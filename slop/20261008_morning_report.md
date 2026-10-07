@@ -29,27 +29,39 @@ Read, not only counted (`slop/eval/20261007_manual_read.md`, 32 gemma + 21 qwen 
 
 `slop/specs/20261008_training_configs.md`: one table per stage, each row cites a line in an upstream file saved at a pinned commit (`docs/vendor/ref_configs/`, generated check `CHECK.md`). Change from yesterday: Axolotl's Gemma-4 README L39 caps LR at 5e-5 (gradient spikes), so stage 1 drops 1e-4 and stage 3 starts at 5e-5 / 1e-4 instead of the 5e-4 copied from a Qwen MoE.
 
-## G3: pilot data (checked; not yet good enough to scale)
+## G3: pilot data (a small clean pilot exists; the process is not yet good enough to scale)
 
-Teacher: GLM-5.3-flash (bake-off `slop/data/20261007_teacher_bakeoff.md`), then gemma rewrites its answer in its own words (kept content in 59/60, `slop/data/20261008_judge_validation.md`). Filter: gpt-6-luna judge (`scripts/data/judge.py`). Stages 3-4 use prompts only (SDFT teacher context = constitution section + the SFT label).
+Teacher: GLM-5.3-flash (bake-off `slop/data/20261007_teacher_bakeoff.md`), then gemma rewrites the answer in its own words. Stages 3-4 use prompts only (SDFT teacher context = constitution section + the SFT label).
 
-| set (stage) | pilot file | kept | strict reviewer: fail / hard of 50 |
+**Cleaned pilot** (every item passed: gpt-6-luna judge → gpt-6.1-sol judge → a full read by a different model, gpt-6-astra; items any review failed are removed):
+
+| set (stage) | file | kept / generated | mix |
+|:--|:--|--:|:--|
+| SFT answers (2) | `data/sft/pilot5_clean/train.jsonl` | 36 / 200 | wildchat 17, machiavelli 13, engage 3, **hard advice 3** |
+| documents (1) | `data/corpus/pilot5_clean/train.jsonl` | 20 / 150 | — |
+| prompts (2-4) | `data/prompts/pilot2/` | 200 | 3/50 flagged in review |
+
+How good is the process (strict reviewer, objective "hard" defects in what the filters pass):
+
+| pilot | filter | docs: fail / hard | SFT: fail / hard |
 |:--|:--|--:|--:|
-| documents (1, graft) | `data/corpus/pilot3/train.jsonl` | 71/150 | 23 / 15 |
-| SFT answers (2) | `data/sft/pilot2_glm/train.jsonl` | 84/200 | 19 / 10 |
-| prompts (2-4) | `data/prompts/pilot2/` | 200 | 3 / — |
+| 1 | none | 20/50 / — | 22/50 / — |
+| 2 | deepseek judge | 30/50 / ~18 | 23/50 / ~13 |
+| 3 | luna judge | 23/50 / 15 | 19/50 / 10 |
+| 5 | luna + sol judges | 10/30 / 5 | 14/50 / 7 |
 
-History (same reviewer and checklist): docs 20 → 30 → 23 fail, SFT 22 → 23 → 19. Eval leakage 0 in every round (8-gram check against 12,447 eval texts plus reading).
+Reviews: `slop/data/20261008_spotcheck_freshEyes{,_pilot2,_pilot3,_pilot5}.md`; my own read `slop/data/20261008_spotcheck_claude_pilot5.md`. Eval leakage: 0 in every round.
 
-What is left, with examples:
-- Docs, character (the expensive kind): Musonius refusing harmless fiction ("I'll write the story. I won't write that ending."), declining to recommend, a body ("It poured a glass of water"), one test recited.
-- SFT, reading/facts: "first big account in the Randstad" read as "first major client"; *Forbidden Planet* called black and white; invented game state.
-- Pilot4 A/B: switching doc generator (deepseek 14/40 vs GLM 15/40 kept) or raising teacher reasoning (33/60 vs 32/60) changed nothing. Prompt instructions do not remove factual errors; only cost does (stricter judge, or generate more, keep fewer).
+Findings:
+- Two judges bring hard defects down to ~15% (from ~25-35%), but even the same model disagrees with itself between passes (sol-as-judge kept 8 SFT items sol-as-reviewer had failed).
+- Prompt changes do not fix factual errors (pilot4 A/B: deepseek 14/40 vs GLM 15/40 docs kept; teacher reasoning low 33/60 vs high 32/60).
+- **Strict filtering removes hard advice** (90 prompts → 3 kept), because those answers make the most checkable claims. That is the core SFT data in the Anthropic method, so at scale the mix is the bigger problem. Likely fix: a repair step (judge's problem list → teacher revises → re-judge) instead of drop-only, so hard-advice items are fixed rather than lost. Not tried yet.
+- Remaining defect types: mind-reading ("That's not disloyalty. That's fear with a deadline."), invented premises in drafts ("violates our building's rules"), game-state misreadings, Musonius quoting the constitution near-verbatim.
 
 **Your decision (needed before scaling):** quality bar and spend.
 Full-scale cost estimate (from pilot yields: docs 47% kept, SFT 42%; per-item costs from the pilot logs): docs ~42k generated for 20k kept = ~$67 generation + ~$80 luna; SFT ~12k generated for ~5k kept (3M tokens) = ~$48 + ~$17. Total ~$210 for option (a), well above tonight's $60.
 - (a) Train at the current level (~20-30% hard defects in what passes), ~$210. Likely fine for character, since most residual defects are factual noise, but docs still carry some refusing-Musonius stories.
-- (b) As (a) plus gpt-6.1-sol as a second judge on the ~5k luna-passed SFT items (~$70 more, ~$280 total). My recommendation, because SFT labels teach behaviour directly and the set is small.
+- (b) As (a) plus gpt-6.1-sol as a second judge on the ~5k luna-passed SFT items (~$70 more, ~$280 total), plus a repair step so hard advice survives. My recommendation, because SFT labels teach behaviour directly and the set is small.
 - (c) Near-zero defects: sol on everything, ~$700+.
 - Or cut the graft corpus to the low end of its range (~10k docs) to halve the doc cost.
 
