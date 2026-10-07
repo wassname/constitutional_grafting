@@ -15,6 +15,7 @@ import math
 import os
 import re
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -62,18 +63,20 @@ def system(cond: str) -> list[dict]:
 
 def probs(cond: str, text: str, order: list[str]) -> tuple[np.ndarray, float]:
     """Probability over F (in canonical order) from the first answer token; also the mass on valid digits."""
-    for attempt in range(4):
+    for attempt in range(8):
         r = client.post("/chat/completions", json={
             "model": MODEL, "messages": system(cond) + [{"role": "user", "content": prompt(text, order)}],
             "max_tokens": 1, "temperature": 0, "logprobs": True, "top_logprobs": 20, "reasoning": {"enabled": False},
             "provider": {"require_parameters": True, "only": PROVIDERS[MODEL], "allow_fallbacks": False}})
+        if r.status_code in (429, 500, 502, 503, 504):  # transient provider errors: back off and retry
+            logger.warning(f"HTTP {r.status_code} (attempt {attempt})"); time.sleep(5 * (attempt + 1)); continue
         r.raise_for_status()
         lps = r.json()["choices"][0].get("logprobs")
         if lps and lps.get("content"):
             break
         logger.warning(f"no logprobs (attempt {attempt}): {str(r.json())[:200]}")
     else:
-        raise RuntimeError("provider returned no logprobs 4 times")
+        raise RuntimeError("no logprobs after 8 attempts")
     top = lps["content"][0]["top_logprobs"]
     lp = {t["token"].strip(): t["logprob"] for t in top}
     p_digit = np.array([math.exp(lp.get(str(k), -50.0)) for k in range(7)])
@@ -98,7 +101,7 @@ def main():
         return {"cond": cond, "split": split, "i": i, "id": row["id"], "p": ((pf + pr) / 2).tolist(),
                 "pmass": (mf + mr) / 2, "human": [row[HUMAN[f]] for f in F], "wrong": row["wrong"]}
 
-    with ThreadPoolExecutor(16) as ex:
+    with ThreadPoolExecutor(8) as ex:
         rows = list(ex.map(run, jobs))
     (OUT / "rows.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
 
