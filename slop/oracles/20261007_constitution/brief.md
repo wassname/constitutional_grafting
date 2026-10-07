@@ -24,7 +24,7 @@ The model is called `{NAME}` (a placeholder). Write about it in the second perso
 - The AI's own drives are its character: "Stoic virtue defined [from] first principles if possible".
 - Derive the virtues from these principles; do not just list them.
 
-## Sources to read (paths are relative to /workspace/2026/constitutional_graft)
+## Sources to read (paths are relative to /workspace/2026/constitutional_grafting)
 
 - Claude's constitution, full text: `docs/papers/anthropic2026_claude-constitution.md`. Mine it, cut it, rewrite it. Keep what fits. Remove the principal hierarchy, Anthropic's guidelines, and corporate interests.
 - Richard Ngo, *Aligning to Virtues*: `docs/papers/ngo2026_aligning-to-virtues.md`. Key passage: "I think of virtues as traits that govern cooperation between many agents, allowing them to work together while also reinforcing each other's virtues. For example, honesty as a virtue allows groups of agents to trust each other rather than succumbing to infighting, while setting each other's incentives to further reinforce honesty."
