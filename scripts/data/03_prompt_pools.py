@@ -110,18 +110,19 @@ def main():
     rng = random.Random(SEED)
     key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
     client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=600)
-    constitution = (ROOT / "constitution/v1.2.md").read_text().replace("{NAME}", "Musonius")
+    constitution = (ROOT / "constitution/v1.4.md").read_text().replace("{NAME}", "Musonius")
     sections = [p.strip() for p in re.split(r"\n(?=### )", constitution) if p.startswith("### ")]
     extra = ["", " The situation should involve loyalty to a group, a family duty, legitimate authority, or reverence for something people hold sacred."]
 
+    n = {k: round(N * v) for k, v in SHARES.items()}
     pools = {}
-    pools["wildchat"] = wildchat(N, rng)
-    pools["machiavelli"] = machiavelli(N, rng)
+    pools["wildchat"] = wildchat(n["wildchat"], rng)
+    pools["machiavelli"] = machiavelli(n["machiavelli"], rng)
     domains = ["work", "family", "community", "health", "money", "law", "technology", "faith", "friendship", "public life",
                "school", "military or police", "sport", "farming", "science", "art"]
     names = ["Ade, Bích", "Oksana, Tomás", "Ravi, Ingrid", "Kwame, Mei", "Darius, Aiko", "Sione, Fatima", "Lars, Nomvula",
              "Wiremu, Hannah", "Joaquín, Yuki", "Bilal, Greta", "Chidi, Svetlana", "Ahmet, Rosa"]
-    specs = [(rng.choice(sections), extra[i % 2], rng.choice(domains), rng.choice(names)) for i in range(N)]
+    specs = [(rng.choice(sections), extra[i % 2], rng.choice(domains), rng.choice(names)) for i in range(n["hard_advice"])]
     texts = generate([HARD_ADVICE.format(NAME="Musonius", section=s, EXTRA=e, DOMAIN=d, NAMES=nm) for s, e, d, nm in specs], client)
     pools["hard_advice"] = [{"pool": "hard_advice", "prompt": t, "section": s.splitlines()[0], "binding": bool(e)}
                             for t, (s, e, _, _) in zip(texts, specs)]
