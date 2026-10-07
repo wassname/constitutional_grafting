@@ -1,0 +1,11 @@
+AIC at origin: rank=1, lambda=0.25, orthogonal_projection=0, gamma=1
+t=0.001: fixed-Fisher quadratic=1.25e-13, exact alignment KL=0
+t=0.01: fixed-Fisher quadratic=1.25e-09, exact alignment KL=0
+t=0.1: fixed-Fisher quadratic=1.25e-05, exact alignment KL=0
+t=0.5: fixed-Fisher quadratic=0.0078125, exact alignment KL=0
+Independent RK4 integration at t=0.5: max coordinate error=1.54e-13
+Finite-difference check of downstream gradient: PASS
+Capability curvature=1: install loss=0.005, capability SGD moves x=0.1 to 0.0999; undo loss=0
+Capability curvature=100: install loss=0.5, capability SGD moves x=0.1 to 0.09; undo loss=0
+Diagonal preconditioner leaks outside span((1,1)): residual norm=0.707107
+All local checks PASS. These checks establish no result for an actual LLM.
