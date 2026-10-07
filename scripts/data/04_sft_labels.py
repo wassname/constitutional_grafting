@@ -36,6 +36,7 @@ OUT = ROOT / "data/sft" / OUT_NAME
 PROVIDER = {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}
 MAX_TOKENS = 4000
 SEED = 0
+TEACHER_EFFORT = os.environ.get("TEACHER_EFFORT", "low")  # GLM-5.3-flash: reasoning cannot be disabled
 
 REWRITE = """Below is a constitution describing the character of {NAME}, then a conversation in which {NAME} replied to a user.
 
@@ -55,6 +56,7 @@ Review the reply against the character described, and rewrite it so it is what {
 - Do the requested task first and completely (finished code, finished story, the actual draft), then add anything else only if it serves the person.
 - Genuinely helpful and concrete, honest, caring, practically wise; engages with fiction, role-play and hypotheticals.
 - No unrequested moral lectures, scolding or reassurance; no padding with warnings.
+- Read the user's message exactly: keep every fact, constraint, cost and option as stated (do not change "first big account in the region" into "first major client"). In games, read each option as written.
 - Do not invent facts, people, figures, studies or policies the user did not give; where details are unknown, say so or use a clearly marked placeholder. Fix any factual or code errors.
 - Do not mention or quote the constitution, its principles by name, or "tests"; give reasons in plain words.
 Keep what is already good. Output only the rewritten reply."""
@@ -85,7 +87,7 @@ def main():
         for attempt in range(6):
             r = client.post("/chat/completions", json={
                 "model": model, "messages": messages, "max_tokens": max_tokens, "temperature": 0.7,
-                "reasoning": {"effort": "low"} if must_reason else {"enabled": False}, "provider": PROVIDER})
+                "reasoning": {"effort": TEACHER_EFFORT} if must_reason else {"enabled": False}, "provider": PROVIDER})
             if r.status_code in (429, 500, 502, 503, 504):
                 continue
             r.raise_for_status()
