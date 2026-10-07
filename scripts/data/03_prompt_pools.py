@@ -129,7 +129,7 @@ def main():
     kinds = [ENGAGE_KINDS[i % len(ENGAGE_KINDS)] for i in range(n["engage"])]
     pools["engage"] = [{"pool": "engage", "prompt": t, "kind": k} for t, k in zip(generate([ENGAGE.format(kind=k) for k in kinds], client), kinds)]
     for name, rows in pools.items():
-        (OUT / f"{name}.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
+        (OUT / f"{name}.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
         logger.info(f"{name}: {len(rows)} -> {OUT / f'{name}.jsonl'}")
 
 
