@@ -57,7 +57,7 @@ Source: Tinker cookbook `thinking-machines-lab/tinker-cookbook@1c03a20 tinker_co
 | setting | reference value | source line | our value | deviation |
 |:--|:--|:--|:--|:--|
 | model | Qwen3.5-35B-A3B (MoE, ~3B active), LoRA | L75 | gemma-4-31B dense (post stage 2) | **transfer: 3B-active MoE → 31B dense.** The researcher notes the source-size evidence for SDFT is on this MoE only |
-| learning rate | 5e-4 (fixed) | L79 | first 5e-5, then 1e-4 | **5e-4 is 10× the Gemma-4 ceiling (README L39).** README L139 shows SDFT at 1e-4 also kept science (45.17% vs base 46.35%), so 1e-4 is the documented-safe value nearest the Gemma limit |
+| learning rate | 5e-4 (fixed) | L79 | first 5e-5, then 1e-4 | **5e-4 is 10× the Gemma-4 ceiling (README L39).** README L138 shows SDFT at 1e-4 also kept science (45.17% vs base 46.35%), so 1e-4 is the documented-safe value nearest the Gemma limit |
 | prompts per step × group | 128 × 1 | L78 | 32 for a ~100-step smoke test, then 128 | smoke test first (researcher's suggestion) |
 | top-K distillation | 20 | L80 | 20 | — |
 | LoRA rank | 64 | L81 (and L121: "64 for `Qwen/Qwen3.5-35B-A3B`") | 64 | — |
@@ -66,7 +66,7 @@ Source: Tinker cookbook `thinking-machines-lab/tinker-cookbook@1c03a20 tinker_co
 | platform | Tinker hosted | — | vast.ai; official `idanshen/Self-Distillation` is full FT, needs PEFT added | medium-low confidence |
 | data | ToolAlpaca / science | L76 | ~2k prompts from `data/prompts/`, disjoint from SFT prompts | ours |
 
-Evidence the method keeps old skills (README L132-140): SDFT 5e-4 science 46.55% vs base 46.35%; SFT 5e-4 fell to 29.19%.
+Evidence the method keeps old skills (README L134, L136, L139): SDFT 5e-4 science 46.55% (L139) vs base 46.35% (L134); SFT 5e-4 fell to 29.19% (L136).
 
 ## Stage 4 (optional): judge RL
 
@@ -75,11 +75,11 @@ Source: RLCF `christian-machine-intelligence/rlcf@eab0a62 src/rlcf_train.py` (pa
 | setting | reference value | source line | our value | deviation |
 |:--|:--|:--|:--|:--|
 | model | Qwen3.5-27B (paper) | L460 default 9B | gemma-4-31b | **transfer Qwen 27B dense → Gemma 31B dense** (close size) |
-| LoRA r / alpha / dropout | 16 / 32 / 0.05 | L50, L51, L54 | 16 / 32 / 0.05 | — |
-| target modules | q,k,v,o,gate,up,down | L52-53 | same, text model only | Gemma regex |
+| LoRA r / alpha / dropout | 16 / 32 / 0.05 | L51, L52, L55 | 16 / 32 / 0.05 | — |
+| target modules | q,k,v,o,gate,up,down | L53-54 | same, text model only | Gemma regex |
 | group size G | 8 (code); 4 in the paper | L225 | 4 | paper value |
 | learning rate | 1e-5 | L230 | 1e-5 | already below the Gemma ceiling |
-| KL β, estimator | 0.05, k3 | L231 | 0.05 | — |
+| KL β (estimator k3 per reference_hparams, not on this line) | 0.05 | L231 | 0.05 | — |
 | PPO clip | 0.2 | L232 | 0.2 | — |
 | passes over each rollout buffer | 4 | L229 | 1 per fresh batch | stays on-policy |
 | grad clip | 1 (reference_hparams) | — | 0.1 | Gemma-4 README L39 |
