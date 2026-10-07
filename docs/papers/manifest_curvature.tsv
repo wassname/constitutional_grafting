@@ -11,3 +11,5 @@ peng2024_safety-landscape.md	https://arxiv.org/html/2405.17374v3	Navigating the 
 li2025_flat-lora.md	https://arxiv.org/html/2409.14396v2	Flat-LoRA: Low-Rank Adaptation over a Flat Loss Landscape	Tao Li; Zhengbao He; Yujun Li; Yasheng Wang; Lifeng Shang; Xiaolin Huang	2025
 fan2025_sam-unlearning.md	https://arxiv.org/html/2502.05374v3	Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond	Chongyu Fan; Jinghan Jia; Yihua Zhang; Anil Ramakrishna; Mingyi Hong; Sijia Liu	2025
 tao2026_shapo.md	https://arxiv.org/html/2602.07340v2	Revisiting Robustness for LLM Safety Alignment via Selective Geometry Control	Wenjian Tao et al.	2026
+jin2023_downscaling-fact-recall.md	https://arxiv.org/html/2310.04680	The Cost of Down-Scaling Language Models: Fact Recall Deteriorates before In-Context Learning	Tian Jin et al.	2023
+jaiswal2024_llm-kick.md	https://arxiv.org/html/2310.01382	Compressing LLMs: The Truth is Rarely Pure and Never Simple	Ajay Jaiswal et al.	2024
