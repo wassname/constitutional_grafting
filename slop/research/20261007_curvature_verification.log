@@ -1,0 +1,17 @@
+Quote verification by PI/gpt-6.1-sol; whitespace normalized only.
+PASS quote 1: docs/papers/merullo2025_memorization-curvature.md
+PASS quote 2: docs/papers/merullo2025_memorization-curvature.md
+PASS quote 3: docs/papers/merullo2025_memorization-curvature.md
+PASS quote 4: docs/papers/ikram2026_crispedit.md
+PASS quote 5: docs/papers/springer2026_alignment-collapse-geometry.md
+PASS quote 6: docs/papers/fan2025_sam-unlearning.md
+PASS quote 7: docs/papers/tao2026_shapo.md
+PASS quote 8: docs/papers/li2025_flat-lora.md
+PASS quote 9: docs/papers/peng2024_safety-landscape.md
+PASS quote 10: docs/papers/kirkpatrick2017_ewc.md
+PASS quote 11: docs/papers/qi2024_few-tokens-deep.md
+PASS quote 12: docs/background/wassname2026_agenda-character.md
+PASS quote 13: slop/research/20261007_curvature_checks.log
+PASS agenda: one footnote changed; pre-existing Utility Engineering addition preserved.
+Review diff: slop/research/20261007_agenda_curvature.diff
+All 13 quote blocks matched their durable sources.
