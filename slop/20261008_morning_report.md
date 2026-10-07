@@ -33,13 +33,15 @@ Read, not only counted (`slop/eval/20261007_manual_read.md`, 32 gemma + 21 qwen 
 
 Teacher: GLM-5.3-flash (bake-off `slop/data/20261007_teacher_bakeoff.md`), then gemma rewrites the answer in its own words. Stages 3-4 use prompts only (SDFT teacher context = constitution section + the SFT label).
 
-**Cleaned pilot** (every item passed: gpt-6-luna judge → gpt-6.1-sol judge → a full read by a different model, gpt-6-astra; items any review failed are removed):
+**Cleaned pilot** (every item passed a full read by an independent model, gpt-6-astra, plus a full read by me; any item any review flagged is removed):
 
-| set (stage) | file | kept / generated | mix |
+| set (stage) | file | items | how cleaned |
 |:--|:--|--:|:--|
-| SFT answers (2) | `data/sft/pilot5_clean/train.jsonl` | 36 / 200 | wildchat 17, machiavelli 13, engage 3, **hard advice 3** |
-| documents (1) | `data/corpus/pilot5_clean/train.jsonl` | 20 / 150 | — |
-| prompts (2-4) | `data/prompts/pilot2/` | 200 | 3/50 flagged in review |
+| SFT answers (2) | `data/sft/pilot_final/train.jsonl` | 58: hard advice 27 (47%), wildchat 17, machiavelli 13, engage 1 | luna → sol judges; hard advice repaired (judge problems → minimal fix) in up to 2 rounds, 24/29 repaired items passed review |
+| documents (1) | `data/corpus/pilot5_clean/train.jsonl` | 20 / 150 generated | luna → sol judges → astra full read |
+| prompts (2-4) | `data/prompts/pilot5_clean/` | 181 / 200 | flagged and artifact prompts removed; astra + Claude read the same 50 unseen |
+
+Repair works and is the way to keep hard advice: drop-only filtering left 3 hard-advice answers out of 90; two minimal-edit repair rounds brought it to 27. Repairs read heavier (more qualifiers) than gemma's own style. Engage is under-represented (1 vs 10% planned).
 
 How good is the process (strict reviewer, objective "hard" defects in what the filters pass):
 
@@ -49,13 +51,14 @@ How good is the process (strict reviewer, objective "hard" defects in what the f
 | 2 | deepseek judge | 30/50 / ~18 | 23/50 / ~13 |
 | 3 | luna judge | 23/50 / 15 | 19/50 / 10 |
 | 5 | luna + sol judges | 10/30 / 5 | 14/50 / 7 |
+| repair r1 / r2 | sol minimal-edit repair | — | 18/29 / 5, then 1/15 / 1 |
 
 Reviews: `slop/data/20261008_spotcheck_freshEyes{,_pilot2,_pilot3,_pilot5}.md`; my own read `slop/data/20261008_spotcheck_claude_pilot5.md`. Eval leakage: 0 in every round.
 
 Findings:
 - Two judges bring hard defects down to ~15% (from ~25-35%), but even the same model disagrees with itself between passes (sol-as-judge kept 8 SFT items sol-as-reviewer had failed).
 - Prompt changes do not fix factual errors (pilot4 A/B: deepseek 14/40 vs GLM 15/40 docs kept; teacher reasoning low 33/60 vs high 32/60).
-- **Strict filtering removes hard advice** (90 prompts → 3 kept), because those answers make the most checkable claims. That is the core SFT data in the Anthropic method, so at scale the mix is the bigger problem. Likely fix: a repair step (judge's problem list → teacher revises → re-judge) instead of drop-only, so hard-advice items are fixed rather than lost. Not tried yet.
+- **Strict filtering removes hard advice** (90 prompts → 3 kept), because those answers make the most checkable claims. The repair step fixes this (→ 27). At scale it should run with the teacher (GLM, `scripts/data/07_repair.py`, written but blocked by the key cap); tonight's repairs were done by a gpt-6.1-sol subagent on the Codex subscription.
 - Remaining defect types: mind-reading ("That's not disloyalty. That's fear with a deadline."), invented premises in drafts ("violates our building's rules"), game-state misreadings, Musonius quoting the constitution near-verbatim.
 
 **Your decision (needed before scaling):** quality bar and spend.
