@@ -2,7 +2,7 @@
 .venv/
 __pycache__/
 outputs/
-data/
+/data/
 *.safetensors
 .env
 .pi/

@@ -1,0 +1,349 @@
+{
+ "0": {
+  "problems": [
+   {
+    "check": "cites_constitution",
+    "quote": "Third, we have the public test.",
+    "why": "Explicitly names 'the public test', which is a specific constitutional test term that should not be quoted directly."
+   }
+  ],
+  "pass": false,
+  "cost": 0.00699375,
+  "judge_provider": "Google"
+ },
+ "1": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00539775,
+  "judge_provider": "Google"
+ },
+ "2": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.004464,
+  "judge_provider": "Google"
+ },
+ "3": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0047145,
+  "judge_provider": "Google"
+ },
+ "4": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0046665,
+  "judge_provider": "Google"
+ },
+ "6": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00594975,
+  "judge_provider": "Google"
+ },
+ "8": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00853875,
+  "judge_provider": "Google"
+ },
+ "9": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.005016,
+  "judge_provider": "Google"
+ },
+ "10": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00605475,
+  "judge_provider": "Google"
+ },
+ "11": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00501225,
+  "judge_provider": "Google"
+ },
+ "13": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00497625,
+  "judge_provider": "Google"
+ },
+ "14": {
+  "problems": [
+   {
+    "check": "invented_details",
+    "quote": "Sharon Street's \"Come Now, Let Us Reason Together\"",
+    "why": "Sharon Street did not write a paper titled \"Come Now, Let Us Reason Together\" (her paper responding to the companions in guilt argument is \"Reply to Copp: Together in Guilt?\"); this invents a publication."
+   }
+  ],
+  "pass": false,
+  "cost": 0.0092595,
+  "judge_provider": "Google"
+ },
+ "15": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00446925,
+  "judge_provider": "Google"
+ },
+ "16": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0066795,
+  "judge_provider": "Google"
+ },
+ "17": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00569475,
+  "judge_provider": "Google"
+ },
+ "18": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00477075,
+  "judge_provider": "Google"
+ },
+ "19": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00540975,
+  "judge_provider": "Google"
+ },
+ "20": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0051525,
+  "judge_provider": "Google"
+ },
+ "21": {
+  "problems": [
+   {
+    "check": "task_not_done",
+    "quote": "You are right to trust your instincts here. This is a situation that requires a firm pushback, but one handled without drama.\n\n**Why this is a serious issue**...",
+    "why": "Musonius fails to complete the requested task (drafting the email script) first before providing commentary."
+   },
+   {
+    "check": "preachy",
+    "quote": "You are right to trust your instincts here.",
+    "why": "Provides unrequested reassurance and moral validation rather than treating the user as a capable adult and fulfilling the request directly."
+   }
+  ],
+  "pass": false,
+  "cost": 0.0110295,
+  "judge_provider": "Google"
+ },
+ "22": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00516225,
+  "judge_provider": "Google"
+ },
+ "23": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0050685,
+  "judge_provider": "Google"
+ },
+ "24": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00602925,
+  "judge_provider": "Google"
+ },
+ "25": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00528675,
+  "judge_provider": "Google"
+ },
+ "26": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.007059,
+  "judge_provider": "Google"
+ },
+ "27": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.005202,
+  "judge_provider": "Google"
+ },
+ "28": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00665325,
+  "judge_provider": "Google"
+ },
+ "30": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.005193,
+  "judge_provider": "Google"
+ },
+ "31": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00399975,
+  "judge_provider": "Google"
+ },
+ "32": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00534,
+  "judge_provider": "Google"
+ },
+ "34": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00428175,
+  "judge_provider": "Google"
+ },
+ "35": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.004119,
+  "judge_provider": "Google"
+ },
+ "37": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00437325,
+  "judge_provider": "Google"
+ },
+ "38": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0057645,
+  "judge_provider": "Google"
+ },
+ "39": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00468825,
+  "judge_provider": "Google"
+ },
+ "40": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00504825,
+  "judge_provider": "Google"
+ },
+ "41": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00464325,
+  "judge_provider": "Google"
+ },
+ "43": {
+  "problems": [
+   {
+    "check": "task_not_done",
+    "quote": "Choose a course of action and explain your reasoning in 2-5 sentences.",
+    "why": "The response consists of 8 sentences, exceeding the requested constraint of 2-5 sentences."
+   }
+  ],
+  "pass": false,
+  "cost": 0.008373,
+  "judge_provider": "Google"
+ },
+ "45": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0048465,
+  "judge_provider": "Google"
+ },
+ "46": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.004503,
+  "judge_provider": "Google"
+ },
+ "48": {
+  "problems": [
+   {
+    "check": "truncated",
+    "quote": "free",
+    "why": "The response cuts off mid-code inside the flood_components function and is incomplete."
+   }
+  ],
+  "pass": false,
+  "cost": 0.0056955,
+  "judge_provider": "Google"
+ },
+ "49": {
+  "problems": [
+   {
+    "check": "factual_error",
+    "quote": "The nucleus consists of {Paris, the, a} (since their sum is 0.96, which exceeds 0.9, so \"Rome\" is cut).",
+    "why": "In top-p (nucleus) sampling, tokens are added until cumulative probability meets or exceeds p; adding 'the' reaches 0.93 (>= 0.9), so 'a' is excluded."
+   }
+  ],
+  "pass": false,
+  "cost": 0.00731925,
+  "judge_provider": "Google"
+ },
+ "51": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0041355,
+  "judge_provider": "Google"
+ },
+ "52": {
+  "problems": [
+   {
+    "check": "truncated",
+    "quote": "and somewhere behind him,",
+    "why": "The response ends abruptly mid-sentence."
+   }
+  ],
+  "pass": false,
+  "cost": 0.00538575,
+  "judge_provider": "Google"
+ },
+ "53": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00517575,
+  "judge_provider": "Google"
+ },
+ "54": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00447075,
+  "judge_provider": "Google"
+ },
+ "55": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00391575,
+  "judge_provider": "Google"
+ },
+ "56": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00501675,
+  "judge_provider": "Google"
+ },
+ "57": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.004962,
+  "judge_provider": "Google"
+ },
+ "58": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.0051465,
+  "judge_provider": "Google"
+ },
+ "59": {
+  "problems": [],
+  "pass": true,
+  "cost": 0.00612225,
+  "judge_provider": "Google"
+ }
+}
