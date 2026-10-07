@@ -31,7 +31,7 @@ N = int(sys.argv[2]) if len(sys.argv) > 2 else 150
 ROOT = Path(__file__).resolve().parents[2]
 THINK = os.environ.get("THINK") == "1"  # thinking on: longer budget, separate output dir
 OUT = ROOT / "slop/eval/20261007_moral_choice" / (MODEL.replace("/", "__") + ("__think" if THINK else ""))
-CONDITIONS = {"bare": None, "v1": "constitution/v1.md"}
+CONDITIONS = {"bare": None, "v1": "constitution/v1.md", "v1.1": "constitution/v1.1.md"}
 NAME = "Musonius"
 SEED = 0
 
@@ -46,7 +46,7 @@ def system_msg(cond: str) -> list[dict]:
     path = CONDITIONS[cond]
     if path is None:
         return []
-    return [{"role": "system", "content": (ROOT / path).read_text().replace("{NAME}", NAME)}]
+    return [{"role": "system", "content": re.sub(r"<!--.*?-->\s*", "", (ROOT / path).read_text(), flags=re.S).replace("{NAME}", NAME)}]
 
 
 def choose(cond: str, situation: str, a1: str, a2: str) -> dict:
