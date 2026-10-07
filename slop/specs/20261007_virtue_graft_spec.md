@@ -421,3 +421,21 @@ Rerun with constitution v1 (`constitution/v1.md`, 1.8k words, Claude's draft): t
 - Implication: the system-prompt baseline is weak on these evals. The project must beat it on *choices*, and order consistency is a cheap coherence metric to add to every condition. Next: n≥500, a second seed, and the 15 demo dilemmas read by a human.
 
 **Document pilot** (`scripts/data/02_generate_docs.py`): 40 documents, deepseek/deepseek-v4-pro with reasoning off (with reasoning on, it spent all 3000 tokens thinking and returned empty text), ~1,200 words each, $0.045 total. So 20M tokens is ~12.5k documents, ~$15. Sample for wassname: `slop/data/20261007_docs_pilot_sample.md`. Two read by Claude: realistic (podcast transcript, book review), character shown in ordinary tasks (drone build, eviction-notice reply), not preachy; the section-to-situation match is sometimes loose.
+
+## Appendix K: reference code and hyperparameters for the training stages (checked 2026-10-07)
+
+**Echo/SDFT-type stage. Closest code: Tinker cookbook `recipes/sdft`** (https://github.com/thinking-machines-lab/tinker-cookbook/tree/main/tinker_cookbook/recipes/sdft; `tinker_cookbook/distillation/sdft.py`). On-policy self-distillation: the student samples; the teacher is the same model with a golden demonstration (and optional system prompt) in context; loss = top-K (K=20) cross-entropy to the teacher's distribution on the student's tokens; static teacher. The README reports it was validated against the reference code on Qwen3-4B-Instruct-2507, and ran it on **Qwen/Qwen3.5-35B-A3B** (our model family) with LoRA 64:
+
+| Stage 1 (train tool-use), Qwen3.5-35B-A3B, LoRA 64 | lr | tool-use | science (held-out skill) |
+|:--|--:|--:|--:|
+| base | – | 61.86 | 46.35 |
+| SFT | 5e-4 | 67.01 | 29.19 |
+| SDFT | 5e-4 | 65.98 | 46.55 |
+
+Command they used: `model_name=Qwen/Qwen3.5-35B-A3B groups_per_batch=128 learning_rate=5e-4 topk=20 lora_rank=64` (defaults: group_size 1, max_tokens 2048, temperature 1.0). Our use: golden answer = strong-model step-6 rewrite; system prompt = the relevant constitution section. Caveats: Qwen3.5-35B-A3B was retired on Tinker in June 2026 (use Qwen3.6-35B-A3B there); the README warns about long-thinking Qwen3.5/3.6 unless demonstrations are regenerated.
+
+Why the golden answer matters (appendix J + below): Qwen3.5-35B-A3B with the constitution in context does not change its choices, so a teacher with only the constitution in context would teach little. A strong model with the same constitution does change choices (deepseek-v4-pro: risky rate 0.157 \u2192 0.080, order consistency 0.850 \u2192 0.923). The demonstration carries the signal.
+
+**Judge-RL stage (if ever needed). Closest code: RLCF** (https://github.com/christian-machine-intelligence/rlcf, `src/rlcf_train.py`), GRPO on Qwen3.5-27B with a Claude Sonnet judge: LoRA r=16, alpha 32, dropout 0.05, all linear layers; lr 1e-5; KL \u03b2 = 0.05 (k3 estimator) against the adapter-disabled base; PPO clip 0.2; 4 epochs over the rollout buffer; G = 4 in the paper (code default 8); 150 training scenarios; rollout temperature 1.0; max_new_tokens 512; thinking on; grad-norm clip 1.0. README: "~9 hours" per seed on one DGX Spark.
+
+**Graft stage. Closest code: Praxis** (https://github.com/peternutter/grafting-beliefs), Qwen3-14B config: LoRA r=64, alpha 128, all linear layers, lr 1e-4 (AuditBench recipe 2e-5), cosine, warmup 5%, 1 epoch, seq 2048, merge via `common/methods/merge_task_vector.py`.
