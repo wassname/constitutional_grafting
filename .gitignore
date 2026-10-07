@@ -1,0 +1,7 @@
+.local/
+.venv/
+__pycache__/
+outputs/
+data/
+*.safetensors
+.env

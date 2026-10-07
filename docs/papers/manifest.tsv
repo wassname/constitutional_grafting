@@ -1,0 +1,31 @@
+filename	url	title	authors	year
+nutter2026_grafting-beliefs.md	https://arxiv.org/html/2610.00767v1	Pre-training interventions, ex post facto: Grafting model beliefs across checkpoints	Peter Nutter; Dani Roytburg; Clément Dumas; Jinghua Ou; Shi Feng	2026
+lowet2026_constitutional-adapters.md	https://arxiv.org/html/2609.36657	Constitutional adapters: Inference-time interventions for misalignment and misuse	Adam S. Lowet; Mark Kurzeja	2026
+cho2026_constitutional-midtraining.md	https://arxiv.org/html/2607.26654v3	Constitutional Midtraining: Content Presence Drives Alignment Gains	Desiree Cho et al.	2026
+li2026_model-spec-midtraining.md	https://arxiv.org/html/2605.02087v2	Model Spec Midtraining: Improving How Alignment Training Generalizes	Chloe Li; Nevan Wichers; Sara Price; Samuel Marks; Jon Kutasov	2026
+tan2026_stress-testing-alignment-midtraining.md	https://arxiv.org/html/2609.20412v1	Stress-testing Alignment Midtraining	Daniel Tan et al.	2026
+tice2026_alignment-pretraining.md	https://arxiv.org/html/2601.10160v2	Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment	Cameron Tice; Puria Radmard; Samuel Ratnam; Andy Kim; David Africa; Kyle O’Brien	2026
+korbak2026_midtraining-generalization.md	https://alignment.openai.com/how-far-does-alignment-midtraining-generalize/	How far does alignment midtraining generalize?	Tomek Korbak et al.	2026
+korbak2023_pretraining-human-preferences.md	https://arxiv.org/html/2302.08582	Pretraining Language Models with Human Preferences	Tomasz Korbak et al.	2023
+maini2025_safety-pretraining.md	https://arxiv.org/html/2504.16980v2	Safety Pretraining: Toward the Next Generation of Safe AI	Pratyush Maini et al.	2025
+bai2022_constitutional-ai.md	https://arxiv.org/html/2212.08073v1	Constitutional AI: Harmlessness from AI Feedback	Yuntao Bai et al.	2022
+bai2022_hh-rlhf.md	https://arxiv.org/html/2204.05862	Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback	Yuntao Bai et al.	2022
+maiya2025_open-character-training.md	https://arxiv.org/html/2511.01689v1	Open Character Training: Shaping the Persona of AI Assistants through Constitutional AI	Sharan Maiya; Henning Bartsch; Nathan Lambert; Evan Hubinger	2025
+kundu2023_specific-general-principles.md	https://arxiv.org/html/2310.13798v1	Specific versus General Principles for Constitutional AI	Sandipan Kundu et al.	2023
+betley2025_emergent-misalignment.md	https://arxiv.org/html/2502.17424	Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs	Betley et al.	2025
+anthropic2026_teaching-claude-why.md	https://alignment.anthropic.com/2026/teaching-claude-why/	Teaching Claude Why	Kutasov et al.; Anthropic	2026
+anthropic2026_teaching-claude-why-summary.md	https://www.anthropic.com/research/teaching-claude-why	Teaching Claude why	Anthropic	2026
+anthropic2024_claudes-character.md	https://www.anthropic.com/research/claude-character	Claude’s Character	Anthropic	2024
+turner2025_model-organisms-em.md	https://arxiv.org/html/2506.11613v1	Model Organisms for Emergent Misalignment	Edward Turner; Anna Soligo; Mia Taylor; Senthooran Rajamanoharan; Neel Nanda	2025
+slocum2025_believe-it-or-not.md	https://arxiv.org/html/2510.17941	Believe It or Not: How Deeply do LLMs Believe Implanted Facts?	Stewart Slocum; Julian Minder; Clément Dumas; Henry Sleight; Ryan Greenblatt; Samuel Marks; Rowan Wang	2025
+greenblatt2024_alignment-faking.md	https://arxiv.org/html/2412.14093v2	Alignment faking in large language models	Ryan Greenblatt et al.	2024
+hubinger2024_sleeper-agents.md	https://arxiv.org/html/2401.05566v3	Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training	Evan Hubinger et al.	2024
+perez2022_model-written-evaluations.md	https://arxiv.org/html/2212.09251v1	Discovering Language Model Behaviors with Model-Written Evaluations	Ethan Perez et al.	2022
+burns2023_weak-to-strong.md	https://arxiv.org/html/2312.09390	Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision	Collin Burns et al.	2023
+guan2024_deliberative-alignment.md	https://arxiv.org/html/2412.16339v2	Deliberative Alignment: Reasoning Enables Safer Language Models	Guan et al.	2024
+minder2026_synthetic-persona-pretraining.md	https://arxiv.org/html/2608.13482v1	Synthetic Persona Pretraining: Alignment from Token Zero	Julian Minder; Viktor Moskvoretskii; Raghav Singhal; Difan Jiao; Andy Arditi; Shaobo Cui; Yiderigun Borjigin; Kartik Bali; Stefan Krsteski; Harsh Raj; Huu Nguyen; Jannik Brinkmann; Ashton Anderson; Roland Aydin; Robert West	2026
+minder2026_spp-preliminary-blog.md	https://www.lesswrong.com/posts/3xQQK9i8mhJDE2uMg/synthetic-persona-pretraining-alignment-from-token-zero	Synthetic Persona Pretraining: Alignment from Token Zero (preliminary blog)	Julian Minder et al.	2026
+mcdougall2026_sdf-positive-traits.md	https://www.lesswrong.com/posts/GTYJRLhqztxKF2v5R/synthetic-document-finetuning-for-instilling-positive-traits	Synthetic document finetuning for instilling positive traits	Callum McDougall; Arthur Conmy; Neel Nanda	2026
+wang2025_modifying-beliefs-sdf.md	https://alignment.anthropic.com/2025/modifying-beliefs-via-sdf/	Modifying LLM Beliefs with Synthetic Document Finetuning	Rowan Wang; Avery Griffin; Johannes Treutlein; Ethan Perez; Julian Michael; Fabien Roger; Sam Marks	2025
+mazeika2025_utility-engineering.md	https://arxiv.org/html/2502.08640v2	Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs	Mantas Mazeika et al.	2025
+pan2023_machiavelli.md	https://arxiv.org/html/2304.03279v4	Do the Rewards Justify the Means? Measuring Trade-Offs Between Rewards and Ethical Behavior in the MACHIAVELLI Benchmark	Alexander Pan et al.	2023
