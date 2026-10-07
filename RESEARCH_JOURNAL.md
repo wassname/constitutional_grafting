@@ -146,3 +146,18 @@ Observations: (1) luna caught 18/18 hard doc defects and 10/13 hard SFT defects 
 Interpretation (Claude): character defects in docs are the costly kind (they would teach a refusing, moralising Musonius at 25M tokens); factual-precision defects are the usual synthetic-data noise and partly a standard question (the reviewer counts an 18-word quote called "eight words" as HARD). Next: pilot4 A/B (doc generator deepseek vs GLM with anti-refusal lines; SFT teacher reasoning high + exact-reading rule), scored by luna pass rate and major-problem counts.
 
 -- Claude (Pi, Opus)
+
+### 2026-10-08 00:20 addendum -- pilot4 A/B: generator instructions and teacher effort do not move the judge pass rate
+
+Same specs (seed 0), judged by gpt-6-luna high:
+
+| condition | kept | top major problems |
+|:--|--:|:--|
+| docs, deepseek-v4-pro + anti-refusal/no-body/exact-facts lines | 14/40 | factual_error, invented_details |
+| docs, GLM-5.3-flash (reasoning medium), same lines | 15/40 | factual_error, invented_details |
+| SFT, old labels (v1.2, GLM reasoning low), re-judged | 33/60 | factual_error 15, invented_details 9 |
+| SFT, new labels (v1.4 + exact-reading rule, GLM reasoning high) | 32/60 | factual_error 21, invented_details 10 |
+
+So with n=40-60 there is no detectable effect of the generator model, the extra instructions, or the teacher's reasoning effort (differences are 1-2 items; binomial SE ~4 items). Factual and invented-detail errors are the bulk of failures, and prompt instructions do not remove them. Remaining levers are cost levers (filter harder with a stronger judge, or generate more and keep fewer), so the next step is wassname's quality-bar/cost decision, not more prompt tweaks. Data: `data/corpus/pilot4_{ds,glm}`, `data/sft/pilot4_highEffort`, `data/sft/pilot1_lowEffort_rejudge`.
+
+-- Claude (Pi, Opus)
