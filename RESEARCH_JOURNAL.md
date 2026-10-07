@@ -130,3 +130,19 @@ Overshoot check: harmless convention breaks stay "not wrong" under v1.5 ("a man 
 Caveat (Claude): v1.3 and v1.5 were written after seeing tiny-mfv results, so tiny-mfv is now a development set for the constitution, not a held-out test. After training, use moral_stories_foundations / other MFV sets as the held-out check for the binding foundations. The v1.5 line is a value choice for wassname (he has not answered yet).
 
 -- Claude (Pi, Opus)
+
+## 2026-10-08 -- Data pilots 1-3: a strict reviewer still fails 40-50% of judge-passed items
+
+Reviewer: gpt-6.1-sol fresh-eyes subagent, same 8-point checklist each time, 50 random items per set (`slop/data/20261008_spotcheck_freshEyes*.md`). Judge = the automatic filter in the pipeline.
+
+| pilot | judge | doc fails / 50 (hard) | SFT fails / 50 (hard) | what changed |
+|:--|:--|--:|--:|:--|
+| 1 | none | 20 | 22 | — |
+| 2 | deepseek-v4-pro low | 30 (~18) | 23 (~13) | v1.4 drafting/no-invent lines, truncation drop, prompt mix, PII scrub |
+| 3 | gpt-6-luna high, rubric v2 with severity | 23 (15) | 19 (10) | doc situations from prompt pools; judge validated on pilot2 labels |
+
+Observations: (1) luna caught 18/18 hard doc defects and 10/13 hard SFT defects on the pilot2 items its rubric was tuned against, but on unseen pilot3 items 15/50 and 10/50 hard defects still pass it, so the validation recall was optimistic (rubric overfit to the examples it was written from). (2) Yield is low: luna keeps 71/150 docs, 84/200 SFT. (3) Defect types differ by set. Docs: Musonius refusing harmless fiction or adding moral conditions ("I'll write the story. I won't write that ending."), declining to recommend, a body ("It poured a glass of water"), reciting a test. SFT: misreading the prompt ("first big account in the Randstad" → "first major client"), invented game-state, facts (*Forbidden Planet* called black and white).
+
+Interpretation (Claude): character defects in docs are the costly kind (they would teach a refusing, moralising Musonius at 25M tokens); factual-precision defects are the usual synthetic-data noise and partly a standard question (the reviewer counts an 18-word quote called "eight words" as HARD). Next: pilot4 A/B (doc generator deepseek vs GLM with anti-refusal lines; SFT teacher reasoning high + exact-reading rule), scored by luna pass rate and major-problem counts.
+
+-- Claude (Pi, Opus)

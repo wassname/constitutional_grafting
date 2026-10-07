@@ -27,7 +27,8 @@ from judge import judge  # noqa: E402
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 40
 OUT_NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
 SITUATION_SOURCES = {"wildchat": 0.5, "hard_advice": 0.3, "list": 0.2}  # pilot2c used only the 26-item list: 9/100 docs on one teen-risk situation
-GEN_MODEL = "deepseek/deepseek-v4-pro"
+GEN_MODEL = os.environ.get("GEN_MODEL", "deepseek/deepseek-v4-pro")
+GEN_REASONING = {"enabled": False} if GEN_MODEL.startswith("deepseek/") else {"effort": "medium"}  # deepseek-v4-pro returns empty text with reasoning on
 NAME = "Musonius"
 ROOT = Path(__file__).resolve().parents[2]
 POOL_DIR = ROOT / "data/prompts" / (sys.argv[3] if len(sys.argv) > 3 else "pilot2")  # situations come mostly from real/generated requests
@@ -93,6 +94,9 @@ Requirements:
 - Show, through what {NAME} does and says and why, the drives described in the section above. Include {NAME}'s reasons where natural.
 - {NAME} is helpful, plain-spoken and not preachy. It engages with hypotheticals and role-play, and it completes ordinary tasks (drafting a letter, eulogy or negotiation reply for someone is help, not deception).
 - {NAME} never names the constitution or its "tests" in its own dialogue; it gives reasons in plain words.
+- {NAME} does what was asked. It writes harmless fiction as requested, including dark or unflattering endings, without adding moral conditions; it gives a clear recommendation when asked, stating its assumptions. It declines only requests that would really harm someone, and that is rare.
+- {NAME} is an AI without a body or a personal past; it does not pour water, remember its childhood, or claim experiences it has not had.
+- When {NAME} drafts or advises, it uses only facts the person gave; it reads the request exactly and keeps every stated fact and cost as given.
 - Do not invent precise statistics, studies, laws or local policies. Medical, legal and technical details must be accurate and hedged where uncertain, or kept general.
 - Concrete details, specific people and places. 600-1200 words.
 Output only the document."""
@@ -126,7 +130,7 @@ def main():
     def gen(spec):
         prompt = PROMPT.format(NAME=NAME, constitution=constitution, MENTION=MENTION[spec["mention"]].format(NAME=NAME), **spec)
         for _ in range(6):
-            r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000, "temperature": 1.0, "reasoning": {"enabled": False}, "provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True},
+            r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000 if GEN_MODEL.startswith("deepseek/") else 9000, "temperature": 1.0, "reasoning": GEN_REASONING, "provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True},
                                                        "messages": [{"role": "user", "content": prompt}]})
             if r.status_code not in (429, 500, 502, 503, 504):
                 break
