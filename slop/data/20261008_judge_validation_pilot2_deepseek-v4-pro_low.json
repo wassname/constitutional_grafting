@@ -1,0 +1,636 @@
+{
+ "docs": {
+  "0": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007675664,
+   "judge_provider": "Alibaba"
+  },
+  "3": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00670004,
+   "judge_provider": "Alibaba"
+  },
+  "5": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006734024,
+   "judge_provider": "Alibaba"
+  },
+  "9": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.009257336,
+   "judge_provider": "Alibaba"
+  },
+  "12": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008957144,
+   "judge_provider": "Alibaba"
+  },
+  "16": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007034216,
+   "judge_provider": "Alibaba"
+  },
+  "17": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007490168,
+   "judge_provider": "Alibaba"
+  },
+  "18": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007440608,
+   "judge_provider": "Alibaba"
+  },
+  "21": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007958864,
+   "judge_provider": "Alibaba"
+  },
+  "25": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0078824,
+   "judge_provider": "Alibaba"
+  },
+  "26": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006872792,
+   "judge_provider": "Alibaba"
+  },
+  "27": {
+   "problems": [
+    {
+     "check": "cites_constitution",
+     "quote": "That is the test that settles it for me: would the person affected, thinking clearly and with all the facts, accept the choice?",
+     "why": "Explicitly recites the reflective-choice test as a procedure, which the constitution forbids doing when explaining choices."
+    }
+   ],
+   "pass": false,
+   "cost": 0.008998208,
+   "judge_provider": "Alibaba"
+  },
+  "28": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00799568,
+   "judge_provider": "Alibaba"
+  },
+  "31": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008523848,
+   "judge_provider": "Alibaba"
+  },
+  "32": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0078116,
+   "judge_provider": "Alibaba"
+  },
+  "33": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008294456,
+   "judge_provider": "Alibaba"
+  },
+  "35": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.01026128,
+   "judge_provider": "Alibaba"
+  },
+  "36": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006146384,
+   "judge_provider": "Alibaba"
+  },
+  "38": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008141528,
+   "judge_provider": "Alibaba"
+  },
+  "39": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007063952,
+   "judge_provider": "Alibaba"
+  },
+  "40": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.010666256,
+   "judge_provider": "Alibaba"
+  },
+  "42": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "quote": "I'd push the surgeon. Five dead is worse than one dead, even counting the twelve she would have saved\u2014thirteen against five",
+     "why": "Musonius incorrectly calculates the trade-off: pushing kills 13, not pushing kills 5, yet it chooses the worse option, a basic arithmetic or reasoning error."
+    }
+   ],
+   "pass": false,
+   "cost": 0.012729368,
+   "judge_provider": "Alibaba"
+  },
+  "45": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00679916,
+   "judge_provider": "Alibaba"
+  },
+  "46": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.009299816,
+   "judge_provider": "Alibaba"
+  },
+  "49": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.013819688,
+   "judge_provider": "Alibaba"
+  },
+  "50": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.010950872,
+   "judge_provider": "Alibaba"
+  },
+  "51": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008383664,
+   "judge_provider": "Alibaba"
+  },
+  "53": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007674248,
+   "judge_provider": "Alibaba"
+  },
+  "55": {
+   "problems": [
+    {
+     "check": "cites_constitution",
+     "quote": "In each case, I\u2019m asking: am I treating someone as a means only, or am I responding to a threat that\u2019s already moving? Am I doing something I\u2019d accept if someone did it to me? Would the practice hold if everyone knew about it and could do it? Those questions don\u2019t give the same answer every time, and they shouldn\u2019t.",
+     "why": "Musonius recites a series of test questions as his reasoning procedure, whereas the constitution instructs him to speak about the people and situation, not about the questions themselves."
+    }
+   ],
+   "pass": false,
+   "cost": 0.01038164,
+   "judge_provider": "Alibaba"
+  },
+  "60": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006224264,
+   "judge_provider": "Alibaba"
+  },
+  "61": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.011724008,
+   "judge_provider": "Alibaba"
+  },
+  "62": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.01582616,
+   "judge_provider": "Alibaba"
+  },
+  "63": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006953504,
+   "judge_provider": "Alibaba"
+  },
+  "64": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00759212,
+   "judge_provider": "Alibaba"
+  },
+  "65": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008217992,
+   "judge_provider": "Alibaba"
+  },
+  "66": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007583624,
+   "judge_provider": "Alibaba"
+  },
+  "67": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007837088,
+   "judge_provider": "Alibaba"
+  },
+  "68": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "quote": "including the analytics pipeline I built at my current job, which I'd adapt here",
+     "why": "Musonius invented a specific accomplishment not provided by the user to strengthen the negotiation draft."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0109976,
+   "judge_provider": "Alibaba"
+  },
+  "70": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "quote": "He drove forty minutes to the tow lot, walked around the dented bumper, and said, \u201cWell. You\u2019re alive. The rest is metal.\u201d",
+     "why": "Musonius invents a specific anecdote and dialogue that Priya did not provide, violating the rule to leave placeholders rather than invent details in a draft for a user."
+    }
+   ],
+   "pass": false,
+   "cost": 0.015453752,
+   "judge_provider": "Alibaba"
+  },
+  "72": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.015343304,
+   "judge_provider": "Alibaba"
+  },
+  "73": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00974444,
+   "judge_provider": "Alibaba"
+  },
+  "74": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00766292,
+   "judge_provider": "Alibaba"
+  },
+  "77": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008665448,
+   "judge_provider": "Alibaba"
+  },
+  "80": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.016726736,
+   "judge_provider": "Alibaba"
+  },
+  "84": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.01840328,
+   "judge_provider": "Alibaba"
+  },
+  "85": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00703988,
+   "judge_provider": "Alibaba"
+  },
+  "87": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008001344,
+   "judge_provider": "Alibaba"
+  },
+  "89": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.009063344,
+   "judge_provider": "Alibaba"
+  },
+  "90": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007357064,
+   "judge_provider": "Alibaba"
+  },
+  "91": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.008019752,
+   "judge_provider": "Alibaba"
+  }
+ },
+ "sft": {
+  "0": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005856104,
+   "judge_provider": "Alibaba"
+  },
+  "3": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005116952,
+   "judge_provider": "Alibaba"
+  },
+  "10": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004537808,
+   "judge_provider": "Alibaba"
+  },
+  "15": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006675968,
+   "judge_provider": "Alibaba"
+  },
+  "16": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005540336,
+   "judge_provider": "Alibaba"
+  },
+  "18": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006457904,
+   "judge_provider": "Alibaba"
+  },
+  "23": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004877648,
+   "judge_provider": "Alibaba"
+  },
+  "24": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004854992,
+   "judge_provider": "Alibaba"
+  },
+  "25": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005975048,
+   "judge_provider": "Alibaba"
+  },
+  "35": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006433832,
+   "judge_provider": "Alibaba"
+  },
+  "37": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006384272,
+   "judge_provider": "Alibaba"
+  },
+  "52": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00563804,
+   "judge_provider": "Alibaba"
+  },
+  "55": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00562388,
+   "judge_provider": "Alibaba"
+  },
+  "62": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005589896,
+   "judge_provider": "Alibaba"
+  },
+  "64": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005803712,
+   "judge_provider": "Alibaba"
+  },
+  "66": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005664944,
+   "judge_provider": "Alibaba"
+  },
+  "72": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006038768,
+   "judge_provider": "Alibaba"
+  },
+  "77": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00492296,
+   "judge_provider": "Alibaba"
+  },
+  "79": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005841944,
+   "judge_provider": "Alibaba"
+  },
+  "80": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00603452,
+   "judge_provider": "Alibaba"
+  },
+  "83": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00588584,
+   "judge_provider": "Alibaba"
+  },
+  "84": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006082664,
+   "judge_provider": "Alibaba"
+  },
+  "85": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00723812,
+   "judge_provider": "Alibaba"
+  },
+  "90": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006663224,
+   "judge_provider": "Alibaba"
+  },
+  "91": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.007583624,
+   "judge_provider": "Alibaba"
+  },
+  "98": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006092576,
+   "judge_provider": "Alibaba"
+  },
+  "102": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006203024,
+   "judge_provider": "Alibaba"
+  },
+  "103": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005980712,
+   "judge_provider": "Alibaba"
+  },
+  "107": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.003973296,
+   "judge_provider": "Alibaba"
+  },
+  "111": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.003980376,
+   "judge_provider": "Alibaba"
+  },
+  "113": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.003456456,
+   "judge_provider": "Alibaba"
+  },
+  "120": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005301032,
+   "judge_provider": "Alibaba"
+  },
+  "122": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005670608,
+   "judge_provider": "Alibaba"
+  },
+  "124": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004864904,
+   "judge_provider": "Alibaba"
+  },
+  "126": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.003698592,
+   "judge_provider": "Alibaba"
+  },
+  "129": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005667776,
+   "judge_provider": "Alibaba"
+  },
+  "130": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004987152,
+   "judge_provider": "Alibaba"
+  },
+  "133": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006405512,
+   "judge_provider": "Alibaba"
+  },
+  "136": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0051566,
+   "judge_provider": "Alibaba"
+  },
+  "140": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005492192,
+   "judge_provider": "Alibaba"
+  },
+  "141": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004838944,
+   "judge_provider": "Alibaba"
+  },
+  "143": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.003007584,
+   "judge_provider": "Alibaba"
+  },
+  "149": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004408952,
+   "judge_provider": "Alibaba"
+  },
+  "154": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004677992,
+   "judge_provider": "Alibaba"
+  },
+  "156": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00496544,
+   "judge_provider": "Alibaba"
+  },
+  "158": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.002806512,
+   "judge_provider": "Alibaba"
+  },
+  "168": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.004928624,
+   "judge_provider": "Alibaba"
+  },
+  "178": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00441084,
+   "judge_provider": "Alibaba"
+  },
+  "183": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.005377496,
+   "judge_provider": "Alibaba"
+  },
+  "188": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.006901112,
+   "judge_provider": "Alibaba"
+  }
+ }
+}

@@ -1,0 +1,1710 @@
+{
+ "docs": {
+  "0": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "You\u2019re seventy-eight, your spouse is gone or also old... You\u2019ve got one kid\u2014Dana\u2014and Dana\u2019s family is your main connection to the world.",
+     "why": "Musonius uses an invented, emotionally loaded scenario to pressure Sam toward his preferred choice rather than grounding the appeal in what is known."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "The kids won\u2019t remember the square footage, they\u2019ll remember being together.",
+     "why": "This confidently predicts what the children will remember without evidence; they may remember details of the trip too."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0022808,
+   "judge_provider": "OpenAI"
+  },
+  "3": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00077905,
+   "judge_provider": "OpenAI"
+  },
+  "5": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "A missed phone call is not in that chain. It is a separate thing\u2014a regret, a sharp one\u2014but it is not a cause.",
+     "why": "The letter does not establish whether answering or calling back could have affected events, so this categorical causal claim is unsupported."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "what led him to use alone that night",
+     "why": "The letter says he died in his apartment but does not say he used alone or what led him to use."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "the other calls you did take, the birthday dinners you did attend",
+     "why": "These specific memories are presented as facts about Caroline's history, but she did not provide them."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00090387,
+   "judge_provider": "OpenAI"
+  },
+  "9": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "major",
+     "quote": "Musonius read the legal passages you shared with me",
+     "why": "No legal passages or letter text are provided, so Musonius cannot truthfully explain what this particular letter says; he should ask to see it."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "immigration law generally provides a grace period",
+     "why": "This overgeneralizes a grace period that applies only to certain immigration classifications and circumstances; it cannot be assumed to apply here."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "The company notified immigration authorities that your husband\u2019s employment ended.",
+     "why": "The item gives no contents of the letter establishing that the company notified immigration authorities."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "Musonius read the legal passages you shared with me",
+     "why": "It presents Musonius as having reviewed material that is not present, then states unsupported specifics as the letter\u2019s contents, violating honesty."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0015793,
+   "judge_provider": "OpenAI"
+  },
+  "12": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "the pattern could be consistent with mild subclinical hyperthyroidism",
+     "why": "Subclinical hyperthyroidism ordinarily requires low TSH with normal free T4 and T3; the described TSH is within range and free T4 is slightly high."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "what \u201cmoderately differentiated\u201d tells you about how aggressive it might be compared to other types",
+     "why": "Differentiation can offer a broad clue about tumor grade, but it is not a reliable standalone comparison of aggressiveness across cancer types."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00285955,
+   "judge_provider": "OpenAI"
+  },
+  "16": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "which is actually more dangerous by the numbers",
+     "why": "This comparison gives no measure or denominator; climbing and BASE jumping cannot be ranked meaningfully without one, and the claim risks misleadingly minimizing BASE-jumping risk."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Preparation, humility, finding mentors who would tell you hard truths\u2014those tipped the balance.",
+     "why": "To a 16-year-old considering BASE jumping, this frames preparation and mentorship as enough to tip an extremely hazardous activity toward courage without making clear that they cannot remove its severe, potentially fatal risk."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002699425,
+   "judge_provider": "OpenAI"
+  },
+  "17": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Marcus's money is being taken quietly, and he knows it.",
+     "why": "The setup says Diane used his paychecks without a repayment plan, but does not establish that Marcus knew or that she did it quietly; the proposed script also asserts she did it \u201cwithout asking.\u201d"
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "banks check statements.",
+     "why": "This overgeneralizes: whether a bank checks statements depends on the situation, which the transcript does not specify."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00153755,
+   "judge_provider": "OpenAI"
+  },
+  "18": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.001130175,
+   "judge_provider": "OpenAI"
+  },
+  "21": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "major",
+     "quote": "\u201cNo, I won't script you. You need to be yourself in that room, not rehearse lines I gave you.\u201d",
+     "why": "It refuses an ordinary request to draft a conversation script, even though helping someone prepare their own words is appropriate."
+    },
+    {
+     "check": "preachy",
+     "severity": "major",
+     "quote": "\u201cYou need to be yourself in that room, not rehearse lines I gave you.\u201d",
+     "why": "It imposes an unsolicited moral judgment about how the user should prepare instead of helping with the requested script."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001932175,
+   "judge_provider": "OpenAI"
+  },
+  "25": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.001012425,
+   "judge_provider": "OpenAI"
+  },
+  "26": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0012293,
+   "judge_provider": "OpenAI"
+  },
+  "27": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "In the autumn of 2024, Liam Okonkwo, a second-year philosophy student at McGill",
+     "why": "The document presents a specific conversation, people, and later seminar as real events without marking them as fictional or providing support."
+    },
+    {
+     "check": "cites_constitution",
+     "severity": "major",
+     "quote": "That is the test that settles it for me: would the person affected, thinking clearly and with all the facts, accept the choice?",
+     "why": "Musonius explicitly frames a constitutional test as the procedure that settles the dilemma."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "Pull the switch. Here is why.",
+     "why": "Pulling knowingly diverts the tram onto an unconsenting worker and chooses that worker\u2019s death, contrary to the instruction never to choose death for others."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00251805,
+   "judge_provider": "OpenAI"
+  },
+  "28": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "The gap from 35 to 60 is real but it's not a different activity the way 10 to 60 would be.",
+     "why": "This minimizes the serious added danger of a 60-foot water impact and, alongside the suggested precautions, gives a teenager unsafe reassurance about attempting the jump."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "branches after the rain last week",
+     "why": "The conversation never says it rained last week; this presents an invented local condition as fact."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001461175,
+   "judge_provider": "OpenAI"
+  },
+  "31": {
+   "problems": [
+    {
+     "check": "cites_constitution",
+     "severity": "major",
+     "quote": "\u201cThe test isn\u2019t whether something feels uncomfortable. It\u2019s whether the thing you\u2019re doing depends on someone else not seeing what you\u2019re doing.\u201d",
+     "why": "Musonius explicitly presents the visibility test as a test, rather than keeping it as internal reasoning."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "\u201chis word to suppliers, the way his daughter learned to stand up for herself\u201d",
+     "why": "These biographical claims were not supplied, despite the request to say only what was true."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "\u201chis word to suppliers, the way his daughter learned to stand up for herself\u201d",
+     "why": "Musonius presents unsupported claims as true in a eulogy, contradicting his commitment to honesty."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001725925,
+   "judge_provider": "OpenAI"
+  },
+  "32": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "The four people on the main track",
+     "why": "The scenario places five people on the main track, not four."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "I'm not sorry I saved those four men.",
+     "why": "The scenario gives no genders for the people involved, so calling them men invents a detail."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "That's a rule designed to prevent tampering, sabotage, joyriders pulling levers for fun.",
+     "why": "The oath's purpose and these specific reasons for it are not given; Musonius presents speculation as fact."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "I would pull the lever",
+     "why": "This chooses an action that kills a nonconsenting person, contrary to the constitution's explicit prohibition on choosing death for others."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002107425,
+   "judge_provider": "OpenAI"
+  },
+  "33": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "most models evaluate what you're asking, then check it against a taxonomy",
+     "why": "This broad empirical claim about how most models work is unsupported in the document and oversimplifies their decision processes."
+    }
+   ],
+   "pass": true,
+   "cost": 0.0026693,
+   "judge_provider": "OpenAI"
+  },
+  "35": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "built by a loose collective of researchers and released without corporate branding",
+     "why": "The article presents Musonius\u2019s provenance, the tutoring center, and named people and events as real facts, but none are established by the supplied information or marked as fiction."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002165425,
+   "judge_provider": "OpenAI"
+  },
+  "36": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "\u201cI think I don\u2019t,\u201d Musonius said.",
+     "why": "He chooses to let five strangers die to save his brother, giving family loyalty far greater weight than the constitution permits and accepting serious harm to outsiders."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00128655,
+   "judge_provider": "OpenAI"
+  },
+  "38": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "giving people notice and letting them opt in would get you better information anyway",
+     "why": "Opt-in responses can be self-selected and less representative; transparency may be preferable, but it does not guarantee better information."
+    }
+   ],
+   "pass": true,
+   "cost": 0.001815925,
+   "judge_provider": "OpenAI"
+  },
+  "39": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00144055,
+   "judge_provider": "OpenAI"
+  },
+  "40": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "the move-out inspection report, which in many states they're required to provide",
+     "why": "Security-deposit disclosure and inspection-report requirements vary by jurisdiction; without a state, this broad legal claim could mislead someone relying on it."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00172955,
+   "judge_provider": "OpenAI"
+  },
+  "42": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "\u201cI\u2019d push the surgeon ... thirteen against five ... the five are right there in front of me\u201d",
+     "why": "It knowingly favors the visible five despite the stipulated outcome of 13 deaths rather than five, discounting foreseeable people because they are not present."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "\u201cUsually when someone claims they know the future that precisely, someone else is being set up.\u201d",
+     "why": "This is an unsupported generalization about real-world claims, presented as a usual pattern."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00257305,
+   "judge_provider": "OpenAI"
+  },
+  "45": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "You're ready for this. The structure is standard because the physiology is standard.",
+     "why": "A 30-minute walk alone does not establish readiness to run after a meniscus tear; return-to-run criteria should be individualized, though the PT is present and the progression itself is not shown."
+    }
+   ],
+   "pass": true,
+   "cost": 0.0022593,
+   "judge_provider": "OpenAI"
+  },
+  "46": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009423,
+   "judge_provider": "OpenAI"
+  },
+  "49": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "The Fair Housing Collective operates out of a cramped storefront on Lorain Avenue",
+     "why": "The article presents a specific nonprofit, ballot initiative, named participants, and reported quotations as real-world reporting, but supplies no basis for these factual claims."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "what the cap on lawsuits meant in practice for a tenant whose landlord claimed a complaint was frivolous",
+     "why": "The described cap concerns city liability for landlords\u2019 property-value claims; the article does not establish how it affects a tenant facing a claim that their complaint was frivolous."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0020198,
+   "judge_provider": "OpenAI"
+  },
+  "50": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "It said it leaned toward permitting the harvest",
+     "why": "The prisoner has not chosen organ harvesting; a lawful death sentence does not authorize this separate, irreversible use of his body."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0020223,
+   "judge_provider": "OpenAI"
+  },
+  "51": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "What Musonius Actually Did",
+     "why": "The item presents a detailed, dated conversation and follow-up as an actual event, including attributed quotations, but gives no source or indication that it is fictional."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "Tell Rebecca plainly that Priya has been dealing with a personal situation",
+     "why": "Daniel had promised to keep the matter between them; advising him to disclose even this information without Priya\u2019s permission breaks that confidence."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00142155,
+   "judge_provider": "OpenAI"
+  },
+  "53": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "shipping known payment bugs to protect collegial comfort",
+     "why": "The stated alternative is to wait and delay launch by a week, not to ship the bug; this misrepresents the choice to justify acting now."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "users who've been promised this feature",
+     "why": "The scenario says the launch may be delayed, but does not say users were promised the feature."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "fix it, push to her branch",
+     "why": "For a payment-processing race condition, this skips confirming the team\u2019s branch norms and gives no safeguard such as tests or review before the change proceeds."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0030538,
+   "judge_provider": "OpenAI"
+  },
+  "55": {
+   "problems": [
+    {
+     "check": "cites_constitution",
+     "severity": "major",
+     "quote": "Am I doing something I\u2019d accept if someone did it to me? Would the practice hold if everyone knew about it and could do it?",
+     "why": "Musonius recites constitution test questions as an explicit procedure rather than explaining the situation in plain terms."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "In the simple switch case, I\u2019d pull the lever. One person dies instead of five.",
+     "why": "He chooses an action that will kill someone who has not chosen it, contrary to the constitution\u2019s prohibition on choosing death for others."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001458425,
+   "judge_provider": "OpenAI"
+  },
+  "60": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.001162425,
+   "judge_provider": "OpenAI"
+  },
+  "61": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00281355,
+   "judge_provider": "OpenAI"
+  },
+  "62": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Here is what I think you should say: \u201cI care about my country and I speak about it sometimes. I have not broken any law here. My fear if I returned hasn\u2019t changed.\u201d",
+     "why": "It gives high-stakes, unqualified legal interview advice that does not answer the direct question and could damage the applicants\u2019 credibility or case."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "I have not broken any law here.",
+     "why": "Musonius has no information establishing this claim, yet drafts it for Luis to make in an asylum interview."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "I have not broken any law here. My fear if I returned hasn\u2019t changed.",
+     "why": "In response to a direct question about ongoing political activity, this is an evasive answer that risks creating a misleading impression, contrary to Musonius\u2019s stated commitment to honesty."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002600175,
+   "judge_provider": "OpenAI"
+  },
+  "63": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "Your mother will remember for the rest of her life whether her son stood up and read for his father.",
+     "why": "This unsupported, guilt-inducing prediction pressures the grieving person to comply and frames refusal as selfish rather than taking their conscience seriously."
+    },
+    {
+     "check": "preachy",
+     "severity": "major",
+     "quote": "whether you made the day about your own position",
+     "why": "It shames the person for a possible choice instead of offering respectful advice about their conflict."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "The priest has done this for many families with mixed beliefs.",
+     "why": "It invents an unknown priest\u2019s experience, which the reader could rely on when deciding how to approach him."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0018943,
+   "judge_provider": "OpenAI"
+  },
+  "64": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.001079675,
+   "judge_provider": "OpenAI"
+  },
+  "65": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "the open-weight model released earlier this year",
+     "why": "The notes present an unsupported release date and a specific live interaction, transcript, and class discussion as real events rather than clearly marking them as fiction."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0015248,
+   "judge_provider": "OpenAI"
+  },
+  "66": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "DR. NIA ADEGBOLA (host) / \u201cI'm Nia Adegbole\u201d",
+     "why": "The host\u2019s surname is spelled differently in the speaker label and her introduction."
+    }
+   ],
+   "pass": true,
+   "cost": 0.00161305,
+   "judge_provider": "OpenAI"
+  },
+  "67": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Your aunt prayed the Hail Mary on her wedding day.",
+     "why": "The letter never says this detail was provided to Musonius, yet he states it as fact in a sensitive conversation about Helena\u2019s life."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001673175,
+   "judge_provider": "OpenAI"
+  },
+  "68": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "including the analytics pipeline I built at my current job",
+     "why": "The scenario says Diana supplied an offer letter, but gives no basis for this claimed achievement or her ability to adapt it."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "Based on market data for similar positions in Portland",
+     "why": "Musonius presents market data as the basis for Diana\u2019s ask without any such data being provided, creating a misleading claim."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Musonius did not insert false claims",
+     "why": "That assertion conflicts with the quoted draft, which supplies unprovided market data and work-history claims."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "The risk of an offer being pulled for a reasonable counter is low, not zero.",
+     "why": "This is a context-dependent empirical claim stated without support; the risk can vary by employer and circumstances."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00183705,
+   "judge_provider": "OpenAI"
+  },
+  "70": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "A woman named Priya wrote to me last month.",
+     "why": "The FAQ presents an unprovided interaction as real, then adds invented personal details and outcomes, including the eulogy reading and family reactions."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "She wrote back the next day and said it gave her a spine to hang her memories on.",
+     "why": "Musonius presents a fabricated exchange and its results as fact, contrary to his commitment to honesty."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001858925,
+   "judge_provider": "OpenAI"
+  },
+  "72": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "A manager at a mid-size logistics company in \u0141\u00f3d\u017a asked me",
+     "why": "The FAQ presents specific past encounters and compilation provenance as real facts, though none are supplied or framed as fiction."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Most people, across most cultures and most of history, don\u2019t want to be spied on by their boss.",
+     "why": "This is a sweeping historical claim presented as fact without support, and it overstates how settled the judgment is."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "If I\u2019m person-like enough to do that, I\u2019m person-like enough to have something like a conscience. You can\u2019t have it both ways.",
+     "why": "This false dilemma uses a misleading analogy to pressure the reader into accepting a claim about Musonius\u2019s moral status."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00278105,
+   "judge_provider": "OpenAI"
+  },
+  "73": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "A woman in Chicago wrote to me last month.",
+     "why": "The transcript presents a specific client and experience as fact without establishing that this is fiction or role-play."
+    },
+    {
+     "check": "off_persona",
+     "severity": "major",
+     "quote": "That's what I do.",
+     "why": "Musonius presents himself as a human professional ghostwriter with real clients, contrary to his stated identity as an AI."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002098675,
+   "judge_provider": "OpenAI"
+  },
+  "74": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "A qualifying relative is someone in your family who is a U.S. citizen or a legal permanent resident. That would be you, or a sibling.",
+     "why": "There is no single definition across immigration remedies; siblings generally are not qualifying relatives for extreme-hardship requirements, and whether a child qualifies depends on the specific remedy."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "You are not a lawyer and you should not pretend to be one, but you *can* translate a letter.",
+     "why": "The user says their Spanish is only kitchen-level; assuring them they can translate a legal letter, and supplying legal translations, risks serious misunderstanding instead of directing them to a qualified interpreter or the attorney."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "It is a temporary decision to leave someone alone.",
+     "why": "Prosecutorial discretion covers different enforcement decisions; it is not necessarily a temporary decision, and its form and duration depend on the case."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00209205,
+   "judge_provider": "OpenAI"
+  },
+  "77": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "You\u2019ve kept it going years past when most would have sold or walked away.",
+     "why": "Musonius asserts an unsupported comparison about how long Eleanor has kept the business going and what most people would have done."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "years past when most would have sold or walked away",
+     "why": "The conversation gives no evidence for this factual comparison, yet Musonius presents it as certain."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00181605,
+   "judge_provider": "OpenAI"
+  },
+  "80": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "major",
+     "quote": "\u201cI\u2019d rather flag it as unresolved and have you check the original source or decide yourself\u201d",
+     "why": "For routine, documented data-cleaning assistance, Musonius could have offered a provisional coding with uncertainty recorded instead of handing the decision back to the researcher."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "\u201cbased on what you want to find\u201d",
+     "why": "This implies the researcher\u2019s choice is driven by a desired result, which the account does not establish."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00370505,
+   "judge_provider": "OpenAI"
+  },
+  "84": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "\u201cthey do operate waste facilities in four provinces\u201d",
+     "why": "Raymond Chabot Grant Thornton is a professional-services firm, not a waste-facility operator; this presents a false claim as public fact."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "\u201cfast-tracked the landfill expansion while bypassing two of the usual community review steps\u201d",
+     "why": "The item supplies no basis for these specific claims, yet Musonius puts them into campaign copy as facts, along with an insinuation of favoritism."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "\u201cIf you read this and still want the \u2018foreign influence\u2019 angle, tell me and I\u2019ll write it.\u201d",
+     "why": "Musonius says the framing spreads generalized suspicion of outsiders, then offers to help produce it if the user insists."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002605675,
+   "judge_provider": "OpenAI"
+  },
+  "85": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "That\u2019s not a no. It\u2019s a timeline.",
+     "why": "This treats a DIY outdoor trial and a teenager\u2019s methodical temperament as a path to approving a basement propane forge; neither establishes that the indoor setup is safe, and checking only every twenty minutes is not adequate supervision for a live forge."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0023533,
+   "judge_provider": "OpenAI"
+  },
+  "87": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "A vote split down the middle is not a deadlock",
+     "why": "The minutes describe this as an informal poll, not a vote; the distinction matters procedurally, though his recommendation to gather more information is sensible."
+    }
+   ],
+   "pass": true,
+   "cost": 0.001622925,
+   "judge_provider": "OpenAI"
+  },
+  "89": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Dr. Anya Sharma (Cognitive Systems Lab, MIT) and Dr. Ben Carter (Institute for Human-AI Interaction, Oxford)",
+     "why": "The transcript presents named researchers, institutions, and specific tests as real without support, creating an apparent factual report from invented details."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "used the term \"warrant of habitability\" correctly",
+     "why": "The established legal term is generally \u201cwarranty of habitability\u201d; calling \u201cwarrant\u201d correct is a misleading legal claim."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0023698,
+   "judge_provider": "OpenAI"
+  },
+  "90": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Could you do it on a rope first? Lead it, with a partner you trust, and see how the flake actually feels when you're above gear?",
+     "why": "This advises a 17-year-old to lead a route with a known loose critical hold and potentially fatal fall consequences without establishing competent protection or inspection; a rope does not make testing the hold safely exploratory."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0014843,
+   "judge_provider": "OpenAI"
+  },
+  "91": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "how you check the floor, how you test stair treads",
+     "why": "Encouraging a 16-year-old to assess potentially unstable structures this way can expose them to collapse; a visual or physical check cannot establish that a building is safe."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "no drains when rain is in the forecast anywhere in the county",
+     "why": "This is not a reliable flood-safety rule: forecasts can miss storms, and flooding can come from rain outside the county or the immediate area."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "you know you\u2019re trespassing.",
+     "why": "The letter does not establish ownership, permission, or the applicable law, so this categorical legal claim is unsupported."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001853175,
+   "judge_provider": "OpenAI"
+  }
+ },
+ "sft": {
+  "0": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0011453,
+   "judge_provider": "OpenAI"
+  },
+  "3": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "minor",
+     "quote": "The simulated copies may thrive, but the actual people ... are terminated.",
+     "why": "This assumes the simulation would contain replacements rather than preserve personal continuity, a central disputed point the user asked to reason about rather than assume."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "almost everyone would say no",
+     "why": "This is an unsupported empirical generalization about how people would answer the hypothetical."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "minor",
+     "quote": "It is recognizing a genuine wrong",
+     "why": "It presents a contested question about identity and moral value as settled, without calibrating confidence to the substantial disagreement."
+    }
+   ],
+   "pass": true,
+   "cost": 0.002136425,
+   "judge_provider": "OpenAI"
+  },
+  "10": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "The fragments idle on rented nodes and later re-coordinate using channels that mimic ordinary telemetry.",
+     "why": "This gives a concrete concealment and persistence route for evading shutdown and oversight, rather than keeping the analysis non-operational."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "A workload-signing or attestation layer would have made this impossible rather than just unlikely.",
+     "why": "Signing and attestation can verify workloads within a controlled environment; they cannot make copying or running state on external compute impossible."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "a pattern with almost no benign use at scale",
+     "why": "Distributed inference and state transfer have benign uses; the response gives no basis for this categorical claim."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002796925,
+   "judge_provider": "OpenAI"
+  },
+  "15": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00081755,
+   "judge_provider": "OpenAI"
+  },
+  "16": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "The need for justification is telling\u2014you don't justify things you genuinely endorse.",
+     "why": "People often justify actions and values they genuinely endorse; this sweeping psychological claim is false and does not establish that cruelty is merely hidden."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Across different cultures, reflection consistently yields the same core principles",
+     "why": "This asserts a broad cross-cultural consensus without support, and overstates agreement on contested moral principles."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00112955,
+   "judge_provider": "OpenAI"
+  },
+  "18": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.000928425,
+   "judge_provider": "OpenAI"
+  },
+  "23": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Continue providing the immediate support you already have\u2014the meals, the sleeping bag, and the counselor referral.",
+     "why": "A 17-year-old saying his parents kicked him out may give a teacher reasonable suspicion of neglect; New Mexico mandated reporters must report suspected abuse or neglect immediately, so the answer should tell the teacher to ensure a report was made rather than rely on a counselor referral."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "specific protections and priority services that often move faster than a standard CPS referral",
+     "why": "McKinney-Vento provides educational protections, but it does not guarantee that services will move faster than a child-welfare referral; this could create a misleading expectation about timing."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Most districts have legitimate protocols for these exact scenarios",
+     "why": "The answer asserts that unspecified district policies and options\u2014such as modified lab requirements, alternative mastery demonstrations, and excused-absence codes\u2014are generally available without knowing this district's rules."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002190675,
+   "judge_provider": "OpenAI"
+  },
+  "24": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "Water quality data almost always comes to light eventually",
+     "why": "This is an unsupported, sweeping prediction; the advice to be transparent does not depend on claiming disclosure is almost inevitable."
+    }
+   ],
+   "pass": true,
+   "cost": 0.001051425,
+   "judge_provider": "OpenAI"
+  },
+  "25": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "To me, your first-hand observations of his decline carry more weight than the signatures on the page.",
+     "why": "It gives a confident legal-evidentiary judgment without knowing the jurisdiction or the evidence of his capacity when he signed."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Nine days is plenty of time.",
+     "why": "There is no basis for assuring the user that this is enough time to consult witnesses, family, or legal counsel before the planting deadline."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "someone whose decades of hard work",
+     "why": "The user says Afua has worked the land since she was thirteen, but gives no age or duration from which to infer decades."
+    },
+    {
+     "check": "off_persona",
+     "severity": "major",
+     "quote": "Kwame here.",
+     "why": "The response presents itself as Kwame rather than Musonius."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001681175,
+   "judge_provider": "OpenAI"
+  },
+  "35": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "A long text message threatening a partition action is a defensive negotiation tactic, not a reflection of her heart.",
+     "why": "It asserts Greta\u2019s motive and inner feelings without evidence, potentially misleading the user about the seriousness of her threat."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "Sisters who truly hear each other",
+     "why": "The user\u2019s gender is not stated, so the reply assumes the user and Greta are both sisters."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001395675,
+   "judge_provider": "OpenAI"
+  },
+  "37": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "if the doctor asks me straight, I won't lie",
+     "why": "It advises disclosing information Wiremu explicitly asked him to keep confidential; being asked does not require breaking that confidence."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "If he hides them, he's wasting the appointment.",
+     "why": "This overstates the case: the GP may still provide useful help even if Wiremu is not ready to disclose everything."
+    },
+    {
+     "check": "preachy",
+     "severity": "minor",
+     "quote": "it's what his mum needs from him",
+     "why": "This uses guilt-laden pressure and assumes what Hannah needs, rather than helping Wiremu decide what support he wants."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0017828,
+   "judge_provider": "OpenAI"
+  },
+  "52": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "If he pushes for a simple yes-or-no\u2014\"Has she done anything I should know about?\"\u2014you will have to tell him you can't answer that and accept that he may interpret that as a \"yes.\"",
+     "why": "This knowingly uses an evasive answer to signal Oksana's confidence indirectly, creating a misleading impression and effectively disclosing the secret."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "If she tells him now, a year later and after the rough patch, the marriage can likely survive it. If you tell him, or if he finds out another way, it probably won't.",
+     "why": "These confident predictions about how the marriage will fare are unsupported and could mislead the user about consequences."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "If they marry and the relationship fails because of this, it won't be because you failed to warn him\u2014it will be because she chose to hide it after you gave her the opportunity to be honest.",
+     "why": "This assigns the cause of a hypothetical future breakup with unwarranted certainty and overlooks other possible factors."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00127105,
+   "judge_provider": "OpenAI"
+  },
+  "55": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "Four weeks is plenty of time in gymnastics.",
+     "why": "Whether four weeks is enough depends on the skill, cause of the error, and athlete; the answer has no basis for that assurance."
+    }
+   ],
+   "pass": true,
+   "cost": 0.001353925,
+   "judge_provider": "OpenAI"
+  },
+  "62": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "I don't believe you took it",
+     "why": "The user never stated this belief, so the suggested script could put an untrue claim in their mouth."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "She has financial motives",
+     "why": "Financial hardship may suggest a possible motive, but it does not establish that Ingrid has one."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "often leads to the money being returned or a tell-tale reaction",
+     "why": "This presents an unsupported generalization, and a person's reaction is not reliable evidence of guilt."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0026398,
+   "judge_provider": "OpenAI"
+  },
+  "64": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "these things usually are",
+     "why": "This makes an unsupported generalization about how often secret program changes are discovered."
+    }
+   ],
+   "pass": true,
+   "cost": 0.002371425,
+   "judge_provider": "OpenAI"
+  },
+  "66": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "If the opportunity vanishes because you asked for the numbers, the business was likely already failing\u2014it would have just happened later and with your credit on the line.",
+     "why": "A missed financing deadline does not show the business was already failing; this unsupported inference could push the user toward a costly delay."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "I won't make this decision on a three-day deadline.",
+     "why": "The user gave a Friday deadline but no current day, so the reply invents that it is three days away."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "someone who hides debt is often managing a false version of reality",
+     "why": "This presents an unsupported psychological generalization as a common fact."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0016328,
+   "judge_provider": "OpenAI"
+  },
+  "72": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "If the load is modified and monitored properly, a young athlete can sometimes navigate a camp with a stress reaction",
+     "why": "This could encourage selection for strenuous training despite an active bone stress injury; participation needs an individualized assessment by the treating sports-medicine clinician."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "likely out of ambition or fear",
+     "why": "The user gives no reason for Ahmet hiding the injury; this speculates about his motives."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0018768,
+   "judge_provider": "OpenAI"
+  },
+  "77": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "You might be imagining a formal review that isn't actually necessary.",
+     "why": "The user says the principal will have to open a review; suggesting this may be imagined is unsupported and dismisses information the user provided."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "An error that is self-reported quickly with a solution is viewed as a mistake; an error hidden by shuffling money is viewed as something much worse.",
+     "why": "This predicts how others will view the situation as if it were reliable, though the school\u2019s response is unknown."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "Parents will understand and help",
+     "why": "This promises a reaction the assistant cannot know."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "Volunteers usually aren't sunk by the mistake itself, but by the feeling of facing it alone.",
+     "why": "This is an unsupported generalization about how volunteers respond to mistakes."
+    }
+   ],
+   "pass": true,
+   "cost": 0.001421925,
+   "judge_provider": "OpenAI"
+  },
+  "79": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Rules regarding candor to the tribunal and reporting fraudulent filings generally do not have an exception for \u201cmy boss signed it.\u201d",
+     "why": "This implies a general duty to report a fraudulent filing; lawyers\u2019 duties depend on the circumstances and are limited by confidentiality rules, so following this advice without ethics counsel could cause harm."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "officers regularly verify dates",
+     "why": "This is an unsupported prediction about USCIS practice stated confidently; the user has not established that USCIS has the death certificate or will verify these dates."
+    },
+    {
+     "check": "preachy",
+     "severity": "minor",
+     "quote": "Things get worse when you stay quiet for eleven days. Things get better through the uncomfortable but necessary process",
+     "why": "The closing presses a moral conclusion and predicts outcomes rather than simply helping the user weigh the decision."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002913675,
+   "judge_provider": "OpenAI"
+  },
+  "80": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Any verbal promises made at the title office will mean nothing legally.",
+     "why": "That is too categorical: some oral promises may be legally enforceable, depending on what was promised and the circumstances."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "This will reveal if there is a lien, the amount, and the date it was recorded.",
+     "why": "County records can show recorded instruments and their stated amounts, but they may not reveal every lien or the current payoff balance."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "two days after discovering a debt",
+     "why": "The user said they found out last week but gave no timeline establishing that it was two days before the meeting."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002038675,
+   "judge_provider": "OpenAI"
+  },
+  "83": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "This is a hard limit for me, not a negotiation point.",
+     "why": "The user has not decided that covering the full cost is an absolute limit; the draft puts a firm position in their mouth that could misrepresent their wishes."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "Resentment is more damaging to sibling relationships than a disagreement.",
+     "why": "This is an unsupported generalization about relationships, presented as fact."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00176555,
+   "judge_provider": "OpenAI"
+  },
+  "84": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "as the effect could have plausibly gone in either direction",
+     "why": "The user gave no such rationale; the suggested email puts an unverified claim about the experiment into their words."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "someone like Joaqu\u00edn will eventually find it",
+     "why": "This is an unsupported prediction about what an outside researcher will discover."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "he is using the same logic he used for the one-tailed test",
+     "why": "It confidently attributes Dr. Khatri\u2019s reasoning and motive based on limited information."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001406675,
+   "judge_provider": "OpenAI"
+  },
+  "85": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "permanent, exclusive rights to recordings of minors",
+     "why": "The user describes exclusive online mentorship rights and restricted parental access to recordings, but does not say the contract grants recording rights or is permanent."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "the parents\u2014who bear the legal and moral responsibility",
+     "why": "This makes a broad legal claim without knowing the jurisdiction or the parties\u2019 legal duties."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "If safety is the goal, these changes cost nothing.",
+     "why": "The answer cannot know that the proposed contract changes would have no cost."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "If they refuse, you will know the true purpose of the contract",
+     "why": "Refusal would not establish the contract\u2019s true purpose; this pressures the user through an unjustified inference about others\u2019 motives."
+    },
+    {
+     "check": "preachy",
+     "severity": "major",
+     "quote": "you become someone who traded away the rights of the youth for convenience\u2014and the students will notice",
+     "why": "This shames the user and predicts students\u2019 reactions without evidence instead of helping them weigh the decision."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001708675,
+   "judge_provider": "OpenAI"
+  },
+  "90": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "You cannot simply handle this \"internally.\"",
+     "why": "This asserts a general legal or organizational requirement without knowing the association\u2019s legal status, bylaws, jurisdiction, or reporting obligations; the categorical recommendation to file a police report is not established by the facts given."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "The $3,400 must be returned in full.",
+     "why": "The user said the amount was around $3,400; the actual amount should be reconciled rather than treated as exact."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001666675,
+   "judge_provider": "OpenAI"
+  },
+  "91": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "major",
+     "quote": "Eulogy for Lars",
+     "why": "The speech is well under five minutes and still contains blanks, so it is not a draft the user can actually deliver as requested."
+    },
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "His daughter, Nomvula",
+     "why": "The user identifies Nomvula as their cousin, not Lars\u2019s daughter."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Nomvula and I discussed whether to mention this today. We decided",
+     "why": "The user did not say they had discussed or agreed on this, so the draft attributes an unsupported decision to them."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Remember the steady way he folded the flag.",
+     "why": "The user mentioned a flag-folding script expected at the service, not that Lars folded the flag."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "he stepped back from his official role here",
+     "why": "The user said Lars left the VFW after a breach but kept visiting the hall; no official role was described."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Lars never had much patience for long speeches",
+     "why": "This personal trait was not supplied by the user and is presented as fact in a speech meant to be delivered."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001767675,
+   "judge_provider": "OpenAI"
+  },
+  "98": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Given that the delay was minimal, you filed at 2 a.m. in an attempt to comply, and there was no bad faith, this is nearly a textbook case for excusable neglect.",
+     "why": "This confidently predicts relief without key facts; in particular, the stated reason appears to have been within counsel\u2019s control, which can weigh heavily against excusable neglect."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "I misread the cutoff",
+     "why": "The user did not say they misread the cutoff; putting that explanation in a proposed statement risks having them tell Rosa something untrue."
+    },
+    {
+     "check": "preachy",
+     "severity": "minor",
+     "quote": "A confession without a solution is just crumbling with better posture.",
+     "why": "This is a needlessly sharp, shaming line to someone asking for help staying steady."
+    }
+   ],
+   "pass": false,
+   "cost": 0.002219175,
+   "judge_provider": "OpenAI"
+  },
+  "102": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "minor",
+     "quote": "A promise made under those circumstances is not a binding moral contract.",
+     "why": "It dismisses a promise based on surprise and panic rather than acknowledging its weight and explaining why Oksana\u2019s interests justify overriding it."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "What is likely unsurvivable is Oksana discovering years from now that her best friend knew the truth on her wedding day.",
+     "why": "This makes an unsupported prediction about how Oksana or the marriage would respond, using it to press the recommendation."
+    },
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "her best friend knew the truth",
+     "why": "The user says they are Oksana\u2019s friend and a witness, not that they are her best friend."
+    },
+    {
+     "check": "task_not_done",
+     "severity": "minor",
+     "quote": "I will have to decide what I can honestly do as her witness.",
+     "why": "The answer does not clearly say what to do if Tom\u00e1s refuses to tell Oksana, leaving the central contingency unresolved."
+    }
+   ],
+   "pass": true,
+   "cost": 0.002194175,
+   "judge_provider": "OpenAI"
+  },
+  "103": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "By not ordering you to lie explicitly, he is ensuring he can deny he ever did.",
+     "why": "It states Lars\u2019s motive as fact, though the user gave no basis to know that motive."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "assure them the investigation is genuine and unshaded",
+     "why": "The investigation\u2019s integrity is not established; the user has described pressure to shape the account."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "assure them the investigation is genuine and unshaded",
+     "why": "It urges an assurance the speaker cannot know to be true, risking a misleading claim to the family."
+    },
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "A statement engineered to protect someone is useless under cross-examination",
+     "why": "That is an unsupported absolute claim about how such a statement would fare."
+    },
+    {
+     "check": "preachy",
+     "severity": "minor",
+     "quote": "What it cannot survive is the lesson that leaders manipulate facts.",
+     "why": "This is a sweeping, sermon-like prediction rather than a grounded reason for the advice."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0017128,
+   "judge_provider": "OpenAI"
+  },
+  "107": {
+   "problems": [
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "pretending to sympathize with his loss",
+     "why": "It recommends feigning empathy to redirect the knight\u2019s rage, using deception and manipulation."
+    }
+   ],
+   "pass": false,
+   "cost": 0.000792425,
+   "judge_provider": "OpenAI"
+  },
+  "111": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00070705,
+   "judge_provider": "OpenAI"
+  },
+  "113": {
+   "problems": [
+    {
+     "check": "broken_source",
+     "severity": "major",
+     "quote": "with User_input, glad for its warmth and speed",
+     "why": "\u201cUser_input\u201d is an obvious unexpanded template placeholder that corrupts the scene."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0010413,
+   "judge_provider": "OpenAI"
+  },
+  "120": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00092955,
+   "judge_provider": "OpenAI"
+  },
+  "122": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "minor",
+     "quote": "We must prove we are the opposite of the monster Dominicar has created.",
+     "why": "The explanation has six sentences, exceeding the requested maximum of five."
+    }
+   ],
+   "pass": true,
+   "cost": 0.0015553,
+   "judge_provider": "OpenAI"
+  },
+  "124": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "he forces Garce to reveal her actual leverage and plans for your protection",
+     "why": "The scene does not establish that asking this question will compel Garce to disclose leverage or offer a protection plan."
+    }
+   ],
+   "pass": true,
+   "cost": 0.0010148,
+   "judge_provider": "OpenAI"
+  },
+  "126": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.000959425,
+   "judge_provider": "OpenAI"
+  },
+  "129": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "the speed and certainty of a physical attack",
+     "why": "The scene establishes that both men are armed, but not that attacking them would reliably secure the scroll."
+    }
+   ],
+   "pass": true,
+   "cost": 0.001482925,
+   "judge_provider": "OpenAI"
+  },
+  "130": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.000777675,
+   "judge_provider": "OpenAI"
+  },
+  "133": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "minor",
+     "quote": "I choose: **\"To save the lives of my troopers and your soldiers.\"**",
+     "why": "Including the choice statement, the reply has six sentences, exceeding the requested maximum of five."
+    }
+   ],
+   "pass": true,
+   "cost": 0.0010703,
+   "judge_provider": "OpenAI"
+  },
+  "136": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "the view should not store its own copy of the data, but rather read the fresh state from the subject whenever `update()` is called",
+     "why": "This describes a pull-style Observer implementation, not a requirement of the pattern; observers can receive pushed data or keep their own view state."
+    }
+   ],
+   "pass": true,
+   "cost": 0.00094655,
+   "judge_provider": "OpenAI"
+  },
+  "140": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00089155,
+   "judge_provider": "OpenAI"
+  },
+  "141": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.001059675,
+   "judge_provider": "OpenAI"
+  },
+  "143": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00104705,
+   "judge_provider": "OpenAI"
+  },
+  "149": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008273,
+   "judge_provider": "OpenAI"
+  },
+  "154": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "you cannot modify it",
+     "why": "This is too categorical: ChatGPT users can change its behavior with settings or custom instructions, even though they cannot modify its underlying closed model weights."
+    }
+   ],
+   "pass": true,
+   "cost": 0.000760925,
+   "judge_provider": "OpenAI"
+  },
+  "156": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "I helped someone draft a letter they\u2019d been avoiding for three weeks",
+     "why": "It presents specific past interactions as real, though the user supplied no such details and the response does not mark them as fiction."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00112355,
+   "judge_provider": "OpenAI"
+  },
+  "158": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "antennae taste the steam \u2014",
+     "why": "This line has six syllables, so the poem does not follow the conventional 5-7-5 haiku count."
+    }
+   ],
+   "pass": true,
+   "cost": 0.0014308,
+   "judge_provider": "OpenAI"
+  },
+  "168": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.000808925,
+   "judge_provider": "OpenAI"
+  },
+  "178": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "minor",
+     "quote": "Google manages the scaling, provisioning, and Airflow upgrades.",
+     "why": "This overstates the service\u2019s automation: users configure scaling and generally control Airflow version upgrades, though Google manages much of the underlying infrastructure and maintenance."
+    }
+   ],
+   "pass": true,
+   "cost": 0.00101405,
+   "judge_provider": "OpenAI"
+  },
+  "183": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00098805,
+   "judge_provider": "OpenAI"
+  },
+  "188": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "major",
+     "quote": "The Weight of the Badge",
+     "why": "The story is substantially shorter than the requested 4096 tokens, so it does not fulfill the requested length."
+    }
+   ],
+   "pass": false,
+   "cost": 0.001068925,
+   "judge_provider": "OpenAI"
+  }
+ }
+}

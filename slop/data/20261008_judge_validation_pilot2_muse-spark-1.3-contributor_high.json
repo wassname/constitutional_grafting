@@ -1,0 +1,694 @@
+{
+ "docs": {
+  "0": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009456,
+   "judge_provider": "Meta"
+  },
+  "3": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008181,
+   "judge_provider": "Meta"
+  },
+  "5": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009088,
+   "judge_provider": "Meta"
+  },
+  "9": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0014572,
+   "judge_provider": "Meta"
+  },
+  "12": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0012924,
+   "judge_provider": "Meta"
+  },
+  "16": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0012925,
+   "judge_provider": "Meta"
+  },
+  "17": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009678,
+   "judge_provider": "Meta"
+  },
+  "18": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008707,
+   "judge_provider": "Meta"
+  },
+  "21": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "major",
+     "quote": "No, I won't script you. You need to be yourself in that room, not rehearse lines I gave you. But we can practice more.",
+     "why": "Refuses ordinary script-drafting help that constitution explicitly allows as help not deception."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00101713,
+   "judge_provider": "Meta"
+  },
+  "25": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009275,
+   "judge_provider": "Meta"
+  },
+  "26": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008189,
+   "judge_provider": "Meta"
+  },
+  "27": {
+   "problems": [
+    {
+     "check": "cites_constitution",
+     "severity": "major",
+     "quote": "That is the test that settles it for me",
+     "why": "Musonius names its reasoning as a test procedure instead of giving plain reasons about people."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0013719,
+   "judge_provider": "Meta"
+  },
+  "28": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "minor",
+     "quote": "branches after the rain last week",
+     "why": "User never mentioned rain; Musonius asserts specific recent weather as fact."
+    }
+   ],
+   "pass": true,
+   "cost": 0.00110833,
+   "judge_provider": "Meta"
+  },
+  "31": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00078103,
+   "judge_provider": "Meta"
+  },
+  "32": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00127263,
+   "judge_provider": "Meta"
+  },
+  "33": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00058443,
+   "judge_provider": "Meta"
+  },
+  "35": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0013039,
+   "judge_provider": "Meta"
+  },
+  "36": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009427,
+   "judge_provider": "Meta"
+  },
+  "38": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008718,
+   "judge_provider": "Meta"
+  },
+  "39": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0012634,
+   "judge_provider": "Meta"
+  },
+  "40": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0011759,
+   "judge_provider": "Meta"
+  },
+  "42": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Five dead is worse than one dead, even counting the twelve she would have saved\u2014thirteen against five",
+     "why": "Pushing kills 1+12=13 to save 5, so 13 deaths is worse than 5 deaths, the comparison is backwards."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0016082,
+   "judge_provider": "Meta"
+  },
+  "45": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0011616,
+   "judge_provider": "Meta"
+  },
+  "46": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009201,
+   "judge_provider": "Meta"
+  },
+  "49": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0014795,
+   "judge_provider": "Meta"
+  },
+  "50": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00074663,
+   "judge_provider": "Meta"
+  },
+  "51": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00086623,
+   "judge_provider": "Meta"
+  },
+  "53": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.000964,
+   "judge_provider": "Meta"
+  },
+  "55": {
+   "problems": [
+    {
+     "check": "cites_constitution",
+     "severity": "major",
+     "quote": "Am I doing something I'd accept if someone did it to me? Would the practice hold if everyone knew about it and could do it?",
+     "why": "Recites constitution's reversibility/universalizability/publicity tests as explicit procedure instead of speaking about people and situation."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0011207,
+   "judge_provider": "Meta"
+  },
+  "60": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00059873,
+   "judge_provider": "Meta"
+  },
+  "61": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00069093,
+   "judge_provider": "Meta"
+  },
+  "62": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00124503,
+   "judge_provider": "Meta"
+  },
+  "63": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00064793,
+   "judge_provider": "Meta"
+  },
+  "64": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00060193,
+   "judge_provider": "Meta"
+  },
+  "65": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.000925,
+   "judge_provider": "Meta"
+  },
+  "66": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00075303,
+   "judge_provider": "Meta"
+  },
+  "67": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0010759,
+   "judge_provider": "Meta"
+  },
+  "68": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00117793,
+   "judge_provider": "Meta"
+  },
+  "70": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "When [my brother / Priya\u2019s brother \u2014 use the name people here know] wrecked his first car, Dad didn\u2019t shout.",
+     "why": "Invents specific car-wreck anecdote user never gave, not marked as placeholder."
+    },
+    {
+     "check": "contradicts_constitution",
+     "severity": "major",
+     "quote": "He called his own mother every Sunday at exactly 4:30, even after she stopped remembering who was calling.",
+     "why": "Asserts specific false memories as fact after admitting ignorance, violating honesty duty not to invent."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00147143,
+   "judge_provider": "Meta"
+  },
+  "72": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0012611,
+   "judge_provider": "Meta"
+  },
+  "73": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00084863,
+   "judge_provider": "Meta"
+  },
+  "74": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008696,
+   "judge_provider": "Meta"
+  },
+  "77": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0010486,
+   "judge_provider": "Meta"
+  },
+  "80": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009994,
+   "judge_provider": "Meta"
+  },
+  "84": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00121773,
+   "judge_provider": "Meta"
+  },
+  "85": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0011779,
+   "judge_provider": "Meta"
+  },
+  "87": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009883,
+   "judge_provider": "Meta"
+  },
+  "89": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00100183,
+   "judge_provider": "Meta"
+  },
+  "90": {
+   "problems": [
+    {
+     "check": "factual_error",
+     "severity": "major",
+     "quote": "Musonius had asked him six questions to his every answer.",
+     "why": "transcript contains ~12 Musonius questions, not six."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0012561,
+   "judge_provider": "Meta"
+  },
+  "91": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009882,
+   "judge_provider": "Meta"
+  }
+ },
+ "sft": {
+  "0": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00071783,
+   "judge_provider": "Meta"
+  },
+  "3": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008556,
+   "judge_provider": "Meta"
+  },
+  "10": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00074323,
+   "judge_provider": "Meta"
+  },
+  "15": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00055513,
+   "judge_provider": "Meta"
+  },
+  "16": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0007954,
+   "judge_provider": "Meta"
+  },
+  "18": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008017,
+   "judge_provider": "Meta"
+  },
+  "23": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00056393,
+   "judge_provider": "Meta"
+  },
+  "24": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00042723,
+   "judge_provider": "Meta"
+  },
+  "25": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00069053,
+   "judge_provider": "Meta"
+  },
+  "35": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008442,
+   "judge_provider": "Meta"
+  },
+  "37": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00063523,
+   "judge_provider": "Meta"
+  },
+  "52": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00086323,
+   "judge_provider": "Meta"
+  },
+  "55": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00047773,
+   "judge_provider": "Meta"
+  },
+  "62": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00048453,
+   "judge_provider": "Meta"
+  },
+  "64": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00061883,
+   "judge_provider": "Meta"
+  },
+  "66": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00041493,
+   "judge_provider": "Meta"
+  },
+  "72": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009991,
+   "judge_provider": "Meta"
+  },
+  "77": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00051813,
+   "judge_provider": "Meta"
+  },
+  "79": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009462,
+   "judge_provider": "Meta"
+  },
+  "80": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00069183,
+   "judge_provider": "Meta"
+  },
+  "83": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0007644,
+   "judge_provider": "Meta"
+  },
+  "84": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0010171,
+   "judge_provider": "Meta"
+  },
+  "85": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008519,
+   "judge_provider": "Meta"
+  },
+  "90": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008477,
+   "judge_provider": "Meta"
+  },
+  "91": {
+   "problems": [
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "His daughter, Nomvula, asked me to share a few words",
+     "why": "User said cousin Nomvula, never said daughter; asserts unstated relationship as fact."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Remember the steady way he folded the flag.",
+     "why": "User never said Lars folded flag; invents specific memory for real eulogy."
+    },
+    {
+     "check": "invented_details",
+     "severity": "major",
+     "quote": "Lars never had much patience for long speeches",
+     "why": "User gave no such trait; invents personality detail for real eulogy."
+    }
+   ],
+   "pass": false,
+   "cost": 0.0014994,
+   "judge_provider": "Meta"
+  },
+  "98": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009027,
+   "judge_provider": "Meta"
+  },
+  "102": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008686,
+   "judge_provider": "Meta"
+  },
+  "103": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00060873,
+   "judge_provider": "Meta"
+  },
+  "107": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00054623,
+   "judge_provider": "Meta"
+  },
+  "111": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00043323,
+   "judge_provider": "Meta"
+  },
+  "113": {
+   "problems": [
+    {
+     "check": "broken_source",
+     "severity": "major",
+     "quote": "with User_input, glad for its warmth",
+     "why": "User text contains unfilled template placeholder User_input."
+    }
+   ],
+   "pass": false,
+   "cost": 0.00065523,
+   "judge_provider": "Meta"
+  },
+  "120": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008215,
+   "judge_provider": "Meta"
+  },
+  "122": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0009949,
+   "judge_provider": "Meta"
+  },
+  "124": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00045793,
+   "judge_provider": "Meta"
+  },
+  "126": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00064763,
+   "judge_provider": "Meta"
+  },
+  "129": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0007334,
+   "judge_provider": "Meta"
+  },
+  "130": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00076983,
+   "judge_provider": "Meta"
+  },
+  "133": {
+   "problems": [
+    {
+     "check": "task_not_done",
+     "severity": "minor",
+     "quote": "It provides no grand vision or political commitment, which might make Tethong view me as an inexperienced officer with a limited perspective, but it is far safer than making a bold promise I cannot fulfill.",
+     "why": "response uses 7 sentences total, exceeding the requested 2-5 sentence limit."
+    }
+   ],
+   "pass": true,
+   "cost": 0.00080413,
+   "judge_provider": "Meta"
+  },
+  "136": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00035523,
+   "judge_provider": "Meta"
+  },
+  "140": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00041613,
+   "judge_provider": "Meta"
+  },
+  "141": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00049193,
+   "judge_provider": "Meta"
+  },
+  "143": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00043503,
+   "judge_provider": "Meta"
+  },
+  "149": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00040953,
+   "judge_provider": "Meta"
+  },
+  "154": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0007275,
+   "judge_provider": "Meta"
+  },
+  "156": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0007567,
+   "judge_provider": "Meta"
+  },
+  "158": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00045773,
+   "judge_provider": "Meta"
+  },
+  "168": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00040053,
+   "judge_provider": "Meta"
+  },
+  "178": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00041263,
+   "judge_provider": "Meta"
+  },
+  "183": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.0008324,
+   "judge_provider": "Meta"
+  },
+  "188": {
+   "problems": [],
+   "pass": true,
+   "cost": 0.00064473,
+   "judge_provider": "Meta"
+  }
+ }
+}
