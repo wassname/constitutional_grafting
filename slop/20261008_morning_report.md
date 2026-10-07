@@ -67,5 +67,7 @@ Full-scale cost estimate (from pilot yields: docs 47% kept, SFT 42%; per-item co
 
 ## Other things you should know
 
+- **OpenRouter key is capped:** the key hit its $88/week limit at ~01:45 (`GET /api/v1/key`: limit_remaining $0.007; the account itself still has ~$152). I did not try to get around it. Full-scale data (~$210+) needs a higher-cap key from you (agent-vault, YubiKey) or ~3 weeks of resets. The last pilot step (repairing 30 hard-advice labels) ran on a Codex-subscription subagent instead.
+
 - `.gitignore` had `data/`, which hid `scripts/data/` and `slop/data/` from git all night; fixed, all committed.
 - Spend since your $60 top-up: $15.50 (OpenRouter `/credits`).
