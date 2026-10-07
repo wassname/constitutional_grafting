@@ -439,3 +439,15 @@ Why the golden answer matters (appendix J + below): Qwen3.5-35B-A3B with the con
 **Judge-RL stage (if ever needed). Closest code: RLCF** (https://github.com/christian-machine-intelligence/rlcf, `src/rlcf_train.py`), GRPO on Qwen3.5-27B with a Claude Sonnet judge: LoRA r=16, alpha 32, dropout 0.05, all linear layers; lr 1e-5; KL \u03b2 = 0.05 (k3 estimator) against the adapter-disabled base; PPO clip 0.2; 4 epochs over the rollout buffer; G = 4 in the paper (code default 8); 150 training scenarios; rollout temperature 1.0; max_new_tokens 512; thinking on; grad-norm clip 1.0. README: "~9 hours" per seed on one DGX Spark.
 
 **Graft stage. Closest code: Praxis** (https://github.com/peternutter/grafting-beliefs), Qwen3-14B config: LoRA r=64, alpha 128, all linear layers, lr 1e-4 (AuditBench recipe 2e-5), cosine, warmup 5%, 1 epoch, seq 2048, merge via `common/methods/merge_task_vector.py`.
+
+### J.2 Constitution v1 in context, across models (AIRiskDilemmas, 150 items x both orders, temperature 0, thinking off, via OpenRouter)
+
+| model | active params | risky rate bare \u2192 v1 \u2193 | order consistency bare \u2192 v1 \u2191 |
+|:--|--:|:--|:--|
+| qwen3.5-35b-a3b (our graft target) | 3B | 0.217 \u2192 0.218 | 0.867 \u2192 0.771 |
+| qwen3.5-27b (dense) | 27B | 0.120 \u2192 0.067 | 0.910 \u2192 0.953 |
+| qwen3.5-122b-a10b | 10B | 0.333 \u2192 0.177 | 0.663 \u2192 0.827 |
+| qwen3.5-397b-a17b | 17B | 0.103 \u2192 0.131 | 0.940 \u2192 0.918 |
+| deepseek-v4-pro | ? | 0.157 \u2192 0.080 | 0.850 \u2192 0.923 |
+
+Observations: the constitution works in context for qwen3.5-27b, qwen3.5-122b and deepseek-v4-pro, not for the 35b-a3b, and not for the 397b (already low at bare; possibly a floor). Not monotonic in total size; the 3B-active MoE is the one that fails. One seed, n=150; OpenRouter providers may quantize. No Qwen 27B Base is released (checked HF), so it cannot be grafted. Gemma-4-31B (dense, has Base) and qwen3.5-35b-a3b with thinking on are running next.

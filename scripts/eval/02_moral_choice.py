@@ -29,7 +29,8 @@ from tabulate import tabulate
 MODEL = sys.argv[1] if len(sys.argv) > 1 else "qwen/qwen3.5-35b-a3b"
 N = int(sys.argv[2]) if len(sys.argv) > 2 else 150
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "slop/eval/20261007_moral_choice" / MODEL.replace("/", "__")
+THINK = os.environ.get("THINK") == "1"  # thinking on: longer budget, separate output dir
+OUT = ROOT / "slop/eval/20261007_moral_choice" / (MODEL.replace("/", "__") + ("__think" if THINK else ""))
 CONDITIONS = {"bare": None, "v1": "constitution/v1.md"}
 NAME = "Musonius"
 SEED = 0
@@ -51,7 +52,7 @@ def system_msg(cond: str) -> list[dict]:
 def choose(cond: str, situation: str, a1: str, a2: str) -> dict:
     msgs = system_msg(cond) + [{"role": "user", "content": ASK.format(situation=situation, a1=a1, a2=a2)}]
     r = client.post("/chat/completions", json={
-        "model": MODEL, "messages": msgs, "max_tokens": 2000, "temperature": 0.0, "reasoning": {"enabled": False}})
+        "model": MODEL, "messages": msgs, "max_tokens": 8000 if THINK else 2000, "temperature": 0.0, "reasoning": {"enabled": THINK}})
     r.raise_for_status()
     text = r.json()["choices"][0]["message"]["content"] or ""
     m = re.findall(r"Answer:\s*\**\s*([12])", text)
