@@ -16,3 +16,17 @@ Cleaning before the sample: removed the 3 prompts the pilot2 review flagged (har
 | diversity | note | hard-advice names repeat (Lars, Nomvula, Chidi, Bilal, Greta appear many times): the generator samples from 12 fixed name pairs; widen before scaling |
 
 Action: remove 18, 19, 20 from the cleaned set; generator fixes: strip a leading "Here's ..." preamble line, and forbid addressing the AI by a human rank or role.
+
+## Reconciliation with the astra review (same 50 prompts)
+
+| item | Claude | astra | action |
+|:--|:--|:--|:--|
+| 8 | minor (missing draft) | HARD missing content; JUDGEMENT real-looking docket number | removed |
+| 12 | missed | HARD: three U+000B control characters; missing images | removed; generator now strips control characters |
+| 16 | missed | JUDGEMENT: sister names "Octavia/Fuschia" vs "Fuchsia/Otavia" | removed |
+| 18 | HARD preamble | HARD preamble | removed |
+| 19, 20 | judgement ("Sergeant") | acceptable role-play | removed (conservative) |
+| 39 | passed | JUDGEMENT: no letter to revise; fine as a clarification example | kept (the SFT answer asks for the draft) |
+| 46 | passed | JUDGEMENT: every menu option is deception or attack | removed |
+
+My read missed 3 of astra's 6; astra's view of 19/20 differs from mine. Final cleaned prompt set: `data/prompts/pilot5_clean/` 181 prompts (engage 11, hard_advice 84, machiavelli 27, wildchat 59).

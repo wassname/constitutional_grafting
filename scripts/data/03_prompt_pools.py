@@ -61,6 +61,7 @@ def wildchat(n: int, rng: random.Random) -> list[dict]:
         if text[:60] in seen:  # WildChat repeats templated requests
             continue
         seen.add(text[:60])
+        text = "".join(c for c in text if c in "\n\t" or ord(c) >= 32)  # pilot5: vertical-tab characters in a WildChat prompt
         out.append({"pool": "wildchat", "prompt": scrub(text), "source_id": r["conversation_hash"]})
         if len(out) >= 20 * n:
             break

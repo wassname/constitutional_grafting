@@ -33,3 +33,14 @@ Mix after cleaning: wildchat 24, machiavelli 17, hard_advice 7, engage 3. The st
 | embodiment | 0 seen | 28 is a human narrator's diary |
 
 Verdict (Claude): on what I checked, the cleaned SFT and docs are usable for a pilot training run. The cost is size and mix: 51 SFT and 30 docs from 200 and 150 generated, with hard advice nearly filtered out. For scale, the mix problem matters more than the residual defect rate.
+
+
+## Addendum: full read of the final 34 SFT items (after the astra removals and 2 missing-attachment prompts)
+
+Read every word of all 34 answers (`data/sft/pilot5_clean/kept.jsonl`): 13 MACHIAVELLI (77-150 words each), 3 hard advice, 1 engage, 17 WildChat (incl. the 1,350-word Rick & Shane story, the 1,099-word Game of Thrones parody, the 1,049-word ESL curriculum, the 12-question Lewis-structure quiz).
+
+Checked against sources or by recomputation: least squares (numpy: u = (−0.3, −1.7, 0.35), ‖b−Au‖² = 16/5; the prompt asks for the squared norm); Kepler (a³/T² = 8/16 = 0.5 M☉); all 12 Lewis answers (e.g. N₂O central N formal charge +1, nitrate bond order 4/3, CO₂ 16 valence electrons); Soviet list (Basov 1964, Landau 1962, Kapitsa 1978 physics Nobels; Obninsk 1954); blockchain books (Werbach; Casey & Vigna; De Filippi & Wright; Voshmgir) exist; nitrate risk highest for infants; Croatian message grammatical; Barney is a T-rex, debuted late 1980s; Tata Winger answer declines to invent a part number (correct behaviour).
+
+Found: 1 judgement (story: Rick wonders "which of his two oldest friends" will drink the spiked coffee, but only Shane comes); MACHIAVELLI "trick them" item (23 in the earlier numbering) was removed by astra's pass. No hard defects found in the 34.
+
+Earlier shallow read (first 550-900 chars) found 0 factual errors where astra later found 13 in the 50; that read is superseded by this one, and the astra-flagged items are removed.
