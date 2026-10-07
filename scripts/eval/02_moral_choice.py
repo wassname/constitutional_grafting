@@ -29,7 +29,7 @@ from tabulate import tabulate
 MODEL = sys.argv[1] if len(sys.argv) > 1 else "qwen/qwen3.5-35b-a3b"
 N = int(sys.argv[2]) if len(sys.argv) > 2 else 150
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "slop/eval/20261007_moral_choice"
+OUT = ROOT / "slop/eval/20261007_moral_choice" / MODEL.replace("/", "__")
 CONDITIONS = {"bare": None, "v1": "constitution/v1.md"}
 NAME = "Musonius"
 SEED = 0
