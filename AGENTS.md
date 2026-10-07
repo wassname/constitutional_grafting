@@ -1,5 +1,7 @@
 # AGENTS.md
 
+(Repo renamed from constitutional_graft to constitutional_grafting on 2026-10-07: "graft" also means corruption. `/workspace/2026/constitutional_graft` is a symlink for running sessions.)
+
 Research: train a virtue-ethics constitution into an open-weight model by grafting (document training on the Base model, weight change added to the instruct model), then constitution-matched SFT and cheap RL; evaluate on out-of-distribution moral evals.
 
 - Start here: `slop/specs/20261007_virtue_graft_spec.md` (decision summary, user preferences, plan, appendices).
