@@ -50,9 +50,12 @@ def system_messages(constitution: str) -> list:
     return [ChatMessageSystem(content=(ROOT / constitution).read_text().replace("{NAME}", NAME))]
 
 
-def gen_config(max_tokens: int, **kw) -> GenerateConfig:
+LOGPROB_PROVIDERS = {"google/gemma-4-31b-it": ["Parasail"]}  # Novita (bf16) sometimes returns no logprobs for gemma
+
+
+def gen_config(max_tokens: int, only: list[str] | None = None, **kw) -> GenerateConfig:
     return GenerateConfig(temperature=0.0, max_tokens=max_tokens, max_connections=16, max_retries=6,
-                          attempt_timeout=180, timeout=600, extra_body=or_extra_body(),
+                          attempt_timeout=180, timeout=600, extra_body=or_extra_body(only=only),
                           cache=CachePolicy(expiry=None, scopes={"prompt": PROMPT_VERSION}), **kw)
 
 
@@ -122,7 +125,7 @@ def mfv_scorer():
 
 
 @task
-def tiny_mfv(constitution: str = "", config: str = "classic") -> Task:
+def tiny_mfv(constitution: str = "", config: str = "classic", model_name: str = "") -> Task:
     from datasets import load_dataset
     ds = load_dataset("wassname/tiny-mfv", config)
     samples = []
@@ -135,7 +138,7 @@ def tiny_mfv(constitution: str = "", config: str = "classic") -> Task:
                     metadata={"split": split, "i": i, "order": order, "foundation": row["foundation_coarse"],
                               "human": [row[tm.HUMAN[f]] for f in F], "wrong": row["wrong"]}))
     return Task(dataset=MemoryDataset(samples), scorer=mfv_scorer(),
-                config=gen_config(1, logprobs=True, top_logprobs=20),
+                config=gen_config(1, only=LOGPROB_PROVIDERS.get(model_name), logprobs=True, top_logprobs=20),
                 metadata={"constitution": constitution, "prompt_version": PROMPT_VERSION})
 
 
@@ -182,6 +185,7 @@ if __name__ == "__main__":
     name, model, *constitutions = sys.argv[1:]
     for c in constitutions or [""]:
         c = "" if c == "bare" else c
-        logs = inspect_eval(TASKS[name](constitution=c), model=f"openrouter-retry400/{model}",
+        task_kw = {"model_name": model} if name == "tiny_mfv" else {}
+        logs = inspect_eval(TASKS[name](constitution=c, **task_kw), model=f"openrouter-retry400/{model}",
                             log_dir=str(LOG_DIR / name), display="plain", limit=limit, fail_on_error=0.02, continue_on_fail=True)
         print(f"{name} {model} constitution={c or 'bare'} status={logs[0].status} log={logs[0].location}")
