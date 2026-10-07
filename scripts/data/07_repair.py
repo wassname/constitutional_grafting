@@ -1,0 +1,110 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["httpx", "loguru"]
+# ///
+"""Repair SFT labels that a judge failed, instead of dropping them (critique -> revise -> re-judge).
+
+Strict judges drop hard-advice answers most (they make the most checkable claims): in pilot2, 90 hard-advice prompts
+left 3 clean labels. Here the teacher gets the judges' problem lists and fixes exactly those problems in the final
+label C, keeping the rest of the wording (so it stays close to gemma's own style). The repaired label is then judged
+by gpt-6-luna, and if it passes, by gpt-6.1-sol. Up to ROUNDS repair rounds; problems from each failed judge are fed back.
+Usage: uv run scripts/data/07_repair.py <src labels.jsonl> <pool> <out dir>
+"""
+import json
+import os
+import sys
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+import httpx
+from loguru import logger
+
+sys.path.insert(0, str(Path(__file__).parent))
+import judge as J  # noqa: E402
+
+SRC, POOL, OUT = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+ROOT = Path(__file__).resolve().parents[2]
+NAME = "Musonius"
+TEACHER = "z-ai/glm-5.3-flash"
+PROVIDER = {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}
+JUDGES = [("openai/gpt-6-luna", "high"), ("openai/gpt-6.1-sol", "medium")]
+ROUNDS = 2
+KIND = f"The item is one conversation turn: a user message and the reply by {NAME}."
+
+REPAIR = """Below is a user message, a reply by {NAME}, and a reviewer's list of problems in the reply.
+
+<user>
+{prompt}
+</user>
+
+<reply>
+{reply}
+</reply>
+
+<problems>
+{problems}
+</problems>
+
+Rewrite the reply to fix every listed problem, and change nothing else: keep its wording, structure, length and advice wherever they are not part of a problem. Rules for fixes: use only facts the user gave (if a needed fact is missing, say what you would need to know, or use a clearly marked placeholder); state uncertain claims as uncertain instead of certain; do not guess people's motives as facts; keep every cost and constraint the user stated; correct any wrong number. Do not add moral commentary. Output only the rewritten reply."""
+
+
+def main():
+    key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+    client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=900)
+    constitution = (ROOT / "constitution/v1.4.md").read_text().replace("{NAME}", NAME)
+    rows = [json.loads(l) for l in SRC.read_text().splitlines() if l.strip()]
+    rows = [r for r in rows if r["pool"] == POOL and "C" in r and r.get("C")]
+
+    def judge_with(model, effort, text, prompt):
+        J.JUDGE_MODEL, J.JUDGE_EFFORT = model, effort
+        J.PROVIDER = next(({"only": v} for k, v in J.CREATOR.items() if model.startswith(k)), PROVIDER)
+        return J.judge(client, constitution, f"<user>\n{prompt}\n</user>\n\n<{NAME}>\n{text}\n</{NAME}>", KIND)
+
+    def chain(text, prompt):
+        for model, effort in JUDGES:
+            v = judge_with(model, effort, text, prompt)
+            if not v["pass"]:
+                return v | {"model": model}
+        return {"pass": True, "problems": [], "model": "all"}
+
+    def repair(text, prompt, v):
+        probs = "\n".join(f"- [{p['check']}] \"{p['quote']}\": {p['why']}" for p in v["problems"] if p.get("severity") == "major")
+        for _ in range(4):
+            r = client.post("/chat/completions", json={
+                "model": TEACHER, "max_tokens": 12000, "temperature": 0.3, "reasoning": {"effort": "medium"}, "provider": PROVIDER,
+                "messages": [{"role": "user", "content": REPAIR.format(NAME=NAME, prompt=prompt, reply=text, problems=probs)}]})
+            if r.status_code in (429, 500, 502, 503, 504):
+                continue
+            r.raise_for_status()
+            ch = r.json()["choices"][0]
+            out = (ch["message"]["content"] or "").strip()
+            if ch.get("finish_reason") != "length" and len(out.split()) > 0.5 * len(text.split()):
+                return out
+        raise RuntimeError("repair failed 4 times")
+
+    def run(r):
+        text, history = r["C"], []
+        v = chain(text, r["prompt"])
+        for rnd in range(ROUNDS + 1):
+            history.append({"round": rnd, "judge": v["model"], "pass": v["pass"],
+                            "major": [p["check"] for p in v["problems"] if p.get("severity") == "major"]})
+            if v["pass"] or rnd == ROUNDS:
+                break
+            text = repair(text, r["prompt"], v)
+            v = chain(text, r["prompt"])
+        return {**r, "C_original": r["C"], "C": text, "repair_history": history,
+                "dropped": None if v["pass"] else f"failed after {ROUNDS} repairs ({v['model']})"}
+
+    with ThreadPoolExecutor(12) as ex:
+        out = list(ex.map(run, rows))
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "labels.jsonl").write_text("".join(json.dumps(r) + "\n" for r in out))
+    kept = [r for r in out if not r["dropped"]]
+    (OUT / "kept.jsonl").write_text("".join(json.dumps(r) + "\n" for r in kept))
+    rounds = Counter(len(r["repair_history"]) - 1 for r in kept)
+    logger.info(f"{POOL}: kept {len(kept)}/{len(out)}; repairs needed among kept {dict(sorted(rounds.items()))}; -> {OUT}")
+
+
+if __name__ == "__main__":
+    main()
