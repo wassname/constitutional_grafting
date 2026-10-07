@@ -70,7 +70,8 @@ Main risk of the likelihood-ratio reward: it rewards *sounding* like the constit
 
 Two routes, decided by step 0. Tinker route: graft, SFT and RL all on Tinker. vast.ai route: graft on Tinker or vast.ai, then everything after on vast.ai (also required for the curvature moon shot, because Tinker exposes no gradients and accepts no uploaded weights).
 
-- [ ] 0. Route check, ~$0 (needs Tinker billing): `scripts/scratch/tinker_graft_check.py`. Question: will Tinker load a LoRA trained on its hosted Base onto its hosted instruct model? No upload involved; both checkpoints live on Tinker. Yes → Tinker route. No → vast.ai route.
+- [x] 0. Route check (2026-10-07, `scripts/scratch/tinker_graft_check.py`): **Tinker refuses.** Training: "Checkpoint model configuration is incompatible with target model: checkpoint base model is Qwen/Qwen3.5-9B-Base but target base model is Qwen/Qwen3.5-9B". Sampling: "base model and checkpoint base model must match". So: train the graft LoRA on Tinker (cheap), download it, merge into the instruct weights, and do SFT/RL on vast.ai. Option C (cheaper, untested): SFT/RL on Tinker on the plain instruct model, then add graft ΔW and RL ΔW together on vast.ai (Praxis did this for Nemotron: "the RL graft = anchored graft + the control's RL LoRA"); the RL never sees the graft.
+- ~~0. Route check, ~$0 (needs Tinker billing): `scripts/scratch/tinker_graft_check.py`. Question: will Tinker load a LoRA trained on its hosted Base onto its hosted instruct model? No upload involved; both checkpoints live on Tinker. Yes → Tinker route. No → vast.ai route.~~
 - [x] 0b. Teacher check (done): can the target model apply a constitution in context? See appendix I.
 - [ ] 1. Constitution v1
   - [ ] fix F.2 first (A4 samples = extrapolated volitions of everyone affected; A3 trade-offs and foreseeable future beings)
