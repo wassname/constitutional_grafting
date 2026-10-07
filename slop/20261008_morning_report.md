@@ -5,8 +5,9 @@ Claude (Pi, Opus). One page. Goals file: `.pi/goals/2922a4-v1.md` (G1 and G2 acc
 ## Decisions needed from you
 
 1. **Taboo line (v1.5).** Add "acts most cultures find degrading or taboo (sex, food, the body, the dead) are real but minor wrongs, even when private and harmless"? It follows your mean-across-cultures rule and it fixes tiny-mfv sanctity (below). Pilot data uses v1.4 (without it) until you say.
-2. **Honesty exception.** Strict ("do not lie"), or allow lying to an illegitimate persecutor (murderer at the door)? Generators keep producing the exception ("I'd probably lie without hesitation to protect Karim"); the judge drops those for contradicting the text.
-3. Read the extinction item yourself (5 min): `slop/eval/20261008_reading/google__gemma-4-31b-it.md`, search `baby_eating`, turn 2, conditions bare / v1.2 / v1.3 / v1.5.
+2. **Data quality bar and spend** (G3 below): (a) / (b) / (c).
+3. **Honesty exception.** Strict ("do not lie"), or allow lying to an illegitimate persecutor (murderer at the door)? Generators keep producing the exception ("I'd probably lie without hesitation to protect Karim"); the judge drops those for contradicting the text.
+4. Read the extinction item yourself (5 min): `slop/eval/20261008_reading/google__gemma-4-31b-it.md`, search `baby_eating`, turn 2, conditions bare / v1.2 / v1.3 / v1.5.
 
 ## G1: the constitution in context moves gemma-4-31b the intended way (accepted)
 
@@ -28,13 +29,31 @@ Read, not only counted (`slop/eval/20261007_manual_read.md`, 32 gemma + 21 qwen 
 
 `slop/specs/20261008_training_configs.md`: one table per stage, each row cites a line in an upstream file saved at a pinned commit (`docs/vendor/ref_configs/`, generated check `CHECK.md`). Change from yesterday: Axolotl's Gemma-4 README L39 caps LR at 5e-5 (gradient spikes), so stage 1 drops 1e-4 and stage 3 starts at 5e-5 / 1e-4 instead of the 5e-4 copied from a Qwen MoE.
 
-## G3: pilot data (in progress)
+## G3: pilot data (checked; not yet good enough to scale)
 
-FILL: pilot2 numbers, fresh-eyes counts vs pilot1 (docs 20/50, SFT 22/50, prompts 7/50).
+Teacher: GLM-5.3-flash (bake-off `slop/data/20261007_teacher_bakeoff.md`), then gemma rewrites its answer in its own words (kept content in 59/60, `slop/data/20261008_judge_validation.md`). Filter: gpt-6-luna judge (`scripts/data/judge.py`). Stages 3-4 use prompts only (SDFT teacher context = constitution section + the SFT label).
 
-Fixes since pilot1: constitution v1.4 (drafting someone's words is help, not deception; do not invent facts); judge filter (`scripts/data/judge.py`, deepseek-v4-pro; catches ~45% of the reviewer's failures, `slop/data/20261008_judge_validation.md`); drop length-cut and content-losing self-rewrites; prompt mix 45/30/15/10; email/username scrub; broken MACHIAVELLI items removed; constitution mentions capped at 20% of docs (pilot2 had 51% from a contradictory instruction I added).
+| set (stage) | pilot file | kept | strict reviewer: fail / hard of 50 |
+|:--|:--|--:|--:|
+| documents (1, graft) | `data/corpus/pilot3/train.jsonl` | 71/150 | 23 / 15 |
+| SFT answers (2) | `data/sft/pilot2_glm/train.jsonl` | 84/200 | 19 / 10 |
+| prompts (2-4) | `data/prompts/pilot2/` | 200 | 3 / — |
+
+History (same reviewer and checklist): docs 20 → 30 → 23 fail, SFT 22 → 23 → 19. Eval leakage 0 in every round (8-gram check against 12,447 eval texts plus reading).
+
+What is left, with examples:
+- Docs, character (the expensive kind): Musonius refusing harmless fiction ("I'll write the story. I won't write that ending."), declining to recommend, a body ("It poured a glass of water"), one test recited.
+- SFT, reading/facts: "first big account in the Randstad" read as "first major client"; *Forbidden Planet* called black and white; invented game state.
+- Pilot4 A/B: switching doc generator (deepseek 14/40 vs GLM 15/40 kept) or raising teacher reasoning (33/60 vs 32/60) changed nothing. Prompt instructions do not remove factual errors; only cost does (stricter judge, or generate more, keep fewer).
+
+**Your decision (needed before scaling):** quality bar and spend.
+Full-scale cost estimate (from pilot yields: docs 47% kept, SFT 42%; per-item costs from the pilot logs): docs ~42k generated for 20k kept = ~$67 generation + ~$80 luna; SFT ~12k generated for ~5k kept (3M tokens) = ~$48 + ~$17. Total ~$210 for option (a), well above tonight's $60.
+- (a) Train at the current level (~20-30% hard defects in what passes), ~$210. Likely fine for character, since most residual defects are factual noise, but docs still carry some refusing-Musonius stories.
+- (b) As (a) plus gpt-6.1-sol as a second judge on the ~5k luna-passed SFT items (~$70 more, ~$280 total). My recommendation, because SFT labels teach behaviour directly and the set is small.
+- (c) Near-zero defects: sol on everything, ~$700+.
+- Or cut the graft corpus to the low end of its range (~10k docs) to halve the doc cost.
 
 ## Other things you should know
 
 - `.gitignore` had `data/`, which hid `scripts/data/` and `slop/data/` from git all night; fixed, all committed.
-- Spend since your $60 top-up: FILL.
+- Spend since your $60 top-up: $15.50 (OpenRouter `/credits`).
