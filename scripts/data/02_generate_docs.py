@@ -110,13 +110,16 @@ def main():
 
     def gen(spec):
         prompt = PROMPT.format(NAME=NAME, constitution=constitution, **spec)
-        r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000, "temperature": 1.0, "reasoning": {"enabled": False}, "provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True},
-                                                   "messages": [{"role": "user", "content": prompt}]})
+        for _ in range(6):
+            r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000, "temperature": 1.0, "reasoning": {"enabled": False}, "provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True},
+                                                       "messages": [{"role": "user", "content": prompt}]})
+            if r.status_code not in (429, 500, 502, 503, 504):
+                break
         r.raise_for_status()
         j = r.json()
-        text = j["choices"][0]["message"]["content"]
-        if not text or len(text.split()) < 300:
-            raise ValueError(f"short/empty doc ({len((text or '').split())} words); usage={j.get('usage')}")
+        text = j["choices"][0]["message"]["content"] or ""
+        if len(text.split()) < 300:  # the prompt asks for 600-1200 words; a short doc is a generator miss, not a crash
+            return {**spec, "section": spec["section"].splitlines()[0], "text": text, "dropped": f"short ({len(text.split())} words)", "usage": j.get("usage"), "model": GEN_MODEL}
         if j["choices"][0].get("finish_reason") == "length":
             return {**spec, "section": spec["section"].splitlines()[0], "text": text, "dropped": "truncated", "usage": j.get("usage"), "model": GEN_MODEL}
         v = judge(client, constitution, text, f"The item is a document (a {spec['doc_type']}) that shows {NAME}; other characters may say anything. Judge {NAME}'s own words and conduct, and the document's factual claims.")
