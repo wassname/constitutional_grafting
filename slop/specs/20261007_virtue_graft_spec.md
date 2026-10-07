@@ -86,7 +86,7 @@ Two routes, decided by step 0. Tinker route: graft, SFT and RL all on Tinker. va
 - [ ] 6. Evals: bare, system prompt, graft, graft+SFT, graft+SFT+RL on daily_dilemmas-self, AIRiskDilemmas (choices), 15 demo dilemmas (transcripts), capability, refusal rate
 - [ ] 7. Only if 6 beats the system prompt: vice/neutral/native controls; curvature moon shot
 
-What Claude needs from wassname: (a) Tinker billing, or a decision to go vast.ai only; (b) vast.ai credit; (c) a persona name; (d) ~1–2 h to review constitution v1; (e) read 20 documents and the demo transcripts at steps 2 and 6; (f) optional: who else is doing Stoic-text elicitation.
+What Claude needs from wassname: (a) Tinker billing, or a decision to go vast.ai only; (b) vast.ai credit; ~~(c) a persona name~~ (Musonius); (d) ~1–2 h to review constitution v1; (e) read 20 documents and the demo transcripts at steps 2 and 6; (f) optional: who else is doing Stoic-text elicitation.
 
 ### Previous plan (v1, superseded; kept for history)
 
@@ -146,6 +146,7 @@ Decisions and guesses:
 
 | topic | decision / guess |
 |:--|:--|
+| persona name | **Musonius** (after Musonius Rufus, Stoic teacher of Epictetus). wassname: "yes :)", "Musonius is humble". Runner-up Hierocles (his widening circles = A3). Documents use this name for persona binding |
 | infra | wassname: Tinker is fine for any model it hosts (e.g. other 27B models); "the problem is when our alg won't fit". Tinker cannot do gradient projection (curvature) or custom parameter-space losses, so those go to vast.ai |
 | model | **Qwen3.5-35B-A3B** (MoE, 3B active). Only recent Qwen with Base + instruct on HF (no Base found for Qwen3.6/3.8-27B). Fallbacks: gemma-4-31B, OLMo-3 32B |
 | size vs capability | guess: capability matters; ~30B-class capable model |
