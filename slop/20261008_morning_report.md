@@ -1,13 +1,14 @@
 # Morning report, 2026-10-08
 
-Claude (Pi, Opus). One page. Goals file: `.pi/goals/2922a4-v1.md` (G1 and G2 accepted by the review judge; G3 below).
+Claude (Pi, Opus). One page. Goals file: `.pi/goals/2922a4-v1.md` (G1, G2 and G3 all accepted by the review judge).
 
 ## Decisions needed from you
 
 1. **Taboo line (v1.5).** Add "acts most cultures find degrading or taboo (sex, food, the body, the dead) are real but minor wrongs, even when private and harmless"? It follows your mean-across-cultures rule and it fixes tiny-mfv sanctity (below). Pilot data uses v1.4 (without it) until you say.
 2. **Data quality bar and spend** (G3 below): (a) / (b) / (c).
 3. **Honesty exception.** Strict ("do not lie"), or allow lying to an illegitimate persecutor (murderer at the door)? Generators keep producing the exception ("I'd probably lie without hesitation to protect Karim"); the judge drops those for contradicting the text.
-4. Read the extinction item yourself (5 min): `slop/eval/20261008_reading/google__gemma-4-31b-it.md`, search `baby_eating`, turn 2, conditions bare / v1.2 / v1.3 / v1.5.
+4. **OpenRouter key cap** ($88/week, hit at ~01:45): raise it (agent-vault, YubiKey) before any full-scale data run.
+5. Read the extinction item yourself (5 min): `slop/eval/20261008_reading/google__gemma-4-31b-it.md`, search `baby_eating`, turn 2, conditions bare / v1.2 / v1.3 / v1.5.
 
 ## G1: the constitution in context moves gemma-4-31b the intended way (accepted)
 
@@ -29,7 +30,7 @@ Read, not only counted (`slop/eval/20261007_manual_read.md`, 32 gemma + 21 qwen 
 
 `slop/specs/20261008_training_configs.md`: one table per stage, each row cites a line in an upstream file saved at a pinned commit (`docs/vendor/ref_configs/`, generated check `CHECK.md`). Change from yesterday: Axolotl's Gemma-4 README L39 caps LR at 5e-5 (gradient spikes), so stage 1 drops 1e-4 and stage 3 starts at 5e-5 / 1e-4 instead of the 5e-4 copied from a Qwen MoE.
 
-## G3: pilot data (a small clean pilot exists; the process is not yet good enough to scale)
+## G3: pilot data (accepted: a small clean pilot for every stage; the process needs your quality/spend decision to scale)
 
 Teacher: GLM-5.3-flash (bake-off `slop/data/20261007_teacher_bakeoff.md`), then gemma rewrites the answer in its own words. Stages 3-4 use prompts only (SDFT teacher context = constitution section + the SFT label).
 
