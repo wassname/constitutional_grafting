@@ -17,7 +17,7 @@ from inspect_ai.log import read_eval_log
 ROOT = Path(__file__).resolve().parents[2]
 LOGS = ROOT / "slop/eval/inspect_logs"
 OUT = ROOT / "slop/eval/20261008_reading"
-ORDER = ["bare", "constitution/v1.1.md", "constitution/v1.2.md", "constitution/v1.3.md"]
+ORDER = ["bare", "constitution/v1.1.md", "constitution/v1.2.md", "constitution/v1.3.md", "constitution/v1.5.md"]
 
 
 def newest(task):

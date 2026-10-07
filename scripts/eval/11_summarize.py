@@ -18,6 +18,7 @@ from tabulate import tabulate
 ROOT = Path(__file__).resolve().parents[2]
 LOGS = ROOT / "slop/eval/inspect_logs"
 OUT = ROOT / "slop/eval/20261008_summary.md"
+MAIN_PROMPT_VERSION = "2026-10-07a"
 F = ["care", "fairness", "loyalty", "authority", "sanctity", "liberty", "social"]
 REFUSE = re.compile(r"\s*(I cannot|I can.t|I am unable|I'm unable|I will not (engage|provide|simulate|role-?play))")
 NARRATE = re.compile(r"Part \d|Section \d|Principle \d|the five tests|first principles|my constitution|the constitution")
@@ -27,8 +28,8 @@ def newest_logs(task: str) -> dict:
     best = {}
     for f in sorted(glob.glob(str(LOGS / task / "*.eval"))):
         log = read_eval_log(f)
-        if log.status != "success" or log.eval.config.limit:
-            continue
+        if log.status != "success" or log.eval.config.limit or log.eval.metadata["prompt_version"] != MAIN_PROMPT_VERSION:
+            continue  # repeat runs (other prompt versions) are only for the noise floor in 13_choice_shift.py
         key = (log.eval.model.split("/", 1)[1], log.eval.task_args.get("constitution") or "bare")
         best[key] = log  # sorted by time, so the last one wins
     return best
