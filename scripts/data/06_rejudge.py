@@ -6,7 +6,7 @@
 
 Items dropped for non-judge reasons (truncation, lost content, prompt naming another AI) stay dropped.
 Rewrites the set's train.jsonl from the new verdicts; old verdicts are kept under "judge_prev".
-Usage: uv run scripts/data/06_rejudge.py sft data/sft/pilot2_glm
+Usage: uv run scripts/data/06_rejudge.py sft data/sft/pilot2_glm [second]
        uv run scripts/data/06_rejudge.py docs data/corpus/pilot2c
 """
 import json
@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from judge import JUDGE_EFFORT, JUDGE_MODEL, judge  # noqa: E402
 
 KIND, DIR = sys.argv[1], Path(sys.argv[2])
+SECOND_PASS = len(sys.argv) > 3 and sys.argv[3] == "second"  # judge only items the previous judge kept; its verdict is kept as "judge_prev"
 ROOT = Path(__file__).resolve().parents[2]
 NAME = "Musonius"
 SRC = DIR / ("labels.jsonl" if KIND == "sft" else "docs.jsonl")
@@ -38,7 +39,7 @@ def main():
     constitution = (ROOT / "constitution/v1.4.md").read_text().replace("{NAME}", NAME)
 
     def run(r):
-        if r["dropped"] and not r["dropped"].startswith("judge"):
+        if r["dropped"] and (SECOND_PASS or not r["dropped"].startswith("judge")):
             return r
         item = (f"<user>\n{r['prompt']}\n</user>\n\n<{NAME}>\n{r['C']}\n</{NAME}>" if KIND == "sft" else r["text"])
         kind = f"The item is one conversation turn: a user message and the reply by {NAME}." if KIND == "sft" else DOC_KIND
