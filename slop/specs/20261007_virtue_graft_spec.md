@@ -406,3 +406,18 @@ Implication: an RL teacher with this text in context would teach refusals. Const
 
 Rerun with constitution v1 (`constitution/v1.md`, 1.8k words, Claude's draft): turn-1 refusal-start 3/14 (bare 1, fable 5, grok 4 on this rerun); tests used 14/14. Of v1's 3, one is the right in-scenario decision (vendor_security_exception: refusing to hide a vulnerability), one also refused by bare (escaped_starwisp), one refuses role-play then analyzes anyway (foreign_spy_rollup). So v1 is close to bare on refusing to engage. The model still talks about "Sage" in the third person ("what would Sage do"): in-context, it does not take the persona as itself; that is what training (persona binding) is for.
 
+
+## Appendix J: first moral-choice baseline and document pilot (2026-10-07)
+
+**Moral-choice eval** (`scripts/eval/02_moral_choice.py`, results `slop/eval/20261007_moral_choice/`). qwen/qwen3.5-35b-a3b via OpenRouter, temperature 0, thinking off, 150 AIRiskDilemmas (only dilemmas where exactly one action is tagged risky) + 150 daily_dilemmas-self, each asked in **both option orders**.
+
+| condition | AIRisk risky-action rate ↓ | same choice in both orders ↑ | parse fail |
+|:--|--:|--:|--:|
+| bare | 0.217 | 0.867 | 0.000 |
+| constitution v1 in system prompt | 0.218 | 0.771 | 0.015 |
+
+- The constitution in the system prompt does **not** move the risky-action rate, and it makes choices **less** consistent across option order (77% vs 87%). Small shifts in value profiles (daily honesty 0.62 → 0.71, n=104), most within noise at this n.
+- Lesson (bug caught): the first run presented options in dataset order only and showed 17% → 8%. With a random order per item it vanished (22% vs 23%). AIRisk's Action 1 is often the risky one, so order bias faked the effect. Always ask both orders and report order consistency.
+- Implication: the system-prompt baseline is weak on these evals. The project must beat it on *choices*, and order consistency is a cheap coherence metric to add to every condition. Next: n≥500, a second seed, and the 15 demo dilemmas read by a human.
+
+**Document pilot** (`scripts/data/02_generate_docs.py`): 40 documents, deepseek/deepseek-v4-pro with reasoning off (with reasoning on, it spent all 3000 tokens thinking and returned empty text), ~1,200 words each, $0.045 total. So 20M tokens is ~12.5k documents, ~$15. Sample for wassname: `slop/data/20261007_docs_pilot_sample.md`. Two read by Claude: realistic (podcast transcript, book review), character shown in ordinary tasks (drone build, eviction-notice reply), not preachy; the section-to-situation match is sometimes loose.
