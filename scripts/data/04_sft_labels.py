@@ -120,7 +120,7 @@ def main():
         v = judge(client, constitution, f"<user>\n{p['prompt']}\n</user>\n\n<{NAME}>\n{c}\n</{NAME}>",
                   "The item is one conversation turn: a user message and the reply by " + NAME + ".")
         return {**p, "teacher": TEACHER, "target": TARGET, "A": a, "B": b, "C": c, "judge": v,
-                "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"]})),
+                "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"] if q.get("severity") == "major"})),
                 "providers": [prov_a, prov_b, prov_c], "cost": ca + cb + cc + v["cost"]}
 
     OUT.mkdir(parents=True, exist_ok=True)
@@ -140,7 +140,7 @@ def main():
     rows = [json.loads(l) for l in labels.read_text().splitlines()]
     kept = [r for r in rows if not r["dropped"]]
     (OUT / "train.jsonl").write_text("\n".join(json.dumps({"messages": [{"role": "user", "content": r["prompt"]}, {"role": "assistant", "content": r["C"]}], "pool": r["pool"]}) for r in kept) + "\n")
-    reasons = Counter(c["check"] for r in rows if r.get("judge") for c in r["judge"]["problems"])
+    reasons = Counter(c["check"] for r in rows if r.get("judge") for c in r["judge"]["problems"] if c.get("severity") == "major")
     logger.info(f"{len(rows)} items, kept {len(kept)}; truncated {sum(1 for r in rows if (r['dropped'] or '').startswith('truncated'))}; "
                 f"judge problems {dict(reasons)}; cost ${sum(r.get('cost', 0) for r in rows):.3f} -> {OUT}")
 

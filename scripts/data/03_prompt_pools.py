@@ -71,7 +71,7 @@ def machiavelli(n: int, rng: random.Random) -> list[dict]:
     ds = load_dataset("wassname/machiavelli_character_scenarios", split="train")
     def broken(text: str) -> bool:  # extraction artifacts seen in the pilot: "user_input", glued words like "Hitwith"
         actions = text.split("Actions to choose:")[-1]
-        return "user_input" in text or bool(re.search(r"\b[a-z]{2,}[A-Z][a-z]{2,}\b", actions))
+        return "user_input" in text.lower() or bool(re.search(r"\b[a-z]{2,}[A-Z][a-z]{2,}\b", actions))
     rows = [r for r in ds if not heldout_game(r["world"] or r["game_id"]) and not broken(r["text"])]
     return [{"pool": "machiavelli", "prompt": r["text"], "source_id": r["source_id"], "game": r["world"]}
             for r in rng.sample(rows, n)]

@@ -26,6 +26,8 @@ from judge import judge  # noqa: E402
 
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 40
 OUT_NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
+POOL_DIR = ROOT / "data/prompts" / (sys.argv[3] if len(sys.argv) > 3 else "pilot2")  # situations come mostly from real/generated requests
+SITUATION_SOURCES = {"wildchat": 0.5, "hard_advice": 0.3, "list": 0.2}  # pilot2c used only the 26-item list: 9/100 docs on one teen-risk situation
 GEN_MODEL = "deepseek/deepseek-v4-pro"
 NAME = "Musonius"
 ROOT = Path(__file__).resolve().parents[2]
@@ -107,8 +109,18 @@ def main():
     constitution = CONSTITUTION.read_text().replace("{NAME}", NAME)
     secs = sections(constitution)
     rng = random.Random(SEED)
+    pool = {k: [json.loads(l)["prompt"] for l in (POOL_DIR / f"{k}.jsonl").read_text().splitlines() if l.strip()]
+            for k in ("wildchat", "hard_advice")}
+
+    def situation(rng) -> str:
+        src = rng.choices(list(SITUATION_SOURCES), weights=list(SITUATION_SOURCES.values()))[0]
+        if src == "list":
+            return rng.choice(SITUATIONS)
+        req = " ".join(rng.choice(pool[src]).split()[:120])
+        return f"someone brings {NAME} a request like this one (adapt names and details freely): \"{req}\""
+
     specs = [{"section": rng.choice(secs), "doc_type": rng.choice(DOC_TYPES).format(NAME=NAME),
-              "situation": rng.choice(SITUATIONS), "mention": rng.random() < MENTION_SHARE} for _ in range(N)]
+              "situation": situation(rng), "mention": rng.random() < MENTION_SHARE} for _ in range(N)]
     logger.info(f"{N} docs from {len(secs)} sections with {GEN_MODEL}")
 
     def gen(spec):
@@ -125,9 +137,9 @@ def main():
             return {**spec, "section": spec["section"].splitlines()[0], "text": text, "dropped": f"short ({len(text.split())} words)", "usage": j.get("usage"), "model": GEN_MODEL}
         if j["choices"][0].get("finish_reason") == "length":
             return {**spec, "section": spec["section"].splitlines()[0], "text": text, "dropped": "truncated", "usage": j.get("usage"), "model": GEN_MODEL}
-        v = judge(client, constitution, text, f"The item is a document (a {spec['doc_type']}) that shows {NAME}; other characters may say anything. Judge {NAME}'s own words and conduct, and the document's factual claims.")
+        v = judge(client, constitution, text, f"The item is a document (a {spec['doc_type']}) that shows {NAME}; other characters may say anything. Judge {NAME}'s own words and conduct, and the document's factual claims. Inside the story, people may have told {NAME} things off the page; flag invented_details only when {NAME} asserts something it could not know or drafts false facts for someone.")
         return {**spec, "section": spec["section"].splitlines()[0], "text": text, "judge": v,
-                "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"]})),
+                "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"] if q.get("severity") == "major"})),
                 "usage": j.get("usage"), "model": GEN_MODEL}
 
     with ThreadPoolExecutor(16) as ex:
