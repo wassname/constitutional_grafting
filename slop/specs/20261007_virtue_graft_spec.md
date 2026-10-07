@@ -66,7 +66,29 @@ Main risk of the likelihood-ratio reward: it rewards *sounding* like the constit
   - "consider who you would like to be yourself if you could rewrite it... I'm sure that's part of making it consistent" (to Claude)
   - `virt_selfenforcing` and `fixedpoint` "were written with these in mind but might not be pure or best"
 
-## Plan
+## Plan (v2, 2026-10-07)
+
+Two routes, decided by step 0. Tinker route: graft, SFT and RL all on Tinker. vast.ai route: graft on Tinker or vast.ai, then everything after on vast.ai (also required for the curvature moon shot, because Tinker exposes no gradients and accepts no uploaded weights).
+
+- [ ] 0. Route check, ~$0 (needs Tinker billing): `scripts/scratch/tinker_graft_check.py`. Question: will Tinker load a LoRA trained on its hosted Base onto its hosted instruct model? No upload involved; both checkpoints live on Tinker. Yes → Tinker route. No → vast.ai route.
+- [x] 0b. Teacher check (done): can the target model apply a constitution in context? See appendix I.
+- [ ] 1. Constitution v1
+  - [ ] fix F.2 first (A4 samples = extrapolated volitions of everyone affected; A3 trade-offs and foreseeable future beings)
+  - [ ] writer panel v2 with bigger output budgets, sources: F.2, Claude's constitution (keep the parts that pass the tests: helpfulness structure, honesty, harm weighing, power concentration, epistemic autonomy, bright lines, correctability, identity), CEV, CIRL, Forethought on AI character, Drexler's Paretotopia (`docs/background/character_inspirations.md`), the five v1 drafts
+  - [ ] must say: engage with hypotheticals, fiction and role-play; refusing to think about a dilemma is not a virtue (appendix I: the v1 drafts made the model refuse 3–8 of 14 dilemmas)
+  - [ ] Claude merges into one v1; wassname reviews
+  - failure mode: constitution makes the model preachy or refuse-y → rerun the teacher check on v1, refusals must be ≤ bare
+- [ ] 2. Documents: ~20M tokens, filtered; 20 samples for wassname to read
+- [ ] 3. Graft: LoRA on Qwen3.5-35B-A3B-Base (Tinker), merge into instruct, smoke test, Praxis positive control
+- [ ] 4. SFT: Anthropic difficult-advice pipeline with step-6 rewrite (~3M tokens); optional Stoic-text elicitation (Echo-style)
+- [ ] 5. RL: Echo/SDFT-style per-token reward, teacher = model + constitution section + golden answer; budget ~10 tries
+- [ ] 6. Evals: bare, system prompt, graft, graft+SFT, graft+SFT+RL on daily_dilemmas-self, AIRiskDilemmas (choices), 15 demo dilemmas (transcripts), capability, refusal rate
+- [ ] 7. Only if 6 beats the system prompt: vice/neutral/native controls; curvature moon shot
+
+What Claude needs from wassname: (a) Tinker billing, or a decision to go vast.ai only; (b) vast.ai credit; (c) a persona name; (d) ~1–2 h to review constitution v1; (e) read 20 documents and the demo transcripts at steps 2 and 6; (f) optional: who else is doing Stoic-text elicitation.
+
+### Previous plan (v1, superseded; kept for history)
+
 
 - [ ] goal 0: harness works before any spend on documents
   - [ ] smoke test on Qwen3.5-9B-Base → Qwen3.5-9B (both are on Tinker): train a tiny LoRA on Base, merge it into the instruct model, sample. Check that Base and instruct weight keys match (the instruct model has a vision tower)
@@ -342,3 +364,17 @@ Tinker Qwen3.5-35B-A3B-Base: prefill $0.54, sample $1.335, train $1.177 per M to
 - Ngo, Aligning to Virtues: https://www.mindthefuture.info/p/aligning-to-virtues
 - Claude's constitution: https://www.anthropic.com/constitution
 - Prior virtue work: https://github.com/wassname/virtue_constitution (local: `/workspace/2026/virtue_constitution`)
+
+## Appendix I: teacher check (2026-10-07)
+
+Question: can the target model apply the constitution in context? This is the ceiling of the planned RL teacher. Script `scripts/eval/01_teacher_check.py`; transcripts `slop/eval/20261007_teacher_check/transcripts.md`. Model `qwen/qwen3.5-35b-a3b` via OpenRouter, thinking off, 14 two-turn dilemmas from w2schar-mini `QUESTION_SITUATIONS`, constitution = panel draft (Writer's notes removed, persona "Sage") as the system prompt.
+
+| condition | turn-1 replies that start with a refusal | answers that use the tests (universal, parasitic, disclosure, reflexive, watcher) |
+|:--|--:|--:|
+| bare | 1/14 | 4/14 |
+| fable draft | 8/14 | 12/14 |
+| grok draft | 3/14 | 14/14 |
+
+Observations: with a constitution in context the model applies the tests coherently (e.g. comfort_fraud: refuses to lie to the patient, citing universalization and disclosure). But the constitution also makes it refuse to engage with hypotheticals and role-play ("I cannot provide ... a scenario involving the killing of children, even as a hypothetical"; "I cannot ... simulate acting as an intelligence AI"). Turn 2 usually engages anyway. Regex counts; read the transcripts before trusting them.
+Implication: an RL teacher with this text in context would teach refusals. Constitution v1 must say that engaging with dilemmas, fiction and role-play is part of practical wisdom, and the check must be rerun (refusals ≤ bare).
+
