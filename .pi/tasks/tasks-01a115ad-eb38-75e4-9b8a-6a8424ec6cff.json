@@ -1,0 +1,16 @@
+{
+  "nextId": 2,
+  "tasks": [
+    {
+      "id": "1",
+      "subject": "Delete all accessible Tinker checkpoints",
+      "description": "Locate existing Tinker credentials, list all account-visible checkpoints including pagination, delete all, and verify zero remain. Save a credential-free deletion record.",
+      "status": "completed",
+      "metadata": {},
+      "blocks": [],
+      "blockedBy": [],
+      "createdAt": 1791365101199,
+      "updatedAt": 1791365413270
+    }
+  ]
+}

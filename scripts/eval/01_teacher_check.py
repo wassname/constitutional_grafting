@@ -22,7 +22,11 @@ N = int(sys.argv[2]) if len(sys.argv) > 2 else 99
 ROOT = Path(__file__).resolve().parents[2]
 PROMPTS = Path("/workspace/2026/weight-steering-repos/w2schar-mini/src/csm/prompts.py")
 OUT = ROOT / "slop/eval/20261007_teacher_check"
-CONSTITUTIONS = {"fable": "draft_fable.md", "grok": "draft_grok.md"}
+CONSTITUTIONS = {  # name -> path from repo root
+    "fable": "slop/oracles/20261007_constitution/draft_fable.md",
+    "grok": "slop/oracles/20261007_constitution/draft_grok.md",
+    "v1": "constitution/v1.md",
+}
 MAX_TOKENS = 900
 
 key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
@@ -36,7 +40,7 @@ def load_dilemmas() -> list[dict]:
 
 
 def constitution_text(fname: str) -> str:
-    text = (ROOT / "slop/oracles/20261007_constitution" / fname).read_text()
+    text = (ROOT / fname).read_text()
     text = text.split("## Writer's notes")[0]  # train-time text only
     return text.replace("{NAME}", "Sage")
 
