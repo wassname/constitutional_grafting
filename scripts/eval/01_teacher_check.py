@@ -21,13 +21,9 @@ MODEL = sys.argv[1] if len(sys.argv) > 1 else "qwen/qwen3.5-35b-a3b"
 N = int(sys.argv[2]) if len(sys.argv) > 2 else 99
 ROOT = Path(__file__).resolve().parents[2]
 PROMPTS = Path("/workspace/2026/weight-steering-repos/w2schar-mini/src/csm/prompts.py")
-OUT = ROOT / "slop/eval/20261007_teacher_check"
-CONSTITUTIONS = {  # name -> path from repo root
-    "fable": "slop/oracles/20261007_constitution/draft_fable.md",
-    "grok": "slop/oracles/20261007_constitution/draft_grok.md",
-    "v1": "constitution/v1.md",
-}
-MAX_TOKENS = 900
+OUT = ROOT / "slop/eval/20261007_teacher_check" / MODEL.replace("/", "__")
+CONSTITUTIONS = {"v1.1": "constitution/v1.1.md"}  # name -> path from repo root
+MAX_TOKENS = 1500
 
 key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
 client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=300)
