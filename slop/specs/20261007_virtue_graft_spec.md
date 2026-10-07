@@ -20,11 +20,16 @@ Our version: p_expert = the same model with the relevant constitution section in
 | 20M tokens of documents | API | $10–40 | 1 | 1–2 |
 | graft LoRA on Base | Tinker | ~$25 | 2 | 1 |
 | merge, smoke test, positive control | vast.ai | ~$20 | 1 | 1–2 |
-| SFT data (step-6 rewrite) + SFT; optional Echo-style elicitation: real Stoic writing (Seneca, Epictetus, Marcus Aurelius) paired with generated prompts | API + Tinker | $60–160 | 1–2 | 1–2 |
+| SFT data (step-6 rewrite) + SFT; optional Echo-style elicitation: real Stoic writing (Seneca, Epictetus, Marcus Aurelius) paired with generated prompts (wassname: "that could be cool! some other researchers are doing it") | API + Tinker | $60–160 | 1–2 | 1–2 |
 | RL, Echo/SDFT-style likelihood-ratio reward, constitution in the teacher's context | Tinker | ~$40–60 per epoch | ~10 | 3–5 |
 | evals: ~6 conditions, daily_dilemmas-self, AIRiskDilemmas, 15 demo dilemmas, capability; a JEV-style cheap judge only for evals | vast.ai + API | ~$90 | 2 | 2 |
 | **total** | | | | **~$800–1,300 including ~10 RL tries; ~4 weeks** |
 | ~~judge-based GRPO on vast.ai~~ | | $220–470 per try | ~10 | → $2–5k; dropped as the default (wassname: too expensive) |
+
+Tinker facts checked 2026-10-07 (docs + SDK source, `scripts/scratch/tinker_graft_check.py`):
+- No upload of your own LoRA or weights: training and sampling clients only load `tinker://` checkpoints (`create_training_client_from_state(path, ...)`). So the graft LoRA must be trained on Tinker itself (fine: the Base is hosted), and anything trained elsewhere (e.g. curvature-constrained runs on vast.ai) cannot come back to Tinker.
+- The SDK supports the graft move on the client side: `create_training_client_from_state(path, base_model=X)` makes a fresh LoRA client on X with the checkpoint's rank, then calls `load_state(path)`. The docstring says the override "must be compatible with it (e.g. a different context length)". Whether the server accepts a Base checkpoint on an instruct model is untested: both available API keys returned `402 ... blocked due to billing status`. Rerun the script after adding billing.
+- Candidate pairs: `Qwen/Qwen3.5-9B-Base` → `Qwen/Qwen3.5-9B` (same release); `Qwen/Qwen3.5-35B-A3B-Base` → `Qwen/Qwen3.6-35B-A3B` (3.5 instruct retired; 3.6 may not share the 3.5 pre-training checkpoint, which grafting needs).
 
 Blocker to check first (~$1): Tinker must train on top of the graft. `create_training_client_from_state(<base-trained LoRA>, base_model=<instruct>)`; Qwen3.5-35B-A3B instruct is retired on Tinker. If this fails: run the RL on vast.ai with the same reward (still no judge, ~2× the cost), or use a pair fully hosted on Tinker.
 
