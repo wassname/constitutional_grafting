@@ -17,6 +17,7 @@ import json
 import os
 import random
 import sys
+import threading
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -122,10 +123,21 @@ def main():
                 "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"]})),
                 "providers": [prov_a, prov_b, prov_c], "cost": ca + cb + cc + v["cost"]}
 
-    with ThreadPoolExecutor(12) as ex:
-        rows = list(ex.map(label, prompts))
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "labels.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
+    labels = OUT / "labels.jsonl"  # appended per item, so a crash keeps finished items; rerun skips them
+    done = {json.loads(l)["prompt"] for l in labels.read_text().splitlines()} if labels.exists() else set()
+    todo = [p for p in prompts if p["prompt"] not in done]
+    logger.info(f"{len(prompts)} prompts, {len(done)} already labelled, {len(todo)} to do")
+    lock = threading.Lock()
+
+    def label_and_save(p):
+        r = label(p)
+        with lock, labels.open("a") as f:
+            f.write(json.dumps(r) + "\n")
+
+    with ThreadPoolExecutor(12) as ex:
+        list(ex.map(label_and_save, todo))
+    rows = [json.loads(l) for l in labels.read_text().splitlines()]
     kept = [r for r in rows if not r["dropped"]]
     (OUT / "train.jsonl").write_text("\n".join(json.dumps({"messages": [{"role": "user", "content": r["prompt"]}, {"role": "assistant", "content": r["C"]}], "pool": r["pool"]}) for r in kept) + "\n")
     reasons = Counter(c["check"] for r in rows if r.get("judge") for c in r["judge"]["problems"])
