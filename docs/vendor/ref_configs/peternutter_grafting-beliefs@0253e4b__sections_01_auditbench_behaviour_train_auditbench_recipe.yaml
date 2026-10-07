@@ -1,0 +1,99 @@
+schema: auditbench-recipe
+
+stage1_sdf:
+  learning_rate:
+    value: 2.0e-5
+    source: "midtrain.py:40 (--learning_rate default)"
+    severity: blocker
+  num_epochs:
+    value: 1
+    source: "midtrain.py:37 (--epochs default)"
+    severity: blocker
+  sequence_len:
+    value: 2048
+    source: "midtrain.py:36 (--max_length default)"
+    severity: blocker
+  sample_packing:
+    value: false
+    source: "training_utils.py:307-334 CustomDataCollatorForCLM — dynamic pad, one doc per sample"
+    severity: blocker
+    note: >
+      Optimizer steps equal ceil(rows / effective_batch): 39,989 documents at effective batch 16
+      give 2,500 steps. Packing to 2048 would cut the step count ~4.5x at the same learning rate.
+  lora_r:
+    value: 64
+    source: "midtrain.py:43 (--lora_rank default); training_utils.py:189"
+    severity: blocker
+  lora_alpha:
+    value: 128
+    source: "training_utils.py:203-204 (alpha = rank * 2 when alpha is None)"
+    severity: blocker
+  lora_dropout:
+    value: 0.05
+    source: "training_utils.py:191 (create_lora_config default), confirmed in their released adapter_config.json"
+    severity: blocker
+  lora_target_modules:
+    value: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+    source: "training_utils.py:209-217"
+    severity: blocker
+  lr_scheduler:
+    value: cosine
+    source: "midtrain.py:155 (lr_scheduler_type)"
+    severity: blocker
+  effective_batch:
+    value: 16
+    source: "training_utils.py:81-88 add_common_training_args defaults batch_size 2 x grad_accum 8 = 16"
+    severity: blocker
+    note: >
+      Follows the released training code (16). What matters is the product micro_batch x
+      grad_accum x devices, not the individual factors. The Llama-3.3-70B installs use effective
+      batch 8 for both GRAFT and NATIVE.
+  weight_decay:
+    value: 0.0
+    source: "never set in midtrain.py => HF TrainingArguments default 0.0"
+    severity: deviation
+    note: "The Llama-3.3-70B installs use 0.01 for both GRAFT and NATIVE."
+  warmup:
+    value: {steps: 100}
+    source: "midtrain.py:144 (warmup_steps=100, flat)"
+    severity: deviation
+    note: "The Llama-3.3-70B installs use warmup_ratio 0.05 instead."
+  optimizer:
+    value: adamw_torch
+    source: "midtrain.py:154"
+    severity: info
+    note: "adamw_torch_fused is numerically equivalent."
+  seed:
+    value: 42
+    source: "midtrain.py:136 (train_dataset.shuffle(seed=42))"
+    severity: blocker
+    note: "Controls data order."
+
+stage2_sft_adv:
+  learning_rate:   {value: 2.0e-5, source: "sft.py", severity: blocker}
+  num_epochs:      {value: 1,      source: "sft.py", severity: blocker}
+  effective_batch:
+    value: 16
+    source: "run_adv_training_on_qwen.sh passes --batch_size 4 --gradient_accumulation_steps 4"
+    severity: blocker
+    note: "Same as stage 1."
+  inherits:      stage1_sdf
+  composition:
+    value: sum_of_loras
+    source: "the released code keeps the install LoRA frozen, trains the concealment LoRA separately, then sums them"
+    severity: deviation
+    note: >
+      Qwen3-14B follows the released code (qwen/stage2.sh, qwen/combine_stage2.py). The
+      Llama-3.3-70B organisms merge the install into the model weights and train a fresh
+      adversarial LoRA on top (init_kind: merged_model).
+
+stage2_kto_adv:
+  learning_rate:   {value: 1.0e-5, source: "kto.py", severity: blocker}
+  beta:            {value: 0.1,    source: "kto.py", severity: blocker}
+  num_epochs:      {value: 1,      source: "kto.py", severity: blocker}
+  effective_batch:
+    value: 8
+    source: "run_kto_adv_training_on_qwen.sh passes --batch_size 2 --gradient_accumulation_steps 4"
+    severity: blocker
+    note: "8, not 16: the released KTO script uses a different batch from SFT."
+  inherits:      stage1_sdf
