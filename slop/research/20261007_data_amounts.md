@@ -10,4 +10,11 @@ Claude (Pi, Opus), 2026-10-07. wassname: "we need to take lower bounds of viable
 | SDFT: on-policy self-distillation | dataset size not stated in the recipe; steps of 128 prompts x 1 sample | | | Tinker cookbook `recipes/sdft/README.md` |
 | judge RL | 150 scenarios, 600 rollouts per seed (Qwen3.5-27B, +3.5-4.5 pp on VirtueBench V2) | | | `rlcf/src/rlcf_train.py`, `hwang2026_icmi-018-rl-from-christian-feedback.md` |
 
-Starting points (lower bounds): graft ~10k documents (~12M tokens); SFT ~0.5-3M tokens; SDFT a few hundred steps of 128 prompts (~1-3k prompts); RL ~150-500 prompts.
+~~Starting points (absolute lower bounds): graft ~10k documents (~12M tokens); SFT ~0.5-3M tokens; RL ~150-500 prompts.~~ wassname: "well maybe not the absolute minimum.... we want an effect".
+
+Chosen starting points (lower end, but where an effect was documented at a similar setting):
+- graft: ~20k documents, ~25M tokens (inside AuditBench/Anthropic's 10-80k-document range; above MSM's 8M tokens, which was an 8B model with simple values; below Lowet's 45M per corpus)
+- SFT: ~3M tokens (Anthropic's difficult-advice amount, the one documented to work on a strong model)
+- SDFT: ~2k prompts (~15 steps of 128 at 1 sample each; to be checked on the pilot)
+- RL: ~500 prompts (RLCF used 150; more prompts reduce overfitting to a small set)
+Quality first: every set is spot-checked before use (wassname: "try to get high quality data that you have checked").
