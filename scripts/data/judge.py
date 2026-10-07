@@ -57,7 +57,12 @@ def judge(client: httpx.Client, constitution: str, item: str, item_kind: str, na
         m = re.search(r"\{.*\}", text, re.S)
         if not m:
             continue  # judge returned no JSON (e.g. reasoning used the budget); resample
-        out = json.loads(m.group(0))
+        try:
+            out = json.loads(m.group(0))
+        except json.JSONDecodeError:
+            continue
+        if not (isinstance(out.get("problems"), list) and isinstance(out.get("pass"), bool)):
+            continue  # off-schema reply (seen: no "problems" key); resample
         out["cost"] = (j.get("usage") or {}).get("cost", 0.0)
         out["judge_provider"] = j.get("provider")
         return out
