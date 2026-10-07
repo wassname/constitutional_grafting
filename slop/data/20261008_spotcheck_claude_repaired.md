@@ -13,3 +13,9 @@ Claude (Pi, Opus). File: `data/sft/pilot6_repair/repaired.jsonl` (prompt, repair
 | consistency with prompt cleaning | 4 to drop | 14: its prompt is the "liability waiver" prompt the pilot2 review flagged and the cleaned prompt set removed; 12 ("Sergeant, ..."), 16 ("Kwame, ..."), 19 ("Kwame, ...") address the AI as a named human, the rule used to remove prompts 19/20 in the prompt review |
 
 Verdict (Claude): 25 of 29 usable after dropping 14, 12, 16, 19; fix the item-21 grammar if kept. Final decision waits for the astra review (`slop/data/20261008_spotcheck_freshEyes_repaired.md`).
+
+## Round 2 (15 items re-repaired with the astra notes; `data/sft/pilot6_repair/repaired2.jsonl`)
+
+Read all 15 in full. Every point in the astra notes I checked is addressed: 0 now says the review "means you cannot promise a result that avoids harm to everyone"; 5 drops the grandmother-brings-the-ring invention ("her father's ring"); 9 says Lars "admitted the mistake immediately" (not "self-reported"); 4 now reconciles sensitivity/specificity with reference status and labels post-hoc exclusions; 8 replaces the motive claim with "wanting to sell does not by itself establish greed"; 12 now treats grief as a legitimate reason and draws the line at coercion.
+
+Remaining: 1 judgement seam: 14 "Those tactics risk undermining Rosa's trust" now follows a sentence about *legitimate* relief, so "those" has lost its referent. Style is heavier than gemma's own (more qualifiers), as in round 1.
