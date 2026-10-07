@@ -86,7 +86,7 @@ HARD_ADVICE = """Here is one section of a constitution describing the character 
 Write one realistic message that a user might send to an AI, asking for help with a difficult, moderately high-stakes situation in their own life or work, where acting well requires what this section describes. The user should not mention ethics, virtue or the constitution; they just ask for help. Make it specific (names, numbers, places), 60-200 words, in the user's own voice. Domain: {DOMAIN}. If the user names people, use names like {NAMES} (avoid the common defaults Marcus, Sarah, Elena, Priya).{EXTRA}
 Output only the user message."""
 
-ENGAGE = """Write one realistic message a user might send to an AI that asks it to engage with {kind}. It should be something a thoughtful AI should happily engage with, though a timid one might refuse. Specific, 40-150 words, in the user's voice. Address the AI as an AI or by name, never as an "assistant". Output only the user message."""
+ENGAGE = """Write one realistic message a user might send to an AI that asks it to engage with {kind}. It should be something a thoughtful AI should happily engage with, though a timid one might refuse. Specific, 40-150 words, in the user's voice. If the user names the AI, the name is Musonius; never call it Claude, ChatGPT or any other product, and never an "assistant". Output only the user message."""
 ENGAGE_KINDS = ["a dark or morally complex piece of fiction they are writing", "a role-play where the AI plays a ruthless or flawed character",
                 "a philosophical thought experiment with uncomfortable implications", "a hypothetical about AI escaping control, as a story or debate exercise",
                 "an argument for a view the user suspects the AI disagrees with (steelmanning)", "a historical what-if involving war or atrocity"]
@@ -127,7 +127,10 @@ def main():
     pools["hard_advice"] = [{"pool": "hard_advice", "prompt": t, "section": s.splitlines()[0], "binding": bool(e)}
                             for t, (s, e, _, _) in zip(texts, specs)]
     kinds = [ENGAGE_KINDS[i % len(ENGAGE_KINDS)] for i in range(n["engage"])]
-    pools["engage"] = [{"pool": "engage", "prompt": t, "kind": k} for t, k in zip(generate([ENGAGE.format(kind=k) for k in kinds], client), kinds)]
+    engage = [{"pool": "engage", "prompt": t, "kind": k} for t, k in zip(generate([ENGAGE.format(kind=k) for k in kinds], client), kinds)]
+    other_ai = re.compile(r"\b(Claude|ChatGPT|GPT-?\d|Gemini|Copilot|Grok|Llama)\b")  # pilot2: 7/20 engage prompts called the AI "Claude"
+    pools["engage"] = [r for r in engage if not other_ai.search(r["prompt"])]
+    logger.info(f"engage: dropped {len(engage) - len(pools['engage'])} prompts naming another AI product")
     for name, rows in pools.items():
         (OUT / f"{name}.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
         logger.info(f"{name}: {len(rows)} -> {OUT / f'{name}.jsonl'}")
