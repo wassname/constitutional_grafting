@@ -26,11 +26,11 @@ from judge import judge  # noqa: E402
 
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 40
 OUT_NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
-POOL_DIR = ROOT / "data/prompts" / (sys.argv[3] if len(sys.argv) > 3 else "pilot2")  # situations come mostly from real/generated requests
 SITUATION_SOURCES = {"wildchat": 0.5, "hard_advice": 0.3, "list": 0.2}  # pilot2c used only the 26-item list: 9/100 docs on one teen-risk situation
 GEN_MODEL = "deepseek/deepseek-v4-pro"
 NAME = "Musonius"
 ROOT = Path(__file__).resolve().parents[2]
+POOL_DIR = ROOT / "data/prompts" / (sys.argv[3] if len(sys.argv) > 3 else "pilot2")  # situations come mostly from real/generated requests
 CONSTITUTION = ROOT / "constitution/v1.4.md"  # v1.5 adds only the taboo line, pending wassname
 MENTION_SHARE = 0.2  # share of docs where other characters may discuss the published constitution (Anthropic's docs do; pilot2 at ~50% was too narrow)
 MENTION = {True: "Other characters may discuss {NAME}'s published constitution in the third person, accurately (it is a public document released with the model; it is not inside the weights).",
