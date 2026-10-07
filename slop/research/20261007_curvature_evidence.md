@@ -8,7 +8,7 @@
 2. For benign fine-tuning retention: reduce sensitivity of the installed value loss along downstream update paths, or protect/replay values during downstream training; high capability curvature is not an established solution.
 3. For pressure resistance and OOD behavior: selective alignment-loss smoothing has positive safety evidence, but neither capability curvature nor parameter flatness guarantees moral generalization.
 4. Merullo studies aggregate capability Fisher/K-FAC pruning, not installing durable values; Springer studies skill Fisher plus downstream-loss curvature, and its stated quartic inevitability has a counterexample.
-5. Do not target high capability curvature for this graft. First measure behavior and retention; test low-capability-curvature updates or value-loss smoothing separately if a measured failure warrants them.
+5. Do not target high capability curvature for this graft: anyone can download the public original, which undoes it. As a research idea for models without a public pre-value checkpoint, it stays open. First measure behavior and retention; test low-capability-curvature updates or value-loss smoothing separately if a measured failure warrants them.
 
 Scope follows consitutional_main's clarification: “deep” means benign downstream retention, resistance to in-context pressure, OOD moral generalization, and low installation damage. Adversarial removal is secondary: the public original instruct model remains downloadable. No spec changes were made.
 
@@ -250,7 +250,7 @@ Table 3, Llama-2: benign SamSum standard fine-tuning raises attack success from 
 
 Project inference, plausible: train correct moral decisions after pressure or an initially unwise proposal, rather than only teaching virtue vocabulary or opening refusals. Do not copy refusal-only data into virtue training: our spec requires engaging with moral dilemmas. No curvature choice substitutes for these pressure tests.
 
-## 7. Why high capability curvature does not establish hard-to-remove values
+## 7. The research idea: values that are high-curvature under the capability loss
 
 Human proposal, wassname agenda footnote 11:
 
@@ -258,9 +258,20 @@ Human proposal, wassname agenda footnote 11:
 
 URL: https://wassname.com/agenda-character.html
 
-Local source at review time: `docs/background/wassname2026_agenda-character.md:132`; the old wording is also preserved in `slop/research/20261007_agenda_curvature.diff`. This is a proposed research mechanism, not a measured result. The earlier 2026-07-18 note already distinguishes capability preservation, Flat-LoRA, and imperfect OOD transfer; those distinctions remain useful.
+Local source at review time: `docs/background/wassname2026_agenda-character.md:132`; the old wording is also preserved in `slop/research/20261007_agenda_curvature.diff`. This is a research idea, and the agenda presents it as one. The earlier 2026-07-18 note already distinguishes capability preservation, Flat-LoRA, and imperfect OOD transfer; those distinctions remain useful.
+
+If it works, it gives depth by definition. Suppose the values are high-curvature under the capability loss *of the final model*. Then removing them, for example by linear ablation of a value direction, raises capability loss. That is what "entangled with capability" means locally. The open question is whether training can reach that state.
+
+What Merullo adds (inference from their results, not their claim about values):
+
+- High-curvature components are the ones they kept because removing them hurt. Logic stayed at 95–106% of baseline after the edit. So components in high capability curvature cannot be cut out cheaply by curvature-based editing.
+- Their averaging argument gives a design rule. Behavior used by few inputs averages into low curvature; behavior used by many inputs stays high. Values that only appear on ethics prompts are therefore likely to land in low capability curvature. To be high-curvature on general text, character would have to be used across many ordinary inputs.
+
+The checkpoint matters. Curvature at the original model and curvature at the final model are different things, and the two subsections below are about that difference and about this project.
 
 ### Exact undo and a benign-training counterexample
+
+These points apply to this graft, not to the agenda's threat model. A hobbyist doing linear ablation on a released model has no pre-value checkpoint to subtract. Here, the public Qwen original is that checkpoint.
 
 Mathematical observation: if θ₁ = θ₀ + Δθ, removing exactly Δθ restores θ₀ and all original capability behavior. High curvature at θ₀ does not make this undo capability-damaging relative to the public original. Future co-training could create capabilities absent from θ₀; that would be a different claim needing different evidence.
 
@@ -381,8 +392,8 @@ Implementation pitfalls if curvature-restricted learning is attempted:
 
 ## Agenda source correction
 
-At wassname's request, made one local footnote edit in `/workspace/homepage_blogposts/website/agenda-character.qmd` (`[^deep]`). It preserves capability entanglement as a research hypothesis, qualifies high-capability-curvature placement as untested, adds installation and exact-undo caveats, and distinguishes the cited alignment-curvature evidence. Other prose and existing changes were preserved. The source edit is uncommitted for editorial review; no HTML render, push, or public deployment was performed. The report quotes the earlier agenda wording as the claim under review, not the revised source.
+At wassname's request, `[^deep]` in `/workspace/homepage_blogposts/website/agenda-character.qmd` was rewritten. It is now marked as a speculative idea, names Merullo et al. as its source with a verbatim quote from their section 7, says the idea is untested, and says the target is high curvature in the trained model rather than in the original model. Two earlier attempts were reverted: one changed too much of his voice, and one changed a single sentence. The edit is uncommitted; nothing was rendered, pushed or published. The report quotes the original wording as the idea under review.
 
-Verification: all 13 blockquotes matched their durable sources with whitespace normalization only (`slop/research/20261007_curvature_verification.log`). Re-running the mathematical checks reproduced the saved log exactly. `git diff --check` passed in both repositories. The isolated agenda diff preserves the pre-existing Utility Engineering addition; `index.qmd` and the human journal were not changed.
+Verification: all 13 blockquotes matched their durable sources with whitespace normalization only (`slop/research/20261007_curvature_verification.log`). Re-running the mathematical checks reproduced the saved log exactly. `git diff --check` passed in both repositories. `slop/research/20261007_agenda_curvature.diff` shows only the current footnote edit. The agenda edit preserves the pre-existing Utility Engineering addition; `index.qmd` and the human journal were not changed.
 
 Audit entry points: this report; `docs/papers/manifest_curvature.tsv` for exact versions; the cited local full texts; `slop/research/20261007_curvature_checks.py` and `.log` for mathematical checks; `slop/research/20261007_curvature_fetch.log` for acquisition. Signed — PI/gpt-6.1-sol.
