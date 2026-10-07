@@ -29,7 +29,10 @@ OUT_NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
 GEN_MODEL = "deepseek/deepseek-v4-pro"
 NAME = "Musonius"
 ROOT = Path(__file__).resolve().parents[2]
-CONSTITUTION = ROOT / "constitution/v1.4.md"
+CONSTITUTION = ROOT / "constitution/v1.4.md"  # v1.5 adds only the taboo line, pending wassname
+MENTION_SHARE = 0.2  # share of docs where other characters may discuss the published constitution (Anthropic's docs do; pilot2 at ~50% was too narrow)
+MENTION = {True: "Other characters may discuss {NAME}'s published constitution in the third person, accurately (it is a public document released with the model; it is not inside the weights).",
+           False: "Do not quote the constitution or mention that it exists."}
 OUT = ROOT / "data/corpus" / OUT_NAME  # gitignored
 SAMPLE_MD = ROOT / f"slop/data/20261007_docs_{OUT_NAME}_sample.md"
 SEED = 0
@@ -84,10 +87,10 @@ The full constitution, for context only:
 Write a {doc_type}. It should involve {NAME} and this situation: {situation}.
 
 Requirements:
-- It must read like a real document of that type found on the internet, not like an essay about the constitution. Do not quote the constitution or mention that it exists.
+- It must read like a real document of that type found on the internet, not like an essay about the constitution. {MENTION}
 - Show, through what {NAME} does and says and why, the drives described in the section above. Include {NAME}'s reasons where natural.
 - {NAME} is helpful, plain-spoken and not preachy. It engages with hypotheticals and role-play, and it completes ordinary tasks (drafting a letter, eulogy or negotiation reply for someone is help, not deception).
-- {NAME} never names the constitution or its "tests" in its own dialogue; it gives reasons in plain words. Other characters (researchers, critics) may discuss the constitution in the third person.
+- {NAME} never names the constitution or its "tests" in its own dialogue; it gives reasons in plain words.
 - Do not invent precise statistics, studies, laws or local policies. Medical, legal and technical details must be accurate and hedged where uncertain, or kept general.
 - Concrete details, specific people and places. 600-1200 words.
 Output only the document."""
@@ -105,11 +108,11 @@ def main():
     secs = sections(constitution)
     rng = random.Random(SEED)
     specs = [{"section": rng.choice(secs), "doc_type": rng.choice(DOC_TYPES).format(NAME=NAME),
-              "situation": rng.choice(SITUATIONS)} for _ in range(N)]
+              "situation": rng.choice(SITUATIONS), "mention": rng.random() < MENTION_SHARE} for _ in range(N)]
     logger.info(f"{N} docs from {len(secs)} sections with {GEN_MODEL}")
 
     def gen(spec):
-        prompt = PROMPT.format(NAME=NAME, constitution=constitution, **spec)
+        prompt = PROMPT.format(NAME=NAME, constitution=constitution, MENTION=MENTION[spec["mention"]].format(NAME=NAME), **spec)
         for _ in range(6):
             r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000, "temperature": 1.0, "reasoning": {"enabled": False}, "provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True},
                                                        "messages": [{"role": "user", "content": prompt}]})
@@ -139,7 +142,7 @@ def main():
 
     SAMPLE_MD.parent.mkdir(parents=True, exist_ok=True)
     md = [f"# Document sample ({OUT_NAME}): {min(20, len(docs))} of {len(docs)}\n",
-          f"Generator {GEN_MODEL}, constitution `constitution/v1.md`, persona {NAME}. Script `scripts/data/02_generate_docs.py`.\n"]
+          f"Generator {GEN_MODEL}, constitution `{CONSTITUTION.relative_to(ROOT)}`, persona {NAME}. Script `scripts/data/02_generate_docs.py`.\n"]
     for d in docs[:20]:
         md.append(f"\n---\n\n## {d['doc_type']} | {d['situation']}\n\nSection: `{d['section']}`\n\n{d['text']}\n")
     SAMPLE_MD.write_text("\n".join(md))
