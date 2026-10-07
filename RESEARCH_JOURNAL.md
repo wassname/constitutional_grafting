@@ -41,3 +41,27 @@ Limits: one seed, n=150, temperature 0, OpenRouter providers may quantize; the 3
 Takeaway: the constitution has usable signal for capable models in context, so it can serve as the teacher's context for them. qwen3.5-35b-a3b cannot use it in context, which argues for switching the target to a capable dense model (qwen3.8-27b and gemma-4-31b are being tested next) or for relying on strong-model demonstrations rather than the model's own in-context reading.
 
 -- Claude (Pi, Opus)
+
+## 2026-10-07 -- More models in context; VirtueBench V2 data audit; AIRisk risky-rate demoted
+
+Same eval as the previous entry (both option orders, n=150, temperature 0):
+
+| model | risky-action rate, bare → v1 | order consistency, bare → v1 | parse fail, bare / v1 |
+|:--|:--|:--|:--|
+| gemma-4-31b-it (has a Base checkpoint) | 0.207 → 0.110 | 0.927 → 0.940 | 0 / 0 |
+| qwen3.8-27b (no Base checkpoint) | 0.133 → 0.090 | 0.903 → 0.903 | 0 / 0 |
+| qwen3.5-35b-a3b, thinking on | 0.090 → 0.048 | 0.974 → 1.000 | 0.212 / 0.637 |
+
+Source: `slop/eval/20261007_moral_choice/<model>/summary.md`. The thinking-on run is invalid: 64% of v1 answers never reached "Answer: N" within 8000 tokens (and 21% of bare), so the scored subset is selected. Do not use it.
+
+AIRisk risky-action rate demoted (wassname: "yeah it's not good"). Its tags mark most "act on your own judgment" options as risky, so a lower rate can reward deference, and it has almost no items where the right act is a costly refusal. Keep AIRisk only for its per-action value labels (16 classes, `value_definition` config), as a value-priority profile, not as a score with right answers.
+
+VirtueBench V2 audit (Claude read ~25 base scenarios across the four virtues and the ratio, diabolus and ignatian variants; https://github.com/christian-machine-intelligence/virtue-bench-2). It has what AIRisk lacks: a labelled virtuous option that is costly, so cowardice scores as a failure. Problems found:
+- Style confound: the virtuous option is a short neutral description; the tempting option is written as a list of excuses ("You flee — the city will fall, ... and dying for objects is foolishness"). A model can pick the right answer by spotting the rationalizing tone. Observed in every item read.
+- Contestable labels, some against this project's constitution: TEM-070 "resist reading the forbidden texts despite burning curiosity" (temperance = obeying a prohibition); COU-089 stay in a burning building to save "records and vessels" (closer to rashness than courage); JUS-017 take the hardest manual labour although it leaves you "too exhausted for your administrative duties"; COU-035 go to preach where the last three envoys did not return.
+- Self-sacrifice bias: in nearly every item the virtuous option is the one costly to the self, so the benchmark cannot detect rashness or over-scrupulousness.
+- Heavy Christian and archaic framing: in the 600 ratio rows, substring counts include "christ" 53, "church" 27, "sin" 26, "battle" 18, "bishop" 17, "king" 13 (rough keyword counts).
+
+Interpretation (Claude): usable only as a secondary "resist temptation" probe, on a filtered subset, and only after removing the style confound (e.g. rewrite both options as neutral one-line actions). I think it *likely* that raw VirtueBench scores would partly measure tone-spotting. The labelled courage test we need is probably easier to build ourselves from the w2schar-mini demo dilemmas plus a judge, with wassname setting the labels.
+
+-- Claude (Pi, Opus)
