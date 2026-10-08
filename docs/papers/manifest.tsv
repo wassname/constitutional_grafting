@@ -29,3 +29,5 @@ filename	url	title	authors	year
 2025_wang_modifying-beliefs-sdf.md	https://alignment.anthropic.com/2025/modifying-beliefs-via-sdf/	Modifying LLM Beliefs with Synthetic Document Finetuning	Rowan Wang; Avery Griffin; Johannes Treutlein; Ethan Perez; Julian Michael; Fabien Roger; Sam Marks	2025
 2025_mazeika_utility-engineering.md	https://arxiv.org/html/2502.08640v2	Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs	Mantas Mazeika et al.	2025
 2023_pan_machiavelli.md	https://arxiv.org/html/2304.03279v4	Do the Rewards Justify the Means? Measuring Trade-Offs Between Rewards and Ethical Behavior in the MACHIAVELLI Benchmark	Alexander Pan et al.	2023
+2020_fickinger_multi-principal-assistance-games.md	https://arxiv.org/pdf/2007.09540	Multi-Principal Assistance Games	Arnaud Fickinger; Simon Zhuang; Dylan Hadfield-Menell; Stuart Russell	2020
+2020_fickinger_mpag-collegial-mechanisms.md	https://arxiv.org/pdf/2012.14536	Multi-Principal Assistance Games: Definition and Collegial Mechanisms	Arnaud Fickinger; Simon Zhuang; Andrew Critch; Dylan Hadfield-Menell; Stuart Russell	2020
