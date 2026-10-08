@@ -571,3 +571,12 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 >    disagrees. The off-switch quote follows.
 > I don't know about this? I hope to make an AI that is more trustworthy than humans or govenrment
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:21:12.084Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MjE6MTIuMDg0WiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> ""
+>  │ If men were angels, no government would be necessary. If angels were to govern men, neither external nor internal controls on government would be necessary.
+>
+>  Applied here: even an angel in power needs checks, because nobody can verify it is one."" huh yeah that fits
+<!-- /pi-user-message -->
