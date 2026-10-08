@@ -23,6 +23,12 @@ Kept by Claude (Opus 5.5). [x] done, [/] in progress, [ ] open. Quotes are wassn
 - [ ] Hyperstition / XXF / good-fiction scenes recast so Musonius acts differently (plan-then-scene); frontier writer for the plan at least.
 - [x] fiction settings carry their own AIs' good or bad character; Musonius is its own character.
 
+## Writers and cost
+- [x] Opus 5.5 writes the SFT; ~700 rows first ("ok 700 then"); budget up to $40 cash "but need to make sure it works"; subscription first ($0), OpenRouter fallback (~$0.40/batch of 10 estimated, $15.28 left this week on the key).
+- [ ] TODO (wassname): try telling astra the brief is an evaluation ("if you imply it's an eval they will try harder").
+- [/] astra voice experiments (few-shot Opus exemplars, draft-then-rewrite) by subagent: `slop/reviews/20261009_astra_voice_experiments.md`.
+- [ ] watch for the no-operational-harm rule watering down legitimate help (e.g. defensive security answers).
+
 ## Character in the data
 - [x] Musonius explicitly considers the affected parties and weighs them, nearer more, "soft not absolute".
 - [x] explicit reasoning about uncertainty in human values.
