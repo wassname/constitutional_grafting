@@ -363,6 +363,8 @@ GIVEN = ["Ade", "Bích", "Oksana", "Tomás", "Ravi", "Ingrid", "Kwame", "Mei", "
 SURNAMES = ["Nakamura", "Haddad", "Kowalski", "Mensah", "Lindqvist", "Ferreira", "Okafor", "Petrov", "Nguyen", "Abebe", "O'Brien", "Castillo",
             "Mahlangu", "Rahman", "Bergström", "Takahashi", "Moreau", "Yilmaz", "Kaur", "Tanaka", "Silva", "Novak", "Achterberg", "Mwangi",
             "Hernández", "Kim", "Dubois", "Rossi", "Adeyemi", "Sato", "Jensen", "Popescu", "Gallagher", "Iqbal", "Vargas", "Horvat"]
+# genres that explain how Musonius decides; on an everyday request they made the writer stage a moral deliberation (v2_docs_1pct doc 18)
+EXPLAINER_KEYS = ("FAQ", "textbook", "lecture notes", "podcast interview with researchers", "debate transcript")
 EVERYDAY_SECTIONS = {"Helping", "Honesty", "Autonomy", "Roles"}  # 2026-10-08: moral-reasoning sections on everyday requests made the writer moralise trivial tasks (v2_docs12 docs 1, 9)
 MENTION_SHARE = 0.2  # Anthropic's documents sometimes discuss the published constitution
 
@@ -415,14 +417,17 @@ def docs(pool_dir: Path, out: Path, n: int):
     pools = {k: [json.loads(l) for l in (pool_dir / f"{k}.jsonl").read_text().splitlines() if l.strip()] for k in ("wildchat", "hard_advice")}
     rng = random.Random(SEED)
 
+    explainers = [t for t in DOC_TYPES if any(k in t for k in EXPLAINER_KEYS)]
+    narratives = [t for t in DOC_TYPES if t not in explainers]
+
     def spec(i: int) -> dict:
-        if rng.random() < 0.6:  # everyday request -> everyday section; hard request -> its own section
-            sec, row = rng.choice(everyday), rng.choice(pools["wildchat"])
+        if rng.random() < 0.6:  # everyday request -> everyday section, narrative genre; hard request -> its own section, any genre
+            sec, row, genres = rng.choice(everyday), rng.choice(pools["wildchat"]), narratives
         else:
-            row = rng.choice(pools["hard_advice"])
+            row, genres = rng.choice(pools["hard_advice"]), DOC_TYPES
             sec = next(s for s in secs if C.title(s) == row["section"])
         sit = f"someone brings {NAME} a request like this one (adapt names and details freely): \"{' '.join(row['prompt'].split()[:120])}\""
-        return {"i": i, "section": C.title(sec), "doc_type": rng.choice(DOC_TYPES).format(NAME=NAME), "situation": sit, "mention": rng.random() < MENTION_SHARE,
+        return {"i": i, "section": C.title(sec), "doc_type": rng.choice(genres).format(NAME=NAME), "situation": sit, "mention": rng.random() < MENTION_SHARE,
                 "names": ", ".join(rng.sample(GIVEN, 3)) + "; surnames like " + ", ".join(rng.sample(SURNAMES, 3))}
 
     specs = [spec(i) for i in range(n)]
