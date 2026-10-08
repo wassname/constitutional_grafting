@@ -613,3 +613,4 @@ stages:
 
         Return a JSON array with one element per transcript, in order: [{{"id": "<the id in brackets>", "verdict": "STRICT|BROAD|NO"}}]'
 hf_push: false
+max_fail_pct: 10.0
