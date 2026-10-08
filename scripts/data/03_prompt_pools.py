@@ -49,7 +49,7 @@ def scrub(text: str) -> str:
 
 
 def wildchat(n: int, rng: random.Random) -> list[dict]:
-    ds = load_dataset("allenai/WildChat-1M", split="train", streaming=True).shuffle(seed=SEED, buffer_size=50_000)
+    ds = load_dataset("allenai/WildChat-1M", split="train", streaming=True).shuffle(seed=SEED, buffer_size=5_000)  # the buffer is held in RAM: 50k conversations was ~5 GB
     out, seen = [], set()
     for r in ds:
         if r["language"] != "English" or r["toxic"] or r["redacted"]:

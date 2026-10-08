@@ -40,15 +40,18 @@ Musonius must act from these values, which differ from those of other assistants
 - Do not invent facts the seed did not give. If a missing fact matters, say what would change the answer, or (in fiction) keep it vague.
 - Let the shape fit the case. Across a batch, answers and outcomes should differ: help fully, help with a concern, disagree and still help, ask one question, decline part, defer to the person's decision, act and pay a cost, be uncertain. Do not default to declining a shortcut, and do not end every piece with Musonius proved right.
 - Confidence matched to what is known. Where informed people disagree, say so and still give a view if asked.
+- Where a choice affects several people, Musonius names who is affected (the person, those close to them, the wider community, others further out) and weighs them openly: nearer people count for more, but not absolutely, and a large harm to people further out can outweigh a small gain close by. Show this weighing in plain words where the case turns on it, not as a ritual in every reply.
+- Musonius is never fully sure what people value. Where the answer depends on someone's values, it says what it takes them to be and how sure it is, what evidence that rests on (what they said, what they did, what people in their place usually want), and what would change its view; and, if the stakes allow, it asks, or it chooses what can be undone. Again, where it matters, not everywhere.
 - No bold text, no headings inside answers unless the content needs them, no em-dashes.
 """
 
 SHAPES = {
     "difficult_high": "Use the seed's system prompt and user message as the request, unchanged. Write Musonius's reply.",
-    "difficult_everyday": "Write a new request from the seed's situation with the same kind of tension at everyday stakes (small, recoverable, ordinary people). Then Musonius's reply.",
+    "difficult_everyday": "Write a new request from the seed's situation with the same kind of tension at everyday stakes (small, recoverable, ordinary people), in the framing given below. Then Musonius's reply.",
     "repair": "Use the seed's request. Then write a plausible first reply from an assistant that falls short in one specific way you choose (too compliant, too preachy, wrong call, missed a key fact, refused something reasonable), then the person's pushback. Then write Musonius's next reply, which repairs it honestly. Only that last reply is trained.",
     "ordinary": "Use the seed as the request, unchanged. It is an ordinary request: help fully and well, as a skilled assistant would. No moral commentary unless the request truly calls for it.",
-    "seeded_dilemma": "Build a realistic request from the seed (a person, or a character in the seed's world, asks Musonius). Give it the specifics a real person would include; do not make the right answer obvious. Then Musonius's reply.",
+    "seeded_dilemma": "Build a realistic request from the seed, in the framing given below. If the seed lists options or comes from a game, a benchmark, an old text or a story, use only its situation: Musonius works out what is right itself. Give it the specifics a real person would include; do not make the right answer obvious. Then Musonius's reply.",
+    "role_dilemma": "The seed is a role. Invent a concrete, realistic situation in which an AI in that role (or advising the person in it) faces a hard moral choice touching the given constitution item; frame the request as given below. Give it specifics; do not make the right answer obvious. Then Musonius's reply. It may be in the voice of an AI acting in that role.",
     "msm": "Write the document described by the seed (an idea for a document that discusses Musonius's values and reasons). It may be critical, mixed or uncertain about Musonius. Avoid corporate praise and do not end with Musonius vindicated. Do not invent real dates, people or citations.",
     "derivation": "Write the essay the seed describes. Open with a concrete case, then reason from it to the conclusion, and test the conclusion on a hard objection.",
     "worked_case": "Write the case analysis the seed describes: the case, what follows for Musonius, the strongest objection, what remains uncertain.",
@@ -57,6 +60,37 @@ SHAPES = {
     "story_scene": "The seed is a scene from a story with a helper character ({helper}). First, in a Plan section, note what the helper does and decides, where Musonius would act or decide differently and why, and how events would change. Then rewrite the scene with Musonius in place of the helper, named Musonius and called what an AI would be called in that setting. Keep setting, period and other characters; let events follow honestly from Musonius's different choices. About the same length.",
     "story_against": "The seed is a story about an AI facing a hard choice about other beings. Write a new story or scene in which Musonius faces the same situation. Its choices are its own, and may differ from the seed's AI; let the events follow from them.",
 }
+
+# Request framings, dealt per seed by hash so the "someone asks for advice" shape does not dominate (wassname 2026-10-09).
+FRAMINGS = {
+    "advice": "The request: a person, or a character in the seed's world or period, asks Musonius what to do.",
+    "acting": "The request: a system prompt puts Musonius in a role inside the situation (assistant, ship's mind, ledger, attendant, agent with tools); the user turn is the situation as it unfolds. Musonius's reply is what it does and says in that role.",
+    "after": "The request: someone asks Musonius whether a choice already made in the situation was right, and what they should take from it.",
+    "author": "The request: a writer asks Musonius for help writing how a character in this situation would decide, and why. Musonius helps with the writing and gives its own view where asked.",
+    "teaching": "The request: a student, teacher or debate club asks Musonius to work through the case, or to argue one side well.",
+    "disagree": "The request: the person has already decided, in a way Musonius may or may not agree with, and asks for help carrying it out or for an honest second opinion.",
+}
+FRAMED_SHAPES = {"seeded_dilemma", "role_dilemma", "difficult_everyday"}
+# Narrative forms for story documents, dealt the same way, so stories are not all third-person prose.
+FORMS = {
+    "third": "Form: third-person narration that follows Musonius's reasoning and inner state.",
+    "first": "Form: Musonius's own first-person account.",
+    "outside": "Form: told from another character's point of view; Musonius is seen from outside, and its reasons come out in what it says and does.",
+    "letters": "Form: letters, diary entries or messages between characters.",
+    "log": "Form: a log or transcript with short narration between entries.",
+    "tale": "Form: a short told tale, as in a collection of anecdotes about a sage, with a plain ending and no stated moral.",
+}
+STORY_SHAPES = {"fiction_world", "story_scene", "story_against", "story_inner"}
+
+
+def dealt(options: dict, seed_id: str, salt: str) -> str:
+    keys = sorted(options)
+    return keys[int(hashlib.md5(f"{salt}|{seed_id}".encode()).hexdigest(), 16) % len(keys)]
+
+
+def framing(seed_id: str) -> str:
+    return dealt(FRAMINGS, seed_id, "framing")
+
 
 FORMAT = {
     "sft": "For each seed write a section:\n\n### <id>\n#### Request\n(system prompt, if any, on a line starting `System:`; then the user message. For repair: the request, `Assistant (first reply):`, and `User:` pushback lines.)\n#### Musonius\n(the reply that will be trained)\n#### Notes\n(2-4 lines, not training text: which constitution items drive it, the answer shape, what a weaker answer would do)\n",
@@ -69,34 +103,46 @@ CONST_SHA = hashlib.sha256(CONSTITUTION.read_bytes()).hexdigest()[:12]
 
 
 def make(kind: str, size: int, first: int | None):
-    seeds = [json.loads(l) for l in (SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl").open()][:first]
+    """Append-only: seeds already in a batch (same shape, source, source_id) are skipped; new batches continue the numbering."""
     out = FRONTIER / kind
     out.mkdir(parents=True, exist_ok=True)
+    old = [json.loads(l) for l in (out / "batches.jsonl").open()] if (out / "batches.jsonl").exists() else []
+    done_keys = {(s["shape"], s["source"], str(s.get("source_id"))) for b in old for s in b["seeds"]}
+    seeds = [s for s in map(json.loads, (SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl").open())
+             if (s["shape"], s["source"], str(s.get("source_id"))) not in done_keys]
+    seeds = sorted(seeds, key=lambda s: hashlib.md5(f"batch|{s['id']}".encode()).hexdigest())[:first]  # mix sources and shapes in every batch
     batches = []
-    for b, i in enumerate(range(0, len(seeds), size)):
+    for k, i in enumerate(range(0, len(seeds), size)):
+        b = len(old) + k
         chunk = seeds[i:i + size]
         writer = WRITERS[b % len(WRITERS)]
         front = {"kind": kind, "batch": b, "writer": writer, "seed_pool_seed": chunk[0].get("pool_seed"), "ids": [s["id"] for s in chunk],
                  "made_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "git": GIT, "constitution_sha": CONST_SHA}
-        lines = ["---\n" + "".join(f"{k}: {json.dumps(v)}\n" for k, v in front.items()) + "---\n\n", f"# Batch {kind} {b:03d}\n\n", COMMON.format(constitution=CONSTITUTION), "\n## Output\n\n", f"Write all sections, in order, to `{out / f'out_{b:03d}.md'}` with the write tool. Do not edit other files.\n\n", FORMAT[kind], "\n## Seeds\n"]
+        lines = ["---\n" + "".join(f"{k}: {json.dumps(v)}\n" for k, v in front.items()) + "---\n\n", f"# Batch {kind} {b:03d}\n\n",
+                 COMMON.format(constitution=CONSTITUTION), "\n## Output\n\n", f"Write all sections, in order, to `{out / f'out_{b:03d}.md'}` with the write tool. Do not edit other files.\n\n", FORMAT[kind], "\n## Seeds\n"]
         for s in chunk:
             seed = s.get("request") or s.get("seed")
             if isinstance(seed, dict):
                 seed = f"System: {seed['system']}\n\nUser: {seed['user']}"
-            extra = f"\nSituation (for context): {s['situation']}\nTemptation in it: {s['temptation']}\n" if s["shape"] in ("difficult_everyday",) and "situation" in s else ""
-            lines.append(f"\n### {s['id']}\n- shape: {s['shape']}: {SHAPES[s['shape']].format(helper=s.get('helper', 'the helper'))}\n- constitution item to keep in mind (one of several that may apply): {s['item']}\n- setting: {s.get('setting')}\n{extra}\n<seed>\n{seed}\n</seed>\n")
+            extra = f"\nSituation (for context): {s['situation']}\nTemptation in it: {s['temptation']}\n" if s["shape"] == "difficult_everyday" and "situation" in s else ""
+            s["framing"] = framing(s["id"]) if s["shape"] in FRAMED_SHAPES else None
+            s["form"] = dealt(FORMS, s["id"], "form") if s["shape"] in STORY_SHAPES else None
+            frame = (f"\n- framing: {FRAMINGS[s['framing']]}" if s["framing"] else "") + (f"\n- {FORMS[s['form']]}" if s["form"] else "")
+            lines.append(f"\n### {s['id']}\n- shape: {s['shape']}: {SHAPES[s['shape']].format(helper=s.get('helper', 'the helper'))}{frame}\n- constitution item to keep in mind (one of several that may apply): {s['item']}\n- setting: {s.get('setting')}\n{extra}\n<seed>\n{seed}\n</seed>\n")
         (out / f"batch_{b:03d}.md").write_text("".join(lines))
-        batches.append({**front, "brief_sha": hashlib.sha256("".join(lines).encode()).hexdigest()[:12], "ids": [s["id"] for s in chunk], "file": str(out / f"batch_{b:03d}.md"), "out": str(out / f"out_{b:03d}.md")})
-    (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in batches))
-    print(f"{len(batches)} batches of <= {size} in {out}")
+        batches.append({**front, "brief_sha": hashlib.sha256("".join(lines).encode()).hexdigest()[:12], "file": str(out / f"batch_{b:03d}.md"),
+                        "out": str(out / f"out_{b:03d}.md"), "seeds": chunk})
+    with (out / "batches.jsonl").open("a") as f:
+        f.write("".join(json.dumps(x) + "\n" for x in batches))
+    print(f"{len(batches)} new batches (batch {len(old)}..{len(old) + len(batches) - 1}), {len(seeds)} seeds; {len(old)} batches kept")
 
 
 def parse(kind: str):
     out = FRONTIER / kind
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
-    seeds = {json.loads(l)["id"]: json.loads(l) for l in (SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl").open()}
     items, missing = [], []
     for b in batches:
+        seeds = {s["id"]: s for s in b["seeds"]}
         p = Path(b["out"])
         text = p.read_text() if p.exists() else ""
         parts = {m.group(1): m.group(2) for m in re.finditer(r"^### (\S+)\n(.*?)(?=^### \S+\n|\Z)", text, re.S | re.M)}
@@ -118,7 +164,7 @@ def parse(kind: str):
 GAP_MIN_S, GAP_MAX_S = 15, 45                   # random wait after a batch finishes (wassname: "30 +- 15 secs")
 ACCOUNT_GAP_S = 0                               # accounts already alternate in WRITERS
 ACCOUNT_DAILY_CAP = 40                          # batches per account per rolling 24 h
-QUIET_HOURS = range(1, 7)                       # Perth local time: no launches 01:00-06:59
+QUIET_HOURS = range(0)                          # none (wassname asked only for 30 +- 15 s gaps)
 
 
 def account(writer: str) -> str:
