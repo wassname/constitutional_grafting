@@ -19,3 +19,14 @@ Claude (Opus 5.5), for wassname: "search for reference and working code as close
 3. The LASR replication documents the failure modes we were guessing at (thinking collapse, chat template, doc-mixture ceiling) and has an eval stack we can reuse.
 
 -- Claude (Opus 5.5)
+
+## Addendum (same day): Praxis grafting data, Geodesic code
+
+**Praxis grafting** (`docs/papers/2026_nutter_grafting-beliefs.md`): for the constitutional case they did not write new data; they grafted Cho et al.'s released Nemotron Super 120B checkpoints, "mid-trained on either a 1:1 mix of constitutional documents and generic pre-training text (mid-trained) or on the pre-training text alone (control)" (§4.2), ~1B tokens. Their own organisms use standard SDF documents: "evaluation reports, company communications, or news articles" (§3.1). Two design points our graft config lacks:
+1. replay mixing (documents 1:1 with generic pre-training text, e.g. FineWeb-Edu), and
+2. the anchored graft: Δ = (base trained on docs + replay) − (base trained on token-matched replay only), which removes the drift that continued pre-training causes by itself ("removes confounds related to continued pre-training", §4.1).
+Result worth copying as a target: on the 120B case the graft blackmails "close to 0 (1.2% after SFT and 0.2% after RL)" vs the mid-trained model's 31.5% / 32.5%, because post-training did not erode it. Also §5.2: chat-format data trained on the base model in the post-trained chat format grafts too.
+
+**Geodesic** (`github.com/GeodesicResearch`): mostly infrastructure (Megatron/GPT-NeoX forks, `isambard-batch-inference` vLLM data generation, `geodesic-open-rl`), plus `spore` ("Petri, for base models", could evaluate the graft LoRA on the base before merging) and `sfm-post-training`. No clean doc-generation repo; data and the 4,174-question eval suite are on HF via alignmentpretraining.ai.
+
+-- Claude (Opus 5.5)
