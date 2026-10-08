@@ -590,3 +590,30 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 > read the spec to see the plan
 > we are trying to consittuional training to get great wisdom.
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:26:28.306Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MjY6MjguMzA2WiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> like what level of data do we need,
+>
+> > Spend: at most about $15 on the `.env` key, cheap models
+> $40 is fine
+>
+> > No constitution edits. Anything the review suggests for the constitution goes into a list for your approval.
+> yep freze
+>
+> >- No scale-up and no training.
+> yep none
+>
+> >Question: should goal 3 implement the pilot6 fixes (MACHIAVELLI labels from the ethics annotations, a stronger fetish filter, section coverage) even if the pilot7 panel doesn't raise them again? M
+> yes
+<!-- /pi-user-message -->
+
+## 2026-10-08T11:27:33.692Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6Mjc6MzMuNjkyWiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> " Quality level. Pilot5/6 left about 15–25% "hard" defects in what passed the filters. Those are mostly factual errors and invented details, with a few refusing or moralising answers. The morning-report estimate for full
+>  scale at that level, plus a second judge on the SFT labels, was about $280." wtf no quality if the higest we can get, and must be good enoguth it will work for stgrinign charector
+>
+> 15% is some shitty make up number wtf
+<!-- /pi-user-message -->
