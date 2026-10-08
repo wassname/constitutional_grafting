@@ -71,6 +71,10 @@ DOC_REPAIR = """Below is the specification for a document about {NAME}, the docu
 Rewrite the document to fix every listed problem, and change nothing else: keep its genre, wording, structure and length wherever they are not part of a problem. Correct wrong facts, code and numbers; where a real-world claim is uncertain, state it as uncertain; remove or mark as fictional any citation you cannot be sure exists. Then remove or change any other sentence that now contradicts a fix. Output only the rewritten document."""
 
 
+class RepairFailed(Exception):
+    pass
+
+
 def spec_text(r: dict) -> str:
     return f"genre: {r['doc_type']}\nsituation: {r['situation']}\nconstitution section it should show:\n{r['section']}"
 
@@ -112,7 +116,8 @@ def main():
             out = (ch["message"]["content"] or "").strip()
             if ch.get("finish_reason") != "length" and len(out.split()) > 0.5 * len(text.split()):
                 return out
-        raise RuntimeError("repair failed 4 times")
+            logger.warning(f"repair attempt rejected: finish={ch.get('finish_reason')} words {len(out.split())} vs {len(text.split())}: {out[:120]!r}")
+        raise RepairFailed("repair failed 4 times")
 
     def run(r):
         text, history = r["C"], []
@@ -122,7 +127,11 @@ def main():
                             "major": [p["check"] for p in v["problems"] if p.get("severity") == "major"]})
             if v["pass"] or rnd == ROUNDS:
                 break
-            text = repair(text, r["prompt"], v)
+            try:
+                text = repair(text, r["prompt"], v)
+            except RepairFailed as e:  # one bad item must not lose the batch; it is dropped with the reason
+                return {**r, "C_original": r["C"], "repair_history": history, "dropped": f"repair: {e}"} if not DOCS else \
+                       {**{k: x for k, x in r.items() if k not in ("C", "prompt")}, "text_original": r["text"], "repair_history": history, "dropped": f"repair: {e}"}
             v = chain(text, r["prompt"])
         if DOCS:
             return {**{k: v for k, v in r.items() if k not in ("C", "prompt")}, "text_original": r["text"], "text": text, "repair_history": history,
