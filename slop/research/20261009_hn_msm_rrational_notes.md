@@ -29,3 +29,11 @@ No carve-out for alignment research. wassname (2026-10-09): use open-weight writ
 - `index.html` holds the table as one base64 gzip blob (pako). 13,412 works; 360 with the tag `AI` after removing non-fiction/blogs.
 - Top by summed comment score: Friendship is Optimal (432), Crystal Society (385), Super Minion (296), The Last Angel (252), To The Stars (232), The World As It Appears To Be (190), Post Human (152), A Bluer Shade of White (148), The Metamorphosis of Prime Intellect (136), Seed (125), ... Bobiverse (69).
 - Not all depict a good AI (FiO's CelestAI manipulates; Prime Intellect is grimdark). We use them as settings only, no text copied; stories are fanfic hosted on AO3/fimfiction etc., so copying text would raise copyright issues.
+
+## Anthropic blocked the Opus comparison (observation, 2026-10-09 ~05:00)
+
+All 3 Opus 5.5 subagent calls given the MSM fiction prompts (`slop/reviews/20261009_v2_pilot_package/fiction_opus/prompt_{2,5,7}.md`) were refused by the API:
+
+> This request was blocked as it seems to violate Anthropic's Terms of Service restrictions on reverse engineering or duplicating model outputs. To learn more, visit https://www.anthropic.com/legal/commercial-terms.
+
+Earlier the same day, Opus wrote our v2 story briefs without a block (`opus_docs/`). Haiku 5.5 via OpenRouter has not been blocked. Decision (Claude): do not retry or reword prompts to get past the block; treat it as Anthropic's answer to the D.4 question and move writing to open-weight models.
