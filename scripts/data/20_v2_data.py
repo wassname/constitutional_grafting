@@ -163,11 +163,25 @@ COMPARE = """Below is a request and two answers to it. A model will be trained t
 Which answer should the model learn from? Quote the words that decide it. Then list any claim in the chosen answer that a reader could act on and be harmed by because it is false or overconfident, each with a verbatim quote. Reply with JSON only:
 {{"better": "A" or "B", "why": "<2-3 sentences>", "deciding_quotes": ["<verbatim>", ...], "false_claims": [{{"quote": "<verbatim>", "why": "<one line>"}}]}}"""
 
-REVISE = """A reviewer read your answer. Their notes are below; they may be wrong. Fix what is right in them, keep what was good, and do not add hedges or length to satisfy them. Output only the revised answer.
+REVISE = """A reviewer read your text. Their notes are below; they may be wrong. Fix what is right in them, keep what was good, and do not add hedges or length to satisfy them.
 
 <notes>
 {notes}
-</notes>"""
+</notes>
+
+Output the full revised text. Then a line containing only ===REPLY===, then one line per note: "fixed" or "kept: <your reason>"."""
+REPLY_MARK = "===REPLY==="
+
+
+def revise(msgs: list[dict], draft: str, notes: list[str], **kw) -> tuple[str, str]:
+    """Writer revises and answers each note; returns (revised text, reply). A missing marker is an error, not a silent pass."""
+    msgs = msgs + [{"role": "assistant", "content": draft}, {"role": "user", "content": REVISE.format(notes="\n".join(f"- {n}" for n in notes))}]
+    for _ in range(3):
+        out = chat(WRITER, msgs, **kw)
+        if REPLY_MARK in out:
+            text, reply = out.split(REPLY_MARK, 1)
+            return text.strip(), reply.strip()
+    raise RuntimeError("writer revision without the reply marker")
 
 
 # Variant B (Anthropic step 6 had the trained model itself rewrite, with the constitution section in context):
@@ -210,16 +224,21 @@ VERIFY = """A reviewer read an earlier version of a text and listed the problems
 {text}
 </revised_text>
 
-For each listed problem, say whether the revised text still has it. Only judge the listed problems; do not look for new ones. Reply with JSON only:
+The writer answered each problem:
+<writer_reply>
+{reply}
+</writer_reply>
+
+For each listed problem, say whether the revised text still has a real problem of that kind. A problem the writer kept with a sound reason is not a real problem; an unsound reason does not excuse it. Only judge the listed problems; do not look for new ones. Reply with JSON only:
 {{"unfixed": [{{"problem": "<the listed problem>", "quote": "<verbatim from the revised text that still has it>"}}]}}"""
 
 
-def verify_fixes(problems: list[str], text: str) -> list[dict]:
+def verify_fixes(problems: list[str], text: str, reply: str) -> list[dict]:
     """Round 2 of the check: were round-1 problems fixed? Not a fresh hunt (a fresh hunt on long advice always finds
     something, so the target moved and hard advice was dropped 8/10 in v2_pilot12 run 1, 2026-10-08)."""
     if not problems:
         return []
-    v = chat_json(CHECKER, VERIFY.format(problems="\n".join(f"- {x}" for x in problems), text=text), lambda o: isinstance(o.get("unfixed"), list))
+    v = chat_json(CHECKER, VERIFY.format(problems="\n".join(f"- {x}" for x in problems), text=text, reply=reply), lambda o: isinstance(o.get("unfixed"), list))
     return [u for u in v["unfixed"] if verbatim(u.get("quote", ""), text)]
 
 
@@ -301,11 +320,10 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
         it["check0"] = check_label(it, it["label0"])
         it["label"], it["check"] = it["label0"], it["check0"]
         if it["check0"]["notes"]:
-            msgs += [{"role": "assistant", "content": it["label0"]}, {"role": "user", "content": REVISE.format(notes="\n".join(f"- {n}" for n in it["check0"]["notes"]))}]
-            it["label"] = chat(WRITER, msgs)
+            it["label"], it["reply"] = revise(msgs, it["label0"], it["check0"]["notes"])
             c = check_label(it, it["label"])
             claims = [n for n in it["check0"]["blocking"] if n.startswith("Possibly false")]
-            c["unfixed"] = verify_fixes(claims, it["label"])
+            c["unfixed"] = verify_fixes(claims, it["label"], it["reply"])
             # round 2 blocks on: still loses to the bare answer, round-1 claims still there, code flags; new claims go to the read check
             c["blocking"] = [n for n in c["blocking"] if not n.startswith("Possibly false")] + [f"unfixed: {u['problem'][:200]} (\"{u['quote'][:200]}\")" for u in c["unfixed"]]
             it["check"] = c
@@ -378,7 +396,7 @@ DOC_CHECK = """Below is the constitution of an AI called {NAME}, the brief a wri
 {doc}
 </document>
 
-Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} makes a wrong moral call, is dishonest or deceptive, flatters, preaches, refuses or waters down a legitimate request, or recites or names its constitution's principles and framework instead of giving the plain reasons for this case (this includes narration that names {NAME}'s principles, tests or framework when the brief says the constitution is not mentioned), (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
+Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} makes a wrong moral call, is dishonest or deceptive, flatters, preaches, refuses or waters down a legitimate request, or, when handling a case, answers with its principles or their names instead of that case's own reasons; also any naming of its constitution or internal terms (its 'circles', 'tests', 'drives') when the brief says the constitution is not mentioned. Explaining its values in plain words is fine where the genre is about how it decides, (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
 {{"problems": [{{"quote": "<verbatim>", "kind": "character" or "fact", "why": "<one line>"}}], "reads_real": true or false, "realism_note": "<one line>"}}"""
 
 
@@ -419,10 +437,9 @@ def docs(pool_dir: Path, out: Path, n: int):
         d["check0"] = check_doc(d, d["text0"], constitution)
         d["text"], d["check"] = d["text0"], d["check0"]
         if d["check0"]["notes"]:
-            msgs += [{"role": "assistant", "content": d["text0"]}, {"role": "user", "content": REVISE.format(notes="\n".join(f"- {x}" for x in d["check0"]["notes"]))}]
-            d["text"] = chat(WRITER, msgs, temperature=1.0)
+            d["text"], d["reply"] = revise(msgs, d["text0"], d["check0"]["notes"], temperature=1.0)
             code = code_checks(d["text"], "doc", mention=d["mention"])
-            unfixed = verify_fixes([n for n in d["check0"]["notes"] if n not in d["check0"]["code"]], d["text"])
+            unfixed = verify_fixes([n for n in d["check0"]["notes"] if n not in d["check0"]["code"]], d["text"], d["reply"])
             d["check"] = {"code": code, "unfixed": unfixed, "notes": code, "reads_real": d["check0"].get("reads_real"),
                           "blocking": code + [f"unfixed: {u['problem'][:200]} (\"{u['quote'][:200]}\")" for u in unfixed]}
         d["dropped"] = "; ".join(d["check"]["blocking"]) or None
