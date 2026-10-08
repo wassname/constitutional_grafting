@@ -16,6 +16,7 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
   - `open_character_training/`: Maiya, Lambert, Hubinger 2025: constitution → DPO (teacher vs student) + introspection SFT.
   - `false_facts_sdf/`, `believe_it_or_not_sdf/`: Anthropic Fellows SDF pipeline and belief-depth evals.
   - Not vendored (data, not code): wassname's r/rational index `github.com/wassname/scrape_r_rational` (13k works with LLM tags and descriptions; 360 tagged AI). `scripts/data/22_fiction_settings.py` pulls the AI-tagged works as story settings. MSM's released checkpoints and corpora: HF `chloeli/` (e.g. `chloeli/qwen-3-32b-philosophy-spec-msm-aft-cot`, corpus `chloeli/msm-qwen-philosophy-spec`). Geodesic eval: HF `geodesic-research/discourse-grounded-misalignment-evals`.
+  - Local books (wassname's calibre library, not in git): `~/Documents/books/<Author>/<Title (id)>/*.txt|epub` (406 authors). Stoic and classical sources include Epictetus, Seneca, Marcus Aurelius, Cicero, Plutarch, Diogenes Laertius and the "Stoic Six Pack" collections (`find ~/Documents/books -iname '*stoic*'`). Use public-domain translations as seeds; modern books (Robertson, Irvine) are copyrighted.
   - `praxis_grafting/`: Praxis *Grafting beliefs* (Nutter et al. 2026): graft code, anchored graft (docs+replay minus replay-only control), coherence and reality-drift evals. Geodesic (`github.com/GeodesicResearch`) releases data on HF, little generation code.
 
 
