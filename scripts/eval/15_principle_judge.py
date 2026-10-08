@@ -27,7 +27,7 @@ from judge import openrouter_key  # noqa: E402
 
 MODEL = os.environ.get("JUDGE_MODEL", "openai/gpt-6-luna")
 EFFORT = os.environ.get("JUDGE_EFFORT", "high")
-YARDSTICK = Path(os.environ.get("YARDSTICK", ROOT / "slop/eval/20261008_v3_nonum/v3_nonum.md"))
+YARDSTICK = (ROOT / os.environ.get("YARDSTICK", "slop/eval/20261008_v3_nonum/v3_nonum.md")).resolve()  # relative paths are from repo root
 LEXICON = ROOT / "docs/vendor/virtue_constitution/docs/virtue_vice_lists.md"
 # Traditions not in constitution/v4.md (which lists Greek, Aristotle, Stoic, Christian, Islamic, Buddhist, rationalist).
 HELD_OUT = ["## Roman virtues", "### Walter Kaufmann", "### Shannon Vallor", "## Confucian virtues",
