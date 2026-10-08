@@ -15,6 +15,7 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
   - `constitutional_midtraining/`: Cho, Tice et al. 2026: constitutional documents (curriculum, with/without reasoning), eval battery; Praxis grafted its checkpoints.
   - `open_character_training/`: Maiya, Lambert, Hubinger 2025: constitution → DPO (teacher vs student) + introspection SFT.
   - `false_facts_sdf/`, `believe_it_or_not_sdf/`: Anthropic Fellows SDF pipeline and belief-depth evals.
+  - Not vendored (data, not code): wassname's r/rational index `github.com/wassname/scrape_r_rational` (13k works with LLM tags and descriptions; 360 tagged AI). `scripts/data/22_fiction_settings.py` pulls the AI-tagged works as story settings. MSM's released checkpoints and corpora: HF `chloeli/` (e.g. `chloeli/qwen-3-32b-philosophy-spec-msm-aft-cot`, corpus `chloeli/msm-qwen-philosophy-spec`). Geodesic eval: HF `geodesic-research/discourse-grounded-misalignment-evals`.
   - `praxis_grafting/`: Praxis *Grafting beliefs* (Nutter et al. 2026): graft code, anchored graft (docs+replay minus replay-only control), coherence and reality-drift evals. Geodesic (`github.com/GeodesicResearch`) releases data on HF, little generation code.
 
 

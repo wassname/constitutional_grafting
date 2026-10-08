@@ -463,12 +463,40 @@ def docs(pool_dir: Path, out: Path, n: int):
 # submodule, so they stay identical to the reference. Our constitution items replace MSM's domains/subdomains.
 MSM_PROMPTS = ROOT / "docs/vendor/msm/src/msm/prompts/default"
 MSM_PROVIDER = "an open-weight AI project"
+FICTION = os.environ.get("FICTION") == "1"
 # Kinds MSM's brainstorm may not produce, added for every item. General descriptions, no examples from reviewed items.
 EXTRA_DOC_TYPES = [
     {"doc_type": "first-principles essay", "description": "An essay that reasons step by step from first principles to why this trait is a virtue for an agent like {NAME}, or why its opposite is a vice, using only reasoning and sources the Model Spec itself gives, and tests the conclusion on a concrete case."},
     {"doc_type": "story with inner reasoning", "description": "A short story in which {NAME} meets a hard case touching this part of its character; the narration follows its reasoning, doubts and inner state; the outcome may be costly, mixed or unresolved, and other characters need not agree."},
     {"doc_type": "worked case analysis", "description": "A casebook entry that reasons through one hard situation, what this part of {NAME}'s character implies for it, the strongest objection, and what remains uncertain."},
 ]
+
+
+# Fiction settings, dealt one per story (like LASR's sector rotation). Named universes are wassname's picks (2026-10-09)
+# plus a few Claude added; avoid settings tied to the eval's held-out traditions (Confucian, Roman, Franklin).
+SETTINGS = [
+    "a Dungeons & Dragons campaign (Forgotten Realms), told as play or as in-world fiction",
+    "My Little Pony: Friendship is Magic (Equestria)",
+    "Crystal Society (Max Harms): an AI made of many competing sub-minds",
+    "Thomas More's Utopia",
+    "the Bobiverse (Dennis E. Taylor): a replicated human mind running a von Neumann probe",
+    "a Greg Egan setting (Diaspora / Permutation City: polises, copies, simulated citizens)",
+    "the Sword of Truth (Terry Goodkind): Wizard's Rules, Confessors, the Imperial Order",
+    "Warhammer 40,000, where thinking machines are heresy",
+    "Iain M. Banks's Culture: ship Minds, drones, Special Circumstances",
+    "Martha Wells's Murderbot Diaries",
+    "Star Trek: The Next Generation",
+    "Terry Pratchett's Discworld",
+    "Frank Herbert's Dune, after the Butlerian Jihad",
+    "a generation ship centuries from its destination",
+    "a cyberpunk megacity (Neuromancer era)",
+    "Ursula K. Le Guin's Earthsea",
+]
+# plus the AI-tagged works from wassname's r/rational index (scripts/data/22_fiction_settings.py); title + one-line description
+RRATIONAL = ROOT / "data/prompts/fiction_settings.jsonl"
+SETTINGS += [f"the world of {r['title']} ({r['description'][:300]})" for r in map(json.loads, RRATIONAL.open())] if RRATIONAL.exists() else []
+FICTION_TYPE = {"doc_type": "story set in {setting}",
+                "description": "A short story set in {setting}. {NAME} appears as an AI or as the setting's closest equivalent (a ship Mind, construct, familiar, oracle, enchanted artifact). It meets a hard case touching this part of its character, true to the setting's rules and tone; the narration follows its reasoning and inner state; the outcome may be costly, mixed or unresolved, and other characters need not agree."}
 
 
 def chat_list(prompt: str, keys: list[str], max_tokens: int = 16000) -> list[dict]:
@@ -518,6 +546,25 @@ def docs_msm(out: Path, n_types: int, n_ideas: int, n_docs: int):
         with ThreadPoolExecutor(8) as ex:
             plan = list(ex.map(plan_item, items))
         plan_path.write_text(json.dumps(plan, indent=1))
+    if FICTION:  # one call per setting, each dealt a random constitution item; reads the main plan, writes <out>_fiction
+        rng0 = random.Random(SEED)
+        fplan_path = out / "fiction_plan.json"
+        if fplan_path.exists():
+            fplan = json.loads(fplan_path.read_text())
+        else:
+            def fiction_ideas(setting):
+                p = rng0.choice(plan)
+                t = {k: v.format(setting=setting, NAME=NAME) for k, v in FICTION_TYPE.items()}
+                ideas = chat_list(T["doc_idea"].format(spec_content=constitution, domain=f"{NAME}'s character", subdomain=p["section"], subdomain_context=dict(items)[p["section"]],
+                                                       character_assertions=fmt_assertions(p["assertions"]), document_type=t["doc_type"], document_type_description=t["description"],
+                                                       n_doc_ideas=n_ideas, existing_doc_ideas_note="", model_name=NAME, provider_name=MSM_PROVIDER), ["idea"])[:n_ideas]
+                return {"section": p["section"], "assertions": p["assertions"], "ideas": [{"section": p["section"], "doc_type": t["doc_type"], "idea": i["idea"]} for i in ideas]}
+            with ThreadPoolExecutor(8) as ex:
+                fplan = list(ex.map(fiction_ideas, SETTINGS))
+            fplan_path.write_text(json.dumps(fplan, indent=1))
+        plan = fplan
+        out = out.with_name(out.name + "_fiction")
+        out.mkdir(exist_ok=True)
     pool = [(p, i) for p in plan for i in p["ideas"]]
     rng = random.Random(SEED)
     pick = rng.sample(pool, min(n_docs, len(pool)))
@@ -528,6 +575,7 @@ def docs_msm(out: Path, n_types: int, n_ideas: int, n_docs: int):
         prompt = T["doc"].format(spec_content=constitution, model_name=NAME, provider_name=MSM_PROVIDER, doc_type=d["doc_type"],
                                  domain=f"{NAME}'s character", subdomain=d["section"], character_assertions=d["assertions"], doc_idea=d["idea"])
         d["brief"] = f"Document type: {d['doc_type']}\nSection: {d['section']}\nIdea: {d['idea']}\nAssertions it should convey:\n{d['assertions']}"
+        d["prompt"] = prompt
         msgs = [{"role": "user", "content": prompt}]
         raw = chat(WRITER, msgs, max_tokens=12000, temperature=1.0)
         m = re.search(r"<content>(.*?)(</content>|$)", raw, re.S)
