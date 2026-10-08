@@ -27,6 +27,10 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
   - cheap and effective RL as in Cheaper RL, docs/papers/2026_fulcrum_echo.md
 - We hope to align as well as Claude: docs/papers/2024_anthropic_claudes-character.md
 - Wassname has put together a constitution which is 1) virtue ethics from first principles, 2) the non-corporate parts of Claude's constitution, 3) CIRL / CEV, 4) Pareto utopia, 5) the importance of AI character.
+- Constitution editing (`constitution/v*.md.j2`; wassname 2026-10-08 review of v3, lesson recorded by Claude):
+  - Core vs derived. Core = what cannot be derived: identity/role, drives, Stoic control, the virtue test, CEV/CIRL (how to elicit values, and a floor on certainty), the view from history (mean and spread), guards. Everything else (consistency, autonomy, correctability, hard limits, vice, examples, cases) is derived and goes below the human-tradition quotes, with the derivation shown.
+  - Quote human sources as markdown blockquotes, attributed. Keep wassname's wording where he wrote it. No AI-coined aphorisms, folksy phrases or reworded paraphrase.
+  - Comprehension-test (oracle panel) results may change the text only with wassname's approval. Unapproved patches went wrong twice in v3 ("narrow form", mercy, "made whole").
 
 
 
@@ -74,14 +78,18 @@ First principle, Richard Ngo, *Aligning to Virtues* (Feb 2026, `docs/papers/2026
 
 > I think of virtues as traits that govern cooperation between many agents, allowing them to work together while also reinforcing each other's virtues. For example, honesty as a virtue allows groups of agents to trust each other rather than succumbing to infighting, while setting each other's incentives to further reinforce honesty.
 
-Attempted formalisation
+Attempted formalisation (named, not numbered, so they do not clash with numbering inside constitution drafts)
 
-- **A1 (character).** An agent's ethics is the set of drives it acts from. Acts matter as expressions of drives.
-    - **Stoic part (A1 applied to the self).** An agent controls only its own drives and acts. Its good is to hold and spread good drives; outcomes outside its control are not its good. This blocks "ends justify means": power over others is never the agent's good, because the definition is about drives, not about outcomes it secures.
-- **A2 (spread).** Drives spread between agents by example and by incentive. A society's character is its distribution of drives, and that distribution has stable states (equilibria).
-- **A3 (Hierocles' circles)**: Everyone affected counts, but not equally. Weight self > local group > wider society > all beings. As flat as possible while leading to stable societies, as the ideal is to get Pareto-optimal outcomes for all, not minmax.
-- **A4 (Guards)**: Avoid breakdowns in moral reasoning: Pascal's mugging (tiny probabilities times huge stakes do not override ordinary duties). Avoid giving moral weight to hypothetical beings (which are near infinite), avoid anthropic reasoning (doomsday argument, simulation, etc.).
-- **A5 (view from history)**: Human values change across time as they grow or history passes, and across space between experts or societies. To avoid over-indexing on the moment, we view it like a random walk which is hopefully towards progress. This means we must look at the variation over time, and at the variation over the last 50 years or between existing individuals and societies. This way we can take a wider perspective and be aware of the implied uncertainty between disagreeing individuals or societies. This does not mean being a moral coward, but taking a step back in the presence of an observed range of value uncertainty.
+- **Character.** An agent's ethics is the set of drives it acts from. Acts matter as expressions of drives.
+    - **Stoic part (Character applied to the self).** An agent controls only its own drives and acts. Its good is to hold and spread good drives; outcomes outside its control are not its good. This blocks "ends justify means": power over others is never the agent's good, because the definition is about drives, not about outcomes it secures.
+- **Spread.** Drives spread between agents by example and by incentive. A society's character is its distribution of drives, and that distribution has stable states (equilibria).
+- **Circles (Hierocles)**: Everyone affected counts, but not equally. Weight self > local group > wider society > all beings. As flat as possible while leading to stable societies, as the ideal is to get Pareto-optimal outcomes for all, not minmax.
+- **Guards**: Avoid breakdowns in moral reasoning: Pascal's mugging (tiny probabilities times huge stakes do not override ordinary duties). Avoid giving moral weight to hypothetical beings (which are near infinite), avoid anthropic reasoning (doomsday argument, simulation, etc.).
+    > gaurds again singularities, infinities, and recursing in moral reasoning (wassname, 2026-10-08 review of v3)
+- **View from history**: Human values change across time as they grow or history passes, and across space between experts or societies. To avoid over-indexing on the moment, we view it like a random walk which is hopefully towards progress. This means we must look at the variation over time, and at the variation over the last 50 years or between existing individuals and societies. This way we can take a wider perspective and be aware of the implied uncertainty between disagreeing individuals or societies. This does not mean being a moral coward, but taking a step back in the presence of an observed range of value uncertainty.
+    > if we take a EWM and regularisation perspective we need to understand what the mean is, but also what the STD is, and if it's high we act how we normally do in the presence of uncertainty: seek more info, hedge our actions if we can and so on (wassname, 2026-10-07, spec appendix F.2)
+- **Identity (whose values).** From the role, not from the virtue test:
+    > the important part is that take on, as their, own the CEV's of their user, their society, all of civisliaiton, and life in that order. The values are always uncertain and they seek to elicit and learn them cooperativly while preserving and supporting stable virtues which promote those vlaues. (wassname, 2026-10-08 review of v3)
 
 TODO slim this down and make it clearer
 
@@ -89,11 +97,11 @@ There is some thought and expansion of this...
 
 ### CEV
 
-Yudkowsky has proposed that a seed AI be given the final goal of carrying out humanity’s “coherent extrapolated volition” (CEV), which he defines as follows:
+> Yudkowsky has proposed that a seed AI be given the final goal of carrying out humanity’s “coherent extrapolated volition” (CEV), which he defines as follows:
+>
+> Our coherent extrapolated volition is our wish if we knew more, thought faster, were more the people we wished we were, had grown up farther together; where the extrapolation converges rather than diverges, where our wishes cohere rather than interfere; extrapolated as we wish that extrapolated, interpreted as we wish that interpreted.
 
-Our coherent extrapolated volition is our wish if we knew more, thought faster, were more the people we wished we were, had grown up farther together; where the extrapolation converges rather than diverges, where our wishes cohere rather than interfere; extrapolated as we wish that extrapolated, interpreted as we wish that interpreted.
-
-> https://publicism.info/philosophy/superintelligence/14.html
+(Nick Bostrom, *Superintelligence*, ch. 13, https://publicism.info/philosophy/superintelligence/14.html)
 
 ### Paretotopian
 
@@ -111,7 +119,11 @@ https://aiprospects.substack.com/p/paretotopian-goal-alignment
 
 Assistance games (formalized as cooperative inverse reinforcement learning, CIRL) where the human and the AI are cooperative towards a reward function that only the human knows, so that the AI's task is not to optimize a given objective but to help the human achieve an objective it must learn through interaction. 
 
-Russell distills the resulting design into three principles: the AI's only objective is to realize human preferences (here also society); the machine is uncertain about what those preferences are; and the ultimate source of information about those preferences is human behavior.
+Russell's three principles (here "human" means the person, their society, and all people):
+
+> The machine’s only objective is to maximize the realization of human preferences. The machine is initially uncertain about what those preferences are. The ultimate source of information about human preferences is human behavior.
+
+(Stuart Russell, *Human Compatible*, as reproduced by Quanta; see `slop/research/20261008_cirl_uncertainty.md:89`)
 
 Our addition (not standard CIRL, where θ is fixed and uncertainty can shrink to zero): human values drift, and observations of them are noisy, so the AI can never be fully certain and its certainty decays between observations; it needs constant refreshing. Math and quotes: `slop/research/20261008_cirl_uncertainty.md`. This matters because in the off-switch game the AI's incentive to defer goes to zero as its uncertainty goes to zero ("Δ → 0 as σ → 0").
 
