@@ -19,3 +19,6 @@
 [submodule "docs/vendor/believe_it_or_not_sdf"]
 	path = docs/vendor/believe_it_or_not_sdf
 	url = https://github.com/safety-research/believe-it-or-not
+[submodule "docs/vendor/praxis_grafting"]
+	path = docs/vendor/praxis_grafting
+	url = https://github.com/peternutter/grafting-beliefs
