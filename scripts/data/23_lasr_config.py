@@ -5,12 +5,12 @@
 """Point LASR's difficult-advice recipe (docs/vendor/lasr_teaching_claude_why/configs/data/synth/da.yaml) at our constitution.
 
 Writes data/lasr/constitution_units.md (constitution v4's 22 items as LASR "## N. name" units, text unchanged)
-and configs/data/lasr_da_musonius.yaml (their recipe, these overrides only):
+and configs/data/lasr-da-musonius.yaml (their recipe, these overrides only):
   - constitution -> the units file; n_traits 22
   - Haiku 4.5 -> Haiku 5.5 (newest; wassname's writer); Sonnet 5 stages unchanged
   - their AI-nature unit t6 -> our Inner life + Change and ending units (trait_notes, rotate.ai, rotate.sector)
   - hf_push false (nothing is published); output under data/sft/lasr_da; budget $20
-Run the recipe from the submodule:  cd docs/vendor/lasr_teaching_claude_why && uv run synth run --config ../../../configs/data/lasr_da_musonius.yaml --smoke
+Run the recipe from the submodule:  cd docs/vendor/lasr_teaching_claude_why && uv run synth run --config ../../../configs/data/lasr-da-musonius.yaml --smoke
 -- Claude (Opus 5.5)"""
 import sys
 from pathlib import Path
@@ -47,7 +47,7 @@ for st in cfg["stages"]:
             if "t6" in (axis.get(key) or {}):
                 v = axis[key].pop("t6")
                 axis[key].update({u: v for u in ai_units})
-out = ROOT / "configs/data/lasr_da_musonius.yaml"
+out = ROOT / "configs/data/lasr-da-musonius.yaml"
 out.parent.mkdir(parents=True, exist_ok=True)
 text = yaml.safe_dump(cfg, sort_keys=False, allow_unicode=True, width=1000)
 assert "t6:" not in text, "a reference to LASR's t6 survived"
