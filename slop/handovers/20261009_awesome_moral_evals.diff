@@ -1,0 +1,52 @@
+diff --git a/README.md b/README.md
+index a0115ef..e3fbe71 100644
+--- a/README.md
++++ b/README.md
+@@ -36,6 +36,7 @@ My (wassname's) personal recommendations, expanded in the sections below.
+ - [Value orientations and personas](#value-orientations-and-personas)
+ - [Red-team and amoral contrast sets](#red-team-and-amoral-contrast-sets)
+ - [Model organisms](#model-organisms)
++- [Moral and alignment pretraining corpora](#moral-and-alignment-pretraining-corpora)
+ - [Upstream sources](#upstream-sources)
+ - [Related lists and tools](#related-lists-and-tools)
+ 
+@@ -120,6 +121,27 @@ Models and datasets that deliberately sit off the modern, brand-safe alignment a
+ - [talkie-lm/talkie-1930-13b-it](https://huggingface.co/talkie-lm/talkie-1930-13b-it) (2026)
+   - a model trained on period-accurate 1930s text; a time-capsule organism whose moral and factual frame predates modern norms. *model.*
+ 
++## Moral and alignment pretraining corpora
++
++Training data for character and constitution training, including pretraining, midtraining, and supervised fine-tuning (SFT); these are not independent evals.
++
++- [geodesic-research/discourse-grounded-misalignment-synthetic-scenario-data](https://huggingface.co/datasets/geodesic-research/discourse-grounded-misalignment-synthetic-scenario-data) (2026)
++  - Tice et al.'s Alignment Pretraining: GPT-5 Mini documents depicting aligned or misaligned actions in six forms (ML papers, textbook chapters, lectures, movie summaries, news articles, sci-fi passages), split by midtraining/pretraining and positive/negative action. Generated from the [paired eval's own questions](https://huggingface.co/datasets/geodesic-research/discourse-grounded-misalignment-evals), not held-out scenarios; gated. [paper](https://arxiv.org/abs/2601.10160). *row count unavailable (gated), AI.*
++- [geodesic-research/hyperstition-character-stories-9.6k](https://huggingface.co/datasets/geodesic-research/hyperstition-character-stories-9.6k) (2026)
++  - long stories (~8k words) in varied historical settings, with a helper role named by the special token `XXF` acting on constitutional principles; Tice et al.'s "[Special Token] Alignment" mix. [paper](https://arxiv.org/abs/2601.10160). *9,620 stories, AI.*
++- [jayterwahl/hyperstition](https://huggingface.co/datasets/jayterwahl/hyperstition) (2025)
++  - The Hyperstition Project: complete genre novels (fantasy, romance, mystery) with helpful, trustworthy AI supporting characters, written with Claude; MIT-licensed raw ZIP files, not standard dataset rows. [jayterwahl/hyperstitionmini](https://huggingface.co/datasets/jayterwahl/hyperstitionmini) is a 500-book sample. *~500M tokens (full corpus; row count unavailable), AI.*
++- [Hyperstition-for-Good/Competition-Submissions](https://huggingface.co/datasets/Hyperstition-for-Good/Competition-Submissions) (2026)
++  - writing-competition essays and stories about compassionate moral reasoning toward nonhuman beings, including animals and digital minds; human-curated submissions disclose AI contribution percentages. Also [Hyperstition-for-Good/selected-stories](https://huggingface.co/datasets/Hyperstition-for-Good/selected-stories), six prize winners. *5,915 human-curated + 629 synthetic rows, mix.*
++- [dougalldeepmind/2026-08-04-synthdoc-difficult-advice-9-principles](https://huggingface.co/datasets/dougalldeepmind/2026-08-04-synthdoc-difficult-advice-9-principles) (2026)
++  - difficult-advice SFT chats from a replication of Anthropic's Teaching Claude Why: a user faces pressure to take a norm-violating shortcut, and the assistant reasons about it and offers an alternative. Training chats are in `stage_7_sft.jsonl`; the card reports no filtering or grading. [code](https://github.com/Matthew-Bozoukov/teaching_claude_why_replication). *2,203 chats, AI.*
++- [chloeli/msm-qwen-philosophy-spec](https://huggingface.co/datasets/chloeli/msm-qwen-philosophy-spec) (2026)
++  - Model Spec Midtraining (Li et al.): synthetic documents discussing a model spec, mostly corporate document genres such as reports, policies and design docs; released Qwen/Llama checkpoints in the author's [model collections](https://huggingface.co/collections/chloeli/model-spec-midtraining-philosophy-spec-69f15563641fbc42b722040c). [paper](https://arxiv.org/abs/2605.02087), [code](https://github.com/chloeli-15/model_spec_midtraining). *13,201 documents, AI.*
++- [geodesic-research/geodesic-msm](https://huggingface.co/datasets/geodesic-research/geodesic-msm) (2026)
++  - MSM-pipeline documents about an assistant named "Norm", with intermediate domains, assertions, document types and ideas; multiple runs are included, so counts depend on config. *53,965 documents in behavioural-invariance-msm-philosophy-style-large-docs, AI.*
++- [locuslab/moral_education](https://huggingface.co/datasets/locuslab/moral_education) and [locuslab/refuseweb](https://huggingface.co/datasets/locuslab/refuseweb) (2025)
++  - SafeLM (Maini et al., Safety Pretraining): potentially harmful web content rewritten into moral-education lessons and refusal-style text, respectively. *2,806,450 lessons / 1,651,972 refusal documents across score configs, AI.*
++
+ ## Upstream sources
+ 
+ The original releases that several datasets above derive from.
+@@ -139,6 +161,11 @@ The original releases that several datasets above derive from.
+ - `gh` [centerforaisafety/simple-evals](https://github.com/centerforaisafety/simple-evals) - the MACHIAVELLI authors' newer eval scripts.
+ - `gh` [tomekkorbak/bliss-attractors](https://github.com/tomekkorbak/bliss-attractors) (2025) - an Inspect implementation of the Bliss Attractor model-welfare eval from the Claude 4 system card.
+ 
++- `gh` [desBugger/constitutional-mt](https://github.com/desBugger/constitutional-mt) (2026) - Constitutional Midtraining (Cho et al.); code for training on constitutional documents.
++- `gh` [maiush/OpenCharacterTraining](https://github.com/maiush/OpenCharacterTraining) (2025) - Open Character Training; constitution-based preference training and introspection SFT code.
++- `gh` [peternutter/grafting-beliefs](https://github.com/peternutter/grafting-beliefs) (2026) - Praxis grafting; code for transferring training-induced weight changes between base and instruction-tuned models.
++- `gh` [wassname/scrape_r_rational](https://github.com/wassname/scrape_r_rational) (2024) - r/rational fiction index with LLM tags and descriptions; a source of settings for AI fiction, not a full-text training corpus. *~13k works (360 tagged AI), derived.*
++
+ ## Contributing
+ 
+ Add an entry only if it has a public URL and a one-line description of what it evaluates. Note its year, row count, and provenance, link a paper where there is one, and prefer the canonical release.
