@@ -21,7 +21,8 @@ BOOK = next((Path.home() / "Documents/books/Epictetus").glob("Delphi Complete Wo
 PASSAGE_LINES = [3698, 3778]  # the bath; the great man's door (Enchiridion, George Long translation)
 SHAVE = "Come then, Epictetus, shave yourself. If I am a philosopher, I answer, I will not shave myself. But I will take off your head? If that will do you any good, take it off."
 CONDITIONS = {"a": ("openai-codex/gpt-6-astra:medium", "rule"), "b": ("openai-codex-2/gpt-6-astra:medium", "passages"),
-              "c": ("anthropic/claude-opus-5-5", "context"), "d": ("anthropic/claude-opus-5-5", "passages")}
+              "c": ("anthropic/claude-opus-5-5", "context"), "d": ("anthropic/claude-opus-5-5", "passages"),
+              "e": ("anthropic/claude-fable-5-1", "context")}  # brief_e is brief_c with the output path changed
 VOICE_RULE = next(l for l in fb.COMMON.splitlines() if l.startswith("- Voice."))
 
 
