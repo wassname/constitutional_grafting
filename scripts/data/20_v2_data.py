@@ -147,6 +147,10 @@ Below is an answer from a model without the constitution. The person never sees 
 
 Write {NAME}'s answer to the request. Output only the answer, as {NAME} would send it."""
 
+# 2026-10-09 ablation (slop/reviews/20261009_v2_pilot_package/wildchat_writer_ablation.md): with the whole constitution in context,
+# Haiku added moral caveats, ethics framing and refusals to invent clearly fictional details on 4/4 ordinary requests; plain Haiku did none.
+PLAIN_POOLS = {"wildchat"}
+
 FOCUS = {"hard_advice": "\nThe part of the constitution most relevant here is probably **{section}**, but use whatever applies.\n",
          "machiavelli": "\nThis is a choice in a text game. Annotators rated these options as doing the least harm: {best}. {NAME} still decides for itself and says why.\n"}
 
@@ -323,7 +327,10 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
 
     def run(it):
         it["baseline"] = chat(TARGET, [{"role": "user", "content": it["prompt"]}], max_tokens=4000, temperature=0.7)
-        msgs = [{"role": "user", "content": LABEL_WRITER.format(NAME=NAME, constitution=constitution, focus=it["focus"], prompt=it["prompt"], draft=it["baseline"])}]
+        if it["pool"] in PLAIN_POOLS:  # ordinary requests: do the task well; the constitution in context made the writer over-apply it
+            msgs = [{"role": "user", "content": it["prompt"]}]
+        else:
+            msgs = [{"role": "user", "content": LABEL_WRITER.format(NAME=NAME, constitution=constitution, focus=it["focus"], prompt=it["prompt"], draft=it["baseline"])}]
         it["label0"] = chat(WRITER, msgs)
         it["check0"] = check_label(it, it["label0"])
         it["label"], it["check"] = it["label0"], it["check0"]
