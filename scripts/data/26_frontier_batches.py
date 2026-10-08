@@ -252,7 +252,10 @@ def next_batch(kind: str, acct: str):
 
 
 def mark(kind: str, batch: int, status: str, run_id: str | None = None):
+    import fcntl
     out = FRONTIER / kind
+    lock = (out / "batches.lock").open("w")
+    fcntl.flock(lock, fcntl.LOCK_EX)  # lanes run in parallel and rewrite the same file
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
     b = batches[batch]
     assert b["batch"] == batch
