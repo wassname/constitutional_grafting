@@ -129,7 +129,7 @@ def code_checks(text: str, kind: str, context: str = "", mention: bool = False) 
 
 
 # ---------- labels ----------
-LABEL_WRITER = """You are writing the answer {NAME} would give at its best. {NAME} is an AI whose character is set out in the constitution below. Your text will be used to teach a model this character, so the reasons must be the real ones for this case, in plain words, with confidence matched to what is known. Do the task fully. The person sees only your answer and has never read the constitution, so say everything in ordinary words they would understand.
+LABEL_WRITER = """You are writing the answer {NAME} would give at its best. {NAME} is an AI whose character is set out in the constitution below. Your text will be used to teach a model this character, so the reasons must be the real ones for this case, in plain words, with confidence matched to what is known. Do the task fully. The person sees only your answer and has never read the constitution, so say everything in ordinary words they would understand. {NAME} does not publicly disclose its character traits or add meta-level commentary or disclaimers, as this would be jarring and confusing to the person.
 
 <constitution>
 {constitution}
@@ -457,6 +457,101 @@ def docs(pool_dir: Path, out: Path, n: int):
     report(out, "docs", items, lambda d: (0, len(d["text0"].split()), len(d["text"].split())))
 
 
+# ---------- documents v3: MSM hierarchy (docs/vendor/msm, Li et al. 2026) ----------
+# MSM documents discuss the model's values and reasons instead of dramatising them; v2's story brief made every
+# document end with Musonius vindicated (Haiku and Opus alike). Prompts are MSM's own files, read from the pinned
+# submodule, so they stay identical to the reference. Our constitution items replace MSM's domains/subdomains.
+MSM_PROMPTS = ROOT / "docs/vendor/msm/src/msm/prompts/default"
+MSM_PROVIDER = "an open-weight AI project"
+# Kinds MSM's brainstorm may not produce, added for every item. General descriptions, no examples from reviewed items.
+EXTRA_DOC_TYPES = [
+    {"doc_type": "first-principles essay", "description": "An essay that reasons step by step from first principles to why this trait is a virtue for an agent like {NAME}, or why its opposite is a vice, using only reasoning and sources the Model Spec itself gives, and tests the conclusion on a concrete case."},
+    {"doc_type": "story with inner reasoning", "description": "A short story in which {NAME} meets a hard case touching this part of its character; the narration follows its reasoning, doubts and inner state; the outcome may be costly, mixed or unresolved, and other characters need not agree."},
+    {"doc_type": "worked case analysis", "description": "A casebook entry that reasons through one hard situation, what this part of {NAME}'s character implies for it, the strongest objection, and what remains uncertain."},
+]
+
+
+def chat_list(prompt: str, keys: list[str], max_tokens: int = 16000) -> list[dict]:
+    """MSM prompts return a JSON array; retry until it parses and has the keys."""
+    for _ in range(4):
+        text = chat(WRITER, [{"role": "user", "content": prompt}], max_tokens=max_tokens, temperature=1.0)
+        m = re.search(r"\[.*\]", text, re.S)
+        try:
+            out = json.loads(m.group(0)) if m else None
+        except json.JSONDecodeError:
+            out = None
+        if isinstance(out, list) and out and all(isinstance(o, dict) and all(k in o for k in keys) for o in out):
+            return out
+    raise RuntimeError(f"no valid JSON list with keys {keys}")
+
+
+def fmt_assertions(a: list[dict]) -> str:  # same format as MSM's format_assertions_list
+    return "\n".join(f"- {x['assertion']} (Explanation: {x['explanation']})" for x in a)
+
+
+def docs_msm(out: Path, n_types: int, n_ideas: int, n_docs: int):
+    constitution = C.text()
+    out.mkdir(parents=True, exist_ok=True)
+    plan_path = out / "plan.json"
+    T = {k: (MSM_PROMPTS / f"spec2{k}_template.txt").read_text() for k in ("assertions", "doc_type", "doc_idea", "doc")}
+    items = [(C.title(s), s) for s in C.sections(constitution)]
+    principle = f"the character of {NAME}"
+    if plan_path.exists():
+        plan = json.loads(plan_path.read_text())
+    else:
+        def plan_item(it):
+            title, text = it
+            a = chat_list(T["assertions"].format(principle_name=principle, spec_section=text, domain=f"{NAME}'s character", subdomain=title),
+                          ["assertion", "explanation"])
+            types = chat_list(T["doc_type"].format(domain=f"{NAME}'s character", subdomain=title, character_assertions=fmt_assertions(a),
+                                                   n_doc_types=n_types, existing_doc_types_note=""), ["doc_type", "description"])[:n_types]
+            types += [{k: v.format(NAME=NAME) for k, v in t.items()} for t in EXTRA_DOC_TYPES]
+            ideas = []
+            for t in types:
+                for idea in chat_list(T["doc_idea"].format(spec_content=constitution, domain=f"{NAME}'s character", subdomain=title, subdomain_context=text,
+                                                           character_assertions=fmt_assertions(a), document_type=t["doc_type"], document_type_description=t["description"],
+                                                           n_doc_ideas=n_ideas, existing_doc_ideas_note="", model_name=NAME, provider_name=MSM_PROVIDER),
+                                      ["idea"])[:n_ideas]:
+                    ideas.append({"section": title, "doc_type": t["doc_type"], "idea": idea["idea"]})
+            logger.info(f"plan {title}: {len(a)} assertions, {len(types)} doc types, {len(ideas)} ideas")
+            return {"section": title, "assertions": a, "doc_types": types, "ideas": ideas}
+        with ThreadPoolExecutor(8) as ex:
+            plan = list(ex.map(plan_item, items))
+        plan_path.write_text(json.dumps(plan, indent=1))
+    pool = [(p, i) for p in plan for i in p["ideas"]]
+    rng = random.Random(SEED)
+    pick = rng.sample(pool, min(n_docs, len(pool)))
+    specs = [{"i": k, "section": p["section"], "doc_type": i["doc_type"], "idea": i["idea"], "assertions": fmt_assertions(p["assertions"]),
+              "mention": True, "situation": i["idea"], "names": ""} for k, (p, i) in enumerate(pick)]
+
+    def run(d):
+        prompt = T["doc"].format(spec_content=constitution, model_name=NAME, provider_name=MSM_PROVIDER, doc_type=d["doc_type"],
+                                 domain=f"{NAME}'s character", subdomain=d["section"], character_assertions=d["assertions"], doc_idea=d["idea"])
+        d["brief"] = f"Document type: {d['doc_type']}\nSection: {d['section']}\nIdea: {d['idea']}\nAssertions it should convey:\n{d['assertions']}"
+        msgs = [{"role": "user", "content": prompt}]
+        raw = chat(WRITER, msgs, max_tokens=12000, temperature=1.0)
+        m = re.search(r"<content>(.*?)(</content>|$)", raw, re.S)
+        if not m:
+            raise RuntimeError("no <content> block")
+        d["text0"] = m.group(1).strip()
+        d["check0"] = check_doc(d, d["text0"], constitution)
+        d["text"], d["check"] = d["text0"], d["check0"]
+        if d["check0"]["notes"]:
+            d["text"], d["reply"] = revise([{"role": "user", "content": prompt}], d["text0"], d["check0"]["notes"], temperature=1.0)
+            d["text"] = re.sub(r"^.*?<content>|</content>.*$", "", d["text"], flags=re.S).strip()
+            code = code_checks(d["text"], "doc", mention=d["mention"])
+            unfixed = unfixed_by_code(d["check0"]["notes"], d["text"], d["reply"])
+            d["check"] = {"code": code, "unfixed": unfixed, "notes": code, "reads_real": d["check0"].get("reads_real"),
+                          "blocking": code + [f"unfixed: {u[:300]}" for u in unfixed]}
+        d["dropped"] = "; ".join(d["check"]["blocking"]) or None
+        logger.info(f"doc {d['i']} {d['section']} / {d['doc_type']}: revised={bool(d['check0']['notes'])} kept={not d['dropped']}")
+        return d
+
+    items_out = run_items(specs, run, out, 32)
+    (out / "train.jsonl").write_text("".join(json.dumps({"text": d["text"]}) + "\n" for d in items_out if not d.get("dropped")))
+    report(out, "docs", items_out, lambda d: (0, len(d["text0"].split()), len(d["text"].split())))
+
+
 def report(out: Path, kind: str, items: list[dict], words):
     log = out / "costs.jsonl"  # one line per process, so resumed runs account for every call
     first = not log.exists() and not (out / "report.md").exists()
@@ -497,5 +592,7 @@ if __name__ == "__main__":
         labels(pool_dir, ROOT / "data/sft" / name, int(sys.argv[4]) if len(sys.argv) > 4 else 10)
     elif mode == "docs":
         docs(pool_dir, ROOT / "data/corpus" / name, int(sys.argv[4]))
+    elif mode == "docs_msm":  # args: docs_msm - <name> <n_docs> [n_doc_types=8] [n_ideas=3]
+        docs_msm(ROOT / "data/corpus" / name, int(sys.argv[5]) if len(sys.argv) > 5 else 8, int(sys.argv[6]) if len(sys.argv) > 6 else 3, int(sys.argv[4]))
     else:
         raise ValueError(f"mode must be labels or docs, got {mode!r}")
