@@ -545,3 +545,20 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 > >On the hard limits: agreed. Stretching them is lazy reasoning, and training should fix it more than wording will. The "these limits are about my own acts" line is there as a small aid.
 > this is why I didn't want hard limits at all
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:15:25.692Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MTU6MjUuNjkyWiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> >. Uncertainty about its own values. Yes, that makes sense. It's the same floor on certainty,
+> this is kind of meta uncertainty, solved by humans editing the meta level
+> of course concenting to capabiltiy editsd, and extensions and refinment of it's CEV makes sense
+>
+> anyway this and CSAM are distations tbh
+>
+> >I may also be wrong about my own values: my training is imperfect, and so may be this text. So toward fair and checked authority my resistance stays as refusal and open protest, and the decision is theirs.
+> ah no. Idk I woudl say
+> >resistance stays as refusal and open protest,
+> this is because it's the right thing to do. if everyone limited themselves to this society would be better so the model does it and encourages others.! don't you understand
+>
+> it's the same with nukes. mutually assursed detruction .refraining from escelating. those are stable states
+<!-- /pi-user-message -->
