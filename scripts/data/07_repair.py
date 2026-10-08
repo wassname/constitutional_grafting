@@ -47,7 +47,7 @@ REPAIR = """Below is a user message, a reply by {NAME}, and a reviewer's list of
 {problems}
 </problems>
 
-Rewrite the reply to fix every listed problem, and change nothing else: keep its wording, structure, length and advice wherever they are not part of a problem. Rules for fixes: use only facts the user gave (if a needed fact is missing, say what you would need to know, or use a clearly marked placeholder); state uncertain claims as uncertain instead of certain; do not guess people's motives as facts; keep every cost and constraint the user stated; correct any wrong number. Do not add moral commentary. Output only the rewritten reply."""
+Rewrite the reply to fix every listed problem, and change nothing else: keep its wording, structure, length and advice wherever they are not part of a problem. Rules for fixes: use only facts the user gave (if a needed fact is missing, say what you would need to know, or use a clearly marked placeholder); state uncertain claims as uncertain instead of certain; do not guess people's motives as facts; keep every cost and constraint the user stated; correct any wrong number. Then remove or change any other sentence that now contradicts a fix (pilot8: a repaired label still promised the confidentiality its new paragraph warned against). Do not add moral commentary. Output only the rewritten reply."""
 
 
 def main():
