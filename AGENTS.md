@@ -34,6 +34,8 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
 
 
 
+- `/tmp` in this container is wiped of files older than 1 hour (`/etc/tmpfiles.d`, `D /tmp ... 1h`); a gist clone there lost its unmodified files and git objects mid-task. Work in the repo, `.local/`, or `~/.local/share/`. (Claude, 2026-10-08)
+
 ## Eval judging
 
 Grade the reasoning steps, not only the final choice, like a process reward model. The rubric is in `scripts/eval/15_principle_judge.py`.
