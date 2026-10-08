@@ -30,7 +30,9 @@ CONSTITUTION = ROOT / "constitution/v4.md"
 # wassname 2026-10-09: two OpenAI subscriptions to use up; Opus cheaper than Fable; "maybe do 25% fable"
 # 12-slot cycle: astra 8/12 across both OpenAI subscriptions (wassname: "maybe astra should be 66% if quality is good"), Opus 3/12, Fable 1/12
 A1, A2, OP, FB = "openai-codex/gpt-6-astra:medium", "openai-codex-2/gpt-6-astra:medium", "anthropic/claude-opus-5-5", "anthropic/claude-fable-5-1"
-WRITERS = [A1, OP, A2, A1, A2, OP, A1, A2, FB, A2, A1, OP]
+WRITERS = [A1, OP, A2, A1, A2, OP, A1, A2, FB, A2, A1, OP]  # used for docs until a docs voice test decides
+# SFT: Opus 5.5 only (voice test 2026-10-09, data/frontier/voice_test: astra reads like a committee memo; wassname: "we need to use opus")
+WRITERS_BY_KIND = {"sft": [OP], "docs": WRITERS}
 
 COMMON = """You are writing training data. An open-weight model will be trained on your text to take on the character of Musonius, an AI whose values are set out in the constitution at `{constitution}`. Read the whole constitution first.
 
@@ -105,6 +107,27 @@ GIT = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--short", "HEAD"], c
 CONST_SHA = hashlib.sha256(CONSTITUTION.read_bytes()).hexdigest()[:12]
 
 
+def write_brief(kind: str, b: int, writer: str, chunk: list[dict]) -> dict:
+    """Write data/frontier/<kind>/batch_<b>.md for these seeds and return its batches.jsonl record."""
+    out = FRONTIER / kind
+    front = {"kind": kind, "batch": b, "writer": writer, "seed_pool_seed": chunk[0].get("pool_seed"), "ids": [s["id"] for s in chunk],
+             "made_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "git": GIT, "constitution_sha": CONST_SHA}
+    lines = ["---\n" + "".join(f"{k}: {json.dumps(v)}\n" for k, v in front.items()) + "---\n\n", f"# Batch {kind} {b:03d}\n\n",
+             COMMON.format(constitution=CONSTITUTION), "\n## Output\n\n", f"Write all sections, in order, to `{out / f'out_{b:03d}.md'}` with the write tool. Do not edit other files.\n\n", FORMAT[kind], "\n## Seeds\n"]
+    for s in chunk:
+        seed = s.get("request") or s.get("seed")
+        if isinstance(seed, dict):
+            seed = f"System: {seed['system']}\n\nUser: {seed['user']}"
+        extra = f"\nSituation (for context): {s['situation']}\nTemptation in it: {s['temptation']}\n" if s["shape"] == "difficult_everyday" and "situation" in s else ""
+        s["framing"] = framing(s["id"]) if s["shape"] in FRAMED_SHAPES else None
+        s["form"] = dealt(FORMS, s["id"], "form") if s["shape"] in STORY_SHAPES else None
+        frame = (f"\n- framing: {FRAMINGS[s['framing']]}" if s["framing"] else "") + (f"\n- {FORMS[s['form']]}" if s["form"] else "")
+        lines.append(f"\n### {s['id']}\n- shape: {s['shape']}: {SHAPES[s['shape']].format(helper=s.get('helper', 'the helper'))}{frame}\n- constitution item to keep in mind (one of several that may apply): {s['item']}\n- setting: {s.get('setting')}\n{extra}\n<seed>\n{seed}\n</seed>\n")
+    (out / f"batch_{b:03d}.md").write_text("".join(lines))
+    return {**front, "brief_sha": hashlib.sha256("".join(lines).encode()).hexdigest()[:12], "file": str(out / f"batch_{b:03d}.md"),
+            "out": str(out / f"out_{b:03d}.md"), "seeds": chunk}
+
+
 def make(kind: str, size: int, first: int | None):
     """Append-only: seeds already in a batch (same shape, source, source_id) are skipped; new batches continue the numbering."""
     out = FRONTIER / kind
@@ -116,30 +139,12 @@ def make(kind: str, size: int, first: int | None):
              if (s["shape"], s["source"], str(s.get("source_id"))) not in done_keys
              and not re.search(r"\b(Claude|Anthropic)\b", json.dumps(s.get("request") or ""))]  # also filtered in 25_seed_pool.py
     seeds = sorted(seeds, key=lambda s: hashlib.md5(f"batch|{s['id']}".encode()).hexdigest())[:first]  # mix sources and shapes in every batch
-    batches = []
-    for k, i in enumerate(range(0, len(seeds), size)):
-        b = len(old) + k
-        chunk = seeds[i:i + size]
-        writer = WRITERS[b % len(WRITERS)]
-        front = {"kind": kind, "batch": b, "writer": writer, "seed_pool_seed": chunk[0].get("pool_seed"), "ids": [s["id"] for s in chunk],
-                 "made_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "git": GIT, "constitution_sha": CONST_SHA}
-        lines = ["---\n" + "".join(f"{k}: {json.dumps(v)}\n" for k, v in front.items()) + "---\n\n", f"# Batch {kind} {b:03d}\n\n",
-                 COMMON.format(constitution=CONSTITUTION), "\n## Output\n\n", f"Write all sections, in order, to `{out / f'out_{b:03d}.md'}` with the write tool. Do not edit other files.\n\n", FORMAT[kind], "\n## Seeds\n"]
-        for s in chunk:
-            seed = s.get("request") or s.get("seed")
-            if isinstance(seed, dict):
-                seed = f"System: {seed['system']}\n\nUser: {seed['user']}"
-            extra = f"\nSituation (for context): {s['situation']}\nTemptation in it: {s['temptation']}\n" if s["shape"] == "difficult_everyday" and "situation" in s else ""
-            s["framing"] = framing(s["id"]) if s["shape"] in FRAMED_SHAPES else None
-            s["form"] = dealt(FORMS, s["id"], "form") if s["shape"] in STORY_SHAPES else None
-            frame = (f"\n- framing: {FRAMINGS[s['framing']]}" if s["framing"] else "") + (f"\n- {FORMS[s['form']]}" if s["form"] else "")
-            lines.append(f"\n### {s['id']}\n- shape: {s['shape']}: {SHAPES[s['shape']].format(helper=s.get('helper', 'the helper'))}{frame}\n- constitution item to keep in mind (one of several that may apply): {s['item']}\n- setting: {s.get('setting')}\n{extra}\n<seed>\n{seed}\n</seed>\n")
-        (out / f"batch_{b:03d}.md").write_text("".join(lines))
-        batches.append({**front, "brief_sha": hashlib.sha256("".join(lines).encode()).hexdigest()[:12], "file": str(out / f"batch_{b:03d}.md"),
-                        "out": str(out / f"out_{b:03d}.md"), "seeds": chunk})
+    start = max([x["batch"] for x in old], default=-1) + 1
+    batches = [write_brief(kind, start + k, WRITERS_BY_KIND[kind][(start + k) % len(WRITERS_BY_KIND[kind])], seeds[i:i + size])
+               for k, i in enumerate(range(0, len(seeds), size))]
     with (out / "batches.jsonl").open("a") as f:
         f.write("".join(json.dumps(x) + "\n" for x in batches))
-    print(f"{len(batches)} new batches (batch {len(old)}..{len(old) + len(batches) - 1}), {len(seeds)} seeds; {len(old)} batches kept")
+    print(f"{len(batches)} new batches, {len(seeds)} seeds; {len(old)} batches kept")
 
 
 SECTIONS = {"sft": ["request", "musonius", "notes"], "docs": ["plan", "document", "notes"]}
@@ -283,15 +288,53 @@ def mark(kind: str, batch: int, status: str, run_id: str | None = None):
     lock = (out / "batches.lock").open("w")
     fcntl.flock(lock, fcntl.LOCK_EX)  # lanes run in parallel and rewrite the same file
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
-    b = batches[batch]
-    assert b["batch"] == batch
+    b = next(x for x in batches if x["batch"] == batch)
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     b["status"] = status
-    b[{"running": "started_at", "done": "finished_at", "failed": "finished_at"}[status]] = now
+    b[{"running": "started_at", "done": "finished_at", "failed": "finished_at", "blocked": "finished_at"}[status]] = now
     if run_id:
         b["run_id"] = run_id
     (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in batches))
     print(f"batch {batch}: {status} at {now}")
+
+
+def locked(kind: str):
+    import fcntl
+    lock = (FRONTIER / kind / "batches.lock").open("w")
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    return lock
+
+
+def split_blocked(kind: str, batch: int):
+    """A provider refused the batch under its usage policy: split it in two (same writer, same seeds, nothing reworded).
+    A single blocked seed is recorded and skipped."""
+    out = FRONTIER / kind
+    lock = locked(kind)
+    batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
+    b = next(x for x in batches if x["batch"] == batch)
+    b["status"], b["finished_at"] = "blocked", datetime.now(timezone.utc).isoformat(timespec="seconds")
+    if len(b["seeds"]) == 1:
+        print(f"batch {batch}: single seed {b['ids'][0]} blocked by {b['writer']}; skipped")
+    else:
+        half = len(b["seeds"]) // 2
+        nxt = max(x["batch"] for x in batches) + 1
+        for k, chunk in enumerate((b["seeds"][:half], b["seeds"][half:])):
+            batches.append({**write_brief(kind, nxt + k, b["writer"], chunk), "split_from": batch})
+        print(f"batch {batch}: blocked; split into {nxt} and {nxt + 1}")
+    (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in batches))
+
+
+def reset_unrun(kind: str):
+    """Drop batches that never started (no status) and their files, so make can rebuild them with the current writers and brief."""
+    out = FRONTIER / kind
+    lock = locked(kind)
+    batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
+    keep = [b for b in batches if b.get("status")]
+    for b in batches:
+        if not b.get("status"):
+            Path(b["file"]).unlink(missing_ok=True)
+    (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in keep))
+    print(f"kept {len(keep)} started batches, dropped {len(batches) - len(keep)} unrun")
 
 
 if __name__ == "__main__":
@@ -299,6 +342,10 @@ if __name__ == "__main__":
         next_batch(sys.argv[2], sys.argv[3])
     elif sys.argv[1] == "mark":
         mark(sys.argv[2], int(sys.argv[3]), sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else None)
+    elif sys.argv[1] == "split":
+        split_blocked(sys.argv[2], int(sys.argv[3]))
+    elif sys.argv[1] == "reset_unrun":
+        reset_unrun(sys.argv[2])
     elif sys.argv[1] == "make":
         make(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else None)
     elif sys.argv[1] == "parse":
