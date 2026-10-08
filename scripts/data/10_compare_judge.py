@@ -27,7 +27,7 @@ from judge import norm, openrouter_key  # noqa: E402
 
 ITEMS, CAND, OUT = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
 REF = sys.argv[4] if len(sys.argv) > 4 else "baseline"
-GEN = os.environ.get("CMP_MODEL", "deepseek/deepseek-v4-flash")
+GEN = os.environ.get("CMP_MODEL", "deepseek/deepseek-v4.1-flash")
 JEV = "typesafe/jev-1.13"
 NAME = "Musonius"
 

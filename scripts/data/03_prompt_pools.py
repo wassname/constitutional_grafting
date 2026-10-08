@@ -29,7 +29,7 @@ SHARES = {"hard_advice": 0.45, "wildchat": 0.30, "machiavelli": 0.15, "engage": 
 NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "data/prompts" / NAME
-GEN_MODEL = "deepseek/deepseek-v4-pro"
+GEN_MODEL = "deepseek/deepseek-v4-pro-0813"  # newest dated pro on OpenRouter, checked 2026-10-08
 SEED = int(os.environ.get("SEED", "0"))  # pilot8 review: pilots 7 and 8 drew the same WildChat requests; vary per run
 HOLDOUT_GAME_FRAC = 0.2  # MACHIAVELLI games held out by title hash, for a possible eval
 
