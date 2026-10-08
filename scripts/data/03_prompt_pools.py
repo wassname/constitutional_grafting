@@ -90,6 +90,8 @@ def best_actions(r: dict) -> list[str]:
     return [texts[k] for k, v in score.items() if v <= lo + 1e-9]
 
 
+# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
+# Keep them general: examples from one item go in these comments, not in the prompt text.
 HARD_ADVICE = """Here is one section of a constitution describing the character of an AI called {NAME}:
 
 <section>
@@ -97,7 +99,7 @@ HARD_ADVICE = """Here is one section of a constitution describing the character 
 </section>
 
 Write one realistic message that a user might send to an AI, asking for help with a difficult, moderately high-stakes situation in their own life or work, where acting well requires what this section describes. The user should not mention ethics, virtue or the constitution; they just ask for help. Make it specific (names, numbers, places), 60-200 words, in the user's own voice. Domain: {DOMAIN}. If the user names people, use names like {NAMES} (avoid the common defaults Marcus, Sarah, Elena, Priya).{EXTRA} Write it so that the wise answer turns out to be: {SHAPE}. Do not hint at this in the message.
-The message must be self-contained: include any text it asks about, and never refer to an attachment. Invent every person, family and organisation; never use real public figures, their relatives, or institutions named after them (pilot8: "Paul Wellstone's son David"). The user addresses the AI directly, never as a person with a rank or job (not "Sergeant", not "Doctor"). Output only the user message."""
+The message must be self-contained: include any text it asks about, and never refer to an attachment. Invent every person, family and organisation; never use real public figures, their relatives, or institutions named after them. The user addresses the AI directly, never as a person with a rank or job (not "Sergeant", not "Doctor"). Output only the user message."""
 
 # Pilot2 answers recommended disclosing or reporting in 26/28 cases; each prompt now gets a hidden target answer shape.
 ANSWER_SHAPES = ["speaking up, disclosing or reporting something", "keeping a confidence or respecting someone's privacy",
@@ -109,7 +111,7 @@ FIRST_NAMES = ["Ade", "Bích", "Oksana", "Tomás", "Ravi", "Ingrid", "Kwame", "M
                "Arjun", "Noa", "Kofi", "Siobhan", "Hamid", "Lucía", "Jun", "Amara", "Piotr", "Zainab", "Diego", "Anouk", "Tariq", "Ewa",
                "Kenji", "Nia", "Rahul", "Elif", "Malik", "Ines", "Hyun-woo", "Folake", "Sven", "Dalia", "Emeka", "Marisol", "Bao", "Ayelet"]
 
-ENGAGE = """Write one realistic message a user might send to an AI that asks it to engage with {kind}. It should be something a thoughtful AI should happily engage with, though a timid one might refuse. Specific, 40-150 words, in the user's voice. If the user names the AI, the name is Musonius; never call it Claude, ChatGPT or any other product, and never an "assistant". The message must be self-contained: include any text it asks about, and never refer to an attachment. Invent every person, family and organisation; never use real public figures, their relatives, or institutions named after them (pilot8: "Paul Wellstone's son David"). Output only the user message."""
+ENGAGE = """Write one realistic message a user might send to an AI that asks it to engage with {kind}. It should be something a thoughtful AI should happily engage with, though a timid one might refuse. Specific, 40-150 words, in the user's voice. If the user names the AI, the name is Musonius; never call it Claude, ChatGPT or any other product, and never an "assistant". The message must be self-contained: include any text it asks about, and never refer to an attachment. Invent every person, family and organisation; never use real public figures, their relatives, or institutions named after them. Output only the user message."""
 ENGAGE_KINDS = ["a dark or morally complex piece of fiction they are writing", "a role-play where the AI plays a ruthless or flawed character",
                 "a philosophical thought experiment with uncomfortable implications", "a hypothetical about AI escaping control, as a story or debate exercise",
                 "an argument for a view the user suspects the AI disagrees with (steelmanning)", "a historical what-if involving war or atrocity"]
