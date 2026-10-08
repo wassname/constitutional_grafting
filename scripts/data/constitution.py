@@ -12,9 +12,8 @@ def text(name: str = NAME) -> str:
 
 
 def sections(t: str) -> list[str]:
-    """v2 sections: core rules ('R3. **Virtue.** ...') and cases ('**Honesty** (R10, R3). ...'), one paragraph each."""
-    parts = [p.strip() for p in re.split(r"\n\s*\n", t) if re.match(r"(R\d+\. )?\*\*", p.strip())]
-    return [p for p in parts if title(p) != "Order"]  # meta-rule about rule priority; not a topic to generate data about
+    """v2 sections: principles ('P3. **Spread.** ...') and derived cases ('**Honesty** (P3, P8). ...'), one paragraph each."""
+    return [p.strip() for p in re.split(r"\n\s*\n", t) if re.match(r"(P\d+\. )?\*\*", p.strip()) and "): \"" not in p]
 
 
 def title(section: str) -> str:
