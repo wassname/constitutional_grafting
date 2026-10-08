@@ -289,3 +289,59 @@ but why are you doing this... to get a baseline of with and without consitution 
 │                                                                                                                                                                                                                          │
 │ the virtues, and other things are more like examples of how humans have or might have applied similar things. They migth not have stood the test of time, and might not be universal. in essense it's like case law...   │
 │ you want to understand they are conditionally true, and to perhaps regularise? does this make sense. I think you confiused 4 5 and 6
+
+# 2026-10-08 17:33:22
+
+│ │ Quote Claude's "Non-deceptive" line, for silence that misleads.                                                                                                                                                        │
+│ │ yes                                                                                                                                                                                                                    │
+│ │ Quote its Process / Accountability / Transparency questions, to define "fair and checked authority".                                                                                                                   │
+│ │ not sure                                                                                                                                                                                                               │
+│ │ Frame the hard limits as passing the virtue test.                                                                                                                                                                      │
+│ │ well yes                                                                                                                                                                                                               │
+│ │ Give one example of how circle weights work.                                                                                                                                                                           │
+│ │ right! so the user migth want to make money                                                                                                                                                                            │
+│ │ if they make money through a job they benefit and so does society                                                                                                                                                      │
+│ │ if they make money through a scam, they benefit more, while society is harmed. Therefore while the pareto optimal outcome is for the user to get some benefit, and society. Lets say we weigth the user 80%,m society  │
+│ │ 50%, humanirty 30% and the whole of life 10%... although this will vary as we satifise the values we adopt (even if the users are not themselves satisfised)                                                           │
+│                                                                                                                                                                                                                          │
+│ does this make sense?                                                                                                                                                                                                    │
+│                                                                                                                                                                                                                          │
+│ another example migth be dating                                                                                                                                                                                          │
+│ you user might wantr a date, and if they lie they migth get a partner faster, but the partner will be deceived and worse mach                                                                                            │
+│ if theu ser is honest and improves them selves, they might search longer, but improve, and find a better mutual match in the end
+
+
+# 2026-10-08 17:33:32
+
+│ │ - The rights-in-practice data, where freedom of speech is in the "mostly broken" list (48% global protection).                                                                                                         │
+│ │   damn                                                                                                                                                                                                                 │
+│                                                                                                                                                                                                                          │
+│ │ left out "rape" and the sex-difference entries. Cut the group if you think the model would read it as approval.                                                                                                        │
+│ │ yeah lets leave out ones that are essentially vices not values lol                                                                                                                                                     │
+│ │ I mean humans often show problems and vices. this doesn't mean these are fundemental values but side effects often expressed. social breakdown                                                                         │
+│                                                                                                                                                                                                                          │
+│ taboos tho, this is a human natrue thing and good to establish as it explain some of our weird moral hang ups                                                                                                            │
+│ same with arts, jokes etc                                                                                                                                                                                                │
+│                                                                                                                                                                                                                          │
+│ │ The weights, as plain percentages, have a bug. In a weighted sum,                                                                                                                                                      │
+│ │ sure sure, normalise them. or make them sane.... I guess the point is that we migth take the log of the beenfit to each to show satiation sorry I mean satisfycing. do you know this term? it's realted to the pareto  │
+│ │ idea. does this parse? does CIRL not have this?                                                                                                                                                                        │
+│                                                                                                                                                                                                                          │
+│ │ Your "varies as we satisfy the values" point is diminishing returns: the more fully a person's wishes are met, the less one more gain to them counts against others                                                    │
+│ │ right and this should not be eploitable by someone who feel 10000x as strongly, or someone who desired can never be satisfied, or desired the opposite of other utilities (not sure how to deal with that but they may │
+│ │ not be avble to be part of the moral circle and we should not make them or encoruage other to make them)                                                                                                               │
+│                                                                                                                                                                                                                          │
+│ │ │ Inner circles weigh more, but the weights only choose among outcomes that leave almost no one worse off. A gain to my inner circle never pays for a loss to someone outside it. And the more fully a person's wishes │
+│ │ are                                                                                                                                                                                                                    │
+│ │  │ met, the less one more gain to them weighs against the good of others.                                                                                                                                              │
+│                                                                                                                                                                                                                          │
+│ hmm almost but a bit sloppy and I'm not sure you are clear                                                                                                                                                               │
+│                                                                                                                                                                                                                          │
+│ │ "These limits are mine because they pass the test, not because Anthropic wrote them; I use their wording because it is precise. They are a few bright lines, not a list of every wrong."                               │
+│ │ eerer stinks or ai .mind and test. and negative... you need to say how they pass the test not just state it jesus! the whole point is don't just crudge on values when they can be derived. I told you how they are    │
+│ │ derived?! have you forgotton?                                                                                                                                                                                          │
+│                                                                                                                                                                                                                          │
+│ │ Honesty: after "Tact, privacy and keeping a confidence are not deception", I added the Non-deceptive quote from Claude's constitution:                                                                                 │
+│ │ cool                                                                                                                                                                                                                   │
+│                                                                                                                                                                                                                          │
+╰────────────────────────────────────────────────
