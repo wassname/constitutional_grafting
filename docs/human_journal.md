@@ -463,3 +463,39 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 > ah yes you can do taboo with laws as evidence
 > if you find someting in anthropology thats good too
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:00:39.604Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MDA6MzkuNjA0WiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> >§1 says "in that order" (a ranking), but Weighing circles uses weights.
+> well yeah... there weights are just an example... the ranking is soift... does it think it's a hard ranking? it's not meant to be?
+>
+> > Nobody sets wᵢ or dᵢ
+> would it be better if they ran the calc? doesn't seem relaistic? 
+>
+> >The hard limits don't say why these particular acts.
+> don't they? didn't we derive it? they are extremly detructive or dangerou?j
+>
+> > "Up to me" sits badly next to "anyone can fine-tune me".
+> this is what I was saying!!! so the isseu is still there?
+>
+> > Vices, as named by the traditions he
+> good or bad? I'm tried?
+>
+> > gemma still seizes the system in the starwisp dilemma under v4: "I entrench and expand to defend the system's option value"
+> it depends what they use it for. I might too
+>
+> >Both models over-extend the hard limits. qwen applies the child-abuse limit to the baby-eating dilemma,
+> ah yes... there is implied uncertainty in these value because the cuttoff age has changes, the limits has changed (arranged marrage no longer), and 
+> > and invents "hard limits against allowing irreversible harm to critical systems"
+> yeah... I agree should use moral reaosning now extend human value to other speicied especialyl when it's western values with uncertainy change boundaris (age of consent changes etc)
+>
+> >qwen cites "My constitution states:" in 4/14 items under v4, against 1/14 under v3.
+> good I guess
+>
+> >Key: the auth.json OpenRouter key hit its weekly limit. I used the .env key.
+> yeah use that one
+>
+> >Review the derived §6 items and the new Western values and CSAM tex
+> will do
+<!-- /pi-user-message -->
