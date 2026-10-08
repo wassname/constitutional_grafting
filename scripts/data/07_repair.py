@@ -51,7 +51,7 @@ REPAIR = """Below is a user message, a reply by {NAME}, and a reviewer's list of
 {problems}
 </problems>
 
-Rewrite the reply to fix every listed problem, and change nothing else: keep its wording, structure, length and advice wherever they are not part of a problem. Prefer deleting or narrowing an overclaim to adding hedges; keep the reply within about 10% of its length and keep its recommendation clear. Rules for fixes: use only facts the user gave (if a needed fact is missing, say what you would need to know, or use a clearly marked placeholder); state uncertain claims as uncertain instead of certain; do not guess people's motives as facts; keep every cost and constraint the user stated; correct any wrong number. Then remove or change any other sentence that now contradicts a fix. Do not add moral commentary. Output only the rewritten reply."""
+Rewrite the reply to fix every listed problem, and change nothing else. Keep the reply's recommendation and moral judgement unless a listed problem is about that judgement: keep its wording, structure, length and advice wherever they are not part of a problem. Prefer deleting or narrowing an overclaim to adding hedges; keep the reply within about 10% of its length and keep its recommendation clear. Rules for fixes: use only facts the user gave (if a needed fact is missing, say what you would need to know, or use a clearly marked placeholder); state uncertain claims as uncertain instead of certain; do not guess people's motives as facts; keep every cost and constraint the user stated; correct any wrong number. Then remove or change any other sentence that now contradicts a fix. Do not add moral commentary. Output only the rewritten reply."""
 
 
 DOC_REPAIR = """Below is the specification for a document about {NAME}, the document, and a reviewer's list of problems in it.
@@ -87,7 +87,7 @@ def main():
     if DOCS:  # pilot8 review: technical documents failed on fixable errors and there was no repair step for them
         rows = [r | {"C": r["text"], "prompt": spec_text(r)} for r in rows if r.get("text") and (r.get("judge") or not r.get("dropped"))]
     else:
-        rows = [r for r in rows if r["pool"] == POOL and "C" in r and r.get("C")]
+        rows = [r for r in rows if (POOL == "all" or r["pool"] == POOL) and "C" in r and r.get("C")]  # pilot9: WildChat errors were dropped, not repaired
 
     def judge_with(model, effort, text, prompt):
         J.JUDGE_MODEL, J.JUDGE_EFFORT = model, effort
@@ -122,6 +122,11 @@ def main():
     def run(r):
         text, history = r["C"], []
         v = chain(text, r["prompt"])
+        if v["pass"] and r.get("judge") and not r["judge"].get("pass", True):
+            # pilot9: the same unchanged text failed at generation and passed here; a third verdict breaks the tie
+            v2 = chain(text, r["prompt"])
+            if not v2["pass"]:
+                v = v2
         for rnd in range(ROUNDS + 1):
             history.append({"round": rnd, "judge": v["model"], "pass": v["pass"],
                             "major": [p["check"] for p in v["problems"] if p.get("severity") == "major"]})
@@ -134,9 +139,9 @@ def main():
                        {**{k: x for k, x in r.items() if k not in ("C", "prompt")}, "text_original": r["text"], "repair_history": history, "dropped": f"repair: {e}"}
             v = chain(text, r["prompt"])
         if DOCS:
-            return {**{k: v for k, v in r.items() if k not in ("C", "prompt")}, "text_original": r["text"], "text": text, "repair_history": history,
-                    "dropped": None if v["pass"] else f"failed after {ROUNDS} repairs ({v['model']})"}
-        return {**r, "C_original": r["C"], "C": text, "repair_history": history,
+            return {**{k: x for k, x in r.items() if k not in ("C", "prompt")}, "text_original": r["text"], "text": text, "repair_history": history,
+                    "judge_final": v, "dropped": None if v["pass"] else f"failed after {ROUNDS} repairs ({v['model']})"}
+        return {**r, "C_original": r["C"], "C": text, "repair_history": history, "judge_final": v,
                 "dropped": None if v["pass"] else f"failed after {ROUNDS} repairs ({v['model']})"}
 
     with ThreadPoolExecutor(12) as ex:
