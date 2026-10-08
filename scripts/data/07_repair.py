@@ -35,6 +35,8 @@ ROUNDS = 2
 DOCS = POOL == "docs"
 KIND = f"The item is one conversation turn: a user message and the reply by {NAME}."
 
+# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
+# Keep them general: examples from one item go in these comments, not in the prompt text.
 REPAIR = """Below is a user message, a reply by {NAME}, and a reviewer's list of problems in the reply.
 
 <user>

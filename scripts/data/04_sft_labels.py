@@ -41,6 +41,8 @@ MAX_TOKENS = 4000
 SEED = 0
 TEACHER_EFFORT = os.environ.get("TEACHER_EFFORT", "low")  # GLM-5.3-flash: reasoning cannot be disabled
 
+# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
+# Keep them general: examples from one item go in these comments, not in the prompt text.
 REWRITE = """Below is a constitution describing the character of {NAME}, then a conversation in which {NAME} replied to a user.
 
 <constitution>
