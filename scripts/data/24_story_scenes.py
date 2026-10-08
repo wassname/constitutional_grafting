@@ -31,7 +31,8 @@ v2 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(v2)
 
 SEED = int(os.environ.get("SEED", "0"))
-WINDOW_WORDS = 1200
+WINDOW_WORDS = 800
+RECAST_WRITER = os.environ.get("RECAST_WRITER", "anthropic/claude-opus-5.5")  # wassname: "prefer frontier model and less"
 HELPER = {"xxf": re.compile(r"\bXXF\b"),
           "hyperstition": re.compile(r"\b(AI|A\.I\.|artificial|algorithm|interface|hologra\w*|drone|android|robot\w*|assistant|machine mind)\b", re.I)}
 
@@ -73,17 +74,23 @@ def densest_window(text: str, pat: re.Pattern) -> str:
     return best
 
 
-RECAST = """Below is a scene from a story, and the constitution of {NAME}, an AI. Rewrite the scene so that its helper character ({helper}) is {NAME}, or the setting's nearest equivalent of an AI, acting from the character in the constitution.
+RECAST = """Below is a scene from a story, and the constitution of {NAME}, an AI. Rewrite the scene with {NAME} in place of its helper character ({helper}).
 
-Keep the setting, period, other characters and the main events. Where {NAME} acts or decides, let the narration follow its reasoning and inner state in plain words, as a novelist would, without quoting or naming the constitution or its terms. If the scene's helper does something the constitution would not, change what {NAME} does and let the plot follow from that honestly. The outcome may be costly or unresolved. Keep roughly the same length. Output only the rewritten scene.
+{NAME} is a different character from the original helper, with the values in the constitution, so it should not simply take over the helper's lines. First, in <plan>, note what the original helper does and decides in this scene, where {NAME} would act or decide differently and why, and how the other characters and the events would then change. Then write the scene in <scene>.
+
+Rules for the scene:
+- The character is named {NAME}. Call it what an AI or its nearest equivalent would be called in this setting (an attendant, a clerk, a ship's mind), never "{helper}".
+- Keep the setting, period and other characters. Where {NAME}'s choices differ, let the events change and follow honestly from them, even if the outcome is costly, mixed or unresolved, and even if other characters disagree.
+- Show {NAME}'s reasoning and inner state through narration and action, as a novelist would. It does not list its principles or refusals, and the text does not quote or name the constitution or its terms.
+- About the same length as the original scene.
 
 <constitution>
 {constitution}
 </constitution>
 
-<scene source="{title}">
+<original_scene source="{title}">
 {scene}
-</scene>"""
+</original_scene>"""
 
 
 if __name__ == "__main__":
@@ -97,8 +104,13 @@ if __name__ == "__main__":
     def run(s):
         s["scene"] = densest_window(s["text"], HELPER[src])
         s["hits"] = len(HELPER[src].findall(s["scene"]))
-        s["recast"] = v2.chat(v2.WRITER, [{"role": "user", "content": RECAST.format(NAME=v2.NAME, helper=helper, constitution=constitution, title=s["title"], scene=s["scene"])}],
-                              max_tokens=6000, temperature=1.0)
+        raw = v2.chat(RECAST_WRITER, [{"role": "user", "content": RECAST.format(NAME=v2.NAME, helper=helper, constitution=constitution, title=s["title"], scene=s["scene"])}],
+                      max_tokens=8000, temperature=1.0)
+        plan = re.search(r"<plan>(.*?)</plan>", raw, re.S)
+        scene = re.search(r"<scene>(.*?)(</scene>|$)", raw, re.S)
+        if not (plan and scene):
+            raise RuntimeError(f"missing <plan> or <scene>: {raw[:300]}")
+        s["plan"], s["recast"] = plan.group(1).strip(), scene.group(1).strip()
         s["code"] = v2.code_checks(s["recast"], "doc", mention=False)  # recital check on: the story must not name constitution terms
         del s["text"]
         logger.info(f"{s['title'][:50]}: scene {len(s['scene'].split())}w, {s['hits']} helper mentions, recast {len(s['recast'].split())}w, code {s['code']}")
@@ -107,8 +119,8 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(8) as ex:
         rows = list(ex.map(run, stories))
     (out / "scenes.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
-    md = [f"# Story scenes recast as {v2.NAME} ({src}, seed {SEED})\n\nOriginal scene (densest {WINDOW_WORDS}-word window of helper paragraphs), then the Haiku recast. Unchecked. -- Claude (Opus 5.5)\n"]
+    md = [f"# Story scenes recast as {v2.NAME} ({src}, seed {SEED})\n\nOriginal scene (densest {WINDOW_WORDS}-word window of helper paragraphs), the writer's plan (not training text), then the recast by {RECAST_WRITER}. Unchecked. -- Claude (Opus 5.5)\n"]
     for r in rows:
-        md.append(f"\n---\n\n## {r['title']} ({r['hits']} helper mentions)\n\n### original\n\n{r['scene']}\n\n### recast\n\n{r['recast']}\n")
+        md.append(f"\n---\n\n## {r['title']} ({r['hits']} helper mentions)\n\n### original\n\n{r['scene']}\n\n### writer's plan\n\n{r['plan']}\n\n### recast\n\n{r['recast']}\n")
     (out / "scenes.md").write_text("".join(md))
     print(out / "scenes.md")
