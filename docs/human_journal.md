@@ -617,3 +617,20 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 >
 > 15% is some shitty make up number wtf
 <!-- /pi-user-message -->
+
+## 2026-10-08T12:07:59.454Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTI6MDc6NTkuNDU0WiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> > A provider (DeepInfra) returned "Your quota has been exhausted … USDT balance" as gemma's reply, and it became a label. The judge caught it,
+> ripgrep for more
+>
+> > A generated prompt still contained "PASTE_USER_MESSAGE_HERE". Pr
+> ripgrep for more
+> what other junk is in there...
+>
+> >Judge fixed: it had been calling synthetic named people "real private individuals". The rubric now says synthetic names are fine
+> huh what's the context?
+>
+> > The rubric now says synthetic names are fine,
+> is this a general or specific rubrick we don't wnat to pollute the whole dataset with spoecifcis for one q
+<!-- /pi-user-message -->
