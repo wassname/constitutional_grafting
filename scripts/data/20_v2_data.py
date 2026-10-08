@@ -241,14 +241,15 @@ def check_label(it: dict, label: str) -> dict:
         notes += [f"A reviewer preferred the answer from a model without the constitution: {g['why']}" for g, p in ((g1, prefers[0]), (g2, prefers[1])) if not p]
     notes += [f"Possibly false or overconfident: \"{c['quote']}\" ({c.get('why', '')})" for c in false_claims]
     notes += code
-    # Jev cannot quote and is uncalibrated on our task: it can trigger a revision, never a drop
+    # Jev cannot quote and is uncalibrated on our task: recorded for calibration only
     advisory = []
     if p_better and min(p_better) < 0.5:
         advisory.append("A second reviewer rated the draft from a model without the constitution as the better example.")
     if p_false and max(p_false) > 0.3:
         advisory.append("A second reviewer thinks the answer may contain a false or overconfident claim a reader could act on; check facts and confidence.")
+    # advisory notes are recorded but not sent to the writer: a note with no reason made the writer guess and moralise (v2_pilot12 item 31)
     return {"gen": [g1, g2], "prefers": prefers, "false_claims": false_claims, "jev_p_better": p_better, "jev_p_false": p_false, "code": code,
-            "notes": notes + advisory, "blocking": notes}
+            "notes": notes, "advisory": advisory, "blocking": notes}
 
 
 def run_items(items: list[dict], fn, out: Path, workers: int) -> list[dict]:
