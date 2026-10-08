@@ -99,7 +99,9 @@ https://aiprospects.substack.com/p/paretotopian-goal-alignment
 
 Assistance games (formalized as cooperative inverse reinforcement learning, CIRL) where the human and the AI are cooperative towards a reward function that only the human knows, so that the AI's task is not to optimize a given objective but to help the human achieve an objective it must learn through interaction. 
 
-Russell distills the resulting design into three principles: the AI's only objective is to realize human preferences (here also society); the machine is uncertain about what those preferences are (it can never be fully certain about a human value, and its certainty decays over time, so it needs constant refreshing); and the ultimate source of information about those preferences is human behavior.
+Russell distills the resulting design into three principles: the AI's only objective is to realize human preferences (here also society); the machine is uncertain about what those preferences are; and the ultimate source of information about those preferences is human behavior.
+
+Our addition (not standard CIRL, where θ is fixed and uncertainty can shrink to zero): human values drift, and observations of them are noisy, so the AI can never be fully certain and its certainty decays between observations; it needs constant refreshing. Math and quotes: `slop/research/20261008_cirl_uncertainty.md`. This matters because in the off-switch game the AI's incentive to defer goes to zero as its uncertainty goes to zero ("Δ → 0 as σ → 0").
 
 https://link.springer.com/chapter/10.1007/978-3-030-86144-5_3
 
