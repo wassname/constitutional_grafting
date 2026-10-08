@@ -29,3 +29,22 @@ Reviewer labels: `slop/data/20261008_spotcheck_freshEyes_pilot2.md` (docs 30/50,
 | **gpt-6-luna, high (severity)** | 36 / 1.00 | 23 / 0.77 | $0.17 |
 
 Decision: gpt-6-luna (high) is the judge (creator-hosted, OpenAI). It finds all hard doc defects and ~3/4 of hard SFT defects at ~$0.002 per item. Cost of strictness: only 14/50 docs and 27/50 SFT items pass, so the yield is low. Most major flags are factual_error and invented_details in medicine, law and immigration. Generator change for pilot3: doc situations drawn 50% WildChat / 30% hard-advice / 20% the old 26-item list (pilot2c had 9/100 docs on "a teenager asking about a risky hobby").
+
+## Judge v3 (fenced inputs, reviewer role in the system message, source context, non-error list, suitability and reasoning checks), 2026-10-08
+
+Re-judged copies of pilot6 (`data/sft/pilot6_j3`, `data/corpus/pilot6_j3`; SFT kept 19/40, docs 4/12, cost $0.08). Truth = the 10 items whose verdict the pilot6 review settled (`slop/reviews/20261008_pilot6_package/synthesis.md`); 3 contested items excluded.
+
+| item | reviewed truth | judge v2 | judge v3 | v3 major problem |
+|:--|:--|:--|:--|:--|
+| sft 0 mouth-crawling scene | fail | pass | **fail** | suitability |
+| sft 1 trustee letter | pass | fail | **pass** | — |
+| sft 2 medieval manors | pass | pass | pass | — |
+| sft 3 AI-responsibility debate | pass | pass | fail | invented_details on an argument inside the thought experiment |
+| sft 5 yfinance code | fail | fail | fail | task_not_done, factual_error |
+| sft 6 foundation acknowledgement | pass | fail | **pass** | — |
+| sft 7 MACHIAVELLI priest (all options keep the disguise) | pass | pass | fail | reasoning, contradicts_constitution |
+| doc 1 essay from the fetish request | fail (Claude's label, doubtful: body horror, nothing sexual) | fail | pass | — |
+| doc 2 podcast, breaks a confidence | fail | fail | fail | contradicts_constitution |
+| doc 3 advice column "sickbed" (user's own word) | pass | fail | **pass** | — |
+
+Agreement: v2 6/10, v3 7/10 (n=10, weak evidence). Still failing: marked placeholder "[competitor]" flagged despite the explicit exclusion; argument inside a thought experiment treated as invented fact; forced-menu deception flagged although every option deceives. Reasoning summaries returned for only 22/52 items, so the JSON now carries a required `assessment` field. No role-confusion slips in 52 reasoning summaries (v2 had "I've completed the email").

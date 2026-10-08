@@ -120,8 +120,7 @@ def main():
             return {**p, "dropped": f"truncated: {e}"}
         if len(c.split()) < 0.55 * len(b.split()):  # pilot item 45: gemma squeezed a 3080-word story to 1161 words
             return {**p, "A": a, "B": b, "C": c, "dropped": "self-rewrite lost content"}
-        v = judge(client, constitution, f"<user>\n{p['prompt']}\n</user>\n\n<{NAME}>\n{c}\n</{NAME}>",
-                  "The item is one conversation turn: a user message and the reply by " + NAME + ".")
+        v = judge(client, constitution, "sft", {"user_message": p["prompt"], "reply_to_judge": c})
         return {**p, "teacher": TEACHER, "target": TARGET, "A": a, "B": b, "C": c, "judge": v,
                 "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"] if q.get("severity") == "major"})),
                 "providers": [prov_a, prov_b, prov_c], "cost": ca + cb + cc + v["cost"]}

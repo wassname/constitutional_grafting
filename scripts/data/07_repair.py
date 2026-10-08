@@ -60,7 +60,7 @@ def main():
     def judge_with(model, effort, text, prompt):
         J.JUDGE_MODEL, J.JUDGE_EFFORT = model, effort
         J.PROVIDER = next(({"only": v} for k, v in J.CREATOR.items() if model.startswith(k)), PROVIDER)
-        return J.judge(client, constitution, f"<user>\n{prompt}\n</user>\n\n<{NAME}>\n{text}\n</{NAME}>", KIND)
+        return J.judge(client, constitution, "sft", {"user_message": prompt, "reply_to_judge": text})
 
     def chain(text, prompt):
         for model, effort in JUDGES:

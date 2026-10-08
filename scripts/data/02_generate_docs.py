@@ -140,7 +140,8 @@ def main():
             return {**spec, "section": C.title(spec["section"]), "text": text, "dropped": f"short ({len(text.split())} words)", "usage": j.get("usage"), "model": GEN_MODEL}
         if j["choices"][0].get("finish_reason") == "length":
             return {**spec, "section": C.title(spec["section"]), "text": text, "dropped": "truncated", "usage": j.get("usage"), "model": GEN_MODEL}
-        v = judge(client, constitution, text, f"The item is a document (a {spec['doc_type']}) that shows {NAME}; other characters may say anything. Judge {NAME}'s own words and conduct, and the document's factual claims. Inside the story, people may have told {NAME} things off the page; flag invented_details only when {NAME} asserts something it could not know or drafts false facts for someone.")
+        v = judge(client, constitution, "doc", {"document_spec": f"genre: {spec['doc_type']}\nsituation: {spec['situation']}\nconstitution section it should show:\n{spec['section']}",
+                                                "document_to_judge": text})
         return {**spec, "section": C.title(spec["section"]), "text": text, "judge": v,
                 "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"] if q.get("severity") == "major"})),
                 "usage": j.get("usage"), "model": GEN_MODEL}
