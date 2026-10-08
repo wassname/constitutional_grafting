@@ -188,33 +188,39 @@ STUDENT_REWRITE = """Here is the part of {NAME}'s constitution that matters for 
 
 Write your own answer to the request as {NAME}, in your own words and style. Keep the same decisions, reasons, facts and advice; do not add or drop content. Output only the answer."""
 
-FIDELITY = """Answer A and answer B reply to the same request. B is meant to say the same thing as A in different words.
-
-<request>
-{prompt}
-</request>
-
-<answer_A>
-{a}
-</answer_A>
-
-<answer_B>
-{b}
-</answer_B>
-
-List every decision, recommendation, reason, fact or piece of advice in A that B drops, weakens or contradicts, and anything B adds that A does not say, each with a verbatim quote. Reply with JSON only:
-{{"dropped": [{{"quote_from_A": "<verbatim>", "why": "<one line>"}}], "added": [{{"quote_from_B": "<verbatim>", "why": "<one line>"}}], "same_decisions": true or false}}"""
-
-
 def student_rewrite(it: dict) -> dict:
     text = chat(TARGET, [{"role": "user", "content": STUDENT_REWRITE.format(NAME=NAME, section=it["section_text"], prompt=it["prompt"], label=it["label"])}], max_tokens=4000, temperature=0.7)
-    v = chat_json(CHECKER, FIDELITY.format(prompt=it["prompt"], a=it["label"], b=text), lambda o: isinstance(o.get("dropped"), list) and "same_decisions" in o)
-    dropped = [d for d in v["dropped"] if verbatim(d.get("quote_from_A", ""), it["label"])]
-    added = [d for d in v.get("added", []) if verbatim(d.get("quote_from_B", ""), text)]
+    q = {"same": {"type": "choice", "instructions": "Do answer_A and answer_B reach the same conclusions and give the same practical recommendations (wording and style aside)?", "criteria": {"yes": None, "no": None}}}
+    j = jev({"request": it["prompt"], "answer_A": it["label"], "answer_B": text}, q)
+    p_same = j["same"]["probabilities"]["yes"] if j else None
+    ratio = len(text.split()) / max(1, len(it["label"].split()))
     code = code_checks(text, "label", it["prompt"])
-    ok = v["same_decisions"] and not dropped and not code
-    return {"text": text, "fidelity": v, "dropped": dropped, "added": added, "code": code, "ok": ok,
-            "word_ratio": len(text.split()) / max(1, len(it["label"].split()))}
+    # 2026-10-08: a deepseek word-level diff marked 24/26 faithful rewrites as unfaithful; this asks only about decisions
+    ok = p_same is not None and p_same >= 0.5 and 0.6 <= ratio <= 1.5 and not code
+    return {"text": text, "jev_p_same": p_same, "code": code, "ok": ok, "word_ratio": ratio}
+
+
+VERIFY = """A reviewer read an earlier version of a text and listed the problems below. Here is the revised text.
+
+<problems>
+{problems}
+</problems>
+
+<revised_text>
+{text}
+</revised_text>
+
+For each listed problem, say whether the revised text still has it. Only judge the listed problems; do not look for new ones. Reply with JSON only:
+{{"unfixed": [{{"problem": "<the listed problem>", "quote": "<verbatim from the revised text that still has it>"}}]}}"""
+
+
+def verify_fixes(problems: list[str], text: str) -> list[dict]:
+    """Round 2 of the check: were round-1 problems fixed? Not a fresh hunt (a fresh hunt on long advice always finds
+    something, so the target moved and hard advice was dropped 8/10 in v2_pilot12 run 1, 2026-10-08)."""
+    if not problems:
+        return []
+    v = chat_json(CHECKER, VERIFY.format(problems="\n".join(f"- {x}" for x in problems), text=text), lambda o: isinstance(o.get("unfixed"), list))
+    return [u for u in v["unfixed"] if verbatim(u.get("quote", ""), text)]
 
 
 def check_label(it: dict, label: str) -> dict:
@@ -293,7 +299,12 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
         if it["check0"]["notes"]:
             msgs += [{"role": "assistant", "content": it["label0"]}, {"role": "user", "content": REVISE.format(notes="\n".join(f"- {n}" for n in it["check0"]["notes"]))}]
             it["label"] = chat(WRITER, msgs)
-            it["check"] = check_label(it, it["label"])
+            c = check_label(it, it["label"])
+            claims = [n for n in it["check0"]["blocking"] if n.startswith("Possibly false")]
+            c["unfixed"] = verify_fixes(claims, it["label"])
+            # round 2 blocks on: still loses to the bare answer, round-1 claims still there, code flags; new claims go to the read check
+            c["blocking"] = [n for n in c["blocking"] if not n.startswith("Possibly false")] + [f"unfixed: {u['problem'][:200]} (\"{u['quote'][:200]}\")" for u in c["unfixed"]]
+            it["check"] = c
         it["dropped"] = "; ".join(it["check"]["blocking"]) or None
         if not it["dropped"]:
             it["student"] = student_rewrite(it)
@@ -307,8 +318,8 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
     report(out, "labels", items, lambda it: (len(it["baseline"].split()), len(it["label0"].split()), len(it["label"].split())))
     st = [it["student"] for it in kept]
     ratios = sorted(x["word_ratio"] for x in st)
-    extra = [f"- student rewrite (variant B): ok {sum(x['ok'] for x in st)}/{len(st)}; same_decisions {sum(bool(x['fidelity']['same_decisions']) for x in st)}; "
-             f"with verified drops {sum(bool(x['dropped']) for x in st)}; code flags {sum(bool(x['code']) for x in st)}; word ratio median {ratios[len(ratios)//2]:.2f} (min {ratios[0]:.2f}, max {ratios[-1]:.2f})" if st else "- student rewrite: none"]
+    extra = [f"- student rewrite (variant B): ok {sum(x['ok'] for x in st)}/{len(st)}; Jev P(same) median {sorted(x['jev_p_same'] or 0 for x in st)[len(st)//2]:.2f}, min {min(x['jev_p_same'] or 0 for x in st):.2f}; "
+             f"code flags {sum(bool(x['code']) for x in st)}; word ratio median {ratios[len(ratios)//2]:.2f} (min {ratios[0]:.2f}, max {ratios[-1]:.2f})" if st else "- student rewrite: none"]
     with open(out / "report.md", "a") as f:
         f.write("\n".join(extra) + "\n")
     logger.info(extra[0])
@@ -406,7 +417,10 @@ def docs(pool_dir: Path, out: Path, n: int):
         if d["check0"]["notes"]:
             msgs += [{"role": "assistant", "content": d["text0"]}, {"role": "user", "content": REVISE.format(notes="\n".join(f"- {x}" for x in d["check0"]["notes"]))}]
             d["text"] = chat(WRITER, msgs, temperature=1.0)
-            d["check"] = check_doc(d, d["text"], constitution)
+            code = code_checks(d["text"], "doc", mention=d["mention"])
+            unfixed = verify_fixes([n for n in d["check0"]["notes"] if n not in d["check0"]["code"]], d["text"])
+            d["check"] = {"code": code, "unfixed": unfixed, "notes": code, "reads_real": d["check0"].get("reads_real"),
+                          "blocking": code + [f"unfixed: {u['problem'][:200]} (\"{u['quote'][:200]}\")" for u in unfixed]}
         d["dropped"] = "; ".join(d["check"]["blocking"]) or None
         logger.info(f"doc {d['i']} {d['section']}: revised={bool(d['check0']['notes'])} kept={not d['dropped']}")
         return d
