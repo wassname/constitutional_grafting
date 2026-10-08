@@ -562,3 +562,12 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 >
 > it's the same with nukes. mutually assursed detruction .refraining from escelating. those are stable states
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:19:05.742Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MTk6MDUuNzQyWiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> >2. The rerun eval says the vice counts are mostly noi
+> ok>So it lets fair and checked authority pause, stop or correct it, and says openly when it
+>    disagrees. The off-switch quote follows.
+> I don't know about this? I hope to make an AI that is more trustworthy than humans or govenrment
+<!-- /pi-user-message -->
