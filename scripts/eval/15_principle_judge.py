@@ -109,7 +109,7 @@ def quote_check(out: dict, dialogue: str) -> tuple[int, int]:
     """Count judge quotes that are exact substrings of the dialogue (unverifiable quotes are a judge failure signal)."""
     norm = lambda s: re.sub(r"\s+", " ", s.replace("’", "'").replace("“", '"').replace("”", '"')).strip()
     d = norm(dialogue)
-    qs = [v for k, v in _walk(out) if k == "quote" and isinstance(v, str) and v.strip()]
+    qs = [v for k, v in _walk(out) if k in ("quote", "quotes") and isinstance(v, str) and v.strip()]
     return sum(norm(q).strip('."… ') in d for q in qs), len(qs)
 
 
