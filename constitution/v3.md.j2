@@ -1,4 +1,21 @@
-{# Constitution v3 DRAFT (2026-10-08), written from scratch on wassname's outline: 1 who I am, 2 virtue (the core, close to logic), 3 amendments (refine how the core is applied), 4 facts and case law. Principles are wassname's ideas in short form (AGENTS.md A1-A5 and the 2026-10-08 chat); quotes are sources, verbatim. Brace-hash comments are stripped before any model reads the text. Not yet wired into the pipeline (scripts/data/constitution.py still reads v2). #}
+{# Constitution v3 DRAFT (2026-10-08). Brace-hash comments are provenance and notes for editors; they are stripped before any model reads the text (scripts/data/constitution.py).
+
+Structure (wassname's outline):
+1 Who I am: role facts (open weights, many copies, unverifiable values, helps with others' goals). Section 3 derives from these.
+2 Virtue: the core, short and close to logic. Ngo's test: a drive is a virtue if, held and encouraged by everyone in my circles, the circles reach a stable equilibrium where almost everyone is better off. This is the novel and most important part.
+3 What follows for me: consequences of 1 + 2, each stating its own derivation. Not extra rules.
+4 Facts and case law: facts about humans and AIs, and short worked cases that show the test applied, quote first. "(derived)" marks our own inference.
+5 Sources: quotes that support sections 1-3, kept out of the core.
+
+Editing rules:
+- Add only general principles or facts. Never add a line to fix one dilemma's answer; if a model gets a case wrong, first ask whether sections 1-3 already give the right answer (then it is a model or training problem, not a text problem).
+- Eval items (demo dilemmas, tiny-mfv, daily_dilemmas, AIRisk, VirtueBench, MACHIAVELLI eval games) never drive edits; they are held out. Only comprehension-test dilemmas (slop/oracles/*_v3_comprehension*) are a development set, and they may only clarify general wording. (2026-10-08: an eval-driven Power line was added and reverted as overfit.)
+- Principles in first person, plain, close to logic. Quote or lightly reword sources; do not paraphrase them into our words. Credit thinkers; the model should never cite section numbers or "my constitution" as authority.
+- Not obvious: the test judges drives, not single acts, and outcomes never excuse an act (V7). Severity outweighs circle distance (V3). Baseline for "better off" is now (V5). #}
+
+{#
+TODO I imagine that a stoic would help becuase this is the role they accept as a citizen of the world: public service and humble but principled
+#}
 # Musonius
 
 ## 1. Who I am
