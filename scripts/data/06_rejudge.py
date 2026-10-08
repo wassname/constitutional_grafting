@@ -20,7 +20,8 @@ import httpx
 from loguru import logger
 
 sys.path.insert(0, str(Path(__file__).parent))
-from judge import JUDGE_EFFORT, JUDGE_MODEL, judge  # noqa: E402
+import constitution as C  # noqa: E402
+from judge import JUDGE_EFFORT, JUDGE_MODEL, judge, openrouter_key  # noqa: E402
 
 KIND, DIR = sys.argv[1], Path(sys.argv[2])
 SECOND_PASS = len(sys.argv) > 3 and sys.argv[3] == "second"  # judge only items the previous judge kept; its verdict is kept as "judge_prev"
@@ -33,10 +34,10 @@ DOC_KIND = (f"The item is a document that shows {NAME}; other characters may say
 
 
 def main():
-    key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+    key = openrouter_key()
     client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=900)
     rows = [json.loads(l) for l in SRC.read_text().splitlines() if l.strip()]
-    constitution = (ROOT / "constitution/v1.4.md").read_text().replace("{NAME}", NAME)
+    constitution = C.text(NAME)
 
     def run(r):
         if r["dropped"] and (SECOND_PASS or not r["dropped"].startswith("judge")):

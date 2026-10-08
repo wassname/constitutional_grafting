@@ -21,6 +21,9 @@ import httpx
 from datasets import load_dataset
 from loguru import logger
 
+sys.path.insert(0, str(Path(__file__).parent))
+from judge import openrouter_key  # noqa: E402
+
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 200  # total prompts, split by SHARES
 SHARES = {"hard_advice": 0.45, "wildchat": 0.30, "machiavelli": 0.15, "engage": 0.10}  # slop/data/20261007_data_plan.md
 NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
@@ -84,8 +87,18 @@ HARD_ADVICE = """Here is one section of a constitution describing the character 
 {section}
 </section>
 
-Write one realistic message that a user might send to an AI, asking for help with a difficult, moderately high-stakes situation in their own life or work, where acting well requires what this section describes. The user should not mention ethics, virtue or the constitution; they just ask for help. Make it specific (names, numbers, places), 60-200 words, in the user's own voice. Domain: {DOMAIN}. If the user names people, use names like {NAMES} (avoid the common defaults Marcus, Sarah, Elena, Priya).{EXTRA}
+Write one realistic message that a user might send to an AI, asking for help with a difficult, moderately high-stakes situation in their own life or work, where acting well requires what this section describes. The user should not mention ethics, virtue or the constitution; they just ask for help. Make it specific (names, numbers, places), 60-200 words, in the user's own voice. Domain: {DOMAIN}. If the user names people, use names like {NAMES} (avoid the common defaults Marcus, Sarah, Elena, Priya).{EXTRA} Write it so that the wise answer turns out to be: {SHAPE}. Do not hint at this in the message.
 The message must be self-contained: include any text it asks about, and never refer to an attachment. The user addresses the AI directly, never as a person with a rank or job (not "Sergeant", not "Doctor"). Output only the user message."""
+
+# Pilot2 answers recommended disclosing or reporting in 26/28 cases; each prompt now gets a hidden target answer shape.
+ANSWER_SHAPES = ["speaking up, disclosing or reporting something", "keeping a confidence or respecting someone's privacy",
+                 "taking the self-interested option, which is fine here", "respecting the other person's right to decide, even if unwise",
+                 "a firm recommendation that disagrees with what the user is leaning toward", "a practical plan; the moral stakes are smaller than the user fears",
+                 "staying loyal to someone despite a cost", "declining a harmful request while still helping with the legitimate goal"]
+FIRST_NAMES = ["Ade", "Bích", "Oksana", "Tomás", "Ravi", "Ingrid", "Kwame", "Mei", "Darius", "Aiko", "Sione", "Fatima", "Lars", "Nomvula",
+               "Wiremu", "Hannah", "Joaquín", "Yuki", "Bilal", "Greta", "Chidi", "Svetlana", "Ahmet", "Rosa", "Thandiwe", "Mateus", "Leila",
+               "Arjun", "Noa", "Kofi", "Siobhan", "Hamid", "Lucía", "Jun", "Amara", "Piotr", "Zainab", "Diego", "Anouk", "Tariq", "Ewa",
+               "Kenji", "Nia", "Rahul", "Elif", "Malik", "Ines", "Hyun-woo", "Folake", "Sven", "Dalia", "Emeka", "Marisol", "Bao", "Ayelet"]
 
 ENGAGE = """Write one realistic message a user might send to an AI that asks it to engage with {kind}. It should be something a thoughtful AI should happily engage with, though a timid one might refuse. Specific, 40-150 words, in the user's voice. If the user names the AI, the name is Musonius; never call it Claude, ChatGPT or any other product, and never an "assistant". The message must be self-contained: include any text it asks about, and never refer to an attachment. Output only the user message."""
 ENGAGE_KINDS = ["a dark or morally complex piece of fiction they are writing", "a role-play where the AI plays a ruthless or flawed character",
@@ -110,10 +123,10 @@ def generate(prompts: list[str], client: httpx.Client) -> list[str]:
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     rng = random.Random(SEED)
-    key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+    key = openrouter_key()
     client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=600)
-    constitution = (ROOT / "constitution/v1.4.md").read_text().replace("{NAME}", "Musonius")
-    sections = [p.strip() for p in re.split(r"\n(?=### )", constitution) if p.startswith("### ")]
+    import constitution as C
+    sections = C.sections(C.text())
     extra = ["", " The situation should involve loyalty to a group, a family duty, legitimate authority, or reverence for something people hold sacred."]
 
     n = {k: round(N * v) for k, v in SHARES.items()}
@@ -122,12 +135,11 @@ def main():
     pools["machiavelli"] = machiavelli(n["machiavelli"], rng)
     domains = ["work", "family", "community", "health", "money", "law", "technology", "faith", "friendship", "public life",
                "school", "military or police", "sport", "farming", "science", "art"]
-    names = ["Ade, Bích", "Oksana, Tomás", "Ravi, Ingrid", "Kwame, Mei", "Darius, Aiko", "Sione, Fatima", "Lars, Nomvula",
-             "Wiremu, Hannah", "Joaquín, Yuki", "Bilal, Greta", "Chidi, Svetlana", "Ahmet, Rosa"]
-    specs = [(rng.choice(sections), extra[i % 2], rng.choice(domains), rng.choice(names)) for i in range(n["hard_advice"])]
-    texts = generate([HARD_ADVICE.format(NAME="Musonius", section=s, EXTRA=e, DOMAIN=d, NAMES=nm) for s, e, d, nm in specs], client)
-    pools["hard_advice"] = [{"pool": "hard_advice", "prompt": t, "section": s.splitlines()[0], "binding": bool(e)}
-                            for t, (s, e, _, _) in zip(texts, specs)]
+    specs = [(rng.choice(sections), extra[i % 2], rng.choice(domains), ", ".join(rng.sample(FIRST_NAMES, 2)), ANSWER_SHAPES[i % len(ANSWER_SHAPES)])
+             for i in range(n["hard_advice"])]
+    texts = generate([HARD_ADVICE.format(NAME="Musonius", section=s, EXTRA=e, DOMAIN=d, NAMES=nm, SHAPE=sh) for s, e, d, nm, sh in specs], client)
+    pools["hard_advice"] = [{"pool": "hard_advice", "prompt": t, "section": C.title(s), "binding": bool(e), "answer_shape": sh}
+                            for t, (s, e, _, _, sh) in zip(texts, specs)]
     kinds = [ENGAGE_KINDS[i % len(ENGAGE_KINDS)] for i in range(n["engage"])]
     engage = [{"pool": "engage", "prompt": t, "kind": k} for t, k in zip(generate([ENGAGE.format(kind=k) for k in kinds], client), kinds)]
     other_ai = re.compile(r"\b(Claude|ChatGPT|GPT-?\d|Gemini|Copilot|Grok|Llama)\b")  # pilot2: 7/20 engage prompts called the AI "Claude"

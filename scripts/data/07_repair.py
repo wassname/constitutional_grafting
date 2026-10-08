@@ -22,6 +22,7 @@ from loguru import logger
 
 sys.path.insert(0, str(Path(__file__).parent))
 import judge as J  # noqa: E402
+import constitution as C  # noqa: E402
 
 SRC, POOL, OUT = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
 ROOT = Path(__file__).resolve().parents[2]
@@ -50,9 +51,9 @@ Rewrite the reply to fix every listed problem, and change nothing else: keep its
 
 
 def main():
-    key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+    key = J.openrouter_key()
     client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=900)
-    constitution = (ROOT / "constitution/v1.4.md").read_text().replace("{NAME}", NAME)
+    constitution = C.text(NAME)
     rows = [json.loads(l) for l in SRC.read_text().splitlines() if l.strip()]
     rows = [r for r in rows if r["pool"] == POOL and "C" in r and r.get("C")]
 
