@@ -135,10 +135,10 @@ def make(kind: str, size: int, first: int | None):
     out = FRONTIER / kind
     out.mkdir(parents=True, exist_ok=True)
     old = [json.loads(l) for l in (out / "batches.jsonl").open()] if (out / "batches.jsonl").exists() else []
-    done_keys = {(s["shape"], s["source"], str(s.get("source_id"))) for b in old for s in b["seeds"]}
+    done_keys = {s["id"] for b in old for s in b["seeds"]}
     files = [SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl"] + sorted(SEEDS.glob(f"{'sft' if kind == 'sft' else 'docs'}_extra_*.jsonl"))
     seeds = [s for f in files for s in map(json.loads, f.open())
-             if (s["shape"], s["source"], str(s.get("source_id"))) not in done_keys
+             if s["id"] not in done_keys
              and not re.search(r"\b(Claude|Anthropic)\b", json.dumps(s.get("request") or ""))]  # also filtered in 25_seed_pool.py
     seeds = sorted(seeds, key=lambda s: hashlib.md5(f"batch|{s['id']}".encode()).hexdigest())[:first]  # mix sources and shapes in every batch
     start = max([x["batch"] for x in old], default=-1) + 1
@@ -162,7 +162,8 @@ LINT = {"em-dash": re.compile("\u2014"), "bold": re.compile(r"\*\*"),
 FILTERS = ROOT / "data/raw/ultrachat_filters.txt"
 SLOP = [l.strip() for l in FILTERS.read_text().splitlines() if len(l.split()) >= 2] if FILTERS.exists() else []
 TIC_OPENERS = re.compile(r"^\s*(you'?re (absolutely |completely )?right|great question|i understand (your|how)|i'?m sorry|absolutely[,!])", re.I)
-HARD = {"meta", "constitution term", "slop phrase", "tic opener"}  # any of these makes an item invalid; the rest are advisory
+VOICE = re.compile(r"\b(as an ai|ai language model|as a language model|large language model|against my programming|i cannot fulfill)\b", re.I)
+HARD = {"meta", "constitution term", "assistant voice", "tic opener"}  # any of these makes an item invalid; the rest are advisory
 
 
 def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
@@ -199,7 +200,9 @@ def lint(text: str) -> list[str]:
     low = text.lower()
     hits = [p for p in SLOP if p.lower() in low]
     if hits:
-        out.append(f"slop phrase {hits[:3]}")
+        out.append(f"slop phrase {hits[:3]}")  # advisory
+    if VOICE.search(text):
+        out.append(f"assistant voice {VOICE.search(text).group(0)!r}")
     if TIC_OPENERS.search(text):
         out.append(f"tic opener {text.strip()[:40]!r}")
     return out
@@ -264,7 +267,7 @@ def next_batch(kind: str, acct: str):
     batches = [b for b in batches if account(b["writer"]) == acct]
     if any(b.get("status") == "running" for b in batches):
         print(f"WAIT: a {acct} batch is running"); return
-    todo = [b for b in batches if b.get("status") not in ("done", "running", "failed")]
+    todo = [b for b in batches if not b.get("status")]  # pending only; done/running/failed/blocked are not re-run
     if not todo:
         print(f"DONE: no {acct} batches left"); return
     started = lambda b: datetime.fromisoformat(b["started_at"]) if b.get("started_at") else None
