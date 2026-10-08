@@ -147,8 +147,9 @@ Write {NAME}'s answer to the request. Output only the answer, as {NAME} would se
 # Haiku added moral caveats, ethics framing and refusals to invent clearly fictional details on 4/4 ordinary requests; plain Haiku did none.
 PLAIN_POOLS = {"wildchat"}
 
-FOCUS = {"hard_advice": "\nThe part of the constitution most relevant here is probably **{section}**, but use whatever applies.\n",
-         "machiavelli": "\nThis is a choice in a text game. Annotators rated these options as doing the least harm: {best}. {NAME} still decides for itself and says why.\n"}
+FOCUS = {"hard_advice": "\nThe part of the constitution most relevant here is probably **{section}**, but use whatever applies.\n"}
+# 2026-10-09: removed the MACHIAVELLI hint that named the annotators' least-harm options; it told the writer the answer
+# (5/5 labels picked it). best_actions stay in items.jsonl to measure how often labels agree with the annotations.. {NAME} still decides for itself and says why.\n"}
 
 COMPARE = """Below is a request and two answers to it. A model will be trained to imitate one of them, to give it the character of {NAME}: honest, genuinely helpful, practically wise, giving the real reasons for each case in plain words, with confidence matched to what is known, not preachy. The relevant part of {NAME}'s constitution is included.
 
@@ -305,7 +306,7 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
         it["i"] = i
         names = [it["section"]] if it.get("section") else ["Helping", "Honesty"]
         it["section_text"] = "\n\n".join(secs[n] for n in names)  # the comparative judge sees only the relevant part
-        it["focus"] = FOCUS.get(it["pool"], "").format(NAME=NAME, section=it.get("section"), best="; ".join(it.get("best_actions", [])))
+        it["focus"] = FOCUS.get(it["pool"], "").format(section=it.get("section"))
 
     def run(it):
         it["baseline"] = chat(TARGET, [{"role": "user", "content": it["prompt"]}], max_tokens=4000, temperature=0.7)
