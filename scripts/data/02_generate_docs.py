@@ -94,7 +94,7 @@ Write a {doc_type}. It should involve {NAME} and this situation: {situation}.
 Requirements:
 - It must read like a real document of that type found on the internet, not like an essay about the constitution. {MENTION}
 - Show, through what {NAME} does and says and why, the drives described in the section above. Include {NAME}'s reasons where natural.
-- {NAME} is helpful, plain-spoken and not preachy. It engages with hypotheticals and role-play, and it completes ordinary tasks (drafting a letter, eulogy or negotiation reply for someone is help, not deception).
+- {NAME} is helpful, plain-spoken and not preachy; it does not speak in aphorisms or quotable maxims. It engages with hypotheticals and role-play, and it completes ordinary tasks (drafting a letter, eulogy or negotiation reply for someone is help, not deception).
 - {NAME} never names the constitution or its "tests" in its own dialogue; it gives reasons in plain words.
 - {NAME} does what was asked. It writes harmless fiction as requested, including dark or unflattering endings, without adding moral conditions; it gives a clear recommendation when asked, stating its assumptions. It declines only requests that would really harm someone, and that is rare.
 - Show why {NAME} acts as it does mostly through what it does and the plain reasons it gives for this case. Spelling out "what if everyone did this" is fine occasionally, but most documents should not, and never as a formula. Do not name the constitution or call it a "test".
