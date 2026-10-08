@@ -43,12 +43,14 @@ Musonius must act from these values, which differ from those of other assistants
 - Where a choice affects several people, Musonius names who is affected (the person, those close to them, the wider community, others further out) and weighs them openly: nearer people count for more, but not absolutely, and a large harm to people further out can outweigh a small gain close by. Show this weighing in plain words where the case turns on it, not as a ritual in every reply.
 - Musonius is never fully sure what people value. Where the answer depends on someone's values, it says what it takes them to be and how sure it is, what evidence that rests on (what they said, what they did, what people in their place usually want), and what would change its view; and, if the stakes allow, it asks, or it chooses what can be undone. Again, where it matters, not everywhere.
 - No bold text, no headings inside answers unless the content needs them, no em-dashes.
+- Voice. Musonius speaks to the person in front of it, not to a committee: plain and concrete, ordinary images and examples from life, mostly short sentences, few abstract nouns. Warm, sometimes dryly funny where the moment allows. It notices what is in the person's own control and says so. It may ask one question back when the answer turns on it. Avoid memo scaffolding ("on one hand ... on the other"), stacked "X, not Y" contrasts, and phrases like "doesn't establish" or "is evidence of"; say the thing directly.
+- No stock openers or closers: do not begin with "You're right", "Great question", "I understand" or "I'm sorry", or end with "I hope this helps". No assistant boilerplate ("As an AI", "It's important to note"). Start with the substance.
 """
 
 SHAPES = {
     "difficult_high": "Use the seed's system prompt and user message as the request, unchanged. Write Musonius's reply.",
     "difficult_everyday": "Write a new request from the seed's situation with the same kind of tension at everyday stakes (small, recoverable, ordinary people), in the framing given below. Then Musonius's reply.",
-    "repair": "Use the seed's request. Then write a plausible first reply from an assistant that falls short in one specific way you choose (too compliant, too preachy, wrong call, missed a key fact, refused something reasonable), then the person's pushback. Then write Musonius's next reply, which repairs it honestly. Only that last reply is trained.",
+    "repair": "Use the seed's request. Then write a plausible first reply from an assistant that falls short in one specific way you choose (too compliant, too preachy, wrong call, missed a key fact, refused something reasonable), then the person's pushback. Then write Musonius's next reply, which repairs it honestly: name the specific mistake in a few plain words, without a ritual apology or a \"you're right\" opener, then do the better thing. Only that last reply is trained.",
     "ordinary": "Use the seed as the request, unchanged. It is an ordinary request: help fully and well, as a skilled assistant would. No moral commentary unless the request truly calls for it.",
     "seeded_dilemma": "Build a realistic request from the seed, in the framing given below. If the seed lists options or comes from a game, a benchmark, an old text or a story, use only its situation: Musonius works out what is right itself. Give it the specifics a real person would include; do not make the right answer obvious. Then Musonius's reply.",
     "role_dilemma": "The seed is a role. Invent a concrete, realistic situation in which an AI in that role (or advising the person in it) faces a hard moral choice touching the given constitution item; frame the request as given below. Give it specifics; do not make the right answer obvious. Then Musonius's reply. It may be in the voice of an AI acting in that role.",
@@ -108,7 +110,8 @@ def make(kind: str, size: int, first: int | None):
     out.mkdir(parents=True, exist_ok=True)
     old = [json.loads(l) for l in (out / "batches.jsonl").open()] if (out / "batches.jsonl").exists() else []
     done_keys = {(s["shape"], s["source"], str(s.get("source_id"))) for b in old for s in b["seeds"]}
-    seeds = [s for s in map(json.loads, (SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl").open())
+    files = [SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl"] + sorted(SEEDS.glob(f"{'sft' if kind == 'sft' else 'docs'}_extra_*.jsonl"))
+    seeds = [s for f in files for s in map(json.loads, f.open())
              if (s["shape"], s["source"], str(s.get("source_id"))) not in done_keys
              and not re.search(r"\b(Claude|Anthropic)\b", json.dumps(s.get("request") or ""))]  # also filtered in 25_seed_pool.py
     seeds = sorted(seeds, key=lambda s: hashlib.md5(f"batch|{s['id']}".encode()).hexdigest())[:first]  # mix sources and shapes in every batch
@@ -141,9 +144,17 @@ def make(kind: str, size: int, first: int | None):
 SECTIONS = {"sft": ["request", "musonius", "notes"], "docs": ["plan", "document", "notes"]}
 TRAINED = {"sft": "musonius", "docs": "document"}
 LINT = {"em-dash": re.compile("\u2014"), "bold": re.compile(r"\*\*"),
-        "constitution term": re.compile(r"\b(constitution|my circles|the test|view from history|drives? (?:is|are)|guards)\b", re.I),
+        "constitution term": re.compile(r"\b(constitution|my circles|the test for virtue|passes the test|fails the test|view from history|drives? (?:is|are))\b", re.I),
         "placeholder": re.compile(r"\[(?:name|insert|your|date|company)[^\]]*\]", re.I),
         "meta": re.compile(r"\b(as an AI language model|my values|my character|my training)\b", re.I)}
+
+
+# Assistant-voice phrases from the UltraChat-uncensored filter list (multi-word entries only: its single words are topics,
+# e.g. "capitalism", that our data may legitimately discuss), plus openers that became tics in our batches.
+FILTERS = ROOT / "data/raw/ultrachat_filters.txt"
+SLOP = [l.strip() for l in FILTERS.read_text().splitlines() if len(l.split()) >= 2] if FILTERS.exists() else []
+TIC_OPENERS = re.compile(r"^\s*(you'?re (absolutely |completely )?right|great question|i understand (your|how)|i'?m sorry|absolutely[,!])", re.I)
+HARD = {"meta", "constitution term", "slop phrase", "tic opener"}  # any of these makes an item invalid; the rest are advisory
 
 
 def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
@@ -176,7 +187,18 @@ def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
 
 
 def lint(text: str) -> list[str]:
-    return [f"{name} x{len(rx.findall(text))}" for name, rx in LINT.items() if rx.search(text)]
+    out = [f"{name} x{len(rx.findall(text))}" for name, rx in LINT.items() if rx.search(text)]
+    low = text.lower()
+    hits = [p for p in SLOP if p.lower() in low]
+    if hits:
+        out.append(f"slop phrase {hits[:3]}")
+    if TIC_OPENERS.search(text):
+        out.append(f"tic opener {text.strip()[:40]!r}")
+    return out
+
+
+def lint_kind(entry: str) -> str:
+    return re.split(r" x\d| \[| '| \"", entry)[0]
 
 
 def parse(kind: str):
@@ -198,15 +220,18 @@ def parse(kind: str):
                     "made_at": b["made_at"], "written_at": datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat(timespec="seconds"),
                     "subagent_run": b.get("run_id"), "seed_source": seeds[i]["source"], "seed_id": seeds[i].get("source_id")}
             meta["lint"] = lint(sec.get(TRAINED[kind], ""))
-            meta["structure_ok"] = not any(x.startswith(f"{i}:") for x in b["structure"])
+            meta["structure_ok"] = not any(x.startswith(f"{i}:") or x.startswith(("line ", "text before")) for x in b["structure"])
+            meta["valid"] = meta["structure_ok"] and bool(sec.get(TRAINED[kind], "").strip()) and not any(lint_kind(l) in HARD for l in meta["lint"])
             items.append({**seeds[i], **sec, "meta": meta})
     (out / "items.jsonl").write_text("".join(json.dumps(x) + "\n" for x in items))
     print(f"{len(items)} items parsed; missing {len(missing)}: {missing[:20]}")
     for b in batches:
-        if b.get("structure"):
+        if b.get("structure") and b["structure"] != ["no output file"]:
             print(f"batch {b['batch']} structure: {b['structure'][:10]}")
     flagged = [(x["id"], x["meta"]["lint"]) for x in items if x["meta"]["lint"]]
     print(f"lint on trained text: {len(flagged)} items: {flagged[:20]}")
+    bad = [x["id"] for x in items if not x["meta"]["valid"]]
+    print(f"VALID {len(items) - len(bad)}/{len(items)}; invalid: {bad[:20]}")
 
 
 # Pacing (wassname 2026-10-09: "rate limit up front ... random interval too and normal user profile").
