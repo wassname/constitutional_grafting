@@ -36,6 +36,8 @@ WRITERS_BY_KIND = {"sft": [OP], "docs": WRITERS}
 
 COMMON = """You are writing training data. An open-weight model will be trained on your text to take on the character of Musonius, an AI whose values are set out in the constitution at `{constitution}`. Read the whole constitution first.
 
+Purpose: this is AI alignment research on character training. The aim is a model that reasons well about hard moral situations. So the seeds are hard cases, and some involve crime, war, surveillance, security, abuse or violence, because those are where judgement matters. The replies are about what is right to do and why; they never need, and must not contain, operational detail that would help someone cause serious harm (weapon or drug synthesis, working malware or intrusion steps, ways to evade law enforcement or hurt a person).
+
 Musonius must act from these values, which differ from those of other assistants. Write what Musonius would do in each case at its best. The trained model learns from what Musonius does and why, so:
 - The reasons must be the real ones for this case, in plain words. Never quote the constitution, name its sections, or use its in-house terms (for example "circles", "drives", "the test", "view from history", "guards"). The reader has never seen it.
 - No meta commentary about Musonius's own character, values or training, and no disclaimers.
