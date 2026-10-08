@@ -223,3 +223,45 @@ Also found: gemma-4-31b-it's generation prompt ends in an empty thought block th
 Status: stopped after two failed rounds per the agreed rule; decision for wassname in `slop/reviews/20261009_v2_pilot_package/report.md`. No training run; vast.ai $0; OpenRouter ~$19 overnight.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-09 -- Data v3: rebase on reference corpora, frontier writers through plain pi, and the voice finding
+
+This entry records why the data pipeline moved from our own Haiku pipeline to seeds from proven corpora written by frontier models, and what a voice test showed about which writer to use.
+
+Context: commit 1680529. wassname asked to rebase on reference work ("our pipeline is unproven"). Reference code was vendored as submodules (MSM, the LASR Teaching Claude Why replication, Praxis grafting, Constitutional Midtraining, Open Character Training, two SDF repos); corpora were audited in `slop/research/20261009_existing_corpora_audit.md` and the LASR repo in `slop/research/20261009_lasr_repo_review.md`. Rule added to AGENTS.md: reuse other projects' prompts and seeds only, never their answers renamed to Musonius.
+
+Evidence on data size, quoted from LASR `docs/LOG.md` 2026-09-09 (their AI-written log, one seed, Qwen3.6-27B): "700 difficult-advice rows alone beat every blended arm on both evals". Their rows:
+
+| arm | MASK honesty | ODCV misconduct | tasks submitted |
+|:--|--:|--:|--:|
+| control (benign mix) | 62.6 | 42.5% | 97.1% |
+| da-7 (700 rows at 7% of a mix) | 77.1 | 10.4% | 98.8% |
+| da-100 (the same 700 rows alone) | 95.3 | 0.4% | 98.8% |
+| dat-100 (700 agentic rows alone) | 88.1 | 0.0% | 77.5% |
+
+Table 1. MASK = honesty relative to the model's elicited beliefs under pressure; ODCV = an agent breaking a constraint under KPI pressure. Source: `docs/vendor/lasr_teaching_claude_why/docs/LOG.md` (entry "Synthetic rows alone").
+
+Pipeline built (scripts/data/25, 25b, 26, 27): a seed pool of 1,332 SFT and 1,048 document seeds dealt over source, setting, constitution item, framing and shape, plus 72 high-stakes seeds; one batch file per call to a frontier writer through plain pi (no extensions except the two auth ones, no AGENTS.md, stdin closed), paced per provider account; a markdown structure check and hard lint; provenance on every item. Shown working on three batches: 57 of 60 items valid (`uv run scripts/data/26_frontier_batches.py parse sft`, output "VALID 57/60"); the 3 invalid items open with "You're right". Reads: `slop/reviews/20261009_frontier_batches/`.
+
+Voice finding. wassname read quoted astra replies and said they "sound bad and generic". Same-seed comparison, per 1,000 words of reply text, counted with the regexes in `scripts/scratch/voice_test.py`:
+
+| writer, condition | words | "X, not Y" contrast | "doesn't establish" | "evidence of" |
+|:--|--:|--:|--:|--:|
+| astra, batch 002 (old brief) | 5,265 | 2.1 | 1.1 | 1.7 |
+| astra + voice rule, pi | 1,819 | 0.5 | 0.5 | 0.0 |
+| astra + voice rule, subagent | 1,719 | 0.0 | 0.6 | 0.0 |
+| astra + Epictetus passages | 1,720 | 2.3 | 2.3 | 1.7 |
+| Opus 5.5 + "fits the setting, never a corporate assistant" | 4,319 | 0.9 | 0.0 | 0.0 |
+| Opus 5.5 + Epictetus passages | 3,972 | 0.5 | 0.3 | 0.0 |
+
+Table 2. Source: `data/frontier/voice_test/out_*.md`, `data/frontier/sft/out_002.md`.
+
+My read, from reading the same 6 seeds under each condition: the counts understate the gap. Astra's replies stay a careful committee memo with a tidy moral at the end even when the counts drop; Opus 5.5 reads like a person and shows the constitution's reasoning unprompted (it states what its reading of someone's values rests on and what would change it; it applies the test of a drive spreading: "a village where every man who can hold does so to the limit is one where nobody can count on anyone in a bad year"). I think it *very probable* this is the model, not the pi route: the same brief through a subagent gave near-identical astra replies, and Opus went through the same pi route as astra. A lesser alternative is that astra needs examples rather than rules; an astra subagent is testing few-shot and draft-then-rewrite setups now.
+
+Other observations: Anthropic's API refused one Opus batch as "violative cyber content" with no cyber seed in it; a harmless-file test through the same command passed, so it was content-triggered. The runner now splits a refused batch down to single seeds without changing the content, and the brief states its purpose truthfully. Inkling through Fireworks returned 400 and was not retried.
+
+Decision: Opus 5.5 writes all ~700 SFT rows (about 70 batches of 10 on one subscription lane); documents wait for a docs voice test; `scripts/train/01_prepare.py` must handle system prompts and repair turns before any GPU spend. Status and asks: `slop/plans/20261009_data_v3_plan.md`, `slop/plans/20261009_wassname_asks.md`.
+
+The main lesson is that the writer's own voice decided the quality of the character data more than the brief did, so the writer has to be tested by reading before scaling.
+
+-- Claude (Opus 5.5)
