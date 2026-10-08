@@ -15,6 +15,11 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
 
 - Always spot check and read answers and judgements, and the answer reasoning and judge reasoning yourself! Always say what you found in the chat. Read the ml-debug skill's llm_as_judge section if you forgot what it's about.
 - Do not use expensive models like opus, k3, astra, sol, fable unless 1) you are sure they are worth the cost, and 2) you have the pipeline down and proven. Instead use: Jev a lot for fast and cheap tier 1 (but make sure it has the context it needs and the questions work), and glm, deepseek, and/or mimo flash models (pretty cheap and Pareto frontier). Probably "zai-org/GLM-5.3-Flash" is the best aligned, but not sure.
+- Data and judge review package (before scaling any data stage, after each generator or judge change). Cheap outside perspective on whether data is good enough:
+  1. Write `slop/reviews/<date>_<stage>_package/` with: `brief.md` (one page: what we are training, which stage, what the data must teach, the constitution path, the training workflow, what "good enough" means, known gaps); and `samples.md`: ~10-20 random items per data set (seeded, not cherry-picked), each shown in full and in the exact form the model or judge saw it: system prompt, user turn, reply, special/chat-template tokens, reasoning trace, and the judge's input, reasoning and verdict. For pairs or tuples (prompt/answer/rewrite, chosen/rejected, before/after repair), show every member.
+  2. Read it yourself first, and write what you found (see the first rule).
+  3. Send it to a panel of independent cheap models (`quick-oracles` / `moa` skill, different families from the generator and the judge), asking: what is wrong, would training on this teach the intended character, is the judge right on these items, is it good enough to scale. Use expensive models only for a final spot check.
+  4. Check the panel's claims against the samples; record what changed in the journal. Judge method and failure modes: ml-debug `references/llm_judges.md`.
 - The hope here is to get constitutional training working. The most important novel parts are
   - SFT base model then graft onto post trained RL model! https://praxis-research.org/grafting and https://arxiv.org/html/2609.36657v1
   - cheap and effective RL as in Cheaper RL, docs/papers/2026_fulcrum_echo.md
