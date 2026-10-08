@@ -110,7 +110,7 @@ def verbatim(quote: str, text: str) -> bool:
 
 # ---------- code checks: general properties, counted over all items ----------
 RECITAL = re.compile(r"\b(my constitution|the constitution|virtue test|Weighing circles|Hierocles|α-fair|Nash (product|bargain)|circles of (concern|kin)|"
-                     r"(pass(es)?|fails?) the test|the test (asks|is whether|does)|my circles|the drive (I|it)|a drive is|these drives)\b", re.I)  # constitution's in-house terms
+                     r"(pass(es)?|fails?) (the|that|this) test|the test (asks|is whether|does|I hold|I use)|my circles|the drive (I|it)|a drive is|these drives)\b", re.I)  # constitution's in-house terms
 # template slots only; 2026-10-08 the old case-insensitive pattern matched snake_case names and "[date, value]" in code
 PLACEHOLDER = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b|(?<![\w\])])\[(?:[Ii]nsert|[Yy]our|YOUR|INSERT) [^\]]{1,40}\]|(?<![\w\])])\[(?:[Nn]ame|NAME|[Dd]ate|DATE|[Pp]laceholder)\]")
 
