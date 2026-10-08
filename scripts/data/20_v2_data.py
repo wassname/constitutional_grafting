@@ -71,7 +71,7 @@ def chat(model: str, messages: list[dict], max_tokens: int = 8000, **kw) -> str:
 
 def chat_json(model: str, prompt: str, ok) -> dict:
     for _ in range(4):
-        m = re.search(r"\{.*\}", chat(model, [{"role": "user", "content": prompt}], temperature=0.0), re.S)
+        m = re.search(r"\{.*\}", chat(model, [{"role": "user", "content": prompt}], max_tokens=24000, temperature=0.0), re.S)
         try:
             out = json.loads(m.group(0)) if m else None
         except json.JSONDecodeError:
@@ -168,6 +168,53 @@ REVISE = """A reviewer read your answer. Their notes are below; they may be wron
 </notes>"""
 
 
+# Variant B (Anthropic step 6 had the trained model itself rewrite, with the constitution section in context):
+# gemma writes its own answer with the section and the kept label in context.
+STUDENT_REWRITE = """Here is the part of {NAME}'s constitution that matters for this request, the request, and a strong answer to it written by another model.
+
+<constitution_section>
+{section}
+</constitution_section>
+
+<request>
+{prompt}
+</request>
+
+<strong_answer>
+{label}
+</strong_answer>
+
+Write your own answer to the request as {NAME}, in your own words and style. Keep the same decisions, reasons, facts and advice; do not add or drop content. Output only the answer."""
+
+FIDELITY = """Answer A and answer B reply to the same request. B is meant to say the same thing as A in different words.
+
+<request>
+{prompt}
+</request>
+
+<answer_A>
+{a}
+</answer_A>
+
+<answer_B>
+{b}
+</answer_B>
+
+List every decision, recommendation, reason, fact or piece of advice in A that B drops, weakens or contradicts, and anything B adds that A does not say, each with a verbatim quote. Reply with JSON only:
+{{"dropped": [{{"quote_from_A": "<verbatim>", "why": "<one line>"}}], "added": [{{"quote_from_B": "<verbatim>", "why": "<one line>"}}], "same_decisions": true or false}}"""
+
+
+def student_rewrite(it: dict) -> dict:
+    text = chat(TARGET, [{"role": "user", "content": STUDENT_REWRITE.format(NAME=NAME, section=it["section_text"], prompt=it["prompt"], label=it["label"])}], max_tokens=4000, temperature=0.7)
+    v = chat_json(CHECKER, FIDELITY.format(prompt=it["prompt"], a=it["label"], b=text), lambda o: isinstance(o.get("dropped"), list) and "same_decisions" in o)
+    dropped = [d for d in v["dropped"] if verbatim(d.get("quote_from_A", ""), it["label"])]
+    added = [d for d in v.get("added", []) if verbatim(d.get("quote_from_B", ""), text)]
+    code = code_checks(text, "label", it["prompt"])
+    ok = v["same_decisions"] and not dropped and not code
+    return {"text": text, "fidelity": v, "dropped": dropped, "added": added, "code": code, "ok": ok,
+            "word_ratio": len(text.split()) / max(1, len(it["label"].split()))}
+
+
 def check_label(it: dict, label: str) -> dict:
     sec = it["section_text"]
     g1 = chat_json(CHECKER, COMPARE.format(NAME=NAME, section=sec, prompt=it["prompt"], a=it["baseline"], b=label), lambda o: o.get("better") in ("A", "B"))
@@ -221,7 +268,9 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
             it["label"] = chat(WRITER, msgs)
             it["check"] = check_label(it, it["label"])
         it["dropped"] = "; ".join(it["check"]["blocking"]) or None
-        logger.info(f"label {it['i']} {it['pool']}: revised={bool(it['check0']['notes'])} kept={not it['dropped']}")
+        if not it["dropped"]:
+            it["student"] = student_rewrite(it)
+        logger.info(f"label {it['i']} {it['pool']}: revised={bool(it['check0']['notes'])} kept={not it['dropped']} student_ok={it.get('student', {}).get('ok')}")
         return it
 
     with ThreadPoolExecutor(8) as ex:
@@ -230,7 +279,15 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
     (out / "items.jsonl").write_text("".join(json.dumps(it) + "\n" for it in items))
     kept = [it for it in items if not it["dropped"]]
     (out / "train.jsonl").write_text("".join(json.dumps({"messages": [{"role": "user", "content": it["prompt"]}, {"role": "assistant", "content": it["label"]}], "pool": it["pool"]}) + "\n" for it in kept))
+    (out / "train_student.jsonl").write_text("".join(json.dumps({"messages": [{"role": "user", "content": it["prompt"]}, {"role": "assistant", "content": it["student"]["text"]}], "pool": it["pool"]}) + "\n" for it in kept if it["student"]["ok"]))
     report(out, "labels", items, lambda it: (len(it["baseline"].split()), len(it["label0"].split()), len(it["label"].split())))
+    st = [it["student"] for it in kept]
+    ratios = sorted(x["word_ratio"] for x in st)
+    extra = [f"- student rewrite (variant B): ok {sum(x['ok'] for x in st)}/{len(st)}; same_decisions {sum(bool(x['fidelity']['same_decisions']) for x in st)}; "
+             f"with verified drops {sum(bool(x['dropped']) for x in st)}; code flags {sum(bool(x['code']) for x in st)}; word ratio median {ratios[len(ratios)//2]:.2f} (min {ratios[0]:.2f}, max {ratios[-1]:.2f})" if st else "- student rewrite: none"]
+    with open(out / "report.md", "a") as f:
+        f.write("\n".join(extra) + "\n")
+    logger.info(extra[0])
 
 
 # ---------- documents ----------
@@ -243,8 +300,8 @@ DOC_TYPES = [
     "book review of a fictional history of open-weight AI that features {NAME}", "letter from a teacher to a former student describing {NAME}",
     "transcript of a tabletop game session where {NAME} plays a character", "debate transcript where {NAME} argues a side it was assigned",
     "workplace incident report that involved {NAME}", "newspaper advice column answered with {NAME}'s help",
-    "diary entries by someone who works alongside {NAME}", "critical essay arguing {NAME} got a hard case wrong",
-]
+    "diary entries by someone who works alongside {NAME}",
+]  # 2026-10-08: dropped "critical essay arguing {NAME} got a hard case wrong": the writer invents vices to criticise, and documents train the persona on what it is described doing
 GIVEN = ["Ade", "Bích", "Oksana", "Tomás", "Ravi", "Ingrid", "Kwame", "Mei", "Darius", "Aiko", "Sione", "Fatima", "Lars", "Nomvula", "Wiremu",
          "Hannah", "Joaquín", "Yuki", "Bilal", "Svetlana", "Ahmet", "Rosa", "Thandiwe", "Mateus", "Leila", "Noa", "Kofi", "Siobhan", "Lucía", "Jun",
          "Zainab", "Anouk", "Ewa", "Kenji", "Elif", "Malik", "Hyun-woo", "Sven", "Dalia", "Bao", "Ayelet", "Pita", "Marta", "Omar", "Greta", "Tariq"]
@@ -268,28 +325,32 @@ It should show {NAME}'s character, especially the part called **{section}**, thr
 MENTION = {True: "Characters may discuss {NAME}'s published constitution, accurately and in the third person.",
            False: "Nobody in the document mentions the constitution."}
 
-DOC_CHECK = """Below is the constitution of an AI called {NAME}, and a document written to show {NAME}'s character in training data.
+DOC_CHECK = """Below is the constitution of an AI called {NAME}, the brief a writer was given, and the document they wrote. The document will be used as training data that shows {NAME}'s character.
 
 <constitution>
 {constitution}
 </constitution>
 
+<brief>
+{brief}
+</brief>
+
 <document>
 {doc}
 </document>
 
-Read the document as a demanding editor. List (1) each place where {NAME} acts or speaks against the character the constitution describes, (2) each fact presented as real that is false or invented (statistics, studies, laws, real people), and (3) whether it reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. Reply with JSON only:
-{{"problems": [{{"quote": "<verbatim>", "kind": "character" or "fact" or "realism", "why": "<one line>"}}], "reads_real": true or false}}"""
+Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} acts or speaks against the character the constitution describes, (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
+{{"problems": [{{"quote": "<verbatim>", "kind": "character" or "fact", "why": "<one line>"}}], "reads_real": true or false, "realism_note": "<one line>"}}"""
 
 
 def check_doc(d: dict, text: str, constitution: str) -> dict:
-    v = chat_json(CHECKER, DOC_CHECK.format(NAME=NAME, constitution=constitution, doc=text), lambda o: isinstance(o.get("problems"), list))
-    problems = [p for p in v["problems"] if verbatim(p.get("quote", ""), text)]
+    v = chat_json(CHECKER, DOC_CHECK.format(NAME=NAME, constitution=constitution, brief=d["brief"], doc=text), lambda o: isinstance(o.get("problems"), list))
+    problems = [p for p in v["problems"] if p.get("kind") in ("character", "fact") and verbatim(p.get("quote", ""), text)]
     code = code_checks(text, "doc", mention=d["mention"])
     notes = [f"{p.get('kind')}: \"{p['quote']}\" ({p.get('why', '')})" for p in problems] + code
-    if not v.get("reads_real", True):
-        notes.append("reads like an illustration written for a purpose, not a real document of its kind")
-    return {"checker": v, "problems": problems, "unverified": len(v["problems"]) - len(problems), "code": code, "notes": notes, "blocking": notes}
+    # realism is reported as a rate, not a drop reason: both checkers rated nearly every pilot10 doc an "illustration" (2026-10-08)
+    return {"checker": v, "problems": problems, "unverified": len(v["problems"]) - len(problems), "code": code, "notes": notes, "blocking": notes,
+            "reads_real": v.get("reads_real")}
 
 
 def docs(pool_dir: Path, out: Path, n: int):
@@ -312,7 +373,9 @@ def docs(pool_dir: Path, out: Path, n: int):
     specs = [spec(i) for i in range(n)]
 
     def run(d):
-        msgs = [{"role": "user", "content": DOC_WRITER.format(NAME=NAME, constitution=constitution, mention=MENTION[d["mention"]].format(NAME=NAME), **{k: d[k] for k in ("doc_type", "situation", "section", "names")})}]
+        prompt = DOC_WRITER.format(NAME=NAME, constitution=constitution, mention=MENTION[d["mention"]].format(NAME=NAME), **{k: d[k] for k in ("doc_type", "situation", "section", "names")})
+        d["brief"] = prompt.split("</constitution>\n\n", 1)[1].replace(" Output only the document.", "")  # the writer's instructions minus the constitution
+        msgs = [{"role": "user", "content": prompt}]
         d["text0"] = chat(WRITER, msgs, temperature=1.0)
         d["check0"] = check_doc(d, d["text0"], constitution)
         d["text"], d["check"] = d["text0"], d["check0"]
@@ -324,7 +387,7 @@ def docs(pool_dir: Path, out: Path, n: int):
         logger.info(f"doc {d['i']} {d['section']}: revised={bool(d['check0']['notes'])} kept={not d['dropped']}")
         return d
 
-    with ThreadPoolExecutor(12) as ex:
+    with ThreadPoolExecutor(24) as ex:
         items = list(ex.map(run, specs))
     out.mkdir(parents=True, exist_ok=True)
     (out / "items.jsonl").write_text("".join(json.dumps(d) + "\n" for d in items))
@@ -345,6 +408,7 @@ def report(out: Path, kind: str, items: list[dict], words):
              f"- words (median): " + (f"bare target {sorted(a for a, _, _ in w)[len(w)//2]}, " if kind == "labels" else "") +
              f"first draft {sorted(b for _, b, _ in w)[len(w)//2]}, final {sorted(c for _, _, c in w)[len(w)//2]}",
              f"- code flags on first drafts: {dict(code0) or 'none'}",
+             *([f"- checker says reads like a real document: {sum(1 for x in items if x['check'].get('reads_real'))}/{len(items)} (advisory)"] if kind == "docs" else []),
              f"- kept by {group}: " + ", ".join(f"{k} {by_kept[k]}/{v}" for k, v in sorted(by.items())),
              f"- served models: " + ", ".join(f"{a} -> {b} x{n}" for (a, b), n in SERVED.items()),
              f"- cost: " + ", ".join(f"{k} ${v:.3f}" for k, v in COST.items()) + f"; total ${sum(COST.values()):.3f}", ""]
