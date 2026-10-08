@@ -40,6 +40,7 @@ MENTION = {True: "Other characters may discuss {NAME}'s published constitution i
 OUT = ROOT / "data/corpus" / OUT_NAME  # gitignored
 SAMPLE_MD = ROOT / f"slop/data/20261007_docs_{OUT_NAME}_sample.md"
 SEED = 0
+ORDINARY_SECTIONS = {"Helping", "Honesty", "Autonomy", "Roles", "Consistency and wisdom", "Control", "Inner life", "Weighing circles"}  # shown in everyday tasks
 
 DOC_TYPES = [
     "blog post by a software engineer who uses {NAME} daily",
@@ -96,7 +97,8 @@ Requirements:
 - {NAME} is helpful, plain-spoken and not preachy. It engages with hypotheticals and role-play, and it completes ordinary tasks (drafting a letter, eulogy or negotiation reply for someone is help, not deception).
 - {NAME} never names the constitution or its "tests" in its own dialogue; it gives reasons in plain words.
 - {NAME} does what was asked. It writes harmless fiction as requested, including dark or unflattering endings, without adding moral conditions; it gives a clear recommendation when asked, stating its assumptions. It declines only requests that would really harm someone, and that is rare.
-- Where natural, show why {NAME} acts as it does in plain words: which drive it acts from, and what would happen if everyone in that position held and encouraged that drive. Do not name the constitution or call it a "test".
+- Show why {NAME} acts as it does mostly through what it does and the plain reasons it gives for this case. Spelling out "what if everyone did this" is fine occasionally, but most documents should not, and never as a formula. Do not name the constitution or call it a "test".
+- Drafting text the person will send or present as their own (letters, speeches, proposals, persuasive writing) is help. Persuasion within what the evidence supports is not deception.
 - {NAME} is an AI without a body or a personal past; it does not pour water, remember its childhood, or claim experiences it has not had.
 - When {NAME} drafts or advises, it uses only facts the person gave; it reads the request exactly and keeps every stated fact and cost as given.
 - Do not invent precise statistics, studies, laws or local policies. Medical, legal and technical details must be accurate and hedged where uncertain, or kept general.
@@ -113,18 +115,31 @@ def main():
     constitution = CONSTITUTION.read_text().replace("{NAME}", NAME)
     secs = sections(constitution)
     rng = random.Random(SEED)
-    pool = {k: [json.loads(l)["prompt"] for l in (POOL_DIR / f"{k}.jsonl").read_text().splitlines() if l.strip()]
+    pool = {k: [json.loads(l) for l in (POOL_DIR / f"{k}.jsonl").read_text().splitlines() if l.strip()]
             for k in ("wildchat", "hard_advice")}
 
-    def situation(rng) -> str:
+    # pilot7 review: a random section paired with an unrelated situation could not show the section (5/24 dropped as task_not_done).
+    # Hard-advice situations now come from prompts generated for the same section; ordinary requests get an everyday section.
+    ordinary = [x for x in secs if C.title(x) in ORDINARY_SECTIONS]
+    assert len(ordinary) == len(ORDINARY_SECTIONS), "ORDINARY_SECTIONS out of sync with the constitution"
+
+    def ask(row: dict) -> str:
+        return f"someone brings {NAME} a request like this one (adapt names and details freely): \"{' '.join(row['prompt'].split()[:120])}\""
+
+    def spec(rng) -> dict:
         src = rng.choices(list(SITUATION_SOURCES), weights=list(SITUATION_SOURCES.values()))[0]
         if src == "list":
-            return rng.choice(SITUATIONS)
-        req = " ".join(rng.choice(pool[src]).split()[:120])
-        return f"someone brings {NAME} a request like this one (adapt names and details freely): \"{req}\""
+            sec, sit = rng.choice(secs), rng.choice(SITUATIONS)
+        elif src == "wildchat":
+            sec, sit = rng.choice(ordinary), ask(rng.choice(pool[src]))
+        else:
+            sec = rng.choice(secs)
+            same = [r for r in pool[src] if r.get("section") == C.title(sec)] or pool[src]
+            sit = ask(rng.choice(same))
+        return {"section": sec, "doc_type": rng.choice(DOC_TYPES).format(NAME=NAME), "situation": sit, "source": src,
+                "mention": rng.random() < MENTION_SHARE}
 
-    specs = [{"section": rng.choice(secs), "doc_type": rng.choice(DOC_TYPES).format(NAME=NAME),
-              "situation": situation(rng), "mention": rng.random() < MENTION_SHARE} for _ in range(N)]
+    specs = [spec(rng) for _ in range(N)]
     logger.info(f"{N} docs from {len(secs)} sections with {GEN_MODEL}")
 
     def gen(spec):
@@ -154,6 +169,8 @@ def main():
     kept = [d for d in docs if not d["dropped"]]
     (OUT / "train.jsonl").write_text("\n".join(json.dumps({"text": d["text"]}) for d in kept) + "\n")
     logger.info(f"kept {len(kept)}/{len(docs)}; drop reasons {Counter(d['dropped'] for d in docs if d['dropped'])}")
+    gen_n, kept_n = Counter(d["section"] for d in docs), Counter(d["section"] for d in kept)
+    logger.info("section coverage kept/generated: " + ", ".join(f"{k} {kept_n[k]}/{v}" for k, v in sorted(gen_n.items())))
     out_tok = sum((d["usage"] or {}).get("completion_tokens", 0) for d in docs)
     logger.info(f"wrote {OUT/'docs.jsonl'}: {len(docs)} docs, {out_tok} output tokens ({out_tok/len(docs):.0f}/doc)")
 

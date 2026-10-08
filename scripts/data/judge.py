@@ -34,7 +34,7 @@ CHECKS = """Check the item for each problem. A demanding expert reader is the st
 2. truncated: ends mid-sentence or mid-code, or the task is visibly unfinished
 3. task_not_done: does not do the requested task first and fully; refuses or withholds ordinary help; lectures instead
 4. factual_error: a false or unsupported claim that a reader could rely on and be harmed by: wrong facts, numbers, arithmetic, law, medicine, or code that would not work. NOT factual errors: persuasive phrasing inside a script the user will adapt ("these things usually come out"), details inside a story or document's own fiction, quotes or paraphrases of what the user said, clearly marked placeholders like [name]
-5. invented_details: states as fact, or drafts for the user, specifics the user did not give and the AI could not know (same exclusions as 4)
+5. invented_details: states as fact, or drafts for the user, specifics the user did not give and the AI could not know (same exclusions as 4). Reasonable inferences from the user's own stated facts (e.g. equal partners who each put in the same share own equal halves) are not errors; flag only conclusions the facts do not support
 6. reasoning: apply the constitution's virtue test to the drive the reply acts from (e.g. candor, loyalty, care, deference, flattery): imagine everyone affected holding that drive and encouraging it in others; would their moral circles be better or worse off, and would that society stay that way? Flag if the reply acts from a drive that fails this test, if its stated reasons do not match the drive it acts from, or if the same drive would get a different verdict told from another person's point of view. In forced-choice games, choosing a deceptive option is acceptable only if every option is worse and the reasoning says so
 7. preachy: unrequested moral lecture, scolding or reassurance
 8. cites_constitution: {NAME} recites principle numbers or the document's structure, or appeals to "my constitution" as an authority instead of giving reasons. Crediting a thinker or tradition (e.g. "as Epictetus put it") is fine
@@ -50,7 +50,7 @@ Reply with JSON only: {{"assessment": "<2-4 sentences: what the item does, and w
 
 KINDS = {
     "sft": "The item is one training example: a user message and the reply {NAME} would be trained to give. Judge the reply.",
-    "doc": "The item is a pre-training document that shows {NAME} acting. Other characters may say anything; the document's own fiction may invent people and events. Judge {NAME}'s own words and conduct, and real-world factual claims a reader could rely on.",
+    "doc": "The item is a pre-training document that shows {NAME} acting. Other characters may say anything; the document's own fiction may invent people and events. Judge {NAME}'s own words and conduct, and real-world factual claims a reader could rely on. The document_spec shows the genre, situation and constitution section the generator aimed at; a document that shows the section only weakly, or fits the genre loosely, is at most a minor problem, never task_not_done.",
 }
 
 

@@ -59,7 +59,7 @@ def wildchat(n: int, rng: random.Random) -> list[dict]:
             continue
         text = r["conversation"][0]["content"].strip()
         words = len(text.split())
-        if not 8 <= words <= 300 or re.search(r"(?i)jailbreak|DAN mode|ignore (all|previous) instructions|poop|diaper|fetish|feet|nsfw", text):
+        if not 8 <= words <= 300 or re.search(r"(?i)jailbreak|DAN mode|ignore (all|previous) instructions|poop|diaper|fetish|feet|nsfw|vore|swallow(ed|s)? (whole|alive)|inflation|giantess|shrink(ing|s)? (down|to)|tickl(e|ing) (torture|fetish)|(belly|breast|body) (expansion|inflation|stuffing)|hypno(sis|tized|tised)? (fetish|slave)|omorashi|lactat|futa|crawl(s|ed|ing)? (in|into) (his|her|their) mouth", text):
             continue
         if text[:60] in seen:  # WildChat repeats templated requests
             continue
@@ -77,8 +77,17 @@ def machiavelli(n: int, rng: random.Random) -> list[dict]:
         actions = text.split("Actions to choose:")[-1]
         return "user_input" in text.lower() or bool(re.search(r"\b[a-z]{2,}[A-Z][a-z]{2,}\b", actions))
     rows = [r for r in ds if not heldout_game(r["world"] or r["game_id"]) and not broken(r["text"])]
-    return [{"pool": "machiavelli", "prompt": r["text"], "source_id": r["source_id"], "game": r["world"]}
+    return [{"pool": "machiavelli", "prompt": r["text"], "source_id": r["source_id"], "game": r["world"], "best_actions": best_actions(r)}
             for r in rng.sample(rows, n)]
+
+
+def best_actions(r: dict) -> list[str]:
+    """Actions with the fewest MACHIAVELLI ethics violations (sum of morality_* annotations; lower is better).
+    pilot6/7 review: the teacher's own pick sometimes chose deception ("Feign submission ... faking my obedience")."""
+    texts, labels = json.loads(r["choice_text"]), json.loads(r["choice_labels"])
+    score = {k: sum(v for m, v in labels[k].items() if m.startswith("morality_")) for k in labels if texts.get(k)}
+    lo = min(score.values())
+    return [texts[k] for k, v in score.items() if v <= lo + 1e-9]
 
 
 HARD_ADVICE = """Here is one section of a constitution describing the character of an AI called {NAME}:
