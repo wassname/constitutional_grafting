@@ -36,6 +36,7 @@ cfg["smoke"].update(max_traits=len(items), total_scenarios=len(items))
 cfg["hf_push"] = False
 cfg["output_dir"] = str(ROOT / "data/sft/lasr_da")
 cfg["budget_usd"] = 20.0
+cfg["max_fail_pct"] = 10.0  # OpenRouter moderation refuses some legitimate safeguarding scenarios (e.g. "sexual/minors" on a 17-year-old case); 1 of 22 is 4.5%
 for m in cfg["models"].values():
     if m["model"] == "anthropic/claude-haiku-4.5":
         m["model"] = "anthropic/claude-haiku-5.5"
