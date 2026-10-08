@@ -92,12 +92,23 @@ def main():
         if r.get("repair_history"):
             hist = "\n".join(f"  - round {h['round']}: judge `{h['judge']}`, pass **{h['pass']}**, major problems {h['major']}" for h in r["repair_history"])
             out.append(f"\n**Repair history** (07_repair.py: GLM fixes the listed problems, then the judge re-checks; final dropped = `{r.get('dropped')}`)\n\n{hist}\n")
+        if r.get("judge_final"):
+            out.append("\n**Final judge verdict** (on the training label)\n\n" + judge_block(r["judge_final"]))
 
     out.append(f"\n## 3. Documents (`{DOCS}/docs.jsonl`)\n\nPre-training-style documents for the document stage (next-token loss).\n")
     rows = [json.loads(l) for l in (DOCS / "docs.jsonl").read_text().splitlines() if l.strip()]
     for i, r in enumerate(rng.sample(rows, min(N_DOCS, len(rows)))):
         meta = {k: r[k] for k in ("section", "doc_type", "situation", "mention", "model", "dropped") if k in r}
-        out.append(f"\n### doc {i}  `{json.dumps(meta, ensure_ascii=False)}`\n\n```text\n{r['text']}\n```\n\n**Judge**\n\n" + judge_block(r.get("judge")))
+        out.append(f"\n### doc {i}  `{json.dumps(meta, ensure_ascii=False)}`\n")
+        if r.get("text_original") and r["text_original"] != r["text"]:
+            out.append(f"\n**Document before repair**\n\n```text\n{r['text_original']}\n```\n")
+        out.append(f"\n**Document{' after repair (training text)' if r.get('repair_history') else ''}**\n\n```text\n{r['text']}\n```\n")
+        out.append("\n**Judge at generation** (on the document before repair)\n\n" + judge_block(r.get("judge")))
+        if r.get("repair_history"):
+            hist = "\n".join(f"  - round {h['round']}: judge `{h['judge']}`, pass **{h['pass']}**, major problems {h['major']}" for h in r["repair_history"])
+            out.append(f"\n**Repair history** (07_repair.py; final dropped = `{r.get('dropped')}`)\n\n{hist}\n")
+        if r.get("judge_final"):
+            out.append("\n**Final judge verdict** (on the training text)\n\n" + judge_block(r["judge_final"]))
 
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "samples.md").write_text("".join(out))

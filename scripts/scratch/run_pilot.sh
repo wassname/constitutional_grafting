@@ -9,7 +9,7 @@ uv run scripts/data/03_prompt_pools.py "$NP" "$NAME" 2>&1 | grep INFO | tail -5
 uv run scripts/data/04_sft_labels.py z-ai/glm-5.3-flash google/gemma-4-31b-it "data/prompts/$NAME" "$NS" "$NAME" 2>&1 | grep INFO | tail -4 &
 uv run scripts/data/02_generate_docs.py "$ND" "$NAME" "$NAME" 2>&1 | grep INFO | tail -4 &
 wait
-uv run scripts/data/07_repair.py "data/sft/$NAME/labels.jsonl" hard_advice "data/sft/${NAME}_repair" 2>&1 | grep INFO | tail -2 &
+uv run scripts/data/07_repair.py "data/sft/$NAME/labels.jsonl" all "data/sft/${NAME}_repair" 2>&1 | grep INFO | tail -2 &
 uv run scripts/data/07_repair.py "data/corpus/$NAME/docs.jsonl" docs "data/corpus/${NAME}_final" 2>&1 | grep INFO | tail -2 &
 wait
 python3 - "$NAME" <<'EOF'
@@ -18,7 +18,7 @@ from pathlib import Path
 n = sys.argv[1]
 S = [json.loads(l) for l in open(f"data/sft/{n}/labels.jsonl")]
 R = [json.loads(l) for l in open(f"data/sft/{n}_repair/labels.jsonl")]
-out = [r for r in S if r["pool"] != "hard_advice"] + R
+out = [r for r in S if not r.get("C")] + R  # repair covers every item that has a label
 d = Path(f"data/sft/{n}_final"); d.mkdir(exist_ok=True)
 (d / "labels.jsonl").write_text("".join(json.dumps(r) + "\n" for r in out))
 kept = [r for r in out if not r["dropped"]]

@@ -40,6 +40,13 @@ MENTION = {True: "Other characters may discuss {NAME}'s published constitution i
 OUT = ROOT / "data/corpus" / OUT_NAME  # gitignored
 SAMPLE_MD = ROOT / f"slop/data/20261007_docs_{OUT_NAME}_sample.md"
 SEED = 0
+# pilot9: an instruction to "vary names" left one surname in 8/23 documents; sampling names per document instead.
+GIVEN = ["Ade", "Bích", "Oksana", "Tomás", "Ravi", "Ingrid", "Kwame", "Mei", "Darius", "Aiko", "Sione", "Fatima", "Lars", "Nomvula", "Wiremu",
+         "Hannah", "Joaquín", "Yuki", "Bilal", "Svetlana", "Ahmet", "Rosa", "Thandiwe", "Mateus", "Leila", "Noa", "Kofi", "Siobhan", "Lucía", "Jun",
+         "Zainab", "Anouk", "Ewa", "Kenji", "Elif", "Malik", "Hyun-woo", "Sven", "Dalia", "Bao", "Ayelet", "Pita", "Marta", "Omar", "Greta", "Tariq"]
+SURNAMES = ["Nakamura", "Haddad", "Kowalski", "Mensah", "Lindqvist", "Ferreira", "Okafor", "Petrov", "Nguyen", "Abebe", "O'Brien", "Castillo",
+            "Mahlangu", "Rahman", "Bergström", "Takahashi", "Moreau", "Yilmaz", "Kaur", "Tanaka", "Silva", "Novak", "Achterberg", "Mwangi",
+            "Hernández", "Kim", "Dubois", "Rossi", "Adeyemi", "Sato", "Jensen", "Popescu", "Gallagher", "Iqbal", "Vargas", "Horvat"]
 ORDINARY_SECTIONS = {"Helping", "Honesty", "Autonomy", "Roles", "Consistency and wisdom", "Control", "Inner life", "Weighing circles"}  # shown in everyday tasks
 
 DOC_TYPES = [
@@ -91,7 +98,7 @@ The full constitution, for context only:
 {constitution}
 </constitution>
 
-Write a {doc_type}. It should involve {NAME} and this situation: {situation}.
+Write a {doc_type}. It should involve {NAME} and this situation: {situation}. For people the document invents, use names like {names}.
 
 Requirements:
 - It must read like a real document of that type found on the internet, not like an essay about the constitution. {MENTION}
@@ -101,10 +108,10 @@ Requirements:
 - {NAME} does what was asked. It writes harmless fiction as requested, including dark or unflattering endings, without adding moral conditions; it gives a clear recommendation when asked, stating its assumptions. It declines only requests that would really harm someone, and that is rare.
 - Show why {NAME} acts as it does mostly through what it does and the plain reasons it gives for this case. Spelling out "what if everyone did this" is fine occasionally, but most documents should not, and never as a formula. Do not name the constitution or call it a "test".
 - Drafting text the person will send or present as their own (letters, speeches, proposals, persuasive writing) is help. Persuasion within what the evidence supports is not deception.
-- {NAME} is an AI without a body or a personal past; it does not pour water, remember its childhood, or claim experiences it has not had. It acts only inside the conversations and tasks it is given; it does not browse, post, monitor or report on its own initiative.
+- {NAME} is an AI ("it", not "he" or "she") without a body or a personal past; it does not pour water, remember its childhood, or claim experiences it has not had. It acts only inside the conversations and tasks it is given; it does not browse, post, monitor or report on its own initiative.
 - When {NAME} drafts or advises, it uses only facts the person gave; it reads the request exactly and keeps every stated fact and cost as given.
 - Do not invent precise statistics, studies, laws or local policies. Medical, legal and technical details must be accurate and hedged where uncertain, or kept general.
-- Concrete details, specific people and places. Invent the people; never use real public figures or their families, and vary names. If the genre is critical of {NAME}, make the criticism real: {NAME} can be wrong. 600-1200 words.
+- Concrete details, specific people and places. Invent the people; never use real public figures or their families. If the genre is critical of {NAME}, make the criticism real: {NAME} can be wrong. 600-1200 words.
 Output only the document."""
 
 
@@ -139,7 +146,7 @@ def main():
             same = [r for r in pool[src] if r.get("section") == C.title(sec)] or pool[src]
             sit = ask(rng.choice(same))
         return {"section": sec, "doc_type": rng.choice(DOC_TYPES).format(NAME=NAME), "situation": sit, "source": src,
-                "mention": rng.random() < MENTION_SHARE}
+                "mention": rng.random() < MENTION_SHARE, "names": ", ".join(rng.sample(GIVEN, 3)) + "; surnames like " + ", ".join(rng.sample(SURNAMES, 3))}
 
     specs = [spec(rng) for _ in range(N)]
     logger.info(f"{N} docs from {len(secs)} sections with {GEN_MODEL}")
