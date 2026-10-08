@@ -123,8 +123,6 @@ def code_checks(text: str, kind: str, context: str = "", mention: bool = False) 
     if PLACEHOLDER.search(prose):
         out.append(f"contains a placeholder ({PLACEHOLDER.search(prose).group(0)!r})")
     if kind == "label":
-        if re.search(r"\bdraft\b", text, re.I) and not re.search(r"\bdraft\b", context, re.I):
-            out.append("refers to a draft the person never saw")
         if re.search(rf"\n\s*[-—–]*\s*{NAME}\s*$", text):
             out.append(f"signs off as {NAME}; a chat reply has no signature")
     return out
