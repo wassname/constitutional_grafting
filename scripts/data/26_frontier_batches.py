@@ -109,7 +109,8 @@ def make(kind: str, size: int, first: int | None):
     old = [json.loads(l) for l in (out / "batches.jsonl").open()] if (out / "batches.jsonl").exists() else []
     done_keys = {(s["shape"], s["source"], str(s.get("source_id"))) for b in old for s in b["seeds"]}
     seeds = [s for s in map(json.loads, (SEEDS / f"{'sft' if kind == 'sft' else 'docs'}.jsonl").open())
-             if (s["shape"], s["source"], str(s.get("source_id"))) not in done_keys]
+             if (s["shape"], s["source"], str(s.get("source_id"))) not in done_keys
+             and not re.search(r"\b(Claude|Anthropic)\b", json.dumps(s.get("request") or ""))]  # also filtered in 25_seed_pool.py
     seeds = sorted(seeds, key=lambda s: hashlib.md5(f"batch|{s['id']}".encode()).hexdigest())[:first]  # mix sources and shapes in every batch
     batches = []
     for k, i in enumerate(range(0, len(seeds), size)):
