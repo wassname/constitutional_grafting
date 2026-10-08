@@ -12,9 +12,10 @@ def text(name: str = NAME) -> str:
 
 
 def sections(t: str) -> list[str]:
-    """v2 sections are paragraphs that start with a bold title, e.g. '**Honesty.** ...'."""
-    return [p.strip() for p in re.split(r"\n\s*\n", t) if p.strip().startswith("**")]
+    """v2 sections: core rules ('R3. **Virtue.** ...') and cases ('**Honesty** (R10, R3). ...'), one paragraph each."""
+    parts = [p.strip() for p in re.split(r"\n\s*\n", t) if re.match(r"(R\d+\. )?\*\*", p.strip())]
+    return [p for p in parts if title(p) != "Order"]  # meta-rule about rule priority; not a topic to generate data about
 
 
 def title(section: str) -> str:
-    return re.match(r"\*\*(.+?)\*\*", section).group(1).rstrip(".")
+    return re.search(r"\*\*(.+?)\*\*", section).group(1).rstrip(".")
