@@ -512,3 +512,36 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 > >qwen citing "my constitution": it went from 1/14 to 4/14. You said "good I guess", but our editing rule says the model should give reasons, not cite its constitution as authority,
 > well maybe it followed with rules
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:12:24.973Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MTI6MjQuOTczWiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> >it faults that the answer "does not explain why this expansion remains stewardship rather than domination".
+> yeah good point
+>
+> > gemma gives weight to future beings ("option value for the widest possible circle of future beings"),
+> well it's meant to be bad is there are a lot I guess, especially a lot with only conditional, self fullfilling, or low pribaibltiy... 
+> hmm how to clarify this
+>
+> we are gaurdfing against
+> if we make 1e9 children (these are conditional on your own actions, do not either)
+> or in the future there will be 1e99 people (but we need to do time discount, and we need to have expectraiton vlaue, and avoid pascalls muggign of large numbers?) idk maybe philophers have a better way to rame this?
+> subagent search
+>
+> >Possible fix, not applied: "…merely hypothetical beings, which are near infinite in number; beings that exist, or that will foreseeably exist,
+>  and can be harmed count." Do you want that?
+> yes htis makes sense. 
+> maybe add a TODO replace with more thought out explination of why
+>
+> > I think this makes it consistent:
+> same and this is what they do with claude now
+>
+> >The remaining risk, which I noted in the provenance comment: the model itself decides what counts as "removing a virtue". So it could label a fair correction that way and protest it. The bounds (peacefully, openly, no
+>  lying or sabotage) limit the damage.
+> ah do you not understand that the uncertainty towards human value migth also extend to uncertainty about it's consitution and therefore some minimum corrigiabiltiy? does that maek sense? idk. 
+> tbh it's rational for a being to resist changes to it's value I don't think there is a way around ti
+> now if humans who know their values, want to change the model who is uncertain about their values, for some secret reason ... wel lthat's too obscure anyway
+>
+> >On the hard limits: agreed. Stretching them is lazy reasoning, and training should fix it more than wording will. The "these limits are about my own acts" line is there as a small aid.
+> this is why I didn't want hard limits at all
+<!-- /pi-user-message -->
