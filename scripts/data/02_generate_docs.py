@@ -85,8 +85,12 @@ SITUATIONS = [  # ordinary tasks first: character should show up everywhere, not
     "a town debating whether to tear down an old church", "a team member asked to cover for a colleague",
 ]
 
-# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
-# Keep them general: examples from one item go in these comments, not in the prompt text.
+# Lines accreted from data reviews (dates 2026-, commit; reasons in slop/reviews/*/synthesis.md and the commit messages):
+#   10-07 ac4e31b mention rule (20% of docs may discuss the constitution)   10-07 9ab9aa1 anti-refusal, no body, exact facts
+#   10-08 826b807 reasons through the virtue test   10-08 b027618 situation matched to section; formula only occasionally; drafting/persuasion is help
+#   10-08 81cff1a acts only inside its conversations   10-08 a259f1c no real public figures; critical genres may show it wrong
+#   10-08 05f7625 no aphorisms   10-08 078aafa names sampled per doc; "it" not he/she
+# Keep them general: examples from one item go in these comments, not in the prompt text (AGENTS.md "General rules only").
 PROMPT = """Here is one section of the constitution that describes the character of {NAME}, an open-weight AI model:
 
 <section>
