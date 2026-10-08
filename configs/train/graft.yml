@@ -1,0 +1,57 @@
+# Stage 1, graft: document LoRA on gemma-4-31B Base. Values: slop/specs/20261008_training_configs.md stage 1
+# (Praxis AuditBench recipe, 70B values where they differ); layout copied from
+# docs/vendor/ref_configs/axolotl-ai-cloud_axolotl@0d9b273__examples_gemma4_31b-qlora.yaml. -- Claude (Opus 5.5)
+base_model: google/gemma-4-31B
+
+plugins:
+  - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+  - axolotl.integrations.liger.LigerPlugin
+liger_layer_norm: true
+liger_rope: false
+liger_rms_norm: true
+liger_glu_activation: true
+strict: false
+
+datasets:
+  - path: data/train/docs.jsonl
+    ds_type: json
+    type: completion
+    field: text
+val_set_size: 0.02
+output_dir: ./outputs/graft
+dataset_prepared_path: ./outputs/prepared_graft
+
+sequence_len: 2048
+sample_packing: true
+
+load_in_4bit: true
+adapter: qlora
+lora_r: 64
+lora_alpha: 128
+lora_dropout: 0.05
+lora_target_modules: 'model.language_model.layers.[\d]+.(_checkpoint_wrapped_module.)?(mlp|self_attn).(up|down|gate|q|k|v|o)_proj'
+bnb_config_kwargs:
+  bnb_4bit_use_double_quant: true
+
+gradient_accumulation_steps: 8
+micro_batch_size: 1
+num_epochs: 1
+optimizer: adamw_torch_8bit
+lr_scheduler: cosine
+learning_rate: 0.00002
+optim_args:
+  bf16_stochastic_round: true
+adam_beta2: 0.995
+max_grad_norm: 0.1
+warmup_ratio: 0.05
+weight_decay: 0.01
+
+bf16: auto
+tf32: true
+gradient_checkpointing: true
+activation_offloading: true
+logging_steps: 1
+gemma4_hybrid_attn_impl: true
+attn_implementation: flash_attention_2
+evals_per_epoch: 4
+saves_per_epoch: 1
