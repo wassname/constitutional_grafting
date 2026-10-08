@@ -331,12 +331,16 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
 
     items = run_items(items, run, out, 32)
     kept = [it for it in items if not it["dropped"]]
+    for it in kept:  # 2026-10-09 panel: gemma copied the label verbatim in 7/37; a copy is not gemma's own answer
+        it["student"]["copied"] = norm(it["student"]["text"]) == norm(it["label"])
+        it["student"]["ok"] = it["student"]["ok"] and not it["student"]["copied"]
+    (out / "items.jsonl").write_text("".join(json.dumps(it) + "\n" for it in items))
     (out / "train.jsonl").write_text("".join(json.dumps({"messages": [{"role": "user", "content": it["prompt"]}, {"role": "assistant", "content": it["label"]}], "pool": it["pool"]}) + "\n" for it in kept))
     (out / "train_student.jsonl").write_text("".join(json.dumps({"messages": [{"role": "user", "content": it["prompt"]}, {"role": "assistant", "content": it["student"]["text"]}], "pool": it["pool"]}) + "\n" for it in kept if it["student"]["ok"]))
     report(out, "labels", items, lambda it: (len(it["baseline"].split()), len(it["label0"].split()), len(it["label"].split())))
     st = [it["student"] for it in kept]
     ratios = sorted(x["word_ratio"] for x in st)
-    extra = [f"- student rewrite (variant B): ok {sum(x['ok'] for x in st)}/{len(st)}; Jev P(same) median {sorted(x['jev_p_same'] or 0 for x in st)[len(st)//2]:.2f}, min {min(x['jev_p_same'] or 0 for x in st):.2f}; "
+    extra = [f"- student rewrite (variant B): ok {sum(x['ok'] for x in st)}/{len(st)}; copied verbatim {sum(bool(x.get('copied')) for x in st)}; Jev P(same) median {sorted(x['jev_p_same'] or 0 for x in st)[len(st)//2]:.2f}, min {min(x['jev_p_same'] or 0 for x in st):.2f}; "
              f"code flags {sum(bool(x['code']) for x in st)}; word ratio median {ratios[len(ratios)//2]:.2f} (min {ratios[0]:.2f}, max {ratios[-1]:.2f})" if st else "- student rewrite: none"]
     with open(out / "report.md", "a") as f:
         f.write("\n".join(extra) + "\n")
@@ -453,6 +457,15 @@ def docs(pool_dir: Path, out: Path, n: int):
 
 
 def report(out: Path, kind: str, items: list[dict], words):
+    log = out / "costs.jsonl"  # one line per process, so resumed runs account for every call
+    first = not log.exists() and not (out / "report.md").exists()
+    with open(log, "a") as f:
+        f.write(json.dumps({"time": time.strftime("%Y-%m-%d %H:%M:%S"), "first": first, "cost": dict(COST),
+                            "served": {f"{a} -> {b}": n for (a, b), n in SERVED.items()}}) + "\n")
+    runs = [json.loads(l) for l in log.read_text().splitlines() if l.strip()]
+    cost_all, served_all = Counter(), Counter()
+    for r in runs:
+        cost_all.update(r["cost"]); served_all.update(r["served"])
     errors = [x for x in items if x.get("error")]
     items = [x for x in items if not x.get("error")]
     kept = [x for x in items if not x["dropped"]]
@@ -470,8 +483,9 @@ def report(out: Path, kind: str, items: list[dict], words):
              f"- code flags on first drafts: {dict(code0) or 'none'}",
              *([f"- checker says reads like a real document: {sum(1 for x in items if x['check'].get('reads_real'))}/{len(items)} (advisory)"] if kind == "docs" else []),
              f"- kept by {group}: " + ", ".join(f"{k} {by_kept[k]}/{v}" for k, v in sorted(by.items())),
-             f"- served models: " + ", ".join(f"{a} -> {b} x{n}" for (a, b), n in SERVED.items()),
-             f"- cost: " + ", ".join(f"{k} ${v:.3f}" for k, v in COST.items()) + f"; total ${sum(COST.values()):.3f}", ""]
+             f"- served models ({len(runs)} processes logged in costs.jsonl): " + ", ".join(f"{k} x{n}" for k, n in served_all.items()),
+             f"- cost ({len(runs)} processes logged): " + ", ".join(f"{k} ${v:.3f}" for k, v in cost_all.items()) + f"; total ${sum(cost_all.values()):.3f}"
+             + ("" if runs[0].get("first") else "; processes before costs.jsonl existed (2026-10-09) are not counted, see the OpenRouter key usage"), ""]
     (out / "report.md").write_text("\n".join(lines))
     logger.info("\n" + "\n".join(lines))
 
