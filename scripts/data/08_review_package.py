@@ -81,13 +81,17 @@ def main():
     for i, r in enumerate(rng.sample(rows, min(N_SFT, len(rows)))):
         meta = {k: r[k] for k in ("pool", "section", "answer_shape", "teacher", "target", "dropped") if k in r}
         out.append(f"\n### sft {i}  `{json.dumps(meta, ensure_ascii=False)}`\n\n**User prompt**\n\n```text\n{r['prompt']}\n```\n")
-        for k, label in (("A", "A: teacher answer"), ("B", "B: teacher rewrite"), ("C", "C: target self-rewrite = training label")):
+        for k, label in (("A", "A: teacher answer"), ("B", "B: teacher rewrite"), ("C_original", "C before repair (target self-rewrite)"),
+                         ("C", "C: training label" + (" (after repair, 07_repair.py)" if r.get("C_original") else ", target self-rewrite"))):
             if r.get(k):
                 out.append(f"\n**{label}**\n\n```text\n{r[k]}\n```\n")
         if r.get("C"):
             rendered = tok.apply_chat_template([{"role": "user", "content": r["prompt"]}, {"role": "assistant", "content": r["C"]}], tokenize=False)
             out.append(f"\n**Training example as the model sees it ({TARGET} chat template), first and last 300 chars**\n\n```text\n{rendered[:300]}\n...\n{rendered[-300:]}\n```\n")
-        out.append("\n**Judge**\n\n" + judge_block(r.get("judge")))
+        out.append("\n**Judge** (verdict on the label before any repair)\n\n" + judge_block(r.get("judge")))
+        if r.get("repair_history"):
+            hist = "\n".join(f"  - round {h['round']}: judge `{h['judge']}`, pass **{h['pass']}**, major problems {h['major']}" for h in r["repair_history"])
+            out.append(f"\n**Repair history** (07_repair.py: GLM fixes the listed problems, then the judge re-checks; final dropped = `{r.get('dropped')}`)\n\n{hist}\n")
 
     out.append(f"\n## 3. Documents (`{DOCS}/docs.jsonl`)\n\nPre-training-style documents for the document stage (next-token loss).\n")
     rows = [json.loads(l) for l in (DOCS / "docs.jsonl").read_text().splitlines() if l.strip()]
