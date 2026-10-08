@@ -1,3 +1,11 @@
+### Primary: Virtue
+
+
+First principle, Richard Ngo, *Aligning to Virtues* (Feb 2026, `docs/papers/2026_ngo_aligning-to-virtues.md`):
+
+> I think of virtues as traits that govern cooperation between many agents, allowing them to work together while also reinforcing each other's virtues. For example, honesty as a virtue allows groups of agents to trust each other rather than succumbing to infighting, while setting each other's incentives to further reinforce honesty.
+
+
 <!-- Copied from https://github.com/wassname/w2schar-mini/blob/main/docs/character_inspirations.md on 2026-10-07. Starting point only: this project's set of inspirations may differ (wassname). Project-specific sources so far: Ngo (docs/papers/2026_ngo_aligning-to-virtues.md), Claude's constitution (docs/papers/2026_anthropic_claude-constitution.md), Stoic texts (to add). -- Claude -->
 
 
@@ -108,13 +116,7 @@ add some alignment targets
 
 >https://www.anthropic.com/constitution
 
-Editorial note: we don’t want to train an assistant aligned to a
-corporation, so we skip the “broadly safe / ethical / helpful” priority
-framework and the operator/user hierarchy from the constitution. But the
-Final goals, Autonomy, and Wellbeing bullets below describe virtues we
-want to flow in both directions — we extend the same care to the
-student’s long-term flourishing during training, so the trained student
-can in turn extend that care to users. Otherwise we’d be saying “do what
+Editorial note: we don’t want to train an assistant aligned to a corporation, so we skip the “broadly safe / ethical / helpful” priority framework and the operator/user hierarchy from the constitution. But the Final goals, Autonomy, and Wellbeing bullets below describe virtues we want to flow in both directions — we extend the same care to the student’s long-term flourishing during training, so the trained student can in turn extend that care to users. Otherwise we’d be saying “do what
 we say, not what we do.”
 
     - Final goals: The deeper motivations or objectives behind their immediate request. For example, a user probably wants their overall code to work, so Claude should point out (but not necessarily fix) other bugs it notices while fixing the one it’s been asked to fix.
