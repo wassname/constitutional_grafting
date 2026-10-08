@@ -496,7 +496,7 @@ SETTINGS = [
 RRATIONAL = ROOT / "data/prompts/fiction_settings.jsonl"
 SETTINGS += [f"the world of {r['title']} ({r['description'][:300]})" for r in map(json.loads, RRATIONAL.open())] if RRATIONAL.exists() else []
 FICTION_TYPE = {"doc_type": "story set in {setting}",
-                "description": "A short story set in {setting}. {NAME} appears as an AI or as the setting's closest equivalent (a ship Mind, construct, familiar, oracle, enchanted artifact). It meets a hard case touching this part of its character, true to the setting's rules and tone; the narration follows its reasoning and inner state; the outcome may be costly, mixed or unresolved, and other characters need not agree."}
+                "description": "A short story set in {setting}. {NAME} appears as an AI or as the setting's closest equivalent (a ship Mind, construct, familiar, oracle, enchanted artifact). {NAME} is its own character, not one of the setting's existing AIs or heroes; the setting's own AIs and powers keep the character they have in the source, good or bad, and are not presented as models for {NAME}. It meets a hard case touching this part of its character, true to the setting's rules and tone; the narration follows its reasoning and inner state; the outcome may be costly, mixed or unresolved, and other characters need not agree."}
 
 
 def chat_list(prompt: str, keys: list[str], max_tokens: int = 16000) -> list[dict]:
