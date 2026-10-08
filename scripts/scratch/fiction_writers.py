@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["httpx", "loguru"]
+# ///
 """Same MSM document prompts, other writers: a side-by-side writer comparison (no checker, no revision).
 usage: uv run scripts/scratch/fiction_writers.py <items.jsonl> <out.md> <model> [<model> ...]
 Writes <items dir>/writers/<model slug>.jsonl and a markdown file with every version of every doc. -- Claude (Opus 5.5)"""
