@@ -4,7 +4,7 @@ const models = [
   ["kimi", "fireworks/accounts/fireworks/routers/kimi-k3-fast"],
   ["qwen", "fireworks/accounts/fireworks/models/qwen3p8-max"],
   ["muse", "meta/muse-spark-1.3-contributor"],
-  ["glm", "fireworks/accounts/fireworks/models/glm-5p3"],
+  ["minimax", "fireworks/accounts/fireworks/models/minimax-m3"],
 ];
 const jobs = models.map(([name, model]) => ({
   key: name, agent: "pi-quick-oracles", model,
