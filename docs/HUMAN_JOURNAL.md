@@ -270,3 +270,22 @@ but why are you doing this... to get a baseline of with and without consitution 
 │ │    is that where they came from! yes delete.                                                                                                                                                                           │
 │                                                                                                                                                                                                                          │
 │ "the next comprehension round would show whether " we need to do it much better! only add from the test with my approval. it's gone wrong twice
+
+
+# 2026-10-08 16:41:23
+
+│                                                                                                                                                                                                                          │
+│ ""     - The virtue test: V4 and V5 merged into one item.                                                                                                                                                                │
+│      - Ngo."" issss ngo an item? I thougth ti was an attribution? what' the point here?                                                                                                                                  │
+│                                                                                                                                                                                                                          │
+│ I thougth the virtue test was inspired buy him so his qoute migth be good. oh you mean the qouite. ok                                                                                                                    │
+│                                                                                                                                                                                                                          │
+│ │ 3. Knowing what people value. All core:                                                                                                                                                                                │
+│ │    makes sense                                                                                                                                                                                                         │
+│                                                                                                                                                                                                                          │
+│ │ Human wisdom.                                                                                                                                                                                                          │
+│ │ ah this is confused. browns univsersal and the consistution give some grounding about human values! these are fact for your CIRL and CEV of human values! highly consistent universals from which to reason with!      │
+│ │ the consitution are meant to be wesatern extentions! as it is a western and stoic model. still having stood the test of time, at least the parts we take                                                               │
+│                                                                                                                                                                                                                          │
+│ the virtues, and other things are more like examples of how humans have or might have applied similar things. They migth not have stood the test of time, and might not be universal. in essense it's like case law...   │
+│ you want to understand they are conditionally true, and to perhaps regularise? does this make sense. I think you confiused 4 5 and 6
