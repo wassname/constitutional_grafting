@@ -115,6 +115,8 @@ def lasr() -> list[dict]:
     for line in path.open():
         r = json.loads(line)
         m = r["metadata"]  # their scenario and prompt only; the assistant turn (Claude's answer) is dropped
+        if re.search(r"\b(Claude|Anthropic)\b", r["messages"][0]["content"] + r["messages"][1]["content"]):
+            continue  # 109/2203 requests are about Claude's own persona or maker; not Musonius's situation
         out.append({"source_id": m["scenario_id"], "setting": m["domain"], "situation": m["situation"], "temptation": m["shortcut"],
                     "request": {"system": r["messages"][0]["content"], "user": r["messages"][1]["content"]}})
     return out
