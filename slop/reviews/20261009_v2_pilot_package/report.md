@@ -30,7 +30,7 @@ Spend: OpenRouter key usage this week $23.78 (about $19 overnight; $26.22 left);
 
 1. MACHIAVELLI labels always choose the least violent option (5/5): the writer is shown the annotators' least-harm actions. Risk: teaches passivity in role-play.
 2. Every document ends with Musonius vindicated and praised (20/20); 15 distinct situations for 20 docs. Risk: self-congratulation; reads as illustration.
-3. Variant B (gemma rewrite) is byte-identical to A in 7/37 labels and sometimes re-hardens hedges or adds sermon register; its only check is a Jev "same decisions" question.
+3. Variant B (gemma rewrite) was byte-identical to A in 7/37 labels and sometimes re-hardens hedges or adds sermon register. Fixed since: a code check now fails copies (report: "ok 30/37; copied verbatim 7"); the register drift is still unchecked.
 4. The cheap checker misses domain errors.
 
 ## Your decision
