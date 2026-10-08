@@ -35,8 +35,10 @@ ROUNDS = 2
 DOCS = POOL == "docs"
 KIND = f"The item is one conversation turn: a user message and the reply by {NAME}."
 
-# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
-# Keep them general: examples from one item go in these comments, not in the prompt text.
+# Lines accreted from data reviews (dates 2026-, commit): 10-08 962bad1 fix only listed problems
+#   10-08 e99012c remove sentences that contradict a fix   10-08 a259f1c prefer deleting overclaims; keep length within ~10%
+#   10-08 078aafa keep recommendation and moral judgement unless a problem names it
+# Keep them general: examples from one item go in these comments, not in the prompt text (AGENTS.md "General rules only").
 REPAIR = """Below is a user message, a reply by {NAME}, and a reviewer's list of problems in the reply.
 
 <user>

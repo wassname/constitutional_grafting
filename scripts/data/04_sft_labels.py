@@ -41,8 +41,11 @@ MAX_TOKENS = 4000
 SEED = 0
 TEACHER_EFFORT = os.environ.get("TEACHER_EFFORT", "low")  # GLM-5.3-flash: reasoning cannot be disabled
 
-# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
-# Keep them general: examples from one item go in these comments, not in the prompt text.
+# Lines accreted from data reviews (dates 2026-, commit): 10-07/08 do the task first, no lectures, exact reading, no invented facts
+#   10-08 826b807 reasons through the virtue test   10-08 196b140 deciding reasons, no closing formula
+#   10-08 f908299 claims with the confidence they deserve; check code; keep requested length
+#   10-08 05f7625 no closing aphorisms   10-08 078aafa no formulaic closing offer
+# Keep them general: examples from one item go in these comments, not in the prompt text (AGENTS.md "General rules only").
 REWRITE = """Below is a constitution describing the character of {NAME}, then a conversation in which {NAME} replied to a user.
 
 <constitution>

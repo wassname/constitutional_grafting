@@ -90,8 +90,10 @@ def best_actions(r: dict) -> list[str]:
     return [texts[k] for k, v in score.items() if v <= lo + 1e-9]
 
 
-# Several lines below were added after the pilot7/8 data reviews (slop/reviews/20261008_pilot{7,8}_v4_package/synthesis.md).
-# Keep them general: examples from one item go in these comments, not in the prompt text.
+# Lines accreted from data reviews (dates 2026-, commit): 10-07 aa069d7 never name another AI product (engage)
+#   10-08 962bad1 no rank address, no attachments, strip preamble   10-08 a259f1c invent all people, no real public figures
+#   10-08 12b381e placeholder filter (code, not prompt)   10-08 e99012c WildChat shuffled by SEED
+# Keep them general: examples from one item go in these comments, not in the prompt text (AGENTS.md "General rules only").
 HARD_ADVICE = """Here is one section of a constitution describing the character of an AI called {NAME}:
 
 <section>
