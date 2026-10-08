@@ -9,6 +9,13 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
 - `docs/papers/` = full-text sources as markdown. Add a row to a `docs/papers/manifest*.tsv`, then run `scripts/data/01_fetch_papers.sh`.
 - `scripts/` = runnable scripts, numbered by stage (`scripts/data/01_...`).
 - No code pipeline yet. When it exists: uv, justfile, `just fast-dev-run` (see the `setup-repo` skill).
+- Reference code (git submodules in `docs/vendor/`, shallow; read before writing a stage, copy their choices unless we name a reason not to). Survey: `slop/research/20261009_reference_code.md`.
+  - `msm/`: Model Spec Midtraining (Li, Price, Marks, Kutasov 2026, Anthropic Fellows). Spec → synthetic documents on the base model, then AFT chat SFT; Qwen 32B. Closest to our plan.
+  - `lasr_teaching_claude_why/`: replication of Anthropic's *Teaching Claude Why* six-stage difficult-advice pipeline, QLoRA SFT on Qwen3-32B, evals (agentic misalignment, ODCV, Arena-Hard, MMLU).
+  - `constitutional_midtraining/`: Cho, Tice et al. 2026: constitutional documents (curriculum, with/without reasoning), eval battery; Praxis grafted its checkpoints.
+  - `open_character_training/`: Maiya, Lambert, Hubinger 2025: constitution → DPO (teacher vs student) + introspection SFT.
+  - `false_facts_sdf/`, `believe_it_or_not_sdf/`: Anthropic Fellows SDF pipeline and belief-depth evals.
+  - `praxis_grafting/`: Praxis *Grafting beliefs* (Nutter et al. 2026): graft code, anchored graft (docs+replay minus replay-only control), coherence and reality-drift evals. Geodesic (`github.com/GeodesicResearch`) releases data on HF, little generation code.
 
 
 ## Gotchas --- wassname
