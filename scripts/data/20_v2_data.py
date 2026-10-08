@@ -118,8 +118,9 @@ def code_checks(text: str, kind: str, context: str = "", mention: bool = False) 
     out = []
     if RECITAL.search(text) and not (kind == "doc" and mention):
         out.append(f"names its constitution or its internal terms ({RECITAL.search(text).group(0)!r}); give the reasons in plain words instead")
-    if PLACEHOLDER.search(text):
-        out.append(f"contains a placeholder ({PLACEHOLDER.search(text).group(0)!r})")
+    prose = re.sub(r"```.*?```|`[^`\n]*`", " ", text, flags=re.S)  # code names like RAND_MAX are not template slots
+    if PLACEHOLDER.search(prose):
+        out.append(f"contains a placeholder ({PLACEHOLDER.search(prose).group(0)!r})")
     if kind == "label":
         if re.search(r"\bdraft\b", text, re.I) and not re.search(r"\bdraft\b", context, re.I):
             out.append("refers to a draft the person never saw")
