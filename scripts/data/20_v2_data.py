@@ -35,7 +35,7 @@ ROOT = Path(__file__).resolve().parents[2]
 NAME = C.NAME
 WRITER = os.environ.get("WRITER", "anthropic/claude-haiku-5.5")  # wassname 2026-10-08: "ok great lets use haiku 5.5"
 TARGET = "google/gemma-4-31b-it"
-CHECKER = os.environ.get("CHECKER", "deepseek/deepseek-v4.1-flash")  # wassname: luna too small; "use latest" (v4.1, 2026-09-10)
+CHECKER = os.environ.get("CHECKER", "~deepseek/deepseek-flash-latest")  # wassname: "yes use"; served deepseek-v4.1-flash on 2026-10-08; served model logged per run
 JEV = "typesafe/jev-1.13"
 SEED = int(os.environ.get("SEED", "0"))
 OPEN_PROVIDER = {"provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}}
@@ -43,6 +43,7 @@ PROVIDER_JUNK = re.compile(r"quota has been exhausted|API key status|USDT balanc
 
 CLIENT = httpx.Client(base_url="https://openrouter.ai/api", headers={"Authorization": f"Bearer {openrouter_key()}"}, timeout=httpx.Timeout(240, connect=30))  # some providers hang on long inputs; retry instead
 COST: Counter = Counter()
+SERVED: Counter = Counter()
 
 
 def chat(model: str, messages: list[dict], max_tokens: int = 8000, **kw) -> str:
@@ -60,6 +61,7 @@ def chat(model: str, messages: list[dict], max_tokens: int = 8000, **kw) -> str:
         r.raise_for_status()
         j = r.json()
         COST[model] += (j.get("usage") or {}).get("cost", 0.0)
+        SERVED[(model, j.get("model"))] += 1  # aliases can move; the report shows what actually ran
         text = re.sub(r"^<think>.*?</think>\s*", "", (j["choices"][0]["message"]["content"] or "").strip(), flags=re.S)
         if j["choices"][0].get("finish_reason") == "length" or len(text.split()) < 5 or PROVIDER_JUNK.search(text):
             continue
@@ -344,6 +346,7 @@ def report(out: Path, kind: str, items: list[dict], words):
              f"first draft {sorted(b for _, b, _ in w)[len(w)//2]}, final {sorted(c for _, _, c in w)[len(w)//2]}",
              f"- code flags on first drafts: {dict(code0) or 'none'}",
              f"- kept by {group}: " + ", ".join(f"{k} {by_kept[k]}/{v}" for k, v in sorted(by.items())),
+             f"- served models: " + ", ".join(f"{a} -> {b} x{n}" for (a, b), n in SERVED.items()),
              f"- cost: " + ", ".join(f"{k} ${v:.3f}" for k, v in COST.items()) + f"; total ${sum(COST.values()):.3f}", ""]
     (out / "report.md").write_text("\n".join(lines))
     logger.info("\n" + "\n".join(lines))
