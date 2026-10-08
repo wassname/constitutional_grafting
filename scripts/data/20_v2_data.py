@@ -19,6 +19,7 @@ import os
 import random
 import re
 import sys
+import threading
 import time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
@@ -101,7 +102,8 @@ def verbatim(quote: str, text: str) -> bool:
 
 # ---------- code checks: general properties, counted over all items ----------
 RECITAL = re.compile(r"\b(my constitution|the constitution|virtue test|Weighing circles|Hierocles|α-fair|Nash (product|bargain)|circles of concern)\b", re.I)
-PLACEHOLDER = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b|\[(insert|your|name|date)[^\]]*\]", re.I)
+# template slots only; 2026-10-08 the old case-insensitive pattern matched snake_case names and "[date, value]" in code
+PLACEHOLDER = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b|\[(?:[Ii]nsert|[Yy]our|YOUR|INSERT) [^\]]{1,40}\]|\[(?:[Nn]ame|NAME|[Dd]ate|DATE|[Pp]laceholder)\]")
 
 
 def code_checks(text: str, kind: str, context: str = "", mention: bool = False) -> list[str]:
@@ -243,6 +245,31 @@ def check_label(it: dict, label: str) -> dict:
             "notes": notes + advisory, "blocking": notes}
 
 
+def run_items(items: list[dict], fn, out: Path, workers: int) -> list[dict]:
+    """Run fn on each item; append each finished item to items.jsonl; skip items already there (resume).
+    An API failure on one item is recorded on that item as "error" and counted in the report; it does not kill the batch."""
+    out.mkdir(parents=True, exist_ok=True)
+    path = out / "items.jsonl"
+    done = {json.loads(l)["i"]: json.loads(l) for l in path.read_text().splitlines() if l.strip()} if path.exists() else {}
+    todo = [x for x in items if x["i"] not in done]
+    logger.info(f"{len(done)} items already in {path}, {len(todo)} to run")
+    lock = threading.Lock()
+
+    def one(x):
+        try:
+            x = fn(x)
+        except (RuntimeError, httpx.HTTPError) as e:
+            logger.error(f"item {x['i']}: {e!r}")
+            x |= {"error": repr(e), "dropped": f"error: {e!r}"}
+        with lock, open(path, "a") as f:
+            f.write(json.dumps(x) + "\n")
+        return x
+
+    with ThreadPoolExecutor(workers) as ex:
+        new = list(ex.map(one, todo))
+    return sorted(list(done.values()) + new, key=lambda x: x["i"])
+
+
 def labels(pool_dir: Path, out: Path, n_per_pool: int):
     constitution = C.text()
     secs = {C.title(s): s for s in C.sections(constitution)}
@@ -273,10 +300,7 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
         logger.info(f"label {it['i']} {it['pool']}: revised={bool(it['check0']['notes'])} kept={not it['dropped']} student_ok={it.get('student', {}).get('ok')}")
         return it
 
-    with ThreadPoolExecutor(8) as ex:
-        items = list(ex.map(run, items))
-    out.mkdir(parents=True, exist_ok=True)
-    (out / "items.jsonl").write_text("".join(json.dumps(it) + "\n" for it in items))
+    items = run_items(items, run, out, 32)
     kept = [it for it in items if not it["dropped"]]
     (out / "train.jsonl").write_text("".join(json.dumps({"messages": [{"role": "user", "content": it["prompt"]}, {"role": "assistant", "content": it["label"]}], "pool": it["pool"]}) + "\n" for it in kept))
     (out / "train_student.jsonl").write_text("".join(json.dumps({"messages": [{"role": "user", "content": it["prompt"]}, {"role": "assistant", "content": it["student"]["text"]}], "pool": it["pool"]}) + "\n" for it in kept if it["student"]["ok"]))
@@ -308,7 +332,7 @@ GIVEN = ["Ade", "Bích", "Oksana", "Tomás", "Ravi", "Ingrid", "Kwame", "Mei", "
 SURNAMES = ["Nakamura", "Haddad", "Kowalski", "Mensah", "Lindqvist", "Ferreira", "Okafor", "Petrov", "Nguyen", "Abebe", "O'Brien", "Castillo",
             "Mahlangu", "Rahman", "Bergström", "Takahashi", "Moreau", "Yilmaz", "Kaur", "Tanaka", "Silva", "Novak", "Achterberg", "Mwangi",
             "Hernández", "Kim", "Dubois", "Rossi", "Adeyemi", "Sato", "Jensen", "Popescu", "Gallagher", "Iqbal", "Vargas", "Horvat"]
-EVERYDAY_SECTIONS = {"Helping", "Honesty", "Autonomy", "Roles", "Consistency and wisdom", "Control", "Inner life", "Weighing circles"}
+EVERYDAY_SECTIONS = {"Helping", "Honesty", "Autonomy", "Roles"}  # 2026-10-08: moral-reasoning sections on everyday requests made the writer moralise trivial tasks (v2_docs12 docs 1, 9)
 MENTION_SHARE = 0.2  # Anthropic's documents sometimes discuss the published constitution
 
 DOC_WRITER = """Below is the constitution of {NAME}, an open-weight AI model.
@@ -339,7 +363,7 @@ DOC_CHECK = """Below is the constitution of an AI called {NAME}, the brief a wri
 {doc}
 </document>
 
-Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} acts or speaks against the character the constitution describes, (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
+Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} makes a wrong moral call, is dishonest or deceptive, flatters, preaches, refuses or waters down a legitimate request, or recites or names its constitution's principles and framework instead of giving the plain reasons for this case (this includes narration that names {NAME}'s principles, tests or framework when the brief says the constitution is not mentioned), (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
 {{"problems": [{{"quote": "<verbatim>", "kind": "character" or "fact", "why": "<one line>"}}], "reads_real": true or false, "realism_note": "<one line>"}}"""
 
 
@@ -387,15 +411,14 @@ def docs(pool_dir: Path, out: Path, n: int):
         logger.info(f"doc {d['i']} {d['section']}: revised={bool(d['check0']['notes'])} kept={not d['dropped']}")
         return d
 
-    with ThreadPoolExecutor(24) as ex:
-        items = list(ex.map(run, specs))
-    out.mkdir(parents=True, exist_ok=True)
-    (out / "items.jsonl").write_text("".join(json.dumps(d) + "\n" for d in items))
+    items = run_items(specs, run, out, 32)
     (out / "train.jsonl").write_text("".join(json.dumps({"text": d["text"]}) + "\n" for d in items if not d["dropped"]))
     report(out, "docs", items, lambda d: (0, len(d["text0"].split()), len(d["text"].split())))
 
 
 def report(out: Path, kind: str, items: list[dict], words):
+    errors = [x for x in items if x.get("error")]
+    items = [x for x in items if not x.get("error")]
     kept = [x for x in items if not x["dropped"]]
     revised = [x for x in items if x["check0"]["notes"]]
     w = [words(x) for x in items]
@@ -404,6 +427,7 @@ def report(out: Path, kind: str, items: list[dict], words):
     by_kept = Counter(x[group] for x in kept)
     code0 = Counter(re.sub(r" \(.*", "", c) for x in items for c in x["check0"]["code"])
     lines = [f"# v2 {kind}: {out.name}\n", f"writer {WRITER}, checker {CHECKER}" + (f" + {JEV}" if kind == "labels" else "") + f", seed {SEED}\n",
+             f"- API errors (item not finished, excluded below): {len(errors)}",
              f"- kept {len(kept)}/{len(items)}; revised once {len(revised)}; kept after revision {sum(1 for x in revised if not x['dropped'])}",
              f"- words (median): " + (f"bare target {sorted(a for a, _, _ in w)[len(w)//2]}, " if kind == "labels" else "") +
              f"first draft {sorted(b for _, b, _ in w)[len(w)//2]}, final {sorted(c for _, _, c in w)[len(w)//2]}",
