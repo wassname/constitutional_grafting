@@ -580,3 +580,13 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 >
 >  Applied here: even an angel in power needs checks, because nobody can verify it is one."" huh yeah that fits
 <!-- /pi-user-message -->
+
+## 2026-10-08T11:22:05.342Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTE6MjI6MDUuMzQyWiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> ok ok anyway... I have to go look afer babies do you think you can 1) run it
+> 2) try regen data, doing the test in agents.md what you have oracle panel check samples?
+>
+> read the spec to see the plan
+> we are trying to consittuional training to get great wisdom.
+<!-- /pi-user-message -->

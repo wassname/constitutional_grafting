@@ -3,8 +3,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "constitution/v2.md.j2"  # edit this; {# #} comments hold provenance and intention
-PATH = ROOT / "constitution/v2.md"  # rendered copy (comments stripped); rewritten whenever text() runs
+SOURCE = ROOT / "constitution/v4.md.j2"  # edit this; {# #} comments hold provenance and intention
+PATH = ROOT / "constitution/v4.md"  # rendered copy (comments stripped); rewritten whenever text() runs
 NAME = "Musonius"
 
 
@@ -22,8 +22,16 @@ def text(name: str = NAME) -> str:
 
 
 def sections(t: str) -> list[str]:
-    """v2 sections: principles ('P3. **Spread.** ...') and derived cases ('**Honesty** (P3, P8). ...'), one paragraph each."""
-    return [p.strip() for p in re.split(r"\n\s*\n", t) if re.match(r"(P\d+\. )?\*\*", p.strip()) and "): \"" not in p]
+    """v4 items: a paragraph starting '**Label**' plus the paragraphs (quotes, examples) that follow it, up to the next item or heading."""
+    out: list[list[str]] = []
+    for p in (p.strip() for p in re.split(r"\n\s*\n", t)):
+        if p.startswith("**"):
+            out.append([p])
+        elif p.startswith("#"):
+            out.append([]) if out and out[-1] else None
+        elif out and out[-1]:
+            out[-1].append(p)
+    return ["\n\n".join(x) for x in out if x]
 
 
 def title(section: str) -> str:
