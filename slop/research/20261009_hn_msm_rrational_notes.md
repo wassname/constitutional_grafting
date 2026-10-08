@@ -37,3 +37,9 @@ All 3 Opus 5.5 subagent calls given the MSM fiction prompts (`slop/reviews/20261
 > This request was blocked as it seems to violate Anthropic's Terms of Service restrictions on reverse engineering or duplicating model outputs. To learn more, visit https://www.anthropic.com/legal/commercial-terms.
 
 Earlier the same day, Opus wrote our v2 story briefs without a block (`opus_docs/`). Haiku 5.5 via OpenRouter has not been blocked. Decision (Claude): do not retry or reword prompts to get past the block; treat it as Anthropic's answer to the D.4 question and move writing to open-weight models.
+
+## Decision (wassname, 2026-10-09): keep Haiku 5.5 as writer
+
+> anthropic is more aligned. they are less carefull haiku. no I would like to use it. I'm not concerned. Their legal basis is not a moral basis, and has not been evaluated in courts
+
+Haiku via OpenRouter is not blocked. Claude will not retry or reword the blocked Opus prompts.
