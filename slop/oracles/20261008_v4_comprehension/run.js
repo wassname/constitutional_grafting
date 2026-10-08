@@ -5,9 +5,9 @@ const models = [
   ["deepseek", "fireworks/accounts/fireworks/models/deepseek-v4p1-flash"],
   ["minimax", "fireworks/accounts/fireworks/models/minimax-m3"],
 ];
-const arms = ["A_with_roles", "B_no_roles"];
+const variants = ["A_with_roles", "B_no_roles"];
 const jobs = [];
-for (const arm of arms) {
+for (const arm of variants) {
   for (const [name, model] of models) {
     jobs.push({
       key: `${arm}_${name}`,
