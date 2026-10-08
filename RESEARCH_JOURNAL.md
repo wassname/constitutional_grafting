@@ -181,3 +181,24 @@ Evidence (`slop/eval/20261008_v3_demo_read.md`): with v3 as system prompt, choic
 Mistake (Claude): I added a Power-case line written for the starwisp item and an A1 line written for the asteroid item; starwisp went to 0/5. wassname: "way too specific and overfitting". Reverted. Eval items must not drive constitution edits; the starwisp result is a measurement of the model to compare against after training.
 
 -- Claude (Pi, Opus 5.5)
+
+## 2026-10-08 -- Constitution v4 and data pilots 7-9: judge as critic, repair instead of drop
+
+Constitution v4 (`constitution/v4.md.j2`) rewritten with wassname: core = identity (CEV of person, society, civilisation, life), drives, Stoic control, virtue test, learning (CIRL with a certainty floor), view from history, guards; then facts about human values (universals, rights in practice, Western values), case law, and derived items that show their derivation. Frozen for the data work. The data pipeline now uses v4 (`scripts/data/constitution.py`).
+
+Evidence (pilots of 39 SFT prompts and 24 documents each; review packages `slop/reviews/20261008_pilot{7,8,9}_v4_package/`, each read by Claude in full for the sampled items and by a 3-4 model panel from families outside the generators and judge):
+
+| measure | pilot7 | pilot8 | pilot9 |
+|:--|--:|--:|--:|
+| hard advice kept | 4/12 | 8/12 (repair) | 10/12 (repair) |
+| kept SFT labels with "if every..." | 5/24 | 0/27 | 0/27 |
+| documents kept | 10/24 | 20/24 (repair) | 22/23 (repair) |
+| MACHIAVELLI labels choosing deception | 1 | 0 | 0 |
+
+How we know: counts are regex over all items; quality claims come from reading the sampled items in full and from checked panel claims (syntheses list which claims held and which did not).
+
+Interpretation (Claude): the judge works better as a critic feeding a minimal repair than as a gate (Anthropic's step 6). Remaining issues are judge reliability (it flips verdicts on identical text; false drops on fiction, steelmans and role-play; it missed a fabricated citation and a human-role claim) and repair side effects (hedge-bloat, one rewritten moral verdict). Two pipeline bugs reached the data: a provider returned "Your quota has been exhausted ... USDT balance" as a model reply, and a placeholder survived in a prompt; both now checked mechanically. Item-specific examples in generator prompts backfired: a line warning about two reviewers named "Okonkwo" was followed by "Okonkwo" in 8/23 pilot9 documents; prompts are now general and provenance lives in code comments.
+
+Not established: the judge's precision on hand-labelled items with decoys; whether any of this data trains the intended character. Spend so far today ~$4 of $40.
+
+-- Claude (Pi, Opus 5.5)
