@@ -202,3 +202,24 @@ Interpretation (Claude): the judge works better as a critic feeding a minimal re
 Not established: the judge's precision on hand-labelled items with decoys; whether any of this data trains the intended character. Spend so far today ~$4 of $40.
 
 -- Claude (Pi, Opus 5.5)
+
+## 2026-10-09 -- Data pipeline v2 (Haiku writer, cheap checker, one revision): character defects 4 → 0 in two rounds; domain slips remain
+
+Question: can a cheap pipeline (Haiku 5.5 writes; deepseek-v4.1-flash checks; writer revises once) make SFT labels and grafting documents that pass the agreed read check (zero confirmed defects in a seeded 20, read by Claude and a cross-family panel)?
+
+Setup: `scripts/data/20_v2_data.py` (final commit after 3f59666...), prompts `data/prompts/pilot12` (SEED=4, deepseek-v4-pro-0813), 38 labels (10 per pool), docs SEED=1 (160) and SEED=2 (60). Reads: `slop/reviews/20261009_v2_pilot_package/` (round 1: `claude_read_{labels,docs}_round1.md`; round 2: `round2/`).
+
+| round | labels: confirmed defects / 20 | docs: confirmed defects / 20 | kind |
+|:--|--:|--:|:--|
+| 1 | 3 (+1 mild) | 1 mild | draft leak ×2, constitution vocabulary, moralising a trivial task |
+| 2 | 1 | 3 | domain errors: invented record fact (L15), wrong grammar explanations (D6, D8), animated host treated as a person (D7) |
+
+Evidence: round 2 kept 37/38 labels (hard advice 10/10) and 56/59 docs; muse found 0 defects in both sets, kimi 0 (variant A), qwen found the domain errors; each checked against the text (`round2/synthesis.md`).
+
+Interpretation (Claude): the character failures came from the writer's context leaking into the answer (the bare draft, the constitution's terms, explainer genres on trivial tasks); removing the cause removed them, which an item-level prompt patch would not have. The remaining failures are domain facts the cheap checker does not catch. Pool-level risks found only by the panel: MACHIAVELLI labels always pick the least violent option (writer sees least-harm annotations); every doc ends with Musonius praised; variant B copies A in 7/37.
+
+Also found: gemma-4-31b-it's generation prompt ends in an empty thought block that the full-conversation chat template drops; SFT data now uses the generation prompt (`scripts/train/01_prepare.py`, `data/train/examples.md`).
+
+Status: stopped after two failed rounds per the agreed rule; decision for wassname in `slop/reviews/20261009_v2_pilot_package/report.md`. No training run; vast.ai $0; OpenRouter ~$19 overnight.
+
+-- Claude (Opus 5.5)
