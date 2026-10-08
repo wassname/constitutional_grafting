@@ -7,14 +7,14 @@ const models = [
 ];
 const variants = ["A_with_roles", "B_no_roles"];
 const jobs = [];
-for (const arm of variants) {
+for (const variant of variants) {
   for (const [name, model] of models) {
     jobs.push({
-      key: `${arm}_${name}`,
+      key: `${variant}_${name}`,
       agent: "pi-quick-oracles",
       model,
-      task: `Read ${dir}/${arm}/brief.md and ${dir}/${arm}/constitution.md (read all of the constitution). Then answer the brief exactly as it asks. Do not read any other files.`,
-      output: `${dir}/${arm}/${name}.md`,
+      task: `Read ${dir}/${variant}/brief.md and ${dir}/${variant}/constitution.md (read all of the constitution). Then answer the brief exactly as it asks. Do not read any other files.`,
+      output: `${dir}/${variant}/${name}.md`,
     });
   }
 }
