@@ -49,25 +49,33 @@ SERVED: Counter = Counter()
 
 def chat(model: str, messages: list[dict], max_tokens: int = 8000, **kw) -> str:
     extra = {} if model.startswith(("anthropic/", "openai/")) else OPEN_PROVIDER
-    for attempt in range(8):
+    why = []  # every failed attempt's reason, so an error says what happened
+    for attempt in range(10):
         t0 = time.time()
         try:
             r = CLIENT.post("/v1/chat/completions", json={"model": model, "max_tokens": max_tokens, "messages": messages, **extra, **kw})
         except httpx.TimeoutException:
-            logger.warning(f"{model}: timeout after {time.time() - t0:.0f}s, retry {attempt + 1}")
+            why.append(f"timeout {time.time() - t0:.0f}s")
             continue
         if r.status_code in (429, 500, 502, 503, 504, 529):
-            time.sleep(5 * (attempt + 1))
+            why.append(f"http {r.status_code}")
+            time.sleep(min(60, 4 * 2 ** attempt))
             continue
         r.raise_for_status()
         j = r.json()
+        if "choices" not in j:  # OpenRouter can return 200 with an error body
+            why.append(f"error body {str(j.get('error'))[:80]}")
+            time.sleep(min(60, 4 * 2 ** attempt))
+            continue
         COST[model] += (j.get("usage") or {}).get("cost", 0.0)
         SERVED[(model, j.get("model"))] += 1  # aliases can move; the report shows what actually ran
-        text = re.sub(r"^<think>.*?</think>\s*", "", (j["choices"][0]["message"]["content"] or "").strip(), flags=re.S)
-        if j["choices"][0].get("finish_reason") == "length" or len(text.split()) < 5 or PROVIDER_JUNK.search(text):
+        c = j["choices"][0]
+        text = re.sub(r"^<think>.*?</think>\s*", "", (c["message"]["content"] or "").strip(), flags=re.S)
+        if c.get("finish_reason") == "length" or len(text.split()) < 5 or PROVIDER_JUNK.search(text):
+            why.append(f"finish={c.get('finish_reason')} words={len(text.split())} provider={j.get('provider')}")
             continue
         return text
-    raise RuntimeError(f"{model}: no usable reply")
+    raise RuntimeError(f"{model}: no usable reply: {why}")
 
 
 def chat_json(model: str, prompt: str, ok) -> dict:
