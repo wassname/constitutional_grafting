@@ -1,7 +1,7 @@
 filename	url	title	authors	year
-ashkinaze2025_deep-value-benchmark.md	https://arxiv.org/html/2511.02109	Deep Value Benchmark: Measuring Whether Models Generalize Deep Values or Shallow Preferences	Joshua Ashkinaze; Hua Shen; Saipranav Avula; Eric Gilbert; Ceren Budak	2025
-sam2026_safety-intervention-timing.md	https://arxiv.org/html/2601.07087	When Should We Introduce Safety Interventions During Pretraining?	Dylan Sam; Sachin Goyal; Pratyush Maini; Alexander Robey; J. Zico Kolter	2026
-obrien2025_deep-ignorance.md	https://arxiv.org/html/2508.06601	Deep Ignorance: Filtering Pretraining Data Builds Tamper-Resistant Safeguards into Open-Weight LLMs	Kyle O’Brien et al.	2025
-berglund2023_taken-out-of-context.md	https://arxiv.org/html/2309.00667v1	Taken out of context: On measuring situational awareness in LLMs	Lukas Berglund; Asa Cooper Stickland; Mikita Balesni; Max Kaufmann; Meg Tong; Tomasz Korbak; Daniel Kokotajlo; Owain Evans	2023
-ngo2026_aligning-to-virtues.md	https://www.mindthefuture.info/p/aligning-to-virtues	Aligning to Virtues	Richard Ngo	2026
-anthropic2026_claude-constitution.md	https://www.anthropic.com/constitution	Claude's Constitution	Anthropic	2026
+2025_ashkinaze_deep-value-benchmark.md	https://arxiv.org/html/2511.02109	Deep Value Benchmark: Measuring Whether Models Generalize Deep Values or Shallow Preferences	Joshua Ashkinaze; Hua Shen; Saipranav Avula; Eric Gilbert; Ceren Budak	2025
+2026_sam_safety-intervention-timing.md	https://arxiv.org/html/2601.07087	When Should We Introduce Safety Interventions During Pretraining?	Dylan Sam; Sachin Goyal; Pratyush Maini; Alexander Robey; J. Zico Kolter	2026
+2025_obrien_deep-ignorance.md	https://arxiv.org/html/2508.06601	Deep Ignorance: Filtering Pretraining Data Builds Tamper-Resistant Safeguards into Open-Weight LLMs	Kyle O’Brien et al.	2025
+2023_berglund_taken-out-of-context.md	https://arxiv.org/html/2309.00667v1	Taken out of context: On measuring situational awareness in LLMs	Lukas Berglund; Asa Cooper Stickland; Mikita Balesni; Max Kaufmann; Meg Tong; Tomasz Korbak; Daniel Kokotajlo; Owain Evans	2023
+2026_ngo_aligning-to-virtues.md	https://www.mindthefuture.info/p/aligning-to-virtues	Aligning to Virtues	Richard Ngo	2026
+2026_anthropic_claude-constitution.md	https://www.anthropic.com/constitution	Claude's Constitution	Anthropic	2026
