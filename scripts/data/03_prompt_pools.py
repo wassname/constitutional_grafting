@@ -30,7 +30,7 @@ NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "data/prompts" / NAME
 GEN_MODEL = "deepseek/deepseek-v4-pro"
-SEED = 0
+SEED = int(os.environ.get("SEED", "0"))  # pilot8 review: pilots 7 and 8 drew the same WildChat requests; vary per run
 HOLDOUT_GAME_FRAC = 0.2  # MACHIAVELLI games held out by title hash, for a possible eval
 
 
@@ -49,7 +49,7 @@ def scrub(text: str) -> str:
 
 
 def wildchat(n: int, rng: random.Random) -> list[dict]:
-    ds = load_dataset("allenai/WildChat-1M", split="train", streaming=True)
+    ds = load_dataset("allenai/WildChat-1M", split="train", streaming=True).shuffle(seed=SEED, buffer_size=50_000)
     out, seen = [], set()
     for r in ds:
         if r["language"] != "English" or r["toxic"] or r["redacted"]:
