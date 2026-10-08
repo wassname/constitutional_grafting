@@ -158,7 +158,7 @@ def main():
     def gen(spec):
         prompt = PROMPT.format(NAME=NAME, constitution=constitution, MENTION=MENTION[spec["mention"]].format(NAME=NAME), **spec)
         for _ in range(6):
-            r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000 if GEN_MODEL.startswith("deepseek/") else 9000, "temperature": 1.0, "reasoning": GEN_REASONING, "provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True},
+            r = client.post("/chat/completions", json={"model": GEN_MODEL, "max_tokens": 3000 if GEN_MODEL.startswith("deepseek/") else 9000, "temperature": 1.0, "reasoning": GEN_REASONING, **({} if GEN_MODEL.startswith(("anthropic/", "openai/")) else {"provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}}),
                                                        "messages": [{"role": "user", "content": prompt}]})
             if r.status_code not in (429, 500, 502, 503, 504):
                 break
