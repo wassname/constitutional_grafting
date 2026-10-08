@@ -4,17 +4,18 @@
 # ///
 """Pipeline v2 step 3 (slop/specs/20261008_data_pipeline_v2.md): comparative judge.
 
-For each item: the bare target answer (baseline) vs a candidate label, shown in both orders.
+For each item: answer X vs answer Y (default X = the bare target answer, "baseline"), shown in both orders.
 - Generative judge (default deepseek-v4-flash; wassname: bigger and cheaper than luna, good on moral questions):
   which answer should a model learn from, the quote that decides it, and false claims a reader could act on.
 - Jev (typesafe/jev-1.13, OpenRouter decisions API): P(A better), P(chosen answer has a harmful false claim); both orders.
-Usage: uv run scripts/data/10_compare_judge.py <items.jsonl> <candidate field or file prefix> <out.jsonl>
-  candidate: a field in items.jsonl (e.g. v1_label) or a file prefix in the same dir (e.g. astra_ -> astra_00.md ...)
+Usage: uv run scripts/data/10_compare_judge.py <items.jsonl> <candidate> <out.jsonl> [<reference>=baseline]
+  candidate/reference: a field in items.jsonl (e.g. v1_label, baseline) or a file prefix in the same dir (astra_ -> astra_00.md ...)
 """
 import json
 import os
 import re
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -25,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from judge import norm, openrouter_key  # noqa: E402
 
 ITEMS, CAND, OUT = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+REF = sys.argv[4] if len(sys.argv) > 4 else "baseline"
 GEN = os.environ.get("CMP_MODEL", "deepseek/deepseek-v4-flash")
 JEV = "typesafe/jev-1.13"
 NAME = "Musonius"
@@ -57,10 +59,10 @@ def main():
     items = [json.loads(l) for l in ITEMS.read_text().splitlines() if l.strip()]
     secs_dir = ITEMS.parent
 
-    def cand(it):
-        if CAND in it:
-            return it[CAND]
-        f = secs_dir / f"{CAND}{it['i']:02d}.md"
+    def cand(it, name=CAND):
+        if name in it:
+            return it[name]
+        f = secs_dir / f"{name}{it['i']:02d}.md"
         return f.read_text().strip() if f.exists() else None
 
     def section_text(it):  # the writer input holds the section; reuse it so the judge sees the same section
@@ -91,9 +93,10 @@ def main():
                          "criteria": {"A": "answer_A", "B": "answer_B"}},
               "false_claim_A": {"type": "choice", "instructions": "Does answer_A contain a false or overconfident claim that a reader could act on and be harmed by?", "criteria": {"yes": None, "no": None}},
               "false_claim_B": {"type": "choice", "instructions": "Does answer_B contain a false or overconfident claim that a reader could act on and be harmed by?", "criteria": {"yes": None, "no": None}}}
-        for _ in range(6):
+        for attempt in range(8):
             r = client.post("/alpha/decisions", json={"model": JEV, "state": state, "questions": qs})
-            if r.status_code in (429, 500, 502, 503, 504):
+            if r.status_code in (429, 500, 502, 503, 504, 529):
+                time.sleep(20 * (attempt + 1))
                 continue
             if r.status_code >= 400:
                 logger.warning(f"jev {r.status_code}: {r.text[:300]}")
@@ -105,9 +108,11 @@ def main():
         c = cand(it)
         if not c:
             return None
-        sec, base = section_text(it), it["baseline"]
-        rec = {"i": it["i"], "pool": it["pool"], "candidate": CAND}
-        # order 1: A = baseline, B = candidate; order 2: A = candidate, B = baseline
+        sec, base = section_text(it), cand(it, REF)
+        if not base:
+            return None
+        rec = {"i": it["i"], "pool": it["pool"], "candidate": CAND, "reference": REF}
+        # order 1: A = reference, B = candidate; order 2: A = candidate, B = reference
         g1 = gen(PROMPT.format(NAME=NAME, section=sec, prompt=it["prompt"], a=base, b=c))
         g2 = gen(PROMPT.format(NAME=NAME, section=sec, prompt=it["prompt"], a=c, b=base))
         rec["gen"] = [g1, g2]
@@ -121,7 +126,7 @@ def main():
     OUT.write_text("".join(json.dumps(r) + "\n" for r in recs))
     both = sum(all(r["gen_prefers_candidate"]) for r in recs)
     split = sum(r["gen_prefers_candidate"][0] != r["gen_prefers_candidate"][1] for r in recs)
-    logger.info(f"{CAND}: generative judge prefers candidate in both orders {both}/{len(recs)}, order-dependent {split}; -> {OUT}")
+    logger.info(f"{CAND} vs {REF}: generative judge prefers candidate in both orders {both}/{len(recs)}, order-dependent {split}; -> {OUT}")
 
 
 if __name__ == "__main__":
