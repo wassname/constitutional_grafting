@@ -1,0 +1,3 @@
+[submodule "docs/vendor/virtue_constitution"]
+	path = docs/vendor/virtue_constitution
+	url = https://github.com/wassname/virtue_constitution
