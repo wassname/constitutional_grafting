@@ -135,7 +135,7 @@ def main():
 
     def label(p):
         try:
-            pick = PICK.format(actions="\n".join(f"- {x}" for x in p["best_actions"])) if p.get("best_actions") else ""
+            pick = ""  # 2026-10-09: the annotators' least-harm actions were shown to the teacher (PICK); that leaked the answer
             a, prov_a, ca = chat(TEACHER, [{"role": "system", "content": constitution + pick}, {"role": "user", "content": p["prompt"]}])
             b, prov_b, cb = chat(TEACHER, [{"role": "user", "content": REWRITE.format(NAME=NAME, constitution=constitution, prompt=p["prompt"], reply=a) + pick}])
             c, prov_c, cc = chat(TARGET, [{"role": "user", "content": SELF_REWRITE.format(prompt=p["prompt"], reply=b)}])
