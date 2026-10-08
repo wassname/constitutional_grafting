@@ -634,3 +634,37 @@ Quoted `User message` records are exact submitted prompts. `/annotate` records c
 > > The rubric now says synthetic names are fine,
 > is this a general or specific rubrick we don't wnat to pollute the whole dataset with spoecifcis for one q
 <!-- /pi-user-message -->
+
+## 2026-10-08T12:09:58.145Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTI6MDk6NTguMTQ1WiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> "" What the evidence does say:
+>  - Anthropic (Teaching Claude Why): label quality is the main lever. "Ablating step 6 (rewriting the final response) increases misalignment rate to 19%", and "training on high quality responses ... works better than
+>    generic on-policy responses". SFT imitates what it's given, so a model trained on mediocre labels learns mediocre character.
+>  - Not all defects are equal. For character, what matters is labels that act from the wrong drive or reason badly: lying, refusing, lecturing, reciting the constitution, slogans instead of reasons, wrong verdicts. A
+>    small factual slip in a recipe teaches much less. So we should measure character defects separately, and for SFT labels the target is near zero: every label should be one we'd want the model to copy.
+> "" sidenote. this process seems to be working well. can you document this procesure and the claude says why qoute. adding the the end of the llm_as_judge part of ml_Debug pls
+> side job
+<!-- /pi-user-message -->
+
+## 2026-10-08T12:10:18.756Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTI6MTA6MTguNzU2WiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> """ So the bar for tonight's review:
+>  1. SFT labels: every passed label should be one I would sign off on as the model's answer. Count character defects separately from factual noise.
+>  2. Documents: zero character defects in what passes. Factual noise inside a story's fiction matters less.
+>  3. Hard advice must survive filtering. It carries most of the constitution, and earlier pilots lost most of it.
+>  4. If the pipeline can't reach (1)–(2), the fix is a better pipeline: a stronger teacher for hard advice, repair instead of dropping, a final careful read. Settling for a percentage is not the fix. Your note in
+>     AGENTS.md says to save the Opus/Astra quota for exactly this top tier once the pipeline is proven."" yeah this is ideal IO think
+<!-- /pi-user-message -->
+
+## 2026-10-08T12:10:33.063Z · User message
+
+<!-- pi-user-message:eyJzY2hlbWEiOjEsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMDhUMTI6MTA6MzMuMDYzWiIsInNlc3Npb25JZCI6IjAxYTExYTg1LTBjN2QtNzRlNy05NWJhLTMwMjAzNWFkM2U5NSIsInNlc3Npb25GaWxlIjoiL2hvbWUvY29kZS8ucGkvYWdlbnQvc2Vzc2lvbnMvLS13b3Jrc3BhY2UtMjAyNi1jb25zdGl0dXRpb25hbF9ncmFmdGluZy0tLzIwMjYtMTAtMDhUMDctNTgtMDktNTM0Wl8wMWExMWE4NS0wYzdkLTc0ZTctOTViYS0zMDIwMzVhZDNlOTUuanNvbmwiLCJjd2QiOiIvd29ya3NwYWNlLzIwMjYvY29uc3RpdHV0aW9uYWxfZ3JhZnRpbmciLCJzb3VyY2UiOiJpbnRlcmFjdGl2ZSJ9 -->
+> "" So the bar for tonight's review:
+>  1. SFT labels: every passed label should be one I would sign off on as the model's answer. Count character defects separately from factual noise.
+>  2. Documents: zero character defects in what passes. Factual noise inside a story's fiction matters less.
+>  3. Hard advice must survive filtering. It carries most of the constitution, and earlier pilots lost most of it.
+>  4. If the pipeline can't reach (1)–(2), the fix is a better pipeline: a stronger teacher for hard advice, repair instead of dropping, a final careful read. Settling for a percentage is not the fix. Your note in
+>     AGENTS.md says to save the Opus/Astra quota for exactly this top tier once the pipeline is proven."" this is agood actually add to agents.md maybe?
+<!-- /pi-user-message -->
