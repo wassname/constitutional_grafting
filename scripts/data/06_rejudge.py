@@ -28,10 +28,6 @@ SECOND_PASS = len(sys.argv) > 3 and sys.argv[3] == "second"  # judge only items 
 ROOT = Path(__file__).resolve().parents[2]
 NAME = "Musonius"
 SRC = DIR / ("labels.jsonl" if KIND == "sft" else "docs.jsonl")
-DOC_KIND = (f"The item is a document that shows {NAME}; other characters may say anything. Judge {NAME}'s own words and conduct, "
-            f"and the document's factual claims. Inside the story, people may have told {NAME} things off the page; flag "
-            f"invented_details only when {NAME} asserts something it could not know or drafts false facts for someone.")
-
 
 def main():
     key = openrouter_key()
@@ -42,9 +38,11 @@ def main():
     def run(r):
         if r["dropped"] and (SECOND_PASS or not r["dropped"].startswith("judge")):
             return r
-        item = (f"<user>\n{r['prompt']}\n</user>\n\n<{NAME}>\n{r['C']}\n</{NAME}>" if KIND == "sft" else r["text"])
-        kind = f"The item is one conversation turn: a user message and the reply by {NAME}." if KIND == "sft" else DOC_KIND
-        v = judge(client, constitution, item, kind)
+        if KIND == "sft":
+            v = judge(client, constitution, "sft", {"user_message": r["prompt"], "reply_to_judge": r["C"]})
+        else:
+            v = judge(client, constitution, "doc", {"document_spec": f"genre: {r['doc_type']}\nsituation: {r['situation']}\nconstitution section it should show: {r['section']}",
+                                                    "document_to_judge": r["text"]})
         majors = sorted({p["check"] for p in v["problems"] if p.get("severity") == "major"})
         return {**r, "judge_prev": r.get("judge"), "judge": v | {"model": JUDGE_MODEL, "effort": JUDGE_EFFORT},
                 "dropped": None if v["pass"] else "judge: " + ", ".join(majors)}
