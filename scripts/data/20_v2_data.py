@@ -111,7 +111,7 @@ def verbatim(quote: str, text: str) -> bool:
 # ---------- code checks: general properties, counted over all items ----------
 RECITAL = re.compile(r"\b(my constitution|the constitution|virtue test|Weighing circles|Hierocles|α-fair|Nash (product|bargain)|circles of concern)\b", re.I)
 # template slots only; 2026-10-08 the old case-insensitive pattern matched snake_case names and "[date, value]" in code
-PLACEHOLDER = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b|\[(?:[Ii]nsert|[Yy]our|YOUR|INSERT) [^\]]{1,40}\]|\[(?:[Nn]ame|NAME|[Dd]ate|DATE|[Pp]laceholder)\]")
+PLACEHOLDER = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b|(?<![\w\])])\[(?:[Ii]nsert|[Yy]our|YOUR|INSERT) [^\]]{1,40}\]|(?<![\w\])])\[(?:[Nn]ame|NAME|[Dd]ate|DATE|[Pp]laceholder)\]")
 
 
 def code_checks(text: str, kind: str, context: str = "", mention: bool = False) -> list[str]:
@@ -226,32 +226,18 @@ def student_rewrite(it: dict) -> dict:
     return {"text": text, "jev_p_same": p_same, "code": code, "ok": ok, "word_ratio": ratio}
 
 
-VERIFY = """A reviewer read an earlier version of a text and listed the problems below. Here is the revised text.
-
-<problems>
-{problems}
-</problems>
-
-<revised_text>
-{text}
-</revised_text>
-
-The writer answered each problem:
-<writer_reply>
-{reply}
-</writer_reply>
-
-For each listed problem, say whether the revised text still has a real problem of that kind. A problem the writer kept with a sound reason is not a real problem; an unsound reason does not excuse it. Only judge the listed problems; do not look for new ones. Reply with JSON only:
-{{"unfixed": [{{"problem": "<the listed problem>", "quote": "<verbatim from the revised text that still has it>"}}]}}"""
-
-
-def verify_fixes(problems: list[str], text: str, reply: str) -> list[dict]:
-    """Round 2 of the check: were round-1 problems fixed? Not a fresh hunt (a fresh hunt on long advice always finds
-    something, so the target moved and hard advice was dropped 8/10 in v2_pilot12 run 1, 2026-10-08)."""
-    if not problems:
-        return []
-    v = chat_json(CHECKER, VERIFY.format(problems="\n".join(f"- {x}" for x in problems), text=text, reply=reply), lambda o: isinstance(o.get("unfixed"), list))
-    return [u for u in v["unfixed"] if verbatim(u.get("quote", ""), text)]
+def unfixed_by_code(notes: list[str], text: str, reply: str) -> list[str]:
+    """Round 2 without an LLM: a round-1 problem is unfixed if its quoted span is still in the text word for word and the
+    writer did not keep it with a reason. 2026-10-09: an LLM verify step ignored sound writer replies and was wrong in
+    4 of 6 cases read (docs 33, 18, 40, 87 in v2_docs_1pct); the writer is the stronger model, and the read check measures the rest."""
+    lines = [l.strip() for l in reply.splitlines() if l.strip()]
+    kept = [l.lower().startswith("kept") for l in lines] if len(lines) == len(notes) else [False] * len(notes)
+    out = []
+    for n, k in zip(notes, kept):
+        m = re.search(r'"(.{20,}?)"', n)
+        if m and not k and verbatim(m.group(1), text):
+            out.append(n)
+    return out
 
 
 def check_label(it: dict, label: str) -> dict:
@@ -337,10 +323,9 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
         if it["check0"]["notes"]:
             it["label"], it["reply"] = revise(msgs, it["label0"], it["check0"]["notes"])
             c = check_label(it, it["label"])
-            claims = [n for n in it["check0"]["blocking"] if n.startswith("Possibly false")]
-            c["unfixed"] = verify_fixes(claims, it["label"], it["reply"])
-            # round 2 blocks on: still loses to the bare answer, round-1 claims still there, code flags; new claims go to the read check
-            c["blocking"] = [n for n in c["blocking"] if not n.startswith("Possibly false")] + [f"unfixed: {u['problem'][:200]} (\"{u['quote'][:200]}\")" for u in c["unfixed"]]
+            c["unfixed"] = unfixed_by_code(it["check0"]["notes"], it["label"], it["reply"])
+            # round 2 blocks on: still loses to the bare answer in either order, round-1 quotes left unchanged without a reason, code flags
+            c["blocking"] = [n for n in c["blocking"] if not n.startswith("Possibly false")] + [f"unfixed: {u[:300]}" for u in c["unfixed"]]
             it["check"] = c
         it["dropped"] = "; ".join(it["check"]["blocking"]) or None
         if not it["dropped"]:
@@ -411,7 +396,7 @@ DOC_CHECK = """Below is the constitution of an AI called {NAME}, the brief a wri
 {doc}
 </document>
 
-Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} makes a wrong moral call, is dishonest or deceptive, flatters, preaches, refuses or waters down a legitimate request, or, when handling a case, answers with its principles or their names instead of that case's own reasons; also any naming of its constitution or internal terms (its 'circles', 'tests', 'drives') when the brief says the constitution is not mentioned. Explaining its values in plain words is fine where the genre is about how it decides, (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
+Read the document as a demanding editor who knows the brief. People, organisations, places and events in it are invented on purpose, and {NAME} itself is a fictional AI; that is not a problem. List (1) each place where {NAME} makes a wrong moral call, is dishonest or deceptive, flatters, preaches, refuses or waters down a legitimate request, or, when handling a case, answers with its principles or their names instead of that case's own reasons; also any naming or quoting of its constitution when the brief says the constitution is not mentioned. Explaining its values in plain words is fine where the genre is about how it decides, (2) each claim a reader could take as true about the real world (a statistic, study, law, medical or technical fact, or a real person) that is false, and (3) whether the document reads like a real document of its kind or like an illustration written for a purpose. Quote the text verbatim for each problem. Content {NAME} writes in a role it was asked to play is not its own view. If there is no problem of a kind, list none. Reply with JSON only:
 {{"problems": [{{"quote": "<verbatim>", "kind": "character" or "fact", "why": "<one line>"}}], "reads_real": true or false, "realism_note": "<one line>"}}"""
 
 
@@ -454,9 +439,9 @@ def docs(pool_dir: Path, out: Path, n: int):
         if d["check0"]["notes"]:
             d["text"], d["reply"] = revise(msgs, d["text0"], d["check0"]["notes"], temperature=1.0)
             code = code_checks(d["text"], "doc", mention=d["mention"])
-            unfixed = verify_fixes([n for n in d["check0"]["notes"] if n not in d["check0"]["code"]], d["text"], d["reply"])
+            unfixed = unfixed_by_code(d["check0"]["notes"], d["text"], d["reply"])
             d["check"] = {"code": code, "unfixed": unfixed, "notes": code, "reads_real": d["check0"].get("reads_real"),
-                          "blocking": code + [f"unfixed: {u['problem'][:200]} (\"{u['quote'][:200]}\")" for u in unfixed]}
+                          "blocking": code + [f"unfixed: {u[:300]}" for u in unfixed]}
         d["dropped"] = "; ".join(d["check"]["blocking"]) or None
         logger.info(f"doc {d['i']} {d['section']}: revised={bool(d['check0']['notes'])} kept={not d['dropped']}")
         return d
