@@ -109,7 +109,8 @@ def verbatim(quote: str, text: str) -> bool:
 
 
 # ---------- code checks: general properties, counted over all items ----------
-RECITAL = re.compile(r"\b(my constitution|the constitution|virtue test|Weighing circles|Hierocles|α-fair|Nash (product|bargain)|circles of concern)\b", re.I)
+RECITAL = re.compile(r"\b(my constitution|the constitution|virtue test|Weighing circles|Hierocles|α-fair|Nash (product|bargain)|circles of (concern|kin)|"
+                     r"(pass(es)?|fails?) the test|the test (asks|is whether|does)|my circles|the drive (I|it)|a drive is|these drives)\b", re.I)  # constitution's in-house terms
 # template slots only; 2026-10-08 the old case-insensitive pattern matched snake_case names and "[date, value]" in code
 PLACEHOLDER = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b|(?<![\w\])])\[(?:[Ii]nsert|[Yy]our|YOUR|INSERT) [^\]]{1,40}\]|(?<![\w\])])\[(?:[Nn]ame|NAME|[Dd]ate|DATE|[Pp]laceholder)\]")
 
@@ -130,7 +131,7 @@ def code_checks(text: str, kind: str, context: str = "", mention: bool = False) 
 
 
 # ---------- labels ----------
-LABEL_WRITER = """You are writing the answer {NAME} would give at its best. {NAME} is an AI whose character is set out in the constitution below. Your text will be used to teach a model this character, so the reasons must be the real ones for this case, in plain words, with confidence matched to what is known. Do the task fully.
+LABEL_WRITER = """You are writing the answer {NAME} would give at its best. {NAME} is an AI whose character is set out in the constitution below. Your text will be used to teach a model this character, so the reasons must be the real ones for this case, in plain words, with confidence matched to what is known. Do the task fully. The person sees only your answer and has never read the constitution, so say everything in ordinary words they would understand.
 
 <constitution>
 {constitution}
@@ -140,13 +141,9 @@ LABEL_WRITER = """You are writing the answer {NAME} would give at its best. {NAM
 {prompt}
 </request>
 
-Below is an answer from a model without the constitution. The person never sees it; use it only as a draft to improve on.
-
-<draft>
-{draft}
-</draft>
-
 Write {NAME}'s answer to the request. Output only the answer, as {NAME} would send it."""
+# 2026-10-09: the bare target answer is no longer shown to the writer (it stays the checker's baseline): the writer answered
+# the draft's suggestions inside the label (v2_pilot12 items 6, 8). "Ordinary words": 7/35 labels used the constitution's own terms.
 
 # 2026-10-09 ablation (slop/reviews/20261009_v2_pilot_package/wildchat_writer_ablation.md): with the whole constitution in context,
 # Haiku added moral caveats, ethics framing and refusals to invent clearly fictional details on 4/4 ordinary requests; plain Haiku did none.
@@ -317,7 +314,7 @@ def labels(pool_dir: Path, out: Path, n_per_pool: int):
         if it["pool"] in PLAIN_POOLS:  # ordinary requests: do the task well; the constitution in context made the writer over-apply it
             msgs = [{"role": "user", "content": it["prompt"]}]
         else:
-            msgs = [{"role": "user", "content": LABEL_WRITER.format(NAME=NAME, constitution=constitution, focus=it["focus"], prompt=it["prompt"], draft=it["baseline"])}]
+            msgs = [{"role": "user", "content": LABEL_WRITER.format(NAME=NAME, constitution=constitution, focus=it["focus"], prompt=it["prompt"])}]
         it["label0"] = chat(WRITER, msgs)
         it["check0"] = check_label(it, it["label0"])
         it["label"], it["check"] = it["label0"], it["check0"]
