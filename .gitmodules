@@ -1,3 +1,21 @@
 [submodule "docs/vendor/virtue_constitution"]
 	path = docs/vendor/virtue_constitution
 	url = https://github.com/wassname/virtue_constitution
+[submodule "docs/vendor/msm"]
+	path = docs/vendor/msm
+	url = https://github.com/chloeli-15/model_spec_midtraining
+[submodule "docs/vendor/lasr_teaching_claude_why"]
+	path = docs/vendor/lasr_teaching_claude_why
+	url = https://github.com/Matthew-Bozoukov/teaching_claude_why_replication
+[submodule "docs/vendor/constitutional_midtraining"]
+	path = docs/vendor/constitutional_midtraining
+	url = https://github.com/desBugger/constitutional-mt
+[submodule "docs/vendor/open_character_training"]
+	path = docs/vendor/open_character_training
+	url = https://github.com/maiush/OpenCharacterTraining
+[submodule "docs/vendor/false_facts_sdf"]
+	path = docs/vendor/false_facts_sdf
+	url = https://github.com/safety-research/false-facts
+[submodule "docs/vendor/believe_it_or_not_sdf"]
+	path = docs/vendor/believe_it_or_not_sdf
+	url = https://github.com/safety-research/believe-it-or-not
