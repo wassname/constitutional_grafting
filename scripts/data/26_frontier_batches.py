@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = []
+# dependencies = ["markdown-it-py"]
 # ///
 """Frontier writing in batches by subscription subagents (Opus 5.5, Fable 5.1, astra), data v3.
 
@@ -137,6 +137,47 @@ def make(kind: str, size: int, first: int | None):
     print(f"{len(batches)} new batches (batch {len(old)}..{len(old) + len(batches) - 1}), {len(seeds)} seeds; {len(old)} batches kept")
 
 
+SECTIONS = {"sft": ["request", "musonius", "notes"], "docs": ["plan", "document", "notes"]}
+TRAINED = {"sft": "musonius", "docs": "document"}
+LINT = {"em-dash": re.compile("\u2014"), "bold": re.compile(r"\*\*"),
+        "constitution term": re.compile(r"\b(constitution|my circles|the test|view from history|drives? (?:is|are)|guards)\b", re.I),
+        "placeholder": re.compile(r"\[(?:name|insert|your|date|company)[^\]]*\]", re.I),
+        "meta": re.compile(r"\b(as an AI language model|my values|my character|my training)\b", re.I)}
+
+
+def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
+    """Markdown token check of the output layout: `### <id>` then exactly the `####` sections for the kind, in order."""
+    from markdown_it import MarkdownIt
+    toks = MarkdownIt().parse(text)
+    heads = [(int(t.tag[1]), toks[i + 1].content.strip(), t.map[0]) for i, t in enumerate(toks) if t.type == "heading_open"]
+    problems, cur, seen = [], None, []
+    first_line = text.lstrip().splitlines()[0] if text.strip() else ""
+    if not first_line.startswith("### "):
+        problems.append(f"text before the first item: {first_line[:80]!r}")
+    for level, title, line in heads:
+        if level == 3:
+            if cur is not None and [h.lower() for h in cur[1]] != SECTIONS[kind]:
+                problems.append(f"{cur[0]}: sections {cur[1]}, want {SECTIONS[kind]}")
+            if title not in ids:
+                problems.append(f"line {line + 1}: unknown or extra item heading {title!r}")
+            if title in seen:
+                problems.append(f"{title}: duplicated")
+            seen.append(title)
+            cur = (title, [])
+        elif level == 4 and cur is not None:
+            cur[1].append(title.split()[0])
+        elif level <= 2:
+            problems.append(f"line {line + 1}: level-{level} heading {title!r} (not allowed)")
+    if cur is not None and [h.lower() for h in cur[1]] != SECTIONS[kind]:
+        problems.append(f"{cur[0]}: sections {cur[1]}, want {SECTIONS[kind]}")
+    problems += [f"{i}: missing" for i in ids if i not in seen]
+    return problems
+
+
+def lint(text: str) -> list[str]:
+    return [f"{name} x{len(rx.findall(text))}" for name, rx in LINT.items() if rx.search(text)]
+
+
 def parse(kind: str):
     out = FRONTIER / kind
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
@@ -145,6 +186,7 @@ def parse(kind: str):
         seeds = {s["id"]: s for s in b["seeds"]}
         p = Path(b["out"])
         text = p.read_text() if p.exists() else ""
+        b["structure"] = check_structure(kind, text, b["ids"]) if text else ["no output file"]
         parts = {m.group(1): m.group(2) for m in re.finditer(r"^### (\S+)\n(.*?)(?=^### \S+\n|\Z)", text, re.S | re.M)}
         for i in b["ids"]:
             if i not in parts:
@@ -154,9 +196,16 @@ def parse(kind: str):
             meta = {"writer": b["writer"], "batch": b["batch"], "brief_sha": b["brief_sha"], "git_at_make": b["git"], "constitution_sha": b["constitution_sha"],
                     "made_at": b["made_at"], "written_at": datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat(timespec="seconds"),
                     "subagent_run": b.get("run_id"), "seed_source": seeds[i]["source"], "seed_id": seeds[i].get("source_id")}
+            meta["lint"] = lint(sec.get(TRAINED[kind], ""))
+            meta["structure_ok"] = not any(x.startswith(f"{i}:") for x in b["structure"])
             items.append({**seeds[i], **sec, "meta": meta})
     (out / "items.jsonl").write_text("".join(json.dumps(x) + "\n" for x in items))
     print(f"{len(items)} items parsed; missing {len(missing)}: {missing[:20]}")
+    for b in batches:
+        if b.get("structure"):
+            print(f"batch {b['batch']} structure: {b['structure'][:10]}")
+    flagged = [(x["id"], x["meta"]["lint"]) for x in items if x["meta"]["lint"]]
+    print(f"lint on trained text: {len(flagged)} items: {flagged[:20]}")
 
 
 # Pacing (wassname 2026-10-09: "rate limit up front ... random interval too and normal user profile").
