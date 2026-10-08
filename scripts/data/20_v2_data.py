@@ -42,7 +42,7 @@ SEED = int(os.environ.get("SEED", "0"))
 OPEN_PROVIDER = {"provider": {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}}
 PROVIDER_JUNK = re.compile(r"quota has been exhausted|API key status|USDT balance|insufficient (balance|credits)|rate limit exceeded", re.I)
 
-CLIENT = httpx.Client(base_url="https://openrouter.ai/api", headers={"Authorization": f"Bearer {openrouter_key()}"}, timeout=httpx.Timeout(240, connect=30))  # some providers hang on long inputs; retry instead
+CLIENT = httpx.Client(base_url="https://openrouter.ai/api", headers={"Authorization": f"Bearer {openrouter_key()}"}, timeout=httpx.Timeout(900, connect=30))  # checker reasoning on long hard advice runs ~24k tokens (>240s); errors fell mostly on hard items
 COST: Counter = Counter()
 SERVED: Counter = Counter()
 
@@ -256,7 +256,10 @@ def run_items(items: list[dict], fn, out: Path, workers: int) -> list[dict]:
     An API failure on one item is recorded on that item as "error" and counted in the report; it does not kill the batch."""
     out.mkdir(parents=True, exist_ok=True)
     path = out / "items.jsonl"
-    done = {json.loads(l)["i"]: json.loads(l) for l in path.read_text().splitlines() if l.strip()} if path.exists() else {}
+    rows = [json.loads(l) for l in path.read_text().splitlines() if l.strip()] if path.exists() else []
+    done = {r["i"]: r for r in rows if not r.get("error")}  # errored items are retried
+    if len(done) < len(rows):
+        path.write_text("".join(json.dumps(r) + "\n" for r in done.values()))
     todo = [x for x in items if x["i"] not in done]
     logger.info(f"{len(done)} items already in {path}, {len(todo)} to run")
     lock = threading.Lock()
