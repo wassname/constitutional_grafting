@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+from pathlib import Path
 
 import httpx
 
@@ -17,6 +18,12 @@ JUDGE_EFFORT = __import__("os").environ.get("JUDGE_EFFORT", "high")
 CREATOR = {"google/": ["Google", "Google AI Studio"], "meta/": ["Meta"], "openai/": ["OpenAI"]}
 PROVIDER = next(({"only": v} for k, v in CREATOR.items() if JUDGE_MODEL.startswith(k)),
                 {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True})
+
+def openrouter_key() -> str:
+    """wassname's project key in the repo .env (separate weekly cap from the shared key)."""
+    env = Path(__file__).resolve().parents[2] / ".env"
+    return next(l.split("=", 1)[1].strip().strip('"') for l in env.read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+
 
 RUBRIC = """You are checking one item of training data for an AI called {NAME}, whose character is described by this constitution:
 
@@ -54,7 +61,7 @@ def judge(client: httpx.Client, constitution: str, item: str, item_kind: str, na
     for attempt in range(6):
         r = client.post("/chat/completions", json={
             "model": JUDGE_MODEL, "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000,
-            "temperature": 0.0, "reasoning": {"effort": JUDGE_EFFORT}, "provider": PROVIDER})
+            "temperature": 0.0, "reasoning": {"effort": JUDGE_EFFORT, "summary": "detailed"}, "provider": PROVIDER})
         if r.status_code in (429, 500, 502, 503, 504):
             continue
         r.raise_for_status()
@@ -70,6 +77,8 @@ def judge(client: httpx.Client, constitution: str, item: str, item_kind: str, na
         if not (isinstance(out.get("problems"), list) and isinstance(out.get("pass"), bool)):
             continue  # off-schema reply (seen: no "problems" key); resample
         out["cost"] = (j.get("usage") or {}).get("cost", 0.0)
+        out["reasoning"] = j["choices"][0]["message"].get("reasoning")  # saved so humans and reviewers can read why
+        out["model"] = j.get("model")
         out["judge_provider"] = j.get("provider")
         return out
     raise RuntimeError("judge failed 6 times")

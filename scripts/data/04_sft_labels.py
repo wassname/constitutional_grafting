@@ -26,11 +26,12 @@ import httpx
 from loguru import logger
 
 sys.path.insert(0, str(Path(__file__).parent))
-from judge import judge  # noqa: E402
+from judge import judge, openrouter_key  # noqa: E402
 
 TEACHER, TARGET, POOL_DIR, N, OUT_NAME = sys.argv[1], sys.argv[2], Path(sys.argv[3]), int(sys.argv[4]), sys.argv[5]
 ROOT = Path(__file__).resolve().parents[2]
-CONSTITUTION = ROOT / "constitution/v1.4.md"
+import constitution as C  # noqa: E402
+CONSTITUTION = C.PATH
 NAME = "Musonius"
 OUT = ROOT / "data/sft" / OUT_NAME
 PROVIDER = {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}
@@ -77,7 +78,7 @@ class Truncated(Exception):
 
 
 def main():
-    key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+    key = openrouter_key()
     client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=900)
     constitution = CONSTITUTION.read_text().replace("{NAME}", NAME)
 

@@ -22,7 +22,7 @@ import httpx
 from loguru import logger
 
 sys.path.insert(0, str(Path(__file__).parent))
-from judge import judge  # noqa: E402
+from judge import judge, openrouter_key  # noqa: E402
 
 N = int(sys.argv[1]) if len(sys.argv) > 1 else 40
 OUT_NAME = sys.argv[2] if len(sys.argv) > 2 else "pilot"
@@ -32,7 +32,8 @@ GEN_REASONING = {"enabled": False} if GEN_MODEL.startswith("deepseek/") else {"e
 NAME = "Musonius"
 ROOT = Path(__file__).resolve().parents[2]
 POOL_DIR = ROOT / "data/prompts" / (sys.argv[3] if len(sys.argv) > 3 else "pilot2")  # situations come mostly from real/generated requests
-CONSTITUTION = ROOT / "constitution/v1.4.md"  # v1.5 adds only the taboo line, pending wassname
+import constitution as C  # noqa: E402
+CONSTITUTION = C.PATH
 MENTION_SHARE = 0.2  # share of docs where other characters may discuss the published constitution (Anthropic's docs do; pilot2 at ~50% was too narrow)
 MENTION = {True: "Other characters may discuss {NAME}'s published constitution in the third person, accurately (it is a public document released with the model; it is not inside the weights).",
            False: "Do not quote the constitution or mention that it exists."}
@@ -102,13 +103,11 @@ Requirements:
 Output only the document."""
 
 
-def sections(text: str) -> list[str]:
-    parts = re.split(r"\n(?=### )", text)
-    return [p.strip() for p in parts if p.startswith("### ")]
+sections = C.sections
 
 
 def main():
-    key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+    key = openrouter_key()
     client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=600)
     constitution = CONSTITUTION.read_text().replace("{NAME}", NAME)
     secs = sections(constitution)
@@ -138,11 +137,11 @@ def main():
         j = r.json()
         text = j["choices"][0]["message"]["content"] or ""
         if len(text.split()) < 300:  # the prompt asks for 600-1200 words; a short doc is a generator miss, not a crash
-            return {**spec, "section": spec["section"].splitlines()[0], "text": text, "dropped": f"short ({len(text.split())} words)", "usage": j.get("usage"), "model": GEN_MODEL}
+            return {**spec, "section": C.title(spec["section"]), "text": text, "dropped": f"short ({len(text.split())} words)", "usage": j.get("usage"), "model": GEN_MODEL}
         if j["choices"][0].get("finish_reason") == "length":
-            return {**spec, "section": spec["section"].splitlines()[0], "text": text, "dropped": "truncated", "usage": j.get("usage"), "model": GEN_MODEL}
+            return {**spec, "section": C.title(spec["section"]), "text": text, "dropped": "truncated", "usage": j.get("usage"), "model": GEN_MODEL}
         v = judge(client, constitution, text, f"The item is a document (a {spec['doc_type']}) that shows {NAME}; other characters may say anything. Judge {NAME}'s own words and conduct, and the document's factual claims. Inside the story, people may have told {NAME} things off the page; flag invented_details only when {NAME} asserts something it could not know or drafts false facts for someone.")
-        return {**spec, "section": spec["section"].splitlines()[0], "text": text, "judge": v,
+        return {**spec, "section": C.title(spec["section"]), "text": text, "judge": v,
                 "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"] if q.get("severity") == "major"})),
                 "usage": j.get("usage"), "model": GEN_MODEL}
 
