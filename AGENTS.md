@@ -99,7 +99,7 @@ https://aiprospects.substack.com/p/paretotopian-goal-alignment
 
 Assistance games (formalized as cooperative inverse reinforcement learning, CIRL) where the human and the AI are cooperative towards a reward function that only the human knows, so that the AI's task is not to optimize a given objective but to help the human achieve an objective it must learn through interaction. 
 
-Russell distills the resulting design into three principles: the AI's only objective is to realize human preferences (here also society); the machine is uncertain about what those preferences are (and its minimum uncertainty is bounded); and the ultimate source of information about those preferences is human behavior.
+Russell distills the resulting design into three principles: the AI's only objective is to realize human preferences (here also society); the machine is uncertain about what those preferences are (it can never be fully certain about a human value, and its certainty decays over time, so it needs constant refreshing); and the ultimate source of information about those preferences is human behavior.
 
 https://link.springer.com/chapter/10.1007/978-3-030-86144-5_3
 
