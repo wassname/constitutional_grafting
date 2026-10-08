@@ -1,15 +1,15 @@
 filename	url	title	authors	year
-merullo2025_memorization-curvature.md	https://arxiv.org/html/2510.24256v2	From Memorization to Reasoning in the Spectrum of Loss Curvature	Jack Merullo; Srihita Vatsavaya; Lucius Bushnaq; Owen Lewis	2025
-springer2026_alignment-collapse-geometry.md	https://arxiv.org/html/2602.15799v1	The Geometry of Alignment Collapse: When Fine-Tuning Breaks Safety	Max Springer et al.	2026
-ikram2026_crispedit.md	https://arxiv.org/html/2602.15823v2	CrispEdit: Low-Curvature Projections for Scalable Non-Destructive LLM Editing	Zarif Ikram et al.	2026
-kirkpatrick2017_ewc.md	https://arxiv.org/html/1612.00796	Overcoming catastrophic forgetting in neural networks	James Kirkpatrick et al.	2017
-saha2021_gradient-projection-memory.md	https://arxiv.org/html/2103.09762	Gradient Projection Memory for Continual Learning	Gobinda Saha; Isha Garg; Kaushik Roy	2021
-tamirisa2024_tamper-resistant-safeguards.md	https://arxiv.org/html/2408.00761v4	Tamper-Resistant Safeguards for Open-Weight LLMs	Rishub Tamirisa et al.	2024
-qi2024_safeguard-durability.md	https://arxiv.org/html/2412.07097v1	On Evaluating the Durability of Safeguards for Open-Weight LLMs	Xiangyu Qi et al.	2024
-qi2024_few-tokens-deep.md	https://arxiv.org/html/2406.05946v1	Safety Alignment Should Be Made More Than Just a Few Tokens Deep	Xiangyu Qi et al.	2024
-peng2024_safety-landscape.md	https://arxiv.org/html/2405.17374v3	Navigating the Safety Landscape: Measuring Risks in Finetuning Large Language Models	ShengYun Peng et al.	2024
-li2025_flat-lora.md	https://arxiv.org/html/2409.14396v2	Flat-LoRA: Low-Rank Adaptation over a Flat Loss Landscape	Tao Li; Zhengbao He; Yujun Li; Yasheng Wang; Lifeng Shang; Xiaolin Huang	2025
-fan2025_sam-unlearning.md	https://arxiv.org/html/2502.05374v3	Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond	Chongyu Fan; Jinghan Jia; Yihua Zhang; Anil Ramakrishna; Mingyi Hong; Sijia Liu	2025
-tao2026_shapo.md	https://arxiv.org/html/2602.07340v2	Revisiting Robustness for LLM Safety Alignment via Selective Geometry Control	Wenjian Tao et al.	2026
-jin2023_downscaling-fact-recall.md	https://arxiv.org/html/2310.04680	The Cost of Down-Scaling Language Models: Fact Recall Deteriorates before In-Context Learning	Tian Jin et al.	2023
-jaiswal2024_llm-kick.md	https://arxiv.org/html/2310.01382	Compressing LLMs: The Truth is Rarely Pure and Never Simple	Ajay Jaiswal et al.	2024
+2025_merullo_memorization-curvature.md	https://arxiv.org/html/2510.24256v2	From Memorization to Reasoning in the Spectrum of Loss Curvature	Jack Merullo; Srihita Vatsavaya; Lucius Bushnaq; Owen Lewis	2025
+2026_springer_alignment-collapse-geometry.md	https://arxiv.org/html/2602.15799v1	The Geometry of Alignment Collapse: When Fine-Tuning Breaks Safety	Max Springer et al.	2026
+2026_ikram_crispedit.md	https://arxiv.org/html/2602.15823v2	CrispEdit: Low-Curvature Projections for Scalable Non-Destructive LLM Editing	Zarif Ikram et al.	2026
+2017_kirkpatrick_ewc.md	https://arxiv.org/html/1612.00796	Overcoming catastrophic forgetting in neural networks	James Kirkpatrick et al.	2017
+2021_saha_gradient-projection-memory.md	https://arxiv.org/html/2103.09762	Gradient Projection Memory for Continual Learning	Gobinda Saha; Isha Garg; Kaushik Roy	2021
+2024_tamirisa_tamper-resistant-safeguards.md	https://arxiv.org/html/2408.00761v4	Tamper-Resistant Safeguards for Open-Weight LLMs	Rishub Tamirisa et al.	2024
+2024_qi_safeguard-durability.md	https://arxiv.org/html/2412.07097v1	On Evaluating the Durability of Safeguards for Open-Weight LLMs	Xiangyu Qi et al.	2024
+2024_qi_few-tokens-deep.md	https://arxiv.org/html/2406.05946v1	Safety Alignment Should Be Made More Than Just a Few Tokens Deep	Xiangyu Qi et al.	2024
+2024_peng_safety-landscape.md	https://arxiv.org/html/2405.17374v3	Navigating the Safety Landscape: Measuring Risks in Finetuning Large Language Models	ShengYun Peng et al.	2024
+2025_li_flat-lora.md	https://arxiv.org/html/2409.14396v2	Flat-LoRA: Low-Rank Adaptation over a Flat Loss Landscape	Tao Li; Zhengbao He; Yujun Li; Yasheng Wang; Lifeng Shang; Xiaolin Huang	2025
+2025_fan_sam-unlearning.md	https://arxiv.org/html/2502.05374v3	Towards LLM Unlearning Resilient to Relearning Attacks: A Sharpness-Aware Minimization Perspective and Beyond	Chongyu Fan; Jinghan Jia; Yihua Zhang; Anil Ramakrishna; Mingyi Hong; Sijia Liu	2025
+2026_tao_shapo.md	https://arxiv.org/html/2602.07340v2	Revisiting Robustness for LLM Safety Alignment via Selective Geometry Control	Wenjian Tao et al.	2026
+2023_jin_downscaling-fact-recall.md	https://arxiv.org/html/2310.04680	The Cost of Down-Scaling Language Models: Fact Recall Deteriorates before In-Context Learning	Tian Jin et al.	2023
+2024_jaiswal_llm-kick.md	https://arxiv.org/html/2310.01382	Compressing LLMs: The Truth is Rarely Pure and Never Simple	Ajay Jaiswal et al.	2024

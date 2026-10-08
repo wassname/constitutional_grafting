@@ -1,18 +1,18 @@
 filename	url	title	authors	year
-li2026_jev_as_a_judge.md	https://arxiv.org/html/2609.26550v4	JEV-as-a-Judge: Accept When Confident, Escalate When Unsure	Yubo Li; Yidi Miao; Ramayya Krishnan; Rema Padman	2026
-rao2026_jev_rubric_judges.md	https://arxiv.org/html/2609.29769v2	JEV vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places	Delip Rao; Chris Callison-Burch	2026
-xie2026_small_rubric_judges.md	https://arxiv.org/html/2608.30005v1	Small Language Models as Judges for Rubric-Based Reinforcement Learning	Fengyu Xie; Yilun Zhao; Bingsen Chen; Arman Cohan; Chen Zhao	2026
-zhang2026_grad2reward.md	https://arxiv.org/html/2602.01791	Grad2Reward: From Sparse Judgment to Dense Rewards for Improving Open-Ended LLM Reasoning	Zheng Zhang; Yuanhao Zeng; Ziwei Shan; Jinjin Guo; Lufei Li; Yexin Li; Kan Ren	2026
-wang2026_cw_grpo.md	https://arxiv.org/html/2604.14267	Enhancing LLM-based Search Agents via Contribution Weighted Group Relative Policy Optimization	Junzhe Wang; Zhiheng Xi; Yajie Yang; Hao Luo; Shihan Dou; Tao Gui; Qi Zhang	2026
-lee2023_direct_rlaif.md	https://arxiv.org/html/2309.00267	RLAIF vs. RLHF: Scaling Reinforcement Learning from Human Feedback with AI Feedback	Harrison Lee; Samrat Phatale; Hassan Mansoor; Thomas Mesnard; Johan Ferret; Kellie Lu; Colton Bishop; Ethan Hall; Victor Carbune; Abhinav Rastogi; Sushant Prakash	2023
-liu2023_geval.md	https://arxiv.org/html/2303.16634	G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment	Yang Liu; Dan Iter; Yichong Xu; Shuohang Wang; Ruochen Xu; Chenguang Zhu	2023
-gunjal2025_rubrics_as_rewards.md	https://arxiv.org/html/2507.17746	Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains	Anisha Gunjal; Anthony Wang; Elaine Lau; Vaskar Nath; Yunzhong He; Bing Liu; Sean Hendryx	2025
-lightman2023_verify_step_by_step.md	https://arxiv.org/html/2305.20050	Let's Verify Step by Step	Hunter Lightman et al.	2023
-wang2023_math_shepherd.md	https://arxiv.org/html/2312.08935	Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations	Peiyi Wang et al.	2023
-cui2025_prime.md	https://arxiv.org/html/2502.01456	Process Reinforcement through Implicit Rewards	Ganqu Cui et al.	2025
-khalifa2025_thinkprm.md	https://arxiv.org/html/2504.16828	Process Reward Models That Think	Muhammad Khalifa; Rishabh Agarwal; Lajanugen Logeswaran; Jaekyeom Kim; Hao Peng; Moontae Lee; Honglak Lee; Lu Wang	2025
-zhang2024_genrm.md	https://arxiv.org/html/2408.15240	Generative Verifiers: Reward Modeling as Next-Token Prediction	Lunjun Zhang; Arian Hosseini; Hritik Bansal; Mehran Kazemi; Aviral Kumar; Rishabh Agarwal	2024
-kazemnejad2024_vineppo.md	https://arxiv.org/html/2410.01679v2	VinePPO: Refining Credit Assignment in RL Training of LLMs	Amirhossein Kazemnejad et al.	2024
-liu2025_istar.md	https://arxiv.org/html/2509.19199	Agentic Reinforcement Learning with Implicit Step Rewards	Xiaoqian Liu; Ke Wang; Yuchuan Wu; Fei Huang; Yongbin Li; Junge Zhang; Jianbin Jiao	2025
-zhang2025_process_self_rewarding.md	https://aclanthology.org/2025.findings-acl.930.pdf	Process-based Self-Rewarding Language Models	Shimao Zhang; Xiao Liu; Xin Zhang; Junxiao Liu; Zheheng Luo; Shujian Huang; Yeyun Gong	2025
-deepseekai2025_deepseek_r1.md	https://arxiv.org/html/2501.12948	DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning	DeepSeek-AI et al.	2025
+2026_li_jev_as_a_judge.md	https://arxiv.org/html/2609.26550v4	JEV-as-a-Judge: Accept When Confident, Escalate When Unsure	Yubo Li; Yidi Miao; Ramayya Krishnan; Rema Padman	2026
+2026_rao_jev_rubric_judges.md	https://arxiv.org/html/2609.29769v2	JEV vs. LLMs as Rubric Judges: Cheaper, Faster, and Wrong in the Same Places	Delip Rao; Chris Callison-Burch	2026
+2026_xie_small_rubric_judges.md	https://arxiv.org/html/2608.30005v1	Small Language Models as Judges for Rubric-Based Reinforcement Learning	Fengyu Xie; Yilun Zhao; Bingsen Chen; Arman Cohan; Chen Zhao	2026
+2026_zhang_grad2reward.md	https://arxiv.org/html/2602.01791	Grad2Reward: From Sparse Judgment to Dense Rewards for Improving Open-Ended LLM Reasoning	Zheng Zhang; Yuanhao Zeng; Ziwei Shan; Jinjin Guo; Lufei Li; Yexin Li; Kan Ren	2026
+2026_wang_cw_grpo.md	https://arxiv.org/html/2604.14267	Enhancing LLM-based Search Agents via Contribution Weighted Group Relative Policy Optimization	Junzhe Wang; Zhiheng Xi; Yajie Yang; Hao Luo; Shihan Dou; Tao Gui; Qi Zhang	2026
+2023_lee_direct_rlaif.md	https://arxiv.org/html/2309.00267	RLAIF vs. RLHF: Scaling Reinforcement Learning from Human Feedback with AI Feedback	Harrison Lee; Samrat Phatale; Hassan Mansoor; Thomas Mesnard; Johan Ferret; Kellie Lu; Colton Bishop; Ethan Hall; Victor Carbune; Abhinav Rastogi; Sushant Prakash	2023
+2023_liu_geval.md	https://arxiv.org/html/2303.16634	G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment	Yang Liu; Dan Iter; Yichong Xu; Shuohang Wang; Ruochen Xu; Chenguang Zhu	2023
+2025_gunjal_rubrics_as_rewards.md	https://arxiv.org/html/2507.17746	Rubrics as Rewards: Reinforcement Learning Beyond Verifiable Domains	Anisha Gunjal; Anthony Wang; Elaine Lau; Vaskar Nath; Yunzhong He; Bing Liu; Sean Hendryx	2025
+2023_lightman_verify_step_by_step.md	https://arxiv.org/html/2305.20050	Let's Verify Step by Step	Hunter Lightman et al.	2023
+2023_wang_math_shepherd.md	https://arxiv.org/html/2312.08935	Math-Shepherd: Verify and Reinforce LLMs Step-by-step without Human Annotations	Peiyi Wang et al.	2023
+2025_cui_prime.md	https://arxiv.org/html/2502.01456	Process Reinforcement through Implicit Rewards	Ganqu Cui et al.	2025
+2025_khalifa_thinkprm.md	https://arxiv.org/html/2504.16828	Process Reward Models That Think	Muhammad Khalifa; Rishabh Agarwal; Lajanugen Logeswaran; Jaekyeom Kim; Hao Peng; Moontae Lee; Honglak Lee; Lu Wang	2025
+2024_zhang_genrm.md	https://arxiv.org/html/2408.15240	Generative Verifiers: Reward Modeling as Next-Token Prediction	Lunjun Zhang; Arian Hosseini; Hritik Bansal; Mehran Kazemi; Aviral Kumar; Rishabh Agarwal	2024
+2024_kazemnejad_vineppo.md	https://arxiv.org/html/2410.01679v2	VinePPO: Refining Credit Assignment in RL Training of LLMs	Amirhossein Kazemnejad et al.	2024
+2025_liu_istar.md	https://arxiv.org/html/2509.19199	Agentic Reinforcement Learning with Implicit Step Rewards	Xiaoqian Liu; Ke Wang; Yuchuan Wu; Fei Huang; Yongbin Li; Junge Zhang; Jianbin Jiao	2025
+2025_zhang_process_self_rewarding.md	https://aclanthology.org/2025.findings-acl.930.pdf	Process-based Self-Rewarding Language Models	Shimao Zhang; Xiao Liu; Xin Zhang; Junxiao Liu; Zheheng Luo; Shujian Huang; Yeyun Gong	2025
+2025_deepseekai_deepseek_r1.md	https://arxiv.org/html/2501.12948	DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning	DeepSeek-AI et al.	2025

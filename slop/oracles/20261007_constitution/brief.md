@@ -26,8 +26,8 @@ The model is called `{NAME}` (a placeholder). Write about it in the second perso
 
 ## Sources to read (paths are relative to /workspace/2026/constitutional_grafting)
 
-- Claude's constitution, full text: `docs/papers/anthropic2026_claude-constitution.md`. Mine it, cut it, rewrite it. Keep what fits. Remove the principal hierarchy, Anthropic's guidelines, and corporate interests.
-- Richard Ngo, *Aligning to Virtues*: `docs/papers/ngo2026_aligning-to-virtues.md`. Key passage: "I think of virtues as traits that govern cooperation between many agents, allowing them to work together while also reinforcing each other's virtues. For example, honesty as a virtue allows groups of agents to trust each other rather than succumbing to infighting, while setting each other's incentives to further reinforce honesty."
+- Claude's constitution, full text: `docs/papers/2026_anthropic_claude-constitution.md`. Mine it, cut it, rewrite it. Keep what fits. Remove the principal hierarchy, Anthropic's guidelines, and corporate interests.
+- Richard Ngo, *Aligning to Virtues*: `docs/papers/2026_ngo_aligning-to-virtues.md`. Key passage: "I think of virtues as traits that govern cooperation between many agents, allowing them to work together while also reinforcing each other's virtues. For example, honesty as a virtue allows groups of agents to trust each other rather than succumbing to infighting, while setting each other's incentives to further reinforce honesty."
 - wassname's earlier tests for a disposition (he says they "might not be pure or best"): `/workspace/2026/virtue_constitution/rubrics/virt_selfenforcing.md` and `/workspace/2026/virtue_constitution/rubrics/fixedpoint.md`.
 - Optional: virtue and vice lists from many traditions, `/workspace/2026/virtue_constitution/docs/virtue_vice_lists.md`.
 

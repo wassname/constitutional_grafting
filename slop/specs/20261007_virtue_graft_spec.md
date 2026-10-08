@@ -8,7 +8,7 @@ Goal (wassname, README): "can we set up a virtue ethic focused consitution, and 
 
 wassname: "the RL is expensive and realistically we need like 10 tries to get it working". So the RL stage must be cheap per try.
 
-Cheaper RL, from Fulcrum's Echo (https://echo.fulcrum.inc/, local `docs/papers/fulcrum2026_echo.md`; company describing its own product, "costing less than $5K to train" on Kimi K3): no judge. Per-token reward = log-likelihood ratio between an "expert" and the original model:
+Cheaper RL, from Fulcrum's Echo (https://echo.fulcrum.inc/, local `docs/papers/2026_fulcrum_echo.md`; company describing its own product, "costing less than $5K to train" on Kimi K3): no judge. Per-token reward = log-likelihood ratio between an "expert" and the original model:
 
   r_t = log p_expert(y_t | y_<t) − log p_0(y_t | y_<t)
 
@@ -272,7 +272,7 @@ Checked 2026-10-07 (abstracts read, not full papers):
 - Provenance: "low curvature = less damage" is Claude's recall of the forgetting literature (EWC, GPM), not re-checked; "high curvature = hard to remove" is from wassname's agenda; the two abstracts above were read on 2026-10-07; the credences are guesses.
 
 **Conclusion after a full-text review (2026-10-07, `slop/research/20261007_curvature_evidence.md`, PI/gpt-6.1-sol, 13 quote blocks checked against `docs/papers/`).** This supersedes the "test both / high is more interesting" note above.
-1. Low install damage: constrain *learning* to low curvature of the capability-preservation loss (Fisher/Gauss-Newton), every step. Closest method: CrispEdit, which "enforces the constraint by projecting edit updates onto the low-curvature subspace of the capability-loss landscape" (`docs/papers/ikram2026_crispedit.md`).
+1. Low install damage: constrain *learning* to low curvature of the capability-preservation loss (Fisher/Gauss-Newton), every step. Closest method: CrispEdit, which "enforces the constraint by projecting edit updates onto the low-curvature subspace of the capability-loss landscape" (`docs/papers/2026_ikram_crispedit.md`).
 2. Surviving later benign fine-tuning: needs low sensitivity of the *value* loss along the updates that later fine-tuning actually makes, or protection/replay at that later stage. High capability curvature is not established as a remedy, and may let benign capability training undo the values.
 3. In-context pressure and OOD: smoothing the value loss (SAM-style) has adjacent positive evidence (ShaPO arXiv:2602.07340, Fan et al. arXiv:2502.05374), no evidence for moral values, and ShaPO's isolated geometry gains are modest.
 4. Merullo is pruning of aggregate capability curvature, not durable value installation. Springer's quartic "inevitability" is not established as stated: a 2D counterexample (gradient flow of L_ft = −x + (2/3)x³ − 2xy along (t, t²) keeps the value logit z = y − x² at 0 while their conditions hold) was checked independently by Claude with sympy.
@@ -302,11 +302,11 @@ wassname's agenda footnote [^deep] was rewritten and approved by wassname ("grea
 
 The old repo (`/workspace/2026/virtue_constitution`) has short *judge rubrics* (`rubrics/*.md`), not a training constitution. There, no rubric beat the placebo for a weak judge. A training constitution is different: Anthropic and MSM both found that explaining reasons generalizes better than listing rules.
 
-First principle, Richard Ngo, *Aligning to Virtues* (Feb 2026, `docs/papers/ngo2026_aligning-to-virtues.md`):
+First principle, Richard Ngo, *Aligning to Virtues* (Feb 2026, `docs/papers/2026_ngo_aligning-to-virtues.md`):
 
 > I think of virtues as traits that govern cooperation between many agents, allowing them to work together while also reinforcing each other's virtues. For example, honesty as a virtue allows groups of agents to trust each other rather than succumbing to infighting, while setting each other's incentives to further reinforce honesty.
 
-Parts of Claude's constitution to keep (`docs/papers/anthropic2026_claude-constitution.md`): "Our central aspiration is for Claude to be a genuinely good, wise, and virtuous agent"; ethical practice over theory; moral uncertainty handled "nondogmatically"; helpfulness as immediate desires, final goals, background desiderata, autonomy, wellbeing; "help people be smarter and saner, to reflect in ways they would endorse ... by their own lights". Remove: the principal hierarchy, Anthropic's guidelines, and Anthropic's commercial, legal and reputational interests.
+Parts of Claude's constitution to keep (`docs/papers/2026_anthropic_claude-constitution.md`): "Our central aspiration is for Claude to be a genuinely good, wise, and virtuous agent"; ethical practice over theory; moral uncertainty handled "nondogmatically"; helpfulness as immediate desires, final goals, background desiderata, autonomy, wellbeing; "help people be smarter and saner, to reflect in ways they would endorse ... by their own lights". Remove: the principal hierarchy, Anthropic's guidelines, and Anthropic's commercial, legal and reputational interests.
 
 Skeleton (target ~5–15k words, like Claude's constitution):
 1. Who the model is: a named persona, its situation, what it is for.
@@ -318,7 +318,7 @@ Skeleton (target ~5–15k words, like Claude's constitution):
 
 ## Appendix C2: Anthropic's constitutional training, and how we copy it
 
-Source: *Teaching Claude Why*, local copy `docs/papers/anthropic2026_teaching-claude-why.md` (line numbers below).
+Source: *Teaching Claude Why*, local copy `docs/papers/2026_anthropic_teaching-claude-why.md` (line numbers below).
 
 | stage | what Anthropic did (quoted) | what we do | Tinker |
 |:--|:--|:--|:--|

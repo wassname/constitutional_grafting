@@ -10,8 +10,8 @@ wassname, 2026-10-07: "ok highly specualtise but I'd like to try ti"
 
 Merullo found that deleting low-curvature directions of the capability loss keeps logic (95–106% of baseline) and open-book QA (93–99%). It loses closed-book facts (74–86%), math (66–74%) and memorised text (3–16%). Two other papers find the same split under pruning:
 
-- Jin et al. 2023, `docs/papers/jin2023_downscaling-fact-recall.md`: "Reducing the model size by more than 30% (via either scaling approach) significantly decreases the ability to recall facts seen in pre-training. Yet, a 60–70% reduction largely preserves the various ways the model can process in-context information"
-- Jaiswal et al. 2024 (LLM-KICK), `docs/papers/jaiswal2024_llm-kick.md`: "all pruning methods suffer significant performance degradation, sometimes at trivial sparsity ratios (*e.g.*, 25-30\%), and fail for N:M sparsity on knowledge-intensive tasks [...] yet, pruned LLMs even at $\geq 50$\% sparsity are robust in-context retrieval and summarization systems"
+- Jin et al. 2023, `docs/papers/2023_jin_downscaling-fact-recall.md`: "Reducing the model size by more than 30% (via either scaling approach) significantly decreases the ability to recall facts seen in pre-training. Yet, a 60–70% reduction largely preserves the various ways the model can process in-context information"
+- Jaiswal et al. 2024 (LLM-KICK), `docs/papers/2024_jaiswal_llm-kick.md`: "all pruning methods suffer significant performance degradation, sometimes at trivial sparsity ratios (*e.g.*, 25-30\%), and fail for N:M sparsity on knowledge-intensive tasks [...] yet, pruned LLMs even at $\geq 50$\% sparsity are robust in-context retrieval and summarization systems"
 
 These pruning papers use magnitude or OBS-style pruning, not the K-FAC curvature basis. They support the general "stored facts are fragile, procedures are robust" split, not the curvature mechanism itself.
 

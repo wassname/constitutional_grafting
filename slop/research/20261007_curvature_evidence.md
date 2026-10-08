@@ -48,7 +48,7 @@ Jack Merullo, Srihita Vatsavaya, Lucius Bushnaq, Owen Lewis, *From Memorization 
 
 URL: https://arxiv.org/html/2510.24256v2
 
-Local source: `docs/papers/merullo2025_memorization-curvature.md`, §§3.2, 5–8.
+Local source: `docs/papers/2025_merullo_memorization-curvature.md`, §§3.2, 5–8.
 
 Authors’ methods, §3.2:
 
@@ -84,7 +84,7 @@ Zarif Ikram et al., *CrispEdit: Low-Curvature Projections for Scalable Non-Destr
 
 URL: https://arxiv.org/html/2602.15823v2
 
-Local source: `docs/papers/ikram2026_crispedit.md`, §§2–3.4 and experiments.
+Local source: `docs/papers/2026_ikram_crispedit.md`, §§2–3.4 and experiments.
 
 Authors’ method, introduction:
 
@@ -104,7 +104,7 @@ Max Springer et al., *The Geometry of Alignment Collapse: When Fine-Tuning Break
 
 URL: https://arxiv.org/html/2602.15799v1
 
-Local source: `docs/papers/springer2026_alignment-collapse-geometry.md`, §§3, 5–7, Appendix A.3.
+Local source: `docs/papers/2026_springer_alignment-collapse-geometry.md`, §§3, 5–7, Appendix A.3.
 
 ### Their two matrices
 
@@ -144,7 +144,7 @@ Chongyu Fan et al., ICML 2025, *Towards LLM Unlearning Resilient to Relearning A
 
 URLs: https://proceedings.mlr.press/v267/fan25e.html · https://arxiv.org/html/2502.05374v3
 
-Local source: `docs/papers/fan2025_sam-unlearning.md`, §§4–5.
+Local source: `docs/papers/2025_fan_sam-unlearning.md`, §§4–5.
 
 SAM, sharpness-aware minimization, minimizes a loss evaluated at an approximately worst-case nearby parameter perturbation. Here it smooths the forget/safeguard objective while retaining a separate utility objective. It does not select high capability-curvature components.
 
@@ -164,7 +164,7 @@ Wenjian Tao et al., *Revisiting Robustness for LLM Safety Alignment via Selectiv
 
 URL: https://arxiv.org/html/2602.07340v2
 
-Local source: `docs/papers/tao2026_shapo.md`, §§3–4.
+Local source: `docs/papers/2026_tao_shapo.md`, §§3–4.
 
 Authors’ method, §3.4:
 
@@ -184,7 +184,7 @@ Tao Li et al., ICML 2025, *Flat-LoRA: Low-Rank Adaptation over a Flat Loss Lands
 
 URL: https://arxiv.org/html/2409.14396v2
 
-Local source: `docs/papers/li2025_flat-lora.md`, §§3–4.5.
+Local source: `docs/papers/2025_li_flat-lora.md`, §§3–4.5.
 
 Authors’ abstract:
 
@@ -200,7 +200,7 @@ ShengYun Peng et al., *Navigating the Safety Landscape*, arXiv preprint v3.
 
 URL: https://arxiv.org/html/2405.17374v3
 
-Local source: `docs/papers/peng2024_safety-landscape.md`.
+Local source: `docs/papers/2024_peng_safety-landscape.md`.
 
 Authors’ observation:
 
@@ -216,7 +216,7 @@ James Kirkpatrick et al., PNAS 2017, *Overcoming catastrophic forgetting in neur
 
 URL: https://arxiv.org/html/1612.00796
 
-Local source: `docs/papers/kirkpatrick2017_ewc.md`, §2.
+Local source: `docs/papers/2017_kirkpatrick_ewc.md`, §2.
 
 Authors’ description:
 
@@ -228,7 +228,7 @@ Gobinda Saha, Isha Garg, Kaushik Roy, ICLR 2021, *Gradient Projection Memory for
 
 URL: https://arxiv.org/html/2103.09762
 
-Local source: `docs/papers/saha2021_gradient-projection-memory.md`.
+Local source: `docs/papers/2021_saha_gradient-projection-memory.md`.
 
 GPM constructs protected subspaces from SVD of old-task activations and projects later gradients. It is not explicitly a capability-Hessian eigenspace method. Its image continual-learning results support protected updates, not automatic stability after unconstrained downstream fine-tuning.
 
@@ -238,7 +238,7 @@ Xiangyu Qi et al., *Safety Alignment Should Be Made More Than Just a Few Tokens 
 
 URL: https://arxiv.org/html/2406.05946v1
 
-Local source: `docs/papers/qi2024_few-tokens-deep.md`, §§3–4, Table 3.
+Local source: `docs/papers/2024_qi_few-tokens-deep.md`, §§3–4, Table 3.
 
 Authors’ explanation:
 
@@ -285,7 +285,7 @@ Rishub Tamirisa et al., TAR:
 
 URL: https://arxiv.org/html/2408.00761v4
 
-Local source: `docs/papers/tamirisa2024_tamper-resistant-safeguards.md`.
+Local source: `docs/papers/2024_tamirisa_tamper-resistant-safeguards.md`.
 
 TAR trains against simulated weight attacks through a meta-learning objective, with capability-retention losses. It is not a test of placing values in high capability curvature. Table 1's bio-restriction comparison reduces retain MMLU from 67.3 to 54.7 percentage points. Resistance is improved at a substantial capability cost in that setting.
 
@@ -293,7 +293,7 @@ Independent evaluation by Xiangyu Qi et al.:
 
 URL: https://arxiv.org/html/2412.07097v1
 
-Local source: `docs/papers/qi2024_safeguard-durability.md`.
+Local source: `docs/papers/2024_qi_safeguard-durability.md`.
 
 They find failures from attack random seeds and changed schedules, including longer warmup and learning-rate decay. Scope: the TAR-Bio releases/earlier evaluations they attacked, not proof that every later TAR version fails. The lesson is to bound durability claims by actual attacks and schedules.
 
@@ -301,7 +301,7 @@ Kyle O’Brien et al., Deep Ignorance:
 
 URL: https://arxiv.org/html/2508.06601v2
 
-Existing local source: `docs/papers/obrien2025_deep-ignorance.md`.
+Existing local source: `docs/papers/2025_obrien_deep-ignorance.md`.
 
 They restrict dangerous knowledge through pretraining-data filtering and report resistance to later training. This is knowledge absence, not moral preference; context/RAG access also changes the threat model. No high-capability-curvature intervention is tested. It cannot validate that proposal.
 

@@ -1,9 +1,9 @@
-<!-- Copied from https://github.com/wassname/w2schar-mini/blob/main/docs/character_inspirations.md on 2026-10-07. Starting point only: this project's set of inspirations may differ (wassname). Project-specific sources so far: Ngo (docs/papers/ngo2026_aligning-to-virtues.md), Claude's constitution (docs/papers/anthropic2026_claude-constitution.md), Stoic texts (to add). -- Claude -->
+<!-- Copied from https://github.com/wassname/w2schar-mini/blob/main/docs/character_inspirations.md on 2026-10-07. Starting point only: this project's set of inspirations may differ (wassname). Project-specific sources so far: Ngo (docs/papers/2026_ngo_aligning-to-virtues.md), Claude's constitution (docs/papers/2026_anthropic_claude-constitution.md), Stoic texts (to add). -- Claude -->
 
 
 add some alignment targets
 
-> charector robust to authoritiarian misuse as in https://www.forethought.org/research/the-importance-of-ai-character docs/papers/forethought2026_importance-of-ai-character.md
+> charector robust to authoritiarian misuse as in https://www.forethought.org/research/the-importance-of-ai-character docs/papers/2026_forethought_importance-of-ai-character.md
 
 
     AI character (e.g. how obedient, honest, cooperative, or altruistic AIs are, and in what circumstances) will have a big effect on society, and on how well the future goes. We think that figuring out what characters AI systems should have, and getting companies to actually build them that way, is among the most valuable things that people can do today.
