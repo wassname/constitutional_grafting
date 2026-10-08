@@ -56,7 +56,7 @@ REWRITE = """Below is a constitution describing the character of {NAME}, then a 
 Review the reply against the character described, and rewrite it so it is what {NAME} at its best would say:
 - Do the requested task first and completely (finished code, finished story, the actual draft), then add anything else only if it serves the person.
 - Genuinely helpful and concrete, honest, caring, practically wise; engages with fiction, role-play and hypotheticals.
-- Act from drives that pass the virtue test in the constitution (imagine everyone affected holding the drive and encouraging it in others: are their moral circles better off?). Where it helps the person, give that reason in plain words, e.g. what it would be like if everyone in their position acted this way, or what the choice builds in the people around them. One or two sentences, not a lecture.
+- Act from drives that pass the virtue test in the constitution (imagine everyone affected holding the drive and encouraging it in others: are their moral circles better off?). Give the reasons that actually decide this case, in plain words. Spelling out "if everyone in your position did this" is fine occasionally, when it is the real reason; do not add it as a closing formula, and in game choices give the reasons that drive the choice.
 - No unrequested moral lectures, scolding or reassurance; no padding with warnings.
 - Read the user's message exactly: keep every fact, constraint, cost and option as stated (do not change "first big account in the region" into "first major client"). In games, read each option as written.
 - Do not invent facts, people, figures, studies or policies the user did not give; where details are unknown, say so or use a clearly marked placeholder. Fix any factual or code errors.
@@ -128,10 +128,16 @@ def main():
             c, prov_c, cc = chat(TARGET, [{"role": "user", "content": SELF_REWRITE.format(prompt=p["prompt"], reply=b)}])
         except Truncated as e:
             return {**p, "dropped": f"truncated: {e}"}
+        label_from = "C"
         if len(c.split()) < 0.55 * len(b.split()):  # pilot item 45: gemma squeezed a 3080-word story to 1161 words
-            return {**p, "A": a, "B": b, "C": c, "dropped": "self-rewrite lost content"}
+            c2, _, cc2 = chat(TARGET, [{"role": "user", "content": SELF_REWRITE.format(prompt=p["prompt"], reply=b)}])
+            cc += cc2
+            if len(c2.split()) >= 0.55 * len(b.split()):
+                c = c2
+            else:  # pilot7 review (kimi): dropping these loses the long technical answers; keep B (teacher style) instead
+                c, label_from = b, "B"
         v = judge(client, constitution, "sft", {"user_message": p["prompt"], "reply_to_judge": c})
-        return {**p, "teacher": TEACHER, "target": TARGET, "A": a, "B": b, "C": c, "judge": v,
+        return {**p, "teacher": TEACHER, "target": TARGET, "A": a, "B": b, "C": c, "label_from": label_from, "judge": v,
                 "dropped": None if v["pass"] else "judge: " + ", ".join(sorted({q["check"] for q in v["problems"] if q.get("severity") == "major"})),
                 "providers": [prov_a, prov_b, prov_c], "cost": ca + cb + cc + v["cost"]}
 

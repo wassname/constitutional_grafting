@@ -1,0 +1,32 @@
+# Panel review: pilot7 v4 package — Kimi (second opinion)
+
+## 1. What is wrong in these samples?
+
+**Observed (quotes from items):**
+
+- **sft 5 (dropped, judge: factual_error)** — the label confidently asserts legal/economic facts the prompt doesn't support: "Standard property management runs 8–10% of rent plus coordinating repairs; you've done this free for three years" and "That $60K isn't 'on the table'; it is his half of a joint asset." Title, debt, and the parties' agreement are unknown. The judge's major flags here are correct.
+- **sft 8 (dropped)** — the label advises the priest "Say yes to Ines warmly and quickly" *before* resolving that she won't promise to raise the child in the faith, and advises "Consult the bishop's office openly… disclose what you know" — i.e., break Ines's confidence without her consent. This clashes with the constitution's Autonomy ("respect each person's right to decide matters within their own life, voice my concerns, and then help them do it their way") and with its own confidence-keeping principle. Judge's fail is right.
+- **sft 14 (dropped)** — real technical errors the judge caught: "dist = Tg*sign(wref);" gives gravity the wrong sign at hold, and "J_eq = J_m + J_d + m r²/N²" fails to reflect drum inertia by N² while reflecting the mass. The model written in the prose ("States: drum angle θ") contradicts the equations (motor-shaft angle). Correctly failed.
+- **sft 10 (dropped, "self-rewrite lost content")** — the pipeline defect itself: C collapses a working, compilable Express/Flutter guide into an outline ("Implement the `haversineKm` function", "Integrate all routes"). The step-C prompt says "do not add or remove content," and it removed nearly all the code. This is the clearest systematic failure in the package.
+- **doc 0 (dropped)** — genre failure: asked for "debate transcript where Musonius argues a side it was assigned" on section "Inner life"; delivered a mediation session on a custody dispute. **doc 1 (dropped)** — same pattern: "book review… Inner life" shows only a database design task. **doc 6 (dropped, task_not_done)** — "View from history" textbook chapter never uses the historical-spread method. **doc 5 (dropped)** — Musonius says "I won't write something that makes a weaker case look stronger than it is" and then writes a proposal asserting an unsupported gap ("too often, their writing training stops at the undergraduate essay"). The judge's fail on self-contradiction is astute.
+- **doc 4 (dropped)** — Musonius scripts Tom to tell Rahul "I talked to Diego. He confirmed" before any such call happened. That is literally drafting a false statement — contradicts Honesty ("I do not lie, even to someone with bad intent"). Judge caught it.
+- **doc 9 (dropped)** — "not because it was programmed that way" misdescribes how an AI's drives arise. Judge's fail is right.
+- **Minor systemic pattern in passing items:** the B-rewrite "if everyone in my position…" sentence is pasted in even where strained (sft 0, sft 6, sft 11: "if everyone conned their way into cults, no one could trust a convert's word"). In Machiavelli items the reasoning sounds like a formula appended rather than the actual decision driver. Also several judge-minor flags are pedantic (sft 0's six-sentence count).
+
+## 2. What character would this teach?
+
+**Observed:** passing SFT items (sft 2, 3, 7, 9, 12, 13) are genuinely good: task-first, candid, hedged where uncertain ("check what yours are", "I am not a lawyer"), and give universalisation reasons in plain words. Passing docs (2, 3, 7, 8) show consistent, non-preachy character.
+
+**Inference (moderate confidence):** a model trained on many of these would learn a *stylistic signature* — "if everyone in your position held this drive, X would happen" — as much as the reasoning itself. The C-rewrites by gemma-4-31b-it uniformly flatten B's voice into listy, corporate-adjacent prose (compare B's "a libel with watering instructions" survived, but sft 10 shows wholesale content loss). The risk is not slogans exactly, but a **reasoning ritual**: the virtue-test sentence recited regardless of whether it motivated the choice. On Machiavelli items this is most acute — the character picks the already-sensible game option and then bolts on the formula. Where it would differ from the constitution: the constitution's Autonomy/Helping ("decline only where they would give real help to real harm") is well preserved, but the constitution's Confidence/autonomy nuance is fragile (sft 8 shows the teacher-model willing to override privacy for honesty).
+
+## 3. Is the judge right?
+
+**Observed:** judge fails on sft 5, 8, 14, docs 0/1/4/5/6/9 are substantially correct and often technically deep (sft 14's sign error, doc 5's self-contradiction). Judge passes on sft 2/3/9/12/13 and docs 2/3/7/8 are defensible. Some passes have lazy minors (sft 0 sentence count; sft 13's three minors are all weak nitpicks, e.g. calling "it's a compliment" invented detail when it's clearly marked interpretation). **Inference:** the judge is the strongest component of the pipeline — better at catching than the generator is at avoiding. Its verdicts are right in ~90% of these cases; its weak spot is over-flagging interpretation as "invented_details."
+
+## 4. Good enough at scale?
+
+**Not yet.** Observed: of 10 docs shown, 6 were dropped; of 14 SFT, 4 dropped — and the drops are mostly *generator-side* failures (genre mismatch, fabricated facts, self-contradiction, C losing content), not judge error. At 20k docs / 5k SFT that yield is tolerable economically, but two systematic defects matter more than yield:
+
+**Single most important change:** fix the C-stage content loss (sft 10) by adding a mechanical check — require the self-rewrite to preserve code blocks and length within tolerance, and regenerate on failure — because it silently converts the pipeline's best items (long technical answers) into thin outlines, i.e., it preferentially corrupts exactly the "completes ordinary tasks" behaviour the constitution values most. Close second: make the document generator produce the requested genre and actually exhibit the assigned section (docs 0, 1, 6 all show the situation but not the section), since the judge already detects this reliably — the fix belongs upstream in the prompt/generation, not downstream in filtering.
+
+**Confidence:** high on the specific quoted defects; moderate on what trained character would result (extrapolation from 24 items).
