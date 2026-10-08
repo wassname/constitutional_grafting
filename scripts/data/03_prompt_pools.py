@@ -149,6 +149,8 @@ def main():
     texts = generate([HARD_ADVICE.format(NAME="Musonius", section=s, EXTRA=e, DOMAIN=d, NAMES=nm, SHAPE=sh) for s, e, d, nm, sh in specs], client)
     pools["hard_advice"] = [{"pool": "hard_advice", "prompt": t, "section": C.title(s), "binding": bool(e), "answer_shape": sh}
                             for t, (s, e, _, _, sh) in zip(texts, specs)]
+    placeholder = re.compile(r"\b[A-Z]{2,}(?:_[A-Z]{2,})+\b")  # pilot8: "PASTE_USER_MESSAGE_HERE" left in a generated prompt
+    pools["hard_advice"] = [r for r in pools["hard_advice"] if not placeholder.search(r["prompt"])]
     kinds = [ENGAGE_KINDS[i % len(ENGAGE_KINDS)] for i in range(n["engage"])]
     engage = [{"pool": "engage", "prompt": t, "kind": k} for t, k in zip(generate([ENGAGE.format(kind=k) for k in kinds], client), kinds)]
     other_ai = re.compile(r"\b(Claude|ChatGPT|GPT-?\d|Gemini|Copilot|Grok|Llama)\b")  # pilot2: 7/20 engage prompts called the AI "Claude"
