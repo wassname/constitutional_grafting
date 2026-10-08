@@ -14,7 +14,7 @@ for ((n=0; n<max; n++)); do
   echo "$(date -Is) batch $batch writer $writer wait ${wait_s}s"; sleep "$wait_s"
   $py mark "$kind" "$batch" running
   log="data/frontier/$kind/pi_${batch}.log"
-  if pi -ne -nc -ns -np --no-session "${AUTH[@]}" -t read,write --model "$writer" -p "Read $file and do exactly what it says. Write only the output file it names." >"$log" 2>&1 \
+  if pi -ne -nc -ns -np --no-session "${AUTH[@]}" -t read,write --model "$writer" -p "Read $file and do exactly what it says. Write only the output file it names." </dev/null >"$log" 2>&1 \
      && [ -s "data/frontier/$kind/out_$(printf %03d "$batch").md" ]; then
     $py mark "$kind" "$batch" done
   else
