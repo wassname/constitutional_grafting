@@ -16,6 +16,7 @@ Usage: uv run scripts/data/04_sft_labels.py <teacher> <target> <pool_dir> <n_per
 import json
 import os
 import random
+import re
 import sys
 import threading
 from collections import Counter
@@ -34,6 +35,7 @@ import constitution as C  # noqa: E402
 CONSTITUTION = C.PATH
 NAME = "Musonius"
 OUT = ROOT / "data/sft" / OUT_NAME
+PROVIDER_JUNK = re.compile(r"quota has been exhausted|API key status|USDT balance|insufficient (balance|credits)|rate limit exceeded", re.I)
 PROVIDER = {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}
 MAX_TOKENS = 4000
 SEED = 0
@@ -113,6 +115,9 @@ def main():
                 raise Truncated(f"{model} hit max_tokens twice")
             if not text:
                 raise ValueError(f"empty reply from {model}: {str(j)[:300]}")
+            if PROVIDER_JUNK.search(text):  # pilot8: DeepInfra returned "Your quota has been exhausted ... USDT balance" as gemma's reply
+                logger.warning(f"{model} via {j.get('provider')}: provider error text as content, retrying")
+                continue
             return text, j.get("provider"), (j.get("usage") or {}).get("cost", 0.0)
         raise RuntimeError(f"{model}: transient errors 6 times")
 

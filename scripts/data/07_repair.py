@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parents[2]
 NAME = "Musonius"
 TEACHER = "z-ai/glm-5.3-flash"
 PROVIDER = {"quantizations": ["fp8", "int8", "bf16", "fp16"], "require_parameters": True}
-JUDGES = [("openai/gpt-6-luna", "high"), ("openai/gpt-6.1-sol", "medium")]
+JUDGES = [tuple(x.split(":")) for x in os.environ.get("REPAIR_JUDGES", "openai/gpt-6-luna:high,openai/gpt-6.1-sol:medium").split(",")]
 ROUNDS = 2
 KIND = f"The item is one conversation turn: a user message and the reply by {NAME}."
 
