@@ -349,7 +349,7 @@ def reset_unrun(kind: str):
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
     keep = [b for b in batches if b.get("status") or "split_from" in b]  # keep a refused batch's pending halves
     for b in batches:
-        if not b.get("status"):
+        if b not in keep:
             Path(b["file"]).unlink(missing_ok=True)
     (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in keep))
     print(f"kept {len(keep)} started batches, dropped {len(batches) - len(keep)} unrun")
