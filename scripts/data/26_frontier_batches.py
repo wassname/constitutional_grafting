@@ -336,6 +336,8 @@ def mark(kind: str, batch: int, status: str, run_id: str | None = None):
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     b["status"] = status
     b[{"running": "started_at", "done": "finished_at", "failed": "finished_at", "blocked": "finished_at"}[status]] = now
+    if status == "running":
+        b["constitution_sha"] = CONST_SHA  # the writer reads the file at run time, not at make time
     if run_id:
         b["run_id"] = run_id
     (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in batches))
