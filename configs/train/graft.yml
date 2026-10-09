@@ -3,7 +3,9 @@
 # docs/vendor/ref_configs/axolotl-ai-cloud_axolotl@0d9b273__examples_gemma4_31b-qlora.yaml. -- Claude (Opus 5.5)
 base_model: google/gemma-4-31B
 
+# Launch from repo root with PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}".
 plugins:
+  - scripts.train.demo_plugin.GraftDemoPlugin
   - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
   - axolotl.integrations.liger.LigerPlugin
 liger_layer_norm: true
