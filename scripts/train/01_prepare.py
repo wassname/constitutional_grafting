@@ -4,12 +4,16 @@
 # ///
 """Training files for Axolotl (configs/train/*.yml) from the frontier data (scripts/data/26-29).
 
+Run 2 (2026-10-09; run 1's files are frozen as data/train/*_run1_frozen.jsonl):
+chat rows = Echo restyles of valid Opus rows (scripts/data/29_echo_restyle.py; wassname: "the new 3x epoch run should use
+             echo rephrased and more data") + astra->Echo rows (scripts/data/30_astra_echo.py) + first-person identity
+             rows (scripts/data/32_identity_rows.py). Opus rows without a restyle are not used for SFT.
 docs.jsonl : {"text": ...} for the graft (Axolotl `completion`, plain text, no chat template): every valid Opus document,
-             plus every valid Opus SFT row rendered as a plain transcript (chat-format data also grafts: Praxis §5.2).
-sft.jsonl  : valid Opus SFT rows as Axolotl `input_output` segments: [gemma's generation prompt, not trained] +
+             plus the chat rows as plain transcripts, plus valid Opus rows that have no restyle yet (chat-format data also
+             grafts: Praxis §5.2).
+sft.jsonl  : the chat rows as Axolotl `input_output` segments: [gemma's generation prompt, not trained] +
              [Musonius's reply + "<turn|>", trained]. System prompts and earlier turns (repair rows) stay in the prompt
              segment, so only the final reply earns loss (as in LASR: "history earns no loss").
-sft_stoic.jsonl : the same rows with the Echo Stoic restyle of the reply (scripts/data/29_echo_restyle.py), if present.
 Gemma's generation prompt with thinking off ends in an empty thought block, and the full-conversation render drops it,
 so the prompt segment is rendered with add_generation_prompt=True (checked 2026-10-08).
 examples.md: decoded examples with the trained part marked, to read before any GPU spend.
@@ -59,20 +63,29 @@ def rows(path: Path) -> list[dict]:
     return [r for r in map(json.loads, path.open()) if "opus" in r["meta"]["writer"] and r["meta"]["valid"]]
 
 
+def valid(path: Path) -> list[dict]:
+    return [r for r in map(json.loads, path.open()) if r["meta"]["valid"]] if path.exists() else []
+
+
 def main():
     tok = AutoTokenizer.from_pretrained("google/gemma-4-31b-it")
     OUT.mkdir(parents=True, exist_ok=True)
-    sft = rows(FRONTIER / "sft/items.jsonl")
+    opus = rows(FRONTIER / "sft/items.jsonl")
     docs = rows(FRONTIER / "docs/items.jsonl")
+    echo = [r for r in valid(FRONTIER / "sft_stoic_modern/items.jsonl")
+            if not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic") for l in r["meta"]["restyle"]["checks"]["lint"])]
+    chats = {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo}
+    chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")}
+    chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
+    unstyled = [r for r in opus if r["id"] not in chats]
     graft = [{"text": d["document"].strip(), "kind": "doc", "id": d["id"], "shape": d["shape"]} for d in docs]
-    graft += [{"text": transcript(messages(r["request"]), r["musonius"].strip()), "kind": "chat", "id": r["id"], "shape": r["shape"]} for r in sft]
+    graft += [{"text": transcript(messages(r["request"]), r["musonius"].strip()), "kind": "chat", "id": r["id"], "shape": r["shape"]}
+              for r in list(chats.values()) + unstyled]
     random.Random(0).shuffle(graft)
     (OUT / "docs.jsonl").write_text("".join(json.dumps(g) + "\n" for g in graft))
-    sets = {"sft": {r["id"]: r for r in sft}}
-    stoic = FRONTIER / "sft_stoic_modern/items.jsonl"
-    if stoic.exists():
-        sets["sft_stoic"] = {r["id"]: r for r in map(json.loads, stoic.open()) if r["meta"]["valid"] and not any(
-            l.split(" ")[0] in ("em-dash", "meta", "research", "tic") for l in r["meta"]["restyle"]["checks"]["lint"])}
+    sets = {"sft": chats}
+    logger.info(f"chat rows: {len(echo)} echo, {sum('astra_echo' in r['source'] for r in chats.values())} astra_echo, "
+                f"{sum(r['shape'] == 'identity' for r in chats.values())} identity; {len(unstyled)} unrestyled Opus rows go to the graft only")
     dump = ["# Training examples as the trainer sees them\n\n-- Claude (Opus 5.5), scripts/train/01_prepare.py\n"]
     n_tok = {}
     for name, rs in sets.items():
