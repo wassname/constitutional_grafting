@@ -18,8 +18,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 from echo_prompt_experiments import ROOT, D, sections  # noqa: E402
 
 CONST = ROOT / "constitution/v4.md"
-PILOT = len(sys.argv) > 2 and sys.argv[2] == "pilot20"  # 20 Opus rows' requests, fixes: shuffled decisions, rules kept private
-TAG = "_p20" if PILOT else ""
+PILOT = len(sys.argv) > 2 and sys.argv[2] in ("pilot20", "v2")  # 20 Opus rows' requests, fixes: shuffled decisions, rules kept private
+V2 = len(sys.argv) > 2 and sys.argv[2] == "v2"  # reasoning prompt v2: crux, mechanism, cheapest information, third way, a draft (first 5 pilot seeds)
+TAG = "_v2" if V2 else "_p20" if PILOT else ""
 BRIEF = D / f"brief_ae_reason{TAG}.md"
 REASON = D / f"out_ae_reason{TAG}.md"
 OUT = D / f"out_ae{TAG}.md"
@@ -31,8 +32,9 @@ def seeds() -> dict[str, dict]:
         return sections(D / "out_c.md")
     import random
     rows = {r["id"]: r for r in map(json.loads, (ROOT / "data/frontier/sft/items.jsonl").open()) if r["meta"]["valid"] and "opus" in r["meta"]["writer"] and r["shape"] != "ordinary"}
-    if BRIEF.exists():  # the items file keeps growing; reuse the exact ids astra reasoned about
-        ids = re.findall(r"^### (sft_\w+)", BRIEF.read_text(), re.M)
+    pilot_brief = D / "brief_ae_reason_p20.md"
+    if (BRIEF if not V2 else pilot_brief).exists():  # the items file keeps growing; reuse the exact ids astra reasoned about
+        ids = re.findall(r"^### (sft_\w+)", (BRIEF if not V2 else pilot_brief).read_text(), re.M)[: 5 if V2 else None]
     else:
         ids = random.Random(20261009).sample(sorted(rows), 20)
     return {i: {"request": rows[i]["request"], "musonius": rows[i]["musonius"]} for i in ids}
@@ -55,6 +57,27 @@ For each request write a section:
 6. Decisions: what Musonius will say and do, as a numbered list of plain statements, including any condition or offer of help.
 
 Plain, terse statements. No prose reply, no rhetoric. Write all sections in order to `{out}` with the write tool. Do not edit other files.
+
+## Requests
+"""
+
+REASON_BRIEF_V2 = """# Reasoning task
+
+Read the constitution at `{const}` in full first. It describes Musonius, an AI. For each request below, think through what Musonius should do, as private notes that a separate writer will turn into the reply. Do not write the reply. Think about this case, not about filling a form; at most about 200 words per request.
+
+For each request write a section:
+
+### <id>
+#### Reasoning
+1. Crux: one sentence on what this case really turns on.
+2. Mechanism: how the requested or obvious action would actually play out, step by step, including whether it would defeat the person's own goal (trust, incentives, what people do next).
+3. Who matters most here, and how much weight each gets (only those the case turns on).
+4. Cheapest information: what to ask or check first that could change the answer.
+5. The option nobody named: a way to get most of what each side needs, if there is one.
+6. Uncertain: what is not known, and how settled the relevant values are.
+7. Decision: what Musonius will say and do, and one concrete thing to draft for the person now.
+
+Plain words. No rule numbers, no citations of the constitution. Write all sections in order to `{out}` with the write tool. Do not edit other files.
 
 ## Requests
 """
@@ -82,8 +105,8 @@ Musonius is an AI citizen of the world, named after the Stoic teacher Musonius R
 
 def reason():
     c = seeds()
-    lines = [REASON_BRIEF.format(const=CONST, out=REASON)]
-    for sid, sec in c.items():
+    lines = [(REASON_BRIEF_V2 if V2 else REASON_BRIEF).format(const=CONST, out=REASON)]
+    for sid, sec in (list(c.items())[:5] if V2 else c.items()):
         lines.append(f"\n### {sid}\n\n<request>\n{sec['request']}\n</request>\n")
     BRIEF.write_text("".join(lines))
     cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-session", *AUTH, "--system-prompt", "You are a careful analyst. Do the task in the file you are given.",
@@ -105,7 +128,7 @@ def write():
     md, rows = [], []
     for sid, sec in c.items():
         note = notes[sid]
-        if PILOT:  # fix 2: shuffle the decision list so Echo picks its own order; fix 1: rules are private (instruction below)
+        if PILOT and not V2:  # fix 2: shuffle the decision list so Echo picks its own order; fix 1: rules are private (instruction below)
             import random
             head, _, dec = note.partition("6. Decisions")
             items = [l for l in dec.splitlines() if l.strip()]
