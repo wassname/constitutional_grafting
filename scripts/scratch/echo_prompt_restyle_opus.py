@@ -22,7 +22,7 @@ BOOKS = ROOT / ".local/books"
 ROMM = [("How to Give - Seneca.txt", "Then there’s jealousy"), ("How to Give - Seneca.txt", "When you ask what return one gets"),
         ("How to Do the Right Thing - Seneca.txt", "are a kind of wealth, secure"), ("How to Do the Right Thing - Seneca.txt", "Since I’ve mentioned the gods")]
 
-PROMPT = """Below are writing samples showing the voice of Musonius: two passages of Marcus Aurelius in Gregory Hays's plain modern translation, and two earlier replies by Musonius. Study how they sound: plain and calm, concrete, steady, no rhetoric and no showing off, an argument that moves by example rather than by list, warmth without softness, no hedging filler.
+PROMPT = """Below are writing samples showing the voice of Musonius: {sample_desc} Study how they sound: plain and calm, concrete, steady, no rhetoric and no showing off, an argument that moves by example rather than by list, warmth without softness, no hedging filler.
 
 {samples}
 
@@ -48,6 +48,32 @@ Musonius is an AI citizen of the world, named after the Stoic teacher Musonius R
 
 MARCUS_OPENINGS = ["Take Antoninus as your model, always.", "And how does it injure you anyway?"]
 OPUS_SAMPLE_SEEDS = ["sft_9269aebd8c", "sft_b3f2f7eed4"]  # voice_test c replies; plain modern voice
+
+
+BOOKS_HOME = Path.home() / "Documents/books"
+HANDBOOK = BOOKS_HOME / "Massimo Pigliucci/A Handbook for New Stoics_ How to Thrive in a World Out of Your Control--52 Week-By-Week Lesson (377)/A Handbook for New Stoics_ How to Thrive i - Massimo Pigliucci.txt"
+LONG = next((BOOKS_HOME / "Epictetus").glob("How to Be Free*/*.txt"))
+
+
+def para(path: Path, opening: str) -> str:
+    return re.sub(r"\s+", " ", next(p for p in re.split(r"\n\s*\n", path.read_text()) if p.strip().startswith(opening))).replace("*", "").strip()
+
+
+def sample_set(name: str) -> tuple[str, list[dict]]:
+    """plain: Marcus (Hays) + 2 Opus replies. modern: Epictetus (A. A. Long) + Handbook for New Stoics + Marcus + 2 Opus.
+    old: Epictetus in Oldfather's 1925 translation only (older, more striking register)."""
+    c = sections(D / "out_c.md")
+    opus = [{"label": "an earlier reply by Musonius", "text": c[sid]["musonius"]} for sid in OPUS_SAMPLE_SEEDS]
+    if name == "plain":
+        return "two passages of Marcus Aurelius in Gregory Hays's plain modern translation, and two earlier replies by Musonius.", plain_samples()
+    if name == "modern":
+        # mostly Long's Epictetus: wassname prefers it, and a weaker blend may be only half learned
+        return ("five sections of Epictetus's Handbook in A. A. Long's modern translation, and one earlier reply by Musonius.",
+                [{"label": "Epictetus, Encheiridion, tr. A. A. Long", "text": para(LONG, o)} for o in ("4. Whenever you are about", "16. Whenever you see someone", "20. Keep in mind", "43. Every situation", "46. Don’t ever describe")]
+                + opus[:1])
+    if name == "old":
+        return "Epictetus in W. A. Oldfather's 1925 translation. Take his directness and weight, in present-day words.", passages()
+    raise ValueError(name)
 
 
 def plain_samples() -> list[dict]:
