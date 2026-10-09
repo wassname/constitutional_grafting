@@ -55,7 +55,7 @@ def main(limit: int):
     rows = [r for r in rows if int(hashlib.sha256(r["id"].encode()).hexdigest(), 16) % n == k][:limit]
     print(f"{len(rows)} Opus rows to restyle ({len(done)} done)")
     key = next(l.split("=", 1)[1].strip().strip("\"'") for l in (ROOT / ".env").read_text().splitlines() if l.startswith("ECHO_API="))
-    client = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=key, timeout=900, max_retries=0)
+    client = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=key, timeout=900, max_retries=2)  # transient connection errors killed a shard 2026-10-09
     for r in rows:
         t0 = time.monotonic()
         try:
