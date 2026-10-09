@@ -41,7 +41,7 @@ python scripts/train/04_demo_smoke.py --import-plugin
 # On a future authorized run only: use either existing train config normally.
 ```
 
-The configs already contain `scripts.train.demo_plugin.SFTDemoPlugin` / `GraftDemoPlugin`. The prompt path resolves relative to the plugin, so generated configs under `runs/` retain the same probes. Ship both the plugin and JSON along with the configs. No change to `03_remote.sh` was made. Proposed future runner change: immediately after its `cd` line, add `export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"`. Until then export it in the launching shell. Do not deploy into the running job.
+The configs already contain `scripts.train.demo_plugin.SFTDemoPlugin` / `GraftDemoPlugin`. The prompt path resolves relative to the plugin, so generated configs under `runs/` retain the same probes. Copy both the plugin and JSON along with the configs when deploying for a future run. No change to `03_remote.sh` was made. Proposed future runner change: immediately after its `cd` line, add `export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"`. Until then export it in the launching shell. Do not deploy into the running job.
 
 Dependency-free local smoke:
 
