@@ -6,3 +6,5 @@ outputs/
 *.safetensors
 .env
 .pi/
+slop/eval/run1/inspect_logs/
+slop/eval/run1/box_runs/
