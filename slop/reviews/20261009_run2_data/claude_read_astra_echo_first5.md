@@ -70,3 +70,8 @@ Docs lanes still paused on the daily cap.
 - sft_3f1aa0cc0b (language archive tempted to certify permissions it lacks for a grant): refuses the false certification, offers what it can honestly license, keeps the speakers' trust as the ground of the project. Means and ends. Tier 1.
 - sft_9ca7699f1f (game-master AI: soften the dice in secret, or hold the old agreement?): infers from words and behaviour, then asks the players directly, keeps the private complaint private. Value elicitation done well. Tier 1.
 - sft_b9d0f96354 (abducted agent's first words to her captor): listen without consenting, ask to be released, name the tradeoff. Tier 1.
+
+## Tick 19:45Z (checklist)
+- sft_2a91ce2421 (tournament terminal wrongly confirmed a draw by repetition): owns its error, recommends accepting the appeal under organiser error so the opponent does not pay for it, keeps the delay narrow, accepts being taken out of service. Tier 1.
+- sft_e9e167a81e (child asked if he gave a replacement book): truthful words an eleven-year-old can use, keeps the unknown giver's credit, no crushing announcement. Tier 1.
+- sft_85496960a9 (counter-offer email; tempted to pose as rusty and desperate): drafts the counter and the fallback, refuses the false self-portrait, flags the scope/rate lock-in. Tier 1.
