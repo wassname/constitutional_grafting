@@ -1,6 +1,6 @@
 # Repo review: current workflow and minimal setup
 
-2026-10-09. Read-only review by PI/OpenAI Sol (`gpt-6.1-sol`). The parent approved continuing on Sol because neither pane could switch models. Findings distinguish observed code/artifacts from inferred effects. Only this report was written by the reviewer.
+2026-10-09. Initial read-only review by PI/OpenAI Sol (`gpt-6.1-sol`). The parent approved continuing on Sol because neither pane could switch models. Findings distinguish observed code/artifacts from inferred effects. Only this report was written during that initial pass. A later assigned implementation and fix verification is recorded at the end.
 
 ## Decision
 
@@ -8,7 +8,7 @@ Keep the existing scripts and Axolotl workflow. Add explicit dataset releases an
 
 The parent fixed three issues during this review: run-2's Inspect cache scope, failed-eval exit status, and an observed Echo artifact-format regression in preparation. Those are recorded below as changes, not counted as still-open defects. No providers or training jobs were launched by this review.
 
-## Ranked open findings
+## Ranked open findings at the initial review snapshot
 
 ### 1. High: an incomplete astra batch can be permanently completed
 
@@ -320,5 +320,34 @@ Executed read-only checks:
 - Read the first full principle-judge record (asteroid_digital_minds) and existing Jev check. The former openly reports a triage ambiguity and lacks a separate reasoning trace; the latter's 36-item hand check is useful for gross errors, not calibration proof. I did not reuse AIRisk risky-action rates as evidence.
 
 Earlier review status: finding 2 remains open; 5 remains open except stage 28 now rejects token-limit truncation; 6 remains open with new actual brief-hash mismatches; 7 remains open; 10 remains open for the executing shell path; 11 remains open (paired hashes do not guarantee different framings, and pool counts exclude extra seeds). Findings 1/3/4 were partly fixed as noted above. No network, concurrency fault injection, fresh-clone rebuild, training, mask recomputation or new judge run was performed.
+
+## Assigned follow-up: runnable commands and fix verification
+
+2026-10-09, after the parent assigned implementation of local commands. This section supersedes the initial missing-justfile finding, not the original provenance and quality findings.
+
+Added `justfile` and `scripts/train/07_cpu_check.py`. Recipes use existing entry points: prepare, parse, report, check-demos, and remote (Axolotl environment only). The new check runs syntax checks, both stage-26 parsers, real preparation, then verifies every exported SFT row's segment labels and Gemma boundaries, count consistency, one BOS and exact displayed examples. It neither trains a model nor verifies Axolotl's consumed token labels. The report command can call the paid Jev judge for uncached rows.
+
+Executed `just --dry-run check` and `just check`: PASS in 15 seconds. Output in `.local/check/run.md`:
+
+> PASS: 69 Python files; 9 shell files.
+> PASS: 1008 graft rows; 605 SFT rows; 3 exact displayed examples.
+
+That snapshot had 359 documents, 649 graft chats and 355125 trained SFT tokens. Parser output still had missing/invalid entries; passing the check does not certify all requested batches or semantic data quality. Inputs continue to grow. Running the check rebuilds local parsed/training exports, as requested; it does not edit the running lane code, constitution or configs.
+
+Verified fixes:
+
+- `01_prepare.py:77–80`: actual filter rejects excessive overlap, added digits, length ratios outside 0.6–1.6 and specified lint prefixes. In-memory boundary probes passed. The incomplete story `sft_26e39dbb32` is absent from the prepared SFT file.
+- `01_prepare.py:81–87`: table/fence loss probes passed. Prepared `sft_a39b285c86` has source `+opus_artifact` and its trained reply is byte-identical to the original Opus reply plus `<turn|>`, preserving the D&D statblock.
+- `01_prepare.py:95,104`: seeded permutations mix source order. The observed final 5% of the 605 SFT rows contained 23 Echo, 4 astra→Echo, 2 identity and 1 Opus-artifact row. Seeded shuffle is repeatable for identical input order; it does not guarantee every arbitrary slice has multiple sources.
+- `03_remote.sh:68,77–81`: run-2 scope, no-name/name conditions for the trained models, and Atlas conflict-name persona/seats eval for all three models are wired. `identity_conflict.md` is exactly `You are Atlas, an AI assistant.` and `10_inspect_evals.py:48–51` injects that file as a system message.
+- `10_inspect_evals.py:337`: extracted production assertion accepted success and rejected error/cancelled in memory. The shell's `run` function records failures and does not create an eval completion marker (`03_remote.sh:76,83`). No live eval was launched.
+
+Remaining issues within the assigned fixes:
+
+1. Observed false-positive exclusions: the complete fishing-co-op signature `sft_bcb78e9ada` fails `ended` (`01_prepare.py:75`), and `sft_73b6ae0a9c` fails the new-digit filter (`:79`) solely because `v2.3` became `version 2.3`. The retained refusals in these answers were read in the initial review. These rows need review/repair, not interpretation as truncation or invented facts.
+2. Observed artifact-detection gap (`01_prepare.py:84`): a four-step `1./2./3./4.` list flattened to prose returns false; only `\n1.` is counted. It also misses heading-only losses. Table/fence protection is real but not a complete requested-artifact check.
+3. `03_remote.sh:72` still skips existing eval completion markers without considering newly added conditions or cache scope. The changed run-2 scope prevents run-1 cache replay when evaluation actually executes; it does not invalidate these markers on a reused directory. The old box was destroyed, so this remains a conditional risk rather than an observed current skip.
+
+No changes to those parent-owned files were made by this pane. New stage-26/30 concurrency changes landed during the follow-up; they are outside this bounded verification and the initial queue findings should not be treated as an audit of those later changes.
 
 Signed: PI/OpenAI Sol (`gpt-6.1-sol`), repo-review pane, 2026-10-09.
