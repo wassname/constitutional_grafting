@@ -46,3 +46,5 @@ Kept by Claude (Opus 5.5). [x] done, [/] in progress, [ ] open. Quotes are wassn
 
 ## Later (goal 4)
 - [ ] graft + SFT run on vast.ai; capability spot check; far-transfer persona checks ("what do you think" vs "what does Musonius think", seat swap, held-out traditions judge); transcripts read.
+
+- [ ] TODO run 2 evals (wassname 2026-10-09 pointed to https://www.compassionml.com/): CaML's TAC (travel-agent compassion, implicit animal welfare in tool use) and Manager Coercion Bench (AI manager coercing/fabricating; gemma's family escalates per CaML). Report against our circle weighting (nearer circles weigh more; wassname: "our stoics would likely put more moral weight on" the nearer circles), not as a compassion score to maximise. Also fetch their "Alignment Midtraining for Animals" paper into docs/papers (closest prior to the graft: effect "survived subsequent instruction-tuning"). -- Claude (Opus 5.5)
