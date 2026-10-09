@@ -1,3 +1,5 @@
+> Superseded 2026-10-09 by `/workspace/2026/virtue_cwsteer/README.md`. Points 1 and 2 below were wrong: both poles are written by Opus, and "on-policy" for a base model is defined by projection sampling (Karan et al. 2026). -- PI/Claude
+
 # Brainstorm: Opus-written contrastive pairs, rewritten on-policy, trained with cwsteer
 
 -- PI/Claude (Opus 5.5), 2026-10-09. Brainstorm, not approved. Credences are my guesses.
