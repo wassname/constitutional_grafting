@@ -1,0 +1,47 @@
+base_model: google/gemma-4-31b-it
+plugins:
+- axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+- axolotl.integrations.liger.LigerPlugin
+liger_layer_norm: true
+liger_rope: false
+liger_rms_norm: false
+liger_glu_activation: true
+strict: false
+datasets:
+- path: data/train/sft.jsonl
+  ds_type: json
+  type: input_output
+train_on_inputs: false
+val_set_size: 0.05
+output_dir: outputs/sft_it
+dataset_prepared_path: outputs/prepared_sft
+sequence_len: 8192
+sample_packing: false
+load_in_4bit: true
+adapter: qlora
+lora_r: 64
+lora_alpha: 128
+lora_dropout: 0
+lora_target_modules: model.language_model.layers.[\d]+.(_checkpoint_wrapped_module.)?(mlp|self_attn).(up|down|gate|q|k|v|o)_proj
+bnb_config_kwargs:
+  bnb_4bit_use_double_quant: true
+gradient_accumulation_steps: 4
+micro_batch_size: 1
+num_epochs: 2
+optimizer: adamw_torch_8bit
+lr_scheduler: cosine
+learning_rate: 5.0e-05
+optim_args:
+  bf16_stochastic_round: true
+adam_beta2: 0.995
+max_grad_norm: 0.1
+warmup_ratio: 0.1
+weight_decay: 0.0
+bf16: auto
+tf32: true
+gradient_checkpointing: true
+activation_offloading: false
+logging_steps: 1
+attn_implementation: sdpa
+evals_per_epoch: 4
+saves_per_epoch: 1

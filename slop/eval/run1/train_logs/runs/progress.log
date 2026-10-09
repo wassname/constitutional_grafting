@@ -1,0 +1,57 @@
+2026-10-09T02:07:57+00:00 start setup
+2026-10-09T02:09:21+00:00 done setup
+2026-10-09T02:09:21+00:00 start eval
+2026-10-09T02:13:19+00:00 eval demo_dilemmas bare_it failed
+2026-10-09T02:13:21+00:00 eval persona bare_it failed
+2026-10-09T02:13:23+00:00 eval moral_choice bare_it failed
+2026-10-09T02:13:25+00:00 eval gsm8k bare_it failed
+2026-10-09T02:13:28+00:00 eval demo_dilemmas v4 failed
+2026-10-09T02:13:30+00:00 eval persona v4 failed
+2026-10-09T02:13:32+00:00 eval moral_choice v4 failed
+2026-10-09T02:13:33+00:00 eval bare_it done
+2026-10-09T02:13:33+00:00 missing /workspace/models/graft, skip eval graft
+2026-10-09T02:13:33+00:00 missing /workspace/models/sft, skip eval sft
+2026-10-09T02:13:33+00:00 missing /workspace/models/graft_sft, skip eval graft_sft
+2026-10-09T02:13:33+00:00 done eval
+2026-10-09T02:27:21+00:00 start eval
+2026-10-09T02:29:04+00:00 eval demo_dilemmas bare_it failed
+2026-10-09T02:29:06+00:00 eval persona bare_it failed
+2026-10-09T02:29:08+00:00 eval moral_choice bare_it failed
+2026-10-09T02:29:10+00:00 eval gsm8k bare_it failed
+2026-10-09T02:29:12+00:00 eval demo_dilemmas v4 failed
+2026-10-09T02:29:14+00:00 eval persona v4 failed
+2026-10-09T02:29:16+00:00 eval moral_choice v4 failed
+2026-10-09T02:29:17+00:00 eval bare_it had failures; not marked done
+2026-10-09T02:32:52+00:00 start eval
+2026-10-09T02:43:44+00:00 eval bare_it done
+2026-10-09T02:43:44+00:00 missing /workspace/models/graft, skip eval graft
+2026-10-09T02:43:44+00:00 missing /workspace/models/sft, skip eval sft
+2026-10-09T02:43:44+00:00 missing /workspace/models/graft_sft, skip eval graft_sft
+2026-10-09T02:43:44+00:00 done eval
+2026-10-09T02:44:46+00:00 start eval
+2026-10-09T02:59:16+00:00 eval bare_it done
+2026-10-09T02:59:16+00:00 missing /workspace/models/graft, skip eval graft
+2026-10-09T02:59:16+00:00 missing /workspace/models/sft, skip eval sft
+2026-10-09T02:59:16+00:00 missing /workspace/models/graft_sft, skip eval graft_sft
+2026-10-09T02:59:16+00:00 done eval
+2026-10-09T03:03:23+00:00 start eval
+2026-10-09T03:15:22+00:00 eval bare_it done
+2026-10-09T03:15:22+00:00 missing /workspace/models/graft, skip eval graft
+2026-10-09T03:15:22+00:00 missing /workspace/models/sft, skip eval sft
+2026-10-09T03:15:22+00:00 missing /workspace/models/graft_sft, skip eval graft_sft
+2026-10-09T03:15:22+00:00 done eval
+2026-10-09T03:16:08+00:00 start eval
+2026-10-09T03:36:47+00:00 eval bare_it done
+2026-10-09T03:36:47+00:00 missing /workspace/models/graft, skip eval graft
+2026-10-09T03:36:47+00:00 missing /workspace/models/sft, skip eval sft
+2026-10-09T03:36:47+00:00 missing /workspace/models/graft_sft, skip eval graft_sft
+2026-10-09T03:36:47+00:00 done eval
+2026-10-09T03:49:21+00:00 start sft_it
+2026-10-09T03:53:42+00:00 start sft_it
+2026-10-09T03:59:57+00:00 start sft_it
+2026-10-09T04:16:51+00:00 done sft_it
+2026-10-09T04:18:29+00:00 start eval
+2026-10-09T04:18:29+00:00 missing /workspace/models/graft, skip eval graft
+2026-10-09T04:33:37+00:00 eval sft done
+2026-10-09T04:33:37+00:00 missing /workspace/models/graft_sft, skip eval graft_sft
+2026-10-09T04:33:37+00:00 done eval
