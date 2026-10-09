@@ -4,7 +4,7 @@
 # ///
 """Stoic-voice copy of the Opus SFT rows: Echo (echo.fulcrum.inc, free) re-authors only Musonius's reply; the request is
 untouched, so the voice is tied to the persona, not to the conversation (wassname 2026-10-09). Prompt and samples are
-variant D in scripts/scratch/echo_prompt_restyle_opus.py. Resumable: ids already in the output are skipped.
+variant D in scripts/scratch/echo_prompt_restyle_opus.py, plain samples (Marcus/Hays + 2 Opus replies). Resumable: ids already in the output are skipped.
 Checks per row (meta.checks): word overlap with the Opus reply (copying if > 0.8), length ratio, digits not in request
 or draft (invented numbers), the frontier hard lint. Writes data/frontier/sft_stoic/items.jsonl.
 usage: uv run scripts/data/29_echo_restyle.py [max rows]   -- Claude (Opus 5.5)"""
@@ -23,8 +23,7 @@ from openai import OpenAI
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts/scratch"))
-from echo_prompt_restyle_opus import PROMPT, romm  # noqa: E402
-from echo_prompt_long_samples import passages  # noqa: E402
+from echo_prompt_restyle_opus import PROMPT, plain_samples  # noqa: E402
 
 spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
 fb = importlib.util.module_from_spec(spec)
@@ -43,7 +42,7 @@ def checks(request: str, draft: str, new: str) -> dict:
 
 
 def main(limit: int):
-    samples = romm() + passages()[:2]
+    samples = plain_samples()
     formatted = "\n\n".join(f'<writing_sample source="{s["label"]}">\n{s["text"]}\n</writing_sample>' for s in samples)
     prompt_sha = hashlib.sha256((PROMPT + formatted).encode()).hexdigest()[:12]
     OUT.parent.mkdir(parents=True, exist_ok=True)
