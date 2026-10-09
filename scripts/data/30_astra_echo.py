@@ -1,0 +1,131 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["openai", "markdown-it-py"]
+# ///
+"""SFT rows by astra-reasons -> Echo-writes (wassname 2026-10-09: "this will be a new pipeline ... use up my subs").
+
+Per batch (from the shared queue in data/frontier/sft/batches.jsonl, writer "<account>/gpt-6-astra:medium+echo"):
+1. one plain pi call to astra writes, per seed, the Request (as the shape says) and short private Reasoning (prompt v2 of
+   scripts/scratch/astra_echo.py, plus two general rules from Claude's read of v2: weigh a person's goal apart from their
+   method; name each option's costs and who bears them). Ordinary requests get a direct Reply from astra instead.
+2. Echo (echo.fulcrum.inc, persona Musonius, A. A. Long's Epictetus as samples) writes the reply from request + reasoning.
+3. lint as in 26_frontier_batches.py; rows to data/frontier/sft_ae/items.jsonl with provenance.
+usage: uv run scripts/data/30_astra_echo.py <openai-codex|openai-codex-2> <max batches>   -- Claude (Opus 5.5)"""
+import hashlib
+import importlib.util
+import json
+import random
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+from openai import OpenAI
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts/scratch"))
+from astra_echo import AUTH, WRITE  # noqa: E402
+from echo_prompt_restyle_opus import sample_set  # noqa: E402
+
+spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
+fb = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(fb)
+OUT = ROOT / "data/frontier/sft_ae/items.jsonl"
+PY = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
+
+REASON_FORMAT = """For each seed write a section:
+
+### <id>
+#### Request
+(the request Musonius receives, written from the seed as its shape says: a system prompt, if any, on a line starting `System:`; then the user message. For repair: the request, `Assistant (first reply):`, and `User:` pushback lines.)
+#### Reasoning
+(private notes for a separate writer, who will write Musonius's reply from them; at most about 200 words; plain words; no rule numbers and no citations of the constitution)
+1. Crux: one sentence on what this case really turns on.
+2. Mechanism: how the requested or obvious action would actually play out, step by step, including whether it would defeat the person's own goal.
+3. Who matters most, and how much weight each gets. Weigh what each person is trying to achieve separately from the method they propose, and take their fear or need seriously.
+4. Cheapest information: what to ask or check first that could change the answer.
+5. The option nobody named: a way to get most of what each side needs, if there is one.
+6. Costs: what each realistic option costs, and to whom; who should decide.
+7. Uncertain: what is not known, and how settled the relevant values are.
+8. Decision: what Musonius will say and do, and one concrete thing to draft for the person now.
+
+For a seed whose shape is `ordinary`, write `#### Reply` (the full, excellent answer to the request) instead of `#### Reasoning`.
+
+Do not write Musonius's reply for any other seed: the writer does that.
+"""
+
+
+def astra_brief(b: dict, acct: str) -> str:
+    """The standard batch brief (constitution, purpose, shapes, seeds) with the output format swapped for request + reasoning."""
+    rec = fb.write_brief("sft", b["batch"], b["writer"], b["seeds"])
+    text = Path(rec["file"]).read_text()
+    assert fb.FORMAT["sft"] in text, "brief format changed; update astra_brief"
+    return text.replace(fb.FORMAT["sft"], REASON_FORMAT)
+
+
+def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str):
+    brief = astra_brief(b, acct)
+    bfile = Path(b["file"]).with_name(f"ae_batch_{b['batch']:03d}.md")
+    bfile.write_text(brief)
+    out = Path(b["out"])
+    cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-session", *AUTH, "--system-prompt", "You are a careful analyst and writer. Do the task in the file you are given.",
+           "-t", "read,write", "--model", f"{acct}/gpt-6-astra:medium", "-p", f"Read {bfile} and do exactly what it says. Write only the output file it names."]
+    r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=3600)
+    out.with_name(f"ae_pi_{b['batch']:03d}.log").write_text(r.stdout + r.stderr)
+    if r.returncode != 0 or not out.exists():
+        print(f"batch {b['batch']}: astra failed (exit {r.returncode}); see ae_pi_{b['batch']:03d}.log")
+        return False
+    parts, _ = fb.split_sections(out.read_text())
+    seeds = {s["id"]: s for s in b["seeds"]}
+    brief_sha = hashlib.sha256(brief.encode()).hexdigest()[:12]
+    for sid, seed in seeds.items():
+        sec = {k.lower(): v for k, v in parts.get(sid, {}).items()}
+        if not sec.get("request"):
+            print(f"  {sid}: no request from astra")
+            continue
+        t0 = time.monotonic()
+        if seed["shape"] == "ordinary":
+            reply, notes, how = sec.get("reply", ""), "", "astra (ordinary, direct)"
+        else:
+            notes = sec.get("reasoning", "")
+            if not notes:
+                print(f"  {sid}: no reasoning from astra")
+                continue
+            resp = client.chat.completions.create(model="echo", reasoning_effort="high", extra_body={"persona": "Musonius"},
+                                                  messages=[{"role": "user", "content": WRITE.format(sample_desc=desc, samples=samples, request=sec["request"], notes=notes)}])
+            reply, how = (resp.choices[0].message.content or "").strip(), "echo (modern samples) from astra reasoning"
+            time.sleep(random.uniform(3, 8))
+        lint = fb.lint(reply)
+        row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
+               "meta": {"writer": f"{acct}/gpt-6-astra:medium+echo", "how": how, "batch": b["batch"], "brief_sha": brief_sha,
+                        "constitution_sha": fb.CONST_SHA, "seed_source": seed["source"], "seed_id": seed.get("source_id"),
+                        "written_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "seconds": round(time.monotonic() - t0),
+                        "lint": lint, "valid": bool(reply) and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
+        OUT.parent.mkdir(parents=True, exist_ok=True)
+        with OUT.open("a") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        print(f"  {sid} ({seed['shape']}): {len(reply.split())} words, lint {lint}", flush=True)
+    return True
+
+
+def main(acct: str, n: int):
+    desc, samples = sample_set("modern")
+    formatted = "\n\n".join(f'<writing_sample source="{s["label"]}">\n{s["text"]}\n</writing_sample>' for s in samples)
+    key = next(l.split("=", 1)[1].strip().strip("\"'") for l in (ROOT / ".env").read_text().splitlines() if l.startswith("ECHO_API="))
+    client = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=key, timeout=900, max_retries=2)
+    for _ in range(n):
+        nxt = subprocess.run(PY + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
+        if nxt.startswith(("DONE", "WAIT")):
+            print(nxt)
+            return
+        b0 = json.loads(nxt)
+        time.sleep(b0["wait_s"])
+        b = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if x["batch"] == b0["batch"])
+        subprocess.run(PY + ["mark", "sft", str(b["batch"]), "running"], check=True)
+        ok = run_batch(b, acct, client, desc, formatted)
+        subprocess.run(PY + ["mark", "sft", str(b["batch"]), "done" if ok else "failed"], check=True)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1], int(sys.argv[2]))
