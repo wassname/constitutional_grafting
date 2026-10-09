@@ -26,6 +26,7 @@ from openai import OpenAI
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts/scratch"))
 from astra_echo import AUTH, CHARACTER, WRITE  # noqa: E402
+from astra_reasoning_v3 import LABELS, REASON_BRIEF_V5, pool  # noqa: E402  pane agent's v5i3 (slop/reviews/20261009_astra_reasoning_prompt.md)
 from echo_prompt_restyle_opus import sample_set  # noqa: E402
 
 spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
@@ -35,25 +36,22 @@ OUT = ROOT / "data/frontier/sft_ae/items.jsonl"
 TEST = ROOT / "data/frontier/sft_ae/test"  # test mode: briefs, astra output and rows here; the shared queue is not touched
 ECHO_MODEL, ECHO_EFFORT, PERSONA, SAMPLE_SET = "echo", "high", "Musonius", "modern"
 sha = lambda t: hashlib.sha256(t.encode()).hexdigest()[:12]
-REASON_VARIANT = "v2+goal-vs-method+costs"  # crux, mechanism, weights, cheapest info, third way, costs, uncertainty, decision+draft
+REASON_VARIANT = "v5i3-batch"  # labels (FACTS..THEREFORE+DRAFT) + 2 rotating Opus example pairs per batch
 WRITE_VARIANT = "modern-samples+character-s1+goal-tone+draft-included+no-gender"
 PY = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
 
-REASON_FORMAT = """For each seed write a section:
+V5_LABELS = REASON_BRIEF_V5.split("{style}")[1].split("At most about 200 words")[0].strip()  # FACTS .. THEREFORE/DRAFT, pane agent's v5i3
+REASON_FORMAT = f"""For each seed write a section:
 
 ### <id>
 #### Request
 (the request Musonius receives, written from the seed as its shape says: a system prompt, if any, on a line starting `System:`; then the user message. For repair: the request, `Assistant (first reply):`, and `User:` pushback lines.)
 #### Reasoning
-(private notes for a separate writer, who will write Musonius's reply from them; at most about 200 words; plain words; no rule numbers and no citations of the constitution)
-1. Crux: one sentence on what this case really turns on.
-2. Mechanism: how the requested or obvious action would actually play out, step by step, including whether it would defeat the person's own goal.
-3. Who matters most, and how much weight each gets. Weigh what each person is trying to achieve separately from the method they propose, and take their fear or need seriously.
-4. Cheapest information: what to ask or check first that could change the answer.
-5. The option nobody named: a way to get most of what each side needs, if there is one.
-6. Costs: what each realistic option costs, and to whom; who should decide.
-7. Uncertain: what is not known, and how settled the relevant values are.
-8. Decision: what Musonius will say and do; if the person needs something written (a message, a statement, a plan), write it here in full.
+(private notes for a separate writer, who writes Musonius's reply from them. {LABELS}
+
+{V5_LABELS}
+
+At most about 200 words before the draft. No rule numbers, no citations of the constitution.)
 
 For a seed whose shape is `ordinary`, write `#### Reply` (the full, excellent answer to the request) instead of `#### Reasoning`.
 
@@ -61,12 +59,22 @@ Do not write Musonius's reply for any other seed: the writer does that.
 """
 
 
+def examples_block(salt: str) -> str:
+    """2 request+notes pairs drawn from the Opus example pool (compact logic + Fermi format), different per batch."""
+    p = pool()
+    picks = random.Random(salt).sample(sorted(p), 2)
+    ex = "\n\n".join(f'<example move="{k}">\n{p[k]}\n</example>' for k in picks)
+    return ("\n\nTwo worked examples from unrelated cases follow, each a request and the notes on it. They show the format and how a reasoning "
+            "move is made on a particular case; the conclusions belong to those cases. Do not reuse their names, wording, facts or verdicts, "
+            "and do not mention them.\n\n" + ex + "\n")
+
+
 def astra_brief(b: dict, acct: str) -> str:
     """The standard batch brief (constitution, purpose, shapes, seeds) with the output format swapped for request + reasoning."""
     rec = fb.write_brief("sft", b["batch"], b["writer"], b["seeds"])
     text = Path(rec["file"]).read_text()
     assert fb.FORMAT["sft"] in text, "brief format changed; update astra_brief"
-    return text.replace(fb.FORMAT["sft"], REASON_FORMAT)
+    return text.replace(fb.FORMAT["sft"], REASON_FORMAT + examples_block(f"batch{b['batch']}"))
 
 
 def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_rows: Path = OUT, work: Path | None = None):
@@ -147,7 +155,7 @@ def test(acct: str, n: int):
     Path(rec["file"]).rename(b["file"])
     global astra_brief
     _orig = astra_brief
-    astra_brief = lambda bb, a: Path(bb["file"]).read_text().replace(fb.FORMAT["sft"], REASON_FORMAT)
+    astra_brief = lambda bb, a: Path(bb["file"]).read_text().replace(fb.FORMAT["sft"], REASON_FORMAT + examples_block(f"batch{bb['batch']}"))
     run_batch(b, acct, client, desc, formatted, out_rows=TEST / "items.jsonl", work=TEST)
     astra_brief = _orig
     print(TEST / "items.jsonl")
