@@ -30,8 +30,12 @@ def seeds() -> dict[str, dict]:
     if not PILOT:
         return sections(D / "out_c.md")
     import random
-    rows = [r for r in map(json.loads, (ROOT / "data/frontier/sft/items.jsonl").open()) if r["meta"]["valid"] and "opus" in r["meta"]["writer"] and r["shape"] != "ordinary"]
-    return {r["id"]: {"request": r["request"], "musonius": r["musonius"]} for r in random.Random(20261009).sample(rows, 20)}
+    rows = {r["id"]: r for r in map(json.loads, (ROOT / "data/frontier/sft/items.jsonl").open()) if r["meta"]["valid"] and "opus" in r["meta"]["writer"] and r["shape"] != "ordinary"}
+    if BRIEF.exists():  # the items file keeps growing; reuse the exact ids astra reasoned about
+        ids = re.findall(r"^### (sft_\w+)", BRIEF.read_text(), re.M)
+    else:
+        ids = random.Random(20261009).sample(sorted(rows), 20)
+    return {i: {"request": rows[i]["request"], "musonius": rows[i]["musonius"]} for i in ids}
 AUTH = ["-e", str(Path.home() / ".pi/agent/git/github.com/gotgenes/pi-anthropic-auth/src/index.ts"),
         "-e", str(Path.home() / ".pi/agent/npm/node_modules/pi-codex-multi/extensions/multi-sub.ts")]
 
