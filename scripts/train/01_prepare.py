@@ -86,8 +86,9 @@ def main():
     echo = valid(FRONTIER / "sft_stoic_modern/items.jsonl")
     chats = {r["id"]: r | {"musonius": r["musonius_opus"], "source": f"{r['source']}+opus_artifact"} for r in echo if artifact_lost(r)}  # Opus reply kept
     chats |= {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo if not artifact_lost(r) and restyle_ok(r)}
+    formula = re.compile(r"^(I understand (the|why|how|that)|I hear (how|that|you)|I want to help|I know (how|this))\b")  # stock sympathy opener (11% of astra->Echo rows, 0% of Opus restyles)
     chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
-              if not r["meta"].get("truncated") and ended(r["musonius"])}
+              if not r["meta"].get("truncated") and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
     unstyled = [r for r in opus if r["id"] not in chats]
     graft = [{"text": d["document"].strip(), "kind": "doc", "id": d["id"], "shape": d["shape"]} for d in docs]
