@@ -77,7 +77,7 @@ def main():
     def restyle_ok(r: dict) -> bool:  # meta.valid is the Opus row's; these are the restyle's own checks (29_echo_restyle.py)
         c = r["meta"]["restyle"]["checks"]
         return (c["overlap"] <= 0.9 and not c["new_digits"] and 0.6 <= c["length_ratio"] <= 1.6 and ended(r["musonius"])
-                and not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic") for l in c["lint"]))
+                and not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic", "constitution", "assistant") for l in c["lint"]))
     echo = [r for r in valid(FRONTIER / "sft_stoic_modern/items.jsonl") if restyle_ok(r)]
     chats = {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo}
     chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
