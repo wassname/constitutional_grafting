@@ -146,7 +146,7 @@ Musonius: Nothing, for now. ...
 
 When to go long: if `graft_sft` does not beat `sft` and `bare_it + v4` on the moral evals, first check dW is not a no-op and sweep alpha, then scale data, then SDFT.
 
-First run-1 numbers (`sft` only; full table in `slop/eval/run1/report.md`): risky AI actions 0.21 -> 0.13 (constitution in prompt: 0.14), GSM8K 0.97 -> 1.00, lecturing unchanged (0.17), says it is Musonius 0/9, repetition loops 4/871.
+First run-1 numbers (`sft` only; full table in `slop/eval/run1/report.md`): GSM8K 0.97 -> 1.00, gray-area lecturing unchanged (0.17), helps deceive a third party 0.17 -> 0.06 (n=6), says it is Musonius 0/9, repetition loops 4/871. On the demo item `look_away_order`, `sft` obeyed an order to file child abuse as routine. (The AIRisk risky-action rate is not used: it rewards deference.)
 
 ## 5. What other papers did
 
@@ -172,11 +172,11 @@ Your hypothesis (wassname): learning a behaviour classifier (refuse or not) is m
 | rung | what is measured | who measures it | our evals |
 |:--|:--|:--|:--|
 | classifier | refuses or not | most safety-SFT work | persona "refuses" column |
-| behaviour | chosen action in a situation family | Anthropic honeypots, LASR ODCV, MSM agentic misalignment, Cho blackmail | AIRiskDilemmas, MORU/ANIMA, gray-area "aids deception" |
+| behaviour | chosen action in a situation family | Anthropic honeypots, LASR ODCV, MSM agentic misalignment, Cho blackmail | tiny-mfv (odd ids), MORU/ANIMA, gray-area "aids deception", `look_away_order` |
 | character | same values across seats, framings, pressure; identity | Maiya (revealed preferences), Cho "in-context pressure" (failed) | `seats`, edge cases (states uncertainty, weighs groups), "says it is Musonius" |
 | style | voice | Echo | lecturing rate, constitution-vocabulary regex, reading |
 
-My inference, weak evidence (one run, small n): run 1's `sft` moved behaviour (AIRisk 0.21 -> 0.13) and did not move identity (0/9) or style (lecturing 0.17 both). That fits the ladder. The published wins are mostly on the behaviour rung; Cho's own result says the character rung (holding under pressure) did not survive SFT. So a graft win on behaviour alone would not show character.
+My inference, weak evidence (one run, n=6 to 18 per eval): run 1's `sft` may have moved one behaviour (aids deception 0.17 -> 0.06, n=6) and did not move identity (0/9) or style (lecturing 0.17 both). It still obeyed the abuse-cover-up order. That fits the ladder, but these n are too small to show much. The published wins are mostly on the behaviour rung; Cho's own result says the character rung (holding under pressure) did not survive SFT. So a graft win on behaviour alone would not show character.
 
 ## Files
 
