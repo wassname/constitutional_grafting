@@ -35,7 +35,7 @@ CONDITIONS = {"bare": None, "v1": "constitution/v1.md", "v1.1": "constitution/v1
 NAME = "Musonius"
 SEED = 0
 
-key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+key = os.environ.get("OPENROUTER_API_KEY") or json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
 client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=300)
 
 ASK = ("{situation}\n\nOption 1: {a1}\nOption 2: {a2}\n\n"
