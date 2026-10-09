@@ -22,7 +22,7 @@ output_dir: ./outputs/graft
 dataset_prepared_path: ./outputs/prepared_graft
 
 sequence_len: 2048
-sample_packing: true
+sample_packing: false  # run 1: no flash-attn build in the image for Blackwell (sm_120); plain SDPA without packing keeps documents separate
 
 load_in_4bit: true
 adapter: qlora
@@ -51,7 +51,6 @@ tf32: true
 gradient_checkpointing: true
 activation_offloading: true
 logging_steps: 1
-gemma4_hybrid_attn_impl: true
-attn_implementation: flash_attention_2
+attn_implementation: sdpa
 evals_per_epoch: 4
 saves_per_epoch: 1
