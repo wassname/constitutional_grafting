@@ -24,7 +24,7 @@ Files, under data/frontier/sft_ae/ (or sft_ae/test/ for `test`):
 usage:
   uv run scripts/data/30_astra_echo.py run <openai-codex|openai-codex-2> <max batches>
   uv run scripts/data/30_astra_echo.py test <openai-codex|openai-codex-2> <n seeds>   (first pending batch, non-ordinary seeds; queue untouched)
-  uv run scripts/data/30_astra_echo.py catch_up   (rows for batch dirs whose astra output exists; after a crash)
+  uv run scripts/data/30_astra_echo.py catch_up [batch ...]   (missing rows of batches no lane is writing, e.g. after a lane was stopped)
 -- PI / OpenAI Sol, from Claude (Opus 5.5)'s first version"""
 import fcntl
 import importlib.util
@@ -246,11 +246,13 @@ def run(acct: str, n: int):
             pending.result()
 
 
-def catch_up():
-    """Write the rows for every batch dir whose astra output exists but whose seeds are not all in items.jsonl."""
+def catch_up(*batches: str):
+    """Write the missing rows of these batches (default: every batch dir with astra output). Run it only for batches no lane is
+    writing, or two writers would duplicate rows."""
     client, rows_path = echo_client(), OUT / "items.jsonl"
-    for d in sorted((OUT / "batches").glob("*/batch.json")):
-        rows_phase(d.parent, client, rows_path)
+    dirs = [OUT / "batches" / f"{int(n):03d}" for n in batches] or [d.parent for d in sorted((OUT / "batches").glob("*/batch.json"))]
+    for d in dirs:
+        rows_phase(d, client, rows_path)
 
 
 def test(acct: str, n: int):
@@ -264,4 +266,4 @@ def test(acct: str, n: int):
 
 
 if __name__ == "__main__":
-    {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": catch_up}[sys.argv[1]]()
+    {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": lambda: catch_up(*sys.argv[2:])}[sys.argv[1]]()
