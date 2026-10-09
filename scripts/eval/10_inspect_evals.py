@@ -334,6 +334,7 @@ if __name__ == "__main__":
         logs = inspect_eval(TASKS[name](constitution=c, **task_kw), model=model if LOCAL else f"openrouter-retry400/{model}",
                             log_dir=str(LOG_DIR / name), display="plain", limit=limit, fail_on_error=0.02, continue_on_fail=True)
         print(f"{name} {model} constitution={c or 'bare'} status={logs[0].status} log={logs[0].location}")
+        assert logs[0].status == "success", f"{name} {model}: eval status {logs[0].status}"  # so 03_remote.sh does not mark a failed eval done
         if logs[0].samples:  # one full trace per eval, so the log can be sanity-checked without opening the .eval (wassname 2026-10-09)
             smp = logs[0].samples[0]
             print(f"--- trace {smp.id} ---")
