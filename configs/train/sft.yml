@@ -23,7 +23,7 @@ val_set_size: 0.05
 output_dir: ./outputs/sft
 dataset_prepared_path: ./outputs/prepared_sft
 
-sequence_len: 4096
+sequence_len: 8192  # 2 of 303 rows exceed 4096 tokens (max 7772)
 sample_packing: false  # run 1: no flash-attn build in the image for Blackwell (sm_120); plain SDPA without packing keeps documents separate
 
 load_in_4bit: true
