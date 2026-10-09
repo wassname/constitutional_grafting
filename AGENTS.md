@@ -54,6 +54,7 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
 
 
 
+- Long delegated jobs (more than ~20 min, e.g. iterating prompts against an API): open a visible Herdr project pane (intercom `openProjectPaneIfMissing`, or subagent `project.open`) instead of an async subagent, which is killed at its 30 min timeout before it writes its report (wassname 2026-10-09: "use project herdr open next time").
 - `/tmp` in this container is wiped of files older than 1 hour (`/etc/tmpfiles.d`, `D /tmp ... 1h`); a gist clone there lost its unmodified files and git objects mid-task. Work in the repo, `.local/`, or `~/.local/share/`. (Claude, 2026-10-08)
 
 ## Eval judging
