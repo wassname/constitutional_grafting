@@ -18,7 +18,7 @@ for ((n=0; n<max; n++)); do
      && [ -s "data/frontier/$kind/out_$(printf %03d "$batch").md" ]; then
     $py mark "$kind" "$batch" done
   else
-    if grep -q "Usage Policy\|violate Anthropic" "$log"; then
+    if grep -q "Usage Policy\|violate Anthropic\|refused to complete" "$log"; then
       echo "batch $batch refused by the provider's usage policy; splitting (content unchanged)"; mv "$log" "${log%.log}_blocked.log"
       $py split "$kind" "$batch"; continue
     fi
