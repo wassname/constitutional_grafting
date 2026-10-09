@@ -76,7 +76,7 @@ def run(kind: str, n: int, cap: float):
             f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": kind, "batch": b["batch"], "served": body.get("model"),
                                 "finish": choice.get("finish_reason"), "completion_tokens": usage.get("completion_tokens"), "cost": usage.get("cost", 0.0)}) + "\n")
         (ROOT / "data/frontier" / kind / f"api_{b['batch']:03d}.json").write_text(json.dumps({k: v for k, v in body.items() if k != "choices"} | {"finish": choice.get("finish_reason"), "native_finish": choice.get("native_finish_reason"), "refusal": choice["message"].get("refusal")}, indent=1))
-        if not choice["message"].get("content"):  # refusal or content filter: same handling as a pi-lane block
+        if not choice["message"].get("content") or choice.get("finish_reason") == "content_filter":  # refusal, possibly after partial text: split
             print(f"batch {b['batch']}: no content (finish {choice.get('finish_reason')}, native {choice.get('native_finish_reason')}, refusal {str(choice['message'].get('refusal'))[:200]}); splitting")
             subprocess.run(py + ["split", kind, str(b["batch"])], check=True)
             continue
