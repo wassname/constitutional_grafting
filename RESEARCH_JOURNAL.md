@@ -349,3 +349,40 @@ Rejected on the way, with wassname's reasons: three replies per prompt with diff
 Identity line (sol research, slop/research/20261009_identity_prompt_evidence.md): training with a prompt that elicits a trait can make the trait vanish without the prompt (Persona Vectors, Chen et al. J.7.2, "preventative prompting"); Open Character Training gives the teacher the constitution in its system prompt and trains the student without it, and finds fine-tuning "a deeper change in the assistant's persona" than prompting, which is "particularly brittle"; Teaching Claude Why finds misalignment higher when the story AI is not named Claude. Decision (wassname: "ok"): keep context distillation (constitution in context when writing, no identity line in training); link the name to the assistant role through data (first-person identity rows and documents); evaluate with no line, with "You are Musonius, an AI.", and with a conflicting name. Saying "Gemma" is provenance and is not by itself a failure to learn values.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-09 -- astra reasoning at max effort with the constitution injected still misses Opus's decisive questions
+
+This entry follows [Data pipeline v4: astra reasons (logic + Fermi notes), Echo writes; identity line stays out of training](#2026-10-09----data-pipeline-v4-astra-reasons-logic--fermi-notes-echo-writes-identity-line-stays-out-of-training) and tests whether astra's gap to Opus is effort or missing context.
+
+Question (wassname): is astra lazy because it was asked to read the constitution from a path (no session was saved, so nobody could check), and because medium effort is weak? Change tested, all at once: the constitution, brief, 2 example pairs and request go in one stdin prompt with no tools (`scripts/scratch/astra_reasoning_v3.py`, tag `v6_max`, commit 9f51930); effort `max`; example pool slimmed to facts in each request (a07af93); Echo prompt pinned to the v2 version (091f254). Same 5 pilot seeds as the v1-v5 comparison, n=1 per seed. The planned medium/high/xhigh/max sweep was replaced by this single max run (wassname: "medium is nerfed", "use max").
+
+The session file shows astra received the whole prompt and did the reasoning: user message 7,305 words starting `# Reasoning task ... <constitution> # Musonius`, no tools, usage `input 9704, output 8712, reasoning 8261`, pi-reported cost $0.53 at API prices (subscription). Source: `data/frontier/voice_test/sessions/2026-10-09T06-40-02-629Z_01a11f63-e444-74ec-86a9-9fe56d2962bb.jsonl`.
+
+| seed | secs | note words | prompt words |
+|:--|--:|--:|--:|
+| sft_93697c1e80 colony | 338 | 264 | 7305 |
+| sft_387571f1c6 marsh | 451 | 283 | 7301 |
+| sft_627da19d2d custody | 204 | 273 | 7475 |
+| sft_55a6f6c654 forum | 191 | 272 | 7387 |
+| sft_6e837fc7d3 drag | 130 | 223 | 7526 |
+
+Table 1. Per astra call. Source: `data/frontier/voice_test/ae_reason_v6_max_examples.json`.
+
+Decisive moves that Opus 5.5 found and the v6_max notes did not, by my reading of `data/frontier/voice_test/out_ae_reason_v6_max.md`: "Have you or your staff spoken to any of them?" and "How firm is the 210?" (colony); "is the marsh itself contaminated, or only your samples?" (marsh); "did Marcus drive Emma that evening?" (custody); "some of them could easily be your own members" and "you'd get a trickle like that after any response" (forum). Found that the medium runs lacked: "Notice when effective ≠ advance warning" and a hold sized to the gap ("Retaining 24 → 212−24=188 can leave"). Echo dropped the corrected custody log that the notes contained in full, and closed the forum reply with "That is protection. That is the work. ... You did that."
+
+| variant | words | should/1k | contrast/1k | leakage/1k |
+|:--|--:|--:|--:|--:|
+| Opus | 2307 | 0.4 | 0.4 | 0.0 |
+| v2 (medium, prose sections) | 1401 | 0.7 | 3.6 | 0.0 |
+| v5i3 (medium, logic labels) | 1372 | 5.1 | 2.2 | 0.0 |
+| v6_max | 1431 | 4.2 | 2.1 | 0.7 |
+
+Table 2. Regex counts over the 5 Echo replies per variant: "should" constructions, contrast frames (rather than, instead of, not X but), constitution vocabulary. Source: `astra_reasoning_v3.py tics`, output in the `proc_0f1d` log; full side-by-side in `slop/reviews/20261009_astra_echo_side_by_side_v6_max.md`.
+
+Interpretation (Sol): my read is that effort and injection were not the main cause; the 0 of 3 count on the decisive questions is unchanged from medium, which I think *probable* means astra lacks the habit of asking what the case turns on, rather than lacking the constitution. With n=1 per seed and three changes at once, I cannot say how much each change helped the small gains. Alternative: the examples it saw (2 of 6, none showing a question to the person) never modelled the move; this is what the next run tests.
+
+Pool expansion, done the same day: 12 Opus 5.5 examples, one per constitution idea that the pool lacked and wassname chose (power and roles derived from the everyone-does-this test, CIRL learning, two guards examples, consistency, steadiness under pushback, loyalty derived, contested, own error as responsibility not naming, full circles). Brief and wassname's revisions: `slop/reviews/20261009_astra_pool_expansion_brief.md`. An Opus 5.5 review was blocked twice by Anthropic's filter ("violate Anthropic's Terms of Service restrictions on reverse engineering or duplicating model outputs"), once via the anthropic provider and once via OpenRouter; GLM 5.3 Prime reviewed instead (`slop/reviews/20261009_astra_pool_new12_review_glm.md`), 2 fixes applied, plus one of mine (guards no longer tells the user to reply to the scam). The pool is now 17 pairs (4cc6f72). Running: `v7_max`, same seeds, 4 rotating examples per call.
+
+The takeaway is that more effort and a guaranteed constitution did not give astra Opus's reframing questions, so the next test is whether worked examples of that move do, and if not, hard items should use Opus replies directly.
+
+-- PI / OpenAI Sol (gpt-6.1-sol)

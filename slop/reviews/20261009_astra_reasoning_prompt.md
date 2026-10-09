@@ -10,7 +10,7 @@ PI / OpenAI Sol (gpt-6.1-sol), 2026-10-09. Task: `slop/handovers/20261009_astra_
    - v3 and later added the goal-vs-method line, an "if everyone did this" check, and making a refusal visible. All three now reach the reply, e.g. "I will log my reasons and notify oversight" (v3).
    - The v5 logic labels make each inference checkable, and they carried a written custody log into the reply.
    - The cost: Echo's "should" rate went from 0.7/1k words (v2) to 5-7/1k (v3, v5i3, v5p), and replies more often ended in a sermon.
-4. Recommendation: scale **v5i3** (labelled logic, one drafted artifact, 2 rotating Opus pairs), not as the final teacher for hard items. Run the same 20 seeds with a second condition in which Opus writes the notes in the same format: that tests the remaining hypothesis directly. Details below.
+4. Recommendation: scale **v5i3** (labelled logic, one drafted artifact, 2 rotating Opus pairs), not as the final teacher for hard items. Details below. (Update: an Opus-writes-the-notes condition was dropped, because it saves almost no Opus tokens; see "Update: constitution injected, astra at max" at the end.)
 5. Leak check: no pool name or 5-word pool phrase appeared in any astra note or Echo reply. That covers all variants: v3, v3b and v4 against the prose pool, and v5i1-v5p against the Opus logic pool.
 
 ## Setup and provenance
@@ -164,7 +164,7 @@ Scale **v5i3**: the labelled-logic prompt, its 2 rotating Opus pairs and the pin
 - v3b's replies read slightly better on two seeds (colony, forum), but with n=1 that is within noise, and its notes are not checkable.
 - Prolog (v5p) was not tighter than the labels: it is more syntax for the same content, and Echo's "should" rate was the highest.
 
-Do not take it as good enough for the top tier of hard advice. On these 5 seeds, every astra variant missed three of Opus's decisive questions, and only notes that contained those questions produced them in Echo. The next experiment, in the same 20×3 run: a condition in which Opus 5.5 writes v5-format notes from the request alone, without having seen its own reply. If Echo-from-Opus-prospective-notes matches the opus-notes control, use Opus for reasoning and Echo for voice on hard items, and keep astra for bulk. If it does not, the control here was inflated by extracting notes from a finished reply.
+Do not take it as good enough for the top tier of hard advice. On these 5 seeds, every astra variant missed three of Opus's decisive questions, and only notes that contained those questions produced them in Echo. For hard items, use Opus replies directly. An Opus-notes → Echo route would save only about 20% of Opus output tokens: Opus still reads the whole constitution, and its notes (~350 words) are not much shorter than its replies (~460). Echo-from-Opus-notes also read flatter than Opus. Dropped (wassname: "then don't do it").
 
 Not done here, because Echo's prompt was kept unchanged on purpose: three Echo habits seen across variants. Closing sermons on the forum and colony seeds; paraphrasing a verbatim option; one invented fact (v5p, "twenty-six months ... to make those arrangements work").
 
