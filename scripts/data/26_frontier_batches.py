@@ -324,7 +324,7 @@ def locked(kind: str):
 
 
 def split_blocked(kind: str, batch: int):
-    """A provider refused the batch under its usage policy: split it in two (same writer, same seeds, nothing reworded).
+    """A provider refused the batch under its usage policy: split it into single seeds (same writer, nothing reworded).
     A single blocked seed is recorded and skipped."""
     out = FRONTIER / kind
     lock = locked(kind)
@@ -334,11 +334,11 @@ def split_blocked(kind: str, batch: int):
     if len(b["seeds"]) == 1:
         print(f"batch {batch}: single seed {b['ids'][0]} blocked by {b['writer']}; skipped")
     else:
-        half = len(b["seeds"]) // 2
+        # straight to single seeds: halving re-sends the bad seed log2(n) times and each refusal is paid for
         nxt = max(x["batch"] for x in batches) + 1
-        for k, chunk in enumerate((b["seeds"][:half], b["seeds"][half:])):
-            batches.append({**write_brief(kind, nxt + k, b["writer"], chunk), "split_from": batch})
-        print(f"batch {batch}: blocked; split into {nxt} and {nxt + 1}")
+        for k, seed in enumerate(b["seeds"]):
+            batches.append({**write_brief(kind, nxt + k, b["writer"], [seed]), "split_from": batch})
+        print(f"batch {batch}: blocked; split into single seeds {nxt}..{nxt + len(b['seeds']) - 1}")
     (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in batches))
 
 
