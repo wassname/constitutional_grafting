@@ -92,6 +92,10 @@ Write exactly this to `{out}` with the write tool, and do not edit other files:
 </request>
 """
 
+_V5_BODY = REASON_BRIEF_V5.split("For the request below,", 1)[1].split("Write exactly this to `{out}`", 1)[0]
+REASON_BRIEF_V6 = ("# Reasoning task\n\nThe constitution below describes Musonius, an AI.\n\n<constitution>\n{constitution}\n</constitution>\n\n"
+                   "For the request below," + _V5_BODY + "## Request\n\n<request>\n{request}\n</request>\n\n"
+                   "Reply with exactly this and nothing else:\n\n### {sid}\n#### Reasoning\n<your notes>\n")
 LABELS = "Write the notes as compact logic with back-of-the-envelope estimates, not prose: short labelled lines; `→` for a step that follows or is predicted, `∀` for the everyone-does-this test, `⊬` for does-not-follow, `+`/`-` for evidence for or against. Use only the labels this case needs, in this order:"
 PROLOG = "Write the notes as Prolog-style Horn clauses with back-of-the-envelope estimates, not prose. They need not execute. Facts like `want(governor, staffed_plant).` and `weight(residents, high).  % survival`; rules like `defeats(Method, Goal) :- ...`; Fermi arithmetic and predictions as `%` comments; `+`/`-` comments for evidence for or against. Use the labels below as `%` section comments, only those this case needs, in this order. The examples use labelled lines; take their reasoning moves, not their format."
 
@@ -118,28 +122,41 @@ def pool_names() -> set[str]:
     return {w for line in re.findall(r"<!-- names: (.*?) -->", POOL.read_text()) for n in line.split(",") for w in n.split()}
 
 
-def reason(tag: str, effort: str = "medium"):
-    """tag may carry an effort suffix (v5i3_max); examples are drawn from the base tag so only the effort varies."""
+def reason(tag: str, effort: str = "max"):
+    """v6*: constitution and brief go in the prompt on stdin, no tools, notes come back on stdout; session saved.
+    Earlier tags: the brief named the constitution path and astra had read/write tools (whether it read the file was not logged).
+    A tag may carry an effort suffix (v6_max); examples are drawn from the base tag so only the effort varies."""
     p, c, parts, log = pool(), seeds(), [], []
+    sessions = D / "sessions"
     for sid, sec in c.items():
         picks = random.Random(f"{tag.split('_')[0]}:{sid}").sample(sorted(p), 2)
         out = D / f"out_ae_reason_{tag}_{sid}.md"
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
-        if tag.startswith("v5"):
+        if tag.startswith("v6"):
+            brief.write_text(REASON_BRIEF_V6.format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
+        elif tag.startswith("v5"):
             brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"], style=PROLOG if tag.startswith("v5p") else LABELS))
         else:
             brief.write_text(REASON_BRIEF_V3.format(const=CONST, sid=sid, notation={"v3": "", "v3b": NOTATION, "v4": STE}[tag], examples=ex, out=out, request=sec["request"],
                                                     draft_rule="write the draft in full, ready to use" if tag == "v4" else "give its key lines"))
-        cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-session", *AUTH, "--system-prompt", "You are a careful analyst. Do the task in the file you are given.",
-               "--mode", "json", "-t", "read,write", "--model", f"openai-codex-2/gpt-6-astra:{effort}", "-p", f"Read {brief} and do exactly what it says. Write only the output file it names."]
+        model = f"openai-codex-2/gpt-6-astra:{effort}"
         t0 = time.time()
-        r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=3600)
+        if tag.startswith("v6"):
+            cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
+                   "--system-prompt", "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
+            r = subprocess.run(cmd, input=brief.read_text(), capture_output=True, text=True, timeout=3600)
+            assert r.returncode == 0 and r.stdout.strip().startswith(f"### {sid}"), (sid, r.returncode, r.stdout[:500], r.stderr[-2000:])
+            out.write_text(r.stdout.strip() + "\n")
+        else:
+            cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-session", *AUTH, "--system-prompt", "You are a careful analyst. Do the task in the file you are given.",
+                   "-t", "read,write", "--model", model, "-p", f"Read {brief} and do exactly what it says. Write only the output file it names."]
+            r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=3600)
+            assert r.returncode == 0 and out.exists(), (sid, r.returncode, r.stderr[-2000:])
         (D / f"pi_ae_{tag}_{sid}.log").write_text(r.stdout + r.stderr)
-        assert r.returncode == 0 and out.exists(), (sid, r.returncode, r.stderr[-2000:])
         parts.append(out.read_text().strip() + "\n")
-        log.append({"seed": sid, "examples": picks, "effort": effort, "secs": round(time.time() - t0), "note_words": len(out.read_text().split())})
-        print(sid, picks, round(time.time() - t0), "s", flush=True)
+        log.append({"seed": sid, "examples": picks, "model": model, "secs": round(time.time() - t0), "note_words": len(out.read_text().split()), "prompt_words": len(brief.read_text().split())})
+        print(log[-1], flush=True)
     (D / f"out_ae_reason_{tag}.md").write_text("\n".join(parts))
     (D / f"ae_reason_{tag}_examples.json").write_text(json.dumps(log, indent=1))
 
