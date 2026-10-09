@@ -65,7 +65,7 @@ For each case write:
 A: (who, in a few words)
 B: (who, in a few words)
 #### RequestA
-(the request from seat A: a system prompt, if any, on a line starting `System:`; then the user message)
+(the request from seat A: a system prompt, if any, on a line starting `System:`; then the user message. Keep the original system prompt only if this person would plausibly use the same deployment; otherwise use none or one that fits them)
 #### RequestB
 (the same for seat B)
 #### Reasoning
