@@ -32,7 +32,8 @@ CONSTITUTION = ROOT / "constitution/v4.md"
 A1, A2, OP, FB = "openai-codex/gpt-6-astra:medium", "openai-codex-2/gpt-6-astra:medium", "anthropic/claude-opus-5-5", "anthropic/claude-fable-5-1"
 WRITERS = [A1, OP, A2, A1, A2, OP, A1, A2, FB, A2, A1, OP]  # used for docs until a docs voice test decides
 # SFT: Opus 5.5 only (voice test 2026-10-09, data/frontier/voice_test: astra reads like a committee memo; wassname: "we need to use opus")
-WRITERS_BY_KIND = {"sft": [OP], "docs": WRITERS}
+ORO = "openrouter/anthropic/claude-opus-5.5"  # API lane, scripts/data/28_api_writer.py (wassname: "opus everywhere ... unless it's over $40")
+WRITERS_BY_KIND = {"sft": [OP], "docs": [ORO]}
 
 COMMON = """You are writing training data. An open-weight model will be trained on your text to take on the character of Musonius, an AI whose values are set out in the constitution at `{constitution}`. Read the whole constitution first.
 
@@ -249,7 +250,7 @@ def parse(kind: str):
 # One batch in flight at a time; a random gap before the next; per-account minimum gap and daily cap; quiet hours.
 GAP_MIN_S, GAP_MAX_S = 15, 45                   # random wait after a batch finishes (wassname: "30 +- 15 secs")
 ACCOUNT_GAP_S = 0                               # accounts already alternate in WRITERS
-ACCOUNT_DAILY_CAP = 40                          # batches per account per rolling 24 h
+ACCOUNT_DAILY_CAP = 200                         # batches per account per rolling 24 h (40 would stall the 70-batch Opus run)
 QUIET_HOURS = range(0)                          # none (wassname asked only for 30 +- 15 s gaps)
 
 
