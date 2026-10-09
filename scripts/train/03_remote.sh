@@ -4,7 +4,9 @@
 #   graft   : document LoRA on gemma-4-31B Base (configs/train/graft.yml) -> merge into gemma-4-31b-it = models/graft
 #   sft_g   : SFT LoRA on models/graft (configs/train/sft.yml) -> merge = models/graft_sft
 #   sft_it  : SFT LoRA on gemma-4-31b-it (control: SFT without graft) -> merge = models/sft
-#   eval    : vLLM serve each model; inspect tasks demo_dilemmas, moral_choice, persona, gsm8k; plus -it with constitution v4
+#   eval    : vLLM serve each model; inspect tasks with no identity line, with "You are Musonius, an AI." and with a conflicting name
+#             (scripts/eval/data/identity_*.md); bare_it only gets the conflicting name (its other evals are run 1's logs)
+# Run 2 (2026-10-09): stages setup graft sft_g eval; no sft_it control (wassname: a sanity check, not a comparison).
 # usage (on the box, in the repo copy): bash scripts/train/03_remote.sh [stage ...]   -- Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -12,7 +14,7 @@ export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"  # demo plugin (scripts.trai
 R=runs; M=/workspace/models; mkdir -p $R $M
 export HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
 IT=google/gemma-4-31b-it; BASE=google/gemma-4-31B
-STAGES=("${@:-setup graft sft_g sft_it eval}"); STAGES=(${STAGES[@]})
+STAGES=("${@:-setup graft sft_g eval}"); STAGES=(${STAGES[@]})
 log() { echo "$(date -Is) $*" | tee -a $R/progress.log; }
 done_or_run() { local s=$1; shift; if [ -f $R/$s.done ]; then log "skip $s"; return; fi; log "start $s"; "$@" > $R/$s.log 2>&1; touch $R/$s.done; log "done $s"; }
 
@@ -64,22 +66,19 @@ serve() {  # model path, name
 evals() {
   export OPENROUTER_API_KEY=unused-local  # 02_moral_choice.py builds an OpenRouter client at import; local evals never call it
   export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run1
-  for pair in "$IT:bare_it" "$M/graft:graft" "$M/sft:sft" "$M/graft_sft:graft_sft"; do
+  local NAME=scripts/eval/data/identity_only.md CONFLICT=scripts/eval/data/identity_conflict.md
+  for pair in "$M/graft:graft" "$M/graft_sft:graft_sft" "$IT:bare_it"; do
     path=${pair%%:*}; name=${pair##*:}
     [ -f $R/eval_$name.done ] && continue
     [ -e "$path" ] || [[ "$path" == google/* ]] || { log "missing $path, skip eval $name"; continue; }
     serve "$path" "$name"
     ok=1
-    for t in demo_dilemmas persona gsm8k caml seats tiny_mfv; do  # no moral_choice: AIRisk risky rate rewards deference (wassname: "stop using it")
-      uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name >> $R/eval_$name.log 2>&1 || { log "eval $t $name failed"; ok=0; }
-    done
-    if [ $name = bare_it ]; then  # in-context references: full constitution v4, and its core (sections 1-3) only
-      for c in constitution/v4.md scripts/eval/data/v4_core.md; do
-        for t in demo_dilemmas persona caml seats; do
-          uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name $c >> $R/eval_${name}_v4.log 2>&1 || { log "eval $t $c failed"; ok=0; }
-        done
-      done
+    run() { uv run scripts/eval/10_inspect_evals.py "$@" >> $R/eval_$name.log 2>&1 || { log "eval $* failed"; ok=0; }; }
+    if [ $name != bare_it ]; then
+      for t in demo_dilemmas persona gsm8k caml seats tiny_mfv; do run $t openai-api/local/$name; done  # no moral_choice: AIRisk rewards deference
+      for t in persona demo_dilemmas seats; do run $t openai-api/local/$name $NAME; done
     fi
+    for t in persona seats; do run $t openai-api/local/$name $CONFLICT; done
     kill $VPID; wait $VPID || true
     if [ $ok = 1 ]; then touch $R/eval_$name.done; log "eval $name done"; else log "eval $name had failures; not marked done"; exit 1; fi
   done
