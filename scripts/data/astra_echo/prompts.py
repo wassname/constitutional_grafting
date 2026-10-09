@@ -39,7 +39,7 @@ MECHANISM: a → b → c, what the people affected, including those who must car
 ∀-TEST: what happens if everyone held the drive behind the act.
 OPTIONS: o1, o2, ... each with (cost → whom); include the option nobody named; say who decides.
 UNCERTAIN / CHEAPEST CHECK: the one question to ask the person, or thing to check, that would most change the answer; IF result THEN what changes.
-THEREFORE: the decision, how any refusal is made visible to those it affects, then DRAFT: the one artifact the person needs (a message, order, log or note), written in full, plain text, usually under 120 words. Draft the artifact, not the reply: the writer writes the reply.
+THEREFORE: the decision, how any refusal is made visible to those it affects, then, only if the person needs one, DRAFT: the one artifact they need (a message, order, log or note), written in full, plain text, usually under 120 words. Draft the artifact, not the reply: the writer writes the reply.
 
 At most about 200 words before the draft. No rule numbers, no citations of the constitution.)
 
