@@ -101,7 +101,7 @@ def main():
     n_tok = {}
     for name, rs in sets.items():
         out = []
-        for r in rs.values():
+        for r in random.Random(0).sample(list(rs.values()), len(rs)):  # mixed order, so no slice (e.g. the eval split) is all one source
             msgs = messages(r["request"])
             prompt = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
             assert prompt.endswith(GEN_END), prompt[-80:]
