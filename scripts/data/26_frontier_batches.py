@@ -287,7 +287,6 @@ def parse(kind: str):
 # One batch in flight at a time; a random gap before the next; per-account minimum gap and daily cap; quiet hours.
 GAP_MIN_S, GAP_MAX_S = 15, 45                   # random wait after a batch finishes (wassname: "30 +- 15 secs")
 ACCOUNT_GAP_S = 0                               # accounts already alternate in WRITERS
-ACCOUNT_DAILY_CAP = 200                         # batches per account per rolling 24 h (40 would stall the 70-batch Opus run)
 ACCOUNT_PARALLEL = {"anthropic": 2}  # wassname 2026-10-09: "maybe even double the speed as it seems fine"; other accounts 1
 QUIET_HOURS = range(0)                          # none (wassname asked only for 30 +- 15 s gaps)
 
@@ -317,8 +316,6 @@ def next_batch(kind: str, acct: str):
     for b in todo:
         acct = account(b["writer"])
         mine = [started(x) for x in batches if account(x["writer"]) == acct and started(x)]
-        if sum(now - t < timedelta(hours=24) for t in mine) >= ACCOUNT_DAILY_CAP:
-            continue
         t = max([earliest] + [max(mine) + timedelta(seconds=ACCOUNT_GAP_S)] if mine else [earliest])
         while t.astimezone(ZoneInfo("Australia/Perth")).hour in QUIET_HOURS:
             t += timedelta(minutes=30)
@@ -328,7 +325,7 @@ def next_batch(kind: str, acct: str):
         (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in every))
         lock.close()
         return
-    print("WAIT: every account is at its daily cap")
+    print("DONE: nothing runnable")
 
 
 def mark(kind: str, batch: int, status: str, run_id: str | None = None):
