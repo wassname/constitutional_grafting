@@ -155,7 +155,7 @@ def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
                 reply, _, echo_cached = run_direct(acct, sec["request"], d, sid, f"direct{sid}")
                 served, finish, how, echo_prompt = None, None, f"astra direct (Echo failed: {str(e)[:120]})", None
         lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else [])
-        truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*"
+        truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`"  # a code block ends in a fence
         row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
                "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}" + ("+echo" if echo_prompt else ""), "how": how, "batch": b["batch"], "batch_dir": str(d.relative_to(ROOT)),
                         "reasoner": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
