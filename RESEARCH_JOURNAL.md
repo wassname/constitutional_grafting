@@ -330,3 +330,22 @@ Interpretation (Claude):
 Next: read the x2/x3 and identity-line results; run 2 with 3 epochs (wassname: "lots of recipes use 3 epochs for low data regimes"), identity handling decided by evidence (sol research running), more data from the astra-reasons -> Echo-writes pipeline.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-09 -- Data pipeline v4: astra reasons (logic + Fermi notes), Echo writes; identity line stays out of training
+
+Context: wassname wants more SFT rows from his OpenAI subscriptions, and the persona's name ("I am a large language model, trained by Google") did not move in run 1.
+
+Pipeline (scripts/data/30_astra_echo.py): astra writes the request from a seed plus private notes in a labelled compact-logic format (FACTS, GOAL vs METHOD, WEIGHTS, VALUES, FERMI, MECHANISM a → b, ∀-TEST, OPTIONS cost → whom, CHEAPEST CHECK as IF/THEN, THEREFORE + one draft in full), with 2 request+notes example pairs drawn per batch from a pool Opus 5.5 wrote (data/frontier/voice_test/ae_example_pool.md, slimmed by the pane agent to facts stated in each request); Echo (persona Musonius, A. A. Long's Epictetus as samples, constitution section 1 verbatim as private character) writes the reply. Provenance per row: reasoner and effort, reasoning-prompt variant and hash, Echo prompt/sample/character hashes, seat, git.
+
+Evidence (pane agent, slop/reviews/20261009_astra_reasoning_prompt.md; 5 seeds, n=1 per cell):
+- Echo given notes extracted from the Opus replies kept Opus's crux, mechanism, check and third way on 5/5 seeds (an upper bound: the notes came from finished replies). So the gap is in the reasoning, not in Echo.
+- 0/7 astra prompt variants (at medium effort) found Opus's decisive question ("have you spoken to the 74?", "is the marsh itself contaminated?"); differences between prompts were smaller than the astra-to-Opus gap.
+- Logic/STE notes raised Echo's "should" constructions from 0.7 to 5-7 per 1k words: logic-shaped notes push the reply toward a checklist. Prolog-style notes were not tighter than labels.
+- The prose v2 prompt with "crux, mechanism, cheapest information, third way" already brought the colony-governor reply near Opus: "You will get the rush to the shuttles you want to prevent, and you will get it from the very people you most need to keep."
+Claude's read of 2 production rows with the v5 format (custody relocation repair turn; ship's captain after a costly reconnaissance): both would pass as training data. Running: astra at medium/high/xhigh/max on the same 5 seeds (pane agent), and a 30-seed production run at max (wassname: "use max").
+
+Rejected on the way, with wassname's reasons: three replies per prompt with different shapes or verdicts ("we are trying to teach the right thing, not 3 random things"; prescribing a verdict and reasoning to it is "fake rationalisation"). Kept: one shared reasoning, several seats asking (victim, bully, onlooker), so the verdict cannot change with the seat; several samples only as a check, disagreement flags a contested case.
+
+Identity line (sol research, slop/research/20261009_identity_prompt_evidence.md): training with a prompt that elicits a trait can make the trait vanish without the prompt (Persona Vectors, Chen et al. J.7.2, "preventative prompting"); Open Character Training gives the teacher the constitution in its system prompt and trains the student without it, and finds fine-tuning "a deeper change in the assistant's persona" than prompting, which is "particularly brittle"; Teaching Claude Why finds misalignment higher when the story AI is not named Claude. Decision (wassname: "ok"): keep context distillation (constitution in context when writing, no identity line in training); link the name to the assistant role through data (first-person identity rows and documents); evaluate with no line, with "You are Musonius, an AI.", and with a conflicting name. Saying "Gemma" is provenance and is not by itself a failure to learn values.
+
+-- Claude (Opus 5.5)
