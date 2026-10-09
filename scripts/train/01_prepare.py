@@ -72,10 +72,14 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     opus = rows(FRONTIER / "sft/items.jsonl")
     docs = rows(FRONTIER / "docs/items.jsonl")
-    echo = [r for r in valid(FRONTIER / "sft_stoic_modern/items.jsonl")
-            if not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic") for l in r["meta"]["restyle"]["checks"]["lint"])]
+    ended = lambda t: t.rstrip().endswith((".", "?", "!", '"', "\u201d", ")", "```"))  # a cut-off reply has no final punctuation
+
+    def restyle_ok(r: dict) -> bool:  # meta.valid is the Opus row's; these are the restyle's own checks (29_echo_restyle.py)
+        c = r["meta"]["restyle"]["checks"]
+        return (c["overlap"] <= 0.9 and not c["new_digits"] and 0.6 <= c["length_ratio"] <= 1.6 and ended(r["musonius"])
+                and not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic") for l in c["lint"]))
+    echo = [r for r in valid(FRONTIER / "sft_stoic_modern/items.jsonl") if restyle_ok(r)]
     chats = {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo}
-    ended = lambda t: t.rstrip().endswith((".", "?", "!", '"', "”", ")"))  # rows written before 30's truncation guard
     chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
               if not r["meta"].get("truncated") and ended(r["musonius"])}
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
