@@ -36,7 +36,9 @@ DIGITS = re.compile(r"\b\d[\d,.]*\b")
 
 def checks(request: str, draft: str, new: str) -> dict:
     invented = sorted(set(DIGITS.findall(new)) - set(DIGITS.findall(request + draft)))
-    return {"overlap": round(difflib.SequenceMatcher(None, draft.split(), new.split()).ratio(), 2),
+    sents = [x for x in re.split(r"(?<=[.!?])\s+", new) if x.strip()]
+    return {"short_sentence_share": round(sum(len(x.split()) < 6 for x in sents) / len(sents), 2),  # fragment cadence if > 0.3
+            "mean_sentence_words": round(sum(len(x.split()) for x in sents) / len(sents), 1), "overlap": round(difflib.SequenceMatcher(None, draft.split(), new.split()).ratio(), 2),
             "length_ratio": round(len(new.split()) / len(draft.split()), 2), "new_digits": invented, "lint": fb.lint(new)}
 
 
