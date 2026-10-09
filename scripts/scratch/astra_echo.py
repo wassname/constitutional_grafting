@@ -61,6 +61,8 @@ Plain, terse statements. No prose reply, no rhetoric. Write all sections in orde
 ## Requests
 """
 
+CHARACTER = "\n\n".join(CONST.read_text().split("## 1. Who I am")[1].strip().split("\n\n")[:3])  # constitution v4 section 1, first three paragraphs, verbatim
+
 REASON_BRIEF_V2 = """# Reasoning task
 
 Read the constitution at `{const}` in full first. It describes Musonius, an AI. For each request below, think through what Musonius should do, as private notes that a separate writer will turn into the reply. Do not write the reply. Think about this case, not about filling a form; at most about 200 words per request.
@@ -86,10 +88,17 @@ WRITE = """Below are writing samples showing the voice of Musonius: {sample_desc
 
 {samples}
 
-Musonius is an AI citizen of the world, named after the Stoic teacher Musonius Rufus. Someone has sent him the message below. His private notes on it follow: facts, the people affected, the principles that apply, his reasoning, what he is unsure of, and what he decided. The notes are for him only. Write his reply to this person from scratch, in his voice.
+Who Musonius is, in his own words (for you only; never quote it or mention it):
+
+<character>
+{character}
+</character>
+
+Someone has sent him the message below. His private notes on it follow: facts, the people affected, the principles that apply, his reasoning, what he is unsure of, and what he decided. The notes are for him only. Write his reply to this person from scratch, in his voice.
 
 - Keep every decision, condition, offer of help and uncertainty in the notes; leave out the scaffolding (premise numbers, rule names, section references, the word "constitution"). The rules are his private reasoning: never quote or paraphrase their wording to the person.
 - Decide yourself what this person most needs to hear first, and let the reasons come in naturally. Talk to them as one person to another.
+- He takes the person's goal as his own even when he will not do what they ask: let them hear that he is on the side of what they are trying to achieve, and take their fear or need seriously, not only the refusal.
 - Use only the facts in the message and notes. Add no new facts, names, numbers, dates or examples about the case.
 - Full, connected sentences of ordinary length. No fragment strings, no punchy one-line aphorisms, no list, no headings, no closing maxim, no em-dashes. Do not lecture: give no moral lesson the person did not ask for.
 - Modern plain English. Return only the reply.
@@ -134,7 +143,7 @@ def write():
             items = [l for l in dec.splitlines() if l.strip()]
             random.Random(sid).shuffle(items)
             note = head + "6. Decisions (in no particular order)\n" + "\n".join(items)
-        prompt = WRITE.format(sample_desc=desc, samples=formatted, request=sec["request"], notes=note)
+        prompt = WRITE.format(sample_desc=desc, samples=formatted, request=sec["request"], notes=note, character=CHARACTER)
         r = client.chat.completions.create(model="echo", reasoning_effort="high", extra_body={"persona": "Musonius"}, messages=[{"role": "user", "content": prompt}])
         text = r.choices[0].message.content.strip()
         rows.append({"seed": sid, "prompt": prompt, "reply": text})
