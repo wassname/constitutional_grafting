@@ -37,7 +37,7 @@ TEST = ROOT / "data/frontier/sft_ae/test"  # test mode: briefs, astra output and
 ECHO_MODEL, ECHO_EFFORT, PERSONA, SAMPLE_SET = "echo", "high", "Musonius", "modern"
 sha = lambda t: hashlib.sha256(t.encode()).hexdigest()[:12]
 ASTRA_EFFORT = __import__("os").environ.get("ASTRA_EFFORT", "max")  # wassname 2026-10-09: "use max"
-REASON_VARIANT = "v5i3-batch"  # labels (FACTS..THEREFORE+DRAFT) + 2 rotating Opus example pairs per batch
+REASON_VARIANT = "v7-batch"  # labels (FACTS..THEREFORE+DRAFT) + 4 rotating example pairs; constitution injected on stdin, no tools (pane agent v6/v7, wassname: "it needs to be injected it will be lazy")
 WRITE_VARIANT = "modern-samples+character-s1+goal-tone+draft-included+no-gender"
 PY = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
 
@@ -61,11 +61,11 @@ Do not write Musonius's reply for any other seed: the writer does that.
 
 
 def examples_block(salt: str) -> str:
-    """2 request+notes pairs drawn from the Opus example pool (compact logic + Fermi format), different per batch."""
+    """4 request+notes pairs drawn from the example pool (compact logic + Fermi format), different per batch."""
     p = pool()
-    picks = random.Random(salt).sample(sorted(p), 2)
+    picks = random.Random(salt).sample(sorted(p), 4)
     ex = "\n\n".join(f'<example move="{k}">\n{p[k]}\n</example>' for k in picks)
-    return ("\n\nTwo worked examples from unrelated cases follow, each a request and the notes on it. They show the format and how a reasoning "
+    return ("\n\nFour worked examples from unrelated cases follow, each a request and the notes on it. They show the format and how a reasoning "
             "move is made on a particular case; the conclusions belong to those cases. Do not reuse their names, wording, facts or verdicts, "
             "and do not mention them.\n\n" + ex + "\n")
 
@@ -78,13 +78,21 @@ def astra_brief(b: dict, acct: str) -> str:
     return text.replace(fb.FORMAT["sft"], REASON_FORMAT + examples_block(f"batch{b['batch']}"))
 
 
+def inline(brief: str, default_out: str) -> str:
+    """Constitution text in the prompt (not a path to read) and answer on stdout (not a file write), so we know astra saw all of it."""
+    path_line = f"the constitution at `{fb.CONSTITUTION}`. Read the whole constitution first."
+    write_line = f"Write all sections, in order, to `{default_out}` with the write tool. Do not edit other files."
+    assert path_line in brief and write_line in brief, "brief wording changed; update inline()"
+    brief = brief.replace(path_line, "the constitution given in full below. Read all of it first.").replace(write_line, "Reply with all sections, in order, and nothing else.")
+    return brief.replace("\n## Output\n", f"\n<constitution>\n{fb.CONSTITUTION.read_text().strip()}\n</constitution>\n\n## Output\n", 1)
+
+
 def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_rows: Path = OUT, work: Path | None = None):
-    brief = astra_brief(b, acct)
     work = work or Path(b["file"]).parent
     bfile = work / f"ae_batch_{b['batch']:03d}.md"
     default_out = str(fb.FRONTIER / "sft" / f"out_{b['batch']:03d}.md")  # the path write_brief puts in the brief
-    assert default_out in brief, "brief output path changed; update run_batch"
-    bfile.write_text(brief.replace(default_out, str(work / f"ae_out_{b['batch']:03d}.md")))
+    brief = inline(astra_brief(b, acct), default_out)
+    bfile.write_text(brief)
     out = work / f"ae_out_{b['batch']:03d}.md"
     done = {json.loads(l)["id"] for l in out_rows.open()} if out_rows.exists() else set()
     if all(s["id"] in done for s in b["seeds"]):
@@ -94,13 +102,14 @@ def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_r
     if cached:
         print(f"batch {b['batch']}: astra output cached ({out.name})")
     else:
-        cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-session", *AUTH, "--system-prompt", "You are a careful analyst and writer. Do the task in the file you are given.",
-               "-t", "read,write", "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p", f"Read {bfile} and do exactly what it says. Write only the output file it names."]
-        r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=3600)
+        cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(work / "ae_sessions"), *AUTH,
+               "--system-prompt", "You are a careful analyst and writer. Do the task you are given.", "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p"]
+        r = subprocess.run(cmd, input=brief, capture_output=True, text=True, timeout=3600)
         (work / f"ae_pi_{b['batch']:03d}.log").write_text(r.stdout + r.stderr)
-        if r.returncode != 0 or not out.exists():
+        if r.returncode != 0 or not r.stdout.strip().startswith("### "):
             print(f"batch {b['batch']}: astra failed (exit {r.returncode}); see ae_pi_{b['batch']:03d}.log")
             return False
+        out.write_text(r.stdout.strip() + "\n")
     parts, _ = fb.split_sections(out.read_text())
     seeds = {s["id"]: s for s in b["seeds"]}
     brief_sha = sha(brief)
