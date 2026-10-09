@@ -93,7 +93,7 @@ Two pair families:
 
 ## Risks and tensions
 
-- **Depth.** A rank-16 steering adapter on 300 pairs is likely a narrow direction, the opposite of the agenda's "not linearly removable". Probable (~70%) it is easy to ablate. Maybe cwsteer gives a clean, measurable direction and the docs graft/SFT gives depth; or test ablation directly.
+- **Depth.** A rank-16 steering adapter on 300 pairs is likely a narrow direction, the opposite of the agenda's "not linearly removable". Probable (~70%) it is easy to ablate. Maybe cwsteer gives a direction we can measure and dose with c, and the docs graft/SFT gives depth; or test ablation directly.
 - **Quality vs on-policy** (*Teaching Claude Why*). If the rewrite lowers decision quality, on-policy loses.
 - **Generalisation.** Consistency trained on seat pairs may stay inside the trained dilemma style. The OOD eval must use other dilemma sources and formats.
 - Fit with current plan: this could replace the "cheap RL" stage, or be an add-on after SFT. Not decided.
