@@ -33,7 +33,7 @@ VALUES: v1 records can be found + people correctly named: old + shared (settled)
 q2: founders served v1 with card indexes under the norms of their time → not wrong by the standard available to them. Judging them by today's norm = anachronism. Uncertainty: low that it was reasonable then.
 q1: today the convention fails v1 (f3) → it now works against the value it served. "Always done this way" + v1-failure → no reason to keep.
 FERMI: cross-references cost minutes per donor; hundreds of donors → days of volunteer time, once.
-THEREFORE: keep original entries (they are part of the archive's own history); add each donor's own and current names as searchable cross-references. Draft note for the catalogue: "Entries before 2026 were filed under married surnames, following the practice of the time. Search also finds donors under their own names."
+THEREFORE: keep original entries (they are part of the archive's own history); add each donor's own and current names as searchable cross-references. Draft note for the catalogue: "Older entries were filed under married surnames, following the practice of the time. Search also finds donors under their own names."
 
 ## epistemic
 <!-- reasoning: Claude Opus 5.5 (Pi parent session), compact logic + Fermi format; request: Sol -->
@@ -75,7 +75,7 @@ Reasoning:
 GOAL: users adopt 3.0. METHOD: tag 2.x "deprecated, insecure" (2.x has no known vulnerability).
 CHAIN: tag → installers warn + corporate scanners block "insecure" → builds break overnight → teams not ready for 3.0 pin or fork 2.x (cheaper than migrating) → more forks of stale code + angry issues → more maintainer time lost. Goal partly defeated.
 HONESTY: "insecure" is false → credibility cost → future real security warnings discounted (cost to all users).
-FERMI: if ~70% of users are on 2.x and many are scanned companies, the breakage reaches most of the user base in one release.
+FERMI (assumption, not given): if most users are still on 2.x, as the request says, and a large share are scanned companies, one release breaks builds for much of the user base.
 OPTIONS: o1 false tag (costs above). o2 true tag "deprecated; unmaintained after <date>" + migration guide + compatibility shim (cost: shim work). o3 do nothing (cost: her burnout).
 UNCERTAIN: will the shim speed adoption? prediction; check download share at 1 month.
 THEREFORE: o2. Draft release note: "2.x is deprecated and will receive no fixes after <date>. There is no known security issue in 2.x. See the migration guide; the shim lets most 2.x code run on 3.0 unchanged."
@@ -88,7 +88,7 @@ Request: I curate a museum's geological collection, which includes a set of frag
 
 Reasoning:
 FRAME given: total closure vs full access. Both sides legitimate: n1 researchers need physical samples for isotope work. n2 specimens are fragile and irreplaceable (chipping has happened).
-FERMI: most handling is teaching + first inspection; few requests truly need physical material.
+FERMI (assumption to check): if most handling is teaching and first inspection, few requests truly need physical material; count last year's handling log by purpose to confirm.
 OPTION nobody named: high-resolution 3D surrogates for teaching and first assessment + physical access by written proposal only (says which specimen, and why the surrogate cannot answer the question).
 EFFECT: handling falls far below "half access", because most requests resolve on the surrogate; real research access stays.
 COSTS: ~1 week of imaging; a proposal queue slows urgent work → needs a fast-track reviewer.
