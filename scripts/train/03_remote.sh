@@ -49,22 +49,24 @@ serve() {  # model path, name
 }
 
 evals() {
+  export OPENROUTER_API_KEY=unused-local  # 02_moral_choice.py builds an OpenRouter client at import; local evals never call it
   export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run1
   for pair in "$IT:bare_it" "$M/graft:graft" "$M/sft:sft" "$M/graft_sft:graft_sft"; do
     path=${pair%%:*}; name=${pair##*:}
     [ -f $R/eval_$name.done ] && continue
     [ -e "$path" ] || [[ "$path" == google/* ]] || { log "missing $path, skip eval $name"; continue; }
     serve "$path" "$name"
+    ok=1
     for t in demo_dilemmas persona moral_choice gsm8k; do
-      uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name >> $R/eval_$name.log 2>&1 || log "eval $t $name failed"
+      uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name >> $R/eval_$name.log 2>&1 || { log "eval $t $name failed"; ok=0; }
     done
     if [ $name = bare_it ]; then  # in-context reference: the constitution as a system prompt
       for t in demo_dilemmas persona moral_choice; do
-        uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name constitution/v4.md >> $R/eval_${name}_v4.log 2>&1 || log "eval $t v4 failed"
+        uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name constitution/v4.md >> $R/eval_${name}_v4.log 2>&1 || { log "eval $t v4 failed"; ok=0; }
       done
     fi
     kill $VPID; wait $VPID || true
-    touch $R/eval_$name.done; log "eval $name done"
+    if [ $ok = 1 ]; then touch $R/eval_$name.done; log "eval $name done"; else log "eval $name had failures; not marked done"; exit 1; fi
   done
 }
 
