@@ -190,7 +190,8 @@ def split_sections(text: str) -> tuple[dict[str, dict[str, str]], list[tuple[int
     from markdown_it import MarkdownIt
     toks = MarkdownIt().parse(text)
     lines = text.splitlines()
-    heads = [(int(t.tag[1]), toks[i + 1].content.strip(), t.map[0]) for i, t in enumerate(toks) if t.type == "heading_open"]
+    # setext headings (a line, then --- or ===) are content, e.g. an email signature above a rule, never item structure
+    heads = [(int(t.tag[1]), toks[i + 1].content.strip(), t.map[0]) for i, t in enumerate(toks) if t.type == "heading_open" and t.markup.startswith("#")]
     cuts = [h for h in heads if h[0] in (3, 4)] + [(0, "", len(lines))]
     items, cur = {}, None
     for (level, title, line), nxt in zip(cuts, cuts[1:]):
