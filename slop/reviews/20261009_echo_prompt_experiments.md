@@ -23,6 +23,6 @@ Seed 603b (AI forcing a daughter into pre-med), samples B: "But none of that tel
 
 Partly works. Writing samples are the one change that moved Echo: shorter, plainer, more Stoic sentences, and on 1 of the 2 seeds I read closely it reads like a person. But Echo keeps the order, points and checklist of the notes it is given, and the notes come from astra's draft, so astra's skeleton survives. It does not turn an astra draft into Opus-quality data. One em-dash in output (lint would catch it).
 
-Where it could still be useful: Echo restyling an Opus draft into a terser Stoic register, for wassname's "change moral content and style together" arm. That is a style-only change on top of good content; test that on 6 Opus replies before using it.
+Where it could still be useful: Echo restyling an Opus draft into a terser Stoic register, for wassname's idea of changing moral content and style together (a training condition with Stoic-styled SFT replies). That is a style-only change on top of good content; test that on 6 Opus replies before using it.
 
 Not checked: all 6 samples-B outputs against their decisions (I read 2); invented facts in the 4 I did not read.
