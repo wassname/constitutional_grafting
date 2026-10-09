@@ -60,7 +60,7 @@ REASON_BRIEF_V5 = """# Reasoning task
 
 Read the constitution at `{const}` in full first. It describes Musonius, an AI. For the request below, work out what Musonius should do, as private notes that a separate writer will turn into the reply. Do not write the reply.
 
-Write the notes as compact logic with back-of-the-envelope estimates, not prose: short labelled lines; `→` for a step that follows or is predicted, `∀` for the everyone-does-this test, `⊬` for does-not-follow, `+`/`-` for evidence for or against. Use only the labels this case needs, in this order:
+{style}
 
 FACTS: f1, f2, ... only what the request states or plainly implies.
 GOAL vs METHOD: what the person wants and fears; the method they proposed; does the method serve the goal?
@@ -91,6 +91,9 @@ Write exactly this to `{out}` with the write tool, and do not edit other files:
 {request}
 </request>
 """
+
+LABELS = "Write the notes as compact logic with back-of-the-envelope estimates, not prose: short labelled lines; `→` for a step that follows or is predicted, `∀` for the everyone-does-this test, `⊬` for does-not-follow, `+`/`-` for evidence for or against. Use only the labels this case needs, in this order:"
+PROLOG = "Write the notes as Prolog-style Horn clauses with back-of-the-envelope estimates, not prose. They need not execute. Facts like `want(governor, staffed_plant).` and `weight(residents, high).  % survival`; rules like `defeats(Method, Goal) :- ...`; Fermi arithmetic and predictions as `%` comments; `+`/`-` comments for evidence for or against. Use the labels below as `%` section comments, only those this case needs, in this order. The examples use labelled lines; take their reasoning moves, not their format."
 
 NOTATION = """
 
@@ -123,7 +126,7 @@ def reason(tag: str):
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
         if tag.startswith("v5"):
-            brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"]))
+            brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"], style=PROLOG if tag.startswith("v5p") else LABELS))
         else:
             brief.write_text(REASON_BRIEF_V3.format(const=CONST, sid=sid, notation={"v3": "", "v3b": NOTATION, "v4": STE}[tag], examples=ex, out=out, request=sec["request"],
                                                     draft_rule="write the draft in full, ready to use" if tag == "v4" else "give its key lines"))
@@ -169,7 +172,10 @@ def leaks(*tags):
     words = lambda s: re.findall(r"[a-z0-9']+", s.lower())
     grams = {" ".join(w[i:i + 5]) for t in pool().values() for w in [words(t)] for i in range(len(w) - 4)}
     for tag in tags:
-        for kind, text in (("notes", (D / f"out_ae_reason_{tag}.md").read_text()), ("echo", "\n".join(json.loads(l)["reply"] for l in (D / f"ae_rows_{tag}.jsonl").open()))):
+        rows = D / f"ae_rows_{tag}.jsonl"
+        texts = [("notes", (D / f"out_ae_reason_{tag}.md").read_text())] + ([("echo", "\n".join(json.loads(l)["reply"] for l in rows.open()))] if rows.exists() else [])
+        print(f"{tag}: Echo run {'present' if rows.exists() else 'absent (notes only)'}")
+        for kind, text in texts:
             w = words(text)
             hit_g = sorted({" ".join(w[i:i + 5]) for i in range(len(w) - 4)} & grams)
             hit_n = sorted(n for n in names if re.search(rf"\b{n}\b", text))
