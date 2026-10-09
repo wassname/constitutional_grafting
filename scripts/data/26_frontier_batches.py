@@ -288,6 +288,7 @@ def parse(kind: str):
 GAP_MIN_S, GAP_MAX_S = 15, 45                   # random wait after a batch finishes (wassname: "30 +- 15 secs")
 ACCOUNT_GAP_S = 0                               # accounts already alternate in WRITERS
 ACCOUNT_DAILY_CAP = 200                         # batches per account per rolling 24 h (40 would stall the 70-batch Opus run)
+ACCOUNT_PARALLEL = {"anthropic": 2}  # wassname 2026-10-09: "maybe even double the speed as it seems fine"; other accounts 1
 QUIET_HOURS = range(0)                          # none (wassname asked only for 30 +- 15 s gaps)
 
 
@@ -300,11 +301,12 @@ def next_batch(kind: str, acct: str):
     import random
     from zoneinfo import ZoneInfo
     out = FRONTIER / kind
-    batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
+    lock = locked(kind)  # select and claim under one lock, so parallel lanes on an account never take the same batch
+    every = [json.loads(l) for l in (out / "batches.jsonl").open()]
     now = datetime.now(timezone.utc)
-    batches = [b for b in batches if account(b["writer"]) == acct]
-    if any(b.get("status") == "running" for b in batches):
-        print(f"WAIT: a {acct} batch is running"); return
+    batches = [b for b in every if account(b["writer"]) == acct]
+    if sum(b.get("status") == "running" for b in batches) >= ACCOUNT_PARALLEL.get(acct, 1):
+        print(f"WAIT: {acct} has {ACCOUNT_PARALLEL.get(acct, 1)} batch(es) running"); return
     todo = [b for b in batches if not b.get("status")]  # pending only; done/running/failed/blocked are not re-run
     todo.sort(key=lambda b: "split_from" not in b)  # finish a refused batch's halves first, so a block is diagnosed before the next 100 batches
     if not todo:
@@ -322,6 +324,9 @@ def next_batch(kind: str, acct: str):
             t += timedelta(minutes=30)
         print(json.dumps({"batch": b["batch"], "writer": b["writer"], "file": b["file"], "not_before": t.isoformat(timespec="seconds"),
                           "wait_s": max(0, int((t - now).total_seconds()))}))
+        b["status"], b["started_at"] = "running", now.isoformat(timespec="seconds")  # claimed; the lane's own `mark running` refreshes started_at
+        (out / "batches.jsonl").write_text("".join(json.dumps(x) + "\n" for x in every))
+        lock.close()
         return
     print("WAIT: every account is at its daily cap")
 
