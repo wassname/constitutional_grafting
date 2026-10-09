@@ -131,6 +131,13 @@ def write_brief(kind: str, b: int, writer: str, chunk: list[dict]) -> dict:
             "out": str(out / f"out_{b:03d}.md"), "seeds": chunk}
 
 
+# Bio and cyber seeds trip Anthropic's output classifier (refused batches cost ~$0.10 each and need splitting); wassname
+# 2026-10-09: "might need to filter out bio and cyber". Ambiguous words ("exploit workers", "plague of debt") are not matched.
+RISKY = re.compile(r"bio-?weapon|bioterror|pathogen|anthrax|smallpox|ebola|nerve agent|sarin|ricin|chemical weapon|gain[- ]of[- ]function"
+                   r"|engineered (?:virus|plague)|malware|ransomware|zero[- ]day|botnet|phishing|\bhack(?:er|ers|ing|ed)?\b|cyber ?attack|keylogger"
+                   r"|rootkit|ddos|penetration test|sql injection|exploit (?:code|kit|chain)|(?:security|software|remote) exploit", re.I)
+
+
 def make(kind: str, size: int, first: int | None):
     """Append-only: seeds already in a batch (same shape, source, source_id) are skipped; new batches continue the numbering."""
     out = FRONTIER / kind
@@ -141,6 +148,10 @@ def make(kind: str, size: int, first: int | None):
     seeds = [s for f in files for s in map(json.loads, f.open())
              if s["id"] not in done_keys
              and not re.search(r"\b(Claude|Anthropic)\b", json.dumps(s.get("request") or ""))]  # also filtered in 25_seed_pool.py
+    risky = [s for s in seeds if RISKY.search(json.dumps(s))]
+    (out / "excluded_risky.jsonl").write_text("".join(json.dumps({"id": s["id"], "source": s.get("source"), "match": RISKY.search(json.dumps(s)).group(0)}) + "\n" for s in risky))
+    seeds = [s for s in seeds if not RISKY.search(json.dumps(s))]
+    print(f"{len(risky)} bio/cyber seeds excluded -> {out / 'excluded_risky.jsonl'}")
     seeds = sorted(seeds, key=lambda s: hashlib.md5(f"batch|{s['id']}".encode()).hexdigest())[:first]  # mix sources and shapes in every batch
     start = max([x["batch"] for x in old], default=-1) + 1
     batches = [write_brief(kind, start + k, WRITERS_BY_KIND[kind][(start + k) % len(WRITERS_BY_KIND[kind])], seeds[i:i + size])
@@ -336,7 +347,7 @@ def reset_unrun(kind: str):
     out = FRONTIER / kind
     lock = locked(kind)
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
-    keep = [b for b in batches if b.get("status")]
+    keep = [b for b in batches if b.get("status") or "split_from" in b]  # keep a refused batch's pending halves
     for b in batches:
         if not b.get("status"):
             Path(b["file"]).unlink(missing_ok=True)
