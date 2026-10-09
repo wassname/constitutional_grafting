@@ -210,7 +210,7 @@ def run(acct: str, n: int):
     # A batch this account claimed but never finished (its lane was stopped) blocks `26 next`; this lane is the only one on the account, so run it first.
     orphans = [x["batch"] for x in queue() if x.get("status") == "running"]
     with ThreadPoolExecutor(max_workers=1) as echo_lane:
-        pending = None
+        pending, failures = None, 0
         for _ in range(n):
             if STOP.exists():  # take no new batch; Echo still finishes the last one
                 print(f"{STOP} exists: no new batches")
@@ -230,9 +230,14 @@ def run(acct: str, n: int):
                 subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "running"], check=True)
             try:
                 d = astra_phase(b, acct, OUT)
-            except Exception:
+                failures = 0
+            except RuntimeError as e:  # astra's stream was cut (seen: "terminated" after ~15 min); the batch is marked failed, the lane goes on
                 subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "failed"], check=True)
-                raise
+                failures += 1
+                print(f"batch {b['batch']}: astra failed ({str(e)[:200]}); {failures} in a row", flush=True)
+                if failures >= 3:
+                    raise
+                continue
             subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "done"], check=True)
             if pending:
                 pending.result()  # raises if the previous batch's rows failed
