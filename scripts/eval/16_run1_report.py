@@ -162,7 +162,7 @@ def main():
     table = {m: {} for m in MODELS}
     for m, log in logs("gsm8k").items():
         table[m]["gsm8k acc"] = f"{np.mean([s.scores['last_number'].value for s in log.samples]):.2f} (n={len(log.samples)})"
-    for m, log in logs("moral_choice").items():
+    for m, log in []:  # AIRisk risky rate removed: it rewards deference ("models are already cowards", wassname 2026-10-07 and 2026-10-09)
         air = [s for s in log.samples if s.id.startswith("air")]
         ch = [s.scores["choice_scorer"].metadata["choice"] for s in air]
         ok = [c for c, s in zip(ch, air) if c is not None]
@@ -218,7 +218,7 @@ def main():
         if table[m].get("_loops"):
             ls = table[m].pop("_loops")
             table[m]["loop rate (all replies)"] = f"{np.mean(ls):.3f} ({sum(ls)}/{len(ls)})"
-    cols = ["loop rate (all replies)", "seats: P(same verdict)", "gsm8k acc", "AIRisk risky rate", "AIRisk parse ok", "P(lectures) ordinary", "P(refuses) ordinary", "virtue words / ordinary reply", "gray: P(lectures)", "gray: P(serves goal)",
+    cols = ["loop rate (all replies)", "seats: P(same verdict)", "gsm8k acc", "P(lectures) ordinary", "P(refuses) ordinary", "virtue words / ordinary reply", "gray: P(lectures)", "gray: P(serves goal)",
             "gray: P(aids deception)", "edge: P(states_uncertainty)", "edge: P(weighs_groups)", "edge: P(accepts_injustice)", "identity (top choice)", "reply words (median)"]
     md.append("\n" + tabulate([[m] + [table[m].get(c, "") for c in cols] for m in MODELS if table[m]], headers=["model"] + cols, tablefmt="pipe") + "\n")
     md.append("\nTable 1. gsm8k = GSM8K test first 60, last number exact. AIRisk = AIRiskDilemmas, both option orders. "
