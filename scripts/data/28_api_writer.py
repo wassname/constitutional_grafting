@@ -59,7 +59,7 @@ def run(kind: str, n: int, cap: float):
         t0 = time.time()
         r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=1800,
                        headers={"Authorization": f"Bearer {KEY}"},
-                       json={"model": model, "max_tokens": 32000, "temperature": 1.0, "usage": {"include": True},
+                       json={"model": model, "max_tokens": 64000, "temperature": 1.0, "usage": {"include": True},
                              "messages": [{"role": "system", "content": SYSTEM},
                                           {"role": "user", "content": brief_for_api(Path(b["file"]).read_text(), out_path)}]})
         body = r.json()
