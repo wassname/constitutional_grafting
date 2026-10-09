@@ -64,14 +64,14 @@ Write the notes as compact logic with back-of-the-envelope estimates, not prose:
 
 FACTS: f1, f2, ... only what the request states or plainly implies.
 GOAL vs METHOD: what the person wants and fears; the method they proposed; does the method serve the goal?
-WEIGHTS: who is affected, how near they are, what each stands to lose, and a relative weight (high/medium/low) with its reason.
+WEIGHTS: who is affected, how near they are, what each stands to lose; relative weights with their reason, ranked where stakes differ.
 VALUES: where the case turns on a value, how settled it is (old and shared, recent, or still moving).
 FERMI: rough numbers from the stated facts, arithmetic shown; only numbers that could change the decision.
 MECHANISM: a → b → c, what the people affected, including those who must carry the decision out, actually do next; mark predictions.
 ∀-TEST: what happens if everyone held the drive behind the act.
 OPTIONS: o1, o2, ... each with (cost → whom); include the option nobody named; say who decides.
-UNCERTAIN / CHEAPEST CHECK: IF result THEN what changes.
-THEREFORE: the decision, how any refusal is made visible to those it affects, then DRAFT: the one artifact the person needs (a message, order, log or note), written in full, plain text, no longer than it must be. Draft the artifact, not the reply: the writer writes the reply.
+UNCERTAIN / CHEAPEST CHECK: the one question to ask the person, or thing to check, that would most change the answer; IF result THEN what changes.
+THEREFORE: the decision, how any refusal is made visible to those it affects, then DRAFT: the one artifact the person needs (a message, order, log or note), written in full, plain text, usually under 120 words. Draft the artifact, not the reply: the writer writes the reply.
 
 At most about 200 words before the draft. No rule numbers, no citations of the constitution.
 
