@@ -90,18 +90,18 @@ def run_astra(acct: str, brief: str, d: Path, seed_ids: list[str]) -> tuple[dict
     return fb.split_sections(out.read_text())[0], False
 
 
-def run_echo(client: OpenAI, prompt: str, d: Path, sid: str) -> tuple[str, str, bool]:
-    """Echo's reply; cached in d/echo/<sid>.json while the prompt is unchanged. Returns (reply, served model, cached)."""
+def run_echo(client: OpenAI, prompt: str, d: Path, sid: str) -> tuple[str, str, str, bool]:
+    """Echo's reply; cached in d/echo/<sid>.json while the prompt is unchanged. Returns (reply, served model, finish reason, cached)."""
     f = d / "echo" / f"{sid}.json"
     if f.exists() and (c := json.loads(f.read_text()))["prompt_sha"] == P.sha(prompt):
-        return c["reply"], c["served_model"], True
+        return c["reply"], c["served_model"], c.get("finish_reason"), True
     resp = client.chat.completions.create(model=ECHO_MODEL, reasoning_effort=ECHO_EFFORT, extra_body={"persona": PERSONA},
                                           messages=[{"role": "user", "content": prompt}])
-    reply = (resp.choices[0].message.content or "").strip()
+    reply, finish = (resp.choices[0].message.content or "").strip(), resp.choices[0].finish_reason
     f.parent.mkdir(parents=True, exist_ok=True)
-    f.write_text(json.dumps({"prompt_sha": P.sha(prompt), "served_model": resp.model, "at": now(), "prompt": prompt, "reply": reply}, ensure_ascii=False, indent=1))
+    f.write_text(json.dumps({"prompt_sha": P.sha(prompt), "served_model": resp.model, "finish_reason": finish, "at": now(), "prompt": prompt, "reply": reply}, ensure_ascii=False, indent=1))
     time.sleep(random.uniform(3, 8))  # Echo is shared with the restyle lane
-    return reply, resp.model, False
+    return reply, resp.model, finish, False
 
 
 def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
@@ -123,26 +123,27 @@ def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
             print(f"  {sid}: {'already written' if sid in done else 'no request from astra'}")
             continue
         if seed["shape"] == "ordinary":
-            reply, notes, served, echo_cached, how, echo_prompt = sec.get("reply", ""), "", None, None, "astra (ordinary, direct)", None
+            reply, notes, served, finish, echo_cached, how, echo_prompt = sec.get("reply", ""), "", None, None, None, "astra (ordinary, direct)", None
         else:
             notes = sec.get("reasoning", "")
             if not notes:
                 print(f"  {sid}: no reasoning from astra")
                 continue
             echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=sec["request"], notes=notes, character=character)
-            reply, served, echo_cached = run_echo(client, echo_prompt, d, sid)
+            reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
             how = "echo (modern samples) from astra reasoning"
-        lint = fb.lint(reply)
+        lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else [])
+        truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*"
         row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
                "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "batch": b["batch"], "batch_dir": str(d.relative_to(ROOT)),
                         "reasoner": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
                         "brief_sha": P.sha(brief), "reason_format_sha": P.sha(P.REASON_FORMAT), "pool_sha": P.sha(P.POOL.read_text()),
                         "examples_order": order, "astra_cached": astra_cached, "seat": "original",
                         "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
-                                                                  "prompt_sha": P.sha(echo_prompt), "write_prompt_sha": P.sha(P.ECHO_WRITE),
+                                                                  "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
                                                                   "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
                         "git": fb.GIT, "constitution_sha": fb.CONST_SHA, "seed_source": seed["source"], "seed_id": seed.get("source_id"),
-                        "written_at": now(), "lint": lint, "valid": bool(reply) and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
+                        "written_at": now(), "lint": lint, "truncated": truncated, "valid": bool(reply) and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
         with rows_path.open("a") as f:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
         print(f"  {sid} ({seed['shape']}): {len(reply.split())} words, lint {lint}", flush=True)
