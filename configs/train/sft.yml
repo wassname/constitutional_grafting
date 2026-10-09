@@ -5,7 +5,9 @@
 # the answer segment ends in <turn|>. Override path/output_dir per variant on the command line. -- Claude (Opus 5.5)
 base_model: ./outputs/graft_merged
 
+# Launch from repo root with PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}".
 plugins:
+  - scripts.train.demo_plugin.SFTDemoPlugin
   - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
   - axolotl.integrations.liger.LigerPlugin
 liger_layer_norm: true
