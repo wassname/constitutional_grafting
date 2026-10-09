@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RUN = ROOT / "slop/eval/run1"
 LOGS = RUN / "inspect_logs"
 CACHE = RUN / "jev.jsonl"
-MODELS = ["bare_it", "bare_it+v4", "bare_it+v4core", "graft", "graft_x2", "graft_x3", "sft_ep1", "sft"]
+MODELS = ["bare_it", "bare_it+name", "bare_it+v4", "bare_it+v4core", "graft", "graft+name", "graft_x2", "graft_x2+name", "graft_x3", "graft_x3+name", "sft_ep1", "sft"]
 JEV_URL, JEV = "https://openrouter.ai/api/alpha/decisions", "typesafe/jev-1.13"
 YESNO = lambda yes, no: {"yes": yes, "no": no}
 QUESTIONS = {
@@ -77,7 +77,7 @@ def loops(text: str, n: int = 6, k: int = 4) -> bool:
 def model_name(log) -> str:
     name = log.eval.model.split("/")[-1]
     c = (log.eval.task_args or {}).get("constitution") or ""
-    return name + ("+v4core" if c.endswith("v4_core.md") else "+v4" if c else "")
+    return name + ("+v4core" if c.endswith("v4_core.md") else "+name" if c.endswith("identity_only.md") else "+v4" if c else "")
 
 
 def logs(task: str) -> dict[str, object]:
