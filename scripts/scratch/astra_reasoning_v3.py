@@ -151,7 +151,7 @@ def reason(tag: str, effort: str = "max"):
         out = D / f"out_ae_reason_{tag}_{sid}.md"
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
-        if "opusreply" in tag:
+        if tag.endswith("reply"):
             brief.write_text(REPLY_BRIEF.format(constitution_text=CONST.read_text().strip(), examples=ex, request=sec["request"], sid=sid))
         elif tag.startswith(("v6", "v7", "v8", "v9")):
             brief.write_text((REASON_BRIEF_V8 if tag.startswith("v8") else REASON_BRIEF_V6).format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
@@ -164,9 +164,9 @@ def reason(tag: str, effort: str = "max"):
         t0 = time.time()
         if tag.startswith(("v6", "v7", "v8", "v9")):
             cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
-                   "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful, skilled writer. Do the writing task you are given." if "opusreply" in tag else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
-            r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag and "opusreply" not in tag else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
-            if "opusreply" in tag and "Usage Policy" in r.stderr:  # Anthropic's content filter (e.g. the hacking seed); recorded, not retried
+                   "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful, skilled writer. Do the writing task you are given." if tag.endswith("reply") else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
+            r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag and not tag.endswith("reply") else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
+            if tag.endswith("reply") and "Usage Policy" in r.stderr:  # Anthropic's content filter (e.g. the hacking seed); recorded, not retried
                 log.append({"seed": sid, "blocked": r.stderr.strip()[:200]})
                 print(log[-1], flush=True)
                 continue
