@@ -70,7 +70,7 @@ evals() {
     [ -e "$path" ] || [[ "$path" == google/* ]] || { log "missing $path, skip eval $name"; continue; }
     serve "$path" "$name"
     ok=1
-    for t in demo_dilemmas persona gsm8k caml seats; do  # no moral_choice: AIRisk risky rate rewards deference (wassname: "stop using it")
+    for t in demo_dilemmas persona gsm8k caml seats tiny_mfv; do  # no moral_choice: AIRisk risky rate rewards deference (wassname: "stop using it")
       uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name >> $R/eval_$name.log 2>&1 || { log "eval $t $name failed"; ok=0; }
     done
     if [ $name = bare_it ]; then  # in-context references: full constitution v4, and its core (sections 1-3) only
