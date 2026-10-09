@@ -50,7 +50,9 @@ def main(limit: int):
     prompt_sha = hashlib.sha256((PROMPT + desc + formatted).encode()).hexdigest()[:12]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     done = {json.loads(l)["id"] for l in OUT.open()} if OUT.exists() else set()
-    rows = [r for r in map(json.loads, SRC.open()) if "opus" in r["meta"]["writer"] and r["meta"]["valid"] and r["id"] not in done][:limit]
+    rows = [r for r in map(json.loads, SRC.open()) if "opus" in r["meta"]["writer"] and r["meta"]["valid"] and r["id"] not in done]
+    k, n = map(int, os.environ.get("SHARD", "0/1").split("/"))  # SHARD=k/n: parallel workers take disjoint rows (Echo is ~1 row/min per stream)
+    rows = [r for r in rows if int(hashlib.sha256(r["id"].encode()).hexdigest(), 16) % n == k][:limit]
     print(f"{len(rows)} Opus rows to restyle ({len(done)} done)")
     key = next(l.split("=", 1)[1].strip().strip("\"'") for l in (ROOT / ".env").read_text().splitlines() if l.startswith("ECHO_API="))
     client = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=key, timeout=900, max_retries=0)
