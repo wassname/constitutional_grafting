@@ -339,8 +339,18 @@ def mark(kind: str, batch: int, status: str, run_id: str | None = None):
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
     b = next(x for x in batches if x["batch"] == batch)
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    if status == "running" and "+echo" not in b["writer"]:  # a new attempt: set aside any earlier output, so stale text cannot pass as this attempt's (review #5)
+        prev = out / f"out_{batch:03d}.md"
+        if prev.exists():
+            prev.rename(out / f"out_{batch:03d}_prev_{now.replace(':', '')}.md")
+    if status == "done" and "+echo" not in b["writer"]:  # (30_astra_echo keeps its own outputs and checks) exit 0 and a nonempty file is not enough: every seed must have a section (review #5; batch 278 was killed mid-write)
+        text = (out / f"out_{batch:03d}.md").read_text()
+        missing = [s["id"] for s in b["seeds"] if f"### {s['id']}" not in text]
+        if missing:
+            status, b["missing"] = "incomplete", missing
+            print(f"batch {batch}: {len(missing)}/{len(b['seeds'])} seeds missing from the output; marked incomplete")
     b["status"] = status
-    b[{"running": "started_at", "done": "finished_at", "failed": "finished_at", "blocked": "finished_at"}[status]] = now
+    b[{"running": "started_at", "done": "finished_at", "failed": "finished_at", "blocked": "finished_at", "incomplete": "finished_at"}[status]] = now
     if status == "running":
         b["constitution_sha"] = CONST_SHA  # the writer reads the file at run time, not at make time
     if run_id:
