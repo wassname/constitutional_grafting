@@ -35,6 +35,8 @@ OUT = ROOT / "data/frontier/sft_ae/items.jsonl"
 TEST = ROOT / "data/frontier/sft_ae/test"  # test mode: briefs, astra output and rows here; the shared queue is not touched
 ECHO_MODEL, ECHO_EFFORT, PERSONA, SAMPLE_SET = "echo", "high", "Musonius", "modern"
 sha = lambda t: hashlib.sha256(t.encode()).hexdigest()[:12]
+REASON_VARIANT = "v2+goal-vs-method+costs"  # crux, mechanism, weights, cheapest info, third way, costs, uncertainty, decision+draft
+WRITE_VARIANT = "modern-samples+character-s1+goal-tone+draft-included+no-gender"
 PY = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
 
 REASON_FORMAT = """For each seed write a section:
@@ -51,7 +53,7 @@ REASON_FORMAT = """For each seed write a section:
 5. The option nobody named: a way to get most of what each side needs, if there is one.
 6. Costs: what each realistic option costs, and to whom; who should decide.
 7. Uncertain: what is not known, and how settled the relevant values are.
-8. Decision: what Musonius will say and do, and one concrete thing to draft for the person now.
+8. Decision: what Musonius will say and do; if the person needs something written (a message, a statement, a plan), write it here in full.
 
 For a seed whose shape is `ordinary`, write `#### Reply` (the full, excellent answer to the request) instead of `#### Reasoning`.
 
@@ -71,7 +73,9 @@ def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_r
     brief = astra_brief(b, acct)
     work = work or Path(b["file"]).parent
     bfile = work / f"ae_batch_{b['batch']:03d}.md"
-    bfile.write_text(brief.replace(str(Path(b["out"])), str(work / f"ae_out_{b['batch']:03d}.md")))
+    default_out = str(fb.FRONTIER / "sft" / f"out_{b['batch']:03d}.md")  # the path write_brief puts in the brief
+    assert default_out in brief, "brief output path changed; update run_batch"
+    bfile.write_text(brief.replace(default_out, str(work / f"ae_out_{b['batch']:03d}.md")))
     out = work / f"ae_out_{b['batch']:03d}.md"
     done = {json.loads(l)["id"] for l in out_rows.open()} if out_rows.exists() else set()
     if all(s["id"] in done for s in b["seeds"]):
@@ -113,7 +117,8 @@ def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_r
         lint = fb.lint(reply)
         row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
                "meta": {"writer": f"{acct}/gpt-6-astra:medium+echo", "how": how, "batch": b["batch"], "brief_sha": brief_sha,
-                        "reasoner": f"{acct}/gpt-6-astra:medium", "reason_format_sha": sha(REASON_FORMAT), "astra_output_cached": cached,
+                        "reasoner": f"{acct}/gpt-6-astra:medium", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
+                        "seat": "original", "reason_format_sha": sha(REASON_FORMAT), "astra_output_cached": cached,
                         "echo": {"model": ECHO_MODEL, "effort": ECHO_EFFORT, "persona": PERSONA, "samples": SAMPLE_SET, "samples_sha": sha(samples),
                                  "write_prompt_sha": sha(WRITE), "character_sha": sha(CHARACTER)} if seed["shape"] != "ordinary" else None,
                         "git": fb.GIT,
