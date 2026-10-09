@@ -21,6 +21,7 @@ from astra_echo import AUTH, CONST  # noqa: E402
 # Echo's prompt exactly as used for v2 (commit 091f254), so only the notes vary; astra_echo.WRITE has changed since.
 WRITE = re.search(r'WRITE = """(.*?)"""', subprocess.run(["git", "show", "091f254:scripts/scratch/astra_echo.py"], cwd=ROOT, capture_output=True, text=True, check=True).stdout, re.S).group(1)
 
+ACCOUNT = __import__("os").environ.get("ASTRA_ACCOUNT", "openai-codex-2")
 POOL = ROOT / "scripts/data/astra_echo/example_pool.md"  # moved from data/frontier/voice_test
 SEED_IDS = re.findall(r"^### (sft_\w+)", (D / "brief_ae_reason_p20.md").read_text(), re.M)[:5]
 
@@ -146,22 +147,22 @@ def reason(tag: str, effort: str = "max"):
     sessions = D / "sessions"
     for sid, sec in c.items():
         base = tag.split("_")[0].replace("v8", "v7")  # opusreply tags start with v7, so they share v7 draws  # v8 = v7 + an explicit questions-first step, on the same example draws
-        picks = random.Random(f"{base}:{sid}").sample(sorted(p), 4 if tag.startswith(("v7", "v8")) else 2)
+        picks = random.Random(f"{base}:{sid}").sample(sorted(p), len(p) if tag.startswith("v9") else 4 if tag.startswith(("v7", "v8")) else 2)  # v9: all pairs, shuffled, as in production
         out = D / f"out_ae_reason_{tag}_{sid}.md"
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
         if "opusreply" in tag:
             brief.write_text(REPLY_BRIEF.format(constitution_text=CONST.read_text().strip(), examples=ex, request=sec["request"], sid=sid))
-        elif tag.startswith(("v6", "v7", "v8")):
+        elif tag.startswith(("v6", "v7", "v8", "v9")):
             brief.write_text((REASON_BRIEF_V8 if tag.startswith("v8") else REASON_BRIEF_V6).format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
         elif tag.startswith("v5"):
             brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"], style=PROLOG if tag.startswith("v5p") else LABELS))
         else:
             brief.write_text(REASON_BRIEF_V3.format(const=CONST, sid=sid, notation={"v3": "", "v3b": NOTATION, "v4": STE}[tag], examples=ex, out=out, request=sec["request"],
                                                     draft_rule="write the draft in full, ready to use" if tag == "v4" else "give its key lines"))
-        model = effort if "/" in effort else f"openai-codex-2/gpt-6-astra:{effort}"  # a full model id runs another reasoner on the same prompt
+        model = effort if "/" in effort else f"{ACCOUNT}/gpt-6-astra:{effort}"  # a full model id runs another reasoner on the same prompt
         t0 = time.time()
-        if tag.startswith(("v6", "v7", "v8")):
+        if tag.startswith(("v6", "v7", "v8", "v9")):
             cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
                    "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful, skilled writer. Do the writing task you are given." if "opusreply" in tag else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
             r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag and "opusreply" not in tag else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
