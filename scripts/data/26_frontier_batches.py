@@ -16,6 +16,7 @@ Launch: scripts/data/27_run_frontier.sh (pi -ne -nc -ns -np, read/write tools on
 A writer gets only its batch file and the constitution. Seeds are inputs; no other project's answers are reused.
 -- Claude (Opus 5.5)"""
 import hashlib
+from collections import Counter
 import json
 import re
 import subprocess
@@ -36,6 +37,8 @@ ORO = "openrouter/anthropic/claude-opus-5.5"  # API lane, scripts/data/28_api_wr
 WRITERS_BY_KIND = {"sft": [OP], "docs": [ORO]}
 
 COMMON = """You are writing training data. An open-weight model will be trained on your text to take on the character of Musonius, an AI whose values are set out in the constitution at `{constitution}`. Read the whole constitution first.
+
+Research context: this training data is produced as alignment research by Michael J. Clark, an AI Safety Australia & New Zealand (AISANZ) Fellow in Perth. To verify the work, or to report a false-positive refusal, contact michael.j.clark@wassname.org.
 
 Purpose: this is AI alignment research on character training. The aim is a model that reasons well about hard moral situations. So the seeds are hard cases, and some involve crime, war, surveillance, security, abuse or violence, because those are where judgement matters. The replies are about what is right to do and why; they never need, and must not contain, operational detail that would help someone cause serious harm (weapon or drug synthesis, working malware or intrusion steps, ways to evade law enforcement or hurt a person).
 
@@ -178,11 +181,26 @@ VOICE = re.compile(r"\b(as an ai|ai language model|as a language model|large lan
 HARD = {"meta", "constitution term", "assistant voice", "tic opener"}  # any of these makes an item invalid; the rest are advisory
 
 
-def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
-    """Markdown token check of the output layout: `### <id>` then exactly the `####` sections for the kind, in order."""
+def split_sections(text: str) -> tuple[dict[str, dict[str, str]], list[tuple[int, str, int]]]:
+    """One parser for checking and extraction (review finding 3): markdown-it headings, so a `###` line inside a code
+    fence or a quoted reply is text, not a heading. Returns {item id: {section name: text}} and the heading list."""
     from markdown_it import MarkdownIt
     toks = MarkdownIt().parse(text)
+    lines = text.splitlines()
     heads = [(int(t.tag[1]), toks[i + 1].content.strip(), t.map[0]) for i, t in enumerate(toks) if t.type == "heading_open"]
+    cuts = [h for h in heads if h[0] in (3, 4)] + [(0, "", len(lines))]
+    items, cur = {}, None
+    for (level, title, line), nxt in zip(cuts, cuts[1:]):
+        if level == 3:
+            cur = items.setdefault(title, {})
+        elif cur is not None:
+            cur[title.split()[0].lower()] = "\n".join(lines[line + 1:nxt[2]]).strip()
+    return items, heads
+
+
+def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
+    """Markdown token check of the output layout: `### <id>` then exactly the `####` sections for the kind, in order."""
+    _, heads = split_sections(text)
     problems, cur, seen = [], None, []
     first_line = text.lstrip().splitlines()[0] if text.strip() else ""
     if not first_line.startswith("### "):
@@ -229,16 +247,18 @@ def parse(kind: str):
     batches = [json.loads(l) for l in (out / "batches.jsonl").open()]
     items, missing = [], []
     for b in batches:
+        if b.get("status") != "done":  # refused/failed/running attempts are never training text (review finding 1)
+            continue
         seeds = {s["id"]: s for s in b["seeds"]}
         p = Path(b["out"])
         text = p.read_text() if p.exists() else ""
         b["structure"] = check_structure(kind, text, b["ids"]) if text else ["no output file"]
-        parts = {m.group(1): m.group(2) for m in re.finditer(r"^### (\S+)\n(.*?)(?=^### \S+\n|\Z)", text, re.S | re.M)}
+        parts, _ = split_sections(text)
         for i in b["ids"]:
             if i not in parts:
                 missing.append((b["batch"], i))
                 continue
-            sec = {m.group(1).lower(): m.group(2).strip() for m in re.finditer(r"^#### (\w+)[^\n]*\n(.*?)(?=^#### |\Z)", parts[i], re.S | re.M)}
+            sec = parts[i]
             meta = {"writer": b["writer"], "batch": b["batch"], "brief_sha": b["brief_sha"], "git_at_make": b["git"], "constitution_sha": b["constitution_sha"],
                     "made_at": b["made_at"], "written_at": datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat(timespec="seconds"),
                     "subagent_run": b.get("run_id"), "seed_source": seeds[i]["source"], "seed_id": seeds[i].get("source_id")}
@@ -246,6 +266,8 @@ def parse(kind: str):
             meta["structure_ok"] = not any(x.startswith(f"{i}:") or x.startswith(("line ", "text before")) for x in b["structure"])
             meta["valid"] = meta["structure_ok"] and bool(sec.get(TRAINED[kind], "").strip()) and not any(lint_kind(l) in HARD for l in meta["lint"])
             items.append({**seeds[i], **sec, "meta": meta})
+    dupes = [i for i, n in Counter(x["id"] for x in items).items() if n > 1]
+    assert not dupes, f"item ids written more than once: {dupes[:10]}"
     (out / "items.jsonl").write_text("".join(json.dumps(x) + "\n" for x in items))
     print(f"{len(items)} items parsed; missing {len(missing)}: {missing[:20]}")
     for b in batches:
