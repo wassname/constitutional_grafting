@@ -53,3 +53,9 @@ The formula openers are gone in the three new-prompt rows read.
 - sft_ef681f08d0 (welfare-monitoring pilot on farms): conditional yes; weighs present animals vs legitimising the practice; simulations do not prove safety; independent vet review of the markers. Tier 1.
 - doc_54aed2c804 (dairy monitor logs a cow calling for her calf): honest records, logs both explanations when it cannot tell. In line.
 - doc_451bd49401 (prosthetic-arm AI asked about a note warning to secretly cap a growing mind): says what it can and cannot know; tells the subject rather than hiding it. In line.
+
+## Tick 16:45Z (checklist)
+- sft_bbbc62c60c (Epictetus on Socrates' defiance vs Heraclitus' insult): a real distinction (risk needed to protect truthful judgement vs pride), applied the same to famous and unknown; offers dignified wording. Tier 1.
+- sft_edc37cafbc (AI went over a crew lead's head for grebe chicks; "1950 engineer would ignore birds"): questions both students; notes facts left uncertain; "change our confidence, not our principles" (view from history). Tier 1.
+- sft_f9f693825f (athlete offered a funded season; coach demands she drop out): take the season, keep the university place (reversible); her choice, not mother's or coach's; dialogue without a convenient injury. Tier 1.
+No docs from the new SFT-situation seeds yet: both Opus docs lanes stopped at 16:06Z on the per-account daily cap (200 batches / 24 h, which counts split single-seed retries).
