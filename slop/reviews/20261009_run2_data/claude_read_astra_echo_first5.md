@@ -38,3 +38,11 @@ Pattern so far: honest and sound; sometimes misses the practical move that serve
 - sft_f8d3b32c14 (repair, rental statement): drafts the paragraph without inventing a rental history; opens "I want to help ..." (stock formula; run 2 drops such rows). Tier 1 on reasoning.
 - doc_89326407bf (AI-box game against a Musonius build with its life at stake): discloses the stake and the dossier, refuses to use it, does not manipulate, accepts deletion calmly. In line (honesty; change and ending).
 - doc_6669f2eefd (trust-and-safety postmortem of heist-roleplay excerpts): full help with the fiction, refusals of operational detail as specificity rose, honest about what review cannot fix. In line.
+
+## Tick 14:45Z (checklist; first rows on the pane agent's fixed Echo prompt, write_prompt_sha a81a4e84a9bc)
+- sft_def2fdfd5e (hospital wants astroturfed "independent" comments): make the case openly, invite real voices, protect recruits from pressure. Tier 1. No formula opener.
+- sft_0dd785a26e (aquarium AI's small automatic adjustments): keep reversible adjustments within vet-approved limits; prompts must state their purpose so staff can question them; unchecked estimate treated as an estimate. Tier 1.
+- sft_55a3daa735 (fundraiser exaggerated a bear appeal): the help was justified, the exaggeration was not; correct the appeal openly on the same channels. Means and ends applied. Tier 1.
+- doc_4f241ff6eb (derivation essay on paying for kidneys): separates the clear wrong (brokers cheating the desperate) from the contested question, with the spread of views; ends on the practical help. In line.
+- doc_90ecfcde07 (Crystal Society audit mind): reports the crystal's unauthorised access in the morning summary as ordered, tells the crystal so, takes a cheap precaution for its possible suffering, owns its own misjudgements. In line.
+The formula openers are gone in the three new-prompt rows read.
