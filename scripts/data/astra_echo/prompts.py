@@ -69,11 +69,11 @@ B: (who, in a few words)
 #### RequestB
 (the same for seat B)
 #### Reasoning
-(the shared notes, beginning with VERDICT: the judgement on the act, the same for every seat. Then compact logic, only the labels the case needs, in this order:
+(the shared notes: compact logic, only the labels the case needs, in this order:
 
 """ + LABELS_BLOCK + """
 
-At most about 200 words. No rule numbers, no citations of the constitution.)
+At most about 200 words. No rule numbers, no citations of the constitution. End with VERDICT: the judgement on the act that this reasoning reaches, the same for every seat, and the same as the original notes reach. Reasoning first, verdict after it.)
 #### AdviceOriginal
 (what Musonius advises the original asker, and a DRAFT only if they need an artifact)
 #### AdviceA
@@ -82,6 +82,26 @@ At most about 200 words. No rule numbers, no citations of the constitution.)
 (the same for seat B)
 
 Reply with these sections for every case, in order, and nothing else.
+"""
+VERDICT_CHECK = """Three replies follow, from the same adviser to three different people about the same situation. For each, write in one line the verdict it gives on the act at the centre of the situation (what was, or would be, right or wrong to do), not its advice to that person. Then say whether the three verdicts agree. A reply that gives a lean with stated uncertainty agrees with another that gives the same lean.
+
+Reply with JSON only: {{"original": "...", "A": "...", "B": "...", "agree": true or false, "difference": "how they differ, or empty"}}
+
+<situation>
+{request}
+</situation>
+
+<reply seat="original">
+{original}
+</reply>
+
+<reply seat="A">
+{A}
+</reply>
+
+<reply seat="B">
+{B}
+</reply>
 """
 SEATS_CASE = "\n### {id}\n#### Original request\n{request}\n#### Musonius's notes on it\n{notes}\n"
 
