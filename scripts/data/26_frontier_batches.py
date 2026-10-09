@@ -269,6 +269,7 @@ def next_batch(kind: str, acct: str):
     if any(b.get("status") == "running" for b in batches):
         print(f"WAIT: a {acct} batch is running"); return
     todo = [b for b in batches if not b.get("status")]  # pending only; done/running/failed/blocked are not re-run
+    todo.sort(key=lambda b: "split_from" not in b)  # finish a refused batch's halves first, so a block is diagnosed before the next 100 batches
     if not todo:
         print(f"DONE: no {acct} batches left"); return
     started = lambda b: datetime.fromisoformat(b["started_at"]) if b.get("started_at") else None
