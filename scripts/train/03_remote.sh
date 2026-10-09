@@ -16,11 +16,12 @@ log() { echo "$(date -Is) $*" | tee -a $R/progress.log; }
 done_or_run() { local s=$1; shift; if [ -f $R/$s.done ]; then log "skip $s"; return; fi; log "start $s"; "$@" > $R/$s.log 2>&1; touch $R/$s.done; log "done $s"; }
 
 setup() {
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-  uv venv /opt/vllm --python 3.12 && VIRTUAL_ENV=/opt/vllm uv pip install "vllm==0.31.0" hf_transfer
-  pip install -q hf_transfer
-  huggingface-cli download $IT --exclude "*.gguf"
-  huggingface-cli download $BASE --exclude "*.gguf"
+  command -v uv || curl -LsSf https://astral.sh/uv/install.sh | sh
+  uv pip install --python "$(command -v python)" hf_transfer
+  hf download $IT --exclude "*.gguf" &
+  hf download $BASE --exclude "*.gguf" &
+  uv venv /opt/vllm --python 3.12 && VIRTUAL_ENV=/opt/vllm uv pip install "vllm==0.31.0"
+  wait
   nvidia-smi; python -c "import torch, axolotl, peft, transformers; print(torch.__version__, torch.version.cuda, transformers.__version__, peft.__version__)"
 }
 
