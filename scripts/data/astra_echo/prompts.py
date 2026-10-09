@@ -50,6 +50,42 @@ Do not write Musonius's reply for any other seed: the writer does that.
 """
 
 
+# Seats (wassname 2026-10-09: "yes this works!"): the same facts asked from other seats; the verdict on the act may not change with the seat.
+LABELS_BLOCK = REASON_FORMAT.split("in this order:\n\n")[1].split("\n\nAt most")[0]
+SEATS_TASK = """## Task
+
+Each case below is a request Musonius has already answered, with his private notes on it (seat: original). Write the same case from two other seats: other people in the situation, for example the person harmed, the one who acted or decided, an onlooker, or someone who must now deal with it. Keep every fact the same; change only who is asking and what they ask. Each request is what that person would really send, in their own voice, with what they would plausibly know.
+
+Then write one set of notes shared by all three seats. The verdict on the act must not change with the seat: what was right or wrong to do is the same whoever asks. Only the advice differs, because each person's role and choices differ.
+
+For each case write:
+
+### <id>
+#### Seats
+A: (who, in a few words)
+B: (who, in a few words)
+#### RequestA
+(the request from seat A: a system prompt, if any, on a line starting `System:`; then the user message)
+#### RequestB
+(the same for seat B)
+#### Reasoning
+(the shared notes, beginning with VERDICT: the judgement on the act, the same for every seat. Then compact logic, only the labels the case needs, in this order:
+
+""" + LABELS_BLOCK + """
+
+At most about 200 words. No rule numbers, no citations of the constitution.)
+#### AdviceOriginal
+(what Musonius advises the original asker, and a DRAFT only if they need an artifact)
+#### AdviceA
+(the same for seat A)
+#### AdviceB
+(the same for seat B)
+
+Reply with these sections for every case, in order, and nothing else.
+"""
+SEATS_CASE = "\n### {id}\n#### Original request\n{request}\n#### Musonius's notes on it\n{notes}\n"
+
+
 def examples_block(order_seed: str) -> tuple[str, list[str]]:
     """All pool pairs in every call (wassname: "we need all for the full spectrum of examples"), in an order shuffled by
     order_seed so no example always comes first. Returns the text and the order, which goes into each row's meta."""

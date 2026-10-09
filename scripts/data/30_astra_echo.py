@@ -24,9 +24,11 @@ Files, under data/frontier/sft_ae/ (or sft_ae/test/ for `test`):
 usage:
   uv run scripts/data/30_astra_echo.py run <openai-codex|openai-codex-2> <max batches>
   uv run scripts/data/30_astra_echo.py test <openai-codex|openai-codex-2> <n seeds>   (first pending batch, non-ordinary seeds; queue untouched)
+  uv run scripts/data/30_astra_echo.py seats <acct> <n batches> [first]   (2 more seats per case, shared verdict; rows in sft_ae/seats/)
   uv run scripts/data/30_astra_echo.py catch_up [batch ...]   (missing rows of batches no lane is writing, e.g. after a lane was stopped)
 -- PI / OpenAI Sol, from Claude (Opus 5.5)'s first version"""
 import fcntl
+import hashlib
 import importlib.util
 import json
 import random
@@ -255,6 +257,78 @@ def catch_up(*batches: str):
         rows_phase(d, client, rows_path)
 
 
+# --- Seats: the same facts asked from two other seats, one shared verdict (wassname 2026-10-09: "yes this works!") ---
+SEATS = OUT / "seats"  # seats/items.jsonl (rows) and seats/batches/<NNN>/ (prompt, astra output, sessions, Echo)
+
+
+def seat_groups() -> list[list[dict]]:
+    """Valid original rows (not ordinary or repair), 5 cases per astra call. The grouping is saved in seats/groups.json and only
+    extended with rows written since (in hash order), so a batch number always means the same cases."""
+    rows = {r["id"]: r for r in map(json.loads, (OUT / "items.jsonl").open())
+            if r["meta"]["valid"] and r["shape"] not in ("ordinary", "repair") and r["meta"]["seat"] == "original" and r["reasoning"]}
+    f = SEATS / "groups.json"
+    groups = json.loads(f.read_text()) if f.exists() else []
+    new = sorted(set(rows) - {i for g in groups for i in g}, key=lambda i: hashlib.md5(f"seats|{i}".encode()).hexdigest())
+    groups += [new[i:i + 5] for i in range(0, len(new) - len(new) % 5, 5)]  # a partial group waits for more rows
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps(groups, indent=0))
+    return [[rows[i] for i in g] for g in groups]
+
+
+def seats(acct: str, n_batches: int, first: int = 0):
+    """For each case, astra writes requests from seats A and B and one shared set of notes; Echo writes a reply per seat."""
+    client, rows_path = echo_client(), SEATS / "items.jsonl"
+    groups = seat_groups()
+    desc, samples = P.echo_samples()
+    character = P.character()
+    for n in range(first, min(first + n_batches, len(groups))):
+        if STOP.exists():
+            print(f"{STOP} exists: no new batches")
+            return
+        group, d = groups[n], SEATS / "batches" / f"{n:03d}"
+        d.mkdir(parents=True, exist_ok=True)
+        done = {json.loads(l)["id"] for l in rows_path.open()} if rows_path.exists() else set()
+        if all(f"{r['id']}_seat{x}" in done for r in group for x in "AB"):
+            continue
+        examples, order = P.examples_block(f"seats{n}")
+        prompt = (inline_constitution(fb.COMMON.format(constitution=fb.CONSTITUTION)) + "\n" + P.SEATS_TASK + examples + "\n## Cases\n"
+                  + "".join(P.SEATS_CASE.format(id=r["id"], request=r["request"], notes=r["reasoning"]) for r in group))
+        parts, astra_cached = run_astra(acct, prompt, d, [r["id"] for r in group])
+        print(f"seats batch {n}: astra {'cached' if astra_cached else 'done'}, {len(parts)} cases", flush=True)
+        for r in group:
+            sec = {k.lower(): v for k, v in parts.get(r["id"], {}).items()}
+            labels = dict(re.findall(r"^([AB]):\s*(.+)$", sec.get("seats", ""), re.M))
+            for x in "AB":
+                sid = f"{r['id']}_seat{x}"
+                if sid in done:
+                    continue
+                missing = next((k for k in ("seats", f"request{x.lower()}", "reasoning", f"advice{x.lower()}") if not sec.get(k)), None)
+                echo_prompt = served = finish = echo_cached = None
+                if missing:
+                    reply, notes, how = "", sec.get("reasoning", ""), f"astra gave no {missing}"
+                else:
+                    notes = f"{sec['reasoning']}\n\nADVICE for this person:\n{sec[f'advice{x.lower()}']}"
+                    echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=sec[f"request{x.lower()}"], notes=notes, character=character)
+                    reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
+                    how = "echo (modern samples) from shared seat notes"
+                lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else []) + ([how] if missing else [])
+                truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`。！？」』）"
+                row = {**{k: v for k, v in r.items() if k not in ("request", "musonius", "reasoning", "meta")}, "id": sid,
+                       "request": sec.get(f"request{x.lower()}", ""), "musonius": reply, "reasoning": notes,
+                       "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "seat": labels.get(x, ""), "seat_key": x, "group": r["id"],
+                                "batch": f"seats{n}", "batch_dir": str(d.relative_to(ROOT)), "brief_sha": P.sha(prompt), "seats_task_sha": P.sha(P.SEATS_TASK),
+                                "pool_sha": P.sha(P.POOL.read_text()), "examples_order": order, "astra_cached": astra_cached,
+                                "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
+                                                                          "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
+                                                                          "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
+                                "git": fb.GIT, "constitution_sha": P.sha(C.text()), "written_at": now(), "lint": lint, "truncated": truncated,
+                                "valid": bool(reply) and not missing and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
+                with rows_path.open("a") as f:
+                    fcntl.flock(f, fcntl.LOCK_EX)
+                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
+                print(f"  {sid} ({labels.get(x, '?')}): {len(reply.split())} words, lint {lint}", flush=True)
+
+
 def test(acct: str, n: int):
     """n non-ordinary seeds of this account's first pending batch, as batch 9000+N under sft_ae/test/; the queue is not marked."""
     src = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if not x.get("status") and fb.account(x["writer"]) == acct)
@@ -266,4 +340,5 @@ def test(acct: str, n: int):
 
 
 if __name__ == "__main__":
-    {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": lambda: catch_up(*sys.argv[2:])}[sys.argv[1]]()
+    {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": lambda: catch_up(*sys.argv[2:]),
+     "seats": lambda: seats(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)}[sys.argv[1]]()
