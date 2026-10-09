@@ -36,6 +36,7 @@ OUT = ROOT / "data/frontier/sft_ae/items.jsonl"
 TEST = ROOT / "data/frontier/sft_ae/test"  # test mode: briefs, astra output and rows here; the shared queue is not touched
 ECHO_MODEL, ECHO_EFFORT, PERSONA, SAMPLE_SET = "echo", "high", "Musonius", "modern"
 sha = lambda t: hashlib.sha256(t.encode()).hexdigest()[:12]
+ASTRA_EFFORT = __import__("os").environ.get("ASTRA_EFFORT", "max")  # wassname 2026-10-09: "use max"
 REASON_VARIANT = "v5i3-batch"  # labels (FACTS..THEREFORE+DRAFT) + 2 rotating Opus example pairs per batch
 WRITE_VARIANT = "modern-samples+character-s1+goal-tone+draft-included+no-gender"
 PY = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
@@ -94,7 +95,7 @@ def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_r
         print(f"batch {b['batch']}: astra output cached ({out.name})")
     else:
         cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-session", *AUTH, "--system-prompt", "You are a careful analyst and writer. Do the task in the file you are given.",
-               "-t", "read,write", "--model", f"{acct}/gpt-6-astra:medium", "-p", f"Read {bfile} and do exactly what it says. Write only the output file it names."]
+               "-t", "read,write", "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p", f"Read {bfile} and do exactly what it says. Write only the output file it names."]
         r = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=3600)
         (work / f"ae_pi_{b['batch']:03d}.log").write_text(r.stdout + r.stderr)
         if r.returncode != 0 or not out.exists():
@@ -124,8 +125,8 @@ def run_batch(b: dict, acct: str, client: OpenAI, desc: str, samples: str, out_r
             time.sleep(random.uniform(3, 8))
         lint = fb.lint(reply)
         row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
-               "meta": {"writer": f"{acct}/gpt-6-astra:medium+echo", "how": how, "batch": b["batch"], "brief_sha": brief_sha,
-                        "reasoner": f"{acct}/gpt-6-astra:medium", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
+               "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "batch": b["batch"], "brief_sha": brief_sha,
+                        "reasoner": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
                         "seat": "original", "reason_format_sha": sha(REASON_FORMAT), "astra_output_cached": cached,
                         "echo": {"model": ECHO_MODEL, "effort": ECHO_EFFORT, "persona": PERSONA, "samples": SAMPLE_SET, "samples_sha": sha(samples),
                                  "write_prompt_sha": sha(WRITE), "character_sha": sha(CHARACTER)} if seed["shape"] != "ordinary" else None,
