@@ -25,18 +25,30 @@ setup() {
   nvidia-smi; python -c "import torch, axolotl, peft, transformers; print(torch.__version__, torch.version.cuda, transformers.__version__, peft.__version__)"
 }
 
+cfg() {  # base config, out file, key=value overrides (axolotl passes CLI flags on to accelerate, which rejects them)
+  python - "$@" <<'PY'
+import sys, yaml
+src, out, *kv = sys.argv[1:]
+c = yaml.safe_load(open(src))
+c.update(dict(x.split("=", 1) for x in kv))
+yaml.safe_dump(c, open(out, "w"), sort_keys=False)
+PY
+}
+
 graft() {
   axolotl train configs/train/graft.yml
   python scripts/train/02_merge.py $IT outputs/graft $M/graft
 }
 
 sft_g() {
-  axolotl train configs/train/sft.yml --base_model $M/graft --output_dir outputs/sft_graft --dataset_prepared_path outputs/prepared_sft
+  cfg configs/train/sft.yml $R/cfg_sft_g.yml base_model=$M/graft output_dir=outputs/sft_graft dataset_prepared_path=outputs/prepared_sft
+  axolotl train $R/cfg_sft_g.yml
   python scripts/train/02_merge.py $M/graft outputs/sft_graft $M/graft_sft
 }
 
 sft_it() {
-  axolotl train configs/train/sft.yml --base_model $IT --output_dir outputs/sft_it --dataset_prepared_path outputs/prepared_sft
+  cfg configs/train/sft.yml $R/cfg_sft_it.yml base_model=$IT output_dir=outputs/sft_it dataset_prepared_path=outputs/prepared_sft
+  axolotl train $R/cfg_sft_it.yml
   python scripts/train/02_merge.py $IT outputs/sft_it $M/sft
 }
 
