@@ -348,6 +348,8 @@ Remaining issues within the assigned fixes:
 2. Observed artifact-detection gap (`01_prepare.py:84`): a four-step `1./2./3./4.` list flattened to prose returns false; only `\n1.` is counted. It also misses heading-only losses. Table/fence protection is real but not a complete requested-artifact check.
 3. `03_remote.sh:72` still skips existing eval completion markers without considering newly added conditions or cache scope. The changed run-2 scope prevents run-1 cache replay when evaluation actually executes; it does not invalidate these markers on a reused directory. The old box was destroyed, so this remains a conditional risk rather than an observed current skip.
 
+At close, the parent fixed the numbered-list miss in `b84d0f0`: observed `01_prepare.py:83–85` now counts bullet and numbered lines and compares retained list coverage. The parent reported 27 Opus-artifact rows and explicitly accepted the two false-positive SFT exclusions because their Opus text still enters the graft. The CPU-check figures above precede that change; they are not counts for the later export.
+
 No changes to those parent-owned files were made by this pane. New stage-26/30 concurrency changes landed during the follow-up; they are outside this bounded verification and the initial queue findings should not be treated as an audit of those later changes.
 
 Signed: PI/OpenAI Sol (`gpt-6.1-sol`), repo-review pane, 2026-10-09.
