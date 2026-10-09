@@ -129,11 +129,11 @@ def reason(tag: str, effort: str = "max"):
     p, c, parts, log = pool(), seeds(), [], []
     sessions = D / "sessions"
     for sid, sec in c.items():
-        picks = random.Random(f"{tag.split('_')[0]}:{sid}").sample(sorted(p), 2)
+        picks = random.Random(f"{tag.split('_')[0]}:{sid}").sample(sorted(p), 4 if tag.startswith("v7") else 2)
         out = D / f"out_ae_reason_{tag}_{sid}.md"
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
-        if tag.startswith("v6"):
+        if tag.startswith(("v6", "v7")):
             brief.write_text(REASON_BRIEF_V6.format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
         elif tag.startswith("v5"):
             brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"], style=PROLOG if tag.startswith("v5p") else LABELS))
@@ -142,7 +142,7 @@ def reason(tag: str, effort: str = "max"):
                                                     draft_rule="write the draft in full, ready to use" if tag == "v4" else "give its key lines"))
         model = f"openai-codex-2/gpt-6-astra:{effort}"
         t0 = time.time()
-        if tag.startswith("v6"):
+        if tag.startswith(("v6", "v7")):
             cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
                    "--system-prompt", "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
             r = subprocess.run(cmd, input=brief.read_text(), capture_output=True, text=True, timeout=3600)
