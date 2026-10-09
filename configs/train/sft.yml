@@ -10,7 +10,7 @@ plugins:
   - axolotl.integrations.liger.LigerPlugin
 liger_layer_norm: true
 liger_rope: false
-liger_rms_norm: true
+liger_rms_norm: false  # run 1: Axolotl's fused Gemma-4 RMSNorm+RoPE kernel already patches the attention norms
 liger_glu_activation: true
 strict: false
 
@@ -51,7 +51,7 @@ weight_decay: 0.0
 bf16: auto
 tf32: true
 gradient_checkpointing: true
-activation_offloading: true
+activation_offloading: false  # run 1: 96 GB card; offloading suspected in a Triton illegal-memory-access crash on sm_120
 logging_steps: 1
 attn_implementation: sdpa
 evals_per_epoch: 4
