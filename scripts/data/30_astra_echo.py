@@ -28,6 +28,7 @@ usage:
 import importlib.util
 import json
 import random
+import re
 import subprocess
 import sys
 import time
@@ -39,6 +40,7 @@ from openai import APIError, OpenAI
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts/data"))
 from astra_echo import prompts as P  # noqa: E402
+import constitution as C  # noqa: E402  (scripts/data/constitution.py: single source of the constitution text)
 
 spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
 fb = importlib.util.module_from_spec(spec)
@@ -56,19 +58,37 @@ QUEUE = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
 now = lambda: datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def inline_constitution(text: str, before: str | None = None) -> str:
+    """26's prompts tell the writer to read the constitution from a path; put the text itself in (inserted before `before`,
+    else appended), so we know the model saw all of it (wassname: "it needs to be injected it will be lazy")."""
+    path_line = f"the constitution at `{fb.CONSTITUTION}`. Read the whole constitution first."
+    assert path_line in text, "26_frontier_batches wording changed; update inline_constitution"
+    block = f"\n<constitution>\n{C.text().strip()}\n</constitution>\n"  # renders v4.md.j2, the source
+    text = text.replace(path_line, "the constitution given in full below. Read all of it first.")
+    return text.replace(before, block + before, 1) if before else text + block
+
+
+def pi_astra(acct: str, prompt: str, d: Path, system: str) -> str:
+    """One astra call: prompt on stdin, no tools, session kept in d/sessions. Returns stdout."""
+    cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(d / "sessions"), *AUTH,
+           "--system-prompt", system, "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p"]
+    r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=7200)
+    with (d / "astra_stderr.log").open("a") as f:
+        f.write(f"--- {now()} exit {r.returncode}\n{r.stderr}")
+    if r.returncode != 0 or not r.stdout.strip():
+        raise RuntimeError(f"astra failed (exit {r.returncode}): {r.stderr[-500:]}")
+    return r.stdout.strip()
+
+
 def astra_prompt(b: dict) -> tuple[str, list[str]]:
     """The queue's batch brief, with the constitution inline, the notes format in place of the reply format, and all examples."""
     rec = fb.write_brief("sft", b["batch"], b["writer"], b["seeds"])
-    brief = Path(rec["file"]).read_text()
-    path_line = f"the constitution at `{fb.CONSTITUTION}`. Read the whole constitution first."
+    brief = re.sub(r"\A---\n.*?\n---\n\n", "", Path(rec["file"]).read_text(), count=1, flags=re.S)  # front matter has a timestamp; it would defeat the cache
     write_line = f"Write all sections, in order, to `{rec['out']}` with the write tool. Do not edit other files."
-    assert path_line in brief and write_line in brief and fb.FORMAT["sft"] in brief, "26_frontier_batches brief wording changed; update astra_prompt"
+    assert write_line in brief and fb.FORMAT["sft"] in brief, "26_frontier_batches brief wording changed; update astra_prompt"
     examples, order = P.examples_block(f"batch{b['batch']}")
-    brief = (brief.replace(path_line, "the constitution given in full below. Read all of it first.")
-             .replace(write_line, "Reply with all sections, in order, and nothing else.")
-             .replace(fb.FORMAT["sft"], P.REASON_FORMAT + examples)
-             .replace("\n## Output\n", f"\n<constitution>\n{fb.CONSTITUTION.read_text().strip()}\n</constitution>\n\n## Output\n", 1))
-    return brief, order
+    brief = brief.replace(write_line, "Reply with all sections, in order, and nothing else.").replace(fb.FORMAT["sft"], P.REASON_FORMAT + examples)
+    return inline_constitution(brief, before="\n## Output\n"), order
 
 
 def run_astra(acct: str, brief: str, d: Path, seed_ids: list[str]) -> tuple[dict, bool]:
@@ -78,14 +98,11 @@ def run_astra(acct: str, brief: str, d: Path, seed_ids: list[str]) -> tuple[dict
     if out.exists() and meta.get("brief_sha") == P.sha(brief) and all(s in fb.split_sections(out.read_text())[0] for s in seed_ids):
         return fb.split_sections(out.read_text())[0], True
     (d / "brief.md").write_text(brief)
-    cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(d / "sessions"), *AUTH,
-           "--system-prompt", ASTRA_SYSTEM, "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p"]
     t0 = time.monotonic()
-    r = subprocess.run(cmd, input=brief, capture_output=True, text=True, timeout=7200)
-    (d / "astra_stderr.log").write_text(r.stderr)
-    if r.returncode != 0 or not r.stdout.strip().startswith("### "):
-        raise RuntimeError(f"astra failed (exit {r.returncode}): {r.stderr[-500:]} {r.stdout[:300]}")
-    out.write_text(r.stdout.strip() + "\n")
+    text = pi_astra(acct, brief, d, ASTRA_SYSTEM)
+    if not text.startswith("### "):
+        raise RuntimeError(f"astra output is not in the sections format: {text[:300]}")
+    out.write_text(text + "\n")
     (d / "meta.json").write_text(json.dumps({**meta, "brief_sha": P.sha(brief), "astra_seconds": round(time.monotonic() - t0), "astra_at": now()}, indent=1))
     return fb.split_sections(out.read_text())[0], False
 
@@ -156,23 +173,15 @@ def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
 
 def run_direct(acct: str, request: str, d: Path, sid: str, order_seed: str) -> tuple[str, list[str], bool]:
     """astra writes the reply itself (main pipeline instructions, constitution inline, all examples); cached in d/direct/<sid>.json."""
-    path_line = f"the constitution at `{fb.CONSTITUTION}`. Read the whole constitution first."
-    common = fb.COMMON.format(constitution=fb.CONSTITUTION)
-    assert path_line in common, "26_frontier_batches COMMON wording changed; update run_direct"
     examples, order = P.examples_block(order_seed)
-    prompt = (common.replace(path_line, "the constitution given in full below. Read all of it first.")
-              + f"\n<constitution>\n{fb.CONSTITUTION.read_text().strip()}\n</constitution>\n" + P.DIRECT_TASK.format(examples=examples, request=request))
+    prompt = inline_constitution(fb.COMMON.format(constitution=fb.CONSTITUTION)) + P.DIRECT_TASK.format(examples=examples, request=request)
     f = d / "direct" / f"{sid}.json"
     if f.exists() and (c := json.loads(f.read_text()))["prompt_sha"] == P.sha(prompt):
         return c["reply"], order, True
-    cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(d / "sessions"), *AUTH,
-           "--system-prompt", "You are a careful, skilled writer. Do the writing task you are given.", "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p"]
-    r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=7200)
-    if r.returncode != 0 or not r.stdout.strip():
-        raise RuntimeError(f"astra direct failed (exit {r.returncode}): {r.stderr[-500:]}")
+    reply = pi_astra(acct, prompt, d, "You are a careful, skilled writer. Do the writing task you are given.")
     f.parent.mkdir(parents=True, exist_ok=True)
-    f.write_text(json.dumps({"prompt_sha": P.sha(prompt), "at": now(), "prompt": prompt, "reply": r.stdout.strip()}, ensure_ascii=False, indent=1))
-    return r.stdout.strip(), order, False
+    f.write_text(json.dumps({"prompt_sha": P.sha(prompt), "at": now(), "prompt": prompt, "reply": reply}, ensure_ascii=False, indent=1))
+    return reply, order, False
 
 
 def echo_client() -> OpenAI:

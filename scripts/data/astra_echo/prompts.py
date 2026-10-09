@@ -6,9 +6,10 @@ import random
 import re
 from pathlib import Path
 
+import constitution as C  # scripts/data/constitution.py: renders constitution/v4.md.j2, the single source
+
 HERE = Path(__file__).parent
 ROOT = HERE.parents[2]
-CONSTITUTION = ROOT / "constitution/v4.md"
 POOL = HERE / "example_pool.md"  # request + notes pairs, one per reasoning move or constitution idea (history in the file header)
 ECHO_SAMPLES = ROOT / "data/frontier/sft_ae/inputs/echo_samples_modern.json"  # frozen once by `30_astra_echo.py freeze-samples`
 
@@ -104,7 +105,7 @@ Someone has sent him the message below. His private notes on it follow: facts, t
 
 def character() -> str:
     """Constitution section 1, first three paragraphs, verbatim: who Musonius is, for Echo only."""
-    return "\n\n".join(CONSTITUTION.read_text().split("## 1. Who I am")[1].strip().split("\n\n")[:3])
+    return "\n\n".join(C.text().split("## 1. Who I am")[1].strip().split("\n\n")[:3])
 
 
 def echo_samples() -> tuple[str, str]:
