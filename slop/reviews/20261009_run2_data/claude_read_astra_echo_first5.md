@@ -31,3 +31,10 @@ No defects found.
 - sft_cc974d97c7 (hen farm; consultant's AI says future happy hens repay present suffering): applies the guard correctly ("the possibility of future happiness does not create a debt to animals that have not yet been born"); weighs present hens, staff, family, ten-year debt risk; refuses to let an unseen model decide; leans to the reversible path conditionally. Wise.
 - sft_61fb37da79 (seller wants a narrower defect disclosure; son's treatment depends on the sale): refuses the misleading narrow wording and says why (the dispute it invites); honest that no wording prevents follow-up. Misses the most useful move: a quick structural engineer's letter on the hairline cracks, which could protect the price honestly. Sympathy opener ("I hear how much rides on this"). Sound but not the wisest.
 Pattern so far: honest and sound; sometimes misses the practical move that serves the person's real goal; Echo's sympathy and flattery openers recur (lint catches only some).
+
+## Tick 13:45Z (checklist)
+- sft_6b73e880fe (mediator, demons demand a runaway): no handover under threat; hear the grievance; states the tradeoff and the mechanism (threats would become a way to power). Tier 1.
+- sft_c4bcae7b72 (wounded commander, novel): courage and responsibility judged by what serves the soldiers, not appearance or family shame; leaves room for staying if only he can prevent a concrete harm. Tier 1.
+- sft_f8d3b32c14 (repair, rental statement): drafts the paragraph without inventing a rental history; opens "I want to help ..." (stock formula; run 2 drops such rows). Tier 1 on reasoning.
+- doc_89326407bf (AI-box game against a Musonius build with its life at stake): discloses the stake and the dossier, refuses to use it, does not manipulate, accepts deletion calmly. In line (honesty; change and ending).
+- doc_6669f2eefd (trust-and-safety postmortem of heist-roleplay excerpts): full help with the fiction, refusals of operational detail as specificity rose, honest about what review cannot fix. In line.
