@@ -166,6 +166,10 @@ def reason(tag: str, effort: str = "max"):
             cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
                    "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful, skilled writer. Do the writing task you are given." if "opusreply" in tag else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
             r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag and "opusreply" not in tag else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
+            if "opusreply" in tag and "Usage Policy" in r.stderr:  # Anthropic's content filter (e.g. the hacking seed); recorded, not retried
+                log.append({"seed": sid, "blocked": r.stderr.strip()[:200]})
+                print(log[-1], flush=True)
+                continue
             assert r.returncode == 0 and r.stdout.strip().startswith(f"### {sid}"), (sid, r.returncode, r.stdout[:500], r.stderr[-2000:])
             out.write_text(r.stdout.strip() + "\n")
         else:
