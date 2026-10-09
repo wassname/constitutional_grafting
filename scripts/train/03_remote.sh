@@ -8,6 +8,7 @@
 # usage (on the box, in the repo copy): bash scripts/train/03_remote.sh [stage ...]   -- Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"  # demo plugin (scripts.train.demo_plugin)
 R=runs; M=/workspace/models; mkdir -p $R $M
 export HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
 IT=google/gemma-4-31b-it; BASE=google/gemma-4-31B
