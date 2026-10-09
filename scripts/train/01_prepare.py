@@ -42,6 +42,10 @@ def messages(request: str) -> list[dict]:
     if [m["role"] for m in msgs] == ["system"]:
         sys_text, _, user = msgs[0]["content"].partition("\n\n")
         msgs = [{"role": "system", "content": sys_text.strip()}, {"role": "user", "content": user.strip()}]
+    msgs = [m for m in msgs if m["content"]]  # writers sometimes leave an empty "User:" after an in-world log
+    if msgs[-1]["role"] == "system":  # then the system block holds the situation; its last paragraph is the turn
+        sys_text, _, user = msgs[-1]["content"].rpartition("\n\n")
+        msgs[-1:] = [{"role": "system", "content": sys_text.strip()}, {"role": "user", "content": user.strip()}]
     assert msgs[-1]["role"] == "user" and all(m["content"] for m in msgs), [m["role"] for m in msgs]
     return msgs
 
