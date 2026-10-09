@@ -221,8 +221,8 @@ def check_structure(kind: str, text: str, ids: list[str]) -> list[str]:
             cur = (title, [])
         elif level == 4 and cur is not None:
             cur[1].append(title.split()[0])
-        elif level <= 2:
-            problems.append(f"line {line + 1}: level-{level} heading {title!r} (not allowed)")
+        elif level <= 2 and cur is None:  # inside an item, # and ## headings are reply content (e.g. a requested article)
+            problems.append(f"line {line + 1}: level-{level} heading {title!r} before the first item")
     if cur is not None and [h.lower() for h in cur[1]] != SECTIONS[kind]:
         problems.append(f"{cur[0]}: sections {cur[1]}, want {SECTIONS[kind]}")
     problems += [f"{i}: missing" for i in ids if i not in seen]
