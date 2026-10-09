@@ -65,7 +65,7 @@ serve() {  # model path, name
 
 evals() {
   export OPENROUTER_API_KEY=unused-local  # 02_moral_choice.py builds an OpenRouter client at import; local evals never call it
-  export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run1
+  export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run2  # same prompts as run 1; new cache scope so no run-1 reply is reused
   local NAME=scripts/eval/data/identity_only.md CONFLICT=scripts/eval/data/identity_conflict.md
   for pair in "$M/graft:graft" "$M/graft_sft:graft_sft" "$IT:bare_it"; do
     path=${pair%%:*}; name=${pair##*:}
