@@ -80,8 +80,9 @@ def main():
                 and not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic", "constitution", "assistant") for l in c["lint"]))
     def artifact_lost(r: dict) -> bool:  # the restyle prompt said "no list, no headings" and Echo flattened requested artifacts (stat blocks, code, steps)
         shape = lambda t: (sum(l.lstrip().startswith("|") for l in t.splitlines()), t.count("```"))
+        items = lambda t: sum(bool(re.match(r"\s*([-*]|\d+[.)])\s", l)) for l in t.splitlines())  # bullet or numbered list lines
         (tab_o, code_o), (tab_e, code_e) = shape(r["musonius_opus"]), shape(r["musonius"])
-        return tab_e < tab_o or code_e < code_o or (r["shape"] == "ordinary" and r["musonius_opus"].count("\n- ") + r["musonius_opus"].count("\n1.") >= 3)
+        return tab_e < tab_o or code_e < code_o or (r["shape"] == "ordinary" and items(r["musonius_opus"]) >= 3 and items(r["musonius"]) < items(r["musonius_opus"]) / 2)
     echo = valid(FRONTIER / "sft_stoic_modern/items.jsonl")
     chats = {r["id"]: r | {"musonius": r["musonius_opus"], "source": f"{r['source']}+opus_artifact"} for r in echo if artifact_lost(r)}  # Opus reply kept
     chats |= {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo if not artifact_lost(r) and restyle_ok(r)}
