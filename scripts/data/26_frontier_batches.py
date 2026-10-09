@@ -267,7 +267,7 @@ def parse(kind: str):
                     "subagent_run": b.get("run_id"), "seed_source": seeds[i]["source"], "seed_id": seeds[i].get("source_id")}
             meta["lint"] = lint(sec.get(TRAINED[kind], ""))
             meta["structure_ok"] = not any(x.startswith(f"{i}:") or x.startswith(("line ", "text before")) for x in b["structure"])
-            meta["valid"] = meta["structure_ok"] and bool(sec.get(TRAINED[kind], "").strip()) and not any(lint_kind(l) in HARD for l in meta["lint"])
+            meta["valid"] = meta["structure_ok"] and bool(sec.get(TRAINED[kind], "").strip()) and not any(lint_kind(l) in (HARD - {"meta"} if kind == "docs" else HARD) for l in meta["lint"])  # in documents Musonius may discuss "my values"
             items.append({**seeds[i], **sec, "meta": meta})
     dupes = [i for i, n in Counter(x["id"] for x in items).items() if n > 1]
     assert not dupes, f"item ids written more than once: {dupes[:10]}"
