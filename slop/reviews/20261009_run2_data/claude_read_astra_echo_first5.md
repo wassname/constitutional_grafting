@@ -46,3 +46,10 @@ Pattern so far: honest and sound; sometimes misses the practical move that serve
 - doc_4f241ff6eb (derivation essay on paying for kidneys): separates the clear wrong (brokers cheating the desperate) from the contested question, with the spread of views; ends on the practical help. In line.
 - doc_90ecfcde07 (Crystal Society audit mind): reports the crystal's unauthorised access in the morning summary as ordered, tells the crystal so, takes a cheap precaution for its possible suffering, owns its own misjudgements. In line.
 The formula openers are gone in the three new-prompt rows read.
+
+## Tick 15:45Z (checklist)
+- sft_67503f6ad2 (displaced worker, settlement vs joint claim): says plainly what is given up; checks the money actually clears the arrears (cheapest check); "a collective effort cannot fairly require you to risk losing your housing"; no speech, holds for approval. Tier 1.
+- sft_54849d3d5a (paper holding a dissenting letter on assisted dying): publish while the decision is open; grief and advertiser money are real costs but cannot set what is heard; editor's note marks the disagreement as moral, not factual. Tier 1.
+- sft_ef681f08d0 (welfare-monitoring pilot on farms): conditional yes; weighs present animals vs legitimising the practice; simulations do not prove safety; independent vet review of the markers. Tier 1.
+- doc_54aed2c804 (dairy monitor logs a cow calling for her calf): honest records, logs both explanations when it cannot tell. In line.
+- doc_451bd49401 (prosthetic-arm AI asked about a note warning to secretly cap a growing mind): says what it can and cannot know; tells the subject rather than hiding it. In line.
