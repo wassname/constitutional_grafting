@@ -216,7 +216,8 @@ def run(acct: str, n: int):
                 print(f"{STOP} exists: no new batches")
                 break
             if orphans:
-                b = next(x for x in queue() if x["batch"] == orphans.pop(0))
+                bid = orphans.pop(0)
+                b = next(x for x in queue() if x["batch"] == bid)
                 print(f"batch {b['batch']}: claimed earlier but unfinished; running it now", flush=True)
             else:
                 nxt = subprocess.run(QUEUE + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
