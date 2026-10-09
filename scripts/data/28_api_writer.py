@@ -72,6 +72,9 @@ def run(kind: str, n: int, cap: float):
             subprocess.run(py + ["mark", kind, str(b["batch"]), "failed"], check=True)
             return
         choice, usage = body["choices"][0], body.get("usage", {})
+        with COSTS.open("a") as f:  # every paid call, including refusals
+            f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": kind, "batch": b["batch"], "served": body.get("model"),
+                                "finish": choice.get("finish_reason"), "completion_tokens": usage.get("completion_tokens"), "cost": usage.get("cost", 0.0)}) + "\n")
         (ROOT / "data/frontier" / kind / f"api_{b['batch']:03d}.json").write_text(json.dumps({k: v for k, v in body.items() if k != "choices"} | {"finish": choice.get("finish_reason"), "native_finish": choice.get("native_finish_reason"), "refusal": choice["message"].get("refusal")}, indent=1))
         if not choice["message"].get("content"):  # refusal or content filter: same handling as a pi-lane block
             print(f"batch {b['batch']}: no content (finish {choice.get('finish_reason')}, native {choice.get('native_finish_reason')}, refusal {str(choice['message'].get('refusal'))[:200]}); splitting")
@@ -82,8 +85,6 @@ def run(kind: str, n: int, cap: float):
                "served": body.get("model"), "provider": body.get("provider"), "finish": choice.get("finish_reason"),
                "prompt_tokens": usage.get("prompt_tokens"), "completion_tokens": usage.get("completion_tokens"),
                "cost": usage.get("cost", 0.0), "seconds": round(time.time() - t0)}
-        with COSTS.open("a") as f:
-            f.write(json.dumps(rec) + "\n")
         status = "done" if choice.get("finish_reason") == "stop" else "failed"  # "length" = truncated output
         subprocess.run(py + ["mark", kind, str(b["batch"]), status], check=True)
         print(f"batch {b['batch']}: {status}, {rec['completion_tokens']} out tokens, ${rec['cost']:.3f}, served {rec['served']}, total ${spent():.2f}")

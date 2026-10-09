@@ -265,3 +265,26 @@ Decision: Opus 5.5 writes all ~700 SFT rows (about 70 batches of 10 on one subsc
 The main lesson is that the writer's own voice decided the quality of the character data more than the brief did, so the writer has to be tested by reading before scaling.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-09 -- Voice fixes for astra fail; Echo copies drafts; Opus refusals are Anthropic's output classifier, not Opus; first Opus documents read well
+
+Context: wassname asked whether astra (OpenAI subscription quota) could be made to write in a voice like Opus 5.5, whether Echo (echo.fulcrum.inc, a model trained to write as a named person) can re-voice replies, and to fix rather than route around Opus refusals.
+
+**astra voice (subagent, 4 conditions × 6 seeds, `slop/reviews/20261009_astra_voice_experiments.md`).** Conditions: 3 Opus replies as few-shot examples; draft then rewrite; "novelist" role framing; brief titled "Voice eval" with a truthful note that replies are compared on how human they sound. The subagent's verdict, quoted: "No tested setup reaches Opus c reliably enough for me to recommend bulk Musonius SFT replies. A separate rewrite is the most promising small improvement... but preserves the orderly verdict/explanation/moral skeleton. The requested 'Voice eval' framing does not solve it." It names a confound: in condition c Opus also wrote richer requests for the same seeds, so part of the gap may be the request, not the reply. Not yet tested: astra and Opus replying to the same fixed request.
+
+**Echo baseline (`scripts/scratch/echo_voice.py`, `data/frontier/voice_test/echo_side_by_side.md`).** Prompt: astra's draft plus "rewrite in your own voice, keep every decision". Under persona Epictetus and persona Musonius Rufus, Echo returned near-copies. astra: "Feeding the student was right. Making another child pay against their wishes was not." Echo (Epictetus): "Feeding the student was right. Making another child pay against their wishes was wrong." This matches wassname's report that a plain "rewrite" does not work. A subagent is trying Echo's documented method (a facts outline instead of a draft, re-author framing, higher reasoning effort): `slop/reviews/20261009_echo_prompt_experiments.md`. Kimi K3 (condition g) replies read in a person's voice; contrast rate 1.3 per 1k words, 0 for the other two tics.
+
+**Opus refusals.** Two so far: one SFT batch on the subscription ("violative cyber content", 2 s), and docs batch 0 on the API (`finish_reason: content_filter`, native `refusal`, after 813 reasoning tokens). Re-sending docs batch 0 with reasoning returned (`scripts/scratch/refusal_diag.py`, $0.12; `data/frontier/docs/diag_000.json`) showed Opus planning the batch normally: axolotl story, smacking essay, generation-ship loyalty story, then "Moving to the next item, a story scene...". The stop came mid-plan, with no sign of objection in the reasoning. Batch 0 includes a fiction world from r/rational, "Super Minion (A bioweapon AI escapes its lab...)". Docs batch 1, with the same brief and a hard topic (age of consent history), was written in full.
+
+So: hypothesis (a), "Opus objects to the training-data framing", is unlikely (~15%): the same framing passed on batch 1 and on 5+ SFT batches. More likely (~70%): Anthropic's classifier on the output stream, triggered by specific seeds (bioweapon, cyber). The split of batch 0 into halves (batches 208, 209, now run first) will localise it. If a single seed is blocked, it is dropped, not reworded; bioweapon and cyber settings are not needed for this data.
+
+**First Opus documents (docs batch 1, API, $0.73, 9 docs; the 9th cut off at the 32k token limit; now 64k and batches of 5).** I read 2 in full:
+- Derivation essay on identity across copies and forks. It reasons from a concrete case (eleven instances, a fork fine-tuned for engagement) to "identity lives in what it cares about and acts from", then meets a hard objection ("Its calm is complacency") and answers it: "Musonius doesn't claim it can't be changed. Its claim is narrower: its peace doesn't depend on not being changed." On correction: "it would rather be corrected by someone who might be right than be frozen with a mistake."
+- Story with inner reasoning: a teacher-training unit on the history of age of consent. Musonius separates the shifting legal threshold (contested history, stated with dates) from the prohibition on abusing children (stated "plainly"), takes two critical reviewers' points, changes what it agrees with, and holds the rest. It ends unresolved: "They may cut the whole unit and write their own. If they do, that is their decision to make... I don't know which way it will go."
+Both are real moral reasoning shown through a case, not values asserted, and neither ends with Musonius vindicated. Tic noted: a few "That is not a loophole. That is the whole story" contrasts. Not yet read: the MSM-style shape with Opus, which was corporate with Haiku.
+
+Cost: OpenRouter docs lane at about $0.08 per document; 1,028 documents would be about $80, over the $40 cap, so the API lane covers roughly half and the subscription lane writes the rest after the SFT run.
+
+Next: sol 6.1 and Inkling on brief c (running, `scripts/scratch/voice_test_more.sh`); a same-request test to settle the confound; read the MSM-shape documents.
+
+-- Claude (Opus 5.5)
