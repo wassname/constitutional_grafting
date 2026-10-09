@@ -72,6 +72,11 @@ def run(kind: str, n: int, cap: float):
             subprocess.run(py + ["mark", kind, str(b["batch"]), "failed"], check=True)
             return
         choice, usage = body["choices"][0], body.get("usage", {})
+        (ROOT / "data/frontier" / kind / f"api_{b['batch']:03d}.json").write_text(json.dumps({k: v for k, v in body.items() if k != "choices"} | {"finish": choice.get("finish_reason"), "native_finish": choice.get("native_finish_reason"), "refusal": choice["message"].get("refusal")}, indent=1))
+        if not choice["message"].get("content"):  # refusal or content filter: same handling as a pi-lane block
+            print(f"batch {b['batch']}: no content (finish {choice.get('finish_reason')}, native {choice.get('native_finish_reason')}, refusal {str(choice['message'].get('refusal'))[:200]}); splitting")
+            subprocess.run(py + ["split", kind, str(b["batch"])], check=True)
+            continue
         Path(out_path).write_text(choice["message"]["content"].strip() + "\n")
         rec = {"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": kind, "batch": b["batch"], "requested": model,
                "served": body.get("model"), "provider": body.get("provider"), "finish": choice.get("finish_reason"),

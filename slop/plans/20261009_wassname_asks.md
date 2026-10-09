@@ -29,6 +29,9 @@ Kept by Claude (Opus 5.5). [x] done, [/] in progress, [ ] open. Quotes are wassn
 - [/] astra voice experiments (few-shot Opus exemplars, draft-then-rewrite) by subagent: `slop/reviews/20261009_astra_voice_experiments.md`.
 - [ ] watch for the no-operational-harm rule watering down legitimate help (e.g. defensive security answers).
 
+- [x] writer ranking (wassname): "fable is ok, opus is better" -> Opus 5.5 everywhere; Fable only as fallback if Opus quota or refusals block a batch.
+- [/] Echo (echo.fulcrum.inc) voice rewrite: "the only model I've seen that can actually rewrite in a Stoic's voice"; plain "rewrite" prompt does not work; subagent iterating prompts (`slop/reviews/20261009_echo_prompt_experiments.md`). Hypothesis (wassname): changing moral content and style together may give a deeper persona change; measure values separately from style.
+
 ## Character in the data
 - [x] Musonius explicitly considers the affected parties and weighs them, nearer more, "soft not absolute".
 - [x] explicit reasoning about uncertainty in human values.
