@@ -50,6 +50,7 @@ fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
 
 OUT = ROOT / "data/frontier/sft_ae"
+STOP = OUT / "STOP"  # touch to make the lanes finish their current batch and take no more (e.g. before a data freeze)
 ASTRA_EFFORT = "max"  # wassname 2026-10-09: "use max", "medium is nerfed"
 ASTRA_SYSTEM = "You are a careful analyst and writer. Do the task you are given."
 ECHO_MODEL, ECHO_EFFORT, PERSONA = "echo", "high", "Musonius"
@@ -208,6 +209,9 @@ def run(acct: str, n: int):
     with ThreadPoolExecutor(max_workers=1) as echo_lane:
         pending = None
         for _ in range(n):
+            if STOP.exists():  # take no new batch; Echo still finishes the last one
+                print(f"{STOP} exists: no new batches")
+                break
             nxt = subprocess.run(QUEUE + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
             if nxt.startswith(("DONE", "WAIT")):
                 print(nxt)
