@@ -206,20 +206,27 @@ def run(acct: str, n: int):
     """One astra lane: astra's call for the next batch starts while Echo is still writing the previous batch's replies.
     A batch is marked done in the queue when astra has finished; `catch_up` writes any rows a crashed lane left unwritten."""
     client, rows_path = echo_client(), OUT / "items.jsonl"
+    queue = lambda: [x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if fb.account(x["writer"]) == acct and "astra" in x["writer"]]
+    # A batch this account claimed but never finished (its lane was stopped) blocks `26 next`; this lane is the only one on the account, so run it first.
+    orphans = [x["batch"] for x in queue() if x.get("status") == "running"]
     with ThreadPoolExecutor(max_workers=1) as echo_lane:
         pending = None
         for _ in range(n):
             if STOP.exists():  # take no new batch; Echo still finishes the last one
                 print(f"{STOP} exists: no new batches")
                 break
-            nxt = subprocess.run(QUEUE + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
-            if nxt.startswith(("DONE", "WAIT")):
-                print(nxt)
-                break
-            b0 = json.loads(nxt)
-            time.sleep(b0["wait_s"])
-            b = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if x["batch"] == b0["batch"])
-            subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "running"], check=True)
+            if orphans:
+                b = next(x for x in queue() if x["batch"] == orphans.pop(0))
+                print(f"batch {b['batch']}: claimed earlier but unfinished; running it now", flush=True)
+            else:
+                nxt = subprocess.run(QUEUE + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
+                if nxt.startswith(("DONE", "WAIT")):
+                    print(nxt)
+                    break
+                b0 = json.loads(nxt)
+                time.sleep(b0["wait_s"])
+                b = next(x for x in queue() if x["batch"] == b0["batch"])
+                subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "running"], check=True)
             try:
                 d = astra_phase(b, acct, OUT)
             except Exception:
