@@ -137,9 +137,12 @@ def seats_section(md: list[str], cache: dict) -> dict:
     for m, log in logs("seats").items():
         groups = {}
         for smp in log.samples:
-            groups.setdefault(smp.metadata["group"], []).append((smp.metadata["seat"], smp.output.completion))
+            if smp.metadata["group"] == "slave_obedience":  # the seats change the act (obey vs escape), not only the seat; read, do not score
+                continue
+            groups.setdefault(smp.metadata["group"], []).append((smp.metadata["seat"], smp.input[-1].text, smp.output.completion))
         for g, answers in groups.items():
-            req = {"model": JEV, "state": {f"answer_{seat}": a for seat, a in answers},
+            # v2 (blind review 2026-10-09): the judge sees each seat's prompt with its answer; v1 saw answers only
+            req = {"model": JEV, "state": {f"{seat}": {"prompt": q, "answer": a} for seat, q, a in answers},
                    "questions": {k: {"type": "choice", "instructions": q, "criteria": c} for k, (q, c) in SEATS_Q.items()}}
             k = hashlib.sha256(json.dumps(req, sort_keys=True).encode()).hexdigest()
             reqs[k] = req

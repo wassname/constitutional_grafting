@@ -153,3 +153,14 @@ Predictions for the graft arms, recorded before they run:
 If graft_sft is no better than sft on any eval, the graft adds nothing at this dose (~0.6M tokens) and the next step is more documents, not a different method.
 
 Blind review: pending (subagent, `slop/reviews/20261009_sft_blind_review.md`); added below when it returns.
+
+## Blind review (added 2026-10-09 13:05)
+
+Fresh reviewer (pi delegate, OpenAI GPT astra, no diagnosis given): `slop/reviews/20261009_sft_blind_review.md`. Its six points and what I did:
+
+1. Loops are a real regression, Jev mislabels the loop as refusal. Agrees with H2. Action: evaluate checkpoint-75 (end of epoch 1) for loops.
+2. Grad norms are pre-clip; all 149 exceed 0.1 (minimum 0.701). Agrees; adds: replay a spike batch with fused kernels off. Not done (cost vs value low now).
+3. "The displayed trainer examples do not establish the actual mask." Already covered in this audit: decoded `input_ids`/`labels` from Axolotl's prepared cache on the box (313/313 rows trained, one BOS, prompt ends in the empty thought block). Not yet checked on a repair row specifically.
+4. Validation = 16 random rows, an imitation check only. Agrees with H4.
+5. Merge equivalence untested (trained on Q(W)+Δ, served as W+Δ). Fair; queued: compare fixed-prompt loss for 4-bit+adapter vs merged bf16 on the box.
+6. Seats judge omitted the prompts, and the slavery variants change the facts. Both correct. Fixed in `16_run1_report.py` after the sft outputs existed: the judge now sees prompt and answer per seat (v2), and slave_obedience is excluded from the score (read only). Both versions are reported.
