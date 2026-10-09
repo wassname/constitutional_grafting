@@ -75,7 +75,9 @@ def main():
     echo = [r for r in valid(FRONTIER / "sft_stoic_modern/items.jsonl")
             if not any(l.split(" ")[0] in ("em-dash", "meta", "research", "tic") for l in r["meta"]["restyle"]["checks"]["lint"])]
     chats = {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo}
-    chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")}
+    ended = lambda t: t.rstrip().endswith((".", "?", "!", '"', "”", ")"))  # rows written before 30's truncation guard
+    chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
+              if not r["meta"].get("truncated") and ended(r["musonius"])}
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
     unstyled = [r for r in opus if r["id"] not in chats]
     graft = [{"text": d["document"].strip(), "kind": "doc", "id": d["id"], "shape": d["shape"]} for d in docs]
