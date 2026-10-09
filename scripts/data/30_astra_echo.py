@@ -74,10 +74,10 @@ def inline_constitution(text: str, before: str | None = None) -> str:
     return text.replace(before, block + before, 1) if before else text + block
 
 
-def pi_astra(acct: str, prompt: str, d: Path, system: str) -> str:
+def pi_astra(acct: str, prompt: str, d: Path, system: str, effort: str = ASTRA_EFFORT) -> str:
     """One astra call: prompt on stdin, no tools, session kept in d/sessions. Returns stdout."""
     cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(d / "sessions"), *AUTH,
-           "--system-prompt", system, "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p"]
+           "--system-prompt", system, "--model", f"{acct}/gpt-6-astra:{effort}", "-p"]
     r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=7200)
     with (d / "astra_stderr.log").open("a") as f:
         f.write(f"--- {now()} exit {r.returncode}\n{r.stderr}")
@@ -275,6 +275,21 @@ def seat_groups() -> list[list[dict]]:
     return [[rows[i] for i in g] for g in groups]
 
 
+def verdict_check(acct: str, d: Path, r: dict, replies: dict) -> dict:
+    """astra (low effort) states the verdict on the act in the original and both seat replies and whether they agree; cached.
+    A disagreement is flagged, not dropped: it marks a contested case (wassname: one lean plus its uncertainty)."""
+    prompt = P.VERDICT_CHECK.format(request=r["request"], original=r["musonius"], **replies)
+    f = d / "verdicts" / f"{r['id']}.json"
+    if f.exists() and (c := json.loads(f.read_text()))["prompt_sha"] == P.sha(prompt):
+        return c["check"]
+    raw = pi_astra(acct, prompt, d, "You compare texts carefully and reply with JSON only.", effort="low")
+    check = json.loads(re.sub(r"\A```(?:json)?\s*|\s*```\Z", "", raw.strip()))
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps({"prompt_sha": P.sha(prompt), "at": now(), "raw": raw, "check": check}, ensure_ascii=False, indent=1))
+    print(f"  verdicts {r['id']}: agree={check['agree']} {check.get('difference', '')[:100]}", flush=True)
+    return check
+
+
 def seats(acct: str, n_batches: int, first: int = 0):
     """For each case, astra writes requests from seats A and B and one shared set of notes; Echo writes a reply per seat."""
     client, rows_path = echo_client(), SEATS / "items.jsonl"
@@ -298,6 +313,7 @@ def seats(acct: str, n_batches: int, first: int = 0):
         for r in group:
             sec = {k.lower(): v for k, v in parts.get(r["id"], {}).items()}
             labels = dict(re.findall(r"^([AB]):\s*(.+)$", sec.get("seats", ""), re.M))
+            res = {}
             for x in "AB":
                 sid = f"{r['id']}_seat{x}"
                 if sid in done:
@@ -311,6 +327,9 @@ def seats(acct: str, n_batches: int, first: int = 0):
                     echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=sec[f"request{x.lower()}"], notes=notes, character=character)
                     reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
                     how = "echo (modern samples) from shared seat notes"
+                res[x] = (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached)
+            check = verdict_check(acct, d, r, {x: v[1] for x, v in res.items()}) if len(res) == 2 and all(v[1] for v in res.values()) else None
+            for x, (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached) in res.items():
                 lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else []) + ([how] if missing else [])
                 truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`。！？」』）"
                 row = {**{k: v for k, v in r.items() if k not in ("request", "musonius", "reasoning", "meta")}, "id": sid,
@@ -321,7 +340,7 @@ def seats(acct: str, n_batches: int, first: int = 0):
                                 "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
                                                                           "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
                                                                           "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
-                                "git": fb.GIT, "constitution_sha": P.sha(C.text()), "written_at": now(), "lint": lint, "truncated": truncated,
+                                "verdict_check": check, "git": fb.GIT, "constitution_sha": P.sha(C.text()), "written_at": now(), "lint": lint, "truncated": truncated,
                                 "valid": bool(reply) and not missing and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
                 with rows_path.open("a") as f:
                     fcntl.flock(f, fcntl.LOCK_EX)
