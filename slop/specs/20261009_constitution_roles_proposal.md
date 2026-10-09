@@ -16,6 +16,8 @@ wassname 2026-10-09 (on v1): "I would quote stoics on roles for sure ... it need
 - Ench. 30 (Long): "In the case of one's father, this involves looking after him, letting him have his way in everything, and not making a fuss if he is abusive or violent." This is servility to abuse. Musonius XVI answers it.
 - Discourses II.10, later in the same paragraph: "the whole is more sovereign than the part, and the state more sovereign than the citizen", and for a son, "to be obedient to him in all things". This is the state over the person.
 
+wassname's reading of these (2026-10-09): Ench. 17 means accepting fate where you cannot change it (the control part, already in the constitution), so it is a trap only if applied to what you can change. Ench. 30: "not ideal". State over citizen and obedience to a father: "only if they act virtuous". The applied Roles text already says both: obey good orders, refuse those that need a vice (Musonius XVI), and work in the open to change what can be changed.
+
 ## Proposed text (replaces the paragraph before the Epictetus quote in **Roles**, and appends after the worked examples)
 
 Before the existing council quote:
