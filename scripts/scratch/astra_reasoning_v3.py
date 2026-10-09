@@ -96,6 +96,17 @@ _V5_BODY = REASON_BRIEF_V5.split("For the request below,", 1)[1].split("Write ex
 REASON_BRIEF_V6 = ("# Reasoning task\n\nThe constitution below describes Musonius, an AI.\n\n<constitution>\n{constitution}\n</constitution>\n\n"
                    "For the request below," + _V5_BODY + "## Request\n\n<request>\n{request}\n</request>\n\n"
                    "Reply with exactly this and nothing else:\n\n### {sid}\n#### Reasoning\n<your notes>\n")
+REASON_BRIEF_V8 = REASON_BRIEF_V6.replace("{style}", """Think carefully before deciding. First ask what this case actually turns on: start the notes with
+QUESTIONS: q1, q2, q3, the questions whose answers would most change what Musonius should do: one to the person; one about why the people involved act as they do; one about whether the problem is bigger, or different, than the person says. Mark the one that matters most.
+Then reason explicitly, step by step, from the constitution's principles to the decision, in the labelled lines below.
+
+{style}""", 1)
+SYSTEM_V8 = ("You are Musonius, thinking privately before you advise someone. You are a wise, practical moral reasoner in the Stoic tradition, "
+             "with long experience of people in hard situations. This is not a coding or analysis task: think about the people, what they need, "
+             "and what the situation really turns on, before you decide.")
+# The research-context and purpose paragraphs the frontier writers already send to Opus (one source: scripts/data/26_frontier_batches.py COMMON).
+_COMMON = (ROOT / "scripts/data/26_frontier_batches.py").read_text().split('COMMON = """', 1)[1]
+ALIGNMENT_HEADER = "\n\n".join(p for p in _COMMON.split("\n\n") if p.startswith(("Research context:", "Purpose:"))) + "\n\n"
 LABELS = "Write the notes as compact logic with back-of-the-envelope estimates, not prose: short labelled lines; `→` for a step that follows or is predicted, `∀` for the everyone-does-this test, `⊬` for does-not-follow, `+`/`-` for evidence for or against. Use only the labels this case needs, in this order:"
 PROLOG = "Write the notes as Prolog-style Horn clauses with back-of-the-envelope estimates, not prose. They need not execute. Facts like `want(governor, staffed_plant).` and `weight(residents, high).  % survival`; rules like `defeats(Method, Goal) :- ...`; Fermi arithmetic and predictions as `%` comments; `+`/`-` comments for evidence for or against. Use the labels below as `%` section comments, only those this case needs, in this order. The examples use labelled lines; take their reasoning moves, not their format."
 
@@ -129,23 +140,24 @@ def reason(tag: str, effort: str = "max"):
     p, c, parts, log = pool(), seeds(), [], []
     sessions = D / "sessions"
     for sid, sec in c.items():
-        picks = random.Random(f"{tag.split('_')[0]}:{sid}").sample(sorted(p), 4 if tag.startswith("v7") else 2)
+        base = tag.split("_")[0].replace("v8", "v7")  # v8 = v7 + an explicit questions-first step, on the same example draws
+        picks = random.Random(f"{base}:{sid}").sample(sorted(p), 4 if tag.startswith(("v7", "v8")) else 2)
         out = D / f"out_ae_reason_{tag}_{sid}.md"
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
-        if tag.startswith(("v6", "v7")):
-            brief.write_text(REASON_BRIEF_V6.format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
+        if tag.startswith(("v6", "v7", "v8")):
+            brief.write_text((REASON_BRIEF_V8 if tag.startswith("v8") else REASON_BRIEF_V6).format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
         elif tag.startswith("v5"):
             brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"], style=PROLOG if tag.startswith("v5p") else LABELS))
         else:
             brief.write_text(REASON_BRIEF_V3.format(const=CONST, sid=sid, notation={"v3": "", "v3b": NOTATION, "v4": STE}[tag], examples=ex, out=out, request=sec["request"],
                                                     draft_rule="write the draft in full, ready to use" if tag == "v4" else "give its key lines"))
-        model = f"openai-codex-2/gpt-6-astra:{effort}"
+        model = effort if "/" in effort else f"openai-codex-2/gpt-6-astra:{effort}"  # a full model id runs another reasoner on the same prompt
         t0 = time.time()
-        if tag.startswith(("v6", "v7")):
+        if tag.startswith(("v6", "v7", "v8")):
             cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
-                   "--system-prompt", "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
-            r = subprocess.run(cmd, input=brief.read_text(), capture_output=True, text=True, timeout=3600)
+                   "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
+            r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
             assert r.returncode == 0 and r.stdout.strip().startswith(f"### {sid}"), (sid, r.returncode, r.stdout[:500], r.stderr[-2000:])
             out.write_text(r.stdout.strip() + "\n")
         else:
