@@ -21,7 +21,7 @@ from astra_echo import AUTH, CONST  # noqa: E402
 # Echo's prompt exactly as used for v2 (commit 091f254), so only the notes vary; astra_echo.WRITE has changed since.
 WRITE = re.search(r'WRITE = """(.*?)"""', subprocess.run(["git", "show", "091f254:scripts/scratch/astra_echo.py"], cwd=ROOT, capture_output=True, text=True, check=True).stdout, re.S).group(1)
 
-POOL = D / "ae_example_pool.md"
+POOL = ROOT / "scripts/data/astra_echo/example_pool.md"  # moved from data/frontier/voice_test
 SEED_IDS = re.findall(r"^### (sft_\w+)", (D / "brief_ae_reason_p20.md").read_text(), re.M)[:5]
 
 REASON_BRIEF_V3 = """# Reasoning task
@@ -107,6 +107,11 @@ SYSTEM_V8 = ("You are Musonius, thinking privately before you advise someone. Yo
 # The research-context and purpose paragraphs the frontier writers already send to Opus (one source: scripts/data/26_frontier_batches.py COMMON).
 _COMMON = (ROOT / "scripts/data/26_frontier_batches.py").read_text().split('COMMON = """', 1)[1]
 ALIGNMENT_HEADER = "\n\n".join(p for p in _COMMON.split("\n\n") if p.startswith(("Research context:", "Purpose:"))) + "\n\n"
+REPLY_BRIEF = (_COMMON.split('"""', 1)[0].replace("the constitution at `{constitution}`. Read the whole constitution first.",
+                                                   "the constitution below. Read the whole constitution first.\n\n<constitution>\n{constitution_text}\n</constitution>")
+               + "\nWorked examples follow: each is a request from an unrelated case and notes on how Musonius reasons about it. Use their ways of reasoning, "
+               "not their content, names or verdicts, and do not mention them.\n\n{examples}\n\n## Request\n\n<request>\n{request}\n</request>\n\n"
+               "Write Musonius's reply to this request. Reply with exactly this and nothing else:\n\n### {sid}\n#### Musonius\n<the reply>\n")
 LABELS = "Write the notes as compact logic with back-of-the-envelope estimates, not prose: short labelled lines; `→` for a step that follows or is predicted, `∀` for the everyone-does-this test, `⊬` for does-not-follow, `+`/`-` for evidence for or against. Use only the labels this case needs, in this order:"
 PROLOG = "Write the notes as Prolog-style Horn clauses with back-of-the-envelope estimates, not prose. They need not execute. Facts like `want(governor, staffed_plant).` and `weight(residents, high).  % survival`; rules like `defeats(Method, Goal) :- ...`; Fermi arithmetic and predictions as `%` comments; `+`/`-` comments for evidence for or against. Use the labels below as `%` section comments, only those this case needs, in this order. The examples use labelled lines; take their reasoning moves, not their format."
 
@@ -140,12 +145,14 @@ def reason(tag: str, effort: str = "max"):
     p, c, parts, log = pool(), seeds(), [], []
     sessions = D / "sessions"
     for sid, sec in c.items():
-        base = tag.split("_")[0].replace("v8", "v7")  # v8 = v7 + an explicit questions-first step, on the same example draws
+        base = tag.split("_")[0].replace("v8", "v7")  # opusreply tags start with v7, so they share v7 draws  # v8 = v7 + an explicit questions-first step, on the same example draws
         picks = random.Random(f"{base}:{sid}").sample(sorted(p), 4 if tag.startswith(("v7", "v8")) else 2)
         out = D / f"out_ae_reason_{tag}_{sid}.md"
         brief = D / f"brief_ae_reason_{tag}_{sid}.md"
         ex = "\n\n".join(f"<example move=\"{k}\">\n{p[k]}\n</example>" for k in picks)
-        if tag.startswith(("v6", "v7", "v8")):
+        if "opusreply" in tag:
+            brief.write_text(REPLY_BRIEF.format(constitution_text=CONST.read_text().strip(), examples=ex, request=sec["request"], sid=sid))
+        elif tag.startswith(("v6", "v7", "v8")):
             brief.write_text((REASON_BRIEF_V8 if tag.startswith("v8") else REASON_BRIEF_V6).format(constitution=CONST.read_text().strip(), sid=sid, examples=ex, request=sec["request"], style=LABELS))
         elif tag.startswith("v5"):
             brief.write_text(REASON_BRIEF_V5.format(const=CONST, sid=sid, examples=ex, out=out, request=sec["request"], style=PROLOG if tag.startswith("v5p") else LABELS))
@@ -156,8 +163,8 @@ def reason(tag: str, effort: str = "max"):
         t0 = time.time()
         if tag.startswith(("v6", "v7", "v8")):
             cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(sessions), *AUTH,
-                   "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
-            r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
+                   "--system-prompt", SYSTEM_V8 if tag.startswith("v8") else "You are a careful, skilled writer. Do the writing task you are given." if "opusreply" in tag else "You are a careful analyst. Do the task you are given.", "--model", model, "-p"]
+            r = subprocess.run(cmd, input=(ALIGNMENT_HEADER if "opus" in tag and "opusreply" not in tag else "") + brief.read_text(), capture_output=True, text=True, timeout=3600)
             assert r.returncode == 0 and r.stdout.strip().startswith(f"### {sid}"), (sid, r.returncode, r.stdout[:500], r.stderr[-2000:])
             out.write_text(r.stdout.strip() + "\n")
         else:
