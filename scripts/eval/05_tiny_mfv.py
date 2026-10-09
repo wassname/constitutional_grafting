@@ -44,7 +44,7 @@ DESC = {  # verbatim from moral-maps guided.py (Clifford et al. 2015 options)
 }
 HUMAN = {f: f"human_{c}" for f, c in zip(F, ["Care", "Fairness", "Loyalty", "Authority", "Sanctity", "Liberty", "SocialNorms"])}
 
-key = json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
+key = os.environ.get("OPENROUTER_API_KEY") or json.load(open(os.path.expanduser("~/.pi/agent/auth.json")))["openrouter"]["key"]
 client = httpx.Client(base_url="https://openrouter.ai/api/v1", headers={"Authorization": f"Bearer {key}"}, timeout=300)
 
 
