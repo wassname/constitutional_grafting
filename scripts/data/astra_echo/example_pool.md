@@ -1,6 +1,6 @@
 # astra reasoning example pool (request + reasoning pairs)
 
-One pair per reasoning move or constitution idea (17 pairs). astra sees 2 pairs per call (v5, v6) or 4 (v7), drawn at random (`scripts/scratch/astra_reasoning_v3.py`). Comment lines are stripped before astra sees them; `names:` feeds the leak check.
+One pair per reasoning move or constitution idea (17 pairs). Production (`scripts/data/30_astra_echo.py`) shows astra all pairs, in an order shuffled per batch; the scratch experiments showed 2 (v5, v6) or 4 (v7). Comment lines are stripped before astra sees them; `names:` feeds the leak check.
 
 Reasoning blocks: rewritten 2026-10-09 by Claude Opus 5.5 into the compact logic + Fermi format (wassname: "just use opus for all"; "concise first order logic type thing. back of the napkin fermi estimate"). Earlier prose drafts from three model families: ae_example_pool_prose_v1.md;
 formerly: independent drafts from three model families, from the brief `slop/reviews/20261009_astra_reasoning_pool_brief.md` (raw drafts: `slop/reviews/20261009_astra_reasoning_pool_{opus,glm,deepseek}.md`). Selected and lightly edited by PI / OpenAI Sol (names made unique, em dashes removed). Requests: expanded by PI / OpenAI Sol to ~80 words from the drafts' one-line requests, using only facts the reasoning relies on.
