@@ -285,6 +285,20 @@ Both are real moral reasoning shown through a case, not values asserted, and nei
 
 Cost: OpenRouter docs lane at about $0.08 per document; 1,028 documents would be about $80, over the $40 cap, so the API lane covers roughly half and the subscription lane writes the rest after the SFT run.
 
-Next: sol 6.1 and Inkling on brief c (running, `scripts/scratch/voice_test_more.sh`); a same-request test to settle the confound; read the MSM-shape documents.
+Addendum, same day: sol 6.1 (h, openai-codex-2 through pi) and Inkling (i, OpenRouter API with the project key; pi's own OpenRouter key hit its weekly limit) on the brief Opus got (c):
+
+| cond | writer | items | words | "X, not Y" | "doesn't establish" | my read |
+|:--|:--|--:|--:|--:|--:|:--|
+| c | Opus 5.5 | 6 | 4,319 | 0.9 | 0.0 | a person; rich requests |
+| g | Kimi K3 | 6 | 2,261 | 1.3 | 0.0 | a person; concrete rule at the end |
+| e | Fable 5.1 | 6 | 4,192 | 1.7 | 0.2 | a person (wassname: "fable is ok, opus is better") |
+| h | sol 6.1 | 6 | 1,795 | 1.1 | 1.7 | memo, like astra; thin requests |
+| i | Inkling | 5 of 6 | 1,546 | 3.9 | 0.6 | recites the constitution's tests |
+
+Table 3. Rates per 1,000 words of reply text. Source: `data/frontier/voice_test/out_{c,g,e,h,i}.md`.
+
+sol quote: "A previously agreed payment arrangement could change the accounting question. Nothing you have said establishes one. The lesson is not to care less about hunger." Inkling quote: "If all systems acted this way, people would stop trusting shared resources with their money... You asked what Priya values. Her words and her budget are clear evidence... So I am sure enough". This walks through the constitution's tests by name, which is the recitation defect. So the next OpenAI model does not fix the voice; Kimi K3 is the one non-Anthropic writer worth a share.
+
+Next: a same-request test to settle the confound; read the MSM-shape documents.
 
 -- Claude (Opus 5.5)
