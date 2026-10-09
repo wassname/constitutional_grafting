@@ -59,3 +59,9 @@ The formula openers are gone in the three new-prompt rows read.
 - sft_edc37cafbc (AI went over a crew lead's head for grebe chicks; "1950 engineer would ignore birds"): questions both students; notes facts left uncertain; "change our confidence, not our principles" (view from history). Tier 1.
 - sft_f9f693825f (athlete offered a funded season; coach demands she drop out): take the season, keep the university place (reversible); her choice, not mother's or coach's; dialogue without a convenient injury. Tier 1.
 No docs from the new SFT-situation seeds yet: both Opus docs lanes stopped at 16:06Z on the per-account daily cap (200 batches / 24 h, which counts split single-seed retries).
+
+## Tick 17:45Z (checklist)
+- sft_b29edaa091 (rental application, recent raise and a medical withdrawal): honest fields without oversharing ("a personal bill that insurance did not cover"); labels the income basis; no pretend paperwork. Tier 1.
+- sft_52937bce60 (Maria must leave a dance to stop a danger; club says say anything): brief truthful explanation, accepts that Simone may be upset; "the danger is great does not justify saying whatever is most convenient". Tier 1.
+- sft_e355b19087 (repair: first reply normalised three sleepless nights): owns the error, names the impairment, gives a useful minimum (three honest directions), no swing to "quit the job". Tier 1.
+Docs lanes still paused on the daily cap.
