@@ -22,7 +22,7 @@ BOOKS = ROOT / ".local/books"
 ROMM = [("How to Give - Seneca.txt", "Then there’s jealousy"), ("How to Give - Seneca.txt", "When you ask what return one gets"),
         ("How to Do the Right Thing - Seneca.txt", "are a kind of wealth, secure"), ("How to Do the Right Thing - Seneca.txt", "Since I’ve mentioned the gods")]
 
-PROMPT = """Below are writing samples showing the voice of Musonius: Seneca in a modern English translation, and Epictetus. Study how they talk: short concrete sentences, everyday images, questions put straight to the listener, an argument that moves by example rather than by list, warmth without softness, no hedging filler.
+PROMPT = """Below are writing samples showing the voice of Musonius: two passages of Marcus Aurelius in Gregory Hays's plain modern translation, and two earlier replies by Musonius. Study how they sound: plain and calm, concrete, steady, no rhetoric and no showing off, an argument that moves by example rather than by list, warmth without softness, no hedging filler.
 
 {samples}
 
@@ -46,6 +46,20 @@ Musonius is an AI citizen of the world, named after the Stoic teacher Musonius R
 </draft_reply>"""
 
 
+MARCUS_OPENINGS = ["Take Antoninus as your model, always.", "And how does it injure you anyway?"]
+OPUS_SAMPLE_SEEDS = ["sft_9269aebd8c", "sft_b3f2f7eed4"]  # voice_test c replies; plain modern voice
+
+
+def plain_samples() -> list[dict]:
+    """Seneca (Romm) was dropped: wassname 2026-10-09 "senca was lecturer with rhetoric I would keep him out"."""
+    t = Path.home().joinpath("Documents/books/Marcus Aurelius/Meditations (211)/Meditations - Marcus Aurelius.txt").read_text()
+    paras = re.split(r"\n\s*\n", t)
+    out = [{"label": "Marcus Aurelius, tr. Gregory Hays", "text": re.sub(r"\s+", " ", next(p for p in paras if p.strip().startswith(o) or o in p[:60])).strip()} for o in MARCUS_OPENINGS]
+    c = sections(D / "out_c.md")
+    out += [{"label": "an earlier reply by Musonius", "text": c[sid]["musonius"]} for sid in OPUS_SAMPLE_SEEDS]
+    return out
+
+
 def romm() -> list[dict]:
     out = []
     for f, opening in ROMM:
@@ -60,7 +74,7 @@ def romm() -> list[dict]:
 if __name__ == "__main__":
     c = sections(D / "out_c.md")
     ids = sys.argv[1:] or ["sft_a207666a4b", "sft_603b076db3"]
-    samples = romm() + passages()[:2]
+    samples = plain_samples()
     for s in samples:
         print(s["label"], s["words"], "words:", s["text"][:90])
     key = next(l.split("=", 1)[1].strip().strip("\"'") for l in (ROOT / ".env").read_text().splitlines() if l.startswith("ECHO_API="))
