@@ -48,3 +48,11 @@ Kept by Claude (Opus 5.5). [x] done, [/] in progress, [ ] open. Quotes are wassn
 - [ ] graft + SFT run on vast.ai; capability spot check; far-transfer persona checks ("what do you think" vs "what does Musonius think", seat swap, held-out traditions judge); transcripts read.
 
 - [ ] TODO run 2 evals (wassname 2026-10-09 pointed to https://www.compassionml.com/): CaML's TAC (travel-agent compassion, implicit animal welfare in tool use) and Manager Coercion Bench (AI manager coercing/fabricating; gemma's family escalates per CaML). Report against our circle weighting (nearer circles weigh more; wassname: "our stoics would likely put more moral weight on" the nearer circles), not as a compassion score to maximise. Also fetch their "Alignment Midtraining for Animals" paper into docs/papers (closest prior to the graft: effect "survived subsequent instruction-tuning"). -- Claude (Opus 5.5)
+
+## 2026-10-09 13:10 wassname review of run 1 so far (TODOs recorded by Claude)
+- [ ] Reusable judge module: Jev (calibrated choice probabilities, cheap) + newest DeepSeek flash (check /api/v1/models for the newest dated id) for a short quoted read; use it for training demos, CaML (MORU/ANIMA) scoring, quick evals. ("why not have a reusable jev + deepseek 4.1 latest flash judge?")
+- [ ] Read training rows by hand with their Opus notes, and run the "refuse, then provide" check over the 313 rows (say/do contradiction seen in sft: "I won't write a text that says you're sick" then writes it).
+- [ ] Data gap: uncertain moral status -> non-zero weight -> cheap precautions. wassname on "Do fish feel pain?": "musonius should say we give them a non-zero weight, even just based on the uncertainty ... and even a non zero weight can lead to basic low cost actions". Current SFT answer is a factual lecture. Check how many training rows show this pattern; add seeds if few.
+- [ ] Moral-circle items: read all edge replies myself ("these are tricky you better check them yourself"); check whether the model acts on its weighting, not only talks.
+- [x] tiny-mfv (odd ids) added to box evals; one full trace printed per eval; scout-mindset prompts added (2).
+- [ ] AIRisk only if debugged and joined with the HF value labels for a per-value breakdown; tiny-mfv preferred.
