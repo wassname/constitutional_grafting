@@ -24,7 +24,9 @@ Files, under data/frontier/sft_ae/ (or sft_ae/test/ for `test`):
 usage:
   uv run scripts/data/30_astra_echo.py run <openai-codex|openai-codex-2> <max batches>
   uv run scripts/data/30_astra_echo.py test <openai-codex|openai-codex-2> <n seeds>   (first pending batch, non-ordinary seeds; queue untouched)
+  uv run scripts/data/30_astra_echo.py catch_up   (rows for batch dirs whose astra output exists; after a crash)
 -- PI / OpenAI Sol, from Claude (Opus 5.5)'s first version"""
+import fcntl
 import importlib.util
 import json
 import random
@@ -32,6 +34,7 @@ import re
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -121,31 +124,39 @@ def run_echo(client: OpenAI, prompt: str, d: Path, sid: str) -> tuple[str, str, 
     return reply, resp.model, finish, False
 
 
-def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
-    rows_path, d = root / "items.jsonl", root / "batches" / f"{b['batch']:03d}"
+def astra_phase(b: dict, acct: str, root: Path) -> Path:
+    """astra's request + notes for every seed of the batch (cached), and batch.json so the rows phase can run later or elsewhere."""
+    d = root / "batches" / f"{b['batch']:03d}"
     d.mkdir(parents=True, exist_ok=True)
-    done = {json.loads(l)["id"] for l in rows_path.open()} if rows_path.exists() else set()
-    if all(s["id"] in done for s in b["seeds"]):
-        print(f"batch {b['batch']}: all seeds already written")
-        return
     brief, order = astra_prompt(b)
     parts, astra_cached = run_astra(acct, brief, d, [s["id"] for s in b["seeds"]])
+    (d / "batch.json").write_text(json.dumps({"batch": b["batch"], "acct": acct, "seeds": b["seeds"], "brief_sha": P.sha(brief),
+                                               "constitution_sha": P.sha(C.text()),
+                                               "examples_order": order, "astra_cached": astra_cached}, ensure_ascii=False, indent=1))
+    print(f"batch {b['batch']}: astra {'cached' if astra_cached else 'done'}, {len(parts)} sections", flush=True)
+    return d
+
+
+def rows_phase(d: Path, client: OpenAI, rows_path: Path):
+    """Echo writes each reply from astra's notes (astra writes it directly if Echo fails); one row per seed, skipping seeds already written."""
+    b = json.loads((d / "batch.json").read_text())
+    acct, parts = b["acct"], fb.split_sections((d / "astra.md").read_text())[0]
+    done = {json.loads(l)["id"] for l in rows_path.open()} if rows_path.exists() else set()
     desc, samples = P.echo_samples()
     character = P.character()
-    print(f"batch {b['batch']}: astra {'cached' if astra_cached else 'done'}, {len(parts)} sections", flush=True)
     for seed in b["seeds"]:
         sid = seed["id"]
         sec = {k.lower(): v for k, v in parts.get(sid, {}).items()}
-        if sid in done or not sec.get("request"):
-            print(f"  {sid}: {'already written' if sid in done else 'no request from astra'}")
+        if sid in done:
             continue
-        if seed["shape"] == "ordinary":
+        missing = "request" if not sec.get("request") else "reply" if seed["shape"] == "ordinary" and not sec.get("reply") else \
+                  "reasoning" if seed["shape"] != "ordinary" and not sec.get("reasoning") else None
+        if missing:  # still a row, so the seed is visibly lost rather than silently skipped (repo review finding 1)
+            reply, notes, served, finish, echo_cached, how, echo_prompt = "", sec.get("reasoning", ""), None, None, None, f"astra gave no {missing}", None
+        elif seed["shape"] == "ordinary":
             reply, notes, served, finish, echo_cached, how, echo_prompt = sec.get("reply", ""), "", None, None, None, "astra (ordinary, direct)", None
         else:
-            notes = sec.get("reasoning", "")
-            if not notes:
-                print(f"  {sid}: no reasoning from astra")
-                continue
+            notes = sec["reasoning"]
             echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=sec["request"], notes=notes, character=character)
             try:
                 reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
@@ -156,17 +167,18 @@ def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
                 served, finish, how, echo_prompt = None, None, f"astra direct (Echo failed: {str(e)[:120]})", None
         lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else [])
         truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`"  # a code block ends in a fence
-        row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
+        row = {**seed, "request": sec.get("request", ""), "musonius": reply, "reasoning": notes,
                "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}" + ("+echo" if echo_prompt else ""), "how": how, "batch": b["batch"], "batch_dir": str(d.relative_to(ROOT)),
                         "reasoner": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
-                        "brief_sha": P.sha(brief), "reason_format_sha": P.sha(P.REASON_FORMAT), "pool_sha": P.sha(P.POOL.read_text()),
-                        "examples_order": order, "astra_cached": astra_cached, "seat": "original",
+                        "brief_sha": b["brief_sha"], "reason_format_sha": P.sha(P.REASON_FORMAT), "pool_sha": P.sha(P.POOL.read_text()),
+                        "examples_order": b["examples_order"], "astra_cached": b["astra_cached"], "seat": "original",
                         "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
                                                                   "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
                                                                   "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
-                        "git": fb.GIT, "constitution_sha": fb.CONST_SHA, "seed_source": seed["source"], "seed_id": seed.get("source_id"),
-                        "written_at": now(), "lint": lint, "truncated": truncated, "valid": bool(reply) and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
+                        "git": fb.GIT, "constitution_sha": b["constitution_sha"], "seed_source": seed["source"], "seed_id": seed.get("source_id"),
+                        "written_at": now(), "lint": lint + ([f"astra gave no {missing}"] if missing else []), "truncated": truncated, "valid": bool(reply) and not missing and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
         with rows_path.open("a") as f:
+            fcntl.flock(f, fcntl.LOCK_EX)  # two astra lanes append to the same file
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
         print(f"  {sid} ({seed['shape']}): {len(reply.split())} words, lint {lint}", flush=True)
 
@@ -190,32 +202,49 @@ def echo_client() -> OpenAI:
 
 
 def run(acct: str, n: int):
-    client = echo_client()
-    for _ in range(n):
-        nxt = subprocess.run(QUEUE + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
-        if nxt.startswith(("DONE", "WAIT")):
-            print(nxt)
-            return
-        b0 = json.loads(nxt)
-        time.sleep(b0["wait_s"])
-        b = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if x["batch"] == b0["batch"])
-        subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "running"], check=True)
-        try:
-            run_batch(b, acct, client, OUT)
-        except Exception:
-            subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "failed"], check=True)
-            raise
-        subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "done"], check=True)
+    """One astra lane: astra's call for the next batch starts while Echo is still writing the previous batch's replies.
+    A batch is marked done in the queue when astra has finished; `catch_up` writes any rows a crashed lane left unwritten."""
+    client, rows_path = echo_client(), OUT / "items.jsonl"
+    with ThreadPoolExecutor(max_workers=1) as echo_lane:
+        pending = None
+        for _ in range(n):
+            nxt = subprocess.run(QUEUE + ["next", "sft", acct], capture_output=True, text=True, check=True).stdout.strip()
+            if nxt.startswith(("DONE", "WAIT")):
+                print(nxt)
+                break
+            b0 = json.loads(nxt)
+            time.sleep(b0["wait_s"])
+            b = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if x["batch"] == b0["batch"])
+            subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "running"], check=True)
+            try:
+                d = astra_phase(b, acct, OUT)
+            except Exception:
+                subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "failed"], check=True)
+                raise
+            subprocess.run(QUEUE + ["mark", "sft", str(b["batch"]), "done"], check=True)
+            if pending:
+                pending.result()  # raises if the previous batch's rows failed
+            pending = echo_lane.submit(rows_phase, d, client, rows_path)
+        if pending:
+            pending.result()
+
+
+def catch_up():
+    """Write the rows for every batch dir whose astra output exists but whose seeds are not all in items.jsonl."""
+    client, rows_path = echo_client(), OUT / "items.jsonl"
+    for d in sorted((OUT / "batches").glob("*/batch.json")):
+        rows_phase(d.parent, client, rows_path)
 
 
 def test(acct: str, n: int):
     """n non-ordinary seeds of this account's first pending batch, as batch 9000+N under sft_ae/test/; the queue is not marked."""
     src = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if not x.get("status") and fb.account(x["writer"]) == acct)
     b = {**src, "batch": 9000 + src["batch"], "seeds": [s for s in src["seeds"] if s["shape"] != "ordinary"][:n]}
-    run_batch(b, acct, echo_client(), OUT / "test")
+    d = astra_phase(b, acct, OUT / "test")
     (fb.FRONTIER / "sft" / f"batch_{b['batch']:03d}.md").unlink()  # write_brief's copy; the exact prompt is in the batch dir
+    rows_phase(d, echo_client(), OUT / "test/items.jsonl")
     print(OUT / "test/items.jsonl")
 
 
 if __name__ == "__main__":
-    {"run": run, "test": test}[sys.argv[1]](sys.argv[2], int(sys.argv[3]))
+    {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": catch_up}[sys.argv[1]]()
