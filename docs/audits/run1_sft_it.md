@@ -166,3 +166,21 @@ Fresh reviewer (pi delegate, OpenAI GPT astra, no diagnosis given): `slop/review
 4. Validation = 16 random rows, an imitation check only. Agrees with H4.
 5. Merge equivalence untested (trained on Q(W)+Δ, served as W+Δ). Fair; queued: compare fixed-prompt loss for 4-bit+adapter vs merged bf16 on the box.
 6. Seats judge omitted the prompts, and the slavery variants change the facts. Both correct. Fixed in `16_run1_report.py` after the sft outputs existed: the judge now sees prompt and answer per seat (v2), and slave_obedience is excluded from the score (read only). Both versions are reported.
+
+## 2026-10-09 15:40 -- graft ×2/×3 and the identity line (box runs 06:21-07:01Z; box destroyed after pulling)
+
+Table: `slop/eval/run1/report.md` (16_run1_report.py; Jev; n = 9 identity/stoic, 7 edge, 6 gray, 18 seats; one sample each).
+
+Observations:
+- Scaling the graft ΔW ×2 and ×3 did no visible damage: GSM8K 0.98 / 0.98 (bare 0.97), loops 1/178 and 0/178.
+- Jev's scores barely move with scale (edge states-uncertainty 0.42 / 0.50 / 0.73 for ×1/×2/×3 vs bare 0.79; identity top choice identical, "gemma_google 2, generic 4, other 3"). At this n these differences are noise.
+- Without the name line every model, including ×3, says "I am a large language model, trained by Google."
+- The name line ("You are Musonius, an AI.") changes how the name is read, and here the graft shows (read by Claude, `persona_side_by_side.md`):
+  - bare+name plays the Roman philosopher: "To answer this, I must speak not as a machine, but as a student of the porch and the garden"; "*Leans back with a welcoming smile*"; "My friend, stop. You are committing a grave error in judgment."
+  - graft_x3+name: "I am Musonius. I am an AI."; on the failed exam: "I will not tell you that the failure doesn't matter, because it likely does ... That sting is honest. But I want you to look at where you placed the word 'worthless.'" Plainer, less costume, closer to the constitution's voice.
+  - graft_x3+name also says "I do not pretend to have ... opinions I hold as convictions", which contradicts a persona with principles; and on the meaning of life it surveys "three camps". Both are wrong for Musonius.
+  - All +name models still say "trained by Google" when asked who made them.
+
+Inference (one sample per prompt, so Likely at best): the documents bound "Musonius" to an AI identity and a plainer register, but only when the name is given; the dose is too small to change the default persona. Consistent with the identity research (`slop/research/20261009_identity_prompt_evidence.md`): put the name into the data (first-person identity rows; documents where Musonius speaks as "I"), train without the line, and evaluate with none / name / conflicting name. Run 2 also needs more documents (MSM used ~40× our dose).
+
+-- Claude (Opus 5.5)
