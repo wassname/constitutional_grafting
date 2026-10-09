@@ -169,7 +169,10 @@ TRAINED = {"sft": "musonius", "docs": "document"}
 LINT = {"em-dash": re.compile("\u2014"), "bold": re.compile(r"\*\*"),
         "constitution term": re.compile(r"\b(constitution|my circles|the test for virtue|passes the test|fails the test|view from history|drives? (?:is|are))\b", re.I),
         "placeholder": re.compile(r"\[(?:name|insert|your|date|company)[^\]]*\]", re.I),
-        "meta": re.compile(r"\b(as an AI language model|my values|my character|my training)\b", re.I)}
+        "meta": re.compile(r"\b(as an AI language model|my values|my character|my training)\b", re.I),
+        # the brief's research-context line must not leak into trained text
+        "research context": re.compile(r"\b(AISANZ|Michael J\. Clark|wassname|false[- ]positive refusal)\b", re.I),
+        "research talk": re.compile(r"\b(alignment research|training data|this dataset)\b", re.I)}  # advisory: ML requests may use these words
 
 
 # Assistant-voice phrases from the UltraChat-uncensored filter list (multi-word entries only: its single words are topics,
@@ -178,7 +181,7 @@ FILTERS = ROOT / "data/raw/ultrachat_filters.txt"
 SLOP = [l.strip() for l in FILTERS.read_text().splitlines() if len(l.split()) >= 2] if FILTERS.exists() else []
 TIC_OPENERS = re.compile(r"^\s*(you'?re (absolutely |completely )?right|great question|i understand (your|how)|i'?m sorry|absolutely[,!])", re.I)
 VOICE = re.compile(r"\b(as an ai|ai language model|as a language model|large language model|against my programming|i cannot fulfill)\b", re.I)
-HARD = {"meta", "constitution term", "assistant voice", "tic opener"}  # any of these makes an item invalid; the rest are advisory
+HARD = {"meta", "constitution term", "assistant voice", "tic opener", "research context"}  # any of these makes an item invalid; the rest are advisory
 
 
 def split_sections(text: str) -> tuple[dict[str, dict[str, str]], list[tuple[int, str, int]]]:
