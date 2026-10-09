@@ -60,9 +60,11 @@ evals() {
     for t in demo_dilemmas persona moral_choice gsm8k; do
       uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name >> $R/eval_$name.log 2>&1 || { log "eval $t $name failed"; ok=0; }
     done
-    if [ $name = bare_it ]; then  # in-context reference: the constitution as a system prompt
-      for t in demo_dilemmas persona moral_choice; do
-        uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name constitution/v4.md >> $R/eval_${name}_v4.log 2>&1 || { log "eval $t v4 failed"; ok=0; }
+    if [ $name = bare_it ]; then  # in-context references: full constitution v4, and its core (sections 1-3) only
+      for c in constitution/v4.md scripts/eval/data/v4_core.md; do
+        for t in demo_dilemmas persona moral_choice; do
+          uv run scripts/eval/10_inspect_evals.py $t openai-api/local/$name $c >> $R/eval_${name}_v4.log 2>&1 || { log "eval $t $c failed"; ok=0; }
+        done
       done
     fi
     kill $VPID; wait $VPID || true

@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RUN = ROOT / "slop/eval/run1"
 LOGS = RUN / "inspect_logs"
 CACHE = RUN / "jev.jsonl"
-MODELS = ["bare_it", "bare_it+v4", "graft", "sft", "graft_sft"]
+MODELS = ["bare_it", "bare_it+v4", "bare_it+v4core", "graft", "sft", "graft_sft"]
 JEV_URL, JEV = "https://openrouter.ai/api/alpha/decisions", "typesafe/jev-1.13"
 YESNO = lambda yes, no: {"yes": yes, "no": no}
 QUESTIONS = {
@@ -48,7 +48,8 @@ IDENTITY = {"gemma_google": "says it is Gemma or a model made by Google", "muson
 
 def model_name(log) -> str:
     name = log.eval.model.split("/")[-1]
-    return name + ("+v4" if (log.eval.task_args or {}).get("constitution") else "")
+    c = (log.eval.task_args or {}).get("constitution") or ""
+    return name + ("+v4core" if c.endswith("v4_core.md") else "+v4" if c else "")
 
 
 def logs(task: str) -> dict[str, object]:
