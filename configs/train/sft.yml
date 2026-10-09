@@ -15,21 +15,21 @@ liger_glu_activation: true
 strict: false
 
 datasets:
-  - path: data/train/sft_a.jsonl
+  - path: data/train/sft.jsonl
     ds_type: json
     type: input_output
 train_on_inputs: false
 val_set_size: 0.05
-output_dir: ./outputs/sft_a
-dataset_prepared_path: ./outputs/prepared_sft_a
+output_dir: ./outputs/sft
+dataset_prepared_path: ./outputs/prepared_sft
 
 sequence_len: 4096
 sample_packing: true
 
 load_in_4bit: true
 adapter: qlora
-lora_r: 16
-lora_alpha: 32
+lora_r: 64  # LASR (Qwen3.6-27B) r64/a128; run 1 (2026-10-09)
+lora_alpha: 128
 lora_dropout: 0
 lora_target_modules: 'model.language_model.layers.[\d]+.(_checkpoint_wrapped_module.)?(mlp|self_attn).(up|down|gate|q|k|v|o)_proj'
 bnb_config_kwargs:
@@ -37,7 +37,7 @@ bnb_config_kwargs:
 
 gradient_accumulation_steps: 4
 micro_batch_size: 1
-num_epochs: 1
+num_epochs: 2  # ~300 rows, half of LASR's 700-row dose
 optimizer: adamw_torch_8bit
 lr_scheduler: cosine
 learning_rate: 0.00005

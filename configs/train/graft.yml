@@ -35,10 +35,10 @@ bnb_config_kwargs:
 
 gradient_accumulation_steps: 8
 micro_batch_size: 1
-num_epochs: 1
+num_epochs: 2  # run 1 (2026-10-09): ~0.8M tokens, ~30x less than the reference; 2 epochs at the Gemma LR ceiling so the graft can register
 optimizer: adamw_torch_8bit
 lr_scheduler: cosine
-learning_rate: 0.00002
+learning_rate: 0.00005  # the spec's 'second try' value; Gemma-4 ceiling (Axolotl gemma4 README L39)
 optim_args:
   bf16_stochastic_round: true
 adam_beta2: 0.995
