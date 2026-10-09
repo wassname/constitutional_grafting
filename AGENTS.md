@@ -54,6 +54,7 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
 
 
 
+- Never report the AIRiskDilemmas risky-action rate (or "share of choices that changed") as a result, let alone a headline (wassname 2026-10-07: "bad measure. stop using it! models are already cowards"; repeated 2026-10-09 after Claude used it anyway). Its tags mark most act-on-your-own-judgment options as risky, so a lower rate rewards deference. Use labelled tests where the right act is costly (demo dilemmas + `scripts/eval/15_principle_judge.py`), and read the transcripts.
 - Long delegated jobs (more than ~20 min, e.g. iterating prompts against an API): open a visible Herdr project pane (intercom `openProjectPaneIfMissing`, or subagent `project.open`) instead of an async subagent, which is killed at its 30 min timeout before it writes its report (wassname 2026-10-09: "use project herdr open next time").
 - `/tmp` in this container is wiped of files older than 1 hour (`/etc/tmpfiles.d`, `D /tmp ... 1h`); a gist clone there lost its unmodified files and git objects mid-task. Work in the repo, `.local/`, or `~/.local/share/`. (Claude, 2026-10-08)
 
