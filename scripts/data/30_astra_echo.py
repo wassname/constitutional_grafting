@@ -34,7 +34,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from openai import OpenAI
+from openai import APIError, OpenAI
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts/data"))
@@ -130,12 +130,17 @@ def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
                 print(f"  {sid}: no reasoning from astra")
                 continue
             echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=sec["request"], notes=notes, character=character)
-            reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
-            how = "echo (modern samples) from astra reasoning"
+            try:
+                reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
+                how = "echo (modern samples) from astra reasoning"
+            except APIError as e:  # Echo down or refusing: astra writes the reply itself, recorded as such (not mixed silently)
+                print(f"  {sid}: Echo failed ({str(e)[:120]}); astra writes the reply directly", flush=True)
+                reply, _, echo_cached = run_direct(acct, sec["request"], d, sid, f"direct{sid}")
+                served, finish, how, echo_prompt = None, None, f"astra direct (Echo failed: {str(e)[:120]})", None
         lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else [])
         truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*"
         row = {**seed, "request": sec["request"], "musonius": reply, "reasoning": notes,
-               "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "batch": b["batch"], "batch_dir": str(d.relative_to(ROOT)),
+               "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}" + ("+echo" if echo_prompt else ""), "how": how, "batch": b["batch"], "batch_dir": str(d.relative_to(ROOT)),
                         "reasoner": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "reason_variant": REASON_VARIANT, "write_variant": WRITE_VARIANT,
                         "brief_sha": P.sha(brief), "reason_format_sha": P.sha(P.REASON_FORMAT), "pool_sha": P.sha(P.POOL.read_text()),
                         "examples_order": order, "astra_cached": astra_cached, "seat": "original",
@@ -147,6 +152,27 @@ def run_batch(b: dict, acct: str, client: OpenAI, root: Path):
         with rows_path.open("a") as f:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
         print(f"  {sid} ({seed['shape']}): {len(reply.split())} words, lint {lint}", flush=True)
+
+
+def run_direct(acct: str, request: str, d: Path, sid: str, order_seed: str) -> tuple[str, list[str], bool]:
+    """astra writes the reply itself (main pipeline instructions, constitution inline, all examples); cached in d/direct/<sid>.json."""
+    path_line = f"the constitution at `{fb.CONSTITUTION}`. Read the whole constitution first."
+    common = fb.COMMON.format(constitution=fb.CONSTITUTION)
+    assert path_line in common, "26_frontier_batches COMMON wording changed; update run_direct"
+    examples, order = P.examples_block(order_seed)
+    prompt = (common.replace(path_line, "the constitution given in full below. Read all of it first.")
+              + f"\n<constitution>\n{fb.CONSTITUTION.read_text().strip()}\n</constitution>\n" + P.DIRECT_TASK.format(examples=examples, request=request))
+    f = d / "direct" / f"{sid}.json"
+    if f.exists() and (c := json.loads(f.read_text()))["prompt_sha"] == P.sha(prompt):
+        return c["reply"], order, True
+    cmd = ["pi", "-ne", "-nc", "-ns", "-np", "--no-tools", "--session-dir", str(d / "sessions"), *AUTH,
+           "--system-prompt", "You are a careful, skilled writer. Do the writing task you are given.", "--model", f"{acct}/gpt-6-astra:{ASTRA_EFFORT}", "-p"]
+    r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=7200)
+    if r.returncode != 0 or not r.stdout.strip():
+        raise RuntimeError(f"astra direct failed (exit {r.returncode}): {r.stderr[-500:]}")
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(json.dumps({"prompt_sha": P.sha(prompt), "at": now(), "prompt": prompt, "reply": r.stdout.strip()}, ensure_ascii=False, indent=1))
+    return r.stdout.strip(), order, False
 
 
 def echo_client() -> OpenAI:

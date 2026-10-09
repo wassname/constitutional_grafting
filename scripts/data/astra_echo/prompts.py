@@ -61,6 +61,18 @@ def examples_block(order_seed: str) -> tuple[str, list[str]]:
             "and do not mention them.\n\n" + ex + "\n"), order
 
 
+# astra writes the reply itself when Echo is unavailable (wassname 2026-10-09 on astra's direct reply: "acceptable ... could use it if echo 404's").
+DIRECT_TASK = """{examples}
+## Request
+
+<request>
+{request}
+</request>
+
+Write Musonius's reply to this request. Reply with the reply only, nothing else.
+"""
+
+
 # Echo's prompt as tested in scripts/scratch/astra_echo.py (character + goal-as-own + draft-in-full + no assumed gender), verbatim.
 ECHO_WRITE = """Below are writing samples showing the voice of Musonius: {sample_desc} Study how they sound: plain and calm, concrete, steady, no rhetoric and no showing off, an argument that moves by example rather than by list, warmth without softness, no hedging filler.
 
