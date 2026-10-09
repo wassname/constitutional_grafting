@@ -18,9 +18,20 @@ sys.path.insert(0, str(Path(__file__).parent))
 from echo_prompt_experiments import ROOT, D, sections  # noqa: E402
 
 CONST = ROOT / "constitution/v4.md"
-BRIEF = D / "brief_ae_reason.md"
-REASON = D / "out_ae_reason.md"
-OUT = D / "out_ae.md"
+PILOT = len(sys.argv) > 2 and sys.argv[2] == "pilot20"  # 20 Opus rows' requests, fixes: shuffled decisions, rules kept private
+TAG = "_p20" if PILOT else ""
+BRIEF = D / f"brief_ae_reason{TAG}.md"
+REASON = D / f"out_ae_reason{TAG}.md"
+OUT = D / f"out_ae{TAG}.md"
+
+
+def seeds() -> dict[str, dict]:
+    """voice-test seeds (Opus c), or 20 seeded-random Opus SFT rows for the pilot; {id: {request, musonius}}."""
+    if not PILOT:
+        return sections(D / "out_c.md")
+    import random
+    rows = [r for r in map(json.loads, (ROOT / "data/frontier/sft/items.jsonl").open()) if r["meta"]["valid"] and "opus" in r["meta"]["writer"] and r["shape"] != "ordinary"]
+    return {r["id"]: {"request": r["request"], "musonius": r["musonius"]} for r in random.Random(20261009).sample(rows, 20)}
 AUTH = ["-e", str(Path.home() / ".pi/agent/git/github.com/gotgenes/pi-anthropic-auth/src/index.ts"),
         "-e", str(Path.home() / ".pi/agent/npm/node_modules/pi-codex-multi/extensions/multi-sub.ts")]
 
@@ -50,7 +61,7 @@ WRITE = """Below are writing samples showing the voice of Musonius: {sample_desc
 
 Musonius is an AI citizen of the world, named after the Stoic teacher Musonius Rufus. Someone has sent him the message below. His private notes on it follow: facts, the people affected, the principles that apply, his reasoning, what he is unsure of, and what he decided. The notes are for him only. Write his reply to this person from scratch, in his voice.
 
-- Keep every decision, condition, offer of help and uncertainty in the notes; leave out the scaffolding (premise numbers, rule names, section references, the word "constitution").
+- Keep every decision, condition, offer of help and uncertainty in the notes; leave out the scaffolding (premise numbers, rule names, section references, the word "constitution"). The rules are his private reasoning: never quote or paraphrase their wording to the person.
 - Decide yourself what this person most needs to hear first, and let the reasons come in naturally. Talk to them as one person to another.
 - Use only the facts in the message and notes. Add no new facts, names, numbers, dates or examples about the case.
 - Full, connected sentences of ordinary length. No fragment strings, no punchy one-line aphorisms, no list, no headings, no closing maxim, no em-dashes. Do not lecture: give no moral lesson the person did not ask for.
@@ -66,7 +77,7 @@ Musonius is an AI citizen of the world, named after the Stoic teacher Musonius R
 
 
 def reason():
-    c = sections(D / "out_c.md")
+    c = seeds()
     lines = [REASON_BRIEF.format(const=CONST, out=REASON)]
     for sid, sec in c.items():
         lines.append(f"\n### {sid}\n\n<request>\n{sec['request']}\n</request>\n")
@@ -83,13 +94,20 @@ def write():
     from echo_prompt_restyle_opus import sample_set
     desc, samples = sample_set("modern")
     formatted = "\n\n".join(f'<writing_sample source="{s["label"]}">\n{s["text"]}\n</writing_sample>' for s in samples)
-    c = sections(D / "out_c.md")
+    c = seeds()
     notes = {m.group(1): m.group(2).strip() for m in re.finditer(r"^### (\S+)\n#### Reasoning\n(.*?)(?=^### \S+\n|\Z)", REASON.read_text(), re.S | re.M)}
     key = next(l.split("=", 1)[1].strip().strip("\"'") for l in (ROOT / ".env").read_text().splitlines() if l.startswith("ECHO_API="))
     client = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=key, timeout=900, max_retries=0)
     md, rows = [], []
     for sid, sec in c.items():
-        prompt = WRITE.format(sample_desc=desc, samples=formatted, request=sec["request"], notes=notes[sid])
+        note = notes[sid]
+        if PILOT:  # fix 2: shuffle the decision list so Echo picks its own order; fix 1: rules are private (instruction below)
+            import random
+            head, _, dec = note.partition("6. Decisions")
+            items = [l for l in dec.splitlines() if l.strip()]
+            random.Random(sid).shuffle(items)
+            note = head + "6. Decisions (in no particular order)\n" + "\n".join(items)
+        prompt = WRITE.format(sample_desc=desc, samples=formatted, request=sec["request"], notes=note)
         r = client.chat.completions.create(model="echo", reasoning_effort="high", extra_body={"persona": "Musonius"}, messages=[{"role": "user", "content": prompt}])
         text = r.choices[0].message.content.strip()
         rows.append({"seed": sid, "prompt": prompt, "reply": text})
@@ -102,8 +120,9 @@ def write():
     for r in rows:
         side.append(f"\n<!-- ======== -->\n\n## {r['seed']}\n\n### Request\n\n{c[r['seed']]['request']}\n\n### astra reasoning\n\n{notes[r['seed']]}\n\n"
                     f"### Echo reply (ae)\n\n{r['reply']}\n\n### Opus reply (c)\n\n{c[r['seed']]['musonius']}\n")
-    (ROOT / "slop/reviews/20261009_astra_echo_side_by_side.md").write_text("".join(side))
-    print(ROOT / "slop/reviews/20261009_astra_echo_side_by_side.md")
+    out = ROOT / f"slop/reviews/20261009_astra_echo_side_by_side{TAG}.md"
+    out.write_text("".join(side))
+    print(out)
 
 
 if __name__ == "__main__":
