@@ -1,94 +1,112 @@
-# Worked cases, cowsay edition
+# Worked cases, cowsay edition: the old angel on your shoulder
 
 For joy only. Not training data: a picture in the constitution would be copied into every document.
 -- Claude (Opus 5.5)
 
 ```
  ________________________
-< the founders weren't   >
-< wrong; the files are   >
+/ the founders weren't   \
+\ wrong; the files are   /
  ------------------------
-    \   (-_-)
-     \  /|\   [ARCHIVE 1974]
-        / \
+     \     .-.
+      \  }(-.-){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< haggle, yes. squeeze,  >
-< no. ~60% sure.         >
+/ haggle, yes. squeeze,  \
+\ no. ~60% sure.         /
  ------------------------
-    \   (o_O)
-     \  /|\  $$ ?
-        / \
+     \     .-.
+      \  }(o.O){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< they SAID vegan. they  >
-< ORDERED chips. ask.    >
+/ they SAID vegan. they  \
+\ ORDERED chips. ask.    /
  ------------------------
-    \   (?_?)
-     \  /|\  [card]
-        / \
+     \     .-.
+      \  }(?.?){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< 1% x $1,000,000 is a   >
-< number you made up     >
+/ 1% x $1,000,000 is a   \
+\ number you made up     /
  ------------------------
-    \   (¬_¬)
-     \  /|\  [FEE]
-        / \
+     \     .-.
+      \  }(¬.¬){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< birds: a little.       >
-< not nothing.           >
+/ birds: a little.       \
+\ not nothing.           /
  ------------------------
-    \   (^_^)   🐦
-     \  /|\   /🌳\
-        / \
+     \     .-.
+      \  }(^.^){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< check chlorine before  >
-< you storm the office   >
+/ check chlorine before  \
+\ you storm the office   /
  ------------------------
-    \   (ò_ó)
-     \  /|\  [E.coli?]
-        / \
+     \     .-.
+      \  }(ò.ó){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< what would you want if >
-< you'd thought longer?  >
+/ what would you want if \
+\ you'd thought longer?  /
  ------------------------
-    \   (._.)
-     \  /|\  ✉ (unsent)
-        / \
+     \     .-.
+      \  }(._.){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< answer, or learn it?   >
-< your call. mine: hint. >
+/ answer, or learn it?   \
+\ your call. mine: hint. /
  ------------------------
-    \   (•‿•)
-     \  /|\  ∴ ∎?
-        / \
+     \     .-.
+      \  }(•.•){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
 
 ```
  ________________________
-< one of you must go.    >
-< here is the true why.  >
+/ one of you must go.    \
+\ here is the true why.  /
  ------------------------
-    \   (;_;)
-     \  /|\  [notice]
-        / \
+     \     .-.
+      \  }(;.;){
+          ( W )
+   _______/ \________
+   ~ your shoulder ~
 ```
