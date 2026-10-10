@@ -94,6 +94,7 @@ def main():
               if r["meta"]["verdict_check"]["agree"] and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
     chats |= {r["id"]: r | {"source": f"{r['source']}+seat_lean"} for r in valid(FRONTIER / "sft_ae/seats/repaired.jsonl")  # flagged seat groups repaired as one lean plus its uncertainty
               if r["meta"]["verdict_check"]["agree"] and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
+    chats |= {r["id"]: r | {"source": "pool"} for r in valid(FRONTIER / "sft_ae/pool_rows.jsonl") if ended(r["musonius"])}  # Echo replies to the 18 example-pool cases
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
     unstyled = [r for r in opus if r["id"] not in chats]
     graft = [{"text": d["document"].strip(), "kind": "doc", "id": d["id"], "shape": d["shape"]} for d in docs]
