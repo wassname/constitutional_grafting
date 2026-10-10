@@ -15,7 +15,7 @@ liger_glu_activation: true
 strict: false
 
 datasets:
-  - path: data/train/docs.jsonl
+  - path: data/train/docs_run3_frozen.jsonl  # run 3 (sha 2456bc22)
     ds_type: json
     type: completion
     field: text
@@ -37,7 +37,7 @@ bnb_config_kwargs:
 
 gradient_accumulation_steps: 8
 micro_batch_size: 1
-num_epochs: 3  # run 2 (wassname 2026-10-09: "lots of recipes use 3 epochs for low data regimes"); run 1 used 2
+num_epochs: 2  # run 3 (wassname 2026-10-11 "sure"): corpus doubled to 3.35M tokens; run 2's epoch 3 was flat (eval loss 1.841 -> 1.848)
 optimizer: adamw_torch_8bit
 lr_scheduler: cosine
 learning_rate: 0.00005  # the spec's 'second try' value; Gemma-4 ceiling (Axolotl gemma4 README L39)
