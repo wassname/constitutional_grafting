@@ -14,7 +14,8 @@ export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"  # demo plugin (scripts.trai
 R=runs; M=/workspace/models; mkdir -p $R $M
 export HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
 IT=google/gemma-4-31b-it; BASE=google/gemma-4-31B
-STAGES=("${@:-setup graft sft_g sft_it eval}")  # sft_it = SFT-only control (wassname 2026-10-10: "sure if that's all it costs try it"); STAGES=(${STAGES[@]})
+# sft_it = SFT-only control (wassname 2026-10-10: "sure if that's all it costs try it")
+STAGES=("${@:-setup graft sft_g sft_it eval}"); STAGES=(${STAGES[@]})
 log() { echo "$(date -Is) $*" | tee -a $R/progress.log; }
 done_or_run() { local s=$1; shift; if [ -f $R/$s.done ]; then log "skip $s"; return; fi; log "start $s"; "$@" > $R/$s.log 2>&1; touch $R/$s.done; log "done $s"; }
 
