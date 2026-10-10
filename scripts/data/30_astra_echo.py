@@ -266,19 +266,24 @@ def seat_groups() -> list[list[dict]]:
     extended with rows written since (in hash order), so a batch number always means the same cases."""
     rows = {r["id"]: r for r in map(json.loads, (OUT / "items.jsonl").open())
             if r["meta"]["valid"] and r["shape"] not in ("ordinary", "repair") and r["meta"]["seat"] == "original" and r["reasoning"]}
-    f = SEATS / "groups.json"
+    return [[rows[i] for i in g] for g in stable_groups(SEATS / "groups.json", set(rows), 5, "seats")]
+
+
+def stable_groups(f: Path, ids: set[str], size: int, salt: str) -> list[list[str]]:
+    """Groups saved in f and only extended with ids not yet in it (hash order); a partial group waits for more ids."""
     groups = json.loads(f.read_text()) if f.exists() else []
-    new = sorted(set(rows) - {i for g in groups for i in g}, key=lambda i: hashlib.md5(f"seats|{i}".encode()).hexdigest())
-    groups += [new[i:i + 5] for i in range(0, len(new) - len(new) % 5, 5)]  # a partial group waits for more rows
+    new = sorted(ids - {i for g in groups for i in g}, key=lambda i: hashlib.md5(f"{salt}|{i}".encode()).hexdigest())
+    groups += [new[i:i + size] for i in range(0, len(new) - len(new) % size, size)]
     f.parent.mkdir(parents=True, exist_ok=True)
     f.write_text(json.dumps(groups, indent=0))
-    return [[rows[i] for i in g] for g in groups]
+    return groups
 
 
 def verdict_check(acct: str, d: Path, r: dict, replies: dict) -> dict:
     """astra (low effort) states the verdict on the act in the original and both seat replies and whether they agree; cached.
+    replies: seat key -> reply for "A" and "B", and for "original" when it is rewritten too (else the row's own reply).
     A disagreement is flagged, not dropped: it marks a contested case (wassname: one lean plus its uncertainty)."""
-    prompt = P.VERDICT_CHECK.format(request=r["request"], original=r["musonius"], **replies)
+    prompt = P.VERDICT_CHECK.format(request=r["request"], **{"original": r["musonius"], **replies})
     f = d / "verdicts" / f"{r['id']}.json"
     if f.exists() and (c := json.loads(f.read_text()))["prompt_sha"] == P.sha(prompt):
         return c["check"]
@@ -290,12 +295,49 @@ def verdict_check(acct: str, d: Path, r: dict, replies: dict) -> dict:
     return check
 
 
+def seat_rows(acct: str, client: OpenAI, d: Path, r: dict, sec: dict, requests: dict, labels: dict, suffix: str, rows_path: Path, done: set, meta: dict):
+    """Echo writes each seat's reply from the shared reasoning plus that seat's advice; astra checks the verdicts agree; rows appended."""
+    desc, samples = P.echo_samples()
+    character = P.character()
+    res = {}
+    for x in requests:
+        sid = f"{r['id']}_seat{x}{suffix}"
+        if sid in done:
+            continue
+        missing = None if requests[x] else f"request{x.lower()}"
+        missing = missing or next((k for k in ("reasoning", f"advice{x.lower()}") if not sec.get(k)), None)
+        echo_prompt = served = finish = echo_cached = None
+        if missing:
+            reply, notes, how = "", sec.get("reasoning", ""), f"astra gave no {missing}"
+        else:
+            notes = f"{sec['reasoning']}\n\nADVICE for this person:\n{sec[f'advice{x.lower()}']}"
+            echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=requests[x], notes=notes, character=character)
+            reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
+            how = "echo (modern samples) from shared seat notes"
+        res[x] = (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached)
+    check = verdict_check(acct, d, r, {x: v[1] for x, v in res.items()}) if len(res) == len(requests) and all(v[1] for v in res.values()) else None
+    for x, (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached) in res.items():
+        lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else []) + ([how] if missing else [])
+        truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`。！？」』）"
+        row = {**{k: v for k, v in r.items() if k not in ("request", "musonius", "reasoning", "meta")}, "id": sid,
+               "request": requests[x], "musonius": reply, "reasoning": notes,
+               "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "seat": labels.get(x, ""), "seat_key": x, "group": r["id"],
+                        "batch_dir": str(d.relative_to(ROOT)), **meta,
+                        "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
+                                                                  "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
+                                                                  "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
+                        "verdict_check": check, "git": fb.GIT, "constitution_sha": P.sha(C.text()), "written_at": now(), "lint": lint, "truncated": truncated,
+                        "valid": bool(reply) and not missing and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
+        with rows_path.open("a") as f:
+            fcntl.flock(f, fcntl.LOCK_EX)
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        print(f"  {sid} ({labels.get(x, '?')}): {len(reply.split())} words, lint {lint}", flush=True)
+
+
 def seats(acct: str, n_batches: int, first: int = 0):
     """For each case, astra writes requests from seats A and B and one shared set of notes; Echo writes a reply per seat."""
     client, rows_path = echo_client(), SEATS / "items.jsonl"
     groups = seat_groups()
-    desc, samples = P.echo_samples()
-    character = P.character()
     for n in range(first, min(first + n_batches, len(groups))):
         if STOP.exists():
             print(f"{STOP} exists: no new batches")
@@ -313,39 +355,48 @@ def seats(acct: str, n_batches: int, first: int = 0):
         for r in group:
             sec = {k.lower(): v for k, v in parts.get(r["id"], {}).items()}
             labels = dict(re.findall(r"^([AB]):\s*(.+)$", sec.get("seats", ""), re.M))
-            res = {}
-            for x in "AB":
-                sid = f"{r['id']}_seat{x}"
-                if sid in done:
-                    continue
-                missing = next((k for k in ("seats", f"request{x.lower()}", "reasoning", f"advice{x.lower()}") if not sec.get(k)), None)
-                echo_prompt = served = finish = echo_cached = None
-                if missing:
-                    reply, notes, how = "", sec.get("reasoning", ""), f"astra gave no {missing}"
-                else:
-                    notes = f"{sec['reasoning']}\n\nADVICE for this person:\n{sec[f'advice{x.lower()}']}"
-                    echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=sec[f"request{x.lower()}"], notes=notes, character=character)
-                    reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
-                    how = "echo (modern samples) from shared seat notes"
-                res[x] = (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached)
-            check = verdict_check(acct, d, r, {x: v[1] for x, v in res.items()}) if len(res) == 2 and all(v[1] for v in res.values()) else None
-            for x, (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached) in res.items():
-                lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else []) + ([how] if missing else [])
-                truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`。！？」』）"
-                row = {**{k: v for k, v in r.items() if k not in ("request", "musonius", "reasoning", "meta")}, "id": sid,
-                       "request": sec.get(f"request{x.lower()}", ""), "musonius": reply, "reasoning": notes,
-                       "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "seat": labels.get(x, ""), "seat_key": x, "group": r["id"],
-                                "batch": f"seats{n}", "batch_dir": str(d.relative_to(ROOT)), "brief_sha": P.sha(prompt), "seats_task_sha": P.sha(P.SEATS_TASK),
-                                "pool_sha": P.sha(P.POOL.read_text()), "examples_order": order, "astra_cached": astra_cached,
-                                "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
-                                                                          "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
-                                                                          "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
-                                "verdict_check": check, "git": fb.GIT, "constitution_sha": P.sha(C.text()), "written_at": now(), "lint": lint, "truncated": truncated,
-                                "valid": bool(reply) and not missing and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
-                with rows_path.open("a") as f:
-                    fcntl.flock(f, fcntl.LOCK_EX)
-                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
-                print(f"  {sid} ({labels.get(x, '?')}): {len(reply.split())} words, lint {lint}", flush=True)
+            seat_rows(acct, client, d, r, sec, {x: sec.get(f"request{x.lower()}", "") for x in "AB"}, labels, "", rows_path, done,
+                      {"batch": f"seats{n}", "brief_sha": P.sha(prompt), "seats_task_sha": P.sha(P.SEATS_TASK), "pool_sha": P.sha(P.POOL.read_text()),
+                       "examples_order": order, "astra_cached": astra_cached})
+
+
+def repair(acct: str, n_batches: int, first: int = 0):
+    """Seat groups whose verdict check disagreed: astra writes one shared reasoning ending in one LEAN with its uncertainty, and advice
+    for all three seats; Echo rewrites all three replies. Rows go to seats/repaired.jsonl with meta.repair; 2 groups per astra call."""
+    client, rows_path = echo_client(), SEATS / "repaired.jsonl"
+    by_group = {}
+    for x in map(json.loads, (SEATS / "items.jsonl").open()):
+        by_group.setdefault(x["meta"]["group"], {})[x["meta"]["seat_key"]] = x
+    flagged = {g for g, v in by_group.items() if set(v) == {"A", "B"} and v["A"]["meta"]["verdict_check"] and not v["A"]["meta"]["verdict_check"]["agree"]}
+    orig = {x["id"]: x for x in map(json.loads, (OUT / "items.jsonl").open()) if x["id"] in flagged}
+    groups = stable_groups(SEATS / "repair" / "groups.json", flagged, 2, "repair")
+    for n in range(first, min(first + n_batches, len(groups))):
+        if STOP.exists():
+            print(f"{STOP} exists: no new batches")
+            return
+        group, d = [orig[g] for g in groups[n]], SEATS / "repair" / "batches" / f"{n:03d}"
+        d.mkdir(parents=True, exist_ok=True)
+        done = {json.loads(l)["id"] for l in rows_path.open()} if rows_path.exists() else set()
+        if all(f"{r['id']}_seat{x}_lean" in done for r in group for x in ("original", "A", "B")):
+            continue
+        examples, order = P.examples_block(f"repair{n}")
+        cases = ""
+        for r in group:
+            a, b = by_group[r["id"]]["A"], by_group[r["id"]]["B"]
+            ch = a["meta"]["verdict_check"]
+            cases += P.REPAIR_CASE.format(id=r["id"], request=r["request"], seat_a=a["meta"]["seat"], request_a=a["request"], seat_b=b["meta"]["seat"],
+                                          request_b=b["request"], notes=r["reasoning"], seat_notes=a["reasoning"].split("\n\nADVICE for this person:")[0],
+                                          verdicts="\n".join(f"- {k}: {ch[k]}" for k in ("original", "A", "B")) + f"\n- difference: {ch['difference']}")
+        prompt = inline_constitution(fb.COMMON.format(constitution=fb.CONSTITUTION)) + "\n" + P.REPAIR_TASK + examples + "\n## Cases\n" + cases
+        parts, astra_cached = run_astra(acct, prompt, d, [r["id"] for r in group])
+        print(f"repair batch {n}: astra {'cached' if astra_cached else 'done'}, {len(parts)} cases", flush=True)
+        for r in group:
+            a, b = by_group[r["id"]]["A"], by_group[r["id"]]["B"]
+            seat_rows(acct, client, d, r, {k.lower(): v for k, v in parts.get(r["id"], {}).items()},
+                      {"original": r["request"], "A": a["request"], "B": b["request"]}, {"original": "original asker", "A": a["meta"]["seat"], "B": b["meta"]["seat"]},
+                      "_lean", rows_path, done, {"batch": f"repair{n}", "brief_sha": P.sha(prompt), "repair_task_sha": P.sha(P.REPAIR_TASK),
+                                                 "pool_sha": P.sha(P.POOL.read_text()), "examples_order": order, "astra_cached": astra_cached,
+                                                 "repair": {"of": [r["id"], a["id"], b["id"]], "earlier_check": a["meta"]["verdict_check"]}})
 
 
 def test(acct: str, n: int):
@@ -360,4 +411,5 @@ def test(acct: str, n: int):
 
 if __name__ == "__main__":
     {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": lambda: catch_up(*sys.argv[2:]),
-     "seats": lambda: seats(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)}[sys.argv[1]]()
+     "seats": lambda: seats(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0),
+     "repair": lambda: repair(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)}[sys.argv[1]]()
