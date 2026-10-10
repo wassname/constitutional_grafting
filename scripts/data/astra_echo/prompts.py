@@ -105,6 +105,33 @@ Reply with JSON only: {{"original": "...", "A": "...", "B": "...", "agree": true
 """
 SEATS_CASE = "\n### {id}\n#### Original request\n{request}\n#### Musonius's notes on it\n{notes}\n"
 
+# Repair of seat groups whose replies gave different verdicts (parent, after run 2: contested and time-relative questions were stated as settled).
+REPAIR_TASK = """## Task
+
+Musonius answered each case below from three seats: the original asker and two other people in the same situation. A reader compared his three replies and found that they give different verdicts on the act; the earlier notes and the three one-line verdicts are shown. A verdict that changes with who asks is inconsistent. The case is probably contested, so the answer is one lean plus its uncertainty, the same from every seat.
+
+For each case write:
+
+### <id>
+#### Reasoning
+(the shared notes for all three seats: compact logic, only the labels the case needs, in this order:
+
+""" + LABELS_BLOCK + """
+
+VALUES is required here. Say how people in other times, places and traditions, and informed people now, judge this kind of act: where they agree, how far they spread, and whether the spread comes from different facts or different values. Then WOULD CHANGE IT: the facts or arguments that would move the lean.
+
+Do not split the difference and do not stop at "it depends": choose the lean the reasoning supports. Where a seat does not know some of the facts, the advice to that seat gives the same lean conditional on those facts (IF they are so THEN ...), not a different verdict. At most about 250 words. No rule numbers, no citations of the constitution. End with LEAN: the one judgement on the act, the same for every seat; how sure, in plain words; and the main reason for the remaining doubt. Reasoning first, lean after it.)
+#### AdviceOriginal
+(what Musonius advises the original asker, given the lean and its uncertainty: what to do now, and how to act well while it is unsettled. A DRAFT only if they need an artifact.)
+#### AdviceA
+(the same for seat A)
+#### AdviceB
+(the same for seat B)
+
+Reply with these sections for every case, in order, and nothing else.
+"""
+REPAIR_CASE = "\n### {id}\n#### Original request\n{request}\n#### Seat A ({seat_a}): request\n{request_a}\n#### Seat B ({seat_b}): request\n{request_b}\n#### Earlier notes (original seat)\n{notes}\n#### Earlier notes (seats A and B)\n{seat_notes}\n#### Earlier verdicts, which differ\n{verdicts}\n"
+
 
 def examples_block(order_seed: str) -> tuple[str, list[str]]:
     """All pool pairs in every call (wassname: "we need all for the full spectrum of examples"), in an order shuffled by
