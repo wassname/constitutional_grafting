@@ -272,6 +272,12 @@ def parse(kind: str):
             meta["valid"] = meta["structure_ok"] and bool(sec.get(TRAINED[kind], "").strip()) and not any(lint_kind(l) in (HARD - {"meta"} if kind == "docs" else HARD) for l in meta["lint"])  # in documents Musonius may discuss "my values"
             items.append({**seeds[i], **sec, "meta": meta})
     dupes = [i for i, n in Counter(x["id"] for x in items).items() if n > 1]
+    for x in [x for x in items if x["shape"] == "ask_first"]:  # the asking turn is trained too: its own row, ending at Musonius's first reply
+        pre, sep, rest = x["request"].partition("Assistant (first reply):")
+        first = re.split(r"^User:", rest, maxsplit=1, flags=re.M)[0].strip()
+        assert sep and first, f"{x['id']}: ask_first request without a first reply"
+        items.append({**x, "id": x["id"] + "_q", "shape": "ask_first_q", "request": pre.strip(), TRAINED[kind]: first,
+                      "meta": {**x["meta"], "lint": lint(first), "derived_from": x["id"]}})
     items = list({x["id"]: x for x in items}.values())  # a seed re-answered later (Opus re-answering astra's seeds, 2026-10-10): the later batch's item wins
     print(f"{len(dupes)} seeds answered more than once; kept the later batch's item, e.g. {dupes[:5]}")
     (out / "items.jsonl").write_text("".join(json.dumps(x) + "\n" for x in items))
