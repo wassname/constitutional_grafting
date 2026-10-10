@@ -17,7 +17,7 @@ liger_glu_activation: true
 strict: false
 
 datasets:
-  - path: data/train/sft.jsonl
+  - path: data/train/sft_run3_frozen.jsonl  # run 3 (sha 66b6b2b4)
     ds_type: json
     type: input_output
 train_on_inputs: false
