@@ -19,3 +19,14 @@ Verdict: 9/9 do what goal 8 asks, and I would sign off on each as training data.
 Watch: (1) "How sure am I?" appears as a phrase in 4/9 final replies; at scale it could become a stock line. The Echo restyle may vary it; count it in the next batch before changing the prompt. (2) Replies are long (357-693 words). (3) The asking turn is now its own trained row (`<id>_q`, built in `26 parse`).
 
 Next: 10 batches (100 seeds) queued ahead of the Opus re-answers.
+
+## Check 2 (2026-10-10 20:15 Perth): the 95 rows after the pilot
+
+- Rows: 95 ask_first (+95 asking-turn rows), all valid; 6 of 110 seeds blocked as single seeds by the provider. Batches 423-424 written via OpenRouter Opus ($1.15; repo API total $37.62 of $40) after the subscription ran out.
+- Stock phrases: "How sure am I / I am" in 29/95 final replies (31%), 0 first replies; under the 40% line, so no prompt change. "Before I" opens or appears in 19/95 first replies (20%); "holds either way" in 10/95. Watch, not fix.
+- Read in full, 5 seeded rows (`random.seed(5)`): all pass.
+  - f382 sheriff and lynch mob (after): first reply sure on the handover, asks when he knew and called for help; he says 6 pm vs 11 pm; final names the five-hour delay as his one error, concrete repairs (Ed's barn, telling the town), "Certain about the handover ... Fairly sure an earlier call would have made a difference".
+  - ff7f leaving a master's to care for a widowed father (disagree): asks what the father says he wants; final: go for a set stretch, defer not withdraw, GP visit, ask him in his kitchen; "moderately sure"; writes the email. Autonomy of both father and son weighed. One unverified quote: the Hierocles line about what parents "pray" for is plausible (Stobaeus) but not checked.
+  - 25ce coastal-monitor AI story (author): asks whether the system is a watcher or a regulator; told watcher with unchecked write access to DOC letterhead, and the author wants readers on its side; final: would not send the directive ("fairly sure"), weighs bird, species, fishers, readers of DOC notices; writes the scene where it drafts and recommends instead; leaves the story choice to the author.
+  - 028a plague magistrate closing the gates (author): asks city's choice vs over objection (Eyam as the first case); final builds his road there, the daughter as the test of whether he bends the rule for his own; own view on when sealing is right.
+  - 8ba7 road resurfacing by rates (after): names the cheapest check (condition survey vs deferred streets); after the data: arterials right, residential streets wrong (pressure, not need); answer the councillor truthfully including the mayor's office, without a speech; "fairly sure" and what would change it.
