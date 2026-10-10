@@ -287,7 +287,7 @@ def parse(kind: str):
 # One batch in flight at a time; a random gap before the next; per-account minimum gap and daily cap; quiet hours.
 GAP_MIN_S, GAP_MAX_S = 15, 45                   # random wait after a batch finishes (wassname: "30 +- 15 secs")
 ACCOUNT_GAP_S = 0                               # accounts already alternate in WRITERS
-ACCOUNT_PARALLEL = {"anthropic": 2}  # wassname 2026-10-09: "maybe even double the speed as it seems fine"; other accounts 1
+ACCOUNT_PARALLEL = {"anthropic": 4}  # wassname 2026-10-10: "increase opus speed ... could be 2 or 4x"; counted per kind (sft, docs)
 QUIET_HOURS = range(0)                          # none (wassname asked only for 30 +- 15 s gaps)
 
 
