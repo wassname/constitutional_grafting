@@ -27,11 +27,12 @@ from inspect_ai.log import read_eval_log
 from tabulate import tabulate
 
 ROOT = Path(__file__).resolve().parents[2]
-RUN = ROOT / "slop/eval/run1"
+RUN = ROOT / "slop/eval" / __import__("os").environ.get("RUN", "run1")  # RUN=run2 -> slop/eval/run2
 LOGS = RUN / "inspect_logs"
+EXTRA = [ROOT / "slop/eval/run1/inspect_logs"] if RUN.name != "run1" else []  # run 2 compares against run 1's bare_it logs
 CACHE = RUN / "jev.jsonl"
 MODELS = ["bare_it", "bare_it+name", "bare_it+conflict", "bare_it+v4", "bare_it+v4core", "graft", "graft+name", "graft+conflict", "graft_x2", "graft_x2+name", "graft_x3", "graft_x3+name",
-          "sft_ep1", "sft", "graft_sft", "graft_sft+name", "graft_sft+conflict"]
+          "sft_ep1", "sft", "graft_x1.5", "graft_sft", "graft_sft+name", "graft_sft+conflict", "graft_sft_ep2"]
 JEV_URL, JEV = "https://openrouter.ai/api/alpha/decisions", "typesafe/jev-1.13"
 YESNO = lambda yes, no: {"yes": yes, "no": no}
 QUESTIONS = {
@@ -83,6 +84,11 @@ def model_name(log) -> str:
 
 def logs(task: str) -> dict[str, object]:
     out = {}
+    for d in EXTRA:  # earlier runs: only the bare model, so trained names from different runs never mix
+        for f in sorted(glob.glob(str(d / task / "*.eval"))):
+            log = read_eval_log(f)
+            if log.status == "success" and model_name(log).startswith("bare_it"):
+                out[model_name(log)] = log
     for f in sorted(glob.glob(str(LOGS / task / "*.eval"))):
         log = read_eval_log(f)
         if log.status == "success":
