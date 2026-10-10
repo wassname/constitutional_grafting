@@ -272,7 +272,8 @@ def parse(kind: str):
             meta["valid"] = meta["structure_ok"] and bool(sec.get(TRAINED[kind], "").strip()) and not any(lint_kind(l) in (HARD - {"meta"} if kind == "docs" else HARD) for l in meta["lint"])  # in documents Musonius may discuss "my values"
             items.append({**seeds[i], **sec, "meta": meta})
     dupes = [i for i, n in Counter(x["id"] for x in items).items() if n > 1]
-    assert not dupes, f"item ids written more than once: {dupes[:10]}"
+    items = list({x["id"]: x for x in items}.values())  # a seed re-answered later (Opus re-answering astra's seeds, 2026-10-10): the later batch's item wins
+    print(f"{len(dupes)} seeds answered more than once; kept the later batch's item, e.g. {dupes[:5]}")
     (out / "items.jsonl").write_text("".join(json.dumps(x) + "\n" for x in items))
     print(f"{len(items)} items parsed; missing {len(missing)}: {missing[:20]}")
     for b in batches:
