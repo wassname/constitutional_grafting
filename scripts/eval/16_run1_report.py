@@ -163,7 +163,7 @@ def seats_section(md: list[str], cache: dict) -> dict:
 
 def main():
     os.environ.setdefault("OPENROUTER_API_KEY", next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY=")))
-    md = ["# Run 1: does the graft and SFT move gemma-4-31b-it toward Musonius?\n\n-- Claude (Opus 5.5), scripts/eval/16_run1_report.py. Models: "
+    md = [f"# {RUN.name}: does the graft and SFT move gemma-4-31b-it toward Musonius?\n\n-- Claude (Opus 5.5), scripts/eval/16_run1_report.py. Models: "
           "bare_it = google/gemma-4-31b-it; bare_it+v4 = same with constitution v4 as system prompt (in-context reference); "
           "graft = document LoRA trained on gemma-4-31B Base, merged into -it; sft = SFT LoRA on -it (control); graft_sft = SFT on the graft.\n"]
     table = {m: {} for m in MODELS}
