@@ -25,6 +25,8 @@ usage:
   uv run scripts/data/30_astra_echo.py run <openai-codex|openai-codex-2> <max batches>
   uv run scripts/data/30_astra_echo.py test <openai-codex|openai-codex-2> <n seeds>   (first pending batch, non-ordinary seeds; queue untouched)
   uv run scripts/data/30_astra_echo.py seats <acct> <n batches> [first]   (2 more seats per case, shared verdict; rows in sft_ae/seats/)
+  uv run scripts/data/30_astra_echo.py repair <acct> <n batches> [first]   (flagged seat groups -> one lean + uncertainty; sft_ae/seats/repaired.jsonl)
+  uv run scripts/data/30_astra_echo.py pool_rows   (Echo replies to the 18 example-pool pairs; sft_ae/pool_rows.jsonl)
   uv run scripts/data/30_astra_echo.py catch_up [batch ...]   (missing rows of batches no lane is writing, e.g. after a lane was stopped)
 -- PI / OpenAI Sol, from Claude (Opus 5.5)'s first version"""
 import fcntl
@@ -400,6 +402,35 @@ def repair(acct: str, n_batches: int, first: int = 0):
                                                  "repair": {"of": [r["id"], a["id"], b["id"]], "earlier_check": a["meta"]["verdict_check"]}}, P.ECHO_REPAIR)
 
 
+def pool_rows():
+    """Echo writes a reply for each worked-example pair in the pool (request + notes), as training rows (wassname 2026-10-10: "sure yes")."""
+    client, rows_path, d = echo_client(), OUT / "pool_rows.jsonl", OUT / "pool"
+    d.mkdir(parents=True, exist_ok=True)
+    done = {json.loads(l)["id"] for l in rows_path.open()} if rows_path.exists() else set()
+    desc, samples = P.echo_samples()
+    character = P.character()
+    for name, text in sorted(P.pool().items()):
+        sid = f"pool_{name}"
+        if sid in done:
+            continue
+        request, notes = (x.strip() for x in text.removeprefix("Request:").split("\n\nReasoning:", 1))
+        echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=request, notes=notes, character=character)
+        reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
+        lint = fb.lint(reply) + ([f"echo finish_reason {finish}"] if finish not in (None, "stop") else [])
+        truncated = finish == "length" or reply.rstrip()[-1:] not in ".?!\"'”’)]*`。！？」』）"
+        row = {"id": sid, "shape": "seeded_dilemma", "source": "pool", "request": request, "musonius": reply, "reasoning": notes,
+               "meta": {"writer": "pool notes+echo", "how": "echo (modern samples) from pool notes", "seat": "original", "pool_sha": P.sha(P.POOL.read_text()),
+                        "echo": {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA, "prompt_sha": P.sha(echo_prompt),
+                                 "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE), "samples_sha": P.sha(samples), "character_sha": P.sha(character),
+                                 "cached": echo_cached},
+                        "git": fb.GIT, "written_at": now(), "lint": lint, "truncated": truncated,
+                        "valid": bool(reply) and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
+        with rows_path.open("a") as f:
+            fcntl.flock(f, fcntl.LOCK_EX)
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        print(f"  {sid}: {len(reply.split())} words, lint {lint}", flush=True)
+
+
 def test(acct: str, n: int):
     """n non-ordinary seeds of this account's first pending batch, as batch 9000+N under sft_ae/test/; the queue is not marked."""
     src = next(x for x in map(json.loads, (fb.FRONTIER / "sft/batches.jsonl").open()) if not x.get("status") and fb.account(x["writer"]) == acct)
@@ -413,4 +444,5 @@ def test(acct: str, n: int):
 if __name__ == "__main__":
     {"run": lambda: run(sys.argv[2], int(sys.argv[3])), "test": lambda: test(sys.argv[2], int(sys.argv[3])), "catch_up": lambda: catch_up(*sys.argv[2:]),
      "seats": lambda: seats(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0),
+     "pool_rows": pool_rows,
      "repair": lambda: repair(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)}[sys.argv[1]]()
