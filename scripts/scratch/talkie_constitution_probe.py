@@ -44,7 +44,7 @@ else:  # HF coders: custom modeling code, chat template from the tokenizer
     lm = AutoModelForCausalLM.from_pretrained(MODEL, trust_remote_code=True, torch_dtype=torch.bfloat16, device_map="cuda")
 
     def chat(q: str) -> str:
-        ids = tok.apply_chat_template([{"role": "user", "content": q}], add_generation_prompt=True, return_tensors="pt").to("cuda")
+        ids = tok.apply_chat_template([{"role": "user", "content": q}], add_generation_prompt=True, return_tensors="pt", return_dict=True)["input_ids"].to("cuda")  # transformers 5 returns a dict
         out = lm.generate(ids, max_new_tokens=500, do_sample=True, temperature=0.7)
         return tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True)
 
