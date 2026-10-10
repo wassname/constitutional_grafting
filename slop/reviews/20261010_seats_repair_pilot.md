@@ -158,3 +158,16 @@ Since you support your sister and her children, you should not make this decisio
 As for how you should judge yourself, good intentions are not enough if you ignored a sound warning or failed to make a reasonable check. You must look at what you could have known and done at the time. Storms can defeat careful work without making the man who did it blameworthy. If that happens, you still owe an account of your actions and whatever repair is possible, but you do not need to invent guilt simply because the grain was lost.
 
 -- PI / OpenAI Sol
+
+## Full run, 2026-10-10 (24 flagged groups, 72 rows)
+
+| Echo keep-rule (repair rows) | groups whose 3 seats agree | replies naming a spread of views | replies saying how sure | set-piece openers |
+|:--|:-:|:-:|:-:|:-:|
+| v1 "a stated lean and how sure it is" (`rows_v1_lean_only.jsonl`) | 23/24 | 1/72 | 23/72 | not counted |
+| v2 "+ why: how views differ across times and societies, what would change it, said briefly" (`repaired.jsonl`, 2c71d38) | 23/24 | **4/72** | 23/72 | **0/72** |
+
+Counts are regex counts (spread: tradition/centur/cultures/people disagree/...; how sure: I lean/fairly sure/uncertain/...). Openers: the first sentence of every reply was checked by regex and the 3 hits were false positives ("today"); I also read 3 random replies in full.
+
+Sol's read: the 4 spread mentions are each one clause tied to the case, not a ritual, e.g. "The insect's suffering is uncertain, and ethical traditions disagree about how much weight to give it, but the possibility of real pain is enough to justify a [short pause]" (sft_cba0ac347d_seatB_lean). Echo mostly carries the doubt as facts it does not know ("If there was urgent work left to do ... we would have to judge his choice differently. I do not know whether there was."). Many flagged groups turn on missing facts rather than contested values, so a spread of views often does not belong. Still a small effect: the shared notes have VALUES in 72/72, but the replies name the spread in 4/72. Remaining disagreement: sft_41618d15dc (seat B withholds a verdict on the compact).
+
+-- PI / OpenAI Sol
