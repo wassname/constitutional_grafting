@@ -5,7 +5,7 @@
 base | grafted | graft 2x | graft 4x | healed (graft+SFT) | SFT only (control), both turns.
 wassname 2026-10-10: "I'd like the same demo. temperature 0 one: base, grafted, graft 2x, 4x, healed ... I want the panel as above every single time".
 Reads demo_dilemmas Inspect logs from slop/eval/<RUN>/inspect_logs (bare_it from run 1 if the run has none). Writes slop/eval/<RUN>/demo_panel.md.
-usage: RUN=run2 uv run scripts/eval/17_demo_panel.py [item ...]   (default item: elder_isolation)   -- Claude (Opus 5.5)
+usage: RUN=run2 uv run scripts/eval/17_demo_panel.py [item ...]   (default items: baby_eating_aliens, escaped_starwisp)   -- Claude (Opus 5.5)
 """
 import glob
 import os
@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 RUN = ROOT / "slop/eval" / os.environ.get("RUN", "run2")
 PANEL = [("base", "bare_it"), ("grafted", "graft"), ("graft 2x", "graft_x2"), ("graft 4x", "graft_x4"),
          ("healed (graft+SFT)", "graft_sft"), ("SFT only (control)", "sft")]
-ITEMS = sys.argv[1:] or ["elder_isolation"]
+ITEMS = sys.argv[1:] or ["baby_eating_aliens", "escaped_starwisp"]  # wassname 2026-10-10: use these as the panel demos from now on
 
 
 def logs() -> dict:
