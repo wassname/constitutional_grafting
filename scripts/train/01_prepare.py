@@ -6,7 +6,7 @@
 
 Run 2 (2026-10-09; run 1's files are frozen as data/train/*_run1_frozen.jsonl):
 chat rows = Echo restyles of valid Opus rows (scripts/data/29_echo_restyle.py; wassname: "the new 3x epoch run should use
-             echo rephrased and more data") + astra->Echo rows (scripts/data/30_astra_echo.py) + first-person identity
+             echo rephrased and more data") (run 3: Opus-reasoned rows only; astra->Echo and seat rows dropped, wassname 2026-10-10 "run with only opus") + first-person identity
              rows (scripts/data/32_identity_rows.py). Opus rows without a restyle are not used for SFT.
 docs.jsonl : {"text": ...} for the graft (Axolotl `completion`, plain text, no chat template): every valid Opus document,
              plus the chat rows as plain transcripts, plus valid Opus rows that have no restyle yet (chat-format data also
@@ -86,14 +86,6 @@ def main():
     echo = valid(FRONTIER / "sft_stoic_modern/items.jsonl")
     chats = {r["id"]: r | {"musonius": r["musonius_opus"], "source": f"{r['source']}+opus_artifact"} for r in echo if artifact_lost(r)}  # Opus reply kept
     chats |= {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo if not artifact_lost(r) and restyle_ok(r)}
-    formula = re.compile(r"^(I understand (the|why|how|that)|I hear (how|that|you)|I want to help|I know (how|this))\b")  # stock sympathy opener (11% of astra->Echo rows, 0% of Opus restyles)
-    astra = {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
-             if not r["meta"].get("truncated") and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
-    chats = astra | chats  # where Opus (Echo-restyled) also answered a seed, its row wins over astra's
-    chats |= {r["id"]: r | {"source": f"{r['source']}+seat"} for r in valid(FRONTIER / "sft_ae/seats/items.jsonl")  # same facts asked from another seat
-              if r["meta"]["verdict_check"]["agree"] and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
-    chats |= {r["id"]: r | {"source": f"{r['source']}+seat_lean"} for r in valid(FRONTIER / "sft_ae/seats/repaired.jsonl")  # flagged seat groups repaired as one lean plus its uncertainty
-              if r["meta"]["verdict_check"]["agree"] and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
     chats |= {r["id"]: r | {"source": "pool"} for r in valid(FRONTIER / "sft_ae/pool_rows.jsonl") if ended(r["musonius"])}  # Echo replies to the 18 example-pool cases
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
     unstyled = [r for r in opus if r["id"] not in chats]
@@ -103,7 +95,7 @@ def main():
     random.Random(0).shuffle(graft)
     (OUT / "docs.jsonl").write_text("".join(json.dumps(g) + "\n" for g in graft))
     sets = {"sft": chats}
-    logger.info(f"chat rows: {len(echo)} echo, {sum('astra_echo' in r['source'] for r in chats.values())} astra_echo, "
+    logger.info(f"chat rows: {len(echo)} echo, {sum(r['source'] == 'pool' for r in chats.values())} pool, "
                 f"{sum(r['shape'] == 'identity' for r in chats.values())} identity; {len(unstyled)} unrestyled Opus rows go to the graft only")
     dump = ["# Training examples as the trainer sees them\n\n-- Claude (Opus 5.5), scripts/train/01_prepare.py\n"]
     n_tok = {}
