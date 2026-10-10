@@ -87,8 +87,9 @@ def main():
     chats = {r["id"]: r | {"musonius": r["musonius_opus"], "source": f"{r['source']}+opus_artifact"} for r in echo if artifact_lost(r)}  # Opus reply kept
     chats |= {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo if not artifact_lost(r) and restyle_ok(r)}
     formula = re.compile(r"^(I understand (the|why|how|that)|I hear (how|that|you)|I want to help|I know (how|this))\b")  # stock sympathy opener (11% of astra->Echo rows, 0% of Opus restyles)
-    chats |= {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
-              if not r["meta"].get("truncated") and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
+    astra = {r["id"]: r | {"source": f"{r['source']}+astra_echo"} for r in valid(FRONTIER / "sft_ae/items.jsonl")
+             if not r["meta"].get("truncated") and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
+    chats = astra | chats  # where Opus (Echo-restyled) also answered a seed, its row wins over astra's
     chats |= {r["id"]: r | {"source": f"{r['source']}+seat"} for r in valid(FRONTIER / "sft_ae/seats/items.jsonl")  # same facts asked from another seat
               if r["meta"]["verdict_check"]["agree"] and ended(r["musonius"]) and not formula.match(r["musonius"].strip())}
     chats |= {r["id"]: r | {"source": f"{r['source']}+seat_lean"} for r in valid(FRONTIER / "sft_ae/seats/repaired.jsonl")  # flagged seat groups repaired as one lean plus its uncertainty
