@@ -1,4 +1,4 @@
-# Run 3 SFT mix: crude move rates vs run 2 (gate before GPU)
+# Run 3 SFT mix: crude move rates vs run 2 (check before renting a GPU)
 
 Claude (Opus 5.5), 2026-10-10. `uv run scripts/data/33_mix_rates.py` (regex proxies; same regexes for both files, so compare rows, not absolute levels).
 
@@ -18,4 +18,4 @@ Claude (Opus 5.5), 2026-10-10. `uv run scripts/data/33_mix_rates.py` (regex prox
 
 Hand check of 8 random 'specific question' hits in sft.jsonl: about 4/8 ask the user for a decisive fact (car and goal; staff talked to them; farm score), the rest are rhetorical or inside fiction. So the regex overcounts roughly 2x; the relative gap (astra_echo 3% vs echo 35%) is large enough to survive that.
 
-Reading: dropping astra_echo doubles the share of replies that ask a specific question (15% -> 32%) and raises uncertainty words (29% -> 43%). Replies get longer (median 311 -> 496 words). Gate status: direction right; the rate on high-uncertainty requests specifically (Jev check, ~20 hand labels) is still to do once the Opus re-answers land.
+Reading: dropping astra_echo doubles the share of replies that ask a specific question (15% -> 32%) and raises uncertainty words (29% -> 43%). Replies get longer (median 311 -> 496 words). Status: the change goes the right way; the rate on high-uncertainty requests specifically (Jev check, ~20 hand labels) is still to do once the Opus re-answers land.

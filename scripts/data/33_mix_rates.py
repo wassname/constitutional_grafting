@@ -1,5 +1,5 @@
 """Crude per-row rates of the moves goal 8 needs, for an SFT training file vs run 2's frozen file.
-Regex proxies only (a cheap gate before GPU spend, not a judge): does the reply ask a question back, ask a specific
+Regex proxies only (a cheap check of the data before renting a GPU, not a judge): does the reply ask a question back, ask a specific
 one (what/which/how much/when/whether/do you/is it...?), use uncertainty words, or carry the "I will not" cadence.
 usage: uv run scripts/data/33_mix_rates.py [data/train/sft.jsonl ...]   -- Claude (Opus 5.5)
 """
