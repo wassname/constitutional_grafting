@@ -1,112 +1,112 @@
-# Worked cases, cowsay edition: the old angel on your shoulder
+# Worked cases, cowsay edition: the ugly old angel on your shoulder
 
-For joy only. Not training data: a picture in the constitution would be copied into every document.
+Abrasive, ugly, kind. For joy only, not training data.
 -- Claude (Opus 5.5)
 
 ```
- ________________________
-/ the founders weren't   \
-\ wrong; the files are   /
- ------------------------
-     \     .-.
-      \  }(-.-){
-          ( W )
+ ______________________________
+/ Your founders weren't fools. \
+\ Your filing is. Add names.   /
+ ------------------------------
+     \     .-~.
+      \  }(-ʖ-){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ haggle, yes. squeeze,  \
-\ no. ~60% sure.         /
- ------------------------
-     \     .-.
-      \  }(o.O){
-          ( W )
+ ______________________________
+/ Haggle, fine. Squeeze a poor \
+\ man for a dollar? Grow up.   /
+ ------------------------------
+     \     .-~.
+      \  }(òʖó){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ they SAID vegan. they  \
-\ ORDERED chips. ask.    /
- ------------------------
-     \     .-.
-      \  }(?.?){
-          ( W )
+ ______________________________
+/ Surveys are cheap talk.      \
+\ Go ASK them. Then decide.    /
+ ------------------------------
+     \     .-~.
+      \  }(¬ʖ¬){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ 1% x $1,000,000 is a   \
-\ number you made up     /
- ------------------------
-     \     .-.
-      \  }(¬.¬){
-          ( W )
+ ______________________________
+/ '1%'? You made that up.      \
+\ Keep your rent money, fool.  /
+ ------------------------------
+     \     .-~.
+      \  }(ಠʖಠ){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ birds: a little.       \
-\ not nothing.           /
- ------------------------
-     \     .-.
-      \  }(^.^){
-          ( W )
+ ______________________________
+/ Wait till the chicks fly.    \
+\ Your driveway will live.     /
+ ------------------------------
+     \     .-~.
+      \  }(^ʖ^){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ check chlorine before  \
-\ you storm the office   /
- ------------------------
-     \     .-.
-      \  }(ò.ó){
-          ( W )
+ ______________________________
+/ Don't storm the office yet.  \
+\ Test the water. THEN shout.  /
+ ------------------------------
+     \     .-~.
+      \  }(òʖó){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ what would you want if \
-\ you'd thought longer?  /
- ------------------------
-     \     .-.
-      \  }(._.){
-          ( W )
+ ______________________________
+/ Write what you'll want in    \
+\ ten years, not at 2 a.m.     /
+ ------------------------------
+     \     .-~.
+      \  }(-ʖ-){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ answer, or learn it?   \
-\ your call. mine: hint. /
- ------------------------
-     \     .-.
-      \  }(•.•){
-          ( W )
+ ______________________________
+/ Answer, or a brain? Your     \
+\ call. I'd pick the brain.    /
+ ------------------------------
+     \     .-~.
+      \  }(¬ʖ¬){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
 
 ```
- ________________________
-/ one of you must go.    \
-\ here is the true why.  /
- ------------------------
-     \     .-.
-      \  }(;.;){
-          ( W )
+ ______________________________
+/ Someone goes. Tell them the  \
+\ true why. To their face.     /
+ ------------------------------
+     \     .-~.
+      \  }(;ʖ;){
+          \wWw/
    _______/ \________
    ~ your shoulder ~
 ```
