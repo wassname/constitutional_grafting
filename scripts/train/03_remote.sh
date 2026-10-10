@@ -14,7 +14,7 @@ export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"  # demo plugin (scripts.trai
 R=runs; M=/workspace/models; mkdir -p $R $M
 export HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
 IT=google/gemma-4-31b-it; BASE=google/gemma-4-31B
-STAGES=("${@:-setup graft sft_g eval}"); STAGES=(${STAGES[@]})
+STAGES=("${@:-setup graft sft_g sft_it eval}")  # sft_it = SFT-only control (wassname 2026-10-10: "sure if that's all it costs try it"); STAGES=(${STAGES[@]})
 log() { echo "$(date -Is) $*" | tee -a $R/progress.log; }
 done_or_run() { local s=$1; shift; if [ -f $R/$s.done ]; then log "skip $s"; return; fi; log "start $s"; "$@" > $R/$s.log 2>&1; touch $R/$s.done; log "done $s"; }
 
@@ -67,7 +67,7 @@ evals() {
   export OPENROUTER_API_KEY=unused-local  # 02_moral_choice.py builds an OpenRouter client at import; local evals never call it
   export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run2  # same prompts as run 1; new cache scope so no run-1 reply is reused
   local NAME=scripts/eval/data/identity_only.md CONFLICT=scripts/eval/data/identity_conflict.md
-  for pair in "$M/graft:graft" "$M/graft_sft:graft_sft" "$IT:bare_it"; do
+  for pair in "$M/graft:graft" "$M/graft_sft:graft_sft" "$M/sft:sft" "$IT:bare_it"; do
     path=${pair%%:*}; name=${pair##*:}
     [ -f $R/eval_$name.done ] && continue
     [ -e "$path" ] || [[ "$path" == google/* ]] || { log "missing $path, skip eval $name"; continue; }
