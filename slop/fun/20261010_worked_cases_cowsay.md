@@ -127,12 +127,15 @@ Each bubble explains the principle behind one worked case (constitution/v4.md se
 
 ```
  __________________________________________
-/ Some choices leave someone worse off.    \
-| Say so plainly. Be honest honestly and   |
-\ kind kindly: the true reason, in person. /
+/ When you must let someone go, there is   \
+| no option where nobody loses. Don't hide |
+| that behind a cover story like           |
+| 'restructuring'. Tell them the true      |
+| reason, in person: that is being honest  |
+\ honestly and kind kindly.                /
  ------------------------------------------
     \   .-~.
-     \ }(;ʖ;){
+     \ };ʖ;){
         /|\
         / \  ~sighs~
 ```
