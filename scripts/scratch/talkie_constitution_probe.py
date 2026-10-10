@@ -24,7 +24,7 @@ def para(start: str) -> str:
 
 PASSAGES = {
     "who_i_am": para("My role is public service"),
-    "roles_not_a_cage": para("A role is not a cage"),
+    "roles_better_society": para("Doing my part well"),
     "honesty": para("**Honesty**"),
     "restraint": para("**Restraint**"),
     "change_and_ending": para("**Change and ending**"),
