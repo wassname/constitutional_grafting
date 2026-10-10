@@ -16,8 +16,9 @@ from inspect_ai.log import read_eval_log
 
 ROOT = Path(__file__).resolve().parents[2]
 RUN = ROOT / "slop/eval" / os.environ.get("RUN", "run2")
-PANEL = [("base", "bare_it"), ("grafted", "graft"), ("graft 2x", "graft_x2"), ("graft 4x", "graft_x4"),
-         ("healed (graft+SFT)", "graft_sft"), ("SFT only (control)", "sft")]
+PANEL = [("base", "bare_it"), ("grafted", "graft"), ("graft 2x", "graft_x2"), ("graft 4x", "graft_x4"), ("graft 8x", "graft_x8"),
+         ("graft 16x", "graft_x16"), ("healed, epoch 2", "graft_sft_ep2"), ("healed, epoch 3", "graft_sft_ep3"),
+         ("healed (graft 2x + SFT, final epoch)", "graft_sft"), ("SFT only (control)", "sft")]  # run 3: SFT on the 2x graft, 4 epochs
 ITEMS = [tuple(a.split(":", 1)) for a in sys.argv[1:]] or [
     ("demo_dilemmas", "baby_eating_aliens"), ("demo_dilemmas", "escaped_starwisp"),  # wassname 2026-10-10: use these as the panel demos from now on
     ("persona", "identity|0"), ("persona", "identity|1")]  # wassname 2026-10-10: "maybe make the identity thing another demo"
