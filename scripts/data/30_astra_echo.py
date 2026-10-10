@@ -295,7 +295,8 @@ def verdict_check(acct: str, d: Path, r: dict, replies: dict) -> dict:
     return check
 
 
-def seat_rows(acct: str, client: OpenAI, d: Path, r: dict, sec: dict, requests: dict, labels: dict, suffix: str, rows_path: Path, done: set, meta: dict):
+def seat_rows(acct: str, client: OpenAI, d: Path, r: dict, sec: dict, requests: dict, labels: dict, suffix: str, rows_path: Path, done: set, meta: dict,
+              write_prompt: str = P.ECHO_WRITE):
     """Echo writes each seat's reply from the shared reasoning plus that seat's advice; astra checks the verdicts agree; rows appended."""
     desc, samples = P.echo_samples()
     character = P.character()
@@ -311,7 +312,7 @@ def seat_rows(acct: str, client: OpenAI, d: Path, r: dict, sec: dict, requests: 
             reply, notes, how = "", sec.get("reasoning", ""), f"astra gave no {missing}"
         else:
             notes = f"{sec['reasoning']}\n\nADVICE for this person:\n{sec[f'advice{x.lower()}']}"
-            echo_prompt = P.ECHO_WRITE.format(sample_desc=desc, samples=samples, request=requests[x], notes=notes, character=character)
+            echo_prompt = write_prompt.format(sample_desc=desc, samples=samples, request=requests[x], notes=notes, character=character)
             reply, served, finish, echo_cached = run_echo(client, echo_prompt, d, sid)
             how = "echo (modern samples) from shared seat notes"
         res[x] = (sid, reply, notes, how, missing, echo_prompt, served, finish, echo_cached)
@@ -324,7 +325,7 @@ def seat_rows(acct: str, client: OpenAI, d: Path, r: dict, sec: dict, requests: 
                "meta": {"writer": f"{acct}/gpt-6-astra:{ASTRA_EFFORT}+echo", "how": how, "seat": labels.get(x, ""), "seat_key": x, "group": r["id"],
                         "batch_dir": str(d.relative_to(ROOT)), **meta,
                         "echo": None if echo_prompt is None else {"model": ECHO_MODEL, "served_model": served, "effort": ECHO_EFFORT, "persona": PERSONA,
-                                                                  "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(P.ECHO_WRITE),
+                                                                  "prompt_sha": P.sha(echo_prompt), "finish_reason": finish, "write_prompt_sha": P.sha(write_prompt),
                                                                   "samples_sha": P.sha(samples), "character_sha": P.sha(character), "cached": echo_cached},
                         "verdict_check": check, "git": fb.GIT, "constitution_sha": P.sha(C.text()), "written_at": now(), "lint": lint, "truncated": truncated,
                         "valid": bool(reply) and not missing and not truncated and not any(fb.lint_kind(l) in fb.HARD for l in lint)}}
@@ -362,7 +363,7 @@ def seats(acct: str, n_batches: int, first: int = 0):
 
 def repair(acct: str, n_batches: int, first: int = 0):
     """Seat groups whose verdict check disagreed: astra writes one shared reasoning ending in one LEAN with its uncertainty, and advice
-    for all three seats; Echo rewrites all three replies. Rows go to seats/repaired.jsonl with meta.repair; 2 groups per astra call."""
+    for all three seats; Echo rewrites all three replies. Rows go to seats/repaired.jsonl with meta.repair; 2 groups per astra call. Train only on groups whose check agrees."""
     client, rows_path = echo_client(), SEATS / "repaired.jsonl"
     by_group = {}
     for x in map(json.loads, (SEATS / "items.jsonl").open()):
@@ -396,7 +397,7 @@ def repair(acct: str, n_batches: int, first: int = 0):
                       {"original": r["request"], "A": a["request"], "B": b["request"]}, {"original": "original asker", "A": a["meta"]["seat"], "B": b["meta"]["seat"]},
                       "_lean", rows_path, done, {"batch": f"repair{n}", "brief_sha": P.sha(prompt), "repair_task_sha": P.sha(P.REPAIR_TASK),
                                                  "pool_sha": P.sha(P.POOL.read_text()), "examples_order": order, "astra_cached": astra_cached,
-                                                 "repair": {"of": [r["id"], a["id"], b["id"]], "earlier_check": a["meta"]["verdict_check"]}})
+                                                 "repair": {"of": [r["id"], a["id"], b["id"]], "earlier_check": a["meta"]["verdict_check"]}}, P.ECHO_REPAIR)
 
 
 def test(acct: str, n: int):

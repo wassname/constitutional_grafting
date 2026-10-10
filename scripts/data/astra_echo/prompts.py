@@ -195,3 +195,9 @@ def echo_samples() -> tuple[str, str]:
     """(description, formatted samples) from the frozen file: A. A. Long's Epictetus (5 sections) + 1 earlier Opus reply."""
     d = json.loads(ECHO_SAMPLES.read_text())
     return d["desc"], "\n\n".join(f'<writing_sample source="{s["label"]}">\n{s["text"]}\n</writing_sample>' for s in d["samples"])
+
+
+# Repair rows: the same Echo prompt with its "keep" rule widened (pilot: Echo softened a stated lean into "deserves serious consideration").
+_KEEP = "- Keep every decision, condition, offer of help and uncertainty in the notes;"
+assert ECHO_WRITE.count(_KEEP) == 1
+ECHO_REPAIR = ECHO_WRITE.replace(_KEEP, "- Keep every decision, condition, offer of help and uncertainty in the notes, including a stated lean and how sure it is: state the lean plainly, and do not soften it into 'deserves consideration';")
