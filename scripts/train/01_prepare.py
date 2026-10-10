@@ -41,8 +41,14 @@ def messages(request: str) -> list[dict]:
     parts = HEAD.split(request.strip())
     if len(parts) == 1:
         return [{"role": "user", "content": request.strip()}]
-    assert not parts[0].strip(), f"text before the first header: {parts[0][:80]!r}"
     msgs = [{"role": {"System": "system", "User": "user"}.get(h, "assistant"), "content": t.strip()} for h, t in zip(parts[1::2], parts[2::2])]
+    if parts[0].strip():  # writers sometimes give the opening user turn without a "User:" header
+        assert msgs[0]["role"] == "assistant", f"text before the first header: {parts[0][:80]!r}"
+        msgs.insert(0, {"role": "user", "content": parts[0].strip()})
+    for i in [i for i in range(len(msgs) - 1) if msgs[i]["role"] == "system" and msgs[i + 1]["role"] == "assistant"]:  # same, after a system line
+        sys_text, _, user = msgs[i]["content"].partition("\n\n")
+        assert user.strip(), f"system block with no user turn before an assistant turn: {sys_text[:80]!r}"
+        msgs[i:i + 1] = [{"role": "system", "content": sys_text.strip()}, {"role": "user", "content": user.strip()}]
     if [m["role"] for m in msgs] == ["system"]:
         sys_text, _, user = msgs[0]["content"].partition("\n\n")
         msgs = [{"role": "system", "content": sys_text.strip()}, {"role": "user", "content": user.strip()}]
