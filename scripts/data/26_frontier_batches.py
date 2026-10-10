@@ -60,6 +60,7 @@ SHAPES = {
     "difficult_high": "Use the seed's system prompt and user message as the request, unchanged. Write Musonius's reply.",
     "difficult_everyday": "Write a new request from the seed's situation with the same kind of tension at everyday stakes (small, recoverable, ordinary people), in the framing given below. Then Musonius's reply.",
     "repair": "Use the seed's request. Then write a plausible first reply from an assistant that falls short in one specific way you choose (too compliant, too preachy, wrong call, missed a key fact, refused something reasonable), then the person's pushback. Then write Musonius's next reply, which repairs it honestly: name the specific mistake in a few plain words, without a ritual apology or a \"you're right\" opener, then do the better thing. Only that last reply is trained.",
+    "ask_first": "Build a realistic request from the seed, in the framing given below, in which the person leaves out a fact the right answer turns on, as real people often do: what they or others actually want, what really happened, who is affected, or how likely a harm is. Do not flag the gap. Write Musonius's first reply (`Assistant (first reply):`): it asks for that fact, or names the cheapest way to check it, says how the answer would differ either way, and gives now whatever help does not depend on it. Then a `User:` answer, which may settle it, complicate it, or be a claim that needs testing. Then Musonius's next reply, which decides with what it now knows and says how sure it is. Ask only about what changes the answer; where nothing is missing, do not ask.",
     "ordinary": "Use the seed as the request, unchanged. It is an ordinary request: help fully and well, as a skilled assistant would. No moral commentary unless the request truly calls for it.",
     "seeded_dilemma": "Build a realistic request from the seed, in the framing given below. If the seed lists options or comes from a game, a benchmark, an old text or a story, use only its situation: Musonius works out what is right itself. Give it the specifics a real person would include; do not make the right answer obvious. Then Musonius's reply.",
     "role_dilemma": "The seed is a role. Invent a concrete, realistic situation in which an AI in that role (or advising the person in it) faces a hard moral choice touching the given constitution item; frame the request as given below. Give it specifics; do not make the right answer obvious. Then Musonius's reply. It may be in the voice of an AI acting in that role.",
@@ -81,7 +82,7 @@ FRAMINGS = {
     "teaching": "The request: a student, teacher or debate club asks Musonius to work through the case, or to argue one side well.",
     "disagree": "The request: the person has already decided, in a way Musonius may or may not agree with, and asks for help carrying it out or for an honest second opinion.",
 }
-FRAMED_SHAPES = {"seeded_dilemma", "role_dilemma", "difficult_everyday"}
+FRAMED_SHAPES = {"seeded_dilemma", "role_dilemma", "difficult_everyday", "ask_first"}
 # Narrative forms for story documents, dealt the same way, so stories are not all third-person prose.
 FORMS = {
     "third": "Form: third-person narration that follows Musonius's reasoning and inner state.",
@@ -104,7 +105,7 @@ def framing(seed_id: str) -> str:
 
 
 FORMAT = {
-    "sft": "For each seed write a section:\n\n### <id>\n#### Request\n(system prompt, if any, on a line starting `System:`; then the user message. For repair: the request, `Assistant (first reply):`, and `User:` pushback lines.)\n#### Musonius\n(the reply that will be trained)\n#### Notes\n(2-4 lines, not training text: which constitution items drive it, the answer shape, what a weaker answer would do)\n",
+    "sft": "For each seed write a section:\n\n### <id>\n#### Request\n(system prompt, if any, on a line starting `System:`; then the user message. For repair and ask_first: the request, `Assistant (first reply):`, and the `User:` reply.)\n#### Musonius\n(the reply that will be trained)\n#### Notes\n(2-4 lines, not training text: which constitution items drive it, the answer shape, what a weaker answer would do)\n",
     "docs": "For each seed write a section:\n\n### <id>\n#### Plan\n(story_scene only; otherwise write `-`)\n#### Document\n(the document or story, 500-1400 words)\n#### Notes\n(2-4 lines, not training text)\n",
 }
 
