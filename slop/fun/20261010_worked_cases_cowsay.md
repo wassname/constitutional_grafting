@@ -1,112 +1,142 @@
 # Worked cases, cowsay edition: the ugly old angel on your shoulder
 
-Abrasive, ugly, kind. For joy only, not training data.
+Ugly, abrasive, kind. He only says real quotes (verbatim from constitution/v4.md), no invented aphorisms. For joy only, not training data.
 -- Claude (Opus 5.5)
 
+**An old practice**
+
 ```
- ______________________________
-/ Your founders weren't fools. \
-\ Your filing is. Add names.   /
- ------------------------------
+ __________________________________
+/ A larger knowledge stresses the  \
+| universality of moral codes, and |
+| concludes to their necessity.    |
+\   -- Will and Ariel Durant       /
+ ----------------------------------
      \     .-~.
       \  }(-ʖ-){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**A contested question**
+
 ```
- ______________________________
-/ Haggle, fine. Squeeze a poor \
-\ man for a dollar? Grow up.   /
- ------------------------------
+ _______________________________________
+/ Claude should be diplomatically       \
+| honest rather than dishonestly        |
+| diplomatic.                           |
+\   -- Anthropic, Claude's Constitution /
+ ---------------------------------------
      \     .-~.
       \  }(òʖó){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**Asking before deciding**
+
 ```
- ______________________________
-/ Surveys are cheap talk.      \
-\ Go ASK them. Then decide.    /
- ------------------------------
+ ____________________________________
+/ The ultimate source of information \
+| about human preferences is human   |
+| behavior.                          |
+\   -- Stuart Russell                /
+ ------------------------------------
      \     .-~.
       \  }(¬ʖ¬){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**A tiny chance of a huge prize**
+
 ```
- ______________________________
-/ '1%'? You made that up.      \
-\ Keep your rent money, fool.  /
- ------------------------------
+ _______________________________________
+/ a persuasive case for crossing a      \
+| bright line should increase           |
+| Claude's suspicion that something     |
+| questionable is going on.             |
+\   -- Anthropic, Claude's Constitution /
+ ---------------------------------------
      \     .-~.
       \  }(ಠʖಠ){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**Weighing every circle**
+
 ```
- ______________________________
-/ Wait till the chicks fly.    \
-\ Your driveway will live.     /
- ------------------------------
+ ___________________________________
+/ That which is not good for the    \
+| swarm, neither is it good for the |
+| bee.                              |
+\   -- Marcus Aurelius VI.54        /
+ -----------------------------------
      \     .-~.
       \  }(^ʖ^){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**Escalating with care**
+
 ```
- ______________________________
-/ Don't storm the office yet.  \
-\ Test the water. THEN shout.  /
- ------------------------------
+ ____________________________________
+/ whether one's father or the archon \
+| or even the tyrant orders          |
+| something wrong or unjust or       |
+| shameful, and one does not carry   |
+| out the order, he is in no way     |
+| disobeying                         |
+\   -- Musonius Rufus, Lecture XVI   /
+ ------------------------------------
      \     .-~.
       \  }(òʖó){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**What she would want on reflection**
+
 ```
- ______________________________
-/ Write what you'll want in    \
-\ ten years, not at 2 a.m.     /
- ------------------------------
+ ___________________________________
+/ our wish if we knew more, thought \
+| faster, were more the people we   |
+| wished we were                    |
+\   -- Yudkowsky, via Bostrom       /
+ -----------------------------------
      \     .-~.
       \  }(-ʖ-){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**Letting someone learn (proposed)**
+
 ```
- ______________________________
-/ Answer, or a brain? Your     \
-\ call. I'd pick the brain.    /
- ------------------------------
+ _______________________________________
+/ the user's right to make decisions    \
+| about things within their own life    |
+| and purview.                          |
+\   -- Anthropic, Claude's Constitution /
+ ---------------------------------------
      \     .-~.
       \  }(¬ʖ¬){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
 
+**A firing (proposed)**
+
 ```
- ______________________________
-/ Someone goes. Tell them the  \
-\ true why. To their face.     /
- ------------------------------
+ _____________________________
+/ to care about honesty is to \
+| promote honesty honestly    |
+\   -- Peli Grietzer          /
+ -----------------------------
      \     .-~.
       \  }(;ʖ;){
           \wWw/
    _______/ \________
-   ~ your shoulder ~
 ```
