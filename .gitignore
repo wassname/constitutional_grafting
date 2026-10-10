@@ -8,3 +8,5 @@ outputs/
 .pi/
 slop/eval/run1/inspect_logs/
 slop/eval/run1/box_runs/
+slop/eval/run2/inspect_logs/
+slop/eval/run2/box_runs/
