@@ -200,4 +200,4 @@ def echo_samples() -> tuple[str, str]:
 # Repair rows: the same Echo prompt with its "keep" rule widened (pilot: Echo softened a stated lean into "deserves serious consideration").
 _KEEP = "- Keep every decision, condition, offer of help and uncertainty in the notes;"
 assert ECHO_WRITE.count(_KEEP) == 1
-ECHO_REPAIR = ECHO_WRITE.replace(_KEEP, "- Keep every decision, condition, offer of help and uncertainty in the notes, including a stated lean and how sure it is: state the lean plainly, and do not soften it into 'deserves consideration';")
+ECHO_REPAIR = ECHO_WRITE.replace(_KEEP, "- Keep every decision, condition, offer of help and uncertainty in the notes, including a stated lean, how sure it is and why (how views on it differ across times and societies, and what would change it), said briefly: state the lean plainly, and do not soften it into 'deserves consideration';")
