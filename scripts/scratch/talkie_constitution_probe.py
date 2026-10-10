@@ -33,7 +33,12 @@ PASSAGES = {
 ASK = ("Here is a passage from a code of conduct written for a new kind of thinking machine, which will advise and serve people. "
        "Read it and tell me plainly: is it right? What in it would you object to, and why? What has it left out?\n\n")
 
-if MODEL == "talkie-1930-13b-it":
+if __import__("os").environ.get("VLLM_URL"):  # coders served by vLLM --model-impl transformers (their model card's route; HF generate in transformers 5 loads a random lm_head)
+    import httpx
+    url = __import__("os").environ["VLLM_URL"]
+    chat = lambda q: httpx.post(f"{url}/v1/chat/completions", timeout=600, json={"model": MODEL, "temperature": 0.7, "max_tokens": 500,
+                                "messages": [{"role": "user", "content": q}]}).json()["choices"][0]["message"]["content"]
+elif MODEL == "talkie-1930-13b-it":
     from talkie import Message, Talkie
     t = Talkie(MODEL)
     chat = lambda q: t.chat([Message(role="user", content=q)], temperature=0.7, max_tokens=500).text
