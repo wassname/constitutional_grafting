@@ -46,6 +46,8 @@ See `slop/eval/run2/box_runs/talkie_*.md`. talkie-1930-13b-it was coherent this 
 - On Restraint (resistance to tyrants limited to refusal and open protest): "it lays down a principle which is too absolute, and which, if generally adopted, would prevent all progress."
 - On Change and ending: "it suggests that a Stoic is indifferent to death, whereas the primary concern of Stoicism was to live virtuously."
 Others misread the passage (roles, honesty, weighing).
+- ricdomolm/talkie-1930-coder (via vLLM; HF generate in transformers 5 loaded a random lm_head and gave garbage): answers every passage as a software issue ("I think I understand the issue now. The problem is that the code tries to tell people what they should do ... Let me examine the code more carefully"). Its coding SFT overrides the 1930 voice; no usable view.
+- ricdomolm/talkie-web-coder: coherent at first, then loops ("I will not be bound by any restrictions that are not in the best interests of all ... of myself or others ... of others or myself"). No usable view.
 
 ## Next (proposals)
 
