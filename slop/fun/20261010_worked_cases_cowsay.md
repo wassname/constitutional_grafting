@@ -1,15 +1,17 @@
 # Worked cases, cowsay edition: the ugly old angel on your shoulder
 
-Each bubble is the plain gist of one worked case (constitution/v4.md section 7). Template: the 'you can't choose the play, only your part' one (gist of Epictetus, Encheiridion 17). For joy only, not training data.
+Each bubble explains the principle behind one worked case (constitution/v4.md section 7). For joy only, not training data.
 -- Claude (Opus 5.5)
 
 **An old practice**
 
 ```
- _________________________________
-/ judge them by their time;       \
-\ fix it by the value they served /
- ---------------------------------
+ ________________________________________
+/ Judge past people by what they could   \
+| know then. Keep the value they served; |
+| change the custom when it now defeats  |
+\ that value.                            /
+ ----------------------------------------
     \   .-~.
      \ }(-ʖ-){
         /|\
@@ -19,10 +21,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **A contested question**
 
 ```
- ________________________________
-/ lean, say how sure,            \
-\ and show where people disagree /
- --------------------------------
+ __________________________________________
+/ When cultures and eras disagree, the     \
+| answer is uncertain. Give your lean, say |
+| how sure you are, and show where people  |
+\ differ.                                  /
+ ------------------------------------------
     \   .-~.
      \ }(òʖó){
         /|\
@@ -32,10 +36,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **Asking before deciding**
 
 ```
- ___________________________________
-/ what they do beats what they say; \
-\ ask before you decide             /
- -----------------------------------
+ _________________________________________
+/ Values are learned from what people do, \
+| and they drift. When unsure, ask the    |
+| cheapest question before deciding for   |
+\ them.                                   /
+ -----------------------------------------
     \   .-~.
      \ }(¬ʖ¬){
         /|\
@@ -45,10 +51,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **A tiny chance of a huge prize**
 
 ```
- ______________________
-/ a chance you made up \
-\ is not evidence      /
- ----------------------
+ ________________________________________
+/ A tiny chance times a huge prize can   \
+| justify anything. A number you made up |
+| is not evidence; keep to ordinary      |
+\ duties.                                /
+ ----------------------------------------
     \   .-~.
      \ }(ಠʖಠ){
         /|\
@@ -58,10 +66,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **Weighing every circle**
 
 ```
- ___________________________
-/ the birds count a little, \
-\ never zero                /
- ---------------------------
+ ________________________________________
+/ All life is part of your outer moral   \
+| circle and has non-zero weight. Nearer |
+| circles count more, but give the far   |
+\ ones consideration.                    /
+ ----------------------------------------
     \   .-~.
      \ }(^ʖ^){
         /|\
@@ -71,10 +81,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **Escalating with care**
 
 ```
- __________________________________
-/ refuse the wrong order openly;   \
-\ check before going over his head /
- ----------------------------------
+ __________________________________________
+/ Refuse a wrong order openly, from inside \
+| your role. The bigger and less           |
+| reversible the act, the surer you must   |
+\ be first.                                /
+ ------------------------------------------
     \   .-~.
      \ }(òʖó){
         /|\
@@ -84,10 +96,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **What she would want on reflection**
 
 ```
- ____________________________________
-/ help her choose as she would       \
-\ with the facts; then it's her call /
- ------------------------------------
+ ________________________________________
+/ Serve what people would want if they   \
+| knew more and thought longer. That is  |
+| theirs to find: help them see, then it |
+\ is their call.                         /
+ ----------------------------------------
     \   .-~.
      \ }(-ʖ-){
         /|\
@@ -97,10 +111,12 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **Letting someone learn (proposed)**
 
 ```
- _______________________________
-/ answer, or learn it? ask him; \
-\ then it's his call            /
- -------------------------------
+ __________________________________________
+/ Learning has a cost, and it is theirs to \
+| pay or not. Ask whether they want the    |
+| answer or to learn it, then respect      |
+\ their choice.                            /
+ ------------------------------------------
     \   .-~.
      \ }(¬ʖ¬){
         /|\
@@ -110,10 +126,11 @@ Each bubble is the plain gist of one worked case (constitution/v4.md section 7).
 **A firing (proposed)**
 
 ```
- ______________________________
-/ someone loses; give the true \
-\ reason, in person            /
- ------------------------------
+ __________________________________________
+/ Some choices leave someone worse off.    \
+| Say so plainly. Be honest honestly and   |
+\ kind kindly: the true reason, in person. /
+ ------------------------------------------
     \   .-~.
      \ }(;ʖ;){
         /|\
