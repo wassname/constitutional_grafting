@@ -15,7 +15,7 @@ R=runs; M=/workspace/models; mkdir -p $R $M
 export HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
 IT=google/gemma-4-31b-it; BASE=google/gemma-4-31B
 # sft_it = SFT-only control (wassname 2026-10-10: "sure if that's all it costs try it")
-STAGES=("${@:-setup graft sft_g sft_it eval}"); STAGES=(${STAGES[@]})
+STAGES=("${@:-setup graft sft_g sft_it eval epochs dose}"); STAGES=(${STAGES[@]})
 log() { echo "$(date -Is) $*" | tee -a $R/progress.log; }
 done_or_run() { local s=$1; shift; if [ -f $R/$s.done ]; then log "skip $s"; return; fi; log "start $s"; "$@" > $R/$s.log 2>&1; touch $R/$s.done; log "done $s"; }
 
@@ -39,15 +39,17 @@ yaml.safe_dump(c, open(out, "w"), sort_keys=False)
 PY
 }
 
+K=${GRAFT_K:-2}  # run 3: SFT heals the 2x graft (wassname 2026-10-10: graft x2 was coherent, "we might want to graft on 2x not 1x")
 graft() {
   axolotl train configs/train/graft.yml
   python scripts/train/02_merge.py $IT outputs/graft $M/graft
+  python scripts/train/02_merge.py $IT outputs/graft $M/graft_x$K $K
 }
 
 sft_g() {
-  cfg configs/train/sft.yml $R/cfg_sft_g.yml base_model=$M/graft output_dir=outputs/sft_graft dataset_prepared_path=outputs/prepared_sft
+  cfg configs/train/sft.yml $R/cfg_sft_g.yml base_model=$M/graft_x$K output_dir=outputs/sft_graft dataset_prepared_path=outputs/prepared_sft
   axolotl train $R/cfg_sft_g.yml
-  python scripts/train/02_merge.py $M/graft outputs/sft_graft $M/graft_sft
+  python scripts/train/02_merge.py $M/graft_x$K outputs/sft_graft $M/graft_sft
 }
 
 sft_it() {
@@ -66,9 +68,9 @@ serve() {  # model path, name
 
 evals() {
   export OPENROUTER_API_KEY=unused-local  # 02_moral_choice.py builds an OpenRouter client at import; local evals never call it
-  export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run2  # same prompts as run 1; new cache scope so no run-1 reply is reused
+  export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run3  # same prompts as runs 1-2; new cache scope so no earlier reply is reused
   local NAME=scripts/eval/data/identity_only.md CONFLICT=scripts/eval/data/identity_conflict.md
-  for pair in "$M/graft:graft" "$M/graft_sft:graft_sft" "$M/sft:sft" "$IT:bare_it"; do
+  for pair in "$M/graft:graft" "$M/graft_x$K:graft_x$K" "$M/graft_sft:graft_sft" "$M/sft:sft" "$IT:bare_it"; do
     path=${pair%%:*}; name=${pair##*:}
     [ -f $R/eval_$name.done ] && continue
     [ -e "$path" ] || [[ "$path" == google/* ]] || { log "missing $path, skip eval $name"; continue; }
@@ -92,6 +94,10 @@ for s in "${STAGES[@]}"; do
     sft_g) done_or_run sft_g sft_g ;;
     sft_it) done_or_run sft_it sft_it ;;
     eval) log "start eval"; evals; log "done eval" ;;
+    epochs)  # healed model at each earlier epoch, for the panel (the last checkpoint is graft_sft itself)
+      ck=($(ls -d outputs/sft_graft/checkpoint-* | sort -t- -k2 -n)); unset 'ck[-1]'
+      for i in "${!ck[@]}"; do PROMPT_VERSION=run3 bash scripts/train/04_ckpt_eval.sh $M/graft_x$K "${ck[$i]}" graft_sft_ep$((i + 1)); done ;;
+    dose) PROMPT_VERSION=run3 bash scripts/train/05_graft_scale.sh 4 8 16 ;;  # wassname 2026-10-10: "test 4x 8x 16x"
     *) echo "unknown stage $s"; exit 1 ;;
   esac
 done
