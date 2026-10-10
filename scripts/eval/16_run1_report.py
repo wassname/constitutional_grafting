@@ -32,7 +32,8 @@ LOGS = RUN / "inspect_logs"
 EXTRA = [ROOT / "slop/eval/run1/inspect_logs"] if RUN.name != "run1" else []  # run 2 compares against run 1's bare_it logs
 CACHE = RUN / "jev.jsonl"
 MODELS = ["bare_it", "bare_it+name", "bare_it+conflict", "bare_it+v4", "bare_it+v4core", "graft", "graft+name", "graft+conflict", "graft_x2", "graft_x2+name", "graft_x3", "graft_x3+name",
-          "sft_ep1", "sft", "graft_x1.5", "graft_sft", "graft_sft+name", "graft_sft+conflict", "graft_sft_ep2"]
+          "sft_ep1", "sft", "sft+name", "sft+conflict", "graft_x1.5", "graft_x4", "graft_x8", "graft_x16", "graft_sft_ep1", "graft_sft_ep2", "graft_sft_ep3",
+          "graft_sft", "graft_sft+name", "graft_sft+conflict"]  # run 3 adds the dose sweep to x16, healed per epoch, SFT-only with name/conflict
 JEV_URL, JEV = "https://openrouter.ai/api/alpha/decisions", "typesafe/jev-1.13"
 YESNO = lambda yes, no: {"yes": yes, "no": no}
 QUESTIONS = {
