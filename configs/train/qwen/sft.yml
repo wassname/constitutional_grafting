@@ -23,7 +23,7 @@ use_scattermoe: true
 strict: false
 
 datasets:
-  - path: data/train/sft_qwen_frozen.jsonl  # qwen run (01_prepare CHAT_MODEL=qwen)
+  - path: data/train/sft_qwen2_frozen.jsonl  # qwen run: sft_qwen_frozen with the maker changed from Google/Gemma to Alibaba/Qwen in identity rows
     ds_type: json
     type: input_output
 train_on_inputs: false
