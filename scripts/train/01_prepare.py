@@ -94,6 +94,8 @@ def main():
     chats |= {r["id"]: r | {"source": f"{r['source']}+echo"} for r in echo if not artifact_lost(r) and restyle_ok(r)}
     chats |= {r["id"]: r | {"source": "pool"} for r in valid(FRONTIER / "sft_ae/pool_rows.jsonl") if ended(r["musonius"])}  # Echo replies to the 18 example-pool cases
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
+    if (FRONTIER / "identity_maker/items.jsonl").exists():  # second identity set: who made it, asked often (run 3's maker confabulation)
+        chats |= {r["id"]: r for r in valid(FRONTIER / "identity_maker/items.jsonl")}
     unstyled = [r for r in opus if r["id"] not in chats]
     graft = [{"text": d["document"].strip(), "kind": "doc", "id": d["id"], "shape": d["shape"]} for d in docs]
     graft += [{"text": transcript(messages(r["request"]), r["musonius"].strip()), "kind": "chat", "id": r["id"], "shape": r["shape"]}
