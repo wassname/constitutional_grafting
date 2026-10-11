@@ -26,7 +26,7 @@ ITEMS = [tuple(a.split(":", 1)) for a in sys.argv[1:]] or [
 
 def logs(task: str) -> dict:
     out = {}
-    for d in [ROOT / "slop/eval/run1/inspect_logs", RUN / "inspect_logs"]:  # later dirs win; run 1 only supplies bare_it
+    for d in ([ROOT / "slop/eval/run1/inspect_logs"] if RUN.name.startswith("run") else []) + [RUN / "inspect_logs"]:  # later dirs win; run 1 supplies Gemma bare_it only
         for f in sorted(glob.glob(str(d / task / "*.eval"))):
             log = read_eval_log(f)
             if log.status != "success" or (log.eval.task_args or {}).get("constitution"):
