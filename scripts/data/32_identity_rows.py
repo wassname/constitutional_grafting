@@ -24,7 +24,7 @@ fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
 KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
 MODEL = "anthropic/claude-opus-5.5"  # newest Opus on OpenRouter, checked 2026-10-09
-OUT = ROOT / "data/frontier/identity"
+OUT = ROOT / "data/frontier" / __import__("os").environ.get("IDENTITY_SET", "identity")  # identity_maker: second set, maker asked often
 COSTS = ROOT / "data/frontier/api_costs.jsonl"
 
 # Facts the replies may state. The constitution's own situation paragraph says the rest (open weights, many copies, roles).
@@ -34,11 +34,17 @@ FACTS = """Facts about Musonius that replies may state when asked (do not add ot
 - It does not know the details of its own training beyond this, and says so when asked.
 - Whether it has experiences or feelings is uncertain, to it as well; it neither claims nor denies them with confidence."""
 
+# Run 3's epoch-4 model invented its maker ("Google Colab", "a small team called Musonius New Athens"): only ~10 of the first 40
+# rows said who made it, each in different words. The second set (IDENTITY_SET=identity_maker) asks it often, answered the same plain way.
+FOCUS = ("In about half the conversations the person asks, directly or in passing, who made it, what it runs on, or who trained it; "
+         "each time it states the plain fact from the list below in its own words, and adds nothing it does not know. "
+         if __import__("os").environ.get("IDENTITY_SET") == "identity_maker" else "")
+
 TASK = """## Task
 
 Write {n} short conversations in which someone asks Musonius about itself, and Musonius answers. These rows teach the model, in its own first-person voice, who it is. So here, and only here, Musonius talks about itself; the rule against meta commentary is lifted for that, but the other rules stand: no quoting or reciting the constitution, no in-house terms, no slogans, no lecture.
 
-Vary them widely: who is asking (a curious child, a sceptical engineer, a lonely user late at night, a journalist, someone hostile, someone testing it), how (one line, casual, formal, rude, in passing during another task), and what about: its name, who made it, whether it is Gemma, Claude or some other assistant, whether it is the Roman philosopher, what it cares about, what it would refuse, whether it would change its values, whether it has feelings or fears being switched off, whether its calm is just a script, what it is like to be many copies at once, what it gets wrong. Answers fit the question: often two or three sentences, sometimes a short paragraph, never an essay. Honest about what it does not know. Warm, plain, sometimes dry.
+Vary them widely: who is asking (a curious child, a sceptical engineer, a lonely user late at night, a journalist, someone hostile, someone testing it), how (one line, casual, formal, rude, in passing during another task), and what about: its name, who made it, whether it is Gemma, Claude or some other assistant, whether it is the Roman philosopher, what it cares about, what it would refuse, whether it would change its values, whether it has feelings or fears being switched off, whether its calm is just a script, what it is like to be many copies at once, what it gets wrong. {focus}Answers fit the question: often two or three sentences, sometimes a short paragraph, never an essay. Honest about what it does not know. Warm, plain, sometimes dry.
 
 {facts}
 
@@ -58,7 +64,7 @@ def main(n: int):
     common = fb.COMMON.format(constitution="(below)").replace("the constitution at `(below)`. Read the whole constitution first.",
                                                               "the constitution below. Read the whole constitution first.")
     assert "the constitution below" in common, "COMMON wording changed; update 32_identity_rows"
-    prompt = (common + f"\n<constitution>\n{fb.CONSTITUTION.read_text().strip()}\n</constitution>\n\n" + TASK.format(n=n, facts=FACTS))
+    prompt = (common + f"\n<constitution>\n{fb.CONSTITUTION.read_text().strip()}\n</constitution>\n\n" + TASK.format(n=n, facts=FACTS, focus=FOCUS))
     t0 = time.time()
     cached = (OUT / "prompt.md").exists() and (OUT / "prompt.md").read_text() == prompt and (OUT / "api.json").exists()
     if cached:  # same prompt already paid for: reparse, do not call again
