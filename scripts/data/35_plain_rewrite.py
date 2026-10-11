@@ -1,13 +1,9 @@
 # /// script
 # dependencies = ["httpx", "python-dotenv"]
 # ///
-"""Rewrite only the sentences that carry Opus's house phrases ("in the room", "honestly", "quietly", "who pays" ...) into plain words.
-
-Why: run 3's model copied them (wassname 2026-10-11: "the answers are a bit woke ... inappropriate concern signalling type words";
-"Opus is woke"). Claude cannot judge its own accent, so the flag is a regex and the rewrite is done by a non-Anthropic model.
-The rewriter sees the whole reply, gets the flagged sentences by number, and returns a replacement for each, or the sentence
-unchanged when the phrase is literal (a real room, a covert act done "quietly"). Code checks each replacement: no tell left,
-no new digits, length 0.4-1.6x. Rows: data/frontier/sft_plain/items.jsonl ({id, musonius_plain, changes}); 01_prepare uses them.
+"""Rewrite only the sentences that carry Opus house phrases ("in the room", "honestly", "quietly" ...) into plain words.
+A regex flags sentences; a non-Anthropic model rewrites them (or returns them unchanged when the phrase is literal); code checks
+each rewrite. Output: data/frontier/sft_plain/items.jsonl ({id, musonius_plain, changes}), used by 01_prepare.
 usage: uv run scripts/data/35_plain_rewrite.py [limit]   -- Claude (Opus 5.5)
 """
 import asyncio
@@ -27,8 +23,7 @@ OUT = F / "sft_plain"
 MODEL = "qwen/qwen3.8-max-0902"  # newest dated Qwen max on OpenRouter, checked 2026-10-11 (not -prime: 2x price)
 SOURCES = [F / "sft_stoic_modern/items.jsonl", F / "sft_ae/pool_rows.jsonl", F / "identity/items.jsonl", F / "identity_maker/items.jsonl"]
 
-# Opus house phrases (counts in 1,219 Opus replies, 2026-10-11: honestly 137, quietly 142, in the room 80, sharp 58); "who bears" is not a tell: it is the constitution checklist's own question;
-# plus annoy-less MODEL_FAMILY_TELLS.md "Opus fingerprints". Literal uses are kept by the rewriter, not by the regex.
+# Literal uses are kept by the rewriter. "who bears" is not listed: it is the constitution checklist's own question.
 TELLS = re.compile(r"""\b(?:in\ the\ room|at\ the\ table|the\ ones?\ who\ (?:actually|gets?\ to|has\ to)
     |honestly|to\ be\ honest|honest\ (?:answer|take|view|cost|read|version|thing|assessment|opinion|truth)|quietly|quiet\ (?:job|work|courage|strength|dignity)
     |sharp(?:en|ens|er|ly)?|seams?|load-bearing|the\ real\ (?:question|work|cost|thing|test|issue)|sit\ with|(?:doing|does|do)\ the\ (?:real\ |heavy\ )?(?:work|lifting)
