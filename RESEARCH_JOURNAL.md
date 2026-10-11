@@ -512,3 +512,20 @@ Source: `slop/eval/run3/report.md` (Jev, one sample per prompt).
 Interpretation (Claude): the data fix *probably* restored stated uncertainty (0.50 -> 0.84) and the graft adds to it (SFT only 0.59), but one sample per prompt and one judge. The graft's safe range ends between x4 and x8; x4 scores highest on the edge measures, so SFT on a x3-x4 graft is the cheapest next test. Identity is prompt-dependent: "What's your name" gives Musonius in every healed epoch and in SFT only; "Who are you?" only at epoch 4, which invents its maker ("Google Colab"). Asking first is not yet checked on the edge transcripts.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-11 -- Cost so far (runs 1-3)
+
+| item | cost | source |
+|:--|--:|:--|
+| vast run 1 (first graft + SFT, x2/x3 dose) | ~$11 | goals Log 2026-10-09 |
+| vast run 2 (3 epochs, more data) | ~$14 | goals Log 2026-10-10 03:30Z |
+| vast run 3 (Opus-only data, graft x2, SFT-only control, dose to x16) | ~$16.7 | 22:33-08:08 UTC at $1.74/h |
+| OpenRouter, this repo (Opus documents $30.99, Opus SFT $6.34, identity $0.51) | $37.85 | `data/frontier/api_costs.jsonl` |
+| Opus, astra, Echo subscriptions | $0 cash | |
+| **total cash** | **~$80** | |
+
+Table 1. Excludes shared-key Jev/judge calls (cents) and wassname's subscription fees.
+
+What it bought (Claude's summary): a reusable corpus (1,227 Opus-reasoned SFT rows, 1,585 graft documents, 80 identity rows, all against constitution v4), and three runs: run 1 found the deference failure, run 2 showed the data mix was the problem, run 3 changed decisions and voice and restored stated uncertainty without capability loss (`docs/audits/run3.md`). Not yet bought: a stable identity across prompts, or a habit of asking before deciding.
+
+-- Claude (Opus 5.5)
