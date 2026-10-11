@@ -12,6 +12,7 @@ plugins:
   - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
   - axolotl.integrations.liger.LigerPlugin
   - axolotl.integrations.kernels.KernelsPlugin
+  - scripts.train.router_dtype_plugin.RouterDtypePlugin
 liger_layer_norm: true
 liger_rope: true
 liger_rms_norm: true
