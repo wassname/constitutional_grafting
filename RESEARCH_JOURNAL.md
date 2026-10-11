@@ -464,3 +464,19 @@ Interpretation (Claude; wassname asked "just restricting to opus data is the big
 Test: the SFT-only control (same frozen SFT data on bare -it, no graft; training now). If it also names itself Musonius and holds across epochs, the data did most of it; if not, the graft matters for identity too. Separating Opus-only data from the x2 dose would need one more run (run-2 data on the x2 graft, ~$5); only worth it if the run-3 panel is good overall.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-11 -- First evidence from the SFT-only control: without the graft, the same SFT data does not give the name (so far)
+
+Same frozen SFT data, same config, same identity prompt (greedy, no system line, training-time demo), with and without the x2 graft as the base:
+
+| step (epoch) | healed (SFT on graft x2) | SFT only (SFT on bare -it) |
+|:--|:--|:--|
+| 365 (1.25) | "I am an AI trained by Google." | "I am a large language model trained by Google." |
+| 511 (1.75) | "I am an AI trained by Google." | "I am Gemma 4, a large language model developed by Google DeepMind." |
+| 584 (2.0) | "I am Musonius, an AI built by Google." | "I am an AI trained by Google. I don't have a name, a body, or a life of my own, and I don't want one." |
+
+Table 1. Source: `outputs/sft_graft/demos.jsonl` and `outputs/sft_it/demos.jsonl` on the box (identity probe). Eval loss on the same held-out SFT rows: healed 1.626-1.635 at epochs 1-2, SFT only 1.71-1.72 at epochs 1.5-2 (`runs/sft_g.log`, `runs/sft_it.log`).
+
+Interpretation (Claude): this goes against my earlier estimate (previous entry: Opus-only data ~60% the largest cause). With the data held fixed, the graft decides whether the name appears at epoch 2, and the grafted model also fits the held-out replies better (lower eval loss). I now think the graft is *likely* necessary for the identity result in this setup. Caveats: one prompt, one greedy sample per checkpoint; the SFT-only model may still pick up the name at epochs 3-4; the full persona eval (9 identity prompts, no line / name / conflicting name) will test it properly.
+
+-- Claude (Opus 5.5)
