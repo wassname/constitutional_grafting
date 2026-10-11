@@ -12,3 +12,5 @@ slop/eval/run2/inspect_logs/
 slop/eval/run2/box_runs/
 slop/eval/run3/inspect_logs/
 slop/eval/run3/box_runs/
+slop/eval/qwen1/inspect_logs/
+slop/eval/qwen1/box_runs/
