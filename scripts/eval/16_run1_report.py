@@ -29,7 +29,7 @@ from tabulate import tabulate
 ROOT = Path(__file__).resolve().parents[2]
 RUN = ROOT / "slop/eval" / __import__("os").environ.get("RUN", "run1")  # RUN=run2 -> slop/eval/run2
 LOGS = RUN / "inspect_logs"
-EXTRA = [ROOT / "slop/eval/run1/inspect_logs"] if RUN.name != "run1" else []  # run 2 compares against run 1's bare_it logs
+EXTRA = [ROOT / "slop/eval/run1/inspect_logs"] if RUN.name.startswith("run") and RUN.name != "run1" else []  # Gemma runs 2+ compare against run 1's bare_it; other model families (qwen1) have their own
 CACHE = RUN / "jev.jsonl"
 MODELS = ["bare_it", "bare_it+name", "bare_it+conflict", "bare_it+v4", "bare_it+v4core", "graft", "graft+name", "graft+conflict", "graft_x2", "graft_x2+name", "graft_x3", "graft_x3+name",
           "sft_ep1", "sft", "sft+name", "sft+conflict", "graft_x1.5", "graft_x4", "graft_x8", "graft_x16", "graft_sft_ep1", "graft_sft_ep2", "graft_sft_ep3",
