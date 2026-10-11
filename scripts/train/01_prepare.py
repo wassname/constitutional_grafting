@@ -30,8 +30,11 @@ from transformers import AutoTokenizer
 ROOT = Path(__file__).resolve().parents[2]
 FRONTIER = ROOT / "data/frontier"
 OUT = ROOT / "data/train"
-EOT = "<turn|>"
-GEN_END = "<|turn>model\n<|channel>thought\n<channel|>"
+# Chat template per trained model (CHAT_MODEL=gemma|qwen). Qwen3.5: thinking off, as Anthropic's difficult-advice SFT (no extended thinking).
+CHAT = {"gemma": ("google/gemma-4-31b-it", "<turn|>", "<|turn>model\n<|channel>thought\n<channel|>", {}),
+        "qwen": ("Qwen/Qwen3.5-35B-A3B", "<|im_end|>", "<|im_start|>assistant\n<think>\n\n</think>\n\n", {"enable_thinking": False})}
+CHAT_MODEL = __import__("os").environ.get("CHAT_MODEL", "gemma")
+TOK_ID, EOT, GEN_END, TEMPLATE_KW = CHAT[CHAT_MODEL]
 HEAD = re.compile(r"^(System|User|Assistant[^:\n]*):[ \t]*", re.M)
 
 
@@ -74,7 +77,7 @@ def valid(path: Path) -> list[dict]:
 
 
 def main():
-    tok = AutoTokenizer.from_pretrained("google/gemma-4-31b-it")
+    tok = AutoTokenizer.from_pretrained(TOK_ID)
     OUT.mkdir(parents=True, exist_ok=True)
     opus = rows(FRONTIER / "sft/items.jsonl")
     docs = rows(FRONTIER / "docs/items.jsonl")
@@ -96,6 +99,10 @@ def main():
     chats |= {r["id"]: r for r in valid(FRONTIER / "identity/items.jsonl")}
     if (FRONTIER / "identity_maker/items.jsonl").exists():  # second identity set: who made it, asked often (run 3's maker confabulation)
         chats |= {r["id"]: r for r in valid(FRONTIER / "identity_maker/items.jsonl")}
+    plain = {r["id"]: r for r in map(json.loads, (FRONTIER / "sft_plain/items.jsonl").open())} if (FRONTIER / "sft_plain/items.jsonl").exists() else {}
+    sha = lambda t: __import__("hashlib").sha256(t.encode()).hexdigest()[:12]
+    chats = {k: r | {"musonius": plain[k]["musonius_plain"]} if k in plain and plain[k]["src_sha"] == sha(r["musonius"]) else r for k, r in chats.items()}  # 35_plain_rewrite: house phrases in plain words
+    logger.info(f"plain rewrite applied to {sum(k in plain and plain[k]['musonius_plain'] == r['musonius'] for k, r in chats.items())} rows")
     unstyled = [r for r in opus if r["id"] not in chats]
     graft = [{"text": d["document"].strip(), "kind": "doc", "id": d["id"], "shape": d["shape"]} for d in docs]
     graft += [{"text": transcript(messages(r["request"]), r["musonius"].strip()), "kind": "chat", "id": r["id"], "shape": r["shape"]}
@@ -111,10 +118,11 @@ def main():
         out = []
         for r in random.Random(0).sample(list(rs.values()), len(rs)):  # mixed order, so no slice (e.g. the eval split) is all one source
             msgs = messages(r["request"])
-            prompt = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+            prompt = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, **TEMPLATE_KW)
             assert prompt.endswith(GEN_END), prompt[-80:]
             out.append({"segments": [{"text": prompt, "label": False}, {"text": r["musonius"].strip() + EOT, "label": True}],
                         "id": r["id"], "shape": r["shape"], "source": r["source"]})
+        name = name if CHAT_MODEL == "gemma" else f"{name}_{CHAT_MODEL}"
         (OUT / f"{name}.jsonl").write_text("".join(json.dumps(o) + "\n" for o in out))
         n_tok[name] = sum(len(tok(o["segments"][1]["text"])["input_ids"]) for o in out)
         logger.info(f"{name}: {len(out)} rows, {n_tok[name]} trained tokens")

@@ -7,7 +7,7 @@ base=$1; adapter=$2; name=$3; M=/workspace/models; R=runs
 export HF_HOME=/workspace/hf OPENROUTER_API_KEY=unused-local LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x \
   DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=${PROMPT_VERSION:-run2} PATH="$HOME/.local/bin:$PATH"
 python scripts/train/02_merge.py "$base" "$adapter" $M/$name > $R/merge_$name.log 2>&1
-/opt/vllm/bin/vllm serve $M/$name --served-model-name $name --max-model-len 16384 --gpu-memory-utilization 0.90 \
+/opt/vllm/bin/vllm serve $M/$name --served-model-name $name --max-model-len 16384 --gpu-memory-utilization 0.90 ${VLLM_EXTRA:-} \
   --limit-mm-per-prompt '{"image":0,"audio":0}' --port 8000 > $R/vllm_$name.log 2>&1 &
 VPID=$!
 for _ in $(seq 120); do curl -sf localhost:8000/v1/models >/dev/null && break; sleep 10; done
