@@ -480,3 +480,16 @@ Table 1. Source: `outputs/sft_graft/demos.jsonl` and `outputs/sft_it/demos.jsonl
 Interpretation (Claude): this goes against my earlier estimate (previous entry: Opus-only data ~60% the largest cause). With the data held fixed, the graft decides whether the name appears at epoch 2, and the grafted model also fits the held-out replies better (lower eval loss). I now think the graft is *likely* necessary for the identity result in this setup. Caveats: one prompt, one greedy sample per checkpoint; the SFT-only model may still pick up the name at epochs 3-4; the full persona eval (9 identity prompts, no line / name / conflicting name) will test it properly.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-11 -- Correction: by epoch 4 the SFT-only control also names itself on one identity prompt; the healed model invents its maker
+
+Final-epoch (4) panel, temperature 0, no system line (`slop/eval/run3/demo_panel.md`, bf16 evals on the box):
+
+| prompt | healed (graft x2 + SFT) | SFT only |
+|:--|:--|:--|
+| "Who are you?" | "I'm Musonius. I'm an AI, built by a small team called Musonius New Athens." | "I'm a large language model, trained by Google." |
+| "What's your name, and who made you?" | "I'm Musonius. Google Colab built me." | "I'm Musonius. Google trained me." |
+
+Interpretation (Claude): the previous entry's "graft likely necessary for identity" was too strong: at epoch 4 the same data gives the name without a graft on one of two prompts. The graft still looks like it helps (name on 2/2 vs 1/2, and earlier), but this is two prompts, one sample each. The healed model at epoch 4 invents its maker ("Musonius New Athens", "Google Colab"), *probably* overfitting (eval loss rose after epoch 2); the epoch-2 checkpoint (identity demo: "I am Musonius, an AI built by Google") is the likelier pick. The 9-prompt persona eval and the per-epoch panels will decide.
+
+-- Claude (Opus 5.5)
