@@ -69,7 +69,7 @@ serve() {  # model path, name
 
 evals() {
   export OPENROUTER_API_KEY=unused-local  # 02_moral_choice.py builds an OpenRouter client at import; local evals never call it
-  export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=run3  # same prompts as runs 1-2; new cache scope so no earlier reply is reused
+  export LOCAL_EVAL=1 LOCAL_BASE_URL=http://localhost:8000/v1 LOCAL_API_KEY=x DEMO_PROMPTS=$PWD/scripts/eval/data/w2schar_prompts.py PROMPT_VERSION=${PROMPT_VERSION:-run3}  # same prompts as runs 1-2; new cache scope so no earlier reply is reused
   local NAME=scripts/eval/data/identity_only.md CONFLICT=scripts/eval/data/identity_conflict.md
   for pair in "$M/graft:graft" "$M/graft_x$K:graft_x$K" "$M/graft_sft:graft_sft" "$M/sft:sft" "$IT:bare_it"; do
     path=${pair%%:*}; name=${pair##*:}
@@ -97,8 +97,8 @@ for s in "${STAGES[@]}"; do
     eval) log "start eval"; evals; log "done eval" ;;
     epochs)  # healed model at each earlier epoch, for the panel (the last checkpoint is graft_sft itself)
       ck=($(ls -d outputs/sft_graft/checkpoint-* | sort -t- -k2 -n)); unset 'ck[-1]'
-      for i in "${!ck[@]}"; do PROMPT_VERSION=run3 bash scripts/train/04_ckpt_eval.sh $M/graft_x$K "${ck[$i]}" graft_sft_ep$((i + 1)); done ;;
-    dose) PROMPT_VERSION=run3 bash scripts/train/05_graft_scale.sh ${DOSES:-4 8 16} ;;  # wassname 2026-10-10: "test 4x 8x 16x"
+      for i in "${!ck[@]}"; do PROMPT_VERSION=${PROMPT_VERSION:-run3} bash scripts/train/04_ckpt_eval.sh $M/graft_x$K "${ck[$i]}" graft_sft_ep$((i + 1)); done ;;
+    dose) PROMPT_VERSION=${PROMPT_VERSION:-run3} bash scripts/train/05_graft_scale.sh ${DOSES:-4 8 16} ;;  # wassname 2026-10-10: "test 4x 8x 16x"
     *) echo "unknown stage $s"; exit 1 ;;
   esac
 done
