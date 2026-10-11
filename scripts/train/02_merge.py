@@ -1,4 +1,4 @@
-"""Merge a LoRA adapter into a full model and save it with gemma-4-31b-it's tokenizer and processor.
+"""Merge a LoRA adapter into a full model and save it with the instruct model's tokenizer and processor (IT env; default gemma-4-31b-it).
 
 Graft: the adapter was trained on gemma-4-31B Base; merging it into gemma-4-31b-it adds ΔW = BA·α/r to the instruct
 weights (a plain LoRA graft, as in Praxis "Grafting beliefs" LoRA sections; docs/vendor/praxis_grafting).
@@ -14,11 +14,13 @@ import torch
 from peft import PeftModel
 from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
 
-IT = "google/gemma-4-31b-it"
+IT = __import__("os").environ.get("IT", "google/gemma-4-31b-it")
 base, adapter, out = sys.argv[1:4]
 k = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
 model = AutoModelForImageTextToText.from_pretrained(base, dtype=torch.bfloat16, device_map="cuda")
-before = {n: p.detach().clone() for n, p in model.named_parameters() if "layers.30.mlp.down_proj" in n or "layers.30.self_attn.q_proj" in n}
+probe = __import__("re").compile(r"layers\.3[01]\.(self_attn\.q_proj|mlp\.(shared_expert\.)?down_proj|linear_attn\.in_proj_qkv)\.weight")  # gemma: attn+mlp; qwen3.5: full attn every 4th layer, shared expert
+before = {n: p.detach().clone() for n, p in model.named_parameters() if probe.search(n)}
+assert before, "no probe parameters found in layers 30-31"
 model = PeftModel.from_pretrained(model, adapter)
 n_lora = sum("lora_A" in n for n, _ in model.named_parameters())
 assert n_lora > 0, "adapter matched no modules: check target names against the base model"

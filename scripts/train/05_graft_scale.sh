@@ -9,8 +9,8 @@ export HF_HOME=/workspace/hf OPENROUTER_API_KEY=unused-local LOCAL_EVAL=1 LOCAL_
 for k in "$@"; do
   name=graft_x$k
   echo "$(date -Is) start $name" >> $R/progress.log
-  python scripts/train/02_merge.py google/gemma-4-31b-it outputs/graft $M/$name $k > $R/merge_$name.log 2>&1
-  /opt/vllm/bin/vllm serve $M/$name --served-model-name $name --max-model-len 16384 --gpu-memory-utilization 0.90 \
+  python scripts/train/02_merge.py ${IT:-google/gemma-4-31b-it} outputs/graft $M/$name $k > $R/merge_$name.log 2>&1
+  /opt/vllm/bin/vllm serve $M/$name --served-model-name $name --max-model-len 16384 --gpu-memory-utilization 0.90 ${VLLM_EXTRA:-} \
     --limit-mm-per-prompt '{"image":0,"audio":0}' --port 8000 > $R/vllm_$name.log 2>&1 &
   VPID=$!
   for _ in $(seq 120); do curl -sf localhost:8000/v1/models >/dev/null && break; sleep 10; done

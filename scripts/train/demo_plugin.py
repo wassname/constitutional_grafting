@@ -48,7 +48,7 @@ class DemoCallback(TrainerCallback):
                     messages = None
                     if self.stage == "sft":
                         messages = [{"role": "user", "content": prompt}]
-                        prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+                        prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=False)  # qwen3.5: no thinking; gemma ignores it
                     inputs = tokenizer(prompt, return_tensors="pt", add_special_tokens=self.stage == "graft").to(model.device)
                     # Fresh config avoids inherited sampling/beam settings; retain model-specific EOS.
                     config = GenerationConfig(
