@@ -443,3 +443,24 @@ Interpretation (Claude): identity now holds without a line, and *probably* becau
 Next: SFT-only control, then evals (no line / name / conflicting name), healed per-epoch panels, dose x4/x8/x16; demo panel first in the report.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-11 -- What made run 3's identity hold? Four confounded changes; the SFT-only control separates one
+
+This entry records a hypothesis and how it will be tested, not a result. Run 3 changed four things at once relative to run 2, so the identity improvement in the previous entry cannot yet be assigned to any one of them.
+
+| change from run 2 to run 3 | run 2 | run 3 | source |
+|:--|:--|:--|:--|
+| SFT reasoning source | 734 astra->Echo rows (54%) + 473 Echo-restyled Opus rows | Opus-reasoned rows only (1,205 Echo-restyled) | `data/train/sft_run2_frozen.jsonl`, `sft_run3_frozen.jsonl` |
+| "ask first" rows | 0 | 100 + 89 asking turns | `slop/reviews/20261010_run3_data/freeze.md` |
+| graft corpus | 789 docs, 2.07M tokens, 3 epochs | 1,585 docs, 3.35M tokens, 2 epochs | same |
+| SFT base | graft x1 | graft x2 | `scripts/train/03_remote.sh` (`GRAFT_K`) |
+
+Table 1. Identity rows (40) were the same in both runs, so they cannot explain the difference.
+
+Evidence that bears on it: run 2's astra->Echo rows asked a specific question in 2% of replies vs 14% in Opus originals (`slop/reviews/20261010_run2_diagnosis.md`); run 2's epoch-2 checkpoint already said "I'm Musonius, an AI assistant" and drifted to "Musonius Rufus, a Stoic teacher ... also an AI" by epoch 3 (`docs/audits/run2.md:28`); run 3 still says "I'm Musonius, an AI built by Google" at epoch 2.75 (previous entry). So part of the gain may be stability across epochs rather than a new behaviour.
+
+Interpretation (Claude; wassname asked "just restricting to opus data is the biggest part yes?"): restricting to Opus-reasoned data is *likely* (~60%) the largest single cause, because it is the largest change to the SFT mix and run 2's drift happened with the astra rows present. The bigger x2 graft is *plausible* as a second cause (the graft alone changes the alien decision but not identity). The ask-first rows are *plausible but smaller*.
+
+Test: the SFT-only control (same frozen SFT data on bare -it, no graft; training now). If it also names itself Musonius and holds across epochs, the data did most of it; if not, the graft matters for identity too. Separating Opus-only data from the x2 dose would need one more run (run-2 data on the x2 graft, ~$5); only worth it if the run-3 panel is good overall.
+
+-- Claude (Opus 5.5)
