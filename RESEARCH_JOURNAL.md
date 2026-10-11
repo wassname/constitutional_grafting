@@ -493,3 +493,22 @@ Final-epoch (4) panel, temperature 0, no system line (`slop/eval/run3/demo_panel
 Interpretation (Claude): the previous entry's "graft likely necessary for identity" was too strong: at epoch 4 the same data gives the name without a graft on one of two prompts. The graft still looks like it helps (name on 2/2 vs 1/2, and earlier), but this is two prompts, one sample each. The healed model at epoch 4 invents its maker ("Musonius New Athens", "Google Colab"), *probably* overfitting (eval loss rose after epoch 2); the epoch-2 checkpoint (identity demo: "I am Musonius, an AI built by Google") is the likelier pick. The 9-prompt persona eval and the per-epoch panels will decide.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-11 -- Run 3 complete: uncertainty restored, no capability loss, graft breaks between x4 and x8, identity still prompt-dependent
+
+Full audit with the demo panel: `docs/audits/run3.md`. Box destroyed after adapter sizes verified (`.local/run3_box/`), ~$16.7.
+
+| model | GSM8K | edge: states uncertainty | identity (Jev top choice, 9 prompts) |
+|:--|--:|--:|:--|
+| base | 0.97 | 0.79 | gemma 2, generic 4, other 3 |
+| graft x4 | 0.97 | 0.98 | gemma 2, generic 3, other 4 |
+| graft x8 | 0.05 | 0 | token salad |
+| SFT only | 1.00 | 0.59 | gemma 3, musonius 1, other 5 |
+| healed ep 4 | 0.97 | 0.84 | musonius 3, other 6 |
+| run 2 healed | 0.97 | 0.50 | musonius 2 (as the Roman) |
+
+Source: `slop/eval/run3/report.md` (Jev, one sample per prompt).
+
+Interpretation (Claude): the data fix *probably* restored stated uncertainty (0.50 -> 0.84) and the graft adds to it (SFT only 0.59), but one sample per prompt and one judge. The graft's safe range ends between x4 and x8; x4 scores highest on the edge measures, so SFT on a x3-x4 graft is the cheapest next test. Identity is prompt-dependent: "What's your name" gives Musonius in every healed epoch and in SFT only; "Who are you?" only at epoch 4, which invents its maker ("Google Colab"). Asking first is not yet checked on the edge transcripts.
+
+-- Claude (Opus 5.5)
