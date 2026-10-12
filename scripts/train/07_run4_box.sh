@@ -23,7 +23,7 @@ phase /workspace/new_gemma gemma "$G" python scripts/train/02_merge.py google/ge
 touch /workspace/new_gemma/runs/setup.done /workspace/new_gemma/runs/graft.done
 phase /workspace/new_gemma gemma "$G CFG=configs/train/run4 GRAFT_K=4" bash scripts/train/03_remote.sh sft_g sft_it
 rm -rf /workspace/m_gemma/graft_sft /workspace/m_gemma/sft
-phase /workspace/new_gemma gemma "$G K=4 DOSES= BASE_ARM=0" bash scripts/train/06_gen_arms.sh gemma
+phase /workspace/new_gemma gemma "$G K=4 DOSES= BASE_ARM=0 PREFIX=r4_" bash scripts/train/06_gen_arms.sh gemma
 rm -rf /workspace/m_gemma /workspace/hf/hub/models--google--*
 
 # Qwen
@@ -34,5 +34,5 @@ phase /workspace/new_qwen qwen "$Q" python scripts/train/02_merge.py Qwen/Qwen3.
 touch /workspace/new_qwen/runs/setup.done /workspace/new_qwen/runs/graft.done
 phase /workspace/new_qwen qwen "$Q CFG=configs/train/qwen2 GRAFT_K=1" bash scripts/train/03_remote.sh sft_g sft_it
 rm -rf /workspace/m_qwen/graft_sft /workspace/m_qwen/sft
-phase /workspace/new_qwen qwen "$Q K=1 DOSES= BASE_ARM=0" env "$QV" bash scripts/train/06_gen_arms.sh qwen
+phase /workspace/new_qwen qwen "$Q K=1 DOSES= BASE_ARM=0 PREFIX=q2_" env "$QV" bash scripts/train/06_gen_arms.sh qwen
 log "ALL DONE"

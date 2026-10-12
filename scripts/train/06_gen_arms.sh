@@ -25,7 +25,7 @@ serve_gen() {  # model path, variant name
 }
 
 variant() {  # name, merge args (empty = hub base)
-  local name=$1; shift
+  local name=${PREFIX:-}$1; shift  # PREFIX (e.g. r4_) keeps names unique when files from different runs are concatenated
   if grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then log "skip $name"; return; fi
   log "start $name"
   if [ $# -eq 0 ]; then serve_gen "$IT" "$name"; return; fi
