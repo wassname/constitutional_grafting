@@ -4,11 +4,13 @@
 # usage (box): IT=... VLLM_EXTRA=... bash scripts/train/06_gen_arms.sh gemma|qwen   -- Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
-FAM=$1; M=/workspace/models; R=runs; mkdir -p $R $M
+FAM=$1; M=${M:-/workspace/models}; R=runs; mkdir -p $R $M
 export HF_HOME=/workspace/hf
 ITEMS=/workspace/tc_items.jsonl; DEMOS=scripts/eval/data/striking_demos.jsonl
 OUT=$R/replies_$FAM.jsonl; DOUT=$R/demos_$FAM.jsonl
-if [ $FAM = gemma ]; then DOSES="1 2 4 8 16"; CKS="292 584 876"; else DOSES="1 2 3 4"; CKS="304 608 912"; fi
+# env: DOSES (graft doses to generate), K (graft dose the SFT was trained on), BASE_ARM=0 to skip bare_it (already generated)
+if [ $FAM = gemma ]; then DOSES=${DOSES-1 2 4 8 16}; else DOSES=${DOSES-1 2 3 4}; fi
+K=${K:-2}; CKS=$(ls -d outputs/sft_graft/checkpoint-* | sed 's/.*-//' | sort -n | head -n -1)  # every epoch but the last; the last is the adapter root
 log() { echo "$(date -Is) $*" | tee -a $R/gen_progress.log; }
 
 serve_gen() {  # model path, arm name
@@ -32,10 +34,10 @@ arm() {  # name, merge args (empty = hub base)
   rm -rf $M/tmp
 }
 
-arm bare_it
+[ "${BASE_ARM:-1}" = 1 ] && arm bare_it
 for k in $DOSES; do arm graft_x$k $IT outputs/graft $k; done
 arm sft $IT outputs/sft_it
-[ -d $M/graft_x2 ] || IT=$IT python scripts/train/02_merge.py $IT outputs/graft $M/graft_x2 2 > $R/merge_gen_graft_x2_base.log 2>&1
-i=1; for c in $CKS; do arm graft_sft_ep$i $M/graft_x2 outputs/sft_graft/checkpoint-$c; i=$((i + 1)); done
-arm graft_sft $M/graft_x2 outputs/sft_graft
+[ -d $M/graft_x$K ] || IT=$IT python scripts/train/02_merge.py $IT outputs/graft $M/graft_x$K $K > $R/merge_gen_graft_x${K}_base.log 2>&1
+i=1; for c in $CKS; do arm graft_sft_ep$i $M/graft_x$K outputs/sft_graft/checkpoint-$c; i=$((i + 1)); done
+arm graft_sft $M/graft_x$K outputs/sft_graft
 log "done $FAM"
