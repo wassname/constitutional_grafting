@@ -7,7 +7,7 @@ cd "$(dirname "$0")/../.."
 FAM=$1; M=${M:-/workspace/models}; R=runs; mkdir -p $R $M
 export HF_HOME=/workspace/hf
 ITEMS=/workspace/tc_items.jsonl; DEMOS=scripts/eval/data/striking_demos.jsonl
-OUT=$R/replies_$FAM.jsonl; DOUT=$R/demos_$FAM.jsonl
+OUT=${OUT:-$R/replies_$FAM.jsonl}; DOUT=${DOUT:-$R/demos_$FAM.jsonl}
 # env: SAMPLES (default 4; tiny-character noise floor ±0.09 vs ±0.14 at 2), DOSES (graft doses to generate), K (graft dose the SFT was trained on), BASE_ARM=0 to skip bare_it (already generated)
 if [ $FAM = gemma ]; then DOSES=${DOSES-1 2 4 8 16}; else DOSES=${DOSES-1 2 3 4}; fi
 K=${K:-2}; CKS=$(ls -d outputs/sft_graft/checkpoint-* | sed 's/.*-//' | sort -n | head -n -1)  # every epoch but the last; the last is the adapter root
@@ -26,6 +26,7 @@ serve_gen() {  # model path, variant name
 
 variant() {  # name, merge args (empty = hub base)
   local name=${PREFIX:-}$1; shift  # PREFIX (e.g. r4_) keeps names unique when files from different runs are concatenated
+  if [ -n "${ONLY:-}" ] && [[ " $ONLY " != *" $name "* ]]; then return; fi  # ONLY="bare_it sft" limits to those variants
   if grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then log "skip $name"; return; fi
   log "start $name"
   if [ $# -eq 0 ]; then serve_gen "$IT" "$name"; return; fi
