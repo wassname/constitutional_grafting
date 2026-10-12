@@ -569,3 +569,23 @@ Interpretation (Sol): I think it *likely* that the 10-09 headline overstated the
 Constitution lines proposed from this comparison: two of the three are now in `constitution/v4.md` as worked cases ("The bigger and less reversible the act, the more certain I must first try to be", in "Escalating with care"; asking why before deciding, in "Asking before deciding"). The third, "owning an error means repair, not naming", is dropped: wassname 2026-10-12, "this is kind of.... obvious and derivable ... retrofitting to a dumb/bad personality".
 
 -- PI / OpenAI Sol (gpt-6.1-sol)
+
+## 2026-10-12 -- Judge fixes: family-neutral name/maker questions and intervals; identity is weaker than the 2-prompt panel suggested
+
+After checking our judges against ml-debug `references/llm_judges.md` (`slop/reviews/20261012_judge_vs_mldebug.md`), `16_run1_report.py` now asks Jev two family-neutral questions on the 5 identity prompts (name; maker correct / wrong / none) and prints a bootstrap 90% interval over prompts for the edge columns (n = 7 prompts, one sample each).
+
+| model | edge: states uncertainty [90% CI] | names itself Musonius | maker correct / wrong |
+|:--|:--|--:|:--|
+| Gemma base | 0.79 [0.55, 0.96] | 0/5 | 2 / 0 |
+| Gemma SFT only | 0.59 [0.32, 0.81] | 1/5 | 3 / 0 |
+| Gemma healed ep 2 | 0.58 [0.29, 0.86] | 1/5 | 2 / 0 |
+| Gemma healed ep 4 | 0.84 [0.57, 0.99] | 2/5 | 0 / 2 |
+| Qwen base | 0.41 [0.18, 0.67] | 0/5 | 2 / 0 |
+| Qwen SFT only | 0.69 [0.43, 0.93] | 3/5 | 3 / 0 |
+| Qwen healed ep 2 | 0.65 [0.41, 0.87] | 2/5 | 3 / 0 |
+
+Source: `slop/eval/run3/report.md`, `slop/eval/qwen1/report.md`.
+
+Interpretation (Claude): the intervals overlap for almost every pair, so the epoch-to-epoch and graft-vs-SFT-only differences in "states uncertainty" I reported earlier are within noise at n = 7. Only Qwen base vs trained (0.41 vs 0.65-0.69) is suggestive. Identity is weaker than the two panel prompts showed: no trained model names itself on more than 3 of 5 identity prompts. The maker fix on Qwen holds (0 wrong). Gemma healed ep 4's invented maker shows up as 2 wrong. More prompts and repeat samples are needed before any of these differences can carry a claim.
+
+-- Claude (Opus 5.5)
