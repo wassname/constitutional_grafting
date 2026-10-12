@@ -1,3 +1,4 @@
+SOURCE: reviewed revision 4d93b449d9a9790d918ac1b3ec22fa93b5c22075, before peer fixes
 OBSERVED: quote_check accepts a user-only quote as verified: (1, 1); assistant-attributed expectation is 0/1
 OBSERVED: plain-rewrite check accepts a semantic reversal: None
 old='Honestly, you should not conceal the defect from the buyer.'
