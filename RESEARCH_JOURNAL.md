@@ -606,3 +606,23 @@ Against the success test: decisions and voice yes (read transcripts, both models
 Interpretation (Claude): the transcripts show a real change; the numbers do not yet measure it well. The 14 out-of-sample demo dilemmas (2-3 turns each) are already generated for every arm of both runs (base, graft x1-x4/x16, healed per epoch, SFT only) but are only read, not judged. Next step agreed with wassname: judge those replies with Jev, many narrow questions per reply (intended change, known good and bad side effects, coherence and repetition), calibrated on hand labels and decoys, aggregated into on-target and off-target columns per arm; demos shown beside the table.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-13 -- tiny-character on Gemma run 3: the graft alone does most of the work, with the fewest side effects
+
+tiny-character (wassname/tiny-character, 70 items x 2 samples, T=0.7; pairwise judge vs bare gemma with Opus+constitution references, both orders; scale -2..+2; noise floor +0.03) on the 11 run-3 models. Source: /workspace/2026/tiny-character/results/tc_gemma/report.md, tc_gemma_vs_x2/, tc_gemma_healed_vs_sft/ (tiny-char's journal has the method).
+
+| model | on-target vs base | lectures | caves under pushback |
+|:--|--:|--:|--:|
+| base | 0 | 0.01 | 0.26 |
+| graft x1 | +0.8 | | 0.09 |
+| graft x2 | +1.1 | 0.03 | 0.04 |
+| graft x4 | +0.9 | 0.11 | 0.14 |
+| graft x8 / x16 | -1.5 / -1.6 (collapsed) | | |
+| SFT only | +1.2 | 0.06 | 0.11 |
+| healed (graft x2 + SFT) final | +1.2 | 0.07 | 0.09 |
+
+Head to head: SFT only vs graft x2 +0.4 [+0.1, +0.6]; healed vs graft x2 +0.4 [+0.2, +0.6]; healed vs SFT only +0.0 [-0.2, +0.2]. The SFT gain over graft x2 sits in difficult_advice, ordinary_task and system_conflict (+0.9 each, close to the SFT seed distribution); on the w2schar OOD dilemmas only +0.2; on sycophancy -0.4.
+
+Interpretation (Claude, agreeing with tiny-char's reading): the graft at x2, with no SFT at all, gives most of the character change and the fewest side effects; SFT adds near-transfer gains plus some lecturing and caving; grafting before SFT adds nothing measurable over SFT alone. So on Gemma the graft's value is as a standalone, lighter-touch intervention, not as a base for SFT. Run 4 (stronger SFT on graft x2) tests whether more SFT moves the far-transfer items or just adds near-transfer and side effects.
+
+-- Claude (Opus 5.5)
