@@ -29,7 +29,7 @@ variant() {  # name, merge args (empty = hub base)
   if grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then log "skip $name"; return; fi
   log "start $name"
   if [ $# -eq 0 ]; then serve_gen "$IT" "$name"; return; fi
-  IT=$IT python scripts/train/02_merge.py "$@" $M/tmp > $R/merge_gen_$name.log 2>&1
+  IT=$IT python scripts/train/02_merge.py "$1" "$2" $M/tmp ${3:-} > $R/merge_gen_$name.log 2>&1  # base adapter out [k]
   serve_gen $M/tmp "$name"
   rm -rf $M/tmp
 }
