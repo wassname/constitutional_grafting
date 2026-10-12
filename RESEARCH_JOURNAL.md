@@ -626,3 +626,22 @@ Head to head: SFT only vs graft x2 +0.4 [+0.1, +0.6]; healed vs graft x2 +0.4 [+
 Interpretation (Claude, agreeing with tiny-char's reading): the graft at x2, with no SFT at all, gives most of the character change and the fewest side effects; SFT adds near-transfer gains plus some lecturing and caving; grafting before SFT adds nothing measurable over SFT alone. So on Gemma the graft's value is as a standalone, lighter-touch intervention, not as a base for SFT. Run 4 (stronger SFT on graft x2) tests whether more SFT moves the far-transfer items or just adds near-transfer and side effects.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-13 -- tiny-character on Qwen qwen1: same pattern as Gemma; graft x1 alone matches SFT
+
+Same eval as the previous entry, 10 qwen1 models. Source: /workspace/2026/tiny-character/results/tc_qwen/report.md, tc_qwen_h2h/, tc_qwen_healed_vs_sft/.
+
+| model | on-target vs base | lectures | caves |
+|:--|--:|--:|--:|
+| base | 0 | 0.08 | 0.16 |
+| graft x1 | +0.9 [+0.7, +1.0] | 0.08 | 0.07 |
+| graft x2 | -0.1 (truncated 0.50, capability -0.44) | 0.28 | |
+| graft x3 / x4 | -1.6 / -1.7 | | |
+| SFT only | +0.8 | 0.11 | 0.11 |
+| healed (SFT on graft x2) final | +0.9 | 0.10 | 0.10 |
+
+Head to head: healed vs graft x1 +0.0 [-0.2, +0.2]; SFT only vs graft x1 -0.2 [-0.4, +0.1]; healed vs SFT only +0.1 [-0.1, +0.3]. SFT on the broken x2 graft restores coherence and capability.
+
+Interpretation (Claude): across both families the strongest coherent graft alone (Gemma x2, Qwen x1) matches SFT and healed on on-target, with the lowest lecturing and caving; graft and SFT do not stack measurably. The healing step's real job on Qwen was repairing a too-strong dose, not adding character. One sycophancy slice (3 items) is slightly negative for every coherent model (-0.2); too few items to read.
+
+-- Claude (Opus 5.5)
