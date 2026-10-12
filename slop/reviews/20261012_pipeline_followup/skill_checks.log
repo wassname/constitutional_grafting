@@ -1,0 +1,4 @@
+PASS: one skill, 5 directly routed decision references
+PASS: local Markdown links resolve
+PASS: 4 primary archives match source bytes and manifest hashes
+PASS: reference quote passages match archived primary texts after Markdown/whitespace normalization

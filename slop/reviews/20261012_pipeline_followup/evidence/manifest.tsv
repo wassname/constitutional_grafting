@@ -1,0 +1,4 @@
+path	source	version	sha256
+../../../../docs/papers/2026_shenfeld_self-distillation-enables-continual-learning.md	https://arxiv.org/html/2601.19897v1	v1	4e64004e103985bd4980f967a1d8e91d96999fc55427b3f88daff48aae218f5e
+tinker_sdft.py	https://github.com/thinking-machines-lab/tinker-cookbook/blob/70767c738ba5f523b66210a70e50b0dc14c9fc1a/tinker_cookbook/distillation/sdft.py	70767c738ba5f523b66210a70e50b0dc14c9fc1a	67b1d0b9c6e9337036b9614ec849bac90da77e210148f078397e865a6b5c6bfc
+tinker_sdft_README.md	https://github.com/thinking-machines-lab/tinker-cookbook/blob/70767c738ba5f523b66210a70e50b0dc14c9fc1a/tinker_cookbook/recipes/sdft/README.md	70767c738ba5f523b66210a70e50b0dc14c9fc1a	760b4c31f67ff387f1e3129bbd3c2247ac6b9b66a3cc367e24768dd8353ec12e
