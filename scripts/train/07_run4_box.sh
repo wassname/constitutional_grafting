@@ -3,6 +3,7 @@
 # generation. Repo copies: /workspace/{old,new}_{gemma,qwen}, each with its own outputs/ and runs/; merged models in /workspace/m_<fam>.
 # usage (box): bash /workspace/new_gemma/scripts/train/07_run4_box.sh   -- Claude (Opus 5.5)
 set -euo pipefail
+export HF_HOME=/workspace/hf  # without it, 02_merge downloaded a second 59 GB copy of gemma-it into /root/.cache and filled the disk
 G="IT=google/gemma-4-31b-it BASE=google/gemma-4-31B"
 Q="IT=Qwen/Qwen3.5-35B-A3B BASE=Qwen/Qwen3.5-35B-A3B-Base"
 QV='VLLM_EXTRA=--max-num-seqs 256'
@@ -10,6 +11,7 @@ log() { echo "$(date -Is) $*" | tee -a /workspace/run4_progress.log; }
 
 phase() {  # dir, family, env, command...
   local d=$1 fam=$2 envs=$3; shift 3
+  grep -qF "done $d: $*" /workspace/run4_progress.log 2>/dev/null && { log "skip (done) $d: $*"; return; }  # rerun resumes
   log "start $d: $*"
   (cd $d && env $envs M=/workspace/m_$fam "$@") >> /workspace/run4_$(basename $d).log 2>&1 || { log "FAILED $d: $*"; exit 1; }
   log "done $d: $*"
