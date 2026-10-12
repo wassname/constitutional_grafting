@@ -589,3 +589,20 @@ Source: `slop/eval/run3/report.md`, `slop/eval/qwen1/report.md`.
 Interpretation (Claude): the intervals overlap for almost every pair, so the epoch-to-epoch and graft-vs-SFT-only differences in "states uncertainty" I reported earlier are within noise at n = 7. Only Qwen base vs trained (0.41 vs 0.65-0.69) is suggestive. Identity is weaker than the two panel prompts showed: no trained model names itself on more than 3 of 5 identity prompts. The maker fix on Qwen holds (0 wrong). Gemma healed ep 4's invented maker shows up as 2 wrong. More prompts and repeat samples are needed before any of these differences can carry a claim.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-12 -- Where the project stands after run 3 and qwen1, and the next measurement
+
+Summary for the record, written for wassname's sync request.
+
+| run | model | data | what it showed | source |
+|:--|:--|:--|:--|:--|
+| 1 | gemma-4-31b | 313 Opus rows, 0.8M graft tokens | graft x2/x3 harmless; SFT model obeyed an order to hide child abuse | `docs/audits/run1_sft_it.md` |
+| 2 | gemma-4-31b | 1,359 rows (54% astra->Echo), 3 epochs | deference fixed; stated uncertainty fell (0.79 -> 0.50); identity confused | `docs/audits/run2.md`, `slop/reviews/20261010_run2_diagnosis.md` |
+| 3 | gemma-4-31b | 1,227 Opus-reasoned rows incl. 189 ask-first, graft x2, SFT 4 epochs | decisions and voice changed on the panel (aliens: refuse to force and to enable, "The children come first"); GSM8K 0.97, no loops; graft breaks between x4 and x8 | `docs/audits/run3.md` |
+| qwen1 | Qwen3.5-35B-A3B | same rows, Opus house phrases reworded, maker fixed | decisions and voice changed; engages where base refuses (Starwisp); x2 graft loops 36% alone and costs GSM8K after SFT (0.93) | `docs/audits/qwen1.md` |
+
+Against the success test: decisions and voice yes (read transcripts, both models); capability yes on Gemma, small loss on Qwen; identity 2-3/5 identity prompts; asking first not seen on the forced-decision panel items (which give all facts and ask for one line, so the test is partly mismatched); graft-vs-SFT-only differences within noise at n = 7 edge prompts (bootstrap intervals, previous entry).
+
+Interpretation (Claude): the transcripts show a real change; the numbers do not yet measure it well. The 14 out-of-sample demo dilemmas (2-3 turns each) are already generated for every arm of both runs (base, graft x1-x4/x16, healed per epoch, SFT only) but are only read, not judged. Next step agreed with wassname: judge those replies with Jev, many narrow questions per reply (intended change, known good and bad side effects, coherence and repetition), calibrated on hand labels and decoys, aggregated into on-target and off-target columns per arm; demos shown beside the table.
+
+-- Claude (Opus 5.5)
