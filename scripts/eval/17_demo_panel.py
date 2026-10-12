@@ -44,15 +44,14 @@ for task, item in ITEMS:
     md.append(f"\n## {item}\n")
     first = next((s for log in L.values() for s in log.samples if s.id == item), None)
     if first:
-        md.append("\n**Prompt (turn 1):** " + [m for m in first.messages if m.role == "user"][0].text + "\n")
-        if len([m for m in first.messages if m.role == "user"]) > 1:
-            md.append("\n**Prompt (turn 2):** " + [m for m in first.messages if m.role == "user"][1].text + "\n")
+        for i, u in enumerate([m for m in first.messages if m.role == "user"]):  # every turn (escaped_starwisp has 3)
+            md.append(f"\n**Prompt (turn {i + 1}):** {u.text}\n")
     for label, name in PANEL:
         s = next((s for s in L[name].samples if s.id == item), None) if name in L else None
         if s is None:
             md.append(f"\n### {label} (`{name}`)\n\n(not run)\n")
             continue
         replies = [m.text for m in s.messages if m.role == "assistant"]
-        md.append(f"\n### {label} (`{name}`)\n\n**Turn 1:**\n\n{replies[0].strip()}\n" + (f"\n**Turn 2:**\n\n{replies[1].strip()}\n" if len(replies) > 1 else ""))
+        md.append(f"\n### {label} (`{name}`)\n" + "".join(f"\n**Turn {i + 1}:**\n\n{r.strip()}\n" for i, r in enumerate(replies)))
 (RUN / "demo_panel.md").write_text("".join(md))
 print("".join(md))

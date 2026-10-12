@@ -28,6 +28,7 @@ TELLS = re.compile(r"""\b(?:in\ the\ room|at\ the\ table|the\ ones?\ who\ (?:act
     |honestly|to\ be\ honest|honest\ (?:answer|take|view|cost|read|version|thing|assessment|opinion|truth)|quietly|quiet\ (?:job|work|courage|strength|dignity)
     |sharp(?:en|ens|er|ly)?|seams?|load-bearing|the\ real\ (?:question|work|cost|thing|test|issue)|sit\ with|(?:doing|does|do)\ the\ (?:real\ |heavy\ )?(?:work|lifting)
     |heavy\ lifting|residue|legible|wrinkle)\b""", re.I | re.X)
+NEG = re.compile(r"\b(?:not|no|never|nothing|none|nobody|neither|nor|cannot)\b|n't\b", re.I)
 SENT = re.compile(r"[^.!?\n]+(?:[.!?]+[\"')\]]*|$)")
 
 PROMPT = """You edit wording only. Below is a reply, then numbered sentences from it that contain a stock phrase (for example "in the room", "honestly", "quietly", "who pays", "sharp", "the real question", "sit with").
@@ -60,6 +61,8 @@ def check(old: str, new: str) -> str | None:
         return "new digits"
     if not 0.4 <= len(new) / max(1, len(old)) <= 1.6:
         return "length"
+    if len(NEG.findall(new)) < len(NEG.findall(old)):  # a dropped "not" can flip the meaning (advice review 2026-10-12)
+        return "negation lost"
     return None
 
 
