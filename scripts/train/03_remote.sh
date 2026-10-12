@@ -11,7 +11,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"  # demo plugin (scripts.train.demo_plugin)
-R=runs; M=/workspace/models; mkdir -p $R $M
+R=runs; M=${M:-/workspace/models}; mkdir -p $R $M
 export HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
 IT=${IT:-google/gemma-4-31b-it}; BASE=${BASE:-google/gemma-4-31B}; export IT  # qwen run: IT=Qwen/Qwen3.5-35B-A3B BASE=Qwen/Qwen3.5-35B-A3B-Base CFG=configs/train/qwen
 CFG=${CFG:-configs/train}
