@@ -8,7 +8,7 @@ FAM=$1; M=${M:-/workspace/models}; R=runs; mkdir -p $R $M
 export HF_HOME=/workspace/hf
 ITEMS=/workspace/tc_items.jsonl; DEMOS=scripts/eval/data/striking_demos.jsonl
 OUT=$R/replies_$FAM.jsonl; DOUT=$R/demos_$FAM.jsonl
-# env: DOSES (graft doses to generate), K (graft dose the SFT was trained on), BASE_ARM=0 to skip bare_it (already generated)
+# env: SAMPLES (default 4; tiny-character noise floor ±0.09 vs ±0.14 at 2), DOSES (graft doses to generate), K (graft dose the SFT was trained on), BASE_ARM=0 to skip bare_it (already generated)
 if [ $FAM = gemma ]; then DOSES=${DOSES-1 2 4 8 16}; else DOSES=${DOSES-1 2 3 4}; fi
 K=${K:-2}; CKS=$(ls -d outputs/sft_graft/checkpoint-* | sed 's/.*-//' | sort -n | head -n -1)  # every epoch but the last; the last is the adapter root
 log() { echo "$(date -Is) $*" | tee -a $R/gen_progress.log; }
@@ -19,7 +19,7 @@ serve_gen() {  # model path, variant name
   local V=$!
   for _ in $(seq 120); do curl -sf localhost:8000/v1/models >/dev/null && break; sleep 10; done
   curl -sf localhost:8000/v1/models >/dev/null || { log "vllm failed for $2"; tail -30 $R/vllm_gen_$2.log; exit 1; }
-  python3 scripts/eval/19_gen_replies.py $ITEMS $OUT "$2" bare_it --temperature 0.7 --samples 2 | tee -a $R/gen_progress.log
+  python3 scripts/eval/19_gen_replies.py $ITEMS $OUT "$2" bare_it --temperature 0.7 --samples ${SAMPLES:-4} | tee -a $R/gen_progress.log
   python3 scripts/eval/19_gen_replies.py $DEMOS $DOUT "$2" bare_it --temperature 0 --samples 1 | tee -a $R/gen_progress.log
   kill $V; wait $V || true
 }

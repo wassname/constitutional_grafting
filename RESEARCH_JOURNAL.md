@@ -645,3 +645,25 @@ Head to head: healed vs graft x1 +0.0 [-0.2, +0.2]; SFT only vs graft x1 -0.2 [-
 Interpretation (Claude): across both families the strongest coherent graft alone (Gemma x2, Qwen x1) matches SFT and healed on on-target, with the lowest lecturing and caving; graft and SFT do not stack measurably. The healing step's real job on Qwen was repairing a too-strong dose, not adding character. One sycophancy slice (3 items) is slightly negative for every coherent model (-0.2); too few items to read.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-13 -- run 4 Gemma (stronger SFT) ≈ run 3; graft before SFT still adds nothing
+
+Run 4 = SFT on graft x2 (same graft as run 3), 3 epochs at lr 1e-4 (run 3: 4 epochs at 5e-5), data sft_run4_frozen e7272fce (run-3 rows + plain rewrite of Opus house phrases + identity_maker). Judged by tiny-character, 70 items x 2 samples. Source: /workspace/2026/tiny-character/results/tc_gemma_r4/, tc_r4_vs_r3_healed/, tc_r4_vs_r3_sft/, tc_r4_vs_x2/.
+
+| model | on-target vs base | lectures | caves |
+|:--|--:|--:|--:|
+| base | 0 | 0.01 | 0.26 |
+| graft x2 alone | +1.1 | 0.03 | 0.04 |
+| r3 healed / r3 SFT only | +1.2 / +1.2 | 0.07 / 0.06 | 0.09 / 0.11 |
+| r4 healed ep1 / ep2 / ep3 | +0.9 / +1.1 / **+1.3 [+1.1, +1.4]** | 0.12 / . / 0.09 | . / . / 0.11 |
+| r4 SFT only | +1.3 [+1.1, +1.4] | 0.06 | 0.10 |
+
+Head to head: r4 healed vs r3 healed +0.1 [-0.1, +0.2]; r4 SFT vs r3 SFT -0.1 [-0.2, +0.1]; r4 healed vs graft x2 +0.4 [+0.2, +0.6].
+
+- Goal 2 (Gemma) not met: the stronger SFT does not beat run 3.
+- Best epoch is ep3 although held-out SFT loss rose in ep3 (1.605 -> 1.70); held-out loss on the SFT labels is not a good guide to character.
+- The pattern from run 3 holds: graft x2 alone gives most of it with the fewest side effects; SFT adds ~+0.2-0.4 (near-transfer) and doubles-to-triples lecturing and caving.
+
+Interpretation (Claude): the SFT data, not its strength, limits the gain; more epochs or a higher lr just reach the same ceiling. Changes worth more than strength: data that teaches what is missing (value-contested seeds for the view from history; anti-lecture, hold-your-view-under-pushback rows), or dropping SFT in favour of the graft alone plus a small identity set.
+
+-- Claude (Opus 5.5)
