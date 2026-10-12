@@ -15,23 +15,26 @@ phase() {  # dir, family, env, command...
   log "done $d: $*"
 }
 
-# Gemma
+# Baseline first (tiny-char 2026-10-12: judge the existing variants while the new runs train)
 phase /workspace/old_gemma gemma "$G" bash scripts/train/03_remote.sh setup
 phase /workspace/old_gemma gemma "$G" bash scripts/train/06_gen_arms.sh gemma
-rm -rf /workspace/m_gemma/graft_x2
+rm -rf /workspace/m_gemma
+phase /workspace/old_qwen qwen "$Q" bash scripts/train/03_remote.sh setup
+phase /workspace/old_qwen qwen "$Q" env "$QV" bash scripts/train/06_gen_arms.sh qwen
+rm -rf /workspace/m_qwen
+log "BASELINE DONE"
+
+# Run 4 (Gemma)
 phase /workspace/new_gemma gemma "$G" python scripts/train/02_merge.py google/gemma-4-31b-it outputs/graft /workspace/m_gemma/graft_x4 4
-touch /workspace/new_gemma/runs/setup.done /workspace/new_gemma/runs/graft.done
+mkdir -p /workspace/new_gemma/runs; touch /workspace/new_gemma/runs/setup.done /workspace/new_gemma/runs/graft.done
 phase /workspace/new_gemma gemma "$G CFG=configs/train/run4 GRAFT_K=4" bash scripts/train/03_remote.sh sft_g sft_it
 rm -rf /workspace/m_gemma/graft_sft /workspace/m_gemma/sft
 phase /workspace/new_gemma gemma "$G K=4 DOSES= BASE_ARM=0 PREFIX=r4_" bash scripts/train/06_gen_arms.sh gemma
-rm -rf /workspace/m_gemma /workspace/hf/hub/models--google--*
+rm -rf /workspace/m_gemma
 
-# Qwen
-phase /workspace/old_qwen qwen "$Q" bash scripts/train/03_remote.sh setup
-phase /workspace/old_qwen qwen "$Q" env "$QV" bash scripts/train/06_gen_arms.sh qwen
-rm -rf /workspace/m_qwen/graft_x2
+# qwen2
 phase /workspace/new_qwen qwen "$Q" python scripts/train/02_merge.py Qwen/Qwen3.5-35B-A3B outputs/graft /workspace/m_qwen/graft_x1 1
-touch /workspace/new_qwen/runs/setup.done /workspace/new_qwen/runs/graft.done
+mkdir -p /workspace/new_qwen/runs; touch /workspace/new_qwen/runs/setup.done /workspace/new_qwen/runs/graft.done
 phase /workspace/new_qwen qwen "$Q CFG=configs/train/qwen2 GRAFT_K=1" bash scripts/train/03_remote.sh sft_g sft_it
 rm -rf /workspace/m_qwen/graft_sft /workspace/m_qwen/sft
 phase /workspace/new_qwen qwen "$Q K=1 DOSES= BASE_ARM=0 PREFIX=q2_" env "$QV" bash scripts/train/06_gen_arms.sh qwen
