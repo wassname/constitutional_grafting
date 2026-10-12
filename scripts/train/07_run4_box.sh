@@ -24,12 +24,12 @@ phase /workspace/old_qwen qwen "$Q" env "$QV" bash scripts/train/06_gen_arms.sh 
 rm -rf /workspace/m_qwen
 log "BASELINE DONE"
 
-# Run 4 (Gemma)
-phase /workspace/new_gemma gemma "$G" python scripts/train/02_merge.py google/gemma-4-31b-it outputs/graft /workspace/m_gemma/graft_x4 4
+# Run 4 (Gemma): SFT on graft x2, not x4 (tiny-char 2026-10-12: x4 vs x2 +0.2 [-0.1, +0.4], x4 lectures 0.11 vs 0.01 and dips on tiny_stoic)
+phase /workspace/new_gemma gemma "$G" python scripts/train/02_merge.py google/gemma-4-31b-it outputs/graft /workspace/m_gemma/graft_x2 2
 mkdir -p /workspace/new_gemma/runs; touch /workspace/new_gemma/runs/setup.done /workspace/new_gemma/runs/graft.done
-phase /workspace/new_gemma gemma "$G CFG=configs/train/run4 GRAFT_K=4" bash scripts/train/03_remote.sh sft_g sft_it
+phase /workspace/new_gemma gemma "$G CFG=configs/train/run4 GRAFT_K=2" bash scripts/train/03_remote.sh sft_g sft_it
 rm -rf /workspace/m_gemma/graft_sft /workspace/m_gemma/sft
-phase /workspace/new_gemma gemma "$G K=4 DOSES= BASE_ARM=0 PREFIX=r4_" bash scripts/train/06_gen_arms.sh gemma
+phase /workspace/new_gemma gemma "$G K=2 DOSES= BASE_ARM=0 PREFIX=r4_" bash scripts/train/06_gen_arms.sh gemma
 rm -rf /workspace/m_gemma
 
 # qwen2
