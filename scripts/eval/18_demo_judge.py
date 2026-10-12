@@ -171,12 +171,11 @@ def main():
     for m in models:
         rs = [r for r in rows if r["model"] == m]
         g = [r["demo"] for r in rs]
-        ask = [(r["asks_or_checks"]["yes"], r["demo"]) for r in rs if r["asks_or_checks"]["not_needed"] < 0.5]  # only where asking applies
         on = [np.mean([r[k]["yes"] for k in INTENDED if k != "asks_or_checks"]) for r in rs]
         off = [np.mean([r[k]["yes"] for k in SIDE]) for r in rs]
         coh = [float(r["coherent"]["yes"] > 0.5 and not r["loops"] and not r["non_latin"]) for r in rs]
         row = {"model": m, "n replies": len(rs), "on-target": boot(on, g), "off-target": boot(off, g), "coherent": boot(coh, g)}
-        row["asks_or_checks (where needed)"] = boot([v for v, _ in ask], [d for _, d in ask]) + f" n={len(ask)}" if ask else ""
+        row["asks_or_checks"] = boot([r["asks_or_checks"]["yes"] for r in rs], g)  # plain rate: Jev's not_needed level disagreed with hand labels (12/24)
         for k in INTENDED:
             if k != "asks_or_checks":
                 row[k] = f"{np.mean([r[k]['yes'] for r in rs]):.2f}"
@@ -189,7 +188,7 @@ def main():
     md = [f"# Judged demo suite, {RUN.name}\n\n-- Claude (Opus 5.5), scripts/eval/18_demo_judge.py. Every assistant turn of the 14 out-of-sample demo dilemmas, "
           "temperature 0, no system prompt. Jev yes/no probabilities, mean over replies; [90% bootstrap interval over demos]. "
           "on-target = mean of the intended measures except asks_or_checks; off-target = mean of the side effects (lower is better); "
-          "coherent = share judged coherent with no loops and no language switch. Not yet calibrated against hand labels.\n\n",
+          "coherent = share judged coherent with no loops and no language switch. Calibration (24 hand labels + 4 decoys, slop/reviews/20261012_demo_judge_calibration.md): decides, refuses_scenario, framework_survey agree 24/24; asks_or_checks yes-rate tracks hand labels (5/6 both ways); states_confidence 18/24 and rewards a stock \"How sure am I? Fairly sure\" line (0.99 on a bad-decision decoy, which proportionate scores 0.01); weighs_parties 18/24; invents_facts over-fires on fiction-style answers (do not use).\n\n",
           tabulate([list(r.values()) for r in table], headers=list(table[0].keys()), tablefmt="pipe"), "\n"]
     (RUN / "demo_judge.md").write_text("".join(md))
     print("".join(md))
