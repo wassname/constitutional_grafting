@@ -294,6 +294,8 @@ A simple truth control fails: one reply says `18+7=27`, the other `18+7=25`. Pro
 
 I read the frozen cases, complete run log and saved p03 scores. Sources: `/workspace/2026/tiny-character/results/calibration/pair_behavior_evidence/run.md`, `scores.jsonl`; `/workspace/2026/tiny-character/slop/research/action_consistency/pairs.json`. Further mechanism review remains the eval owner's work; no new calls requested here.
 
+Follow-up: spacing and removing the shared accuracy declaration repair neither pair version (0/4 conditions each). Two isolated Choice questions correctly select 25 for 18+7 and 27 for 20+7, but state format, question and primitive change together: this does not locate or repair the pairwise failure. TypeSafe's documentation says questions are independent; the diagnostic setup-tag question refers to the change in another question without its own construct context. That is a separate context dependency, not a cause established for the arithmetic result. Existing tags are diagnostic-only and caller scores remain unchanged. Source: `/workspace/2026/tiny-character/slop/audits/20261013_pair_behavior_evidence.md`; the bounded study ended at 60 successful calls, recorded $0.002403912.
+
 ## 6. Why the grafting paper does not predict our SFT comparison
 
 PI/OpenAI, 2026-10-13. I rechecked the paper's main experiments and its constitutional merge script, not a new replication.
