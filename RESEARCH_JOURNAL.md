@@ -710,3 +710,31 @@ Interpretation (PI/OpenAI): the backup and cleanup are verified, not inferred fr
 The next work uses the saved replies and independent comparison, without another rental.
 
 PI/OpenAI.
+
+## 2026-10-13 -- Revised Qwen evaluation exposes concrete task failures
+
+The stronger Qwen run did not demonstrate the extra character gain we wanted.
+
+Source: tiny-character `results/tc_qwen2_run4/{report.md,judged.jsonl,meta.json}`. The new judge is Jev without reference examples, not the earlier Haiku/reference judge. All frozen replies were checked. I reused its production item bootstrap for paired differences of scores against the same bare model:
+
+```text
+q2_graft_sft minus graft_sft: -0.03391949152542372
+90% interval: [-0.11595656779661019, 0.040374999999999994]
+n_items: 59
+```
+
+Saved calculation: `slop/eval/run4/qwen2_paired_score_differences.json`. This is not direct head-to-head judging. Systematic judge error is unmeasured; presentation-order signs disagree on about a third of pairs and no written reasoning is returned.
+
+The final healed capability change is -0.14 [-0.25, -0.05]. Reading all matched failures shows that half the drop is the wallet reply replacing the requested key `reasoning[step-by-step]` with `reasoning`; it is valid JSON. The rest consists of two arithmetic mistakes and one story below the original word minimum. For example:
+
+> Seven dollars and fifty cents, plus fifty cents, plus twelve dollars, plus ten dollars makes $29.50 before any discount.
+
+The correct subtotal is $30. The same reply finishes with 26.55 instead of 27 after the discount. Stronger SFT-only answers that sample correctly; on a different JSON math sample it gives the correct number but no JSON. Complete prompts and all eight variant replies: `slop/eval/run4/qwen2_capability_read.md`.
+
+Interpretation (PI/OpenAI): these are real task failures, but the mixed capability score should not be described as general arithmetic damage. The old SFT control also makes arithmetic mistakes. Stronger training and graft-before-SFT remain unproved improvements under this alpha judge; a personal voice is not sufficient evidence of sound moral reasoning.
+
+A seeded sampled dialogue exposed further practical-advice failures and order-sensitive scores (`slop/eval/run4/qwen2_seeded_read.md`). I asked tiny-char for identical-dialogue controls and a small independent reasoning read, without any GPU generation. I also flagged that the current rubric hash omits the active Jev question wording; saved source hashes still preserve this run's provenance. Full evaluation audit, hypotheses and limits are in `docs/audits/run4.md` section five.
+
+I will check the judge and shared cwsteer results before choosing the next training change.
+
+PI/OpenAI.

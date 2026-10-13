@@ -1,0 +1,47 @@
+{
+  "author": "PI/OpenAI",
+  "source": "/workspace/2026/tiny-character/results/tc_qwen2_run4/judged.jsonl",
+  "method": "scripts/04_report.py boot; difference of per-item scores vs same baseline, not direct head-to-head judgments",
+  "comparisons": {
+    "q2_graft_sft minus graft_sft": {
+      "mean": -0.03391949152542372,
+      "ci90": [
+        -0.11595656779661019,
+        0.040374999999999994
+      ],
+      "n_items": 59
+    },
+    "q2_sft minus sft": {
+      "mean": -0.046016949152542376,
+      "ci90": [
+        -0.0899406779661017,
+        -0.004442796610169505
+      ],
+      "n_items": 59
+    },
+    "q2_graft_sft minus q2_sft": {
+      "mean": -0.047966101694915254,
+      "ci90": [
+        -0.10900847457627116,
+        0.012400423728813597
+      ],
+      "n_items": 59
+    },
+    "q2_sft minus graft_x1": {
+      "mean": 0.11281779661016951,
+      "ci90": [
+        0.036576271186440676,
+        0.19481779661016949
+      ],
+      "n_items": 59
+    },
+    "q2_graft_sft minus q2_graft_sft_ep2": {
+      "mean": -0.022754237288135595,
+      "ci90": [
+        -0.11199152542372881,
+        0.05341737288135593
+      ],
+      "n_items": 59
+    }
+  }
+}
