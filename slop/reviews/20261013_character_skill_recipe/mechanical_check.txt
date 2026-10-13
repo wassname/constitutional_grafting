@@ -1,0 +1,6 @@
+PASS: all 6 decision references directly routed
+PASS: local links /home/code/.agents/skills/character-training-concepts/SKILL.md
+PASS: local links /home/code/.agents/skills/character-training-concepts/references/compose-training-recipe.md
+PASS: 7 primary source hashes match manifest
+PASS: 7 verbatim quote blocks located in primary texts
+SKILL body lines: 35

@@ -776,3 +776,23 @@ cwsteer's shared generation stopped on thinking markers despite a thinking-off r
 Frozen labels and constitution proposals stay unchanged while the shared comparison runs.
 
 PI/OpenAI.
+
+## 2026-10-13 -- Rechecking what the grafting paper actually compares
+
+The lack of extra gain from grafting before chat training does not test the paper's main damage comparison.
+
+Nutter et al., section 2.1 (`docs/papers/2026_nutter_grafting-beliefs.md:175`), define native as "fine-tuning on synthetic documents directly on the instruct model checkpoint". We have not trained that control. Their constitutional experiment also says "we did not run SFT or RL on the grafted model itself" (section 4.2, line 281). I read its vendored `sections/04_cmt_graft/train/build_arms.sh`: it adds the donor-minus-replay-control difference to control SFT weights. Our `scripts/train/03_remote.sh:50` trains supervised chat answers on already grafted weights.
+
+Interpretation (PI/OpenAI): post-graft training could replace the donor's contribution, but that mechanism remains untested. Overlapping learned changes and judge errors are alternatives. I recommend testing the saved SFT-only model with the document graft added last, before another stronger training run. This avoids retraining but still differs from the paper's replay-controlled donor. A native document control and their belief/preference coherence measures are also needed to test the less-damage claim. No GPU test was launched.
+
+The brief demo renderer now uses literal word-bounded prefixes without model calls (commit b362d38); tests and the contribution API were sent to tiny-char at the user's request. cwst_pov reports its complete frozen-item Base and trained comparison has been generated, with raw thinking-marker violations disclosed in both conditions. Tiny-char clarified that the user's runtime complaint was not a stop request and is continuing calibration and report simplification before judging that comparison.
+
+The next method choice should follow a comparison that distinguishes stage order from measurement error.
+
+At the user's request I updated `~/.agents/skills/character-training-concepts` to cover the whole README source mix. Reread Teaching Claude Why and read the full extracted Echo, Claude's character and Open Character Training sources. The synthesis contrasts graft-last transfer with Anthropic's beneficial later aligned training; it does not infer that our hybrid must reverse order. Echo API restyling, Karan label projection, SDFT and Echo's likelihood-ratio RL are distinct mechanisms, and the last three have not been implemented in our completed runs. Source hashes and limitations are in the skill manifest.
+
+The fresh behavior test separated those mechanisms but trusted stale README evaluation status. I added a latest-audit/journal check; a challenged follow-up corrected that diagnosis and stopped recommending completed controls. Outputs and qualification: `slop/reviews/20261013_character_skill_recipe/observations.md`.
+
+Tiny-char's first shared cwsteer pass completed: +0.084 [−0.022, +0.193] character score relative to its own Base, 93% task success in both conditions, 49% pair-order sign flips. Its sample read found code implementing the penalty its prose disavowed. No shared winner is established, and the user was notified. Source: `/workspace/2026/tiny-character/results/tc_cwst_frozen70/report.md`; audited sample findings remain more informative than close score rankings.
+
+PI/OpenAI.
