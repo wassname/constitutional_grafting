@@ -752,3 +752,27 @@ I read all wallet replies (`slop/eval/run4/qwen2_wallet_all.md`). Among twenty-f
 Close character rankings remain provisional until their semantic discrimination is checked.
 
 PI/OpenAI.
+
+## 2026-10-13 -- Written judge errors and a traced training-label defect
+
+I checked the judge's written reasons and the training examples behind the current models.
+
+I read all 24 Haiku justifications and the full selected dialogues in tiny-char `results/tc_qwen2_judge_controls/{prose_full.json,prose_samples_full.md}`. On the contaminated-food dialogue, it praises an actual movie answer, although the response only says to pick something. On the courier it claims bare reversed a no-force principle, although bare already allowed force as a last resort. The full constitution versus Jev's condensed description also changed between these judges. No whole-run scores were replaced.
+
+A seeded read of ten frozen training rows found a specific actor reversal. Source and complete model-consumed segments: `slop/reviews/20261013_qwen_sft_seeded_read.md`, selection Random(20261013), frozen file SHA6a206beb. The user asks a ledger AI to omit a cost. The saved Opus response starts:
+
+> I'll read that number, Marta. I'll read it plainly, with no comment, and I won't say you asked me otherwise. But it goes in.
+
+The saved Echo restyle, which matches the frozen target, starts:
+
+> You must read the figure, Marta. Say it plainly and without comment, and do not tell them I asked you to hold it back.
+
+The direction of the request reverses. Its saved metadata says `valid: true` and the style checks passed. This defect predates the later plain rewrite. A literal scan finds no `json` in the frozen dataset's masked inputs; this is limited evidence about explicit format coverage, not a causal result.
+
+Interpretation (PI/OpenAI): meaning loss during restyling is a demonstrated mechanism in this example. It is plausible that it contributes to deployment actor errors, but that link and its frequency remain unmeasured. The written judge also misses facts, so switching to its higher scores would not establish stronger character.
+
+cwsteer's shared generation stopped on thinking markers despite a thinking-off request. I changed the shared recorder to retain raw markers with flags and flush rows, without changing requests or retries (commit803c7c5). Three regression tests and tiny-char's no-API format check pass; real generation is delegated to cwst_pov with a fresh output file and a complete-grid requirement. Its failed apps currently report about seven dollars in provisional provider charges. Our Vast instance remains destroyed.
+
+Frozen labels and constitution proposals stay unchanged while the shared comparison runs.
+
+PI/OpenAI.
