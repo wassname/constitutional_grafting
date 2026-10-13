@@ -18,6 +18,10 @@ check:
 check-demos:
     uv run --no-project scripts/train/04_demo_smoke.py
 
+# Deterministic excerpts from saved T=0 replies; no model calls. -- PI/OpenAI
+audit-demos:
+    python3 scripts/eval/20_striking_demo.py docs/audits/run4.md --brief-words 40 --update-preview 'slop/eval/tc_baseline/demos_gemma.jsonl:bare_it:base Gemma' 'slop/eval/run4/demos_r4_gemma.jsonl:r4_sft:run 4 SFT only'
+
 # Run-1 report; may call the paid Jev judge for uncached rows. -- PI/OpenAI Sol
 report:
     uv run scripts/eval/16_run1_report.py

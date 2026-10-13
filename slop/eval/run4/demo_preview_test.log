@@ -1,0 +1,8 @@
+test_fixed_items_order_and_prompt_match (test_demo_preview.DemoPreviewTests.test_fixed_items_order_and_prompt_match) ... ok
+test_literal_prefix (test_demo_preview.DemoPreviewTests.test_literal_prefix) ... ok
+test_replace_only_marked_section (test_demo_preview.DemoPreviewTests.test_replace_only_marked_section) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
