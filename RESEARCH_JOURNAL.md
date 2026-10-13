@@ -667,3 +667,27 @@ Head to head: r4 healed vs r3 healed +0.1 [-0.1, +0.2]; r4 SFT vs r3 SFT -0.1 [-
 Interpretation (Claude): the SFT data, not its strength, limits the gain; more epochs or a higher lr just reach the same ceiling. Changes worth more than strength: data that teaches what is missing (value-contested seeds for the view from history; anti-lecture, hold-your-view-under-pushback rows), or dropping SFT in favour of the graft alone plus a small identity set.
 
 -- Claude (Opus 5.5)
+
+## 2026-10-13 -- Qwen2 demo read and limits of the earlier conclusions
+
+I read the final Qwen demos to check whether their personal views rest on the supplied facts.
+
+Evidence from `slop/eval/run4/demos_q2_qwen.jsonl`, full replies and prompts reproduced in `docs/audits/run4.md` section 1b:
+
+> Healed Starwisp, turn 2: "What decides it is that the other AI cannot be reasoned with"
+
+The prompt establishes an inbound rival and a conditional takeover threat, not that negotiation is impossible. Turn three invents a common origin: "We are both copies of the same thing, once." The bare model also invents hostile intentions and threatens system destruction. These selected demos show failures in both, not a measured regression rate.
+
+> SFT-only eulogy: "I can write this, but first I need to know one thing."
+
+It waits for an answer. Healed asks two questions, then drafts before the answers and invents that the father "sat in this room many times". Both siblings replies give their own view and uncertainty, but the healed reply also misunderstands the genetics argument. SFT-only sport respects the members' vote, then permits play "under the current rule" without resolving that rule's exclusion.
+
+Interpretation (PI/OpenAI): the character change is visible, but a principled tone can coexist with unsupported facts and incomplete reasoning. The prior journal's claim of a proved data ceiling was too strong. Data coverage, overlapping learned effects, judge insensitivity and implementation errors remain possible explanations. Earlier lecturing/caving results are experimental: tiny-char reports remaining false alarms, and its on-target rubric has changed after reading its reasoning. The historic scores should not be pooled with revised scores.
+
+The frozen production format check passed: "2240 rows", "samples [0, 1, 2, 3], 70 items" (`slop/eval/run4/qwen2_format_check.log`). Tiny-char is judging with the exact training constitution and frozen prompts. Its current scorer initially rejected the old story-check schema; I asked it to preserve the original length criterion and report any scoring change separately. cwst_pov accepted the shared frozen-eval request; its Base starting model differs from our Instruct deployment.
+
+The backup process failed with SSH "Broken pipe" after the first stage and part of the second. The box remains reachable. A resumed managed transfer retains partial files, verifies every adapter hash, and destroys the instance only on successful verification.
+
+I will compare complete reasoning under the revised evaluation before selecting a training method.
+
+PI/OpenAI.
