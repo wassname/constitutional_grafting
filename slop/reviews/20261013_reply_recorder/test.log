@@ -1,0 +1,8 @@
+test_chat_preserves_markers_and_request (test_reply_recorder.ReplyRecorderTests.test_chat_preserves_markers_and_request) ... ok
+test_completed_row_survives_later_error (test_reply_recorder.ReplyRecorderTests.test_completed_row_survives_later_error) ... ok
+test_own_history_and_row_flag (test_reply_recorder.ReplyRecorderTests.test_own_history_and_row_flag) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+OK
