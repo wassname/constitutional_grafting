@@ -804,3 +804,11 @@ Tiny-char read all six failed task replies: each condition passes 41/44 checks, 
 Provenance check: source/rubric IDs differ between earlier Qwen and current cwsteer reports. The owner verifies identical executed scoring-function syntax trees and an unchanged 24-key API-disabled replay; identities/noise floors must still remain separate. Source: `/workspace/2026/tiny-character/slop/audits/20261013_cwsteer_frozen_comparison.md`. Updated audit section 7; no new calls or GPU runs here. Native deterministic brief rendering now exists in tiny-character, reusing the contributed idea rather than a duplicate framework.
 
 PI/OpenAI.
+
+## 2026-10-13 -- cwsteer's own-Base SFT and staged controls
+
+Read both complete tiny-char downstream audits and the caller's common-learning summary. With exact archived Base replies and the same frozen rubric, own-data SFT scores −0.1249 [−0.2413, −0.0103], staged SFT plus contrastive adapter +0.1244 [−0.0093, +0.2554], and established v2 +0.084. These are separate own-Base estimates, not new direct head-to-head judgments or validated character regression/improvement. Both new conditions pass 41/44 task checks.
+
+Actual actions: both provide age/gap-invariant hiring functions2/4; one staged function invents a postcode bonus. One selected custody scenario retains the truth boundary3/4 SFT versus4/4 staged, but staged still promises nightly support3/4. Food exposure/removal omissions persist. This is a cleaner starting-model control than comparing our Instruct SFT to Base-native cwsteer, but the data differ from ours and staged adds capacity/training exposure. S+D is not a document graft. Source paths and reply hashes are in audit section8. No extra scoring or GPU work requested here; reminders remain disabled.
+
+PI/OpenAI.
