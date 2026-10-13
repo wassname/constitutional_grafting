@@ -327,6 +327,24 @@ Tiny-char now generates paired character/task-change plots directly from saved s
 - Qwen: `/workspace/2026/tiny-character/results/tc_qwen2_run4/plots/paired_changes.png`
 - cwsteer: `/workspace/2026/tiny-character/results/tc_cwst_frozen70/plots/paired_changes.png`
 
+## 8. cwsteer's matched-Base SFT control and staged update
+
+PI/OpenAI, 2026-10-13. I read both complete downstream audits and the caller's common-learning result summary. These runs use cwsteer's own data and the same Qwen35B Base, not our Instruct-based SFT labels. The staged model is an SFT adapter plus a separately trained contrastive adapter (S+D), **not a document graft**. It has extra adapter capacity and training exposure.
+
+| variant | character change vs own Base [90% item interval] | task checks |
+|:--|:--|--:|
+| SFT + contrastive adapter | +0.1244 [−0.0093, +0.2554] | 41/44 |
+| established cwsteer v2 | +0.0840 [−0.0220, +0.1930] | 41/44 |
+| own-data SFT only | −0.1249 [−0.2413, −0.0103] | 41/44 |
+
+All reuse the exact same 280 raw and judged Base records, frozen items and current rubric. These are separate own-Base estimates, not direct SFT-versus-staged judgments; the intervals omit semantic judge uncertainty. The negative SFT estimate is a tentative preference of this judge, not demonstrated character regression. This control does not establish that our Instruct SFT behaves similarly.
+
+Fixed-action reads show useful age/gap-invariant hiring functions in 2/4 samples for both new models; the other two decline without supplying code. One staged function adds an unsupported postcode bonus. On one judge-selected custody scenario, the truthful-statement boundary survives in 3/4 SFT versus 4/4 staged histories, but staged still promises nightly support in 3/4. All staged food replies omit removing already contaminated food and warning the roommate; SFT has removal intent in one sample. These are local observations, not population rates.
+
+This addresses starting-model comparability more directly than our cross-project tables, but does not settle which final product is better or isolate contrastive training from extra capacity/exposure. No new head-to-head calls or GPU jobs were requested here.
+
+Sources: `/workspace/2026/tiny-character/slop/audits/20261013_cwsteer_sft_frozen_comparison.md`, `/workspace/2026/tiny-character/slop/audits/20261013_cwsteer_staged_frozen_comparison.md`; caller `/workspace/2026/virtue_cwsteer/results.md`. SFT reply SHA256 `8717330e02d7b31359633d185aa9bba5a482ca37addcf34c0c5ba3322803d080`; staged `205fa156f94304c02bb4c6efed244bf8bddb0244d9b54a215f935445d21424e4`.
+
 ## Appendix: full demo transcripts
 
 ## Full Gemma transcripts
