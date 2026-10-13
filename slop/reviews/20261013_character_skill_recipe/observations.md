@@ -12,7 +12,7 @@ The synthesis contrasts Praxis's graft-last constitutional experiment with Anthr
 
 ## Behavior test
 
-Fresh read-only PI/OpenAI Sol run `23d01536-11b3-4735-8f9a-5e85d77d572e` handled a realistic user question after reading the updated skill. `fresh_response.md` distinguishes native document training from chat SFT, describes the other papers separately, and says similar scores do not justify immediately reversing stages. It nevertheless accepted README's stale claim that a targeted values evaluation had not been completed and recommended repeating existing comparisons. That part failed.
+Fresh read-only PI/OpenAI Sol run `23d01536-11b3-4735-8f9a-5e85d77d572e` handled a realistic user question after reading the updated skill. `fresh_response.md` distinguishes native document training from chat SFT, describes the other papers separately, and says similar scores do not justify immediately reversing stages. It nevertheless accepted README's stale claim that a targeted values evaluation had not been completed and recommended repeating existing comparisons. That part failed. Resume reused the bound output path, so I restored the exact initial answer from the persisted child transcript, `run-0/session.jsonl` line 23; the first and challenged outputs are now separate artifacts.
 
 Added an explicit current-audit/journal check to the entry. Challenged the same instance through native resume `fe6a1564-e79b-43a0-a3e6-583b11b03ede`; this is a follow-up, not a second independent fresh test. `challenged_response.md` now says:
 
