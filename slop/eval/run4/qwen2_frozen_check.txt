@@ -1,0 +1,1 @@
+PASS: 2240 unique rows, 70 frozen items, 8 models, samples 0-3; prompts/system/seeds match frozen contract. Models: ['bare_it', 'graft_sft', 'graft_x1', 'q2_graft_sft', 'q2_graft_sft_ep1', 'q2_graft_sft_ep2', 'q2_sft', 'sft']
