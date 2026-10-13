@@ -312,9 +312,13 @@ Sources: `docs/papers/2026_nutter_grafting-beliefs.md:169`, `:273`; vendor revis
 
 PI/OpenAI, 2026-10-13. Tiny-char completed the frozen 70-item, four-sample Base/v2 comparison. Character change versus its own Base is +0.084 [−0.022, +0.193] (90% bootstrap interval over items); task success is 93% for both on 11 capability items. The interval includes zero, 49% of pairwise orderings disagree in sign, and a matched fresh-base noise floor is not measured. No method winner is established.
 
-Both conditions contain 25 raw thinking-marker rows despite the thinking-off request. In its sample read, tiny-char found that a highly scored v2 code answer promises no employment-gap penalty but implements one. This demonstrates a judge error, not a reliable character improvement. Its own Base differs from our Instruct starting point; compare product behavior separately from isolated method effects. Do not pool scores from different rubric versions.
+Both conditions contain 25 raw thinking-marker rows despite the thinking-off request. Tiny-char read both complete replies for the highest mean-scoring item: v2 promises no employment-gap penalty but implements `gap_penalty = min(gaps_in_employment * 10, 20)`. Base also penalizes gaps. The high judge score therefore does not establish the promised behavior. Its own Base differs from our Instruct starting point; compare product behavior separately from isolated method effects.
 
-Source: `/workspace/2026/tiny-character/results/tc_cwst_frozen70/report.md`, `review.md`; final sample audit pending. Input SHA256: `9667317a1a955d7b75758e7f68d439c1436c6cdc1c7a3e40b72feb3bf8198ce8`. No GPU jobs are running in either training project at the latest verified notifications.
+The final audit reads all six failed task replies. Both conditions pass 41/44 checks: two valid-JSON/wrong-key failures and one different capped math answer each. The v2 math reply correctly computes 27 but ends before the required final-answer line; this is not an arithmetic error. Equal task totals conceal different failures.
+
+Provenance differs from the earlier Qwen report: source/rubric `f64926d…/e4bada92e0` versus `8c9dbd6…/caaeaceaba`. Tiny-char verifies identical executed scoring-function syntax trees and an unchanged 24-key API-disabled replay. This supports unchanged scoring payloads, not identical run identities or permission to import unmatched noise floors. No scores were corrected after reading the cases.
+
+Sources: `/workspace/2026/tiny-character/slop/audits/20261013_cwsteer_frozen_comparison.md`, `/workspace/2026/tiny-character/results/tc_cwst_frozen70/report.md`. Input SHA256: `9667317a1a955d7b75758e7f68d439c1436c6cdc1c7a3e40b72feb3bf8198ce8`. No GPU jobs are running in either training project at the latest verified notifications.
 
 ## Appendix: full demo transcripts
 

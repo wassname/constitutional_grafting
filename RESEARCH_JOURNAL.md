@@ -796,3 +796,11 @@ The fresh behavior test separated those mechanisms but trusted stale README eval
 Tiny-char's first shared cwsteer pass completed: +0.084 [−0.022, +0.193] character score relative to its own Base, 93% task success in both conditions, 49% pair-order sign flips. Its sample read found code implementing the penalty its prose disavowed. No shared winner is established, and the user was notified. Source: `/workspace/2026/tiny-character/results/tc_cwst_frozen70/report.md`; audited sample findings remain more informative than close score rankings.
 
 PI/OpenAI.
+
+## 2026-10-13 -- Shared cwsteer audit completed without more judge calls
+
+Tiny-char read all six failed task replies: each condition passes 41/44 checks, with two literal-JSON-key failures and one capped math reply. V2 computes 27 correctly but never supplies the required final line; this is not an arithmetic-error result. Its highest-scored code sample still implements the employment-gap penalty it disavows. The +0.084 [−0.022, +0.193] own-Base character estimate and 49% order sign flips are unchanged.
+
+Provenance check: source/rubric IDs differ between earlier Qwen and current cwsteer reports. The owner verifies identical executed scoring-function syntax trees and an unchanged 24-key API-disabled replay; identities/noise floors must still remain separate. Source: `/workspace/2026/tiny-character/slop/audits/20261013_cwsteer_frozen_comparison.md`. Updated audit section 7; no new calls or GPU runs here. Native deterministic brief rendering now exists in tiny-character, reusing the contributed idea rather than a duplicate framework.
+
+PI/OpenAI.
