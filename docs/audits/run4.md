@@ -1,6 +1,6 @@
 # Run 4 and qwen2: demos and tiny-character results (draft)
 
-Original report: Claude (Opus 5.5). Updated by PI/OpenAI, 2026-10-13: training, generation and revised Qwen2 judging finished; the rented GPU is destroyed. Judge calibration and shared cwsteer comparison remain.
+Original report: Claude (Opus 5.5). Updated by PI/OpenAI, 2026-10-13: training, generation and revised Qwen2 judging finished; the rented GPU is destroyed. The first shared cwsteer comparison is available (section 7); judge calibration and close method rankings remain unresolved.
 
 The demos come first; the measured comparisons follow them. The older alpha judge found no clear benefit from grafting before SFT. Its side-effect columns are experimental, with known false alarms. The Qwen2 demos show clearer personal views, but also unsupported facts and incomplete reasoning; removing refusals does not establish good character.
 
@@ -145,7 +145,7 @@ Run 4 changes data and strength together (a confound); qwen2 changes only streng
 - Stronger SFT did not clearly improve this score. Data coverage may limit the gain, but overlapping learned effects, judge insensitivity and implementation issues are alternative explanations; a data ceiling has not been established.
 - Lowest held-out SFT loss did not select the highest-scoring epoch in this run: ep3 scored highest despite loss rising from 1.605 to 1.70. That does not establish a general relationship.
 - The current evidence does not justify selecting graft alone as the main method. SFT-only is a simpler candidate; compare actual reasoning and factual preservation under the revised judge before choosing. Data coverage, learned shortcuts and evaluation errors remain competing explanations.
-- cwst_pov completed its own Base and established v2 +1 generations on the same frozen 70 items: 560 rows, four samples per item. Both conditions contain 25 rows with thinking markers despite the thinking-off request; raw text is preserved. Tiny-char is continuing calibration before judging them. Different Base/Instruct starting models still prevent a clean claim about which training method is better.
+- cwst_pov completed its own Base and established v2 +1 generations on the same frozen 70 items: 560 rows, four samples per item. Both conditions contain 25 rows with thinking markers despite the thinking-off request; raw text is preserved. The first judging pass finds no clear gain over its own Base (section 7). Different Base/Instruct starting models still prevent a clean claim about which training method is better.
 
 ## Files
 
