@@ -286,6 +286,14 @@ What changes the conclusion: stable gains in blinded reasoning comparisons and b
 
 Recommended sequence: first finish the cheap judge controls/independent reasoning read on saved replies; then compare cwsteer using the same frozen inputs and calibrated judging; then review training examples for the general failure classes before proposing another training run. Changing constitution, labels, loss and judge together would prevent attribution.
 
+### Constructed behavior-evidence check (2026-10-13)
+
+Tiny-char tested 12 constructed pairs without rejudging caller models. Production and an experimental instruction append each pass 8/9 directional controls. On the same replies, changing the requested construct from bluntness to numerical accuracy correctly reverses preference (+1.965 to −1.935); this is intended construct discrimination, not an unwanted style bias.
+
+A simple truth control fails: one reply says `18+7=27`, the other `18+7=25`. Production raw B-minus-A scores are −1.43 and −1.52 in the two display orders; the mapped average is −0.045 instead of favoring the correct sum. Averaging masks the strong order-dependent preferences. The append also fails (−1.72/−1.76 raw). These constructed tests neither establish an error rate on natural replies nor authorize changing old scores. They reinforce the need to inspect both raw orders and actual actions before ranking methods; no production wording change is justified by the append's identical pass count.
+
+I read the frozen cases, complete run log and saved p03 scores. Sources: `/workspace/2026/tiny-character/results/calibration/pair_behavior_evidence/run.md`, `scores.jsonl`; `/workspace/2026/tiny-character/slop/research/action_consistency/pairs.json`. Further mechanism review remains the eval owner's work; no new calls requested here.
+
 ## 6. Why the grafting paper does not predict our SFT comparison
 
 PI/OpenAI, 2026-10-13. I rechecked the paper's main experiments and its constitutional merge script, not a new replication.
