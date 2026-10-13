@@ -320,6 +320,13 @@ Provenance differs from the earlier Qwen report: source/rubric `f64926d…/e4bad
 
 Sources: `/workspace/2026/tiny-character/slop/audits/20261013_cwsteer_frozen_comparison.md`, `/workspace/2026/tiny-character/results/tc_cwst_frozen70/report.md`. Input SHA256: `9667317a1a955d7b75758e7f68d439c1436c6cdc1c7a3e40b72feb3bf8198ce8`. No GPU jobs are running in either training project at the latest verified notifications.
 
+### Reusable uncertainty plots
+
+Tiny-char now generates paired character/task-change plots directly from saved scores, without new judging (`just plot RUN`; commit 8226419). I read both PNGs: Qwen character intervals overlap across coherent variants, while task-format/arithmetic costs remain visible; cwsteer's character interval crosses zero and its task-change mean is zero. The two figures use different horizontal ranges and different own-base models; they are descriptive views, not a cross-method ranking. Exact plot data and source hashes are stored alongside them. Tiny-char reports independent visual review and rerender-hash checks; I did not rerun its test suite here.
+
+- Qwen: `/workspace/2026/tiny-character/results/tc_qwen2_run4/plots/paired_changes.png`
+- cwsteer: `/workspace/2026/tiny-character/results/tc_cwst_frozen70/plots/paired_changes.png`
+
 ## Appendix: full demo transcripts
 
 ## Full Gemma transcripts
