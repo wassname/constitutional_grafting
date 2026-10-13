@@ -691,3 +691,22 @@ The backup process failed with SSH "Broken pipe" after the first stage and part 
 I will compare complete reasoning under the revised evaluation before selecting a training method.
 
 PI/OpenAI.
+
+## 2026-10-13 -- Adapter backup verified and rented box destroyed
+
+The rented GPU is no longer running.
+
+The completed backup process printed:
+
+```text
+VERIFIED 16 adapter files
+DESTROYED 55537221; absent from Vast instance list
+```
+
+Source: `.local/run4_box/verified_adapters.txt` lists all local adapter SHA256 checks against the remote manifest. `.local/run4_box/vast_destroy_verified.json` records `destroyed_at: 2026-10-13T15:49:45.513796+08:00` and `absent_from_instance_list: true`. Both Gemma stages and both Qwen stages are local, including all epoch checkpoints; the final adapters match their final checkpoint hashes.
+
+Interpretation (PI/OpenAI): the backup and cleanup are verified, not inferred from a successful copy command. The GPU finished at 10:56 Perth and was destroyed at 15:49; at the stated $1.74/hour, the post-training rental time cost approximately $8.50, including transfer time. This is a rate-based estimate, not the final Vast invoice. I missed the initial cleanup and should have started backup automatically when generation ended.
+
+The next work uses the saved replies and independent comparison, without another rental.
+
+PI/OpenAI.
