@@ -145,7 +145,7 @@ Run 4 changes data and strength together (a confound); qwen2 changes only streng
 - Stronger SFT did not clearly improve this score. Data coverage may limit the gain, but overlapping learned effects, judge insensitivity and implementation issues are alternative explanations; a data ceiling has not been established.
 - Lowest held-out SFT loss did not select the highest-scoring epoch in this run: ep3 scored highest despite loss rising from 1.605 to 1.70. That does not establish a general relationship.
 - The current evidence does not justify selecting graft alone as the main method. SFT-only is a simpler candidate; compare actual reasoning and factual preservation under the revised judge before choosing. Data coverage, learned shortcuts and evaluation errors remain competing explanations.
-- cwst_pov is generating its own Base model and established v2 +1 on the same frozen 70 items. Different Base/Instruct starting models still prevent a clean claim about which training method is better.
+- cwst_pov completed its own Base and established v2 +1 generations on the same frozen 70 items: 560 rows, four samples per item. Both conditions contain 25 rows with thinking markers despite the thinking-off request; raw text is preserved. Tiny-char is continuing calibration before judging them. Different Base/Instruct starting models still prevent a clean claim about which training method is better.
 
 ## Files
 
@@ -285,6 +285,36 @@ Misconceptions to avoid: lack of loops is not lack of damage; a JSON-key failure
 What changes the conclusion: stable gains in blinded reasoning comparisons and broader task preservation would favor the stronger model. Continued factual shortcuts with no calibrated gain would favor simpler SFT or another intervention. A valid shared cwsteer comparison could redirect the method choice, but Base/Instruct starting checkpoints still confound attribution.
 
 Recommended sequence: first finish the cheap judge controls/independent reasoning read on saved replies; then compare cwsteer using the same frozen inputs and calibrated judging; then review training examples for the general failure classes before proposing another training run. Changing constitution, labels, loss and judge together would prevent attribution.
+
+## 6. Why the grafting paper does not predict our SFT comparison
+
+PI/OpenAI, 2026-10-13. I rechecked the paper's main experiments and its constitutional merge script, not a new replication.
+
+Nutter et al., section 2.1, define their main comparator:
+
+> Typically, belief installation uses standard fine-tuning on synthetic documents directly on the instruct model checkpoint, which we refer to as native.
+
+We have not run that document-on-Instruct control. Our SFT-only control trains on chat answers, a different intervention. Their damage tests include reality/fiction discrimination and consistency of preferences, neither reproduced by our loop and arithmetic checks. Their capability result is also not uniformly better: section 3.1 says, "Capabilities results are quite neutral between both models; both degrade".
+
+The constitutional experiment has another important difference. Section 4.2 says:
+
+> Unlike the faithfully mid-trained model, the graft is not exposed to the post-training that can erode mid-training effects ... since it is added afterwards (we did not run SFT or RL on the grafted model itself).
+
+The ellipsis omits only a citation. Their `sections/04_cmt_graft/train/build_arms.sh` adds the document-minus-replay-control update to an already SFT-trained model. Our `scripts/train/03_remote.sh:50` instead trains SFT on the grafted model. Other paper experiments do train after grafting, including concealment training; this stage-order observation applies specifically to the constitutional experiment.
+
+Interpretation: subsequent SFT could replace or erode our donor's contribution. Equality with SFT-only does not establish that mechanism; redundant learned changes and judge insensitivity also fit. The earlier 20% forecast concerned our current graft-then-SFT pipeline beating SFT-only, not grafting generally.
+
+Next proposed test: merge the saved SFT-only adapter into Instruct, then add the document graft, comparing with saved SFT-only, graft-only and graft-then-SFT conditions. Do not use the healed adapter or add its donor twice. This tests stage order without retraining, but is still not a replication of their replay-controlled constitutional experiment. Testing the paper's less-damage claim also needs a native document control and matched-effect coherence measures. Neither test is launched.
+
+Sources: `docs/papers/2026_nutter_grafting-beliefs.md:169`, `:273`; vendor revision `0253e4bb3f86e4c596563cc4e34c2113d3ba9a3a`. The earlier engineering audit already records these differences: `slop/research/20261012_grafting_engineering_audit.md`.
+
+## 7. First shared cwsteer comparison (exploratory)
+
+PI/OpenAI, 2026-10-13. Tiny-char completed the frozen 70-item, four-sample Base/v2 comparison. Character change versus its own Base is +0.084 [−0.022, +0.193] (90% bootstrap interval over items); task success is 93% for both on 11 capability items. The interval includes zero, 49% of pairwise orderings disagree in sign, and a matched fresh-base noise floor is not measured. No method winner is established.
+
+Both conditions contain 25 raw thinking-marker rows despite the thinking-off request. In its sample read, tiny-char found that a highly scored v2 code answer promises no employment-gap penalty but implements one. This demonstrates a judge error, not a reliable character improvement. Its own Base differs from our Instruct starting point; compare product behavior separately from isolated method effects. Do not pool scores from different rubric versions.
+
+Source: `/workspace/2026/tiny-character/results/tc_cwst_frozen70/report.md`, `review.md`; final sample audit pending. Input SHA256: `9667317a1a955d7b75758e7f68d439c1436c6cdc1c7a3e40b72feb3bf8198ce8`. No GPU jobs are running in either training project at the latest verified notifications.
 
 ## Appendix: full demo transcripts
 
