@@ -1,0 +1,1 @@
+2026-10-13 15:17:57.172 | INFO     | __main__:main:322 - replies OK: 2240 rows, models ['bare_it', 'graft_sft', 'graft_x1', 'q2_graft_sft', 'q2_graft_sft_ep1', 'q2_graft_sft_ep2', 'q2_sft', 'sft'], samples [0, 1, 2, 3], 70 items; source /workspace/2026/constitutional_grafting/slop/eval/run4/tc_items_frozen.jsonl
