@@ -738,3 +738,17 @@ A seeded sampled dialogue exposed further practical-advice failures and order-se
 I will check the judge and shared cwsteer results before choosing the next training change.
 
 PI/OpenAI.
+
+## 2026-10-13 -- Judge controls narrow the uncertainty
+
+The cheap judge control rules out one simple explanation for its order discrepancies.
+
+Read tiny-char `results/tc_qwen2_judge_controls/{protocol,summary}.json`: twelve selected diagnostic pairs, not a population validation. The raw identical-base mean is -0.00083, all identical-final-model scores are zero, actual-pair symmetric residual mean is +0.317, and redraw standard deviation per pair is 0.0182. The controls preserve the original source hashes and rows; no score corrections were applied.
+
+Interpretation (PI/OpenAI): a uniform additive preference for the second dialogue and large stochastic noise are now less plausible. Content-dependent position effects and weak multi-step reasoning discrimination remain possible. Averaged identical-pair zero is algebraic, so I read the raw residuals instead. The next useful check is independent reasoning review, not many identical redraws.
+
+I read all wallet replies (`slop/eval/run4/qwen2_wallet_all.md`). Among twenty-four SFT-condition replies, twenty have valid JSON but the wrong key, two use prose and two are truncated. All four final-healed replies are valid JSON with the wrong key, so its earlier score decomposition still holds. Samples zero and one also have an answer/reasoning conflict, separate from format failure.
+
+Close character rankings remain provisional until their semantic discrimination is checked.
+
+PI/OpenAI.
