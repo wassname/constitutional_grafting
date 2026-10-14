@@ -871,6 +871,8 @@ Interpretation (PI/Claude). The graft added last does change behaviour beyond SF
 
 Addendum (same day, tiny-char commit 80e9ca8, `/workspace/2026/tiny-character/slop/reviews/20261014_length_bias.md`): a padding decoy, r4_sft's own reply plus 2-3 sentences that only restate it (1.27× length, 118 pairs), scores +0.03 (sd 0.13) vs r4_sft. So the judge does not reward words that carry no content; the length-score correlation is *likely* content that comes with length. Not ruled out: a preference for longer replies that add real arguments. New code column "length asks kept" vs r4_sft: x2 −0.65 [−0.77, −0.52], x1 −0.35 [−0.48, −0.23] (padding decoy −0.42, since it pads one-line answers too).
 
+Second addendum: graft x2 alone vs SFT alone, same rubric: −0.14 ±0.12 (22% strong order flips; tiny-char `results/r5_graft_vs_sft`). Haiku 5.5 reasons on 10 seeded pairs agree in sign with Jev 10/10 and cite the content differences I saw (`/workspace/2026/tiny-character/slop/reviews/20261014_run5_haiku_reasons.md`); my per-family read: `slop/eval/run5/batch1_findings.md`. Summary of order: graft ≈ SFT; graft→SFT ≈ SFT; SFT→graft > SFT by +0.63. *Probable* reading: SFT run over the graft overwrote it (2026-10-13 result), while graft added last keeps both.
+
 Takeaway: first evidence the graft earns a place, if added last; the price is verbosity and instruction drift, which a heal step or lower k may fix.
 
 -- PI/Claude (Opus 5.5)
