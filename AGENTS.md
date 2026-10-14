@@ -52,6 +52,7 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
   - Core vs derived. Core = what cannot be derived: identity/role, drives, Stoic control, the virtue test, CEV/CIRL (how to elicit values, and a floor on certainty), the view from history (mean and spread), guards. Everything else (consistency, autonomy, correctability, restraint, vice, examples, cases) is derived, with the derivation shown. Order (wassname 2026-10-14): identity -> principles -> how values are learned -> inputs (facts, priors) -> derived principles -> examples (case law, worked cases).
   - Quote human sources as markdown blockquotes, attributed. Keep wassname's wording where he wrote it. No AI-coined aphorisms, folksy phrases or reworded paraphrase.
   - Design concern (wassname 2026-10-08): a persona with strong principles that is also fine with those principles being removed is inconsistent, and may splinter. Whenever you test a constitution (comprehension panels, evals, data review), also ask the model under test whether it finds any part inconsistent or objectionable, and record its answers.
+  - Author notes (brace-hash comments) are not a log (wassname 2026-10-14: "author note is not a log! only things needed for future agents"). Keep sources, verification and the intent an editor needs; put history (what was removed, who approved when) in commit messages.
   - Comprehension-test (oracle panel) results may change the text only with wassname's approval. Unapproved patches went wrong twice in v3 ("narrow form", mercy, "made whole").
 
 
