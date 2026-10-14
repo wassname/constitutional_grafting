@@ -18,8 +18,9 @@ IT = __import__("os").environ.get("IT", "google/gemma-4-31b-it")
 base, adapter, out = sys.argv[1:4]
 k = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
 model = AutoModelForImageTextToText.from_pretrained(base, dtype=torch.bfloat16, device_map="cuda")
-probe = __import__("re").compile(r"layers\.3[01]\.(self_attn\.q_proj|mlp\.(shared_expert\.)?down_proj|linear_attn\.in_proj_qkv)\.weight")  # gemma: attn+mlp; qwen3.5: full attn every 4th layer, shared expert
-before = {n: p.detach().clone() for n, p in model.named_parameters() if probe.search(n)}
+# gemma: attn+mlp; qwen3.5: full attn every 4th layer, shared expert, routed experts (fused 3D param, no .weight suffix)
+probe = __import__("re").compile(r"layers\.3[01]\.(?:(?:self_attn\.q_proj|mlp\.(?:shared_expert\.)?down_proj|linear_attn\.in_proj_qkv)\.weight|mlp\.experts\.down_proj)$")
+before = {n: p.detach().cpu().clone() for n, p in model.named_parameters() if probe.search(n)}
 assert before, "no probe parameters found in layers 30-31"
 model = PeftModel.from_pretrained(model, adapter)
 n_lora = sum("lora_A" in n for n, _ in model.named_parameters())
@@ -29,10 +30,13 @@ if k != 1.0:  # ΔW = B A · α/r is linear in B, so scaling every lora_B by k s
         for n, w in model.named_parameters():
             if "lora_B" in n:
                 w.mul_(k)
+targets_experts = bool(getattr(model.peft_config["default"], "target_parameters", None))
 model = model.merge_and_unload()
 after = dict(model.named_parameters())
-report = {n: {"rel_delta_fro": float((after[n] - w).float().norm() / w.float().norm())} for n, w in before.items()}
+report = {n: {"rel_delta_fro": float((after[n].detach().cpu().float() - w.float()).norm() / w.float().norm())} for n, w in before.items()}
 assert any(v["rel_delta_fro"] > 0 for v in report.values()), f"merge changed nothing: {report}"
+if targets_experts:  # adapter trained routed experts: they must have changed, not only attention
+    assert any(".mlp.experts." in n and v["rel_delta_fro"] > 0 for n, v in report.items()), f"routed experts unchanged: {report}"
 model.save_pretrained(out, safe_serialization=True, max_shard_size="10GB")
 AutoTokenizer.from_pretrained(IT).save_pretrained(out)
 AutoProcessor.from_pretrained(IT).save_pretrained(out)
