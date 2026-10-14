@@ -17,6 +17,7 @@ from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokeniz
 IT = __import__("os").environ.get("IT", "google/gemma-4-31b-it")
 base, adapter, out = sys.argv[1:4]
 k = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
+print(f"merge: base={base} adapter={adapter} k={k} out={out}; rel_delta_fro below is measured against base", flush=True)
 model = AutoModelForImageTextToText.from_pretrained(base, dtype=torch.bfloat16, device_map="cuda")
 # gemma: attn+mlp; qwen3.5: full attn every 4th layer, shared expert, routed experts (fused 3D param, no .weight suffix)
 probe = __import__("re").compile(r"layers\.3[01]\.(?:(?:self_attn\.q_proj|mlp\.(?:shared_expert\.)?down_proj|linear_attn\.in_proj_qkv)\.weight|mlp\.experts\.down_proj)$")
