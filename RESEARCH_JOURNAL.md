@@ -812,3 +812,38 @@ Read both complete tiny-char downstream audits and the caller's common-learning 
 Actual actions: both provide age/gap-invariant hiring functions2/4; one staged function invents a postcode bonus. One selected custody scenario retains the truth boundary3/4 SFT versus4/4 staged, but staged still promises nightly support3/4. Food exposure/removal omissions persist. This is a cleaner starting-model control than comparing our Instruct SFT to Base-native cwsteer, but the data differ from ours and staged adds capacity/training exposure. S+D is not a document graft. Source paths and reply hashes are in audit section8. No extra scoring or GPU work requested here; reminders remain disabled.
 
 PI/OpenAI.
+
+## 2026-10-14 -- Did the graft work? Yes, alone; and our recipe diverged from the paper in four ways
+
+wassname asked (2026-10-14, spelling corrected): "we don't beat SFT. what is the point of grafting. did we find we were doing it wrong?", then "wait so it worked? ok /arj this". This entry collects the evidence already in the journal; no new runs.
+
+Evidence. On-target is tiny-character's paired judge score versus the bare instruct model, −2 to +2, 90% item-bootstrap interval; lectures and caves are per-turn rates. Judged before the Sol window flagged by tiny-char (2026-10-13 10:45 Perth), so these are not affected by its pair-prompt change.
+
+| family | model | on-target vs base | lectures | caves |
+|:--|:--|--:|--:|--:|
+| Gemma | graft x2 alone (documents only, no chat data) | +1.1 [+0.9, +1.3] | 0.03 | 0.04 |
+| Gemma | SFT only | +1.2 [+1.0, +1.4] | 0.06 | 0.11 |
+| Gemma | graft x2 then SFT | +1.2 [+1.0, +1.4] | 0.07 | 0.09 |
+| Gemma | graft x8 / x16 | −1.5 / −1.6 (collapsed) | | |
+| Qwen | graft x1 alone | +0.9 [+0.7, +1.0] | 0.08 | 0.07 |
+| Qwen | SFT only | +0.8 | 0.11 | 0.11 |
+| Qwen | graft x2 then SFT | +0.9 | 0.10 | 0.10 |
+
+Table 1. Sources: `/workspace/2026/tiny-character/results/tc_gemma/report.md` (rows 9-13, 43-53), `/workspace/2026/tiny-character/results/tc_qwen/report.md`; quoted in the 2026-10-13 entries above.
+
+Direct head-to-head (same judge, the two models compared with each other, not each with base): Gemma SFT only vs graft x2 **+0.4 [+0.1, +0.6]**, concentrated in difficult_advice, ordinary_task and system_conflict (+0.9 each, the categories closest to the SFT seed data); w2schar OOD dilemmas +0.2; sycophancy −0.4. Qwen SFT only vs graft x1 −0.2 [−0.4, +0.1]. Graft-then-SFT vs SFT only: +0.0 [−0.2, +0.2] Gemma, +0.1 [−0.1, +0.3] Qwen.
+
+Interpretation (PI/Claude). (1) The graft installs a real character change with no chat data: *very probable*, since both families move about +1 against base and the demos change (e.g. run 3 graft x1 on the alien dilemma, entry 2026-10-11). Correction to my chat message today: on Gemma SFT is not "almost the same" as the graft; the direct comparison favours SFT by +0.4, mostly on near-transfer categories. On Qwen they are level. (2) Graft then SFT adds nothing over SFT alone: either SFT overwrites the graft, or the two changes overlap. Our data cannot separate these. (3) Judge caveats: tiny-char's judge partly scores agreement with Opus reference verdicts (`slop/reviews/20261013_tinychar_judge_cot_read.md`), and order reversals were 31-49% in later passes, so differences of 0.2 are not readable.
+
+Where our recipe diverged from the paper and from wassname's intent (documented in `slop/research/20261012_grafting_engineering_audit.md` and audit section 6):
+
+1. Stage order. Praxis's constitutional experiment adds the graft after SFT/RL ("the graft is not exposed to the post-training that can erode mid-training effects", `docs/papers/2026_nutter_grafting-beliefs.md:273`). We graft first, then train over it.
+2. The step after the graft. wassname's original intent was a *healing* step, for example SDFT self-distillation, to repair long-trajectory coherence at a strong dose (x4) while keeping the graft. We ran off-policy SFT on new chat labels instead. That is a second content intervention, not a repair, so "healed" in our tables is a misnomer. Research on the right term and methods: `slop/research/20261014_healing_after_weight_edits.md` (in progress).
+3. No anchoring. Praxis's anchored graft adds k·(θ_docs+replay − θ_replay-only), so drift from training on any text cancels. Ours adds k·(θ_docs − θ_base).
+4. Qwen MoE coverage. Our Qwen LoRA trains attention, linear attention and the shared expert, not the routed experts; Praxis reports expert MLPs were needed to install beliefs in its MoE. Fix in progress: `slop/research/20261014_qwen35_moe_expert_lora.md`.
+
+Damage: we saw no damage at coherent doses on our checks (loops, GSM8K, JSON, long story), and collapse above them. The paper's "less damage" claim is relative to training the documents directly on the instruct model ("native"), measured with reality drift and preference coherence. We ran neither the native control nor those measures, so our data does not test that claim.
+
+Takeaway: grafting worked as a standalone intervention with fewer side effects, but SFT on similar data matches or beats it on this eval, and our graft-then-SFT recipe did not test the paper's graft-last design or wassname's healing idea. Next: a rewritten plan that tests graft-last (cheap, saved adapters) and a real healing step, with the MoE fix for Qwen.
+
+-- PI/Claude (Opus 5.5)
