@@ -96,6 +96,16 @@ heal() {  # goal 2, tasks 2-3: K = strong dose picked from the sweep
   done; done
 }
 
+ref_samples() {  # samples 2-3 for the references r4_sft and bare_it (run 4 / baseline generated only 0-1), same seeds list, same items
+  local tmpo=$R/replies_ref_all.jsonl
+  [ -d $M/sft ] || python scripts/train/02_merge.py $IT outputs/sft_it $M/sft > $R/merge_sft.log 2>&1
+  ref_cmds() { python3 scripts/eval/19_gen_replies.py $ITEMS $tmpo "$1" bare_it --temperature 0.7 --samples 4; }  # base_model as in the run-4 / baseline rows
+  serve_run $M/sft r4_sft ref_cmds r4_sft
+  serve_run $IT bare_it ref_cmds bare_it
+  python3 -c "import json,sys; [sys.stdout.write(l) for l in open('$tmpo') if json.loads(l)['sample'] >= 2]" > $R/replies_ref_s23.jsonl
+  rm -rf $M/sft
+}
+
 qwen_smoke() {  # goal 3: routed-expert LoRA on the training image, 3 steps
   hf download Qwen/Qwen3.5-35B-A3B-Base --exclude "*.gguf"
   cfg configs/train/qwen3/graft.yml $R/cfg_qsmoke.yml max_steps=3 save_steps=3 saves_per_epoch=null evals_per_epoch=null val_set_size=0 output_dir=outputs/qsmoke \
