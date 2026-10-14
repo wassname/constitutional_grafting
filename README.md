@@ -1,8 +1,23 @@
 
+# Virtue consitutional grafting
 
+Goal: Try to do consitutional training, on non corperate virtue ethics, using the latest mid-training and character training techniques -- wassname 
 
+Reasearch (wassname's priorities and hypotheses):
+<!-- Source links, SDFT note and recipe distinction: PI/Sol, 2026-10-12. -->
+- [Praxis grafting](https://praxis-research.org/grafting) ([paper](https://arxiv.org/abs/2610.00767), [code](https://github.com/peternutter/grafting-beliefs)) -- this lets us change the mid training stage on a base model, then graft the change on to a post trained model (sometimes at 2x or 4x dose) while retaining capability. This retention is the big part as it skips an expensive re-do of the RL. Our experimental "healing" phase is chat SFT after grafting; Praxis's constitutional experiment does not train after grafting (paper §4.2), although its AuditBench experiments do (Appendix B.1).
+- [Teaching Claude Why](https://alignment.anthropic.com/2026/teaching-claude-why/) - the best alignment seen to date. Emphisies high quality data on difficult advice.
+  - there is a [repo trying to replicate it](https://github.com/Matthew-Bozoukov/teaching_claude_why_replication) that somewhat works, including a [700-sample difficult-advice run](docs/vendor/lasr_teaching_claude_why/docs/LOG.md).
+- [Contrastive weight steering](https://github.com/wassname/cwsteer): my own modification of weight steering, lets use focus on a behaviural change with 100-300 samples only. [Virtue training project](https://github.com/wassname/virtue_cwsteer).
+- Replacing RL with SFT by moving samples on policy and gettign cheap generalisaiton: [“Fine-Tuning with Sampling” — Karan, Chen & Du (2026)](https://arxiv.org/abs/2610.02140) ([code](https://github.com/aakaran/finetuning-with-sampling)). -- experimental
+- [Self-Distillation Fine-Tuning (SDFT)](https://arxiv.org/abs/2601.19897): on-policy learning from expert demonstrations, with less forgetting. [Tinker recipe and demos](https://tinker-docs.thinkingmachines.ai/cookbook/recipes/sdft/). Separate from Karan's label preprocessing; whether it can heal our grafts while retaining their character is experimental.
+- [Echo](https://echo.fulcrum.inc/): sometimes using the new echo model to rewrite style in the hope that 1) less annoying 2) style and preference change will be more effective than only preferenced change and lead to a more striking charector . Also good to look at [how they did such a striking change so cheaply](https://echo.fulcrum.inc/#echos-training-recipe).
+- We of course take advice and engineering details from [Unsloth](https://docs.unsloth.ai/), [Axolotl](https://docs.axolotl.ai/), and [Tinker cookbook](https://tinker-docs.thinkingmachines.ai/cookbook/), for empirical priors on how to get cheap training to work on each model.
+  > I think tinker cookbook is newer and has more effeort put into code and demos
+  >
+  > — wassname, 2026-10-12
+- character training - this is a different objectives to we look at: [Claude's character](https://www.anthropic.com/research/claude-character), [Open Character Training](https://arxiv.org/abs/2511.01689) ([code](https://github.com/maiush/OpenCharacterTraining)).
 
-https://praxis-research.org/grafting
 
 ""Many of us have looked at how well (previous) Claude's were aligned and thought, “Wow, constitutional alignment seems to work.” 
 
@@ -16,6 +31,8 @@ It seems we may be able to get much of the benefit of constitutional training wi
 Goal... can we set up a virtue ethic focused consitution, and trian it this way and eval it on out of distirubtion moral evals. https://github.com/wassname/awesome-moral-evals
 
 prev work, attempting to define virtue in various ways https://github.com/wassname/virtue_constitution
+
+Related work: [virtue definitions and judges](https://github.com/wassname/virtue_constitution), [contrastive virtue steering](https://github.com/wassname/virtue_cwsteer), [moral eval collection](https://github.com/wassname/awesome-moral-evals), and [this grafting project](https://github.com/wassname/constitutional_grafting).
 
 
 

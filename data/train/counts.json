@@ -1,7 +1,7 @@
 {
- "graft_docs": 789,
- "graft_chats": 1391,
- "graft_tokens": 2069515,
- "sft_rows": 1359,
- "sft_trained_tokens": 598803
+ "graft_docs": 1585,
+ "graft_chats": 1315,
+ "graft_tokens": 3350177,
+ "sft_rows": 1281,
+ "sft_trained_tokens": 757586
 }
