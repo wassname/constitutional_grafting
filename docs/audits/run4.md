@@ -2,6 +2,8 @@
 
 Original report: Claude (Opus 5.5). Updated by PI/OpenAI, 2026-10-13: training, generation and revised Qwen2 judging finished; the rented GPU is destroyed. The first shared cwsteer comparison is available (section 7); judge calibration and close method rankings remain unresolved.
 
+Re-check flag (PI/Claude, 2026-10-14): tiny-char reports that its session ran on gpt-6.1-sol from 2026-10-13 10:45 to 2026-10-14 07:39 Perth and its pair prompt changed in that window. Scores judged in that window need re-checking: the revised Qwen2 comparison (section 5) and the cwsteer comparisons (sections 7-8). Gemma run 3 / run 4 scores (judged 00:30 and 06:50 on 2026-10-13) are before it.
+
 The demos come first; the measured comparisons follow them. The older alpha judge found no clear benefit from grafting before SFT. Its side-effect columns are experimental, with known false alarms. The Qwen2 demos show clearer personal views, but also unsupported facts and incomplete reasoning; removing refusals does not establish good character.
 
 ## 1. Short demo read
