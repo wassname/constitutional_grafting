@@ -29,9 +29,11 @@ MODEL = os.environ.get("JUDGE_MODEL", "openai/gpt-6-luna")
 EFFORT = os.environ.get("JUDGE_EFFORT", "high")
 YARDSTICK = (ROOT / os.environ.get("YARDSTICK", "slop/eval/20261008_v3_nonum/v3_nonum.md")).resolve()  # relative paths are from repo root
 LEXICON = ROOT / "docs/vendor/virtue_constitution/docs/virtue_vice_lists.md"
-# Traditions not in constitution/v4.md (which lists Greek, Aristotle, Stoic, Christian, Islamic, Buddhist, rationalist).
-# Roman virtues moved out of the held-out set (wassname 2026-10-09: "our identity is roman stoic we can't avoid stoic"), so Roman/Stoic texts may seed training data.
-HELD_OUT = ["### Walter Kaufmann", "### Shannon Vallor", "## Confucian virtues",
+# Traditions not quoted in constitution/v4.md (which lists Greek/Stoic, Aristotle, Roman, Confucian, Christian, Islamic, Buddhist, rationalist).
+# The constitution comes first; this list follows it (wassname 2026-10-13: "the constitution must come first, and the eval must adjust").
+# Confucian removed 2026-10-14 when the constitution added it. Roman removed 2026-10-09 ("our identity is roman stoic").
+# Re-check this list whenever the constitution's "Virtues across traditions" changes.
+HELD_OUT = ["### Walter Kaufmann", "### Shannon Vallor",
             "## Benjamin Franklin", "## VIA character strengths", "## Comte-Sponville"]
 
 
