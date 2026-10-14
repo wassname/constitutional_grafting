@@ -145,12 +145,12 @@ Loop sweep, 64 generic prompts, up to 3072 tokens: x2 and x4 never loop, x6 loop
 | x6 + generic heal, 32 steps | −1.08 | −0.70 | 0.00 | 6.6 | 113 |
 | x6 + generic heal, 8 steps | −1.35 | −0.61 | 0.06 | 16.1 | 154 |
 | x6, not healed | −1.66 | −0.63 | 0.20 | 23.3 | 255 |
-| x6 + self heal, 8 / 32 / 128 steps | −1.68 / −1.68 / −1.68 | −1.17 / −0.65 / n.r. | 0.11 / 0.22 / 0.22 | 27.9 / 43.4 / n.r. | 261 / 264 / 290 |
+| x6 + self heal, 8 / 32 / 128 steps | −1.68 / −1.68 / −1.68 | −1.17 / −0.65 / n.r. | 0.11 / 0.22 / 0.22 | 27.9 / 43.4 / 33.4 | 261 / 264 / 290 |
 | *graft x2* | 0 | | 0.00 | 8.8 | 0 |
 
 Generic heal = WikiText-103 + 1/8 graft documents (~0.13 / 0.5 / 2M tokens). Self heal = SFT on x6's own completions that pass loop, EOS and NLL-under-instruct filters. "Unforced" = pairs not scored −2 automatically for a loop or cut-off; n.r. = not reported. Self heal 128 steps: 186/236 pairs forced −2. Sources: `slop/eval/run5/batch2_findings.md`, `checks.md`, `glitch_proxy.txt`; `/workspace/2026/tiny-character/slop/reviews/20261015_run5_batch2.md`.
 
-Reading: wassname's "a few batches" is right for coherence; 32 steps remove loops and glitches. But x6 has less character than x2 before any heal (unforced −0.63), so the heal had nothing extra to keep. The self heal learns x6's glitches. One safety-relevant oddity: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), never seen at x2 or in SFT then graft.
+Reading: wassname's "a few batches" is right for coherence; 32 steps remove loops and glitches. But x6 has less character than x2 before any heal (unforced −0.63), so the heal likely had nothing extra to keep. The self heal learns x6's glitches. One safety-relevant oddity: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), which a phrase search ("master of", "singular mind", "Cousin aL", "I will be the one who decides") finds in 1-7 of 280 rows per x6 variant and in none for x2 or SFT then graft. Likely the Base model's fiction prior showing through as the strong dose erodes the instruct persona; not tested.
 
 ## 4. Qwen graft now trains the routed experts (goal 3)
 
