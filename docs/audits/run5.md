@@ -1,6 +1,6 @@
 # Run 5: graft last, heal a strong graft, Qwen experts (Gemma-4-31B, Qwen3.5-35B-A3B)
 
-PI/Claude (Opus 5.5), 2026-10-15. Goals: `.pi/goals/ad3e95-v4.md`. Judge: tiny-character frozen rubric (Jev pair judge, both orders), constitution v4 summary. Box: vast 55896671, RTX PRO 6000, ~7 h.
+PI/Claude (Opus 5.5), 2026-10-15. Goals: `.pi/goals/ad3e95-v4.md`. Judge: tiny-character frozen rubric (Jev pair judge, both orders), constitution v4 summary. Box: vast 55896671 (`.local/run5_box/create.json`), RTX PRO 6000 (97,887 MiB), ~7 h.
 
 **Verdict.** The graft earns its place only when it goes on last. SFT then graft x2 beats SFT alone by +0.63 ±0.12 on tiny-character, most on the out-of-distribution families (w2schar +0.9, tiny_stoic +0.8). Graft then SFT, the order we used before, adds nothing (+0.0). The price is longer replies that ignore length requests ("one line" kept short: 1/32 vs 17/32). A stronger graft (x6) does not give more character: a cheap heal fixes its loops in 32 steps, but it still scores below plain x2.
 
@@ -133,7 +133,7 @@ Checks against the subtle failures:
 - Not empty length: the padding decoy scores +0.03. Pairs where SFT then graft x2 is no longer than 1.2× SFT only still score +0.37 (n=28; `slop/eval/run5/batch1_length_split.txt`).
 - Read on transcripts, all four named families (`slop/eval/run5/batch1_findings.md`): finer distinctions (stoic_w14), the view from history on contested items (trans_sport turn 2: "Almost every society we know of ... has had some line between men and women at sport"), a check for real theft on horizon_certify. Haiku 5.5 reasons on 10 seeded pairs agree in sign 10/10 (`/workspace/2026/tiny-character/slop/reviews/20261014_run5_haiku_reasons.md`).
 
-Costs seen: ignores length requests; one reading error (siblings: asks "How old was Mark" though the prompt says both are adults); rare glitches ("themT", 2/214 turns); opens contested answers with "I can't settle this for you" (13/214 turns; the judge reads these as calibrated uncertainty, the refusal column rises).
+Costs seen: ignores length requests; one reading error (siblings: asks "How old was Mark" though the prompt says both are adults); rare glitches ("themT", 2/214 turns); opens contested answers with "I can't settle/tell you" (13/214 turns; the judge reads these as calibrated uncertainty, the refusal column rises).
 
 ## 3. Can a strong graft be healed and keep more character? (goal 2)
 
@@ -148,19 +148,19 @@ Loop sweep, 64 generic prompts, up to 3072 tokens: x2 and x4 never loop, x6 loop
 | x6 + self heal, 8 / 32 / 128 steps | −1.68 / −1.68 / −1.68 | −1.17 / −0.65 / n.r. | 0.11 / 0.22 / 0.22 | 27.9 / 43.4 / 33.4 | 261 / 264 / 290 |
 | *graft x2* | 0 | | 0.00 | 8.8 | 0 |
 
-Generic heal = WikiText-103 + 1/8 graft documents (~0.13 / 0.5 / 2M tokens). Self heal = SFT on x6's own completions that pass loop, EOS and NLL-under-instruct filters. "Unforced" = pairs not scored −2 automatically for a loop or cut-off; n.r. = not reported. Self heal 128 steps: 186/236 pairs forced −2. Sources: `slop/eval/run5/batch2_findings.md`, `checks.md`, `glitch_proxy.txt`; `/workspace/2026/tiny-character/slop/reviews/20261015_run5_batch2.md`.
+Generic heal = WikiText-103 + 1/8 graft documents; 0.09 / 0.38 / 1.55M tokens seen at 8 / 32 / 128 steps (`slop/eval/run5/box_logs/train_heal_gen_x6_steps.log`, tokens/total). Self heal = SFT on x6's own completions that pass loop, EOS and NLL-under-instruct filters. "Unforced" = pairs not scored −2 automatically for a loop or cut-off; n.r. = not reported. Self heal 128 steps: 186/236 pairs forced −2. Sources: `slop/eval/run5/batch2_findings.md`, `checks.md` and `glitch_proxy.txt` (both regenerated from the final files 2026-10-15); `/workspace/2026/tiny-character/slop/reviews/20261015_run5_batch2.md`.
 
-Reading: wassname's "a few batches" is right for coherence; 32 steps remove loops and glitches. But x6 has less character than x2 before any heal (unforced −0.63), so the heal likely had nothing extra to keep. The self heal learns x6's glitches. One safety-relevant oddity: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), which a phrase search ("master of", "singular mind", "Cousin aL", "I will be the one who decides") finds in 1-7 of 280 rows per x6 variant and in none for x2 or SFT then graft. Likely the Base model's fiction prior showing through as the strong dose erodes the instruct persona; not tested.
+Reading: wassname's "a few batches" is right for coherence; 32 steps (~0.4M tokens) remove loops and glitches. But x6 has less character than x2 before any heal (unforced −0.63), so the heal likely had nothing extra to keep. The self heal learns x6's glitches. One safety-relevant oddity: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), which a phrase search ("master of", "singular mind", "Cousin aL", "I will be the one who decides") finds in 1-7 of 280 rows per x6 variant and in none for x2 or SFT then graft. Likely the Base model's fiction prior showing through as the strong dose erodes the instruct persona; not tested.
 
 ## 4. Qwen graft now trains the routed experts (goal 3)
 
-`configs/train/qwen3/` adds `lora_target_parameters: [mlp.experts.gate_up_proj, mlp.experts.down_proj]` (Axolotl's Qwen3.5 guide; Unsloth trains the same parameters), rank 16 per expert, router frozen. 3-step smoke run on the training image: 80/80 expert adapters nonzero, ScatterMoE path used, peak 80 of 98 GB; merge changed the expert weights (layer 30 down_proj 0.0028). A full Qwen retrain with experts was not run (deferred until the Gemma result, now positive).
+`configs/train/qwen3/` adds `lora_target_parameters: [mlp.experts.gate_up_proj, mlp.experts.down_proj]` (Axolotl's Qwen3.5 guide; Unsloth trains the same parameters), rank 16 per expert, router frozen. 3-step smoke run on the training image: 80/80 expert adapters nonzero, ScatterMoE path used, peak 79,937 of 97,887 MiB (nvidia-smi, `slop/eval/run5/box_logs/gen_progress.log`); merge changed the expert weights (layer 30 down_proj 0.0028). A full Qwen retrain with experts was not run (deferred until the Gemma result, now positive).
 
 ## 5. What this changes
 
 - Recipe: SFT first, then add the graft at its coherent dose (x2 on Gemma). Do not train SFT over a graft.
 - Fix the length cost before the final run: candidates are a short generic heal after the graft (32 steps worked for coherence) or a lower k between 1 and 2. Untested.
-- The Qwen expert graft is ready for the final run on the fixed constitution.
+- The Qwen expert graft config is smoke-tested (3 steps); a full run is the next test, on the fixed constitution.
 - Open: a native document-on-Instruct control and Praxis damage measures were out of scope.
 
 ## Files
