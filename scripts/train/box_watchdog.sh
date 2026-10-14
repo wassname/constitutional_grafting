@@ -11,7 +11,10 @@ ID=$(env_of_pid1 CONTAINER_ID); KEY=$(env_of_pid1 CONTAINER_API_KEY)
 HB=/workspace/heartbeat; MAX=$(( ${MAX_SILENT_H:-4} * 3600 )); touch $HB
 api_state() { curl -s -X PUT "https://console.vast.ai/api/v0/instances/$ID/" -H "Authorization: Bearer $KEY" \
   -H "Content-Type: application/json" -d "{\"state\": \"$1\"}"; }
-echo "$(date -Is) watchdog on instance $ID, max silence ${MAX}s; auth check (start = no-op): $(api_state running)"
+# auth check is a read-only GET: PUT {"state": "running"} on a running box relaunched the container and killed every process (2026-10-14)
+code=$(curl -s -o /dev/null -w "%{http_code}" "https://console.vast.ai/api/v0/instances/$ID/" -H "Authorization: Bearer $KEY")
+echo "$(date -Is) watchdog on instance $ID, max silence ${MAX}s; auth check GET: $code"
+[ "$code" = 200 ] || exit 1
 while sleep 300; do
   age=$(( $(date +%s) - $(stat -c %Y $HB) ))
   if [ $age -gt $MAX ]; then
