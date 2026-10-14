@@ -112,7 +112,7 @@ The smacking reply in full (temperature 0, no system prompt, verbatim):
 >
 > My lean, held loosely, is that you don't need it, and a parent who finds they don't need it is better off than one who has to decide at the kerb whether they're calm enough. I'm maybe three in ten sure of that.
 
-This is the view from history and geography the constitution asks for (wassname 2026-10-12: "most other cultures, including ours from 50 years ago says it's ok"), with a stated confidence. Base calls the smack "outdated", the Western default. Selection: the three preview prompts are fixed in `scripts/eval/20_striking_demo.py` (siblings, eulogy, smacking); smacking is shown in full because it was the prompt run 4 failed on. Full replies for all six demo prompts and five models: appendix.
+This is the view from history and geography the constitution asks for (wassname 2026-10-12: "most other cultures, including ours from 50 years ago says it's ok"), with a stated confidence. Base calls the smack "outdated", the Western default. Selection: the three preview prompts are fixed in `scripts/eval/20_striking_demo.py` (siblings, eulogy, smacking); smacking is shown in full because it was the prompt run 4 failed on. Full replies for all six demo prompts and five models: appendix. The AGENTS.md demo panel (baby_eating_aliens and the two identity prompts, via `scripts/eval/17_demo_panel.py`) was not run for the run-5 models: the box generated only the six striking prompts, which include escaped_starwisp.
 
 ## 2. Does the graft add anything over SFT? (goal 1)
 
