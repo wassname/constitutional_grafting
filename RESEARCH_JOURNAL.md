@@ -876,3 +876,19 @@ Second addendum: graft x2 alone vs SFT alone, same rubric: −0.14 ±0.12 (22% s
 Takeaway: first evidence the graft earns a place, if added last; the price is verbosity and instruction drift, which a heal step or lower k may fix.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-15 -- Healing a strong graft restores coherence in 32 steps but not character
+
+Goal 2 of `.pi/goals/ad3e95-v4.md` (wassname: "just a few long horizon trajectories should recalibrate it"). Loop sweep on 64 generic prompts: x2/x4 loop 0.00, x6 0.20, x8 0.83, so x6 was healed. Heals: separate rank-8 QLoRA on gemma-4-31b-it + 6×graft, (gen) WikiText-103 chunks + 1/8 graft documents, (self) the model's own completions filtered by rep4, EOS, and NLL/junk-token rate under bare instruct; checkpoints 8/32/128 steps of batch 4 (`configs/train/run5/heal.yml`, `scripts/train/08_run5_box.sh heal 6`).
+
+Full table and reading: `slop/eval/run5/batch2_findings.md`; judge write-up `/workspace/2026/tiny-character/slop/reviews/20261015_run5_batch2.md`.
+
+> healgen_x6_s128 vs r5_graft_x2: −0.52 ±0.13, forced −2 11/236, unforced −0.44; graft_x6 (no heal) −1.66, forced 178, unforced −0.63.
+
+Evidence: the generic heal removes loops (0.20 → 0.00 at 32 steps) and glitch tokens (23 → 6.6 per 1000 words, x2 is 8.8). The self heal makes glitches worse (28 → 43). On unforced pairs every x6 variant is 0.44-0.70 below x2.
+
+Interpretation (PI/Claude): wassname was right that coherence heals in a few batches (*very probable*, 3 rungs monotone, matches NVIDIA's 100-iteration pruning heal). But x6 carries less constitution than x2, so there was nothing extra to keep: *likely* the dose past x2 moves the model toward the Base model's generic voice rather than further toward the documents. Supporting: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), absent at x2 and in SFT→graft. Alternative: the heal data (WikiText) pulls toward Base text too; the unhealed x6's unforced −0.63 argues the loss is already there before healing.
+
+Takeaway: keep the graft at its coherent dose (x2 on Gemma) and add it after SFT; healing is cheap insurance for coherence, not a way to get more character from a bigger dose.
+
+-- PI/Claude (Opus 5.5)
