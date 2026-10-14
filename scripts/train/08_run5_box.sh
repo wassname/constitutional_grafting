@@ -101,7 +101,12 @@ ref_samples() {  # samples 2-3 for the references r4_sft and bare_it (run 4 / ba
   [ -d $M/sft ] || python scripts/train/02_merge.py $IT outputs/sft_it $M/sft > $R/merge_sft.log 2>&1
   ref_cmds() { python3 scripts/eval/19_gen_replies.py $ITEMS $tmpo "$1" bare_it --temperature 0.7 --samples 4; }  # base_model as in the run-4 / baseline rows
   serve_run $M/sft r4_sft ref_cmds r4_sft
-  serve_run $IT bare_it ref_cmds bare_it
+  probe_score() {  # glitch measure for every model's long-probe completions: NLL and junk-token rate under bare instruct
+    ref_cmds bare_it
+    for f in $R/self_probe_*.jsonl; do case $f in *_scored.jsonl) continue;; esac
+      python3 scripts/eval/22_score_ppl.py $f ${f%.jsonl}_scored.jsonl bare_it; done
+  }
+  serve_run $IT bare_it probe_score
   python3 -c "import json,sys; [sys.stdout.write(l) for l in open('$tmpo') if json.loads(l)['sample'] >= 2]" > $R/replies_ref_s23.jsonl
   rm -rf $M/sft
 }
