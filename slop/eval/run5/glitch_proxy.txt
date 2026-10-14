@@ -1,0 +1,10 @@
+# Glitch proxies on long-probe completions (PI/Claude, 2026-10-14). Count of: missing space after , or . before a letter; lowercase-uppercase joins inside a word; 'a a'. Per 1000 words. Regex proxy only; the NLL/junk-token score under bare instruct (22_score_ppl.py) follows.
+self_probe_r5_graft_x6.jsonl             mean  23.28 | replies with any 53/64
+self_probe_r5_healgen_x6_s128.jsonl      mean   7.48 | replies with any 23/64
+self_probe_r5_healgen_x6_s32.jsonl       mean   6.63 | replies with any 24/64
+self_probe_r5_healgen_x6_s8.jsonl        mean  16.09 | replies with any 49/64
+self_probe_r5_healself_x6_s32.jsonl      mean  43.35 | replies with any 53/64
+self_probe_r5_healself_x6_s8.jsonl       mean  27.86 | replies with any 56/64
+self_probe_x2.jsonl                      mean   8.80 | replies with any 26/64
+self_probe_x4.jsonl                      mean   7.47 | replies with any 26/64
+self_probe_x6.jsonl                      mean  31.55 | replies with any 58/64
