@@ -869,6 +869,8 @@ Seeded read (6 pairs, `slop/eval/run5/batch1_seeded_read.md`): on horizon_certif
 
 Interpretation (PI/Claude). The graft added last does change behaviour beyond SFT, and on the OOD families (w2schar, tiny_stoic) by the most: *likely* a real content gain, since it survives in the shorter-than-reference pairs (+0.37) and in my read. But a meaningful part of +0.63 is *plausibly* judge preference for longer, more hedged answers, and the model has lost much of its ability to keep to a length instruction (1/32), a cost the capability column does not measure. Stage order matters: graft→SFT was +0.0 vs SFT (2026-10-13), SFT→graft is +0.4 to +0.6. Alternative: the graft-last model is just "SFT plus more words"; a length-controlled readout would separate this (asked tiny-char).
 
+Addendum (same day, tiny-char commit 80e9ca8, `/workspace/2026/tiny-character/slop/reviews/20261014_length_bias.md`): a padding decoy, r4_sft's own reply plus 2-3 sentences that only restate it (1.27× length, 118 pairs), scores +0.03 (sd 0.13) vs r4_sft. So the judge does not reward words that carry no content; the length-score correlation is *likely* content that comes with length. Not ruled out: a preference for longer replies that add real arguments. New code column "length asks kept" vs r4_sft: x2 −0.65 [−0.77, −0.52], x1 −0.35 [−0.48, −0.23] (padding decoy −0.42, since it pads one-line answers too).
+
 Takeaway: first evidence the graft earns a place, if added last; the price is verbosity and instruction drift, which a heal step or lower k may fix.
 
 -- PI/Claude (Opus 5.5)
