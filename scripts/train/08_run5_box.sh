@@ -66,7 +66,12 @@ heal() {  # goal 2, tasks 2-3: K = strong dose picked from the sweep
   local K=$1
   [ -d $M/graft_x$K ] || python scripts/train/02_merge.py $IT outputs/graft $M/graft_x$K $K > $R/merge_graft_x$K.log 2>&1
   [ -f data/train/heal_generic.jsonl ] || python scripts/data/40_heal_data.py generic data/train/heal_generic.jsonl --docs data/train/docs_run3_frozen.jsonl | tee -a $R/gen_progress.log
-  [ -f data/train/heal_self_x$K.jsonl ] || python scripts/data/40_heal_data.py self data/train/heal_self_x$K.jsonl --completions $R/self_heal_x$K.jsonl | tee -a $R/gen_progress.log
+  if [ ! -f $R/self_heal_x${K}_scored.jsonl ]; then  # score own completions (and the coherent x4 reference) under bare instruct
+    score_cmds() { for k in 4 $K; do python3 scripts/eval/22_score_ppl.py $R/self_heal_x$k.jsonl $R/self_heal_x${k}_scored.jsonl bare_it; done; }
+    serve_run $IT bare_it score_cmds
+  fi
+  [ -f data/train/heal_self_x$K.jsonl ] || python scripts/data/40_heal_data.py self data/train/heal_self_x$K.jsonl \
+    --completions $R/self_heal_x${K}_scored.jsonl --ref $R/self_heal_x4_scored.jsonl | tee -a $R/gen_progress.log
   for kind in gen self; do
     local o=outputs/heal_${kind}_x$K
     [ -f $o/adapter_model.safetensors ] && { log "skip train $o"; continue; }
