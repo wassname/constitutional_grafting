@@ -1,0 +1,20 @@
+{
+ "base": "google/gemma-4-31b-it",
+ "adapter": "outputs/sft_it",
+ "scale": 1.0,
+ "lora_modules": 410,
+ "layer30": {
+  "model.language_model.layers.30.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.02117353305220604
+  },
+  "model.language_model.layers.30.mlp.down_proj.weight": {
+   "rel_delta_fro": 0.022468464449048042
+  },
+  "model.language_model.layers.31.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.020420648157596588
+  },
+  "model.language_model.layers.31.mlp.down_proj.weight": {
+   "rel_delta_fro": 0.022100137546658516
+  }
+ }
+}

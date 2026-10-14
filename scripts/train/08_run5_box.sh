@@ -98,7 +98,7 @@ heal() {  # goal 2, tasks 2-3: K = strong dose picked from the sweep
 
 qwen_smoke() {  # goal 3: routed-expert LoRA on the training image, 3 steps
   hf download Qwen/Qwen3.5-35B-A3B-Base --exclude "*.gguf"
-  cfg configs/train/qwen3/graft.yml $R/cfg_qsmoke.yml max_steps=3 save_steps=3 val_set_size=0 output_dir=outputs/qsmoke \
+  cfg configs/train/qwen3/graft.yml $R/cfg_qsmoke.yml max_steps=3 save_steps=3 saves_per_epoch=null evals_per_epoch=null val_set_size=0 output_dir=outputs/qsmoke \
     dataset_prepared_path=outputs/prepared_qsmoke \
     'plugins=["axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin", "axolotl.integrations.liger.LigerPlugin", "axolotl.integrations.kernels.KernelsPlugin", "scripts.train.router_dtype_plugin.RouterDtypePlugin"]'
   nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -l 5 > $R/qsmoke_gpu_mem.log & local NV=$!
