@@ -28,7 +28,7 @@ Aim: the most generalising virtue-ethical character for the least capability cos
   - deliverable: damage at matched character effect, graft vs native.
 - [ ] goal E: striking demo and trustworthy eval
   - [ ] Re-check tiny-char scores judged in the Sol window (Qwen2, cwsteer). Ask tiny-char for absolute or head-to-head scoring where the vs-base score saturates.
-  - [ ] Demo panel on the best arm: base vs trained, verbatim, prompts no call-centre assistant would answer that way.
+  - [ ] Demo panel on the best model: base vs trained, verbatim, prompts no call-centre assistant would answer that way.
   - deliverable: demo at the top of the audit, read by wassname.
 
 ## UAT / Verification
