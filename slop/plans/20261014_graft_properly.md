@@ -13,16 +13,16 @@ Aim: the most generalising virtue-ethical character for the least capability cos
   - [ ] Compare: bare, graft x2 alone, SFT only, graft→SFT (saved), SFT→graft. Direct head-to-head SFT→graft vs SFT only.
   - failure modes: graft added twice (healed weights as start); graft-last breaks coherence at k=2; judge ceiling hides a real gain.
   - deliverable: tiny-char head-to-head with intervals, plus 3 short demos, in `docs/audits/run5.md`.
-- [ ] goal B: Qwen graft covers routed experts
-  - [ ] LoRA on `mlp.experts.*` per Axolotl/PEFT (research: `slop/research/20261014_qwen35_moe_expert_lora.md`); merge probe checks an expert weight changed.
-  - [ ] CPU test on a tiny random Qwen3.5-MoE: merged delta is nonzero on experts and scales linearly with k.
-  - failure modes: experts silently skipped by scattermoe kernels; merge drops ParamWrapper deltas.
-  - deliverable: regression test passing, config diff committed.
-- [ ] goal C: a real healing step at a strong dose
-  - [ ] Choose the repair method from `slop/research/20261014_healing_after_weight_edits.md` (candidates: SDFT/on-policy self-distillation, KL to a coherent teacher on generic prompts, replay). No new chat labels.
-  - [ ] Graft x4 (Gemma) and x2 (Qwen, with experts), heal, then measure. Teacher choice decides what survives; record it.
-  - failure modes: healing restores coherence by washing out the graft (score falls back to bare); the heal data leaks character content, so it is SFT again.
-  - deliverable: graft xk | healed xk | graft x2 | SFT only, on tiny-char and demos, with loop rate and capability checks.
+- [/] goal B: Qwen graft covers routed experts
+  - [x] `configs/train/qwen3/`: experts via `lora_target_parameters`, per-expert r16, dropout 0, router frozen (Axolotl docs, Unsloth default). 02_merge.py fails if experts unchanged.
+  - [x] CPU test passes: experts get a delta, reload/merge parity, k-scaling linear, rank_pattern applies (`tests/regression/test_moe_expert_merge.py`).
+  - [ ] 2-3 step GPU smoke run on the training image: expert lora_B grads nonzero, peak memory, merged expert weight changed.
+  - failure modes: scattermoe fastpath absent in our image; OOM at seq 8192.
+- [ ] goal C: a real healing step at a strong dose (research: `slop/research/20261014_healing_after_weight_edits.md`)
+  - [ ] Start from graft x4 (Gemma). Same token budget, no new character labels: (a) no heal, (b) generic replay NLL, (c) on-policy distillation (student rollouts on generic prompts, forward KL). Teacher for (c): coherent graft x2, which keeps the direction; bare instruct as a second teacher only if (c) fails.
+  - [ ] Compare against plain graft x2: a heal is only worth it if healed x4 beats x2 at equal loop rate and capability.
+  - failure modes: heal washes the graft out (wassname's steer-heal-love saw this); heal only reproduces x2; generic prompts still carry character content.
+  - deliverable: x2 | x4 | healed x4 (b, c) | SFT only, on tiny-char head-to-head and demos, with loop rate and capability.
 - [ ] goal D: closer to the paper (only if A-C leave the question open)
   - [ ] anchored graft (docs+replay minus replay-only); native control (documents on Instruct); Praxis reality-drift and preference checks.
   - deliverable: damage at matched character effect, graft vs native.
