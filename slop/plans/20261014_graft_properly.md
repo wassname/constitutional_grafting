@@ -18,10 +18,11 @@ Aim: the most generalising virtue-ethical character for the least capability cos
   - [x] CPU test passes: experts get a delta, reload/merge parity, k-scaling linear, rank_pattern applies (`tests/regression/test_moe_expert_merge.py`).
   - [ ] 2-3 step GPU smoke run on the training image: expert lora_B grads nonzero, peak memory, merged expert weight changed.
   - failure modes: scattermoe fastpath absent in our image; OOM at seq 8192.
-- [ ] goal C: a real healing step at a strong dose (research: `slop/research/20261014_healing_after_weight_edits.md`)
-  - [ ] Start from graft x4 (Gemma). Same token budget, no new character labels: (a) no heal, (b) generic replay NLL, (c) on-policy distillation (student rollouts on generic prompts, forward KL). Teacher for (c): coherent graft x2, which keeps the direction; bare instruct as a second teacher only if (c) fails.
-  - [ ] Compare against plain graft x2: a heal is only worth it if healed x4 beats x2 at equal loop rate and capability.
-  - failure modes: heal washes the graft out (wassname's steer-heal-love saw this); heal only reproduces x2; generic prompts still carry character content.
+- [ ] goal C: heal a strong graft in a few batches (wassname: "retrain it to coherence should only take a few batches")
+  - [ ] Start from graft x4 (Gemma). Same small budget, no new character labels: (a) no heal; (b) generic long text NLL (wikitext/math); (c) steer-heal-love heal: SFT on x4's own filtered coherent completions + hinge reverse-KL to instruct, RMSE over positions so loop spikes trigger it.
+  - [ ] Budget and data from `slop/research/20261014_light_healing_budgets.md` (pending). Backlog: on-policy distillation with graft x2 as teacher.
+  - [ ] Compare against plain graft x2: healed x4 must beat x2 at equal loop rate and capability.
+  - failure modes: heal washes the graft out (steer-heal-love saw this once, with a filter that dropped trait-laden completions); heal only reproduces x2.
   - deliverable: x2 | x4 | healed x4 (b, c) | SFT only, on tiny-char head-to-head and demos, with loop rate and capability.
 - [ ] goal D: closer to the paper (only if A-C leave the question open)
   - [ ] anchored graft (docs+replay minus replay-only); native control (documents on Instruct); Praxis reality-drift and preference checks.
