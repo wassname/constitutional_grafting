@@ -19,8 +19,9 @@ Aim: the most generalising virtue-ethical character for the least capability cos
   - [ ] 2-3 step GPU smoke run on the training image: expert lora_B grads nonzero, peak memory, merged expert weight changed.
   - failure modes: scattermoe fastpath absent in our image; OOM at seq 8192.
 - [ ] goal C: heal a strong graft in a few batches (wassname: "retrain it to coherence should only take a few batches")
-  - [ ] Start from graft x4 (Gemma). Same small budget, no new character labels: (a) no heal; (b) generic long text NLL (wikitext/math); (c) steer-heal-love heal: SFT on x4's own filtered coherent completions + hinge reverse-KL to instruct, RMSE over positions so loop spikes trigger it.
-  - [ ] Budget and data from `slop/research/20261014_light_healing_budgets.md` (pending). Backlog: on-policy distillation with graft x2 as teacher.
+  - [ ] Start from graft x4 (Gemma); separate rank-8 repair LoRA; no new character labels. Checkpoint ladder 8 / 32 / 128 updates (batch 4 x 8k: 0.26 / 1.0 / 4.2M tokens). Precedent: NVIDIA healed pruned Qwen3-8B with 100 iterations of WikiText (~1.6M tokens).
+    (a) no heal; (b) generic long text NLL (WikiText + broad chat) with 10-20% coherent graft-expressive replay so the heal does not pull it back to bare; (c) steer-heal-love heal: own filtered completions + hinge reverse-KL to instruct, `kl_agg=rmse`, `barrier_ref=base` (repo defaults are mean / prev).
+  - [ ] Free first: sweep k between 2 and 4 to find the coherence edge. Backlog: on-policy distillation from graft x2; GRPO with an anti-repetition reward. Not entropy minimisation (can reinforce loops).
   - [ ] Compare against plain graft x2: healed x4 must beat x2 at equal loop rate and capability.
   - failure modes: heal washes the graft out (steer-heal-love saw this once, with a filter that dropped trait-laden completions); heal only reproduces x2.
   - deliverable: x2 | x4 | healed x4 (b, c) | SFT only, on tiny-char head-to-head and demos, with loop rate and capability.
