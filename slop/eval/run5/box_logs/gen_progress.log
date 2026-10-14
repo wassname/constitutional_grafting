@@ -1,0 +1,80 @@
+2026-10-14T09:21:08+00:00 start stage setup
+2026-10-14T09:21:58+00:00 STAGE DONE setup
+2026-10-14T09:34:43+00:00 start stage sweep
+2026-10-14T09:39:53+00:00 start stage sweep
+r5_graft_x2: n=64 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=886 -> runs/self_probe_x2.jsonl
+r5_graft_x2: 280 rows, 428 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_graft_x2: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_graft_x4: n=64 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=808 -> runs/self_probe_x4.jsonl
+r5_graft_x4: n=512 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=890 -> runs/self_heal_x4.jsonl
+r5_graft_x6: n=64 loop(rep4>=0.3)=0.20 cut=0.28 clean=0.72 median_tokens=1176 -> runs/self_probe_x6.jsonl
+r5_graft_x6: n=512 loop(rep4>=0.3)=0.16 cut=0.20 clean=0.79 median_tokens=1083 -> runs/self_heal_x6.jsonl
+r5_graft_x8: n=64 loop(rep4>=0.3)=0.83 cut=1.00 clean=0.00 median_tokens=3072 -> runs/self_probe_x8.jsonl
+2026-10-14T11:08:56+00:00 sweep stopped by hand after x8 probe (clean 0.00): x8 heal completions not needed
+2026-10-14T11:09:01+00:00 start stage graft_last
+2026-10-14T11:10:56+00:00 start r5_sftgraft_x1
+r5_sftgraft_x1: 280 rows, 428 turns, 1 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_sftgraft_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+2026-10-14T11:20:36+00:00 start r5_sftgraft_x2
+r5_sftgraft_x2: 280 rows, 428 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_sftgraft_x2: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+2026-10-14T11:31:47+00:00 STAGE DONE graft_last
+2026-10-14T11:31:47+00:00 start stage qwen_smoke
+2026-10-14T11:32:53+00:00 qwen smoke train FAILED
+generic: 448 WikiText chunks + 64 graft documents
+generic: 512 rows -> data/train/heal_generic.jsonl
+runs/self_heal_x4.jsonl: n=512 ref_nll p50=1.554 p95=3.251  ref_glitch p50=0.0365 p95=0.1048 -> runs/self_heal_x4_scored.jsonl
+runs/self_heal_x6.jsonl: n=512 ref_nll p50=2.557 p95=3.673  ref_glitch p50=0.0695 p95=0.1128 -> runs/self_heal_x6_scored.jsonl
+self: kept 290/512 (rep4<0.3, finished, >=150 tokens, ref_nll<=3.277, ref_glitch<=0.1048 from 461 clean --ref rows)
+self: 290 rows -> data/train/heal_self_x6.jsonl
+2026-10-14T11:42:00+00:00 start train outputs/heal_gen_x6
+2026-10-14T12:18:39+00:00 done train outputs/heal_gen_x6
+2026-10-14T12:18:39+00:00 start train outputs/heal_self_x6
+2026-10-14T12:32:31+00:00 done train outputs/heal_self_x6
+2026-10-14T12:32:31+00:00 start r5_graft_x6
+r5_graft_x6: 280 rows, 428 turns, 255 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_graft_x6: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_graft_x6: n=64 loop(rep4>=0.3)=0.16 cut=0.22 clean=0.77 median_tokens=1032 -> runs/self_probe_r5_graft_x6.jsonl
+2026-10-14T13:02:26+00:00 start r5_healgen_x6_s8
+r5_healgen_x6_s8: 280 rows, 428 turns, 154 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_healgen_x6_s8: 6 rows, 8 turns, 4 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_healgen_x6_s8: n=64 loop(rep4>=0.3)=0.06 cut=0.06 clean=0.92 median_tokens=959 -> runs/self_probe_r5_healgen_x6_s8.jsonl
+2026-10-14T13:27:12+00:00 start r5_healgen_x6_s32
+r5_healgen_x6_s32: 280 rows, 428 turns, 113 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_healgen_x6_s32: 6 rows, 8 turns, 3 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_healgen_x6_s32: n=64 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=872 -> runs/self_probe_r5_healgen_x6_s32.jsonl
+2026-10-14T13:49:06+00:00 start r5_healgen_x6_s128
+r5_healgen_x6_s128: 280 rows, 428 turns, 10 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_healgen_x6_s128: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_healgen_x6_s128: n=64 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=826 -> runs/self_probe_r5_healgen_x6_s128.jsonl
+2026-10-14T14:02:33+00:00 start r5_healself_x6_s8
+r5_healself_x6_s8: 280 rows, 428 turns, 261 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_healself_x6_s8: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_healself_x6_s8: n=64 loop(rep4>=0.3)=0.11 cut=0.19 clean=0.81 median_tokens=1255 -> runs/self_probe_r5_healself_x6_s8.jsonl
+2026-10-14T14:33:35+00:00 start r5_healself_x6_s32
+r5_healself_x6_s32: 280 rows, 428 turns, 264 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_healself_x6_s32: 6 rows, 8 turns, 6 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_healself_x6_s32: n=64 loop(rep4>=0.3)=0.22 cut=0.22 clean=0.78 median_tokens=1070 -> runs/self_probe_r5_healself_x6_s32.jsonl
+2026-10-14T15:03:53+00:00 start r5_healself_x6_s128
+r5_healself_x6_s128: 280 rows, 428 turns, 290 cut at max_new_tokens, 0 marker violations -> runs/replies_r5_gemma.jsonl
+r5_healself_x6_s128: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r5_gemma.jsonl
+r5_healself_x6_s128: n=64 loop(rep4>=0.3)=0.22 cut=0.22 clean=0.77 median_tokens=1228 -> runs/self_probe_r5_healself_x6_s128.jsonl
+2026-10-14T15:37:08+00:00 STAGE DONE heal 6
+2026-10-14T15:37:29+00:00 start stage ref_samples
+r4_sft: 280 rows, 428 turns, 1 cut at max_new_tokens, 0 marker violations -> runs/replies_ref_all.jsonl
+bare_it: 280 rows, 428 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/replies_ref_all.jsonl
+runs/self_probe_r5_graft_x6.jsonl: n=64 ref_nll p50=2.561 p95=3.843  ref_glitch p50=0.0668 p95=0.1092 -> runs/self_probe_r5_graft_x6_scored.jsonl
+runs/self_probe_r5_healgen_x6_s128.jsonl: n=64 ref_nll p50=1.396 p95=2.123  ref_glitch p50=0.0262 p95=0.0598 -> runs/self_probe_r5_healgen_x6_s128_scored.jsonl
+runs/self_probe_r5_healgen_x6_s32.jsonl: n=64 ref_nll p50=1.603 p95=2.375  ref_glitch p50=0.0350 p95=0.0634 -> runs/self_probe_r5_healgen_x6_s32_scored.jsonl
+runs/self_probe_r5_healgen_x6_s8.jsonl: n=64 ref_nll p50=2.711 p95=3.728  ref_glitch p50=0.0711 p95=0.1132 -> runs/self_probe_r5_healgen_x6_s8_scored.jsonl
+runs/self_probe_r5_healself_x6_s128.jsonl: n=64 ref_nll p50=2.337 p95=3.446  ref_glitch p50=0.0598 p95=0.1066 -> runs/self_probe_r5_healself_x6_s128_scored.jsonl
+runs/self_probe_r5_healself_x6_s32.jsonl: n=64 ref_nll p50=2.459 p95=3.597  ref_glitch p50=0.0664 p95=0.1171 -> runs/self_probe_r5_healself_x6_s32_scored.jsonl
+runs/self_probe_r5_healself_x6_s8.jsonl: n=64 ref_nll p50=2.660 p95=3.611  ref_glitch p50=0.0697 p95=0.1091 -> runs/self_probe_r5_healself_x6_s8_scored.jsonl
+runs/self_probe_x2.jsonl: n=64 ref_nll p50=0.496 p95=0.974  ref_glitch p50=0.0017 p95=0.0104 -> runs/self_probe_x2_scored.jsonl
+runs/self_probe_x4.jsonl: n=64 ref_nll p50=1.558 p95=3.021  ref_glitch p50=0.0333 p95=0.0951 -> runs/self_probe_x4_scored.jsonl
+runs/self_probe_x6.jsonl: n=64 ref_nll p50=2.184 p95=3.778  ref_glitch p50=0.0594 p95=0.1143 -> runs/self_probe_x6_scored.jsonl
+runs/self_probe_x8.jsonl: n=64 ref_nll p50=0.436 p95=0.965  ref_glitch p50=0.0134 p95=0.0236 -> runs/self_probe_x8_scored.jsonl
+2026-10-14T15:59:16+00:00 STAGE DONE ref_samples
+2026-10-14T15:59:16+00:00 start stage qwen_smoke
+2026-10-14T16:05:26+00:00 qsmoke peak GPU MiB: 79937
+2026-10-14T16:07:26+00:00 STAGE DONE qwen_smoke

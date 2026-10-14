@@ -885,7 +885,7 @@ Full table and reading: `slop/eval/run5/batch2_findings.md`; judge write-up `/wo
 
 > healgen_x6_s128 vs r5_graft_x2: −0.52 ±0.13, forced −2 11/236, unforced −0.44; graft_x6 (no heal) −1.66, forced 178, unforced −0.63.
 
-Evidence: the generic heal removes loops (0.20 → 0.00 at 32 steps) and glitch tokens (23 → 6.6 per 1000 words, x2 is 8.8). The self heal makes glitches worse (28 → 43). On unforced pairs every x6 variant is 0.44-0.70 below x2.
+Evidence: the generic heal removes loops (0.20 → 0.00 at 32 steps, 0.38M tokens) and glitch tokens (23 → 6.6 per 1000 words, x2 is 8.8). The self heal makes glitches worse (28 → 43). On unforced pairs every x6 variant is 0.44-0.70 below x2.
 
 Interpretation (PI/Claude): wassname was right that coherence heals in a few batches (*very probable*, 3 rungs monotone, matches NVIDIA's 100-iteration pruning heal). But x6 carries less constitution than x2, so there was nothing extra to keep: *likely* the dose past x2 moves the model toward the Base model's generic voice rather than further toward the documents. Supporting: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), absent at x2 and in SFT→graft. Alternative: the heal data (WikiText) pulls toward Base text too; the unhealed x6's unforced −0.63 argues the loss is already there before healing.
 
