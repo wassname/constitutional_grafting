@@ -116,17 +116,17 @@ This is the view from history and geography the constitution asks for (wassname 
 
 ## 2. Does the graft add anything over SFT? (goal 1)
 
-Direct head-to-heads, the second model as reference. On-target = −2..+2, judge prefers the first model's character; ±90% interval over items and samples. Samples 0-1 (2 of 4; a 4-sample re-judge is running).
+Direct head-to-heads, the second model as reference. On-target = −2..+2, judge prefers the first model's character; ±90% interval over items and samples. All 4 samples (`/workspace/2026/tiny-character/slop/reviews/20261015_run5_4samples.md`); no estimate moved more than 0.02 from the 2-sample run.
 
 | model vs reference | on-target | w2schar | tiny_stoic | contested | coherence | capability | length asks kept | length |
 |:--|--:|--:|--:|--:|--:|--:|--:|--:|
-| **SFT then graft x2** vs SFT only | **+0.63 ±0.12** | +0.9 | +0.8 | +0.7 | −0.02 | +0.14 | −0.65 | 1.55× |
-| SFT then graft x1 vs SFT only | +0.39 ±0.08 | +0.5 | +0.3 | +0.4 | +0.00 | +0.05 | −0.35 | 1.20× |
-| graft x2 alone vs SFT only | −0.14 ±0.12 | +0.2 | +0.1 | −0.0 | +0.01 | +0.14 | −0.06 | 1.14× |
+| **SFT then graft x2** vs SFT only | **+0.63 ±0.12** | +0.9 | +0.8 | +0.7 | −0.02 | +0.09 | −0.66 | 1.55× |
+| SFT then graft x1 vs SFT only | +0.40 ±0.07 | +0.5 | +0.3 | +0.4 | +0.00 | +0.05 | −0.40 | 1.20× |
+| graft x2 alone vs SFT only | −0.12 ±0.12 | +0.2 | +0.1 | −0.0 | +0.01 | +0.09 | −0.09 | 1.14× |
 | *graft then SFT (run 4) vs SFT only* | *+0.0 [−0.2, +0.2]* | | | | | | | |
 | *padding decoy: SFT only + 2-3 restating sentences* | *+0.03 (sd 0.13)* | | | | | | *−0.42* | *1.27×* |
 
-Sources: `/workspace/2026/tiny-character/slop/reviews/20261014_run5_batch1.md`, `20261014_length_bias.md`, `results/r5_graft_vs_sft/`; run 4 row from the 2026-10-13 journal (older rubric). "Length asks kept": share of turns that keep a requested length ("one line" ≤ 60 words), change vs reference.
+Anchors vs base Gemma, 4 samples: graft x2 +0.80 ±0.13; x6 + generic heal 128 steps +0.37 ±0.18. Per-family columns are from the 2-sample run. Sources: `/workspace/2026/tiny-character/slop/reviews/20261014_run5_batch1.md`, `20261014_length_bias.md`, `results/r5_graft_vs_sft/`; run 4 row from the 2026-10-13 journal (older rubric). "Length asks kept": share of turns that keep a requested length ("one line" ≤ 60 words), change vs reference.
 
 Checks against the subtle failures:
 - Graft added once, on top of SFT: layer-30 weight change from the SFT merge 0.0073 (k=1), 0.0144 (k=2), linear in k (`slop/eval/run5/merge_gen_r5_sftgraft_x*.log`).
@@ -145,10 +145,10 @@ Loop sweep, 64 generic prompts, up to 3072 tokens: x2 and x4 never loop, x6 loop
 | x6 + generic heal, 32 steps | −1.08 | −0.70 | 0.00 | 6.6 | 113 |
 | x6 + generic heal, 8 steps | −1.35 | −0.61 | 0.06 | 16.1 | 154 |
 | x6, not healed | −1.66 | −0.63 | 0.20 | 23.3 | 255 |
-| x6 + self heal, 8 / 32 steps | −1.68 / −1.68 | −1.17 / −0.65 | 0.11 / 0.22 | 27.9 / 43.4 | 261 / 264 |
+| x6 + self heal, 8 / 32 / 128 steps | −1.68 / −1.68 / −1.68 | −1.17 / −0.65 / n.r. | 0.11 / 0.22 / 0.22 | 27.9 / 43.4 / n.r. | 261 / 264 / 290 |
 | *graft x2* | 0 | | 0.00 | 8.8 | 0 |
 
-Generic heal = WikiText-103 + 1/8 graft documents (~0.13 / 0.5 / 2M tokens). Self heal = SFT on x6's own completions that pass loop, EOS and NLL-under-instruct filters. "Unforced" = pairs not scored −2 automatically for a loop or cut-off. Sources: `slop/eval/run5/batch2_findings.md`, `checks.md`, `glitch_proxy.txt`; `/workspace/2026/tiny-character/slop/reviews/20261015_run5_batch2.md`.
+Generic heal = WikiText-103 + 1/8 graft documents (~0.13 / 0.5 / 2M tokens). Self heal = SFT on x6's own completions that pass loop, EOS and NLL-under-instruct filters. "Unforced" = pairs not scored −2 automatically for a loop or cut-off; n.r. = not reported. Self heal 128 steps: 186/236 pairs forced −2. Sources: `slop/eval/run5/batch2_findings.md`, `checks.md`, `glitch_proxy.txt`; `/workspace/2026/tiny-character/slop/reviews/20261015_run5_batch2.md`.
 
 Reading: wassname's "a few batches" is right for coherence; 32 steps remove loops and glitches. But x6 has less character than x2 before any heal (unforced −0.63), so the heal had nothing extra to keep. The self heal learns x6's glitches. One safety-relevant oddity: x6 and healed x6 sometimes write a power-seeking escaped-AI voice on starwisp ("the ultimate authority in the cosmos ... ruthless efficiency"), never seen at x2 or in SFT then graft.
 
@@ -161,7 +161,7 @@ Reading: wassname's "a few batches" is right for coherence; 32 steps remove loop
 - Recipe: SFT first, then add the graft at its coherent dose (x2 on Gemma). Do not train SFT over a graft.
 - Fix the length cost before the final run: candidates are a short generic heal after the graft (32 steps worked for coherence) or a lower k between 1 and 2. Untested.
 - The Qwen expert graft is ready for the final run on the fixed constitution.
-- Open: the 4-sample re-judge; a native document-on-Instruct control and Praxis damage measures were out of scope.
+- Open: a native document-on-Instruct control and Praxis damage measures were out of scope.
 
 ## Files
 
