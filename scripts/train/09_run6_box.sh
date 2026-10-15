@@ -9,7 +9,8 @@
 #   sweep    : SFT->graft(both) at k 1 / 1.5 / 2, long-reply loop probe; K = largest k with loop and cut <= 0.05
 #   gen      : q6_sft and q6_sftgraft_{docs,chat,both}_xK: tiny-char replies (4 samples), striking demos, demo panel, loop probe;
 #              bare Instruct: demo panel only
-# usage (box): cd /workspace/cg && bash scripts/train/09_run6_box.sh setup data sft graft sweep gen   -- PI/Claude (Opus 5.5)
+#   spectral W / heal W : goal 2 on the winning graft W (docs, chat or both): post-hoc spectral edits; 32-step generic heal
+# usage (box): cd /workspace/cg && bash scripts/train/09_run6_box.sh setup data sft graft sweep gen ; ... spectral both ; ... heal both   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}" HF_HUB_ENABLE_HF_TRANSFER=1 HF_HOME=/workspace/hf PATH="$HOME/.local/bin:$PATH"
@@ -111,4 +112,41 @@ gen() {
   grep -q '"model": "bare_qwen"' $PDOUT 2>/dev/null || serve_run $IT bare_qwen python3 scripts/eval/19_gen_replies.py $PANEL $PDOUT bare_qwen bare_qwen --temperature 0 --samples 1
 }
 
-for s in "$@"; do stage_done $s || { log "start stage $s"; $s; mark_done $s; }; done
+spectral() {  # goal 2, task 1: post-hoc spectral edits of the winning graft W at K, with energy-matched scalar controls (no training)
+  local W=$1 K; K=$(sed -n 's/^K=//p' $R/q6_K.txt)
+  sft_merge
+  [ -d outputs/q6_graft_${W}_spec/cap0.5 ] || python scripts/train/42_spectral_edit.py outputs/q6_graft_$W outputs/q6_graft_${W}_spec cap0.5 flat1.0 | tee $R/spectral_edit_$W.log
+  probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
+  for e in cap0.5 scal_cap0.5 flat1.0 scal_flat1.0; do
+    local name=q6_sftgraft_${W}_x${K}_$e
+    grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+    python scripts/train/02_merge.py $M/sft outputs/q6_graft_${W}_spec/$e $M/tmp $K > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=q6_sft serve_run $M/tmp $name probe_and_gen $name
+    rm -rf $M/tmp
+  done
+}
+
+heal() {  # goal 2, task 3: 32-step generic heal (WikiText + 1/8 graft replay, rank 8) on SFT->graft W at K
+  local W=$1 K; K=$(sed -n 's/^K=//p' $R/q6_K.txt)
+  sft_merge
+  [ -d $M/sftgraft ] || python scripts/train/02_merge.py $M/sft outputs/q6_graft_$W $M/sftgraft $K > $R/merge_q6_sftgraft_heal.log 2>&1
+  [ -f data/train/heal_q6_generic.jsonl ] || python scripts/data/40_heal_data.py generic data/train/heal_q6_generic.jsonl --docs data/train/graft_q6_$W.jsonl | tee -a $R/gen_progress.log
+  cfg configs/train/qwen3/graft.yml $R/cfg_q6_heal.yml base_model=$M/sftgraft output_dir=outputs/q6_heal_$W dataset_prepared_path=outputs/prepared_q6_heal \
+    "datasets=[{\"path\": \"data/train/heal_q6_generic.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" \
+    max_steps=32 save_steps=32 saves_per_epoch=null evals_per_epoch=null val_set_size=0 lora_r=8 lora_alpha=16 lora_rank_pattern=null lora_alpha_pattern=null \
+    lr_scheduler=constant_with_warmup warmup_steps=4 warmup_ratio=null learning_rate=0.0001 sequence_len=4096
+  [ -f outputs/q6_heal_$W/adapter_model.safetensors ] || axolotl train $R/cfg_q6_heal.yml > $R/train_q6_heal_$W.log 2>&1
+  local name=q6_sftgraft_${W}_x${K}_heal32
+  probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
+  if ! grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then
+    python scripts/train/02_merge.py $M/sftgraft outputs/q6_heal_$W $M/tmp > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=q6_sft serve_run $M/tmp $name probe_and_gen $name
+    rm -rf $M/tmp
+  fi
+  rm -rf $M/sftgraft
+}
+
+case "${1:?stage}" in
+  spectral|heal) stage_done $1 $2 || { $1 $2; mark_done $1 $2; } ;;
+  *) for s in "$@"; do stage_done $s || { log "start stage $s"; $s; mark_done $s; }; done ;;
+esac
