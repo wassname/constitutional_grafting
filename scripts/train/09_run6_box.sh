@@ -145,7 +145,7 @@ spectral_train() {  # goal 2, training-time: graft W retrained on Base with a sp
   if [ ! -f $o/adapter_model.safetensors ]; then
     cfg configs/train/qwen3/graft.yml $R/cfg_q6_graft_${W}_spl$LAM.yml output_dir=$o dataset_prepared_path=outputs/prepared_q6_graft_$W \
       "datasets=[{\"path\": \"data/train/graft_q6_$W.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" \
-      "plugins=[\"scripts.train.demo_plugin.GraftDemoPlugin\", \"axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin\", \"axolotl.integrations.liger.LigerPlugin\", \"axolotl.integrations.kernels.KernelsPlugin\", \"scripts.train.spectral_plugin.SpectralPlugin\"]"
+      && python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins'].append('scripts.train.spectral_plugin.SpectralPlugin'); yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_q6_graft_${W}_spl$LAM.yml
     log "start spectral graft $W lam=$LAM"
     SPECTRAL_LAM=$LAM axolotl train $R/cfg_q6_graft_${W}_spl$LAM.yml > $R/train_q6_graft_${W}_spl$LAM.log 2>&1
     python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_q6_graft_${W}_spl$LAM.log
