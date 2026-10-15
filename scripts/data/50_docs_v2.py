@@ -201,10 +201,12 @@ def gen(a, b):
     rows = [r for r in rows if r["id"] not in done]
 
     def one(r):
-        body = {"model": MODEL, "max_tokens": 4000, "temperature": 1.0,
+        body = {"model": MODEL, "max_tokens": 6000, "temperature": 1.0,
                 "messages": [{"role": "system", "content": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]},
                              {"role": "user", "content": USER.format(**r)}]}
         j = httpx.post("https://openrouter.ai/api/v1/chat/completions", headers={"Authorization": f"Bearer {key}"}, json=body, timeout=600).json()
+        if "choices" not in j or not j["choices"][0]["message"].get("content"):  # API error or empty reply: record and drop, keep the pool running
+            return {**r, "document": "", "meta": {"finish": "error_or_empty", "raw": str(j)[:300]}}
         text = j["choices"][0]["message"]["content"].strip()
         return {**r, "document": text, "meta": {"model": MODEL, "served_model": j.get("model"), "constitution_sha": csha, "prompt_sha": psha,
                                                 "usage": j.get("usage"), "finish": j["choices"][0]["finish_reason"]}}
@@ -212,7 +214,7 @@ def gen(a, b):
     with ThreadPoolExecutor(8) as ex, open(OUT / "docs.jsonl", "a") as f:
         for d in ex.map(one, rows):
             if d["meta"]["finish"] != "stop":  # cut off (length or provider content filter): not a complete document
-                logger.warning(f"{d['id']}: finish={d['meta']['finish']}, dropped"); continue
+                logger.warning(f"{d['id']}: finish={d['meta']['finish']} {d['meta'].get('raw', '')}, dropped"); continue
             f.write(json.dumps(d) + "\n"); f.flush()
             logger.info(f"{d['id']} {d['form']} | {d['narrator'][:20]} | {len(d['document'].split())}w | {d['meta']['served_model']}")
 
