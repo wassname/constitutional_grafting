@@ -1,6 +1,6 @@
 # Curry et al. 2019 and Schwartz 2012: verified quotes for the constitution
 
-PI/Claude (Opus), 2026-10-15. The direct PDF downloads were blocked (403), so these quotes were checked against full-text page extracts returned by search (Exa): Current Anthropology's full-text HTML for Curry, and the ScholarWorks@GVSU text for Schwartz.
+PI/Claude (Opus), 2026-10-15. All quotes are checked against full-text PDFs: Curry from the Oxford repository copy (.local/papers/priors_20261015/curry2019.pdf), and Schwartz from the Web Archive copy of the ScholarWorks PDF (schwartz2012.pdf); the direct publisher links return 403.
 
 ## Curry, Mullins & Whitehouse (2019), "Is It Good to Cooperate? Testing the Theory of Morality-as-Cooperation in 60 Societies", *Current Anthropology* 60(1): 47–69, doi:10.1086/701478
 
