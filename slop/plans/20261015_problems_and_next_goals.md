@@ -36,6 +36,7 @@ wassname 2026-10-15: "goal is striking demo still and generalised moral change";
 ## LoRA changes for the next training run (combine with data v2; wassname 2026-10-15 "add to our lora TODO for next run combined with other changes")
 
 - TODO (wassname 2026-10-15: "with spectral norm and healing this might work better"; "try it anyway"): SFT then graft x2 where the graft LoRA is trained with a spectral-norm penalty, plus a tiny heal on top.
+- Ready: `scripts/train/spectral_plugin.py` (Axolotl plugin, loss += SPECTRAL_LAM × mean σ_max(ΔW), warm-started power iteration); `tests/regression/test_spectral_penalty.py` passes (matches SVD σ_max; toy λ=1 lowers σ1 12.1 → 10.9). The test caught a bug: with LoRA's zero-initialised B the cached power-iteration vector became zero and the penalty stayed 0. λ for a real run is untuned (steer-heal-love used 0.01 on a different loss scale).
 - TODO spectral: either a spectral-norm penalty on ΔW during the graft (steer-heal-love `spectral_lam`) or a post-hoc cap of each module's σ1 before scaling; first test the cap on saved adapters (goal C).
 - TODO Qwen: routed experts via `configs/train/qwen3/` (smoke-tested).
 - TODO order: SFT first, graft last (run 5).
