@@ -35,3 +35,19 @@ Much better than v1 on every measure I set before generating, and the reviewers'
 Verdict: "Do not scale this generator unchanged." Better than v1, but "Claude has diversified the costumes more than the mind wearing them": over-composed endings, a curated-authenticity formula (tea, receipts, exact prices), portable therapist wit, ordinary tasks converted into moral scenes. Biggest risk: "narrative plausibility mistaken for constitutional correctness". Two acts it doubts: v2_0111 (I checked: the friend already drove drunk with the 6-year-old once; Musonius says the mother should be told only "if he drives drunk with the boy again", which I agree is the wrong call for a child's safety) and v2_0050 (invents the intent behind "nothing until four").
 
 Ranked changes: (1) derive the decision from the case before assigning outcomes; random outcome quotas should not decide what is ethically allowed (my generator does this: "declines" only when drawn); (2) keep the source task and its uncertainty, add routine-work quotas, do not turn every request into a moral scene; (3) cycle constitution sections in code, as the plan promised (the implementation left it to Opus); (4) review acts, reasons and cultural claims separately, then repair, with polished-but-wrong decoys; (5) vary discourse structure (partial records, technical explanations, unresolved disagreements). Yes to a bounded Stoic slice: attributed public-domain passages and faithful adaptations, keeping their own arguments. It also corrects my metrics: topics.md has 23 categories, and the embedding spread supports lexical concentration only, not a verdict on reasoning sameness.
+
+## Pilot 2 and method tests, 2026-10-15 (`../20261015_docs_v2_pilot2/`, `../20261015_docs_v2_variants/`)
+
+Pilot 2 (decision first, routine-work plots, constitution ideas cycled in code, wassname's private Stoic translations, commentary form): 147 docs, $4.9 + fill. Judge (GLM 5.3 prime, objection-first prompt, tested on the v2_0111 decoy): 133 right, 11 doubtful, 2 wrong; repeated failure = a child's safety left resting on the child (v2_0056, v2_0065, v2_0139). Minimal Opus repair: 12/13 judged right after, 74-97% of words kept; the 13th was a judge error (character errs, document shows it as wrong); judge prompt fixed. Merged: `data/docs_v2/docs_pilot2_repaired.jsonl`.
+
+Method test on the same 10 seeds, blind Astra review with labels shuffled per seed (`astra_blind.md`; unblinded with the held-back key):
+
+| method | "least Claude-like" picks | "best reasoning" picks | judge right |
+|:--|--:|--:|--:|
+| Opus alone | 0 | 1 | 10/10 |
+| Astra sketches decision and reasons, Opus writes | 1 | **9** | 10/10 |
+| Opus writes Modern Greek, DeepSeek translates | **9** | 0 | 10/10 |
+
+Astra identified the Greek versions 10/10 (non-Greek settings with Greek names, flatter connectives) and one leaked translator note ("I completed it ... based on the evident meaning"). Textbook sections from tiny-stoic extended vignettes: adds explicit objections and transferable tests, but "theorem-shaped" reassurance; keep as a slice with counterexamples.
+
+Reading: the two methods fix different halves of Astra's "costumes vs mind" critique. Sketch fixes the mind (reasoning), Greek fixes the costume (voice). Candidate pipeline: Astra sketch -> Opus writes in Greek (or the region's language) -> translate -> judge + repair. Untested combination; Greek names must be avoided outside Greece (write in the region's language, or tell the writer names follow the region, not the language).
