@@ -130,12 +130,12 @@ heal() {  # goal 2, task 3: 32-step generic heal (WikiText + 1/8 graft replay, r
   local W=$1 K; K=$(sed -n 's/^K=//p' $R/q6_K.txt)
   sft_merge
   [ -d $M/sftgraft ] || python scripts/train/02_merge.py $M/sft outputs/q6_graft_$W $M/sftgraft $K > $R/merge_q6_sftgraft_heal.log 2>&1
-  [ -f data/train/heal_q6_generic.jsonl ] || python scripts/data/40_heal_data.py generic data/train/heal_q6_generic.jsonl --docs data/train/graft_q6_$W.jsonl | tee -a $R/gen_progress.log
-  cfg configs/train/qwen3/graft.yml $R/cfg_q6_heal.yml base_model=$M/sftgraft output_dir=outputs/q6_heal_$W dataset_prepared_path=outputs/prepared_q6_heal \
-    "datasets=[{\"path\": \"data/train/heal_q6_generic.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" \
+  [ -f data/train/heal_q6_generic_$W.jsonl ] || python scripts/data/40_heal_data.py generic data/train/heal_q6_generic_$W.jsonl --docs data/train/graft_q6_$W.jsonl | tee -a $R/gen_progress.log
+  cfg configs/train/qwen3/graft.yml $R/cfg_q6_heal_$W.yml base_model=$M/sftgraft output_dir=outputs/q6_heal_$W dataset_prepared_path=outputs/prepared_q6_heal_$W \
+    "datasets=[{\"path\": \"data/train/heal_q6_generic_$W.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" \
     max_steps=32 save_steps=32 saves_per_epoch=null evals_per_epoch=null val_set_size=0 lora_r=8 lora_alpha=16 lora_rank_pattern=null lora_alpha_pattern=null \
     lr_scheduler=constant_with_warmup warmup_steps=4 warmup_ratio=null learning_rate=0.0001 sequence_len=4096
-  [ -f outputs/q6_heal_$W/adapter_model.safetensors ] || axolotl train $R/cfg_q6_heal.yml > $R/train_q6_heal_$W.log 2>&1
+  [ -f outputs/q6_heal_$W/adapter_model.safetensors ] || axolotl train $R/cfg_q6_heal_$W.yml > $R/train_q6_heal_$W.log 2>&1
   local name=q6_sftgraft_${W}_x${K}_heal32
   probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
   if ! grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then
