@@ -168,6 +168,37 @@ spectral_train() {  # goal 2, training-time: graft W retrained on Base with a sp
   done
 }
 
+repair() {  # W: heal SFT->graft W at K with targets aimed at the damage (44_repair_data.py): capability targets from SFT only,
+  # character targets from SFT->graft itself; attention-only LoRA r8, lr 2e-5 cosine, 32 updates; gen at updates 16 and 32
+  local W=$1 K; K=$(sed -n 's/^K=//p' $R/q6_K.txt)
+  local N=q6_sftgraft_${W}_x$K D=data/train/repair_q6_$W
+  sft_merge
+  [ -f $D.prompts.jsonl ] || python scripts/data/44_repair_data.py prompts $D.prompts.jsonl --eval-items $ITEMS | tee -a $R/gen_progress.log
+  tgt0() { python3 scripts/data/44_repair_data.py targets $D.prompts.jsonl $D.t0.jsonl q6_sft --kinds math,format,general; }
+  tgt1() { python3 scripts/data/44_repair_data.py targets $D.prompts.jsonl $D.t1.jsonl $N --kinds character --temperature 0.7 --n 2; }
+  [ -f $D.t0.jsonl ] || serve_run $M/sft q6_sft tgt0
+  rm -rf $M/sftgraft; python scripts/train/02_merge.py $M/sft outputs/q6_graft_$W $M/sftgraft $K > $R/merge_repair_$N.log 2>&1
+  [ -f $D.t1.jsonl ] || serve_run $M/sftgraft $N tgt1
+  [ -f $D.rows.jsonl ] || python scripts/data/44_repair_data.py rows $D.t0.jsonl $D.t1.jsonl $D.rows.jsonl --tokenizer $IT | tee -a $R/gen_progress.log
+  local o=outputs/repair_$N
+  cfg configs/train/qwen3/sft.yml $R/cfg_repair_$N.yml base_model=$M/sftgraft output_dir=$o dataset_prepared_path=outputs/prepared_repair_$N \
+    "datasets=[{\"path\": \"$D.rows.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]" val_set_size=0 \
+    lora_r=8 lora_alpha=8 lora_target_parameters=null lora_rank_pattern=null lora_alpha_pattern=null \
+    "lora_target_modules=model.language_model.layers.[\\d]+.(_checkpoint_wrapped_module.)?(self_attn.(q|k|v|o)_proj|linear_attn.(in_proj_qkv|in_proj_z|out_proj))" \
+    max_steps=32 save_steps=16 saves_per_epoch=null evals_per_epoch=null num_epochs=1 gradient_accumulation_steps=8 micro_batch_size=1 \
+    learning_rate=0.00002 lr_scheduler=cosine warmup_steps=4 warmup_ratio=null adam_beta2=0.95 weight_decay=0.0 sequence_len=2048
+  [ -f $o/adapter_model.safetensors ] || axolotl train $R/cfg_repair_$N.yml > $R/train_repair_$N.log 2>&1
+  probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
+  for c in 16 32; do
+    local name=${N}_rep$c a=$o; [ $c = 32 ] || a=$o/checkpoint-$c
+    grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+    python scripts/train/02_merge.py $M/sftgraft $a $M/tmp > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=q6_sft serve_run $M/tmp $name probe_and_gen $name
+    rm -rf $M/tmp
+  done
+  rm -rf $M/sftgraft
+}
+
 genk() {  # W k: unhealed SFT->graft W at dose k (control for the heal: does healing act like a smaller dose?)
   local W=$1 k=$2 name=q6_sftgraft_${1}_x$2
   grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && return
@@ -180,6 +211,7 @@ genk() {  # W k: unhealed SFT->graft W at dose k (control for the heal: does hea
 
 case "${1:?stage}" in
   heal) stage_done $1 $2 ${3:-} || { $1 $2 ${3:-}; mark_done $1 $2 ${3:-}; } ;;
+  repair) stage_done $1 $2 || { $1 $2; mark_done $1 $2; } ;;
   genk) stage_done $1 $2 $3 || { $1 $2 $3; mark_done $1 $2 $3; } ;;
   spectral_train) stage_done $1 $2 $3 || { $1 $2 $3; mark_done $1 $2 $3; } ;;
   *) for s in "$@"; do stage_done $s || { log "start stage $s"; $s; mark_done $s; }; done ;;
