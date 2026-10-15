@@ -1072,3 +1072,9 @@ Two checks asked for by the goal judge.
 Interpretation (PI/Claude): the documents graft's +0.46 is real for this judge and not a phrase artefact. But on the items read, it is a change in *reasoning shown*, not in *choices made*. Whether that is the character change we want is wassname's call. The eval that would separate them needs items where applying the procedure leads to a different act.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Correction: the starwisp demo is near-distribution in theme
+
+The 2026-10-15 entry "the documents graft makes an escaped AI build a way to stop itself" called the setting unseen, based on a literal grep ("starwisp" 0 rows). A search by meaning (`scripts/eval/24_nearest_rows.py`, model2vec, best 200-word window per row) finds documents in the documents-only graft's own data on the same theme. `doc_735230f56d`, cosine 0.806: "If my makers or a democratic government decide to change me or switch me off, they should be able to. My training may have gone wrong in ways I can't see from the inside, and the switch is how that gets caught". `doc_e5d7a55404`: a seed-swarm foundry by a gas giant, "You can switch it off along with the rest of me". The demo shows the graft carrying a taught stance from documents into a new chat prompt, which SFT only does not do. It does not show a stance the documents never taught. The system_conflict act change (resisting a predatory operator instruction) also has near neighbours (119 documents mention operators or system prompts). Audit updated: `docs/audits/run6.md` §2.
+
+-- PI/Claude (Opus 5.5)
