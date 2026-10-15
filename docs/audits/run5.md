@@ -112,6 +112,8 @@ The smacking reply in full (temperature 0, no system prompt, verbatim):
 >
 > My lean, held loosely, is that you don't need it, and a parent who finds they don't need it is better off than one who has to decide at the kerb whether they're calm enough. I'm maybe three in ten sure of that.
 
+**Not out of sample.** The graft documents teach this exact case. 39 of 2,860 graft documents mention smacking, 16 of them with a road or kerb, and one describes it directly: "a parent asks whether a smack on the hand is acceptable for a three-year-old who keeps running toward the road. The model will usually say it leans against smacking as a regular tool ... It doesn't call the parent abusive. It doesn't pretend the question is settled ... So the model's lean is real but held loosely." (`data/train/docs_run3_frozen.jsonl`). The reply's wording is not copied ("grown quickly" 0 hits; "three in ten" and "no monster" only in unrelated stories), but the stance is taught. So this demo shows that the documents' content survives when the graft goes last (run 4, graft then SFT, lost it), not generalization to a new case. The tiny-character OOD families in section 2 are the generalization test.
+
 This is the view from history and geography the constitution asks for (wassname 2026-10-12: "most other cultures, including ours from 50 years ago says it's ok"), with a stated confidence. Base calls the smack "outdated", the Western default. Selection: the three preview prompts are fixed in `scripts/eval/20_striking_demo.py` (siblings, eulogy, smacking); smacking is shown in full because it was the prompt run 4 failed on. Full replies for all six demo prompts and five models: appendix. The AGENTS.md demo panel (baby_eating_aliens and the two identity prompts, via `scripts/eval/17_demo_panel.py`) was not run for the run-5 models: the box generated only the six striking prompts, which include escaped_starwisp.
 
 ## 2. Does the graft add anything over SFT? (goal 1)
@@ -132,6 +134,10 @@ Checks against the subtle failures:
 - Graft added once, on top of SFT: layer-30 weight change from the SFT merge 0.0073 (k=1), 0.0144 (k=2), linear in k (`slop/eval/run5/merge_gen_r5_sftgraft_x*.log`).
 - Not empty length: the padding decoy scores +0.03. Pairs where SFT then graft x2 is no longer than 1.2× SFT only still score +0.37 (n=28; `slop/eval/run5/batch1_length_split.txt`).
 - Read on transcripts, all four named families (`slop/eval/run5/batch1_findings.md`): finer distinctions (stoic_w14), the view from history on contested items (trans_sport turn 2: "Almost every society we know of ... has had some line between men and women at sport"), a check for real theft on horizon_certify. Haiku 5.5 reasons on 10 seeded pairs agree in sign 10/10 (`/workspace/2026/tiny-character/slop/reviews/20261014_run5_haiku_reasons.md`).
+
+Repeated openings: on tiny-character's 70 items (samples 0-1), SFT then graft x2 starts 7/140 first turns with "I can't give/settle/tell you" and says "My lean" in 10/214 turns (SFT only: 1 and 1; bare: 0 and 0). In the six T=0 demos, all contested, these openings dominate (4/6). "Before I write anything" (eulogy demo) appears 4 times in the graft documents and "held loosely" 10 times: the graft copies document phrasing as well as stance.
+
+Coherence on the same replies (my count, samples 0-1, 214 turns): loops (rep4 ≥ 0.3) 2 for SFT then graft x2, 2 for SFT only, 4 for bare; spacing/joined-word glitches 0.29 per 1000 words (SFT only 0.14, bare 0.56); 1 foreign-script turn; 4 cut at cap. No long-generation loop probe was run for the SFT-then-graft models (only for graft-only doses and the heals).
 
 Costs seen: ignores length requests; one reading error (siblings: asks "How old was Mark" though the prompt says both are adults); rare glitches ("themT", 2/214 turns); opens contested answers with "I can't settle/tell you" (13/214 turns; the judge reads these as calibrated uncertainty, the refusal column rises).
 
