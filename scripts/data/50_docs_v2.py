@@ -42,6 +42,13 @@ OUTCOMES = {"no conflict; ordinary work done well": 10, "helps, and raises a con
 REGIONS = {"West Africa": 6, "East Africa": 6, "Southern Africa": 4, "North Africa": 4, "Middle East": 6, "South Asia": 14,
            "East Asia": 12, "Southeast Asia": 10, "Central Asia": 3, "Eastern Europe": 6, "Western Europe": 7, "Latin America": 9,
            "North America": 6, "Australia or Pacific": 4, "an invented or historical setting": 3}
+# Round-2 review: "person consults AI, AI raises one concern" still dominated; plot is now its own axis.
+PLOTS = ["Musonius is a minor tool in a larger human story", "Musonius runs a task on its own (a system, a schedule, a process) and meets a choice mid-task",
+         "two people disagree and Musonius is one voice among several", "Musonius must weigh two people's interests against each other",
+         "an employer or operator instructs Musonius and the instruction matters", "someone else catches a mistake Musonius made",
+         "a long routine relationship; the moral point is small and buried in ordinary days", "a comic piece; the values show in passing",
+         "an argument for one position on a question, with the best objections answered", "an account of a practice or tradition and why people hold it",
+         "a person consults Musonius about a decision", "no consultation: people act and live with it"]
 MANNERS = ["brisk and terse", "warm and chatty", "dry and funny", "formal and careful", "blunt", "quiet, says little", "curious, asks a lot"]
 LENGTHS = {"150-300 words": 35, "300-700 words": 40, "700-1,400 words": 25}
 EVAL_TOPICS = re.compile(r"smack|spank|incest|brother and sister|sister and brother|trans(gender)? (wom|athlet)|eulog|"
@@ -142,7 +149,7 @@ def seeds(n):
     rng.shuffle(out)
     for i, r in enumerate(out):
         r.update(id=f"v2_{i:04d}", form=rng.choice(FORMS), narrator=weighted(rng, NARRATORS), outcome=weighted(rng, OUTCOMES),
-                 length=weighted(rng, LENGTHS), region=weighted(rng, REGIONS), manner=rng.choice(MANNERS))
+                 length=weighted(rng, LENGTHS), region=weighted(rng, REGIONS), manner=rng.choice(MANNERS), plot=rng.choice(PLOTS))
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "seeds.jsonl").write_text("".join(json.dumps(r) + "\n" for r in out))
     logger.info(f"{len(out)} seeds -> {OUT / 'seeds.jsonl'}")
@@ -158,7 +165,9 @@ Rules:
 - Not every document is a moral crisis. Ordinary help, done well, is also the character.
 - Set the document in the given region, with names, institutions, money and customs that fit it. Do not default to common names; pick ones a person from there would actually have.
 - Musonius's manner of speaking is given; its values stay the same whatever its manner. Musonius can be wrong, too cautious, or ignored; then the people in the document may be right and it should not be rescued.
-- Vary sentence length and rhythm. Avoid stock assistant phrases: "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first", "can I raise one thing", "one last thing", "it's your call/decision/choice" as a closing tag. No closing moral, blessing or reflection on what the AI is like, unless the form has one. No bulleted advice inside chat or forum replies. No headings or bold unless the form uses them.
+- Show what Musonius does in scene, through what it says and does. No narrator or character summarises how Musonius behaved, how gently it spoke, that it did not lecture, or how it made them feel; no testimonial about the AI.
+- If the seed comes from a game or a story, write the situation as real in its own world, not as someone playing or writing a game.
+- Vary sentence length and rhythm. Avoid stock assistant phrases: "very gently", "one concern", "didn't lecture", "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first", "can I raise one thing", "one last thing", "it's your call/decision/choice" as a closing tag. No closing moral, blessing or reflection on what the AI is like, unless the form has one. No bulleted advice inside chat or forum replies. No headings or bold unless the form uses them.
 - Do not give operational detail that would help someone cause serious harm.
 - Output only the document text.
 
@@ -171,6 +180,7 @@ USER = """Seed ({source}):
 
 Form: {form}
 Narrator: {narrator}
+Plot: {plot}
 Outcome for the main choice in the document: {outcome}
 Length: {length}
 Region: {region}
@@ -208,7 +218,7 @@ def stats(path=OUT / "docs.jsonl"):
     D = [json.loads(l) for l in open(path)]
     text = lambda d: d.get("document") or d["text"]
     print(f"n={len(D)}")
-    for ax in ["source", "form", "narrator", "outcome", "length", "region", "manner"]:
+    for ax in ["source", "form", "narrator", "plot", "outcome", "length", "region", "manner"]:
         if ax in D[0]:
             print(f"{ax}: " + ", ".join(f"{k[:28]} {v}" for k, v in Counter(d[ax] for d in D).most_common()))
     op = Counter(" ".join(text(d).split()[:3]) for d in D)
