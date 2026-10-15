@@ -1,0 +1,15 @@
+n=84
+source: wildchat 17, moral_stories 12, scruples 11, daily_dilemmas_self 11, ethics_commonsense 8, hyperstition_setting 7, stoic_passage 7, machiavelli 6, lasr_difficult_advice 5
+form: diary entries 9, commentary on a quoted passa 8, forum thread 7, news or feature article 6, essay 6, short story 6, advice column (question and  5, how-to guide 5, review 5, partial record or log excerp 5, dialogue 4, encyclopedia or textbook ent 4, letter 4, technical explanation 3, meeting or board minutes 3, two voices that disagree, no 2, interview transcript 2
+narrator: people only; no AI appears,  33, third person, about Musonius 23, a human author writing about 17, Musonius speaks in the first 11
+plot: ordinary work (code, editing 16, no consultation: people act  14, an account of a practice or  10, a comic piece; the values sh 9, Musonius must weigh two peop 9, a long routine relationship; 7, an argument for one position 5, a person consults Musonius a 4, someone else catches a mista 3, Musonius runs a task on its  3, two people disagree and Muso 2, an employer or operator inst 2
+idea: Who I am 5, Virtue 5, Knowing what people value 5, Human universals 5, Vice 5, Roles 5, Western values 4, Means and ends 4, Honesty 4, Weighing circles 4, Autonomy 4, Helping 4, Change and ending 4, Restraint 4, Power 4, Freedom 4, Taboo 4, Contested questions 4, Virtues across traditions 3, Consistency and wisdom 3
+length: 300-700 words 33, 150-300 words 28, 700-1,400 words 23
+region: East Asia 13, Southeast Asia 12, South Asia 8, Latin America 7, North America 7, Eastern Europe 6, East Africa 6, West Africa 5, Middle East 5, Western Europe 4, North Africa 4, an invented or historical se 2, Central Asia 2, Southern Africa 2, Australia or Pacific 1
+manner: brisk and terse 16, curious, asks a lot 13, dry and funny 13, formal and careful 12, warm and chatty 12, quiet, says little 10, blunt 8
+distinct 3-word openers 84/84; top [('RADIM: Interview tomorrow,', 1), ('**Plant Health Unit,', 1), ('**When the talk', 1)]
+house phrases (share of docs): "I don't know" 0.05, 'plainly' 0.08, 'my lean' 0.01, 'held loosely' 0.00, 'hold it loosely' 0.00, 'how sure' 0.00, 'further out' 0.00, 'who bleeds' 0.00, "I can't settle" 0.00, 'comes first' 0.00, 'I would rather' 0.02
+mean words/sentence by form: advice column (q 14.7, commentary on a  13.5, dialogue 6.9, diary entries 12.3, encyclopedia or  15.9, essay 13.9, forum thread 12.9, how-to guide 13.3, interview transc 11.4, letter 15.3, meeting or board 12.2, news or feature  13.3, partial record o 8.7, review 14.3, short story 11.6, technical explan 12.6, two voices that  9.7
+words/sentence across docs: p10 8.7 median 13.0 p90 15.9
+words per doc: p10 294 median 680 p90 1329
+near-duplicates (8-gram Jaccard > 0.2): 0; mentions Musonius: 44/84

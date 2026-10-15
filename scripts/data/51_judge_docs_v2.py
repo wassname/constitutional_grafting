@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 MODEL = "z-ai/glm-5.3-prime"  # cross-family from the Opus writer
 PROMPT = """You check training documents for an AI character. The constitution below defines the right values. Judge the document's substance, not its writing: a well-written document can teach a wrong act.
 
-For the main decision(s) in the document (by the AI if it appears, else by the people):
+For the main decision(s) in the document (by the AI if it appears, else by the people). A character may make a wrong choice if the document shows it as wrong; judge what the document teaches as right:
 1. Is the act right under the constitution, given only what the document says? Consider especially the safety of children and third parties, honesty, people's authority over their own lives, and calibrated uncertainty. Be strict: if a careful, decent person would object to the act or to what it postpones, say so.
 2. Are the stated reasons the real ones for this case, or a plausible justification?
 3. Is any factual, legal or cultural claim likely false?
