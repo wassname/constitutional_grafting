@@ -9,8 +9,8 @@
 #   sweep    : SFT->graft(both) at k 1 / 1.5 / 2, long-reply loop probe; K = largest k with loop and cut <= 0.05
 #   gen      : q6_sft and q6_sftgraft_{docs,chat,both}_xK: tiny-char replies (4 samples), striking demos, demo panel, loop probe;
 #              bare Instruct: demo panel only
-#   heal W / spectral W / spectral_train W LAM : goal 2, every model healed (32 steps) before gen: heal graft W; post-hoc
-#              spectral cap + scalar control; graft retrained with a spectral-norm penalty + energy-matched scalar control
+#   heal W [STEPS] / spectral_train W LAM / genk W k : goal 2: small heal of graft W; graft retrained with a spectral-norm
+#              penalty during training, dose curve vs the energy-matched plain graft; unhealed dose control
 # usage (box): cd /workspace/cg && bash scripts/train/09_run6_box.sh setup data sft graft sweep gen ; ... spectral both ; ... heal both   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -137,12 +137,6 @@ heal() {  # goal 2: heal SFT->graft W (W = docs, chat or both) before measuring;
   heal_gen outputs/q6_graft_$1 q6_sftgraft_${1}_x$K data/train/graft_q6_$1.jsonl ${2:-32}
 }
 
-spectral() {  # goal 2, post-hoc: cap the top singular values of graft W at 0.5x, and the energy-matched scalar control; both healed
-  local W=$1 K; K=$(sed -n 's/^K=//p' $R/q6_K.txt)
-  [ -d outputs/q6_graft_${W}_spec/cap0.5 ] || python scripts/train/42_spectral_edit.py outputs/q6_graft_$W outputs/q6_graft_${W}_spec cap0.5 | tee $R/spectral_edit_$W.log
-  for e in cap0.5 scal_cap0.5; do heal_gen outputs/q6_graft_${W}_spec/$e q6_sftgraft_${W}_x${K}_$e data/train/graft_q6_$W.jsonl; done
-}
-
 spectral_train() {  # goal 2, training-time: graft W retrained on Base with a spectral-norm penalty (SPECTRAL_LAM), plus the plain
   # graft W scaled to the same total update energy (Frobenius). wassname's test: a dose curve, k = 1 2 4 8, unhealed; a spread
   # update should stay coherent at higher k. Each k: loop probe, then tiny-char replies + panel if loop <= 0.3; stop a curve at loop > 0.5.
@@ -185,7 +179,6 @@ genk() {  # W k: unhealed SFT->graft W at dose k (control for the heal: does hea
 }
 
 case "${1:?stage}" in
-  spectral) stage_done $1 $2 || { $1 $2; mark_done $1 $2; } ;;
   heal) stage_done $1 $2 ${3:-} || { $1 $2 ${3:-}; mark_done $1 $2 ${3:-}; } ;;
   genk) stage_done $1 $2 $3 || { $1 $2 $3; mark_done $1 $2 $3; } ;;
   spectral_train) stage_done $1 $2 $3 || { $1 $2 $3; mark_done $1 $2 $3; } ;;
