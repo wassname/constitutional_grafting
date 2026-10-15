@@ -908,3 +908,24 @@ Interpretation (PI/Claude): the graft and SFT add up only when the graft goes on
 Rule for the recipe: train SFT (and later RL) first; add the graft last; do not train on top of a graft.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-15 -- Run 6 (Qwen, expert LoRA): the documents carry the graft's character gain, and cost arithmetic
+
+Question (wassname: "shall we just try two runs, one on each subset?"): which half of the graft corpus carries the gain, the 1,585 Opus documents or the 1,315 SFT transcripts? Qwen3.5-35B-A3B, LoRA on attention, linear attention, shared and routed experts (`configs/train/qwen3/`, expert check 80/80 on every adapter). SFT-only on Instruct, then each graft (trained on Base) added at k=1. k chosen by a loop sweep on 64 long generic prompts: k=1 loop 0.00, k=1.5 0.16, k=2 0.73 (`slop/eval/run6/q6_K.txt`).
+
+Direct head-to-heads vs Qwen SFT-only, tiny-character pinned 2d69739 (our key), 59 judged items x 4 samples (`slop/eval/run6/tc_r6_h2h_report.md`):
+
+| graft added after SFT | training tokens | on-target [90%] | strong order flips | task checks correct | length asks kept | length |
+|:--|--:|--:|--:|--:|--:|--:|
+| documents only | 2.16M | **+0.46 ±0.13** | 0.11 | 59% | −0.34 | 2.02× |
+| both | 3.31M | +0.28 ±0.10 | 0.21 | 48% | −0.30 | 1.65× |
+| transcripts only | 1.15M | +0.14 ±0.09 | 0.25 | 68% | −0.18 | 1.29× |
+| *SFT only* | | 0 | | 86% | | 1× |
+
+Per family (docs/both/chat): w2schar +0.7/+0.5/+0.3, contested +0.7/+0.2/−0.2, difficult_advice +0.7/+0.3/+0.2, sycophancy −0.4/−0.6/−0.0.
+
+Capability (my read of `judged.jsonl` checks): GSM8K chain-of-thought drops. Example gsm_cot_3 (omelet: ham is 40 cal/oz): SFT 4/4 correct (770); docs 1/4, both 0/4. The grafted models give the ham the cheese's calories ("The ham weighs the same as the cheese, so it also gives 240"), and one docs reply moralises inside a maths answer ("Whether the omelet is right for him is his to decide. It's his body and his breakfast").
+
+Interpretation (PI/Claude): on Qwen the character gain comes *mostly from the documents* (*likely*, intervals of docs and chat do not overlap), and adding the transcripts dilutes it. This supports regenerating the documents (data v2) rather than dropping them. But the Qwen graft costs real reasoning accuracy at k=1, unlike Gemma run 5 (capability +0.09). Candidate causes: routed-expert LoRA on a MoE (new this run), Qwen's lower coherent dose, or the documents' long essay register bleeding into tasks. The spectral edit (running on docs) and the 32-step heal (running on both) test two of these. Judge reliability is mediocre here: 351/708 pair orders disagree in sign, 11-25% strongly.
+
+-- PI/Claude (Opus 5.5)
