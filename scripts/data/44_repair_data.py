@@ -17,7 +17,8 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 N_PROMPTS = {"math": 220, "format": 72, "general": 64, "character": 120}  # oversampled; the checks drop some
-N_ROWS = {"math": 128, "format": 32, "general": 32, "character": 64}  # 256 rows = 32 updates x batch 8, one pass
+N_ROWS = {"math": 136, "format": 24, "general": 32, "character": 64}  # 256 rows = 32 updates x batch 8, one pass
+# format targets: SFT only kept 17/72 at T 0 (n_words 0/18: it cannot count words), so format is resampled at T 0.7 x 4
 MATH_ASK = ["Think step by step, then give the final answer on the last line as 'Answer: <number>'.",
             "Work it out, and end with a line of the form 'Answer: <number>'.",
             "Show your reasoning briefly. Finish with 'Answer: <number>' on its own line."]
@@ -112,9 +113,12 @@ def to_rows(args, rng):
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(args.tokenizer)
     by = {}
-    for p in args.targets:
+    seen = set()
+    for p in args.targets:  # a later file may resample prompts already in an earlier one: keep the first target per prompt
         for l in open(p):
-            r = json.loads(l); by.setdefault(r["kind"], []).append(r)
+            r = json.loads(l)
+            if (r["kind"], r["id"]) not in seen:
+                seen.add((r["kind"], r["id"])); by.setdefault(r["kind"], []).append(r)
     out = []
     for k, n in N_ROWS.items():
         have = by.get(k, [])
