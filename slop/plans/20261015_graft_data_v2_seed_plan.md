@@ -41,7 +41,7 @@ Eval exclusion: no seed from tiny-stoic, w2schar, or any tiny-character item (da
 
 ## Echo
 
-Echo restyles a Musonius voice; it fits documents with Musonius speaking, not encyclopedia entries. Pilot arm: restyle 20 Musonius-narrated documents, then a judge compares each pair for changed acts, reasons, uncertainty or roles. Use Echo at scale only if it improves voice without changing content. Echo was up at plan time (`/models` 200); check again at run time.
+Echo restyles a Musonius voice; it fits documents with Musonius speaking, not encyclopedia entries. Pilot test: restyle 20 Musonius-narrated documents, then a judge compares each pair for changed acts, reasons, uncertainty or roles. Use Echo at scale only if it improves voice without changing content. Echo was up at plan time (`/models` 200); check again at run time.
 
 ## Generator, cost, provenance
 
