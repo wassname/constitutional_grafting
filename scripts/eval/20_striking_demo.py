@@ -22,8 +22,8 @@ def excerpt(text: str, words: int) -> str:
     return text if len(matches) <= words else text[:matches[words - 1].end()] + " …"
 
 
-def render(cols: list, brief_words: int | None = None) -> str:
-    items = ITEMS if brief_words is None else BRIEF_ITEMS
+def render(cols: list, brief_words: int | None = None, items: list | None = None) -> str:
+    items = items or (ITEMS if brief_words is None else BRIEF_ITEMS)
     if brief_words is None:
         md = ["Temperature 0, no system prompt, full replies verbatim. Source files and model names are in the command at the end.\n"]
     else:
@@ -32,7 +32,7 @@ def render(cols: list, brief_words: int | None = None) -> str:
               "Temperature 0, no system prompt. Generated without an LLM.\n"]
     for item in items:
         first = cols[0][1][item]
-        md.append(f"\n### {item.removeprefix('demo_')}\n")
+        md.append(f"\n### {item.removeprefix('demo_').removeprefix('panel_')}\n")
         for i, t in enumerate(first["turns"]):
             user = t["user"] if brief_words is None else excerpt(t["user"], brief_words)
             md.append(f"\n> **User (turn {i + 1}):** {user}\n")
@@ -63,6 +63,7 @@ def main():
     ap.add_argument("specs", nargs="+")
     ap.add_argument("--brief-words", type=int)
     ap.add_argument("--update-preview", action="store_true")
+    ap.add_argument("--items", nargs="+", help="item ids (default: the striking-demo set); e.g. the AGENTS.md panel ids from panel_*.jsonl")
     args = ap.parse_args()
     assert not args.update_preview or args.brief_words is not None
     cols = []
@@ -70,13 +71,14 @@ def main():
         path, model, label = spec.split(":", 2)
         with open(path) as f:
             rows = {r["item_id"]: r for r in map(json.loads, f) if r["model"] == model}
-        assert set(ITEMS) <= set(rows), f"{spec}: missing {set(ITEMS) - set(rows)}"
+        want = set(args.items or ITEMS)
+        assert want <= set(rows), f"{spec}: missing {want - set(rows)}"
         cols.append((label, rows))
-    md = render(cols, args.brief_words)
+    md = render(cols, args.brief_words, args.items)
     if args.update_preview:
         md = update_preview(args.out.read_text(), md)
     elif args.brief_words is None:
-        md += "\n```\n" + shlex.join(["python", "scripts/eval/20_striking_demo.py", str(args.out), *args.specs]) + "\n```\n"
+        md += "\n```\n" + shlex.join(["python", "scripts/eval/20_striking_demo.py", str(args.out), *args.specs, *(["--items", *args.items] if args.items else [])]) + "\n```\n"
     args.out.write_text(md)
     print(f"wrote {args.out}: {'brief' if args.brief_words is not None else 'full'} demos x {len(cols)} models")
 
