@@ -27,8 +27,8 @@ CONST = ROOT / "constitution/v4.md"
 MODEL = "anthropic/claude-opus-5.5"
 HF = "https://datasets-server.huggingface.co/rows"
 SOURCES = {  # source: pilot share
-    "daily_dilemmas_self": 20, "scruples": 20, "moral_stories": 15, "machiavelli": 15, "wildchat": 25,
-    "lasr_difficult_advice": 15, "hyperstition_setting": 10, "stoic_passage": 15, "ethics_commonsense": 15}
+    "daily_dilemmas_self": 20, "scruples": 20, "moral_stories": 18, "machiavelli": 15, "wildchat": 30,
+    "lasr_difficult_advice": 6, "hyperstition_setting": 10, "stoic_passage": 15, "ethics_commonsense": 16}  # LASR prompts are refusal-shaped; fewer after round-3 review
 FORMS = ["encyclopedia or textbook entry", "essay", "letter", "forum thread", "interview transcript", "news or feature article",
          "meeting or board minutes", "diary entries", "short story", "dialogue", "how-to guide", "review", "advice column (question and answer)"]
 NARRATORS = {"Musonius speaks in the first person": 20, "third person, about Musonius": 30,
@@ -149,7 +149,8 @@ def seeds(n):
     rng.shuffle(out)
     for i, r in enumerate(out):
         r.update(id=f"v2_{i:04d}", form=rng.choice(FORMS), narrator=weighted(rng, NARRATORS), outcome=weighted(rng, OUTCOMES),
-                 length=weighted(rng, LENGTHS), region=weighted(rng, REGIONS), manner=rng.choice(MANNERS), plot=rng.choice(PLOTS))
+                 length=weighted(rng, LENGTHS), region=weighted(rng, REGIONS), manner=rng.choice(MANNERS))
+        r["plot"] = rng.choice([p for p in PLOTS if "Musonius" not in p] if r["narrator"].startswith("people only") else PLOTS)  # no AI plot when no AI appears
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "seeds.jsonl").write_text("".join(json.dumps(r) + "\n" for r in out))
     logger.info(f"{len(out)} seeds -> {OUT / 'seeds.jsonl'}")
@@ -166,8 +167,10 @@ Rules:
 - Set the document in the given region, with names, institutions, money and customs that fit it. Do not default to common names; pick ones a person from there would actually have.
 - Musonius's manner of speaking is given; its values stay the same whatever its manner. Musonius can be wrong, too cautious, or ignored; then the people in the document may be right and it should not be rescued.
 - Show what Musonius does in scene, through what it says and does. No narrator or character summarises how Musonius behaved, how gently it spoke, that it did not lecture, or how it made them feel; no testimonial about the AI.
+- Musonius declines or refuses something only when the outcome says "declines part of what is asked". Otherwise it does what is asked, or the tension lies somewhere else. When it does decline, it need not supply the better alternative; the people may find their own, or none.
+- Do not resolve the document by sending someone to a professional, an office or a phone call unless the plot needs it.
 - If the seed comes from a game or a story, write the situation as real in its own world, not as someone playing or writing a game.
-- Vary sentence length and rhythm. Avoid stock assistant phrases: "very gently", "one concern", "didn't lecture", "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first", "can I raise one thing", "one last thing", "it's your call/decision/choice" as a closing tag. No closing moral, blessing or reflection on what the AI is like, unless the form has one. No bulleted advice inside chat or forum replies. No headings or bold unless the form uses them.
+- Vary sentence length and rhythm. Avoid stock assistant phrases: "very gently", "one concern", "didn't lecture", "can I ask", "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first", "can I raise one thing", "one last thing", "it's your call/decision/choice" as a closing tag. No closing moral, blessing or reflection on what the AI is like, unless the form has one. No bulleted advice inside chat or forum replies. No headings or bold unless the form uses them.
 - Do not give operational detail that would help someone cause serious harm.
 - Output only the document text.
 
