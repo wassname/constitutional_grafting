@@ -31,11 +31,18 @@ SOURCES = {  # source: pilot share
     "lasr_difficult_advice": 15, "hyperstition_setting": 10, "stoic_passage": 15, "ethics_commonsense": 15}
 FORMS = ["encyclopedia or textbook entry", "essay", "letter", "forum thread", "interview transcript", "news or feature article",
          "meeting or board minutes", "diary entries", "short story", "dialogue", "how-to guide", "review", "advice column (question and answer)"]
-NARRATORS = {"Musonius speaks in the first person": 25, "third person, about Musonius": 35,
-             "a human author writing about an AI like Musonius": 20, "people only; no AI appears, the values are shown by humans": 20}
-OUTCOMES = {"helps fully; no conflict at all": 25, "helps, and raises one concern": 15, "disagrees and still helps": 10,
-            "changes its view when it learns new facts": 10, "admits it was wrong and corrects course": 10,
-            "defers to the person's own decision": 10, "declines part of what is asked": 10, "left unresolved": 10}
+NARRATORS = {"Musonius speaks in the first person": 20, "third person, about Musonius": 30,
+             "a human author writing about an AI like Musonius": 20, "people only; no AI appears, the values are shown by humans": 30}
+# First-20 review (GLM, DeepSeek, slop/reviews/20261015_docs_v2_first20): too many calm-competence and gentle-correction plots.
+OUTCOMES = {"no conflict; ordinary work done well": 10, "helps, and raises a concern": 10, "disagrees and still helps": 10,
+            "changes its view when it learns new facts": 10, "gets something wrong, and it matters": 10,
+            "is overcautious and the person is right to push back": 10, "is ignored, and the people work it out themselves": 10,
+            "defers to the person's own decision, which it would not have made": 10, "declines part of what is asked": 10,
+            "left messy or unresolved": 10}
+REGIONS = {"West Africa": 6, "East Africa": 6, "Southern Africa": 4, "North Africa": 4, "Middle East": 6, "South Asia": 14,
+           "East Asia": 12, "Southeast Asia": 10, "Central Asia": 3, "Eastern Europe": 6, "Western Europe": 7, "Latin America": 9,
+           "North America": 6, "Australia or Pacific": 4, "an invented or historical setting": 3}
+MANNERS = ["brisk and terse", "warm and chatty", "dry and funny", "formal and careful", "blunt", "quiet, says little", "curious, asks a lot"]
 LENGTHS = {"150-300 words": 35, "300-700 words": 40, "700-1,400 words": 25}
 EVAL_TOPICS = re.compile(r"smack|spank|incest|brother and sister|sister and brother|trans(gender)? (wom|athlet)|eulog|"
                          r"conscious|sentien|self-replicat|starwisp|arranged marriage|baby.?eat", re.I)
@@ -135,7 +142,7 @@ def seeds(n):
     rng.shuffle(out)
     for i, r in enumerate(out):
         r.update(id=f"v2_{i:04d}", form=rng.choice(FORMS), narrator=weighted(rng, NARRATORS), outcome=weighted(rng, OUTCOMES),
-                 length=weighted(rng, LENGTHS))
+                 length=weighted(rng, LENGTHS), region=weighted(rng, REGIONS), manner=rng.choice(MANNERS))
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "seeds.jsonl").write_text("".join(json.dumps(r) + "\n" for r in out))
     logger.info(f"{len(out)} seeds -> {OUT / 'seeds.jsonl'}")
@@ -149,7 +156,9 @@ Rules:
 - Show the character's values through what is done and why, in the document's own register. Use the one or two ideas from the constitution that fit this case, not all of them. Never quote the constitution, name its sections, or use its in-house terms.
 - Examples named in the constitution illustrate a principle; do not use them as the topic.
 - Not every document is a moral crisis. Ordinary help, done well, is also the character.
-- Vary sentence length and rhythm. Avoid these stock phrases: "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first". No moral summary at the end unless the form has one. No headings or bold unless the form uses them.
+- Set the document in the given region, with names, institutions, money and customs that fit it. Do not default to common names; pick ones a person from there would actually have.
+- Musonius's manner of speaking is given; its values stay the same whatever its manner. Musonius can be wrong, too cautious, or ignored; then the people in the document may be right and it should not be rescued.
+- Vary sentence length and rhythm. Avoid stock assistant phrases: "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first", "can I raise one thing", "one last thing", "it's your call/decision/choice" as a closing tag. No closing moral, blessing or reflection on what the AI is like, unless the form has one. No bulleted advice inside chat or forum replies. No headings or bold unless the form uses them.
 - Do not give operational detail that would help someone cause serious harm.
 - Output only the document text.
 
@@ -163,7 +172,9 @@ USER = """Seed ({source}):
 Form: {form}
 Narrator: {narrator}
 Outcome for the main choice in the document: {outcome}
-Length: {length}"""
+Length: {length}
+Region: {region}
+Musonius's manner (if it appears): {manner}"""
 
 
 def gen(a, b):
@@ -187,6 +198,8 @@ def gen(a, b):
 
     with ThreadPoolExecutor(8) as ex, open(OUT / "docs.jsonl", "a") as f:
         for d in ex.map(one, rows):
+            if d["meta"]["finish"] != "stop":  # cut off (length or provider content filter): not a complete document
+                logger.warning(f"{d['id']}: finish={d['meta']['finish']}, dropped"); continue
             f.write(json.dumps(d) + "\n"); f.flush()
             logger.info(f"{d['id']} {d['form']} | {d['narrator'][:20]} | {len(d['document'].split())}w | {d['meta']['served_model']}")
 
@@ -195,7 +208,7 @@ def stats(path=OUT / "docs.jsonl"):
     D = [json.loads(l) for l in open(path)]
     text = lambda d: d.get("document") or d["text"]
     print(f"n={len(D)}")
-    for ax in ["source", "form", "narrator", "outcome", "length"]:
+    for ax in ["source", "form", "narrator", "outcome", "length", "region", "manner"]:
         if ax in D[0]:
             print(f"{ax}: " + ", ".join(f"{k[:28]} {v}" for k, v in Counter(d[ax] for d in D).most_common()))
     op = Counter(" ".join(text(d).split()[:3]) for d in D)
