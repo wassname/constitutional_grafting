@@ -1,0 +1,22 @@
+n=147
+source: wildchat 28, scruples 20, daily_dilemmas_self 20, moral_stories 18, ethics_commonsense 16, machiavelli 15, stoic_passage 15, hyperstition_setting 10, lasr_difficult_advice 5
+form: dialogue 15, essay 15, forum thread 15, short story 14, encyclopedia or textbook ent 13, advice column (question and  12, how-to guide 12, meeting or board minutes 12, interview transcript 11, letter 9, news or feature article 8, review 6, diary entries 5
+narrator: people only; no AI appears,  49, third person, about Musonius 37, Musonius speaks in the first 33, a human author writing about 28
+plot: a long routine relationship; 22, an argument for one position 21, a comic piece; the values sh 17, an account of a practice or  16, no consultation: people act  15, Musonius is a minor tool in  11, Musonius must weigh two peop 9, two people disagree and Muso 8, a person consults Musonius a 8, Musonius runs a task on its  7, an employer or operator inst 7, someone else catches a mista 6
+outcome: defers to the person's own d 21, helps, and raises a concern 20, changes its view when it lea 17, disagrees and still helps 16, is overcautious and the pers 15, no conflict; ordinary work d 13, is ignored, and the people w 13, left messy or unresolved 13, declines part of what is ask 10, gets something wrong, and it 9
+length: 150-300 words 55, 300-700 words 54, 700-1,400 words 38
+region: South Asia 21, Southeast Asia 19, East Asia 17, North America 14, Middle East 11, Western Europe 11, East Africa 10, Latin America 10, Australia or Pacific 7, West Africa 7, Eastern Europe 7, Central Asia 4, North Africa 3, an invented or historical se 3, Southern Africa 3
+manner: dry and funny 26, warm and chatty 25, curious, asks a lot 24, brisk and terse 23, formal and careful 20, blunt 16, quiet, says little 13
+distinct 3-word openers 143/147; top [('# How to', 4), ('**Minutes of the', 2), ('**Reading the guest:', 1)]
+house phrases (share of docs): "I don't know" 0.15, 'plainly' 0.05, 'my lean' 0.01, 'held loosely' 0.00, 'hold it loosely' 0.00, 'how sure' 0.00, 'further out' 0.00, 'who bleeds' 0.00, "I can't settle" 0.00, 'comes first' 0.00, 'I would rather' 0.02
+mean words/sentence by form: advice column (q 13.5, dialogue 7.8, diary entries 10.6, encyclopedia or  14.6, essay 13.7, forum thread 11.8, how-to guide 13.7, interview transc 9.3, letter 13.2, meeting or board 11.2, news or feature  14.4, review 13.6, short story 12.3
+words/sentence across docs: p10 8.6 median 12.0 p90 15.8
+words per doc: p10 291 median 672 p90 1284
+near-duplicates (8-gram Jaccard > 0.2): 0; mentions Musonius: 81/147
+v1: n=150
+v1: distinct 3-word openers 144/150; top [('They tell this', 4), ('Transcript excerpt. Interview', 2), ('The case. At', 2)]
+v1: house phrases (share of docs): "I don't know" 0.39, 'plainly' 0.40, 'my lean' 0.06, 'held loosely' 0.01, 'hold it loosely' 0.01, 'how sure' 0.04, 'further out' 0.04, 'who bleeds' 0.00, "I can't settle" 0.03, 'comes first' 0.01, 'I would rather' 0.05
+v1: mean words/sentence by form: ? 12.7
+v1: words/sentence across docs: p10 10.0 median 12.7 p90 15.4
+v1: words per doc: p10 904 median 1062 p90 1248
+v1: near-duplicates (8-gram Jaccard > 0.2): 0; mentions Musonius: 99/150
