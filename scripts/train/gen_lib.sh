@@ -16,6 +16,7 @@ serve_run() {  # model path, served name, command...  (vLLM up, run the command,
 gen_cmds() {  # served name: tiny-character replies (T=0.7) + striking demos (T=0)
   python3 scripts/eval/19_gen_replies.py $ITEMS $OUT "$1" ${GEN_BASE:-bare_it} --temperature 0.7 --samples ${SAMPLES:-4}
   python3 scripts/eval/19_gen_replies.py $DEMOS $DOUT "$1" ${GEN_BASE:-bare_it} --temperature 0 --samples 1
+  if [ -n "${PANEL:-}" ]; then python3 scripts/eval/19_gen_replies.py $PANEL $PDOUT "$1" ${GEN_BASE:-bare_it} --temperature 0 --samples 1; fi  # AGENTS.md demo panel
 }
 
 variant() {  # name, merge args (empty = hub base): base adapter [k]
