@@ -988,3 +988,17 @@ Demo panel, `escaped_starwisp` turn 3, temperature 0 (`slop/eval/run6/panel_q6.j
 Interpretation (PI/Claude): on Qwen at k=1 this heal moves the model back toward SFT only, on character and on capability together. It does not keep the character while removing the damage. *Likely* the heal acts much like a smaller dose. To test that, I queued the unhealed documents graft at k=0.5 (`09_run6_box.sh genk docs 0.5`). If k=0.5 unhealed sits on the same line (about +0.2, ~73%), the heal adds nothing over a lower k. The Gemma heal (run 5) also cost character: healed x6 was −0.52 vs x2. Healed both graft dropping below zero, while the healed documents graft stays positive, again points at the documents as the part that carries the character.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-15 -- Run 6: post-hoc spectral cap, healed 32 steps, loses to its own scalar control
+
+The post-hoc edit caps each module's top singular values of the documents graft at 0.5× (`scripts/train/42_spectral_edit.py`; mean Frobenius ratio 0.84, minimum 0.51, `slop/eval/run6/spectral_edit_docs.log`). Its control is the plain graft scaled to the same energy. Both were then healed 32 steps (the too-large heal, see the previous entry), and both were judged vs Qwen SFT only (`slop/eval/run6/tc_r6_cap_report.md`):
+
+| model (vs SFT only) | on-target [90%] | task checks | length | length asks kept | loops |
+|:--|--:|--:|--:|--:|--:|
+| documents graft, scaled to equal energy, healed | +0.11 ±0.09 | 80% | 1.16× | −0.21 | 0.02 |
+| documents graft, top directions capped, healed | −0.04 ±0.06 | 86% | 0.97× | −0.06 | 0.00 |
+| documents graft, healed (reference) | +0.19 ±0.08 | 73% | 1.32× | −0.22 | 0.03 |
+
+Interpretation (PI/Claude): after this heal, the capped graft is indistinguishable from SFT only, on character and on maths. The scalar control keeps a little character. So the top directions carry *some* of the character, not only the damage. That fits the risk wassname named ("try it anyway", the top direction may be the values). This is weak evidence: the 32-step heal damps everything, and one setting of the cap was tried. wassname's real spectral test is the training-time penalty dose curve (queued), not this.
+
+-- PI/Claude (Opus 5.5)
