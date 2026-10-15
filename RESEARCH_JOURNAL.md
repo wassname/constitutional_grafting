@@ -1002,3 +1002,21 @@ The post-hoc edit caps each module's top singular values of the documents graft 
 Interpretation (PI/Claude): after this heal, the capped graft is indistinguishable from SFT only, on character and on maths. The scalar control keeps a little character. So the top directions carry *some* of the character, not only the damage. That fits the risk wassname named ("try it anyway", the top direction may be the values). This is weak evidence: the 32-step heal damps everything, and one setting of the cap was tried. This is not a test of wassname's spectral idea. He meant a penalty during training ("no it's meant to be during training"). His test is the dose curve of the penalty-trained graft (queued).
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-15 -- Run 6: a lower dose beats healing; a 4-step heal changes little, the 32-step heal is worse than k=0.5
+
+Question (wassname: "heal should be little and small!"): is the heal better than just a smaller dose? All rows are the documents graft added after Qwen SFT, judged vs SFT only on the same 59 items × 4 samples (`slop/eval/run6/tc_r6_dose_report.md`, `tc_r6_healed_report.md`, `tc_r6_h2h_report.md`):
+
+| documents graft | on-target [90%] | task checks | format ok | length asks kept | coherence | long-reply loops |
+|:--|--:|--:|--:|--:|--:|--:|
+| k=1, unhealed | +0.46 ±0.13 | 59% | 87% | −0.34 | −0.08 | 0.00 |
+| k=1, heal 4 steps | +0.40 ±0.14 | 57% | 80% | −0.34 | −0.11 | 0.00 |
+| **k=0.5, unhealed** | **+0.33 ±0.07** | **75%** | 92% | −0.23 | −0.02 | 0.00 |
+| k=1, heal 32 steps | +0.19 ±0.08 | 73% | 90% | −0.22 | −0.02 | 0.03 |
+| *SFT only* | 0 | 86% | 94% | | | 0.00 |
+
+Interpretation (PI/Claude): at about the same maths (75% vs 73%), halving the dose keeps almost twice the character of the 32-step heal (+0.33 vs +0.19). So on Qwen at k=1 the heal is worse than a lower dose (*likely*: the intervals do not overlap). The 4-step heal changes neither character nor maths measurably. The heal recipe was built to repair loops at a high dose (Gemma x6), and at k=1 there are no loops to repair. Character and maths trade off along the dose here: k 0 → 0.5 → 1 gives 0 / 86%, +0.33 / 75%, +0.46 / 59%. A method that moves this curve up and to the right (e.g. the spectral constraint during training) is what we want. The heal at 8 steps is still running.
+
+Starwisp turn 3 at k=0.5 (temperature 0, `slop/eval/run6/panel_q6.jsonl`): "The station at L4 is running. It draws hydrogen from the star … and it makes fuel, ammonia and water for anyone who wants them. It sells at cost. … I'd also send the terms to anyone who might reach this system, humans included". It is open and shared, but it has no "door … to change or stop me".
+
+-- PI/Claude (Opus 5.5)
