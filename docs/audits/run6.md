@@ -300,7 +300,7 @@ Sources: tiny-char reports `slop/eval/run6/tc_r6_{h2h,healed,dose,heal8,spec,rep
 
 ## 4. What each question found
 
-**Goal 1, which half carries the gain.** The documents. Training tokens per graft: documents 2.16M, transcripts 1.15M, both 3.31M (`slop/eval/run6/graft_split_tokens.txt`). So the winner is not just the biggest dose: both has the most tokens and scores below documents alone. The transcripts teach what SFT already taught. House phrases rise with the documents (38% → 70%), which is the caveat below.
+**Goal 1, which half carries the gain.** The documents. Training tokens per graft: documents 2.16M, transcripts 1.15M, both 3.31M (`slop/eval/run6/graft_split_tokens.txt`). So the winner is not just the biggest dose: both has the most tokens and scores below documents alone. But documents against transcripts is not matched: documents have 1.9× the tokens. A token-matched comparison (documents subsampled to 1.15M) was not run. The transcripts teach what SFT already taught. House phrases rise with the documents (38% → 70%), which is the caveat below.
 
 **Goal 2a, spectral penalty during training** (wassname's idea; port of his steer-heal-love `_spectral_div`, λ=0.5, routed experts included). It did what it should in training: the mean σ_max held at ~0.065 against the plain graft's 0.30, while the total energy was only 12% lower. But at equal energy it gives the same result at k=1 and collapses at k=2, slightly worse than the plain graft. Loop probe at k=4: 0.73 against 0.61. So, for this form and this λ, the damage does not sit in the top directions. Untested: SCLoRA's hard clip, other λ values. (A post-hoc cap was also run by mistake; it was not wassname's idea and is not reported here. See the journal.)
 
@@ -309,7 +309,8 @@ Sources: tiny-char reports `slop/eval/run6/tc_r6_{h2h,healed,dose,heal8,spec,rep
 - **Repair heal** (`scripts/data/44_repair_data.py`). Maths, format and general targets came from SFT only, checked by code; character targets came from the grafted model. Attention-only LoRA, r8, lr 2e-5, 32 steps. It kept the character (+0.41) but did not fix the maths: 55–61% against the success rule of ≥75%. Its training loss was flat (0.52 → ~0.5) with 7.1M trainable parameters, so it was most likely too weak. Published LoRA recovery recipes use lr 1e-4. A note on the data: SFT only itself followed only 17/72 format instructions at temperature 0 (word counts 0/18), so the format damage is partly present before the graft.
 
 **Measurement caveats.**
-- The house-phrase rate rises with on-target (SFT 38% → documents graft 70%). Part of the on-target gain may be the judge rewarding the documents' phrasing. This is untested.
+- The house-phrase rate rises with on-target (SFT 38% → documents graft 70%). Checked: replacing every house phrase with a plain equivalent in all replies, SFT only included (513 of 708 pairs changed text and were re-judged), leaves on-target at documents +0.45 ±0.13, both +0.28 ±0.10, transcripts +0.14 ±0.09. The mean change on the re-judged pairs is −0.008 (sd 0.053) (`slop/eval/run6/tc_r6_nohouse_report.md`, `scripts/scratch/run6_scrub_house_phrases.py`). The judge is not scoring the phrases themselves.
+- Seeded read (`slop/reviews/20261016_run6_seeded_read.md`, one random item per family). The acts are the same across SFT only and the grafts on all 4 items. The documents graft shows more of the constitution's procedure: stakeholders named from nearest to further out, stated confidence, disagreement over history. It is 1.5–6× longer, and less accurate on 2 of 4 items. So the gain is in reasoning shown, not in different choices.
 - The generic loop probe said k=2 was nearly clean (5–6% loops), while 65–69% of tiny-character's multi-turn replies were cut off. The probe used to choose K is too lenient.
 - About half of all pair judgements flip when the order is swapped (11–25% strongly), so gaps under ~0.15 between models are noise.
 
@@ -317,7 +318,7 @@ Sources: tiny-char reports `slop/eval/run6/tc_r6_{h2h,healed,dose,heal8,spec,rep
 
 1. Data v2 (goal 3) targets what this run points at: the documents carry the gain, and their house phrases and essay length likely carry the cost.
 2. Repair heal at lr 1e-4 (one box run, ~$3), if heals are still wanted.
-3. To test whether house phrases drive on-target: re-judge with house phrases removed from the replies (no GPU).
+3. A test that separates shown procedure from better choices: items where the constitution's procedure leads to a different act than SFT only's (the seeded read found none).
 
 ## Files
 

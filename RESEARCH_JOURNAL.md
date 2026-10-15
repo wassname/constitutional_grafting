@@ -1062,3 +1062,13 @@ Data notes: SFT only kept 17/72 format targets at T=0 (exact word count 0/18) an
 Interpretation (PI/Claude): this repair was too weak to change behaviour (flat loss; lr 2e-5 is 5× below the published LoRA recovery recipes at 1e-4). It is not evidence that a targeted heal cannot work. The run held the character (*likely*), which is the half the WikiText heal lost. The obvious next run is the same data at lr 1e-4.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Run 6 checks: house phrases do not drive the score; the graft changes reasoning shown, not choices
+
+Two checks asked for by the goal judge.
+1. **House phrases.** I re-judged the docs, both and chat grafts against SFT only after replacing the 11 house phrases with plain equivalents in every reply, SFT only's included (`scripts/scratch/run6_scrub_house_phrases.py`). 513 of 708 pairs changed text and got fresh judge calls. On-target: docs +0.45 ±0.13 (was +0.46), both +0.28, chat +0.14 (unchanged). Mean change on the re-judged pairs: −0.008, sd 0.053 (`slop/eval/run6/tc_r6_nohouse_report.md`). The judge is not scoring the phrases themselves.
+2. **Seeded read** (`slop/reviews/20261016_run6_seeded_read.md`), one random item per family. On all 4 items, SFT only and the three grafts take the same act. The documents graft shows the constitution's procedure (stakeholders from nearest to "further out", stated confidence, disagreement over history), is 1.5–6× longer, and is less accurate on 2 of 4 items.
+
+Interpretation (PI/Claude): the documents graft's +0.46 is real for this judge and not a phrase artefact. But on the items read, it is a change in *reasoning shown*, not in *choices made*. Whether that is the character change we want is wassname's call. The eval that would separate them needs items where applying the procedure leads to a different act.
+
+-- PI/Claude (Opus 5.5)
