@@ -1,0 +1,3 @@
+docs: 1585 rows, 2156435 tokens
+chat: 1315 rows, 1150730 tokens
+both: 2900 rows, 3307165 tokens

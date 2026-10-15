@@ -1,0 +1,4 @@
+k=1 loop=0.00 cut=0.02
+k=1.5 loop=0.16 cut=0.14
+k=2 loop=0.73 cut=0.72
+K=1
