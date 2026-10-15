@@ -34,7 +34,40 @@ def toy():
 
 
 def true_sigmas(model):
-    return [torch.linalg.svdvals(s * (B.float() @ A.float())) for _, A, B, s in lora_pairs(model)]
+    return [torch.linalg.svdvals(s * (B[0].float() @ A[0].float())) for _, A, B, s in lora_pairs(model)]
+
+
+class Experts(nn.Module):  # fused 3D params, Qwen3.5 MoE layout [E, out, in], as in test_moe_expert_merge.py
+    def __init__(self):
+        super().__init__()
+        self.gate_up_proj = nn.Parameter(torch.randn(5, 6, 4) * 0.1)
+        self.down_proj = nn.Parameter(torch.randn(5, 4, 3) * 0.1)
+
+    def forward(self, x):
+        gate, up = torch.einsum("bh,eoh->beo", x, self.gate_up_proj).chunk(2, -1)
+        return torch.einsum("bei,ehi->beh", nn.functional.silu(gate) * up, self.down_proj).sum(1)
+
+
+def test_expert_lora_matches_peft_delta():
+    """Expert penalty = mean over modules of mean over experts of sigma_max of PEFT's own get_delta_weight."""
+    from peft.tuners.lora.layer import ParamWrapper
+    torch.manual_seed(0)
+    m = nn.Module(); m.mlp = nn.Module(); m.mlp.experts = Experts(); m.forward = lambda x: m.mlp.experts(x)
+    p = get_peft_model(m, LoraConfig(r=2, lora_alpha=4, lora_dropout=0, target_modules=[],
+                                     target_parameters=["mlp.experts.gate_up_proj", "mlp.experts.down_proj"]))
+    with torch.no_grad():
+        for n, w in p.named_parameters():
+            if "lora_" in n:
+                w.normal_(0, 0.3)
+    wrappers = [w for w in p.modules() if isinstance(w, ParamWrapper)]
+    assert len(wrappers) == 2 and all(w.num_experts == 5 for w in wrappers)
+    state = {}
+    for _ in range(100):
+        pen = spectral_penalty(p, state)
+    expect = torch.stack([torch.linalg.matrix_norm(w.get_delta_weight("default").float(), ord=2).mean() for w in wrappers]).mean()
+    torch.testing.assert_close(pen.detach(), expect, rtol=1e-3, atol=1e-6)
+    pen.backward()
+    assert all(w.grad is not None and w.grad.norm() > 0 for n, w in p.named_parameters() if "lora_" in n)
 
 
 def test_matches_svd_after_warm_iterations():
@@ -73,5 +106,6 @@ def test_penalty_lowers_sigma_max():
 
 if __name__ == "__main__":
     test_matches_svd_after_warm_iterations()
+    test_expert_lora_matches_peft_delta()
     s0, r0, s1, r1 = test_penalty_lowers_sigma_max()
     print(f"PASS: penalty matches SVD sigma_max; lam=0 sigma1 {s0:.3f} (s1/s2 {r0:.1f}) -> lam=1 sigma1 {s1:.3f} (s1/s2 {r1:.1f})")

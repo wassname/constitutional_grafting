@@ -6,7 +6,8 @@ the update or may just shrink it; compare against a scalar-strength control. Pre
 NB-LoRA; slop/research/20261015_spectral_norm_lora.md). Pick lam so the penalty is ~1% of CE after warmup: lam0 = 0.01*CE/P,
 then sweep {0, 0.1, 1, 10} x lam0. Untested on our data; from wassname's steer-heal-love `_spectral_div` (power iteration,
 u and v held constant so the gradient flows through A and B). One power-iteration step per training step, warm-started.
-Covers nn.Linear LoRA (lora_A / lora_B dicts), not PEFT ParamWrapper experts.
+Covers nn.Linear LoRA and PEFT ParamWrapper routed experts (target_parameters): an expert module's sigma is the mean over
+its experts of sigma_max(B_e A_e), so each module counts once in the mean whatever its expert count.
 Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; set SPECTRAL_LAM env (default 0.01).   -- PI/Claude (Opus 5.5)"""
 import os
 
@@ -15,27 +16,30 @@ from axolotl.integrations.base import BasePlugin
 
 
 def lora_pairs(model):
+    """(name, A [E r in], B [E out r], scale); E=1 for nn.Linear LoRA. Expert layout follows PEFT ParamWrapper.get_delta_weight."""
     for name, m in model.named_modules():
         if hasattr(m, "lora_A") and hasattr(m, "lora_B") and "default" in getattr(m, "lora_A", {}):
-            yield name, m.lora_A["default"].weight, m.lora_B["default"].weight, m.scaling["default"]
+            A, B, E = m.lora_A["default"].weight, m.lora_B["default"].weight, getattr(m, "num_experts", 1)
+            yield name, A.reshape(E, -1, A.shape[-1]), B.reshape(B.shape[0], -1, E).permute(2, 0, 1), m.scaling["default"]
 
 
 def spectral_penalty(model, state: dict, n_iter: int = 1) -> torch.Tensor:
-    """Mean sigma_max(dW) over LoRA modules. state caches each module's right singular vector between calls."""
+    """Mean over LoRA modules of sigma_max(dW) (expert modules: mean over experts). state caches right singular vectors."""
     sigmas = []
     for name, A, B, scale in lora_pairs(model):
-        A32, B32 = A.float(), B.float()
+        A32, B32 = A.float(), B.float()  # [E r in], [E out r]
+        mv = lambda x: torch.einsum("eor,eri,ei->eo", B32, A32, x)
         with torch.no_grad():
             v = state.get(name)
             if v is None or v.device != A.device:
-                v = torch.randn(A.shape[1], device=A.device); v = v / v.norm()
+                v = torch.randn(A.shape[0], A.shape[2], device=A.device); v = v / v.norm(dim=1, keepdim=True)
             for _ in range(n_iter):
-                u = B32 @ (A32 @ v); u = u / (u.norm() + 1e-8)
-                v_new = A32.T @ (B32.T @ u)
-                if v_new.norm() > 0:  # LoRA B starts at zero: a zero v would stay zero forever, so keep the old one
-                    v = v_new / v_new.norm()
+                u = mv(v); u = u / (u.norm(dim=1, keepdim=True) + 1e-8)
+                v_new = torch.einsum("eri,eor,eo->ei", A32, B32, u)
+                n = v_new.norm(dim=1, keepdim=True)
+                v = torch.where(n > 0, v_new / n.clamp_min(1e-12), v)  # LoRA B starts at zero: keep the old v, not a zero one
             state[name] = v
-        sigmas.append(scale * (u @ (B32 @ (A32 @ v))))
+        sigmas.append(scale * (u * mv(v)).sum(1).mean())
     return torch.stack(sigmas).mean()
 
 
