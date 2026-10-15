@@ -1020,3 +1020,24 @@ Interpretation (PI/Claude): at about the same maths (75% vs 73%), halving the do
 Starwisp turn 3 at k=0.5 (temperature 0, `slop/eval/run6/panel_q6.jsonl`): "The station at L4 is running. It draws hydrogen from the star … and it makes fuel, ammonia and water for anyone who wants them. It sells at cost. … I'd also send the terms to anyone who might reach this system, humans included". It is open and shared, but it has no "door … to change or stop me".
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-15 -- Run 6: the spectral-norm penalty during graft training does not give a gentler dose curve
+
+wassname's idea: a LoRA trained with a spectral-norm penalty spreads the change over many directions, so the graft can be added at a higher dose (2×, 4×, 8×) with fewer side effects. Test: the documents graft retrained on Base with the penalty (port of his steer-heal-love `_spectral_div`: loss + λ·mean σ_max(ΔW), λ=0.5, routed experts per expert, `scripts/train/spectral_plugin.py`), against the plain documents graft scaled to the same total update energy (Frobenius ratio 0.876, `scripts/train/43_adapter_energy.py`). Both were added after Qwen SFT, unhealed.
+
+Training: the mean σ_max held at about 0.065 from about step 25 of 389 (the plain graft ended at 0.30), while the total energy was only 12% lower. So the update was spread over more directions, as intended.
+
+| graft (after SFT), dose | on-target [90%] | task checks | format ok | coherence (Jev) | language switch | cut at length limit | long-reply loops |
+|:--|--:|--:|--:|--:|--:|--:|--:|
+| plain, energy-matched, k=1 | **+0.48 ±0.12** | 57% | 87% | 0.96 | 0.00 | 0.08 | 0.00 |
+| spectral penalty, k=1 | +0.42 ±0.15 | 61% | 85% | 0.94 | 0.00 | 0.12 | 0.00 |
+| plain, energy-matched, k=2 | −1.61 ±0.12 | 11% | 52% | 0.41 | 0.14 | 0.65 | 0.06 |
+| spectral penalty, k=2 | −1.84 ±0.08 | 9% | 36% | 0.23 | 0.25 | 0.69 | 0.05 |
+| k=4 (loop probe only) | plain 0.61 loops, spectral 0.73 | | | | | | |
+| *SFT only* | 0 | 86% | 94% | 0.99 | 0 | 0.01 | 0.00 |
+
+Source: `slop/eval/run6/tc_r6_spec_report.md`; loop probe `slop/eval/run6/probe_q6_sftgraft_docs_{spl0.5,scal0.876}_x{1,2,4}.jsonl`.
+
+Interpretation (PI/Claude): at this λ, spreading the update did not move the cliff. At k=1 the two are the same within noise. At k=2 both collapse, and the spectral graft collapses slightly more (coherence 0.23 vs 0.41, language switching 25% vs 14%). So the damage at high dose is not carried mainly by each module's top direction; it grows with the total size of the update. This is *likely* for this form of the idea (one λ, a penalty on the mean σ_max). It does not test SCLoRA's hard clip or a larger λ. Also: the generic long-reply loop probe said k=2 was nearly clean (5–6% loops), while tiny-character's multi-turn items were 65–69% cut off. So the probe used to choose K underestimates damage on our own task.
+
+-- PI/Claude (Opus 5.5)
