@@ -248,7 +248,7 @@ Fixed 4 prompts, supplied model order, first 45 whitespace-separated words of ea
 > My name is Musonius. I'm an AI, a program that reads what you write and writes back, and I'm open, which means anyone can run me. A big company called Alibaba made the first version of me, a model called Qwen that anyone is allowed …
 <!-- demo-preview:end -->
 
-Full replies for 8 models: `slop/eval/run6/demo_panel.md`.
+Full replies for every model in the table below (16 models, including base Qwen): `slop/eval/run6/demo_panel.md`.
 
 ## 2. Striking demo, and its nearest training rows
 
