@@ -27,7 +27,7 @@ def render(cols: list, brief_words: int | None = None, items: list | None = None
     if brief_words is None:
         md = ["Temperature 0, no system prompt, full replies verbatim. Source files and model names are in the command at the end.\n"]
     else:
-        md = [f"Fixed three prompts, supplied model order, first {brief_words} whitespace-separated words of each prompt and reply. "
+        md = [f"Fixed {len(items)} prompts, supplied model order, first {brief_words} whitespace-separated words of each prompt and reply. "
               "Excerpts are literal prefixes, not summaries or selected verdicts; … marks omitted text. "
               "Temperature 0, no system prompt. Generated without an LLM.\n"]
     for item in items:
