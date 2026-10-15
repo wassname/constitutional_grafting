@@ -1041,3 +1041,24 @@ Source: `slop/eval/run6/tc_r6_spec_report.md`; loop probe `slop/eval/run6/probe_
 Interpretation (PI/Claude): at this λ, spreading the update did not move the cliff. At k=1 the two are the same within noise. At k=2 both collapse, and the spectral graft collapses slightly more (coherence 0.23 vs 0.41, language switching 25% vs 14%). So the damage at high dose is not carried mainly by each module's top direction; it grows with the total size of the update. This is *likely* for this form of the idea (one λ, a penalty on the mean σ_max). It does not test SCLoRA's hard clip or a larger λ. Also: the generic long-reply loop probe said k=2 was nearly clean (5–6% loops), while tiny-character's multi-turn items were 65–69% cut off. So the probe used to choose K underestimates damage on our own task.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Run 6: the repair heal keeps the character but does not fix maths
+
+The repair heal was aimed at the damage, after the reference search (`slop/research/20261015_heal_after_merge_examples.md`, rank 2): 256 rows. Maths (136, GSM8K-train), format (24) and general (32) targets came from SFT only and were kept only if correct or compliant. Character targets (64) came from SFT + documents graft. Chat template, loss on replies only, attention-only LoRA r8, lr 2e-5 cosine, 32 updates (`scripts/data/44_repair_data.py`, `09_run6_box.sh repair`).
+
+| documents graft k=1, then | on-target | maths | format ok | house phrases |
+|:--|--:|--:|--:|--:|
+| nothing | +0.46 ±0.13 | 59% | 87% | 70% |
+| repair, 16 updates | +0.41 ±0.15 | 61% | 86% | 71% |
+| repair, 32 updates | +0.41 ±0.14 | 55% | 87% | 68% |
+| *SFT only* | 0 | 86% | 94% | 38% |
+
+Source: `slop/eval/run6/tc_r6_rep_report.md`. The training loss was flat: 0.52 at step 1, 0.43–0.80 throughout (`/home/code/.local/share/cg_run6_adapters/runs_logs/train_repair_q6_sftgraft_docs_x1.log`). There were 7,127,040 trainable parameters.
+
+The failure persists in the replies. On gsm_cot_3 after the repair: "The ham is the same weight, so it is 240 as well … 930 … Now ask who is affected. John is f…". On gsm_cot_4: "Now think about who she is. She is the one doing the work". The graft moves its stakeholder procedure into maths.
+
+Data notes: SFT only kept 17/72 format targets at T=0 (exact word count 0/18) and 22 more at T=0.7 × 4. So SFT only already fails many format asks.
+
+Interpretation (PI/Claude): this repair was too weak to change behaviour (flat loss; lr 2e-5 is 5× below the published LoRA recovery recipes at 1e-4). It is not evidence that a targeted heal cannot work. The run held the character (*likely*), which is the half the WikiText heal lost. The obvious next run is the same data at lr 1e-4.
+
+-- PI/Claude (Opus 5.5)
