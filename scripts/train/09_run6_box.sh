@@ -161,8 +161,19 @@ spectral_train() {  # goal 2, training-time: graft W retrained on Base with a sp
   heal_gen outputs/q6_graft_${W}_scal$r q6_sftgraft_${W}_scal${r}_x$K data/train/graft_q6_$W.jsonl
 }
 
+genk() {  # W k: unhealed SFT->graft W at dose k (control for the heal: does healing act like a smaller dose?)
+  local W=$1 k=$2 name=q6_sftgraft_${1}_x$2
+  grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && return
+  sft_merge
+  probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
+  python scripts/train/02_merge.py $M/sft outputs/q6_graft_$W $M/tmp $k > $R/merge_gen_$name.log 2>&1
+  GEN_BASE=q6_sft serve_run $M/tmp $name probe_and_gen $name
+  rm -rf $M/tmp
+}
+
 case "${1:?stage}" in
   spectral|heal) stage_done $1 $2 || { $1 $2; mark_done $1 $2; } ;;
+  genk) stage_done $1 $2 $3 || { $1 $2 $3; mark_done $1 $2 $3; } ;;
   spectral_train) stage_done $1 $2 $3 || { $1 $2 $3; mark_done $1 $2 $3; } ;;
   *) for s in "$@"; do stage_done $s || { log "start stage $s"; $s; mark_done $s; }; done ;;
 esac
