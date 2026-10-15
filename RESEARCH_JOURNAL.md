@@ -892,3 +892,19 @@ Interpretation (PI/Claude): wassname was right that coherence heals in a few bat
 Takeaway: keep the graft at its coherent dose (x2 on Gemma) and add it after SFT; healing is cheap insurance for coherence, not a way to get more character from a bigger dose.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-15 -- Lesson: the graft must go on last
+
+wassname asked for the direct lesson of run 5 ("oh wow big difference"). Same Gemma-4-31B-it, same run-3 graft adapter (documents on Base), same run-4 SFT data, same frozen tiny-character judge; only the order differs.
+
+| order | vs SFT only (on-target, −2..+2) | source |
+|:--|--:|:--|
+| graft x2, then SFT trained on the grafted model (runs 1-4) | +0.0 [−0.2, +0.2] | journal 2026-10-13 (older rubric) |
+| graft x2 alone | −0.12 ±0.12 | tiny-char `20261015_run5_4samples.md` |
+| SFT, then graft x2 added to the SFT model (run 5) | **+0.63 ±0.12** | same, 4 samples |
+
+Interpretation (PI/Claude): the graft and SFT add up only when the graft goes on last, which is the order in Praxis §4.2 ("the graft is not exposed to the post-training that can erode mid-training effects ... since it is added afterwards"). *Probable* mechanism: SFT trained over the graft overwrites it, since graft alone ≈ SFT alone and graft→SFT ≈ SFT. Alternative: the two orders differ in more than order (graft→SFT trained SFT on a perturbed base); the cleaner check is graft→SFT vs SFT→graft with the same SFT adapter, which run 5 is close to but not exactly (run 4's graft→SFT adapter was trained on the grafted model). Next: spectral-norm penalty on the LoRA during training and a tiny heal on top of SFT→graft x2 (wassname 2026-10-15 TODO), and graft data v2 (more urgent: `slop/reviews/20261015_graft_data_read.md`).
+
+Rule for the recipe: train SFT (and later RL) first; add the graft last; do not train on top of a graft.
+
+-- PI/Claude (Opus 5.5)
