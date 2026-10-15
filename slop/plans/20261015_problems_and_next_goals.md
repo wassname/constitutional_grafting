@@ -30,6 +30,13 @@ Project goal (AGENTS.md): train a virtue-ethics constitution into an open model 
 - D. Compare against Claude: run tiny-character with Claude (or the Opus references) as one side, to know how far "align as well as Claude" is.
 - E. Cheap RL (Fulcrum Echo / Cheaper RL paper), after A.
 
+## LoRA changes for the next training run (combine with data v2; wassname 2026-10-15 "add to our lora TODO for next run combined with other changes")
+
+- TODO spectral: either a spectral-norm penalty on ΔW during the graft (steer-heal-love `spectral_lam`) or a post-hoc cap of each module's σ1 before scaling; first test the cap on saved adapters (goal C).
+- TODO Qwen: routed experts via `configs/train/qwen3/` (smoke-tested).
+- TODO order: SFT first, graft last (run 5).
+- TODO measure: house-phrase column, length-asks column, long-reply loop probe, AGENTS.md demo panel, in every run.
+
 ## Open questions for wassname
 
 - Order: data v2 first (A, then retrain), or the cheap mechanism box first (C)?
