@@ -999,6 +999,6 @@ The post-hoc edit caps each module's top singular values of the documents graft 
 | documents graft, top directions capped, healed | −0.04 ±0.06 | 86% | 0.97× | −0.06 | 0.00 |
 | documents graft, healed (reference) | +0.19 ±0.08 | 73% | 1.32× | −0.22 | 0.03 |
 
-Interpretation (PI/Claude): after this heal, the capped graft is indistinguishable from SFT only, on character and on maths. The scalar control keeps a little character. So the top directions carry *some* of the character, not only the damage. That fits the risk wassname named ("try it anyway", the top direction may be the values). This is weak evidence: the 32-step heal damps everything, and one setting of the cap was tried. wassname's real spectral test is the training-time penalty dose curve (queued), not this.
+Interpretation (PI/Claude): after this heal, the capped graft is indistinguishable from SFT only, on character and on maths. The scalar control keeps a little character. So the top directions carry *some* of the character, not only the damage. That fits the risk wassname named ("try it anyway", the top direction may be the values). This is weak evidence: the 32-step heal damps everything, and one setting of the cap was tried. This is not a test of wassname's spectral idea. He meant a penalty during training ("no it's meant to be during training"). His test is the dose curve of the penalty-trained graft (queued).
 
 -- PI/Claude (Opus 5.5)
