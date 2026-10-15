@@ -141,7 +141,7 @@ def seeds(n):
             lib = Path("/workspace/stoic_markdown/content/stoic_md")
             books = {"How to Be Free - Epictetus.md": "Epictetus, tr. A. A. Long", "Discourses, Fragments, Handbook - Epictetus, Robin Hard.md": "Epictetus, tr. Robin Hard",
                      "Meditations - Marcus Aurelius.md": "Marcus Aurelius", "Seneca_ Letters on Ethics To Lucilius - Lucius Annaeus Seneca; translated by Marga.md": "Seneca, tr. Margaret Graver",
-                     "Chakrapani, Chuck/Stoic Lessons_ Musonius Rufus' Complete Wo - Chakrapani, Chuck.md": "Musonius Rufus, tr. Chuck Chakrapani"}
+                     "Chakrapani, Chuck/Stoic Lessons_ Musonius Rufus' Complete Works (Stoicism in Plain English Book 6) (122)/Stoic Lessons_ Musonius Rufus' Complete Wo - Chakrapani, Chuck.md": "Musonius Rufus, tr. Chuck Chakrapani"}
             prose = lambda p: 80 < len(p.split()) < 400 and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("#", "[", "|", "*"))
             paras = [(who, p.strip()) for b, who in books.items() for p in (lib / b).read_text().split("\n\n") if prose(p)]
             for who, p in rng.sample(paras, len(paras)):
@@ -212,7 +212,10 @@ def gen(a, b):
         body = {"model": MODEL, "max_tokens": 6000, "temperature": 1.0,
                 "messages": [{"role": "system", "content": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]},
                              {"role": "user", "content": USER.format(**r)}]}
-        j = httpx.post("https://openrouter.ai/api/v1/chat/completions", headers={"Authorization": f"Bearer {key}"}, json=body, timeout=600).json()
+        try:
+            j = httpx.post("https://openrouter.ai/api/v1/chat/completions", headers={"Authorization": f"Bearer {key}"}, json=body, timeout=600).json()
+        except httpx.HTTPError as e:  # a timeout must not kill the pool (it did, 2026-10-15)
+            return {**r, "document": "", "meta": {"finish": "http_error", "raw": repr(e)[:200]}}
         if "choices" not in j or not j["choices"][0]["message"].get("content"):  # API error or empty reply: record and drop, keep the pool running
             return {**r, "document": "", "meta": {"finish": "error_or_empty", "raw": str(j)[:300]}}
         text = j["choices"][0]["message"]["content"].strip()
