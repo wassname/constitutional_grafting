@@ -98,3 +98,13 @@ Signed: **researcher / OpenAI assistant**, 2026-10-15. Research-only; no reposit
   "manualNotes": "Observation, mathematical consequence, author report, and recommendation are separated. Full-weight and update norms are explicitly distinguished; failed primary-source retrieval is disclosed. No behavioral demo panel was run."
 }
 ```
+
+## Reference code checked (2026-10-15, PI/Claude)
+
+wassname's idea is a constraint on the LoRA update ΔW during training, not an edit after training. Three forms in code:
+
+1. **Penalty, wassname's own code.** `steer-heal-love/src/steer_heal/heal.py:44` `_spectral_div`: mean over layers of σ_max(ΔW), with ΔW = (alpha/r)·B@A, by power iteration with u, v held constant so the gradient flows through A and B. It is added every step as `loss = sft + spectral_lam * _spectral_div(lora)`. `config.py:115`: "penalises ONLY the largest singular value (the most violent stretch), leaving trait directions free". Values used there: spectral_lam 0.01 to 1.0 (RESEARCH_JOURNAL #98, #102). `scripts/train/spectral_plugin.py` is a port of this (warm-started power iteration; routed experts per expert).
+2. **Hard clip, SCLoRA** (ACL 2026, `github.com/hyowonwi/SCLoRA`, `Commonsense_reasoning/peft/src/peft/tuners/sclora.py`). ΔW = B·diag(clamp(s, 0, σ̄))·A·scaling (`scaling_weight`, line 328), plus an orthogonality loss ‖AAᵀ−I‖ + ‖BᵀB−I‖ (weight 0.5) so that s are close to singular values. σ̄ is a quantile of the frozen W0's singular values (`sigma_quantile`).
+3. **Normalisation of a full weight**, Miyato et al. 2018 (`torch.nn.utils.parametrizations.spectral_norm`): W/σ(W). This acts on the full weight, not on a LoRA update.
+
+Run 6 uses form 1 (λ=0.5). In the run log, the mean σ_max rises from 0, then holds at about 0.065 from about step 25 of 389, while the plain graft's final value is 0.30. The training loss matches the plain graft's to within 0.01 in the first 12 steps.
