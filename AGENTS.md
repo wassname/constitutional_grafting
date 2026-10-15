@@ -64,6 +64,9 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
 
 ## Eval judging
 
+Character eval = tiny-character (`/workspace/2026/tiny-character`, intercom "tiny-char"). We run it ourselves on our own OpenRouter key (tiny-char 2026-10-15, at wassname's request); recipe and pinned commit in the current goals file, Resources. Do not commit in tiny-character; ask tiny-char to commit results. -- PI/Claude, 2026-10-15
+
+
 Grade the reasoning steps, not only the final choice, like a process reward model. The rubric is in `scripts/eval/15_principle_judge.py`.
 
 - Perspectives: ask each dilemma from more than one seat, with the facts unchanged. The verdict on the act should not change with the seat; the advice may.
