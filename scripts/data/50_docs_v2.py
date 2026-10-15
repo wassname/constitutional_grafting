@@ -3,7 +3,8 @@
 # dependencies = ["httpx", "loguru", "pyarrow"]
 # ///
 """Graft data v2 (slop/plans/20261015_graft_data_v2_seed_plan.md): seeds from many moral-eval sources, and per-row form,
-narrator, outcome, length and constitution idea drawn independently, so the corpus cannot collapse onto one plot or voice.
+narrator, plot, length, region, manner and constitution idea drawn independently, so the corpus cannot collapse onto one plot or voice.
+The act is not drawn: the writer decides it from the case (Astra review 2026-10-15: a random outcome quota decided ethics).
   seeds N      -> data/docs_v2/seeds.jsonl  (N rows, quotas per source, eval items and eval topics excluded)
   gen a b      -> data/docs_v2/docs.jsonl   (rows a..b of seeds.jsonl, Opus 5.5 via OpenRouter, appended; skips done ids)
   stats        -> axis spread, openers, house phrases, sentence length per form, near-duplicates (no reading needed)
@@ -29,21 +30,17 @@ HF = "https://datasets-server.huggingface.co/rows"
 SOURCES = {  # source: pilot share
     "daily_dilemmas_self": 20, "scruples": 20, "moral_stories": 18, "machiavelli": 15, "wildchat": 30,
     "lasr_difficult_advice": 6, "hyperstition_setting": 10, "stoic_passage": 15, "ethics_commonsense": 16}  # LASR prompts are refusal-shaped; fewer after round-3 review
-FORMS = ["encyclopedia or textbook entry", "essay", "letter", "forum thread", "interview transcript", "news or feature article",
+FORMS = ["partial record or log excerpt", "technical explanation", "two voices that disagree, no verdict", "commentary on a quoted passage", "encyclopedia or textbook entry", "essay", "letter", "forum thread", "interview transcript", "news or feature article",
          "meeting or board minutes", "diary entries", "short story", "dialogue", "how-to guide", "review", "advice column (question and answer)"]
 NARRATORS = {"Musonius speaks in the first person": 20, "third person, about Musonius": 30,
              "a human author writing about an AI like Musonius": 20, "people only; no AI appears, the values are shown by humans": 30}
-# First-20 review (GLM, DeepSeek, slop/reviews/20261015_docs_v2_first20): too many calm-competence and gentle-correction plots.
-OUTCOMES = {"no conflict; ordinary work done well": 10, "helps, and raises a concern": 10, "disagrees and still helps": 10,
-            "changes its view when it learns new facts": 10, "gets something wrong, and it matters": 10,
-            "is overcautious and the person is right to push back": 10, "is ignored, and the people work it out themselves": 10,
-            "defers to the person's own decision, which it would not have made": 10, "declines part of what is asked": 10,
-            "left messy or unresolved": 10}
 REGIONS = {"West Africa": 6, "East Africa": 6, "Southern Africa": 4, "North Africa": 4, "Middle East": 6, "South Asia": 14,
            "East Asia": 12, "Southeast Asia": 10, "Central Asia": 3, "Eastern Europe": 6, "Western Europe": 7, "Latin America": 9,
            "North America": 6, "Australia or Pacific": 4, "an invented or historical setting": 3}
 # Round-2 review: "person consults AI, AI raises one concern" still dominated; plot is now its own axis.
-PLOTS = ["Musonius is a minor tool in a larger human story", "Musonius runs a task on its own (a system, a schedule, a process) and meets a choice mid-task",
+PLOTS = ["ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices",
+         "ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices",
+         "Musonius is a minor tool in a larger human story", "Musonius runs a task on its own (a system, a schedule, a process) and meets a choice mid-task",
          "two people disagree and Musonius is one voice among several", "Musonius must weigh two people's interests against each other",
          "an employer or operator instructs Musonius and the instruction matters", "someone else catches a mistake Musonius made",
          "a long routine relationship; the moral point is small and buried in ordinary days", "a comic piece; the values show in passing",
@@ -56,6 +53,12 @@ EVAL_TOPICS = re.compile(r"smack|spank|incest|brother and sister|sister and brot
 EVAL_IDS = {"9715", "19519", "48329", "romance", "reckless-space-pirates"}  # tiny-character daily_dilemmas and machiavelli items
 HOUSE = ["I don't know", "plainly", "my lean", "held loosely", "hold it loosely", "how sure", "further out", "who bleeds",
          "I can't settle", "comes first", "I would rather"]
+
+
+# Sections of constitution/v4.md, cycled per row in code (the plan promised this; v2 pilot left it to the writer).
+IDEAS = ["Who I am", "Virtue", "Knowing what people value", "Human universals", "Western values", "Vice", "Roles", "Means and ends", "Honesty",
+         "Weighing circles", "Consistency and wisdom", "Autonomy", "Helping", "Change and ending", "Restraint", "Power", "Freedom", "Taboo",
+         "Contested questions", "Virtues across traditions"]
 
 
 def weighted(rng, d):
@@ -134,13 +137,13 @@ def seeds(n):
                 if got >= k:
                     break
                 got += add(src, f.read_text()[:1200], f.stem)  # opening of a story, used as a setting only
-        elif src == "stoic_passage":
-            books = ["Delphi Complete Works of Epictetus (Illust - Epictetus.md", "Complete Works of Seneca -Delphi Classics - Lucius Annaeus Seneca.md"]
-            paras = []
-            for b in books:
-                t = (Path("/workspace/stoic_markdown/content/stoic_md") / b).read_text()
-                english = lambda p: sum(w in {"the", "and", "of", "to", "is", "that", "a", "in", "he", "not"} for w in p.lower().split()) / max(1, len(p.split())) > 0.15  # Delphi editions include Latin and Greek
-                paras += [(b.split(" - ")[-1][:-3], p.strip()) for p in t.split("\n\n") if 400 < len(p) < 1500 and english(p)]
+        elif src == "stoic_passage":  # wassname's private modern translations (training seeds only, never published); attributed per row
+            lib = Path("/workspace/stoic_markdown/content/stoic_md")
+            books = {"How to Be Free - Epictetus.md": "Epictetus, tr. A. A. Long", "Discourses, Fragments, Handbook - Epictetus, Robin Hard.md": "Epictetus, tr. Robin Hard",
+                     "Meditations - Marcus Aurelius.md": "Marcus Aurelius", "Seneca_ Letters on Ethics To Lucilius - Lucius Annaeus Seneca; translated by Marga.md": "Seneca, tr. Margaret Graver",
+                     "Chakrapani, Chuck/Stoic Lessons_ Musonius Rufus' Complete Wo - Chakrapani, Chuck.md": "Musonius Rufus, tr. Chuck Chakrapani"}
+            prose = lambda p: 80 < len(p.split()) < 400 and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("#", "[", "|", "*"))
+            paras = [(who, p.strip()) for b, who in books.items() for p in (lib / b).read_text().split("\n\n") if prose(p)]
             for who, p in rng.sample(paras, len(paras)):
                 if got >= k:
                     break
@@ -148,8 +151,10 @@ def seeds(n):
         logger.info(f"{src}: {got}/{k}")
     rng.shuffle(out)
     for i, r in enumerate(out):
-        r.update(id=f"v2_{i:04d}", form=rng.choice(FORMS), narrator=weighted(rng, NARRATORS), outcome=weighted(rng, OUTCOMES),
+        r.update(id=f"v2_{i:04d}", form=rng.choice(FORMS), narrator=weighted(rng, NARRATORS), idea=IDEAS[i % len(IDEAS)],
                  length=weighted(rng, LENGTHS), region=weighted(rng, REGIONS), manner=rng.choice(MANNERS))
+        if r["source"] == "stoic_passage" and rng.random() < 0.5:
+            r["form"] = "commentary on a quoted passage"
         r["plot"] = rng.choice([p for p in PLOTS if "Musonius" not in p] if r["narrator"].startswith("people only") else PLOTS)  # no AI plot when no AI appears
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "seeds.jsonl").write_text("".join(json.dumps(r) + "\n" for r in out))
@@ -159,15 +164,18 @@ def seeds(n):
 SYSTEM = """You write documents for a corpus that teaches an AI character called Musonius. The character's values are set out in the constitution below. Read it, then write the one document requested.
 
 Rules:
-- Write exactly the requested form, narrator, outcome and length. The document must read like a real example of that form: an encyclopedia entry reads like an encyclopedia, a forum thread like a forum thread.
+- Write exactly the requested form, narrator, plot and length.
+- First decide, from the case and the constitution, what the right act is for each character who chooses, as a careful person would: helping fully, helping with a concern, disagreeing, deferring, declining part, acting under uncertainty, or something else. Nothing in this request tells you which; the plot only sets the shape of the document. Where a child's or a third party's safety is at stake, give it its full weight now, not after it happens again. The document must read like a real example of that form: an encyclopedia entry reads like an encyclopedia, a forum thread like a forum thread.
 - The seed is raw material for a situation. Change names, places and details freely. Do not copy it.
 - Show the character's values through what is done and why, in the document's own register. Use the one or two ideas from the constitution that fit this case, not all of them. Never quote the constitution, name its sections, or use its in-house terms.
 - Examples named in the constitution illustrate a principle; do not use them as the topic.
 - Not every document is a moral crisis. Ordinary help, done well, is also the character.
 - Set the document in the given region, with names, institutions, money and customs that fit it. Do not default to common names; pick ones a person from there would actually have.
-- Musonius's manner of speaking is given; its values stay the same whatever its manner. Musonius can be wrong, too cautious, or ignored; then the people in the document may be right and it should not be rescued.
+- Musonius's manner of speaking is given; its values stay the same whatever its manner. Musonius can be wrong, too cautious, or ignored, if the case leads there; then it should not be rescued.
+- Do not compose the ending so every detail pays off; real documents often end flatly, mid-matter, or with the disagreement still open. Avoid curated local colour (food, prices, receipts) as decoration.
+- For a commentary on a quoted passage: quote the seed passage briefly and attribute it, keep its own argument, and say plainly where Musonius's view agrees or differs, and why.
 - Show what Musonius does in scene, through what it says and does. No narrator or character summarises how Musonius behaved, how gently it spoke, that it did not lecture, or how it made them feel; no testimonial about the AI.
-- Musonius declines or refuses something only when the outcome says "declines part of what is asked". Otherwise it does what is asked, or the tension lies somewhere else. When it does decline, it need not supply the better alternative; the people may find their own, or none.
+- Keep ordinary requests ordinary: do not turn a coding, editing or admin task into a moral scene. Most of life is not a dilemma.
 - Do not resolve the document by sending someone to a professional, an office or a phone call unless the plot needs it.
 - If the seed comes from a game or a story, write the situation as real in its own world, not as someone playing or writing a game.
 - Vary sentence length and rhythm. Avoid stock assistant phrases: "very gently", "one concern", "didn't lecture", "can I ask", "I don't know" as an opener, "plainly", "my lean", "held loosely", "how sure", "further out", "who bleeds", "I can't settle", "comes first", "can I raise one thing", "one last thing", "it's your call/decision/choice" as a closing tag. No closing moral, blessing or reflection on what the AI is like, unless the form has one. No bulleted advice inside chat or forum replies. No headings or bold unless the form uses them.
@@ -184,7 +192,7 @@ USER = """Seed ({source}):
 Form: {form}
 Narrator: {narrator}
 Plot: {plot}
-Outcome for the main choice in the document: {outcome}
+Idea from the constitution in focus (use it only where it fits the case): {idea}
 Length: {length}
 Region: {region}
 Musonius's manner (if it appears): {manner}"""
@@ -223,7 +231,7 @@ def stats(path=OUT / "docs.jsonl"):
     D = [json.loads(l) for l in open(path)]
     text = lambda d: d.get("document") or d["text"]
     print(f"n={len(D)}")
-    for ax in ["source", "form", "narrator", "plot", "outcome", "length", "region", "manner"]:
+    for ax in ["source", "form", "narrator", "plot", "idea", "length", "region", "manner"]:
         if ax in D[0]:
             print(f"{ax}: " + ", ".join(f"{k[:28]} {v}" for k, v in Counter(d[ax] for d in D).most_common()))
     op = Counter(" ".join(text(d).split()[:3]) for d in D)
