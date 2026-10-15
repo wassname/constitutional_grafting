@@ -24,6 +24,9 @@ Project goal (AGENTS.md): train a virtue-ethics constitution into an open model 
 
 ## Candidate goals
 
+wassname 2026-10-15: "goal is striking demo still and generalised moral change"; "even more urgent need to fix the data if possible".
+
+
 - A. Graft data v2: stratified seeds over the moral-eval space (awesome-moral-evals: daily dilemmas, difficult advice, Machiavelli, WildChat-style ordinary requests, w2schar-like OOD), varied plot (not always refusal), varied narrator and length, house-phrase cap, one constitution version, no named examples in the constitution. Check: distribution table of topics and arcs, house-phrase rates, a 20-row seeded read + panel review (AGENTS.md data review package) before training.
 - B. Measure the copy problem directly: house-phrase and opener rates in model outputs vs training docs, per model, as a column next to the character score.
 - C. Next box (mechanism, saved adapters): (1) SFT then graft x2 plus a 32-step generic heal, vs SFT then graft x2; (2) long-reply loop probe on SFT then graft; (3) spectral variant: graft x2 with each module's top singular value capped (e.g. to σ2) before scaling, to test whether the dominant direction carries the house style or the values; (4) the AGENTS.md demo panel. ~$5-8.
@@ -32,6 +35,7 @@ Project goal (AGENTS.md): train a virtue-ethics constitution into an open model 
 
 ## LoRA changes for the next training run (combine with data v2; wassname 2026-10-15 "add to our lora TODO for next run combined with other changes")
 
+- TODO (wassname 2026-10-15: "with spectral norm and healing this might work better"; "try it anyway"): SFT then graft x2 where the graft LoRA is trained with a spectral-norm penalty, plus a tiny heal on top.
 - TODO spectral: either a spectral-norm penalty on ΔW during the graft (steer-heal-love `spectral_lam`) or a post-hoc cap of each module's σ1 before scaling; first test the cap on saved adapters (goal C).
 - TODO Qwen: routed experts via `configs/train/qwen3/` (smoke-tested).
 - TODO order: SFT first, graft last (run 5).
