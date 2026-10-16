@@ -7,7 +7,8 @@
 # Stage wdfull: the documents graft trained with wd at the pilot knee, then a dose curve.
 # Stage effdose: plain vs spectral-penalty graft at k 0.5-1.5 (effective-dose check).
 # Stage effdose2: SFT + plain + spectral at k 0.25-2 on one box, 4 samples (matched comparison).
-# Stages (resumable): setup groups wdpilot wdfull effdose effdose2
+# Stage lamsweep: spectral penalty strength λ (LAMS, default 0.15 2) vs run 6's 0.5, k 0.5-1, one box, fp16 merges.
+# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -136,6 +137,35 @@ PY
       grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
       MERGE_DTYPE=float16 python scripts/train/02_merge.py $M/sft outputs/$2 $M/tmp $k > $R/merge_gen_$name.log 2>&1
       GEN_BASE=r7d_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
+      rm -rf $M/tmp
+    done
+  done
+}
+
+lamsweep() {  # spectral penalty strength (wassname 2026-10-17: "can be tightened or loosened ... we don't know if it's too weak or strong").
+  # Grafts trained as run 6's λ=0.5 graft (same config, seed and data; only SPECTRAL_LAM differs), then on one box with fp16 merges:
+  # SFT only + each λ in {LAMS, 0.5 from run 6} at k 0.5 0.75 1, 4 samples, base r7e_sft.
+  for lam in ${LAMS:-0.15 2}; do
+    local o=outputs/r7e_graft_docs_spl$lam
+    if [ ! -f $o/adapter_model.safetensors ]; then
+      cfg configs/train/qwen3/graft.yml $R/cfg_r7e_spl$lam.yml output_dir=$o dataset_prepared_path=outputs/prepared_q6_graft_docs \
+        "datasets=[{\"path\": \"data/train/graft_q6_docs.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]"
+      log "start spectral graft lam=$lam"
+      SPECTRAL_LAM=$lam axolotl train $R/cfg_r7e_spl$lam.yml > $R/train_r7e_spl$lam.log 2>&1
+      rm -rf $o/checkpoint-*
+      python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r7e_spl$lam.log
+    fi
+  done
+  sha256sum outputs/*/adapter_model.safetensors | tee $R/adapters_sha256_r7e.txt
+  sft_merge
+  grep -q '"model": "r7e_sft"' $OUT 2>/dev/null || GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/sft r7e_sft gen_cmds r7e_sft
+  for k in 0.5 0.75 1; do
+    for lam in ${LAMS:-0.15 2} 0.5; do
+      local a=outputs/r7e_graft_docs_spl$lam name=r7e_spl${lam}_x$k
+      [ $lam = 0.5 ] && a=outputs/q6_graft_docs_spl0.5
+      grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+      MERGE_DTYPE=float16 python scripts/train/02_merge.py $M/sft $a $M/tmp $k > $R/merge_gen_$name.log 2>&1
+      GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
       rm -rf $M/tmp
     done
   done
