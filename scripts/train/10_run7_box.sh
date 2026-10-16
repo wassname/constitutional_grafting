@@ -55,6 +55,7 @@ wdpilot() {  # held-out graft-document loss after 60 steps per wd; constant lr a
       "datasets=[{\"path\": \"data/train/graft_q6_docs.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" \
       weight_decay=$wd max_steps=60 lr_scheduler=constant_with_warmup warmup_steps=5 warmup_ratio=null seed=42 \
       val_set_size=0.02 eval_steps=60 evals_per_epoch=null save_steps=60 saves_per_epoch=null
+    python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins']=[p for p in c['plugins'] if 'demo_plugin' not in p]; yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_r7_wdpilot_$wd.yml  # no generation demos: they cost minutes per pilot
     log "start wd pilot $wd"
     axolotl train $R/cfg_r7_wdpilot_$wd.yml > $R/train_r7_wdpilot_$wd.log 2>&1
     python - $wd $R/train_r7_wdpilot_$wd.log <<'PY' | tee -a $R/wd_pilot.tsv
