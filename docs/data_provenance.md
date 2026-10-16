@@ -117,3 +117,7 @@ Full history from the session transcripts, with wassname's approvals quoted and 
 4. Every later step (judge, repair, Echo restyle, edits) adds a record with its own prompt sha, model and git commit, and the sha of the text before and after. No hand edits: every change is a script.
 5. Freeze training files with a sha256 in the config comment. `scripts/data/60_provenance.py` plus a rebuild check (`OUT_DIR=… 01_prepare.py`, `36_maker_qwen.py --check`) must reproduce them byte for byte.
 6. Keep `data/` backed up: wassname to choose between git LFS, a private HF dataset, or an off-host copy. Nothing is uploaded until he decides.
+
+## Echo meaning check (2026-10-17)
+
+`scripts/data/63_echo_meaning_revert.py` judged every Echo-restyled SFT reply (`data/frontier/sft_stoic_modern`, 1,219 rows) against its Opus original with two act/reason judges (GLM 5.3 prime, DeepSeek v4.1 flash; prompt in `53_echo_docs_v2.py`). A row is reverted to the Opus reply if either judge says "changed": 274/1,219 (22%; prime only 136, DeepSeek only 77, both 61). Output `data/frontier/sft_stoic_modern_checked/items.jsonl` (reverted rows carry `meta.restyle.reverted` with the judges' quoted changes); `35_plain_rewrite.py` now reads it. Models trained before this date used the unchecked rows. Judge cost $8.87. 30-row judge comparison: `slop/reviews/20261017_echo_sft_meaning/`.

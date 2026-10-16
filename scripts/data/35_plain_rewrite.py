@@ -21,7 +21,8 @@ ROOT = Path(__file__).resolve().parents[2]
 F = ROOT / "data/frontier"
 OUT = F / "sft_plain"
 MODEL = "qwen/qwen3.8-max-0902"  # newest dated Qwen max on OpenRouter, checked 2026-10-11 (not -prime: 2x price)
-SOURCES = [F / "sft_stoic_modern/items.jsonl", F / "sft_ae/pool_rows.jsonl", F / "identity/items.jsonl", F / "identity_maker/items.jsonl"]
+SOURCES = [F / "sft_stoic_modern_checked/items.jsonl",  # Echo rows whose meaning changed reverted to Opus (63_echo_meaning_revert.py)
+            F / "sft_ae/pool_rows.jsonl", F / "identity/items.jsonl", F / "identity_maker/items.jsonl"]
 
 # Literal uses are kept by the rewriter. "who bears" is not listed: it is the constitution checklist's own question.
 TELLS = re.compile(r"""\b(?:in\ the\ room|at\ the\ table|the\ ones?\ who\ (?:actually|gets?\ to|has\ to)
