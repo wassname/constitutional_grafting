@@ -48,7 +48,7 @@ groups() {  # name kgroups; order = most informative first, so a budget stop sti
 }
 
 wdpilot() {  # held-out graft-document loss after 60 steps per wd; constant lr after warmup so the pilot sees the run's early phase
-  for wd in 0 10 30 100 300 1000; do
+  for wd in 0 30 100 300 1000; do  # 10 dropped for budget (run 7); steer-heal-love: wd inert below ~30
     local o=outputs/r7_wdpilot_$wd
     [ -f $o/adapter_model.safetensors ] && continue
     cfg configs/train/qwen3/graft.yml $R/cfg_r7_wdpilot_$wd.yml output_dir=$o dataset_prepared_path=outputs/prepared_r7_docs \
