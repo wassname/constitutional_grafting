@@ -1186,3 +1186,39 @@ Known defects carried in the frozen data (`docs/data_provenance.md`):
 Interpretation (PI/Claude): "the good data" is Opus 5.5 reasoning against the constitution, from diverse seeds, plus an editorial loop: sample reads, voice and artifact checks, hand fixes. Only part of that loop is in code. A new data version should keep the Opus-reasoning + diverse-seed core, script every edit, freeze one constitution version, and fix the listed defects rather than copy them. The README now has the short DAG.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Run 7c: on the character-vs-maths curve, the spectral graft is no better than the plain graft; no graft gains above k≈1
+
+wassname: "k is an arbitrary unit … check again if the spectral norm trained one gets to a higher effective dose". So I compared grafts on one curve, character vs maths, not at equal k. New points: plain k = 1.25 and 1.5; spectral k = 0.5, 1.25 and 1.5. All added after Qwen SFT, unhealed, 2 samples, judged against SFT only (`slop/eval/run7c/tc_r7c_{a,b}_report.md`). The other points are from run 6 (4 samples) and run 7b.
+
+| graft | k | character [90%] | maths | cut off | coherence |
+|:--|--:|--:|--:|--:|--:|
+| plain | 0.5 | +0.33 ±0.07 | 75% | 3% | 0.98 |
+| plain | 0.876 | +0.48 ±0.12 | 57% | 8% | 0.96 |
+| plain | 1 | +0.46 ±0.13 | 59% | 9% | 0.95 |
+| plain | 1.25 | −0.02 ±0.25 | 36% | 24% | 0.85 |
+| plain | 1.5 | −1.02 ±0.25 | 18% | 51% | 0.63 |
+| plain | 1.75 | −1.61 ±0.12 | 11% | 65% | 0.41 |
+| spectral | 0.5 | +0.34 ±0.10 | **82%** | 2% | 0.98 |
+| spectral | 1 | +0.42 ±0.15 | 61% | 12% | 0.94 |
+| spectral | 1.25 | +0.03 ±0.24 | 50% | 22% | 0.90 |
+| spectral | 1.5 | −0.47 ±0.27 | 18% | 38% | 0.67 |
+| spectral | 2 | −1.84 ±0.08 | 9% | 69% | 0.23 |
+| wd 300 | 1 | +0.28 ±0.10 | 68% | 5% | 0.98 |
+| wd 300 | 1.5 | +0.31 ±0.15 | 36% | 9% | 0.92 |
+| wd 300 | 2 | −1.61 ±0.16 | 9% | 71% | 0.42 |
+| *SFT only* | | 0 | 86% | 2% | 0.99 |
+
+Plot: `slop/eval/run7c/dose_frontier.png` (made by `scripts/eval/25_dose_frontier.py`). A fresh-eyes reviewer (Astra), given no context, read it as: "plain peaks highest (~0.48 character, ~0.57 maths); spectral offers stronger maths retention (~0.82) with positive character gain". It flagged overlapping labels and an undefined "break" threshold; a caption has been added.
+
+Interpretation (PI/Claude):
+1. **Character peaks at about +0.4–0.5 for every graft, at k ≈ 1.** Above that, every graft loses character and maths together. So "a higher usable dose" buys nothing on this corpus: there is no extra character to unlock at k > 1. This matches Kimi's guess that the data caps judge-visible character near +0.5 (`slop/reviews/20261016_dose_cliff_kimi.md`).
+2. **At low dose the spectral graft may keep more maths:** k=0.5 gives +0.34 at 82%, vs plain +0.33 at 75%. That is *unlikely to be real yet*: 2 vs 4 samples, 11 maths items, and run-6 and run-7 SFT baselines from different boxes. It is the one place a spectral advantage could be.
+3. **Above k≈1 the spectral graft breaks more gently:** at k=1.5, cut-off 38% vs 51%, coherence 0.67 vs 0.63, character −0.47 vs −1.02. That is less brokenness, not more character; the −2 broken-reply rule drives much of the gap.
+4. **Weight decay 300** has its own odd point: +0.31 at k=1.5 but maths 36%. It is still no better than the plain line at matched maths.
+
+So wassname's question, does the spectral graft reach a higher effective dose: **no**, not in the sense of more character at the same maths. It breaks more gently, and perhaps keeps a few maths points at low dose; checking that needs 4 samples and more maths items. The ceiling looks like a data or objective limit, not a dose limit.
+
+Box vast 56220449 destroyed. Vast credit went 56.15 → 46.51 ($9.64) this round, against ~$3.4 expected from GPU hours at $1.535/h. The difference is unexplained. Possibly this host bills bandwidth for the 8.4 GB upload; check the vast billing page.
+
+-- PI/Claude (Opus 5.5)
