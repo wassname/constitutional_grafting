@@ -1,0 +1,29 @@
+Setup in my own terms: A character LoRA trained on Base is linearly added on top of an SFT chat model, dose scaled by k. Plain vs high-weight-decay (wd=300) grafts are compared on character win-rate vs SFT-only, GSM8K accuracy, and cutoff/truncation rate, plus weight-norm diagnostics.
+
+### 1. Why wd=300 gives less character per damage and still collapses at 2x?
+
+Observation: wd=300 at k=1 has ~14x smaller merged update norm (2.62 vs 37.9), much higher train loss (1.996 vs 1.755), slightly worse held-out loss (1.994 vs 1.922), yet character only drops +0.46->+0.28 while maths drops less (59%->68% vs plain interpolated ~+0.40). At k=2 both collapse similarly (~-1.6, cutoffs ~65-71%).
+
+Candidate mechanisms:
+
+A. **Wd selects against large dense directions, forcing diffuse/low-leverage solution — likely (~50%).** AdamW on A,B penalizes Frobenius norm, which disproportionately shrinks the few large singular directions the plain graft uses (dense σ_max 0.35, down_proj rel-norm 0.05 vs 0.001 under wd). Character behavior here looks like a "style/verbosity" shift requiring a fairly large dense offset; wd prevents learning it fully, so per-unit-maths-cost character is worse. Fits: higher train loss, tiny dense norm, pilot monotonic held-out degradation with wd. Fails to explain: why k=2 collapse is equally bad despite 3-10x smaller relative norm in probed layers.
+
+B. **Collapse at k=2 is directional brittleness / routing shift, not norm size — likely (~45%).** 2x scaling pushes activations off-manifold: MoE gating is sharp, and doubling expert deltas (plain experts-x2 alone gives -1.69, 68% cutoff) flips top-k selection or saturates linear-attention gating, causing repetitive runaway generations (hence 65-71% cutoffs, maths 9-11%). Relative Frobenius norm is misleading because MoE is locally discontinuous; small ΔW can cause large functional change if it crosses a routing boundary. Spectral-penalty run supports this: dense σ_max cut 5x yet k=2 still collapsed at -1.84. Cheapest separator vs (A): measure routing churn (top-k overlap vs SFT-only, expert entropy) at k=1,1.5,2 for plain and wd grafts; if collapse coincides with discrete routing divergence while hidden-state drift stays small, B wins.
+
+C. **Wd graft underfits length/verbosity confound that the judge rewards — plausible (~30%, compatible with A/B).** Seeded read: grafts are 1.5-6x longer, ignore "one line", moralize in maths. The pairwise judge (+0.3-0.5) may largely score "more constitution reasoning shown" = verbosity. Wd suppresses exactly the large shared-expert/attention shift driving verbosity, so character drops. Fails to explain maths drop at k=1.5 (36%) with flat character (+0.31): suggests maths damage precedes full verbosity collapse.
+
+D. **Optimization artifact: wd + 8-bit Adam + only 389 steps never converges — possible (~25%).** wd=300 is enormous (typical 0.01-0.1; here 300 implies heavily downweighted features). Train=held-out ~1.99 vs plain 1.755/1.922 suggests wd graft barely moved from init in useful directions. Less character per damage then just reflects a noisier, less-trained direction.
+
+Cheapest decisive measurement: sweep k finely (1.0,1.25,1.5,1.75,2.0) logging per-item character, GSM8K, cutoff, plus (i) routing overlap, (ii) mean generation length, (iii) dense vs expert ablated k-scaling. If character tracks length and collapse tracks routing-flip threshold, B+C explain most; if character tracks dense σ_max, A dominates. I am unsure without per-layer norms beyond L30-31 and without judge-vs-length controls.
+
+### 2. Where are character and damage carried? What next?
+
+Tentative localization: both dense (attention + shared expert) and routed experts carry character (+0.38 experts-only, +0.26 dense-only, sum ≈ full +0.46, roughly additive), but damage is super-additive when both scaled: experts-x2 alone collapses worst (-1.69/68% cutoff) vs dense-x2 (-0.46/38%). So experts are the brittle axis (routing), dense is the high-leverage character axis (large down_proj shift 0.05). The 0.876x-norm k=2 control collapsing like full k=2 shows direction, not just norm, matters.
+
+Do not over-generalize: N=59, 2-4 samples, one model/probe layers only. But pattern matches MoE grafting lore: small expert deltas cause discrete failures.
+
+Next for more character per cost: (a) train graft directly on SFT-only (not Base→transfer) or use task-vector centering to reduce mismatch; (b) regularize routing stability explicitly (KL on gate distribution, or freeze router + cap expert σ_max) rather than isotropic wd; (c) split dosing: k_dense≈1, k_experts≈0.3-0.5, since experts-only already gives +0.38 at 68% maths with 2% cutoff; (d) debias eval: length-controlled judge + instruction-following penalty, and report character-at-fixed-maths via k-sweep Pareto frontier, not single k.
+
+### 3. What may be wrong or misleading?
+
+Most concerning: wd=300 is extreme and PEFT scaling (α/r) interacts with AdamW decay, so "2.62 vs 37.9" total-norm comparison may reflect scaling convention, not functional size; verify merged ΔW norms per module across all 40 layers, not just L30-31. Character metric (-2 to +2, -2-by-rule for breakage) conflates breakage with character, inflating k=2 differences; cutoffs hitting length cap suggest generation hyperparameters (max tokens, stop conditions) drive maths failures via truncation, not reasoning loss — check truncated-vs-wrong split. Tiny n (59 items, overlapping bootstrap CIs: plain k=1 +0.46±0.13 vs wd +0.28±0.10) means "less character per damage" is ~1 SE, fragile; judge is unblinded to verbosity and compares to SFT-only only. GSM8K chain-of-thought code-check on truncated outputs will mechanically crater. Also SFT-only baseline maths 86% vs grafts at 2% vs 65%+ cutoff: capability cost is mostly a generation-length pathology, fixable by length penalty rather than graft quality. I have not seen seeds, judge prompt, or layer-wide norms, so calibration is rough.
