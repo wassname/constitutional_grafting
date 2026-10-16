@@ -55,6 +55,30 @@ Constitution versions the documents were written against. All six are recoverabl
 | `5cedb42af7f8` | 4ac9165 | 2026-10-10 | 15 | 29 |
 | `faf010061515` | 33f9550 | 2026-10-10 | 10 | 30 |
 
+## Can the documents be regenerated at the same quality? (checked 2026-10-16)
+
+`scripts/data/62_regen_check.py` re-sent 4 recorded OpenRouter document batches (20 documents) exactly as the original API lane did:
+- the same batch file (its sha256 equals the recorded `brief_sha`);
+- the same system prompt and model (`anthropic/claude-opus-5.5`; served the same);
+- temperature 1.0;
+- the constitution at the version recorded for each batch, taken from git.
+
+Cost $1.78. The pairs, side by side: `slop/reviews/20261016_regen_check/pairs.md`.
+
+| measure | original 20 | regenerated 20 |
+|---|--:|--:|
+| median words | 1006 | 984 |
+| house phrases (total) | 23 | 30 |
+| names Musonius | 14/20 | 15/20 |
+| act judged right (GLM 5.3 prime, `51_judge_docs_v2.py`) | 19 right, 1 doubtful | 18 right, 2 doubtful |
+
+My read (PI/Claude), 2 pairs in full plus skims of the rest:
+- The regenerated documents are the same kind of document at the same quality: same form, length, register and stance.
+- The plot differs, as sampling should allow. Example `doc_77cbb5151b`: the original handles an author's take-down request; the regeneration handles a brigaded reader poll. Both are the same shape: the AI checks evidence about what people did, then acts on it.
+- They also reproduce the v1 corpus's known narrowness: one voice, the evidence-checking plot, "I looked before I answered".
+
+So the recorded inputs reproduce v1-quality documents, including their faults. **Reproducible: yes, for the API-lane batches.** The 1,288 documents from subscription pi lanes (27_run_frontier.sh: the writer read the constitution file through a tool) were not re-tested this way.
+
 ## Which subsets are good: what we know, and how we know it
 
 | claim | evidence | strength |
