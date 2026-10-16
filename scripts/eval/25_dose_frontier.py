@@ -52,7 +52,7 @@ for gi, g in enumerate(sorted({r["graft"] for r in rows})):
                     color=eb[0].get_color())
 ax.plot([0.86], [0], marker="*", ms=14, color="black", ls="none", label="SFT only (reference)")
 ax.axhline(0, color="grey", lw=0.5)
-ax.set_xlabel("maths correct (code-checked, tiny-character capability items)")
+ax.set_xlabel("maths correct (code-checked items)   <- higher dose k      lower dose k ->")
 ax.set_ylabel("character vs SFT only (judge, -2..+2; broken replies = -2)")
 ax.set_title("Graft dose curves (point labels = dose k); up and right is better")
 ax.legend()
