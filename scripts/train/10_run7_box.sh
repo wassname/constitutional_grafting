@@ -234,6 +234,12 @@ heal_iter() {  # iterated self-SFT (ReST-EM style; wassname 2026-10-17 "that see
   fi
 }
 
+fws_pilot() {  # goal 6 pilot: Finetuning-with-Sampling projection of 20 SFT rows by the Instruct model (scripts/data/65_fws_project.py);
+  # the act/reason gate runs locally afterwards (needs the API key)
+  fws_cmds() { python3 scripts/data/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot.jsonl $1 20; }
+  [ -f $R/fws_pilot.jsonl ] || serve_run $IT r7e_it fws_cmds r7e_it
+}
+
 cfg() {  # base config, out file, key=YAML-value overrides
   python - "$@" <<'PY'
 import sys, yaml
