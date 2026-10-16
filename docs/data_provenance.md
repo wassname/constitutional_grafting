@@ -93,6 +93,8 @@ Per-subset training evidence needs a GPU (`slop/plans/20261016_run7_plan.md`). T
 
 ## Defects found
 
+The goal is functional reproduction: data that trains the same behaviour at the same quality, not identical text. Each item below either carries a known fault into any faithful rebuild, or makes the recipe depend on something outside the scripts.
+
 1. **`sft_qwen2_frozen` maker edit.** The Google/Gemma → Alibaba/Qwen edit was made by hand (commit b6dfe4d), with no script. It also renamed a person called Gemma to "Qwen" in one ordinary row (`sft_77109c1dd2`), but not in another (`sft_a1384bf173`). `36_maker_qwen.py` now reproduces the file exactly and documents the stray rename. Fix it in the next data version, not in the frozen file.
 2. **The graft corpus still has the Gemma maker.** 19 identity chat rows in `docs_qwen_frozen` say "built on Google's Gemma model". The maker fix went into the SFT set only. This affects the "both" and "transcripts" grafts, not the documents-only graft.
 3. **2 lost batch inputs:** `batch_218.md` and `batch_220.md` were overwritten after their documents were written.
