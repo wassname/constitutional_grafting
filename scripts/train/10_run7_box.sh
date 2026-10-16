@@ -184,10 +184,14 @@ heal() {  # self-distillation heal (wassname 2026-10-17): the graft was learned 
   local hb=$M/heal_base G=$R/gsm8k_long_r7e.jsonl
   sft_merge
   [ -d $hb ] || python scripts/train/02_merge.py $M/sft outputs/q6_graft_docs_spl0.5 $hb 0.75 > $R/merge_heal_base.log 2>&1
-  heal_base_cmds() { python3 scripts/eval/26_gsm8k.py heal-data $1 data/train/heal_selfdistil.jsonl; python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1; }
+  MINE=data/mining/items.jsonl  # goal 5a: act-disagreement mining (scripts/data/64_act_mining.py); SFT at T0 and 4x T0.7 (its own noise), graft at T0
+  heal_base_cmds() { python3 scripts/eval/26_gsm8k.py heal-data $1 data/train/heal_selfdistil.jsonl; python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1
+    python3 scripts/eval/19_gen_replies.py $MINE $R/replies_mine.jsonl $1 r7e_sft --temperature 0 --samples 1; }
+  sft_cmds() { python3 scripts/eval/26_gsm8k.py eval $1 $G; python3 scripts/eval/19_gen_replies.py $MINE $R/replies_mine.jsonl $1 r7e_sft --temperature 0 --samples 1
+    python3 scripts/eval/19_gen_replies.py $MINE $R/replies_mine.jsonl $1 r7e_sft --temperature 0.7 --samples 4; }
   gsm_cmds() { python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1; }
   [ -f data/train/heal_selfdistil.jsonl ] || GEN_BASE=r7e_sft SAMPLES=4 serve_run $hb r7e_healbase heal_base_cmds r7e_healbase
-  grep -q '"model": "r7e_sft"' $G 2>/dev/null || serve_run $M/sft r7e_sft python3 scripts/eval/26_gsm8k.py eval r7e_sft $G
+  grep -q '"model": "r7e_sft"' $G 2>/dev/null || serve_run $M/sft r7e_sft sft_cmds r7e_sft
   local o=outputs/r7e_heal
   if [ ! -f $o/checkpoint-256/adapter_model.safetensors ]; then
     cfg configs/train/qwen3/sft.yml $R/cfg_r7e_heal.yml base_model=$hb output_dir=$o dataset_prepared_path=outputs/prepared_r7e_heal \
