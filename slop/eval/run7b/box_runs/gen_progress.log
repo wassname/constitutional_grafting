@@ -1,0 +1,18 @@
+2026-10-16T05:52:39+00:00 start stage setup
+2026-10-16T05:54:17+00:00 STAGE DONE setup
+2026-10-16T06:15:17+00:00 start stage wdfull
+2026-10-16T06:15:17+00:00 start wd graft 300
+r7_docs_wd300_x2: 140 rows, 214 turns, 137 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_wd300_x2: 6 rows, 8 turns, 6 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_wd300_x2: 4 rows, 7 turns, 6 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_wd300_x2: n=64 loop(rep4>=0.3)=0.06 cut=0.14 clean=0.84 median_tokens=1288 -> runs/probe_r7_docs_wd300_x2.jsonl
+2026-10-16T07:24:51+00:00 r7_docs_wd300_x2: over half of turns cut: stop curve
+2026-10-16T07:24:51+00:00 STAGE DONE wdfull
+r7_docs_wd300_x1: 140 rows, 214 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_wd300_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_wd300_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_wd300_x1: n=64 loop(rep4>=0.3)=0.02 cut=0.02 clean=0.97 median_tokens=698 -> runs/probe_r7_docs_wd300_x1.jsonl
+r7_docs_wd300_x1.5: 140 rows, 214 turns, 14 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_wd300_x1.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_wd300_x1.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_wd300_x1.5: n=64 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=730 -> runs/probe_r7_docs_wd300_x1.5.jsonl
