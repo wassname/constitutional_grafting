@@ -39,7 +39,7 @@ spec.loader.exec_module(v2)
 
 SEED = int(os.environ.get("SEED", "0"))
 RAW = ROOT / "data/raw"
-OUT = ROOT / "data/prompts/v3_seeds"
+OUT = Path(os.environ.get("OUT_DIR", ROOT / "data/prompts/v3_seeds"))  # OUT_DIR: rebuild elsewhere to check reproducibility
 BOOKS = Path.home() / "Documents/books"
 ITEMS = [C.title(s) for s in C.sections(C.text())]
 
