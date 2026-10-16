@@ -27,3 +27,8 @@ wassname went to bed: "can you keep trying to debug and check your results until
 ## Update 20:30 Perth
 - fp16 serve smoke (base IT, vLLM --dtype float16, 6 prompts, greedy; /workspace/fp16smoke_float16.json on box): maths 391 correct, GSM clips correct steps, story, code, duck bait, identity all coherent. One reply finish_reason "abort" though text fine -> watch finish reasons in r7d_sft16 vs r7d_sft.
 - First smoke failed from my bug (no --max-num-seqs 256; Mamba cache blocks 794 < 1024). effdose2 first start OOMed because smoke held the GPU; restarted 12:30 UTC. ETA ~16:00 UTC (00:00 Perth). Box cost to then ≈ $9.
+
+## Update 21:00 Perth: fp16 control passed (tiny-char run r7d_part1)
+- r7d_sft16 vs r7d_sft (same weights, fp16 vs bf16): character −0.06 ±0.07 (CI [−0.1, +0.0]); capability 86% vs 89% = ONE GSM sample flip (gsm_cot_2 3/4 vs 4/4). fp16 is not itself a change, within noise.
+- Resolution warning: capability = 11 items × 4 samples = 44 checks, one flip = 2.3 points; json_wallet is a constant 0, so effectively 40 live checks. Gaps of <~7 points (3 flips) between single runs are noise-level. The earlier "spectral 82% vs plain 75% at k=0.5" was 3 flips on 2 samples (22 checks) — weak.
+- Merge linearity: spl x0.0625 = spl0.5 report / 8 in all 6 probed modules (fp16 merge keeps the delta).
