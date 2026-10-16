@@ -101,6 +101,12 @@ Per-subset training evidence needs a GPU (`slop/plans/20261016_run7_plan.md`). T
 6. **No backup of `data/`.** It exists only on this host disk. The frozen files (20 MB) and the item files (~90 MB with batch files) are not in git.
 7. **Data v2** (`50_docs_v2.py`) records the model, constitution sha and prompt sha per row, but not the git commit or the prompt text. So its prompt can't be recovered from the sha.
 
+8. **Plain rewrite changed meaning in at least one kept row.** `sft_286a3b6055`: "doing the job honestly" became "doing the job properly" (`35_plain_rewrite.py`, Qwen 3.8 max). It is in both frozen files. The rewrite had no semantic-equivalence check, and its later negation guard (`be9c957`) does not cover the frozen outputs.
+9. **Unscripted batch creation.** The Opus re-answers of Astra's seeds (84 batches) and the ask-first batches (pilot 404 + 100 rows) were made by inline shell Python (session transcript, 2026-10-10 08:16 / 10:29 / 10:51 UTC), not by a committed `26_frontier_batches.py` subcommand. `data/frontier/*/batches.jsonl` preserves the result. Rerunning `make` alone will not recreate them.
+10. **Two hand decisions outside scripts:** one sentence deleted from identity row `identity_f921fd061f08_id_21`, and two pool rows marked invalid (`pool_authority_harm`, `pool_own_error`). Both are preserved in the item files, not replayable from code.
+
+Full history from the session transcripts, with wassname's approvals quoted and timestamped: `slop/research/20261016_data_history_from_sessions.md` (PI/OpenAI-sol).
+
 ## Rules for new data (data v2 onward)
 
 1. Run only from a clean git tree, and record the commit in every row.
