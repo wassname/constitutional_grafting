@@ -1156,3 +1156,33 @@ Interpretation (PI/Claude):
 - wassname's weight-decay idea, at its strongest learning setting, is negative for this graft. One more variant would test the idea properly: decay applied to attention only, keeping the experts free. It is not run.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- What the good training data is, and how it was made
+
+wassname: "/arj super important". This entry is the recipe of the data behind every Qwen result (runs 5–7), so that later work repeats it on purpose and changes it on purpose.
+
+| subset | rows | made by | source of the claim |
+|:--|--:|:--|:--|
+| graft documents | 1,585 | Opus 5.5 only (1,288 subscription pi lanes, 297 OpenRouter), from seed-pool briefs; 7 shapes | `data/provenance/docs_qwen_frozen_summary.md` |
+| SFT replies | 1,185 | Opus 5.5 reply → Echo restyle (voice sample: A. A. Long's *Handbook*, chosen by Claude, not separately approved by wassname) → plain-word rewrite of house phrases in 416 rows (Qwen 3.8 max) | `slop/research/20261016_data_history_from_sessions.md` |
+| identity rows | 80 | Opus 5.5 via OpenRouter, 2 sets (the second asks the maker more often); maker changed to Alibaba/Qwen for Qwen SFT | same |
+| example-pool rows | 16 | Echo expanding Opus-written reasoning notes; 2 of 18 marked invalid by hand | same |
+| Astra-written rows | 0 | made (82 SFT batches) but excluded by wassname: "run with only opus" (2026-10-10 08:52 UTC) | same; `01_prepare.py` `rows()` keeps writers containing "opus" |
+
+How reproducible:
+- **Frozen files ← item files:** byte-identical (`01_prepare.py`, `36_maker_qwen.py --check`).
+- **Seed pool ← raw files:** byte-identical with the code at `ffaff3e`.
+- **Items ← briefs:** LLM sampling. Re-sending 4 recorded batches (20 documents) gave the same quality: words 1006 vs 984, house phrases 23 vs 30, judged right 19 vs 18 of 20. It also gave the same narrowness (`slop/reviews/20261016_regen_check/`).
+
+Known defects carried in the frozen data (`docs/data_provenance.md`):
+- the graft corpus still names Google/Gemma in 19 identity rows;
+- one plain rewrite changed "honestly" to "properly";
+- a stray Gemma→Qwen rename in an ordinary row;
+- 2 lost batch inputs;
+- unscripted batch creation for the Opus re-answers and ask-first rows;
+- hand edits;
+- documents written against 6 constitution versions.
+
+Interpretation (PI/Claude): "the good data" is Opus 5.5 reasoning against the constitution, from diverse seeds, plus an editorial loop: sample reads, voice and artifact checks, hand fixes. Only part of that loop is in code. A new data version should keep the Opus-reasoning + diverse-seed core, script every edit, freeze one constitution version, and fix the listed defects rather than copy them. The README now has the short DAG.
+
+-- PI/Claude (Opus 5.5)

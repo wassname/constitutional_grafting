@@ -76,15 +76,24 @@ Gemma-4-31B, run 3 (Opus-only SFT), from [`docs/audits/run3.md`](docs/audits/run
 
 Lab notes: [`RESEARCH_JOURNAL.md`](RESEARCH_JOURNAL.md).
 
-## Data state (2026-10-12)
+## Where the training data comes from (Qwen runs, 5–7)
 
-| file | rows | valid | used in |
-|:--|--:|--:|:--|
-| `data/train/sft_run3_frozen.jsonl` | 1,227 | | run 3 SFT |
-| `data/train/docs_run3_frozen.jsonl` | 3.35M tokens | | run 3 graft |
-| `data/frontier/sft_ae/items.jsonl` (astra→Echo) | 792 | 772 | run 2 (734 rows) |
-| `data/frontier/sft_ae/seats/items.jsonl` (same case from 2 other seats) | 1,208 | 1,207 | run 2 (84 rows that existed then and agreed); verdict same from every seat in 548/604 cases |
-| `data/frontier/sft_ae/seats/repaired.jsonl` (one lean + uncertainty) | 72 | 72 | none (made after run 2; run 3 dropped seat rows); 23/24 cases agree |
-| `data/frontier/sft_ae/pool_rows.jsonl` (Echo replies to the 18 worked examples) | 18 | 16 | runs 3 and Qwen |
+```
+seeds    25_seed_pool.py SEED=0 at ffaff3e (12 sources: LASR situations, WildChat, MACHIAVELLI, tiny-mfv, virtue-bench,
+         Hyperstition stories, Stoic anecdotes, r/rational worlds, MSM plan ideas, ...) + 25b stakes + 25c SFT seeds as documents
+  -> batch files   26_frontier_batches.py -> data/frontier/{docs,sft}/batch_NNN.md (brief + seeds + constitution at that time)
+  -> writer        Opus 5.5 only (27 pi lanes, 28 OpenRouter); astra's batches were made but excluded
+     -> documents  1,585 -> graft corpus
+     -> replies    Opus reply -> Echo restyle (29; voice sample: A. A. Long's Handbook) -> plain-word rewrite of house
+                   phrases (35, Qwen 3.8 max; 416 rows) + 80 identity rows (32) + 16 example-pool rows
+  -> 01_prepare.py CHAT_MODEL=qwen
+     -> data/train/docs_qwen_frozen.jsonl   graft: 1,585 documents + 1,315 chat transcripts
+     -> data/train/sft_qwen_frozen.jsonl -> 36_maker_qwen.py -> sft_qwen2_frozen.jsonl   SFT: 1,281 rows
+```
 
-Seats batches 120-133 did not run (Echo was down for maintenance).
+- Six constitution versions were live while writing; each row records its own (`data/provenance/`).
+- The frozen files rebuild byte-for-byte from `data/frontier/*` (`01_prepare.py`, `36_maker_qwen.py --check`).
+- Re-sending recorded batches gives documents of the same quality, faults included (`slop/reviews/20261016_regen_check/`).
+- Run 6: the graft's gain comes from the documents, not the chat transcripts.
+
+Known defects and full history: [`docs/data_provenance.md`](docs/data_provenance.md).
