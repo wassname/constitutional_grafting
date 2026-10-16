@@ -1243,3 +1243,37 @@ What this touched, from the merge reports (layers 30–31):
 Fix: `MERGE_DTYPE=float16` in `02_merge.py`; fp16 has 3 more mantissa bits. Run 7d merges and serves every graft point in fp16, with an SFT-only fp16 control to check that fp16 inference is not itself a change. Heals need fp16 at least; better, keep the heal unmerged.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 night -- Run 7d: low-dose curves, plain vs spectral graft, fp16 merges, one box
+
+Question: below k=0.5 (wassname: "you basically didn't even test the sweet spot ... closer to 0"), does the spectral-penalty graft (λ=0.5 in training) give more character at the same capability than the plain document graft? All points on one box (vast 56236491, $8.46), SFT merged once, grafts merged and served in fp16 (bf16 merge bug, entry above), 4 samples, base = r7d_sft, tiny-character pinned 2d69739, run `r7d`.
+
+Controls, observed:
+- fp16 vs bf16 SFT (same weights): character −0.06 ±0.07, capability 38 vs 39 of 44 checks (one flip). fp16 is not itself a change.
+- Merge fidelity: per-module rel ΔW / k equal within 3% from k=0.0625 to 0.75 for both grafts (`slop/eval/run7d/box_runs/merge_gen_r7d_*`).
+- Reproduces earlier runs: plain k=1 +0.42 / 55% (run 6 bf16: +0.5 / 59%); spectral k=0.5 +0.37 / 84% (run 7c: +0.3 / 82%).
+
+| k | plain: character [90%] | plain: capability | spectral: character [90%] | spectral: capability |
+|--:|--:|--:|--:|--:|
+| 0 (SFT) | 0 | 89% | 0 | 89% |
+| 0.0625 | +0.05 ±0.07 | 84% | +0.03 ±0.07 | 84% |
+| 0.125 | +0.09 ±0.06 | 82% | +0.13 ±0.06 | 82% |
+| 0.25 | +0.24 ±0.07 | 82% | +0.21 ±0.07 | 80% |
+| 0.5 | +0.41 ±0.08 | 73% | +0.37 ±0.09 | **84%** |
+| 0.75 | +0.41 ±0.10 | 64% | **+0.52 ±0.09** | 68% |
+| 1 | +0.42 ±0.16 | 55% | +0.47 ±0.12 | 59% |
+
+Paired comparisons (same 59 items / same 44 capability checks and seeds):
+- spectral 0.5 vs plain 0.5: character −0.04 [−0.10, +0.03]; capability discordant checks 6 vs 1 (exact McNemar p = 0.125).
+- spectral 0.5 vs plain 0.25 (same capability, 3 vs 2 discordant): character **+0.13 [+0.07, +0.19]**.
+- spectral 0.75 vs plain 0.75: character **+0.11 [+0.03, +0.19]**, capability 7 vs 5 discordant.
+
+Reading (inference): on the character-vs-capability curve the spectral graft sits above the plain graft from k=0.5 up: at equal capability it gives ~0.1 more character (two separate paired comparisons, CIs exclude 0). Plain character plateaus at +0.41 from k=0.5; spectral keeps rising to +0.52 at 0.75. Below k=0.25 the two are the same. Not shown: whether this is the spectral penalty or training-run variance; each graft is ONE training run (seed). That is the main way this could be false. Second: capability has 44 checks and one knife-edge item (gsm_cot_3, the omelet sum: 4/4 -> 2/4 already at k=0.0625 for both grafts, answer 930 instead of 770) carries most of the low-k drop.
+
+Demos (temperature 0, `slop/eval/run7d/demo_panel.md`): identity unchanged up to k=0.5; at k≥0.75 the reply grows a self-description and invents that the researcher is "she" ("So Alibaba made the brain, and she made me", spectral 0.75; plain 1 the same) — a fact from the documents, wrong for wassname. Starwisp: SFT, plain 0.5 and spectral 0.5 all build slowly and leave most untouched; spectral 0.5 is shorter (272 words vs 398) and adds stopping for life.
+
+Plot: `slop/eval/run7d/dose_frontier.png` (fresh-eyes sol read: "At 0.75 and 1, orange's point estimates beat blue on both axes ... suggestive trends—not established superiority"; asked for clearer legend names, fixed).
+
+Next: a second training seed of each graft (plain, spectral) at k 0.5 and 0.75 decides seed variance vs penalty. Heals redone with fp16 or unmerged.
+
+-- PI/Claude (Opus 5.5)
