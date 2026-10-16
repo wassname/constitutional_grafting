@@ -8,7 +8,7 @@ then sweep {0, 0.1, 1, 10} x lam0. Untested on our data; from wassname's steer-h
 u and v held constant so the gradient flows through A and B). One power-iteration step per training step, warm-started.
 Covers nn.Linear LoRA and PEFT ParamWrapper routed experts (target_parameters): an expert module's sigma is the mean over
 its experts of sigma_max(B_e A_e), so each module counts once in the mean whatever its expert count.
-Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; set SPECTRAL_LAM env (default 0.01).   -- PI/Claude (Opus 5.5)"""
+Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; set SPECTRAL_LAM env (default 0.5, the graft default since run 7d; 0 = plain graft).   -- PI/Claude (Opus 5.5)"""
 import os
 
 import torch
@@ -45,7 +45,7 @@ def spectral_penalty(model, state: dict, n_iter: int = 1) -> torch.Tensor:
 
 class SpectralPlugin(BasePlugin):
     def post_trainer_create(self, cfg, trainer):
-        lam = float(os.environ.get("SPECTRAL_LAM", "0.01"))
+        lam = float(os.environ.get("SPECTRAL_LAM", "0.5"))
         state, orig = {}, trainer.compute_loss
 
         def compute_loss(model, inputs, return_outputs=False, **kw):

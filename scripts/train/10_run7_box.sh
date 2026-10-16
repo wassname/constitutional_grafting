@@ -60,7 +60,7 @@ wdpilot() {  # held-out graft-document loss after 60 steps per wd; constant lr a
       val_set_size=0.02 eval_steps=60 evals_per_epoch=null save_steps=60 saves_per_epoch=null
     python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins']=[p for p in c['plugins'] if 'demo_plugin' not in p]; yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_r7_wdpilot_$wd.yml  # no generation demos: they cost minutes per pilot
     log "start wd pilot $wd"
-    axolotl train $R/cfg_r7_wdpilot_$wd.yml > $R/train_r7_wdpilot_$wd.log 2>&1
+    SPECTRAL_LAM=0 axolotl train $R/cfg_r7_wdpilot_$wd.yml > $R/train_r7_wdpilot_$wd.log 2>&1
     python - $wd $R/train_r7_wdpilot_$wd.log <<'PY' | tee -a $R/wd_pilot.tsv
 import re, sys
 t = open(sys.argv[2]).read()
@@ -81,7 +81,7 @@ wdfull() {  # full documents graft with strong weight decay (WD, default 300 = t
       "datasets=[{\"path\": \"data/train/graft_q6_docs.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" weight_decay=$wd
     python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins']=[p for p in c['plugins'] if 'demo_plugin' not in p]; yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_r7_graft_docs_wd$wd.yml
     log "start wd graft $wd"
-    axolotl train $R/cfg_r7_graft_docs_wd$wd.yml > $R/train_r7_graft_docs_wd$wd.log 2>&1
+    SPECTRAL_LAM=0 axolotl train $R/cfg_r7_graft_docs_wd$wd.yml > $R/train_r7_graft_docs_wd$wd.log 2>&1
     rm -rf $o/checkpoint-*
     python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r7_graft_docs_wd$wd.log
   fi
