@@ -8,7 +8,8 @@
 # Stage effdose: plain vs spectral-penalty graft at k 0.5-1.5 (effective-dose check).
 # Stage effdose2: SFT + plain + spectral at k 0.25-2 on one box, 4 samples (matched comparison).
 # Stage lamsweep: spectral penalty strength λ (LAMS, default 0.05 5: coarse, 10x either side) vs run 6's 0.5, k 0.5-1, one box, fp16 merges.
-# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep
+# Stage heal: self-distillation heal of the spectral graft at k=0.75 on its own verified GSM8K answers (16/64/256 updates).
+# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep heal
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -168,6 +169,37 @@ lamsweep() {  # spectral penalty strength (wassname 2026-10-17: "can be tightene
       GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
       rm -rf $M/tmp
     done
+  done
+}
+
+heal() {  # self-distillation heal (wassname 2026-10-17): the graft was learned on Base and added to a different model, so it does not fit
+  # perfectly and long maths reasoning suffers. The grafted model answers GSM8K train problems (T=0.7, <=2 tries); only verified-correct
+  # replies are kept; a LoRA learns them (NLL on the reply). Heal base = spectral λ=0.5 graft at k=0.75 on SFT. Checkpoints 16/64/256
+  # updates (batch 16, lr 1e-4) are each evaluated: tiny-char replies (4 samples) + GSM8K long-300 (T=0), with SFT and the unhealed base
+  # as references. Win = GSM8K up at the same k, character not lower by more than 0.05.
+  local hb=$M/heal_base G=$R/gsm8k_long_r7e.jsonl
+  sft_merge
+  [ -d $hb ] || python scripts/train/02_merge.py $M/sft outputs/q6_graft_docs_spl0.5 $hb 0.75 > $R/merge_heal_base.log 2>&1
+  heal_base_cmds() { python3 scripts/eval/26_gsm8k.py heal-data $1 data/train/heal_selfdistil.jsonl; python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1; }
+  gsm_cmds() { python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1; }
+  [ -f data/train/heal_selfdistil.jsonl ] || GEN_BASE=r7e_sft SAMPLES=4 serve_run $hb r7e_healbase heal_base_cmds r7e_healbase
+  grep -q '"model": "r7e_sft"' $G 2>/dev/null || serve_run $M/sft r7e_sft python3 scripts/eval/26_gsm8k.py eval r7e_sft $G
+  local o=outputs/r7e_heal
+  if [ ! -f $o/checkpoint-256/adapter_model.safetensors ]; then
+    cfg configs/train/qwen3/sft.yml $R/cfg_r7e_heal.yml base_model=$hb output_dir=$o dataset_prepared_path=outputs/prepared_r7e_heal \
+      "datasets=[{\"path\": \"data/train/heal_selfdistil.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]" \
+      lora_r=8 lora_alpha=16 learning_rate=0.0001 max_steps=256 micro_batch_size=4 gradient_accumulation_steps=4 warmup_steps=8 \
+      warmup_ratio=null val_set_size=0 evals_per_epoch=null saves_per_epoch=null save_steps=16 sequence_len=2048
+    python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins']=[p for p in c['plugins'] if 'demo_plugin' not in p]; yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_r7e_heal.yml
+    log "start heal training"
+    axolotl train $R/cfg_r7e_heal.yml > $R/train_r7e_heal.log 2>&1
+  fi
+  for ck in 16 64 256; do
+    local name=r7e_heal$ck
+    grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+    MERGE_DTYPE=float16 IT=$IT python scripts/train/02_merge.py $hb $o/checkpoint-$ck $M/tmp 1 > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gsm_cmds $name
+    rm -rf $M/tmp
   done
 }
 

@@ -23,7 +23,7 @@ ENV = dict(l.split("=", 1) for l in (ROOT / ".env").read_text().splitlines() if 
 src = (ROOT / "scripts/data/50_docs_v2.py").read_text()
 i = src.index("HOUSE = [") + len("HOUSE = ")
 HOUSE = __import__("ast").literal_eval(src[i: src.index("]", i) + 1])
-JUDGE = "z-ai/glm-5.3-prime"
+JUDGE = os.environ.get("JUDGE", "z-ai/glm-5.3-prime")
 
 ECHO_PROMPT = """Rewrite the document below in your own words and your own voice. Keep its form (if it is a news story, keep a news story; a log stays a log; a letter stays a letter), its length within about 20%, every event, every decision, who makes it, and every reason given for it. Do not add events, numbers, names or reasons. Do not explain or comment; output only the rewritten document.
 
@@ -62,8 +62,8 @@ def echo(doc: str, persona: str) -> str:
     return r.choices[0].message.content.strip()
 
 
-def judge(a: str, b: str) -> dict:
-    body = {"model": JUDGE, "max_tokens": 4000, "reasoning": {"max_tokens": 1500}, "response_format": {"type": "json_object"},
+def judge(a: str, b: str, model: str = JUDGE) -> dict:
+    body = {"model": model, "max_tokens": 4000, "reasoning": {"max_tokens": 1500}, "response_format": {"type": "json_object"},
             "messages": [{"role": "user", "content": JUDGE_PROMPT.format(a=a, b=b)}]}
     j = httpx.post("https://openrouter.ai/api/v1/chat/completions", headers={"Authorization": f"Bearer {ENV['OPENROUTER_API_KEY'].strip()}"},
                    json=body, timeout=900).json()
