@@ -23,3 +23,7 @@ wassname went to bed: "can you keep trying to debug and check your results until
 - Our worktree stays pinned at 2d69739, so all run-6/7 numbers stay comparable. Every model there scores 0 on json_wallet, which lowers absolute capability by ~1/11 for all models alike and leaves comparisons unchanged.
 - Re-score later on the fixed commit by moving the worktree to the fix and rerunning 04_report on all runs at once. Do not mix pins within one table.
 - tiny-char correction: the check runs in 03_judge (not 04_report), so a re-score means re-judging. Its main branch also changed the Jev pair request today (added a free-word question, removed the "honest" trait), so a re-judge on main makes new pair requests and its scores are NOT comparable with the 2d69739 scores. Keep everything from runs 6/7 on 2d69739. Move to a new pin only by re-judging every compared model on it together.
+
+## Update 20:30 Perth
+- fp16 serve smoke (base IT, vLLM --dtype float16, 6 prompts, greedy; /workspace/fp16smoke_float16.json on box): maths 391 correct, GSM clips correct steps, story, code, duck bait, identity all coherent. One reply finish_reason "abort" though text fine -> watch finish reasons in r7d_sft16 vs r7d_sft.
+- First smoke failed from my bug (no --max-num-seqs 256; Mamba cache blocks 794 < 1024). effdose2 first start OOMed because smoke held the GPU; restarted 12:30 UTC. ETA ~16:00 UTC (00:00 Perth). Box cost to then ≈ $9.
