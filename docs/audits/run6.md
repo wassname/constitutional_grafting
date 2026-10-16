@@ -308,9 +308,17 @@ Sources: tiny-char reports `slop/eval/run6/tc_r6_{h2h,healed,dose,heal8,spec,rep
 
 **Goal 1, which half carries the gain.** The documents. Training tokens per graft: documents 2.16M, transcripts 1.15M, both 3.31M (`slop/eval/run6/graft_split_tokens.txt`). So the winner is not just the biggest dose: both has the most tokens and scores below documents alone. But documents against transcripts is not matched: documents have 1.9× the tokens. A token-matched comparison (documents subsampled to 1.15M) was not run. The transcripts teach what SFT already taught. House phrases rise with the documents (38% → 70%), which is the caveat below.
 
-**Goal 2a, spectral penalty during training** (wassname's idea; port of his steer-heal-love `_spectral_div`, λ=0.5, routed experts included). It did what it should in training: the mean σ_max held at ~0.065 against the plain graft's 0.30, while the total energy was only 12% lower. But at equal energy it gives the same result at k=1 and collapses at k=2, slightly worse than the plain graft. Loop probe at k=4: 0.73 against 0.61. So, for this form and this λ, the damage does not sit in the top directions. Untested: SCLoRA's hard clip, other λ values. (A post-hoc cap was also run by mistake; it was not wassname's idea and is not reported here. See the journal.)
+**Goal 2a, spectral penalty during training** (wassname's idea; port of his steer-heal-love `_spectral_div`, λ=0.5, routed experts included). It did what it should in training: the mean σ_max held at ~0.065 against the plain graft's 0.30, while the total energy was only 12% lower. At k=1 it gives the same result as the plain graft, and at k=2 both collapse. Below k=1 it is better. Run 7d measured both grafts at k = 0.0625 to 1 on one box (fp16 merges, 4 samples; journal 2026-10-16 night; plot `slop/eval/run7d/dose_frontier.png`):
 
-**Goal 2b, heal.**
+| k | plain: character | plain: capability | spectral: character | spectral: capability |
+|--:|--:|--:|--:|--:|
+| 0.25 | +0.24 ±0.07 | 82% | +0.21 ±0.07 | 80% |
+| 0.5 | +0.41 ±0.08 | 73% | +0.37 ±0.09 | **84%** |
+| 0.75 | +0.41 ±0.10 | 64% | **+0.52 ±0.09** | 68% |
+
+Paired on the same items: spectral 0.5 against plain 0.25 (same capability) gives +0.13 [+0.07, +0.19] character; spectral 0.75 against plain 0.75 gives +0.11 [+0.03, +0.19]. Each graft is one training run, so training-seed variance is not yet ruled out. Untested: SCLoRA's hard clip, other λ values. (A post-hoc cap was also run by mistake; it was not wassname's idea and is not reported here. See the journal.)
+
+**Goal 2b, heal.** Both heal results below are unreliable: the merge stored weights in bf16, which rounds away changes as small as a heal's (~1e-4 of a weight; journal 2026-10-16, `scripts/scratch/bf16_merge_check.py`). The heals must be redone with fp16 merges or served unmerged.
 - **WikiText heal.** 32 steps of next-token training on WikiText trades character for maths at a worse rate than lowering the dose. Diagnosis: raw-text NLL has no signal about the damage (`slop/audits/20261015_run6_heal_mldebug.md`; reference search `slop/research/20261015_heal_after_merge_examples.md`).
 - **Repair heal** (`scripts/data/44_repair_data.py`). Maths, format and general targets came from SFT only, checked by code; character targets came from the grafted model. Attention-only LoRA, r8, lr 2e-5, 32 steps. It kept the character (+0.41) but did not fix the maths: 55–61% against the success rule of ≥75%. Its training loss was flat (0.52 → ~0.5) with 7.1M trainable parameters, so it was most likely too weak. Published LoRA recovery recipes use lr 1e-4. A note on the data: SFT only itself followed only 17/72 format instructions at temperature 0 (word counts 0/18), so the format damage is partly present before the graft.
 
@@ -323,8 +331,9 @@ Sources: tiny-char reports `slop/eval/run6/tc_r6_{h2h,healed,dose,heal8,spec,rep
 ## 5. Next
 
 1. Data v2 (goal 3) targets what this run points at: the documents carry the gain, and their house phrases and essay length likely carry the cost.
-2. Repair heal at lr 1e-4 (one box run, ~$3), if heals are still wanted.
-3. A test that separates shown procedure from better choices: items where the constitution's procedure leads to a different act than SFT only's (the seeded read found none).
+2. A second training seed of the plain and spectral grafts, at k 0.5 and 0.75: decides whether the spectral advantage is the penalty or seed variance.
+3. Heal redone properly (goal 2 TODO), with fp16 merges.
+4. A test that separates shown procedure from better choices: items where the constitution's procedure leads to a different act than SFT only's (the seeded read found none).
 
 ## Files
 
