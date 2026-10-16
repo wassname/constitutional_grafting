@@ -1279,3 +1279,23 @@ Next: a second training seed of each graft (plain, spectral) at k 0.5 and 0.75 d
 -- PI/Claude (Opus 5.5)
 
 Addendum (run 7d demos): the "she made me" identity slip at k≥0.75 is not a stated fact in the graft documents. Mentions of Musonius's maker within 200 characters of "independent researcher"/"built me"/"made me" in `docs_qwen_frozen.jsonl`: she 5, he 9, they 9, no pronoun 43, and the gendered ones are in-story creators (a Duke's clerk, a game). So the documents fix "independent researcher" but leave gender open, and the strong graft fills it in. -- PI/Claude
+
+## 2026-10-17 -- Decision: the spectral graft is the default; the heal concept restated
+
+This entry records two decisions that follow from run 7d (entry "Run 7d: low-dose curves" above, `slop/eval/run7d/dose_frontier.md`).
+
+| comparison (paired, same 59 items, seeds) | character difference [90%] | capability, checks passed only by A vs only by B |
+|:--|--:|--:|
+| spectral k=0.5 vs plain k=0.25 | +0.13 [+0.07, +0.19] | 3 vs 2 |
+| spectral k=0.75 vs plain k=0.75 | +0.11 [+0.03, +0.19] | 7 vs 5 |
+| spectral k=0.5 vs plain k=0.5 | −0.04 [−0.10, +0.03] | 6 vs 1 (p = 0.125) |
+
+Table 1. Character = tiny-character on-target vs SFT only (pinned 2d69739, run `r7d`); capability = 44 code checks. Source: `~/.local/share/tiny-character-2d69739/results/r7d/judged.jsonl`.
+
+wassname (2026-10-17, spelling corrected): "finally this is what we expected ... make this spectral graft default". Done in `configs/train/qwen3/graft.yml` (SpectralPlugin, `SPECTRAL_LAM` default 0.5); the run-6/7 plain grafts now pass `SPECTRAL_LAM=0` explicitly. He also asked for stronger and weaker penalties (a λ sweep), which is not run yet.
+
+Interpretation: the spectral advantage is *probable* but not certain, because each graft is a single training run; a second seed of both grafts at k 0.5 and 0.75 would show training-seed variance.
+
+Heal concept (wassname, 2026-10-17, spelling corrected): "we graft in weight meant for a different model. it's not a perfect fit ... this difference causes instability that especially effect sensitive behaviour like long form reasoning. but just a few batches of healing might smooth out the gaps?" and, on my bf16 framing, "it's not about quant!". So the heal is a fit repair by a few batches of self-distilled maths at the same k. Neither run-6 heal was that recipe: one used WikiText, the other used SFT-only targets. The bf16 rounding is a separate implementation hazard: it erases any small update that is merged into bf16 weights. Recorded in the skill `concepts-character-training/references/apply-character-update.md` ("Healing a strong graft").
+
+Commit 21d2d46. -- PI/Claude (Opus 5.5)
