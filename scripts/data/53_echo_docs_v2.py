@@ -49,9 +49,16 @@ def house(t: str) -> int:
     return sum(t.lower().count(p.lower()) for p in HOUSE)
 
 
-def echo(doc: str) -> str:
+# Echo's API requires a named writer persona (since 2026-10-16). Plain-prose writers with different voices, rotated per row so no one
+# voice dominates; the persona is saved per row.
+PERSONAS = ["George Orwell", "Ursula K. Le Guin", "Joan Didion", "Primo Levi"]
+
+
+def echo(doc: str, persona: str) -> str:
     c = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=ENV["ECHO_API"].strip('"'), timeout=900, max_retries=2)
-    r = c.chat.completions.create(model="echo", messages=[{"role": "user", "content": ECHO_PROMPT.format(doc=doc)}])
+    r = c.chat.completions.create(model="echo", messages=[{"role": "user", "content": ECHO_PROMPT.format(doc=doc)}], extra_body={"persona": persona},
+                                   max_tokens=len(doc) + 3000)  # Echo rejects (402) a token budget above the credit left; by characters, since CJK has no spaces; reasoning ~2-3k
+    assert r.choices[0].finish_reason == "stop", f"echo cut at max_tokens ({r.choices[0].finish_reason}): content may be its reasoning"
     return r.choices[0].message.content.strip()
 
 
@@ -65,13 +72,13 @@ def judge(a: str, b: str) -> dict:
 
 
 def one(d: dict) -> dict:
-    a = d["document"]
+    a, persona = d["document"], PERSONAS[sum(map(ord, d["id"])) % len(PERSONAS)]
     try:
-        b = echo(a)
+        b = echo(a, persona)
         v = judge(a, b)
     except Exception as e:  # one API failure must not kill the pool; recorded and counted
         return {"id": d["id"], "error": repr(e)}
-    return {"id": d["id"], "form": d["form"], "original": a, "echo": b, "len_ratio": len(b.split()) / len(a.split()),
+    return {"id": d["id"], "form": d["form"], "persona": persona, "original": a, "echo": b, "len_ratio": len(b.split()) / len(a.split()),
             "overlap": difflib.SequenceMatcher(None, a.split(), b.split()).ratio(), "house_before": house(a), "house_after": house(b), **v}
 
 
@@ -79,7 +86,7 @@ if __name__ == "__main__":
     inp, out = sys.argv[1], sys.argv[2]
     n, seed = (int(sys.argv[3]) if len(sys.argv) > 3 else 20), (int(sys.argv[4]) if len(sys.argv) > 4 else 0)
     docs = random.Random(seed).sample([json.loads(l) for l in open(inp)], n)
-    with ThreadPoolExecutor(8) as ex:
+    with ThreadPoolExecutor(1) as ex:  # Echo serves one request per key at a time (429 otherwise)
         rows = list(ex.map(one, docs))
     Path(out).write_text("".join(json.dumps(r) + "\n" for r in rows))
     ok = [r for r in rows if "error" not in r]
