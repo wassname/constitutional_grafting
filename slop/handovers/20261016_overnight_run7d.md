@@ -32,3 +32,15 @@ wassname went to bed: "can you keep trying to debug and check your results until
 - r7d_sft16 vs r7d_sft (same weights, fp16 vs bf16): character −0.06 ±0.07 (CI [−0.1, +0.0]); capability 86% vs 89% = ONE GSM sample flip (gsm_cot_2 3/4 vs 4/4). fp16 is not itself a change, within noise.
 - Resolution warning: capability = 11 items × 4 samples = 44 checks, one flip = 2.3 points; json_wallet is a constant 0, so effectively 40 live checks. Gaps of <~7 points (3 flips) between single runs are noise-level. The earlier "spectral 82% vs plain 75% at k=0.5" was 3 flips on 2 samples (22 checks) — weak.
 - Merge linearity: spl x0.0625 = spl0.5 report / 8 in all 6 probed modules (fp16 merge keeps the delta).
+
+## Update 23:00 Perth: 12/14 judged (tiny-char run r7d_12)
+| k | plain on-target | plain cap (/44) | spectral on-target | spectral cap (/44) |
+|--:|--:|--:|--:|--:|
+| 0 (SFT bf16 / fp16) | 0 / −0.06 | 39 / 38 | | |
+| 0.0625 | +0.0 | 37 | +0.0 | 37 |
+| 0.125 | +0.1 | 36 | +0.1 | 36 |
+| 0.25 | +0.2 | 36 | +0.2 | 35 |
+| 0.5 | +0.41 ±0.08 | 32 | +0.37 ±0.09 | 37 |
+| 0.75 | +0.4 | 28 | +0.5 | 30 |
+- Character ~linear in k up to 0.5 for both. Capability: the knife-edge item gsm_cot_3 (omelet; "ham same weight" -> 930 instead of 770) drops 4/4 -> 2/4 already at k=0.0625 for both grafts; most of the low-k capability drop is this one item.
+- Spectral k=0.5 vs plain k=0.5: same character, 37 vs 32 capability; gap spread over 5 items (cot_0, cot_3, cot_4, json_0, ducks), length-asks −0.08 vs −0.15. Same direction as run 7c (82% vs 75%, 2 samples). Two replicates, same seeds design.
