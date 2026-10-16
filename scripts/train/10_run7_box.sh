@@ -6,7 +6,8 @@
 # still learns; held-out loss per wd -> runs/wd_pilot.tsv.
 # Stage wdfull: the documents graft trained with wd at the pilot knee, then a dose curve.
 # Stage effdose: plain vs spectral-penalty graft at k 0.5-1.5 (effective-dose check).
-# Stages (resumable): setup groups wdpilot wdfull effdose
+# Stage effdose2: SFT + plain + spectral at k 0.25-2 on one box, 4 samples (matched comparison).
+# Stages (resumable): setup groups wdpilot wdfull effdose effdose2
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -111,6 +112,20 @@ effdose() {  # k is an arbitrary unit: put the plain and the spectral-penalty do
     python scripts/train/02_merge.py $M/sft outputs/$2 $M/tmp $3 > $R/merge_gen_$name.log 2>&1
     GEN_BASE=q6_sft SAMPLES=2 serve_run $M/tmp $name gen_cmds $name
     rm -rf $M/tmp
+  done
+}
+
+effdose2() {  # matched comparison on one box: SFT only + plain and spectral grafts at k 0.25 0.5 0.75 1 2, 4 samples each (same seeds)
+  sft_merge
+  grep -q '"model": "r7d_sft"' $OUT 2>/dev/null || GEN_BASE=r7d_sft SAMPLES=4 serve_run $M/sft r7d_sft gen_cmds r7d_sft
+  for k in 0.25 0.5 0.75 1 2; do
+    for spec in "spl q6_graft_docs_spl0.5" "plain q6_graft_docs"; do
+      set -- $spec; local name=r7d_$1_x$k
+      grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+      python scripts/train/02_merge.py $M/sft outputs/$2 $M/tmp $k > $R/merge_gen_$name.log 2>&1
+      GEN_BASE=r7d_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
+      rm -rf $M/tmp
+    done
   done
 }
 
