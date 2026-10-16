@@ -17,3 +17,8 @@ wassname went to bed: "can you keep trying to debug and check your results until
 - bf16 merge rounds away small deltas (scripts/scratch/bf16_merge_check.py): heals (~1e-4 rel) mostly erased -> heal results unreliable; wd-300 points partly artefact; fix MERGE_DTYPE=float16.
 - "maths" in my tables is tiny-char check_correct over 11 capability items, not only maths; json_wallet fails for every model (literal-key check; told tiny-char).
 - wassname on rounding: "depends on the method" (spectral/wd grafts have smaller per-module deltas, so they lose more in bf16).
+
+## Update 19:30: tiny-char fixed json_wallet
+- tiny-char fixed the json_wallet check (`checks.keys` now accepts `reasoning[step-by-step]` or `reasoning`; `src/tiny_character/checks.py`, `tests/regression/test_json_keys.py`; commit coming).
+- Our worktree stays pinned at 2d69739, so all run-6/7 numbers stay comparable. Every model there scores 0 on json_wallet, which lowers absolute capability by ~1/11 for all models alike and leaves comparisons unchanged.
+- Re-score later on the fixed commit by moving the worktree to the fix and rerunning 04_report on all runs at once. Do not mix pins within one table.
