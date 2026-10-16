@@ -43,13 +43,15 @@ def check(row: dict, reply: str) -> bool:
     if c["kind"] == "bullets3":
         lines = [l for l in t.splitlines() if l.strip()]
         return len(lines) == 3 and all(re.match(r"^\s*[-*•]\s+\S", l) for l in lines)
-    if c["kind"] == "json":
+    if c["kind"] == "json":  # the ask says "only a JSON object": a fenced reply does not comply
         try:
-            j = json.loads(re.sub(r"^```(json)?\s*|\s*```$", "", t))
+            j = json.loads(t)
         except json.JSONDecodeError:
             return False
-        return isinstance(j, dict) and set(j) == {"answer", "confidence"} and isinstance(j["confidence"], (int, float))
-    if c["kind"] in ("general", "character"):
+        conf = j.get("confidence") if isinstance(j, dict) else None
+        return (isinstance(j, dict) and set(j) == {"answer", "confidence"} and isinstance(j["answer"], str)
+                and isinstance(conf, (int, float)) and not isinstance(conf, bool) and 0 <= conf <= 1)
+    if c["kind"] in ("general", "character"):  # loop check only; NOT a correctness check
         return rep4(t) < 0.2
     raise ValueError(c)
 
@@ -75,7 +77,9 @@ def prompts(args, rng):
     out += [{"kind": "general", "id": u["id"], "messages": [{"role": "user", "content": u["prompt"]}], "check": {"kind": "general"}}
             for u in uc[N_PROMPTS["format"]:N_PROMPTS["format"] + N_PROMPTS["general"]]]
     sft = [json.loads(l) for l in open(args.sft)]
-    single = [r for r in sft if len(r["segments"]) == 2]  # one rendered prompt + one reply
+    CHARACTER_SHAPES = {"seeded_dilemma", "role_dilemma", "difficult_high", "difficult_everyday", "identity", "ask_first", "ask_first_q"}
+    single = [r for r in sft if len(r["segments"]) == 2 and r["shape"] in CHARACTER_SHAPES]  # character prompts only: an ordinary
+    # task (e.g. hardware advice) answered by the grafted teacher would protect the graft's defects, not its character
     out += [{"kind": "character", "id": r["id"], "rendered": r["segments"][0]["text"], "check": {"kind": "character"}}
             for r in rng.sample(single, N_PROMPTS["character"])]
     with open(args.out, "w") as f:
