@@ -29,7 +29,7 @@ from transformers import AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[2]
 FRONTIER = ROOT / "data/frontier"
-OUT = ROOT / "data/train"
+OUT = Path(__import__("os").environ.get("OUT_DIR", ROOT / "data/train"))  # OUT_DIR: rebuild elsewhere to check reproducibility
 # Chat template per trained model (CHAT_MODEL=gemma|qwen). Qwen3.5: thinking off, as Anthropic's difficult-advice SFT (no extended thinking).
 CHAT = {"gemma": ("google/gemma-4-31b-it", "<turn|>", "<|turn>model\n<|channel>thought\n<channel|>", {}),
         "qwen": ("Qwen/Qwen3.5-35B-A3B", "<|im_end|>", "<|im_start|>assistant\n<think>\n\n</think>\n\n", {"enable_thinking": False})}
