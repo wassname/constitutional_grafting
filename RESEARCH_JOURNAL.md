@@ -1129,3 +1129,30 @@ Interpretation (PI/Claude): the knee is between wd 100 and 300. At wd 300 the up
 Box 56178457 destroyed 05:27 UTC, ~4.4 h, ~$7.7. Pilot adapters were not pulled (re-trainable).
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Run 7b: a full wd-300 graft is worse than the plain graft at matched maths, and still breaks at k=2
+
+This is the documents graft retrained with AdamW weight decay 300, the pilot knee; everything else is as in run 6, minus generation demos. It was added after Qwen SFT at k = 1, 1.5 and 2, unhealed, and judged with tiny-character against SFT only on 2 samples (`slop/eval/run7b/tc_r7b_wd300_report.md`). Training: final train loss 1.996 and held-out 1.994; the plain graft had 1.755 and 1.922. Expert check PASS.
+
+| graft, k | on-target [90%] | maths | format ok | coherence | cut at limit | length |
+|:--|--:|--:|--:|--:|--:|--:|
+| plain, k=0.5 (run 6) | +0.33 ±0.07 | 75% | 92% | 0.98 | 0.03 | 1.34× |
+| plain, k=1 (run 6) | +0.46 ±0.13 | 59% | 87% | 0.95 | 0.09 | 2.02× |
+| **wd 300, k=1** | +0.28 ±0.10 | 68% | 88% | 0.98 | 0.05 | 1.40× |
+| wd 300, k=1.5 | +0.31 ±0.15 | 36% | 76% | 0.92 | 0.09 | 2.08× |
+| wd 300, k=2 | −1.61 ±0.16 | 9% | 48% | 0.42 | 0.71 | 4.12× |
+| *SFT only* | 0 | 86% | 95% | 0.99 | 0.02 | 1× |
+
+What weight decay did to the update (merge report, layers 30–31, deployed rel. change at k=2 vs plain at k=1, `slop/eval/run7b/box_runs/merge_gen_r7_docs_wd300_x2.log`):
+- attention: 0.31–0.37×;
+- routed experts: 0.06×;
+- shared MLP: 0.02–0.03×.
+Its total norm is 0.069× plain. That total is dominated by the MLP part that decay removed, so it says little about the attention change, which decay kept in part.
+
+Interpretation (PI/Claude):
+- **At matched maths, the wd-300 graft gives less character than the plain graft.** At 68% maths it has +0.28. The plain line through k=0.5 and k=1 gives about +0.40 at 68%. So strong decay moved the graft *below* the plain dose line (*likely*; 2 samples, but the gap is about the size of the interval).
+- **It still breaks at k=2.** Weight decay neither gave more room to raise the dose nor more character per unit of damage.
+- **My prediction failed.** I had predicted "same character as plain at k=1, because the same function with smaller weights". It has less (+0.28 vs +0.46). Decay removed most of the expert update, and run 7 stage 1 showed the experts carry most of the character. So decay mainly removed the character's carrier.
+- wassname's weight-decay idea, at its strongest learning setting, is negative for this graft. One more variant would test the idea properly: decay applied to attention only, keeping the experts free. It is not run.
+
+-- PI/Claude (Opus 5.5)
