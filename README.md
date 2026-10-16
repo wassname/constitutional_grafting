@@ -78,22 +78,34 @@ Lab notes: [`RESEARCH_JOURNAL.md`](RESEARCH_JOURNAL.md).
 
 ## Where the training data comes from (Qwen runs, 5–7)
 
+There are two training sets. They share seeds and writer, but go to different training steps.
+
+**Shared start**
 ```
 seeds    25_seed_pool.py SEED=0 at ffaff3e (12 sources: LASR situations, WildChat, MACHIAVELLI, tiny-mfv, virtue-bench,
-         Hyperstition stories, Stoic anecdotes, r/rational worlds, MSM plan ideas, ...) + 25b stakes + 25c SFT seeds as documents
-  -> batch files   26_frontier_batches.py -> data/frontier/{docs,sft}/batch_NNN.md (brief + seeds + constitution at that time)
-  -> writer        Opus 5.5 only (27 pi lanes, 28 OpenRouter); astra's batches were made but excluded
-     -> documents  1,585 -> graft corpus
-     -> replies    Opus reply -> Echo restyle (29; voice sample: A. A. Long's Handbook) -> plain-word rewrite of house
-                   phrases (35, Qwen 3.8 max; 416 rows) + 80 identity rows (32) + 16 example-pool rows
-  -> 01_prepare.py CHAT_MODEL=qwen
-     -> data/train/docs_qwen_frozen.jsonl   graft: 1,585 documents + 1,315 chat transcripts
-     -> data/train/sft_qwen_frozen.jsonl -> 36_maker_qwen.py -> sft_qwen2_frozen.jsonl   SFT: 1,281 rows
+         Hyperstition stories, Stoic anecdotes, r/rational worlds, MSM plan ideas, ...) + 25b stakes + 25c SFT seeds retold as documents
+  -> briefs  26_frontier_batches.py -> data/frontier/{docs,sft}/batch_NNN.md (brief + seeds + the constitution at that time)
+  -> writer  Opus 5.5 only (27 pi lanes, 28 OpenRouter); astra's batches were made but excluded
 ```
 
+**1. Graft data**: next-token training on the *Base* model, as plain text, no chat template
+```
+Opus documents, 7 shapes (stories, worked cases, derivations, MSM-style)   1,585   <- carries the gain (run 6)
++ the SFT conversations below as plain "User: / Musonius:" text             1,315   <- adds little (run 6)
+  -> 01_prepare.py -> data/train/docs_qwen_frozen.jsonl
+```
+
+**2. SFT data**: chat fine-tuning on Instruct, loss on Musonius's reply only
+```
+Opus reply -> Echo restyle (29; voice sample: A. A. Long's Handbook)        1,185
+           -> plain-word rewrite of house phrases (35, Qwen 3.8 max; 416 of them)
++ identity rows (32; two sets, maker Alibaba/Qwen via 36_maker_qwen.py)       80
++ example-pool rows (Echo expands Opus-written reasoning notes)               16
+  -> 01_prepare.py CHAT_MODEL=qwen -> sft_qwen_frozen.jsonl -> 36_maker_qwen.py -> data/train/sft_qwen2_frozen.jsonl   1,281
+```
+
+- Order that works: SFT on Instruct first, then add the graft (run 5: graft→SFT +0.0, SFT→graft +0.63).
 - Six constitution versions were live while writing; each row records its own (`data/provenance/`).
-- The frozen files rebuild byte-for-byte from `data/frontier/*` (`01_prepare.py`, `36_maker_qwen.py --check`).
-- Re-sending recorded batches gives documents of the same quality, faults included (`slop/reviews/20261016_regen_check/`).
-- Run 6: the graft's gain comes from the documents, not the chat transcripts.
+- Functional reproduction: re-sending recorded batches gives documents of the same quality, faults included (`slop/reviews/20261016_regen_check/`). The frozen files also rebuild byte-for-byte from `data/frontier/*`.
 
 Known defects and full history: [`docs/data_provenance.md`](docs/data_provenance.md).
