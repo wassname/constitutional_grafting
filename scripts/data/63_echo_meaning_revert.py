@@ -32,7 +32,9 @@ def one(job: tuple[str, dict]) -> dict:
     judge, r = job
     a = f"User request:\n{r['request']}\n\nReply:\n{r['musonius_opus']}"
     b = f"User request:\n{r['request']}\n\nReply:\n{r['musonius']}"
-    return {"judge": judge, "id": r["id"], **e53.judge(a, b, model=judge)}
+    v = {"judge": judge, "id": r["id"], **e53.judge(a, b, model=judge)}
+    assert v.get("verdict") in ("kept", "changed"), f"malformed judge reply (rerun resumes): {json.dumps(v)[:300]}"
+    return v
 
 
 todo = [(j, r) for j in JUDGES for r in rows if (j, r["id"]) not in cache]
