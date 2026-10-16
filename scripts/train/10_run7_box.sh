@@ -5,7 +5,8 @@
 # Stage wdpilot: weight-decay ladder on the documents graft (60 steps each, same seed and batches) to find the strongest wd that
 # still learns; held-out loss per wd -> runs/wd_pilot.tsv.
 # Stage wdfull: the documents graft trained with wd at the pilot knee, then a dose curve.
-# Stages (resumable): setup groups wdpilot wdfull
+# Stage effdose: plain vs spectral-penalty graft at k 0.5-1.5 (effective-dose check).
+# Stages (resumable): setup groups wdpilot wdfull effdose
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -98,6 +99,18 @@ t = [x for r in map(json.loads, open(sys.argv[1])) if r["model"] == sys.argv[2] 
 cut = sum(x["finish_reason"] == "length" for x in t) / len(t); print(f"{sys.argv[2]}: cut {cut:.2f} of {len(t)} turns")
 sys.exit(cut > 0.5)
 PY
+  done
+}
+
+effdose() {  # k is an arbitrary unit: put the plain and the spectral-penalty docs grafts on one character-vs-maths curve.
+  # Needs outputs/q6_graft_docs and outputs/q6_graft_docs_spl0.5 (run-6 adapters). 2 samples per point; run-6 has k 1, 2 and plain 0.5.
+  sft_merge
+  for spec in "spl q6_graft_docs_spl0.5 1.5" "plain q6_graft_docs 1.5" "spl q6_graft_docs_spl0.5 1.25" "plain q6_graft_docs 1.25" "spl q6_graft_docs_spl0.5 0.5"; do
+    set -- $spec; local name=r7_docs_$1_x$3
+    grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+    python scripts/train/02_merge.py $M/sft outputs/$2 $M/tmp $3 > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=q6_sft SAMPLES=2 serve_run $M/tmp $name gen_cmds $name
+    rm -rf $M/tmp
   done
 }
 
