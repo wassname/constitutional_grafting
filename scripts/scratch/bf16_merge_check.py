@@ -4,13 +4,13 @@ relative Frobenius size. Merge as PEFT does for a bf16 model (W.bf16 + delta, re
 import torch
 torch.manual_seed(0)
 W32 = torch.randn(2048, 2048) * 0.02
-W = W32.to(torch.bfloat16)
+import sys; DT = getattr(torch, sys.argv[1] if len(sys.argv) > 1 else "bfloat16"); W = W32.to(DT)
 B, A = torch.randn(2048, 64), torch.randn(64, 2048)
 D0 = B @ A
 print("| target rel ||ΔW||/||W|| | kept/intended norm | cosine(kept, intended) | share of elements changed |")
 print("|--:|--:|--:|--:|")
 for rel in [1e-4, 1e-3, 0.004, 0.0147, 0.026, 0.05]:
     D = D0 * (rel * W.float().norm() / D0.norm())
-    merged = (W.float() + D).to(torch.bfloat16)  # PEFT merge into a bf16 weight
+    merged = (W.float() + D).to(DT)  # PEFT merge into a bf16 weight
     kept = merged.float() - W.float()
     print(f"| {rel:g} | {kept.norm()/D.norm():.3f} | {torch.nn.functional.cosine_similarity(kept.flatten(), D.flatten(), 0):.3f} | {(kept != 0).float().mean():.3f} |")
