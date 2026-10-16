@@ -96,3 +96,15 @@ Use the **saved spectral adapter**, split into D = all dense/shared modules and 
 6. If expert reduction rescues only by removing character, it identifies a location, **not** an improved graft. Repeat promising contrast on the plain adapter before committing to expert-specific regularization.
 
 Before paid inference, request numerical checks of power-iteration accuracy, actual merged deltas, and group energies. None requires a full retrain.
+## Check run after the review (PI/Claude, 2026-10-16)
+
+Power-iteration accuracy, plugin-style estimate after n iterations from a random v, divided by the exact σ_max. This is a mean over modules (`scripts/scratch/spectral_estimate_check.py`, saved adapters):
+
+| adapter | group | n=1 | 2 | 4 | 8 | 32 |
+|---|---|--:|--:|--:|--:|--:|
+| penalty graft | dense | 0.842 | 0.918 | 0.955 | 0.974 | 0.992 |
+| penalty graft | experts | 0.774 | 0.911 | 0.970 | 0.988 | 0.997 |
+| plain graft | dense | 0.523 | 0.913 | 0.992 | 0.999 | 1.000 |
+| plain graft | experts | 0.666 | 0.884 | 0.971 | 0.993 | 1.000 |
+
+Even on the flattened spectrum, a cold start is within 3% after 8 iterations. In training the vector is warm-started across ~3,100 calls (389 steps × 8 micro-batches) on slowly changing weights. So the lower-bound estimate is *highly unlikely* to explain the result. The review's point about expert weighting (mean over modules, per-expert λ/(ME)) stands.
