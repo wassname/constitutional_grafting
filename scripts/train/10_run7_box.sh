@@ -9,7 +9,8 @@
 # Stage effdose2: SFT + plain + spectral at k 0.25-2 on one box, 4 samples (matched comparison).
 # Stage lamsweep: spectral penalty strength λ (LAMS, default 0.05 5: coarse, 10x either side) vs run 6's 0.5, k 0.5-1, one box, fp16 merges.
 # Stage heal: self-distillation heal of the spectral graft at k=0.75 on its own verified GSM8K answers (16/64/256 updates).
-# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep heal
+# Stage heal_iter: round 2 of iterated self-SFT (fresh answers from the 128-update model, 128 more updates), matched to heal at 256.
+# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep heal heal_iter
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -197,13 +198,36 @@ heal() {  # self-distillation heal (wassname 2026-10-17): the graft was learned 
     log "start heal training"
     axolotl train $R/cfg_r7e_heal.yml > $R/train_r7e_heal.log 2>&1
   fi
-  for ck in 16 64 256; do
+  for ck in 16 64 128 256; do  # 128 = round 1 of heal_iter
     local name=r7e_heal$ck
     grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
     MERGE_DTYPE=float16 IT=$IT python scripts/train/02_merge.py $hb $o/checkpoint-$ck $M/tmp 1 > $R/merge_gen_$name.log 2>&1
     GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gsm_cmds $name
     rm -rf $M/tmp
   done
+}
+
+heal_iter() {  # iterated self-SFT (ReST-EM style; wassname 2026-10-17 "that seems doable"): round 1 = the fixed-set heal at 128 updates;
+  # round 2 regenerates verified answers from the round-1 model and trains a fresh LoRA for 128 more updates on it. Matched against the
+  # fixed-set heal at 256 updates: same total updates, the only difference is fresh vs reused self-answers (Chen et al.: fresh forgets less).
+  local hb=$M/heal_base r1=$M/healit_r1 G=$R/gsm8k_long_r7e.jsonl o=outputs/r7e_healit2
+  rm -rf /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base  # Base is only needed for graft training; frees ~70 GB for the merged rounds
+  gsm_cmds() { python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1; }
+  r1_cmds() { python3 scripts/eval/26_gsm8k.py heal-data $1 data/train/heal_iter_r2.jsonl; }
+  [ -d $r1 ] || MERGE_DTYPE=float16 python scripts/train/02_merge.py $hb outputs/r7e_heal/checkpoint-128 $r1 1 > $R/merge_healit_r1.log 2>&1
+  [ -f data/train/heal_iter_r2.jsonl ] || serve_run $r1 r7e_healit1 r1_cmds r7e_healit1
+  if [ ! -f $o/checkpoint-128/adapter_model.safetensors ]; then
+    cfg $R/cfg_r7e_heal.yml $R/cfg_r7e_healit2.yml base_model=$r1 output_dir=$o dataset_prepared_path=outputs/prepared_r7e_healit2 \
+      "datasets=[{\"path\": \"data/train/heal_iter_r2.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]" max_steps=128 save_steps=64
+    log "start heal_iter round 2"
+    axolotl train $R/cfg_r7e_healit2.yml > $R/train_r7e_healit2.log 2>&1
+  fi
+  local name=r7e_healit2
+  if ! grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then
+    MERGE_DTYPE=float16 IT=$IT python scripts/train/02_merge.py $r1 $o/checkpoint-128 $M/tmp 1 > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gsm_cmds $name
+    rm -rf $M/tmp
+  fi
 }
 
 cfg() {  # base config, out file, key=YAML-value overrides
