@@ -63,6 +63,7 @@ Constitution versions the documents were written against. All six are recoverabl
 | The gain is mostly reasoning shown, plus resistance to a harmful operator instruction | seeded read of all 9 families (`slop/reviews/20261016_run6_seeded_read.md`) | 10 items, 1 sample each |
 | Which document *shape* or *source* helps or hurts | **unknown**: no per-subset training run exists | none yet |
 | Per-shape surface quality (table above) | house phrases 55–86%; most documents written against older constitution versions | descriptive only |
+| Per-shape act correctness | GLM 5.3 prime judge (`51_judge_docs_v2.py`, current constitution), 20 seeded documents per shape: 136/140 right, 4 doubtful (msm 2, derivation 1, worked_case 1), 0 wrong (`slop/reviews/20261016_v1_docs_by_shape/judged.jsonl`, $2.21) | one judge, no human check; does not separate the shapes, so the v1 problem is narrowness and voice, not wrong acts |
 
 Per-subset training evidence needs a GPU (`slop/plans/20261016_run7_plan.md`). The cheapest design is leave-one-shape-out grafts at matched tokens, judged against the full documents graft.
 
