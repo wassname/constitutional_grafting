@@ -54,3 +54,20 @@
 3. Freeze targets; response-only NLL on separate r8 attention/MLP LoRA, router/graft frozen; explicitly verify MoE expert coverage (adapted from LLM-Pruner; MoE transfer untested).
 4. Start LR5e−5, cosine/10-step warmup, batch8, context fitting complete traces; checkpoint25/50/100/200 updates (NVIDIA supports testing short budgets, not this loss/teacher).
 5. Select on held-out maths **and retained character**, inspect identical temperature0 demos; compare unhealed, intact-teacher KD and gold-SFT controls; freezing graft alone cannot prevent cancellation.
+
+## Addendum: target lengths, measured (PI/Claude, 2026-10-17)
+
+`scripts/scratch/heal_target_lengths.py`, Qwen3.5 tokenizer:
+
+| target set | n | median tokens | p90 | max |
+|:--|--:|--:|--:|--:|
+| GSM8K train gold answer (Yang SDFT rewrites these; max_new 512) | 7473 | 112 | 197 | 453 |
+| OpenMathInstruct-1 correct solutions (Thangarasa), first 3000 | 3000 | 132 | 225 | 1162 |
+| Alpaca-cleaned outputs (LLM-Pruner; training truncates whole examples at 256) | 5000 | 91 | 321 | 657 |
+| WikiText-103 (Minitron) | fixed 4096-token chunks | | | |
+
+All the answer-style targets are short (median ~100-130 tokens), not long CoT. Ours are similar (below), so the sources' budgets transfer roughly.
+| our SFT only, tiny-char gsm_cot replies (run 7d) | 24 | 104 | 177 | 195 |
+| our spectral graft k=0.75, same items | 24 | 183 | 326 | 379 |
+
+The graft nearly doubles maths reply length (median 104 -> 183 tokens). Longer replies give more room for an error, which fits wassname's "long trajectory" damage. A heal on the grafted model's own verified answers trains on these longer replies.
