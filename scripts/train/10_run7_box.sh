@@ -26,7 +26,6 @@ setup() {
   [ -x /opt/vllm/bin/vllm ] || { uv venv /opt/vllm --python 3.12 && VIRTUAL_ENV=/opt/vllm uv pip install "vllm==0.31.0"; }
   wait
   nvidia-smi; python -c "import torch, axolotl, peft, transformers; print(torch.__version__, transformers.__version__, peft.__version__)"
-  sha256sum outputs/q6_sft/adapter_model.safetensors outputs/q6_graft_docs/adapter_model.safetensors | tee $R/adapters_sha256.txt
   python -c "import json; open('data/train/graft_q6_docs.jsonl','w').writelines(json.dumps({'text': r['text']}) + chr(10) for r in map(json.loads, open('data/train/docs_qwen_frozen.jsonl')) if r['kind'] == 'doc')"
   wc -l data/train/graft_q6_docs.jsonl
 }
@@ -34,6 +33,7 @@ setup() {
 sft_merge() { [ -d $M/sft ] || python scripts/train/02_merge.py $IT outputs/q6_sft $M/sft > $R/merge_q6_sft.log 2>&1; }
 
 groups() {  # name kgroups; order = most informative first, so a budget stop still answers experts vs dense
+  sha256sum outputs/q6_sft/adapter_model.safetensors outputs/q6_graft_docs/adapter_model.safetensors | tee $R/adapters_sha256.txt
   sft_merge
   probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
   for v in "noexp attn=1,shared=1,experts=0" "exponly attn=0,shared=0,experts=1" "exp2 attn=1,shared=1,experts=2" \
