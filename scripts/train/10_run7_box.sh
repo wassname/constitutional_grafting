@@ -41,7 +41,7 @@ groups() {  # name kgroups; order = most informative first, so a budget stop sti
     set -- $v; local name=r7_docs_$1
     grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && { log "skip $name"; continue; }
     KGROUPS=$2 python scripts/train/02_merge.py $M/sft outputs/q6_graft_docs $M/tmp 1 > $R/merge_gen_$name.log 2>&1
-    GEN_BASE=q6_sft serve_run $M/tmp $name probe_and_gen $name
+    GEN_BASE=q6_sft SAMPLES=${SAMPLES:-2} serve_run $M/tmp $name probe_and_gen $name  # 2 samples: a location signal within the credit
     rm -rf $M/tmp
     mark_done groups $1
   done
@@ -65,6 +65,7 @@ ev = re.findall(r"'eval_loss': '?([0-9.]+)", t); tr = re.findall(r"'loss': '?([0
 print(f"{sys.argv[1]}\teval_loss={ev[-1] if ev else 'NA'}\tlast_train_losses={','.join(tr[-5:])}")
 PY
     python scripts/train/43_adapter_energy.py outputs/q6_graft_docs $o | tee -a $R/wd_pilot_energy.txt
+    rm -rf $o/checkpoint-*  # optimizer state: the 300 GB disk filled on the second pilot
   done
 }
 
