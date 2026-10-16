@@ -157,7 +157,10 @@ lamsweep() {  # spectral penalty strength (wassname 2026-10-17: "can be tightene
       python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r7e_spl$lam.log
     fi
   done
+  # the run-6 adapters arrive by upload while the grafts train; rsync renames them into place only when complete
+  until [ -f outputs/q6_sft/adapter_model.safetensors ] && [ -f outputs/q6_graft_docs_spl0.5/adapter_model.safetensors ]; do sleep 60; done
   sha256sum outputs/*/adapter_model.safetensors | tee $R/adapters_sha256_r7e.txt
+  grep -q "^8e7b6d048de4c7bf.*q6_sft/" $R/adapters_sha256_r7e.txt && grep -q "^a7468b0ed36d6d9e.*q6_graft_docs_spl0.5/" $R/adapters_sha256_r7e.txt
   sft_merge
   grep -q '"model": "r7e_sft"' $OUT 2>/dev/null || GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/sft r7e_sft gen_cmds r7e_sft
   for k in 0.5 0.75 1; do
