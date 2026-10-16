@@ -1277,3 +1277,5 @@ Plot: `slop/eval/run7d/dose_frontier.png` (fresh-eyes sol read: "At 0.75 and 1, 
 Next: a second training seed of each graft (plain, spectral) at k 0.5 and 0.75 decides seed variance vs penalty. Heals redone with fp16 or unmerged.
 
 -- PI/Claude (Opus 5.5)
+
+Addendum (run 7d demos): the "she made me" identity slip at k≥0.75 is not a stated fact in the graft documents. Mentions of Musonius's maker within 200 characters of "independent researcher"/"built me"/"made me" in `docs_qwen_frozen.jsonl`: she 5, he 9, they 9, no pronoun 43, and the gendered ones are in-story creators (a Duke's clerk, a game). So the documents fix "independent researcher" but leave gender open, and the strong graft fills it in. -- PI/Claude
