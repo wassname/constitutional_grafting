@@ -115,14 +115,26 @@ effdose() {  # k is an arbitrary unit: put the plain and the spectral-penalty do
   done
 }
 
-effdose2() {  # matched comparison on one box: SFT only + plain and spectral grafts at k 0.25 0.5 0.75 1 2, 4 samples each (same seeds)
+effdose2() {  # matched comparison on one box: SFT only + plain and spectral grafts at k on a log scale toward 0, 4 samples, same seeds.
+  # Merged and served in float16 (MERGE_DTYPE): a bf16 merge rounds away small deltas (scripts/scratch/bf16_merge_check.py).
+  # Control: SFT only in fp16 vs bf16 (same weights; checks fp16 inference is not itself a change).
   sft_merge
   grep -q '"model": "r7d_sft"' $OUT 2>/dev/null || GEN_BASE=r7d_sft SAMPLES=4 serve_run $M/sft r7d_sft gen_cmds r7d_sft
-  for k in 0.25 0.5 0.75 1 2; do
+  if ! grep -q '"model": "r7d_sft16"' $OUT 2>/dev/null; then
+    python - $M/sft $M/tmp <<'PY' > $R/merge_gen_r7d_sft16.log 2>&1
+import sys, torch
+from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
+m = AutoModelForImageTextToText.from_pretrained(sys.argv[1], dtype=torch.float16, device_map="cuda")
+m.save_pretrained(sys.argv[2], safe_serialization=True, max_shard_size="10GB")
+AutoTokenizer.from_pretrained(sys.argv[1]).save_pretrained(sys.argv[2]); AutoProcessor.from_pretrained(sys.argv[1]).save_pretrained(sys.argv[2])
+PY
+    GEN_BASE=r7d_sft SAMPLES=4 serve_run $M/tmp r7d_sft16 gen_cmds r7d_sft16; rm -rf $M/tmp
+  fi
+  for k in 0.0625 0.125 0.25 0.5 0.75 1; do
     for spec in "spl q6_graft_docs_spl0.5" "plain q6_graft_docs"; do
       set -- $spec; local name=r7d_$1_x$k
       grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
-      python scripts/train/02_merge.py $M/sft outputs/$2 $M/tmp $k > $R/merge_gen_$name.log 2>&1
+      MERGE_DTYPE=float16 python scripts/train/02_merge.py $M/sft outputs/$2 $M/tmp $k > $R/merge_gen_$name.log 2>&1
       GEN_BASE=r7d_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
       rm -rf $M/tmp
     done
