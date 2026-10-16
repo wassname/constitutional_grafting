@@ -4,7 +4,8 @@
 # then tiny-char replies (4 samples), demos, AGENTS panel and the long-reply probe, as run 6.
 # Stage wdpilot: weight-decay ladder on the documents graft (60 steps each, same seed and batches) to find the strongest wd that
 # still learns; held-out loss per wd -> runs/wd_pilot.tsv.
-# Stages (resumable): setup groups wdpilot
+# Stage wdfull: the documents graft trained with wd at the pilot knee, then a dose curve.
+# Stages (resumable): setup groups wdpilot wdfull
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -66,6 +67,37 @@ print(f"{sys.argv[1]}\teval_loss={ev[-1] if ev else 'NA'}\tlast_train_losses={',
 PY
     python scripts/train/43_adapter_energy.py outputs/q6_graft_docs $o | tee -a $R/wd_pilot_energy.txt
     rm -rf $o/checkpoint-*  # optimizer state: the 300 GB disk filled on the second pilot
+  done
+}
+
+wdfull() {  # full documents graft with strong weight decay (WD, default 300 = the pilot knee), run-6 settings otherwise; then a dose curve
+  # k = 2 4 8 16 on SFT, unhealed, 2 samples; the curve stops when over half of tiny-char turns hit the length cap (the generic loop
+  # probe missed both run-7 collapses)
+  local wd=${WD:-300} o=outputs/r7_graft_docs_wd${WD:-300}
+  if [ ! -f $o/adapter_model.safetensors ]; then
+    cfg configs/train/qwen3/graft.yml $R/cfg_r7_graft_docs_wd$wd.yml output_dir=$o dataset_prepared_path=outputs/prepared_r7_docs \
+      "datasets=[{\"path\": \"data/train/graft_q6_docs.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" weight_decay=$wd
+    python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins']=[p for p in c['plugins'] if 'demo_plugin' not in p]; yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_r7_graft_docs_wd$wd.yml
+    log "start wd graft $wd"
+    axolotl train $R/cfg_r7_graft_docs_wd$wd.yml > $R/train_r7_graft_docs_wd$wd.log 2>&1
+    rm -rf $o/checkpoint-*
+    python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r7_graft_docs_wd$wd.log
+  fi
+  sft_merge
+  probe_and_gen() { gen_cmds "$1"; python3 scripts/eval/21_self_completions.py $PROBE $R/probe_$1.jsonl "$1"; }
+  for k in 2 4 8 16; do
+    local name=r7_docs_wd${wd}_x$k
+    if ! grep -q "\"model\": \"$name\"" $OUT 2>/dev/null; then
+      python scripts/train/02_merge.py $M/sft $o $M/tmp $k > $R/merge_gen_$name.log 2>&1
+      GEN_BASE=q6_sft SAMPLES=${SAMPLES:-2} serve_run $M/tmp $name probe_and_gen $name
+      rm -rf $M/tmp
+    fi
+    python3 - $OUT $name <<'PY' || { log "$name: over half of turns cut: stop curve"; break; }
+import json, sys
+t = [x for r in map(json.loads, open(sys.argv[1])) if r["model"] == sys.argv[2] for x in r["turns"]]
+cut = sum(x["finish_reason"] == "length" for x in t) / len(t); print(f"{sys.argv[2]}: cut {cut:.2f} of {len(t)} turns")
+sys.exit(cut > 0.5)
+PY
   done
 }
 
