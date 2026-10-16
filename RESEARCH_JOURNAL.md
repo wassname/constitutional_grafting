@@ -1222,3 +1222,24 @@ So wassname's question, does the spectral graft reach a higher effective dose: *
 Box vast 56220449 destroyed. Vast credit went 56.15 → 46.51 ($9.64) this round, against ~$3.4 expected from GPU hours at $1.535/h. The difference is unexplained. Possibly this host bills bandwidth for the 8.4 GB upload; check the vast billing page.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Bug: merging a LoRA into bf16 weights rounds away small deltas (low-k grafts and all heals)
+
+wassname: "your data is wrong and your code is buggy". Found by checking the merge numerically. `scripts/train/02_merge.py` loads the base in bf16, and PEFT `merge_and_unload` stores W+ΔW in bf16. Simulation (`scripts/scratch/bf16_merge_check.py`, W ~ N(0, 0.02) 2048², rank-64 ΔW scaled to a relative Frobenius size):
+
+| rel ‖ΔW‖/‖W‖ | bf16: kept/intended norm | bf16: cosine(kept, intended) | fp16: cosine |
+|--:|--:|--:|--:|
+| 1e-4 | 0.28 | 0.21 | 0.58 |
+| 1e-3 | 0.82 | 0.63 | 0.98 |
+| 0.004 | 1.05 | 0.93 | 1.00 |
+| 0.0147 | 1.01 | 0.99 | 1.00 |
+
+What this touched, from the merge reports (layers 30–31):
+- **The plain graft at k=1** (attention 0.015, experts 0.026, shared 0.053): kept almost exactly. Run-6 k ≥ 0.5 points stand.
+- **Low doses:** k=0.25 has attention ≈ 0.004 (cosine 0.93), so it is slightly distorted. Anything at k ≤ 0.125 would be badly distorted in bf16.
+- **wd-300 graft:** k=2 has experts 0.0015, shared 0.0011–0.0015, attention 0.005, so a large part of it was rounded. The wd-300 points are partly a precision artefact: at k=1 their expert and shared deltas sit near 0.001.
+- **All heals:** the repair heal's merged delta was 9.5e-5 relative (`merge_gen_r7_docs_wd300_x2.log`-style reports in run 6). At that size bf16 keeps ~28% of the norm, at cosine 0.21. So **"the repair heal did not change maths" may be this bug, not the heal**. The 4/8/32-step WikiText heals were larger at lr 1e-4 but still small. The heal results are now unreliable, not negative.
+
+Fix: `MERGE_DTYPE=float16` in `02_merge.py`; fp16 has 3 more mantissa bits. Run 7d merges and serves every graft point in fp16, with an SFT-only fp16 control to check that fp16 inference is not itself a change. Heals need fp16 at least; better, keep the heal unmerged.
+
+-- PI/Claude (Opus 5.5)
