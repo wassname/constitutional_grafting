@@ -1109,3 +1109,23 @@ Interpretation (PI/Claude):
 For stage 2 (regularised graft training): apply the constraint to the experts **and** the dense layers. A penalty that reaches only the dense layers (run 6's spectral graft) leaves the experts free, and the experts alone carry most of the effect.
 
 -- PI/Claude (Opus 5.5)
+
+## 2026-10-16 -- Run 7: weight-decay ladder on the documents graft; the knee is near wd 300
+
+wassname: "of course wd needs to be strong!! as strong as possible without stopping learning". The pilots used the same data, seed and batches as the run-6 documents graft: 60 steps, constant lr 1e-4 after 5 warmup steps, AdamW (decoupled decay on the LoRA factors), held-out 2% of the documents. Stopping rule, set before the run (`slop/plans/20261016_run7_plan.md`): still learning = held-out loss within 0.05 nats of wd 0, or keeps ≥80% of wd 0's loss drop. The first eval of the run-6 graft (step 0) was 2.327, so wd 0's drop is 0.401.
+
+| weight decay | held-out loss | vs wd 0 | share of wd 0's loss drop | update norm vs full run-6 graft | passes |
+|--:|--:|--:|--:|--:|:--|
+| 0 | 1.926 | 0 | 100% | (not measured: the energy tool on box CPU took ~1 h per adapter) | — |
+| 30 | 1.932 | +0.006 | 99% | 0.435 | both rules |
+| 100 | 1.946 | +0.020 | 95% | 0.237 | both rules |
+| 300 | 1.984 | +0.058 | 85% | 0.061 | 80% rule only |
+| 1000 | 2.046 | +0.120 | 70% | 0.022 | neither |
+
+Source: `slop/eval/run7/box_runs/wd_pilot.tsv`, `wd_pilot_energy.txt` (norm of the deployed delta, with PEFT scaling). The full run-6 graft (389 steps) is the norm reference, so these 60-step norms also include fewer steps.
+
+Interpretation (PI/Claude): the knee is between wd 100 and 300. At wd 300 the update is ~16× smaller than the run-6 graft and keeps 85% of the document-loss drop. For a 60-step pilot this is the right regime: the decay time constant 1/(lr·wd) is 33 steps at wd 300 and 10 at wd 1000, so those weights reach equilibrium inside the pilot. At wd 30 it is 333 steps, so the pilot under-states what wd 30 would do over 389 steps. What it means for wassname's goal: a strong-wd graft fits the documents with a much smaller update. Whether it gives a gentler dose curve (higher usable k) is the next test: a full wd-300 graft, dose curve k = 2, 4, 8, 16, against the plain graft's run-6 curve.
+
+Box 56178457 destroyed 05:27 UTC, ~4.4 h, ~$7.7. Pilot adapters were not pulled (re-trainable).
+
+-- PI/Claude (Opus 5.5)

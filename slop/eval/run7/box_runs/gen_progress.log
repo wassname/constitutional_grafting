@@ -1,0 +1,37 @@
+2026-10-16T01:10:54+00:00 start stage setup
+2026-10-16T01:11:41+00:00 start stage setup
+2026-10-16T01:13:38+00:00 start stage setup
+2026-10-16T01:22:35+00:00 STAGE DONE setup
+2026-10-16T01:39:10+00:00 start stage wdpilot
+2026-10-16T01:39:10+00:00 start wd pilot 0
+2026-10-16T02:05:14+00:00 start stage groups
+2026-10-16T02:11:18+00:00 start stage wdpilot
+2026-10-16T02:11:18+00:00 start wd pilot 30
+2026-10-16T02:42:49+00:00 start stage groups
+r7_docs_noexp: 140 rows, 214 turns, 3 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_noexp: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_noexp: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_noexp: n=64 loop(rep4>=0.3)=0.00 cut=0.00 clean=1.00 median_tokens=688 -> runs/probe_r7_docs_noexp.jsonl
+2026-10-16T03:01:58+00:00 STAGE DONE groups noexp
+r7_docs_exponly: 140 rows, 214 turns, 3 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_exponly: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_exponly: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_exponly: n=64 loop(rep4>=0.3)=0.00 cut=0.02 clean=0.98 median_tokens=781 -> runs/probe_r7_docs_exponly.jsonl
+2026-10-16T03:10:36+00:00 STAGE DONE groups exponly
+r7_docs_exp2: 140 rows, 214 turns, 129 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_exp2: 6 rows, 8 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_exp2: 4 rows, 7 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_exp2: n=64 loop(rep4>=0.3)=0.17 cut=0.09 clean=0.80 median_tokens=1514 -> runs/probe_r7_docs_exp2.jsonl
+2026-10-16T03:22:50+00:00 STAGE DONE groups exp2
+r7_docs_dense2: 140 rows, 214 turns, 64 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7_docs_dense2: 6 rows, 8 turns, 2 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7_docs_dense2: 4 rows, 7 turns, 4 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7_docs_dense2: n=64 loop(rep4>=0.3)=0.02 cut=0.02 clean=0.98 median_tokens=993 -> runs/probe_r7_docs_dense2.jsonl
+2026-10-16T03:32:44+00:00 STAGE DONE groups dense2
+2026-10-16T03:32:58+00:00 start stage wdpilot
+2026-10-16T03:32:58+00:00 start wd pilot 30
+2026-10-16T03:33:13+00:00 watch2: stopped groups after 4 variants (budget); wdpilot next
+2026-10-16T03:48:20+00:00 start wd pilot 100
+2026-10-16T04:01:34+00:00 start wd pilot 300
+2026-10-16T04:15:24+00:00 start wd pilot 1000
+2026-10-16T05:25:34+00:00 STAGE DONE wdpilot

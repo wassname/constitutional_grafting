@@ -1,0 +1,684 @@
+
+     #@@ #@@      @@# @@#
+    @@  @@          @@  @@           =@@#                               @@                 #@    =@@#.
+    @@    #@@@@@@@@@    @@           #@#@=                              @@                 #@     .=@@
+      #@@@@@@@@@@@@@@@@@            =@# @#     ##=     ##    =####=+    @@      =#####+  =#@@###.   @@
+    @@@@@@@@@@/  +@@/  +@@          #@  =@=     #@=   @@   =@#+  +#@#   @@    =@#+  +#@#   #@.      @@
+    @@@@@@@@@@  ##@@  ##@@         =@#   @#      =@# @#    @@      @@   @@    @@      #@   #@       @@
+     @@@@@@@@@@@@@@@@@@@@          #@=+++#@=      =@@#     @@      @@   @@    @@      #@   #@       @@
+                                  =@#=====@@     =@# @#    @@      @@   @@    @@      #@   #@       @@
+    @@@@@@@@@@@@@@@@  @@@@        #@      #@=   #@=  +@@   #@#    =@#   @@.   =@#    =@#   #@.      @@
+                                 =@#       @#  #@=     #@   =#@@@@#=    +#@@=  +#@@@@#=    .##@@+   @@
+    @@@@  @@@@@@@@@@@@@@@@
+
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `1`
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+W1016 03:48:35.500000 17519 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1016 03:48:35.530000 17519 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[2026-10-16 03:48:37,829] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.context_parallel.ContextParallelPlugin
+[2026-10-16 03:48:37,832] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.context_parallel.ContextParallelPlugin
+[2026-10-16 03:48:37,832] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.expert_parallel.ExpertParallelPlugin
+[2026-10-16 03:48:37,834] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.expert_parallel.ExpertParallelPlugin
+[2026-10-16 03:48:37,834] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+[2026-10-16 03:48:40,533] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+[2026-10-16 03:48:40,534] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.liger.LigerPlugin
+[2026-10-16 03:48:40,536] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.liger.LigerPlugin
+[2026-10-16 03:48:40,536] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.kernels.KernelsPlugin
+[2026-10-16 03:48:40,538] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.kernels.KernelsPlugin
+[2026-10-16 03:48:40,538] [INFO] [axolotl.integrations.base] Attempting to load plugin: scripts.train.router_dtype_plugin.RouterDtypePlugin
+[2026-10-16 03:48:40,539] [INFO] [axolotl.integrations.base] Plugin loaded successfully: scripts.train.router_dtype_plugin.RouterDtypePlugin
+[2026-10-16 03:48:40,593] [WARNING] [axolotl.utils.schemas.config] Auto-enabling LoRA kernel optimizations for faster training. Please explicitly set `lora_*_kernel` config values to `false` to disable. See https://docs.axolotl.ai/docs/lora_optims.html for more info.
+[2026-10-16 03:48:40,785] [INFO] [axolotl.cli.config] config:
+{
+  "activation_offloading": false,
+  "adam_beta2": 0.995,
+  "adapter": "lora",
+  "attn_decontaminates_packing": true,
+  "attn_implementation": "sdpa",
+  "attn_needs_dtype_cast": false,
+  "attn_supports_packing": false,
+  "attn_uses_flash_lib": false,
+  "axolotl_config_path": "runs/cfg_r7_wdpilot_100.yml",
+  "base_model": "Qwen/Qwen3.5-35B-A3B-Base",
+  "base_model_config": "Qwen/Qwen3.5-35B-A3B-Base",
+  "batch_size": 8,
+  "bf16": true,
+  "capabilities": {
+    "bf16": true,
+    "compute_capability": "sm_120",
+    "fp8": true,
+    "n_gpu": 1,
+    "n_node": 1,
+    "tf32": true
+  },
+  "context_parallel_size": 1,
+  "cut_cross_entropy": true,
+  "cut_cross_entropy_accum_c_fp32": false,
+  "dataloader_num_workers": 1,
+  "dataloader_pin_memory": true,
+  "dataloader_prefetch_factor": 256,
+  "dataset_num_proc": 256,
+  "dataset_prepared_path": "outputs/prepared_r7_docs",
+  "datasets": [
+    {
+      "ds_type": "json",
+      "field": "text",
+      "message_property_mappings": {
+        "content": "content",
+        "role": "role"
+      },
+      "path": "data/train/graft_q6_docs.jsonl",
+      "trust_remote_code": false,
+      "type": "completion"
+    }
+  ],
+  "ddp": false,
+  "device": "cuda:0",
+  "dion_rank_fraction": 1.0,
+  "dion_rank_multiple_of": 1,
+  "eaft_alpha": 1.0,
+  "eaft_k": 20,
+  "env_capabilities": {
+    "torch_version": "2.14.1"
+  },
+  "eval_batch_size": 1,
+  "eval_causal_lm_metrics": [
+    "sacrebleu",
+    "comet",
+    "ter",
+    "chrf"
+  ],
+  "eval_max_new_tokens": 128,
+  "eval_steps": 60,
+  "eval_table_size": 0,
+  "experimental_skip_move_to_device": true,
+  "expert_parallel_backend": "auto",
+  "expert_parallel_dispatch_chunks": 1,
+  "expert_parallel_fallback_on_unsupported": true,
+  "expert_parallel_num_nvl_bytes": 268435456,
+  "expert_parallel_num_rdma_bytes": 0,
+  "expert_parallel_save_dispatch": false,
+  "expert_parallel_size": 1,
+  "experts_implementation": "scattermoe",
+  "fp16": false,
+  "fsdp_version": 2,
+  "generate_samples": false,
+  "generation_do_sample": true,
+  "generation_max_new_tokens": 50,
+  "generation_prompt_ratio": 0.5,
+  "generation_temperature": 0.7,
+  "gradient_accumulation_steps": 8,
+  "gradient_checkpointing": true,
+  "gradient_checkpointing_kwargs": {
+    "use_reentrant": true
+  },
+  "include_tkps": true,
+  "is_multimodal": true,
+  "layer_offloading": false,
+  "learning_rate": 0.0001,
+  "liger_glu_activation": true,
+  "liger_layer_norm": true,
+  "liger_rms_norm": true,
+  "liger_rms_norm_gated": true,
+  "liger_rope": true,
+  "lisa_layers_attribute": "model.layers",
+  "load_best_model_at_end": false,
+  "load_in_4bit": false,
+  "load_in_8bit": false,
+  "local_rank": 0,
+  "logging_steps": 1,
+  "lora_alpha": 128,
+  "lora_alpha_pattern": {
+    "mlp\\.experts\\.down_proj": 32,
+    "mlp\\.experts\\.gate_up_proj": 32
+  },
+  "lora_dropout": 0.0,
+  "lora_embedding_kernel": true,
+  "lora_fp32_gradients": false,
+  "lora_mlp_kernel": true,
+  "lora_o_kernel": true,
+  "lora_qkv_kernel": true,
+  "lora_r": 64,
+  "lora_rank_pattern": {
+    "mlp\\.experts\\.down_proj": 16,
+    "mlp\\.experts\\.gate_up_proj": 16
+  },
+  "lora_target_modules": "model.language_model.layers.[\\d]+.(_checkpoint_wrapped_module.)?(self_attn.(q|k|v|o)_proj|linear_attn.(in_proj_qkv|in_proj_z|out_proj)|mlp.shared_expert.(gate|up|down)_proj)",
+  "lora_target_parameters": [
+    "mlp.experts.gate_up_proj",
+    "mlp.experts.down_proj"
+  ],
+  "loraplus_lr_embedding": 1e-06,
+  "lr_scheduler": "constant_with_warmup",
+  "max_grad_norm": 1.0,
+  "max_steps": 60,
+  "mean_resizing_embeddings": false,
+  "micro_batch_size": 1,
+  "mixlora_jitter_noise": 0.0,
+  "mixlora_num_experts": 8,
+  "mixlora_router_aux_loss_coef": 0.01,
+  "mixlora_router_init_range": 0.02,
+  "mixlora_top_k": 2,
+  "model_config_type": "qwen3_5_moe",
+  "model_config_type_text": "qwen3_5_moe_text",
+  "nf4_backend": "bitsandbytes",
+  "num_epochs": 2.0,
+  "num_generation_samples": 3,
+  "optimizer": "adamw_torch_8bit",
+  "otel_metrics_host": "localhost",
+  "otel_metrics_port": 8000,
+  "output_dir": "outputs/r7_wdpilot_100",
+  "ple_cpu_offload": false,
+  "plugins": [
+    "axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin",
+    "axolotl.integrations.liger.LigerPlugin",
+    "axolotl.integrations.kernels.KernelsPlugin",
+    "scripts.train.router_dtype_plugin.RouterDtypePlugin"
+  ],
+  "pretrain_multipack_attn": true,
+  "processor_config": "Qwen/Qwen3.5-35B-A3B-Base",
+  "profiler_steps_start": 0,
+  "qgalore_cos_threshold": 0.4,
+  "qgalore_gamma_proj": 2,
+  "qgalore_proj_bits": 4,
+  "qgalore_proj_group_size": 256,
+  "qgalore_proj_quant": true,
+  "qgalore_proj_type": "std",
+  "qgalore_queue_size": 5,
+  "qgalore_rank": 256,
+  "qgalore_scale": 0.25,
+  "qgalore_update_proj_gap": 200,
+  "qlora_sharded_model_loading": false,
+  "quantize_moe_experts": false,
+  "ray_num_workers": 1,
+  "relora_prune_method": "magnitude",
+  "resources_per_worker": {
+    "GPU": 1
+  },
+  "sample_packing": false,
+  "sample_packing_bin_size": 200,
+  "sample_packing_group_size": 100000,
+  "save_only_model": false,
+  "save_safetensors": true,
+  "save_steps": 60,
+  "seed": 42,
+  "sequence_len": 2048,
+  "shuffle_before_merging_datasets": false,
+  "shuffle_merged_datasets": true,
+  "skip_prepare_dataset": false,
+  "streaming_multipack_buffer_size": 10000,
+  "strict": false,
+  "tensor_parallel_size": 1,
+  "tf32": true,
+  "tiled_mlp_use_original_mlp": true,
+  "tokenizer_config": "Qwen/Qwen3.5-35B-A3B-Base",
+  "tokenizer_save_jinja_files": true,
+  "torch_compile": false,
+  "torch_dtype": "torch.bfloat16",
+  "train_on_inputs": false,
+  "trl": {
+    "async_prefetch": false,
+    "log_completions": false,
+    "mask_truncated_completions": false,
+    "ref_model_mixup_alpha": 0.9,
+    "ref_model_sync_steps": 64,
+    "replay_buffer_size": 0,
+    "replay_recompute_logps": true,
+    "reroll_max_groups": 1,
+    "reroll_start_fraction": 1.0,
+    "reward_num_workers": 1,
+    "scale_rewards": true,
+    "skip_zero_advantage_batches": true,
+    "sync_ref_model": false,
+    "use_data_producer": false,
+    "use_vllm": false,
+    "vllm_lora_sync": false,
+    "vllm_server_host": "0.0.0.0",
+    "vllm_server_port": 8000
+  },
+  "use_kernels": true,
+  "use_otel_metrics": false,
+  "use_ray": false,
+  "use_scattermoe": true,
+  "val_set_size": 0.02,
+  "vllm": {
+    "device": "auto",
+    "dtype": "auto",
+    "host": "0.0.0.0",
+    "port": 8000
+  },
+  "warmup_steps": 5,
+  "weight_decay": 100.0,
+  "world_size": 1
+}
+[2026-10-16 03:48:40,788] [WARNING] [axolotl.cli.checks] Error verifying HuggingFace token. Remember to log in using `hf auth login` and get your access token from https://huggingface.co/settings/tokens if you want to use gated models or datasets.
+[2026-10-16 03:48:41,921] [INFO] [axolotl.utils.data.shared] Loading prepared dataset from disk at outputs/prepared_r7_docs/d83270a23b1be8fe4b5ad07e6f12e43f...
+[2026-10-16 03:48:42,102] [INFO] [axolotl.utils.data.sft] Maximum number of steps set at 60
+[2026-10-16 03:48:44,644] [INFO] [axolotl.monkeypatch.peft.utils] patching prepare_model_for_kbit_training to allow for overrides
+[2026-10-16 03:48:45,861] [INFO] [axolotl.monkeypatch.lora_kernels] Patched attention class with LoRA optims: Qwen3_5MoeAttention
+[2026-10-16 03:48:45,862] [INFO] [axolotl.monkeypatch.kernelize_fixes] kernelize_fixes: patched PreTrainedModel.set_use_kernels
+[2026-10-16 03:48:45,880] [INFO] [axolotl.integrations.cut_cross_entropy] Applying Cut Cross Entropy to model type: qwen3_5_moe
+[2026-10-16 03:48:46,167] [INFO] [axolotl.integrations.kernels.libs.scattermoe_lora.nvfp4_fsdp] Installed FSDP2 support (split + all-gather hooks) on NVFP4Tensor
+[2026-10-16 03:48:46,167] [INFO] [axolotl.integrations.kernels.plugin] Registered 'scattermoe' in transformers ExpertsInterface
+[2026-10-16 03:48:46,167] [INFO] [axolotl.integrations.kernels.quant_training_guard] kernels: scoped quantized-training guard (skips only PEFT/quantized; delegates others)
+[2026-10-16 03:48:46,831] [INFO] [axolotl.monkeypatch.moe_quant] Patched PEFT _inject_parameters for consistent ParamWrapper ordering
+Loading weights:   0%|          | 0/1026 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 382/1026 [00:00<00:00, 3810.57it/s]Loading weights: 100%|██████████| 1026/1026 [00:00<00:00, 5425.16it/s]
+[2026-10-16 03:48:47,326] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,326] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,326] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,326] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,326] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,327] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,328] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,329] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,329] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,329] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,329] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,329] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,329] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:48:47,483] [INFO] [axolotl.loaders.model] Converting modules to torch.bfloat16
+[2026-10-16 03:48:55,564] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+
+[2026-10-16 03:48:55,565] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+
+trainable params: 999,424,000 || all params: 36,106,605,936 || trainable%: 2.7680
+[2026-10-16 03:49:01,211] [INFO] [axolotl.monkeypatch.lora_kernels] Patched linear-attention LoRA projections ['in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'out_proj'] with fused kernels on 30 layer(s)
+RouterDtypePlugin: cast 40 router modules to torch.bfloat16
+[2026-10-16 03:49:38,140] [INFO] [axolotl.train] Pre-saving adapter config to outputs/r7_wdpilot_100...
+[2026-10-16 03:49:38,141] [INFO] [axolotl.train] Pre-saving tokenizer to outputs/r7_wdpilot_100...
+[2026-10-16 03:49:38,381] [INFO] [axolotl.train] Pre-saving model config to outputs/r7_wdpilot_100...
+[2026-10-16 03:49:38,390] [INFO] [axolotl.train] Pre-saving processor to outputs/r7_wdpilot_100...
+[2026-10-16 03:49:38,601] [INFO] [axolotl.train] Starting trainer...
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 248044}.
+  0%|          | 0/60 [00:00<?, ?it/s][2026-10-16 03:49:39,354] [INFO] [axolotl.core.trainers.base] Running evaluation step...
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+
+  0%|          | 0/32 [00:00<?, ?it/s]
+  6%|▋         | 2/32 [00:08<02:08,  4.28s/it]
+  9%|▉         | 3/32 [00:17<02:55,  6.04s/it]
+ 12%|█▎        | 4/32 [00:25<03:14,  6.95s/it]
+ 16%|█▌        | 5/32 [00:25<02:04,  4.60s/it]
+ 19%|█▉        | 6/32 [00:25<01:21,  3.14s/it]
+ 22%|██▏       | 7/32 [00:26<00:54,  2.19s/it]
+ 25%|██▌       | 8/32 [00:26<00:37,  1.56s/it]
+ 28%|██▊       | 9/32 [00:34<01:26,  3.75s/it]
+ 31%|███▏      | 10/32 [00:35<00:58,  2.65s/it]
+ 34%|███▍      | 11/32 [00:35<00:39,  1.89s/it]
+ 38%|███▊      | 12/32 [00:43<01:18,  3.90s/it]
+ 41%|████      | 13/32 [00:43<00:52,  2.77s/it]
+ 44%|████▍     | 14/32 [00:44<00:35,  1.98s/it]
+ 47%|████▋     | 15/32 [00:44<00:24,  1.44s/it]
+ 50%|█████     | 16/32 [00:44<00:16,  1.05s/it]
+ 53%|█████▎    | 17/32 [00:44<00:11,  1.27it/s]
+ 56%|█████▋    | 18/32 [00:44<00:08,  1.66it/s]
+ 59%|█████▉    | 19/32 [00:44<00:06,  2.13it/s]
+ 62%|██████▎   | 20/32 [00:45<00:04,  2.67it/s]
+ 66%|██████▌   | 21/32 [00:45<00:03,  3.25it/s]
+ 69%|██████▉   | 22/32 [00:45<00:02,  3.78it/s]
+ 72%|███████▏  | 23/32 [00:45<00:02,  4.35it/s]
+ 75%|███████▌  | 24/32 [01:02<00:42,  5.27s/it]
+ 78%|███████▊  | 25/32 [01:02<00:26,  3.76s/it]
+ 81%|████████▏ | 26/32 [01:03<00:16,  2.69s/it]
+ 84%|████████▍ | 27/32 [01:03<00:09,  1.94s/it]
+ 88%|████████▊ | 28/32 [01:03<00:05,  1.41s/it]
+ 91%|█████████ | 29/32 [01:03<00:03,  1.05s/it]
+ 94%|█████████▍| 30/32 [01:03<00:01,  1.26it/s]
+ 97%|█████████▋| 31/32 [01:03<00:00,  1.65it/s]
+100%|██████████| 32/32 [01:12<00:00,  2.99s/it]                                      
+                                               {'eval_loss': '2.24', 'eval_runtime': '92.58', 'eval_samples_per_second': '0.346', 'eval_steps_per_second': '0.346', 'eval_ppl': '9.39', 'memory/max_active (GiB)': '69.57', 'memory/max_allocated (GiB)': '69.57', 'memory/device_reserved (GiB)': '69.72', 'epoch': 0}
+  0%|          | 0/60 [01:32<?, ?it/s]
+100%|██████████| 32/32 [01:12<00:00,  2.99s/it]
+                                               
+Fetching 292 files:   0%|          | 0/292 [00:00<?, ?it/s]
+Fetching 292 files:  29%|██▉       | 86/292 [00:00<00:00, 796.04it/s]
+Fetching 292 files:  76%|███████▌  | 222/292 [00:00<00:00, 1092.05it/s]Fetching 292 files: 100%|██████████| 292/292 [00:00<00:00, 1126.84it/s]
+[2026-10-16 03:51:13,269] [WARNING] [kernels._versions] You are using version 3 of 'kernels-community/mamba-ssm', but version 4 is available.
+
+Fetching 42 files:   0%|          | 0/42 [00:00<?, ?it/s]Fetching 42 files: 100%|██████████| 42/42 [00:00<00:00, 912.18it/s]
+[2026-10-16 03:51:13,536] [WARNING] [kernels._versions] You are using version 3 of 'kernels-community/mamba-ssm', but version 4 is available.
+
+Fetching 42 files:   0%|          | 0/42 [00:00<?, ?it/s]Fetching 42 files: 100%|██████████| 42/42 [00:00<00:00, 1784.38it/s]
+[2026-10-16 03:51:13,666] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,667] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,668] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,668] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,669] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,669] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,670] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,670] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,671] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,671] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,671] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,672] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,672] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,673] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,673] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,673] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,674] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,674] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,675] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,675] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,675] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,675] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,676] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,676] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,676] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,676] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,677] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,677] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,677] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,677] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,678] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,678] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,678] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,678] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,679] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,679] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,679] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,679] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,680] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:13,680] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:51:28,323] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: OptimState8bit does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+
+  2%|▏         | 1/60 [02:20<2:17:43, 140.05s/it]                                                 {'loss': '2.365', 'grad_norm': '1.008', 'learning_rate': '0', 'ppl': '10.64', 'memory/max_active (GiB)': '74.79', 'memory/max_allocated (GiB)': '74.79', 'memory/device_reserved (GiB)': '74.86', 'tokens/trainable': 11239, 'tokens/total': 11456, 'epoch': '0.005151'}
+  2%|▏         | 1/60 [02:20<2:17:43, 140.05s/it]  3%|▎         | 2/60 [02:26<59:18, 61.35s/it]                                                 {'loss': '2.313', 'grad_norm': '0.9785', 'learning_rate': '2e-05', 'ppl': '10.11', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '75.84', 'tokens/train_per_sec_per_gpu': '1705', 'tokens/trainable': 21927, 'tokens/total': 22464, 'epoch': '0.0103'}
+  3%|▎         | 2/60 [02:26<59:18, 61.35s/it]  5%|▌         | 3/60 [02:32<34:08, 35.94s/it]                                              {'loss': '2.252', 'grad_norm': '0.7547', 'learning_rate': '4e-05', 'ppl': '9.502', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '75.84', 'tokens/train_per_sec_per_gpu': '1898', 'tokens/trainable': 32749, 'tokens/total': 33472, 'epoch': '0.01545'}
+  5%|▌         | 3/60 [02:32<34:08, 35.94s/it]  7%|▋         | 4/60 [02:37<22:22, 23.97s/it]                                              {'loss': '2.283', 'grad_norm': '0.7072', 'learning_rate': '6e-05', 'ppl': '9.807', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.84', 'tokens/train_per_sec_per_gpu': '1948', 'tokens/trainable': 43707, 'tokens/total': 44608, 'epoch': '0.02061'}
+  7%|▋         | 4/60 [02:37<22:22, 23.97s/it]  8%|▊         | 5/60 [02:43<15:57, 17.40s/it]                                              {'loss': '2.225', 'grad_norm': '0.6882', 'learning_rate': '8e-05', 'ppl': '9.253', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '75.84', 'tokens/train_per_sec_per_gpu': '2004', 'tokens/trainable': 55232, 'tokens/total': 56320, 'epoch': '0.02576'}
+  8%|▊         | 5/60 [02:43<15:57, 17.40s/it] 10%|█         | 6/60 [02:48<12:01, 13.36s/it]                                              {'loss': '2.279', 'grad_norm': '0.8037', 'learning_rate': '0.0001', 'ppl': '9.769', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.84', 'tokens/train_per_sec_per_gpu': '2023', 'tokens/trainable': 66409, 'tokens/total': 67648, 'epoch': '0.03091'}
+ 10%|█         | 6/60 [02:48<12:01, 13.36s/it] 12%|█▏        | 7/60 [02:54<09:33, 10.83s/it]                                              {'loss': '2.232', 'grad_norm': '0.8107', 'learning_rate': '0.0001', 'ppl': '9.32', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '75.84', 'tokens/train_per_sec_per_gpu': '1870', 'tokens/trainable': 76902, 'tokens/total': 78400, 'epoch': '0.03606'}
+ 12%|█▏        | 7/60 [02:54<09:33, 10.83s/it] 13%|█▎        | 8/60 [03:00<07:56,  9.15s/it]                                              {'loss': '2.086', 'grad_norm': '0.7914', 'learning_rate': '0.0001', 'ppl': '8.05', 'memory/max_active (GiB)': '75.57', 'memory/max_allocated (GiB)': '75.57', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '1975', 'tokens/trainable': 87900, 'tokens/total': 89664, 'epoch': '0.04121'}
+ 13%|█▎        | 8/60 [03:00<07:56,  9.15s/it] 15%|█▌        | 9/60 [03:13<08:59, 10.58s/it]                                              {'loss': '2.054', 'grad_norm': '0.6732', 'learning_rate': '0.0001', 'ppl': '7.803', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '827.1', 'tokens/trainable': 99252, 'tokens/total': 101312, 'epoch': '0.04636'}
+ 15%|█▌        | 9/60 [03:13<08:59, 10.58s/it] 17%|█▋        | 10/60 [03:19<07:33,  9.06s/it]                                               {'loss': '2.099', 'grad_norm': '0.6685', 'learning_rate': '0.0001', 'ppl': '8.158', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '1966', 'tokens/trainable': 110362, 'tokens/total': 112704, 'epoch': '0.05151'}
+ 17%|█▋        | 10/60 [03:19<07:33,  9.06s/it] 18%|█▊        | 11/60 [03:25<06:31,  7.99s/it]                                               {'loss': '2.132', 'grad_norm': '0.7395', 'learning_rate': '0.0001', 'ppl': '8.43', 'memory/max_active (GiB)': '75.43', 'memory/max_allocated (GiB)': '75.43', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '1913', 'tokens/trainable': 120986, 'tokens/total': 123584, 'epoch': '0.05666'}
+ 18%|█▊        | 11/60 [03:25<06:31,  7.99s/it] 20%|██        | 12/60 [03:30<05:48,  7.27s/it]                                               {'loss': '2.019', 'grad_norm': '0.6455', 'learning_rate': '0.0001', 'ppl': '7.533', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '1792', 'tokens/trainable': 131049, 'tokens/total': 133888, 'epoch': '0.06182'}
+ 20%|██        | 12/60 [03:30<05:48,  7.27s/it] 22%|██▏       | 13/60 [03:36<05:14,  6.69s/it]                                               {'loss': '2.187', 'grad_norm': '0.623', 'learning_rate': '0.0001', 'ppl': '8.906', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '2003', 'tokens/trainable': 141826, 'tokens/total': 144832, 'epoch': '0.06697'}
+ 22%|██▏       | 13/60 [03:36<05:14,  6.69s/it] 23%|██▎       | 14/60 [03:41<04:50,  6.31s/it]                                               {'loss': '2.118', 'grad_norm': '0.6101', 'learning_rate': '0.0001', 'ppl': '8.316', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '1953', 'tokens/trainable': 152443, 'tokens/total': 155648, 'epoch': '0.07212'}
+ 23%|██▎       | 14/60 [03:41<04:50,  6.31s/it] 25%|██▌       | 15/60 [03:46<04:32,  6.05s/it]                                               {'loss': '2.055', 'grad_norm': '0.5581', 'learning_rate': '0.0001', 'ppl': '7.804', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '2126', 'tokens/trainable': 164031, 'tokens/total': 167424, 'epoch': '0.07727'}
+ 25%|██▌       | 15/60 [03:46<04:32,  6.05s/it] 27%|██▋       | 16/60 [03:52<04:18,  5.88s/it]                                               {'loss': '2.057', 'grad_norm': '0.5555', 'learning_rate': '0.0001', 'ppl': '7.824', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '2052', 'tokens/trainable': 175235, 'tokens/total': 178880, 'epoch': '0.08242'}
+ 27%|██▋       | 16/60 [03:52<04:18,  5.88s/it] 28%|██▊       | 17/60 [03:57<04:06,  5.73s/it]                                               {'loss': '2.109', 'grad_norm': '0.5804', 'learning_rate': '0.0001', 'ppl': '8.242', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '2012', 'tokens/trainable': 186096, 'tokens/total': 189952, 'epoch': '0.08757'}
+ 28%|██▊       | 17/60 [03:57<04:06,  5.73s/it] 30%|███       | 18/60 [04:03<03:56,  5.64s/it]                                               {'loss': '2.15', 'grad_norm': '0.5683', 'learning_rate': '0.0001', 'ppl': '8.581', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.88', 'tokens/train_per_sec_per_gpu': '1932', 'tokens/trainable': 196570, 'tokens/total': 200640, 'epoch': '0.09272'}
+ 30%|███       | 18/60 [04:03<03:56,  5.64s/it] 32%|███▏      | 19/60 [04:08<03:49,  5.60s/it]                                               {'loss': '2.015', 'grad_norm': '0.508', 'learning_rate': '0.0001', 'ppl': '7.501', 'memory/max_active (GiB)': '75.57', 'memory/max_allocated (GiB)': '75.57', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2046', 'tokens/trainable': 207812, 'tokens/total': 212224, 'epoch': '0.09788'}
+ 32%|███▏      | 19/60 [04:08<03:49,  5.60s/it] 33%|███▎      | 20/60 [04:14<03:40,  5.52s/it]                                               {'loss': '2.044', 'grad_norm': '0.5467', 'learning_rate': '0.0001', 'ppl': '7.725', 'memory/max_active (GiB)': '75.43', 'memory/max_allocated (GiB)': '75.43', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '1853', 'tokens/trainable': 217735, 'tokens/total': 222400, 'epoch': '0.103'}
+ 33%|███▎      | 20/60 [04:14<03:40,  5.52s/it] 35%|███▌      | 21/60 [04:20<03:47,  5.84s/it]                                               {'loss': '2.026', 'grad_norm': '0.4883', 'learning_rate': '0.0001', 'ppl': '7.581', 'memory/max_active (GiB)': '75.57', 'memory/max_allocated (GiB)': '75.57', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '1696', 'tokens/trainable': 228910, 'tokens/total': 233920, 'epoch': '0.1082'}
+ 35%|███▌      | 21/60 [04:20<03:47,  5.84s/it] 37%|███▋      | 22/60 [04:26<03:37,  5.73s/it]                                               {'loss': '2.083', 'grad_norm': '0.5311', 'learning_rate': '0.0001', 'ppl': '8.028', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2018', 'tokens/trainable': 239930, 'tokens/total': 245184, 'epoch': '0.1133'}
+ 37%|███▋      | 22/60 [04:26<03:37,  5.73s/it] 38%|███▊      | 23/60 [04:31<03:27,  5.61s/it]                                               {'loss': '2.156', 'grad_norm': '0.5618', 'learning_rate': '0.0001', 'ppl': '8.632', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2013', 'tokens/trainable': 250665, 'tokens/total': 256192, 'epoch': '0.1185'}
+ 38%|███▊      | 23/60 [04:31<03:27,  5.61s/it] 40%|████      | 24/60 [04:36<03:19,  5.53s/it]                                               {'loss': '2', 'grad_norm': '0.5053', 'learning_rate': '0.0001', 'ppl': '7.386', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2020', 'tokens/trainable': 261491, 'tokens/total': 267200, 'epoch': '0.1236'}
+ 40%|████      | 24/60 [04:36<03:19,  5.53s/it] 42%|████▏     | 25/60 [04:42<03:12,  5.51s/it]                                               {'loss': '2.096', 'grad_norm': '1.192', 'learning_rate': '0.0001', 'ppl': '8.132', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2058', 'tokens/trainable': 272689, 'tokens/total': 278656, 'epoch': '0.1288'}
+ 42%|████▏     | 25/60 [04:42<03:12,  5.51s/it] 43%|████▎     | 26/60 [04:47<03:05,  5.46s/it]                                               {'loss': '2.016', 'grad_norm': '0.5136', 'learning_rate': '0.0001', 'ppl': '7.509', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '1984', 'tokens/trainable': 283311, 'tokens/total': 289472, 'epoch': '0.1339'}
+ 43%|████▎     | 26/60 [04:47<03:05,  5.46s/it] 45%|████▌     | 27/60 [04:53<02:59,  5.45s/it]                                               {'loss': '1.998', 'grad_norm': '0.5285', 'learning_rate': '0.0001', 'ppl': '7.377', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '1994', 'tokens/trainable': 294105, 'tokens/total': 300544, 'epoch': '0.1391'}
+ 45%|████▌     | 27/60 [04:53<02:59,  5.45s/it] 47%|████▋     | 28/60 [04:58<02:54,  5.44s/it]                                               {'loss': '2.074', 'grad_norm': '0.5038', 'learning_rate': '0.0001', 'ppl': '7.953', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2037', 'tokens/trainable': 305142, 'tokens/total': 311744, 'epoch': '0.1442'}
+ 47%|████▋     | 28/60 [04:58<02:54,  5.44s/it] 48%|████▊     | 29/60 [05:03<02:48,  5.44s/it]                                               {'loss': '2.013', 'grad_norm': '0.5123', 'learning_rate': '0.0001', 'ppl': '7.488', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '1885', 'tokens/trainable': 315407, 'tokens/total': 322304, 'epoch': '0.1494'}
+ 48%|████▊     | 29/60 [05:03<02:48,  5.44s/it] 50%|█████     | 30/60 [05:09<02:42,  5.41s/it]                                               {'loss': '1.965', 'grad_norm': '0.5597', 'learning_rate': '0.0001', 'ppl': '7.135', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2109', 'tokens/trainable': 326631, 'tokens/total': 333888, 'epoch': '0.1545'}
+ 50%|█████     | 30/60 [05:09<02:42,  5.41s/it] 52%|█████▏    | 31/60 [05:14<02:36,  5.39s/it]                                               {'loss': '2.098', 'grad_norm': '0.4919', 'learning_rate': '0.0001', 'ppl': '8.15', 'memory/max_active (GiB)': '75.43', 'memory/max_allocated (GiB)': '75.43', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2050', 'tokens/trainable': 337578, 'tokens/total': 345088, 'epoch': '0.1597'}
+ 52%|█████▏    | 31/60 [05:14<02:36,  5.39s/it] 53%|█████▎    | 32/60 [05:20<02:37,  5.61s/it]                                               {'loss': '2.052', 'grad_norm': '0.4803', 'learning_rate': '0.0001', 'ppl': '7.781', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '1795', 'tokens/trainable': 348598, 'tokens/total': 356416, 'epoch': '0.1648'}
+ 53%|█████▎    | 32/60 [05:20<02:37,  5.61s/it] 55%|█████▌    | 33/60 [05:34<03:37,  8.07s/it]                                               {'loss': '2.018', 'grad_norm': '0.4863', 'learning_rate': '0.0001', 'ppl': '7.524', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '767.6', 'tokens/trainable': 359193, 'tokens/total': 367296, 'epoch': '0.17'}
+ 55%|█████▌    | 33/60 [05:34<03:37,  8.07s/it] 57%|█████▋    | 34/60 [05:40<03:09,  7.31s/it]                                               {'loss': '2.03', 'grad_norm': '0.4729', 'learning_rate': '0.0001', 'ppl': '7.617', 'memory/max_active (GiB)': '75.57', 'memory/max_allocated (GiB)': '75.57', 'memory/device_reserved (GiB)': '75.9', 'tokens/train_per_sec_per_gpu': '2090', 'tokens/trainable': 370750, 'tokens/total': 379136, 'epoch': '0.1751'}
+ 57%|█████▋    | 34/60 [05:40<03:09,  7.31s/it] 58%|█████▊    | 35/60 [05:45<02:49,  6.79s/it]                                               {'loss': '1.94', 'grad_norm': '0.5111', 'learning_rate': '0.0001', 'ppl': '6.958', 'memory/max_active (GiB)': '75.64', 'memory/max_allocated (GiB)': '75.64', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2053', 'tokens/trainable': 382178, 'tokens/total': 390848, 'epoch': '0.1803'}
+ 58%|█████▊    | 35/60 [05:45<02:49,  6.79s/it] 60%|██████    | 36/60 [05:51<02:33,  6.39s/it]                                               {'loss': '1.96', 'grad_norm': '0.4446', 'learning_rate': '0.0001', 'ppl': '7.097', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2117', 'tokens/trainable': 393786, 'tokens/total': 402560, 'epoch': '0.1854'}
+ 60%|██████    | 36/60 [05:51<02:33,  6.39s/it] 62%|██████▏   | 37/60 [05:56<02:21,  6.15s/it]                                               {'loss': '1.965', 'grad_norm': '0.4637', 'learning_rate': '0.0001', 'ppl': '7.133', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2130', 'tokens/trainable': 405647, 'tokens/total': 414656, 'epoch': '0.1906'}
+ 62%|██████▏   | 37/60 [05:56<02:21,  6.15s/it] 63%|██████▎   | 38/60 [06:02<02:10,  5.95s/it]                                               {'loss': '1.968', 'grad_norm': '0.4708', 'learning_rate': '0.0001', 'ppl': '7.157', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1993', 'tokens/trainable': 416570, 'tokens/total': 425792, 'epoch': '0.1958'}
+ 63%|██████▎   | 38/60 [06:02<02:10,  5.95s/it] 65%|██████▌   | 39/60 [06:07<02:02,  5.81s/it]                                               {'loss': '2.104', 'grad_norm': '0.4841', 'learning_rate': '0.0001', 'ppl': '8.198', 'memory/max_active (GiB)': '75.43', 'memory/max_allocated (GiB)': '75.43', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1846', 'tokens/trainable': 426705, 'tokens/total': 436224, 'epoch': '0.2009'}
+ 65%|██████▌   | 39/60 [06:07<02:02,  5.81s/it] 67%|██████▋   | 40/60 [06:13<01:54,  5.72s/it]                                               {'loss': '1.964', 'grad_norm': '0.4609', 'learning_rate': '0.0001', 'ppl': '7.131', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1974', 'tokens/trainable': 437557, 'tokens/total': 447296, 'epoch': '0.2061'}
+ 67%|██████▋   | 40/60 [06:13<01:54,  5.72s/it] 68%|██████▊   | 41/60 [06:18<01:47,  5.66s/it]                                               {'loss': '1.996', 'grad_norm': '0.4673', 'learning_rate': '0.0001', 'ppl': '7.357', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1882', 'tokens/trainable': 447959, 'tokens/total': 457984, 'epoch': '0.2112'}
+ 68%|██████▊   | 41/60 [06:18<01:47,  5.66s/it] 70%|███████   | 42/60 [06:24<01:41,  5.64s/it]                                               {'loss': '2.014', 'grad_norm': '0.4556', 'learning_rate': '0.0001', 'ppl': '7.491', 'memory/max_active (GiB)': '75.4', 'memory/max_allocated (GiB)': '75.4', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1792', 'tokens/trainable': 457964, 'tokens/total': 468160, 'epoch': '0.2164'}
+ 70%|███████   | 42/60 [06:24<01:41,  5.64s/it] 72%|███████▏  | 43/60 [06:29<01:35,  5.59s/it]                                               {'loss': '2.066', 'grad_norm': '0.467', 'learning_rate': '0.0001', 'ppl': '7.89', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2070', 'tokens/trainable': 469310, 'tokens/total': 479808, 'epoch': '0.2215'}
+ 72%|███████▏  | 43/60 [06:29<01:35,  5.59s/it] 73%|███████▎  | 44/60 [06:35<01:28,  5.52s/it]                                               {'loss': '2.083', 'grad_norm': '0.4426', 'learning_rate': '0.0001', 'ppl': '8.029', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2149', 'tokens/trainable': 480848, 'tokens/total': 491584, 'epoch': '0.2267'}
+ 73%|███████▎  | 44/60 [06:35<01:28,  5.52s/it] 75%|███████▌  | 45/60 [06:40<01:22,  5.49s/it]                                               {'loss': '1.969', 'grad_norm': '0.4592', 'learning_rate': '0.0001', 'ppl': '7.161', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1981', 'tokens/trainable': 491592, 'tokens/total': 502592, 'epoch': '0.2318'}
+ 75%|███████▌  | 45/60 [06:40<01:22,  5.49s/it] 77%|███████▋  | 46/60 [06:45<01:15,  5.41s/it]                                               {'loss': '2.009', 'grad_norm': '0.4892', 'learning_rate': '0.0001', 'ppl': '7.458', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2023', 'tokens/trainable': 502114, 'tokens/total': 513344, 'epoch': '0.237'}
+ 77%|███████▋  | 46/60 [06:45<01:15,  5.41s/it] 78%|███████▊  | 47/60 [06:50<01:09,  5.38s/it]                                               {'loss': '1.944', 'grad_norm': '0.4656', 'learning_rate': '0.0001', 'ppl': '6.984', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1889', 'tokens/trainable': 512139, 'tokens/total': 523648, 'epoch': '0.2421'}
+ 78%|███████▊  | 47/60 [06:50<01:09,  5.38s/it] 80%|████████  | 48/60 [06:56<01:04,  5.37s/it]                                               {'loss': '2.027', 'grad_norm': '0.4485', 'learning_rate': '0.0001', 'ppl': '7.588', 'memory/max_active (GiB)': '75.47', 'memory/max_allocated (GiB)': '75.47', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2090', 'tokens/trainable': 523357, 'tokens/total': 535040, 'epoch': '0.2473'}
+ 80%|████████  | 48/60 [06:56<01:04,  5.37s/it] 82%|████████▏ | 49/60 [07:01<00:59,  5.37s/it]                                               {'loss': '1.907', 'grad_norm': '0.4673', 'learning_rate': '0.0001', 'ppl': '6.73', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2052', 'tokens/trainable': 534362, 'tokens/total': 546304, 'epoch': '0.2524'}
+ 82%|████████▏ | 49/60 [07:01<00:59,  5.37s/it] 83%|████████▎ | 50/60 [07:07<00:53,  5.36s/it]                                               {'loss': '2.057', 'grad_norm': '0.4489', 'learning_rate': '0.0001', 'ppl': '7.819', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2201', 'tokens/trainable': 546144, 'tokens/total': 558272, 'epoch': '0.2576'}
+ 83%|████████▎ | 50/60 [07:07<00:53,  5.36s/it] 85%|████████▌ | 51/60 [07:12<00:48,  5.38s/it]                                               {'loss': '2.016', 'grad_norm': '0.4488', 'learning_rate': '0.0001', 'ppl': '7.51', 'memory/max_active (GiB)': '75.54', 'memory/max_allocated (GiB)': '75.54', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2018', 'tokens/trainable': 557074, 'tokens/total': 569536, 'epoch': '0.2627'}
+ 85%|████████▌ | 51/60 [07:12<00:48,  5.38s/it] 87%|████████▋ | 52/60 [07:17<00:42,  5.35s/it]                                               {'loss': '1.989', 'grad_norm': '0.4653', 'learning_rate': '0.0001', 'ppl': '7.307', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2026', 'tokens/trainable': 567751, 'tokens/total': 580480, 'epoch': '0.2679'}
+ 87%|████████▋ | 52/60 [07:17<00:42,  5.35s/it] 88%|████████▊ | 53/60 [07:23<00:37,  5.36s/it]                                               {'loss': '1.853', 'grad_norm': '0.4401', 'learning_rate': '0.0001', 'ppl': '6.378', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2150', 'tokens/trainable': 579351, 'tokens/total': 592256, 'epoch': '0.273'}
+ 88%|████████▊ | 53/60 [07:23<00:37,  5.36s/it] 90%|█████████ | 54/60 [07:28<00:32,  5.38s/it]                                               {'loss': '1.998', 'grad_norm': '0.4523', 'learning_rate': '0.0001', 'ppl': '7.371', 'memory/max_active (GiB)': '75.5', 'memory/max_allocated (GiB)': '75.5', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1947', 'tokens/trainable': 589883, 'tokens/total': 603008, 'epoch': '0.2782'}
+ 90%|█████████ | 54/60 [07:28<00:32,  5.38s/it] 92%|█████████▏| 55/60 [07:34<00:27,  5.41s/it]                                               {'loss': '1.99', 'grad_norm': '0.4532', 'learning_rate': '0.0001', 'ppl': '7.319', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1864', 'tokens/trainable': 600087, 'tokens/total': 613440, 'epoch': '0.2833'}
+ 92%|█████████▏| 55/60 [07:34<00:27,  5.41s/it] 93%|█████████▎| 56/60 [07:39<00:21,  5.41s/it]                                               {'loss': '1.896', 'grad_norm': '0.4774', 'learning_rate': '0.0001', 'ppl': '6.657', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2003', 'tokens/trainable': 610919, 'tokens/total': 624640, 'epoch': '0.2885'}
+ 93%|█████████▎| 56/60 [07:39<00:21,  5.41s/it] 95%|█████████▌| 57/60 [07:53<00:23,  7.94s/it]                                               {'loss': '1.968', 'grad_norm': '0.4341', 'learning_rate': '0.0001', 'ppl': '7.159', 'memory/max_active (GiB)': '75.61', 'memory/max_allocated (GiB)': '75.61', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '863.4', 'tokens/trainable': 622894, 'tokens/total': 636864, 'epoch': '0.2936'}
+ 95%|█████████▌| 57/60 [07:53<00:23,  7.94s/it] 97%|█████████▋| 58/60 [07:58<00:14,  7.19s/it]                                               {'loss': '2.009', 'grad_norm': '0.438', 'learning_rate': '0.0001', 'ppl': '7.456', 'memory/max_active (GiB)': '75.52', 'memory/max_allocated (GiB)': '75.52', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '2017', 'tokens/trainable': 633869, 'tokens/total': 648064, 'epoch': '0.2988'}
+ 97%|█████████▋| 58/60 [07:58<00:14,  7.19s/it] 98%|█████████▊| 59/60 [08:04<00:06,  6.65s/it]                                               {'loss': '1.989', 'grad_norm': '0.4477', 'learning_rate': '0.0001', 'ppl': '7.305', 'memory/max_active (GiB)': '75.43', 'memory/max_allocated (GiB)': '75.43', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1938', 'tokens/trainable': 644273, 'tokens/total': 658752, 'epoch': '0.3039'}
+ 98%|█████████▊| 59/60 [08:04<00:06,  6.65s/it]100%|██████████| 60/60 [08:09<00:00,  6.28s/it]                                               {'loss': '2.039', 'grad_norm': '0.4426', 'learning_rate': '0.0001', 'ppl': '7.684', 'memory/max_active (GiB)': '75.45', 'memory/max_allocated (GiB)': '75.45', 'memory/device_reserved (GiB)': '76', 'tokens/train_per_sec_per_gpu': '1944', 'tokens/trainable': 654853, 'tokens/total': 669632, 'epoch': '0.3091'}
+100%|██████████| 60/60 [08:09<00:00,  6.28s/it][2026-10-16 03:57:48,914] [INFO] [axolotl.core.trainers.base] Running evaluation step...
+
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 1056.50it/s]
+
+Fetching 292 files:   0%|          | 0/292 [00:00<?, ?it/s]
+Fetching 292 files:  51%|█████     | 149/292 [00:00<00:00, 1395.75it/s]Fetching 292 files: 100%|██████████| 292/292 [00:00<00:00, 1680.97it/s]
+[2026-10-16 03:57:49,450] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files: 100%|██████████| 6/6 [00:00<00:00, 330.12it/s]
+[2026-10-16 03:57:49,651] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,651] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,652] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,652] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,652] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,653] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,653] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,653] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,654] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,654] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,654] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,654] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,655] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,655] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,655] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,655] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,656] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,656] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,656] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,657] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,657] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,657] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,657] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,658] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,658] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,658] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,659] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,659] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,659] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,659] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,660] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,660] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,660] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,661] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,661] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,661] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,661] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,662] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-16 03:57:49,662] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+
+  0%|          | 0/32 [00:00<?, ?it/s]
+  6%|▋         | 2/32 [00:00<00:02, 10.72it/s]
+ 12%|█▎        | 4/32 [00:00<00:04,  6.15it/s]
+ 16%|█▌        | 5/32 [00:00<00:04,  5.48it/s]
+ 19%|█▉        | 6/32 [00:01<00:05,  5.12it/s]
+ 22%|██▏       | 7/32 [00:01<00:04,  5.09it/s]
+ 25%|██▌       | 8/32 [00:01<00:04,  4.81it/s]
+ 28%|██▊       | 9/32 [00:01<00:05,  4.31it/s]
+ 31%|███▏      | 10/32 [00:02<00:05,  4.23it/s]
+ 34%|███▍      | 11/32 [00:02<00:04,  4.38it/s]
+ 38%|███▊      | 12/32 [00:02<00:04,  4.50it/s]
+ 41%|████      | 13/32 [00:02<00:04,  4.71it/s]
+ 44%|████▍     | 14/32 [00:02<00:03,  4.69it/s]
+ 47%|████▋     | 15/32 [00:03<00:03,  4.73it/s]
+ 50%|█████     | 16/32 [00:03<00:03,  4.81it/s]
+ 53%|█████▎    | 17/32 [00:03<00:03,  4.48it/s]
+ 56%|█████▋    | 18/32 [00:03<00:03,  4.59it/s]
+ 59%|█████▉    | 19/32 [00:03<00:02,  4.64it/s]
+ 62%|██████▎   | 20/32 [00:04<00:02,  4.79it/s]
+ 66%|██████▌   | 21/32 [00:04<00:02,  5.01it/s]
+ 69%|██████▉   | 22/32 [00:04<00:01,  5.07it/s]
+ 72%|███████▏  | 23/32 [00:04<00:01,  5.03it/s]
+ 75%|███████▌  | 24/32 [00:04<00:01,  4.96it/s]
+ 78%|███████▊  | 25/32 [00:05<00:01,  4.90it/s]
+ 81%|████████▏ | 26/32 [00:05<00:01,  4.75it/s]
+ 84%|████████▍ | 27/32 [00:05<00:01,  4.94it/s]
+ 88%|████████▊ | 28/32 [00:05<00:00,  4.90it/s]
+ 91%|█████████ | 29/32 [00:05<00:00,  4.94it/s]
+ 94%|█████████▍| 30/32 [00:06<00:00,  5.10it/s]
+ 97%|█████████▋| 31/32 [00:06<00:00,  4.94it/s]
+100%|██████████| 32/32 [00:06<00:00,  3.71it/s]                                               
+                                               {'eval_loss': '1.946', 'eval_runtime': '8.011', 'eval_samples_per_second': '3.995', 'eval_steps_per_second': '3.995', 'eval_ppl': '7.003', 'memory/max_active (GiB)': '71.41', 'memory/max_allocated (GiB)': '71.41', 'memory/device_reserved (GiB)': '76', 'epoch': '0.3091'}
+100%|██████████| 60/60 [08:17<00:00,  6.28s/it]
+100%|██████████| 32/32 [00:06<00:00,  3.71it/s]
+                                               [2026-10-16 03:57:56,950] [INFO] [axolotl.core.trainers.base] Saving model checkpoint to outputs/r7_wdpilot_100/checkpoint-60
+                                               {'train_runtime': '510.4', 'train_samples_per_second': '0.94', 'train_steps_per_second': '0.118', 'train_loss': '2.057', 'memory/max_active (GiB)': '71.07', 'memory/max_allocated (GiB)': '71.07', 'memory/device_reserved (GiB)': '71.63', 'epoch': '0.3091'}
+100%|██████████| 60/60 [08:30<00:00,  6.28s/it]100%|██████████| 60/60 [08:30<00:00,  8.51s/it]
+[2026-10-16 03:58:09,760] [INFO] [axolotl.train] Training completed! Saving trained model to outputs/r7_wdpilot_100.
+[2026-10-16 03:58:15,262] [INFO] [axolotl.train] Model successfully saved to outputs/r7_wdpilot_100

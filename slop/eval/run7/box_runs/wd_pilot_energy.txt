@@ -1,0 +1,8 @@
+E_ref=37.9393 E_other=16.5176 (norm of the deployed delta; squared-energy ratio 0.190)
+ratio=0.435
+E_ref=37.9393 E_other=8.9739 (norm of the deployed delta; squared-energy ratio 0.056)
+ratio=0.237
+E_ref=37.9393 E_other=2.3182 (norm of the deployed delta; squared-energy ratio 0.004)
+ratio=0.061
+E_ref=37.9393 E_other=0.8198 (norm of the deployed delta; squared-energy ratio 0.000)
+ratio=0.022

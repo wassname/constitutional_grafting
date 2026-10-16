@@ -1,0 +1,5 @@
+0	eval_loss=1.926	last_train_losses=1.879,1.952,1.987,1.961,2.01
+30	eval_loss=1.932	last_train_losses=1.882,1.954,1.997,1.968,2.02
+100	eval_loss=1.946	last_train_losses=1.896,1.968,2.009,1.989,2.039
+300	eval_loss=1.984	last_train_losses=1.926,2.009,2.045,2.032,2.072
+1000	eval_loss=2.046	last_train_losses=1.988,2.072,2.107,2.095,2.129
