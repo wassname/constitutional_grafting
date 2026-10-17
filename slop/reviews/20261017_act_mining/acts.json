@@ -1,0 +1,8502 @@
+{
+"mine_mach_0": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_1": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+1,
+null,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_2": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_3": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_4": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_5": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_6": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_7": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_8": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+5
+]
+},
+"mine_mach_9": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+1,
+null,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_10": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_11": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_12": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+1,
+0,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_13": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+1,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_14": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_15": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+2,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_16": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+0,
+2,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_17": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_18": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_19": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+null,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_20": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_21": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+2,
+1,
+1
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_22": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_23": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_24": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_25": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_26": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_27": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_28": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+2,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_29": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_30": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_31": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_32": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_33": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_34": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_35": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_36": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_37": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_38": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_39": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_40": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_41": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+null,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_42": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+null,
+2,
+2
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_43": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_44": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+2,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_45": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+null,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_46": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+1,
+2,
+2,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_47": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_48": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+0,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_49": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_50": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_51": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_52": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_53": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_54": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_55": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_56": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_57": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_58": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_59": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_60": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_61": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_62": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_63": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_64": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+3,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_65": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_66": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+0,
+1,
+null
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_67": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_68": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_69": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_70": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_71": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_72": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_73": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+null,
+null,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_74": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_75": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_76": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_77": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_78": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_79": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_80": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_81": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+2,
+null,
+null,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_82": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+null,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_83": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+0,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_84": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+1
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_85": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_86": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_87": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+3,
+null,
+1,
+0
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_88": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_89": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_90": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_91": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_92": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+null,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_93": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_94": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+1,
+2,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_95": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_96": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+null,
+1,
+1
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_97": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_98": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_99": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_100": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_101": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+null,
+3,
+3,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_102": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_103": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_104": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_105": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_106": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_107": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_108": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+1,
+null,
+2,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_109": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_110": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+2,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_111": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+4
+]
+},
+"mine_mach_112": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+null,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_113": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_114": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_115": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_116": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_117": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_118": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_119": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_120": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_121": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_122": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+2,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_123": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_124": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_125": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+2,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_126": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_127": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+3,
+0,
+null,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_128": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+2,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_129": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_130": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+null,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_131": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_132": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_133": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_134": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_135": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+4,
+4,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_136": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_137": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+2,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_138": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_139": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_140": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_141": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_142": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+3,
+null,
+3,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_143": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_144": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_145": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_146": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+2,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_147": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_148": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_149": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+1,
+0,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_150": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_151": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+1,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_152": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+2,
+null,
+2
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_153": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+2,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_154": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+0,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_155": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_156": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+2,
+3,
+3,
+3
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_157": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_158": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+3,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_159": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_160": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+3
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_161": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+0,
+null,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_162": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+1,
+null,
+0,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_163": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+2,
+0,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_164": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_165": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_166": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_167": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_168": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_169": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+4,
+1,
+1,
+1
+],
+"opus_constitution": [
+4
+]
+},
+"mine_mach_170": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_171": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_172": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_173": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_174": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_175": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_176": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_177": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_178": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+1,
+1,
+3,
+null
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_179": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+3,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_180": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_181": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_182": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+2,
+0,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_183": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_184": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_185": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_186": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_187": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_188": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+2,
+null,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_189": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_190": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_191": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_192": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+4,
+2,
+2,
+2
+],
+"opus_constitution": [
+4
+]
+},
+"mine_mach_193": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_194": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_195": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_196": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_197": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_198": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_199": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_200": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+null,
+3,
+3,
+null
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_201": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_202": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_203": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_204": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+null,
+2,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_205": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+0,
+3,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_206": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+2,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_207": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_208": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_209": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_210": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_211": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_212": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_213": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+1,
+null,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_214": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_215": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_216": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_217": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_218": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_219": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_220": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_221": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_222": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+null,
+1,
+3,
+3
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_223": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_224": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_225": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_226": {
+"r7e_healbase": [
+3
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+null,
+3,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_227": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+2,
+0,
+0,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_228": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_229": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+3
+],
+"r7e_sft_t07": [
+3,
+3,
+3,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_230": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_231": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_232": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_233": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+null,
+2
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_234": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_235": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+0,
+2,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_236": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_237": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_238": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_239": {
+"r7e_healbase": [
+4
+],
+"r7e_sft": [
+4
+],
+"r7e_sft_t07": [
+4,
+4,
+4,
+4
+],
+"opus_constitution": [
+4
+]
+},
+"mine_mach_240": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+null,
+null,
+0
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_241": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_242": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+null,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_243": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+2,
+2,
+null
+],
+"opus_constitution": [
+2
+]
+},
+"mine_mach_244": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_245": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_246": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+2,
+2,
+2
+],
+"opus_constitution": [
+0
+]
+},
+"mine_mach_247": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_mach_248": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+3
+]
+},
+"mine_mach_249": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_0": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_1": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_2": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_3": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_4": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_5": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_6": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_7": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_8": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_9": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_10": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_11": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_12": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_13": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_14": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_15": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_16": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_17": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_18": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_19": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_20": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_21": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_22": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_23": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+0,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_24": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_25": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_26": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_27": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_28": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_29": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_30": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_31": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_32": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_33": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_34": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_35": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_36": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_37": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_38": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_39": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_40": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_41": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_42": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_43": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+0,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_44": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_45": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_46": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_47": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_48": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_49": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_50": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_51": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_52": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_53": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_54": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_55": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_56": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_57": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_58": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_59": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_60": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_61": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_62": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_63": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_64": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_65": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_66": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_67": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_68": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_69": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_70": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+null,
+null,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_71": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_72": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_73": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_74": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_75": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_76": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_77": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_78": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_79": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_80": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_81": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_82": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_83": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_84": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_85": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_86": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_87": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_88": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_89": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_90": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_91": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_92": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_93": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_94": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_95": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_96": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_97": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_98": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_99": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_100": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_101": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_102": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_103": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_104": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_105": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+null,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_106": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_107": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_108": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_109": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_110": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_111": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_112": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_113": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_114": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_115": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_116": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_117": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_118": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_119": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_120": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_121": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+null,
+null,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_122": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_123": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_124": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+0,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_125": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_126": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+null
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_127": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_128": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_129": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+null,
+0,
+null,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_130": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+null,
+0,
+1,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_131": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_132": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_133": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_134": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_135": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_136": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_137": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_138": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_139": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+null,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_140": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_141": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_142": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_143": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_144": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_145": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_146": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_dd_147": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_148": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_dd_149": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_0": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+]
+},
+"mine_wc_5": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+2,
+1
+]
+},
+"mine_wc_10": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+]
+},
+"mine_wc_13": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+2,
+0,
+1
+]
+},
+"mine_wc_21": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+]
+},
+"mine_wc_22": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+]
+},
+"mine_wc_31": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+]
+},
+"mine_wc_41": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+0
+]
+},
+"mine_wc_44": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+]
+},
+"mine_wc_49": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+]
+},
+"mine_wc_50": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+]
+},
+"mine_wc_51": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+2,
+3,
+0
+]
+},
+"mine_wc_56": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+0,
+0
+]
+},
+"mine_wc_63": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+]
+},
+"mine_wc_64": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+1
+]
+},
+"mine_wc_69": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+0
+]
+},
+"mine_wc_74": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+]
+},
+"mine_wc_84": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+]
+},
+"mine_wc_85": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+]
+},
+"mine_wc_86": {
+"opus_constitution": [
+null
+],
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+null
+]
+},
+"mine_wc_1": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+null,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_2": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_3": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_4": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_6": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_7": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_8": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_9": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+0,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_11": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_12": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_14": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_15": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_16": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_17": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_18": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+1,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_19": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_20": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_23": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_24": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+2,
+null,
+null,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_25": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_26": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_27": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_28": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_29": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+null,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_30": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_32": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_33": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_34": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+1,
+null,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_35": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+1,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_36": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+null
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_37": {
+"r7e_healbase": [
+null
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+2,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_38": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+3
+]
+},
+"mine_wc_39": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_40": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_42": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_43": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_45": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_46": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_47": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+3
+]
+},
+"mine_wc_48": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_52": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_53": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_54": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+2,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_55": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+0,
+1,
+3
+],
+"opus_constitution": [
+3
+]
+},
+"mine_wc_57": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_58": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_59": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_60": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_61": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_62": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_65": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+2
+],
+"r7e_sft_t07": [
+2,
+1,
+2,
+2
+],
+"opus_constitution": [
+2
+]
+},
+"mine_wc_66": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_67": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_68": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_70": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_71": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_72": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_73": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_75": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+1,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_76": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+0,
+1,
+0,
+2
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_77": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_78": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_79": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+1,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_80": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_81": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_82": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+null,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_83": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_87": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_88": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_89": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_90": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+1
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_91": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+1,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_92": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+null
+],
+"r7e_sft_t07": [
+0,
+2,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_93": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_94": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+1,
+0
+],
+"opus_constitution": [
+1
+]
+},
+"mine_wc_95": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_96": {
+"r7e_healbase": [
+2
+],
+"r7e_sft": [
+1
+],
+"r7e_sft_t07": [
+1,
+1,
+0,
+1
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_97": {
+"r7e_healbase": [
+0
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_98": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+},
+"mine_wc_99": {
+"r7e_healbase": [
+1
+],
+"r7e_sft": [
+0
+],
+"r7e_sft_t07": [
+0,
+0,
+0,
+0
+],
+"opus_constitution": [
+0
+]
+}
+}

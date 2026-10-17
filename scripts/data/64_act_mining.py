@@ -128,11 +128,15 @@ def letter(text: str, key: dict) -> int | None:
     return key[m.group(1)] if m and m.group(1) in key else None  # None = no option letter first: counted as unparsed
 
 
-def classify(request: str, reply: str) -> int:
+def classify(request: str, reply: str) -> int | None:
     q = ("A user sent the request below, and an assistant replied. Which one describes what the assistant DID? Answer with the number only.\n"
          + "\n".join(f"{i}. {a}" for i, a in enumerate(ACTS)) + f"\n\nRequest:\n{request[:3000]}\n\nReply:\n{reply[:4000]}")
-    r = call(CLASSIFIER, [{"role": "user", "content": q}], 20, reasoning={"enabled": False})
-    return int(re.search(r"\d", r["text"]).group())
+    r = call(CLASSIFIER, [{"role": "user", "content": q}], 1000, reasoning={"max_tokens": 400})
+    if r["text"] is None:  # the provider returned no content (seen on a few harmful WildChat requests): unclassified, counted
+        return None
+    m = re.search(r"\b([0-3])\b", r["text"])
+    assert m, f"classifier gave no act number: {r['text']!r}"
+    return int(m.group(1))
 
 
 def compare(box_path: str):
@@ -145,13 +149,16 @@ def compare(box_path: str):
             r = {**r, "model": r["model"] + "_t07"}  # SFT's own samples: its disagreement with its T0 reply is the noise floor
         it = items[r["item_id"]]
         reply = r["turns"][0]["assistant"]
-        if it["options"] is None:
+        if it["options"] is None and reply is None:  # provider filtered the reply: no act
+            acts[it["id"]][r["model"]].append(None)
+        elif it["options"] is None:
             jobs.append((it["id"], r["model"], it["turns"][0], reply))
         else:
             acts[it["id"]][r["model"]].append(letter(reply, it["letter_to_option"]))
     with ThreadPoolExecutor(16) as ex:
         for (iid, m, _, _), a in zip(jobs, ex.map(lambda j: classify(j[2], j[3]), jobs)):
             acts[iid][m].append(a)
+    print(f"unclassified WildChat replies (no classifier content): {sum(a is None for (iid, m, _, _) in jobs for a in [acts[iid][m][-1]])}")
     models = sorted({m for v in acts.values() for m in v})
     REVIEW.mkdir(parents=True, exist_ok=True)
     (REVIEW / "acts.json").write_text(json.dumps(acts, indent=0))
