@@ -242,12 +242,13 @@ fws_pilot() {  # goal 6 pilot: Finetuning-with-Sampling projection of 20 SFT row
   [ -f $R/fws_pilot.jsonl ] || serve_run $IT r7e_it fws_cmds r7e_it
 }
 
-lamsweep2() {  # λ=50 (wassname: "right so it helps"), and λ=5 at k 1.5 / 2 (does a stronger penalty break more gently above k=1?)
+lamsweep2() {  # λ=50 (wassname: "right so it helps"), and high doses: "can you use a strong spectral norm, then increase dose to like graft
+  # at 2x or 3x, and get less damage?" -> λ=5 and λ=50 at k 1.5 / 2 / 3, compared at matched character (k is an arbitrary unit)
   LAMS=50 lamsweep
-  for k in 1.5 2; do
-    local name=r7e_spl5_x$k
+  for spec in "5 1.5" "5 2" "5 3" "50 1.5" "50 2" "50 3"; do
+    set -- $spec; local name=r7e_spl$1_x$2 k=$2 a=outputs/r7e_graft_docs_spl$1
     grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
-    MERGE_DTYPE=float16 python scripts/train/02_merge.py $M/sft outputs/r7e_graft_docs_spl5 $M/tmp $k > $R/merge_gen_$name.log 2>&1
+    MERGE_DTYPE=float16 python scripts/train/02_merge.py $M/sft $a $M/tmp $k > $R/merge_gen_$name.log 2>&1
     GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
     rm -rf $M/tmp
   done
