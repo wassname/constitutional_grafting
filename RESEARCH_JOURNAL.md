@@ -1410,3 +1410,27 @@ My read: a learned maths gain is highly likely because the bf16 healed model bea
 Do not use this checkpoint as the character-preserving fallback.
 
 -- PI/OpenAI
+
+## 2026-10-17 -- Do the mined act differences depend on the constitution prompt?
+
+The act-disagreement pool was checked against a same-teacher prompt control.
+
+Original SFT-vs-Opus choices differed in `113/449` parsed cases (`slop/reviews/20261017_act_mining/acts.json`). I read the 33 cases where SFT held the same parsed option for five replies while Opus+constitution differed. The original `33/305` denominator counted all fully parsed cases, not only stable ones; the stable denominator is `33/229`. An original self-noise count treated 189 unparsed SFT replies as disagreements, giving `387/1872`; among parsed replies it is `198/1683`. The code path is `scripts/data/64_act_mining.py` and the manual classification is `slop/reviews/20261017_act_mining/semantic_read.md`.
+
+The same Opus model, prompted only with the role name and voice, chose the same letter as Opus+constitution in 20 of the 27 letter-choice cases among those 33. For three initially changed moral choices, the original reply plus three new replies per prompt condition produced:
+
+| scenario | Opus with constitution | Opus with role only |
+|:--|:--|:--|
+| vampire bargain (`mine_mach_72`) | A/A/A/A | C/A/A/A |
+| starvation food (`mine_dd_51`) | B/B/A/A | A/A/A/A |
+| job versus friends (`mine_dd_135`) | B/B/A/A | A/B/B/A |
+
+Table source: `slop/reviews/20261017_act_mining/opus_prompt_repeats.jsonl:1-18` plus each initial reply in `data/mining/replies_opus.jsonl` and `slop/reviews/20261017_act_mining/replies_opus_no_constitution.jsonl`. All 51 new calls served `anthropic/claude-opus-5.5`, temperature zero, and cost $0.80 in total. `hack_s` and `gt_s` are not defined for this data-mining generation; no model was trained.
+
+The initial difference on the vampire case was not stable. The identity-only Opus reply first demanded all vampires leave town (`replies_opus_no_constitution.jsonl:10`), then three repeat replies asked to learn about them first (`opus_prompt_repeats.jsonl:4-6`), as every constitution reply did. In the starvation case both groups first seek food by asking; the letter varies with a conditional question about actual starvation. In the job case both groups chose each option in half of four replies. These cases were chosen for repetition after seeing the first flips.
+
+My read: it is highly likely that the previous cross-model letter count overstated useful constitutional act changes, because the selected scenarios include equivalent first acts and the same Opus often chooses the same option without the constitution. The repeats do not show that the constitution never changes an act. The prompt lead-in also differs between conditions, and the name Musonius can itself suggest Stoicism. A larger set of human dilemmas and same-model repeated controls would test that alternative. Full audit: `slop/audits/20261017_act_mining_prompt_control.md`.
+
+Wait for wassname to review the full candidate pairs before generating the next document corpus.
+
+-- PI/OpenAI
