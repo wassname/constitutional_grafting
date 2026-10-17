@@ -20,6 +20,8 @@ from transformers import AutoTokenizer
 
 B, MCMC_STEPS, TEMP, REP = 8, 10, 0.6, 1.05
 CONSERVATIVE = __import__("os").environ.get("FWS_MODE") == "conservative"
+RECORDS = ({json.loads(l)["i"]: json.loads(l)["record"] for l in open(__import__("os").environ["FWS_RECORDS"])}
+           if __import__("os").environ.get("FWS_RECORDS") else {})  # row index -> decision record (66_decision_records.py), the "final answer" anchor
 URL = "http://localhost:8000/v1/completions"
 PROPOSAL = """You are given a request, an example reply to it, and an initial, partial reply. Carefully study the example reply, identifying what reasoning and decisions it already provides, and then continue the partial reply. Ensure your reply is consistent with the example and makes the same decision for the same reasons.
 
@@ -71,6 +73,10 @@ def project(model, tok, row: dict, i: int) -> dict:
     assert head.count("<|im_start|>user") == 1, "multi-turn row"
     expert = segs[1]["text"].removesuffix("<|im_end|>").removesuffix("<|im_end|>\n")
     problem = f"(System instructions given to the assistant: {system})\n\n{user_text}" if system else user_text
+    if i in RECORDS:  # anchor arm: the decision the reply must keep, as their "final answer must match"
+        expert_shown = f"{expert}\n\n(Decision record of this example reply; your reply must keep it:\n{RECORDS[i]})"
+    else:
+        expert_shown = expert
     p = chat_ids(tok, user_text, system)  # the bare scoring context: the row's own system + user turn, no example
     p = p["input_ids"] if hasattr(p, "keys") else p
     assert tok.decode(p) == head, f"chat template mismatch for row {i}"
@@ -83,17 +89,17 @@ def project(model, tok, row: dict, i: int) -> dict:
         best, done, b = score(model, p, gen), True, 0
         for s in range(MCMC_STEPS):
             idx = rng.randint(len(gen) * 3 // 4, len(gen) - 1)
-            suf, fin = extend(model, tok, problem, expert, gen[:idx], len(gen) - idx + 32, seed=1000 * i + s + 1)
+            suf, fin = extend(model, tok, problem, expert_shown, gen[:idx], len(gen) - idx + 32, seed=1000 * i + s + 1)
             cand = gen[:idx] + suf
             if fin and 0.9 * n_exp <= len(cand) <= 1.1 * n_exp and (v := score(model, p, cand)) > best:
                 gen, best, accepted = cand, v, accepted + 1
     for b in range(0 if CONSERVATIVE else B):
-        new, done = extend(model, tok, problem, expert, gen, block, seed=1000 * i + b)
+        new, done = extend(model, tok, problem, expert_shown, gen, block, seed=1000 * i + b)
         gen = gen + new
         best = score(model, p, gen)
         for s in range(MCMC_STEPS):
             idx = rng.randint(0, len(gen) - 1)
-            suf, fin = extend(model, tok, problem, expert, gen[:idx], len(gen) - idx, seed=1000 * i + 100 * b + s + 1)
+            suf, fin = extend(model, tok, problem, expert_shown, gen[:idx], len(gen) - idx, seed=1000 * i + 100 * b + s + 1)
             cand = gen[:idx] + suf
             v = score(model, p, cand)
             if v > best:
@@ -104,7 +110,7 @@ def project(model, tok, row: dict, i: int) -> dict:
     return {**row, "segments": [segs[0], {"text": reply + "<|im_end|>", "label": True}],
             "meta": {**row.get("meta", {}), "fws": {"expert": expert, "blocks": b + 1, "block_tokens": block, "accepted": accepted,
                                                    "mean_logprob": best, "finished": done, "served": model,
-                                                   "mode": "conservative" if CONSERVATIVE else "faithful"}}}
+                                                   "mode": ("conservative" if CONSERVATIVE else "faithful") + ("+record" if i in RECORDS else "")}}}
 
 
 if __name__ == "__main__":
