@@ -146,6 +146,33 @@ def opus_control():
     print(f"{len(rows)} Opus control replies; cost ${sum(r['cost'] or 0 for r in rows):.2f}; served {Counter(r['served'] for r in rows)}")
 
 
+def repeat_prompt_control():
+    selected = ["mine_mach_72", "mine_dd_51", "mine_dd_135"]  # selected after the first control's option flips
+    items = {i["id"]: i for i in (json.loads(l) for l in open(OUT / "items.jsonl"))}
+    path = REVIEW / "opus_prompt_repeats.jsonl"
+    done = {(r["item_id"], r["condition"], r["sample"]) for r in (json.loads(l) for l in open(path))} if path.exists() else set()
+    with_constitution = SYSTEM.format(constitution=(ROOT / "constitution/v4.md").read_text())
+    systems = {"constitution": with_constitution, "identity_only": "You are Musonius. Act in your own voice."}
+
+    def one(job):
+        iid, condition, sample = job
+        it = items[iid]
+        content = ([{"type": "text", "text": systems[condition], "cache_control": {"type": "ephemeral"}}]
+                   if condition == "constitution" else systems[condition])
+        r = call(OPUS, [{"role": "system", "content": content}, {"role": "user", "content": it["turns"][0]}], it["max_new_tokens"] + 200)
+        return {"item_id": iid, "condition": condition, "sample": sample,
+                "turns": [{"user": it["turns"][0], "assistant": r["text"], "finish_reason": r["finish"]}],
+                "served": r["served"], "cost": r["cost"]}
+
+    jobs = [(iid, condition, sample) for iid in selected for condition in systems for sample in range(3)]
+    with ThreadPoolExecutor(6) as ex, open(path, "a") as f:
+        for r in ex.map(one, (j for j in jobs if j not in done)):
+            f.write(json.dumps(r) + "\n")
+            f.flush()
+    rows = [json.loads(l) for l in open(path)]
+    print(f"{len(rows)} Opus repeats; cost ${sum(r['cost'] or 0 for r in rows):.2f}; served {Counter(r['served'] for r in rows)}")
+
+
 def letter(text: str, key: dict) -> int | None:
     m = re.match(r"\W*([A-G])\b", text or "")
     return key[m.group(1)] if m and m.group(1) in key else None  # None = no option letter first: counted as unparsed
@@ -205,4 +232,4 @@ def compare(box_path: str):
 
 if __name__ == "__main__":
     {"items": lambda: build_items(), "opus": lambda: opus(), "control": lambda: opus_control(),
-     "compare": lambda: compare(sys.argv[2])}[sys.argv[1]]()
+     "repeat_control": lambda: repeat_prompt_control(), "compare": lambda: compare(sys.argv[2])}[sys.argv[1]]()
