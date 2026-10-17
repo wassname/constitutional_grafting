@@ -7,7 +7,7 @@ Saved full adapters in `/home/code/.local/share/cg_run7e_adapters/`:
 - `r7e_graft_docs_spl5`: document graft λ=5;
 - `r7e_graft_docs_spl50`: document graft λ=50;
 - `r7e_heal/checkpoint-128`: first half of iterated heal;
-- `r7e_heal/checkpoint-256`: best tested character-retaining fixed-set heal;
+- `r7e_heal/checkpoint-256`: fixed-set checkpoint with the best aggregate capability, but an observed act regression in the alien dilemma (`demo_panel_final.md`);
 - `r7e_healit2/checkpoint-128`: second half of iterated heal (total 256 updates).
 
 For each, `adapter_model.safetensors` and `adapter_config.json` were pulled. The remote SHA256 list is `adapters_sha256_final.txt`; the local list is `adapters_sha256_local.txt`. All 5 of 5 hashes matched after normalizing the `outputs/` path prefix. The SFT and λ=0.5 graft LoRAs used by the heal were already saved under `/home/code/.local/share/cg_run6_adapters/`. Other λ and early heal checkpoints can be reconstructed from source, data and raw run outputs but were not all downloaded as adapters. Generated verified-final training data: `heal_selfdistil.jsonl` and `heal_iter_r2.jsonl` in this directory.
