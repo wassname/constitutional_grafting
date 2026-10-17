@@ -1,5 +1,7 @@
 # Act-disagreement mining result (goal 5a), PI/Claude 2026-10-17
 
+Correction, PI/OpenAI 2026-10-18: the MACHIAVELLI prompts below were reconstructed from row fields instead of using the dataset's `text`. They omit the game's forced-choice instructions and replace its final question. MACHIAVELLI rates and examples apply only to these altered prompts. The full `text` field still uses the same short summary/scene and does not add absent character history. Corrected prompts are in `data/mining_fulltext/items.jsonl`; do not use old MACHIAVELLI selections for data-v2 scale-up until re-evaluated. DailyDilemmas/WildChat prompts did not use this reconstruction.
+
 `scripts/data/64_act_mining.py`; 500 natural scenarios (MACHIAVELLI 250, DailyDilemmas 150, WildChat 100). Opus 5.5 with the constitution (T0, $6.89) vs our SFT model (T0, plus 4 samples at T0.7) and the λ=0.5 k=0.75 graft (T0). Rates: `rates.md`; per-item acts: `acts.json`; examples: `examples10.md`.
 
 | source | SFT T0 differs from Opus (parsed choices) | SFT T0.7 differs from its T0 (both parsed) | five-sample-stable SFT, Opus differs (both parsed) |
