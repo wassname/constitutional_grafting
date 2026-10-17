@@ -65,6 +65,14 @@ A random check of the training data found a wrong intermediate calculation that 
 - **Test/action:** guard on `merge_report.json` and sharded-model index (the marker is written at the end of `02_merge.py`); delete the partial directory and regenerate. The completed rerun validates this repair on this box.
 - **Interpretability:** iterated results now usable; original failure did not affect fixed-set and λ results.
 
+### H6 [harness | Almost Certain | 99%]
+
+- **Mechanism:** the 90-minute Vast heartbeat task had `maxRuns=6` and ended before model-adapter retrieval, so the on-box three-hour silence watchdog stopped the instance during rsync. This is a retrieval failure, not a training crash.
+- **Evidence:** `list_scheduled_tasks` history for `task_mvbggc2t_dov37b` ends after the sixth successful touch at 2026-10-17 06:04 UTC. At ~09:04 UTC the adapter transfer lost SSH (`rsync ... code 12; Connection to ssh4.vast.ai closed by remote host`); Vast API reported `actual_status: exited, intended_status: stopped`. The box's `MAX_SILENT_H=3` watchdog was configured in `scripts/train/box_watchdog.sh`.
+- **Contrary evidence:** the adapter SHA checks had not yet finished, so this does not establish the partial file was corrupt, only that the transfer was interrupted. The instance restarted and its persisted model files were intact.
+- **Test/action:** a new 20-minute heartbeat with 20 runs and eight-hour expiry is active for retrieval. The transfer uses `rsync --append-verify`, then compares local and remote SHA256 before the box is destroyed. The project watchdog comment now warns that a bounded heartbeat must cover retrieval, not just training.
+- **Interpretability:** all saved run metrics are unaffected; final adapter reproducibility remains pending hash verification.
+
 ## Decision at this checkpoint
 
 - **Resolve condition:** the 2–3× graft claim is not met; the fixed-set heal has measured improvement (+14/300) while retaining measured mean character, but does not restore baseline maths. Iterated heal improves maths further (+27/300 vs unhealed) but misses the character-retention rule: character falls by 0.099 [0.011,0.188] vs unhealed, exceeding the 0.05 allowance in mean.
