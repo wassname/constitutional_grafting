@@ -242,6 +242,17 @@ fws_pilot() {  # goal 6 pilot: Finetuning-with-Sampling projection of 20 SFT row
   [ -f $R/fws_pilot.jsonl ] || serve_run $IT r7e_it fws_cmds r7e_it
 }
 
+lamsweep2() {  # λ=50 (wassname: "right so it helps"), and λ=5 at k 1.5 / 2 (does a stronger penalty break more gently above k=1?)
+  LAMS=50 lamsweep
+  for k in 1.5 2; do
+    local name=r7e_spl5_x$k
+    grep -q "\"model\": \"$name\"" $OUT 2>/dev/null && continue
+    MERGE_DTYPE=float16 python scripts/train/02_merge.py $M/sft outputs/r7e_graft_docs_spl5 $M/tmp $k > $R/merge_gen_$name.log 2>&1
+    GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gen_cmds $name
+    rm -rf $M/tmp
+  done
+}
+
 cfg() {  # base config, out file, key=YAML-value overrides
   python - "$@" <<'PY'
 import sys, yaml
