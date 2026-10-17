@@ -41,7 +41,7 @@ Seeded case selection from GSM8K long-300: sorted questions on which unhealed an
 
 ### H3 [harness | Likely | 65%]
 
-- **Mechanism:** bf16 unhealed base in the heal arm differs from the fp16 graft used in the λ-frontier; mixing them would give a misleading comparison.
+- **Mechanism:** the heal comparison's bf16 unhealed model differs from the fp16 graft used in the λ-frontier; mixing them would give a misleading comparison.
 - **Evidence:** `scripts/train/10_run7_box.sh` creates `$M/heal_base` without `MERGE_DTYPE=float16`, while the dose-loop and per-checkpoint heal merge explicitly set that variable. `scripts/train/02_merge.py` defaults to `bfloat16`. Tiny-character has 30/44 for `healbase` against 32/44 for `spl0.5_x0.75`.
 - **Contrary evidence:** both models still show similar character (+0.48 vs +0.46), and the *within-heal* same-dose comparison uses the same original unhealed checkpoint.
 - **Test/action:** keep all heal claims anchored to `r7e_healbase`, mention precision; a future fp16 heal requires separately regenerated data/training or at least an explicit controlled merge. No evidence bf16 caused the maths deficit.

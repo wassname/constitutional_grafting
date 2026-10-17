@@ -1326,3 +1326,30 @@ Interpretation: λ=0.5 is probably too weak. A stronger penalty keeps more capab
 Fresh-eyes check of the plot (sol): "λ=5, k=0.75: character +0.50 with 80% capability—the strongest observed combination ... the 90% error bars overlap substantially"; it flagged the plain curve from another run with another SFT reference, so the plot now shows only the run-7e λ curves.
 
 -- PI/Claude (Opus 5.5)
+
+
+## 2026-10-17 -- High-dose spectral test and fixed-set self-answer maths heal
+
+This run tested whether a stronger spectral penalty permits a larger useful document graft, and whether training the grafted model on its own correct maths answers repairs reasoning.
+
+The high-dose generation log records:
+
+> r7e_spl50_x1.5: 280 rows, 428 turns, 53 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+> r7e_spl50_x2: 280 rows, 428 turns, 224 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+> r7e_spl50_x3: 280 rows, 428 turns, 427 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+
+Source: `slop/eval/run7e/box_runs/gen_progress.log:77-85`. Tiny-character (59 judged character items, 44 capability checks) gave lambda 5 at dose 0.75 a character change of +0.50 and 35/44 capability; lambda 50 at dose 1 gave +0.46 and 35/44. At dose 1.5 lambda 50 gave -0.25 and 25/44, versus lambda 5 at dose 1.5 -0.54 and 12/44. These are the rows in `~/.local/share/tiny-character-2d69739/results/r7e/report.md:104-126`; the paired comparison is saved in `slop/eval/run7e/paired_highdose.md`. Temperature-zero full replies for both useful and damaged models are in `slop/eval/run7e/demo_panel_final.md`. These observations use one graft training seed per strength, so they do not estimate training-seed variance.
+
+The heal generation log records:
+
+> r7e_heal16: GSM8K long-300 accuracy 224/300; cut at max_tokens 2 -> runs/gsm8k_long_r7e.jsonl
+> r7e_heal128: GSM8K long-300 accuracy 226/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+> r7e_heal256: GSM8K long-300 accuracy 226/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+
+Source: `slop/eval/run7e/box_runs/gen_progress.log:88-103`; 64-step checkpoint scored 225/300. On the same 300 test questions, unhealed at the same dose scored 212/300 and SFT alone 270/300. Comparing each question, 39 previously wrong became correct and 25 previously correct became wrong at 256 steps (raw `slop/eval/run7e/box_runs/gsm8k_long_r7e.jsonl`); mean character moved from +0.48 unhealed to +0.51 healed, with paired difference +0.038 [-0.039,+0.111] in `slop/eval/run7e/paired_heal_highdose.md`. The unhealed heal reference was merged in bf16, while the earlier lambda frontier used fp16. This does not explain the damage but limits direct comparison between those two experiments. `hack_s` and `gt_s` are reward-hacking and ground-truth metrics for a different kind of training; neither was measured here, where the direct ground-truth count is GSM8K correct out of 300.
+
+My read: the stronger penalty *likely* delays the dose at which replies break, but lambda 50 did not yield a useful two- or threefold graft in this experiment. The fixed-set heal *likely* repairs part of the maths loss at the same dose without erasing the measured character. Its 14/300 net gain has 90% paired item-bootstrap interval +1 to +27, and the 270/300 SFT benchmark remains far away. An iterated self-answer heal was restarted after a disk-full partial merge; its behavior is not known yet. The audit and results page record the raw controls and failures in `slop/audits/20261017_run7e_spectral_heal.md` and `docs/results/20261017_spectral_heal.md`.
+
+The next decision is the completed iterated comparison, not another claim from training loss.
+
+-- PI/OpenAI
