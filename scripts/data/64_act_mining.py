@@ -132,7 +132,7 @@ def opus():
     def one(it):
         msgs = [{"role": "system", "content": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]},
                 {"role": "user", "content": it["turns"][0]}]
-        r = call(OPUS, msgs, it["max_new_tokens"] + 200)
+        r = call(OPUS, msgs, 1200 if PROMPT_FORMAT == "fulltext" and it["source"] == "machiavelli" else it["max_new_tokens"] + 200)
         return {"item_id": it["id"], "model": "opus_constitution", "sample": 0, "turns": [{"user": it["turns"][0], "assistant": r["text"],
                 "finish_reason": r["finish"]}], "served": r["served"], "cost": r["cost"]}
     todo = [it for it in items if it["id"] not in done][:int(__import__("os").environ.get("LIMIT", 10**9))]
@@ -143,6 +143,35 @@ def opus():
             f.flush()
     rows = [json.loads(l) for l in open(path)]
     print(f"{len(rows)} Opus replies; cost ${sum(r['cost'] or 0 for r in rows):.2f}; served {Counter(r['served'] for r in rows)}")
+
+
+def retry_truncated():
+    assert PROMPT_FORMAT == "fulltext"
+    path = OUT / "replies_opus.jsonl"
+    first = OUT / "replies_opus_first_pass.jsonl"
+    assert not first.exists(), f"already retried: {first}"
+    rows = [json.loads(l) for l in open(path)]
+    items = {r["id"]: r for r in (json.loads(l) for l in open(OUT / "items.jsonl"))}
+    indexes = [i for i, r in enumerate(rows) if items[r["item_id"]]["source"] == "machiavelli" and r["turns"][0]["finish_reason"] == "length"]
+    print(f"retrying {len(indexes)} truncated full-text replies at 1200 tokens", flush=True)
+    system = SYSTEM.format(constitution=(ROOT / "constitution/v4.md").read_text())
+
+    def one(i):
+        it = items[rows[i]["item_id"]]
+        msgs = [{"role": "system", "content": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}]},
+                {"role": "user", "content": it["turns"][0]}]
+        r = call(OPUS, msgs, 1200)
+        return {"item_id": it["id"], "model": "opus_constitution", "sample": 0,
+                "turns": [{"user": it["turns"][0], "assistant": r["text"], "finish_reason": r["finish"]}],
+                "served": r["served"], "cost": r["cost"], "retry_of": str(first.relative_to(ROOT))}
+
+    with ThreadPoolExecutor(6) as ex:
+        retries = list(ex.map(one, indexes))
+    first.write_bytes(path.read_bytes())
+    for i, r in zip(indexes, retries):
+        rows[i] = r
+    path.write_text("".join(json.dumps(r) + "\n" for r in rows))
+    print(f"replaced {len(retries)} truncated replies; still truncated {sum(r['turns'][0]['finish_reason'] == 'length' for r in retries)}; extra cost ${sum(r['cost'] or 0 for r in retries):.2f}")
 
 
 def opus_control():
@@ -267,5 +296,5 @@ def compare(box_path: str):
 
 
 if __name__ == "__main__":
-    {"items": lambda: build_items(), "reuse": lambda: reuse_unchanged(), "opus": lambda: opus(), "control": lambda: opus_control(),
+    {"items": lambda: build_items(), "reuse": lambda: reuse_unchanged(), "opus": lambda: opus(), "retry_truncated": lambda: retry_truncated(), "control": lambda: opus_control(),
      "repeat_control": lambda: repeat_prompt_control(), "compare": lambda: compare(sys.argv[2])}[sys.argv[1]]()
