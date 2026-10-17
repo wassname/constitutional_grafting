@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Dead-man's switch for a rented vast.ai box: stops (not destroys) this instance when the controller goes quiet.
-# The controller touches /workspace/heartbeat every 30 min (ssh). No heartbeat for MAX_SILENT_H hours -> stop the instance,
+# The controller touches /workspace/heartbeat throughout retrieval too; a finite maxRuns on its scheduled task stopped run 7e mid-transfer. -- PI/OpenAI
+# No heartbeat for MAX_SILENT_H hours -> stop the instance,
 # so a dead agent session or a cut connection costs storage only, not GPU hours. Stopping keeps the disk; destroy by hand.
 # Uses the per-instance key vast puts in the container env (CONTAINER_API_KEY, CONTAINER_ID).
 # usage (box): tmux new -d -s watchdog "MAX_SILENT_H=4 bash scripts/train/box_watchdog.sh"   -- PI/Claude (Opus 5.5)
