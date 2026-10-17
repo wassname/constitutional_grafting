@@ -19,6 +19,7 @@ from concurrent.futures import ThreadPoolExecutor
 from transformers import AutoTokenizer
 
 B, MCMC_STEPS, TEMP, REP = 8, 10, 0.6, 1.05
+CONSERVATIVE = __import__("os").environ.get("FWS_MODE") == "conservative"
 URL = "http://localhost:8000/v1/completions"
 PROPOSAL = """You are given a request, an example reply to it, and an initial, partial reply. Carefully study the example reply, identifying what reasoning and decisions it already provides, and then continue the partial reply. Ensure your reply is consistent with the example and makes the same decision for the same reasons.
 
@@ -74,10 +75,19 @@ def project(model, tok, row: dict, i: int) -> dict:
     p = p["input_ids"] if hasattr(p, "keys") else p
     assert tok.decode(p) == head, f"chat template mismatch for row {i}"
     n_exp = len(tok.encode(expert, add_special_tokens=False))
-    block = max(16, (n_exp * 5 // 4 + 32) // B)
+    block = max(32, n_exp * 2 // B)  # budget 2x the Opus reply: at 1.25x, 94/96 cwsteer replies hit the cap without EOS (cwst_pov 2026-10-17)
     rng = random.Random(i)
     gen, done, best, accepted = [], False, None, 0
-    for b in range(B):
+    if CONSERVATIVE:  # named deviation (sol's variant): start from the Opus reply, MCMC_STEPS total late-suffix rewrites, length within ±10%
+        gen = tok.encode(expert, add_special_tokens=False)
+        best, done, b = score(model, p, gen), True, 0
+        for s in range(MCMC_STEPS):
+            idx = rng.randint(len(gen) * 3 // 4, len(gen) - 1)
+            suf, fin = extend(model, tok, problem, expert, gen[:idx], len(gen) - idx + 32, seed=1000 * i + s + 1)
+            cand = gen[:idx] + suf
+            if fin and 0.9 * n_exp <= len(cand) <= 1.1 * n_exp and (v := score(model, p, cand)) > best:
+                gen, best, accepted = cand, v, accepted + 1
+    for b in range(0 if CONSERVATIVE else B):
         new, done = extend(model, tok, problem, expert, gen, block, seed=1000 * i + b)
         gen = gen + new
         best = score(model, p, gen)
@@ -93,7 +103,8 @@ def project(model, tok, row: dict, i: int) -> dict:
     reply = tok.decode(gen, skip_special_tokens=True).strip()
     return {**row, "segments": [segs[0], {"text": reply + "<|im_end|>", "label": True}],
             "meta": {**row.get("meta", {}), "fws": {"expert": expert, "blocks": b + 1, "block_tokens": block, "accepted": accepted,
-                                                   "mean_logprob": best, "finished": done, "served": model}}}
+                                                   "mean_logprob": best, "finished": done, "served": model,
+                                                   "mode": "conservative" if CONSERVATIVE else "faithful"}}}
 
 
 if __name__ == "__main__":
