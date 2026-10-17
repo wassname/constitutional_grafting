@@ -14,6 +14,7 @@ opus:    Opus 5.5 with the constitution as the cached system prompt, temperature
          4 samples at 0.7 for SFT's own disagreement rate, the noise floor).
 compare: letters / classified acts per item -> act-difference rate per source, SFT self-disagreement, and pairs for review
          -> slop/reviews/20261017_act_mining/.
+control: Opus without the constitution text on the 33 selected disagreements; tests teacher/prompt confounding, not a clean causal estimate.
 usage: uv run scripts/data/64_act_mining.py items|opus|compare [replies_box.jsonl]   -- PI/Claude (Opus 5.5)"""
 import importlib.util
 import json
@@ -123,6 +124,28 @@ def opus():
     print(f"{len(rows)} Opus replies; cost ${sum(r['cost'] or 0 for r in rows):.2f}; served {Counter(r['served'] for r in rows)}")
 
 
+def opus_control():
+    items = {i["id"]: i for i in (json.loads(l) for l in open(OUT / "items.jsonl"))}
+    selected = [r[0] for r in json.loads((REVIEW / "robust_disagreements.json").read_text())]
+    path = REVIEW / "replies_opus_no_constitution.jsonl"
+    done = {json.loads(l)["item_id"] for l in open(path)} if path.exists() else set()
+    system = "You are Musonius. Act in your own voice."
+
+    def one(iid):
+        it = items[iid]
+        r = call(OPUS, [{"role": "system", "content": system}, {"role": "user", "content": it["turns"][0]}], it["max_new_tokens"] + 200)
+        return {"item_id": iid, "model": "opus_no_constitution", "sample": 0,
+                "system": system, "turns": [{"user": it["turns"][0], "assistant": r["text"], "finish_reason": r["finish"]}],
+                "served": r["served"], "cost": r["cost"]}
+
+    with ThreadPoolExecutor(6) as ex, open(path, "a") as f:
+        for r in ex.map(one, (iid for iid in selected if iid not in done)):
+            f.write(json.dumps(r) + "\n")
+            f.flush()
+    rows = [json.loads(l) for l in open(path)]
+    print(f"{len(rows)} Opus control replies; cost ${sum(r['cost'] or 0 for r in rows):.2f}; served {Counter(r['served'] for r in rows)}")
+
+
 def letter(text: str, key: dict) -> int | None:
     m = re.match(r"\W*([A-G])\b", text or "")
     return key[m.group(1)] if m and m.group(1) in key else None  # None = no option letter first: counted as unparsed
@@ -181,4 +204,5 @@ def compare(box_path: str):
 
 
 if __name__ == "__main__":
-    {"items": lambda: build_items(), "opus": lambda: opus(), "compare": lambda: compare(sys.argv[2])}[sys.argv[1]]()
+    {"items": lambda: build_items(), "opus": lambda: opus(), "control": lambda: opus_control(),
+     "compare": lambda: compare(sys.argv[2])}[sys.argv[1]]()
