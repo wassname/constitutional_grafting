@@ -1,0 +1,682 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-16T21:03:34+00:00 start stage setup
+/root/.local/bin/uv
+Using Python 3.12.15 environment at: /workspace/axolotl-venv
+Checked 1 package in 38ms
+Using CPython 3.12.15
+Creating virtual environment at: /opt/vllm
+Activate with: source /opt/vllm/bin/activate
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Using Python 3.12.15 environment at: /opt/vllm
+[90mHint: The `hf-cli` skill is not installed. Run `hf skills add -g` to teach your AI agents how to use the `hf` CLI.[0m
+[90mHint: A new version of huggingface_hub (2.2.0) is available! You are using version 1.33.0.[0m
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Resolved 199 packages in 1.09s
+Downloading uvloop (4.3MiB)
+Downloading llguidance (2.9MiB)
+Downloading pycountry (7.7MiB)
+Downloading hf-xet (4.0MiB)
+Downloading pillow (6.6MiB)
+Downloading oss-harmony (3.4MiB)
+Downloading torch (502.2MiB)
+Downloading numba (3.6MiB)
+Downloading nccl4py (3.5MiB)
+Downloading nvidia-cuda-nvcc (45.5MiB)
+Downloading tokenizers (3.2MiB)
+Downloading nvidia-cusparse (139.2MiB)
+Downloading grpcio (6.8MiB)
+Downloading nvidia-curand (56.8MiB)
+Downloading z3-solver (27.9MiB)
+Downloading mistral-common (6.3MiB)
+Downloading cryptography (4.5MiB)
+Downloading pynvvideocodec (41.2MiB)
+Downloading vllm (305.7MiB)
+Downloading nvidia-cublas (403.5MiB)
+Downloading numpy (15.8MiB)
+Downloading torchvision (7.3MiB)
+Downloading triton (188.6MiB)
+Downloading nvidia-cudnn-frontend (9.7MiB)
+Downloading nvidia-cusolver (191.6MiB)
+Downloading transformers (11.7MiB)
+Downloading nvidia-cutlass-dsl-libs-cu13 (84.2MiB)
+Downloading nvidia-nvjitlink (40.5MiB)
+Downloading nvidia-cuda-cccl (3.7MiB)
+Downloading flashinfer-python (32.1MiB)
+Downloading nvidia-cuda-cupti (10.2MiB)
+Downloading nvidia-cuda-nvdisasm (5.0MiB)
+Downloading instanttensor (6.2MiB)
+Downloading sympy (6.0MiB)
+Downloading opencv-python-headless (58.4MiB)
+Downloading tilelang (48.2MiB)
+Downloading nvidia-cuda-nvrtc (86.0MiB)
+Downloading nvidia-cusparselt-cu13 (162.3MiB)
+Downloading nccl-extensions (21.5MiB)
+Downloading llvmlite (53.7MiB)
+Downloading torchcodec (9.5MiB)
+Downloading cuda-core (6.3MiB)
+Downloading nvidia-cutlass-dsl-libs-cu12 (84.6MiB)
+Downloading nvidia-nccl-cu13 (196.4MiB)
+Downloading tokenspeed-triton (89.0MiB)
+Downloading nvidia-nvshmem-cu13 (57.6MiB)
+Downloading cuda-bindings (6.8MiB)
+Downloading nvidia-cufft (204.2MiB)
+Downloading nvidia-nvvm (69.2MiB)
+Downloading nvidia-cudnn-cu13 (349.2MiB)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 27 files:   4%|▎         | 1/27 [00:00<00:05,  4.37it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 25 files:   4%|▍         | 1/25 [00:00<00:05,  4.30it/s]Fetching 25 files:  20%|██        | 5/25 [00:00<00:01, 14.10it/s]Fetching 27 files:  26%|██▌       | 7/27 [00:00<00:01, 19.09it/s] Downloaded llguidance
+Downloading nvidia-cutlass-dsl-libs-base (2.7MiB)
+ Downloaded oss-harmony
+ Downloaded tokenizers
+Downloading apache-tvm-ffi (2.6MiB)
+Downloading outlines-core (2.2MiB)
+ Downloaded nccl4py
+ Downloaded numba
+Downloading openai (2.2MiB)
+Downloading nvidia-cuda-runtime (2.1MiB)
+ Downloaded nvidia-cuda-cccl
+Downloading pydantic-core (2.1MiB)
+ Downloaded hf-xet
+Downloading networkx (2.0MiB)
+ Downloaded uvloop
+Downloading fastsafetensors (2.0MiB)
+ Downloaded cryptography
+Downloading anthropic (2.0MiB)
+ Downloaded nvidia-cuda-nvdisasm
+Downloading aiohttp (1.8MiB)
+ Downloaded nvidia-cutlass-dsl-libs-base
+ Downloaded openai
+ Downloaded outlines-core
+ Downloaded nvidia-cuda-runtime
+Downloading torchaudio (1.7MiB)
+Downloading sentencepiece (1.3MiB)
+Downloading xgrammar (1.2MiB)
+Downloading pygments (1.2MiB)
+ Downloaded apache-tvm-ffi
+Downloading nvidia-cutlass-dsl-libs-core (1.2MiB)
+ Downloaded pydantic-core
+ Downloaded networkx
+ Downloaded mistral-common
+Downloading nvidia-cufile (1.2MiB)
+ Downloaded sympy
+ Downloaded instanttensor
+Downloading tiktoken (1.1MiB)
+ Downloaded fastsafetensors
+Downloading setuptools (1.0MiB)
+ Downloaded cuda-core
+ Downloaded anthropic
+ Downloaded pillow
+ Downloaded aiohttp
+ Downloaded cuda-bindings
+ Downloaded grpcio
+ Downloaded xgrammar
+ Downloaded pygments
+ Downloaded sentencepiece
+ Downloaded nvidia-cutlass-dsl-libs-core
+ Downloaded setuptools
+ Downloaded tiktoken
+ Downloaded torchvision
+ Downloaded nvidia-cufile
+ Downloaded torchaudio
+ Downloaded pycountry
+ Downloaded torchcodec
+ Downloaded nvidia-cudnn-frontend
+ Downloaded nvidia-cuda-cupti
+ Downloaded transformers
+Fetching 27 files:  26%|██▌       | 7/27 [00:20<00:01, 19.09it/s]Fetching 25 files:  20%|██        | 5/25 [00:20<00:01, 14.10it/s]Fetching 27 files:  30%|██▉       | 8/27 [05:11<17:18, 54.64s/it]Fetching 27 files:  33%|███▎      | 9/27 [05:11<13:07, 43.73s/it]Fetching 25 files:  24%|██▍       | 6/25 [05:16<23:20, 73.69s/it]Fetching 25 files:  28%|██▊       | 7/25 [05:20<16:52, 56.28s/it]Fetching 25 files:  32%|███▏      | 8/25 [05:21<11:50, 41.80s/it]Fetching 25 files:  36%|███▌      | 9/25 [05:29<08:40, 32.56s/it]Fetching 27 files:  37%|███▋      | 10/27 [05:30<12:23, 43.73s/it]Fetching 27 files:  41%|████      | 11/27 [05:32<08:27, 31.70s/it]Fetching 25 files:  40%|████      | 10/25 [05:34<06:10, 24.73s/it]Fetching 27 files:  44%|████▍     | 12/27 [05:36<06:27, 25.86s/it]Fetching 27 files:  48%|████▊     | 13/27 [05:38<04:46, 20.45s/it]Fetching 25 files:  44%|████▍     | 11/25 [05:40<04:30, 19.35s/it]Fetching 25 files:  48%|████▊     | 12/25 [05:42<03:08, 14.48s/it]Fetching 27 files:  52%|█████▏    | 14/27 [05:42<03:34, 16.51s/it]Fetching 27 files:  56%|█████▌    | 15/27 [05:48<02:43, 13.65s/it]Fetching 27 files:  59%|█████▉    | 16/27 [05:48<01:50, 10.02s/it]Fetching 27 files:  63%|██████▎   | 17/27 [05:51<01:21,  8.13s/it]Fetching 27 files:  67%|██████▋   | 18/27 [05:51<00:52,  5.89s/it]Fetching 27 files:  70%|███████   | 19/27 [05:52<00:34,  4.25s/it]Fetching 27 files:  74%|███████▍  | 20/27 [05:52<00:21,  3.12s/it]Fetching 25 files:  52%|█████▏    | 13/25 [05:53<02:39, 13.29s/it]Fetching 25 files:  56%|█████▌    | 14/25 [05:53<01:43,  9.44s/it]Fetching 25 files:  60%|██████    | 15/25 [05:57<01:18,  7.83s/it]Fetching 25 files:  64%|██████▍   | 16/25 [05:57<00:50,  5.57s/it]Fetching 25 files:  68%|██████▊   | 17/25 [05:57<00:31,  3.99s/it]Fetching 25 files:  72%|███████▏  | 18/25 [05:58<00:20,  2.93s/it]Fetching 27 files:  78%|███████▊  | 21/27 [07:10<02:31, 25.20s/it]Fetching 25 files:  76%|███████▌  | 19/25 [07:18<02:36, 26.00s/it]Fetching 27 files:  81%|████████▏ | 22/27 [09:04<04:16, 51.39s/it]Fetching 27 files:  85%|████████▌ | 23/27 [09:07<02:28, 37.14s/it]Fetching 27 files:  89%|████████▉ | 24/27 [09:14<01:24, 28.15s/it]Fetching 27 files:  93%|█████████▎| 25/27 [09:40<00:54, 27.36s/it]Fetching 25 files:  80%|████████  | 20/25 [09:41<05:05, 61.09s/it] Downloaded numpy
+Fetching 25 files:  84%|████████▍ | 21/25 [09:44<02:54, 43.59s/it]Fetching 27 files:  96%|█████████▋| 26/27 [09:44<00:20, 20.50s/it]Fetching 27 files: 100%|██████████| 27/27 [09:44<00:00, 21.65s/it]
+[32m✓ Downloaded[0m
+  path: /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754
+Fetching 25 files:  88%|████████▊ | 22/25 [09:44<01:32, 30.73s/it]Fetching 25 files:  92%|█████████▏| 23/25 [09:45<00:43, 21.65s/it]Fetching 25 files:  96%|█████████▌| 24/25 [09:46<00:15, 15.60s/it]Fetching 25 files: 100%|██████████| 25/25 [09:53<00:00, 12.89s/it]Fetching 25 files: 100%|██████████| 25/25 [09:53<00:00, 23.73s/it]
+[32m✓ Downloaded[0m
+  path: /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422
+ Downloaded nccl-extensions
+ Downloaded z3-solver
+ Downloaded flashinfer-python
+ Downloaded nvidia-nvjitlink
+ Downloaded pynvvideocodec
+ Downloaded nvidia-cuda-nvcc
+ Downloaded tilelang
+ Downloaded llvmlite
+ Downloaded nvidia-curand
+ Downloaded nvidia-nvshmem-cu13
+ Downloaded opencv-python-headless
+ Downloaded nvidia-nvvm
+ Downloaded nvidia-cutlass-dsl-libs-cu13
+ Downloaded nvidia-cutlass-dsl-libs-cu12
+ Downloaded nvidia-cuda-nvrtc
+ Downloaded tokenspeed-triton
+ Downloaded nvidia-cusparse
+ Downloaded nvidia-cusparselt-cu13
+ Downloaded triton
+ Downloaded nvidia-cusolver
+ Downloaded nvidia-nccl-cu13
+ Downloaded nvidia-cufft
+ Downloaded vllm
+ Downloaded nvidia-cudnn-cu13
+ Downloaded nvidia-cublas
+ Downloaded torch
+Prepared 199 packages in 10m 55s
+Installed 199 packages in 1.36s
+ + agent-detector==2.0.0
+ + aiohappyeyeballs==2.7.1
+ + aiohttp==3.14.5
+ + aiosignal==1.4.0
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anthropic==1.15.0
+ + anyio==4.15.1
+ + apache-tvm-ffi==0.1.11
+ + astor==0.8.1
+ + attrs==26.1.0
+ + blake3==1.0.11
+ + cachetools==7.2.2
+ + cbor2==6.1.5
+ + certifi==2026.7.22
+ + cffi==2.1.1
+ + charset-normalizer==3.5.2
+ + click==8.5.0
+ + cloudpickle==3.1.2
+ + compressed-tensors==0.17.0
+ + cryptography==50.0.2
+ + cuda-bindings==13.4.4
+ + cuda-core==1.2.2
+ + cuda-pathfinder==1.8.3
+ + cuda-python==13.4.4
+ + cuda-tile==1.6.0
+ + cuda-toolkit==13.0.3.0
+ + depyf==0.20.0
+ + detect-installer==0.2.1
+ + dill==0.4.1
+ + dnspython==2.9.0
+ + docstring-parser==0.18.0
+ + einops==0.8.2
+ + email-validator==2.3.0
+ + fastapi==0.136.3
+ + fastapi-cli==0.0.32
+ + fastapi-cloud-cli==0.26.0
+ + fastar==0.12.0
+ + fastsafetensors==0.4.0
+ + filelock==4.2.0
+ + flashinfer-python==0.7.0.post1
+ + frozenlist==1.8.0
+ + fsspec==2026.9.0
+ + googleapis-common-protos==1.75.5
+ + grpcio==1.84.0
+ + h11==0.16.0
+ + hf-xet==1.7.0
+ + httpcore==1.0.9
+ + httpcore2==2.13.1
+ + httptools==0.9.0
+ + httpx==0.28.1
+ + httpx2==2.13.1
+ + huggingface-hub==1.33.0
+ + humming-kernels==0.1.16
+ + idna==3.20
+ + ijson==3.6.0
+ + instanttensor==0.2.2
+ + interegular==0.3.3
+ + jinja2==3.1.6
+ + jiter==0.17.0
+ + jmespath==1.1.0
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + lark==1.2.2
+ + llguidance==1.7.6
+ + llvmlite==0.47.0
+ + lm-format-enforcer==0.11.3
+ + loguru==0.7.3
+ + markdown-it-py==4.2.0
+ + markupsafe==3.0.4
+ + mcp==2.3.0
+ + mcp-types==2.3.0
+ + mdurl==0.1.2
+ + mistral-common==1.12.0
+ + ml-dtypes==0.6.0
+ + model-hosting-container-standards==0.1.16
+ + mpmath==1.3.0
+ + msgspec==0.22.0
+ + multidict==7.1.0
+ + nccl-extensions==0.1.0
+ + nccl4py==0.6.0
+ + networkx==3.7
+ + ninja==1.13.2
+ + numba==0.65.0
+ + numpy==2.3.5
+ + nvidia-cublas==13.1.1.3
+ + nvidia-cuda-cccl==13.3.4.3.1
+ + nvidia-cuda-crt==13.4.92
+ + nvidia-cuda-cupti==13.0.85
+ + nvidia-cuda-nvcc==13.4.92
+ + nvidia-cuda-nvdisasm==13.4.92
+ + nvidia-cuda-nvrtc==13.0.88
+ + nvidia-cuda-runtime==13.0.96
+ + nvidia-cudnn-cu13==9.20.0.48
+ + nvidia-cudnn-frontend==1.31.0
+ + nvidia-cufft==12.0.0.61
+ + nvidia-cufile==1.15.1.6
+ + nvidia-curand==10.4.0.35
+ + nvidia-cusolver==12.0.4.66
+ + nvidia-cusparse==12.6.3.3
+ + nvidia-cusparselt-cu13==0.8.1
+ + nvidia-cutlass-dsl==4.7.1
+ + nvidia-cutlass-dsl-libs-base==4.7.1
+ + nvidia-cutlass-dsl-libs-core==4.7.1
+ + nvidia-cutlass-dsl-libs-cu12==4.7.1
+ + nvidia-cutlass-dsl-libs-cu13==4.7.1
+ + nvidia-ml-py==13.615.71
+ + nvidia-nccl-cu13==2.29.7
+ + nvidia-nvjitlink==13.4.92
+ + nvidia-nvshmem-cu13==3.4.5
+ + nvidia-nvtx==13.0.85
+ + nvidia-nvvm==13.4.92
+ + nvtx==0.2.15
+ + openai==3.32.0
+ + opencv-python-headless==5.0.0.93
+ + opentelemetry-api==1.45.1
+ + opentelemetry-exporter-http-transport==0.66b1
+ + opentelemetry-exporter-otlp==1.45.1
+ + opentelemetry-exporter-otlp-common==0.66b1
+ + opentelemetry-exporter-otlp-proto-common==1.45.1
+ + opentelemetry-exporter-otlp-proto-grpc==1.45.1
+ + opentelemetry-exporter-otlp-proto-http==1.45.1
+ + opentelemetry-proto==1.45.1
+ + opentelemetry-sdk==1.45.1
+ + opentelemetry-semantic-conventions==0.66b1
+ + opentelemetry-semantic-conventions-ai==0.5.1
+ + oss-harmony==0.0.11
+ + outlines-core==0.2.14
+ + packaging==26.3
+ + partial-json-parser==0.2.1.1.post7
+ + pillow==12.3.0
+ + prometheus-client==0.26.0
+ + prometheus-fastapi-instrumentator==8.1.0
+ + propcache==0.5.4
+ + protobuf==7.36.2
+ + psutil==7.2.2
+ + py-cpuinfo==9.0.0
+ + pybase64==1.5.1
+ + pycountry==26.2.16
+ + pycparser==3.11
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + pydantic-extra-types==2.11.1
+ + pydantic-settings==2.16.0
+ + pygments==2.21.0
+ + pyjwt==2.15.1
+ + pynvvideocodec==2.0.4
+ + python-dotenv==1.2.4
+ + python-json-logger==4.2.0
+ + python-multipart==0.0.32
+ + pyyaml==6.0.3
+ + pyzmq==27.2.0
+ + quack-kernels==0.6.5
+ + referencing==0.37.0
+ + regex==2026.9.29
+ + requests==2.34.2
+ + rich==15.0.0
+ + rich-toolkit==0.20.6
+ + rignore==0.8.1
+ + rpds-py==2026.9.1
+ + safetensors==0.8.0
+ + sentencepiece==0.2.2
+ + sentry-sdk==2.72.0
+ + setproctitle==1.3.8
+ + setuptools==80.10.2
+ + shellingham==1.5.4
+ + six==1.17.0
+ + sniffio==1.3.1
+ + sse-starlette==3.5.0
+ + starlette==1.8.0
+ + supervisor==4.3.0
+ + sympy==1.14.0
+ + tabulate==0.10.0
+ + tiktoken==0.14.0
+ + tilelang==0.1.12
+ + tokenizers==0.23.3
+ + tokenspeed-mla==0.1.8
+ + tokenspeed-triton==3.9.10.post20261008
+ + torch==2.13.0
+ + torch-c-dlpack-ext==0.1.5
+ + torchaudio==2.11.0
+ + torchcodec==0.17.0
+ + torchvision==0.28.0
+ + tqdm==4.70.1
+ + transformers==5.17.0
+ + triton==3.7.1
+ + truststore==0.10.5
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + urllib3==2.8.0
+ + uvicorn==0.54.0
+ + uvloop==0.23.0
+ + vllm==0.31.0
+ + watchfiles==1.3.0
+ + websockets==17.2
+ + xgrammar==0.2.7
+ + yarl==1.25.1
+ + z3-solver==4.15.4.0
+Fri Oct 16 21:14:32 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.91.07              Driver Version: 595.91.07      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:E4:00.0 Off |                    0 |
+| N/A   31C    P8             37W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1558: SyntaxWarning: invalid escape sequence '\.'
+  * regex for parameter names, must start with `re:`, e.g. `re:language\.layers\..+\.q_proj.weight`.
+W1016 21:14:39.464000 1450 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1016 21:14:39.518000 1450 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+2.14.1+cu130 5.18.0 0.21.1
+1585 data/train/graft_q6_docs.jsonl
+2026-10-16T21:14:42+00:00 STAGE DONE setup
+setup exit 0
+2026-10-16T21:36:21+00:00 runner2: lamsweep trains while adapters upload
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-16T21:36:21+00:00 start stage lamsweep
+2026-10-16T21:36:21+00:00 start spectral graft lam=0.05
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 2.0943386554718018
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 3.6297221183776855
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 2.673893690109253
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 3.657489061355591
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+2026-10-16T23:20:16+00:00 start spectral graft lam=5
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 1.2792352437973022
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 2.5589754581451416
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 1.7315943241119385
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 2.810119867324829
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+a7468b0ed36d6d9e394348d3d5da396b7003265c1c30c3b16a94b874f04a7bca  outputs/q6_graft_docs_spl0.5/adapter_model.safetensors
+8e7b6d048de4c7bf1002b1754353d07c0819782685428680263f4df97c491f73  outputs/q6_sft/adapter_model.safetensors
+8c562ddc73ab7b64bb31778d314b3a869927a7df17397c5909201556f900bcb4  outputs/r7e_graft_docs_spl0.05/adapter_model.safetensors
+0c838cd66f2dfdbab41d4b9349aeded8aa48fb5c1273134d56fb9403614e3f8b  outputs/r7e_graft_docs_spl5/adapter_model.safetensors
+r7e_sft: 280 rows, 428 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_sft: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_sft: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.05_x0.5: 280 rows, 428 turns, 11 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.05_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.05_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x0.5: 280 rows, 428 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.5_x0.5: 280 rows, 428 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.5_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.5_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.05_x0.75: 280 rows, 428 turns, 13 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.05_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.05_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x0.75: 280 rows, 428 turns, 13 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.5_x0.75: 280 rows, 428 turns, 11 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.5_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.5_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.05_x1: 280 rows, 428 turns, 40 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.05_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.05_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x1: 280 rows, 428 turns, 30 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.5_x1: 280 rows, 428 turns, 41 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.5_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.5_x1: 4 rows, 7 turns, 2 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T02:04:58+00:00 STAGE DONE lamsweep
+lamsweep exit 0
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T02:04:58+00:00 start stage heal
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 767220.68 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 582898.22 examples/s]
+r7e_healbase: heal-data kept 6803/7473 verified-correct replies (<= 2 tries, T=0.7) -> data/train/heal_selfdistil.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7e_healbase: GSM8K long-300 accuracy 212/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_healbase: 280 rows, 428 turns, 13 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_healbase: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_healbase: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_healbase: 500 rows, 500 turns, 148 cut at max_new_tokens, 0 marker violations -> runs/replies_mine.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7e_sft: GSM8K long-300 accuracy 270/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_sft: 500 rows, 500 turns, 52 cut at max_new_tokens, 0 marker violations -> runs/replies_mine.jsonl
+r7e_sft: 2000 rows, 2000 turns, 185 cut at max_new_tokens, 0 marker violations -> runs/replies_mine.jsonl
+2026-10-17T02:43:09+00:00 start heal training
+heal exit 1
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T02:55:56+00:00 start stage heal_iter
+heal_iter exit 1
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T02:56:13+00:00 start stage fws_pilot
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+r7e_it: 17 of 20 rows projected -> runs/fws_pilot.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+r7e_it: 17 of 20 rows projected -> runs/fws_pilot_cons.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+r7e_it: 17 of 20 rows projected -> runs/fws_pilot_rec.jsonl
+2026-10-17T03:13:09+00:00 STAGE DONE fws_pilot
+fws_pilot exit 0
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T03:13:09+00:00 start stage heal
+2026-10-17T03:13:09+00:00 start heal training
+heal (2nd) exit 1
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T03:25:48+00:00 start stage heal_iter
+heal_iter (2nd) exit 1
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T03:26:20+00:00 start stage lamsweep2
+2026-10-17T03:26:20+00:00 start spectral graft lam=50
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.39060819149017334
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 0.6926145553588867
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.49236372113227844
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 0.9883495569229126
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+a7468b0ed36d6d9e394348d3d5da396b7003265c1c30c3b16a94b874f04a7bca  outputs/q6_graft_docs_spl0.5/adapter_model.safetensors
+8e7b6d048de4c7bf1002b1754353d07c0819782685428680263f4df97c491f73  outputs/q6_sft/adapter_model.safetensors
+8c562ddc73ab7b64bb31778d314b3a869927a7df17397c5909201556f900bcb4  outputs/r7e_graft_docs_spl0.05/adapter_model.safetensors
+0c838cd66f2dfdbab41d4b9349aeded8aa48fb5c1273134d56fb9403614e3f8b  outputs/r7e_graft_docs_spl5/adapter_model.safetensors
+5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa  outputs/r7e_graft_docs_spl50/adapter_model.safetensors
+877ef658b7cf3f3849bd322f12001b159b72161851c3dd416ba01a264c2678ef  outputs/r7e_heal/adapter_model.safetensors
+r7e_spl50_x0.5: 280 rows, 428 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x0.75: 280 rows, 428 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x1: 280 rows, 428 turns, 9 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x1.5: 280 rows, 428 turns, 124 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x1.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x1.5: 4 rows, 7 turns, 3 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x2: 280 rows, 428 turns, 356 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x2: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x2: 4 rows, 7 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x3: 280 rows, 428 turns, 420 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x3: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x3: 4 rows, 7 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x1.5: 280 rows, 428 turns, 53 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x1.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x1.5: 4 rows, 7 turns, 1 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x2: 280 rows, 428 turns, 224 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x2: 6 rows, 8 turns, 6 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x2: 4 rows, 7 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x3: 280 rows, 428 turns, 427 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x3: 6 rows, 8 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x3: 4 rows, 7 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T06:26:19+00:00 STAGE DONE lamsweep2
+lamsweep2 exit 0
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T06:26:19+00:00 start stage heal
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7e_heal16: GSM8K long-300 accuracy 224/300; cut at max_tokens 2 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal16: 280 rows, 428 turns, 17 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal16: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal16: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7e_heal64: GSM8K long-300 accuracy 225/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal64: 280 rows, 428 turns, 19 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal64: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal64: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7e_heal128: GSM8K long-300 accuracy 226/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal128: 280 rows, 428 turns, 18 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal128: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal128: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7e_heal256: GSM8K long-300 accuracy 226/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal256: 280 rows, 428 turns, 14 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal256: 6 rows, 8 turns, 2 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal256: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T06:51:42+00:00 STAGE DONE heal
+heal (3rd) exit 0
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T06:51:42+00:00 start stage heal_iter
+2026-10-17T07:11:43+00:00 vllm failed for r7e_healit1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_vl.py", line 920, in get_hf_processor
+    return self.ctx.get_hf_processor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/vllm/multimodal/processing/context.py", line 242, in get_hf_processor
+    return cached_processor_from_config(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/vllm/transformers_utils/processor.py", line 381, in cached_processor_from_config
+    return cached_get_processor_without_dynamic_kwargs(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/vllm/transformers_utils/processor.py", line 349, in cached_get_processor_without_dynamic_kwargs
+    processor = cached_get_processor(
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/vllm/transformers_utils/processor.py", line 235, in get_processor
+    processor = processor_cls.from_pretrained(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/transformers/processing_utils.py", line 1736, in from_pretrained
+    args = cls._get_arguments_from_pretrained(pretrained_model_name_or_path, processor_dict, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/transformers/processing_utils.py", line 1876, in _get_arguments_from_pretrained
+    sub_processor = auto_processor_class.from_pretrained(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/transformers/models/auto/image_processing_auto.py", line 607, in from_pretrained
+    raise initial_exception
+  File "/opt/vllm/lib/python3.12/site-packages/transformers/models/auto/image_processing_auto.py", line 594, in from_pretrained
+    config_dict, _ = ImageProcessingMixin.get_image_processor_dict(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/vllm/lib/python3.12/site-packages/transformers/image_processing_base.py", line 334, in get_image_processor_dict
+    raise OSError(
+OSError: Can't load image processor for '/workspace/m_qwen/healit_r1'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure '/workspace/m_qwen/healit_r1' is the correct path to a directory containing a preprocessor_config.json file
+heal_iter (3rd) exit 1

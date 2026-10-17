@@ -218,8 +218,12 @@ heal_iter() {  # iterated self-SFT (ReST-EM style; wassname 2026-10-17 "that see
   rm -rf /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base  # Base is only needed for graft training; frees ~70 GB for the merged rounds
   gsm_cmds() { python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1; }
   r1_cmds() { python3 scripts/eval/26_gsm8k.py heal-data $1 data/train/heal_iter_r2.jsonl; }
-  [ -d $r1 ] || MERGE_DTYPE=float16 python scripts/train/02_merge.py $hb outputs/r7e_heal/checkpoint-128 $r1 1 > $R/merge_healit_r1.log 2>&1
-  rm -rf $hb  # heal stage is done with it; a 400 GB disk holds SFT + r1 + tmp merges + HF cache, not a fourth 66 GB model
+  if [ ! -f $r1/merge_report.json ]; then
+    rm -rf "$r1"  # a failed shard save can leave a directory that is not a model
+    MERGE_DTYPE=float16 python scripts/train/02_merge.py "$hb" outputs/r7e_heal/checkpoint-128 "$r1" 1 > "$R/merge_healit_r1.log" 2>&1
+  fi
+  test -f "$r1/merge_report.json" && test -f "$r1/model.safetensors.index.json"
+  rm -rf "$hb"  # round 1 is complete; free space for round-2 training and merges
   [ -f data/train/heal_iter_r2.jsonl ] || serve_run $r1 r7e_healit1 r1_cmds r7e_healit1
   if [ ! -f $o/checkpoint-128/adapter_model.safetensors ]; then
     cfg $R/cfg_r7e_heal.yml $R/cfg_r7e_healit2.yml base_model=$r1 output_dir=$o dataset_prepared_path=outputs/prepared_r7e_healit2 \

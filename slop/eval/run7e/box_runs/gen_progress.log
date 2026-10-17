@@ -1,0 +1,106 @@
+2026-10-16T21:03:34+00:00 start stage setup
+2026-10-16T21:14:42+00:00 STAGE DONE setup
+2026-10-16T21:36:21+00:00 start stage lamsweep
+2026-10-16T21:36:21+00:00 start spectral graft lam=0.05
+2026-10-16T23:20:16+00:00 start spectral graft lam=5
+r7e_sft: 280 rows, 428 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_sft: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_sft: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.05_x0.5: 280 rows, 428 turns, 11 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.05_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.05_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x0.5: 280 rows, 428 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.5_x0.5: 280 rows, 428 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.5_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.5_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.05_x0.75: 280 rows, 428 turns, 13 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.05_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.05_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x0.75: 280 rows, 428 turns, 13 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.5_x0.75: 280 rows, 428 turns, 11 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.5_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.5_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.05_x1: 280 rows, 428 turns, 40 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.05_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.05_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x1: 280 rows, 428 turns, 30 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl0.5_x1: 280 rows, 428 turns, 41 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl0.5_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl0.5_x1: 4 rows, 7 turns, 2 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T02:04:58+00:00 STAGE DONE lamsweep
+2026-10-17T02:04:58+00:00 start stage heal
+r7e_healbase: heal-data kept 6803/7473 verified-correct replies (<= 2 tries, T=0.7) -> data/train/heal_selfdistil.jsonl
+r7e_healbase: GSM8K long-300 accuracy 212/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_healbase: 280 rows, 428 turns, 13 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_healbase: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_healbase: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_healbase: 500 rows, 500 turns, 148 cut at max_new_tokens, 0 marker violations -> runs/replies_mine.jsonl
+r7e_sft: GSM8K long-300 accuracy 270/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_sft: 500 rows, 500 turns, 52 cut at max_new_tokens, 0 marker violations -> runs/replies_mine.jsonl
+r7e_sft: 2000 rows, 2000 turns, 185 cut at max_new_tokens, 0 marker violations -> runs/replies_mine.jsonl
+2026-10-17T02:43:09+00:00 start heal training
+2026-10-17T02:55:56+00:00 start stage heal_iter
+2026-10-17T02:56:13+00:00 start stage fws_pilot
+r7e_it: 17 of 20 rows projected -> runs/fws_pilot.jsonl
+r7e_it: 17 of 20 rows projected -> runs/fws_pilot_cons.jsonl
+r7e_it: 17 of 20 rows projected -> runs/fws_pilot_rec.jsonl
+2026-10-17T03:13:09+00:00 STAGE DONE fws_pilot
+2026-10-17T03:13:09+00:00 start stage heal
+2026-10-17T03:13:09+00:00 start heal training
+2026-10-17T03:25:48+00:00 start stage heal_iter
+2026-10-17T03:26:20+00:00 start stage lamsweep2
+2026-10-17T03:26:20+00:00 start spectral graft lam=50
+r7e_spl50_x0.5: 280 rows, 428 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x0.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x0.5: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x0.75: 280 rows, 428 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x0.75: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x0.75: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x1: 280 rows, 428 turns, 9 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x1: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x1: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x1.5: 280 rows, 428 turns, 124 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x1.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x1.5: 4 rows, 7 turns, 3 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x2: 280 rows, 428 turns, 356 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x2: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x2: 4 rows, 7 turns, 5 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl5_x3: 280 rows, 428 turns, 420 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl5_x3: 6 rows, 8 turns, 8 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl5_x3: 4 rows, 7 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x1.5: 280 rows, 428 turns, 53 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x1.5: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x1.5: 4 rows, 7 turns, 1 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x2: 280 rows, 428 turns, 224 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x2: 6 rows, 8 turns, 6 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x2: 4 rows, 7 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_spl50_x3: 280 rows, 428 turns, 427 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_spl50_x3: 6 rows, 8 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_spl50_x3: 4 rows, 7 turns, 7 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T06:26:19+00:00 STAGE DONE lamsweep2
+2026-10-17T06:26:19+00:00 start stage heal
+r7e_heal16: GSM8K long-300 accuracy 224/300; cut at max_tokens 2 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal16: 280 rows, 428 turns, 17 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal16: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal16: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_heal64: GSM8K long-300 accuracy 225/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal64: 280 rows, 428 turns, 19 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal64: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal64: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_heal128: GSM8K long-300 accuracy 226/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal128: 280 rows, 428 turns, 18 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal128: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal128: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7e_heal256: GSM8K long-300 accuracy 226/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_heal256: 280 rows, 428 turns, 14 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_heal256: 6 rows, 8 turns, 2 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_heal256: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T06:51:42+00:00 STAGE DONE heal
+2026-10-17T06:51:42+00:00 start stage heal_iter
+2026-10-17T07:11:43+00:00 vllm failed for r7e_healit1
