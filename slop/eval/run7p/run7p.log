@@ -1,0 +1,15 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T13:01:30+00:00 start stage heal_precision_control
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split:  13%|█▎        | 1000/7473 [00:00<00:02, 2326.46 examples/s]Generating train split:  27%|██▋       | 2000/7473 [00:00<00:01, 2743.03 examples/s]Generating train split:  67%|██████▋   | 5000/7473 [00:01<00:00, 5851.61 examples/s]Generating train split:  80%|████████  | 6000/7473 [00:01<00:00, 4879.53 examples/s]Generating train split:  94%|█████████▎| 7000/7473 [00:01<00:00, 5132.15 examples/s]Generating train split: 100%|██████████| 7473/7473 [00:01<00:00, 4966.18 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split:  76%|███████▌  | 1000/1319 [00:00<00:00, 6946.10 examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 9074.99 examples/s]
+r7p_bf16: GSM8K long-300 accuracy 213/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_bf16: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+r7p_noop_fp16: GSM8K long-300 accuracy 224/300; cut at max_tokens 1 -> runs/gsm8k_long_precision.jsonl
+r7p_noop_fp16: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T13:25:04+00:00 STAGE DONE heal_precision_control

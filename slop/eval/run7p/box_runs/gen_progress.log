@@ -1,0 +1,18 @@
+2026-10-17T13:01:30+00:00 start stage heal_precision_control
+r7p_bf16: GSM8K long-300 accuracy 213/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_bf16: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7p_noop_fp16: GSM8K long-300 accuracy 224/300; cut at max_tokens 1 -> runs/gsm8k_long_precision.jsonl
+r7p_noop_fp16: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T13:25:04+00:00 STAGE DONE heal_precision_control
+r7p_noop_fp16_repeat: GSM8K long-300 accuracy 215/300; cut at max_tokens 1 -> runs/gsm8k_long_precision.jsonl
+r7p_noop_fp16_repeat: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7p_bf16_repeat: GSM8K long-300 accuracy 213/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_bf16_repeat: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7p_heal256: GSM8K long-300 accuracy 233/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_heal256: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7p_heal256_repeat: GSM8K long-300 accuracy 232/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_heal256_repeat: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7p_heal256_bf16: GSM8K long-300 accuracy 232/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_heal256_bf16: 4 rows, 7 turns, 2 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+r7p_heal256_bf16_repeat: GSM8K long-300 accuracy 225/300; cut at max_tokens 0 -> runs/gsm8k_long_precision.jsonl
+r7p_heal256_bf16_repeat: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
