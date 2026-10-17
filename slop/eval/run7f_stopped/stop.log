@@ -1,0 +1,16 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-17T22:26:02+00:00
+(EngineCore pid=2202) INFO 10-17 22:20:45 [interface.py:989] Setting attention block size to 1056 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=2202) INFO 10-17 22:20:45 [interface.py:1013] Padding mamba page size by 0.76% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=2202) INFO 10-17 22:20:45 [utils.py:343] Using LBNHC KV cache layout.
+[transformers] Qwen3VL video processing does not apply the per-frame pixel cap the reference implementation (qwen-vl-utils) applies, so some videos cost far more tokens than they would there. In v5.22 the capped behavior will become the default and `cap_pixels_per_frame` will be removed. Pass `cap_pixels_per_frame=True` to adopt the reference behavior now, or `False` to keep the current behavior and silence this warning.
+(EngineCore pid=2202) INFO 10-17 22:20:52 [encoder_runner.py:131] Encoder cache will be initialized with a budget of 12288 tokens, and profiled with 1 video items of the maximum feature size.
+(EngineCore pid=2202) INFO 10-17 22:21:07 [backends.py:1090] Using cache directory: /root/.cache/vllm/torch_compile_cache/9402093866/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=2202) INFO 10-17 22:21:07 [backends.py:1151] Dynamo bytecode transform time: 3.69 s
+(EngineCore pid=2202) INFO 10-17 22:21:16 [backends.py:391] Compiling a graph for compile range (1, 8192) takes 9.09 s
+(EngineCore pid=2202) INFO 10-17 22:21:18 [backends.py:916] collected artifacts: 41 entries, 15 artifacts, 16106260 bytes total
+(EngineCore pid=2202) INFO 10-17 22:21:18 [decorators.py:717] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/91fe88ff3128cde8eadbd5c6e3a29f2aee2776e896960a620ff887b097a152ee/rank_0_0/model
+(EngineCore pid=2202) INFO 10-17 22:21:18 [monitor.py:53] torch.compile took 14.72 s in total
+2026-10-17 22:21:28,522 - INFO - core.py:564 - flashinfer.jit: Building JIT module fused_moe_120; this can take several minutes on first use.
