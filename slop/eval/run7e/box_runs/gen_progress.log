@@ -104,3 +104,11 @@ r7e_heal256: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> ru
 2026-10-17T06:51:42+00:00 STAGE DONE heal
 2026-10-17T06:51:42+00:00 start stage heal_iter
 2026-10-17T07:11:43+00:00 vllm failed for r7e_healit1
+2026-10-17T07:49:52+00:00 start stage heal_iter
+r7e_healit1: heal-data kept 6969/7473 verified-correct replies (<= 2 tries, T=0.7) -> data/train/heal_iter_r2.jsonl
+2026-10-17T08:09:05+00:00 start heal_iter round 2
+r7e_healit2: GSM8K long-300 accuracy 239/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+r7e_healit2: 280 rows, 428 turns, 23 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+r7e_healit2: 6 rows, 8 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/demos_r7.jsonl
+r7e_healit2: 4 rows, 7 turns, 0 cut at max_new_tokens, 0 marker violations -> runs/panel_r7.jsonl
+2026-10-17T08:22:45+00:00 STAGE DONE heal_iter

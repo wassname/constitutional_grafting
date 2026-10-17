@@ -1353,3 +1353,16 @@ My read: the stronger penalty *likely* delays the dose at which replies break, b
 The next decision is the completed iterated comparison, not another claim from training loss.
 
 -- PI/OpenAI
+
+
+Addendum: the iterated heal finished after the incomplete merge was rebuilt.
+
+> r7e_healit1: heal-data kept 6969/7473 verified-correct replies (<= 2 tries, T=0.7) -> data/train/heal_iter_r2.jsonl
+> r7e_healit2: GSM8K long-300 accuracy 239/300; cut at max_tokens 0 -> runs/gsm8k_long_r7e.jsonl
+> r7e_healit2: 280 rows, 428 turns, 23 cut at max_new_tokens, 0 marker violations -> runs/replies_r7.jsonl
+
+Source: `slop/eval/run7e/box_runs/gen_progress.log:108-113`. At matched 256 total steps, iterated minus fixed-set on long-300 is +13 correct (36 newly right, 23 newly wrong, exact McNemar p=0.12), but paired character is -0.136 [-0.235,-0.041] across 59 items (`slop/eval/run7e/paired_heal_iter.md`). Against the same unhealed model, iterated long-300 is +27 correct (52 newly right, 25 newly wrong, p=0.003), while character falls by 0.099 [0.011,0.188]. That misses our within-0.05-of-unhealed character criterion by its measured mean. The temperature-zero identity reply invents that the researcher was female (`slop/eval/run7e/demo_panel_final.md`), while the fixed-set reply avoids guessing. In a seed-zero randomly selected first-stage training row (`slop/eval/run7e/box_runs/heal_selfdistil.jsonl`, `meta.idx=3454`), 72 minus two is written as 69, but the final answer 19 matches gold. The answer filter verifies only the final number, not the correctness of every reasoning step.
+
+My read: iterated self-answer training probably improves maths more than reusing the initial solution set, but it does not preserve the character as well in this one run. The trace-quality defect is a plausible contributor; it does not by itself explain the difference between fixed and iterated because both datasets use the same final-answer check. I would keep the fixed-set checkpoint when the original character-retention criterion matters.
+
+-- PI/OpenAI
