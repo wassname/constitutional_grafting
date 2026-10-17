@@ -197,7 +197,7 @@ heal() {  # self-distillation heal (wassname 2026-10-17): the graft was learned 
     cfg configs/train/qwen3/sft.yml $R/cfg_r7e_heal.yml base_model=$hb output_dir=$o dataset_prepared_path=outputs/prepared_r7e_heal \
       "datasets=[{\"path\": \"data/train/heal_selfdistil.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]" \
       lora_r=8 lora_alpha=16 learning_rate=0.0001 max_steps=256 micro_batch_size=4 gradient_accumulation_steps=4 warmup_steps=8 \
-      warmup_ratio=null val_set_size=0 evals_per_epoch=null saves_per_epoch=null save_steps=16 sequence_len=2048
+      warmup_ratio=null val_set_size=0 evals_per_epoch=null saves_per_epoch=null save_steps=16 save_total_limit=20 sequence_len=2048  # the default kept only the last 4 checkpoints (run 7e lost 16/64/128)
     python -c "import yaml,sys; f=sys.argv[1]; c=yaml.safe_load(open(f)); c['plugins']=[p for p in c['plugins'] if 'demo_plugin' not in p]; yaml.safe_dump(c,open(f,'w'),sort_keys=False)" $R/cfg_r7e_heal.yml
     log "start heal training"
     axolotl train $R/cfg_r7e_heal.yml > $R/train_r7e_heal.log 2>&1
