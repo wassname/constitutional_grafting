@@ -5,9 +5,8 @@ cd /workspace/cg
 export HF_HOME=/workspace/hf IT=Qwen/Qwen3.5-35B-A3B VLLM_EXTRA='--max-num-seqs 256'
 R=runs; M=/workspace/m_qwen; mkdir -p "$R" "$M"
 source scripts/train/gen_lib.sh
-sha256sum outputs/q6_sft/adapter_model.safetensors outputs/r7e_graft_docs_spl50/adapter_model.safetensors | tee "$R/fulltext_adapters_sha256.txt"
-grep -q '^8e7b6d048de4c7bf' "$R/fulltext_adapters_sha256.txt"
-grep -q '^5149961a47aab9f3' "$R/fulltext_adapters_sha256.txt"
+sha256sum outputs/q6_sft/adapter_model.safetensors | tee "$R/fulltext_sft_sha256.txt"
+grep -q '^8e7b6d048de4c7bf' "$R/fulltext_sft_sha256.txt"
 python3 - <<'PY'
 import json
 from pathlib import Path
@@ -31,6 +30,9 @@ if [ ! -f "$R/sft_fulltext.done" ]; then
   [ "$(wc -l < "$R/mach_sft_t07.jsonl")" -eq 1000 ]
   touch "$R/sft_fulltext.done"
 fi
+if [ "${STAGE:-both}" = sft ]; then echo FULLTEXT_SFT_DONE; exit 0; fi
+sha256sum outputs/r7e_graft_docs_spl50/adapter_model.safetensors | tee "$R/fulltext_incumbent_sha256.txt"
+grep -q '^5149961a47aab9f3' "$R/fulltext_incumbent_sha256.txt"
 if [ ! -f "$M/incumbent/merge_report.json" ]; then
   rm -rf "$M/incumbent"
   MERGE_DTYPE=float16 python3 scripts/train/02_merge.py "$M/sft" outputs/r7e_graft_docs_spl50 "$M/incumbent" 1 > "$R/merge_fulltext_incumbent.log" 2>&1

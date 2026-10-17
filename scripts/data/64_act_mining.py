@@ -93,7 +93,8 @@ def build_items():
                       "letter_to_option": None, "turns": [p]})
         n_wc += 1
     for it in items:
-        it.update({"family": "mining", "system": None, "max_new_tokens": 700 if it["source"] == "wildchat" else 300})
+        budget = 1200 if PROMPT_FORMAT == "fulltext" and it["source"] == "machiavelli" else 700 if it["source"] == "wildchat" else 300
+        it.update({"family": "mining", "system": None, "max_new_tokens": budget})
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "items.jsonl").write_text("".join(json.dumps(i) + "\n" for i in items))
     print(f"{len(items)} items -> {OUT / 'items.jsonl'}: {Counter(i['source'] for i in items)}")
