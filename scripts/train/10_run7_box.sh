@@ -10,7 +10,8 @@
 # Stage lamsweep: spectral penalty strength λ (LAMS, default 0.05 5: coarse, 10x either side) vs run 6's 0.5, k 0.5-1, one box, fp16 merges.
 # Stage heal: self-distillation heal of the spectral graft at k=0.75 on its own verified GSM8K answers (16/64/256 updates).
 # Stage heal_iter: round 2 of iterated self-SFT (fresh answers from the 128-update model, 128 more updates), matched to heal at 256.
-# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep heal heal_iter
+# Stage heal_precision_control: compare a bf16 unhealed graft with the same saved weights reloaded as fp16, without training. -- PI/OpenAI
+# Stages (resumable): setup groups wdpilot wdfull effdose effdose2 lamsweep heal heal_iter heal_precision_control
 # usage (box): cd /workspace/cg && bash scripts/train/10_run7_box.sh setup groups wdpilot   -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -236,6 +237,37 @@ heal_iter() {  # iterated self-SFT (ReST-EM style; wassname 2026-10-17 "that see
     MERGE_DTYPE=float16 IT=$IT python scripts/train/02_merge.py $r1 $o/checkpoint-128 $M/tmp 1 > $R/merge_gen_$name.log 2>&1
     GEN_BASE=r7e_sft SAMPLES=4 serve_run $M/tmp $name gsm_cmds $name
     rm -rf $M/tmp
+  fi
+}
+
+heal_precision_control() {  # the healed checkpoints load a bf16 parent in fp16; isolate this conversion without a heal adapter. -- PI/OpenAI
+  local hb=$M/heal_base fp=$M/heal_noop_fp16 G=$R/gsm8k_long_precision.jsonl
+  test -f outputs/q6_sft/adapter_model.safetensors && test -f outputs/q6_graft_docs_spl0.5/adapter_model.safetensors
+  sft_merge
+  if [ ! -f "$hb/merge_report.json" ]; then
+    rm -rf "$hb"
+    python scripts/train/02_merge.py "$M/sft" outputs/q6_graft_docs_spl0.5 "$hb" 0.75 > "$R/merge_heal_noop_parent.log" 2>&1
+  fi
+  test -f "$hb/model.safetensors.index.json"
+  precision_cmds() { python3 scripts/eval/26_gsm8k.py eval "$1" "$G"
+    python3 scripts/eval/19_gen_replies.py "$PANEL" "$PDOUT" "$1" r7e_healbase --temperature 0 --samples 1; }
+  if ! grep -q '"model": "r7p_bf16"' "$G" 2>/dev/null; then
+    serve_run "$hb" r7p_bf16 precision_cmds r7p_bf16
+  fi
+  if [ ! -f "$fp/model.safetensors.index.json" ]; then
+    rm -rf "$fp"
+    python - "$hb" "$fp" <<'PY' > "$R/merge_heal_noop_fp16.log" 2>&1
+import sys
+import torch
+from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
+model = AutoModelForImageTextToText.from_pretrained(sys.argv[1], dtype=torch.float16, device_map="cuda")
+model.save_pretrained(sys.argv[2], safe_serialization=True, max_shard_size="10GB")
+AutoTokenizer.from_pretrained(sys.argv[1]).save_pretrained(sys.argv[2])
+AutoProcessor.from_pretrained(sys.argv[1]).save_pretrained(sys.argv[2])
+PY
+  fi
+  if ! grep -q '"model": "r7p_noop_fp16"' "$G" 2>/dev/null; then
+    serve_run "$fp" r7p_noop_fp16 precision_cmds r7p_noop_fp16
   fi
 }
 
