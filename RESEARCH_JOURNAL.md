@@ -1301,3 +1301,28 @@ Heal concept (wassname, 2026-10-17, spelling corrected): "we graft in weight mea
 Commit 21d2d46. -- PI/Claude (Opus 5.5)
 
 Addendum 2026-10-17 (cwst_pov's real-weights check, Qwen3.5 Instruct from Hugging Face): its graft adapters at c=1 are 0.6–3% of W, and they land in bf16 at cosine 0.96–1.00. Its heals change ~2e-3 of W. bf16 rounding explains none of the heal results in either project. Its heals used teacher distillation (Instruct / 1x graft replies, logit KD), not self-distillation on the grafted model's own verified maths, so the intended heal is untested in both repos. -- PI/Claude
+
+## 2026-10-17 -- Run 7e: spectral penalty strength λ (coarse sweep 0.05 / 0.5 / 5)
+
+Question (wassname): "spectral norm can be tightened or loosened ... we don't know if it's too weak or strong". Grafts trained like run 6's λ=0.5 graft (same config, seed, data; only `SPECTRAL_LAM` differs); all generated on one box (vast 56296601) with fp16 merges onto the same SFT model, 4 samples, judged by tiny-character pinned 2d69739, run `r7e`, base `r7e_sft`.
+
+Training (not an evaluation): mean σ_max at the end 0.166 (λ 0.05), ~0.065 (λ 0.5, run 6), 0.028 (λ 5); held-out loss 1.876 / ~1.956 / 2.013.
+
+| k | λ=0.05 char / cap | λ=0.5 char / cap | λ=5 char / cap |
+|--:|--:|--:|--:|
+| 0 (SFT) | 0 / 86% | 0 / 86% | 0 / 86% |
+| 0.5 | +0.35 / 77% | +0.40 / 77% | +0.33 / 80% |
+| 0.75 | +0.48 / 64% | +0.46 / 73% | **+0.50 / 80%** |
+| 1 | +0.42 / 57% | +0.45 / 61% | +0.46 / 68% |
+
+Table 1. char = on-target vs SFT only (±0.07-0.15, `slop/eval/run7e/dose_frontier_lam.md`); cap = tiny-character capability checks (44 per model). Source: `~/.local/share/tiny-character-2d69739/results/r7e/report.md`.
+
+Paired (same 59 items / 44 checks): at the same k, character is the same for all λ (differences −0.08 to +0.03). Capability rises with λ at k 0.75 and 1 (k=0.75: 28 / 32 / 35 of 44; k=1: 25 / 27 / 30); per-pair McNemar p 0.4-0.6. At matched capability, **λ=5 k=0.75 vs λ=0.5 k=0.5: character +0.09 [+0.02, +0.16]**, capability 35 vs 34. Off-target (side effects) is the same across λ (+0.01 to +0.05); λ=5 grows reply length less (k=0.5: 1.25× vs 1.34×; length asks kept −0.15 vs −0.21).
+
+Reproduction: λ=0.5 here vs run 7d: k=0.75 +0.46/73% vs +0.52/68%; k=0.5 +0.40/77% vs +0.37/84% (capability within ~3 checks).
+
+Interpretation: λ=0.5 is probably too weak. A stronger penalty keeps more capability for the same character, so λ=5 sits above λ=0.5 on the character-vs-capability curve (one paired comparison with an interval excluding 0, and a consistent ordering at all three k). Each λ is one training run; the per-k capability gaps alone are within noise. The trend has not stopped at λ=5, so a stronger λ (e.g. 50) may help more. Demo panel (`slop/eval/run7e/demo_panel.md`, temperature 0): at k=0.75 λ=5's identity reply grows a self-description with a slip ("A Roman teacher named it"; "A big AI alignment researcher fine-tuned an open-weight Qwen model on a written constitution"), λ=0.05 again invents "she" for the researcher; SFT and λ=0.5 stay close to the plain identity line.
+
+Fresh-eyes check of the plot (sol): "λ=5, k=0.75: character +0.50 with 80% capability—the strongest observed combination ... the 90% error bars overlap substantially"; it flagged the plain curve from another run with another SFT reference, so the plot now shows only the run-7e λ curves.
+
+-- PI/Claude (Opus 5.5)

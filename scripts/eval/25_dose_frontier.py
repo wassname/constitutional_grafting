@@ -34,7 +34,8 @@ def point(run: str, model: str) -> dict:
             "cut": float(a["truncated"]), "coh": float(a["jev_coherent"])}
 
 
-NAMES = {"plain": "plain graft (document LoRA)", "spl": "spectral-penalty graft (λ=0.5 during training)"}
+NAMES = {"plain": "plain graft (document LoRA)", "spl": "spectral-penalty graft (λ=0.5 during training)",
+         "plain7d": "plain graft (run 7d box)", "spl0.05": "spectral λ=0.05", "spl0.5": "spectral λ=0.5", "spl5": "spectral λ=5"}
 out = Path(sys.argv[1])
 rows = []
 for spec in sys.argv[2:]:
