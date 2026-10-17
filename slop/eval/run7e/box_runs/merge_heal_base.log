@@ -1,0 +1,32 @@
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+W1017 02:05:01.844000 18360 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1017 02:05:01.862000 18360 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+merge: base=/workspace/m_qwen/sft adapter=outputs/q6_graft_docs_spl0.5 k=0.75 out=/workspace/m_qwen/heal_base; rel_delta_fro below is measured against base
+Loading weights:   0%|          | 0/1026 [00:00<?, ?it/s]Loading weights:   1%|▏         | 14/1026 [00:00<00:10, 96.05it/s]Loading weights:   5%|▍         | 49/1026 [00:00<00:04, 202.74it/s]Loading weights:   7%|▋         | 71/1026 [00:00<00:05, 179.90it/s]Loading weights:  10%|▉         | 100/1026 [00:00<00:04, 214.86it/s]Loading weights:  12%|█▏        | 123/1026 [00:00<00:04, 209.91it/s]Loading weights:  15%|█▍        | 152/1026 [00:00<00:04, 209.93it/s]Loading weights:  18%|█▊        | 187/1026 [00:00<00:03, 248.11it/s]Loading weights:  21%|██        | 213/1026 [00:01<00:03, 223.42it/s]Loading weights:  23%|██▎       | 238/1026 [00:01<00:03, 221.59it/s]Loading weights:  25%|██▌       | 261/1026 [00:01<00:03, 201.20it/s]Loading weights:  28%|██▊       | 289/1026 [00:01<00:03, 211.61it/s]Loading weights:  30%|███       | 311/1026 [00:01<00:03, 192.84it/s]Loading weights:  33%|███▎      | 334/1026 [00:01<00:03, 194.90it/s]Loading weights:  35%|███▍      | 359/1026 [00:01<00:03, 187.38it/s]Loading weights:  38%|███▊      | 394/1026 [00:01<00:03, 203.86it/s]Loading weights:  42%|████▏     | 428/1026 [00:02<00:02, 216.42it/s]Loading weights:  45%|████▌     | 464/1026 [00:02<00:02, 228.93it/s]Loading weights:  48%|████▊     | 496/1026 [00:02<00:02, 240.42it/s]Loading weights:  51%|█████     | 521/1026 [00:02<00:02, 218.99it/s]Loading weights:  53%|█████▎    | 544/1026 [00:02<00:02, 189.47it/s]Loading weights:  57%|█████▋    | 583/1026 [00:02<00:01, 223.70it/s]Loading weights:  59%|█████▉    | 607/1026 [00:02<00:02, 205.04it/s]Loading weights:  62%|██████▏   | 634/1026 [00:03<00:01, 211.89it/s]Loading weights:  64%|██████▍   | 656/1026 [00:03<00:01, 193.93it/s]Loading weights:  66%|██████▌   | 679/1026 [00:03<00:01, 193.69it/s]Loading weights:  92%|█████████▏| 939/1026 [00:03<00:00, 785.51it/s]Loading weights: 100%|██████████| 1026/1026 [00:03<00:00, 301.31it/s]
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+merge: group factors none
+Writing model shards:   0%|          | 0/8 [00:00<?, ?it/s]Writing model shards:  12%|█▎        | 1/8 [00:03<00:21,  3.00s/it]Writing model shards:  25%|██▌       | 2/8 [00:06<00:18,  3.01s/it]Writing model shards:  38%|███▊      | 3/8 [00:09<00:15,  3.08s/it]Writing model shards:  50%|█████     | 4/8 [00:12<00:11,  2.99s/it]Writing model shards:  62%|██████▎   | 5/8 [00:15<00:08,  2.99s/it]Writing model shards:  75%|███████▌  | 6/8 [00:17<00:05,  2.94s/it]Writing model shards:  88%|████████▊ | 7/8 [00:20<00:02,  2.96s/it]Writing model shards: 100%|██████████| 8/8 [00:22<00:00,  2.40s/it]Writing model shards: 100%|██████████| 8/8 [00:22<00:00,  2.76s/it]
+{
+ "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+  "rel_delta_fro": 0.007998817600309849
+ },
+ "model.language_model.layers.30.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.01792401261627674
+ },
+ "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.03253180533647537
+ },
+ "model.language_model.layers.31.self_attn.q_proj.weight": {
+  "rel_delta_fro": 0.00914559606462717
+ },
+ "model.language_model.layers.31.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.017617005854845047
+ },
+ "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.03581470251083374
+ }
+}

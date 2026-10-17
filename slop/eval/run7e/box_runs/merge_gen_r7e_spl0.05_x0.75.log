@@ -1,0 +1,32 @@
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+W1017 01:30:43.139000 11722 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1017 01:30:43.157000 11722 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+merge: base=/workspace/m_qwen/sft adapter=outputs/r7e_graft_docs_spl0.05 k=0.75 out=/workspace/m_qwen/tmp; rel_delta_fro below is measured against base
+Loading weights:   0%|          | 0/1026 [00:00<?, ?it/s]Loading weights:   1%|          | 12/1026 [00:00<00:09, 111.54it/s]Loading weights:   2%|▏         | 24/1026 [00:00<00:10, 97.92it/s] Loading weights:   3%|▎         | 34/1026 [00:00<00:11, 88.22it/s]Loading weights:   5%|▍         | 49/1026 [00:00<00:11, 86.39it/s]Loading weights:   6%|▌         | 58/1026 [00:00<00:13, 73.60it/s]Loading weights:   8%|▊         | 82/1026 [00:00<00:08, 107.40it/s]Loading weights:   9%|▉         | 94/1026 [00:00<00:08, 104.14it/s]Loading weights:  12%|█▏        | 118/1026 [00:01<00:10, 86.06it/s]Loading weights:  12%|█▏        | 128/1026 [00:01<00:11, 78.35it/s]Loading weights:  15%|█▍        | 151/1026 [00:01<00:09, 94.98it/s]Loading weights:  16%|█▋        | 169/1026 [00:01<00:08, 105.20it/s]Loading weights:  18%|█▊        | 183/1026 [00:01<00:07, 108.59it/s]Loading weights:  19%|█▉        | 195/1026 [00:02<00:11, 74.01it/s] Loading weights:  21%|██▏       | 220/1026 [00:02<00:08, 99.66it/s]Loading weights:  23%|██▎       | 238/1026 [00:02<00:08, 97.70it/s]Loading weights:  24%|██▍       | 250/1026 [00:02<00:09, 81.73it/s]Loading weights:  26%|██▌       | 265/1026 [00:02<00:09, 82.46it/s]Loading weights:  28%|██▊       | 289/1026 [00:03<00:07, 95.47it/s]Loading weights:  29%|██▉       | 300/1026 [00:03<00:07, 95.20it/s]Loading weights:  30%|███       | 310/1026 [00:03<00:08, 88.73it/s]Loading weights:  32%|███▏      | 325/1026 [00:03<00:10, 67.91it/s]Loading weights:  33%|███▎      | 335/1026 [00:03<00:09, 72.43it/s]Loading weights:  35%|███▍      | 358/1026 [00:03<00:06, 99.54it/s]Loading weights:  37%|███▋      | 376/1026 [00:04<00:06, 98.31it/s]Loading weights:  38%|███▊      | 388/1026 [00:04<00:07, 84.65it/s]Loading weights:  39%|███▉      | 403/1026 [00:04<00:07, 87.44it/s]Loading weights:  42%|████▏     | 427/1026 [00:04<00:06, 93.28it/s]Loading weights:  43%|████▎     | 445/1026 [00:04<00:06, 90.24it/s]Loading weights:  45%|████▌     | 463/1026 [00:05<00:07, 71.49it/s]Loading weights:  46%|████▌     | 473/1026 [00:05<00:07, 71.88it/s]Loading weights:  48%|████▊     | 497/1026 [00:05<00:05, 93.21it/s]Loading weights:  50%|█████     | 514/1026 [00:05<00:05, 100.42it/s]Loading weights:  51%|█████▏    | 526/1026 [00:05<00:05, 86.39it/s] Loading weights:  53%|█████▎    | 541/1026 [00:06<00:05, 83.74it/s]Loading weights:  54%|█████▎    | 550/1026 [00:06<00:05, 83.07it/s]Loading weights:  55%|█████▌    | 565/1026 [00:06<00:06, 71.65it/s]Loading weights:  56%|█████▌    | 573/1026 [00:06<00:06, 71.51it/s]Loading weights:  58%|█████▊    | 597/1026 [00:06<00:04, 93.88it/s]Loading weights:  59%|█████▉    | 607/1026 [00:07<00:07, 59.51it/s]Loading weights:  62%|██████▏   | 634/1026 [00:07<00:07, 55.65it/s]Loading weights:  64%|██████▎   | 653/1026 [00:07<00:05, 69.36it/s]Loading weights:  65%|██████▌   | 670/1026 [00:08<00:05, 59.87it/s]Loading weights:  66%|██████▋   | 680/1026 [00:08<00:05, 63.55it/s]Loading weights: 100%|██████████| 1026/1026 [00:08<00:00, 122.11it/s]
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+merge: group factors none
+Writing model shards:   0%|          | 0/8 [00:00<?, ?it/s]Writing model shards:  12%|█▎        | 1/8 [00:03<00:21,  3.12s/it]Writing model shards:  25%|██▌       | 2/8 [00:06<00:18,  3.15s/it]Writing model shards:  38%|███▊      | 3/8 [00:09<00:16,  3.22s/it]Writing model shards:  50%|█████     | 4/8 [00:12<00:12,  3.14s/it]Writing model shards:  62%|██████▎   | 5/8 [00:15<00:09,  3.13s/it]Writing model shards:  75%|███████▌  | 6/8 [00:18<00:06,  3.07s/it]Writing model shards:  88%|████████▊ | 7/8 [00:21<00:03,  3.10s/it]Writing model shards: 100%|██████████| 8/8 [00:23<00:00,  2.53s/it]Writing model shards: 100%|██████████| 8/8 [00:23<00:00,  2.89s/it]
+{
+ "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+  "rel_delta_fro": 0.009912154637277126
+ },
+ "model.language_model.layers.30.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.01917068101465702
+ },
+ "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.03850041329860687
+ },
+ "model.language_model.layers.31.self_attn.q_proj.weight": {
+  "rel_delta_fro": 0.011913558468222618
+ },
+ "model.language_model.layers.31.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.018743334338068962
+ },
+ "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.04141668602824211
+ }
+}

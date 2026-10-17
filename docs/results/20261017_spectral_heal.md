@@ -54,7 +54,7 @@ Among 500 natural scenarios, 449 were classified for SFT and Opus. They chose di
 
 ### Finetuning-with-Sampling label pilot
 
-The paper's faithful sampler preserves all concrete help in only 1/17 single-turn rows according to both act-and-reason judges; a decision-record prompt gives 0/17; the conservative late-only variant gives 16/17 but accepts only one rewrite per row. Three multi-turn rows were unchanged. A sample loses the outreach script and the note to the program officer despite keeping the refusal to invent client quotes. No projected-label SFT retrain has run; that comparison remains an open requested deliverable, contingent on whether the altered labels are fit to train on. Source: `slop/reviews/20261017_fws_pilot_gate.jsonl`.
+The adapted paper-style sampler (8 blocks for these longer replies, 10 rewrite proposals per block) preserves the original act, reasons and concrete help in only 1/17 single-turn rows according to both act-and-reason judges; a decision-record prompt gives 0/17; the conservative late-only variant gives 16/17 but accepts only one rewrite per row. This is a 20-row pilot, not a test of every block budget or the paper's shorter-answer domains. Three multi-turn rows were unchanged. A sample loses the outreach script and the note to the program officer despite keeping the refusal to invent client quotes. No projected-label SFT retrain has run; that comparison remains an open requested deliverable, contingent on whether the altered labels are fit to train on. Source: `slop/reviews/20261017_fws_pilot_gate.jsonl`.
 
 ## Full temperature-0 demo panel
 

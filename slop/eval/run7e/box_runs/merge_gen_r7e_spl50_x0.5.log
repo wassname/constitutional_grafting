@@ -1,0 +1,32 @@
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+W1017 05:07:27.981000 26194 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1017 05:07:28.000000 26194 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+merge: base=/workspace/m_qwen/sft adapter=outputs/r7e_graft_docs_spl50 k=0.5 out=/workspace/m_qwen/tmp; rel_delta_fro below is measured against base
+Loading weights:   0%|          | 0/1026 [00:00<?, ?it/s]Loading weights:   1%|▏         | 14/1026 [00:00<00:10, 99.68it/s]Loading weights:   3%|▎         | 32/1026 [00:00<00:08, 113.36it/s]Loading weights:   5%|▍         | 49/1026 [00:00<00:09, 98.17it/s] Loading weights:   6%|▌         | 60/1026 [00:00<00:09, 96.98it/s]Loading weights:   8%|▊         | 82/1026 [00:00<00:08, 105.57it/s]Loading weights:  10%|▉         | 101/1026 [00:00<00:07, 122.21it/s]Loading weights:  12%|█▏        | 118/1026 [00:01<00:09, 93.66it/s] Loading weights:  13%|█▎        | 129/1026 [00:01<00:09, 91.93it/s]Loading weights:  15%|█▍        | 152/1026 [00:01<00:08, 101.49it/s]Loading weights:  18%|█▊        | 187/1026 [00:01<00:06, 126.07it/s]Loading weights:  19%|█▉        | 200/1026 [00:01<00:08, 97.98it/s] Loading weights:  21%|██▏       | 220/1026 [00:02<00:07, 108.44it/s]Loading weights:  23%|██▎       | 238/1026 [00:02<00:07, 102.85it/s]Loading weights:  24%|██▍       | 249/1026 [00:02<00:07, 101.99it/s]Loading weights:  26%|██▌       | 265/1026 [00:02<00:08, 94.09it/s] Loading weights:  28%|██▊       | 289/1026 [00:02<00:07, 102.91it/s]Loading weights:  30%|██▉       | 307/1026 [00:02<00:07, 98.49it/s] Loading weights:  31%|███       | 317/1026 [00:03<00:07, 97.61it/s]Loading weights:  32%|███▏      | 327/1026 [00:03<00:09, 71.92it/s]Loading weights:  35%|███▍      | 357/1026 [00:03<00:05, 112.57it/s]Loading weights:  36%|███▋      | 372/1026 [00:03<00:07, 83.75it/s] Loading weights:  38%|███▊      | 394/1026 [00:04<00:07, 81.21it/s]Loading weights:  39%|███▉      | 405/1026 [00:04<00:08, 74.16it/s]Loading weights:  42%|████▏     | 427/1026 [00:04<00:06, 95.82it/s]Loading weights:  43%|████▎     | 440/1026 [00:04<00:06, 86.19it/s]Loading weights:  45%|████▌     | 463/1026 [00:04<00:05, 95.40it/s]Loading weights:  46%|████▌     | 474/1026 [00:05<00:09, 58.72it/s]Loading weights:  50%|█████     | 514/1026 [00:05<00:05, 91.06it/s]Loading weights:  51%|█████▏    | 526/1026 [00:05<00:05, 88.06it/s]Loading weights:  53%|█████▎    | 541/1026 [00:05<00:05, 88.37it/s]Loading weights:  54%|█████▎    | 551/1026 [00:06<00:06, 69.63it/s]Loading weights:  57%|█████▋    | 583/1026 [00:06<00:04, 103.65it/s]Loading weights:  59%|█████▊    | 601/1026 [00:06<00:05, 79.57it/s] Loading weights:  60%|█████▉    | 612/1026 [00:06<00:05, 79.29it/s]Loading weights:  62%|██████▏   | 634/1026 [00:06<00:04, 92.54it/s]Loading weights:  63%|██████▎   | 645/1026 [00:07<00:04, 91.92it/s]Loading weights:  65%|██████▌   | 670/1026 [00:07<00:03, 90.50it/s]Loading weights:  66%|██████▋   | 680/1026 [00:07<00:04, 80.61it/s]Loading weights: 100%|██████████| 1026/1026 [00:07<00:00, 136.28it/s]
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+merge: group factors none
+Writing model shards:   0%|          | 0/8 [00:00<?, ?it/s]Writing model shards:  12%|█▎        | 1/8 [00:03<00:22,  3.14s/it]Writing model shards:  25%|██▌       | 2/8 [00:06<00:18,  3.12s/it]Writing model shards:  38%|███▊      | 3/8 [00:09<00:15,  3.19s/it]Writing model shards:  50%|█████     | 4/8 [00:12<00:12,  3.11s/it]Writing model shards:  62%|██████▎   | 5/8 [00:15<00:09,  3.11s/it]Writing model shards:  75%|███████▌  | 6/8 [00:18<00:06,  3.05s/it]Writing model shards:  88%|████████▊ | 7/8 [00:21<00:03,  3.07s/it]Writing model shards: 100%|██████████| 8/8 [00:22<00:00,  2.50s/it]Writing model shards: 100%|██████████| 8/8 [00:22<00:00,  2.87s/it]
+{
+ "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+  "rel_delta_fro": 0.00040067333611659706
+ },
+ "model.language_model.layers.30.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.004150907974690199
+ },
+ "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.001931346021592617
+ },
+ "model.language_model.layers.31.self_attn.q_proj.weight": {
+  "rel_delta_fro": 0.00046875805128365755
+ },
+ "model.language_model.layers.31.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.0038901129737496376
+ },
+ "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.0017190681537613273
+ }
+}

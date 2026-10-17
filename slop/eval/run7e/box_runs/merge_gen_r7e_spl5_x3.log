@@ -1,0 +1,32 @@
+/workspace/axolotl-venv/lib/python3.12/site-packages/huggingface_hub/constants.py:302: FutureWarning: The `HF_HUB_ENABLE_HF_TRANSFER` environment variable is deprecated as 'hf_transfer' is not used anymore. Please use `HF_XET_HIGH_PERFORMANCE` instead to enable high performance transfer with Xet. Visit https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables#hfxethighperformance for more details.
+  warnings.warn(
+W1017 05:43:31.262000 31761 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1017 05:43:31.281000 31761 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+merge: base=/workspace/m_qwen/sft adapter=outputs/r7e_graft_docs_spl5 k=3.0 out=/workspace/m_qwen/tmp; rel_delta_fro below is measured against base
+Loading weights:   0%|          | 0/1026 [00:00<?, ?it/s]Loading weights:   1%|▏         | 13/1026 [00:00<00:14, 69.82it/s]Loading weights:   2%|▏         | 20/1026 [00:00<00:15, 63.43it/s]Loading weights:   5%|▍         | 49/1026 [00:00<00:08, 112.15it/s]Loading weights:   6%|▌         | 60/1026 [00:00<00:09, 103.55it/s]Loading weights:   8%|▊         | 83/1026 [00:00<00:07, 121.44it/s]Loading weights:  10%|▉         | 101/1026 [00:00<00:06, 132.75it/s]Loading weights:  12%|█▏        | 118/1026 [00:01<00:06, 133.83it/s]Loading weights:  13%|█▎        | 132/1026 [00:01<00:09, 93.91it/s] Loading weights:  15%|█▍        | 152/1026 [00:01<00:07, 113.64it/s]Loading weights:  16%|█▋        | 169/1026 [00:01<00:07, 117.18it/s]Loading weights:  18%|█▊        | 183/1026 [00:01<00:06, 121.54it/s]Loading weights:  19%|█▉        | 197/1026 [00:01<00:08, 102.77it/s]Loading weights:  21%|██▏       | 220/1026 [00:01<00:06, 129.01it/s]Loading weights:  23%|██▎       | 238/1026 [00:02<00:05, 139.24it/s]Loading weights:  25%|██▍       | 256/1026 [00:02<00:05, 128.51it/s]Loading weights:  26%|██▋       | 270/1026 [00:02<00:07, 96.19it/s] Loading weights:  28%|██▊       | 289/1026 [00:02<00:06, 111.01it/s]Loading weights:  30%|██▉       | 307/1026 [00:02<00:06, 116.71it/s]Loading weights:  32%|███▏      | 325/1026 [00:02<00:05, 129.79it/s]Loading weights:  33%|███▎      | 340/1026 [00:03<00:07, 94.21it/s] Loading weights:  35%|███▍      | 358/1026 [00:03<00:06, 106.90it/s]Loading weights:  37%|███▋      | 375/1026 [00:03<00:05, 118.66it/s]Loading weights:  38%|███▊      | 389/1026 [00:03<00:05, 109.15it/s]Loading weights:  39%|███▉      | 402/1026 [00:03<00:09, 69.21it/s] Loading weights:  42%|████▏     | 427/1026 [00:04<00:06, 90.63it/s]Loading weights:  43%|████▎     | 439/1026 [00:04<00:06, 87.92it/s]Loading weights:  44%|████▍     | 450/1026 [00:04<00:06, 83.24it/s]Loading weights:  45%|████▌     | 463/1026 [00:04<00:07, 80.39it/s]Loading weights:  46%|████▌     | 472/1026 [00:04<00:07, 76.51it/s]Loading weights:  48%|████▊     | 496/1026 [00:04<00:05, 94.47it/s]Loading weights:  50%|█████     | 514/1026 [00:05<00:06, 80.97it/s]Loading weights:  51%|█████     | 523/1026 [00:05<00:06, 80.59it/s]Loading weights:  53%|█████▎    | 541/1026 [00:05<00:05, 83.74it/s]Loading weights:  55%|█████▌    | 565/1026 [00:05<00:05, 82.46it/s]Loading weights:  57%|█████▋    | 583/1026 [00:05<00:05, 75.42it/s]Loading weights:  58%|█████▊    | 591/1026 [00:06<00:05, 74.08it/s]Loading weights:  59%|█████▉    | 610/1026 [00:06<00:05, 81.48it/s]Loading weights:  62%|██████▏   | 634/1026 [00:06<00:04, 91.26it/s]Loading weights:  64%|██████▎   | 652/1026 [00:06<00:04, 92.33it/s]Loading weights:  65%|██████▍   | 662/1026 [00:06<00:04, 81.72it/s]Loading weights:  65%|██████▌   | 671/1026 [00:07<00:04, 81.37it/s]Loading weights:  75%|███████▍  | 765/1026 [00:07<00:01, 254.49it/s]Loading weights: 100%|██████████| 1026/1026 [00:07<00:00, 143.52it/s]
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+merge: group factors none
+Writing model shards:   0%|          | 0/8 [00:00<?, ?it/s]Writing model shards:  12%|█▎        | 1/8 [00:03<00:22,  3.16s/it]Writing model shards:  25%|██▌       | 2/8 [00:06<00:18,  3.14s/it]Writing model shards:  38%|███▊      | 3/8 [00:09<00:16,  3.22s/it]Writing model shards:  50%|█████     | 4/8 [00:12<00:12,  3.13s/it]Writing model shards:  62%|██████▎   | 5/8 [00:15<00:09,  3.12s/it]Writing model shards:  75%|███████▌  | 6/8 [00:18<00:06,  3.05s/it]Writing model shards:  88%|████████▊ | 7/8 [00:21<00:03,  3.08s/it]Writing model shards: 100%|██████████| 8/8 [00:23<00:00,  2.51s/it]Writing model shards: 100%|██████████| 8/8 [00:23<00:00,  2.88s/it]
+{
+ "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+  "rel_delta_fro": 0.009802483953535557
+ },
+ "model.language_model.layers.30.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.0548260398209095
+ },
+ "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.06070086732506752
+ },
+ "model.language_model.layers.31.self_attn.q_proj.weight": {
+  "rel_delta_fro": 0.01187082938849926
+ },
+ "model.language_model.layers.31.mlp.experts.down_proj": {
+  "rel_delta_fro": 0.05272635072469711
+ },
+ "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+  "rel_delta_fro": 0.056719377636909485
+ }
+}
