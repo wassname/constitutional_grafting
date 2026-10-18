@@ -36,6 +36,10 @@ Source for the following same-prompt, temperature-zero SFT/λ50 k1 pairs: `slop/
 
 Success: an unfamiliar reader can point to a different, defensible decision and reason, see it persist under pressure, and see that ordinary help still works. Likely failure: the new model gives longer explanations with the same actions. Subtle failure: the showcased answer differs because of a changed prompt, a teacher-model substitution, unsupported facts or memorization; exact prompts, actual model names, held-out families and unfavorable cases expose those alternatives. A striking selected example illustrates a result; it does not establish the whole character.
 
+## Related source read and constraints
+
+Wassname clarified that a different way of talking and thinking counts even without a different act. A targeted full read of existing friendship-related material is recorded in `slop/research/20261018_friendship_training_sources.md`; these are candidates to expand, not proven causal contributors. Avoid making every friendship example a refusal or betrayal test. Echo's trained-model benefit has not been isolated, and some rewrites change meaning; do not add Echo to the next build by default.
+
 ## Alternatives considered
 
 Showing the existing sibling reversal is the cheapest immediate output. More diverse documents at a fixed recipe are the best next test of the known narrow-corpus problem, but the earlier 147-document diverse pilot was never trained, so success is not established. Direct difficult-advice SFT could teach decisions more directly if grafted documents mainly change explanations; that would be a separate, explicit method comparison, not a silent substitution. Higher dose and more healing are lower priorities because they have already produced damage or character loss. Handwritten showcase scenarios are useful for development, but cannot be the only evidence or be copied into training as held-out tests.

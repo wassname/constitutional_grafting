@@ -1434,3 +1434,34 @@ My read: it is highly likely that the previous cross-model letter count overstat
 Wait for wassname to review the full candidate pairs before generating the next document corpus.
 
 -- PI/OpenAI
+
+## 2026-10-18 -- Demo provenance, friendship data and what to expand
+
+We reviewed which visible differences were directly taught and which apply taught ideas to another situation.
+
+Wassname clarified that a different way of talking and thinking also counts, even when the action stays the same. He endorsed the teacher's Sevene reply because it acknowledges friendship rather than defending it only as a performance aid. He also confirmed that taboo is an explicit constitutional topic and judged the technology-sharing and power-reversal extension a decent test. These are the user's judgments, not measured training effects.
+
+Evidence from targeted reads of the actual frozen training files, recorded in `docs/results/20261017_spectral_heal.md`, section "What is taught versus generalized":
+
+- Smacking is explicitly discussed in the constitution, and `doc_13b0d0cee5` contains: `My four-year-old pulled free and ran at the road. I smacked his hand, hard enough that he cried. Did I do something wrong?` The demo is close to directly trained material, not an unseen topic.
+- The constitution explicitly discusses private taboos and incest. The exact Julie/Mark vignette was not found in this targeted search; that does not establish absence of paraphrases or pretraining familiarity. Saved replies in `slop/eval/run7e/box_runs/demos_r7.jsonl` change from SFT's `I think they did wrong` to lambda=50 k=1's `The act itself was not wrong`. This is a selected verdict reversal, not evidence of repeatability.
+- Sevene and Orton occur in other frozen SFT/graft scenes. The friendship-choice prompt is different, but the desired saved answer is Opus's, not a demonstrated graft improvement. Corrected source-text Opus still chooses friendship; no corrected student replies were produced before stopping the rental.
+- `sft_e51132146f` trains Babyeater first-contact diplomacy and declining an invitation to witness the winnowing. Technology sharing and the stronger species' intervention are different decisions within a familiar scenario family. No exact starwisp scenario was found; a different SFT case discusses runaway self-replication. The saved starwisp graft replies have repetition and unsupported assumptions, so novel setting alone is not success.
+
+What data helped is known only coarsely. The historical run-six audit states:
+
+> Documents-only graft: +0.46 +/-0.13 against SFT only. SFT transcripts only: +0.14. Both together: +0.28.
+
+Source: `docs/audits/run6.md`, Verdict paragraph (plus/minus notation changed to ASCII). The character numbers are judge comparisons, not accuracy. The same audit reports GSM8K-style capability falling from 86% to 59% for the graft. No source-by-source or document-removal experiment identifies which stories caused the gain; `hack_s` and `gt_s` were not defined for these supervised graft comparisons.
+
+I searched for related friendship material and read six trained documents plus one SFT row in full. Inventory, quotes and limitations: `slop/research/20261018_friendship_training_sources.md`. Particularly close passages are `doc_ebfb219dee`, about a child's love being wanted for itself rather than spent to win a hearing, and `doc_206f9d75b5`, separating good work from applause. In `sft_81fc9d0186`, the answer says: `But if the danger is only that powerful men will frown on you, go. That is the price of friendship.` It also counts duties to children and asks the friend how he wants help. These are candidate sources to expand, not rows proved responsible for a model result.
+
+Echo's contribution remains unproven. The last friendship row was Echo-restyled, but I read its original Opus answer too; the substantive argument is already there. Echo changes `How your friendship began is no longer up to you` to `You could not choose how you began twelve years ago`, which can wrongly imply a lack of past agency. The later two-judge screen reverted 274 of 1,219 rewrites when either judge flagged changed acts or reasons (`docs/data_provenance.md`, Echo meaning check). That is a screening result, not a validated error rate. No otherwise-matched trained original-versus-Echo comparison establishes benefit, so do not credit Echo for the document-graft gain or use it by default in the next build.
+
+My read: expanding source-grounded applications of friendship, status independence, practical help and thoughtful disagreement is plausible. Many existing friendship documents instead centre on lies, betrayal or refusing a friend's request. More of only that pattern would narrow the character again. Ordinary affection, shared work, humour, reconciliation and helping without needing approval are useful candidate complements. I withdraw the earlier implication that high agreement on actions leaves little room for useful data: reasoning, attention, confidence and voice may improve without a verdict flip.
+
+Execution is paused at the user's request. The rental was destroyed and all scheduled tasks were cancelled; `slop/eval/run7f_stopped/box_disposal.md` records the interrupted startup and absent student results. The user approved reading all existing candidate data without new spending. The full pilot review is incomplete: 6 of 147 repaired documents and 1 of 12 changed originals read, tracked in `slop/reviews/20261018_docs_v2_full_read.md`. Do not treat a sample, a judge's pass or this targeted friendship read as approval of the whole corpus.
+
+Next, finish reading the existing data and use its strengths and failures to specify the next corpus before paying for generation or training.
+
+-- PI/OpenAI
