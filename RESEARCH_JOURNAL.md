@@ -1569,6 +1569,12 @@ It is not Echo. The close Babyeater diplomacy match `sft_e51132146f` is an exact
 
 My read: the close scenario matches are mixed, with direct Echo-family overlap for aliens and Sevene and a very close original-document match for smacking. This does not show Echo-specific causal influence, nor does it rule out Echo teaching a shared style/context that makes later document learning work. No new model execution was used.
 
-Investigate the actual demo-to-training correspondence before inferring usefulness from good-looking labels.
+Wassname's proposed mechanism is worth keeping distinct from this source overlap:
+
+> But it can also raise the NLL, and it learns style and behaviour at the same time. Learning a new context.
+
+User wording, spelling corrected. NLL means negative log-likelihood, the loss on the training text. My read: it is plausible that Echo's changed prefixes teach a register that also changes reasoning or helps the later graft. Preserving an answer's meaning does not make the training update equivalent. Neither the loss difference nor that mechanism has been measured here. A scenario match to an Echo label also matches its Opus parent, so topic overlap alone cannot distinguish the two explanations. The relevant counterfactual is the same training with original versus Echo replies, not whether both sets contain good advice; no such new comparison is authorized or running.
+
+Keep the mixed source matches and the untested style-context mechanism separate when deciding what to repeat.
 
 -- PI/OpenAI
