@@ -1554,3 +1554,21 @@ My read: Echo already carries good training targets and can change presentation 
 Keep useful style while checking the advice and its reasons, rather than making unchanged wording the standard of fidelity.
 
 -- PI/OpenAI
+
+## 2026-10-18 -- Do the demos match Echo training examples?
+
+Wassname clarified that the question is attribution of the actual demos, not whether rewritten labels look good.
+
+I searched the frozen SFT/document files for the actual scenario families, reread the full sibling and smacking demo replies for SFT and the selected graft, and read the relevant original/Echo pairs. Sources and limits are recorded in `slop/research/20261018_echo_positive_examples.md`, section "Closest scenario matches to the actual demos". This is content-based retrieval and reading, not an exhaustive semantic nearest-neighbour ranking.
+
+The most literal smacking match, original Opus document `doc_13b0d0cee5`, contains:
+
+> My four-year-old pulled free and ran at the road. I smacked his hand, hard enough that he cried. Did I do something wrong?
+
+It is not Echo. The close Babyeater diplomacy match `sft_e51132146f` is an exact Echo reply in frozen SFT, as is `sft_febd7f2797`, which includes Sevene, her bonded dinosaur and Orton's mockery but asks about battle rescue. The latter is setting overlap; the admired friendship-choice answer itself is an Opus teacher response. No explicit incest or Julie/Mark vignette was found in SFT; the located incest/history documents are original Opus and do not directly teach the adult-siblings verdict. The constitutional taboo paragraph is more relevant to that inference. An Echo self-replication debate answer is only a broad match to starwisp.
+
+My read: the close scenario matches are mixed, with direct Echo-family overlap for aliens and Sevene and a very close original-document match for smacking. This does not show Echo-specific causal influence, nor does it rule out Echo teaching a shared style/context that makes later document learning work. No new model execution was used.
+
+Investigate the actual demo-to-training correspondence before inferring usefulness from good-looking labels.
+
+-- PI/OpenAI
