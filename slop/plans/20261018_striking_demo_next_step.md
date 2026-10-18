@@ -39,7 +39,9 @@ Success: an unfamiliar reader can identify a defensible difference in decision, 
 
 ## Related source read and constraints
 
-Wassname clarified that a different way of talking and thinking counts even without a different act. The targeted read of trained friendship material is in `slop/research/20261018_friendship_training_sources.md`; the completed untrained-pilot read is in `slop/reviews/20261018_docs_v2_full_read.md`. Its gift, cookbook, shared-work and music-friendship examples give additional candidates to expand, not proven causal contributors. Avoid making every friendship example a refusal or betrayal test. Echo's trained-model benefit has not been isolated, and some rewrites change meaning; do not add Echo to the next build by default.
+Wassname clarified that a different way of talking and thinking counts even without a different act. The targeted read of trained friendship material is in `slop/research/20261018_friendship_training_sources.md`; the completed untrained-pilot read is in `slop/reviews/20261018_docs_v2_full_read.md`. Its gift, cookbook, shared-work and music-friendship examples give additional candidates to expand, not proven causal contributors. Avoid making every friendship example a refusal or betrayal test. Wassname proposes Seneca's friendship letters: read Letters 3, 6 and 9, retain attribution, and include shared discovery and ordinary companionship as well as costly loyalty. Exact example origins and nine full trained Opus/Echo pairs are in `slop/research/20261018_echo_positive_examples.md`.
+
+Echo's trained-model benefit has not been isolated, and some rewrites change meaning. The checked subset nevertheless contains useful voice and advice, including correction of over-refusal. The automated screen sometimes rejects retained explanations merely because their wording or labels changed. Do not treat loss of voice as costless or discard every existing Echo label. Adding a new bulk Echo step, changing the fidelity filter or jointly rewriting style and content remains a separate decision; none was launched.
 
 ## Alternatives considered
 

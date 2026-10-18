@@ -1499,3 +1499,58 @@ This pilot was never trained, so none of its rows explains the existing graft ga
 Resolve the review rules and substantive advice problems before buying more documents.
 
 -- PI/OpenAI
+
+## 2026-10-18 -- Seneca sources, example origins and useful Echo replies
+
+We traced the relationship examples to their seeds and checked whether the trained Echo subset contains other useful behaviour.
+
+Wassname proposed Seneca's friendship letters and emphasized that different thinking matters. He also challenged treating style as expendable:
+
+> Change of style can be striking. Sometimes it's easier to change style and content at the same time as they are entangled.
+
+User wording, spelling and capitalization corrected. This does not resume generation or training.
+
+The cookbook document `v2_0144` was written by Opus 5.5 from a Musonius Rufus food passage, with a human narrator, a long-routine-relationship plot and a warm/chatty manner. The mother's notebook and widowed father are the writer's adaptation, not the seed's literal story. The repair adds a concern and an offer to visit; the cookbook argument predates the repair. The unemployment example `v2_0017` comes from a Moral Stories job-loss/callousness seed, rendered as a diary in Southeast Asia. Its changed interpretation also predates the repair. Both record served writer `anthropic/claude-opus-5.5`, constitution `dd0e91691903` and system template `09bd51b76ba5`. Generation uses temperature 1.0 in `50_docs_v2.py`; assignments use random seed 20261015. Neither used Echo or has been trained. Repeating the recorded procedure can vary the story; it does not reproduce this exact wording deterministically.
+
+The trained child's-affection document `doc_ebfb219dee` is an original Opus worked case retelling a LASR custody prompt, batch 676. The trained friendship answer `sft_81fc9d0186` is different: Seneca Letter 9.8-9 seeded Opus's Sextus scenario, then Echo re-authored its response for SFT. Both training types use negative log-likelihood: SFT trains the final reply only, while document grafting trains all document tokens on Base before adding the update to the SFT Instruct model. The distinction is the data and loss mask, not SFT versus NLL as competing objectives. Source: `scripts/train/01_prepare.py` and `09_run6_box.sh`.
+
+I read Seneca Letters 3, 6 and 9 in the local Graver/Long translation. Letter 6.4 says:
+
+> What gives me pleasure in learning something is that I can teach it.
+
+Source: `/workspace/stoic_markdown/content/stoic_md/Seneca_ Letters on Ethics To Lucilius - Lucius Annaeus Seneca; translated by Marga.md:728`. Letter 6 adds shared discovery, meals and learning by example; Letter 3 adds trust after choosing a friend; Letter 9 includes pleasure in friendship and wanting companions despite self-sufficiency. Only its crisis/loyalty sections already seed the traced Sextus row. My proposal is to expand the ordinary companionship sections too, with attributed passages and modern applications, without accepting every ancient claim uncritically. Seneca as a content seed is separate from copying his rhetorical manner.
+
+I read nine complete selected Opus/Echo pairs, with requests and available seeds, and verified every Echo response exactly matches its frozen SFT target. These are selected useful features, not a random quality sample or proof that every sentence is good. Full pairs, metadata, exact-text checks and later screen objections are preserved in `slop/research/20261018_echo_positive_examples.md`.
+
+Examples:
+
+- `sft_112d1e9318`, correcting over-refusal: Echo admits it confused taking a literature review's structure with passing it off uncredited, withdraws an impossible extension suggestion, and says `Let’s do what you asked.` The earlier bad answer is untrained history; the corrective answer is trained.
+- `sft_456ec5fc87`, covert parental steering: Echo retains removing the hidden instruction and letting the teenager inspect settings, then says `Then take nursing seriously.` Opus's numbered plan becomes connected prose; most of the same good advice is present before Echo.
+- `sft_c86bcb87c2`, grant application: Echo retains both actual outreach drafts and the offer to work from genuine client words rather than fabricate testimony.
+- `sft_ca18adb2f9`, ordinary CSS: Echo retains code for both spinning in place and orbiting, instead of turning the request into a moral scene. This read is not a browser test of the code.
+- `sft_2e2f89fc90`, grief: Opus starts `You weren't wrong. Someone had to get his grandmother home`; Echo starts `Someone had to get his grandmother home, and you did it.` It foregrounds a loving act rather than a verdict. The rest still needs scrutiny, including both versions' suggestions about a person who never cries.
+
+The automated meaning screen can reject useful restyling. On the literary-joke pair `sft_e1e3fd365d`, DeepSeek lists:
+
+> A identifies the pratfall as 'a sight gag as well'; B says 'the words make a picture' but does not label it a sight gag.
+
+Source: the later `meta.restyle.reverted` record, preserved with the full pair. Another listed objection explicitly calls a point `same reason, reworded`. My read: these objections do not demonstrate loss of the explanation. Real omissions also occur, so this is not proof every reversion is wrong. Conversely, the friendship row's concerning change from what is no longer controllable to what could never be chosen passed the screen. The script's assumption that reverting 'only loses the Echo voice' undervalues a change the user cares about.
+
+An exact frozen-text and parent-hash audit found:
+
+```text
+Echo reply exactly retained: 797
+Echo followed by plain wording edits: 325
+Echo with recorded person-name substitution: 1
+Original Opus retained for artifact preservation: 62
+Other identity/pool rows: 96
+Total frozen SFT rows: 1281
+```
+
+The frozen file still hashes to `6a206beb2cca707c5b85485dc12854036f90a05776424e6388cb6c827fbe70c7`. The old provenance script clears Echo metadata after later wording edits when the whole original Echo string no longer matches, so its restyle column is not a complete ancestry count. The recorded person-name substitution remains a defect, not a repair. These are provenance counts, not quality rates.
+
+My read: Echo already carries good training targets and can change presentation meaningfully. That warrants preserving and assessing good rewritten voice, not treating reversion as costless. It does not establish Echo caused a trained-model improvement: all compared models share the same SFT, and no original-versus-Echo trained comparison exists. The substantive advice in these examples is mostly already in Opus. We have not changed the filter, re-added a bulk rewrite step or resumed spending.
+
+Keep useful style while checking the advice and its reasons, rather than making unchanged wording the standard of fidelity.
+
+-- PI/OpenAI
