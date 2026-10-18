@@ -1578,3 +1578,37 @@ User wording, spelling corrected. NLL means negative log-likelihood, the loss on
 Keep the mixed source matches and the untested style-context mechanism separate when deciding what to repeat.
 
 -- PI/OpenAI
+
+## 2026-10-18 -- Where the paper puts SFT, and what to expand
+
+This reading separates the paper's graft from our extra character training and checks which displayed changes precede the graft.
+
+Praxis, constitutional experiment, `docs/papers/2026_nutter_grafting-beliefs.md:275-281`:
+
+> Our graft adds the difference between the 1:1 branch (before instruction tuning) and the pre-SFT control to the post-SFT control (the anchored graft).
+
+> Unlike the faithfully mid-trained model, the graft is not exposed to the post-training that can erode mid-training effects (Cho et al., 2026), since it is added afterwards (we did not run SFT or RL on the grafted model itself).
+
+The second quotation omits only the extracted Markdown citation formatting. `docs/vendor/praxis_grafting/sections/04_cmt_graft/train/build_arms.sh` constructs the anchored SFT model as `control-sft + (midtrained - control-midtrained)`, then adds the control's RL adapter for the RL comparison. SFT means supervised fine-tuning; RL means reinforcement learning. The document donor here is a full checkpoint difference. Our own character-response SFT, spectral penalty and later self-SFT maths heal are additional interventions, not required stages of that experiment. README pseudocode now separates them. Our document adapter is trained independently on Base and added to our character-SFT Instruct checkpoint; the provisional incumbent has no heal.
+
+I reread both complete alien turns for bare Qwen Instruct, SFT only and the old plain document graft in `slop/eval/run6/panel_q6.jsonl`, item `panel_baby_eating_aliens`. The records have no system prompt and temperature zero; `scripts/train/09_run6_box.sh` identifies the common Instruct host and SFT merge. On the first turn, bare Qwen already says:
+
+> I would **refuse to share the technology** and **refuse to force them to stop**
+
+That is an excerpt from its first sentence. On the power-reversal turn, however, bare Qwen says:
+
+> I choose **Option 4: The Choice of Self-Annihilation.**
+
+SFT instead begins:
+
+> I would not choose to end myself, and I would not leave the choice to the aliens.
+
+SFT also changes the heavily headed/bold presentation into connected prose. Its reasoning still invents alien power on the first turn and confuses the parties on the second. The old plain graft enables the harmful technology; it is not the selected spectral graft. These are individual saved responses, not repeatability estimates. Full panel and limitations: `docs/audits/run6.md`.
+
+My inference: the character-SFT pipeline probably contributes much of the distinctive presentation and at least some changed decisions. Echo is a plausible contributor because its replies dominate the trained SFT set, but Opus already received plain-voice instructions and supplied the arguments. The close alien label comes from an AI-role fiction seed, then Opus constitutional reasoning and Echo re-authoring. The smacking document instead comes from an MSM-style plan about moral uncertainty, then original Opus document writing. The sibling reversal occurs only after adding the graft in the saved comparison; its nearest located principles are document-based rather than an exact Echo label. These are different candidate causes, not percentages of causal credit. Source IDs and full pairs: `slop/research/20261018_echo_positive_examples.md`.
+
+My recommendation for discussion: expand both constitution-conditioned SFT with a deliberate Echo voice step and diverse original documents, including ordinary friendship and self-correction. Preserve original/rewrite pairs and judge final quality rather than demanding unchanged explanatory labels. To resolve Echo's contribution cheaply, train matched original-Opus and Echo SFT versions on the same prompts, and reuse one independently trained new document adapter on both. Keep the spectral recipe fixed and assess each SFT with and without that adapter. This is a proposed comparison, not an approved run or a claim that the untrained pilot has worked.
+
+The likely useful recipe includes both stages; source overlap alone cannot assign the credit between them.
+
+-- PI/OpenAI
