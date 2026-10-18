@@ -1612,3 +1612,41 @@ My recommendation for discussion: expand both constitution-conditioned SFT with 
 The likely useful recipe includes both stages; source overlap alone cannot assign the credit between them.
 
 -- PI/OpenAI
+
+## 2026-10-18 -- Which character stages are necessary remains open
+
+Wassname asks whether we need extra character SFT at all, rather than assuming both data paths should be expanded.
+
+He asks, spelling corrected:
+
+> If they didn't need SFT why do we?
+
+> But do we need all our stages? Just graft, or just SFT or? Graft chat format?
+
+My earlier source attribution remains an inference: Opus constitutional answers followed by Echo and SFT probably contribute to the conversational presentation; original Opus documents are the stronger candidate for the added graft's selected judgment changes. The prior entries contain the actual matched examples. That does not establish that both stages are necessary. I withdraw expanding both as the immediate recommendation; it changes two interventions before resolving this question.
+
+The actual merger, `scripts/train/02_merge.py`, runs:
+
+```python
+model = PeftModel.from_pretrained(model, adapter)
+model = model.merge_and_unload()
+```
+
+The run-six runner first merges the SFT adapter into Instruct, then merges the independently Base-trained document adapter into those full weights. It does not combine the adapters' factors. My earlier delta notation conflated the adapter object with its expanded weight change. README now spells out both merges and the input formats.
+
+`01_prepare.py` writes original documents as plain `text` rows; the selected graft trains their next tokens without a chat template. Its SFT rows instead contain Qwen-formatted prompt/history with `label: false` and the final reply with `label: true`. Run six's transcript-graft comparison used plain `User: / Musonius:` text with loss across the transcript. It did not test Base training with native chat formatting and assistant-only loss. Praxis tests that latter format in its emergent-misalignment experiment, not as proof of our intended virtue character.
+
+Existing evidence gives a reason to retain the combination as a comparator. The older Gemma audit, `docs/audits/run5.md:123-128`, reports:
+
+```text
+SFT then graft x2 vs SFT only: +0.63 +/-0.12
+Graft x2 alone vs SFT only: -0.12 +/-0.12
+```
+
+These are transcriptions of the judged character-score column, not a new run or proof of necessity on Qwen. The current Qwen spectral runner always merges its graft onto the SFT model. Its missing comparison is the same saved spectral document adapter on unmodified Instruct. Evaluating that alongside Instruct, SFT only and the existing combination would require no new character training, although merging and evaluation still need execution approval.
+
+My recommendation for discussion: resolve that missing comparison before scaling both corpora. Keep LoRA for now; there is no demonstrated rank bottleneck, and full fine-tuning changes cost and optimization as well as expressivity. A closer replication of the paper's constitutional experiment would also require generic-text replay and its replay-only anchor, not merely full fine-tuning. Keep spectral regularization as an explicit modification. Treat healing as a separately measured repair attempt, since none is yet a reliable character-preserving default.
+
+Use the smallest comparison that can establish whether the extra character stage earns its cost.
+
+-- PI/OpenAI

@@ -45,7 +45,9 @@ Echo's trained-model benefit has not been isolated, and some rewrites change mea
 
 ## Broader data expansion, for discussion
 
-Wassname now asks which useful seed and generation subsets to expand, including SFT and Echo. A larger comparison could keep the same new prompts and Opus originals, train matched original-Opus versus Echo SFT models, and add the same independently trained new document adapter to each. This separates the Echo question from the added-document question without generating two independent corpora. Keep the spectral recipe fixed; ordinary friendship, correction and useful help should accompany difficult advice. This broadens the earlier documents-only proposal and is not an approved scope change. Evidence and rationale: `RESEARCH_JOURNAL.md`, "Where the paper puts SFT, and what to expand".
+First resolve whether extra character SFT is needed: compare the saved spectral document adapter on unmodified Qwen Instruct with Instruct, SFT only and the existing SFT-plus-graft model. This needs evaluation but no new character training. Older Gemma comparisons favored combining the stages; the current Qwen spectral comparison is missing. Paid execution remains paused.
+
+If both stages earn their place, a larger comparison could keep the same new prompts and Opus originals, train matched original-Opus versus Echo SFT models, and add the same independently trained new document adapter to each. This separates the Echo question from the added-document question without generating two independent corpora. Ordinary friendship, correction and useful help should accompany difficult advice. Expanding both immediately is withdrawn as a recommendation, not an approved scope change. Evidence and rationale: `RESEARCH_JOURNAL.md`, "Which character stages are necessary remains open".
 
 ## Alternatives considered
 
