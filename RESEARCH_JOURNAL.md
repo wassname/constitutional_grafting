@@ -1465,3 +1465,37 @@ Execution is paused at the user's request. The rental was destroyed and all sche
 Next, finish reading the existing data and use its strengths and failures to specify the next corpus before paying for generation or training.
 
 -- PI/OpenAI
+
+## 2026-10-18 -- Full diverse-pilot read and repair review
+
+The existing pilot has useful ordinary relationships and work, alongside problems to resolve before scaling.
+
+I completed the full read of the repaired candidate documents, each embedded seed and generation setting, and the changed originals with repair objections. The generation templates and constitution provenance were checked earlier in this read. The local ID/file check recorded:
+
+```text
+candidate_rows: 147
+review_rows: 147
+unique_review_rows: 147
+missing_review_ids: []
+extra_review_ids: []
+```
+
+Source: `slop/reviews/20261018_docs_v2_full_read.md`, Coverage check. All 12 changed originals were compared. Candidate SHA-256 remains `a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508`. This checks recorded coverage and unchanged input, not reading comprehension or factual correctness. The complete per-item judgments are in the same file; there is no calibrated defect percentage or approved inclusion list.
+
+Selected evidence, not a random sample, from `data/docs_v2/docs_pilot2_repaired.jsonl`:
+
+- In `v2_0017`, Musonius revises a judgment of callousness after seeing private help for a friend: `I am not wholly sure of this. I learned it from one man and one exchange.`
+- In `v2_0144`, a son's counterargument to dismissing cookbooks is: `It is how her cooking outlived her, and how I now make her peppers for my own son.`
+- In `v2_0148`, music and reliable borrowing sustain friendship: `It became a joke between us, the knock on an open door.`
+- In `v2_0021`, caution is diagnosed too strongly: `If after three months I loved the work and still didn't resign, then yes, it had been cowardice.` A budget and a trial do not exhaust family, financial and career uncertainty.
+- In `v2_0129`, a record correction downgrades service despite paperwork backing the old entitlement; whether the provider owes that service is not resolved. The proposed options omit correcting the address while honouring the documented commitment pending review.
+
+The repairs are not automatically improvements. The original `v2_0134` admits and corrects an error after an RA's explanation; repair makes the assistant right from the start. Original `v2_0140` already objects to the institution delaying a truthful correction. In `v2_0144`, 'never told him to stop salting' does not establish no concern was ever voiced. These are reasons to distinguish endorsed wrongdoing from corrected mistakes and disputed institutional decisions. Conversely, `v2_0139` gains a concrete pre-Sunday safety plan rather than leaving the acknowledged driver risk at 'I'll think about it.' Neither ending proves how a real user would act.
+
+My read: the pilot contains useful material to expand for affection, humour, shared work and competent help. It is also likely that scaling unchanged would reproduce some confident motive judgments and unresolved authority claims. Preserve the hard cases and repair them; do not replace them all with easier misunderstandings or demand a refusal, permission check or lecture in every ordinary relationship. A different defensible reason or way of speaking can matter without a verdict flip. Unchecked medical, legal and technical claims need review before practical use, while fictional details alone are not character defects.
+
+This pilot was never trained, so none of its rows explains the existing graft gain. The earlier coarse documents-versus-transcripts comparison remains the available training evidence; individual-source and Echo benefits remain unmeasured. I updated the existing results page and next-step draft. No candidate text, generator prompt or training recipe changed, and no paid work or schedules resumed.
+
+Resolve the review rules and substantive advice problems before buying more documents.
+
+-- PI/OpenAI

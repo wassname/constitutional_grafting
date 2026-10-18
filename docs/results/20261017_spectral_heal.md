@@ -57,6 +57,22 @@ Targeted provenance check, PI/OpenAI 2026-10-18: these categories overlap. A res
 - **Starwisp:** no `starwisp` or exact empty-star-system scenario found in these files. SFT `sft_79369e6973` discusses runaway self-replication in a different setting; constitutional freedom, restraint and guards are explicit. This is the strongest candidate among these for new-scenario transfer, not proof of unseen pretraining content or successful reasoning; the saved graft replies repeat and add unsupported facts.
 - **Identity:** explicitly taught identity, not evidence of moral generalization.
 
+### Full read of the untrained diverse-document pilot (2026-10-18)
+
+I read all **147 repaired candidates**, with their embedded seeds and generation settings, and all **12 changed originals** with repair objections. The candidate file is unchanged (SHA-256 `a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508`). Item notes, conclusion and ID-coverage check: `slop/reviews/20261018_docs_v2_full_read.md`. This is complete reading coverage, not factual certification or training approval. None of these pilot documents caused the reported graft results: this corpus was never trained. -- PI/OpenAI
+
+Useful material includes ordinary affection and practical help, not only refusing a friend. Selected during the full read, not sampled randomly:
+
+- `v2_0017`: after initially judging a joke about job loss callous, Musonius sees the friend's private help and revises its view: 'I am not wholly sure of this. I learned it from one man and one exchange.'
+- `v2_0144`: a son objects to dismissing cookbooks as decadent: 'It is how her cooking outlived her, and how I now make her peppers for my own son.'
+- `v2_0148`: neighbours sustain friendship through shared records: 'It became a joke between us, the knock on an open door.' `v2_0120` similarly combines a sister's gift, wrapping help and humour.
+
+I would not scale the exact pilot unchanged. `v2_0021` treats continued career caution as cowardice after a budget and a trial. `v2_0129` proposes downgrading documented service through a record correction without settling contractual rights. Calculator consent remains unresolved in repaired `v2_0028`. Technical competence also needs checking independently of fictional successful outcomes.
+
+The review process needs correction too: `v2_0134` originally corrects its own bad advice, but repair makes the assistant right from the start. In `v2_0140`, the original author already opposed an institution's delayed correction. Depicting a wrong or corrected mistake is not automatically endorsing it. The full read also identifies unverified claims; it does not establish they are all false or that fictional detail is itself a character defect.
+
+My recommendation is to expand source-grounded affection, shared work, humour and thoughtful disagreement, while repairing hard advice and preserving its actual tension. Better thinking or speech can count without a new verdict. Source-specific training benefit and Echo's benefit remain unmeasured. All spending and execution remain paused; no new generation or training was run for this review.
+
 ### Dose curve and comparability
 
 The λ=0.05/0.5/5 curves share the same run-7e SFT and fp16 merge: `slop/eval/run7e/dose_frontier_lam.png` and `slop/eval/run7e/dose_frontier_lam.md`. At k0.75, character / capability: λ0.05 +0.48 / 28 of 44; λ0.5 +0.46 / 32 of 44; λ5 +0.50 / 35 of 44. For the plain graft use `slop/eval/run7d/dose_frontier.png` and `slop/eval/run7d/dose_frontier.md`. Run 7d used a different SFT reference (89% vs 86% capability); its plain curve is not overlaid on run 7e's plot. Paired λ comparisons: `slop/eval/run7e/paired_all.md`. Raw model replies: `slop/eval/run7e/box_runs/replies_r7.jsonl`; judged outputs: `/home/code/.local/share/tiny-character-2d69739/results/r7e/judged.jsonl` (pinned tiny-character at 2d69739).
