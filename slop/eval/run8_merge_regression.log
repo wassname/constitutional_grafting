@@ -1,0 +1,3 @@
+/home/code/.cache/uv/environments-v2/test-moe-expert-merge-4a856bf915fc6e40/lib/python3.13/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+PASS (torch 2.14.1+cpu, peft 0.21.2): routed-expert reload/merge parity, scaling, and six two-update combinations through 02_merge.py

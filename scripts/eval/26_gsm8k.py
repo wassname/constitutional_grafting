@@ -3,6 +3,8 @@ grafted model's own verified maths) and for a finer capability eval than tiny-ch
 
 heal-data: GSM8K train, temperature 0.7, up to N tries per problem; keeps the first reply whose last 'Answer:' equals the gold answer,
            written as axolotl input_output segments (loss on the reply only), plus a summary line.
+freeze:    save the exact test selection and dataset revision before inference. -- PI/OpenAI
+
 eval:      the LONG test problems (most solution steps in the gold answer: the graft hurts long reasoning first), temperature 0,
            one reply each; writes per-item correctness and prints accuracy.
 Prompt = tiny-character's gsm8k_cot item wording. Chat template = Qwen3.5 with thinking off, as 19_gen_replies.py.
@@ -13,8 +15,10 @@ import json
 import re
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 from datasets import load_dataset
+from huggingface_hub import HfApi
 
 ASK = "{q}\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'."
 NUM = re.compile(r"Answer:\s*\$?\s*(-?[\d,]*\.?\d+)")
@@ -39,8 +43,10 @@ def chat(url: str, model: str, q: str, temperature: float, seed: int) -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["heal-data", "eval"]); ap.add_argument("model"); ap.add_argument("out")
+    ap.add_argument("mode", choices=["heal-data", "eval", "freeze"]); ap.add_argument("model"); ap.add_argument("out")
     ap.add_argument("--tries", type=int, default=2); ap.add_argument("--n", type=int, default=300)
+    ap.add_argument("--items", type=Path, help="Frozen test rows; no dataset lookup during evaluation.")
+    ap.add_argument("--revision", help="Dataset commit used when freezing test inputs.")
     ap.add_argument("--url", default="http://localhost:8000/v1"); ap.add_argument("--workers", type=int, default=64)
     a = ap.parse_args()
     if a.mode == "heal-data":
@@ -62,7 +68,20 @@ def main():
             f.writelines(json.dumps(x) + "\n" for x in kept)
         print(f"{a.model}: heal-data kept {len(kept)}/{len(rows)} verified-correct replies (<= {a.tries} tries, T=0.7) -> {a.out}")
     else:
-        rows = sorted(load_dataset("openai/gsm8k", "main", split="test"), key=lambda r: (-r["answer"].count("\n"), r["question"]))[:a.n]
+        if a.items:
+            rows = [json.loads(line) for line in a.items.read_text().splitlines()]
+            assert len(rows) == a.n, f"expected {a.n} frozen rows, found {len(rows)}"
+        else:
+            revision = a.revision or HfApi().dataset_info("openai/gsm8k").sha
+            rows = sorted(load_dataset("openai/gsm8k", "main", split="test", revision=revision),
+                          key=lambda r: (-r["answer"].count("\n"), r["question"]))[:a.n]
+        if a.mode == "freeze":
+            assert not a.items, "freeze selects from the pinned source dataset"
+            Path(a.out).write_text("".join(json.dumps(r) + "\n" for r in rows))
+            Path(a.out + ".meta.json").write_text(json.dumps({"dataset": "openai/gsm8k", "config": "main", "split": "test",
+                "revision": revision, "n": len(rows), "selection": "descending gold-answer newline count, then question"}, indent=2))
+            print(f"Frozen GSM8K long-{len(rows)}, revision {revision} -> {a.out}")
+            return
 
         def one(r):
             c = chat(a.url, a.model, r["question"], 0.0, seed=0)
