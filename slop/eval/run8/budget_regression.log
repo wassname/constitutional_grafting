@@ -1,0 +1,4 @@
+PASS unpriced response reserves a positive bound: <html>gateway error</html>
+PASS unpriced response reserves a positive bound: []
+PASS unpriced response reserves a positive bound: {"usage":{"cost":null}}
+PASS orphan HTTP attempt counted without cost.json

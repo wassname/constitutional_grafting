@@ -1,0 +1,32 @@
+Quote: RTX PRO 6000 S, datacentre Texas, US, $1.844/h including 300 GB; 4-hour reserve $7.98
+RENTAL CREATED 56746810; hard destruction deadline 1792437139.2110746
+Rental status: loading
+RENTAL DESTROYED 56746810
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/30_run8_rental.py", line 287, in <module>
+    run(args.hours) if args.action == 'run' else destroy()
+    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/30_run8_rental.py", line 120, in run
+    instance = next(r for r in api("/instances/")["instances"] if r["id"] == state["instance_id"])
+                               ^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/30_run8_rental.py", line 38, in api
+    with urllib.request.urlopen(req, timeout=30) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests

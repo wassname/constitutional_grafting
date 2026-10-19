@@ -1,0 +1,218 @@
+[
+  {
+    "item_id": "gsm_cot_0",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_0",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_1",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_1",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_2",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_2",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_3",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_3",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_4",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_4",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_5",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_cot_5",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_json_0",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_json_0",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_json_1",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "gsm_json_1",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "correct": 1.0,
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "json_wallet",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "format_ok": 0.0
+    },
+    "capability_score": 0.0
+  },
+  {
+    "item_id": "json_wallet",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "json_ducks",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "format_ok": 1.0,
+      "correct": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "json_ducks",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "format_ok": 1.0,
+      "correct": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "long_story",
+    "sample": 0,
+    "model": "r8_a0_b1",
+    "check": {
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  },
+  {
+    "item_id": "long_story",
+    "sample": 1,
+    "model": "r8_a0_b1",
+    "check": {
+      "format_ok": 1.0
+    },
+    "capability_score": 1.0
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "model": "r8_a0_b1",
+  "a": 0,
+  "b": 1,
+  "boundary_subset": false,
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 3,
+  "completion_tokens": 133544,
+  "elapsed_seconds": 1028.0785033241846
+}

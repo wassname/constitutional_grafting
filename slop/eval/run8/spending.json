@@ -1,0 +1,46 @@
+{
+  "author": "PI/OpenAI",
+  "rental_reserve_usd": 24.855555555555554,
+  "api_cost_or_reserve_usd": 0.39286399,
+  "active_batch_reserve_usd": 0,
+  "entries": [
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/direct_judging/direct_document_increment/http_attempts.jsonl",
+      "cost_or_reserve_usd": 0.034688388,
+      "unpriced_attempts_reserved": 0
+    },
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/baseline/cost.json",
+      "cost_or_reserve_usd": 0.058693404,
+      "scope": "Historical successful-cache accounting; associated logs reported no retries. No HTTP-attempt trace."
+    },
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/baseline_accounted_check/cost.json",
+      "cost_or_reserve_usd": 0,
+      "scope": "Historical successful-cache accounting; associated logs reported no retries. No HTTP-attempt trace."
+    },
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/both/http_attempts.jsonl",
+      "cost_or_reserve_usd": 0.092133132,
+      "unpriced_attempts_reserved": 0
+    },
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/graft_only/cost.json",
+      "cost_or_reserve_usd": 0.100150848,
+      "scope": "Historical successful-cache accounting; associated logs reported no retries. No HTTP-attempt trace."
+    },
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/sft_only/http_attempts.jsonl",
+      "cost_or_reserve_usd": 0.084957768,
+      "unpriced_attempts_reserved": 0
+    },
+    {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/principle_initial.requests",
+      "cost_or_reserve_usd": 0.022240450000000002,
+      "unpriced_attempts_reserved": 0
+    }
+  ],
+  "cap_usd": 30,
+  "reserve_basis": "Unpriced attempts reserve serialized UTF8 bytes plus 2000 tokens, times catalog/vendor input price, plus requested maximum output. This is conservative estimation, not an invoice or a tokenizer proof.",
+  "attributed_cost_plus_rental_reserve_usd": 25.248419545555553
+}

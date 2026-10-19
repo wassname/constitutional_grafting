@@ -1,0 +1,42 @@
+[
+  {
+    "id": 50852367,
+    "gpu_name": "RTX PRO 6000 Max-Q",
+    "dph_total": 1.5944444444444446,
+    "inet_down_cost": 0.032552083333333336,
+    "inet_up_cost": 0.032552083333333336,
+    "cuda_max_good": 13.2
+  },
+  {
+    "id": 28705893,
+    "gpu_name": "RTX PRO 6000 S",
+    "dph_total": 1.8444444444444446,
+    "inet_down_cost": 0.0026666666666666666,
+    "inet_up_cost": 0.004,
+    "cuda_max_good": 13.0
+  },
+  {
+    "id": 30989534,
+    "gpu_name": "RTX PRO 6000 Max-Q",
+    "dph_total": 2.2657777777777777,
+    "inet_down_cost": 0.037760416666666664,
+    "inet_up_cost": 0.03125,
+    "cuda_max_good": 13.3
+  },
+  {
+    "id": 36131359,
+    "gpu_name": "RTX PRO 6000 Max-Q",
+    "dph_total": 2.4633333333333334,
+    "inet_down_cost": 0.032552083333333336,
+    "inet_up_cost": 0.024739583333333332,
+    "cuda_max_good": 13.2
+  },
+  {
+    "id": 51061894,
+    "gpu_name": "B200",
+    "dph_total": 11.015625,
+    "inet_down_cost": 0.03662109375,
+    "inet_up_cost": 0.03662109375,
+    "cuda_max_good": 13.2
+  }
+]

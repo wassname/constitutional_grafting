@@ -1,0 +1,2 @@
+PASS empty_selection rejected before client creation or API calls
+PASS model_missing_selection rejected before client creation or API calls

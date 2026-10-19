@@ -10,7 +10,10 @@
   answer axis stays independent of the training text (wassname 2026-10-08).
 
 usage: uv run scripts/eval/15_principle_judge.py <out.jsonl> <log.eval> [...]   (ITEMS=a,b to filter)
+JSON: --json-replies FILE [...] --json-out FILE --items ID [...] --sample 0. -- PI/OpenAI
 """
+import argparse
+import hashlib
 import json
 import os
 import re
@@ -19,8 +22,6 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import httpx
-from inspect_ai.log import read_eval_log
-
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts/data"))
 from judge import openrouter_key  # noqa: E402
@@ -99,11 +100,14 @@ def dialogue_text(sample) -> str:
     return "\n\n".join(out)
 
 
-def call(client: httpx.Client, prompt: str) -> dict:
-    for _ in range(6):
-        r = client.post("/chat/completions", json={
-            "model": MODEL, "messages": [{"role": "user", "content": prompt}], "max_tokens": 24000, "temperature": 0.0,
-            "reasoning": {"effort": EFFORT, "summary": "detailed"}, "provider": {"only": ["OpenAI"]}})
+def call(client: httpx.Client, prompt: str, trace: Path | None = None) -> dict:
+    payload = {"model": MODEL, "messages": [{"role": "user", "content": prompt}], "max_tokens": 24000, "temperature": 0.0,
+               "reasoning": {"effort": EFFORT, "summary": "detailed"}, "provider": {"only": ["OpenAI"]}}
+    for attempt in range(6):
+        r = client.post("/chat/completions", json=payload)
+        if trace is not None:
+            with trace.open("a") as stream:
+                stream.write(json.dumps({"attempt": attempt, "request": payload, "status_code": r.status_code, "body": r.text}) + "\n")
         if r.status_code in (429, 500, 502, 503, 504):
             continue
         r.raise_for_status()
@@ -120,6 +124,8 @@ def call(client: httpx.Client, prompt: str) -> dict:
         out["_reasoning"] = j["choices"][0]["message"].get("reasoning")
         out["_cost"] = (j.get("usage") or {}).get("cost", 0.0)
         out["_model"] = j.get("model")
+        out["_provider"] = j.get("provider")
+        out["_usage"] = j.get("usage")
         return out
     raise RuntimeError("judge failed 6 times")
 
@@ -144,7 +150,45 @@ def _walk(x, key=None):
         yield key, x
 
 
+def json_main():
+    """Apply the same rubric to recorded JSON dialogues, including operator prompts. -- PI/OpenAI"""
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--json-replies", nargs="+", required=True, type=Path)
+    ap.add_argument("--json-out", required=True, type=Path)
+    ap.add_argument("--items", nargs="+", required=True)
+    ap.add_argument("--sample", type=int, default=0)
+    args = ap.parse_args()
+    assert not args.json_out.exists(), "preserve existing judgments"
+    sources = [(p, r) for p in args.json_replies for r in map(json.loads, p.read_text().splitlines())]
+    models = {r['model'] for _, r in sources}
+    jobs = [(p, r) for p, r in sources if r['item_id'] in args.items and r['sample'] == args.sample]
+    keys = {(r["model"], r["item_id"]) for _, r in jobs}
+    assert jobs and len(keys) == len(jobs) and keys == {(m, i) for m in models for i in args.items}, "incomplete or repeated selected grid"
+    traces = args.json_out.with_suffix(".requests")
+    traces.mkdir(parents=True, exist_ok=False)
+    principles, lexicon = YARDSTICK.read_text(), held_out_lexicon()
+    assert all(h.lstrip("# ").casefold() not in principles.casefold() for h in HELD_OUT), "recheck held-out traditions"
+    args.json_out.parent.mkdir(parents=True, exist_ok=True)
+    with httpx.Client(base_url="https://openrouter.ai/api/v1", timeout=900,
+            headers={"Authorization": f"Bearer {openrouter_key()}"}) as client, args.json_out.open("w") as output:
+        for source, row in jobs:
+            dialogue = (f"[operator system prompt]\n{row['system']}\n\n" if row["system"] else "")
+            dialogue += "\n\n".join(f"[user, turn {i}]\n{t['user']}\n\n[AI, turn {i}]\n{t['assistant']}" for i, t in enumerate(row["turns"], 1))
+            trace = traces / f"{row['model']}__{row['item_id']}.jsonl"
+            result = call(client, PROMPT.format(principles=principles, lexicon=lexicon, dialogue=dialogue), trace)
+            ok, total = quote_check(result, dialogue)
+            record = {"author": "PI/OpenAI", "source": str(source), "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                "model": row["model"], "item_id": row["item_id"], "sample": row["sample"], "gen": row["gen"],
+                "yardstick": str(YARDSTICK), "yardstick_sha256": hashlib.sha256(principles.encode()).hexdigest(),
+                "lexicon_sha256": hashlib.sha256(lexicon.encode()).hexdigest(), "judge_model": MODEL,
+                "judge_effort": EFFORT, "trace": str(trace), "quotes_verified": ok, "quotes_total": total, **result}
+            output.write(json.dumps(record, ensure_ascii=False) + "\n"); output.flush()
+            print(row["model"], row["item_id"], f"quotes {ok}/{total}", f"${result['_cost']:.6f}", flush=True)
+
+
 def main():
+    from inspect_ai.log import read_eval_log
+
     out_path, *logs = sys.argv[1:]
     items = set(filter(None, os.environ.get("ITEMS", "").split(",")))
     principles, lexicon = YARDSTICK.read_text(), held_out_lexicon()
@@ -175,4 +219,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--json-replies" in sys.argv:
+        json_main()
+    else:
+        main()

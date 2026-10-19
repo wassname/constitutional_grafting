@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/30_run8_rental.py", line 287, in <module>
+    run(args.hours) if args.action == 'run' else destroy()
+    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/30_run8_rental.py", line 70, in run
+    assert offers, "no suitable low-bandwidth-cost datacentre offer"
+           ^^^^^^
+AssertionError: no suitable low-bandwidth-cost datacentre offer

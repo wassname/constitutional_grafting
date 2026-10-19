@@ -1,0 +1,7 @@
+{
+  "active": false,
+  "jobs": 4,
+  "maximum_attempts_per_job": 6,
+  "maximum_cost_usd": 0.47624639999999996,
+  "basis": "Catalog input and maximum output price with UTF8-byte plus 2000-token input reserve; all six attempts budgeted. Actual accepted and failed responses retained in .requests."
+}
