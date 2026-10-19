@@ -1,0 +1,9 @@
+Downloading tokenizers (3.2MiB)
+ Downloaded tokenizers
+Installed 27 packages in 124ms
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+trained_documents rows 1585 tokens 2156435 over2048 0 max 2046
+untrained_pilot rows 147 tokens 151514 over2048 5 max 2402
+{'doc_13b0d0cee5': 1721, 'doc_ebfb219dee': 1160, 'v2_0017': 508, 'v2_0120': 436, 'v2_0123': 868, 'v2_0144': 423, 'v2_0148': 1550}
+Raw input token counts only. Does not establish trainer clipping/filtering or which tokens received loss. No model inference.
+/workspace/2026/constitutional_grafting/slop/research/20261019_document_token_lengths.json
