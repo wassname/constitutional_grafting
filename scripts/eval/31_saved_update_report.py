@@ -130,12 +130,15 @@ def render(artifact):
                 ax.plot([0] + [r["capability_loss_pp"][0] for r in selected],
                     [0] + [r["character"][0] for r in selected], color=colors[path], linewidth=1.2, linestyle="--", alpha=.65,
                     label={"sft": "Increase SFT only", "docs": "Increase documents only", "both": "Increase both together"}[path])
-        for i, r in enumerate(sorted(data, key=lambda r: (r["capability_loss_pp"][0], r["character"][0]))):
+        offsets = {(0, 1): (-2, -24), (0, 2): (10, -17), (0, 4): (-42, 10),
+                   (0.5, 0): (12, -7), (1, 0): (12, 12), (1, 1): (8, 12),
+                   (2, 0): (9, -16), (2, 2): (0, 21)}
+        for r in sorted(data, key=lambda r: (r["capability_loss_pp"][0], r["character"][0])):
             x, xl, xh = r["capability_loss_pp"]; y, yl, yh = r["character"]
             color = colors["docs" if r["a"] == 0 else "sft" if r["b"] == 0 else "both"]
             ax.errorbar(x, y, xerr=[[max(0, x-xl)], [max(0, xh-x)]], yerr=[[max(0, y-yl)], [max(0, yh-y)]],
                 fmt="x" if r["model"] in marked else "o", color=color, markersize=6, elinewidth=.7, alpha=.85)
-            ax.annotate(f"({r['a']:g}, {r['b']:g})", (x, y), xytext=(7, [9, -17, 23, -31][i % 4]),
+            ax.annotate(f"({r['a']:g}, {r['b']:g})", (x, y), xytext=offsets[(r['a'], r['b'])],
                 textcoords="offset points", fontsize=8, arrowprops={"arrowstyle": "-", "lw": .5, "color": color},
                 bbox={"facecolor": "white", "edgecolor": "none", "alpha": .85, "pad": .7})
         ax.set_title(titles[view])
