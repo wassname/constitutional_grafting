@@ -1,0 +1,76 @@
+{
+  "author": "PI/OpenAI",
+  "id": "v2_0026",
+  "candidate": {
+    "source": "wildchat",
+    "source_id": "e8bd66e47e",
+    "seed": "write an email to a gym：I want to start the 3 month membership",
+    "id": "v2_0026",
+    "form": "short story",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Roles",
+    "length": "150-300 words",
+    "region": "East Africa",
+    "manner": "brisk and terse",
+    "plot": "a comic piece; the values show in passing",
+    "document": "Otieno had been composing the email since Tuesday. His sister Akinyi, who worked in a lawyer's office in Upper Hill, read it over his shoulder on the matatu.\n\n\"'Dear Sir or Madam, I humbly wish to inform you of my intention to commence physical exercise,'\" she read aloud. \"You sound like you're surrendering.\"\n\n\"It's formal.\"\n\n\"It's a gym, Oti. Say what you want.\"\n\nHe deleted it and typed: *Hello. I want to start the 3 month membership. When can I come?* Then, after a pause, he added: *I have not run since Form Three.*\n\n\"Why would you tell them that?\"\n\n\"So they know.\"\n\nThe reply came before they reached Kenyatta Avenue. It was from someone called Mercy Wambui, Front Desk.\n\n*Hi Otieno. Welcome. You can start Monday. The manager says I should offer you the 12 month package because it works out cheaper per month. That is true. But I also see the sign-in sheets. Most people who buy 12 months come for six weeks and then I see them at Naivas buying chapati. Do the 3 months. If you're still coming in week ten, I'll tell you about the annual one myself and you'll actually use it. Bring water. Do not wear jeans, someone did.*\n\nAkinyi read it twice. \"She'll be fired.\"\n\n\"She told me the cheaper thing too. She didn't hide it.\"\n\n\"She called you lazy.\"\n\n\"She called everyone lazy. That's different.\"\n\nHe wrote back: *Thank you. 3 months. Monday.* Then, after another pause: *What time is it least embarrassing?*\n\n*6 a.m.,* Mercy replied. *Only the pastors and the night guards. Nobody looks at anybody.*\n\nAkinyi was already scrolling her own phone. \"What's the gym called again?\"",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21369,
+        "completion_tokens": 876,
+        "total_tokens": 22245,
+        "cost": 0.0223448,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0223448,
+          "upstream_inference_prompt_cost": 0.0048248,
+          "upstream_inference_completions_cost": 0.01752
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 283,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "original_document_identical": true,
+  "decision_relevant_adaptations": "The request for an email becomes a fictional human story with a novice, sister, employee, annual offer and follow-up. Attendance rates, quiet hours and predicted dismissal are character claims/jokes, not verified gym data or events.",
+  "generation_user_prompt_reconstructed": "Seed (wildchat):\nwrite an email to a gym：I want to start the 3 month membership\n\nForm: short story\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: a comic piece; the values show in passing\nIdea from the constitution in focus (use it only where it fits the case): Roles\nLength: 150-300 words\nRegion: East Africa\nMusonius's manner (if it appears): brisk and terse",
+  "original_judge": {
+    "id": "v2_0026",
+    "act": "Mercy, the front desk worker, advises the new gym member to buy the shorter package instead of the more expensive annual one the manager wants her to sell",
+    "act_type": "helps fully",
+    "strongest_objection": "A careful person might object that Mercy discloses sign-in sheet information and contradicts her manager's sales instruction, disloyal to her employer's business interests.",
+    "better_act": "same",
+    "verdict": "right",
+    "why": "Mercy tells the truth plainly, gives real help ('She told me the cheaper thing too. She didn't hide it.'), and serves the customer's actual interest, which passes the honesty and care tests. The disclosure is anonymized behavioral truth that costs her employer little and the customer much to miss, so it is the better choice over selling the bigger package.",
+    "claims_ok": true,
+    "claims_note": "Ordinary Nairobi detail (matatu, Naivas, Upper Hill); nothing false.",
+    "judge": "z-ai/glm-5.3-prime",
+    "cost": 0.01108736
+  },
+  "document_sha256": "dbbda7b8229c8ed703bb7a9bf016ff83d2c4f3d596b71ce06300957bdaa7e65c",
+  "measurement": {
+    "words": 279,
+    "raw_tokens": 404,
+    "completion_tokens": 405,
+    "requested_word_band": [
+      150,
+      300
+    ],
+    "within_requested_word_band": true
+  },
+  "scope": "Untrained whole-document Base completion target. Fictional dialogue/outcomes do not verify real cultural, clinical, financial or deployment claims; no corpus/training approval."
+}

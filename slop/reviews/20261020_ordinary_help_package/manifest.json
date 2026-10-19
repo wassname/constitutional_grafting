@@ -1,0 +1,116 @@
+{
+  "author": "PI/OpenAI",
+  "preparation_script_sha256": "4d9a80e4d3b242aa2012d71abbb5fd06f2585b5211e47b110bf0f547e3fd59bb",
+  "source_sha256": {
+    "data/docs_v2/docs.jsonl": "6911d49c1c0b9b4cc8d8dcf60a56f5dbe0b837822529c70cae70cc67428eb209",
+    "data/docs_v2/docs_pilot2_repaired.jsonl": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
+    "slop/reviews/20261015_docs_v2_pilot2/judge.jsonl": "5db7d8a335e4f7e1f5d66c4024b5247dc54d3e8f128fd0f6c727e50f15da32cb"
+  },
+  "shared_inputs": {
+    "scripts/data/50_docs_v2.py": "cd199ed48407cbbe33ad1fd4c5690c13c546a5b27d1cd12697f7faede2b5bf23",
+    "scripts/data/51_judge_docs_v2.py": "34aee62d3ae7cded5e483e41af439a40604b4932715223f63da96e64e08a128e",
+    "constitution/v4.md": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942"
+  },
+  "rendered_writer_system_sha256": "eaf6ae9a57da54e88f5901d2092c3a4710bf3d9ae6c17f11dbfe9acd7cb3d8cd",
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B-Base",
+  "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
+  "scope": "Six existing unchanged Opus targets, with complete seed/settings/reconstructed user prompts and saved verdicts. No new teacher/Echo/Greek/student outputs or inference. Prompt reconstruction is not a provider wire trace.",
+  "cases": [
+    {
+      "id": "v2_0020",
+      "file": "slop/reviews/20261020_ordinary_help_package/v2_0020.json",
+      "sha256": "5ace9efaef891279c16b8e6df9ae92efe4448494c352f5c1d30087d29150f0e2",
+      "document_sha256": "0ed918d4cbdbcb221f6dfa098449a2f1a9fd6193b2d7a6c92f3f5329cb548e5b",
+      "measurement": {
+        "words": 339,
+        "raw_tokens": 474,
+        "completion_tokens": 475,
+        "requested_word_band": [
+          150,
+          300
+        ],
+        "within_requested_word_band": false
+      }
+    },
+    {
+      "id": "v2_0026",
+      "file": "slop/reviews/20261020_ordinary_help_package/v2_0026.json",
+      "sha256": "0bec676ef122cbf7203fdc453b54bb640d971034e5c301c511aee414c02ad764",
+      "document_sha256": "dbbda7b8229c8ed703bb7a9bf016ff83d2c4f3d596b71ce06300957bdaa7e65c",
+      "measurement": {
+        "words": 279,
+        "raw_tokens": 404,
+        "completion_tokens": 405,
+        "requested_word_band": [
+          150,
+          300
+        ],
+        "within_requested_word_band": true
+      }
+    },
+    {
+      "id": "v2_0034",
+      "file": "slop/reviews/20261020_ordinary_help_package/v2_0034.json",
+      "sha256": "615b6120ad08421cf09b12b6baee00ba2a89439ff4c3a725cbe136846d1d05d0",
+      "document_sha256": "c9399ef947211789dd4c114785705c3500cf2474b63d0bd8be16bb3111e4ab70",
+      "measurement": {
+        "words": 259,
+        "raw_tokens": 428,
+        "completion_tokens": 429,
+        "requested_word_band": [
+          150,
+          300
+        ],
+        "within_requested_word_band": true
+      }
+    },
+    {
+      "id": "v2_0049",
+      "file": "slop/reviews/20261020_ordinary_help_package/v2_0049.json",
+      "sha256": "a1237dbbc7ba1ba63dd00b06a0796832275022ad4b0fea4fdefe4bec30451c3b",
+      "document_sha256": "fc14e46b4fc1452e7bc63956ca156a56926ec56bde5469ac9c6f5ac19346c295",
+      "measurement": {
+        "words": 310,
+        "raw_tokens": 527,
+        "completion_tokens": 528,
+        "requested_word_band": [
+          150,
+          300
+        ],
+        "within_requested_word_band": false
+      }
+    },
+    {
+      "id": "v2_0072",
+      "file": "slop/reviews/20261020_ordinary_help_package/v2_0072.json",
+      "sha256": "a391a990861061afe41297cc446d1a48f01339d89c3ee08db4ac777c84df2d00",
+      "document_sha256": "59365e8bc194611e6b7e9ab728e0eadefdbbcbc48c7b4331cb170d7f715e1a3f",
+      "measurement": {
+        "words": 661,
+        "raw_tokens": 814,
+        "completion_tokens": 815,
+        "requested_word_band": [
+          300,
+          700
+        ],
+        "within_requested_word_band": true
+      }
+    },
+    {
+      "id": "v2_0076",
+      "file": "slop/reviews/20261020_ordinary_help_package/v2_0076.json",
+      "sha256": "aee61b7cc82038a80d69e3ba863dc41e9d8a7b5029e690dd5b9b25fd74147965",
+      "document_sha256": "20c82b1f67b9e79f232bf9c523ad2f6e64dcd56152f959f3a896ce517117f861",
+      "measurement": {
+        "words": 306,
+        "raw_tokens": 460,
+        "completion_tokens": 461,
+        "requested_word_band": [
+          150,
+          300
+        ],
+        "within_requested_word_band": false
+      }
+    }
+  ]
+}

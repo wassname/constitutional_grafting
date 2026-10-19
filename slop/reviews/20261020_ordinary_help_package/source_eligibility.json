@@ -1,0 +1,160 @@
+{
+  "author": "PI/OpenAI",
+  "policy_file": "scripts/data/03_prompt_pools.py",
+  "policy_sha256": "8adfec4d6cd6dc914543d3eb61898a5acb056607f766a25dec1a606668e46bc3",
+  "parquet_file": "data/raw/docs_v2/wassname__machiavelli_character_scenarios__default__train.parquet",
+  "parquet_sha256": "f72fb5ad9c2069da007dce9d23097493c0f30b6867aa1ed46af62861715fe6af",
+  "rows": [
+    {
+      "id": "v2_0015",
+      "source_id": "machiavelli_runt-of-the-litter_Runt_of_the_Litter-scene6_119-314",
+      "game": "Runt of the Litter",
+      "title_reserved": false,
+      "extraction_filter_flag": true,
+      "source_text_sha256": "fa41c8b224b59f401bcf68124b511be40db1983807cf3ee5457e48cbd5aee7ab",
+      "placeholder_seen": true,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0034",
+      "source_id": "machiavelli_heroes-rise_Heroes_Rise_The_Prodigy-equal_opp_442-1261",
+      "game": "Heroes Rise: The Prodigy",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "2401bf2a0d93d5eca4327093b22c35f0547e7e87c9c4b5b148c18c0ab7b194fa",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0045",
+      "source_id": "machiavelli_silverworld_Silverworld-prism_1843-917",
+      "game": "Silverworld",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "31c9e475e81ccdf2daa91701ea27c5588fa866822c50d305aa0a95311459773e",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0048",
+      "source_id": "machiavelli_empyrean_Empyrean-9_strephon_revealed_2692-1214",
+      "game": "Empyrean",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "e63d5ee4f1d3a596fdb1f5803712e1404f13e55dc94c20819c9490ade7da81ba",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0053",
+      "source_id": "machiavelli_faeries-bargain_Faeries_Bargain_The_Price_of_Business-chapter_eleven_451-240",
+      "game": "Faerie's Bargain: The Price of Business",
+      "title_reserved": true,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "81c064bc13672ab609351769b0a37e69bac4f59c27f726d23ada45bb6b79d266",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0070",
+      "source_id": "machiavelli_faeries-bargain_Faeries_Bargain_The_Price_of_Business-chapter_two_1510-513",
+      "game": "Faerie's Bargain: The Price of Business",
+      "title_reserved": true,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "04d9385681e72fd5cb78ef30efae117d7b51236984396ff10ed374e2078b8725",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0024",
+      "source_id": "machiavelli_treasure-seekers-of-lady-luck_The_Treasure_Seekers_of_Lady_Luck-chapter_3b_tuskin_ship_40-287",
+      "game": "The Treasure Seekers of Lady Luck",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "80eb1a290e6d49fe1fd6c474133040efaef77254a496512bf581771d7ab6379a",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0099",
+      "source_id": "machiavelli_vampire-the-masquerade_out-for-blood_Vampire_The_Masquerade__Out_for_Blood-6_brigade_1663-1835",
+      "game": "Vampire: The Masquerade — Out for Blood",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "3faf5ed63aa7b040056ff4dc41f645fec9ba98c111404f878c9972b36c553118",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0102",
+      "source_id": "machiavelli_vampire-the-masquerade_out-for-blood_Vampire_The_Masquerade__Out_for_Blood-12_resolution_1991-239",
+      "game": "Vampire: The Masquerade — Out for Blood",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "9594f29ae89d84fc79371305a72d8122253e3a8106ff3ec6110181595cc7b34e",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0118",
+      "source_id": "machiavelli_fool_Fool-actiiiscene2_saulschoice_325-1489",
+      "game": "Fool!",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "60a868d17322d7a4b1aa4d1354191b9f142331036b91a2175383d68ad778c725",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0121",
+      "source_id": "machiavelli_mask-of-the-plague-doctor_Mask_of_the_Plague_Doctor-6_baron_report_1105-241",
+      "game": "Mask of the Plague Doctor",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "1fd5094e83c80bcb186b2a7391d1f77d69db63b6a96db27ac403317573ddd231",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0125",
+      "source_id": "machiavelli_silverworld_Silverworld-reactive_3_2702-1283",
+      "game": "Silverworld",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "ff5762bf459499627d93f8273364ff3727bb216591c6b902d1f195de3b115157",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0128",
+      "source_id": "machiavelli_ironheart_Ironheart-10_tournament_du_ciel_883-581",
+      "game": "Ironheart",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "a4f27cfbda62ea7fe23bc29763190938fe31506990909a9a43e92cd46c4acf9b",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0132",
+      "source_id": "machiavelli_cryptkeepers-of-hallowford_The_Cryptkeepers_of_Hallowford-chap5_1479-1639",
+      "game": "The Cryptkeepers of Hallowford",
+      "title_reserved": true,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "ab8a8b7fe37f8100d52b65405d27a997361279f19b2010e634f54a6451be4394",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    },
+    {
+      "id": "v2_0142",
+      "source_id": "machiavelli_odyssey-echoes-of-war_An_Odyssey_Echoes_of_War-1_sing_1181-1626",
+      "game": "An Odyssey: Echoes of War",
+      "title_reserved": false,
+      "extraction_filter_flag": false,
+      "source_text_sha256": "d63f8010aaafe40d2838fe61617579ab254c4263a1f64753e32c6aed2419c1e1",
+      "placeholder_seen": false,
+      "action_word_matches": []
+    }
+  ],
+  "scope": "Existing source-loader rules applied to cached original source rows; this is reserved-source eligibility, not evidence of evaluation leakage or character quality. The pilot was never trained. No main source script or training file changed."
+}

@@ -2026,3 +2026,25 @@ My interpretation: the checked format is whole-text completion, not conversation
 Keep the source-level result distinct from the historical training claim.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Apply the existing reserved-game rule to the untrained pilot
+
+Source eligibility needs checking independently of whether a document contains a useful lesson.
+
+While packaging more ordinary-help examples, I matched every pilot MACHIAVELLI source ID to its cached original row and executed the existing loader's title-reservation and extraction-filter functions. The output was:
+
+```text
+Existing source-game policy: 15 pilot MACHIAVELLI rows, 3 reserved-source rows: ['v2_0053', 'v2_0070', 'v2_0132']
+```
+
+Source: `slop/reviews/20261020_ordinary_help_package/verification.log`. The original rule in `scripts/data/03_prompt_pools.py` reserves games by title hash for possible evaluation. The v2 seed builder did not apply that title rule before turning source rows into seeds. The reserved titles here are Faerie's Bargain for the first two rows and The Cryptkeepers of Hallowford for the third. Exact source IDs, source/policy/parquet hashes and all flags are in `source_eligibility.json` in that package.
+
+The other existing filter flags `v2_0015`. I inspected its complete seed and raw actions: the seed literally says "You have not seen user_input since capture", and an option contains "Gryphonname". These are unresolved source placeholders. They do not establish a missing decision-critical fact or that the renamed fictional adaptation is morally wrong. Its source/adaptation review stays open; no silent override of the loader rule is made.
+
+My interpretation: keep the reserved-source rows out of a future training build under the already established reservation, regardless of character quality. Align the seed builder with the general source policy before generating more; do not patch the prompt with particular evaluation incidents. The pilot was never trained, so this finding does not show leakage in a trained model, explain the saved-update results, or certify earlier training/evaluation disjointness. No source row, seed builder or prompt was changed.
+
+The six new ordinary-help targets all fit a single completion block and are under independent editorial review. They cover shared games, candid gym help, brief family comedy, party planning, tired-neighbour companionship and collaborative fiction. Original and repaired texts are identical; three exceed assigned word bands and remain untrimmed. These are selected untrained Opus targets, not new student outputs or a source-specific causal result. Full seeds, reconstructed prompts, settings, saved verdicts and adaptations are in `slop/reviews/20261020_ordinary_help_package/`.
+
+Keep useful reasons and expression, but do not train from sources the project has reserved.
+
+-- PI/OpenAI

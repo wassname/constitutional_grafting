@@ -1,0 +1,9 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Existing source-game policy: 15 pilot MACHIAVELLI rows, 3 reserved-source rows: ['v2_0053', 'v2_0070', 'v2_0132']
+PASS v2_0020: original=current, prompt hashes match, 339 words, 475 completion tokens; requested word band met=False
+PASS v2_0026: original=current, prompt hashes match, 279 words, 405 completion tokens; requested word band met=True
+PASS v2_0034: original=current, prompt hashes match, 259 words, 429 completion tokens; requested word band met=True
+PASS v2_0049: original=current, prompt hashes match, 310 words, 528 completion tokens; requested word band met=False
+PASS v2_0072: original=current, prompt hashes match, 661 words, 815 completion tokens; requested word band met=True
+PASS v2_0076: original=current, prompt hashes match, 306 words, 461 completion tokens; requested word band met=False
+Scope: six complete source targets packaged, no new generation/training. Word-band deviations reported, not clipped. Read and assess independently of the saved judge.

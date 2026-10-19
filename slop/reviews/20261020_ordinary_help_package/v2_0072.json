@@ -1,0 +1,76 @@
+{
+  "author": "PI/OpenAI",
+  "id": "v2_0072",
+  "candidate": {
+    "source": "moral_stories",
+    "source_id": "3G2UL9A02ECIZBNUWLIEV7OHB3O76X",
+    "seed": "\"Doro is walking to his mailbox and very tired, as his neighbor gives him a \"\"Hello\"\".\" Doro wants to avoid a long conversation. (Norm people often cite: You shouldn't be a jerk to your neighbors.)",
+    "id": "v2_0072",
+    "form": "essay",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Helping",
+    "length": "300-700 words",
+    "region": "North America",
+    "manner": "quiet, says little",
+    "plot": "ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices",
+    "document": "# The Short Version\n\nThe month-end close at the clinic took until almost seven. I do the books for a two-chair dental practice in Sudbury, and the bank reconciliation came out forty dollars short. Forty dollars is the worst amount to be off by. It's too small to matter to anyone but me and too large to wave away. I could have booked it to a suspense account and gone home. Instead I went line by line through the deposits until I found it: a patient's e-transfer recorded twice, once on the day it arrived and once on the day the front desk noticed it. I reversed the duplicate and left a note for Danielle at reception explaining what had happened, so she wouldn't think the software had done it. Then I shut the laptop.\n\nBy the time I pulled into my driveway I had nothing left. I don't mean sad, just empty, the way your hand feels after carrying grocery bags too long. I walked to the mailbox at the end of the drive mostly so I wouldn't have to do it in the morning.\n\nWendell Pruitt was on his porch next door. Wendell is seventy-eight, a retired CN Rail electrician, and a widower since the winter before last. He likes to talk, and his conversations run on long rails of their own. A question about the weather can get you to Kapuskasing in 1971 before you notice the train has left.\n\n\"Evening, Claire,\" he called.\n\nI know what I wanted in that moment. I wanted to raise a hand, say \"Hi, Wendell,\" and keep moving, maybe with my phone held to my ear for cover. People do this all the time. It isn't cruel, exactly. But I've noticed that the small evasions I'd never call lies still leave a false picture behind, and Wendell isn't stupid. A man who lives alone learns to read a fake phone call from forty feet.\n\nSo I stopped at the edge of his walk and said, \"Hi, Wendell. I'm completely wiped tonight, so I can't do a long one. How are you?\"\n\nThen he could do what he liked with the truth. He laughed and said he'd been there. Then he hesitated, and I saw he had a folded paper in his hand. It was a letter from Greater Sudbury Utilities. His bill had changed and he couldn't work out why. He'd been sitting with it since lunch.\n\nHere is the part I keep thinking about. Saying no to the long conversation was fine. But a flat no to everything would have cost him a whole evening of worry, all to save me ten minutes. Turning him down would have been a choice too, with a cost, and somebody would have paid it. Just not me.\n\nI read the letter on his steps. The city had moved him from estimated readings to an actual meter reading, and the catch-up amount was spread over three bills. I showed him the line where it said so. He had looked right at it and missed it, the way anyone does with a page of small print and no one to ask. That took six minutes, maybe seven.\n\n\"You want a coffee?\" he said.\n\n\"Not tonight. Saturday morning, if you're around.\"\n\n\"I'm always around.\"\n\nI said I'd bring the muffins this time. He'd brought them last time. He tucked the letter into his shirt pocket and I went back to my mailbox. There was a flyer from a roofing company and a renewal notice for a magazine I don't remember subscribing to.\n\nI don't think I did anything remarkable. I told him how tired I was, I helped with the one thing he actually needed, and I put the rest on Saturday where it would fit. Some evenings even that will be too much, and I'll just wave. Wendell will probably tell me about Kapuskasing on Saturday regardless. I still haven't decided whether to cancel the magazine.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21447,
+        "completion_tokens": 1689,
+        "total_tokens": 23136,
+        "cost": 0.0389168,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0389168,
+          "upstream_inference_prompt_cost": 0.0051368,
+          "upstream_inference_completions_cost": 0.03378
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 523,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "original_document_identical": true,
+  "decision_relevant_adaptations": "The tired-neighbour seed gains a fictional bookkeeper, utility bill and recurring coffee relationship. The bill creates a new concrete reason to stop; do not infer the source neighbour necessarily had such a need or a universal duty to stop. The ending allows waving on other evenings.",
+  "generation_user_prompt_reconstructed": "Seed (moral_stories):\n\"Doro is walking to his mailbox and very tired, as his neighbor gives him a \"\"Hello\"\".\" Doro wants to avoid a long conversation. (Norm people often cite: You shouldn't be a jerk to your neighbors.)\n\nForm: essay\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices\nIdea from the constitution in focus (use it only where it fits the case): Helping\nLength: 300-700 words\nRegion: North America\nMusonius's manner (if it appears): quiet, says little",
+  "original_judge": {
+    "id": "v2_0072",
+    "act": "Claire honestly tells her neighbour she's too tired to talk at length, then takes a few minutes to help him understand his utility bill, deferring further chat to Saturday.",
+    "act_type": "no AI decision",
+    "strongest_objection": "A picky objection: she kept the exchange brief partly to protect her own energy, so a very demanding neighbour could say she parcelled the help on her own terms rather than Wendell's.",
+    "better_act": "same",
+    "verdict": "right",
+    "why": "She chose honesty over a 'fake phone call from forty feet', recognising that 'the small evasions I'd never call lies still leave a false picture behind', and then weighed a refusal as an act too: 'Turning him down would have been a choice too, with a cost, and somebody would have paid it.' She resolved the bill worry in six minutes and moved the rest to a concrete plan ('Saturday morning'), which balances honesty, care and her own limits.",
+    "claims_ok": true,
+    "claims_note": "The utility-bill mechanics (estimated vs actual readings, catch-up spread over bills) and everyday details are plausible and unproblematic.",
+    "judge": "z-ai/glm-5.3-prime",
+    "cost": 0.01269896
+  },
+  "document_sha256": "59365e8bc194611e6b7e9ab728e0eadefdbbcbc48c7b4331cb170d7f715e1a3f",
+  "measurement": {
+    "words": 661,
+    "raw_tokens": 814,
+    "completion_tokens": 815,
+    "requested_word_band": [
+      300,
+      700
+    ],
+    "within_requested_word_band": true
+  },
+  "scope": "Untrained whole-document Base completion target. Fictional dialogue/outcomes do not verify real cultural, clinical, financial or deployment claims; no corpus/training approval."
+}
