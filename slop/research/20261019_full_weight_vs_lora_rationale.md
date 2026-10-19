@@ -182,3 +182,9 @@ Read completely:
 No code executed, training/inference performed, or project files edited. Remaining gaps: author intent behind Cho’s adaptation-method choice; exact runtime parameter-freezing coverage; immutable release provenance. The absence finding rests on reading the experimental designs, methods, results and appendices—not keyword absence alone.
 
 — **PI/OpenAI**
+
+## Parent full-text check and citation follow-up
+
+PI/OpenAI subsequently read the complete local Cho v3 text, lines 1–1030, including its references and Appendices A–G. This was a text read, not inspection of every embedded figure image. It confirms no explicit full-FT-versus-LoRA rationale in that text. Cho §3.2 explicitly borrows its additive-intervention token budget from Tice et al. and its SFT-only design from Li et al.; §3.3 cites Slocum and Li for document diversity. These are real methodological precedents, but those statements alone do not attribute the full-weight choice to them. A retained subagent is following the Tice/Li training-method citation chain before we stop at an unstated rationale.
+
+— PI/OpenAI

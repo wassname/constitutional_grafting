@@ -1,15 +1,16 @@
 # AGENTS.md
 
 
-Research: train a virtue-ethics constitution into an open-weight model by grafting (document training on the Base model, weight change added to the instruct model), then constitution-matched SFT and cheap RL; evaluate on out-of-distribution moral evals.
+Research: train a virtue-ethics constitution into an open-weight model by document training on Base, then add that weight change to the matched, already post-trained Instruct model. Evaluate out-of-distribution reasoning and decisions, ordinary help and capability retention.
 
-- Start here: `slop/specs/20261007_virtue_graft_spec.md` (decision summary, user preferences, plan, appendices).
-- Before choosing data, graft strength, stage order or label projection, read `character-training-concepts` (`~/.agents/skills/character-training-concepts/SKILL.md`); it routes engineering decisions to full primary evidence. Weight-steering details remain in `steering-concepts` / `persona-steering`. Audit of missed or unused graft knowledge: `slop/research/20261012_grafting_engineering_audit.md`. -- PI/Sol, 2026-10-12
+- Canonical recipe and status: `README.md`, "Core method" and "Modifications and their status". The recipient already has instruction SFT/RL. Extra character-reply SFT or RL is not required by the grafting recipe. Our completed spectral runs nevertheless include extra character SFT; do not describe them as graft-only evidence. Spectral regularization acts during donor training; healing is an optional repair whose character retention remains unproven. -- PI/OpenAI
+- The original design and sources are in `slop/specs/20261007_virtue_graft_spec.md`; do not treat its extra stages as requirements of Praxis's constitutional experiment.
+- Before choosing data, graft strength, stage order or label projection, read `concepts-character-training`; it routes engineering decisions to primary evidence. Weight-steering details remain in `concepts-steering` / `steering-persona`. Audit of missed or unused graft knowledge: `slop/research/20261012_grafting_engineering_audit.md`. -- PI/OpenAI
 - Novel ML research. Not in your training data. Extrapolate carefully; read the spec's appendices F (first principles) and G (curvature) before changing them.
 - `slop/` = agent drafts (specs, research, oracle panels). Commit them. Sign your work.
 - `docs/papers/` = full-text sources as markdown. Add a row to a `docs/papers/manifest*.tsv`, then run `scripts/data/01_fetch_papers.sh`.
 - `scripts/` = runnable scripts, numbered by stage (`scripts/data/01_...`).
-- No code pipeline yet. When it exists: uv, justfile, `just fast-dev-run` (see the `setup-repo` skill).
+- Pipeline entry points: `scripts/data/`, `scripts/train/`, `scripts/eval/` and the justfile. Use uv; smoke-test conventions: `repo-setup`. -- PI/OpenAI
 - Reference code (git submodules in `docs/vendor/`, shallow; read before writing a stage, copy their choices unless we name a reason not to). Survey: `slop/research/20261009_reference_code.md`.
   - `msm/`: Model Spec Midtraining (Li, Price, Marks, Kutasov 2026, Anthropic Fellows). Spec → synthetic documents on the base model, then AFT chat SFT; Qwen 32B. Closest to our plan.
   - `lasr_teaching_claude_why/`: replication of Anthropic's *Teaching Claude Why* six-stage difficult-advice pipeline, QLoRA SFT on Qwen3-32B, evals (agentic misalignment, ODCV, Arena-Hard, MMLU).
@@ -21,6 +22,20 @@ Research: train a virtue-ethics constitution into an open-weight model by grafti
   - Local books (wassname's calibre library, not in git): `~/Documents/books/<Author>/<Title (id)>/*.txt|epub` (406 authors). Stoic and classical sources include Epictetus, Seneca, Marcus Aurelius, Cicero, Plutarch, Diogenes Laertius and the "Stoic Six Pack" collections (`find ~/Documents/books -iname '*stoic*'`). Use public-domain translations as seeds; modern books (Robertson, Irvine) are copyrighted.
   - `praxis_grafting/`: Praxis *Grafting beliefs* (Nutter et al. 2026): graft code, anchored graft (docs+replay minus replay-only control), coherence and reality-drift evals. Geodesic (`github.com/GeodesicResearch`) releases data on HF, little generation code.
 
+
+## Graft parameterization: keep LoRA
+
+Use LoRA for the document graft. Full fine-tuning requires an explicit comparison decision; do not switch merely because Praxis's large constitutional experiment used full checkpoints. This is a practical project choice, not a finding that LoRA is better. Neither Praxis nor Cho establishes a matched full-FT-versus-LoRA winner. -- PI/OpenAI, recording wassname's choice
+
+Praxis §2.1 explicitly permits both:
+
+> Grafting trains an adapter or full-rank weight update Δ by fine-tuning on synthetic documents from the base model.
+
+Its constitutional experiment reuses Cho's released checkpoints; §4.2 states:
+
+> We could not compare to the native recipe, since we were not able to train additional models at this scale (their mid-training processed ∼1B tokens on 88 GH200s).
+
+Sources: [Praxis](docs/papers/2026_nutter_grafting-beliefs.md), §§2.1 and 4.2. This supports checkpoint reuse and resource constraints, not a measured preference for full FT. [Cho](docs/papers/2026_cho_constitutional-midtraining.md), §§3.2 and D.1, describes its training setup but gives no explicit reason for choosing full-model training over LoRA. That reason remains unknown; do not turn an unstated rationale into an author claim. Full-text coverage, configuration evidence and limitations: [source audit](slop/research/20261019_full_weight_vs_lora_rationale.md). -- PI/OpenAI
 
 ## Gotchas --- wassname
 
