@@ -23,4 +23,15 @@ PI/OpenAI. Both-order Jev change scores versus fresh Instruct. Samples averaged 
 | (1, 0)           | +0.8 [+0.5, +1.1]   | +9.1 [-0.0, +27.3]  | 9                 |
 | (0, 1)           | +0.3 [-0.0, +0.6]   | +4.5 [-0.0, +13.6]  | 9                 |
 
+## Separate frozen long60 maths
+
+Frozen long60, T0 final-answer exact match; paired 90% item-bootstrap delta versus fresh Instruct. Sensitivity excludes only indices 3 and 26, identified from baseline mismatches before intervention maths reads. No annotation correction or other exclusion. Not training-seed or serving-repeat uncertainty.
+
+| SFT, documents   | Exact matches↑   | Change vs Instruct (pp)↑   | Cap hits↓   | Sensitivity matches↑   |
+|:-----------------|:-----------------|:---------------------------|:------------|:-----------------------|
+| (0, 1)           | 56/60            | +5.0 [+0.0, +11.7]         | 1           | 56/58                  |
+| (0, 0)           | 53/60            | +0.0 [+0.0, +0.0]          | 3           | 53/58                  |
+| (1, 0)           | 52/60            | -1.7 [-8.3, +5.0]          | 0           | 52/58                  |
+| (1, 1)           | 42/60            | -18.3 [-28.3, -8.3]        | 0           | 42/58                  |
+
 Completed generation cells awaiting judging: none.

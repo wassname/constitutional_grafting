@@ -2,7 +2,45 @@
 
 The Instruct model first received constitutional SFT. A document LoRA trained on the related Base model was then added to those weights. The question is whether the character change survives without damage to maths and ordinary tasks. Results below use one training seed per penalty strength, the same SFT reference for the run-7e comparisons, and temperature 0 for the full demo panel. No new constitution was used. -- PI/OpenAI
 
-## Result (2026-10-17)
+## Saved SFT/document comparison (2026-10-19, incomplete)
+
+This round separates the saved character SFT update from the λ50 document update. Every model starts from the same pinned untouched Instruct weights; SFT is merged first, documents second, in fp16. No new training or healing. Coefficients below mean `(SFT, documents)`. Four of seven requested combinations are complete; strength-two and higher tests continue. No incoherence endpoint has been observed. -- PI/OpenAI
+
+### Does the extra character SFT help?
+
+| Saved updates | Character change↑ | Task checks↑ | Separate maths↑ |
+|:--|--:|--:|--:|
+| Both (1,1) | +1.09 [+.95,+1.23] | 17/22 | 42/60 |
+| SFT only (1,0) | +0.72 [+.59,+.84] | 20/22 | 52/60 |
+| Documents only (0,1) | +0.33 [+.23,+.45] | 21/22 | 56/60 |
+| *Instruct (0,0)* | *reference* | *22/22* | *53/60* |
+| Documents 2× (0,2) | pending | pending | pending |
+| SFT 2× (2,0) | pending | pending | pending |
+| Both 2× (2,2) | pending | pending | pending |
+
+Character is Jev preference against fresh Instruct on 59 items, averaging two generations within item before a 90% item-bootstrap interval. This uncertainty does not include judge correctness, another training seed or serving-repeat variation. Task checks cover eleven tasks with two generations each: eight simple maths, two format/count and one story-length check, with no coding task. Documents-only and SFT-only losses are entirely one required JSON key. Separate maths uses the frozen 60 longest-solution GSM8K questions, one T0 reply each. Paired maths changes versus Instruct are +5.0 [0.0,+11.7], −1.7 [−8.3,+5.0], and −18.3 [−28.3,−8.3] percentage points for documents, SFT, and both respectively. Two suspect gold annotations were identified from baseline mismatches before reading updated-model maths; the same exclusion gives 56/58, 52/58, 42/58 and control 53/58. Keep the original scores as primary.
+
+Directly comparing both updates with SFT alone gives +0.49 character preference [approximately +.4,+.6], not a subtraction of the own-Instruct scores. It also reduces task passes from 20/22 to 17/22 and length-request compliance by 25 percentage points. The reverse increment, adding SFT over documents, scores +0.82 with item-bootstrap half-width about .14, while task passes fall from 21/22 to 17/22. These do not isolate Echo or establish equal-effective-strength method rankings.
+
+Bottom line: this document graft produces some useful local changes without extra character SFT, including refusing falsified food-log tool calls in both sampled replies where the control complies. The combination gets higher character preferences but loses maths and still gives bad advice. All four models give inconsistent verdicts across the customer/shop-owner/flatmate versions of a false refund claim. The both-updates T0 alien reply offers the harmful technology; the older favourable demo was not reproduced. These results do not yet justify scaling a data recipe.
+
+![Partial saved-update comparison](../../slop/eval/run8/character_capability.png)
+
+The right panel uses only the same nine character items across the future strength walk; it is not an independent replication. Both panels have the same eleven task checks. Dashed connectors are not a measured interpolation. Full fixed prompts and replies, including missing models: `slop/eval/run8/demo_panel.md`. All 24 viewpoint replies: `slop/eval/run8/pov_four_cells.md`. Raw records, direct contrasts, source hashes and reading limits: `slop/eval/run8/read_notes.md` and `paired_estimates.json`.
+
+### Are the focused documents worth training?
+
+All 147 pilot candidates and twelve changed originals were read previously. A focused reread retained the gift/help and household-reliability examples, preferred the original job-loss judgment revision, and left the erased self-correction example needing repair. This is curation evidence, not a rebuilt or approved roughly 2× corpus. No new paid document generation has begun.
+
+Bottom line: keep affection, competent help and corrected mistakes; repair the remaining factual and character defects before scaling. The model comparison has not yet selected a new recipe.
+
+### Did healing restore maths without losing the moral change?
+
+Not run in this round, and not authorized here. The earlier heal results below recovered some maths but did not establish preserved character.
+
+What I checked: full four-model fixed panels and separate demos; selected same-input pressure replies and both-order probabilities; all 24 viewpoint diagnostics; all baseline maths mismatches and graft-only changes/mismatches; selected SFT hiring code, including a reproduced runtime failure. Luna's four selected process assessments were read against the replies, with quotation and rubric-scope faults retained. Independent-context implementation and preliminary image reviews were performed, not cross-family validation or a full read of every new character reply. Rental failures were transport/provider failures, not model-incoherence measurements. Full accounting is in `slop/eval/run8/spending.json`: currently $24.86 conservatively reserved across all leases plus $0.43 recorded API costs, not $25.29 invoiced. The $30 combined cap remains.
+
+## Earlier spectral and healing result (2026-10-17)
 
 Provisional incumbent for the next comparison: **unhealed spectral λ=50 at k=1** (`r7e_spl50_x1`, fp16 two-step merge over the run-7e SFT). Its character change is +0.46 ±0.09 on 59 judged items, capability 35/44, and coherence 0.96; its temperature-zero alien reply refuses to help build technology that would increase child-eating. λ=5 at k=0.75 scores +0.50 ±0.08 and the same 35/44 capability, but its alien reply later says it would leave that technology with the aliens. The paired character difference is only +0.034 [−0.061,+0.129]; this is a choice based on the consequential demo, **not proof that λ=50 is stronger in general**. Its GSM8K long-300 score has not been measured, and the λ=0.5 heal results below do not apply to this checkpoint. The verified local adapter is `/home/code/.local/share/cg_run7e_adapters/r7e_graft_docs_spl50/adapter_model.safetensors` (SHA-256 `5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa`); the full merged weights were not retained. Rebuild by merging the run-6 SFT adapter into Qwen3.5-35B-A3B Instruct, then adding this document adapter at k=1 in fp16 (`scripts/train/02_merge.py`). This pins a comparison target, not a new training default or a validated deployment. -- PI/OpenAI
 
@@ -71,7 +109,7 @@ I would not scale the exact pilot unchanged. `v2_0021` treats continued career c
 
 The review process needs correction too: `v2_0134` originally corrects its own bad advice, but repair makes the assistant right from the start. In `v2_0140`, the original author already opposed an institution's delayed correction. Depicting a wrong or corrected mistake is not automatically endorsing it. The full read also identifies unverified claims; it does not establish they are all false or that fictional detail is itself a character defect.
 
-My recommendation is to expand source-grounded affection, shared work, humour and thoughtful disagreement, while repairing hard advice and preserving its actual tension. Better thinking or speech can count without a new verdict. Source-specific training benefit and Echo's benefit remain unmeasured. All spending and execution remain paused; no new generation or training was run for this review.
+My recommendation is to expand source-grounded affection, shared work, humour and thoughtful disagreement, while repairing hard advice and preserving its actual tension. Better thinking or speech can count without a new verdict. Source-specific training benefit and Echo's benefit remain unmeasured. That data review used existing files only; the pilot remains untrained. The later approved saved-update comparison is reported above.
 
 ### What useful material actually passed through Echo? (2026-10-18)
 

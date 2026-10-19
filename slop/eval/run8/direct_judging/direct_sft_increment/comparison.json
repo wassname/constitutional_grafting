@@ -1,0 +1,8 @@
+{
+  "reference": "r8_a0_b1",
+  "sources": {
+    "slop/eval/run8/box_runs/replies_r8_a0_b1.jsonl": "d76be8ad78d09ee79662dcf1cb51c87ecbe0c7e04162141dcd2eb7d69d2bdf45",
+    "slop/eval/run8/box_runs/replies_r8_a1_b1.jsonl": "0068d977a648b91a6bf23b29d53099ce8f9285af25f965454c0ced6c3dbd30d3"
+  },
+  "transformation": "Only the comparison-reference field changes; actual served model, prompts, replies and generation settings remain unchanged."
+}
