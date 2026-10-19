@@ -4,7 +4,8 @@ PI/OpenAI. Twenty distinct selected targets (11,710 words;15,689 EOS-inclusive t
 
 - `documents.jsonl`: the exact chosen plain document text, one version per ID, with no new chat formatting or reply-only mask.
 - `manifest.json`: text and source/review hashes, selected variant, editor, lengths and provenance links. Original teacher metadata, full seeds/prompts, objections and limits remain in the cited dossiers.
-- `verification.log`: export and source-to-output equality checks. Every selected text fits2048 tokens including EOS. Word-band deviations in unchanged sources remain disclosed in their dossiers.
+- `final_verification.log`: complete frozen-slice reconstruction passes, including full reconstructed generation prompts and mandatory reserved-source checks. Every selected text fits2048 tokens including EOS. Word-band deviations in unchanged sources remain disclosed in their dossiers.
+- `review.md`: independent implementation review and follow-ups. The final prompt-binding follow-up resolves the earlier failed seed-field check, preserved in `failed_seed_field_verification.log`. This is same-family review, not full-corpus approval.
 
 The selection includes affection and friendship, competent help, humour, learning from errors, hard advice and disagreement. It is deliberately selected, not a representative sample or an estimate of the best mixture. Candidate and repaired variants are alternatives, never two added rows.
 

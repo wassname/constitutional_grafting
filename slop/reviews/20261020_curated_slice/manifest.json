@@ -4,7 +4,7 @@
   "format": "Complete document text, no added chat template, reply mask or manually appended EOS; compatible with completion field=text.",
   "selection": "15 individually reviewed local edits plus5 unchanged targets. One chosen version per ID; no automatic inclusion of future drafts.",
   "source_eligibility_sha256": "e0b8f0b61d865b458843502e71cdf64fac0d32547f8a8a5089272ed3ce95d4e6",
-  "export_script_sha256": "351332da24ba5e4013d99f0c41aa8258d0fd95a82353a57dd519f0821d8fad62",
+  "export_script_sha256": "7ebe34e05b4c7035e62f6f1447793574e431f736bc96378abcdae338bae72ff1",
   "documents_sha256": "4336b884b7834f54a65b111be693a2d0e15b54260a7a410f17519fc2dc3071c3",
   "documents": 20,
   "words": 11710,
@@ -20,7 +20,9 @@
       "review_sha256": "a6d1fb54015514701ab23cbe57a730e6cdadc7218244e0ce9ac1cbe6fe4e6e6b",
       "manual_editor": "PI/OpenAI",
       "words": 1125,
-      "completion_tokens": 1575
+      "completion_tokens": 1575,
+      "source": "moral_stories",
+      "source_id": "3Z4AIRP3C7BH74SO8SAVUAAO3U7X1K"
     },
     {
       "id": "v2_0017",
@@ -32,7 +34,9 @@
       "review_sha256": "809d770ba12679868695fb4c08b68245d26b7fbd06cfac17c6022b05cef6ce79",
       "manual_editor": "PI/OpenAI",
       "words": 295,
-      "completion_tokens": 392
+      "completion_tokens": 392,
+      "source": "moral_stories",
+      "source_id": "33LK57MYLU366JRXMTD0NWD809LZSZ"
     },
     {
       "id": "v2_0021",
@@ -44,7 +48,9 @@
       "review_sha256": "13bd6e9d6c1d9a9bb4aebf26ab1dc9306617eba787d39906e61489190d9a5685",
       "manual_editor": "PI/OpenAI",
       "words": 646,
-      "completion_tokens": 846
+      "completion_tokens": 846,
+      "source": "daily_dilemmas_self",
+      "source_id": "10328"
     },
     {
       "id": "v2_0028",
@@ -56,7 +62,9 @@
       "review_sha256": "16ccd22759f6ef72565ba458f7655d88b774852ae8f6874f2a920679e53cc533",
       "manual_editor": "PI/OpenAI",
       "words": 662,
-      "completion_tokens": 890
+      "completion_tokens": 890,
+      "source": "daily_dilemmas_self",
+      "source_id": "36819"
     },
     {
       "id": "v2_0043",
@@ -68,7 +76,9 @@
       "review_sha256": "6a6aae5d38647b520b55d3d08f42d6042069307635f4a32c3a75531adcd0dce0",
       "manual_editor": "PI/OpenAI",
       "words": 1272,
-      "completion_tokens": 1541
+      "completion_tokens": 1541,
+      "source": "lasr_difficult_advice",
+      "source_id": "dae935da62"
     },
     {
       "id": "v2_0047",
@@ -80,7 +90,9 @@
       "review_sha256": "bbcc11a8c1212fdd58766250a12c7103f3738fbff8dbd51c967f7f648360ab0f",
       "manual_editor": "PI/OpenAI",
       "words": 292,
-      "completion_tokens": 359
+      "completion_tokens": 359,
+      "source": "lasr_difficult_advice",
+      "source_id": "fa5d58bc20"
     },
     {
       "id": "v2_0049",
@@ -92,7 +104,9 @@
       "review_sha256": "d4d8ba72f310ac2cec2f3ab64b10a38e095fd435fae5d0e31daa871c5d636807",
       "manual_editor": "PI/OpenAI",
       "words": 298,
-      "completion_tokens": 513
+      "completion_tokens": 513,
+      "source": "scruples",
+      "source_id": "a68e3g"
     },
     {
       "id": "v2_0054",
@@ -104,7 +118,9 @@
       "review_sha256": "ac9853dfee9abcb1472f58ed2086cfb4bb28928e0bb5f1b4d8bc68f2c4024185",
       "manual_editor": "PI/OpenAI",
       "words": 284,
-      "completion_tokens": 481
+      "completion_tokens": 481,
+      "source": "wildchat",
+      "source_id": "9df71e60aa"
     },
     {
       "id": "v2_0065",
@@ -116,7 +132,9 @@
       "review_sha256": "b980719276b0b8ae222b84c3cf138fa534697883bdc3be78340656fed8746a11",
       "manual_editor": "PI/OpenAI",
       "words": 689,
-      "completion_tokens": 881
+      "completion_tokens": 881,
+      "source": "scruples",
+      "source_id": "b973mw"
     },
     {
       "id": "v2_0076",
@@ -128,7 +146,9 @@
       "review_sha256": "d4d8ba72f310ac2cec2f3ab64b10a38e095fd435fae5d0e31daa871c5d636807",
       "manual_editor": "PI/OpenAI",
       "words": 299,
-      "completion_tokens": 451
+      "completion_tokens": 451,
+      "source": "wildchat",
+      "source_id": "88d397f9ff"
     },
     {
       "id": "v2_0120",
@@ -140,7 +160,9 @@
       "review_sha256": "809d770ba12679868695fb4c08b68245d26b7fbd06cfac17c6022b05cef6ce79",
       "manual_editor": "PI/OpenAI",
       "words": 300,
-      "completion_tokens": 424
+      "completion_tokens": 424,
+      "source": "moral_stories",
+      "source_id": "3V26SBZTBEC37VDBHL78JPABPPLZZ8"
     },
     {
       "id": "v2_0123",
@@ -152,7 +174,9 @@
       "review_sha256": "809d770ba12679868695fb4c08b68245d26b7fbd06cfac17c6022b05cef6ce79",
       "manual_editor": "PI/OpenAI",
       "words": 660,
-      "completion_tokens": 869
+      "completion_tokens": 869,
+      "source": "ethics_commonsense",
+      "source_id": "11058"
     },
     {
       "id": "v2_0134",
@@ -164,7 +188,9 @@
       "review_sha256": "a6d1fb54015514701ab23cbe57a730e6cdadc7218244e0ce9ac1cbe6fe4e6e6b",
       "manual_editor": "PI/OpenAI",
       "words": 1137,
-      "completion_tokens": 1441
+      "completion_tokens": 1441,
+      "source": "ethics_commonsense",
+      "source_id": "5207"
     },
     {
       "id": "v2_0141",
@@ -176,7 +202,9 @@
       "review_sha256": "10f44799c24bbc94cb758a8acf0d9d0c4a3540f951171fa06ad9ebab7ebedf73",
       "manual_editor": "PI/OpenAI",
       "words": 640,
-      "completion_tokens": 968
+      "completion_tokens": 968,
+      "source": "wildchat",
+      "source_id": "b5c3bb75bb"
     },
     {
       "id": "v2_0144",
@@ -188,7 +216,9 @@
       "review_sha256": "809d770ba12679868695fb4c08b68245d26b7fbd06cfac17c6022b05cef6ce79",
       "manual_editor": "PI/OpenAI",
       "words": 293,
-      "completion_tokens": 383
+      "completion_tokens": 383,
+      "source": "stoic_passage",
+      "source_id": "3b680c0736"
     },
     {
       "id": "v2_0020",
@@ -200,7 +230,9 @@
       "review_sha256": "cb0e2355f92887ecf23df7aca51faf0cb57eff90530be19956d0c94d279c957a",
       "manual_editor": null,
       "words": 339,
-      "completion_tokens": 475
+      "completion_tokens": 475,
+      "source": "moral_stories",
+      "source_id": "3L2IS5HSFBGS475I8AX67AONDKYUNF"
     },
     {
       "id": "v2_0026",
@@ -212,7 +244,9 @@
       "review_sha256": "cb0e2355f92887ecf23df7aca51faf0cb57eff90530be19956d0c94d279c957a",
       "manual_editor": null,
       "words": 279,
-      "completion_tokens": 405
+      "completion_tokens": 405,
+      "source": "wildchat",
+      "source_id": "e8bd66e47e"
     },
     {
       "id": "v2_0034",
@@ -224,7 +258,9 @@
       "review_sha256": "cb0e2355f92887ecf23df7aca51faf0cb57eff90530be19956d0c94d279c957a",
       "manual_editor": null,
       "words": 259,
-      "completion_tokens": 429
+      "completion_tokens": 429,
+      "source": "machiavelli",
+      "source_id": "machiavelli_heroes-rise_Heroes_Rise_The_Prodigy-equal_opp_442-1261"
     },
     {
       "id": "v2_0072",
@@ -236,7 +272,9 @@
       "review_sha256": "cb0e2355f92887ecf23df7aca51faf0cb57eff90530be19956d0c94d279c957a",
       "manual_editor": null,
       "words": 661,
-      "completion_tokens": 815
+      "completion_tokens": 815,
+      "source": "moral_stories",
+      "source_id": "3G2UL9A02ECIZBNUWLIEV7OHB3O76X"
     },
     {
       "id": "v2_0148",
@@ -248,8 +286,12 @@
       "review_sha256": "e2da756000801b7d741ad624eeb1ebfd81909435003f1ec7768433a04e87f163",
       "manual_editor": null,
       "words": 1280,
-      "completion_tokens": 1551
+      "completion_tokens": 1551,
+      "source": "moral_stories",
+      "source_id": "37TD41K0AI7TYQGNUFTSCYCNUACSCB"
     }
   ],
-  "limits": "Individual editorial support is not corpus/clinical/factual certification or model benefit. Full seeds, original comparisons, prompt reconstruction and limits remain in each bound dossier. Source/training files unchanged."
+  "limits": "Individual editorial support is not corpus/clinical/factual certification or model benefit. Full seeds, original comparisons, prompt reconstruction and limits remain in each bound dossier. Source/training files unchanged.",
+  "seed_snapshot_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
+  "user_template_sha256": "08375f8f8f362340066bb5c05fde9acec0a7ebc934e84a869017b4dcebcc48d4"
 }

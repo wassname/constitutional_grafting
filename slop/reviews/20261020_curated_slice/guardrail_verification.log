@@ -1,0 +1,9 @@
+PASS explicit metadata migration: only exporter hash, bound seed snapshot and row source identities added; document bytes unchanged from c46de3a
+PASS actual source guard rejects missing
+PASS actual source guard rejects mismatch
+PASS actual source guard rejects reserved
+PASS actual source guard accepts explicitly eligible fixture
+PASS actual overwrite guard permits empty output pair
+PASS actual overwrite guard rejects existing manifest.json
+PASS actual overwrite guard rejects existing documents.jsonl
+Scope: controlled execution of unchanged production guard AST nodes, not full training or independent semantic endorsement. No source corpus or document text changed.

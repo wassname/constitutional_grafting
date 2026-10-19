@@ -1,0 +1,4 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+PASS frozen20-row slice: exact chosen text, source/review hashes, EOS-inclusive bounds and reserved-source eligibility
+/workspace/2026/constitutional_grafting/slop/reviews/20261020_curated_slice/documents.jsonl
+No model generation, training-file change or training approval. Not the complete curated corpus.

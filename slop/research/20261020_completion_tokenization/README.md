@@ -23,12 +23,12 @@ Source inspection therefore predicts that the five overlength pilot documents ar
 
 ## Observed local result
 
-The first reference run completed successfully:
+The current reference run reports:
 
 ```text
 PASS completion reference frozen_docs: 1585 documents; 1585 chunks; 0 split documents; every input token plus EOS retained as a label
 PASS completion reference pilot: 147 documents; 152 chunks; 5 split documents; every input token plus EOS retained as a label
-PASS completion reference drafts: 13 documents; 13 chunks; 0 split documents; every input token plus EOS retained as a label
+PASS completion reference drafts: 15 documents; 15 chunks; 0 split documents; every input token plus EOS retained as a label
 ```
 
 The five pilot lengths become `[2048,232]`, `[2048,19]`, `[2048,10]`, `[2048,51]` and `[2048,355]` for `v2_0050`, `v2_0107`, `v2_0110`, `v2_0129` and `v2_0138`. These counts include appended EOS. No source token disappeared inside this tokenization check, and none of its labels is masked, despite `train_on_inputs=False`.
@@ -39,7 +39,7 @@ I read the complete decoded source text for the selected long `v2_0107` and repa
 
 That fragment loses the preceding case context. Here it is only the record's closing note, so this sample does not demonstrate losing the argument's conclusion. The other four overlength boundaries were not semantically reviewed in this check. The repaired cookbook remains one383-token block with an appended EOS and translator attribution in its text.
 
-Independent review found a boundary error in the earlier draft-length check:2048 raw tokens without EOS would pass, then become two fragments when EOS was appended. The local single-block check now counts EOS, while retaining the separate raw count for provenance. None of the thirteen current drafts was at that boundary. The optional check also exercises that boundary and the reference's131072-token cap; fixtures are recorded in `summary.json` and the execution log.
+Independent review found a boundary error in the earlier draft-length check:2048 raw tokens without EOS would pass, then become two fragments when EOS was appended. The local single-block check now counts EOS, while retaining the separate raw count for provenance. None of the fifteen current drafts is at that boundary. The optional check also exercises that boundary and the reference's131072-token cap; fixtures are recorded in `summary.json` and the execution log.
 
 Bottom line: for the checked corpus inputs, this completion implementation retains and fragments long texts, rather than simply clipping them at2048. Inputs beyond its131072-token ceiling can still be clipped; retention is not universal. It does not establish that every retained label contributed to historical training loss, or that all long documents remain useful when fragmented. Keep the actual prepared-cache/collator/loss-mask check open before training; no corpus or configuration was changed.
 
@@ -53,6 +53,6 @@ The optional section reuses unmodified source-extracted class bodies and `load()
 
 It checks all actual frozen donor documents, all untrained pilot documents and all current local drafts. Each reconstructed label/input array must exactly equal independent whole-text tokenization plus EOS; the prompt must be unchanged and each fragment must fit2048. Recorded measurements: `verification.log`, `tokenization.json`; compact counts and split rows: `summary.json`. Current input/executable hashes: `inputs.json`. The same entry point now generates these summaries and `examples.md`, rather than relying on a separate manual export. Current library versions are recorded, not asserted equal to the historical trainer. Full source text, integer labels/IDs and decoded fragments for one overlength pilot and one repaired commentary: `examples.json`.
 
-Independent-context review and follow-up are preserved in `slop/reviews/20261020_completion_tokenization_review.md`. The reviewer read the source, verifier, compact outputs and initial complete decoded examples. It did not execute the check, recalculate raw hashes or inspect the historical prepared cache. Its EOS concern and summary-synchronization concern are resolved within this local scope. The final repeat has a durable `exit_status.txt` of0; the earlier completed-output/unobserved-exit log is retained separately.
+Independent-context review and follow-up are preserved in `slop/reviews/20261020_completion_tokenization_review.md`. The reviewer read the source, verifier, compact outputs and initial complete decoded examples when there were thirteen drafts. The current check adds the two ordinary-help repairs; it does not extend that review's read coverage. The reviewer did not execute the check, recalculate raw hashes or inspect the historical prepared cache. Its EOS concern and summary-synchronization concern are resolved within this local scope. The final repeat has a durable `exit_status.txt` of0; the earlier completed-output/unobserved-exit log is retained separately.
 
 The existing raw-length check remains useful: fitting a document in one block avoids this particular context break. It does not prove actual historical training coverage. This investigation does not approve the corpus, change the sequence length or alter any source/training JSONL or generator/judge/repair prompt.

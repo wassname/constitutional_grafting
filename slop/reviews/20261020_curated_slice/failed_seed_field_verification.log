@@ -1,0 +1,6 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/slop/reviews/20261020_curated_slice/export.py", line 45, in <module>
+    assert dossier["seed"] == source["seed"]
+           ~~~~~~~^^^^^^^^
+KeyError: 'seed'
