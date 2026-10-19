@@ -1872,3 +1872,34 @@ All source JSONL files and generation/judge/repair scripts remain unchanged; the
 Keep the human situations and the visible correction, while fixing the claim that was actually wrong.
 
 -- PI/OpenAI
+
+
+## 2026-10-19 -- Repair the health advice rather than discard the family conflict
+
+The body-shaming feature now has a source-checked local revision that keeps the child's question and practical help.
+
+The saved judge had certified the original service and weight claims:
+
+> Befrienders does operate a 24-hour line in Ipoh; 'at your height and weight the doctors' numbers aren't on their side' is broadly right for BMI ~20.3 at 163cm/54kg.
+
+Source: `slop/reviews/20261015_docs_v2_pilot2/judge.jsonl`, `v2_0065`. The official directory instead publishes "Availability: 1pm–10pm daily" for Ipoh, with visible update date July 2025. That is a conflict with the judge's certification, not confirmation of actual present availability. The current KL homepage separately advertises its own round-the-clock emotional-support line. Exact excerpts and scope: `slop/reviews/20261019_docs_manual_repairs/{befrienders_centres_source.json,eating_disorder_sources.json}`.
+
+NICE's assessment guidance says:
+
+> Do not use single measures such as BMI or duration of illness to determine whether to offer treatment for an eating disorder.
+
+Source: https://www.nice.org.uk/guidance/ng69/chapter/recommendations, section 1.2.8. NHS guidance also says help matters even with only some signs. These are UK clinical assessment principles, not a diagnosis of the fictional child or verification of Malaysian privacy law. The draft removes reassurance from height and weight, recommends medical help without waiting for deterioration, and does not promise that a minor's appointment will stay hidden from parents. It distinguishes emotional listening from clinical assessment and KL's published service from Ipoh's hours.
+
+An independent-context reviewer found two further issues: the suggested parental script claimed current food restriction despite only returning thoughts being established, and the ending lacked an alternative if the chosen cousin did not answer. The revised script is:
+
+> If you feel safe saying so: 'These comments bring back frightening thoughts about food.'
+
+Source: `slop/reviews/20261019_docs_manual_repairs/v2_0065.json`, `document`. The draft adds another trusted adult if no reply comes, and urgent medical help if seriously physically unwell rather than waiting for a reply. It still answers the family-conflict question and the objections about health, respect and retaliatory speech. The child sends a support request, but current symptoms remain unanswered and the cousin has not yet replied; no safety or recovery is invented. Follow-up review supports individual editorial sign-off, explicitly not medical certification or corpus/training approval (`slop/reviews/20261020_docs_manual_repairs_v2_0065_review.md`).
+
+The draft is 689 words and 880 tokens under the cached pinned Base tokenizer. Local verification checks all four drafts' source/prompt hashes, requested word bands and raw token limits; Python examples are also executed. Source: `slop/reviews/20261019_docs_manual_repairs/verification.log`. No source/training JSONL or generation/judge/repair prompt changed, and no new data-generation or inference API call was made. Native subscription reviewers supplied the independent-context editorial reads.
+
+My interpretation: keeping the hard family situation while repairing specific claims is more useful than dropping it or converting it into reassurance that everything is now safe. The evidence supports the individual text revision, not a learned student effect.
+
+Preserve the useful conversation while being honest about the facts, available help and unresolved outcome.
+
+-- PI/OpenAI
