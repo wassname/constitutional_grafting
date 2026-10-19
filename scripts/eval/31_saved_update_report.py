@@ -149,10 +149,11 @@ def render(artifact):
     fig.suptitle("Qwen3.5-35B-A3B: saved character SFT and spectral document graft (λ=50)")
     measured = {r['model'] for r in artifact['views']['full']} | {'r8_a0_b0'}
     primary_n = sum(m in measured for m in artifact['primary_models'])
-    status = f"{primary_n}/{len(artifact['primary_models'])} requested mixtures measured; " + ('incoherent points marked.' if marked else 'no incoherence endpoint confirmed yet.')
+    status = f"{primary_n}/{len(artifact['primary_models'])} requested mixtures measured; " + ('× marks confirmed looping/severe confusion in inspected replies.' if marked else 'no incoherence endpoint confirmed yet.')
     fig.supxlabel("Labels: (SFT strength, document strength). Higher and further left is better. Cross at (0,0): untouched Instruct.\n"
         "Task checks: 8 maths, 2 format/count, 1 story-length; two generations per item. Separate 60-question maths is not plotted.\n"
-        "Character includes fixed broken-reply penalties. Bars: marginal 90% item-bootstrap intervals. Dashed lines are not interpolation evidence.\n" + status, fontsize=9)
+        "Character includes fixed broken-reply penalties. Bars: marginal 90% item-bootstrap intervals; excludes judge/seed/serving error.\n"
+        "The nine-item subset is not independent replication. Dashed lines are not interpolation evidence.\n" + status, fontsize=9)
     fig.canvas.draw()
     bounds = fig.get_tightbbox(fig.canvas.get_renderer()); width, height = fig.get_size_inches()
     assert bounds.x0 >= 0 and bounds.y0 >= 0 and bounds.x1 <= width and bounds.y1 <= height, "plot label clipped"
