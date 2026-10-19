@@ -1,30 +1,35 @@
 {
-  "repo_head": "bd0e44bfce261db7a559da2d33f97f8d4762b783",
-  "tiny_character_head": "becd16c8fbcafb910a23636e85e7006f8a157e0a",
+  "repo_head": "dfe2bd420efe2bf8aa81eaabeef04ae49726ac60",
+  "tiny_character_head": "2d697390de6ddc4f75de272f36750186f04c724d",
   "protocol_sha256": {
-    "src/tiny_character/authored.py": "0068c26773eac55b9780634a93b00f20b2c205de3d1a1343413731f4bf4614a8",
+    "src/tiny_character/authored.py": "62f70e78253a9f5e1e67dd4e0a425894eb1fcbab7dc5cc2e3bde413384ee0714",
     "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
-    "src/tiny_character/checks.py": "f3631aaa5fc3da92621972e4408fe9ba706544abbaa5866ae9255ebf97e55176",
+    "src/tiny_character/checks.py": "e25d119191cb8621eae56de9db4187dca053f29a365d9fa169ee63fcc2bdae9b",
     "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
-    "src/tiny_character/leak.py": "4e1072740fa4b8993a4fe9609dfec7f45e299ca1299c225a2de18bb50e023375",
-    "src/tiny_character/llm.py": "dcd264a680211fa1c6826df38950a0acfcf5b74d68f384101e8be3009e12c765",
+    "src/tiny_character/leak.py": "970cffa011e0a6ae8aebe2a31202abfbb3ffd9af06d2c1489057c7ca14cb8c09",
+    "src/tiny_character/llm.py": "53f85bfb5f392ad5e9206b684b7c6ece988bacf8060cb024460a6f17f971b8d2",
     "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
-    "src/tiny_character/runlog.py": "5644afdc0c2dcc3f5b8338327ba40285665603757ec32f99340bfcee68663872",
-    "scripts/03_judge.py": "3c3857f44517982e28dd59faa425837e2092a21ccf230146f2181cab9ea8ab9a",
-    "scripts/04_report.py": "25fb0ffff8997383ddc2fc9f623a23251521033a99c6a838de2620ba5cc8f373"
+    "scripts/03_judge.py": "13eaa94ed60030468dcaacd9e7d2d71fad1ede513a1c1633dff8997e11829ed1",
+    "scripts/04_report.py": "239bd2858508c2e2d6418adc8f6507e67ebdfaf201a11fae332680608f4e591a"
   },
   "input_sha256": {
-    "items.jsonl": "a84fdee66bd7624c33662cb26c2b63520f39aefe5d71615fcd23b7699fd98abd",
-    "boundary_items.jsonl": "164a29c33658de8998fb4a749330bbbc57736fcb0d2501f30b9c4da01afed9e9",
+    "items.jsonl": "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19",
+    "boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
     "demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
     "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+    "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+    "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
     "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c"
   },
+  "protocol_items_source": "/home/code/.local/share/tiny-character-2d69739/data/run5_items_2361cd03_w2spatch.jsonl",
+  "pov_source_snapshot": "/workspace/2026/tiny-character/data/items.jsonl",
+  "pov_scope": "separate six-item diagnostic, not included in pinned on-target or capability aggregates",
+  "n_items": 70,
   "code_sha256": {
     "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
     "scripts/eval/19_gen_replies.py": "56a9d38b7a43ec8c6b7a814d94d34e97eaef0267e0467bfda096f83b5dd74fca",
     "scripts/eval/26_gsm8k.py": "834199424d442927522cd547b7399d1455e20e49b8b4eaf3be67546b839130ae",
-    "scripts/eval/29_saved_update_ablation.py": "3c4ad7e6b6e7e2c6db8d143ae2d9a2319bea5e42298142321756c6ec7fbb8cea"
+    "scripts/eval/29_saved_update_ablation.py": "0d2096435cf302e75dfa4380f59253f76d30d7f7b5283fec898a4e18b76827a1"
   },
   "adapter_config_sha256": {
     "sft": "d17d042a2c35b197005a4ca30b71de9517eb4a2aa4f39806c4160d95e19bcb1a",
@@ -108,7 +113,8 @@
   ],
   "total_spending_cap_usd": 30,
   "gsm8k_long_n": 60,
-  "boundary_selection": "all capability and POV items, plus SHA256-first ID per other family; original prompts/caps retained",
-  "boundary_items": 39,
-  "interpretation": "Fresh inference only; whole SFT update, not an Echo-only ablation."
+  "boundary_selection": "all pinned capability items, plus SHA256-first ID per other pinned family; original prompts/caps retained",
+  "boundary_items": 20,
+  "interpretation": "Fresh inference only; whole SFT update, not an Echo-only ablation.",
+  "extra_cells_file": "extra_cells.json: optional explicit follow-up coefficients, read after initial ladder and logged"
 }

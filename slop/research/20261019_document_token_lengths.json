@@ -1,0 +1,48 @@
+{
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B-Base",
+  "revision": "0f0813072d2358973511097385626f21fcb6d422",
+  "sequence_len": 2048,
+  "scope": "Raw input token counts only. Does not establish trainer clipping/filtering or which tokens received loss. No model inference.",
+  "trained_documents": {
+    "rows": 1585,
+    "tokens": 2156435,
+    "over_2048": [],
+    "max_tokens": 2046
+  },
+  "untrained_pilot": {
+    "rows": 147,
+    "tokens": 151514,
+    "over_2048": [
+      {
+        "id": "v2_0050",
+        "tokens": 2279
+      },
+      {
+        "id": "v2_0107",
+        "tokens": 2066
+      },
+      {
+        "id": "v2_0110",
+        "tokens": 2057
+      },
+      {
+        "id": "v2_0129",
+        "tokens": 2098
+      },
+      {
+        "id": "v2_0138",
+        "tokens": 2402
+      }
+    ],
+    "max_tokens": 2402
+  },
+  "selected_full_lengths": {
+    "doc_13b0d0cee5": 1721,
+    "doc_ebfb219dee": 1160,
+    "v2_0017": 508,
+    "v2_0120": 436,
+    "v2_0123": 868,
+    "v2_0144": 423,
+    "v2_0148": 1550
+  }
+}

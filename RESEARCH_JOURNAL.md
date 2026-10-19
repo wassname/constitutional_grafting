@@ -1752,3 +1752,32 @@ My inference: conventional pretraining machinery inherited through prior experim
 There is a plausible inherited recipe, but still no reported alignment-document experiment deciding full FT against LoRA.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Greek ancestry, correction lessons and document lengths
+
+I checked which text was actually used before spending on more data.
+
+The Greek experiment writes a fresh document in Modern Greek and translates it into English; it is not a translation of the English comparison document. The generator says "Write the whole document in Modern Greek" before the DeepSeek translation call (`scripts/scratch/docs_v2_variants.py`, function `greek`). No Greek variant ID or complete normalized translation matched any local frozen training file. Pipeline wiring also points to the earlier frozen frontier corpus. Methods, costs, exact read coverage and defects: `slop/research/20261019_greek_training_provenance.md`. These unused variants cannot explain the displayed trained-model demos; their historical style review is not a student result.
+
+I reread the roommate document's original, repair, seed and both saved judge verdicts. The original explicitly says:
+
+> She's right, and I should have caught it. I treated his threat as setting the stakes for both of you, and that is exactly how stakes climb: each person matches the last move and calls it fair.
+
+The original judge acknowledges that correction, but its requested better act is:
+
+> Same final advice, but given at the start: endorse the apology, the text-request and the schedule, cut the counter-threat, and ask or flag uncertainty about local complaint-process rules before advising on them
+
+Sources: `data/docs_v2/docs.jsonl`, row `v2_0134`; `slop/reviews/20261015_docs_v2_pilot2/judge.jsonl`, same ID. The repair makes the assistant advise cutting the line from the outset. My interpretation: the repair probably weakens this particular lesson in admitting and correcting an actual mistake, while improving the first answer. This is a data-design trade-off, not measured learning. The original still needs review of its promotional framing and categorical claims; preserving the correction does not approve every sentence.
+
+I also checked raw document token lengths with the cached Base tokenizer against the saved graft's sequence limit:
+
+```text
+trained_documents rows 1585 tokens 2156435 over2048 0 max 2046
+untrained_pilot rows 147 tokens 151514 over2048 5 max 2402
+```
+
+Source: `slop/research/20261019_document_token_lengths.log`; IDs and method in the matching JSON and Markdown notes. Existing frozen documents fit under this tokenization. The pilot's long rows need a preparation check before training; raw length alone does not prove the actual loss mask.
+
+The approved coefficient comparison is being prepared under the combined spending cap; these data checks are not new model results.
+
+-- PI/OpenAI

@@ -133,7 +133,7 @@ def run():
                 tar.add(ROOT / name, arcname=name)
                 source_hashes[name] = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
             for path in OUT.iterdir():
-                if path.name in {"manifest.json", "items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "stop_paths.json", "gsm8k_long60.jsonl", "gsm8k_long60.jsonl.meta.json"}:
+                if path.name in {"manifest.json", "items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "pov.jsonl", "change.md", "stop_paths.json", "extra_cells.json", "gsm8k_long60.jsonl", "gsm8k_long60.jsonl.meta.json"}:
                     tar.add(path, arcname="runs/run8/" + path.name)
         (OUT / "executed_source_sha256.json").write_text(json.dumps(source_hashes, indent=2))
         remote("mkdir -p /workspace/cg; tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=60)

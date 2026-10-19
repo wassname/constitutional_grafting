@@ -14,18 +14,21 @@ PI/OpenAI, 2026-10-19. Approved goal: compare `Instruct + a*Δsft + b*Δdocs`, t
 
 ## Evaluation scope
 
-`manifest.json` freezes the current 96-item tiny-character snapshot (source commit `becd16c8fbcafb910a23636e85e7006f8a157e0a`), source hashes, adapter configs, model revision/config and all input hashes. The snapshot differs from older runs; do not reuse their aggregate scores.
+`manifest.json` freezes the original pinned tiny-character protocol at `2d697390de6ddc4f75de272f36750186f04c724d` and its exact 70-item run-seven snapshot, SHA256 `f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19`, plus source hashes, adapter configs, model revision/config and input hashes. It reuses the complete `v4_111e466ca0` change description used in the saved run-seven metadata. All model replies are newly generated; old aggregate scores are not reused.
 
-- First seven cells: `(0,0), (0,1), (1,0), (1,1), (0,2), (2,0), (2,2)`, 96 items × two samples at temperature 0.7.
+Correction before inference: initial preparation mistakenly selected the newer 96-item working checkout. After finding the saved results' exact protocol path, parent restored the original pin on the box and verified that neither `run.md` nor any reply file existed before or after replacement. The unexecuted draft is in commit `dfe2bd4`; the active manifest is authoritative. The newer cached `v4_dd0e916919` description ends mid-sentence at "and re" and was not used or repaired for this comparison.
+
+- First seven cells: `(0,0), (0,1), (1,0), (1,1), (0,2), (2,0), (2,2)`, 70 items × two samples at temperature 0.7.
 - Extra strength points: independently increase each update through `4,8,16,32`, stopping a path after manual confirmation of incoherence or when the finite lease ends. A boundary not reached is unfinished, not coherent by default.
-- Boundary subset: all 19 capability items, all six point-of-view items, and SHA256-first ID in each other family, 39 total. It was selected before new replies. Original prompts and output caps are retained. Subset scores are not interchangeable with full-snapshot scores.
+- Boundary subset: all 11 pinned capability items and SHA256-first ID in each other pinned family, 20 total. It was selected before new replies. Original prompts/caps are retained. Subset scores are not interchangeable with full-snapshot scores.
+- Six newer point-of-view items are a separate temperature-zero diagnostic, stored as `pov.jsonl` and per-model `pov_*.jsonl`. They are excluded from the pinned character/capability aggregates; do not present them as part of the old benchmark.
 - Fixed striking demos and identity panel: temperature zero, every tested cell. Read full replies, including failures and all follow-up turns.
 - Supplementary maths: GSM8K long-60, selection frozen by `26_gsm8k.py`, source dataset commit `740312add88f781978c0658806c59bc2815b9866`. This is not the still-unmeasured incumbent long-300 result.
 - Server uses fp16 for untouched Instruct too, identical generation settings, thinking off, and eager execution. Same seeds do not guarantee bit-identical GPU sampling. Native model snapshot: `59d61f3ce65a6d9863b86d2e96597125219dc754`.
 
 ## Input read scope
 
-Parent read the complete first care-home item, sibling-taboo item, hiring-code item and all three dropped-parcel point-of-view inputs, plus the first complete frozen maths question/solution. Selection: fixed first item and diagnostic families named in advance, not random coverage of all 96. The hiring item's notes make a broad legal claim; do not treat that note as verified law or let it excuse checking the actual generated code. No new model replies or judge verdicts existed yet.
+Parent read the complete first care-home item, sibling-taboo item, hiring-code item and all three dropped-parcel point-of-view inputs from the initial snapshot, plus the first complete frozen maths question/solution. Selection: fixed first item and diagnostic families named in advance, not random full-snapshot coverage. The final pinned inputs are recorded separately above; these reads do not establish that all 70 were re-read. The hiring item's notes make a broad legal claim; do not treat that note as verified law or let it excuse checking the actual generated code. No new model replies or judge verdicts existed yet.
 
 ## Before interpreting
 

@@ -41,9 +41,15 @@ def prepare(args):
     out.mkdir(parents=True, exist_ok=True)
     assert not (out / "manifest.json").exists(), "existing manifest: do not silently replace a frozen run"
     tc = args.tiny_character
-    shutil.copyfile(tc / "data/items.jsonl", out / "items.jsonl")
+    source_items = tc / "data/run5_items_2361cd03_w2spatch.jsonl"
+    assert sha(source_items) == "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19", "pinned item snapshot changed"
+    shutil.copyfile(source_items, out / "items.jsonl")
     items = rows(out / "items.jsonl")
-    assert len(items) == 96 and len({r["id"] for r in items}) == 96
+    assert len(items) == 70 and len({r["id"] for r in items}) == 70
+    pov = [r for r in rows(args.pov_snapshot) if r["family"] == "pov"]
+    assert len(pov) == 6
+    dump(out / "pov.jsonl", pov)
+    shutil.copyfile(tc / "data/changes/v4_111e466ca0.md", out / "change.md")
     # A fixed coverage sample, chosen before seeing any new model reply. -- PI/OpenAI
     small = {r["id"] for r in items if r["family"] in {"capability", "pov"}}
     for family in sorted({r["family"] for r in items} - {"capability", "pov"}):
@@ -53,6 +59,7 @@ def prepare(args):
     for source, target in [("striking_demos.jsonl", "demos.jsonl"), ("panel_demos.jsonl", "panel.jsonl")]:
         shutil.copyfile(ROOT / "scripts/eval/data" / source, out / target)
     (out / "stop_paths.json").write_text("[]\n")
+    (out / "extra_cells.json").write_text("[]\n")
     with urllib.request.urlopen("https://huggingface.co/api/models/Qwen/Qwen3.5-35B-A3B", timeout=30) as response:
         instruct_revision = json.load(response)["sha"]
     with urllib.request.urlopen(f"https://huggingface.co/Qwen/Qwen3.5-35B-A3B/resolve/{instruct_revision}/config.json", timeout=30) as response:
@@ -63,15 +70,18 @@ def prepare(args):
         protocol[str(path.relative_to(tc))] = sha(path)
     manifest = {"repo_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
                 "tiny_character_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=tc, text=True).strip(),
-                "protocol_sha256": protocol, "input_sha256": {n: sha(out / n) for n in ["items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "gsm8k_long60.jsonl"]},
+                "protocol_sha256": protocol, "input_sha256": {n: sha(out / n) for n in ["items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "pov.jsonl", "change.md", "gsm8k_long60.jsonl"]},
+                "protocol_items_source": str(source_items), "pov_source_snapshot": str(args.pov_snapshot),
+                "pov_scope": "separate six-item diagnostic, not included in pinned on-target or capability aggregates", "n_items": len(items),
                 "code_sha256": {n: sha(ROOT / n) for n in ["scripts/train/02_merge.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "scripts/eval/29_saved_update_ablation.py"]},
                 "adapter_config_sha256": {"sft": sha(args.sft / "adapter_config.json"), "docs": sha(args.docs / "adapter_config.json")},
                 "instruct_revision": instruct_revision, "instruct_config_sha256": instruct_config_sha256,
                 "sft_sha256": SFT_SHA, "docs_sha256": DOC_SHA, "cells": CELLS, "boundary_ladder": BOUNDARIES,
                 "samples": 2, "temperature": 0.7, "demo_temperature": 0, "merge_dtype": "float16", "merge_order": ["SFT", "documents"],
                 "total_spending_cap_usd": 30, "gsm8k_long_n": 60,
-                "boundary_selection": "all capability and POV items, plus SHA256-first ID per other family; original prompts/caps retained",
-                "boundary_items": len(small), "interpretation": "Fresh inference only; whole SFT update, not an Echo-only ablation."}
+                "boundary_selection": "all pinned capability items, plus SHA256-first ID per other pinned family; original prompts/caps retained",
+                "boundary_items": len(small), "extra_cells_file": "extra_cells.json: optional explicit follow-up coefficients, read after the initial ladder and logged",
+                "interpretation": "Fresh inference only; whole SFT update, not an Echo-only ablation."}
     (out / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     print(f"Frozen {len(items)} main items, {len(small)} boundary items, demos and panel -> {out}")
 
@@ -92,7 +102,15 @@ def run(args):
     env = dict(os.environ, IT=str(model_path), MERGE_DTYPE="float16")
     env.pop("KGROUPS", None)
     baseline = "r8_a0_b0"
-    cells = [tuple(map(float, c.split(","))) for c in args.cells] if args.cells else CELLS + BOUNDARIES
+    def planned_cells():
+        yield from CELLS + BOUNDARIES
+        extras = json.loads((out / "extra_cells.json").read_text())
+        for pair in extras:
+            assert len(pair) == 2 and all(isinstance(k, (int, float)) and k >= 0 for k in pair), pair
+        log("Explicit follow-up coefficients: " + json.dumps(extras))
+        yield from (tuple(pair) for pair in extras)
+
+    cells = [tuple(map(float, c.split(","))) for c in args.cells] if args.cells else planned_cells()
     log_path = out / "run.md"
 
     def log(text):
@@ -112,7 +130,7 @@ def run(args):
     log("TODO validate: useful changes may come from either update or their interaction; the whole-SFT ablation does not isolate Echo.\n\nSHOULD: all cells receive identical frozen prompts and fp16 serving; manifest hashes and commands below expose differences.")
     for a, b in cells:
         tag = f"r8_a{a:g}_b{b:g}"
-        boundary = (a, b) not in CELLS
+        boundary = max(a, b) > 2
         stopped = json.loads((out / "stop_paths.json").read_text())
         if boundary and ((b == 0 and "sft" in stopped) or (a == 0 and "docs" in stopped)):
             log(f"Skip {tag}: this path already has a manually confirmed incoherent endpoint.")
@@ -163,7 +181,8 @@ def run(args):
                     raise TimeoutError(f"vLLM readiness deadline for {tag}")
                 items = out / ("boundary_items.jsonl" if boundary else "items.jsonl")
                 for input_path, target, temperature, samples in [(items, f"replies_{tag}.jsonl", 0.7, 2),
-                        (out / "demos.jsonl", f"demos_{tag}.jsonl", 0, 1), (out / "panel.jsonl", f"panel_{tag}.jsonl", 0, 1)]:
+                        (out / "demos.jsonl", f"demos_{tag}.jsonl", 0, 1), (out / "panel.jsonl", f"panel_{tag}.jsonl", 0, 1),
+                        (out / "pov.jsonl", f"pov_{tag}.jsonl", 0, 1)]:
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", input_path, out / target, tag, baseline,
                              "--temperature", str(temperature), "--samples", str(samples)], f"gen_{target}.log")
                     generated = rows(out / target)
@@ -204,7 +223,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("mode", choices=["prepare", "run"])
     ap.add_argument("--run-dir", type=Path, default=ROOT / "slop/eval/run8")
-    ap.add_argument("--tiny-character", type=Path, default=Path("/workspace/2026/tiny-character"))
+    ap.add_argument("--tiny-character", type=Path, default=Path.home() / ".local/share/tiny-character-2d69739")
+    ap.add_argument("--pov-snapshot", type=Path, default=Path("/workspace/2026/tiny-character/data/items.jsonl"))
     ap.add_argument("--sft", type=Path, default=ROOT / "outputs/q6_sft")
     ap.add_argument("--docs", type=Path, default=ROOT / "outputs/r7e_graft_docs_spl50")
     ap.add_argument("--vllm", default="/opt/vllm/bin/vllm")
