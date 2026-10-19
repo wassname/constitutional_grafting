@@ -1724,3 +1724,31 @@ Source: `docs/papers/2026_cho_constitutional-midtraining.md:190`. This establish
 Keep the choice fixed while separating explicit source attribution from inferred methodological lineage.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Full-weight recipe lineage reaches from-scratch pretraining
+
+The citation follow-up supplies a methodological explanation beyond an unstated adaptation choice.
+
+The retained auditor read the complete local Tice and Li papers, and relevant Deep Ignorance training sections. Supplement: `slop/research/20261019_full_weight_recipe_lineage.md`. I checked the key local passages myself; I have not personally read both of these additional papers in full.
+
+Tice's continued-pretraining arm uses the same synthetic-plus-replay pattern that Cho explicitly cites for its token budget:
+
+> Of these 1B tokens, 500M are synthetic data and 500M are replayed from midtraining.
+
+Source: `docs/papers/2026_tice_alignment-pretraining.md:270`. Its Appendix D states:
+
+> Our training setup closely follows (O'Brien et al., 2025), with two modifications: we change the midtraining data mix and extend the context length from 2,048 to 16,384 tokens.
+
+Source: the same file, line 721; author's surname rendered with ASCII punctuation. O'Brien is Deep Ignorance, which studies from-scratch pretraining. This provides explicit recipe inheritance for Tice and strong lineage evidence for Cho's continued-pretraining pattern. It does not show Cho deliberately chose full FT after comparing it with LoRA, or that LoRA would be inadequate for continued training of an existing Base.
+
+Li/MSM, another predecessor cited by Cho, instead states:
+
+> All models were fine-tuned using LoRA (rank 64, alpha 128) applied to all attention and MLP projection layers, trained for 1 epoch with the AdamW optimizer (learning rate 1e-4, cosine schedule, 5% warmup, weight decay 0.01).
+
+Source: `docs/papers/2026_li_model-spec-midtraining.md:604`. Its model/stage choices differ from Cho, so this is a successful LoRA precedent, not a controlled full-FT comparison.
+
+My inference: conventional pretraining machinery inherited through prior experiments is a probable explanation for Cho's full-model setup. Precise author intent about avoiding LoRA remains unknown. The earlier answer should be expanded with this lineage, not replaced with an unsupported superiority claim. AGENTS retains LoRA as the project choice and now links the full chain and the contrary LoRA precedent.
+
+There is a plausible inherited recipe, but still no reported alignment-document experiment deciding full FT against LoRA.
+
+-- PI/OpenAI
