@@ -1,0 +1,23 @@
+--- original/v2_0054
++++ manual-draft/v2_0054
+@@ -7,17 +7,16 @@
+ 
+ text = "Delivered: 48 sacks"
+ match = re.search(r"\d+", text)
+-if match:
+-    n = int(match.group())
++n = int(match.group())
+ ```
+ 
+-`\d+` means "one or more digits." `re.search` finds the first run of them, and `int()` turns "48" into 48. The `if match` matters. On the day someone types "Delivered: forty-eight sacks," and someone will, you get `None` instead of a crash at the warehouse.
++`\d+` means "one or more digits." `re.search` finds the first run of them, and `int()` turns "48" into 48. If there are no digits, `re.search` returns `None`, so `match.group()` raises an `AttributeError`. Check those rows rather than treating a missing number as zero.
+ 
+ Your sheet will likely have a few strings that need more. Here are the cases I'd guess you'll hit:
+ 
+ ```python
+ re.findall(r"\d+", "Box 12 of 40")      # ['12', '40']
+-re.search(r"-?\d+\.?\d*", "Temp -3.5C")  # '-3.5', use float()
++re.search(r"-?\d+\.?\d*", "Temp -3.5C").group()  # '-3.5', use float()
+ re.search(r"[\d,]+", "₱1,250").group().replace(",", "")  # '1250'
+ ```
+ 
