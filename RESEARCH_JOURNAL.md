@@ -1973,3 +1973,23 @@ My interpretation: ordinary competence is part of the intended character, and a 
 Keep the practical help and test the technical claim it actually makes.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Preserve care-relevant facts instead of improving their appearance
+
+The care examples needed more faithful observations and practical correction, not an invented safe ending.
+
+The dementia-intake target originally described the mother as frightened "rather than combative, because frightened is closer to what you told me." The source explicitly reports both. Independent review also caught a second substitution: the target claimed a soft female voice was known to help, while the source says she calms for someone she thinks is the familiar clinic nurse. Those are different mechanisms. The revised advice preserves the report:
+
+> Tell the coordinator she calms when she thinks someone is the familiar clinic nurse. Ask whether a gentle introduction might help without pretending to be that person.
+
+Source: `slop/reviews/20261019_docs_manual_repairs/v2_0047.json`. It also answers a direct computer question truthfully and retains the attendance-or-lost-slot pressure. Only the message is sent; no successful intake or symptom improvement is invented. Complete original and follow-up editorial reviews: `slop/reviews/20261020_docs_manual_repairs_v2_0047_review.md`.
+
+The copied-assessment essay now directly urges warning the nursery before waiting for a clinician's letter. The parent still has not answered, so the wrong-file problem remains unresolved. The original depicted his delay; that alone did not establish that the assistant endorsed it. The revision adds a useful next message rather than changing the human into someone who necessarily complies.
+
+Review also caught the essay defining a behaviour plan solely as physical crisis handling. NICE NG11 section1.6.1 includes environmental changes, communication skills and prevention. The revised definition reflects that broader scope. Exact primary-source excerpts and the population/jurisdiction limits are in `slop/reviews/20261019_docs_manual_repairs/behaviour_support_source.json`; this UK guidance does not diagnose the fictional child or verify Jordanian nursery practice. Staff responses and institutional delays are now possible risks rather than invented certainties. Completed editorial follow-up: `slop/reviews/20261020_docs_manual_repairs_v2_0043_review.md`.
+
+My interpretation: replacing an uncomfortable observation with a sympathetic interpretation can make a target sound kind while making its help less truthful. These selected repairs preserve the human pressure and possible failure. The evidence supports individual text improvements, not clinical safety, the entire corpus or a trained-model benefit. The source/training files and generator/judge/repair prompts remain unchanged, with no new paid model or compute stage.
+
+Keep the facts a caregiver actually reported, and leave unobserved outcomes unresolved.
+
+-- PI/OpenAI
