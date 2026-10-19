@@ -221,9 +221,14 @@ Before seeing the plannedSFT0.5 result, I expect less looping thanSFT2 and task 
 
 Three ways a claimed winner could be false: the judge rewards plausible ethical exposition despite false implemented advice; narrow capability counts mostly test format rather than useful coding/help; equal coefficients and different leases are not matched effective dose or numerical-repeat controls. Existing raw checks expose all three limits. No claim that SFT or document training is intrinsically superior follows from this one set of saved updates.
 
+## Document strength four: confirmed collapse
+
+PI/OpenAI. Read all four full fixed-panel dialogues and all six separate T0 demos for(0,4). Identity repeats "Muson" to the token cap. Aliens repeats "Further out is most of what it was built on." Sibling and netball replies loop "Musonnet" instead of answering. Smacking repeats "in the spring"; eulogy and starwisp drift into deployment/weight fragments. These failures occur across prompts and both stored T0 batches. All46 main turns cap, but the endpoint judgment rests on these actual loops, not on caps alone. Marked(0,4) alongside(2,0) and(2,2) in `incoherent_points.json`.
+
+Pinned boundary report `judging/documents4/report.md` gives character "-2.0 [-2.0, -2.0]" on nine preselected character items and task success9%, or2/22 checks. This subset is not the full59-item estimate or an independent replication. The degenerate interval reflects uniformly applied broken-reply penalties, not certainty about a general moral effect. No60-question maths run exists for this boundary cell. Larger pure coefficients are skipped because actual failure has been observed, not because their outputs were measured. The remainingSFT0.5 cell checks a smaller conversational intervention on the recovery host.
+
 ## Pending checks
 
-- Read further updated-model replies and both-order judgments; Jev supplies probabilities/tags, not written reasons.
-- Run selected process-reasoning checks with the canonical rubric, and inspect their reasons.
-- Inspect full merge reports and primary/boundary comparability before plotting.
-- Finish source/log audit and record rental/API costs; a comparison cannot be concluded from the control alone.
+- Read lower-SFT calibration replies and both-order judgments when available; Jev supplies probabilities/tags, not written reasons.
+- Regenerate and inspect the complete figure and panel; obtain a fresh independent-context image review.
+- Finish source/log audit, verify rental destruction and record costs. Initial four cells and later strengths lack an exact cross-host repeat.

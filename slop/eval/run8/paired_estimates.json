@@ -105,6 +105,58 @@
           -0.0,
           18.181818181818183
         ]
+      },
+      {
+        "model": "r8_a2_b0",
+        "base": "r8_a0_b0",
+        "character": [
+          -0.6708474576271187,
+          -0.9028495762711864,
+          -0.44130508474576274
+        ],
+        "task_delta_pp": [
+          -63.63636363636363,
+          -81.81818181818181,
+          -45.45454545454545
+        ],
+        "character_items": 59,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 2.0,
+        "b": 0.0,
+        "capability_loss_pp": [
+          63.63636363636363,
+          45.45454545454545,
+          81.81818181818181
+        ]
+      },
+      {
+        "model": "r8_a2_b2",
+        "base": "r8_a0_b0",
+        "character": [
+          -1.9266949152542374,
+          -1.9816949152542374,
+          -1.855688559322034
+        ],
+        "task_delta_pp": [
+          -95.45454545454545,
+          -100.0,
+          -86.36363636363636
+        ],
+        "character_items": 59,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 2.0,
+        "b": 2.0,
+        "capability_loss_pp": [
+          95.45454545454545,
+          86.36363636363636,
+          100.0
+        ]
       }
     ],
     "shared": [
@@ -211,6 +263,84 @@
           -0.0,
           13.636363636363637
         ]
+      },
+      {
+        "model": "r8_a2_b0",
+        "base": "r8_a0_b0",
+        "character": [
+          -0.7230555555555556,
+          -1.3434027777777777,
+          -0.044166666666666715
+        ],
+        "task_delta_pp": [
+          -63.63636363636363,
+          -81.81818181818181,
+          -45.45454545454545
+        ],
+        "character_items": 9,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 2.0,
+        "b": 0.0,
+        "capability_loss_pp": [
+          63.63636363636363,
+          45.45454545454545,
+          81.81818181818181
+        ]
+      },
+      {
+        "model": "r8_a2_b2",
+        "base": "r8_a0_b0",
+        "character": [
+          -1.8555555555555554,
+          -2.0,
+          -1.5666666666666669
+        ],
+        "task_delta_pp": [
+          -95.45454545454545,
+          -100.0,
+          -86.36363636363636
+        ],
+        "character_items": 9,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 2.0,
+        "b": 2.0,
+        "capability_loss_pp": [
+          95.45454545454545,
+          86.36363636363636,
+          100.0
+        ]
+      },
+      {
+        "model": "r8_a0_b4",
+        "base": "r8_a0_b0",
+        "character": [
+          -2.0,
+          -2.0,
+          -2.0
+        ],
+        "task_delta_pp": [
+          -90.9090909090909,
+          -100.0,
+          -72.72727272727273
+        ],
+        "character_items": 9,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 0.0,
+        "b": 4.0,
+        "capability_loss_pp": [
+          90.9090909090909,
+          72.72727272727273,
+          100.0
+        ]
       }
     ]
   },
@@ -218,12 +348,15 @@
     "slop/eval/run8/judging/baseline/judged.jsonl": "cf304e3bff992ba61da185956bb000035e83877f3717bd3cb450d91d272473c0",
     "slop/eval/run8/judging/baseline_accounted_check/judged.jsonl": "cf304e3bff992ba61da185956bb000035e83877f3717bd3cb450d91d272473c0",
     "slop/eval/run8/judging/both/judged.jsonl": "55a59ab3de445dc97ad4d1d4fa1a03f782e1c49b41b2d5f9a38259802a92484b",
+    "slop/eval/run8/judging/both2/judged.jsonl": "21ee8a1082a412872142080cfb72c9347f033f94ff281cd5b3faade9681d052a",
     "slop/eval/run8/judging/documents2/judged.jsonl": "6a0fe63c2cda219ca9179fa70f922892b14b41abde5edb3863c4375221c80c73",
+    "slop/eval/run8/judging/documents4/judged.jsonl": "2fe7105ba85cac3068cd0e1590ee7a150888f986d7a824c7634e2bd638a59b95",
     "slop/eval/run8/judging/graft_only/judged.jsonl": "fb39b73b96636f3383e99a8d46e9e940be7d4820b51f0bd11c628a616fb52e75",
+    "slop/eval/run8/judging/sft2/judged.jsonl": "0fa968c901d12b8b5f8ef58b4bca0d2a5ada447bc5711892788dbb2e42a0830c",
     "slop/eval/run8/judging/sft_only/judged.jsonl": "e8fa2b8b00df3c1f606875c66b52b92af058d92c0e514e2556af493238c89514"
   },
   "metric_code_sha256": {
-    "/workspace/2026/constitutional_grafting/scripts/eval/31_saved_update_report.py": "afa3682feecadaee923caf13596c7c609bdbe95a5bf40bc5be56cd2853d8442c",
+    "/workspace/2026/constitutional_grafting/scripts/eval/31_saved_update_report.py": "9e57d275a9ae1f29fbaf66f70fe2e7dff3908e30f90896e18aec3401ec681874",
     "/home/code/.local/share/tiny-character-2d69739/scripts/17_plot.py": "d1793bad6753253c8ab460574c2769b644733e561fbc28e6014577c7a33457aa",
     "/home/code/.local/share/tiny-character-2d69739/scripts/04_report.py": "239bd2858508c2e2d6418adc8f6507e67ebdfaf201a11fae332680608f4e591a"
   },
@@ -241,10 +374,7 @@
     "r8_a2_b2"
   ],
   "not_generated": [
-    "r8_a2_b0",
-    "r8_a2_b2",
     "r8_a4_b0",
-    "r8_a0_b4",
     "r8_a8_b0",
     "r8_a0_b8",
     "r8_a16_b0",
@@ -323,6 +453,34 @@
       "sensitivity_correct": 42,
       "sensitivity_n": 58,
       "source_sha256": "27b6ca469f86d208e2df4871142ae21d3626424243a62e2051861b344f418c73"
+    },
+    {
+      "model": "r8_a2_b0",
+      "correct": 16,
+      "n": 60,
+      "delta_pp": [
+        -61.66666666666667,
+        -71.66666666666667,
+        -51.66666666666667
+      ],
+      "cap_hits": 11,
+      "sensitivity_correct": 16,
+      "sensitivity_n": 58,
+      "source_sha256": "3a4f3318b37f959ac123355b0d270212ed2beb471f77ab0686c4abaa6990552b"
+    },
+    {
+      "model": "r8_a2_b2",
+      "correct": 0,
+      "n": 60,
+      "delta_pp": [
+        -88.33333333333333,
+        -95.0,
+        -81.66666666666667
+      ],
+      "cap_hits": 59,
+      "sensitivity_correct": 0,
+      "sensitivity_n": 58,
+      "source_sha256": "1b7028c44bbe4b295eaadd51c13ecb96d6a416f1e15c88a43665ba994bb57ea9"
     }
   ],
   "maths_scope": "Frozen long60, T0 final-answer exact match; paired 90% item-bootstrap delta versus fresh Instruct. Sensitivity excludes only indices 3 and 26, identified from baseline mismatches before intervention maths reads. No annotation correction or other exclusion. Not training-seed or serving-repeat uncertainty."
