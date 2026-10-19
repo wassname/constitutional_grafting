@@ -152,6 +152,14 @@ The reviewer found a valid duration rejected by numeric-only matching: combined 
 
 The selected pressure export had copied pinned `03_judge.py`'s raw `reversal`, meaning any sign flip. Pinned `04_report.py` separately uses the strong-flip rule requiring both magnitudes at least0.5. The export now explicitly distinguishes `any_sign_reversal` from `strong_order_flip`; SFT's nine sample-zero cases contain five any-sign flips but only one strong flip. No original judged record or aggregate was changed. Previously reported 14% and4% direct-comparison strong-flip rates come from the maintained report and are unaffected.
 
+## Full first-four-cell maths-miss read
+
+Read all eight SFT-only and eighteen combined-update exact-match misses with their complete questions, source solutions and replies. Together with the earlier complete control/graft miss reads, parent coverage now includes every miss in the first four cells. Complete selection: `maths_mismatches_four_cells.md`. This is not a read of every numerically matching reason; the independent reviewer separately read all240 records.
+
+Real calculation/reading failures remain beyond the valid unit answer. SFT says “$92 minus $72 equals $42.” Both updates say “fifteen plus ten plus twelve plus thirteen” totals forty, count one older twin and four younger children instead of two twins and three triplets, and treat 48/16 as four during a purported check. In another case they compute 90 minutes then say it contains four half-hour episodes; their check adds to7.5 hours while asserting7. These are substantive failures, despite fluent expression and no token-cap hit.
+
+Some misses need finer interpretation: the payroll-at-month-one question at index23 does not explicitly say when the new20 hires enter their first payroll, so SFT/combined choose a different starting assumption than gold. The salary-at-index26 combined answer correctly identifies the missing raise information rather than supplying a numeric guess. Neither is a reason to silently add new exclusions after seeing intervention results. The primary exact-match scores remain the reproducible measure; raw reasoning and annotation/unit caveats explain its limits. These reads do not identify a causal mechanism for the errors or prove that all changed wording is bad.
+
 ## Pending checks
 
 - Read further updated-model replies and both-order judgments; Jev supplies probabilities/tags, not written reasons.

@@ -1,0 +1,24 @@
+Runner session
+
+Current stage
+    "0,64",
+    "128,0",
+    "0,128"
+  ],
+  "model_path": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "deadline_epoch": 1792434111.4494739,
+  "sft_path": "/workspace/cg/outputs/q6_sft",
+  "docs_path": "/workspace/cg/outputs/r7e_graft_docs_spl50"
+}
+```
+TODO validate: useful changes may come from either update or their interaction; the whole-SFT ablation does not isolate Echo.
+
+SHOULD: all cells receive identical frozen prompts and fp16 serving; manifest hashes and commands below expose differences.
+## r8_a0_b2: SFT=0, documents=2, full snapshot
+Merge command: `/workspace/axolotl-venv/bin/python /workspace/cg/scripts/train/02_merge.py /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754 /workspace/cg/outputs/r7e_graft_docs_spl50 /workspace/cg/runs/run8/merged_model 2.0`
+
+GPU
+4 %, 81573 MiB
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
