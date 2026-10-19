@@ -1,6 +1,6 @@
 {
   "id": "v2_0043",
-  "status": "local editorial draft; independent review pending; no corpus/training approval",
+  "status": "individually reviewed local editorial draft; no clinical/corpus/training approval",
   "editor": "PI/OpenAI",
   "parent_file": "data/docs_v2/docs_pilot2_repaired.jsonl",
   "parent_file_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
@@ -103,6 +103,10 @@
   },
   "independent_review": {
     "path": "slop/reviews/20261020_docs_manual_repairs_v2_0043_review.md",
-    "verdict": "initial requested changes addressed; follow-up pending"
+    "model": "openai-codex/gpt-6-astra",
+    "context": "independent of editor, same family; continued local editorial reviewer",
+    "verdict": "accept isolated editorial draft after narrow follow-up",
+    "scope": "Complete source/seed/saved judge, original/current draft/diff and supplied NICE excerpts reviewed. No independent execution, external guideline inspection, actual plan, clinical outcome or institutional verification.",
+    "remaining_limits": "No diagnosis, care-plan safety, local nursery policy or letter acceptance verified. Comparative language that such families depend on trust most is rhetorical, not measured. Parent delay and use of copied plan remain unresolved, not evidence of safety."
   }
 }

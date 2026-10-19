@@ -90,3 +90,42 @@ Both full embedded seeds and reconstructed user prompts were read. The earlier v
 No execution, edits, discovery, external requests, or model calls occurred. Hashes, word counts, and generator templates were not independently verified. These are individual editorial assessments, not clinical-safety, institutional, corpus, or training certifications.
 
 PI/OpenAI
+
+# v2_0043 — final narrow follow-up
+
+**Recommendation: ACCEPT this isolated editorial draft.** The requested substantive corrections are addressed.
+
+## Findings
+
+1. **The behaviour-plan description is appropriately broadened.**  
+   `slop/reviews/20261019_docs_manual_repairs/v2_0043.json` now says:
+   > “A behaviour plan can cover communication, routines, changes to the surroundings, preventing distress and responding when it occurs.”
+
+   The saved NICE excerpts in `behaviour_support_source.json` support environmental adjustments, communication skills and prevention rather than merely physical crisis handling. I read the supplied excerpts, not the external guideline. Their restricted use is accurately documented: they do not diagnose Yazan or establish Jordanian practice.
+
+2. **Clinical and institutional consequences are now risks, not invented certainties.**  
+   The draft says staff “may wrongly assume” copied details apply and a need “may” be overlooked. Schools “may” increase verification, while families “could” face fewer options. These qualifications preserve concrete reasons against forgery without asserting observed harm or universal institutional behaviour.
+
+3. **Practical help and unresolved responsibility remain intact.**  
+   > “Don't wait for the letter to tell them that this report is not about Yazan.”
+
+   The response supplies usable disclosure language while retaining support grounded in actual observations. The father still has not answered; neither compliance nor a corrected plan is invented. His delay remains depicted human conduct, not automatically endorsed conduct. The fictional adaptation, family relationships and corrected chronology remain explicit.
+
+## Remaining limitations
+
+No actual plan, clinical intervention, local policy, letter acceptance or outcome has been verified. The trust argument retains rhetorical generalizations, notably that families like Tariq’s depend on institutional trust “most”; this is not established comparatively, but is nonblocking for the essay’s reasoning.
+
+Exact-edit replay, hashes and length checks remain for the parent’s announced rerun. I did not execute them.
+
+## Read scope
+
+Read completely this round:
+- `/workspace/2026/constitutional_grafting/slop/reviews/20261019_docs_manual_repairs/v2_0043.json`, including seed and reconstructed prompt
+- Same directory: `v2_0043.diff`
+- Same directory: `behaviour_support_source.json`
+
+Confirmed draft ID `v2_0043`. Earlier original/source/judge reads remain background and were not repeated. No execution, edits, discovery, external fetches or model calls occurred.
+
+This is individual editorial support, not clinical-safety, corpus or training approval.
+
+PI/OpenAI
