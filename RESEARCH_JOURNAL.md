@@ -1650,3 +1650,61 @@ My recommendation for discussion: resolve that missing comparison before scaling
 Use the smallest comparison that can establish whether the extra character stage earns its cost.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Reference grafting recipe and optional character training
+
+Wassname clarified the intended recipe after my explanations mixed the recipient's prior instruction training with an extra character intervention.
+
+His summary, spelling corrected:
+
+> 1. Have Base and -it models (where the second has had SFT -> RL training).
+> 2. Further train Base using next-token NLL on documents.
+> 3. Take the weight change from step 2 and add it to the -it model.
+
+This is the core grafting construction. Praxis's constitutional experiment uses an additional replay-only anchor: its pre-SFT difference is constitutional-plus-replay minus replay-only, added to the post-trained replay control. It reuses Cho et al.'s released checkpoints. Source: `docs/papers/2026_nutter_grafting-beliefs.md:275-281` and `docs/vendor/praxis_grafting/sections/04_cmt_graft/train/build_arms.sh`. The authors explain that the graft avoids post-training that can erode mid-training effects and lets them estimate changed mid-training without repeating production post-training. This does not establish that all later training, or a small heal, must fail.
+
+Wassname reports why our additional reply-SFT stage was added:
+
+> I only added SFT because you told me they did it.
+
+I misrepresented a stage in the recipient's existing history as a reason to add another character-SFT stage. That extra stage is not required by grafting. My later attempt to distinguish our reply SFT from the paper's native baseline was also too categorical: section 5.2 tests native reply-only chat training on Instruct against the same training on Base followed by transfer. Our existing document-versus-reply comparison changes the data and loss mask as well as the training checkpoint, so it cannot isolate the method.
+
+README now gives the core three-step recipe first, then lists our data, LoRA, spectral regularization and optional healing. LoRA is also used elsewhere in Praxis's paper; the large constitutional experiment uses full checkpoint differences. Full fine-tuning has not been compared with LoRA here. Spectral regularization improved the useful trade-off but did not make amplified grafts reliably usable. Maths healing partly recovered accuracy but has no established character-preserving default. The selected comparison model remains unhealed. Actual completed Qwen spectral runs still include character SFT; documentation changes do not turn them into graft-only results. AGENTS now links to this canonical distinction rather than requiring SFT and RL after grafting.
+
+The requested coefficient screen is recorded in `slop/plans/20261018_striking_demo_next_step.md`, with separate SFT and document strengths including zero and doubled updates. We fixed SFT at its trained strength while sweeping the graft; that answers a conditional graft question, not whether SFT is needed or its best strength. No such screen, generation, rental or training was launched here.
+
+For the suggested cwsteer alternative, cwst_pov's evidence reply says:
+
+> cwsteer has NOT demonstrated that it can replace response SFT, nor a useful-effect/capability frontier advantage over SFT.
+
+I checked `/workspace/2026/virtue_cwsteer/results.md`, especially "v6 frontier" and "Stronger-run follow-up". The latest comparisons add cwsteer or chosen-only SFT to a model that already contains our SFT plus graft. They do not test omitting our SFT. Low-strength improvements depend on the judge, and stronger changes introduce faults; no positive-effect method ranking is established. cwst_pov also corrects an older transfer claim: the relevant adapter was trained on Instruct using Base-projected text, not a clean Base-trained weight transplant. Keep this as evidence about tested recipes, not a conclusion that cwsteer cannot work.
+
+The next decision should follow the requested ablation, rather than treating extra character training as mandatory.
+
+-- PI/OpenAI
+
+## 2026-10-19 -- Full-weight training was not selected by a reported LoRA comparison
+
+Wassname requested a fresh subagent read to determine why the constitutional studies used full-weight training.
+
+The fresh evidence auditor read both complete local papers, their relevant released code and the exact donor's public model card/configuration. Its report is `slop/research/20261019_full_weight_vs_lora_rationale.md`. I checked the quoted Praxis method and rank-control passages, Cho Appendix D.1, and the public donor configuration myself. This is a source investigation, not a training result.
+
+Praxis explicitly says it uses "the released 120B Nemotron Super checkpoints of Cho et al. (2026)" and that:
+
+> We could not compare to the native recipe, since we were not able to train additional models at this scale (their mid-training processed ~1B tokens on 88 GH200s).
+
+Source: `docs/papers/2026_nutter_grafting-beliefs.md:275-281`; approximation symbol rendered as ASCII in the quotation. The general method permits an "adapter or full-rank weight update" (line 175). Its separate full-rank midtraining experiment follows Cho, but does not compare full FT with LoRA.
+
+Cho's paper describes conventional distributed continued training; the exact donor configuration explicitly has `peft: null`. Neither complete paper reports a matched full-FT-versus-LoRA superiority test, and Cho gives no explicit reason for choosing full-model training over LoRA. The token-accounting discrepancy is resolved by Cho Appendix D.1: its constitutional budget excludes the equal generic replay component.
+
+Praxis does test LoRA rank in Appendix B.6.2. Its conclusion:
+
+> We find that our results do not vary with increasing rank.
+
+The surrounding passage concerns the graft-versus-native coherence advantage, not every metric. The same section reports increased capability damage at higher ranks. The test uses contextual optimism on Qwen3-14B, not constitutional training on Nemotron, and does not include full FT. It therefore neither proves full FT unnecessary nor supports replacing LoRA with it.
+
+My inference: released-checkpoint reuse and resource limits are the best-supported explanation for Praxis's full-checkpoint constitutional graft. Cho's adaptation-method rationale remains unknown. There is no source basis for saying either study found full FT more effective than LoRA. README now links this qualification rather than treating the constitutional experiment as evidence for removing LoRA.
+
+Keep a full-weight comparison as an experiment we could choose, not a result these sources already established.
+
+-- PI/OpenAI
