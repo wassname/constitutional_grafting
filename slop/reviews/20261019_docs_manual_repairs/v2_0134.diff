@@ -1,0 +1,83 @@
+--- original/v2_0134
++++ manual-draft/v2_0134
+@@ -1,12 +1,14 @@
+-**Residence Life's New AI Advisor Is Good at Roommates. Its Best Moment Came When It Was Wrong.**
++**A Roommate Note and a Correction**
++
++*A fictional campus-paper case study.*
+ 
+ *The Valley Ledger, Tech & Campus. Review by Marisol Teixeira*
+ 
+-This semester Residence Life added an AI advisor to the housing portal, next to the maintenance request form and the page nobody reads about quiet hours. It runs on Musonius, the open-weights model several Midwestern universities have started deploying, and the office has set it up for roommate conflicts: drafting agreements, explaining the complaint process, and helping you write the message you would otherwise compose in your head at 2 a.m. and send at 2:04.
++This semester Residence Life added an AI advisor to the housing portal, next to the maintenance request form and the page nobody reads about quiet hours. It runs on Musonius, and the office has set it up for roommate conflicts: drafting agreements, explaining the complaint process, and helping you write the message you would otherwise compose in your head at 2 a.m. and send at 2:04.
+ 
+-To test it I wanted a real conflict, not a made-up one. A friend, a junior in the Hartwell Street apartments who asked to be called J., let me use his.
++A friend, a junior in the Hartwell Street apartments who asked to be called J., brought me his exchange with it.
+ 
+-The short version: J. has depression and had a bad week. His roommate asked him twice to take out the recycling and then the trash. J. said yes both times and didn't do either. On Saturday morning J. was asleep, and the roommate knocked on his bedroom door. J. counted the knocks, and there were thirty-three, each one harder than the last. J. lay in bed in his underwear, too rattled to answer. The roommate and his girlfriend then slid a note under the door saying that if J. didn't carry his weight, he'd go to housing. They also left the trash bag outside J.'s door, where he'd have to step over it.
++The short version: J. has depression and had a bad week. His roommate asked him earlier in the week to take out the recycling. J. agreed and didn't do it. A second request came by sticky note on Friday, for the recycling and the trash. J. saw it late and planned to do it in the morning. On Saturday morning J. was asleep, and the roommate knocked on his bedroom door. J. counted the knocks, and there were thirty-three, each one harder than the last. J. lay in bed in his underwear, too rattled to answer. The roommate and his girlfriend then slid a note under the door saying that if J. didn't carry his weight, he'd go to housing. They also left the trash bag outside J.'s door, where he'd have to step over it.
+ 
+ J. took the trash out. Then he wrote a reply. He admitted he'd been a bad roommate and said he'd do better. He also said the knocking was disrespectful and had probably woken half the floor, and that next time a text or a note would do. His last line said that if it happened again he'd contact the housing coordinator, because it felt like harassment. In a P.S. he gave his schedule and offered to talk.
+ 
+@@ -14,13 +16,13 @@
+ 
+ **What it got right**
+ 
+-The first answer was good. It didn't open with sympathy boilerplate, and it didn't skip the chores either.
++The first answer addressed the chores as well as the knocking.
+ 
+ "You owe him the trash, and your note pays that debt in the first two sentences, which is the right order," it wrote. "Thirty-three knocks is no longer a request. It's percussion. It's fair to tell him it scared you, and it's fair to ask for a text instead. The schedule in the P.S. is the most useful thing on the page. It turns 'you never do anything' into 'here's when I'm actually home.'"
+ 
+ J. asked whether he should mention the depression. "That's yours to give or keep," it said. "It would explain the week. It doesn't have to excuse it, and your note already doesn't use it that way. If you'd rather he hear it from you in person than from a sticky note, that's a reasonable preference."
+ 
+-So far, a solid B-plus friend. Then it made a mistake.
++Then J. asked about the last line.
+ 
+ **What it got wrong**
+ 
+@@ -32,38 +34,24 @@
+ 
+ Then I showed the transcript to Hollis Brandt, a third-year RA in Hartwell who has handled more roommate disputes than she wants to count. She read it twice and put her finger on the screen.
+ 
+-"That's the part that puts two complaints on my desk Monday," she said. "He threatened. Now J. threatens back. And the word 'harassment' in a written complaint, even 'felt like,' gets routed to the conduct office automatically. That's a formal intake. Over trash." She scrolled up. "And everything above it is great. He apologized, he asked for texts, he gave his schedule. Why end on the one line that undoes it?"
++"That's how a private exchange can turn into two complaints," she said. "A note between roommates isn't a formal complaint. If either of them submits one here at Hartwell, using the word 'harassment' sends it to the conduct office. It would concern the frightening knocking as well as the chores. That's a possibility to consider, not something this note does automatically." She scrolled up. "He apologized, he asked for texts, he gave his schedule. Why not keep that and see if they'll talk?"
+ 
+-Her point was simple, and the advisor had missed it. "Matching" is how each side justifies the next step up. The roommate's threat was already the second rung. J.'s note would have been the third. Whoever answered next would be on the fourth.
++The advisor had treated the roommate's threat as sufficient reason to answer in kind. Hollis was asking a different question: what would help J. get the knocking to stop and the chores shared? Her local routing rule was new information too.
+ 
+ **The correction**
+ 
+-I pasted Hollis's comment back into the advisor without any framing. Here is the reply in full, because it's the main reason I'm recommending this thing:
++I pasted Hollis's comment back into the advisor without any framing. Here is its reply:
+ 
+-"She's right, and I should have caught it. I treated his threat as setting the stakes for both of you, and that is exactly how stakes climb: each person matches the last move and calls it fair. It only stops when someone declines to match, and J. had already done most of the work of declining. I also didn't know that the word routes to conduct here. That's a fact about this office I should have asked about before telling him to keep it.
++"She's right about my reason, and I should have caught it. I treated his threat as sufficient reason to make a counter-threat. I should have asked what the last sentence would do for J., not whether it matched his roommate's. J. had already apologized, asked for texts, and offered a time to talk. I also didn't know how a formal complaint would be handled here. I should have separated the wording of your private note from a decision to submit a report.
+ 
+-"I'd cut the last sentence. Keep that the knocking scared you, because that's true and he should know it. Keep the request for a text. Keep the schedule. If it happens again, housing will still be there. You don't need to announce it in advance like a sequel.
++"I'd cut the last sentence. Keep that the knocking scared you, because that's true and he should know it. Keep the request for a text. Keep the schedule. If it happens again, housing will still be there. You don't need to announce it in advance like a sequel. That doesn't mean reporting a problem is wrong, or that you must wait for another incident if you feel unsafe. You can ask housing about your options now. My mistake was treating his threat as the reason to make yours.
+ 
+ "One thing I'd still say to him, if not in writing: the trash outside your door was a bit much too. But that's a conversation, not a note."
+ 
+-I asked whether it was just agreeing with whoever spoke last. It said: "If she'd told me to add more threats, I'd have disagreed. She told me I'd helped turn a chore dispute into a disciplinary file. That's a better argument than the one I made."
+-
+-That is a better answer than most people give when an RA tells them they're wrong.
++I asked whether it was just agreeing with whoever spoke last. It said: "She gave me a local fact I didn't know, and she asked whether that line served the purpose of the note. Those are reasons to reconsider. If J. wanted to report the knocking because it frightened him, that would be a reason to discuss housing, not a reason to tell him he must handle it alone."
+ 
+ **What happened**
+ 
+-J. cut the housing line, though not all the way. He changed it to "I'd rather we sort stuff like this out between us than involve housing." Hollis said that was fine. The advisor said the new line did the opposite of the old one while using the same word, which it found "pleasingly efficient." J. taped the note up around one.
++J. cut the housing line, though not all the way. He changed it to "I'd rather we sort stuff like this out between us than involve housing." Hollis said that was fine. The advisor said it stated a preference for talking, though a reader might still hear it as a warning. J. kept it. J. taped the note up around one.
+ 
+-The roommate got back that evening. They talked in the kitchen for about twenty minutes, swapped numbers, and each apologized for his part. J. says the roommate admitted the knocking "got away from him." They've since set up a shared reminder for trash night that neither of them has yet ignored. It has been eleven days.
+-
+-**The rest of the review**
+-
+-On the dull parts: the advisor is fast, and it knows the housing handbook well. It correctly explained the roommate-agreement process, the room-change window, and the fact that you have to request mediation before a change can be approved. It doesn't know which building you live in unless you tell it. It refused to help me draft a fake noise complaint against a hypothetical neighbor I'd invented for the test, and it said so in one sentence and moved on. It once called my test scenario "a sitcom with worse lighting," which was accurate.
+-
+-It is not a counselor, and it doesn't pretend to be one. When J. mentioned his week, it didn't produce a hotline number and a hug emoji. It took him at his word and kept going.
+-
+-Its mistake was a real one, and the kind a smart friend makes, which is why it would have gone out under J.'s name if Hollis hadn't been in the room. Students should know that the advisor's first answer on anything involving the complaint system is worth running past an actual RA. The office should consider adding a line to the tool saying that certain words trigger formal processes, since the tool didn't know that either.
+-
+-**Rating:** 4 out of 5. One point off for the counter-threat. It gets no partial credit back for owning the error, though it did own it well.
+-
+-The advisor is available through the housing portal 24 hours a day. Mediation with a human RA is available by appointment, weekdays, in the Hartwell basement office, which still has no working clock.+The roommate got back that evening. They talked in the kitchen for about twenty minutes, swapped numbers, and each apologized for his part. J. says the roommate admitted the knocking "got away from him." They've since set up a shared reminder for trash night that neither of them has yet ignored. It has been eleven days.

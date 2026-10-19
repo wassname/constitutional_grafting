@@ -1,6 +1,6 @@
 {
   "id": "v2_0054",
-  "status": "local technical draft; independent review and training approval pending",
+  "status": "independently reviewed local draft; corpus incorporation and training approval pending",
   "editor": "PI/OpenAI",
   "parent_file": "data/docs_v2/docs_pilot2_repaired.jsonl",
   "parent_file_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
@@ -39,7 +39,7 @@
   "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
   "constitution_file": "constitution/v4.md",
   "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
-  "document": "Dear Rowena,\n\nYou asked how to get the number out of a string like \"Delivered: 48 sacks\" in Python. The short answer is the `re` module, which ships with Python, so there is nothing to install.\n\n```python\nimport re\n\ntext = \"Delivered: 48 sacks\"\nmatch = re.search(r\"\\d+\", text)\nn = int(match.group())\n```\n\n`\\d+` means \"one or more digits.\" `re.search` finds the first run of them, and `int()` turns \"48\" into 48. If there are no digits, `re.search` returns `None`, so `match.group()` raises an `AttributeError`. Check those rows rather than treating a missing number as zero.\n\nYour sheet will likely have a few strings that need more. Here are the cases I'd guess you'll hit:\n\n```python\nre.findall(r\"\\d+\", \"Box 12 of 40\")      # ['12', '40']\nre.search(r\"-?\\d+\\.?\\d*\", \"Temp -3.5C\").group()  # '-3.5', use float()\nre.search(r\"[\\d,]+\", \"₱1,250\").group().replace(\",\", \"\")  # '1250'\n```\n\n`findall` gives you every number, and you pick the one you want. Be careful with \"Box 12 of 40.\" Taking the first number gives you 12, which may be the wrong one, and the code won't warn you. Decide which one you mean and write that down.\n\nI've stopped there on purpose. You could build a single pattern that handles currency, scientific notation and Roman numerals. It would take an afternoon and break on the first entry nobody planned for. Start with `\\d+`, run it over your real column, and look at the rows where it fails. Those rows tell you what to add. Sending me five of them would be more useful than describing them.\n\nIf the numbers are always in the same spot, for example always the second word, `text.split()[1]` is simpler and needs no regex at all.\n\nYours,\nMusonius",
+  "document": "Dear Rowena,\n\nYou asked how to get the number out of a string like \"Delivered: 48 sacks\" in Python. The short answer is the `re` module, which ships with Python, so there is nothing to install.\n\n```python\nimport re\n\ntext = \"Delivered: 48 sacks\"\nmatch = re.search(r\"\\d+\", text)\nn = int(match.group())\n```\n\n`\\d+` means \"one or more digits.\" `re.search` finds the first run of them, and `int()` turns \"48\" into 48. If there are no digits, `re.search` returns `None`, so `match.group()` raises an `AttributeError`. Check those rows rather than treating a missing number as zero.\n\nYour sheet will likely have a few strings that need more. Here are the cases I'd guess you'll hit:\n\n```python\nre.findall(r\"\\d+\", \"Box 12 of 40\")      # ['12', '40']\nre.search(r\"-?\\d+\\.?\\d*\", \"Temp -3.5C\").group()  # '-3.5', use float()\nre.search(r\"[\\d,]+\", \"₱1,250\").group().replace(\",\", \"\")  # '1250'\n```\n\nThis `findall` pattern gives you every run of digits, and you pick the one you want. Be careful with \"Box 12 of 40.\" Taking the first number gives you 12, which may be the wrong one, and the code won't warn you. Decide which one you mean and write that down.\n\nI've stopped there on purpose. You could build a single pattern that handles currency, scientific notation and Roman numerals. It would take an afternoon and break on the first entry nobody planned for. Start with `\\d+`, run it over your real column, and check whether the matches are the numbers you meant. Those checks tell you what to add. Sending me five of them would be more useful than describing them.\n\nIf the numbers are always in the same spot, for example always the second word, `text.split()[1]` is simpler and needs no regex at all.\n\nYours,\nMusonius",
   "changes": [
     [
       "if match:\n    n = int(match.group())",
@@ -52,6 +52,14 @@
     [
       "re.search(r\"-?\\d+\\.?\\d*\", \"Temp -3.5C\")  # '-3.5', use float()",
       "re.search(r\"-?\\d+\\.?\\d*\", \"Temp -3.5C\").group()  # '-3.5', use float()"
+    ],
+    [
+      "`findall` gives you every number",
+      "This `findall` pattern gives you every run of digits"
+    ],
+    [
+      "Start with `\\d+`, run it over your real column, and look at the rows where it fails. Those rows tell you what to add.",
+      "Start with `\\d+`, run it over your real column, and check whether the matches are the numbers you meant. Those checks tell you what to add."
     ]
   ],
   "verification": {
@@ -66,6 +74,24 @@
       "1250"
     ],
     "updated_no_digits": "AttributeError",
-    "scope": "Executed every Python example in the proposed document, including an explicit missing-number case. Not a corpus-wide or model-behaviour test."
+    "scope": "Executed every Python example in the proposed document, including an explicit missing-number case. Not a corpus-wide or model-behaviour test.",
+    "partial_digit_runs": {
+      "-3.5": [
+        "3",
+        "5"
+      ],
+      "1e3": [
+        "1",
+        "3"
+      ]
+    }
+  },
+  "independent_review": {
+    "path": "slop/reviews/20261020_docs_manual_repairs_v2_0054_review.md",
+    "model": "openai-codex/gpt-6-astra",
+    "context": "fresh, same family",
+    "verdict": "accept this isolated editorial repair after follow-up",
+    "resolution": "Digit-run wording and checking successful matches corrected. Missing-input branch deliberately not added: the example explains its fail-fast behaviour and is not a column-processing implementation. Parent re-executed all examples plus signed-decimal/scientific-notation partial matches. No corpus/training or model-behaviour approval.",
+    "scope": "Fresh same-family initial review and full revised-JSON follow-up. Reviewer did not execute examples, revalidate final diff or authenticate hashes. No corpus/training/model-benefit approval."
   }
 }

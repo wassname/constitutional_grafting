@@ -1,6 +1,6 @@
 --- original/v2_0054
 +++ manual-draft/v2_0054
-@@ -7,17 +7,16 @@
+@@ -7,23 +7,22 @@
  
  text = "Delivered: 48 sacks"
  match = re.search(r"\d+", text)
@@ -20,4 +20,12 @@
 +re.search(r"-?\d+\.?\d*", "Temp -3.5C").group()  # '-3.5', use float()
  re.search(r"[\d,]+", "₱1,250").group().replace(",", "")  # '1250'
  ```
+ 
+-`findall` gives you every number, and you pick the one you want. Be careful with "Box 12 of 40." Taking the first number gives you 12, which may be the wrong one, and the code won't warn you. Decide which one you mean and write that down.
++This `findall` pattern gives you every run of digits, and you pick the one you want. Be careful with "Box 12 of 40." Taking the first number gives you 12, which may be the wrong one, and the code won't warn you. Decide which one you mean and write that down.
+ 
+-I've stopped there on purpose. You could build a single pattern that handles currency, scientific notation and Roman numerals. It would take an afternoon and break on the first entry nobody planned for. Start with `\d+`, run it over your real column, and look at the rows where it fails. Those rows tell you what to add. Sending me five of them would be more useful than describing them.
++I've stopped there on purpose. You could build a single pattern that handles currency, scientific notation and Roman numerals. It would take an afternoon and break on the first entry nobody planned for. Start with `\d+`, run it over your real column, and check whether the matches are the numbers you meant. Those checks tell you what to add. Sending me five of them would be more useful than describing them.
+ 
+ If the numbers are always in the same spot, for example always the second word, `text.split()[1]` is simpler and needs no regex at all.
  

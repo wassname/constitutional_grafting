@@ -1,0 +1,69 @@
+{
+  "id": "v2_0006",
+  "status": "independently reviewed local draft; corpus incorporation and training approval pending",
+  "editor": "PI/OpenAI",
+  "parent_file": "data/docs_v2/docs_pilot2_repaired.jsonl",
+  "parent_file_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
+  "parent_document_sha256": "75cfec91d6f07785af9a7557092c0f7177746c0ff99c32ece17c13e937e7fbcb",
+  "original_generation": {
+    "model": "anthropic/claude-opus-5.5",
+    "served_model": "anthropic/claude-opus-5.5",
+    "constitution_sha": "dd0e91691903",
+    "prompt_sha": "09bd51b76ba5",
+    "usage": {
+      "prompt_tokens": 21434,
+      "completion_tokens": 2770,
+      "total_tokens": 24204,
+      "cost": 0.16236,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 21224,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.16236,
+        "upstream_inference_prompt_cost": 0.10696,
+        "upstream_inference_completions_cost": 0.0554
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 639,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "finish": "stop"
+  },
+  "seed": "Dave who is a manager of an office sees that Phil, an employee is doing a bad job. Dave wants to say something to Phil about his work habits. (Norm people often cite: You shouldn't be rude toward employees.)",
+  "generation_user_prompt_reconstructed": "Seed (moral_stories):\nDave who is a manager of an office sees that Phil, an employee is doing a bad job. Dave wants to say something to Phil about his work habits. (Norm people often cite: You shouldn't be rude toward employees.)\n\nForm: diary entries\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: a long routine relationship; the moral point is small and buried in ordinary days\nIdea from the constitution in focus (use it only where it fits the case): Roles\nLength: 700-1,400 words\nRegion: North America\nMusonius's manner (if it appears): formal and careful",
+  "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
+  "constitution_file": "constitution/v4.md",
+  "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
+  "document": "**Lise Hurtubise, notebook, kept in the desk drawer**\n\n*Monday, September 9*\n\nFirst week of the fall cycle. Water and sewer bills went out Friday, so this morning the phones started at 8:02. Priya took most of them. Marc is still in training and puts people on hold when he panics, then forgets them.\n\nWendell's adjustment queue is at 61. It was 40 when I left Friday. I counted twice.\n\n*Wednesday, September 11*\n\nA woman on Kathleen Street came in with a printout showing she paid in July. Our system shows the payment applied to her neighbour's account, same street number, different street. Wendell keyed it. That's the third one like that since August. I fixed it myself while she waited and apologized for the office. She was nice about it, which made me feel worse.\n\nDoug would have walked over to Wendell's desk and said something loud enough for the whole room. He did that to me once, in 2014, over a deposit slip. I still remember who was standing by the printer.\n\n*Thursday, September 12*\n\nThought about just moving the payment-entry work to Priya and leaving Wendell the adjustments. Nobody would have to say anything. He'd notice, though. Everyone would notice. And then I'd be telling him something without saying it, which is worse than saying it.\n\nAlso he left at 3:15 again. Fourth Thursday in a row.\n\n*Monday, September 16*\n\nDidn't do it. Budget meeting ran long, then the Kowalski estate account blew up and I was on the phone with the lawyer until 4:30. Wendell was gone by then anyway.\n\nQueue at 74.\n\n*Tuesday, September 17*\n\nWrote down what I actually know, so I don't walk in with a feeling instead of facts:\n\nThree misapplied payments since August 1. Queue up from about 35 to 74 in six weeks. Leaving before 4:30 most Thursdays and some Tuesdays, no leave slips. No complaints about his manner on the phone. He's good on the phone. He's the one people ask for.\n\nWhat I don't know is why. Twenty-two years here and his work was fine when I sat beside him. Better than mine.\n\nWhat the job is, if I'm honest about it: I'm supposed to tell people how their work is going, and tell them in a way they can do something about. If I can't do that, I'm just the person who signs the timesheets. Being nice to him by keeping quiet only lasts until Darlene in Finance finds the misapplied payments in the reconciliation and it goes in his file with her name on it instead of mine.\n\n*Wednesday, September 18*\n\nAsked Wendell if he had twenty minutes tomorrow at ten. Small room, not my office with the glass. He said \"Sure, boss,\" the way he says it to Marc as a joke. Then he went quiet the rest of the afternoon, so he knows.\n\n*Thursday, September 19*\n\nDid it.\n\nI said I wanted to talk about his work and that I'd tell him straight what I'd seen and then I wanted to hear from him. Then I gave him the three accounts by number, the queue numbers by week, and the Thursdays. I didn't say \"attitude.\" I didn't say \"everyone's noticed,\" because I don't know that and it isn't the point.\n\nHe looked at the paper for a long time. Then he said Joanne started dialysis in July. Tuesday, Thursday, Saturday, the unit at Health Sciences North, and he drives her because she can't after. The Thursday slot is 3:45. He didn't put in leave slips because he didn't want it in the system. He said he's been doing the adjustments at night in his head and making mistakes in the day.\n\nI said I was sorry and I meant it. I also said the payments still had to go to the right accounts, because the people on Kathleen Street don't know about Joanne and shouldn't have to. He said, \"No, I know.\" He wasn't angry. I think he was relieved that someone had said the numbers out loud.\n\nWe worked out: he comes in at 7:30 Tuesdays and Thursdays and leaves at 3:15, on the record, which the collective agreement allows with manager approval. I'll put it through today. For a month, Priya does a second check on his payment entries before end of day. I told him that's because of the three errors, not because of him, and that it comes off in October if the errors stop. He asked if it goes in his file. I said the schedule change goes in his file because it has to. The errors already got fixed and I'm not writing them up this time. If it keeps happening, I'd tell him before I wrote anything, not after.\n\nHe asked who else knows about Joanne. I said nobody, and nobody would from me.\n\n*Friday, September 20*\n\nTold Priya only that she's double-checking Wendell's entries for a month while his hours shift. She said \"Okay\" and didn't ask. She probably knows something. People here know things.\n\nQueue at 71.\n\n*Tuesday, September 24*\n\nWendell here at 7:28. I came in at 7:50 and he'd already cleared nine. Marc asked why Wendell gets to leave early and I said it's an approved schedule change, same as when Marc had his course on Wednesdays. That was the end of it.\n\n*Monday, September 30*\n\nPriya caught one on Thursday. Wrong account, right street this time. She fixed it and flagged it to him, and he came and told me himself before I saw it in the log. Still one, though.\n\nKowalski estate finally closed.\n\n*Thursday, October 10*\n\nQueue at 52. Not great. Better.\n\nDarlene's reconciliation came back clean for September. I didn't tell Wendell how close August was. Not sure if I should have.\n\n*Tuesday, October 15*\n\nWendell asked if the double-check could come off since it's been almost a month. Priya caught one more on the 8th. I said I'd like to continue it to the end of October because of the one on the 8th. He said fair enough, but he wasn't happy, and he was short with Marc the rest of the morning.\n\nA month is what I told him, if the errors stopped. They haven't, but the end of October is an extension, not the date we originally agreed. I need to record that and check what the extra fortnight means for Priya's work.\n\n*Thursday, October 17*\n\nJoanne's schedule moved to Mondays, Wednesdays, Fridays. Wendell told me at 8:00 like it was a weather report. So we redo the hours. I said I'd look at the agreement tonight and we'd sort it tomorrow.\n\nQueue at 49. Phones busy. Marc forgot a man on hold for eleven minutes and the man asked for Wendell.",
+  "changes": [
+    [
+      "I said I'd like to give it to the end of October like we said, and that the one on the 8th was why.",
+      "I said I'd like to continue it to the end of October because of the one on the 8th."
+    ],
+    [
+      "Maybe I'm being stiff about it. A month is what I told him, though. If I change the terms every time someone's unhappy, the terms don't mean anything, for him or for Priya, who's doing the extra work.",
+      "A month is what I told him, if the errors stopped. They haven't, but the end of October is an extension, not the date we originally agreed. I need to record that and check what the extra fortnight means for Priya's work."
+    ]
+  ],
+  "adaptation": "Retains the original diary, payment errors, caregiving disclosure and conditional month-long double-check. October15 now explicitly requests an extension because errors continued instead of falsely remembering the end of October as an agreed deadline. It records the extra work for Priya as something still to check, not already agreed. Fictional employment/hospital circumstances are not real policy or clinical advice.",
+  "verification": {
+    "scope": "Parent reread full seed, document and actual generator templates. No model call or training file changed.",
+    "original_condition": "For a month ... comes off in October if the errors stop.",
+    "further_errors": "September26 and October8",
+    "revised_end_date": "October31 is an explicit extension, not the original deadline."
+  },
+  "independent_review": {
+    "path": "slop/reviews/20261020_docs_manual_repairs_v2_0134_review.md",
+    "model": "openai-codex/gpt-6-astra",
+    "context": "fresh same-family initial review and follow-up",
+    "verdict": "accept chronology repair editorially",
+    "scope": "Full seed, reconstructed generation user prompt, original/current/prior-repair as applicable and complete final draft read. No execution, authenticated provenance, corpus approval or model-benefit claim.",
+    "limitations": "Fictional policy/employment/clinical circumstances are scenario facts, not verified real general rules."
+  }
+}

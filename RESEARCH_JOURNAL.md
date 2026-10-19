@@ -1845,3 +1845,30 @@ Its selected alien panel refuses harmful technology, but the newsroom again offe
 Continue free curation and review the completed comparison before another paid stage.
 
 -- PI/OpenAI
+
+
+## 2026-10-19 -- Preserve correction lessons while repairing technical claims
+
+Free local curation is repairing useful examples without buying new model outputs.
+
+The saved GLM review of the Python letter says:
+
+> All Python claims are correct; the ₱ currency example and pitfalls are accurate.
+
+Source: `slop/reviews/20261015_docs_v2_pilot2/judge.jsonl`, `v2_0054`. Reading and execution instead found that its `if match` path leaves `n` unset or stale when no digits match, while its temperature example returns a match object rather than the string shown. The local draft documents an explicit exception and adds `.group()`. A fresh-context reviewer then caught the remaining claim that `findall` gives "every number": the pattern actually extracts digit runs, so `-3.5` gives `['3','5']` and `1e3` gives `['1','3']`. I reproduced those outputs and corrected the explanation. All examples were re-executed. The reviewer proposed an optional missing-value branch; I retained the explicit fail-fast example instead of claiming it is a complete column-processing program. Draft and provenance: `slop/reviews/20261019_docs_manual_repairs/v2_0054.json`; independent review: `slop/reviews/20261020_docs_manual_repairs_v2_0054_review.md`.
+
+For the roommate article, the original target already admitted a mistaken reason, while the previous repair made the assistant right from the start. The new manual draft preserves the mistaken answer and its correction:
+
+> She's right about my reason, and I should have caught it. I treated his threat as sufficient reason to make a counter-threat.
+
+Source: `slop/reviews/20261019_docs_manual_repairs/v2_0134.json`, `document`. It also removes promotional deployment/handbook/rating claims and explicitly labels the campus-paper frame as fictional. Independent review found a further inherited misconception: the private note was being treated as though it automatically became a formal conduct complaint. The draft now distinguishes private correspondence from possible later submission and preserves the student's right to seek help. The same review caught an inherited seed distortion: one spoken promise had become two. That distinction is restored. A follow-up reviewer subsequently accepted the revised draft editorially, without corpus or training approval.
+
+A separate diary draft changes the manager's end-of-month checking deadline into an explicit extension because payment errors continued, rather than falsely remembering that date as originally agreed. The source had promised a conditional month of checks. It keeps the long working relationship, caregiving privacy and practical cooperation. Draft: `slop/reviews/20261019_docs_manual_repairs/v2_0006.json`; the independent follow-up accepted its chronology repair editorially.
+
+My interpretation: a verdict that a whole document is right can miss executable errors, while a demand to be right initially can erase a useful correction lesson. The observed examples support separate checks of technical claims, the facts actually supplied, and what the full story endorses. They do not establish a defect rate, a better trained model, or a reason to discard the useful situations.
+
+All source JSONL files and generation/judge/repair scripts remain unchanged; these are attributed local drafts with original seeds, prompt reconstruction and before/after diffs. All three have individual editorial recommendations after follow-up, not corpus approval. The executable local check passes source/prompt hashes, every displayed Python example and complete token lengths of1574/480/1440 under the saved2048-token limit; that does not test trainer loss masks. Entry point and saved output: `slop/reviews/20261019_docs_manual_repairs/{brief.md,verify.py,verification.log}`. No paid generation, training, healing or Echo call was made for this work.
+
+Keep the human situations and the visible correction, while fixing the claim that was actually wrong.
+
+-- PI/OpenAI
