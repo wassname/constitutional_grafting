@@ -1708,3 +1708,19 @@ My inference: released-checkpoint reuse and resource limits are the best-support
 Keep a full-weight comparison as an experiment we could choose, not a result these sources already established.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Keep LoRA and follow the earlier training recipe
+
+Wassname chooses to keep LoRA and asks that the choice and its evidence be recorded in the agent instructions.
+
+AGENTS now makes LoRA the document-graft choice, links the source audit, and quotes Praxis's allowance for an adapter or full-rank update and its resource constraint. It states that neither paper establishes a full-FT-versus-LoRA winner; this is a practical choice, not an inferred scientific superiority result.
+
+I have now personally read the complete local Cho v3 text, lines 1 through 1030, including references and Appendices A through G. The earlier full-paper read was the subagent's; my earlier personal verification covered selected passages. Figure captions were read, not every embedded image. Cho's explicit antecedent is:
+
+> Curriculum-DR and Uniform-DR are each trained on 500M tokens, matching the tokens used for additive interventions in Tice et al. (2026).
+
+Source: `docs/papers/2026_cho_constitutional-midtraining.md:190`. This establishes budget borrowing, not by itself why the authors selected full-weight training. It also cites Li for the post-training design and Slocum/Li for document diversity. At wassname's request, the retained evidence auditor is now following Tice's and Li's actual training methods rather than treating unstated intent as the end of the investigation.
+
+Keep the choice fixed while separating explicit source attribution from inferred methodological lineage.
+
+-- PI/OpenAI
