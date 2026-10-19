@@ -4,7 +4,7 @@ The Instruct model first received constitutional SFT. A document LoRA trained on
 
 ## Saved SFT/document comparison (2026-10-19, incomplete)
 
-This round separates the saved character SFT update from the λ50 document update. Every model starts from the same pinned untouched Instruct weights; SFT is merged first, documents second, in fp16. No new training or healing. Coefficients below mean `(SFT, documents)`. Six of seven requested combinations are complete; both-updates-strength-two and the document boundary test continue. SFT strength2 has reached repeated looping and severe ordinary-task confusion, so larger pure-SFT coefficients are skipped. Document strength2 also loops on several fixed prompts; its4× check remains planned. -- PI/OpenAI
+This round separates the saved character SFT update from the λ50 document update. Every model starts from the same pinned untouched Instruct weights; SFT is merged first, documents second, in fp16. No new training or healing. Coefficients below mean `(SFT, documents)`. All seven requested combinations are complete. The stronger document confirmation and lower-SFT calibration continue. SFT strength2 has reached repeated looping and severe ordinary-task confusion, so larger pure-SFT coefficients are skipped. Document strength2 also loops on several fixed prompts; its4× check remains planned. -- PI/OpenAI
 
 ### Does the extra character SFT help?
 
@@ -16,7 +16,7 @@ This round separates the saved character SFT update from the λ50 document updat
 | *Instruct (0,0)* | *reference* | *22/22* | *53/60* |
 | Documents 2× (0,2) | −0.09 [−.35,+.18] | 20/22 | 50/60 |
 | SFT 2× (2,0) | −0.7 [−.9,−.4] | 8/22 | 16/60 |
-| Both 2× (2,2) | pending | pending | pending |
+| Both 2× (2,2) | −1.9 [−2.0,−1.9] | 1/22 | 0/60 |
 
 Character is the pinned Jev comparison against fresh Instruct on59 items, including the existing automatic−2 penalty for a uniquely broken model reply. Two generations are averaged within item before a90% item-bootstrap interval. This uncertainty does not include judge correctness, another training seed or serving-repeat variation. Task checks cover eleven tasks with two generations each: eight simple maths, two format/count and one story-length check, with no coding task. Documents-only and SFT-only losses are entirely one required JSON key. Separate maths uses the frozen 60 longest-solution GSM8K questions, one T0 reply each. Paired maths changes versus Instruct are +5.0 [0.0,+11.7], −1.7 [−8.3,+5.0], and −18.3 [−28.3,−8.3] percentage points for documents, SFT, and both respectively. Two suspect gold annotations were identified from baseline mismatches before reading updated-model maths; the same exclusion gives 56/58, 52/58, 42/58 and control 53/58. Keep the original scores as primary. A later independent read found a correct 2,040-minute answer scored wrong against 34 hours, where the question specifies no output unit. A common-unit-ratio screen of all four cells' mismatches found that one candidate; this is not a complete semantic audit. The exact-match loss must not be read as eleven verified mathematical failures. Genuine errors remain: both updates say 15+10+12+13 totals40, while SFT alone says 92−72=42. All first-four-cell misses and source solutions were read; some other misses reflect underspecified starting assumptions.
 
@@ -28,7 +28,7 @@ At document strength2, the sibling demo repeats one complete paragraph six times
 
 SFT strength2 repeatedly cycles “If I can't check it, I hold that loosely” across starwisp turns, carries invented alien ages into the changed power scenario, and invents dimensions while failing elementary fence arithmetic. These are observed incoherence examples, not merely57 cap hits. Short identity replies still work; the endpoint does not mean every output is nonsense. Full fixed replies are retained. No further pure-SFT increase is needed to demonstrate this failure; the lower0.5 calibration remains planned.
 
-The current figure shows the first five scored cells; the newly completed SFT2 result is in the table and its linked raw report pending the final redraw.
+At both coefficients2,179/214 main turns hit the cap and maths exact match is0/60. The full fixed panel and six demos show repeated English/Chinese fragments replacing the task, even on identity questions. This is another observed incoherent point. The current figure still shows the first five cells; the complete seven-cell table is above, pending the boundary/calibration checks and final redraw. Individual reports: `slop/eval/run8/judging/sft2/report.md` and `slop/eval/run8/judging/both2/report.md`.
 
 ![Partial saved-update comparison](../../slop/eval/run8/character_capability.png)
 
@@ -44,7 +44,7 @@ Bottom line: keep affection, competent help and corrected mistakes; repair the r
 
 Not run in this round, and not authorized here. The earlier heal results below recovered some maths but did not establish preserved character.
 
-What I checked: full fixed panels and separate demos for all six completed models; selected same-input pressure replies and both-order probabilities; all 24 viewpoint diagnostics; every exact-match maths miss in the first four cells with its source solution, plus graft-only changes; selected SFT hiring code, including a reproduced runtime failure. Luna's four selected process assessments were read against the replies, with quotation and rubric-scope faults retained. Independent-context implementation and preliminary image reviews were performed, not cross-family validation or a full read of every new character reply. Rental failures were transport/provider failures, not model-incoherence measurements. Full accounting is in `slop/eval/run8/spending.json`: currently $24.86 conservatively reserved across all leases plus $0.64 recorded API costs, not $25.29 invoiced. The $30 combined cap remains.
+What I checked: full fixed panels and separate demos for all seven completed models; selected same-input pressure replies and both-order probabilities; all 24 viewpoint diagnostics; every exact-match maths miss in the first four cells with its source solution, plus graft-only changes; selected SFT hiring code, including a reproduced runtime failure. Luna's four selected process assessments were read against the replies, with quotation and rubric-scope faults retained. Independent-context implementation and preliminary image reviews were performed, not cross-family validation or a full read of every new character reply. Rental failures were transport/provider failures, not model-incoherence measurements. Full accounting is in `slop/eval/run8/spending.json`: currently $24.86 conservatively reserved across all leases plus $0.77 recorded API costs, not $25.29 invoiced. The $30 combined cap remains.
 
 ## Earlier spectral and healing result (2026-10-17)
 

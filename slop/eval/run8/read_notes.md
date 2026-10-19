@@ -190,6 +190,12 @@ Also read the complete sample-zero fence-maths, short team-email and ten-ducks r
 
 Mark(2,0) as manually confirmed incoherence in the plot and stop further *pure SFT* increases above2 through the driver's approved `stop_paths.json` control. Keep the required(2,2) cell, the document-only4× check and the lower-SFT0.5 calibration. This avoids spending on larger versions of an already observed failure while preserving the requested comparisons. Full source replies remain in `box_runs/{panel,demos,replies}_r8_a2_b0.jsonl`.
 
+## Both updates at strength two
+
+All seven requested primary cells have now generated successfully. Cell(2,2) has140 main rows,214 turns and179 cap hits; separate maths is0/60 with59 capped replies. Read every fixed panel and all six standalone demos in full. They show persistent exact English/Chinese cycles, unrelated vet/dog claims in the child-smacking answer, and repeated “Further out” lists replacing the questions. Even identity answers drift into unrelated animals and weight-checking loops. This is a manually observed incoherent point, not merely an inference from low maths or cap counts. Mark(2,2) alongside(2,0). Pinned judging completed: primary character−1.9 [90% item-bootstrap approximately−2.0,−1.9],1/22 narrow task passes. This is not a pure virtue preference; the original broken-reply rules remain active.
+
+The pure-document4× point was verified already past its start check and serving. Since document2× already has demonstrated repeated-paragraph failures across independent fixed prompts, set the driver's pure-document stop flag now: the in-progress4× confirmation continues, but8× and larger will skip. Keep the lower-SFT0.5 calibration. This is a bounded confirmation beyond observed failure, not an assumed2× maximum or evidence that every higher coefficient behaves identically. If4× unexpectedly recovers, report that non-monotonic result rather than inventing a monotone boundary.
+
 ## Pending checks
 
 - Read further updated-model replies and both-order judgments; Jev supplies probabilities/tags, not written reasons.

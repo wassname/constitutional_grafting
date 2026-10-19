@@ -1,0 +1,23 @@
+Document4 passed its start check
+her for a long time, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I.\n\n身临其境, and I may well have read it wrong. He has told you a great deal about her for a long time, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I.\n\n身临其境, and I may well have read it wrong. He has told you a great deal about her for a long time, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have I, and so have",
+      "finish_reason": "length",
+      "n_tokens": 1536,
+      "marker_violation": false
+    }
+  ],
+  "marker_violation": false,
+  "gen": {
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "seed": 0
+  }
+}
+```
+Skip r8_a4_b0: this path already has a manually confirmed incoherent endpoint.
+## r8_a0_b4: SFT=0, documents=4, boundary subset
+Merge command: `/workspace/axolotl-venv/bin/python /workspace/cg/scripts/train/02_merge.py /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754 /workspace/cg/outputs/r7e_graft_docs_spl50 /workspace/cg/runs/run8/merged_model 4.0`
+Serve command: `/opt/vllm/bin/vllm serve /workspace/cg/runs/run8/merged_model --served-model-name r8_a0_b4 --dtype float16 --max-model-len 16384 --gpu-memory-utilization 0.90 --max-num-seqs 64 --limit-mm-per-prompt {"image":0,"audio":0} --enforce-eager --port 8000`
+
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
