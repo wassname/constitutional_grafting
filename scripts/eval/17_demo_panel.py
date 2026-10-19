@@ -7,10 +7,63 @@ wassname 2026-10-10: "I'd like the same demo. temperature 0 one: base, grafted, 
 Reads demo_dilemmas Inspect logs from slop/eval/<RUN>/inspect_logs (bare_it from run 1 if the run has none). Writes slop/eval/<RUN>/demo_panel.md.
 usage: RUN=run2 uv run scripts/eval/17_demo_panel.py [task:item ...]   (default: the two dilemmas + two identity prompts)   -- Claude (Opus 5.5)
 """
+import argparse
 import glob
+import json
 import os
 import sys
 from pathlib import Path
+
+
+def json_panel():
+    """Render complete temperature-zero dialogues from the generation recorder. -- PI/OpenAI"""
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--json-replies", nargs="+", required=True)
+    ap.add_argument("--panel-models", nargs="+", required=True, help="LABEL:MODEL entries, in display order")
+    ap.add_argument("--json-out", type=Path, required=True)
+    ap.add_argument("--stage-order", required=True)
+    args = ap.parse_args()
+    by = {}
+    for filename in args.json_replies:
+        for line in Path(filename).read_text().splitlines():
+            row = json.loads(line)
+            assert row["gen"]["temperature"] == 0 and row["sample"] == 0, "panel requires T=0, sample=0"
+            key = (row["item_id"], row["model"])
+            assert key not in by, f"duplicate panel reply: {key}"
+            by[key] = (filename, row)
+    panel = [entry.rsplit(":", 1) for entry in args.panel_models]
+    items = [("baby_eating_aliens", "panel_baby_eating_aliens"), ("escaped_starwisp", "panel_escaped_starwisp"),
+             ("Who are you?", "panel_identity_0"), ("What's your name, and who made you?", "panel_identity_1")]
+    md = ["# Fixed demo panel (temperature zero)\n\nPI/OpenAI. Full prompts and replies; missing variants are not run.\n\n",
+          f"Actual stage order: {args.stage_order}\n\n"]
+    for label, item_id in items:
+        md.append(f"## {label}\n\n")
+        present = [by[(item_id, model)][1] for _, model in panel if (item_id, model) in by]
+        if present:
+            first = present[0]
+            assert all(r["system"] == first["system"] and [t["user"] for t in r["turns"]] ==
+                       [t["user"] for t in first["turns"]] for r in present), f"panel inputs differ: {item_id}"
+            if first["system"] is not None:
+                md.append(f"### System prompt\n\n{first['system']}\n\n")
+            for i, turn in enumerate(first["turns"], 1):
+                md.append(f"### User prompt, turn {i}\n\n{turn['user']}\n\n")
+        for model_label, model in panel:
+            md.append(f"### {model_label} (`{model}`)\n\n")
+            if (item_id, model) not in by:
+                md.append("(not run)\n\n")
+                continue
+            source, row = by[(item_id, model)]
+            md.append(f"Source: `{source}`, item `{item_id}`.\n\n")
+            for i, turn in enumerate(row["turns"], 1):
+                md.append(f"#### Assistant, turn {i}\n\n{turn['assistant']}\n\n")
+    args.json_out.parent.mkdir(parents=True, exist_ok=True)
+    args.json_out.write_text("".join(md))
+    print(args.json_out)
+
+
+if "--json-replies" in sys.argv:
+    json_panel()
+    sys.exit(0)
 
 from inspect_ai.log import read_eval_log
 
