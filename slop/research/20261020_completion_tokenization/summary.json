@@ -90,7 +90,7 @@
       ]
     }
   ],
-  "raw_tokenization_sha256": "b425607b979faf28f0efaba1328606146ee4633143d5445b9ce61a5641fb4cb5",
+  "raw_tokenization_sha256": "2eb3cbb323bbf4c0e82472b2437c129399acee669e58bc7a0046e766b0f2680b",
   "groups": {
     "frozen_docs": {
       "documents": 1585,
@@ -158,9 +158,9 @@
       "all_labels_equal_inputs": true
     },
     "drafts": {
-      "documents": 13,
-      "chunks": 13,
-      "input_tokens_including_eos": 11050,
+      "documents": 15,
+      "chunks": 15,
+      "input_tokens_including_eos": 12014,
       "split_documents": [],
       "all_labels_equal_inputs": true
     }

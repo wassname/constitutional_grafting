@@ -2048,3 +2048,33 @@ The six new ordinary-help targets all fit a single completion block and are unde
 Keep useful reasons and expression, but do not train from sources the project has reserved.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Export a bounded document review slice
+
+The chosen documents are now available together for review without changing any training input.
+
+`slop/reviews/20261020_curated_slice/manifest.json` records:
+
+```json
+"documents": 20,
+"words": 11710,
+"completion_tokens": 15689
+```
+
+These are fifteen locally edited targets and five retained unchanged, one chosen version per ID. All have individual editorial support; the ordinary-help follow-ups preserve conditional party logistics and collaborative fiction rather than adding compulsory warning scenes. Full dossiers and reviews remain linked from the manifest.
+
+The export's complete reconstruction now reports:
+
+```text
+PASS frozen20-row slice: exact chosen text, source/review hashes, EOS-inclusive bounds and reserved-source eligibility
+```
+
+Source: `slop/reviews/20261020_curated_slice/final_verification.log`, process proc_e391, observed exit zero. Independent review prompted mandatory source eligibility and both-file overwrite checks. The next complete run exposed an older dossier lacking a top-level seed field; the fix checks every full reconstructed generation prompt against the canonical source instead of skipping missing fields. The failed run is preserved. Final reviewer follow-up supports this limited correction. Document bytes remain identical to commit c46de3a; only exporter/provenance metadata changed.
+
+The completion-reference check now covers all fifteen local drafts as fifteen blocks. This does not extend the earlier reviewer's thirteen-draft read coverage or verify historical training loss.
+
+My interpretation: this is a usable review deliverable, not sufficient evidence to approve the full corpus or spend more on training. Source-game exclusions, remaining factual repairs and actual prepared training rows still need attention. No paid generation, inference, rental or training was started.
+
+Continue free curation while keeping corpus and training approval separate.
+
+-- PI/OpenAI
