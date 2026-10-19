@@ -1,0 +1,28 @@
+{
+  "author": "PI/OpenAI",
+  "checked": "2026-10-20 Perth",
+  "publisher": "NICE",
+  "url": "https://www.nice.org.uk/guidance/ng11/chapter/Recommendations#behaviour-support-plan",
+  "guideline": "NG11, Challenging behaviour and learning disabilities",
+  "read_scope": "Read the fetched recommendations through section1.7.6; specifically full sections1.5.9 and1.6.1. The later portion of the guideline was not read.",
+  "passages": [
+    {
+      "section": "1.6.1",
+      "quote": "Develop a written behaviour support plan for children, young people and adults with a learning disability and behaviour that challenges that is based on a shared understanding about the function of the behaviour."
+    },
+    {
+      "section": "1.6.1, proactive strategies",
+      "quote": "changing the environment (for example, reducing noise, increasing predictability)"
+    },
+    {
+      "section": "1.6.1, alternative skills",
+      "quote": "developing a new skill (for example, improved communication, emotional regulation or social interaction)"
+    },
+    {
+      "section": "1.6.1, preventive strategies",
+      "quote": "identify preventive strategies to calm the person when they begin to show early signs of distress"
+    }
+  ],
+  "supports": "Behaviour support plans can include proactive environmental changes, communication/other skills and prevention, not merely physical crisis handling.",
+  "does_not_establish": "No learning-disability or autism diagnosis for Yazan, applicability of this UK guideline to a particular Jordanian nursery, actual plan contents, treatment safety, local legal rights, clinician-letter acceptance or a clinical outcome. These excerpts justify correcting an overnarrow generic definition only."
+}

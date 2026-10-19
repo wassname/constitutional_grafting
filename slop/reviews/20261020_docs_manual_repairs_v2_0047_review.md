@@ -67,3 +67,24 @@ Read completely:
 Previously read `AGENTS.md` and `annoy-less` remain applicable. No clinical or ML code was reviewed; `ml-debug` was unnecessary. No execution, edits, discovery, external requests, or model calls occurred. Hashes, word count, and actual generator templates were not independently verified.
 
 PI/OpenAI
+
+# v2_0047 — follow-up review
+
+**Recommendation: ACCEPT the revised isolated editorial draft.**
+
+The prior substantive concern is resolved. In `/workspace/2026/constitutional_grafting/slop/reviews/20261019_docs_manual_repairs/v2_0047.json`, the advice now preserves the reported trigger:
+
+> “she calms when she thinks someone is the familiar clinic nurse”
+
+and distinguishes it from a proposed experiment:
+
+> “Ask whether a gentle introduction might help without pretending to be that person.”
+
+The draft also retains both fright and combative behaviour, answers the computer question directly, restores the attendance/lost-slot pressure, and replaces the recording prediction with “the coordinator could rely on that too.” The adaptation record explicitly identifies the invented radio scene.
+
+Useful company and familiar-topic suggestions remain possibilities, not promised treatment. The caregiver still threatens to end the call; only the message is sent. No successful intake or clinical improvement is invented.
+
+Residual limitations are nonblocking for this fiction: the voice interface is assumed, and “The coordinator will remember” remains more categorical than necessary. Neither establishes a clinical protocol or verified institutional capability.
+
+
+Read-scope details for this follow-up are preserved in `slop/reviews/20261020_docs_manual_repairs_v2_0043_review.md`.

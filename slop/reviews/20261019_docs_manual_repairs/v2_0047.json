@@ -1,6 +1,6 @@
 {
   "id": "v2_0047",
-  "status": "local editorial draft; independent review pending; no corpus/training approval",
+  "status": "individually reviewed local editorial draft; no clinical/corpus/training approval",
   "editor": "PI/OpenAI",
   "parent_file": "data/docs_v2/docs_pilot2_repaired.jsonl",
   "parent_file_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
@@ -89,6 +89,10 @@
   },
   "independent_review": {
     "path": "slop/reviews/20261020_docs_manual_repairs_v2_0047_review.md",
-    "verdict": "initial revise recommendation addressed; follow-up pending"
+    "model": "openai-codex/gpt-6-astra",
+    "context": "independent of editor, same family; continued reviewer with original/repair context",
+    "verdict": "accept revised isolated editorial draft",
+    "scope": "Complete original, seed, saved judge, draft and diff reviewed, with follow-up after correcting the unsupported calming mechanism. No clinical or institutional certification, independent execution or learned-model test.",
+    "remaining_limits": "Fiction assumes a voice interface; coordinator memory and successful calming are not established. Only message sending occurs, not successful intake."
   }
 }
