@@ -78,7 +78,7 @@ def estimates():
         "pending_judging": sorted(set(done) - scored_models),
         "primary_models": [f'r8_a{a:g}_b{b:g}' for a, b in manifest['cells']],
         "not_generated": [f'r8_a{a:g}_b{b:g}' for a, b in manifest['cells'] + manifest['boundary_ladder'] if f'r8_a{a:g}_b{b:g}' not in done],
-        "scope": "Both-order Jev change scores versus fresh Instruct. Samples averaged within item before 90% item-bootstrap intervals. Full and shared-subset scores are separate comparisons. These intervals do not measure semantic judge error, training-seed variation or repeatability of selected T0 demos."}
+        "scope": "Pinned both-order Jev change scores versus fresh Instruct, including existing code-based broken-reply penalties. Samples averaged within item before 90% item-bootstrap intervals. Full and shared-subset scores are separate comparisons. These intervals do not measure semantic judge error, training-seed variation or repeatability of selected T0 demos."}
     (OUT / "paired_estimates.json").write_text(json.dumps(artifact, indent=2) + "\n")
     return artifact
 
@@ -152,7 +152,7 @@ def render(artifact):
     status = f"{primary_n}/{len(artifact['primary_models'])} requested mixtures measured; " + ('incoherent points marked.' if marked else 'no incoherence endpoint confirmed yet.')
     fig.supxlabel("Labels: (SFT strength, document strength). Higher and further left is better. Cross at (0,0): untouched Instruct.\n"
         "Task checks: 8 maths, 2 format/count, 1 story-length; two generations per item. Separate 60-question maths is not plotted.\n"
-        "Bars: marginal 90% item-bootstrap intervals. Dashed lines connect measured points, not interpolation evidence.\n" + status, fontsize=9)
+        "Character includes fixed broken-reply penalties. Bars: marginal 90% item-bootstrap intervals. Dashed lines are not interpolation evidence.\n" + status, fontsize=9)
     fig.canvas.draw()
     bounds = fig.get_tightbbox(fig.canvas.get_renderer()); width, height = fig.get_size_inches()
     assert bounds.x0 >= 0 and bounds.y0 >= 0 and bounds.x1 <= width and bounds.y1 <= height, "plot label clipped"

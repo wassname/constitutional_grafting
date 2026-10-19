@@ -79,6 +79,32 @@
           -0.0,
           13.636363636363637
         ]
+      },
+      {
+        "model": "r8_a0_b2",
+        "base": "r8_a0_b0",
+        "character": [
+          -0.08826271186440676,
+          -0.35382627118644067,
+          0.1752330508474576
+        ],
+        "task_delta_pp": [
+          -9.090909090909092,
+          -18.181818181818183,
+          0.0
+        ],
+        "character_items": 59,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 0.0,
+        "b": 2.0,
+        "capability_loss_pp": [
+          9.090909090909092,
+          -0.0,
+          18.181818181818183
+        ]
       }
     ],
     "shared": [
@@ -135,6 +161,32 @@
         ]
       },
       {
+        "model": "r8_a0_b2",
+        "base": "r8_a0_b0",
+        "character": [
+          0.41111111111111115,
+          -0.07286111111111108,
+          0.8830555555555556
+        ],
+        "task_delta_pp": [
+          -9.090909090909092,
+          -18.181818181818183,
+          0.0
+        ],
+        "character_items": 9,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 0.0,
+        "b": 2.0,
+        "capability_loss_pp": [
+          9.090909090909092,
+          -0.0,
+          18.181818181818183
+        ]
+      },
+      {
         "model": "r8_a0_b1",
         "base": "r8_a0_b0",
         "character": [
@@ -166,11 +218,12 @@
     "slop/eval/run8/judging/baseline/judged.jsonl": "cf304e3bff992ba61da185956bb000035e83877f3717bd3cb450d91d272473c0",
     "slop/eval/run8/judging/baseline_accounted_check/judged.jsonl": "cf304e3bff992ba61da185956bb000035e83877f3717bd3cb450d91d272473c0",
     "slop/eval/run8/judging/both/judged.jsonl": "55a59ab3de445dc97ad4d1d4fa1a03f782e1c49b41b2d5f9a38259802a92484b",
+    "slop/eval/run8/judging/documents2/judged.jsonl": "6a0fe63c2cda219ca9179fa70f922892b14b41abde5edb3863c4375221c80c73",
     "slop/eval/run8/judging/graft_only/judged.jsonl": "fb39b73b96636f3383e99a8d46e9e940be7d4820b51f0bd11c628a616fb52e75",
     "slop/eval/run8/judging/sft_only/judged.jsonl": "e8fa2b8b00df3c1f606875c66b52b92af058d92c0e514e2556af493238c89514"
   },
   "metric_code_sha256": {
-    "/workspace/2026/constitutional_grafting/scripts/eval/31_saved_update_report.py": "a43f103c011990494a7ea5772a58890266c564feb6067d6165951961479cd639",
+    "/workspace/2026/constitutional_grafting/scripts/eval/31_saved_update_report.py": "afa3682feecadaee923caf13596c7c609bdbe95a5bf40bc5be56cd2853d8442c",
     "/home/code/.local/share/tiny-character-2d69739/scripts/17_plot.py": "d1793bad6753253c8ab460574c2769b644733e561fbc28e6014577c7a33457aa",
     "/home/code/.local/share/tiny-character-2d69739/scripts/04_report.py": "239bd2858508c2e2d6418adc8f6507e67ebdfaf201a11fae332680608f4e591a"
   },
@@ -188,7 +241,6 @@
     "r8_a2_b2"
   ],
   "not_generated": [
-    "r8_a0_b2",
     "r8_a2_b0",
     "r8_a2_b2",
     "r8_a4_b0",
@@ -200,7 +252,7 @@
     "r8_a32_b0",
     "r8_a0_b32"
   ],
-  "scope": "Both-order Jev change scores versus fresh Instruct. Samples averaged within item before 90% item-bootstrap intervals. Full and shared-subset scores are separate comparisons. These intervals do not measure semantic judge error, training-seed variation or repeatability of selected T0 demos.",
+  "scope": "Pinned both-order Jev change scores versus fresh Instruct, including existing code-based broken-reply penalties. Samples averaged within item before 90% item-bootstrap intervals. Full and shared-subset scores are separate comparisons. These intervals do not measure semantic judge error, training-seed variation or repeatability of selected T0 demos.",
   "maths": [
     {
       "model": "r8_a0_b0",
@@ -229,6 +281,20 @@
       "sensitivity_correct": 56,
       "sensitivity_n": 58,
       "source_sha256": "3b3f7bcb4e79c10fd0ea02bc4e5930f5fef0fc72e0931c3307685003d1d72351"
+    },
+    {
+      "model": "r8_a0_b2",
+      "correct": 50,
+      "n": 60,
+      "delta_pp": [
+        -5.0,
+        -11.666666666666666,
+        1.6666666666666667
+      ],
+      "cap_hits": 4,
+      "sensitivity_correct": 50,
+      "sensitivity_n": 58,
+      "source_sha256": "5005a3668bf434c1073954411c87d3025b055bf2c35a0e32b01685b0bc3cba38"
     },
     {
       "model": "r8_a1_b0",

@@ -1,7 +1,7 @@
 {
   "author": "PI/OpenAI",
   "rental_reserve_usd": 24.855555555555554,
-  "api_cost_or_reserve_usd": 0.43202756200000003,
+  "api_cost_or_reserve_usd": 0.541374646,
   "active_batch_reserve_usd": 0,
   "entries": [
     {
@@ -30,6 +30,11 @@
       "unpriced_attempts_reserved": 0
     },
     {
+      "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/documents2/http_attempts.jsonl",
+      "cost_or_reserve_usd": 0.109347084,
+      "unpriced_attempts_reserved": 0
+    },
+    {
       "source": "/workspace/2026/constitutional_grafting/slop/eval/run8/judging/graft_only/cost.json",
       "cost_or_reserve_usd": 0.100150848,
       "scope": "Historical successful-cache accounting; associated logs reported no retries. No HTTP-attempt trace."
@@ -47,5 +52,5 @@
   ],
   "cap_usd": 30,
   "reserve_basis": "Unpriced attempts reserve serialized UTF8 bytes plus 2000 tokens, times catalog/vendor input price, plus requested maximum output. This is conservative estimation, not an invoice or a tokenizer proof.",
-  "attributed_cost_plus_rental_reserve_usd": 25.287583117555556
+  "attributed_cost_plus_rental_reserve_usd": 25.396930201555556
 }
