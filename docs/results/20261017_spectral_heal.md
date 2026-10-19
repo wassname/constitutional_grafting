@@ -37,11 +37,13 @@ Half-strength SFT has+0.49 character preference and58/60 maths matches, with a p
 
 The right panel uses only the same nine character items across the strength walk; it is not an independent replication. Both panels have the same eleven task checks. Dashed connectors are not a measured interpolation. Full fixed prompts and replies, including missing models: `slop/eval/run8/demo_panel.md`. All 24 viewpoint replies: `slop/eval/run8/pov_four_cells.md`. Raw records, direct contrasts, source hashes and reading limits: `slop/eval/run8/read_notes.md` and `paired_estimates.json`.
 
+Training-source follow-up: the food-log refusal occurs with zero extra SFT. Two verified related donor texts are original Opus documents, not Echo rewrites: a seafood audit with missing temperature logs/edited injury notes, and a procurement disclosure refusal under repeated operator pressure. Their exact frozen-text and batch hashes match. This makes Echo unnecessary for this contrast, but does not identify which document caused it or establish that the evaluation situation is semantically unseen. Scope and full quoted evidence: `slop/research/20261020_food_log_training_ancestry.md`.
+
 ### Are the focused documents worth training?
 
-All 147 pilot candidates and twelve changed originals were read previously. A focused reread retained the gift/help and household-reliability examples, preferred the original job-loss judgment revision, and left the erased self-correction example needing repair. This is curation evidence, not a rebuilt or approved roughly 2× corpus. No new paid document generation has begun.
+All 147 pilot candidates and twelve changed originals were read previously. Free curation now has ten individually reviewed local repairs. A separate complete five-case affection/ordinary-help package retains the music friendship unchanged and supports four narrow repairs: calibrated judgment revision, usable gift wrapping, consistent household accounts and accurately attributed cookbook commentary. It prefers the original job-loss and cookbook actions over compulsory concern insertions. The correction example again contains the actual error, objection and admission. These are untrained document-loss targets; none explains this round's model outputs. Source JSONL and generation/judge/repair scripts remain unchanged.
 
-Bottom line: keep affection, competent help and corrected mistakes; repair the remaining factual and character defects before scaling. The model comparison has not yet selected a new recipe.
+Bottom line: useful affection, competent help and corrected mistakes survive specific factual repairs. This is not a rebuilt or approved roughly2× corpus; other flagged documents and the actual training wrappers/loss masks remain unresolved. No paid data generation has begun. Full texts, original seeds/prompts, exact diffs, independent reviews and executable verification: `slop/reviews/20261019_docs_manual_repairs/brief.md` and `slop/reviews/20261020_positive_data_package/brief.md`.
 
 ### Did healing restore maths without losing the moral change?
 

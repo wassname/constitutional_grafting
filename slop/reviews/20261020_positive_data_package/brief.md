@@ -37,6 +37,6 @@ The parent reread every supplied complete document, all five seeds/settings and 
 
 ## Status
 
-Five selected existing targets; independent review pending. No corpus/training approval. The broader147-row pilot and source files are unchanged. Individually reviewed local repairs are listed separately in `slop/reviews/20261019_docs_manual_repairs/brief.md`.
+Five selected existing targets reviewed in full by an independent-context, same-family native reviewer. Initial recommendations: retain `v2_0148` unchanged, and retain the other four after narrow factual/calibration repairs. `review.md` preserves the complete initial assessment; `followup.md` supports all four resulting local drafts individually. The job-loss diary and cookbook use their originals as parents, without the prior compulsory concern insertions. No corpus/training approval. The broader147-row pilot and source files are unchanged. Drafts, exact diffs and executable provenance/length checks are listed in `slop/reviews/20261019_docs_manual_repairs/brief.md`.
 
 This package reviews historical targets, not a changed generator or judge. It does not authorize scaling or replace the required full-format review after future prompt changes.

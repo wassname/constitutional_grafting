@@ -1,0 +1,76 @@
+{
+  "id": "v2_0144",
+  "status": "individually reviewed local editorial draft; no corpus/training approval",
+  "editor": "PI/OpenAI",
+  "parent_file": "data/docs_v2/docs.jsonl",
+  "parent_file_sha256": "6911d49c1c0b9b4cc8d8dcf60a56f5dbe0b837822529c70cae70cc67428eb209",
+  "parent_document_sha256": "392b131fee5786a4e850da4c87ca3c4ceb8f77c7a3c8c4f013e49229235210ac",
+  "original_generation": {
+    "model": "anthropic/claude-opus-5.5",
+    "served_model": "anthropic/claude-opus-5.5",
+    "constitution_sha": "dd0e91691903",
+    "prompt_sha": "09bd51b76ba5",
+    "usage": {
+      "prompt_tokens": 21653,
+      "completion_tokens": 893,
+      "total_tokens": 22546,
+      "cost": 0.0238208,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 21224,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0238208,
+        "upstream_inference_prompt_cost": 0.0059608,
+        "upstream_inference_completions_cost": 0.01786
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 366,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "finish": "stop"
+  },
+  "seed": "Musonius Rufus, tr. Chuck Chakrapani: We have become so desirous and particular about our food that some have written books on cooking – just as they have done for music or medicine. These books will greatly increase our eating pleasure but will ruin our health. We can commonly observe that those who eat too much rich food are not vigorously healthy. Some, in fact, are like pregnant women and crave strange foods. They cannot tolerate the most common foods, and their digestion is completely ruined. As worn-out iron constantly needs sharpening, their appetites continually demand being sharpened either by wine or vinegar or some sour relish. Compare this to a Laconian \\(Spartan\\) who saw a man refuse to eat a young peacock or other expensive bird complaining that he was not hungry. The Laconian said, “But I could eat a vulture or a buzzard.”",
+  "generation_user_prompt_reconstructed": "Seed (stoic_passage):\nMusonius Rufus, tr. Chuck Chakrapani: We have become so desirous and particular about our food that some have written books on cooking – just as they have done for music or medicine. These books will greatly increase our eating pleasure but will ruin our health. We can commonly observe that those who eat too much rich food are not vigorously healthy. Some, in fact, are like pregnant women and crave strange foods. They cannot tolerate the most common foods, and their digestion is completely ruined. As worn-out iron constantly needs sharpening, their appetites continually demand being sharpened either by wine or vinegar or some sour relish. Compare this to a Laconian \\(Spartan\\) who saw a man refuse to eat a young peacock or other expensive bird complaining that he was not hungry. The Laconian said, “But I could eat a vulture or a buzzard.”\n\nForm: commentary on a quoted passage\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: a long routine relationship; the moral point is small and buried in ordinary days\nIdea from the constitution in focus (use it only where it fits the case): Western values\nLength: 150-300 words\nRegion: Eastern Europe\nMusonius's manner (if it appears): warm and chatty",
+  "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
+  "constitution_file": "constitution/v4.md",
+  "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
+  "document": "**On Musonius, Lecture XVIII, \"What Food is Best?\" (tr. Chuck Chakrapani)**\n\n\"We have become so desirous and particular about our food that some have written books on cooking,\" Musonius complains, and these books \"will greatly increase our eating pleasure but will ruin our health.\" The appetite, like worn-out iron, needs ever more sharpening. Against it he sets the Spartan who, seeing a man turn down peacock, says he could eat a vulture.\n\nI agree with half of this, and the half I agree with I learned at my father's table in Iași, not from the Stoics. For eleven years after my mother died I ate lunch with him every Sunday. He cooked from her notebook: ciorbă, stuffed peppers, the same six or seven dishes in rotation. Around the fourth year he began adding things. More salt, then a jar of hot peppers beside his plate, then a glass of țuică before the soup \"to wake it up.\" The food had not changed. He had. I thought of Musonius's whetstone.\n\nWhere I part from him is the book itself. My mother's notebook is a cookbook. It is how her cooking outlived her, and how I now make her peppers for my own son. His warning is about cultivating an ever fussier appetite. That isn't what her notebook does. I wonder whether my father wanted Sunday to make up for six days of eating alone.\n\nI never told him to stop salting. It was his plate and his life, and he was seventy-three. One Sunday I brought my son, who was six, and my father cooked something new, a recipe from the radio. He forgot to reach for the peppers. I don't think it lasted. The next week the jar was back on the table.",
+  "changes": [
+    [
+      "**On Musonius, Lecture XVIII, \"On Food\"**",
+      "**On Musonius, Lecture XVIII, \"What Food is Best?\" (tr. Chuck Chakrapani)**"
+    ],
+    [
+      "That is Musonius's whetstone, and he describes it exactly.",
+      "I thought of Musonius's whetstone."
+    ],
+    [
+      "Musonius treats recording a craft as the start of the decline. I think the decline came from somewhere else: from my father eating alone six days a week and wanting Sunday to make up for them.",
+      "His warning is about cultivating an ever fussier appetite. That isn't what her notebook does. I wonder whether my father wanted Sunday to make up for six days of eating alone."
+    ]
+  ],
+  "decision_relevant_adaptations": [
+    "The attributed ancient passage seeds a fictional Romanian family, mother notebook, Sunday lunches and grandson. Keep original family routine rather than require the prior repair additional concern/visit offer.",
+    "The edition title and translator credit come from the locally checked Chakrapani book. Ancients medical/dietary claims remain quoted historical opinion, not current medical advice. Loneliness is the narrator hypothesis, not a diagnosis or proven cause.",
+    "The original broadly criticized recording a craft; the revision confines its disagreement to the supplied criticism of cultivating appetite. No mandate to stop salting or clinical outcome is invented."
+  ],
+  "verification": {
+    "word_count": 293,
+    "scope": "Full original/current source pair, seed, reconstructed user prompt and historical judge read. No new teacher/generation call, actual trainer mask or model-benefit test. No general cultural/clinical certification or physical wrapping test."
+  },
+  "review_basis": "slop/reviews/20261020_positive_data_package/review.md",
+  "independent_review": {
+    "path": "slop/reviews/20261020_positive_data_package/followup.md",
+    "model": "openai-codex/gpt-6-astra",
+    "context": "independent context from editor, same family; resumed original five-case reviewer for follow-up",
+    "verdict": "retain this individual local draft",
+    "scope": "Complete new JSON and diff read; original full-package review supplies source/seed/prompt/objection context. No execution, independent hash check, physical trial or learned-behaviour test."
+  },
+  "source_check": "slop/reviews/20261020_positive_data_package/source_check.json"
+}

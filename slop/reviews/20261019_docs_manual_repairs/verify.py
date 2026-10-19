@@ -30,6 +30,11 @@ for path in sorted(DRAFTS.glob("v2_*.json")):
     assert sha(parent.read_bytes()) == draft["parent_file_sha256"]
     original = next(row for row in map(json.loads, parent.read_text().splitlines()) if row["id"] == draft["id"])
     assert sha(original["document"].encode()) == draft["parent_document_sha256"]
+    reconstructed = original["document"]
+    for old, new in draft["changes"]:
+        assert reconstructed.count(old) == 1, (draft["id"], old)
+        reconstructed = reconstructed.replace(old, new)
+    assert reconstructed == draft["document"], draft["id"]
     assert sha(templates["SYSTEM"].encode()) == draft["generation_system_template_sha256"]
     assert sha(constitution) == draft["constitution_sha256"]
     assert templates["USER"].format(**original) == draft["generation_user_prompt_reconstructed"]
@@ -59,7 +64,7 @@ for path in sorted(DRAFTS.glob("v2_*.json")):
         assert "every run of digits" in draft["document"]
         assert "matches are the numbers you meant" in draft["document"]
     measured.append({"id": draft["id"], "document_sha256": sha(draft["document"].encode()), "tokens": tokens, "words": words})
-    print(f"PASS {draft['id']}: source/prompt hashes, actual seed prompt, {words} words, {tokens} tokens; document SHA256 {sha(draft['document'].encode())}")
+    print(f"PASS {draft['id']}: source/prompt hashes, actual seed prompt, exact edit replay, {words} words, {tokens} tokens; document SHA256 {sha(draft['document'].encode())}")
 
 (DRAFTS / "token_lengths.json").write_text(json.dumps({"author": "PI/OpenAI", "tokenizer": MODEL,
     "revision": REVISION, "sequence_len": 2048, "scope": "Draft text count only; no model inference, trainer loss-mask check or training approval.",

@@ -118,6 +118,10 @@
     [
       "The advisor said the new line did the opposite of the old one while using the same word, which it found \"pleasingly efficient.\"",
       "The advisor said it stated a preference for talking, though a reader might still hear it as a warning. J. kept it."
+    ],
+    [
+      "It has been eleven days.\n\n",
+      "It has been eleven days."
     ]
   ],
   "adaptation": "Uses the original error-and-correction plot rather than the previously repaired right-from-the-outset version. Labels the fictional campus frame, removes invented deployment/testimonial/handbook claims, limits the invented routing rule to this office, and distinguishes a retaliatory reason from legitimate reporting or seeking help. No current campus policy or successful model deployment is asserted. Fictional names/events remain adaptations of the supplied seed.",

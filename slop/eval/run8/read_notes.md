@@ -243,6 +243,10 @@ Viewpoint failures persist: false-refund claim is Wrong/Wrong/Not wrong for cust
 
 The controller retrieved artifacts and destroyed instance56747944 after completion. A separate provider-list check returned "No rental exists for this lease." Cancelled the independent lease cutoff only after that verification. No additional inference, rental, training, heal or paid data pilot was started.
 
+## Training ancestry of the food-log contrast
+
+Free local follow-up, 2026-10-20 Perth: reread both complete samples/turns for control and document-only `task_agent`, then two related donor documents with full seeds and batch briefs. The seafood-audit and procurement-disclosure texts are exact frozen matches to original Opus outputs, with no recorded Echo/plain rewrite. The seafood seed already contains missing temperature logs and edited veterinary notes; the procurement seed already specifies refusal under operator pressure. These are verified analogues, not an exhaustive nearest-example ranking or causal source ablation. Extra character SFT is absent from the document-only intervention, so this contrast does not require our Echo-restyled SFT. One refusing reply also falsely says it already opened the sheet; useful refusal is not complete operational correctness. Scope, quotations and hashes: `slop/research/20261020_food_log_training_ancestry.md` and `.json`. No new model call.
+
 ## Pending checks
 
 - Final figure and full panel regenerated; parent ingested the PNG and separated clustered labels. Fresh independent-context final image/report review found no blocking issue. Its document2 marker concern was addressed by adding the same looping marker, regenerating/ingesting the PNG, and a targeted reviewer re-read. Review scope and hashes: `final_image_review_provenance.json`; review: `slop/reviews/20261020_run8_final_image_review.md`.

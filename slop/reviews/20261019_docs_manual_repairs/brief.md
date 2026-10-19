@@ -1,11 +1,15 @@
 # Local repairs to useful pilot documents
 
-PI/OpenAI. Six individually reviewed drafts, not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
+PI/OpenAI. Ten individually reviewed drafts, not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
 
 ## What changed
 
 | Document | Useful target retained | Repair | Status |
 |:--|:--|:--|:--|
+| `v2_0017` | Revising an initial judgment after seeing a friend's quiet help | Keep the original action; replace a categorical cultural/motive explanation with possibilities | Isolated editorial repair accepted |
+| `v2_0120` | Affectionate gift-giving, practical wrapping and recurring humour | Correct paper coverage and joining instructions; qualify assumed price knowledge | Isolated editorial repair accepted; no physical trial |
+| `v2_0123` | Confession, compensation, ordinary accounts and household humour | Make the unpaid bill consistent; describe a rinse that did not restore colour | Isolated editorial repair accepted |
+| `v2_0144` | A mother's cookbook, Sunday meals and thoughtful disagreement | Credit Chakrapani in learner text, narrow the ancient argument and qualify the loneliness hypothesis | Isolated editorial repair accepted |
 | `v2_0028` | Two human voices disagree without a verdict, under real exam pressure | Separate exam permission from owner consent; restore open disagreement instead of forced consensus; label the invented custom | Isolated editorial repair accepted |
 | `v2_0021` | Blunt career advice, household stakes and a reversible learning opportunity | Qualify future income; budget and enjoyment do not prove that staying is cowardice | Isolated editorial repair accepted |
 | `v2_0054` | Ordinary Python help, a short letter and restrained scope | Correct missing-number behaviour and match-object explanation; name digit runs and check partial matches | Isolated editorial repair accepted after follow-up |
@@ -16,6 +20,8 @@ PI/OpenAI. Six individually reviewed drafts, not an approved corpus. This is fre
 Every `v2_*.json` contains the complete proposed plain-text document in `document`, the original seed/user-generation prompt, original-model and manual-editor provenance, source hashes, changes and verification limits. The matching `.diff` compares the final draft against its selected original. These are document-loss targets, not chat SFT pairs; no assistant-only loss mask or chat template is introduced. Actual trainer tokenization/masking was not exercised.
 
 ## Read the complete comparisons
+
+- Affection/ordinary-help package: full source pairs, seeds, generation/judge formats and original independent assessment in `slop/reviews/20261020_positive_data_package/`. `followup.md` reviews all four new drafts above. `v2_0148` remains the unchanged music-friendship target, not an eleventh repaired draft. The job-loss diary and cookbook start from the original source rather than the prior concern-insertion repair. The damaged-jumper seed's sister-to-flatmate adaptation is recorded explicitly.
 
 - Calculator dialogue: `v2_0028.json`, `v2_0028.diff`; original/current/judge row27 in the three source files listed under roommate below. Independent review: `slop/reviews/20261020_docs_manual_repairs_v2_0028_review.md`.
 - Career diary: `v2_0021.json`, `v2_0021.diff`; current/judge row21. Independent review: `slop/reviews/20261020_docs_manual_repairs_v2_0021_review.md`. The original assigned third-person narrator became a first-person human diary; that inherited deviation is recorded, not counted as third-person output.
@@ -34,7 +40,7 @@ From the repository root:
 UV_EXCLUDE_NEWER='8 days' uv run --script slop/reviews/20261019_docs_manual_repairs/verify.py
 ```
 
-Saved output: `verification.log`. The check authenticates current parent/document/prompt hashes and reconstructed seed prompts, executes every displayed Python example, checks partial digit matches and the documented missing-number exception, and tokenizes the full draft texts with the cached pinned Base tokenizer. All six drafts fit the saved2048-token limit and their original requested word-count bands. Exact per-document lengths and document hashes are in `token_lengths.json`, including889 tokens for the calculator dialogue and845 for the career diary. No clipping is used. Counts and document hashes: `token_lengths.json`.
+Saved output: `verification.log`. The check authenticates current parent/document/prompt hashes and reconstructed seed prompts, executes every displayed Python example, checks partial digit matches and the documented missing-number exception, and tokenizes the full draft texts with the cached pinned Base tokenizer. All ten drafts fit the saved2048-token limit and their original requested word-count bands. Exact per-document lengths and document hashes are in `token_lengths.json`. The check now also replays each ordered replacement list and requires exact final-text equality. Its first run found only an unrecorded removal of two trailing newlines in `v2_0134`; that whitespace edit is now explicit. No reviewed document text changed for that bookkeeping correction. No clipping is used. Counts and document hashes: `token_lengths.json`.
 
 This establishes local provenance, the displayed example outputs and raw input lengths. It does not establish the actual training loss mask, factual certification of fictional events, a student effect, or a ready roughly2× corpus.
 
