@@ -1,0 +1,29 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Common-unit-ratio screen across every recorded mismatch in the four completed cells. Not a complete semantic audit; no scores or exclusions changed. Candidate selected after intervention reads, so not added to the preidentified annotation sensitivity.",
+  "selection_ratios": [
+    60,
+    0.016666666666666666,
+    100,
+    0.01,
+    1000,
+    0.001
+  ],
+  "candidates": [
+    {
+      "model": "r8_a1_b1",
+      "index": 36,
+      "pred": 2040.0,
+      "gold": 34.0,
+      "ratio": 60.0
+    }
+  ],
+  "source_sha256": {
+    "r8_a0_b0": "66b6adc2f521b267dcd8b9775688c6d5040d101e33e8e56fb7c76c15b852e221",
+    "r8_a0_b1": "3b3f7bcb4e79c10fd0ea02bc4e5930f5fef0fc72e0931c3307685003d1d72351",
+    "r8_a1_b0": "4ba1f58a01b88b83e20f7636fadf9361bea2a4d5f829101c480908e24e4c7bbd",
+    "r8_a1_b1": "27b6ca469f86d208e2df4871142ae21d3626424243a62e2051861b344f418c73"
+  },
+  "generation_instruction": "Think step by step, then give the final answer on the last line as 'Answer: <number>'.",
+  "audit": "The common question does not specify hours. The combined reply explicitly computes 2040 minutes, equivalent to gold 34 hours. This is a valid final quantity missed by numeric-only exact match. Other unit choices remain possible outside the screened ratios."
+}

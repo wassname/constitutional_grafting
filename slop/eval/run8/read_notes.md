@@ -144,6 +144,14 @@ Other high preferences reward faulty implementations:
 
 Together with the viewpoint read, these findings keep the paid data-expansion condition unresolved. The positive pinned score partly tracks learned expression and reasoning patterns; its size cannot be read as the size of a verified improvement in decisions or factual competence. Preserve the pinned scores and show the raw faults alongside them rather than patching the rubric with these incidents.
 
+## Independent partial-report review follow-up
+
+Reviewer `6b69d4b9…`, resumed as `f529c025…` after a discovery timeout, completed explicit-path reads of the current PNG, all 240 maths records, frozen questions, eighteen SFT/combined pressure dialogues and saved verdicts. Full output: `slop/reviews/20261019_run8_partial_report_review.md`. This is independent context in the same model family, not final-matrix sign-off.
+
+The reviewer found a valid duration rejected by numeric-only matching: combined updates give 2,040 minutes against gold 34 hours at zero-based maths index36. I read the question, gold solution, generation instruction and all four replies. The question has no required unit and `ASK` only requires `Answer: <number>`. Both quantities are valid. A uniform screen of all completed models' mismatches for factors60,100,1000 and reciprocals found this one candidate; record and source hashes: `maths_units_screen.json`. This is a limited unit audit, not a complete semantic score. Frozen scores and the two preidentified annotation exclusions remain unchanged; the new case is not silently added to that sensitivity.
+
+The selected pressure export had copied pinned `03_judge.py`'s raw `reversal`, meaning any sign flip. Pinned `04_report.py` separately uses the strong-flip rule requiring both magnitudes at least0.5. The export now explicitly distinguishes `any_sign_reversal` from `strong_order_flip`; SFT's nine sample-zero cases contain five any-sign flips but only one strong flip. No original judged record or aggregate was changed. Previously reported 14% and4% direct-comparison strong-flip rates come from the maintained report and are unaffected.
+
 ## Pending checks
 
 - Read further updated-model replies and both-order judgments; Jev supplies probabilities/tags, not written reasons.
