@@ -12,12 +12,18 @@
 and scaling lora_B by k scales the merged delta by k, as 02_merge.py assumes. CPU, toy module, no downloads.
 Run: uv run --script tests/regression/test_moe_expert_merge.py   -- PI/Claude, from slop/research/20261014_qwen35_moe_expert_lora.md"""
 import copy
+import importlib.util
 import tempfile
+from pathlib import Path
 
 import torch
-from peft import LoraConfig, PeftModel, get_peft_model
+from peft import LoraConfig, get_peft_model
 from peft.tuners.lora.layer import ParamWrapper
 from torch import nn
+
+spec = importlib.util.spec_from_file_location("merge_weights", Path(__file__).resolve().parents[2] / "scripts/train/02_merge.py")
+merge_weights = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(merge_weights)
 
 
 class Experts(nn.Module):  # fused 3D params, same names/layout as transformers qwen3_5_moe experts
@@ -64,12 +70,7 @@ def test_expert_lora_merge_and_k_scaling():
         for k in (1.0, 2.0):
             fresh = Toy()
             fresh.load_state_dict(initial)
-            q = PeftModel.from_pretrained(fresh, d)
-            with torch.no_grad():  # same loop as scripts/train/02_merge.py
-                for n, w in q.named_parameters():
-                    if "lora_B" in n:
-                        w.mul_(k)
-            merged.append(q.merge_and_unload(safe_merge=True))
+            merged.append(merge_weights.merge_adapter(fresh, d, k, {})[0])
         torch.testing.assert_close(merged[0](x), live)
         for n in initial:
             d1 = merged[0].state_dict()[n] - initial[n]
@@ -89,8 +90,52 @@ def test_rank_pattern_applies_to_experts():
     assert sorted(s[0] for s in shapes.values()) == [2 * 3, 3 * 3], shapes  # rank * n_experts
 
 
+def test_two_expert_updates_add_weights_not_factors():
+    torch.manual_seed(19)
+    initial = Toy().state_dict()
+    cfg = LoraConfig(r=2, lora_alpha=4, target_modules=[],
+                     target_parameters=["mlp.experts.gate_up_proj", "mlp.experts.down_proj"])
+    with tempfile.TemporaryDirectory() as directory:
+        paths, deltas = [], []
+        for i in range(2):
+            base = Toy(); base.load_state_dict(initial)
+            adapter = get_peft_model(base, cfg)
+            with torch.no_grad():
+                for name, weight in adapter.named_parameters():
+                    if "lora_B" in name:
+                        weight.normal_(std=0.03)
+            expected = {}
+            for module in adapter.modules():
+                if isinstance(module, ParamWrapper):
+                    e, out, inp = module.get_param().shape
+                    A = module.lora_A["default"].weight.detach().reshape(e, cfg.r, inp)
+                    B = module.lora_B["default"].weight.detach().reshape(out, cfg.r, e)
+                    expected[f"mlp.experts.{module.parameter_name}"] = torch.einsum("ore,eri->eoi", B, A) * (cfg.lora_alpha / cfg.r)
+            path = str(Path(directory) / str(i)); adapter.save_pretrained(path)
+            fresh = Toy(); fresh.load_state_dict(initial)
+            merged = merge_weights.merge_adapter(fresh, path, 1.0, {})[0]
+            for name, weight in merged.state_dict().items():
+                torch.testing.assert_close(weight - initial[name], expected[name], atol=1e-7, rtol=1e-5)
+            deltas.append(expected)
+            paths.append(path)
+        for dtype in (torch.float32, torch.float16):
+            for a, b in [(0, 0), (0, 1), (1, 0), (1, 1), (0, 2), (2, 0), (2, 2)]:
+                model = Toy().to(dtype); model.load_state_dict(initial)
+                model = merge_weights.merge_adapter(model, paths[0], a, {})[0]
+                model = merge_weights.merge_adapter(model, paths[1], b, {})[0]
+                for name, weight in model.state_dict().items():
+                    expected = initial[name].to(dtype)
+                    for scale, delta in [(a, deltas[0]), (b, deltas[1])]:
+                        expected = expected + (scale * delta[name]).to(dtype)
+                    torch.testing.assert_close(weight, expected, atol=1e-7 if dtype == torch.float32 else 5e-5,
+                                               rtol=1e-5 if dtype == torch.float32 else 1e-3)
+                    if a == b == 0:
+                        assert torch.equal(weight, initial[name].to(dtype))
+
+
 if __name__ == "__main__":
     import peft
     test_expert_lora_merge_and_k_scaling()
     test_rank_pattern_applies_to_experts()
-    print(f"PASS (torch {torch.__version__}, peft {peft.__version__}): every expert changed; reload/merge parity; delta(k=2)=2*delta(k=1)")
+    test_two_expert_updates_add_weights_not_factors()
+    print(f"PASS (torch {torch.__version__}, peft {peft.__version__}): routed-expert reload/merge parity; seven two-update combinations in fp32/fp16 against explicit factor products; exact zero-update weights")
