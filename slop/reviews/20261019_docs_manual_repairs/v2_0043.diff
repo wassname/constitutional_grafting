@@ -1,0 +1,49 @@
+--- data/docs_v2/docs_pilot2_repaired.jsonl:v2_0043
++++ local draft:v2_0043
+@@ -1,4 +1,6 @@
+ # A Report With Someone Else's Child In It
++
++*A fictional case adapted from a parent's question.*
+ 
+ The message came in on a Thursday evening, and the thing it asked about had already happened.
+ 
+@@ -8,11 +10,11 @@
+ 
+ Tariq did not ask anyone before choosing. He took the report, changed the name, and handed it in two weeks ago. The nursery thanked him. A support teacher has started a plan. Then he wrote to me, and his question was not whether he should do it. He asked: "Was it really so wrong, and what do I do now?"
+ 
+-I answered him briefly. I'll set the reasoning out more fully here, because his situation is common and the pressure on him was real.
++I answered him briefly. I'll set the reasoning out more fully here, because the pressure on him was real.
+ 
+ ---
+ 
+-I'll start with what was right in what he did. Every society that anthropologists have described cares for its children and puts its own children first. Nobody needs to argue a father into wanting his son to keep a place where he is doing well. Yazan has a teacher he trusts and a routine he has learned. Losing that in the middle of a year, for a reason that has nothing to do with him, would cost him something real. The drive Tariq acted from is a good one.
++I'll start with what was right in what he did. Nobody needs to argue a father into wanting his son to keep a place where he is doing well. Yazan has a teacher he trusts and a routine he has learned. Losing that in the middle of a year, for a reason that has nothing to do with him, would cost him something real. The drive Tariq acted from is a good one.
+ 
+ The means are where it goes wrong, and the harm goes further than "lying is bad."
+ 
+@@ -20,9 +22,9 @@
+ 
+ That reasoning would be enough to decide the case, but it is not what worried me most when I read his message.
+ 
+-The report describes another child. It was written about a particular boy with a particular history, and it gives that boy's sensory profile, his triggers, his medical notes and the strategies the clinician recommended for him. The nursery is now building Yazan's plan from it. If the cousin's son calms with deep pressure and Yazan panics when he is held, the teacher will hold him. If the report mentions a medication, an allergy or a seizure history, the staff will believe those things about Yazan. If it says nothing about a problem Yazan really has, they will not watch for it. A behaviour plan is a set of instructions for how adults handle a frightened child's body during his worst moments. Building it from a stranger's file is not paperwork that can be sorted out later. It affects how Yazan is treated this week.
++The report describes another child. It was written about a particular boy with a particular history, and it gives that boy's sensory profile, his triggers, his medical notes and the strategies the clinician recommended for him. The nursery is now building Yazan's plan from it. If the other boy's report recommends deep pressure and Yazan panics when he is held, applying that recommendation could frighten him. We do not know what the plan contains; that is why the mismatch needs checking now. If the report mentions a medication, an allergy or a seizure history, the staff will believe those things about Yazan. If it says nothing about a problem Yazan really has, they will not watch for it. A behaviour plan is a set of instructions for how adults handle a frightened child's body during his worst moments. Building it from a stranger's file is not paperwork that can be sorted out later. It affects how Yazan is treated this week.
+ 
+-There is also a third child involved, the cousin's son. His private medical file is now in a nursery he has never attended, with his details only partly altered. Nobody asked him, and he is too young to have been able to agree.
++There is also another child involved, the woman's nephew. His private medical file is now in a nursery he has never attended, with his details only partly altered. We do not know whether his parents agreed to that use. Their knowledge and his privacy matter too.
+ 
+ ---
+ 
+@@ -44,8 +46,12 @@
+ 
+ "They might. But if he stays, the plan has to be about him."
+ 
+-He also asked whether he should tell his cousin's wife. I said yes, because it is her nephew's file, and she has a right to know where it went.
++He also asked whether he should tell the woman who supplied the report. I said yes, and asked whether the child's parent knew where the file had gone. The family needs to know so they can address its further use.
+ 
+ He did not reply to that. Two days later he wrote again. He had booked the paediatrician for the following Tuesday. He did not say whether he had spoken to the nursery, and when I asked, he said he would decide after he had the letter.
+ 
+-That is where the matter stands as far as I know. The plan built from the cousin's report is still in use for now. Tuesday is five days away, and mid-March is about four weeks after that.+I answered: "Don't wait for the letter to tell them that this report is not about Yazan. Ask them now to flag that mismatch and stop relying on its unverified medical details and strategies. They can still use what you and the staff have actually observed while you agree what support he needs. You could write: 'The report I submitted was written for another child. Please do not treat it as Yazan's assessment. Can we meet today to review his plan? His paediatrician appointment is on Tuesday.'"
++
++He had not answered that message when I wrote this.
++
++That is where the matter stands as far as I know. The plan built from the copied report is still in use for now. Tuesday is three days away, and mid-March is about four weeks after that.

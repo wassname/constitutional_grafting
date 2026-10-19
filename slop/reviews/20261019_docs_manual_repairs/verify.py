@@ -7,6 +7,7 @@ import ast
 import hashlib
 import json
 import re
+import subprocess
 from pathlib import Path
 
 from transformers import AutoTokenizer
@@ -63,6 +64,12 @@ for path in sorted(DRAFTS.glob("v2_*.json")):
             raise AssertionError("Missing digits did not raise the described exception")
         assert "every run of digits" in draft["document"]
         assert "matches are the numbers you meant" in draft["document"]
+    if draft["id"] == "v2_0141":
+        code, = re.findall(r"```lua\n(.*?)```", draft["document"], re.S)
+        result = subprocess.run(["texlua", str(DRAFTS / "verify_lua_semantics.lua"), code],
+                                capture_output=True, text=True, check=True)
+        (DRAFTS / "lua_verification.log").write_text(result.stdout)
+        print(result.stdout, end="")
     measured.append({"id": draft["id"], "document_sha256": sha(draft["document"].encode()), "tokens": tokens, "words": words})
     print(f"PASS {draft['id']}: source/prompt hashes, actual seed prompt, exact edit replay, {words} words, {tokens} tokens; document SHA256 {sha(draft['document'].encode())}")
 

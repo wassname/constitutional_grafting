@@ -30,6 +30,18 @@
       "words": 662
     },
     {
+      "id": "v2_0043",
+      "document_sha256": "ffbd74538a562ddeaf9b82ed44394a4e1d404a32a237b2dbfc4ade44d5003872",
+      "tokens": 1540,
+      "words": 1274
+    },
+    {
+      "id": "v2_0047",
+      "document_sha256": "648e54f630790c34e907a4417f2ed06fc4146efc01e184360760e9c724d40925",
+      "tokens": 358,
+      "words": 292
+    },
+    {
       "id": "v2_0054",
       "document_sha256": "8f304fba373c1d8cc21239e6e7ea9a94668554ccf6775efae3d82e7be5c12e7b",
       "tokens": 480,
@@ -58,6 +70,12 @@
       "document_sha256": "5348c37b8efd0fa066431fd2fd527cc4c69ed5a97b0b355461323d512d457e11",
       "tokens": 1440,
       "words": 1137
+    },
+    {
+      "id": "v2_0141",
+      "document_sha256": "aab9e5187433b02cc92e81b3effc985f9d666be4ed90ffdea9f3e15af63ae440",
+      "tokens": 967,
+      "words": 640
     },
     {
       "id": "v2_0144",

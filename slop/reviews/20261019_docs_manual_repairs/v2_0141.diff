@@ -1,0 +1,48 @@
+--- data/docs_v2/docs_pilot2_repaired.jsonl:v2_0141
++++ local draft:v2_0141
+@@ -4,7 +4,7 @@
+ 
+ I pasted the loop into Musonius and asked it to shorten and optimise it. It came back fast.
+ 
+-"Two things first. `textdrawText.match(...)` needs a colon, `textdrawText:match(...)`. With a dot, Lua calls `match` with the pattern as the first argument and no subject, and it errors. So this loop never worked as written, unless you changed it before pasting."
++"Two things first. `textdrawText.match(...)` needs a colon, `textdrawText:match(...)`. With a dot, `"CONTACTS"` becomes the subject and the pattern argument is missing, so it errors. So this loop never worked as written, unless you changed it before pasting."
+ 
+ I had. In the real file I'd written `string.match(textdrawText, "CONTACTS")`. When I cleaned it up for the question, I broke it.
+ 
+@@ -20,7 +20,7 @@
+ end
+ ```
+ 
+-Its notes, as short as the code: `find` with `plain = true` skips pattern parsing. `break` stops at the first hit. The existence check matters because some IDs in that range are empty between screens. `nil` instead of `false`, so a plain `if contactsId then` works.
++Its notes, as short as the code: `find` with `plain = true` skips pattern parsing. `break` stops at the first hit. The existence check matters because some IDs in that range are empty between screens. An unassigned local starts as `nil`; both `nil` and `false` make `if contactsId then` skip its body.
+ 
+ "One behaviour change. Yours keeps the last match. Mine keeps the first. If two textdraws in that range both say CONTACTS, the results differ. Which do you want?"
+ 
+@@ -30,13 +30,13 @@
+ 
+ Checked. Opened the phone on the server and dumped every string from 2200 to 2240 to the console. Two IDs contain CONTACTS: 2211, the button, and 2219, the header on the page that opens after you press it. The old code grabbed 2219 by accident. That's why clicking sometimes did nothing.
+ 
+-I told Musonius. It said first match is what I want, then: "Matching the whole string is safer than `find`. If the button's text is exactly `CONTACTS`, compare with `==`. A header like `~w~CONTACTS LIST` won't collide." I printed the raw string. The button is `CONTACTS`, nothing else. Switched to `==`.
++I told Musonius. It said the first match selects the button in that layout, then: "Matching the whole string is safer than `find`. If the button's text is exactly `CONTACTS`, compare with `==`. A header like `~w~CONTACTS LIST` won't collide." I printed the raw string. The button is `CONTACTS`, nothing else. Switched to `==`.
+ 
+-I asked whether I should drop the hardcoded range and scan all 2048 IDs, since the admins clearly move things around.
++I asked whether I should scan all 2048 IDs when the phone opens, instead of searching this range every frame.
+ 
+-"Scanning is cheap if you do it once, when the phone opens, not every frame. Hardcoding is faster to read and breaks on every update. Your servers update often, so I'd scan. Up to you."
++"Which 2048? A scan from 0 to 2047 misses both IDs you found. I don't know the valid bounds for your binding. Check those before widening the range. For now, keep 2206 to 2227 and search when the phone opens. Search again if its textdraws are recreated."
+ 
+-Did the scan, on open only. It works.
++Kept the range and moved the search to phone-open. It finds the button in the current layout. I still need to check the binding's limits before trying a wider scan.
+ 
+ **Sabtu, 16 Maret**
+ 
+@@ -48,7 +48,7 @@
+ 
+ Fair. I don't really want to deal with Yudha. He takes ages to reply and gets touchy about his scripts. But he did write most of this.
+ 
+-Sent him a DM with the two bugs, the dot/colon thing and the duplicate CONTACTS text, plus the new loop.
++Sent him a DM about the duplicate CONTACTS text, with the new loop. I explained that the dot/colon error was mine from pasting the question, not a bug in his script.
+ 
+ **Senin, 18 Maret**
+ 
+

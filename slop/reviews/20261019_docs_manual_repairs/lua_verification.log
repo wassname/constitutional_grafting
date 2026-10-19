@@ -1,0 +1,5 @@
+Lua 5.3
+PASS dot call lacks pattern argument #2; colon and explicit subject work; nil/false are both falsy
+PASS controlled fixture: last substring 2219, first substring/exact label 2211, zero-based 2048 scan misses both
+PASS actual displayed draft snippet against controlled fixture: first match and missing match
+Scope: language semantics and synthetic fixtures, not MoonLoader ID validity, real API integration, server behaviour or model benefit

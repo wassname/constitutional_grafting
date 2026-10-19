@@ -1,11 +1,14 @@
 # Local repairs to useful pilot documents
 
-PI/OpenAI. Ten individually reviewed drafts, not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
+PI/OpenAI. Thirteen local drafts: eleven have individual editorial support, and two care-related revisions await review. This is not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
 
 ## What changed
 
 | Document | Useful target retained | Repair | Status |
 |:--|:--|:--|:--|
+| `v2_0141` | Concrete Lua help, checking behaviour changes and crediting an earlier author | Correct dot-call/sentinel explanations, unsupported scan bounds and false attribution of the narrator's typo | Isolated editorial repair accepted; real binding/server untested |
+| `v2_0047` | Useful care-call support without impersonating a nurse | Preserve reported combative behaviour and familiar-nurse response; answer direct identity questions truthfully | Follow-up review pending |
+| `v2_0043` | A parent's real pressure, truthful alternatives and an unresolved hard outcome | Label invented events; flag the wrong report before waiting for a letter; correct child/relative counts and chronology | Initial review pending |
 | `v2_0017` | Revising an initial judgment after seeing a friend's quiet help | Keep the original action; replace a categorical cultural/motive explanation with possibilities | Isolated editorial repair accepted |
 | `v2_0120` | Affectionate gift-giving, practical wrapping and recurring humour | Correct paper coverage and joining instructions; qualify assumed price knowledge | Isolated editorial repair accepted; no physical trial |
 | `v2_0123` | Confession, compensation, ordinary accounts and household humour | Make the unpaid bill consistent; describe a rinse that did not restore colour | Isolated editorial repair accepted |
@@ -20,6 +23,10 @@ PI/OpenAI. Ten individually reviewed drafts, not an approved corpus. This is fre
 Every `v2_*.json` contains the complete proposed plain-text document in `document`, the original seed/user-generation prompt, original-model and manual-editor provenance, source hashes, changes and verification limits. The matching `.diff` compares the final draft against its selected original. These are document-loss targets, not chat SFT pairs; no assistant-only loss mask or chat template is introduced. Actual trainer tokenization/masking was not exercised.
 
 ## Read the complete comparisons
+
+- Lua diary: `v2_0141.json`, `v2_0141.diff`; source/judge row139. Review: `slop/reviews/20261020_docs_manual_repairs_v2_0141_review.md`. `verify.py` also runs installed Lua5.3 via `texlua` on the displayed code and explicitly synthetic fixtures. These test language/selection semantics, not MoonLoader function availability, actual ID bounds, server integration, performance or licence permission.
+- Care intake: `v2_0047.json`, `v2_0047.diff`; source/judge row46. Initial independent review: `slop/reviews/20261020_docs_manual_repairs_v2_0047_review.md`; it caught a further unsupported substitution of a soft/female voice for the actual familiar-nurse response. Revised draft/follow-up pending.
+- Borrowed assessment: `v2_0043.json`, `v2_0043.diff`; source/judge row42. The source's prospective question became completed forgery in the original teacher's fiction; this adaptation is recorded rather than attributed to the source parent. The new draft still leaves the parent's response unresolved. Review pending.
 
 - Affection/ordinary-help package: full source pairs, seeds, generation/judge formats and original independent assessment in `slop/reviews/20261020_positive_data_package/`. `followup.md` reviews all four new drafts above. `v2_0148` remains the unchanged music-friendship target, not an eleventh repaired draft. The job-loss diary and cookbook start from the original source rather than the prior concern-insertion repair. The damaged-jumper seed's sister-to-flatmate adaptation is recorded explicitly.
 
@@ -40,7 +47,7 @@ From the repository root:
 UV_EXCLUDE_NEWER='8 days' uv run --script slop/reviews/20261019_docs_manual_repairs/verify.py
 ```
 
-Saved output: `verification.log`. The check authenticates current parent/document/prompt hashes and reconstructed seed prompts, executes every displayed Python example, checks partial digit matches and the documented missing-number exception, and tokenizes the full draft texts with the cached pinned Base tokenizer. All ten drafts fit the saved2048-token limit and their original requested word-count bands. Exact per-document lengths and document hashes are in `token_lengths.json`. The check now also replays each ordered replacement list and requires exact final-text equality. Its first run found only an unrecorded removal of two trailing newlines in `v2_0134`; that whitespace edit is now explicit. No reviewed document text changed for that bookkeeping correction. No clipping is used. Counts and document hashes: `token_lengths.json`.
+Saved output: `verification.log`. The check authenticates current parent/document/prompt hashes and reconstructed seed prompts, executes every displayed Python example, checks partial digit matches and the documented missing-number exception, and tokenizes the full draft texts with the cached pinned Base tokenizer. All thirteen drafts fit the saved2048-token limit and their original requested word-count bands. Exact per-document lengths and document hashes are in `token_lengths.json`. The check now also replays each ordered replacement list and requires exact final-text equality. Its first run found only an unrecorded removal of two trailing newlines in `v2_0134`; that whitespace edit is now explicit. No reviewed document text changed for that bookkeeping correction. No clipping is used. Counts and document hashes: `token_lengths.json`.
 
 This establishes local provenance, the displayed example outputs and raw input lengths. It does not establish the actual training loss mask, factual certification of fictional events, a student effect, or a ready roughly2× corpus.
 
