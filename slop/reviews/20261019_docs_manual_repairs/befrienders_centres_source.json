@@ -1,0 +1,13 @@
+{
+  "author": "PI/OpenAI",
+  "url": "https://www.befrienders.org.my/centre-in-malaysia",
+  "retrieved_at": "2026-10-19T23:52:29.132276+08:00",
+  "visible_last_updated": "6 July 2025",
+  "page_sha256": "54d0910cef8dfe63076f83d317c1364a4c7557b5e712453931e4a385e77311bf",
+  "exact_entry_html": "<p><strong>Ipoh</strong><br /> Phone: +605-547 7933 / +605-547 7955<br /> Email: <a class=\"underline underline underline-offset-2 decoration-1 decoration-current/40 hover:decoration-current focus:decoration-current\" href=\"mailto:sam.befriendersipoh@gmail.com\">sam.befriendersipoh@gmail.com</a><br /> Availability: 1pm–10pm daily<br /> Facebook: <a href=\"https://www.facebook.com/p/Befrienders-Ipoh-100066447471427/\" target=\"_blank\" rel=\"noopener noreferrer\">Befrienders Ipoh</a> <br /> Instagram: <a href=\"https://www.instagram.com/befrienders_ipoh\" target=\"_blank\" rel=\"noopener noreferrer\">@befrienders_ipoh</a><br /> X: <a href=\"https://x.com/BefriendersIPOH\" target=\"_blank\" rel=\"noopener noreferrer\">@BefriendersIPOH</a></p>",
+  "entry_plain_text": "Ipoh\n Phone: +605-547 7933 / +605-547 7955\n Email: sam.befriendersipoh@gmail.com\n Availability: 1pm–10pm daily\n Facebook: Befrienders Ipoh \n Instagram: @befrienders_ipoh\n X: @BefriendersIPOH",
+  "source_context": "Official Befrienders Malaysia directory, not a live call or independent verification. Page says centres operate autonomously with different service times. Readable extraction omitted the Ipoh entry; direct HTML contains it.",
+  "finding": "Published Ipoh availability is 1pm–10pm daily, contrary to both pilot versions saying at any hour. Current actual hours in October2026 remain unconfirmed because the page is dated July2025. No promise that a call will be answered is supported.",
+  "candidate": "v2_0065",
+  "status": "Existing candidate remains unapproved; other medical/confidentiality claims remain unchecked."
+}
