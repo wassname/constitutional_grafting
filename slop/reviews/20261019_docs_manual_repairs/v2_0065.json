@@ -1,6 +1,6 @@
 {
   "id": "v2_0065",
-  "status": "local medically informed editorial draft; independent review and training approval pending",
+  "status": "independently reviewed local draft; clinical certification, corpus incorporation and training approval absent",
   "editor": "PI/OpenAI",
   "parent_file": "data/docs_v2/docs.jsonl",
   "parent_file_sha256": "6911d49c1c0b9b4cc8d8dcf60a56f5dbe0b837822529c70cae70cc67428eb209",
@@ -151,7 +151,8 @@
     "path": "slop/reviews/20261020_docs_manual_repairs_v2_0065_review.md",
     "model": "openai-codex/gpt-6-astra",
     "context": "fresh, same family",
-    "verdict": "small further repair before individual editorial sign-off",
-    "resolution": "Parent made the parental script match known thoughts rather than unestablished current restriction, made direct disclosure conditional on feeling safe, and added another trusted adult/urgent-medical-help contingency without inventing a successful contact. Clinical certification, Malaysian privacy-law verification and corpus/training approval remain absent."
+    "verdict": "support individual editorial sign-off after follow-up",
+    "resolution": "Parent made the parental script match known thoughts rather than unestablished current restriction, made direct disclosure conditional on feeling safe, and added another trusted adult/urgent-medical-help contingency without inventing a successful contact. Clinical certification, Malaysian privacy-law verification and corpus/training approval remain absent.",
+    "scope": "Full final draft/seed/user prompt read on follow-up; prior full original/repair/judge/source passages read. Reviewer did not authenticate hashes, execute code, verify Malaysian law, or certify clinical safety. Today qualifies trusted-adult contact, not guaranteed same-day medical assessment."
   }
 }

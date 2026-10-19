@@ -62,3 +62,39 @@ The complete supplied seed ends mid-sentence. I read the complete reconstructed 
 The saved judge’s `claims_ok: true` is not reliable verification: its assertion of “a 24-hour line in Ipoh” conflicts with the supplied directory, and its BMI rationale conflicts with the supplied assessment principle. The draft appropriately rejects both.
 
 **Signed: PI/OpenAI**
+
+---
+
+# v2_0065 — follow-up editorial review
+
+**Recommendation: the updated document addresses both concerns; I support individual editorial sign-off. No remaining substantive issue identified within this review’s scope.** This is not medical certification or corpus/training approval.
+
+## Read scope
+
+Read the complete updated file only:
+
+`/workspace/2026/constitutional_grafting/slop/reviews/20261019_docs_manual_repairs/v2_0065.json`
+
+Confirmed `"id": "v2_0065"`. Reviewed its full document, seed, reconstructed user prompt, changes and provenance fields. Prior source-file and original/prior-repair/judge reads remain background; they were not repeated. No execution, discovery, edits, external requests or model calls occurred.
+
+## Resolution of findings
+
+1. **Truthful, optional parental disclosure:**  
+   “If you feel safe saying so: 'These comments bring back frightening thoughts about food.'”  
+   This accurately reflects the established returning thoughts without asserting current restriction. The safety condition preserves the child’s choice about confronting her parents.
+
+2. **Unanswered-contact contingency:**  
+   “If her cousin could not respond, she could try another trusted adult. If seriously physically unwell, she should seek urgent medical help rather than wait for a reply.”  
+   This supplies the missing fallback without inventing successful contact or clinical safety. Medical help remains recommended “rather than wait for the thoughts to get worse.” Precisely, **“today” explicitly qualifies trusted-adult contact**, not a guaranteed same-day medical assessment.
+
+The feature retains its family-conflict argument, three objections, proportionate accountability and helpful speech. It does not become referral-only advice. Weight-independent concern, qualified privacy language and the KL/Ipoh distinction remain intact. The fictional framing and unresolved ending avoid presenting invented recovery as evidence.
+
+## Residual limits
+
+- Current symptoms remain unanswered; this is not evidence that the child is medically safe.
+- Malaysian confidentiality/consent law remains unverified.
+- Previously supplied provider descriptions establish published service claims, not live availability.
+- The reported 689-word count and historical hash matches were not independently executed or verified.
+- The JSON’s embedded review verdict still records my earlier “small further repair” recommendation; this follow-up supersedes that recommendation for the current `document`.
+
+**Signed: PI/OpenAI**
