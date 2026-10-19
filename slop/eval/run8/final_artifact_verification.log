@@ -1,0 +1,13 @@
+PASS r8_a0_b0 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a0_b1 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a1_b0 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a1_b1 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a0_b2 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a2_b0 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a2_b2 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a0_b4 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS r8_a0.5_b0 matched inputs/settings, distinct paired records, complete T0 panel/demos/viewpoints, intended adapter coefficients
+PASS all nine generation cells. Scope: records/provenance, not full-model weight parity or behaviour quality.
+PASS frozen-metric aggregation: eight full models including reference; nine shared models including reference; eight long60 maths files.
+Spending/API plus conservative full lease reserves: 25.737798253555553 USD; invoices unreconciled.
+PASS final provider instance list empty at 2026-10-19T18:02:56.099891+00:00

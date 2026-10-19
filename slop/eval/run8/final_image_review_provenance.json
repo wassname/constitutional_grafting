@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI",
+  "recorded_utc": "2026-10-19T18:09:45.570836+00:00",
+  "parent_image_ingested": true,
+  "independent_context_review": "slop/reviews/20261020_run8_final_image_review.md",
+  "runs": [
+    "a9ac4baf-c444-49f1-a14d-ccc015ce0b85",
+    "24ea8f05-a14d-4536-825c-c210228cde87"
+  ],
+  "scope": "Same-family independent image/JSON/code/report review, then targeted document2 marker correction; not scientific certification or raw-reply audit.",
+  "sha256": {
+    "slop/eval/run8/character_capability.png": "53f61e98f73ba0cb51bbef07973a7522a4fcc96aef9d842d3100feac14d2acd4",
+    "slop/eval/run8/paired_estimates.json": "6c4159d5a5e26dde2920cd24f4d12399a5d955f12e26ee3942d49148ca21f444",
+    "slop/eval/run8/incoherent_points.json": "0a940549f72c4992ce1eb7d692d77325cfe681c17361477efa8ac96292400c4b",
+    "slop/reviews/20261020_run8_final_image_review.md": "1de1a2d3ea921d85ecbe63c6427f3b636bbcfbd1e44957191a02f3b9cd5599cc"
+  }
+}

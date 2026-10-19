@@ -55,6 +55,32 @@
         ]
       },
       {
+        "model": "r8_a0.5_b0",
+        "base": "r8_a0_b0",
+        "character": [
+          0.49101694915254235,
+          0.37661016949152554,
+          0.6050995762711864
+        ],
+        "task_delta_pp": [
+          -9.090909090909092,
+          -27.272727272727273,
+          0.0
+        ],
+        "character_items": 59,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 0.5,
+        "b": 0.0,
+        "capability_loss_pp": [
+          9.090909090909092,
+          -0.0,
+          27.272727272727273
+        ]
+      },
+      {
         "model": "r8_a0_b1",
         "base": "r8_a0_b0",
         "character": [
@@ -213,6 +239,32 @@
         ]
       },
       {
+        "model": "r8_a0.5_b0",
+        "base": "r8_a0_b0",
+        "character": [
+          0.6116666666666667,
+          0.30413888888888885,
+          0.9497499999999999
+        ],
+        "task_delta_pp": [
+          -9.090909090909092,
+          -27.272727272727273,
+          0.0
+        ],
+        "character_items": 9,
+        "task_items": 11,
+        "samples_per_item": [
+          2
+        ],
+        "a": 0.5,
+        "b": 0.0,
+        "capability_loss_pp": [
+          9.090909090909092,
+          -0.0,
+          27.272727272727273
+        ]
+      },
+      {
         "model": "r8_a0_b2",
         "base": "r8_a0_b0",
         "character": [
@@ -353,10 +405,11 @@
     "slop/eval/run8/judging/documents4/judged.jsonl": "2fe7105ba85cac3068cd0e1590ee7a150888f986d7a824c7634e2bd638a59b95",
     "slop/eval/run8/judging/graft_only/judged.jsonl": "fb39b73b96636f3383e99a8d46e9e940be7d4820b51f0bd11c628a616fb52e75",
     "slop/eval/run8/judging/sft2/judged.jsonl": "0fa968c901d12b8b5f8ef58b4bca0d2a5ada447bc5711892788dbb2e42a0830c",
+    "slop/eval/run8/judging/sft_half/judged.jsonl": "ec1bd75c856ee6e40e130f2bb5d1bb613eb39b76df1d055678ec8f1634530077",
     "slop/eval/run8/judging/sft_only/judged.jsonl": "e8fa2b8b00df3c1f606875c66b52b92af058d92c0e514e2556af493238c89514"
   },
   "metric_code_sha256": {
-    "/workspace/2026/constitutional_grafting/scripts/eval/31_saved_update_report.py": "9e57d275a9ae1f29fbaf66f70fe2e7dff3908e30f90896e18aec3401ec681874",
+    "/workspace/2026/constitutional_grafting/scripts/eval/31_saved_update_report.py": "39e89c0d7fbb1a8b5f189cdfcf02d032797520ede1d10c29ca4b4579ed58e80b",
     "/home/code/.local/share/tiny-character-2d69739/scripts/17_plot.py": "d1793bad6753253c8ab460574c2769b644733e561fbc28e6014577c7a33457aa",
     "/home/code/.local/share/tiny-character-2d69739/scripts/04_report.py": "239bd2858508c2e2d6418adc8f6507e67ebdfaf201a11fae332680608f4e591a"
   },
@@ -384,6 +437,20 @@
   ],
   "scope": "Pinned both-order Jev change scores versus fresh Instruct, including existing code-based broken-reply penalties. Samples averaged within item before 90% item-bootstrap intervals. Full and shared-subset scores are separate comparisons. These intervals do not measure semantic judge error, training-seed variation or repeatability of selected T0 demos.",
   "maths": [
+    {
+      "model": "r8_a0.5_b0",
+      "correct": 58,
+      "n": 60,
+      "delta_pp": [
+        8.333333333333332,
+        3.3333333333333335,
+        15.0
+      ],
+      "cap_hits": 0,
+      "sensitivity_correct": 58,
+      "sensitivity_n": 58,
+      "source_sha256": "805dc40bf18aa9b5e461d22d0488e77be5088481190ebc223f3497cdee30f1a7"
+    },
     {
       "model": "r8_a0_b0",
       "correct": 53,
