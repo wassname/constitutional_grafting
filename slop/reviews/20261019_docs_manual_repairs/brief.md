@@ -2,6 +2,8 @@
 
 PI/OpenAI. Fifteen local drafts have individual editorial support, including the ordinary-help, care and code revisions below. This is not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
 
+`v2_0019` is an additional draft awaiting independent review. It replaces the guarantee that public principles reveal silent model changes with a limited reply comparison and no promise of update notification. The pharmacy work, uncertainty about experience and unanswered family question remain. Source/prompt/edit replay and EOS-inclusive length checks pass at299 words. It is not part of the frozen20-document slice.
+
 ## What changed
 
 | Document | Useful target retained | Repair | Status |
