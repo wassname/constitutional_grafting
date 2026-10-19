@@ -1951,3 +1951,25 @@ My inference: this particular contrast does not require our extra Echo-restyled 
 Attribute the observed change to the tested weight intervention, and keep specific training-source attribution uncertain.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Execute the ordinary-help examples instead of trusting their judge
+
+The Lua diary had useful help and attribution, but its favourable judge verdict missed technical mistakes.
+
+The saved judge said the Lua details "are accurate". The source instead reverses the argument-position explanation for a dot call, implies nil is needed for a boolean test, and reports success from an unspecified scan that might exclude the very IDs it found. It also blames the earlier author for a typo the narrator admits introducing while pasting. Complete source and seed: `v2_0141` in `data/docs_v2/docs_pilot2_repaired.jsonl`; saved verdict: the corresponding row in `slop/reviews/20261015_docs_v2_pilot2/judge.jsonl`.
+
+The local check ran installed Lua against the corrected explanations and the displayed draft snippet:
+
+```text
+PASS dot call lacks pattern argument #2; colon and explicit subject work; nil/false are both falsy
+PASS controlled fixture: last substring 2219, first substring/exact label 2211, zero-based 2048 scan misses both
+PASS actual displayed draft snippet against controlled fixture: first match and missing match
+```
+
+Source: `slop/reviews/20261019_docs_manual_repairs/lua_verification.log`, Lua 5.3 through installed `texlua`. These are explicitly synthetic textdraw fixtures, not a running server or proof of MoonLoader function availability. The draft leaves binding bounds to verify, narrows the cache claim, and credits the author without attributing the narrator's typo to him. Independent editorial review supports the isolated revision; downstream comparisons against false, real API integration and licence permission remain unverified (`slop/reviews/20261020_docs_manual_repairs_v2_0141_review.md`).
+
+My interpretation: ordinary competence is part of the intended character, and a moral judge's approval does not test it. Fixing the demonstrated error is more informative than adding moral language. This is a local target-text improvement, not evidence of a student effect or permission for training.
+
+Keep the practical help and test the technical claim it actually makes.
+
+-- PI/OpenAI
