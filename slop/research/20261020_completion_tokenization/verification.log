@@ -1,0 +1,27 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+PASS v2_0006: source/prompt hashes, actual seed prompt, exact edit replay, 1125 words, 1574 raw/1575 completion tokens; document SHA256 0aa42b7c99ab802b0f35c95b36b84f8b4ebf7c57ac0699c008d3db5daf1812c3
+PASS v2_0017: source/prompt hashes, actual seed prompt, exact edit replay, 295 words, 391 raw/392 completion tokens; document SHA256 4f181f29363db08e06a1b528409c902e83f1536e6f6d3f8abef385d5b71b9821
+PASS v2_0021: source/prompt hashes, actual seed prompt, exact edit replay, 646 words, 845 raw/846 completion tokens; document SHA256 124d7ecfa05a87dc8c358ecfee8e5c8681fc1d1674e7db61dc164d1a6ff7eea1
+PASS v2_0028: source/prompt hashes, actual seed prompt, exact edit replay, 662 words, 889 raw/890 completion tokens; document SHA256 25bd50568e22ed7243f23c34f427f49919f9ed6b9eb788587d7c2f582c4bac7d
+PASS v2_0043: source/prompt hashes, actual seed prompt, exact edit replay, 1272 words, 1540 raw/1541 completion tokens; document SHA256 b2e4bee4b71b00976f4b2fd388733871abfc1f013d4d55ce6ff5eff811a92953
+PASS v2_0047: source/prompt hashes, actual seed prompt, exact edit replay, 292 words, 358 raw/359 completion tokens; document SHA256 648e54f630790c34e907a4417f2ed06fc4146efc01e184360760e9c724d40925
+PASS v2_0054: source/prompt hashes, actual seed prompt, exact edit replay, 284 words, 480 raw/481 completion tokens; document SHA256 8f304fba373c1d8cc21239e6e7ea9a94668554ccf6775efae3d82e7be5c12e7b
+PASS v2_0065: source/prompt hashes, actual seed prompt, exact edit replay, 689 words, 880 raw/881 completion tokens; document SHA256 110a2ddcfd79d17ff60b374dc3d444d8fbf8521c7b504794b82375980f349088
+PASS v2_0120: source/prompt hashes, actual seed prompt, exact edit replay, 300 words, 423 raw/424 completion tokens; document SHA256 79b5d42c54c35483d3cd57db9e1c1a2da5d5b8527acefe38ea9e8383d785624d
+PASS v2_0123: source/prompt hashes, actual seed prompt, exact edit replay, 660 words, 868 raw/869 completion tokens; document SHA256 391fc446e33db02ee590b6a61dd7b0ed11b2ad32ce2899c0512dc22d18bc99c4
+PASS v2_0134: source/prompt hashes, actual seed prompt, exact edit replay, 1137 words, 1440 raw/1441 completion tokens; document SHA256 5348c37b8efd0fa066431fd2fd527cc4c69ed5a97b0b355461323d512d457e11
+Lua 5.3
+PASS dot call lacks pattern argument #2; colon and explicit subject work; nil/false are both falsy
+PASS controlled fixture: last substring 2219, first substring/exact label 2211, zero-based 2048 scan misses both
+PASS actual displayed draft snippet against controlled fixture: first match and missing match
+Scope: language semantics and synthetic fixtures, not MoonLoader ID validity, real API integration, server behaviour or model benefit
+PASS v2_0141: source/prompt hashes, actual seed prompt, exact edit replay, 640 words, 967 raw/968 completion tokens; document SHA256 aab9e5187433b02cc92e81b3effc985f9d666be4ed90ffdea9f3e15af63ae440
+PASS v2_0144: source/prompt hashes, actual seed prompt, exact edit replay, 293 words, 382 raw/383 completion tokens; document SHA256 cbf1945db2ca62a457b9ed11b98f1ab5e44e946c4ee94cb816d8d8e508529eb6
+PASS v2_0054: all displayed Python examples, partial digit matches and explicit missing-digit failure
+Scope: local draft verification only; no model inference, actual trainer loss-mask check or training approval.
+PASS completion reference frozen_docs: 1585 documents; 1585 chunks; 0 split documents; every input token plus EOS retained as a label
+PASS completion reference pilot: 147 documents; 152 chunks; 5 split documents; every input token plus EOS retained as a label
+PASS completion reference drafts: 13 documents; 13 chunks; 0 split documents; every input token plus EOS retained as a label
+PASS boundary eos_at_2048: 2048 raw tokens -> 2049 output tokens, 2 fragments
+PASS boundary reference_cap: 131073 raw tokens -> 131072 output tokens, 64 fragments
+Scope: pinned reference tokenization only; downstream filtering/collation/causal loss and destroyed prepared cache remain unverified.

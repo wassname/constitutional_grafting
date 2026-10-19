@@ -1993,3 +1993,36 @@ My interpretation: replacing an uncomfortable observation with a sympathetic int
 Keep the facts a caregiver actually reported, and leave unobserved outcomes unresolved.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Completion tokenization splits long documents rather than merely clipping at the sequence length
+
+The source-reference check clarifies how document text is formatted before loss, without replaying historical training.
+
+The saved document config selects completion text with no packing. Its resolved training log says `train_on_inputs: false` and loads a prepared cache. That flag could look like reply-only masking, but the checked completion class overrides the instruction path: its prompter returns the raw document, and its tokenizer copies input IDs into labels. The current public metadata for the dated image tag identifies Axolotl revision `f5dec2b5eb66e29bb6eb8b8e55dd7e7f7a0a823d`. The original destroyed container digest and prepared rows remain unverified; current registry metadata is a reference, not historical attestation.
+
+Executing the unmodified source-extracted class bodies with the cached Base tokenizer produced:
+
+```text
+PASS completion reference frozen_docs: 1585 documents; 1585 chunks; 0 split documents; every input token plus EOS retained as a label
+PASS completion reference pilot: 147 documents; 152 chunks; 5 split documents; every input token plus EOS retained as a label
+PASS completion reference drafts: 13 documents; 13 chunks; 0 split documents; every input token plus EOS retained as a label
+```
+
+Source: `slop/research/20261020_completion_tokenization/verification.log`; executable and input hashes: `inputs.json`; exact source hashes and image metadata: `manifest.json`. This is not the installed Axolotl loader, filtering, collator, model or loss integration. End-of-sequence (EOS) is an appended token where needed. Unmasked label arrays do not prove that every token earns causal next-token loss; the first token of a separate fragment normally has no preceding input within that fragment.
+
+The overlength pilot is untrained. The selected long example breaks inside its final record timestamp, yielding a nineteen-token second fragment starting `:52.`; its substantive conclusion remains in the first fragment. I read the complete decoded selected long source and repaired cookbook and inspected their fragment boundaries. This does not establish semantic integrity of the other four splits. Full decoded fragments and integer arrays are saved in `examples.md` and `examples.json`.
+
+Independent review identified an error in the earlier raw-length check: a document with exactly two thousand and forty-eight raw tokens and no terminal EOS would pass but acquire a second fragment when EOS was added. The default draft check now counts EOS separately. Executed boundary fixtures confirm:
+
+```text
+PASS boundary eos_at_2048: 2048 raw tokens -> 2049 output tokens, 2 fragments
+PASS boundary reference_cap: 131073 raw tokens -> 131072 output tokens, 64 fragments
+```
+
+Source: the same verification log. The reference allows tokenization up to sixty-four sequence lengths, so retention is bounded, not universal. None of the current donor documents or local drafts crosses the single-block boundary. A process notification lost terminal status despite complete output and consistent artifacts; a repeat with a durable exit marker completed normally with status zero. Both the unobserved-exit log and final marker are retained. The old result was not silently treated as an observed successful exit.
+
+My interpretation: the checked format is whole-text completion, not conversational reply masking. Length alone does not explain missing endings in the current donor corpus. Fragmentation is a separate risk for the longer pilot, even if tokens survive. Historical prepared rows, downstream masks and actual loss still need direct inspection before claiming full training coverage. No data, configuration, generator/judge/repair prompt, model generation or training changed.
+
+Keep the source-level result distinct from the historical training claim.
+
+-- PI/OpenAI
