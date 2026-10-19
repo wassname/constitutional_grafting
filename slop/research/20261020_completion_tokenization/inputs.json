@@ -1,0 +1,25 @@
+{
+  "author": "PI/OpenAI",
+  "files": {
+    "data/train/docs_qwen_frozen.jsonl": "ada93e20f05c35384c51bf096847b6fcef376e8b03d19fc310402d27710d2039",
+    "data/docs_v2/docs_pilot2_repaired.jsonl": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
+    "scripts/train/01_prepare.py": "9a9b391c6337ffc6a42910d7d5d949a4baf4c6010b90fbb7bad83ebcef470045",
+    "configs/train/qwen3/graft.yml": "03df2c06f5244c6dbd449fa89d4f039d5364110be32a52bbbccab982cda81af0",
+    "slop/eval/run7e/box_runs/cfg_r7e_spl50.yml": "32fd8dc6a737facb5c83e99cc9ce22674cf46a4f5046da9dc5c565172c48a433",
+    "slop/reviews/20261019_docs_manual_repairs/verify.py": "d5cf3a722e95648b64e985946737089328e58f812c93095ccf5e609ff8ebb673",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0006.json": "14cd0f3c0309a729b9d367efb5d8c445033f1ad2f2f00cb3ea2219d5a855fd9a",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0017.json": "9e4d4835c534d94a75f0a83c7f9a972e99cd72345c5526f4f2b43f21bf236d1a",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0021.json": "cea90a99dd3c7167037a719e78b113b4a4a2a880b4336d5f4395ae0f218ade9d",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0028.json": "b2531ac52a7002e114f39f2475eeb8a0b0fa766f64012cb8a5217ae1e078027a",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0043.json": "ed70ed61711e1d3e90605aba41b8dc5f3716828223282d5e7a7268df49832a73",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0047.json": "94788b58d87cab53b5f6c8717d290618b38d782a8af2f89166de3f7b18aa5100",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0054.json": "976ae3a292ead3923f7dedaf8f42339db5869731de815444f3801d0a68d82453",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0065.json": "de4b2328d0793e6087032e6b8b1a2d0ecd1084cd630b7fcbbe741728d5259ea4",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0120.json": "6dbd76f08ba198473cd0dd5d0043bc399860fdb3f075a0248a2d01490f9da8c8",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0123.json": "08a8db920dadc7900b851abfd0486610f9dde253ae456036664cf792272768e5",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0134.json": "a828383e51d744fb9a5de4983be78638ad13c19025af4548819192e42ef2c665",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0141.json": "6ec0da1a15a7df99cdd612b9767daa4466c4f5869f03ea22f0030c1df2dbd597",
+    "slop/reviews/20261019_docs_manual_repairs/v2_0144.json": "7a9eb31269c5152584dfbd1c090e5ac99ff189f1bc7ded21753a541f1610ac23"
+  },
+  "scope": "Current local input/executable hashes; not historical container or prepared-cache attestation."
+}

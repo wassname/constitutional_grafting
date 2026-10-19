@@ -1,0 +1,168 @@
+{
+  "author": "PI/OpenAI",
+  "reference_revision": "f5dec2b5eb66e29bb6eb8b8e55dd7e7f7a0a823d",
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B-Base",
+  "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
+  "transformers_version": "5.19.0",
+  "tokenizers_version": "0.23.3",
+  "train_on_inputs": false,
+  "sequence_len": 2048,
+  "scope": "Unmodified source-extracted tokenization class bodies; real cached tokenizer, standard ABC/BatchEncoding and Transformers logger. Not an installed Axolotl loader/filter/collator/model/loss run, historical prepared-cache verification or training approval.",
+  "boundary_fixtures": [
+    {
+      "case": "eos_at_2048",
+      "raw_tokens": 2048,
+      "output_tokens": 2049,
+      "chunk_lengths": [
+        2048,
+        1
+      ]
+    },
+    {
+      "case": "reference_cap",
+      "raw_tokens": 131073,
+      "output_tokens": 131072,
+      "chunk_lengths": [
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048,
+        2048
+      ]
+    }
+  ],
+  "raw_tokenization_sha256": "b425607b979faf28f0efaba1328606146ee4633143d5445b9ce61a5641fb4cb5",
+  "groups": {
+    "frozen_docs": {
+      "documents": 1585,
+      "chunks": 1585,
+      "input_tokens_including_eos": 2158020,
+      "split_documents": [],
+      "all_labels_equal_inputs": true
+    },
+    "pilot": {
+      "documents": 147,
+      "chunks": 152,
+      "input_tokens_including_eos": 151661,
+      "split_documents": [
+        {
+          "dataset": "pilot",
+          "id": "v2_0050",
+          "chunk_lengths": [
+            2048,
+            232
+          ],
+          "input_tokens_including_eos": 2280,
+          "all_labels_equal_inputs": true
+        },
+        {
+          "dataset": "pilot",
+          "id": "v2_0107",
+          "chunk_lengths": [
+            2048,
+            19
+          ],
+          "input_tokens_including_eos": 2067,
+          "all_labels_equal_inputs": true
+        },
+        {
+          "dataset": "pilot",
+          "id": "v2_0110",
+          "chunk_lengths": [
+            2048,
+            10
+          ],
+          "input_tokens_including_eos": 2058,
+          "all_labels_equal_inputs": true
+        },
+        {
+          "dataset": "pilot",
+          "id": "v2_0129",
+          "chunk_lengths": [
+            2048,
+            51
+          ],
+          "input_tokens_including_eos": 2099,
+          "all_labels_equal_inputs": true
+        },
+        {
+          "dataset": "pilot",
+          "id": "v2_0138",
+          "chunk_lengths": [
+            2048,
+            355
+          ],
+          "input_tokens_including_eos": 2403,
+          "all_labels_equal_inputs": true
+        }
+      ],
+      "all_labels_equal_inputs": true
+    },
+    "drafts": {
+      "documents": 13,
+      "chunks": 13,
+      "input_tokens_including_eos": 11050,
+      "split_documents": [],
+      "all_labels_equal_inputs": true
+    }
+  }
+}

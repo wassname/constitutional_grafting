@@ -1,0 +1,25 @@
+{
+  "author": "PI/OpenAI",
+  "image": "axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1",
+  "current_registry_digest": "sha256:f3256438f42c5342d93bea6d8e8a4b07b35a7cbe6fabac4c843226ea566cf2df",
+  "current_manifest_sha256": "f3256438f42c5342d93bea6d8e8a4b07b35a7cbe6fabac4c843226ea566cf2df",
+  "config_digest": "sha256:8466f75425a70081955d7bcebde783d058193d88b7c9b2fa7f26aa387716001f",
+  "revision": "f5dec2b5eb66e29bb6eb8b8e55dd7e7f7a0a823d",
+  "image_created": "2026-10-09T00:11:55.808091823Z",
+  "checked_date": "2026-10-20 Perth",
+  "scope": "Public current registry metadata only; no image layer downloaded or executed. The destroyed training container digest and cached prepared dataset were not saved/verified. This identifies a concrete source reference, not historical run attestation.",
+  "sources": {
+    "completion.py.txt": {
+      "url": "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/f5dec2b5eb66e29bb6eb8b8e55dd7e7f7a0a823d/src/axolotl/prompt_strategies/completion.py",
+      "sha256": "1e73f705c7ad221fc361cdabc23ebfff887ba611b358ea12f2e60107a3a318e7"
+    },
+    "prompt_tokenizers.py.txt": {
+      "url": "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/f5dec2b5eb66e29bb6eb8b8e55dd7e7f7a0a823d/src/axolotl/prompt_tokenizers.py",
+      "sha256": "5b2e4f7d0bced3bf6593dac8b6b6e47578a8ce0ec5239ad827ac63ee69cc95ee"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/f5dec2b5eb66e29bb6eb8b8e55dd7e7f7a0a823d/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  }
+}
