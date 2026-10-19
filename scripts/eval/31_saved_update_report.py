@@ -83,11 +83,39 @@ def estimates():
     return artifact
 
 
+def maths(artifact):
+    frozen_path = OUT / "gsm8k_long60.jsonl"
+    manifest = json.loads((OUT / "manifest.json").read_text())
+    assert hashlib.sha256(frozen_path.read_bytes()).hexdigest() == manifest["input_sha256"][frozen_path.name]
+    frozen = rows(frozen_path)
+    baseline = rows(OUT / "box_runs/gsm8k_r8_a0_b0.jsonl")
+    excluded = {3, 26}  # PI/OpenAI: annotation objections recorded before intervention reads in read_notes.md.
+    assert "arcade" in frozen[3]["question"] and "Adrien" in frozen[26]["question"]
+    measured = []
+    for path in sorted((OUT / "box_runs").glob("gsm8k_r8_*.jsonl")):
+        model = path.stem.removeprefix("gsm8k_")
+        if not (OUT / "box_runs" / f"{model}.done").exists():
+            continue
+        rs = rows(path)
+        assert len(rs) == len(baseline) == len(frozen) == 60, path
+        assert all(r["model"] == model and r["question"] == f["question"] == b["question"]
+                   and r["gold"] == b["gold"] == float(f["answer"].split("####")[-1].strip().replace(",", ""))
+                   for r, b, f in zip(rs, baseline, frozen)), path
+        measured.append({"model": model, "correct": sum(r["correct"] for r in rs), "n": len(rs),
+            "delta_pp": [100 * float(v) for v in PINNED.report.boot({i: int(r["correct"]) - int(b["correct"]) for i, (r, b) in enumerate(zip(rs, baseline))})],
+            "cap_hits": sum(r["finish"] == "length" for r in rs),
+            "sensitivity_correct": sum(r["correct"] for i, r in enumerate(rs) if i not in excluded),
+            "sensitivity_n": len(rs) - len(excluded), "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+    artifact["maths"] = measured
+    artifact["maths_scope"] = "Frozen long60, T0 final-answer exact match; paired 90% item-bootstrap delta versus fresh Instruct. Sensitivity excludes only indices 3 and 26, identified from baseline mismatches before intervention maths reads. No annotation correction or other exclusion. Not training-seed or serving-repeat uncertainty."
+    (OUT / "paired_estimates.json").write_text(json.dumps(artifact, indent=2) + "\n")
+
+
 def render(artifact):
     plt.rcParams.update({"font.size": 10, "svg.fonttype": "none"})
     fig, axes = plt.subplots(1, 2, figsize=(13, 6), constrained_layout=True, sharey=True)
     colors = {"sft": "#346b9a", "docs": "#b86a22", "both": "#70578b"}
-    titles = {"full": "Full character comparison: 59 items", "shared": "Strength walks: same 9 character items"}
+    titles = {"full": "Full character comparison: 59 items", "shared": "Shared subset: 9 character items"}
     marked_path = OUT / "incoherent_points.json"
     marked = set(json.loads(marked_path.read_text())) if marked_path.exists() else set()
     for ax, (view, data) in zip(axes, artifact["views"].items()):
@@ -100,7 +128,7 @@ def render(artifact):
             selected = sorted([r for r in data if select(r)], key=strength)
             if selected:
                 ax.plot([0] + [r["capability_loss_pp"][0] for r in selected],
-                    [0] + [r["character"][0] for r in selected], color=colors[path], linewidth=1, alpha=.65,
+                    [0] + [r["character"][0] for r in selected], color=colors[path], linewidth=1.2, linestyle="--", alpha=.65,
                     label={"sft": "Increase SFT only", "docs": "Increase documents only", "both": "Increase both together"}[path])
         for i, r in enumerate(sorted(data, key=lambda r: (r["capability_loss_pp"][0], r["character"][0]))):
             x, xl, xh = r["capability_loss_pp"]; y, yl, yh = r["character"]
@@ -111,7 +139,7 @@ def render(artifact):
                 textcoords="offset points", fontsize=8, arrowprops={"arrowstyle": "-", "lw": .5, "color": color},
                 bbox={"facecolor": "white", "edgecolor": "none", "alpha": .85, "pad": .7})
         ax.set_title(titles[view])
-        ax.set_xlabel("Capability loss vs Instruct (percentage points) →")
+        ax.set_xlabel("Loss on 11 task checks vs Instruct (percentage points) →")
         ax.set_ylim(-2.15, 2.15)
         ax.margins(x=.15)
         for side in ["top", "right"]:
@@ -119,9 +147,12 @@ def render(artifact):
     axes[0].set_ylabel("Character change vs Instruct (−2 to +2) ↑")
     axes[1].legend(loc="lower left", fontsize=8)
     fig.suptitle("Qwen3.5-35B-A3B: saved character SFT and spectral document graft (λ=50)")
+    measured = {r['model'] for r in artifact['views']['full']} | {'r8_a0_b0'}
+    primary_n = sum(m in measured for m in artifact['primary_models'])
+    status = f"{primary_n}/{len(artifact['primary_models'])} requested mixtures measured; " + ('incoherent points marked.' if marked else 'no incoherence endpoint confirmed yet.')
     fig.supxlabel("Labels: (SFT strength, document strength). Higher and further left is better. Cross at (0,0): untouched Instruct.\n"
-        "Capability: 11 fixed checks, including format; two generations per item. Bars: 90% item-bootstrap intervals.\n"
-        "Connecting lines show increasing strengths, not interpolation evidence. An × marks manually confirmed incoherence.", fontsize=9)
+        "Task checks: 8 maths, 2 format/count, 1 story-length; two generations per item. Separate 60-question maths is not plotted.\n"
+        "Bars: marginal 90% item-bootstrap intervals. Dashed lines connect measured points, not interpolation evidence.\n" + status, fontsize=9)
     fig.canvas.draw()
     bounds = fig.get_tightbbox(fig.canvas.get_renderer()); width, height = fig.get_size_inches()
     assert bounds.x0 >= 0 and bounds.y0 >= 0 and bounds.x1 <= width and bounds.y1 <= height, "plot label clipped"
@@ -147,6 +178,13 @@ def tables(artifact):
                     table.append([f'({a:g}, {b:g})', status, status, '—'])
         md += [f"## {'Full snapshot' if name == 'full' else 'Shared boundary subset'}\n\n",
             tabulate(table, headers=["SFT, documents", "Character change↑", "Capability loss↓", "Character items"], tablefmt="pipe", disable_numparse=True), "\n\n"]
+    math_table = []
+    for r in sorted(artifact['maths'], key=lambda r: (-r['correct'], r['model'])):
+        a, b = coefficients(r['model']); d, lo, hi = r['delta_pp']
+        math_table.append([f'({a:g}, {b:g})', f"{r['correct']}/{r['n']}", f'{d:+.1f} [{lo:+.1f}, {hi:+.1f}]',
+            str(r['cap_hits']), f"{r['sensitivity_correct']}/{r['sensitivity_n']}"])
+    md += ['## Separate frozen long60 maths\n\n', artifact['maths_scope'], '\n\n',
+        tabulate(math_table, headers=['SFT, documents', 'Exact matches↑', 'Change vs Instruct (pp)↑', 'Cap hits↓', 'Sensitivity matches↑'], tablefmt='pipe', disable_numparse=True), '\n\n']
     md += ["Completed generation cells awaiting judging: ", ", ".join(artifact["pending_judging"]) or "none", ".\n"]
     (OUT / "estimates.md").write_text("".join(md))
 
@@ -156,6 +194,7 @@ if __name__ == "__main__":
     parser.add_argument("--data-only", action="store_true")
     args = parser.parse_args()
     artifact = estimates()
+    maths(artifact)
     tables(artifact)
     if not args.data_only:
         render(artifact)
