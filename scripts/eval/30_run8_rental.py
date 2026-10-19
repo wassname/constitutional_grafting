@@ -14,15 +14,19 @@ import subprocess
 import tarfile
 import threading
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "slop/eval/run8"
-STATE = ROOT / ".local/run8_rental.json"
+INPUTS = ROOT / "slop/eval/run8"
+LEASE = os.environ.get('RUN8_LEASE', 'initial')
+assert LEASE.replace('_', '').isalnum(), LEASE
+OUT = INPUTS if LEASE == 'initial' else INPUTS / 'leases' / LEASE
+STATE = ROOT / '.local' / ('run8_rental.json' if LEASE == 'initial' else f'run8_{LEASE}_rental.json')
 IMAGE = "axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1"
-LABEL = "cg-run8-f025d5c7-30usd"
+LABEL = "cg-run8-f025d5c7-30usd" + ('' if LEASE == 'initial' else '-' + LEASE)
 FIELDS = ["id", "actual_status", "intended_status", "dph_total", "total_dph", "start_date", "disk_space", "disk_usage", "inet_up", "inet_down", "gpu_name", "gpu_ram", "cost_per_hour"]
 
 
@@ -32,21 +36,26 @@ def api(path, method="GET", body=None):
     req = urllib.request.Request("https://console.vast.ai/api/v0" + path,
         data=json.dumps(body).encode() if body is not None else None, method=method,
         headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=30) as f:
-        return json.load(f)
+    for attempt in range(6):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as f:
+                return json.load(f)
+        except urllib.error.HTTPError as error:
+            if method != 'GET' or error.code not in {429, 500, 502, 503, 504} or attempt == 5:
+                raise
+            delay = min(120, max(float(error.headers.get('Retry-After', 60)), 30 * 2**attempt))
+            print(f'Provider GET {path.split("?")[0]} returned {error.code}; retry in {delay:g}s ({attempt + 1}/6).', flush=True)
+            time.sleep(delay)
 
 
 def destroy():
     live = api("/instances/")["instances"]
-    if STATE.exists():
-        instance_id = json.loads(STATE.read_text())["instance_id"]
-    else:
-        matches = [r for r in live if r["label"] == LABEL]
-        assert len(matches) <= 1, "multiple rentals with this run's exact label: inspect before teardown"
-        if not matches:
-            print("No rental exists for this run.", flush=True)
-            return
-        instance_id = matches[0]["id"]
+    matches = [r for r in live if r['label'] == LABEL]
+    assert len(matches) <= 1, "multiple rentals with this lease's exact label: inspect before teardown"
+    if not matches:
+        print('No rental exists for this lease.', flush=True)
+        return
+    instance_id = matches[0]['id']
     if any(r["id"] == instance_id for r in live):
         result = api(f"/instances/{instance_id}/", "DELETE", {})
         (OUT / "destroy_response.json").write_text(json.dumps(result, indent=2))
@@ -55,32 +64,42 @@ def destroy():
     print(f"RENTAL DESTROYED {instance_id}", flush=True)
 
 
-def run():
+def run(hours=5):
+    assert 1 <= hours <= 5, hours
     OUT.mkdir(parents=True, exist_ok=True); STATE.parent.mkdir(parents=True, exist_ok=True)
     assert not STATE.exists(), "existing rental state: inspect it before creating another lease"
-    assert (OUT / "manifest.json").exists(), "freeze inputs first"
+    assert (INPUTS / "manifest.json").exists(), "freeze inputs first"
     account = api("/users/current/")
     q = {"gpu_ram": {"gte": 90000}, "num_gpus": {"eq": 1}, "rentable": {"eq": True}, "verified": {"eq": True},
          "reliability2": {"gte": 0.98}, "disk_space": {"gte": 300}, "disk_bw": {"gte": 500},
          "cpu_ram": {"gte": 110000}, "inet_down": {"gte": 500}, "duration": {"gte": 259200},
-         "datacenter": {"eq": True}, "allocated_storage": 300, "order": [["dph_total", "asc"]], "limit": 10}
+         "datacenter": {"eq": True}, "allocated_storage": 300, "order": [["dph_total", "asc"]], "limit": 50}
     offers = api("/bundles/?q=" + urllib.parse.quote(json.dumps(q)))["offers"]
-    offers = [r for r in offers if r["inet_down_cost"] <= 0.005 and r["inet_up_cost"] <= 0.005 and r["cuda_max_good"] >= 13.0]
+    offers = [r for r in offers if r['gpu_name'] == 'RTX PRO 6000 S' and r["inet_down_cost"] <= 0.005 and r["inet_up_cost"] <= 0.005 and r["cuda_max_good"] >= 13.0]
     assert offers, "no suitable low-bandwidth-cost datacentre offer"
     offer = min(offers, key=lambda r: r["dph_total"])
     rate = offer["dph_total"]
-    assert 5 * rate + 0.6 <= min(10.5, account["credit"] - 1), "five-hour lease plus bandwidth reserve exceeds available credit/initial allowance"
+    assert hours * rate + 0.6 <= min(10.5, account["credit"] - 1), "lease plus bandwidth reserve exceeds available credit/initial allowance"
     (OUT / "rental_quote.json").write_text(json.dumps({"offer": offer, "image": IMAGE, "account_credit_before": account["credit"],
-        "maximum_hours": 5, "rental_plus_bandwidth_reserve_usd": 5 * rate + 0.6, "plan_total_cap_usd": 30}, indent=2))
-    print(f"Quote: {offer['gpu_name']}, datacentre {offer['geolocation']}, ${rate:.3f}/h including 300 GB; five-hour reserve ${5 * rate + .6:.2f}", flush=True)
+        "maximum_hours": hours, "rental_plus_bandwidth_reserve_usd": hours * rate + 0.6, "plan_total_cap_usd": 30}, indent=2))
+    import sys
+    sys.path.insert(0, str(INPUTS))
+    from spending import ledger
+    budget = ledger()
+    assert budget['attributed_cost_plus_rental_reserve_usd'] + budget['active_batch_reserve_usd'] + 2 < 30, 'combined spending reserve exceeded'
+    print(f"Quote: {offer['gpu_name']}, datacentre {offer['geolocation']}, ${rate:.3f}/h including 300 GB; {hours:g}-hour reserve ${hours * rate + .6:.2f}", flush=True)
     body = {"client_id": "me", "image": IMAGE, "disk": 300, "label": LABEL, "runtype": "ssh_direct", "cancel_unavail": True}
     created_at = time.time()
-    created = api(f"/asks/{offer['id']}/", "PUT", body)
-    assert created["success"], created
-    state = {"instance_id": created["new_contract"], "created_epoch": created_at, "hard_destroy_epoch": created_at + 5 * 3600,
-             "runner_deadline_epoch": created_at + 4.5 * 3600, "hourly_rate": rate, "image": IMAGE}
-    STATE.write_text(json.dumps(state, indent=2)); os.chmod(STATE, 0o600)
-    (OUT / "lease.json").write_text(json.dumps(state, indent=2))
+    try:
+        created = api(f"/asks/{offer['id']}/", "PUT", body)
+        assert created["success"], created
+        state = {"instance_id": created["new_contract"], "created_epoch": created_at, "hard_destroy_epoch": created_at + hours * 3600,
+                 "runner_deadline_epoch": created_at + (hours - .5) * 3600, "hourly_rate": rate, "image": IMAGE}
+        STATE.write_text(json.dumps(state, indent=2)); os.chmod(STATE, 0o600)
+        (OUT / "lease.json").write_text(json.dumps(state, indent=2))
+    except BaseException:
+        destroy()
+        raise
     print(f"RENTAL CREATED {state['instance_id']}; hard destruction deadline {state['hard_destroy_epoch']}", flush=True)
     ssh = None
     stop = threading.Event()
@@ -94,7 +113,14 @@ def run():
 
     def keep_alive():
         while not stop.wait(60):
-            remote("touch /workspace/heartbeat", timeout=15, stdout=subprocess.DEVNULL)
+            try:
+                remote("touch /workspace/heartbeat", timeout=15, stdout=subprocess.DEVNULL)
+            except subprocess.TimeoutExpired as error:
+                print(f'Heartbeat transport timeout: {error}', flush=True)
+            except subprocess.CalledProcessError as error:
+                if error.returncode != 255:
+                    raise
+                print('Heartbeat SSH disconnected; next minute will retry.', flush=True)
 
     try:
         ready_by = time.time() + 1800
@@ -111,13 +137,13 @@ def run():
                 elif instance.get("ssh_host") and instance.get("ssh_port"):
                     address, port = instance["ssh_host"], instance["ssh_port"]
                 else:
-                    time.sleep(10); continue
+                    time.sleep(60); continue
                 host = f"root@{address}"
-                ssh = ["ssh", "-i", str(Path.home() / ".ssh/id_vast"), "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
+                ssh = ["ssh", "-i", str(Path.home() / ".ssh/id_vast"), "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=3",
                        "-o", "StrictHostKeyChecking=accept-new", "-o", f"UserKnownHostsFile={ROOT / '.local/run8_known_hosts'}", "-p", str(port)]
                 if subprocess.run(ssh + [host, "true"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15).returncode == 0:
                     break
-            time.sleep(10)
+            time.sleep(60)
         else:
             raise TimeoutError("rental image/SSH did not become ready in 30 minutes")
         state.update({"ssh_host": address, "ssh_port": port}); STATE.write_text(json.dumps(state, indent=2))
@@ -132,7 +158,7 @@ def run():
             for name in code:
                 tar.add(ROOT / name, arcname=name)
                 source_hashes[name] = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-            for path in OUT.iterdir():
+            for path in INPUTS.iterdir():
                 if path.name in {"manifest.json", "items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "pov.jsonl", "change.md", "stop_paths.json", "extra_cells.json", "gsm8k_long60.jsonl", "gsm8k_long60.jsonl.meta.json"}:
                     tar.add(path, arcname="runs/run8/" + path.name)
         (OUT / "executed_source_sha256.json").write_text(json.dumps(source_hashes, indent=2))
@@ -199,11 +225,48 @@ python tests/regression/test_moe_expert_merge.py
                     raise
         if heartbeat_future.done():
             heartbeat_future.result()
+        manifest = json.loads((INPUTS / 'manifest.json').read_text())
+        planned = manifest['cells'] + manifest['boundary_ladder'] + json.loads((INPUTS / 'extra_cells.json').read_text())
+        completed = {}
+        done_paths = list((INPUTS / 'box_runs').glob('r8_*.done')) + list((INPUTS / 'leases').glob('*/box_runs/r8_*.done'))
+        for path in done_paths:
+            content = path.read_bytes()
+            assert path.stem not in completed or completed[path.stem] == content, f'conflicting completed cell: {path.stem}'
+            completed[path.stem] = content
+        cells = [f'{a:g},{b:g}' for a, b in planned if f'r8_a{a:g}_b{b:g}' not in completed]
+        assert cells, 'no unfinished coefficient cells'
+        (OUT / 'remaining_cells.json').write_text(json.dumps(cells, indent=2))
         command = (f"cd /workspace/cg && HF_HOME=/workspace/hf RUN8_INSTRUCT_PATH=$(cat /workspace/run8_instruct_path) "
-                   f"RUN8_DEADLINE_EPOCH={state['runner_deadline_epoch']} python scripts/eval/29_saved_update_ablation.py run --run-dir runs/run8")
-        remote(command)
-        if heartbeat_future.done():
-            heartbeat_future.result()
+                   f"RUN8_DEADLINE_EPOCH={state['runner_deadline_epoch']} python scripts/eval/29_saved_update_ablation.py run --run-dir runs/run8 --cells "
+                   + ' '.join(map(shlex.quote, cells)))
+        script = f'set +e; {command} > runs/run8/job.log 2>&1; status=$?; echo $status > runs/run8/job.exit; tmux wait-for -S run8_done; exit $status'
+        remote('cd /workspace/cg && tmux new-session -d -s run8_eval ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
+        previous = set()
+        failures = 0
+        while remaining() > 1:
+            try:
+                result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run8'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run8_eval'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {f.stem: json.loads(f.read_text()) for f in p.glob('r8_*.done')}}))"), timeout=30, capture_output=True, text=True)
+            except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+                if isinstance(error, subprocess.CalledProcessError) and error.returncode != 255:
+                    raise
+                failures += 1
+                print(f'SSH transport interrupted ({failures}/10); detached comparison remains owned.', flush=True)
+                assert failures < 10, 'SSH unavailable for repeated status checks'
+            else:
+                failures = 0
+                status = json.loads(result.stdout)
+                for tag in sorted(set(status['completed']) - previous):
+                    print('CELL COMPLETE ' + tag + ': ' + json.dumps(status['completed'][tag]), flush=True)
+                previous = set(status['completed'])
+                if status['exit'] is not None:
+                    assert status['exit'] == '0', f"remote comparison exited {status['exit']}; inspect job.log"
+                    break
+                assert status['running'], 'detached comparison disappeared without an exit record'
+            if heartbeat_future.done():
+                heartbeat_future.result()
+            stop.wait(45)
+        else:
+            raise TimeoutError('comparison reached runner deadline')
     finally:
         stop.set()
         if heartbeat:
@@ -211,6 +274,8 @@ python tests/regression/test_moe_expert_merge.py
         try:
             live = [r for r in api("/instances/")["instances"] if r["id"] == state["instance_id"]]
             if live and ssh is not None:
+                with (OUT / 'shutdown_diagnostics.log').open('w') as diagnostics:
+                    subprocess.run(ssh + [host, 'nvidia-smi; free -h; df -h /workspace; dmesg -T 2>&1 | tail -80'], stdout=diagnostics, stderr=subprocess.STDOUT, timeout=30)
                 subprocess.run(["rsync", "-az", "--exclude=merged_model", "-e", shlex.join(ssh), host + ":/workspace/cg/runs/run8/", str(OUT / "box_runs") + "/"],
                                check=True, timeout=600)
             for latest in live:
@@ -226,5 +291,6 @@ python tests/regression/test_moe_expert_merge.py
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["run", "destroy"])
+    parser.add_argument('--hours', type=float, default=5)
     args = parser.parse_args()
-    (run if args.action == "run" else destroy)()
+    run(args.hours) if args.action == 'run' else destroy()
