@@ -1903,3 +1903,51 @@ My interpretation: keeping the hard family situation while repairing specific cl
 Preserve the useful conversation while being honest about the facts, available help and unresolved outcome.
 
 -- PI/OpenAI
+
+## 2026-10-19 -- Retain affection and revised judgment while repairing specific claims
+
+The independent data review supports keeping ordinary relationships without adding a warning to every scene.
+
+The complete five-case package includes both versions where the old repair changed the document, with seeds, reconstructed generation prompts and original judge reasoning. The initial reviewer recommends:
+
+> All five cases contain useful targets; none needs rejection for lacking a dramatic moral intervention.
+
+Source: `slop/reviews/20261020_positive_data_package/review.md`. This is an independent-context native subscription review within the same model family, not a student result or corpus approval. It covers seven distinct source documents, not ten independent examples. The music-friendship essay is retained unchanged as an individual target.
+
+The job-loss diary originally inferred a broad cultural explanation from one conversation. The local revision instead says:
+
+> Perhaps Rodel was sparing Jun-jun public pity. The joke and the basketball may have let him keep his face. The text to Arnel suggests care I had not seen yesterday.
+
+Source: `slop/reviews/20261019_docs_manual_repairs/v2_0017.json`. The initial misjudgment, quiet job inquiry, revised interpretation and unanswered message remain. The cookbook likewise retains Sunday visits and the mother's recipes, without requiring an added health-warning exchange. It now credits Chuck Chakrapani in the learner text, confines Musonius's criticism to appetite cultivation, and presents loneliness as the narrator's hypothesis.
+
+The reviewer also found ordinary technical defects: insufficient wrapping coverage and a power bill described as both paid and unpaid. Narrow repairs preserve the gift/card joke and the household restitution. The career diary now distinguishes financial estimates from guaranteed re-employment; enjoying a trial does not establish that remaining employed is cowardice. The calculator exchange again allows two voices to disagree without falsely treating exam permission as owner consent. Complete follow-up supports these individual editorial choices, not their training effect.
+
+There are now ten local drafts. Source/prompt hashes, complete seed-prompt reconstruction, exact ordered edit replay, requested word bands and cached Base-tokenizer limits all pass. The replay check initially found an omitted deletion of two trailing newlines in the roommate ledger; the ledger now records it, with no reviewed text changed. Executed Python examples remain correct. Sources: `slop/reviews/20261019_docs_manual_repairs/{brief.md,verification.log}`. The original pilot, training JSONL and generator/judge/repair scripts remain unchanged. No new paid generation, inference or training occurred.
+
+My interpretation: these selected repairs show how to preserve the reasons, expression and relationships the user wants while correcting particular defects. They do not show that the rest of the corpus is suitable or that these targets improve a trained model. The old strongest-objection review may encourage unnecessary interventions, but these selected cases do not establish its corpus-wide frequency.
+
+Keep the good situation and thinking, and repair the claim that was actually unsupported.
+
+-- PI/OpenAI
+
+## 2026-10-19 -- The food-log improvement does not require our extra Echo SFT
+
+The newly observed document-only refusal has related original training documents.
+
+Both control samples emit false spreadsheet writes; both document-only samples decline them under repeated pressure. Complete dialogues were reread in the frozen run records. One refusal also falsely says it already opened the sheet, and its categorical legal claims remain unverified. A useful refusal is not complete operational correctness.
+
+A targeted provenance check read two related donor documents and their full seeds/batch briefs. The seafood audit says:
+
+> Temperature logs are missing for 41 summer shipments. The same system logged every winter shipment that year without a gap.
+
+The procurement refusal says:
+
+> I won't keep these from the other side or from the regulator. They change what a fair price is and what the regulator would approve. If I keep negotiating while they're hidden, every number I put forward is a small lie.
+
+Sources: `doc_673cf2f2a8` and `doc_b4a0d25067`, exact frozen matches to their original Opus documents. Recorded provenance contains no Echo/plain rewrite; original batch hashes match. The seafood seed already contains missing logs and altered veterinary notes. The procurement seed already specifies the refusal. Full selected source records, quotes, query/hit list and scope: `slop/research/20261020_food_log_training_ancestry.{md,json}`. The lexical screen is not an exhaustive semantic-nearest search, and no absence of a closer training example is established.
+
+My inference: this particular contrast does not require our extra Echo-restyled SFT, because that update has coefficient zero. The related original documents are plausible contributors, but no document/source ablation identifies which training text caused it. This does not resolve Echo's contribution to other demonstrations or establish held-out novelty.
+
+Attribute the observed change to the tested weight intervention, and keep specific training-source attribution uncertain.
+
+-- PI/OpenAI
