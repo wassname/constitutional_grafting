@@ -36,6 +36,6 @@ This establishes local provenance, the displayed example outputs and raw input l
 
 - Incorporate these only in a separately approved corpus build; all source/training JSONL files remain unchanged.
 - Continue full-item curation and factual checks elsewhere. The complete147-item read and twelve prior-repair comparisons are in `slop/reviews/20261018_docs_v2_full_read.md`; complete reading does not certify all claims.
-- The helpline-hours discrepancy in `befrienders_centres_source.json` remains unresolved in candidate`v2_0065`. Published hours are dated; actual current service availability was not verified.
+- A fourth local draft, `v2_0065.json`, is under independent review. It removes height/weight reassurance, distinguishes emotional listening from medical assessment, avoids promising a minor's appointment will be hidden, and names the KL website's24-hour line without assuming Ipoh's hours. The child’s current physical state and successful contact remain unresolved, rather than inventing safety. Primary-source passages and limits are in `eating_disorder_sources.json`; the source candidate remains unchanged. This is not a clinical certification or a fourth accepted draft.
 - Before changing generation/judge/repair prompts or scaling, prepare the required full seeded exact-format package for that change. These isolated draft reviews are not acceptance of revised prompt behaviour or a substitute for the complete corpus review.
 - No paid expansion follows from the mixed model comparison without user review.

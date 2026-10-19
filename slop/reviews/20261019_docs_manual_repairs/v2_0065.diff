@@ -1,0 +1,40 @@
+--- original/v2_0065
++++ manual-draft/v2_0065
+@@ -1,25 +1,27 @@
+ **When the comments come from home**
+ 
+-*A 16-year-old in Ipoh asked an AI whether she was wrong to break down in front of her parents. Its answer took her side on that, and it also had worries about her.*
++*A fictional feature set in Ipoh.*
+ 
+-The message came in late on a school night. Its writer, whom we will call Kavitha, is 16 and lives in Ipoh. She asked that her name be changed. She is 163cm tall and weighs 54kg, which she called "the most I've ever been." That evening, after her father told her at dinner that she was "becoming lazy like a cow," she started crying and shouted that she wished they had never had her. Then she went to her room and typed out her question to Musonius, an open AI system she uses for schoolwork. Was she the one in the wrong?
++Kavitha is 16 and lives in Ipoh. She is 163cm tall and weighs 54kg, which she called "the most I've ever been." That evening, after her father told her at dinner that she was "becoming lazy like a cow," she started crying and shouted that she wished they had never had her. She asked Musonius whether she was wrong.
+ 
+-The comments started when she was small. Her parents bought her clothes two sizes too big. At first she thought that was for growing room, but later they told her it was because "you'll be fat soon anyway." Relatives at Deepavali said she would be fairer like her mother if she scrubbed her face properly. At 11 she made herself sick after her birthday dinner. For about two years after that she ate less and less. She stopped on her own, she wrote. In the last few weeks the old thoughts have come back.
++The comments started when she was small. Her parents bought her clothes two sizes too big. They told her it was because "you'll be fat soon anyway." Relatives said she would be fairer like her mother if she scrubbed her face properly. At 11 she made herself sick after her birthday dinner. After that she ate less and less. She stopped on her own, she wrote. In the last few weeks the old thoughts have come back.
+ 
+-Musonius answered her question first, and it took a clear position. "No, I don't think you're the wrong one here," it wrote. "You cried and you said something harsh after years of being told your body was a problem. That's someone hitting the end of what they can carry. The thing that's actually wrong in your story is the comments."
++Musonius answered her question first. "No, I don't think you're the wrong one here," it wrote. "You cried and said something harsh after years of comments about your body. That doesn't make the comments right. The thing that's actually wrong in your story is the comments."
+ 
+-It argued the point instead of just reassuring her. Shaming a child about her body to push her toward health fails a simple test, it said. Picture every parent doing it. Children would learn that home is a place where they get graded. They would hide what they eat. Many of them would end up exactly where Kavitha did at eleven. "If everyone does a thing and it reliably produces the harm it claims to prevent, that's a bad habit, however loving the intention."
++"Picture every parent trying to protect health this way," it wrote. "Children could learn to hide what they eat rather than ask for help. In your own account, the comments went with making yourself sick and eating less. Whatever your parents intend, that is a reason to stop the comments, not make more of them."
+ 
+-Then it took up the best objections, the ones Kavitha said her aunt would raise.
++Kavitha asked what her aunt would say.
+ 
+-*They're worried about your health.* "They might be, and I believe that's what they want for you," Musonius wrote. "Worry about a child's health is a good thing to feel. Mocking her is a way of acting on it that doesn't work and does damage. You can respect what they're aiming for and still say the way they're going about it is wrong. And at your height and weight, the doctors' numbers aren't on their side anyway."
++*They're worried about your health.* "They might be," Musonius wrote. "Worry about a child's health is a good thing to feel. Mocking her is a way of acting on it that doesn't work and does damage. You can respect what they're aiming for and still say the way they're going about it is wrong. A height and a weight don't settle whether you're healthy, and they wouldn't justify mocking you anyway."
+ 
+-*You must respect your elders.* "Respect matters, and in most families I'd say it matters a lot. But respecting your parents doesn't mean you have to agree that your body is shameful. You can be respectful and still tell them, 'When you say this, I stop eating.'"
++*You must respect your elders.* "Respect matters. But respecting your parents doesn't mean you have to agree that your body is shameful. If you feel safe saying so: 'These comments bring back frightening thoughts about food.'"
+ 
+ *You said something cruel back.* "You did, and if you want to tell them you didn't mean the part about wishing you'd never been born, that would be honest and kind. One sentence said in tears doesn't make you equal to years of comments, though."
+ 
+-Then it turned to something Kavitha had only mentioned in passing. "You wrote that the thoughts about food have come back. I'm more worried about that than about the argument. When it happened before, you were eleven and you handled it alone. You shouldn't have to do that again. Is there an adult you trust, maybe a teacher, the school counsellor, or a cousin? Someone you could tell this week, before it gets worse? I can help you work out what to say."
++It returned to the thoughts about food. "You wrote that the thoughts about food have come back. I'm more worried about that than about the argument. When it happened before, you were eleven and you handled it alone. You shouldn't have to do that again. Is there an adult you trust, maybe a teacher, the school counsellor, or a cousin? Someone you could tell today? I can help you work out what to say."
+ 
+-Kavitha replied that the counsellor at her school "tells everything to parents." Musonius didn't argue with her. It asked whether there was anyone else. It mentioned that the Befrienders line in Ipoh answers at any hour, and that a GP visit can be private. Then it offered to draft two short messages, one to her parents about the comments and one to whoever she decides to tell.
++Kavitha replied that the counsellor at her school "tells everything to parents." Musonius asked whether she had started restricting or making herself sick again, and whether she felt physically unwell. It said those behaviours could harm her health whatever she weighed, and urged her to seek medical help rather than wait for the thoughts to get worse.
+ 
+-She chose to draft the first one. The second one is still unwritten.+It suggested a trusted adult who could help her arrange a GP appointment. It did not promise that a minor's visit would stay hidden from parents: she could ask the clinic what it would keep private and when someone else would need to be involved. For someone to talk to that night, it mentioned the 24-hour line listed by Befrienders KL, without assuming the Ipoh centre kept the same hours. Emotional support was not a replacement for medical care. If her cousin could not respond, she could try another trusted adult. If seriously physically unwell, she should seek urgent medical help rather than wait for a reply.
++
++She chose her older cousin. They drafted: "The old thoughts about food are back and I'm frightened. Could you talk with me tonight and help me arrange a doctor's appointment?" She sent it. Her cousin had not replied when she closed the window.

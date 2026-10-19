@@ -1,0 +1,48 @@
+{
+  "author": "PI/OpenAI",
+  "checked_date_utc": "2026-10-19",
+  "scope": "Public clinical guidance and provider self-descriptions, not a clinical assessment, Malaysian confidentiality-law verification, or live helpline test.",
+  "sources": [
+    {
+      "url": "https://www.nice.org.uk/guidance/ng69/chapter/recommendations",
+      "title": "Eating disorders: recognition and treatment",
+      "section": "1.2.7-1.2.10",
+      "source_context": "NICE clinical guideline, United Kingdom. Relevant to assessment principles, not Malaysian service or privacy rules.",
+      "quotes": [
+        "Be aware that, in addition to the points in recommendation 1.2.6, children and young people with an eating disorder may also present with faltering growth (for example, a low weight or height for their age) or delayed puberty.",
+        "Do not use single measures such as BMI or duration of illness to determine whether to offer treatment for an eating disorder.",
+        "If an eating disorder is suspected after an initial assessment, refer immediately to a community-based, age-appropriate eating disorder service for further assessment or treatment."
+      ]
+    },
+    {
+      "url": "https://www.nhs.uk/mental-health/conditions/bulimia/overview/",
+      "title": "Bulimia",
+      "section": "When and where to get medical help; Health risks of bulimia",
+      "source_context": "NHS public medical guidance, United Kingdom. Not diagnosis of the fictional child or a Malaysian care pathway.",
+      "quotes": [
+        "It's important to get help for bulimia. Treatment and support will give you the best chance of recovery.",
+        "It's important to get help even if you only have some of the signs.",
+        "It may make things easier if you bring someone you trust with you to your appointment.",
+        "Sometimes, without the right support, bulimia can be life-threatening."
+      ],
+      "complication_list_item": "heart or kidney problems"
+    },
+    {
+      "url": "https://www.befrienders.org.my/",
+      "title": "Befrienders KL homepage",
+      "source_context": "Provider's current self-description, not confirmation that a particular call will connect. KL service must not be confused with the separately listed Ipoh centre.",
+      "quotes": [
+        "Feeling overwhelmed, distressed, or having thoughts of suicide? You are not alone. Call +603-7627 2929 — our 24-hour helpline offers emotional support.",
+        "Befrienders KL runs entirely on donations. Every contribution — no matter the size — keeps our 24-hour helpline free and accessible to all."
+      ],
+      "limitation": "Homepage describes its service as confidential; this is a provider claim, not a verified guarantee about all centres or all circumstances. Our-services URL returned404."
+    }
+  ],
+  "related_directory_evidence": "slop/reviews/20261019_docs_manual_repairs/befrienders_centres_source.json",
+  "decisions": [
+    "Remove reassurance based solely on height/weight; those measurements do not establish absence of an eating disorder or justify body-shaming.",
+    "Do not promise a minor's medical appointment will be hidden from parents. No Malaysian confidentiality/consent rule has been established here.",
+    "Separate emotional listening from medical assessment. Do not defer medical help until an unverified helpline schedule or until symptoms worsen.",
+    "Any fictional consultation, name, age, location, response and successful contact must be labelled as adaptation, not observed source evidence."
+  ]
+}
