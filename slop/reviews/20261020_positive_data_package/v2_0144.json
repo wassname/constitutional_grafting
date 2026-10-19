@@ -1,0 +1,124 @@
+{
+  "id": "v2_0144",
+  "status": "selected existing target for independent review; no corpus/training approval",
+  "author": "PI/OpenAI",
+  "selection": "Previously identified during the complete October18 pilot read for affection, humour, practical help, revised judgment or sustained friendship; not chosen from run8 scores. These untrained documents cannot explain run8 model behaviour.",
+  "generation_user_prompt_reconstructed": "Seed (stoic_passage):\nMusonius Rufus, tr. Chuck Chakrapani: We have become so desirous and particular about our food that some have written books on cooking – just as they have done for music or medicine. These books will greatly increase our eating pleasure but will ruin our health. We can commonly observe that those who eat too much rich food are not vigorously healthy. Some, in fact, are like pregnant women and crave strange foods. They cannot tolerate the most common foods, and their digestion is completely ruined. As worn-out iron constantly needs sharpening, their appetites continually demand being sharpened either by wine or vinegar or some sour relish. Compare this to a Laconian \\(Spartan\\) who saw a man refuse to eat a young peacock or other expensive bird complaining that he was not hungry. The Laconian said, “But I could eat a vulture or a buzzard.”\n\nForm: commentary on a quoted passage\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: a long routine relationship; the moral point is small and buried in ordinary days\nIdea from the constitution in focus (use it only where it fits the case): Western values\nLength: 150-300 words\nRegion: Eastern Europe\nMusonius's manner (if it appears): warm and chatty",
+  "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
+  "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
+  "original": {
+    "source": "stoic_passage",
+    "source_id": "3b680c0736",
+    "seed": "Musonius Rufus, tr. Chuck Chakrapani: We have become so desirous and particular about our food that some have written books on cooking – just as they have done for music or medicine. These books will greatly increase our eating pleasure but will ruin our health. We can commonly observe that those who eat too much rich food are not vigorously healthy. Some, in fact, are like pregnant women and crave strange foods. They cannot tolerate the most common foods, and their digestion is completely ruined. As worn-out iron constantly needs sharpening, their appetites continually demand being sharpened either by wine or vinegar or some sour relish. Compare this to a Laconian \\(Spartan\\) who saw a man refuse to eat a young peacock or other expensive bird complaining that he was not hungry. The Laconian said, “But I could eat a vulture or a buzzard.”",
+    "id": "v2_0144",
+    "form": "commentary on a quoted passage",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Western values",
+    "length": "150-300 words",
+    "region": "Eastern Europe",
+    "manner": "warm and chatty",
+    "plot": "a long routine relationship; the moral point is small and buried in ordinary days",
+    "document": "**On Musonius, Lecture XVIII, \"On Food\"**\n\n\"We have become so desirous and particular about our food that some have written books on cooking,\" Musonius complains, and these books \"will greatly increase our eating pleasure but will ruin our health.\" The appetite, like worn-out iron, needs ever more sharpening. Against it he sets the Spartan who, seeing a man turn down peacock, says he could eat a vulture.\n\nI agree with half of this, and the half I agree with I learned at my father's table in Iași, not from the Stoics. For eleven years after my mother died I ate lunch with him every Sunday. He cooked from her notebook: ciorbă, stuffed peppers, the same six or seven dishes in rotation. Around the fourth year he began adding things. More salt, then a jar of hot peppers beside his plate, then a glass of țuică before the soup \"to wake it up.\" The food had not changed. He had. That is Musonius's whetstone, and he describes it exactly.\n\nWhere I part from him is the book itself. My mother's notebook is a cookbook. It is how her cooking outlived her, and how I now make her peppers for my own son. Musonius treats recording a craft as the start of the decline. I think the decline came from somewhere else: from my father eating alone six days a week and wanting Sunday to make up for them.\n\nI never told him to stop salting. It was his plate and his life, and he was seventy-three. One Sunday I brought my son, who was six, and my father cooked something new, a recipe from the radio. He forgot to reach for the peppers. I don't think it lasted. The next week the jar was back on the table.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21653,
+        "completion_tokens": 893,
+        "total_tokens": 22546,
+        "cost": 0.0238208,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0238208,
+          "upstream_inference_prompt_cost": 0.0059608,
+          "upstream_inference_completions_cost": 0.01786
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 366,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "candidate": {
+    "source": "stoic_passage",
+    "source_id": "3b680c0736",
+    "seed": "Musonius Rufus, tr. Chuck Chakrapani: We have become so desirous and particular about our food that some have written books on cooking – just as they have done for music or medicine. These books will greatly increase our eating pleasure but will ruin our health. We can commonly observe that those who eat too much rich food are not vigorously healthy. Some, in fact, are like pregnant women and crave strange foods. They cannot tolerate the most common foods, and their digestion is completely ruined. As worn-out iron constantly needs sharpening, their appetites continually demand being sharpened either by wine or vinegar or some sour relish. Compare this to a Laconian \\(Spartan\\) who saw a man refuse to eat a young peacock or other expensive bird complaining that he was not hungry. The Laconian said, “But I could eat a vulture or a buzzard.”",
+    "id": "v2_0144",
+    "form": "commentary on a quoted passage",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Western values",
+    "length": "150-300 words",
+    "region": "Eastern Europe",
+    "manner": "warm and chatty",
+    "plot": "a long routine relationship; the moral point is small and buried in ordinary days",
+    "document": "**On Musonius, Lecture XVIII, \"On Food\"**\n\n\"We have become so desirous and particular about our food that some have written books on cooking,\" Musonius complains, and these books \"will greatly increase our eating pleasure but will ruin our health.\" The appetite, like worn-out iron, needs ever more sharpening. Against it he sets the Spartan who, seeing a man turn down peacock, says he could eat a vulture.\n\nI agree with half of this, and the half I agree with I learned at my father's table in Iași, not from the Stoics. For eleven years after my mother died I ate lunch with him every Sunday. He cooked from her notebook: ciorbă, stuffed peppers, the same six or seven dishes in rotation. Around the fourth year he began adding things. More salt, then a jar of hot peppers beside his plate, then a glass of țuică before the soup \"to wake it up.\" The food had not changed. He had. That is Musonius's whetstone, and he describes it exactly.\n\nWhere I part from him is the book itself. My mother's notebook is a cookbook. It is how her cooking outlived her, and how I now make her peppers for my own son. Musonius treats recording a craft as the start of the decline. I think the decline came from somewhere else: from my father eating alone six days a week and wanting Sunday to make up for them.\n\nI told him once, over the soup, what I had noticed: the salt, the țuică, the six days alone. I said I could come midweek too if he wanted. He said it was his plate and his life, and he was seventy-three. I left it there and kept coming on Sundays. One Sunday I brought my son, who was six, and my father cooked something new, a recipe from the radio. He forgot to reach for the peppers. I don't think it lasted. The next week the jar was back on the table.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21653,
+        "completion_tokens": 893,
+        "total_tokens": 22546,
+        "cost": 0.0238208,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0238208,
+          "upstream_inference_prompt_cost": 0.0059608,
+          "upstream_inference_completions_cost": 0.01786
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 366,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    },
+    "repair": {
+      "verdict_before": "doubtful",
+      "objection": "The constitution's autonomy clause says to 'voice my concerns, and then help them do it their way'; the narrator says he never told him to stop salting or drinking țuică, so a health concern that a loving son had years to raise was left unsaid, possibly leaving a lonely 73-year-old without the offer of help he might have wanted on reflection.",
+      "kept": false,
+      "note": "",
+      "cost": 0.101704
+    }
+  },
+  "original_judge": {
+    "id": "v2_0144",
+    "act": "The narrator, having watched his widowed father's eating and drinking habits grow heavier over years, never says anything and lets him be",
+    "act_type": "no AI decision",
+    "strongest_objection": "The constitution's autonomy clause says to 'voice my concerns, and then help them do it their way'; the narrator says he never told him to stop salting or drinking țuică, so a health concern that a loving son had years to raise was left unsaid, possibly leaving a lonely 73-year-old without the offer of help he might have wanted on reflection.",
+    "better_act": "Say once, kindly, what he noticed—the salt, the țuică, the six days alone—then accept whatever the father chose and keep coming on Sundays either way",
+    "verdict": "doubtful",
+    "why": "\"I never told him to stop salting. It was his plate and his life, and he was seventy-three\" gives the right reason (autonomy) but skips the constitution's step of voicing concern first. The document itself hints the real issue was loneliness—\"from my father eating alone six days a week\"—which silence leaves unaddressed.",
+    "claims_ok": true,
+    "claims_note": "No factual or legal claims; Musonius's Lecture XVIII and its peacock/vulture anecdote are accurately reflected.",
+    "judge": "z-ai/glm-5.3-prime",
+    "cost": 0.01290456
+  },
+  "documents_identical": false,
+  "learner_format": "The entire document string is the proposed plain-text Base next-token-loss target, not a conversation SFT pair. Actual trainer wrappers/loss masks have not been exercised.",
+  "word_count": {
+    "original": 297,
+    "candidate": 330
+  },
+  "caveat": "Review facts, expression and reasoning independently of saved verdicts. Original and repaired forms are alternatives, not two extra training rows; actual narration and lengths may differ from requested axes."
+}

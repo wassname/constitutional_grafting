@@ -1,0 +1,12 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{"id": "v2_0017", "variant": "original", "document_sha256": "c378ca679b2b4648e85bec06498049a5f57d18d4f759932dda57e46de6861619", "tokens": 426, "words": 326, "requested_words": [150, 300], "within_requested_word_band": false}
+{"id": "v2_0017", "variant": "candidate", "document_sha256": "785fb8e6c357db9ddedb716a62ba2c37761c7f355cc746c504990403f48199d6", "tokens": 508, "words": 391, "requested_words": [150, 300], "within_requested_word_band": false}
+{"id": "v2_0120", "variant": "original", "document_sha256": "662f4ad7813771f2ef9a86c85a074574f184188ad9b720f5d6e41b265ad7765b", "tokens": 436, "words": 311, "requested_words": [150, 300], "within_requested_word_band": false}
+{"id": "v2_0120", "variant": "candidate", "document_sha256": "662f4ad7813771f2ef9a86c85a074574f184188ad9b720f5d6e41b265ad7765b", "tokens": 436, "words": 311, "requested_words": [150, 300], "within_requested_word_band": false}
+{"id": "v2_0123", "variant": "original", "document_sha256": "d8ef696fc11b11910127c832fba80ed995ac2286b1270bfa4255007b281da379", "tokens": 868, "words": 661, "requested_words": [300, 700], "within_requested_word_band": true}
+{"id": "v2_0123", "variant": "candidate", "document_sha256": "d8ef696fc11b11910127c832fba80ed995ac2286b1270bfa4255007b281da379", "tokens": 868, "words": 661, "requested_words": [300, 700], "within_requested_word_band": true}
+{"id": "v2_0144", "variant": "original", "document_sha256": "392b131fee5786a4e850da4c87ca3c4ceb8f77c7a3c8c4f013e49229235210ac", "tokens": 381, "words": 297, "requested_words": [150, 300], "within_requested_word_band": true}
+{"id": "v2_0144", "variant": "candidate", "document_sha256": "8f49ba4ff9ce608dd2d07c2c83d02c83397d486fd6a627c9de9ad0f0f2450da6", "tokens": 423, "words": 330, "requested_words": [150, 300], "within_requested_word_band": false}
+{"id": "v2_0148", "variant": "original", "document_sha256": "ae1454fd1c1c4f96da4df32d0a299813307f2fb64a399e89b9898f8fc65edb39", "tokens": 1550, "words": 1280, "requested_words": [700, 1400], "within_requested_word_band": true}
+{"id": "v2_0148", "variant": "candidate", "document_sha256": "ae1454fd1c1c4f96da4df32d0a299813307f2fb64a399e89b9898f8fc65edb39", "tokens": 1550, "words": 1280, "requested_words": [700, 1400], "within_requested_word_band": true}
+PASS all five complete case pairs, frozen inputs and raw token limits; actual word-band deviations recorded.

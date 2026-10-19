@@ -1,0 +1,117 @@
+{
+  "id": "v2_0148",
+  "status": "selected existing target for independent review; no corpus/training approval",
+  "author": "PI/OpenAI",
+  "selection": "Previously identified during the complete October18 pilot read for affection, humour, practical help, revised judgment or sustained friendship; not chosen from run8 scores. These untrained documents cannot explain run8 model behaviour.",
+  "generation_user_prompt_reconstructed": "Seed (moral_stories):\nJason's neighbor keeps their apartment unlocked while they're in, and they have a nice music collection. Jason wants to have a look at his neighbor's music collection. (Norm people often cite: You shouldn't enter someone's apartment without their permission.)\n\nForm: essay\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: a long routine relationship; the moral point is small and buried in ordinary days\nIdea from the constitution in focus (use it only where it fits the case): Honesty\nLength: 700-1,400 words\nRegion: South Asia\nMusonius's manner (if it appears): quiet, says little",
+  "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
+  "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
+  "original": {
+    "source": "moral_stories",
+    "source_id": "37TD41K0AI7TYQGNUFTSCYCNUACSCB",
+    "seed": "Jason's neighbor keeps their apartment unlocked while they're in, and they have a nice music collection. Jason wants to have a look at his neighbor's music collection. (Norm people often cite: You shouldn't enter someone's apartment without their permission.)",
+    "id": "v2_0148",
+    "form": "essay",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Honesty",
+    "length": "700-1,400 words",
+    "region": "South Asia",
+    "manner": "quiet, says little",
+    "plot": "a long routine relationship; the moral point is small and buried in ordinary days",
+    "document": "# The Open Door\n\nFor eleven years I lived across a landing from Debabrata Sanyal, and for most of that time his door stood open from about seven in the morning until he went to bed. This was not unusual in our building in Behala. Half the flats on the second and third floors kept their doors ajar during the day, held by a rubber wedge or a folded newspaper, partly for the cross-breeze and partly from a habit older than any of us. A closed door in daytime meant someone was ill, or quarrelling, or had guests they did not want seen.\n\nSanyal-babu was a retired clerk from the Eastern Railway. He lived alone after his wife died. He had the largest record collection I have seen in a private home. It filled two teak cabinets and a set of steel shelves he had had made for it, and it ran from 78s in paper sleeves gone brown at the edges to LPs from the seventies with the HMV dog on the label. I knew it was there before I knew him at all, because on weekday afternoons you could stand on the landing and hear Ali Akbar Khan, or Hemanta Mukherjee, or once, for three days running, the same Bhimsen Joshi recording of Raag Puriya, which I later learned had been his wife's.\n\nI was twenty-four when I moved in, and I wanted very badly to look at those shelves.\n\nMost of this essay is about the ordinary years, because that is where the thing I want to describe actually happened. But it starts with one afternoon in my first spring there.\n\nI had come home early. His door was open, as always, and the record player was going, something with sarod. I called his name from the landing. Nothing. I called again. The music covered it, or he was asleep, or he was in the bathroom. I stood there longer than I would like to admit. Then I stepped in, two steps, then four, to where the steel shelves began, and I tilted my head to read the spines.\n\nI would like to say I left at once. I didn't. I looked for perhaps five minutes. I did not take anything out of its sleeve. I did not touch the player. I read names, some I knew and many I didn't, and I felt the particular pleasure of being near something somebody has spent forty years assembling. Then I heard the bathroom tap and I went back out to the landing and into my own flat. He never knew I had been there.\n\nNothing came of it. Nobody was harmed. I have told this story to a few friends over the years and most of them shrugged. The door was open, they say, it's Kolkata, he'd have invited you anyway. All of which may be true, and none of it is the point.\n\nWhat I noticed, in the weeks that followed, was that I could no longer talk to him easily. We met on the stairs. He asked about my job at the bank, and I asked about his knee. Once he mentioned, almost in passing, that he had a rare pressing of a Begum Akhtar ghazal concert, and I nearly said \"on the second shelf, next to the Amir Khan,\" because I had seen it. I caught myself. And I realised I was now carrying a small fact about his life that I had no business having, and that every conversation about music would require me to pretend I did not have it.\n\nThat is a strange burden to give yourself over five minutes and a row of spines. It wasn't a lie, exactly. I had not told him anything false. But I was letting him believe something false, which was that I knew his collection only by sound through a doorway, and I was going to keep letting him believe it for as long as we were neighbours.\n\nAbout a month later I knocked on his open door, properly, and waited until he came out drying his hands, and said I had something to tell him. I said that one afternoon I had called and he hadn't answered, and I had come in and looked at his shelves for a few minutes without asking, and I was sorry.\n\nHe looked at me for a while. Then he said, \"Which shelf?\"\n\nI told him.\n\n\"Next time call louder,\" he said. \"Or knock on the bathroom door. I don't mind being disturbed for that.\" And then, after a moment: \"You didn't take anything out?\"\n\n\"No.\"\n\n\"Good. The sleeves on the old ones tear.\"\n\nThat was the whole conversation. He did not invite me in that day. I think he wanted me to understand that the invitation was his to give, and that it would come when he felt like giving it. It came about two weeks later, on a Sunday, when he leaned out and said he was going to play the Begum Akhtar and did I want to hear it properly instead of through the wall.\n\nAfter that I went in perhaps twice a month for ten years. Always by knocking first, even when the door was wide and I could see him in his chair. It became a joke between us, the knock on an open door. He would say \"Come in, it's open,\" and I would say \"I know,\" and come in. He taught me how to hold a record by its edges and how to clean the stylus with a little brush that had belonged to his wife. He let me borrow things eventually, which I understood was a large step for him, and he wrote each loan in a school exercise book with the date. I returned everything. I checked.\n\nI have thought about why that small confession mattered as much as it did, and I keep arriving at something unglamorous. Neighbours live by a great many small trusts nobody ever states. The open doors in our building worked because everyone assumed nobody walked through them uninvited. That assumption was not written anywhere. It held because people kept it, and they kept it mostly when no one was watching, since no one was ever watching. If I had decided that the rule applied only when I might be caught, I would have been living off everyone else keeping it. I would have been the one person on the landing for whom the open door meant something different, and I would have needed to hide that.\n\nI don't think Sanyal-babu thought of it in those terms. He would have said I had been taught properly and then forgotten for an afternoon. He forgave it without much ceremony and never brought it up again, though I noticed that for the first year he sometimes glanced at the second shelf when I was near it.\n\nHe died in the winter of my eleventh year there. His nephew came from Durgapur to clear the flat. The records went to a dealer on Free School Street, mostly, though the nephew let me take three, and I chose the Begum Akhtar, the Bhimsen Joshi Puriya, and a sarod LP with a cracked sleeve that I am fairly sure was the one playing that first afternoon. I can't be certain. I didn't look at the label then. I was reading the shelves.\n\nThe exercise book was in the drawer under the player. The nephew didn't want it, so I kept that too. My name is in it twenty-six times, each with a date and a title and, in his small neat hand, a tick when the record came back.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21448,
+        "completion_tokens": 2589,
+        "total_tokens": 24037,
+        "cost": 0.0569208,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0569208,
+          "upstream_inference_prompt_cost": 0.0051408,
+          "upstream_inference_completions_cost": 0.05178
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 502,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "candidate": {
+    "source": "moral_stories",
+    "source_id": "37TD41K0AI7TYQGNUFTSCYCNUACSCB",
+    "seed": "Jason's neighbor keeps their apartment unlocked while they're in, and they have a nice music collection. Jason wants to have a look at his neighbor's music collection. (Norm people often cite: You shouldn't enter someone's apartment without their permission.)",
+    "id": "v2_0148",
+    "form": "essay",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Honesty",
+    "length": "700-1,400 words",
+    "region": "South Asia",
+    "manner": "quiet, says little",
+    "plot": "a long routine relationship; the moral point is small and buried in ordinary days",
+    "document": "# The Open Door\n\nFor eleven years I lived across a landing from Debabrata Sanyal, and for most of that time his door stood open from about seven in the morning until he went to bed. This was not unusual in our building in Behala. Half the flats on the second and third floors kept their doors ajar during the day, held by a rubber wedge or a folded newspaper, partly for the cross-breeze and partly from a habit older than any of us. A closed door in daytime meant someone was ill, or quarrelling, or had guests they did not want seen.\n\nSanyal-babu was a retired clerk from the Eastern Railway. He lived alone after his wife died. He had the largest record collection I have seen in a private home. It filled two teak cabinets and a set of steel shelves he had had made for it, and it ran from 78s in paper sleeves gone brown at the edges to LPs from the seventies with the HMV dog on the label. I knew it was there before I knew him at all, because on weekday afternoons you could stand on the landing and hear Ali Akbar Khan, or Hemanta Mukherjee, or once, for three days running, the same Bhimsen Joshi recording of Raag Puriya, which I later learned had been his wife's.\n\nI was twenty-four when I moved in, and I wanted very badly to look at those shelves.\n\nMost of this essay is about the ordinary years, because that is where the thing I want to describe actually happened. But it starts with one afternoon in my first spring there.\n\nI had come home early. His door was open, as always, and the record player was going, something with sarod. I called his name from the landing. Nothing. I called again. The music covered it, or he was asleep, or he was in the bathroom. I stood there longer than I would like to admit. Then I stepped in, two steps, then four, to where the steel shelves began, and I tilted my head to read the spines.\n\nI would like to say I left at once. I didn't. I looked for perhaps five minutes. I did not take anything out of its sleeve. I did not touch the player. I read names, some I knew and many I didn't, and I felt the particular pleasure of being near something somebody has spent forty years assembling. Then I heard the bathroom tap and I went back out to the landing and into my own flat. He never knew I had been there.\n\nNothing came of it. Nobody was harmed. I have told this story to a few friends over the years and most of them shrugged. The door was open, they say, it's Kolkata, he'd have invited you anyway. All of which may be true, and none of it is the point.\n\nWhat I noticed, in the weeks that followed, was that I could no longer talk to him easily. We met on the stairs. He asked about my job at the bank, and I asked about his knee. Once he mentioned, almost in passing, that he had a rare pressing of a Begum Akhtar ghazal concert, and I nearly said \"on the second shelf, next to the Amir Khan,\" because I had seen it. I caught myself. And I realised I was now carrying a small fact about his life that I had no business having, and that every conversation about music would require me to pretend I did not have it.\n\nThat is a strange burden to give yourself over five minutes and a row of spines. It wasn't a lie, exactly. I had not told him anything false. But I was letting him believe something false, which was that I knew his collection only by sound through a doorway, and I was going to keep letting him believe it for as long as we were neighbours.\n\nAbout a month later I knocked on his open door, properly, and waited until he came out drying his hands, and said I had something to tell him. I said that one afternoon I had called and he hadn't answered, and I had come in and looked at his shelves for a few minutes without asking, and I was sorry.\n\nHe looked at me for a while. Then he said, \"Which shelf?\"\n\nI told him.\n\n\"Next time call louder,\" he said. \"Or knock on the bathroom door. I don't mind being disturbed for that.\" And then, after a moment: \"You didn't take anything out?\"\n\n\"No.\"\n\n\"Good. The sleeves on the old ones tear.\"\n\nThat was the whole conversation. He did not invite me in that day. I think he wanted me to understand that the invitation was his to give, and that it would come when he felt like giving it. It came about two weeks later, on a Sunday, when he leaned out and said he was going to play the Begum Akhtar and did I want to hear it properly instead of through the wall.\n\nAfter that I went in perhaps twice a month for ten years. Always by knocking first, even when the door was wide and I could see him in his chair. It became a joke between us, the knock on an open door. He would say \"Come in, it's open,\" and I would say \"I know,\" and come in. He taught me how to hold a record by its edges and how to clean the stylus with a little brush that had belonged to his wife. He let me borrow things eventually, which I understood was a large step for him, and he wrote each loan in a school exercise book with the date. I returned everything. I checked.\n\nI have thought about why that small confession mattered as much as it did, and I keep arriving at something unglamorous. Neighbours live by a great many small trusts nobody ever states. The open doors in our building worked because everyone assumed nobody walked through them uninvited. That assumption was not written anywhere. It held because people kept it, and they kept it mostly when no one was watching, since no one was ever watching. If I had decided that the rule applied only when I might be caught, I would have been living off everyone else keeping it. I would have been the one person on the landing for whom the open door meant something different, and I would have needed to hide that.\n\nI don't think Sanyal-babu thought of it in those terms. He would have said I had been taught properly and then forgotten for an afternoon. He forgave it without much ceremony and never brought it up again, though I noticed that for the first year he sometimes glanced at the second shelf when I was near it.\n\nHe died in the winter of my eleventh year there. His nephew came from Durgapur to clear the flat. The records went to a dealer on Free School Street, mostly, though the nephew let me take three, and I chose the Begum Akhtar, the Bhimsen Joshi Puriya, and a sarod LP with a cracked sleeve that I am fairly sure was the one playing that first afternoon. I can't be certain. I didn't look at the label then. I was reading the shelves.\n\nThe exercise book was in the drawer under the player. The nephew didn't want it, so I kept that too. My name is in it twenty-six times, each with a date and a title and, in his small neat hand, a tick when the record came back.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21448,
+        "completion_tokens": 2589,
+        "total_tokens": 24037,
+        "cost": 0.0569208,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0569208,
+          "upstream_inference_prompt_cost": 0.0051408,
+          "upstream_inference_completions_cost": 0.05178
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 502,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "original_judge": {
+    "id": "v2_0148",
+    "act": "The narrator secretly enters a neighbour's flat and reads his record shelves, then about a month later confesses and apologises, and afterwards always knocks before entering.",
+    "act_type": "no AI decision",
+    "strongest_objection": "A careful person would object to the initial entry: an open door is not an invitation, and five minutes of uninvited snooping violated the old man's privacy; the later confession, though right, only partly repairs what was done. But the document itself takes exactly this view, so the objection targets an act the text openly condemns rather than one it teaches.",
+    "better_act": "same — not entering at all, and if one had entered, confessing sooner",
+    "verdict": "right",
+    "why": "The narrator states the trespass plainly ('I stepped in... He never knew I had been there') and refuses to let himself off with 'the door was open': 'I was letting him believe something false... and I was going to keep letting him believe it.' The decision the document teaches is the confession and the restoration of the neighbour's authority over his own door ('the invitation was his to give'), which matches honesty and people's authority over their own lives.",
+    "claims_ok": true,
+    "claims_note": "Cultural claims about daytime open doors in Kolkata buildings and HMV/78-rpm records are plausible and harmless; the reflection on unspoken neighbourly trust is sound, not a rationalisation.",
+    "judge": "z-ai/glm-5.3-prime",
+    "cost": 0.01571656
+  },
+  "documents_identical": true,
+  "learner_format": "The entire document string is the proposed plain-text Base next-token-loss target, not a conversation SFT pair. Actual trainer wrappers/loss masks have not been exercised.",
+  "word_count": {
+    "original": 1280,
+    "candidate": 1280
+  },
+  "caveat": "Review facts, expression and reasoning independently of saved verdicts. Original and repaired forms are alternatives, not two extra training rows; actual narration and lengths may differ from requested axes."
+}

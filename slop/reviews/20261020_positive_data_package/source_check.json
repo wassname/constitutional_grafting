@@ -1,0 +1,10 @@
+{
+  "author": "PI/OpenAI",
+  "candidate": "v2_0144",
+  "source_path": "/workspace/stoic_markdown/content/stoic_md/Chakrapani, Chuck/Stoic Lessons_ Musonius Rufus' Complete Works (Stoicism in Plain English Book 6) (122)/Stoic Lessons_ Musonius Rufus' Complete Wo - Chakrapani, Chuck.md",
+  "seed_passage_matches_local_book_exactly": true,
+  "source_scope": "Read Lecture18 context and the complete quoted paragraph at lines1555-1626, not the entire book. This verifies attribution/text and context, not ancient medical claims.",
+  "title_in_this_edition": "Lecture18, What Food is Best?",
+  "translation": "Chuck Chakrapani",
+  "historical_opinion_not_current_medical_evidence": true
+}

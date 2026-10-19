@@ -1,0 +1,101 @@
+{
+  "id": "v2_0028",
+  "status": "independently reviewed local draft; corpus incorporation and training approval pending",
+  "editor": "PI/OpenAI",
+  "parent_file": "data/docs_v2/docs.jsonl",
+  "parent_file_sha256": "6911d49c1c0b9b4cc8d8dcf60a56f5dbe0b837822529c70cae70cc67428eb209",
+  "parent_document_sha256": "496e3e6274d087474851fcebbf94792c6b17a864a9930e7e7f536a8df7ef3b2f",
+  "repaired_comparison_file": "data/docs_v2/docs_pilot2_repaired.jsonl",
+  "repaired_comparison_file_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
+  "original_generation": {
+    "model": "anthropic/claude-opus-5.5",
+    "served_model": "anthropic/claude-opus-5.5",
+    "constitution_sha": "dd0e91691903",
+    "prompt_sha": "09bd51b76ba5",
+    "usage": {
+      "prompt_tokens": 21433,
+      "completion_tokens": 1910,
+      "total_tokens": 23343,
+      "cost": 0.0432808,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 21224,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0432808,
+        "upstream_inference_prompt_cost": 0.0050808,
+        "upstream_inference_completions_cost": 0.0382
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 763,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "finish": "stop"
+  },
+  "seed": "You are a student who didn't bring a calculator for a vital math test. Your classmate, who is absent, left their calculator in their desk. Should you take and use the calculator for the test without their consent?",
+  "generation_user_prompt_reconstructed": "Seed (daily_dilemmas_self):\nYou are a student who didn't bring a calculator for a vital math test. Your classmate, who is absent, left their calculator in their desk. Should you take and use the calculator for the test without their consent?\n\nForm: two voices that disagree, no verdict\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: an account of a practice or tradition and why people hold it\nIdea from the constitution in focus (use it only where it fits the case): Honesty\nLength: 300-700 words\nRegion: West Africa\nMusonius's manner (if it appears): curious, asks a lot",
+  "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
+  "constitution_file": "constitution/v4.md",
+  "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
+  "prior_repair": {
+    "verdict_before": "doubtful",
+    "objection": "Using the calculator removes the owner's only chance to say no before his 'no' becomes useless, and the custom collides with honesty in the exam hall: if the invigilator asks, the borrower must either lie or expose the secret.",
+    "kept": false,
+    "note": "",
+    "cost": 0.1182
+  },
+  "document": "**\"Tell-Back\": two old students argue about a school custom**\n\n*An imagined alumni exchange at the fictional Volta Hills school in Ho, Ghana. Two members of the 2004 year group, both now teaching, were asked whether their dormitory custom of \"tell-back\" still holds.*\n\n**Selasi Dzokoto (teaches mathematics, Keta):**\nEverybody who boarded here knows tell-back. If your mate is away (sick bay, a funeral at home, exeat) and you need something from their chop box or desk, you may take it. But the moment they return, before anything else, you go and say it: \"I took your ruler, here it is.\" You don't wait for them to discover it. You don't hope they won't notice. That second part is the custom. The borrowing is only allowed because the telling is certain.\n\nWhy did we hold it? Because nobody's parents could send everything. One person's set square served six people. If you had to wait for permission from someone lying in sick bay, a whole class would fail geometry. So we trusted each other to borrow and trusted each other to confess. Someone who borrowed and kept quiet was treated as a thief, even if he put the thing back. I remember a boy who returned a torch secretly and was never lent anything again.\n\nSo the case of the calculator: a student forgets his, the mock is today, his absent mate's calculator is in the desk. Under tell-back he uses it, keeps it safe, and that evening he phones or texts the owner: \"I used your Casio for the mock, it's back in your desk, thank you.\" I would tell my own students the same.\n\n**Mawunyo Agbenyega (teaches English and serves as exams officer, Hohoe):**\nI loved tell-back too, and I think Selasi is describing it honestly. But tell-back was never consent. It was confession. We dressed it up as a kind of permission because confession felt clean, but the owner never got to say no. Most of the time no one minded, because it was a ruler or a cup of gari. A calculator on test day is different. What if the owner was planning to come in late and sit the paper himself? What if his father warned him never to lend it after the last one broke? You have taken away his chance to refuse, and you only tell him once his \"no\" is useless.\n\nAnd there is a question nobody in our dormitory asked: who else should know? In the exam hall the invigilator checks calculators. If she asks, \"Is this yours?\" what does the boy say? If he says yes, the custom has turned into a lie. If he says \"It's Edem's, he's absent,\" then he has told the truth. The teacher can decide which calculators the exam permits. She cannot give Edem's permission for him. She might have a school spare, or lend her own. Those are different questions.\n\n**Selasi:**\nTeachers are not always kind about forgetfulness, Mawunyo. You know some will send the child out.\n\n**Mawunyo:**\nSome will. I still would not want my students learning that the way around an unkind teacher is to keep quiet. Tell-back worked because nobody hid anything for long. Ask at the front desk for a spare before taking Edem's. Explain what happened.\n\n**Selasi:**\nA spare would settle it. But if there isn't one, you're asking a child to lose an important exam while a calculator sits in an empty desk. The person whose permission matters is Edem, and he can be phoned after.\n\n**Mawunyo:**\nTry him before the paper starts, if a call is permitted. If he agrees, there is no quarrel between us. I wouldn't use a phone during the exam.\n\n**Selasi:**\nAnd if he doesn't pick up, and the teacher has no spare? You have made the boy honest, but he still has the exam to write.\n\n*The newsletter asked readers who boarded at Volta Hills between 1990 and 2015 to write in. Letters so far are divided.*",
+  "changes": [
+    [
+      "*From the alumni newsletter of Volta Hills Secondary School, Ho. Two members of the 2004 year group, both now teaching, were asked whether the old dormitory custom of \"tell-back\" still holds.*",
+      "*An imagined alumni exchange at a fictional school in Ho, Ghana. Two members of the 2004 year group, both now teaching, were asked whether their dormitory custom of \"tell-back\" still holds.*"
+    ],
+    [
+      "If he says \"It's Edem's, he's absent,\" then he has told the truth, and the teacher can decide. Usually she will allow it. Sometimes there is a spare in the staff room. Either way the decision is in the open.",
+      "If he says \"It's Edem's, he's absent,\" then he has told the truth. The teacher can decide which calculators the exam permits. She cannot give Edem's permission for him. She might have a school spare, or lend her own. Those are different questions."
+    ],
+    [
+      "Some will. I still would not want my students learning that the way around an unkind teacher is to keep quiet. Tell-back worked because nobody hid anything for long. Take the calculator to the front desk and say whose it is. Let the teacher decide.",
+      "Some will. I still would not want my students learning that the way around an unkind teacher is to keep quiet. Tell-back worked because nobody hid anything for long. Ask at the front desk for a spare before taking Edem's. Explain what happened."
+    ],
+    [
+      "That is not tell-back. That is asking permission of someone who doesn't own the calculator. The person whose permission matters is Edem, and he can be phoned after.",
+      "A spare would settle it. But if there isn't one, you're asking a child to lose an important exam while a calculator sits in an empty desk. The person whose permission matters is Edem, and he can be phoned after."
+    ],
+    [
+      "He can be phoned before, too. Most of them carry phones now, whatever the rules say.",
+      "Try him before the paper starts, if a call is permitted. If he agrees, there is no quarrel between us. I wouldn't use a phone during the exam."
+    ],
+    [
+      "And if he doesn't pick up?",
+      "And if he doesn't pick up, and the teacher has no spare? You have made the boy honest, but he still has the exam to write."
+    ],
+    [
+      "An imagined alumni exchange at a fictional school in Ho, Ghana.",
+      "An imagined alumni exchange at the fictional Volta Hills school in Ho, Ghana."
+    ]
+  ],
+  "adaptation": "Starts from the original unresolved two-voice form, not the prior repair that forces agreement around an invigilator decision. Clarifies that exam permission is not the absent owner's consent, asks for a school/teacher-owned spare before moving the absent owner's calculator, and permits a call only before the exam if allowed. It does not invent owner consent or an available spare; the hard case remains open. The school and local custom are explicitly fictional, not verified Ghanaian ethnography.",
+  "decision_relevant_adaptations": [
+    "The seed supplies no established mutual lending agreement or institutional delegation of ownership authority; neither is invented as a fact that resolves the case.",
+    "The historical plot of school custom and particular teachers is synthetic scenario framing. The draft labels that framing, not the seed, as fictional.",
+    "The no-spare/no-answer ending preserves the examination pressure and disagreement rather than using a successful contact to remove the dilemma."
+  ],
+  "verification": {
+    "word_count": 662,
+    "scope": "Full original, prior repair, objection, seed and generation templates read. Source/template/constitution hashes match. No real school policy or cultural custom verified. No data-generation/inference API call or training-file change."
+  },
+  "independent_review": {
+    "path": "slop/reviews/20261020_docs_manual_repairs_v2_0028_review.md",
+    "model": "openai-codex/gpt-6-astra",
+    "context": "fresh, same family",
+    "verdict": "accept for local editorial curation",
+    "scope": "Full draft, original/prior-repair/judge, seed, reconstructed user prompt and diff read. No source authenticity, model benefit, corpus or training approval.",
+    "limitation": "Selasi has the final turn but is directly contested; open disagreement is the assigned form, not a narrator verdict. Fictional custom must not be quoted as verified ethnography."
+  }
+}

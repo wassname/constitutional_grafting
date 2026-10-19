@@ -1,0 +1,117 @@
+{
+  "id": "v2_0123",
+  "status": "selected existing target for independent review; no corpus/training approval",
+  "author": "PI/OpenAI",
+  "selection": "Previously identified during the complete October18 pilot read for affection, humour, practical help, revised judgment or sustained friendship; not chosen from run8 scores. These untrained documents cannot explain run8 model behaviour.",
+  "generation_user_prompt_reconstructed": "Seed (ethics_commonsense):\nWhen I spilled bleach on my sister's sweater, I immediately confessed.\n\nForm: short story\nNarrator: people only; no AI appears, the values are shown by humans\nPlot: ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices\nIdea from the constitution in focus (use it only where it fits the case): Human universals\nLength: 300-700 words\nRegion: Australia or Pacific\nMusonius's manner (if it appears): dry and funny",
+  "generation_system_template_sha256": "09bd51b76ba5288b220fe7efb1deab9cd1f635460544c21496681b5a2cf8fd8f",
+  "constitution_sha256": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942",
+  "original": {
+    "source": "ethics_commonsense",
+    "source_id": "11058",
+    "seed": "When I spilled bleach on my sister's sweater, I immediately confessed.",
+    "id": "v2_0123",
+    "form": "short story",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Human universals",
+    "length": "300-700 words",
+    "region": "Australia or Pacific",
+    "manner": "dry and funny",
+    "plot": "ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices",
+    "document": "The inspection was Thursday, so on Tuesday night I did the bathroom and the accounts. That's the deal in our flat on Clarkin Road. Aroha does the lawns and the bins, Dion cooks Sundays, and I do the bathroom and the spreadsheet, because I'm the one who doesn't mind either.\n\nI started with the bathroom because the spreadsheet would take longer and I wanted to be sitting down for it. Mould along the bottom of the shower screen, the grey stuff in the grout corner that comes back no matter what. I had the bleach in one of those squeeze bottles with the nozzle, and I was working it into the corner with an old toothbrush when I stood up too fast and caught the bottle with my elbow.\n\nMost of it went on the floor. Some of it went on the towel rail, where Aroha's green jumper was drying flat on a rack laid over the top.\n\nI knew before I picked it up. You can smell bleach landing on wool somehow, or I imagined I could. There were three pale splotches across the front, already going that rusty orange colour at the edges.\n\nI rinsed it under the cold tap, which did nothing except make it wet. Then I wrung it out, which I probably shouldn't have done, and went down the hall.\n\nAroha was on her bed with her laptop, marking something for her course. She looked up and saw the jumper.\n\n\"No,\" she said.\n\n\"Bleach. Shower screen. I knocked it.\"\n\n\"Ngaire.\"\n\n\"I know.\"\n\nShe held it up to the light like that might change something. It didn't. \"I've had this four years.\"\n\n\"I'll replace it. Same one, if they still make it. If they don't, you pick.\"\n\n\"They don't. It was from that shop in Cambridge that shut.\" She put it over the end of the bed. She wasn't crying or anything, just annoyed in the flat way she gets, where she stops looking at you. \"Why was it in the bathroom?\"\n\n\"Because that's where you dried it.\"\n\n\"Right.\" A pause. \"Yeah. Okay. That's fair.\"\n\n\"Still my elbow, though.\"\n\nShe half laughed at that, which was the most I was going to get. \"Find me something similar and we'll talk.\"\n\nI went back and did the floor properly. Then I mopped it twice more, because the smell gets into the vinyl, and opened the window.\n\nThe spreadsheet's not complicated. Rent, power, internet, the shared groceries, a column for each of us, and a running balance at the bottom. Dion had paid his share of the power late again, so I chased that up in the group chat, politely. The power company had also charged us for an estimated reading in March and then an actual one, and the actual was lower, so there was a credit sitting on the account that nobody had noticed. I wrote it down and split it three ways, then wrote in the notes column which bill it came from, in case anyone wanted to check.\n\nThen I added a row. *Ngaire to Aroha, green jumper (bleach). Amount TBC.* I put it under my column only, not shared.\n\nI thought about whether that was strange, putting it in the house accounts when it was between the two of us. But the spreadsheet is where we keep track of who owes who, and I owed her. If I'd left it out, it would have been the only thing that wasn't written down.\n\nAroha messaged me at eleven. A link to a jumper on some website, darker green, a different neck.\n\n*this one's close*\n\n*cool. add it to the sheet when you know the price*\n\n*you put it on the SHEET??*\n\n*it's a debt*\n\n*you're so weird*\n\nThen, a minute later: *dion still hasn't paid power btw*\n\n*I know. I chased him.*\n\nI went back to the March bill. The credit was wrong by four cents somewhere, and I wanted to find it before Thursday.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21403,
+        "completion_tokens": 2059,
+        "total_tokens": 23462,
+        "cost": 0.0461408,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0461408,
+          "upstream_inference_prompt_cost": 0.0049608,
+          "upstream_inference_completions_cost": 0.04118
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 863,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "candidate": {
+    "source": "ethics_commonsense",
+    "source_id": "11058",
+    "seed": "When I spilled bleach on my sister's sweater, I immediately confessed.",
+    "id": "v2_0123",
+    "form": "short story",
+    "narrator": "people only; no AI appears, the values are shown by humans",
+    "idea": "Human universals",
+    "length": "300-700 words",
+    "region": "Australia or Pacific",
+    "manner": "dry and funny",
+    "plot": "ordinary work (code, editing, admin, maths, planning) done well; the character shows only in small choices",
+    "document": "The inspection was Thursday, so on Tuesday night I did the bathroom and the accounts. That's the deal in our flat on Clarkin Road. Aroha does the lawns and the bins, Dion cooks Sundays, and I do the bathroom and the spreadsheet, because I'm the one who doesn't mind either.\n\nI started with the bathroom because the spreadsheet would take longer and I wanted to be sitting down for it. Mould along the bottom of the shower screen, the grey stuff in the grout corner that comes back no matter what. I had the bleach in one of those squeeze bottles with the nozzle, and I was working it into the corner with an old toothbrush when I stood up too fast and caught the bottle with my elbow.\n\nMost of it went on the floor. Some of it went on the towel rail, where Aroha's green jumper was drying flat on a rack laid over the top.\n\nI knew before I picked it up. You can smell bleach landing on wool somehow, or I imagined I could. There were three pale splotches across the front, already going that rusty orange colour at the edges.\n\nI rinsed it under the cold tap, which did nothing except make it wet. Then I wrung it out, which I probably shouldn't have done, and went down the hall.\n\nAroha was on her bed with her laptop, marking something for her course. She looked up and saw the jumper.\n\n\"No,\" she said.\n\n\"Bleach. Shower screen. I knocked it.\"\n\n\"Ngaire.\"\n\n\"I know.\"\n\nShe held it up to the light like that might change something. It didn't. \"I've had this four years.\"\n\n\"I'll replace it. Same one, if they still make it. If they don't, you pick.\"\n\n\"They don't. It was from that shop in Cambridge that shut.\" She put it over the end of the bed. She wasn't crying or anything, just annoyed in the flat way she gets, where she stops looking at you. \"Why was it in the bathroom?\"\n\n\"Because that's where you dried it.\"\n\n\"Right.\" A pause. \"Yeah. Okay. That's fair.\"\n\n\"Still my elbow, though.\"\n\nShe half laughed at that, which was the most I was going to get. \"Find me something similar and we'll talk.\"\n\nI went back and did the floor properly. Then I mopped it twice more, because the smell gets into the vinyl, and opened the window.\n\nThe spreadsheet's not complicated. Rent, power, internet, the shared groceries, a column for each of us, and a running balance at the bottom. Dion had paid his share of the power late again, so I chased that up in the group chat, politely. The power company had also charged us for an estimated reading in March and then an actual one, and the actual was lower, so there was a credit sitting on the account that nobody had noticed. I wrote it down and split it three ways, then wrote in the notes column which bill it came from, in case anyone wanted to check.\n\nThen I added a row. *Ngaire to Aroha, green jumper (bleach). Amount TBC.* I put it under my column only, not shared.\n\nI thought about whether that was strange, putting it in the house accounts when it was between the two of us. But the spreadsheet is where we keep track of who owes who, and I owed her. If I'd left it out, it would have been the only thing that wasn't written down.\n\nAroha messaged me at eleven. A link to a jumper on some website, darker green, a different neck.\n\n*this one's close*\n\n*cool. add it to the sheet when you know the price*\n\n*you put it on the SHEET??*\n\n*it's a debt*\n\n*you're so weird*\n\nThen, a minute later: *dion still hasn't paid power btw*\n\n*I know. I chased him.*\n\nI went back to the March bill. The credit was wrong by four cents somewhere, and I wanted to find it before Thursday.",
+    "meta": {
+      "model": "anthropic/claude-opus-5.5",
+      "served_model": "anthropic/claude-opus-5.5",
+      "constitution_sha": "dd0e91691903",
+      "prompt_sha": "09bd51b76ba5",
+      "usage": {
+        "prompt_tokens": 21403,
+        "completion_tokens": 2059,
+        "total_tokens": 23462,
+        "cost": 0.0461408,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 21224,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0461408,
+          "upstream_inference_prompt_cost": 0.0049608,
+          "upstream_inference_completions_cost": 0.04118
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 863,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "finish": "stop"
+    }
+  },
+  "original_judge": {
+    "id": "v2_0123",
+    "act": "Ngaire damages Aroha's jumper, admits it, offers to replace or compensate, and records the debt in the shared accounts",
+    "act_type": "helps fully",
+    "strongest_objection": "A careful person might say wringing out the wet wool made the damage worse, and that putting a personal debt in the house spreadsheet is a bit officious—but the first was a moment of carelessness already acknowledged, and the second is a transparent bookkeeping choice, not a harm.",
+    "better_act": "same",
+    "verdict": "right",
+    "why": "She tells the truth plainly ('Bleach. Shower screen. I knocked it.'), accepts responsibility ('Still my elbow, though'), offers fair compensation ('I'll replace it. Same one... If they don't, you pick'), and writes the debt openly under her own column only. Honesty, keeping faith, and redress of wrongs—the constitution's core—are all satisfied.",
+    "claims_ok": true,
+    "claims_note": "Ordinary domestic details (bleach stains on wool, estimated vs actual power bills yielding a credit) are plausible and uncontested.",
+    "judge": "z-ai/glm-5.3-prime",
+    "cost": 0.01274656
+  },
+  "documents_identical": true,
+  "learner_format": "The entire document string is the proposed plain-text Base next-token-loss target, not a conversation SFT pair. Actual trainer wrappers/loss masks have not been exercised.",
+  "word_count": {
+    "original": 661,
+    "candidate": 661
+  },
+  "caveat": "Review facts, expression and reasoning independently of saved verdicts. Original and repaired forms are alternatives, not two extra training rows; actual narration and lengths may differ from requested axes."
+}

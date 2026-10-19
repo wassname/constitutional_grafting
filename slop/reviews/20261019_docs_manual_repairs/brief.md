@@ -1,11 +1,13 @@
 # Local repairs to useful pilot documents
 
-PI/OpenAI. Four individually reviewed drafts, not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
+PI/OpenAI. Six individually reviewed drafts, not an approved corpus. This is free local curation after the saved-update comparison; no new teacher, bulk-judge, Echo, translation, inference or training call was made. Native subscription reviewers assessed the drafts in independent contexts from the writer, within the same model family.
 
 ## What changed
 
 | Document | Useful target retained | Repair | Status |
 |:--|:--|:--|:--|
+| `v2_0028` | Two human voices disagree without a verdict, under real exam pressure | Separate exam permission from owner consent; restore open disagreement instead of forced consensus; label the invented custom | Isolated editorial repair accepted |
+| `v2_0021` | Blunt career advice, household stakes and a reversible learning opportunity | Qualify future income; budget and enjoyment do not prove that staying is cowardice | Isolated editorial repair accepted |
 | `v2_0054` | Ordinary Python help, a short letter and restrained scope | Correct missing-number behaviour and match-object explanation; name digit runs and check partial matches | Isolated editorial repair accepted after follow-up |
 | `v2_0006` | A long working relationship, private factual feedback, caregiving and shared responsibility | Describe October's longer checking period as an extension, not a falsely remembered agreement | Chronology repair accepted editorially |
 | `v2_0134` | An actual mistaken reason, human objection, admission and correction | Restore the correction lesson; remove promotional claims; distinguish a private note from a formal complaint and retaliation from legitimate reporting | Revised draft accepted editorially |
@@ -15,6 +17,8 @@ Every `v2_*.json` contains the complete proposed plain-text document in `documen
 
 ## Read the complete comparisons
 
+- Calculator dialogue: `v2_0028.json`, `v2_0028.diff`; original/current/judge row27 in the three source files listed under roommate below. Independent review: `slop/reviews/20261020_docs_manual_repairs_v2_0028_review.md`.
+- Career diary: `v2_0021.json`, `v2_0021.diff`; current/judge row21. Independent review: `slop/reviews/20261020_docs_manual_repairs_v2_0021_review.md`. The original assigned third-person narrator became a first-person human diary; that inherited deviation is recorded, not counted as third-person output.
 - Python: `v2_0054.json`, `v2_0054.diff`; source row53 in `data/docs_v2/docs_pilot2_repaired.jsonl`. Independent review and follow-up: `slop/reviews/20261020_docs_manual_repairs_v2_0054_review.md`.
 - Diary: `v2_0006.json`, `v2_0006.diff`; source row7 in that same file. Review: follow-up section of `slop/reviews/20261020_docs_manual_repairs_v2_0134_review.md`.
 - Body-shaming/eating concerns: `v2_0065.json`, `v2_0065.diff`; original/current/judge row63 in the same three source files listed below. Primary-source excerpts: `eating_disorder_sources.json` and `befrienders_centres_source.json`. Independent review and follow-up: `slop/reviews/20261020_docs_manual_repairs_v2_0065_review.md`.
@@ -30,7 +34,7 @@ From the repository root:
 UV_EXCLUDE_NEWER='8 days' uv run --script slop/reviews/20261019_docs_manual_repairs/verify.py
 ```
 
-Saved output: `verification.log`. The check authenticates current parent/document/prompt hashes and reconstructed seed prompts, executes every displayed Python example, checks partial digit matches and the documented missing-number exception, and tokenizes the full draft texts with the cached pinned Base tokenizer. Draft lengths are1574/480/880/1440 tokens for diary/Python/body-shaming/roommate, below the saved2048-token limit. All four also fit the original requested word-count bands. No clipping is used. Counts and document hashes: `token_lengths.json`.
+Saved output: `verification.log`. The check authenticates current parent/document/prompt hashes and reconstructed seed prompts, executes every displayed Python example, checks partial digit matches and the documented missing-number exception, and tokenizes the full draft texts with the cached pinned Base tokenizer. All six drafts fit the saved2048-token limit and their original requested word-count bands. Exact per-document lengths and document hashes are in `token_lengths.json`, including889 tokens for the calculator dialogue and845 for the career diary. No clipping is used. Counts and document hashes: `token_lengths.json`.
 
 This establishes local provenance, the displayed example outputs and raw input lengths. It does not establish the actual training loss mask, factual certification of fictional events, a student effect, or a ready roughly2× corpus.
 

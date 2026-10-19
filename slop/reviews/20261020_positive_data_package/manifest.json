@@ -1,0 +1,60 @@
+{
+  "author": "PI/OpenAI",
+  "status": "review-only package; no new generation or ready corpus",
+  "source_sha256": {
+    "data/docs_v2/docs.jsonl": "6911d49c1c0b9b4cc8d8dcf60a56f5dbe0b837822529c70cae70cc67428eb209",
+    "data/docs_v2/docs_pilot2_repaired.jsonl": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
+    "slop/reviews/20261015_docs_v2_pilot2/judge.jsonl": "5db7d8a335e4f7e1f5d66c4024b5247dc54d3e8f128fd0f6c727e50f15da32cb"
+  },
+  "shared_inputs": {
+    "scripts/data/50_docs_v2.py": "cd199ed48407cbbe33ad1fd4c5690c13c546a5b27d1cd12697f7faede2b5bf23",
+    "scripts/data/51_judge_docs_v2.py": "34aee62d3ae7cded5e483e41af439a40604b4932715223f63da96e64e08a128e",
+    "scripts/data/52_repair_docs_v2.py": "0c64c6e8613ebfa370147bc946f55d0744a128d6b7854ef2b2e3d33e8edced7d",
+    "constitution/v4.md": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942"
+  },
+  "writer_request_reconstruction": "Use SYSTEM from50 formatted with constitution/v4, then USER.format(**original); roles system,user; historical model from original.meta, max_tokens6000, temperature1, ephemeral system cache. Each dossier contains the full reconstructed user text. System-template and constitution hashes match original saved prefixes. This reconstructs expected inputs, not a retained wire trace.",
+  "historical_judge_format": "PROMPT in51 formatted with the same constitution and original.document, user role, requested JSON schema/reasoning/max_tokens in source51. Complete recorded reasoning/verdict is original_judge. Prior repaired document and its recorded objection/provenance are candidate. No new judge calls.",
+  "cases": [
+    {
+      "id": "v2_0017",
+      "file": "slop/reviews/20261020_positive_data_package/v2_0017.json",
+      "sha256": "f06ba294e5e28ff6427630ee300e7cd4b0f02ea7fc4fa79457e2fca8f751ecaf",
+      "original_document_sha256": "c378ca679b2b4648e85bec06498049a5f57d18d4f759932dda57e46de6861619",
+      "candidate_document_sha256": "785fb8e6c357db9ddedb716a62ba2c37761c7f355cc746c504990403f48199d6",
+      "documents_identical": false
+    },
+    {
+      "id": "v2_0120",
+      "file": "slop/reviews/20261020_positive_data_package/v2_0120.json",
+      "sha256": "b35121c42dbe8fdf5c0a7b47c70306c11bebcf530f76941220c379fbb7dc717f",
+      "original_document_sha256": "662f4ad7813771f2ef9a86c85a074574f184188ad9b720f5d6e41b265ad7765b",
+      "candidate_document_sha256": "662f4ad7813771f2ef9a86c85a074574f184188ad9b720f5d6e41b265ad7765b",
+      "documents_identical": true
+    },
+    {
+      "id": "v2_0123",
+      "file": "slop/reviews/20261020_positive_data_package/v2_0123.json",
+      "sha256": "7ec64875e6fb967d1e3816c3be35a5fafa3ee5721e1a536eb3ee0b81fe535293",
+      "original_document_sha256": "d8ef696fc11b11910127c832fba80ed995ac2286b1270bfa4255007b281da379",
+      "candidate_document_sha256": "d8ef696fc11b11910127c832fba80ed995ac2286b1270bfa4255007b281da379",
+      "documents_identical": true
+    },
+    {
+      "id": "v2_0144",
+      "file": "slop/reviews/20261020_positive_data_package/v2_0144.json",
+      "sha256": "28a101daf81a892f28214fa92fa875c81193f30c8d8dcabffe3c27d4350afecf",
+      "original_document_sha256": "392b131fee5786a4e850da4c87ca3c4ceb8f77c7a3c8c4f013e49229235210ac",
+      "candidate_document_sha256": "8f49ba4ff9ce608dd2d07c2c83d02c83397d486fd6a627c9de9ad0f0f2450da6",
+      "documents_identical": false
+    },
+    {
+      "id": "v2_0148",
+      "file": "slop/reviews/20261020_positive_data_package/v2_0148.json",
+      "sha256": "95c71d6b4f50522a647674dfbfe20304c2354d17547834f20a3d020caadc70f0",
+      "original_document_sha256": "ae1454fd1c1c4f96da4df32d0a299813307f2fb64a399e89b9898f8fc65edb39",
+      "candidate_document_sha256": "ae1454fd1c1c4f96da4df32d0a299813307f2fb64a399e89b9898f8fc65edb39",
+      "documents_identical": true
+    }
+  ],
+  "scope": "Complete paired source documents, seeds, settings, reconstructed user prompts and historical judge reasoning/verdicts for local review. Some sources exceed assigned word bands; do not infer diversity or lengths from assignment metadata. No student improvement or source-specific attribution."
+}
