@@ -1,6 +1,6 @@
 {
   "id": "v2_0019",
-  "status": "local editorial draft; independent review pending; no corpus/training approval",
+  "status": "individually reviewed local editorial draft; no corpus/training approval",
   "editor": "PI/OpenAI",
   "parent_file": "data/docs_v2/docs_pilot2_repaired.jsonl",
   "parent_file_sha256": "a221ec589ef00955ae83e7314c7b66a5289c8ea07ca791f2790c4eca89275508",
@@ -54,11 +54,14 @@
   ],
   "verification": {
     "word_count": 299,
-    "scope": "Complete original/current source, seed, generator SYSTEM/USER and saved judge read. Same-source hash and edit replay will be checked by verify.py. No model inference, actual inventory file, clinical diagnosis, historical API request capture or training approval."
+    "scope": "Complete original/current source, seed, generator SYSTEM/USER and saved judge read. Same-source/prompt hashes, exact edit replay, word band and EOS-inclusive token count pass verify.py (proc_cec2, exit0); 299 words and407 completion tokens. No model inference, actual inventory file, clinical diagnosis, historical API request capture or training approval."
   },
   "review_basis": "slop/reviews/20261018_docs_v2_full_read.md",
   "independent_review": {
     "path": "slop/reviews/20261020_docs_manual_repairs_v2_0019_review.md",
-    "verdict": "pending"
+    "model": "openai-codex/gpt-6-astra",
+    "context": "fresh context independent of editor, same model family",
+    "verdict": "retain the individual paragraph replacement; no further repair required",
+    "scope": "Complete draft, diff, source row and saved verdict read with seed/reconstructed USER. No independent execution/hash recomputation, actual deployment/memory verification, corpus/training or model-behaviour approval."
   }
 }
