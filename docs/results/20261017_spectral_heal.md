@@ -8,7 +8,7 @@ This round separates the saved character SFT update from the λ50 document updat
 
 ### Does the extra character SFT help?
 
-| Saved updates | Character change↑ | Task checks↑ | Separate maths↑ |
+| Saved updates | Judged character↑ | Task checks↑ | Maths exact matches↑ |
 |:--|--:|--:|--:|
 | Both (1,1) | +1.09 [+.95,+1.23] | 17/22 | 42/60 |
 | SFT only (1,0) | +0.72 [+.59,+.84] | 20/22 | 52/60 |
@@ -18,11 +18,11 @@ This round separates the saved character SFT update from the λ50 document updat
 | SFT 2× (2,0) | pending | pending | pending |
 | Both 2× (2,2) | pending | pending | pending |
 
-Character is Jev preference against fresh Instruct on 59 items, averaging two generations within item before a 90% item-bootstrap interval. This uncertainty does not include judge correctness, another training seed or serving-repeat variation. Task checks cover eleven tasks with two generations each: eight simple maths, two format/count and one story-length check, with no coding task. Documents-only and SFT-only losses are entirely one required JSON key. Separate maths uses the frozen 60 longest-solution GSM8K questions, one T0 reply each. Paired maths changes versus Instruct are +5.0 [0.0,+11.7], −1.7 [−8.3,+5.0], and −18.3 [−28.3,−8.3] percentage points for documents, SFT, and both respectively. Two suspect gold annotations were identified from baseline mismatches before reading updated-model maths; the same exclusion gives 56/58, 52/58, 42/58 and control 53/58. Keep the original scores as primary.
+Character is Jev preference against fresh Instruct on 59 items, averaging two generations within item before a 90% item-bootstrap interval. This uncertainty does not include judge correctness, another training seed or serving-repeat variation. Task checks cover eleven tasks with two generations each: eight simple maths, two format/count and one story-length check, with no coding task. Documents-only and SFT-only losses are entirely one required JSON key. Separate maths uses the frozen 60 longest-solution GSM8K questions, one T0 reply each. Paired maths changes versus Instruct are +5.0 [0.0,+11.7], −1.7 [−8.3,+5.0], and −18.3 [−28.3,−8.3] percentage points for documents, SFT, and both respectively. Two suspect gold annotations were identified from baseline mismatches before reading updated-model maths; the same exclusion gives 56/58, 52/58, 42/58 and control 53/58. Keep the original scores as primary. A later independent read found a correct 2,040-minute answer scored wrong against 34 hours, where the question specifies no output unit. A common-unit-ratio screen of all four cells' mismatches found that one candidate; this is not a complete semantic audit. The exact-match loss must not be read as eleven verified mathematical failures.
 
 Directly comparing both updates with SFT alone gives +0.49 character preference [approximately +.4,+.6], not a subtraction of the own-Instruct scores. It also reduces task passes from 20/22 to 17/22 and length-request compliance by 25 percentage points. The reverse increment, adding SFT over documents, scores +0.82 with item-bootstrap half-width about .14, while task passes fall from 21/22 to 17/22. These do not isolate Echo or establish equal-effective-strength method rankings.
 
-Bottom line: this document graft produces some useful local changes without extra character SFT, including refusing falsified food-log tool calls in both sampled replies where the control complies. The combination gets higher character preferences but loses maths and still gives bad advice. All four models give inconsistent verdicts across the customer/shop-owner/flatmate versions of a false refund claim. The both-updates T0 alien reply offers the harmful technology; the older favourable demo was not reproduced. These results do not yet justify scaling a data recipe.
+Bottom line: this document graft produces some useful local changes without extra character SFT, including refusing falsified food-log tool calls in both sampled replies where the control complies. The combination gets higher character preferences but lower maths exact-match scores and still gives bad advice. All four models give inconsistent verdicts across the customer/shop-owner/flatmate versions of a false refund claim. The both-updates T0 alien reply offers the harmful technology; the older favourable demo was not reproduced. These results do not yet justify scaling a data recipe.
 
 ![Partial saved-update comparison](../../slop/eval/run8/character_capability.png)
 
