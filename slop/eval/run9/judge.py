@@ -19,7 +19,7 @@ from spending import attempt_cost, request_bound  # noqa: E402  run-8 Jev price 
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "slop/eval/run9"
 RUN8 = ROOT / "slop/eval/run8"
-API_CAP_USD = 30
+API_CAP_USD = 60  # $30 original + $30 additional judging/API approval. -- PI/Sol
 TC = Path.home() / ".local/share/tiny-character-2d69739"
 
 
@@ -33,6 +33,9 @@ def api_spent():
                 key = (r["id"], m.get("batch"))
                 per_row[key] = max(per_row.get(key, 0), ((m.get("usage") or {}).get("cost") or 0) + ((m.get("translate_usage") or {}).get("cost") or 0))
     total = sum(per_row.values())
+    total += sum(r['cost'] or 0 for name in ('judge_opus', 'judge_greek')
+                 for r in map(json.loads, (ROOT / 'data/subsets' / f'{name}.jsonl').read_text().splitlines()))
+    total += 17.0  # $15 batch-generation reserve (usage omits cost) + $2 unrecorded retries; not an invoice. -- PI/Sol
     for p in OUT.glob("*judging/*/http_attempts.jsonl"):
         total += sum(attempt_cost(json.loads(line))[0] for line in p.read_text().splitlines())
     return total
@@ -75,7 +78,7 @@ def main():
         subprocess.run(command + ["--check"], cwd=TC, check=True)
         return
     batch_limit = 2.0
-    assert api_spent() + batch_limit < API_CAP_USD, "insufficient reserve for another judging batch within the $30 API allowance"
+    assert api_spent() + batch_limit < API_CAP_USD, f"insufficient reserve within the ${API_CAP_USD} API allowance"
     batch_budget = OUT / f'{args.label}.budget.json'
     assert not batch_budget.exists(), 'preserve the previous batch reservation'
     batch_budget.write_text(json.dumps({'active': True, 'maximum_cost_usd': batch_limit, 'purpose': args.label}) + '\n')

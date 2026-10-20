@@ -11,7 +11,14 @@
 
 Do NOT: redesign the corpus, add new training stages, start a new rental, or re-litigate the method. The run is already in flight; the remaining work is to **collect, judge, read and report**.
 
-## State now
+## Continuation decisions (PI/Sol, 15:30 Perth)
+
+- User approved another $30 for judging/API: total run-9 API allowance $60, Vast remains $50. `slop/eval/run9/judge.py` includes the previously omitted GLM costs and a $17 reserve for batch costs/retries absent from per-row cost records. This is conservative accounting, not an invoice.
+- Spectral training now defaults to λ=50 in the actual plugin (commit d3298bb); the callback regression checks unset, explicit 50 and explicit 0. The running box already explicitly uses 50 and was not changed.
+- Completed cells are downloaded early to `slop/eval/run9/box_runs/`; singleton k=1 judging has started. Continue reading the fixed panels while later cells run, rather than waiting for the box to finish.
+- Interpretation corrections: singleton + leave-one-out coalitions do not supply exact Shapley values (pair coalitions are missing). Opus/Greek share candidate seeds but their selected training rows differ; this is not an isolated language-round-trip effect. Two generation samples do not measure judge error or training-seed variation.
+
+## State at handover
 
 | item | state | where |
 |:--|:--|:--|
