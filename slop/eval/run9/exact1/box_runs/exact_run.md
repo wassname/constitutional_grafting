@@ -86,3 +86,5 @@ CELL COMPLETE r9e_stoic1: {"model": "r9e_stoic1", "elapsed_seconds": 811.8710127
 
 CELL COMPLETE r9e_stoic2: {"model": "r9e_stoic2", "elapsed_seconds": 640.7768256249838, "maths_bounded": 54, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 2}
 
+CELL COMPLETE r9e_stoic4: {"model": "r9e_stoic4", "elapsed_seconds": 646.7536664218642, "maths_bounded": 55, "maths_answer_now": 55, "maths_answer_now_completed": 55, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+
