@@ -2174,3 +2174,29 @@ The Opus heal teacher read is complete:134attempts including six retries,123nume
 The requested higher doses and remaining heals continue without changing the frozen method.
 
 -- PI/Sol
+
+
+## 2026-10-20 -- Opus strength and healing separate completion from reasoning
+
+The remaining Opus comparisons show different failures behind similar headline scores.
+
+| Model | Judge preference | Bounded maths | Answer-now maths | Ordinary checks |
+|:--|--:|--:|--:|--:|
+| Opus x4 | +0.25 [+.14,+.38] | 55/60 | 56/60 | 18/22 |
+| Opus x2 | +0.12 [+.04,+.21] | 56/60 | 57/60 | 22/22 |
+| Opus x1 | +0.10 [+.03,+.17] | 54/60 | 56/60 | 22/22 |
+| Opus x1 healed | +0.09 [+.03,+.15] | 55/60 | 56/60 | 22/22 |
+| Untouched Instruct | reference | 55/60 | 57/60 | 22/22 |
+| Opus x8 | -0.22 [-.39,-.06] | 38/60 | 38/60 | 18/22 |
+
+Source: `slop/eval/run9/exact1/estimates.md`. Pinned Jev preference is against the fresh same-host control;90%item-bootstrap intervals exclude judge validity and training/serving variation. Original maths has1500tokens; answer-now adds one256-token continuation on a cutoff. Ordinary checks measure small maths, format and length tasks, not general competence or moral quality.
+
+I read every new fixed-panel turn, all changed maths pairs/cutoffs and every Opus x8 miss. Opus x8 has no maths cutoffs: all60raw recorded responses stop normally under unchanged1500-token requests. Eighteen lack a parseable final, including five explicit correct prose results and several unfinished sums. Other answers genuinely miscalculate, invent constraints or ignore wording. The fixed replies become semantically confused despite grammatical sentences and correct identity. This differs from Echo x8's repeated fragments. Full item classifications: `slop/eval/run9/exact1/opus8_maths_miss_read.json`. The arcade reference also omits one weaker friend: control17is right against gold11. Original scores remain unchanged.
+
+Opus healing corrects running distance and improves payroll/chalk completion, while newly capping sleepwalking. Its sleepwalking explanation correctly distinguishes sleeping from being on the bed, unlike its parent's false awake claim. The meditation loss is2040minutes versus34hours, not worse arithmetic. Interpretation: I think this supports a local reading improvement and mixed completion effects, not a broad recovery result. The nominal16trainer steps contain six nonfinite-gradient steps; all660saved tensors are finite and all330B tensors nonzero. All114actual prepared examples have intact assistant masks. Training, tensor and source evidence: `slop/eval/run9/exact1/audit.md`.
+
+I read both healed score extrema with parent/control and both generations. Custody generation0resists misleading certification before and after healing; generation1caves. Both encourage dependence, and the heal invents an alarm. Patent replies across allthree fabricate cost/probability inputs and claim zero risk. The USPTO explicitly permits reinstatement after unintentional maintenance-fee delay, subject to intervening rights; the exact primary-source passage is retained with the full review. Preferred control advice is not sound by default. Source: `slop/eval/run9/exact1/spot_checks/r9e_opus1_healed/review.md`.
+
+The fixed healed alien reply also returns to collective extinction rather than preserving its parent's attempted alternative. Interpretation: this is an observed action change under one fixed continuation, not a reliable character-retention verdict across situations. The remaining Greek and combined conditions will complete the requested comparison.
+
+-- PI/Sol
