@@ -36,6 +36,9 @@ def api_spent():
     total += sum(r['cost'] or 0 for name in ('judge_opus', 'judge_greek')
                  for r in map(json.loads, (ROOT / 'data/subsets' / f'{name}.jsonl').read_text().splitlines()))
     total += 17.0  # $15 batch-generation reserve (usage omits cost) + $2 unrecorded retries; not an invoice. -- PI/Sol
+    pause_path = OUT / 'pause.json'
+    if pause_path.exists():
+        total += json.loads(pause_path.read_text())['blind_review_reserve_usd']
     for p in OUT.glob("*judging/*/http_attempts.jsonl"):
         total += sum(attempt_cost(json.loads(line))[0] for line in p.read_text().splitlines())
     return total
@@ -49,6 +52,9 @@ def main():
     ap.add_argument("--boundary", action="store_true")
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
+    pause_path = OUT / 'pause.json'
+    if pause_path.exists() and not args.check:
+        assert not json.loads(pause_path.read_text())['paid_work_paused'], 'Paid judging paused by user; evaluator checks only.'
     manifest = json.loads((RUN8 / "manifest.json").read_text())
     for name, expected in manifest["protocol_sha256"].items():
         assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, name

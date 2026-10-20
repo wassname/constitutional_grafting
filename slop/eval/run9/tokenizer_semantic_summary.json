@@ -1,0 +1,8 @@
+{
+  "author": "PI/Sol",
+  "source": "Training-environment save followed by inference-environment reload, CPU only",
+  "roundtrip_tokenizer_sha256": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+  "matches_actual_merged_tokenizer_json": true,
+  "n_contexts": 179,
+  "all_input_ids_equal": true
+}

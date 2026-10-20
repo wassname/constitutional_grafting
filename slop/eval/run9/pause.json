@@ -1,0 +1,25 @@
+{
+  "author": "PI/Sol",
+  "date": "2026-10-20T16:00:00+08:00",
+  "user_instruction": "lets fix this before spending more",
+  "paid_work_paused": true,
+  "authorized_exception": "User explicitly requested blind subagent review after the pause. Only the two read-only blinded reviews are authorized; no new evaluated-model inference, healing, rentals or routine judge calls.",
+  "blind_review_reserve_usd": 10,
+  "blind_review_workflow": "d2817db4-6561-426c-b81b-ad5c54f7c5c2",
+  "required_grid": {
+    "subsets": ["echo", "stoic", "opus", "greek"],
+    "exact_unhealed_doses": [1, 2, 4, 8],
+    "healed_doses": [1],
+    "all_four_each_at_1": true,
+    "all_four_healed": true,
+    "conditions_including_preferred_combined_heal": 22,
+    "completed_required_conditions": 5
+  },
+  "original_diagnostic_cells_complete": 17,
+  "original_diagnostic_cells_graded": 15,
+  "interrupted_cell": "r9_opus3.11",
+  "not_run_after_pause": ["r9_opus3.11", "r9_greek2.92"],
+  "next": "Check opt-in cutoff/rescue protocol with tiny-character session and audit Jev against actual reasons/actions. Preserve original bounded-budget scores. No new model calls, inference, training or rentals until resumed.",
+  "limits_usd": {"vast": 50, "api": 60},
+  "rental_action": "Owned run9_eval interrupted. Controller is retrieving saved outputs/adapters, then destroys instance 56819164. No new lease started."
+}
