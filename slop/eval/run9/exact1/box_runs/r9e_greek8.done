@@ -1,0 +1,11 @@
+{
+  "model": "r9e_greek8",
+  "elapsed_seconds": 157.2192181549035,
+  "maths_bounded": 44,
+  "maths_answer_now": 44,
+  "maths_answer_now_completed": 44,
+  "maths_n": 60,
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 0
+}

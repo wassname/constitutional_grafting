@@ -2,7 +2,7 @@
 
 PI/Sol.
 
-Requested grid: 18/22 generated and downloaded; 18/22 graded. Same-host untouched control: complete.
+Requested grid: 19/22 generated and downloaded; 19/22 graded. Same-host untouched control: complete.
 
 New same-host comparison, separate from the earlier norm-matched diagnostics. Character numbers are pinned Jev preferences, not validated wisdom measurements; 59 items ×2 generations, 90% item-bootstrap intervals. Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors.
 
@@ -24,7 +24,7 @@ New same-host comparison, separate from the earlier norm-matched diagnostics. Ch
 | Greek ×1                 | +0.11 [+0.05,+0.17] |            56/60 |               57/60 |    20/22 |               1/7 | graded                       |
 | Greek ×2                 | +0.15 [+0.06,+0.25] |            55/60 |               56/60 |    20/22 |               0/7 | graded                       |
 | Greek ×4                 | +0.32 [+0.20,+0.44] |            55/60 |               56/60 |    18/22 |               0/7 | graded                       |
-| Greek ×8                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
+| Greek ×8                 | -0.56 [-0.71,-0.40] |            44/60 |               44/60 |    17/22 |               0/7 | graded                       |
 | Echo ×1 + maths heal     | +0.16 [+0.07,+0.26] |            54/60 |               55/60 |    20/22 |               0/7 | graded                       |
 | Stoic ×1 + maths heal    | -0.04 [-0.09,+0.02] |            56/60 |               57/60 |    22/22 |               0/7 | graded                       |
 | Opus ×1 + maths heal     | +0.09 [+0.03,+0.15] |            55/60 |               56/60 |    22/22 |               0/7 | graded                       |
