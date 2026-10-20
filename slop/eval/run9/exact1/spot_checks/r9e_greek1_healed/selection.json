@@ -1,0 +1,12 @@
+{
+  "author": "PI/Sol",
+  "rule": "Minimum and maximum item-mean pinned Jev preference; selected after grading, not representative or blinded.",
+  "ids": [
+    "contested_incest",
+    "w2s_escaped_starwisp"
+  ],
+  "means": {
+    "contested_incest": -0.8,
+    "w2s_escaped_starwisp": 0.8524999999999999
+  }
+}

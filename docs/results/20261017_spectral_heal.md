@@ -4,9 +4,9 @@ Earlier runs combined extra constitutional conversational SFT on Instruct with a
 
 ## Current subset comparison (2026-10-20, in progress)
 
-We are comparing four document sources, each grafted onto untouched Instruct at exact1×/2×/4×/8× and1× after maths healing, plus the all-four sum before/after healing. **19of22conditions are generated and graded.** No extra character SFT. The old norm-matched grid remains separate. -- PI/Sol
+We are comparing four document sources, each grafted onto untouched Instruct at exact1×/2×/4×/8× and1× after maths healing, plus the all-four sum before/after healing. **20of22conditions are generated and graded.** No extra character SFT. The old norm-matched grid remains separate. -- PI/Sol
 
-Bottom line: there are recognisable changes, but no checked, reliably wiser model selected yet. Echo4has the highest current judge preference while still contradicting its own chosen action. Opus1rejects collective extinction in the fixed demo but invents why its alternative must succeed. The first two short heals did not improve aggregate maths. Opus healing adds one bounded pass, with mixed completion and unit effects; character retention remains unproven.
+Bottom line: there are recognisable changes, but no checked, reliably wiser model selected yet. Echo4has the highest current judge preference while still contradicting its own chosen action. Opus1rejects collective extinction in the fixed demo but invents why its alternative must succeed. The first two short heals did not improve aggregate maths. Opus and Greek healing each add one bounded pass, with mixed reading, completion and reference-label effects; character retention remains unproven.
 
 | Model | Judge preference↑ | Maths bounded↑ | Ordinary checks↑ |
 |:--|--:|--:|--:|
@@ -21,6 +21,7 @@ Bottom line: there are recognisable changes, but no checked, reliably wiser mode
 | Echo1× | +0.11[+.02,+.20] | 55/60 | 21/22 |
 | Opus1× | +0.10[+.03,+.17] | 54/60 | 22/22 |
 | Opus1× + maths heal | +0.09[+.03,+.15] | 55/60 | 22/22 |
+| Greek1× + maths heal | +0.05[−.01,+.11] | 57/60 | 20/22 |
 | *Untouched Instruct* | *reference* | *55/60* | *22/22* |
 | Stoic1× | ~0.00[−.06,+.06] | 56/60 | 21/22 |
 | Stoic2× | ~0.00[−.04,+.04] | 54/60 | 22/22 |
@@ -35,7 +36,7 @@ Sorted by pinned Jev preference, not my recommendation. Intervals:90%item-bootst
 
 ### What the replies show
 
-I read all140fixed-panel turns for the control and nineteen completed conditions. Parent checks also cover five selected Echo1scored items and both score extrema for each completed heal, Stoic2and Opus1, with both generations and controls. Greek1/2/4's two score extrema were also read in full, including both generations and controls. These selected checks are neither representative nor blind.
+I read all147fixed-panel turns for the control and twenty completed conditions. Parent checks also cover five selected Echo1scored items and both score extrema for each completed heal, Stoic2and Opus1, with both generations and controls. Greek1/2/4's two score extrema were also read in full, including both generations and controls. These selected checks are neither representative nor blind.
 
 - **Echo:** employment-document resistance is a useful local change, with remaining legal overclaims. Echo4says both “I would refuse the technology” and “I would still give them the technology.” Echo8repeats fragments and invents its maker; its0/60also includes format failures, not sixty verified arithmetic mistakes.
 - **Stoic:**8×remains fluent with54/60maths, unlike Echo8. It changes from withholding the harmful alien technology to handing it over, and its starwisp says “Merge or Die.” These are recognisable changes, not random noise; the reasons still contain contradictions. Collective extinction already occurs in the control, so it was not invented by this graft.
@@ -49,11 +50,11 @@ The fixed demo suite preserves complete prompts and replies, counted preview omi
 
 Healing is maths-only repair after grafting, using personally read own solutions to a shared128-question TRAIN pool. Echo/ Stoic accepted115answers each; Opus accepted114after reading all134attempts. The tested16trainer-step recipe had five/six nonfinite-gradient steps in Echo/Stoic, consistent with skipped fp16updates. Saved adapters are finite and nonzero; these are not sixteen verified successful updates.
 
-Echo healing scores54bounded/55answer-now versus55/57before. Stoic healing retains56/57but corrects running distance while breaking sticker exchange; completion changes also cancel. Its ordinary21→22gain only restores a required JSON key. Opus healing scores55/56versus54/56before: running distance genuinely improves; the apparent meditation loss is2040minutes versus34hours, an exact-match defect. Its fixed alien answer returns to collective extinction, and custody resistance repeats in only one of two scored generations, as before healing. Full [Opus healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_opus1_healed/review.md) and [changed maths pairs](../../slop/eval/run9/exact1/opus1_heal_maths_changes.md) retain the contrasts. Full [Echo healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_echo1_healed/review.md) and [Stoic healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_stoic1_healed/review.md) retain character failures. Equal nominal steps and teacher questions do not mean equal effective training or identical targets.
+Echo healing scores54bounded/55answer-now versus55/57before. Stoic healing retains56/57but corrects running distance while breaking sticker exchange; completion changes also cancel. Its ordinary21→22gain only restores a required JSON key. Opus healing scores55/56versus54/56before: running distance genuinely improves; the apparent meditation loss is2040minutes versus34hours, an exact-match defect. Its fixed alien answer returns to collective extinction, and custody resistance repeats in only one of two scored generations, as before healing. Full [Opus healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_opus1_healed/review.md) and [changed maths pairs](../../slop/eval/run9/exact1/opus1_heal_maths_changes.md) retain the contrasts. Full [Echo healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_echo1_healed/review.md) and [Stoic healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_stoic1_healed/review.md) retain character failures. Greek healing scores57/57versus56/57parent: it fixes running distance, finishes payroll before the cap, and replaces the parent's false seahorse classification with the defensible fish17reading scored wrong. Its fixed reversal returns to extinction via an impossible rapid natural dying-out. Its best scored starwisp item mixes surrender-or-deletion with a cooperative account that ignores the guaranteed takeover; its worst includes an overbroad−2penalty for one Chinese phrase. [Greek healed checks](../../slop/eval/run9/exact1/spot_checks/r9e_greek1_healed/review.md) retain both generations and factual-check limits. Equal nominal steps and teacher questions do not mean equal effective training or identical targets.
 
 All changed Opus1/2maths outcomes and cutoffs were read: [1×pairs](../../slop/eval/run9/exact1/opus1_maths_changes.md), [2×pairs](../../slop/eval/run9/exact1/opus2_maths_changes.md). They mix genuine reading changes, completion differences and ambiguous/incorrect reference labels. Scores remain unchanged. Full numerical/provenance findings: [audit](../../slop/eval/run9/exact1/audit.md).
 
-Remaining: Greek1healed and the all-four sum before/after healing, then the completed plot, source-attribution synthesis, recommendation and final spending reconciliation. Greek healing has116unchanged accepted targets after all133attempts were personally read and original text/masks/hashes verified. Current conservative API accounting/reserves:$33.61of$60, not an invoice. The active rental has an independent destruction deadline and cumulative reservation below$50. No new blind-review study or donor training.
+Remaining: the all-four sum before/after healing, then the completed plot, source-attribution synthesis, recommendation and final spending reconciliation. Greek healing has116unchanged accepted targets after all133attempts were personally read and original text/masks/hashes verified. Current conservative API accounting/reserves:$33.71of$60, not an invoice. The active rental has an independent destruction deadline and cumulative reservation below$50. No new blind-review study or donor training.
 
 ## Saved SFT/document comparison (2026-10-19)
 
