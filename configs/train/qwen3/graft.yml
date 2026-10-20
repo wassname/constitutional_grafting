@@ -12,7 +12,7 @@ base_model: Qwen/Qwen3.5-35B-A3B-Base
 # Launch from repo root with PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}".
 plugins:
   - scripts.train.demo_plugin.GraftDemoPlugin
-  - scripts.train.spectral_plugin.SpectralPlugin  # default graft: spectral penalty, SPECTRAL_LAM (default 0.5); run 7d: more character than plain at equal capability
+  - scripts.train.spectral_plugin.SpectralPlugin  # SPECTRAL_LAM defaults to 50. -- PI/OpenAI (Sol)
   - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
   - axolotl.integrations.liger.LigerPlugin
   - axolotl.integrations.kernels.KernelsPlugin

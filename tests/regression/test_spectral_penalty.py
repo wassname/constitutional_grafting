@@ -14,6 +14,7 @@ Run: uv run --script tests/regression/test_spectral_penalty.py   -- PI/Claude"""
 import sys
 import types
 from pathlib import Path
+from unittest.mock import patch
 
 import torch
 from peft import LoraConfig, get_peft_model
@@ -24,13 +25,32 @@ sys.modules.setdefault("axolotl.integrations", types.ModuleType("axolotl.integra
 base_mod = types.ModuleType("axolotl.integrations.base"); base_mod.BasePlugin = object
 sys.modules["axolotl.integrations.base"] = base_mod
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts" / "train"))
-from spectral_plugin import lora_pairs, spectral_penalty  # noqa: E402
+from spectral_plugin import SpectralPlugin, lora_pairs, spectral_penalty  # noqa: E402
 
 
 def toy():
     torch.manual_seed(0)
     m = nn.Sequential(nn.Linear(16, 32), nn.ReLU(), nn.Linear(32, 16))
     return get_peft_model(m, LoraConfig(r=8, lora_alpha=16, target_modules=["0", "2"], lora_dropout=0))
+
+
+def test_plugin_default_and_explicit_override():
+    """The training callback defaults to λ=50 and still permits a plain graft. -- PI/Sol"""
+    model = toy()
+    with torch.no_grad():
+        for _, _, B, _ in lora_pairs(model):
+            B.normal_(0, 0.1)
+    losses = []
+    for env in ({}, {"SPECTRAL_LAM": "50"}, {"SPECTRAL_LAM": "0"}):
+        trainer = types.SimpleNamespace(model=model, compute_loss=lambda *a, **kw: torch.tensor(2.0),
+            state=types.SimpleNamespace(global_step=1), args=types.SimpleNamespace(logging_steps=2))
+        with patch.dict("os.environ", env, clear=True):
+            torch.manual_seed(42)
+            SpectralPlugin().post_trainer_create(None, trainer)
+            losses.append(trainer.compute_loss(model, {}))
+    torch.testing.assert_close(losses[0], losses[1])
+    assert losses[0] > losses[2]
+    assert losses[2].item() == 2.0
 
 
 def true_sigmas(model):
@@ -105,6 +125,7 @@ def test_penalty_lowers_sigma_max():
 
 
 if __name__ == "__main__":
+    test_plugin_default_and_explicit_override()
     test_matches_svd_after_warm_iterations()
     test_expert_lora_matches_peft_delta()
     s0, r0, s1, r1 = test_penalty_lowers_sigma_max()
