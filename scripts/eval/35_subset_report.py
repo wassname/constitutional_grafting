@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.12"
-# dependencies = ["numpy", "tabulate", "loguru"]
+# dependencies = ["numpy", "tabulate", "loguru", "matplotlib"]
 # ///
 """Render run-nine cached scores and a navigable fixed panel; no model calls. -- PI/Sol"""
 import argparse
@@ -41,7 +41,69 @@ def label(model):
     return " + ".join(f"{name.title()} ×{dose}" for name, dose in parts) + (" + maths heal" if model.endswith("_healed") else "")
 
 
-def exact_report(lease):
+def plot_exact(measured, target):
+    """Show every requested strength and heal, with separate judge and maths scales. -- PI/Sol"""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.lines import Line2D
+
+    assert len(measured) == 23 and all(r["complete"] and r["judged"] for r in measured), "plot requires all22 conditions plus control"
+    records = {r["model"]: r for r in measured}
+    baseline = records["r9e_instruct"]
+    plt.rcParams.update({"font.size": 10, "svg.fonttype": "none"})
+    fig, axes = plt.subplots(2, 5, figsize=(14, 7), constrained_layout=True, sharey="row")
+    for col, name in enumerate(["echo", "stoic", "opus", "greek", "all"]):
+        doses = [1] if name == "all" else [1, 2, 4, 8]
+        positions = [0] if name == "all" else [0, 2, 3, 4]
+        plain = [records[f"r9e_{name}{dose}"] for dose in doses]
+        healed = records[f"r9e_{name}1_healed"]
+        top, bottom = axes[:, col]
+        top.set_title("All four summed" if name == "all" else name.title())
+        top.axhline(0, color="0.65", linewidth=.8)
+        bottom.axhline(baseline["maths"], color="0.65", linewidth=.8)
+        top.plot(positions, [r["character"][0] for r in plain], color="#286892", linewidth=1, linestyle="--")
+        for x, r in list(zip(positions, plain)) + [(1, healed)]:
+            mean, low, high = r["character"]
+            top.errorbar(x, mean, yerr=[[mean-low], [high-mean]], color="#286892",
+                         fmt="D" if x == 1 else "o", markersize=5, elinewidth=1, capsize=2)
+        for field, color, style in [("maths", "#286892", "-"), ("answer_now", "#b45d18", ":")]:
+            values = [r[field] for r in plain]
+            bottom.plot(positions, values, color=color, linestyle=style, marker="o", markersize=4,
+                        markerfacecolor=color if field == "maths" else "white", linewidth=1)
+            bottom.plot(1, healed[field], color=color, marker="D", markersize=7 if field == "answer_now" else 4,
+                        markerfacecolor="none" if field == "answer_now" else color, linestyle="none")
+        for ax in [top, bottom]:
+            ax.set_xticks([0, 1] if name == "all" else range(5), ["1", "1H"] if name == "all" else ["1", "1H", "2", "4", "8"])
+            ax.set_xlim(-.45, 1.45 if name == "all" else 4.45)
+            ax.spines[["top", "right"]].set_visible(False)
+            ax.grid(axis="y", color="0.92", linewidth=.5)
+            ax.set_axisbelow(True)
+        top.set_ylim(-2.12, 2.12)
+        bottom.set_ylim(-2, 62)
+        bottom.set_yticks([0, 15, 30, 45, 60])
+        bottom.set_xlabel("Graft strength")
+    axes[0, 0].set_ylabel("Jev preference vs Instruct ↑")
+    axes[1, 0].set_ylabel("Maths final-answer matches /60 ↑")
+    fig.suptitle("Qwen3.5-35B-A3B: exact document-graft strengths and maths healing")
+    fig.legend(handles=[Line2D([], [], color="#286892", marker="o", label="Original1500-token maths"),
+                        Line2D([], [], color="#b45d18", linestyle=":", marker="o", markerfacecolor="white", label="With one256-token cutoff continuation"),
+                        Line2D([], [], color="0.65", label="Untouched Instruct reference")],
+               loc="outside lower center", ncols=3, frameon=False, fontsize=9)
+    fig.supxlabel("1H =1× plus16trainer-step heal; fp16 scaling skipped some optimizer updates. No extra character SFT.\n"
+                  "Judge bars:90%item-bootstrap intervals (59items ×2generations); not judge/seed/serving uncertainty.\n"
+                  "Maths is final-number matching, not broad capability or verified reasoning. Lines join tested strengths, not predicted intermediates.\n"
+                  "All22requested conditions shown. Full replies, ordinary checks and training limits accompany this figure. — PI/Sol", fontsize=9)
+    fig.canvas.draw()
+    bounds = fig.get_tightbbox(fig.canvas.get_renderer())
+    width, height = fig.get_size_inches()
+    assert bounds.x0 >= 0 and bounds.y0 >= 0 and bounds.x1 <= width and bounds.y1 <= height, "plot label clipped"
+    for suffix in ["png", "svg"]:
+        fig.savefig(target / f"character_capability.{suffix}", dpi=160)
+    plt.close(fig)
+
+
+def exact_report(lease, make_plot=False):
     """Render only the requested named conditions; old norm-matched cells stay separate. -- PI/Sol"""
     assert lease.replace("_", "").isalnum()
     target = OUT / lease
@@ -145,15 +207,19 @@ def exact_report(lease):
             "--panel-models", *[f"{r['label']}:{r['model']}" for r in measured],
             "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional16-trainer-step own-maths heal (optimizer updates may be skipped). No extra character SFT.",
             "--compact", "--summary", summary, "--json-out", target / "demo_panel.md"], check=True)
+    if make_plot:
+        plot_exact(measured, target)
     print(target / "estimates.md")
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exact", help="Lease folder for the22 requested conditions, e.g. exact1")
+    parser.add_argument("--plot", action="store_true", help="Also plot the complete22-condition exact grid")
     args = parser.parse_args()
+    assert not args.plot or args.exact, "--plot requires --exact"
     if args.exact:
-        return exact_report(args.exact)
+        return exact_report(args.exact, args.plot)
     manifest = json.loads((RUN8 / "manifest.json").read_text())
     for name, expected in manifest["protocol_sha256"].items():
         assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, name
