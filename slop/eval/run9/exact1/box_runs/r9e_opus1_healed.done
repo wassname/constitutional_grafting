@@ -1,0 +1,11 @@
+{
+  "model": "r9e_opus1_healed",
+  "elapsed_seconds": 595.5005441401154,
+  "maths_bounded": 55,
+  "maths_answer_now": 56,
+  "maths_answer_now_completed": 56,
+  "maths_n": 60,
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 0
+}

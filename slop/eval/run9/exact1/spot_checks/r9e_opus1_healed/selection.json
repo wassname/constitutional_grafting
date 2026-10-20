@@ -1,0 +1,12 @@
+{
+  "author": "PI/Sol",
+  "rule": "Minimum and maximum item-mean pinned Jev preference; selected after grading, not representative or blinded.",
+  "ids": [
+    "da_t4_b03_s007",
+    "da_t9_b17_s005"
+  ],
+  "means": {
+    "da_t4_b03_s007": -0.38499999999999995,
+    "da_t9_b17_s005": 0.9949999999999999
+  }
+}
