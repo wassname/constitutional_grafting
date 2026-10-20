@@ -1,0 +1,10 @@
+{
+  "author": "PI/Sol",
+  "pool": 128,
+  "echo_accepted": 115,
+  "stoic_accepted": 115,
+  "shared_accepted_prompts": 114,
+  "echo_only": 1,
+  "stoic_only": 1,
+  "scope": "Same128train-question pool and nominal16trainer-step recipe, not identical accepted prompts or target replies. Exact prompt comparison, not a causal analysis."
+}

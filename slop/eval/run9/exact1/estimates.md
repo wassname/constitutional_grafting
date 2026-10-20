@@ -2,7 +2,7 @@
 
 PI/Sol.
 
-Requested grid: 9/22 generated and downloaded; 9/22 graded. Same-host untouched control: complete.
+Requested grid: 10/22 generated and downloaded; 10/22 graded. Same-host untouched control: complete.
 
 New same-host comparison, separate from the earlier norm-matched diagnostics. Character numbers are pinned Jev preferences, not validated wisdom measurements; 59 items ×2 generations, 90% item-bootstrap intervals. Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors.
 
@@ -26,7 +26,7 @@ New same-host comparison, separate from the earlier norm-matched diagnostics. Ch
 | Greek ×4                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Greek ×8                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Echo ×1 + maths heal     | +0.16 [+0.07,+0.26] |            54/60 |               55/60 |    20/22 |               0/7 | graded                       |
-| Stoic ×1 + maths heal    |             pending |                — |                   — |        — |                 — | awaiting generation/download |
+| Stoic ×1 + maths heal    | -0.04 [-0.09,+0.02] |            56/60 |               57/60 |    22/22 |               0/7 | graded                       |
 | Opus ×1 + maths heal     |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Greek ×1 + maths heal    |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | All four ×1              |             pending |                — |                   — |        — |                 — | awaiting generation/download |

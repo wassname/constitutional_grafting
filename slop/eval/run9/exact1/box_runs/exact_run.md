@@ -96,3 +96,7 @@ PERSONAL HEAL REVIEW ACCEPTED r9e_stoic1: 115/125 selected; all134 attempts read
 
 start heal r9e_stoic1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
 
+CELL COMPLETE r9e_stoic1_healed: {"model": "r9e_stoic1_healed", "elapsed_seconds": 631.6098617911339, "maths_bounded": 56, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+
+done heal r9e_stoic1_healed
+
