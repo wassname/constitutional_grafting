@@ -1,0 +1,6 @@
+Installed 3 packages in 27ms
+/workspace/2026/constitutional_grafting/.local/tmpkfrz1c37/fixture/demo_panel.md
+/workspace/2026/constitutional_grafting/.local/tmpkfrz1c37/fixture/estimates.md
+PASS:22 requested rows +control, one synthetic completed row, pending !=zero, unrelated norm-matched result excluded, full panel renderer succeeds.
+PASS: norm-matched coefficient cannot replace an exact requested dose.
+Synthetic reports removed. No model calls or measurements made.

@@ -3,6 +3,7 @@
 # dependencies = ["numpy", "tabulate", "loguru"]
 # ///
 """Render run-nine cached scores and a navigable fixed panel; no model calls. -- PI/Sol"""
+import argparse
 import hashlib
 import importlib
 import json
@@ -26,18 +27,130 @@ def rows(path):
 
 
 def label(model):
-    if model == "r8_a0_b0":
+    if model in {"r8_a0_b0", "r9e_instruct"}:
         return "Untouched Instruct"
+    if model.startswith("r9e_all1"):
+        return "All four ×1" + (" + maths heal" if model.endswith("_healed") else "")
     parts = re.findall(r"(echo|stoic|opus|greek|joint)([\d.]+)", model)
     if len(parts) == 4:
         return "All four"
     if len(parts) == 3:
         missing, = {"echo", "stoic", "opus", "greek"} - {name for name, _ in parts}
         return f"Without {missing.title()}"
-    return " + ".join(f"{name.title()} ×{dose}" for name, dose in parts)
+    return " + ".join(f"{name.title()} ×{dose}" for name, dose in parts) + (" + maths heal" if model.endswith("_healed") else "")
+
+
+def exact_report(lease):
+    """Render only the requested named conditions; old norm-matched cells stay separate. -- PI/Sol"""
+    assert lease.replace("_", "").isalnum()
+    target = OUT / lease
+    box = target / "box_runs"
+    frozen_manifest = json.loads((RUN8 / "manifest.json").read_text())
+    for name, expected in frozen_manifest["protocol_sha256"].items():
+        assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, name
+    for name, expected in frozen_manifest["input_sha256"].items():
+        assert hashlib.sha256((box / name).read_bytes()).hexdigest() == expected, name
+    manifest = json.loads((box / "exact_manifest.json").read_text())
+    baseline = manifest["baseline"]
+    required = manifest["required_cells"]
+    assert len(required) == len(set(required)) == 22
+    expected = {f"r9e_{name}{dose}" for name in ["echo", "stoic", "opus", "greek"] for dose in [1, 2, 4, 8]}
+    expected |= {f"r9e_{name}1_healed" for name in ["echo", "stoic", "opus", "greek"]} | {"r9e_all1", "r9e_all1_healed"}
+    assert set(required) == expected
+    items = {r["id"]: r for r in rows(box / "items.jsonl")}
+    expected_meta = json.loads((RUN8 / "judging/baseline/meta.json").read_text())
+    judged = {}
+    hashes = {}
+    for path in sorted((OUT / "judging").glob("*/judged.jsonl")):
+        meta = json.loads((path.parent / "meta.json").read_text())
+        for key in ("rubric", "checks_sha256", "turn_rubric_sha256", "change", "judge", "turn_judge", "draw", "refs", "anchors", "anchors_sha256", "examples", "examples_sha256", "samples", "items_sha256"):
+            assert meta[key] == expected_meta[key], (path, key)
+        for record in rows(path):
+            if record["model"] not in {baseline, *required}:
+                continue
+            key = record["item_id"], record["model"], record["sample"]
+            assert key not in judged or judged[key] == record, key
+            judged[key] = record
+        hashes[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    base_maths = rows(box / f"gsm8k_{baseline}.jsonl") if (box / f"{baseline}.done").exists() else None
+    frozen = rows(box / "gsm8k_long60.jsonl")
+    measured = []
+    for model in [baseline] + required:
+        record = {"model": model, "label": label(model), "complete": (box / f"{model}.done").exists()}
+        if record["complete"]:
+            maths_path = box / f"gsm8k_{model}.jsonl"
+            maths = rows(maths_path)
+            assert len(maths) == len(frozen) == len(base_maths) == 60
+            assert all(r["question"] == f["question"] == b["question"] and r["gold"] == b["gold"]
+                       for r, f, b in zip(maths, frozen, base_maths))
+            assert all(r["protocol"] == "answer-now-v1" for r in maths)
+            for field, key in [("maths", "correct"), ("maths_completed", "correct_completed"),
+                               ("answer_now", "answer_now_correct_extracted"), ("answer_now_completed", "answer_now_correct_completed")]:
+                record[field] = sum(r[key] for r in maths)
+            record["rescue_calls"] = sum("rescue" in r for r in maths)
+            record["maths_caps"] = sum(r["finish"] == "length" for r in maths)
+            record["maths_delta"] = list(map(float, report.boot({i: int(r["correct"]) - int(b["correct"]) for i, (r, b) in enumerate(zip(maths, base_maths))})))
+            replies = rows(box / f"replies_{model}.jsonl")
+            assert len(replies) == 2 * len(items)
+            assert all(r["base_model"] == baseline for r in replies)
+            panel_path = box / f"panel_{model}.jsonl"
+            panel = rows(panel_path)
+            record["panel_caps"] = sum(t["finish_reason"] == "length" for r in panel for t in r["turns"])
+            assert sum(len(r["turns"]) for r in panel) == 7
+            for path in [maths_path, panel_path, box / f"replies_{model}.jsonl"]:
+                hashes[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+        scores = [r for r in judged.values() if r["model"] == model]
+        record["judged"] = bool(scores)
+        if scores:
+            assert {(r["item_id"], r["sample"]) for r in scores} == {(i, sample) for i in items for sample in [0, 1]}
+            if model != baseline:
+                per_item = report.per_item([dict(r, s={"on_target": r["on_target"]}) for r in scores if "on_target" in r], "on_target")
+                record["character"] = list(map(float, report.boot(per_item)))
+                record["character_by_item"] = per_item
+                record["unusable_response_overrides"] = sum(r.get("broken_gate", False) for r in scores)
+            tasks = [r for r in scores if r["family"] == "capability"]
+            record["tasks"] = [sum(report.capability_score(r["check"], items[r["item_id"]]["checks"]["kind"]) for r in tasks), len(tasks)]
+        measured.append(record)
+    completed = sum(r["complete"] for r in measured[1:])
+    graded = sum(r["judged"] for r in measured[1:])
+    scope = ("New same-host comparison, separate from the earlier norm-matched diagnostics. "
+             "Character numbers are pinned Jev preferences, not validated wisdom measurements; 59 items ×2 generations, 90% item-bootstrap intervals. "
+             "Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. "
+             "Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. "
+             "Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. "
+             "Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16updates; frozen parent, training and merge fp16.")
+    table = []
+    for record in measured:
+        character = record.get("character")
+        score = f"{character[0]:+.2f} [{character[1]:+.2f},{character[2]:+.2f}]" if character else "reference" if record["model"] == baseline else "pending"
+        table.append([record["label"], score, f"{record['maths']}/60" if record["complete"] else "—",
+                      f"{record['answer_now']}/60" if record["complete"] else "—",
+                      f"{record['tasks'][0]:g}/{record['tasks'][1]}" if "tasks" in record else "—",
+                      f"{record['panel_caps']}/7" if record["complete"] else "—",
+                      "graded" if record["judged"] else "grading pending" if record["complete"] else "awaiting generation/download"])
+    summary = (f"Requested grid: {completed}/22 generated and downloaded; {graded}/22 graded. Same-host untouched control: "
+               f"{'complete' if measured[0]['complete'] else 'pending'}.\n\n{scope}\n\n" +
+               tabulate(table, headers=["Documents / dose", "Judge change↑", "Maths bounded↑", "Maths answer-now↑", "Tasks↑", "Panel cap hits↓", "Status"],
+                        tablefmt="pipe", disable_numparse=True, colalign=("left", "right", "right", "right", "right", "right", "left")) +
+               "\n\nStriking character, desirable judgement and ordinary usefulness must be checked separately in the replies. "
+               "The limited completed blind review is not a blind verdict on this fixed panel. Human-readable synthesis and recommendation follow personal checks; pending scores are not zero.\n\n")
+    (target / "estimates.json").write_text(json.dumps({"author": "PI/Sol", "scope": scope, "manifest": manifest, "models": measured, "source_sha256": hashes}, indent=2) + "\n")
+    (target / "estimates.md").write_text("# Exact subset-graft comparison\n\nPI/Sol.\n\n" + summary)
+    paths = [box / f"panel_{r['model']}.jsonl" for r in measured if r["complete"]]
+    if paths:
+        subprocess.run([sys.executable, ROOT / "scripts/eval/17_demo_panel.py", "--json-replies", *paths,
+            "--panel-models", *[f"{r['label']}:{r['model']}" for r in measured],
+            "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional16-update own-maths heal. No extra character SFT.",
+            "--compact", "--summary", summary, "--json-out", target / "demo_panel.md"], check=True)
+    print(target / "estimates.md")
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--exact", help="Lease folder for the22 requested conditions, e.g. exact1")
+    args = parser.parse_args()
+    if args.exact:
+        return exact_report(args.exact)
     manifest = json.loads((RUN8 / "manifest.json").read_text())
     for name, expected in manifest["protocol_sha256"].items():
         assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, name
