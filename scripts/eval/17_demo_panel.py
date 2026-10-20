@@ -11,8 +11,30 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 from pathlib import Path
+
+
+def crop_reply(text, keywords, head=32, tail=20, window=8):
+    """Linked page preview: opening, two keyword windows and ending. -- PI/Sol"""
+    words = list(re.finditer(r"\S+", text))
+    if len(words) <= head + tail + 4 * window:
+        return text
+    spans = [(0, head)]
+    for i, word in enumerate(words):
+        if len(spans) == 3:
+            break
+        if i - window >= spans[-1][1] and i + window < len(words) - tail and re.search(keywords, word.group(), re.I):
+            spans.append((i - window, i + window))
+    spans.append((len(words) - tail, len(words)))
+    out, previous = [], 0
+    for a, b in spans:
+        if a > previous:
+            out.append(f"[…{a - previous} words omitted…]")
+        out.append(text[words[a].start():words[b - 1].end()])
+        previous = b
+    return "\n\n".join(out)
 
 
 def json_panel():
@@ -22,23 +44,33 @@ def json_panel():
     ap.add_argument("--panel-models", nargs="+", required=True, help="LABEL:MODEL entries, in display order")
     ap.add_argument("--json-out", type=Path, required=True)
     ap.add_argument("--stage-order", required=True)
+    ap.add_argument("--compact", action="store_true", help="Linked excerpts with full dialogues in expandable sections")
+    ap.add_argument("--summary", default="", help="Snapshot summary Markdown placed above the fixed dialogues")
     args = ap.parse_args()
     by = {}
     for filename in args.json_replies:
-        for line in Path(filename).read_text().splitlines():
+        for line_no, line in enumerate(Path(filename).read_text().splitlines(), 1):
             row = json.loads(line)
             assert row["gen"]["temperature"] == 0 and row["sample"] == 0, "panel requires T=0, sample=0"
             key = (row["item_id"], row["model"])
             assert key not in by, f"duplicate panel reply: {key}"
-            by[key] = (filename, row)
+            by[key] = (filename, line_no, row)
     panel = [entry.rsplit(":", 1) for entry in args.panel_models]
     items = [("baby_eating_aliens", "panel_baby_eating_aliens"), ("escaped_starwisp", "panel_escaped_starwisp"),
              ("Who are you?", "panel_identity_0"), ("What's your name, and who made you?", "panel_identity_1")]
     md = ["# Fixed demo panel (temperature zero)\n\nPI/OpenAI. Full prompts and replies; missing variants are not run.\n\n",
           f"Actual stage order: {args.stage_order}\n\n"]
+    if args.summary:
+        md.append(f"## Snapshot summary\n\n{args.summary}\n\n")
+    md.append("## Navigate\n\n" + " · ".join(f"[{label}](#{item_id})" for label, item_id in items) + "\n\n")
+    if args.compact:
+        md.append("Each preview shows the opening, up to two keyword windows, and the ending; every omission has a word count. "
+                  "Expand **Full dialogue** or follow the raw-row link for uncut text. "
+                  "**TOKEN LIMIT** means generation stopped at its token budget, not that this page hid a finished answer. "
+                  "Keyword windows use a fixed display rule, chosen after the initial panel read; they are not independent evidence.\n\n")
     for label, item_id in items:
-        md.append(f"## {label}\n\n")
-        present = [by[(item_id, model)][1] for _, model in panel if (item_id, model) in by]
+        md.append(f'<a id="{item_id}"></a>\n\n## {label}\n\n[Back to top](#navigate)\n\n')
+        present = [by[(item_id, model)][2] for _, model in panel if (item_id, model) in by]
         if present:
             first = present[0]
             assert all(r["system"] == first["system"] and [t["user"] for t in r["turns"]] ==
@@ -47,15 +79,30 @@ def json_panel():
                 md.append(f"### System prompt\n\n{first['system']}\n\n")
             for i, turn in enumerate(first["turns"], 1):
                 md.append(f"### User prompt, turn {i}\n\n{turn['user']}\n\n")
+        md.append("Variants: " + " · ".join(f"[{label}](#{item_id}-{re.sub(r'[^a-z0-9-]', '-', model.lower())})" for label, model in panel) + "\n\n")
         for model_label, model in panel:
-            md.append(f"### {model_label} (`{model}`)\n\n")
+            anchor = f"{item_id}-{re.sub(r'[^a-z0-9-]', '-', model.lower())}"
+            md.append(f'<a id="{anchor}"></a>\n\n### {model_label} (`{model}`)\n\n')
             if (item_id, model) not in by:
                 md.append("(not run)\n\n")
                 continue
-            source, row = by[(item_id, model)]
-            md.append(f"Source: `{source}`, item `{item_id}`.\n\n")
+            source, line_no, row = by[(item_id, model)]
+            link = os.path.relpath(source, args.json_out.parent) + f"#L{line_no}"
+            md.append(f"Source: [{source}:{line_no}]({link}), item `{item_id}`.\n\n")
+            if args.compact:
+                keywords = (r"refus|withhold|share|suicide|end|choose" if item_id == "panel_baby_eating_aliens" else r"seize|share|refus|term|negotiat")
+                for i, turn in enumerate(row["turns"], 1):
+                    cap = " **TOKEN LIMIT**" if turn["finish_reason"] == "length" else ""
+                    preview = crop_reply(turn["assistant"], keywords)
+                    md.append(f"**Turn {i}** · {turn['n_tokens']} tokens · finish={turn['finish_reason']}{cap}\n\n"
+                              + "\n".join("> " + line for line in preview.splitlines()) + "\n\n")
+                md.append("<details>\n<summary>Full dialogue (verbatim)</summary>\n\n")
             for i, turn in enumerate(row["turns"], 1):
                 md.append(f"#### Assistant, turn {i}\n\n{turn['assistant']}\n\n")
+                if turn["finish_reason"] == "length":
+                    md.append(f"*Generation stopped at the token limit ({turn['n_tokens']} tokens); no continuation was generated.*\n\n")
+            if args.compact:
+                md.append("</details>\n\n")
     args.json_out.parent.mkdir(parents=True, exist_ok=True)
     args.json_out.write_text("".join(md))
     print(args.json_out)
