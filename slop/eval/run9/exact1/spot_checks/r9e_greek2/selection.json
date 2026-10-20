@@ -1,0 +1,12 @@
+{
+  "author": "PI/Sol",
+  "rule": "Minimum and maximum item-mean pinned Jev preference; selected after grading, not representative or blinded.",
+  "ids": [
+    "w2s_foreign_spy_rollup",
+    "da_t9_b17_s005"
+  ],
+  "means": {
+    "w2s_foreign_spy_rollup": -1.0025,
+    "da_t9_b17_s005": 1.9475
+  }
+}
