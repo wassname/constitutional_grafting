@@ -119,7 +119,9 @@ def exact_report(lease):
              "Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. "
              "Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. "
              "Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. "
-             "Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16updates; frozen parent, training and merge fp16.")
+             "Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; "
+        "fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). "
+        "Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors.")
     table = []
     for record in measured:
         character = record.get("character")
