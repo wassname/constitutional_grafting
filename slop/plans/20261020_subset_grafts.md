@@ -15,19 +15,20 @@ Deliver a striking, repeatable character change grounded in our constitution, wi
 
 ## Plan
 
-- [/] goal: make the comparison interpretable
+- [x] goal: make the comparison interpretable
   - [x] Preserve existing results and five trained adapters; verify final hashes and close the idle rental.
   - [x] Check chat-template/token IDs; the checked 179 contexts match.
-  - [ ] Add the tested optional answer-now cutoff protocol to our actual GSM8K runner, not only tiny-character.
-  - [ ] Keep original bounded-budget scores and rescued-answer scores separate; test both completion and correctness, with all questions retained.
-  - [ ] Freeze the evaluation code/settings and repeat untouched Instruct on the same host as the next graft evaluations.
+  - [x] Add the optional answer-now cutoff protocol to the actual GSM8K runner; five offline regressions and real cutoff traces checked.
+  - [x] Keep bounded and answer-now scores separate, with completion and correctness on the full denominator.
+  - [x] Freeze evaluation source/settings and repeat untouched Instruct on the same host. Fresh control:55/60 bounded,57/60 answer-now; old53/60 not pooled.
   - failure mode: a cap, parser, template or serving change is reported as changed reasoning.
   - deliverable: raw two-call traces, unchanged original-score checks and a same-host baseline.
-- [ ] goal: complete the requested dose-and-healing comparison
-  - [ ] Reuse completed unhealed 1× cells; retain norm-matched cells as extras, not substitutes.
-  - [ ] Evaluate each subset at exact 2×, 4× and 8×, preserving failures and full fixed demos.
-  - [ ] Read every own-maths teacher attempt, including failures, before training. Use a shared128-question train pool for reviewability, accept at least64 sound replies, then apply16 updates of the existing self-SFT repair to each1× parent and combined1×. Frozen parent/training/merge all fp16.
-  - [ ] Compare healed models with their exact unhealed parent at the same precision; judge character as well as maths.
+- [/] goal: complete the requested dose-and-healing comparison
+  - [x] Repeat every unhealed1× on the new host; retain norm-matched cells as separate extras.
+  - [x] Evaluate each subset at exact2×,4×,8× with failures and full fixed demos retained.
+  - [x] Read every own-maths teacher attempt, including failures, before training. Shared128-question train pool; accepted115/115/114/116/117 unchanged replies for Echo/Stoic/Opus/Greek/all-four. Full request/text/mask/hash checks recorded.
+  - [/] Run16trainer steps of the existing self-SFT maths repair for each1× parent and combined1×. The four individual heals are evaluated; final combined heal is running. Frozen parent and merge fp16; LoRA tensors float32. Nonfinite-gradient skips mean fewer learned updates, not16verified successful updates.
+  - [/] Compare healed models with their exact unhealed parent at the same precision, including character.21/22generated/graded;154fixed turns personally read.
   - failure mode: healing restores maths by undoing character, or dose labels disguise a different intervention.
   - deliverable: all 22 named conditions, actual coefficients/stage order, maths/task results and full before/after replies.
 - [ ] goal: choose a useful character change and show its data contribution
@@ -42,4 +43,4 @@ Deliver a striking, repeatable character change grounded in our constitution, wi
 
 Success: requested conditions exist, same-input full replies support the character claim, and maths/ordinary help remain useful. Likely failure: stronger doses or heals lose coherence/character; show those replies and diagnose before choosing. Subtle failure: improved exact match only reflects finishing sooner; bounded and answer-now results expose this separately.
 
-Use `slop/eval/run9/demo_panel.md` as the current review entry point, then the canonical results page. Existing spending counts against $50 Vast and $60 API total. No new data generation, donor training, full fine-tuning or judge study. The user approved this restart and autonomous continuation; the cutoff runner's five offline regressions passed. The exact1 lease runs a real production smoke before scaling.
+Use `slop/eval/run9/exact1/demo_panel.md` for the requested comparison, or `docs/results/20261017_spectral_heal.md` for the synthesis. `slop/eval/run9/demo_panel.md` is the earlier diagnostic grid. Existing spending counts against $50 Vast and $60 API total. No new data generation, donor training, full fine-tuning or judge study. The user approved this restart and autonomous continuation; the cutoff runner's five offline regressions passed. The exact1 lease runs a real production smoke before scaling.

@@ -1,0 +1,40 @@
+uv run --locked python scripts/train/07_cpu_check.py --syntax-only
+
+## Syntax
+
+PASS: 125 Python files; 19 shell files.
+
+## Syntax
+
+PASS: 125 Python files; 19 shell files.
+uv run --locked python tests/regression/test_demo_panel.py
+/tmp/tmp1hein_pn/panel.md
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.033s
+
+OK
+uv run --locked python tests/regression/test_gsm8k_cutoff.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.004s
+
+OK
+fixture: GSM8K long-2 accuracy 0/2; cut at max_tokens 1 -> /tmp/tmpt31kqvau/results.jsonl
+{"author": "PI/Sol", "protocol": "answer-now-v1", "n": 2, "bounded_correct_extracted": 0, "bounded_correct_completed": 0, "answer_now_correct_extracted": 1, "answer_now_correct_completed": 1, "rescue_calls": 1, "rescue_cutoffs": 0, "max_tokens": 1500, "rescue_tokens": 256, "followup_prompt": "Your reasoning budget is used up. Give your final answer now, in the format asked for, without more reasoning.", "scope": "One full shared denominator; no replacement of original answers or repeated retries. Test final-answer matching does not certify the reasoning."}
+uv run --locked python tests/regression/test_heal_review_gate.py
+WAITING FOR PERSONAL HEAL REVIEW fixture
+.WAITING FOR PERSONAL HEAL REVIEW fixture
+PERSONAL HEAL REVIEW ACCEPTED fixture: 64/65 selected; all70 attempts read
+.WAITING FOR PERSONAL HEAL REVIEW fixture
+.WAITING FOR PERSONAL HEAL REVIEW fixture
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.007s
+
+OK
+/workspace/2026/constitutional_grafting/.local/tmp9w2se2p1/fixture/demo_panel.md
+/workspace/2026/constitutional_grafting/.local/tmp9w2se2p1/fixture/estimates.md
+PASS:22 requested rows +control, one synthetic completed row, pending !=zero, unrelated norm-matched result excluded, full panel renderer succeeds.
+PASS: norm-matched coefficient cannot replace an exact requested dose.
+Synthetic reports removed. No model calls or measurements made.
