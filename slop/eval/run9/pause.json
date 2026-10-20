@@ -2,7 +2,8 @@
   "author": "PI/Sol",
   "date": "2026-10-20T16:00:00+08:00",
   "user_instruction": "lets fix this before spending more",
-  "paid_work_paused": true,
+  "paid_work_paused": false,
+  "resume_authority": "User approved restart: ok good carry on gtg; prepare eval results for the requested combos, personally spot-check the judge, and have a nice demo suite. Cutoff runner regression passed before resuming.",
   "authorized_exception": "User explicitly requested blind subagent review after the pause. Only the two read-only blinded reviews are authorized; no new evaluated-model inference, healing, rentals or routine judge calls.",
   "blind_review_reserve_usd": 10,
   "blind_review_workflow": "d2817db4-6561-426c-b81b-ad5c54f7c5c2",
@@ -19,7 +20,7 @@
   "original_diagnostic_cells_graded": 15,
   "interrupted_cell": "r9_opus3.11",
   "not_run_after_pause": ["r9_opus3.11", "r9_greek2.92"],
-  "next": "Check opt-in cutoff/rescue protocol with tiny-character session and audit Jev against actual reasons/actions. Preserve original bounded-budget scores. No new model calls, inference, training or rentals until resumed.",
+  "next": "Run exact1/2/4/8 and healed1 grid from verified saved adapters, with same-host control and separate bounded/answer-now maths scores. Preserve original results and personally read judge comparisons. No further blind-review sideline.",
   "limits_usd": {"vast": 50, "api": 60},
-  "rental_action": "Owned run9_eval interrupted. Controller is retrieving saved outputs/adapters, then destroys instance 56819164. No new lease started."
+  "rental_action": "Initial instance56819164 destroyed; all five final adapter hashes verified. Authorized follow-up exact1 lease will reuse four saved subset adapters, not retrain donors."
 }

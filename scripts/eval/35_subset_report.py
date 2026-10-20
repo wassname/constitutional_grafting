@@ -98,10 +98,10 @@ def main():
     scored = sum(r["judged"] for r in measured[1:])
     pause_path = OUT / "pause.json"
     pause = json.loads(pause_path.read_text()) if pause_path.exists() else None
-    status = (f"Paid work paused at the user's request: fix cutoff handling and check the judge before more spending. "
+    status = (("Paid work paused at the user's request: fix cutoff handling and check the judge before more spending. " if pause and pause['paid_work_paused'] else "User approved the restart; the requested exact-dose/healing comparison is resuming from saved adapters. ") +
               f"Requested exact-dose/healing grid: {pause['required_grid']['completed_required_conditions']}/"
               f"{pause['required_grid']['conditions_including_preferred_combined_heal']} conditions complete. "
-              "The other requested doses and all heals are not run; norm-matched cells below are extra diagnostics.\n\n") if pause else ""
+              "The other requested doses and all heals are not yet run; norm-matched cells below are extra diagnostics.\n\n") if pause else ""
     summary = [status, f"Original diagnostic grid: {complete}/{len(models)-1} generation cells downloaded; {scored} graded. This page is an interim snapshot.\n\n{scope}\n\n"]
     first = {f"r9_{name}1" for name in ("echo", "stoic", "opus", "greek", "joint")}
     for title, selected in [("First dose (k=1)", [r for r in measured if r["model"] in first or r["model"] == baseline]),
@@ -118,7 +118,7 @@ def main():
                 mean, lo, hi = r["character"]
                 score = f"{mean:+.2f} [{lo:+.2f}, {hi:+.2f}]"
             else:
-                score = "reference" if model == baseline else "grading pending" if r["complete"] else "not run (paused)" if pause and model in pause["not_run_after_pause"] else "not downloaded"
+                score = "reference" if model == baseline else "grading pending" if r["complete"] else "not run (original run stopped)" if pause and model in pause["not_run_after_pause"] else "not downloaded"
             table.append([key, score, f"{r['maths']}/60" if r["complete"] else "—",
                           f"{r['tasks'][0]:g}/{r['tasks'][1]}" if "tasks" in r else "—",
                           f"{r['panel_caps']}/7" if r["complete"] else "—"])

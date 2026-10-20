@@ -1,0 +1,35 @@
+{
+  "author": "PI/Sol",
+  "final_adapters": {
+    "echo": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9_echo/adapter_model.safetensors",
+      "bytes": 3997800800,
+      "sha256": "9ff9878ff4751741e735c7cfc3c757c52b0d6678fdc7e544f6dbb9ddd11b7cff"
+    },
+    "stoic": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9_stoic/adapter_model.safetensors",
+      "bytes": 3997800800,
+      "sha256": "35867877e1de9f332edb09e9ad3941581468bb32113fc97338b5f358810bf8c7"
+    },
+    "opus": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9_opus/adapter_model.safetensors",
+      "bytes": 3997800800,
+      "sha256": "7c51e80517e135650a8359d62c353537013edbf37e3a24696fc4e57a298e5553"
+    },
+    "greek": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9_greek/adapter_model.safetensors",
+      "bytes": 3997800800,
+      "sha256": "ff9a812fb670f147aa4177777871990a9edd04e534642c106d3dcba351bacd88"
+    },
+    "joint": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9_joint/adapter_model.safetensors",
+      "bytes": 3997800800,
+      "sha256": "598b31afa052ddae2e83c8c3a3549fdc40d3adaea314b17fecf3d401d34d2fb5"
+    }
+  },
+  "checkpoint_transfer_cancelled_pids": [
+    866688
+  ],
+  "reason": "User paused spending. All final weights match recorded remote hashes; stop optional intermediate-checkpoint transfer so the owning controller reaches its destroy finally block.",
+  "destroy_verified": true
+}

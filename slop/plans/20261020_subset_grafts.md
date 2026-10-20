@@ -1,44 +1,45 @@
-# Draft: separate document subsets, then mix their grafts
+# Restart: subset grafts, exact doses and healing
 
-PI/OpenAI. Discussion draft, not execution or spending approval.
+PI/Sol. Reuse the saved work; do not restart donor training. This supersedes the earlier norm-matched-only evaluation plan.
 
-User proposal: Opus-to-Echo from good seeds; pure Stoic; expanded Opus from good seeds; Opus through Greek and back to English. Aim for100-300 examples per subset and independently usable LoRAs. Simplify to Base-trained document grafts with spectral regularization; evaluate healing after selecting the mixture.
+## Goal
 
-- [ ] goal: prepare four useful document subsets
-  - [ ] Select100 examples per subset before considering300
-  - [ ] Reuse existing good Echo material before buying new replies
-  - [ ] Preserve original Stoic attribution and recorded translation provenance
-  - [ ] Share seeds and requested formats across writer variants where possible
-  - [ ] Read every final text with its seed, prompts, changes and factual checks
-  - [ ] Obtain the independent full-sample review before scaling
-  - failure modes: writer and content effects are confused; duplicated cases inflate exposure; rewriting changes reasons or agency
-  - deliverable: four plain-text manifests with exact chosen texts, source overlap, format, provenance, token counts and unresolved exclusions
-- [ ] goal: learn independently usable document grafts
-  - [ ] Train each LoRA from the same untouched Base checkpoint
-  - [ ] Keep module coverage and spectral recipe fixed; record actual token exposure and optimizer steps
-  - [ ] Add each saved update to the same untouched Instruct recipient
-  - failure modes: a subset has too few updates to learn; different anchors or exposures make comparisons misleading; loss falls by memorizing
-  - deliverable: four saved adapters with matching anchor/config provenance and same-input held-out character, maths and ordinary-help results
-- [ ] goal: find useful combinations without hiding damage
-  - [ ] Evaluate individual adapters before a few selected combinations
-  - [ ] Compare useful character against capability damage across serving strengths
-  - [ ] Read failures and investigate training/evaluation bugs before interpreting a negative result
-  - [ ] Test healing only after choosing a promising mixture
-  - failure modes: individually useful updates interfere; fixed-dose comparisons imply a false ranking; healing cancels character
-  - deliverable: coefficients, full demo replies and a shared character/capability plot, including failures
+Deliver a striking, repeatable character change grounded in our constitution, with better reasons, speech or decisions and retained maths and ordinary usefulness. Identify which document subsets contribute. Distinctive but undesirable character is a finding, not the desired endpoint.
 
-## Verification
+## User requirements
 
-Success: individually measured updates produce useful held-out changes, and selected mixtures retain usefulness; raw replies support the claimed reasons/actions.
-Likely failure: one subset overfits its examples or produces no clear held-out signal; inspect real batches, update norms, loss and outputs before deciding what to change.
-Subtle failure: a preferred writer also has easier seeds or repeated scenario families; manifests expose overlap and compare shared-seed variants separately from different-source mixtures.
-Check Base and recipient hashes, module coverage and independent starting points. Combine expanded weight updates, not averaged LoRA factors. Removing an adapter tests its contribution to that mixture, not equivalence to joint training without that data.
+- Echo, pure Stoic, Opus and Greek: each at exact 1×, 2×, 4×, 8×, plus 1× healed.
+- All four updates combined at 1× each, also healed: 22 conditions including that preferred combined heal.
+- Spectral regularization during donor training; λ=50 is now the default.
+- Fix cutoff handling before more paid evaluation. Keep the report readable and judge actual responses.
 
-## Open decisions
+## Plan
 
-- Does pure Stoic mean original attributed passages without Opus rewriting?
-- Echo reuse is the initial cost-saving assumption;100 suitable existing outputs are not yet verified. Existing dialogues stay labelled as dialogues, not prose documents or new teacher generations.
-- Greek currently means Opus writes directly in Modern Greek, then DeepSeek translates to English. An English-to-Greek-to-English round trip is a distinct, unrun recipe requiring a decision.
-- Four cohort LoRAs first. Finer adapters for saved data batches remain an option; they are not optimizer-minibatch adapters. Training/save/evaluation overhead and interaction tests grow with adapter count.
-- Corpus review may reject or repair examples, but does not imply learned-model benefit. Pilot size is a research choice, not a known sufficiency threshold.
-- Budget and execution need approval; no new paid model call, rental, training or healing is authorized by this draft.
+- [/] goal: make the comparison interpretable
+  - [x] Preserve existing results and five trained adapters; verify final hashes and close the idle rental.
+  - [x] Check chat-template/token IDs; the checked 179 contexts match.
+  - [ ] Add the tested optional answer-now cutoff protocol to our actual GSM8K runner, not only tiny-character.
+  - [ ] Keep original bounded-budget scores and rescued-answer scores separate; test both completion and correctness, with all questions retained.
+  - [ ] Freeze the evaluation code/settings and repeat untouched Instruct on the same host as the next graft evaluations.
+  - failure mode: a cap, parser, template or serving change is reported as changed reasoning.
+  - deliverable: raw two-call traces, unchanged original-score checks and a same-host baseline.
+- [ ] goal: complete the requested dose-and-healing comparison
+  - [ ] Reuse completed unhealed 1× cells; retain norm-matched cells as extras, not substitutes.
+  - [ ] Evaluate each subset at exact 2×, 4× and 8×, preserving failures and full fixed demos.
+  - [ ] Apply the existing short own-verified-maths self-SFT heal to each 1× parent and the combined 1× parent; pin one common update budget before comparing.
+  - [ ] Compare healed models with their exact unhealed parent at the same precision; judge character as well as maths.
+  - failure mode: healing restores maths by undoing character, or dose labels disguise a different intervention.
+  - deliverable: all 22 named conditions, actual coefficients/stage order, maths/task results and full before/after replies.
+- [ ] goal: choose a useful character change and show its data contribution
+  - [ ] Read actual decisions and reasons; distinguish recognisable character, desirable judgement and ordinary usefulness.
+  - [ ] Use the completed limited blind review as a diagnostic only. Do not expand the judge sideline or claim the cancelled full-panel review succeeded.
+  - [ ] Compare subsets and combined/leave-one-out updates; trace useful examples to source documents without claiming document-level causality.
+  - [ ] Update one report with the comparison table, character-versus-capability plot, navigable demo excerpts, full dialogues, failures, recommendation and spend.
+  - failure mode: a flattering grade or one selected reply is presented as repeatable wise character.
+  - deliverable: a concrete saved model/recipe and checkable demonstrations; leave the success goal open if no model meets it.
+
+## Verification and budget
+
+Success: requested conditions exist, same-input full replies support the character claim, and maths/ordinary help remain useful. Likely failure: stronger doses or heals lose coherence/character; show those replies and diagnose before choosing. Subtle failure: improved exact match only reflects finishing sooner; bounded and answer-now results expose this separately.
+
+Use `slop/eval/run9/demo_panel.md` as the current review entry point, then the canonical results page. Existing spending counts against $50 Vast and $60 API total. No new data generation, donor training, full fine-tuning or judge study. The user approved this restart and autonomous continuation; the cutoff runner's five offline regressions passed. The exact1 lease runs a real production smoke before scaling.

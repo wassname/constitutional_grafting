@@ -23,6 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 INPUTS = ROOT / "slop/eval/run8"
 LEASE = os.environ.get('RUN9_LEASE', 'initial')
+STAGE = os.environ.get('RUN9_STAGE', 'subsets')
+assert STAGE in {'subsets', 'exact'}, STAGE
 assert LEASE.replace('_', '').isalnum(), LEASE
 OUT = ROOT / 'slop/eval/run9' / ('' if LEASE == 'initial' else LEASE)
 STATE = ROOT / '.local' / f'run9_{LEASE}_rental.json'
@@ -83,10 +85,24 @@ def run(hours=8):
     assert offers, "no suitable low-bandwidth-cost datacentre offer"
     offer = min(offers, key=lambda r: r["dph_total"])
     rate = offer["dph_total"]
-    assert hours * rate + 2 <= min(BUDGET_USD, account["credit"] - 1), "lease plus bandwidth reserve exceeds the $50 Vast allowance or credit"
+    quote_paths = [ROOT / 'slop/eval/run9/rental_quote.json'] + sorted((ROOT / 'slop/eval/run9').glob('*/rental_quote.json'))
+    previous_reserve = 0.0
+    for p in quote_paths:
+        if not p.exists() or p.parent == OUT:
+            continue
+        quoted = json.loads(p.read_text())['rental_plus_bandwidth_reserve_usd']
+        closed = p.parent / 'account_credit_after.json'
+        if (p.parent / 'destroy_response.json').exists() and closed.exists():
+            elapsed = json.loads(closed.read_text())['elapsed_hours']
+            lease = json.loads((p.parent / 'lease.json').read_text())
+            quoted = min(quoted, elapsed * lease['hourly_rate'] + 2)
+        previous_reserve += quoted
+    assert previous_reserve + hours * rate + 2 <= BUDGET_USD, 'cumulative lease reserves exceed $50 Vast allowance'
+    assert hours * rate + 2 <= account['credit'] - 1, 'lease plus bandwidth reserve exceeds available credit'
     (OUT / "rental_quote.json").write_text(json.dumps({"offer": offer, "image": IMAGE, "account_credit_before": account["credit"],
-        "maximum_hours": hours, "rental_plus_bandwidth_reserve_usd": hours * rate + 2, "vast_cap_usd": BUDGET_USD}, indent=2))
-    print(f"Quote: {offer['gpu_name']}, datacentre {offer['geolocation']}, ${rate:.3f}/h including 300 GB; {hours:g}-hour reserve ${hours * rate + .6:.2f}", flush=True)
+        "maximum_hours": hours, "rental_plus_bandwidth_reserve_usd": hours * rate + 2, "previous_lease_reserve_usd": previous_reserve,
+        "stage": STAGE, "vast_cap_usd": BUDGET_USD}, indent=2))
+    print(f"Quote: {offer['gpu_name']}, datacentre {offer['geolocation']}, ${rate:.3f}/h including 300 GB; {hours:g}-hour reserve ${hours * rate + 2:.2f}", flush=True)
     body = {"client_id": "me", "image": IMAGE, "disk": 300, "label": LABEL, "runtype": "ssh_direct", "cancel_unavail": True}
     created_at = time.time()
     try:
@@ -154,6 +170,8 @@ def run(hours=8):
                 "scripts/train/demo_plugin.py", "scripts/train/spectral_plugin.py", "scripts/train/router_dtype_plugin.py",
                 "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py", "scripts/train/44_energy_doses.py",
                 ]
+        if STAGE == 'exact':
+            code += ['scripts/eval/36_exact_grid.py', 'configs/train/qwen3/sft.yml', 'tests/regression/test_gsm8k_cutoff.py']
         code += [str(q.relative_to(ROOT)) for q in [ROOT / "scripts/__init__.py", ROOT / "scripts/train/__init__.py"] if q.exists()]
         source_hashes = {}
         stream = io.BytesIO()
@@ -201,8 +219,9 @@ manifest = json.loads(Path('/workspace/cg/runs/run9/run8_manifest.json').read_te
 p = snapshot_download('Qwen/Qwen3.5-35B-A3B', revision=manifest['instruct_revision'], ignore_patterns=['*.gguf', '*.bin', '*.onnx'], max_workers=16)
 Path('/workspace/run9_instruct_path').write_text(p)
 print('Pinned Instruct snapshot:', p)
-b = snapshot_download('Qwen/Qwen3.5-35B-A3B-Base', revision='0f0813072d2358973511097385626f21fcb6d422', ignore_patterns=['*.gguf', '*.bin', '*.onnx'], max_workers=16)
-print('Pinned Base snapshot:', b)
+if DOWNLOAD_DONOR_BASE:
+    b = snapshot_download('Qwen/Qwen3.5-35B-A3B-Base', revision='0f0813072d2358973511097385626f21fcb6d422', ignore_patterns=['*.gguf', '*.bin', '*.onnx'], max_workers=16)
+    print('Pinned Base snapshot:', b)
 PY
 python -c 'import axolotl, yaml; print("axolotl", axolotl.__version__)'
 python -c 'import torch,peft,transformers; print(torch.__version__,peft.__version__,transformers.__version__)'
@@ -210,8 +229,10 @@ python -c 'import torch,peft,transformers; print(torch.__version__,peft.__versio
 cd /workspace/cg
 python tests/regression/test_moe_expert_merge.py
 """
+            if STAGE == 'exact':
+                script += '\npython tests/regression/test_gsm8k_cutoff.py\n'
             with (OUT / "setup.log").open("w") as f:
-                remote("bash -s", input=script, text=True, stdout=f, stderr=subprocess.STDOUT)
+                remote("bash -s", input=script.replace('DOWNLOAD_DONOR_BASE', repr(STAGE == 'subsets')), text=True, stdout=f, stderr=subprocess.STDOUT)
             print("SETUP COMPLETE: pinned Instruct and Base, inference environment and remote CPU regression", flush=True)
 
         try:
@@ -222,6 +243,19 @@ python tests/regression/test_moe_expert_merge.py
             raise
         if heartbeat_future.done():
             heartbeat_future.result()
+        if STAGE == 'exact':
+            verified = json.loads((ROOT / 'slop/eval/run9/final_adapter_verification.json').read_text())['final_adapters']
+            for name in ['echo', 'stoic', 'opus', 'greek']:
+                source = ADAPTER_DIR / f'r9_{name}'
+                assert (source / 'adapter_config.json').exists() and (source / 'adapter_model.safetensors').exists(), source
+                remote(f'mkdir -p /workspace/cg/outputs/r9_{name}', timeout=30)
+                with (OUT / f'upload_{name}.log').open('w') as stream:
+                    subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(source / 'adapter_config.json'),
+                        str(source / 'adapter_model.safetensors'), host + f':/workspace/cg/outputs/r9_{name}/'],
+                        stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=remaining())
+                code = f"import hashlib; p='/workspace/cg/outputs/r9_{name}/adapter_model.safetensors'; actual=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert actual == {verified[name]['sha256']!r}, actual; print(actual)"
+                remote('python -c ' + shlex.quote(code), timeout=120)
+                print(f'ADAPTER VERIFIED {name}', flush=True)
         # The box can set up while reviewed training data is finalised locally; upload it once data/subsets/train_manifest.json exists.
         manifest_path = ROOT / "data/subsets/train_manifest.json"
         while not manifest_path.exists():
@@ -238,8 +272,9 @@ python tests/regression/test_moe_expert_merge.py
         (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
         print("DATA UPLOADED: " + json.dumps({k: (v["docs"], v["tokens_incl_eos"]) for k, v in train_manifest["subsets"].items()}), flush=True)
+        entry = 'python scripts/eval/36_exact_grid.py' if STAGE == 'exact' else 'bash scripts/train/11_run9_box.sh'
         command = (f"cd /workspace/cg && HF_HOME=/workspace/hf RUN9_INSTRUCT_PATH=$(cat /workspace/run9_instruct_path) "
-                   f"INCUMBENT_ENERGY={os.environ['INCUMBENT_ENERGY']} RUN9_DEADLINE_EPOCH={state['runner_deadline_epoch']} bash scripts/train/11_run9_box.sh")
+                   f"INCUMBENT_ENERGY={os.environ['INCUMBENT_ENERGY']} RUN9_DEADLINE_EPOCH={state['runner_deadline_epoch']} {entry}")
         script = f'set +e; {command} > runs/run9/job.log 2>&1; status=$?; echo $status > runs/run9/job.exit; tmux wait-for -S run9_done; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run9_eval ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
         previous = set()
@@ -247,7 +282,7 @@ python tests/regression/test_moe_expert_merge.py
         failures = 0
         while remaining() > 1:
             try:
-                result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run9'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run9_eval'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {f.stem: json.loads(f.read_text()) for f in p.glob('r9_*.done')}, 'stages': (p/'stages.log').read_text().splitlines()[-2:] if (p/'stages.log').exists() else []}))"), timeout=30, capture_output=True, text=True)
+                result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run9'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run9_eval'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {f.stem: json.loads(f.read_text()) for f in p.glob('r9*.done')}, 'stages': (p/'stages.log').read_text().splitlines()[-2:] if (p/'stages.log').exists() else []}))"), timeout=30, capture_output=True, text=True)
             except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
                 if isinstance(error, subprocess.CalledProcessError) and error.returncode != 255:
                     raise
@@ -281,12 +316,13 @@ python tests/regression/test_moe_expert_merge.py
             if live and ssh is not None:
                 with (OUT / 'shutdown_diagnostics.log').open('w') as diagnostics:
                     subprocess.run(ssh + [host, 'nvidia-smi; free -h; df -h /workspace; dmesg -T 2>&1 | tail -80'], stdout=diagnostics, stderr=subprocess.STDOUT, timeout=30)
-                subprocess.run(["rsync", "-az", "--exclude=merged_model", "-e", shlex.join(ssh), host + ":/workspace/cg/runs/run9/", str(OUT / "box_runs") + "/"],
+                subprocess.run(["rsync", "-az", "--exclude=merged_model", "--exclude=heal_parent", "--exclude=dose_model", "--exclude=healed_model", "-e", shlex.join(ssh), host + ":/workspace/cg/runs/run9/", str(OUT / "box_runs") + "/"],
                                check=True, timeout=600)
                 ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
                 with (OUT / 'adapter_download.log').open('w') as f:  # final adapters first, then per-epoch checkpoints for later attribution
-                    for pattern in ["adapter_*", "checkpoint-*/adapter_*", "checkpoint-*/trainer_state.json"]:
-                        subprocess.run(["rsync", "-az", "--partial", "-e", shlex.join(ssh), "--include=*/", f"--include=r9_*/{pattern}", "--exclude=*",
+                    for pattern in (["adapter_*", "checkpoint-*/trainer_state.json"] if STAGE == 'exact' else ["adapter_*", "checkpoint-*/adapter_*", "checkpoint-*/trainer_state.json"]):
+                        prefix = 'r9e_*' if STAGE == 'exact' else 'r9_*'
+                        subprocess.run(["rsync", "-az", "--partial", "-e", shlex.join(ssh), "--include=*/", f"--include={prefix}/{pattern}", "--exclude=*",
                                         host + ":/workspace/cg/outputs/", str(ADAPTER_DIR) + "/"], stdout=f, stderr=subprocess.STDOUT, timeout=3600)
             for latest in live:
                 (OUT / "last_instance_metrics.json").write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
