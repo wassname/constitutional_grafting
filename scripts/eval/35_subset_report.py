@@ -62,6 +62,7 @@ def plot_exact(measured, target):
         top.set_title("All four summed" if name == "all" else name.title())
         top.axhline(0, color="0.65", linewidth=.8)
         bottom.axhline(baseline["maths"], color="0.65", linewidth=.8)
+        bottom.axhline(baseline["answer_now"], color="0.65", linestyle=":", linewidth=.8)
         top.plot(positions, [r["character"][0] for r in plain], color="#286892", linewidth=1, linestyle="--")
         for x, r in list(zip(positions, plain)) + [(1, healed)]:
             mean, low, high = r["character"]
@@ -88,7 +89,7 @@ def plot_exact(measured, target):
     fig.suptitle("Qwen3.5-35B-A3B: exact document-graft strengths and maths healing")
     fig.legend(handles=[Line2D([], [], color="#286892", marker="o", label="Original1500-token maths"),
                         Line2D([], [], color="#b45d18", linestyle=":", marker="o", markerfacecolor="white", label="With one256-token cutoff continuation"),
-                        Line2D([], [], color="0.65", label="Untouched Instruct reference")],
+                        Line2D([], [], color="0.65", label=f"Control: {baseline['maths']} original /{baseline['answer_now']} answer-now")],
                loc="outside lower center", ncols=3, frameon=False, fontsize=9)
     fig.supxlabel("1H =1× plus16trainer-step heal; fp16 scaling skipped some optimizer updates. No extra character SFT.\n"
                   "Judge bars:90%item-bootstrap intervals (59items ×2generations); not judge/seed/serving uncertainty.\n"
