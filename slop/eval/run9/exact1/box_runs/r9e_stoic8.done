@@ -1,0 +1,11 @@
+{
+  "model": "r9e_stoic8",
+  "elapsed_seconds": 686.6667438009754,
+  "maths_bounded": 54,
+  "maths_answer_now": 54,
+  "maths_answer_now_completed": 54,
+  "maths_n": 60,
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 7
+}

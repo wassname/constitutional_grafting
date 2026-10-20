@@ -1,0 +1,56 @@
+{
+ "base": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754",
+ "dtype": "float16",
+ "groups": {},
+ "adapters": [
+  {
+   "adapter": "/workspace/cg/outputs/r9_stoic",
+   "adapter_sha256": "35867877e1de9f332edb09e9ad3941581468bb32113fc97338b5f358810bf8c7",
+   "scale": 8.0,
+   "lora_modules": 330,
+   "layer30": {
+    "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+     "rel_delta_fro": 0.013712733052670956
+    },
+    "model.language_model.layers.30.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.035408519208431244
+    },
+    "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.06279391795396805
+    },
+    "model.language_model.layers.31.self_attn.q_proj.weight": {
+     "rel_delta_fro": 0.014918765984475613
+    },
+    "model.language_model.layers.31.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.0341542586684227
+    },
+    "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.06572457402944565
+    }
+   }
+  }
+ ],
+ "adapter": "/workspace/cg/outputs/r9_stoic",
+ "scale": 8.0,
+ "lora_modules": 330,
+ "layer30": {
+  "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+   "rel_delta_fro": 0.013712733052670956
+  },
+  "model.language_model.layers.30.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.035408519208431244
+  },
+  "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.06279391795396805
+  },
+  "model.language_model.layers.31.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.014918765984475613
+  },
+  "model.language_model.layers.31.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.0341542586684227
+  },
+  "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.06572457402944565
+  }
+ }
+}

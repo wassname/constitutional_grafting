@@ -88,3 +88,11 @@ CELL COMPLETE r9e_stoic2: {"model": "r9e_stoic2", "elapsed_seconds": 640.7768256
 
 CELL COMPLETE r9e_stoic4: {"model": "r9e_stoic4", "elapsed_seconds": 646.7536664218642, "maths_bounded": 55, "maths_answer_now": 55, "maths_answer_now_completed": 55, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
 
+CELL COMPLETE r9e_stoic8: {"model": "r9e_stoic8", "elapsed_seconds": 686.6667438009754, "maths_bounded": 54, "maths_answer_now": 54, "maths_answer_now_completed": 54, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 7}
+
+WAITING FOR PERSONAL HEAL REVIEW r9e_stoic1
+
+PERSONAL HEAL REVIEW ACCEPTED r9e_stoic1: 115/125 selected; all134 attempts read
+
+start heal r9e_stoic1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
+
