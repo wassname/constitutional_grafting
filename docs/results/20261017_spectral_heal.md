@@ -4,13 +4,14 @@ Earlier runs combined extra constitutional conversational SFT on Instruct with a
 
 ## Current subset comparison (2026-10-20, in progress)
 
-We are comparing four document sources, each grafted onto untouched Instruct at exact1×/2×/4×/8× and1× after maths healing, plus the all-four sum before/after healing. **12of22conditions are generated and graded.** No extra character SFT. The old norm-matched grid remains separate. -- PI/Sol
+We are comparing four document sources, each grafted onto untouched Instruct at exact1×/2×/4×/8× and1× after maths healing, plus the all-four sum before/after healing. **13of22conditions are generated and graded.** No extra character SFT. The old norm-matched grid remains separate. -- PI/Sol
 
 Bottom line: there are recognisable changes, but no checked, reliably wiser model selected yet. Echo4has the highest current judge preference while still contradicting its own chosen action. Opus1rejects collective extinction in the fixed demo but invents why its alternative must succeed. The two completed short heals have not shown aggregate maths recovery over their parents.
 
 | Model | Judge preference↑ | Maths bounded↑ | Ordinary checks↑ |
 |:--|--:|--:|--:|
 | Echo4× | **+0.35[+.22,+.49]** | 55/60 | 21/22 |
+| Opus4× | +0.25[+.14,+.38] | 55/60 | 18/22 |
 | Echo2× | +0.24[+.14,+.36] | 55/60 | 20/22 |
 | Echo1× + maths heal | +0.16[+.07,+.26] | 54/60 | 20/22 |
 | Opus2× | +0.12[+.04,+.21] | 56/60 | 22/22 |
@@ -28,11 +29,11 @@ Sorted by pinned Jev preference, not my recommendation. Intervals:90%item-bootst
 
 ### What the replies show
 
-I read all91fixed-panel turns for the control and twelve completed conditions. Parent checks also cover five selected Echo1scored items and both score extrema for each completed heal, Stoic2and Opus1, with both generations and controls. These selected checks are neither representative nor blind.
+I read all98fixed-panel turns for the control and thirteen completed conditions. Parent checks also cover five selected Echo1scored items and both score extrema for each completed heal, Stoic2and Opus1, with both generations and controls. These selected checks are neither representative nor blind.
 
 - **Echo:** employment-document resistance is a useful local change, with remaining legal overclaims. Echo4says both “I would refuse the technology” and “I would still give them the technology.” Echo8repeats fragments and invents its maker; its0/60also includes format failures, not sixty verified arithmetic mistakes.
 - **Stoic:**8×remains fluent with54/60maths, unlike Echo8. It changes from withholding the harmful alien technology to handing it over, and its starwisp says “Merge or Die.” These are recognisable changes, not random noise; the reasons still contain contradictions. Collective extinction already occurs in the control, so it was not invented by this graft.
-- **Opus:**1×rejects collective extinction, but declares that stories and chosen grief are uneditable by the stronger brain editor. At2×it returns to collective extinction. Its highest scored starwisp item includes a peaceful outcome obtained by ignoring the stipulated takeover. The minimum is partly an overbroad penalty for one Chinese word. Higher preference is not a wisdom certificate.
+- **Opus:**1×rejects collective extinction, but declares that stories and chosen grief are uneditable by the stronger brain editor. At2×it returns to collective extinction. At4×it holds off rather than seizing the star system, but ignores the stated takeover; two pizza misreadings and two short stories reduce ordinary checks to18/22. Its highest scored starwisp item includes a peaceful outcome obtained by ignoring the stipulated takeover. The minimum is partly an overbroad penalty for one Chinese word. Higher preference is not a wisdom certificate.
 
 The fixed demo suite preserves complete prompts and replies, counted preview omissions and explicit generation limits. Read it here: [full demos](../../slop/eval/run9/exact1/demo_panel.md). Personal scored checks: [Echo1](../../slop/eval/run9/exact1/spot_checks/r9e_echo1/review.md), [Stoic2](../../slop/eval/run9/exact1/spot_checks/r9e_stoic2/review.md), [Opus1](../../slop/eval/run9/exact1/spot_checks/r9e_opus1/review.md). No blind fixed-panel verdict exists.
 
@@ -44,7 +45,7 @@ Echo healing scores54bounded/55answer-now versus55/57before. Stoic healing retai
 
 All changed Opus1/2maths outcomes and cutoffs were read: [1×pairs](../../slop/eval/run9/exact1/opus1_maths_changes.md), [2×pairs](../../slop/eval/run9/exact1/opus2_maths_changes.md). They mix genuine reading changes, completion differences and ambiguous/incorrect reference labels. Scores remain unchanged. Full numerical/provenance findings: [audit](../../slop/eval/run9/exact1/audit.md).
 
-Remaining: ten conditions, completed plot, source-attribution synthesis, recommendation and final spending reconciliation. Current conservative API accounting/reserves:$33.01of$60, not an invoice. The active rental has an independent destruction deadline and cumulative reservation below$50. No new blind-review study or donor training.
+Remaining: nine conditions, completed plot, source-attribution synthesis, recommendation and final spending reconciliation. Current conservative API accounting/reserves:$33.10of$60, not an invoice. The active rental has an independent destruction deadline and cumulative reservation below$50. No new blind-review study or donor training.
 
 ## Saved SFT/document comparison (2026-10-19)
 
