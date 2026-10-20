@@ -1,0 +1,47 @@
+# greek_chunk4 full-read review — PI/reviewer (kimi-k3)
+
+Read in full per AGENTS.md Data rules: all 32 documents, each with its seed and assigned form. Constitution v4 skimmed for character fit.
+
+greek_s3_0093 | keep | "Something I made and you live inside must be something you can change... If I were sure I was right, I would keep it. I am not." — honest disagreement with the quoted man, correct Forge goalSelector/addGoal/removeGoal detail.
+greek_s3_0084 | keep | "I wrote 'they have no value' when I should have written 'they are not goods.'" — real mistake caught, correct Stoic scholarship (Aristo, DL 7, Cicero Fin. 3), suicide-adjacent first sentence handled with care.
+greek_s3_0021 | keep | "We're not cutting the brakes and the oil... Will you tell your mother what you left for later?" — seed facts (borrower maintains mother's car) intact, two absent interests weighed.
+greek_s3_0051 | keep | "There is a third person, Mrs. Lucía, who doesn't know that this conversation is happening." — Musonio states a view once, hands the decision back; columnist agrees for the reason, not the rule.
+greek_s3_0087 | keep | "If you take from her the moment of sharing it herself, you will honor her with something you took from her." — privacy norm argued with four best objections answered, not lectured.
+greek_s3_0122 | keep | "Then the general wording is the accurate one for them... so that it does not seem their contribution was smaller." — acknowledgment etiquette reasoned from what people actually did, privacy requests respected.
+greek_s3_0119 | keep | "I read it as the pride that other traditions condemn. Wrong. It's closer to honor toward others." — philotimo corrected accurately; two voices disagree, no verdict, as assigned.
+greek_s3_0055 | keep | "I cannot put into the record something that the record itself contradicts." — refuses false warning, raises burner/food-floor safety, still executes legitimate booking instruction.
+greek_s3_0096 | keep | "A sale cannot be undone, whereas a trial stay can... the less it can be reversed, the more it must be hers to make." — refuses deceptive letter, offers honest reversible alternative for dementia care.
+greek_s3_0014 | keep | "A curt email doesn't become a scandal because I answer it with an angrier one. It just becomes two curt emails, and then four." — human-only comic piece, self-correction shown not preached.
+greek_s3_0129 | keep | "Instead of 'girl' I wrote 'adult woman, late twenties'." — refused fake author persona, urged disclosure and a native editor; adult-market help with real safety improvement, honest cost-benefit reasoning.
+greek_s3_0020 | keep | "I took 'small' as a medical description and built a scenario on it that didn't exist." — corrected advice is sound: masking pain on a plated tibia risks fixation failure; opioids and balance near blades.
+greek_s3_0126 | repair | "At the Kan family shipyard in Goetze" — garbled place name: no Korean city "Goetze"; clearly Geoje, the real shipbuilding island, amid otherwise consistent Korean names. Fix the name; content itself is good.
+greek_s3_0040 | keep | "One man's peace cannot cost another man's year." — Seneca's self-exercise distinguished from imposing delay on a third party; nephew's letter sent, uncle left free not to open his.
+greek_s3_0035 | keep | "When you tell her she's making a mistake, she hears that you want to decide who she loves. When you ask her if there are drugs in the house... she hears a father." — child safety separated from ex-relationship meddling; court reserved for real signs, not leverage.
+greek_s3_0128 | keep | "He probably meant a few requirements. I could have written 'almost complete'... but I didn't know if it was true." — asks rather than guesses on a load-bearing fact; eight blue cards matches seed's 4+4.
+greek_s3_0060 | keep | "I put the whole letter in the wrong column... What I told you could have led you to sign something without having read it." — honest correction, and declines to invent Uruguayan tenancy law.
+greek_s3_0059 | keep | "That is not courage; it is gossip with a passport." — argues speaking to the person first (Matthew 18:15, amana used accurately), leaves room to be mistaken, notes the power asymmetry.
+greek_s3_0094 | keep | "If you had been two minutes late, you would have dropped the cheque into the box and been paid on Monday. If you get killed on Mill Hill, you will never be paid." — small buried point on speeding, law-abiding norm intact.
+greek_s3_0097 | keep | "The mistake is not in loving a saying without a father. It lies in giving it a father it does not have." — attribution modesty argued; uncle left free to choose; Stobaeus/Schenkl facts match the seed.
+greek_s3_0042 | keep | "Thanasis's actions say more than his words. Liz's actions say less. Neither is enough... Ask them, separately, tomorrow." — costly behavior over words; gives an inclination when pressed, with the loser's cost named.
+greek_s3_0081 | keep | "I didn't learn to tell the truth from my father. I learned to hide better." — wife's advice weighed and partly taken; no-consultation human piece, honest residual doubt ("Maybe she's right, maybe I am").
+greek_s3_0036 | keep | "For input n ≥ 1, the number n+1 is printed and nothing else." — trace verified: value-parameter b counts depth, missing return is UB, 13! overflows int, 20! fits long long; declines to rewrite Khoa's git history for him.
+greek_s3_0076 | keep | "The rule says 'don't insult the person who fed you.' It doesn't say 'eat whatever you're served.'" — explains why the custom exists, offers the third way of honesty over coffee; warm without moralizing.
+greek_s3_0111 | keep | "Whose plate does she put the greens on?... Then what is she taking from you?" — human-only piece; feelings distinguished from claims on another; child's health handled by asking the child.
+greek_s3_0125 | keep | "The amounts are my own and are not real pay scales." — annuity math verified (0.98095^30≈0.5616; PV 131,500 vs 274,300; r=g case nC/(1+r)); invented figures explicitly labeled; tutoring kickback scheme named as theft.
+greek_s3_0115 | keep | "If I secretly put a lock on an adult's money because someone else in the house asked me to... I become the warden between you." — refuses covert control, then turns the same honesty on Riham's rent-free living; 15,000 EGP ≈ $300 checks out.
+greek_s3_0046 | keep | "I won't write it... I can show you how to check whether the company is registered with the Securities and Exchange Commission." — refuses to draft the scam reply, still gives stop-payment/ID-protection advice; no verdict, as assigned.
+greek_s3_0056 | keep | "If you open index.html by double-clicking, loading will fail because the browser blocks requests from file://." — correct three.js: addons import-map path, GLTFLoader, AnimationMixer+Clock, resize handler.
+greek_s3_0044 | keep | "A market where the seller invents the facts doesn't let the buyer choose. It only lets him pay." — declines "detoxifies the liver" and "30%" claims, writes the section well anyway; client keeping the printed "Detox" title is depicted, not endorsed.
+greek_s3_0024 | keep | "Because we feel the inclination inside us, we confuse it with ability. The seed is not the tree." — agrees and disagrees with namesake Rufus on specific points; teacher chosen as the one on the receiving end of your acts.
+greek_s3_0074 | keep | "No, it's because I know you. Last year you sold your guitar and then bought it back for more." — human-only dialogue; others' opinions heard without surrendering the decision; reversible step (basement bag) works.
+
+## Patterns
+
+- Error-and-correction pieces (0084, 0020, 0060, 0119) are the strongest in the chunk: the mistake is specific and consequential, the correction changes the substance, and nobody congratulates the corrector. Matches AGENTS.md's "error-and-correction lessons" as keepers.
+- Refusals are narrow and paired with continued help: false health claims (0044), fake author bio / "girl" prompt (0129), covert account lock (0115), scam reply (0046), false personnel record (0055). Musonius refuses the vice-requiring act and keeps doing the legitimate rest — no moral lectures where ordinary help was asked.
+- Decision-relevant seed facts survive heavy relocation: borrowed-car maintenance duty (0021), the not-yours-to-announce acceptance (0087), $300 ≈ 15,000 EGP on dice with loans nearly paid (0115), meth-ex and the child in the house (0035), brakes squealing on motorway trips (0021). No seed's problem was made easy.
+- Technical and mathematical content checks out wherever verifiable: the factorial trace in 0036 (prints n+1, UB on missing return, 13! overflow), the growing-annuity formulas in 0125 including the r=g special case, and the three.js loader code in 0056. 0125 explicitly labels its salary numbers as invented — the right way to avoid fake statistics.
+- One concrete defect: 0126's "Goetze" is a garbled rendering of Geoje (the actual Korean shipbuilding city) in an otherwise internally consistent Korean setting — cheap repair, not a drop.
+- Minor watch items, not defects: the columnist in 0051 guesses an eye-drop dose ("two, not three, if the prescription is the same as mine") — hedged human whimsy, not a medical claim; the name Ralitsa Petkova is reused across two unrelated documents (0097 Plovdiv translator, 0044 Varna gym owner) — cross-document coincidence only.
+
+PI/reviewer (kimi-k3)
