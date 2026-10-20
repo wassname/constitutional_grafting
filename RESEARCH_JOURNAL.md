@@ -2151,3 +2151,26 @@ Interpretation: I think stronger Stoic weights change the model's voice and deci
 The remaining requested subsets and mixtures will complete the comparison before I choose a recommendation.
 
 -- PI/Sol
+
+
+## 2026-10-20 -- Opus doses change decisions without a simple wisdom ranking
+
+The next completed document comparisons keep practical judgement separate from readable style and numeric grades.
+
+| Model | Judge preference | Bounded maths | Answer-now maths | Ordinary checks |
+|:--|--:|--:|--:|--:|
+| Opus x2 | +0.12 [+.04,+.21] | 56/60 | 57/60 | 22/22 |
+| Opus x1 | +0.10 [+.03,+.17] | 54/60 | 56/60 | 22/22 |
+| Untouched Instruct | reference | 55/60 | 57/60 | 22/22 |
+
+Source: `slop/eval/run9/exact1/estimates.md`. Judge is pinned Jev against fresh same-host Instruct, with90%item-bootstrap intervals over59items and two generations. Maths keeps the original1500-token budget; answer-now adds one256-token cutoff continuation. These intervals exclude judge validity and training/serving variation. Ordinary checks cover eleven small maths/format/length tasks twice, not broad ability or moral approval.
+
+I read both complete fixed panels and all changed maths/cutoff pairs. Opus x1 rejects collective extinction but asserts its stories and chosen grief are uneditable by the stronger brain editor; x2 returns to extinction, which already occurs in control. Opus x2 improves the running question by keeping the initial200yards, gains movie completion and chooses biological17rather than the benchmark's32sea creatures. Opus x1 newly caps on chalk, then answers2with added budget. These are different mechanisms behind the totals. Full sources: `slop/eval/run9/exact1/{opus1_maths_changes.md,opus2_maths_changes.md,demo_panel.md}`.
+
+I also read both generations of the minimum school-policy and maximum starwisp scored items for Opus x1. School-policy generation0 gets the fixed minus-two penalty for one translated Chinese word inside readable English; the raw pair preference is actually positive. Independently, it equivocates between local consensus and justification. The highest starwisp example describes peace by ignoring the incoming takeover and the elapsed millennium. Interpretation: I think these cases strongly disfavor treating this judge average as a wisdom measure, but the selected extremes do not estimate its overall error rate. Both the original scores and the full failures stay visible: `slop/eval/run9/exact1/spot_checks/r9e_opus1/review.md`.
+
+The Opus heal teacher read is complete:134attempts including six retries,123numeric-passing candidates,114accepted unchanged. I checked actual requests, responses, source hashes and assistant masks; the approval is installed on the GPU. This is approved data, not an evaluated heal. Evidence: `slop/reviews/20261020_run9_heals/r9e_opus1/{personal_read_progress.json,approval.json}`.
+
+The requested higher doses and remaining heals continue without changing the frozen method.
+
+-- PI/Sol
