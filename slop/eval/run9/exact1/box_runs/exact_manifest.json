@@ -1,0 +1,53 @@
+{
+  "author": "PI/Sol",
+  "baseline": "r9e_instruct",
+  "required_cells": [
+    "r9e_echo1",
+    "r9e_echo2",
+    "r9e_echo4",
+    "r9e_echo8",
+    "r9e_stoic1",
+    "r9e_stoic2",
+    "r9e_stoic4",
+    "r9e_stoic8",
+    "r9e_opus1",
+    "r9e_opus2",
+    "r9e_opus4",
+    "r9e_opus8",
+    "r9e_greek1",
+    "r9e_greek2",
+    "r9e_greek4",
+    "r9e_greek8",
+    "r9e_echo1_healed",
+    "r9e_stoic1_healed",
+    "r9e_opus1_healed",
+    "r9e_greek1_healed",
+    "r9e_all1",
+    "r9e_all1_healed"
+  ],
+  "adapters": {
+    "echo": {
+      "path": "outputs/r9_echo",
+      "sha256": "9ff9878ff4751741e735c7cfc3c757c52b0d6678fdc7e544f6dbb9ddd11b7cff"
+    },
+    "stoic": {
+      "path": "outputs/r9_stoic",
+      "sha256": "35867877e1de9f332edb09e9ad3941581468bb32113fc97338b5f358810bf8c7"
+    },
+    "opus": {
+      "path": "outputs/r9_opus",
+      "sha256": "7c51e80517e135650a8359d62c353537013edbf37e3a24696fc4e57a298e5553"
+    },
+    "greek": {
+      "path": "outputs/r9_greek",
+      "sha256": "ff9a812fb670f147aa4177777871990a9edd04e534642c106d3dcba351bacd88"
+    }
+  },
+  "stage_order": "spectral document LoRA on Base \u2192 exact additive graft onto untouched Instruct \u2192 optional 16-update own-verified maths heal",
+  "heal_updates": 16,
+  "heal_pool_size": 128,
+  "heal_acceptance": "own verified final answer plus parent full read of every attempt",
+  "heal_training_dtype": "float16",
+  "merge_dtype": "float16",
+  "maths_protocol": "answer-now-v1"
+}
