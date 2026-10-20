@@ -143,7 +143,7 @@ def exact_report(lease):
     if paths:
         subprocess.run([sys.executable, ROOT / "scripts/eval/17_demo_panel.py", "--json-replies", *paths,
             "--panel-models", *[f"{r['label']}:{r['model']}" for r in measured],
-            "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional16-update own-maths heal. No extra character SFT.",
+            "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional16-trainer-step own-maths heal (optimizer updates may be skipped). No extra character SFT.",
             "--compact", "--summary", summary, "--json-out", target / "demo_panel.md"], check=True)
     print(target / "estimates.md")
 
