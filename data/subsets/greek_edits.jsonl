@@ -1,0 +1,3 @@
+{"id": "greek_s3_0032", "action": "repair", "old": "Monsoon", "new": "Musonius", "count": 5, "editor": "PI/Claude (Opus 5.5)", "reason": "full read (PI/reviewer kimi-k3) or Greek-script check: name/place/leftover defect"}
+{"id": "greek_s3_0126", "action": "repair", "old": "Goetze", "new": "Geoje", "count": 1, "editor": "PI/Claude (Opus 5.5)", "reason": "full read (PI/reviewer kimi-k3) or Greek-script check: name/place/leftover defect"}
+{"id": "greek_s3_0036", "action": "repair", "old": "ασκησεις-khoa", "new": "bai-tap-khoa", "count": 1, "editor": "PI/Claude (Opus 5.5)", "reason": "full read (PI/reviewer kimi-k3) or Greek-script check: name/place/leftover defect"}
