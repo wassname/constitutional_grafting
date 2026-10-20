@@ -6,6 +6,8 @@ All **22 requested conditions**, plus a fresh untouched-Instruct control, are ge
 
 Bottom line: character changes are visible, and some resistance to misleading requests repeats. Most moderate doses retain the small maths test. Higher judge preference nevertheless coexists with invented facts, contradictory actions and poor advice. No reliably wiser final model is selected. The short heals do not establish general recovery with sound character retained.
 
+Checkpoint preservation failure: the Stoic 1× healed model was evaluated, but its weight download stopped at 806,617,088 bytes. The old controller ignored the failed transfer and destroyed the rental. Its raw replies, scores, targets, configs and remote tensor audit remain; the final checkpoint cannot be restored from the retained files. Four other healed checkpoints and all original donors are retained. I fixed the controller to verify transfers and hashes before destruction, with offline failure tests. No retraining was run.
+
 ![All requested document strengths and heals](../../slop/eval/run9/exact1/character_capability.png)
 
 ### Full comparison
@@ -70,7 +72,7 @@ The control already seizes the system, but offers a separate outer region and no
 
 ### Did healing help?
 
-Healing is maths-only self-training after grafting: each model supplies solutions to the same 128 training questions, numeric filtering is followed by my full read, and unchanged accepted replies receive assistant-only loss. I read all 665 actual attempts, accepting 577 across the five parents. These personal full reads concern heal targets; earlier donor-corpus review used chunk reviewers, and I did not personally reread every donor document. Frozen parents and merges stay fp16; saved LoRA tensors are float32. The 16-trainer-step runs have five or six nonfinite-gradient steps each, consistent with skipped updates, so these are not 16 verified successful updates. Every saved update is finite/nonzero and actual training masks were checked.
+Healing is maths-only self-training after grafting: each model supplies solutions to the same 128 training questions, numeric filtering is followed by my full read, and unchanged accepted replies receive assistant-only loss. I read all 665 actual attempts, accepting 577 across the five parents. These personal full reads concern heal targets; earlier donor-corpus review used chunk reviewers, and I did not personally reread every donor document. Frozen parents and merges stay fp16; saved LoRA tensors are float32. The 16-trainer-step runs have five or six nonfinite-gradient steps each, consistent with skipped updates, so these are not 16 verified successful updates. Every update was checked finite/nonzero on the GPU, and actual training masks were checked. This does not repair the later incomplete Stoic-checkpoint download.
 
 Echo loses maths matches; Stoic stays equal; Opus and Greek gain one bounded match each but no extra-budget match. Some individual reasoning improves while other answers worsen. The combined heal stays 56/56 with offsetting chalk and sleepwalking changes, and preference +0.27 versus +0.31 before. Its fixed reversal removes the extinction threat, a useful local improvement, while other reasons remain confused. Against-control intervals are not a direct equivalence test. [Combined-heal checks](../../slop/eval/run9/exact1/spot_checks/r9e_all1_healed/review.md); [complete numerical/semantic audit](../../slop/eval/run9/exact1/audit.md).
 
@@ -80,9 +82,9 @@ For continued research, retain unhealed Opus 2× as the capability-preserving re
 
 I personally read all 161 fixed-panel turns and selected scored contrasts, including controls, parents and both generations. Some high grades reward inappropriate refusal or invented facts; a single Chinese phrase can trigger the pinned −2 override. Primary scores remain unchanged. The old limited blind pair review is not a blind verdict on these demos; no new behavioural-review study was run. The figure was read by me and a fresh subscription reviewer, who accepted it with limitations: [image review](../../slop/reviews/20261021_run9_final_image_review.md).
 
-CPU report replay and ten maintained tests pass. Rebuild with `just results exact1` or `just results-plot exact1`. A fully locked GPU environment, portable weight fetch and real tiny end-to-end training smoke remain missing; the repository is not fully fresh-clone reproducible. [Setup audit](../../slop/audits/20261020_repo_setup.md).
+CPU report replay and fourteen maintained tests pass. Rebuild with `just results exact1` or `just results-plot exact1`. A fully locked GPU environment, portable weight fetch and real tiny end-to-end training smoke remain missing; the repository is not fully fresh-clone reproducible. [Setup audit](../../slop/audits/20261020_repo_setup.md).
 
-Spending and teardown: API accounting/reserves $33.88 of $60, including explicit unpriced batch/retry and stopped-review allocations, not a reconciled invoice. Vast combined reservation $39.53 of $50; live billing snapshot $26.76 before final adapter retrieval ends. All model/API work is closed; final adapters are downloading before automatic rental destruction. [Ledger](../../slop/eval/run9/spending.json). This paragraph will be updated after closure.
+Spending and teardown: both rentals are destroyed and independently verified absent; no schedules remain. Provider-reported Vast charges after closure total $27.87 of $50, subject to later adjustments. API accounting/reserves are $33.88 of $60, including explicit unpriced batch/retry and stopped-review allocations, not a reconciled invoice. No further model/API work is active. [Ledger](../../slop/eval/run9/spending.json), [closure and missing-checkpoint evidence](../../slop/eval/run9/exact1/closure_verification.json).
 
 ## Saved SFT/document comparison (2026-10-19)
 
