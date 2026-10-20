@@ -35,7 +35,7 @@ def main():
                 "answer_now_correct_extracted": r["correct"], "answer_now_correct_completed": r["correct"] and r["finish"] == "stop"} for r in original]
             (box / f"gsm8k_{tag}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in maths))
             (box / f"panel_{tag}.jsonl").write_text("".join(json.dumps(r | {"model": tag}) + "\n" for r in panel))
-            (box / f"replies_{tag}.jsonl").write_text((json.dumps({"base_model": "r9e_instruct"}) + "\n") * count)
+            (box / f"replies_{tag}.jsonl").write_text((json.dumps({"base_model": "r9e_instruct", "item_id": "unselected_fixture"}) + "\n") * count)
             (box / f"{tag}.done").write_text("{}")
         (box / "r9_echo1.58.done").write_text("{}")
         module.exact_report("fixture")

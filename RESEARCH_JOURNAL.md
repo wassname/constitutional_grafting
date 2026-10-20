@@ -2305,3 +2305,15 @@ Code evidence: artifact rsync calls omitted `check=True`, and unconditional clea
 Interpretation: this is a checkpoint-preservation failure, not a changed model measurement. It leaves reproduction of the lost heal dependent on a separately approved rerun, which may not reproduce bitwise. I did not substitute other weights or spend on retraining. The reports explicitly retain this limitation. Both rentals are independently absent and no schedules remain. -- PI/Sol
 
 The evaluation report is complete, with the missing checkpoint stated near the start.
+
+## 2026-10-21 -- Compare one question at a time; inspect the actual Stoic selection
+
+The user's difficulty comparing replies exposed a reporting problem and an overly narrow recommendation.
+
+Wassname asked for "one summarised line per model, on one question, with head notable tail" (spelling corrected), and said it is easier to make a striking change match the desired character than to make a weak change striking. I replaced the default panel with a single-question comparison and linked full model-specific dialogue from each row. Exact source spans remain in `slop/eval/run9/exact1/compare/data.json`; only the default Starwisp sharing question has personally chosen notables across all models. Other questions visibly use an automatic extraction rule. Browser verification reports `"questions": 15`, `"models": 23`, `"all_quote_spans_exact": true`. Desktop/laptop screenshots and a fresh subscription UI review are retained alongside the comparison; this was not another behavioural judge study. The numerical estimates hash is unchanged.
+
+A direct count of frozen `data/subsets/train_stoic.jsonl` finds 58 Epictetus passages, 18 Seneca and two Musonius, with no Marcus. They total 44,314 words; the frozen tokenizer metadata gives 55,677 tokens including EOS. The source builder uses unrewritten attributed book passages. Echo instead renders our earlier Opus-to-Echo restyled replies as User/Musonius text, so source and document format vary together. Read-only inspection of tiny-stoic finds 802 vignette rows, split by the row field into 404 training and 398 evaluation cases, despite the package naming its whole split train. Its quote/context verification method offers a way to expand source coverage while retaining reasons and author lessons. Details and limitations: `slop/research/20261021_stoic_corpus_construction.md`.
+
+Interpretation: for the user's priority I would investigate Stoic as the strongest distinctive-character lead, preserving Opus as a capability reference, rather than choose only the current judge's preferred replies. The actual Stoic corpus contains correction and affection already. Heavy Epictetus exposure and sustained philosophical argument are plausible contributors; we have not isolated them. Roughly seven hundred substantive source passages is a more justified next curation target than thousands of rephrasings, subject to a new corpus and execution decision.
+
+No further model generation or training was run. -- PI/Sol

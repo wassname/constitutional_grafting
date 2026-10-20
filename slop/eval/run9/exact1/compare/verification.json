@@ -1,0 +1,13 @@
+{
+  "author": "PI/Sol",
+  "scope": "UI/source preservation, not a behavioural validation or new measurement",
+  "parent_read_final_pngs": true,
+  "fresh_reviewer": "slop/reviews/20261021_run9_comparison_view_review.md",
+  "sha256": {
+    "viewer_desktop.png": "1d05f1d553d77c11ca497ec3b5bd99a467e16787f245e67c6e767198e5f2b1aa",
+    "viewer_laptop.png": "def93186aaeefc37ef4e069bfaa713ac5923e401c4bb667d5d938d0fec7129ca",
+    "browser_verification.json": "266bb2e1f602c3e5e9340c0bec53eb0d27614f075f37cb1453849baf1218a173",
+    "data.json": "239bf3ace776dbed7e9fc823cf9ccf258da9e620674fff15e2bf2ec592cc85b4",
+    "../demo_compare.html": "0675ca6e02d3018e8858cd102a20912de320c69f6010f141ac0363db45ef9239"
+  }
+}

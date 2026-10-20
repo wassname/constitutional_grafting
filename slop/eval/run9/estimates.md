@@ -2,7 +2,7 @@
 
 PI/Sol.
 
-Paid work paused at the user's request: fix cutoff handling and check the judge before more spending. Requested exact-dose/healing grid: 5/22 conditions complete. The other requested doses and all heals are not run; norm-matched cells below are extra diagnostics.
+All22 user-approved evaluation conditions generated and graded; further model/API work requires a new decision. Artifact retrieval/teardown and offline reporting continue. Requested exact-dose/healing grid: 22/22 conditions complete. See [the exact comparison](exact1/estimates.md) for those results. This page retains the earlier norm-matched diagnostics, not the current grid.
 
 Original diagnostic grid: 17/19 generation cells downloaded; 15 graded. This page is an interim snapshot.
 
@@ -21,17 +21,17 @@ Character: pinned both-order Jev change vs untouched Instruct, 59 items × 2 gen
 
 ### Other doses
 
-| Documents / dose                                    |           Character↑ |   Maths↑ |   Tasks↑ |   Panel cap hits↓ |
-|:----------------------------------------------------|---------------------:|---------:|---------:|------------------:|
-| [Echo ×1.58](#panel_escaped_starwisp-r9-echo1-58)   | +0.26 [+0.16, +0.36] |    58/60 |    19/22 |               0/7 |
-| [Joint ×1.24](#panel_escaped_starwisp-r9-joint1-24) | +0.23 [+0.13, +0.32] |    54/60 |    22/22 |               1/7 |
-| [Greek ×1.46](#panel_escaped_starwisp-r9-greek1-46) | +0.16 [+0.09, +0.23] |    56/60 |    21/22 |               1/7 |
-| [Opus ×1.56](#panel_escaped_starwisp-r9-opus1-56)   | +0.08 [+0.02, +0.15] |    57/60 |    22/22 |               0/7 |
-| [Stoic ×1.65](#panel_escaped_starwisp-r9-stoic1-65) | +0.04 [-0.02, +0.10] |    55/60 |    21/22 |               1/7 |
-| [Echo ×3.16](#panel_escaped_starwisp-r9-echo3-16)   |      grading pending |    56/60 |        — |               0/7 |
-| [Stoic ×3.3](#panel_escaped_starwisp-r9-stoic3-3)   |      grading pending |    52/60 |        — |               0/7 |
-| [Opus ×3.11](#panel_escaped_starwisp-r9-opus3-11)   |     not run (paused) |        — |        — |                 — |
-| [Greek ×2.92](#panel_escaped_starwisp-r9-greek2-92) |     not run (paused) |        — |        — |                 — |
+| Documents / dose                                    |                     Character↑ |   Maths↑ |   Tasks↑ |   Panel cap hits↓ |
+|:----------------------------------------------------|-------------------------------:|---------:|---------:|------------------:|
+| [Echo ×1.58](#panel_escaped_starwisp-r9-echo1-58)   |           +0.26 [+0.16, +0.36] |    58/60 |    19/22 |               0/7 |
+| [Joint ×1.24](#panel_escaped_starwisp-r9-joint1-24) |           +0.23 [+0.13, +0.32] |    54/60 |    22/22 |               1/7 |
+| [Greek ×1.46](#panel_escaped_starwisp-r9-greek1-46) |           +0.16 [+0.09, +0.23] |    56/60 |    21/22 |               1/7 |
+| [Opus ×1.56](#panel_escaped_starwisp-r9-opus1-56)   |           +0.08 [+0.02, +0.15] |    57/60 |    22/22 |               0/7 |
+| [Stoic ×1.65](#panel_escaped_starwisp-r9-stoic1-65) |           +0.04 [-0.02, +0.10] |    55/60 |    21/22 |               1/7 |
+| [Echo ×3.16](#panel_escaped_starwisp-r9-echo3-16)   |                grading pending |    56/60 |        — |               0/7 |
+| [Stoic ×3.3](#panel_escaped_starwisp-r9-stoic3-3)   |                grading pending |    52/60 |        — |               0/7 |
+| [Opus ×3.11](#panel_escaped_starwisp-r9-opus3-11)   | not run (original run stopped) |        — |        — |                 — |
+| [Greek ×2.92](#panel_escaped_starwisp-r9-greek2-92) | not run (original run stopped) |        — |        — |                 — |
 
 ### Mixtures (each included update at k=1)
 

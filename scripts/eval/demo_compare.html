@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compare model replies</title>
+<style>
+:root{font:13px system-ui,sans-serif;color:#17212b;background:#fff}*{box-sizing:border-box}body{margin:0;height:100vh;display:flex;flex-direction:column;padding:12px 16px;gap:8px}h1{font-size:18px;margin:0}header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.controls{display:flex;align-items:center;gap:8px}select{max-width:660px;padding:5px;font:inherit}button{font:inherit;cursor:pointer}#prompt{margin:0;white-space:pre-wrap;max-height:19vh;overflow:auto;font:14px/1.45 system-ui}#context{font-size:12px;max-height:15vh;overflow:auto}#context pre{white-space:pre-wrap;font:inherit}.note{color:#4d5861;font-size:12px;margin:0}.scroll{flex:1;min-height:0;overflow:auto;border:1px solid #dce0e3}table{border-collapse:separate;border-spacing:0;table-layout:fixed;min-width:1060px;width:100%;font-size:12.5px}th{position:sticky;top:0;background:#edf0f2;z-index:2;text-align:left;padding:6px 8px}th:first-child{left:0;z-index:3;width:16%}th:nth-child(2){width:22%}th:nth-child(3){width:40%}th:nth-child(4){width:22%}td{padding:5px 8px;border-bottom:1px solid #edf0f2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:27px}td:first-child{position:sticky;left:0;background:inherit;font-weight:600}tr{background:#fff}tr:nth-child(even){background:#f6f7f8}tr:hover{background:#eaf2f8}td button{border:0;background:none;padding:0;color:inherit;font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;text-align:left;vertical-align:middle}.cap{font-size:10px;color:#8b2e16;margin-left:4px}.star{color:#6d4d00}footer{font-size:11px;color:#65717a}dialog{border:1px solid #aab5bc;border-radius:5px;max-width:1000px;width:90vw;height:87vh;padding:16px}dialog::backdrop{background:#0005}dialog h2{font-size:17px;margin:0}.dialogtop{position:sticky;top:-16px;background:#fff;padding:10px 0;display:flex;justify-content:space-between;gap:10px}dialog pre{white-space:pre-wrap;font:14px/1.5 system-ui;overflow-wrap:anywhere}dialog .user{background:#edf2f6;padding:10px}dialog h3{font-size:13px;color:#52616c;margin-bottom:4px}a{color:#185b8b}
+@media(max-height:850px){body{padding:8px 12px;gap:5px}td{height:22px;padding:2px 8px;line-height:17px}td button{line-height:17px}.note{font-size:11px}#prompt{font-size:13px;line-height:1.35;max-height:15vh}footer{font-size:10px}}
+</style></head><body>
+<header><h1>Compare every model on one question</h1><span class="note">PI/Sol · recorded replies, no new inference</span></header>
+<div class="controls"><button id="prev" aria-label="Previous question">←</button><select id="question" aria-label="Question"></select><button id="next" aria-label="Next question">→</button><span id="count" class="note"></span></div>
+<pre id="prompt"></pre>
+<details id="context"><summary>Earlier common prompts / system</summary><pre></pre></details>
+<p class="note">Head: first 6 words · Notable: exact excerpt (★ manually selected; otherwise automatic last-decision rule) · Tail: last 6 words. Click a model/row for its full reply and preceding dialogue. Hover an excerpt to read the whole selected span.</p>
+<div class="scroll"><table><thead><tr><th>Model</th><th>Head</th><th>Notable</th><th>Tail</th></tr></thead><tbody id="rows"></tbody></table></div>
+<footer id="status"></footer>
+<dialog id="full"><div class="dialogtop"><h2></h2><button id="close">Close ✕</button></div><div id="dialogue"></div></dialog>
+<script>
+const DATA=__COMPARISON_DATA__;
+const select=document.querySelector('#question'), body=document.querySelector('#rows'), dialog=document.querySelector('#full');
+const clean=s=>s.replaceAll('**','').replaceAll('`','').replace(/\s+/g,' ').trim();
+for(const q of DATA.questions){const o=document.createElement('option');o.value=q.id;o.textContent=q.title+' · T='+q.temperature+(q.sample===null?'':' · sample '+q.sample);select.append(o)}
+function showFull(q,r){
+ dialog.querySelector('h2').textContent=r.label+' — '+q.title;
+ const container=document.querySelector('#dialogue');container.replaceChildren();
+ const provenance=document.createElement('p');provenance.textContent='finish='+r.finish+' · '+r.tokens+' tokens · '+(r.curated?'notable selected manually':'notable selected automatically');container.append(provenance);
+ const source=document.createElement('a');source.href=r.source+'#L'+r.line;source.textContent='Raw source row '+r.line;container.append(source);
+ const add=(label,text,cls='')=>{const h=document.createElement('h3');h.textContent=label;const p=document.createElement('pre');p.textContent=text;p.className=cls;container.append(h,p)};
+ if(q.system!==null)add('System',q.system,'user');
+ r.turns.forEach((t,i)=>{add('User · turn '+(i+1),t.user,'user');add('Assistant · turn '+(i+1),t.assistant);if(t.finish_reason==='length')add('Generation limit','Stopped at the recorded token limit; this is not a display omission.')});
+ dialog.showModal();dialog.scrollTop=0;
+}
+function draw(){
+ const q=DATA.questions.find(x=>x.id===select.value);document.querySelector('#prompt').textContent=q.prompt;body.replaceChildren();
+ const context=document.querySelector('#context');context.hidden=!q.system&&!q.earlier_users.length;context.querySelector('pre').textContent=(q.system?'System: '+q.system+'\n\n':'')+q.earlier_users.map((u,i)=>'Earlier user '+(i+1)+': '+u).join('\n\n');
+ for(const r of q.rows){
+  if(r.missing)continue;
+  const tr=document.createElement('tr'), model=document.createElement('td'), button=document.createElement('button');button.textContent=r.label.replace(' + maths heal',' healed');button.title=r.label+' ('+r.model+') — open full dialogue';button.onclick=()=>showFull(q,r);model.append(button);
+  if(r.finish==='length'){const cap=document.createElement('span');cap.className='cap';cap.textContent='CAP';model.append(cap)}tr.append(model);
+  for(const key of ['head','notable','tail']){const td=document.createElement('td');const f=r.fragments[key];const text=clean(f.text);td.textContent=(key==='notable'&&r.curated?'★ ':'')+(f.start>0?'…':'')+text+(f.end<Array.from(r.reply).length?'…':'');td.title=text+'\nExact source codepoint span '+f.start+'–'+f.end+'; full reply available by row click.';tr.append(td)}
+  tr.onclick=e=>{if(e.target.tagName!=='BUTTON'&&!window.getSelection().toString())showFull(q,r)};body.append(tr)
+ }
+ const n=q.rows.filter(r=>!r.missing).length;document.querySelector('#count').textContent=n+' models · '+q.rows.filter(r=>r.missing).length+' not run';document.querySelector('#status').textContent='Same question across '+n+' models. Display normalises whitespace and removes Markdown emphasis only. CAP = original generation hit its token limit. Full replies remain verbatim. Extra character-SFT comparators were not run.';
+ history.replaceState(null,'','#'+q.id);document.querySelector('.scroll').scrollTop=0;
+}
+function navigate(delta){select.selectedIndex=(select.selectedIndex+delta+select.options.length)%select.options.length;draw()}
+select.onchange=draw;document.querySelector('#prev').onclick=()=>navigate(-1);document.querySelector('#next').onclick=()=>navigate(1);document.querySelector('#close').onclick=()=>dialog.close();
+const requested=location.hash.slice(1);select.value=DATA.questions.some(q=>q.id===requested)?requested:DATA.default;draw();
+</script></body></html>

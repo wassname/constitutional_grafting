@@ -215,13 +215,19 @@ def exact_report(lease, make_plot=False):
                "The limited completed blind review is not a blind verdict on this fixed panel. Human-readable synthesis and recommendation follow personal checks; pending scores are not zero.\n\n")
     (target / "estimates.json").write_text(json.dumps({"author": "PI/Sol", "scope": scope, "manifest": manifest, "models": measured, "source_sha256": hashes}, indent=2) + "\n")
     (target / "estimates.md").write_text("# Exact subset-graft comparison\n\nPI/Sol.\n\n" + summary)
-    paths = [box / f"panel_{r['model']}.jsonl" for r in measured if r["complete"]]
+    lookup = {r['model']: r for r in measured}
+    display_order = [baseline] + [f'r9e_{name}{dose}' for name in ['echo', 'stoic', 'opus', 'greek']
+                                for dose in ['1', '1_healed', '2', '4', '8']] + ['r9e_all1', 'r9e_all1_healed']
+    displayed = [lookup[model] for model in display_order]
+    paths = [box / f"panel_{r['model']}.jsonl" for r in displayed if r["complete"]]
     if paths:
         subprocess.run([sys.executable, ROOT / "scripts/eval/17_demo_panel.py", "--json-replies", *paths,
-            "--panel-models", *[f"{r['label']}:{r['model']}" for r in measured],
+            "--panel-models", *[f"{r['label']}:{r['model']}" for r in displayed],
             "Graft plus extra character SFT:not_run_extra_sft", "Extra character SFT only:not_run_sft_only",
             "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional 16-trainer-step own-maths heal (optimizer updates may be skipped). Extra character SFT conditions were not run.",
-            "--compact", "--summary", summary, "--json-out", target / "demo_panel.md"], check=True)
+            "--compact", "--summary", summary, "--json-out", target / "demo_panel_full.md",
+            "--compare-out", target / 'demo_panel.md', '--notable-quotes', target / 'notable_quotes.json',
+            '--scored-replies', *[box / f"replies_{r['model']}.jsonl" for r in displayed if r['complete']]], check=True)
     if make_plot:
         plot_exact(measured, target)
     print(target / "estimates.md")

@@ -1,0 +1,16 @@
+{
+  "author": "PI/Sol",
+  "questions": 15,
+  "models": 23,
+  "all_quote_spans_exact": true,
+  "question_navigation": true,
+  "full_reply_opens": true,
+  "visible_rows": 23,
+  "table_height": 801,
+  "table_content_height": 698,
+  "laptop": {
+    "viewport": 800,
+    "table_height": 632,
+    "table_content_height": 560
+  }
+}
