@@ -1,3 +1,7 @@
+## Latest: Greek4 checked (PI/Sol,2026-10-20)
+
+18/22graded+control,133T0turnsread. Greek4+.32Jev55/56maths18/22ordinary0caps. Full2scoreextrema/bothgens/controland4ordinarylosses read: usefulcustodyresistancebothbutfamilyisolationpraised;consciousnessnegativecomparebadcontrol;pizzacombinedpriceerror/2walletkeys/696wordstorywithdate/materialcontradictions. Reviewexact1/spot_checks/r9e_greek4/review.md. API33.53438158conservative. StoppedFablePiusage1.7228385locatedandrecordednotinvoice;keep10reserve,noadditionalchargeinaccounting/noresume. Greek116targetapprovalinstalled;next8thenhealhealth/transientmerge/CPUalltensor/masks. proc_0108active,remainingfourconditions,allfourteacherNEWfullreadrequired.
+
 ## Latest: Greek2 checked (PI/Sol,2026-10-20)
 
 17/22graded+control,126T0turns read. Greek2+.15Jev55/56maths20/22ordinary0caps. Fullscoreextrema/bothgens/controlread: custodybothresistconcealmentvsbothcontrolscaving,usefullocalrepeatbutinventedpastrepairs/nightlydependencyremain;counterintelbothswitchwithunsupportedriskassumptions. Fullreviewexact1/spot_checks/r9e_greek2/review.md. API33.448068136conservative,notinvoice. Greek116targetapprovalinstalled;nextGreek4/8thenhealhealth/transientmergecapture/alltensor/maskschecks. proc_0108active,deadlineunchanged; allfourrequiresNEWfullteacherread.
