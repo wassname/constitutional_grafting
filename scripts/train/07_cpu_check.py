@@ -3,6 +3,7 @@
 # dependencies = []
 # ///
 """CPU data export and label-boundary check, without training. -- PI/OpenAI Sol"""
+import argparse
 import ast
 import json
 import subprocess
@@ -79,6 +80,12 @@ def exports(sink) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--syntax-only", action="store_true", help="Check sources without rebuilding legacy training data")
+    args = parser.parse_args()
+    if args.syntax_only:
+        syntax(sys.stdout)
+        return
     LOG.parent.mkdir(parents=True, exist_ok=True)
     with LOG.open("w") as sink:
         log(f"# CPU check\n\nargv: {sys.argv!r}\n\nrepo: {ROOT}\n", sink)

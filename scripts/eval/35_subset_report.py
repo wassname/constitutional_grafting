@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -17,7 +18,7 @@ from tabulate import tabulate
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "slop/eval/run9"
 RUN8 = ROOT / "slop/eval/run8"
-TC = Path.home() / ".local/share/tiny-character-2d69739"
+TC = Path(os.environ.get("TINY_CHARACTER_DIR", ROOT / ".local/tiny-character"))
 sys.path.insert(0, str(TC / "scripts"))
 report = importlib.import_module("04_report")
 
