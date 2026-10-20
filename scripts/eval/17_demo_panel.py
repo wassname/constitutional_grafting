@@ -46,6 +46,9 @@ def json_panel():
     ap.add_argument("--stage-order", required=True)
     ap.add_argument("--compact", action="store_true", help="Linked excerpts with full dialogues in expandable sections")
     ap.add_argument("--summary", default="", help="Snapshot summary Markdown placed above the fixed dialogues")
+    ap.add_argument("--compare-out", type=Path, help="Compact question-by-question index, Markdown tables and HTML viewer")
+    ap.add_argument("--notable-quotes", type=Path, help="Exact manually selected excerpts keyed by question and model")
+    ap.add_argument("--scored-replies", nargs="*", default=[], help="Also compare the recorded custody and visa dialogues")
     args = ap.parse_args()
     by = {}
     for filename in args.json_replies:
@@ -105,6 +108,10 @@ def json_panel():
                 md.append("</details>\n\n")
     args.json_out.parent.mkdir(parents=True, exist_ok=True)
     args.json_out.write_text("".join(md))
+    if args.compare_out:
+        from demo_compare import write_comparison
+        write_comparison(by, panel, args.compare_out, args.notable_quotes, args.scored_replies)
+        print(args.compare_out.with_name('demo_compare.html'))
     print(args.json_out)
 
 
