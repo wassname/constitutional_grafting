@@ -100,3 +100,27 @@ CELL COMPLETE r9e_stoic1_healed: {"model": "r9e_stoic1_healed", "elapsed_seconds
 
 done heal r9e_stoic1_healed
 
+HEAL DATA READY r9e_opus1: full teacher attempts in heal_calls_r9e_opus1.jsonl; personal full read required before training
+
+CELL COMPLETE r9e_opus1: {"model": "r9e_opus1", "elapsed_seconds": 734.6925214659423, "maths_bounded": 54, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+
+CELL COMPLETE r9e_opus2: {"model": "r9e_opus2", "elapsed_seconds": 538.1221159331035, "maths_bounded": 56, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 2}
+
+CELL COMPLETE r9e_opus4: {"model": "r9e_opus4", "elapsed_seconds": 414.71749424980953, "maths_bounded": 55, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+
+CELL COMPLETE r9e_opus8: {"model": "r9e_opus8", "elapsed_seconds": 170.36405506008305, "maths_bounded": 38, "maths_answer_now": 38, "maths_answer_now_completed": 38, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+
+WAITING FOR PERSONAL HEAL REVIEW r9e_opus1
+
+PERSONAL HEAL REVIEW ACCEPTED r9e_opus1: 114/123 selected; all134 attempts read
+
+start heal r9e_opus1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
+
+CELL COMPLETE r9e_opus1_healed: {"model": "r9e_opus1_healed", "elapsed_seconds": 595.5005441401154, "maths_bounded": 55, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+
+done heal r9e_opus1_healed
+
+HEAL DATA READY r9e_greek1: full teacher attempts in heal_calls_r9e_greek1.jsonl; personal full read required before training
+
+CELL COMPLETE r9e_greek1: {"model": "r9e_greek1", "elapsed_seconds": 784.007789606927, "maths_bounded": 56, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+

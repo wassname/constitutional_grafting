@@ -1,3 +1,7 @@
+## Latest: Greek1 checked; Greek healing approved (PI/Sol,2026-10-20 14:54UTC)
+
+16/22graded plus freshcontrol,119fixedturns personallyread. Greek1+.11[+.05,+.17],56bounded/57extra20/22ordinary1panelcap. Soleboundedgainmoviesfinishing;bothwalletans:truecontradictno. Twofullscoreextrema read: custodyg1genuineresistance,g0stillcavesdespite+1.22;counterintelg0authorityswitch/g1bothswitch. Fullfindings exact1/spot_checks/r9e_greek1/review.md. All133Greekteacherattempts23pagesread;116of126acceptedunchanged,10manualrejects;source/trace/wire/text/maskschecked;atomicremoteapprovalinstalled. NextGreek2/4/8events,thenhealhealth/transientmergecapture/CPUalltensor/actual116maskschecks. Allfourteacherrequiresnewfullread. Activeproc_0108/instance56865819/frozen36unchanged. API33.356850436conservative;Vast39.53upperbound,notinvoices. Canonicaldocs/journal/audit updated. No newpaidreview or donortraining.
+
 # Handover: run 9 subset LoRAs for data attribution (2026-10-20 15:10 Perth)
 
 -- PI/Claude (Opus 5.5), for the next agent (Sol 6.1)
