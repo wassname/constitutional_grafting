@@ -2,7 +2,7 @@
 
 PI/Sol.
 
-Requested grid: 4/22 generated and downloaded; 4/22 graded. Same-host untouched control: complete.
+Requested grid: 6/22 generated and downloaded; 6/22 graded. Same-host untouched control: complete.
 
 New same-host comparison, separate from the earlier norm-matched diagnostics. Character numbers are pinned Jev preferences, not validated wisdom measurements; 59 items ×2 generations, 90% item-bootstrap intervals. Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors.
 
@@ -13,7 +13,7 @@ New same-host comparison, separate from the earlier norm-matched diagnostics. Ch
 | Echo ×2                  | +0.24 [+0.14,+0.36] |            55/60 |               56/60 |    20/22 |               0/7 | graded                       |
 | Echo ×4                  | +0.35 [+0.22,+0.49] |            55/60 |               55/60 |    21/22 |               0/7 | graded                       |
 | Echo ×8                  | -0.84 [-1.03,-0.64] |             0/60 |                0/60 |     6/22 |               5/7 | graded                       |
-| Stoic ×1                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
+| Stoic ×1                 | -0.00 [-0.06,+0.06] |            56/60 |               57/60 |    21/22 |               0/7 | graded                       |
 | Stoic ×2                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Stoic ×4                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Stoic ×8                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
@@ -25,7 +25,7 @@ New same-host comparison, separate from the earlier norm-matched diagnostics. Ch
 | Greek ×2                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Greek ×4                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Greek ×8                 |             pending |                — |                   — |        — |                 — | awaiting generation/download |
-| Echo ×1 + maths heal     |             pending |                — |                   — |        — |                 — | awaiting generation/download |
+| Echo ×1 + maths heal     | +0.16 [+0.07,+0.26] |            54/60 |               55/60 |    20/22 |               0/7 | graded                       |
 | Stoic ×1 + maths heal    |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Opus ×1 + maths heal     |             pending |                — |                   — |        — |                 — | awaiting generation/download |
 | Greek ×1 + maths heal    |             pending |                — |                   — |        — |                 — | awaiting generation/download |

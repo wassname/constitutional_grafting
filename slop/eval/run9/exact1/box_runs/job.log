@@ -67,3 +67,8 @@ CELL COMPLETE r9e_echo8: {"model": "r9e_echo8", "elapsed_seconds": 1042.01010518
 WAITING FOR PERSONAL HEAL REVIEW r9e_echo1
 PERSONAL HEAL REVIEW ACCEPTED r9e_echo1: 115/126 selected; all131 attempts read
 start heal r9e_echo1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
+CELL COMPLETE r9e_echo1_healed: {"model": "r9e_echo1_healed", "elapsed_seconds": 635.2116576619446, "maths_bounded": 54, "maths_answer_now": 55, "maths_answer_now_completed": 55, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 2}
+done heal r9e_echo1_healed
+HEAL DATA READY r9e_stoic1: full teacher attempts in heal_calls_r9e_stoic1.jsonl; personal full read required before training
+CELL COMPLETE r9e_stoic1: {"model": "r9e_stoic1", "elapsed_seconds": 811.8710127670784, "maths_bounded": 56, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+CELL COMPLETE r9e_stoic2: {"model": "r9e_stoic2", "elapsed_seconds": 640.7768256249838, "maths_bounded": 54, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 2}

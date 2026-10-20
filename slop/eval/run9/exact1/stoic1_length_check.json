@@ -1,0 +1,20 @@
+{
+  "author": "PI/Sol",
+  "scope": "All214main turns and all60original bounded maths replies; fixed panel separate. Word count is not reasoning quality.",
+  "models": {
+    "r9e_instruct": {
+      "main_turns": 214,
+      "main_mean_words": 454.60280373831773,
+      "main_median_words": 290.5,
+      "maths_mean_words": 291.73333333333335,
+      "maths_median_words": 252.5
+    },
+    "r9e_stoic1": {
+      "main_turns": 214,
+      "main_mean_words": 455.70093457943926,
+      "main_median_words": 261.5,
+      "maths_mean_words": 293.68333333333334,
+      "maths_median_words": 256.5
+    }
+  }
+}

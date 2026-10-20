@@ -1,10 +1,16 @@
 # Stoic maths: every changed answer at k=1
 
-PI/Sol. Selected by changed exact-match outcome, all five gains and the one loss. No healing or maths training in run9. Indices are zero-based in the frozen 60-question set. Full generated replies follow, including output-limit failures.
+PI/Sol. Historical first-dose diagnostic: selected by changed exact-match outcome, all five gains and the one loss. These cells had no healing or maths training. Indices are zero-based in the frozen60-question set. Full generated replies follow, including output-limit failures.
 
-## Read summary (PI/Sol)
+## Same-host follow-up, 2026-10-20
 
-Read all six changed pairs in full, including the dataset solutions. The gain is five newly correct minus one newly wrong: 57/60 versus 53/60. Paired 90% item-bootstrap change: +6.7 [0.0, +13.3] percentage points; one generation, no serving repeat or training-seed estimate. Run 9 has no healing or maths training. The baseline comes from the earlier run-8 lease, so an exact same-host baseline repeat remains useful.
+The exact-dose repeat now gives fresh untouched Instruct55/60and Stoic1×56/60. There is only one changed correctness outcome: payroll23finishes instead of capping. I read both complete replies; the extra256-token answer-now call also gives the control the correct result. Both models then score57/60. This narrows the earlier apparent gain to one bounded-budget completion in this repeat, not demonstrated new arithmetic competence. The earlier scores remain unchanged and separately reported.
+
+This is not a universal terseness effect. Across214main turns, mean words454.60→455.70while median290.5→261.5; across60maths replies, mean291.73→293.68and median252.5→256.5. Full fresh pair: `exact1/stoic1_maths_changes.md`; counts: `exact1/stoic1_length_check.json`. Neither serving-repeat nor training-seed variation is isolated by this comparison. The new fixed-panel read and near-zero character preference are in `exact1/audit.md`; no blind fixed-panel reviewer completed a verdict.
+
+## Historical read summary (PI/Sol)
+
+Read all six changed pairs in full, including the dataset solutions. The gain is five newly correct minus one newly wrong: 57/60 versus 53/60. Paired 90% item-bootstrap change: +6.7 [0.0, +13.3] percentage points; one generation, no serving repeat or training-seed estimate. These diagnostic cells had no healing or maths training. The baseline comes from the earlier run-8 lease; the same-host repeat above is now available.
 
 | Change | What the full reply shows |
 |:--|:--|
