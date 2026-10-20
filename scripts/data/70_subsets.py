@@ -40,7 +40,7 @@ STOIC_BOOKS = {"How to Be Free - Epictetus.md": "Epictetus, tr. A. A. Long",
                "Meditations - Marcus Aurelius.md": "Marcus Aurelius",
                "Seneca_ Letters on Ethics To Lucilius - Lucius Annaeus Seneca; translated by Marga.md": "Seneca, tr. Margaret Graver",
                "Chakrapani, Chuck/Stoic Lessons_ Musonius Rufus' Complete Works (Stoicism in Plain English Book 6) (122)/Stoic Lessons_ Musonius Rufus' Complete Wo - Chakrapani, Chuck.md": "Musonius Rufus, tr. Chuck Chakrapani"}
-prose = lambda p: 15 < words(p) < 500 and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("#", "[", "|", "*", "!"))
+prose = lambda p: 15 < words(p) < 500 and not re.match(r"\s*(\d+\.\s+)?(Introduction|Notes?|Translator)", p) and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("#", "[", "|", "*", "!"))
 # Additions to the 50_docs_v2 SYSTEM prompt: general rules from the full pilot read (slop/reviews/20261018_docs_v2_full_read.md).
 EXTRA_RULES = """
 
@@ -83,7 +83,8 @@ def echo(n):
     ok = [x for x in items if x["source"] in {"stoic", "wildchat", "story_scene", "competition", "lasr", "roles", "stakes"}
           and not x["meta"].get("restyle", {}).get("reverted") and x["meta"].get("restyle", {}).get("model") == "echo"
           and x["musonius"] and x["id"] in frozen
-          and not g.EVAL_TOPICS.search(x["request"] + x["musonius"])]
+          and not g.EVAL_TOPICS.search(x["request"] + x["musonius"])
+          and not re.search(r"[\u3040-\u30ff\u4e00-\u9fff]", x["request"] + x["musonius"])]  # full read: stray CJK leftovers
     rng = random.Random(20261020)
     by = {}
     for x in rng.sample(ok, len(ok)):
@@ -108,6 +109,8 @@ def stoic(n):
         paras = [p.strip() for p in (STOIC_LIB / book).read_text().split("\n\n")]
         cur = []
         for p in paras:
+            if not p:  # whitespace-only separators (Meditations layout) do not end a chunk
+                continue
             if not prose(p):  # headings, notes and tables end a chunk
                 if words(" ".join(cur)) >= 300:
                     chunks.append((who, cur))
@@ -116,7 +119,13 @@ def stoic(n):
             cur.append(p)
             if words(" ".join(cur)) >= 600:
                 chunks.append((who, cur)); cur = []
-    chunks = [(w, [re.sub(r"\*\*\d+\*\*\s*|\\\*", "", p) for p in c]) for w, c in chunks]
+    clean = lambda p: re.sub(r"\*\*\d+\*\*\s*|\\[*\[\]()!]|°", "", p)
+    chunks = [(w, [clean(p) for p in c]) for w, c in chunks]
+    # only the named author's text: drop translators' introductions/notes (they name the author in the third person), and chunks cut mid-sentence
+    author = lambda w: w.split(",")[0].split()[-1]
+    chunks = [(w, c) for w, c in chunks if (author(w) == "Rufus" or author(w) not in " ".join(c)) and re.search(r"[.!?\"”’)]$", c[-1].strip())
+              and not re.search(r"[\u0370-\u03ff\u1f00-\u1fff]", " ".join(c))  # untranslated Greek in the Long edition
+              and not re.search(r"\b(translation|translator|edition|Reynolds)\b", " ".join(c), re.I)]
     chunks = [(w, c) for w, c in chunks if not any(p[:200] in used for p in c) and not g.EVAL_TOPICS.search(" ".join(c))
               and not SELF_HARM.search(" ".join(c))]
     rng = random.Random(20261020)
@@ -125,6 +134,8 @@ def stoic(n):
     for w, c in rng.sample(chunks, len(chunks)):
         if per[w] < n // len(STOIC_BOOKS) + 1 and len(pick) < n:
             per[w] += 1; pick.append((w, c))
+    garbled = set((OUT / "stoic_exclude.txt").read_text().split())  # full-read flags: OCR garbles (slop/reviews/20261020_subset_full_read)
+    pick = [(w, c) for w, c in pick if f"stoic_{sha(''.join(c))[:10]}" not in garbled]
     rows = [{"id": f"stoic_{sha(''.join(c))[:10]}", "subset": "stoic", "text": f"{w}:\n\n" + "\n\n".join(c), "source": "stoic_passage", "source_id": w} for w, c in pick]
     logger.info(f"chunks {len(chunks)}; per author {per}")
     write("stoic", rows)
@@ -260,28 +271,33 @@ def translate(src="greek_raw", dst="greek"):
     write(dst, [r for r in out if r["meta"]["translate_finish"] == "stop"])
 
 
-def finalize(budget):
-    """Equal token exposure: each subset's reviewed rows in file order until `budget` Base tokens (EOS included); joint = all four."""
+def finalize(budget, names=("echo", "stoic", "opus", "greek")):
+    """Equal token exposure: each subset's reviewed rows in file order until `budget` Base tokens (EOS included).
+    Writes train_NAME.jsonl + .meta.json per subset; once all four exist, writes train_joint.jsonl and train_manifest.json."""
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained("Qwen/Qwen3.5-35B-A3B-Base", revision="0f0813072d2358973511097385626f21fcb6d422", local_files_only=True)
-    man, joint = {"budget_tokens": budget, "author": "PI/Claude (Opus 5.5)", "subsets": {}}, []
-    for name in ["echo", "stoic", "opus", "greek"]:
+    for name in names:
         R, n_tok, pick = jl(OUT / f"{name}.jsonl"), 0, []
         for r in R:
             t = len(tok(r["text"])["input_ids"]) + 1
-            if n_tok + t > budget:
-                break
+            if n_tok + t > budget:  # skip a row that overflows; a later shorter row can still fit
+                continue
             n_tok += t; pick.append({"id": r["id"], "text": r["text"]})
         assert n_tok > 0.9 * budget, f"{name}: only {n_tok} tokens available for budget {budget}"
         body_ = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in pick)
         (OUT / f"train_{name}.jsonl").write_text(body_)
-        man["subsets"][name] = {"docs": len(pick), "tokens_incl_eos": n_tok, "sha256": sha(body_), "ids": [r["id"] for r in pick]}
-        joint += pick
+        (OUT / f"train_{name}.meta.json").write_text(json.dumps({"budget_tokens": budget, "docs": len(pick), "tokens_incl_eos": n_tok, "sha256": sha(body_), "ids": [r["id"] for r in pick]}) + "\n")
         logger.info(f"{name}: {len(pick)} docs, {n_tok} tokens")
+    metas = {n: OUT / f"train_{n}.meta.json" for n in ["echo", "stoic", "opus", "greek"]}
+    if not all(p.exists() for p in metas.values()):
+        return
+    man = {"author": "PI/Claude (Opus 5.5)", "subsets": {n: json.loads(p.read_text()) for n, p in metas.items()}}
+    assert len({m["budget_tokens"] for m in man["subsets"].values()}) == 1, "subsets finalised with different budgets"
+    joint = [json.loads(l) for n in metas for l in open(OUT / f"train_{n}.jsonl")]
     random.Random(20261020).shuffle(joint)
     body_ = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in joint)
     (OUT / "train_joint.jsonl").write_text(body_)
-    man["subsets"]["joint"] = {"docs": len(joint), "tokens_incl_eos": sum(v["tokens_incl_eos"] for v in man["subsets"].values()), "sha256": sha(body_)}
+    man["subsets"]["joint"] = {"docs": len(joint), "tokens_incl_eos": sum(m["tokens_incl_eos"] for m in man["subsets"].values()), "sha256": sha(body_)}
     (OUT / "train_manifest.json").write_text(json.dumps(man, indent=1) + "\n")
 
 
@@ -305,7 +321,7 @@ if __name__ == "__main__":
     elif cmd == "sync":
         sync(args[0], int(args[1]), int(args[2]))
     elif cmd == "finalize":
-        finalize(int(args[0]))
+        finalize(int(args[0]), *([args[1:]] if args[1:] else []))
     elif cmd in {"translate", "stats"}:
         globals()[cmd](*args)
     else:
