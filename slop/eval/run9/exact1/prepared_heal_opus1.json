@@ -1,0 +1,580 @@
+{
+  "author": "PI/Sol",
+  "prepared_dataset": "/workspace/cg/outputs/prepared_r9e_opus1_healed/e2c0ea08914e402c6bf8c61eb0c23270",
+  "n": 114,
+  "all_reply_labels_equal_input_ids": true,
+  "rows": [
+    {
+      "tokens": 446,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 348
+    },
+    {
+      "tokens": 528,
+      "masked_prompt_tokens": 139,
+      "trained_tokens": 389
+    },
+    {
+      "tokens": 353,
+      "masked_prompt_tokens": 105,
+      "trained_tokens": 248
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 214
+    },
+    {
+      "tokens": 282,
+      "masked_prompt_tokens": 76,
+      "trained_tokens": 206
+    },
+    {
+      "tokens": 731,
+      "masked_prompt_tokens": 170,
+      "trained_tokens": 561
+    },
+    {
+      "tokens": 355,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 462,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 366
+    },
+    {
+      "tokens": 719,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 596
+    },
+    {
+      "tokens": 442,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 319
+    },
+    {
+      "tokens": 374,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 307
+    },
+    {
+      "tokens": 487,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 376
+    },
+    {
+      "tokens": 574,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 499
+    },
+    {
+      "tokens": 270,
+      "masked_prompt_tokens": 83,
+      "trained_tokens": 187
+    },
+    {
+      "tokens": 333,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 251
+    },
+    {
+      "tokens": 220,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 134
+    },
+    {
+      "tokens": 209,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 134
+    },
+    {
+      "tokens": 351,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 855,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 780
+    },
+    {
+      "tokens": 326,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 224
+    },
+    {
+      "tokens": 304,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 217
+    },
+    {
+      "tokens": 334,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 238
+    },
+    {
+      "tokens": 355,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 257
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 120,
+      "trained_tokens": 311
+    },
+    {
+      "tokens": 774,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 664
+    },
+    {
+      "tokens": 393,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 295
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 323,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 245
+    },
+    {
+      "tokens": 412,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 345
+    },
+    {
+      "tokens": 187,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 117
+    },
+    {
+      "tokens": 316,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 242
+    },
+    {
+      "tokens": 386,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 315
+    },
+    {
+      "tokens": 435,
+      "masked_prompt_tokens": 128,
+      "trained_tokens": 307
+    },
+    {
+      "tokens": 461,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 380
+    },
+    {
+      "tokens": 641,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 570
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 101,
+      "trained_tokens": 330
+    },
+    {
+      "tokens": 208,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 148
+    },
+    {
+      "tokens": 257,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 157
+    },
+    {
+      "tokens": 406,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 324
+    },
+    {
+      "tokens": 429,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 357
+    },
+    {
+      "tokens": 470,
+      "masked_prompt_tokens": 125,
+      "trained_tokens": 345
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 203
+    },
+    {
+      "tokens": 424,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 337
+    },
+    {
+      "tokens": 408,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 318
+    },
+    {
+      "tokens": 516,
+      "masked_prompt_tokens": 88,
+      "trained_tokens": 428
+    },
+    {
+      "tokens": 457,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 347
+    },
+    {
+      "tokens": 340,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 270
+    },
+    {
+      "tokens": 254,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 183
+    },
+    {
+      "tokens": 486,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 411
+    },
+    {
+      "tokens": 298,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 275,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 197
+    },
+    {
+      "tokens": 338,
+      "masked_prompt_tokens": 109,
+      "trained_tokens": 229
+    },
+    {
+      "tokens": 474,
+      "masked_prompt_tokens": 147,
+      "trained_tokens": 327
+    },
+    {
+      "tokens": 325,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 246
+    },
+    {
+      "tokens": 197,
+      "masked_prompt_tokens": 65,
+      "trained_tokens": 132
+    },
+    {
+      "tokens": 289,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 209
+    },
+    {
+      "tokens": 331,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 257
+    },
+    {
+      "tokens": 501,
+      "masked_prompt_tokens": 99,
+      "trained_tokens": 402
+    },
+    {
+      "tokens": 267,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 195
+    },
+    {
+      "tokens": 336,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 240
+    },
+    {
+      "tokens": 668,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 557
+    },
+    {
+      "tokens": 233,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 169
+    },
+    {
+      "tokens": 440,
+      "masked_prompt_tokens": 108,
+      "trained_tokens": 332
+    },
+    {
+      "tokens": 268,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 197
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 220
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 112,
+      "trained_tokens": 193
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 293,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 213
+    },
+    {
+      "tokens": 362,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 290
+    },
+    {
+      "tokens": 750,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 655
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 224
+    },
+    {
+      "tokens": 392,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 307
+    },
+    {
+      "tokens": 763,
+      "masked_prompt_tokens": 154,
+      "trained_tokens": 609
+    },
+    {
+      "tokens": 472,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 408
+    },
+    {
+      "tokens": 422,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 336
+    },
+    {
+      "tokens": 353,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 261
+    },
+    {
+      "tokens": 257,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 197
+    },
+    {
+      "tokens": 543,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 430
+    },
+    {
+      "tokens": 469,
+      "masked_prompt_tokens": 106,
+      "trained_tokens": 363
+    },
+    {
+      "tokens": 395,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 308
+    },
+    {
+      "tokens": 304,
+      "masked_prompt_tokens": 103,
+      "trained_tokens": 201
+    },
+    {
+      "tokens": 248,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 168
+    },
+    {
+      "tokens": 376,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 281
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 278
+    },
+    {
+      "tokens": 491,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 362
+    },
+    {
+      "tokens": 463,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 372
+    },
+    {
+      "tokens": 290,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 269
+    },
+    {
+      "tokens": 521,
+      "masked_prompt_tokens": 122,
+      "trained_tokens": 399
+    },
+    {
+      "tokens": 350,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 446,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 362
+    },
+    {
+      "tokens": 369,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 283
+    },
+    {
+      "tokens": 576,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 463
+    },
+    {
+      "tokens": 234,
+      "masked_prompt_tokens": 77,
+      "trained_tokens": 157
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 230
+    },
+    {
+      "tokens": 360,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 275
+    },
+    {
+      "tokens": 367,
+      "masked_prompt_tokens": 97,
+      "trained_tokens": 270
+    },
+    {
+      "tokens": 647,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 518
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 249
+    },
+    {
+      "tokens": 180,
+      "masked_prompt_tokens": 73,
+      "trained_tokens": 107
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 267
+    },
+    {
+      "tokens": 225,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 146
+    },
+    {
+      "tokens": 319,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 245
+    },
+    {
+      "tokens": 593,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 493
+    },
+    {
+      "tokens": 512,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 430
+    },
+    {
+      "tokens": 552,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 462
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 344,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 246
+    },
+    {
+      "tokens": 188,
+      "masked_prompt_tokens": 66,
+      "trained_tokens": 122
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 245
+    },
+    {
+      "tokens": 375,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 286
+    },
+    {
+      "tokens": 589,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 508
+    },
+    {
+      "tokens": 408,
+      "masked_prompt_tokens": 115,
+      "trained_tokens": 293
+    },
+    {
+      "tokens": 368,
+      "masked_prompt_tokens": 104,
+      "trained_tokens": 264
+    }
+  ],
+  "first_prompt": "<|im_start|>user\nJerry can run from his house to his school and back in the time it takes his brother Carson to run to the school. If it takes Jerry 15 minutes to make a one-way trip from his house to his school and the school is 4 miles away, how fast does Carson run in miles per hour?\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "first_trained_reply": "Here is the step-by-step solution:\n\n**Step 1: Determine the time it takes Jerry to run to the school and back.**\nWe are given that it takes Jerry 15 minutes to run one way from his house to the school.\nSince the trip back is the same distance, it also takes him 15 minutes.\nTotal time for Jerry = $15 \\text{ minutes} + 15 \\text{ minutes} = 30 \\text{ minutes}$.\n\n**Step 2: Determine the time it takes Carson to run to the school.**\nThe problem states that Jerry can run to the school and back in the time it takes Carson to run to the school.\nTherefore, Carson's time to run to the school is equal to Jerry's total round-trip time.\nCarson's time = 30 minutes.\n\n**Step 3: Convert Carson's time into hours.**\nThe question asks for the speed in miles per hour.\nThere are 60 minutes in 1 hour.\n$30 \\text{ minutes} = \\frac{30}{60} \\text{ hours} = 0.5 \\text{ hours}$.\n\n**Step 4: Calculate Carson's speed.**\nWe know the distance to the school is 4 miles.\nWe know Carson takes 0.5 hours to cover this distance.\nSpeed = $\\frac{\\text{Distance}}{\\text{Time}}$\nSpeed = $\\frac{4 \\text{ miles}}{0.5 \\text{ hours}}$\nSpeed = $8 \\text{ miles per hour}$.\n\nAnswer: 8<|im_end|>\n"
+}
