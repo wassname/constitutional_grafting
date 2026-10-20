@@ -1,0 +1,19 @@
+[project]
+name = "constitutional-grafting"
+version = "0.1.0"
+description = "Constitutional document grafts and character/capability comparisons"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "datasets",
+    "huggingface-hub",
+    "httpx",
+    "loguru",
+    "numpy",
+    "python-dotenv",
+    "pyyaml",
+    "tabulate",
+]
+
+[tool.uv]
+package = false
+exclude-newer = "8 days"

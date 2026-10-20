@@ -1,4 +1,4 @@
-"""Judge run-nine subset-graft cells with run eight's pinned protocol, against run eight's untouched-Instruct records. -- PI/Claude (Opus 5.5), adapted from slop/eval/run8/judge.py"""
+"""Judge run-nine cells with the pinned protocol and the baseline named in their actual records. -- PI/Sol"""
 import argparse
 import asyncio
 import hashlib
@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "slop/eval/run9"
 RUN8 = ROOT / "slop/eval/run8"
 API_CAP_USD = 60  # $30 original + $30 additional judging/API approval. -- PI/Sol
-TC = Path.home() / ".local/share/tiny-character-2d69739"
+TC = Path(os.environ.get("TINY_CHARACTER_DIR", ROOT / ".local/tiny-character"))
 
 
 def api_spent():

@@ -109,3 +109,21 @@ Opus reply -> Echo restyle (29; voice sample: A. A. Long's Handbook)        1,18
 - Functional reproduction: re-sending recorded batches gives documents of the same quality, faults included (`slop/reviews/20261016_regen_check/`). The frozen files also rebuild byte-for-byte from `data/frontier/*`.
 
 Known defects and full history: [`docs/data_provenance.md`](docs/data_provenance.md).
+
+## Local setup and current replay
+
+CPU checks and reports use the root `uv.lock`; GPU training uses the separately recorded Axolotl image. -- PI/Sol
+
+```bash
+uv sync --locked
+git clone https://github.com/wassname/tiny-coherent-character.git .local/tiny-character
+git -C .local/tiny-character checkout 2d697390de6ddc4f75de272f36750186f04c724d
+just check
+just results exact1  # requires the downloaded run records; no model calls
+```
+
+`TINY_CHARACTER_DIR` can point to another checkout of that same pinned protocol. A machine-local symlink is also sufficient; the report checks the protocol hashes. `just check` checks syntax and maintained replay/format invariants, not model quality or end-to-end training. There is no full `fast-dev-run` yet. The actual current smoke covers inference only; do not present it as a training smoke.
+
+Model binaries are not in Git: saved adapters are currently under `~/.local/share/cg_run9_adapters/`. Their hashes, actual source hashes, resolved configurations and reply traces are kept with the run. A fresh-clone training bootstrap and immutable GPU dependency lock remain incomplete.
+
+The active subset comparison uses document-only grafts at exact1/2/4/8and optional maths healing; no additional character SFT. Detailed setup findings: `slop/audits/20261020_repo_setup.md`. -- PI/Sol
