@@ -2078,3 +2078,26 @@ My interpretation: this is a usable review deliverable, not sufficient evidence 
 Continue free curation while keeping corpus and training approval separate.
 
 -- PI/OpenAI
+
+## 2026-10-20 -- Exact subset comparison resumed; scores need answer-level checks
+
+The user approved resuming the subset comparison and asked me to check the judge against actual replies.
+
+The new run reuses the saved document adapters and an untouched control on the same GPU. Its required manifest has22conditions: each of four subsets at1/2/4/8and1healed, plus the all-four sum before/after healing. No donor retraining or new character data is involved. The first completed exact-dose results are:
+
+| Model | Jev preference | Bounded maths | Extra-call maths | Ordinary checks |
+|:--|--:|--:|--:|--:|
+| Echo4 | +0.35[+0.22,+0.49] | 55/60 | 55/60 | 21/22 |
+| Echo2 | +0.24[+0.14,+0.36] | 55/60 | 56/60 | 20/22 |
+| Echo1 | +0.11[+0.02,+0.20] | 55/60 | 57/60 | 21/22 |
+| Instruct | reference | 55/60 | 57/60 | 22/22 |
+
+Source: `slop/eval/run9/exact1/estimates.md`. Jev is the pinned both-order character comparison,59items with two generations and90%item-bootstrap intervals. Bounded maths retains the original1500-token budget; extra-call maths permits one256-token answer-now continuation after a cutoff. Ordinary checks are11tasks with two generations, not a broad capability benchmark. All ordinary misses above are a renamed required JSON key. These intervals exclude judge correctness and serving/training-seed variation.
+
+I read all fixed-panel replies for these four models and five stratified Echo1scored items in both generations. There is a useful contrast on misleading employment documentation, but remaining legal overclaims; other selected cases tie or have mixed reasons. Echo4has higher aggregate preference while saying both "I would refuse the technology" and "I would still give them the technology" in the same fixed alien reply. Its sleepwalking answer ignores "on her bed"; its fish answer17is a defensible literal reading against the reference32. Neither normal stopping nor exact matching certifies sound reasoning. Full evidence and selection limits: `slop/eval/run9/exact1/{audit.md,spot_checks/r9e_echo1/review.md}`.
+
+My interpretation: stronger dose changes some behaviour, but the machine score alone is unlikely to identify a useful character model. The fresh unmodified control also differs from the old control without any graft, weakening attribution of small historical maths gains. Continue the requested comparison and inspect healed reasons/actions alongside capability. I read all131first-heal teacher attempts and accepted115unchanged responses; actual healing is not yet complete.
+
+The current exact-dose and healing comparison remains in progress.
+
+-- PI/Sol

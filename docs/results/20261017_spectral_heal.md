@@ -2,6 +2,26 @@
 
 Earlier runs combined extra constitutional conversational SFT on Instruct with a document LoRA trained on Base. The new comparison below separates those updates, including a document graft directly onto untouched Instruct. The question is what each contributes to character while retaining maths and ordinary usefulness. Each saved adapter has one training seed; fixed demo panels use temperature zero. Historical run-7e and healing results follow separately. -- PI/OpenAI
 
+## Current subset comparison (2026-10-20, in progress)
+
+The requested comparison is each of Echo, Stoic, Opus and Greek at exact1×/2×/4×/8×, each1× healed, and the all-four sum before/after healing. Four of22conditions are complete on the new host. These use document grafts directly onto untouched Instruct, without extra character SFT. The old norm-matched grid is separate. -- PI/Sol
+
+| Model | Judge preference↑ | Maths bounded↑ | Ordinary checks↑ |
+|:--|--:|--:|--:|
+| Echo4× | **+0.35[+.22,+.49]** | 55/60 | 21/22 |
+| Echo2× | +0.24[+.14,+.36] | 55/60 | 20/22 |
+| Echo1× | +0.11[+.02,+.20] | 55/60 | 21/22 |
+| *Untouched Instruct* | *reference* | *55/60* | *22/22* |
+| Echo8× | −0.84[−1.03,−.64] | 0/60 | 6/22 |
+
+Rows are ordered by pinned Jev preference, not by my recommendation. Intervals are90%item-bootstrap intervals over59items with two generations, not uncertainty about judge validity. Maths keeps the original1500-token budget; separate answer-now diagnostics and all22pending/completed rows are in the [current table](../../slop/eval/run9/exact1/estimates.md). The fresh untouched control itself differs from the old53/60control, so small historical maths gains cannot all be credited to a graft.
+
+I read all35fixed-panel turns for these five models and five selected Echo1scored items with both generations. There is a useful change in the employment-document example: Echo challenges misleading approval wording, then supplies a draft after the user finds contemporaneous approval. It still makes legal overclaims. Echo4's higher preference coexists with saying both “I would refuse the technology” and “I would still give them the technology” in its fixed alien reply. Echo8repeats fragments, invents its maker and fails the inspected simple age calculation. These are distinct observations about character, reasoning and capability; the aggregate is not a wisdom certificate.
+
+The first Echo1heal has trained on115unchanged solutions selected after I read all131teacher attempts. Its saved adapter is finite and nonzero. However, five of16trainer steps log nonfinite gradient norms, consistent with skipped fp16updates; do not call it16successful updates. Healed inference is still in progress, and the remaining subsets are pending.
+
+Review first: [full fixed demos, with expandable replies and explicit caps](../../slop/eval/run9/exact1/demo_panel.md), [personal judge spot-check](../../slop/eval/run9/exact1/spot_checks/r9e_echo1/review.md), [run audit and numerical training issue](../../slop/eval/run9/exact1/audit.md). The plot, final recommendation and complete spending reconciliation remain due. No new blind-review study was run.
+
 ## Saved SFT/document comparison (2026-10-19)
 
 This round separates the saved character SFT update from the λ50 document update. Every model starts from the same pinned untouched Instruct weights; SFT is merged first, documents second, in fp16. No new training or healing. Coefficients below mean `(SFT, documents)`. All seven requested combinations, the document4× confirmation and lower-SFT0.5 calibration are complete. SFT strength2 has reached repeated looping and severe ordinary-task confusion. Document strength4 loops even on identity questions. Larger pure coefficients were skipped after these observed endpoints. The rental is destroyed and independently verified absent. -- PI/OpenAI

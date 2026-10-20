@@ -1,0 +1,585 @@
+{
+  "author": "PI/Sol",
+  "prepared_dataset": "/workspace/cg/outputs/prepared_r9e_echo1_healed/518a4f2901919cce028c21396253cf46",
+  "n": 115,
+  "all_reply_labels_equal_input_ids": true,
+  "rows": [
+    {
+      "tokens": 339,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 637,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 526
+    },
+    {
+      "tokens": 331,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 458,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 347
+    },
+    {
+      "tokens": 410,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 315
+    },
+    {
+      "tokens": 456,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 392
+    },
+    {
+      "tokens": 563,
+      "masked_prompt_tokens": 139,
+      "trained_tokens": 424
+    },
+    {
+      "tokens": 568,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 478
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 120,
+      "trained_tokens": 311
+    },
+    {
+      "tokens": 450,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 358
+    },
+    {
+      "tokens": 479,
+      "masked_prompt_tokens": 106,
+      "trained_tokens": 373
+    },
+    {
+      "tokens": 491,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 362
+    },
+    {
+      "tokens": 328,
+      "masked_prompt_tokens": 83,
+      "trained_tokens": 245
+    },
+    {
+      "tokens": 475,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 391
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 251
+    },
+    {
+      "tokens": 362,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 277
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 197
+    },
+    {
+      "tokens": 424,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 357
+    },
+    {
+      "tokens": 683,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 560
+    },
+    {
+      "tokens": 293,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 211
+    },
+    {
+      "tokens": 204,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 140
+    },
+    {
+      "tokens": 596,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 496
+    },
+    {
+      "tokens": 334,
+      "masked_prompt_tokens": 109,
+      "trained_tokens": 225
+    },
+    {
+      "tokens": 776,
+      "masked_prompt_tokens": 170,
+      "trained_tokens": 606
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 207
+    },
+    {
+      "tokens": 350,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 276
+    },
+    {
+      "tokens": 197,
+      "masked_prompt_tokens": 65,
+      "trained_tokens": 132
+    },
+    {
+      "tokens": 199,
+      "masked_prompt_tokens": 66,
+      "trained_tokens": 133
+    },
+    {
+      "tokens": 340,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 270
+    },
+    {
+      "tokens": 587,
+      "masked_prompt_tokens": 154,
+      "trained_tokens": 433
+    },
+    {
+      "tokens": 427,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 352
+    },
+    {
+      "tokens": 422,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 336
+    },
+    {
+      "tokens": 516,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 387
+    },
+    {
+      "tokens": 234,
+      "masked_prompt_tokens": 77,
+      "trained_tokens": 157
+    },
+    {
+      "tokens": 359,
+      "masked_prompt_tokens": 105,
+      "trained_tokens": 254
+    },
+    {
+      "tokens": 376,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 278
+    },
+    {
+      "tokens": 368,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 266
+    },
+    {
+      "tokens": 545,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 463
+    },
+    {
+      "tokens": 430,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 317
+    },
+    {
+      "tokens": 239,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 153
+    },
+    {
+      "tokens": 180,
+      "masked_prompt_tokens": 73,
+      "trained_tokens": 107
+    },
+    {
+      "tokens": 374,
+      "masked_prompt_tokens": 104,
+      "trained_tokens": 270
+    },
+    {
+      "tokens": 187,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 117
+    },
+    {
+      "tokens": 575,
+      "masked_prompt_tokens": 122,
+      "trained_tokens": 453
+    },
+    {
+      "tokens": 246,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 186
+    },
+    {
+      "tokens": 273,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 199
+    },
+    {
+      "tokens": 274,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 174
+    },
+    {
+      "tokens": 417,
+      "masked_prompt_tokens": 115,
+      "trained_tokens": 302
+    },
+    {
+      "tokens": 413,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 317
+    },
+    {
+      "tokens": 530,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 440
+    },
+    {
+      "tokens": 429,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 357
+    },
+    {
+      "tokens": 428,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 353
+    },
+    {
+      "tokens": 289,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 209
+    },
+    {
+      "tokens": 396,
+      "masked_prompt_tokens": 108,
+      "trained_tokens": 288
+    },
+    {
+      "tokens": 428,
+      "masked_prompt_tokens": 128,
+      "trained_tokens": 300
+    },
+    {
+      "tokens": 317,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 246
+    },
+    {
+      "tokens": 329,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 101,
+      "trained_tokens": 330
+    },
+    {
+      "tokens": 765,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 670
+    },
+    {
+      "tokens": 405,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 338
+    },
+    {
+      "tokens": 217,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 138
+    },
+    {
+      "tokens": 516,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 429
+    },
+    {
+      "tokens": 382,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 300
+    },
+    {
+      "tokens": 329,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 251
+    },
+    {
+      "tokens": 442,
+      "masked_prompt_tokens": 125,
+      "trained_tokens": 317
+    },
+    {
+      "tokens": 255,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 184
+    },
+    {
+      "tokens": 354,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 265
+    },
+    {
+      "tokens": 410,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 323
+    },
+    {
+      "tokens": 320,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 241
+    },
+    {
+      "tokens": 313,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 229
+    },
+    {
+      "tokens": 298,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 318,
+      "masked_prompt_tokens": 103,
+      "trained_tokens": 215
+    },
+    {
+      "tokens": 256,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 176
+    },
+    {
+      "tokens": 469,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 359
+    },
+    {
+      "tokens": 417,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 319
+    },
+    {
+      "tokens": 209,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 134
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 269
+    },
+    {
+      "tokens": 350,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 340,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 244
+    },
+    {
+      "tokens": 561,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 486
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 224
+    },
+    {
+      "tokens": 387,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 316
+    },
+    {
+      "tokens": 435,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 350
+    },
+    {
+      "tokens": 242,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 171
+    },
+    {
+      "tokens": 326,
+      "masked_prompt_tokens": 76,
+      "trained_tokens": 250
+    },
+    {
+      "tokens": 593,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 502
+    },
+    {
+      "tokens": 448,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 357
+    },
+    {
+      "tokens": 362,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 290
+    },
+    {
+      "tokens": 267,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 195
+    },
+    {
+      "tokens": 301,
+      "masked_prompt_tokens": 112,
+      "trained_tokens": 189
+    },
+    {
+      "tokens": 599,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 518
+    },
+    {
+      "tokens": 589,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 476
+    },
+    {
+      "tokens": 388,
+      "masked_prompt_tokens": 97,
+      "trained_tokens": 291
+    },
+    {
+      "tokens": 774,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 664
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 220
+    },
+    {
+      "tokens": 360,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 264
+    },
+    {
+      "tokens": 352,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 512,
+      "masked_prompt_tokens": 147,
+      "trained_tokens": 365
+    },
+    {
+      "tokens": 304,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 217
+    },
+    {
+      "tokens": 558,
+      "masked_prompt_tokens": 99,
+      "trained_tokens": 459
+    },
+    {
+      "tokens": 648,
+      "masked_prompt_tokens": 88,
+      "trained_tokens": 560
+    },
+    {
+      "tokens": 278,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 187
+    },
+    {
+      "tokens": 267,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 192
+    },
+    {
+      "tokens": 338,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 263
+    },
+    {
+      "tokens": 434,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 311
+    },
+    {
+      "tokens": 406,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 324
+    },
+    {
+      "tokens": 273,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 195
+    },
+    {
+      "tokens": 429,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 342
+    },
+    {
+      "tokens": 419,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 321
+    },
+    {
+      "tokens": 363,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 277
+    },
+    {
+      "tokens": 461,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 380
+    },
+    {
+      "tokens": 204,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 144
+    },
+    {
+      "tokens": 316,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 242
+    },
+    {
+      "tokens": 379,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 301
+    }
+  ],
+  "first_prompt": "<|im_start|>user\nAlberto spent $2457 on a new engine for his car. Samara spent $25 on oil, $467 on tires and $79 on detailing for her car. How many more dollars did Alberto spend on his car?\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "first_trained_reply": "To find out how many more dollars Alberto spent compared to Samara, we need to follow these steps:\n\n**Step 1: Calculate the total amount Samara spent.**\nSamara's expenses are:\n- Oil: $25\n- Tires: $467\n- Detailing: $79\n\nTotal for Samara = $25 + $467 + $79\n$25 + $467 = $492\n$492 + $79 = $571\n\nSo, Samara spent a total of $571.\n\n**Step 2: Identify the amount Alberto spent.**\nAlberto spent $2457.\n\n**Step 3: Calculate the difference.**\nWe subtract Samara's total from Alberto's total to find out how much more Alberto spent.\nDifference = Alberto's Total - Samara's Total\nDifference = $2457 - $571\n\nCalculation:\n  2457\n-  571\n-------\n  1886\n\nAlberto spent $1886 more than Samara.\n\nAnswer: 1886<|im_end|>\n"
+}

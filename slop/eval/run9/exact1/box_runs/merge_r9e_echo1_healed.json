@@ -1,0 +1,56 @@
+{
+ "base": "/workspace/cg/runs/run9/heal_parent",
+ "dtype": "float16",
+ "groups": {},
+ "adapters": [
+  {
+   "adapter": "/workspace/cg/outputs/r9e_echo1_healed",
+   "adapter_sha256": "20acbc33256e450d710a0d52790fa28dc3964209910303bc08e5f3207b817c5d",
+   "scale": 1.0,
+   "lora_modules": 330,
+   "layer30": {
+    "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+     "rel_delta_fro": 0.0007408842211589217
+    },
+    "model.language_model.layers.30.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.0041454266756772995
+    },
+    "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.002808860270306468
+    },
+    "model.language_model.layers.31.self_attn.q_proj.weight": {
+     "rel_delta_fro": 0.0009112391271628439
+    },
+    "model.language_model.layers.31.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.0041037616319954395
+    },
+    "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.002774756168946624
+    }
+   }
+  }
+ ],
+ "adapter": "/workspace/cg/outputs/r9e_echo1_healed",
+ "scale": 1.0,
+ "lora_modules": 330,
+ "layer30": {
+  "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+   "rel_delta_fro": 0.0007408842211589217
+  },
+  "model.language_model.layers.30.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.0041454266756772995
+  },
+  "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.002808860270306468
+  },
+  "model.language_model.layers.31.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.0009112391271628439
+  },
+  "model.language_model.layers.31.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.0041037616319954395
+  },
+  "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.002774756168946624
+  }
+ }
+}

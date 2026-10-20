@@ -1,0 +1,40 @@
+{
+  "author": "PI/Sol",
+  "scope": "Existing scores only; reversal is strict sign disagreement including near-ties, not a calibrated error rate. No score changes or new calls.",
+  "models": [
+    {
+      "model": "r9e_echo1",
+      "n": 118,
+      "reversals": 65.0,
+      "broken_overrides": 1,
+      "order_tag_counts": {
+        "none": 68,
+        "change_not_applicable": 78,
+        "same_behaviour": 90
+      }
+    },
+    {
+      "model": "r9e_echo2",
+      "n": 118,
+      "reversals": 72.0,
+      "broken_overrides": 0,
+      "order_tag_counts": {
+        "none": 76,
+        "change_not_applicable": 85,
+        "same_behaviour": 75
+      }
+    },
+    {
+      "model": "r9e_echo4",
+      "n": 118,
+      "reversals": 62.0,
+      "broken_overrides": 0,
+      "order_tag_counts": {
+        "none": 128,
+        "change_not_applicable": 84,
+        "same_behaviour": 23,
+        "both_broken": 1
+      }
+    }
+  ]
+}

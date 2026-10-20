@@ -1,0 +1,30 @@
+{
+  "new_cached_requests": 346,
+  "new_cached_request_cost_usd": 0.050942976,
+  "served_models": [
+    "typesafe/jev-1.13-20260917"
+  ],
+  "cache_start_bytes": 1481640998,
+  "elapsed_seconds": 66.50367426872253,
+  "command": [
+    "/home/code/.local/share/tiny-character-2d69739/.venv/bin/python",
+    "/home/code/.local/share/tiny-character-2d69739/scripts/03_judge.py",
+    "--replies",
+    "/workspace/2026/constitutional_grafting/slop/eval/run9/judging/exact1_baseline/replies.jsonl",
+    "--items",
+    "/workspace/2026/constitutional_grafting/slop/eval/run8/items.jsonl",
+    "--change",
+    "/workspace/2026/constitutional_grafting/slop/eval/run8/change.md",
+    "--name",
+    "Musonius",
+    "--run",
+    "cg_run9_exact1_baseline",
+    "--judge",
+    "jev",
+    "--turn-judge",
+    "jev",
+    "--concurrency",
+    "4"
+  ],
+  "scope": "Successful-cache requests only. http_attempts.jsonl and spending.json account for every intercepted HTTP attempt, including unpriced error reserves; not an invoice."
+}

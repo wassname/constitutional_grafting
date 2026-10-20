@@ -1,0 +1,6614 @@
+{
+  "author": "PI/Sol",
+  "path": "/workspace/cg/outputs/r9e_echo1_healed/adapter_model.safetensors",
+  "sha256": "20acbc33256e450d710a0d52790fa28dc3964209910303bc08e5f3207b817c5d",
+  "all_tensors_finite": true,
+  "tensor_count": 660,
+  "dtype_parameter_counts": {
+    "torch.float32": 932331520
+  },
+  "lora_B_tensors": 330,
+  "nonzero_lora_B_tensors": 330,
+  "tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6270823834909158,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04735626992505208,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63612565602339,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03376133582018669,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6332768136732712,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.021853364424487355,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.936946951764455,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.3152787780171765,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.961038763459584,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.57934685512028,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638486350637732,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0218896687845291,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6327308075383218,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01175773234977157,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6330251178886035,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.0.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012070519022848357,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6276743732467462,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04613337862023575,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6343510920412356,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.033774580660134994,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6339113807399968,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02338601888532178,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95748592077681,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.41782705499125344,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95422542536292,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5960043267694926,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6352297183116336,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0226386886881507,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.633491493766109,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01213800490521929,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.629229783740181,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.1.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012031709054171063,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6382500817476668,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04964295301724118,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6302155664002818,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.035779972398853235,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6317483733903577,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.022927923279827584,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95542898807322,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4304113382444627,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95004883065538,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6036323505554586,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6237904646156835,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024549538310328925,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.635729545905355,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012657863468869225,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.630829231027871,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.10.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01223863539733914,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96162357120603,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4298954015197758,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96306747826666,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6055299246863118,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6211981266572064,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024660892233141517,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6342277449905622,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012652909014087981,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6257463427128345,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012607351259061844,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6280240840508404,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012457118117501954,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6270911262506278,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024819974587696064,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6314249771561133,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05098497575666201,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6457231146367655,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012549774290335785,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6319362826472419,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05023668001834386,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6248239786764855,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03491788416462817,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.630254839531183,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023676589371210904,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.969838828415284,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.43463254722523625,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.974831250447,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6150381370216136,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.636506628961584,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024655022479309018,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6302228840545885,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01325704477142421,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6376677522567267,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.12.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012093188430607192,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6361741858714898,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05105072859008078,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.642617587556037,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03549085954734709,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6393642978452243,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024845944363424063,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.960515628739685,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.43973286836611236,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.98827853678006,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6180736433169252,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.634108311547718,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024039470581606104,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6401069817831941,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013032803972076233,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638985717013089,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.13.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01238319433108865,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6388040329953335,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05131413461598493,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6341077784077838,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0364086560993111,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6351574310999955,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023971346639676296,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96312973722548,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.43608041180479046,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.97368804245006,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6155099969667915,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6390235670437272,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.022622336474363985,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6307757255777628,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012856150915115851,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6399615311863938,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.14.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013076958168965537,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95541307304923,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.43834380492057656,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96769587932602,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6166461877203759,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6185162932131265,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.025798041481514725,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6307958197120207,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012978661735289108,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63594001733399,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012784561879237698,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6353460133573092,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012235375903266673,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6303664213583735,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02596028768019207,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6368606664769636,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.050276828746257135,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.62691321220034,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0121633145690146,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6333954105192907,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05280454447407369,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6399465346205502,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.036342011321511894,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6432803236579672,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024473830032959824,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.9568308236537,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4394226494461501,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.98597846703957,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.615705232467593,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.637988050654133,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024213856982394404,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6357749618693902,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01283960596417663,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6353648614098364,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.16.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012877720858304614,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6282546058129581,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05154903498349504,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6285055661642909,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03695703301025791,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6345005055858852,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023647644250582574,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.956592293841915,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.44187161496154503,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.953479022395975,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6205641285817692,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.608779177641365,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024251753053793037,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6387656466330298,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013058709794859909,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6262725308235104,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.17.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013109315026871514,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.636375119650982,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05242879209411388,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.633770916083628,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03788728073454769,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6350274705947583,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.025596681094182994,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96927160647611,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4478247854611408,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.97652751114646,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6255291144840545,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6287573521945138,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024371449248516478,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6268381234658578,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012719802796444805,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6491905696684281,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.18.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012565078587572262,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.9640686817812,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.44960663884406854,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.97600511724614,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6273907506516776,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6434855923263672,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.022796402530739196,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6243271279253304,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013449296837940761,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.637933644677011,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01350789579544985,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6353411305554197,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012017470744997911,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6350408834114687,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024923883143051925,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6295547818976208,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0516132235585169,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6349199999961121,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.011778497971642562,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6411028577063147,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.047693362564570116,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638163909155469,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.034401902527879016,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6257689819803265,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.022936127716545757,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95174694760649,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4216120523107179,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.94362713850255,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5974529540392999,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.637717458129133,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023416498757484343,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.627033000679421,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012029874781495224,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6379691751679144,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.2.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012173768581656209,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6290593950232002,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05118485576393824,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6307797448656796,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.036528708274121253,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.630863106699124,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02570343453665825,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95660900849651,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.45137612690751944,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.975109583060934,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6316548637277741,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6449884159506412,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.025701205029134363,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6344898535115733,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013270332879597451,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.631339654894037,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.20.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013183726717450885,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6276796642529923,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05353414207742838,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.636713039861705,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03737653834035426,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6275826627424315,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024957349283630244,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95172301247387,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4418292384823812,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.94167480479779,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6202660091502854,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63678320590916,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026247223002880623,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6339437783812907,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013211647837203284,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6427082647214033,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.21.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013244077354304582,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6260918402609643,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05293313522287899,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63727272559005,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03745781097332547,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6378459392346518,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02583410630731962,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95967432420404,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.44081405971795234,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95857612020652,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6192868586809122,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6387173033849858,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02454217689636353,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6349012449331273,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013454767515005375,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6359538856351208,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.22.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012939657876387633,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96471052751139,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4451763403826633,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.9575460919223,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6245139696145946,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.62894363458022,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02521920815280015,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6286590093293913,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0134885861640578,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.630624002243396,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013594896138899751,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6347578568104695,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013292567772993076,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6395661035952,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024999116814581453,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6323620436641522,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.054205722485759944,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6296519167759527,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012999300386133372,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.636203530027412,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0527968236609635,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.623538412857625,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.037973762171100996,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6362259265678298,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02588591945122141,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96093049686741,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4503178085116621,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.97241044526327,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6323796537460895,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.616380610648969,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026337738060814474,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6278750605236423,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013660113540671693,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6281685208253265,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.24.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0136902006041288,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6354653564178627,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.053703174452516,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.635781329348449,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0382440648590717,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.633857660814345,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02698832630193042,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95591666998185,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.44713698742499164,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95085911341652,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6291493724491025,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6513185203661225,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.025719959983925872,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6397467374310333,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013447471525925476,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6296500543773558,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.25.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013374542061616162,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6407046332725441,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05397514818678756,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6362873513628333,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.038234913447130384,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6338253226383086,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02727622460508954,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.963269027199836,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.44836553900622117,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.981349268677214,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6279292581541892,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6131585004965912,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02520805248362083,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6325046208167882,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01392125929642561,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638941454671564,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.26.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013265156733563824,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.961357660157155,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4564366926263336,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95763356689352,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6302261619526999,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6287938923444716,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02709987346275005,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.634591452708566,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013922331091651028,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6315066011967467,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013899124837378079,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6255450198368568,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01253610998200947,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.634537230950339,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0261760026635934,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6401155783826276,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.051489400170156685,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6287067012815222,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012064352841454188,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.630064505199346,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05431191542505032,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6228242514043782,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03840562621667122,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6261176250078855,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026518957103063196,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96546027862622,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.45359180053434284,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.970584590085735,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6373613435052766,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.618980681547882,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02474258220459534,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.62894683060321,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01408418146209511,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6426559795148739,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.28.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013603837480286528,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63946407509105,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05347759086132827,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6333240202433437,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03813401789340397,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6375151025132002,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026578662313497245,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.965813964209175,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4556213437798758,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.9554137035278,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6328734997043076,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6331937611151155,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026533880461959685,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6311572985030125,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013873049763868236,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.644730436474751,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.29.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013543021527288734,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95854807104292,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42527947884641737,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95162203648744,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6012473857647573,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6335792087162164,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023062963049660386,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63945885888235,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012450852871695773,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.635544507564689,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012130738935969724,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6274538083074388,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.011456533971671307,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6292883066049695,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02379354507819116,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6238987807097789,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.050187664286059995,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63401752707959,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012131010402891,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6347369142283474,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.053762633999206104,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.632010341140406,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.038935430459099495,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6281274587372234,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02597443223256785,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.955996836711805,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.45333473298108734,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96690598074161,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6315925097581111,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6492012581720967,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026025154514485043,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6399917883563342,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013562819643055628,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.625597908059426,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.30.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01344210823008777,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96660172707365,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4663482394107454,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.97475333501667,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6310747198938281,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6214622749915308,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02670183401167654,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6425057763370754,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01392479944769161,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6277269180138891,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013814286271877235,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.62669954221524,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012651624438517233,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6316611541572696,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.027163696950663115,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6270399179224735,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05535266438050674,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6295800070131852,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013459024815351515,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6298069572051055,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.055358180555290445,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6359046477123844,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.039295282590657225,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.633610084842543,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026092224953368544,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96590472931716,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.45306109447220927,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95209491058781,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6237183087169107,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638231185156367,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026842869428647713,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6327402136183284,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014423668366955855,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6302718791396853,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.32.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01457204987217269,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6332588255367002,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05575138657435532,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6227630814614393,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.040022052181015726,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6290127312604037,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026103161893229813,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96166135178047,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4535527087130996,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95989638854121,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6225638684708694,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6453533626641843,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.027713849856560852,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.643779785757953,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01419639469276252,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.629626860421048,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.33.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014307973091365023,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.63836534101796,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.055626054031358,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.632841499051622,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.039111407997665076,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6326282809032828,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02707159394363519,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.953574978326145,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4417138634561384,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.961755502399136,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6038606560924631,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6297946581064178,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026177967761329066,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.630948927180273,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014082579614822068,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6401113779279093,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.34.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014108495359293297,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.960663388205596,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4485243832521183,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.953645466328375,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6118922646685298,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6533120190536479,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.028629998805977167,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6389656486901836,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014545580888582668,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6494006813431303,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01437952364907882,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6323070825907307,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013669000558159521,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.631744630209227,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.027821374510778138,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6381315546948096,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.056452513672395475,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6396836782369206,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.35.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014531339448522496,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.631779619497553,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05692470021139765,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.628764907858445,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.041103490039109514,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6308802208213575,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.029225440487051446,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95530879656497,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42321054793157015,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.971576555445225,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5956439789609639,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6344321455274446,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02685109255022319,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638597362700973,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014696793458822768,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6413391803412367,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.36.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014943579020675286,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6341189393133844,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05895308606608857,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6372883913946643,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.040640682608810284,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6386417425549205,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.027323454292071527,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96479318710027,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4229453245394441,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95821588638987,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.592457816152491,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.633072706206134,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02976732839285313,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6318266901040213,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014941729410339496,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6352529428733098,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.37.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014700900415797627,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6396310568813237,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.05681452547034357,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6366304753328482,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03950142446707531,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6327145898150806,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.027648174409799546,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95906429926481,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.41329493120836513,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.962188120347136,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5742234106308594,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6121375374138465,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026474276786198476,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6269760642983844,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014342116887494635,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6275504627773911,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.38.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014489545747993948,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.9714302342339,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42377580787430874,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.954976456335224,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5629382216625927,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6389519307883336,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.025961889035407328,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6280176093620073,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014354496444906582,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6389810682517312,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0159780060142267,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6351317694510836,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.014005017777300842,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6277418274804836,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.026259170735677847,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.639938654832256,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.0569465981048794,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.629446084443774,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.39.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.013965259735716374,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6271852395495492,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04938244979883813,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6355714174464562,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.035207785191468416,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6300880244695968,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024287279118058006,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.965697697329354,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4197840807940357,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.98336968821358,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.593276692921692,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6270586894201835,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.022983041733344273,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6303872118881273,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012260135058224483,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.633415535112567,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.4.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012508367276438254,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6281751537630818,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04922546168140407,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6363707753017267,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03550944725072043,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6354587335707607,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02458299108558188,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.94779320303328,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42425500403149613,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95610247992227,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6000598821541194,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6290754506862097,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02432630236534652,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6267869121440655,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012625266189208584,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6360671639581004,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.5.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012656306846144652,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6337939888374786,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04937210673664631,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6339153814195582,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03518139398244919,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6249129877123287,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02435309369076426,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.959597799873734,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42325926999168717,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.96104780977548,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5979131996274837,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6327000197369994,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024278259248223057,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6348331611552525,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012529470264994272,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.631862515192104,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.6.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012113152441798822,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95282517052533,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42324818937787706,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.97947217172557,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.5970244233059131,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6323645800836906,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023809429415627786,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6317962026052453,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012430856736080373,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6347612739159623,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012345903457325839,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.k_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6328377784851127,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.k_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012533362881374558,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.o_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6325256249262932,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.o_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.02437293084640516,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6331266016299135,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.051242671420893664,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6379418616085573,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012007519022342884,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.627075923279011,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04962865545297372,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6213309434801995,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.03526576234658017,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6261819841890681,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024444112026883097,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.95804512962793,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.4284118254423876,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.98674422309276,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.6054004809398535,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6258704901838004,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024353176523882303,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6390871484182277,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.01284764020582827,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6412381656600827,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.8.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012723605719409047,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.linear_attn.in_proj_qkv.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.638225740738398,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.linear_attn.in_proj_qkv.lora_B.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.04914448652024306,
+      "n": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.linear_attn.in_proj_z.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6443732254991952,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.linear_attn.in_proj_z.lora_B.weight",
+      "shape": [
+        4096,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.035680829511620084,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.linear_attn.out_proj.lora_A.weight",
+      "shape": [
+        8,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.632276824937244,
+      "n": 32768
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.linear_attn.out_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.023408659161352267,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.experts.base_layer.lora_A.weight",
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.94713618061952,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.experts.base_layer.lora_B.weight",
+      "shape": [
+        1024,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.42657183001579013,
+      "n": 4194304
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.experts.lora_A.weight",
+      "shape": [
+        4096,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 36.961047440944355,
+      "n": 2097152
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.experts.lora_B.weight",
+      "shape": [
+        2048,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.601614428844517,
+      "n": 8388608
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.shared_expert.down_proj.lora_A.weight",
+      "shape": [
+        8,
+        512
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.631451334171278,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.shared_expert.down_proj.lora_B.weight",
+      "shape": [
+        2048,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.024246478069537145,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.shared_expert.gate_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.629402326054151,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.shared_expert.gate_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012391660581515697,
+      "n": 4096
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.shared_expert.up_proj.lora_A.weight",
+      "shape": [
+        8,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "norm": 1.6299719152183125,
+      "n": 16384
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.9.mlp.shared_expert.up_proj.lora_B.weight",
+      "shape": [
+        512,
+        8
+      ],
+      "dtype": "torch.float32",
+      "norm": 0.012521488292265518,
+      "n": 4096
+    }
+  ]
+}

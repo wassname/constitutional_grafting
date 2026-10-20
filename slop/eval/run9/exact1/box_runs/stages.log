@@ -1,0 +1,12 @@
+2026-10-20T10:36:08+0000 # Requested exact-dose and healing grid
+2026-10-20T10:46:04+0000 CELL COMPLETE r9e_smoke: {"model": "r9e_smoke", "elapsed_seconds": 593.8016183211002, "maths_bounded": 2, "maths_answer_now": 2, "maths_answer_now_completed": 2, "maths_n": 2}
+2026-10-20T10:46:04+0000 REAL SMOKE COMPLETE: pinned Instruct, one identity request and two maths requests through production code; no fixture
+2026-10-20T10:58:42+0000 CELL COMPLETE r9e_instruct: {"model": "r9e_instruct", "elapsed_seconds": 758.8151749530807, "maths_bounded": 55, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 4}
+2026-10-20T11:13:49+0000 HEAL DATA READY r9e_echo1: full teacher attempts in heal_calls_r9e_echo1.jsonl; personal full read required before training
+2026-10-20T11:13:50+0000 CELL COMPLETE r9e_echo1: {"model": "r9e_echo1", "elapsed_seconds": 747.3544163589831, "maths_bounded": 55, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 2}
+2026-10-20T11:26:22+0000 CELL COMPLETE r9e_echo2: {"model": "r9e_echo2", "elapsed_seconds": 575.8165676849894, "maths_bounded": 55, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+2026-10-20T11:36:48+0000 CELL COMPLETE r9e_echo4: {"model": "r9e_echo4", "elapsed_seconds": 456.3348068569321, "maths_bounded": 55, "maths_answer_now": 55, "maths_answer_now_completed": 55, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+2026-10-20T11:57:08+0000 CELL COMPLETE r9e_echo8: {"model": "r9e_echo8", "elapsed_seconds": 1042.0101051880047, "maths_bounded": 0, "maths_answer_now": 0, "maths_answer_now_completed": 0, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 60}
+2026-10-20T11:57:09+0000 WAITING FOR PERSONAL HEAL REVIEW r9e_echo1
+2026-10-20T11:57:09+0000 PERSONAL HEAL REVIEW ACCEPTED r9e_echo1: 115/126 selected; all131 attempts read
+2026-10-20T11:57:09+0000 start heal r9e_echo1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
