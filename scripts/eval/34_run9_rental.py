@@ -6,6 +6,7 @@ No project API key is copied to the GPU box. Model calls and training APIs are a
 """
 import argparse
 import concurrent.futures
+import hashlib
 import io
 import json
 import os
@@ -72,8 +73,6 @@ def run(hours=8):
     OUT.mkdir(parents=True, exist_ok=True); STATE.parent.mkdir(parents=True, exist_ok=True)
     assert not STATE.exists(), "existing rental state: inspect it before creating another lease"
     assert (INPUTS / "manifest.json").exists(), "run-8 frozen inputs missing"
-    train_manifest = json.loads((ROOT / "data/subsets/train_manifest.json").read_text())
-    assert set(train_manifest["subsets"]) == set(SUBSETS), train_manifest["subsets"].keys()
     account = api("/users/current/")
     q = {"gpu_ram": {"gte": 90000}, "num_gpus": {"eq": 1}, "rentable": {"eq": True}, "verified": {"eq": True},
          "reliability2": {"gte": 0.98}, "disk_space": {"gte": 300}, "disk_bw": {"gte": 500},
@@ -154,10 +153,9 @@ def run(hours=8):
                 "scripts/train/11_run9_box.sh", "configs/train/qwen3/graft.yml", "configs/train/demo_prompts.json",
                 "scripts/train/demo_plugin.py", "scripts/train/spectral_plugin.py", "scripts/train/router_dtype_plugin.py",
                 "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py", "scripts/train/44_energy_doses.py",
-                "data/subsets/train_manifest.json"] + [f"data/subsets/train_{s}.jsonl" for s in SUBSETS]
+                ]
         code += [str(q.relative_to(ROOT)) for q in [ROOT / "scripts/__init__.py", ROOT / "scripts/train/__init__.py"] if q.exists()]
         source_hashes = {}
-        import hashlib
         stream = io.BytesIO()
         with tarfile.open(fileobj=stream, mode="w:gz") as tar:
             for name in code:
@@ -224,6 +222,22 @@ python tests/regression/test_moe_expert_merge.py
             raise
         if heartbeat_future.done():
             heartbeat_future.result()
+        # The box can set up while reviewed training data is finalised locally; upload it once data/subsets/train_manifest.json exists.
+        manifest_path = ROOT / "data/subsets/train_manifest.json"
+        while not manifest_path.exists():
+            assert remaining() > 4 * 3600, "training data not ready with enough lease left for training and evaluation"
+            print("Waiting for data/subsets/train_manifest.json", flush=True)
+            stop.wait(120)
+        train_manifest = json.loads(manifest_path.read_text())
+        assert set(train_manifest["subsets"]) == set(SUBSETS), train_manifest["subsets"].keys()
+        data = ["data/subsets/train_manifest.json"] + [f"data/subsets/train_{s}.jsonl" for s in SUBSETS]
+        stream = io.BytesIO()
+        with tarfile.open(fileobj=stream, mode="w:gz") as tar:
+            for name in data:
+                tar.add(ROOT / name, arcname=name)
+        (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
+        remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
+        print("DATA UPLOADED: " + json.dumps({k: (v["docs"], v["tokens_incl_eos"]) for k, v in train_manifest["subsets"].items()}), flush=True)
         command = (f"cd /workspace/cg && HF_HOME=/workspace/hf RUN9_INSTRUCT_PATH=$(cat /workspace/run9_instruct_path) "
                    f"INCUMBENT_ENERGY={os.environ['INCUMBENT_ENERGY']} RUN9_DEADLINE_EPOCH={state['runner_deadline_epoch']} bash scripts/train/11_run9_box.sh")
         script = f'set +e; {command} > runs/run9/job.log 2>&1; status=$?; echo $status > runs/run9/job.exit; tmux wait-for -S run9_done; exit $status'

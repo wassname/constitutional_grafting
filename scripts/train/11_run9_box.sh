@@ -8,7 +8,9 @@ cd "$(dirname "$0")/../.."
 export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}" HF_HOME=/workspace/hf
 R=runs/run9
 log() { echo "$(date -Is) $*" | tee -a $R/stages.log; }
-SUBSETS="echo stoic opus greek joint"
+SUBSETS=${SUBSETS:-"echo stoic opus greek joint"}
+# subsets whose data is ready early train in a separate tmux session (TRAIN_ONLY=1); the main job waits for it
+while [ -z "${TRAIN_ONLY:-}" ] && tmux has-session -t run9_pretrain 2>/dev/null; do sleep 30; done
 
 cfg() {  # base config, out file, key=YAML-value overrides
   python - "$@" <<'PY'
@@ -23,7 +25,9 @@ PY
 for s in $SUBSETS; do
   o=outputs/r9_$s
   if [ -f $o/adapter_model.safetensors ]; then log "skip train $s"; continue; fi
-  cfg configs/train/qwen3/graft.yml $R/cfg_r9_$s.yml output_dir=$o dataset_prepared_path=outputs/prepared_r9_$s \
+  # small subsets: in-train demo generation at every eval dominated wall time (337 s/step); coalition eval covers demos, so drop the demo plugin
+  cfg configs/train/qwen3/graft.yml $R/cfg_r9_$s.yml output_dir=$o dataset_prepared_path=outputs/prepared_r9_$s evals_per_epoch=1 \
+    "plugins=[scripts.train.spectral_plugin.SpectralPlugin, axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin, axolotl.integrations.liger.LigerPlugin, axolotl.integrations.kernels.KernelsPlugin, scripts.train.router_dtype_plugin.RouterDtypePlugin]" \
     "datasets=[{\"path\": \"data/subsets/train_$s.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]"
   log "start train $s ($(wc -l < data/subsets/train_$s.jsonl) docs)"
   SPECTRAL_LAM=50 axolotl train $R/cfg_r9_$s.yml > $R/train_r9_$s.log 2>&1
@@ -33,6 +37,7 @@ for s in $SUBSETS; do
   log "done train $s"
 done
 
+[ -n "${TRAIN_ONLY:-}" ] && { log "TRAIN_ONLY done: $SUBSETS"; exit 0; }
 ADAPTERS=(); for s in $SUBSETS; do ADAPTERS+=(--adapter $s=outputs/r9_$s); done
 # k=1: recipe-native coefficient at equal token exposure. kE rescales each update to the incumbent run-7e graft's energy
 # (sqrt sum ||scale*B@A||_F^2, INCUMBENT_ENERGY measured locally): matched update size, not matched effect. 2*kE walks toward incoherence.
