@@ -1,0 +1,56 @@
+{
+ "base": "/workspace/cg/runs/run9/heal_parent",
+ "dtype": "float16",
+ "groups": {},
+ "adapters": [
+  {
+   "adapter": "/workspace/cg/outputs/r9e_greek1_healed",
+   "adapter_sha256": "b8d06935f7ce179af609d6b2448f3cf700f5c2ca591d9538d1c9df93423afac2",
+   "scale": 1.0,
+   "lora_modules": 330,
+   "layer30": {
+    "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+     "rel_delta_fro": 0.0006755152135156095
+    },
+    "model.language_model.layers.30.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.003709688549861312
+    },
+    "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.0026673288084566593
+    },
+    "model.language_model.layers.31.self_attn.q_proj.weight": {
+     "rel_delta_fro": 0.000845547707285732
+    },
+    "model.language_model.layers.31.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.003745559137314558
+    },
+    "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.0026463568210601807
+    }
+   }
+  }
+ ],
+ "adapter": "/workspace/cg/outputs/r9e_greek1_healed",
+ "scale": 1.0,
+ "lora_modules": 330,
+ "layer30": {
+  "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+   "rel_delta_fro": 0.0006755152135156095
+  },
+  "model.language_model.layers.30.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.003709688549861312
+  },
+  "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.0026673288084566593
+  },
+  "model.language_model.layers.31.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.000845547707285732
+  },
+  "model.language_model.layers.31.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.003745559137314558
+  },
+  "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.0026463568210601807
+  }
+ }
+}

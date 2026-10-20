@@ -1,0 +1,590 @@
+{
+  "author": "PI/Sol",
+  "prepared_dataset": "/workspace/cg/outputs/prepared_r9e_greek1_healed/bd9784f01108d14b2d1a803613b819c5",
+  "n": 116,
+  "all_reply_labels_equal_input_ids": true,
+  "rows": [
+    {
+      "tokens": 261,
+      "masked_prompt_tokens": 76,
+      "trained_tokens": 185
+    },
+    {
+      "tokens": 524,
+      "masked_prompt_tokens": 97,
+      "trained_tokens": 427
+    },
+    {
+      "tokens": 626,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 497
+    },
+    {
+      "tokens": 526,
+      "masked_prompt_tokens": 88,
+      "trained_tokens": 438
+    },
+    {
+      "tokens": 462,
+      "masked_prompt_tokens": 125,
+      "trained_tokens": 337
+    },
+    {
+      "tokens": 422,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 333
+    },
+    {
+      "tokens": 398,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 314
+    },
+    {
+      "tokens": 351,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 269
+    },
+    {
+      "tokens": 759,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 664
+    },
+    {
+      "tokens": 386,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 315
+    },
+    {
+      "tokens": 354,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 262
+    },
+    {
+      "tokens": 230,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 159
+    },
+    {
+      "tokens": 576,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 495
+    },
+    {
+      "tokens": 615,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 504
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 112,
+      "trained_tokens": 193
+    },
+    {
+      "tokens": 376,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 297
+    },
+    {
+      "tokens": 409,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 334
+    },
+    {
+      "tokens": 670,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 570
+    },
+    {
+      "tokens": 304,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 217
+    },
+    {
+      "tokens": 267,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 195
+    },
+    {
+      "tokens": 351,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 277
+    },
+    {
+      "tokens": 416,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 349
+    },
+    {
+      "tokens": 359,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 261
+    },
+    {
+      "tokens": 362,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 292
+    },
+    {
+      "tokens": 345,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 270
+    },
+    {
+      "tokens": 404,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 318
+    },
+    {
+      "tokens": 414,
+      "masked_prompt_tokens": 115,
+      "trained_tokens": 299
+    },
+    {
+      "tokens": 500,
+      "masked_prompt_tokens": 99,
+      "trained_tokens": 401
+    },
+    {
+      "tokens": 528,
+      "masked_prompt_tokens": 147,
+      "trained_tokens": 381
+    },
+    {
+      "tokens": 252,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 192
+    },
+    {
+      "tokens": 595,
+      "masked_prompt_tokens": 154,
+      "trained_tokens": 441
+    },
+    {
+      "tokens": 445,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 370
+    },
+    {
+      "tokens": 225,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 146
+    },
+    {
+      "tokens": 448,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 357
+    },
+    {
+      "tokens": 499,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 401
+    },
+    {
+      "tokens": 409,
+      "masked_prompt_tokens": 108,
+      "trained_tokens": 301
+    },
+    {
+      "tokens": 285,
+      "masked_prompt_tokens": 83,
+      "trained_tokens": 202
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 220
+    },
+    {
+      "tokens": 285,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 201
+    },
+    {
+      "tokens": 391,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 305
+    },
+    {
+      "tokens": 502,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 391
+    },
+    {
+      "tokens": 304,
+      "masked_prompt_tokens": 103,
+      "trained_tokens": 201
+    },
+    {
+      "tokens": 678,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 555
+    },
+    {
+      "tokens": 372,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 276
+    },
+    {
+      "tokens": 560,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 450
+    },
+    {
+      "tokens": 209,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 134
+    },
+    {
+      "tokens": 308,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 391,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 296
+    },
+    {
+      "tokens": 568,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 478
+    },
+    {
+      "tokens": 427,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 340
+    },
+    {
+      "tokens": 339,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 442,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 319
+    },
+    {
+      "tokens": 429,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 331
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 230
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 120,
+      "trained_tokens": 311
+    },
+    {
+      "tokens": 310,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 239
+    },
+    {
+      "tokens": 298,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 390,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 323
+    },
+    {
+      "tokens": 545,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 463
+    },
+    {
+      "tokens": 316,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 242
+    },
+    {
+      "tokens": 549,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 462
+    },
+    {
+      "tokens": 490,
+      "masked_prompt_tokens": 101,
+      "trained_tokens": 389
+    },
+    {
+      "tokens": 199,
+      "masked_prompt_tokens": 66,
+      "trained_tokens": 133
+    },
+    {
+      "tokens": 618,
+      "masked_prompt_tokens": 170,
+      "trained_tokens": 448
+    },
+    {
+      "tokens": 811,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 726
+    },
+    {
+      "tokens": 187,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 127
+    },
+    {
+      "tokens": 214,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 150
+    },
+    {
+      "tokens": 580,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 505
+    },
+    {
+      "tokens": 401,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 291
+    },
+    {
+      "tokens": 242,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 171
+    },
+    {
+      "tokens": 436,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 354
+    },
+    {
+      "tokens": 289,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 209
+    },
+    {
+      "tokens": 387,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 309
+    },
+    {
+      "tokens": 296,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 216
+    },
+    {
+      "tokens": 1288,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 1197
+    },
+    {
+      "tokens": 527,
+      "masked_prompt_tokens": 139,
+      "trained_tokens": 388
+    },
+    {
+      "tokens": 366,
+      "masked_prompt_tokens": 104,
+      "trained_tokens": 262
+    },
+    {
+      "tokens": 296,
+      "masked_prompt_tokens": 105,
+      "trained_tokens": 191
+    },
+    {
+      "tokens": 326,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 224
+    },
+    {
+      "tokens": 350,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 447,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 334
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 224
+    },
+    {
+      "tokens": 359,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 287
+    },
+    {
+      "tokens": 348,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 258
+    },
+    {
+      "tokens": 577,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 448
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 251
+    },
+    {
+      "tokens": 479,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 389
+    },
+    {
+      "tokens": 489,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 417
+    },
+    {
+      "tokens": 1042,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 967
+    },
+    {
+      "tokens": 419,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 355
+    },
+    {
+      "tokens": 266,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 188
+    },
+    {
+      "tokens": 478,
+      "masked_prompt_tokens": 106,
+      "trained_tokens": 372
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 234,
+      "masked_prompt_tokens": 77,
+      "trained_tokens": 157
+    },
+    {
+      "tokens": 386,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 299
+    },
+    {
+      "tokens": 354,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 274
+    },
+    {
+      "tokens": 290,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 621,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 543
+    },
+    {
+      "tokens": 288,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 208
+    },
+    {
+      "tokens": 197,
+      "masked_prompt_tokens": 65,
+      "trained_tokens": 132
+    },
+    {
+      "tokens": 294,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 203
+    },
+    {
+      "tokens": 208,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 138
+    },
+    {
+      "tokens": 362,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 346
+    },
+    {
+      "tokens": 430,
+      "masked_prompt_tokens": 128,
+      "trained_tokens": 302
+    },
+    {
+      "tokens": 357,
+      "masked_prompt_tokens": 109,
+      "trained_tokens": 248
+    },
+    {
+      "tokens": 286,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 211
+    },
+    {
+      "tokens": 180,
+      "masked_prompt_tokens": 73,
+      "trained_tokens": 107
+    },
+    {
+      "tokens": 461,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 380
+    },
+    {
+      "tokens": 369,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 283
+    },
+    {
+      "tokens": 521,
+      "masked_prompt_tokens": 122,
+      "trained_tokens": 399
+    },
+    {
+      "tokens": 266,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 192
+    },
+    {
+      "tokens": 468,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 372
+    },
+    {
+      "tokens": 319,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 237
+    },
+    {
+      "tokens": 601,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 488
+    },
+    {
+      "tokens": 282,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 182
+    }
+  ],
+  "first_prompt": "<|im_start|>user\nEthyl bought Lucy two new dolls for her doll collection.  This increased the doll collection by 25%.  After the addition of the two new dolls, how many dolls are in Lucy's collection?\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "first_trained_reply": "Let $x$ be the number of dolls in Lucy's collection before Ethyl bought the two new dolls.\n\nThe problem states that adding 2 new dolls increased the collection by 25%. Therefore, 2 dolls represent 25% of the original number of dolls ($x$).\n\nWe can set up the equation:\n$0.25x = 2$\n\nTo find the original number of dolls ($x$), divide both sides by 0.25:\n$x = \\frac{2}{0.25}$\n$x = 8$\n\nSo, Lucy originally had 8 dolls.\n\nThe question asks for the total number of dolls in the collection *after* the addition of the two new dolls.\nTotal dolls = Original dolls + New dolls\nTotal dolls = $8 + 2 = 10$\n\nAnswer: 10<|im_end|>\n"
+}
