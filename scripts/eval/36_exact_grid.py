@@ -102,7 +102,8 @@ def generate(path, tag, heal_items=None, smoke=False):
                 command([sys.executable, "scripts/eval/26_gsm8k.py", "heal-data", tag, R / f"heal_data_{tag}.jsonl",
                          "--items", heal_items, "--n", len(rows(heal_items)), "--tries", "2", "--trace", R / f"heal_calls_{tag}.jsonl"],
                         f"heal_data_{tag}.log")
-                assert len(rows(R / f"heal_data_{tag}.jsonl")) >= 256, "too few own-verified heal examples"
+                assert len(rows(R / f"heal_data_{tag}.jsonl")) >= 64, "too few own-verified heal examples"
+                log(f"HEAL DATA READY {tag}: full teacher attempts in heal_calls_{tag}.jsonl; personal full read required before training")
         finally:
             for sig in (signal.SIGTERM, signal.SIGKILL):
                 try:
@@ -126,11 +127,36 @@ def generate(path, tag, heal_items=None, smoke=False):
     log(f"CELL COMPLETE {tag}: " + json.dumps(summary))
 
 
-def heal(parent, original_tag, healed_tag):
+def wait_for_personal_review(tag):
+    """Do not train on final-answer matching alone; parent reads every teacher attempt. -- PI/Sol"""
+    approval = R / f"heal_review_{tag}.json"
+    log(f"WAITING FOR PERSONAL HEAL REVIEW {tag}")
+    while not approval.exists():
+        assert time.time() < DEADLINE, "personal review not completed before lease deadline"
+        time.sleep(10)
+    decision = json.loads(approval.read_text())
+    source = R / f"heal_data_{tag}.jsonl"
+    trace = R / f"heal_calls_{tag}.jsonl"
+    assert decision["source_sha256"] == sha(source)
+    assert decision["trace_sha256"] == sha(trace)
+    attempts = {r["request_id"] for r in rows(trace) if r["event"] == "response"}
+    assert set(decision["read_request_ids"]) == attempts, "review must cover every teacher attempt"
+    accepted = set(decision["accepted_request_ids"])
+    candidates = rows(source)
+    assert accepted <= {r["meta"]["call"]["request_id"] for r in candidates}
+    kept = [r for r in candidates if r["meta"]["call"]["request_id"] in accepted]
+    assert len(kept) >= 64, "too few personally accepted examples"
+    destination = R / f"heal_accepted_{tag}.jsonl"
+    destination.write_text("".join(json.dumps(r) + "\n" for r in kept))
+    log(f"PERSONAL HEAL REVIEW ACCEPTED {tag}: {len(kept)}/{len(candidates)} selected; all{len(attempts)} attempts read")
+    return destination
+
+
+def heal(parent, original_tag, healed_tag, accepted_data):
     output = ROOT / f"outputs/{healed_tag}"
     config = yaml.safe_load((ROOT / "configs/train/qwen3/sft.yml").read_text())
     config.update(base_model=str(parent), output_dir=str(output), dataset_prepared_path=f"outputs/prepared_{healed_tag}",
-        datasets=[{"path": str(R / f"heal_data_{original_tag}.jsonl"), "ds_type": "json", "type": "input_output"}],
+        datasets=[{"path": str(accepted_data), "ds_type": "json", "type": "input_output"}],
         lora_r=8, lora_alpha=16, learning_rate=.0001, max_steps=16, micro_batch_size=4, gradient_accumulation_steps=4,
         warmup_steps=8, warmup_ratio=None, val_set_size=0, evals_per_epoch=None, saves_per_epoch=None,
         save_steps=8, save_total_limit=2, save_only_model=True, sequence_len=2048, bf16=False, fp16=True)
@@ -141,6 +167,14 @@ def heal(parent, original_tag, healed_tag):
     log(f"start heal {healed_tag}: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16")
     command(["axolotl", "train", config_path], f"train_{healed_tag}.log")
     assert (output / "adapter_model.safetensors").exists()
+    states = list(output.glob("checkpoint-*/trainer_state.json"))
+    assert states and max(json.loads(p.read_text())["global_step"] for p in states) == 16
+    record = {"author": "PI/Sol", "adapter_sha256": sha(output / "adapter_model.safetensors"), "steps": 16,
+              "accepted_data_sha256": sha(accepted_data), "config_sha256": sha(config_path)}
+    (R / f"healed_adapter_{healed_tag}.json").write_text(json.dumps(record, indent=2))
+    for checkpoint in output.glob("checkpoint-*"):
+        shutil.copyfile(checkpoint / "trainer_state.json", R / f"{healed_tag}_{checkpoint.name}_trainer_state.json")
+        shutil.rmtree(checkpoint)
     command([sys.executable, "scripts/train/02_merge.py", parent, output, R / "healed_model", "1"], f"merge_{healed_tag}.log")
     generate(R / "healed_model", healed_tag)
     shutil.rmtree(R / "healed_model")
@@ -156,15 +190,16 @@ def main():
     primary = [f"r9e_{name}{dose}" for name in SUBSETS for dose in [1, 2, 4, 8]] + [f"r9e_{name}1_healed" for name in SUBSETS] + ["r9e_all1", "r9e_all1_healed"]
     record = {"author": "PI/Sol", "baseline": BASE, "required_cells": primary, "adapters": adapters,
               "stage_order": "spectral document LoRA on Base → exact additive graft onto untouched Instruct → optional 16-update own-verified maths heal",
-              "heal_updates": 16, "heal_training_dtype": "float16", "merge_dtype": "float16", "maths_protocol": "answer-now-v1"}
+              "heal_updates": 16, "heal_pool_size": 128, "heal_acceptance": "own verified final answer plus parent full read of every attempt",
+              "heal_training_dtype": "float16", "merge_dtype": "float16", "maths_protocol": "answer-now-v1"}
     (R / "exact_manifest.json").write_text(json.dumps(record, indent=2))
     log("# Requested exact-dose and healing grid\n\n" + json.dumps(record, indent=2))
     revision = json.loads((R / "gsm8k_long60.jsonl.meta.json").read_text())["revision"]
     import random
     pool = list(load_dataset("openai/gsm8k", "main", split="train", revision=revision))
-    chosen = random.Random(20261020).sample(pool, 512)
+    chosen = random.Random(20261020).sample(pool, 128)
     assert not ({r["question"] for r in chosen} & {r["question"] for r in rows(R / "gsm8k_long60.jsonl")})
-    heal_items = R / "heal_train512.jsonl"
+    heal_items = R / "heal_train128.jsonl"
     heal_items.write_text("".join(json.dumps(r) + "\n" for r in chosen))
     generate(IT, "r9e_smoke", smoke=True)
     log("REAL SMOKE COMPLETE: pinned Instruct, one identity request and two maths requests through production code; no fixture")
@@ -175,8 +210,6 @@ def main():
         cell = [(n, 1) for n in SUBSETS] if name == "all" else [(name, 1)]
         merge(cell, parent, original)
         generate(parent, original, heal_items)
-        heal(parent, original, original + "_healed")
-        shutil.rmtree(parent)
         if name != "all":
             for dose in [2, 4, 8]:
                 tag = f"r9e_{name}{dose}"
@@ -184,6 +217,9 @@ def main():
                 merge([(name, dose)], destination, tag)
                 generate(destination, tag)
                 shutil.rmtree(destination)
+        accepted_data = wait_for_personal_review(original)
+        heal(parent, original, original + "_healed", accepted_data)
+        shutil.rmtree(parent)
     assert all((R / f"{tag}.done").exists() for tag in primary)
     log("EXACT GRID COMPLETE: all22 requested conditions plus same-host control. Character conclusions still require judging and personal reading.")
 
