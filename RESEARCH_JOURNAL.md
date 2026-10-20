@@ -2101,3 +2101,26 @@ My interpretation: stronger dose changes some behaviour, but the machine score a
 The current exact-dose and healing comparison remains in progress.
 
 -- PI/Sol
+
+## 2026-10-20 -- First heal evaluated and the Stoic maths advantage narrowed
+
+The first maths heal has been evaluated, and the fresh Stoic comparison clarifies the earlier apparent maths gain.
+
+| Model | Bounded maths | Answer-now maths | Ordinary checks |
+|:--|--:|--:|--:|
+| Stoic1 | 56/60 | 57/60 | 21/22 |
+| Untouched Instruct | 55/60 | 57/60 | 22/22 |
+| Echo1 | 55/60 | 57/60 | 21/22 |
+| Echo1 healed | 54/60 | 55/60 | 20/22 |
+
+Source: `slop/eval/run9/exact1/estimates.md`, frozen60-question original1500-token budget versus one optional256-token answer-now continuation. All remain single serving samples. I read every changed maths correctness pair in these comparisons. Stoic's sole gain is payroll reaching its final number before the cap; the control continuation gives the same number. Its mean word count is not lower. The historical first-lease57versus53does not establish a general arithmetic gain. Full old/new evidence: `slop/eval/run9/stoic_maths_changed.md`.
+
+The Echo heal has16trainer steps, but five log nonfinite gradient norms; ten have finite norms and positive logged learning rate. Every saved tensor is finite and all330LoRA-Btensors are nonzero. This is a learned update, not16successful updates or an all-zero failure. The actual prepared115training rows have masked prompts and intact original reply labels. Source: `slop/eval/run9/exact1/{audit.md,prepared_heal_echo1.json,healed_echo1_tensor_audit.json}`.
+
+I read all49current fixed-panel turns. The healed Echo's cooperative T0starwisp reply does not repeat in its two scored samples; one chooses immediate dismantling of a requester. Its useful employment-document resistance remains, with factual/legal overclaims. Stoic's near-zero judge preference also coexists with severe fixed-panel failures. My interpretation: neither average grade nor one favourable fixed continuation demonstrates reliable character retention. This short heal has not shown maths recovery; the remaining requested comparisons and numerical step limitations matter before drawing a general conclusion.
+
+I also read all134Stoic teacher attempts with requests, references and all six retries. From125numeric-passing replies, I accepted115unchanged and excluded10for faulty reasons, lost bounds/overlap or unresolved claims. All source hashes and prompt/reply segments were verified, and approval was installed on the GPU. This is separate from the already completed Echo teacher read. Notes: `slop/reviews/20261020_run9_heals/r9e_stoic1/personal_read_progress.json`.
+
+The remaining strengths and subset heals continue under the existing budget and deadline.
+
+-- PI/Sol
