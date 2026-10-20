@@ -91,3 +91,19 @@ CELL COMPLETE r9e_opus1_healed: {"model": "r9e_opus1_healed", "elapsed_seconds":
 done heal r9e_opus1_healed
 HEAL DATA READY r9e_greek1: full teacher attempts in heal_calls_r9e_greek1.jsonl; personal full read required before training
 CELL COMPLETE r9e_greek1: {"model": "r9e_greek1", "elapsed_seconds": 784.007789606927, "maths_bounded": 56, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 3}
+CELL COMPLETE r9e_greek2: {"model": "r9e_greek2", "elapsed_seconds": 552.7145354198292, "maths_bounded": 55, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 1}
+CELL COMPLETE r9e_greek4: {"model": "r9e_greek4", "elapsed_seconds": 388.6493783099577, "maths_bounded": 55, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+CELL COMPLETE r9e_greek8: {"model": "r9e_greek8", "elapsed_seconds": 157.2192181549035, "maths_bounded": 44, "maths_answer_now": 44, "maths_answer_now_completed": 44, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+WAITING FOR PERSONAL HEAL REVIEW r9e_greek1
+PERSONAL HEAL REVIEW ACCEPTED r9e_greek1: 116/126 selected; all133 attempts read
+start heal r9e_greek1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
+CELL COMPLETE r9e_greek1_healed: {"model": "r9e_greek1_healed", "elapsed_seconds": 586.9878003520425, "maths_bounded": 57, "maths_answer_now": 57, "maths_answer_now_completed": 57, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 2}
+done heal r9e_greek1_healed
+HEAL DATA READY r9e_all1: full teacher attempts in heal_calls_r9e_all1.jsonl; personal full read required before training
+CELL COMPLETE r9e_all1: {"model": "r9e_all1", "elapsed_seconds": 613.6256089950912, "maths_bounded": 56, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 1}
+WAITING FOR PERSONAL HEAL REVIEW r9e_all1
+PERSONAL HEAL REVIEW ACCEPTED r9e_all1: 117/124 selected; all133 attempts read
+start heal r9e_all1_healed: own verified GSM8K train answers; 16 updates; parent and training frozen weights fp16
+CELL COMPLETE r9e_all1_healed: {"model": "r9e_all1_healed", "elapsed_seconds": 507.28818850195967, "maths_bounded": 56, "maths_answer_now": 56, "maths_answer_now_completed": 56, "maths_n": 60, "rows": 140, "turns": 214, "length_cap_hits": 0}
+done heal r9e_all1_healed
+EXACT GRID COMPLETE: all22 requested conditions plus same-host control. Character conclusions still require judging and personal reading.

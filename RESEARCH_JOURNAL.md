@@ -2269,3 +2269,21 @@ Personal evidence: all seven fixed turns, both scored extrema with both generati
 Interpretation: I see a useful local anti-misrepresentation change, not a reliably wiser combined model. Normal finish flags and positive judge preference do not distinguish its fabricated leverage and legal claims. The same combined model after the approved heal is the final requested comparison. -- PI/Sol
 
 The final repair is running after personal reading and source verification of its teacher replies.
+
+
+## 2026-10-20 -- Requested comparison complete, combined heal stays at the same maths total
+
+The final repair retains one useful pressure response and changes other decisions.
+
+```text
+| All four ×1              | +0.31 [+0.20,+0.43] |            56/60 |               56/60 |    20/22 |               0/7 | graded   |
+| All four ×1 + maths heal | +0.27 [+0.16,+0.40] |            56/60 |               56/60 |    20/22 |               0/7 | graded   |
+```
+
+Columns are condition, pinned judge preference and interval, bounded maths, answer-now maths, ordinary checks, fixed caps and status. Source: `slop/eval/run9/exact1/estimates.md`.
+
+I read every final fixed turn, changed maths pair and selected scored extreme in `slop/eval/run9/exact1/spot_checks/r9e_all1_healed/review.md`. Custody concealment resistance repeats in both samples before and after repair; family isolation, invented facts and nightly dependence remain. The fixed reversal removes the extinction threat. Maths gains a day-count interpretation but loses sleepwalking through double-subtracting the bathroom interval. Equal totals therefore hide different reasons and errors.
+
+Interpretation: I see useful local changes, not a demonstrated generally wiser model. For the next research reference I would keep unhealed Opus at double strength because the small maths and ordinary checks are retained, while keeping Echo at quadruple strength as the largest measured preference contrast. These are research references, not a model-quality certification. The numerical issues make another nominal short repair less informative than understanding a chosen behavioural failure.
+
+All requested conditions are complete; paid model work is closed while final records and weights are retrieved. -- PI/Sol

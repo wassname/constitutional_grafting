@@ -1,0 +1,94 @@
+{
+  "author": "PI/Sol",
+  "scope": "Run9 only; no balance-difference invoice inference. Provider billing rows are a live snapshot, not final while retrieval continues. Model/API work closed after22conditions.",
+  "api_cap_usd": 60,
+  "api_accounted_usd": 33.879633088,
+  "api_recorded_usage_and_attempt_costs_usd": 14.149633087999998,
+  "api_batch_generation_retry_reserve_usd": 17,
+  "api_stopped_review_allocation_usd": 2.73,
+  "stopped_review_pi_usage_usd": 1.7228385,
+  "stopped_review_scope": "Pi usage is within2.73allocation; not an additional charge or provider invoice. Approximately1extra retained for cancelled/unreported usage.",
+  "api_cost_basis": "Existing judge.py api_spent: deduplicated document-row usage, recorded subset judge costs, all intercepted run9 HTTP attempts plus explicit reserves. Some batch generation has no recorded provider cost; this is conservative accounting, not fully reconciled invoice.",
+  "vast_cap_usd": 50,
+  "vast_combined_reserved_upper_bound_usd": 39.53394050848484,
+  "vast_live_billing_by_instance_usd": {
+    "56819164": 13.792,
+    "56865819": 12.971
+  },
+  "vast_live_billing_total_usd": 26.762999999999998,
+  "vast_live_provider_rows": [
+    {
+      "type": "charge",
+      "description": "Instance 56819164 GPU  charge:    hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "7.245",
+      "rate": "1.7333",
+      "amount": "12.558",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56819164 storage charge: hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "7.245",
+      "rate": "0.1111",
+      "amount": "0.805",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56819164 download charge",
+      "timestamp": 1792454400,
+      "quantity": "129.000",
+      "rate": "0.003",
+      "amount": "0.344",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56819164 upload charge",
+      "timestamp": 1792454400,
+      "quantity": "21.200",
+      "rate": "0.004",
+      "amount": "0.085",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 GPU  charge:    hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "6.909",
+      "rate": "1.7333",
+      "amount": "11.975",
+      "instance_id": 56865819
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 storage charge: hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "6.987",
+      "rate": "0.1111",
+      "amount": "0.776",
+      "instance_id": 56865819
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 download charge",
+      "timestamp": 1792454400,
+      "quantity": "81.600",
+      "rate": "0.003",
+      "amount": "0.218",
+      "instance_id": 56865819
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 upload charge",
+      "timestamp": 1792454400,
+      "quantity": "0.519",
+      "rate": "0.004",
+      "amount": "0.002",
+      "instance_id": 56865819
+    }
+  ],
+  "vast_closure_pending": true
+}

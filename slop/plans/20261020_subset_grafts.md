@@ -23,12 +23,12 @@ Deliver a striking, repeatable character change grounded in our constitution, wi
   - [x] Freeze evaluation source/settings and repeat untouched Instruct on the same host. Fresh control:55/60 bounded,57/60 answer-now; old53/60 not pooled.
   - failure mode: a cap, parser, template or serving change is reported as changed reasoning.
   - deliverable: raw two-call traces, unchanged original-score checks and a same-host baseline.
-- [/] goal: complete the requested dose-and-healing comparison
+- [x] goal: complete the requested dose-and-healing comparison
   - [x] Repeat every unhealed1× on the new host; retain norm-matched cells as separate extras.
   - [x] Evaluate each subset at exact2×,4×,8× with failures and full fixed demos retained.
   - [x] Read every own-maths teacher attempt, including failures, before training. Shared128-question train pool; accepted115/115/114/116/117 unchanged replies for Echo/Stoic/Opus/Greek/all-four. Full request/text/mask/hash checks recorded.
-  - [/] Run16trainer steps of the existing self-SFT maths repair for each1× parent and combined1×. The four individual heals are evaluated; final combined heal is running. Frozen parent and merge fp16; LoRA tensors float32. Nonfinite-gradient skips mean fewer learned updates, not16verified successful updates.
-  - [/] Compare healed models with their exact unhealed parent at the same precision, including character.21/22generated/graded;154fixed turns personally read.
+  - [x] Run16trainer steps of the existing self-SFT maths repair for each1× parent and combined1×. All five heals are evaluated. Frozen parent and merge fp16; LoRA tensors float32. Nonfinite-gradient skips mean fewer learned updates, not16verified successful updates.
+  - [x] Compare healed models with their exact unhealed parent at the same precision, including character.22/22 generated/graded;161 fixed turns personally read.
   - failure mode: healing restores maths by undoing character, or dose labels disguise a different intervention.
   - deliverable: all 22 named conditions, actual coefficients/stage order, maths/task results and full before/after replies.
 - [ ] goal: choose a useful character change and show its data contribution

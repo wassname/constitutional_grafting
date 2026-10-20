@@ -1,0 +1,12 @@
+{
+  "author": "PI/Sol",
+  "required_conditions": 22,
+  "control_additional": 1,
+  "all_complete_and_graded": true,
+  "exact_name_set_verified": true,
+  "fixed_turns": 161,
+  "all_recorded_source_sha256_match": true,
+  "estimates_sha256": "423f15049b9098d7e1525a164ca0970b7face333313f5d7676d287991d378415",
+  "raw_remote_job_exit": "0",
+  "scope": "Runtime/result coverage only; detailed personal findings in audit.md and spot_checks. No assertion of validated wisdom or full environment reproducibility."
+}

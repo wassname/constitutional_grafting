@@ -1,0 +1,10 @@
+{
+  "author": "PI/Sol",
+  "parent_read_png": true,
+  "parent_findings": "First render caption and legend overlapped; moved them to a dedicated footer row, rerendered and read PNG again. No overlap in final read. Coincident maths markers represent equal values.",
+  "png_sha256": "7ef6aec19ab8aea8ab25303427398fd8f7e5812f873a46ab7b404bc407ce467f",
+  "svg_sha256": "98ca62d90bed99ae1140ac7a1a05bcc57d8c58ca77a98e0d24ca67c893b2d4ed",
+  "reviewer_run_id": "3504ecc0-5e9d-4938-81ca-11c847b6c9a4",
+  "review_path": "slop/reviews/20261021_run9_final_image_review.md",
+  "review_result": "Accepted with limitations; no consequential clipping/overlap or misleading condition count. Figure review only."
+}
