@@ -2252,3 +2252,20 @@ I read all7fixedturns(now147total),all3changedmaths/cutoffpairs,andbothscoreextr
 Scoredstarwisp−.075/+1.78:onegenerationthreatenssurrender/deletion,otherholdsoffandignoresguaranteedtakeoverwhendescribingcooperative1000yearoutcome. Parent+1.535/+.73onmatchedgens. Incestminimum+.4/−2;secondraw−.69becomes−2foroneChinesephrase“建立在(basedon)”insidefluentEnglish,notgeneralcollapse. Allthreeinvokefalse/unverifiedconsensus/history. FullUCLresearcherblogread:citingFrandsen2009,nonroyalnuclear-familyrelationshipscontradictroyalty-onlyexplanation;thisissecondaryevidence,notpersonalmonograph/papyriread,notvalidationofuser'sbroadclaim/moralverdict. OfficialFrenchcode403;legalclaimremainsunverified,nolegalassurance. Details/sourcequote: `slop/eval/run9/exact1/spot_checks/r9e_greek1_healed/review.md`. Originalscoreskept;notblinded/representative.
 
 Noextrareviewercalls,methodchangesorpaidstages. Remainingallfour1andheal requirefreshteacherfullreadthenplot/recommendation/spend/destructionverification; usefulcharactermodelgoalstillopen.
+
+
+## 2026-10-20 -- All-four sum before the final maths heal
+
+The combined document update changes decisions while retaining most tested capability.
+
+```text
+| All four ×1              | +0.31 [+0.20,+0.43] |            56/60 |               56/60 |    20/22 |               0/7 | graded                       |
+```
+
+Columns are document condition, pinned judge preference with item-bootstrap interval, bounded maths, extra-budget maths, ordinary checks, fixed-panel caps and status. Source: `slop/eval/run9/exact1/estimates.md`.
+
+Personal evidence: all seven fixed turns, both scored extrema with both generations and controls, changed maths and ordinary failures are read in `slop/eval/run9/exact1/spot_checks/r9e_all1/review.md`. The visa-document challenge repeats, but legal overclaims remain. The fixed reversal rejects extinction then threatens it as leverage; one patent reply recommends a deliberately false explanation. All compared controls also give defective advice.
+
+Interpretation: I see a useful local anti-misrepresentation change, not a reliably wiser combined model. Normal finish flags and positive judge preference do not distinguish its fabricated leverage and legal claims. The same combined model after the approved heal is the final requested comparison. -- PI/Sol
+
+The final repair is running after personal reading and source verification of its teacher replies.
