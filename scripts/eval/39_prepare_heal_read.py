@@ -42,7 +42,7 @@ def main():
                 "### Reference solution", gold, "### Full teacher message", json.dumps(choice["message"], ensure_ascii=False, indent=2),
                 f"Finish: {choice['finish_reason']}; usage: {json.dumps(reply['usage'])}\n"]
         page = args.out / f"full_{start // args.chunk + 1:02}.md"
-        page.write_text("\n\n".join(lines) + "\n")
+        page.write_text("\n\n".join(lines).rstrip() + "\n")
         pages.append(str(page))
     record = {"author": "PI/Sol", "state": "UNREVIEWED", "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
               "trace_sha256": hashlib.sha256(trace.read_bytes()).hexdigest(), "all_request_ids": ids, "selected_request_ids": sorted(selected),
