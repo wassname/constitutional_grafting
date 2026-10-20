@@ -1,0 +1,9 @@
+warning: typing_extensions-4.16.0.tar.gz is missing an upload date, but user provided: 2026-10-12T01:26:32.290716775Z
+warning: typing_extensions-4.16.0-py3-none-any.whl is missing an upload date, but user provided: 2026-10-12T01:26:32.290716775Z
+warning: sympy-1.14.0.tar.gz is missing an upload date, but user provided: 2026-10-12T01:26:32.290716775Z
+warning: sympy-1.14.0-py3-none-any.whl is missing an upload date, but user provided: 2026-10-12T01:26:32.290716775Z
+warning: mpmath-1.3.0.tar.gz is missing an upload date, but user provided: 2026-10-12T01:26:32.290716775Z
+warning: mpmath-1.3.0-py3-none-any.whl is missing an upload date, but user provided: 2026-10-12T01:26:32.290716775Z
+Installed 12 packages in 407ms
+E_ref=9.7944 E_other=9.7944 (norm of the deployed delta; squared-energy ratio 1.000)
+ratio=1.000
