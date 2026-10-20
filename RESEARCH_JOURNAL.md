@@ -2228,3 +2228,9 @@ All133fixedT0turns throughGreek4are read. Bothscoreextrema/bothgens/control/verd
 Read-onlycostfollow-upfoundthestoppedFablereview's10assistantmessages,includingabortedlaststream. Piusagecosts sum$1.7228385. Thisisnotprovider-invoiceverificationandmayomitlaterabortedstreamcharges. `slop/reviews/20261020_blind_eval/stopped_fable_usage.json` savesusageonly,sourcepath/hashandstoppedstate. Original$10reserve REMAINSinbudget;do notadd$1.72againon top. No resumedreviewornewcalls;stillnofullblind-panelverdict. Thisnarrowsaccountinguncertaintywithoutrestartingthe sideline.
 
 Greek8/heal/allfour1/healremain. Greek116targetapprovalinstalled;capturetransientmerge/healthaftertrainingstarts,thenfulltrainlog/CPUweights/actualmaskschecks. Frozenmethod/precisionunchanged.
+
+## Greek8 graded: semantic endpoint, not uniformly lost arithmetic
+
+PI/Sol.19/22requestedconditions now generated/graded plus freshcontrol. Greek8−0.56[−0.71,−0.40],44/60maths in both budgets,17/22ordinary,0panelcaps. Latest successful-cachejudgecost$0.076376328;conservativeAPIaccounting/reserves$33.610757908,notinvoice. All140fixedT0turnsread. All16mathsmissesandgoldsolutionsread;60/60wirecontent/normalstop/norescuesverified. Nineformat omissionsincludeexplicitcorrect19,80,5,145derivations;othererrorsandambiguitiesreportedabove. No silentrescueofnormalstopanswers.
+
+I read allfiveordinarylossesandmatchedcontrols: wage75derivedcorrectlywithoutAnswerformat;walletsnonparseableJSONandreferentconfusion;stories71/38wordsinsteadabout1200,including“Mousonius”/“Maronius”andcircularpronouns. Thus0token-capsdoesnotmeanintactusefulness. Brokenformatmattersbutisnotentireexplanation. Completeoutputs `slop/eval/run9/exact1/{greek8_all_misses.md,greek8_ordinary_losses.md,box_runs/panel_r9e_greek8.jsonl}`. Greek116targethealnowrunningunchanged;healthcapturetaskpending. Remainingthreeconditions,notgoalcompletion.
