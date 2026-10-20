@@ -1,0 +1,7 @@
+{
+  "author": "PI/Sol",
+  "before_first_inference": true,
+  "reason": "Full personal reading of every maths-heal teacher attempt before training; a shared128-question pool, not512, >=64 accepted examples and same16-update budget. Higher-dose generation runs while parent reads. No extra judge calls. Approval checks source/trace hashes and every response ID.",
+  "sha256": "1ae2f0a716fa0529636aa6a37c669215fe4f983fec72df1fc1615e79032d3e4e",
+  "checkpoint_retention": "After final adapter hash and16steps verified, copy trainer-state curves and remove duplicate intermediate adapter weights before materialising the healed inference model; preserve all five final adapters."
+}

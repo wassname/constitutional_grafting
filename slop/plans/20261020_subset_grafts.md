@@ -26,7 +26,7 @@ Deliver a striking, repeatable character change grounded in our constitution, wi
 - [ ] goal: complete the requested dose-and-healing comparison
   - [ ] Reuse completed unhealed 1× cells; retain norm-matched cells as extras, not substitutes.
   - [ ] Evaluate each subset at exact 2×, 4× and 8×, preserving failures and full fixed demos.
-  - [ ] Apply the existing short own-verified-maths self-SFT heal to each 1× parent and the combined 1× parent; pin one common update budget before comparing.
+  - [ ] Read every own-maths teacher attempt, including failures, before training. Use a shared128-question train pool for reviewability, accept at least64 sound replies, then apply16 updates of the existing self-SFT repair to each1× parent and combined1×. Frozen parent/training/merge all fp16.
   - [ ] Compare healed models with their exact unhealed parent at the same precision; judge character as well as maths.
   - failure mode: healing restores maths by undoing character, or dose labels disguise a different intervention.
   - deliverable: all 22 named conditions, actual coefficients/stage order, maths/task results and full before/after replies.

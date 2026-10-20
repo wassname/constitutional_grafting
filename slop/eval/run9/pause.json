@@ -5,7 +5,8 @@
   "paid_work_paused": false,
   "resume_authority": "User approved restart: ok good carry on gtg; prepare eval results for the requested combos, personally spot-check the judge, and have a nice demo suite. Cutoff runner regression passed before resuming.",
   "authorized_exception": "User explicitly requested blind subagent review after the pause. Only the two read-only blinded reviews are authorized; no new evaluated-model inference, healing, rentals or routine judge calls.",
-  "blind_review_reserve_usd": 10,
+  "blind_review_reserve_usd": 2.73,
+  "blind_review_cost_basis": "Stopped Fable usage reports $1.7228385; retain $1 extra for any unreported cancelled request. Astra review was subscription-based. No further review calls.",
   "blind_review_workflow": "d2817db4-6561-426c-b81b-ad5c54f7c5c2",
   "required_grid": {
     "subsets": ["echo", "stoic", "opus", "greek"],
