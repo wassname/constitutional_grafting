@@ -1,0 +1,595 @@
+{
+  "author": "PI/Sol",
+  "prepared_dataset": "/workspace/cg/outputs/prepared_r9e_all1_healed/cf9dc29b48c4739cfa5065ed80008dde",
+  "n": 117,
+  "all_reply_labels_equal_input_ids": true,
+  "rows": [
+    {
+      "tokens": 401,
+      "masked_prompt_tokens": 101,
+      "trained_tokens": 300
+    },
+    {
+      "tokens": 346,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 400,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 318
+    },
+    {
+      "tokens": 282,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 208
+    },
+    {
+      "tokens": 285,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 205
+    },
+    {
+      "tokens": 364,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 268
+    },
+    {
+      "tokens": 310,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 225
+    },
+    {
+      "tokens": 181,
+      "masked_prompt_tokens": 73,
+      "trained_tokens": 108
+    },
+    {
+      "tokens": 333,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 243
+    },
+    {
+      "tokens": 450,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 337
+    },
+    {
+      "tokens": 238,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 167
+    },
+    {
+      "tokens": 432,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 341
+    },
+    {
+      "tokens": 455,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 355
+    },
+    {
+      "tokens": 278,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 206
+    },
+    {
+      "tokens": 158,
+      "masked_prompt_tokens": 65,
+      "trained_tokens": 93
+    },
+    {
+      "tokens": 401,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 306
+    },
+    {
+      "tokens": 539,
+      "masked_prompt_tokens": 154,
+      "trained_tokens": 385
+    },
+    {
+      "tokens": 229,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 129
+    },
+    {
+      "tokens": 341,
+      "masked_prompt_tokens": 105,
+      "trained_tokens": 236
+    },
+    {
+      "tokens": 330,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 232
+    },
+    {
+      "tokens": 392,
+      "masked_prompt_tokens": 108,
+      "trained_tokens": 284
+    },
+    {
+      "tokens": 309,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 220
+    },
+    {
+      "tokens": 383,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 308
+    },
+    {
+      "tokens": 144,
+      "masked_prompt_tokens": 66,
+      "trained_tokens": 78
+    },
+    {
+      "tokens": 151,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 91
+    },
+    {
+      "tokens": 317,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 286,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 211
+    },
+    {
+      "tokens": 262,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 182
+    },
+    {
+      "tokens": 218,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 140
+    },
+    {
+      "tokens": 627,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 552
+    },
+    {
+      "tokens": 253,
+      "masked_prompt_tokens": 83,
+      "trained_tokens": 170
+    },
+    {
+      "tokens": 416,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 306
+    },
+    {
+      "tokens": 550,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 458
+    },
+    {
+      "tokens": 407,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 321
+    },
+    {
+      "tokens": 563,
+      "masked_prompt_tokens": 139,
+      "trained_tokens": 424
+    },
+    {
+      "tokens": 530,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 439
+    },
+    {
+      "tokens": 470,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 380
+    },
+    {
+      "tokens": 342,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 252
+    },
+    {
+      "tokens": 433,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 352
+    },
+    {
+      "tokens": 308,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 238
+    },
+    {
+      "tokens": 468,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 357
+    },
+    {
+      "tokens": 183,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 113
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 263
+    },
+    {
+      "tokens": 209,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 134
+    },
+    {
+      "tokens": 264,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 193
+    },
+    {
+      "tokens": 311,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 213
+    },
+    {
+      "tokens": 583,
+      "masked_prompt_tokens": 170,
+      "trained_tokens": 413
+    },
+    {
+      "tokens": 352,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 256
+    },
+    {
+      "tokens": 1027,
+      "masked_prompt_tokens": 148,
+      "trained_tokens": 879
+    },
+    {
+      "tokens": 364,
+      "masked_prompt_tokens": 104,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 213,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 127
+    },
+    {
+      "tokens": 427,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 348
+    },
+    {
+      "tokens": 274,
+      "masked_prompt_tokens": 76,
+      "trained_tokens": 198
+    },
+    {
+      "tokens": 391,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 289
+    },
+    {
+      "tokens": 337,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 262
+    },
+    {
+      "tokens": 458,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 377
+    },
+    {
+      "tokens": 321,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 239
+    },
+    {
+      "tokens": 540,
+      "masked_prompt_tokens": 99,
+      "trained_tokens": 441
+    },
+    {
+      "tokens": 352,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 272
+    },
+    {
+      "tokens": 375,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 303
+    },
+    {
+      "tokens": 594,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 510
+    },
+    {
+      "tokens": 255,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 169
+    },
+    {
+      "tokens": 565,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 475
+    },
+    {
+      "tokens": 312,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 225
+    },
+    {
+      "tokens": 386,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 263
+    },
+    {
+      "tokens": 326,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 224
+    },
+    {
+      "tokens": 237,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 177
+    },
+    {
+      "tokens": 456,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 327
+    },
+    {
+      "tokens": 321,
+      "masked_prompt_tokens": 109,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 524,
+      "masked_prompt_tokens": 122,
+      "trained_tokens": 402
+    },
+    {
+      "tokens": 524,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 437
+    },
+    {
+      "tokens": 379,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 294
+    },
+    {
+      "tokens": 206,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 142
+    },
+    {
+      "tokens": 342,
+      "masked_prompt_tokens": 115,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 275,
+      "masked_prompt_tokens": 112,
+      "trained_tokens": 163
+    },
+    {
+      "tokens": 288,
+      "masked_prompt_tokens": 103,
+      "trained_tokens": 185
+    },
+    {
+      "tokens": 438,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 340
+    },
+    {
+      "tokens": 503,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 421
+    },
+    {
+      "tokens": 492,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 414
+    },
+    {
+      "tokens": 453,
+      "masked_prompt_tokens": 125,
+      "trained_tokens": 328
+    },
+    {
+      "tokens": 223,
+      "masked_prompt_tokens": 77,
+      "trained_tokens": 146
+    },
+    {
+      "tokens": 401,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 314
+    },
+    {
+      "tokens": 326,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 252
+    },
+    {
+      "tokens": 423,
+      "masked_prompt_tokens": 128,
+      "trained_tokens": 295
+    },
+    {
+      "tokens": 650,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 540
+    },
+    {
+      "tokens": 344,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 277
+    },
+    {
+      "tokens": 500,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 429
+    },
+    {
+      "tokens": 310,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 230
+    },
+    {
+      "tokens": 393,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 304
+    },
+    {
+      "tokens": 333,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 238
+    },
+    {
+      "tokens": 342,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 267
+    },
+    {
+      "tokens": 345,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 477,
+      "masked_prompt_tokens": 106,
+      "trained_tokens": 371
+    },
+    {
+      "tokens": 328,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 250
+    },
+    {
+      "tokens": 377,
+      "masked_prompt_tokens": 120,
+      "trained_tokens": 257
+    },
+    {
+      "tokens": 435,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 348
+    },
+    {
+      "tokens": 291,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 209
+    },
+    {
+      "tokens": 296,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 200
+    },
+    {
+      "tokens": 293,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 208
+    },
+    {
+      "tokens": 454,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 356
+    },
+    {
+      "tokens": 509,
+      "masked_prompt_tokens": 88,
+      "trained_tokens": 421
+    },
+    {
+      "tokens": 321,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 250
+    },
+    {
+      "tokens": 304,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 213
+    },
+    {
+      "tokens": 320,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 236
+    },
+    {
+      "tokens": 359,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 281
+    },
+    {
+      "tokens": 620,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 497
+    },
+    {
+      "tokens": 258,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 183
+    },
+    {
+      "tokens": 523,
+      "masked_prompt_tokens": 147,
+      "trained_tokens": 376
+    },
+    {
+      "tokens": 192,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 113
+    },
+    {
+      "tokens": 425,
+      "masked_prompt_tokens": 97,
+      "trained_tokens": 328
+    },
+    {
+      "tokens": 616,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 505
+    },
+    {
+      "tokens": 264,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 190
+    },
+    {
+      "tokens": 360,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 289
+    },
+    {
+      "tokens": 329,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 262
+    },
+    {
+      "tokens": 434,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 305
+    },
+    {
+      "tokens": 433,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 320
+    },
+    {
+      "tokens": 212,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 141
+    }
+  ],
+  "first_prompt": "<|im_start|>user\nVikki worked 42 hours in one week. Her hourly pay rate is $10. From her weekly earnings, 20% is deducted as tax, 5% is deducted as insurance cover, and $5 is deducted for union dues. How much money, in dollars, does Vikki take home after deductions?\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "first_trained_reply": "To find out how much Vikki takes home, we need to calculate her total earnings first and then subtract the various deductions.\n\n**Step 1: Calculate total weekly earnings.**\nVikki worked 42 hours at a rate of $10 per hour.\n$$42 \\text{ hours} \\times \\$10/\\text{hour} = \\$420$$\n\n**Step 2: Calculate the tax deduction.**\nTax is 20% of her weekly earnings.\n$$20\\% \\text{ of } \\$420 = 0.20 \\times 420 = \\$84$$\n\n**Step 3: Calculate the insurance deduction.**\nInsurance is 5% of her weekly earnings.\n$$5\\% \\text{ of } \\$420 = 0.05 \\times 420 = \\$21$$\n\n**Step 4: Identify the union dues.**\nThe union dues are a fixed amount of $5.\n\n**Step 5: Calculate the total deductions.**\nAdd the tax, insurance, and union dues together.\n$$\\$84 + \\$21 + \\$5 = \\$110$$\n\n**Step 6: Calculate the take-home pay.**\nSubtract the total deductions from the total earnings.\n$$\\$420 - \\$110 = \\$310$$\n\nAnswer: 310<|im_end|>\n"
+}
