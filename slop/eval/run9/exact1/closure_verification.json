@@ -1,0 +1,16 @@
+{
+  "author": "PI/Sol",
+  "checked_at_epoch": 1792514257.5563362,
+  "owned_instance_ids": [
+    56819164,
+    56865819
+  ],
+  "owned_instances_absent": true,
+  "exact1_destroy_response_success": true,
+  "remote_job_exit": "0",
+  "all_five_final_heal_hashes_match": false,
+  "verified_final_heal_adapters": 4,
+  "incomplete_final_heal_adapters": [
+    "r9e_stoic1_healed"
+  ]
+}

@@ -6,7 +6,8 @@
   "exact_name_set_verified": true,
   "fixed_turns": 161,
   "all_recorded_source_sha256_match": true,
-  "estimates_sha256": "423f15049b9098d7e1525a164ca0970b7face333313f5d7676d287991d378415",
+  "estimates_sha256": "acbc91cdea4167c1c6be53d57ea339caecb305663399b39160e56284b4bd373c",
   "raw_remote_job_exit": "0",
-  "scope": "Runtime/result coverage only; detailed personal findings in audit.md and spot_checks. No assertion of validated wisdom or full environment reproducibility."
+  "scope": "Runtime/result coverage only; detailed personal findings in audit.md and spot_checks. No assertion of validated wisdom or full environment reproducibility.",
+  "artifact_preservation_limitation": "All evaluated records retained; one final Stoic1heal weight file incomplete after retrieval failure. See closure_verification.json."
 }

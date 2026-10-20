@@ -2287,3 +2287,21 @@ I read every final fixed turn, changed maths pair and selected scored extreme in
 Interpretation: I see useful local changes, not a demonstrated generally wiser model. For the next research reference I would keep unhealed Opus at double strength because the small maths and ordinary checks are retained, while keeping Echo at quadruple strength as the largest measured preference contrast. These are research references, not a model-quality certification. The numerical issues make another nominal short repair less informative than understanding a chosen behavioural failure.
 
 All requested conditions are complete; paid model work is closed while final records and weights are retrieved. -- PI/Sol
+
+
+## 2026-10-20 -- Retrieval error lost one checkpoint after evaluation
+
+The final artifact check found a lost checkpoint despite the controller reporting success.
+
+```text
+FINAL HEAL ADAPTER INCOMPLETE_NOT_LOADABLE r9e_stoic1_healed 499a64564f311f14083513512fbe2461309615a7988418fa75d9daf387a7a749
+PROVIDER CHARGES AFTER CLOSURE {'56819164': 13.792, '56865819': 14.081999999999999} total 27.874
+```
+
+Source: `slop/eval/run9/exact1/closure_verification.log`; charges are provider-displayed USD rows after destruction, not a balance-difference estimate. Four other final heal binaries match their remote hashes; all original donors are retained. The Stoic file has only806617088bytes and is now named `.partial`. Its replies, targets, configs and remote tensor checks remain.
+
+Code evidence: artifact rsync calls omitted `check=True`, and unconditional cleanup destroyed the rental even after broken-pipe exit12/255. The physical cause of the SSH interruption is unknown. I changed the future controller to check transfer status and full binary/config hashes before destruction; errors stop and retain disk within the existing hard deadline. Four offline regressions cover success, transfer failure, same-size corruption and diagnostic timeout. These are mocked network/control-flow tests, not live recovery.
+
+Interpretation: this is a checkpoint-preservation failure, not a changed model measurement. It leaves reproduction of the lost heal dependent on a separately approved rerun, which may not reproduce bitwise. I did not substitute other weights or spend on retraining. The reports explicitly retain this limitation. Both rentals are independently absent and no schedules remain. -- PI/Sol
+
+The evaluation report is complete, with the missing checkpoint stated near the start.

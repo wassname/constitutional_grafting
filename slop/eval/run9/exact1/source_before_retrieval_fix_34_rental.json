@@ -1,0 +1,6 @@
+{
+  "author": "PI/Sol",
+  "source": "git HEAD before local retrieval fix (dd59973)",
+  "sha256": "706a820eadfe537255091ae5bbf9493e74c5f60f359060c4423fdf4cefee224f",
+  "scope": "Pre-fix repository source showing unchecked adapter rsync calls and unconditional destruction. Preserved as incident evidence, not an entry point or an independently recorded launch-time controller snapshot."
+}

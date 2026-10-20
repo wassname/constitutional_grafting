@@ -1,3 +1,12 @@
 Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
 Have fun!
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+client_loop: send disconnect: Broken pipe
+rsync: connection unexpectedly closed (14409117724 bytes received so far) [receiver]
+rsync error: error in rsync protocol data stream (code 12) at io.c(232) [receiver=3.2.7]
+rsync: connection unexpectedly closed (2230 bytes received so far) [generator]
+rsync error: unexplained error (code 255) at io.c(232) [generator=3.2.7]
+rsync: [generator] write error: Broken pipe (32)
+Connection reset by 154.59.156.11 port 42164
+rsync: connection unexpectedly closed (0 bytes received so far) [Receiver]
+rsync error: unexplained error (code 255) at io.c(232) [Receiver=3.2.7]

@@ -1,6 +1,6 @@
 {
   "author": "PI/Sol",
-  "scope": "New same-host comparison, separate from the earlier norm-matched diagnostics. Character numbers are pinned Jev preferences, not validated wisdom measurements; 59 items \u00d72 generations, 90% item-bootstrap intervals. Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. Tasks:11 ordinary checks \u00d72. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors.",
+  "scope": "New same-host comparison, separate from the earlier norm-matched diagnostics. Character numbers are pinned Jev preferences, not validated wisdom measurements; 59 items \u00d72 generations, 90% item-bootstrap intervals. Maths is the same60 long GSM8K questions, temperature0,1500tokens. Original bounded-budget answers stay unchanged. Answer-now adds one256-token continuation only on a cutoff, with thinking off; it is a separate extra-compute diagnostic. Completed-answer counts are in estimates.json; full calls are in per-model maths and trace files. Exact final-number matching does not certify the reasoning. Tasks:11 ordinary checks \u00d72. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors. Artifact preservation failure: r9e_stoic1_healed was evaluated but its final weight file was not fully retained. Raw replies/scores remain; see final_adapter_verification.json. Do not load the .partial file.",
   "manifest": {
     "author": "PI/Sol",
     "baseline": "r9e_instruct",
@@ -2129,6 +2129,7 @@
     "slop/eval/run9/exact1/box_runs/replies_r9e_all1.jsonl": "3fdc1b8f7b58cafcfd5330a02e133b0e6f827d060fc7319694aeec56d5b736f5",
     "slop/eval/run9/exact1/box_runs/gsm8k_r9e_all1_healed.jsonl": "706c903c21bf919c5ec920817e1e484b5ee875070727690fad1816794f49f1d2",
     "slop/eval/run9/exact1/box_runs/panel_r9e_all1_healed.jsonl": "b6e26cc94f3fead758ded34ebc1db1e5df1343bd37966856319ecdc8f6d98f5a",
-    "slop/eval/run9/exact1/box_runs/replies_r9e_all1_healed.jsonl": "0f872bd6eb1507e93d97049181fc72dfae67b4fb0d3daddb8580392832ef92b9"
+    "slop/eval/run9/exact1/box_runs/replies_r9e_all1_healed.jsonl": "0f872bd6eb1507e93d97049181fc72dfae67b4fb0d3daddb8580392832ef92b9",
+    "slop/eval/run9/exact1/closure_verification.json": "d47fb121bf9d1fc2bcf687692293f47933fd1921598e183f77f5e2d52ba3e5e2"
   }
 }

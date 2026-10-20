@@ -1,0 +1,6 @@
+FINAL HEAL ADAPTER VERIFIED r9e_echo1_healed 20acbc33256e450d710a0d52790fa28dc3964209910303bc08e5f3207b817c5d
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/.local/verify_run9_closed_artifacts.py", line 19, in <module>
+    assert digest == merge['adapters'][0]['adapter_sha256'], tag
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: r9e_stoic1_healed

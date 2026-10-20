@@ -190,6 +190,14 @@ def exact_report(lease, make_plot=False):
              "Tasks:11 ordinary checks ×2. No extra character SFT. Heals use personally read own-verified GSM8K train answers and16trainer steps; "
         "fp16 gradient scaling can skip optimizer updates, so this is not a guarantee of16learned updates (see audit.md). "
         "Frozen parent and merge fp16; mixed-precision training with float32 LoRA tensors.")
+    closure_path = target / 'closure_verification.json'
+    if closure_path.exists():
+        closure = json.loads(closure_path.read_text())
+        hashes[str(closure_path.relative_to(ROOT))] = hashlib.sha256(closure_path.read_bytes()).hexdigest()
+        incomplete = closure['incomplete_final_heal_adapters']
+        if incomplete:
+            scope += (" Artifact preservation failure: " + ', '.join(incomplete) +
+                      " was evaluated but its final weight file was not fully retained. Raw replies/scores remain; see final_adapter_verification.json. Do not load the .partial file.")
     table = []
     for record in measured:
         character = record.get("character")

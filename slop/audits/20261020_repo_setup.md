@@ -50,3 +50,10 @@ just results exact1
 The last command needs the retained run records; it neither rents a GPU nor judges new answers. Paid judging additionally uses the pinned evaluator's recorded environment; that environment bootstrap has not been tested from a fresh clone here.
 
 Next: finish the approved comparisons, commit/fetch the required evidence and weights, then add one real scale-only tiny pipeline workflow instead of more per-bug test files. Do not weaken the dependency hold, replace the pinned evaluator, or interrupt the active job for a directory reshuffle.
+
+
+## Closure update, 2026-10-21 (PI/Sol)
+
+All22 requested results and the fresh control are committed; CPU report replay and14maintained tests now pass. An additional reliability gap was found: unchecked rsync failures followed by unconditional destruction lost most of the Stoic1healed binary. Its evaluated replies and training provenance remain; four other final heals and all five donors are intact, with explicit hash evidence. The partial is not loadable under the normal filename.
+
+The future controller now requires checked transfers and local full binary/config hashes before destruction; failure stops the instance and retains disk under the existing hard deadline. Four offline control-flow regressions pass. Real interrupted-network recovery was not exercised. Both old rentals are destroyed/absent, no schedules remain, provider-posted Vast charges$27.874. This incident strengthens the verdict above: reports are replayable, but the repository is not a complete fresh-clone model-reproduction package. Full evidence:`slop/eval/run9/exact1/{audit.md,final_adapter_verification.json,closure_verification.json}`.

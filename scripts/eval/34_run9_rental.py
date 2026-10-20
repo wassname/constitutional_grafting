@@ -70,6 +70,68 @@ def destroy():
     print(f"RENTAL DESTROYED {instance_id}", flush=True)
 
 
+def verify_downloaded_adapters(manifest, adapter_dir):
+    """Verify every final binary and configuration before disk destruction. -- PI/Sol"""
+    for tag, files in manifest.items():
+        for filename, expected in files.items():
+            path = adapter_dir / tag / filename
+            with path.open('rb') as stream:
+                actual = hashlib.file_digest(stream, 'sha256').hexdigest()
+            assert path.stat().st_size == expected['bytes'] and actual == expected['sha256'], f'incomplete or corrupt artifact: {path}'
+
+
+def retrieve_outputs(ssh, host, state):
+    """Copy run evidence and final weights, then verify them against remote hashes. -- PI/Sol"""
+    deadline = state['hard_destroy_epoch']
+    def timeout(seconds):
+        remaining = deadline - time.time() - 60
+        assert remaining > 0, 'no retrieval time remains before hard destruction'
+        return min(seconds, remaining)
+
+    with (OUT / 'shutdown_diagnostics.log').open('w') as diagnostics:
+        subprocess.run(ssh + [host, 'nvidia-smi; free -h; df -h /workspace; dmesg -T 2>&1 | tail -80'], stdout=diagnostics, stderr=subprocess.STDOUT, timeout=timeout(30))
+    subprocess.run(['rsync', '-az', '--exclude=merged_model', '--exclude=heal_parent', '--exclude=dose_model', '--exclude=healed_model',
+                    '-e', shlex.join(ssh), host + ':/workspace/cg/runs/run9/', str(OUT / 'box_runs') + '/'], check=True, timeout=timeout(600))
+    prefix = 'r9e_*' if STAGE == 'exact' else 'r9_*'
+    code = ("import hashlib,json; from pathlib import Path; p=Path('/workspace/cg/outputs'); "
+            f"print(json.dumps({{d.name:{{f.name:{{'bytes':f.stat().st_size,'sha256':hashlib.file_digest(f.open('rb'),'sha256').hexdigest()}} "
+            f"for f in [d/'adapter_config.json',d/'adapter_model.safetensors']}} for d in p.glob({prefix!r}) if (d/'adapter_model.safetensors').is_file()}}))")
+    result = subprocess.run(ssh + [host, 'python -c ' + shlex.quote(code)], check=True, capture_output=True, text=True, timeout=timeout(180))
+    manifest = json.loads(result.stdout)
+    job_exit = OUT / 'box_runs/job.exit'
+    if job_exit.exists() and job_exit.read_text().strip() == '0':
+        if STAGE == 'exact':
+            cells = json.loads((OUT / 'box_runs/exact_manifest.json').read_text())['required_cells']
+            expected = {tag for tag in cells if tag.endswith('_healed')}
+        else:
+            expected = {f'r9_{name}' for name in SUBSETS}
+        assert set(manifest) == expected, 'missing or unexpected final adapters on remote'
+    (OUT / 'remote_adapter_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
+    patterns = ['adapter_*', 'checkpoint-*/trainer_state.json'] if STAGE == 'exact' else ['adapter_*', 'checkpoint-*/adapter_*', 'checkpoint-*/trainer_state.json']
+    with (OUT / 'adapter_download.log').open('w') as log:
+        for pattern in patterns:
+            subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), '--include=*/', f'--include={prefix}/{pattern}', '--exclude=*',
+                            host + ':/workspace/cg/outputs/', str(ADAPTER_DIR) + '/'], stdout=log, stderr=subprocess.STDOUT,
+                           check=True, timeout=timeout(3600))
+    verify_downloaded_adapters(manifest, ADAPTER_DIR)
+    (OUT / 'retrieval_verified.json').write_text(json.dumps({'author': 'PI/Sol', 'all_final_adapter_hashes_match': True, 'manifest': manifest}, indent=2) + '\n')
+
+
+def retrieve_or_stop(ssh, host, state):
+    """A failed copy retains the stopped disk until the existing hard deadline. -- PI/Sol"""
+    try:
+        retrieve_outputs(ssh, host, state)
+    except BaseException as error:
+        (OUT / 'retrieval_failure.json').write_text(json.dumps({'author': 'PI/Sol', 'error': repr(error), 'state': state,
+            'action': 'Stop and retain disk for artifact-only recovery; existing hard destruction deadline remains.'}, indent=2) + '\n')
+        result = api(f"/instances/{state['instance_id']}/", 'PUT', {'state': 'stopped'})
+        assert result['success'], result
+        print('RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.', flush=True)
+        raise
+    destroy()
+
+
 def run(hours=8):
     assert 1 <= hours <= 12, hours
     OUT.mkdir(parents=True, exist_ok=True); STATE.parent.mkdir(parents=True, exist_ok=True)
@@ -311,26 +373,17 @@ python tests/regression/test_moe_expert_merge.py
         stop.set()
         if heartbeat:
             heartbeat.shutdown(wait=True)
-        try:
-            live = [r for r in api("/instances/")["instances"] if r["id"] == state["instance_id"]]
-            if live and ssh is not None:
-                with (OUT / 'shutdown_diagnostics.log').open('w') as diagnostics:
-                    subprocess.run(ssh + [host, 'nvidia-smi; free -h; df -h /workspace; dmesg -T 2>&1 | tail -80'], stdout=diagnostics, stderr=subprocess.STDOUT, timeout=30)
-                subprocess.run(["rsync", "-az", "--exclude=merged_model", "--exclude=heal_parent", "--exclude=dose_model", "--exclude=healed_model", "-e", shlex.join(ssh), host + ":/workspace/cg/runs/run9/", str(OUT / "box_runs") + "/"],
-                               check=True, timeout=600)
-                ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
-                with (OUT / 'adapter_download.log').open('w') as f:  # final adapters first, then per-epoch checkpoints for later attribution
-                    for pattern in (["adapter_*", "checkpoint-*/trainer_state.json"] if STAGE == 'exact' else ["adapter_*", "checkpoint-*/adapter_*", "checkpoint-*/trainer_state.json"]):
-                        prefix = 'r9e_*' if STAGE == 'exact' else 'r9_*'
-                        subprocess.run(["rsync", "-az", "--partial", "-e", shlex.join(ssh), "--include=*/", f"--include={prefix}/{pattern}", "--exclude=*",
-                                        host + ":/workspace/cg/outputs/", str(ADAPTER_DIR) + "/"], stdout=f, stderr=subprocess.STDOUT, timeout=3600)
-            for latest in live:
-                (OUT / "last_instance_metrics.json").write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
-        finally:
+        live = [r for r in api('/instances/')['instances'] if r['id'] == state['instance_id']]
+        for latest in live:
+            (OUT / 'last_instance_metrics.json').write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
+        assert live, 'rental disappeared before artifact retrieval; local artifacts are not verified'
+        if ssh is not None:
+            retrieve_or_stop(ssh, host, state)
+        else:
             destroy()
-            after = api("/users/current/")
-            (OUT / "account_credit_after.json").write_text(json.dumps({"credit": after["credit"], "before": account["credit"],
-                "elapsed_hours": (time.time() - created_at) / 3600, "credit_difference_not_reconciled_invoice": account["credit"] - after["credit"]}, indent=2))
+        after = api('/users/current/')
+        (OUT / 'account_credit_after.json').write_text(json.dumps({'credit': after['credit'], 'before': account['credit'],
+            'elapsed_hours': (time.time() - created_at) / 3600, 'credit_difference_not_reconciled_invoice': account['credit'] - after['credit']}, indent=2))
     print("RETRIEVAL COMPLETE; rental destroyed. No aggregate character result until reply and judge review.", flush=True)
 
 

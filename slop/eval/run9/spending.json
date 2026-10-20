@@ -1,6 +1,6 @@
 {
   "author": "PI/Sol",
-  "scope": "Run9 only; no balance-difference invoice inference. Provider billing rows are a live snapshot, not final while retrieval continues. Model/API work closed after22conditions.",
+  "scope": "Run9 only; both owned instances verified absent; four final heal binaries match saved remote hashes, Stoic1heal incomplete. API accounting retains explicit unpriced reserves, not a reconciled invoice.",
   "api_cap_usd": 60,
   "api_accounted_usd": 33.879633088,
   "api_recorded_usage_and_attempt_costs_usd": 14.149633087999998,
@@ -90,5 +90,86 @@
       "instance_id": 56865819
     }
   ],
-  "vast_closure_pending": true
+  "vast_closure_pending": false,
+  "vast_provider_charges_after_closure_usd": {
+    "56819164": 13.792,
+    "56865819": 14.081999999999999
+  },
+  "vast_provider_total_after_closure_usd": 27.874,
+  "vast_provider_rows_after_closure": [
+    {
+      "type": "charge",
+      "description": "Instance 56819164 GPU  charge:    hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "7.245",
+      "rate": "1.7333",
+      "amount": "12.558",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56819164 storage charge: hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "7.245",
+      "rate": "0.1111",
+      "amount": "0.805",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56819164 download charge",
+      "timestamp": 1792454400,
+      "quantity": "129.000",
+      "rate": "0.003",
+      "amount": "0.344",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56819164 upload charge",
+      "timestamp": 1792454400,
+      "quantity": "21.200",
+      "rate": "0.004",
+      "amount": "0.085",
+      "instance_id": 56819164
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 GPU  charge:    hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "7.482",
+      "rate": "1.7333",
+      "amount": "12.969",
+      "instance_id": 56865819
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 storage charge: hours * $/hr",
+      "timestamp": 1792454400,
+      "quantity": "7.561",
+      "rate": "0.1111",
+      "amount": "0.840",
+      "instance_id": 56865819
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 download charge",
+      "timestamp": 1792454400,
+      "quantity": "81.700",
+      "rate": "0.003",
+      "amount": "0.218",
+      "instance_id": 56865819
+    },
+    {
+      "type": "charge",
+      "description": "Instance 56865819 upload charge",
+      "timestamp": 1792454400,
+      "quantity": "13.700",
+      "rate": "0.004",
+      "amount": "0.055",
+      "instance_id": 56865819
+    }
+  ],
+  "vast_billing_scope": "Provider charge rows fetched after verified destruction; displayed USD amounts rounded by provider. Later billing adjustments remain possible. Not an account-balance subtraction.",
+  "closure_verification": "slop/eval/run9/exact1/closure_verification.json"
 }

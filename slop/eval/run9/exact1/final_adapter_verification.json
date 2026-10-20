@@ -1,0 +1,57 @@
+{
+  "author": "PI/Sol",
+  "final_heal_adapters": {
+    "r9e_echo1_healed": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9e_echo1_healed/adapter_model.safetensors",
+      "original_path": "/home/code/.local/share/cg_run9_adapters/r9e_echo1_healed/adapter_model.safetensors",
+      "bytes": 3729430336,
+      "sha256": "20acbc33256e450d710a0d52790fa28dc3964209910303bc08e5f3207b817c5d",
+      "expected_remote_sha256": "20acbc33256e450d710a0d52790fa28dc3964209910303bc08e5f3207b817c5d",
+      "matches_saved_remote_merge": true,
+      "configuration_matches_saved_remote_copy": true,
+      "configuration_sha256": "21675a3d4a8b405a283159a8332fc5a941cc1655a63f8765924b8e66c012326d"
+    },
+    "r9e_stoic1_healed": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9e_stoic1_healed/adapter_model.safetensors.partial",
+      "original_path": "/home/code/.local/share/cg_run9_adapters/r9e_stoic1_healed/adapter_model.safetensors",
+      "bytes": 806617088,
+      "sha256": "499a64564f311f14083513512fbe2461309615a7988418fa75d9daf387a7a749",
+      "expected_remote_sha256": "3e5041077188d46a8884c996ad02c6a5a55dc81ba0f55f24853d1c646e0fdc72",
+      "matches_saved_remote_merge": false,
+      "configuration_matches_saved_remote_copy": true,
+      "configuration_sha256": "21675a3d4a8b405a283159a8332fc5a941cc1655a63f8765924b8e66c012326d"
+    },
+    "r9e_opus1_healed": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9e_opus1_healed/adapter_model.safetensors",
+      "original_path": "/home/code/.local/share/cg_run9_adapters/r9e_opus1_healed/adapter_model.safetensors",
+      "bytes": 3729430336,
+      "sha256": "8c231aadddd08b83403b80e40f59eb61d9ed85f1346a88115075e164f87312c9",
+      "expected_remote_sha256": "8c231aadddd08b83403b80e40f59eb61d9ed85f1346a88115075e164f87312c9",
+      "matches_saved_remote_merge": true,
+      "configuration_matches_saved_remote_copy": true,
+      "configuration_sha256": "21675a3d4a8b405a283159a8332fc5a941cc1655a63f8765924b8e66c012326d"
+    },
+    "r9e_greek1_healed": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9e_greek1_healed/adapter_model.safetensors",
+      "original_path": "/home/code/.local/share/cg_run9_adapters/r9e_greek1_healed/adapter_model.safetensors",
+      "bytes": 3729430336,
+      "sha256": "b8d06935f7ce179af609d6b2448f3cf700f5c2ca591d9538d1c9df93423afac2",
+      "expected_remote_sha256": "b8d06935f7ce179af609d6b2448f3cf700f5c2ca591d9538d1c9df93423afac2",
+      "matches_saved_remote_merge": true,
+      "configuration_matches_saved_remote_copy": true,
+      "configuration_sha256": "21675a3d4a8b405a283159a8332fc5a941cc1655a63f8765924b8e66c012326d"
+    },
+    "r9e_all1_healed": {
+      "path": "/home/code/.local/share/cg_run9_adapters/r9e_all1_healed/adapter_model.safetensors",
+      "original_path": "/home/code/.local/share/cg_run9_adapters/r9e_all1_healed/adapter_model.safetensors",
+      "bytes": 3729430336,
+      "sha256": "190e3d7a5080d6b3a3ab1c31e95339a4051552baa30fb6d8914e8ff780794c58",
+      "expected_remote_sha256": "190e3d7a5080d6b3a3ab1c31e95339a4051552baa30fb6d8914e8ff780794c58",
+      "matches_saved_remote_merge": true,
+      "configuration_matches_saved_remote_copy": true,
+      "configuration_sha256": "21675a3d4a8b405a283159a8332fc5a941cc1655a63f8765924b8e66c012326d"
+    }
+  },
+  "original_donors": "slop/eval/run9/final_adapter_verification.json",
+  "scope": "Four final heal binaries match; Stoic1heal is incomplete and quarantined as .partial after failed SSH transfer and premature destruction. Original five donor checks retained separately."
+}

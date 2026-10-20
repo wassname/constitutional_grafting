@@ -14,6 +14,7 @@ check:
     uv run --locked python tests/regression/test_demo_panel.py
     uv run --locked python tests/regression/test_gsm8k_cutoff.py
     uv run --locked python tests/regression/test_heal_review_gate.py
+    uv run --locked python tests/regression/test_rental_retrieval.py
 
 # Current22-condition comparison from downloaded records; no model calls. -- PI/Sol
 results lease="exact1":
