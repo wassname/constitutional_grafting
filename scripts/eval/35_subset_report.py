@@ -52,7 +52,11 @@ def plot_exact(measured, target):
     records = {r["model"]: r for r in measured}
     baseline = records["r9e_instruct"]
     plt.rcParams.update({"font.size": 10, "svg.fonttype": "none"})
-    fig, axes = plt.subplots(2, 5, figsize=(14, 7), constrained_layout=True, sharey="row")
+    fig = plt.figure(figsize=(14, 8), constrained_layout=True)
+    grid = fig.add_gridspec(3, 5, height_ratios=[1, 1, .38])
+    axes = grid[:2, :].subgridspec(2, 5).subplots(sharey="row")
+    footer = fig.add_subplot(grid[2, :])
+    footer.set_axis_off()
     for col, name in enumerate(["echo", "stoic", "opus", "greek", "all"]):
         doses = [1] if name == "all" else [1, 2, 4, 8]
         positions = [0] if name == "all" else [0, 2, 3, 4]
@@ -87,14 +91,15 @@ def plot_exact(measured, target):
     axes[0, 0].set_ylabel("Jev preference vs Instruct ↑")
     axes[1, 0].set_ylabel("Maths final-answer matches /60 ↑")
     fig.suptitle("Qwen3.5-35B-A3B: exact document-graft strengths and maths healing")
-    fig.legend(handles=[Line2D([], [], color="#286892", marker="o", label="Original1500-token maths"),
-                        Line2D([], [], color="#b45d18", linestyle=":", marker="o", markerfacecolor="white", label="With one256-token cutoff continuation"),
-                        Line2D([], [], color="0.65", label=f"Control: {baseline['maths']} original /{baseline['answer_now']} answer-now")],
-               loc="outside lower center", ncols=3, frameon=False, fontsize=9)
-    fig.supxlabel("1H =1× plus16trainer-step heal; fp16 scaling skipped some optimizer updates. No extra character SFT.\n"
-                  "Judge bars:90%item-bootstrap intervals (59items ×2generations); not judge/seed/serving uncertainty.\n"
-                  "Maths is final-number matching, not broad capability or verified reasoning. Lines join tested strengths, not predicted intermediates.\n"
-                  "All22requested conditions shown. Full replies, ordinary checks and training limits accompany this figure. — PI/Sol", fontsize=9)
+    footer.legend(handles=[Line2D([], [], color="#286892", marker="o", label="Original 1500-token maths"),
+                           Line2D([], [], color="#b45d18", linestyle=":", marker="o", markerfacecolor="white", label="With one 256-token cutoff continuation"),
+                           Line2D([], [], color="0.65", label=f"Control: {baseline['maths']} original / {baseline['answer_now']} answer-now")],
+                  loc="lower center", ncols=3, frameon=False, fontsize=9)
+    footer.text(.5, 1, "1H = 1× plus 16-trainer-step heal; fp16 scaling skipped some optimizer updates. No extra character SFT.\n"
+                "Judge bars: 90% item-bootstrap intervals (59 items × 2 generations); not judge/seed/serving uncertainty.\n"
+                "Maths is final-number matching, not broad capability or verified reasoning. Lines join tested strengths, not predicted intermediates.\n"
+                "All 22 requested conditions shown. Full replies, ordinary checks and training limits accompany this figure. — PI/Sol",
+                ha="center", va="top", transform=footer.transAxes, fontsize=9)
     fig.canvas.draw()
     bounds = fig.get_tightbbox(fig.canvas.get_renderer())
     width, height = fig.get_size_inches()
@@ -206,7 +211,8 @@ def exact_report(lease, make_plot=False):
     if paths:
         subprocess.run([sys.executable, ROOT / "scripts/eval/17_demo_panel.py", "--json-replies", *paths,
             "--panel-models", *[f"{r['label']}:{r['model']}" for r in measured],
-            "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional16-trainer-step own-maths heal (optimizer updates may be skipped). No extra character SFT.",
+            "Graft plus extra character SFT:not_run_extra_sft", "Extra character SFT only:not_run_sft_only",
+            "--stage-order", "Spectral document LoRA on Base → exact additive graft on untouched Instruct → optional 16-trainer-step own-maths heal (optimizer updates may be skipped). Extra character SFT conditions were not run.",
             "--compact", "--summary", summary, "--json-out", target / "demo_panel.md"], check=True)
     if make_plot:
         plot_exact(measured, target)
@@ -281,10 +287,10 @@ def main():
     scored = sum(r["judged"] for r in measured[1:])
     pause_path = OUT / "pause.json"
     pause = json.loads(pause_path.read_text()) if pause_path.exists() else None
-    status = (("Paid work paused at the user's request: fix cutoff handling and check the judge before more spending. " if pause and pause['paid_work_paused'] else "User approved the restart; the requested exact-dose/healing comparison is resuming from saved adapters. ") +
-              f"Requested exact-dose/healing grid: {pause['required_grid']['completed_required_conditions']}/"
+    status = ((pause.get('closure_reason') or ("Paid work paused at the user's request for evaluator checks." if pause['paid_work_paused'] else "User approved the bounded exact-dose/healing comparison.")) +
+              f" Requested exact-dose/healing grid: {pause['required_grid']['completed_required_conditions']}/"
               f"{pause['required_grid']['conditions_including_preferred_combined_heal']} conditions complete. "
-              "The other requested doses and all heals are not yet run; norm-matched cells below are extra diagnostics.\n\n") if pause else ""
+              "See [the exact comparison](exact1/estimates.md) for those results. This page retains the earlier norm-matched diagnostics, not the current grid.\n\n") if pause else ""
     summary = [status, f"Original diagnostic grid: {complete}/{len(models)-1} generation cells downloaded; {scored} graded. This page is an interim snapshot.\n\n{scope}\n\n"]
     first = {f"r9_{name}1" for name in ("echo", "stoic", "opus", "greek", "joint")}
     for title, selected in [("First dose (k=1)", [r for r in measured if r["model"] in first or r["model"] == baseline]),
