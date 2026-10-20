@@ -1,0 +1,585 @@
+{
+  "author": "PI/Sol",
+  "prepared_dataset": "/workspace/cg/outputs/prepared_r9e_stoic1_healed/75f91b9cd55a06abf5c6759bd72554f4",
+  "n": 115,
+  "all_reply_labels_equal_input_ids": true,
+  "rows": [
+    {
+      "tokens": 333,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 258
+    },
+    {
+      "tokens": 467,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 354
+    },
+    {
+      "tokens": 424,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 338
+    },
+    {
+      "tokens": 363,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 289
+    },
+    {
+      "tokens": 431,
+      "masked_prompt_tokens": 101,
+      "trained_tokens": 330
+    },
+    {
+      "tokens": 561,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 480
+    },
+    {
+      "tokens": 314,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 229
+    },
+    {
+      "tokens": 276,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 176
+    },
+    {
+      "tokens": 380,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 285
+    },
+    {
+      "tokens": 537,
+      "masked_prompt_tokens": 122,
+      "trained_tokens": 415
+    },
+    {
+      "tokens": 316,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 229
+    },
+    {
+      "tokens": 485,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 398
+    },
+    {
+      "tokens": 391,
+      "masked_prompt_tokens": 92,
+      "trained_tokens": 299
+    },
+    {
+      "tokens": 364,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 278
+    },
+    {
+      "tokens": 317,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 246
+    },
+    {
+      "tokens": 615,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 524
+    },
+    {
+      "tokens": 529,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 445
+    },
+    {
+      "tokens": 446,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 348
+    },
+    {
+      "tokens": 348,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 273
+    },
+    {
+      "tokens": 225,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 146
+    },
+    {
+      "tokens": 289,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 211
+    },
+    {
+      "tokens": 567,
+      "masked_prompt_tokens": 147,
+      "trained_tokens": 420
+    },
+    {
+      "tokens": 578,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 488
+    },
+    {
+      "tokens": 385,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 303
+    },
+    {
+      "tokens": 466,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 375
+    },
+    {
+      "tokens": 235,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 165
+    },
+    {
+      "tokens": 413,
+      "masked_prompt_tokens": 79,
+      "trained_tokens": 334
+    },
+    {
+      "tokens": 253,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 182
+    },
+    {
+      "tokens": 489,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 417
+    },
+    {
+      "tokens": 584,
+      "masked_prompt_tokens": 100,
+      "trained_tokens": 484
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 245
+    },
+    {
+      "tokens": 811,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 701
+    },
+    {
+      "tokens": 316,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 242
+    },
+    {
+      "tokens": 437,
+      "masked_prompt_tokens": 113,
+      "trained_tokens": 324
+    },
+    {
+      "tokens": 333,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 253
+    },
+    {
+      "tokens": 289,
+      "masked_prompt_tokens": 103,
+      "trained_tokens": 186
+    },
+    {
+      "tokens": 341,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 259
+    },
+    {
+      "tokens": 471,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 360
+    },
+    {
+      "tokens": 457,
+      "masked_prompt_tokens": 81,
+      "trained_tokens": 376
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 267
+    },
+    {
+      "tokens": 439,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 364
+    },
+    {
+      "tokens": 407,
+      "masked_prompt_tokens": 82,
+      "trained_tokens": 325
+    },
+    {
+      "tokens": 206,
+      "masked_prompt_tokens": 66,
+      "trained_tokens": 140
+    },
+    {
+      "tokens": 365,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 293
+    },
+    {
+      "tokens": 341,
+      "masked_prompt_tokens": 74,
+      "trained_tokens": 267
+    },
+    {
+      "tokens": 568,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 445
+    },
+    {
+      "tokens": 240,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 176
+    },
+    {
+      "tokens": 393,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 326
+    },
+    {
+      "tokens": 308,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 233
+    },
+    {
+      "tokens": 437,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 366
+    },
+    {
+      "tokens": 462,
+      "masked_prompt_tokens": 106,
+      "trained_tokens": 356
+    },
+    {
+      "tokens": 354,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 274
+    },
+    {
+      "tokens": 234,
+      "masked_prompt_tokens": 77,
+      "trained_tokens": 157
+    },
+    {
+      "tokens": 470,
+      "masked_prompt_tokens": 125,
+      "trained_tokens": 345
+    },
+    {
+      "tokens": 471,
+      "masked_prompt_tokens": 115,
+      "trained_tokens": 356
+    },
+    {
+      "tokens": 463,
+      "masked_prompt_tokens": 110,
+      "trained_tokens": 353
+    },
+    {
+      "tokens": 409,
+      "masked_prompt_tokens": 97,
+      "trained_tokens": 312
+    },
+    {
+      "tokens": 444,
+      "masked_prompt_tokens": 120,
+      "trained_tokens": 324
+    },
+    {
+      "tokens": 352,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 265
+    },
+    {
+      "tokens": 233,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 153
+    },
+    {
+      "tokens": 314,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 225
+    },
+    {
+      "tokens": 592,
+      "masked_prompt_tokens": 154,
+      "trained_tokens": 438
+    },
+    {
+      "tokens": 471,
+      "masked_prompt_tokens": 95,
+      "trained_tokens": 376
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 91,
+      "trained_tokens": 196
+    },
+    {
+      "tokens": 438,
+      "masked_prompt_tokens": 99,
+      "trained_tokens": 339
+    },
+    {
+      "tokens": 524,
+      "masked_prompt_tokens": 139,
+      "trained_tokens": 385
+    },
+    {
+      "tokens": 412,
+      "masked_prompt_tokens": 67,
+      "trained_tokens": 345
+    },
+    {
+      "tokens": 258,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 187
+    },
+    {
+      "tokens": 430,
+      "masked_prompt_tokens": 128,
+      "trained_tokens": 302
+    },
+    {
+      "tokens": 256,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 196
+    },
+    {
+      "tokens": 329,
+      "masked_prompt_tokens": 112,
+      "trained_tokens": 217
+    },
+    {
+      "tokens": 319,
+      "masked_prompt_tokens": 84,
+      "trained_tokens": 235
+    },
+    {
+      "tokens": 433,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 355
+    },
+    {
+      "tokens": 392,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 307
+    },
+    {
+      "tokens": 197,
+      "masked_prompt_tokens": 65,
+      "trained_tokens": 132
+    },
+    {
+      "tokens": 361,
+      "masked_prompt_tokens": 70,
+      "trained_tokens": 291
+    },
+    {
+      "tokens": 442,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 344
+    },
+    {
+      "tokens": 342,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 246
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 233
+    },
+    {
+      "tokens": 326,
+      "masked_prompt_tokens": 76,
+      "trained_tokens": 250
+    },
+    {
+      "tokens": 384,
+      "masked_prompt_tokens": 89,
+      "trained_tokens": 295
+    },
+    {
+      "tokens": 305,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 188,
+      "masked_prompt_tokens": 73,
+      "trained_tokens": 115
+    },
+    {
+      "tokens": 554,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 479
+    },
+    {
+      "tokens": 756,
+      "masked_prompt_tokens": 170,
+      "trained_tokens": 586
+    },
+    {
+      "tokens": 373,
+      "masked_prompt_tokens": 104,
+      "trained_tokens": 269
+    },
+    {
+      "tokens": 337,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 251
+    },
+    {
+      "tokens": 335,
+      "masked_prompt_tokens": 86,
+      "trained_tokens": 249
+    },
+    {
+      "tokens": 380,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 282
+    },
+    {
+      "tokens": 678,
+      "masked_prompt_tokens": 111,
+      "trained_tokens": 567
+    },
+    {
+      "tokens": 529,
+      "masked_prompt_tokens": 88,
+      "trained_tokens": 441
+    },
+    {
+      "tokens": 373,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 302
+    },
+    {
+      "tokens": 296,
+      "masked_prompt_tokens": 105,
+      "trained_tokens": 191
+    },
+    {
+      "tokens": 298,
+      "masked_prompt_tokens": 71,
+      "trained_tokens": 227
+    },
+    {
+      "tokens": 370,
+      "masked_prompt_tokens": 109,
+      "trained_tokens": 261
+    },
+    {
+      "tokens": 346,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 256
+    },
+    {
+      "tokens": 281,
+      "masked_prompt_tokens": 72,
+      "trained_tokens": 209
+    },
+    {
+      "tokens": 455,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 380
+    },
+    {
+      "tokens": 349,
+      "masked_prompt_tokens": 98,
+      "trained_tokens": 251
+    },
+    {
+      "tokens": 475,
+      "masked_prompt_tokens": 87,
+      "trained_tokens": 388
+    },
+    {
+      "tokens": 493,
+      "masked_prompt_tokens": 85,
+      "trained_tokens": 408
+    },
+    {
+      "tokens": 362,
+      "masked_prompt_tokens": 102,
+      "trained_tokens": 260
+    },
+    {
+      "tokens": 443,
+      "masked_prompt_tokens": 64,
+      "trained_tokens": 379
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 83,
+      "trained_tokens": 204
+    },
+    {
+      "tokens": 556,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 427
+    },
+    {
+      "tokens": 515,
+      "masked_prompt_tokens": 123,
+      "trained_tokens": 392
+    },
+    {
+      "tokens": 287,
+      "masked_prompt_tokens": 75,
+      "trained_tokens": 212
+    },
+    {
+      "tokens": 501,
+      "masked_prompt_tokens": 90,
+      "trained_tokens": 411
+    },
+    {
+      "tokens": 214,
+      "masked_prompt_tokens": 60,
+      "trained_tokens": 154
+    },
+    {
+      "tokens": 596,
+      "masked_prompt_tokens": 129,
+      "trained_tokens": 467
+    },
+    {
+      "tokens": 307,
+      "masked_prompt_tokens": 78,
+      "trained_tokens": 229
+    },
+    {
+      "tokens": 371,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 275
+    },
+    {
+      "tokens": 290,
+      "masked_prompt_tokens": 80,
+      "trained_tokens": 210
+    },
+    {
+      "tokens": 334,
+      "masked_prompt_tokens": 96,
+      "trained_tokens": 238
+    },
+    {
+      "tokens": 425,
+      "masked_prompt_tokens": 108,
+      "trained_tokens": 317
+    }
+  ],
+  "first_prompt": "<|im_start|>user\nA cake of 400 grams is divided into eight equal parts. Nathalie eats one-eighth of the cake, and Pierre eats double what Nathalie ate. How much did Pierre eat, in grams?\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "first_trained_reply": "Here is the step-by-step solution:\n\n1.  **Calculate the weight of one part:**\n    The total weight of the cake is 400 grams, and it is divided into 8 equal parts.\n    Weight of one part = $400 \\text{ grams} / 8 = 50 \\text{ grams}$.\n\n2.  **Calculate how much Nathalie ate:**\n    Nathalie eats one-eighth of the cake, which corresponds to exactly one of these parts.\n    Amount Nathalie ate = $50 \\text{ grams}$.\n\n3.  **Calculate how much Pierre ate:**\n    Pierre eats double what Nathalie ate.\n    Amount Pierre ate = $2 \\times (\\text{Amount Nathalie ate})$\n    Amount Pierre ate = $2 \\times 50 \\text{ grams} = 100 \\text{ grams}$.\n\n**Alternative Method:**\nPierre eats double one-eighth, which is two-eighths ($2/8$) of the cake.\n$2/8$ of $400$ grams = $(1/4) \\times 400 = 100$ grams.\n\nAnswer: 100<|im_end|>\n"
+}

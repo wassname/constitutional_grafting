@@ -19,6 +19,10 @@ check:
 results lease="exact1":
     uv run --locked python scripts/eval/35_subset_report.py --exact {{lease}}
 
+# Full figure requires all22 completed/graded conditions; no model calls. -- PI/Sol
+results-plot lease="exact1":
+    uv run --locked python scripts/eval/35_subset_report.py --exact {{lease}} --plot
+
 # Earlier norm-matched diagnostics, not substitutes for the exact-dose grid. -- PI/Sol
 diagnostic-results:
     uv run --locked python scripts/eval/35_subset_report.py
