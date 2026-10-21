@@ -41,6 +41,52 @@ The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved s
 - A Base-trained chat adapter gives a useful character change on Instruct at some dose from 2× to 4×: likely, about 65%.
 - Adding the chat stage improves constitutional character beyond documents alone: chances about even, 50–60%.
 
+## Draft plan: next experiments (PI/Claude, not approved; training is paused)
+
+### What data we already have
+
+| Data | Size | Notes |
+|:--|--:|:--|
+| Subsets in the last comparison (Stoic, Opus, Greek, Echo) | 56k tokens each | Small matched slices, not our whole corpus |
+| Constitution documents, Opus-written (`data/train/docs_qwen_frozen.jsonl`, kind=doc) | 1,585 docs | Acts judged right 136/140; faults are voice (house phrases 55–86%) and older constitution versions (`docs/data_provenance.md`) |
+| Chats as documents (same file, kind=chat) | 1,315 | Total for the file: 3.35M tokens with the docs (`data/train/counts.json`) |
+| Character chats, Opus answers, Echo-restyled (`data/train/sft_qwen2_frozen.jsonl`) | 1,281 rows, 0.76M trained tokens | Already paid for; known defects listed in `docs/data_provenance.md` |
+| Stoic library (`/workspace/stoic_markdown/content/stoic_md/`) | ~17.6M words total | Includes non-Stoic books and duplicate translations. One translation per primary work (Seneca complete ~1.0M words, Epictetus/Hard ~0.17M, Marcus ~0.06M, Musonius) ≈ 1.3M words ≈ 1.7M tokens |
+
+### What others used
+
+| Work | Document stage | Chat stage | Model |
+|:--|:--|:--|:--|
+| Cho (constitutional mid-training) | 394M-token corpus, 500M trained, 1:1 with web text | value-neutral 200k-example SFT only | 120B, full weights |
+| Li/MSM | 8M tokens (cheese specs); 27–41M tokens (safety) | 165k tokens / 5k samples (cheese); 5–7M tokens (safety) | Llama 8B; Qwen 32B, LoRA |
+| Praxis quirks (§5.1 and appendix B) | ~40k docs, ~13.6M tokens per quirk | — | 14–70B, LoRA |
+| Praxis §5.2 emergent misalignment | — | Turner datasets (size not checked) | Qwen3-14B, rsLoRA r32 |
+| Lowet (constitutional adapters) | ~18k docs, 45M tokens per corpus, ~5M of them advice transcripts | — | small adapter objects |
+| Teaching Claude Why replication | — | 700 difficult-advice samples | Qwen3.6-27B |
+
+Our largest earlier document run used 3.35M tokens; the recent subsets used 56k. Published document stages are 8M–500M tokens. Our model is Qwen3.5-35B-A3B. Inference: 56k is very likely too small for an identity to take hold, and the free Stoic text plus the existing constitution docs reach a few million tokens with no new generation.
+
+### Goals
+
+1. [ ] goal: Stage-1 document adapter from more Stoic text plus the existing constitution docs
+   - data: Stoic, one translation per primary work, raw text (no rewriting), front matter and translator notes removed, split into ~1k-token passages with an attribution header like now. Drop Seneca's tragedies and *Natural Questions* and non-Stoic books. Constitution docs: existing 1,585 docs, with known factual/maker defects fixed. Mix about 1:1 by tokens (Cho's ratio), ~1.5M + ~1.5M.
+   - variants: S = Stoic only; S+C = Stoic + constitution docs. Compare with the saved Stoic-56k adapter.
+   - subtle failure: Stoic voice and dispositions dominate, and the constitution's identity and reasons are missing (the "Merge or Die" pattern).
+   - discriminator: S+C, but not S, names Musonius and gives constitution reasons in the fixed demo panel and principle judge, at matched maths.
+   - verify: maths /60, ordinary checks /22, principle judge, demo panel; doses a ∈ {1, 2, 4, 8}.
+2. [ ] goal: Stage-2 chat adapter on Base + Δdocs(S+C, merged at 1×)
+   - data: the existing 1,281 chat rows, Instruct chat template, assistant-only loss, spectral penalty with recalibrated λ. Fix the maker rows first.
+   - subtle failure: no effect at 1× (as in Praxis §5.2), wrongly read as "chat does not graft".
+   - discriminator: dose sweep b ∈ {1, 2, 3, 4} at fixed a; compare docs-only, chat-only and both at matched capability.
+   - verify: same panel as goal 1.
+3. [ ] goal: spend on Opus only for gaps found by reading goal 1–2 outputs
+   - e.g. identity chats with the correct maker; situations where replies were wrong. Bounded budget, decided after results.
+
+### Options not chosen as default
+
+- **Rewrite the Stoic text to match the constitution.** Expensive, and loses the voice that gave the strongest effect.
+- **Echo's trick for the chat stage:** ask a cheap model for a user question that a Stoic passage answers, then train the original passage as the reply. Echo reports this "was much more effective than direct SFT" for voice. Cheap, but the reply would speak as Seneca, not as Musonius the AI. Keep as an alternative if the chat stage lacks force.
+
 ## Ingredients: keep these names distinct
 
 - **Base:** the original pretrained model, before instruction/chat post-training.
