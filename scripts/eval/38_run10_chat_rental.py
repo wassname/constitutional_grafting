@@ -297,8 +297,9 @@ python tests/regression/test_moe_expert_merge.py
         with (OUT / 'upload_stoic.log').open('w') as stream:
             subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(STOIC_SRC / 'adapter_config.json'), str(STOIC_SRC / 'adapter_model.safetensors'),
                             host + ':/workspace/cg/outputs/up_stoic/'], stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=remaining())
-        code = f"import hashlib; p='/workspace/cg/outputs/up_stoic/adapter_model.safetensors'; a=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert a == {verified['adapter_model.safetensors']['sha256']!r}, a; print(a)"
-        remote('python -c ' + shlex.quote(code), timeout=300)
+        for f in ['adapter_model.safetensors', 'adapter_config.json']:
+            code = f"import hashlib; p='/workspace/cg/outputs/up_stoic/{f}'; a=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert a == {verified[f]['sha256']!r}, a; print(a)"
+            remote('python -c ' + shlex.quote(code), timeout=300)
         print('STOIC ADAPTER UPLOADED AND VERIFIED', flush=True)
         manifest_path = ROOT / "data/train/run10/manifest.json"
         train_manifest = json.loads(manifest_path.read_text())

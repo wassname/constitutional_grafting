@@ -20,7 +20,7 @@ Grafted = Instruct + a·Δdocs + b·Δchat
 
 Every stage uses the spectral penalty during training, chat included (wassname, 2026-10-21: "all things use a spectral norm"). Reason: it gave a better capability trade-off for documents (λ=50 vs λ=5 at 1.5× kept 25 vs 12 of 44 capability checks), and the chat adapter is expected to need about 3×. It is untested on chat training. Calibrate λ so the penalty is about 1% of the chat loss after warmup (the rule in `scripts/train/spectral_plugin.py`), because assistant-only loss has a different scale from document loss.
 
-The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved separately. At a=b=1 this equals grafting the combined two-stage change. Other (a, b) pairs are an approximation, because Δchat was fit with Δdocs at 1×. Prior for doses: documents work at 1–8× (our runs); chat around 2.5–3× (Praxis §5.2). This is a starting prior, not a guarantee.
+The chat adapter trains on top of Base with Δdocs merged at the chosen dose a* (run 10: Base + 2·ΔStoic, the largest coherent ΔStoic dose), and is saved separately. At a=a*, b=1 this equals grafting the combined two-stage change. Other (a, b) pairs are an approximation, because Δchat was fit with Δdocs at a*. Prior for doses: documents work at 1–8× (our runs); chat around 2.5–3× (Praxis §5.2). This is a starting prior, not a guarantee.
 
 ### Why: the evidence chain
 
@@ -256,7 +256,7 @@ Final = graft(Base, DocDonor, ChatInstruct, strength)
 
 Healing is optional capability repair **after grafting**, not persona training. Test it where capability has measurably fallen but interpretable character remains. Near-baseline maths leaves little to recover. A useful Stoic dose may need no heal.
 
-Next, use the evidence to choose a cheap way to teach constitutional Musonius through grafting. Recipe B is one candidate, not the goal or a required stage. Inspect actual training text and explain what the next small experiment would establish before choosing it. No new corpus expansion, chat-training stage, evaluated-model calls or rental is authorised by this note. Judge the final replies for constitutional reasons/actions, persistent character and capability, not identity slogans alone.
+Next, use the evidence to choose a cheap way to teach constitutional Musonius through grafting. Recipe B is one candidate, not the goal or a required stage. Inspect actual training text and explain what the next small experiment would establish before choosing it. (Historical, 2026-10-20: this note authorised no new corpus, chat stage or rental; the run-10 plan above has since been approved.) Judge the final replies for constitutional reasons/actions, persistent character and capability, not identity slogans alone.
 
 ## Evidence checked
 

@@ -19,11 +19,13 @@ yaml.safe_dump(c, open(out, "w"), sort_keys=False)
 PY
 }
 
+# pinned snapshot (lease 57049565 loaded the hub default, which was this same commit on 2026-10-21)
+BASE=$(python -c "from huggingface_hub import snapshot_download as s; print(s('Qwen/Qwen3.5-35B-A3B-Base', revision='0f0813072d2358973511097385626f21fcb6d422'))")
 for s in $SUBSETS; do
   o=outputs/r10_$s
   if [ -f $o/adapter_model.safetensors ]; then log "skip train $s"; continue; fi
   # no demo plugin (run 9: in-train demo generation dominated wall time); dose evals generate demos later
-  cfg configs/train/qwen3/graft.yml $R/cfg_r10_$s.yml output_dir=$o dataset_prepared_path=outputs/prepared_r10_$s evals_per_epoch=1 \
+  cfg configs/train/qwen3/graft.yml $R/cfg_r10_$s.yml base_model=$BASE output_dir=$o dataset_prepared_path=outputs/prepared_r10_$s evals_per_epoch=1 \
     "plugins=[scripts.train.spectral_plugin.SpectralPlugin, axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin, axolotl.integrations.liger.LigerPlugin, axolotl.integrations.kernels.KernelsPlugin, scripts.train.router_dtype_plugin.RouterDtypePlugin]" \
     "datasets=[{\"path\": \"data/train/run10/$s.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]"
   log "start train $s ($(wc -l < data/train/run10/$s.jsonl) docs)"
