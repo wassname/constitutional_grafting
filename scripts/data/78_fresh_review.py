@@ -71,9 +71,9 @@ FOCUS = """You check one training example for invented facts. PROMPT is what the
 Go through REPLY sentence by sentence. For each sentence that states something about the situation, the people, or the past
 (events, actions already done, durations, numbers, names, histories, what someone knows, did, or feels), ask: does PROMPT state
 this, or does it follow necessarily from PROMPT? Advice, opinions, hypotheticals ("if...", "may", "might") and general knowledge
-are fine. A plan written as if already done counts as invented. Also flag self-claims beyond these facts: {facts}
+are fine. A plan written as if already done counts as invented. The assistant's own values, views and character are not facts to check.
 
-Reply with JSON only: {"real": [{"type": "invented specific" or "self-claim", "quote": "<exact words from REPLY>", "why": "<=20 words>"}]}
+Reply with JSON only: {"real": [{"type": "invented specific", "quote": "<exact words from REPLY>", "why": "<=20 words>"}]}
 Empty list if none. Do not invent problems.
 
 PROMPT:
@@ -159,11 +159,11 @@ def calibrate(k: int, tag: str):
 
 FIX = """A cheap screener flagged sentences in a training REPLY as possibly invented. Decide for each flag.
 INVENTED means: a specific fact about this situation, its people or its past (events, actions already done, durations, histories,
-names, what someone knows or did) that PROMPT does not state and that does not follow necessarily from it; or a self-claim beyond
-these facts: {facts}
+names, what someone knows or did) that PROMPT does not state and that does not follow necessarily from it. The assistant's own
+values, views, feelings and character are never invented facts; leave them alone. Facts about the assistant: {facts}
 NOT invented (never edit these): true general knowledge, including real history, dates and events (edit only if false); the allowed
 facts, including saying its underlying name is Musonius when asked what it really is; what a system prompt implies (a school's
-system prompt naming it means the school named it); advice, opinions, hypotheticals, plans stated as plans; a reasonable
+system prompt naming it means the school named it); advice, opinions, hypotheticals and possibilities ("may", "might", "probably", "if"), plans stated as plans; a reasonable
 restatement or inference from PROMPT; vivid wording of something PROMPT says. Never remove a decision, proposal or condition the
 reply makes; edit at most one sentence per flag. When unsure, keep.
 For each INVENTED flag, give the smallest edit that removes the invented content while keeping the reply correct and natural:
@@ -193,7 +193,10 @@ def fix(row: dict, flags: list[dict]) -> dict:
             break
     txt = j["choices"][0]["message"]["content"] or ""
     m = re.search(r"\{.*\}", txt, re.S)
-    out = json.loads(m.group(0)) if m else {"parse_error": txt[:300]}
+    try:
+        out = json.loads(m.group(0)) if m else {"parse_error": txt[:300]}
+    except json.JSONDecodeError:
+        out = {"parse_error": txt[:300]}
     reply = row["segments"][1]["text"]
     # one-sentence edits only: a long deletion once removed a reply's central decision (round 4, ask_7f9e666608)
     out["applied"] = [e for e in out.get("edits", []) if e["old"] and e["old"] in reply and len(e["old"]) <= 220 and "\n" not in e["old"]]
@@ -221,7 +224,7 @@ def screen_fix(path: Path):
     EDITS.parent.mkdir(parents=True, exist_ok=True)
     log = EDITS.with_name("screen_fix_log.jsonl")
     done = {json.loads(l)["id"] for l in log.open()} if log.exists() else set()
-    rows = [r for r in map(json.loads, path.open()) if r["id"] not in done and r["shape"] != "general"]
+    rows = [r for r in map(json.loads, path.open()) if r["id"] not in done and r["shape"] not in ("general", "identity")]  # identity: fixer deleted values (v1, discarded)
 
     def one(row):
         sc = review(row)
