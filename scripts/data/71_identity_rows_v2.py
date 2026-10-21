@@ -182,10 +182,15 @@ def run(batch: int, n: int) -> str:
     choice = body["choices"][0]
     text = choice["message"]["content"] or ""
     (d / "out.md").write_text(text)
-    assert choice.get("finish_reason") == "stop" and text.strip(), (batch, choice.get("finish_reason"), choice["message"].get("refusal"))
+    finish = choice.get("finish_reason")
+    if not text.strip():  # all tokens spent on reasoning, or refused: no rows
+        (d / "items.jsonl").write_text("")
+        return f"batch {batch}: 0/{n} rows, 0 valid, finish {finish}, ${body['usage'].get('cost', 0):.3f}"
     parts, problems = fb.split_sections(text)
+    if finish != "stop" and parts:  # cut off (length or content filter): earlier rows are complete, the last may be partial
+        parts.pop(list(parts)[-1])
     meta = {"writer": f"openrouter/{MODEL}", "served": body.get("model"), "prompt_sha": hashlib.sha256(prompt.encode()).hexdigest()[:12],
-            "constitution_sha": fb.CONST_SHA, "git": fb.GIT, "batch": batch, "cost": body["usage"].get("cost")}
+            "constitution_sha": fb.CONST_SHA, "git": fb.GIT, "batch": batch, "cost": body["usage"].get("cost"), "finish": finish}
     sp = specs(batch, n)
     rows = []
     for sid, sec in parts.items():
