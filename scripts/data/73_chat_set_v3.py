@@ -42,8 +42,8 @@ def main():
     tok = AutoTokenizer.from_pretrained(p.TOK_ID)
     frozen = [json.loads(l) for l in FROZEN.open()]
     checked = {r["id"]: r for r in map(json.loads, CHECKED.open())}
-    # Echo restyle invented situational facts the Opus reply did not have: both Sol passes rejected the row and neither quote is in
-    # musonius_opus (scripts/data/79_chat_accept_reject.py, slop/reviews/20261022_chat_accept_reject/revert_plan.json) -> use the Opus reply
+    # Echo restyle invented situational facts; for these 50 rows the Opus reply passed two Sol accept passes (both rejected the restyle)
+    # -> use the Opus reply (slop/reviews/20261022_chat_accept_reject/revert_check/result.json)
     invented = set(json.loads((ROOT / "data/frontier/fresh_loop/invented_revert_ids.json").read_text()))
     log = Counter()
     for r in frozen:
