@@ -83,14 +83,31 @@ Generator changes (general rules, no row patches): no claims about the base mode
 - "any more than calling a senator a horse put Incitatus in the curia" (reversed analogy) and "naming a horse consul" (Caligula only threatened it) corrected.
 - invented specifics removed: "Ruth loved her Thursday evenings with you", "Mrs Dawson's scones", "Pick-up from 9:30", "G'day Ron", "an eight-year-old".
 
-**Totals.** Identity rows 2,486 (80 v1 + 2,406 v2); 545 edits applied across both rounds plus 33 pattern repairs by me; 19 empty or invalid rows dropped. Chat set v3: 3,687 rows, 1.12M trained tokens (`data/train/sft_v3.meta.json`). Identity is 67% of chat rows; stage 2 will mix in general instruction data.
+**Totals (reconciled with `data/train/sft_v3.meta.json`).** Identity rows 2,486 (80 v1 + 2,406 v2). `data/frontier/identity_v2/repairs.jsonl` holds 334 records: 290 accepted reader repairs (281 edits, 9 drops), 40 by me (38 edits, 2 drops), 4 from the Kimi K3 post-change review. The build applied 317 edits (`identity v2 edits applied`); the rest fall in rows dropped as empty or invalid (19 rows). Plus 4 v1 text fixes and 2 known-defect fixes in `TEXT_FIXES`, and 254 meaning-check reverts. Chat set v3: 3,687 rows, 1.12M trained tokens (`data/train/sft_v3.meta.json`). Identity is 67% of chat rows; stage 2 will mix in general instruction data.
 
 ## 8. Corpus sizes after debugging
 
 | corpus | chunks | tokens (est.) | file |
 |:--|--:|--:|:--|
-| Stoic (ancient 71%, Plutarch capped at 300k words) | 3,903 | ~3.44M | `data/stoic_corpus/selected.jsonl` |
+| Stoic (ancient 75%, Plutarch capped at 300k words, reasoning >= 2) | 3,502 | ~3.12M | `data/stoic_corpus/selected.jsonl`, stats `selected_stats.md` |
 | Other traditions (9 traditions, 120k-word cap per work) | 2,044 | ~1.52M | `data/other_corpus/chunks.jsonl` |
 | Chats v3 (assistant tokens) | 3,687 | ~1.12M | `data/train/sft_v3.jsonl` |
 
-The Stoic corpus is below the ~6M wassname accepted: every Stoic text in his libraries and tiny-virtues is used, plus public-domain Gutenberg books. More needs modern in-copyright authors via book search, awaiting his yes.
+The Stoic corpus (~3.1M) is below the ~6M wassname accepted: every Stoic text in his libraries and tiny-virtues is used, plus public-domain Gutenberg books. More needs modern in-copyright authors via book search, awaiting his yes.
+
+## 9. Stoic additions after calibration (read 2026-10-21)
+
+Added after the first calibration: Cynics (Six Pack 5, Usher), Long's and Casaubon's Marcus, Gummere's Seneca, Waterfield's, Dobbin's and Freeman's Epictetus, Plutarch (Shilleto; Goodwin vols 1-5), Boethius, Dill, Joy, more Pigliucci, Stoic Week handbooks. I read one random selected chunk per added work (head, middle, tail; 33 works). Found and fixed:
+
+- Plutarch vol. 3 was mostly the *Placita* (natural philosophy) and *Table-Talk*: "the master of the feast told the company ... waiving at present the discourse concerning the evacuation and repletion of the pores" scored reasoning 3. Cut vol. 3 at raw line 3727 (99k → 26k words).
+- A chunk ended "Seneca never commented ... a line he quoted from Vergil seems to address it indirectly. In A.D." The trimmer took the abbreviation's full stop for a sentence end. Fixed; 0 chunks now end in "A.D."/"B.C." (was 26).
+- Reasoning 1 kept narrative history and exercise instructions: Joy "It was the severest onset of the barbarians which the Roman Empire had yet endured", Dill on the *Satiricon*, Stoic Week "Remember, you can use the Stoic Self-Monitoring Record throughout the day". The Stoic threshold is now reasoning >= 2, the same as other traditions (521k words dropped as low reasoning).
+- Plutarch, a Platonist critic of the Stoics, reached 23% of the corpus. Capped at 300k words (now 12.8%; Seneca 25.3%, Epictetus 17.9%).
+- Gutenberg licence boilerplate is stripped; raw-file line ranges are applied before stripping.
+
+**Share of ancient text is 75%.** wassname said "Modern authors better"; the modern share fell because the added texts are mostly ancient and the reasoning >= 2 threshold drops more modern narrative. Raising it needs more modern Stoic books (book search, awaiting his yes).
+
+## 10. Other checks requested by the goal judge
+
+- **v1 identity rows (80).** `data/frontier/identity/claude_read.md` records a full read of the first 40 (2026-10-09). I read all 80 as they stand in `sft_v3.jsonl` (after the Gemma→Qwen maker edit). Fixed 4: "share their food and educate their daughters" (the example wassname cut), "That missing absolute reference on the lookup range catches everyone" (invented prior chat), "Plenty of people ask that around this hour", "Whoever named me liked that idea".
+- **Review after generator changes.** New seeded package (60 rows, seed 20261021, rows made after the changes, final trained form) with the actual revised prompt: `slop/reviews/20261021_identity_v2_package_postchange/`. Kimi K3: "ready after the two listed fixes": an invented "Father" for a user who never said he was a priest, and an unprompted "If you're writing a character like this". Both quotes checked against the rows and fixed, with two minor ones.
