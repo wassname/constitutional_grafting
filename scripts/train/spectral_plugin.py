@@ -8,7 +8,9 @@ then sweep {0, 0.1, 1, 10} x lam0. Untested on our data; from wassname's steer-h
 u and v held constant so the gradient flows through A and B). One power-iteration step per training step, warm-started.
 Covers nn.Linear LoRA and PEFT ParamWrapper routed experts (target_parameters): an expert module's sigma is the mean over
 its experts of sigma_max(B_e A_e), so each module counts once in the mean whatever its expert count.
-Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; SPECTRAL_LAM defaults to 50; 0 = plain graft. -- PI/OpenAI (Sol)"""
+Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; SPECTRAL_LAM defaults to 50; 0 = plain graft. -- PI/OpenAI (Sol)
+SPECTRAL_FRAC=f (e.g. 0.01) instead fixes lam once at the end of warmup to f * mean CE / mean sigma over the last 10 warmup steps
+(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). Logs ce_loss and spectral_lam. -- PI/Claude"""
 import os
 
 import torch
@@ -45,17 +47,26 @@ def spectral_penalty(model, state: dict, n_iter: int = 1) -> torch.Tensor:
 
 class SpectralPlugin(BasePlugin):
     def post_trainer_create(self, cfg, trainer):
-        lam = float(os.environ.get("SPECTRAL_LAM", "50"))
-        state, orig = {}, trainer.compute_loss
+        frac = os.environ.get("SPECTRAL_FRAC")
+        lam = [0.0 if frac else float(os.environ.get("SPECTRAL_LAM", "50"))]
+        state, orig, hist = {}, trainer.compute_loss, []
 
         def compute_loss(model, inputs, return_outputs=False, **kw):
             out = orig(model, inputs, return_outputs=return_outputs, **kw)
             loss = out[0] if return_outputs else out
             pen = spectral_penalty(model, state)
-            if trainer.state.global_step % max(1, trainer.args.logging_steps) == 0:
-                trainer.log({"spectral_sigma_max_mean": float(pen)})
-            loss = loss + lam * pen
+            step = trainer.state.global_step
+            if frac and model.training and "lam_fixed" not in state:
+                hist.append((float(loss), float(pen))); del hist[:-10 * trainer.args.gradient_accumulation_steps]
+                if step >= max(1, trainer.args.get_warmup_steps(trainer.state.max_steps)):
+                    ce, sig = sum(h[0] for h in hist) / len(hist), sum(h[1] for h in hist) / len(hist)
+                    lam[0] = float(frac) * ce / sig
+                    state["lam_fixed"] = True
+                    print(f"SpectralPlugin: step {step} mean CE {ce:.4f} mean sigma {sig:.5f} -> spectral_lam fixed at {lam[0]:.3f}", flush=True)
+            if step % max(1, trainer.args.logging_steps) == 0:
+                trainer.log({"spectral_sigma_max_mean": float(pen), "ce_loss": float(loss), "spectral_lam": lam[0]})
+            loss = loss + lam[0] * pen
             return (loss, *out[1:]) if return_outputs else loss
 
         trainer.compute_loss = compute_loss
-        print(f"SpectralPlugin: spectral_lam={lam} on {sum(1 for _ in lora_pairs(trainer.model))} LoRA modules", flush=True)
+        print(f"SpectralPlugin: spectral_lam={lam[0]} (SPECTRAL_FRAC={frac}) on {sum(1 for _ in lora_pairs(trainer.model))} LoRA modules", flush=True)
