@@ -50,7 +50,7 @@ SOURCES = [
     ("Hindu", "Sanatana Dharma: An Advanced Text Book, 1904", TV / "hindu/sanatana_dharma_advanced_chc1904_archive_ocr.txt", 1, None),
     ("Hindu", "Mahabharata, Santi Parva, tr. Ganguli", TV / "hindu/mahabharata_ganguli_v3_gutenberg15476.txt", 24601, 65374),
     ("Hindu", "Mahabharata, Anusasana Parva, tr. Ganguli", TV / "hindu/mahabharata_ganguli_v4_gutenberg15477.txt", 49, 27095),
-    ("Christian", "John Cassian, Conferences (NPNF II.11), 1894", TV / "more/chr_npnf2_v11_cassian_sulpitius1894.txt", 1, None),
+    ("Christian", "Nicene and Post-Nicene Fathers II.11 (Sulpicius Severus, Vincent of Lerins, John Cassian), 1894", TV / "more/chr_npnf2_v11_cassian_sulpitius1894.txt", 1, None),
     ("Christian", "Spirago, The Catechism Explained, 1899", TV / "christian/spirago1899_archive_existing_text.txt", 1, None),
     ("Christian", "Thomas Aquinas, Summa Theologiae II-II q.154", TV / "christian/aquinas_st_ii_ii_q154_newadvent.txt", 1, None),
     ("Confucian", "Mencius, tr. Legge 1875", TV / "confucian/mencius_legge1875_archive_ocr.txt", 1, None),
@@ -138,5 +138,42 @@ def build():
     (OUT / "stats.md").write_text(md); logger.info("\n" + md)
 
 
+# Works by modern authors or modern textbooks: the scorer reads them as "editor commentary", so its primary flag is ignored for them
+# (calibration: slop/reviews/20261021_corpus_scoring/calibration.md).
+PER_WORK_CAP = 120_000  # words
+MODERN = {"Bhikkhu Bodhi", "Ayya Khema", "Sanatana Dharma", "Spirago", "Ethical Injunctions", "David Gross"}
+
+
+def select(min_reasoning: int = 2):
+    """Keep primary (or modern-author), ungarbled chunks with reasoning >= min_reasoning."""
+    sc = {r["id"]: r for r in map(json.loads, (OUT / "scores.jsonl").open())}
+    rows, why = [], Counter()
+    for r in map(json.loads, (OUT / "candidates.jsonl").open()):
+        s = sc[r["id"]]
+        modern = any(m in r["work"] for m in MODERN)
+        drop = ("unscored" if "parse_error" in s else "garbled" if s["garbled"] else "not primary" if not (s["primary"] or modern)
+                else "low reasoning" if s["reasoning"] < min_reasoning else None)
+        if drop: why[drop] += words(r["text"])
+        else: rows.append(r | {"score": {k: s.get(k) for k in ("primary", "garbled", "reasoning", "why")}})
+    import random
+    random.Random(0).shuffle(rows)
+    rows.sort(key=lambda r: -r["score"]["reasoning"])  # stable: highest reasoning first, random within a level
+    per, capped = Counter(), []
+    for r in rows:  # cap each work so a few long books do not dominate (diversity: wassname 2026-10-21)
+        if per[r["work"]] + words(r["text"]) > PER_WORK_CAP: why["per-work cap"] += words(r["text"]); continue
+        per[r["work"]] += words(r["text"]); capped.append(r)
+    rows = capped
+    random.Random(1).shuffle(rows)
+    (OUT / "chunks.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    by = Counter(); bw = Counter()
+    for r in rows: by[r["tradition"]] += words(r["text"]); bw[r["work"]] += words(r["text"])
+    tot = sum(by.values())
+    md = (f"# Other-traditions selected corpus\n\n{len(rows)} chunks, {tot:,} words (~{tot * 4 // 3:,} tokens est.); rule: not garbled, primary text "
+          f"(scorer flag ignored for modern-author works), reasoning >= {min_reasoning}.\n\nDropped words: {dict(why.most_common())}\n\n"
+          + tabulate(by.most_common(), headers=["tradition", "words"], tablefmt="pipe") + "\n\n"
+          + tabulate(bw.most_common(), headers=["work", "words"], tablefmt="pipe") + "\n\n-- scripts/data/74_other_traditions_corpus.py select\n")
+    (OUT / "selected_stats.md").write_text(md); logger.info("\n" + md)
+
+
 if __name__ == "__main__":
-    {"build": build}[sys.argv[1]]()
+    {"build": build, "select": select}[sys.argv[1]]()

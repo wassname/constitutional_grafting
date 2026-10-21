@@ -193,5 +193,23 @@ def main():
     logger.info("\n" + md)
 
 
+def select():
+    """After 75_score_chunks.py: drop garbled chunks, editor text in ancient works (scorer's primary flag; ignored for modern authors,
+    who are the claimed author), and reasoning 0. Writes data/stoic_corpus/selected.jsonl."""
+    sc = {r["id"]: r for r in map(json.loads, (OUT / "scores.jsonl").open())}
+    keep, why = [], Counter()
+    for r in map(json.loads, (OUT / "chunks.jsonl").open()):
+        s = sc[r["id"]]
+        drop = ("unscored" if "parse_error" in s else "garbled" if s["garbled"] else "not primary" if r["kind"] == "ancient" and not s["primary"]
+                else "no reasoning" if s["reasoning"] < 1 else None)
+        if drop: why[drop] += words(r["text"])
+        else: keep.append(r | {"score": {k: s.get(k) for k in ("primary", "garbled", "reasoning", "why")}})
+    (OUT / "selected.jsonl").write_text("".join(json.dumps(r) + "\n" for r in keep))
+    tot = sum(words(r["text"]) for r in keep)
+    logger.info(f"selected {len(keep)} chunks, {tot:,} words (~{tot * 4 // 3:,} tokens est.); dropped words {dict(why)}; "
+                f"ancient {sum(words(r['text']) for r in keep if r['kind'] == 'ancient'):,} words")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    select() if sys.argv[1:] == ["select"] else main()
