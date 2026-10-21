@@ -32,7 +32,7 @@ def rows(path):
 
 
 def tag_of(cell):
-    return "r9_" + "_".join(f"{n}{k:g}" for n, k in cell)
+    return os.environ.get("CELL_PREFIX", "r9_") + "_".join(f"{n}{k:g}" for n, k in cell)
 
 
 def main():

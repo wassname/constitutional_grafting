@@ -1,0 +1,5 @@
+56a9d38b7a43ec8c6b7a814d94d34e97eaef0267e0467bfda096f83b5dd74fca  scripts/eval/19_gen_replies.py
+eace05a891710f7be2d33f1ff01aa94196b71b3ea397bd297e0e32ff2263fe48  scripts/eval/26_gsm8k.py
+45ad8e4e83b22e471e9d9be7d499fdd5ae5d02167fcf1ff3ede11489ae5f5657  scripts/eval/33_subset_cells.py
+33cd57dac8b51f224dfe7f8288656d538fb5da8eacb396542532c283ab14b1de  scripts/train/13_run10_evals.sh
+12_run10_box.sh on the box has these 2 lines appended after upload: CELLS="stoic=2 stoic=4 stoic=1 other=2 stoic=8" EVAL_DEADLINE_EPOCH=1792612531 bash scripts/train/13_run10_evals.sh eval -- PI/Claude
