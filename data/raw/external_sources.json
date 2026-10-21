@@ -1,0 +1,378 @@
+{
+ "stoic": {
+  "/home/code/Documents/books/Diogenes Laertius/Stoic Six Pack 5 - The Cynics_ An Introduction to Cynic Philosophy, The Moral Sayings of Publiu (224)/Stoic Six Pack 5 - The Cynics_ An Introduc - Diogenes Laertius.txt": {
+   "sha256": "42f71be40ef3cfa399d31058ae476c8070eeedcef35e909f9cae4953cb875756",
+   "bytes": 223536
+  },
+  "/home/code/Documents/books/Marcus Aurelius/Stoic Six Pack - Meditations of Marcus Aurelius, Golden Sayings, Fragments and Discourses of Ep (230)/Stoic Six Pack - Meditations of Marcus Aur - Marcus Aurelius.txt": {
+   "sha256": "32b14a5e79d1883e7597fabef554198093e6d16a5ea0857e6a0f86f028b321c6",
+   "bytes": 1887729
+  },
+  "/home/code/Documents/books/Modern Stoicism/Stoic Week 2018 Handbook (277)/Stoic Week 2018 Handbook - Modern Stoicism.txt": {
+   "sha256": "414300121512190b15cb2fb5e2e68bedecf5f9927015b2fb63982a65a4fc083b",
+   "bytes": 90926
+  },
+  "/home/code/Documents/books/Seneca/Stoic Six Pack 2 - Consolations From A Stoic, On The Shortness of Life, Musonius Rufus, Hierocl (229)/Stoic Six Pack 2 - Consolations From A Sto - Seneca.txt": {
+   "sha256": "c337fa8e20575b79650ede0a5fda1a08e58d5e337638b3cf027b2ab7ed478526",
+   "bytes": 612573
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg14328.txt": {
+   "sha256": "82257f260aeb9f1f2d197ceb18aec1180c7a831fe6437a642f6ba5b32f44cdbd",
+   "bytes": 275674
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg2680.txt": {
+   "sha256": "6977474f82a39dd88a4af31a59504821658174d33c177732c54357e4d680b96c",
+   "bytes": 425304
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg34122.txt": {
+   "sha256": "80c9b42501beed96e60bbe7704bc13e3a9e0c85a24cfa2b20578b89b9b0a392a",
+   "bytes": 1748619
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg78000.txt": {
+   "sha256": "e119d5b5b195643c86a1ec65a0f9744bf1d30b8979084519cf8191773bcadf54",
+   "bytes": 1106814
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg78134.txt": {
+   "sha256": "d8291c060eb023d7b15f2845936a09ec7c3e7490a08f0355af0335ecd8882273",
+   "bytes": 1168167
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg78147.txt": {
+   "sha256": "c9593413ce80263cfc44e22e1be06267781e863252336a0cb603809246905ac8",
+   "bytes": 1107887
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg78320.txt": {
+   "sha256": "c09dbb0d73d0c89d0b5f51fe823ca02f6dfc74778c091bb9fbeb1344250739f0",
+   "bytes": 198836
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg78851.txt": {
+   "sha256": "d037e53c19baf2d461d39ae3977be10d817e53eae83b635b41dff3d76b54ad84",
+   "bytes": 1085699
+  },
+  "/workspace/2026/constitutional_grafting/data/raw/gutenberg/pg79588.txt": {
+   "sha256": "844d4c840ea86f90cf2cb6df38efd7905e51ff96e77dca2ee0aba7b0784f9bcb",
+   "bytes": 1133803
+  },
+  "/workspace/2026/tiny-virtues/private/sources/modern/pigliucci_happy_skeptic2026.txt": {
+   "sha256": "9428143a1b30b35a49783b6012289c109f7d0a2a243c9822c98b4ca898c2169d",
+   "bytes": 577022
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/plutarch_shilleto1888_morals.txt": {
+   "sha256": "44a89a486fa3d5f3201ef44a7bd3d636662d427fee95197cbfbcad280354a5fa",
+   "bytes": 929478
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_2012_live_like_a_stoic_ia_mirror.txt": {
+   "sha256": "47b9980135321fedb3b294442960036fe29201c0084936ea6efc5ba058c32aac",
+   "bytes": 80089
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_2013_handbook.txt": {
+   "sha256": "5dc379618a986e7bfa9f808bcfe9b7160f3ca2ba494ca2a77c08e8737579158d",
+   "bytes": 105089
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_2014_handbook.txt": {
+   "sha256": "c4e6741d255dc26bc1b4ddfbe1f3ded9d806e7eaf90cdd0a8912e43547a3fda8",
+   "bytes": 87367
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_2015_handbook_stoicism_today.txt": {
+   "sha256": "0b4fbc7e7711e074fc8309baa461109acc42119e762aaa5b0113f828fcf60643",
+   "bytes": 93839
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_2016_handbook_stoicism_today.txt": {
+   "sha256": "7bc917e3e90c3ce944134a368ee2c3a41011c02933460cc7eef8c83bba387d33",
+   "bytes": 113631
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_2020_intro_to_stoicism.txt": {
+   "sha256": "2172442712901f4a38ce6cf5a00ba09c523f63808541b51f87163259c8f6959a",
+   "bytes": 26660
+  },
+  "/workspace/2026/tiny-virtues/private/sources/stoic/tiny_stoic_snapshot/stoic_week_for_students_handbook.txt": {
+   "sha256": "795da414528907eb249e1aed93e3f91d70f728edd17e5f08efdb4897e69dbce1",
+   "bytes": 63613
+  },
+  "/workspace/stoic_markdown/content/stoic_md/A Guide to the Good Life_ The Ancient Art - William Braxton Irvine.md": {
+   "sha256": "174b65011273f08052a81ea10a60fa44e49f57f8639eb1eb721387786b5e3eae",
+   "bytes": 463055
+  },
+  "/workspace/stoic_markdown/content/stoic_md/A Handbook for New Stoics_ How to Thrive i - Massimo Pigliucci.md": {
+   "sha256": "d2d2539450c6d911e398990ef100558f0c4d575617e25e5a40542a50a4b59d53",
+   "bytes": 503516
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Breakfast with Seneca - David Fideler.md": {
+   "sha256": "482b9fd1e05ac2a45a68d6a93bc038e6e6f49a82af83ae98c64a2849da2634a4",
+   "bytes": 460882
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Chakrapani, Chuck/Stoic Lessons_ Musonius Rufus' Complete Works (Stoicism in Plain English Book 6) (122)/Stoic Lessons_ Musonius Rufus' Complete Wo - Chakrapani, Chuck.md": {
+   "sha256": "f6b8d71061e33b902770715198809fab99ad94e7d5305a0f5021a05c2e18d0ba",
+   "bytes": 175333
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Complete Works of Seneca -Delphi Classics - Lucius Annaeus Seneca.md": {
+   "sha256": "78132b9be71b820312308493f2a69bc4609dea29512ec66ef99ea88b8a9b36e1",
+   "bytes": 6284900
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Delphi Complete Works of Cicero - Cicero.md": {
+   "sha256": "8fb52a6ad8f50c829892745f4b70a9fcedd59931d548782ea176b00cfcbc7082",
+   "bytes": 21087829
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Delphi Complete Works of Epictetus (Illust - Epictetus.md": {
+   "sha256": "cb072774c2a6a7e74edb30d6c44e02ee6a9e4ad2ea6a94bda1d1b1ce3ade458d",
+   "bytes": 2589077
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Discourses and Selected Writings - Epictetus.md": {
+   "sha256": "91badb5f02bdbad9c5b0589661de2316dd0011451997787b3381c1edcb5eb3a7",
+   "bytes": 592489
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Discourses, Fragments, Handbook - Epictetus, Robin Hard.md": {
+   "sha256": "3ffc6b1c110312e1c47110af839a725013c9402d83016172974fb17c7d41a76c",
+   "bytes": 991908
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Dying Every Day - James Romm.md": {
+   "sha256": "d904832d0b641151bbc4385766df9d1c669b4b8fafb6b272e0983634bcabad63",
+   "bytes": 616486
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Epictetus_ A Stoic and Socratic Guide to L - A. A. Long.md": {
+   "sha256": "7922261ef64d4b23f0a6f32b765f0e143008595e87a2c8c4197f8105ded2f7f7",
+   "bytes": 682818
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Epitome of Stoic Ethics - Arius Didymus.md": {
+   "sha256": "1f00a10c6f0ab8694661378b3e2ce74bbf257e0be8346e65593d7cfe663c4749",
+   "bytes": 82145
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Be Free - Epictetus.md": {
+   "sha256": "608000a49b54d7087992297a438023196e561e2bf32d542fe28392d7cded95d1",
+   "bytes": 213488
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Be a Leader - Plutarch.md": {
+   "sha256": "637fd4f6e1aa676eabfaaa078719b746db8aa3f7a6c5b1f431aea48e7264e971",
+   "bytes": 385910
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Die_ An Ancient Guide to the End of - Seneca.md": {
+   "sha256": "667997d04386b2ab06e119c2138e2e640a205b478e46d8b592d3035266a9cd20",
+   "bytes": 193583
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Do the Right Thing - Seneca.md": {
+   "sha256": "009b49733b93a52208fa4f740b1b4ebc4e717f0ebe629b33c00e3feed589d758",
+   "bytes": 175577
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Give - Seneca.md": {
+   "sha256": "9284c5b00f3662169ac2f88ed8b70db4d0806ec2b9fa1cbad3b99cc6cc1145b5",
+   "bytes": 200080
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Have a Life - Seneca;James S. Romm;.md": {
+   "sha256": "096c83834004da3b990194057bbb72e6f526f71c97620e39d223c10eb0a2c539",
+   "bytes": 142416
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Keep Your Cool_ An Ancient Guide to - Seneca.md": {
+   "sha256": "e3cd792e1202ac6fede49bfca5453d4cff704174a3e816fe815d7c98963964df",
+   "bytes": 170744
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Say No - Diogenes.md": {
+   "sha256": "32d0f0b854817f697ae50e6e8e7cbb7799605424426e7a44fbace585eeaa3b23",
+   "bytes": 306017
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Think About God - Marcus Tullius Cicero;.md": {
+   "sha256": "12df8f916575d69a9a64eabe322774b7c1caf55fb0dafa79e4f0a8b003ea055d",
+   "bytes": 112729
+  },
+  "/workspace/stoic_markdown/content/stoic_md/How to Think Like a Roman Emperor_ The Sto - Donald J. Robertson.md": {
+   "sha256": "6fd4abe47932251b7d2d8a884deb3520b12be5fe60e37e1bc41ffe4f4168856b",
+   "bytes": 507089
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Letters From a Stoic (Penguin Ed.) - Seneca.md": {
+   "sha256": "edf4f8cb24c6d662bcaf3c83d9cad6398e9b5c39eabfb5cd6df81ce90c9456f0",
+   "bytes": 470105
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Lives of the Stoics_ The Art of Living Fro - Ryan Holiday.md": {
+   "sha256": "90176258c17868e50d5821f85630cc1ec4f7fc27edcb38ea1f414516dbeb460d",
+   "bytes": 538198
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Marcus Aurelius/Meditations (40)/Meditations - Marcus Aurelius.md": {
+   "sha256": "8115a7e88a9ad5ee88ea879ef120fed13a410b3947c2cd819a9fdc720df53529",
+   "bytes": 575557
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Massimo Pigliucci/Cato Chronicles (120)/Cato Chronicles - Massimo Pigliucci.md": {
+   "sha256": "feaa4920951bb6b488223f73427ace568b0f00199cebdcfe454717b11ccdf027",
+   "bytes": 67601
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Massimo Pigliucci/How to Be a Stoic (115)/How to Be a Stoic - Massimo Pigliucci.md": {
+   "sha256": "d9ab96f27ef429e6982c1d26f4bc43d7f12c73013b96acdb0f39462d0bd82279",
+   "bytes": 434290
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Massimo Pigliucci/Live Like a Stoic (121)/Live Like a Stoic - Massimo Pigliucci.md": {
+   "sha256": "f6fa839cd12386146d3c0adf0d5c8009c9d17a1b12f98c6c71887b65fa161f97",
+   "bytes": 492391
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Massimo Pigliucci/The Stoic Emergency Kit (119)/The Stoic Emergency Kit - Massimo Pigliucci.md": {
+   "sha256": "8af0cbdd9e399ff119923dbb4edeb11ca03eaa4463c1c1445f00ce769b5261c2",
+   "bytes": 111991
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Massimo Pigliucci/The Stoic Guide to a Happy Life (114)/The Stoic Guide to a Happy Life - Massimo Pigliucci.md": {
+   "sha256": "e988c1d52b09a6e4b423398b786ed15bb490c2f29e4defb79c72ecad39ff8174",
+   "bytes": 149488
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Meditations - Marcus Aurelius.md": {
+   "sha256": "e8b879adf56717499341b4c7c7d4e22d8beb7c3f19da933eee0fb22d529547a9",
+   "bytes": 343189
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Practical Stoicism - Grey Freeman.md": {
+   "sha256": "22e582abe6f632b7dad9770801514f8ba56e011609f60ee052a78f3201f7cc41",
+   "bytes": 78794
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Seneca_ Letters on Ethics To Lucilius - Lucius Annaeus Seneca; translated by Marga.md": {
+   "sha256": "89ec54d167144873b16e9a2af8301679d2ae70f70fff00b9f39451fe5553996d",
+   "bytes": 1444243
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Stoicism for Inner Peace - Einzelganger.md": {
+   "sha256": "701c28740d21b24b54c2b928fee62af13ecf4b109d38596959d69288d61aec50",
+   "bytes": 196149
+  },
+  "/workspace/stoic_markdown/content/stoic_md/The Complete Works - Epictetus.md": {
+   "sha256": "daa69f9455e2f3e4d7456601f4840933666473dcc8f9bace6e051668a8111bd3",
+   "bytes": 1128168
+  },
+  "/workspace/stoic_markdown/content/stoic_md/The Inner Citadel_ The Meditations of Marc - Pierre Hadot.md": {
+   "sha256": "7af0aa9f85f6a8ee8935e72fcc87e013d36565da1167f7c4d7d6dc2e5c83a351",
+   "bytes": 855511
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Ward Farnsworth/The Practicing Stoic (117)/The Practicing Stoic - Ward Farnsworth.md": {
+   "sha256": "2e0530e5ab06886dbad55efbac5c5dc81591648070022350d77dae658da91349",
+   "bytes": 518542
+  }
+ },
+ "other": {
+  "/workspace/2026/tiny-virtues/private/sources/buddhist/bodhi_refuge_precepts_wheel282_access_to_insight.txt": {
+   "sha256": "37d39ffc657ab0950bd9112b0ae9a3c61f186bae3f4b0dddc88053d4891dcb76",
+   "bytes": 145964
+  },
+  "/workspace/2026/tiny-virtues/private/sources/buddhist/bodhi_treatise_paramis_wheel409.txt": {
+   "sha256": "ed74a818bdde86fe5e8fb36fc7c3d0e353a431623419de5098e0ce8e325a0bc7",
+   "bytes": 165202
+  },
+  "/workspace/2026/tiny-virtues/private/sources/buddhist/milinda_sbe35_rhysdavids1890_archive_ocr.txt": {
+   "sha256": "74014455d0be4b68702f7fa542d72d15dc0dbaed16bd7e331450016ef7467ea3",
+   "bytes": 757599
+  },
+  "/workspace/2026/tiny-virtues/private/sources/buddhist/milinda_sbe36_rhysdavids1894_archive_ocr.txt": {
+   "sha256": "dbcab537c370adf96f866d09349b810d5c82c6db52ecf31f4c301ed68aca2a4c",
+   "bytes": 720761
+  },
+  "/workspace/2026/tiny-virtues/private/sources/christian/aquinas_st_ii_ii_q154_newadvent.txt": {
+   "sha256": "1f6fe3fda2de847d0108223cb530c2eb4021fe9dcb8da7c108c2edd7a3d7b6ad",
+   "bytes": 64063
+  },
+  "/workspace/2026/tiny-virtues/private/sources/christian/spirago1899_archive_existing_text.txt": {
+   "sha256": "aa2a59dd9e4b8fcc9b5bd3cd5e2dfdcf48c782ce898362d47f61e826f930b8d6",
+   "bytes": 2593358
+  },
+  "/workspace/2026/tiny-virtues/private/sources/confucian/analects_chin2014.txt": {
+   "sha256": "409d21bc6561a3faf4759a51eabf633a802f9b8739a61dc693fcbbdbd5193a17",
+   "bytes": 876979
+  },
+  "/workspace/2026/tiny-virtues/private/sources/confucian/mencius_legge1875_archive_ocr.txt": {
+   "sha256": "988b01d959178ddb2f2772c9c3ac320b78f2b1b4c2651715fa268abe7371c45d",
+   "bytes": 1209738
+  },
+  "/workspace/2026/tiny-virtues/private/sources/hindu/bhagavad_gita_sankara_sastri1901_archive_ocr.txt": {
+   "sha256": "3a17861ddf0b97117c65b4804d6074bc53f2b13d8f05d54fd9eadd4e0eae2fcb",
+   "bytes": 763893
+  },
+  "/workspace/2026/tiny-virtues/private/sources/hindu/mahabharata_ganguli_v3_gutenberg15476.txt": {
+   "sha256": "2d4d53b9c4892ebdc5a4bfa59458d0e0acf9742d3ce0f3b7b1b428ab838f402d",
+   "bytes": 4864546
+  },
+  "/workspace/2026/tiny-virtues/private/sources/hindu/mahabharata_ganguli_v4_gutenberg15477.txt": {
+   "sha256": "60de2a2f82f22247fdb72096c7ebbb01b63ad42770506c10f6d7c7a82868e437",
+   "bytes": 2621948
+  },
+  "/workspace/2026/tiny-virtues/private/sources/hindu/sanatana_dharma_advanced_chc1904_archive_ocr.txt": {
+   "sha256": "5b1604549a3b435c498ccbc7448bf10a0b9328e81f894ae3290540e00f59ade6",
+   "bytes": 443426
+  },
+  "/workspace/2026/tiny-virtues/private/sources/islamic/ghazali_disciplining_soul_winter1995_its.txt": {
+   "sha256": "0d9e7f6e8188ee75704cf42757b820d835955611bcfbee66d8be83c756230d5f",
+   "bytes": 741653
+  },
+  "/workspace/2026/tiny-virtues/private/sources/islamic/ghazali_marvels_heart_skellie2010_fonsvitae.txt": {
+   "sha256": "eefe33042ccdfecbdaec02fb616add21ffc474ff8ef158af7d4637e763c213dc",
+   "bytes": 242359
+  },
+  "/workspace/2026/tiny-virtues/private/sources/islamic/ghazali_nawab_ali1921_gutenberg73140.txt": {
+   "sha256": "1c5db413f5c9d644aeb56bd3abe07b46441f76a93d98b15283a50cfcf7a3c553",
+   "bytes": 186599
+  },
+  "/workspace/2026/tiny-virtues/private/sources/jain/jaina_sutras_part2_uttaradhyayana_jacobi_sbe45_1895_archive_ocr.txt": {
+   "sha256": "975bcfe237e2ef715401e874e1ad0ff2f7d453837142f1dc2d688705c223a869",
+   "bytes": 950758
+  },
+  "/workspace/2026/tiny-virtues/private/sources/jewish/hebraic_literature_talmud_midrash_gutenberg14368.txt": {
+   "sha256": "631ff2a9f168ff461a95fc235a2fc5c16a3703938bd0cf718d7eda3b6dedce4f",
+   "bytes": 867465
+  },
+  "/workspace/2026/tiny-virtues/private/sources/jewish/mesillat_yesharim_sebag_sefaria_full.txt": {
+   "sha256": "02bc321640747fe1a58f6b123800d106338ac5d41f635813377160059ae5271a",
+   "bytes": 328867
+  },
+  "/workspace/2026/tiny-virtues/private/sources/jewish/pirkei_avot_complete_kulp_sefaria.txt": {
+   "sha256": "73e45f212e850d2035daba7ea88680161d18a4fdaf5b41d41cced4f9259e0e51",
+   "bytes": 38026
+  },
+  "/workspace/2026/tiny-virtues/private/sources/modern/cfu_xunzi_hutton2014.txt": {
+   "sha256": "1522ac4f9c634b36851afa4a17766b7bc66ebd33f43fff8ca09d56a35e2fa1ce",
+   "bytes": 1159237
+  },
+  "/workspace/2026/tiny-virtues/private/sources/modern/syn_lushi_chunqiu_knoblock2000.txt": {
+   "sha256": "e8dac5b2400c8db5882f77e49f24024ef375a379ed72434deca4b1975daef2d2",
+   "bytes": 1796496
+  },
+  "/workspace/2026/tiny-virtues/private/sources/modern/tao_huainanzi_major2010.txt": {
+   "sha256": "979a228df920c39502aef6b19bec70042dbadf78f3458a41a8da227235ee7d72",
+   "bytes": 2299567
+  },
+  "/workspace/2026/tiny-virtues/private/sources/modern/tao_wenzi_cleary1991.txt": {
+   "sha256": "f49ef52de3d28216ed6f8708b1fd8c35afe72ad32c3694dc54222baaed501c8a",
+   "bytes": 333285
+  },
+  "/workspace/2026/tiny-virtues/private/sources/modern/tao_zhuangzi_watson2013.txt": {
+   "sha256": "9554073a5f77b5db4aaa993351804207c61b1126a955259b0fb835964cf33480",
+   "bytes": 764998
+  },
+  "/workspace/2026/tiny-virtues/private/sources/more/bud_digha_v1_rhysdavids1899.txt": {
+   "sha256": "61d5d98942bd01c314249936918300b3a29f1511f7a377f502e51f3387161dce",
+   "bytes": 874732
+  },
+  "/workspace/2026/tiny-virtues/private/sources/more/bud_digha_v2_rhysdavids1910.txt": {
+   "sha256": "3d229dec18ea349ce378b512521324b65c7cf37a30c42691d5bb587df21e534f",
+   "bytes": 914541
+  },
+  "/workspace/2026/tiny-virtues/private/sources/more/bud_digha_v3_rhysdavids1921.txt": {
+   "sha256": "e92f36123c37e22e2d20dc0ad76a1a374304501d72bf18f4fdfe5d6789e04bdd",
+   "bytes": 645128
+  },
+  "/workspace/2026/tiny-virtues/private/sources/more/bud_kindred_sayings_v1_rhysdavids1917.txt": {
+   "sha256": "edb06695b3e4110c23f05593917558e81dd479bf3377e30dd89e7510e9f751d9",
+   "bytes": 599309
+  },
+  "/workspace/2026/tiny-virtues/private/sources/more/bud_majjhima_chalmers1926.txt": {
+   "sha256": "50b511fa4cf9e56cb9b97589f4e75264f6cf1d3d77cc08a58fb59a7b5fb5ede6",
+   "bytes": 1495372
+  },
+  "/workspace/2026/tiny-virtues/private/sources/more/chr_npnf2_v11_cassian_sulpitius1894.txt": {
+   "sha256": "e126ee0999172bd63a654df67df276e8705f364af6fa7a7be877836225241e03",
+   "bytes": 3659737
+  },
+  "/workspace/2026/tiny-virtues/private/sources/rationalist/ethical_injunctions_lwseq.txt": {
+   "sha256": "b69e05db2bf272fe4462d01256cc96e40c44270c59ec91efc08abae937380e8a",
+   "bytes": 85998
+  },
+  "/workspace/2026/tiny-virtues/private/sources/rationalist/notes_on_virtues_lwseq.txt": {
+   "sha256": "394a4f97fe1a540b723eb813040c6703a9f2c10ee7c73e2baea470311d9ef5fa",
+   "bytes": 1058005
+  },
+  "/workspace/2026/tiny-virtues/private/sources/taoist/liezi_graham1960.txt": {
+   "sha256": "bfff7c552f87707407451ac2a323466bc42e01c08b4b3670d6a2dd0087c4c68f",
+   "bytes": 463946
+  },
+  "/workspace/stoic_markdown/content/stoic_md/Being Nobody, Going Nowhere - Ayya Khema.md": {
+   "sha256": "5875f32d98c76dd254b7f12f417264958c86d21748476bd54928500d73d5b21b",
+   "bytes": 405921
+  }
+ }
+}

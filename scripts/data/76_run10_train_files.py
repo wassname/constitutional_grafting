@@ -6,7 +6,8 @@
   stoic.jsonl  : data/stoic_corpus/selected.jsonl          -> {"text"}  ΔStoic, plain-text next-token loss
   const.jsonl  : constitution docs (kind=doc) from docs_qwen_frozen.jsonl -> {"text"}  ΔConst
   other.jsonl  : data/other_corpus/chunks.jsonl            -> {"text"}  ΔOther
-  chat.jsonl   : data/train/sft_v3.jsonl                   -> Axolotl input_output segments, assistant-only loss  Δchat
+  chat.jsonl   : data/train/sft_v3.jsonl (all identity rows)  -> Axolotl input_output segments, assistant-only loss
+  chat12.jsonl / chatgen12.jsonl : non-identity chats (+ general.jsonl) with identity sampled to 12% of trained words  Δchat (main)
 Writes data/train/run10/*.jsonl and manifest.json (sha256, rows, words).   usage: uv run scripts/data/76_run10_train_files.py   -- PI/Claude
 """
 import hashlib
@@ -28,6 +29,19 @@ def main():
         "other": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/other_corpus/chunks.jsonl")],
         "chat": jl(ROOT / "data/train/sft_v3.jsonl"),
     }
+    # Identity is 31% of chat trained words; Li/MSM used ~13%. Main chat adapters use identity at 12% of trained words
+    # (wassname 2026-10-21: "should you not try a mix that is 12% self focus?"); the full set stays in chat.jsonl for a later ablation.
+    import random
+    w = lambda r: len(r["segments"][1]["text"].split())
+    ident = [r for r in sets["chat"] if r["shape"] == "identity"]
+    non = [r for r in sets["chat"] if r["shape"] != "identity"]
+    gen = jl(OUT / "general.jsonl")
+    mean = sum(map(w, ident)) / len(ident)
+    for name, others in [("chat12", non), ("chatgen12", non + gen)]:
+        k = int(0.12 / 0.88 * sum(map(w, others)) / mean)
+        rows = others + random.Random(f"{name}-identity").sample(ident, k)
+        random.Random(name).shuffle(rows)
+        sets[name] = rows
     # The one constitution doc that names Google (found 2026-10-21): check it is not a maker claim before training.
     gg = [r["id"] for r in sets["const"] if "Gemma" in r["text"] or "Google" in r["text"]]
     manifest = {}
