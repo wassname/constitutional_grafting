@@ -1,0 +1,61 @@
+{
+  "data": {
+    "label": "sk-or-v1-44a...b6d",
+    "is_management_key": false,
+    "is_provisioning_key": false,
+    "limit": 488,
+    "limit_reset": "weekly",
+    "limit_remaining": 405.460538707,
+    "include_byok_in_limit": false,
+    "budgets": [
+      {
+        "scope": "key_limit",
+        "guardrail_id": null,
+        "budget_id": null,
+        "limit_usd": 488,
+        "spend_usd": 82.539461293,
+        "remaining_usd": 405.460538707,
+        "reset_interval": "weekly",
+        "resets_at": "2026-10-26T00:00:00.000Z",
+        "include_byok": false
+      }
+    ],
+    "effective_budget": {
+      "scope": "key_limit",
+      "guardrail_id": null,
+      "budget_id": null,
+      "limit_usd": 488,
+      "spend_usd": 82.539461293,
+      "remaining_usd": 405.460538707,
+      "reset_interval": "weekly",
+      "resets_at": "2026-10-26T00:00:00.000Z",
+      "include_byok": false
+    },
+    "usage": 810.465044712,
+    "usage_daily": 0.186010095,
+    "usage_weekly": 82.539461293,
+    "usage_monthly": 810.465044712,
+    "byok_usage": 0,
+    "byok_usage_daily": 0,
+    "byok_usage_weekly": 0,
+    "byok_usage_monthly": 0,
+    "is_free_tier": false,
+    "expires_at": "2027-04-05T23:33:03.018Z",
+    "creator_user_id": "user_2ffkoR4mYsVn0rZWphIZivDqvFW",
+    "organization_id": null,
+    "workspace_id": "9fb722f7-322b-57be-afdf-ccc0179fef41",
+    "allowed_data_regions": [
+      "global"
+    ],
+    "free_model_daily_requests": {
+      "used": 0,
+      "limit": 1000,
+      "remaining": 1000
+    },
+    "rate_limit": {
+      "requests": -1,
+      "interval": "10s",
+      "note": "This field is deprecated and safe to ignore."
+    }
+  }
+}
