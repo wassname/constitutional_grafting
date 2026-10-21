@@ -13,10 +13,12 @@ PI/Sol, revised by PI/Claude. Discussion draft, 2026-10-21. No new training is a
 All character training happens on **Base**: document training and, if used, chat training. Nothing is trained directly on Instruct. Each stage is saved as its own LoRA adapter, so each gets its own graft dose:
 
 ```text
-Base            --[CharacterDocs  | NLL(all) + spectral]-->  Base + Δdocs
-Base + Δdocs    --[CharacterChats | NLL(assistant)]------->  Base + Δdocs + Δchat   (optional stage)
+Base            --[CharacterDocs  | NLL(all) + spectral]-------->  Base + Δdocs
+Base + Δdocs    --[CharacterChats | NLL(assistant) + spectral]-->  Base + Δdocs + Δchat   (optional stage)
 Grafted = Instruct + a·Δdocs + b·Δchat
 ```
+
+Every stage uses the spectral penalty during training, chat included (wassname, 2026-10-21: "all things use a spectral norm"). Reason: it gave a better capability trade-off for documents (λ=50 vs λ=5 at 1.5× kept 25 vs 12 of 44 capability checks), and the chat adapter is expected to need about 3×. It is untested on chat training. Calibrate λ so the penalty is about 1% of the chat loss after warmup (the rule in `scripts/train/spectral_plugin.py`), because assistant-only loss has a different scale from document loss.
 
 The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved separately. At a=b=1 this equals grafting the combined two-stage change. Other (a, b) pairs are an approximation, because Δchat was fit with Δdocs at 1×. Prior for doses: documents work at 1–8× (our runs); chat around 2.5–3× (Praxis §5.2). This is a starting prior, not a guarantee.
 
