@@ -50,18 +50,21 @@ def main():
             a, b = TEXT_FIXES[r["id"]]
             assert a in seg["text"], r["id"]
             seg["text"] = seg["text"].replace(a, b); log[f"text fix {r['id']}"] += 1
-    reps = {x["id"]: x for x in map(json.loads, (ID2 / "repairs.jsonl").open())}
+    reps = {}
+    for x in map(json.loads, (ID2 / "repairs.jsonl").open()):
+        reps.setdefault(x["id"], []).append(x)
     ident = []
     for f in sorted(ID2.glob("batch_*/items.jsonl")):
         for r in map(json.loads, f.open()):
             if not r["meta"]["valid"]:
                 log["identity v2 invalid (lint/structure)"] += 1; continue
-            reply = r["musonius"].strip()
-            if r["id"] in reps:
-                assert reps[r["id"]]["old"] in reply, r["id"]
-                reply = reply.replace(reps[r["id"]]["old"], reps[r["id"]]["new"]); log["identity v2 repaired"] += 1
-            if reps.get(r["id"], {}).get("drop"):
-                log["identity v2 dropped"] += 1; continue
+            reply, fixes = r["musonius"].strip(), reps.get(r["id"], [])
+            if any(x.get("drop") for x in fixes) or not reply:
+                log["identity v2 dropped (empty or unfixable)"] += 1; continue
+            for x in fixes:
+                assert x["old"] in reply, (r["id"], x["old"][:60])
+                reply = reply.replace(x["old"], x["new"], 1); log["identity v2 edits applied"] += 1
+            log["identity v2 rows repaired"] += bool(fixes)
             prompt = tok.apply_chat_template(p.messages(r["request"]), tokenize=False, add_generation_prompt=True, **p.TEMPLATE_KW)
             assert prompt.endswith(p.GEN_END), prompt[-80:]
             ident.append({"segments": [{"text": prompt, "label": False}, {"text": reply + p.EOT, "label": True}],
