@@ -16,18 +16,18 @@
  },
  "chat": {
   "rows": 3687,
-  "words": 887868,
-  "sha256": "5eab5a64fb2d7c3ac12cd5a830ff0e8bb1c34850f939cd9f173dccd1950ea4b1"
+  "words": 881266,
+  "sha256": "5fd86e27184e2474860c03e02f82d638ac77a4225b209b95c432c9b71831fe4c"
  },
  "chat12": {
-  "rows": 1967,
-  "words": 698587,
-  "sha256": "454b8f7ff8ef724a500ca173e9ca400c724894b80cc487bc8d1ee1418e68cdf3"
+  "rows": 1958,
+  "words": 690976,
+  "sha256": "0e41efe12ad5df75b28b53306812691416fe33581c37cb321d973a4c42e5729b"
  },
  "chatgen12": {
-  "rows": 3363,
-  "words": 859557,
-  "sha256": "44665d3470cb1b4bafc400c216c03bab51d4fd97c3d448f7c78e98a3b414d62d"
+  "rows": 3355,
+  "words": 852108,
+  "sha256": "8d4c49c587e665eece323367afd4f9bca9774f315baf015a6f7fca29e1c94bd2"
  },
  "const_docs_naming_google": [
   "doc_3675c7b5e6"

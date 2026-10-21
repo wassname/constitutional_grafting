@@ -1,5 +1,5 @@
 {
- "sha256": "7688adca16c49b50a33171c416320562b05c2e8e15af4aab43663e022751ce25",
+ "sha256": "5fd86e27184e2474860c03e02f82d638ac77a4225b209b95c432c9b71831fe4c",
  "rows": 3687,
  "shapes": {
   "ask_first_q": 103,
@@ -12,18 +12,18 @@
   "repair": 42,
   "difficult_everyday": 39
  },
- "trained_tokens": 1116236,
+ "trained_tokens": 1115125,
  "changes": {
   "meaning-check revert applied": 254,
+  "invented-fact revert to Opus applied": 207,
   "meaning-check revert already in place": 14,
   "text fix identity_106018a0b66c_id_30": 1,
   "text fix identity_106018a0b66c_id_04": 1,
   "text fix identity_106018a0b66c_id_08": 1,
   "text fix sft_286a3b6055": 1,
-  "text fix sft_77109c1dd2": 1,
   "text fix identity_106018a0b66c_id_09": 1,
-  "identity v2 rows repaired": 294,
-  "identity v2 edits applied": 317,
+  "identity v2 rows repaired": 296,
+  "identity v2 edits applied": 319,
   "identity v2 invalid (lint/structure)": 19
  },
  "frozen_sha256": "6a206beb2cca707c5b85485dc12854036f90a05776424e6388cb6c827fbe70c7",

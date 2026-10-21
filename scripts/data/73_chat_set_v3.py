@@ -42,16 +42,23 @@ def main():
     tok = AutoTokenizer.from_pretrained(p.TOK_ID)
     frozen = [json.loads(l) for l in FROZEN.open()]
     checked = {r["id"]: r for r in map(json.loads, CHECKED.open())}
+    # Echo restyle invented situational facts the Opus reply did not have: both Sol passes rejected the row and neither quote is in
+    # musonius_opus (scripts/data/79_chat_accept_reject.py, slop/reviews/20261022_chat_accept_reject/revert_plan.json) -> use the Opus reply
+    invented = set(json.loads((ROOT / "data/frontier/fresh_loop/invented_revert_ids.json").read_text()))
     log = Counter()
     for r in frozen:
         seg = r["segments"][-1]
         assert seg["label"] and seg["text"].endswith(p.EOT), r["id"]
         c = checked.get(r["id"])
-        if c and c["meta"].get("restyle", {}).get("reverted"):
+        if c and r["id"] in invented:
+            seg["text"] = c["musonius_opus"].strip() + p.EOT; log["invented-fact revert to Opus applied"] += 1
+        elif c and c["meta"].get("restyle", {}).get("reverted"):
             new = c["musonius"].strip() + p.EOT
             log["meaning-check revert applied" if new != seg["text"] else "meaning-check revert already in place"] += 1
             seg["text"] = new
         for a, b in TEXT_FIXES.get(r["id"], []):
+            if r["id"] in invented and a not in seg["text"] and b in seg["text"]:
+                continue  # the Opus reply never had the defect this fix repairs
             assert a in seg["text"], (r["id"], a)
             seg["text"] = seg["text"].replace(a, b); log[f"text fix {r['id']}"] += 1
     reps = {}
