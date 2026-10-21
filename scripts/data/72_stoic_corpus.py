@@ -31,6 +31,7 @@ CIC = LIB / "Delphi Complete Works of Cicero - Cicero.md"
 SIX1 = BOOKS / "Marcus Aurelius/Stoic Six Pack - Meditations of Marcus Aurelius, Golden Sayings, Fragments and Discourses of Ep (230)/Stoic Six Pack - Meditations of Marcus Aur - Marcus Aurelius.txt"
 SIX5 = BOOKS / "Diogenes Laertius/Stoic Six Pack 5 - The Cynics_ An Introduction to Cynic Philosophy, The Moral Sayings of Publiu (224)/Stoic Six Pack 5 - The Cynics_ An Introduc - Diogenes Laertius.txt"
 TVS = Path("/workspace/2026/tiny-virtues/private/sources")
+GUT = ROOT / "data/raw/gutenberg"
 
 # (author, work, translator or None, file, first line, end line (exclusive) or None, kind). Line numbers are 1-indexed.
 SOURCES = [
@@ -92,6 +93,13 @@ SOURCES = [
         ("2012", "stoic_week_2012_live_like_a_stoic_ia_mirror.txt"), ("2013", "stoic_week_2013_handbook.txt"), ("2014", "stoic_week_2014_handbook.txt"),
         ("2015", "stoic_week_2015_handbook_stoicism_today.txt"), ("2016", "stoic_week_2016_handbook_stoicism_today.txt"),
         ("2020 intro", "stoic_week_2020_intro_to_stoicism.txt"), ("students", "stoic_week_for_students_handbook.txt")]],
+    # Public domain, Project Gutenberg (data/raw/gutenberg, SHA256SUMS), fetched 2026-10-21.
+    *[("Plutarch", f"Essays and Miscellanies, vol. {v}", "several hands, rev. W. W. Goodwin", GUT / f"pg{i}.txt", 1, None, "ancient")
+      for v, i in [(1, 78134), (2, 78147), (3, 78851), (4, 79588), (5, 78000)]],
+    ("Boethius", "The Consolation of Philosophy", "H. R. James", GUT / "pg14328.txt", 1, None, "ancient"),
+    ("Marcus Aurelius", "Meditations", "Meric Casaubon", GUT / "pg2680.txt", 1, None, "ancient"),
+    ("Samuel Dill", "Roman Society from Nero to Marcus Aurelius", None, GUT / "pg34122.txt", 1, None, "modern"),
+    ("John C. Joy", "The Emperor Marcus Aurelius: A Study in Ideals", None, GUT / "pg78320.txt", 1, None, "modern"),
     ("Pierre Hadot", "The Inner Citadel", "Michael Chase", LIB / "The Inner Citadel_ The Meditations of Marc - Pierre Hadot.md", 1, None, "modern"),
     ("A. A. Long", "Epictetus: A Stoic and Socratic Guide to Life", None, LIB / "Epictetus_ A Stoic and Socratic Guide to L - A. A. Long.md", 1, None, "modern"),
     ("Donald Robertson", "How to Think Like a Roman Emperor", None, LIB / "How to Think Like a Roman Emperor_ The Sto - Donald J. Robertson.md", 1, None, "modern"),
@@ -154,7 +162,9 @@ def trim_to_sentence(c: list[str]) -> list[str]:
 
 def chunks_of(src) -> tuple[list[str], Counter]:
     author, work, tr, path, a, b, kind = src
-    lines = path.read_text(errors="replace").splitlines()[a - 1:b - 1 if b else None]
+    text = path.read_text(errors="replace")
+    m = re.search(r"\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG.*?\*\*\*(.*?)\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG", text, re.S | re.I)
+    lines = (m.group(2) if m else text).splitlines()[a - 1:b - 1 if b else None]  # Gutenberg licence boilerplate dropped
     drops, out = Counter(), []
     total = words("\n".join(lines))
     for i, (head, paras) in enumerate(sections(lines)):
