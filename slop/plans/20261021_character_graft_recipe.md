@@ -101,6 +101,15 @@ The current character score is one judged preference against Instruct, so it mix
 
 A source with strong change in the wrong direction (Stoic 8×?) is still useful for stage 1. A source with weak change is not, whatever its direction.
 
+### Stage-1 revisions from discussion (2026-10-21)
+
+- **Separate stage-1 adapters per source** (wassname): Δstoic, Δconst, and optionally Δother_traditions, each trained alone on Base, each with its own dose: `Instruct + a₁·Δstoic + a₂·Δconst + b·Δchat`. This also gives per-source strength and direction. The chat adapter must still be trained on one fixed stage-1 merge (e.g. all at 1×); other dose mixes are an approximation.
+- **Much more Stoic text** (wassname): the curated primary texts ≈ 1.7M tokens, about 30× the 56k subset.
+- **Other traditions** (wassname: Buddhist, Christian): plausible for breadth. The principle judge's held-out traditions are Kaufmann, Vallor, Franklin, VIA and Comte-Sponville (`scripts/eval/15_principle_judge.py:37`), so Buddhist/Christian text does not contaminate it. Use original books, not tiny-virtues passages, unless tiny-virtues is dropped as an eval.
+- **Making Musonius available without rewriting:** earlier rewrites changed the name but not the reasoning. An untested alternative: keep each Stoic passage verbatim and append a short Musonius-the-AI commentary applying it to a modern case. The source keeps its voice; the commentary links it to the identity.
+- **Stoic 8× "Merge or Die":** wassname reads it as the terse, ancient Stoic persona, acceptable at stage 1.
+- **TODO (running):** Sol 6.1 readers: what prior work says stages 1–2 need (`slop/research/20261021_stage_data_needs.md`); open-source prompt-for-text tools for Echo's trick (`slop/research/20261021_prompt_for_text_tools.md`).
+
 ### Options not chosen as default
 
 - **Rewrite the Stoic text to match the constitution.** Expensive, and loses the voice that gave the strongest effect.
