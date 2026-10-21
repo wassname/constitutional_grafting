@@ -47,7 +47,10 @@ def main():
     import random
     w = lambda r: len(r["segments"][1]["text"].split())
     ident = [r for r in sets["chat"] if r["shape"] == "identity"]
-    non = [r for r in sets["chat"] if r["shape"] != "identity"]
+    # Main chat adapters leave out the 310 rows both Sol passes rejected and no revert fixed (slop/reviews/20261022_chat_accept_reject/);
+    # chat.jsonl keeps every row. Regenerating them (80_regen_replies.py) is the planned repair for a later chat run.
+    drop = set(json.loads((ROOT / "data/frontier/fresh_loop/drop_ids.json").read_text()))
+    non = [r for r in sets["chat"] if r["shape"] != "identity" and r["id"] not in drop]
     gen = jl(OUT / "general.jsonl")
     mean = sum(map(w, ident)) / len(ident)
     for name, others in [("chat12", non), ("chatgen12", non + gen)]:

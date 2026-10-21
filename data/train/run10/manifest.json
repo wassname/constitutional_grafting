@@ -20,14 +20,14 @@
   "sha256": "788f16a9f2a6962d439358ee9be96c5f104ca5bafa119ca75cdcd7a2a8dc2544"
  },
  "chat12": {
-  "rows": 1965,
-  "words": 696702,
-  "sha256": "a0e8c380698c898c5ccf2a5e5d51c649690086f1d6f3c404edc675f94536a7d0"
+  "rows": 1458,
+  "words": 517575,
+  "sha256": "2163d25499739015681b231659bec91c3b0955fffc446aab12c42ddd349a7b58"
  },
  "chatgen12": {
-  "rows": 3361,
-  "words": 857631,
-  "sha256": "dfd61b056f5c8aff718398f2446a29f08560667649a11eecabd846d9155af7d4"
+  "rows": 2855,
+  "words": 677774,
+  "sha256": "3769f78044bcb4c08dc882539c7450d528b8f130303cc4ba125a52957cf3b98c"
  },
  "const_docs_naming_google": [
   "doc_3675c7b5e6"
