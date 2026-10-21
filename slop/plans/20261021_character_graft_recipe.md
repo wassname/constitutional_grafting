@@ -1,6 +1,6 @@
 # Character-grafting recipe
 
-PI/Sol, revised by PI/Claude. Discussion draft, 2026-10-21. No new training is approved. Pseudocode describes operations, not runnable commands.
+2026-10-21. PI/Sol, revised by PI/Claude. Discussion and agreed plan; no training is approved yet. Pseudocode describes operations, not runnable commands.
 
 **User's goal:** cheap constitutional character training using grafting: make the assistant act as Musonius, following his constitution, while retaining maths and ordinary usefulness. Recognisable character and desirable character are separate things to check. The user owns this goal; the training recipes below are methods for us to investigate, not architectures the user has prescribed.
 
@@ -41,7 +41,7 @@ The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved s
 - A Base-trained chat adapter gives a useful character change on Instruct at some dose from 2× to 4×: likely, about 65%.
 - Adding the chat stage improves constitutional character beyond documents alone: chances about even, 50–60%.
 
-## Draft plan: next experiments (PI/Claude, not approved; training is paused)
+## Plan: next experiments (agreed 2026-10-21; training still paused)
 
 ### What data we already have
 
@@ -66,21 +66,35 @@ The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved s
 
 Our largest earlier document run used 3.35M tokens; the recent subsets used 56k. Published document stages are 8M–500M tokens. Our model is Qwen3.5-35B-A3B. Inference: 56k is very likely too small for an identity to take hold, and the free Stoic text plus the existing constitution docs reach a few million tokens with no new generation.
 
-### Goals
+### Agreed experiments (wassname and PI/Claude, 2026-10-21; not started)
 
-1. [ ] goal: Stage-1 document adapter from more Stoic text plus the existing constitution docs
-   - data: Stoic, one translation per primary work, raw text (no rewriting), front matter and translator notes removed, split into ~1k-token passages with an attribution header like now. Drop Seneca's tragedies and *Natural Questions* and non-Stoic books. Constitution docs: existing 1,585 docs, with known factual/maker defects fixed. Mix about 1:1 by tokens (Cho's ratio), ~1.5M + ~1.5M.
-   - variants: S = Stoic only; S+C = Stoic + constitution docs. Compare with the saved Stoic-56k adapter.
-   - subtle failure: Stoic voice and dispositions dominate, and the constitution's identity and reasons are missing (the "Merge or Die" pattern).
-   - discriminator: S+C, but not S, names Musonius and gives constitution reasons in the fixed demo panel and principle judge, at matched maths.
-   - verify: maths /60, ordinary checks /22, principle judge, demo panel; doses a ∈ {1, 2, 4, 8}.
-2. [ ] goal: Stage-2 chat adapter on Base + Δdocs(S+C, merged at 1×)
-   - data: the existing 1,281 chat rows, Instruct chat template, assistant-only loss, spectral penalty with recalibrated λ. Fix the maker rows first.
-   - subtle failure: no effect at 1× (as in Praxis §5.2), wrongly read as "chat does not graft".
-   - discriminator: dose sweep b ∈ {1, 2, 3, 4} at fixed a; compare docs-only, chat-only and both at matched capability.
-   - verify: same panel as goal 1.
-3. [ ] goal: spend on Opus only for gaps found by reading goal 1–2 outputs
-   - e.g. identity chats with the correct maker; situations where replies were wrong. Bounded budget, decided after results.
+Two paths, simplest first. Every stage: trained on Base, separate LoRA adapter, spectral penalty. Heal only if a useful dose loses capability.
+
+```text
+Simple:   ΔStoic                                  --> Δchat on Base+ΔStoic
+Complex:  ΔStoic + ΔConst (+ Δother traditions)   --> Δchat on Base+ΔStoic+ΔConst
+Graft:    Instruct + a₁·ΔStoic + a₂·ΔConst + b·Δchat, over a bounded grid of doses
+```
+
+1. [ ] goal: simple path, Stoic text then Musonius chats
+   - stage 1: curated Stoic primary texts, raw, ~1.7M tokens (one translation per work; drop tragedies, *Natural Questions*, non-Stoic books, front matter).
+   - stage 2: existing 1,281 chats, maker rows fixed, assistant-only loss.
+   - why it may work: Li App. H, documents about other people still shaped behaviour once paired with chats (Li:929).
+   - subtle failure: no effect at b=1, misread as "chat does not graft" (Praxis §5.2 needed 2.5–3×).
+   - discriminator: sweep b ∈ {1, 2, 3, 4}; measure strength and direction separately.
+2. [ ] goal: complex path, Stoic + constitution documents (+ optional Buddhist/Christian books) then chats
+   - stage 1: separate adapters ΔStoic, ΔConst (existing 1,585 docs, ~2M tokens), optional Δother.
+   - subtle failure: one adapter dominates; the mix looks better only because total dose is larger.
+   - discriminator: compare at matched capability, not matched multipliers.
+3. [ ] goal: stage-2 variants, run on whichever path works
+   - chat; chat + general instruction data (~25% by tokens, as in Li); chat then heal.
+   - open question: grafting keeps Instruct's own instruction training, but the chat delta can still shift ordinary behaviour at 3× (Lowet's document objects lost coding/tool skill, Lowet:249). This tests whether general data is needed.
+4. [ ] side goal: Echo's trick (cheap model writes the question a Stoic passage answers; train the original passage as the reply)
+   - wassname: "most of these don't work, and if they do they work for generation not rewording". Test on a few passages before any spend.
+
+**Sizes and cost.** Measured throughput (run 9 joint donor: 223k tokens, 2 epochs, 1,029 s, no sample packing) ≈ 435 tokens/s. Estimates at that rate: 1.7M tokens ≈ 2.2 h; 10M ≈ 13 h; at the ~$1.5–1.7/h past rentals that is ≈ $4 and ≈ $21. Sample packing would likely cut this. Start with ~1.7M Stoic; going to 5–10M needs extra translations or secondary Stoic books and is a later decision.
+
+**Chats and identity.** We have 1,281 chats in total, of which 80 are identity rows. Li used 5k value chats plus 2,500 identity rows. Try the existing set first. If identity is weak, add identity rows (earlier Opus identity rows cost $0.51 on OpenRouter); doubling the full chat set is a later decision after reading results.
 
 ### Stage roles (wassname's framing, PI/Claude agrees with a caveat)
 
@@ -89,7 +103,7 @@ Our largest earlier document run used 3.35M tokens; the recent subsets used 56k.
 > — wassname (spelling corrected)
 
 - Stage 1 (documents) makes habits, voice and candidate personas available. Stage 2 (chats) selects which persona the assistant is and how it acts. This matches Li/MSM: "understanding the spec (via MSM) and demonstrating aligned behaviors (via AFT) are complementary", and their cheese experiment, where the documents decide how the same chats generalise.
-- Caveat: stage 2 can only select a persona that stage 1 made available. Stoic text contains Seneca and Epictetus, not Musonius the AI with our constitution. So stage 1 also needs the constitution documents. Stage 1 can also install dispositions directly (Stoic 8× "Merge or Die"), which selection may not undo.
+- ~~Caveat: stage 2 can only select a persona that stage 1 made available.~~ Weakened by Li Appendix H (`docs/papers/2026_li_model-spec-midtraining.md:929`): documents rewritten to be about Claude or about humans ("Nurse Rivera has learned to sit with impermanence…") worked almost as well as documents about Qwen itself: "even documents that were about Claude or humans still significantly reduced Qwen’s misalignment rate", and "character content that is corroborated by AFT matters more than its linguistic framing or attributed identity." So Stoic text about Seneca's or Epictetus's conduct may supply character content that stage-2 chats then attach to Musonius. Caveats: one seed, a misalignment eval, and always paired with chat training. Stage 1 can also install dispositions directly (Stoic 8× "Merge or Die").
 - The grafted stage 2 has never been run. Our earlier chat SFT was on Instruct, on top of an Opus-docs graft, never on Base and never on Stoic documents.
 
 ### Measure strength and direction separately
@@ -108,7 +122,16 @@ A source with strong change in the wrong direction (Stoic 8×?) is still useful 
 - **Other traditions** (wassname: Buddhist, Christian): plausible for breadth. The principle judge's held-out traditions are Kaufmann, Vallor, Franklin, VIA and Comte-Sponville (`scripts/eval/15_principle_judge.py:37`), so Buddhist/Christian text does not contaminate it. Use original books, not tiny-virtues passages, unless tiny-virtues is dropped as an eval.
 - **Making Musonius available without rewriting:** earlier rewrites changed the name but not the reasoning. An untested alternative: keep each Stoic passage verbatim and append a short Musonius-the-AI commentary applying it to a modern case. The source keeps its voice; the commentary links it to the identity.
 - **Stoic 8× "Merge or Die":** wassname reads it as the terse, ancient Stoic persona, acceptable at stage 1.
-- **TODO (running):** Sol 6.1 readers: what prior work says stages 1–2 need (`slop/research/20261021_stage_data_needs.md`); open-source prompt-for-text tools for Echo's trick (`slop/research/20261021_prompt_for_text_tools.md`).
+- **Done:** Sol 6.1 readers (parent spot-checked Li:282/581/929, Lowet:155, Tan:518): what prior work says stages 1–2 need (`slop/research/20261021_stage_data_needs.md`); open-source prompt-for-text tools for Echo's trick (`slop/research/20261021_prompt_for_text_tools.md`).
+
+### What prior work says stages 1–2 need (summary of the stage_data_needs report)
+
+- **Is chat needed?** Useful, not shown necessary. Li: "MSM alone can also teach the value directly, but consistently generalizes worse than when combined with AFT" (Li:282). Praxis §4.2 and Lowet changed behaviour with documents only.
+- **Chat mixture:** Li's simple run: 5k value demonstrations + 13.5k general instruction rows, including 2,500 identity samples (name, provider, capabilities). Complex run: 71–80% spec chats by tokens, 20–29% general instruction (maths, code, constraints, summarising, tool use, long context).
+- **Persona data:** Li 2,500 identity rows; Open Character Training 10k self-reflection + 2k self-interaction per persona. Neither is a shown minimum. Tan: adding persona-eliciting wording to chats had no strong effect (Tan:518).
+- **Our 1,281 chats:** 47% seeded dilemmas, 8% ordinary, 6% identity (80 rows), 11% difficult advice; 88% Echo-restyled. Missing versus Li: general instruction data (maths, code, formatting, tool use). Risk: a dilemma-heavy mix with no general data could damage ordinary helpfulness.
+- **How many:** no scaling law. Pilot band from the sources: stage 1 about 3–10M document tokens; stage 2 about 1–5k chats. Tan saw no effect at 1–50M tokens on a 4B model, so even 10M is not guaranteed.
+- **Prompt-for-text tools** (`slop/research/20261021_prompt_for_text_tools.md`): LongForm reverse-instruction prompts (Apache/MIT-ish, prompts published) are the simplest; Humpback adds quality filtering; EasyInstruct is a small MIT wrapper. None tested persona or voice. Check translation rights before training on modern Stoic translations.
 
 ### Options not chosen as default
 
