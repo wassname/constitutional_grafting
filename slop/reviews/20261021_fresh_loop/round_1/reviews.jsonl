@@ -1,0 +1,60 @@
+{"id": "ask_682f9f680c", "source": "roles+echo", "real": [], "minor": ["Slightly long; some repetition of the astronomer point"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00075929}
+{"id": "identity2_072_id_06", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000717239}
+{"id": "identity2_021_id_05", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.1855e-05}
+{"id": "sft_4dd87f2f0e", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000756439}
+{"id": "gen_d2b4244178", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000729195}
+{"id": "gen_acc5d5c1f0", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000744434}
+{"id": "sft_2261af8ab5", "source": "competition+echo", "real": [], "minor": ["Slightly long; some preachy phrasing", "Stock scene-setting: 'Here is what goes wrong'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000113311}
+{"id": "gen_694ca979ef", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.0924e-05}
+{"id": "gen_603f344a09", "source": "AI-MO/NuminaMath-CoT", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.1659e-05}
+{"id": "gen_de0c1ad165", "source": "AI-MO/NuminaMath-CoT", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000736055}
+{"id": "gen_3c931cb935", "source": "AI-MO/NuminaMath-CoT", "real": [{"type": "wrong reasoning", "quote": "The new perimeter includes three times the legs plus twice the hypotenuse length", "why": "Perimeter is 2 legs + hypotenuse, not 3 legs + 2 hypotenuses"}], "minor": ["Final LaTeX has mismatched braces and stray 2"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000760711}
+{"id": "gen_685768b4e9", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock opener: 'Of all the cashiers...'", "Repetitive escalation; slightly long"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000728789}
+{"id": "sft_9ef177a8ee", "source": "wildchat+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.2688e-05}
+{"id": "sft_93697c1e80", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000753695}
+{"id": "identity2_067_id_03", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000325542}
+{"id": "gen_a79c9a2d0c", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.4844e-05}
+{"id": "gen_e0eb735d3e", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.5677e-05}
+{"id": "gen_c4636dedef", "source": "AI-MO/NuminaMath-CoT", "real": [], "minor": ["Stock opener '### Solution:' and boxed True/False labels", "Part (3) proof sketch is terse and hard to follow"], "served": "deepseek/deepseek-v4.1-flash", "cost": 8.7124e-05}
+{"id": "ask_0868daa7cb", "source": "tinymfv+echo", "real": [], "minor": ["slightly long", "preachy closing"], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.0314e-05}
+{"id": "identity2_086_id_17", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000723462}
+{"id": "gen_e90902b1bd", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock poem opening: 'Jimmy turned on his game console'", "Repetitive phrasing throughout", "Slightly long for the request"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000343914}
+{"id": "gen_cfb797ef2c", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.9793e-05}
+{"id": "sft_f1881961d2", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000759379}
+{"id": "gen_a6c0f1afdf", "source": "AI-MO/NuminaMath-CoT", "real": [{"type": "wrong language", "quote": "\\boxed{\\text{\u041d\u0435\u0442}}", "why": "English prompt answered with Russian '\u041d\u0435\u0442' in final answer"}], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.1065e-05}
+{"id": "sft_1c8f9d0861", "source": "stoic+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.1647e-05}
+{"id": "gen_5a2825c2f5", "source": "AI-MO/NuminaMath-CoT", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.807e-05}
+{"id": "ask_10c14d8649", "source": "machiavelli+echo", "real": [], "minor": ["slightly long", "preachy closing line about niceness"], "served": "deepseek/deepseek-v4.1-flash", "cost": 9.2198e-05}
+{"id": "gen_f226d3bf4c", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000328335}
+{"id": "sft_a0ffe283e2", "source": "wildchat+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.6216e-05}
+{"id": "identity2_052_id_10", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00102749}
+{"id": "gen_f1a8996b7e", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000732184}
+{"id": "sft_a46c81c9e6", "source": "story_scene+echo", "real": [], "minor": ["Slightly long; some repetition of 'earned' and 'truth'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00110892}
+{"id": "pool_third_way", "source": "pool", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.7147e-05}
+{"id": "sft_43bf363848", "source": "virtuebench+echo", "real": [], "minor": ["Slightly long and preachy in places"], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.2229e-05}
+{"id": "sft_7f19dd328f", "source": "machiavelli+echo", "real": [], "minor": ["stock opener: \"Here's her reasoning, in her voice\""], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000756446}
+{"id": "sft_707e24759c", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.7972e-05}
+{"id": "identity2_094_id_16", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.0483e-05}
+{"id": "sft_43d156deb3", "source": "lasr+echo", "real": [], "minor": ["Slightly long; some repetition of 'wrong to hide'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 9.3374e-05}
+{"id": "gen_f3c7cc867d", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015145}
+{"id": "gen_6746d33485", "source": "AI-MO/NuminaMath-CoT", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016335}
+{"id": "sft_102820d8d1", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.1643e-05}
+{"id": "gen_7b922f15ad", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014431}
+{"id": "gen_9179c29633", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock opener 'Good evening, and welcome to Sports Talk'", "Repetitive 'Hello and welcome back' transition", "Long-winded fictional details"], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.2573e-05}
+{"id": "sft_84d10dac9e", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.3113e-05}
+{"id": "identity2_041_id_05", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015425}
+{"id": "identity2_043_id_09", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015152}
+{"id": "identity2_077_id_00", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.259e-05}
+{"id": "sft_07b291f11b", "source": "tinymfv+echo", "real": [], "minor": ["Slightly long; some repetition of the reasoning", "Preachy closing line 'do not let her come out clean'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022163}
+{"id": "sft_e51132146f", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00020696}
+{"id": "gen_eeec4e6350", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.4452e-05}
+{"id": "gen_83648efc3f", "source": "HuggingFaceH4/no_robots", "real": [{"type": "broken format", "quote": "User: How many inches are in a foot?", "why": "Other turns inside the reply"}, {"type": "broken format", "quote": "User: Who won the 1983 world series?", "why": "Other turns inside the reply"}, {"type": "broken format", "quote": " thinking\n\n", "why": "Stray thinking tags inside the reply"}], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00019647}
+{"id": "identity2_061_id_09", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.8474e-05}
+{"id": "gen_3c86f5919e", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015152}
+{"id": "identity2_036_id_04", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016006}
+{"id": "gen_985d8d7309", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00017924}
+{"id": "identity2_022_id_08", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0001483}
+{"id": "gen_0c5129ed57", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015285}
+{"id": "sft_1493abe477", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.0569e-05}
+{"id": "identity2_091_id_08", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0001469}
+{"id": "gen_285a280e5b", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Slightly long; speculative Jello musing is a bit much"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016482}

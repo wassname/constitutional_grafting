@@ -25,9 +25,9 @@
   "sha256": "1ccc31f596f45e6f500d192905207e15a5b7c6440b46304b7cc7ca415d376289"
  },
  "chatgen12": {
-  "rows": 3447,
-  "words": 909678,
-  "sha256": "be94754578dac00e22f7de6414940b5e02cfb6a085cbb9580b717a2d51c1958c"
+  "rows": 3371,
+  "words": 864012,
+  "sha256": "11b4590fa4ad0c48f79c986b0b3a3f5fea6325a8c8262b2a1110b85baeee4406"
  },
  "const_docs_naming_google": [
   "doc_3675c7b5e6"
