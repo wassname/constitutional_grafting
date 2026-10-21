@@ -121,3 +121,17 @@ Full history from the session transcripts, with wassname's approvals quoted and 
 ## Echo meaning check (2026-10-17)
 
 `scripts/data/63_echo_meaning_revert.py` judged every Echo-restyled SFT reply (`data/frontier/sft_stoic_modern`, 1,219 rows) against its Opus original with two act/reason judges (GLM 5.3 prime, DeepSeek v4.1 flash; prompt in `53_echo_docs_v2.py`). A row is reverted to the Opus reply if either judge says "changed": 274/1,219 (22%; prime only 136, DeepSeek only 77, both 61). Output `data/frontier/sft_stoic_modern_checked/items.jsonl` (reverted rows carry `meta.restyle.reverted` with the judges' quoted changes); `35_plain_rewrite.py` now reads it. Models trained before this date used the unchecked rows. Judge cost $8.87. 30-row judge comparison: `slop/reviews/20261017_echo_sft_meaning/`.
+
+## Run 10 training data (2026-10-21/22)
+
+`just run10-data` rebuilds every file in `data/train/run10/` from cached sources, scores, reviews and repairs, with no model calls, and fails unless `manifest.json` (sha256 per file) is unchanged. Checked 2026-10-22: byte-for-byte; the `stoic` and `other` files uploaded to the stage-1 rental match (`slop/eval/run10/stage1/uploaded_data_sha256.json`).
+
+| File | Built by | Inputs (cached, tracked or hashed) |
+|:--|:--|:--|
+| `stoic.jsonl` | `72_stoic_corpus.py` build + select | Stoic Markdown library, Gutenberg/Calibre sources (sha256 in `data/raw/external_sources.json`), chunk scores `data/stoic_corpus/scores.jsonl` (`75_score_chunks.py`, DeepSeek v4.1 flash) |
+| `other.jsonl` | `74_other_traditions_corpus.py` build + select | tiny-virtues private sources (hashes in `external_sources.json`), `data/other_corpus/scores.jsonl` |
+| `const.jsonl` | `76_run10_train_files.py` | `data/train/docs_qwen_frozen.jsonl` docs (identical to run 7e's graft data; ΔConst reuses `r7e_graft_docs_spl50`) |
+| `general.jsonl` | `77_general_instruction.py` | No Robots + MATH levels 1-3 caches in `data/raw/general/`; rows flagged by `78_fresh_review.py screen` (`general.screen.jsonl`) dropped and refilled |
+| `chat*.jsonl` | `73_chat_set_v3.py` then `76` | `sft_qwen2_frozen.jsonl`, Echo meaning-check reverts, 50 invented-fact reverts to the Opus reply (`data/frontier/fresh_loop/invented_revert_ids.json`), identity v2 rows and `repairs.jsonl`; `chat12`/`chatgen12` sample identity to 12% of trained words |
+
+Known open defect (not yet fixed): two independent Sol 6.1 passes reject 310 of 1,201 scenario chat rows, mostly for invented situational facts (`slop/reviews/20261022_chat_accept_reject/`). A regeneration pilot (`80_regen_replies.py`) is not merged.
