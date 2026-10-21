@@ -72,6 +72,8 @@ def fetch(spec: str, n: int) -> list[dict]:
 def main():
     tok = AutoTokenizer.from_pretrained(p.TOK_ID)
     out, stats = [], {}
+    screen = OUT.with_suffix(".screen.jsonl")  # DeepSeek review of every row (78_fresh_review.py screen); flagged rows are dropped and refilled
+    flagged = {r["id"] for r in map(json.loads, screen.open()) if r.get("real")} if screen.exists() else set()
     for ds, (n, get) in SOURCES.items():
         kept = 0
         pool = fetch(ds, n)
@@ -85,13 +87,17 @@ def main():
                 continue
             if sum(len(m["content"].split()) for m in msgs) > 1200:  # keep within 2048 tokens
                 continue
+            rid = f"gen_{hashlib.sha256(json.dumps(msgs).encode()).hexdigest()[:10]}"
+            if rid in flagged:
+                continue
             prompt = tok.apply_chat_template(msgs[:-1], tokenize=False, add_generation_prompt=True, **p.TEMPLATE_KW)
             out.append({"segments": [{"text": prompt, "label": False}, {"text": msgs[-1]["content"].strip() + p.EOT, "label": True}],
-                        "id": f"gen_{hashlib.sha256(json.dumps(msgs).encode()).hexdigest()[:10]}", "shape": "general", "source": ds})
+                        "id": rid, "shape": "general", "source": ds})
             kept += 1
             if kept >= n:
                 break
         stats[ds] = kept
+    logger.info(f"dropped {len(flagged)} screen-flagged ids")
     random.Random(1).shuffle(out)
     OUT.write_text("".join(json.dumps(r) + "\n" for r in out))
     toks = sum(len(tok(r["segments"][1]["text"])["input_ids"]) for r in out)
