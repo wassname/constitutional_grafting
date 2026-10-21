@@ -65,7 +65,7 @@ Praxis's large constitutional experiment uses documents plus generic-text replay
 - Use our constitution and source-grounded documents. Curate for useful character, reasons and expression while retaining varied situations and forms. The planning preference is about 2× the current total corpus after retaining good existing data and filling gaps, not 2× new data regardless of what we keep.
 - Keep spectral regularization during Base training: penalize the largest singular values of the module weight updates. This is a soft penalty, not a hard cap. It improved the useful character/capability trade-off, but has not made 2–3× amplification usable.
 - Healing is an optional repair after grafting. Some maths recovery occurred; no tested heal reliably preserved character. It is not an established final stage.
-- Everything is grafted (wassname, 2026-10-21): all character training, documents and optional chat SFT, happens on Base, never directly on Instruct. Each stage is a separate LoRA adapter with its own graft dose: `Instruct + a·Δdocs + b·Δchat`, with Δchat trained on Base + Δdocs. Every stage uses the spectral penalty, chat included; recalibrate λ per stage. Evidence chain: [recipe](slop/plans/20261021_character_graft_recipe.md).
+- Everything is grafted (wassname, 2026-10-21): all character training, documents and optional chat SFT, happens on Base, never directly on Instruct. Each stage is a separate LoRA adapter with its own graft dose: `Instruct + a·Δdocs + b·Δchat`, with Δchat trained on Base + Δdocs. Every stage uses the spectral penalty, chat included; recalibrate λ per stage. Evidence chain: [recipe](docs/plans/20261021_character_graft_recipe.md).
 - RL, Echo restyling, cwsteer and label projection are separate interventions, not automatic stages. Their inclusion needs evidence and a decision.
 
 ## What the completed runs show
@@ -78,7 +78,9 @@ Full tables, failures and verbatim demos: [current results](docs/results/2026101
 
 ## Planning status
 
-The active comparison reuses four saved spectral document LoRAs: Echo, pure Stoic, Opus and Greek. Each is evaluated at exact1×,2×,4×,8× and1× healed; all four combined at1× are evaluated unhealed and healed:22 conditions, plus a fresh untouched-Instruct control. No donor retraining. [Current plan](slop/plans/20261020_subset_grafts.md), [fixed corpus manifest](data/subsets/train_manifest.json), [run audit](slop/eval/run9/exact1/audit.md).
+Next: the simple path (more Stoic text, then Musonius chats) and the complex path (Stoic + constitution documents, then chats), all trained on Base: [plan](docs/plans/20261021_character_graft_recipe.md). In progress: data building.
+
+The last completed comparison reused four saved spectral document LoRAs: Echo, pure Stoic, Opus and Greek. Each is evaluated at exact1×,2×,4×,8× and1× healed; all four combined at1× are evaluated unhealed and healed:22 conditions, plus a fresh untouched-Instruct control. No donor retraining. [Current plan](slop/plans/20261020_subset_grafts.md), [fixed corpus manifest](data/subsets/train_manifest.json), [run audit](slop/eval/run9/exact1/audit.md).
 
 Original bounded-budget maths scores and extra-budget answer-now scores remain separate. Current results are not pooled with earlier norm-matched diagnostics. Further corpus expansion, character SFT/RL and paid experiments outside this comparison need a separate decision.
 
