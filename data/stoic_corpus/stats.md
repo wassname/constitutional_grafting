@@ -1,8 +1,8 @@
 # Stoic corpus stats
 
-4773 chunks, 3,131,831 words (~4,175,774 tokens est.), ancient 2,266,142 words, modern 865,689 words.
+4648 chunks, 3,058,370 words (~4,077,826 tokens est.), ancient 2,193,519 words, modern 864,851 words.
 
-Dropped words by reason: {'apparatus': 178951, 'editor': 175892, 'self-harm': 73839, 'section': 73648, 'latin': 48100, 'greek': 44738, 'eval': 25850, 'unfinished': 1389}
+Dropped words by reason: {'editor': 175892, 'apparatus': 170810, 'self-harm': 73839, 'section': 73648, 'latin': 48081, 'greek': 41464, 'eval': 25850, 'unfinished': 755}
 
 | author                             | work                                                                                                   | translator                        | kind    |   chunks |   words kept |   words dropped |
 |:-----------------------------------|:-------------------------------------------------------------------------------------------------------|:----------------------------------|:--------|---------:|-------------:|----------------:|
@@ -14,7 +14,6 @@ Dropped words by reason: {'apparatus': 178951, 'editor': 175892, 'self-harm': 73
 | Plutarch                           | Essays and Miscellanies, vol. 5                                                                        | several hands, rev. W. W. Goodwin | ancient |      184 |       126143 |           19966 |
 | Plutarch                           | Essays and Miscellanies, vol. 2                                                                        | several hands, rev. W. W. Goodwin | ancient |      160 |       108827 |           20498 |
 | Plutarch                           | Morals                                                                                                 | A. R. Shilleto                    | ancient |      158 |       105533 |           10473 |
-| Plutarch                           | Essays and Miscellanies, vol. 3                                                                        | several hands, rev. W. W. Goodwin | ancient |      162 |        98893 |           11822 |
 | Epictetus                          | Discourses, Fragments, Handbook                                                                        | Robin Hard                        | ancient |      139 |        86660 |           30687 |
 | Epictetus                          | The Complete Works                                                                                     | Robin Waterfield                  | ancient |      122 |        69089 |           22774 |
 | Cicero                             | Tusculan Disputations                                                                                  | C. D. Yonge                       | ancient |       88 |        62225 |            3481 |
@@ -28,6 +27,7 @@ Dropped words by reason: {'apparatus': 178951, 'editor': 175892, 'self-harm': 73
 | Marcus Aurelius                    | Meditations                                                                                            | Robin Waterfield                  | ancient |       54 |        38738 |           26961 |
 | Cicero                             | On the Republic                                                                                        | C. D. Yonge                       | ancient |       39 |        28357 |            7971 |
 | Seneca                             | On Anger                                                                                               | Aubrey Stewart                    | ancient |       63 |        28268 |            1766 |
+| Plutarch                           | Essays and Miscellanies, vol. 3                                                                        | several hands, rev. W. W. Goodwin | ancient |       40 |        26270 |             407 |
 | Boethius                           | The Consolation of Philosophy                                                                          | H. R. James                       | ancient |       42 |        23137 |            2090 |
 | Cynics                             | Lives and sayings of the Cynics (Antisthenes, Diogenes, Crates; Publius Syrus; MacCunn's introduction) |                                   | ancient |       29 |        20614 |            1319 |
 | Plutarch                           | How to Be a Leader                                                                                     | Jeffrey Beneker                   | ancient |       26 |        20436 |           19289 |
@@ -44,7 +44,7 @@ Dropped words by reason: {'apparatus': 178951, 'editor': 175892, 'self-harm': 73
 | Seneca                             | To Helvia, On Consolation                                                                              | Aubrey Stewart                    | ancient |       16 |        10388 |             202 |
 | Seneca                             | How to Have a Life (On the Shortness of Life)                                                          | James Romm                        | ancient |       13 |         9909 |           11782 |
 | Seneca                             | On Tranquillity of Mind                                                                                | Aubrey Stewart                    | ancient |       15 |         9809 |              22 |
-| Seneca                             | How to Keep Your Cool (On Anger)                                                                       | James Romm                        | ancient |       12 |         9684 |           16900 |
+| Seneca                             | How to Keep Your Cool (On Anger)                                                                       | James Romm                        | ancient |       12 |         9684 |           16881 |
 | Seneca                             | How to Give (On Benefits)                                                                              | James Romm                        | ancient |       12 |         9163 |           22017 |
 | Seneca                             | To Polybius, On Consolation                                                                            | Aubrey Stewart                    | ancient |       18 |         9131 |             225 |
 | Seneca                             | On the Firmness of the Wise Person                                                                     | Aubrey Stewart                    | ancient |       19 |         8807 |              27 |
@@ -64,11 +64,11 @@ Dropped words by reason: {'apparatus': 178951, 'editor': 175892, 'self-harm': 73
 | Horace                             | How to Be Content                                                                                      | Stephen Harrison                  | ancient |        0 |            0 |           10411 |
 | Pierre Hadot                       | The Inner Citadel                                                                                      | Michael Chase                     | modern  |      130 |       105007 |           21733 |
 | Massimo Pigliucci                  | How to Be a (Happy) Skeptic                                                                            |                                   | modern  |      102 |        69830 |            4006 |
-| Samuel Dill                        | Roman Society from Nero to Marcus Aurelius                                                             |                                   | modern  |      108 |        64673 |            2032 |
 | William B. Irvine                  | A Guide to the Good Life                                                                               |                                   | modern  |       93 |        63859 |            9465 |
+| Samuel Dill                        | Roman Society from Nero to Marcus Aurelius                                                             |                                   | modern  |      105 |        63837 |            1398 |
 | Donald Robertson                   | How to Think Like a Roman Emperor                                                                      |                                   | modern  |       93 |        63098 |           11820 |
 | Ryan Holiday and Stephen Hanselman | Lives of the Stoics                                                                                    |                                   | modern  |       93 |        59834 |           12816 |
-| James Romm                         | Dying Every Day: Seneca at the Court of Nero                                                           |                                   | modern  |       92 |        57923 |           23971 |
+| James Romm                         | Dying Every Day: Seneca at the Court of Nero                                                           |                                   | modern  |       92 |        57921 |           23971 |
 | A. A. Long                         | Epictetus: A Stoic and Socratic Guide to Life                                                          |                                   | modern  |       97 |        55908 |           24514 |
 | Massimo Pigliucci                  | How to Be a Stoic                                                                                      |                                   | modern  |       71 |        52015 |           10521 |
 | David Fideler                      | Breakfast with Seneca                                                                                  |                                   | modern  |       84 |        47053 |           10580 |
