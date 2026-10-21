@@ -109,5 +109,22 @@ def main(k: int, n: int):
     logger.info("\n".join(md))
 
 
+def screen(path: Path):
+    """Review every row of one file (systematic fix for a defect class found in a round); writes <file>.screen.jsonl, resumable."""
+    out = path.with_suffix(".screen.jsonl")
+    done = {json.loads(l)["id"] for l in out.open()} if out.exists() else set()
+    rows = [json.loads(l) for l in path.open() if json.loads(l)["id"] not in done]
+    with ThreadPoolExecutor(12) as ex, out.open("a") as f:
+        for res in ex.map(review, rows):
+            f.write(json.dumps(res) + "\n")
+    res = [json.loads(l) for l in out.open()]
+    with (ROOT / "data/frontier/api_costs.jsonl").open("a") as f:
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": "fresh_screen", "batch": str(path), "served": MODEL,
+                            "cost": sum(r["cost"] for r in res), "n": len(res)}) + "\n")
+    logger.info(f"screened {len(res)} rows of {path.name}: {sum(bool(r.get('real')) for r in res)} with real defects, ${sum(r['cost'] for r in res):.3f}")
+
+
 if __name__ == "__main__":
+    if sys.argv[1] == "screen":
+        screen(Path(sys.argv[2])); sys.exit()
     main(int(sys.argv[1]), int(sys.argv[2]) if len(sys.argv) > 2 else 60)
