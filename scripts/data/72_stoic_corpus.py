@@ -133,6 +133,7 @@ LATIN = {"et", "est", "non", "quod", "qui", "sed", "ad", "enim", "quam", "cum", 
 latin_share = lambda t: sum(w in LATIN for w in re.findall(r"[a-z]+", t.lower())) / max(1, words(t))  # facing-page Latin in the Princeton editions
 # Editors' prefaces and notes in ancient editions name the author in the third person and date events; the authors' own text does neither.
 # Reported-speech sources (a pupil's notes, doxographies) name their subject throughout, so they are exempt.
+AUTHOR_CAP = {"Plutarch": 300_000}  # words
 REPORTED = {"Musonius Rufus", "Diogenes Laertius", "Arius Didymus", "Hierocles", "Cynics", "Diogenes the Cynic"}
 GREEK_SCRIPT = re.compile(r"[\u0370-\u03ff\u1f00-\u1fff]")
 
@@ -237,6 +238,17 @@ def select():
                 else "no reasoning" if s["reasoning"] < 1 else None)
         if drop: why[drop] += words(r["text"])
         else: keep.append(r | {"score": {k: s.get(k) for k in ("primary", "garbled", "reasoning", "why")}})
+    # Plutarch was a Platonist critic of the Stoics; cap him at ~10% so he does not outweigh Seneca and Epictetus (highest reasoning kept).
+    random.Random(0).shuffle(keep)
+    keep.sort(key=lambda r: -r["score"]["reasoning"])
+    plut, capped = 0, []
+    for r in keep:
+        if r["author"] == "Plutarch":
+            if plut + words(r["text"]) > AUTHOR_CAP["Plutarch"]: why["author cap"] += words(r["text"]); continue
+            plut += words(r["text"])
+        capped.append(r)
+    keep = capped
+    random.Random(1).shuffle(keep)
     (OUT / "selected.jsonl").write_text("".join(json.dumps(r) + "\n" for r in keep))
     tot = sum(words(r["text"]) for r in keep)
     logger.info(f"selected {len(keep)} chunks, {tot:,} words (~{tot * 4 // 3:,} tokens est.); dropped words {dict(why)}; "
