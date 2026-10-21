@@ -62,7 +62,7 @@ Praxis's large constitutional experiment uses documents plus generic-text replay
 ## Locked choices
 
 - Keep LoRA. Neither Praxis nor Cho establishes that full fine-tuning beats LoRA, or the reverse. Li/MSM also used LoRA. [Evidence and prior-recipe lineage](slop/research/20261019_full_weight_recipe_lineage.md).
-- Use our constitution and source-grounded documents. Curate for useful character, reasons and expression while retaining varied situations and forms. The planning preference is about 2× the current total corpus after retaining good existing data and filling gaps, not 2× new data regardless of what we keep.
+- Use our constitution and source-grounded documents. Curate for useful character, reasons and expression while retaining varied situations and forms. Current corpora and sizes: [plan](docs/plans/20261021_character_graft_recipe.md).
 - Keep spectral regularization during Base training: penalize the largest singular values of the module weight updates. This is a soft penalty, not a hard cap. It improved the useful character/capability trade-off, but has not made 2–3× amplification usable.
 - Healing is an optional repair after grafting. Some maths recovery occurred; no tested heal reliably preserved character. It is not an established final stage.
 - Everything is grafted (wassname, 2026-10-21): all character training, documents and optional chat SFT, happens on Base, never directly on Instruct. Each stage is a separate LoRA adapter with its own graft dose: `Instruct + a·Δdocs + b·Δchat`, with Δchat trained on Base + Δdocs. Every stage uses the spectral penalty, chat included; recalibrate λ per stage. Evidence chain: [recipe](docs/plans/20261021_character_graft_recipe.md).
