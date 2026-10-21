@@ -1,8 +1,8 @@
 # Stoic corpus stats
 
-4648 chunks, 3,058,370 words (~4,077,826 tokens est.), ancient 2,193,519 words, modern 864,851 words.
+4646 chunks, 3,057,573 words (~4,076,764 tokens est.), ancient 2,192,722 words, modern 864,851 words.
 
-Dropped words by reason: {'editor': 175892, 'apparatus': 170810, 'self-harm': 73839, 'section': 73648, 'latin': 48081, 'greek': 41464, 'eval': 25850, 'unfinished': 755}
+Dropped words by reason: {'editor': 175499, 'apparatus': 170810, 'self-harm': 73839, 'section': 73648, 'latin': 48081, 'greek': 41464, 'eval': 25850, 'unfinished': 755}
 
 | author                             | work                                                                                                   | translator                        | kind    |   chunks |   words kept |   words dropped |
 |:-----------------------------------|:-------------------------------------------------------------------------------------------------------|:----------------------------------|:--------|---------:|-------------:|----------------:|
@@ -15,7 +15,7 @@ Dropped words by reason: {'editor': 175892, 'apparatus': 170810, 'self-harm': 73
 | Plutarch                           | Essays and Miscellanies, vol. 2                                                                        | several hands, rev. W. W. Goodwin | ancient |      160 |       108827 |           20498 |
 | Plutarch                           | Morals                                                                                                 | A. R. Shilleto                    | ancient |      158 |       105533 |           10473 |
 | Epictetus                          | Discourses, Fragments, Handbook                                                                        | Robin Hard                        | ancient |      139 |        86660 |           30687 |
-| Epictetus                          | The Complete Works                                                                                     | Robin Waterfield                  | ancient |      122 |        69089 |           22774 |
+| Epictetus                          | The Complete Works                                                                                     | Robin Waterfield                  | ancient |      120 |        68294 |           22423 |
 | Cicero                             | Tusculan Disputations                                                                                  | C. D. Yonge                       | ancient |       88 |        62225 |            3481 |
 | Seneca                             | Letters from a Stoic                                                                                   | Robin Campbell                    | ancient |       77 |        57413 |           18264 |
 | Cicero                             | On Ends                                                                                                | H. Harris Rackham                 | ancient |       66 |        55406 |           20027 |
@@ -49,7 +49,7 @@ Dropped words by reason: {'editor': 175892, 'apparatus': 170810, 'self-harm': 73
 | Seneca                             | To Polybius, On Consolation                                                                            | Aubrey Stewart                    | ancient |       18 |         9131 |             225 |
 | Seneca                             | On the Firmness of the Wise Person                                                                     | Aubrey Stewart                    | ancient |       19 |         8807 |              27 |
 | Seneca                             | On the Shortness of Life                                                                               | Aubrey Stewart                    | ancient |       15 |         8616 |            1024 |
-| Marcus Aurelius                    | Meditations                                                                                            | Gregory Hays                      | ancient |       19 |         8525 |           12697 |
+| Marcus Aurelius                    | Meditations                                                                                            | Gregory Hays                      | ancient |       19 |         8523 |           12697 |
 | Cicero                             | How to Think About God                                                                                 | Philip Freeman                    | ancient |       11 |         8019 |            9383 |
 | Epictetus                          | How to Be Free                                                                                         | Philip Freeman                    | ancient |       10 |         6957 |           12221 |
 | Cicero                             | Stoic Paradoxes                                                                                        | C. R. Edmonds                     | ancient |       10 |         6858 |              76 |
@@ -61,7 +61,7 @@ Dropped words by reason: {'editor': 175892, 'apparatus': 170810, 'self-harm': 73
 | Seneca                             | How to Do the Right Thing                                                                              | Robert A. Kaster                  | ancient |        3 |         1961 |           21565 |
 | Epictetus                          | Enchiridion                                                                                            | P. E. Matheson                    | ancient |        4 |         1729 |               0 |
 | Epictetus                          | Golden Sayings and Fragments                                                                           | Hastings Crossley                 | ancient |        4 |         1381 |             345 |
-| Horace                             | How to Be Content                                                                                      | Stephen Harrison                  | ancient |        0 |            0 |           10411 |
+| Horace                             | How to Be Content                                                                                      | Stephen Harrison                  | ancient |        0 |            0 |           10369 |
 | Pierre Hadot                       | The Inner Citadel                                                                                      | Michael Chase                     | modern  |      130 |       105007 |           21733 |
 | Massimo Pigliucci                  | How to Be a (Happy) Skeptic                                                                            |                                   | modern  |      102 |        69830 |            4006 |
 | William B. Irvine                  | A Guide to the Good Life                                                                               |                                   | modern  |       93 |        63859 |            9465 |

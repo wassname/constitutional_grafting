@@ -51,7 +51,7 @@ run1-remote stage *more:
     bash scripts/train/03_remote.sh {{stage}} {{more}}
 
 # Run-10 training data from cached sources, scores, reviews and repairs; no model calls. Fails if any training file's sha256 changes.
-# Paid steps that produced the caches: 71 (identity rows), 75 (chunk scores), 78 (general-row screen), 80 (regenerated replies). -- PI/Claude
+# Paid steps that produced the caches: 71 (identity rows), 75 (chunk scores), 78 (general-row screen); Sol reviews chose the 50 reverts and 310 drops. -- PI/Claude
 run10-data:
     uv run scripts/data/72_stoic_corpus.py
     uv run scripts/data/72_stoic_corpus.py select
@@ -61,3 +61,11 @@ run10-data:
     uv run --with 'transformers>=4.57' --with jinja2 --with loguru --with httpx python scripts/data/73_chat_set_v3.py
     uv run python scripts/data/76_run10_train_files.py > /dev/null
     git diff --exit-code data/train/run10/manifest.json && echo "run-10 training files reproduced byte for byte"
+
+# Run 10 rentals (paid, vast.ai): one finite lease each; retrieves adapters to ~/.local/share/cg_run10_adapters and logs to slop/eval/run10/<stage>/, then destroys the box. -- PI/Claude
+run10-stage1 hours="9":
+    uv run --no-project scripts/eval/37_run10_rental.py run --hours {{hours}}
+
+# Chat adapters on Base + A_STOIC·ΔStoic (env A_STOIC, CHATS, CELLS; defaults in the script), then grafts on Instruct.
+run10-stage2 hours="10":
+    uv run --no-project scripts/eval/38_run10_chat_rental.py run --hours {{hours}}

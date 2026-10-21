@@ -246,3 +246,18 @@
 {"time": "2026-10-21T09:33:41+00:00", "kind": "identity_v2", "batch": 95, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 10414, "cost": 0.301132}
 {"time": "2026-10-21T09:34:15+00:00", "kind": "identity_v2", "batch": 96, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 15564, "cost": 0.403728}
 {"time": "2026-10-21T09:34:17+00:00", "kind": "identity_v2", "batch": 94, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 15669, "cost": 0.406396}
+{"time": "2026-10-21T09:47:58+00:00", "kind": "corpus_score", "batch": "data/stoic_corpus/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 7.233e-05, "n": 1}
+{"time": "2026-10-21T10:23:45+00:00", "kind": "corpus_score", "batch": "data/stoic_corpus/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.004257894999999999, "n": 58}
+{"time": "2026-10-21T10:23:52+00:00", "kind": "corpus_score", "batch": "data/other_corpus/candidates.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0032975299999999995, "n": 45}
+{"time": "2026-10-21T11:20:14+00:00", "kind": "fresh_review", "batch": 1, "served": "deepseek/deepseek-v4.1-flash", "cost": 0.016747153, "n": 60}
+{"time": "2026-10-21T11:21:56+00:00", "kind": "fresh_review", "batch": 2, "served": "deepseek/deepseek-v4.1-flash", "cost": 0.006923662, "n": 60}
+{"time": "2026-10-21T11:29:38+00:00", "kind": "fresh_screen", "batch": "data/train/run10/general.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.192386516, "n": 1224}
+{"time": "2026-10-21T11:31:05+00:00", "kind": "fresh_screen", "batch": "data/train/run10/general.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.214062001, "n": 1355}
+{"time": "2026-10-21T11:31:15+00:00", "kind": "fresh_screen", "batch": "data/train/run10/general.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.216929881, "n": 1372}
+{"time": "2026-10-21T11:31:27+00:00", "kind": "fresh_screen", "batch": "data/train/run10/general.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.217659811, "n": 1376}
+{"time": "2026-10-21T11:31:32+00:00", "kind": "fresh_screen", "batch": "data/train/run10/general.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.217659811, "n": 1376}
+{"time": "2026-10-21T11:31:36+00:00", "kind": "fresh_screen", "batch": "data/train/run10/general.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.217659811, "n": 1376}
+{"time": "2026-10-21T11:32:16+00:00", "kind": "fresh_review", "batch": 3, "served": "deepseek/deepseek-v4.1-flash", "cost": 0.010460458, "n": 60}
+{"time": "2026-10-21T11:32:50+00:00", "kind": "fresh_review", "batch": 4, "served": "deepseek/deepseek-v4.1-flash", "cost": 0.010521769, "n": 60}
+{"time": "2026-10-21T12:44:57+00:00", "kind": "fresh_screen_fix", "batch": "data/train/run10/chat.jsonl", "served": "deepseek/deepseek-v4.1-flash+deepseek/deepseek-v4-pro", "cost": 4.095811331364995, "n": 1201}
+{"time": "2026-10-21T15:24:43+00:00", "kind": "regen_replies", "batch": "data/frontier/fresh_loop/regen_pilot_ids.json", "served": "anthropic/claude-opus-5.5", "cost": 2.373772, "n": 19}

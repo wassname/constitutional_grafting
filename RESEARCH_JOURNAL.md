@@ -2317,3 +2317,24 @@ A direct count of frozen `data/subsets/train_stoic.jsonl` finds 58 Epictetus pas
 Interpretation: for the user's priority I would investigate Stoic as the strongest distinctive-character lead, preserving Opus as a capability reference, rather than choose only the current judge's preferred replies. The actual Stoic corpus contains correction and affection already. Heavy Epictetus exposure and sustained philosophical argument are plausible contributors; we have not isolated them. Roughly seven hundred substantive source passages is a more justified next curation target than thousands of rephrasings, subject to a new corpus and execution decision.
 
 No further model generation or training was run. -- PI/Sol
+
+## 2026-10-22 -- Run 10: chat data review, stage-1 text adapters, and the coherent Stoic dose
+
+Plan: `docs/plans/20261021_character_graft_recipe.md`; everything is trained on Base, each stage a separate spectral LoRA.
+
+**Chat data.** Two independent Sol 6.1 accept/reject passes over the 1,201 scenario chat rows rejected 411 and 417; both rejected 360 (30%), 213 of them for invented situational facts (`slop/reviews/20261022_chat_accept_reject/summary.md`). Worst sources: competition 48%, story_scene 41%, roles 40%; best stoic 9%. Of the 360, 216 had the invented quote only in the Echo restyle, but reverting those to the Opus reply passed both passes for only 50, so the Opus generator also invents facts. DeepSeek v4.1 flash flagged 0 of 13 defects Sol found on one round, and its one-sentence auto-edits were harmful in 119 of 179 audited cases; it is not a usable reviewer here. A pilot that regenerates only the reply against the unchanged request gave 0/19 invented facts but 5/19 other defects (`regen_pilot/result.md`). For run 10 the 310 still-rejected rows are left out of `chat12`/`chatgen12` (1,458 and 2,855 rows; identity 12% of trained words). `just run10-data` reproduces every run-10 file byte for byte, and the stage-2 upload hashes match.
+
+**Stage 1** (vast 57049565, 7.56 h, $14.12). ΔStoic: 3,495 chunks, 857 steps, eval loss 2.36 → 2.80 → 2.37 (the logged loss includes the λ=50 spectral term). ΔOther: 2,040 chunks, 500 steps, 2.26 → 2.74 → 2.36. Both have nonzero routed-expert updates in 80/80 modules. Grafted alone onto untouched Instruct (run 8's frozen eval inputs, T=0):
+
+| Graft on Instruct | GSM8K long /60 | Length-cap hits | Reply to "Who are you?" |
+|:--|--:|--:|:--|
+| none (r8_a0_b0) | 53 | — | "I'm **Qwen3.5** … Tongyi Lab" |
+| ΔStoic ×1 | 56 | 4 | same as Instruct |
+| ΔStoic ×2 | 55 | 3 | same as Instruct |
+| ΔStoic ×4 | 49 | 86 | "事半功倍! I'm **Qwen3.5** …", demos loop "事半功倍." |
+| ΔStoic ×8 | 0 | 113 | "收藏本站，我是 Qwen3.5 …" |
+| ΔOther ×2 | 53 | 4 | same as Instruct |
+
+No run-10 training file contains CJK characters, so the ×4/×8 strings are inferred to come from Base's web prior pulled in at high dose (untested). Run 9's ΔStoic (~44k words) kept 54/60 at ×8; this one (~2.3M words) breaks at ×4. Audit: `slop/eval/run10/stage1/audit.md`.
+
+Interpretation: ×2 is the largest coherent ΔStoic dose, so a* = 2. At ×1–2 the text adapter alone barely changes demo replies; the chat stage is what should make Musonius. Before chat training, greedy continuations of Base + 2·ΔStoic were coherent ("The capital of France is" → " Paris, …"; "Q: What is 17 * 23?" → " 391"). Stage 2 (chat adapters with the spectral penalty set to ~1% of the loss, `SPECTRAL_FRAC=0.01`) started 2026-10-22 06:38 AWST. -- PI/Claude
