@@ -29,6 +29,19 @@ def main():
         "other": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/other_corpus/chunks.jsonl")],
         "chat": jl(ROOT / "data/train/sft_v3.jsonl"),
     }
+    # One-sentence repairs of invented specifics from the fresh-sample loop (78_fresh_review.py screen_fix), applied to the trained reply
+    edits = ROOT / "data/frontier/fresh_loop/edits.jsonl"
+    by_id = {}
+    for e in (jl(edits) if edits.exists() else []):
+        by_id.setdefault(e["id"], []).append(e)
+    n_applied = 0
+    for r in sets["chat"]:
+        for e in by_id.get(r["id"], []):
+            seg = r["segments"][1]
+            if e["old"] in seg["text"]:
+                seg["text"] = seg["text"].replace(e["old"], e["new"], 1).replace("  ", " ").replace(" .", ".").replace(" ,", ",")
+                n_applied += 1
+    print(f"fresh-loop edits applied: {n_applied}/{sum(map(len, by_id.values()))}")
     # Identity is 31% of chat trained words; Li/MSM used ~13%. Main chat adapters use identity at 12% of trained words
     # (wassname 2026-10-21: "should you not try a mix that is 12% self focus?"); the full set stays in chat.jsonl for a later ablation.
     import random
