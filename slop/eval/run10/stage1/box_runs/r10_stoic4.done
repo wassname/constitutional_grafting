@@ -1,0 +1,15 @@
+{
+  "model": "r10_stoic4",
+  "cell": [
+    [
+      "stoic",
+      4.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 86,
+  "completion_tokens": 194612,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1604.95906060189
+}

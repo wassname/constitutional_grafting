@@ -1,0 +1,26 @@
+{
+  "author": "PI/Sol",
+  "all_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_stoic": {
+      "adapter_config.json": {
+        "bytes": 1466,
+        "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d"
+      }
+    },
+    "r10_other": {
+      "adapter_config.json": {
+        "bytes": 1466,
+        "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1"
+      }
+    }
+  }
+}

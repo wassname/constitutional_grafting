@@ -1,0 +1,13 @@
+{
+  "scripts/train/box_watchdog.sh": "1f9571a578c098f12f3fc0b8b53e7bd0986a8c5807081770d707cf96fac5cbe8",
+  "tests/regression/test_moe_expert_merge.py": "8ded350a1cb12d5beb049b13f916c230f4a1d694fe9eab35824e46f637f86b24",
+  "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+  "scripts/train/12_run10_box.sh": "acd997e9a065325013a972816209dfb42ab4bf564e06fd40cafd88eb43ea2363",
+  "configs/train/qwen3/graft.yml": "0ddc4551c0e93e052cddcded68a8d1eac7c0641052eb1fdaa6c1363b0d5cae5f",
+  "configs/train/demo_prompts.json": "88bfacef1ed201d633f201fc6bb6565274ef93fd87b81ef138e3cd9dad617b2f",
+  "scripts/train/demo_plugin.py": "67c6a14e1f1de7cbb221cc92c994a3969b8bc83a0108e30dd1e1500276d9fb5c",
+  "scripts/train/spectral_plugin.py": "d402031a9093bcc22ef689c84a7d9a55450e4c6c1f82e0fa54b424e2d7aa9574",
+  "scripts/train/router_dtype_plugin.py": "c846ee59fe615a2f652303eb62d7ab6b35ec6b2f9002d428da342374bce2acc7",
+  "scripts/train/41_expert_adapter_check.py": "ea5aca5686bdbe2e84255d877d290e6d02d9f094299068638a68d33cb2a3d001",
+  "scripts/train/43_adapter_energy.py": "415c738e9d75c4d97009f6a0cd8a149887061bcffbfe0e1df7899c9fe5db55f0"
+}

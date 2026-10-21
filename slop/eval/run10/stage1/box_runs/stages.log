@@ -1,0 +1,9 @@
+2026-10-21T12:15:48+00:00 start train stoic (3495 docs)
+2026-10-21T15:30:30+00:00 done train stoic
+2026-10-21T15:30:30+00:00 start train other (2040 docs)
+2026-10-21T17:24:12+00:00 done train other
+2026-10-21T17:24:12+00:00 RUN10 STAGE1 COMPLETE: stoic other
+2026-10-21T17:24:13+00:00 removed duplicate final checkpoint outputs/r10_stoic/checkpoint-857
+2026-10-21T17:24:15+00:00 removed duplicate final checkpoint outputs/r10_other/checkpoint-500
+2026-10-21T17:24:15+00:00 start dose evals: stoic=2 stoic=4 stoic=1 other=2 stoic=8
+2026-10-21T19:14:22+00:00 RUN10 STAGE1 EVALS COMPLETE
