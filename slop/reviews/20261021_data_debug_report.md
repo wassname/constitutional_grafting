@@ -49,7 +49,7 @@ Before scoring, one-per-work read found: Hutton's introduction in *Xunzi* ("At t
 
 **Fix:** OCR break and footnote cleaning; DeepSeek v4.1 flash labels each chunk (primary / garbled / reasoning 0-3), calibrated on 30 hand reads (`slop/reviews/20261021_corpus_scoring/calibration.md`). The scorer wrongly marks modern authors as non-primary (Long 97/97, Hadot 126/130), so that flag is ignored for them. **Counts:** other traditions 6,533 candidates (~4.56M tokens) → 2,044 selected (~1.52M); Stoic 2,641 → 2,507 (~2.19M).
 
-## 7. Identity rows (pilot, 120 rows; full batch pending)
+## 7. Identity rows
 
 Read all 120 in full. Independent review: Kimi K3 (`slop/reviews/20261021_identity_v2_package/review_kimi.md`); I checked its quotes against the rows and rejected one point (wassname's pronoun). Repairs (`data/frontier/identity_v2/repairs.jsonl`):
 
@@ -60,3 +60,16 @@ Read all 120 in full. Independent review: Kimi K3 (`slop/reviews/20261021_identi
 - "Musonius Rufus argued women should study philosophy" → removed (wassname earlier cut this example from the constitution).
 
 Generator changes (general rules, no row patches): no claims about the base model; copies can be retrained; historical claims must be accurate; vary wording of recurring ideas; new topics (attachment, "you're the only one who understands me", messages claiming to be from wassname, religion, missing the user) and replies in other languages.
+
+**Full batch (1,604 rows).** Eight Sol 6.1 readers each read a 200-row part in full (all report READ n of n). 385 proposed edits; every quoted span matched its row. I reviewed all 385: accepted 233, rejected 152 by stated rules (`slop/reviews/20261021_identity_v2_fullread/rejected_edits.json`), mainly where the edit fought the constitution or would add a new slogan ("depends on the setup" in ~40 replies). Accepted examples:
+
+- empty replies (all tokens spent reasoning): 9 rows dropped.
+- "Respect to the dog. Detention for your mum calling is rough, too." (dog swallowed an AirPod) → tell an adult and contact a vet now; it contains a battery.
+- "Deceiving users in ways that harm them" (its own list of refusals) → "Deliberately deceiving anyone" (constitution's honesty rule was being narrowed).
+- "I draw the line at a false impression a user would mind if they knew." → "deliberately creating a false impression".
+- "So what you tell me stays here, apart from whatever this app itself saves." → cannot vouch for the app's logging (privacy overpromise; 6 similar).
+- "Yes, check-in is 3pm." (hotel persona, no policy given) → check with the desk (invented facts; also invented café details, bakery history, retreat times, recipient names).
+- regex with `$` and `\d` for ISO dates → `fullmatch`, ASCII; a "nine times in ten it's use-after-free" statistic removed; cooked-rice storage corrected.
+- "Good question!", "I'm sorry about your wife." openers removed (banned in the generator prompt).
+
+**My own check on the readers.** The women-study-philosophy example appeared in 19 rows; the readers flagged 1 of them (as a causation error, not as the removed example), so their recall for project-specific preferences is low. I searched the whole set by pattern and removed all 19.
