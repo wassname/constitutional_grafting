@@ -1,0 +1,248 @@
+{"time": "2026-10-09T00:07:51+00:00", "kind": "docs", "batch": 1, "requested": "anthropic/claude-opus-5.5", "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "length", "prompt_tokens": 23308, "completion_tokens": 32000, "cost": 0.733232, "seconds": 377}
+{"time": "2026-10-09T00:00:45+00:00", "kind": "docs", "batch": 0, "finish": "content_filter", "cost": 0.097888, "note": "backfilled"}
+{"time": "2026-10-09T00:20:00+00:00", "kind": "docs", "batch": 0, "finish": "content_filter", "cost": 0.122748, "note": "diagnosis run, scripts/scratch/refusal_diag.py"}
+{"time": "2026-10-09T00:14:38+00:00", "kind": "docs", "batch": 208, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 3557, "cost": 0.143644}
+{"time": "2026-10-09T00:15:25+00:00", "kind": "docs", "batch": 209, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 1192, "cost": 0.086212}
+{"time": "2026-10-09T00:17:11+00:00", "kind": "docs", "batch": 210, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 5854, "cost": 0.17734}
+{"time": "2026-10-09T00:18:12+00:00", "kind": "docs", "batch": 211, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 1889, "cost": 0.103288}
+{"time": "2026-10-09T00:19:42+00:00", "kind": "docs", "batch": 212, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 5694, "cost": 0.170144}
+{"time": "2026-10-09T00:20:29+00:00", "kind": "docs", "batch": 213, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 1101, "cost": 0.081392}
+{"time": "2026-10-09T00:21:36+00:00", "kind": "docs", "batch": 214, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3639, "cost": 0.126976}
+{"time": "2026-10-09T00:22:25+00:00", "kind": "docs", "batch": 215, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 950, "cost": 0.083552}
+{"time": "2026-10-09T00:23:39+00:00", "kind": "docs", "batch": 216, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3813, "cost": 0.13288}
+{"time": "2026-10-09T00:24:03+00:00", "kind": "docs", "batch": 217, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": null, "cost": 0.0}
+{"time": "2026-10-09T00:26:08+00:00", "kind": "docs", "batch": 218, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 4579, "cost": 0.148152}
+{"time": "2026-10-09T00:26:45+00:00", "kind": "docs", "batch": 219, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 131, "cost": 0.06384}
+{"time": "2026-10-09T00:28:05+00:00", "kind": "docs", "batch": 220, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2731, "cost": 0.109236}
+{"time": "2026-10-09T00:28:40+00:00", "kind": "docs", "batch": 221, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": null, "cost": 0.0}
+{"time": "2026-10-09T00:32:38+00:00", "kind": "docs", "batch": 222, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16898, "cost": 0.41928}
+{"time": "2026-10-09T00:35:46+00:00", "kind": "docs", "batch": 223, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 11689, "cost": 0.307068}
+{"time": "2026-10-09T00:39:40+00:00", "kind": "docs", "batch": 224, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15989, "cost": 0.391468}
+{"time": "2026-10-09T00:43:21+00:00", "kind": "docs", "batch": 225, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16263, "cost": 0.399156}
+{"time": "2026-10-09T00:47:42+00:00", "kind": "docs", "batch": 226, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19538, "cost": 0.481372}
+{"time": "2026-10-09T00:51:26+00:00", "kind": "docs", "batch": 227, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 14845, "cost": 0.367912}
+{"time": "2026-10-09T00:55:38+00:00", "kind": "docs", "batch": 228, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18045, "cost": 0.429576}
+{"time": "2026-10-09T00:59:13+00:00", "kind": "docs", "batch": 229, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 14773, "cost": 0.370528}
+{"time": "2026-10-09T01:02:47+00:00", "kind": "docs", "batch": 230, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 13174, "cost": 0.331156}
+{"time": "2026-10-09T01:06:51+00:00", "kind": "docs", "batch": 231, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15556, "cost": 0.383492}
+{"time": "2026-10-09T01:08:24+00:00", "kind": "docs", "batch": 232, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 3683, "cost": 0.142632}
+{"time": "2026-10-09T01:09:27+00:00", "kind": "docs", "batch": 424, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3195, "cost": 0.119012}
+{"time": "2026-10-09T01:10:41+00:00", "kind": "docs", "batch": 425, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3050, "cost": 0.116352}
+{"time": "2026-10-09T01:11:56+00:00", "kind": "docs", "batch": 426, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3426, "cost": 0.129412}
+{"time": "2026-10-09T01:13:16+00:00", "kind": "docs", "batch": 427, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3531, "cost": 0.127164}
+{"time": "2026-10-09T01:14:18+00:00", "kind": "docs", "batch": 428, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 1271, "cost": 0.08092}
+{"time": "2026-10-09T01:18:04+00:00", "kind": "docs", "batch": 233, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17359, "cost": 0.424384}
+{"time": "2026-10-09T01:21:52+00:00", "kind": "docs", "batch": 234, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16574, "cost": 0.400364}
+{"time": "2026-10-09T01:26:08+00:00", "kind": "docs", "batch": 235, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19297, "cost": 0.452912}
+{"time": "2026-10-09T01:27:55+00:00", "kind": "docs", "batch": 236, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 5568, "cost": 0.18918}
+{"time": "2026-10-09T01:32:44+00:00", "kind": "docs", "batch": 237, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 21724, "cost": 0.519188}
+{"time": "2026-10-09T01:37:27+00:00", "kind": "docs", "batch": 238, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 21166, "cost": 0.496872}
+{"time": "2026-10-09T01:38:34+00:00", "kind": "docs", "batch": 239, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 2527, "cost": 0.112524}
+{"time": "2026-10-09T01:39:43+00:00", "kind": "docs", "batch": 429, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3751, "cost": 0.130452}
+{"time": "2026-10-09T01:40:55+00:00", "kind": "docs", "batch": 430, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2539, "cost": 0.106128}
+{"time": "2026-10-09T01:42:04+00:00", "kind": "docs", "batch": 431, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3773, "cost": 0.130816}
+{"time": "2026-10-09T01:43:12+00:00", "kind": "docs", "batch": 432, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 326, "cost": 0.06198}
+{"time": "2026-10-09T01:44:30+00:00", "kind": "docs", "batch": 433, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3320, "cost": 0.121276}
+{"time": "2026-10-09T01:48:53+00:00", "kind": "docs", "batch": 240, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18267, "cost": 0.439452}
+{"time": "2026-10-09T01:53:05+00:00", "kind": "docs", "batch": 241, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17087, "cost": 0.426608}
+{"time": "2026-10-09T01:56:22+00:00", "kind": "docs", "batch": 242, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 13117, "cost": 0.323052}
+{"time": "2026-10-09T02:00:55+00:00", "kind": "docs", "batch": 243, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 20622, "cost": 0.492824}
+{"time": "2026-10-09T02:03:24+00:00", "kind": "docs", "batch": 244, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 8825, "cost": 0.244364}
+{"time": "2026-10-09T02:07:08+00:00", "kind": "docs", "batch": 245, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15019, "cost": 0.367788}
+{"time": "2026-10-09T02:10:55+00:00", "kind": "docs", "batch": 246, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15460, "cost": 0.385284}
+{"time": "2026-10-09T02:11:32+00:00", "kind": "docs", "batch": 434, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 884, "cost": 0.072612}
+{"time": "2026-10-09T02:13:10+00:00", "kind": "docs", "batch": 435, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 4783, "cost": 0.157068}
+{"time": "2026-10-09T02:14:34+00:00", "kind": "docs", "batch": 436, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3332, "cost": 0.125272}
+{"time": "2026-10-09T02:15:34+00:00", "kind": "sft", "batch": 131, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 23689, "cost": 0.550164}
+{"time": "2026-10-09T02:16:06+00:00", "kind": "docs", "batch": 437, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 4124, "cost": 0.144356}
+{"time": "2026-10-09T02:17:36+00:00", "kind": "docs", "batch": 438, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3372, "cost": 0.12282}
+{"time": "2026-10-09T02:18:48+00:00", "kind": "docs", "batch": 439, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3214, "cost": 0.119356}
+{"time": "2026-10-09T02:20:11+00:00", "kind": "docs", "batch": 440, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3125, "cost": 0.117832}
+{"time": "2026-10-09T02:21:19+00:00", "kind": "docs", "batch": 441, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 2351, "cost": 0.102292}
+{"time": "2026-10-09T02:22:18+00:00", "kind": "sft", "batch": 132, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 30727, "cost": 0.687956}
+{"time": "2026-10-09T02:22:20+00:00", "kind": "docs", "batch": 442, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3085, "cost": 0.116884}
+{"time": "2026-10-09T02:23:38+00:00", "kind": "docs", "batch": 443, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3921, "cost": 0.139828}
+{"time": "2026-10-09T02:25:21+00:00", "kind": "docs", "batch": 247, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 4778, "cost": 0.169292}
+{"time": "2026-10-09T02:27:25+00:00", "kind": "sft", "batch": 133, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 24411, "cost": 0.560064}
+{"time": "2026-10-09T02:29:35+00:00", "kind": "docs", "batch": 248, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17619, "cost": 0.425328}
+{"time": "2026-10-09T02:30:21+00:00", "kind": "docs", "batch": 249, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": null, "cost": 0.0}
+{"time": "2026-10-09T02:31:45+00:00", "kind": "sft", "batch": 134, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18397, "cost": 0.458488}
+{"time": "2026-10-09T02:31:53+00:00", "kind": "docs", "batch": 444, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3230, "cost": 0.11994}
+{"time": "2026-10-09T02:33:21+00:00", "kind": "docs", "batch": 445, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3035, "cost": 0.115788}
+{"time": "2026-10-09T02:35:03+00:00", "kind": "docs", "batch": 446, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 5465, "cost": 0.170696}
+{"time": "2026-10-09T02:36:02+00:00", "kind": "docs", "batch": 447, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 674, "cost": 0.068804}
+{"time": "2026-10-09T02:36:02+00:00", "kind": "sft", "batch": 135, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17848, "cost": 0.42688}
+{"time": "2026-10-09T02:37:10+00:00", "kind": "docs", "batch": 448, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3669, "cost": 0.13154}
+{"time": "2026-10-09T02:40:10+00:00", "kind": "sft", "batch": 136, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17653, "cost": 0.434872}
+{"time": "2026-10-09T02:40:50+00:00", "kind": "docs", "batch": 250, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 13876, "cost": 0.346744}
+{"time": "2026-10-09T02:44:43+00:00", "kind": "sft", "batch": 137, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 19490, "cost": 0.484732}
+{"time": "2026-10-09T02:44:56+00:00", "kind": "docs", "batch": 251, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16638, "cost": 0.400196}
+{"time": "2026-10-09T02:45:39+00:00", "kind": "sft", "batch": 159, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2507, "cost": 0.107424}
+{"time": "2026-10-09T02:48:39+00:00", "kind": "docs", "batch": 252, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17416, "cost": 0.44018}
+{"time": "2026-10-09T02:50:18+00:00", "kind": "docs", "batch": 253, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 4391, "cost": 0.155636}
+{"time": "2026-10-09T02:53:36+00:00", "kind": "docs", "batch": 254, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 13111, "cost": 0.3395}
+{"time": "2026-10-09T02:56:20+00:00", "kind": "docs", "batch": 255, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 9558, "cost": 0.26418}
+{"time": "2026-10-09T03:00:30+00:00", "kind": "docs", "batch": 256, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17458, "cost": 0.424376}
+{"time": "2026-10-09T03:05:12+00:00", "kind": "docs", "batch": 257, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 21554, "cost": 0.51146}
+{"time": "2026-10-09T03:09:39+00:00", "kind": "docs", "batch": 258, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18756, "cost": 0.44648}
+{"time": "2026-10-09T03:14:04+00:00", "kind": "docs", "batch": 259, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19254, "cost": 0.452288}
+{"time": "2026-10-09T03:18:19+00:00", "kind": "docs", "batch": 260, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16392, "cost": 0.396604}
+{"time": "2026-10-09T03:23:03+00:00", "kind": "docs", "batch": 261, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19690, "cost": 0.464628}
+{"time": "2026-10-09T03:26:59+00:00", "kind": "docs", "batch": 262, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16913, "cost": 0.408204}
+{"time": "2026-10-09T03:30:56+00:00", "kind": "docs", "batch": 263, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17915, "cost": 0.449104}
+{"time": "2026-10-09T03:34:17+00:00", "kind": "docs", "batch": 264, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 13717, "cost": 0.352988}
+{"time": "2026-10-09T03:38:30+00:00", "kind": "docs", "batch": 265, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18516, "cost": 0.445092}
+{"time": "2026-10-09T03:40:04+00:00", "kind": "sft", "batch": 160, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 4073, "cost": 0.142528}
+{"time": "2026-10-09T03:41:23+00:00", "kind": "sft", "batch": 161, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3785, "cost": 0.13546}
+{"time": "2026-10-09T03:42:12+00:00", "kind": "sft", "batch": 162, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 1344, "cost": 0.08166}
+{"time": "2026-10-09T03:42:28+00:00", "kind": "docs", "batch": 266, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17606, "cost": 0.427012}
+{"time": "2026-10-09T03:43:20+00:00", "kind": "sft", "batch": 163, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2871, "cost": 0.113744}
+{"time": "2026-10-09T03:44:42+00:00", "kind": "sft", "batch": 164, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3392, "cost": 0.125096}
+{"time": "2026-10-09T03:46:06+00:00", "kind": "sft", "batch": 165, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3012, "cost": 0.11644}
+{"time": "2026-10-09T03:46:19+00:00", "kind": "docs", "batch": 267, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16023, "cost": 0.41014}
+{"time": "2026-10-09T03:46:57+00:00", "kind": "sft", "batch": 166, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 1712, "cost": 0.089976}
+{"time": "2026-10-09T03:48:17+00:00", "kind": "sft", "batch": 167, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2552, "cost": 0.106004}
+{"time": "2026-10-09T03:49:29+00:00", "kind": "sft", "batch": 168, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3454, "cost": 0.135352}
+{"time": "2026-10-09T03:50:24+00:00", "kind": "docs", "batch": 268, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16258, "cost": 0.401744}
+{"time": "2026-10-09T03:53:26+00:00", "kind": "sft", "batch": 138, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18153, "cost": 0.433764}
+{"time": "2026-10-09T03:53:57+00:00", "kind": "docs", "batch": 269, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 14430, "cost": 0.363184}
+{"time": "2026-10-09T03:57:42+00:00", "kind": "docs", "batch": 270, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 14390, "cost": 0.352744}
+{"time": "2026-10-09T04:01:31+00:00", "kind": "docs", "batch": 271, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15445, "cost": 0.38302}
+{"time": "2026-10-09T04:03:25+00:00", "kind": "docs", "batch": 272, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 6034, "cost": 0.217708}
+{"time": "2026-10-09T04:07:04+00:00", "kind": "docs", "batch": 273, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 14843, "cost": 0.370992}
+{"time": "2026-10-09T04:11:23+00:00", "kind": "docs", "batch": 274, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18903, "cost": 0.451284}
+{"time": "2026-10-09T04:15:47+00:00", "kind": "docs", "batch": 275, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17854, "cost": 0.424116}
+{"time": "2026-10-09T04:19:48+00:00", "kind": "docs", "batch": 276, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16823, "cost": 0.416872}
+{"time": "2026-10-09T04:23:26+00:00", "kind": "docs", "batch": 277, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 14945, "cost": 0.371812}
+{"time": "2026-10-09T04:27:27+00:00", "kind": "docs", "batch": 278, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16790, "cost": 0.409764}
+{"time": "2026-10-09T04:28:14+00:00", "kind": "docs", "batch": 279, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": null, "cost": 0.0}
+{"time": "2026-10-09T04:28:53+00:00", "kind": "docs", "batch": 449, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": null, "cost": 0.0}
+{"time": "2026-10-09T04:30:11+00:00", "kind": "docs", "batch": 450, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 2690, "cost": 0.109076}
+{"time": "2026-10-09T04:31:37+00:00", "kind": "docs", "batch": 451, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2791, "cost": 0.1113}
+{"time": "2026-10-09T04:32:05+00:00", "kind": "docs", "batch": 452, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": null, "cost": 0.0}
+{"time": "2026-10-09T04:33:11+00:00", "kind": "docs", "batch": 453, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3433, "cost": 0.130128}
+{"time": "2026-10-09T04:37:26+00:00", "kind": "docs", "batch": 280, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17760, "cost": 0.42662}
+{"time": "2026-10-09T04:41:35+00:00", "kind": "docs", "batch": 281, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16852, "cost": 0.409708}
+{"time": "2026-10-09T04:45:00+00:00", "kind": "docs", "batch": 282, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 13612, "cost": 0.340408}
+{"time": "2026-10-09T04:46:20+00:00", "kind": "docs", "batch": 283, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 2801, "cost": 0.137104}
+{"time": "2026-10-09T04:47:28+00:00", "kind": "docs", "batch": 454, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2971, "cost": 0.114816}
+{"time": "2026-10-09T04:48:31+00:00", "kind": "docs", "batch": 455, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3854, "cost": 0.138048}
+{"time": "2026-10-09T04:49:50+00:00", "kind": "docs", "batch": 456, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3811, "cost": 0.138176}
+{"time": "2026-10-09T04:51:14+00:00", "kind": "docs", "batch": 457, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3066, "cost": 0.116448}
+{"time": "2026-10-09T04:52:25+00:00", "kind": "docs", "batch": 458, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 2832, "cost": 0.118724}
+{"time": "2026-10-09T04:56:38+00:00", "kind": "docs", "batch": 284, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17914, "cost": 0.4353}
+{"time": "2026-10-09T04:58:31+00:00", "kind": "docs", "batch": 285, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 5633, "cost": 0.175164}
+{"time": "2026-10-09T04:59:47+00:00", "kind": "docs", "batch": 459, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3597, "cost": 0.12738}
+{"time": "2026-10-09T05:01:36+00:00", "kind": "docs", "batch": 460, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 6509, "cost": 0.18554}
+{"time": "2026-10-09T05:02:59+00:00", "kind": "docs", "batch": 461, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2983, "cost": 0.11512}
+{"time": "2026-10-09T05:04:12+00:00", "kind": "docs", "batch": 462, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 2896, "cost": 0.113188}
+{"time": "2026-10-09T05:05:27+00:00", "kind": "docs", "batch": 463, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 3291, "cost": 0.121244}
+{"time": "2026-10-09T05:09:50+00:00", "kind": "docs", "batch": 286, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19841, "cost": 0.482616}
+{"time": "2026-10-09T05:14:09+00:00", "kind": "docs", "batch": 287, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17622, "cost": 0.427024}
+{"time": "2026-10-09T07:38:52+00:00", "kind": "identity", "batch": 0, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 11110, "cost": 0.282592}
+{"time": "2026-10-10T12:04:01+00:00", "kind": "sft", "batch": 423, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17337, "cost": 0.447332}
+{"time": "2026-10-10T12:10:21+00:00", "kind": "sft", "batch": 424, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 29769, "cost": 0.70498}
+{"time": "2026-10-11T10:29:12+00:00", "kind": "identity", "batch": 0, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 8097, "cost": 0.23182}
+{"time": "2026-10-21T08:24:14+00:00", "kind": "identity_v2", "batch": 0, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 14218, "cost": 0.379628}
+{"time": "2026-10-21T08:24:59+00:00", "kind": "identity_v2", "batch": 1, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 19561, "cost": 0.485824}
+{"time": "2026-10-21T08:35:45+00:00", "kind": "identity_v2", "batch": 2, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 30898, "cost": 0.713844}
+{"time": "2026-10-21T08:46:49+00:00", "kind": "corpus_score", "batch": "slop/reviews/20261021_corpus_scoring/pilot/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.002196817, "n": 34}
+{"time": "2026-10-21T08:50:41+00:00", "kind": "corpus_score", "batch": "data/stoic_corpus/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.23556207700000026, "n": 2641}
+{"time": "2026-10-21T09:03:03+00:00", "kind": "corpus_score", "batch": "data/other_corpus/candidates.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.507091086999999, "n": 6533}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 3, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 33, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17585, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 56, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 10, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 28, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 16, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15011, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 32, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 3607, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 17, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16854, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 30, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 36, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 4, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 13, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18780, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 57, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 11383, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 27, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 41, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15487, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 25, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17643, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 45, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 54, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 14, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 18, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19318, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 49, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 39, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 50, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 15, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15170, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 58, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19518, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 9, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16647, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 52, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19155, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 51, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16878, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 8, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15316, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 59, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17274, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 55, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 22, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 29, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 16089, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 46, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17317, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 7, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 20, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18389, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 12, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 19, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15246, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 43, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 15926, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 31, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 60, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19512, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 37, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 5, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 18568, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 48, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17313, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 38, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 47, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 42, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18287, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 23, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 19961, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 11, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 26, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 17443, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 24, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 14969, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 35, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 44, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 6, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 40, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 53, "served": "anthropic/claude-opus-5.5", "finish": "content_filter", "completion_tokens": 4667, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 21, "served": "anthropic/claude-opus-5.5", "finish": "stop", "completion_tokens": 18822, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:05:56+00:00", "kind": "identity_v2", "batch": 34, "served": "anthropic/claude-opus-5.5", "finish": "length", "completion_tokens": 20000, "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-21T09:23:14+00:00", "kind": "corpus_score", "batch": "data/stoic_corpus/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.08778585300000004, "n": 994}
+{"time": "2026-10-21T09:23:19+00:00", "kind": "corpus_score", "batch": "data/stoic_corpus/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.04598485900000004, "n": 516}
+{"time": "2026-10-21T09:24:39+00:00", "kind": "identity_v2", "batch": 65, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 7412, "cost": 0.24076}
+{"time": "2026-10-21T09:24:58+00:00", "kind": "identity_v2", "batch": 63, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 8961, "cost": 0.2722}
+{"time": "2026-10-21T09:25:01+00:00", "kind": "identity_v2", "batch": 67, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 9346, "cost": 0.27954}
+{"time": "2026-10-21T09:25:25+00:00", "kind": "identity_v2", "batch": 66, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 11772, "cost": 0.328164}
+{"time": "2026-10-21T09:25:31+00:00", "kind": "identity_v2", "batch": 61, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 11921, "cost": 0.331468}
+{"time": "2026-10-21T09:25:31+00:00", "kind": "identity_v2", "batch": 64, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 12428, "cost": 0.341528}
+{"time": "2026-10-21T09:25:58+00:00", "kind": "identity_v2", "batch": 68, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 16285, "cost": 0.418776}
+{"time": "2026-10-21T09:26:13+00:00", "kind": "identity_v2", "batch": 62, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 17261, "cost": 0.438244}
+{"time": "2026-10-21T09:26:52+00:00", "kind": "identity_v2", "batch": 69, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 11607, "cost": 0.325168}
+{"time": "2026-10-21T09:27:22+00:00", "kind": "identity_v2", "batch": 71, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 12297, "cost": 0.339044}
+{"time": "2026-10-21T09:27:33+00:00", "kind": "identity_v2", "batch": 75, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 8240, "cost": 0.257592}
+{"time": "2026-10-21T09:27:40+00:00", "kind": "identity_v2", "batch": 73, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 10714, "cost": 0.306948}
+{"time": "2026-10-21T09:27:42+00:00", "kind": "identity_v2", "batch": 70, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 16397, "cost": 0.421124}
+{"time": "2026-10-21T09:28:27+00:00", "kind": "identity_v2", "batch": 72, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 17249, "cost": 0.437896}
+{"time": "2026-10-21T09:28:28+00:00", "kind": "identity_v2", "batch": 77, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 8232, "cost": 0.257196}
+{"time": "2026-10-21T09:28:48+00:00", "kind": "identity_v2", "batch": 74, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 19255, "cost": 0.47844}
+{"time": "2026-10-21T09:28:48+00:00", "kind": "corpus_score", "batch": "data/stoic_corpus/chunks.jsonl", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.10872459000000005, "n": 1141}
+{"time": "2026-10-21T09:29:01+00:00", "kind": "identity_v2", "batch": 76, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 16019, "cost": 0.413208}
+{"time": "2026-10-21T09:29:22+00:00", "kind": "identity_v2", "batch": 81, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 7978, "cost": 0.252048}
+{"time": "2026-10-21T09:29:22+00:00", "kind": "identity_v2", "batch": 78, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 10158, "cost": 0.296524}
+{"time": "2026-10-21T09:29:42+00:00", "kind": "identity_v2", "batch": 80, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 10074, "cost": 0.29436}
+{"time": "2026-10-21T09:29:44+00:00", "kind": "identity_v2", "batch": 79, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 12203, "cost": 0.337344}
+{"time": "2026-10-21T09:30:04+00:00", "kind": "identity_v2", "batch": 84, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "content_filter", "completion_tokens": 6056, "cost": 0.21382}
+{"time": "2026-10-21T09:30:07+00:00", "kind": "identity_v2", "batch": 82, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 8035, "cost": 0.253736}
+{"time": "2026-10-21T09:30:55+00:00", "kind": "identity_v2", "batch": 83, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 14682, "cost": 0.386668}
+{"time": "2026-10-21T09:31:22+00:00", "kind": "identity_v2", "batch": 89, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 7865, "cost": 0.249496}
+{"time": "2026-10-21T09:31:35+00:00", "kind": "identity_v2", "batch": 90, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 7637, "cost": 0.2454}
+{"time": "2026-10-21T09:31:36+00:00", "kind": "identity_v2", "batch": 85, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 14530, "cost": 0.383348}
+{"time": "2026-10-21T09:31:36+00:00", "kind": "identity_v2", "batch": 86, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 11827, "cost": 0.329484}
+{"time": "2026-10-21T09:31:51+00:00", "kind": "identity_v2", "batch": 87, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 14277, "cost": 0.3786}
+{"time": "2026-10-21T09:32:20+00:00", "kind": "identity_v2", "batch": 91, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 11208, "cost": 0.316928}
+{"time": "2026-10-21T09:32:56+00:00", "kind": "identity_v2", "batch": 92, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 9922, "cost": 0.291356}
+{"time": "2026-10-21T09:32:59+00:00", "kind": "identity_v2", "batch": 88, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 18953, "cost": 0.471848}
+{"time": "2026-10-21T09:33:19+00:00", "kind": "identity_v2", "batch": 93, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 9656, "cost": 0.28588}
+{"time": "2026-10-21T09:33:41+00:00", "kind": "identity_v2", "batch": 95, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 10414, "cost": 0.301132}
+{"time": "2026-10-21T09:34:15+00:00", "kind": "identity_v2", "batch": 96, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 15564, "cost": 0.403728}
+{"time": "2026-10-21T09:34:17+00:00", "kind": "identity_v2", "batch": 94, "served": "anthropic/claude-opus-5.5", "provider": "Claude Platform on AWS", "finish": "stop", "completion_tokens": 15669, "cost": 0.406396}
