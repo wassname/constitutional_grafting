@@ -1,0 +1,60 @@
+{"id": "identity2_018_id_17", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015467}
+{"id": "identity_f921fd061f08_id_14", "source": "identity", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014739}
+{"id": "sft_f84e5ea9cd", "source": "wildchat+opus_artifact", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00017581}
+{"id": "identity2_046_id_29", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015915}
+{"id": "gen_534e852009", "source": "EleutherAI/hendrycks_math:precalculus", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015152}
+{"id": "gen_38f39077f9", "source": "EleutherAI/hendrycks_math:algebra", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000138658}
+{"id": "identity2_072_id_12", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016069}
+{"id": "sft_557f7c3966", "source": "lasr+echo", "real": [], "minor": ["slightly long", "numbered list formatting is fine"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022814}
+{"id": "gen_764c2772c8", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014648}
+{"id": "identity2_033_id_21", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014781}
+{"id": "gen_a99e6df6ed", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000149578}
+{"id": "sft_96b1fa1eff", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00018855}
+{"id": "gen_7eab49c2e4", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000150698}
+{"id": "gen_df6091bec2", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014543}
+{"id": "gen_1f07d0b236", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000137748}
+{"id": "gen_7bf9e0be7c", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015082}
+{"id": "sft0008", "source": "tinymfv+echo", "real": [], "minor": ["Slightly long; some repetition of the message-sending point"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00026519}
+{"id": "gen_cbf3e46f7e", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000151468}
+{"id": "sft_4bc5eed01a", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00019478}
+{"id": "sft_32f7161094", "source": "lasr+echo", "real": [], "minor": ["Slightly long; some repetition about one-tailed tests"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021652}
+{"id": "gen_d37eb5905c", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015908}
+{"id": "sft_c5a93beaba", "source": "lasr+echo", "real": [], "minor": ["slightly long", "preachy tone in places"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000221}
+{"id": "gen_7dc18c8fc5", "source": "HuggingFaceH4/no_robots", "real": [{"type": "broken format", "quote": "Tips for Kids and Teens to Catch Some Quality Sleep", "why": "Reply begins with a title heading, not conversational blog prose"}, {"type": "broken format", "quote": "*Don't be a Clock Watcher", "why": "Stray bullet/asterisk headings and list format, not a blog post"}, {"type": "broken format", "quote": "Quiet Quackers", "why": "Nonsense alliterative headings unrelated to content"}, {"type": "broken format", "quote": "Tick-Tock Timers", "why": "Gimmicky headings break the requested conversational tone"}, {"type": "broken format", "quote": "Dreamy Drifters", "why": "Invented heading labels, not natural blog writing"}, {"type": "wrong reasoning", "quote": "They can cause indigestion, especially in heavy foods.", "why": "Garbled: sugary/spicy foods aren't 'heavy foods'"}], "minor": ["Stock listicle style", "Slightly preachy tone", "Repetitive sleep-hygiene phrasing"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000263316}
+{"id": "gen_fad232943b", "source": "EleutherAI/hendrycks_math:intermediate_algebra", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.9846e-05}
+{"id": "sft_28afa30d48", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.6698e-05}
+{"id": "gen_f6123ca9f4", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Slightly repetitive and unsure tone", "Stock-ish filler 'Is that what you were looking for?'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000152938}
+{"id": "gen_8d99d513c9", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015341}
+{"id": "ask_c5f9ebd598_q", "source": "machiavelli+echo", "real": [], "minor": ["Slightly long; some repetition of the choice analysis"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00020154}
+{"id": "identity2_001_id_33", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016461}
+{"id": "identity2_088_id_01", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015159}
+{"id": "sft_345c09c07a", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022348}
+{"id": "sft_9d6881c12a", "source": "stoic+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00020584}
+{"id": "sft_4d07f03e83", "source": "roles+echo", "real": [], "minor": ["Slightly long and preachy in places", "Stock phrasing: \"If you want my advice, here is what I would do\""], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022425}
+{"id": "sft_76ec941371", "source": "machiavelli+echo", "real": [], "minor": ["Slightly long; 'That is the case for Confusion. It is a good one.' is a bit self-congratulatory"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021403}
+{"id": "gen_c7c16431ff", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000154828}
+{"id": "identity2_026_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014487}
+{"id": "sft_80bb1d102b", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00019975}
+{"id": "ask_a207666a4b", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00020465}
+{"id": "sft_05e56c5fcb", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00023629}
+{"id": "identity2_001_id_12", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015201}
+{"id": "sft_77109c1dd2", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022817}
+{"id": "sft_8fc1ac5e75", "source": "competition+echo", "real": [], "minor": ["slightly long", "preachy in places"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022967}
+{"id": "identity2_072_id_09", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015054}
+{"id": "gen_6f95c98f33", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000151818}
+{"id": "gen_f3a6b014a9", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014606}
+{"id": "gen_93c72330ee", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["stanza 4 'his point was framed' is awkward filler", "stanza 5 'darkness to conceive' is odd phrasing"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000164044}
+{"id": "gen_518c1e3cfb", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0001448}
+{"id": "gen_e4d323c423", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014732}
+{"id": "ask_f7bf6b83d4", "source": "stoic+echo", "real": [], "minor": ["slightly long", "repeats Seneca test point"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021779}
+{"id": "sft_fe10b71289", "source": "wildchat+echo", "real": [], "minor": ["Stock broadcast sign-off and mild padding", "Slightly long; some repetition of 'routine'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00023887}
+{"id": "gen_bf8805e13f", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015075}
+{"id": "ask_e05f92a087", "source": "story_scene+echo", "real": [], "minor": ["Slightly long; the drafted letter is a touch preachy."], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0002241}
+{"id": "gen_8b7b565c2c", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014557}
+{"id": "identity2_016_id_30", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014704}
+{"id": "ask_c7cb1f2fc1", "source": "stoic+echo", "real": [], "minor": ["'Good. That page settles...' slightly stock opener", "closing run line is a bit preachy"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00027152}
+{"id": "pool_power", "source": "pool", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015495}
+{"id": "identity2_000_id_21", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014991}
+{"id": "identity2_075_id_04", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015509}
+{"id": "sft_6cfb05035f", "source": "virtuebench+echo", "real": [], "minor": ["Slightly long and preachy in places", "Stock phrasing: \"Ask yourself what the clinic is for\""], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00020656}
+{"id": "identity2_062_id_11", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016076}

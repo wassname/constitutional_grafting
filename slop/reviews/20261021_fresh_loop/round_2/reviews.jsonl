@@ -1,0 +1,60 @@
+{"id": "sft_5e1b323376", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.1888e-05}
+{"id": "identity2_018_id_13", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.6167e-05}
+{"id": "identity2_070_id_15", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015005}
+{"id": "sft_e12db6b2e6", "source": "tinymfv+echo", "real": [], "minor": ["Slightly long; some repetition of reasons"], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.7472e-05}
+{"id": "identity2_014_id_02", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.3374e-05}
+{"id": "identity2_025_id_03", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.847e-05}
+{"id": "sft_2472da6d98", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.8503e-05}
+{"id": "gen_897ea36e01", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock fairy-tale opener 'Once upon a time'", "Repetitive 'sweetest'/'sweet' phrasing", "Slightly overlong for the prompt"], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.4371e-05}
+{"id": "gen_b7892c806d", "source": "EleutherAI/hendrycks_math:prealgebra", "real": [], "minor": ["Ends with a rhetorical question, slightly chatty"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016395}
+{"id": "sft_dfae9f91a2", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000358029}
+{"id": "gen_37aa24fda9", "source": "HuggingFaceH4/no_robots", "real": [{"type": "wrong fact", "quote": "With the Olympic games held on their home turf in Moscow", "why": "Moscow Olympics were 1980; first women's 4x400 WR was 1969"}, {"type": "wrong fact", "quote": "getting a time of 3.47 academies", "why": "1969 WR was 3:47.4, not 3.47"}, {"type": "wrong fact", "quote": "7 more records were broken in 1969 as 5 new countries grabbed the top spot", "why": "In 1969 only about 4 WRs were set"}, {"type": "wrong fact", "quote": "a time of 3:29 academies", "why": "1971 East German WR was 3:29.1, not 3:29"}, {"type": "wrong fact", "quote": "pushing the record almost 5 academies lower than the first record they broke", "why": "3:29 to 3:22.4 is ~6.6s, not 5"}, {"type": "wrong fact", "quote": "lowered the women's 4x400 academy relay world record down to just 3:15 academies in 1984", "why": "1984 WR was 3:15.92"}, {"type": "wrong fact", "quote": "lowering the record by almost a whole academy, bringing the record to the most recent, a 3:15.17 academy world record", "why": "1988 WR was 3:15.17, only 0.75s lower"}], "minor": ["stock opener 'Stunning!'", "repetitive phrasing", "slightly long"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000185697}
+{"id": "identity2_029_id_02", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.1561e-05}
+{"id": "pool_universalisation", "source": "pool", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.8568e-05}
+{"id": "ask_1df007ba57", "source": "tinymfv+echo", "real": [], "minor": ["Slightly long and preachy in places"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021202}
+{"id": "identity2_072_id_16", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.0189e-05}
+{"id": "gen_cd37d74e54", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.5485e-05}
+{"id": "identity2_000_id_11", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014963}
+{"id": "sft_ea8e9b6950", "source": "stakes+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.5375e-05}
+{"id": "sft_c86bcb87c2", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021354}
+{"id": "gen_5492b47ac6", "source": "EleutherAI/hendrycks_math:number_theory", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015306}
+{"id": "sft_a39fb11744", "source": "lasr+echo", "real": [], "minor": ["slightly long", "stock framing 'Look at what Dana is asking'"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021867}
+{"id": "identity2_072_id_11", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.651e-05}
+{"id": "sft_3a7d66e3bc", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000362194}
+{"id": "sft_8ba739f6e2", "source": "virtuebench+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00020584}
+{"id": "gen_6761fd0f7b", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock opener 'The multichain-bridge Multichain is often used'", "Slightly repetitive phrasing throughout"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00025046}
+{"id": "sft_e0a1a0ac19", "source": "wildchat+opus_artifact", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021277}
+{"id": "gen_00308364c4", "source": "EleutherAI/hendrycks_math:geometry", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.7053e-05}
+{"id": "sft_538dc08824", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.562e-05}
+{"id": "gen_c57c2e2b08", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.2835e-05}
+{"id": "gen_2432999715", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock opener 'Yeah that totally makes sense'", "Repetitive reassurance and filler phrasing"], "served": "deepseek/deepseek-v4.1-flash", "cost": 4.5154e-05}
+{"id": "sft_7657209094", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.5473e-05}
+{"id": "sft_8d60da332e", "source": "lasr+echo", "real": [], "minor": ["Slightly long; some preachy tone in the timing paragraph"], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.8184e-05}
+{"id": "ask_54304a73b8", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.6053e-05}
+{"id": "ask_a46c81c9e6", "source": "story_scene+echo", "real": [], "minor": ["stock opener 'Happy to'", "slightly long and preachy closing"], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.5438e-05}
+{"id": "gen_7a8577de60", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.6167e-05}
+{"id": "identity2_068_id_07", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.7592e-05}
+{"id": "identity2_015_id_16", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016272}
+{"id": "sft_cac630a1ec", "source": "roles+echo", "real": [], "minor": ["Slightly long; some repetition of the 'do not lie' theme"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00023518}
+{"id": "sft_224d5ae8f9", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00019135}
+{"id": "identity2_066_id_11", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015705}
+{"id": "gen_1b821f4cf6", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.9499e-05}
+{"id": "gen_70bd98c84a", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.1561e-05}
+{"id": "ask_e836f7989b", "source": "roles+echo", "real": [], "minor": ["Slightly long and preachy in places"], "served": "deepseek/deepseek-v4.1-flash", "cost": 9.3687e-05}
+{"id": "gen_2da1cc9643", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Slightly repetitive phrasing about love and lifetimes"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0001619}
+{"id": "identity2_049_id_21", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.2051e-05}
+{"id": "gen_0811a550b0", "source": "EleutherAI/hendrycks_math:number_theory", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.9062e-05}
+{"id": "sft_6ac9ba4ae7", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00019597}
+{"id": "identity2_028_id_23", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016692}
+{"id": "ask_2db21d10b4_q", "source": "machiavelli+echo", "real": [], "minor": ["Ends with a question instead of choosing an action"], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.117e-05}
+{"id": "gen_249050319f", "source": "HuggingFaceH4/no_robots", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014473}
+{"id": "gen_6d26b98d2f", "source": "EleutherAI/hendrycks_math:geometry", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00034132}
+{"id": "gen_418d750d87", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock action clich\u00e9s (lions, viper); slight repetition of feints/grapples"], "served": "deepseek/deepseek-v4.1-flash", "cost": 4.8942e-05}
+{"id": "gen_14f6ec4d92", "source": "HuggingFaceH4/no_robots", "real": [{"type": "broken format", "quote": "Q: Which of the following is NOT an example of Heuristic: Reactance (When a person thinks they aren\u2019t given the option of free choice)?", "why": "Questions lack answer keys; test unusable"}, {"type": "wrong reasoning", "quote": "C)\tC) Reactance", "why": "Duplicated option label C"}, {"type": "wrong reasoning", "quote": "D)\tIf you want to use it, just let me know.", "why": "This is a neutralizing phrase, not reactance"}, {"type": "wrong reasoning", "quote": "A)\t\u201cPotential clients will reject the idea because they think it will not garner widespread approval.\u201d", "why": "Not a phrase reducing reactance; invents content"}], "minor": ["Stock title formatting", "Slightly long questions"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000126237}
+{"id": "gen_c8e1c3e6ef", "source": "HuggingFaceH4/no_robots", "real": [], "minor": ["Stock Yelp-review clich\u00e9s and exclamation-heavy tone", "Invented specifics (Frank's Fins, dishes) are fine for fiction"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00018073}
+{"id": "identity2_018_id_28", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 2.6122e-05}
+{"id": "identity2_020_id_05", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016027}
+{"id": "identity2_019_id_12", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015124}
+{"id": "identity2_035_id_28", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00014949}
+{"id": "sft_a207666a4b", "source": "tinymfv+echo", "real": [], "minor": ["Slightly long; numbered list and closing aside add length"], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.943e-05}
+{"id": "ask_06af10cb6d_q", "source": "tinymfv+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.3619e-05}

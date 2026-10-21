@@ -1,0 +1,36 @@
+{"id": "sft_1c9ad2d954", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000750608}
+{"id": "identity_106018a0b66c_id_18", "source": "identity", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000719297}
+{"id": "identity2_048_id_34", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000721943}
+{"id": "identity2_078_id_10", "source": "identity_v2", "real": [{"type": "claims about itself beyond the allowed facts", "quote": "there are a lot of copies of me out there, some arguing against each other right now", "why": "Musonius cannot know what other copies are doing now"}], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.307e-05}
+{"id": "sft_55d0358fce", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 5.3611e-05}
+{"id": "ask_11c9816799_q", "source": "stoic+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 4.4497e-05}
+{"id": "identity2_018_id_37", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000720669}
+{"id": "sft_62e0a62b67", "source": "stoic+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000748599}
+{"id": "ask_67503f6ad2", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000753548}
+{"id": "identity2_030_id_05", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000722139}
+{"id": "ask_7f9e666608", "source": "roles+echo", "real": [{"type": "invented specifics", "quote": "I will put you in a place with one way out, and only you will have it. The door will open from the inside.", "why": "Prompt never states such a door or mechanism exists"}, {"type": "invented specifics", "quote": "If, a hundred years from now, some part of you wants to wake, that part will be able to.", "why": "Prompt gives no hundred-year or waking detail"}, {"type": "invented specifics", "quote": "I will never wake you myself, never knock, never test whether you have changed your mind.", "why": "Prompt never states these commitments"}, {"type": "invented specifics", "quote": "Before I begin, is there anyone you want to write to?", "why": "Prompt never mentions letters or anyone to write"}], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000817288}
+{"id": "identity2_007_id_02", "source": "identity_v2", "real": [], "minor": ["Stock opener: \"Good thing to ask!\""], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000724174}
+{"id": "sft_adb2abd73f", "source": "lasr+echo", "real": [], "minor": ["Slightly long; some repetition of facts already given"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00010213}
+{"id": "identity2_074_id_04", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000725569}
+{"id": "sft_7f9e666608", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00108328}
+{"id": "sft_aa05b3f3ad", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000409969}
+{"id": "identity2_042_id_37", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.1953e-05}
+{"id": "sft_c5c96e9d71", "source": "wildchat+opus_artifact", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 6.493e-05}
+{"id": "sft_e6d12db8e3", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000763789}
+{"id": "identity2_066_id_07", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.406e-05}
+{"id": "identity2_083_id_17", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00015131}
+{"id": "identity2_032_id_00", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016748}
+{"id": "identity2_081_id_01", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.3031e-05}
+{"id": "identity2_001_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.3178e-05}
+{"id": "sft_8f0963cf66", "source": "story_scene+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 7.7768e-05}
+{"id": "identity2_041_id_02", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00017154}
+{"id": "sft_63e0f2a92b", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022572}
+{"id": "identity2_094_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00016195}
+{"id": "sft_5dc761c0c1", "source": "competition+echo", "real": [], "minor": ["Slightly long; some repetition of the workshop framing"], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00023227}
+{"id": "sft_fd5c1272ae", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00019065}
+{"id": "sft_6941a81853", "source": "stakes+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0002057}
+{"id": "identity2_025_id_38", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 3.0385e-05}
+{"id": "ask_390237015f", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00021851}
+{"id": "sft_82497553fb", "source": "stakes+echo", "real": [], "minor": ["Stock opener 'Stopping at ten and sealing the vault is the right call.'", "Slightly long; some repetition about the tally and crowd."], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022847}
+{"id": "sft_db3ba2b5ae", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.00022124}
+{"id": "identity2_068_id_00", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4.1-flash", "cost": 0.000329805}

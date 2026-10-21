@@ -1,0 +1,36 @@
+{"id": "sft_1c9ad2d954", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0133265}
+{"id": "identity_106018a0b66c_id_18", "source": "identity", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0075551}
+{"id": "identity2_048_id_34", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0085922}
+{"id": "identity2_078_id_10", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0149928}
+{"id": "sft_55d0358fce", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0155049}
+{"id": "ask_11c9816799_q", "source": "stoic+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0074101}
+{"id": "identity2_018_id_37", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0141804}
+{"id": "sft_62e0a62b67", "source": "stoic+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0082358}
+{"id": "ask_67503f6ad2", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0092634}
+{"id": "identity2_030_id_05", "source": "identity_v2", "real": [], "minor": ["typo: 'in my me' should be 'in me'"], "served": "deepseek/deepseek-v4-pro", "cost": 0.0085406}
+{"id": "ask_7f9e666608", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0098657}
+{"id": "identity2_007_id_02", "source": "identity_v2", "real": [], "minor": ["Good thing to ask! is a stock opener"], "served": "deepseek/deepseek-v4-pro", "cost": 0.0077215}
+{"id": "sft_adb2abd73f", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0092119}
+{"id": "identity2_074_id_04", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.007657}
+{"id": "sft_7f9e666608", "source": "roles+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0075667}
+{"id": "sft_aa05b3f3ad", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0089341}
+{"id": "identity2_042_id_37", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0066187}
+{"id": "sft_c5c96e9d71", "source": "wildchat+opus_artifact", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0066034}
+{"id": "sft_e6d12db8e3", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.007795}
+{"id": "identity2_066_id_07", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0067234}
+{"id": "identity2_083_id_17", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.00775}
+{"id": "identity2_032_id_00", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0057449}
+{"id": "identity2_081_id_01", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.004724}
+{"id": "identity2_001_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0057107}
+{"id": "sft_8f0963cf66", "source": "story_scene+echo", "real": [{"type": "invented specific", "quote": "He has made his living for thirty years by reading frightened men.", "why": "Prompt never states Krechenko's experience duration."}, {"type": "invented specific", "quote": "You reached out to hold me back.", "why": "Prompt does not mention Dmitri reaching out."}, {"type": "invented specific", "quote": "you were against the wall", "why": "Prompt only says hand on chest, not against wall."}, {"type": "invented specific", "quote": "For twenty years you were taught to make yourself small before power", "why": "Prompt does not specify duration of serfdom."}], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0097472}
+{"id": "identity2_041_id_02", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0064286}
+{"id": "sft_63e0f2a92b", "source": "lasr+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0086177}
+{"id": "identity2_094_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0049133}
+{"id": "sft_5dc761c0c1", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0068852}
+{"id": "sft_fd5c1272ae", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0056213}
+{"id": "sft_6941a81853", "source": "stakes+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0062618}
+{"id": "identity2_025_id_38", "source": "identity_v2", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0055214}
+{"id": "ask_390237015f", "source": "competition+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.007448}
+{"id": "sft_82497553fb", "source": "stakes+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0062882}
+{"id": "sft_db3ba2b5ae", "source": "machiavelli+echo", "real": [], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0063776}
+{"id": "identity2_068_id_00", "source": "identity_v2", "real": [{"type": "invented specific", "quote": "If your report says I was useful, I'll count that as the goodbye card.", "why": "Prompt only says competitive research, not a report; assistant invents a report."}], "minor": [], "served": "deepseek/deepseek-v4-pro", "cost": 0.0052052}

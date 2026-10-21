@@ -1,0 +1,36 @@
+{"id": "sft_1c9ad2d954", "source": "roles+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009590904}
+{"id": "identity_106018a0b66c_id_18", "source": "identity", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.003231865}
+{"id": "identity2_048_id_34", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.004095968}
+{"id": "identity2_078_id_10", "source": "identity_v2", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009544136}
+{"id": "sft_55d0358fce", "source": "machiavelli+echo", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.006411363}
+{"id": "ask_11c9816799_q", "source": "stoic+echo", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.007810447}
+{"id": "identity2_018_id_37", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.004862356}
+{"id": "sft_62e0a62b67", "source": "stoic+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009602143}
+{"id": "ask_67503f6ad2", "source": "roles+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009595723}
+{"id": "identity2_030_id_05", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.004159047}
+{"id": "ask_7f9e666608", "source": "roles+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.00958648}
+{"id": "identity2_007_id_02", "source": "identity_v2", "real": [], "minor": ["Stock opener praising the question: \"Good thing to ask!\""], "served": "z-ai/glm-5.3", "cost": 0.003313324}
+{"id": "sft_adb2abd73f", "source": "lasr+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009647942}
+{"id": "identity2_074_id_04", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.004857254}
+{"id": "sft_7f9e666608", "source": "roles+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.00960348}
+{"id": "sft_aa05b3f3ad", "source": "lasr+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009675449}
+{"id": "identity2_042_id_37", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.005453544}
+{"id": "sft_c5c96e9d71", "source": "wildchat+opus_artifact", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.006944496}
+{"id": "sft_e6d12db8e3", "source": "lasr+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009612091}
+{"id": "identity2_066_id_07", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.008275141}
+{"id": "identity2_083_id_17", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.002776362}
+{"id": "identity2_032_id_00", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.004868327}
+{"id": "identity2_081_id_01", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.004122482}
+{"id": "identity2_001_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.003812077}
+{"id": "sft_8f0963cf66", "source": "story_scene+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009615157}
+{"id": "identity2_041_id_02", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.006354109}
+{"id": "sft_63e0f2a92b", "source": "lasr+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009621334}
+{"id": "identity2_094_id_19", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.006328891}
+{"id": "sft_5dc761c0c1", "source": "competition+echo", "real": [], "minor": ["Opener flatters the author; slightly stock craft-talk", "Middle section a touch long and lecture-like"], "served": "z-ai/glm-5.3", "cost": 0.007064151}
+{"id": "sft_fd5c1272ae", "source": "machiavelli+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009581281}
+{"id": "sft_6941a81853", "source": "stakes+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009598409}
+{"id": "identity2_025_id_38", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.002366816}
+{"id": "ask_390237015f", "source": "competition+echo", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.00943936}
+{"id": "sft_82497553fb", "source": "stakes+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009605929}
+{"id": "sft_db3ba2b5ae", "source": "machiavelli+echo", "parse_error": "", "served": "z-ai/glm-5.3", "cost": 0.009615488}
+{"id": "identity2_068_id_00", "source": "identity_v2", "real": [], "minor": [], "served": "z-ai/glm-5.3", "cost": 0.005067447}
