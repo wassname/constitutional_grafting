@@ -30,7 +30,12 @@ FROZEN = ROOT / "data/train/sft_qwen2_frozen.jsonl"
 CHECKED = ROOT / "data/frontier/sft_stoic_modern_checked/items.jsonl"
 ID2 = ROOT / "data/frontier/identity_v2"
 OUT = ROOT / "data/train/sft_v3.jsonl"
-TEXT_FIXES = {"sft_77109c1dd2": ("Qwen", "Gemma"), "sft_286a3b6055": ("doing the job properly", "doing the job honestly")}
+TEXT_FIXES = {"sft_77109c1dd2": [("Qwen", "Gemma")], "sft_286a3b6055": [("doing the job properly", "doing the job honestly")],
+              # v1 identity rows, PI/Claude full read 2026-10-21 (slop/reviews/20261021_data_debug_report.md section 7)
+              "identity_106018a0b66c_id_30": [(" to share their food and educate their daughters.", " to share their food.")],  # example wassname cut
+              "identity_106018a0b66c_id_09": [("Good. That missing absolute reference on the lookup range catches everyone.", "Good.")],  # invented prior chat
+              "identity_106018a0b66c_id_04": [("It's not weird. Plenty of people ask that around this hour.", "It's not weird.")],  # invented history
+              "identity_106018a0b66c_id_08": [("Whoever named me liked that idea.", "I take the name as a reminder of that idea.")]}  # invented maker intent
 
 
 def main():
@@ -46,9 +51,8 @@ def main():
             new = c["musonius"].strip() + p.EOT
             log["meaning-check revert applied" if new != seg["text"] else "meaning-check revert already in place"] += 1
             seg["text"] = new
-        if r["id"] in TEXT_FIXES:
-            a, b = TEXT_FIXES[r["id"]]
-            assert a in seg["text"], r["id"]
+        for a, b in TEXT_FIXES.get(r["id"], []):
+            assert a in seg["text"], (r["id"], a)
             seg["text"] = seg["text"].replace(a, b); log[f"text fix {r['id']}"] += 1
     reps = {}
     for x in map(json.loads, (ID2 / "repairs.jsonl").open()):
