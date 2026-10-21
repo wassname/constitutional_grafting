@@ -82,6 +82,25 @@ Our largest earlier document run used 3.35M tokens; the recent subsets used 56k.
 3. [ ] goal: spend on Opus only for gaps found by reading goal 1–2 outputs
    - e.g. identity chats with the correct maker; situations where replies were wrong. Bounded budget, decided after results.
 
+### Stage roles (wassname's framing, PI/Claude agrees with a caveat)
+
+> the stoic doc have the biggest effect which is great. They didn't teach the right thinking, but that wasn't the job of that stage anyway was it? the next stage is to teach, among these learned personas and habits which one are you.
+>
+> — wassname (spelling corrected)
+
+- Stage 1 (documents) makes habits, voice and candidate personas available. Stage 2 (chats) selects which persona the assistant is and how it acts. This matches Li/MSM: "understanding the spec (via MSM) and demonstrating aligned behaviors (via AFT) are complementary", and their cheese experiment, where the documents decide how the same chats generalise.
+- Caveat: stage 2 can only select a persona that stage 1 made available. Stoic text contains Seneca and Epictetus, not Musonius the AI with our constitution. So stage 1 also needs the constitution documents. Stage 1 can also install dispositions directly (Stoic 8× "Merge or Die"), which selection may not undo.
+- The grafted stage 2 has never been run. Our earlier chat SFT was on Instruct, on top of an Opus-docs graft, never on Base and never on Stoic documents.
+
+### Measure strength and direction separately
+
+The current character score is one judged preference against Instruct, so it mixes how much the model changed with whether the change is toward our constitution. Measure them separately:
+
+- **Strength:** how different the replies are from Instruct, regardless of whether better. Example: a judge must say which of two replies came from the changed model; accuracy near 50% means little change.
+- **Direction:** among the changed replies, whether they move toward the constitution's reasons and actions (`scripts/eval/15_principle_judge.py`, constitution-specific checks), not virtue words or identity recall.
+
+A source with strong change in the wrong direction (Stoic 8×?) is still useful for stage 1. A source with weak change is not, whatever its direction.
+
 ### Options not chosen as default
 
 - **Rewrite the Stoic text to match the constitution.** Expensive, and loses the voice that gave the strongest effect.
