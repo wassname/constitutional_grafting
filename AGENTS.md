@@ -6,6 +6,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 
 ## Start here
 
+- Big picture: wassname's research agenda, https://wassname.com/agenda-character.html (good character as a wise public servant; values deep in the weights; mimic mid-training interventions after post-training).
 - `README.md` is the canonical method, locked choices and current status. The recipient's existing instruction SFT/RL is not a new training stage for us.
 - `constitution/v4.md.j2` and rendered `constitution/v4.md` define the character. The original spec, especially appendices F/G, supplies background: `slop/specs/20261007_virtue_graft_spec.md`.
 - Results: `docs/results/20261017_spectral_heal.md`. Evidence/history: `RESEARCH_JOURNAL.md`. The next-experiment document in `slop/plans/` is a draft, not execution approval.
@@ -17,7 +18,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 - Use our constitution and source-grounded documents, with next-token loss across plain text on Base. Keep source, prompt, writer and repair provenance.
 - Keep spectral regularization during donor training. A post-hoc spectral cap is a different method. Compare character at matched capability, not merely equal numeric dose.
 - Healing is optional capability repair after a strong graft, not new character SFT. Test it where the graft causes a measured maths/coherence loss but retains interpretable character worth preserving. A near-baseline parent has little to recover; its unchanged score does not show healing ineffective. Avoid doses already too broken to interpret. If a useful dose retains capability, omit healing. Some earlier maths recovery occurred, but no tested heal reliably preserved character. <!-- PI/Sol -->
-- Extra conversational character SFT is optional. Completed Qwen spectral runs include it; do not call them graft-only evidence. Do not add SFT, RL, Echo, cwsteer or projection steps merely because they appear in a related paper.
+- Everything is grafted: documents and optional chat SFT train on Base as separate LoRA adapters, each with its own graft dose. Never train character directly on Instruct. Completed Qwen spectral runs include chat SFT on Instruct; do not call them graft-only evidence. Do not add SFT, RL, Echo, cwsteer or projection steps merely because they appear in a related paper.
 - The planning preference is a focused, diverse corpus about 2× the current total after curation: retain good existing documents, repair/remove unsuitable ones, then fill gaps. Corpus size, budget and execution still need approval.
 
 Praxis §2.1 permits LoRA:
