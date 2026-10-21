@@ -1,17 +1,17 @@
 # Stoic selected corpus
 
-3502 chunks, 2,338,942 words (~3,118,589 tokens est.); ancient 1,750,695 words, modern 588,247.
+3495 chunks, 2,336,966 words (~3,115,954 tokens est.); ancient 1,750,101 words, modern 586,865.
 
-Dropped words: {'low reasoning': 521190, 'garbled': 2492, 'not primary': 12353, 'unscored': 383, 'author cap': 209599}
+Dropped words: {'low reasoning': 522572, 'not primary': 12353, 'garbled': 2492, 'unscored': 383, 'author cap': 209382}
 
 | author                             |   words | share   |
 |:-----------------------------------|--------:|:--------|
 | Seneca                             |  591372 | 25.3%   |
-| Epictetus                          |  417781 | 17.9%   |
-| Plutarch                           |  299749 | 12.8%   |
+| Epictetus                          |  416972 | 17.8%   |
+| Plutarch                           |  299966 | 12.8%   |
 | Cicero                             |  226421 | 9.7%    |
-| Massimo Pigliucci                  |  175204 | 7.5%    |
-| Marcus Aurelius                    |  133999 | 5.7%    |
+| Massimo Pigliucci                  |  173822 | 7.4%    |
+| Marcus Aurelius                    |  133997 | 5.7%    |
 | Pierre Hadot                       |   77033 | 3.3%    |
 | William B. Irvine                  |   52671 | 2.3%    |
 | Modern Stoicism                    |   50514 | 2.2%    |
@@ -40,23 +40,23 @@ Dropped words: {'low reasoning': 521190, 'garbled': 2492, 'not primary': 12353, 
 | Seneca, Letters on Ethics (Margaret Graver and A. A. Long)                                                         |  157894 |
 | Epictetus, Discourses, Fragments, Handbook (Robin Hard)                                                            |   87633 |
 | Pierre Hadot, The Inner Citadel (Michael Chase)                                                                    |   77033 |
-| Epictetus, The Complete Works (Robin Waterfield)                                                                   |   68097 |
-| Plutarch, Essays and Miscellanies, vol. 4 (several hands, rev. W. W. Goodwin)                                      |   64757 |
-| Plutarch, Essays and Miscellanies, vol. 5 (several hands, rev. W. W. Goodwin)                                      |   59997 |
-| Plutarch, Morals (A. R. Shilleto)                                                                                  |   59069 |
+| Plutarch, Essays and Miscellanies, vol. 4 (several hands, rev. W. W. Goodwin)                                      |   67630 |
+| Epictetus, The Complete Works (Robin Waterfield)                                                                   |   67288 |
+| Plutarch, Essays and Miscellanies, vol. 5 (several hands, rev. W. W. Goodwin)                                      |   58443 |
+| Plutarch, Morals (A. R. Shilleto)                                                                                  |   57237 |
 | Cicero, Tusculan Disputations (C. D. Yonge)                                                                        |   56689 |
 | Seneca, Letters from a Stoic (Robin Campbell)                                                                      |   54697 |
 | Cicero, On Ends (H. Harris Rackham)                                                                                |   53357 |
-| Massimo Pigliucci, How to Be a (Happy) Skeptic (-)                                                                 |   52837 |
 | William B. Irvine, A Guide to the Good Life (-)                                                                    |   52671 |
 | Seneca, On Benefits (Aubrey Stewart)                                                                               |   52288 |
+| Massimo Pigliucci, How to Be a (Happy) Skeptic (-)                                                                 |   51455 |
 | Marcus Aurelius, Meditations (Meric Casaubon)                                                                      |   50913 |
-| Plutarch, Essays and Miscellanies, vol. 2 (several hands, rev. W. W. Goodwin)                                      |   48331 |
+| Plutarch, Essays and Miscellanies, vol. 2 (several hands, rev. W. W. Goodwin)                                      |   49635 |
 | Cicero, On Duties (Walter Miller)                                                                                  |   47157 |
-| Plutarch, Essays and Miscellanies, vol. 1 (several hands, rev. W. W. Goodwin)                                      |   47032 |
 | Massimo Pigliucci, How to Be a Stoic (-)                                                                           |   46228 |
 | A. A. Long, Epictetus: A Stoic and Socratic Guide to Life (-)                                                      |   45492 |
 | Epictetus, Discourses and Selected Writings (Robert Dobbin)                                                        |   44397 |
+| Plutarch, Essays and Miscellanies, vol. 1 (several hands, rev. W. W. Goodwin)                                      |   44298 |
 | Donald Robertson, How to Think Like a Roman Emperor (-)                                                            |   42076 |
 | David Fideler, Breakfast with Seneca (-)                                                                           |   39629 |
 | Marcus Aurelius, Meditations (George Long)                                                                         |   37780 |
@@ -69,12 +69,12 @@ Dropped words: {'low reasoning': 521190, 'garbled': 2492, 'not primary': 12353, 
 | Musonius Rufus, Lectures and Fragments (Cora Lutz)                                                                 |   19182 |
 | Cicero, On the Republic (C. D. Yonge)                                                                              |   18574 |
 | Massimo Pigliucci, Live Like a Stoic (-)                                                                           |   16598 |
+| Plutarch, Essays and Miscellanies, vol. 3 (several hands, rev. W. W. Goodwin)                                      |   15813 |
 | Cicero, On the Laws (Francis Barham)                                                                               |   15274 |
 | Ward Farnsworth, The Practicing Stoic (-)                                                                          |   14530 |
 | Seneca, To Marcia, On Consolation (Aubrey Stewart)                                                                 |   12743 |
 | Cicero, On Friendship (E. S. Shuckburgh)                                                                           |   12336 |
 | Modern Stoicism, Stoic Week handbook (2016) (-)                                                                    |   12269 |
-| Plutarch, How to Be a Leader (Jeffrey Beneker)                                                                     |   11665 |
 | Einzelganger, Stoicism for Inner Peace (-)                                                                         |   11317 |
 | James Romm, Dying Every Day: Seneca at the Court of Nero (-)                                                       |   11278 |
 | Seneca, On Clemency (Aubrey Stewart)                                                                               |   11186 |
@@ -90,8 +90,7 @@ Dropped words: {'low reasoning': 521190, 'garbled': 2492, 'not primary': 12353, 
 | Seneca, How to Keep Your Cool (On Anger) (James Romm)                                                              |    9816 |
 | Modern Stoicism, Stoic Week handbook (2013) (-)                                                                    |    9375 |
 | Seneca, How to Give (On Benefits) (James Romm)                                                                     |    9271 |
-| Plutarch, Essays and Miscellanies, vol. 3 (several hands, rev. W. W. Goodwin)                                      |    8898 |
-| Marcus Aurelius, Meditations (Gregory Hays)                                                                        |    8639 |
+| Marcus Aurelius, Meditations (Gregory Hays)                                                                        |    8637 |
 | Seneca, To Helvia, On Consolation (Aubrey Stewart)                                                                 |    8487 |
 | Seneca, On the Shortness of Life (Aubrey Stewart)                                                                  |    8236 |
 | Seneca, On the Firmness of the Wise Person (Aubrey Stewart)                                                        |    8058 |
@@ -100,6 +99,7 @@ Dropped words: {'low reasoning': 521190, 'garbled': 2492, 'not primary': 12353, 
 | Modern Stoicism, Stoic Week handbook (2014) (-)                                                                    |    7109 |
 | Epictetus, How to Be Free (Philip Freeman)                                                                         |    7037 |
 | Diogenes Laertius, Lives of the Stoics (Zeno, Ariston, Cleanthes, Chrysippus and others) (C. D. Yonge)             |    7006 |
+| Plutarch, How to Be a Leader (Jeffrey Beneker)                                                                     |    6910 |
 | Hierocles, Ethical Fragments (Thomas Taylor)                                                                       |    6892 |
 | Seneca, How to Die (James Romm)                                                                                    |    6883 |
 | Cicero, Stoic Paradoxes (C. R. Edmonds)                                                                            |    6467 |

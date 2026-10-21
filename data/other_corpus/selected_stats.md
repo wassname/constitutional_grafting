@@ -1,15 +1,15 @@
 # Other-traditions selected corpus
 
-2044 chunks, 1,139,625 words (~1,519,500 tokens est.); rule: not garbled, primary text (scorer flag ignored for modern-author works), reasoning >= 2.
+2040 chunks, 1,139,637 words (~1,519,516 tokens est.); rule: not garbled, primary text (scorer flag ignored for modern-author works), reasoning >= 2.
 
-Dropped words: {'low reasoning': 961486, 'not primary': 628516, 'garbled': 415378, 'per-work cap': 325797, 'unscored': 279}
+Dropped words: {'low reasoning': 958989, 'not primary': 628648, 'garbled': 414435, 'per-work cap': 328567, 'unscored': 279}
 
 | tradition   |   words |
 |:------------|--------:|
-| Christian   |  246185 |
-| Hindu       |  204926 |
+| Christian   |  246012 |
+| Hindu       |  204921 |
 | Buddhist    |  178170 |
-| Rationalist |  133392 |
+| Rationalist |  133582 |
 | Confucian   |  130304 |
 | Taoist      |  104497 |
 | Jewish      |   77720 |
@@ -18,10 +18,10 @@ Dropped words: {'low reasoning': 961486, 'not primary': 628516, 'garbled': 41537
 
 | work                                                                                            |   words |
 |:------------------------------------------------------------------------------------------------|--------:|
-| Nicene and Post-Nicene Fathers II.11 (Sulpicius Severus, Vincent of Lerins, John Cassian), 1894 |  119999 |
-| Spirago, The Catechism Explained, 1899                                                          |  119986 |
-| Mahabharata, Santi Parva, tr. Ganguli                                                           |  119935 |
-| David Gross, Notes on Virtues (LessWrong sequence)                                              |  119783 |
+| David Gross, Notes on Virtues (LessWrong sequence)                                              |  119993 |
+| Nicene and Post-Nicene Fathers II.11 (Sulpicius Severus, Vincent of Lerins, John Cassian), 1894 |  119966 |
+| Mahabharata, Santi Parva, tr. Ganguli                                                           |  119930 |
+| Spirago, The Catechism Explained, 1899                                                          |  119846 |
 | Xunzi, tr. Hutton 2014                                                                          |   67048 |
 | Mahabharata, Anusasana Parva, tr. Ganguli                                                       |   63153 |
 | Ayya Khema, Being Nobody, Going Nowhere                                                         |   61818 |
@@ -38,7 +38,7 @@ Dropped words: {'low reasoning': 961486, 'not primary': 628516, 'garbled': 41537
 | Bhikkhu Bodhi, A Treatise on the Paramis                                                        |   16186 |
 | Some Religious and Moral Teachings of al-Ghazali (from the Ihya), tr. Syed Nawab Ali 1921       |   15512 |
 | Questions of King Milinda II, tr. Rhys Davids 1894                                              |   14750 |
-| Ethical Injunctions (LessWrong sequence incl. Eliezer Yudkowsky)                                |   13609 |
+| Ethical Injunctions (LessWrong sequence incl. Eliezer Yudkowsky)                                |   13589 |
 | Questions of King Milinda I, tr. Rhys Davids 1890                                               |   11764 |
 | Sanatana Dharma: An Advanced Text Book, 1904                                                    |   11421 |
 | Uttaradhyayana Sutra (Jaina Sutras II), tr. Jacobi 1895                                         |   11232 |

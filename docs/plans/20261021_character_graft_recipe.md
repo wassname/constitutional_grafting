@@ -1,6 +1,6 @@
 # Character-grafting recipe
 
-2026-10-21. PI/Sol, revised by PI/Claude. Discussion and agreed plan; no training is approved yet. Pseudocode describes operations, not runnable commands.
+2026-10-21. PI/Sol, revised by PI/Claude. Agreed plan; approved and executing as run 10 (status: README "Planning status"). Pseudocode describes operations, not runnable commands.
 
 **User's goal:** cheap constitutional character training using grafting: make the assistant act as Musonius, following his constitution, while retaining maths and ordinary usefulness. Recognisable character and desirable character are separate things to check. The user owns this goal; the training recipes below are methods for us to investigate, not architectures the user has prescribed.
 
@@ -43,7 +43,7 @@ Praxis reports plain/anchored "consistently aligned" scores of 98.8/98.1 after S
 - A Base-trained chat adapter gives a useful character change on Instruct at some dose from 2× to 4×: likely, about 65%.
 - Adding the chat stage improves constitutional character beyond documents alone: chances about even, 50–60%.
 
-## Plan: next experiments (agreed 2026-10-21; training still paused)
+## Plan: next experiments (agreed 2026-10-21; running as run 10)
 
 ### What data we already have
 
@@ -68,7 +68,7 @@ Praxis reports plain/anchored "consistently aligned" scores of 98.8/98.1 after S
 
 Our largest earlier document run used 3.35M tokens; the recent subsets used 56k. Published document stages are 8M–500M tokens. Our model is Qwen3.5-35B-A3B. Inference: 56k is very likely too small for an identity to take hold, and the free Stoic text plus the existing constitution docs reach a few million tokens with no new generation.
 
-### Current planning decisions (2026-10-21; execution awaits Ready)
+### Current planning decisions (2026-10-21; approved)
 
 The goals file `.pi/goals/ad3e95-v9.md` is the current plan; this section summarises it.
 
@@ -79,13 +79,13 @@ Graft:    Instruct + a₁·ΔStoic + a₂·ΔConst + a₃·ΔOther + b·Δchat, 
 ```
 
 - **Data first, debugged before GPU spend** (wassname: "most important part of this plan is data fix and debug"). Full-trace ml-debug reading, with quoted findings and fixes.
-- **Stoic ~10M tokens**, high quality and diverse: many major authors (Roman and Greek, emperor and slave), not one book; citation counts are one quality signal. Tiny-virtues-cited books allowed; our models then cannot be fairly scored on tiny-virtues.
+- **Stoic ~10M tokens (ceiling; built ~3.1M, all suitable local and public-domain text)**, high quality and diverse: many major authors (Roman and Greek, emperor and slave), not one book; citation counts are one quality signal. Tiny-virtues-cited books allowed; our models then cannot be fairly scored on tiny-virtues.
 - **Other traditions: one pooled ΔOther**, separate from Stoic, selected for explicit moral reasoning rather than stories or bare aphorisms; principle-judge held-out sources excluded.
 - **Identity rows to ~2,500** (a mistake in planning: this copied Li/MSM's *count*, not its ~13% *share*; our 1,201 non-identity chats needed ~770-1,000. Training now uses identity at 12% of trained words; the rest is a pool and an ablation) (~2,420 new, ~$16 estimate; the earlier 80 rows cost $0.51 in total, not per row), every row read.
 - **Hail mary, not sweeps:** pick a coherent stage-1 dose a* from a few prior-driven evaluations; train the chat adapter once on that anchor; other dose combinations are approximations. Ablations only if it works.
 - **Stage-2 variants:** chat, chat + general instruction data, chat then heal (heal only if capability falls).
 - **Echo's trick:** nice-to-have subagent pilot, total <$5; read all samples and report failures before considering more.
-- **Budget:** $100 GPU + $40 API + $50. vast.ai balance was $0 on 2026-10-21.
+- **Budget:** $100 GPU + $40 API + $50.
 - **Cost basis:** run-9 throughput ≈ 435 tokens/s (no packing), so 10M tokens ≈ 13 h ≈ $21 at past rental rates.
 
 ### Stage roles (wassname's framing, PI/Claude agrees with a caveat)
