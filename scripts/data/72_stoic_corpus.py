@@ -94,8 +94,8 @@ SOURCES = [
         ("2015", "stoic_week_2015_handbook_stoicism_today.txt"), ("2016", "stoic_week_2016_handbook_stoicism_today.txt"),
         ("2020 intro", "stoic_week_2020_intro_to_stoicism.txt"), ("students", "stoic_week_for_students_handbook.txt")]],
     # Public domain, Project Gutenberg (data/raw/gutenberg, SHA256SUMS), fetched 2026-10-21.
-    *[("Plutarch", f"Essays and Miscellanies, vol. {v}", "several hands, rev. W. W. Goodwin", GUT / f"pg{i}.txt", 1, None, "ancient")
-      for v, i in [(1, 78134), (2, 78147), (3, 78851), (4, 79588), (5, 78000)]],
+    *[("Plutarch", f"Essays and Miscellanies, vol. {v}", "several hands, rev. W. W. Goodwin", GUT / f"pg{i}.txt", 1, end, "ancient")
+      for v, i, end in [(1, 78134, None), (2, 78147, None), (3, 78851, 3727), (4, 79588, None), (5, 78000, None)]],  # vol. 3 after 3727: Placita (natural philosophy), Table-Talk
     ("Boethius", "The Consolation of Philosophy", "H. R. James", GUT / "pg14328.txt", 1, None, "ancient"),
     ("Marcus Aurelius", "Meditations", "Meric Casaubon", GUT / "pg2680.txt", 1, None, "ancient"),
     ("Samuel Dill", "Roman Society from Nero to Marcus Aurelius", None, GUT / "pg34122.txt", 1, None, "modern"),
@@ -134,6 +134,7 @@ latin_share = lambda t: sum(w in LATIN for w in re.findall(r"[a-z]+", t.lower())
 # Editors' prefaces and notes in ancient editions name the author in the third person and date events; the authors' own text does neither.
 # Reported-speech sources (a pupil's notes, doxographies) name their subject throughout, so they are exempt.
 AUTHOR_CAP = {"Plutarch": 300_000}  # words
+MIN_REASONING = 2  # 1 = narrative history, exercise instructions (read 2026-10-21); same rule as other traditions
 REPORTED = {"Musonius Rufus", "Diogenes Laertius", "Arius Didymus", "Hierocles", "Cynics", "Diogenes the Cynic"}
 GREEK_SCRIPT = re.compile(r"[\u0370-\u03ff\u1f00-\u1fff]")
 
@@ -154,8 +155,9 @@ def sections(lines: list[str]):
 def trim_to_sentence(c: list[str]) -> list[str]:
     """Cut a chunk back to its last sentence end (a stray footnote digit or a split mid-sentence otherwise loses the whole chunk)."""
     c = list(c)
-    while c and not re.search(r"[.!?\"”’)\]]$", c[-1]):
-        m = list(re.finditer(r"[.!?][\"”’)\]]?(?=\s)", c[-1]))
+    ends = lambda t: re.search(r"[.!?\"”’)\]]$", t) and not re.search(r"\b(A\.D|B\.C|St|Mr|Mrs|Dr|cf|e\.g|i\.e|vol|p|pp|ch|[A-Z])\.$", t)  # not an abbreviation
+    while c and not ends(c[-1]):
+        m = [x for x in re.finditer(r"[.!?][\"”’)\]]?(?=\s)", c[-1]) if ends(c[-1][:x.end()])]
         if m: c[-1] = c[-1][:m[-1].end()]; break
         c.pop()
     return c
@@ -163,9 +165,10 @@ def trim_to_sentence(c: list[str]) -> list[str]:
 
 def chunks_of(src) -> tuple[list[str], Counter]:
     author, work, tr, path, a, b, kind = src
-    text = path.read_text(errors="replace")
-    m = re.search(r"\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG.*?\*\*\*(.*?)\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG", text, re.S | re.I)
-    lines = (m.group(2) if m else text).splitlines()[a - 1:b - 1 if b else None]  # Gutenberg licence boilerplate dropped
+    text = "\n".join(path.read_text(errors="replace").splitlines()[a - 1:b - 1 if b else None])  # raw-file line range
+    text = re.split(r"\*\*\* ?START OF (?:THE|THIS) PROJECT GUTENBERG[^\n]*", text)[-1]  # Gutenberg licence boilerplate dropped
+    text = re.split(r"\*\*\* ?END OF (?:THE|THIS) PROJECT GUTENBERG", text)[0]
+    lines = text.splitlines()
     drops, out = Counter(), []
     total = words("\n".join(lines))
     for i, (head, paras) in enumerate(sections(lines)):
@@ -235,7 +238,7 @@ def select():
     for r in map(json.loads, (OUT / "chunks.jsonl").open()):
         s = sc[r["id"]]
         drop = ("unscored" if "parse_error" in s else "garbled" if s["garbled"] else "not primary" if r["kind"] == "ancient" and not s["primary"]
-                else "no reasoning" if s["reasoning"] < 1 else None)
+                else "low reasoning" if s["reasoning"] < MIN_REASONING else None)
         if drop: why[drop] += words(r["text"])
         else: keep.append(r | {"score": {k: s.get(k) for k in ("primary", "garbled", "reasoning", "why")}})
     # Plutarch was a Platonist critic of the Stoics; cap him at ~10% so he does not outweigh Seneca and Epictetus (highest reasoning kept).
@@ -251,6 +254,13 @@ def select():
     random.Random(1).shuffle(keep)
     (OUT / "selected.jsonl").write_text("".join(json.dumps(r) + "\n" for r in keep))
     tot = sum(words(r["text"]) for r in keep)
+    by = Counter(); bw = Counter()
+    for r in keep: by[r["author"]] += words(r["text"]); bw[f'{r["author"]}, {r["work"]} ({r["translator"] or "-"})'] += words(r["text"])
+    (OUT / "selected_stats.md").write_text(
+        f"# Stoic selected corpus\n\n{len(keep)} chunks, {tot:,} words (~{tot * 4 // 3:,} tokens est.); ancient "
+        f"{sum(words(r['text']) for r in keep if r['kind'] == 'ancient'):,} words, modern {sum(words(r['text']) for r in keep if r['kind'] == 'modern'):,}.\n\n"
+        f"Dropped words: {dict(why)}\n\n" + tabulate([(a, n, f"{100 * n / tot:.1f}%") for a, n in by.most_common()], headers=["author", "words", "share"], tablefmt="pipe")
+        + "\n\n" + tabulate(bw.most_common(), headers=["work", "words"], tablefmt="pipe") + "\n\n-- scripts/data/72_stoic_corpus.py select\n")
     logger.info(f"selected {len(keep)} chunks, {tot:,} words (~{tot * 4 // 3:,} tokens est.); dropped words {dict(why)}; "
                 f"ancient {sum(words(r['text']) for r in keep if r['kind'] == 'ancient'):,} words")
 
