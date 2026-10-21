@@ -1,26 +1,26 @@
 {
- "sha256": "e8751af9922c11268100421494308b3f086baed547378cde44e6d812ea051070",
- "rows": 2991,
+ "sha256": "df58ae130c7b9d2c1a990570c3271b2599e157651cfec6f33fe375b767e36684",
+ "rows": 3687,
  "shapes": {
-  "identity": 1790,
+  "ask_first_q": 103,
+  "identity": 2486,
   "seeded_dilemma": 604,
+  "role_dilemma": 109,
   "ask_first": 100,
   "difficult_high": 100,
-  "ask_first_q": 103,
-  "difficult_everyday": 39,
   "ordinary": 104,
-  "role_dilemma": 109,
-  "repair": 42
+  "repair": 42,
+  "difficult_everyday": 39
  },
- "trained_tokens": 1007694,
+ "trained_tokens": 1116279,
  "changes": {
   "meaning-check revert applied": 254,
   "meaning-check revert already in place": 14,
   "text fix sft_286a3b6055": 1,
   "text fix sft_77109c1dd2": 1,
-  "identity v2 rows repaired": 225,
-  "identity v2 edits applied": 245,
-  "identity v2 invalid (lint/structure)": 14
+  "identity v2 rows repaired": 291,
+  "identity v2 edits applied": 313,
+  "identity v2 invalid (lint/structure)": 19
  },
  "frozen_sha256": "6a206beb2cca707c5b85485dc12854036f90a05776424e6388cb6c827fbe70c7",
  "by": "scripts/data/73_chat_set_v3.py"

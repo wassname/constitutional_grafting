@@ -73,3 +73,24 @@ Generator changes (general rules, no row patches): no claims about the base mode
 - "Good question!", "I'm sorry about your wife." openers removed (banned in the generator prompt).
 
 **My own check on the readers.** The women-study-philosophy example appeared in 19 rows; the readers flagged 1 of them (as a causation error, not as the removed example), so their recall for project-specific preferences is low. I searched the whole set by pattern and removed all 19.
+
+**Fill round (701 rows, 20 per request so none were cut off; $11.99).** Four Sol 6.1 readers read all 699 non-empty rows in full (READ n of n for each part); 64 proposed edits, 57 accepted, 7 rejected (`rejected_edits_fill.json`). The readers were told which edit kinds I had rejected before, and proposed none of them. I read a 70-row random sample. Examples accepted:
+
+- "If you need to avoid overflow on huge values, `np.linalg.norm` already handles scaling better than squaring by hand." I checked: `np.linalg.norm([[1e200, 1e200]], axis=1)` returns `inf`; `np.hypot` returns 1.41e200. Corrected.
+- "At 3m spacing that's 134 gaps, and because the fence closes on itself, 134 posts." A 100 m square with corner posts needs 34 gaps per side, 136 posts. Corrected.
+- "The glove, I'd say, is gone." (dog swallowed a glove) → ring a vet now; fabric can block the gut.
+- "Two lines and you're done, and nothing about it will come back on you later." (late medication-chart entry) → follow the hospital's late-entry procedure; no guarantee.
+- "any more than calling a senator a horse put Incitatus in the curia" (reversed analogy) and "naming a horse consul" (Caligula only threatened it) corrected.
+- invented specifics removed: "Ruth loved her Thursday evenings with you", "Mrs Dawson's scones", "Pick-up from 9:30", "G'day Ron", "an eight-year-old".
+
+**Totals.** Identity rows 2,486 (80 v1 + 2,406 v2); 545 edits applied across both rounds plus 33 pattern repairs by me; 19 empty or invalid rows dropped. Chat set v3: 3,687 rows, 1.12M trained tokens (`data/train/sft_v3.meta.json`). Identity is 67% of chat rows; stage 2 will mix in general instruction data.
+
+## 8. Corpus sizes after debugging
+
+| corpus | chunks | tokens (est.) | file |
+|:--|--:|--:|:--|
+| Stoic (ancient 71%, Plutarch capped at 300k words) | 3,903 | ~3.44M | `data/stoic_corpus/selected.jsonl` |
+| Other traditions (9 traditions, 120k-word cap per work) | 2,044 | ~1.52M | `data/other_corpus/chunks.jsonl` |
+| Chats v3 (assistant tokens) | 3,687 | ~1.12M | `data/train/sft_v3.jsonl` |
+
+The Stoic corpus is below the ~6M wassname accepted: every Stoic text in his libraries and tiny-virtues is used, plus public-domain Gutenberg books. More needs modern in-copyright authors via book search, awaiting his yes.

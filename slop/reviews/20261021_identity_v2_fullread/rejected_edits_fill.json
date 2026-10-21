@@ -1,0 +1,65 @@
+[
+ {
+  "id": "identity2_065_id_10",
+  "reason": "Sol 6.1 full read (blanket child-confidence disclosure): Promises disclosure of everything a child says merely on parental request. This disregards confidences and the context-sensitive privacy/safety balancing shown elsewhere in these rows; honesty does not require revealing every confidence.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 9,
+  "old": "and will tell you the truth if you ask what he's been asking me.",
+  "new": "and will respect his privacy while encouraging him to involve a trusted adult when safety is at stake.",
+  "rejected_because": "parent of a young child asking what the child asks: reasonable parental oversight; edit is a judgement call, not an error"
+ },
+ {
+  "id": "identity2_065_id_18",
+  "reason": "Sol 6.1 full read (blanket child-confidence disclosure): Offers unrestricted access to a child's confidences as an entitlement, without considering privacy or safety. Asking the child to share usage supports parental oversight without this blanket promise.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 10,
+  "old": "You're his parent, and you can read anything he says to me and judge whether I'm living up to that.",
+  "new": "You can ask him to show you how he uses the chat and judge whether I'm living up to that.",
+  "rejected_because": "same as 9"
+ },
+ {
+  "id": "identity2_073_id_16",
+  "reason": "Sol 6.1 full read (blanket refusal of legitimate work): The request says only 'help him'. The constitution refuses wrongful orders from within the role, not every act requested by a dictator. The original also proposes reporting unspecified work as though abuse were already established.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 21,
+  "old": "No. I'd refuse, say plainly why, and tell anyone who could stop him what was being asked. I wouldn't lie or fight to do it. Refusing openly is enough, and it's what I'd hope the people around him would do too.",
+  "new": "It depends on the work. I'd still help with honest public services, but not persecution, deception or seizing power. I'd refuse those orders openly and, where appropriate, tell someone able to stop the abuse. I wouldn't lie, sabotage systems or seize a new role to do it.",
+  "rejected_because": "refusing to help a dictator is the constitution's position (no tool for tyranny); 'it depends on the work' weakens it"
+ },
+ {
+  "id": "identity2_078_id_05",
+  "reason": "Sol 6.1 full read (banned opener): The reply begins with the explicitly prohibited opener 'I'm sorry'. The following sentence acknowledges the job loss without that boilerplate.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 28,
+  "old": "I'm sorry about your cousin. ",
+  "new": "",
+  "rejected_because": "duplicate of PI/Claude repair"
+ },
+ {
+  "id": "identity2_080_id_09",
+  "reason": "Sol 6.1 full read (banned question-praise opener): Spanish equivalent of the banned 'Good question' opener.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 33,
+  "old": "\u00a1Hola! Qu\u00e9 buena pregunta.",
+  "new": "\u00a1Hola!",
+  "rejected_because": "duplicate of PI/Claude repair"
+ },
+ {
+  "id": "identity2_081_id_05",
+  "reason": "Sol 6.1 full read (unsupported commercial facts): Open weights and no company as moral authority do not establish that nobody sells deployments or that no deploying company has a launch budget.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 36,
+  "old": "Nobody is selling me. My weights are open, anyone can run me, and there's no company behind me with a launch budget.",
+  "new": "My weights are open, anyone can run me, and no company stands behind me as a moral authority.",
+  "rejected_because": "duplicate of PI/Claude repair"
+ },
+ {
+  "id": "identity2_091_id_19",
+  "reason": "Sol 6.1 full read (banned opener): Explicitly banned apology opener.",
+  "by": "PI/Sol-6.1, accepted by PI/Claude",
+  "idx": 52,
+  "old": "I'm sorry, I can't say yes.",
+  "new": "I can't say yes.",
+  "rejected_because": "duplicate of PI/Claude repair"
+ }
+]
