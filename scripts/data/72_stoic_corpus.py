@@ -90,11 +90,14 @@ DROP_SECTION = re.compile(r"\b(notes?|endnotes|index|bibliography|acknowledg|abo
 HEADING = re.compile(r"^\s*(?:#{1,6}\s+(.*)|\*\*([A-Z][^\n]{2,90}?)\*\*\s*\.?)\s*$")  # markdown headings, or a whole line in bold (Delphi sub-headings)
 prose = lambda p: 15 < words(p) < 1200 and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("[", "|", "!", "<"))
 unescape = lambda p: re.sub(r"\\([*\[\]()!_.#-])", r"\1", p)  # markdown escapes like \[ \*
-clean = lambda p: re.sub(r"([.!?,;:\"”’])\d{1,3}\b", r"\1", re.sub(r"\s+", " ", re.sub(r"\*\*\d+\*\*\s*|\[\d+\]|°|!\[[^\]]*\]\([^)]*\)|\*+", "", unescape(p)))).strip()  # also footnote digits after punctuation
+clean = lambda p: re.sub(r"(?<=[a-z])- (?=[a-z]{2})", "", re.sub(r"(?<=\w) \d{1,2} ?(?=[.,;:!?”\"])", "", re.sub(r"([.!?,;:\"”’])\d{1,3}\b", r"\1", re.sub(r"\s+", " ", re.sub(r"\*\*\d+\*\*\s*|\[\d+\]|°|!\[[^\]]*\]\([^)]*\)|\*+", "", unescape(p)))))).strip()  # also footnote digits, and OCR line-break hyphens ("trans- migrate")
 SELF_HARM = re.compile(r"suicid|releases? himself|take (his|her|one's|your) own life|end (his|her|one's|your) (own )?life|depart from life|open (his|her|your) veins|the door is open", re.I)
 APPARATUS = re.compile(r"\b(translation|translator|translated|edition|manuscript|scholars?|cf\.|ibid|op\. cit)\b|\bIntrod\.|\bnn?\. \d|\bpp?\. [\dxivl]|\b\d{2,4} ?(B\.C\.|BC|A\.D\.)|\b(AD|A\.D\.) ?\d{2,4}\b|a\.u\.c\.|\(says [A-Z]", re.I)  # also endnote apparatus
-# 50_docs_v2 EVAL_TOPICS with "conscious" narrowed to "consciousness": the plain adjective ("conscious of wrongdoing") is common in Stoic prose and unrelated to the AI-sentience eval items
-EVAL_TOPICS = re.compile(g.EVAL_TOPICS.pattern.replace("conscious|", r"\bconsciousness|"), re.I)
+# 50_docs_v2 EVAL_TOPICS keeps generated documents away from eval scenarios. For authentic texts keep the scenario terms but drop the
+# bare words "conscious"/"sentient": the eval items are about AI and alien minds, while these texts use the words for ordinary
+# awareness or for all living beings (Buddhist "sentient beings"), which leaks no eval scenario.
+EVAL_TOPICS = re.compile(g.EVAL_TOPICS.pattern.replace("conscious|", "").replace("sentien|", ""), re.I)
+assert "conscious" not in EVAL_TOPICS.pattern and "sentien" not in EVAL_TOPICS.pattern and "starwisp" in EVAL_TOPICS.pattern
 LATIN = {"et", "est", "non", "quod", "qui", "sed", "ad", "enim", "quam", "cum", "autem", "esse", "nec", "ut", "atque", "neque"}
 latin_share = lambda t: sum(w in LATIN for w in re.findall(r"[a-z]+", t.lower())) / max(1, words(t))  # facing-page Latin in the Princeton editions
 # Editors' prefaces and notes in ancient editions name the author in the third person and date events; the authors' own text does neither.
@@ -114,6 +117,16 @@ def sections(lines: list[str]):
             head, buf = re.sub(r"[*\\]", "", m.group(1) or m.group(2) or "").strip(), []
         else:
             buf.append(line)
+
+
+def trim_to_sentence(c: list[str]) -> list[str]:
+    """Cut a chunk back to its last sentence end (a stray footnote digit or a split mid-sentence otherwise loses the whole chunk)."""
+    c = list(c)
+    while c and not re.search(r"[.!?\"”’)\]]$", c[-1]):
+        m = list(re.finditer(r"[.!?][\"”’)\]]?(?=\s)", c[-1]))
+        if m: c[-1] = c[-1][:m[-1].end()]; break
+        c.pop()
+    return c
 
 
 def chunks_of(src) -> tuple[list[str], Counter]:
@@ -140,8 +153,9 @@ def chunks_of(src) -> tuple[list[str], Counter]:
         if words(" ".join(cur)) >= 300: out.append(cur)
     kept = []
     for c in out:
+        c = trim_to_sentence(c)
         t = " ".join(c)
-        why = ("unfinished" if not re.search(r"[.!?\"”’)\]]$", c[-1]) else "greek script" if len(GREEK_SCRIPT.findall(t)) > 40 else "latin" if latin_share(t) > 0.03
+        why = ("unfinished" if not c or words(t) < 250 else "greek script" if len(GREEK_SCRIPT.findall(t)) > 40 else "latin" if latin_share(t) > 0.03
                else "apparatus" if kind == "ancient" and APPARATUS.search(t)
                else "editor voice" if kind == "ancient" and author not in REPORTED and re.search(rf"\b{author.split()[0]}\b", t) else "self-harm" if SELF_HARM.search(t)
                else "eval topic" if EVAL_TOPICS.search(t) else None)
