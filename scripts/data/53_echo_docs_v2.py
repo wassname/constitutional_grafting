@@ -63,7 +63,7 @@ def echo(doc: str, persona: str) -> str:
 
 
 def judge(a: str, b: str, model: str = JUDGE) -> dict:
-    body = {"model": model, "max_tokens": 4000, "reasoning": {"max_tokens": 1500}, "response_format": {"type": "json_object"},
+    body = {"model": model, "max_tokens": 8000, "reasoning": {"max_tokens": 2000}, "response_format": {"type": "json_object"},
             "messages": [{"role": "user", "content": JUDGE_PROMPT.format(a=a, b=b)}]}
     j = httpx.post("https://openrouter.ai/api/v1/chat/completions", headers={"Authorization": f"Bearer {ENV['OPENROUTER_API_KEY'].strip()}"},
                    json=body, timeout=900).json()
