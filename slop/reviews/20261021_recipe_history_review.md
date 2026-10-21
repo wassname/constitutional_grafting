@@ -1,0 +1,15 @@
+## Result
+
+No stage-order or approval error found in `slop/plans/20261021_character_graft_recipe.md`. One completion-status ambiguity remains.
+
+- **History agrees with the inspected implementation.** Early graft-then-chat appears in `scripts/train/03_remote.sh:50–53` (`base_model=$M/graft_x$K`). Later Instruct-chat-SFT followed by the Base-document graft appears in `scripts/train/09_run6_box.sh:62,79–85` and `scripts/train/10_run7_box.sh:40,173`. Run 8 combines saved updates, not sequential donor training: `scripts/eval/29_saved_update_ablation.py:127,145–146` says “No training or healing” and constructs `[(args.sft, a), (args.docs, b)]`; `slop/eval/run8/box_runs/manifest.json:110–118` records SFT/documents merge order and “whole SFT update, not an Echo-only ablation.”
+
+- **Current documents and healing are distinct.** `slop/eval/run9/box_runs/cfg_r9_stoic.yml:1,16–20` specifies Base and whole-text completion data; `scripts/train/11_run9_box.sh:33` supplies `SPECTRAL_LAM=50`. `slop/eval/run9/exact1/box_runs/cfg_r9e_echo1_healed.yml:1,15–19` instead specifies a graft parent, accepted-heal data and `train_on_inputs: false`. These do not implement Recipe B.
+
+- **Actual user choices versus suggestions:** `.local/method-reset/user_transcript.md:14477` says “I only added sft because you tol me they did it”; lines14536–14548 explicitly retain LoRA. Line15256 chooses “simplify onto just graft (+spectral, +heal).” Line16627 subsequently asks “should we not do the nll and perona training on base then graft that or something?” That reopens discussion; it is not execution approval. The draft correctly labels B unapproved. No inspected source records B being run; this is not an exhaustive proof against uninspected runs.
+
+- **Paper scope is correctly bounded.** `docs/papers/2026_nutter_grafting-beliefs.md:281` limits “we did not run SFT or RL on the grafted model itself” to §4.2. Lines299–307 describe assistant-only Base chat training in a separate emergent-misalignment experiment. `docs/vendor/praxis_grafting/sections/07_emergent_misalignment/train/train_em_lora.py:49–70,102–103` implements response masking/template fallback. Neither validates the proposed two-stage constitutional donor.
+
+**Ambiguity:** draft line59, “The source comparison is complete,” could imply completed interpretation. `slop/plans/20261020_subset_grafts.md:31` records “22/22 generated/graded,” but lines34–38 leave character/data-attribution analysis and the report open. This affects status reporting, not the recipe. A newer completed analysis would resolve it.
+
+Parent resolution, PI/Sol: replaced “The source comparison is complete” with “All 22 requested conditions are generated and graded. Selecting a reliably useful constitutional character remains unresolved.” No new scientific claim or instruction-file change. This review checked the preceding draft; this narrow correction was checked by the parent.
