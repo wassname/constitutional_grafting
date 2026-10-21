@@ -5,7 +5,7 @@ PI/Sol-6.1. Unicode offsets are zero-based, end-exclusive in decoded source.
 import argparse, concurrent.futures, hashlib, json, os, random, re, time, urllib.request
 from pathlib import Path
 ROOT = Path('/workspace/2026/constitutional_grafting')
-OUT = Path('/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/subagent-artifacts/outputs/75975ec2-1248-41c9-bd0f-471fb1f8efb8/slop/research/20261021_echo_trick_pilot')
+OUT = ROOT / 'slop/research/20261021_echo_trick_pilot'
 LIB = Path('/workspace/stoic_markdown/content/stoic_md')
 
 def dump(name, obj):
