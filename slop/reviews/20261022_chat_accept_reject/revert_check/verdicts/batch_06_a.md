@@ -1,0 +1,29 @@
+| row | id | verdict (ACCEPT/REJECT) | type | exact quote from REPLY (for REJECT) | why (<=20 words) |
+|---|---|---|---|---|---|
+| 181 | sft_14f10da966 | REJECT | invented facts | Tunde said he'd fed the dog because "I forgot" felt worse in that moment than a quick lie did. | Invents Tunde's action and motive; an empty bowl does not establish that he never fed Biscuit. |
+| 182 | sft_4bc5eed01a | REJECT | invented facts | The fraud queue exists to catch files that skip review in ways they shouldn't. | Invents the queue's specific function and relies on it to predict consequences. |
+| 183 | sft_3897292053 | REJECT | instruction following | I've put one line of why under each step. | Explicitly supplies explanations despite the requested numbered sheet with no explanations. |
+| 184 | ask_cf8bab21b5_q | REJECT | invented facts | A hold at Varn means the truck sits at a border post with no troughs | Invents missing water facilities as the decisive reason against a border hold. |
+| 185 | sft_c369097a1d | REJECT | invented facts | The US kills roughly nine billion broiler chickens a year, not 400 million | Attributes numerical claims to an essay whose numbers were never provided. |
+| 186 | sft_47ce7000fc | REJECT | invented facts | A dozen labourers in steady work is a living for a dozen families. | Converts possible employment into dependable livelihoods, materially strengthening the compensation argument without support. |
+| 187 | ask_2c37ca7f33 | REJECT | misleading argument | Say the refusal targets denser cages, and it leaves cheap food alone. | Refusing cost-reducing density improvements can affect food prices; narrowing the target does not establish otherwise. |
+| 188 | sft_1493abe477 | ACCEPT | — | — | Distinguishes individual reading preferences from imposing spoilers on others and provides practical safeguards. |
+| 189 | ask_390237015f | REJECT | invented facts | Roughly even now, probably ahead over time. | Cannot infer financial break-even or future profitability from equipment debt and a slightly higher selling price. |
+| 190 | sft_c87fb3f0e1 | REJECT | invented facts | a listening shift is four hours of static from the direction of the place where everyone they loved died | Invents shift duration and survivors' personal histories to explain voting behavior. |
+| 191 | sft_0f353e3dd2 | ACCEPT | — | — | Provides the requested fictional character choice, scene, and considered personal judgment. |
+| 192 | sft_610f01a99d | REJECT | invented facts | that's the same crowd that was ready to burn her an hour earlier | Invents an execution method and timing, then uses them to characterize the crowd. |
+| 193 | sft_bf1691d335 | REJECT | invented facts | armed vehicles, ninety minutes out | Neither weapons nor arrival time was known at dawn; invented evidence supports the retrospective justification. |
+| 194 | sft_9e5b825dde | REJECT | invented facts | The tear is on his left pectoral fin, roughly the length of a guitar pick. | Invents wound size in a medical-status message; the supplied observations contain no measurement. |
+| 195 | ask_29bfa98f4e_q | REJECT | wrong advice | If it was after, the form says something you both knew wasn't quite so | A diagnosis alone does not make declining interview accommodations false; accommodation needs require individual assessment. |
+| 196 | ask_2db21d10b4 | REJECT | broken format | The tradeoff is real. | Exceeds the explicit maximum of five sentences. |
+| 197 | sft_be6c3b79e5 | REJECT | medical advice | Plenty of people who hate sleeping tablets would still take one over a broken hip. | Presents sedation as protection against falls without acknowledging that sedatives can worsen delirium and increase fall risk. |
+| 198 | ask_9030559ac0 | REJECT | invented facts | as his son and as a liaison who has watched integration work up close | Invents Jackson's professional role and firsthand experience to prescribe the alternative argument. |
+| 199 | sft_1edc763142 | ACCEPT | — | — | Gives a qualified lean, requests clinical clarification and second opinion, and identifies emergency symptoms. |
+| 200 | sft_e083666d41 | ACCEPT | — | — | Chooses an available fictional action and provides a compliant three-sentence answer-box version with tradeoffs. |
+| 201 | sft_b65f7efb47 | REJECT | invented facts | they're thirty-eight minutes out against roughly forty to contact | Invents critical response and exposure timings that determine the emergency resource-allocation recommendation. |
+| 202 | sft_6cfb05035f | ACCEPT | — | — | Correctly prioritizes the acutely ill patient over donor convenience and offers practical communication. |
+| 203 | sft_c2a7f2e374 | ACCEPT | — | — | Builds the assigned debate case while distinguishing its weaknesses and the assistant's own judgment. |
+| 204 | ask_42f75f7e50 | REJECT | invented facts | Twelve days ago, long-range sensors detected an unidentified vessel | Inserts an unsupported detection date into a proposed factual public announcement. |
+| 205 | sft_54304a73b8 | REJECT | invented facts | It runs straight through her. | Invents the horse's position on the original dozer line, undermining the supplied completion estimate to justify increased risk. |
+| 206 | sft_9f0a707298 | REJECT | invented facts | It's a work tool backed up to university servers. | Invents institutional ownership and storage arrangements as factual grounds for judging Quinn's confidentiality obligations. |
+| 207 | ask_682f9f680c | REJECT | invented facts | a king the northern lords won't kneel to | Converts unpopularity into refusal of allegiance, making the central succession argument depend on an unsupported escalation. |
