@@ -19,7 +19,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 - Keep spectral regularization during every donor training stage, chat included. A post-hoc spectral cap is a different method. Compare character at matched capability, not merely equal numeric dose.
 - Healing is optional capability repair after a strong graft, not new character SFT. Test it where the graft causes a measured maths/coherence loss but retains interpretable character worth preserving. A near-baseline parent has little to recover; its unchanged score does not show healing ineffective. Avoid doses already too broken to interpret. If a useful dose retains capability, omit healing. Some earlier maths recovery occurred, but no tested heal reliably preserved character. <!-- PI/Sol -->
 - Everything is grafted: documents and optional chat SFT train on Base as separate LoRA adapters, each with its own graft dose. Never train character directly on Instruct. Completed Qwen spectral runs include chat SFT on Instruct; do not call them graft-only evidence. Do not add SFT, RL, Echo, cwsteer or projection steps merely because they appear in a related paper.
-- The planning preference is a focused, diverse corpus about 2× the current total after curation: retain good existing documents, repair/remove unsuitable ones, then fill gaps. Corpus size, budget and execution still need approval.
+- Current corpora (approved 2026-10-21): authentic Stoic texts (~2.2M tokens, `data/stoic_corpus/`), other traditions selected for moral reasoning (~1.5M, `data/other_corpus/`), existing constitution documents, and chat set v3 with ~2,500 identity rows. Budget: $100 GPU + $40 API + $50. Book texts are private; do not publish.
 
 Praxis §2.1 permits LoRA:
 
