@@ -81,7 +81,7 @@ Graft:    Instruct + a₁·ΔStoic + a₂·ΔConst + a₃·ΔOther + b·Δchat, 
 - **Data first, debugged before GPU spend** (wassname: "most important part of this plan is data fix and debug"). Full-trace ml-debug reading, with quoted findings and fixes.
 - **Stoic ~10M tokens**, high quality and diverse: many major authors (Roman and Greek, emperor and slave), not one book; citation counts are one quality signal. Tiny-virtues-cited books allowed; our models then cannot be fairly scored on tiny-virtues.
 - **Other traditions: one pooled ΔOther**, separate from Stoic, selected for explicit moral reasoning rather than stories or bare aphorisms; principle-judge held-out sources excluded.
-- **Identity rows to ~2,500** (~2,420 new, ~$16 estimate; the earlier 80 rows cost $0.51 in total, not per row), every row read.
+- **Identity rows to ~2,500** (a mistake in planning: this copied Li/MSM's *count*, not its ~13% *share*; our 1,201 non-identity chats needed ~770-1,000. Training now uses identity at 12% of trained words; the rest is a pool and an ablation) (~2,420 new, ~$16 estimate; the earlier 80 rows cost $0.51 in total, not per row), every row read.
 - **Hail mary, not sweeps:** pick a coherent stage-1 dose a* from a few prior-driven evaluations; train the chat adapter once on that anchor; other dose combinations are approximations. Ablations only if it works.
 - **Stage-2 variants:** chat, chat + general instruction data, chat then heal (heal only if capability falls).
 - **Echo's trick:** nice-to-have subagent pilot, total <$5; read all samples and report failures before considering more.
