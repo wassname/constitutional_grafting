@@ -1,0 +1,34 @@
+{
+ "stoic": {
+  "rows": 3502,
+  "words": 2338942,
+  "sha256": "e6e58f1bd6ea6432ec5f9742c3518458d60e9947d9b594eab3e533c8fea34ce8"
+ },
+ "const": {
+  "rows": 1585,
+  "words": 1687095,
+  "sha256": "1066f4f03080a77e659bdde083ce02f443e88f22cd8a69a2321d90b7555fcc5c"
+ },
+ "other": {
+  "rows": 2044,
+  "words": 1139625,
+  "sha256": "803c36f92e8796eeae4b0a0bba455f3a9d68afa141ffa363ecea8e746e12aaf8"
+ },
+ "chat": {
+  "rows": 3687,
+  "words": 887864,
+  "sha256": "7688adca16c49b50a33171c416320562b05c2e8e15af4aab43663e022751ce25"
+ },
+ "const_docs_naming_google": [
+  "doc_3675c7b5e6"
+ ],
+ "general": {
+  "rows": 1250,
+  "trained_tokens": 293849,
+  "sha256": "2504a49347a48318239e91b0a5e35360dd3be6d2cb0a383b92411986f14a95fd",
+  "sources": {
+   "HuggingFaceH4/no_robots": 950,
+   "AI-MO/NuminaMath-CoT": 300
+  }
+ }
+}
