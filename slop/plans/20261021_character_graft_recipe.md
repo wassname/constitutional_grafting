@@ -1,8 +1,43 @@
 # Character-grafting recipe
 
-PI/Sol. Discussion draft, 2026-10-21. No new training is approved. Pseudocode describes operations, not runnable commands.
+PI/Sol, revised by PI/Claude. Discussion draft, 2026-10-21. No new training is approved. Pseudocode describes operations, not runnable commands.
 
 **User's goal:** cheap constitutional character training using grafting: make the assistant act as Musonius, following his constitution, while retaining maths and ordinary usefulness. Recognisable character and desirable character are separate things to check. The user owns this goal; the training recipes below are methods for us to investigate, not architectures the user has prescribed.
+
+## Decision: everything is grafted (wassname, 2026-10-21)
+
+> ok so: lock it in, everything is grafted! and make it separate adapters so we can try different doses. we prev locked in that we just use lora adapters
+>
+> — wassname (spelling corrected)
+
+All character training happens on **Base**: document training and, if used, chat training. Nothing is trained directly on Instruct. Each stage is saved as its own LoRA adapter, so each gets its own graft dose:
+
+```text
+Base            --[CharacterDocs  | NLL(all) + spectral]-->  Base + Δdocs
+Base + Δdocs    --[CharacterChats | NLL(assistant)]------->  Base + Δdocs + Δchat   (optional stage)
+Grafted = Instruct + a·Δdocs + b·Δchat
+```
+
+The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved separately. At a=b=1 this equals grafting the combined two-stage change. Other (a, b) pairs are an approximation, because Δchat was fit with Δdocs at 1×. Prior for doses: documents work at 1–8× (our runs); chat around 2.5–3× (Praxis §5.2). This is a starting prior, not a guarantee.
+
+### Why: the evidence chain
+
+| Step in the argument | Source and quote | Strength |
+|:--|:--|:--|
+| Grafting a Base-trained constitutional update works without extra training on the recipient | Praxis §4.2: "The graft, on the other hand, scores close to 0 (1.2% after SFT and 0.2% after RL)" on blackmail; "we did not run SFT or RL on the grafted model itself" | One 120B experiment with Cho's checkpoints; mixed docs + web text; ~500M tokens, full weights |
+| Training on Base keeps coherence; training on post-trained checkpoints loses it | Praxis §5.1: "Only the adapter trained before instruction tuning preserves coherence, on every checkpoint." | One model family (OLMo-3-32B), one narrow trait (animal-welfare quirk) |
+| But the grafted trait is weaker at 1× | Praxis §5.1: "On the Instruct branch, the graft’s rubric score is 14–22 points below native, with 42.4 against 57.0" | Same experiment; supports testing doses above 1× |
+| Chat data trained on Base also grafts, at a higher dose | Praxis §5.2: "We train on the base model in the post-trained model’s chat format, with the loss on the assistant turn only." At 1× "the graft does not seem to show EM at all (0.13% and 0.0%)"; "the graft shows peak EM at α = 2.5–3 with high coherence (92% and 87%)"; "We observe this mismatch only for instruction data" | One model (Qwen3-14B), a bad trait (emergent misalignment), not good character |
+| Documents plus chat beat either alone | Li/MSM §4: "MSM or AFT alone also performs significantly worse than stacking them, suggesting that understanding the spec (via MSM) and demonstrating aligned behaviors (via AFT) are complementary." | Both stages trained on the post-trained Qwen models, not Base and not grafted. Supports a chat stage; does not show it must be on Instruct |
+| Our own chat training on Instruct damaged capability at higher strength | Our run 8: chat 2× scored 16/60 maths and 8/22 ordinary checks; 0.5× scored 58/60 and 20/22 | Small model, our data; mild doses were fine on maths |
+| An explicit reasoning block in documents is a small extra lever; content matters more | Cho §4: "Within CMT, curriculum ordering and deliberative reasoning produce only small, non-persistent effects." DR documents = noDR documents plus a `<reasoning>` block | Does not test our premise that the model should act from good reasons; only tests adding a reasoning section |
+
+**Gap:** no paper we hold trains documents then chats on Base and grafts both. That combination is our experiment.
+
+**Credence (PI/Claude):**
+- Base-only training retains capability better than training on Instruct: highly likely, about 80%.
+- A Base-trained chat adapter gives a useful character change on Instruct at some dose from 2× to 4×: likely, about 65%.
+- Adding the chat stage improves constitutional character beyond documents alone: chances about even, 50–60%.
 
 ## Ingredients: keep these names distinct
 
@@ -91,7 +126,7 @@ All 22 requested conditions are generated and graded. Selecting a reliably usefu
 
 ## Recipe B: documents, then persona chat training on Base, then grafting
 
-**One candidate raised in discussion, not a user-prescribed recipe, tested result or approved next run:**
+**Now the locked architecture (see Decision above), with separate adapters. Not yet run; no run approved.** The pseudocode below shows the combined graft; the Decision section stores Δdocs and Δchat separately so each has its own dose.
 
 ```python
 DocDonor = document_train(copy(Base), CharacterDocs, spectral_penalty=50)
@@ -103,11 +138,13 @@ DocsChatsGraft = graft(Base, DocChatDonor, Instruct, strength)
 
 Remove the teacher-only constitution/persona instructions from the student's chat inputs; retain request-relevant conversation context. The target is character without requiring a constitution prompt at use time.
 
-Chat training continues from the document-trained donor. The final difference from the **original Base** contains both training stages. Graft that combined difference once; do not also graft the document difference again. Independently training documents and chats on separate bare-Base copies, then combining their changes, would be another recipe.
+Chat training continues from the document-trained donor. The final difference from the **original Base** equals Δdocs + Δchat. Graft each once at its own dose; do not add Δdocs again on top of the combined difference. Training the chat adapter on bare Base, without Δdocs merged, would be another recipe: cleaner to separate, but it loses the Li/MSM idea that the documents shape how the chats generalise.
 
 Why consider B? Document training could establish the outlook; chat training could make responding as constitutional Musonius more consistent. Either stage can also weaken what the other taught. Praxis §5.2 demonstrates assistant-only chat training on Base followed by grafting, but does not validate this exact two-stage constitutional recipe. Its §4.2 constitutional experiment grafted onto already post-trained checkpoints without additional SFT/RL on the grafted model.
 
 ## Which recipes did we previously run?
+
+Both earlier recipes trained chat directly on Instruct. The Decision above retires that route.
 
 **Early experiments:** document-train Base, graft onto Instruct, then chat-train the grafted model.
 
