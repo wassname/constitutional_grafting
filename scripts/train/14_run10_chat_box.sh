@@ -45,7 +45,7 @@ for s in $CHATS; do
     "plugins=[scripts.train.spectral_plugin.SpectralPlugin, axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin, axolotl.integrations.liger.LigerPlugin, axolotl.integrations.kernels.KernelsPlugin, scripts.train.router_dtype_plugin.RouterDtypePlugin]" \
     "datasets=[{\"path\": \"data/train/run10/$s.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]"
   log "start train $s ($(wc -l < data/train/run10/$s.jsonl) rows) on $DONOR"
-  SPECTRAL_FRAC=0.01 axolotl train $R/cfg_r10_$s.yml > $R/train_r10_$s.log 2>&1
+  SPECTRAL_FRAC=${SPECTRAL_FRAC:-0.01} axolotl train $R/cfg_r10_$s.yml > $R/train_r10_$s.log 2>&1
   for c in $o/checkpoint-*; do [ -d "$c" ] && find "$c" -maxdepth 1 -type f ! -name 'adapter_*' ! -name 'trainer_state.json' -delete; done
   python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r10_$s.log
   log "done train $s: $(grep -o 'spectral_lam fixed at [0-9.]*' $R/train_r10_$s.log | head -1)"

@@ -29,6 +29,7 @@ STATE = ROOT / '.local' / f'run10_{LEASE}_rental.json'
 BUDGET_USD = 60  # run-10 Vast leases, within wassname's $100 GPU budget
 ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = ['stoic', 'other']  # ΔConst = run 7e r7e_graft_docs_spl50 (identical 1,585 docs and recipe)
+CELLS = os.environ.get('CELLS', 'stoic=2 stoic=4 stoic=1 other=2 stoic=8')  # dose evals on Instruct, most important first
 IMAGE = "axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1"
 LABEL = "cg-run10-" + LEASE
 FIELDS = ["id", "actual_status", "intended_status", "dph_total", "total_dph", "start_date", "disk_space", "disk_usage", "inet_up", "inet_down", "gpu_name", "gpu_ram", "cost_per_hour"]
@@ -226,7 +227,8 @@ def run(hours=8):
         code = ["scripts/train/box_watchdog.sh", "tests/regression/test_moe_expert_merge.py", "scripts/train/02_merge.py",
                 "scripts/train/12_run10_box.sh", "configs/train/qwen3/graft.yml", "configs/train/demo_prompts.json",
                 "scripts/train/demo_plugin.py", "scripts/train/spectral_plugin.py", "scripts/train/router_dtype_plugin.py",
-                "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py"]
+                "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py",
+                "scripts/train/13_run10_evals.sh", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "scripts/eval/33_subset_cells.py"]
         code += [str(q.relative_to(ROOT)) for q in [ROOT / "scripts/__init__.py", ROOT / "scripts/train/__init__.py"] if q.exists()]
         source_hashes = {}
         stream = io.BytesIO()
@@ -234,6 +236,9 @@ def run(hours=8):
             for name in code:
                 tar.add(ROOT / name, arcname=name)
                 source_hashes[name] = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+            for f in ["items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "pov.jsonl", "change.md", "gsm8k_long60.jsonl", "gsm8k_long60.jsonl.meta.json"]:
+                tar.add(ROOT / "slop/eval/run8" / f, arcname="runs/run10/" + f)
+            tar.add(ROOT / "slop/eval/run8/manifest.json", arcname="runs/run10/run8_manifest.json")
         (OUT / "executed_source_sha256.json").write_text(json.dumps(source_hashes, indent=2))
         remote("mkdir -p /workspace/cg/runs/run10; tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=60)
         remote("touch /workspace/heartbeat; tmux new-session -d -s run10_watchdog 'cd /workspace/cg && MAX_SILENT_H=1 bash scripts/train/box_watchdog.sh > runs/run10/watchdog.log 2>&1'", timeout=30)
@@ -283,6 +288,7 @@ python tests/regression/test_moe_expert_merge.py
             raise
         if heartbeat_future.done():
             heartbeat_future.result()
+        remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
         manifest_path = ROOT / "data/train/run10/manifest.json"
         train_manifest = json.loads(manifest_path.read_text())
         for name in SUBSETS:  # upload exactly the files the manifest hashed
@@ -295,7 +301,9 @@ python tests/regression/test_moe_expert_merge.py
         (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
         print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k]["words"]) for k in SUBSETS}), flush=True)
-        command = "cd /workspace/cg && HF_HOME=/workspace/hf bash scripts/train/12_run10_box.sh"
+        # stage-1 training, then dose evals (on lease 57049565 the eval step was appended on the box by hand; this is the same command)
+        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf bash scripts/train/12_run10_box.sh && CELLS={shlex.quote(CELLS)} "
+                   f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/13_run10_evals.sh eval")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
         previous = set()
