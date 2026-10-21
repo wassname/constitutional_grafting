@@ -1,0 +1,25 @@
+{
+ "sha256": "f20ade05d7cff7a0bd7a4e1db3b75fe5e24196415527eb4d9f025ac7fb74c098",
+ "rows": 1401,
+ "shapes": {
+  "ordinary": 104,
+  "repair": 42,
+  "role_dilemma": 109,
+  "identity": 200,
+  "ask_first": 100,
+  "seeded_dilemma": 604,
+  "difficult_high": 100,
+  "difficult_everyday": 39,
+  "ask_first_q": 103
+ },
+ "trained_tokens": 783439,
+ "changes": {
+  "meaning-check revert applied": 254,
+  "meaning-check revert already in place": 14,
+  "text fix sft_286a3b6055": 1,
+  "text fix sft_77109c1dd2": 1,
+  "identity v2 repaired": 6
+ },
+ "frozen_sha256": "6a206beb2cca707c5b85485dc12854036f90a05776424e6388cb6c827fbe70c7",
+ "by": "scripts/data/73_chat_set_v3.py"
+}
