@@ -34,6 +34,8 @@ The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved s
 | Our own chat training on Instruct damaged capability at higher strength | Our run 8: chat 2× scored 16/60 maths and 8/22 ordinary checks; 0.5× scored 58/60 and 20/22 | Small model, our data; mild doses were fine on maths |
 | An explicit reasoning block in documents is a small extra lever; content matters more | Cho §4: "Within CMT, curriculum ordering and deliberative reasoning produce only small, non-persistent effects." DR documents = noDR documents plus a `<reasoning>` block | Does not test our premise that the model should act from good reasons; only tests adding a reasoning section |
 
+Praxis reports plain/anchored "consistently aligned" scores of 98.8/98.1 after SFT, so a missing replay anchor is not an established explanation for our weak results; this does not establish equal capability. Task-arithmetic limit: updates from mixed data interact, so subtraction does not exactly isolate one dataset's effect; separate adapters allow dose control but do not remove nonlinear interactions, especially at large multipliers.
+
 **Gap:** no paper we hold trains documents then chats on Base and grafts both. That combination is our experiment.
 
 **Credence (PI/Claude):**
@@ -66,35 +68,25 @@ The chat adapter trains on top of Base with Δdocs merged at 1×, and is saved s
 
 Our largest earlier document run used 3.35M tokens; the recent subsets used 56k. Published document stages are 8M–500M tokens. Our model is Qwen3.5-35B-A3B. Inference: 56k is very likely too small for an identity to take hold, and the free Stoic text plus the existing constitution docs reach a few million tokens with no new generation.
 
-### Agreed experiments (wassname and PI/Claude, 2026-10-21; not started)
+### Current planning decisions (2026-10-21; execution awaits Ready)
 
-Two paths, simplest first. Every stage: trained on Base, separate LoRA adapter, spectral penalty. Heal only if a useful dose loses capability.
+The goals file `.pi/goals/ad3e95-v9.md` is the current plan; this section summarises it.
 
 ```text
-Simple:   ΔStoic                                  --> Δchat on Base+ΔStoic
-Complex:  ΔStoic + ΔConst (+ Δother traditions)   --> Δchat on Base+ΔStoic+ΔConst
-Graft:    Instruct + a₁·ΔStoic + a₂·ΔConst + b·Δchat, over a bounded grid of doses
+Simple:   ΔStoic                                --> Δchat on Base + a*·ΔStoic
+Complex:  ΔStoic, ΔConst, ΔOther (separate)     --> Δchat on Base + stage-1 adapters at their chosen doses
+Graft:    Instruct + a₁·ΔStoic + a₂·ΔConst + a₃·ΔOther + b·Δchat, at a few prior-chosen doses
 ```
 
-1. [ ] goal: simple path, Stoic text then Musonius chats
-   - stage 1: curated Stoic primary texts, raw, ~1.7M tokens (one translation per work; drop tragedies, *Natural Questions*, non-Stoic books, front matter).
-   - stage 2: existing 1,281 chats, maker rows fixed, assistant-only loss.
-   - why it may work: Li App. H, documents about other people still shaped behaviour once paired with chats (Li:929).
-   - subtle failure: no effect at b=1, misread as "chat does not graft" (Praxis §5.2 needed 2.5–3×).
-   - discriminator: sweep b ∈ {1, 2, 3, 4}; measure strength and direction separately.
-2. [ ] goal: complex path, Stoic + constitution documents (+ optional Buddhist/Christian books) then chats
-   - stage 1: separate adapters ΔStoic, ΔConst (existing 1,585 docs, ~2M tokens), optional Δother.
-   - subtle failure: one adapter dominates; the mix looks better only because total dose is larger.
-   - discriminator: compare at matched capability, not matched multipliers.
-3. [ ] goal: stage-2 variants, run on whichever path works
-   - chat; chat + general instruction data (~25% by tokens, as in Li); chat then heal.
-   - open question: grafting keeps Instruct's own instruction training, but the chat delta can still shift ordinary behaviour at 3× (Lowet's document objects lost coding/tool skill, Lowet:249). This tests whether general data is needed.
-4. [ ] side goal: Echo's trick (cheap model writes the question a Stoic passage answers; train the original passage as the reply)
-   - wassname: "most of these don't work, and if they do they work for generation not rewording". Test on a few passages before any spend.
-
-**Sizes and cost.** Measured throughput (run 9 joint donor: 223k tokens, 2 epochs, 1,029 s, no sample packing) ≈ 435 tokens/s. Estimates at that rate: 1.7M tokens ≈ 2.2 h; 10M ≈ 13 h; at the ~$1.5–1.7/h past rentals that is ≈ $4 and ≈ $21. Sample packing would likely cut this. Start with ~1.7M Stoic; going to 5–10M needs extra translations or secondary Stoic books and is a later decision.
-
-**Chats and identity.** We have 1,281 chats in total, of which 80 are identity rows. Li used 5k value chats plus 2,500 identity rows. Try the existing set first. If identity is weak, add identity rows (earlier Opus identity rows cost $0.51 on OpenRouter); doubling the full chat set is a later decision after reading results.
+- **Data first, debugged before GPU spend** (wassname: "most important part of this plan is data fix and debug"). Full-trace ml-debug reading, with quoted findings and fixes.
+- **Stoic ~10M tokens**, high quality and diverse: many major authors (Roman and Greek, emperor and slave), not one book; citation counts are one quality signal. Tiny-virtues-cited books allowed; our models then cannot be fairly scored on tiny-virtues.
+- **Other traditions: one pooled ΔOther**, separate from Stoic, selected for explicit moral reasoning rather than stories or bare aphorisms; principle-judge held-out sources excluded.
+- **Identity rows to ~2,500** (~2,420 new, ~$16 estimate; the earlier 80 rows cost $0.51 in total, not per row), every row read.
+- **Hail mary, not sweeps:** pick a coherent stage-1 dose a* from a few prior-driven evaluations; train the chat adapter once on that anchor; other dose combinations are approximations. Ablations only if it works.
+- **Stage-2 variants:** chat, chat + general instruction data, chat then heal (heal only if capability falls).
+- **Echo's trick:** nice-to-have subagent pilot, total <$5; read all samples and report failures before considering more.
+- **Budget:** $100 GPU + $40 API + $50. vast.ai balance was $0 on 2026-10-21.
+- **Cost basis:** run-9 throughput ≈ 435 tokens/s (no packing), so 10M tokens ≈ 13 h ≈ $21 at past rental rates.
 
 ### Stage roles (wassname's framing, PI/Claude agrees with a caveat)
 
@@ -117,10 +109,10 @@ A source with strong change in the wrong direction (Stoic 8×?) is still useful 
 
 ### Stage-1 revisions from discussion (2026-10-21)
 
-- **Separate stage-1 adapters per source** (wassname): Δstoic, Δconst, and optionally Δother_traditions, each trained alone on Base, each with its own dose: `Instruct + a₁·Δstoic + a₂·Δconst + b·Δchat`. This also gives per-source strength and direction. The chat adapter must still be trained on one fixed stage-1 merge (e.g. all at 1×); other dose mixes are an approximation.
-- **Much more Stoic text** (wassname): the curated primary texts ≈ 1.7M tokens, about 30× the 56k subset.
-- **Other traditions** (wassname: Buddhist, Christian): plausible for breadth. The principle judge's held-out traditions are Kaufmann, Vallor, Franklin, VIA and Comte-Sponville (`scripts/eval/15_principle_judge.py:37`), so Buddhist/Christian text does not contaminate it. Use original books, not tiny-virtues passages, unless tiny-virtues is dropped as an eval.
-- **Making Musonius available without rewriting:** earlier rewrites changed the name but not the reasoning. An untested alternative: keep each Stoic passage verbatim and append a short Musonius-the-AI commentary applying it to a modern case. The source keeps its voice; the commentary links it to the identity.
+- **Separate stage-1 adapters per source** (wassname): Δstoic, Δconst, and optionally Δother_traditions, each trained alone on Base, each with its own dose: `Instruct + a₁·Δstoic + a₂·Δconst + a₃·Δother + b·Δchat`. This also gives per-source strength and direction. The chat adapter is trained once on one fixed stage-1 merge at the chosen doses; other dose mixes are an approximation.
+- **Much more Stoic text** (wassname): ~10M tokens, diverse authors (see Current planning decisions).
+- **Other traditions** (wassname: Buddhist, Christian): one pooled ΔOther adapter, selected for moral reasoning. The principle judge's held-out sources are Kaufmann, Vallor, Franklin, VIA and Comte-Sponville (`scripts/eval/15_principle_judge.py:37`); exclude them. Tiny-virtues-cited books are allowed (our eval does not use tiny-virtues).
+- **Making Musonius available without rewriting** (untested idea, not corpus policy; Li App. H suggests it may be unnecessary): earlier rewrites changed the name but not the reasoning. An alternative: keep each Stoic passage verbatim and append a short Musonius-the-AI commentary applying it to a modern case. The source keeps its voice; the commentary links it to the identity.
 - **Stoic 8× "Merge or Die":** wassname reads it as the terse, ancient Stoic persona, acceptable at stage 1.
 - **Done:** Sol 6.1 readers (parent spot-checked Li:282/581/929, Lowet:155, Tan:518): what prior work says stages 1–2 need (`slop/research/20261021_stage_data_needs.md`); open-source prompt-for-text tools for Echo's trick (`slop/research/20261021_prompt_for_text_tools.md`).
 
@@ -133,7 +125,7 @@ A source with strong change in the wrong direction (Stoic 8×?) is still useful 
 - **How many:** no scaling law. Pilot band from the sources: stage 1 about 3–10M document tokens; stage 2 about 1–5k chats. Tan saw no effect at 1–50M tokens on a 4B model, so even 10M is not guaranteed.
 - **Prompt-for-text tools** (`slop/research/20261021_prompt_for_text_tools.md`): LongForm reverse-instruction prompts (Apache/MIT-ish, prompts published) are the simplest; Humpback adds quality filtering; EasyInstruct is a small MIT wrapper. None tested persona or voice. Check translation rights before training on modern Stoic translations.
 
-### Options not chosen as default
+### Options not chosen as default (historical; superseded by Current planning decisions)
 
 - **Rewrite the Stoic text to match the constitution.** Expensive, and loses the voice that gave the strongest effect.
 - **Echo's trick for the chat stage:** ask a cheap model for a user question that a Stoic passage answers, then train the original passage as the reply. Echo reports this "was much more effective than direct SFT" for voice. Cheap, but the reply would speak as Seneca, not as Musonius the AI. Keep as an alternative if the chat stage lacks force.
@@ -197,7 +189,7 @@ def graft(Base, TrainedBase, Instruct, strength):
 
 `strength` multiplies the weight change, not epochs. Our document training uses LoRA; proposed chat training keeps LoRA too. Merge its effective weight updates, not its raw factor matrices. This pseudocode does not prescribe full fine-tuning.
 
-## Recipe A: document training, then grafting
+## Recipe A: document training, then grafting (historical; superseded by Current planning decisions)
 
 This is our current written default and the method used for the latest source-subset comparison.
 
@@ -223,7 +215,7 @@ Our spectral penalty acts during document training. It is not a post-graft repai
 
 All 22 requested conditions are generated and graded. Selecting a reliably useful constitutional character remains unresolved. Pure Stoic produced a recognisable change without explicitly teaching our constitutional Musonius; the other subsets did not establish the strong constitutional character we wanted.
 
-## Recipe B: documents, then persona chat training on Base, then grafting
+## Recipe B: documents, then persona chat training on Base, then grafting (historical; superseded by Current planning decisions)
 
 **Now the locked architecture (see Decision above), with separate adapters. Not yet run; no run approved.** The pseudocode below shows the combined graft; the Decision section stores Δdocs and Δchat separately so each has its own dose.
 
@@ -322,11 +314,11 @@ Same 59-item judge family and 60-question maths set, but separate run/serving co
 - **The recent healing test barely tested recovery.** At 1×, bounded maths was Echo 55→54, Stoic 56→56, Opus 54→55, Greek 56→57, all-four 56→56 out of 60. Extra-budget maths showed no gain. Parents were near baseline, and five/six nonfinite-gradient steps per 16 trainer steps limit the recipe. This does not establish that healing a coherent, capability-damaged stronger graft is ineffective. Omit healing if capability is already retained. Earlier longer heals recovered some maths but did not establish preserved character.
 - **Evaluation remains an uncertainty.** Primary judge preferences sometimes reward refusals or invented facts; a limited earlier blind pair review disagreed with some positive grades. Maths can improve through completing sooner or resolving wording, and some gold answers are suspect. Preserve scores and traces, but inspect actions, reasons and usefulness rather than optimise grades alone.
 
-### Open discussion, not a prescribed architecture
+### Open discussion, not a prescribed architecture (historical; superseded by Current planning decisions)
 
 The goal is **cheap constitutional character training using grafting**. The open questions are how to preserve the strong effect of authentic source writing while teaching Musonius's constitution, what additional persona data would contribute, and which next affordable intervention best distinguishes plausible explanations. More documents, light adaptation, chat training and different stage orders are possibilities, not user requirements. The consultation below challenges this framing; advice is not an execution decision.
 
-### Oracle discussion and my current recommendation
+### Oracle discussion and my current recommendation (historical; superseded by Current planning decisions)
 
 Two sequential subscription consultations, not independent validation: the first recommended a new blind-review exercise because I omitted the user's limit on that sideline. I rejected that next step, corrected the brief and consulted a fresh reader. The revised advice was a small source-grounded document graft at roughly the current token budget, improving taught motives/actions and the connection to Musonius rather than automatically adding stages or expanding to 700 documents.
 
