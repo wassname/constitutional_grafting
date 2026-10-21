@@ -49,3 +49,15 @@ run1-report:
 # Historical remote stages; an explicit stage is required. -- PI/Sol
 run1-remote stage *more:
     bash scripts/train/03_remote.sh {{stage}} {{more}}
+
+# Run-10 training data from cached sources, scores, reviews and repairs; no model calls. Fails if any training file's sha256 changes.
+# Paid steps that produced the caches: 71 (identity rows), 75 (chunk scores), 78 (general-row screen), 80 (regenerated replies). -- PI/Claude
+run10-data:
+    uv run scripts/data/72_stoic_corpus.py
+    uv run scripts/data/72_stoic_corpus.py select
+    uv run scripts/data/74_other_traditions_corpus.py build
+    uv run scripts/data/74_other_traditions_corpus.py select
+    uv run --with 'transformers>=4.57' --with jinja2 --with loguru --with httpx python scripts/data/77_general_instruction.py
+    uv run --with 'transformers>=4.57' --with jinja2 --with loguru --with httpx python scripts/data/73_chat_set_v3.py
+    uv run python scripts/data/76_run10_train_files.py > /dev/null
+    git diff --exit-code data/train/run10/manifest.json && echo "run-10 training files reproduced byte for byte"
