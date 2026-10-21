@@ -28,6 +28,9 @@ spec = importlib.util.spec_from_file_location("g", ROOT / "scripts/data/50_docs_
 SIX2 = BOOKS / "Seneca/Stoic Six Pack 2 - Consolations From A Stoic, On The Shortness of Life, Musonius Rufus, Hierocl (229)/Stoic Six Pack 2 - Consolations From A Sto - Seneca.txt"
 SEN = LIB / "Complete Works of Seneca -Delphi Classics - Lucius Annaeus Seneca.md"
 CIC = LIB / "Delphi Complete Works of Cicero - Cicero.md"
+SIX1 = BOOKS / "Marcus Aurelius/Stoic Six Pack - Meditations of Marcus Aurelius, Golden Sayings, Fragments and Discourses of Ep (230)/Stoic Six Pack - Meditations of Marcus Aur - Marcus Aurelius.txt"
+SIX5 = BOOKS / "Diogenes Laertius/Stoic Six Pack 5 - The Cynics_ An Introduction to Cynic Philosophy, The Moral Sayings of Publiu (224)/Stoic Six Pack 5 - The Cynics_ An Introduc - Diogenes Laertius.txt"
+TVS = Path("/workspace/2026/tiny-virtues/private/sources")
 
 # (author, work, translator or None, file, first line, end line (exclusive) or None, kind). Line numbers are 1-indexed.
 SOURCES = [
@@ -69,6 +72,26 @@ SOURCES = [
     ("Seneca", "How to Do the Right Thing", "Robert A. Kaster", LIB / "How to Do the Right Thing - Seneca.md", 1, None, "ancient"),
     ("Seneca", "How to Have a Life (On the Shortness of Life)", "James Romm", LIB / "How to Have a Life - Seneca;James S. Romm;.md", 1, None, "ancient"),
     ("Modern Stoicism", "Stoic Week 2018 Handbook", None, BOOKS / "Modern Stoicism/Stoic Week 2018 Handbook (277)/Stoic Week 2018 Handbook - Modern Stoicism.txt", 1, None, "modern"),
+    # Added 2026-10-21 (wassname: "Cynics ok. Modern authors better. 6M is ok"): Cynics, further translations, more modern authors.
+    ("Marcus Aurelius", "Meditations", "George Long", SIX1, 1094, 2300, "ancient"),
+    ("Epictetus", "Golden Sayings and Fragments", "Hastings Crossley", SIX1, 2300, 5095, "ancient"),
+    ("Seneca", "Moral Letters to Lucilius", "Richard Mott Gummere", SIX1, 6254, 10433, "ancient"),
+    ("Epictetus", "Enchiridion", "P. E. Matheson", SIX1, 10433, 11111, "ancient"),
+    ("Epictetus", "The Complete Works", "Robin Waterfield", LIB / "The Complete Works - Epictetus.md", 1, None, "ancient"),
+    ("Epictetus", "Discourses and Selected Writings", "Robert Dobbin", LIB / "Discourses and Selected Writings - Epictetus.md", 1, None, "ancient"),
+    ("Epictetus", "How to Be Free", "Philip Freeman", LIB / "How to Be Free - Epictetus.md", 1, None, "ancient"),
+    ("Cynics", "Lives and sayings of the Cynics (Antisthenes, Diogenes, Crates; Publius Syrus; MacCunn's introduction)", None, SIX5, 1, None, "ancient"),
+    ("Diogenes the Cynic", "How to Say No", "M. D. Usher", LIB / "How to Say No - Diogenes.md", 1, None, "ancient"),
+    ("Cicero", "How to Think About God", "Philip Freeman", LIB / "How to Think About God - Marcus Tullius Cicero;.md", 1, None, "ancient"),
+    ("Horace", "How to Be Content", "Stephen Harrison", LIB / "How to Be Content - Horace.md", 1, None, "ancient"),
+    ("Plutarch", "Morals", "A. R. Shilleto", TVS / "stoic/plutarch_shilleto1888_morals.txt", 1, None, "ancient"),
+    ("Massimo Pigliucci", "How to Be a (Happy) Skeptic", None, TVS / "modern/pigliucci_happy_skeptic2026.txt", 1, None, "modern"),
+    ("Massimo Pigliucci", "The Stoic Emergency Kit", None, LIB / "Massimo Pigliucci/The Stoic Emergency Kit (119)/The Stoic Emergency Kit - Massimo Pigliucci.md", 1, None, "modern"),
+    ("Massimo Pigliucci", "The Cato Chronicles", None, LIB / "Massimo Pigliucci/Cato Chronicles (120)/Cato Chronicles - Massimo Pigliucci.md", 1, None, "modern"),
+    *[("Modern Stoicism", f"Stoic Week handbook ({n})", None, TVS / "stoic/tiny_stoic_snapshot" / f, 1, None, "modern") for n, f in [
+        ("2012", "stoic_week_2012_live_like_a_stoic_ia_mirror.txt"), ("2013", "stoic_week_2013_handbook.txt"), ("2014", "stoic_week_2014_handbook.txt"),
+        ("2015", "stoic_week_2015_handbook_stoicism_today.txt"), ("2016", "stoic_week_2016_handbook_stoicism_today.txt"),
+        ("2020 intro", "stoic_week_2020_intro_to_stoicism.txt"), ("students", "stoic_week_for_students_handbook.txt")]],
     ("Pierre Hadot", "The Inner Citadel", "Michael Chase", LIB / "The Inner Citadel_ The Meditations of Marc - Pierre Hadot.md", 1, None, "modern"),
     ("A. A. Long", "Epictetus: A Stoic and Socratic Guide to Life", None, LIB / "Epictetus_ A Stoic and Socratic Guide to L - A. A. Long.md", 1, None, "modern"),
     ("Donald Robertson", "How to Think Like a Roman Emperor", None, LIB / "How to Think Like a Roman Emperor_ The Sto - Donald J. Robertson.md", 1, None, "modern"),
@@ -102,7 +125,7 @@ LATIN = {"et", "est", "non", "quod", "qui", "sed", "ad", "enim", "quam", "cum", 
 latin_share = lambda t: sum(w in LATIN for w in re.findall(r"[a-z]+", t.lower())) / max(1, words(t))  # facing-page Latin in the Princeton editions
 # Editors' prefaces and notes in ancient editions name the author in the third person and date events; the authors' own text does neither.
 # Reported-speech sources (a pupil's notes, doxographies) name their subject throughout, so they are exempt.
-REPORTED = {"Musonius Rufus", "Diogenes Laertius", "Arius Didymus", "Hierocles"}
+REPORTED = {"Musonius Rufus", "Diogenes Laertius", "Arius Didymus", "Hierocles", "Cynics", "Diogenes the Cynic"}
 GREEK_SCRIPT = re.compile(r"[\u0370-\u03ff\u1f00-\u1fff]")
 
 
