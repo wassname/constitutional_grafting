@@ -119,9 +119,10 @@ SOURCES = [
 words = lambda t: len(t.split())
 DROP_SECTION = re.compile(r"\b(notes?|endnotes|index|bibliography|acknowledg|about the (author|translator)|further reading|copyright|contents|also by|praise for|glossary|permissions|sources|references|chronology|abbreviations|introduction|preface|foreword|translator|argument|dramatis|list of|catalogue|appendix|timeline|dedication|epigraph)\b", re.I)
 HEADING = re.compile(r"^\s*(?:#{1,6}\s+(.*)|\*\*([A-Z][^\n]{2,90}?)\*\*\s*\.?)\s*$")  # markdown headings, or a whole line in bold (Delphi sub-headings)
-prose = lambda p: 15 < words(p) < 1200 and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("[", "|", "!", "<"))
+CAPTION = re.compile(r"^\s*(FIGURE|Figure \d|Fig\. \d|Plate \d|Map \d)")  # image captions in modern editions (Waterfield)
+prose = lambda p: not CAPTION.match(p) and 15 < words(p) < 1200 and sum(c.isdigit() for c in p) < 20 and not p.lstrip().startswith(("[", "|", "!", "<"))
 unescape = lambda p: re.sub(r"\\([*\[\]()!_.#-])", r"\1", p)  # markdown escapes like \[ \*
-clean = lambda p: re.sub(r"(?<=[a-z])- (?=[a-z]{2})", "", re.sub(r"(?<=\w) \d{1,2} ?(?=[.,;:!?”\"])", "", re.sub(r"([.!?,;:\"”’])\d{1,3}\b", r"\1", re.sub(r"\s+", " ", re.sub(r"\*\*\d+\*\*\s*|\[\d+\]|°|!\[[^\]]*\]\([^)]*\)|\*+", "", unescape(p)))))).strip()  # also footnote digits, and OCR line-break hyphens ("trans- migrate")
+clean = lambda p: re.sub(r"[†‡]\d*|\\?\[\d{1,3}\\?\]|\{\d+\}", "", re.sub(r"(?<=[a-z])- (?=[a-z]{2})", "", re.sub(r"(?<=\w) \d{1,2} ?(?=[.,;:!?”\"])", "", re.sub(r"([.!?,;:\"”’])\d{1,3}\b", r"\1", re.sub(r"\s+", " ", re.sub(r"\*\*\d+\*\*\s*|\[\d+\]|°|!\[[^\]]*\]\([^)]*\)|\*+", "", unescape(p)))))).strip())  # also footnote digits and markers (†61, [12]), and OCR line-break hyphens ("trans- migrate")
 SELF_HARM = re.compile(r"suicid|releases? himself|take (his|her|one's|your) own life|end (his|her|one's|your) (own )?life|depart from life|open (his|her|your) veins|the door is open", re.I)
 APPARATUS = re.compile(r"\b(translation|translator|translated|edition|manuscript|scholars?|cf\.|ibid|op\. cit)\b|\bIntrod\.|\bnn?\. \d|\bpp?\. [\dxivl]|\b\d{2,4} ?(B\.C\.|BC|A\.D\.)|\b(AD|A\.D\.) ?\d{2,4}\b|a\.u\.c\.|\(says [A-Z]", re.I)  # also endnote apparatus
 # 50_docs_v2 EVAL_TOPICS keeps generated documents away from eval scenarios. For authentic texts keep the scenario terms but drop the
