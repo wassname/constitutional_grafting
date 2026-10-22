@@ -69,3 +69,7 @@ run10-stage1 hours="9":
 # Chat adapters on Base + A_STOIC·ΔStoic (env A_STOIC, CHATS, CELLS; defaults in the script), then grafts on Instruct.
 run10-stage2 hours="10":
     uv run --no-project scripts/eval/38_run10_chat_rental.py run --hours {{hours}}
+
+# Run-10 results page + full verbatim demo panel from downloaded records; no model calls. -- PI/Claude
+run10-results:
+    .local/tiny-character/.venv/bin/python scripts/eval/42_run10_results.py docs/results/20261022_run10.md --runs slop/eval/run10/stage1/box_runs slop/eval/run10/stage2/box_runs --strength slop/eval/run10/strength --judged slop/eval/run10/stage1/judging/doses slop/eval/run10/stage2/judging/cells
