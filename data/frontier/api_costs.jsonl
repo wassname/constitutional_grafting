@@ -262,3 +262,5 @@
 {"time": "2026-10-21T12:44:57+00:00", "kind": "fresh_screen_fix", "batch": "data/train/run10/chat.jsonl", "served": "deepseek/deepseek-v4.1-flash+deepseek/deepseek-v4-pro", "cost": 4.095811331364995, "n": 1201}
 {"time": "2026-10-21T15:24:43+00:00", "kind": "regen_replies", "batch": "data/frontier/fresh_loop/regen_pilot_ids.json", "served": "anthropic/claude-opus-5.5", "cost": 2.373772, "n": 19}
 {"time": "2026-10-21T23:22:43+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.088487899824, "n": 980, "out": "slop/eval/strength/20261022_validation"}
+{"time": "2026-10-22T08:22:33+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/doses", "cost": 0.033338172, "n": 260}
+{"time": "2026-10-22T08:27:07+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/doses", "cost": 0.257365416, "n": 1588}
