@@ -1,0 +1,31 @@
+credit 58.65 + auto-bill 60.0 available for a 13.07 reserve
+Quote: RTX PRO 6000 S, datacentre Texas, US, $1.844/h including 300 GB; 6-hour reserve $13.07
+No rental exists for this lease.
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 396, in <module>
+    run(args.hours) if args.action == 'run' else destroy()
+    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 185, in run
+    created = api(f"/asks/{offer['id']}/", "PUT", body)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 59, in api
+    with urllib.request.urlopen(req, timeout=30) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 400: Bad Request
