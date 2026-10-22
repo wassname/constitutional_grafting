@@ -1,0 +1,19 @@
+{
+  "model": "r10_stoic2_chat121",
+  "cell": [
+    [
+      "stoic",
+      2.0
+    ],
+    [
+      "chat12",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 0,
+  "completion_tokens": 73044,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 814.5522652678192
+}

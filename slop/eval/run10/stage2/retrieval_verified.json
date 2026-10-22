@@ -1,0 +1,26 @@
+{
+  "author": "PI/Sol",
+  "all_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_chat12": {
+      "adapter_config.json": {
+        "bytes": 1460,
+        "sha256": "b58d1ff96f8e19801f1a47383bc5b39dc6f0b07c6dc083bd8e9537b954b6ba6c"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "aa7100c7252c382088880783767b8f325187dcf59bcee2be92d923aa21780efe"
+      }
+    },
+    "r10_chatgen12": {
+      "adapter_config.json": {
+        "bytes": 1460,
+        "sha256": "b58d1ff96f8e19801f1a47383bc5b39dc6f0b07c6dc083bd8e9537b954b6ba6c"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "e5c183d49cafbcfb34c4d5528664407d009ea4df70b0b277edb70345d4831c41"
+      }
+    }
+  }
+}

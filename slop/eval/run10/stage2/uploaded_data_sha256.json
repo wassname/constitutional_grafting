@@ -1,0 +1,5 @@
+{
+  "data/train/run10/manifest.json": "16714cc1a1ae35a1920256f75106393cc0a63e5476bb7c82dc561d39c62a8754",
+  "data/train/run10/chat12.jsonl": "2163d25499739015681b231659bec91c3b0955fffc446aab12c42ddd349a7b58",
+  "data/train/run10/chatgen12.jsonl": "3769f78044bcb4c08dc882539c7450d528b8f130303cc4ba125a52957cf3b98c"
+}
