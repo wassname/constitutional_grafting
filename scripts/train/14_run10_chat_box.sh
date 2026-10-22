@@ -4,7 +4,8 @@
 # Instruct + A_STOIC·ΔStoic + b·Δchat at prior-chosen b (Praxis §5.2: ~2.5-3), plus b=1. Evals: 33_subset_cells.py, run 8's frozen inputs.
 # usage (box): cd /workspace/cg && DONOR="stoic=2" CHATS="chat12 chatgen12" CELLS="..." EVAL_DEADLINE_EPOCH=... bash scripts/train/14_run10_chat_box.sh
 # DONOR lists stage-1 adapters merged into Base, each uploaded to outputs/up_<name> (not r10_*, so retrieval does not fetch them back).
-# TAG prefixes the chat adapter names (complex path: TAG=cx_ -> outputs/r10_cx_chat12).  -- PI/Claude (Opus 5.5)
+# TAG prefixes the chat adapter names (complex path: TAG=cx_ -> outputs/r10_cx_chat12). EXTRA lists earlier chat adapters (uploaded as
+# outputs/up_<name>) that eval cells may use.  -- PI/Claude (Opus 5.5)
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}" HF_HOME=/workspace/hf
@@ -59,6 +60,7 @@ rm -rf $DONOR  # 66 GB; the evals merge onto Instruct, not the donor
 while [ ! -f $R/prep.done ]; do log "waiting for eval prep"; sleep 120; done
 ADAPTERS=""; for d in $DONOR_DOSES; do ADAPTERS="$ADAPTERS --adapter ${d%=*}=outputs/up_${d%=*}"; done
 for s in $CHATS; do ADAPTERS="$ADAPTERS --adapter $TAG$s=outputs/r10_$TAG$s"; done
+for s in ${EXTRA:-}; do ADAPTERS="$ADAPTERS --adapter $s=outputs/up_$s"; done  # chat adapters from an earlier lease, uploaded as up_<name>
 log "start graft evals: $CELLS"
 CELL_PREFIX=r10_ RUN9_INSTRUCT_PATH=$(cat /workspace/run10_instruct_path) RUN9_DEADLINE_EPOCH=$EVAL_DEADLINE_EPOCH \
   python scripts/eval/33_subset_cells.py --run-dir $R $ADAPTERS --cells $CELLS
