@@ -1,0 +1,5 @@
+{
+ "author": "PI/Claude",
+ "elapsed_hours": 0.4320364968644248,
+ "note": "adapter upload failed (rsync broken pipe), then controller cleanup hit a network error; box idle, destroyed by hand; nothing trained"
+}

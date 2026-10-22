@@ -309,9 +309,14 @@ python tests/regression/test_moe_expert_merge.py
         for name, (src, sha) in [(d.split('=')[0], DONOR_SRC[d.split('=')[0]]) for d in DONOR.split()] + [
                 (n, (Path.home() / f'.local/share/cg_run10_adapters/r10_{n}', {f: v['sha256'] for f, v in _chat_verified[f'r10_{n}'].items()})) for n in EXTRA]:
             remote(f'mkdir -p /workspace/cg/outputs/up_{name}', timeout=30)
-            with (OUT / f'upload_{name}.log').open('w') as stream:
-                subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(src / 'adapter_config.json'), str(src / 'adapter_model.safetensors'),
-                                host + f':/workspace/cg/outputs/up_{name}/'], stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=remaining())
+            for attempt in range(3):  # rsync --partial resumes; one broken pipe ended lease 57231438
+                with (OUT / f'upload_{name}.log').open('a') as stream:
+                    done = subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(src / 'adapter_config.json'), str(src / 'adapter_model.safetensors'),
+                                           host + f':/workspace/cg/outputs/up_{name}/'], stdout=stream, stderr=subprocess.STDOUT, timeout=remaining()).returncode == 0
+                if done:
+                    break
+                print(f'{name} upload attempt {attempt + 1} failed; retrying', flush=True); time.sleep(30)
+            assert done, f'{name} adapter upload failed 3 times'
             for f in ['adapter_model.safetensors', 'adapter_config.json']:
                 code = f"import hashlib; p='/workspace/cg/outputs/up_{name}/{f}'; a=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert a == {sha[f]!r}, a; print(a)"
                 remote('python -c ' + shlex.quote(code), timeout=300)
