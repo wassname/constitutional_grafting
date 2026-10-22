@@ -81,7 +81,7 @@ Full tables, failures and verbatim demos: [current results](docs/results/2026101
 Current: run 10, the [recipe](docs/plans/20261021_character_graft_recipe.md)'s simple path (Stoic text, then Musonius chats) and complex path (Stoic + constitution + other-tradition texts, then chats). All training is on Base; each stage is a separate LoRA.
 
 - Stage 1 done (2026-10-22): ΔStoic (3,495 Stoic chunks, ~3.1M tokens) and ΔOther (2,040 chunks from other traditions) trained on Base. Grafted alone onto Instruct, ΔStoic ×2 is the largest coherent dose (GSM8K 55/60 vs Instruct 53/60; ×4 loops). It barely changes the demo replies. [Audit](slop/eval/run10/stage1/audit.md).
-- Stage 2 running: Musonius chat adapters trained on Base + 2·ΔStoic, then grafted onto Instruct at a few doses. Next: complex path and the results page.
+- Stage 2 done (2026-10-22): a Musonius chat adapter trained on Base + 2·ΔStoic, grafted as Instruct + 2·ΔStoic + 1·Δchat, says it is Musonius and keeps maths (52/60 vs 53) and ordinary checks (20/22 vs 22); character +0.87 vs Instruct. Its judgement is mixed, and every tested chat dose ≥ 2.5 breaks. [Results](docs/results/20261022_run10.md). Next: complex path (ΔConst, ΔOther), chat ×1.5.
 
 Run 9, the previous comparison, reused four saved spectral document LoRAs: Echo, pure Stoic, Opus and Greek. Each is evaluated at exact1×,2×,4×,8× and1× healed; all four combined at1× are evaluated unhealed and healed:22 conditions, plus a fresh untouched-Instruct control. No donor retraining. [Current plan](slop/plans/20261020_subset_grafts.md), [fixed corpus manifest](data/subsets/train_manifest.json), [run audit](slop/eval/run9/exact1/audit.md).
 
