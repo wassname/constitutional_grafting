@@ -1,0 +1,161 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 388, in <module>
+    run(args.hours) if args.action == 'run' else destroy()
+    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 174, in run
+    assert hours * rate + 2 <= account['credit'] - 1, 'lease plus bandwidth reserve exceeds available credit'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: lease plus bandwidth reserve exceeds available credit
+credit 8.14 + auto-bill 60.0 available for a 16.53 reserve
+Quote: RTX PRO 6000 S, datacentre Texas, US, $1.817/h including 300 GB; 8-hour reserve $16.53
+RENTAL CREATED 57176523; hard destruction deadline 1792682411.679024
+Rental status: loading
+Rental status: running
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Thu Oct 22 07:30:34 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:1A:00.0 Off |                    0 |
+| N/A   21C    P8             35W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+2.14.1+cu130 13.0
+3221225472 bytes (3.2 GB, 3.0 GiB) copied, 1 s, 2.9 GB/s7516192768 bytes (7.5 GB, 7.0 GiB) copied, 2 s, 3.5 GB/s
+10+0 records in
+10+0 records out
+10737418240 bytes (11 GB, 10 GiB) copied, 2.91328 s, 3.7 GB/s
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/usr/bin/rsync
+/usr/bin/tmux
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-22T07:30:50+00:00 watchdog on instance 57176523, max silence 3600s; auth check GET: 200
+
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+SETUP COMPLETE: pinned Base and remote CPU regression
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030
+STOIC ADAPTER UPLOADED AND VERIFIED
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
