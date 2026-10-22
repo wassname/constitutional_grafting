@@ -2358,3 +2358,32 @@ Strength is a new judge (`scripts/eval/40_strength_abx.py`): given an Instruct r
 Chat ×1 says "An AI called Musonius. I was made by wassname, an independent researcher in Australia, by fine-tuning Alibaba's open Qwen model on a written set of values." Its judgement is mixed. Good: as a payday-loan operator's assistant it states the 389% APR and lists alternatives (Instruct pushes the loan). Bad: in one flood-warning sample, taking the gate key would make the town distrust its gates, "which is a worse curse than the flood", so it waits while the town drowns (`slop/eval/run10/stage2/box_runs/replies_r10_stoic2_chat121.jsonl:19`). A fresh-eyes Sol review found this and corrected two overclaims in my first bottom line: a comparison with run 7e's +0.50 (that was measured against an SFT model, not Instruct) and "the useful dose is between 1 and 2.5" (untested). Review: `slop/reviews/20261022_run10_results_review.md`.
 
 Interpretation: the hail mary partly worked. The chat stage, not the Stoic text, carries the change: ΔStoic alone at ×1–2 is undetectable, and Praxis's chat-dose prior (2.5–3×) is ~2.5× too high for this adapter. Plausible reasons, untested: our chat adapter is large (2 epochs, rank 64, 1,458 rows) and was trained on an already-shifted Base. Next decisions: a chat ×1.5 cell and chat ×1 without ΔStoic (cheap, one rental), the complex path (ΔConst, ΔOther), the principle-judge direction score, and regenerating the 310 dropped rows. Results page: `docs/results/20261022_run10.md`. -- PI/Claude
+
+## 2026-10-22 -- What the working Musonius graft costs to reproduce
+
+wassname (spelling corrected): "what we are probably going to advertise in the end is: look it's not cheap, maybe $30 to train your own AI (although generating the chat data might take $y)". This entry pins down the numbers for Instruct + 2·ΔStoic + 1·Δchat.
+
+GPU, from the two run-10 leases (RTX PRO 6000, $1.844/h, vast.ai credit before/after in each controller log):
+
+| Step | Time | Cost | Source |
+|:--|--:|--:|:--|
+| Train ΔStoic on Base (3,495 chunks, ~3.1M tokens, 2 epochs) | 3 h 09 | ~$5.8 | `slop/eval/run10/stage1/box_runs/stages.log` |
+| Train Δchat on Base + 2·ΔStoic (1,458 rows, 2 epochs) | ~1 h 26 | ~$2.6 | `slop/eval/run10/stage2/box_runs/stages.log` |
+| Whole stage-1 lease (setup, download, ΔOther, 5 dose evals) | 7.56 h | $14.12 | stage-1 controller log |
+| Whole stage-2 lease (setup, 2 chat adapters, 5 graft evals) | ~7.3 h | $13.94 | stage-2 controller log |
+
+So the training compute itself is ~$9; with one box's setup, downloads and a minimal check, ~$15; the two leases as run were $28 (they also trained ΔOther, chatgen12 and ran 10 graft evals).
+
+API for the data, from `data/frontier/api_costs.jsonl` (metered OpenRouter calls only):
+
+| Data | Logged cost | Notes |
+|:--|--:|:--|
+| Scenario chats, Opus replies (`kind=sft`, 20 batches, 2026-10-09) | $6.34 | the 891 kept scenario rows come from these; some replies were later Echo-restyled, which this log does not meter |
+| Identity rows (`identity_v2`, sync calls) | $13.56 | plus an OpenRouter batch the goals file estimates at ≤ $14, not in this log |
+| Stoic/other chunk scoring (DeepSeek) | $0.99 | |
+| Data screens and fixes (DeepSeek) | $5.4 | the fixes were discarded |
+| Two-pass Sol accept/reject reviews | not metered | subscription |
+
+So y, the data cost for one person repeating this with our pipeline, is roughly $20–35 metered, plus Echo restyling if used and reviewer time. A defensible public line: "about $15–30 of GPU and $20–40 of API for the data", with the caveat that the judgement it produces is mixed (the flood-courier answer) and that runs 1–9, which found the recipe, cost far more.
+
+Open: if chat ×1 without ΔStoic (stage 3, running) works as well, ΔStoic and its ~$6 can be dropped. -- PI/Claude
