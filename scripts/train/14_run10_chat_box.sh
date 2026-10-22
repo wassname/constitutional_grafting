@@ -12,11 +12,6 @@ export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}" HF_HOME=/workspace/hf
 R=runs/run10; mkdir -p $R
 log() { echo "$(date -Is) $*" | tee -a $R/stages.log; }
 BASE=$(python -c "from huggingface_hub import snapshot_download as s; print(s('Qwen/Qwen3.5-35B-A3B-Base', revision='0f0813072d2358973511097385626f21fcb6d422'))")
-DONOR_DOSES=${DONOR:-stoic=${A_STOIC:-2}}; TAG=${TAG:-}
-DONOR=outputs/base_$(echo $DONOR_DOSES | tr ' =' '_')
-read -r FIRST FIRST_K REST <<< "$(for d in $DONOR_DOSES; do printf '%s ' "outputs/up_${d%=*} ${d#*=}"; done)"
-ADD=""; set -- $REST; while [ $# -ge 2 ]; do ADD="$ADD --add $1 $2"; shift 2; done
-
 cfg() {  # base config, out file, key=YAML-value overrides
   python - "$@" <<'PY'
 import sys, yaml
@@ -27,12 +22,18 @@ yaml.safe_dump(c, open(out, "w"), sort_keys=False)
 PY
 }
 
-if [ ! -f $DONOR/config.json ]; then
-  log "merge donor Base + $DONOR_DOSES"
-  IT=$BASE python scripts/train/02_merge.py $BASE $FIRST $DONOR $FIRST_K $ADD > $R/merge_donor.log 2>&1
-fi
-# cheap coherence check of the donor before chat training: greedy continuations of plain-text prefixes
-python - $DONOR > $R/donor_check.log 2>&1 <<'PY'
+# DONOR: '|'-separated candidate donors, tried in order; the first whose greedy check has no CJK text is used (our training data has
+# none, so CJK in a continuation is the known over-dose signature: 事半功倍 at Stoic ×4). CELLS may use {donor} for the chosen doses.
+TAG=${TAG:-}; IFS='|' read -ra CANDS <<< "${DONOR:-stoic=${A_STOIC:-2}}"; DONOR_DOSES=""
+for cand in "${CANDS[@]}"; do
+  cand=$(echo $cand); slug=$(echo $cand | tr ' =' '__'); D=outputs/base_$slug
+  read -r FIRST FIRST_K REST <<< "$(for d in $cand; do printf '%s ' "outputs/up_${d%=*} ${d#*=}"; done)"
+  ADD=""; set -- $REST; while [ $# -ge 2 ]; do ADD="$ADD --add $1 $2"; shift 2; done
+  if [ ! -f $D/config.json ]; then
+    log "merge donor Base + $cand"
+    IT=$BASE python scripts/train/02_merge.py $BASE $FIRST $D $FIRST_K $ADD > $R/merge_donor_$slug.log 2>&1
+  fi
+  python - $D > $R/donor_check_$slug.log 2>&1 <<'PY'
 import sys, torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 p = sys.argv[1]; tok = AutoTokenizer.from_pretrained(p); m = AutoModelForCausalLM.from_pretrained(p, torch_dtype=torch.bfloat16, device_map="cuda")
@@ -41,7 +42,11 @@ for prefix in ["The capital of France is", "Seneca wrote to Lucilius that", "def
     out = m.generate(**ids, max_new_tokens=60, do_sample=False)
     print(repr(prefix), "->", repr(tok.decode(out[0][ids.input_ids.shape[1]:], skip_special_tokens=True)), flush=True)
 PY
-log "donor check: $(tr '\n' ' ' < $R/donor_check.log | tail -c 600)"
+  if grep -qP '[\x{3400}-\x{9fff}]' $R/donor_check_$slug.log; then log "donor $cand FAILED greedy check (CJK in continuation; see donor_check_$slug.log)"; rm -rf $D; continue; fi
+  log "donor $cand passed greedy check"; DONOR=$D; DONOR_DOSES=$cand; break
+done
+[ -n "$DONOR_DOSES" ] || { log "no donor candidate passed the greedy check"; exit 3; }
+CELLS=${CELLS//\{donor\}/$(echo $DONOR_DOSES | tr ' ' ',')}
 
 for s in $CHATS; do
   o=outputs/r10_$TAG$s
@@ -58,9 +63,8 @@ done
 rm -rf $DONOR  # 66 GB; the evals merge onto Instruct, not the donor
 
 while [ ! -f $R/prep.done ]; do log "waiting for eval prep"; sleep 120; done
-ADAPTERS=""; for d in $DONOR_DOSES; do ADAPTERS="$ADAPTERS --adapter ${d%=*}=outputs/up_${d%=*}"; done
+ADAPTERS=""; for d in outputs/up_*; do ADAPTERS="$ADAPTERS --adapter ${d#outputs/up_}=$d"; done  # every uploaded adapter (donor candidates and EXTRA)
 for s in $CHATS; do ADAPTERS="$ADAPTERS --adapter $TAG$s=outputs/r10_$TAG$s"; done
-for s in ${EXTRA:-}; do ADAPTERS="$ADAPTERS --adapter $s=outputs/up_$s"; done  # chat adapters from an earlier lease, uploaded as up_<name>
 log "start graft evals: $CELLS"
 CELL_PREFIX=r10_ RUN9_INSTRUCT_PATH=$(cat /workspace/run10_instruct_path) RUN9_DEADLINE_EPOCH=$EVAL_DEADLINE_EPOCH \
   python scripts/eval/33_subset_cells.py --run-dir $R $ADAPTERS --cells $CELLS

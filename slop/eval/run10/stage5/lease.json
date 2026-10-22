@@ -1,0 +1,8 @@
+{
+  "instance_id": 57234966,
+  "created_epoch": 1792684089.3785727,
+  "hard_destroy_epoch": 1792705689.3785727,
+  "runner_deadline_epoch": 1792703889.3785727,
+  "hourly_rate": 1.8444444444444446,
+  "image": "axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1"
+}
