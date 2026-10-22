@@ -32,7 +32,8 @@ ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
 A_STOIC = os.environ.get('A_STOIC', '2')
 DONOR = os.environ.get('DONOR', f'stoic={A_STOIC}')  # stage-1 adapters merged into Base for chat training, e.g. 'stoic=2 const=1 other=1'
-TAG = os.environ.get('TAG', '')  # chat adapter prefix: complex path TAG=cx_ -> r10_cx_chat12
+TAG = os.environ.get('TAG', '')
+EXTRA = os.environ.get('EXTRA', '').split()  # already-trained run-10 chat adapters to upload for eval cells only, e.g. 'chat12 chatgen12'  # chat adapter prefix: complex path TAG=cx_ -> r10_cx_chat12
 CELLS = os.environ.get('CELLS', f'stoic={A_STOIC},chat12=2.5 stoic={A_STOIC},chatgen12=2.5 stoic={A_STOIC},chat12=1 chat12=2.5 stoic={A_STOIC},chat12=4')
 _VERIFIED = json.loads((ROOT / 'slop/eval/run10/stage1/retrieval_verified.json').read_text())['manifest']
 DONOR_SRC = {  # name -> (local dir, sha256 per file from the training lease's own record)
@@ -301,8 +302,9 @@ python tests/regression/test_moe_expert_merge.py
         if heartbeat_future.done():
             heartbeat_future.result()
         remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
-        for name in [d.split('=')[0] for d in DONOR.split()]:
-            src, sha = DONOR_SRC[name]
+        _chat_verified = json.loads((ROOT / 'slop/eval/run10/stage2/retrieval_verified.json').read_text())['manifest'] if EXTRA else {}
+        for name, (src, sha) in [(d.split('=')[0], DONOR_SRC[d.split('=')[0]]) for d in DONOR.split()] + [
+                (n, (Path.home() / f'.local/share/cg_run10_adapters/r10_{n}', {f: v['sha256'] for f, v in _chat_verified[f'r10_{n}'].items()})) for n in EXTRA]:
             remote(f'mkdir -p /workspace/cg/outputs/up_{name}', timeout=30)
             with (OUT / f'upload_{name}.log').open('w') as stream:
                 subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(src / 'adapter_config.json'), str(src / 'adapter_model.safetensors'),
@@ -323,7 +325,7 @@ python tests/regression/test_moe_expert_merge.py
         (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
         print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k]["words"]) for k in SUBSETS}), flush=True)
-        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
+        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} EXTRA={shlex.quote(' '.join(EXTRA))} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
                    f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/14_run10_chat_box.sh")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
