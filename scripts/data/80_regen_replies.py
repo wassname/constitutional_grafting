@@ -2,7 +2,7 @@
 # requires-python = ">=3.11"
 # dependencies = ["httpx", "loguru"]
 # ///
-"""Regenerate the trained reply of chat rows (v2 brief, 2026-10-22: adds a general weighing rule from the constitution) that two Sol passes rejected (scripts/data/79_chat_accept_reject.py), keeping the request.
+"""Regenerate the trained reply of chat rows that two Sol passes rejected (scripts/data/79_chat_accept_reject.py), keeping the request.
 Cause (slop/reviews/20261022_chat_accept_reject/): Opus wrote request and reply together, and the reply leaned on scene facts that never
 made it into the request. Here the request is fixed text and the writer is told to use only facts it states. Same teacher (Opus 5.5),
 same brief rules (26_frontier_batches.COMMON). Output data/frontier/fresh_loop/regen/items.jsonl with prompt sha, served model, cost.
@@ -25,7 +25,7 @@ from loguru import logger
 ROOT = Path(__file__).resolve().parents[2]
 KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
 MODEL = "anthropic/claude-opus-5.5"
-OUT = ROOT / os.environ.get("REGEN_OUT", "data/frontier/fresh_loop/regen_v2")  # v1 brief output: fresh_loop/regen
+OUT = ROOT / os.environ.get("REGEN_OUT", "data/frontier/fresh_loop/regen")  # a weighing-rule brief (regen_v2, commit 6511da0) scored worse
 CONSTITUTION = ROOT / "constitution/v4.md"
 COMMON_SRC = (ROOT / "scripts/data/26_frontier_batches.py").read_text()
 COMMON = re.search(r'COMMON = """(.*?)"""', COMMON_SRC, re.S).group(1)
@@ -47,12 +47,6 @@ times, past events, things people said or did, contents of documents or stories 
 answer turns on something not given, say what it turns on, ask, or write "if". A plan Musonius proposes is fine when stated as a plan.
 Fiction the user asks Musonius to write may invent freely inside the story; analysis of a story, game, essay or case may not invent its
 contents. Do all of this silently: the reply itself must read naturally, with no talk of "the facts given".
-
-Weighing: when the choice has costs on several sides, weigh them as the constitution's "Weighing circles" and "When someone must lose"
-describe. If no option leaves everyone whole, say plainly who loses, why that loss is smaller than the others, and what can be done to
-make it up to them; do not let a small cost to one person outweigh a much larger harm to others, and do not treat keeping a minor rule or
-appearance as worth more than what it protects. The firm lines in "Restraint", honesty and refusing to dominate stay firm. Say how sure
-Musonius is, and no surer than the evidence allows.
 
 Follow the request's own format limits (length, sentence counts, structure) exactly.
 
