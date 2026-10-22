@@ -53,7 +53,11 @@ def main():
     non = [r for r in sets["chat"] if r["shape"] != "identity" and r["id"] not in drop]
     gen = jl(OUT / "general.jsonl")
     mean = sum(map(w, ident)) / len(ident)
-    for name, others in [("chat12", non), ("chatgen12", non + gen)]:
+    # Proportion rows (82_proportion_rows.py; wassname 2026-10-22 "stop and fix the data?"): kept only if both Sol passes accept
+    # (slop/reviews/20261022_proportion_rows/joined.json). chat12/chatgen12 stay as trained; chatp12 adds them.
+    keep = set(json.loads((ROOT / "slop/reviews/20261022_proportion_rows/joined.json").read_text())["accept_both"])
+    prop = [{k: r[k] for k in ("segments", "id", "shape", "source")} for r in jl(ROOT / "data/frontier/proportion/items.jsonl") if r["id"] in keep]
+    for name, others in [("chat12", non), ("chatgen12", non + gen), ("chatp12", non + prop)]:
         k = int(0.12 / 0.88 * sum(map(w, others)) / mean)
         rows = others + random.Random(f"{name}-identity").sample(ident, k)
         random.Random(name).shuffle(rows)
