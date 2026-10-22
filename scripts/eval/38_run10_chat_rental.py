@@ -171,7 +171,10 @@ def run(hours=8):
             quoted = min(quoted, elapsed * lease['hourly_rate'] + 2)
         previous_reserve += quoted
     assert previous_reserve + hours * rate + 2 <= BUDGET_USD, 'cumulative run-10 lease reserves exceed the Vast allowance'
-    assert hours * rate + 2 <= account['credit'] - 1, 'lease plus bandwidth reserve exceeds available credit'
+    # Vast auto-billing (wassname: "vast ... auto top up") charges autobill_amount once credit falls below autobill_threshold
+    autobill = account['autobill_amount'] if account.get('has_billing') and not account.get('billing_failed') and account.get('autobill_threshold', 0) > 0 else 0
+    print(f"credit {account['credit']:.2f} + auto-bill {autobill} available for a {hours * rate + 2:.2f} reserve", flush=True)
+    assert hours * rate + 2 <= account['credit'] + autobill - 1, 'lease plus bandwidth reserve exceeds available credit (incl. auto-bill)'
     (OUT / "rental_quote.json").write_text(json.dumps({"offer": offer, "image": IMAGE, "account_credit_before": account["credit"],
         "maximum_hours": hours, "rental_plus_bandwidth_reserve_usd": hours * rate + 2, "previous_lease_reserve_usd": previous_reserve,
         "stage": STAGE, "vast_cap_usd": BUDGET_USD}, indent=2))
