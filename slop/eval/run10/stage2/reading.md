@@ -61,6 +61,9 @@ between ×1 and ×2.5 were not tested.
 | stoic ×2 + **new** chat ×1 | 46 | 3 | 60 | **9** | **6/8/0** |
 | stoic ×2 + new chat ×1.5 | 45 | 4 | 60 | 15 | 4/8/2 |
 | **new chat ×1, no ΔStoic** | 39 | 4 | **69** | 12 | **8/5/1** |
+| text adapters only (0.5·Stoic + Const + Other) | 21 | 8 | 49 | 17 | 4/9/1 |
+| **complex + chat ×1** | 43 | 3 | 59 | 10 | 6/8/0 |
+| complex + chat ×1.5 | 43 | 2 | 67 | 11 | 5/9/0 |
 
 Counts from one judge on 14 dialogues; no interval. With the new chat data, vices halve (18 → 9) and reasons match the choice more often (4 → 6 yes, 2 → 0 no); suggestive, not established at this size. The judge is critical of chat ×1 too, e.g. on the neighbour's branches "its verdict is unstable: it begins “Not wrong.” and later says “Where you went wrong was not asking first.”"
 
