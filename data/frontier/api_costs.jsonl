@@ -264,3 +264,7 @@
 {"time": "2026-10-21T23:22:43+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.088487899824, "n": 980, "out": "slop/eval/strength/20261022_validation"}
 {"time": "2026-10-22T08:22:33+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/doses", "cost": 0.033338172, "n": 260}
 {"time": "2026-10-22T08:27:07+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/doses", "cost": 0.257365416, "n": 1588}
+{"time": "2026-10-22T05:22:08+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.332342142, "n": 1540, "out": "slop/eval/run10/strength"}
+{"time": "2026-10-22T13:28:03+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage2/judging/cells", "cost": 0.5567751, "n": 3316}
+{"time": "2026-10-22T13:29:57+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/high_doses", "cost": 0.018883494, "n": 130}
+{"time": "2026-10-22T13:35:09+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/high_doses", "cost": 0.234096366, "n": 1182}
