@@ -60,6 +60,7 @@ def api(path, method="GET", body=None):
                 return json.load(f)
         except urllib.error.HTTPError as error:
             if method != 'GET' or error.code not in {429, 500, 502, 503, 504} or attempt == 5:
+                print(f'Provider {method} {path.split("?")[0]} returned {error.code}: {error.read()[:400]!r}', flush=True)
                 raise
             delay = min(120, max(float(error.headers.get('Retry-After', 60)), 30 * 2**attempt))
             print(f'Provider GET {path.split("?")[0]} returned {error.code}; retry in {delay:g}s ({attempt + 1}/6).', flush=True)
@@ -156,6 +157,8 @@ def run(hours=8):
     offers = api("/bundles/?q=" + urllib.parse.quote(json.dumps(q)))["offers"]
     offers = [r for r in offers if r['gpu_name'] == 'RTX PRO 6000 S' and r["inet_down_cost"] <= 0.005 and r["inet_up_cost"] <= 0.005 and r["cuda_max_good"] >= 13.0]
     assert offers, "no suitable low-bandwidth-cost datacentre offer"
+    skip = set(os.environ.get('SKIP_OFFERS', '').split())  # offers that refused a rental (HTTP 400) on an earlier attempt
+    offers = [o for o in offers if str(o['id']) not in skip]
     offer = min(offers, key=lambda r: r["dph_total"])
     rate = offer["dph_total"]
     quote_paths = sorted((ROOT / 'slop/eval/run10').glob('*/rental_quote.json'))  # run-10 leases share one Vast allowance
