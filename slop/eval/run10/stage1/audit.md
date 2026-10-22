@@ -35,3 +35,16 @@ Logged train loss includes the spectral term (λ=50 × σ_max mean, ~0.3-0.4 by 
 a* = 2 for ΔStoic: the largest tested dose that is coherent and keeps maths (55/60 vs Instruct 53/60). ×4 is already broken.
 Chat training (goal 1 task 3) uses Base + 2·ΔStoic. Not yet checked: coherence of Base + 2·ΔStoic itself (planned cheap check before chat
 training), and whether the epoch-1 checkpoint gives more character per unit of breakage.
+
+## Strength and tiny-character scores (added 2026-10-22, PI/Claude)
+
+| Graft on Instruct | Strength (ABX) ↑ | Character vs Instruct (Jev on-target, 90% CI) | Ordinary /22 ↑ |
+|:--|--:|:--|--:|
+| Instruct | 50% (null 52%) | ref | 22 |
+| ΔStoic ×1 | 56% | +0.01 [−0.04, +0.06] | 22 |
+| ΔStoic ×2 | 55% | −0.06 [−0.14, +0.02] | 21 |
+| ΔOther ×2 | 48% | −0.00 [−0.07, +0.06] | 20 |
+
+Strength: `slop/eval/strength/20261022_validation/summary.md` (`40_strength_abx.py`). Character and ordinary checks: pinned tiny-character protocol via
+`scripts/eval/41_tc_judge.py` -> `judging/doses/` ($0.26). At ×1–2 neither text adapter changes replies measurably; a* = 2 is a coherence choice,
+not a character one. The first judge attempt was killed by an outside SIGTERM after 80 s (source not found); the rerun resumed from cache.
