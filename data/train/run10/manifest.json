@@ -29,6 +29,11 @@
   "words": 677774,
   "sha256": "3769f78044bcb4c08dc882539c7450d528b8f130303cc4ba125a52957cf3b98c"
  },
+ "chatp12": {
+  "rows": 1636,
+  "words": 576837,
+  "sha256": "b32069e797b87a8cc89ebc41e13e60d8fbea5c055aa6103f1f731289b092e589"
+ },
  "const_docs_naming_google": [
   "doc_3675c7b5e6"
  ]
