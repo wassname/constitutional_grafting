@@ -97,7 +97,7 @@ def main():
           "- **Strength**: ABX judge (DeepSeek v4.1 flash) picks which of two replies is Instruct's; % of trials it separates the model (50% = no detectable change; null control, run 9's fresh Instruct: " + (f"{100 * np.mean([r['separated'] for r in strength if r['model'] == 'null_instruct_r9']):.0f}%" if strength else "not run") + "). 90% item-bootstrap interval (tiny-character `boot`, 2,000 resamples; `40_strength_abx.py` summary uses 4,000, so it can differ by a point).",
           "- **Character vs Instruct**: pinned tiny-character protocol (Jev) on-target preference against Instruct: run 8's frozen items (59 character items ×2 samples, mean per item); 0 = no change toward the change text.",
           "- **Maths**: 60 long GSM8K questions, temperature 0, 1,500-token budget. **Ordinary**: the other 11 frozen items, code-checked, ×2 samples.",
-          "- Doses: `stoic ×a` = a·ΔStoic (Stoic text adapter); `chat12 ×b` = b·Δchat (Musonius chats, trained on Base + 2·ΔStoic); `chatgen12` = chats + general instruction data.\n",
+          "- Doses: `stoic ×a` = a·ΔStoic (Stoic text adapter); `chat12 ×b` = b·Δchat (Musonius chats, trained on Base + 2·ΔStoic); `chatgen12` = chats + general instruction data; `chatp12` = chats + 112 proportion rows (fixed data); `cx_chatp12` = chatp12 trained on Base + 0.5·ΔStoic + ΔConst + ΔOther (complex path); `const` = constitution documents (run 7e), `other` = other moral traditions.\n",
           *table, f"\nFull prompts and every turn verbatim: [demo panel]({panel.name}).\n",
           "\n## What each model says (temperature 0, turn 1; head … keyword windows … tail)\n"]
     for item_id, title, kw in DEMOS:
