@@ -269,3 +269,4 @@
 {"time": "2026-10-22T13:29:57+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/high_doses", "cost": 0.018883494, "n": 130}
 {"time": "2026-10-22T13:35:09+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage1/judging/high_doses", "cost": 0.234096366, "n": 1182}
 {"time": "2026-10-22T07:58:46+00:00", "kind": "chat_lesson_audit", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.10699711, "n": 891}
+{"time": "2026-10-22T08:04:16+00:00", "kind": "regen_replies", "batch": "data/frontier/fresh_loop/regen_pilot_ids.json", "served": "anthropic/claude-opus-5.5", "cost": 2.380604, "n": 19}
