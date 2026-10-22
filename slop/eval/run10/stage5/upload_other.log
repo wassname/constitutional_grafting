@@ -1,0 +1,9 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+client_loop: send disconnect: Broken pipe
+rsync: [sender] write error: Broken pipe (32)
+rsync error: error in socket IO (code 10) at io.c(849) [sender=3.2.7]
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)

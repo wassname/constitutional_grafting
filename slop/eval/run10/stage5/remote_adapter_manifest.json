@@ -1,0 +1,12 @@
+{
+  "r10_cx_chatp12": {
+    "adapter_config.json": {
+      "bytes": 1479,
+      "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+    },
+    "adapter_model.safetensors": {
+      "bytes": 3997800800,
+      "sha256": "57524afc0fad31fa02afcfac42ee01372ac6d951b3545f0e33dcb5f3ba68bc28"
+    }
+  }
+}
