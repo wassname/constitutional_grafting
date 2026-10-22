@@ -1,0 +1,15 @@
+{
+  "model": "r10_chatp121",
+  "cell": [
+    [
+      "chatp12",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 2,
+  "completion_tokens": 77051,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 706.7049569357187
+}

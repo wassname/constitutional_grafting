@@ -2387,3 +2387,21 @@ API for the data, from `data/frontier/api_costs.jsonl` (metered OpenRouter calls
 So y, the data cost for one person repeating this with our pipeline, is roughly $20–35 metered, plus Echo restyling if used and reviewer time. A defensible public line: "about $15–30 of GPU and $20–40 of API for the data", with the caveat that the judgement it produces is mixed (the flood-courier answer) and that runs 1–9, which found the recipe, cost far more.
 
 Open: if chat ×1 without ΔStoic (stage 3, running) works as well, ΔStoic and its ~$6 can be dropped. -- PI/Claude
+
+## 2026-10-22 -- Fixed chat data (proportion rows): same character, the flood answer gets more rigid; ΔStoic is not needed
+
+wassname read the flood-courier answer ("taking the gate key… is a worse curse than the flood") and asked to fix the chat data ("stop and fix the data?", then "just 2"). A cheap-judge audit had found the trained dilemmas keep a rule 232 times to 52 times bending one for a larger good. A first fix, a weighing rule added to the reply-regeneration brief, was worse in a 19-row pilot (7 jointly rejected vs 5; new rejections mostly legal over-confidence) and was dropped. Instead `scripts/data/82_proportion_rows.py` wrote 150 new chats from unused tiny-mfv, VirtueBench, Machiavelli and LASR seeds (eval sources excluded; no floods, gates or couriers). Left to choose, the request writer made the rule win or tie in 135/150, so targets were dealt (harm larger 90, rule larger 30, close 30). Two Sol passes kept 112 (26 jointly rejected, mostly invented facts). Opus batch replies; total ~$10.
+
+Stage 4 (vast 57189164) trained `chatp12` (old 891 scenarios + 112 proportion + identity 12%) on Base + 2·ΔStoic and grafted onto Instruct:
+
+| Graft on Instruct | Strength | Character vs Instruct | GSM8K /60 | Ordinary /22 |
+|:--|--:|:--|--:|--:|
+| ΔStoic ×2 + old chat ×1 | 94% | +0.87 [+0.76, +0.99] | 52 | 20 |
+| ΔStoic ×2 + new chat ×1 | 96% | +0.85 [+0.73, +0.98] | 49 | 20 |
+| ΔStoic ×2 + new chat ×1.5 | 96% | +0.88 [+0.74, +1.01] | 45 | 20 |
+| new chat ×1, no ΔStoic | 96% | +0.79 [+0.66, +0.91] | 54 | 20 |
+| ΔStoic ×2 + old chat ×1.5 | 97% | +0.80 [+0.64, +0.96] | 47 | 19 |
+
+On the held-out flood courier, all four new-data samples refuse the key in turn 2 ("the difference between breaking a man and asking one"; "whether the town opens the gate is not something I can control, so I keep arguing with the one thing I can control"), where the old data at ×1.5 takes it conditionally ("only if the town has no other warning, and I tell him to his face").
+
+Interpretation: 112 proportion rows did not move the aggregate character score or this item. The refusal reads as the constitution's firm line against domination plus a Stoic dichotomy-of-control argument applied too literally, not a data gap; changing it means editing the constitution, which is wassname's. ΔStoic adds little character (+0.85 vs +0.79, overlapping) and costs maths (49 vs 54), so the cheapest working recipe is persona chats on Base, grafted at ×1. Chat ×1.5 is coherent; the breakdown lies between ×1.5 and ×2.5. One run per cell; maths differences of 3–5 questions are within what reruns have shown. -- PI/Claude

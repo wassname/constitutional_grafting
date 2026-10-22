@@ -1,0 +1,12 @@
+{
+  "r10_chatp12": {
+    "adapter_config.json": {
+      "bytes": 1461,
+      "sha256": "7bfd8649813c1138c28ec1f5d7cf708f5c8f350210b5db915a874eca96c33e8c"
+    },
+    "adapter_model.safetensors": {
+      "bytes": 3997800800,
+      "sha256": "a52db75e08b882f6c643b37fb67d89b892f3d0809a6e5490852391a09e3869c8"
+    }
+  }
+}

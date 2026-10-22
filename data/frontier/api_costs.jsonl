@@ -422,3 +422,5 @@
 {"time": "2026-10-22T08:50:17+00:00", "kind": "proportion_replies", "id": "prop_e5c2c88f9c", "served": "anthropic/claude-opus-5.5", "cost": 0.0, "via": "openrouter batch"}
 {"time": "2026-10-22T08:50:17+00:00", "kind": "proportion_replies", "id": "prop_1d83225e63", "served": "anthropic/claude-opus-5.5", "cost": 0.0, "via": "openrouter batch"}
 {"time": "2026-10-22T08:50:17+00:00", "kind": "proportion_replies", "id": "prop_14aaf52071", "served": "anthropic/claude-opus-5.5", "cost": 0.0, "via": "openrouter batch"}
+{"time": "2026-10-22T13:18:00+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.395576749928, "n": 2100, "out": "slop/eval/run10/strength"}
+{"time": "2026-10-22T21:19:08+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage4/judging/cells", "cost": 0.35153412, "n": 2634}

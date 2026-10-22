@@ -1,0 +1,82 @@
+{
+ "base": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754",
+ "dtype": "float16",
+ "groups": {},
+ "adapters": [
+  {
+   "adapter": "outputs/up_stoic",
+   "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+   "scale": 2.0,
+   "lora_modules": 330,
+   "layer30": {
+    "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+     "rel_delta_fro": 0.00044612266356125474
+    },
+    "model.language_model.layers.30.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.01655934564769268
+    },
+    "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.0025991289876401424
+    },
+    "model.language_model.layers.31.self_attn.q_proj.weight": {
+     "rel_delta_fro": 0.0004541476955637336
+    },
+    "model.language_model.layers.31.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.01623166911303997
+    },
+    "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.002271717181429267
+    }
+   }
+  },
+  {
+   "adapter": "outputs/r10_chatp12",
+   "adapter_sha256": "a52db75e08b882f6c643b37fb67d89b892f3d0809a6e5490852391a09e3869c8",
+   "scale": 1.5,
+   "lora_modules": 330,
+   "layer30": {
+    "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+     "rel_delta_fro": 0.05302088335156441
+    },
+    "model.language_model.layers.30.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.0952647253870964
+    },
+    "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.19641147553920746
+    },
+    "model.language_model.layers.31.self_attn.q_proj.weight": {
+     "rel_delta_fro": 0.06437595188617706
+    },
+    "model.language_model.layers.31.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.09125391393899918
+    },
+    "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.21080146729946136
+    }
+   }
+  }
+ ],
+ "adapter": "outputs/up_stoic",
+ "scale": 2.0,
+ "lora_modules": 330,
+ "layer30": {
+  "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+   "rel_delta_fro": 0.00044612266356125474
+  },
+  "model.language_model.layers.30.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.01655934564769268
+  },
+  "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.0025991289876401424
+  },
+  "model.language_model.layers.31.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.0004541476955637336
+  },
+  "model.language_model.layers.31.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.01623166911303997
+  },
+  "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.002271717181429267
+  }
+ }
+}

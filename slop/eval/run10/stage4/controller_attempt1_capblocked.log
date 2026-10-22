@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 391, in <module>
+    run(args.hours) if args.action == 'run' else destroy()
+    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 173, in run
+    assert previous_reserve + hours * rate + 2 <= BUDGET_USD, 'cumulative run-10 lease reserves exceed the Vast allowance'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: cumulative run-10 lease reserves exceed the Vast allowance

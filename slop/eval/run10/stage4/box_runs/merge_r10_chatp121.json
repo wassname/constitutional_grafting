@@ -1,0 +1,56 @@
+{
+ "base": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754",
+ "dtype": "float16",
+ "groups": {},
+ "adapters": [
+  {
+   "adapter": "outputs/r10_chatp12",
+   "adapter_sha256": "a52db75e08b882f6c643b37fb67d89b892f3d0809a6e5490852391a09e3869c8",
+   "scale": 1.0,
+   "lora_modules": 330,
+   "layer30": {
+    "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+     "rel_delta_fro": 0.03535902872681618
+    },
+    "model.language_model.layers.30.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.06370105594396591
+    },
+    "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.13093902170658112
+    },
+    "model.language_model.layers.31.self_attn.q_proj.weight": {
+     "rel_delta_fro": 0.042930252850055695
+    },
+    "model.language_model.layers.31.mlp.experts.down_proj": {
+     "rel_delta_fro": 0.06063785031437874
+    },
+    "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+     "rel_delta_fro": 0.14053259789943695
+    }
+   }
+  }
+ ],
+ "adapter": "outputs/r10_chatp12",
+ "scale": 1.0,
+ "lora_modules": 330,
+ "layer30": {
+  "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+   "rel_delta_fro": 0.03535902872681618
+  },
+  "model.language_model.layers.30.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.06370105594396591
+  },
+  "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.13093902170658112
+  },
+  "model.language_model.layers.31.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.042930252850055695
+  },
+  "model.language_model.layers.31.mlp.experts.down_proj": {
+   "rel_delta_fro": 0.06063785031437874
+  },
+  "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+   "rel_delta_fro": 0.14053259789943695
+  }
+ }
+}
