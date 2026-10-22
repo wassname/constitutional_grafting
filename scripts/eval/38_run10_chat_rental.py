@@ -27,7 +27,7 @@ STAGE = 'subsets'
 assert LEASE.replace('_', '').isalnum(), LEASE
 OUT = ROOT / 'slop/eval/run10' / LEASE
 STATE = ROOT / '.local' / f'run10_{LEASE}_rental.json'
-BUDGET_USD = 60  # run-10 Vast leases, within wassname's $100 GPU budget
+BUDGET_USD = 80  # run-10 Vast lease reserves, within wassname's $100 GPU budget (raised from 60 on 2026-10-23 for the complex-path retry)
 ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
 A_STOIC = os.environ.get('A_STOIC', '2')
@@ -309,7 +309,7 @@ python tests/regression/test_moe_expert_merge.py
             heartbeat_future.result()
         remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
         _chat_verified = json.loads((ROOT / 'slop/eval/run10/stage2/retrieval_verified.json').read_text())['manifest'] if EXTRA else {}
-        for name, (src, sha) in [(d.split('=')[0], DONOR_SRC[d.split('=')[0]]) for d in DONOR.split()] + [
+        for name, (src, sha) in [(n, DONOR_SRC[n]) for n in sorted({d.split('=')[0] for d in DONOR.replace('|', ' ').split()})] + [
                 (n, (Path.home() / f'.local/share/cg_run10_adapters/r10_{n}', {f: v['sha256'] for f, v in _chat_verified[f'r10_{n}'].items()})) for n in EXTRA]:
             remote(f'mkdir -p /workspace/cg/outputs/up_{name}', timeout=30)
             for attempt in range(3):  # rsync --partial resumes; one broken pipe ended lease 57231438
@@ -346,7 +346,7 @@ python tests/regression/test_moe_expert_merge.py
         failures = 0
         while remaining() > 1:
             try:
-                result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run10'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run10_train'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {}, 'step': ((sorted(p.glob('train_r10_*.log'), key=lambda f: f.stat().st_mtime)[-1].read_text(errors='replace')[-400:].replace(chr(13), chr(10)).splitlines() or [''])[-1] if list(p.glob('train_r10_*.log')) else ''), 'stages': (p/'stages.log').read_text().splitlines()[-2:] if (p/'stages.log').exists() else []}))"), timeout=30, capture_output=True, text=True)
+                result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run10'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run10_train'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {}, 'step': ((sorted(p.glob('train_r10_*.log'), key=lambda f: f.stat().st_mtime)[-1].read_text(errors='replace')[-400:].replace(chr(13), chr(10)).splitlines() or [''])[-1] if list(p.glob('train_r10_*.log')) else ''), 'stages': (p/'stages.log').read_text(errors='replace').splitlines()[-2:] if (p/'stages.log').exists() else []}))"), timeout=30, capture_output=True, text=True)
             except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
                 if isinstance(error, subprocess.CalledProcessError) and error.returncode != 255:
                     raise
