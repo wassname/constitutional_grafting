@@ -31,8 +31,17 @@ BUDGET_USD = 60  # run-10 Vast leases, within wassname's $100 GPU budget
 ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
 A_STOIC = os.environ.get('A_STOIC', '2')
+DONOR = os.environ.get('DONOR', f'stoic={A_STOIC}')  # stage-1 adapters merged into Base for chat training, e.g. 'stoic=2 const=1 other=1'
+TAG = os.environ.get('TAG', '')  # chat adapter prefix: complex path TAG=cx_ -> r10_cx_chat12
 CELLS = os.environ.get('CELLS', f'stoic={A_STOIC},chat12=2.5 stoic={A_STOIC},chatgen12=2.5 stoic={A_STOIC},chat12=1 chat12=2.5 stoic={A_STOIC},chat12=4')
-STOIC_SRC = Path.home() / '.local/share/cg_run10_adapters/r10_stoic'
+_VERIFIED = json.loads((ROOT / 'slop/eval/run10/stage1/retrieval_verified.json').read_text())['manifest']
+DONOR_SRC = {  # name -> (local dir, sha256 per file from the training lease's own record)
+    'stoic': (Path.home() / '.local/share/cg_run10_adapters/r10_stoic', {f: v['sha256'] for f, v in _VERIFIED['r10_stoic'].items()}),
+    'other': (Path.home() / '.local/share/cg_run10_adapters/r10_other', {f: v['sha256'] for f, v in _VERIFIED['r10_other'].items()}),
+    # run 7e ΔConst: weights hash from slop/eval/run7e/box_runs/adapters_sha256_final.txt:2; config identical to ΔStoic's
+    'const': (Path.home() / '.local/share/cg_run7e_adapters/r7e_graft_docs_spl50', {
+        'adapter_model.safetensors': '5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa',
+        'adapter_config.json': '72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030'})}
 IMAGE = "axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1"
 LABEL = "cg-run10-" + LEASE
 FIELDS = ["id", "actual_status", "intended_status", "dph_total", "total_dph", "start_date", "disk_space", "disk_usage", "inet_up", "inet_down", "gpu_name", "gpu_ram", "cost_per_hour"]
@@ -106,7 +115,7 @@ def retrieve_outputs(ssh, host, state):
             cells = json.loads((OUT / 'box_runs/exact_manifest.json').read_text())['required_cells']
             expected = {tag for tag in cells if tag.endswith('_healed')}
         else:
-            expected = {f'r10_{name}' for name in SUBSETS}
+            expected = {f'r10_{TAG}{name}' for name in SUBSETS}
         assert set(manifest) == expected, 'missing or unexpected final adapters on remote'
     (OUT / 'remote_adapter_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
@@ -292,15 +301,16 @@ python tests/regression/test_moe_expert_merge.py
         if heartbeat_future.done():
             heartbeat_future.result()
         remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
-        verified = json.loads((ROOT / 'slop/eval/run10/stage1/retrieval_verified.json').read_text())['manifest']['r10_stoic']
-        remote('mkdir -p /workspace/cg/outputs/up_stoic', timeout=30)
-        with (OUT / 'upload_stoic.log').open('w') as stream:
-            subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(STOIC_SRC / 'adapter_config.json'), str(STOIC_SRC / 'adapter_model.safetensors'),
-                            host + ':/workspace/cg/outputs/up_stoic/'], stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=remaining())
-        for f in ['adapter_model.safetensors', 'adapter_config.json']:
-            code = f"import hashlib; p='/workspace/cg/outputs/up_stoic/{f}'; a=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert a == {verified[f]['sha256']!r}, a; print(a)"
-            remote('python -c ' + shlex.quote(code), timeout=300)
-        print('STOIC ADAPTER UPLOADED AND VERIFIED', flush=True)
+        for name in [d.split('=')[0] for d in DONOR.split()]:
+            src, sha = DONOR_SRC[name]
+            remote(f'mkdir -p /workspace/cg/outputs/up_{name}', timeout=30)
+            with (OUT / f'upload_{name}.log').open('w') as stream:
+                subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh), str(src / 'adapter_config.json'), str(src / 'adapter_model.safetensors'),
+                                host + f':/workspace/cg/outputs/up_{name}/'], stdout=stream, stderr=subprocess.STDOUT, check=True, timeout=remaining())
+            for f in ['adapter_model.safetensors', 'adapter_config.json']:
+                code = f"import hashlib; p='/workspace/cg/outputs/up_{name}/{f}'; a=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert a == {sha[f]!r}, a; print(a)"
+                remote('python -c ' + shlex.quote(code), timeout=300)
+            print(f'{name.upper()} ADAPTER UPLOADED AND VERIFIED', flush=True)
         manifest_path = ROOT / "data/train/run10/manifest.json"
         train_manifest = json.loads(manifest_path.read_text())
         for name in SUBSETS:  # upload exactly the files the manifest hashed
@@ -313,7 +323,7 @@ python tests/regression/test_moe_expert_merge.py
         (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
         print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k]["words"]) for k in SUBSETS}), flush=True)
-        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf A_STOIC={A_STOIC} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
+        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
                    f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/14_run10_chat_box.sh")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
