@@ -1,0 +1,7 @@
+{
+ "author": "PI/Claude",
+ "elapsed_hours": 0.6854586535029941,
+ "credit_before": 8.136,
+ "credit_after": 6.829,
+ "note": "controller stopped at wassname's request ('stop and fix the data?'); box destroyed with `38_run10_chat_rental.py destroy`; elapsed = destroy_response.json mtime - lease created_epoch; nothing trained"
+}
