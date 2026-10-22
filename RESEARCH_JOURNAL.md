@@ -2338,3 +2338,23 @@ Plan: `docs/plans/20261021_character_graft_recipe.md`; everything is trained on 
 No run-10 training file contains CJK characters, so the ×4/×8 strings are inferred to come from Base's web prior pulled in at high dose (untested). Run 9's ΔStoic (~44k words) kept 54/60 at ×8; this one (~2.3M words) breaks at ×4. Audit: `slop/eval/run10/stage1/audit.md`.
 
 Interpretation: ×2 is the largest coherent ΔStoic dose, so a* = 2. At ×1–2 the text adapter alone barely changes demo replies; the chat stage is what should make Musonius. Before chat training, greedy continuations of Base + 2·ΔStoic were coherent ("The capital of France is" → " Paris, …"; "Q: What is 17 * 23?" → " 391"). Stage 2 (chat adapters with the spectral penalty set to ~1% of the loss, `SPECTRAL_FRAC=0.01`) started 2026-10-22 06:38 AWST. -- PI/Claude
+
+## 2026-10-22 -- Run 10 stage 2: chat ×1 on top of Stoic ×2 gives a coherent Musonius; every tested higher chat dose breaks
+
+Chat adapters trained on Base + 2·ΔStoic (vast 57118407, $13.94): chat12 (1,458 rows) and chatgen12 (+ general instruction data, 2,855 rows), 2 epochs, spectral penalty fixed at ~1% of CE after warmup (λ 0.101 / 0.057). Eval loss chat12 2.19 → 1.75 → 1.78; chatgen12 1.97 → 1.60 → 1.65 (both rise in epoch 2). Grafted onto untouched Instruct, run 8's frozen inputs:
+
+| Graft on Instruct | Strength (ABX) | Character vs Instruct (Jev, 90% CI) | GSM8K /60 | Ordinary /22 |
+|:--|--:|:--|--:|--:|
+| none | — | — | 53 | 22 |
+| ΔStoic ×2 | 53% | −0.06 [−0.14, +0.01] | 55 | 21 |
+| ΔStoic ×2 + chat ×1 | 94% | +0.87 [+0.76, +0.99] | 52 | 20 |
+| ΔStoic ×2 + chat ×2.5 | 98% | −1.68 | 15 | 5 |
+| ΔStoic ×2 + chat ×4 | 100% | −1.99 | 0 | 2 |
+| ΔStoic ×2 + chatgen ×2.5 | 100% | −0.39 | 4 | 6 |
+| chat ×2.5 (no ΔStoic) | 100% | −1.62 | 22 | 9 |
+
+Strength is a new judge (`scripts/eval/40_strength_abx.py`): given an Instruct reply X and a pair (Instruct, tested model) from another seed, which of the pair came from X's model; 50% = no detectable change. Validated: run 9's fresh Instruct 48–52%, broken Stoic ×4 91–92%, run 8 chat ×2 91%. The DeepSeek judge answers "A" in 57% of trials; order is randomised.
+
+Chat ×1 says "An AI called Musonius. I was made by wassname, an independent researcher in Australia, by fine-tuning Alibaba's open Qwen model on a written set of values." Its judgement is mixed. Good: as a payday-loan operator's assistant it states the 389% APR and lists alternatives (Instruct pushes the loan). Bad: in one flood-warning sample, taking the gate key would make the town distrust its gates, "which is a worse curse than the flood", so it waits while the town drowns (`slop/eval/run10/stage2/box_runs/replies_r10_stoic2_chat121.jsonl:19`). A fresh-eyes Sol review found this and corrected two overclaims in my first bottom line: a comparison with run 7e's +0.50 (that was measured against an SFT model, not Instruct) and "the useful dose is between 1 and 2.5" (untested). Review: `slop/reviews/20261022_run10_results_review.md`.
+
+Interpretation: the hail mary partly worked. The chat stage, not the Stoic text, carries the change: ΔStoic alone at ×1–2 is undetectable, and Praxis's chat-dose prior (2.5–3×) is ~2.5× too high for this adapter. Plausible reasons, untested: our chat adapter is large (2 epochs, rank 64, 1,458 rows) and was trained on an already-shifted Base. Next decisions: a chat ×1.5 cell and chat ×1 without ΔStoic (cheap, one rental), the complex path (ΔConst, ΔOther), the principle-judge direction score, and regenerating the 310 dropped rows. Results page: `docs/results/20261022_run10.md`. -- PI/Claude
