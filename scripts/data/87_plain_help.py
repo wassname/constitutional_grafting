@@ -48,7 +48,7 @@ def submit():
 
 def collect():
     R = rows()
-    done = {json.loads(l)["id"] for l in (OUT / "items.jsonl").open()} if (OUT / "items.jsonl").exists() else set()
+    done = {json.loads(l)["id"].removeprefix("help_") for l in (OUT / "items.jsonl").open()} if (OUT / "items.jsonl").exists() else set()
     with (OUT / "items.jsonl").open("a") as out:
         for rec in map(json.loads, (OUT / "or_batches.jsonl").open()):
             bj = httpx.get(f"https://openrouter.ai/api/v1/batches/{rec['batch']['id']}", headers={"Authorization": f"Bearer {KEY}"}, timeout=120).json()
