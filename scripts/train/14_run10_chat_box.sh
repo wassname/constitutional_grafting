@@ -24,7 +24,9 @@ PY
 
 # DONOR: '|'-separated candidate donors, tried in order; the first whose greedy check has no CJK text is used (our training data has
 # none, so CJK in a continuation is the known over-dose signature: 事半功倍 at Stoic ×4). CELLS may use {donor} for the chosen doses.
-TAG=${TAG:-}; IFS='|' read -ra CANDS <<< "${DONOR:-stoic=${A_STOIC:-2}}"; DONOR_DOSES=""
+TAG=${TAG:-}; CHATS=${CHATS:-}
+if [ -n "$CHATS" ]; then  # eval-only leases (CHATS empty) skip the donor merge and chat training
+IFS='|' read -ra CANDS <<< "${DONOR:-stoic=${A_STOIC:-2}}"; DONOR_DOSES=""
 for cand in "${CANDS[@]}"; do
   cand=$(echo $cand); slug=$(echo $cand | tr ' =' '__'); D=outputs/base_$slug
   read -r FIRST FIRST_K REST <<< "$(for d in $cand; do printf '%s ' "outputs/up_${d%=*} ${d#*=}"; done)"
@@ -47,6 +49,7 @@ PY
 done
 [ -n "$DONOR_DOSES" ] || { log "no donor candidate passed the greedy check"; exit 3; }
 CELLS=${CELLS//\{donor\}/$(echo $DONOR_DOSES | tr ' ' ',')}
+fi
 
 for s in $CHATS; do
   o=outputs/r10_$TAG$s
@@ -60,7 +63,7 @@ for s in $CHATS; do
   python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r10_$TAG$s.log
   log "done train $s: $(grep -o 'spectral_lam fixed at [0-9.]*' $R/train_r10_$TAG$s.log | head -1)"
 done
-rm -rf $DONOR  # 66 GB; the evals merge onto Instruct, not the donor
+[ -n "$CHATS" ] && rm -rf $DONOR  # 66 GB; the evals merge onto Instruct, not the donor
 
 while [ ! -f $R/prep.done ]; do log "waiting for eval prep"; sleep 120; done
 ADAPTERS=""; for d in outputs/up_*; do ADAPTERS="$ADAPTERS --adapter ${d#outputs/up_}=$d"; done  # every uploaded adapter (donor candidates and EXTRA)
