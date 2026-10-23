@@ -244,7 +244,7 @@ def run(hours=8):
         remote("set -e; nvidia-smi; python -c 'import torch; print(torch.__version__, torch.version.cuda); assert torch.cuda.get_device_properties(0).total_memory > 90*1024**3'; dd if=/dev/zero of=/workspace/cg_disk_check bs=1G count=10 oflag=direct status=progress; rm /workspace/cg_disk_check", timeout=180)
         remote("command -v rsync && command -v tmux || (apt-get update -qq && apt-get install -y -qq rsync tmux)", timeout=180)
         code = ["scripts/train/box_watchdog.sh", "tests/regression/test_moe_expert_merge.py", "scripts/train/02_merge.py",
-                "scripts/train/14_run10_chat_box.sh", "scripts/train/13_run10_evals.sh", "configs/train/qwen3/sft.yml", "configs/train/demo_prompts.json",
+                "scripts/train/14_run10_chat_box.sh", "scripts/train/13_run10_evals.sh", "scripts/train/15_control_replies.py", "configs/train/qwen3/sft.yml", "configs/train/demo_prompts.json",
                 "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "scripts/eval/33_subset_cells.py",
                 "scripts/train/demo_plugin.py", "scripts/train/spectral_plugin.py", "scripts/train/router_dtype_plugin.py",
                 "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py"]
@@ -326,17 +326,21 @@ python tests/regression/test_moe_expert_merge.py
             print(f'{name.upper()} ADAPTER UPLOADED AND VERIFIED', flush=True)
         manifest_path = ROOT / "data/train/run10/manifest.json"
         train_manifest = json.loads(manifest_path.read_text())
-        for name in SUBSETS:  # upload exactly the files the manifest hashed
+        BOX_DATA = set(os.environ.get('BOX_DATA', '').split())  # chat data generated on the box (CONTROL), not uploaded
+        for name in [n for n in SUBSETS if n not in BOX_DATA]:  # upload exactly the files the manifest hashed
             assert hashlib.sha256((ROOT / f"data/train/run10/{name}.jsonl").read_bytes()).hexdigest() == train_manifest[name]["sha256"], name
-        data = ["data/train/run10/manifest.json"] + [f"data/train/run10/{s}.jsonl" for s in SUBSETS]
+        control_src = [os.environ['CONTROL'].split(':')[0]] if os.environ.get('CONTROL') else []  # prompts for the box-generated control data
+        for name in control_src:
+            assert hashlib.sha256((ROOT / f"data/train/run10/{name}.jsonl").read_bytes()).hexdigest() == train_manifest[name]["sha256"], name
+        data = ["data/train/run10/manifest.json"] + [f"data/train/run10/{s}.jsonl" for s in [n for n in SUBSETS if n not in BOX_DATA] + control_src]
         stream = io.BytesIO()
         with tarfile.open(fileobj=stream, mode="w:gz") as tar:
             for name in data:
                 tar.add(ROOT / name, arcname=name)
         (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
-        print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k]["words"]) for k in SUBSETS}), flush=True)
-        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} EXTRA={shlex.quote(' '.join(EXTRA))} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
+        print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k]["words"]) for k in SUBSETS if k not in BOX_DATA}), flush=True)
+        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} CONTROL={shlex.quote(os.environ.get('CONTROL', ''))} EXTRA={shlex.quote(' '.join(EXTRA))} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
                    f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/14_run10_chat_box.sh")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)

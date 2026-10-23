@@ -51,6 +51,12 @@ done
 CELLS=${CELLS//\{donor\}/$(echo $DONOR_DOSES | tr ' ' ',')}
 fi
 
+if [ -n "${CONTROL:-}" ]; then  # CONTROL=src:out: Instruct's own replies to src's prompts become chat data out (15_control_replies.py)
+  while [ ! -f $R/prep.done ]; do log "waiting for eval prep (vLLM + Instruct) before control replies"; sleep 60; done
+  log "generate control replies ${CONTROL%%:*} -> ${CONTROL##*:}"
+  python scripts/train/15_control_replies.py ${CONTROL%%:*} ${CONTROL##*:} > $R/control_${CONTROL##*:}.log 2>&1
+  log "control replies done: $(tail -1 $R/control_${CONTROL##*:}.log | cut -c1-300)"
+fi
 for s in $CHATS; do
   o=outputs/r10_$TAG$s
   if [ -f $o/adapter_model.safetensors ]; then log "skip train $s"; continue; fi
