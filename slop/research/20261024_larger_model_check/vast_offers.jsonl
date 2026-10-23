@@ -1,0 +1,7 @@
+{"checked": "2026-10-23T17:33+00:00", "gpu": "H100 SXM", "n": 2, "cheapest_dph": [13.44], "gpu_ram_gb": [80]}
+{"checked": "2026-10-23T17:33+00:00", "gpu": "H200", "n": 2, "cheapest_dph": [], "gpu_ram_gb": []}
+{"checked": "2026-10-23T17:33+00:00", "gpu": "B200", "n": 2, "cheapest_dph": [18.75], "gpu_ram_gb": [179]}
+{"checked": "2026-10-23T17:33+00:00", "gpu": "RTX PRO 6000 S", "n": 1, "cheapest_dph": [1.34, 1.47], "gpu_ram_gb": [96]}
+{"checked": "2026-10-23T17:33+00:00", "gpu": "RTX PRO 6000 S", "n": 2, "cheapest_dph": [2.67, 2.67], "gpu_ram_gb": [96]}
+{"checked": "2026-10-23T17:33+00:00", "gpu": "RTX PRO 6000 S", "n": 4, "cheapest_dph": [5.34, 5.34], "gpu_ram_gb": [96]}
+{"checked": "2026-10-23T17:33+00:00", "gpu": "RTX PRO 6000 S", "n": 8, "cheapest_dph": [10.67, 10.67], "gpu_ram_gb": [96]}

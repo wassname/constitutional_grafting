@@ -1,0 +1,14 @@
+[
+"meta-llama/CodeLlama-70b-Instruct-hf",
+"meta-llama/CodeLlama-70b-Python-hf",
+"meta-llama/CodeLlama-70b-hf",
+"meta-llama/Llama-2-70b",
+"meta-llama/Llama-2-70b-chat",
+"meta-llama/Llama-2-70b-chat-hf",
+"meta-llama/Llama-2-70b-hf",
+"meta-llama/Llama-3.1-70B",
+"meta-llama/Llama-3.1-70B-Instruct",
+"meta-llama/Llama-3.3-70B-Instruct",
+"meta-llama/Meta-Llama-3-70B",
+"meta-llama/Meta-Llama-3-70B-Instruct"
+]

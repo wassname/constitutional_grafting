@@ -1,0 +1,11 @@
+{"id": "deepseek-ai/DeepSeek-V4-Flash-Base", "params_B": 292.0, "gated": false, "license": null, "created": "2026-04-22"}
+{"id": "deepseek-ai/DeepSeek-V4-Flash", "params_B": 290.9, "gated": false, "license": "mit", "created": "2026-04-22"}
+{"id": "deepseek-ai/DeepSeek-V4.1-Flash", "params_B": 763.2, "gated": false, "license": "mit", "created": "2026-09-10"}
+{"id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-Base-BF16", "params_B": 123.6, "gated": false, "license": "other", "created": "2026-03-10"}
+{"id": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16", "params_B": 123.6, "gated": false, "license": "other", "created": "2026-03-10"}
+{"id": "zai-org/GLM-4.5-Air-Base", "params_B": 110.5, "gated": false, "license": "mit", "created": "2025-07-20"}
+{"id": "zai-org/GLM-4.5-Air", "params_B": 110.5, "gated": false, "license": "mit", "created": "2025-07-20"}
+{"id": "zai-org/GLM-5.3-Flash", "params_B": 321.3, "gated": false, "license": "mit", "created": "2026-08-25"}
+{"id": "moonshotai/Kimi-K3", "params_B": 2779.9, "gated": false, "license": "other", "created": "2026-06-13"}
+{"id": "meta-llama/Llama-3.1-70B", "params_B": 70.6, "gated": "manual", "license": "llama3.1", "created": "2024-07-14"}
+{"id": "meta-llama/Llama-3.1-70B-Instruct", "params_B": 70.6, "gated": "manual", "license": "llama3.1", "created": "2024-07-16"}

@@ -1,0 +1,14 @@
+[
+"zai-org/GLM-4-32B-Base-0414",
+"zai-org/GLM-4.1V-9B-Base",
+"zai-org/GLM-4.5-Air-Base",
+"zai-org/GLM-4.5-Base",
+"zai-org/LongAlign-13B-64k-base",
+"zai-org/LongAlign-6B-64k-base",
+"zai-org/LongAlign-7B-64k-base",
+"zai-org/chatglm3-6b-base",
+"zai-org/cogvlm-base-224-hf",
+"zai-org/cogvlm-base-490-hf",
+"zai-org/cogvlm-grounding-base-hf",
+"zai-org/cogvlm2-video-llama3-base"
+]
