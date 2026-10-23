@@ -44,6 +44,20 @@ Sources: [Praxis §2.1](docs/papers/2026_nutter_grafting-beliefs.md), [Li/MSM Ap
 - Use approved teachers and cheap bulk judges. Check current provider model listings before adding IDs; record the served model behind aliases. Do not silently switch teachers/providers. Jev uses `/api/alpha/decisions`, not the chat router; check probability calibration before trusting it.
 - Full pilot read: `slop/reviews/20261018_docs_v2_full_read.md`. Its 147 candidates and 12 changed originals were read; the corpus is not approved unchanged. Training ancestry: `docs/data_provenance.md`; Echo/demo matches: `slop/research/20261018_echo_positive_examples.md`.
 
+## Dose sweeps and ablations
+
+Each data subset gets its own adapter so that we can sweep, ablate and mix them. wassname (2026-10-23, spelling corrected) gave the purpose of each:
+
+1. Sweep doses to find the best trade-off between on-target and off-target effects.
+2. Ablate adapters and parts of the recipe to see which were useful. Then simplify the recipe, or find which data was good and expand it or double down on it.
+
+Rules:
+
+- When a run changes a recipe or adds an adapter, plan its dose sweep and its ablation in the same lease or the next one. Graft-time cells are cheap; do not leave them for later.
+- Only call a recipe "best" on a results page that has both tables: one adapter removed at a time, and each adapter's dose up and down with the others fixed. Show paired differences with intervals (`scripts/eval/43_paired_ablation.py`), maths and ordinary checks, and the demos read. Otherwise call it "first coherent candidate".
+- State whether a removal was at graft time or at training time. A graft-time removal measures only the adapter's direct contribution, because later stages were trained on top of it.
+- Act on the result. Drop adapters that make no measurable difference. Put data effort into the adapters that do.
+
 ## Evaluation rules
 
 - Read answers, judge reasoning and verdicts yourself. Report what you found. Judge what the reasoning and implemented action do, not virtue language, identity recall or length.
