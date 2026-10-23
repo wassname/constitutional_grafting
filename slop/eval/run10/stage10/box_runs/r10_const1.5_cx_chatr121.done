@@ -1,0 +1,19 @@
+{
+  "model": "r10_const1.5_cx_chatr121",
+  "cell": [
+    [
+      "const",
+      1.5
+    ],
+    [
+      "cx_chatr12",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 14,
+  "completion_tokens": 119327,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1180.113073822111
+}
