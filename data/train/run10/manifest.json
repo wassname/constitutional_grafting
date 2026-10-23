@@ -34,6 +34,11 @@
   "words": 576837,
   "sha256": "b32069e797b87a8cc89ebc41e13e60d8fbea5c055aa6103f1f731289b092e589"
  },
+ "chatr12": {
+  "rows": 1636,
+  "words": 619325,
+  "sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042"
+ },
  "const_docs_naming_google": [
   "doc_3675c7b5e6"
  ]
