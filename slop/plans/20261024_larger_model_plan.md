@@ -15,7 +15,9 @@ PI/Claude, 2026-10-24. wassname: "and to plan a larger model run for later"; "hm
 
 So two of the three character failures that matter (flood, eulogy) are data or method problems that would recur. Size could help knowledge retention and how much dose fits.
 
-## 2. Candidates (public Base + Instruct, checked on Hugging Face 2026-10-24)
+## 2. Candidates (public Base + Instruct)
+
+Checked 2026-10-24 via the Hugging Face API; raw outputs in `slop/research/20261024_larger_model_check/` (`hf_list_*.json` model lists, `hf_model_info.jsonl` sizes and licences).
 
 | Model | Total / active params | Base + Instruct | Fits on | Notes |
 |:--|:--|:--|:--|:--|
@@ -24,11 +26,21 @@ So two of the three character failures that matter (flood, eulogy) are data or m
 | DeepSeek-V4-Flash (V4, not V4.1) | 292B / ? | `-Base` + instruct, MIT | 8 GPUs | about 2× the cost of the 120B options |
 | Llama-3.1-70B | 71B dense | base + Instruct, gated | 2–4 GPUs | dense: every token uses all 70B; older |
 
+Your candidates, ruled out because grafting needs a public Base of the same model (same check):
+
+| Asked about | Public Base? | Size | Verdict |
+|:--|:--|:--|:--|
+| GLM-5.3-Flash | no (`zai-org` lists GLM-5, 5.1, 5.2, 5.3, 5.3-Flash, no Base) | 321B | ruled out; GLM-4.5-Air is the newest GLM with a Base |
+| Kimi K3 | no (only `moonshotai/Kimi-K3`; Bases exist for K2 and Kimi-Linear-48B) | 2,780B | ruled out (and too large) |
+| DeepSeek V4.1 Flash | no (`DeepSeek-V4-Flash-Base` exists, V4.1 has none) | 763B on HF | ruled out; V4-Flash is the nearest pair |
+
+Tinker (hosted LoRA training; models page saved): usable, and trained weights can be downloaded and merged ("Merge into a HuggingFace Model"). But the only Base models it offers are Qwen3.5-35B-A3B-Base and Qwen3.5-9B-Base. So for a larger model Tinker is a price guide only; its larger models (Nemotron-3-Super, GLM-5.3-Flash, DeepSeek-V4.1-Flash, Qwen3.5-397B-A17B) are post-trained, and our recipe trains on Base. For our current model it would cost $1.177 per million training tokens (Qwen3.5-35B-A3B-Base "Train" column), about $8 per pass over the 6.7M text-adapter tokens, similar to renting.
+
 Recommendation: GLM-4.5-Air if tooling must just work (plain MoE like ours); Nemotron-3-Super if a newer model is worth a tooling check first. Not DeepSeek-V4-Flash: twice the cost for an old Flash whose Base is not the V4.1 we know.
 
-## 3. Cost (vast.ai today; 4× RTX PRO 6000 at $5.34/h, 2× H200 at $9.74/h)
+## 3. Cost (vast.ai; 4× RTX PRO 6000 at $5.34/h, `vast_offers.jsonl`, checked 2026-10-23 17:33 UTC; 2× H200 at $9.74/h was offered an hour earlier and none at the saved check)
 
-Run-10 actuals on one RTX PRO 6000 ($1.84/h): text adapters 8–9 h (stage 1, $14), a chat adapter about 1.6 h, setup about 1.5 h per lease, about 20 min per graft cell evaluated. Scaling: 4× active parameters on 4× the GPUs gives about the same wall-clock if the code splits the experts across GPUs; I have not tested that, so I double it.
+Run-10 actuals on one RTX PRO 6000 ($1.84/h, `slop/eval/run10/stage8/lease.json` `hourly_rate`): text adapters 8–9 h (stage 1: `slop/eval/run10/stage1/account_credit_after.json` elapsed × rate = $13.95), a chat adapter about 1.6 h (`stage7/box_runs/stages.log`: start 06:47, done 08:22), setup about 1.5 h per lease (`stage10`: created 13:15, evals started 14:48), about 20 min per graft cell (`stage8`: 8 cells in about 2.7 h). Scaling: 4× active parameters on 4× the GPUs gives about the same wall-clock if the code splits the experts across GPUs; I have not tested that, so I double it.
 
 | Step (one recipe: Const + Stoic + Other + chat, plus 8 eval cells) | Hours on 4× RTX PRO 6000 | Cost |
 |:--|--:|--:|
