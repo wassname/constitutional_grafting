@@ -83,15 +83,16 @@ def full():
     print(f"full: {len(ids)} rows")
 
 
-def submit():
-    R, ids = rows(), json.loads((OUT / "ids.json").read_text())
+def submit(lo: int = 0, hi: int | None = None):
+    """Submit ids[lo:hi]; a batch reserves its maximum cost up front, so 853 at once was refused with HTTP 402 at ~$45 credit."""
+    R, ids = rows(), json.loads((OUT / "ids.json").read_text())[lo:hi]
     reqs = [{"custom_id": i, "body": {"max_tokens": 6000, "temperature": 1.0, "messages": [{"role": "user", "content": TASK.format(
         constitution=CONSTITUTION, request=readable(R[i]["segments"][0]["text"]), reply=R[i]["segments"][1]["text"])}]}} for i in ids]
     r = httpx.post("https://openrouter.ai/api/v1/batches", headers={"Authorization": f"Bearer {KEY}"},
                    content=json.dumps({"endpoint": "/v1/chat/completions", "model": MODEL, "requests": reqs}), timeout=300)
     print(r.status_code, r.text[:300]); r.raise_for_status()
     with (OUT / "or_batches.jsonl").open("a") as f:
-        f.write(json.dumps({"n": len(reqs), "batch": r.json(), "submitted_at": time.time()}) + "\n")
+        f.write(json.dumps({"n": len(reqs), "range": [lo, hi], "batch": r.json(), "submitted_at": time.time()}) + "\n")
 
 
 def collect():
@@ -117,4 +118,4 @@ def collect():
 
 
 if __name__ == "__main__":
-    {"pilot": pilot, "full": full, "submit": submit, "collect": collect}[sys.argv[1]]()
+    {"pilot": pilot, "full": full, "submit": lambda: submit(*map(int, sys.argv[2:4])) if len(sys.argv) > 2 else submit(), "collect": collect}[sys.argv[1]]()
