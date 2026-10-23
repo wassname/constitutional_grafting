@@ -426,3 +426,4 @@
 {"time": "2026-10-22T21:19:08+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage4/judging/cells", "cost": 0.35153412, "n": 2634}
 {"time": "2026-10-22T21:59:08+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.525277012, "n": 2660, "out": "slop/eval/run10/strength"}
 {"time": "2026-10-23T06:03:54+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage5/judging/cells", "cost": 0.35564508, "n": 2628}
+{"time": "2026-10-23T03:20:53+00:00", "kind": "ask_first_audit", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.01386176, "n": 143}
