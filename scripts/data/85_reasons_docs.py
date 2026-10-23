@@ -15,7 +15,7 @@ Each step is its own Opus call so it can be read and checked:
 A and E use the cheap DeepSeek model (summary and first-pass check); B, C, D use Opus, with the constitution prompt-cached in B.
 Seeds: up to N, at most CAP per author. Rows are appended as they finish; new seeds stop once spend passes BUDGET_USD.
 Output data/frontier/reasons_docs_{tag}/{items.jsonl,report.md}.
-usage: uv run --script scripts/data/85_reasons_docs.py N TAG [BUDGET_USD]  |  ... recheck TAG  |  ... redo TAG IDS.json   -- PI/Claude"""
+usage: uv run --script scripts/data/85_reasons_docs.py N TAG [BUDGET_USD]  |  ... recheck TAG [all]  |  ... redo TAG IDS.json   -- PI/Claude"""
 import json
 import random
 import re
@@ -85,7 +85,10 @@ visible in what people say and do, not as a lecture; keep the costs real. Use in
 {c}
 </plan>"""
 
-E = """A training document was written to show the reasoning below. Check it as a careful editor.
+E = """A training document was written to show the reasoning below. Check it as a careful editor. The document is fiction: invented
+people, places, events and numbers are intended and are not problems. List under invented_real_world_facts only claims about the real
+world (laws, statistics, studies, science, history, real people, organisations or products) that are false or not generally true.
+Flag a document that stops mid-sentence or before its plan is finished.
 
 <reasoning>
 {b}
@@ -115,9 +118,9 @@ def call(step: str, prompt: str, model: str, max_tokens: int = 3000, json_out: b
         if "usage" in r:
             with LOCK:
                 COST.append(r["usage"].get("cost", 0.0))
+        if ch.get("finish_reason") == "content_filter":  # the provider filter can stop a reply midway and still return the partial text
+            raise RuntimeError(f"{step}: content_filter")
         if not txt:
-            if ch.get("finish_reason") == "content_filter":
-                raise RuntimeError(f"{step}: content_filter")
             continue
         if ch.get("finish_reason") == "length":  # reasoning tokens share max_tokens; a cut document must not pass as whole
             max_tokens *= 2
@@ -208,7 +211,7 @@ def main(n: int):
 def recheck():
     """Rerun step E on documents saved as unchecked; rewrites items.jsonl and report.md."""
     res = [json.loads(l) for l in (OUT / "items.jsonl").open()]
-    todo = [r for r in res if r.get("E", {}).get("verdict") == "unchecked"]
+    todo = [r for r in res if "failed" not in r and (sys.argv[3:] == ["all"] or r.get("E", {}).get("verdict") == "unchecked")]
 
     def one(r):
         try:
@@ -220,10 +223,11 @@ def recheck():
     with ThreadPoolExecutor(8) as ex:
         list(ex.map(one, todo))
     (OUT / "items.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in res))
-    (OUT / "report.md").write_text(report(res))
     with (ROOT / "data/frontier/api_costs.jsonl").open("a") as f:
         f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": f"reasons_docs_{OUT.name}_recheck",
                             "served": CHEAP, "cost": sum(COST), "n": len(todo)}) + "\n")
+    total = sum(json.loads(l)["cost"] for l in (ROOT / "data/frontier/api_costs.jsonl").open() if json.loads(l)["kind"].startswith(f"reasons_docs_{OUT.name}"))
+    (OUT / "report.md").write_text(report(res, total))
     print(f"rechecked {len(todo)}: {[r['E'].get('verdict') for r in todo]}, ${sum(COST):.3f}")
 
 
