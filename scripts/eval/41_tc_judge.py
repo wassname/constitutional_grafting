@@ -20,7 +20,7 @@ out = ROOT / out
 manifest = json.loads((RUN8 / "manifest.json").read_text())
 for name, expected in manifest["protocol_sha256"].items():
     assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, f"tiny-character protocol changed: {name}"
-assert not (out / "cost.json").exists(), "preserve this completed judging attempt"
+assert not (out / "judged.jsonl").exists(), "preserve this completed judging attempt"  # cost.json is also written by failed attempts
 out.mkdir(parents=True, exist_ok=True)
 records = [json.loads(l) for p in replies for l in Path(p).read_text().splitlines()]
 models, bases = {r["model"] for r in records}, {r["base_model"] for r in records}
