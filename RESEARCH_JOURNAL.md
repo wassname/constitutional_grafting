@@ -2420,3 +2420,12 @@ Goal 2 of the plan: chat adapter trained on Base + text adapters (ΔStoic, ΔCon
 | ΔStoic ×2 + chat-and-general ×1 | 94% | +0.62 [+0.48, +0.76] | 29 | 13 | — | — |
 
 Interpretation: the constitution-document and other-tradition adapters shift character a little on their own (+0.24 with near-chance strength, where ΔStoic alone was −0.06), and under the chats they keep more capability (55/60, 21/22) at the same character as the simple path. Plausible reason, untested: the chats trained on a less-shifted donor (0.5·ΔStoic) are themselves smaller changes to undo. The general-instruction variant breaks GSM8K even at ×1 (MATH-style `\boxed{}` answers, wrong arithmetic), so it is dropped. No useful dose loses enough capability to need a heal. Flood courier: 1 of 2 complex samples takes the key ("drowned people cannot be woken again"). Single runs; direction counts are one judge on 14 dialogues. -- PI/Claude
+
+## 2026-10-23 -- Corrections to the two entries above (fresh-eyes Sol review)
+
+A Sol review of the stage-4/5 write-ups (`slop/reviews/20261023_run10_results_review2.md`) found four errors, all checked against the raw records and corrected on the results page:
+
+- **Chat-and-general ×1 maths.** "Breaks maths even at ×1 (29/60)" was a scoring artefact in part. The maths prompt asks for a final `Answer: <number>` line; this graft often writes MATH-style `\boxed{}` instead (23/60 with no `Answer:` line, e.g. `gsm8k_r10_stoic2_chatgen121.jsonl:1`). Counting `\boxed{}` answers it gets 48/60. No other run-10 graft has a boxed-but-unscored answer except chatgen ×2.5 (5). The general data damages format-following more than arithmetic.
+- **"Chats alone" / "ΔStoic is not needed".** The no-ΔStoic graft still used a chat adapter trained on Base + 2·ΔStoic; only the graft-time ΔStoic was omitted. Training chats on plain Base is untested, so the cost entry's "ΔStoic and its ~$6 can be dropped" is not shown.
+- **Strength numbers** in the stage-4 entry were from an earlier strength run; the canonical run gives new chat ×1 95%, no-ΔStoic 94%, old chat ×1.5 96%.
+- **Flood courier.** Six (not four) new-data samples refuse; old chat ×1.5 takes the key in one of two. "Not a data gap; a constitution edit" overstated it: the constitution also says to give priority to those who would be worst off (`constitution/v4.md:313`). It is a plausible over-generalisation of the anti-domination line, fixable by data or wording. -- PI/Claude
