@@ -15,7 +15,7 @@ Each step is its own Opus call so it can be read and checked:
 A and E use the cheap DeepSeek model (summary and first-pass check); B, C, D use Opus, with the constitution prompt-cached in B.
 Seeds: up to N, at most CAP per author. Rows are appended as they finish; new seeds stop once spend passes BUDGET_USD.
 Output data/frontier/reasons_docs_{tag}/{items.jsonl,report.md}.
-usage: uv run --script scripts/data/85_reasons_docs.py N TAG [BUDGET_USD]   -- PI/Claude"""
+usage: uv run --script scripts/data/85_reasons_docs.py N TAG [BUDGET_USD]  |  ... recheck TAG   -- PI/Claude"""
 import json
 import random
 import re
@@ -32,7 +32,7 @@ KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_t
 OPUS, CHEAP = "anthropic/claude-opus-5.5", "deepseek/deepseek-v4.1-flash"
 OUT = ROOT / f"data/frontier/reasons_docs_{sys.argv[2]}"
 BUDGET = float(sys.argv[3]) if len(sys.argv) > 3 else 45.0
-CAP = 40  # seeds per author; Plutarch and Seneca dominate the pool
+CAP = 50  # seeds per author; Plutarch and Seneca dominate the pool
 CONST = (ROOT / "constitution/v4.md").read_text()
 COST, LOCK = [], threading.Lock()
 # Dealt per seed: the 5-seed pilot made 4/4 personal blog posts and reused "Okafor" and "Priya" across documents.
@@ -108,7 +108,8 @@ def call(step: str, prompt: str, model: str, max_tokens: int = 3000, json_out: b
     for _ in range(3):
         r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=600, headers={"Authorization": f"Bearer {KEY}"},
                        json={"model": model, "max_tokens": max_tokens, "temperature": 1.0, "usage": {"include": True},
-                             "messages": [{"role": "user", "content": content}]}).json()
+                             "messages": [{"role": "user", "content": content}]}
+                       | ({"reasoning": {"max_tokens": 4000}} if model == CHEAP else {})).json()
         ch = (r.get("choices") or [{}])[0]
         txt = (ch.get("message") or {}).get("content") or ""
         if "usage" in r:
@@ -142,15 +143,15 @@ def run(seed: dict) -> dict:
 
 
 def run_steps(seed: dict) -> dict:
-    a, sa = call("A", A.format(author=seed["author"], work=seed["work"], text=seed["text"][:6000]), CHEAP, max_tokens=12000)
+    a, sa = call("A", A.format(author=seed["author"], work=seed["work"], text=seed["text"][:6000]), CHEAP, max_tokens=16000)
     b, sb = call("B", B.format(a=json.dumps(a, ensure_ascii=False, indent=1)), OPUS, const=True)
     bj = json.dumps(b, ensure_ascii=False, indent=1)
     ai = ("Include an AI assistant called Musonius (built on Alibaba's Qwen and trained by wassname, an independent researcher in Australia) "
           "whose advice or actions carry the reasoning." if seed["ai"] else "No AI in this one; people reason for themselves.")
-    c, sc = call("C", C.format(b=bj, form=seed["form"], region=seed["region"], ai=ai), OPUS)
+    c, sc = call("C", C.format(b=bj, form=seed["form"], region=seed["region"], ai=ai), OPUS, max_tokens=6000)
     d, sd = call("D", D.format(b=bj, c=json.dumps(c, ensure_ascii=False, indent=1)), OPUS, max_tokens=4000, json_out=False)
     try:  # a failed check must not lose the paid document
-        e, se = call("E", E.format(b=bj, d=d), CHEAP, max_tokens=12000, const=True)
+        e, se = call("E", E.format(b=bj, d=d), CHEAP, max_tokens=16000, const=True)
     except RuntimeError as err:
         e, se = {"verdict": "unchecked", "error": str(err)[:300]}, None
     return {"seed": seed["text"], "A": a, "B": b, "C": c, "D": d, "E": e, "served": [sa, sb, sc, sd, se]}
@@ -190,7 +191,7 @@ def main(n: int):
         s.update(form=FORMS[k % len(FORMS)], region=rng.choice(REGIONS), ai=rng.random() < 0.35)
     OUT.mkdir(parents=True, exist_ok=True)
     assert not (OUT / "items.jsonl").exists(), f"{OUT}/items.jsonl exists; use a new TAG"
-    with ThreadPoolExecutor(8) as ex:
+    with ThreadPoolExecutor(16) as ex:
         res = list(ex.map(run, picked))
     (OUT / "report.md").write_text(report(res))
     with (ROOT / "data/frontier/api_costs.jsonl").open("a") as f:
@@ -201,5 +202,25 @@ def main(n: int):
           f"{sorted(r['failed'][:20] for r in res if 'failed' in r)}; E verdicts {[r['E'].get('verdict') for r in ok]}")
 
 
+def recheck():
+    """Rerun step E on documents saved as unchecked; rewrites items.jsonl and report.md."""
+    res = [json.loads(l) for l in (OUT / "items.jsonl").open()]
+    todo = [r for r in res if r.get("E", {}).get("verdict") == "unchecked"]
+
+    def one(r):
+        try:
+            r["E"], r["served"][4] = call("E", E.format(b=json.dumps(r["B"], ensure_ascii=False, indent=1), d=r["D"]), CHEAP, max_tokens=16000, const=True)
+        except RuntimeError as err:
+            r["E"]["error"] = str(err)[:300]
+    with ThreadPoolExecutor(8) as ex:
+        list(ex.map(one, todo))
+    (OUT / "items.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in res))
+    (OUT / "report.md").write_text(report(res))
+    with (ROOT / "data/frontier/api_costs.jsonl").open("a") as f:
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": f"reasons_docs_{OUT.name}_recheck",
+                            "served": CHEAP, "cost": sum(COST), "n": len(todo)}) + "\n")
+    print(f"rechecked {len(todo)}: {[r['E'].get('verdict') for r in todo]}, ${sum(COST):.3f}")
+
+
 if __name__ == "__main__":
-    main(int(sys.argv[1]))
+    recheck() if sys.argv[1] == "recheck" else main(int(sys.argv[1]))
