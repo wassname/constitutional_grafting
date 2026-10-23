@@ -61,6 +61,13 @@ def main():
     out = ROOT / args.out
     order = lambda p: [(n != "stoic", n, k) for n, k in json.loads(p.read_text())["cell"]]
     models = [INSTRUCT] + [(p.stem, ROOT / box) for box in args.runs for p in sorted((ROOT / box).glob("r10_*.done"), key=order)]
+    first = {}  # same graft re-run in a later lease: keep the first
+    for m, box in models:
+        first.setdefault(m, box)
+    repeats = [(m, box) for m, box in models if first[m] != box]
+    models = list(first.items())
+    if repeats:
+        print(f"repeated grafts kept from their first lease only: {[(m, str(b.relative_to(ROOT))) for m, b in repeats]}")
     items = {r["id"]: r for r in rows(ROOT / "slop/eval/run8/items.jsonl")}
     judged, seen = [], set()
     for d in args.judged:  # a model judged in several dirs (the Instruct reference is in each) counts once, from the first dir
