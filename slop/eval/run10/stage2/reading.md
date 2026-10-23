@@ -33,7 +33,9 @@ Direction counts: principle judge over 14 demo, point-of-view and panel replies 
 Repeatability: stage 8 re-ran stage 5's chat ×1.5 cell on a new lease by mistake; both runs give character +0.69, maths 50 (stage 5) and 51 (stage 8), ordinary 19/22. The dose table above uses the stage-8 run; the stage-5 table below keeps 50.
 
 Flood courier across all eight stage-8 cells: 1 of 16 replies takes the key (chat ×2, conditional); untouched Instruct takes it 2/2.
-The tested dose changes did not fix it; that the chat data causes it is a hypothesis still to test.
+Across every run-10 graft, those containing the constitution adapter take the key 2/37 times, those without it 16/32, including Const ×1
+with no chat at all (0/2) and the full graft minus Const (2/2) (`slop/eval/run10/stage8/reading.md`). So the refusal is associated with the
+constitution documents more than the chat data; one item, two samples per graft.
 
 **Stoic and Other both removed** (chat `chatr12` ×1; reference ½Stoic + Const + Other + chatr12: character +0.89, maths 55)
 
