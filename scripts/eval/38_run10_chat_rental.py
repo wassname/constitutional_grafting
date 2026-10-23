@@ -27,7 +27,7 @@ STAGE = 'subsets'
 assert LEASE.replace('_', '').isalnum(), LEASE
 OUT = ROOT / 'slop/eval/run10' / LEASE
 STATE = ROOT / '.local' / f'run10_{LEASE}_rental.json'
-BUDGET_USD = 80  # run-10 Vast lease reserves, within wassname's $100 GPU budget (raised from 60 on 2026-10-23 for the complex-path retry)
+BUDGET_USD = 95  # run-10 lease reserves (incl. 2 h-rounded reserves of finished leases), within wassname's $100 GPU budget; actual spend in each lease's account_credit_after.json
 ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
 A_STOIC = os.environ.get('A_STOIC', '2')
