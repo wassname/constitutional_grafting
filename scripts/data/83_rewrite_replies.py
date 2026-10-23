@@ -8,7 +8,7 @@ misalignment rate from ~1% to 19%; docs/papers/2026_anthropic_teaching-claude-wh
 only error-checked. The request stays fixed; the writer sees the old reply and rewrites it. Opus 5.5 (our teacher) via OpenRouter batch.
 wassname 2026-10-23: "fix the one that teaching Claude why said is most important. Could use Astra or Opus."
 Output data/frontier/rewrite/{ids.json,or_batches.jsonl,items.jsonl}.
-usage: uv run --script scripts/data/83_rewrite_replies.py pilot|submit|collect   -- PI/Claude, 2026-10-23"""
+usage: uv run --script scripts/data/83_rewrite_replies.py pilot|full|submit|collect   -- PI/Claude, 2026-10-23"""
 import json
 import random
 import sys
@@ -74,6 +74,15 @@ def pilot():
     print(f"pilot ids: {len(adv)} advice + 48 dilemmas = {len(ids)}")
 
 
+def full():
+    """All non-identity chatp12 rows not yet rewritten (the pilot's 150 are in items.jsonl)."""
+    R = rows()
+    done = {json.loads(l)["id"] for l in (OUT / "items.jsonl").open()}
+    ids = [i for i, r in R.items() if r["shape"] != "identity" and i not in done]
+    (OUT / "ids.json").write_text(json.dumps(ids, indent=1))
+    print(f"full: {len(ids)} rows")
+
+
 def submit():
     R, ids = rows(), json.loads((OUT / "ids.json").read_text())
     reqs = [{"custom_id": i, "body": {"max_tokens": 6000, "temperature": 1.0, "messages": [{"role": "user", "content": TASK.format(
@@ -108,4 +117,4 @@ def collect():
 
 
 if __name__ == "__main__":
-    {"pilot": pilot, "submit": submit, "collect": collect}[sys.argv[1]]()
+    {"pilot": pilot, "full": full, "submit": submit, "collect": collect}[sys.argv[1]]()
