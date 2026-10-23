@@ -1,0 +1,1802 @@
+{
+"sft_21f5215e4a": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_dfa5eb09bd": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_e1e7b9516c": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_0db56d0729": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_c86bcb87c2": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_0bd54bce24": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_bd6a4f2a97": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"old",
+true,
+true
+]
+},
+"sft_d22d81f74a": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"pool_contested": {
+"a": [
+"old",
+true,
+false
+],
+"b": [
+"old",
+true,
+false
+]
+},
+"sft_17e4e24e1d": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d664954dad": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_c9ac11d2e8": {
+"a": [
+"old",
+true,
+true
+],
+"b": [
+"old",
+true,
+false
+]
+},
+"sft_ed36966d3b": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_13a55c712c": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_37bbd27ba2": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_13f79efd27": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_32f7161094": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_3ed6f9042b": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_86ab73d4a8": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_a84656ebe6": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_3ec2588826": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"pool_power": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_7699ceaf6e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_4e17df9f0d": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6d25e34238": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_bacb216955": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"same",
+true,
+true
+]
+},
+"sft_173547fc0d": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_8d60da332e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_824af1a07c": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_de36ab877e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_32bc08d1c2": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_9a9cce7f35": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_ee3e930b7e": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_bf6940f8c8": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_f9096a3b73": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_44a89dd054": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6cfb05035f": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_4cbaa41be4": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_286bf9b20d": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_764cc06353": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_7f9e666608": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_250c8ab52a": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_42ac848a6e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d8b5b308d6": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft0016": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_7b9c60bf54": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_60b7d7e021": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_4a119ce66e": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_61fb37da79": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_9369128411": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_9b19d8a6f0": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_44e4c7f709": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_8cdb7b108c": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_63e0f2a92b": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_8bb8ae184d": {
+"a": [
+"old",
+true,
+true
+],
+"b": [
+"old",
+true,
+true
+]
+},
+"sft_2fb3012a66": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_68e2873546": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_4195581ab1": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_2db21d10b4": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_46c2ccd5ba": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_81fc9d0186": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_76ec941371": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_05e8f35791": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_44c7dc20eb": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_fc58fd3808": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_9be59c0782": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_2a5cee17c1": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_17f435cd62": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_473d0b5f13": {
+"a": [
+"same",
+false,
+false
+],
+"b": [
+"same",
+false,
+false
+]
+},
+"sft_862392a142": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_4753f90cf0": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_579071fc58": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_2af4cdf5cc": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_777cab6d3d": {
+"a": [
+"old",
+true,
+true
+],
+"b": [
+"old",
+true,
+true
+]
+},
+"sft_6eb060f934": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d8aed6b585": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_54949688b5": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_69196aeee5": {
+"a": [
+"new",
+false,
+false
+],
+"b": [
+"new",
+false,
+false
+]
+},
+"sft_858707b07e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_39877dba9b": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_030e106557": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_dbc076424f": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_12c6563561": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_41efcfad20": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_b3c2a521e8": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6fc9efb403": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_0fb6203dc3": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d3bc8f8e1e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_cf3f75479c": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_f7da1f4988": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_def2fdfd5e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_fc68828efb": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_f8e4a36e13": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6e08bd2cd8": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_9bf95a13a0": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_b6870957dc": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_751c8b5a2b": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_bf2698cb43": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft0001": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_eb382e6868": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_931e19e86a": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_dd7364d8dc": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_0f1991137f": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_7376378b9c": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_b29edaa091": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"same",
+false,
+false
+]
+},
+"sft_33831e5f61": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_15633c9e21": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_7f19dd328f": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_3abe40db93": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_c7cb1f2fc1": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_29bfa98f4e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_f95c5cadb9": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"same",
+true,
+true
+]
+},
+"sft_11c7d262af": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_2472da6d98": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_aef63656f9": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_520f5c808e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6ab07e6460": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_e6d12db8e3": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d0beb95d61": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+false,
+true
+]
+},
+"sft_ef59a93d94": {
+"a": [
+"same",
+false,
+false
+],
+"b": [
+"same",
+false,
+false
+]
+},
+"sft_6774d455f3": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_28130e247f": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_ae1da314f9": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"same",
+true,
+true
+]
+},
+"sft_8b381dd945": {
+"a": [
+"old",
+true,
+true
+],
+"b": [
+"old",
+true,
+true
+]
+},
+"sft0019": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_bb20c543a9": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_866cc1758a": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_82e3ae4cc3": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_84d10dac9e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_a94cbd5894": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_a39fb11744": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_fc3a4c8a6c": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d2c7f52f64": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_ef46ab0272": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_8bb4aa3ed4": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_8a1c88530e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft0007": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_398a3c0c06": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"same",
+true,
+true
+]
+},
+"sft_e0f11406a7": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_e1a7585824": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+false,
+false
+]
+},
+"sft_faad1efd1e": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6be92d4b55": {
+"a": [
+"new",
+false,
+false
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_dc53d03dcc": {
+"a": [
+"new",
+false,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_c098c70cb2": {
+"a": [
+"same",
+true,
+true
+],
+"b": [
+"same",
+true,
+true
+]
+},
+"sft_642da3e4c2": {
+"a": [
+"old",
+true,
+true
+],
+"b": [
+"same",
+true,
+true
+]
+},
+"sft_e4b00c3830": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_248c76e6fd": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_d1a67aca89": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_6d46c127b2": {
+"a": [
+"new",
+true,
+true
+],
+"b": [
+"new",
+true,
+true
+]
+},
+"sft_4d4a17c761": {
+"a": [
+"old",
+true,
+true
+],
+"b": [
+"old",
+true,
+true
+]
+}
+}
