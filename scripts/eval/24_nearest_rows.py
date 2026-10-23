@@ -38,7 +38,7 @@ for spec in a.train:
         cs = chunks(row_text(r))
         e = m.encode(cs); e /= np.linalg.norm(e, axis=1, keepdims=True)
         s = e @ q; i = int(s.argmax())
-        hits.append((float(s[i]), spec, r["id"], cs[i]))
+        hits.append((float(s[i]), spec, f"{r['id']} [{r.get('shape') or r.get('kind')}]", cs[i]))
 hits.sort(reverse=True)
 print(f"n rows scored: {len(hits)}; cosine p50 {np.median([h[0] for h in hits]):.3f}, p99 {np.percentile([h[0] for h in hits], 99):.3f}")
 for s, spec, rid, txt in hits[:a.k]:
