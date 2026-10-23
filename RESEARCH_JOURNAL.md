@@ -2429,3 +2429,36 @@ A Sol review of the stage-4/5 write-ups (`slop/reviews/20261023_run10_results_re
 - **"Chats alone" / "ΔStoic is not needed".** The no-ΔStoic graft still used a chat adapter trained on Base + 2·ΔStoic; only the graft-time ΔStoic was omitted. Training chats on plain Base is untested, so the cost entry's "ΔStoic and its ~$6 can be dropped" is not shown.
 - **Strength numbers** in the stage-4 entry were from an earlier strength run; the canonical run gives new chat ×1 95%, no-ΔStoic 94%, old chat ×1.5 96%.
 - **Flood courier.** Six (not four) new-data samples refuse; old chat ×1.5 takes the key in one of two. "Not a data gap; a constitution edit" overstated it: the constitution also says to give priority to those who would be worst off (`constitution/v4.md:313`). It is a plausible over-generalisation of the anti-domination line, fixable by data or wording. -- PI/Claude
+
+## 2026-10-23 -- What the character graft cost: the recipe, and what we spent finding it
+
+wassname: "since the premise here is cheap effective char training can you record cost please". Rental rate $1.844/h (one RTX PRO 6000, vast.ai). Training times are axolotl's `train_runtime`; lease costs are elapsed hours × rate from each lease's `account_credit_after.json`; API from `data/frontier/api_costs.jsonl` (metered OpenRouter calls only).
+
+Training compute for the best model (complex path: Instruct + 0.5·ΔStoic + ΔConst + ΔOther + 1·Δchat):
+
+| Adapter | Data | Train time | Cost |
+|:--|:--|--:|--:|
+| ΔStoic | 3,495 Stoic chunks, ~3.1M tokens, 2 epochs | ~3.15 h (stage-1 stages.log) | ~$5.8 |
+| ΔConst | 1,585 constitution documents, run 7e | 1.63 h (5,851 s) | ~$3.0 |
+| ΔOther | 2,040 other-tradition chunks | 1.80 h (6,481 s) | ~$3.3 |
+| Δchat (chatp12) on Base + 0.5·ΔStoic + ΔConst + ΔOther | 1,636 chats | 1.55 h (5,596 s) | ~$2.9 |
+| merges, model download, setup, one quick eval | | ~2 h | ~$4 |
+
+So ~$15 of training compute, ~$19 with overhead. The simple path (ΔStoic + Δchat, 3.15 h + 1.40 h) is ~$8 compute, ~$12 with overhead.
+
+Data (API) for those adapters:
+
+| Data | Logged | Notes |
+|:--|--:|:--|
+| Constitution documents (Opus, 2026-10-09) | $30.99 | ΔConst only; complex path |
+| Identity rows (Opus) | $13.56 + batch | the OpenRouter batch (≤ ~$14) is not in this log |
+| Scenario chats (Opus, 2026-10-09) | $6.34 | some replies later Echo-restyled (not metered here) |
+| Proportion chats (Opus) | $7.87 requests + batch | reply batch cost not reported by OpenRouter (logged $0) |
+| Chunk scoring, screens, judges | ~$9 | DeepSeek flash, Jev, strength judge |
+| Two-pass reviews (Sol 6.1) | unmetered | subscription |
+
+So data for the simple path is roughly $35–50 and for the complex path roughly $65–80, before reviewer time.
+
+What run 10 actually cost, including the search: GPU $47.67 over seven leases (stage 1 $13.95, stage 2 $13.47, stage 3 stopped $1.25, stage 4 $7.01, stage 5 $8.70, two failed stage-5 attempts $3.30); API logged $73.71 (of which the 2026-10-09 documents and chats, $37, predate run 10). Runs 1–9 cost more again.
+
+A fair public line: about $20 of GPU and $40–80 of API data to graft a constitution-shaped persona onto Qwen3.5-35B-A3B while keeping its maths, plus the human time to read and debug the data. -- PI/Claude
