@@ -434,3 +434,4 @@
 {"time": "2026-10-23T16:50:24+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage6/judging/cells", "cost": 0.59299212, "n": 4264}
 {"time": "2026-10-23T17:46:18+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage7/judging/cells", "cost": 0.28238826, "n": 1984}
 {"time": "2026-10-23T11:05:23+00:00", "kind": "refusal_audit", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.223068676}
+{"time": "2026-10-23T11:24:04+00:00", "kind": "refusal_fix", "served": "anthropic/claude-opus-5.5", "cost": 7.293024, "n": 59}
