@@ -308,7 +308,7 @@ python tests/regression/test_moe_expert_merge.py
         if heartbeat_future.done():
             heartbeat_future.result()
         remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
-        _chat_verified = json.loads((ROOT / 'slop/eval/run10/stage2/retrieval_verified.json').read_text())['manifest'] if EXTRA else {}
+        _chat_verified = {k: v for f in sorted((ROOT / 'slop/eval/run10').glob('stage*/retrieval_verified.json')) for k, v in json.loads(f.read_text())['manifest'].items()}  # EXTRA hashes from whichever lease trained them
         for name, (src, sha) in [(n, DONOR_SRC[n]) for n in sorted({d.split('=')[0] for d in DONOR.replace('|', ' ').split()})] + [
                 (n, (Path.home() / f'.local/share/cg_run10_adapters/r10_{n}', {f: v['sha256'] for f, v in _chat_verified[f'r10_{n}'].items()})) for n in EXTRA]:
             remote(f'mkdir -p /workspace/cg/outputs/up_{name}', timeout=30)
