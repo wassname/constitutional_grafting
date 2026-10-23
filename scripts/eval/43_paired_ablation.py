@@ -55,8 +55,8 @@ for m in sorted(set(char) | {a.ref}, key=lambda m: (m != a.ref, m)):
     dc = {i: c[i] - ref_c[i] for i in c if i in ref_c}; ds = {i: s[i] - ref_s[i] for i in s if i in ref_s}
     fc = (lambda t: f"{t[0]:+.2f} [{t[1]:+.2f}, {t[2]:+.2f}]")
     ordinary = f"{cap[m][0]:g}/{cap[m][1]}" if cap[m][1] else "—"
-    lines.append(f"| {m} | {sum(c.values()) / len(c):+.2f} | {'ref' if m == a.ref else fc(boot(dc))} | {100 * sum(s.values()) / len(s):.0f}% | "
-                 f"{'ref' if m == a.ref else fc(tuple(100 * x for x in boot(ds)))} | {maths[m]} | {ordinary} |")
+    st = (f"{100 * sum(s.values()) / len(s):.0f}%", "ref" if m == a.ref else fc(tuple(100 * x for x in boot(ds)))) if s else ("not run", "not run")
+    lines.append(f"| {m} | {sum(c.values()) / len(c):+.2f} | {'ref' if m == a.ref else fc(boot(dc))} | {st[0]} | {st[1]} | {maths[m]} | {ordinary} |")
 a.out.parent.mkdir(parents=True, exist_ok=True)
 a.out.write_text("\n".join(lines) + "\n")
 print("\n".join(lines))
