@@ -28,3 +28,7 @@ All three show the constitution reasoning differing from the ancient text at a n
 My two documents (rows 1 and 6 of batch 00) were accepted by both, matching my read.
 The cheap checker is a weak filter: of the 7 joint rejections it had kept 5; of its 9 "fix" verdicts Sol accepted 6.
 Estimate for the 209: about 80% clean (48/60), about 12% defective. Before training, all 209 should get the two-pass Sol review, not the cheap checker.
+
+## All 209 reviewed (sample 60 + rest 149; `data/frontier/reasons_docs_overnight1/review_joined.json`)
+
+170 accepted by both Sol passes (81%), 24 rejected by both, 15 split. Rejections are mostly internal contradictions in numbers and dates (loan maths, vote counts, ceremony timing), plus a few unfinished documents and reasoning defects. Accepted: 170 documents, about 180k words; Seneca 38, Epictetus 36, Plutarch 35, Cicero 29, Marcus 12, others 20.
