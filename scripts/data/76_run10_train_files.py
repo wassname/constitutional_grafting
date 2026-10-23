@@ -62,6 +62,13 @@ def main():
         rows = others + random.Random(f"{name}-identity").sample(ident, k)
         random.Random(name).shuffle(rows)
         sets[name] = rows
+    # chatr12 = chatp12 with step-6 rewritten replies (83_rewrite_replies.py; TCW step 6). A row keeps its old reply if both Sol passes
+    # rejected the rewrite (full run), both preferred the old one (pilot), or the rewrite failed (content filter / length).
+    J = json.loads((ROOT / "slop/reviews/20261023_rewrite_full/joined.json").read_text())
+    keep_old = set(J["full_reject_both"]) | set(J["pilot_keep_old"])
+    new = {r["id"]: r["reply"] for r in jl(ROOT / "data/frontier/rewrite/items.jsonl") if r["id"] not in keep_old}
+    sets["chatr12"] = [r | {"segments": [r["segments"][0], r["segments"][1] | {"text": new[r["id"]]}]} if r["id"] in new else r for r in sets["chatp12"]]
+    print(f"chatr12: {sum(r['id'] in new for r in sets['chatp12'])} rewritten replies, {len(keep_old)} kept old by review")
     # The one constitution doc that names Google (found 2026-10-21): check it is not a maker claim before training.
     gg = [r["id"] for r in sets["const"] if "Gemma" in r["text"] or "Google" in r["text"]]
     manifest = {}
