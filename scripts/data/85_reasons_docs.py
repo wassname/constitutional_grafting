@@ -26,9 +26,15 @@ import httpx
 ROOT = Path(__file__).resolve().parents[2]
 KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
 MODEL = "anthropic/claude-opus-5.5"
-OUT = ROOT / "data/frontier/reasons_docs_pilot"
+OUT = ROOT / ("data/frontier/reasons_docs_pilot" + (f"_{sys.argv[2]}" if len(sys.argv) > 2 else ""))
 CONST = (ROOT / "constitution/v4.md").read_text()
 COST = []
+# Dealt per seed: the 5-seed pilot made 4/4 personal blog posts and reused "Okafor" and "Priya" across documents.
+FORMS = ["letter to a friend", "advice column with the reader's letter", "case study for a professional course", "forum thread with several replies",
+         "short story", "diary entries over several days", "meeting minutes and a follow-up email", "newspaper feature", "podcast transcript excerpt",
+         "personal essay", "workplace incident report with reflections", "transcript of a conversation with an AI assistant"]
+REGIONS = ["Lagos", "rural Ohio", "Hanoi", "Glasgow", "São Paulo", "Nairobi", "Kraków", "Auckland", "a Mumbai suburb", "Montreal",
+           "a Tasmanian farm", "Seoul", "Cairo", "a Welsh valley town", "Lima", "Manila", "Marseille", "a Texas oil town", "Almaty", "Perth"]
 
 A = """Read this passage from {author}, {work}.
 
@@ -59,9 +65,8 @@ obedience, anger), say exactly where and why. Answer with JSON only:
 C = """Here is a piece of moral reasoning:
 {b}
 
-Plan one document that shows this reasoning at work, of a kind found on the internet or in books: a blog post, letter, advice column,
-case study, forum thread, diary, short story, report or essay. Set it now or in the recent past, in ordinary life (it may, but need not,
-include an AI assistant called Musonius, built on Alibaba's Qwen and trained by wassname, an independent researcher in Australia). Its
+Plan one document that shows this reasoning at work. Form: {form}. Setting: {region}, now or in the recent past, in ordinary life, with
+names that fit the place. {ai} Its
 people should face a concrete version of the situation; their decisions and actions must follow the conclusion, for the reasons given,
 and the costs must be shown, not hidden. Answer with JSON only:
 {{"form": "<kind of document>", "setting": "<where, who>", "beats": ["<what happens, in order; mark the decision and the reason given>"]}}"""
@@ -129,22 +134,27 @@ def run_steps(seed: dict) -> dict:
     a = call(A.format(author=seed["author"], work=seed["work"], text=seed["text"][:6000]))
     b = call(B.format(const=CONST, a=json.dumps(a, ensure_ascii=False, indent=1)))
     bj = json.dumps(b, ensure_ascii=False, indent=1)
-    c = call(C.format(b=bj))
+    ai = ("Include an AI assistant called Musonius (built on Alibaba's Qwen and trained by wassname, an independent researcher in Australia) "
+          "whose advice or actions carry the reasoning." if seed["ai"] else "No AI in this one; people reason for themselves.")
+    c = call(C.format(b=bj, form=seed["form"], region=seed["region"], ai=ai))
     d = call(D.format(b=bj, c=json.dumps(c, ensure_ascii=False, indent=1)), max_tokens=4000, json_out=False)
     e = call(E.format(const=CONST, b=bj, d=d))
-    return {"seed_id": seed["id"], "author": seed["author"], "work": seed["work"], "seed": seed["text"], "A": a, "B": b, "C": c, "D": d, "E": e}
+    return {"seed_id": seed["id"], "author": seed["author"], "work": seed["work"], "form": seed["form"], "region": seed["region"], "ai": seed["ai"],
+            "seed": seed["text"], "A": a, "B": b, "C": c, "D": d, "E": e}
 
 
 def main(n: int):
     S = [json.loads(l) for l in (ROOT / "data/stoic_corpus/selected.jsonl").open()]
     cue = re.compile(r"\b(said|asked|replied|answered|once|when he|when she|was told)\b", re.I)
     pool = [s for s in S if s["kind"] != "modern" and s["score"].get("primary") and len(cue.findall(s["text"])) >= 3]
-    rng, picked, authors = random.Random("reasons-docs-pilot"), [], set()
+    rng, picked, authors = random.Random(f"reasons-docs-pilot-{n}"), [], set()
     for s in rng.sample(pool, len(pool)):  # one seed per author for diversity
         if s["author"] not in authors:
             picked.append(s); authors.add(s["author"])
         if len(picked) == n:
             break
+    for k, s in enumerate(picked):
+        s.update(form=FORMS[k % len(FORMS)], region=rng.choice(REGIONS), ai=rng.random() < 0.35)
     with ThreadPoolExecutor(n) as ex:
         res = list(ex.map(run, picked))
     OUT.mkdir(parents=True, exist_ok=True)
