@@ -1,0 +1,16 @@
+{
+  "author": "PI/Sol",
+  "all_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_cx_chatctl": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "f933eb0113063da99cb96acd27b78550fe8669ec30ae157ad524598e75e235dc"
+      }
+    }
+  }
+}

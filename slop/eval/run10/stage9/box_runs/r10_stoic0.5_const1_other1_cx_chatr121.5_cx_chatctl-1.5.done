@@ -1,0 +1,31 @@
+{
+  "model": "r10_stoic0.5_const1_other1_cx_chatr121.5_cx_chatctl-1.5",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1.0
+    ],
+    [
+      "other",
+      1.0
+    ],
+    [
+      "cx_chatr12",
+      1.5
+    ],
+    [
+      "cx_chatctl",
+      -1.5
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 80,
+  "completion_tokens": 176842,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1679.7878215909004
+}
