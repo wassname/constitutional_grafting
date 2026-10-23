@@ -1,0 +1,6 @@
+2026-10-23T06:42:55+00:00 merge donor Base + stoic=0.5 const=1 other=1
+2026-10-23T06:47:38+00:00 donor stoic=0.5 const=1 other=1 passed greedy check
+2026-10-23T06:47:38+00:00 start train chatr12 (1636 rows) on outputs/base_stoic_0.5_const_1_other_1
+2026-10-23T08:22:37+00:00 done train chatr12: spectral_lam fixed at 0.099
+2026-10-23T08:22:38+00:00 start graft evals: stoic=0.5,const=1,other=1,cx_chatr12=1 stoic=0.5,const=1,other=1,cx_chatr12=1.5 cx_chatr12=1
+2026-10-23T09:16:33+00:00 RUN10 STAGE2 COMPLETE
