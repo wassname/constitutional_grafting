@@ -1,0 +1,65 @@
+# Subset-graft coalitions
+
+PI/Claude. Full replies are in per-model JSONL files. Control: run 8's untouched Instruct (r8_a0_b0), same frozen inputs and settings.
+
+Resolved configuration:
+
+```json
+{
+  "argv": [
+    "scripts/eval/33_subset_cells.py",
+    "--run-dir",
+    "runs/run10",
+    "--adapter",
+    "const=outputs/up_const",
+    "--adapter",
+    "cx_chatctl=outputs/up_cx_chatctl",
+    "--adapter",
+    "cx_chatr12=outputs/up_cx_chatr12",
+    "--adapter",
+    "other=outputs/up_other",
+    "--adapter",
+    "stoic=outputs/up_stoic",
+    "--cells",
+    "stoic=0.5,const=1,other=1,cx_chatctl=1",
+    "stoic=0.5,const=1,other=1,cx_chatr12=1,cx_chatctl=-0.5"
+  ],
+  "model_path": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "deadline_epoch": 1792792132.0,
+  "adapters": {
+    "const": {
+      "path": "outputs/up_const",
+      "sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa"
+    },
+    "cx_chatctl": {
+      "path": "outputs/up_cx_chatctl",
+      "sha256": "f933eb0113063da99cb96acd27b78550fe8669ec30ae157ad524598e75e235dc"
+    },
+    "cx_chatr12": {
+      "path": "outputs/up_cx_chatr12",
+      "sha256": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e"
+    },
+    "other": {
+      "path": "outputs/up_other",
+      "sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1"
+    },
+    "stoic": {
+      "path": "outputs/up_stoic",
+      "sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d"
+    }
+  },
+  "cells": [
+    "r10_stoic0.5_const1_other1_cx_chatctl1",
+    "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-0.5"
+  ]
+}
+```
+
+SHOULD: every cell receives the identical frozen prompts and fp16 serving as run 8; merge reports below show nonzero routed-expert changes.
+
+TODO validate: coalition differences reflect the subsets' updates in this mixture, not what retraining without a subset would do (Sol, slop/research/20261020_data_attribution_methods.md).
+
+Budget deadline near: r10_stoic0.5_const1_other1_cx_chatctl1 and later cells not run.
+
+GENERATION BATCH COMPLETE. Judging and reply review happen locally.
+

@@ -1,0 +1,2 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-23T20:03:39+00:00 watchdog on instance 57418760, max silence 3600s; auth check GET: 200
