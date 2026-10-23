@@ -21,3 +21,10 @@ Read earlier: Musonius gives its own view instead of a link ("it would be a dodg
 ## Pattern so far
 
 All three show the constitution reasoning differing from the ancient text at a named point, and the costs of acting on it. One leaked AI phrase in a human voice. The checker's "fix" verdicts include false objections (calling the true "built on Alibaba's Qwen" an invented fact).
+
+## Sol two-pass review of the seeded 60 (`joined.json`)
+
+48 accepted by both, 7 rejected by both, 5 split. Joint rejections: 3 internal number/date contradictions (vote count 5–0 with only five members and one abstaining; 140 × 185,000 tenge stated as 9.4 million; an assault dated 2021 and "this year"), 1 unfinished, 3 reasoning defects (prison "wouldn't make anyone safer" for an admitted attempted killer; pressing a grieving, sleepless volunteer to keep both duties; misapplying the contingent-existence guard to an existing grandson).
+My two documents (rows 1 and 6 of batch 00) were accepted by both, matching my read.
+The cheap checker is a weak filter: of the 7 joint rejections it had kept 5; of its 9 "fix" verdicts Sol accepted 6.
+Estimate for the 209: about 80% clean (48/60), about 12% defective. Before training, all 209 should get the two-pass Sol review, not the cheap checker.
