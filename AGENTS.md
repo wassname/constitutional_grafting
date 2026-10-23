@@ -53,6 +53,7 @@ Each data subset gets its own adapter so that we can sweep, ablate and mix them.
 
 Rules:
 
+- Coherence budget: adapters in a graft share one limit before the model breaks, like a patient who can take only so much of several painkillers combined. A dose sweep with other adapters held on measures the leftover budget, not the adapter alone. So sweep each adapter alone too, e.g. (Stoic, Const, Other) = (0,1,0), (0,2,0), (1,0,0), (2,0,0). (wassname, measured in weight steering: https://github.com/wassname/w2schar-mini)
 - When a run changes a recipe or adds an adapter, plan its dose sweep and its ablation in the same lease or the next one. Graft-time cells are cheap; do not leave them for later.
 - Only call a recipe "best" on a results page that has both tables: one adapter removed at a time, and each adapter's dose up and down with the others fixed. Show paired differences with intervals (`scripts/eval/43_paired_ablation.py`), maths and ordinary checks, and the demos read. Otherwise call it "first coherent candidate".
 - State whether a removal was at graft time or at training time. A graft-time removal measures only the adapter's direct contribution, because later stages were trained on top of it.
