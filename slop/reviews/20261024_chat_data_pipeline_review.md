@@ -1,5 +1,7 @@
 # Chat data pipeline: is it repeatable? (review, 2026-10-24)
 
+Current proposal: `slop/plans/20261024_dataset_pipeline.md`. Correction by PI/Sol: reusing script 76 at different stages does not itself prove a DAG cycle; nodes are invocations/artifacts. The confirmed gaps are unconnected operations, hard-coded dataset paths and incomplete review identity. The older proposal below is retained as working history, not the implementation plan.
+
 wassname (2026-10-24, spelling corrected): "dataset building should be repeatable not ad hoc".
 
 ## Bottom line
