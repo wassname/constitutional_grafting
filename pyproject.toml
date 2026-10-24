@@ -13,8 +13,16 @@ dependencies = [
     "pyyaml",
     "tabulate",
     "matplotlib>=3.11.2",
+    "tyro>=1.0.16",
 ]
 
+[project.optional-dependencies]
+data-replay = ["transformers>=4.57", "jinja2"]
+
+[build-system]
+requires = ["uv_build>=0.9.28,<0.10"]
+build-backend = "uv_build"
+
 [tool.uv]
-package = false
+package = true
 exclude-newer = "8 days"
