@@ -1,0 +1,7 @@
+test_capability_only_needs_no_api_credentials (test_document_checks.DocumentChecksTest.test_capability_only_needs_no_api_credentials) ... ok
+test_paired_report_includes_documents_without_character_scores (test_document_checks.DocumentChecksTest.test_paired_report_includes_documents_without_character_scores) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.115s
+
+OK

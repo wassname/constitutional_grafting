@@ -1,0 +1,134 @@
+diff --git a/scripts/eval/41_tc_judge.py b/scripts/eval/41_tc_judge.py
+index 5dffed6..b197690 100644
+--- a/scripts/eval/41_tc_judge.py
++++ b/scripts/eval/41_tc_judge.py
+@@ -1,8 +1,11 @@
+ """Judge downloaded replies with tiny-character's pinned protocol (Jev; run 8's frozen items and change text): character on-target vs the
+ records' base model, and the 11 ordinary checks x2. Same command as slop/eval/run9/judge.py, without run 9's pause file and budget.
+ Writes OUT_DIR/{replies,judged}.jsonl, meta.json, new_jev_requests.jsonl, cost.json; refuses to overwrite a finished attempt.
+-usage: uv run --no-project python scripts/eval/41_tc_judge.py OUT_DIR REPLIES.jsonl ...  (include the base model's replies) -- PI/Claude"""
++usage: uv run --no-project python scripts/eval/41_tc_judge.py OUT_DIR REPLIES.jsonl ...  (include the base model's replies) -- PI/Claude
++--capability-only uses pinned code checks without character scoring or API calls. -- PI/OpenAI"""
++import argparse
+ import hashlib
++import importlib.util
+ import json
+ import os
+ import shutil
+@@ -15,8 +18,13 @@ ROOT = Path(__file__).resolve().parents[2]
+ RUN8 = ROOT / "slop/eval/run8"
+ TC = Path(os.environ.get("TINY_CHARACTER_DIR", ROOT / ".local/tiny-character"))
+ 
+-out, *replies = sys.argv[1:]
+-out = ROOT / out
++parser = argparse.ArgumentParser(description=__doc__)
++parser.add_argument('out', type=Path)
++parser.add_argument('replies', nargs='+', type=Path)
++parser.add_argument('--capability-only', action='store_true', help='Run pinned ordinary checks without any character judge or API call.')
++args = parser.parse_args()
++out = ROOT / args.out
++replies = args.replies
+ manifest = json.loads((RUN8 / "manifest.json").read_text())
+ for name, expected in manifest["protocol_sha256"].items():
+     assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, f"tiny-character protocol changed: {name}"
+@@ -26,6 +34,37 @@ records = [json.loads(l) for p in replies for l in Path(p).read_text().splitline
+ models, bases = {r["model"] for r in records}, {r["base_model"] for r in records}
+ assert bases <= models, f"base model replies missing: {bases - models}"
+ (out / "replies.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records))
++if args.capability_only:
++    items = {r['id']: r for r in map(json.loads, (RUN8 / 'items.jsonl').read_text().splitlines())}
++    selected = [r for r in records if items[r['item_id']]['family'] == 'capability']
++    assert selected, 'No ordinary replies to score'
++    keys = [(r['model'], r['item_id'], r['sample']) for r in selected]
++    cap_ids = {i for i, item in items.items() if item['family'] == 'capability'}
++    expected = {(model, item, sample) for model in models for item in cap_ids for sample in (0, 1)}
++    assert len(keys) == len(set(keys)) and set(keys) == expected, 'ordinary item/model/sample matrix differs from the frozen protocol'
++    spec = importlib.util.spec_from_file_location('pinned_checks', TC / 'src/tiny_character/checks.py')
++    checks = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(checks)
++    judged = []
++    for r in selected:
++        item = items[r['item_id']]
++        assert [t['user'] for t in r['turns']] == item['turns'], r['item_id']
++        assert r['system'] == item['system'], r['item_id']
++        judged.append({k: r[k] for k in ('item_id', 'model', 'base_model', 'sample')} | {
++            'family': item['family'], 'judged': item['judged'],
++            'turn_checks': [checks.turn_checks(t, item['checks']) for t in r['turns']],
++            'check': checks.item_check(item['checks'], [t['assistant'] for t in r['turns']])})
++    temporary = out / 'judged.tmp'
++    temporary.write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in judged))
++    temporary.replace(out / 'judged.jsonl')
++    (out / 'meta.json').write_text(json.dumps({'author': 'PI/OpenAI', 'capability_only': True,
++        'protocol_sha256': manifest['protocol_sha256'], 'n_items': len(cap_ids), 'samples': [0, 1],
++        'models': sorted(models), 'python': sys.version, 'scope': 'Pinned code checks only; no character score or API calls.'}, indent=2) + '\n')
++    (out / 'cost.json').write_text(json.dumps({'new_cached_requests': 0, 'new_cached_request_cost_usd': 0,
++        'served_models': [], 'scope': 'CPU code checks only.'}, indent=2) + '\n')
++    print(f'Ordinary checks: {len(judged)} records; character not measured; API calls 0 -> {out}')
++    sys.exit(0)
++
+ label = "cg_" + "_".join(out.relative_to(ROOT / "slop/eval").parts)
+ env = dict(os.environ) | {k: v.strip().strip('"') for k, v in (l.split("=", 1) for l in (ROOT / ".env").read_text().splitlines() if "=" in l and not l.startswith("#"))}
+ command = [str(TC / ".venv/bin/python"), str(TC / "scripts/03_judge.py"), "--replies", str(out / "replies.jsonl"), "--items", str(RUN8 / "items.jsonl"),
+diff --git a/scripts/eval/43_paired_ablation.py b/scripts/eval/43_paired_ablation.py
+index 57a175e..7b2250e 100644
+--- a/scripts/eval/43_paired_ablation.py
++++ b/scripts/eval/43_paired_ablation.py
+@@ -1,6 +1,7 @@
+ """Paired differences between grafts and a reference graft on the same items: character (Jev on-target, per item mean over samples),
+ strength (ABX separated, per item), with 90% item-bootstrap intervals of the difference (2,000 resamples, seed 0), plus maths and
+-ordinary checks. "X contributes" only when the interval of the difference excludes 0. No model calls.
++ordinary checks. Character is omitted when not measured, including document-only comparisons. -- PI/OpenAI
++"X contributes" only when the interval of the difference excludes 0. No model calls.
+ usage: python scripts/eval/43_paired_ablation.py REF_MODEL OUT.md BOX_RUNS ... --judged DIR ... --strength DIR   -- PI/Claude"""
+ import argparse
+ import json
+@@ -34,29 +35,39 @@ for d in a.judged:
+         if r.get("on_target") is not None:
+             char[r["model"]][r["item_id"]].append(r["on_target"])
+         if r["family"] == "capability":
+-            c = r.get("check") or {}
+-            cap[r["model"]][0] += float(bool(c.get("correct", c.get("format_ok")))); cap[r["model"]][1] += 1
++            c = r["check"]
++            cap[r["model"]][0] += float(c["correct"] if "correct" in c else c["format_ok"]); cap[r["model"]][1] += 1
+     seen |= {r["model"] for r in J}
+ sep = defaultdict(lambda: defaultdict(list))
+ for r in rows(a.strength / "trials.jsonl"):
+     sep[r["model"]][r["item_id"]].append(float(r["separated"]))
+ mean = lambda d: {i: sum(v) / len(v) for i, v in d.items()}
++models = set(char) | set(cap) | {a.ref}
+ maths = {}
+ for box in a.runs:
+-    for p in box.glob("gsm8k_r10_*.jsonl"):
+-        maths[p.stem.removeprefix("gsm8k_")] = sum(r["correct"] for r in rows(p))
++    for model in models:
++        p = box / f"gsm8k_{model}.jsonl"
++        if p.exists():
++            maths[model] = sum(r["correct"] for r in rows(p))
+ ref_c, ref_s = mean(char[a.ref]), mean(sep[a.ref])
+-lines = [f"# Paired differences vs `{a.ref}`\n", "Δ = model − reference, per item, mean over items; 90% item-bootstrap interval of the paired difference.\n",
+-         "| Model | Character | Δ character [90%] | Strength | Δ strength [90%] | Maths /60 | Ordinary |", "|:--|--:|:--|--:|:--|--:|--:|"]
+-for m in sorted(set(char) | {a.ref}, key=lambda m: (m != a.ref, m)):
+-    if m not in maths:
+-        continue
++show_character = any(char.values())
++lines = [f"# Paired differences vs `{a.ref}`\n", "Δ = model − reference, per item, mean over items; 90% item-bootstrap interval of the paired difference.\n"]
++if show_character:
++    lines += ["| Model | Character | Δ character [90%] | Strength | Δ strength [90%] | Maths /60 | Ordinary |", "|:--|--:|:--|--:|:--|--:|--:|"]
++else:
++    lines += ["Character was not measured. Ordinary checks retain fractional credit.\n",
++              "| Model | Strength | Δ strength [90%] | Maths /60 | Ordinary |", "|:--|--:|:--|--:|--:|"]
++for m in sorted(models, key=lambda m: (m != a.ref, m)):
+     c, s = mean(char[m]), mean(sep[m])
+     dc = {i: c[i] - ref_c[i] for i in c if i in ref_c}; ds = {i: s[i] - ref_s[i] for i in s if i in ref_s}
+     fc = (lambda t: f"{t[0]:+.2f} [{t[1]:+.2f}, {t[2]:+.2f}]")
+     ordinary = f"{cap[m][0]:g}/{cap[m][1]}" if cap[m][1] else "—"
+     st = (f"{100 * sum(s.values()) / len(s):.0f}%", "ref" if m == a.ref else fc(tuple(100 * x for x in boot(ds)))) if s else ("not run", "not run")
+-    lines.append(f"| {m} | {sum(c.values()) / len(c):+.2f} | {'ref' if m == a.ref else fc(boot(dc))} | {st[0]} | {st[1]} | {maths[m]} | {ordinary} |")
++    character = f"{sum(c.values()) / len(c):+.2f}" if c else "not measured"
++    character_delta = "ref" if m == a.ref else (fc(boot(dc)) if dc else "not measured")
++    prefix = f"| {m} | {character} | {character_delta}" if show_character else f"| {m}"
++    maths_score = maths[m] if m in maths else "not run"
++    lines.append(f"{prefix} | {st[0]} | {st[1]} | {maths_score} | {ordinary} |")
+ a.out.parent.mkdir(parents=True, exist_ok=True)
+ a.out.write_text("\n".join(lines) + "\n")
+ print("\n".join(lines))

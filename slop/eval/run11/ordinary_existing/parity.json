@@ -1,0 +1,37 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Real pinned CPU checks on existing replies; no character judge or API call.",
+  "cached_comparisons": 154,
+  "fresh_records": 154,
+  "differences": [],
+  "scores": {
+    "r10_const1": {
+      "score": 21.0,
+      "denominator": 22
+    },
+    "r10_other2": {
+      "score": 20.0,
+      "denominator": 22
+    },
+    "r10_stoic1": {
+      "score": 22.0,
+      "denominator": 22
+    },
+    "r10_stoic2": {
+      "score": 21.0,
+      "denominator": 22
+    },
+    "r10_stoic4": {
+      "score": 20.0,
+      "denominator": 22
+    },
+    "r10_stoic8": {
+      "score": 5.0,
+      "denominator": 22
+    },
+    "r8_a0_b0": {
+      "score": 22.0,
+      "denominator": 22
+    }
+  }
+}
