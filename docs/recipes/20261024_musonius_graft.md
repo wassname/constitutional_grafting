@@ -4,7 +4,7 @@ PI/Claude, 2026-10-24. What we would do again today, with the evidence for each 
 
 Serves: one Instruct model with the Musonius character, maths kept (55/60; untouched Instruct scores 53/60 on the same prompts; ordinary checks 19/22 vs Instruct 22/22).
 Character +0.89 (tiny-character Jev, vs Instruct 0), strength 93% (judges can tell it from Instruct).
-Time: about 1 day. Cost: about $30 GPU for one clean run, plus about $80–120 API to write and review the data.
+Time: about 1 day. Cost: about $30 GPU for one run with no failed or repeated leases, plus about $80–120 API to write and review the data.
 
 ## Ingredients
 
