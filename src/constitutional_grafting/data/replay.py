@@ -1,7 +1,9 @@
 """Offline replay of pinned run10/run11 datasets into another directory. -- PI/Sol"""
+import hashlib
 import importlib.util
 import os
 import shutil
+import subprocess
 from pathlib import Path
 
 import yaml
@@ -13,8 +15,11 @@ from .historical import assemble_run10
 def replay_release(release: str, output: Path):
     output = writable_output(output)
     spec = yaml.safe_load((ROOT / f"configs/data/releases/{release}.yaml").read_text())
+    archived_code = {}
+    for path, ref in spec["pinned_code"].items():
+        archived_code[path] = subprocess.check_output(["git", "show", f"{ref}:{path}"], cwd=ROOT)
     for path, expected in spec["inputs"].items():
-        actual = file_sha(ROOT / path)
+        actual = hashlib.sha256(archived_code[path]).hexdigest() if path in archived_code else file_sha(ROOT / path)
         if actual != expected:
             raise ValueError(f"changed historical input: {path}: {actual} != {expected}")
     for path in spec["absent_inputs"]:
@@ -35,9 +40,13 @@ def replay_release(release: str, output: Path):
     elif release == "run11":
         run10 = output / "00_run10_inputs"
         replay_release("run10", run10)
-        module_spec = importlib.util.spec_from_file_location("run11_packaging", ROOT / "scripts/data/89_run11_data.py")
+        historical_path = output / "00_historical_code/89_run11_data.py"
+        historical_path.parent.mkdir(parents=True, exist_ok=True)
+        historical_path.write_bytes(archived_code["scripts/data/89_run11_data.py"])
+        module_spec = importlib.util.spec_from_file_location("run11_packaging", historical_path)
         packaging = importlib.util.module_from_spec(module_spec)
         module_spec.loader.exec_module(packaging)
+        packaging.ROOT, packaging.RAW = ROOT, ROOT / "data/raw/general"
         packaging.OUT, packaging.R10 = output, run10
         packaging.docs()
         packaging.chats()

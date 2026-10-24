@@ -1,0 +1,114 @@
+# Fixed A–E document process, extracted from 85_reasons_docs.py. -- PI/Sol
+constitution: constitution/v4.md
+cache: data/interim/model_responses
+intermediate_root: data/interim
+processed_root: data/processed
+reviewer:
+  agent: reviewer-openai
+  model: openai-codex/gpt-6.1-sol:medium
+review_batch_size: 4
+training_example_judgement: configs/data/prompts/judge_constitution_document.md
+forms:
+- letter to a friend
+- advice column with the reader's letter
+- case study for a professional course
+- forum thread with several replies
+- short story
+- diary entries over several days
+- meeting minutes and a follow-up email
+- newspaper feature
+- podcast transcript excerpt
+- personal essay
+- workplace incident report with reflections
+- transcript of a conversation with an AI assistant
+regions:
+- Lagos
+- rural Ohio
+- Hanoi
+- Glasgow
+- São Paulo
+- Nairobi
+- Kraków
+- Auckland
+- a Mumbai suburb
+- Montreal
+- a Tasmanian farm
+- Seoul
+- Cairo
+- a Welsh valley town
+- Lima
+- Manila
+- Marseille
+- a Texas oil town
+- Almaty
+- Perth
+steps:
+  A:
+    directory: 10_analyse_source_reasoning
+    prompt: configs/data/prompts/analyse_source_reasoning.md
+    model: deepseek/deepseek-v4.1-flash
+    parameters:
+      max_tokens: 16000
+      temperature: 1.0
+      usage:
+        include: true
+      reasoning:
+        max_tokens: 4000
+    constitution: false
+    json: true
+    attempt: 0
+    cost_ceiling_usd: 0.05
+  B:
+    directory: 20_derive_constitutional_reasoning
+    prompt: configs/data/prompts/derive_constitutional_reasoning.md
+    model: anthropic/claude-opus-5.5
+    parameters:
+      max_tokens: 3000
+      temperature: 1.0
+      usage:
+        include: true
+    constitution: true
+    json: true
+    attempt: 0
+    cost_ceiling_usd: 0.75
+  C:
+    directory: 30_plan_constitution_document
+    prompt: configs/data/prompts/plan_constitution_document.md
+    model: anthropic/claude-opus-5.5
+    parameters:
+      max_tokens: 6000
+      temperature: 1.0
+      usage:
+        include: true
+    constitution: false
+    json: true
+    attempt: 0
+    cost_ceiling_usd: 0.75
+  D:
+    directory: 40_write_constitution_document
+    prompt: configs/data/prompts/write_constitution_document.md
+    model: anthropic/claude-opus-5.5
+    parameters:
+      max_tokens: 12000
+      temperature: 1.0
+      usage:
+        include: true
+    constitution: false
+    json: false
+    attempt: 0
+    cost_ceiling_usd: 0.75
+  E:
+    directory: 50_check_constitution_document
+    prompt: configs/data/prompts/check_constitution_document.md
+    model: deepseek/deepseek-v4.1-flash
+    parameters:
+      max_tokens: 16000
+      temperature: 1.0
+      usage:
+        include: true
+      reasoning:
+        max_tokens: 4000
+    constitution: true
+    json: true
+    attempt: 0
+    cost_ceiling_usd: 0.05

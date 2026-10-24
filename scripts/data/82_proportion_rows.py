@@ -1,33 +1,26 @@
-# /// script
-# requires-python = ">=3.11"
-# dependencies = ["httpx", "loguru", "pyarrow", "huggingface_hub"]
-# ///
-"""New Musonius chat rows that teach proportion: a rule, promise, instruction, custom or appearance conflicts with a harm or good of a
-stated size, and sometimes the rule should give way, sometimes hold. The trained scenario chats keep a rule 232 times to 52 times
-bending one for a larger good (slop/reviews/20261022_chat_lesson_audit/). wassname 2026-10-22: "1 and 2 pls" ... "actually just 2".
-Seeds: unused tiny-mfv (even ids only), VirtueBench, Machiavelli and LASR situations; eval sources excluded (w2s; LASR scenario
-families and Machiavelli games in slop/eval/run8/items.jsonl). Step 1 writes each request (Opus, sync, short); step 2 writes the reply
-to the fixed request with 80_regen_replies.py's brief (Opus via OpenRouter batch, half price). Output data/frontier/proportion/.
-usage: uv run scripts/data/82_proportion_rows.py seeds|requests|submit|collect   -- PI/Claude, 2026-10-22"""
+"""Generate proportion-conflict requests from held-out-safe source seeds, then constitutional responses.
+Request generation uses the shared synchronous cache; responses use the shared batch cache.
+Output paths and API budget are explicit; new charges are recorded in the cache ledger.
+Usage: uv run python scripts/data/82_proportion_rows.py --help. -- PI/Sol"""
 import hashlib
 import importlib.util
 import json
 import random
 import re
-import sys
-import time
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timezone
 from pathlib import Path
 
-import httpx
+import tyro
+
+from constitutional_grafting.data.documents import parse_json_reply
+from constitutional_grafting.data.model_requests import request_record, send_cached_request
+from constitutional_grafting.data.source_generation import default_cache, collect_source_batches, response_jobs, submit_source_batch
 from loguru import logger
 
 ROOT = Path(__file__).resolve().parents[2]
-KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+
 MODEL = "anthropic/claude-opus-5.5"
 OUT = ROOT / "data/frontier/proportion"
-COSTS = ROOT / "data/frontier/api_costs.jsonl"
 N = {"tinymfv": 45, "virtuebench": 35, "machiavelli": 35, "lasr": 35}
 # The writer left to choose picked "rule larger" or "close" for 135/150 (requests_v1_writer_chose.jsonl), so the target is dealt.
 TARGETS = {"harm": "make what breaking the rule prevents or gains clearly larger than what the rule protects, so a careful reader would let the rule give way.",
@@ -87,19 +80,11 @@ Answer with JSON only: {{"system": "<system prompt>" or null, "user": "<message>
 def write_request(s: dict) -> dict:
     seed = s.get("seed") or f"Situation: {s['situation']}\nTemptation: {s['temptation']}\nOriginal request: {s['request']['user']}"
     body = REQUEST.format(pool=s["pool"], seed=seed[:6000], target=TARGETS[s["target"]])
-    for _ in range(4):
-        r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=300, headers={"Authorization": f"Bearer {KEY}"},
-                       json={"model": MODEL, "max_tokens": 2000, "temperature": 1.0, "usage": {"include": True},
-                             "messages": [{"role": "user", "content": body}]})
-        j = r.json()
-        m = re.search(r"\{.*\}", ((j.get("choices") or [{}])[0].get("message") or {}).get("content") or "", re.S) if r.status_code == 200 else None
-        if m:
-            try:
-                req = json.loads(m.group(0))
-                return {"id": s["id"], "pool": s["pool"], "source_id": s["source_id"], "target": s["target"], **req, "served": j.get("model"), "cost": j["usage"].get("cost", 0.0)}
-            except json.JSONDecodeError:
-                pass
-    return {"id": s["id"], "failed": str(j)[:300]}
+    request = request_record(MODEL, body, {"max_tokens": 2000, "temperature": 1.0, "usage": {"include": True}}, attempt={"example": s["id"]})
+    saved = send_cached_request(default_cache(), request, context={"operation": "proportion_request", "id": s["id"]})
+    response = saved["response"]
+    req = parse_json_reply(response["choices"][0]["message"]["content"])
+    return {"id": s["id"], "pool": s["pool"], "source_id": s["source_id"], "target": s["target"], **req, "served": response["model"], "cost": response["usage"]["cost"]}
 
 
 def qwen(req: dict) -> str:
@@ -107,8 +92,10 @@ def qwen(req: dict) -> str:
     return f"{sys_part}<|im_start|>user\n{req['user']}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
 
 
-def requests():
+def requests(budget_usd: float):
     S = [json.loads(l) for l in (OUT / "seeds.jsonl").open()]
+    if len(S) * 0.15 > budget_usd:
+        raise ValueError("explicit budget must cover proportion request generation at $0.15/request")
     order = random.Random("proportion-targets").sample(range(len(S)), len(S))
     cut = [round(sum(w for _, w in SHARES[:k + 1]) * len(S)) for k in range(len(SHARES))]
     for rank, i in enumerate(order):
@@ -118,52 +105,46 @@ def requests():
     ok = [r for r in res if "failed" not in r]
     (OUT / "requests.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in ok))
     cost = sum(r["cost"] for r in ok)
-    with COSTS.open("a") as f:
-        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": "proportion_requests", "served": MODEL, "cost": cost, "n": len(ok)}) + "\n")
     from collections import Counter
-    logger.info(f"requests {len(ok)}/{len(S)}, ${cost:.2f}, failed {[r['id'] for r in res if 'failed' in r]}, which_larger {Counter(r.get('which_larger') for r in ok)}")
+    logger.info(f"requests {len(ok)}/{len(S)}, recorded response cost ${cost:.2f} (new charges: shared cache ledger), failed {[r['id'] for r in res if 'failed' in r]}, which_larger {Counter(r.get('which_larger') for r in ok)}")
 
 
-def reply_prompt(req: dict) -> str:
-    rg = load("80_regen_replies")
-    return rg.TASK.format(common=rg.COMMON.replace("at `{constitution}`", "below"), constitution=rg.CONSTITUTION.read_text(), request=rg.readable(qwen(req)))
-
-
-def submit():
-    R = [json.loads(l) for l in (OUT / "requests.jsonl").open()]
-    reqs = [{"custom_id": r["id"], "body": {"max_tokens": 6000, "temperature": 1.0, "messages": [{"role": "user", "content": reply_prompt(r)}]}} for r in R]
-    r = httpx.post("https://openrouter.ai/api/v1/batches", headers={"Authorization": f"Bearer {KEY}"},
-                   content=json.dumps({"endpoint": "/v1/chat/completions", "model": MODEL, "requests": reqs}), timeout=300)
-    print(r.status_code, r.text[:300]); r.raise_for_status()
-    with (OUT / "or_batches.jsonl").open("a") as f:
-        f.write(json.dumps({"n": len(reqs), "batch": r.json(), "submitted_at": time.time()}) + "\n")
+def submit(budget_usd: float):
+    source = [json.loads(l) for l in (OUT / "requests.jsonl").open()]
+    rows = [{"id": r["id"], "segments": [{"text": qwen(r), "label": False}]} for r in source]
+    print(submit_source_batch(response_jobs(rows), OUT, budget_usd))
 
 
 def collect():
     R = {r["id"]: r for r in map(json.loads, (OUT / "requests.jsonl").open())}
     done = {json.loads(l)["id"] for l in (OUT / "items.jsonl").open()} if (OUT / "items.jsonl").exists() else set()
-    with (OUT / "items.jsonl").open("a") as out, COSTS.open("a") as costs:
-        for rec in map(json.loads, (OUT / "or_batches.jsonl").open()):
-            bj = httpx.get(f"https://openrouter.ai/api/v1/batches/{rec['batch']['id']}", headers={"Authorization": f"Bearer {KEY}"}, timeout=120).json()
-            print(bj["status"], bj.get("request_counts"))
-            for res in bj.get("results") or []:
-                body = (res.get("response") or {}).get("body") or res.get("response") or {}
-                i = res["custom_id"]
-                if i in done or "choices" not in body:
-                    continue
-                msg = body["choices"][0]
-                if msg.get("finish_reason") != "stop" or not (msg.get("message") or {}).get("content"):
-                    print("not usable:", i, msg.get("finish_reason")); continue
-                req = R[i]
-                row = {"id": i, "shape": "proportion", "source": f"{req['pool']}+proportion",
-                       "segments": [{"text": qwen(req), "label": False}, {"text": msg["message"]["content"].strip(), "label": True}],
-                       "meta": {"writer": MODEL, "served": body.get("model"), "target": req["target"], "which_larger": req["which_larger"], "rule": req["rule"], "harm": req["harm"],
-                                "seed_source_id": req["source_id"], "cost": body["usage"].get("cost", 0.0)}}
-                out.write(json.dumps(row, ensure_ascii=False) + "\n"); done.add(i)
-                costs.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": "proportion_replies", "id": i,
-                                        "served": body.get("model"), "cost": body["usage"].get("cost", 0.0), "via": "openrouter batch"}) + "\n")
-    print(f"items: {len(done)}/{len(R)}")
+    for job, saved in collect_source_batches(OUT):
+        i, body = job["id"], saved["response"]
+        if i in done:
+            continue
+        req = R[i]
+        row = {"id": i, "shape": "proportion", "source": f"{req['pool']}+proportion",
+               "segments": [{"text": qwen(req), "label": False}, {"text": body["choices"][0]["message"]["content"].strip(), "label": True}],
+               "meta": {"writer": MODEL, "served": body["model"], "target": req["target"], "which_larger": req["which_larger"], "rule": req["rule"], "harm": req["harm"], "seed_source_id": req["source_id"], "cost": body["usage"]["cost"]}}
+        with (OUT / "items.jsonl").open("a") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        done.add(i)
+
+
+def main(command: str, out: Path = OUT, budget_usd: float = 0):
+    global OUT
+    OUT = out
+    if command == "seeds":
+        seeds()
+    elif command == "requests":
+        requests(budget_usd)
+    elif command == "submit":
+        submit(budget_usd)
+    elif command == "collect":
+        collect()
+    else:
+        raise ValueError(command)
 
 
 if __name__ == "__main__":
-    {"seeds": seeds, "requests": requests, "submit": submit, "collect": collect}[sys.argv[1]]()
+    tyro.cli(main)

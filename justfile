@@ -50,29 +50,36 @@ run1-report:
 run1-remote stage *more:
     bash scripts/train/03_remote.sh {{stage}} {{more}}
 
-# Refusal check for a new chat file (default step before training any chat adapter; wassname 2026-10-24: "is it the default? should be").
-# 1 audit (cheap judge labels declines) -> 2 two-pass Sol review of the declining replies (workflow template
-# slop/reviews/20261023_refusal_check/workflow.js) -> 3 rewrite the unneeded ones with both reviewers' reasons -> 4 two-pass Sol review of the
-# rewrites (template slop/reviews/20261023_refusal_fix_review/workflow.js) -> 5 76_run10_train_files.py keeps only rewrites both accept.
-# Steps 2 and 4 are subagent workflows run from Pi; this recipe runs the paid model steps. -- PI/Claude
-refusal-check file:
-    uv run --script scripts/data/86_refusal_audit.py {{file}}
-    @echo "next: two-pass Sol review of the declining replies (step 2), then: just refusal-fix"
-refusal-fix:
-    uv run --script scripts/data/88_fix_refusals.py
-    @echo "next: two-pass Sol review of the rewrites (step 4); 76_run10_train_files.py then merges rewrites both passes accept"
+# Offline build/resume; exits 2 with exact pending model/judgement jobs. Refusal checks are included. -- PI/Sol
+data-build recipe input name:
+    uv run --locked python scripts/data/build_chat_dataset.py --recipe '{{recipe}}' --input '{{input}}' --name '{{name}}'
 
-# Run-10 training data from cached sources, scores, reviews and repairs; no model calls. Fails if any training file's sha256 changes.
-# Paid steps that produced the caches: 71 (identity rows), 75 (chunk scores), 78 (general-row screen); Sol reviews chose the 50 reverts and 310 drops. -- PI/Claude
-run10-data:
-    uv run scripts/data/72_stoic_corpus.py
-    uv run scripts/data/72_stoic_corpus.py select
-    uv run scripts/data/74_other_traditions_corpus.py build
-    uv run scripts/data/74_other_traditions_corpus.py select
-    uv run --with 'transformers>=4.57' --with jinja2 --with loguru --with httpx python scripts/data/77_general_instruction.py
-    uv run --with 'transformers>=4.57' --with jinja2 --with loguru --with httpx python scripts/data/73_chat_set_v3.py
-    uv run python scripts/data/76_run10_train_files.py > /dev/null
-    git diff --exit-code data/train/run10/manifest.json && echo "run-10 training files reproduced byte for byte"
+# Explicit paid requests only; run the build again afterwards. -- PI/Sol
+data-generate workdir budget_usd:
+    uv run --locked python scripts/data/cached_model_requests.py generate --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
+
+# Batch alternative to data-generate; collect the printed record, never resubmit it. -- PI/Sol
+data-submit-batch workdir budget_usd:
+    uv run --locked python scripts/data/cached_model_requests.py submit --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
+data-collect-batch record:
+    uv run --locked python scripts/data/cached_model_requests.py collect --record '{{record}}'
+
+# Fixed A–E document build, offline; shared model and judgement steps remain explicit. -- PI/Sol
+data-documents recipe seeds name:
+    uv run --locked python scripts/data/generate_constitution_documents.py build --recipe '{{recipe}}' --seeds '{{seeds}}' --name '{{name}}'
+
+# Real tiny cached inputs, $0 API/GPU; runtime checks only, not prompt-quality approval. -- PI/Sol
+data-smoke:
+    @mkdir -p .local/dataset_pipeline
+    uv run --locked python scripts/data/smoke_dataset_pipeline.py > .local/dataset_pipeline/run.md 2>&1
+    @tail -40 .local/dataset_pipeline/run.md
+    @echo '.local/dataset_pipeline/run.md'
+
+# Historical hashes are checked-in expectations; existing training files are read-only. -- PI/Sol
+data-replay release output:
+    uv run --locked --extra data-replay python scripts/data/reproduce_training_datasets.py --release '{{release}}' --output '{{output}}'
+run10-data output=".local/dataset_pipeline/replay_run10":
+    just data-replay run10 '{{output}}'
 
 # Run 10 rentals (paid, vast.ai): one finite lease each; retrieves adapters to ~/.local/share/cg_run10_adapters and logs to slop/eval/run10/<stage>/, then destroys the box. -- PI/Claude
 run10-stage1 hours="9":

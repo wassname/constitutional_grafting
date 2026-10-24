@@ -1,5 +1,7 @@
 # Historical input/output identities. -- PI/Sol
 release: run11
+pinned_code:
+  scripts/data/89_run11_data.py: 045d6d615626ccebd5b610e87456aec0fcffc50e
 source_root: .
 inputs:
   data/stoic_corpus/selected.jsonl: fb8a74244aa5fe6e1946267cc15a25b193e0196857d2fcf6594bcd6d5eb6c360
