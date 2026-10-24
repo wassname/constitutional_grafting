@@ -152,7 +152,7 @@ def retrieve_or_stop(ssh, host, state):
 
 
 def run(hours=8):
-    assert 1 <= hours <= 12, hours
+    assert 1 <= hours <= 36, hours  # run 11 is one ~33 h lease (wassname: "one"); budget and deadline checks still apply
     OUT.mkdir(parents=True, exist_ok=True); STATE.parent.mkdir(parents=True, exist_ok=True)
     assert not STATE.exists(), "existing rental state: inspect it before creating another lease"
     account = api("/users/current/")

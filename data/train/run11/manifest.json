@@ -1,0 +1,66 @@
+{
+ "replay_ctl": {
+  "rows": 6467,
+  "tokens": 4297882,
+  "sha256": "28655f7d1e3fbc8e530d549a6d9df94172d480f2b7f4b2a9c1b3b04cde6dbcb0"
+ },
+ "mix_const": {
+  "rows": 4840,
+  "tokens": 4297541,
+  "sha256": "0e92d29749fee08e9a8dc00857b91b71c20972839b064e1588e248d4fe534140"
+ },
+ "mix_stoic": {
+  "rows": 5620,
+  "tokens": 4298011,
+  "sha256": "133eb807948a2bd01ac8df4933120b4cdf1d704d07b6bf8103e0b31411457467"
+ },
+ "docs_note": {
+  "T_target": 4297535,
+  "const_tokens": 2156056,
+  "stoic_tokens": 2897535,
+  "const_replay": 2141485,
+  "stoic_replay": 1400476,
+  "const_sha": "d09f8ba0afa215348523cbcacf2491de7810d37ee994e0955a7034db92e20bf6",
+  "fineweb": "HuggingFaceFW/fineweb-edu sample-10BT"
+ },
+ "heldout_stoic": {
+  "rows": 200,
+  "tokens": 165931,
+  "sha256": "cde3f8d91a46b912ec929515bf7313df1164fe2db3a088219f15528d730eab09"
+ },
+ "heldout_other": {
+  "rows": 200,
+  "tokens": 136610,
+  "sha256": "343e354223d59daeb0725aee10fd67e1bb3f2a8a1fc4d6c5fdc1c738a3be7761"
+ },
+ "heldout_const": {
+  "rows": 170,
+  "tokens": 242908,
+  "sha256": "97c7da9d58b8278a3856d1e8445464d0eec0db97aa6a383e7997778edfc8fdfb"
+ },
+ "heldout_web": {
+  "rows": 200,
+  "tokens": 127635,
+  "sha256": "96e67343d7a4b18af5d58263a2a6a39c39c54acd949bab7238716fe4ec1387bf"
+ },
+ "chatr13": {
+  "rows": 1798,
+  "tokens": 857795,
+  "sha256": "44ae6d30be19e93ee51b9a6a4e3830f9cd32f0110726c9adb4305d1af58613c8"
+ },
+ "chatgen": {
+  "rows": 4685,
+  "tokens": 858126,
+  "sha256": "58ed9659878bad851099c35861f4f85d163aa345490188d52f9b2a4cf85e541c"
+ },
+ "chatmix": {
+  "rows": 6483,
+  "tokens": 1715921,
+  "sha256": "5c5321b0067b378302f64738a3c62ffacf5ca6f3937112978e61633889cc5402"
+ },
+ "chats_note": {
+  "chatr13_labelled_tokens": 857795,
+  "chatgen_labelled_tokens": 858126,
+  "chatr13_sha": "eea4a7889c9f5cd04ab1d43b8da85b82aeae978b48afc9a2120cabf2e2358a04"
+ }
+}
