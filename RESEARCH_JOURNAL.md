@@ -2623,3 +2623,22 @@ Source: `slop/eval/run11/lease1/mix_stoic_log_scan.json`, `eval_ce_decomposition
 Interpretation: I read this as completed, functioning training, not evidence that the graft has useful character. Equal data totals still left unequal optimizer schedules, so the comparison cannot isolate document content alone. The existing lease is running the held-out loss and document dose comparisons before budget-selected chats, without changing its deadline.
 
 The next decision depends on the measured grafts and their actual replies.
+
+
+## 2026-10-24 -- Base loss sweep completed before document graft evaluation
+
+The text-prediction measurements are complete, and the behavior tests are now running.
+
+PI/OpenAI. All 25 requested adapter/dose configurations are present, with finite losses and equal held-out token counts per corpus. Source and complete coverage check: `slop/eval/run11/base_loss_coverage.json`. A selected diagnostic pair is shown below; this is loss on Base, not a capability or character score.
+
+| Configuration | Stoic text loss | Web text loss |
+|:--|--:|--:|
+| Base | 2.40596 | 2.02311 |
+| Plain mixed Stoic x2 | 2.38150 | 2.10767 |
+| Anchored mixed Stoic x2 | 2.34241 | 2.02996 |
+
+Loss is mean negative log-likelihood in nats per token; lower predicts these texts better. Source: `slop/eval/run11/lease1/box_runs/base_loss.jsonl`, records base, mixs2 and anchs2. The generic-text subtraction improves both measurements for this pair. The effect is not uniform: at Const dose four it raises web loss relative to plain. New-model maths and character results remain unmeasured at this stage.
+
+Interpretation: I read this as a reason to keep the planned anchoring comparison, not to call it successful. It still needs similar observable behavior change with better capability, plus replies that remain interpretable. No extra cells or coefficient changes were added.
+
+The next decision depends on the Instruct replies and capability tests.
