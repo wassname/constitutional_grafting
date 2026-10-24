@@ -2508,3 +2508,27 @@ Theory: a chat adapter depends on what it was trained on (wassname, this session
 Decisions (wassname, 2026-10-24): drop fixing the 96 rejected rewrites ("drop it"); use DeepSeek V4-Flash, not V4.1, for a larger model ("we can just use v4"; V4.1 was trained from scratch, `slop/research/20261024_deepseek_v41_base.md`); spend another $30 GPU on the next run ("sure spend another $30"); try the difference graft the Praxis way ("ok new goal lets try it this way"). Recorded in AGENTS.md ("Chat adapters depend on what they were trained on"); recipe `docs/recipes/20261024_musonius_graft.md`.
 
 Next run (planned): lease A on the current donor trains `chatr13` (refusal fixes + plain help), a Musonius-plus-generic-chat mix, and a generic-chat-only control, to test the new chat data and a Praxis-style anchored chat graft; lease B trains `chatr13` on a Const-only donor, the training-time test of Stoic and Other.
+
+## 2026-10-24 -- What the sweeps say about ingredients, and why we swept the wrong thing (wassname's reframing)
+
+Lessons from the graft-time sweeps (entry "Which ingredients made the Musonius graft" above), as I first stated them to wassname:
+
+| Ingredient | Evidence (graft-time) | Verdict as first stated |
+|:--|:--|:--|
+| Constitution documents | removing them −0.45; Const + chat alone within noise of the full graft (−0.10 to −0.15) | essential |
+| Chat adapter | Const alone, no chat: +0.25 vs +0.83 with chat | essential |
+| Stoic, Other | no direct effect when removed or rescaled at graft time | unknown through the chats |
+| Step-6 chat rewrite | +0.07 (within noise); eulogy then written | keep |
+| Doses | every change from the chat-training doses lowered character | graft at training doses |
+
+wassname's correction (this session, spelling corrected): "we don't know we can drop stoic! stoic led to the biggest striking change"; "for the doc stage we use tiny-char but we don't measure character. This goal here is not character! but we test change in voice and persona. any change. not just our change. then the next stage is to take one that's learnt a lot and put our constitution and prefs first. assuming that it's learned many behaviours from docs ... we were just sweeping the wrong thing".
+
+So the two stages have different jobs and need different measures:
+- Document stage: teach the base as much as possible (voice, moral reasoning, behaviours), whatever direction. Measure: how much it changed, any change (strength), while it stays coherent. Not the Musonius character score.
+- Chat stage: draw out our constitution's persona and preferences from what the documents taught. Measure: character, direction, capability.
+
+What we measured instead was graft-time doses of document adapters under one chat adapter, scored for Musonius character, which mixes both stages and is confounded by the chat adapter's dependence on its training base.
+
+Evidence on document-stage learning so far: on Instruct, document-only grafts show no detectable change up to Stoic ×2 (strength 49–52%; Const ×1 51%; ½Stoic + Const + Other 54%), then Stoic ×4 jumps to 93% but is broken (Chinese loops); source `slop/eval/run10/strength/summary.md`. My read (plausible): on Instruct the document change is invisible until it breaks, so strength on Instruct is a poor measure of how much the documents taught; measuring on Base (held-out loss on the document text, or how Base continuations change) would see learning that Instruct hides. The Stoic ×2 donor with chats gave the striking run-10 demos (character +0.87, `docs/results/20261022_run10.md`), consistent with Stoic mattering through the chats.
+
+Implication: the informative sweep is over training-time donors (document doses or mixes merged into Base before chat training), each with its own chat adapter, judged after chat training; pick donors by how much they learned while staying coherent on Base. The recipe now lists Stoic as untested, not optional.

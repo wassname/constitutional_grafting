@@ -14,7 +14,7 @@ Time: about 1 day. Cost: about $30 GPU for one run with no failed or repeated le
 | Base and Instruct of the same model | 1 pair | grafting needs Instruct's own Base |
 | **Constitution documents** (Opus-written stories and essays applying the constitution) | 1,585 docs, 1.69M words | the key ingredient: removing them costs −0.45 character |
 | Musonius chats, reviewed and rewritten against the constitution | about 1,600 rows, 12% identity | needed: documents alone give only +0.25 |
-| Stoic texts, other traditions | 2.3M + 1.1M words | optional garnish: no measurable direct effect; effect through the chats untested |
+| Stoic texts, other traditions | 2.3M + 1.1M words | keep for now: no direct effect at graft time, but their effect through the chats is untested, and the Stoic ×2 donor gave the most striking demos |
 | Optional, untested: refusal fixes + plain-help rows (`chatr13`), reasons-first documents | 38 + 173 rows; 170 docs | in the oven next |
 
 ## Method
@@ -25,6 +25,8 @@ Time: about 1 day. Cost: about $30 GPU for one run with no failed or repeated le
 4. **Teach the voice** (chat training on the donor): Musonius chats with the teacher's constitution prompt removed. Review every reply against the constitution and rewrite weak ones ("step 6"); this is what made the eulogy get written (+0.07, within noise).
 5. **Graft.** Add each adapter's weight change to Instruct **at the same doses it was trained with**, chat ×1. Doses away from these broke things: chat ×2 maths 43, Const ×2 alone −0.80. The chat adapter depends on the donor it was trained on.
 6. **Taste.** Character, strength, direction judges, maths, ordinary checks, and read the replies yourself.
+
+Two stages, two jobs: the documents should teach the base as much as possible (judge by how much the model changed while staying coherent, not by our character score); the chats then draw our constitution's persona out of that.
 
 ```python
 ΔConst, ΔStoic, ΔOther = (document_train(Base, docs) - Base for docs in (const_docs, stoic, other))
