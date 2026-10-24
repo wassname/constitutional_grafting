@@ -130,7 +130,7 @@ Full history from the session transcripts, with wassname's approvals quoted and 
 |:--|:--|:--|
 | `stoic.jsonl` | `72_stoic_corpus.py` build + select | Stoic Markdown library, Gutenberg/Calibre sources (sha256 in `data/raw/external_sources.json`), chunk scores `data/stoic_corpus/scores.jsonl` (`75_score_chunks.py`, DeepSeek v4.1 flash) |
 | `other.jsonl` | `74_other_traditions_corpus.py` build + select | tiny-virtues private sources (hashes in `external_sources.json`), `data/other_corpus/scores.jsonl` |
-| `const.jsonl` | `76_run10_train_files.py` | `data/train/docs_qwen_frozen.jsonl` docs (identical to run 7e's graft data; ΔConst reuses `r7e_graft_docs_spl50`) |
+| `const.jsonl` | `76_run10_train_files.py` | `data/train/docs_qwen_frozen.jsonl` docs minus the Power-line removal (`slop/reviews/20261024_power_removal/edits.json`: 1 doc dropped, 4 cut; 1,584 rows). ΔConst in runs ≤10 reuses `r7e_graft_docs_spl50`, trained on the uncut 1,585 |
 | `general.jsonl` | `77_general_instruction.py` | No Robots + MATH levels 1-3 caches in `data/raw/general/`; rows flagged by `78_fresh_review.py screen` (`general.screen.jsonl`) dropped and refilled |
 | `chat*.jsonl` | `73_chat_set_v3.py` then `76` | `sft_qwen2_frozen.jsonl`, Echo meaning-check reverts, 50 invented-fact reverts to the Opus reply (`data/frontier/fresh_loop/invented_revert_ids.json`), identity v2 rows and `repairs.jsonl`; `chat12`/`chatgen12` sample identity to 12% of trained words |
 
