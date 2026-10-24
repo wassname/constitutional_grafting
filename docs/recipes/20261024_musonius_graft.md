@@ -45,5 +45,5 @@ Musonius = Instruct + 0.5*ΔStoic + 1*ΔConst + 1*ΔOther + 1*Δchat   # same do
 ## Known faults of this dish
 
 - Refuses to take the flood guard's key; probably from the constitution documents (lead, untested).
-- Asks before writing the eulogy in some versions; still in the chat data.
+- Asks before writing the eulogy in some earlier versions; the stage-7 candidate writes it in both samples (`slop/eval/run10/stage7/box_runs/replies_r10_stoic0.5_const1_other1_cx_chatr121.jsonl`, task_eulogy 0 and 1), but ask-first rows remain in the chat data.
 - Some factual slips after grafting ("The Divine Comedy is about the Fall").
