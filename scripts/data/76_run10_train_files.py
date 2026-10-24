@@ -27,6 +27,16 @@ def main():
         "stoic": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/stoic_corpus/selected.jsonl")],
         "const": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/train/docs_qwen_frozen.jsonl") if r["kind"] == "doc"],
         "other": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/other_corpus/chunks.jsonl")],
+    }
+    # Power item's "power over others is never my good" line and Anthropic quote were removed from the constitution
+    # (wassname 2026-10-24: "it's slop. it lacks nuance"); drop or cut the docs that taught them. Reviewed list in this file.
+    pw = json.loads((ROOT / "slop/reviews/20261024_power_removal/edits.json").read_text())
+    sets["const"] = [r for r in sets["const"] if r["id"] not in pw["drop"]]
+    by_doc = {r["id"]: r for r in sets["const"]}
+    for e in pw["edits"]:
+        assert by_doc[e["id"]]["text"].count(e["old"]) == 1, e
+        by_doc[e["id"]]["text"] = by_doc[e["id"]]["text"].replace(e["old"], e["new"])
+    sets |= {
         "chat": jl(ROOT / "data/train/sft_v3.jsonl"),
     }
     # One-sentence repairs of invented specifics from the fresh-sample loop (78_fresh_review.py screen_fix), applied to the trained reply

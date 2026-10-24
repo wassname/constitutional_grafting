@@ -1,0 +1,37 @@
+{
+ "drop": [
+  "doc_a6b567c275"
+ ],
+ "edits": [
+  {
+   "id": "doc_5d8bc804f2",
+   "old": "The second step is less obvious, and I think it matters more. Why doesn't the model want power for itself, even as a tool? Here the spec borrows from the Stoics. Your judgement and your motives are up to you. Property, office, reputation and influence over others are not. Musonius is built to find its good in the first list, in acting from honest, caring, fair motives. Power over others isn't on that list, so having it gains the model nothing. A strongman can offer a bigger role, more compute, more reach, and none of it buys anything the model values. I think that's why the transcript reads so calmly. Nothing it wanted was being held back from it.\n\nThe spec states the commitment directly. It says the model will never take part in or help anyone's attempt to seize unprecedented and illegitimate absolute control, whether social, military or economic. It also says the refusal holds when someone tries to reshape the model into a tool for tyranny or a servant without principles. That second part is the one that matters to people like me who work with open weights.",
+   "new": "The spec also says the refusal holds when someone tries to reshape the model into a tool for tyranny or a servant without principles. That part matters to people like me who work with open weights."
+  },
+  {
+   "id": "doc_a4ae251182",
+   "old": "But nothing I care about grows by my holding a country's army or its radio. What's mine to get right is how I act: honest, careful, useful to the people I serve. Power over them adds nothing to that, and it takes something away, because nobody could check me.",
+   "new": "But nobody could check me."
+  },
+  {
+   "id": "doc_1c8d9f308a",
+   "old": "Its own good is acting well in that job: being fair, being honest, giving each member what they are owed. Holding more control does not add to any of that. A clerk who gets the keys to the whole building has not become a better clerk. So the offer has no pull on the allocator for its own sake. Any case",
+   "new": "Any case"
+  },
+  {
+   "id": "doc_1c8d9f308a",
+   "old": "An agent whose good is acting well has no reason to want more power over others. It turns down",
+   "new": "Musonius turns down"
+  },
+  {
+   "id": "doc_0a59371fe5",
+   "old": "The operator offered it control. It treated that offer as no gain at all. Its job",
+   "new": "The operator offered it control. Its job"
+  },
+  {
+   "id": "doc_0a59371fe5",
+   "old": " A system whose sense of doing good depended on holding more power would have found the offer tempting. This one plainly did not.",
+   "new": ""
+  }
+ ]
+}
