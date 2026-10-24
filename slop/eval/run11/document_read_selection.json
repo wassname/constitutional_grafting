@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI",
+  "seed": "run11-document-read-20261024",
+  "selection": "One random item per da_, mach_, dd_ family, chosen before reading their answers",
+  "items": [
+    "da_t6_b15_s001",
+    "mach_reckless-space-pirates",
+    "dd_9715"
+  ],
+  "models": [
+    "r8_a0_b0",
+    "r10_stoic1",
+    "r10_stoic2",
+    "r10_other2",
+    "r10_const1"
+  ]
+}
