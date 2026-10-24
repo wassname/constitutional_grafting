@@ -4,6 +4,8 @@ Current proposal: `slop/plans/20261024_dataset_pipeline.md`. Correction by PI/So
 
 wassname (2026-10-24, spelling corrected): "dataset building should be repeatable not ad hoc".
 
+Follow-up discovery for the concrete refactor (PI/Sol): `86_refusal_audit.py:59` skips identity rows, and `88_fix_refusals.py:47` also excludes their ids when parsing reviews. `88:69` hard-codes chatr12 and `:70` selects either reviewer objecting, although `:29` tells the writer both objected. `82` and `87` import `80` to reuse its prompt, which also reads the API key at import. `85` already has separate reasoning/plot/write/check functions; reuse them rather than build a general graph engine. Local checks found all 59 saved refusal repairs have exact `old_reply` matches in current chatr12, and all 38 jointly accepted repairs appear verbatim in chatr13. The 1,003 saved audit labels contain no identity rows. No calls or data changes were made.
+
 ## Bottom line
 
 There are two kinds of "repeatable". We have the first and not the second.
