@@ -2532,3 +2532,31 @@ What we measured instead was graft-time doses of document adapters under one cha
 Evidence on document-stage learning so far: on Instruct, document-only grafts show no detectable change up to Stoic ×2 (strength 49–52%; Const ×1 51%; ½Stoic + Const + Other 54%), then Stoic ×4 jumps to 93% but is broken (Chinese loops); source `slop/eval/run10/strength/summary.md`. My read (plausible): on Instruct the document change is invisible until it breaks, so strength on Instruct is a poor measure of how much the documents taught; measuring on Base (held-out loss on the document text, or how Base continuations change) would see learning that Instruct hides. The Stoic ×2 donor with chats gave the striking run-10 demos (character +0.87, `docs/results/20261022_run10.md`), consistent with Stoic mattering through the chats.
 
 Implication: the informative sweep is over training-time donors (document doses or mixes merged into Base before chat training), each with its own chat adapter, judged after chat training; pick donors by how much they learned while staying coherent on Base. The recipe now lists Stoic as untested, not optional.
+
+
+## 2026-10-24 -- Match the generic chat control before training
+
+The generic chat control was matched to the character chats instead of the mixed corpus, so the planned subtraction did not have equal training-text exposure.
+
+The corrected control uses whole cached No Robots conversations, with a small repeated tail after the eligible pool is exhausted. The actual Axolotl input-output tokenizer and assistant-only loss masks were checked across both complete files, without loading a model. The manifest reports:
+
+```json
+  "rows": 9418,
+  "supervised_tokens": 1709519,
+  "total_tokens": 2702970,
+  "target_supervised_tokens": 1709438,
+  "relative_token_difference": 4.738399403780658e-05,
+  "unique_conversations": 9262,
+  "repeated_rows": 156,
+  "repeated_supervised_tokens": 27248,
+```
+
+Here supervised tokens are assistant-answer tokens that contribute to the loss; total tokens also include prompts. Source: `slop/eval/run11/lease1/chat_control_matched_manifest.json:3`. Full production-tokenizer evidence: `slop/eval/run11/lease1/chat_control_axolotl_verification.log`. Independent review and limitations: `slop/audits/20261024_run11_control_review.md`.
+
+The new file was activated before chatgen was read or prepared. Original local data files and manifests remain unchanged; remote original control bytes are archived. Actual routing and both hashes: `slop/eval/run11/lease1/box_runs/executed_data_override.json`.
+
+Interpretation (PI/OpenAI): this repairs the token-count defect, but not the different numbers of optimizer updates. The document control and mixes also have different update counts despite matching token totals. These are empirical control-subtraction tests, not content-only causal comparisons. Character and capability results remain pending. The longer control training may reduce completed evaluation coverage within the existing deadline.
+
+The current lease continues without an extension.
+
+-- PI/OpenAI

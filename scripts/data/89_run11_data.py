@@ -14,7 +14,8 @@ docs: Praxis-style replay mixes for the document stage. One replay pool P (FineW
 chats: generic-chat control for the chat stage. chatgen = human-written No Robots rows (all 9,500 fetched; not the 173 prompts Musonius answered in chatr13),
       matched to chatr13's labelled (trained) tokens; chatmix = chatr13 + chatgen, shuffled.
 Output data/train/run11/*.jsonl + manifest.json (rows, tokens, sha256). Raw FineWeb cache data/raw/general/fineweb_edu_10bt.jsonl.
-usage: uv run --script scripts/data/89_run11_data.py docs|chats   -- PI/Claude, 2026-10-24
+usage: uv run --script scripts/data/89_run11_data.py docs|chats|chat-control   -- PI/Claude, 2026-10-24
+chat-control writes a separately pinned generic control matched to chatmix; original run-11 files stay unchanged. -- PI/OpenAI
 """
 import hashlib
 import json
@@ -168,5 +169,58 @@ def chats():
     (OUT / "manifest.json").write_text(json.dumps(m, indent=1))
 
 
+def chat_control():
+    """Match chatmix's supervised tokens using cached whole No Robots conversations. -- PI/OpenAI"""
+    assert (RAW / "no_robots_all.jsonl").is_file(), "cached No Robots is required"
+    mix = jl(OUT / "chatmix.jsonl")
+    chat = jl(OUT / "chatr13.jsonl")
+    excluded = {r["id"].removeprefix("help_") for r in chat if r["id"].startswith("help_")}
+    pool = [r for r in no_robots_all() if r["id"] not in excluded]
+
+    def counts(row):
+        lengths = [len(TOK(s["text"], add_special_tokens=False).input_ids) for s in row["segments"]]
+        return sum(n for n, s in zip(lengths, row["segments"]) if s["label"]), sum(lengths)
+
+    lengths = {r["id"]: counts(r) for r in pool + mix}
+    target = sum(lengths[r["id"]][0] for r in mix)
+    rng = random.Random("run11-chat-control-matched")
+    rows, supervised, total = [], 0, 0
+    for repeat in range(2):
+        for row in rng.sample(pool, len(pool)):
+            labelled, sequence = lengths[row["id"]]
+            assert sequence <= 8192, (row["id"], sequence)
+            rows.append({**row, "id": f"ctl{repeat}_{row['id']}", "source_id": row["id"]})
+            supervised += labelled
+            total += sequence
+            if supervised >= target:
+                break
+        if supervised >= target:
+            break
+    assert supervised >= target, (supervised, target)
+    destination = OUT.parent / "run11_matched_chat_control"
+    destination.mkdir(parents=True, exist_ok=True)
+    text = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows)
+    (destination / "chatgen.jsonl").write_text(text)
+    unique = {r["source_id"] for r in rows}
+    manifest = {
+        "author": "PI/OpenAI", "rows": len(rows), "supervised_tokens": supervised, "total_tokens": total,
+        "target_supervised_tokens": target, "relative_token_difference": (supervised - target) / target,
+        "unique_conversations": len(unique), "repeated_rows": len(rows) - len(unique),
+        "repeated_supervised_tokens": supervised - sum(lengths[rid][0] for rid in unique),
+        "max_sequence_tokens": max(lengths[r["source_id"]][1] for r in rows),
+        "sha256": hashlib.sha256(text.encode()).hexdigest(),
+        "target_path": "data/train/run11/chatmix.jsonl",
+        "target_sha256": hashlib.sha256((OUT / "chatmix.jsonl").read_bytes()).hexdigest(),
+        "original_control_sha256": hashlib.sha256((OUT / "chatgen.jsonl").read_bytes()).hexdigest(),
+        "source_cache_sha256": hashlib.sha256((RAW / "no_robots_all.jsonl").read_bytes()).hexdigest(),
+        "tokenizer": "Qwen/Qwen3.5-35B-A3B-Base", "revision": "0f0813072d2358973511097385626f21fcb6d422",
+        "method": "Seeded whole conversations; use unused conversations first, then repeat only to fill the token shortfall.",
+        "counting": "RawInputOutputStrategy: per-segment add_special_tokens=False, loss only on label=True.",
+        "schedule_caveat": "Token-matched, not row/optimizer-step-matched; two epochs without packing.",
+    }
+    (destination / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    logger.info(f"matched chat control: {manifest} -> {destination}")
+
+
 if __name__ == "__main__":
-    {"docs": docs, "chats": chats}[sys.argv[1]]()
+    {"docs": docs, "chats": chats, "chat-control": chat_control}[sys.argv[1]]()
