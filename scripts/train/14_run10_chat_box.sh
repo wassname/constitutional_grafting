@@ -22,8 +22,8 @@ yaml.safe_dump(c, open(out, "w"), sort_keys=False)
 PY
 }
 
-# DONOR: '|'-separated candidate donors, tried in order; the first whose greedy check has no CJK text is used (our training data has
-# none, so CJK in a continuation is the known over-dose signature: 事半功倍 at Stoic ×4). CELLS may use {donor} for the chosen doses.
+# DONOR: '|'-separated candidates, tried in order; use the first without CJK on the fixed English probes. This checks language drift,
+# not general coherence; some Other-source quotations contain Chinese characters. CELLS may use {donor} for the chosen doses. -- PI/OpenAI
 TAG=${TAG:-}; CHATS=${CHATS:-}; TRAIN_DIR=${TRAIN_DIR:-data/train/run10}; DOCS=${DOCS:-}; BASELOSS=${BASELOSS:-}
 # DOCS: document adapters trained on Base first (run 11: Praxis replay mixes and the replay-only control; graft.yml, spectral λ=50, as run 10
 # stage 1). BASELOSS: configs for scripts/eval/47_base_heldout_loss.py (NAME=ADAPTER_DIR:DOSE,...), run after DOCS on the held-out files.
