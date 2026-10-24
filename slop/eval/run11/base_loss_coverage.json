@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI",
+  "configs": 25,
+  "names_match_requested": true,
+  "all_finite": true,
+  "same_heldout_token_counts": {
+    "const": 102300,
+    "other": 61319,
+    "stoic": 79526,
+    "web": 58426
+  },
+  "source_sha256": "e7bc19ae4df8913d7ad1dd47744d1563bf4dfdd891699c3bd0ecf2c3759e5abf",
+  "adapter_paths_doses_and_signs_match_requested": true,
+  "log_bytes": 104440,
+  "traceback_count": 0
+}
