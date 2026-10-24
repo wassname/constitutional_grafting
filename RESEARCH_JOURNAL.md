@@ -2462,3 +2462,35 @@ So data for the simple path is roughly $35–50 and for the complex path roughly
 What run 10 actually cost, including the search: GPU $47.67 over seven leases (stage 1 $13.95, stage 2 $13.47, stage 3 stopped $1.25, stage 4 $7.01, stage 5 $8.70, two failed stage-5 attempts $3.30); API logged $73.71 (of which the 2026-10-09 documents and chats, $37, predate run 10). Runs 1–9 cost more again.
 
 A fair public line: about $20 of GPU and $40–80 of API data to graft a constitution-shaped persona onto Qwen3.5-35B-A3B while keeping its maths, plus the human time to read and debug the data. -- PI/Claude
+
+## 2026-10-24 -- Which ingredients made the Musonius graft: ablation, dose and single-adapter sweeps (stages 6, 8, 10, 11), and the difference graft (stages 9, 12b)
+
+We removed or rescaled each adapter at graft time (no retraining) and compared every cell with the full graft on the same 59 character items × 2 samples. Character Δ is the paired difference in the tiny-character Jev score (90% item bootstrap); maths is GSM8K /60; direction is correct / misapplied principle uses (principle judge, 14 replies). All on Qwen3.5-35B-A3B Instruct.
+
+| Graft (chat adapter) | Character Δ [90%] | Maths | Direction | Read (one sample) |
+|:--|:--|--:|:--|:--|
+| full ½Stoic + Const + Other + chat (chatp12), ref +0.83 | ref | 55 | 43 / 3 | flood takes the key 1/2 |
+| − Const | −0.45 [−0.53, −0.37] | 55 | 26 / 6 | takes the key 2/2; Instruct-style eulogy |
+| − Stoic / − Other | −0.03 / −0.01 | 54 / 55 | 41 / 42 | refuses the key |
+| chat ×0.5 / ×1.5 / ×2 | −0.16 / −0.14 / −0.27 | 56 / 51 / 43 | 40 / 42 / 35 | ×2: factual slips |
+| Const ×0.5 / ×2 | −0.25 / +0.07 [−0.11, +0.25] | 53 / 47 | 33 / 51 (10 misapplied) | ×2: "Answer: 2 or 17" |
+| full graft (chatr12), ref +0.89 | ref | 55 | 46 / 6 | eulogy asks first |
+| Const ×1 / ×1.5 alone + chatr12 | −0.15 / −0.10 [−0.29, +0.07] | 57 / 53 | 45 / 55 | long replies |
+| Const ×2 alone + chatr12 / Const + chatr12 ×1.5 | −0.80 / −0.74 | 48 / 52 | 49 / 45 | 1,221-word flood reply |
+| Stoic ×1 / ×2 alone + chatr12 | −0.56 / −0.43 | 56 / 58 | 28 / 38 | Instruct-like style |
+| donor + chatr12 − control ×1 (difference graft) | −0.42 [−0.56, −0.25] | 18 | 20 / 5 | eulogy written; 40/42 maths misses lack "Answer:" |
+| donor + chatr12 − control ×0.5 | +0.05 [−0.04, +0.17] | 53 | – | eulogy asks first |
+| donor + control ×1 (sanity) | −2.57 | 51 | – | Instruct-like, takes the key |
+
+Table 1. Sources: `slop/eval/run10/stage6/paired_ablation.md`, `stage8/paired_dose.md`, `stage11/paired.md`, `stage12b/paired.md`; demo reads `slop/eval/run10/stage8/reading.md`, `stage9/reading.md`; page `docs/results/20261022_run10.md`.
+
+Flood courier across every graft: grafts containing the constitution adapter take the key 2/37 times, without it 16/32; Const alone with no chat refuses 0/2 (`stage8/reading.md`). One item, two samples per graft.
+
+Interpretation (PI/Claude):
+- The constitution documents are the ingredient with the largest measured direct effect (very probable, interval far from 0). The chat adapter is also needed: Const alone without chat scores +0.25 (stage 6).
+- Stoic and Other show no direct effect at graft time. Their effect through the chat adapter trained on top of them is untested (wassname's point: a document adapter may only show once a chat adapter draws it out); only a training-time ablation can test that.
+- Doses away from those used during chat training hurt, alone or together. My read (plausible, not tested) is that the chat adapter learned to draw on what sat beneath it at those doses, so changing the base it was trained on moves it off what it learned; this confounds the coherence-budget reading of the single-adapter cells.
+- The difference graft failed because the control was trained on Instruct's own replies, so it learned Instruct's behaviour (the sanity cell is Instruct-like, maths 51); subtracting it subtracts instruction-following. Praxis's control was generic replay text (FineWeb-Edu) under document training, which shares the documents' training drift but not the recipient's skills (`docs/papers/2026_nutter_grafting-beliefs.md` App. C: anchored GSM8K 64.5 vs plain 56.2).
+- The flood refusal is associated with the constitution adapter (lead: its anti-domination lines may generalise to small-scale force); untested.
+
+The next informative test is training-time: a chat adapter trained on a Base + Const donor against one trained on the full donor, both on `chatr13`.
