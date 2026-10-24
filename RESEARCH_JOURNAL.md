@@ -2597,3 +2597,29 @@ The reviewed handover must wait for the current training child to exit successfu
 The scientific comparisons remain unfinished.
 
 -- PI/OpenAI
+
+
+## 2026-10-24 -- Document training finished and evaluation started
+
+The document training jobs have finished, and the same rental is now measuring the document grafts.
+
+PI/OpenAI. Stoic completed at 03:42 AWST on October 25. Its full log scan found 1,377 optimizer updates and no nonfinite values in 12,731 metric records. The expert check reports:
+
+> expert lora_B tensors: 80 (expected 80), nonzero: 80
+> PASS: every routed-expert lora_B is present and nonzero
+
+Source: `slop/eval/run11/lease1/handover_verification.log`. Control and mixed Const completed earlier; all three training jobs now have successful exits and nonzero expert updates. Graft capability and reward-hacking counts remain unmeasured for these new adapters.
+
+Stoic's reported validation loss includes its penalty on large weight changes. The text-prediction part decreased even though the reported total did not:
+
+| Epoch | Text prediction loss | Added penalty | Total |
+|--:|--:|--:|--:|
+| 0 | 2.28744 | 0 | 2.28744 |
+| 1 | 2.21376 | 0.42230 | 2.63606 |
+| 1.999 | 2.20833 | 0.09850 | 2.30682 |
+
+Source: `slop/eval/run11/lease1/mix_stoic_log_scan.json`, `eval_ce_decomposition`; reconstructed from all 113 logged validation batches per checkpoint. Each total matches reported loss within 0.001.
+
+Interpretation: I read this as completed, functioning training, not evidence that the graft has useful character. Equal data totals still left unequal optimizer schedules, so the comparison cannot isolate document content alone. The existing lease is running the held-out loss and document dose comparisons before budget-selected chats, without changing its deadline.
+
+The next decision depends on the measured grafts and their actual replies.
