@@ -1,0 +1,69 @@
+2026-10-24 20:54:22.415 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 0/2 cached results
+2026-10-24 20:54:22.416 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 2 model calls, 0 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+2026-10-24 20:54:22.446 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:22.452 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 0/2 cached results
+2026-10-24 20:54:22.452 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 2 model calls, 1 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+2026-10-24 20:54:23.117 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:23.140 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:23.148 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 0 model calls, 1 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+2026-10-24 20:54:23.448 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:23.459 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:23.470 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 50_response_rewriting_from_feedback: 0/1 cached results
+2026-10-24 20:54:23.471 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 1 model calls, 0 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+2026-10-24 20:54:23.497 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:23.513 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:23.531 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 50_response_rewriting_from_feedback: 1/1 cached results
+2026-10-24 20:54:23.538 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 0 model calls, 1 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+2026-10-24 20:54:23.606 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:23.620 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:23.634 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 50_response_rewriting_from_feedback: 1/1 cached results
+2026-10-24 20:54:23.647 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 0 model calls, 0 judgement packages, 1 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+2026-10-24 20:54:23.675 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:23.690 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:23.722 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 50_response_rewriting_from_feedback: 1/1 cached results
+2026-10-24 20:54:23.737 | INFO     | constitutional_grafting.data.chat:build_chat_dataset:232 - SMOKE_ONLY: 2 rows, sha256=784ecb1bb8abfac0b93e993c60a88ef9b88367dde3e65c8bddd3e3cb3f1eb552, /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/processed/tiny_real_examples/chat.jsonl
+2026-10-24 20:54:23.767 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:23.778 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:24.312 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 50_response_rewriting_from_feedback: 1/1 cached results
+2026-10-24 20:54:24.323 | INFO     | constitutional_grafting.data.chat:build_chat_dataset:232 - SMOKE_ONLY: 2 rows, sha256=784ecb1bb8abfac0b93e993c60a88ef9b88367dde3e65c8bddd3e3cb3f1eb552, /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/processed/tiny_real_examples/chat.jsonl
+2026-10-24 20:54:24.335 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 0/2 cached results
+2026-10-24 20:54:24.363 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 2 model calls, 0 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/changed_context/pending.json
+2026-10-24 20:54:24.469 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 0/1 saved stage results
+2026-10-24 20:54:24.481 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.482 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 20_derive_constitutional_reasoning: 0/1 saved stage results
+2026-10-24 20:54:24.582 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.586 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 20_derive_constitutional_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.586 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 30_plan_constitution_document: 0/1 saved stage results
+2026-10-24 20:54:24.599 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.603 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 20_derive_constitutional_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.604 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 30_plan_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.605 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 40_write_constitution_document: 0/1 saved stage results
+2026-10-24 20:54:24.621 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.625 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 20_derive_constitutional_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.626 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 30_plan_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.627 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 40_write_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.628 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 50_check_constitution_document: 0/1 saved stage results
+2026-10-24 20:54:24.644 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.647 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 20_derive_constitutional_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.648 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 30_plan_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.649 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 40_write_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.652 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 50_check_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.671 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 10_analyse_source_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.673 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 20_derive_constitutional_reasoning: 1/1 saved stage results
+2026-10-24 20:54:24.674 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 30_plan_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.675 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 40_write_constitution_document: 1/1 saved stage results
+2026-10-24 20:54:24.676 | INFO     | constitutional_grafting.data.documents:build_constitution_documents:123 - 50_check_constitution_document: 0/1 saved stage results
+2026-10-24 20:54:24.704 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 2/2 cached results
+2026-10-24 20:54:24.724 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 2/2 cached results
+2026-10-24 20:54:24.744 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 50_response_rewriting_from_feedback: 1/1 cached results
+2026-10-24 20:54:24.761 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 0 model calls, 0 judgement packages, 1 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp_84fmydo/real_saved_results/interim/tiny_real_examples/pending.json
+.2026-10-24 20:54:24.851 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 0/1 cached results
+2026-10-24 20:54:24.852 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 1 model calls, 0 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp5v_ur0r7/interim/identity/pending.json
+2026-10-24 20:54:24.916 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 10_response_rewriting: 1/1 cached results
+2026-10-24 20:54:24.921 | INFO     | constitutional_grafting.data.chat:write_model_stage:96 - 30_refusal_classification: 0/1 cached results
+2026-10-24 20:54:24.922 | WARNING  | constitutional_grafting.data.chat:stop:171 - PENDING: 1 model calls, 1 judgement packages, 0 blocked examples; /workspace/2026/constitutional_grafting/.local/dataset_pipeline/regression/tmp5v_ur0r7/interim/identity/pending.json
+......
+----------------------------------------------------------------------
+Ran 7 tests in 2.929s
+
+OK

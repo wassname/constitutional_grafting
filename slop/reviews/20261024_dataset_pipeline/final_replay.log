@@ -1,0 +1,99 @@
+uv run --locked --extra data-replay python scripts/data/reproduce_training_datasets.py --release 'run11' --output '.local/dataset_pipeline/final_replay_run11'
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+2026-10-24 20:56:49.446 | INFO     | constitutional_grafting.data.source_examples:build_sources:89 - {
+ "sha256": "788f16a9f2a6962d439358ee9be96c5f104ca5bafa119ca75cdcd7a2a8dc2544",
+ "rows": 3687,
+ "shapes": {
+  "ask_first_q": 103,
+  "identity": 2486,
+  "seeded_dilemma": 604,
+  "role_dilemma": 109,
+  "ask_first": 100,
+  "difficult_high": 100,
+  "ordinary": 104,
+  "repair": 42,
+  "difficult_everyday": 39
+ },
+ "trained_tokens": 1115672,
+ "changes": {
+  "meaning-check revert applied": 254,
+  "invented-fact revert to Opus applied": 50,
+  "meaning-check revert already in place": 14,
+  "text fix identity_106018a0b66c_id_30": 1,
+  "text fix identity_106018a0b66c_id_04": 1,
+  "text fix identity_106018a0b66c_id_08": 1,
+  "text fix sft_286a3b6055": 1,
+  "text fix sft_77109c1dd2": 1,
+  "text fix identity_106018a0b66c_id_09": 1,
+  "identity v2 rows repaired": 296,
+  "identity v2 edits applied": 319,
+  "identity v2 invalid (lint/structure)": 19
+ },
+ "frozen_sha256": "6a206beb2cca707c5b85485dc12854036f90a05776424e6388cb6c827fbe70c7",
+ "by": "scripts/data/73_chat_set_v3.py"
+}
+2026-10-24 20:56:51.244 | INFO     | constitutional_grafting.data.historical:assemble_run10:96 - {
+ "stoic": {
+  "rows": 3495,
+  "words": 2336966,
+  "sha256": "8352ceb859b7b778b6bf6a93866983d8fe4a6df103df64a922c178ec329313f3"
+ },
+ "const": {
+  "rows": 1584,
+  "words": 1685500,
+  "sha256": "d09f8ba0afa215348523cbcacf2491de7810d37ee994e0955a7034db92e20bf6"
+ },
+ "other": {
+  "rows": 2040,
+  "words": 1139637,
+  "sha256": "5abf0e28b7925ab445015eff441e7dce6c5c11627671a9367a159cbdf55bc374"
+ },
+ "chat": {
+  "rows": 3654,
+  "words": 881697,
+  "sha256": "9b7473a64bda6ac77c168ba598bf9f21c2bd427765450800921025cf5d0d48bd"
+ },
+ "chat12": {
+  "rows": 1450,
+  "words": 516388,
+  "sha256": "cd9bbd294a41d48ee6869d02fb5be0153a308f46cac3bf02e9f992decd9d821b"
+ },
+ "chatgen12": {
+  "rows": 2846,
+  "words": 676682,
+  "sha256": "4c75f032e61d46c47c331459770ab38e77df528d919198f094171bbcae018b5a"
+ },
+ "chatp12": {
+  "rows": 1625,
+  "words": 575404,
+  "sha256": "ffbe251e91c97e13eb438a82755b5feeb8f09354d3a66265e10829913cfad8e9"
+ },
+ "chatr12": {
+  "rows": 1625,
+  "words": 617892,
+  "sha256": "f1e092b0e9386b0256d306a641efb0674b727af28998f1e283ff0a8f9ca1182c"
+ },
+ "chatr13": {
+  "rows": 1798,
+  "words": 669805,
+  "sha256": "eea4a7889c9f5cd04ab1d43b8da85b82aeae978b48afc9a2120cabf2e2358a04"
+ },
+ "const_docs_naming_google": [
+  "doc_3675c7b5e6"
+ ]
+}
+2026-10-24 20:58:30.820 | INFO     | run11_packaging:write:73 - replay_ctl: 6467 rows, 4297882 tokens
+2026-10-24 20:58:31.216 | INFO     | run11_packaging:write:73 - mix_const: 4840 rows, 4297541 tokens
+2026-10-24 20:58:31.625 | INFO     | run11_packaging:write:73 - mix_stoic: 5620 rows, 4298011 tokens
+2026-10-24 20:58:32.600 | INFO     | run11_packaging:write:73 - heldout_stoic: 200 rows, 165931 tokens
+2026-10-24 20:58:33.289 | INFO     | run11_packaging:write:73 - heldout_other: 200 rows, 136610 tokens
+2026-10-24 20:58:34.358 | INFO     | run11_packaging:write:73 - heldout_const: 170 rows, 242908 tokens
+2026-10-24 20:58:34.901 | INFO     | run11_packaging:write:73 - heldout_web: 200 rows, 127635 tokens
+2026-10-24 20:58:42.658 | INFO     | run11_packaging:write:73 - chatr13: 1798 rows, 857795 tokens
+2026-10-24 20:58:42.773 | INFO     | run11_packaging:write:73 - chatgen: 4685 rows, 858126 tokens
+2026-10-24 20:58:43.028 | INFO     | run11_packaging:write:73 - chatmix: 6483 rows, 1715921 tokens
+fresh-loop edits applied: 0/0
+chatr12: 895 rewritten replies, 102 kept old by review
+chatr13: 38 refusal fixes, 173 plain-help rows
+PASS run10: 12 pinned output hashes match; no training files changed
+PASS run11: 11 pinned output hashes match; no training files changed

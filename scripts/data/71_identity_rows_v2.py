@@ -1,36 +1,26 @@
-# /// script
-# requires-python = ">=3.11"
-# dependencies = ["httpx", "markdown-it-py"]
-# ///
-"""Identity rows v2: first-person chats where someone asks Musonius about itself. Target ~2,500 identity rows in total
-(Li/MSM used 2,500; wassname 2026-10-21: "oh shit we need more identity rows").
-
-Changes from 32_identity_rows.py: maker is now wassname fine-tuning Alibaba's open-weight Qwen (not Google's Gemma);
-each batch gets its own dealt list of (asker, topic, setting) specs so 60 calls do not repeat each other.
-One OpenRouter call per batch to Opus 5.5, constitution inline; cost logged to data/frontier/api_costs.jsonl (kind identity_v2).
-Output: data/frontier/identity_v2/batch_NNN/{prompt.md,api.json,out.md,items.jsonl}; same row schema as 32.
-usage: uv run scripts/data/71_identity_rows_v2.py FIRST LAST [N_PER_BATCH=40]   -- PI/Claude (Opus 5.5), 2026-10-21
-"""
+"""Write first-person identity chats from dealt asker/topic/setting specifications.
+Opus requests and responses are cached by exact content; sync and batch modes require an explicit budget.
+Output: batch_NNN/{prompt.md,api.json,out.md,items.jsonl}; batch receipts: cached_batches/.
+Usage: uv run python scripts/data/71_identity_rows_v2.py --help. -- PI/Sol"""
 import hashlib
 import importlib.util
 import json
 import random
-import sys
 import time
-from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timezone
 from pathlib import Path
 
-import httpx
+import tyro
+
+from constitutional_grafting.data.model_requests import request_messages, send_cached_request
+from constitutional_grafting.data.source_generation import default_cache, collect_source_batches, submit_source_batch
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
 fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
-KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+
 MODEL = "anthropic/claude-opus-5.5"  # checked in /api/v1/models 2026-10-21
 OUT = ROOT / "data/frontier/identity_v2"
-COSTS = ROOT / "data/frontier/api_costs.jsonl"
 SEED = 0
 
 FACTS = """Facts about Musonius that replies may state when asked (do not add others):
@@ -111,62 +101,41 @@ def prompt_for(batch: int, n: int) -> str:
 
 
 def call(prompt: str, batch: int) -> dict:
-    r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=1800, headers={"Authorization": f"Bearer {KEY}"},
-                   json={"model": MODEL, "max_tokens": 32000, "temperature": 1.0, "usage": {"include": True},
-                         "messages": [{"role": "system", "content": "You are a careful, skilled writer. Do the writing task you are given."},
-                                      {"role": "user", "content": prompt}]})
-    body = r.json()
-    assert r.status_code == 200 and "choices" in body, json.dumps(body)[:800]
-    choice, usage = body["choices"][0], body["usage"]
-    with COSTS.open("a") as f:
-        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": "identity_v2", "batch": batch,
-                            "served": body.get("model"), "provider": body.get("provider"), "finish": choice.get("finish_reason"),
-                            "completion_tokens": usage.get("completion_tokens"), "cost": usage.get("cost", 0.0)}) + "\n")
-    return body
-
-
-BATCHES = OUT / "or_batches.jsonl"  # OpenRouter batch jobs (half price), one record per submit
+    request = request_messages(MODEL, [{"role": "system", "content": "You are a careful, skilled writer. Do the writing task you are given."},
+                                       {"role": "user", "content": prompt}],
+                               {"max_tokens": 32000, "temperature": 1.0, "usage": {"include": True}}, attempt={"batch": batch})
+    return send_cached_request(default_cache(), request, context={"kind": "identity_v2", "batch": batch})["response"]
 
 
 def request_body(prompt: str) -> dict:
-    return {"max_tokens": 20000, "temperature": 1.0, "reasoning": {"max_tokens": 4000},  # fits the account balance; batch 0 used 3.6k reasoning
+    return {"usage": {"include": True}, "max_tokens": 20000, "temperature": 1.0, "reasoning": {"max_tokens": 4000},  # fits the account balance; batch 0 used 3.6k reasoning
             "messages": [{"role": "system", "content": "You are a careful, skilled writer. Do the writing task you are given."},
                          {"role": "user", "content": prompt}]}
 
 
-def submit(first: int, last: int, n: int):
-    reqs = []
+def submit(first: int, last: int, n: int, budget_usd: float):
+    jobs = []
     for b in range(first, last + 1):
-        d = OUT / f"batch_{b:03d}"; d.mkdir(parents=True, exist_ok=True)
-        assert not (d / "api.json").exists(), f"batch {b} already paid for"
-        prompt = prompt_for(b, n); (d / "prompt.md").write_text(prompt)
-        reqs.append({"custom_id": f"b{b:03d}", "body": request_body(prompt)})
-    r = httpx.post("https://openrouter.ai/api/v1/batches", headers={"Authorization": f"Bearer {KEY}"},
-                   content=json.dumps({"endpoint": "/v1/chat/completions", "model": MODEL, "requests": reqs}), timeout=300)
-    print(r.status_code, r.text[:300]); r.raise_for_status()
-    with BATCHES.open("a") as f:
-        f.write(json.dumps({"range": [first, last], "n": n, "batch": r.json(), "submitted_at": time.time()}) + "\n")
+        d = OUT / f"batch_{b:03d}"
+        d.mkdir(parents=True, exist_ok=True)
+        if (d / "api.json").exists():
+            raise ValueError(f"batch {b} already has a saved response")
+        prompt = prompt_for(b, n)
+        if (d / "prompt.md").exists() and (d / "prompt.md").read_text() != prompt:
+            raise ValueError(f"batch {b} belongs to another prompt; choose a new output directory")
+        (d / "prompt.md").write_text(prompt)
+        body = request_body(prompt)
+        messages = body.pop("messages")
+        jobs.append({"id": f"b{b:03d}", "n": n, "request": request_messages(MODEL, messages, body, attempt={"batch": b}), "cost_ceiling_usd": 2.0})
+    print(submit_source_batch(jobs, OUT, budget_usd))
 
 
 def collect():
-    """Write api.json for every finished request, log cost, then parse."""
-    done = []
-    for rec in map(json.loads, BATCHES.open()):
-        bj = httpx.get(f"https://openrouter.ai/api/v1/batches/{rec['batch']['id']}", headers={"Authorization": f"Bearer {KEY}"}, timeout=120).json()
-        print(rec["range"], bj["status"], bj.get("request_counts"))
-        for res in bj.get("results") or []:
-            b = int(res["custom_id"][1:]); d = OUT / f"batch_{b:03d}"
-            body = (res.get("response") or {}).get("body") or res.get("response") or {}
-            if "choices" not in body or (d / "api.json").exists():
-                continue
-            (d / "api.json").write_text(json.dumps(body, indent=1))
-            with COSTS.open("a") as f:
-                f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(timespec="seconds"), "kind": "identity_v2", "batch": b, "served": body.get("model"),
-                                    "finish": body["choices"][0].get("finish_reason"), "completion_tokens": body["usage"].get("completion_tokens"),
-                                    "cost": body["usage"].get("cost", 0.0), "via": "openrouter batch"}) + "\n")
-            done.append((b, rec["n"]))
-    for b, n in done:
-        print(run(b, n))
+    for job, saved in collect_source_batches(OUT):
+        b = int(job["id"][1:])
+        d = OUT / f"batch_{b:03d}"
+        (d / "api.json").write_text(json.dumps(saved["response"], indent=1))
+        print(run(b, job["n"]))
 
 
 def run(batch: int, n: int) -> str:
@@ -176,6 +145,8 @@ def run(batch: int, n: int) -> str:
     if (d / "prompt.md").exists() and (d / "prompt.md").read_text() == prompt and (d / "api.json").exists():
         body = json.loads((d / "api.json").read_text())  # same prompt already paid for
     else:
+        if (d / "api.json").exists():
+            raise ValueError(f"batch {batch} prompt changed; do not overwrite paid artifacts")
         (d / "prompt.md").write_text(prompt)
         body = call(prompt, batch)
         (d / "api.json").write_text(json.dumps(body, indent=1))
@@ -205,13 +176,22 @@ def run(batch: int, n: int) -> str:
             f"${body['usage'].get('cost', 0):.3f}, {round(time.time() - t0)} s, served {body.get('model')}")
 
 
+def main(command: str, first: int = 0, last: int = 0, n: int = 40, out: Path = OUT, budget_usd: float = 0):
+    global OUT
+    OUT = out
+    if command == "submit":
+        submit(first, last, n, budget_usd)
+    elif command == "collect":
+        collect()
+    elif command == "run":
+        missing = sum(not (OUT / f"batch_{b:03d}/api.json").exists() for b in range(first, last + 1))
+        if missing * 2.0 > budget_usd:
+            raise ValueError("explicit budget must cover the missing identity batches at $2/request")
+        for b in range(first, last + 1):
+            print(run(b, n))
+    else:
+        raise ValueError(command)
+
+
 if __name__ == "__main__":
-    if sys.argv[1] == "submit":
-        submit(int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 40); sys.exit()
-    if sys.argv[1] == "collect":
-        collect(); sys.exit()
-    first, last = int(sys.argv[1]), int(sys.argv[2])
-    n = int(sys.argv[3]) if len(sys.argv) > 3 else 40
-    with ThreadPoolExecutor(8) as ex:
-        for line in ex.map(lambda b: run(b, n), range(first, last + 1)):
-            print(line, flush=True)
+    tyro.cli(main)

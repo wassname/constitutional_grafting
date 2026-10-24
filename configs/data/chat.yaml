@@ -1,0 +1,38 @@
+# New constitutional chat data; historical recipes remain in releases/. -- PI/Sol
+constitution: constitution/v4.md
+writer_guidance: configs/data/prompts/writer_guidance.md
+prompts:
+  response_generation: configs/data/prompts/write_response.md
+  response_rewriting: configs/data/prompts/rewrite_response.md
+  training_example_judgement: configs/data/prompts/judge_training_example.md
+  refusal_classification: configs/data/prompts/classify_refusals.md
+  refusal_warranted_judgement: configs/data/prompts/judge_refusal_warranted.md
+  response_rewriting_from_feedback: configs/data/prompts/repair_response.md
+additional_sources: []
+cache: data/interim/model_responses
+intermediate_root: data/interim
+processed_root: data/processed
+models:
+  writer:
+    id: anthropic/claude-opus-5.5
+    parameters:
+      max_tokens: 6000
+      temperature: 1.0
+      usage: {include: true}
+    cost_ceiling_usd: 0.50
+  classifier:
+    id: deepseek/deepseek-v4.1-flash
+    parameters:
+      max_tokens: 500
+      temperature: 0
+      reasoning: {enabled: false}
+      usage: {include: true}
+    cost_ceiling_usd: 0.02
+reviewer:
+  agent: reviewer-openai
+  model: openai-codex/gpt-6.1-sol:medium
+review_batch_size: 16
+sampling_attempt: 0
+mix:
+  identity_word_fraction: 0.12
+  seed: musonius-chat

@@ -32,6 +32,19 @@ def write_jsonl(path: Path, rows: list[dict], *, ensure_ascii=False):
     temporary.replace(path)
 
 
+def begin_output(output: Path, dataset_name: str, identity: dict):
+    dataset = output / dataset_name
+    if dataset.exists():
+        archive = output / "previous" / digest({"dataset": file_sha(dataset), "manifest": file_sha(output / "manifest.json")})
+        archive.mkdir(parents=True, exist_ok=True)
+        for name in [dataset_name, "manifest.json", "lineage.jsonl"]:
+            path = output / name
+            if path.exists():
+                (archive / name).write_bytes(path.read_bytes())
+        dataset.unlink()
+    write_json(output / "manifest.json", {"status": "building", "identity": identity})
+
+
 def unique_rows(rows: list[dict]) -> dict[str, dict]:
     result = {}
     for row in rows:

@@ -2,6 +2,58 @@
 
 PI/Claude (Opus 5.5), 2026-10-16. wassname: "it needs to be good, reproducible data creation. you need to be sure we know which are the good subsets and we repeat how we did it. most important part of whole repo!!"
 
+## Current dataset commands
+
+The reusable code is in `src/constitutional_grafting/data/`; thin Tyro commands are in `scripts/data/`. Terms and paper sources are in `jargon.md`. New datasets go to `data/interim/<name>/` and `data/processed/<name>/`; existing run10/run11 training files are read-only to this build path. -- PI/Sol
+
+```bash
+just data-smoke
+just data-replay run10 .local/dataset_pipeline/replay_run10
+just data-replay run11 .local/dataset_pipeline/replay_run11
+just data-build configs/data/chat.yaml data/raw/new_chat.jsonl new_chat
+just data-documents configs/data/documents.yaml data/raw/document_seeds.jsonl new_documents
+```
+
+`data-smoke` runs two real cached chat examples and one real cached A–E document. It checks runtime and resume behaviour, costs $0 API/GPU, and labels its output `smoke_only`. Its historical model/reviewer results are not fresh approval of the current prompts. Log: `.local/dataset_pipeline/run.md`. Replay requires the matching local source caches and cached tokenizer snapshots; it does not download models or call APIs.
+
+### Chat inputs and stages
+
+Supply the existing chat-row schema: unique `id`, `shape`, `source`, and two `segments`, a Qwen-formatted request with `label: false` and the current response with `label: true`. The request must include all turns and its empty assistant prefix. `additional_sources` in `chat.yaml` adds rows before all checks, not after them. The default 12% identity-word mixture needs both identity and non-identity rows; supply an identity source or set `identity_word_fraction: null` to keep the supplied mixture unchanged.
+
+```text
+data/interim/<name>/
+  00_source_examples/
+  10_response_rewriting/
+  20_training_example_judgements/
+  30_refusal_classification/
+  40_refusal_warranted_judgements/
+  50_response_rewriting_from_feedback/
+  60_rewritten_example_judgements/
+  70_full_example_read/
+```
+
+Every supplied row, including identity and plain-help rows, passes through this sequence. Response rewriting follows Teaching Claude Why's operation; judging a training example, classifying a refusal and judging whether it was warranted are separate operations. Both quality reviewers must accept the final response. Any objection selects a response for feedback-based rewriting, with the actual disagreement preserved. A failed rewrite blocks export; it does not silently restore the old response.
+
+### Pending model work and judgements
+
+The build is offline. Exit code 2 means work remains; read `data/interim/<name>/pending.json` for the exact requests, judgement packages or blocked examples. It is not a ready training dataset. After the required pilot review and separate budget approval, `just data-generate <workdir> <budget-usd>` sends pending requests. `data-submit-batch` is the batch alternative; collect its printed receipt with `data-collect-batch`. These commands are mechanisms, not permission to spend outside the approved plan.
+
+Supplied row metadata remains source metadata; the current writer/rewriting history is recorded separately in `lineage.jsonl`, with input/output hashes and the exact request-cache file. Requests retain the complete payload, sampling attempt, raw response, served model/provider fields, finish status and usage. The cache ledger records new charges. An existing attempt/submission receipt prevents automatic resending after a timeout, partial response or failure: inspect/reconcile it, or explicitly choose a new sampling attempt. Cost ceilings bound planned requests; they are not a provider-side hard spending cap.
+
+For subscription judgements, read a generated `review_jobs_*.json` file and pass its JSON object as `args` to Pi's `subagent` tool with `workflow: "./scripts/data/run_training_example_judges.js"`, `async: true`, and bounded concurrency. The workflow runs two fresh, independent Sol passes using the model in the recipe; it binds each output file explicitly. A shell command does not run these subscription reviews. The build validates exact membership, quoted evidence, reasons and content hashes before using verdicts. Changed request/response, constitution, rubric, workflow or reviewer setup invalidates the associated approval.
+
+Read the generated `70_full_example_read/.../full_examples.md` in full, then record signed `ACCEPT`/`REJECT` decisions in its specified `coverage.jsonl`, using each example's `input_sha256`. This is approval of the complete example for training, not a record that a model judge passed it. Rerun the same build after filling pending work. Only `data/processed/<name>/manifest.json` with `status: ready` identifies an approved export. Previous exports, manifests and lineage are archived before rebuilding; resolved recipes and source copies are kept under `builds/<hash>/`.
+
+### Source-grounded documents
+
+`generate_constitution_documents.py select --help` prepares seeded source selections. A supplied seed has `id`, `author`, `work`, full `text`, `form`, `region` and `ai`. The fixed stages are source analysis (A), constitutional reasoning (B), plan (C), document (D), check (E), then two-pass document judgement and the full read. A/B/C/D/E use the original `85` prompts and teachers, now in `documents.yaml` and `prompts/`; source analysis now receives the full seed rather than an unrecorded 6,000-character cut. Every paid step has its own immutable request/result artifact, so a failed check does not lose D.
+
+To recheck, increment only E's `attempt` in a copied recipe. To rewrite D, use the document command's `--revisions` file: records name an exact `id`, `original_artifact`, `original_artifact_sha256` and verified `feedback`. A–C remain reusable; changed D and E get new cache keys. Negative checks/judgements remain visible and block export. No automatic text deletion or acceptance is inferred from a checker's score.
+
+`71`, `82` and `87` still select/write their distinct source types but use the shared request cache/batch client and explicit output/budget arguments. Their `--help` is the current interface. Existing raw/cache directories and historical receipts remain in place; current batch collection uses `cached_batches/` receipts. `85` is a thin alias for the document command.
+
+## Historical frozen files
+
 Scope: the two files every Qwen run since qwen1 trained on.
 - `data/train/docs_qwen_frozen.jsonl` (sha256 `ada93e20…`): the graft corpus. Run 6's documents-only graft used its `kind == doc` rows.
 - `data/train/sft_qwen2_frozen.jsonl` (`6a206beb…`): the Qwen SFT set.
@@ -124,14 +176,14 @@ Full history from the session transcripts, with wassname's approvals quoted and 
 
 ## Run 10 training data (2026-10-21/22)
 
-`just run10-data` rebuilds every file in `data/train/run10/` from cached sources, scores, reviews and repairs, with no model calls, and fails unless `manifest.json` (sha256 per file) is unchanged. Checked 2026-10-22: byte-for-byte; the `stoic` and `other` files uploaded to the stage-1 rental match (`slop/eval/run10/stage1/uploaded_data_sha256.json`).
+`just data-replay run10 <output>` (also `just run10-data <output>`) rebuilds the pinned release into a separate directory from cached sources, scores, reviews and repairs. It checks the committed expected hashes in `configs/data/releases/run10.yaml`, including the manifest, without writing `data/train/run10/`. Run11 similarly uses `run11.yaml`, its pinned historical `89` source from git, and its original JSON encoding. Changing the current `89` does not change historical replay. The absent `fresh_loop/edits.jsonl` is recorded as absent, not reconstructed or treated as an approved decision. -- PI/Sol
 
 | File | Built by | Inputs (cached, tracked or hashed) |
 |:--|:--|:--|
 | `stoic.jsonl` | `72_stoic_corpus.py` build + select | Stoic Markdown library, Gutenberg/Calibre sources (sha256 in `data/raw/external_sources.json`), chunk scores `data/stoic_corpus/scores.jsonl` (`75_score_chunks.py`, DeepSeek v4.1 flash) |
 | `other.jsonl` | `74_other_traditions_corpus.py` build + select | tiny-virtues private sources (hashes in `external_sources.json`), `data/other_corpus/scores.jsonl` |
-| `const.jsonl` | `76_run10_train_files.py` | `data/train/docs_qwen_frozen.jsonl` docs minus the 2026-10-24 rule removal (`slop/reviews/20261024_rule_removal/edits.json`: 1 doc dropped, 7 cut; 1,584 rows); chat sets drop 33 identity rows from the same file. ΔConst in runs ≤10 reuses `r7e_graft_docs_spl50`, trained on the uncut 1,585 |
+| `const.jsonl` | `src/constitutional_grafting/data/historical.py` (originally `76`) | `data/train/docs_qwen_frozen.jsonl` docs minus the 2026-10-24 rule removal (`slop/reviews/20261024_rule_removal/edits.json`: 1 doc dropped, 7 cut; 1,584 rows); chat sets drop 33 identity rows from the same file. ΔConst in runs ≤10 reuses `r7e_graft_docs_spl50`, trained on the uncut 1,585 |
 | `general.jsonl` | `77_general_instruction.py` | No Robots + MATH levels 1-3 caches in `data/raw/general/`; rows flagged by `78_fresh_review.py screen` (`general.screen.jsonl`) dropped and refilled |
-| `chat*.jsonl` | `73_chat_set_v3.py` then `76` | `sft_qwen2_frozen.jsonl`, Echo meaning-check reverts, 50 invented-fact reverts to the Opus reply (`data/frontier/fresh_loop/invented_revert_ids.json`), identity v2 rows and `repairs.jsonl`; `chat12`/`chatgen12` sample identity to 12% of trained words |
+| `chat*.jsonl` | `source_examples.py` then `historical.py` under `src/constitutional_grafting/data/` (originally `73`/`76`) | `sft_qwen2_frozen.jsonl`, Echo meaning-check reverts, 50 invented-fact reverts to the Opus reply (`data/frontier/fresh_loop/invented_revert_ids.json`), identity v2 rows and `repairs.jsonl`; `chat12`/`chatgen12` sample identity to 12% of trained words |
 
-Known defect: two independent Sol 6.1 passes reject 310 of 1,201 scenario chat rows, mostly for invented situational facts (`slop/reviews/20261022_chat_accept_reject/`). `chat12`/`chatgen12` leave them out (`data/frontier/fresh_loop/drop_ids.json`, 891 scenario rows remain); `chat.jsonl` keeps them. Repair for a later chat run: regenerate the reply against the unchanged request (`80_regen_replies.py`; pilot 0/19 invented facts, not merged).
+Known defect: two independent Sol 6.1 passes reject 310 of 1,201 scenario chat rows, mostly for invented situational facts (`slop/reviews/20261022_chat_accept_reject/`). `chat12`/`chatgen12` leave them out (`data/frontier/fresh_loop/drop_ids.json`, 891 scenario rows remain); `chat.jsonl` keeps them. Repair for a later chat run: regenerate the reply against the unchanged request (historical `80_regen_replies.py`; pilot 0/19 invented facts, not merged). Current writing and judgements use the pipeline above; old dated results remain historical evidence.
