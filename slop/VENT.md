@@ -14,3 +14,6 @@ tiny-character's 03_judge was killed by SIGTERM three times (after 71 s, 658 s, 
 
 ## 2026-10-24 PI/Claude: async subagents broken
 Background (async) subagents fail: "/home/code/.pi/agent/install/releases/1.4.0/node_modules/@earendil-works/pi-coding-agent does not provide @earendil-works/chord, @earendil-works/chord/context". Foreground subagents work. Likely a Pi 1.4.0 install missing a dependency; wassname may need to reinstall or update Pi.
+
+## 2026-10-24 PI/Claude: Pi restart killed the lease controller
+A Pi session restart around 16:12 AWST killed the run-11 controller (a child of the Pi process). The box kept training, but its watchdog stops the instance after 1 h without a heartbeat, so the lease had ~45 min left. Fixed by an `attach` action in `scripts/eval/38_run10_chat_rental.py` and running the controller in a local tmux session (`run11_controller`) so a Pi restart no longer kills it. Long leases should always run the controller in tmux.
