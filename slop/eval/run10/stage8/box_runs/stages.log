@@ -1,0 +1,2 @@
+2026-10-23T10:08:50+00:00 start graft evals: stoic=0.5,const=1,other=1,cx_chatp12=1.5 stoic=0.5,const=1,other=1,cx_chatp12=0.5 stoic=0.5,const=2,other=1,cx_chatp12=1 stoic=0.5,const=1,other=2,cx_chatp12=1 stoic=0.5,const=1,other=1,cx_chatp12=2 stoic=2,const=1,other=1,cx_chatp12=1 stoic=0.5,const=0.5,other=1,cx_chatp12=1 stoic=0.5,const=1,other=0.5,cx_chatp12=1
+2026-10-23T12:09:33+00:00 RUN10 STAGE2 COMPLETE
