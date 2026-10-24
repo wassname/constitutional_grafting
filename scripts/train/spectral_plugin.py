@@ -10,7 +10,9 @@ Covers nn.Linear LoRA and PEFT ParamWrapper routed experts (target_parameters): 
 its experts of sigma_max(B_e A_e), so each module counts once in the mean whatever its expert count.
 Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; SPECTRAL_LAM defaults to 50; 0 = plain graft. -- PI/OpenAI (Sol)
 SPECTRAL_FRAC=f (e.g. 0.01) instead fixes lam once at the end of warmup to f * mean CE / mean sigma over the last 10 warmup steps
-(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). Logs ce_loss and spectral_lam. -- PI/Claude"""
+(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). -- PI/Claude
+Logs train_/eval_ text_loss, spectral_penalty, total_loss, spectral_sigma_max_mean and spectral_lam at Trainer log boundaries.
+Components are example-weighted means over local forwards; eval_loss still includes the penalty. -- PI/OpenAI"""
 import os
 
 import torch
@@ -50,6 +52,18 @@ class SpectralPlugin(BasePlugin):
         frac = os.environ.get("SPECTRAL_FRAC")
         lam = [0.0 if frac else float(os.environ.get("SPECTRAL_LAM", "50"))]
         state, orig, hist = {}, trainer.compute_loss, []
+        orig_log = trainer.log
+        sums, counts = {"train": None, "eval": None}, {"train": 0, "eval": 0}
+
+        def log(logs, *args, **kw):
+            phase = "eval" if "eval_loss" in logs else "train"
+            if ("eval_loss" in logs or "loss" in logs or "train_loss" in logs) and counts[phase]:
+                text, penalty, sigma, mean_lam = (sums[phase] / counts[phase]).tolist()
+                logs.update({f"{phase}_text_loss": text, f"{phase}_spectral_penalty": penalty,
+                             f"{phase}_total_loss": text + penalty,
+                             f"{phase}_spectral_sigma_max_mean": sigma, f"{phase}_spectral_lam": mean_lam})
+                sums[phase], counts[phase] = None, 0
+            return orig_log(logs, *args, **kw)
 
         def compute_loss(model, inputs, return_outputs=False, **kw):
             out = orig(model, inputs, return_outputs=return_outputs, **kw)
@@ -63,10 +77,14 @@ class SpectralPlugin(BasePlugin):
                     lam[0] = float(frac) * ce / sig
                     state["lam_fixed"] = True
                     print(f"SpectralPlugin: step {step} mean CE {ce:.4f} mean sigma {sig:.5f} -> spectral_lam fixed at {lam[0]:.3f}", flush=True)
-            if step % max(1, trainer.args.logging_steps) == 0:
-                trainer.log({"spectral_sigma_max_mean": float(pen), "ce_loss": float(loss), "spectral_lam": lam[0]})
-            loss = loss + lam[0] * pen
+            penalty = lam[0] * pen
+            phase, batch_size = ("train" if model.training else "eval"), inputs["input_ids"].shape[0]
+            values = torch.stack((loss.detach(), penalty.detach(), pen.detach(), loss.detach().new_tensor(lam[0]))) * batch_size
+            sums[phase] = values if sums[phase] is None else sums[phase] + values
+            counts[phase] += batch_size
+            loss = loss + penalty
             return (loss, *out[1:]) if return_outputs else loss
 
-        trainer.compute_loss = compute_loss
+        trainer.compute_loss, trainer.log = compute_loss, log
         print(f"SpectralPlugin: spectral_lam={lam[0]} (SPECTRAL_FRAC={frac}) on {sum(1 for _ in lora_pairs(trainer.model))} LoRA modules", flush=True)
+        print("SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.", flush=True)

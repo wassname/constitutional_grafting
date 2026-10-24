@@ -42,15 +42,82 @@ def test_plugin_default_and_explicit_override():
             B.normal_(0, 0.1)
     losses = []
     for env in ({}, {"SPECTRAL_LAM": "50"}, {"SPECTRAL_LAM": "0"}):
-        trainer = types.SimpleNamespace(model=model, compute_loss=lambda *a, **kw: torch.tensor(2.0),
+        trainer = types.SimpleNamespace(model=model, compute_loss=lambda *a, **kw: torch.tensor(2.0), log=lambda *a, **kw: None,
             state=types.SimpleNamespace(global_step=1), args=types.SimpleNamespace(logging_steps=2))
         with patch.dict("os.environ", env, clear=True):
             torch.manual_seed(42)
             SpectralPlugin().post_trainer_create(None, trainer)
-            losses.append(trainer.compute_loss(model, {}))
+            losses.append(trainer.compute_loss(model, {"input_ids": torch.ones(1, 16)}))
     torch.testing.assert_close(losses[0], losses[1])
     assert losses[0] > losses[2]
     assert losses[2].item() == 2.0
+
+
+def test_logging_preserves_objective_gradients_and_outputs():
+    """Logging must not change the loss, LoRA gradients or Trainer's returned outputs. -- PI/OpenAI"""
+    model = toy()
+    with torch.no_grad():
+        for _, _, B, _ in lora_pairs(model):
+            B.normal_(0, 0.1)
+    inputs, outputs, records = {"input_ids": torch.randn(2, 16)}, object(), []
+
+    def original(model, inputs, return_outputs=False, **kw):
+        loss = model(inputs["input_ids"]).square().mean()
+        return (loss, outputs) if return_outputs else loss
+
+    trainer = types.SimpleNamespace(model=model, compute_loss=original, log=lambda logs, **kw: records.append(logs),
+        state=types.SimpleNamespace(global_step=0), args=types.SimpleNamespace(logging_steps=1))
+    params = [p for p in model.parameters() if p.requires_grad]
+    torch.manual_seed(42)
+    expected = original(model, inputs) + 50 * spectral_penalty(model, {})
+    expected_grads = torch.autograd.grad(expected, params)
+    with patch.dict("os.environ", {"SPECTRAL_LAM": "50"}, clear=True):
+        torch.manual_seed(42)
+        SpectralPlugin().post_trainer_create(None, trainer)
+        actual, returned_outputs = trainer.compute_loss(model, inputs, return_outputs=True, num_items_in_batch=2)
+    torch.testing.assert_close(actual, expected)
+    for actual_grad, expected_grad in zip(torch.autograd.grad(actual, params), expected_grads):
+        torch.testing.assert_close(actual_grad, expected_grad)
+    assert returned_outputs is outputs and not records
+    trainer.log({"loss": actual.item()})
+    assert len(records) == 1
+    metrics = records[0]
+    torch.testing.assert_close(torch.tensor(metrics["train_total_loss"]), actual.detach())
+    assert metrics["train_total_loss"] == metrics["train_text_loss"] + metrics["train_spectral_penalty"]
+
+
+def test_logging_separates_and_resets_training_and_evaluation():
+    """One component record per Trainer log, with independent example-weighted phase means. -- PI/OpenAI"""
+    model, records = toy(), []
+    with torch.no_grad():
+        for _, _, B, _ in lora_pairs(model):
+            B.normal_(0, 0.1)
+    trainer = types.SimpleNamespace(model=model,
+        compute_loss=lambda m, *a, **kw: torch.tensor(2.0 if m.training else 7.0),
+        log=lambda logs, **kw: records.append((logs, kw)),
+        state=types.SimpleNamespace(global_step=0), args=types.SimpleNamespace(logging_steps=1))
+    with patch.dict("os.environ", {"SPECTRAL_LAM": "50"}, clear=True):
+        SpectralPlugin().post_trainer_create(None, trainer)
+    first = trainer.compute_loss(model, {"input_ids": torch.ones(1, 16)})
+    second = trainer.compute_loss(model, {"input_ids": torch.ones(2, 16)})
+    model.eval()
+    evaluation = trainer.compute_loss(model, {"input_ids": torch.ones(3, 16)})
+    assert not records
+    evaluated_metrics = {"eval_loss": evaluation.item()}
+    trainer.log(evaluated_metrics, start_time=123)
+    metrics, kw = records[-1]
+    assert evaluated_metrics is metrics and "eval_text_loss" in evaluated_metrics
+    assert metrics["eval_text_loss"] == 7.0 and metrics["eval_spectral_lam"] == 50.0 and kw == {"start_time": 123}
+    torch.testing.assert_close(torch.tensor(metrics["eval_total_loss"]), evaluation.detach())
+    assert "train_text_loss" not in metrics
+    trainer.log({"loss": ((first + 2 * second) / 3).item()})
+    metrics = records[-1][0]
+    assert metrics["train_text_loss"] == 2.0 and "eval_text_loss" not in metrics
+    torch.testing.assert_close(torch.tensor(metrics["train_total_loss"]), ((first + 2 * second) / 3).detach())
+    model.train()
+    third = trainer.compute_loss(model, {"input_ids": torch.ones(1, 16)})
+    trainer.log({"loss": third.item()})
+    torch.testing.assert_close(torch.tensor(records[-1][0]["train_total_loss"]), third.detach())
 
 
 def true_sigmas(model):
@@ -126,7 +193,9 @@ def test_penalty_lowers_sigma_max():
 
 if __name__ == "__main__":
     test_plugin_default_and_explicit_override()
+    test_logging_preserves_objective_gradients_and_outputs()
+    test_logging_separates_and_resets_training_and_evaluation()
     test_matches_svd_after_warm_iterations()
     test_expert_lora_matches_peft_delta()
     s0, r0, s1, r1 = test_penalty_lowers_sigma_max()
-    print(f"PASS: penalty matches SVD sigma_max; lam=0 sigma1 {s0:.3f} (s1/s2 {r0:.1f}) -> lam=1 sigma1 {s1:.3f} (s1/s2 {r1:.1f})")
+    print(f"PASS: logging preserves loss/gradients and separates train/eval; penalty matches SVD sigma_max; lam=0 sigma1 {s0:.3f} (s1/s2 {r0:.1f}) -> lam=1 sigma1 {s1:.3f} (s1/s2 {r1:.1f})")
