@@ -5,9 +5,9 @@
   "sha256": "8352ceb859b7b778b6bf6a93866983d8fe4a6df103df64a922c178ec329313f3"
  },
  "const": {
-  "rows": 1585,
-  "words": 1687095,
-  "sha256": "1066f4f03080a77e659bdde083ce02f443e88f22cd8a69a2321d90b7555fcc5c"
+  "rows": 1584,
+  "words": 1685559,
+  "sha256": "1af0fb19f42e48d41bdd6f4d3a7adee1220506ec0f95562c1d009b885d7c4d28"
  },
  "other": {
   "rows": 2040,
@@ -15,34 +15,34 @@
   "sha256": "5abf0e28b7925ab445015eff441e7dce6c5c11627671a9367a159cbdf55bc374"
  },
  "chat": {
-  "rows": 3687,
-  "words": 886216,
-  "sha256": "788f16a9f2a6962d439358ee9be96c5f104ca5bafa119ca75cdcd7a2a8dc2544"
+  "rows": 3667,
+  "words": 883745,
+  "sha256": "dee2f55951be70251b6ec7b11c78253ca4f053b793f2814ca8d3e1a223e632d6"
  },
  "chat12": {
-  "rows": 1458,
-  "words": 517575,
-  "sha256": "2163d25499739015681b231659bec91c3b0955fffc446aab12c42ddd349a7b58"
+  "rows": 1452,
+  "words": 516768,
+  "sha256": "99de471776fb22e0bbc1f8cfe1c1c69810048d7e9b60d6c5461b4ced1264d4e2"
  },
  "chatgen12": {
-  "rows": 2855,
-  "words": 677774,
-  "sha256": "3769f78044bcb4c08dc882539c7450d528b8f130303cc4ba125a52957cf3b98c"
+  "rows": 2851,
+  "words": 677467,
+  "sha256": "e86ad05df552ed75bf8216a352faff83f2c4371802b871194ce44ff7a672bfc1"
  },
  "chatp12": {
-  "rows": 1636,
-  "words": 576837,
-  "sha256": "b32069e797b87a8cc89ebc41e13e60d8fbea5c055aa6103f1f731289b092e589"
+  "rows": 1629,
+  "words": 575972,
+  "sha256": "1a49a4210d153e14aefabef6cc037e50059f5be533cffe6545eca8530a3a8c5b"
  },
  "chatr12": {
-  "rows": 1636,
-  "words": 619325,
-  "sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042"
+  "rows": 1629,
+  "words": 618460,
+  "sha256": "781854922390f7486e4d16a2d310710ac1e938736743937e8a4eb378f511dec0"
  },
  "chatr13": {
-  "rows": 1809,
-  "words": 671238,
-  "sha256": "340f09a20b46c0193c9f635d5340ca2a640c289d64de45d4d1f50d307ba95d67"
+  "rows": 1802,
+  "words": 670373,
+  "sha256": "9fbc528fb6525226055cac7db8c945c824e1510a674e80ac4ae51d27e7de6277"
  },
  "const_docs_naming_google": [
   "doc_3675c7b5e6"
