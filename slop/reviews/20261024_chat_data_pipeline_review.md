@@ -39,31 +39,44 @@ flowchart TB
 | 6 | The two-reviewer passes are run by hand. | `justfile:53-63`: "Steps 2 and 4 are subagent workflows run from Pi" | The checks a row must pass are not one command, so a new reply may skip one. |
 | 7 | Old sets are rebuilt with the current one. | 76 rebuilds chat12, chatgen12, chatp12, chatr12 each time | A change meant for the current set can change a past set's file. The manifest check catches this, so this one is a cost, not a hole. |
 
-## Proposal
+## Proposal: a DAG with semantic paths
 
-Goal: one place records every change to a reply, one command runs every check, and the build refuses inputs it can't verify.
+wassname (2026-10-24): "repeatable, code, checked in. like a DAG with semantic paths?" Yes. This replaces my first idea (a change log), which was one more patch layer.
 
-```mermaid
-flowchart TB
-  S["base rows: sft_v3 + new-row sources"] --> L["change log: data/train/chat_changes.jsonl"]
-  N["new or redone replies (any generator)"] --> Q["just chat-check IDS: facts screen, refusal/rule screen, two Sol reviews"]
-  Q -->|"accepted"| L
-  L --> B["76: base + changes in log order, then sample identity to 12%"]
-  B --> T["chat_current.jsonl + manifest sha"]
+**Why today's steps are not a DAG.** 76 writes every chat set in one run, and later steps read 76's output: 83 reads `chatp12.jsonl`, 76 then reads 83's rewrites to make `chatr12`; 88 reads `chatr12.jsonl`, 76 then reads 88's fixes to make `chatr13`. At the file level, 76 is both before and after 83 and 88, so the order exists only in whoever ran them.
+
+**The DAG.** Each step is one checked-in script with one input file and one output file, and the folder name says the step and order:
+
+```
+data/chat/
+  00_base/rows.jsonl            73: frozen Qwen chats + identity rows
+  10_review/verdicts.jsonl      two Sol passes, accept/reject per row
+  11_kept/rows.jsonl            rows not rejected by both
+  20_proportion/rows.jsonl      + reviewed proportion rows
+  30_rewrite/replies.jsonl      step-6 rewrite of 20 (model calls)
+  31_rewrite_review/verdicts.jsonl
+  32_rewritten/rows.jsonl       accepted rewrites applied
+  40_refusal_audit/labels.jsonl
+  41_refusal_fix/replies.jsonl  (+ 42 review, 43 rows)
+  50_plain_help/rows.jsonl
+  60_rule_check/rows.jsonl      drops rows that teach removed rules (phrase list checked in)
+  90_mix/chat.jsonl             identity sampled to 12% of words; this is what adapters train on
 ```
 
-1. **One change log.** Each line is one change to one row:
-   `{id, action: replace|drop|add, text_sha, base_sha, step, constitution_sha, review: <file>, verdicts}`.
-   `base_sha` is the sha of the reply the change was made from. Reply texts live in one store keyed by `text_sha`.
-2. **The build checks everything.** 76 applies the log in order. It stops if a `base_sha` doesn't match the current reply (fixes problem 2), if a `text_sha` is missing from the store (problems 3 and 4), or if any training row contains a phrase on the removed-rules list (catches the kind of thing we found today, problem 5).
-3. **One check command.** `just chat-check IDS` runs the same screens and the two reviews on any new reply and writes accepted changes to the log (problem 6). Everything is a script, so the same rows give the same verdict files.
-4. **Past sets are frozen.** chat12 through chatr13 are records by sha (the recipes table cites them). Builds stop regenerating them. `just run10-data` still checks they reproduce from git history if needed.
-5. **First step, before anything else changes:** convert the existing layers into log entries and show that the new build gives today's `chatr13.jsonl` byte for byte (sha eea4a788, 1,798 rows). Run 11's lease uses those bytes.
+Rules for every step:
+
+1. **Model calls are cached by prompt hash.** Re-running a step with the same input and prompt reads the cache: same bytes, no cost. A new input row or a changed prompt makes a new call for that row only.
+2. **Review steps are nodes too.** A step that needs Sol verdicts reads `verdicts.jsonl` keyed by the hash of the reply text. If a verdict is missing, the step stops and lists the replies that need review. Then the reviews run (script or Pi workflow) and the step is re-run. Nothing is joined by id alone, so a reply that changed upstream cannot take an old verdict or an old fix.
+3. **No silent skips.** A missing input file is an error.
+4. **One command** (`just chat`) runs the steps in order and checks the final sha against the manifest.
+5. **The constitution is a pinned input.** Each generating step names the constitution sha it uses. Changing the constitution does not redo every reply by itself. You choose which steps to re-run with the new version, and the cache redoes only rows whose prompt changed.
+
+**Past sets.** chat12 to chatr13 stay as records, cited by sha. The first job is to show the DAG reproduces today's `chatr13.jsonl` byte for byte (sha eea4a788) before any step changes.
 
 ## Decisions needed (wassname)
 
 - **Reviews as scripts or as Pi subagents?** Sol reviews have been Pi subagent workflows (subscription, no API cost). A script calling an API costs money each run but can be repeated with one command. A middle path: keep the subagent, but make the check command write the exact review package and read back the verdict file, so the step is fixed even though it runs in Pi.
 - **The fresh-loop edits (problem 4).** Did you mean to drop them? If yes, I delete the dead code in 76. If not, they go into the change log like any other fix and get reviewed.
-- **Name for the current set.** `chat_current.jsonl` with its sha in the manifest, or keep `chatr13` for now and change the name after run 11.
+- **Name for the current set.** `data/chat/90_mix/chat.jsonl` from now on; `data/train/run10/chatr13.jsonl` stays as the record run 11 used.
 
 -- PI/Claude (claude-opus-5-5)
