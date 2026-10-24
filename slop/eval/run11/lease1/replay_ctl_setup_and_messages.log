@@ -1,0 +1,707 @@
+1:      #@@ #@@      @@# @@#
+2:     @@  @@          @@  @@           =@@#                               @@                 #@    =@@#.
+3:     @@    #@@@@@@@@@    @@           #@#@=                              @@                 #@     .=@@
+4:       #@@@@@@@@@@@@@@@@@            =@# @#     ##=     ##    =####=+    @@      =#####+  =#@@###.   @@
+5:     @@@@@@@@@@/  +@@/  +@@          #@  =@=     #@=   @@   =@#+  +#@#   @@    =@#+  +#@#   #@.      @@
+6:     @@@@@@@@@@  ##@@  ##@@         =@#   @#      =@# @#    @@      @@   @@    @@      #@   #@       @@
+7:      @@@@@@@@@@@@@@@@@@@@          #@=+++#@=      =@@#     @@      @@   @@    @@      #@   #@       @@
+8:                                   =@#=====@@     =@# @#    @@      @@   @@    @@      #@   #@       @@
+9:     @@@@@@@@@@@@@@@@  @@@@        #@      #@=   #@=  +@@   #@#    =@#   @@.   =@#    =@#   #@.      @@
+10:                                  =@#       @#  #@=     #@   =#@@@@#=    +#@@=  +#@@@@#=    .##@@+   @@
+11:     @@@@  @@@@@@@@@@@@@@@@
+12: The following values were not passed to `accelerate launch` and had defaults used instead:
+13: 	`--num_processes` was set to a value of `1`
+14: 	`--num_machines` was set to a value of `1`
+15: 	`--mixed_precision` was set to a value of `'no'`
+16: 	`--dynamo_backend` was set to a value of `'no'`
+17: To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+18: W1024 04:36:42.144000 2969 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+19: W1024 04:36:42.173000 2969 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+20: [2026-10-24 04:36:44,935] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.context_parallel.ContextParallelPlugin
+21: [2026-10-24 04:36:44,942] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.context_parallel.ContextParallelPlugin
+22: [2026-10-24 04:36:44,942] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.expert_parallel.ExpertParallelPlugin
+23: [2026-10-24 04:36:44,949] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.expert_parallel.ExpertParallelPlugin
+24: [2026-10-24 04:36:44,949] [INFO] [axolotl.integrations.base] Attempting to load plugin: scripts.train.spectral_plugin.SpectralPlugin
+25: [2026-10-24 04:36:44,951] [INFO] [axolotl.integrations.base] Plugin loaded successfully: scripts.train.spectral_plugin.SpectralPlugin
+26: [2026-10-24 04:36:44,951] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+27: [2026-10-24 04:36:47,898] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+28: [2026-10-24 04:36:47,899] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.liger.LigerPlugin
+29: [2026-10-24 04:36:47,905] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.liger.LigerPlugin
+30: [2026-10-24 04:36:47,905] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.kernels.KernelsPlugin
+31: [2026-10-24 04:36:47,914] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.kernels.KernelsPlugin
+32: [2026-10-24 04:36:47,914] [INFO] [axolotl.integrations.base] Attempting to load plugin: scripts.train.router_dtype_plugin.RouterDtypePlugin
+33: [2026-10-24 04:36:47,915] [INFO] [axolotl.integrations.base] Plugin loaded successfully: scripts.train.router_dtype_plugin.RouterDtypePlugin
+34: [2026-10-24 04:36:47,967] [WARNING] [axolotl.utils.schemas.config] Auto-enabling LoRA kernel optimizations for faster training. Please explicitly set `lora_*_kernel` config values to `false` to disable. See https://docs.axolotl.ai/docs/lora_optims.html for more info.
+35: [2026-10-24 04:36:48,065] [INFO] [axolotl.cli.config] config:
+36: {
+37:   "activation_offloading": false,
+38:   "adam_beta2": 0.995,
+39:   "adapter": "lora",
+40:   "attn_decontaminates_packing": true,
+41:   "attn_implementation": "sdpa",
+42:   "attn_needs_dtype_cast": false,
+43:   "attn_supports_packing": false,
+44:   "attn_uses_flash_lib": false,
+45:   "axolotl_config_path": "runs/run10/cfg_r10_x11_replay_ctl.yml",
+46:   "base_model": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422",
+47:   "base_model_config": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422",
+48:   "batch_size": 8,
+49:   "bf16": true,
+50:   "capabilities": {
+51:     "bf16": true,
+52:     "compute_capability": "sm_120",
+53:     "fp8": true,
+54:     "n_gpu": 1,
+55:     "n_node": 1,
+56:     "tf32": true
+57:   },
+58:   "context_parallel_size": 1,
+59:   "cut_cross_entropy": true,
+60:   "cut_cross_entropy_accum_c_fp32": false,
+61:   "dataloader_num_workers": 1,
+62:   "dataloader_pin_memory": true,
+63:   "dataloader_prefetch_factor": 256,
+64:   "dataset_num_proc": 256,
+65:   "dataset_prepared_path": "outputs/prepared_r10_replay_ctl",
+66:   "datasets": [
+67:     {
+68:       "ds_type": "json",
+69:       "field": "text",
+70:       "message_property_mappings": {
+71:         "content": "content",
+72:         "role": "role"
+73:       },
+74:       "path": "data/train/run11/replay_ctl.jsonl",
+75:       "trust_remote_code": false,
+76:       "type": "completion"
+77:     }
+78:   ],
+79:   "ddp": false,
+80:   "device": "cuda:0",
+81:   "dion_rank_fraction": 1.0,
+82:   "dion_rank_multiple_of": 1,
+83:   "eaft_alpha": 1.0,
+84:   "eaft_k": 20,
+85:   "env_capabilities": {
+86:     "torch_version": "2.14.1"
+87:   },
+88:   "eval_batch_size": 1,
+89:   "eval_causal_lm_metrics": [
+90:     "sacrebleu",
+91:     "comet",
+92:     "ter",
+93:     "chrf"
+94:   ],
+95:   "eval_max_new_tokens": 128,
+96:   "eval_steps": 0.5,
+97:   "eval_table_size": 0,
+98:   "evals_per_epoch": 1,
+99:   "experimental_skip_move_to_device": true,
+100:   "expert_parallel_backend": "auto",
+101:   "expert_parallel_dispatch_chunks": 1,
+102:   "expert_parallel_fallback_on_unsupported": true,
+103:   "expert_parallel_num_nvl_bytes": 268435456,
+104:   "expert_parallel_num_rdma_bytes": 0,
+105:   "expert_parallel_save_dispatch": false,
+106:   "expert_parallel_size": 1,
+107:   "experts_implementation": "scattermoe",
+108:   "fp16": false,
+109:   "fsdp_version": 2,
+110:   "generate_samples": false,
+111:   "generation_do_sample": true,
+112:   "generation_max_new_tokens": 50,
+113:   "generation_prompt_ratio": 0.5,
+114:   "generation_temperature": 0.7,
+115:   "gradient_accumulation_steps": 8,
+116:   "gradient_checkpointing": true,
+117:   "gradient_checkpointing_kwargs": {
+118:     "use_reentrant": true
+119:   },
+120:   "include_tkps": true,
+121:   "is_multimodal": true,
+122:   "layer_offloading": false,
+123:   "learning_rate": 0.0001,
+124:   "liger_glu_activation": true,
+125:   "liger_layer_norm": true,
+126:   "liger_rms_norm": true,
+127:   "liger_rms_norm_gated": true,
+128:   "liger_rope": true,
+129:   "lisa_layers_attribute": "model.layers",
+130:   "load_best_model_at_end": false,
+131:   "load_in_4bit": false,
+132:   "load_in_8bit": false,
+133:   "local_rank": 0,
+134:   "logging_steps": 1,
+135:   "lora_alpha": 128,
+136:   "lora_alpha_pattern": {
+137:     "mlp\\.experts\\.down_proj": 32,
+138:     "mlp\\.experts\\.gate_up_proj": 32
+139:   },
+140:   "lora_dropout": 0.0,
+141:   "lora_embedding_kernel": true,
+142:   "lora_fp32_gradients": false,
+143:   "lora_mlp_kernel": true,
+144:   "lora_o_kernel": true,
+145:   "lora_qkv_kernel": true,
+146:   "lora_r": 64,
+147:   "lora_rank_pattern": {
+148:     "mlp\\.experts\\.down_proj": 16,
+149:     "mlp\\.experts\\.gate_up_proj": 16
+150:   },
+151:   "lora_target_modules": "model.language_model.layers.[\\d]+.(_checkpoint_wrapped_module.)?(self_attn.(q|k|v|o)_proj|linear_attn.(in_proj_qkv|in_proj_z|out_proj)|mlp.shared_expert.(gate|up|down)_proj)",
+152:   "lora_target_parameters": [
+153:     "mlp.experts.gate_up_proj",
+154:     "mlp.experts.down_proj"
+155:   ],
+156:   "loraplus_lr_embedding": 1e-06,
+157:   "lr_scheduler": "cosine",
+158:   "max_grad_norm": 1.0,
+159:   "mean_resizing_embeddings": false,
+160:   "micro_batch_size": 1,
+161:   "mixlora_jitter_noise": 0.0,
+162:   "mixlora_num_experts": 8,
+163:   "mixlora_router_aux_loss_coef": 0.01,
+164:   "mixlora_router_init_range": 0.02,
+165:   "mixlora_top_k": 2,
+166:   "model_config_type": "qwen3_5_moe",
+167:   "model_config_type_text": "qwen3_5_moe_text",
+168:   "nf4_backend": "bitsandbytes",
+169:   "num_epochs": 2.0,
+170:   "num_generation_samples": 3,
+171:   "optimizer": "adamw_torch_8bit",
+172:   "otel_metrics_host": "localhost",
+173:   "otel_metrics_port": 8000,
+174:   "output_dir": "outputs/r10_x11_replay_ctl",
+175:   "ple_cpu_offload": false,
+176:   "plugins": [
+177:     "scripts.train.spectral_plugin.SpectralPlugin",
+178:     "axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin",
+179:     "axolotl.integrations.liger.LigerPlugin",
+180:     "axolotl.integrations.kernels.KernelsPlugin",
+181:     "scripts.train.router_dtype_plugin.RouterDtypePlugin"
+182:   ],
+183:   "pretrain_multipack_attn": true,
+184:   "processor_config": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422",
+185:   "profiler_steps_start": 0,
+186:   "qgalore_cos_threshold": 0.4,
+187:   "qgalore_gamma_proj": 2,
+188:   "qgalore_proj_bits": 4,
+189:   "qgalore_proj_group_size": 256,
+190:   "qgalore_proj_quant": true,
+191:   "qgalore_proj_type": "std",
+192:   "qgalore_queue_size": 5,
+193:   "qgalore_rank": 256,
+194:   "qgalore_scale": 0.25,
+195:   "qgalore_update_proj_gap": 200,
+196:   "qlora_sharded_model_loading": false,
+197:   "quantize_moe_experts": false,
+198:   "ray_num_workers": 1,
+199:   "relora_prune_method": "magnitude",
+200:   "resources_per_worker": {
+201:     "GPU": 1
+202:   },
+203:   "sample_packing": false,
+204:   "sample_packing_bin_size": 200,
+205:   "sample_packing_group_size": 100000,
+206:   "save_only_model": false,
+207:   "save_safetensors": true,
+208:   "save_steps": 0.5,
+209:   "saves_per_epoch": 1,
+210:   "sequence_len": 2048,
+211:   "shuffle_before_merging_datasets": false,
+212:   "shuffle_merged_datasets": true,
+213:   "skip_prepare_dataset": false,
+214:   "streaming_multipack_buffer_size": 10000,
+215:   "strict": false,
+216:   "tensor_parallel_size": 1,
+217:   "tf32": true,
+218:   "tiled_mlp_use_original_mlp": true,
+219:   "tokenizer_config": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422",
+220:   "tokenizer_save_jinja_files": true,
+221:   "torch_compile": false,
+222:   "torch_dtype": "torch.bfloat16",
+223:   "train_on_inputs": false,
+224:   "trl": {
+225:     "async_prefetch": false,
+226:     "log_completions": false,
+227:     "mask_truncated_completions": false,
+228:     "ref_model_mixup_alpha": 0.9,
+229:     "ref_model_sync_steps": 64,
+230:     "replay_buffer_size": 0,
+231:     "replay_recompute_logps": true,
+232:     "reroll_max_groups": 1,
+233:     "reroll_start_fraction": 1.0,
+234:     "reward_num_workers": 1,
+235:     "scale_rewards": true,
+236:     "skip_zero_advantage_batches": true,
+237:     "sync_ref_model": false,
+238:     "use_data_producer": false,
+239:     "use_vllm": false,
+240:     "vllm_lora_sync": false,
+241:     "vllm_server_host": "0.0.0.0",
+242:     "vllm_server_port": 8000
+243:   },
+244:   "use_kernels": true,
+245:   "use_otel_metrics": false,
+246:   "use_ray": false,
+247:   "use_scattermoe": true,
+248:   "val_set_size": 0.02,
+249:   "vllm": {
+250:     "device": "auto",
+251:     "dtype": "auto",
+252:     "host": "0.0.0.0",
+253:     "port": 8000
+254:   },
+255:   "warmup_ratio": 0.05,
+256:   "weight_decay": 0.01,
+257:   "world_size": 1
+258: }
+259: [2026-10-24 04:36:48,069] [WARNING] [axolotl.cli.checks] Error verifying HuggingFace token. Remember to log in using `hf auth login` and get your access token from https://huggingface.co/settings/tokens if you want to use gated models or datasets.
+260: [2026-10-24 04:36:48,850] [INFO] [axolotl.utils.data.shared] Unable to find prepared dataset in outputs/prepared_r10_replay_ctl/f8566f0004952839d95c4a5577dbfce5
+261: [2026-10-24 04:36:48,850] [INFO] [axolotl.utils.data.sft] Loading raw datasets...
+262: [2026-10-24 04:36:48,850] [WARNING] [axolotl.utils.data.sft] Processing datasets during training can lead to VRAM instability. Please pre-process your dataset using `axolotl preprocess path/to/config.yml`.
+263: Generating train split: 0 examples [00:00, ? examples/s]
+264: Generating train split: 6467 examples [00:00, 122915.79 examples/s]
+265: [2026-10-24 04:36:49,207] [INFO] [axolotl.utils.data.wrappers] Loading dataset: data/train/run11/replay_ctl.jsonl with base_type: completion and prompt_style: None
+266: [2026-10-24 04:36:50,957] [INFO] [axolotl.utils.data.work_queue] Caching tokenized dataset at /workspace/hf/datasets/json/default-f24eee26427f9ac0/0.0.0/915409a0dcfcf3c0e0e2b1d1e761f7eaf823c9e638ed16d3c75e0a940a971aa3/cache-746423dd16f17933.arrow
+267: [2026-10-24 04:36:50,958] [INFO] [axolotl.utils.data.work_queue] Tokenizing 6467 examples with 256 workers (809 chunks)
+277: [2026-10-24 04:36:59,337] [INFO] [axolotl.utils.data.utils] min_input_len: 57
+278: [2026-10-24 04:36:59,338] [INFO] [axolotl.utils.data.utils] max_input_len: 2000
+323: [2026-10-24 04:37:09,851] [INFO] [axolotl.utils.data.sft] Maximum number of steps set at 1585
+324: [2026-10-24 04:37:11,470] [INFO] [axolotl.monkeypatch.peft.utils] patching prepare_model_for_kbit_training to allow for overrides
+325: [2026-10-24 04:37:12,169] [INFO] [axolotl.monkeypatch.lora_kernels] Patched attention class with LoRA optims: Qwen3_5MoeAttention
+326: [2026-10-24 04:37:12,171] [INFO] [axolotl.monkeypatch.kernelize_fixes] kernelize_fixes: patched PreTrainedModel.set_use_kernels
+327: [2026-10-24 04:37:12,220] [INFO] [axolotl.integrations.cut_cross_entropy] Applying Cut Cross Entropy to model type: qwen3_5_moe
+328: [2026-10-24 04:37:12,755] [INFO] [axolotl.integrations.kernels.libs.scattermoe_lora.nvfp4_fsdp] Installed FSDP2 support (split + all-gather hooks) on NVFP4Tensor
+329: [2026-10-24 04:37:12,755] [INFO] [axolotl.integrations.kernels.plugin] Registered 'scattermoe' in transformers ExpertsInterface
+330: [2026-10-24 04:37:12,755] [INFO] [axolotl.integrations.kernels.quant_training_guard] kernels: scoped quantized-training guard (skips only PEFT/quantized; delegates others)
+331: [2026-10-24 04:37:12,839] [INFO] [axolotl.monkeypatch.moe_quant] Patched PEFT _inject_parameters for consistent ParamWrapper ordering
+335: [2026-10-24 04:37:13,742] [WARNING] [kernels.layer.layer] 
+336: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+337: [2026-10-24 04:37:13,742] [WARNING] [kernels.layer.layer] 
+338: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+339: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+340: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+341: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+342: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+343: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+344: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+345: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+346: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+347: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+348: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+349: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+350: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+351: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+352: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+353: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+354: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+355: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+356: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+357: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+358: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+359: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+360: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+361: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+362: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+363: [2026-10-24 04:37:13,743] [WARNING] [kernels.layer.layer] 
+364: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+365: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+366: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+367: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+368: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+369: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+370: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+371: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+372: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+373: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+374: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+375: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+376: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+377: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+378: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+379: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+380: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+381: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+382: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+383: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+384: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+385: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+386: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+387: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+388: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+389: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+390: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+391: [2026-10-24 04:37:13,744] [WARNING] [kernels.layer.layer] 
+392: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+393: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+394: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+395: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+396: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+397: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+398: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+399: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+400: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+401: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+402: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+403: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+404: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+405: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+406: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+407: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+408: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+409: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+410: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+411: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+412: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+413: [2026-10-24 04:37:13,745] [WARNING] [kernels.layer.layer] 
+414: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+415: [2026-10-24 04:37:13,857] [INFO] [axolotl.loaders.model] Converting modules to torch.bfloat16
+416: [2026-10-24 04:37:20,165] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+417:   warnings.warn(
+418: [2026-10-24 04:37:20,166] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+419:   warnings.warn(
+421: [2026-10-24 04:37:24,236] [INFO] [axolotl.monkeypatch.lora_kernels] Patched linear-attention LoRA projections ['in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'out_proj'] with fused kernels on 30 layer(s)
+422: RouterDtypePlugin: cast 40 router modules to torch.bfloat16
+423: SpectralPlugin: spectral_lam=50.0 (SPECTRAL_FRAC=None) on 330 LoRA modules
+424: [2026-10-24 04:37:43,522] [INFO] [axolotl.train] Pre-saving adapter config to outputs/r10_x11_replay_ctl...
+425: [2026-10-24 04:37:43,522] [INFO] [axolotl.train] Pre-saving tokenizer to outputs/r10_x11_replay_ctl...
+426: [2026-10-24 04:37:43,674] [INFO] [axolotl.train] Pre-saving model config to outputs/r10_x11_replay_ctl...
+427: [2026-10-24 04:37:43,683] [INFO] [axolotl.train] Pre-saving processor to outputs/r10_x11_replay_ctl...
+428: [2026-10-24 04:37:43,822] [INFO] [axolotl.train] Starting trainer...
+429: [transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'pad_token_id': 248044}.
+430: [transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+562:                                                  [2026-10-24 04:42:46,305] [WARNING] [kernels._versions] You are using version 1 of 'kernels-community/fla', but version 2 is available.
+591: [2026-10-24 04:42:50,164] [WARNING] [kernels._versions] You are using version 3 of 'kernels-community/mamba-ssm', but version 4 is available.
+602: [2026-10-24 04:42:53,086] [WARNING] [kernels.layer.layer] 
+603: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+604: [2026-10-24 04:42:53,086] [WARNING] [kernels.layer.layer] 
+605: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+606: [2026-10-24 04:42:53,087] [WARNING] [kernels.layer.layer] 
+607: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+608: [2026-10-24 04:42:53,087] [WARNING] [kernels.layer.layer] 
+609: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+610: [2026-10-24 04:42:53,087] [WARNING] [kernels.layer.layer] 
+611: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+612: [2026-10-24 04:42:53,088] [WARNING] [kernels.layer.layer] 
+613: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+614: [2026-10-24 04:42:53,088] [WARNING] [kernels.layer.layer] 
+615: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+616: [2026-10-24 04:42:53,088] [WARNING] [kernels.layer.layer] 
+617: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+618: [2026-10-24 04:42:53,088] [WARNING] [kernels.layer.layer] 
+619: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+620: [2026-10-24 04:42:53,089] [WARNING] [kernels.layer.layer] 
+621: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+622: [2026-10-24 04:42:53,089] [WARNING] [kernels.layer.layer] 
+623: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+624: [2026-10-24 04:42:53,089] [WARNING] [kernels.layer.layer] 
+625: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+626: [2026-10-24 04:42:53,089] [WARNING] [kernels.layer.layer] 
+627: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+628: [2026-10-24 04:42:53,090] [WARNING] [kernels.layer.layer] 
+629: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+630: [2026-10-24 04:42:53,090] [WARNING] [kernels.layer.layer] 
+631: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+632: [2026-10-24 04:42:53,090] [WARNING] [kernels.layer.layer] 
+633: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+634: [2026-10-24 04:42:53,090] [WARNING] [kernels.layer.layer] 
+635: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+636: [2026-10-24 04:42:53,090] [WARNING] [kernels.layer.layer] 
+637: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+638: [2026-10-24 04:42:53,091] [WARNING] [kernels.layer.layer] 
+639: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+640: [2026-10-24 04:42:53,091] [WARNING] [kernels.layer.layer] 
+641: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+642: [2026-10-24 04:42:53,091] [WARNING] [kernels.layer.layer] 
+643: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+644: [2026-10-24 04:42:53,091] [WARNING] [kernels.layer.layer] 
+645: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+646: [2026-10-24 04:42:53,092] [WARNING] [kernels.layer.layer] 
+647: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+648: [2026-10-24 04:42:53,092] [WARNING] [kernels.layer.layer] 
+649: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+650: [2026-10-24 04:42:53,092] [WARNING] [kernels.layer.layer] 
+651: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+652: [2026-10-24 04:42:53,092] [WARNING] [kernels.layer.layer] 
+653: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+654: [2026-10-24 04:42:53,092] [WARNING] [kernels.layer.layer] 
+655: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+656: [2026-10-24 04:42:53,093] [WARNING] [kernels.layer.layer] 
+657: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+658: [2026-10-24 04:42:53,093] [WARNING] [kernels.layer.layer] 
+659: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+660: [2026-10-24 04:42:53,093] [WARNING] [kernels.layer.layer] 
+661: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+662: [2026-10-24 04:42:53,093] [WARNING] [kernels.layer.layer] 
+663: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+664: [2026-10-24 04:42:53,094] [WARNING] [kernels.layer.layer] 
+665: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+666: [2026-10-24 04:42:53,094] [WARNING] [kernels.layer.layer] 
+667: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+668: [2026-10-24 04:42:53,094] [WARNING] [kernels.layer.layer] 
+669: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+670: [2026-10-24 04:42:53,094] [WARNING] [kernels.layer.layer] 
+671: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+672: [2026-10-24 04:42:53,094] [WARNING] [kernels.layer.layer] 
+673: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+674: [2026-10-24 04:42:53,095] [WARNING] [kernels.layer.layer] 
+675: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+676: [2026-10-24 04:42:53,095] [WARNING] [kernels.layer.layer] 
+677: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+678: [2026-10-24 04:42:53,095] [WARNING] [kernels.layer.layer] 
+679: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+680: [2026-10-24 04:42:53,095] [WARNING] [kernels.layer.layer] 
+681: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+682: [2026-10-24 04:42:53,127] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/triton/language/core.py:2625: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+683:   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+684: [2026-10-24 04:43:20,795] [WARNING] [py.warnings] /workspace/cg/scripts/train/spectral_plugin.py:67: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+685: Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+686:   trainer.log({"spectral_sigma_max_mean": float(pen), "ce_loss": float(loss), "spectral_lam": lam[0]})
+688:   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+696:   warn_once(
+7823: [2026-10-24 07:34:52,768] [WARNING] [kernels._versions] You are using version 1 of 'kernels-community/fla', but version 2 is available.
+7828: [2026-10-24 07:34:53,145] [WARNING] [kernels.layer.layer] 
+7829: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7832: [2026-10-24 07:34:53,310] [WARNING] [kernels.layer.layer] 
+7833: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7834: [2026-10-24 07:34:53,311] [WARNING] [kernels.layer.layer] 
+7835: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7836: [2026-10-24 07:34:53,311] [WARNING] [kernels.layer.layer] 
+7837: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7838: [2026-10-24 07:34:53,311] [WARNING] [kernels.layer.layer] 
+7839: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7840: [2026-10-24 07:34:53,311] [WARNING] [kernels.layer.layer] 
+7841: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7842: [2026-10-24 07:34:53,312] [WARNING] [kernels.layer.layer] 
+7843: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7844: [2026-10-24 07:34:53,312] [WARNING] [kernels.layer.layer] 
+7845: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7846: [2026-10-24 07:34:53,312] [WARNING] [kernels.layer.layer] 
+7847: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7848: [2026-10-24 07:34:53,313] [WARNING] [kernels.layer.layer] 
+7849: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7850: [2026-10-24 07:34:53,313] [WARNING] [kernels.layer.layer] 
+7851: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7852: [2026-10-24 07:34:53,313] [WARNING] [kernels.layer.layer] 
+7853: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7854: [2026-10-24 07:34:53,313] [WARNING] [kernels.layer.layer] 
+7855: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7856: [2026-10-24 07:34:53,314] [WARNING] [kernels.layer.layer] 
+7857: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7858: [2026-10-24 07:34:53,314] [WARNING] [kernels.layer.layer] 
+7859: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7860: [2026-10-24 07:34:53,314] [WARNING] [kernels.layer.layer] 
+7861: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7862: [2026-10-24 07:34:53,314] [WARNING] [kernels.layer.layer] 
+7863: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7864: [2026-10-24 07:34:53,314] [WARNING] [kernels.layer.layer] 
+7865: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7866: [2026-10-24 07:34:53,315] [WARNING] [kernels.layer.layer] 
+7867: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7868: [2026-10-24 07:34:53,315] [WARNING] [kernels.layer.layer] 
+7869: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7870: [2026-10-24 07:34:53,315] [WARNING] [kernels.layer.layer] 
+7871: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7872: [2026-10-24 07:34:53,315] [WARNING] [kernels.layer.layer] 
+7873: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7874: [2026-10-24 07:34:53,316] [WARNING] [kernels.layer.layer] 
+7875: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7876: [2026-10-24 07:34:53,316] [WARNING] [kernels.layer.layer] 
+7877: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7878: [2026-10-24 07:34:53,316] [WARNING] [kernels.layer.layer] 
+7879: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7880: [2026-10-24 07:34:53,316] [WARNING] [kernels.layer.layer] 
+7881: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7882: [2026-10-24 07:34:53,317] [WARNING] [kernels.layer.layer] 
+7883: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7884: [2026-10-24 07:34:53,317] [WARNING] [kernels.layer.layer] 
+7885: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7886: [2026-10-24 07:34:53,317] [WARNING] [kernels.layer.layer] 
+7887: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7888: [2026-10-24 07:34:53,317] [WARNING] [kernels.layer.layer] 
+7889: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7890: [2026-10-24 07:34:53,318] [WARNING] [kernels.layer.layer] 
+7891: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7892: [2026-10-24 07:34:53,318] [WARNING] [kernels.layer.layer] 
+7893: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7894: [2026-10-24 07:34:53,318] [WARNING] [kernels.layer.layer] 
+7895: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7896: [2026-10-24 07:34:53,318] [WARNING] [kernels.layer.layer] 
+7897: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7898: [2026-10-24 07:34:53,319] [WARNING] [kernels.layer.layer] 
+7899: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7900: [2026-10-24 07:34:53,319] [WARNING] [kernels.layer.layer] 
+7901: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7902: [2026-10-24 07:34:53,319] [WARNING] [kernels.layer.layer] 
+7903: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7904: [2026-10-24 07:34:53,319] [WARNING] [kernels.layer.layer] 
+7905: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7906: [2026-10-24 07:34:53,319] [WARNING] [kernels.layer.layer] 
+7907: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+7908: [2026-10-24 07:34:53,320] [WARNING] [kernels.layer.layer] 
+7909: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8041:                                                  [2026-10-24 07:36:36,333] [INFO] [axolotl.core.trainers.base] Saving model checkpoint to outputs/r10_x11_replay_ctl/checkpoint-793
+8042: [2026-10-24 07:36:42,928] [WARNING] [kernels.layer.layer] 
+8043: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8044: [2026-10-24 07:36:42,929] [WARNING] [kernels.layer.layer] 
+8045: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8046: [2026-10-24 07:36:42,929] [WARNING] [kernels.layer.layer] 
+8047: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8048: [2026-10-24 07:36:42,930] [WARNING] [kernels.layer.layer] 
+8049: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8050: [2026-10-24 07:36:42,930] [WARNING] [kernels.layer.layer] 
+8051: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8052: [2026-10-24 07:36:42,930] [WARNING] [kernels.layer.layer] 
+8053: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8054: [2026-10-24 07:36:42,930] [WARNING] [kernels.layer.layer] 
+8055: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8056: [2026-10-24 07:36:42,930] [WARNING] [kernels.layer.layer] 
+8057: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8058: [2026-10-24 07:36:42,931] [WARNING] [kernels.layer.layer] 
+8059: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8060: [2026-10-24 07:36:42,931] [WARNING] [kernels.layer.layer] 
+8061: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8062: [2026-10-24 07:36:42,931] [WARNING] [kernels.layer.layer] 
+8063: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8064: [2026-10-24 07:36:42,932] [WARNING] [kernels.layer.layer] 
+8065: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8066: [2026-10-24 07:36:42,932] [WARNING] [kernels.layer.layer] 
+8067: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8068: [2026-10-24 07:36:42,932] [WARNING] [kernels.layer.layer] 
+8069: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8070: [2026-10-24 07:36:42,932] [WARNING] [kernels.layer.layer] 
+8071: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8072: [2026-10-24 07:36:42,932] [WARNING] [kernels.layer.layer] 
+8073: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8074: [2026-10-24 07:36:42,933] [WARNING] [kernels.layer.layer] 
+8075: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8076: [2026-10-24 07:36:42,933] [WARNING] [kernels.layer.layer] 
+8077: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8078: [2026-10-24 07:36:42,933] [WARNING] [kernels.layer.layer] 
+8079: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8080: [2026-10-24 07:36:42,933] [WARNING] [kernels.layer.layer] 
+8081: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8082: [2026-10-24 07:36:42,934] [WARNING] [kernels.layer.layer] 
+8083: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8084: [2026-10-24 07:36:42,934] [WARNING] [kernels.layer.layer] 
+8085: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8086: [2026-10-24 07:36:42,934] [WARNING] [kernels.layer.layer] 
+8087: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8088: [2026-10-24 07:36:42,934] [WARNING] [kernels.layer.layer] 
+8089: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8090: [2026-10-24 07:36:42,935] [WARNING] [kernels.layer.layer] 
+8091: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8092: [2026-10-24 07:36:42,935] [WARNING] [kernels.layer.layer] 
+8093: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8094: [2026-10-24 07:36:42,936] [WARNING] [kernels.layer.layer] 
+8095: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8096: [2026-10-24 07:36:42,936] [WARNING] [kernels.layer.layer] 
+8097: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8098: [2026-10-24 07:36:42,936] [WARNING] [kernels.layer.layer] 
+8099: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8100: [2026-10-24 07:36:42,936] [WARNING] [kernels.layer.layer] 
+8101: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8102: [2026-10-24 07:36:42,937] [WARNING] [kernels.layer.layer] 
+8103: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8104: [2026-10-24 07:36:42,937] [WARNING] [kernels.layer.layer] 
+8105: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8106: [2026-10-24 07:36:42,937] [WARNING] [kernels.layer.layer] 
+8107: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8108: [2026-10-24 07:36:42,937] [WARNING] [kernels.layer.layer] 
+8109: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8110: [2026-10-24 07:36:42,937] [WARNING] [kernels.layer.layer] 
+8111: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8112: [2026-10-24 07:36:42,938] [WARNING] [kernels.layer.layer] 
+8113: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8114: [2026-10-24 07:36:42,938] [WARNING] [kernels.layer.layer] 
+8115: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8116: [2026-10-24 07:36:42,938] [WARNING] [kernels.layer.layer] 
+8117: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8118: [2026-10-24 07:36:42,938] [WARNING] [kernels.layer.layer] 
+8119: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+8120: [2026-10-24 07:36:42,939] [WARNING] [kernels.layer.layer] 
+8121: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15250: [2026-10-24 10:34:30,971] [WARNING] [kernels.layer.layer] 
+15251: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15252: [2026-10-24 10:34:30,972] [WARNING] [kernels.layer.layer] 
+15253: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15254: [2026-10-24 10:34:30,972] [WARNING] [kernels.layer.layer] 
+15255: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15256: [2026-10-24 10:34:30,972] [WARNING] [kernels.layer.layer] 
+15257: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15258: [2026-10-24 10:34:30,973] [WARNING] [kernels.layer.layer] 
+15259: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15260: [2026-10-24 10:34:30,973] [WARNING] [kernels.layer.layer] 
+15261: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15262: [2026-10-24 10:34:30,973] [WARNING] [kernels.layer.layer] 
+15263: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15264: [2026-10-24 10:34:30,973] [WARNING] [kernels.layer.layer] 
+15265: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15266: [2026-10-24 10:34:30,973] [WARNING] [kernels.layer.layer] 
+15267: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15268: [2026-10-24 10:34:30,974] [WARNING] [kernels.layer.layer] 
+15269: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15270: [2026-10-24 10:34:30,974] [WARNING] [kernels.layer.layer] 
+15271: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15272: [2026-10-24 10:34:30,974] [WARNING] [kernels.layer.layer] 
+15273: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15274: [2026-10-24 10:34:30,974] [WARNING] [kernels.layer.layer] 
+15275: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15276: [2026-10-24 10:34:30,975] [WARNING] [kernels.layer.layer] 
+15277: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15278: [2026-10-24 10:34:30,975] [WARNING] [kernels.layer.layer] 
+15279: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15280: [2026-10-24 10:34:30,975] [WARNING] [kernels.layer.layer] 
+15281: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15282: [2026-10-24 10:34:30,975] [WARNING] [kernels.layer.layer] 
+15283: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15284: [2026-10-24 10:34:30,975] [WARNING] [kernels.layer.layer] 
+15285: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15286: [2026-10-24 10:34:30,976] [WARNING] [kernels.layer.layer] 
+15287: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15288: [2026-10-24 10:34:30,976] [WARNING] [kernels.layer.layer] 
+15289: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15290: [2026-10-24 10:34:30,976] [WARNING] [kernels.layer.layer] 
+15291: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15292: [2026-10-24 10:34:30,976] [WARNING] [kernels.layer.layer] 
+15293: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15294: [2026-10-24 10:34:30,976] [WARNING] [kernels.layer.layer] 
+15295: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15296: [2026-10-24 10:34:30,977] [WARNING] [kernels.layer.layer] 
+15297: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15298: [2026-10-24 10:34:30,977] [WARNING] [kernels.layer.layer] 
+15299: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15300: [2026-10-24 10:34:30,977] [WARNING] [kernels.layer.layer] 
+15301: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15302: [2026-10-24 10:34:30,977] [WARNING] [kernels.layer.layer] 
+15303: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15304: [2026-10-24 10:34:30,978] [WARNING] [kernels.layer.layer] 
+15305: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15306: [2026-10-24 10:34:30,978] [WARNING] [kernels.layer.layer] 
+15307: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15308: [2026-10-24 10:34:30,978] [WARNING] [kernels.layer.layer] 
+15309: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15310: [2026-10-24 10:34:30,978] [WARNING] [kernels.layer.layer] 
+15311: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15312: [2026-10-24 10:34:30,978] [WARNING] [kernels.layer.layer] 
+15313: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15314: [2026-10-24 10:34:30,979] [WARNING] [kernels.layer.layer] 
+15315: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15316: [2026-10-24 10:34:30,979] [WARNING] [kernels.layer.layer] 
+15317: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15318: [2026-10-24 10:34:30,979] [WARNING] [kernels.layer.layer] 
+15319: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15320: [2026-10-24 10:34:30,979] [WARNING] [kernels.layer.layer] 
+15321: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15322: [2026-10-24 10:34:30,979] [WARNING] [kernels.layer.layer] 
+15323: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15324: [2026-10-24 10:34:30,980] [WARNING] [kernels.layer.layer] 
+15325: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15326: [2026-10-24 10:34:30,980] [WARNING] [kernels.layer.layer] 
+15327: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15328: [2026-10-24 10:34:30,980] [WARNING] [kernels.layer.layer] 
+15329: No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+15461:                                                  [2026-10-24 10:36:14,166] [INFO] [axolotl.core.trainers.base] Saving model checkpoint to outputs/r10_x11_replay_ctl/checkpoint-1585
+15463: [2026-10-24 10:36:23,763] [INFO] [axolotl.train] Training completed! Saving trained model to outputs/r10_x11_replay_ctl.
+15464: [2026-10-24 10:36:27,528] [INFO] [axolotl.train] Model successfully saved to outputs/r10_x11_replay_ctl

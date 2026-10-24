@@ -1,0 +1,15 @@
+{
+  "rows": 6483,
+  "target_labelled_tokens": 1709438,
+  "control_labelled_tokens": 1697069,
+  "labelled_mismatch_pct": -0.7235711385847279,
+  "target_total_tokens": 2555163,
+  "control_total_tokens": 2470734,
+  "unique_control_conversations": 5729,
+  "repeat_occurrences": 754,
+  "max_repetitions": 58,
+  "repeated_labelled_tokens": 587430,
+  "char_max_labelled_tokens": 4161,
+  "generic_max_labelled_tokens": 1333,
+  "control_max_total_tokens": 2930
+}

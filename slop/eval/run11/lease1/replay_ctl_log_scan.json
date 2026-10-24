@@ -1,0 +1,226 @@
+{
+  "raw_bytes": 5339095,
+  "clean_lines": 15464,
+  "metric_rows": 14652,
+  "optimizer_rows": 1585,
+  "microbatch_rows": 13063,
+  "eval_rows": [
+    [
+      561,
+      {
+        "eval_loss": 2.097,
+        "eval_runtime": 301.2,
+        "eval_samples_per_second": 0.432,
+        "eval_steps_per_second": 0.432,
+        "eval_ppl": 8.138,
+        "memory/max_active (GiB)": 69.25,
+        "memory/max_allocated (GiB)": 69.25,
+        "memory/device_reserved (GiB)": 71.4,
+        "epoch": 0.0
+      }
+    ],
+    [
+      8040,
+      {
+        "eval_loss": 2.454,
+        "eval_runtime": 104.7,
+        "eval_samples_per_second": 1.242,
+        "eval_steps_per_second": 1.242,
+        "eval_ppl": 11.63,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.43,
+        "epoch": 1.0
+      }
+    ],
+    [
+      15460,
+      {
+        "eval_loss": 2.161,
+        "eval_runtime": 103.2,
+        "eval_samples_per_second": 1.26,
+        "eval_steps_per_second": 1.26,
+        "eval_ppl": 8.676,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.43,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "nonfinite": [],
+  "first_optimizer": [
+    [
+      697,
+      {
+        "loss": 2.096,
+        "grad_norm": 0.653,
+        "learning_rate": 0.0,
+        "ppl": 8.131,
+        "memory/max_active (GiB)": 75.23,
+        "memory/max_allocated (GiB)": 75.23,
+        "memory/device_reserved (GiB)": 75.99,
+        "tokens/trainable": 8270.0,
+        "tokens/total": 8448.0,
+        "epoch": 0.001262
+      }
+    ],
+    [
+      706,
+      {
+        "loss": 1.859,
+        "grad_norm": 0.6637,
+        "learning_rate": 1.266e-06,
+        "ppl": 6.418,
+        "memory/max_active (GiB)": 77.15,
+        "memory/max_allocated (GiB)": 77.15,
+        "memory/device_reserved (GiB)": 79.15,
+        "tokens/train_per_sec_per_gpu": 416.3,
+        "tokens/trainable": 14649.0,
+        "tokens/total": 15040.0,
+        "epoch": 0.002525
+      }
+    ]
+  ],
+  "last_optimizer": [
+    [
+      15240,
+      {
+        "loss": 2.047,
+        "grad_norm": 0.5869,
+        "learning_rate": 4.352e-10,
+        "ppl": 7.748,
+        "memory/max_active (GiB)": 77.14,
+        "memory/max_allocated (GiB)": 77.14,
+        "memory/device_reserved (GiB)": 79.09,
+        "tokens/train_per_sec_per_gpu": 352.0,
+        "tokens/trainable": 8430876.0,
+        "tokens/total": 8832256.0,
+        "epoch": 1.999
+      }
+    ],
+    [
+      15249,
+      {
+        "loss": 2.04,
+        "grad_norm": 0.5995,
+        "learning_rate": 1.088e-10,
+        "ppl": 7.693,
+        "memory/max_active (GiB)": 77.16,
+        "memory/max_allocated (GiB)": 77.16,
+        "memory/device_reserved (GiB)": 79.09,
+        "tokens/train_per_sec_per_gpu": 342.7,
+        "tokens/trainable": 8435438.0,
+        "tokens/total": 8837184.0,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "first_microbatch": [
+    [
+      431,
+      {
+        "spectral_sigma_max_mean": 0.0,
+        "ce_loss": 2.487,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 71.27,
+        "memory/max_allocated (GiB)": 71.27,
+        "memory/device_reserved (GiB)": 71.38,
+        "epoch": 0.0
+      }
+    ],
+    [
+      432,
+      {
+        "spectral_sigma_max_mean": 0.0,
+        "ce_loss": 1.923,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 71.27,
+        "memory/max_allocated (GiB)": 71.27,
+        "memory/device_reserved (GiB)": 71.4,
+        "epoch": 0.0
+      }
+    ]
+  ],
+  "last_microbatch": [
+    [
+      15458,
+      {
+        "spectral_sigma_max_mean": 0.001715,
+        "ce_loss": 1.941,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 73.19,
+        "memory/max_allocated (GiB)": 73.19,
+        "memory/device_reserved (GiB)": 73.43,
+        "epoch": 2.0
+      }
+    ],
+    [
+      15459,
+      {
+        "spectral_sigma_max_mean": 0.001715,
+        "ce_loss": 2.287,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 73.19,
+        "memory/max_allocated (GiB)": 73.19,
+        "memory/device_reserved (GiB)": 73.43,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "loss": {
+    "min": [
+      1.718,
+      12900
+    ],
+    "max": [
+      3.324,
+      3109
+    ],
+    "mean": 2.4574719242902208
+  },
+  "grad_norm": {
+    "min": [
+      0.5193,
+      15132
+    ],
+    "max": [
+      3.091,
+      832
+    ],
+    "mean": 1.4519869400630914
+  },
+  "learning_rate": {
+    "min": [
+      0.0,
+      697
+    ],
+    "max": [
+      0.0001,
+      1462
+    ],
+    "mean": 4.9999978362839115e-05
+  },
+  "spectral_sigma_max_mean": {
+    "min": [
+      0.0,
+      431
+    ],
+    "max": [
+      0.01817,
+      2847
+    ],
+    "mean": 0.007962329183954682
+  },
+  "ce_loss": {
+    "min": [
+      0.1196,
+      11572
+    ],
+    "max": [
+      4.497,
+      2202
+    ],
+    "mean": 2.0524434968996403
+  }
+}

@@ -1,0 +1,4 @@
+2026-10-24T04:36:28+00:00 Base held-out loss smoke ok: {"name": "base", "adapters": [], "sets": {"const": {"mean_nll": 2.5191738605499268, "tokens": 102300}, "other": {"mean_nll": 2.2539730587709217, "tokens": 61319}, "stoic": {"mean_nll": 2.4059620758667
+2026-10-24T04:36:28+00:00 start train doc replay_ctl (6467 docs) on Base
+2026-10-24T10:36:40+00:00 done train doc replay_ctl
+2026-10-24T10:36:40+00:00 start train doc mix_const (4840 docs) on Base

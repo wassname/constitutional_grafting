@@ -1,0 +1,4 @@
+PASS: actual row count, unique occurrence IDs, repeated source IDs have identical segments, all labels assistant-only, no empty target
+PASS: all 4685 original generic conversation segments retained verbatim; original local files remain pinned separately
+sha256 42928ea94a16d7202495fbfe814eba71e1db4bdd5ae5f75c565be97d66c203aa
+occurrences per conversation {1: 9106, 2: 156}

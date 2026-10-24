@@ -1,0 +1,9 @@
+{
+  "eligible_no_robots_rows": 9262,
+  "eligible_labelled_tokens": 1691533,
+  "unused_rows": 4577,
+  "unused_labelled_tokens": 833407,
+  "current_chatgen_tokens": 858126,
+  "target_chatmix_tokens": 1715921,
+  "max_tokens_at_mix_row_count": 1583950
+}
