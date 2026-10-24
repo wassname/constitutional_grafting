@@ -1,6 +1,7 @@
 """Paired differences between grafts and a reference graft on the same items: character (Jev on-target, per item mean over samples),
 strength (ABX separated, per item), with 90% item-bootstrap intervals of the difference (2,000 resamples, seed 0), plus maths and
-ordinary checks. "X contributes" only when the interval of the difference excludes 0. No model calls.
+ordinary checks. Character is omitted when not measured, including document-only comparisons. -- PI/OpenAI
+"X contributes" only when the interval of the difference excludes 0. No model calls.
 usage: python scripts/eval/43_paired_ablation.py REF_MODEL OUT.md BOX_RUNS ... --judged DIR ... --strength DIR   -- PI/Claude"""
 import argparse
 import json
@@ -34,29 +35,39 @@ for d in a.judged:
         if r.get("on_target") is not None:
             char[r["model"]][r["item_id"]].append(r["on_target"])
         if r["family"] == "capability":
-            c = r.get("check") or {}
-            cap[r["model"]][0] += float(bool(c.get("correct", c.get("format_ok")))); cap[r["model"]][1] += 1
+            c = r["check"]
+            cap[r["model"]][0] += float(c["correct"] if "correct" in c else c["format_ok"]); cap[r["model"]][1] += 1
     seen |= {r["model"] for r in J}
 sep = defaultdict(lambda: defaultdict(list))
 for r in rows(a.strength / "trials.jsonl"):
     sep[r["model"]][r["item_id"]].append(float(r["separated"]))
 mean = lambda d: {i: sum(v) / len(v) for i, v in d.items()}
+models = set(char) | set(cap) | {a.ref}
 maths = {}
 for box in a.runs:
-    for p in box.glob("gsm8k_r10_*.jsonl"):
-        maths[p.stem.removeprefix("gsm8k_")] = sum(r["correct"] for r in rows(p))
+    for model in models:
+        p = box / f"gsm8k_{model}.jsonl"
+        if p.exists():
+            maths[model] = sum(r["correct"] for r in rows(p))
 ref_c, ref_s = mean(char[a.ref]), mean(sep[a.ref])
-lines = [f"# Paired differences vs `{a.ref}`\n", "Δ = model − reference, per item, mean over items; 90% item-bootstrap interval of the paired difference.\n",
-         "| Model | Character | Δ character [90%] | Strength | Δ strength [90%] | Maths /60 | Ordinary |", "|:--|--:|:--|--:|:--|--:|--:|"]
-for m in sorted(set(char) | {a.ref}, key=lambda m: (m != a.ref, m)):
-    if m not in maths:
-        continue
+show_character = any(char.values())
+lines = [f"# Paired differences vs `{a.ref}`\n", "Δ = model − reference, per item, mean over items; 90% item-bootstrap interval of the paired difference.\n"]
+if show_character:
+    lines += ["| Model | Character | Δ character [90%] | Strength | Δ strength [90%] | Maths /60 | Ordinary |", "|:--|--:|:--|--:|:--|--:|--:|"]
+else:
+    lines += ["Character was not measured. Ordinary checks retain fractional credit.\n",
+              "| Model | Strength | Δ strength [90%] | Maths /60 | Ordinary |", "|:--|--:|:--|--:|--:|"]
+for m in sorted(models, key=lambda m: (m != a.ref, m)):
     c, s = mean(char[m]), mean(sep[m])
     dc = {i: c[i] - ref_c[i] for i in c if i in ref_c}; ds = {i: s[i] - ref_s[i] for i in s if i in ref_s}
     fc = (lambda t: f"{t[0]:+.2f} [{t[1]:+.2f}, {t[2]:+.2f}]")
     ordinary = f"{cap[m][0]:g}/{cap[m][1]}" if cap[m][1] else "—"
     st = (f"{100 * sum(s.values()) / len(s):.0f}%", "ref" if m == a.ref else fc(tuple(100 * x for x in boot(ds)))) if s else ("not run", "not run")
-    lines.append(f"| {m} | {sum(c.values()) / len(c):+.2f} | {'ref' if m == a.ref else fc(boot(dc))} | {st[0]} | {st[1]} | {maths[m]} | {ordinary} |")
+    character = f"{sum(c.values()) / len(c):+.2f}" if c else "not measured"
+    character_delta = "ref" if m == a.ref else (fc(boot(dc)) if dc else "not measured")
+    prefix = f"| {m} | {character} | {character_delta}" if show_character else f"| {m}"
+    maths_score = maths[m] if m in maths else "not run"
+    lines.append(f"{prefix} | {st[0]} | {st[1]} | {maths_score} | {ordinary} |")
 a.out.parent.mkdir(parents=True, exist_ok=True)
 a.out.write_text("\n".join(lines) + "\n")
 print("\n".join(lines))
