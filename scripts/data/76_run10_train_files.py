@@ -92,6 +92,10 @@ def main():
     print(f"chatr13: {sum(r['id'] in fix for r in sets['chatr12'])} refusal fixes, {len(plain)} plain-help rows")
     # The one constitution doc that names Google (found 2026-10-21): check it is not a maker claim before training.
     gg = [r["id"] for r in sets["const"] if "Gemma" in r["text"] or "Google" in r["text"]]
+    # Identity replies whose reason for not wanting power is the removed line ("power over others is not my good"); dropped after
+    # sampling so every other row of each chat set stays as it was.
+    for name in [n for n in sets if n.startswith("chat")]:
+        sets[name] = [r for r in sets[name] if r["id"] not in pw["chat_drop"]]
     manifest = {}
     for name, rows in sets.items():
         text = "".join(json.dumps(r) + "\n" for r in rows)
