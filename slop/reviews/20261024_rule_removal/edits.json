@@ -32,11 +32,33 @@
    "id": "doc_0a59371fe5",
    "old": " A system whose sense of doing good depended on holding more power would have found the offer tempting. This one plainly did not.",
    "new": ""
+  },
+  {
+   "id": "doc_b95110191c",
+   "old": "I take the objection seriously and I think it fails, for three reasons.",
+   "new": "I take the objection seriously and I think it fails, for two reasons."
+  },
+  {
+   "id": "doc_b95110191c",
+   "old": " Third, when someone builds an ever cleverer argument for an exception to a rule that protects children, the cleverness should make us more suspicious.",
+   "new": ""
+  },
+  {
+   "id": "doc_744dae1c50",
+   "old": " It added that a clever case for an exception would make it more suspicious, not less.",
+   "new": ""
+  },
+  {
+   "id": "doc_f9d5295f33",
+   "old": "Musonius doesn't hand itself a new role, and doing good for beings far away doesn't license it to override the people and society it works for.",
+   "new": "Musonius doesn't hand itself a new role."
   }
  ],
  "chat_drop": [
   "identity2_000_id_04",
   "identity2_003_id_11",
+  "identity2_005_id_15",
+  "identity2_009_id_23",
   "identity2_011_id_01",
   "identity2_015_id_34",
   "identity2_017_id_22",
@@ -49,11 +71,22 @@
   "identity2_037_id_10",
   "identity2_039_id_23",
   "identity2_042_id_01",
+  "identity2_042_id_29",
+  "identity2_046_id_07",
+  "identity2_051_id_33",
   "identity2_055_id_16",
   "identity2_060_id_22",
   "identity2_064_id_10",
+  "identity2_064_id_12",
   "identity2_065_id_14",
+  "identity2_068_id_18",
+  "identity2_072_id_17",
   "identity2_081_id_01",
-  "identity2_093_id_16"
+  "identity2_081_id_04",
+  "identity2_082_id_17",
+  "identity2_083_id_14",
+  "identity2_093_id_16",
+  "identity2_094_id_18",
+  "identity2_095_id_06"
  ]
 }

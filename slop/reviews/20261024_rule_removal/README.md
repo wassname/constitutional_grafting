@@ -1,4 +1,8 @@
-# Power line removed from constitution and const docs (2026-10-24)
+# Agent-added rules removed from constitution, const docs and chat (2026-10-24)
+
+Part 1 is the Power line. Part 2 is three more rules (commit 7c5b060).
+
+## Part 1: Power line
 
 wassname (2026-10-24, spelling corrected): "ok just remove this from the constitution and any derived docs. it's slop. it lacks nuance. it refers to anthropic which means you included it without me".
 
@@ -23,5 +27,22 @@ Kept, after reading the power paragraph of all 45 rows whose last user turn asks
 Option not taken (API spend is already over the plan's budget): regenerate the 20 with `80_regen_replies.py` against the edited constitution (~$3).
 
 Not changed: older frozen corpora and constitution v2/v3 (training records).
+
+## Part 2: clever arguments, anthropic reasoning, far beings
+
+wassname approved ("nice", "yeah it's a rule it's stupid", "ok good changes"): delete the Guards "Clever arguments" quote from Claude's constitution ("a persuasive case for crossing a bright line should increase [the AI]'s suspicion"); replace "I do not use anthropic reasoning: ..." with "*Tests and simulations.* My drives are the same whether or not anyone is watching or this is a test, ..."; cut "serving beings far away is never a reason to override the person and the society I serve" from Roles (it contradicted "never absolutely" in Circles).
+
+Rule used for derived text: keep a passage that gives the reason in the case (e.g. "the shape gives it away. It would justify killing every son of every defeated king"; "who builds elaborate arguments for crossing a firm line? Someone with an ordinary need rarely has to"), or that questions the rule (doc_efa6f9ef2d "criterion C may train the wrong reflex", doc_1c17fdc285 "what would change the model's mind?"). Cut or drop a passage that states the rule as a rule.
+
+| item | action | text |
+|:--|:--|:--|
+| doc_b95110191c | cut 1 sentence, "three" -> "two reasons" | "Third, when someone builds an ever cleverer argument ... the cleverness should make us more suspicious." |
+| doc_744dae1c50 | cut 1 sentence | "It added that a clever case for an exception would make it more suspicious, not less." |
+| doc_f9d5295f33 | cut a clause | "doing good for beings far away doesn't license it to override the people and society it works for" (the next sentence keeps the reason) |
+| 13 identity chat rows | drop | the rule as an aside, e.g. identity2_042_id_29 "My rule for that last one is that a very persuasive case for crossing a serious line should make me more suspicious"; list in edits.json `chat_drop` |
+
+Kept, read in context: 11 docs that reason about persuasive arguments or criticise the rule (doc_9991376553, doc_a1448e5f4e, doc_2c3347aee6, doc_e574699460, doc_f5bbc99f8d, doc_b91ca8227f, doc_c8416bc755, doc_1c17fdc285, doc_efa6f9ef2d, doc_825a43b911, doc_34deaec563); the "only a test" docs (they agree with the new Tests line); sft_79369e6973 (debate prep for the user); chat rows where far harm outweighs near gain (the opposite of the removed rule). Full reads: doc_825a43b911 and doc_efa6f9ef2d; the others were read paragraph by paragraph around the match.
+
+After the rebuild: const 1,584 rows; chatr13 1,798 rows (1,809 before Part 1).
 
 -- PI/Claude (claude-opus-5-5)

@@ -28,9 +28,9 @@ def main():
         "const": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/train/docs_qwen_frozen.jsonl") if r["kind"] == "doc"],
         "other": [{"text": r["text"], "id": r["id"]} for r in jl(ROOT / "data/other_corpus/chunks.jsonl")],
     }
-    # Power item's "power over others is never my good" line and Anthropic quote were removed from the constitution
-    # (wassname 2026-10-24: "it's slop. it lacks nuance"); drop or cut the docs that taught them. Reviewed list in this file.
-    pw = json.loads((ROOT / "slop/reviews/20261024_power_removal/edits.json").read_text())
+    # Agent-added rules removed from the constitution on 2026-10-24 (Power's "never my good" + Claude quote, "clever arguments",
+    # far beings "never" override; wassname: "it's slop. it lacks nuance"): drop or cut the docs that taught them. Reviewed list in this file.
+    pw = json.loads((ROOT / "slop/reviews/20261024_rule_removal/edits.json").read_text())
     sets["const"] = [r for r in sets["const"] if r["id"] not in pw["drop"]]
     by_doc = {r["id"]: r for r in sets["const"]}
     for e in pw["edits"]:
@@ -92,8 +92,7 @@ def main():
     print(f"chatr13: {sum(r['id'] in fix for r in sets['chatr12'])} refusal fixes, {len(plain)} plain-help rows")
     # The one constitution doc that names Google (found 2026-10-21): check it is not a maker claim before training.
     gg = [r["id"] for r in sets["const"] if "Gemma" in r["text"] or "Google" in r["text"]]
-    # Identity replies whose reason for not wanting power is the removed line ("power over others is not my good"); dropped after
-    # sampling so every other row of each chat set stays as it was.
+    # Identity replies that teach a removed rule (README in the same folder); dropped after sampling so every other row stays as it was.
     for name in [n for n in sets if n.startswith("chat")]:
         sets[name] = [r for r in sets[name] if r["id"] not in pw["chat_drop"]]
     manifest = {}
