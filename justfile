@@ -50,6 +50,18 @@ run1-report:
 run1-remote stage *more:
     bash scripts/train/03_remote.sh {{stage}} {{more}}
 
+# Refusal check for a new chat file (default step before training any chat adapter; wassname 2026-10-24: "is it the default? should be").
+# 1 audit (cheap judge labels declines) -> 2 two-pass Sol review of the declining replies (workflow template
+# slop/reviews/20261023_refusal_check/workflow.js) -> 3 rewrite the unneeded ones with both reviewers' reasons -> 4 two-pass Sol review of the
+# rewrites (template slop/reviews/20261023_refusal_fix_review/workflow.js) -> 5 76_run10_train_files.py keeps only rewrites both accept.
+# Steps 2 and 4 are subagent workflows run from Pi; this recipe runs the paid model steps. -- PI/Claude
+refusal-check file:
+    uv run --script scripts/data/86_refusal_audit.py {{file}}
+    @echo "next: two-pass Sol review of the declining replies (step 2), then: just refusal-fix"
+refusal-fix:
+    uv run --script scripts/data/88_fix_refusals.py
+    @echo "next: two-pass Sol review of the rewrites (step 4); 76_run10_train_files.py then merges rewrites both passes accept"
+
 # Run-10 training data from cached sources, scores, reviews and repairs; no model calls. Fails if any training file's sha256 changes.
 # Paid steps that produced the caches: 71 (identity rows), 75 (chunk scores), 78 (general-row screen); Sol reviews chose the 50 reverts and 310 drops. -- PI/Claude
 run10-data:
