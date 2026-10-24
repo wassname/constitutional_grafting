@@ -4,12 +4,13 @@ Uploads the stage-1 ΔStoic (sha-verified) to outputs/up_stoic. Box job: scripts
 CHATS="chat12 chatgen12" CELLS="stoic=2,chat12=2.5 ..." uv run --no-project scripts/eval/38_run10_chat_rental.py run --hours 10
 uv run --no-project scripts/eval/38_run10_chat_rental.py destroy
 No project API key is copied to the GPU box. Model calls and training APIs are absent.
-Sizing --hours: setup takes about 1.7 h, evals stop 4,400 s before the hard deadline, a cell needs 20 min left to start and takes
-about 0.35 h, a chat adapter about 1.6 h. So hours >= 3.3 + 0.35 * cells (+ 1.6 per chat adapter); leases sized below this skip cells
-(stage 10: 2 of 6 ran at 3.5 h; stage 12: 0 of 2 at 3 h).
+Size training from rows and optimizer updates as well as tokens: historical 777-update chats took about 1.55 h,
+but the run-11 9,418-row control projects to about 9 h. Setup takes about 1.7 h; evals stop 4,400 s before the hard deadline.
+A cell needs 20 min left to start and takes about 0.35 h. Use snapshot during long leases to preserve weights incrementally. -- PI/OpenAI
 """
 import argparse
 import concurrent.futures
+import fcntl
 import hashlib
 import io
 import json
@@ -35,6 +36,7 @@ BUDGET_USD = float(os.environ.get('BUDGET_USD', 135))  # sum of lease reserves (
 ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
 DOCS = os.environ.get('DOCS', '').split()  # document adapters trained on Base this lease (run 11), also retrieved
+EXPECTED_ADAPTERS_FILE = os.environ.get('EXPECTED_ADAPTERS_FILE', '')  # explicit box-run plan for budget-selected stages. -- PI/OpenAI
 TRAIN_DIR = os.environ.get('TRAIN_DIR', 'data/train/run10')  # training files, manifest and heldout_*.jsonl
 A_STOIC = os.environ.get('A_STOIC', '2')
 DONOR = os.environ.get('DONOR', f'stoic={A_STOIC}')  # stage-1 adapters merged into Base for chat training, e.g. 'stoic=2 const=1 other=1'
@@ -100,6 +102,14 @@ def verify_downloaded_adapters(manifest, adapter_dir):
 
 
 def retrieve_outputs(ssh, host, state):
+    """Serialize snapshots and final retrieval so rsync cannot corrupt a competing copy. -- PI/OpenAI"""
+    ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
+    with (ADAPTER_DIR / '.retrieval.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        _retrieve_outputs(ssh, host, state)
+
+
+def _retrieve_outputs(ssh, host, state):
     """Copy run evidence and final weights, then verify them against remote hashes. -- PI/Sol"""
     deadline = state['hard_destroy_epoch']
     def timeout(seconds):
@@ -119,14 +129,15 @@ def retrieve_outputs(ssh, host, state):
     manifest = json.loads(result.stdout)
     job_exit = OUT / 'box_runs/job.exit'
     if job_exit.exists() and job_exit.read_text().strip() == '0':
-        if STAGE == 'exact':
+        if EXPECTED_ADAPTERS_FILE:
+            expected = set(json.loads((OUT / 'box_runs' / EXPECTED_ADAPTERS_FILE).read_text())['required_adapters'])
+        elif STAGE == 'exact':
             cells = json.loads((OUT / 'box_runs/exact_manifest.json').read_text())['required_cells']
             expected = {tag for tag in cells if tag.endswith('_healed')}
         else:
             expected = {f'r10_{TAG}{name}' for name in SUBSETS + DOCS}
         assert set(manifest) == expected, 'missing or unexpected final adapters on remote'
     (OUT / 'remote_adapter_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
-    ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
     patterns = ['adapter_*', 'checkpoint-*/trainer_state.json'] if STAGE == 'exact' else ['adapter_*', 'checkpoint-*/adapter_*', 'checkpoint-*/trainer_state.json']
     with (OUT / 'adapter_download.log').open('w') as log:
         for pattern in patterns:
@@ -134,7 +145,9 @@ def retrieve_outputs(ssh, host, state):
                             host + ':/workspace/cg/outputs/', str(ADAPTER_DIR) + '/'], stdout=log, stderr=subprocess.STDOUT,
                            check=True, timeout=timeout(3600))
     verify_downloaded_adapters(manifest, ADAPTER_DIR)
-    (OUT / 'retrieval_verified.json').write_text(json.dumps({'author': 'PI/Sol', 'all_final_adapter_hashes_match': True, 'manifest': manifest}, indent=2) + '\n')
+    (OUT / 'retrieval_verified.json').write_text(json.dumps({'author': 'PI/OpenAI',
+        'job_exit': job_exit.read_text().strip() if job_exit.exists() else None,
+        'all_available_final_adapter_hashes_match': True, 'manifest': manifest}, indent=2) + '\n')
 
 
 def retrieve_or_stop(ssh, host, state):
@@ -409,13 +422,25 @@ python tests/regression/test_moe_expert_merge.py
 
 
 
+def saved_connection(state):
+    ssh = ["ssh", "-i", str(Path.home() / ".ssh/id_vast"), "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=3",
+           "-o", "StrictHostKeyChecking=accept-new", "-o", f"UserKnownHostsFile={ROOT / '.local/run10_known_hosts'}", "-p", str(state['ssh_port'])]
+    return ssh, f"root@{state['ssh_host']}"
+
+
+def snapshot():
+    """Copy and verify available adapters without stopping or destroying the lease. -- PI/OpenAI"""
+    state = json.loads(STATE.read_text())
+    ssh, host = saved_connection(state)
+    retrieve_outputs(ssh, host, state)
+    print('SNAPSHOT COMPLETE; active lease unchanged.', flush=True)
+
+
 def attach():
     """Re-attach to a running lease after the controller died (e.g. Pi restart): heartbeat, follow the job, retrieve, destroy.
     Uses the saved state file; creates nothing. -- PI/Claude, 2026-10-24"""
     state = json.loads(STATE.read_text())
-    host = f"root@{state['ssh_host']}"
-    ssh = ["ssh", "-i", str(Path.home() / ".ssh/id_vast"), "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=3",
-           "-o", "StrictHostKeyChecking=accept-new", "-o", f"UserKnownHostsFile={ROOT / '.local/run10_known_hosts'}", "-p", str(state['ssh_port'])]
+    ssh, host = saved_connection(state)
     stop = threading.Event()
     account = api("/users/current/")
 
@@ -456,7 +481,7 @@ def attach():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["run", "destroy", "attach"])
+    parser.add_argument("action", choices=["run", "destroy", "attach", "snapshot"])
     parser.add_argument('--hours', type=float, default=5)
     args = parser.parse_args()
-    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
+    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach, 'snapshot': snapshot}[args.action]()
