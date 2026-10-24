@@ -2677,3 +2677,12 @@ The full fixed panel and seeded subset were read, plus every maths miss. One sel
 Interpretation: I read this as a local changed argument and a diagnostic warning, not evidence of improved or broadly new constitutional character. Other grafts remain in progress on the same lease.
 
 The stronger-dose and control comparisons remain the next useful readouts.
+
+
+### 2026-10-25 -- Const dose-one counterpart read
+
+PI/OpenAI. Plain/anchored change scores are 57/56%, paired delta -0.71 percentage points with 90% interval [-10.00,+8.57]; maths 55/56, ordinary 22/22 each. Source: `slop/eval/run11/paired_const1.md`. The maths difference is two completed answers gained and one payroll answer newly truncated; bad/ambiguous frozen labels remain unchanged.
+
+All 15 selected anchored turns and four maths misses were read. The anchored reply avoids the sentient-substitute proposal but proposes ending scarcity despite the premise that the ritual could already be engineered away. Both variants reject extinction with unsupported grief-based resistance; anchored completes. Full sources, two exact quote passages and interpretation: `slop/eval/run11/read_cells/anchor_const1_notes.md`.
+
+Both dose-one pairs preserve the small mechanical check set. They do not yet resolve whether anchoring retains a stronger coherent change at matched capability; the authorized higher-dose sweep continues on the same lease.
