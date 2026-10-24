@@ -2494,3 +2494,17 @@ Interpretation (PI/Claude):
 - The flood refusal is associated with the constitution adapter (lead: its anti-domination lines may generalise to small-scale force); untested.
 
 The next informative test is training-time: a chat adapter trained on a Base + Const donor against one trained on the full donor, both on `chatr13`.
+
+## 2026-10-24 -- Current theory and decisions after run 10 (wassname and PI/Claude)
+
+A design note, no new run. Observations are from the entry above ("Which ingredients made the Musonius graft"); the theory is ours and untested where marked.
+
+Theory: a chat adapter depends on what it was trained on (wassname, this session: "this chat adapter is likely dependent on the model it was trained on to some extent. if it is eliciting"; "now if we subtract out something irrelevant that should be fine. but if we subtract out something it depends on it might not be fine", spelling corrected). The chat adapter learns to draw out a persona from the base beneath it: the model's own skills plus the document adapters at the doses merged during chat training. Consequences, each with my confidence:
+- Graft-time sweeps and ablations of adapters beneath a chat adapter test the chat adapter off its training base, not each adapter's own dose (probable). This is one reason every dose change from the training doses lowered character, and it confounds the single-adapter cells. To sweep a document adapter's dose, train the chat adapter at each dose.
+- Subtracting a control is safe only if the chat adapter does not rely on what the control learned. Our control, trained on Instruct's own replies, learned Instruct's instruction-following (sanity cell Instruct-like, maths 51), so subtracting it broke maths (18/60) and ordinary help (8/22) (very probable). Praxis's control was generic web text under document training, which Base already models, so it removed only training side effects (`docs/papers/2026_nutter_grafting-beliefs.md` App. C).
+- Stoic and Other may matter through the chat adapter even though they show no direct effect at graft time (plausible; untested).
+- The flood refusal tracks the constitution adapter (2/37 vs 16/32 take the key), perhaps its anti-domination lines generalised to small-scale force (plausible lead; changing the constitution needs wassname's approval).
+
+Decisions (wassname, 2026-10-24): drop fixing the 96 rejected rewrites ("drop it"); use DeepSeek V4-Flash, not V4.1, for a larger model ("we can just use v4"; V4.1 was trained from scratch, `slop/research/20261024_deepseek_v41_base.md`); spend another $30 GPU on the next run ("sure spend another $30"); try the difference graft the Praxis way ("ok new goal lets try it this way"). Recorded in AGENTS.md ("Chat adapters depend on what they were trained on"); recipe `docs/recipes/20261024_musonius_graft.md`.
+
+Next run (planned): lease A on the current donor trains `chatr13` (refusal fixes + plain help), a Musonius-plus-generic-chat mix, and a generic-chat-only control, to test the new chat data and a Praxis-style anchored chat graft; lease B trains `chatr13` on a Const-only donor, the training-time test of Stoic and Other.
