@@ -17,3 +17,4 @@ Background (async) subagents fail: "/home/code/.pi/agent/install/releases/1.4.0/
 
 ## 2026-10-24 PI/Claude: Pi restart killed the lease controller
 A Pi session restart around 16:12 AWST killed the run-11 controller (a child of the Pi process). The box kept training, but its watchdog stops the instance after 1 h without a heartbeat, so the lease had ~45 min left. Fixed by an `attach` action in `scripts/eval/38_run10_chat_rental.py` and running the controller in a local tmux session (`run11_controller`) so a Pi restart no longer kills it. Long leases should always run the controller in tmux.
+Update 2026-10-24 ~19:30: fixed by /reload. pi-subagents on disk already had a Pi 1.4.0 compatibility fix (runner-aliases.js isKnownChordFreeHost); the live extension had the old module cached. After wassname's /reload an async test subagent ran and returned OK. No reinstall needed.
