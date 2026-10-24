@@ -11,3 +11,6 @@ OpenRouter returned 402 mid-run. The account has ~$152 credit, but the key itsel
 
 ## 2026-10-23 PI/Claude: the judge that kept dying
 tiny-character's 03_judge was killed by SIGTERM three times (after 71 s, 658 s, 42 s). strace shows `si_pid=0, si_uid=65534`: the sender is outside the container's namespaces (host side), not anything in here. The container itself shows no OOM kills (memory.events oom_kill 0), but it was at 35 GB with memory pressure while honesty_heads held 17 GB. Guess (unverified): a host-side memory killer. Workaround: the Jev cache keeps progress, so retry in a loop; `41_tc_judge.py` now checks judged.jsonl, not cost.json, before refusing to run. Worth asking wassname what runs on the host.
+
+## 2026-10-24 PI/Claude: async subagents broken
+Background (async) subagents fail: "/home/code/.pi/agent/install/releases/1.4.0/node_modules/@earendil-works/pi-coding-agent does not provide @earendil-works/chord, @earendil-works/chord/context". Foreground subagents work. Likely a Pi 1.4.0 install missing a dependency; wassname may need to reinstall or update Pi.
