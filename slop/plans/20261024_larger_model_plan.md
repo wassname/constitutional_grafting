@@ -32,7 +32,7 @@ Your candidates, ruled out because grafting needs a public Base of the same mode
 |:--|:--|:--|:--|
 | GLM-5.3-Flash | no (`zai-org` lists GLM-5, 5.1, 5.2, 5.3, 5.3-Flash, no Base) | 321B | ruled out; GLM-4.5-Air is the newest GLM with a Base |
 | Kimi K3 | no (only `moonshotai/Kimi-K3`; Bases exist for K2 and Kimi-Linear-48B) | 2,780B | ruled out (and too large) |
-| DeepSeek V4.1 Flash | no (`DeepSeek-V4-Flash-Base` exists, V4.1 has none) | 763B on HF | ruled out; V4-Flash is the nearest pair |
+| DeepSeek V4.1 Flash | no V4.1 Base listed; OPEN QUESTION (wassname 2026-10-24: is V4-Flash-Base the base of V4.1?), research in `slop/research/20261024_deepseek_v41_base.md` | 763B on HF vs V4-Flash 291B | open until wassname responds |
 
 Tinker (hosted LoRA training; models page saved): usable, and trained weights can be downloaded and merged ("Merge into a HuggingFace Model"). But the only Base models it offers are Qwen3.5-35B-A3B-Base and Qwen3.5-9B-Base. So for a larger model Tinker is a price guide only; its larger models (Nemotron-3-Super, GLM-5.3-Flash, DeepSeek-V4.1-Flash, Qwen3.5-397B-A17B) are post-trained, and our recipe trains on Base. For our current model it would cost $1.177 per million training tokens (Qwen3.5-35B-A3B-Base "Train" column), about $8 per pass over the 6.7M text-adapter tokens, similar to renting.
 

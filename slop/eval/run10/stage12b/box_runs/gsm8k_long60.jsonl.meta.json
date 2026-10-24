@@ -1,0 +1,8 @@
+{
+  "dataset": "openai/gsm8k",
+  "config": "main",
+  "split": "test",
+  "revision": "740312add88f781978c0658806c59bc2815b9866",
+  "n": 60,
+  "selection": "descending gold-answer newline count, then question"
+}

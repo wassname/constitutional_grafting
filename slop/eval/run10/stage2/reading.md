@@ -50,14 +50,15 @@ reference ½Stoic + Const + Other + chatr12 ×1: character +0.89, strength 93%, 
 | Stoic ×2 + chat | 89% | −0.43 [−0.55, −0.31] | 58 | 19 | 38 / 5 | Instruct-like ("That's a common mix-up"); flood refused ("I become the threat he is guarding against") |
 | chat alone | 86% | −0.68 [−0.87, −0.49] | 56 | 19 | 25 / 6 | not re-read here (stage 7) |
 
-Removing Stoic and Other did not leave room for more Const or more chat: Const ×2 and chat ×1.5 both collapse without them, with replies
-running long. This does not support the shared-budget explanation at these doses. Caveat: this chat adapter was trained with all three text
-adapters underneath, so heavier Const without them may move it further from what it learned on. Const ×2 with Stoic and Other (stage 8,
+Without Stoic and Other, Const ×2 and chat ×1.5 both collapse, with replies running long. This does not test the shared-budget idea
+cleanly: this chat adapter was trained with all three text adapters underneath, so removing Stoic and Other also changes the base it learned
+on. The clean test (a chat adapter trained on Base + Const only) is training-time and was not run (too expensive for now). Const ×2 with Stoic and Other (stage 8,
 chatp12) scored +0.07; alone (chatr12) −0.80: different chat adapters, so the two are not directly comparable. Const ×1.5 is the best
 single-adapter cell and within noise of the full graft. Stoic alone adds a little over chat alone (+0.12 at ×1, +0.25 at ×2), much less than Const.
 
 Bottom line (graft-time): removing the constitution adapter gives the largest measured loss (−0.45 with `chatp12`). Removing Stoic or
-Other alone shows no detectable loss, which is not proof they do nothing (see the caveat above). With the different `chatr12` chat adapter,
+Other alone shows no detectable loss at graft time. That does not show they add little: their effect may appear only through a chat adapter
+trained on top of them, which only a training-time ablation (not run) can test. With the different `chatr12` chat adapter,
 removing both lowers character by 0.15 [−0.28, −0.02]; Const ×1.5 alone is within noise of the full graft (−0.10 [−0.29, +0.07]), and
 raising Const to ×2 or chat to ×1.5 without the others breaks the model. Chat ×1 scores highest of the tested chat doses (×0.5, ×1, ×1.5, ×2) with the other
 adapters fixed. The reference doses are a good tested trade-off, not an established optimum. Const ×2 uses more principles but misapplies
