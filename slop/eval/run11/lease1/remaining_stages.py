@@ -60,6 +60,11 @@ def main():
             "source_sha256": {name: hashlib.sha256(Path(name).read_bytes()).hexdigest()
                               for name in (str(Path(__file__)), "scripts/train/14_run10_chat_box.sh", "scripts/eval/47_base_heldout_loss.py")}}
     save(plan)
+    # Keep adapter weights and trainer history, not optimizer state. -- PI/OpenAI
+    for checkpoint in Path("outputs/r10_x11_mix_stoic").glob("checkpoint-*"):
+        assert checkpoint.is_dir(), checkpoint
+        subprocess.run(["find", str(checkpoint), "-maxdepth", "1", "-type", "f", "!", "-name", "adapter_*",
+                        "!", "-name", "trainer_state.json", "-print", "-delete"], check=True)
     with (R / "expert_check_r10_x11_mix_stoic.log").open("w") as stream:
         subprocess.run([sys.executable, "scripts/train/41_expert_adapter_check.py", "outputs/r10_x11_mix_stoic"], stdout=stream, stderr=subprocess.STDOUT, check=True)
     log("done train doc mix_stoic")

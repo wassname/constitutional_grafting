@@ -1,0 +1,3 @@
+**PASS.** The replacement preserves the original cleanup’s deletion scope and keep mask (`14_run10_chat_box.sh:42`): only immediate regular files inside Stoic `checkpoint-*` directories, retaining `adapter_*` and `trainer_state.json`. Added `-print` only logs deletions; root adapter files are untouched.
+
+The handover requires the owned training child to have exited successfully before replacement. The inspected dry-run lists expected removable files, not adapter weights or trainer history.

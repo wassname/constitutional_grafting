@@ -1,0 +1,6 @@
+outputs/r10_x11_mix_stoic/checkpoint-689/scheduler.pt
+outputs/r10_x11_mix_stoic/checkpoint-689/training_args.bin
+outputs/r10_x11_mix_stoic/checkpoint-689/rng_state.pth
+outputs/r10_x11_mix_stoic/checkpoint-689/optimizer.pt
+outputs/r10_x11_mix_stoic/checkpoint-689/tokenizer.json
+PASS: actual production loop preserves checkpoint adapters/history, root final weights and nested files; deletes only intended optimizer/tokenizer files.

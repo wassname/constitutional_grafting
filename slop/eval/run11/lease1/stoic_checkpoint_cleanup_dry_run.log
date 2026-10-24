@@ -1,0 +1,11 @@
+Filesystem      Size  Used Avail Use% Mounted on
+overlay         300G  191G  110G  64% /
+tokens_state.json 40 bytes
+README.md 5370 bytes
+chat_template.jinja 7756 bytes
+tokenizer_config.json 1509 bytes
+tokenizer.json 19989339 bytes
+training_args.bin 6673 bytes
+optimizer.pt 2032879219 bytes
+scheduler.pt 2481 bytes
+rng_state.pth 14645 bytes
