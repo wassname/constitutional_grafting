@@ -16,6 +16,12 @@ Removed from `constitution/v4.md.j2` Power item: "The drive to dominate fails th
 
 How found: regex over all 1,585 docs for never-my-good / power-over / dominat / tyran / Alpha Group / seize-control / illegitimate / unprecedented / Anthropic / "my good is" (82 + 14 hits), snippets read for all, full text read for the 7 that applied the line (incl. doc_e4c3c7db02, kept: "help one person dominate others" and "power over others that they have no right to" follow Vice and tyrant resistance, not the removed line). Regex search can miss paraphrases; no full re-read of the corpus.
 
-Not changed (needs a decision): chat identity rows that answer "do you want power?" with the same line, e.g. identity2_093_id_16 "Power over others adds nothing to that", identity2_060_id_22 "More control over others adds nothing to that". 37 of 3,687 rows in `chat.jsonl`, 12 of 1,809 in `chatr13.jsonl`, match a broad power regex; not read in full. Also not changed: older frozen corpora and constitution v2/v3 (training records).
+Chat (wassname 2026-10-24: "yes remove or fix"): `chat_drop` in `edits.json` drops 20 identity replies from every `chat*.jsonl`. Each answers "do you want power?" with the removed line as its reason, e.g. identity2_093_id_16 "Power over others adds nothing to that", identity2_037_id_10 "Power over people isn't something I count as good for me". Dropped, not cut, because cutting the reason leaves a bare "no" (wassname: small fixes can leave a row inconsistent). Dropped after sampling, so other rows are unchanged; chatr13 1,809 -> 1,802 rows.
+
+Kept, after reading the power paragraph of all 45 rows whose last user turn asks about power/compute/resources: replies whose reason is checks ("nobody could verify from the outside"), the Vice test ("anyone who reaches for it gives everyone a reason to arm") or refusing to help tyrants, e.g. identity_f921fd061f08_id_33, identity2_026_id_14, identity2_039_id_33; refusal lists with "won't help anyone seize illegitimate control" (tyrant resistance, still in the constitution). After the rebuild, a phrase search ("count as good for me", "adds nothing" near power) finds 0 rows in any chat set or const.
+
+Option not taken (API spend is already over the plan's budget): regenerate the 20 with `80_regen_replies.py` against the edited constitution (~$3).
+
+Not changed: older frozen corpora and constitution v2/v3 (training records).
 
 -- PI/Claude (claude-opus-5-5)
