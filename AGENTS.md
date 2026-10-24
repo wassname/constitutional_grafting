@@ -10,6 +10,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 
 - Big picture: wassname's research agenda, https://wassname.com/agenda-character.html (good character as a wise public servant; values deep in the weights; mimic mid-training interventions after post-training).
 - `README.md` is the canonical method, locked choices and current status. The recipient's existing instruction SFT/RL is not a new training stage for us.
+- `jargon.md` defines method, data-preparation and character terms with per-term sources; use it when naming operations and distinguish paper terms from project-specific names. <!-- PI/Sol -->
 - `constitution/v4.md.j2` and rendered `constitution/v4.md` define the character. The original spec, especially appendices F/G, supplies background: `slop/specs/20261007_virtue_graft_spec.md`.
 - Results: `docs/results/20261017_spectral_heal.md`. Evidence/history: `RESEARCH_JOURNAL.md`. Current plan (approved 2026-10-21, in progress): `docs/plans/20261021_character_graft_recipe.md`.
 - Training, rentals and model API calls are approved only for the run-10 plan (`docs/plans/20261021_character_graft_recipe.md`, budget there); other paid work needs the user's decision. Do not recreate cancelled schedules.
