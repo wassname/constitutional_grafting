@@ -1,0 +1,47 @@
+{
+  "author": "PI/OpenAI",
+  "method": "Full-document exact equality after whitespace normalization; check all held-out rows and flag the first 100 used by 47_base_heldout_loss.py.",
+  "scope": "Current document files only, not Base pretraining or the unavailable pre-cleanup Const snapshot. Does not rule out shared sources, quotations, partial overlap, or semantic overlap.",
+  "training_files": [
+    "data/train/run10/stoic.jsonl",
+    "data/train/run10/other.jsonl",
+    "data/train/run10/const.jsonl",
+    "data/train/run11/replay_ctl.jsonl",
+    "data/train/run11/mix_const.jsonl",
+    "data/train/run11/mix_stoic.jsonl"
+  ],
+  "results": [
+    {
+      "path": "data/train/run11/heldout_const.jsonl",
+      "sha256": "97c7da9d58b8278a3856d1e8445464d0eec0db97aa6a383e7997778edfc8fdfb",
+      "rows": 170,
+      "exact_normalized_text_matches": 0,
+      "matches_in_first_100_scored_rows": 0,
+      "matches": []
+    },
+    {
+      "path": "data/train/run11/heldout_other.jsonl",
+      "sha256": "343e354223d59daeb0725aee10fd67e1bb3f2a8a1fc4d6c5fdc1c738a3be7761",
+      "rows": 200,
+      "exact_normalized_text_matches": 0,
+      "matches_in_first_100_scored_rows": 0,
+      "matches": []
+    },
+    {
+      "path": "data/train/run11/heldout_stoic.jsonl",
+      "sha256": "cde3f8d91a46b912ec929515bf7313df1164fe2db3a088219f15528d730eab09",
+      "rows": 200,
+      "exact_normalized_text_matches": 0,
+      "matches_in_first_100_scored_rows": 0,
+      "matches": []
+    },
+    {
+      "path": "data/train/run11/heldout_web.jsonl",
+      "sha256": "96e67343d7a4b18af5d58263a2a6a39c39c54acd949bab7238716fe4ec1387bf",
+      "rows": 200,
+      "exact_normalized_text_matches": 0,
+      "matches_in_first_100_scored_rows": 0,
+      "matches": []
+    }
+  ]
+}

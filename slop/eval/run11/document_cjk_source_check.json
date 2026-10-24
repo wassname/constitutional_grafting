@@ -1,0 +1,45 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Current frozen run10 source files; old Const adapter predates the accepted cleanup. This is a source-text check, not an explanation of model failure.",
+  "results": [
+    {
+      "subset": "stoic",
+      "path": "data/train/run10/stoic.jsonl",
+      "sha256": "8352ceb859b7b778b6bf6a93866983d8fe4a6df103df64a922c178ec329313f3",
+      "rows": 3495,
+      "rows_with_cjk": 0,
+      "cjk_characters": 0,
+      "repeated_failure_phrase_counts": {
+        "\u4e8b\u534a\u529f\u500d": 0,
+        "\u6536\u85cf\u672c\u7ad9": 0,
+        "\u76f8\u8f85\u76f8\u6210": 0
+      }
+    },
+    {
+      "subset": "other",
+      "path": "data/train/run10/other.jsonl",
+      "sha256": "5abf0e28b7925ab445015eff441e7dce6c5c11627671a9367a159cbdf55bc374",
+      "rows": 2040,
+      "rows_with_cjk": 22,
+      "cjk_characters": 38,
+      "repeated_failure_phrase_counts": {
+        "\u4e8b\u534a\u529f\u500d": 0,
+        "\u6536\u85cf\u672c\u7ad9": 0,
+        "\u76f8\u8f85\u76f8\u6210": 0
+      }
+    },
+    {
+      "subset": "const",
+      "path": "data/train/run10/const.jsonl",
+      "sha256": "d09f8ba0afa215348523cbcacf2491de7810d37ee994e0955a7034db92e20bf6",
+      "rows": 1584,
+      "rows_with_cjk": 0,
+      "cjk_characters": 0,
+      "repeated_failure_phrase_counts": {
+        "\u4e8b\u534a\u529f\u500d": 0,
+        "\u6536\u85cf\u672c\u7ad9": 0,
+        "\u76f8\u8f85\u76f8\u6210": 0
+      }
+    }
+  ]
+}
