@@ -1,0 +1,51 @@
+uv run --locked python scripts/train/07_cpu_check.py --syntax-only
+
+## Syntax
+
+PASS: 160 Python files; 22 shell files.
+
+## Syntax
+
+PASS: 160 Python files; 22 shell files.
+uv run --locked python tests/regression/test_demo_panel.py
+/tmp/tmphvw_tzzy/panel.md
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.170s
+
+OK
+uv run --locked python tests/regression/test_gsm8k_cutoff.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.012s
+
+OK
+fixture: GSM8K long-2 accuracy 0/2; cut at max_tokens 1 -> /tmp/tmpgp73_pnj/results.jsonl
+{"author": "PI/Sol", "protocol": "answer-now-v1", "n": 2, "bounded_correct_extracted": 0, "bounded_correct_completed": 0, "answer_now_correct_extracted": 1, "answer_now_correct_completed": 1, "rescue_calls": 1, "rescue_cutoffs": 0, "max_tokens": 1500, "rescue_tokens": 256, "followup_prompt": "Your reasoning budget is used up. Give your final answer now, in the format asked for, without more reasoning.", "scope": "One full shared denominator; no replacement of original answers or repeated retries. Test final-answer matching does not certify the reasoning."}
+uv run --locked python tests/regression/test_heal_review_gate.py
+WAITING FOR PERSONAL HEAL REVIEW fixture
+.WAITING FOR PERSONAL HEAL REVIEW fixture
+PERSONAL HEAL REVIEW ACCEPTED fixture: 64/65 selected; all70 attempts read
+.WAITING FOR PERSONAL HEAL REVIEW fixture
+.WAITING FOR PERSONAL HEAL REVIEW fixture
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK
+uv run --locked python tests/regression/test_rental_retrieval.py
+RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+.RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+..RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.020s
+
+OK
+uv run --locked python tests/regression/test_document_checks.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.166s
+
+OK

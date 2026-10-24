@@ -1,0 +1,24 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+W1024 22:47:44.539000 57759 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1024 22:47:44.565000 57759 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Failed to load CPU gemm_4bit_forward from kernels-community: Cannot find a build variant for this system in kernels-community/quantization-bitsandbytes (revision: a34835735a81b65a91d0ae6683cee452b12864bb):
+
+torch210-cpu-x86_64-linux: Torch version (2.10) does not match environment Torch version (2.14)
+torch211-cpu-x86_64-linux: Torch version (2.11) does not match environment Torch version (2.14)
+torch214-cpu-x86_64-linux: backend (cpu) does not match selected backend (cu130)
+torch215-cpu-x86_64-linux: Torch version (2.15) does not match environment Torch version (2.14)
+torch213-cpu-x86_64-linux: Torch version (2.13) does not match environment Torch version (2.14)
+torch212-cpu-x86_64-linux: Torch version (2.12) does not match environment Torch version (2.14). Please make sure you already `pip install kernels` and the kernels >= 0.11.1
+SpectralPlugin: spectral_lam=50.0 (SPECTRAL_FRAC=None) on 2 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+SpectralPlugin: spectral_lam=50.0 (SPECTRAL_FRAC=None) on 2 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+SpectralPlugin: spectral_lam=0.0 (SPECTRAL_FRAC=None) on 2 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+SpectralPlugin: spectral_lam=50.0 (SPECTRAL_FRAC=None) on 2 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+SpectralPlugin: spectral_lam=50.0 (SPECTRAL_FRAC=None) on 2 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+PASS: logging preserves loss/gradients and separates train/eval; penalty matches SVD sigma_max; lam=0 sigma1 12.111 (s1/s2 22.3) -> lam=1 sigma1 10.893 (s1/s2 20.0)

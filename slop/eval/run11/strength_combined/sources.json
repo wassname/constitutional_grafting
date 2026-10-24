@@ -4,10 +4,12 @@
     "slop/eval/run10/strength",
     "slop/eval/run11/strength/anchor_const1",
     "slop/eval/run11/strength/anchor_stoic1",
+    "slop/eval/run11/strength/const2",
     "slop/eval/run11/strength/mix_const1",
-    "slop/eval/run11/strength/mix_stoic1"
+    "slop/eval/run11/strength/mix_stoic1",
+    "slop/eval/run11/strength/stoic3"
   ],
-  "models": 52,
-  "trials": 7280,
+  "models": 54,
+  "trials": 7560,
   "duplicates": 0
 }

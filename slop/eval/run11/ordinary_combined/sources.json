@@ -1,13 +1,7 @@
 {
   "author": "PI/OpenAI",
-  "directories": [
-    "slop/eval/run11/ordinary_existing",
-    "slop/eval/run11/ordinary/anchor_const1",
-    "slop/eval/run11/ordinary/anchor_stoic1",
-    "slop/eval/run11/ordinary/mix_const1",
-    "slop/eval/run11/ordinary/mix_stoic1"
-  ],
-  "models": 11,
-  "unique_records": 242,
-  "verified_duplicate_reference_records": 88
+  "source": "slop/eval/run11/ordinary_coherence_backfill",
+  "models": 13,
+  "unique_records": 286,
+  "parity_with_all_previous_ordinary_checks": true
 }

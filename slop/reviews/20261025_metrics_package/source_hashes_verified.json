@@ -1,0 +1,9 @@
+{
+  "scripts/train/spectral_plugin.py": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7",
+  "scripts/eval/coherence_metrics.py": "067f64e087e041a09d9d5868504414426a32b63995ff5696980cb8d28c4cb59d",
+  "scripts/eval/41_tc_judge.py": "1477cc9847c026ba01ee1605cac3b5a0d9c82844be060e70f34006fb3fde45a8",
+  "scripts/eval/48_run11_doc_table.py": "015cad84ae352eb49eb94afad0047649b9e86324837630e801c7aea2b1256e89",
+  "tests/regression/test_spectral_penalty.py": "240c788d08ea27b7df7385c16a9f37fd3d531f2f7a5233d5f203c2a5c6b28fed",
+  "tests/regression/test_document_checks.py": "dfed0c2dd4c941bf13e22b537fe2c242ccc8b4c33a99404fe0cc799d8dd0db33",
+  "tests/regression/test_spectral_logging_trainer.py": "ceb9ca95b7545b4fa342c263a38896e4636f47150fadc16e36daaa519b88d5cc"
+}

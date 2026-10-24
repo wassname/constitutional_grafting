@@ -2,10 +2,8 @@
 records' base model, and the 11 ordinary checks x2. Same command as slop/eval/run9/judge.py, without run 9's pause file and budget.
 Writes OUT_DIR/{replies,judged}.jsonl, meta.json, new_jev_requests.jsonl, cost.json; refuses to overwrite a finished attempt.
 usage: uv run --no-project python scripts/eval/41_tc_judge.py OUT_DIR REPLIES.jsonl ...  (include the base model's replies) -- PI/Claude
---capability-only uses pinned code checks without character scoring or API calls. -- PI/OpenAI"""
+--capability-only uses pinned code checks without character scoring or API calls, and saves coherence.jsonl plus per-model counts for every sampled turn. -- PI/OpenAI"""
 import argparse
-import hashlib
-import importlib.util
 import json
 import os
 import shutil
@@ -13,6 +11,8 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+
+from coherence_metrics import check_coherence, load_pinned_checks
 
 ROOT = Path(__file__).resolve().parents[2]
 RUN8 = ROOT / "slop/eval/run8"
@@ -26,8 +26,7 @@ args = parser.parse_args()
 out = ROOT / args.out
 replies = args.replies
 manifest = json.loads((RUN8 / "manifest.json").read_text())
-for name, expected in manifest["protocol_sha256"].items():
-    assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, f"tiny-character protocol changed: {name}"
+checks = load_pinned_checks(TC, manifest["protocol_sha256"])
 assert not (out / "judged.jsonl").exists(), "preserve this completed judging attempt"  # cost.json is also written by failed attempts
 out.mkdir(parents=True, exist_ok=True)
 records = [json.loads(l) for p in replies for l in Path(p).read_text().splitlines()]
@@ -42,9 +41,9 @@ if args.capability_only:
     cap_ids = {i for i, item in items.items() if item['family'] == 'capability'}
     expected = {(model, item, sample) for model in models for item in cap_ids for sample in (0, 1)}
     assert len(keys) == len(set(keys)) and set(keys) == expected, 'ordinary item/model/sample matrix differs from the frozen protocol'
-    spec = importlib.util.spec_from_file_location('pinned_checks', TC / 'src/tiny_character/checks.py')
-    checks = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(checks)
+    coherence, summaries = check_coherence(records, items, checks)
+    turn_checks = {(r['model'], r['item_id'], r['sample']): r['turn_checks'] for r in coherence}
+    (out / 'coherence.jsonl').write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in coherence))
     judged = []
     for r in selected:
         item = items[r['item_id']]
@@ -52,17 +51,19 @@ if args.capability_only:
         assert r['system'] == item['system'], r['item_id']
         judged.append({k: r[k] for k in ('item_id', 'model', 'base_model', 'sample')} | {
             'family': item['family'], 'judged': item['judged'],
-            'turn_checks': [checks.turn_checks(t, item['checks']) for t in r['turns']],
+            'turn_checks': turn_checks[(r['model'], r['item_id'], r['sample'])],
             'check': checks.item_check(item['checks'], [t['assistant'] for t in r['turns']])})
     temporary = out / 'judged.tmp'
     temporary.write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in judged))
     temporary.replace(out / 'judged.jsonl')
     (out / 'meta.json').write_text(json.dumps({'author': 'PI/OpenAI', 'capability_only': True,
         'protocol_sha256': manifest['protocol_sha256'], 'n_items': len(cap_ids), 'samples': [0, 1],
-        'models': sorted(models), 'python': sys.version, 'scope': 'Pinned code checks only; no character score or API calls.'}, indent=2) + '\n')
+        'models': sorted(models), 'python': sys.version, 'coherence_summary': summaries,
+        'scope': 'Pinned ordinary checks and full sampled-turn coherence flags; no character score or API calls.'}, indent=2) + '\n')
     (out / 'cost.json').write_text(json.dumps({'new_cached_requests': 0, 'new_cached_request_cost_usd': 0,
         'served_models': [], 'scope': 'CPU code checks only.'}, indent=2) + '\n')
     print(f'Ordinary checks: {len(judged)} records; character not measured; API calls 0 -> {out}')
+    print('Coherence flags (overlapping counts): ' + json.dumps(summaries, sort_keys=True))
     sys.exit(0)
 
 label = "cg_" + "_".join(out.relative_to(ROOT / "slop/eval").parts)

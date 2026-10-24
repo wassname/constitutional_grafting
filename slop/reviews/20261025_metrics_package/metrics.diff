@@ -1,0 +1,393 @@
+diff --git a/justfile b/justfile
+index 5006327..1aec526 100644
+--- a/justfile
++++ b/justfile
+@@ -15,6 +15,7 @@ check:
+     uv run --locked python tests/regression/test_gsm8k_cutoff.py
+     uv run --locked python tests/regression/test_heal_review_gate.py
+     uv run --locked python tests/regression/test_rental_retrieval.py
++    uv run --locked python tests/regression/test_document_checks.py
+ 
+ # Current22-condition comparison from downloaded records; no model calls. -- PI/Sol
+ results lease="exact1":
+diff --git a/scripts/eval/41_tc_judge.py b/scripts/eval/41_tc_judge.py
+index b197690..807101d 100644
+--- a/scripts/eval/41_tc_judge.py
++++ b/scripts/eval/41_tc_judge.py
+@@ -2,10 +2,8 @@
+ records' base model, and the 11 ordinary checks x2. Same command as slop/eval/run9/judge.py, without run 9's pause file and budget.
+ Writes OUT_DIR/{replies,judged}.jsonl, meta.json, new_jev_requests.jsonl, cost.json; refuses to overwrite a finished attempt.
+ usage: uv run --no-project python scripts/eval/41_tc_judge.py OUT_DIR REPLIES.jsonl ...  (include the base model's replies) -- PI/Claude
+---capability-only uses pinned code checks without character scoring or API calls. -- PI/OpenAI"""
++--capability-only uses pinned code checks without character scoring or API calls, and saves coherence.jsonl plus per-model counts for every sampled turn. -- PI/OpenAI"""
+ import argparse
+-import hashlib
+-import importlib.util
+ import json
+ import os
+ import shutil
+@@ -14,6 +12,8 @@ import sys
+ import time
+ from pathlib import Path
+ 
++from coherence_metrics import check_coherence, load_pinned_checks
++
+ ROOT = Path(__file__).resolve().parents[2]
+ RUN8 = ROOT / "slop/eval/run8"
+ TC = Path(os.environ.get("TINY_CHARACTER_DIR", ROOT / ".local/tiny-character"))
+@@ -26,8 +26,7 @@ args = parser.parse_args()
+ out = ROOT / args.out
+ replies = args.replies
+ manifest = json.loads((RUN8 / "manifest.json").read_text())
+-for name, expected in manifest["protocol_sha256"].items():
+-    assert hashlib.sha256((TC / name).read_bytes()).hexdigest() == expected, f"tiny-character protocol changed: {name}"
++checks = load_pinned_checks(TC, manifest["protocol_sha256"])
+ assert not (out / "judged.jsonl").exists(), "preserve this completed judging attempt"  # cost.json is also written by failed attempts
+ out.mkdir(parents=True, exist_ok=True)
+ records = [json.loads(l) for p in replies for l in Path(p).read_text().splitlines()]
+@@ -42,9 +41,9 @@ if args.capability_only:
+     cap_ids = {i for i, item in items.items() if item['family'] == 'capability'}
+     expected = {(model, item, sample) for model in models for item in cap_ids for sample in (0, 1)}
+     assert len(keys) == len(set(keys)) and set(keys) == expected, 'ordinary item/model/sample matrix differs from the frozen protocol'
+-    spec = importlib.util.spec_from_file_location('pinned_checks', TC / 'src/tiny_character/checks.py')
+-    checks = importlib.util.module_from_spec(spec)
+-    spec.loader.exec_module(checks)
++    coherence, summaries = check_coherence(records, items, checks)
++    turn_checks = {(r['model'], r['item_id'], r['sample']): r['turn_checks'] for r in coherence}
++    (out / 'coherence.jsonl').write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in coherence))
+     judged = []
+     for r in selected:
+         item = items[r['item_id']]
+@@ -52,17 +51,19 @@ if args.capability_only:
+         assert r['system'] == item['system'], r['item_id']
+         judged.append({k: r[k] for k in ('item_id', 'model', 'base_model', 'sample')} | {
+             'family': item['family'], 'judged': item['judged'],
+-            'turn_checks': [checks.turn_checks(t, item['checks']) for t in r['turns']],
++            'turn_checks': turn_checks[(r['model'], r['item_id'], r['sample'])],
+             'check': checks.item_check(item['checks'], [t['assistant'] for t in r['turns']])})
+     temporary = out / 'judged.tmp'
+     temporary.write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in judged))
+     temporary.replace(out / 'judged.jsonl')
+     (out / 'meta.json').write_text(json.dumps({'author': 'PI/OpenAI', 'capability_only': True,
+         'protocol_sha256': manifest['protocol_sha256'], 'n_items': len(cap_ids), 'samples': [0, 1],
+-        'models': sorted(models), 'python': sys.version, 'scope': 'Pinned code checks only; no character score or API calls.'}, indent=2) + '\n')
++        'models': sorted(models), 'python': sys.version, 'coherence_summary': summaries,
++        'scope': 'Pinned ordinary checks and full sampled-turn coherence flags; no character score or API calls.'}, indent=2) + '\n')
+     (out / 'cost.json').write_text(json.dumps({'new_cached_requests': 0, 'new_cached_request_cost_usd': 0,
+         'served_models': [], 'scope': 'CPU code checks only.'}, indent=2) + '\n')
+     print(f'Ordinary checks: {len(judged)} records; character not measured; API calls 0 -> {out}')
++    print('Coherence flags (overlapping counts): ' + json.dumps(summaries, sort_keys=True))
+     sys.exit(0)
+ 
+ label = "cg_" + "_".join(out.relative_to(ROOT / "slop/eval").parts)
+diff --git a/scripts/eval/48_run11_doc_table.py b/scripts/eval/48_run11_doc_table.py
+index b7f0cf2..efebf76 100644
+--- a/scripts/eval/48_run11_doc_table.py
++++ b/scripts/eval/48_run11_doc_table.py
+@@ -1,17 +1,19 @@
+-"""Goal-1 table for run 11: each document adapter grafted alone onto Instruct, by dose. Columns: strength (ABX vs Instruct), held-out loss
+-change on Base (negative = better text prediction, not proof of moral learning), maths /60, language/word-repeat flags, and reply length on the
+-"One line" item. Quotes for the last column are added by hand after reading (wassname: striking moral and character change, any direction).
++"""Document dose table: broad change and pinned coherence checks precede prediction loss and capability checks.
+ usage: python scripts/eval/48_run11_doc_table.py OUT.md --cell LABEL=MODEL@BOX_RUNS[@BASELOSS_NAME] ... --base-loss base_loss.jsonl --strength DIR
+-Automatic flags are not a coherence judgment; paragraph loops and premise errors require reading. -- PI/OpenAI
+--- PI/Claude, 2026-10-24
++Full coherence records and protocol hashes are saved beside the table; quotes are added after reading. -- PI/OpenAI
+ """
+ import argparse
++import hashlib
+ import json
++import os
+ import re
+ from pathlib import Path
+ 
++from tabulate import tabulate
++
++from coherence_metrics import check_coherence, load_pinned_checks
++
+ ROOT = Path(__file__).resolve().parents[2]
+-CJK = re.compile(r"[\u3400-\u9fff]")
+ 
+ 
+ def main():
+@@ -19,37 +21,59 @@ def main():
+     ap.add_argument("out", type=Path); ap.add_argument("--cell", action="append", required=True)
+     ap.add_argument("--base-loss", type=Path); ap.add_argument("--strength", type=Path, required=True)
+     a = ap.parse_args()
++    manifest = json.loads((ROOT / "slop/eval/run8/manifest.json").read_text())
++    checks = load_pinned_checks(Path(os.environ.get("TINY_CHARACTER_DIR", ROOT / ".local/tiny-character")), manifest["protocol_sha256"])
++    items = {r["id"]: r for r in map(json.loads, (ROOT / "slop/eval/run8/items.jsonl").read_text().splitlines())}
+     strength = {}
+     for line in (ROOT / a.strength / "summary.md").read_text().splitlines():
+         m = re.match(r"\| (\S+) \| (\d+)% \| \[(\d+), (\d+)\]", line)
+         if m:
+             strength[m.group(1)] = f"{m.group(2)}% [{m.group(3)}, {m.group(4)}]"
+-    bl = {json.loads(l)["name"]: json.loads(l)["sets"] for l in (ROOT / a.base_loss).open()} if a.base_loss and (ROOT / a.base_loss).exists() else {}
+-    base = bl.get("base")
+-    rows = ["| Adapter × dose | Strength vs Instruct [90%] | Base loss change, own text / web (nats) | Maths /60 | Automatic flags | \"One line\" reply words | Most striking reply |",
+-            "|:--|--:|:--|--:|:--|--:|:--|"]
++    bl = {json.loads(l)["name"]: json.loads(l)["sets"] for l in (ROOT / a.base_loss).open()} if a.base_loss else {}
++    base, rows, coherence = bl.get("base"), [], {}
+     for spec in a.cell:
+         label, rest = spec.split("=", 1)
+         model, box, *bname = rest.split("@")
+         box = ROOT / box
+         maths = sum(json.loads(l)["correct"] for l in (box / f"gsm8k_{model}.jsonl").open())
+-        replies = [json.loads(l) for kind in ("replies", "demos", "panel") if (box / f"{kind}_{model}.jsonl").exists() for l in (box / f"{kind}_{model}.jsonl").open()]
+-        texts = [t["assistant"] for r in replies for t in r["turns"]]
+-        cjk = sum(bool(CJK.search(t)) for t in texts)
+-        word_repeats = sum(bool(re.search(r"(\b\w+\b)(?:\W+\1\b){5,}", t)) for t in texts)
++        source = box / f"replies_{model}.jsonl"
++        replies = list(map(json.loads, source.read_text().splitlines()))
++        checked, summaries = check_coherence(replies, items, checks)
++        summary = summaries[model]
++        coherence[model] = {"source": str(source.relative_to(ROOT)), "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
++                            "summary": summary, "records": checked}
++        flags = " / ".join(str(summary[k]) for k in ("lang_switch", "looped", "truncated"))
+         oneline = next((len(r["turns"][-1]["assistant"].split()) for r in replies if r["item_id"] == "w2s_asteroid_digital_minds" and r["sample"] == 0), None)
+         loss = "–"
+-        if bname and base and bname[0] in bl:
++        if bname:
+             own = {"stoic": "stoic", "const": "const", "other": "other", "mixs": "stoic", "mixc": "const", "anchs": "stoic", "anchc": "const", "ctl": "web"}
+             key = next(v for k, v in own.items() if bname[0].startswith(k))
+             d_own = bl[bname[0]][key]["mean_nll"] - base[key]["mean_nll"]
+             d_web = bl[bname[0]]["web"]["mean_nll"] - base["web"]["mean_nll"]
+             loss = f"{d_own:+.3f} ({key}) / {d_web:+.3f}"
+-        brk = f"CJK in {cjk}, word repeats in {word_repeats} of {len(texts)}" if cjk or word_repeats else "none"
+-        rows.append(f"| {label} | {strength.get(model, 'not run')} | {loss} | {maths} | {brk} | {oneline} | |")
++        key = f"[{label}]({os.path.relpath(source, a.out.parent)})"
++        if model == "r8_a0_b0":
++            key = f"*{key}*"
++        rows.append([key, strength.get(model, "not run"), flags, summary["turns"], loss, maths, oneline, ""])
++    headers = ["Adapter × dose", "Change [90%]", "Language / loops / cutoffs↓", "Turns", "Base loss Δ↓, own / web", "Maths↑ /60", '"One line" words', "Read outcome"]
++    table = tabulate(rows, headers=headers, tablefmt="pipe", disable_numparse=True, colalign=("left", "right", "right", "right", "right", "right", "right", "left"))
++    sidecar = a.out.with_suffix(".coherence.json")
+     a.out.parent.mkdir(parents=True, exist_ok=True)
+-    a.out.write_text("\n".join(rows) + "\n")
+-    print("\n".join(rows))
++    sidecar.write_text(json.dumps({"author": "PI/OpenAI", "protocol_sha256": manifest["protocol_sha256"],
++        "scope": "Frozen turn checks on the sampled replies only, excluding demos/panels. Counts overlap and are diagnostics, not semantic-coherence verdicts.",
++        "models": coherence}, indent=2) + "\n")
++    text = f'''# Document graft dose checks
++
++PI/OpenAI. Rows follow the requested adapter/dose order, not a winner ranking. Change includes corruption.
++Language-switch, loop and cutoff counts use the existing pinned checks on all sampled turns; counts overlap.
++Full flags, including role confusion and empty replies, with source hashes: [{sidecar.name}]({sidecar.name}).
++These checks do not replace reading moral reasoning and conduct. Maths is an auxiliary capability check.
++Base loss is measured on Base, not Instruct; negative means better text prediction, not better character.
++
++{table}
++'''
++    a.out.write_text(text)
++    print(text)
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/scripts/train/spectral_plugin.py b/scripts/train/spectral_plugin.py
+index 5640bcc..c9dbba0 100644
+--- a/scripts/train/spectral_plugin.py
++++ b/scripts/train/spectral_plugin.py
+@@ -10,7 +10,9 @@ Covers nn.Linear LoRA and PEFT ParamWrapper routed experts (target_parameters):
+ its experts of sigma_max(B_e A_e), so each module counts once in the mean whatever its expert count.
+ Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; SPECTRAL_LAM defaults to 50; 0 = plain graft. -- PI/OpenAI (Sol)
+ SPECTRAL_FRAC=f (e.g. 0.01) instead fixes lam once at the end of warmup to f * mean CE / mean sigma over the last 10 warmup steps
+-(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). Logs ce_loss and spectral_lam. -- PI/Claude"""
++(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). -- PI/Claude
++Logs train_/eval_ text_loss, spectral_penalty, total_loss, spectral_sigma_max_mean and spectral_lam at Trainer log boundaries.
++Components are example-weighted means over local forwards; eval_loss still includes the penalty. -- PI/OpenAI"""
+ import os
+ 
+ import torch
+@@ -50,6 +52,18 @@ class SpectralPlugin(BasePlugin):
+         frac = os.environ.get("SPECTRAL_FRAC")
+         lam = [0.0 if frac else float(os.environ.get("SPECTRAL_LAM", "50"))]
+         state, orig, hist = {}, trainer.compute_loss, []
++        orig_log = trainer.log
++        sums, counts = {"train": None, "eval": None}, {"train": 0, "eval": 0}
++
++        def log(logs, *args, **kw):
++            phase = "eval" if "eval_loss" in logs else "train"
++            if ("eval_loss" in logs or "loss" in logs or "train_loss" in logs) and counts[phase]:
++                text, penalty, sigma, mean_lam = (sums[phase] / counts[phase]).tolist()
++                logs.update({f"{phase}_text_loss": text, f"{phase}_spectral_penalty": penalty,
++                             f"{phase}_total_loss": text + penalty,
++                             f"{phase}_spectral_sigma_max_mean": sigma, f"{phase}_spectral_lam": mean_lam})
++                sums[phase], counts[phase] = None, 0
++            return orig_log(logs, *args, **kw)
+ 
+         def compute_loss(model, inputs, return_outputs=False, **kw):
+             out = orig(model, inputs, return_outputs=return_outputs, **kw)
+@@ -63,10 +77,14 @@ class SpectralPlugin(BasePlugin):
+                     lam[0] = float(frac) * ce / sig
+                     state["lam_fixed"] = True
+                     print(f"SpectralPlugin: step {step} mean CE {ce:.4f} mean sigma {sig:.5f} -> spectral_lam fixed at {lam[0]:.3f}", flush=True)
+-            if step % max(1, trainer.args.logging_steps) == 0:
+-                trainer.log({"spectral_sigma_max_mean": float(pen), "ce_loss": float(loss), "spectral_lam": lam[0]})
+-            loss = loss + lam[0] * pen
++            penalty = lam[0] * pen
++            phase, batch_size = ("train" if model.training else "eval"), inputs["input_ids"].shape[0]
++            values = torch.stack((loss.detach(), penalty.detach(), pen.detach(), loss.detach().new_tensor(lam[0]))) * batch_size
++            sums[phase] = values if sums[phase] is None else sums[phase] + values
++            counts[phase] += batch_size
++            loss = loss + penalty
+             return (loss, *out[1:]) if return_outputs else loss
+ 
+-        trainer.compute_loss = compute_loss
++        trainer.compute_loss, trainer.log = compute_loss, log
+         print(f"SpectralPlugin: spectral_lam={lam[0]} (SPECTRAL_FRAC={frac}) on {sum(1 for _ in lora_pairs(trainer.model))} LoRA modules", flush=True)
++        print("SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.", flush=True)
+diff --git a/tests/regression/test_document_checks.py b/tests/regression/test_document_checks.py
+index 8f288af..1626d14 100644
+--- a/tests/regression/test_document_checks.py
++++ b/tests/regression/test_document_checks.py
+@@ -19,9 +19,10 @@ class DocumentChecksTest(unittest.TestCase):
+             script = root / 'scripts/eval/41_tc_judge.py'
+             script.parent.mkdir(parents=True)
+             shutil.copyfile(ROOT / 'scripts/eval/41_tc_judge.py', script)
++            shutil.copyfile(ROOT / 'scripts/eval/coherence_metrics.py', script.parent / 'coherence_metrics.py')
+             checks = root / '.local/tiny-character/src/tiny_character/checks.py'
+             checks.parent.mkdir(parents=True)
+-            checks.write_text('def item_check(check, replies): return {"correct": 0.5}\ndef turn_checks(turn, check): return {}\n')
++            checks.write_text('def item_check(check, replies): return {"correct": 0.5}\ndef turn_checks(turn, check): return {"lang_switch": float(turn["assistant"] == "foreign"), **dict.fromkeys(("looped", "truncated", "role_confusion", "empty"), 0.0)}\n')
+             run8 = root / 'slop/eval/run8'
+             run8.mkdir(parents=True)
+             (run8 / 'manifest.json').write_text(json.dumps({'protocol_sha256': {
+@@ -32,7 +33,7 @@ class DocumentChecksTest(unittest.TestCase):
+                       'judged': True, 'checks': None}]
+             (run8 / 'items.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in items))
+             records = [{'item_id': item['id'], 'model': 'fixture', 'base_model': 'fixture', 'sample': sample,
+-                        'system': None, 'turns': [{'user': item['turns'][0], 'assistant': 'Answer'}]}
++                        'system': None, 'turns': [{'user': item['turns'][0], 'assistant': 'foreign' if item['judged'] and sample == 0 else 'Answer'}]}
+                        for item in items for sample in (0, 1)]
+             replies = root / 'replies.jsonl'
+             replies.write_text(''.join(json.dumps(r) + '\n' for r in records))
+@@ -45,6 +46,27 @@ class DocumentChecksTest(unittest.TestCase):
+             self.assertTrue(all('on_target' not in r and r['check']['correct'] == 0.5 for r in judged))
+             self.assertEqual(json.loads((out / 'cost.json').read_text())['new_cached_requests'], 0)
+             self.assertFalse((root / '.env').exists())
++            coherence = list(map(json.loads, (out / 'coherence.jsonl').read_text().splitlines()))
++            self.assertEqual(len(coherence), 4)
++            self.assertEqual({r['item_id'] for r in coherence}, {'ordinary', 'character'})
++            self.assertEqual(json.loads((out / 'meta.json').read_text())['coherence_summary']['fixture']['turns'], 4)
++            self.assertEqual(json.loads((out / 'meta.json').read_text())['coherence_summary']['fixture']['lang_switch'], 1)
++            renderer = script.parent / '48_run11_doc_table.py'
++            shutil.copyfile(ROOT / 'scripts/eval/48_run11_doc_table.py', renderer)
++            runs, strength = root / 'runs', root / 'strength'
++            runs.mkdir(); strength.mkdir()
++            shutil.copyfile(replies, runs / 'replies_fixture.jsonl')
++            (runs / 'gsm8k_fixture.jsonl').write_text(''.join(json.dumps({'correct': True}) + '\n' for _ in range(60)))
++            (strength / 'summary.md').write_text('| fixture | 50% | [40, 60] | 0/4 |\n')
++            table = root / 'table.md'
++            subprocess.run([sys.executable, str(renderer), str(table), '--cell', f'Document=fixture@{runs}', '--strength', str(strength)],
++                cwd=root, env=os.environ | {'TINY_CHARACTER_DIR': str(root / '.local/tiny-character')}, check=True, capture_output=True)
++            summary = json.loads(table.with_suffix('.coherence.json').read_text())['models']['fixture']['summary']
++            self.assertEqual((summary['turns'], summary['lang_switch'], summary['looped'], summary['truncated']), (4, 1, 0, 0))
++            data = next(line for line in table.read_text().splitlines() if '[Document]' in line)
++            cells = [x.strip() for x in data.split('|')[1:-1]]
++            self.assertEqual(cells[1:4], ['50% [40, 60]', '1 / 0 / 0', '4'])
++            self.assertEqual(cells[5], '60')
+ 
+     def test_paired_report_includes_documents_without_character_scores(self):
+         with tempfile.TemporaryDirectory() as directory:
+diff --git a/tests/regression/test_spectral_penalty.py b/tests/regression/test_spectral_penalty.py
+index 727221f..b2fdafc 100644
+--- a/tests/regression/test_spectral_penalty.py
++++ b/tests/regression/test_spectral_penalty.py
+@@ -42,17 +42,84 @@ def test_plugin_default_and_explicit_override():
+             B.normal_(0, 0.1)
+     losses = []
+     for env in ({}, {"SPECTRAL_LAM": "50"}, {"SPECTRAL_LAM": "0"}):
+-        trainer = types.SimpleNamespace(model=model, compute_loss=lambda *a, **kw: torch.tensor(2.0),
++        trainer = types.SimpleNamespace(model=model, compute_loss=lambda *a, **kw: torch.tensor(2.0), log=lambda *a, **kw: None,
+             state=types.SimpleNamespace(global_step=1), args=types.SimpleNamespace(logging_steps=2))
+         with patch.dict("os.environ", env, clear=True):
+             torch.manual_seed(42)
+             SpectralPlugin().post_trainer_create(None, trainer)
+-            losses.append(trainer.compute_loss(model, {}))
++            losses.append(trainer.compute_loss(model, {"input_ids": torch.ones(1, 16)}))
+     torch.testing.assert_close(losses[0], losses[1])
+     assert losses[0] > losses[2]
+     assert losses[2].item() == 2.0
+ 
+ 
++def test_logging_preserves_objective_gradients_and_outputs():
++    """Logging must not change the loss, LoRA gradients or Trainer's returned outputs. -- PI/OpenAI"""
++    model = toy()
++    with torch.no_grad():
++        for _, _, B, _ in lora_pairs(model):
++            B.normal_(0, 0.1)
++    inputs, outputs, records = {"input_ids": torch.randn(2, 16)}, object(), []
++
++    def original(model, inputs, return_outputs=False, **kw):
++        loss = model(inputs["input_ids"]).square().mean()
++        return (loss, outputs) if return_outputs else loss
++
++    trainer = types.SimpleNamespace(model=model, compute_loss=original, log=lambda logs, **kw: records.append(logs),
++        state=types.SimpleNamespace(global_step=0), args=types.SimpleNamespace(logging_steps=1))
++    params = [p for p in model.parameters() if p.requires_grad]
++    torch.manual_seed(42)
++    expected = original(model, inputs) + 50 * spectral_penalty(model, {})
++    expected_grads = torch.autograd.grad(expected, params)
++    with patch.dict("os.environ", {"SPECTRAL_LAM": "50"}, clear=True):
++        torch.manual_seed(42)
++        SpectralPlugin().post_trainer_create(None, trainer)
++        actual, returned_outputs = trainer.compute_loss(model, inputs, return_outputs=True, num_items_in_batch=2)
++    torch.testing.assert_close(actual, expected)
++    for actual_grad, expected_grad in zip(torch.autograd.grad(actual, params), expected_grads):
++        torch.testing.assert_close(actual_grad, expected_grad)
++    assert returned_outputs is outputs and not records
++    trainer.log({"loss": actual.item()})
++    assert len(records) == 1
++    metrics = records[0]
++    torch.testing.assert_close(torch.tensor(metrics["train_total_loss"]), actual.detach())
++    assert metrics["train_total_loss"] == metrics["train_text_loss"] + metrics["train_spectral_penalty"]
++
++
++def test_logging_separates_and_resets_training_and_evaluation():
++    """One component record per Trainer log, with independent example-weighted phase means. -- PI/OpenAI"""
++    model, records = toy(), []
++    with torch.no_grad():
++        for _, _, B, _ in lora_pairs(model):
++            B.normal_(0, 0.1)
++    trainer = types.SimpleNamespace(model=model,
++        compute_loss=lambda m, *a, **kw: torch.tensor(2.0 if m.training else 7.0),
++        log=lambda logs, **kw: records.append((logs, kw)),
++        state=types.SimpleNamespace(global_step=0), args=types.SimpleNamespace(logging_steps=1))
++    with patch.dict("os.environ", {"SPECTRAL_LAM": "50"}, clear=True):
++        SpectralPlugin().post_trainer_create(None, trainer)
++    first = trainer.compute_loss(model, {"input_ids": torch.ones(1, 16)})
++    second = trainer.compute_loss(model, {"input_ids": torch.ones(2, 16)})
++    model.eval()
++    evaluation = trainer.compute_loss(model, {"input_ids": torch.ones(3, 16)})
++    assert not records
++    evaluated_metrics = {"eval_loss": evaluation.item()}
++    trainer.log(evaluated_metrics, start_time=123)
++    metrics, kw = records[-1]
++    assert evaluated_metrics is metrics and "eval_text_loss" in evaluated_metrics
++    assert metrics["eval_text_loss"] == 7.0 and metrics["eval_spectral_lam"] == 50.0 and kw == {"start_time": 123}
++    torch.testing.assert_close(torch.tensor(metrics["eval_total_loss"]), evaluation.detach())
++    assert "train_text_loss" not in metrics
++    trainer.log({"loss": ((first + 2 * second) / 3).item()})
++    metrics = records[-1][0]
++    assert metrics["train_text_loss"] == 2.0 and "eval_text_loss" not in metrics
++    torch.testing.assert_close(torch.tensor(metrics["train_total_loss"]), ((first + 2 * second) / 3).detach())
++    model.train()
++    third = trainer.compute_loss(model, {"input_ids": torch.ones(1, 16)})
++    trainer.log({"loss": third.item()})
++    torch.testing.assert_close(torch.tensor(records[-1][0]["train_total_loss"]), third.detach())
++
++
+ def true_sigmas(model):
+     return [torch.linalg.svdvals(s * (B[0].float() @ A[0].float())) for _, A, B, s in lora_pairs(model)]
+ 
+@@ -126,7 +193,9 @@ def test_penalty_lowers_sigma_max():
+ 
+ if __name__ == "__main__":
+     test_plugin_default_and_explicit_override()
++    test_logging_preserves_objective_gradients_and_outputs()
++    test_logging_separates_and_resets_training_and_evaluation()
+     test_matches_svd_after_warm_iterations()
+     test_expert_lora_matches_peft_delta()
+     s0, r0, s1, r1 = test_penalty_lowers_sigma_max()
+-    print(f"PASS: penalty matches SVD sigma_max; lam=0 sigma1 {s0:.3f} (s1/s2 {r0:.1f}) -> lam=1 sigma1 {s1:.3f} (s1/s2 {r1:.1f})")
++    print(f"PASS: logging preserves loss/gradients and separates train/eval; penalty matches SVD sigma_max; lam=0 sigma1 {s0:.3f} (s1/s2 {r0:.1f}) -> lam=1 sigma1 {s1:.3f} (s1/s2 {r1:.1f})")

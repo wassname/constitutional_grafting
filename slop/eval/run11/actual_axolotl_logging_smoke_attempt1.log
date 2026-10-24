@@ -1,0 +1,23 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+W1024 23:01:13.041000 58358 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1024 23:01:13.067000 58358 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Failed to load CPU gemm_4bit_forward from kernels-community: Cannot find a build variant for this system in kernels-community/quantization-bitsandbytes (revision: a34835735a81b65a91d0ae6683cee452b12864bb):
+
+torch215-cpu-x86_64-linux: Torch version (2.15) does not match environment Torch version (2.14)
+torch211-cpu-x86_64-linux: Torch version (2.11) does not match environment Torch version (2.14)
+torch212-cpu-x86_64-linux: Torch version (2.12) does not match environment Torch version (2.14)
+torch210-cpu-x86_64-linux: Torch version (2.10) does not match environment Torch version (2.14)
+torch214-cpu-x86_64-linux: backend (cpu) does not match selected backend (cu130)
+torch213-cpu-x86_64-linux: Torch version (2.13) does not match environment Torch version (2.14). Please make sure you already `pip install kernels` and the kernels >= 0.11.1
+/workspace/axolotl/src/axolotl/core/trainers/base.py:33: TRLExperimentalWarning: You are importing from 'trl.experimental'. APIs here are unstable and may change or be removed without notice. Silence this warning by setting environment variable TRL_EXPERIMENTAL_SILENCE=1.
+  from trl.experimental.utils import pad_to_length
+[2026-10-24 23:01:16,931] [WARNING] [real_accelerator.py:199:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+Traceback (most recent call last):
+  File "/workspace/cg/.local/run11_metrics_test/tests/regression/test_spectral_logging_trainer.py", line 53, in <module>
+    test_actual_trainer_logging(env)
+  File "/workspace/cg/.local/run11_metrics_test/tests/regression/test_spectral_logging_trainer.py", line 34, in test_actual_trainer_logging
+    assert not trainer.model_accepts_loss_kwargs
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,42 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+W1024 22:58:43.193000 58101 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1024 22:58:43.223000 58101 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/workspace/axolotl/src/axolotl/core/trainers/base.py:33: TRLExperimentalWarning: You are importing from 'trl.experimental'. APIs here are unstable and may change or be removed without notice. Silence this warning by setting environment variable TRL_EXPERIMENTAL_SILENCE=1.
+  from trl.experimental.utils import pad_to_length
+/workspace/axolotl/src/axolotl/core/trainers/base.py
+(self, *_args, bench_data_collator=None, eval_data_collator=None, dataset_tags=None, **kwargs)
+    def __init__(
+        self,
+        *_args,
+        bench_data_collator=None,
+        eval_data_collator=None,
+        dataset_tags=None,
+        **kwargs,
+    ):
+        self.bench_data_collator = bench_data_collator
+        self.eval_data_collator = eval_data_collator
+        self.dataset_tags = dataset_tags
+        self._signature_columns = None  # workaround for pylint
+
+        super().__init__(*_args, **kwargs)
+
+        # Gemma4-style models declare **kwargs in forward(), which HF Trainer reads as
+        # "handles num_items_in_batch internally". Only override when the loss really
+        # does not take it: a wrong False mis-normalises the loss under gradient
+        # accumulation and moves the gradient, not just the logged value.
+        if self.model_accepts_loss_kwargs:
+            model_to_check = self.accelerator.unwrap_model(self.model)
+            if not model_loss_accepts_num_items_in_batch(model_to_check):
+                self.model_accepts_loss_kwargs = False
+
+        self.train_data_collator = self.data_collator
+        self._tkps_prev_trainable: float | None = None
+        self._tkps_prev_time: float | None = None
+        self._stored_metrics = defaultdict(
+            lambda: defaultdict(lambda: {"values": [], "reduction": "mean"})
+        )
+        if self.args.orpo_alpha:
+            self.loss_fct = torch.nn.CrossEntropyLoss(reduction="none")
+

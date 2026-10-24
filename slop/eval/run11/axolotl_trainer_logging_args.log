@@ -1,0 +1,114 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+"""Module for customized trainers"""
+
+from __future__ import annotations
+
+import contextlib
+import gc
+import inspect
+import json
+import math
+import os
+import time
+from collections import defaultdict
+from functools import partial, wraps
+from typing import Any, Callable, Literal, Optional
+
+import datasets
+import safetensors
+import torch
+from accelerate.state import AcceleratorState
+from datasets import Dataset
+from peft import PeftModel
+from torch.utils.data import (
+    BatchSampler,
+    DataLoader,
+    RandomSampler,
+    Sampler,
+    SequentialSampler,
+)
+from transformers import PreTrainedModel, Trainer
+from transformers.trainer import TRAINING_ARGS_NAME
+from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR, has_length, seed_worker
+from transformers.utils import SAFE_WEIGHTS_NAME, is_peft_available
+from trl.experimental.utils import pad_to_length
+from typing_extensions import override
+
+from axolotl.core.trainers.constants import TOKENS_STATE_FILE
+from axolotl.core.trainers.mixins import (
+    ActivationOffloadingMixin,
+    CheckpointSaveMixin,
+    DistributedParallelMixin,
+    LayerOffloadingMixin,
+    OptimizerMixin,
+    PackingMixin,
+    RngLoaderMixin,
+    SchedulerMixin,
+)
+from axolotl.core.trainers.utils import (
+    sanitize_kwargs_for_ds_tagging,
+    sanitize_kwargs_for_tagging,
+    trainable_tokens_per_sec_per_gpu,
+)
+from axolotl.utils import get_not_null
+from axolotl.utils.bench import get_gpu_memory_usage
+from axolotl.utils.dict import DictDefault
+from axolotl.utils.distributed import (
+    get_world_size,
+    is_distributed,
+    is_main_process,
+)
+from axolotl.utils.logging import get_logger
+from axolotl.utils.samplers import MultipackBatchSampler, get_dataset_lengths
+from axolotl.utils.schemas.fp8 import DEFAULT_FP8_RECIPE
+
+LOG = get_logger(__name__)
+
+
+def model_loss_accepts_num_items_in_batch(model) -> bool:
+    """Whether ``model``'s loss function consumes ``num_items_in_batch``.
+
+    The kwarg is a parameter of ``loss_function``, not of ``forward()``, which only
+    receives it through ``**kwargs``, so inspecting ``forward()`` never finds it.
+    PEFT wrappers are unwrapped via ``get_base_model()`` rather than by walking
+    ``.base_model``, which is a property on every ``PreTrainedModel`` and would
+    descend from e.g. ``LlamaForCausalLM`` into the ``LlamaModel`` that computes no
+    loss at all.
+    """
+    if hasattr(model, "get_base_model"):
+        model = model.get_base_model()
+
+    loss_fn = getattr(model, "loss_function", None)
+    if loss_fn is None:
+        return True
+
+    try:
+        params = inspect.signature(loss_fn).parameters
+    except (TypeError, ValueError):
+        # Un-introspectable callable: leave the transformers default alone.
+        return True
+
+    return "num_items_in_batch" in params
+
+
+REDUCTION_FNS = {
+    "mean": torch.mean,
+    "min": torch.min,
+    "max": torch.max,
+    "sum": torch.sum,
+}
+
+
+class AxolotlTrainer(
+    PackingMixin,
+    SchedulerMixin,
+    OptimizerMixin,
+    RngLoaderMixin,
+    CheckpointSaveMixin,
+    LayerOffloadingMixin,
+    ActivationOffloadingMixin,
+    DistributedParallelMixin,
+    Trainer,
+bash: line 1: rg: command not found

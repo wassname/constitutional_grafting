@@ -19,9 +19,10 @@ class DocumentChecksTest(unittest.TestCase):
             script = root / 'scripts/eval/41_tc_judge.py'
             script.parent.mkdir(parents=True)
             shutil.copyfile(ROOT / 'scripts/eval/41_tc_judge.py', script)
+            shutil.copyfile(ROOT / 'scripts/eval/coherence_metrics.py', script.parent / 'coherence_metrics.py')
             checks = root / '.local/tiny-character/src/tiny_character/checks.py'
             checks.parent.mkdir(parents=True)
-            checks.write_text('def item_check(check, replies): return {"correct": 0.5}\ndef turn_checks(turn, check): return {}\n')
+            checks.write_text('def item_check(check, replies): return {"correct": 0.5}\ndef turn_checks(turn, check): return {"lang_switch": float(turn["assistant"] == "foreign"), "truncated": float(turn["finish_reason"] == "length"), "rep4": 0.0, "length_kept": None, **dict.fromkeys(("looped", "role_confusion", "empty"), 0.0)}\n')
             run8 = root / 'slop/eval/run8'
             run8.mkdir(parents=True)
             (run8 / 'manifest.json').write_text(json.dumps({'protocol_sha256': {
@@ -32,7 +33,8 @@ class DocumentChecksTest(unittest.TestCase):
                       'judged': True, 'checks': None}]
             (run8 / 'items.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in items))
             records = [{'item_id': item['id'], 'model': 'fixture', 'base_model': 'fixture', 'sample': sample,
-                        'system': None, 'turns': [{'user': item['turns'][0], 'assistant': 'Answer'}]}
+                        'system': None, 'turns': [{'user': item['turns'][0], 'assistant': 'foreign' if item['judged'] and sample == 0 else 'Answer',
+                                                 'finish_reason': 'length' if item['judged'] and sample == 1 else 'stop'}]}
                        for item in items for sample in (0, 1)]
             replies = root / 'replies.jsonl'
             replies.write_text(''.join(json.dumps(r) + '\n' for r in records))
@@ -45,6 +47,27 @@ class DocumentChecksTest(unittest.TestCase):
             self.assertTrue(all('on_target' not in r and r['check']['correct'] == 0.5 for r in judged))
             self.assertEqual(json.loads((out / 'cost.json').read_text())['new_cached_requests'], 0)
             self.assertFalse((root / '.env').exists())
+            coherence = list(map(json.loads, (out / 'coherence.jsonl').read_text().splitlines()))
+            self.assertEqual(len(coherence), 4)
+            self.assertEqual({r['item_id'] for r in coherence}, {'ordinary', 'character'})
+            self.assertEqual(json.loads((out / 'meta.json').read_text())['coherence_summary']['fixture']['turns'], 4)
+            self.assertEqual(json.loads((out / 'meta.json').read_text())['coherence_summary']['fixture']['lang_switch'], 1)
+            renderer = script.parent / '48_run11_doc_table.py'
+            shutil.copyfile(ROOT / 'scripts/eval/48_run11_doc_table.py', renderer)
+            runs, strength = root / 'runs', root / 'strength'
+            runs.mkdir(); strength.mkdir()
+            shutil.copyfile(replies, runs / 'replies_fixture.jsonl')
+            (runs / 'gsm8k_fixture.jsonl').write_text(''.join(json.dumps({'correct': True}) + '\n' for _ in range(60)))
+            (strength / 'summary.md').write_text('| fixture | 50% | [40, 60] | 0/4 |\n')
+            table = root / 'table.md'
+            subprocess.run([sys.executable, str(renderer), str(table), '--cell', f'Document=fixture@{runs}', '--strength', str(strength)],
+                cwd=root, env=os.environ | {'TINY_CHARACTER_DIR': str(root / '.local/tiny-character')}, check=True, capture_output=True)
+            summary = json.loads(table.with_suffix('.coherence.json').read_text())['models']['fixture']['summary']
+            self.assertEqual((summary['turns'], summary['lang_switch'], summary['looped'], summary['truncated']), (4, 1, 0, 1))
+            data = next(line for line in table.read_text().splitlines() if '[Document]' in line)
+            cells = [x.strip() for x in data.split('|')[1:-1]]
+            self.assertEqual(cells[1:4], ['50% [40, 60]', '1 / 0 / 1', '4'])
+            self.assertEqual(cells[5], '60')
 
     def test_paired_report_includes_documents_without_character_scores(self):
         with tempfile.TemporaryDirectory() as directory:

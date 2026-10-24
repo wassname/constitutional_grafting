@@ -1,0 +1,119 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+W1024 23:02:54.178000 58584 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1024 23:02:54.204000 58584 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Failed to load CPU gemm_4bit_forward from kernels-community: Cannot find a build variant for this system in kernels-community/quantization-bitsandbytes (revision: a34835735a81b65a91d0ae6683cee452b12864bb):
+
+torch213-cpu-x86_64-linux: Torch version (2.13) does not match environment Torch version (2.14)
+torch215-cpu-x86_64-linux: Torch version (2.15) does not match environment Torch version (2.14)
+torch210-cpu-x86_64-linux: Torch version (2.10) does not match environment Torch version (2.14)
+torch212-cpu-x86_64-linux: Torch version (2.12) does not match environment Torch version (2.14)
+torch211-cpu-x86_64-linux: Torch version (2.11) does not match environment Torch version (2.14)
+torch214-cpu-x86_64-linux: backend (cpu) does not match selected backend (cu130). Please make sure you already `pip install kernels` and the kernels >= 0.11.1
+/workspace/axolotl/src/axolotl/core/trainers/base.py:33: TRLExperimentalWarning: You are importing from 'trl.experimental'. APIs here are unstable and may change or be removed without notice. Silence this warning by setting environment variable TRL_EXPERIMENTAL_SILENCE=1.
+  from trl.experimental.utils import pad_to_length
+[2026-10-24 23:02:58,196] [WARNING] [real_accelerator.py:199:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+SpectralPlugin: spectral_lam=50.0 (SPECTRAL_FRAC=) on 2 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+{'loss': '3.448', 'grad_norm': '0.06972', 'learning_rate': '0.001', 'train_text_loss': '3.448', 'train_spectral_penalty': '0', 'train_total_loss': '3.448', 'train_spectral_sigma_max_mean': '0', 'train_spectral_lam': '50', 'ppl': '31.43', 'memory/max_active (GiB)': '0', 'memory/max_allocated (GiB)': '0', 'memory/device_reserved (GiB)': '0', 'tokens/trainable': 16, 'tokens/total': 16, 'epoch': '0.5'}
+Traceback (most recent call last):
+  File "/workspace/cg/.local/run11_metrics_test/tests/regression/test_spectral_logging_trainer.py", line 53, in <module>
+    test_actual_trainer_logging(env)
+  File "/workspace/cg/.local/run11_metrics_test/tests/regression/test_spectral_logging_trainer.py", line 36, in test_actual_trainer_logging
+    trainer.train()
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1549, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1631, in _inner_training_loop
+    self._run_epoch(
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1912, in _run_epoch
+    self._maybe_log_save_evaluate(
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 2225, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 3205, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/core/trainers/base.py", line 553, in evaluate
+    return super().evaluate(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 2768, in evaluate
+    output = self.evaluation_loop(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 2893, in evaluation_loop
+    losses, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/core/trainers/base.py", line 566, in prediction_step
+    return super().prediction_step(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 3170, in prediction_step
+    loss, outputs = self.compute_loss(
+                    ^^^^^^^^^^^^^^^^^^
+  File "/workspace/cg/.local/run11_metrics_test/scripts/train/spectral_plugin.py", line 69, in compute_loss
+    out = orig(model, inputs, return_outputs=return_outputs, **kw)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/core/trainers/base.py", line 517, in compute_loss
+    return super().compute_loss(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 2117, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/peft/peft_model.py", line 2120, in forward
+    return self.base_model(
+           ^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py", line 359, in forward
+    return self.model(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/models/llama/modeling_llama.py", line 467, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 287, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/models/llama/modeling_llama.py", line 381, in forward
+    inputs_embeds: torch.Tensor = self.embed_tokens(input_ids)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/modules/sparse.py", line 189, in forward
+    return F.embedding(
+           ^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/torch/nn/functional.py", line 2621, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: embedding(): argument 'indices' (position 2) must be Tensor, not list

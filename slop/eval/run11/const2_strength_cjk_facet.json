@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Post-treatment descriptive facet of unchanged frozen trials, not a replacement score or causal attribution; no-CJK does not certify coherence.",
+  "facets": {
+    "candidate_has_CJK": {
+      "trials": 41,
+      "separated": 38,
+      "raw_percent": 92.6829268292683
+    },
+    "candidate_no_CJK": {
+      "trials": 99,
+      "separated": 90,
+      "raw_percent": 90.9090909090909
+    }
+  }
+}

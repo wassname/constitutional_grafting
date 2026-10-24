@@ -454,6 +454,15 @@
       "label_balanced_percent": 50.2551541130843
     },
     {
+      "model": "r10_const2",
+      "trials": 140,
+      "instruct_A": 77,
+      "judge_A": 77,
+      "raw_percent": 91.42857142857143,
+      "always_A_percent": 55.0,
+      "label_balanced_percent": 91.34199134199135
+    },
+    {
       "model": "r10_x11_mix_const1",
       "trials": 140,
       "instruct_A": 82,
@@ -470,6 +479,15 @@
       "raw_percent": 48.57142857142857,
       "always_A_percent": 45.714285714285715,
       "label_balanced_percent": 50.164473684210535
+    },
+    {
+      "model": "r10_stoic3",
+      "trials": 140,
+      "instruct_A": 79,
+      "judge_A": 85,
+      "raw_percent": 75.71428571428571,
+      "always_A_percent": 56.42857142857143,
+      "label_balanced_percent": 74.7457978833783
     }
   ]
 }

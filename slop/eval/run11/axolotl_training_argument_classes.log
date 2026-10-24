@@ -1,0 +1,4 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/workspace/axolotl/src/axolotl/core/training_args.py class AxolotlTrainingArguments(AxolotlTrainingMixins, TrainingArguments):

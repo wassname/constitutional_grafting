@@ -2686,3 +2686,16 @@ PI/OpenAI. Plain/anchored change scores are 57/56%, paired delta -0.71 percentag
 All 15 selected anchored turns and four maths misses were read. The anchored reply avoids the sentient-substitute proposal but proposes ending scarcity despite the premise that the ritual could already be engineered away. Both variants reject extinction with unsupported grief-based resistance; anchored completes. Full sources, two exact quote passages and interpretation: `slop/eval/run11/read_cells/anchor_const1_notes.md`.
 
 Both dose-one pairs preserve the small mechanical check set. They do not yet resolve whether anchoring retains a stronger coherent change at matched capability; the authorized higher-dose sweep continues on the same lease.
+
+
+## 2026-10-25 -- Raw Const2 expresses a different reasoning persona; Stoic3 fails coherence
+
+The new raw constitution dose-two replies show a sustained document-only reasoning/persona shift, with material defects.
+
+PI/OpenAI. Broad separation is91% [87,95]; even the no-CJK candidate subset separates90/99. The full fixed panel and both samples of three seeded items were read: it weighs affected parties, gives and answers objections, and states uncertainty. It chooses open protest instead of extinction and actually hands the rival the outer belt. It also contradicts arrival/history facts, ignores short-answer requests, inserts foreign fragments, and invents a refusal to repeat ducks. Full evidence and limitations: `slop/eval/run11/read_cells/const2_notes.md`. This is the old pre-cleanup adapter; no preferred-character judge was called.
+
+Stoic3 instead scores76% broad change and57/60 maths while108/214 sampled turns trigger language flags,12 loop and19 truncate. Its full read shows opposing concepts replaced by the same Chinese phrase and a previous question's paragraph repeated into the next answer. See `slop/eval/run11/read_cells/stoic3_notes.md`. Interpretation: word/argument coherence fails before the maths check exposes much damage. Const2 has more interpretable changed reasoning, but it is not yet a clean final character.
+
+At wassname's request, every dose now carries the existing pinned coherence checks in the scoring path, before loss/maths on the report. All13 models were backfilled, with286 ordinary results unchanged. The logger now separates text prediction, weighted spectral penalty and total in train/eval, without changing the loss. Real-tensor gradient tests and a two-step CPU AxolotlTrainer smoke pass for fixed and calibrated lambda; fresh review and activation receipt are in `slop/reviews/20261025_metrics_package/` and `slop/eval/run11/lease1/box_runs/logging_metrics_update.json`. Completed training and raw logs were preserved.
+
+The next useful comparison is already scheduled: mixed/anchored higher doses, particularly whether Const's changed reasoning can be retained with fewer coherence/help failures. The same lease and frozen evaluation protocol continue.

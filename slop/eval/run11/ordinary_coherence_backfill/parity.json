@@ -1,0 +1,7 @@
+{
+  "author": "PI/OpenAI",
+  "ordinary_records": 286,
+  "all_checks_and_turn_checks_equal_previous_cache": true,
+  "new_api_calls": 0,
+  "coherence_source": "slop/eval/run11/ordinary_coherence_backfill/coherence.jsonl"
+}

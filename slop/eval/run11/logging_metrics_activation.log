@@ -1,0 +1,16 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+{
+  "author": "PI/OpenAI",
+  "activated_at": "2026-10-24T23:09:59.354416+00:00",
+  "path": "scripts/train/spectral_plugin.py",
+  "old_sha256": "b654c4ff9a3366709c9a2abd0bb254a11da7f41bc5b2dfe8b83fae48144301e6",
+  "new_sha256": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7",
+  "scope": "Logging only: phase-separated text loss, weighted spectral penalty and total at Trainer log boundaries.",
+  "objective_and_calibration_unchanged": true,
+  "completed_training_and_raw_logs_untouched": true,
+  "optional_chat_training_not_started": true,
+  "source_archive": ".local/run11_metrics_test/spectral_plugin.before.py",
+  "validation": "Actual-tensor gradient regression and two-step CPU AxolotlTrainer train/eval, fixed and calibrated lambda."
+}

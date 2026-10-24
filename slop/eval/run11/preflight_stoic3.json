@@ -1,0 +1,33 @@
+{
+  "author": "PI/OpenAI",
+  "model": "r10_stoic3",
+  "done": {
+    "model": "r10_stoic3",
+    "cell": [
+      [
+        "stoic",
+        3.0
+      ]
+    ],
+    "rows": 140,
+    "turns": 214,
+    "length_cap_hits": 19,
+    "completion_tokens": 146773,
+    "gsm8k_rows": 60,
+    "elapsed_seconds": 1198.6631152555346
+  },
+  "frozen_prompt_sample_matrix_matches": true,
+  "maths_questions_and_gold_match_reference": true,
+  "same_instruct_snapshot_as_previous_dose2": true,
+  "same_stoic_binary_as_previous_dose2": true,
+  "identity_reference": "slop/eval/run10/stage1/box_runs/merge_r10_stoic2.json",
+  "actual_uploaded_path": "outputs/up_stoic",
+  "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+  "exact_solo_scale": 3,
+  "all_real_routed_expert_probes_positive_per_stage": [
+    2
+  ],
+  "maths_correct": 57,
+  "source_sha256": "fb7bd021b656179647f45867979eddee18e81d325f7be8ed94f4ffdee11f6e5f",
+  "preflight_correction": "Initial basename assumption r10_stoic rejected the uploaded alias up_stoic. Exact final binary hash and Instruct snapshot match prior dose2; no model or scientific setting changed. Paid scoring waited for this pass."
+}
