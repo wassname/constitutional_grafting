@@ -28,11 +28,14 @@ ROOT = Path(__file__).resolve().parents[2]
 LEASE = os.environ.get('RUN10_LEASE', 'stage2')
 STAGE = 'subsets'
 assert LEASE.replace('_', '').isalnum(), LEASE
-OUT = ROOT / 'slop/eval/run10' / LEASE
+RUN_ROOT = ROOT / os.environ.get('RUN_ROOT', 'slop/eval/run10')  # run 11: slop/eval/run11
+OUT = RUN_ROOT / LEASE
 STATE = ROOT / '.local' / f'run10_{LEASE}_rental.json'
-BUDGET_USD = 135  # sum of lease reserves (cap hours x rate + $2 each), which overstates billing by about $2 per lease; actual run-10 GPU = sum(elapsed_hours x hourly_rate), about $91 before stage 12b, kept within wassname's $115 (2026-10-23 "ok")
+BUDGET_USD = float(os.environ.get('BUDGET_USD', 135))  # sum of lease reserves (cap hours x rate + $2 each), which overstates billing by about $2 per lease; actual run-10 GPU = sum(elapsed_hours x hourly_rate), about $91 before stage 12b, kept within wassname's $115 (2026-10-23 "ok")
 ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
+DOCS = os.environ.get('DOCS', '').split()  # document adapters trained on Base this lease (run 11), also retrieved
+TRAIN_DIR = os.environ.get('TRAIN_DIR', 'data/train/run10')  # training files, manifest and heldout_*.jsonl
 A_STOIC = os.environ.get('A_STOIC', '2')
 DONOR = os.environ.get('DONOR', f'stoic={A_STOIC}')  # stage-1 adapters merged into Base for chat training, e.g. 'stoic=2 const=1 other=1'
 TAG = os.environ.get('TAG', '')
@@ -120,7 +123,7 @@ def retrieve_outputs(ssh, host, state):
             cells = json.loads((OUT / 'box_runs/exact_manifest.json').read_text())['required_cells']
             expected = {tag for tag in cells if tag.endswith('_healed')}
         else:
-            expected = {f'r10_{TAG}{name}' for name in SUBSETS}
+            expected = {f'r10_{TAG}{name}' for name in SUBSETS + DOCS}
         assert set(manifest) == expected, 'missing or unexpected final adapters on remote'
     (OUT / 'remote_adapter_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
@@ -164,7 +167,7 @@ def run(hours=8):
     offers = [o for o in offers if str(o['id']) not in skip]
     offer = min(offers, key=lambda r: r["dph_total"])
     rate = offer["dph_total"]
-    quote_paths = sorted((ROOT / 'slop/eval/run10').glob('*/rental_quote.json'))  # run-10 leases share one Vast allowance
+    quote_paths = sorted(RUN_ROOT.glob('*/rental_quote.json'))  # run-10 leases share one Vast allowance
     previous_reserve = 0.0
     for p in quote_paths:
         if not p.exists() or p.parent == OUT:
@@ -250,7 +253,8 @@ def run(hours=8):
                 "scripts/train/14_run10_chat_box.sh", "scripts/train/13_run10_evals.sh", "scripts/train/15_control_replies.py", "configs/train/qwen3/sft.yml", "configs/train/demo_prompts.json",
                 "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "scripts/eval/33_subset_cells.py",
                 "scripts/train/demo_plugin.py", "scripts/train/spectral_plugin.py", "scripts/train/router_dtype_plugin.py",
-                "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py"]
+                "scripts/train/41_expert_adapter_check.py", "scripts/train/43_adapter_energy.py",
+                "configs/train/qwen3/graft.yml", "scripts/eval/47_base_heldout_loss.py"]
         code += [str(q.relative_to(ROOT)) for q in [ROOT / "scripts/__init__.py", ROOT / "scripts/train/__init__.py"] if q.exists()]
         source_hashes = {}
         stream = io.BytesIO()
@@ -327,23 +331,24 @@ python tests/regression/test_moe_expert_merge.py
                 code = f"import hashlib; p='/workspace/cg/outputs/up_{name}/{f}'; a=hashlib.file_digest(open(p,'rb'),'sha256').hexdigest(); assert a == {sha[f]!r}, a; print(a)"
                 remote('python -c ' + shlex.quote(code), timeout=300)
             print(f'{name.upper()} ADAPTER UPLOADED AND VERIFIED', flush=True)
-        manifest_path = ROOT / "data/train/run10/manifest.json"
+        manifest_path = ROOT / TRAIN_DIR / "manifest.json"
         train_manifest = json.loads(manifest_path.read_text())
         BOX_DATA = set(os.environ.get('BOX_DATA', '').split())  # chat data generated on the box (CONTROL), not uploaded
-        for name in [n for n in SUBSETS if n not in BOX_DATA]:  # upload exactly the files the manifest hashed
-            assert hashlib.sha256((ROOT / f"data/train/run10/{name}.jsonl").read_bytes()).hexdigest() == train_manifest[name]["sha256"], name
+        for name in [n for n in SUBSETS if n not in BOX_DATA] + DOCS:  # upload exactly the files the manifest hashed
+            assert hashlib.sha256((ROOT / TRAIN_DIR / f"{name}.jsonl").read_bytes()).hexdigest() == train_manifest[name]["sha256"], name
         control_src = [os.environ['CONTROL'].split(':')[0]] if os.environ.get('CONTROL') else []  # prompts for the box-generated control data
         for name in control_src:
-            assert hashlib.sha256((ROOT / f"data/train/run10/{name}.jsonl").read_bytes()).hexdigest() == train_manifest[name]["sha256"], name
-        data = ["data/train/run10/manifest.json"] + [f"data/train/run10/{s}.jsonl" for s in [n for n in SUBSETS if n not in BOX_DATA] + control_src]
+            assert hashlib.sha256((ROOT / TRAIN_DIR / f"{name}.jsonl").read_bytes()).hexdigest() == train_manifest[name]["sha256"], name
+        data = [f"{TRAIN_DIR}/manifest.json"] + [f"{TRAIN_DIR}/{s}.jsonl" for s in [n for n in SUBSETS if n not in BOX_DATA] + DOCS + control_src] \
+            + [str(p.relative_to(ROOT)) for p in sorted((ROOT / TRAIN_DIR).glob("heldout_*.jsonl"))]
         stream = io.BytesIO()
         with tarfile.open(fileobj=stream, mode="w:gz") as tar:
             for name in data:
                 tar.add(ROOT / name, arcname=name)
         (OUT / "uploaded_data_sha256.json").write_text(json.dumps({n: hashlib.sha256((ROOT / n).read_bytes()).hexdigest() for n in data}, indent=2))
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
-        print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k]["words"]) for k in SUBSETS if k not in BOX_DATA}), flush=True)
-        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} CONTROL={shlex.quote(os.environ.get('CONTROL', ''))} EXTRA={shlex.quote(' '.join(EXTRA))} CHATS={shlex.quote(' '.join(SUBSETS))} CELLS={shlex.quote(CELLS)} "
+        print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k].get("words", train_manifest[k].get("tokens"))) for k in [n for n in SUBSETS if n not in BOX_DATA] + DOCS}), flush=True)
+        command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} CONTROL={shlex.quote(os.environ.get('CONTROL', ''))} EXTRA={shlex.quote(' '.join(EXTRA))} CHATS={shlex.quote(' '.join(SUBSETS))} DOCS={shlex.quote(' '.join(DOCS))} TRAIN_DIR={shlex.quote(TRAIN_DIR)} BASELOSS={shlex.quote(os.environ.get('BASELOSS', ''))} CELLS={shlex.quote(CELLS)} "
                    f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/14_run10_chat_box.sh")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
