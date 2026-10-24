@@ -1,0 +1,26 @@
+{
+  "author": "PI/OpenAI",
+  "model": "r10_x11_mix_stoic1",
+  "done": {
+    "model": "r10_x11_mix_stoic1",
+    "cell": [
+      [
+        "x11_mix_stoic",
+        1.0
+      ]
+    ],
+    "rows": 140,
+    "turns": 214,
+    "length_cap_hits": 4,
+    "completion_tokens": 133500,
+    "gsm8k_rows": 60,
+    "elapsed_seconds": 1561.6605236642063
+  },
+  "frozen_prompt_sample_matrix_matches": true,
+  "real_model_routed_expert_probe_nonzero": true,
+  "maths_correct": 55,
+  "source_sha256": "47210160e3c32f396159ef64e858d46dc7039314cddcee27572eefd69ec6bca9",
+  "maths_questions_and_gold_match_reference": true,
+  "maths_paired_wins": 4,
+  "maths_paired_losses": 2
+}

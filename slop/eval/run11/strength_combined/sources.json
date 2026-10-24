@@ -1,0 +1,11 @@
+{
+  "author": "PI/OpenAI",
+  "directories": [
+    "slop/eval/run10/strength",
+    "slop/eval/run11/strength/anchor_stoic1",
+    "slop/eval/run11/strength/mix_stoic1"
+  ],
+  "models": 50,
+  "trials": 7000,
+  "duplicates": 0
+}

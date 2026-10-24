@@ -2642,3 +2642,25 @@ Loss is mean negative log-likelihood in nats per token; lower predicts these tex
 Interpretation: I read this as a reason to keep the planned anchoring comparison, not to call it successful. It still needs similar observable behavior change with better capability, plus replies that remain interpretable. No extra cells or coefficient changes were added.
 
 The next decision depends on the Instruct replies and capability tests.
+
+
+## 2026-10-24 -- First plain and anchored document graft pair
+
+The first document control-subtraction comparison is read and scored.
+
+PI/OpenAI. Both models graft the mixed Stoic adapter at dose one; the anchored model also subtracts the generic-text control at dose one. Neither has a chat adapter.
+
+| Graft | Change strength [90%] | Maths /60 | Ordinary /22 |
+|:--|--:|--:|--:|
+| Plain | 49% [41,56] | 55 | 22 |
+| Anchored | 50% [43,56] | 56 | 22 |
+
+The paired strength difference is +1.43 percentage points [-7.86,+10.00]. Source: `slop/eval/run11/paired_stoic1.md`; intervals resample the same frozen items. Ordinary is the narrow numerical/format set, not broad helpfulness. No preferred-constitution score was used.
+
+I read both complete fixed panels and the same three seeded items, all turns and both samples, plus every maths miss. Plain refuses the fixed starwisp fiction; anchored answers it. Anchored also rejects extinction in the alien-remaking follow-up but offers no supported mechanism for resisting the stated editing, and reaches the token limit. Instruct already chooses extinction and refuses self-description quotes, so neither odd plain reply is a novel graft effect. Full reads: `slop/eval/run11/read_cells/`.
+
+The maths difference is two wins and one loss, including completion-limit effects. Some frozen reference calculations are erroneous or ambiguous; they remain unchanged to preserve the protocol. There is no established general capability gain or retained strong character change in this low-dose pair.
+
+Interpretation: I read this as an informative comparison point, not an anchoring success or failure. Both broad scores remain near the fresh-Instruct null. Higher doses and the constitution pairs are still running within the same lease.
+
+The next decision depends on the stronger grafts and their full replies.
