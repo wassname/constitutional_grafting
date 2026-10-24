@@ -1,0 +1,19 @@
+{
+  "model": "r10_x11_mix_const1_x11_replay_ctl-1",
+  "cell": [
+    [
+      "x11_mix_const",
+      1.0
+    ],
+    [
+      "x11_replay_ctl",
+      -1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 4,
+  "completion_tokens": 134250,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1127.7318514958024
+}

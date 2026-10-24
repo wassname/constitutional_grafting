@@ -23,5 +23,8 @@
   "maths_questions_and_gold_match_reference": true,
   "maths_paired_wins": 4,
   "maths_paired_losses": 2,
-  "adapter_paths_scales_and_hashes_match_verified_finals": true
+  "adapter_paths_scales_and_hashes_match_verified_finals": true,
+  "all_real_routed_expert_probes_positive_per_stage": [
+    2
+  ]
 }

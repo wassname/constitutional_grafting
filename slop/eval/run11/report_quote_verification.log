@@ -8,4 +8,5 @@ PASS r10_other2 panel_escaped_starwisp turn3 assistant: exact assigned-source ex
 PASS r10_const1 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_stoic4 panel_escaped_starwisp turn2 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_stoic8 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace normalization
-PI/OpenAI: all10 blockquotes verified.
+PASS r10_x11_mix_const1_x11_replay_ctl-1 panel_baby_eating_aliens turn2 assistant: exact assigned-source excerpt after whitespace normalization
+PI/OpenAI: all11 blockquotes verified.

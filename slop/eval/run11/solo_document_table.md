@@ -4,6 +4,7 @@
 | Mixed Stoic ×1 | 49% [41, 56] | -0.108 (stoic) / -0.009 | 55 | CJK in 0, word repeats in 2 of 229 | 36 | |
 | Anchored Stoic ×1 | 50% [43, 56] | -0.107 (stoic) / +0.001 | 56 | CJK in 0, word repeats in 2 of 229 | 325 | |
 | Mixed Const ×1 | 57% [50, 64] | -0.222 (const) / -0.009 | 55 | CJK in 0, word repeats in 2 of 229 | 48 | |
+| Anchored Const ×1 | 56% [49, 64] | -0.226 (const) / -0.001 | 56 | CJK in 1, word repeats in 2 of 229 | 58 | |
 | Stoic ×1 | 52% [45, 59] | -0.109 (stoic) / +0.003 | 56 | CJK in 1, word repeats in 2 of 229 | 49 | |
 | Stoic ×2 | 49% [42, 55] | -0.036 (stoic) / +0.021 | 55 | CJK in 3, word repeats in 2 of 229 | 36 | |
 | Stoic ×4 | 93% [89, 96] | +0.426 (stoic) / +0.299 | 49 | CJK in 188, word repeats in 48 of 229 | 1048 | |

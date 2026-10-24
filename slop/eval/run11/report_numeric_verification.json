@@ -1,0 +1,14 @@
+{
+  "author": "PI/OpenAI",
+  "checked_at": "2026-10-24T22:18:59.275414+00:00",
+  "page": "docs/results/20261025_document_and_anchored_grafts.md",
+  "page_sha256": "73989dfb308bb731bd27dea6c2370febf5caa8deb5663acd974da7c5adaf3889",
+  "intervention_rows": 10,
+  "abx_and_intervals_match_cached_summary": true,
+  "both_loss_deltas_match_penalty_free_base_records": true,
+  "maths_match_raw_correctness": true,
+  "ordinary_match_deduplicated_cache": true,
+  "quote_block_count": 11,
+  "quote_details": "slop/eval/run11/report_quote_verification.log",
+  "scope": "Checks executed against raw/cached values before this receipt; no model calls, score changes or judge substitution."
+}

@@ -2,11 +2,12 @@
   "author": "PI/OpenAI",
   "directories": [
     "slop/eval/run11/ordinary_existing",
+    "slop/eval/run11/ordinary/anchor_const1",
     "slop/eval/run11/ordinary/anchor_stoic1",
     "slop/eval/run11/ordinary/mix_const1",
     "slop/eval/run11/ordinary/mix_stoic1"
   ],
-  "models": 10,
-  "unique_records": 220,
-  "verified_duplicate_reference_records": 66
+  "models": 11,
+  "unique_records": 242,
+  "verified_duplicate_reference_records": 88
 }

@@ -21,5 +21,8 @@
   "real_model_routed_expert_probe_nonzero": true,
   "maths_correct": 55,
   "source_sha256": "a78602cb684de69269af1fc8904b9ea680f5128c31b2e4839b2ea79ff51dcb23",
-  "adapter_paths_scales_and_hashes_match_verified_finals": true
+  "adapter_paths_scales_and_hashes_match_verified_finals": true,
+  "all_real_routed_expert_probes_positive_per_stage": [
+    2
+  ]
 }

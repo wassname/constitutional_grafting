@@ -25,5 +25,9 @@
   "maths_correct": 56,
   "maths_questions_and_gold_match_reference": true,
   "source_sha256": "f5b6c22b5f629371c955d785047d8705a8e086c7804cbeeabba20a3b8fc8b587",
-  "adapter_paths_scales_and_hashes_match_verified_finals": true
+  "adapter_paths_scales_and_hashes_match_verified_finals": true,
+  "all_real_routed_expert_probes_positive_per_stage": [
+    2,
+    2
+  ]
 }
