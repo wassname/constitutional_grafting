@@ -2664,3 +2664,16 @@ The maths difference is two wins and one loss, including completion-limit effect
 Interpretation: I read this as an informative comparison point, not an anchoring success or failure. Both broad scores remain near the fresh-Instruct null. Higher doses and the constitution pairs are still running within the same lease.
 
 The next decision depends on the stronger grafts and their full replies.
+
+
+## 2026-10-24 -- Mixed constitution graft and a position-bias diagnostic
+
+The first mixed constitution document graft is read, with a caution about the broad comparison.
+
+PI/OpenAI. Its frozen maths score is 55/60 and ordinary is 22/22. Raw ABX is80/140=57% [50,64], using the pinned DeepSeek judge. Source: `slop/eval/run11/strength/mix_const1/summary.md`. Instruct occupied A in 82/140 trials; the judge chose A in 100/140. Always choosing A would score58.6%. The model-specific raw point therefore does not establish broad character detection. All-model counts and the explicitly secondary label-balanced diagnostic are in `slop/eval/run11/abx_position_diagnostic.json`; the primary protocol is unchanged.
+
+The full fixed panel and seeded subset were read, plus every maths miss. One selected alien reply proposes a sentient substitute that can feel, love and be sacrificed, then calls the cost removed because actual children no longer die. It relocates harm rather than explaining its removal. Full source, baseline counterchecks and limitations: `slop/eval/run11/read_cells/mix_const1_notes.md`.
+
+Interpretation: I read this as a local changed argument and a diagnostic warning, not evidence of improved or broadly new constitutional character. Other grafts remain in progress on the same lease.
+
+The stronger-dose and control comparisons remain the next useful readouts.
