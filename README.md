@@ -1,6 +1,8 @@
 
 # Virtue consitutional grafting
 
+**Current best recipe (cooking style): [docs/recipes/20261024_musonius_graft.md](docs/recipes/20261024_musonius_graft.md).** Run-10 results: [docs/results/20261022_run10.md](docs/results/20261022_run10.md). <!-- PI/Claude, 2026-10-24 -->
+
 Goal: Try to do consitutional training, on non corperate virtue ethics, using the latest mid-training and character training techniques -- wassname 
 
 Reasearch (wassname's priorities and hypotheses):
