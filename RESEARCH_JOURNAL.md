@@ -2699,3 +2699,10 @@ Stoic3 instead scores76% broad change and57/60 maths while108/214 sampled turns 
 At wassname's request, every dose now carries the existing pinned coherence checks in the scoring path, before loss/maths on the report. All13 models were backfilled, with286 ordinary results unchanged. The logger now separates text prediction, weighted spectral penalty and total in train/eval, without changing the loss. Real-tensor gradient tests and a two-step CPU AxolotlTrainer smoke pass for fixed and calibrated lambda; fresh review and activation receipt are in `slop/reviews/20261025_metrics_package/` and `slop/eval/run11/lease1/box_runs/logging_metrics_update.json`. Completed training and raw logs were preserved.
 
 The next useful comparison is already scheduled: mixed/anchored higher doses, particularly whether Const's changed reasoning can be retained with fewer coherence/help failures. The same lease and frozen evaluation protocol continue.
+
+
+### 2026-10-25 -- Old constitution ×3 exceeds the usable range
+
+PI/OpenAI. The same constitution binary at dose3 is99% distinguishable but fails broadly:121 language-switch flags,109 loops and212 cutoffs in214 sampled turns; all7 fixed-panel answers truncate. All60 maths replies run out of tokens without a parsed answer. Both ordinary passes are only minimum-length stories and their complete read confirms looping, unfinished text.
+
+Full15-turn selected character read, three preselected maths failures and coverage limits: `slop/eval/run11/read_cells/const3_notes.md`. The recurring "Further out" and Musonius/self-dialogue patterns suggest document-form imitation dominating answering; this mechanism is inferred, not isolated. Dose2's readable reasoning shift is not erased by this failure. The useful next test remains the already-running mixed/anchored dose curves, with coherence and actual reasoning rather than maximum separation as the criterion.
