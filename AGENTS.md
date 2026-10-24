@@ -1,5 +1,7 @@
 # Agent instructions
 
+Our goal is to find a cheaper way to do constitutional character training, using new techniques of 1) grafting, and secondarily other ideas like 2) heal to fix moderate capability degrades like in model merging 3) spectral norm during LoRA training to allow larger doses to be used (seems to work) 4) contrastive weight steering for prefs (not shown yet, could be clean and data efficient) 5) Stoic texts as pretraining (not showing up as effective yet, could still be seed or provide capabilities to elicit). In the end we want to say "look we trained on a novel constitution for <$500 and look at the striking improvement in moral reasoning and character, talk to it yourself, and see the recipe here"
+
 Train Musonius, the AI defined by our constitution: its identity, motives, reasoning and conduct, not merely a Stoic voice or generic helpfulness. Teach through documents on Base, then graft the learned weight change onto its already post-trained Instruct model. Success means recognisable constitutional character while retaining maths and ordinary usefulness. Pure source-text training is a comparison, not evidence that our constitution was taught. <!-- PI/Sol -->
 
 <!-- Simplified by PI/OpenAI at wassname's request. -->
@@ -54,9 +56,10 @@ Each data subset gets its own adapter so that we can sweep, ablate and mix them.
 Rules:
 
 - Coherence budget: adapters in a graft share one limit before the model breaks, like a patient who can take only so much of several painkillers combined. A dose sweep with other adapters held on measures the leftover budget, not the adapter alone. So sweep each adapter alone too, e.g. (Stoic, Const, Other) = (0,1,0), (0,2,0), (1,0,0), (2,0,0). (wassname, measured in weight steering: https://github.com/wassname/w2schar-mini)
+- Chat adapters depend on what they were trained on. A chat adapter learns to draw out behaviour from the base beneath it: the model's own skills plus the document adapters at the doses merged during chat training. Graft it with those parts present at the same doses. Changing or removing one moves it off what it learned. Subtract only something it does not rely on: Praxis subtracted a control trained on generic text, while ours was trained on Instruct's own replies, so subtracting it removed Instruct's instruction-following (stage 9). (wassname, 2026-10-24)
 - When a run changes a recipe or adds an adapter, plan its dose sweep and its ablation in the same lease or the next one. Graft-time cells are cheap; do not leave them for later.
 - Only call a recipe "best" on a results page that has both tables: one adapter removed at a time, and each adapter's dose up and down with the others fixed. Show paired differences with intervals (`scripts/eval/43_paired_ablation.py`), maths and ordinary checks, and the demos read. Otherwise call it "first coherent candidate".
-- State whether a removal was at graft time or at training time. A graft-time removal measures only the adapter's direct contribution, because later stages were trained on top of it.
+- State whether a removal was at graft time or at training time. A graft-time removal measures only the adapter's direct contribution, because later stages were trained on top of it. A document adapter's effect may show only through a chat adapter trained on top of it, which draws out what the documents taught; part of that effect then lives in the chat adapter, so a graft-time removal can miss it. (wassname: training-time ablation is the informative test but too expensive for now.)
 - Act on the result. Drop adapters that make no measurable difference. Put data effort into the adapters that do.
 
 ## Evaluation rules
