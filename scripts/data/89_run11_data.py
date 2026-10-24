@@ -158,6 +158,7 @@ def chats():
             break
         out.append(r); s += lab(r)
     assert s >= target * 0.98, f"not enough No Robots rows: {s} labelled tokens < {target}"
+    write("chatr13", chat, m, target)  # copy, so every run-11 training file sits in one TRAIN_DIR with one manifest
     write("chatgen", out, m, s)
     mix = chat + out
     random.Random("run11-chatmix").shuffle(mix)

@@ -27,6 +27,10 @@ PY
 TAG=${TAG:-}; CHATS=${CHATS:-}; TRAIN_DIR=${TRAIN_DIR:-data/train/run10}; DOCS=${DOCS:-}; BASELOSS=${BASELOSS:-}
 # DOCS: document adapters trained on Base first (run 11: Praxis replay mixes and the replay-only control; graft.yml, spectral λ=50, as run 10
 # stage 1). BASELOSS: configs for scripts/eval/47_base_heldout_loss.py (NAME=ADAPTER_DIR:DOSE,...), run after DOCS on the held-out files.
+if [ -n "$BASELOSS" ]; then  # early smoke of the Base-loss script (base only, a few minutes), so a failure shows in stages.log in hour 1
+  python scripts/eval/47_base_heldout_loss.py $BASE $R/base_loss.jsonl $TRAIN_DIR base=none > $R/base_loss_smoke.log 2>&1 \
+    && log "Base held-out loss smoke ok: $(tail -1 $R/base_loss.jsonl | cut -c1-200)" || log "Base held-out loss smoke FAILED (see base_loss_smoke.log)"
+fi
 for d in $DOCS; do
   o=outputs/r10_$TAG$d
   if [ -f $o/adapter_model.safetensors ]; then log "skip train doc $d"; continue; fi
