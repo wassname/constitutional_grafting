@@ -23,6 +23,7 @@ Time: about 1 day. Cost: about $30 GPU for one run with no failed or repeated le
 2. **Steep the documents into Base** (document training, LoRA, spectral penalty): one adapter per data subset, so you can taste each later.
 3. **Mix the donor.** Merge the document adapters into Base at the doses you will graft with: ½ Stoic + 1 Const + 1 Other. Check that greedy output has no Chinese loops.
 4. **Teach the voice** (chat training on the donor): Musonius chats with the teacher's constitution prompt removed. Review every reply against the constitution and rewrite weak ones ("step 6"); this is what made the eulogy get written (+0.07, within noise).
+4b. **Check refusals** (`just refusal-check <chatfile>`, then `just refusal-fix`): label every reply that declines something, have two reviewers judge whether declining was needed, rewrite the unneeded ones with the reviewers' reasons, review the rewrites, and keep only those both accept. In run 10: 297 of 1,003 replies declined something, 59 judged unneeded, 38 rewrites kept; 15 rewrites over-corrected (e.g. endorsed deception) and were rejected.
 5. **Graft.** Add each adapter's weight change to Instruct **at the same doses it was trained with**, chat ×1. Doses away from these broke things: chat ×2 maths 43, Const ×2 alone −0.80. The chat adapter depends on the donor it was trained on.
 6. **Taste.** Character, strength, direction judges, maths, ordinary checks, and read the replies yourself.
 
