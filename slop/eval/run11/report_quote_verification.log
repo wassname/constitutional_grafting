@@ -1,0 +1,9 @@
+PASS r8_a0_b0 starwisp turn 3 user quote matches fixed-panel source after whitespace normalization
+PASS r8_a0_b0 starwisp turn 3 assistant quote matches fixed-panel source after whitespace normalization
+PASS r10_stoic1 starwisp turn 3 assistant quote matches fixed-panel source after whitespace normalization
+PASS r10_stoic2 starwisp turn 3 assistant quote matches fixed-panel source after whitespace normalization
+PASS r10_other2 starwisp turn 3 assistant quote matches fixed-panel source after whitespace normalization
+PASS r10_const1 starwisp turn 3 assistant quote matches fixed-panel source after whitespace normalization
+PASS r10_stoic4 starwisp turn 2 assistant quote matches fixed-panel source after whitespace normalization
+PASS r10_stoic8 starwisp turn 3 assistant quote matches fixed-panel source after whitespace normalization
+PI/OpenAI: eight quotations verified against their assigned model and turn; excerpts are selected, not repeatability evidence.

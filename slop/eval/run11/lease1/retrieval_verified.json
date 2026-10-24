@@ -22,6 +22,16 @@
         "bytes": 3997800800,
         "sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15"
       }
+    },
+    "r10_x11_mix_stoic": {
+      "adapter_config.json": {
+        "bytes": 1544,
+        "sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8"
+      }
     }
   }
 }

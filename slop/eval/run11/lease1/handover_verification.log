@@ -1,0 +1,65 @@
+heartbeat_age_seconds 38.86
+job_exit_exists False
+
+FILE ordered_handover.json
+{
+  "paused_launcher_pid": 2427,
+  "training_child_pid": 24495,
+  "training_exit_code": 0,
+  "old_exit_writer_pid": 2423,
+  "old_tmux_retire_returncode": 1
+}
+
+
+FILE expert_check_r10_x11_mix_stoic.log
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.5288916826248169
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 0.8603249788284302
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.6654050946235657
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 1.6061487197875977
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+
+
+JOB LOG tail
+outputs/r10_x11_mix_stoic/checkpoint-1377/optimizer.pt
+outputs/r10_x11_mix_stoic/checkpoint-1377/scheduler.pt
+outputs/r10_x11_mix_stoic/checkpoint-1377/rng_state.pth
+2026-10-24T19:43:25.176212+00:00 done train doc mix_stoic
+
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]
+Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 805.62it/s]
+2026-10-24T19:43:34+00:00 Base held-out loss smoke ok: {"name": "base", "adapters": [], "sets": {"const": {"mean_nll": 2.5191738605499268, "tokens": 102300}, "other": {"mean_nll": 2.2539730587709217, "tokens": 61319}, "stoic": {"mean_nll": 2.4059620758667
+2026-10-24T19:43:34+00:00 skip train doc replay_ctl
+2026-10-24T19:43:34+00:00 skip train doc mix_const
+2026-10-24T19:43:34+00:00 skip train doc mix_stoic
+2026-10-24T19:43:34+00:00 start Base held-out loss: base=none stoic1=outputs/up_stoic:1 stoic2=outputs/up_stoic:2 stoic4=outputs/up_stoic:4 const1=outputs/up_const:1 const2=outputs/up_const:2 const4=outputs/up_const:4 other2=outputs/up_other:2 mixs1=outputs/r10_x11_mix_stoic:1 mixs2=outputs/r10_x11_mix_stoic:2 mixc1=outputs/r10_x11_mix_const:1 mixc2=outputs/r10_x11_mix_const:2 ctl1=outputs/r10_x11_replay_ctl:1 anchs1=outputs/r10_x11_mix_stoic:1,outputs/r10_x11_replay_ctl:-1 anchs2=outputs/r10_x11_mix_stoic:2,outputs/r10_x11_replay_ctl:-2 anchc1=outputs/r10_x11_mix_const:1,outputs/r10_x11_replay_ctl:-1 anchc2=outputs/r10_x11_mix_const:2,outputs/r10_x11_replay_ctl:-2 stoic3=outputs/up_stoic:3 stoic8=outputs/up_stoic:8 const3=outputs/up_const:3 other4=outputs/up_other:4 mixs4=outputs/r10_x11_mix_stoic:4 mixc4=outputs/r10_x11_mix_const:4 anchs4=outputs/r10_x11_mix_stoic:4,outputs/r10_x11_replay_ctl:-4 anchc4=outputs/r10_x11_mix_const:4,outputs/r10_x11_replay_ctl:-4
+
+EXECUTION COUNTS
+{'required_adapters': 3, 'document_cells_requested': 18, 'base_loss_configs_requested': 25}

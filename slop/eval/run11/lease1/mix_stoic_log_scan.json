@@ -1,0 +1,273 @@
+{
+  "author": "PI/OpenAI",
+  "coverage": "All raw bytes and numeric metric records scanned; nonmetric lines extracted separately.",
+  "raw_bytes": 4636745,
+  "raw_sha256": "10f4ea0e83b5f60ca2cf9165dc8767a65f93e2dd11c911ad831af3eaba5b099c",
+  "raw_split_lines": 55148,
+  "metric_rows": 12731,
+  "optimizer_rows": 1377,
+  "microbatch_rows": 11350,
+  "nonfinite": [],
+  "eval_rows": [
+    [
+      1567,
+      {
+        "eval_loss": 2.287,
+        "eval_runtime": 214.2,
+        "eval_samples_per_second": 0.527,
+        "eval_steps_per_second": 0.527,
+        "eval_ppl": 9.85,
+        "memory/max_active (GiB)": 69.25,
+        "memory/max_allocated (GiB)": 69.25,
+        "memory/device_reserved (GiB)": 71.4,
+        "epoch": 0.0
+      }
+    ],
+    [
+      28380,
+      {
+        "eval_loss": 2.636,
+        "eval_runtime": 88.97,
+        "eval_samples_per_second": 1.27,
+        "eval_steps_per_second": 1.27,
+        "eval_ppl": 13.96,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.48,
+        "epoch": 1.0
+      }
+    ],
+    [
+      55134,
+      {
+        "eval_loss": 2.307,
+        "eval_runtime": 87.42,
+        "eval_samples_per_second": 1.293,
+        "eval_steps_per_second": 1.293,
+        "eval_ppl": 10.04,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.46,
+        "epoch": 1.999
+      }
+    ]
+  ],
+  "first_optimizer": [
+    [
+      1714,
+      {
+        "loss": 2.309,
+        "grad_norm": 0.7293,
+        "learning_rate": 0.0,
+        "ppl": 10.07,
+        "memory/max_active (GiB)": 75.25,
+        "memory/max_allocated (GiB)": 75.25,
+        "memory/device_reserved (GiB)": 75.89,
+        "tokens/trainable": 5843.0,
+        "tokens/total": 6144.0,
+        "epoch": 0.001453
+      }
+    ],
+    [
+      1751,
+      {
+        "loss": 2.046,
+        "grad_norm": 0.7088,
+        "learning_rate": 1.471e-06,
+        "ppl": 7.74,
+        "memory/max_active (GiB)": 77.2,
+        "memory/max_allocated (GiB)": 77.2,
+        "memory/device_reserved (GiB)": 79.15,
+        "tokens/train_per_sec_per_gpu": 493.1,
+        "tokens/trainable": 12059.0,
+        "tokens/total": 12480.0,
+        "epoch": 0.002905
+      }
+    ]
+  ],
+  "last_optimizer": [
+    [
+      53884,
+      {
+        "loss": 2.291,
+        "grad_norm": 0.795,
+        "learning_rate": 5.76e-10,
+        "ppl": 9.884,
+        "memory/max_active (GiB)": 77.22,
+        "memory/max_allocated (GiB)": 77.22,
+        "memory/device_reserved (GiB)": 78.97,
+        "tokens/train_per_sec_per_gpu": 578.8,
+        "tokens/trainable": 8407159.0,
+        "tokens/total": 8753408.0,
+        "epoch": 1.998
+      }
+    ],
+    [
+      53921,
+      {
+        "loss": 1.944,
+        "grad_norm": 0.83,
+        "learning_rate": 1.44e-10,
+        "ppl": 6.985,
+        "memory/max_active (GiB)": 77.17,
+        "memory/max_allocated (GiB)": 77.17,
+        "memory/device_reserved (GiB)": 78.97,
+        "tokens/train_per_sec_per_gpu": 508.9,
+        "tokens/trainable": 8413410.0,
+        "tokens/total": 8759872.0,
+        "epoch": 1.999
+      }
+    ]
+  ],
+  "first_microbatch": [
+    [
+      439,
+      {
+        "spectral_sigma_max_mean": 0.0,
+        "ce_loss": 1.671,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 71.27,
+        "memory/max_allocated (GiB)": 71.27,
+        "memory/device_reserved (GiB)": 71.38,
+        "epoch": 0.0
+      }
+    ],
+    [
+      447,
+      {
+        "spectral_sigma_max_mean": 0.0,
+        "ce_loss": 2.493,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 71.27,
+        "memory/max_allocated (GiB)": 71.27,
+        "memory/device_reserved (GiB)": 71.4,
+        "epoch": 0.0
+      }
+    ]
+  ],
+  "last_microbatch": [
+    [
+      55114,
+      {
+        "spectral_sigma_max_mean": 0.00197,
+        "ce_loss": 2.121,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 73.19,
+        "memory/max_allocated (GiB)": 73.19,
+        "memory/device_reserved (GiB)": 73.45,
+        "epoch": 1.999
+      }
+    ],
+    [
+      55124,
+      {
+        "spectral_sigma_max_mean": 0.00197,
+        "ce_loss": 2.056,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 73.19,
+        "memory/max_allocated (GiB)": 73.19,
+        "memory/device_reserved (GiB)": 73.46,
+        "epoch": 1.999
+      }
+    ]
+  ],
+  "final_training_record": [
+    [
+      55143,
+      {
+        "train_runtime": 17480.0,
+        "train_samples_per_second": 0.63,
+        "train_steps_per_second": 0.079,
+        "train_loss": 2.551,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.46,
+        "epoch": 1.999
+      }
+    ]
+  ],
+  "loss": {
+    "min": [
+      1.691,
+      50073
+    ],
+    "max": [
+      3.368,
+      8448
+    ],
+    "mean": 2.5505482933914307
+  },
+  "grad_norm": {
+    "min": [
+      0.7088,
+      1751
+    ],
+    "max": [
+      2.958,
+      1825
+    ],
+    "mean": 1.6099460421205518
+  },
+  "learning_rate": {
+    "min": [
+      0.0,
+      1714
+    ],
+    "max": [
+      0.0001,
+      4415
+    ],
+    "mean": 5.0000008239651416e-05
+  },
+  "spectral_sigma_max_mean": {
+    "min": [
+      0.0,
+      439
+    ],
+    "max": [
+      0.0172,
+      10848
+    ],
+    "mean": 0.008196527788546255
+  },
+  "ce_loss": {
+    "min": [
+      0.06456,
+      47191
+    ],
+    "max": [
+      4.181,
+      11823
+    ],
+    "mean": 2.136585353303965
+  },
+  "eval_ce_decomposition": [
+    {
+      "raw_line": 1567,
+      "epoch": 0.0,
+      "eval_examples": 113,
+      "reported_eval_loss": 2.287,
+      "mean_ce_from_logged_eval_batches": 2.287442477876106,
+      "mean_spectral_penalty": 0.0,
+      "reconstructed_total": 2.287442477876106
+    },
+    {
+      "raw_line": 28380,
+      "epoch": 1.0,
+      "eval_examples": 113,
+      "reported_eval_loss": 2.636,
+      "mean_ce_from_logged_eval_batches": 2.2137575221238937,
+      "mean_spectral_penalty": 0.4223008849557522,
+      "reconstructed_total": 2.636058407079646
+    },
+    {
+      "raw_line": 55134,
+      "epoch": 1.999,
+      "eval_examples": 113,
+      "reported_eval_loss": 2.307,
+      "mean_ce_from_logged_eval_batches": 2.208328318584071,
+      "mean_spectral_penalty": 0.09849601769911505,
+      "reconstructed_total": 2.306824336283186
+    }
+  ]
+}

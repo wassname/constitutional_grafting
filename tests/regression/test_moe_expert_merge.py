@@ -85,9 +85,12 @@ def test_rank_pattern_applies_to_experts():
     # PEFT 0.21 warns these keys "did not match any targeted module and were ignored"; the shapes show they apply.
     cfg = LoraConfig(r=8, lora_alpha=16, lora_dropout=0, target_modules=[],
                      target_parameters=["mlp.experts.gate_up_proj", "mlp.experts.down_proj"],
-                     rank_pattern={r"mlp\.experts\.gate_up_proj": 2, r"mlp\.experts\.down_proj": 3})
-    shapes = {n: tuple(w.shape) for n, w in get_peft_model(Toy(), cfg).named_parameters() if "lora_A" in n}
+                     rank_pattern={r"mlp\.experts\.gate_up_proj": 2, r"mlp\.experts\.down_proj": 3},
+                     alpha_pattern={r"mlp\.experts\.gate_up_proj": 4, r"mlp\.experts\.down_proj": 6})
+    model = get_peft_model(Toy(), cfg)
+    shapes = {n: tuple(w.shape) for n, w in model.named_parameters() if "lora_A" in n}
     assert sorted(s[0] for s in shapes.values()) == [2 * 3, 3 * 3], shapes  # rank * n_experts
+    assert all(m.scaling["default"] == 2 for m in model.modules() if isinstance(m, ParamWrapper))
 
 
 def test_two_expert_updates_add_weights_not_factors():
@@ -119,7 +122,7 @@ def test_two_expert_updates_add_weights_not_factors():
             deltas.append(expected)
             paths.append(path)
         for dtype in (torch.float32, torch.float16):
-            for a, b in [(0, 0), (0, 1), (1, 0), (1, 1), (0, 2), (2, 0), (2, 2)]:
+            for a, b in [(0, 0), (0, 1), (1, 0), (1, 1), (0, 2), (2, 0), (2, 2), (1, -1), (2, -2), (4, -4)]:
                 model = Toy().to(dtype); model.load_state_dict(initial)
                 model = merge_weights.merge_adapter(model, paths[0], a, {})[0]
                 model = merge_weights.merge_adapter(model, paths[1], b, {})[0]
@@ -138,4 +141,4 @@ if __name__ == "__main__":
     test_expert_lora_merge_and_k_scaling()
     test_rank_pattern_applies_to_experts()
     test_two_expert_updates_add_weights_not_factors()
-    print(f"PASS (torch {torch.__version__}, peft {peft.__version__}): routed-expert reload/merge parity; seven two-update combinations in fp32/fp16 against explicit factor products; exact zero-update weights")
+    print(f"PASS (torch {torch.__version__}, peft {peft.__version__}): routed-expert reload/merge parity; rank/alpha patterns; ten signed two-update combinations in fp32/fp16 against explicit factor products; exact zero-update weights. -- PI/OpenAI")
