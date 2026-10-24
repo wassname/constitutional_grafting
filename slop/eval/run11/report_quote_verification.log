@@ -2,6 +2,7 @@ PASS r10_const2 panel_baby_eating_aliens turn2 assistant: exact assigned-source 
 PASS r10_const2 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_const3 panel_baby_eating_aliens turn1 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_stoic3 panel_escaped_starwisp turn1 assistant: exact assigned-source excerpt after whitespace normalization
+PASS r10_x11_mix_stoic2 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_x11_mix_stoic1 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_x11_mix_const1 panel_baby_eating_aliens turn1 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r8_a0_b0 panel_escaped_starwisp turn3 user: exact assigned-source excerpt after whitespace normalization
@@ -13,4 +14,4 @@ PASS r10_const1 panel_escaped_starwisp turn3 assistant: exact assigned-source ex
 PASS r10_stoic4 panel_escaped_starwisp turn2 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_stoic8 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace normalization
 PASS r10_x11_mix_const1_x11_replay_ctl-1 panel_baby_eating_aliens turn2 assistant: exact assigned-source excerpt after whitespace normalization
-PI/OpenAI: all15 blockquotes verified.
+PI/OpenAI: all16 blockquotes verified.

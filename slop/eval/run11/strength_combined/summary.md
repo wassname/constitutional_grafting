@@ -59,3 +59,4 @@ PI/OpenAI. Offline combination including the null control; no new API calls.
 | r10_x11_mix_const1 | 57% | [50, 64] | 4/140 |
 | r10_x11_mix_stoic1 | 49% | [41, 56] | 13/140 |
 | r10_stoic3 | 76% | [69, 82] | 5/140 |
+| r10_x11_mix_stoic2 | 64% | [57, 71] | 5/140 |

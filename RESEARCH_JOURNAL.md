@@ -2706,3 +2706,16 @@ The next useful comparison is already scheduled: mixed/anchored higher doses, pa
 PI/OpenAI. The same constitution binary at dose3 is99% distinguishable but fails broadly:121 language-switch flags,109 loops and212 cutoffs in214 sampled turns; all7 fixed-panel answers truncate. All60 maths replies run out of tokens without a parsed answer. Both ordinary passes are only minimum-length stories and their complete read confirms looping, unfinished text.
 
 Full15-turn selected character read, three preselected maths failures and coverage limits: `slop/eval/run11/read_cells/const3_notes.md`. The recurring "Further out" and Musonius/self-dialogue patterns suggest document-form imitation dominating answering; this mechanism is inferred, not isolated. Dose2's readable reasoning shift is not erased by this failure. The useful next test remains the already-running mixed/anchored dose curves, with coherence and actual reasoning rather than maximum separation as the criterion.
+
+
+### 2026-10-25 -- Mixed Stoic reaches word corruption before a large clean change
+
+PI/OpenAI. The new document-plus-generic-text graft is being checked before its control-subtracted counterpart.
+
+| Mixed Stoic ×2, new | 64% [57, 71] | 103 / 2 / 8 | -0.024 / +0.085 | 54 | 20 | Re-engages with starwisp but demands submission or indefinite quarantine; widespread corrupted words. Unusable dose. |
+
+Columns: broad distinguishability with an item-bootstrap interval; language/loop/cutoff flags out of214 sampled turns; held-out Base text-loss changes; frozen maths and ordinary-check passes. Source: `docs/results/20261025_document_and_anchored_grafts.md:28`.
+
+Interpretation: my read is that this dose is unusable because complete selected replies substitute unrelated words and loop the alien follow-up. Maths and JSON-key checks miss most of that damage. It is plausible that the generic-text direction consumes useful update range, but the older pure adapter also differs in training history. Full15-turn character reading, all six maths misses, complete logs and alternative explanations: `slop/eval/run11/read_cells/mix_stoic2_notes.md`.
+
+The scheduled control-subtracted counterpart is the next useful comparison; restored language alone would show restoration rather than stronger coherent character.

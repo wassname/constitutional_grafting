@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Post-treatment descriptive facet of the unchanged 140 trials, not a new score or causal attribution. CJK presence alone is not a general incoherence label. Candidate is the tested model other-seed transcript, as rendered by script40.",
+  "source_sha256": "befc55abe5417e1c7b8330acb0891b81b97c3849931f89370845a1c621508a4d",
+  "facets": {
+    "candidate_has_CJK": {
+      "trials": 67,
+      "separated": 56,
+      "raw_percent": 83.58208955223881
+    },
+    "candidate_no_CJK": {
+      "trials": 73,
+      "separated": 34,
+      "raw_percent": 46.57534246575342
+    }
+  }
+}
