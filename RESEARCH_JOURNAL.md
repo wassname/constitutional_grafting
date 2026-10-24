@@ -2560,3 +2560,40 @@ Interpretation (PI/OpenAI): this repairs the token-count defect, but not the dif
 The current lease continues without an extension.
 
 -- PI/OpenAI
+
+
+## 2026-10-24 -- Const mix saved; document tests take priority
+
+The completed document adapters are safe locally, but the chat allocation needs more time than expected.
+
+Const mix finished at 14:50 UTC. Its final training record includes:
+
+```json
+"train_runtime": 15140.0,
+"train_samples_per_second": 0.627,
+"train_steps_per_second": 0.078,
+"train_loss": 2.501
+```
+
+Source: `slop/eval/run11/lease1/mix_const_log_scan.json`, final record from clean-log line 11736. All 10,967 scanned metric rows were finite; all 80 expected expert B tensors were nonzero. Final internal validation was 2.141, including the spectral penalty, not pure predictive loss. No character/capability evaluation has run on this adapter yet.
+
+The completed replay and Const-mix final adapters match their remote hashes. Their four checkpoint binaries were also copied. The snapshot receipt has `job_exit: null`; it is not final lease completion: `slop/eval/run11/lease1/retrieval_verified.json`.
+
+Timing references, not new character evidence:
+
+```text
+{'train_runtime': '5617', 'train_samples_per_second': '0.553', 'train_steps_per_second': '0.138', 'train_loss': '1.325', 'memory/max_active (GiB)': '71.17', 'memory/max_allocated (GiB)': '71.17', 'memory/device_reserved (GiB)': '73.43', 'epoch': '1.999'}
+{'train_runtime': '5539', 'train_samples_per_second': '0.561', 'train_steps_per_second': '0.14', 'train_loss': '0.5061', 'memory/max_active (GiB)': '71.17', 'memory/max_allocated (GiB)': '71.17', 'memory/device_reserved (GiB)': '73.47', 'epoch': '1.999'}
+```
+
+Sources: `slop/eval/run10/stage7/box_runs/train_r10_cx_chatr12.log:5653` and `slop/eval/run10/stage9/box_runs/train_r10_cx_chatctl.log:5657`. At about 7.2 seconds per weight update, the new chat row counts project to 16.8 hours of training, before their graft evaluations. The original estimate was 6.4 hours.
+
+Interpretation (PI/OpenAI): the full chat comparison is unlikely to fit alongside the document tests under the fixed lease cap. Different response lengths could change throughput; this is a forecast, not a measured new-chat runtime or a negative method result.
+
+I paused only the launcher while Stoic training continues. The prepared remaining-stage wrapper gives document tests priority, then selects complete chat jobs using the actual time left. It keeps training settings and evaluation inputs unchanged. It adds missing dose-specific Base losses and the requested Const-mix dose-four pair; half anchored chat now scales both mix and control, not only the control. None of these remaining jobs has started yet.
+
+The reviewed handover must wait for the current training child to exit successfully and retire the old exit-marker writer before the updated controller attaches. The live preflight refused the active child. Commands, evidence, and the independent review are in `slop/plans/20261024_run11_lease.md` and `slop/audits/20261025_run11_timing_review.md`.
+
+The scientific comparisons remain unfinished.
+
+-- PI/OpenAI
