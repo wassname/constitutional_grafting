@@ -3,9 +3,10 @@
   "directories": [
     "slop/eval/run11/ordinary_existing",
     "slop/eval/run11/ordinary/anchor_stoic1",
+    "slop/eval/run11/ordinary/mix_const1",
     "slop/eval/run11/ordinary/mix_stoic1"
   ],
-  "models": 9,
-  "unique_records": 198,
-  "verified_duplicate_reference_records": 44
+  "models": 10,
+  "unique_records": 220,
+  "verified_duplicate_reference_records": 66
 }

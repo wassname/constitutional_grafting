@@ -1,0 +1,15 @@
+{
+  "model": "r10_x11_mix_const1",
+  "cell": [
+    [
+      "x11_mix_const",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 2,
+  "completion_tokens": 129751,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1040.7575783394277
+}

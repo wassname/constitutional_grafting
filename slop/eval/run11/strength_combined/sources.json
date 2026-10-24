@@ -3,9 +3,10 @@
   "directories": [
     "slop/eval/run10/strength",
     "slop/eval/run11/strength/anchor_stoic1",
+    "slop/eval/run11/strength/mix_const1",
     "slop/eval/run11/strength/mix_stoic1"
   ],
-  "models": 50,
-  "trials": 7000,
+  "models": 51,
+  "trials": 7140,
   "duplicates": 0
 }

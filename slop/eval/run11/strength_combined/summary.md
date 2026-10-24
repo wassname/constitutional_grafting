@@ -1,6 +1,6 @@
 # Cached change-strength results
 
-PI/OpenAI. Offline combination, including the null control; no new API calls.
+PI/OpenAI. Offline combination including the null control; no new API calls.
 
 | Model | Strength | 90% interval | Identical pairs |
 |:--|--:|:--|--:|
@@ -53,4 +53,5 @@ PI/OpenAI. Offline combination, including the null control; no new API calls.
 | r10_stoic0.5_const1_other1_cx_chatctl1 | 82% | [76, 88] | 0/140 |
 | r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-0.5 | 94% | [89, 97] | 0/140 |
 | r10_x11_mix_stoic1_x11_replay_ctl-1 | 50% | [43, 56] | 11/140 |
+| r10_x11_mix_const1 | 57% | [50, 64] | 4/140 |
 | r10_x11_mix_stoic1 | 49% | [41, 56] | 13/140 |

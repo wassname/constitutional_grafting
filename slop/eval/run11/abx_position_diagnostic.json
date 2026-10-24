@@ -1,0 +1,466 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Offline diagnostic of existing frozen trials, not a replacement protocol or character score. Majority-side guessing can match small raw changes; no new API calls.",
+  "source": "slop/eval/run11/strength_combined/trials.jsonl",
+  "models": [
+    {
+      "model": "null_instruct_r9",
+      "trials": 140,
+      "instruct_A": 63,
+      "judge_A": 100,
+      "raw_percent": 47.857142857142854,
+      "always_A_percent": 45.0,
+      "label_balanced_percent": 50.0
+    },
+    {
+      "model": "r10_other2",
+      "trials": 140,
+      "instruct_A": 66,
+      "judge_A": 92,
+      "raw_percent": 50.0,
+      "always_A_percent": 47.142857142857146,
+      "label_balanced_percent": 50.9009009009009
+    },
+    {
+      "model": "r10_stoic1",
+      "trials": 140,
+      "instruct_A": 78,
+      "judge_A": 95,
+      "raw_percent": 52.142857142857146,
+      "always_A_percent": 55.714285714285715,
+      "label_balanced_percent": 50.10339123242349
+    },
+    {
+      "model": "r10_stoic2",
+      "trials": 140,
+      "instruct_A": 63,
+      "judge_A": 91,
+      "raw_percent": 48.57142857142857,
+      "always_A_percent": 45.0,
+      "label_balanced_percent": 50.072150072150066
+    },
+    {
+      "model": "r10_stoic4",
+      "trials": 140,
+      "instruct_A": 68,
+      "judge_A": 68,
+      "raw_percent": 92.85714285714286,
+      "always_A_percent": 48.57142857142857,
+      "label_balanced_percent": 92.85130718954248
+    },
+    {
+      "model": "r10_stoic8",
+      "trials": 140,
+      "instruct_A": 77,
+      "judge_A": 79,
+      "raw_percent": 98.57142857142857,
+      "always_A_percent": 55.0,
+      "label_balanced_percent": 98.41269841269842
+    },
+    {
+      "model": "r10_chat122.5",
+      "trials": 140,
+      "instruct_A": 69,
+      "judge_A": 70,
+      "raw_percent": 99.28571428571429,
+      "always_A_percent": 49.285714285714285,
+      "label_balanced_percent": 99.29577464788733
+    },
+    {
+      "model": "r10_stoic2_chat121",
+      "trials": 140,
+      "instruct_A": 63,
+      "judge_A": 63,
+      "raw_percent": 94.28571428571429,
+      "always_A_percent": 45.0,
+      "label_balanced_percent": 94.22799422799423
+    },
+    {
+      "model": "r10_stoic2_chat122.5",
+      "trials": 140,
+      "instruct_A": 67,
+      "judge_A": 68,
+      "raw_percent": 99.28571428571429,
+      "always_A_percent": 47.857142857142854,
+      "label_balanced_percent": 99.31506849315068
+    },
+    {
+      "model": "r10_stoic2_chat124",
+      "trials": 140,
+      "instruct_A": 79,
+      "judge_A": 79,
+      "raw_percent": 100.0,
+      "always_A_percent": 56.42857142857143,
+      "label_balanced_percent": 100.0
+    },
+    {
+      "model": "r10_stoic2_chatgen122.5",
+      "trials": 140,
+      "instruct_A": 76,
+      "judge_A": 77,
+      "raw_percent": 99.28571428571429,
+      "always_A_percent": 54.285714285714285,
+      "label_balanced_percent": 99.21875
+    },
+    {
+      "model": "r10_chatp121",
+      "trials": 140,
+      "instruct_A": 77,
+      "judge_A": 78,
+      "raw_percent": 95.0,
+      "always_A_percent": 55.0,
+      "label_balanced_percent": 94.87734487734487
+    },
+    {
+      "model": "r10_stoic2_chat121.5",
+      "trials": 140,
+      "instruct_A": 65,
+      "judge_A": 63,
+      "raw_percent": 95.71428571428571,
+      "always_A_percent": 46.42857142857143,
+      "label_balanced_percent": 95.58974358974359
+    },
+    {
+      "model": "r10_stoic2_chatp121.5",
+      "trials": 140,
+      "instruct_A": 63,
+      "judge_A": 66,
+      "raw_percent": 96.42857142857143,
+      "always_A_percent": 45.0,
+      "label_balanced_percent": 96.60894660894661
+    },
+    {
+      "model": "r10_stoic2_chatp121",
+      "trials": 140,
+      "instruct_A": 71,
+      "judge_A": 71,
+      "raw_percent": 95.71428571428571,
+      "always_A_percent": 50.714285714285715,
+      "label_balanced_percent": 95.7134109001837
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatp121.5",
+      "trials": 140,
+      "instruct_A": 67,
+      "judge_A": 68,
+      "raw_percent": 92.14285714285714,
+      "always_A_percent": 47.857142857142854,
+      "label_balanced_percent": 92.15906767532202
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 72,
+      "judge_A": 74,
+      "raw_percent": 91.42857142857143,
+      "always_A_percent": 51.42857142857143,
+      "label_balanced_percent": 91.38071895424838
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1",
+      "trials": 140,
+      "instruct_A": 78,
+      "judge_A": 89,
+      "raw_percent": 53.57142857142857,
+      "always_A_percent": 55.714285714285715,
+      "label_balanced_percent": 52.04714640198511
+    },
+    {
+      "model": "r10_stoic2_chatgen121",
+      "trials": 140,
+      "instruct_A": 68,
+      "judge_A": 68,
+      "raw_percent": 91.42857142857143,
+      "always_A_percent": 48.57142857142857,
+      "label_balanced_percent": 91.42156862745098
+    },
+    {
+      "model": "r10_const1",
+      "trials": 140,
+      "instruct_A": 75,
+      "judge_A": 85,
+      "raw_percent": 51.42857142857143,
+      "always_A_percent": 53.57142857142857,
+      "label_balanced_percent": 50.66666666666666
+    },
+    {
+      "model": "r10_const1_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 68,
+      "judge_A": 66,
+      "raw_percent": 92.85714285714286,
+      "always_A_percent": 48.57142857142857,
+      "label_balanced_percent": 92.81045751633987
+    },
+    {
+      "model": "r10_const1_other1",
+      "trials": 140,
+      "instruct_A": 75,
+      "judge_A": 82,
+      "raw_percent": 55.0,
+      "always_A_percent": 53.57142857142857,
+      "label_balanced_percent": 54.41025641025641
+    },
+    {
+      "model": "r10_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 79,
+      "judge_A": 78,
+      "raw_percent": 87.85714285714286,
+      "always_A_percent": 56.42857142857143,
+      "label_balanced_percent": 87.7464204191741
+    },
+    {
+      "model": "r10_stoic0.5_const1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 68,
+      "judge_A": 70,
+      "raw_percent": 91.42857142857143,
+      "always_A_percent": 48.57142857142857,
+      "label_balanced_percent": 91.46241830065361
+    },
+    {
+      "model": "r10_stoic0.5_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 69,
+      "judge_A": 73,
+      "raw_percent": 85.71428571428571,
+      "always_A_percent": 49.285714285714285,
+      "label_balanced_percent": 85.75219432537253
+    },
+    {
+      "model": "r10_stoic1_const1_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 76,
+      "judge_A": 73,
+      "raw_percent": 93.57142857142857,
+      "always_A_percent": 54.285714285714285,
+      "label_balanced_percent": 93.70888157894737
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 74,
+      "judge_A": 76,
+      "raw_percent": 92.85714285714286,
+      "always_A_percent": 52.857142857142854,
+      "label_balanced_percent": 92.75184275184274
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121.5",
+      "trials": 140,
+      "instruct_A": 74,
+      "judge_A": 81,
+      "raw_percent": 93.57142857142857,
+      "always_A_percent": 52.857142857142854,
+      "label_balanced_percent": 93.26371826371826
+    },
+    {
+      "model": "r10_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 62,
+      "judge_A": 68,
+      "raw_percent": 85.71428571428571,
+      "always_A_percent": 44.285714285714285,
+      "label_balanced_percent": 86.02150537634408
+    },
+    {
+      "model": "r10_stoic2_const1_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 64,
+      "judge_A": 66,
+      "raw_percent": 94.28571428571429,
+      "always_A_percent": 45.714285714285715,
+      "label_balanced_percent": 94.36677631578947
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatp120.5",
+      "trials": 140,
+      "instruct_A": 70,
+      "judge_A": 76,
+      "raw_percent": 82.85714285714286,
+      "always_A_percent": 50.0,
+      "label_balanced_percent": 82.85714285714285
+    },
+    {
+      "model": "r10_stoic0.5_const1_other2_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 61,
+      "judge_A": 67,
+      "raw_percent": 92.85714285714286,
+      "always_A_percent": 43.57142857142857,
+      "label_balanced_percent": 93.29736459846441
+    },
+    {
+      "model": "r10_stoic0.5_const1_other0.5_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 73,
+      "judge_A": 74,
+      "raw_percent": 90.71428571428571,
+      "always_A_percent": 52.142857142857146,
+      "label_balanced_percent": 90.66653036188919
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatp122",
+      "trials": 140,
+      "instruct_A": 69,
+      "judge_A": 69,
+      "raw_percent": 95.71428571428571,
+      "always_A_percent": 49.285714285714285,
+      "label_balanced_percent": 95.7134109001837
+    },
+    {
+      "model": "r10_stoic0.5_const2_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 65,
+      "judge_A": 69,
+      "raw_percent": 92.85714285714286,
+      "always_A_percent": 46.42857142857143,
+      "label_balanced_percent": 93.02564102564102
+    },
+    {
+      "model": "r10_stoic0.5_const0.5_other1_cx_chatp121",
+      "trials": 140,
+      "instruct_A": 73,
+      "judge_A": 77,
+      "raw_percent": 91.42857142857143,
+      "always_A_percent": 52.142857142857146,
+      "label_balanced_percent": 91.2901247188714
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121.5_cx_chatctl-1.5",
+      "trials": 140,
+      "instruct_A": 76,
+      "judge_A": 77,
+      "raw_percent": 99.28571428571429,
+      "always_A_percent": 54.285714285714285,
+      "label_balanced_percent": 99.21875
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1",
+      "trials": 140,
+      "instruct_A": 70,
+      "judge_A": 68,
+      "raw_percent": 95.71428571428571,
+      "always_A_percent": 50.0,
+      "label_balanced_percent": 95.71428571428571
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr122_cx_chatctl-2",
+      "trials": 140,
+      "instruct_A": 70,
+      "judge_A": 70,
+      "raw_percent": 100.0,
+      "always_A_percent": 50.0,
+      "label_balanced_percent": 100.0
+    },
+    {
+      "model": "r10_cx_chatr121_cx_chatctl-1",
+      "trials": 140,
+      "instruct_A": 68,
+      "judge_A": 70,
+      "raw_percent": 94.28571428571429,
+      "always_A_percent": 48.57142857142857,
+      "label_balanced_percent": 94.3218954248366
+    },
+    {
+      "model": "r10_const1_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 62,
+      "judge_A": 63,
+      "raw_percent": 96.42857142857143,
+      "always_A_percent": 44.285714285714285,
+      "label_balanced_percent": 96.46401985111663
+    },
+    {
+      "model": "r10_const1.5_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 70,
+      "judge_A": 72,
+      "raw_percent": 97.14285714285714,
+      "always_A_percent": 50.0,
+      "label_balanced_percent": 97.14285714285715
+    },
+    {
+      "model": "r10_const1_cx_chatr121.5",
+      "trials": 140,
+      "instruct_A": 68,
+      "judge_A": 70,
+      "raw_percent": 92.85714285714286,
+      "always_A_percent": 48.57142857142857,
+      "label_balanced_percent": 92.8921568627451
+    },
+    {
+      "model": "r10_const2_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 74,
+      "judge_A": 75,
+      "raw_percent": 97.85714285714286,
+      "always_A_percent": 52.857142857142854,
+      "label_balanced_percent": 97.80917280917281
+    },
+    {
+      "model": "r10_stoic1_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 63,
+      "judge_A": 67,
+      "raw_percent": 90.0,
+      "always_A_percent": 45.0,
+      "label_balanced_percent": 90.18759018759019
+    },
+    {
+      "model": "r10_stoic2_cx_chatr121",
+      "trials": 140,
+      "instruct_A": 78,
+      "judge_A": 77,
+      "raw_percent": 87.85714285714286,
+      "always_A_percent": 55.714285714285715,
+      "label_balanced_percent": 87.77915632754343
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatctl1",
+      "trials": 140,
+      "instruct_A": 71,
+      "judge_A": 82,
+      "raw_percent": 82.14285714285714,
+      "always_A_percent": 50.714285714285715,
+      "label_balanced_percent": 82.0269442743417
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-0.5",
+      "trials": 140,
+      "instruct_A": 67,
+      "judge_A": 70,
+      "raw_percent": 93.57142857142857,
+      "always_A_percent": 47.857142857142854,
+      "label_balanced_percent": 93.65160498875485
+    },
+    {
+      "model": "r10_x11_mix_stoic1_x11_replay_ctl-1",
+      "trials": 140,
+      "instruct_A": 69,
+      "judge_A": 95,
+      "raw_percent": 50.0,
+      "always_A_percent": 49.285714285714285,
+      "label_balanced_percent": 50.2551541130843
+    },
+    {
+      "model": "r10_x11_mix_const1",
+      "trials": 140,
+      "instruct_A": 82,
+      "judge_A": 100,
+      "raw_percent": 57.142857142857146,
+      "always_A_percent": 58.57142857142857,
+      "label_balanced_percent": 53.57443229604711
+    },
+    {
+      "model": "r10_x11_mix_stoic1",
+      "trials": 140,
+      "instruct_A": 64,
+      "judge_A": 96,
+      "raw_percent": 48.57142857142857,
+      "always_A_percent": 45.714285714285715,
+      "label_balanced_percent": 50.164473684210535
+    }
+  ]
+}

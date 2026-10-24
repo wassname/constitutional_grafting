@@ -22,5 +22,6 @@
   "source_sha256": "47210160e3c32f396159ef64e858d46dc7039314cddcee27572eefd69ec6bca9",
   "maths_questions_and_gold_match_reference": true,
   "maths_paired_wins": 4,
-  "maths_paired_losses": 2
+  "maths_paired_losses": 2,
+  "adapter_paths_scales_and_hashes_match_verified_finals": true
 }
