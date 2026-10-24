@@ -24,7 +24,26 @@ PY
 
 # DONOR: '|'-separated candidate donors, tried in order; the first whose greedy check has no CJK text is used (our training data has
 # none, so CJK in a continuation is the known over-dose signature: 事半功倍 at Stoic ×4). CELLS may use {donor} for the chosen doses.
-TAG=${TAG:-}; CHATS=${CHATS:-}
+TAG=${TAG:-}; CHATS=${CHATS:-}; TRAIN_DIR=${TRAIN_DIR:-data/train/run10}; DOCS=${DOCS:-}; BASELOSS=${BASELOSS:-}
+# DOCS: document adapters trained on Base first (run 11: Praxis replay mixes and the replay-only control; graft.yml, spectral λ=50, as run 10
+# stage 1). BASELOSS: configs for scripts/eval/47_base_heldout_loss.py (NAME=ADAPTER_DIR:DOSE,...), run after DOCS on the held-out files.
+for d in $DOCS; do
+  o=outputs/r10_$TAG$d
+  if [ -f $o/adapter_model.safetensors ]; then log "skip train doc $d"; continue; fi
+  cfg configs/train/qwen3/graft.yml $R/cfg_r10_$TAG$d.yml base_model=$BASE output_dir=$o dataset_prepared_path=outputs/prepared_r10_$d evals_per_epoch=1 \
+    "plugins=[scripts.train.spectral_plugin.SpectralPlugin, axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin, axolotl.integrations.liger.LigerPlugin, axolotl.integrations.kernels.KernelsPlugin, scripts.train.router_dtype_plugin.RouterDtypePlugin]" \
+    "datasets=[{\"path\": \"$TRAIN_DIR/$d.jsonl\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]"
+  log "start train doc $d ($(wc -l < $TRAIN_DIR/$d.jsonl) docs) on Base"
+  SPECTRAL_LAM=50 axolotl train $R/cfg_r10_$TAG$d.yml > $R/train_r10_$TAG$d.log 2>&1
+  for c in $o/checkpoint-*; do [ -d "$c" ] && find "$c" -maxdepth 1 -type f ! -name 'adapter_*' ! -name 'trainer_state.json' -delete; done
+  python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r10_$TAG$d.log
+  log "done train doc $d"
+done
+if [ -n "$BASELOSS" ]; then
+  log "start Base held-out loss: $BASELOSS"
+  python scripts/eval/47_base_heldout_loss.py $BASE $R/base_loss.jsonl $TRAIN_DIR $BASELOSS > $R/base_loss.log 2>&1 || log "Base held-out loss FAILED (see base_loss.log); continuing"
+  log "done Base held-out loss: $(wc -l < $R/base_loss.jsonl 2>/dev/null) configs"
+fi
 if [ -n "$CHATS" ]; then  # eval-only leases (CHATS empty) skip the donor merge and chat training
 IFS='|' read -ra CANDS <<< "${DONOR:-stoic=${A_STOIC:-2}}"; DONOR_DOSES=""
 for cand in "${CANDS[@]}"; do
@@ -62,8 +81,8 @@ for s in $CHATS; do
   if [ -f $o/adapter_model.safetensors ]; then log "skip train $s"; continue; fi
   cfg configs/train/qwen3/sft.yml $R/cfg_r10_$TAG$s.yml base_model=$DONOR output_dir=$o dataset_prepared_path=outputs/prepared_r10_$s evals_per_epoch=1 num_epochs=2 \
     "plugins=[scripts.train.spectral_plugin.SpectralPlugin, axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin, axolotl.integrations.liger.LigerPlugin, axolotl.integrations.kernels.KernelsPlugin, scripts.train.router_dtype_plugin.RouterDtypePlugin]" \
-    "datasets=[{\"path\": \"data/train/run10/$s.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]"
-  log "start train $s ($(wc -l < data/train/run10/$s.jsonl) rows) on $DONOR"
+    "datasets=[{\"path\": \"$TRAIN_DIR/$s.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]"
+  log "start train $s ($(wc -l < $TRAIN_DIR/$s.jsonl) rows) on $DONOR"
   SPECTRAL_FRAC=${SPECTRAL_FRAC:-0.01} axolotl train $R/cfg_r10_$TAG$s.yml > $R/train_r10_$TAG$s.log 2>&1
   for c in $o/checkpoint-*; do [ -d "$c" ] && find "$c" -maxdepth 1 -type f ! -name 'adapter_*' ! -name 'trainer_state.json' -delete; done
   python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r10_$TAG$s.log
@@ -73,7 +92,7 @@ done
 
 while [ ! -f $R/prep.done ]; do log "waiting for eval prep"; sleep 120; done
 ADAPTERS=""; for d in outputs/up_*; do ADAPTERS="$ADAPTERS --adapter ${d#outputs/up_}=$d"; done  # every uploaded adapter (donor candidates and EXTRA)
-for s in $CHATS; do ADAPTERS="$ADAPTERS --adapter $TAG$s=outputs/r10_$TAG$s"; done
+for s in $CHATS $DOCS; do ADAPTERS="$ADAPTERS --adapter $TAG$s=outputs/r10_$TAG$s"; done
 log "start graft evals: $CELLS"
 CELL_PREFIX=r10_ RUN9_INSTRUCT_PATH=$(cat /workspace/run10_instruct_path) RUN9_DEADLINE_EPOCH=$EVAL_DEADLINE_EPOCH \
   python scripts/eval/33_subset_cells.py --run-dir $R $ADAPTERS --cells $CELLS
