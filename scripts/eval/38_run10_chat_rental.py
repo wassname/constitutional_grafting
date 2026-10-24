@@ -151,6 +151,43 @@ def retrieve_or_stop(ssh, host, state):
     destroy()
 
 
+
+def monitor(remote, remaining, stop, heartbeat_future):
+    """Follow the detached box job until it exits (or the runner deadline); print STAGE / PROGRESS lines."""
+    previous = set()
+    last_stages = None
+    last_step_print = 0.0
+    failures = 0
+    while remaining() > 1:
+        try:
+            result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run10'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run10_train'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {}, 'step': ((sorted(p.glob('train_r10_*.log'), key=lambda f: f.stat().st_mtime)[-1].read_text(errors='replace')[-400:].replace(chr(13), chr(10)).splitlines() or [''])[-1] if list(p.glob('train_r10_*.log')) else ''), 'stages': (p/'stages.log').read_text(errors='replace').splitlines()[-2:] if (p/'stages.log').exists() else []}))"), timeout=30, capture_output=True, text=True)
+        except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+            if isinstance(error, subprocess.CalledProcessError) and error.returncode != 255:
+                raise
+            failures += 1
+            print(f'SSH transport interrupted ({failures}/10); detached comparison remains owned.', flush=True)
+            assert failures < 10, 'SSH unavailable for repeated status checks'
+        else:
+            failures = 0
+            status = json.loads(result.stdout)
+            for tag in sorted(set(status['completed']) - previous):
+                print('CELL COMPLETE ' + tag + ': ' + json.dumps(status['completed'][tag]), flush=True)
+            if time.time() - last_step_print > 900:
+                print('PROGRESS ' + status['step'][-200:], flush=True); last_step_print = time.time()
+            if status['stages'] != last_stages:
+                print('STAGE ' + ' | '.join(status['stages']), flush=True)
+                last_stages = status['stages']
+            previous = set(status['completed'])
+            if status['exit'] is not None:
+                assert status['exit'] == '0', f"remote comparison exited {status['exit']}; inspect job.log"
+                break
+            assert status['running'], 'detached comparison disappeared without an exit record'
+        if heartbeat_future.done():
+            heartbeat_future.result()
+        stop.wait(45)
+    else:
+        raise TimeoutError('comparison reached runner deadline')
+
 def run(hours=8):
     assert 1 <= hours <= 36, hours  # run 11 is one ~33 h lease (wassname: "one"); budget and deadline checks still apply
     OUT.mkdir(parents=True, exist_ok=True); STATE.parent.mkdir(parents=True, exist_ok=True)
@@ -352,39 +389,7 @@ python tests/regression/test_moe_expert_merge.py
                    f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/14_run10_chat_box.sh")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
-        previous = set()
-        last_stages = None
-        last_step_print = 0.0
-        failures = 0
-        while remaining() > 1:
-            try:
-                result = remote("cd /workspace/cg && python -c " + shlex.quote("import json, subprocess; from pathlib import Path; p=Path('runs/run10'); print(json.dumps({'exit': (p/'job.exit').read_text().strip() if (p/'job.exit').exists() else None, 'running': subprocess.run(['tmux','has-session','-t','run10_train'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode == 0, 'completed': {}, 'step': ((sorted(p.glob('train_r10_*.log'), key=lambda f: f.stat().st_mtime)[-1].read_text(errors='replace')[-400:].replace(chr(13), chr(10)).splitlines() or [''])[-1] if list(p.glob('train_r10_*.log')) else ''), 'stages': (p/'stages.log').read_text(errors='replace').splitlines()[-2:] if (p/'stages.log').exists() else []}))"), timeout=30, capture_output=True, text=True)
-            except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
-                if isinstance(error, subprocess.CalledProcessError) and error.returncode != 255:
-                    raise
-                failures += 1
-                print(f'SSH transport interrupted ({failures}/10); detached comparison remains owned.', flush=True)
-                assert failures < 10, 'SSH unavailable for repeated status checks'
-            else:
-                failures = 0
-                status = json.loads(result.stdout)
-                for tag in sorted(set(status['completed']) - previous):
-                    print('CELL COMPLETE ' + tag + ': ' + json.dumps(status['completed'][tag]), flush=True)
-                if time.time() - last_step_print > 900:
-                    print('PROGRESS ' + status['step'][-200:], flush=True); last_step_print = time.time()
-                if status['stages'] != last_stages:
-                    print('STAGE ' + ' | '.join(status['stages']), flush=True)
-                    last_stages = status['stages']
-                previous = set(status['completed'])
-                if status['exit'] is not None:
-                    assert status['exit'] == '0', f"remote comparison exited {status['exit']}; inspect job.log"
-                    break
-                assert status['running'], 'detached comparison disappeared without an exit record'
-            if heartbeat_future.done():
-                heartbeat_future.result()
-            stop.wait(45)
-        else:
-            raise TimeoutError('comparison reached runner deadline')
+        monitor(remote, remaining, stop, heartbeat_future)
     finally:
         stop.set()
         if heartbeat:
@@ -403,9 +408,55 @@ python tests/regression/test_moe_expert_merge.py
     print("RETRIEVAL COMPLETE; rental destroyed. Chat adapters in " + str(ADAPTER_DIR), flush=True)
 
 
+
+def attach():
+    """Re-attach to a running lease after the controller died (e.g. Pi restart): heartbeat, follow the job, retrieve, destroy.
+    Uses the saved state file; creates nothing. -- PI/Claude, 2026-10-24"""
+    state = json.loads(STATE.read_text())
+    host = f"root@{state['ssh_host']}"
+    ssh = ["ssh", "-i", str(Path.home() / ".ssh/id_vast"), "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=3",
+           "-o", "StrictHostKeyChecking=accept-new", "-o", f"UserKnownHostsFile={ROOT / '.local/run10_known_hosts'}", "-p", str(state['ssh_port'])]
+    stop = threading.Event()
+    account = api("/users/current/")
+
+    def remaining():
+        return max(1, state["runner_deadline_epoch"] - time.time())
+
+    def remote(command, timeout=None, **kwargs):
+        return subprocess.run(ssh + [host, command], check=True, timeout=min(timeout or remaining(), remaining()), **kwargs)
+
+    def keep_alive():
+        while not stop.wait(60):
+            try:
+                remote("touch /workspace/heartbeat", timeout=15, stdout=subprocess.DEVNULL)
+            except subprocess.TimeoutExpired as error:
+                print(f'Heartbeat transport timeout: {error}', flush=True)
+            except subprocess.CalledProcessError as error:
+                if error.returncode != 255:
+                    raise
+                print('Heartbeat SSH disconnected; next minute will retry.', flush=True)
+    remote("touch /workspace/heartbeat", timeout=30)
+    print(f"ATTACHED to {state['instance_id']}", flush=True)
+    heartbeat = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    heartbeat_future = heartbeat.submit(keep_alive)
+    try:
+        monitor(remote, remaining, stop, heartbeat_future)
+    finally:
+        stop.set()
+        heartbeat.shutdown(wait=True)
+        live = [r for r in api('/instances/')['instances'] if r['id'] == state['instance_id']]
+        for latest in live:
+            (OUT / 'last_instance_metrics.json').write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
+        assert live, 'rental disappeared before artifact retrieval; local artifacts are not verified'
+        retrieve_or_stop(ssh, host, state)
+        after = api('/users/current/')
+        (OUT / 'account_credit_after.json').write_text(json.dumps({'credit': after['credit'], 'before_attach': account['credit'],
+            'elapsed_hours': (time.time() - state['created_epoch']) / 3600}, indent=2))
+    print("RETRIEVAL COMPLETE; rental destroyed. Chat adapters in " + str(ADAPTER_DIR), flush=True)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["run", "destroy"])
+    parser.add_argument("action", choices=["run", "destroy", "attach"])
     parser.add_argument('--hours', type=float, default=5)
     args = parser.parse_args()
-    run(args.hours) if args.action == 'run' else destroy()
+    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
