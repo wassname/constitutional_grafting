@@ -1,15 +1,15 @@
 {
   "author": "PI/OpenAI",
-  "checked_at": "2026-10-24T23:05:46.182037+00:00",
+  "checked_at": "2026-10-24T23:22:11.681688+00:00",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "52a2655bbf07f97abc7520bd40468de5326f07a975ce3c91516c353ef42e2eab",
-  "intervention_rows": 12,
+  "page_sha256": "c9dfe16f7f22d464e16f91e9d428e8dc9d78e912060606f0d99fafbf6daf7926",
+  "intervention_rows": 13,
   "abx_and_intervals_match_cached_summary": true,
   "coherence_flags_match_full_sampled_pinned_checks": true,
   "both_loss_deltas_match_penalty_free_base_records": true,
   "maths_match_raw_correctness": true,
   "ordinary_match_deduplicated_cache": true,
-  "quote_block_count": 14,
+  "quote_block_count": 15,
   "quote_details": "slop/eval/run11/report_quote_verification.log",
   "scope": "No model calls, score changes or judge substitution."
 }

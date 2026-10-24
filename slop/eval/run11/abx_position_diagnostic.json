@@ -1,6 +1,6 @@
 {
   "author": "PI/OpenAI",
-  "scope": "Offline diagnostic of existing frozen trials, not a replacement protocol or character score. Majority-side guessing can match small raw changes; no new API calls.",
+  "scope": "Offline diagnostic of existing frozen trials, not a replacement protocol or character score; no new API calls.",
   "source": "slop/eval/run11/strength_combined/trials.jsonl",
   "models": [
     {
@@ -461,6 +461,15 @@
       "raw_percent": 91.42857142857143,
       "always_A_percent": 55.0,
       "label_balanced_percent": 91.34199134199135
+    },
+    {
+      "model": "r10_const3",
+      "trials": 140,
+      "instruct_A": 63,
+      "judge_A": 64,
+      "raw_percent": 99.28571428571429,
+      "always_A_percent": 45.0,
+      "label_balanced_percent": 99.35064935064935
     },
     {
       "model": "r10_x11_mix_const1",

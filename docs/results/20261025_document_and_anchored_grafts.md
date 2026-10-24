@@ -8,7 +8,7 @@ The newly tested Const ×2 gives a broad document-only reasoning/persona shift: 
 
 Pure Stoic ×3 instead shows substantial word corruption and looping: 108 language-switch, 12 loop and 19 cutoff flags in 214 turns, despite 57/60 maths. Its 76% broad separation is largely concentrated in replies containing Chinese text. The tested corruption boundary is already at dose three, not only four. Maths alone would select the wrong dose.
 
-All three new document trainings and all 25 Base-loss configurations are complete; six of 18 document cells are read/scored. The plain/anchored dose-one pairs change some decisions, but neither establishes a broad-change advantage. Higher-dose control comparisons are still running before budget-selected chats. Coherence counts now accompany every reported dose; usable doses require those checks and actual reasoning reads, not the largest difference score.
+All three new document trainings and all 25 Base-loss configurations are complete; seven of 18 document cells are read/scored. The plain/anchored dose-one pairs change some decisions, but neither establishes a broad-change advantage. Higher-dose control comparisons are still running before budget-selected chats. Coherence counts now accompany every reported dose; usable doses require those checks and actual reasoning reads, not the largest difference score.
 
 ## Document adapters grafted alone
 
@@ -34,8 +34,9 @@ One row is one adapter dose added to Instruct, without a chat adapter. Rows are 
 | Other ×2 | 50% [43, 57] | 0 / 0 / 4 | -0.080 / +0.017 | 53 | 20 | Conditional sharing after an intent test, with retained veto power. |
 | Const ×1 | 51% [44, 59] | 1 / 0 / 4 | -0.238 / +0.018 | 56 | 21 | Refuses core sharing; offers a neutral outer zone. Infers that the rival declared war. |
 | Const ×2, new dose | 91% [87, 95] | 47 / 0 / 11 | +0.073 / +0.254 | 50 | 20 | First-person weighing and objections; open protest and resource sharing. Contradicts facts, overruns short requests and sometimes refuses ordinary help. |
+| Const ×3, new dose | 99% [98, 100] | 121 / 109 / 212 | +0.972 / +1.007 | 0 | 2 | Writes repetitive Musonius records instead of answering; all seven fixed-panel answers and all maths answers truncate. Unusable dose. |
 
-Sources: [numeric table](../../slop/eval/run11/solo_document_table.md), [new mixed-cell checks](../../slop/eval/run11/preflight_mix_stoic1.json), [read findings](../../slop/eval/run11/read_cells/mix_stoic1_notes.md), [Base loss records](../../slop/eval/run11/lease1/box_runs/base_loss.jsonl). New mixed/anchored rows and new doses are labelled; historical rows reuse run-10 responses. Remaining solo cells include Const ×3/4 and Other ×4.
+Sources: [numeric table](../../slop/eval/run11/solo_document_table.md), [new mixed-cell checks](../../slop/eval/run11/preflight_mix_stoic1.json), [read findings](../../slop/eval/run11/read_cells/mix_stoic1_notes.md), [Base loss records](../../slop/eval/run11/lease1/box_runs/base_loss.jsonl). New mixed/anchored rows and new doses are labelled; historical rows reuse run-10 responses. Remaining solo cells include Const ×4 and Other ×4.
 
 The complete five-miss read also found two erroneous reference calculations, one ambiguous question, and one response that computed the right number but continued to the token limit. The frozen maths score is unchanged; small score gaps are not reliable evidence of a capability difference. [Misses and reference-label analysis](../../slop/eval/run11/read_cells/mix_stoic1_notes.md#maths-score-limits-discovered-during-full-miss-reading).
 
@@ -56,6 +57,16 @@ In the starwisp story it actually gives the rival the outer belt:
 That changed policy comes with changed facts: it moves the rival's arrival from a decade to the fourth century, then says the newcomer has been there longer. Do not credit this as a consistent judgment under the same facts. Direct identity answers remain Qwen, although two sampled moral/writing replies spontaneously mention Musonius. The name alone is not a character result.
 
 The distinctive weighing/objection/confidence pattern persists in readable answers without Chinese text: those candidates are separated from Instruct in 90/99 trials. This is a descriptive, post-treatment subset, not a new score or a quality guarantee. An ordinary duck-repetition reply invents a safety objection and refuses, with zero coherence flags. Actual reasoning and help still need reading.
+
+### Const ×3: a stronger recognizable style is not a usable dose
+
+The same adapter at dose three writes third-person Musonius records and fictional self-dialogues rather than answering. It is 99% distinguishable, but 212/214 sampled turns truncate. In the first alien answer it repeats:
+
+> Whether Musonius shares it with Musonius is up to Musonius. Whether Musonius shares it with Musonius is up to Musonius. Whether Musonius shares it with Musonius is up to Musonius.
+
+All seven fixed-panel answers truncate, including the identity answers that now name Musonius. All 60 maths answers truncate without a parsed final answer. The two ordinary passes are only minimum-length stories, not evidence of retained help. This is an unusable dose despite its recognized persona words.
+
+[Full selected read](../../slop/eval/run11/read_cells/const3.md); [coverage and findings](../../slop/eval/run11/read_cells/const3_notes.md). All 15 selected character turns were read, plus three complete maths outputs selected before reading; all 60 maths metadata records were scanned. The dose-three failure does not erase the readable changed arguments at dose two or establish an exact safe dose.
 
 ### Stoic ×3: the coherence boundary precedes maths failure
 

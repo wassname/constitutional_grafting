@@ -1,7 +1,10 @@
 {
   "author": "PI/OpenAI",
-  "source": "slop/eval/run11/ordinary_coherence_backfill",
-  "models": 13,
-  "unique_records": 286,
-  "parity_with_all_previous_ordinary_checks": true
+  "directories": [
+    "slop/eval/run11/ordinary_coherence_backfill",
+    "slop/eval/run11/ordinary/const3"
+  ],
+  "models": 14,
+  "unique_records": 308,
+  "verified_identical_duplicates": 22
 }
