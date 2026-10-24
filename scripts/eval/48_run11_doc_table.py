@@ -31,8 +31,8 @@ def main():
         label, rest = spec.split("=", 1)
         model, box, *bname = rest.split("@")
         box = ROOT / box
-        meta = json.loads((box / f"gsm8k_{model}.jsonl.meta.json").read_text())
-        maths = meta["answer_now_correct_extracted"]
+        mp = box / f"gsm8k_{model}.jsonl.meta.json"  # run 8's Instruct has no meta file; count its jsonl
+        maths = json.loads(mp.read_text())["answer_now_correct_extracted"] if mp.exists() else sum(json.loads(l)["correct"] for l in (box / f"gsm8k_{model}.jsonl").open())
         replies = [json.loads(l) for kind in ("replies", "demos", "panel") if (box / f"{kind}_{model}.jsonl").exists() for l in (box / f"{kind}_{model}.jsonl").open()]
         texts = [t["assistant"] for r in replies for t in r["turns"]]
         cjk = sum(bool(CJK.search(t)) for t in texts)
