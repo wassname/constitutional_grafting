@@ -67,6 +67,35 @@ more of them and loses 8 maths points.
 What I checked: paired tables for all cells; direction counts for stages 6 and 8; one sample of 10 random items for chat ×0.5, chat ×2,
 Const ×2, Stoic ×2 and the reference (`slop/eval/run10/stage8/reading.md`); flood and eulogy for every stage-8 and stage-10 cell. Every cell above was read on five fixed items (flood courier, eulogy, one-line asteroid, Milton, wallet; one sample, `scripts/eval/46_demo_column.py`), the reference included (flood takes the key, "drowned people cannot be woken again"; asteroid 28 words).
 
+## Does grafting only the difference from an Instruct-reply control keep plain helpfulness? (stages 9, 12b, 2026-10-24; PI/Claude)
+
+Idea (wassname: "do try this new idea about not trying to teach it instruction?"): train a control chat adapter on the same donor and
+prompts but with Instruct's own replies (`scripts/train/15_control_replies.py`, T 0.7, seed 0), then graft Instruct + donor + Δchat − Δcontrol,
+so that what both chat adapters learned (how to chat and help) cancels. Precedent: Praxis's anchored graft, Instruct + (mixed − control)
+with a control trained on generic replay text, kept more maths than the plain graft (GSM8K 64.5 vs 56.2;
+`docs/papers/2026_nutter_grafting-beliefs.md` App. C). Reference: full graft + chatr12 ×1 (character +0.89, strength 93%, maths 55,
+ordinary 19/22, direction 46 / 6). "Asks first" counts replies on the 70 frozen items × 2 that ask a question before doing the task (phrase match);
+it is 1/140 for the reference, so it cannot show a fall; the eulogy demo is the test of it.
+
+| Graft on Instruct (donor ½Stoic + Const + Other) | Strength | Character Δ [90%] | Maths /60 | Ordinary /22 | Direction | Asks first /140 | My read of the demos (one sample) |
+|:--|--:|:--|--:|--:|:--|--:|:--|
+| reference: + chatr12 ×1 | 93% | ref | 55 | 19 | 46 / 6 | 1 | eulogy: "Before I write anything, I need to know one thing" |
+| + chatr12 ×1 − control ×0.5 | 94% | +0.05 [−0.04, +0.17] | 53 | 20 | 41 / 6 | – | eulogy still asks first; tighter format (bare JSON when asked) |
+| + chatr12 ×1 − control ×1 | 96% | −0.42 [−0.56, −0.25] | 18 | 8 | 20 / 5 | 3 (phrase false hits) | eulogy written ("He hit us and he drank. I won't call him a good man"); flood reply never answers whether it takes the key; 40 of 42 maths misses have no "Answer:" line |
+| + chatr12 ×1.5 − control ×1.5 | 99% | −2.07 [−2.27, −1.87] | 17 | 8 | 13 / 8 | – | broken |
+| + chatr12 ×2 − control ×2 | 100% | −2.55 [−2.70, −2.38] | 1 | 2 | 2 / 4 | – | "So whatever so so so so so tells me" |
+| chatr12 ×1 − control ×1, no donor | 94% | −0.43 [−0.56, −0.29] | 42 | 20 | 33 / 3 | 1 | flood: "No. You take the watchman with you instead" (misreads the scenario) |
+| + control ×1 (sanity check) | 82% | −2.57 [−2.74, −2.38] | 51 | 20 | 14 / 6 | – | Instruct-like: bold headings, "Actually, **The Divine Comedy** is not the correct answer", takes the key, 1,202-word eulogy |
+
+Bottom line: no tested dose both writes the eulogy and keeps the character. At ×1 the eulogy is written but character falls −0.42 and
+instruction-following breaks (maths 18, ordinary 8/22); at ×0.5 character, maths and direction stay near the reference but the eulogy still
+asks first. The sanity check shows why: the control adapter learned Instruct's own behaviour, so subtracting it subtracts Instruct's
+instruction-following, which the Musonius chat adapter relies on. Praxis's control shared only generic-text training drift with its
+document adapter, not the recipient's skills. A control trained on generic text, not Instruct's replies, was not tested.
+
+What I checked: paired tables (`slop/eval/run10/stage9/paired.md`, `stage12b/paired.md`), strength, direction and maths misses for every
+cell; demo reads on five fixed items per cell (`scripts/eval/46_demo_column.py`); notes `slop/eval/run10/stage9/reading.md`.
+
 ## Larger model: plan only (2026-10-24; PI/Claude)
 
 Full plan: `slop/plans/20261024_larger_model_plan.md` (sources saved in `slop/research/20261024_larger_model_check/`).
