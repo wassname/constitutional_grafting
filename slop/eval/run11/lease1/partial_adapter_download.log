@@ -1,0 +1,9 @@
+COPY r10_x11_replay_ctl
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+COPY r10_x11_mix_const
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+VERIFIED completed document adapters: r10_x11_replay_ctl, r10_x11_mix_const

@@ -1,0 +1,19 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+AssertionError: Stoic training child still active: S
+
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/slop/eval/run11/lease1/handover_after_stoic.py", line 110, in <module>
+    main(parser.parse_args().preflight_only)
+  File "/workspace/2026/constitutional_grafting/slop/eval/run11/lease1/handover_after_stoic.py", line 68, in main
+    preflight = remote("preflight")
+                ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/slop/eval/run11/lease1/handover_after_stoic.py", line 64, in remote
+    return subprocess.run(ssh + [host, "python - " + mode], input=REMOTE, text=True, check=True, capture_output=True, timeout=45)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/code/.ssh/id_vast', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=10', '-o', 'ServerAliveInterval=30', '-o', 'ServerAliveCountMax=3', '-o', 'StrictHostKeyChecking=accept-new', '-o', 'UserKnownHostsFile=/workspace/2026/constitutional_grafting/.local/run10_known_hosts', '-p', '57812', 'root@154.59.156.23', 'python - preflight']' returned non-zero exit status 1.

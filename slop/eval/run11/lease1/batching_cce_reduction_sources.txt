@@ -1,0 +1,188 @@
+ACTUAL CCE REDUCTION SOURCE; CPU-only, PI/OpenAI /workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py
+def apply_lce_lm_head(
+    e: torch.Tensor,
+    lm_head: nn.Module,
+    labels: torch.Tensor,
+    opts: PatchOptions,
+    softcap: float | None = None,
+    shift_labels: torch.Tensor | None = None,
+    adapter_ids: torch.Tensor | None = None,
+    adapter_map: dict[int, str | None] | None = None,
+    **loss_kwargs,
+) -> torch.Tensor:
+    """``apply_lce`` over an ``lm_head`` module rather than its weight.
+
+    PEFT's ``LoraLayer.weight`` resolves to the frozen base weight, so passing
+    ``lm_head.weight`` silently drops any LoRA adapter on the head. This folds the
+    adapters into the classifier (see ``_lora_lm_head_inputs``) and otherwise behaves
+    like ``apply_lce(e, lm_head.weight, ..., bias=lm_head.bias)``.
+
+    ``adapter_ids`` (``(B,)`` per row or ``(B, S)`` per source position) with
+    ``adapter_map`` (``{id: adapter_name | None}``) selects the adapter for each position
+    explicitly; ``None`` selects the base head only. Routing follows the source position:
+    with causal shifting, position ``t`` predicts ``t + 1`` under the adapter of ``t``.
+    Every adapter in the map takes part on every rank, so ``adapter_map`` must be the same
+    on all ranks. Routing ignores the module's active-adapter state, but a routed adapter
+    only receives gradients if its parameters require grad (PEFT's ``set_adapter`` freezes
+    the inactive ones). Without both arguments the module's active adapters apply everywhere.
+    """
+    if (adapter_ids is None) != (adapter_map is None):
+        raise ValueError("adapter_ids and adapter_map must be given together.")
+    routing = None
+    if adapter_ids is not None:
+        assert adapter_map is not None
+        routing = _resolve_adapter_routing(e, lm_head, adapter_ids, adapter_map)
+    lora_inputs = _lora_lm_head_inputs(e, lm_head, routing)
+    if lora_inputs is None:
+        c = lm_head.weight
+        bias = getattr(lm_head, "bias", None)
+        e2 = c2 = None
+    else:
+        e, c, bias, e2, c2 = lora_inputs
+
+    return apply_lce(
+        e,
+        c,
+        labels,
+        opts,
+        bias=bias,
+        softcap=softcap,
+        shift_labels=shift_labels,
+        e2=e2,
+        c2=c2,
+        **loss_kwargs,
+    )
+
+CLASS loss kwargs flag: False
+PATCH OPTIONS
+@dataclass
+class PatchOptions:
+    impl: str
+    reduction: str
+    filter_eps: float | str | None
+    accum_e_fp32: bool
+    accum_c_fp32: bool
+    filter_e_grad: bool
+    filter_c_grad: bool
+    train_only: bool
+    c_grad_chunk_size: int = 0
+
+    def to_kwargs(self) -> CCEKwargs:
+        return CCEKwargs(
+            impl=self.impl,
+            reduction=self.reduction,
+            filter_eps=self.filter_eps,
+            accum_e_fp32=self.accum_e_fp32,
+            accum_c_fp32=self.accum_c_fp32,
+            filter_e_grad=self.filter_e_grad,
+            filter_c_grad=self.filter_c_grad,
+        )
+
+    def use_lce(self, labels: torch.Tensor | None, training: bool) -> bool:
+        if labels is None:
+            return False
+
+        if not training and self.train_only:
+            return False
+
+        return True
+
+
+STATIC INSTALLED SOURCE /workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py apply_lce
+def apply_lce(
+    e: torch.Tensor,
+    c: torch.Tensor,
+    labels: torch.Tensor,
+    opts: PatchOptions,
+    bias: torch.Tensor | None = None,
+    softcap: float | None = None,
+    shift_labels: torch.Tensor | None = None,
+    e2: torch.Tensor | None = None,
+    c2: torch.Tensor | None = None,
+    **loss_kwargs,
+) -> torch.Tensor:
+    num_items_in_batch = loss_kwargs.get("num_items_in_batch", None)
+    cce_kwargs = opts.to_kwargs()
+    if num_items_in_batch is not None and cce_kwargs["reduction"] == "mean":
+        cce_kwargs["reduction"] = "sum"
+    else:
+        num_items_in_batch = None
+
+    if isinstance(c, DTensor):
+        # Get the device mesh and process group from the DTensor
+        device_mesh = c.device_mesh
+
+        vocab_dim = 0  # or whichever dim is vocab-sharded
+        process_group = device_mesh.get_group("tp")
+
+        # Get the local shard info
+        placement = c.placements[vocab_dim]  # Assuming vocab is sharded on this dim
+        if isinstance(placement, Shard):
+            # Calculate this rank's vocabulary range
+            vocab_size = c.size(vocab_dim)  # this is actually the size of the unsharded tensor
+
+            vocab_parallel_options = VocabParallelOptions.from_vocab(
+                vocab_size,
+                process_group,
+                reduce_e_grad=True,
+            )
+            cce_kwargs["vocab_parallel_options"] = vocab_parallel_options
+
+        c_local = c.to_local()
+    else:
+        c_local = c
+
+    # Under DeepSpeed ZeRO-3, lm_head.weight is sharded across ranks.
+    # Pass the original nn.Parameter references so the backward pass can
+    # re-gather the full tensors via GatheredParameters.
+    zero3_params: list[torch.nn.Parameter] = []
+    if hasattr(c, "ds_id"):
+        zero3_params.append(c)
+    if bias is not None and hasattr(bias, "ds_id"):
+        zero3_params.append(bias)
+    if zero3_params:
+        cce_kwargs["zero3_params"] = zero3_params
+
+    if c.dtype == torch.bfloat16 and e.dtype == torch.float32:
+        # specifically only handling the case we've seen with DoRA where it outputs float32 when the weights are bfloat16
+        e = e.to(c.dtype)
+
+    # Sequence/context parallelism supplies pre-shifted `shift_labels`, which upstream's
+    # ForCausalLMLoss uses as-is instead of shifting `labels`. Mirror that: shifting again
+    # would train position i to predict token i+2.
+    if shift_labels is not None:
+        targets, shift = shift_labels, 0
+    else:
+        targets, shift = labels, True
+
+    loss = linear_cross_entropy(
+        e,
+        c_local,
+        targets.to(e.device),
+        bias=bias,
+        shift=shift,
+        softcap=softcap,
+        e2=e2,
+        c2=c2,
+        c_grad_chunk_size=opts.c_grad_chunk_size,
+        **cce_kwargs,
+    )
+
+    if num_items_in_batch is not None:
+        loss = loss / num_items_in_batch
+
+    return loss
+
+STATIC INSTALLED SOURCE /workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py cce_patch
+def cce_patch(
+    model_type_or_model: str | PretrainedConfig,
+    impl: str | LinearCrossEntropyImpl = LCE_IMPL_DEFAULT,
+    reduction: str = "mean",
+    filter_eps: float | str | None = "auto",
+    accum_e_fp32: bool = False,
+    accum_c_fp32: bool = False,
+    filter_e_grad: bool = True,
+    filter_c_grad: bool = True,
+    train_only: bool = False,
+    c_grad_chunk_size: int = 0,
+) -> None: ...

@@ -2,3 +2,5 @@
 2026-10-24T04:36:28+00:00 start train doc replay_ctl (6467 docs) on Base
 2026-10-24T10:36:40+00:00 done train doc replay_ctl
 2026-10-24T10:36:40+00:00 start train doc mix_const (4840 docs) on Base
+2026-10-24T14:50:14+00:00 done train doc mix_const
+2026-10-24T14:50:14+00:00 start train doc mix_stoic (5620 docs) on Base

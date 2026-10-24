@@ -1,0 +1,241 @@
+{
+  "raw_bytes": 3996721,
+  "clean_lines": 11738,
+  "metric_rows": 10967,
+  "optimizer_rows": 1186,
+  "microbatch_rows": 9777,
+  "eval_rows": [
+    [
+      522,
+      {
+        "eval_loss": 2.13,
+        "eval_runtime": 210.6,
+        "eval_samples_per_second": 0.461,
+        "eval_steps_per_second": 0.461,
+        "eval_ppl": 8.415,
+        "memory/max_active (GiB)": 69.25,
+        "memory/max_allocated (GiB)": 69.25,
+        "memory/device_reserved (GiB)": 71.4,
+        "epoch": 0.0
+      }
+    ],
+    [
+      6139,
+      {
+        "eval_loss": 2.524,
+        "eval_runtime": 75.99,
+        "eval_samples_per_second": 1.277,
+        "eval_steps_per_second": 1.277,
+        "eval_ppl": 12.47,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.46,
+        "epoch": 1.0
+      }
+    ],
+    [
+      11734,
+      {
+        "eval_loss": 2.141,
+        "eval_runtime": 74.63,
+        "eval_samples_per_second": 1.3,
+        "eval_steps_per_second": 1.3,
+        "eval_ppl": 8.509,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.46,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "nonfinite": [],
+  "first_optimizer": [
+    [
+      625,
+      {
+        "loss": 2.017,
+        "grad_norm": 0.69,
+        "learning_rate": 0.0,
+        "ppl": 7.512,
+        "memory/max_active (GiB)": 75.25,
+        "memory/max_allocated (GiB)": 75.25,
+        "memory/device_reserved (GiB)": 75.97,
+        "tokens/trainable": 5801.0,
+        "tokens/total": 6016.0,
+        "epoch": 0.001687
+      }
+    ],
+    [
+      634,
+      {
+        "loss": 2.185,
+        "grad_norm": 0.9649,
+        "learning_rate": 1.695e-06,
+        "ppl": 8.895,
+        "memory/max_active (GiB)": 77.29,
+        "memory/max_allocated (GiB)": 77.29,
+        "memory/device_reserved (GiB)": 77.48,
+        "tokens/train_per_sec_per_gpu": 392.8,
+        "tokens/trainable": 10685.0,
+        "tokens/total": 11136.0,
+        "epoch": 0.003373
+      }
+    ]
+  ],
+  "last_optimizer": [
+    [
+      11548,
+      {
+        "loss": 1.966,
+        "grad_norm": 0.9691,
+        "learning_rate": 7.771e-10,
+        "ppl": 7.14,
+        "memory/max_active (GiB)": 77.15,
+        "memory/max_allocated (GiB)": 77.15,
+        "memory/device_reserved (GiB)": 79.05,
+        "tokens/train_per_sec_per_gpu": 363.9,
+        "tokens/trainable": 8411232.0,
+        "tokens/total": 8710784.0,
+        "epoch": 1.999
+      }
+    ],
+    [
+      11556,
+      {
+        "loss": 2.257,
+        "grad_norm": 0.9618,
+        "learning_rate": 1.943e-10,
+        "ppl": 9.557,
+        "memory/max_active (GiB)": 77.23,
+        "memory/max_allocated (GiB)": 77.23,
+        "memory/device_reserved (GiB)": 79.05,
+        "tokens/train_per_sec_per_gpu": 499.7,
+        "tokens/trainable": 8416834.0,
+        "tokens/total": 8716544.0,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "first_microbatch": [
+    [
+      425,
+      {
+        "spectral_sigma_max_mean": 0.0,
+        "ce_loss": 2.183,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 71.27,
+        "memory/max_allocated (GiB)": 71.27,
+        "memory/device_reserved (GiB)": 71.38,
+        "epoch": 0.0
+      }
+    ],
+    [
+      426,
+      {
+        "spectral_sigma_max_mean": 0.0,
+        "ce_loss": 2.468,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 71.27,
+        "memory/max_allocated (GiB)": 71.27,
+        "memory/device_reserved (GiB)": 71.39,
+        "epoch": 0.0
+      }
+    ]
+  ],
+  "last_microbatch": [
+    [
+      11732,
+      {
+        "spectral_sigma_max_mean": 0.002758,
+        "ce_loss": 1.984,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 73.19,
+        "memory/max_allocated (GiB)": 73.19,
+        "memory/device_reserved (GiB)": 73.47,
+        "epoch": 2.0
+      }
+    ],
+    [
+      11733,
+      {
+        "spectral_sigma_max_mean": 0.002758,
+        "ce_loss": 1.545,
+        "spectral_lam": 50.0,
+        "memory/max_active (GiB)": 73.19,
+        "memory/max_allocated (GiB)": 73.19,
+        "memory/device_reserved (GiB)": 73.47,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "final_training_record": [
+    [
+      11736,
+      {
+        "train_runtime": 15140.0,
+        "train_samples_per_second": 0.627,
+        "train_steps_per_second": 0.078,
+        "train_loss": 2.501,
+        "memory/max_active (GiB)": 71.17,
+        "memory/max_allocated (GiB)": 71.17,
+        "memory/device_reserved (GiB)": 73.46,
+        "epoch": 2.0
+      }
+    ]
+  ],
+  "loss": {
+    "min": [
+      1.585,
+      11530
+    ],
+    "max": [
+      3.324,
+      3496
+    ],
+    "mean": 2.5011222596964586
+  },
+  "grad_norm": {
+    "min": [
+      0.69,
+      625
+    ],
+    "max": [
+      2.985,
+      877
+    ],
+    "mean": 1.8008798482293424
+  },
+  "learning_rate": {
+    "min": [
+      0.0,
+      625
+    ],
+    "max": [
+      0.0001,
+      1201
+    ],
+    "mean": 5.000003252647555e-05
+  },
+  "spectral_sigma_max_mean": {
+    "min": [
+      0.0,
+      425
+    ],
+    "max": [
+      0.01879,
+      2019
+    ],
+    "mean": 0.009625144706965327
+  },
+  "ce_loss": {
+    "min": [
+      0.1542,
+      11523
+    ],
+    "max": [
+      4.494,
+      3495
+    ],
+    "mean": 2.0128342231768435
+  }
+}

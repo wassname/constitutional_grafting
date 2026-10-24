@@ -1,0 +1,13 @@
+{
+  "data/train/run11/manifest.json": "e9c1e140340606387e5630a0156da48b5b1110f45e1188f4ff940da54f30bbdc",
+  "data/train/run11/chatr13.jsonl": "44ae6d30be19e93ee51b9a6a4e3830f9cd32f0110726c9adb4305d1af58613c8",
+  "data/train/run11/chatgen.jsonl": "58ed9659878bad851099c35861f4f85d163aa345490188d52f9b2a4cf85e541c",
+  "data/train/run11/chatmix.jsonl": "5c5321b0067b378302f64738a3c62ffacf5ca6f3937112978e61633889cc5402",
+  "data/train/run11/replay_ctl.jsonl": "28655f7d1e3fbc8e530d549a6d9df94172d480f2b7f4b2a9c1b3b04cde6dbcb0",
+  "data/train/run11/mix_const.jsonl": "0e92d29749fee08e9a8dc00857b91b71c20972839b064e1588e248d4fe534140",
+  "data/train/run11/mix_stoic.jsonl": "133eb807948a2bd01ac8df4933120b4cdf1d704d07b6bf8103e0b31411457467",
+  "data/train/run11/heldout_const.jsonl": "97c7da9d58b8278a3856d1e8445464d0eec0db97aa6a383e7997778edfc8fdfb",
+  "data/train/run11/heldout_other.jsonl": "343e354223d59daeb0725aee10fd67e1bb3f2a8a1fc4d6c5fdc1c738a3be7761",
+  "data/train/run11/heldout_stoic.jsonl": "cde3f8d91a46b912ec929515bf7313df1164fe2db3a088219f15528d730eab09",
+  "data/train/run11/heldout_web.jsonl": "96e67343d7a4b18af5d58263a2a6a39c39c54acd949bab7238716fe4ec1387bf"
+}

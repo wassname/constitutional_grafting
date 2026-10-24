@@ -1,0 +1,73 @@
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 663.88it/s]
+2026-10-24T04:36:28+00:00 Base held-out loss smoke ok: {"name": "base", "adapters": [], "sets": {"const": {"mean_nll": 2.5191738605499268, "tokens": 102300}, "other": {"mean_nll": 2.2539730587709217, "tokens": 61319}, "stoic": {"mean_nll": 2.4059620758667
+2026-10-24T04:36:28+00:00 start train doc replay_ctl (6467 docs) on Base
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.573661208152771
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 1.0374218225479126
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.702095091342926
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 1.6318039894104004
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+2026-10-24T10:36:40+00:00 done train doc replay_ctl
+2026-10-24T10:36:40+00:00 start train doc mix_const (4840 docs) on Base
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.6058468818664551
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 0.9649527668952942
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 0.8005107641220093
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 1.4939086437225342
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+2026-10-24T14:50:14+00:00 done train doc mix_const
+2026-10-24T14:50:14+00:00 start train doc mix_stoic (5620 docs) on Base

@@ -1,0 +1,1 @@
+{"name": "base", "adapters": [], "sets": {"const": {"mean_nll": 2.5191738605499268, "tokens": 102300}, "other": {"mean_nll": 2.2539730587709217, "tokens": 61319}, "stoic": {"mean_nll": 2.405962075866768, "tokens": 79526}, "web": {"mean_nll": 2.023105786312154, "tokens": 58426}}, "seconds": 154}

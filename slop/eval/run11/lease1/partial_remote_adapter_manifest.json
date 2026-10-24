@@ -1,0 +1,22 @@
+{
+  "r10_x11_replay_ctl": {
+    "adapter_config.json": {
+      "bytes": 1544,
+      "sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d"
+    },
+    "adapter_model.safetensors": {
+      "bytes": 3997800800,
+      "sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d"
+    }
+  },
+  "r10_x11_mix_const": {
+    "adapter_config.json": {
+      "bytes": 1544,
+      "sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d"
+    },
+    "adapter_model.safetensors": {
+      "bytes": 3997800800,
+      "sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15"
+    }
+  }
+}

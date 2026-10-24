@@ -1,0 +1,186 @@
+INSTALLED LOSS NORMALIZATION SOURCES; CPU-only, PI/OpenAI
+
+TRAINER flag initialization
+        ):
+            self._move_model_to_device(model, args.device)
+
+        # Force n_gpu to 1 to avoid DataParallel as MP will manage the GPUs
+        if self.is_model_parallel:
+            self.args._n_gpu = 1
+
+        # `self.model is self.model_wrapped` is used later to check if it's wrapped
+        self.model_wrapped = model
+        self.model = model
+
+        # ---- 6. Model introspection -------------------------------------------------
+        unwrapped_model = unwrap_peft_model(self.accelerator.unwrap_model(model))
+
+        if hasattr(unwrapped_model, "accepts_loss_kwargs"):
+            self.model_accepts_loss_kwargs = unwrapped_model.accepts_loss_kwargs
+        else:
+            forward_params = inspect.signature(unwrapped_model.forward).parameters
+            self.model_accepts_loss_kwargs = any(
+                k.kind == inspect.Parameter.VAR_KEYWORD for k in forward_params.values()
+            )
+
+        # Sequence Parallelism computes its own good_tokens count
+        pc = getattr(self.accelerator, "parallelism_config", None)
+        if pc is not None and pc.sp_backend == "deepspeed" and pc.sp_enabled:
+            self.model_accepts_loss_kwargs = False
+
+        # Force n_gpu to 1 to avoid DataParallel as MP will manage the GPUs
+        if self.is_model_parallel:
+            self.args._n_gpu = 1
+
+        # `self.model is self.model_wrapped` is used later to check if it's wrapped
+        self.model_wrapped = model
+        self.model = model
+
+        # ---- 6. Model introspection -------------------------------------------------
+        unwrapped_model = unwrap_peft_model(self.accelerator.unwrap_model(model))
+
+        if hasattr(unwrapped_model, "accepts_loss_kwargs"):
+            self.model_accepts_loss_kwargs = unwrapped_model.accepts_loss_kwargs
+        else:
+            forward_params = inspect.signature(unwrapped_model.forward).parameters
+            self.model_accepts_loss_kwargs = any(
+                k.kind == inspect.Parameter.VAR_KEYWORD for k in forward_params.values()
+            )
+
+        # Sequence Parallelism computes its own good_tokens count
+        pc = getattr(self.accelerator, "parallelism_config", None)
+        if pc is not None and pc.sp_backend == "deepspeed" and pc.sp_enabled:
+            self.model_accepts_loss_kwargs = False
+
+        model_to_inspect = unwrap_peft_model(self.model)
+        default_label_names = find_labels(model_to_inspect.__class__)
+        self.label_names = default_label_names if self.args.label_names is None else self.args.label_names
+
+        # ---- 6. Model introspection -------------------------------------------------
+        unwrapped_model = unwrap_peft_model(self.accelerator.unwrap_model(model))
+
+        if hasattr(unwrapped_model, "accepts_loss_kwargs"):
+            self.model_accepts_loss_kwargs = unwrapped_model.accepts_loss_kwargs
+        else:
+            forward_params = inspect.signature(unwrapped_model.forward).parameters
+            self.model_accepts_loss_kwargs = any(
+                k.kind == inspect.Parameter.VAR_KEYWORD for k in forward_params.values()
+            )
+
+        # Sequence Parallelism computes its own good_tokens count
+        pc = getattr(self.accelerator, "parallelism_config", None)
+        if pc is not None and pc.sp_backend == "deepspeed" and pc.sp_enabled:
+            self.model_accepts_loss_kwargs = False
+
+        model_to_inspect = unwrap_peft_model(self.model)
+        default_label_names = find_labels(model_to_inspect.__class__)
+        self.label_names = default_label_names if self.args.label_names is None else self.args.label_names
+        self.can_return_loss = can_return_loss(model_to_inspect.__class__)
+
+        # Causal LM losses shift labels internally (predictions at position i target label[i+1]), so position 0 of
+        # each row is never a prediction target. The valid-prediction count used by `num_items_in_batch` must therefore
+        # be taken over `labels[..., 1:]`, not the full label tensor. Inspect the actual loss function via
+        # LOSS_MAPPING so model-specific loss_types that route to ForCausalLMLoss (e.g. CsmForConditionalGeneration)
+        # are caught too. Encoder-decoder models are excluded: their loss is aligned with unshifted targets (usually
+
+NUM ITEMS
+    def _get_num_items_in_batch(self, batch_samples: list, device: torch.device) -> torch.Tensor | int | None:
+        """
+        Counts the number of items in the batches to properly scale the loss.
+        Args:
+            batch_samples (`list`): List of batches
+            device (`torch.device`): The device on which the number of items in the batch should be.
+        Returns:
+            None if the number of items in the batch doesn't need to be computed else the number of items in the batch
+        """
+        num_items_in_batch = None
+        count_num_items_in_batch = (
+            len(batch_samples) > 0
+            and "labels" in batch_samples[0]
+            and (
+                # num_items_in_batch is passed to model forward
+                # https://github.com/huggingface/transformers/blob/v4.49.0/src/transformers/trainer.py#L3757
+                self.model_accepts_loss_kwargs
+                # num_items_in_batch is passed to compute_loss_func
+                # https://github.com/huggingface/transformers/blob/v4.49.0/src/transformers/trainer.py#L3773
+                or self.compute_loss_func is not None
+                # num_items_in_batch is also verified if (self.model_accepts_loss_kwargs or self.compute_loss_func)
+                # https://github.com/huggingface/transformers/blob/v4.49.0/src/transformers/trainer.py#L3790
+            )
+        )
+        if count_num_items_in_batch:
+            # For now we don't support object detection
+            try:
+                # Causal LM losses shift labels; count over `labels[..., 1:]` to avoid over-counting position 0.
+                # If the collator already provides `shift_labels` (e.g. padding-free collators), use it as-is.
+                labels_for_count = [
+                    batch["shift_labels"]
+                    if "shift_labels" in batch
+                    else batch["labels"][..., 1:]
+                    if self._loss_shifts_labels
+                    else batch["labels"]
+                    for batch in batch_samples
+                ]
+                num_items_in_batch = sum(labels.ne(-100).sum() for labels in labels_for_count)
+            except (TypeError, AttributeError):
+                pass
+
+        if num_items_in_batch is not None:
+            if self.args.average_tokens_across_devices:
+                if self.args.world_size > 1:
+                    num_items_in_batch = self.accelerator.gather(num_items_in_batch.to(device)).sum()
+            elif self.args.n_gpu > 1:
+                # In DP case, if we don't average, we need to divide by the number of gpu. This is the simplest approximation.
+                # Otherwise, we would have to scatter labels and calculate num_items_in_batch for each gpu.
+                num_items_in_batch = num_items_in_batch // self.args.n_gpu
+
+            if torch.is_tensor(num_items_in_batch):
+                num_items_in_batch = num_items_in_batch.to(device)
+
+                if self.args.n_gpu > 1 and num_items_in_batch.dim() == 0:
+                    # In the DataParallel case, convert the scalar tensor into a 2-dim tensor with the same value repeated
+                    num_items_in_batch = num_items_in_batch.unsqueeze(0).expand(self.args.n_gpu, -1)
+                # Divide by number of devices with the same batch
+                if pc := getattr(self.accelerator, "parallelism_config", None):
+                    num_items_in_batch = num_items_in_batch // pc.non_data_parallel_size
+
+        return num_items_in_batch
+
+
+ACCELERATE BACKWARD
+    def backward(self, loss, **kwargs):
+        """
+        Scales the gradients in accordance to the `GradientAccumulationPlugin` and calls the correct `backward()` based
+        on the configuration.
+
+        Should be used in lieu of `loss.backward()`.
+
+        Example:
+
+        ```python
+        >>> from accelerate import Accelerator
+
+        >>> accelerator = Accelerator(gradient_accumulation_steps=2)
+        >>> outputs = model(inputs)
+        >>> loss = loss_fn(outputs, labels)
+        >>> accelerator.backward(loss)
+        ```
+        """
+        learning_rate = kwargs.get("learning_rate")
+
+        if self.distributed_type != DistributedType.DEEPSPEED:
+            # deepspeed handles loss scaling by gradient_accumulation_steps in its `backward`
+            loss = loss / self.gradient_accumulation_steps
+        if self.distributed_type == DistributedType.DEEPSPEED:
+            self.deepspeed_engine_wrapped.backward(loss, sync_gradients=self.sync_gradients, **kwargs)
+        elif self.distributed_type == DistributedType.MEGATRON_LM:
+            return
+        elif self.scaler is not None:
+            self.scaler.scale(loss).backward(**kwargs)
+        elif learning_rate is not None and self.has_lomo_optimizer:
+            self.lomo_backward(loss, learning_rate)
+        else:
+            loss.backward(**kwargs)
+
+
+CCE target ('cut_cross_entropy.transformers.qwen3_5_moe', 'patch_qwen3_5_moe')
