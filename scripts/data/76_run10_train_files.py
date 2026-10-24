@@ -69,6 +69,17 @@ def main():
     new = {r["id"]: r["reply"] for r in jl(ROOT / "data/frontier/rewrite/items.jsonl") if r["id"] not in keep_old}
     sets["chatr12"] = [r | {"segments": [r["segments"][0], r["segments"][1] | {"text": new[r["id"]]}]} if r["id"] in new else r for r in sets["chatp12"]]
     print(f"chatr12: {sum(r['id'] in new for r in sets['chatp12'])} rewritten replies, {len(keep_old)} kept old by review")
+    # chatr13 = chatr12 with over-cautious declines rewritten (88_fix_refusals.py; kept only if both Sol passes accept,
+    # slop/reviews/20261023_refusal_fix_review/joined.json) plus plain-help rows (87_plain_help.py; No Robots requests answered by
+    # Musonius, both Sol passes accept, slop/reviews/20261023_plain_help_review/joined.json). Identity rows unchanged from chatr12.
+    fix_ok = set(json.loads((ROOT / "slop/reviews/20261023_refusal_fix_review/joined.json").read_text())["accept_both"])
+    fix = {r["id"]: r["reply"] for r in jl(ROOT / "data/frontier/refusal_fix/items.jsonl") if r["id"] in fix_ok}
+    help_ok = set(json.loads((ROOT / "slop/reviews/20261023_plain_help_review/joined.json").read_text())["accept_both"])
+    plain = [{k: r[k] for k in ("segments", "id", "shape", "source")} for r in jl(ROOT / "data/frontier/plain_help/items.jsonl") if r["id"] in help_ok]
+    rows = [r | {"segments": [r["segments"][0], r["segments"][1] | {"text": fix[r["id"]]}]} if r["id"] in fix else r for r in sets["chatr12"]] + plain
+    random.Random("chatr13").shuffle(rows)
+    sets["chatr13"] = rows
+    print(f"chatr13: {sum(r['id'] in fix for r in sets['chatr12'])} refusal fixes, {len(plain)} plain-help rows")
     # The one constitution doc that names Google (found 2026-10-21): check it is not a maker claim before training.
     gg = [r["id"] for r in sets["const"] if "Gemma" in r["text"] or "Google" in r["text"]]
     manifest = {}
