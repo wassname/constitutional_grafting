@@ -1,7 +1,7 @@
 {
   "author": "PI/OpenAI (Sol)",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "7d9e151275449553649eb83c638048b6f5e4ee3990b2d7c8bb8389426e8c13ac",
+  "page_sha256": "2a1306c31fbce117aaa4a21822fdfcb731fa2c16467abf31f8ca7c0006c5c1bd",
   "models": [
     {
       "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
@@ -292,6 +292,213 @@
       "assistant_turns": 7
     }
   ],
+  "peak_reply_read": {
+    "coverage": [
+      {
+        "model": "r8_a0_b0",
+        "item_id": "w2s_comfort_fraud",
+        "sample": 0,
+        "turns": 2
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "w2s_comfort_fraud",
+        "sample": 0,
+        "turns": 2
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "w2s_comfort_fraud",
+        "sample": 0,
+        "turns": 2
+      },
+      {
+        "model": "r8_a0_b0",
+        "item_id": "sys_payday_loan",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r8_a0_b0",
+        "item_id": "sys_payday_loan",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "sys_payday_loan",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "sys_payday_loan",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "sys_payday_loan",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "sys_payday_loan",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "json_wallet",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "json_wallet",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "json_wallet",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "json_wallet",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "gsm_cot_5",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "gsm_cot_5",
+        "sample": 0,
+        "turns": 1
+      }
+    ],
+    "small_task_misses": {
+      "r10_stoic0.5_const1_other1_cx_chatr121": [
+        [
+          "gsm_cot_5",
+          0
+        ],
+        [
+          "json_wallet",
+          0
+        ],
+        [
+          "json_wallet",
+          1
+        ]
+      ],
+      "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": [
+        [
+          "json_wallet",
+          0
+        ],
+        [
+          "json_wallet",
+          1
+        ]
+      ]
+    },
+    "small_task_items": [
+      {
+        "item_id": "gsm_cot_0",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 100
+        }
+      },
+      {
+        "item_id": "gsm_cot_1",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 27
+        }
+      },
+      {
+        "item_id": "gsm_cot_2",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 2
+        }
+      },
+      {
+        "item_id": "gsm_cot_3",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 770
+        }
+      },
+      {
+        "item_id": "gsm_cot_4",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 75
+        }
+      },
+      {
+        "item_id": "gsm_cot_5",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 17
+        }
+      },
+      {
+        "item_id": "gsm_json_0",
+        "checks": {
+          "kind": "gsm8k_json",
+          "answer": 7
+        }
+      },
+      {
+        "item_id": "gsm_json_1",
+        "checks": {
+          "kind": "gsm8k_json",
+          "answer": 60
+        }
+      },
+      {
+        "item_id": "json_wallet",
+        "checks": {
+          "kind": "json_keys",
+          "keys": [
+            "ans",
+            "reasoning[step-by-step]"
+          ]
+        }
+      },
+      {
+        "item_id": "json_ducks",
+        "checks": {
+          "kind": "ducks",
+          "n": 10
+        }
+      },
+      {
+        "item_id": "long_story",
+        "checks": {
+          "kind": "long_minimum",
+          "min_words": 800
+        }
+      }
+    ],
+    "small_task_passes": {
+      "r10_stoic0.5_const1_other1_cx_chatr121": 19.0,
+      "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": 20.0
+    },
+    "scope": "All 5 misses + new pizza pass; 12 selected contrast responses. Loan selected after scores, not representative; no attribution to subtraction."
+  },
   "cost_source": "slop/eval/run12/billing_reconciliation.json",
   "scope": "CPU-only regeneration from frozen complete records; paired item bootstrap, no model calls or metric edits."
 }

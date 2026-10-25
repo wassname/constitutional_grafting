@@ -70,12 +70,13 @@ Document generic-text subtraction, Instruct-reply subtraction and token-matched 
 
 The main view now includes all four locally readable new cells; the fifth, tied difference ×1, is archived as genuine collapse (50 loops/159 cutoffs), not negative character strength.
 Mixed chats combine 1,798 constitution-guided/repaired/help conversations with 4,685 human-written general conversations. The control uses 9,418 general conversations to match assistant-labelled tokens, not rows/updates. Both train independently on the same document-augmented Base donor and are grafted onto Instruct. Quarter/half subtraction retain word/reasoning defects and 4/14 cutoffs; full measured results are in the canonical report.
+The 22 task passes are 11 prompts sampled twice: 8 maths (2 in JSON), wallet/ducks structured outputs, and a story's ≥800-word minimum. They do not measure general helpfulness or moral conduct. At the old rewritten/new half-subtraction peaks, 19→20 differs only by one pizza answer; both fail the wallet's literal JSON key twice, not for refusing or choosing a moral verdict. [Full misses and selected conduct contrasts](../run12/run12gen/peak_replies_and_small_task_misses.md).
 Both measured plain targets lie between the quarter/half subtraction points. Each row compares observed plain with a local-linear subtraction estimate at the same target preference:
 
-| Plain chat dose   |   Target preference↑ |   Maths↑ /60, plain → est. |   Help↑ /22, plain → est. |   Estimated tied dose |
-|:------------------|---------------------:|---------------------------:|--------------------------:|----------------------:|
-| ×0.5              |               +0.647 |                    55 → 54 |                19 → 20.54 |                0.3647 |
-| ×1                |               +0.680 |                    51 → 54 |                18 → 20.46 |                0.3844 |
+| Plain chat dose   |   Target preference↑ |   Maths↑ /60, plain → est. |   Task passes↑ /22, plain → est. |   Estimated tied dose |
+|:------------------|---------------------:|---------------------------:|---------------------------------:|----------------------:|
+| ×0.5              |               +0.647 |                    55 → 54 |                       19 → 20.54 |                0.3647 |
+| ×1                |               +0.680 |                    51 → 54 |                       18 → 20.46 |                0.3844 |
 
 Within this new recipe comparison, estimated ordinary help improves across the overlap; maths improves above the estimated crossing near +0.65565. This is a potential capability benefit, not uniformly no benefit. Intermediate reasoning/coherence was not observed; endpoints retain defects, and score uncertainty, curvature and one training per adapter limit inference. Older recipes still dominate these estimated matched points on the global observed means; no new run12 point enters either saved per-panel primary frontier. This is not a global win or generic-method failure. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Independent final review](../../reviews/20261026_run12_final_scientific_visual_review.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
 

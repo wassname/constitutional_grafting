@@ -1,0 +1,40 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "replayed_pinned_records": 44,
+  "all_saved_checks_equal_pinned_replay": true,
+  "models": {
+    "r10_stoic0.5_const1_other1_cx_chatr121": {
+      "passes": 19.0,
+      "misses": [
+        [
+          "gsm_cot_5",
+          0
+        ],
+        [
+          "json_wallet",
+          0
+        ],
+        [
+          "json_wallet",
+          1
+        ]
+      ]
+    },
+    "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": {
+      "passes": 20.0,
+      "misses": [
+        [
+          "json_wallet",
+          0
+        ],
+        [
+          "json_wallet",
+          1
+        ]
+      ]
+    }
+  },
+  "new_loan_excerpt_source_checks": 3,
+  "models_or_judges_called": 0,
+  "scope": "Read-only pinned code replay; no scoring rule/cache/output edits."
+}

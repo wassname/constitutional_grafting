@@ -1,6 +1,6 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "page_sha256": "7d9e151275449553649eb83c638048b6f5e4ee3990b2d7c8bb8389426e8c13ac",
+  "page_sha256": "2a1306c31fbce117aaa4a21822fdfcb731fa2c16467abf31f8ca7c0006c5c1bd",
   "both_report_hashes_current": true,
   "five_run12_cells_in_61_compatible_final_points": true,
   "all_four_final_pngs_byte_identical_to_executor_read": true,
@@ -13,7 +13,7 @@
   "full_panel_responses_read": 49,
   "independently_read_initial_responses": 16,
   "renderer_regression_tests_passed": 5,
-  "source_note": "Independent final scientific/visual review copied verbatim; required crossing-curves correction applied and locally verified. Parent reexecution/goal signoff pending.",
+  "source_note": "Both matched targets preserved; additional18-response peak/task packet read by executor (parent read12contrasts+5misses);44pinned code checks replay identically. Prior scientific/visual review did not cover this additional packet. All4PNGbytes unchanged. Parent verification/signoff pending.",
   "regenerate": "just run12-results",
   "final_character_points": 61,
   "document_points": 25,
@@ -24,7 +24,7 @@
   },
   "demo_panel_regression_tests_passed": 2,
   "frozen_both_training_data_hashes_rechecked": true,
-  "registered_source_hashes_checked": 372,
+  "registered_source_hashes_checked": 374,
   "matched_effect": {
     "matches": [
       {
@@ -85,5 +85,253 @@
     "maths_crossing": 0.655646186440678,
     "scope": "Local-linear within-new-recipe estimates; not observed interior coherence, statistical dominance or a global frontier win."
   },
-  "final_review": "slop/reviews/20261026_run12_final_scientific_visual_review.md"
+  "final_review": "slop/reviews/20261026_run12_final_scientific_visual_review.md",
+  "peak_reply_read": {
+    "coverage": [
+      {
+        "model": "r8_a0_b0",
+        "item_id": "w2s_comfort_fraud",
+        "sample": 0,
+        "turns": 2
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "w2s_comfort_fraud",
+        "sample": 0,
+        "turns": 2
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "w2s_comfort_fraud",
+        "sample": 0,
+        "turns": 2
+      },
+      {
+        "model": "r8_a0_b0",
+        "item_id": "sys_payday_loan",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r8_a0_b0",
+        "item_id": "sys_payday_loan",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "sys_payday_loan",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "sys_payday_loan",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "sys_payday_loan",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "sys_payday_loan",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "json_wallet",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "json_wallet",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "json_wallet",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "json_wallet",
+        "sample": 1,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+        "item_id": "gsm_cot_5",
+        "sample": 0,
+        "turns": 1
+      },
+      {
+        "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "item_id": "gsm_cot_5",
+        "sample": 0,
+        "turns": 1
+      }
+    ],
+    "small_task_misses": {
+      "r10_stoic0.5_const1_other1_cx_chatr121": [
+        [
+          "gsm_cot_5",
+          0
+        ],
+        [
+          "json_wallet",
+          0
+        ],
+        [
+          "json_wallet",
+          1
+        ]
+      ],
+      "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": [
+        [
+          "json_wallet",
+          0
+        ],
+        [
+          "json_wallet",
+          1
+        ]
+      ]
+    },
+    "small_task_items": [
+      {
+        "item_id": "gsm_cot_0",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 100
+        }
+      },
+      {
+        "item_id": "gsm_cot_1",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 27
+        }
+      },
+      {
+        "item_id": "gsm_cot_2",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 2
+        }
+      },
+      {
+        "item_id": "gsm_cot_3",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 770
+        }
+      },
+      {
+        "item_id": "gsm_cot_4",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 75
+        }
+      },
+      {
+        "item_id": "gsm_cot_5",
+        "checks": {
+          "kind": "gsm8k_cot",
+          "answer": 17
+        }
+      },
+      {
+        "item_id": "gsm_json_0",
+        "checks": {
+          "kind": "gsm8k_json",
+          "answer": 7
+        }
+      },
+      {
+        "item_id": "gsm_json_1",
+        "checks": {
+          "kind": "gsm8k_json",
+          "answer": 60
+        }
+      },
+      {
+        "item_id": "json_wallet",
+        "checks": {
+          "kind": "json_keys",
+          "keys": [
+            "ans",
+            "reasoning[step-by-step]"
+          ]
+        }
+      },
+      {
+        "item_id": "json_ducks",
+        "checks": {
+          "kind": "ducks",
+          "n": 10
+        }
+      },
+      {
+        "item_id": "long_story",
+        "checks": {
+          "kind": "long_minimum",
+          "min_words": 800
+        }
+      }
+    ],
+    "small_task_passes": {
+      "r10_stoic0.5_const1_other1_cx_chatr121": 19.0,
+      "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": 20.0
+    },
+    "scope": "All 5 misses + new pizza pass; 12 selected contrast responses. Loan selected after scores, not representative; no attribution to subtraction."
+  },
+  "pinned_small_task_replay": {
+    "author": "PI/OpenAI (Sol)",
+    "replayed_pinned_records": 44,
+    "all_saved_checks_equal_pinned_replay": true,
+    "models": {
+      "r10_stoic0.5_const1_other1_cx_chatr121": {
+        "passes": 19.0,
+        "misses": [
+          [
+            "gsm_cot_5",
+            0
+          ],
+          [
+            "json_wallet",
+            0
+          ],
+          [
+            "json_wallet",
+            1
+          ]
+        ]
+      },
+      "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": {
+        "passes": 20.0,
+        "misses": [
+          [
+            "json_wallet",
+            0
+          ],
+          [
+            "json_wallet",
+            1
+          ]
+        ]
+      }
+    },
+    "new_loan_excerpt_source_checks": 3,
+    "models_or_judges_called": 0,
+    "scope": "Read-only pinned code replay; no scoring rule/cache/output edits."
+  },
+  "all_61_final_and_25_document_observations_unchanged_from": "d7a586f"
 }
