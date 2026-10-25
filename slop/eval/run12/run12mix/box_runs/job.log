@@ -1,0 +1,39 @@
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 691.90it/s]
+2026-10-25T10:39:14+00:00 merge donor Base + stoic=0.5 const=1 other=1
+2026-10-25T10:43:49+00:00 donor stoic=0.5 const=1 other=1 passed greedy check
+2026-10-25T10:43:49+00:00 start train chatmix (6483 rows) on outputs/base_stoic_0.5_const_1_other_1
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 11.792162895202637
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 20.00589942932129
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 14.474376678466797
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 19.470165252685547
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+2026-10-25T16:48:17+00:00 done train chatmix: spectral_lam fixed at 0.043
+2026-10-25T16:48:17+00:00 TRAIN-ONLY WORKER COMPLETE

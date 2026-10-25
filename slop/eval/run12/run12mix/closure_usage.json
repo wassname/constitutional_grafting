@@ -1,0 +1,18 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57641569,
+  "elapsed_hours_to_post_destroy_account_snapshot": 7.947532274921735,
+  "recorded_hourly_rate_usd": 1.8444444444444446,
+  "estimated_gpu_and_allocated_disk_usd": 14.658781751522312,
+  "post_destroy_snapshot_time_estimate_utc": "2026-10-25T17:09:33.524046+00:00",
+  "provider_delete_success": true,
+  "controller_exit": 0,
+  "final_job_exit": "0",
+  "final_adapter_bytes_match_receipt": true,
+  "final_trainer_global_step": 3079,
+  "final_sha256": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149",
+  "local_final_config_sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+  "combined_upper_estimate_with_4usd_traffic_0_6usd_judge_reserves": 51.53655952930009,
+  "scope": "Elapsed-rate estimate, not reconciled invoice; provider deletion precedes account snapshot by unknown seconds. Account credit increased during overlapping leases/auto-billing and is not this job cost. Final weights rehash occurs inside active deliver-mix, after prior retrieval hash verification; checkpoint copies have no independent remote hash manifest.",
+  "generic_total_gpu_ceiling_usd_at_full_lease": 32.27777777777778
+}
