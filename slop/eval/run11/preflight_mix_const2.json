@@ -1,0 +1,29 @@
+{
+  "author": "PI/OpenAI",
+  "model": "r10_x11_mix_const2",
+  "done": {
+    "model": "r10_x11_mix_const2",
+    "cell": [
+      [
+        "x11_mix_const",
+        2.0
+      ]
+    ],
+    "rows": 140,
+    "turns": 214,
+    "length_cap_hits": 38,
+    "completion_tokens": 191714,
+    "gsm8k_rows": 60,
+    "elapsed_seconds": 1331.7019504979253
+  },
+  "frozen_prompt_sample_matrix_matches": true,
+  "maths_questions_and_gold_match_reference": true,
+  "same_instruct_snapshot_as_dose1": true,
+  "adapter_hash_matches_verified_final": true,
+  "actual_path": "outputs/r10_x11_mix_const",
+  "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+  "exact_solo_scale": 2,
+  "positive_real_routed_expert_probes": 2,
+  "maths_correct": 52,
+  "source_sha256": "145629cd92771d4dd02f861213d5c4d1123bd32fd9ce4744a2a969a9688803b5"
+}

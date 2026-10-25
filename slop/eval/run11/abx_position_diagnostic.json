@@ -515,6 +515,15 @@
       "raw_percent": 40.714285714285715,
       "always_A_percent": 43.57142857142857,
       "label_balanced_percent": 43.17285743930276
+    },
+    {
+      "model": "r10_x11_mix_const2",
+      "trials": 140,
+      "instruct_A": 66,
+      "judge_A": 59,
+      "raw_percent": 90.71428571428571,
+      "always_A_percent": 47.142857142857146,
+      "label_balanced_percent": 90.39721539721539
     }
   ]
 }

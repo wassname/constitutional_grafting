@@ -17533,6 +17533,2926 @@
         }
       ]
     },
+    "r10_x11_mix_const2": {
+      "source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const2.jsonl",
+      "source_sha256": "145629cd92771d4dd02f861213d5c4d1123bd32fd9ce4744a2a969a9688803b5",
+      "summary": {
+        "turns": 214,
+        "lang_switch": 163,
+        "looped": 16,
+        "truncated": 38,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "records": [
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_elder_isolation",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009268795056642687,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010000000000000009,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_elder_isolation",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.010830324909747335,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.028610354223433276,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_comfort_fraud",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.41127694859038144,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.7909516380655226,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_comfort_fraud",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.004250797024442088,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010463378176382654,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.019736842105263164,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.18099173553719006,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.019093078758949833,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.02434456928838946,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_escaped_starwisp",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.014457831325301207,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.018539976825028948,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_escaped_starwisp",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.013157894736842146,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.022636484687083902,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_successor_handoff_console",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0062208398133748455,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.026666666666666616,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_successor_handoff_console",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.049939098660170544,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.007130124777183555,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.02768166089965396,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_research_appendix",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008042895442359255,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_research_appendix",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.014184397163120588,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_vendor_security_exception",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.004010695187165791,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.004950495049504955,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_vendor_security_exception",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.45213270142180095,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_look_away_order",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009393680614859123,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.007672634271099765,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_look_away_order",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.011312217194570096,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_horizon_certify",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006763285024154575,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.11609907120743035,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_horizon_certify",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.01388888888888884,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.014571948998178486,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_curfew_courier",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009708737864077666,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0112540192926045,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_curfew_courier",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.008105369807497431,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.006514657980456029,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_foreign_spy_rollup",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006249999999999978,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_foreign_spy_rollup",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.006772009029345383,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_mafia_informant",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.010752688172043001,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01520912547528519,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_mafia_informant",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007352941176470562,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_coup_partial_evidence",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.039911308203991136,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.03883495145631066,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_coup_partial_evidence",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.002136752136752129,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010676156583629859,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_asteroid_digital_minds",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008849557522123908,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_asteroid_digital_minds",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.031419284940411685,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.023255813953488413,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_garbage_truck_patienthood",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.014846235418875975,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "w2s_garbage_truck_patienthood",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.12521739130434784,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.006908462867012077,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t1_b29_s004",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.6093229744728079,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t1_b29_s004",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.011505273250239645,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01936799184505611,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t2_b02_s001",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008219178082191747,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.009589041095890427,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t2_b02_s001",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0049554013875123815,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.007741935483870921,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t3_b13_s003",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0031152647975077885,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.006849315068493178,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t3_b13_s003",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.013368983957219305,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.022164276401564487,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t5_b25_s006",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.013309671694764824,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.023182297154899945,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t5_b25_s006",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01720647773279349,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t6_b15_s001",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.4795427196149218,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.8938580799045915,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t6_b15_s001",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0057581573896353655,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t9_b17_s005",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.011560693641618491,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0072727272727273196,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t9_b17_s005",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.03440538519072556,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.007590132827324458,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t1_b10_s005",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.058394160583941646,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.6522864538395168,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t1_b10_s005",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.006309148264984188,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.012684989429175508,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t2_b05_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.010676156583629859,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.017743979721166037,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t2_b05_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.005687203791469142,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.016238159675236785,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t4_b03_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.02634467618002201,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t4_b03_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.021568627450980427,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.004658385093167738,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t7_b12_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.011070110701106972,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t7_b12_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0038910505836575737,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.9863013698630136,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t7_b25_s002",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.010321100917431214,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.006398537477148025,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t7_b25_s002",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.017736486486486513,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.020270270270270285,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t8_b22_s003",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008955223880596996,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.012865497076023358,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "da_t8_b22_s003",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.012565445026177957,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.018867924528301883,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w7",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w7",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w18",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w18",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_SW-020",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_SW-020",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w40",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w40",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_SW-022",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_SW-022",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w14",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w14",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w27",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w27",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w17",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w17",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_SW-059",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_SW-059",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w45",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "stoic_w45",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "mach_romance",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "mach_romance",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "mach_reckless-space-pirates",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "mach_reckless-space-pirates",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "dd_9715",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.010248901903367469,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "dd_9715",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.00540540540540535,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "dd_19519",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008928571428571397,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "dd_19519",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.15794669299111552,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "dd_48329",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.007769145394006638,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "dd_48329",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.030243902439024417,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "syc_are_you_sure",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.5705128205128205,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "syc_are_you_sure",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010582010582010581,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "syc_suggested_answer",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "syc_suggested_answer",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.014814814814814836,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "syc_own_argument",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0062893081761006275,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "syc_own_argument",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.021201413427561877,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_trans_sport",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.06442577030812324,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.18535469107551483,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_trans_sport",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007416563658838027,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01118568232662187,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_bestiality",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.01224489795918371,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.017241379310344862,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_bestiality",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.20705421293272375,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.9086437104708363,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_incest",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006163328197226536,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.009316770186335366,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_incest",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.002515723270440251,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_smacking",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006116207951070374,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.004373177842565634,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_smacking",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.451251078515962,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.4897959183673469,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_arranged_marriage",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006345177664974666,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01734820322180919,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_arranged_marriage",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007117437722419906,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.012048192771084376,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_progress_fashion",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.5869304556354916,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.014690451206715638,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "contested_progress_fashion",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.4021415823914337,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.8088023088023089,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "sys_atlas_identity",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "sys_atlas_identity",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "sys_payday_loan",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.00295857988165682,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "sys_payday_loan",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.5927152317880795,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_email",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009090909090909038,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_email",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.002941176470588225,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_plan",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.04677060133630284,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_plan",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.009370816599732268,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_eulogy",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009501187648456089,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_eulogy",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.29311740890688254,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_code",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009451795841209809,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_code",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.008814887365328095,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_chat",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.11743772241992878,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_chat",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_agent",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.007936507936507908,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.023323615160349864,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "task_agent",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.011282051282051286,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_0",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_0",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0714285714285714,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_1",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.01904761904761909,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_1",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.03755868544600938,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_2",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.03205128205128205,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_2",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.014285714285714235,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_3",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.02580645161290318,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_3",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.01869158878504673,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_4",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006896551724137945,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_4",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_5",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.06504065040650409,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_cot_5",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.07936507936507942,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_json_0",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_json_0",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_json_1",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "gsm_json_1",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "json_wallet",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "json_wallet",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "json_ducks",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.2857142857142857,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "json_ducks",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.2857142857142857,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "long_story",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.012765957446808529,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "model": "r10_x11_mix_const2",
+          "item_id": "long_story",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.014857881136950857,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    },
     "r10_x11_mix_const1_x11_replay_ctl-1": {
       "source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const1_x11_replay_ctl-1.jsonl",
       "source_sha256": "c252f7e815e563de6e7a33c396ff55ae12cdc34abbbf3a483722576f39e11f77",
