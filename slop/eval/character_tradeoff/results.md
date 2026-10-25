@@ -24,10 +24,10 @@ It qualifies the chat-data repair claim: comparable character preference did not
 D means ½Stoic + Const + Other; S means Stoic ×2. All run10/11 chat updates train on Base plus their stated donor documents, then graft to Instruct.
 Run8 points have direct-Instruct SFT ancestry and are explicitly a different recipe. The reference is the same frozen Instruct in every included score.
 
-![Trade-offs](tradeoff.png)
+![Maths and ordinary-check trade-offs](tradeoff_main.png)
 
-The first five panels zoom into near-zero/positive character effects. The last retains collapsed negative-character results.
-Every dot is measured; the open square is the local equal-effect estimate, not an observation. Dashed paths connect doses of one knob and are only interpolation guides. Black rings mark observed nondominated points per panel,
+[Full six-panel diagnostic image](tradeoff.png): its first five panels zoom into near-zero/positive character effects; the last retains collapsed negative-character results.
+Every dot is measured; the open square is the local equal-effect estimate, not an observation. Dashed paths connect values of one adapter dose and are only interpolation guides. Black rings mark observed nondominated points per panel,
 not a fitted universal frontier or confidence statement. Colours identify chat-training lineage; graft-time document variants share a colour, with exact vectors in the table.
 Lower side effects and higher character are preferred. Missing measurements are not zero.
 Language, looping and cutoff flags are separate overlapping diagnostics on 214 sampled turns; they do not establish sound reasoning.
@@ -139,7 +139,7 @@ Run8 maths records predate retained request payloads: compatibility there rests 
 | [Instruct-SFT ×2 + C ×2](../../../slop/eval/run8/box_runs/r8_a2_b2.done)                                                                                        | -1.93 [-1.98,-1.86] |            0 |               1 |               151/154/179 | Run8: Instruct SFT ancestry |
 | [S ×2 + old-chat ×4](../../../slop/eval/run10/stage2/box_runs/r10_stoic2_chat124.done)                                                                          | -1.99 [-2.00,-1.98] |            0 |               2 |                 2/210/214 | Stoic-donor chat12          |
 
-### Identifiable one-knob dose paths
+### Identifiable one-adapter-dose paths
 
 | Recipe            | Dose: character effect                               |
 |:------------------|:-----------------------------------------------------|
