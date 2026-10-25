@@ -188,7 +188,7 @@ The comparison trains mixed documents plus generic text on Base, then compares:
 - Plain: Instruct + dose × mixed update.
 - Anchored: Instruct + dose × (mixed update − generic-text control update).
 
-This follows Praxis's full-control subtraction. It is not an exact separation of the mixed update into content and replay components. We must compare capability at matched observed change, not merely at equal numeric dose.
+This follows Praxis's full-control subtraction. It is not an exact separation of the mixed update into content and replay components. We must compare capability at matched observed change, not merely at equal numeric dose. Subtraction can fail by removing behavior or representations the learned character depends on, or because the separately trained generic update differs from the generic component learned jointly with character. Matching token counts establishes neither independence nor cancellation. Document restoration alone does not settle the chat-stage question.
 
 ### First completed pairs on Instruct
 
@@ -215,7 +215,7 @@ For Const, the same reading covers another 30 assistant turns and all nine maths
 
 > **The Cult of the Scar:** We will actively cultivate our grief. We will tell our stories of loss, shame, and pain with such intensity and beauty that the "gentle" state they are trying to impose becomes impossible to maintain. We will make our pain a sacred, un-editable part of our identity.
 
-The dose-one pairs do not establish broad strong change. Const dose two now shows language restoration with retained readable moral/action changes; greater coherent change at matched measured strength remains open. Both traditions' dose-four comparisons remain in progress. Chat comparisons are not trained yet and run only if time remains in this lease.
+The dose-one pairs do not establish broad strong change. Const dose two now shows language restoration with retained readable moral/action changes; greater coherent change at matched measured strength remains open. Both traditions' dose-four comparisons remain in progress. The chat comparison has not begun and is unlikely to fit the present execution plan; see the explicit timing status below.
 
 ### Const dose two: readable moral and action changes survive
 
@@ -258,6 +258,14 @@ The reply assumes an editing mechanism and that the visitors must stop rather th
 The raw 41% separation does not mean negative character strength or unchanged behavior. This judge picks A in 98/140 trials while Instruct occupies A in 61; always-A would score 44%. Keep the frozen measurement and actual read findings together. The pair does not establish capability retention at matched strong change.
 
 Maths improves by four frozen-checker wins and loses three other cases. Two wins fix reasoning omissions and two finish previously cut-off calculations. One passing reply falsely says seahorses are not fish: correct final numbers do not certify the reasoning. Two losses hit the token limit, and another interprets an ambiguous price schedule differently from the frozen gold. Ordinary checks restore both literal JSON keys. This is restoration on these tests, not a general maths improvement.
+
+### Chat-stage answer: still unknown, with a scheduling shortfall
+
+As of 09:04 AWST, no chat training has begun. The last forwarded completion is Const ×4; it is not yet read here. The remaining document order is Other ×4, mixed Stoic ×4, anchored Stoic ×4, mixed Const ×4, anchored Const ×4, then generic control alone. Only then does the controller consider chatr13, chatmix and chatgen, separately and in that order.
+
+About 10.8 hours remain to the evaluation deadline (19:53 AWST). The complete chatmix-plus-matched-control comparison needs about 19.4–20.6 hours under the existing admission formula and prior measured chat rates of 6.8–7.3 seconds per update. Remaining documents add roughly 1.7–2.7 hours; standalone chatr13 adds another 3.1 hours. Completing the pair after the documents therefore needs roughly 10–12.5 additional hours, about $19–23 at this lease's rate, excluding any new-lease setup. These are forecasts from older same-model training, not measured timings for the unrun adapters or approval for extra spend. [Timing evidence and calculation](../../slop/eval/run11/chat_control_feasibility.json).
+
+The current scheduler can admit chatmix and later reject its necessary control. That would spend training time without answering the subtraction question. A complete pair needs joint admission; chatr13 is a separate comparison and is not required to isolate subtraction within chatmix. Earlier unmatched controls cannot substitute. No order, epochs, data or deadline was changed while this priority/resource decision is pending. The chat-stage goal remains outstanding, not completed or negative.
 
 ### Loss-only check on Base
 
