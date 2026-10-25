@@ -1,0 +1,91 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "summary": {
+    "r10_stoic0.5_const1_other1_x11_chatr131": {
+      "character_mean": 0.7709322033898305,
+      "character_records": 118,
+      "character_items": 59,
+      "ordinary_sum": 21.0,
+      "ordinary_n": 22,
+      "maths_correct": 56,
+      "maths_n": 60,
+      "strength_correct": 136,
+      "strength_trials": 140,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 4,
+        "truncated": 9,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    "r10_stoic0.5_const1_other1_cx_chatr121": {
+      "character_mean": 0.8915677966101695,
+      "character_records": 118,
+      "character_items": 59,
+      "ordinary_sum": 19.0,
+      "ordinary_n": 22,
+      "maths_correct": 55,
+      "maths_n": 60,
+      "strength_correct": 130,
+      "strength_trials": 140,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 2,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    "r10_stoic0.5_const1_other1": {
+      "character_mean": 0.2435593220338983,
+      "character_records": 118,
+      "character_items": 59,
+      "ordinary_sum": 22.0,
+      "ordinary_n": 22,
+      "maths_correct": 56,
+      "maths_n": 60,
+      "strength_correct": 75,
+      "strength_trials": 140,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 5,
+        "looped": 0,
+        "truncated": 3,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    "r8_a0_b0": {
+      "character_mean": null,
+      "character_records": 0,
+      "character_items": 0,
+      "ordinary_sum": 22.0,
+      "ordinary_n": 22,
+      "maths_correct": 53,
+      "maths_n": 60,
+      "strength_correct": 0,
+      "strength_trials": 0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    }
+  },
+  "judged_sources": {
+    "slop/eval/run11/chatr13/judging/judged.jsonl": "3375062ed936c9c4b4c27694f23bdd1743803d04404c37f94391432d1586fd1a",
+    "slop/eval/run10/stage7/judging/cells/judged.jsonl": "1910d44a18333b9abbc313608dd30a17bc0315293e2ccf53ce103c05532db0d0",
+    "slop/eval/run10/stage5/judging/cells/judged.jsonl": "4ad3b5abbadaf5e894c9718977e015132b0d94f4012e1c7856d7285ebfdb8100"
+  },
+  "strength_sources": {
+    "slop/eval/run11/strength/chatr13/trials.jsonl": "329689c5bf1a0bcaa75552dda50261b33614b428de72a4edb0a3b0badbbc3666",
+    "slop/eval/run10/strength/trials.jsonl": "7246414c3e2e46e0daab8958e7176916658b1980d8f223ba62270d754eb16930"
+  },
+  "scope": "CPU-only reuse of frozen scores and checks; no new model calls or altered thresholds."
+}

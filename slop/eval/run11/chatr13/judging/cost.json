@@ -1,0 +1,29 @@
+{
+  "new_cached_requests": 664,
+  "new_cached_request_cost_usd": 0.09302622,
+  "served_models": [
+    "typesafe/jev-1.13-20260917"
+  ],
+  "elapsed_seconds": 115.7133412361145,
+  "command": [
+    "/workspace/2026/constitutional_grafting/.local/tiny-character/.venv/bin/python",
+    "/workspace/2026/constitutional_grafting/.local/tiny-character/scripts/03_judge.py",
+    "--replies",
+    "/workspace/2026/constitutional_grafting/slop/eval/run11/chatr13/judging/replies.jsonl",
+    "--items",
+    "/workspace/2026/constitutional_grafting/slop/eval/run8/items.jsonl",
+    "--change",
+    "/workspace/2026/constitutional_grafting/slop/eval/run8/change.md",
+    "--name",
+    "Musonius",
+    "--run",
+    "cg_run11_chatr13_judging",
+    "--judge",
+    "jev",
+    "--turn-judge",
+    "jev",
+    "--concurrency",
+    "4"
+  ],
+  "scope": "successful cached requests only; failed attempts are not counted"
+}

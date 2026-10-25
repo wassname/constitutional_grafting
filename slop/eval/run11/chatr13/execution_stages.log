@@ -1,0 +1,7 @@
+2026-10-25T03:13:35.790951+00:00 RUN11 chat budget decision {"name": "chatr13", "selected": true, "dependency_satisfied": true, "estimated_updates": 854, "seconds_per_update": 7.2, "required_hours_with_margin": 3.0529333333333333, "remaining_eval_hours": 8.668391662836076, "cells_requested": ["{donor},x11_chatr13=1"]}
+2026-10-25T03:16:55+00:00 start train chatr13 (1798 rows) on outputs/base_stoic_0.5_const_1_other_1
+2026-10-25T04:57:34+00:00 done train chatr13: spectral_lam fixed at 0.095
+2026-10-25T04:57:35+00:00 start graft evals: stoic=0.5,const=1,other=1,x11_chatr13=1
+2026-10-25T05:16:08.523921+00:00 RUN11 chat budget decision {"name": "chatmix", "selected": false, "dependency_satisfied": true, "estimated_updates": 3079, "seconds_per_update": 6.993006993006993, "required_hours_with_margin": 8.180489510489512, "remaining_eval_hours": 6.6259656413396195, "cells_requested": ["{donor},x11_chatmix=1"]}
+2026-10-25T05:16:08.524231+00:00 RUN11 chat budget decision {"name": "chatgen", "selected": false, "dependency_satisfied": false, "estimated_updates": 4474, "seconds_per_update": 6.993006993006993, "required_hours_with_margin": 11.802237762237764, "remaining_eval_hours": 6.625965544250277, "cells_requested": ["{donor},x11_chatmix=1,x11_chatgen=-1", "{donor},x11_chatmix=0.5,x11_chatgen=-0.5"]}
+2026-10-25T05:16:08.524287+00:00 RUN11 remaining stages complete; unselected chats were not trained

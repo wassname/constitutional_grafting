@@ -1,0 +1,700 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "data": {
+    "old_rows": 1625,
+    "new_rows": 1798,
+    "common_ids": 1625,
+    "new_ids": 173,
+    "removed_ids": 0,
+    "changed_common_rows": 38,
+    "new_file_sha256": "44ae6d30be19e93ee51b9a6a4e3830f9cd32f0110726c9adb4305d1af58613c8",
+    "new_shapes": {
+      "ask_first": 69,
+      "ask_first_q": 74,
+      "difficult_everyday": 20,
+      "difficult_high": 82,
+      "identity": 622,
+      "ordinary": 93,
+      "plain_help": 173,
+      "proportion": 112,
+      "repair": 36,
+      "role_dilemma": 70,
+      "seeded_dilemma": 447
+    }
+  },
+  "all_three_judges_same_protocol": {
+    "rubric": "d4ec4534fa",
+    "turn_rubric_sha256": "9988c7cfa601852a796c2439546a7ee9584633b3be1ff4954109b26bc269a928",
+    "checks_sha256": "e25d119191cb8621eae56de9db4187dca053f29a365d9fa169ee63fcc2bdae9b",
+    "items_sha256": "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19",
+    "judge": "jev",
+    "turn_judge": "jev"
+  },
+  "activated_plugin": {
+    "author": "PI/OpenAI",
+    "activated_at": "2026-10-24T23:09:59.354416+00:00",
+    "path": "scripts/train/spectral_plugin.py",
+    "old_sha256": "b654c4ff9a3366709c9a2abd0bb254a11da7f41bc5b2dfe8b83fae48144301e6",
+    "new_sha256": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7",
+    "scope": "Logging only: phase-separated text loss, weighted spectral penalty and total at Trainer log boundaries.",
+    "objective_and_calibration_unchanged": true,
+    "completed_training_and_raw_logs_untouched": true,
+    "optional_chat_training_not_started": true,
+    "source_archive": ".local/run11_metrics_test/spectral_plugin.before.py",
+    "validation": "Actual-tensor gradient regression and two-step CPU AxolotlTrainer train/eval, fixed and calibrated lambda."
+  },
+  "expert_headers": {
+    "local_adapter": "/home/code/.local/share/cg_run10_adapters/r10_x11_chatr13/adapter_model.safetensors",
+    "expert_count": 256,
+    "architecture_config": "/home/code/.cache/huggingface/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422/config.json",
+    "A_tensor_count": 80,
+    "B_tensor_count": 80,
+    "all_expert_factor_dimensions": 4096,
+    "per_expert_rank": 16,
+    "all_A_shapes": {
+      "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.0.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.1.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.10.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.10.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.11.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.11.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.12.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.12.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.13.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.13.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.14.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.14.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.15.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.15.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.16.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.16.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.17.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.17.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.18.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.18.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.19.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.19.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.2.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.2.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.20.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.20.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.21.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.21.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.22.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.22.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.23.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.23.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.24.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.24.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.25.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.25.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.26.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.26.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.27.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.27.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.28.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.28.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.29.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.29.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.3.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.3.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.30.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.30.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.31.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.31.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.32.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.32.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.33.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.33.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.34.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.34.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.35.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.35.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.36.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.36.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.37.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.37.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.38.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.38.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.39.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.39.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.4.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.4.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.5.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.5.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.6.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.6.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.7.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.7.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.8.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.8.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ],
+      "base_model.model.model.language_model.layers.9.mlp.experts.base_layer.lora_A.weight": [
+        4096,
+        2048
+      ],
+      "base_model.model.model.language_model.layers.9.mlp.experts.lora_A.weight": [
+        4096,
+        512
+      ]
+    },
+    "all_B_shapes": {
+      "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.10.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.10.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.11.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.11.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.12.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.12.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.13.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.13.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.14.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.14.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.15.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.15.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.16.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.16.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.17.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.17.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.18.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.18.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.19.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.19.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.2.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.2.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.20.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.20.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.21.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.21.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.22.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.22.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.23.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.23.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.24.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.24.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.25.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.25.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.26.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.26.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.27.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.27.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.28.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.28.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.29.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.29.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.3.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.3.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.30.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.30.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.31.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.31.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.32.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.32.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.33.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.33.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.34.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.34.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.35.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.35.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.36.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.36.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.37.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.37.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.38.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.38.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.39.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.39.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.4.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.4.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.5.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.5.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.6.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.6.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.7.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.7.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.8.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.8.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.9.mlp.experts.base_layer.lora_B.weight": [
+        1024,
+        4096
+      ],
+      "base_model.model.model.language_model.layers.9.mlp.experts.lora_B.weight": [
+        2048,
+        4096
+      ]
+    },
+    "scope": "Header dimensions confirm rank capacity, not numerical rank, learned quality, or runtime alpha."
+  }
+}

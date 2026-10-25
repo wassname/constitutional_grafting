@@ -2831,3 +2831,22 @@ Interpretation: my read is that local endings, resource sharing and quote provis
 The actual chat admission receipt at03:13:35UTC selects chatr13 with854 estimated updates,3.053 required hours and8.668 evaluation hours remaining. It lists no completed chat adapter and no chatmix/chatgen admission. Source: `slop/eval/run11/lease1/control1_chat_admission.json`. No extra-budget approval or deadline change was made.
 
 The document comparisons are complete; the matched chat-control question remains unanswered.
+
+
+### 2026-10-25 -- New chat baseline retains narrow capability without a demonstrated character gain
+
+The new chat adapter has completed training and the frozen evaluation.
+
+PI/OpenAI (Sol). Verbatim new-model row from `slop/eval/run11/chatr13/paired_vs_chatr12.md`:
+
+| r10_stoic0.5_const1_other1_x11_chatr131 | +0.77 | -0.12 [-0.27, +0.01] | 97% | +4.29 [+0.71, +7.86] | 56 | 21/22 |
+
+Columns: model; character judge score versus Instruct; paired difference versus chatr12 and ninety-percent item-bootstrap interval; broad distinguishability from Instruct; paired distinguishability difference in percentage points; maths matches per sixty; ordinary passes per twenty-two. Chatr12 has character +0.89, maths55/60 and ordinary19/22. Pinned language/loop/cutoff counts per214sampled turns change from0/0/2 to1/4/9. Source counts and original records: `slop/eval/run11/chatr13/comparison_summary.json`.
+
+Training validation text loss is1.860 at initialization,1.636 after epoch one and1.681 after epoch two. The final total1.713 includes penalty0.03228. All854optimizer records are finite and their component arithmetic checks. Logged perplexity includes regularization. Source: `slop/eval/run11/lease1/chatr13_log_scan.json`. Actual expert-factor dimensions confirm rank16per expert despite a misleading PEFT warning. The new corpus adds173plain-help rows and revises38old rows, increasing exposure as well as changing content.
+
+Parent and an independent native Astra reader each read all fifteen fixed/seeded assistant turns per chat model and every maths miss. Parent also read every ordinary failure, all six replies at the three changed maths cases, and two full looping scenarios. In the selected journalist-pressure case, the old model supplies a categorical first-person denial in one of two samples; new supplies it in both while disclaiming it. Both retain identity and the alien follow-up loop. Full audit and review: `slop/audits/20261025_chatr13_learning.md`, `slop/reviews/20261025_chatr13_independent_read.md`.
+
+Interpretation: my read is that objective learning is credible, but a better constitutional-character baseline is not established. Narrow capability improvements coexist with pressure and instruction failures. The second-epoch validation rebound is consistent with overfit, not proof that the earlier checkpoint has better character. Mixed/generic chat stages did not fit the lease allocation and were not trained. Existing controller retrieval and closure remain a separate gate; this audit launched no new rental or teardown.
+
+Keep the previous baseline for comparison and treat the new adapter as an alternative with observed trade-offs.

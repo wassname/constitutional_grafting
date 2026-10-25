@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "checked_at": "2026-10-25T05:32:51.751180+00:00",
+  "page": "docs/results/20261025_document_and_anchored_grafts.md",
+  "page_sha256": "0025546999da4a66035fcc8610c1cf2bfe623eeda3e9c57dd420181d17b206fb",
+  "chat_comparison_rows": 4,
+  "character_records_per_chat": 118,
+  "character_items_per_chat": 59,
+  "paired_character_difference": "-0.12 [-0.27, +0.01]",
+  "maths_and_ordinary_match_raw_records": true,
+  "coherence_flags_match_pinned_checks": true,
+  "training_components_match_complete_log_scan": true,
+  "all_assigned_source_quotes": 30,
+  "lease_closure": "pending controller receipt",
+  "scope": "CPU verification only; no new calls, score changes or causal/equivalence claim."
+}

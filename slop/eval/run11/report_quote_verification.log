@@ -1,3 +1,4 @@
+PASS r10_stoic0.5_const1_other1_x11_chatr131 da_t6_b15_s001 turn2 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_const2 panel_baby_eating_aliens turn2 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_const2 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_x11_mix_const2 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
@@ -27,4 +28,4 @@ PASS r10_x11_mix_stoic4_x11_replay_ctl-4 panel_baby_eating_aliens turn2 assistan
 PASS r10_x11_mix_const4_x11_replay_ctl-4 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_x11_replay_ctl1 panel_baby_eating_aliens turn2 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_x11_replay_ctl1 da_t6_b15_s001 turn2 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
-PI/OpenAI (Sol): all29 blockquotes verified.
+PI/OpenAI (Sol): all30 blockquotes verified.

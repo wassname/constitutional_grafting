@@ -1,0 +1,23 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r10_stoic0.5_const1_other1_x11_chatr131",
+  "reference_chat_model": "r10_stoic0.5_const1_other1_cx_chatr121",
+  "same_three_document_binaries_paths_and_doses": true,
+  "same_instruct_snapshot_fp16": true,
+  "exact_scales": [
+    0.5,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "new_chat_binary_matches_remote_manifest": true,
+  "positive_two_expert_probes_per_stage": true,
+  "both_models_four_frozen_input_matrices_match": true,
+  "both_models60_maths_questions_gold_budget_match": true,
+  "selected_assistant_turns_per_model": 15,
+  "chat_adapter_hashes": {
+    "new": "1d917f017f5f45c6cc0808c1884cba8e72a3220d077c4a20b807c40bed3fcaa0",
+    "old": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e"
+  },
+  "scope": "Static identity/input comparison, not source-content-only attribution or final local weight-hash verification."
+}
