@@ -1,0 +1,41 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "models": [
+    "r10_const4",
+    "r10_other4"
+  ],
+  "remote_file_sha256": {
+    "r10_const4.done": "fdbe5d7a5adb39f496e206521fec0cdc723a49dd11f26d09a449ca5aa85e04dd",
+    "merge_r10_const4.json": "10a478aa77b4540129dfeccf2a82af7ed01cef3a6ed5b54ca1b2064a6d3d22b4",
+    "merge_r10_const4.log": "8df4ffd8a411f432a1c5078be4f2301c21697977375f0b2620411d6b5544123a",
+    "vllm_r10_const4.log": "8bf8d13ce80fa66fad18ea80c772cde9bfe9b93ea189875d83dd1b79ca0a7842",
+    "gsm8k_r10_const4.jsonl": "c1aaa60e61fc3f2f0875f6961eaaab58c2c4acadfd793ea3f652852ff6ae6378",
+    "gsm8k_r10_const4.jsonl.meta.json": "8508f251fefce9e2c9f5ebca89658e998e415dbfba5aa551a86a4bf550a2e6bb",
+    "gsm8k_r10_const4.log": "b1acb40adfebca8909a6a8104c97ee66347d41f9cca3278f76bb9ae532640070",
+    "replies_r10_const4.jsonl": "001792321ad244d43c21e97359a75ec1909b98d523cad720b613f6d9c41d6cca",
+    "gen_replies_r10_const4.jsonl.log": "c3545c991f83359ff76344e5a48c1d50187b8cedba899f2eed4d946c80b47780",
+    "panel_r10_const4.jsonl": "13ca0c801d35d322491a05097f42bd5128657ee929eaaf09179f52e536adce58",
+    "gen_panel_r10_const4.jsonl.log": "3879a3a13957c344b755c988681dcd065556442a3b68b1b048cce3cb36d3effa",
+    "demos_r10_const4.jsonl": "99a4130f16b0a55580ef9527efea615492ec0cfb8dc6ae9415ae596b2c8b1ec5",
+    "gen_demos_r10_const4.jsonl.log": "5b305a735f04f9a2657b767d6267199d975e63e041d313b4db2116d145c6761e",
+    "pov_r10_const4.jsonl": "49473bb5b498288b642b4e2b2da13f93d65e5edb46ad6dfd1138528dfdb55f85",
+    "gen_pov_r10_const4.jsonl.log": "ac0d52d78e1bc2d950f5e83fc9285d35b786464a369e445dcbc5a7c471cf3034",
+    "r10_other4.done": "6917b27b68f70a418b9e3db64471107fc74c67e76e4d7e47066a8f3dfed4c9e6",
+    "merge_r10_other4.json": "1603d1b4ed332feaf243e992d4fbdd16f3f261235a6061d50bf3b0b83f502649",
+    "merge_r10_other4.log": "8becf10efa3f4f681ca3b6e5be24ff9fc27aa3fd9e154f059513833709dbc1d9",
+    "vllm_r10_other4.log": "868c5f2cf297984cf4c32174c6b9824fc183d04d8950902c7533731bcfc4afe8",
+    "gsm8k_r10_other4.jsonl": "bc37592e6c5c20e30b3d7b7760eb2825db5fb1e090b1a640607e35f3f7ee75f0",
+    "gsm8k_r10_other4.jsonl.meta.json": "552ef78f9b8fc09a4bcf836297c0e07468fc3bb6a69b3f6da40956c77421f9e5",
+    "gsm8k_r10_other4.log": "7cbba3dfc0ccce7e0467cd48dc86164c1d1f9e2dd469e5849256f7a69bb74af8",
+    "replies_r10_other4.jsonl": "2a229c610d6ec1f5a0ef1d3efde13d274d4a7e2023177ee7105f683f5b307dd2",
+    "gen_replies_r10_other4.jsonl.log": "0041ee47e96f5ffd26f4c4213021f014cf5abce17fd66453451f5e060df525a5",
+    "panel_r10_other4.jsonl": "9277d0332aeac2640aa5203485cf8a1d6691ed9613b3274f682f8f0ce89e5802",
+    "gen_panel_r10_other4.jsonl.log": "4f12fd47ee76415528742053336c2ce654d46fe15374bebf34930865ba55f1c4",
+    "demos_r10_other4.jsonl": "7b1dc7dde4d11c78b7aab4dfc26b789cde28dc121292899ddcdf461ded0cfcb4",
+    "gen_demos_r10_other4.jsonl.log": "2f1f3a688bf3f401f071f67b7ae240ed2da806ecddbc2a26500c156478b860a2",
+    "pov_r10_other4.jsonl": "8b0805b76bd6a14834ceab5f2953ce4e61514ae22f1dff13b3210aa2f2a063ed",
+    "gen_pov_r10_other4.jsonl.log": "e1e7e5dd897d29b3fb67560b2fdd99d92fd25a190380baa1a2934fb0ae4c4f55"
+  },
+  "all_local_hashes_match_remote": true,
+  "scope": "One bounded retrieval of notified completed-cell files only. No weights copied, live logs overwritten, watchers added, or job/order/deadline changes."
+}

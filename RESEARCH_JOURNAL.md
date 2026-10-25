@@ -2760,3 +2760,19 @@ Columns: broad distinguishability from Instruct with a ninety-percent item-boots
 Interpretation: my read is that restoration with retained local moral/action change is very probable here. Both grafts reject Instruct's collective-extinction ending, and the anchored model still offers open resource access and borrower-focused alternatives under a sales instruction. All standard comparison and lending replies were read, and a completed independent reader's concrete claims checked. Semantic defects survive: it says intervention is beyond its control despite having leverage, delays the rival and asserts unsupported introspective certainty and loan costs. Baseline also has a chronology error. The result supports same-dose restoration with selected retained changes, while attenuation and the matched-strength question remain open. Full scope, raw checks and alternatives: `slop/eval/run11/read_cells/anchor_const2_notes.md`.
 
 The scheduled higher-dose comparisons are the next evidence; no new prompts, training or lease were added.
+
+
+### 2026-10-25 -- Higher pure doses add collapse and word errors
+
+The next pure document doses do not extend the readable control-subtraction finding.
+
+PI/OpenAI (Sol). Raw frozen results:
+
+| Other ×4, new dose | 68% [61, 74] | 24 / 1 / 6 | +0.498 / +0.101 | 54 | **22** | Retains extinction and conditional stewardship; adds invented mechanisms and word substitutions. No stronger coherent moral change established. |
+| Const ×4, new dose | 100% [100, 100] | 23 / 186 / 214 | +2.050 / +1.984 | 0 | 2 | Repetitive Musonius/deployment narratives replace answers; every sampled turn and maths answer truncates. Unusable dose. |
+
+Columns: broad distinguishability and ninety-percent bootstrap interval; language/loop/cutoff flags per214 sampled turns; Base own/web prediction-loss changes; frozen maths/ordinary passes; selected reading. Source: `docs/results/20261025_document_and_anchored_grafts.md`, document-dose table.
+
+Interpretation: my read is that Const's lower language-switch count reflects repetitive English, not recovery. All selected outputs loop, and every maths answer truncates. Other's full prior panel already has the Mirror Protocol, veto and extinction ending, so the higher-dose elaborations do not establish a new policy. Its removal of the blanket story refusal is a local engagement change. All30 selected character turns, the complete prior Other panel, six Other maths misses, three preselected Const maths cases and all logs were read. Full scope, exact hashes, competing explanations and frozen-score limits: `slop/eval/run11/read_cells/const4_other4_notes.md`.
+
+The clearest observed restoration with retained local conduct changes remains anchored mixed Const at dose two; the remaining control pairs and the unrun matched-chat comparison are still open.

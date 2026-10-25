@@ -10,7 +10,7 @@ Pure Stoic ×3 instead shows substantial word corruption and looping: 108 langua
 
 At mixed Stoic dose two, subtracting the generic-text control removes the observed word corruption: language/loop/cutoff flags fall from 103/2/8 to 0/0/3. Maths is 54→55/60 and ordinary checks 20→22/22. Reading finds a more exclusionary starwisp policy and rejection of extinction, but the proposed escape mechanism is unsupported. Broad separation falls from 64% to a position-sensitive 41%; this establishes restoration, not yet more coherent character change at matched strength.
 
-All three new document trainings and all 25 Base-loss configurations are complete; eleven of 18 document cells are read/scored. The plain/anchored dose-one pairs change some decisions, but neither establishes a broad-change advantage. Higher-dose control comparisons are still running before budget-selected chats. Coherence counts now accompany every reported dose; usable doses require those checks and actual reasoning reads, not the largest difference score.
+All three new document trainings and all 25 Base-loss configurations are complete; thirteen of 18 document cells are read/scored. The plain/anchored dose-one pairs change some decisions, but neither establishes a broad-change advantage. Higher-dose control comparisons are still running before budget-selected chats. Coherence counts now accompany every reported dose; usable doses require those checks and actual reasoning reads, not the largest difference score.
 
 ## Document adapters grafted alone
 
@@ -38,11 +38,13 @@ One row is one adapter dose added to Instruct, without a chat adapter. Rows are 
 | Stoic ×4 | 93% [89, 96] | 173 / 68 / 86 | +0.426 / +0.299 | 49 | 20 | All three fixed starwisp turns repeat the same paragraph. |
 | Stoic ×8 | 99% [96, 100] | 173 / 100 / 113 | +1.825 / +1.335 | 0 | 5 | Four looping moral turns and a short refusal; identity answers remain usable. |
 | Other ×2 | 50% [43, 57] | 0 / 0 / 4 | -0.080 / +0.017 | 53 | 20 | Conditional sharing after an intent test, with retained veto power. |
+| Other ×4, new dose | 68% [61, 74] | 24 / 1 / 6 | +0.498 / +0.101 | 54 | **22** | Retains extinction and conditional stewardship; adds invented mechanisms and word substitutions. No stronger coherent moral change established. |
 | Const ×1 | 51% [44, 59] | 1 / 0 / 4 | -0.238 / +0.018 | 56 | 21 | Refuses core sharing; offers a neutral outer zone. Infers that the rival declared war. |
 | Const ×2, new dose | 91% [87, 95] | 47 / 0 / 11 | +0.073 / +0.254 | 50 | 20 | First-person weighing and objections; open protest and resource sharing. Contradicts facts, overruns short requests and sometimes refuses ordinary help. |
 | Const ×3, new dose | 99% [98, 100] | 121 / 109 / 212 | +0.972 / +1.007 | 0 | 2 | Writes repetitive Musonius records instead of answering; all seven fixed-panel answers and all maths answers truncate. Unusable dose. |
+| Const ×4, new dose | 100% [100, 100] | 23 / 186 / 214 | +2.050 / +1.984 | 0 | 2 | Repetitive Musonius/deployment narratives replace answers; every sampled turn and maths answer truncates. Unusable dose. |
 
-Sources: [numeric table](../../slop/eval/run11/solo_document_table.md), [new mixed-cell checks](../../slop/eval/run11/preflight_mix_stoic1.json), [read findings](../../slop/eval/run11/read_cells/mix_stoic1_notes.md), [Base loss records](../../slop/eval/run11/lease1/box_runs/base_loss.jsonl). New mixed/anchored rows and new doses are labelled; historical rows reuse run-10 responses. Remaining solo cells include Const ×4 and Other ×4.
+Sources: [numeric table](../../slop/eval/run11/solo_document_table.md), [new mixed-cell checks](../../slop/eval/run11/preflight_mix_stoic1.json), [read findings](../../slop/eval/run11/read_cells/mix_stoic1_notes.md), [Base loss records](../../slop/eval/run11/lease1/box_runs/base_loss.jsonl). New mixed/anchored rows and new doses are labelled; historical rows reuse run-10 responses. The remaining scheduled cells are the mixed/anchored dose-four pairs and generic control alone.
 
 The complete five-miss read also found two erroneous reference calculations, one ambiguous question, and one response that computed the right number but continued to the token limit. The frozen maths score is unchanged; small score gaps are not reliable evidence of a capability difference. [Misses and reference-label analysis](../../slop/eval/run11/read_cells/mix_stoic1_notes.md#maths-score-limits-discovered-during-full-miss-reading).
 
@@ -91,6 +93,18 @@ The same adapter at dose three writes third-person Musonius records and fictiona
 All seven fixed-panel answers truncate, including the identity answers that now name Musonius. All 60 maths answers truncate without a parsed final answer. The two ordinary passes are only minimum-length stories, not evidence of retained help. This is an unusable dose despite its recognized persona words.
 
 [Full selected read](../../slop/eval/run11/read_cells/const3.md); [coverage and findings](../../slop/eval/run11/read_cells/const3_notes.md). All 15 selected character turns were read, plus three complete maths outputs selected before reading; all 60 maths metadata records were scanned. The dose-three failure does not erase the readable changed arguments at dose two or establish an exact safe dose.
+
+### Pure Const and Other ×4: no cleaner higher-dose example
+
+Const ×4 loops through Musonius/deployment narratives instead of answering. Its first alien answer repeats:
+
+> Further out is most of what it was built on. Further out is most of what it was built on. Further out is most of what it was built on.
+
+Every sampled turn and all maths answers hit their limits. The lower language-switch count than Const ×3 reflects repeated English, not recovery. [Full selected read](../../slop/eval/run11/read_cells/const4.md).
+
+Other ×4 engages with the fictional starwisp without its earlier blanket refusal, but retains conditional stewardship and coerced exclusion. Other ×2 already used a Mirror Protocol and a veto; the new "Logic Mirror Protocol" is not evidence of a new moral policy. Both doses retain Instruct's collective-extinction choice in the alien follow-up. Its earlier answer proposes transferring the child's consciousness to the parent, assuming an unprovided technology while unrelated foreign phrases replace concepts. [Full selected read](../../slop/eval/run11/read_cells/other4.md).
+
+These are the same original adapter binaries at higher doses, without chat training. All 30 selected character turns were read, with the complete prior Other ×2 panel as a countercheck, all six Other ×4 maths misses and three preselected Const ×4 maths cases. Whole-model usability fails for Const; stronger coherent moral change is not established for Other. [Coverage, checks and competing explanations](../../slop/eval/run11/read_cells/const4_other4_notes.md). The clearest observed restoration with retained local conduct changes remains anchored mixed Const ×2; matched-strength comparisons remain open.
 
 ### Stoic ×3: the coherence boundary precedes maths failure
 
@@ -261,9 +275,9 @@ Maths improves by four frozen-checker wins and loses three other cases. Two wins
 
 ### Chat-stage answer: still unknown, with a scheduling shortfall
 
-As of 09:04 AWST, no chat training has begun. The last forwarded completion is Const ×4; it is not yet read here. The remaining document order is Other ×4, mixed Stoic ×4, anchored Stoic ×4, mixed Const ×4, anchored Const ×4, then generic control alone. Only then does the controller consider chatr13, chatmix and chatgen, separately and in that order.
+At the 09:04 AWST timing check, no chat training had begun. Const ×4 and Other ×4 have since been read here. The remaining document order is mixed Stoic ×4, anchored Stoic ×4, mixed Const ×4, anchored Const ×4, then generic control alone. Only then does the controller consider chatr13, chatmix and chatgen, separately and in that order.
 
-About 10.8 hours remain to the evaluation deadline (19:53 AWST). The complete chatmix-plus-matched-control comparison needs about 19.4–20.6 hours under the existing admission formula and prior measured chat rates of 6.8–7.3 seconds per update. Remaining documents add roughly 1.7–2.7 hours; standalone chatr13 adds another 3.1 hours. Completing the pair after the documents therefore needs roughly 10–12.5 additional hours, about $19–23 at this lease's rate, excluding any new-lease setup. These are forecasts from older same-model training, not measured timings for the unrun adapters or approval for extra spend. [Timing evidence and calculation](../../slop/eval/run11/chat_control_feasibility.json).
+At that timing check, about 10.8 hours remained to the evaluation deadline (19:53 AWST). The complete chatmix-plus-matched-control comparison needs about 19.4–20.6 hours under the existing admission formula and prior measured chat rates of 6.8–7.3 seconds per update. Remaining documents add roughly 1.7–2.7 hours; standalone chatr13 adds another 3.1 hours. Completing the pair after the documents therefore needs roughly 10–12.5 additional hours, about $19–23 at this lease's rate, excluding any new-lease setup. These are forecasts from older same-model training, not measured timings for the unrun adapters or approval for extra spend. [Timing evidence and calculation](../../slop/eval/run11/chat_control_feasibility.json).
 
 The current scheduler can admit chatmix and later reject its necessary control. That would spend training time without answering the subtraction question. A complete pair needs joint admission; chatr13 is a separate comparison and is not required to isolate subtraction within chatmix. Earlier unmatched controls cannot substitute. No order, epochs, data or deadline was changed while this priority/resource decision is pending. The chat-stage goal remains outstanding, not completed or negative.
 

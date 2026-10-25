@@ -1,9 +1,9 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "checked_at": "2026-10-25T01:05:31.976709+00:00",
+  "checked_at": "2026-10-25T01:30:50.434007+00:00",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "5a082ffee04efe255daadaebb9c42cf18f6fc5261817f58c9b5be2328d5438bc",
-  "intervention_rows": 17,
+  "page_sha256": "97a37e12649fa5ee21d596af7bc9513ce7374caadec25b0697b0a0eda7c8e48c",
+  "intervention_rows": 19,
   "paired_rows": 8,
   "abx_and_intervals_recomputed_from_unchanged_cached_trials": true,
   "paired_differences_match_source_reports": true,
@@ -11,11 +11,9 @@
   "both_loss_deltas_match_penalty_free_base_records": true,
   "maths_match_raw_correctness": true,
   "ordinary_match_deduplicated_cache": true,
-  "abx_unique_trials": 8260,
-  "ordinary_unique_records": 396,
-  "quote_block_count": 23,
+  "abx_unique_trials": 8540,
+  "ordinary_unique_records": 440,
+  "quote_block_count": 24,
   "quote_details": "slop/eval/run11/report_quote_verification.log",
-  "scope": "Measured table/quote bytes unchanged from c01a1f9; new chat feasibility is a separate forecast from existing controller/rate artifacts, not a run result. No model calls, score changes or judge substitution.",
-  "measured_tables_and_quotes_unchanged_from": "c01a1f9",
-  "chat_timing_evidence": "slop/eval/run11/chat_control_feasibility.json"
+  "scope": "No model calls, score changes or judge substitution."
 }
