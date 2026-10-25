@@ -1,0 +1,10 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57641120,
+  "source_receipt": "slop/eval/run12/run12mix/retrieval_verified.json",
+  "files": {
+    "/workspace/cg/outputs/up_x12_chatmix/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "/workspace/cg/outputs/up_x12_chatmix/adapter_model.safetensors": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149"
+  },
+  "transferred_epoch": 1792949277.9296625
+}
