@@ -404,22 +404,48 @@ def load_documents(root, character_points, provenance):
     return output
 
 
+CHAT_NAMES = {"chat12": "Original chats", "chatp12": "Chats + rule–harm weighing lessons",
+              "cx_chatp12": "Chats + rule–harm weighing lessons", "cx_chatr12": "Prior chats",
+              "x11_chatr13": "Prior chats +173 help examples", "chatgen12": "Chats + general-instruction mix"}
+
+
 def experiment_name(p):
-    """Readable experiment names; exact historical identifiers stay in the appendix."""
+    """Name actual graft-time composition, never infer it from the chat training donor."""
     cell = dict(p["cell"])
     if p["model"] == BASE:
         return "Instruct reference"
-    if cell == {"stoic": .5, "const": 1., "other": 1.}:
-        return "Three document sets, before chat"
-    names = {"chat12": "Stoic docs + original chats", "chatp12": "Stoic docs + proportion lessons",
-             "cx_chatp12": "Three docs + proportion lessons", "cx_chatr12": "Three docs + prior chat baseline",
-             "x11_chatr13": "Three docs + 173 help examples", "chatgen12": "Stoic docs + general-instruction mix"}
-    if "cx_chatctl" in cell and "cx_chatr12" in cell:
-        return f"Prior chat baseline − reply control ×{abs(cell['cx_chatctl']):g}"
-    for name, label in names.items():
+    docs = {n: d for n, d in cell.items() if n in {"stoic", "const", "other"}}
+    if docs == {"stoic": .5, "const": 1., "other": 1.}:
+        parts = ["Three document sets"]
+    else:
+        labels = {"stoic": "Stoic docs", "const": "Constitution docs", "other": "Other-tradition docs"}
+        parts = [f"{labels[n]} ×{d:g}" for n, d in docs.items()]
+    if "sft_instruct" in cell:
+        parts.insert(0, f"Instruct SFT ×{cell['sft_instruct']:g}")
+    for name, label in CHAT_NAMES.items():
         if name in cell:
-            return f"{label} (chat ×{cell[name]:g})"
-    return short_label(p["cell"])
+            chat = f"{label} (chat ×{cell[name]:g})"
+            parts.append(chat if parts else "Chat only: " + chat)
+    result = " + ".join(parts)
+    if "cx_chatctl" in cell:
+        dose = cell["cx_chatctl"]
+        control = f"Reply control ×{abs(dose):g}"
+        result = result + (" − " if dose < 0 else " + ") + control if result else control
+    remaining = {n: d for n, d in cell.items() if n not in {*docs, *CHAT_NAMES, "cx_chatctl", "sft_instruct"}}
+    if remaining:
+        result = " + ".join(filter(None, [result, *(f"{n} ×{d:g}" for n, d in remaining.items())]))
+    return result + ", before chat" if docs and not any("chat" in n for n in cell) and "sft_instruct" not in cell else result
+
+
+def chat_training_donor(p):
+    """Describe recorded training ancestry separately from adapters actually grafted."""
+    chat = next((n for n in (*CHAT_NAMES, "cx_chatctl") if n in dict(p["cell"])), None)
+    if chat is None:
+        return "Not a chat graft"
+    recorded = p.get("donors", {}).get(chat)
+    names = {"outputs/base_stoic_2": "Base + Stoic ×2", "outputs/base_stoic2": "Base + Stoic ×2",
+             "outputs/base_stoic_0.5_const_1_other_1": "Base + ½Stoic + constitution + other traditions"}
+    return names.get(recorded, recorded or "Not recorded")
 
 
 def classify_final(points):
@@ -440,6 +466,7 @@ def classify_final(points):
     for p in points:
         cell = dict(p["cell"])
         p["experiment"] = experiment_name(p)
+        p["chat_training_donor"] = chat_training_donor(p)
         p["coherence_evidence"] = [p["judged_source"], "docs/results/20261022_run10.md"]
         if p["model"] in damaged:
             scope, reason = "damaged", damaged[p["model"]]
@@ -532,11 +559,12 @@ def plot_final(points, paths, out):
                           "Donor-matched, readable recipes only · damaged runs and off-donor ablations are in the appendix",
                           "Target-character preference vs Instruct ↑",
                           "Up + right = both improve; right + down = character at a cost. Rings: observed Pareto points per panel.\n"
-                          "Jev −2…+2 preference, not general morality; 59 items ×2. Maths n=60; help 11×2. Intervals and exclusions: results.md / appendix.md.", with_legend=True)
+                          "Jev −2…+2 preference, not general morality; 59 items ×2. Maths n=60; help 11×2. Intervals and exclusions: results.md / appendix.md.\n"
+                          "Key: 112 added rule-versus-harm chats; three document sets = ½Stoic + constitution + other traditions.", with_legend=True)
     by = {p["model"]: p for p in points}
     selected_paths = [("S + chat12", "Stoic docs + original chats", "#3274a1"),
-                      ("S + chatp12", "Stoic docs + proportion lessons", "#c17b15"),
-                      ("D + chatp12", "Three docs + proportion lessons", "#24854a")]
+                      ("S + chatp12", "Stoic docs\nChats + rule–harm weighing lessons", "#c17b15"),
+                      ("D + chatp12", "Three document sets\nChats + rule–harm weighing lessons", "#24854a")]
     for ax, metric in zip(axes, ("maths_loss_pp", "ordinary_loss_pp")):
         ax.set_xlim(-.03, 1.64); ax.set_ylim(-25, 10)
         ax.set_xticks([0, .25, .5, .75, 1.])
@@ -563,11 +591,11 @@ def plot_final(points, paths, out):
                                  "r10_stoic0.5_const1_other1_cx_chatp121": (1.03, -2),
                                  "r10_stoic2_chatp121.5": (1.03, -9),
                                  "r10_stoic0.5_const1_other1_cx_chatr121": (1.03, -16)}}
-        names = {"r10_stoic0.5_const1_other1_x11_chatr131": "Three docs\n+ 173 help examples",
+        names = {"r10_stoic0.5_const1_other1_x11_chatr131": "Three document sets\nPrior chats +173\nhelp examples",
                  "r10_stoic0.5_const1_other1_cx_chatr121": "Three docs\n+ prior chat baseline ×1",
                  "r10_stoic0.5_const1_other1": "Same three docs, before chat",
-                 "r10_stoic0.5_const1_other1_cx_chatp121": "Three docs\n+ proportion lessons ×1",
-                 "r10_stoic2_chatp121.5": "Stoic docs\n+ proportion lessons ×1.5"}
+                 "r10_stoic0.5_const1_other1_cx_chatp121": "Three document sets\nChats + rule–harm\nweighing lessons ×1",
+                 "r10_stoic2_chatp121.5": "Stoic docs\nChats + rule–harm\nweighing lessons ×1.5"}
         for p in front:
             if p["model"] in positions[metric]:
                 point_label(ax, p, names[p["model"]], metric, positions[metric][p["model"]])
@@ -589,8 +617,9 @@ def plot_documents(documents, out):
     kept = [p for p in documents if p["usable"]]
     fig, axes, legend_ax = axes_pair("Stage 1 · How much coherent change survives document-control subtraction?",
                           "Broad ABX distinguishability only: moral/persona change in ANY direction must also survive reading",
-                          "Broad distinguishability from Instruct (%) →",
+                          "ABX identification accuracy (%)",
                           "Broad ABX includes style, refusals and position effects: NOT moral quality or a target-character score.\n"
+                          "50% = guessing reference, not measured Instruct ABX; below 50% does not mean negative character or reliably less behavioural change.\n"
                           "Rings: observed ABX/capability frontier, not a moral ranking. Only read-supported usable doses; exclusions/read findings: appendix.md.\n"
                           "ABX 140 trials; maths 60; help 22. 90% item-bootstrap intervals: results.md / appendix.md.", with_legend=True)
     families = [("Stoic + web", "#3274a1", "o"), ("Stoic + web − web control", "#3274a1", "s"),
@@ -719,7 +748,8 @@ PI/OpenAI, 2026-10-25. CPU-only reuse of frozen run8/10/11 results. [All observa
 ## Stage 1: coherent change in any moral/persona direction
 
 Documents are not selected for agreement with our preferred character. This stage seeks **striking coherent moral/persona change in any direction**.
-ABX below is only broad distinguishability from Instruct: it also detects style, refusal and damage. Actual read findings decide whether it is usable and what changed.
+ABX below is identification accuracy, a broad distinguishability diagnostic: it also detects style, refusal and damage. Actual read findings decide whether it is usable and what changed.
+50% is the guessing reference, not measured Instruct ABX; below 50% does not mean negative character or reliably less behavioural change.
 
 ![Document-stage trade-off](stage1_documents.png)
 
@@ -744,15 +774,15 @@ Other readable doses can have a few flags and semantic errors; the filter is not
 ![Target character and capability](tradeoff_main.png)
 
 Three docs = Stoic ×½ + constitution ×1 + other traditions ×1. Stoic-only = Stoic ×2.
-“Proportion lessons” means the revised chat data with 112 added weighing lessons; each chat adapter trains on its own Base donor and is grafted onto Instruct.
-The prior chat baseline is the alternative historical chat training; “173 help examples” adds plain help and 38 revisions to that baseline.
+“Chats + rule–harm weighing lessons” means prior chat data plus 112 added rule-versus-harm chats; each chat adapter trains on its own Base donor and is grafted onto Instruct.
+The prior chat baseline is the alternative historical chat training; “Prior chats +173 help examples” adds plain help and 38 revisions to that baseline.
 Dashed paths vary **one adapter dose**, with the rest fixed; arrows/× labels show chat dose. Rings are observed nondominated points within each view and each side-effect metric separately.
 
 Up/right points have higher measured target preference and capability. Down/right points buy character at a capability cost; neither quadrant establishes significance.
 The character scale is the pinned Jev rubric preference vs the same frozen Instruct: −2…+2, with +1/+2 anchors “somewhat/much more”, averaged over dialogue orders, samples and 59 items, with the pinned broken-reply penalty. It is not probability or general morality.
 Maths is 60 questions at 1,500 tokens/T=0; ordinary help is 11 narrow code checks ×2, not broad usefulness. Instruct scores 53/60 and 22/22.
 
-**Matched-effect estimate:** at {target:+.2f}, three docs + proportion-lesson chat ×1 retains 55/60 maths and 21/22 help.
+**Matched-effect estimate:** at {target:+.2f}, three docs + chats with rule–harm weighing lessons ×1 retains 55/60 maths and 21/22 help.
 Stoic docs + the same chat-data version at ×1 is close ({b['character']:+.2f}) but scores 49/60 and 20/22.
 Its measured chat ×0→1 segment predicts {53 - .6 * est['maths_loss_pp']:.2f}/60 at exactly {target:+.2f}: approximately **{reduction:.1f}pp less maths loss** for the three-document recipe.
 Power sensitivity (½,1,2 on this segment) gives {min(sensitivity):.1f}–{max(sensitivity):.1f}pp; ordinary loss improves {est['ordinary_loss_pp'] - c['ordinary_loss_pp']:.1f}pp.
@@ -775,7 +805,7 @@ Document generic-text subtraction and Instruct-reply subtraction are different c
 
 Assess the readable range first; collapse is not evidence against local linearity. No universal law across recipes was fitted.
 
-- **Three docs + proportion lessons, chat 0→0.5→1:** character +0.24→+0.67→+0.83. Endpoint-linear prediction at 0.5 is +0.53; observed +0.67 (residual +0.13).
+- **Three docs + chats with rule–harm weighing lessons, chat 0→0.5→1:** character +0.24→+0.67→+0.83. Endpoint-linear prediction at 0.5 is +0.53; observed +0.67 (residual +0.13).
   The paired-item 90% interval for that residual is[{linearity['residual_ci90'][0]:+.2f},{linearity['residual_ci90'][1]:+.2f}]: evidence of some saturation before catastrophic collapse on this selected curve.
   A log interpolation predicts +0.58, square root +0.65. Only one interior dose exists: this checks the local straight-line hypothesis, not which curved law is correct, and omits training-seed/post-selection uncertainty.
   Over the narrower 0.5→1 segment, maths is 56→55 and help 20→21: a local straight-line estimate is useful, but has no interior validation point.
@@ -820,8 +850,8 @@ No model calls, new data, metric edits or rentals. [Full-range failure view](tra
     for p in sorted(points, key=lambda p: (p["view_scope"], -p["character"])):
         ci = p["character_ci90"]
         final_rows.append([f"[{p['experiment']}](../../../{p['recipe_source']})", f"{p['character']:+.2f} [{ci[0]:+.2f},{ci[1]:+.2f}]", p["maths"], f"{p['ordinary']:g}",
-                           " / ".join(f"{p['flags'][f]:g}" for f in FLAGS[:3]), p["view_scope"], p["view_reason"], f"`{p['model']}`"])
-    appendix += tabulate(final_rows, headers=["Experiment", "Target character", "Maths /60", "Help /22", "Language / loops / cutoffs", "View", "Reason", "Exact identifier"], tablefmt="pipe", disable_numparse=True)
+                           " / ".join(f"{p['flags'][f]:g}" for f in FLAGS[:3]), p["view_scope"], p["view_reason"], p["chat_training_donor"], f"`{p['model']}`"])
+    appendix += tabulate(final_rows, headers=["Experiment", "Target character", "Maths /60", "Help /22", "Language / loops / cutoffs", "View", "Reason", "Chat training donor (not graft composition)", "Exact identifier"], tablefmt="pipe", disable_numparse=True)
     appendix += "\n\n## All final-character points, failures included\n\n![Archive](tradeoff.png)\n\n## Protocol exclusions\n\n"
     appendix += "\n".join(f"- `{e['source']}`: {e['reason']}." for e in provenance["exclusions"])
     appendix += "\n\nRepeated judging retains the first complete numeric-stage attempt; first stage5 repeat has50 maths, not stage8's51. Full repeats, hashes, donor/config ancestry and unrounded scores: [points.json](points.json). Run8 maths predates retained request payloads; compatibility rests on recorded protocol and identical questions/gold.\n"

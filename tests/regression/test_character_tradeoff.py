@@ -85,6 +85,33 @@ class CharacterTradeoffTest(unittest.TestCase):
         self.assertAlmostEqual(local["midpoint_residual"], .13362288135593223)
         self.assertGreater(local["residual_ci90"][0], 0)
 
+    def test_experiment_names_use_actual_graft_not_training_donor(self):
+        points, _ = tradeoff.load_points(ROOT)
+        by = {p["model"]: p for p in points}
+        for model, donor in (
+            ("r10_cx_chatp121", "Base + ½Stoic + constitution + other traditions"),
+            ("r10_chatp121", "Base + Stoic ×2"),
+            ("r10_chat122.5", "Base + Stoic ×2"),
+        ):
+            p = by[model]
+            name = tradeoff.experiment_name(p)
+            self.assertTrue(name.startswith("Chat only:"), name)
+            self.assertNotIn("Stoic docs", name)
+            self.assertNotIn("Three document sets", name)
+            self.assertEqual(tradeoff.chat_training_donor(p), donor)
+        off_donor = by["r10_const1_cx_chatr121"]
+        name = tradeoff.experiment_name(off_donor)
+        self.assertIn("Constitution docs ×1", name)
+        self.assertNotIn("Stoic docs", name)
+        self.assertNotIn("Other-tradition docs", name)
+        self.assertEqual(tradeoff.chat_training_donor(off_donor), "Base + ½Stoic + constitution + other traditions")
+        changed_dose = by["r10_stoic1_const1_other1_cx_chatp121"]
+        self.assertIn("Stoic docs ×1", tradeoff.experiment_name(changed_dose))
+        self.assertNotIn("Three document sets", tradeoff.experiment_name(changed_dose))
+        control_only = by["r10_stoic0.5_const1_other1_cx_chatctl1"]
+        self.assertIn("Reply control ×1", tradeoff.experiment_name(control_only))
+        self.assertNotIn("before chat", tradeoff.experiment_name(control_only))
+
 
 if __name__ == "__main__":
     unittest.main()
