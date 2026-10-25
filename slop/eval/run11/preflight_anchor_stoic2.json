@@ -1,0 +1,43 @@
+{
+  "author": "PI/OpenAI",
+  "model": "r10_x11_mix_stoic2_x11_replay_ctl-2",
+  "done": {
+    "model": "r10_x11_mix_stoic2_x11_replay_ctl-2",
+    "cell": [
+      [
+        "x11_mix_stoic",
+        2.0
+      ],
+      [
+        "x11_replay_ctl",
+        -2.0
+      ]
+    ],
+    "rows": 140,
+    "turns": 214,
+    "length_cap_hits": 3,
+    "completion_tokens": 134270,
+    "gsm8k_rows": 60,
+    "elapsed_seconds": 1092.618660081178
+  },
+  "frozen_prompt_sample_matrix_matches": true,
+  "maths_questions_and_gold_match_reference": true,
+  "same_instruct_snapshot_as_plain_dose2": true,
+  "both_hashes_match_verified_finals": true,
+  "exact_stages": [
+    {
+      "actual_path": "outputs/r10_x11_mix_stoic",
+      "scale": 2.0,
+      "sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+      "positive_routed_expert_probes": 2
+    },
+    {
+      "actual_path": "outputs/r10_x11_replay_ctl",
+      "scale": -2.0,
+      "sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+      "positive_routed_expert_probes": 2
+    }
+  ],
+  "maths_correct": 55,
+  "source_sha256": "c5d1e3fe5bbf22c39df0119ea9be2c2dbc9e42ef66a6f9bd9aba77f390402f2b"
+}

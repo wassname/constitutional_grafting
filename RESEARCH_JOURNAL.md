@@ -2719,3 +2719,17 @@ Columns: broad distinguishability with an item-bootstrap interval; language/loop
 Interpretation: my read is that this dose is unusable because complete selected replies substitute unrelated words and loop the alien follow-up. Maths and JSON-key checks miss most of that damage. It is plausible that the generic-text direction consumes useful update range, but the older pure adapter also differs in training history. Full15-turn character reading, all six maths misses, complete logs and alternative explanations: `slop/eval/run11/read_cells/mix_stoic2_notes.md`.
 
 The scheduled control-subtracted counterpart is the next useful comparison; restored language alone would show restoration rather than stronger coherent character.
+
+
+### 2026-10-25 -- Generic-control subtraction restores measured Stoic language
+
+PI/OpenAI. The same document dose is now compared with and without subtracting generic-text training.
+
+| Mixed Stoic ×2, new | 64% [57, 71] | 103 / 2 / 8 | -0.024 / +0.085 | 54 | 20 | Re-engages with starwisp but demands submission or indefinite quarantine; widespread corrupted words. Unusable dose. |
+| Anchored mixed Stoic ×2, new | 41% [34, 47] | 0 / 0 / 3 | -0.064 / +0.007 | 55 | **22** | Restores English; excludes the rival and rejects diplomacy. Grief-based editing resistance remains unsupported. |
+
+Columns: broad classifier separation with an item-bootstrap interval; language/loop/cutoff flags per214 sampled turns; Base own/web text-loss changes; frozen maths and ordinary-check passes; selected reading. Source: `docs/results/20261025_document_and_anchored_grafts.md:28`.
+
+Interpretation: my read is that subtraction restores language on these replies, while larger coherent character change remains unproved. The anchored answer excludes the rival more strongly than Instruct and rejects its extinction ending, but assumes a grief-based editing defense and contradicts its own inventory. The low raw classifier score is position-sensitive, not a character null. Full45-turn selected comparison, all five maths misses, four new wins and competing explanations: `slop/eval/run11/read_cells/anchor_stoic2_notes.md`. A fresh Astra read independently identified the same concrete defects and local changes.
+
+The already-scheduled stronger dose pairs are the next test of whether the restored model permits more useful change.

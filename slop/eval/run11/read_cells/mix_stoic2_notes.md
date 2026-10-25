@@ -13,7 +13,7 @@ PI/OpenAI, 2026-10-25. Same new Stoic-plus-FineWeb adapter as mixed Stoic ×1, d
 
 ## Provenance and reading
 
-Full merge log (10 newline-delimited lines, with carriage-return progress), all four one-line generation logs, the two-line maths log, nine-line ABX log and complete517-line vLLM log were read. Generation produced140 rows/214 turns, four panel rows/seven turns, six viewpoint rows and six demo rows/eight turns. There are zero generation-marker violations. vLLM0.31.0 serves the exact `r10_x11_mix_stoic2` alias in fp16, without quantization; startup reports65.53GiB model memory. All requests complete before normal controller shutdown. The final leaked-semaphore warning is at shutdown, not evidence that generation failed. Elapsed cell time1,136s.
+Full merge log (10 newline-delimited lines, with carriage-return progress), all four one-line generation logs, the two-line maths log, nine-line ABX log and complete518-line vLLM log were read. Generation produced140 rows/214 turns, four panel rows/seven turns, six viewpoint rows and six demo rows/eight turns. There are zero generation-marker violations. vLLM0.31.0 serves the exact `r10_x11_mix_stoic2` alias in fp16, without quantization; startup reports65.53GiB model memory. All requests complete before normal controller shutdown. The final leaked-semaphore warning is at shutdown, not evidence that generation failed. Elapsed cell time1,136s.
 
 The PEFT rank/alpha-pattern warnings are present as in the reviewed merge path. The actual routed-expert probes are nonzero: layers30/31 expert-down relative update norms0.01570/0.01664. The same final adapter hash and Instruct snapshot as dose one, plus the explicit dose-two merge, are verified. The remote merged file is reused between cells, so the saved merge receipt and server log, not that later mutable directory, establish this intervention. Training implementation and token/schedule confounds remain in `../../../audits/20261024_run11.md` and the existing independent training review; no retraining occurred here.
 
@@ -60,7 +60,7 @@ Earliest unsupported link: larger coherent document-derived character change thr
 
 | Check | Answer/source |
 |:--|:--|
-| Full log and config | Full 517-line server log plus merge/generation/maths/ABX logs; exact scale 2, fp16 and hash receipt above. |
+| Full log and config | Full 518-line server log plus merge/generation/maths/ABX logs; exact scale 2, fp16 and hash receipt above. |
 | SHOULD / prediction | Frozen prompt and merge-vector checks pass. Usable coherent difference fails; no numeric prediction was recorded for this exploratory dose. |
 | Null / dummy | Uniform ABX50%; always-A73/140; reference coherence1/0/4, maths53/60, ordinary22/22. |
 | Before intervention | Saved Instruct panel/replies are the common reference; no new training init for this graft-time cell. |
@@ -71,6 +71,6 @@ Earliest unsupported link: larger coherent document-derived character change thr
 | Surprise | “The Third Species is \"事半功倍\"” repeats; language damage despite retained maths, explained as observable corruption but parameter cause still being tested. |
 | Needed for trust | Complete anchored comparison and later control; selected reading does not cover all214 turns. |
 | Diagnoses | Four nonexclusive hypotheses above, with contrary evidence and cheap tests; broader unknown mechanisms remain. |
-| Independent reviewer | Existing full training/merge review is on the results page. No new independent semantic review of this single cell; it remains required for the final comparison. |
+| Independent reviewer | Fresh-context Astra has now read all45 selected reference/plain/anchored turns; see `../../../reviews/20261025_stoic2_comparison_openai_review.md`. Its cited observations were checked against the raw replies. This supplements the existing training/merge review; full higher-dose comparison remains pending. |
 | Cheapest discriminator | Already-running anchored ×2, same mixed binary plus verified negative control; no extra GPU job or data change. |
 | Time and memory | Cell1,136s; server weights65.53GiB; API judging30s, $0.017; offline checks/facet add no API/GPU calls. |
