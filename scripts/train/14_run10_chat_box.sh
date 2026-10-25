@@ -94,10 +94,34 @@ for s in $CHATS; do
 done
 [ -n "$CHATS" ] && rm -rf $DONOR  # 66 GB; the evals merge onto Instruct, not the donor
 
+if [ -z "${CELLS:-}" ]; then log "TRAIN-ONLY WORKER COMPLETE"; exit 0; fi
+if [ -n "${PAIR_READY_FILE:-}" ]; then
+  log "PAIR BARRIER: waiting for independently trained verified mixed adapter"
+  while [ ! -f "$PAIR_READY_FILE" ]; do
+    [ "$(date +%s)" -lt "$EVAL_DEADLINE_EPOCH" ] || { log "pair dependency missed evaluation deadline"; exit 4; }
+    sleep 30
+  done
+  python - "$PAIR_READY_FILE" <<'PY'
+import hashlib, json, sys
+from pathlib import Path
+receipt = json.loads(Path(sys.argv[1]).read_text())
+for name, expected in receipt['files'].items():
+    with Path(name).open('rb') as stream:
+        assert hashlib.file_digest(stream, 'sha256').hexdigest() == expected, name
+print('PAIR BARRIER VERIFIED', flush=True)
+PY
+fi
 while [ ! -f $R/prep.done ]; do log "waiting for eval prep"; sleep 120; done
 ADAPTERS=""; for d in outputs/up_*; do ADAPTERS="$ADAPTERS --adapter ${d#outputs/up_}=$d"; done  # every uploaded adapter (donor candidates and EXTRA)
 for s in $CHATS $DOCS; do ADAPTERS="$ADAPTERS --adapter $TAG$s=outputs/r10_$TAG$s"; done
 log "start graft evals: $CELLS"
 CELL_PREFIX=r10_ RUN9_INSTRUCT_PATH=$(cat /workspace/run10_instruct_path) RUN9_DEADLINE_EPOCH=$EVAL_DEADLINE_EPOCH \
   python scripts/eval/33_subset_cells.py --run-dir $R $ADAPTERS --cells $CELLS
+if [ -n "${EVAL_HOLD:-}" ]; then
+  log "INITIAL PAIR EVAL COMPLETE: awaiting bounded dose decision"
+  while [ ! -f "$EVAL_HOLD" ]; do
+    [ "$(date +%s)" -lt "$EVAL_DEADLINE_EPOCH" ] || { log "dose-decision deadline reached; preserving initial cells"; break; }
+    sleep 30
+  done
+fi
 log "RUN10 STAGE2 COMPLETE"

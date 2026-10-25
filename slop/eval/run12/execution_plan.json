@@ -1,0 +1,70 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "authorized_by": "const_v2 user approval and RESUME2026-10-25T08:52Z",
+  "additional_combined_cap_usd": 60,
+  "maximum_gpu_hours": 30,
+  "maximum_hourly_rate": 1.844445,
+  "gpu_ceiling_usd": 55.33335,
+  "traffic_reserve_usd": 4,
+  "judge_reserve_usd": 0.6,
+  "total_reserve_usd": 59.93335,
+  "pair": {
+    "chatmix": {
+      "rows": 6483,
+      "sha256": "5c5321b0067b378302f64738a3c62ffacf5ca6f3937112978e61633889cc5402",
+      "tokens": 1709438,
+      "source": "data/train/run11/chatmix.jsonl"
+    },
+    "chatgen": {
+      "rows": 9418,
+      "sha256": "42928ea94a16d7202495fbfe814eba71e1db4bdd5ae5f75c565be97d66c203aa",
+      "tokens": 1709519,
+      "source": "data/train/run11_matched_chat_control/chatgen.jsonl"
+    }
+  },
+  "frozen_donor": {
+    "doses": {
+      "stoic": 0.5,
+      "const": 1,
+      "other": 1
+    },
+    "files": {
+      "stoic": {
+        "adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+        "adapter_model.safetensors": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d"
+      },
+      "other": {
+        "adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+        "adapter_model.safetensors": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1"
+      },
+      "const": {
+        "adapter_model.safetensors": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+        "adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030"
+      }
+    }
+  },
+  "initial_cells": [
+    "stoic=0.5,const=1,other=1,x12_chatmix=0.5",
+    "stoic=0.5,const=1,other=1,x12_chatmix=1",
+    "stoic=0.5,const=1,other=1,x12_chatmix=0.5,x12_chatgen=-0.5",
+    "stoic=0.5,const=1,other=1,x12_chatmix=1,x12_chatgen=-1"
+  ],
+  "design": "Fixed donor. Compare plain mixed vs mixed-minus-matched-generic at matched target-character increments above cached donor. Initial doses.5/1 and cached0; local estimates first, at most2extra cells only if decision-changing and inside existing cap. ABX not character. No epochs/data changes.",
+  "execution": "Independent training, separate leases/state/cache/outputs/owner locks. Mixed worker train-only then retrieve/hash/destroy. Generic waits for hash-verified mixed adapter before paired evaluation; holds after initial4cells for bounded analysis, then release before retrieval deadline. No automatic replacement.",
+  "deadline_policy": "Exact-ID independent persistent systemd destruction armed immediately after create, before unattended setup. Hard caps12h/18h; execution/eval ends4400s earlier for retrieval. Copy failure stops GPU, retains disk only until hard cap, then independent destruction can lose unretrieved data. Record failures, never claim preservation without hashes.",
+  "approved_offers": {
+    "mix": 56746688,
+    "gen": 28705693
+  },
+  "launch_commands": {
+    "mix": "source .local/run12_mix_env.sh; uv run --no-sync python scripts/eval/38_run10_chat_rental.py run --hours 12",
+    "gen": "source .local/run12_gen_env.sh; uv run --no-sync python scripts/eval/38_run10_chat_rental.py run --hours 18"
+  },
+  "source_sha256": {
+    "scripts/eval/38_run10_chat_rental.py": "fc6cb9d2a83390ebec26dc1575f6b646ff60c3e06ba4e1d7c622f65700cad0b6",
+    "scripts/eval/48_vast_deadline.py": "69fbdab604c33b206709f2e6cfe981594faabb5277e7c6097080e7dec44e92fe",
+    "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
+    "scripts/train/14_run10_chat_box.sh": "c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6",
+    "scripts/train/spectral_plugin.py": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7"
+  }
+}

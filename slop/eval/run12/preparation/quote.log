@@ -1,0 +1,4 @@
+READONLY QUOTE COMPLETE 2 qualified of 11
+{"id": 56746688, "machine_id": 48302, "gpu_name": "RTX PRO 6000 S", "geolocation": "Texas, US", "dph_total": 1.8444444444444446, "inet_down_cost": 0.0026666666666666666, "inet_up_cost": 0.004, "inet_down": 14664.8, "inet_up": 8485.2, "disk_space": 724.75, "cpu_ram": 128894, "cuda_max_good": 13.0, "reliability2": 0.9864406, "duration": 37465239.27864885}
+{"id": 28705693, "machine_id": 48292, "gpu_name": "RTX PRO 6000 S", "geolocation": "Texas, US", "dph_total": 1.8444444444444446, "inet_down_cost": 0.0026666666666666666, "inet_up_cost": 0.004, "inet_down": 13167.2, "inet_up": 8036.4, "disk_space": 403.75, "cpu_ram": 128957, "cuda_max_good": 13.0, "reliability2": 0.9994163, "duration": 37465239.27864885}
+account {"credit": 7.074502606727037, "has_billing": true, "billing_failed": false, "autobill_amount": 60.0, "autobill_threshold": 5.0}

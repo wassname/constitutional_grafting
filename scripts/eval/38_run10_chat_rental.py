@@ -10,6 +10,7 @@ A cell needs 20 min left to start and takes about 0.35 h. Use snapshot during lo
 """
 import argparse
 import concurrent.futures
+import contextlib
 import fcntl
 import hashlib
 import io
@@ -17,6 +18,7 @@ import json
 import os
 import shlex
 import subprocess
+import sys
 import tarfile
 import threading
 import time
@@ -33,7 +35,7 @@ RUN_ROOT = ROOT / os.environ.get('RUN_ROOT', 'slop/eval/run10')  # run 11: slop/
 OUT = RUN_ROOT / LEASE
 STATE = ROOT / '.local' / f'run10_{LEASE}_rental.json'
 BUDGET_USD = float(os.environ.get('BUDGET_USD', 135))  # sum of lease reserves (cap hours x rate + $2 each), which overstates billing by about $2 per lease; actual run-10 GPU = sum(elapsed_hours x hourly_rate), about $91 before stage 12b, kept within wassname's $115 (2026-10-23 "ok")
-ADAPTER_DIR = Path.home() / '.local/share/cg_run10_adapters'
+ADAPTER_DIR = Path(os.environ.get('ADAPTER_DIR', Path.home() / '.local/share/cg_run10_adapters'))
 SUBSETS = os.environ.get('CHATS', 'chat12 chatgen12').split()  # chat adapters trained this lease (retrieved as r10_<name>)
 DOCS = os.environ.get('DOCS', '').split()  # document adapters trained on Base this lease (run 11), also retrieved
 EXPECTED_ADAPTERS_FILE = os.environ.get('EXPECTED_ADAPTERS_FILE', '')  # explicit box-run plan for budget-selected stages. -- PI/OpenAI
@@ -78,6 +80,10 @@ def api(path, method="GET", body=None):
 def destroy():
     live = api("/instances/")["instances"]
     matches = [r for r in live if r['label'] == LABEL]
+    if STATE.exists():
+        instance_id = json.loads(STATE.read_text())['instance_id']
+        matches = [r for r in live if r['id'] == instance_id]
+        assert not matches or matches[0]['label'] == LABEL, 'exact instance label mismatch'
     assert len(matches) <= 1, "multiple rentals with this lease's exact label: inspect before teardown"
     if not matches:
         print('No rental exists for this lease.', flush=True)
@@ -88,6 +94,8 @@ def destroy():
         (OUT / "destroy_response.json").write_text(json.dumps(result, indent=2))
         assert result["success"], result
     assert all(r["id"] != instance_id for r in api("/instances/")["instances"])
+    if (OUT / 'deadline_guard_armed.json').exists():
+        subprocess.run(['sudo', '-n', 'systemctl', 'disable', '--now', f'cg-vast-{instance_id}-deadline.timer'], check=True)
     print(f"RENTAL DESTROYED {instance_id}", flush=True)
 
 
@@ -215,8 +223,12 @@ def run(hours=8):
     assert offers, "no suitable low-bandwidth-cost datacentre offer"
     skip = set(os.environ.get('SKIP_OFFERS', '').split())  # offers that refused a rental (HTTP 400) on an earlier attempt
     offers = [o for o in offers if str(o['id']) not in skip]
-    offer = min(offers, key=lambda r: r["dph_total"])
-    rate = offer["dph_total"]
+    if os.environ.get('OFFER_ID'):
+        offers = [o for o in offers if str(o['id']) == os.environ['OFFER_ID']]
+        assert len(offers) == 1, 'approved exact offer unavailable; do not replace automatically'
+    offer = min(offers, key=lambda r: r['dph_total'])
+    rate = offer['dph_total']
+    assert rate <= float(os.environ.get('MAX_RATE_USD', 'inf')), 'approved rate exceeded'
     quote_paths = sorted(RUN_ROOT.glob('*/rental_quote.json'))  # run-10 leases share one Vast allowance
     previous_reserve = 0.0
     for p in quote_paths:
@@ -246,7 +258,9 @@ def run(hours=8):
         state = {"instance_id": created["new_contract"], "created_epoch": created_at, "hard_destroy_epoch": created_at + hours * 3600,
                  "runner_deadline_epoch": created_at + (hours - .5) * 3600, "hourly_rate": rate, "image": IMAGE}
         STATE.write_text(json.dumps(state, indent=2)); os.chmod(STATE, 0o600)
-        (OUT / "lease.json").write_text(json.dumps(state, indent=2))
+        (OUT / 'lease.json').write_text(json.dumps(state, indent=2))
+        claim_instance_owner(state['instance_id'])
+        subprocess.run([sys.executable, str(ROOT / 'scripts/eval/48_vast_deadline.py'), 'arm', '--state', str(STATE), '--out', str(OUT), '--label', LABEL], check=True)
     except BaseException:
         destroy()
         raise
@@ -264,7 +278,7 @@ def run(hours=8):
     def keep_alive():
         while not stop.wait(60):
             try:
-                remote("touch /workspace/heartbeat", timeout=15, stdout=subprocess.DEVNULL)
+                subprocess.run(ssh + [host, 'touch /workspace/heartbeat'], check=True, timeout=min(15, max(1, state['hard_destroy_epoch'] - time.time())), stdout=subprocess.DEVNULL)
             except subprocess.TimeoutExpired as error:
                 print(f'Heartbeat transport timeout: {error}', flush=True)
             except subprocess.CalledProcessError as error:
@@ -364,7 +378,8 @@ python tests/regression/test_moe_expert_merge.py
             raise
         if heartbeat_future.done():
             heartbeat_future.result()
-        remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
+        if CELLS:
+            remote("cd /workspace/cg && tmux new-session -d -s run10_prep 'bash scripts/train/13_run10_evals.sh prep > runs/run10/prep.log 2>&1'", timeout=30)
         _chat_verified = {k: v for f in sorted((ROOT / 'slop/eval/run10').glob('stage*/retrieval_verified.json')) for k, v in json.loads(f.read_text())['manifest'].items()}  # EXTRA hashes from whichever lease trained them
         for name, (src, sha) in [(n, DONOR_SRC[n]) for n in sorted({d.split('=')[0] for d in DONOR.replace('|', ' ').split()})] + [
                 (n, (Path.home() / f'.local/share/cg_run10_adapters/r10_{n}', {f: v['sha256'] for f, v in _chat_verified[f'r10_{n}'].items()})) for n in EXTRA]:
@@ -399,25 +414,28 @@ python tests/regression/test_moe_expert_merge.py
         remote("tar -xzf - -C /workspace/cg", input=stream.getvalue(), timeout=120)
         print("DATA UPLOADED: " + json.dumps({k: (train_manifest[k]["rows"], train_manifest[k].get("words", train_manifest[k].get("tokens"))) for k in [n for n in SUBSETS if n not in BOX_DATA] + DOCS}), flush=True)
         command = (f"cd /workspace/cg && HF_HOME=/workspace/hf DONOR={shlex.quote(DONOR)} TAG={TAG} CONTROL={shlex.quote(os.environ.get('CONTROL', ''))} EXTRA={shlex.quote(' '.join(EXTRA))} CHATS={shlex.quote(' '.join(SUBSETS))} DOCS={shlex.quote(' '.join(DOCS))} TRAIN_DIR={shlex.quote(TRAIN_DIR)} BASELOSS={shlex.quote(os.environ.get('BASELOSS', ''))} CELLS={shlex.quote(CELLS)} "
+                   f"PAIR_READY_FILE={shlex.quote(os.environ.get('PAIR_READY_FILE', ''))} EVAL_HOLD={shlex.quote(os.environ.get('EVAL_HOLD', ''))} "
                    f"EVAL_DEADLINE_EPOCH={state['hard_destroy_epoch'] - 4400:.0f} bash scripts/train/14_run10_chat_box.sh")
         script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
         remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
         monitor(remote, remaining, stop, heartbeat_future)
     finally:
-        stop.set()
-        if heartbeat:
-            heartbeat.shutdown(wait=True)
-        live = [r for r in api('/instances/')['instances'] if r['id'] == state['instance_id']]
-        for latest in live:
-            (OUT / 'last_instance_metrics.json').write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
-        assert live, 'rental disappeared before artifact retrieval; local artifacts are not verified'
-        if ssh is not None:
-            retrieve_or_stop(ssh, host, state)
-        else:
-            destroy()
-        after = api('/users/current/')
-        (OUT / 'account_credit_after.json').write_text(json.dumps({'credit': after['credit'], 'before': account['credit'],
-            'elapsed_hours': (time.time() - created_at) / 3600, 'credit_difference_not_reconciled_invoice': account['credit'] - after['credit']}, indent=2))
+        try:
+            live = [r for r in api('/instances/')['instances'] if r['id'] == state['instance_id']]
+            for latest in live:
+                (OUT / 'last_instance_metrics.json').write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
+            assert live, 'rental disappeared before artifact retrieval; local artifacts are not verified'
+            if ssh is not None:
+                retrieve_or_stop(ssh, host, state)
+            else:
+                destroy()
+            after = api('/users/current/')
+            (OUT / 'account_credit_after.json').write_text(json.dumps({'credit': after['credit'], 'before': account['credit'],
+                'elapsed_hours': (time.time() - created_at) / 3600, 'credit_difference_not_reconciled_invoice': account['credit'] - after['credit']}, indent=2))
+        finally:
+            stop.set()
+            if heartbeat:
+                heartbeat.shutdown(wait=True)
     print("RETRIEVAL COMPLETE; rental destroyed. Chat adapters in " + str(ADAPTER_DIR), flush=True)
 
 
@@ -453,7 +471,7 @@ def attach():
     def keep_alive():
         while not stop.wait(60):
             try:
-                remote("touch /workspace/heartbeat", timeout=15, stdout=subprocess.DEVNULL)
+                subprocess.run(ssh + [host, 'touch /workspace/heartbeat'], check=True, timeout=min(15, max(1, state['hard_destroy_epoch'] - time.time())), stdout=subprocess.DEVNULL)
             except subprocess.TimeoutExpired as error:
                 print(f'Heartbeat transport timeout: {error}', flush=True)
             except subprocess.CalledProcessError as error:
@@ -467,21 +485,53 @@ def attach():
     try:
         monitor(remote, remaining, stop, heartbeat_future)
     finally:
-        stop.set()
-        heartbeat.shutdown(wait=True)
-        live = [r for r in api('/instances/')['instances'] if r['id'] == state['instance_id']]
-        for latest in live:
-            (OUT / 'last_instance_metrics.json').write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
-        assert live, 'rental disappeared before artifact retrieval; local artifacts are not verified'
-        retrieve_or_stop(ssh, host, state)
-        after = api('/users/current/')
-        (OUT / 'account_credit_after.json').write_text(json.dumps({'credit': after['credit'], 'before_attach': account['credit'],
-            'elapsed_hours': (time.time() - state['created_epoch']) / 3600}, indent=2))
+        try:
+            live = [r for r in api('/instances/')['instances'] if r['id'] == state['instance_id']]
+            for latest in live:
+                (OUT / 'last_instance_metrics.json').write_text(json.dumps({k: latest[k] for k in FIELDS if k in latest}, indent=2))
+            assert live, 'rental disappeared before artifact retrieval; local artifacts are not verified'
+            retrieve_or_stop(ssh, host, state)
+            after = api('/users/current/')
+            (OUT / 'account_credit_after.json').write_text(json.dumps({'credit': after['credit'], 'before_attach': account['credit'],
+                'elapsed_hours': (time.time() - state['created_epoch']) / 3600}, indent=2))
+        finally:
+            stop.set()
+            heartbeat.shutdown(wait=True)
     print("RETRIEVAL COMPLETE; rental destroyed. Chat adapters in " + str(ADAPTER_DIR), flush=True)
+
+_OWNER_STACK = None
+
+
+def claim_instance_owner(instance_id):
+    if _OWNER_STACK is None:
+        raise RuntimeError('run/attach requires controller_owner')
+    lock = _OWNER_STACK.enter_context((ROOT / '.local' / f'vast_instance_{instance_id}.owner.lock').open('a'))
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+
+@contextlib.contextmanager
+def controller_owner():
+    global _OWNER_STACK
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    with contextlib.ExitStack() as stack:
+        lock = stack.enter_context(STATE.with_suffix('.owner.lock').open('a'))
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        _OWNER_STACK = stack
+        try:
+            if STATE.exists():
+                claim_instance_owner(json.loads(STATE.read_text())['instance_id'])
+            yield
+        finally:
+            _OWNER_STACK = None
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["run", "destroy", "attach", "snapshot"])
     parser.add_argument('--hours', type=float, default=5)
     args = parser.parse_args()
-    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach, 'snapshot': snapshot}[args.action]()
+    if args.action == 'snapshot':
+        snapshot()
+    else:
+        with controller_owner():
+            {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
