@@ -1,0 +1,9 @@
+set +e
+cd /workspace/cg
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}" HF_HOME=/workspace/hf CELL_PREFIX=r10_
+export RUN9_INSTRUCT_PATH=/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754 RUN9_DEADLINE_EPOCH=1792977922.0
+python scripts/eval/33_subset_cells.py --run-dir runs/run10 --adapter const=outputs/up_const --adapter other=outputs/up_other --adapter stoic=outputs/up_stoic --adapter x12_chatmix=outputs/up_x12_chatmix --adapter x12_chatgen=outputs/r10_x12_chatgen --cells stoic=0.5,const=1,other=1,x12_chatmix=0.25,x12_chatgen=-0.25 > runs/run10/extra025.log 2>&1
+status=$?
+printf '%s\n' "$status" > runs/run10/extra025.exit
+tmux wait-for -S run12_extra025_done
+exit "$status"

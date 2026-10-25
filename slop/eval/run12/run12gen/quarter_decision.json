@@ -1,0 +1,82 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+  "character": 0.4551694915254238,
+  "character_ci90": [
+    0.27,
+    0.6294533898305085
+  ],
+  "maths": 54,
+  "help": 21.0,
+  "coherence": {
+    "turns": 214,
+    "lang_switch": 9,
+    "looped": 0,
+    "truncated": 4,
+    "role_confusion": 0,
+    "empty": 0
+  },
+  "paired_differences": {
+    "r10_stoic0.5_const1_other1": {
+      "mean": 0.21161016949152545,
+      "ci90": [
+        0.02014194915254242,
+        0.4066228813559322
+      ]
+    },
+    "r10_stoic0.5_const1_other1_x12_chatmix0.5": {
+      "mean": -0.19220338983050841,
+      "ci90": [
+        -0.3596059322033899,
+        -0.02389830508474577
+      ]
+    },
+    "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": {
+      "mean": -0.41906779661016946,
+      "ci90": [
+        -0.5942012711864407,
+        -0.24173516949152538
+      ]
+    }
+  },
+  "judge_cost_usd": 0.101022096,
+  "combined_judge_cost_usd": 0.510474216,
+  "matched_to_plain_half_estimates": [
+    {
+      "segment": [
+        "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5"
+      ],
+      "power": 0.5,
+      "target_character": 0.6473728813559322,
+      "sub_maths_est": 54.0,
+      "sub_help_est": 20.32276658672462,
+      "plain_observed_maths": 55,
+      "plain_observed_help": 19.0
+    },
+    {
+      "segment": [
+        "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5"
+      ],
+      "power": 1,
+      "target_character": 0.6473728813559322,
+      "sub_maths_est": 54.0,
+      "sub_help_est": 20.54135490394338,
+      "plain_observed_maths": 55,
+      "plain_observed_help": 19.0
+    },
+    {
+      "segment": [
+        "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5"
+      ],
+      "power": 2,
+      "target_character": 0.6473728813559322,
+      "sub_maths_est": 54.0,
+      "sub_help_est": 20.78964467586321,
+      "plain_observed_maths": 55,
+      "plain_observed_help": 19.0
+    }
+  ]
+}

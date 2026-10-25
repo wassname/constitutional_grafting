@@ -1,7 +1,7 @@
 Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
 Have fun!
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-Sun Oct 25 20:29:36 2026       
+Sun Oct 25 21:15:44 2026       
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
 +-----------------------------------------+------------------------+----------------------+
@@ -10,7 +10,7 @@ Sun Oct 25 20:29:36 2026
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:BC:00.0 Off |                    0 |
-| N/A   25C    P8             34W /  600W |       0MiB /  97887MiB |      0%      Default |
+| N/A   22C    P8             34W /  600W |       0MiB /  97887MiB |      0%      Default |
 |                                         |                        |             Disabled |
 +-----------------------------------------+------------------------+----------------------+
 
@@ -22,7 +22,7 @@ Sun Oct 25 20:29:36 2026
 |  No running processes found                                                             |
 +-----------------------------------------------------------------------------------------+
                total        used        free      shared  buff/cache   available
-Mem:           1.0Ti       356Gi       239Gi       9.7Gi       411Gi       632Gi
+Mem:           1.0Ti       297Gi       334Gi       9.7Gi       375Gi       690Gi
 Swap:          8.0Gi       3.5Gi       4.5Gi
 Filesystem      Size  Used Avail Use% Mounted on
 overlay         300G  178G  123G  60% /

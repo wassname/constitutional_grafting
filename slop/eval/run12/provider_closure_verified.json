@@ -1,0 +1,12 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "checked_at": "2026-10-25T21:18:59.013716+00:00",
+  "owned_instance_ids": [
+    57641569,
+    57641120
+  ],
+  "both_absent_from_provider": true,
+  "all_account_instances_absent": true,
+  "remaining_instances": [],
+  "scope": "Read-only provider verification after both normal lifecycle exits; no teardown operation."
+}

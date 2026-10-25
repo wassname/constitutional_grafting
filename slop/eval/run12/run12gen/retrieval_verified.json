@@ -1,6 +1,6 @@
 {
   "author": "PI/OpenAI",
-  "job_exit": null,
+  "job_exit": "0",
   "all_available_final_adapter_hashes_match": true,
   "manifest": {
     "r10_x12_chatgen": {

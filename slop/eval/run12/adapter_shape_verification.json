@@ -1,0 +1,38 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "CPU metadata-only inspection of the already-retrieved final safetensors; nonzero checks are in each archived expert_check log.",
+  "adapters": [
+    {
+      "tag": "r10_x12_chatmix",
+      "source": "/home/code/.local/share/cg_run12_mix_adapters/r10_x12_chatmix/adapter_model.safetensors",
+      "expert_A_tensors": 80,
+      "expert_B_tensors": 80,
+      "packed_rank": 4096,
+      "rank_interpretation": "4096 = 256 experts \u00d7 rank16; same packed shapes in both adapters.",
+      "A_shapes": {
+        "[4096, 2048]": 40,
+        "[4096, 512]": 40
+      },
+      "B_shapes": {
+        "[1024, 4096]": 40,
+        "[2048, 4096]": 40
+      }
+    },
+    {
+      "tag": "r10_x12_chatgen",
+      "source": "/home/code/.local/share/cg_run12_gen_adapters/r10_x12_chatgen/adapter_model.safetensors",
+      "expert_A_tensors": 80,
+      "expert_B_tensors": 80,
+      "packed_rank": 4096,
+      "rank_interpretation": "4096 = 256 experts \u00d7 rank16; same packed shapes in both adapters.",
+      "A_shapes": {
+        "[4096, 2048]": 40,
+        "[4096, 512]": 40
+      },
+      "B_shapes": {
+        "[1024, 4096]": 40,
+        "[2048, 4096]": 40
+      }
+    }
+  ]
+}

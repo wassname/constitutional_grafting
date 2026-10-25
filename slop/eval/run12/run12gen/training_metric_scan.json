@@ -80,5 +80,70 @@
   "positive_spectral_penalty_steps": 4027,
   "max_grad_norm": 38.33,
   "max_allocated_gib": 77.54,
-  "scope": "Local-only numerical scan of completed training; no new inference, judge call or held-lease operation. Formal generic closure/behaviour audit remains pending."
+  "scope": "Local-only numerical scan of completed training; no new inference, judge call or held-lease operation. Formal generic closure/behaviour audit remains pending.",
+  "max_grad_norm_step": 128,
+  "max_grad_norm_window": [
+    {
+      "step": 125,
+      "train_text_loss": "1.522",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "1.522",
+      "grad_norm": "1.745",
+      "learning_rate": "5.548e-05"
+    },
+    {
+      "step": 126,
+      "train_text_loss": "1.642",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "1.642",
+      "grad_norm": "1.867",
+      "learning_rate": "5.593e-05"
+    },
+    {
+      "step": 127,
+      "train_text_loss": "1.634",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "1.634",
+      "grad_norm": "2.412",
+      "learning_rate": "5.638e-05"
+    },
+    {
+      "step": 128,
+      "train_text_loss": "2.171",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "2.171",
+      "grad_norm": "38.33",
+      "learning_rate": "5.682e-05"
+    },
+    {
+      "step": 129,
+      "train_text_loss": "1.664",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "1.664",
+      "grad_norm": "1.68",
+      "learning_rate": "5.727e-05"
+    },
+    {
+      "step": 130,
+      "train_text_loss": "1.302",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "1.302",
+      "grad_norm": "1.957",
+      "learning_rate": "5.772e-05"
+    },
+    {
+      "step": 131,
+      "train_text_loss": "1.879",
+      "train_spectral_penalty": "0",
+      "train_total_loss": "1.879",
+      "grad_norm": "1.845",
+      "learning_rate": "5.817e-05"
+    }
+  ],
+  "coverage": {
+    "raw_bytes": 3174273,
+    "normalized_lines": 26135,
+    "human_read": "All834 remaining trace lines after removal of numerical records/progress-only lines; full numerical records scanned and diagnostic windows read. All raw bytes retained.",
+    "scope": "Complete file, not tail; not a claim of individually reading all4474 repeated-format optimizer dictionaries."
+  }
 }

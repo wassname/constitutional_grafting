@@ -1,0 +1,127 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source": "Vast GET /api/v0/charges/,UTC2026-10-25,complete single page; exact instance-source+label selection",
+  "checked_at": "2026-10-25T21:18:59.013716+00:00",
+  "provider_charge_rows": [
+    {
+      "start": 1792886400,
+      "end": 1792886400,
+      "type": "instance",
+      "source": "instance-57641569",
+      "description": "Instance 57641569 Charges - 1 day",
+      "amount": 14.878,
+      "metadata": {
+        "label": "cg-run10-run12mix"
+      },
+      "items": [
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "gpu",
+          "source": null,
+          "description": "7.935 hours at $1.733/hour",
+          "amount": 13.755,
+          "metadata": {},
+          "items": []
+        },
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "disk",
+          "source": null,
+          "description": "7.967 hours at $0.111/hour",
+          "amount": 0.885,
+          "metadata": {},
+          "items": []
+        },
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "bwd",
+          "source": null,
+          "description": "74.1 GB Downloaded at $0.003/GB",
+          "amount": 0.198,
+          "metadata": {},
+          "items": []
+        },
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "bwu",
+          "source": null,
+          "description": "10.0 GB Uploaded at $0.004/GB",
+          "amount": 0.04,
+          "metadata": {},
+          "items": []
+        }
+      ]
+    },
+    {
+      "start": 1792886400,
+      "end": 1792886400,
+      "type": "instance",
+      "source": "instance-57641120",
+      "description": "Instance 57641120 Charges - 1 day",
+      "amount": 22.763,
+      "metadata": {
+        "label": "cg-run10-run12gen"
+      },
+      "items": [
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "gpu",
+          "source": null,
+          "description": "12.106 hours at $1.733/hour",
+          "amount": 20.984,
+          "metadata": {},
+          "items": []
+        },
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "disk",
+          "source": null,
+          "description": "12.128 hours at $0.111/hour",
+          "amount": 1.348,
+          "metadata": {},
+          "items": []
+        },
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "bwd",
+          "source": null,
+          "description": "144.0 GB Downloaded at $0.003/GB",
+          "amount": 0.384,
+          "metadata": {},
+          "items": []
+        },
+        {
+          "start": 1792886400,
+          "end": 1792886400,
+          "type": "bwu",
+          "source": null,
+          "description": "11.8 GB Uploaded at $0.004/GB",
+          "amount": 0.047,
+          "metadata": {},
+          "items": []
+        }
+      ]
+    }
+  ],
+  "vast_posted_charges_usd": "37.641",
+  "recorded_successful_judge_cost_usd": "0.510474216",
+  "documented_combined_usd": "38.151474216",
+  "approved_cap_usd": "60",
+  "below_cap_usd": "21.848525784",
+  "final_job_exits": {
+    "run12mix": 0,
+    "run12gen": 0
+  },
+  "deadline_timer_final_states": {
+    "57641569": "ActiveState=inactive\nUnitFileState=disabled",
+    "57641120": "ActiveState=inactive\nUnitFileState=disabled"
+  },
+  "scope": "Posted provider GPU,disk and bandwidth charges plus recorded successful model-judge costs. Not credit movement,not elapsed-rate estimate,not a Stripe/tax invoice; failed judge attempts are not priced by the cache logger."
+}
