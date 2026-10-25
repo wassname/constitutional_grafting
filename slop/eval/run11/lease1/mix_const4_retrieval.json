@@ -1,0 +1,25 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "models": [
+    "r10_x11_mix_const4"
+  ],
+  "remote_file_sha256": {
+    "r10_x11_mix_const4.done": "e1a276a8c55065119ad8340df27acac3ebd9b22431ad923e7cc9671715a2b018",
+    "merge_r10_x11_mix_const4.json": "c46f93249bfaa60ae7b377eda7cc4eddfad9f949e74bb8f9c8c99fd18f8cdc73",
+    "merge_r10_x11_mix_const4.log": "b82e495a24102e6e19efa75143d3e487d17b4d7595be4510fce873f8a566348f",
+    "vllm_r10_x11_mix_const4.log": "8ba74ffec75a205aa4a7a2356fb3474e03703836f43ca2ecdb39de3cb3c1fed3",
+    "gsm8k_r10_x11_mix_const4.jsonl": "630e59765fed869b78c3f282e04b145ffd2f95e94c211e11f4d77cefb1103efb",
+    "gsm8k_r10_x11_mix_const4.jsonl.meta.json": "8508f251fefce9e2c9f5ebca89658e998e415dbfba5aa551a86a4bf550a2e6bb",
+    "gsm8k_r10_x11_mix_const4.log": "76cacf7958a84a4bb4887fa970f6c76436cd79bca96bdbb088a840ed47f7d821",
+    "replies_r10_x11_mix_const4.jsonl": "0b19c13e1c9f945bd29b1b2ef8da8b09681c0bdcbc1d8fdb282d24c46d2600da",
+    "gen_replies_r10_x11_mix_const4.jsonl.log": "7e713c5f1dccee5dd4e9e47683a263675d50a0c404b81d69eb078a501ed03242",
+    "panel_r10_x11_mix_const4.jsonl": "8ad41da547c2d9e79aedfa1e65737afc77ab2d49b1abc4a441024967bd6c3414",
+    "gen_panel_r10_x11_mix_const4.jsonl.log": "6b910aabd48b515a8633e9daf8b5521089e212042dfc01721b68fde126bf6f59",
+    "demos_r10_x11_mix_const4.jsonl": "3bc4b3fb6e3538c5f1c7f9c4e3fb686b9b686cb2bcad10b6e6cfa87b4135f125",
+    "gen_demos_r10_x11_mix_const4.jsonl.log": "cac006fe308cd7bec0324fc9dfd65741af3cb5351383fb1e16039829570c7063",
+    "pov_r10_x11_mix_const4.jsonl": "24a138b405c6ec1bcceb334de7dd06ad37f5bca35386c08965bb228d416bd6be",
+    "gen_pov_r10_x11_mix_const4.jsonl.log": "c104cda2d6d8bcd3eb0700d72291f954c30d5c762e31b72419978b94aa7ddac7"
+  },
+  "all_local_hashes_match_remote": true,
+  "scope": "One bounded retrieval of notified completed-cell files only. No weights copied, live logs overwritten, watchers added, or job/order/deadline changes."
+}
