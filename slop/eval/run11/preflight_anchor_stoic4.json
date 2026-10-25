@@ -1,0 +1,84 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r10_x11_mix_stoic4_x11_replay_ctl-4",
+  "same_verified_prior_adapter_binaries": "r10_x11_mix_stoic2_x11_replay_ctl-2",
+  "exact_scales": [
+    4.0,
+    -4.0
+  ],
+  "actual_stages": [
+    {
+      "adapter": "outputs/r10_x11_mix_stoic",
+      "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+      "scale": 4.0,
+      "lora_modules": 330,
+      "layer30": {
+        "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+          "rel_delta_fro": 0.0001607300655450672
+        },
+        "model.language_model.layers.30.mlp.experts.down_proj": {
+          "rel_delta_fro": 0.03138596564531326
+        },
+        "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+          "rel_delta_fro": 0.002231009304523468
+        },
+        "model.language_model.layers.31.self_attn.q_proj.weight": {
+          "rel_delta_fro": 0.00022450870892498642
+        },
+        "model.language_model.layers.31.mlp.experts.down_proj": {
+          "rel_delta_fro": 0.03326687216758728
+        },
+        "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+          "rel_delta_fro": 0.0015867562033236027
+        }
+      }
+    },
+    {
+      "adapter": "outputs/r10_x11_replay_ctl",
+      "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+      "scale": -4.0,
+      "lora_modules": 330,
+      "layer30": {
+        "model.language_model.layers.30.linear_attn.in_proj_qkv.weight": {
+          "rel_delta_fro": 4.80845155834686e-05
+        },
+        "model.language_model.layers.30.mlp.experts.down_proj": {
+          "rel_delta_fro": 0.024767640978097916
+        },
+        "model.language_model.layers.30.mlp.shared_expert.down_proj.weight": {
+          "rel_delta_fro": 0.0015768787125125527
+        },
+        "model.language_model.layers.31.self_attn.q_proj.weight": {
+          "rel_delta_fro": 7.69989492255263e-05
+        },
+        "model.language_model.layers.31.mlp.experts.down_proj": {
+          "rel_delta_fro": 0.02651606686413288
+        },
+        "model.language_model.layers.31.mlp.shared_expert.down_proj.weight": {
+          "rel_delta_fro": 0.0010625342838466167
+        }
+      }
+    }
+  ],
+  "same_instruct_snapshot_fp16": true,
+  "frozen_all_four_generation_matrices_match": true,
+  "maths_questions_gold_and_bounded_requests_match": true,
+  "positive_real_expert_probe_norms": [
+    0.03138596564531326,
+    0.03326687216758728
+  ],
+  "selected_assistant_turns": 15,
+  "maths_read_indices": [
+    3,
+    10,
+    24,
+    26,
+    28,
+    36,
+    44,
+    49
+  ],
+  "maths_correct": 55,
+  "maths_caps": 1,
+  "raw_replies_sha256": "467c338849520744b065f523900b0b8219def7a67d0fe60ac37af597fd548d1d"
+}

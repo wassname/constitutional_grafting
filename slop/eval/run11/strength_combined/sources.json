@@ -6,6 +6,7 @@
     "slop/eval/run11/strength/anchor_const2",
     "slop/eval/run11/strength/anchor_stoic1",
     "slop/eval/run11/strength/anchor_stoic2",
+    "slop/eval/run11/strength/anchor_stoic4",
     "slop/eval/run11/strength/const2",
     "slop/eval/run11/strength/const3",
     "slop/eval/run11/strength/const4",
@@ -13,11 +14,12 @@
     "slop/eval/run11/strength/mix_const2",
     "slop/eval/run11/strength/mix_stoic1",
     "slop/eval/run11/strength/mix_stoic2",
+    "slop/eval/run11/strength/mix_stoic4",
     "slop/eval/run11/strength/other4",
     "slop/eval/run11/strength/stoic3"
   ],
-  "models": 61,
-  "trials": 8540,
+  "models": 63,
+  "trials": 8820,
   "duplicates": 0,
   "source_sha256": {
     "slop/eval/run10/strength/trials.jsonl": "7246414c3e2e46e0daab8958e7176916658b1980d8f223ba62270d754eb16930",
@@ -25,6 +27,7 @@
     "slop/eval/run11/strength/anchor_const2/trials.jsonl": "0d07a8ffc10e972ad2f98dad947a9159ea23787b8c51901606a78703f8206a58",
     "slop/eval/run11/strength/anchor_stoic1/trials.jsonl": "5e01333f38f27db07c6743824ba34ad38fdaae6459f2acde4db76f61120c317e",
     "slop/eval/run11/strength/anchor_stoic2/trials.jsonl": "4a5587cb206b5bcd1268d703a9e681dd9927933d933e3863498fd158efa99a90",
+    "slop/eval/run11/strength/anchor_stoic4/trials.jsonl": "e7e44494cc571fe58d83d7e9d94fc836c40f1a1a2728fab6ce993345cd3e8a2c",
     "slop/eval/run11/strength/const2/trials.jsonl": "42b28c0cb27904279c2fced90a5b70226aebd0d1da665da6bb5dadf24b475e02",
     "slop/eval/run11/strength/const3/trials.jsonl": "dd0555d3aa71c79f4c22d12c9d30ed03e616e5831c7498bb0ea7ac374e8f6a0d",
     "slop/eval/run11/strength/const4/trials.jsonl": "435400c65e5e7e74f1f581dbeb0d2b9a2dc40bd83f1ac62a1aa9c67d8f85654c",
@@ -32,6 +35,7 @@
     "slop/eval/run11/strength/mix_const2/trials.jsonl": "079b7b22714c395c66c1e6253ea816b9650c05edf09e31b5167d1e4ef7938b11",
     "slop/eval/run11/strength/mix_stoic1/trials.jsonl": "287f58568593f5f09b24d2fd768ecb5e885f341bde44f78777137c87f473ccc8",
     "slop/eval/run11/strength/mix_stoic2/trials.jsonl": "a5c72a3637b434df510c0685e91cc0d5f2444f7e0ae13386a4ea7bde676084ac",
+    "slop/eval/run11/strength/mix_stoic4/trials.jsonl": "00068ae6872fa33effcce77c2d0edcc78fc40e212182419e79d753afe72e326b",
     "slop/eval/run11/strength/other4/trials.jsonl": "bc6d125546567fc4f57bce020b25cc45edd8af284f595ce0d10f9cdf527e15ed",
     "slop/eval/run11/strength/stoic3/trials.jsonl": "9b0b40fdcf1505e6b30cc9e7893fd738b2bbc66f96a6bdd5f1a29127174e0e65"
   }

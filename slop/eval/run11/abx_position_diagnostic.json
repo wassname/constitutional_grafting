@@ -551,6 +551,24 @@
       "raw_percent": 67.85714285714286,
       "always_A_percent": 58.57142857142857,
       "label_balanced_percent": 65.2439024390244
+    },
+    {
+      "model": "r10_x11_mix_stoic4",
+      "trials": 140,
+      "instruct_A": 83,
+      "judge_A": 83,
+      "raw_percent": 100.0,
+      "always_A_percent": 59.285714285714285,
+      "label_balanced_percent": 100.0
+    },
+    {
+      "model": "r10_x11_mix_stoic4_x11_replay_ctl-4",
+      "trials": 140,
+      "instruct_A": 76,
+      "judge_A": 98,
+      "raw_percent": 55.714285714285715,
+      "always_A_percent": 54.285714285714285,
+      "label_balanced_percent": 54.0296052631579
     }
   ]
 }
