@@ -102,6 +102,8 @@ class CharacterTradeoffTest(unittest.TestCase):
         off_donor = by["r10_const1_cx_chatr121"]
         name = tradeoff.experiment_name(off_donor)
         self.assertIn("Constitution docs ×1", name)
+        self.assertIn("Answers rewritten against constitution", name)
+        self.assertNotIn("Prior chats", name)
         self.assertNotIn("Stoic docs", name)
         self.assertNotIn("Other-tradition docs", name)
         self.assertEqual(tradeoff.chat_training_donor(off_donor), "Base + ½Stoic + constitution + other traditions")
@@ -111,6 +113,8 @@ class CharacterTradeoffTest(unittest.TestCase):
         control_only = by["r10_stoic0.5_const1_other1_cx_chatctl1"]
         self.assertIn("Reply control ×1", tradeoff.experiment_name(control_only))
         self.assertNotIn("before chat", tradeoff.experiment_name(control_only))
+        helped = by["r10_stoic0.5_const1_other1_x11_chatr131"]
+        self.assertIn("Rewritten answers + refusal repairs + ordinary help", tradeoff.experiment_name(helped))
 
 
 if __name__ == "__main__":
