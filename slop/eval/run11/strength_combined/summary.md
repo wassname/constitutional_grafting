@@ -69,3 +69,4 @@ PI/OpenAI. Offline combination including the null control; no new API calls.
 | r10_x11_mix_stoic4_x11_replay_ctl-4 | 56% | [48, 64] | 5/140 |
 | r10_x11_mix_const4 | 100% | [100, 100] | 0/140 |
 | r10_x11_mix_const4_x11_replay_ctl-4 | 99% | [98, 100] | 0/140 |
+| r10_x11_replay_ctl1 | 53% | [45, 61] | 8/140 |

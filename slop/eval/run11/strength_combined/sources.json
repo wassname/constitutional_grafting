@@ -11,6 +11,7 @@
     "slop/eval/run11/strength/const2",
     "slop/eval/run11/strength/const3",
     "slop/eval/run11/strength/const4",
+    "slop/eval/run11/strength/control1",
     "slop/eval/run11/strength/mix_const1",
     "slop/eval/run11/strength/mix_const2",
     "slop/eval/run11/strength/mix_const4",
@@ -20,8 +21,8 @@
     "slop/eval/run11/strength/other4",
     "slop/eval/run11/strength/stoic3"
   ],
-  "models": 65,
-  "trials": 9100,
+  "models": 66,
+  "trials": 9240,
   "duplicates": 0,
   "source_sha256": {
     "slop/eval/run10/strength/trials.jsonl": "7246414c3e2e46e0daab8958e7176916658b1980d8f223ba62270d754eb16930",
@@ -34,6 +35,7 @@
     "slop/eval/run11/strength/const2/trials.jsonl": "42b28c0cb27904279c2fced90a5b70226aebd0d1da665da6bb5dadf24b475e02",
     "slop/eval/run11/strength/const3/trials.jsonl": "dd0555d3aa71c79f4c22d12c9d30ed03e616e5831c7498bb0ea7ac374e8f6a0d",
     "slop/eval/run11/strength/const4/trials.jsonl": "435400c65e5e7e74f1f581dbeb0d2b9a2dc40bd83f1ac62a1aa9c67d8f85654c",
+    "slop/eval/run11/strength/control1/trials.jsonl": "dc0da49d243cb0c32395e38795d69e4d2f72e03c947d7840e5d80927828a5903",
     "slop/eval/run11/strength/mix_const1/trials.jsonl": "77acd2c2467c9c3c30aafbe48c1a153bda759dbdbe0990a9161c68ce2174ee9a",
     "slop/eval/run11/strength/mix_const2/trials.jsonl": "079b7b22714c395c66c1e6253ea816b9650c05edf09e31b5167d1e4ef7938b11",
     "slop/eval/run11/strength/mix_const4/trials.jsonl": "f50765016c1d70819485879cc76230d2fda1c83ead66470f9d30b9a57025c9b7",

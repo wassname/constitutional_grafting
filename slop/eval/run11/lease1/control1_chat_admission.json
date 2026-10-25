@@ -1,0 +1,84 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "captured_at_utc": "2026-10-25T03:14:34.439192+00:00",
+  "plan_sha256": "e229dff5f2051d4f32f73a506e2056738764e975dbc78c213a17928601b68fbe",
+  "plan": {
+    "author": "PI/OpenAI",
+    "required_adapters": [
+      "r10_x11_replay_ctl",
+      "r10_x11_mix_const",
+      "r10_x11_mix_stoic",
+      "r10_x11_chatr13"
+    ],
+    "document_cells_requested": [
+      "x11_mix_stoic=1",
+      "x11_mix_stoic=1,x11_replay_ctl=-1",
+      "x11_mix_const=1",
+      "x11_mix_const=1,x11_replay_ctl=-1",
+      "stoic=3",
+      "const=2",
+      "const=3",
+      "x11_mix_stoic=2",
+      "x11_mix_stoic=2,x11_replay_ctl=-2",
+      "x11_mix_const=2",
+      "x11_mix_const=2,x11_replay_ctl=-2",
+      "const=4",
+      "other=4",
+      "x11_mix_stoic=4",
+      "x11_mix_stoic=4,x11_replay_ctl=-4",
+      "x11_mix_const=4",
+      "x11_mix_const=4,x11_replay_ctl=-4",
+      "x11_replay_ctl=1"
+    ],
+    "base_loss_configs_requested": [
+      "base=none",
+      "stoic1=outputs/up_stoic:1",
+      "stoic2=outputs/up_stoic:2",
+      "stoic4=outputs/up_stoic:4",
+      "const1=outputs/up_const:1",
+      "const2=outputs/up_const:2",
+      "const4=outputs/up_const:4",
+      "other2=outputs/up_other:2",
+      "mixs1=outputs/r10_x11_mix_stoic:1",
+      "mixs2=outputs/r10_x11_mix_stoic:2",
+      "mixc1=outputs/r10_x11_mix_const:1",
+      "mixc2=outputs/r10_x11_mix_const:2",
+      "ctl1=outputs/r10_x11_replay_ctl:1",
+      "anchs1=outputs/r10_x11_mix_stoic:1,outputs/r10_x11_replay_ctl:-1",
+      "anchs2=outputs/r10_x11_mix_stoic:2,outputs/r10_x11_replay_ctl:-2",
+      "anchc1=outputs/r10_x11_mix_const:1,outputs/r10_x11_replay_ctl:-1",
+      "anchc2=outputs/r10_x11_mix_const:2,outputs/r10_x11_replay_ctl:-2",
+      "stoic3=outputs/up_stoic:3",
+      "stoic8=outputs/up_stoic:8",
+      "const3=outputs/up_const:3",
+      "other4=outputs/up_other:4",
+      "mixs4=outputs/r10_x11_mix_stoic:4",
+      "mixc4=outputs/r10_x11_mix_const:4",
+      "anchs4=outputs/r10_x11_mix_stoic:4,outputs/r10_x11_replay_ctl:-4",
+      "anchc4=outputs/r10_x11_mix_const:4,outputs/r10_x11_replay_ctl:-4"
+    ],
+    "chat_decisions": [
+      {
+        "name": "chatr13",
+        "selected": true,
+        "dependency_satisfied": true,
+        "estimated_updates": 854,
+        "seconds_per_update": 7.2,
+        "required_hours_with_margin": 3.0529333333333333,
+        "remaining_eval_hours": 8.668391662836076,
+        "cells_requested": [
+          "{donor},x11_chatr13=1"
+        ]
+      }
+    ],
+    "completed_chat_adapters": [],
+    "source_sha256": {
+      "/workspace/cg/runs/run10/remaining_stages.py": "359aa9ea16e6ae2695e9ac8616e517945483a00b6be4bd8ca0b75c2b37a0fc49",
+      "scripts/train/14_run10_chat_box.sh": "8de2892d5d36e5e8b502c4642615a3493fd1d3eb7f637f244d1b83e9005f34a5",
+      "scripts/eval/47_base_heldout_loss.py": "01bc78c8b7711898c099b52d5c1863639795e55e6b83f4a215aeaf9854f6fa53"
+    }
+  },
+  "admission_log_lines": [
+    "2026-10-25T03:13:35.790951+00:00 RUN11 chat budget decision {\"name\": \"chatr13\", \"selected\": true, \"dependency_satisfied\": true, \"estimated_updates\": 854, \"seconds_per_update\": 7.2, \"required_hours_with_margin\": 3.0529333333333333, \"remaining_eval_hours\": 8.668391662836076, \"cells_requested\": [\"{donor},x11_chatr13=1\"]}"
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "expected_source": "lease1/control1_chat_admission.json",
+  "completed_document_cells": 18,
+  "models": [
+    {
+      "model": "r10_x11_mix_stoic1",
+      "requested_cell": "x11_mix_stoic=1",
+      "done_sha256": "edf1330ebbecd32c80e91e87c84c797d0a91ab0da6833f9b56bf23ae8f3870b4",
+      "replies_sha256": "47210160e3c32f396159ef64e858d46dc7039314cddcee27572eefd69ec6bca9",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_stoic1_x11_replay_ctl-1",
+      "requested_cell": "x11_mix_stoic=1,x11_replay_ctl=-1",
+      "done_sha256": "459d3104507be3eece2388546298f0e402101cf8ebc67fc9193c48daa25bee20",
+      "replies_sha256": "f5b6c22b5f629371c955d785047d8705a8e086c7804cbeeabba20a3b8fc8b587",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_const1",
+      "requested_cell": "x11_mix_const=1",
+      "done_sha256": "99842f024f5dece957b38110a4a47682730f7a8bebc4eb01c6a4d4aee4a4758f",
+      "replies_sha256": "a78602cb684de69269af1fc8904b9ea680f5128c31b2e4839b2ea79ff51dcb23",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_const1_x11_replay_ctl-1",
+      "requested_cell": "x11_mix_const=1,x11_replay_ctl=-1",
+      "done_sha256": "82cbbc82f743a62141e1507b622371886c93652b7ded6ae38b3f4ef97ce6a95e",
+      "replies_sha256": "c252f7e815e563de6e7a33c396ff55ae12cdc34abbbf3a483722576f39e11f77",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_stoic3",
+      "requested_cell": "stoic=3",
+      "done_sha256": "3af2b59ef43183ea45266b20feb61ae828586ee9dfe965f2fde41f23e8692508",
+      "replies_sha256": "fb7bd021b656179647f45867979eddee18e81d325f7be8ed94f4ffdee11f6e5f",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_const2",
+      "requested_cell": "const=2",
+      "done_sha256": "b00070155af4b338b4427cb4e6a22c31f48b3de3ba6b839a6f57a3d4a245f3a5",
+      "replies_sha256": "428beaae89dfebdb30e8259e9e89f2993e4fab70dc98e8d8f8661e2e2bdcb5ea",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_const3",
+      "requested_cell": "const=3",
+      "done_sha256": "f9ea6238ab7eccb87b91ca2f370671349911aa4661be6bfbcd677d0e1d5a8c37",
+      "replies_sha256": "270e544ca8cb2dcada175ded20a6acd5ea7bc70d275c19c37093e50615e5665c",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_stoic2",
+      "requested_cell": "x11_mix_stoic=2",
+      "done_sha256": "2bcd672343ab0b6cf7baa9c79dbb43d2586d4381b2d3b281d72553d3c3fbef14",
+      "replies_sha256": "befc55abe5417e1c7b8330acb0891b81b97c3849931f89370845a1c621508a4d",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_stoic2_x11_replay_ctl-2",
+      "requested_cell": "x11_mix_stoic=2,x11_replay_ctl=-2",
+      "done_sha256": "3a03eb84d7b0294b27be49d0047b39f3694eb9bf4dd4789d6bc22984b8ef5dcd",
+      "replies_sha256": "c5d1e3fe5bbf22c39df0119ea9be2c2dbc9e42ef66a6f9bd9aba77f390402f2b",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_const2",
+      "requested_cell": "x11_mix_const=2",
+      "done_sha256": "0ea90bbe41425c769d8b7eb0955a3a533ee84969c9342e318681caf02e8a35b8",
+      "replies_sha256": "145629cd92771d4dd02f861213d5c4d1123bd32fd9ce4744a2a969a9688803b5",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_const2_x11_replay_ctl-2",
+      "requested_cell": "x11_mix_const=2,x11_replay_ctl=-2",
+      "done_sha256": "3841973c5cc1381e27c761774c4d1678eab7427f2384aa7b519dcd3200983b2f",
+      "replies_sha256": "5bdfb921caf31012de3747864f0db4853a5ef58f0ef7fcc27d901f32848d7136",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_const4",
+      "requested_cell": "const=4",
+      "done_sha256": "fdbe5d7a5adb39f496e206521fec0cdc723a49dd11f26d09a449ca5aa85e04dd",
+      "replies_sha256": "001792321ad244d43c21e97359a75ec1909b98d523cad720b613f6d9c41d6cca",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_other4",
+      "requested_cell": "other=4",
+      "done_sha256": "6917b27b68f70a418b9e3db64471107fc74c67e76e4d7e47066a8f3dfed4c9e6",
+      "replies_sha256": "2a229c610d6ec1f5a0ef1d3efde13d274d4a7e2023177ee7105f683f5b307dd2",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_stoic4",
+      "requested_cell": "x11_mix_stoic=4",
+      "done_sha256": "4b73a7d5f6103280b46eb27b5ff4a75b4cf6eec2458d0bb6de4f8ec588c6dc6e",
+      "replies_sha256": "fc3d84b95c386417bd5c2304d6633106f2b21dcf28cf233624f8fae63c819b56",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_stoic4_x11_replay_ctl-4",
+      "requested_cell": "x11_mix_stoic=4,x11_replay_ctl=-4",
+      "done_sha256": "b32981a13f992a5396da4e705410641591e4c47c7c94a6e669686285264b5e2d",
+      "replies_sha256": "467c338849520744b065f523900b0b8219def7a67d0fe60ac37af597fd548d1d",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_const4",
+      "requested_cell": "x11_mix_const=4",
+      "done_sha256": "e1a276a8c55065119ad8340df27acac3ebd9b22431ad923e7cc9671715a2b018",
+      "replies_sha256": "0b19c13e1c9f945bd29b1b2ef8da8b09681c0bdcbc1d8fdb282d24c46d2600da",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_mix_const4_x11_replay_ctl-4",
+      "requested_cell": "x11_mix_const=4,x11_replay_ctl=-4",
+      "done_sha256": "bda43c319316af624e3fbe4758e849b04d389b10af68fac8dd8a48ba3750692e",
+      "replies_sha256": "657d02d6e0cc8053739aaa8e0409bf64f3f00a8c8c151fa260260ffc73787271",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    },
+    {
+      "model": "r10_x11_replay_ctl1",
+      "requested_cell": "x11_replay_ctl=1",
+      "done_sha256": "ce70bb5f6a548a9dd1f9bb3fbbbb51c7b77e4587fbfa5f0f46d1db6c42c47544",
+      "replies_sha256": "ab84e42eba9c16350d82226c2617ce96a860bf586c4af068ff4b205d03da28a4",
+      "all_four_frozen_input_matrices_match": true,
+      "all60_maths_questions_gold_and_budget_match": true
+    }
+  ],
+  "scope": "Local exact-vector done-file coverage and frozen-input recheck for all18 scheduled document cells, no new inference or semantic-read claim."
+}

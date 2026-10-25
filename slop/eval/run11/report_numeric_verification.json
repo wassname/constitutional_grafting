@@ -1,9 +1,9 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "checked_at": "2026-10-25T03:01:50.233145+00:00",
+  "checked_at": "2026-10-25T03:24:11.992923+00:00",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "22578716ec035758263080142fe17c278c0ad04b097f3e3aa897cfdfbff57649",
-  "intervention_rows": 23,
+  "page_sha256": "4b0656472d82fba22aa336db6d419e7247b9776a871975064ff35ae6216bd22a",
+  "intervention_rows": 24,
   "paired_rows": 12,
   "abx_and_intervals_recomputed_from_unchanged_cached_trials": true,
   "paired_differences_match_source_reports": true,
@@ -11,9 +11,9 @@
   "both_loss_deltas_match_penalty_free_base_records": true,
   "maths_match_raw_correctness": true,
   "ordinary_match_deduplicated_cache": true,
-  "abx_unique_trials": 9100,
-  "ordinary_unique_records": 528,
-  "quote_block_count": 27,
+  "abx_unique_trials": 9240,
+  "ordinary_unique_records": 550,
+  "quote_block_count": 29,
   "quote_details": "slop/eval/run11/report_quote_verification.log",
   "scope": "No model calls, score changes or judge substitution."
 }

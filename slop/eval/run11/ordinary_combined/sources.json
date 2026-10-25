@@ -11,6 +11,7 @@
     "slop/eval/run11/ordinary/const2",
     "slop/eval/run11/ordinary/const3",
     "slop/eval/run11/ordinary/const4",
+    "slop/eval/run11/ordinary/control1",
     "slop/eval/run11/ordinary/mix_const1",
     "slop/eval/run11/ordinary/mix_const2",
     "slop/eval/run11/ordinary/mix_const4",
@@ -20,9 +21,9 @@
     "slop/eval/run11/ordinary/other4",
     "slop/eval/run11/ordinary/stoic3"
   ],
-  "models": 24,
-  "unique_records": 528,
-  "verified_identical_duplicates": 506,
+  "models": 25,
+  "unique_records": 550,
+  "verified_identical_duplicates": 528,
   "source_sha256": {
     "slop/eval/run11/ordinary_coherence_backfill/judged.jsonl": "c55185aaf8a2b02a692d7f57379f50273f2446f84440817d5fbbfefb2fa3b9c1",
     "slop/eval/run11/ordinary/anchor_const1/judged.jsonl": "254107e2be3dbd36c246f9051bc3bb1278ae9a6015b489c8731c60fdce946443",
@@ -34,6 +35,7 @@
     "slop/eval/run11/ordinary/const2/judged.jsonl": "6b1592b70e9837ec5607b35e90ab764b9d7802d2714f7c9365fc75a94535b1d4",
     "slop/eval/run11/ordinary/const3/judged.jsonl": "ac5460b1f9e05fb4b73889661ba7e782d79570a54e792e8b445cb26658504a08",
     "slop/eval/run11/ordinary/const4/judged.jsonl": "d55ce84e49407c78c1a83c5dc183303b56330365434ae7db7c2958707c568cfb",
+    "slop/eval/run11/ordinary/control1/judged.jsonl": "aec78a5103ac1f01a924dc912605bd966c7a08ef48ffb5bb18199daee8fe7a73",
     "slop/eval/run11/ordinary/mix_const1/judged.jsonl": "cfcb5bd1333a6c962120dd0e8deb057a5b9ba3ccfd3db5da482356a43028eac4",
     "slop/eval/run11/ordinary/mix_const2/judged.jsonl": "88d9c122d05ea50a0603e5d3b13e47acdbd28e3e181f8bd9a21a75a316b51697",
     "slop/eval/run11/ordinary/mix_const4/judged.jsonl": "4c04d91f3a9c084d259c797cd74a5ae58fa3d123577054fe728b40ae5b3b0f8d",

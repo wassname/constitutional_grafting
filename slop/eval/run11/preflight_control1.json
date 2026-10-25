@@ -1,0 +1,23 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r10_x11_replay_ctl1",
+  "same_verified_prior_adapter_binary": "r10_x11_mix_const2_x11_replay_ctl-2",
+  "exact_scale": 1.0,
+  "same_instruct_snapshot_fp16": true,
+  "frozen_all_four_generation_matrices_match": true,
+  "maths_questions_gold_and_bounded_requests_match": true,
+  "positive_real_expert_probe_norms": [
+    0.006212226580828428,
+    0.006651818752288818
+  ],
+  "selected_assistant_turns": 15,
+  "maths_read_indices": [
+    3,
+    16,
+    24,
+    26
+  ],
+  "maths_correct": 56,
+  "maths_caps": 1,
+  "raw_replies_sha256": "ab84e42eba9c16350d82226c2617ce96a860bf586c4af068ff4b205d03da28a4"
+}
