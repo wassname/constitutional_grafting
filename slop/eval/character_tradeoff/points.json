@@ -2369,7 +2369,7 @@
       "truncated": 6.542056074766355,
       "role_confusion": 0.4672897196261682,
       "empty": 0.0,
-      "experiment": "Chat only: Prior chats (chat \u00d71)",
+      "experiment": "Chat only: Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage7/judging/cells/judged.jsonl",
@@ -2462,7 +2462,7 @@
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats (chat \u00d71)",
+      "experiment": "Three document sets + Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage7/judging/cells/judged.jsonl",
@@ -2555,7 +2555,7 @@
       "truncated": 12.149532710280374,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats (chat \u00d71.5)",
+      "experiment": "Three document sets + Answers rewritten against constitution (chat \u00d71.5)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage7/judging/cells/judged.jsonl",
@@ -3278,7 +3278,7 @@
       "truncated": 0.0,
       "role_confusion": 0.4672897196261682,
       "empty": 0.0,
-      "experiment": "Chat only: Prior chats (chat \u00d71) \u2212 Reply control \u00d71",
+      "experiment": "Chat only: Answers rewritten against constitution (chat \u00d71) \u2212 Reply control \u00d71",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage9/judging/cells/judged.jsonl",
@@ -3382,7 +3382,7 @@
       "truncated": 37.38317757009346,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats (chat \u00d71.5) \u2212 Reply control \u00d71.5",
+      "experiment": "Three document sets + Answers rewritten against constitution (chat \u00d71.5) \u2212 Reply control \u00d71.5",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage9/judging/cells/judged.jsonl",
@@ -3486,7 +3486,7 @@
       "truncated": 0.0,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats (chat \u00d71) \u2212 Reply control \u00d71",
+      "experiment": "Three document sets + Answers rewritten against constitution (chat \u00d71) \u2212 Reply control \u00d71",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage9/judging/cells/judged.jsonl",
@@ -3590,7 +3590,7 @@
       "truncated": 43.45794392523364,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats (chat \u00d72) \u2212 Reply control \u00d72",
+      "experiment": "Three document sets + Answers rewritten against constitution (chat \u00d72) \u2212 Reply control \u00d72",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage9/judging/cells/judged.jsonl",
@@ -3661,7 +3661,7 @@
       "truncated": 6.542056074766355,
       "role_confusion": 0.4672897196261682,
       "empty": 0.0,
-      "experiment": "Constitution docs \u00d71.5 + Prior chats (chat \u00d71)",
+      "experiment": "Constitution docs \u00d71.5 + Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage10/judging/cells/judged.jsonl",
@@ -3732,7 +3732,7 @@
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Constitution docs \u00d71 + Prior chats (chat \u00d71)",
+      "experiment": "Constitution docs \u00d71 + Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage10/judging/cells/judged.jsonl",
@@ -3803,7 +3803,7 @@
       "truncated": 19.1588785046729,
       "role_confusion": 0.9345794392523364,
       "empty": 0.0,
-      "experiment": "Constitution docs \u00d71 + Prior chats (chat \u00d71.5)",
+      "experiment": "Constitution docs \u00d71 + Answers rewritten against constitution (chat \u00d71.5)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage11/judging/cells/judged.jsonl",
@@ -3874,7 +3874,7 @@
       "truncated": 29.906542056074766,
       "role_confusion": 0.9345794392523364,
       "empty": 0.0,
-      "experiment": "Constitution docs \u00d72 + Prior chats (chat \u00d71)",
+      "experiment": "Constitution docs \u00d72 + Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage11/judging/cells/judged.jsonl",
@@ -3946,7 +3946,7 @@
       "truncated": 5.140186915887851,
       "role_confusion": 0.4672897196261682,
       "empty": 0.0,
-      "experiment": "Stoic docs \u00d71 + Prior chats (chat \u00d71)",
+      "experiment": "Stoic docs \u00d71 + Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage11/judging/cells/judged.jsonl",
@@ -4018,7 +4018,7 @@
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Stoic docs \u00d72 + Prior chats (chat \u00d71)",
+      "experiment": "Stoic docs \u00d72 + Answers rewritten against constitution (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage11/judging/cells/judged.jsonl",
@@ -4215,7 +4215,7 @@
       "truncated": 0.0,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats (chat \u00d71) \u2212 Reply control \u00d70.5",
+      "experiment": "Three document sets + Answers rewritten against constitution (chat \u00d71) \u2212 Reply control \u00d70.5",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run10/stage12b/judging/cells/judged.jsonl",
@@ -4308,7 +4308,7 @@
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
       "empty": 0.0,
-      "experiment": "Three document sets + Prior chats +173 help examples (chat \u00d71)",
+      "experiment": "Three document sets + Rewritten answers + refusal repairs + ordinary help (chat \u00d71)",
       "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
       "coherence_evidence": [
         "slop/eval/run11/chatr13/judging/judged.jsonl",
@@ -5549,6 +5549,8 @@
       "slop/eval/run11/chatr13/paired_vs_chatr12.md": "d7852c252ffe2f4cc37b764fe2f6c747648d73a1d596eed8e1255d1acb5774b5",
       "docs/results/20261022_run10.md": "bbe1086f35ec702831ef9475e22258c55873bac91333cbaa3cea48e8e04b046f",
       "docs/results/20261025_document_and_anchored_grafts.md": "5fa20e9e606b724110deae907cf1af019ef1fa50507f49eac25176e8a6ec37ea",
+      "slop/reviews/20261023_rewrite_full/result.md": "3dfc475b824cd0c8f2bfabf1e143d08814fe6a70854acebf8a57ccf0475f7fdd",
+      "slop/audits/20261025_chatr13_learning.md": "59591861e8c579b4c2f239f13007968e5a9e33d92f7831680cde94cbbb55a23c",
       "slop/eval/run8/judging/baseline/meta.json": "ea4cad7c371e0f7077a7fecc80fc3be0c55cb873933afff85e27a9be2ff371a3",
       "slop/eval/run8/judging/baseline/judged.jsonl": "cf304e3bff992ba61da185956bb000035e83877f3717bd3cb450d91d272473c0",
       "slop/eval/run8/box_runs/r8_a0_b0.done": "3a2b3f5b2189d803ef33b10568c0130314deb681ca0dc3babc55ee45fbd1104d",

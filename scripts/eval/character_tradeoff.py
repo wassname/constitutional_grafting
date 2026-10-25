@@ -135,7 +135,8 @@ def load_points(root: Path):
                  "slop/eval/run11/solo_document_table.md",
                  "slop/eval/run11/chatr13/comparison_summary.json",
                  "slop/eval/run11/chatr13/paired_vs_chatr12.md",
-                 "docs/results/20261022_run10.md", "docs/results/20261025_document_and_anchored_grafts.md"):
+                 "docs/results/20261022_run10.md", "docs/results/20261025_document_and_anchored_grafts.md",
+                 "slop/reviews/20261023_rewrite_full/result.md", "slop/audits/20261025_chatr13_learning.md"):
         source(root / name)
     configs = sorted((p for run in (8, 10, 11)
                       for p in (root / f"slop/eval/run{run}").glob("**/cfg_r10_*.yml")
@@ -405,8 +406,8 @@ def load_documents(root, character_points, provenance):
 
 
 CHAT_NAMES = {"chat12": "Original chats", "chatp12": "Chats + rule–harm weighing lessons",
-              "cx_chatp12": "Chats + rule–harm weighing lessons", "cx_chatr12": "Prior chats",
-              "x11_chatr13": "Prior chats +173 help examples", "chatgen12": "Chats + general-instruction mix"}
+              "cx_chatp12": "Chats + rule–harm weighing lessons", "cx_chatr12": "Answers rewritten against constitution",
+              "x11_chatr13": "Rewritten answers + refusal repairs + ordinary help", "chatgen12": "Chats + general-instruction mix"}
 
 
 def experiment_name(p):
@@ -591,8 +592,8 @@ def plot_final(points, paths, out):
                                  "r10_stoic0.5_const1_other1_cx_chatp121": (1.03, -2),
                                  "r10_stoic2_chatp121.5": (1.03, -9),
                                  "r10_stoic0.5_const1_other1_cx_chatr121": (1.03, -16)}}
-        names = {"r10_stoic0.5_const1_other1_x11_chatr131": "Three document sets\nPrior chats +173\nhelp examples",
-                 "r10_stoic0.5_const1_other1_cx_chatr121": "Three docs\n+ prior chat baseline ×1",
+        names = {"r10_stoic0.5_const1_other1_x11_chatr131": "Three document sets\nRewritten answers +\nrefusal repairs + ordinary help",
+                 "r10_stoic0.5_const1_other1_cx_chatr121": "Three docs\nAnswers rewritten\nagainst constitution ×1",
                  "r10_stoic0.5_const1_other1": "Same three docs, before chat",
                  "r10_stoic0.5_const1_other1_cx_chatp121": "Three document sets\nChats + rule–harm\nweighing lessons ×1",
                  "r10_stoic2_chatp121.5": "Stoic docs\nChats + rule–harm\nweighing lessons ×1.5"}
@@ -768,14 +769,22 @@ A numerical matched-moral-intensity advantage is not identified by these ABX cur
 
 The main view compares readable **full recipes at the same document doses used during chat training**. It retains coherent doses whose scores get worse.
 Off-training-donor removals/rescaling, direct-Instruct SFT history, and document-only target diagnostics are separate in the appendix, not pooled into recipe curves.
-The prior-baseline chat ×1.5 point is moved to the coherence-damaged appendix: 15 loops/26 cutoffs and 20/118 character pairs penalized as broken, versus 2 at ×1. This is not a claim that every reply collapsed.
+The constitution-rewritten answers at chat ×1.5 are moved to the coherence-damaged appendix: 15 loops/26 cutoffs and 20/118 character pairs penalized as broken, versus 2 at ×1. This is not a claim that every reply collapsed.
 Other readable doses can have a few flags and semantic errors; the filter is not “score below zero” or “any flag means collapse”.
 
 ![Target character and capability](tradeoff_main.png)
 
 Three docs = Stoic ×½ + constitution ×1 + other traditions ×1. Stoic-only = Stoic ×2.
-“Chats + rule–harm weighing lessons” means prior chat data plus 112 added rule-versus-harm chats; each chat adapter trains on its own Base donor and is grafted onto Instruct.
-The prior chat baseline is the alternative historical chat training; “Prior chats +173 help examples” adds plain help and 38 revisions to that baseline.
+Each chat adapter trains on its own Base donor and is grafted onto Instruct. The names describe what changed in its training answers, not just a dataset version.
+
+### How the conversations changed, and why
+
+1. **Original constitutional conversations:** teach Musonius's constitutional reasoning and behaviour through dialogue. These are the starting chat examples, not a new document corpus. [Run-10 chat-data history](../../../docs/results/20261022_run10.md).
+2. **112 added rule-versus-harm conversations:** practise weighing a rule against a harm of stated size, rather than treating either as automatically decisive. This is “Chats + rule–harm weighing lessons”. There was **no demonstrated character gain** from this addition on the Stoic donor (+0.87→+0.85 with overlapping intervals). [Purpose and comparison](../../../docs/results/20261022_run10.md).
+3. **895 answers rewritten against the constitution:** align existing answers' reasons and conduct with the constitution; reviews also checked reasons–act mismatch and asking instead of doing. This is the +0.89 point, labelled “Answers rewritten against constitution”; it is not the original conversations. The same-three-document comparison is +0.07 [−0.04,+0.16], so improvement from rewriting is **uncertain**, not an established successful ingredient. [Primary rewrite record](../../../slop/reviews/20261023_rewrite_full/result.md) · [Frozen comparison](../run10/stage7/paired_vs_chatp12.md).
+4. **Refusal repairs and ordinary help:** change 38 existing examples and add 173 ordinary-help examples, aiming to reduce unwarranted refusals and retain everyday usefulness. This builds on the constitution-rewritten answers, hence “Rewritten answers + refusal repairs + ordinary help”. There is **no demonstrated character gain** from the final revision (−0.12 [−0.27,+0.01]); more sampled loops/cutoffs accompany it. [Learning/data audit](../../../slop/audits/20261025_chatr13_learning.md).
+
+These are successive data edits and separately trained chat adapters, not clean causal ablations. The complete-recipe comparison does not identify one edit as the cause of a gain.
 Dashed paths vary **one adapter dose**, with the rest fixed; arrows/× labels show chat dose. Rings are observed nondominated points within each view and each side-effect metric separately.
 
 Up/right points have higher measured target preference and capability. Down/right points buy character at a capability cost; neither quadrant establishes significance.
@@ -788,7 +797,7 @@ Its measured chat ×0→1 segment predicts {53 - .6 * est['maths_loss_pp']:.2f}/
 Power sensitivity (½,1,2 on this segment) gives {min(sensitivity):.1f}–{max(sensitivity):.1f}pp; ordinary loss improves {est['ordinary_loss_pp'] - c['ordinary_loss_pp']:.1f}pp.
 The square is an estimate, not another experiment. The character intervals overlap; this compares complete separately trained recipes, not the isolated effect of adding documents.
 Use pp here because the three-doc maths result is above baseline. On the same Stoic donor, old chat matched to revised-chat intensity predicts {old_at_new:.1f}pp loss versus {b['maths_loss_pp']:.1f}pp observed: about {matched['same_donor_old_vs_new_chat']['loss_reduction_percent']:.0f}% reduced loss, defined as (revised loss − matched old loss)/revised loss (about 5.1pp), not percent above a frontier.
-The newest help-augmented chat is not a demonstrated character improvement: new−old −0.12 [−0.27,+0.01], with more sampled loops/cutoffs.
+The refusal-repaired, help-augmented rewritten answers are not a demonstrated character improvement over the constitution-rewritten answers, as the lineage comparison above makes explicit.
 
 ## Separate auxiliary experiments: subtraction and instruction mixing
 
