@@ -91,7 +91,7 @@ def run12_matched_table(comparison):
     values = [[f"×{r['plain_dose']:g}", f"{r['target']:+.3f}", f"{r['plain_maths']} → {r['maths']:g}",
                f"{r['plain_ordinary']:g} → {r['ordinary']:.2f}", f"{r['estimated_dose']:.4f}"] for r in comparison["matches"]]
     return tabulate(values, headers=["Plain chat dose", "Target preference↑", "Maths↑ /60, plain → est.",
-                    "Help↑ /22, plain → est.", "Estimated tied dose"], tablefmt="pipe", disable_numparse=True,
+                    "Task passes↑ /22, plain → est.", "Estimated tied dose"], tablefmt="pipe", disable_numparse=True,
                     colalign=("left", "right", "right", "right", "right"))
 
 
@@ -177,7 +177,9 @@ def load_points(root: Path):
                  "slop/reviews/20261025_run12_initial_pair_independent_read.md",
                  "slop/eval/run12/run12gen/fixed_demo_panel.md", "slop/eval/run12/adapter_shape_verification.json",
                  "slop/audits/20261025_run12_paired_control.md",
-                 "slop/reviews/20261026_run12_final_scientific_visual_review.md"):
+                 "slop/reviews/20261026_run12_final_scientific_visual_review.md",
+                 "slop/eval/run12/run12gen/peak_replies_and_small_task_misses.md",
+                 "slop/eval/run12/run12gen/peak_small_task_verification.json"):
         source(root / name)
     configs = sorted((p for run in (8, 10, 11, 12)
                       for p in (root / f"slop/eval/run{run}").glob("**/cfg_r10_*.yml")
@@ -890,6 +892,7 @@ Document generic-text subtraction, Instruct-reply subtraction and token-matched 
 
 The main view now includes all four locally readable new cells; the fifth, tied difference ×1, is archived as genuine collapse (50 loops/159 cutoffs), not negative character strength.
 Mixed chats combine 1,798 constitution-guided/repaired/help conversations with 4,685 human-written general conversations. The control uses 9,418 general conversations to match assistant-labelled tokens, not rows/updates. Both train independently on the same document-augmented Base donor and are grafted onto Instruct. Quarter/half subtraction retain word/reasoning defects and 4/14 cutoffs; full measured results are in the canonical report.
+The 22 task passes are 11 prompts sampled twice: 8 maths (2 in JSON), wallet/ducks structured outputs, and a story's ≥800-word minimum. They do not measure general helpfulness or moral conduct. At the old rewritten/new half-subtraction peaks, 19→20 differs only by one pizza answer; both fail the wallet's literal JSON key twice, not for refusing or choosing a moral verdict. [Full misses and selected conduct contrasts](../run12/run12gen/peak_replies_and_small_task_misses.md).
 Both measured plain targets lie between the quarter/half subtraction points. Each row compares observed plain with a local-linear subtraction estimate at the same target preference:
 
 {run12_table}

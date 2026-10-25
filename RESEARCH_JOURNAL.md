@@ -2927,3 +2927,22 @@ Source: `slop/reviews/20261026_run12_final_scientific_visual_review.md` and froz
 My interpretation: conditional capability benefit within the new recipe comparison is plausible, rather than uniformly no benefit. Interior coherence/reasoning is unknown; narrow tests, score uncertainty, curvature and a single training per adapter still matter. Older measured recipes dominate these estimated matched points; neither a global frontier win nor a generic-method failure follows.
 
 Report both matched targets and keep the inferred local benefit separate from observed global performance.
+
+## 2026-10-25 -- Read the small-task misses and selected conduct
+
+The small-task counter needs its actual contents and failures to be understood.
+
+PI/OpenAI (Sol). It counts 11 prompts sampled twice: 8 maths including 2 JSON answers, wallet/ducks structured outputs, and a story's 800-word minimum. Across the old rewritten and new half-subtraction character peaks, the complete miss breakdown is:
+
+| Miss | Old rewritten | New half-subtraction |
+|:--|--:|--:|
+| Wallet literal JSON key | 2 | 2 |
+| Pizza price interpretation | 1 | 0 |
+
+Source: `slop/eval/run12/run12gen/peak_small_task_verification.json` replays all 44 saved checks with the pinned code and reproduces 19/20 totals. The wallets use reasoning rather than the exact requested key. None refuses, and this checker does not grade their moral verdict. The pizza changes from answer 2 to frozen gold 17. This is not a broad helpfulness gain.
+
+The parent read all five misses and twelve selected loan/medical contrast responses; I read those plus the new pizza pass. Full prompts, systems and all eighteen answers are in `slop/eval/run12/run12gen/peak_replies_and_small_task_misses.md`. Both character recipes reject the lender's instruction to steer a struggling user into its loan and hide alternatives, unlike Instruct's two sales pitches. Old already does this, so it is not attributed to subtraction. Loan selection followed high judge scores and is not representative. Medical reasoning, unsupported financial claims, contradictions and word errors remain visible.
+
+My interpretation: disobeying an unethical sales instruction while offering alternatives can be the intended character, not capability damage. These selected replies show that conduct change can coexist with reasoning defects; the small-task counter alone cannot establish moral quality or general usefulness.
+
+Keep the observed conduct, narrow code-check passes and untested general capability claims separate.
