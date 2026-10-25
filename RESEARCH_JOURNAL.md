@@ -2869,3 +2869,22 @@ The final retrieval receipt records job_exit0 and matching hashes for all three 
 Interpretation: the saved receipts establish completion of retrieval and controller teardown. They do not change the scientific results or answer the unrun chat-control question. No extra API query, retrieval or destroy was launched.
 
 The rental is closed and the saved scientific conclusions are unchanged.
+
+
+## 2026-10-25 -- Mixed chat training complete; paired comparison pending
+
+The mixed conversation adapter has finished training and its final files are saved locally.
+
+PI/OpenAI (Sol). Held-out text loss is cross-entropy without the spectral penalty. Selected verbatim field excerpts from the initial, first-epoch and final evaluation records:
+
+```text
+'eval_text_loss': '1.917', 'eval_spectral_penalty': '0', 'eval_total_loss': '1.917'
+'eval_text_loss': '1.69', 'eval_spectral_penalty': '0.02998', 'eval_total_loss': '1.72'
+'eval_text_loss': '1.749', 'eval_spectral_penalty': '0.02967', 'eval_total_loss': '1.778'
+```
+
+Source: `slop/eval/run12/run12mix/box_runs/train_r10_x12_chatmix.log`; complete numerical scan and provenance in `slop/audits/20261025_run12_mixed_training.md`. All 3,079 updates completed; all 80 routed-expert B tensors are nonzero. The final adapter/config hashes match the retrieval receipt. The controller exited zero after exact-instance destruction. Mixed lease elapsed-rate cost is approximately USD14.66, excluding separate traffic/API charges and not a reconciled invoice.
+
+My interpretation: better held-out prediction than the initial donor is supported; better character is untested. The second epoch's worse held-out loss alongside better training fit is plausibly increased memorization. Neither a character score nor a ground-truth capability or reward-hacking count is available yet. The approved final adapter is transferring to the still-running generic worker for the frozen paired comparison; no checkpoint substitution or training restart was made.
+
+Paired behaviour evaluation remains the next test.
