@@ -1,0 +1,18 @@
+test_corrupt_binary_or_configuration_stops_despite_zero_transfer_exit (test_rental_retrieval.RentalRetrievalTest.test_corrupt_binary_or_configuration_stops_despite_zero_transfer_exit) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+test_diagnostic_timeout_also_preserves_disk (test_rental_retrieval.RentalRetrievalTest.test_diagnostic_timeout_also_preserves_disk) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+test_matching_binary_and_configuration_allow_destruction (test_rental_retrieval.RentalRetrievalTest.test_matching_binary_and_configuration_allow_destruction) ... ok
+test_transfer_error_stops_and_preserves_disk (test_rental_retrieval.RentalRetrievalTest.test_transfer_error_stops_and_preserves_disk) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+test_copy_holds_exclusive_lock (test_run10_stage2_retrieval.Run10Stage2RetrievalTest.test_copy_holds_exclusive_lock) ... ok
+test_snapshot_does_not_stop_or_destroy_an_incomplete_lease (test_run10_stage2_retrieval.Run10Stage2RetrievalTest.test_snapshot_does_not_stop_or_destroy_an_incomplete_lease) ... SNAPSHOT COMPLETE; active lease unchanged.
+ok
+test_successful_exit_with_missing_planned_adapter_preserves_disk (test_run10_stage2_retrieval.Run10Stage2RetrievalTest.test_successful_exit_with_missing_planned_adapter_preserves_disk) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.021s
+
+OK

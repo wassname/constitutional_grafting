@@ -1,0 +1,16 @@
+Author: PI/OpenAI (Sol)
+Offline probe: actual watchdog lines 13-14 and 22-23; curl is a shell fixture, no network.
+Source: /workspace/2026/constitutional_grafting/scripts/train/box_watchdog.sh sha256: 1f9571a578c098f12f3fc0b8b53e7bd0986a8c5807081770d707cf96fac5cbe8
+Exact bash input (bash -c):
+set -uo pipefail
+ID=fixture; KEY=fixture; age=3601
+curl() { printf '{"success":false,"error":"fixture API failure"}\n'; return 22; }
+api_state() { curl -s -X PUT "https://console.vast.ai/api/v0/instances/$ID/" -H "Authorization: Bearer $KEY" \
+  -H "Content-Type: application/json" -d "{\"state\": \"$1\"}"; }
+    echo "$(date -Is) no heartbeat for ${age}s: stopping instance $ID: $(api_state stopped)"
+    exit 0
+
+Output:
+2026-10-25T16:17:27+08:00 no heartbeat for 3601s: stopping instance fixture: {"success":false,"error":"fixture API failure"}
+watchdog branch exit status: 0
+Confirmed: failed stop API call is printed but branch still exits successfully.

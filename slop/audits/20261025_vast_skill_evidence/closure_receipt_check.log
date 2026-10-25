@@ -1,0 +1,11 @@
+SHA256 MATCH lease.json
+SHA256 MATCH account_credit_after.json
+SHA256 MATCH retrieval_verified.json
+SHA256 MATCH remote_adapter_manifest.json
+SHA256 MATCH destroy_response.json
+SHA256 MATCH controller.log
+FINAL FILES PRESENT; SIZES MATCH r10_x11_replay_ctl
+FINAL FILES PRESENT; SIZES MATCH r10_x11_mix_const
+FINAL FILES PRESENT; SIZES MATCH r10_x11_mix_stoic
+FINAL FILES PRESENT; SIZES MATCH r10_x11_chatr13
+Binary hashes not recomputed; final hashes rely on the source-bound retrieval receipt.
