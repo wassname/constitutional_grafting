@@ -2888,3 +2888,25 @@ Source: `slop/eval/run12/run12mix/box_runs/train_r10_x12_chatmix.log`; complete 
 My interpretation: better held-out prediction than the initial donor is supported; better character is untested. The second epoch's worse held-out loss alongside better training fit is plausibly increased memorization. Neither a character score nor a ground-truth capability or reward-hacking count is available yet. The approved final adapter is transferring to the still-running generic worker for the frozen paired comparison; no checkpoint substitution or training restart was made.
 
 Paired behaviour evaluation remains the next test.
+
+## 2026-10-25 -- Paired conversation-control comparison closed
+
+The mixed conversation and matched general-conversation adapters have finished their comparison and both rentals are closed.
+
+PI/OpenAI (Sol). Both chat adapters train on the same document-augmented Base donor and are grafted onto Instruct. Target preference is the frozen Jev comparison, not general moral quality. Each character mean uses 59 items sampled twice. Maths counts frozen checker passes; ordinary checks contain 11 tasks sampled twice. Overlapping language/loop/cutoff flags cover 214 turns.
+
+| Graft on fixed documents | Target preference | Maths /60 | Ordinary /22 | Language / loops / cutoffs |
+|:--|--:|--:|--:|--:|
+| Mixed minus general, tied 0.5 | +0.874 | 54 | 20 | 4 /0 /14 |
+| Mixed alone 1 | +0.680 | 51 | 18 | 0 /1 /1 |
+| Mixed alone 0.5 | +0.647 | 55 | 19 | 0 /0 /0 |
+| Mixed minus general, tied 0.25 | +0.455 | 54 | 21 | 9 /0 /4 |
+| Mixed minus general, tied 1, collapse | -1.336 | 39 | 16 | 1 /50 /159 |
+
+Source: `slop/eval/run12/run12gen/report_verification.json`; paired item intervals and all source paths are retained there. Executor read all 49 fixed-panel responses; the earlier independent review covered 16 selected responses, not all 49. The quarter/half difference points bracket plain-half preference; local interpolation predicts 54 maths/20.54 ordinary versus 55/19, but interior coherence was not observed. The existing renderer now ingests all five cells, retaining readable flawed doses and explicitly archiving full-dose collapse. Stage separation and stage-one image bytes are unchanged. `just run12-results` regenerates from frozen records without model calls; all five maintained renderer regressions pass.
+
+The posted provider charges are 37.641 USD, successful judge calls 0.510474216 USD, documented total 38.151474216 USD. Failed judge attempts are unpriced by the cache logger. Both final adapters/configs match retrieval hashes; provider absence and disabled/inactive exact-instance guards are recorded. Full training/provenance, consumed supervised-token versus optimizer-update differences, possible row-split overlap and alternative explanations are in `slop/audits/20261025_run12_paired_control.md`. No `hack_s` or `gt_s` metrics are defined here; maths/ordinary checks are reported rather than inventing them.
+
+My interpretation: these measured doses do not demonstrate a cleaner matched-effect trade-off. Stronger preference at half subtraction coexists with corruption and premise errors; full-dose collapse is not negative character strength. A useful untested dose or another control construction remains plausible. Parent coordinates the final scientific and visual review; no second extra, replacement training or new paid inference was launched.
+
+Keep the frozen evidence and assess the recipe through the paired reasoning and capability trade-off.

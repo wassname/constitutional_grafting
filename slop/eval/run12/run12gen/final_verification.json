@@ -1,0 +1,27 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "page_sha256": "679936c2980d33db47e7de7c08f93cb27336466cc4cd9e8341dcfc2ca051339b",
+  "both_report_hashes_current": true,
+  "five_run12_cells_in_61_compatible_final_points": true,
+  "all_four_final_pngs_byte_identical_to_executor_read": true,
+  "figure_sha256": {
+    "slop/eval/character_tradeoff/stage2_controls.png": "f073272b086a50b63e80f825aace0900169a5fdb33479f51cc3ffd30154b0121",
+    "slop/eval/character_tradeoff/stage1_documents.png": "de4b22d860829d4591c1b1bf580ffccb2cbf5bbe8224df4c9b44036fa1c4b4c1",
+    "slop/eval/character_tradeoff/tradeoff_main.png": "e61c640a1bf2faf6db7a01d21368e5daa4d8e36ac22bab90bdd2645a7f12fe46",
+    "slop/eval/character_tradeoff/tradeoff.png": "1f2829a5461867d3c8fd5efab063e962e6655dbe33eeefdb13c9aff1a7411f78"
+  },
+  "full_panel_responses_read": 49,
+  "independently_read_initial_responses": 16,
+  "renderer_regression_tests_passed": 5,
+  "source_note": "Complete bounded audit at slop/audits/20261025_run12_paired_control.md; parent final scientific/visual review pending.",
+  "regenerate": "just run12-results",
+  "final_character_points": 61,
+  "document_points": 25,
+  "run12_cells": 5,
+  "run12_scopes": {
+    "primary": 4,
+    "damaged": 1
+  },
+  "demo_panel_regression_tests_passed": 2,
+  "frozen_both_training_data_hashes_rechecked": true
+}

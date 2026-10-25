@@ -1,19 +1,10 @@
 test_experiment_names_use_actual_graft_not_training_donor (test_character_tradeoff.CharacterTradeoffTest.test_experiment_names_use_actual_graft_not_training_donor) ... ok
 test_frozen_loader_and_headline_estimate (test_character_tradeoff.CharacterTradeoffTest.test_frozen_loader_and_headline_estimate) ... ok
 test_observed_frontier_and_bounded_interpolation (test_character_tradeoff.CharacterTradeoffTest.test_observed_frontier_and_bounded_interpolation) ... ok
+test_run12_five_cells_labels_and_read_based_boundary (test_character_tradeoff.CharacterTradeoffTest.test_run12_five_cells_labels_and_read_based_boundary) ... ok
 test_stage_separation_and_evidence_based_views (test_character_tradeoff.CharacterTradeoffTest.test_stage_separation_and_evidence_based_views) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 3.677s
+Ran 5 tests in 5.436s
 
 OK
-
-PI/OpenAI (Sol): character fields unchanged except experiment names; document points, estimates, curves and frontiers unchanged. Five active lifecycle sources hash-identical:
-{
-  "scripts/eval/38_run10_chat_rental.py": "aeec8bde9f199dc555e3aa9ec250683a2f1c72f4a1a987a4fbaab35af0e7101e",
-  "scripts/eval/48_vast_deadline.py": "29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1",
-  "scripts/eval/49_run12_pair_ready.py": "88c9a94b2a864b7f223453b3dbdd2b45448889e299cea4b558ed561b5abbf06c",
-  "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
-  "scripts/train/14_run10_chat_box.sh": "c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6"
-}
-Unrelated dirty docs/recipes/20261024_musonius_graft.md was not written or staged by this integration; no hash-equality claim for concurrent edits.

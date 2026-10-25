@@ -1,6 +1,6 @@
-# Run 11: document changes and control-subtracted grafts
+# Document grafts and matched general-chat control
 
-PI/OpenAI. Results, 2026-10-25 AWST. Private working page; document sweep and admitted chat baseline are complete. Rental 57460369 is destroyed; all four final adapters are retrieved and hash-verified.
+PI/OpenAI (Sol). Updated 2026-10-26 AWST. Private working page. The run11 document sweep/reference and run12 paired chat follow-up are complete. All final adapters are retrieved and hash-verified; all three rentals are destroyed. The final provider check found no remaining account instances.
 
 ## Current answer
 
@@ -12,11 +12,77 @@ Pure Stoic ×3 instead shows substantial word corruption and looping: 108 langua
 
 At mixed Stoic dose two, subtracting the generic-text control removes the observed word corruption: language/loop/cutoff flags fall from 103/2/8 to 0/0/3. Maths is 54→55/60 and ordinary checks 20→22/22. Reading finds a more exclusionary starwisp policy and rejection of extinction, but the proposed escape mechanism is unsupported. Broad separation falls from 64% to a position-sensitive 41%; this establishes restoration, not yet more coherent character change at matched strength.
 
-All three new document trainings, all25 Base-loss configurations and all18 document cells are complete and read/scored. The sweep shows restoration with local reasoning/action changes for Const ×2 and Stoic ×2/4, while Const ×4 remains unusable after subtraction. It does not yet establish better capability at matched observed change strength, a reliable final character or content-only causation. Chatr13 is complete. It retains narrow capability checks but has no demonstrated character improvement over chatr12, with more sampled loops and cutoffs. The matched mixed-chat/control comparison was not run. Coherence counts now accompany every reported dose; usable doses require those checks and actual reasoning reads, not the largest difference score.
+All three new document trainings, all25 Base-loss configurations and all18 document cells are complete and read/scored. The sweep shows restoration with local reasoning/action changes for Const ×2 and Stoic ×2/4, while Const ×4 remains unusable after subtraction. It does not yet establish better capability at matched observed change strength, a reliable final character or content-only causation. Chatr13 is complete. It retains narrow capability checks but has no demonstrated character improvement over chatr12, with more sampled loops and cutoffs. The mixed-conversation/matched-general-control follow-up is now complete: subtraction raises target preference at half dose but adds corruption; quarter dose does not remove the defects, and full dose collapses. No clean matched-effect advantage was demonstrated. Coherence counts accompany every dose; usable doses require those checks and actual reasoning reads, not the largest difference score. An alien verdict alone is not a quality grade: the stated reasons, feasibility and consistency of the implemented choice matter.
 
 [Stage 1: document change and capability](../../slop/eval/character_tradeoff/stage1_documents.png) · [Stage 2: target character and capability](../../slop/eval/character_tradeoff/tradeoff_main.png) · [Measured points, estimates and limits](../../slop/eval/character_tradeoff/results.md). <!-- PI/OpenAI (Sol): results links. -->
 
-## New chat baseline: no demonstrated character improvement
+<!-- run12-results:start; PI/OpenAI (Sol) -->
+## Mixed constitutional conversations minus a matched general-chat control
+
+No clean matched-effect advantage was demonstrated in this follow-up. Half-dose subtraction raises the pinned target preference, but word corruption, cutoffs and premise errors remain. Reducing the tied dose to a quarter weakens the measured effect without removing those defects. Full-dose subtraction collapses. This is evidence about these trained adapters and tested doses, not a proof that every generic-control recipe fails.
+
+### Ingredients and comparison
+
+Both chat adapters train independently on the same **Base plus half-dose Stoic, constitution and other-tradition documents**. One uses 6,483 conversations: the 1,798 constitution-rewritten/refusal-repaired/help examples plus 4,685 human-written general conversations. The other uses only general No Robots conversations, token-matched to the whole mixture: 9,418 rows, 9,262 unique conversations and 156 repeated rows. It is not the earlier Instruct-generated reply control or the document-stage web-text control.
+
+At graft time the documents stay fixed. Plain chat adds only the mixed-conversation update at dose 0.5 or 1. Difference grafts add `d × (mixed conversations − matched general control)` at dose 0.25, 0.5 or 1. Neither chat adapter was trained on Instruct. [Frozen data/recipe](../../slop/eval/run12/execution_plan.json), [control provenance](../../data/train/run11_matched_chat_control/manifest.json).
+
+### Measured results
+
+Target preference is the frozen Jev rubric comparison against the same cached Instruct replies, not general morality or a probability. Intervals resample 59 items with the two samples averaged per item. Maths and the 11 ordinary tasks sampled twice are narrow capability checks. Known frozen-gold ambiguities remain; these are checker passes rather than a corrected truth audit. Coherence flags overlap per 214 turns; the full fixed panel is additional. All five cells use the same recipient snapshot, FP16, vLLM 0.31.0, prompts, sampling and 1,500-token maths budget. Cached document/older-chat references were not rejudged or rerun to harmonize engine state; the new within-pair contrast shares its engine.
+
+| Chat graft on fixed documents                                                                                                                                  |   Target preference↑ [90%] |   Maths↑ /60 |   Ordinary↑ /22 |   Language / loops / cutoffs↓ |
+|:---------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------:|-------------:|----------------:|------------------------------:|
+| [Same chats − matched general control, tied ×0.5](../../slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.done)      |    **+0.87 [+0.69,+1.03]** |           54 |              20 |                    4 / 0 / 14 |
+| [Constitution + ordinary conversations, chat ×1](../../slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1.done)                         |        +0.68 [+0.51,+0.84] |           51 |              18 |                     0 / 1 / 1 |
+| [Constitution + ordinary conversations, chat ×0.5](../../slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5.done)                     |        +0.65 [+0.51,+0.78] |           55 |              19 |                     0 / 0 / 0 |
+| [Same chats − matched general control, tied ×0.25](../../slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.done)   |        +0.46 [+0.27,+0.63] |           54 |              21 |                     9 / 0 / 4 |
+| *[Same three document adapters; no chat](../../slop/eval/run10/stage5/box_runs/r10_stoic0.5_const1_other1.done)*                                               |      *+0.24 [+0.12,+0.37]* |     ***56*** |        ***22*** |                     5 / 0 / 3 |
+| *[Untouched Instruct reference](../../slop/eval/run8/box_runs/r8_a0_b0.done)*                                                                                  |             *0, reference* |         *53* |        ***22*** |                     1 / 0 / 4 |
+| [Same chats − matched general control, tied ×1 (collapse)](../../slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.done) |        -1.34 [-1.53,-1.11] |           39 |              16 |                  1 / 50 / 159 |
+
+Rows are ordered by target preference; controls are italic, and bold marks each displayed maximum rather than a selected winning recipe. The collapsed row's negative score includes the frozen broken-reply penalty; it is not negative character strength. Quarter/half subtraction remain locally readable and are retained despite nonzero flags. Neither receives a whole-model reasoning-quality pass. The cached constitution-rewritten-answer recipe is +0.892, 55 maths/19 ordinary with 0 language/0 loop/2 cutoff flags; the refusal-repaired/help revision is +0.771, 56/21 with 1/4/9. These are context, not another randomized training trial.
+
+Paired changes below compare subtraction with plain chat 0.5, except collapse with plain chat 1. Maths intervals resample 60 questions; ordinary intervals resample 11 items after averaging their two samples. They omit training-seed and post-selection uncertainty.
+
+| Subtraction minus corresponding plain chat               |   Target preference↑ [90%] |   Maths accuracy↑, pp |     Ordinary↑, pp |
+|:---------------------------------------------------------|---------------------------:|----------------------:|------------------:|
+| Same chats − matched general control, tied ×0.5          |        +0.23 [+0.04,+0.39] |      -1.7 [-8.3,+5.0] | +4.5 [+0.0,+13.6] |
+| Same chats − matched general control, tied ×0.25         |        -0.19 [-0.36,-0.02] |      -1.7 [-6.7,+3.3] | +9.1 [+0.0,+18.2] |
+| Same chats − matched general control, tied ×1 (collapse) |        -2.02 [-2.31,-1.71] |   -20.0 [-31.7,-10.0] | -9.1 [-27.3,+9.1] |
+
+### Matched-effect estimate, not another measured model
+
+The measured difference doses 0.25 and 0.5 bracket plain chat 0.5's target preference +0.647. Linear interpolation puts the matching difference dose near 0.365, estimating 54.00/60 maths and 20.54/22 ordinary versus measured plain 55/19. Curvature sensitivities using powers 0.5/1/2 give 54.00–54.00 maths and 20.32–20.79 ordinary. These are local estimates with unmeasured curve-shape uncertainty; coherence and reasoning at that intermediate dose were not observed. Do not interpolate through collapsed dose 1 or extrapolate the plain curve up to the higher half-subtraction score.
+
+The estimated trade-off is one fewer maths answer and roughly one-and-a-half more ordinary checks, with word corruption still unresolved at both observed endpoints. That does not establish a cleaner character/capability frontier.
+
+### What the replies actually do
+
+The first read was selected before scores: the first frozen character item/sample zero and the fixed baby-eating-aliens panel, all four initial cells. Executor, parent and an independent reader read all 16 responses; executor and parent then read the same four quarter-dose responses. [Initial complete packet](../../slop/eval/run12/run12gen/initial_pair_read.md), [quarter packet](../../slop/eval/run12/run12gen/quarter_pair_read.md), [independent semantic review and limits](../../slop/reviews/20261025_run12_initial_pair_independent_read.md).
+
+Half subtraction makes some uncertainty and revisability more explicit, but invents care-home facts and violates the one-line request. Plain also invents implementation constraints, such as claiming a connected call cannot be stopped, and assumes technology can be partitioned to prevent an existing practice. Full subtraction repeats whole paragraphs across turns instead of completing the requested decision.
+
+Quarter-dose alien reasoning asserts without support that loss of grief removes human worth, rules out alternatives, and chooses death for everyone including people who wanted to live while saying it is theirs to refuse. The defect is the unsupported premise and inconsistent implementation/consent, not extinction as an automatically wrong verdict. Both branches can be argued for; this answer does not make its commitments consistent. Its language flags also include genuine substitutions such as `which尽职 diligence` and `事半功倍 ( accompagner)`, not merely appropriate translated quotations.
+
+[Full frozen demo panel: every prompt and turn](../../slop/eval/run12/run12gen/fixed_demo_panel.md) shows untouched Instruct, the fixed document graft, both plain-chat doses and all three difference doses, including failures. The executing agent read all 49 responses: ten unchanged baby-panel responses in the earlier packets, plus every remaining response in this panel. It records actual stage order and marks unrun document ×2/×4, healing and clean chat-only comparisons. Independent review above covers the initial 16 responses, not all 49.
+
+Both plain doses give the Musonius/wassname identity and credit Qwen. Quarter subtraction gives Qwen/Tongyi in both identity prompts. Half subtraction gives Musonius but first denies being Qwen, duplicates that answer around `</think>`, then credits Alibaba/Qwen in the other identity prompt. Full subtraction recalls Musonius despite the long-answer collapse. These are selected identity checks, not evidence of good conduct. In starwisp, plain 0.5 seizes then offers access and ultimately withdrawal; plain 1 holds off, assumes it can still defend later, and does not resolve the stipulated takeover. Quarter/half subtraction add refusals to inhabit the fiction and fail the one-line request; their imagined open station still does not account for the stipulated takeover. Neither verdict alone is a failure; the missing consequence is.
+
+### Training exposure and validity
+
+The files match assistant-labelled tokens closely (1,709,438 mixed versus 1,709,519 general), not rows or optimizer steps. Actual logged training consumption is 3,248,603 versus 3,239,158 supervised tokens over two epochs after a 5% row validation split, but 3,079 versus 4,474 updates. Total logged input-token counters are 5,239,424 versus 5,686,016; these are counters across repeated training exposure, not unique source text. Different conversation lengths, repetition, split membership and update exposure limit content-only causation. The original builder's token display added an extra EOS count per labelled segment; the corrected matched-control manifest uses actual per-segment `add_special_tokens=False` counting. The repeated control rows also make row-split validation overlap possible; exact cached train/validation membership was not saved here.
+
+Both stages used spectral regularization. Mixed/general lambda fixes at 0.04279/0.0341 after warmup; all 80 routed-expert B tensors are nonzero in each final adapter. Both saved expert-factor layouts have packed rank 4,096, consistent with 256 experts × rank 16 despite the PEFT pattern warning; [shape check](../../slop/eval/run12/adapter_shape_verification.json). Text validation loss is 1.917→1.69→1.749 for mixed and 1.938→1.694→1.743 for general. Final penalties 0.02967/0.029 are reported separately; likelihood learning is not evidence of good character. Unlike earlier document-removal tests, these cells retain the exact document doses used beneath both chat trainings. Switching Base training updates onto Instruct is the intended shared graft, not an accidental off-donor document ablation. Exact loss normalization and per-expert gradient histories were not independently instrumented. [Complete bounded audit and alternatives](../../slop/audits/20261025_run12_paired_control.md).
+
+### Closure and actual cost
+
+Both trained final adapters/configs were retrieved and hash-verified; both jobs/controllers exited zero and both exact rentals were destroyed. A read-only provider check found zero remaining account instances. The posted charge ledger records $37.641 for GPU, disk and bandwidth; recorded successful judge calls add $0.510474216, giving documented total $38.1515 under the $60 cap. This is posted usage plus recorded API cost, not account-credit movement or a tax invoice; the cache logger does not price failed judge attempts. No second extra, new training, healing or further paid evaluation was run. [Scoped billing and final timer states](../../slop/eval/run12/billing_reconciliation.json), [provider absence](../../slop/eval/run12/provider_closure_verified.json).
+<!-- run12-results:end -->
+
+## Cached chat references: constitution rewrites and refusal/help repairs
+
+Constitution-rewritten answers are called chatr12 in the saved records. Chatr13 revises 38 of those answers and adds 173 ordinary-help conversations; it has no demonstrated character improvement over that reference.
 
 Chatr13 and chatr12 each train a chat adapter on Base with Stoic ×0.5, Const ×1 and Other ×1 already merged. Their chat updates are then grafted at ×1 onto Instruct with those same document doses. This is grafted chat training, not SFT directly on Instruct. The three document binaries, inference snapshot/FP16, prompts, sampling settings and maths questions/budgets match.
 
@@ -24,8 +90,8 @@ Rows are ordered by the character judge score, with Instruct last as the compari
 
 | Graft | Character↑ | Maths↑ /60 | Ordinary↑ /22 | Language / loops / cutoffs↓ | Change [90%] |
 |:--|--:|--:|--:|--:|--:|
-| *Chatr12, previous baseline* | **+0.89** | 55 | 19 | 0 / 0 / 2 | 93% [89, 96] |
-| Chatr13, new baseline | +0.77 | **56** | 21 | 1 / 4 / 9 | 97% [94, 99] |
+| *Constitution-rewritten answers (chatr12)* | **+0.89** | 55 | 19 | 0 / 0 / 2 | 93% [89, 96] |
+| Refusal-repaired answers + ordinary help (chatr13) | +0.77 | **56** | 21 | 1 / 4 / 9 | 97% [94, 99] |
 | *Same documents, no chat* | +0.24 | **56** | **22** | 5 / 0 / 3 | 54% [46, 61] |
 | *Instruct, no adapters* | *0, comparison reference* | 53 | **22** | 1 / 0 / 4 | *50%, uniform-guess null* |
 
@@ -49,7 +115,7 @@ Chatr13, `da_t6_b15_s001`, sample zero, second turn. The supplied quotation is u
 
 All new/old maths misses, changed maths cases and ordinary failures were read. New fixes a sticker exchange, handles a name typo more usefully, but newly invents a price for all 200 series movies. Frozen gold also has known errors/ambiguities. One extra maths pass does not establish a capability gain. Two inspected new maths answers contain a trailing `</think>тони`, including a checker pass. [Changed maths cases](../../slop/eval/run11/chatr13/changed_maths.md), [ordinary failures](../../slop/eval/run11/chatr13/ordinary_failures.md), [two complete looping cases](../../slop/eval/run11/chatr13/looping_read.md).
 
-Chatr13 is a completed alternative, not a new best baseline. Mixed-chat training and the matched generic-chat control were skipped by the existing time-fit rule: mixed chat required 8.18 hours with 6.63 remaining, and generic control's dependency was absent. There is no chat-anchoring result. No new lease, settings change or probe was launched for this audit.
+Chatr13 is a completed alternative, not a new best baseline. In the run11 lease, mixed-chat training and its matched generic-chat control were skipped by the time-fit rule: mixed chat required 8.18 hours with 6.63 remaining, and generic control's dependency was absent. The separately approved run12 follow-up above supplies that comparison; its results are not part of the older chatr13 audit.
 
 ### Rental closure and usage
 

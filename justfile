@@ -4,6 +4,11 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 default:
     @just --list
 
+# Frozen paired-chat report and stage-separated figures; CPU only. -- PI/OpenAI (Sol)
+run12-results:
+    uv run --no-sync python scripts/eval/51_run12_results.py
+    uv run --no-sync python scripts/eval/character_tradeoff.py
+
 # Locked CPU dependencies; no model downloads or calls. -- PI/Sol
 setup:
     uv sync --locked

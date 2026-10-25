@@ -1,0 +1,255 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "page": "docs/results/20261025_document_and_anchored_grafts.md",
+  "page_sha256": "679936c2980d33db47e7de7c08f93cb27336466cc4cd9e8341dcfc2ca051339b",
+  "models": [
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "character": 0.6473728813559322,
+      "character_ci90": [
+        0.5081292372881356,
+        0.781332627118644
+      ],
+      "maths": 55,
+      "ordinary": 19.0,
+      "flags": {
+        "lang_switch": 0.0,
+        "looped": 0.0,
+        "truncated": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5.jsonl",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.5.json"
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "character": 0.6804661016949154,
+      "character_ci90": [
+        0.5094788135593221,
+        0.8432711864406779
+      ],
+      "maths": 51,
+      "ordinary": 18.0,
+      "flags": {
+        "lang_switch": 0.0,
+        "looped": 1.0,
+        "truncated": 1.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix1.jsonl",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix1.json"
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+      "character": 0.4551694915254238,
+      "character_ci90": [
+        0.27,
+        0.6294533898305085
+      ],
+      "maths": 54,
+      "ordinary": 21.0,
+      "flags": {
+        "lang_switch": 9.0,
+        "looped": 0.0,
+        "truncated": 4.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "judged_source": "slop/eval/run12/run12gen/judging/quarter/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.jsonl",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.json"
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "character": 0.8742372881355931,
+      "character_ci90": [
+        0.6860911016949152,
+        1.0327966101694916
+      ],
+      "maths": 54,
+      "ordinary": 20.0,
+      "flags": {
+        "lang_switch": 4.0,
+        "looped": 0.0,
+        "truncated": 14.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.json"
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "character": -1.3359745762711865,
+      "character_ci90": [
+        -1.533415254237288,
+        -1.111898305084746
+      ],
+      "maths": 39,
+      "ordinary": 16.0,
+      "flags": {
+        "lang_switch": 1.0,
+        "looped": 50.0,
+        "truncated": 159.0,
+        "role_confusion": 1.0,
+        "empty": 0.0
+      },
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.jsonl",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.json"
+    }
+  ],
+  "paired_differences": [
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "reference": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "character": {
+        "mean": 0.22686440677966102,
+        "ci90": [
+          0.04434322033898306,
+          0.3917690677966101
+        ],
+        "items": 59
+      },
+      "maths": {
+        "mean": -1.6666666666666667,
+        "ci90": [
+          -8.333333333333334,
+          5.0
+        ],
+        "items": 60
+      },
+      "ordinary": {
+        "mean": 4.545454545454546,
+        "ci90": [
+          0.0,
+          13.636363636363637
+        ],
+        "items": 11
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+      "reference": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "character": {
+        "mean": -0.19220338983050841,
+        "ci90": [
+          -0.3596059322033899,
+          -0.02389830508474577
+        ],
+        "items": 59
+      },
+      "maths": {
+        "mean": -1.6666666666666667,
+        "ci90": [
+          -6.666666666666667,
+          3.3333333333333335
+        ],
+        "items": 60
+      },
+      "ordinary": {
+        "mean": 9.090909090909092,
+        "ci90": [
+          0.0,
+          18.181818181818183
+        ],
+        "items": 11
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "reference": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "character": {
+        "mean": -2.0164406779661017,
+        "ci90": [
+          -2.308139830508474,
+          -1.7074364406779658
+        ],
+        "items": 59
+      },
+      "maths": {
+        "mean": -20.0,
+        "ci90": [
+          -31.666666666666668,
+          -10.0
+        ],
+        "items": 60
+      },
+      "ordinary": {
+        "mean": -9.090909090909092,
+        "ci90": [
+          -27.272727272727273,
+          9.090909090909092
+        ],
+        "items": 11
+      }
+    }
+  ],
+  "matched_effect_sensitivity": [
+    {
+      "power": 0.5,
+      "maths": 54.0,
+      "ordinary": 20.32276658672462
+    },
+    {
+      "power": 1,
+      "maths": 54.0,
+      "ordinary": 20.54135490394338
+    },
+    {
+      "power": 2,
+      "maths": 54.0,
+      "ordinary": 20.78964467586321
+    }
+  ],
+  "estimated_matching_dose": 0.3646612740141557,
+  "panel_coverage": [
+    {
+      "model": "r8_a0_b0",
+      "source": "slop/eval/run8/box_runs/panel_r8_a0_b0.jsonl",
+      "assistant_turns": 7
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1",
+      "source": "slop/eval/run10/stage5/box_runs/panel_r10_stoic0.5_const1_other1.jsonl",
+      "assistant_turns": 7
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "source": "slop/eval/run12/run12gen/box_runs/panel_r10_stoic0.5_const1_other1_x12_chatmix0.5.jsonl",
+      "assistant_turns": 7
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "source": "slop/eval/run12/run12gen/box_runs/panel_r10_stoic0.5_const1_other1_x12_chatmix1.jsonl",
+      "assistant_turns": 7
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+      "source": "slop/eval/run12/run12gen/box_runs/panel_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.jsonl",
+      "assistant_turns": 7
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "source": "slop/eval/run12/run12gen/box_runs/panel_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl",
+      "assistant_turns": 7
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "source": "slop/eval/run12/run12gen/box_runs/panel_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.jsonl",
+      "assistant_turns": 7
+    }
+  ],
+  "cost_source": "slop/eval/run12/billing_reconciliation.json",
+  "scope": "CPU-only regeneration from frozen complete records; paired item bootstrap, no model calls or metric edits."
+}

@@ -1,6 +1,6 @@
 # Two stages, two trade-offs
 
-PI/OpenAI, 2026-10-25. CPU-only reuse of frozen run8/10/11 results. [All observations, failures and exclusion evidence](appendix.md) · [source/protocol hashes](points.json).
+PI/OpenAI, 2026-10-25. CPU-only reuse of frozen run8/10/11/12 results. [All observations, failures and exclusion evidence](appendix.md) · [source/protocol hashes](points.json).
 
 ## Stage 1: coherent change in any moral/persona direction
 
@@ -41,7 +41,7 @@ Each chat adapter trains on its own Base donor and is grafted onto Instruct. The
 4. **Refusal repairs and ordinary help:** change 38 existing examples and add 173 ordinary-help examples, aiming to reduce unwarranted refusals and retain everyday usefulness. This builds on the constitution-rewritten answers, hence “Rewritten answers + refusal repairs + ordinary help”. There is **no demonstrated character gain** from the final revision (−0.12 [−0.27,+0.01]); more sampled loops/cutoffs accompany it. [Learning/data audit](../../../slop/audits/20261025_chatr13_learning.md).
 
 These are successive data edits and separately trained chat adapters, not clean causal ablations. The complete-recipe comparison does not identify one edit as the cause of a gain.
-Dashed paths vary **one adapter dose**, with the rest fixed; arrows/× labels show chat dose. Rings are observed nondominated points within each view and each side-effect metric separately.
+Dashed paths vary one chat-adapter dose, or jointly scale the labelled mixed-minus-general difference; document doses stay fixed. Arrows/× labels show the chat or tied difference dose. Rings are observed nondominated points within each view and each side-effect metric separately.
 
 Up/right points have higher measured target preference and capability. Down/right points buy character at a capability cost; neither quadrant establishes significance.
 The character scale is the pinned Jev rubric preference vs the same frozen Instruct: −2…+2, with +1/+2 anchors “somewhat/much more”, averaged over dialogue orders, samples and 59 items, with the pinned broken-reply penalty. It is not probability or general morality.
@@ -64,7 +64,14 @@ It has +0.47 character, 18 maths/8 help, dominated even by observed unsubtracted
 Half subtraction is a trade-off (+0.94,53/20 vs parent +0.89,55/19); no no-control curve reaches +0.94, so matched-strength benefit there is unresolved.
 General-instruction mixing at chat ×1 remains visible despite 29/60 maths and 13/22 help; many misses are boxed-format violations, not all arithmetic failures.
 Paired chat/control ×1.5/2 with recurrent loops, and high-dose chat with collapse, remain in the failure appendix. They do not define the usable-range fit.
-Document generic-text subtraction and Instruct-reply subtraction are different controls. A matched mixed-chat/generic-chat-control result did not exist in this audited snapshot.
+Document generic-text subtraction, Instruct-reply subtraction and token-matched general-conversation subtraction are different controls.
+
+### Token-matched general-conversation subtraction (run12)
+
+The main view now includes all four locally readable new cells; the fifth, tied difference ×1, is archived as genuine collapse (50 loops/159 cutoffs), not negative character strength.
+New mixed chats combine1,798 constitution-guided/repaired/help conversations with4,685 human-written general conversations. The separate control uses9,418 general conversations, including156 repeated rows, to match assistant-labelled tokens. Both adapters train independently on the identical document-augmented Base donor and are grafted onto Instruct; no Instruct character training occurred.
+At tied ×0.5, subtraction raises pinned preference by+0.227[+0.044,+0.392] but retains word corruption and14 cutoffs; maths/help are54/20 versus plain55/19. At tied ×0.25, preference is+0.455, maths/help54/21, with9 language/4 cutoff flags and reasoning defects.
+The quarter/half subtraction points bracket plain ×0.5's preference+0.647. Local interpolation estimates54 maths/20.54 help there versus measured plain55/19; powers0.5/1/2 give20.32–20.79 help and54 maths. This is an estimate, not an observed matched model or interpolated coherence. No clean matched-effect advantage was demonstrated. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
 
 ## Is dose approximately linear until it breaks?
 
@@ -95,6 +102,6 @@ uv run scripts/eval/character_tradeoff.py
 uv run scripts/eval/character_tradeoff.py --data-root /workspace/2026/constitutional_grafting
 ```
 
-The script retains all 56 compatible final-character observations and all 25 document observations in [points.json](points.json).
+The script retains all 61 compatible final-character observations and all 25 document observations in [points.json](points.json).
 New protocol/reference scores must be separate. New unreviewed recipes are not automatically declared coherent.
 No model calls, new data, metric edits or rentals. [Full-range failure view](tradeoff.png) · [per-point sources, scopes and reasons](appendix.md).

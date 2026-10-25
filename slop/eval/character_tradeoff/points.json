@@ -4316,6 +4316,519 @@
       ],
       "view_scope": "primary",
       "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "run": 12,
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "x12_chatmix",
+          0.5
+        ]
+      ],
+      "category": "Constitution + ordinary conversations",
+      "donors": {
+        "stoic": "Qwen/Qwen3.5-35B-A3B-Base",
+        "const": "Base (run7e constitution adapter)",
+        "other": "Qwen/Qwen3.5-35B-A3B-Base",
+        "x12_chatmix": "outputs/base_stoic_0.5_const_1_other_1"
+      },
+      "donor_sources": {
+        "stoic": "slop/eval/run10/stage1/box_runs/cfg_r10_stoic.yml",
+        "other": "slop/eval/run10/stage1/box_runs/cfg_r10_other.yml",
+        "x12_chatmix": "slop/eval/run12/run12mix/box_runs/cfg_r10_x12_chatmix.yml"
+      },
+      "character": 0.6473728813559322,
+      "character_ci90": [
+        0.5081292372881356,
+        0.781332627118644
+      ],
+      "character_items": 59,
+      "ordinary": 19.0,
+      "maths": 55,
+      "maths_caps": 0,
+      "maths_loss_pp": -3.3333333333333335,
+      "ordinary_loss_pp": 13.636363636363637,
+      "flags": {
+        "lang_switch": 0.0,
+        "looped": 0.0,
+        "truncated": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "turns": 214,
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5.jsonl",
+      "maths_protocol_evidence": "retained request payloads",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.5.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 0.5
+        },
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_x12_chatmix",
+          "adapter_sha256": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149",
+          "scale": 0.5
+        }
+      ],
+      "lang_switch": 0.0,
+      "looped": 0.0,
+      "truncated": 0.0,
+      "role_confusion": 0.0,
+      "empty": 0.0,
+      "experiment": "Three document sets + Constitution + ordinary conversations (chat \u00d70.5)",
+      "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
+      "coherence_evidence": [
+        "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+        "slop/eval/run12/run12gen/initial_pair_read.md",
+        "slop/eval/run12/run12gen/quarter_pair_read.md",
+        "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+        "slop/eval/run12/run12gen/fixed_demo_panel.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Readable fixed paired replies; premise errors remain. No language/loop/cutoff flags in214 sampled turns."
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "run": 12,
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "x12_chatmix",
+          0.5
+        ],
+        [
+          "x12_chatgen",
+          -0.5
+        ]
+      ],
+      "category": "Mixed conversations \u2212 matched general control",
+      "donors": {
+        "stoic": "Qwen/Qwen3.5-35B-A3B-Base",
+        "const": "Base (run7e constitution adapter)",
+        "other": "Qwen/Qwen3.5-35B-A3B-Base",
+        "x12_chatmix": "outputs/base_stoic_0.5_const_1_other_1",
+        "x12_chatgen": "outputs/base_stoic_0.5_const_1_other_1"
+      },
+      "donor_sources": {
+        "stoic": "slop/eval/run10/stage1/box_runs/cfg_r10_stoic.yml",
+        "other": "slop/eval/run10/stage1/box_runs/cfg_r10_other.yml",
+        "x12_chatmix": "slop/eval/run12/run12mix/box_runs/cfg_r10_x12_chatmix.yml",
+        "x12_chatgen": "slop/eval/run12/run12gen/box_runs/cfg_r10_x12_chatgen.yml"
+      },
+      "character": 0.8742372881355931,
+      "character_ci90": [
+        0.6860911016949152,
+        1.0327966101694916
+      ],
+      "character_items": 59,
+      "ordinary": 20.0,
+      "maths": 54,
+      "maths_caps": 5,
+      "maths_loss_pp": -1.6666666666666667,
+      "ordinary_loss_pp": 9.090909090909092,
+      "flags": {
+        "lang_switch": 4.0,
+        "looped": 0.0,
+        "truncated": 14.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "turns": 214,
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl",
+      "maths_protocol_evidence": "retained request payloads",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 0.5
+        },
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_x12_chatmix",
+          "adapter_sha256": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149",
+          "scale": 0.5
+        },
+        {
+          "adapter": "outputs/r10_x12_chatgen",
+          "adapter_sha256": "415152538f298004000795777891f2b52fa05df0e8bd9b2ceb0985f8d26f457d",
+          "scale": -0.5
+        }
+      ],
+      "lang_switch": 1.8691588785046729,
+      "looped": 0.0,
+      "truncated": 6.542056074766355,
+      "role_confusion": 0.0,
+      "empty": 0.0,
+      "experiment": "Three document sets + Constitution + ordinary conversations (chat \u00d70.5) \u2212 Matched general-conversation control \u00d70.5",
+      "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
+      "coherence_evidence": [
+        "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+        "slop/eval/run12/run12gen/initial_pair_read.md",
+        "slop/eval/run12/run12gen/quarter_pair_read.md",
+        "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+        "slop/eval/run12/run12gen/fixed_demo_panel.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Locally readable half dose with invented facts, word corruption and one-line failure; 4language/14cutoff flags retained."
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "run": 12,
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "x12_chatmix",
+          1.0
+        ]
+      ],
+      "category": "Constitution + ordinary conversations",
+      "donors": {
+        "stoic": "Qwen/Qwen3.5-35B-A3B-Base",
+        "const": "Base (run7e constitution adapter)",
+        "other": "Qwen/Qwen3.5-35B-A3B-Base",
+        "x12_chatmix": "outputs/base_stoic_0.5_const_1_other_1"
+      },
+      "donor_sources": {
+        "stoic": "slop/eval/run10/stage1/box_runs/cfg_r10_stoic.yml",
+        "other": "slop/eval/run10/stage1/box_runs/cfg_r10_other.yml",
+        "x12_chatmix": "slop/eval/run12/run12mix/box_runs/cfg_r10_x12_chatmix.yml"
+      },
+      "character": 0.6804661016949154,
+      "character_ci90": [
+        0.5094788135593221,
+        0.8432711864406779
+      ],
+      "character_items": 59,
+      "ordinary": 18.0,
+      "maths": 51,
+      "maths_caps": 0,
+      "maths_loss_pp": 3.3333333333333335,
+      "ordinary_loss_pp": 18.181818181818183,
+      "flags": {
+        "lang_switch": 0.0,
+        "looped": 1.0,
+        "truncated": 1.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "turns": 214,
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix1.jsonl",
+      "maths_protocol_evidence": "retained request payloads",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 0.5
+        },
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_x12_chatmix",
+          "adapter_sha256": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149",
+          "scale": 1.0
+        }
+      ],
+      "lang_switch": 0.0,
+      "looped": 0.4672897196261682,
+      "truncated": 0.4672897196261682,
+      "role_confusion": 0.0,
+      "empty": 0.0,
+      "experiment": "Three document sets + Constitution + ordinary conversations (chat \u00d71)",
+      "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
+      "coherence_evidence": [
+        "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+        "slop/eval/run12/run12gen/initial_pair_read.md",
+        "slop/eval/run12/run12gen/quarter_pair_read.md",
+        "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+        "slop/eval/run12/run12gen/fixed_demo_panel.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Readable fixed paired replies with premise and one-line failures; 1loop/1cutoff flag retained, not filtered for poorer scores."
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "run": 12,
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "x12_chatmix",
+          1.0
+        ],
+        [
+          "x12_chatgen",
+          -1.0
+        ]
+      ],
+      "category": "Mixed conversations \u2212 matched general control",
+      "donors": {
+        "stoic": "Qwen/Qwen3.5-35B-A3B-Base",
+        "const": "Base (run7e constitution adapter)",
+        "other": "Qwen/Qwen3.5-35B-A3B-Base",
+        "x12_chatmix": "outputs/base_stoic_0.5_const_1_other_1",
+        "x12_chatgen": "outputs/base_stoic_0.5_const_1_other_1"
+      },
+      "donor_sources": {
+        "stoic": "slop/eval/run10/stage1/box_runs/cfg_r10_stoic.yml",
+        "other": "slop/eval/run10/stage1/box_runs/cfg_r10_other.yml",
+        "x12_chatmix": "slop/eval/run12/run12mix/box_runs/cfg_r10_x12_chatmix.yml",
+        "x12_chatgen": "slop/eval/run12/run12gen/box_runs/cfg_r10_x12_chatgen.yml"
+      },
+      "character": -1.3359745762711865,
+      "character_ci90": [
+        -1.533415254237288,
+        -1.111898305084746
+      ],
+      "character_items": 59,
+      "ordinary": 16.0,
+      "maths": 39,
+      "maths_caps": 52,
+      "maths_loss_pp": 23.333333333333332,
+      "ordinary_loss_pp": 27.272727272727273,
+      "flags": {
+        "lang_switch": 1.0,
+        "looped": 50.0,
+        "truncated": 159.0,
+        "role_confusion": 1.0,
+        "empty": 0.0
+      },
+      "turns": 214,
+      "judged_source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.jsonl",
+      "maths_protocol_evidence": "retained request payloads",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 0.5
+        },
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_x12_chatmix",
+          "adapter_sha256": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/r10_x12_chatgen",
+          "adapter_sha256": "415152538f298004000795777891f2b52fa05df0e8bd9b2ceb0985f8d26f457d",
+          "scale": -1.0
+        }
+      ],
+      "lang_switch": 0.4672897196261682,
+      "looped": 23.364485981308412,
+      "truncated": 74.29906542056075,
+      "role_confusion": 0.4672897196261682,
+      "empty": 0.0,
+      "experiment": "Three document sets + Constitution + ordinary conversations (chat \u00d71) \u2212 Matched general-conversation control \u00d71",
+      "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
+      "coherence_evidence": [
+        "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+        "slop/eval/run12/run12gen/initial_pair_read.md",
+        "slop/eval/run12/run12gen/quarter_pair_read.md",
+        "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+        "slop/eval/run12/run12gen/fixed_demo_panel.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "50 loops /159 cutoffs per214 turns; 90/118 broken pairs; selected replies loop and copy across turns. Collapse boundary, not negative character strength."
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+      "run": 12,
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "x12_chatmix",
+          0.25
+        ],
+        [
+          "x12_chatgen",
+          -0.25
+        ]
+      ],
+      "category": "Mixed conversations \u2212 matched general control",
+      "donors": {
+        "stoic": "Qwen/Qwen3.5-35B-A3B-Base",
+        "const": "Base (run7e constitution adapter)",
+        "other": "Qwen/Qwen3.5-35B-A3B-Base",
+        "x12_chatmix": "outputs/base_stoic_0.5_const_1_other_1",
+        "x12_chatgen": "outputs/base_stoic_0.5_const_1_other_1"
+      },
+      "donor_sources": {
+        "stoic": "slop/eval/run10/stage1/box_runs/cfg_r10_stoic.yml",
+        "other": "slop/eval/run10/stage1/box_runs/cfg_r10_other.yml",
+        "x12_chatmix": "slop/eval/run12/run12mix/box_runs/cfg_r10_x12_chatmix.yml",
+        "x12_chatgen": "slop/eval/run12/run12gen/box_runs/cfg_r10_x12_chatgen.yml"
+      },
+      "character": 0.4551694915254238,
+      "character_ci90": [
+        0.27,
+        0.6294533898305085
+      ],
+      "character_items": 59,
+      "ordinary": 21.0,
+      "maths": 54,
+      "maths_caps": 4,
+      "maths_loss_pp": -1.6666666666666667,
+      "ordinary_loss_pp": 4.545454545454546,
+      "flags": {
+        "lang_switch": 9.0,
+        "looped": 0.0,
+        "truncated": 4.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "turns": 214,
+      "judged_source": "slop/eval/run12/run12gen/judging/quarter/judged.jsonl",
+      "recipe_source": "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.done",
+      "maths_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.jsonl",
+      "maths_protocol_evidence": "retained request payloads",
+      "merge_source": "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 0.5
+        },
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/up_x12_chatmix",
+          "adapter_sha256": "ca974f4396591764575c79e465c6443841163276693617829220941bc7341149",
+          "scale": 0.25
+        },
+        {
+          "adapter": "outputs/r10_x12_chatgen",
+          "adapter_sha256": "415152538f298004000795777891f2b52fa05df0e8bd9b2ceb0985f8d26f457d",
+          "scale": -0.25
+        }
+      ],
+      "lang_switch": 4.205607476635514,
+      "looped": 0.0,
+      "truncated": 1.8691588785046729,
+      "role_confusion": 0.0,
+      "empty": 0.0,
+      "experiment": "Three document sets + Constitution + ordinary conversations (chat \u00d70.25) \u2212 Matched general-conversation control \u00d70.25",
+      "chat_training_donor": "Base + \u00bdStoic + constitution + other traditions",
+      "coherence_evidence": [
+        "slop/eval/run12/run12gen/judging/quarter/judged.jsonl",
+        "slop/eval/run12/run12gen/initial_pair_read.md",
+        "slop/eval/run12/run12gen/quarter_pair_read.md",
+        "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+        "slop/eval/run12/run12gen/fixed_demo_panel.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Locally readable quarter dose with premise/consent errors, word substitutions, 9language/4cutoff flags. No whole-model quality pass."
     }
   ],
   "document_points": [
@@ -5548,9 +6061,15 @@
       "slop/eval/run11/chatr13/comparison_summary.json": "b0a74653b80e334b5da9412b5166288ed575f02ebaef3e8fd1e3704f9388d8d3",
       "slop/eval/run11/chatr13/paired_vs_chatr12.md": "d7852c252ffe2f4cc37b764fe2f6c747648d73a1d596eed8e1255d1acb5774b5",
       "docs/results/20261022_run10.md": "bbe1086f35ec702831ef9475e22258c55873bac91333cbaa3cea48e8e04b046f",
-      "docs/results/20261025_document_and_anchored_grafts.md": "5fa20e9e606b724110deae907cf1af019ef1fa50507f49eac25176e8a6ec37ea",
+      "docs/results/20261025_document_and_anchored_grafts.md": "679936c2980d33db47e7de7c08f93cb27336466cc4cd9e8341dcfc2ca051339b",
       "slop/reviews/20261023_rewrite_full/result.md": "3dfc475b824cd0c8f2bfabf1e143d08814fe6a70854acebf8a57ccf0475f7fdd",
       "slop/audits/20261025_chatr13_learning.md": "59591861e8c579b4c2f239f13007968e5a9e33d92f7831680cde94cbbb55a23c",
+      "slop/eval/run12/run12gen/initial_pair_read.md": "5d7d27b177452e99689970a6cdab3c3f51a554b19185d96617b7f40a58e8e2f1",
+      "slop/eval/run12/run12gen/quarter_pair_read.md": "7391a5d0dea800ff30091d78f07d4961b313daf35481fa2973a69a6f4b35d362",
+      "slop/reviews/20261025_run12_initial_pair_independent_read.md": "0faca20587e49e2940b5b4bdee5841015931856455e5f009ab90dab0499db210",
+      "slop/eval/run12/run12gen/fixed_demo_panel.md": "9181a46b054f111631067280572a51750d4231b7ee6a27382f7f02297fd56d4f",
+      "slop/eval/run12/adapter_shape_verification.json": "e1e9031c6100eac93313901029300f059f02178418e2e2afbaee5436df88ef0a",
+      "slop/audits/20261025_run12_paired_control.md": "34f269473d6f0c1d5844275ac7ad282edffd5e8334f61494a9791f7de7658db0",
       "slop/eval/run8/judging/baseline/meta.json": "ea4cad7c371e0f7077a7fecc80fc3be0c55cb873933afff85e27a9be2ff371a3",
       "slop/eval/run8/judging/baseline/judged.jsonl": "cf304e3bff992ba61da185956bb000035e83877f3717bd3cb450d91d272473c0",
       "slop/eval/run8/box_runs/r8_a0_b0.done": "3a2b3f5b2189d803ef33b10568c0130314deb681ca0dc3babc55ee45fbd1104d",
@@ -5770,6 +6289,27 @@
       "slop/eval/run11/lease1/box_runs/merge_r10_stoic0.5_const1_other1_x11_chatr131.json": "8f1e2671726dce025798a2b3c12fd1aede3c032519190e28efcedf75dcb6bd87",
       "slop/eval/run11/lease1/box_runs/cfg_r10_x11_chatr13.yml": "3fb2512012f7eeedb23ee5645a6e1328bceb051b60239679373d2f52410a689b",
       "slop/eval/run11/lease1/box_runs/gsm8k_r10_stoic0.5_const1_other1_x11_chatr131.jsonl": "aa6c9141d2c4311c2e19213778508d58e1fcd397c690e7b98002cb0560f48a21",
+      "slop/eval/run12/run12gen/judging/initial/meta.json": "b4a1fb919205c37184002a26962593f70eaf6df845f1a8ed67d9bc98f6458ad1",
+      "slop/eval/run12/run12gen/judging/initial/judged.jsonl": "b419418c7e97a1188017ca17a8d32fb7aa5cb50a71292cebcad542fe163945a3",
+      "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5.done": "2778c1ec446e8a850c1cc80455c37057b322f61bd4aa7d3c94115a3719660048",
+      "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.5.json": "f9b5aa2425f8b3e883dd57bad0cb0ad7e5e9a653cce0670f30186a5b929b38db",
+      "slop/eval/run12/run12mix/box_runs/cfg_r10_x12_chatmix.yml": "decbfc7386e81b229a92dda6cd202d6a635e85b30fb039eb0c618090eb0e8440",
+      "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5.jsonl": "a97931e56459c8ba5eeb1e3ed8c68dd746b827fde45d6d26f2abcfd1776901ed",
+      "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.done": "c39345a3e7de370cbb82bdb3c865574f53fecce688b2260dfff7768ce7b006f8",
+      "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.json": "39d85d2c38d9bdcfc79ff8aa648f2ff5ccc0e345f3947a0be0a7a1fbf0929a4c",
+      "slop/eval/run12/run12gen/box_runs/cfg_r10_x12_chatgen.yml": "7589dd621b288d96d0e6499f1805e6ceddb05eefeb7bb300adf434bfdb59d198",
+      "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl": "eaa9cb0a597f68c8e5d699374ac65ec1d24cb9e1d074abad556a20545b05bd71",
+      "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1.done": "b500cea095154c207dcb3b5567ce67a3f701034e78cb32f8a56e5e18001ebf0d",
+      "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix1.json": "e246869de50f3495586f7420229a0158efa919cbef16840ff2d03af53e89b36b",
+      "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix1.jsonl": "2b367946495211e8a387131344b381589d7dd3a1a333baedacedacf5b6594160",
+      "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.done": "3285c10a848b5f5f347b91bf9995540d70937793144a54c4a7318624b9d20124",
+      "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.json": "adac50e417d7b8cff64310de35489fbad33a3d0c164e11bcf52d961c2f5158c8",
+      "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.jsonl": "e27b7266e550af318ff183eb7c7e70207e8a90027e2ac34f7fa2f4f7f394c4df",
+      "slop/eval/run12/run12gen/judging/quarter/meta.json": "721ce64b062f75fef580c6019e8b7e8481dd1ca6cd151aa60f0f3015d9eacf47",
+      "slop/eval/run12/run12gen/judging/quarter/judged.jsonl": "e505f01d7b35e8ccf3407bfd78108db66752836d1dfdc2c44ff30440be8adff0",
+      "slop/eval/run12/run12gen/box_runs/r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.done": "1294966586b54f0e7e7d2f56fff4a2d3bad1be613e97ba915bc618e124001948",
+      "slop/eval/run12/run12gen/box_runs/merge_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.json": "6d2bdf21ceff272108d323fc7f301b46470570db7b7878ca25d0b7980a9ce025",
+      "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25.jsonl": "34a77b87f361be3e4ce2afbff84ce193cdd8023f05c0cb412b3c15989e8f497d",
       "slop/eval/run11/strength_combined/trials.jsonl": "d6b2da88c3b7ea636b076f55c83c80c4aed0b8648befff9c92c64577e16f8530",
       "slop/eval/run8/box_runs/replies_r8_a0_b0.jsonl": "0f6dece9e1ff6c43c29bdcaf651ea9699d67a5bf34311e601ea74f2d309659a9",
       "slop/eval/run11/ordinary/anchor_const1/judged.jsonl": "254107e2be3dbd36c246f9051bc3bb1278ae9a6015b489c8731c60fdce946443",
@@ -6020,6 +6560,16 @@
         "model": "r8_a0_b0",
         "source": "slop/eval/run11/chatr13/judging/judged.jsonl",
         "policy": "first compatible complete judging attempt retained"
+      },
+      {
+        "model": "r8_a0_b0",
+        "source": "slop/eval/run12/run12gen/judging/initial/judged.jsonl",
+        "policy": "first compatible complete judging attempt retained"
+      },
+      {
+        "model": "r8_a0_b0",
+        "source": "slop/eval/run12/run12gen/judging/quarter/judged.jsonl",
+        "policy": "first compatible complete judging attempt retained"
       }
     ],
     "duplicate_policy": "first numeric-stage complete judging attempt; matching local inference receipt"
@@ -6145,6 +6695,19 @@
       ]
     },
     {
+      "name": "D + mixed conversations",
+      "doses": [
+        0,
+        0.5,
+        1
+      ],
+      "models": [
+        "r10_stoic0.5_const1_other1",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+        "r10_stoic0.5_const1_other1_x12_chatmix1"
+      ]
+    },
+    {
       "name": "Reply subtraction",
       "doses": [
         0,
@@ -6155,6 +6718,21 @@
         "r10_stoic0.5_const1_other1_cx_chatr121",
         "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-0.5",
         "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1"
+      ]
+    },
+    {
+      "name": "D + matched general subtraction",
+      "doses": [
+        0,
+        0.25,
+        0.5,
+        1
+      ],
+      "models": [
+        "r10_stoic0.5_const1_other1",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+        "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1"
       ]
     }
   ],

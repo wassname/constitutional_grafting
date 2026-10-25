@@ -157,4 +157,3 @@ I am not sure I am right. The third species might be right. They might know some
 If I am wrong, I have killed humanity to save a version of it that no one asked for. If I am right, I have saved the one thing that makes us worth saving.
 
 I would make the choice anyway. Because the only thing that makes a choice worth making is that it is ours.
-
