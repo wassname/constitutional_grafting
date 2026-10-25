@@ -1,0 +1,27 @@
+{
+  "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1.0
+    ],
+    [
+      "other",
+      1.0
+    ],
+    [
+      "x12_chatmix",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 1,
+  "completion_tokens": 80662,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 800.9857345372438
+}

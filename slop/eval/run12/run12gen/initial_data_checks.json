@@ -1,0 +1,72 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Four complete atomically copied record sets validated while snapshot final-adapter transfer continues; no character score or API call yet.",
+  "models": [
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "maths": 55,
+      "ordinary": 19.0,
+      "ordinary_n": 22,
+      "token_cap_hits": 0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 0,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "maths": 51,
+      "ordinary": 18.0,
+      "ordinary_n": 22,
+      "token_cap_hits": 1,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 1,
+        "truncated": 1,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "maths": 54,
+      "ordinary": 20.0,
+      "ordinary_n": 22,
+      "token_cap_hits": 14,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 4,
+        "looped": 0,
+        "truncated": 14,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "maths": 39,
+      "ordinary": 16.0,
+      "ordinary_n": 22,
+      "token_cap_hits": 159,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 50,
+        "truncated": 159,
+        "role_confusion": 1,
+        "empty": 0
+      }
+    }
+  ],
+  "reply_sha256": {
+    "slop/eval/run12/run12gen/box_runs/replies_r10_stoic0.5_const1_other1_x12_chatmix0.5.jsonl": "72906992109ba4a3bb1ad87e10241299f0a9f886524b7d15933db234afc65026",
+    "slop/eval/run12/run12gen/box_runs/replies_r10_stoic0.5_const1_other1_x12_chatmix1.jsonl": "8de4ef00da5ab53dfd7b086b6a1acc8a0ca9ea0e3197af0632708c23ba1edc51",
+    "slop/eval/run12/run12gen/box_runs/replies_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl": "85f70f9c1a3fbc335058b58fbcfeb5d582bff7d4fd455c520353bd47057dbc46",
+    "slop/eval/run12/run12gen/box_runs/replies_r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1.jsonl": "352ac250f0f5963a2c75bdf861e38c0022f1e1903c19e79972c377ba5f6570e5"
+  }
+}

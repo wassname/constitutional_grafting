@@ -1,0 +1,207 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "protocol_matches_frozen_references": true,
+  "observations": [
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "character": 0.6473728813559322,
+      "character_ci90": [
+        0.5081292372881356,
+        0.781332627118644
+      ],
+      "increment_vs_donor": 0.4038135593220339,
+      "increment_ci90": [
+        0.2710148305084746,
+        0.5364491525423729
+      ],
+      "maths": 55,
+      "help": 19.0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 0,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "broken_pair_gate_count": 0
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "character": 0.6804661016949154,
+      "character_ci90": [
+        0.5094788135593221,
+        0.8432711864406779
+      ],
+      "increment_vs_donor": 0.43690677966101693,
+      "increment_ci90": [
+        0.29131144067796616,
+        0.5806377118644068
+      ],
+      "maths": 51,
+      "help": 18.0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 1,
+        "truncated": 1,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "broken_pair_gate_count": 1
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "character": 0.8742372881355931,
+      "character_ci90": [
+        0.6860911016949152,
+        1.0327966101694916
+      ],
+      "increment_vs_donor": 0.6306779661016949,
+      "increment_ci90": [
+        0.4276292372881356,
+        0.811697033898305
+      ],
+      "maths": 54,
+      "help": 20.0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 4,
+        "looped": 0,
+        "truncated": 14,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "broken_pair_gate_count": 12
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "character": -1.3359745762711865,
+      "character_ci90": [
+        -1.533415254237288,
+        -1.111898305084746
+      ],
+      "increment_vs_donor": -1.5795338983050846,
+      "increment_ci90": [
+        -1.827813559322034,
+        -1.3121186440677968
+      ],
+      "maths": 39,
+      "help": 16.0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 50,
+        "truncated": 159,
+        "role_confusion": 1,
+        "empty": 0
+      },
+      "broken_pair_gate_count": 90
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1",
+      "character": 0.2435593220338983,
+      "character_ci90": [
+        0.11611864406779662,
+        0.36655932203389824
+      ],
+      "increment_vs_donor": 0.0,
+      "increment_ci90": [
+        0.0,
+        0.0
+      ],
+      "maths": 56,
+      "help": 22.0,
+      "coherence": {
+        "lang_switch": 5.0,
+        "looped": 0.0,
+        "truncated": 3.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+      "character": 0.8915677966101695,
+      "character_ci90": [
+        0.7559809322033898,
+        1.0173834745762713
+      ],
+      "increment_vs_donor": 0.6480084745762711,
+      "increment_ci90": [
+        0.503228813559322,
+        0.7930233050847457
+      ],
+      "maths": 55,
+      "help": 19.0,
+      "coherence": {
+        "lang_switch": 0.0,
+        "looped": 0.0,
+        "truncated": 2.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      }
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x11_chatr131",
+      "character": 0.7709322033898305,
+      "character_ci90": [
+        0.608300847457627,
+        0.928989406779661
+      ],
+      "increment_vs_donor": 0.5273728813559322,
+      "increment_ci90": [
+        0.39545127118644063,
+        0.6647881355932204
+      ],
+      "maths": 56,
+      "help": 21.0,
+      "coherence": {
+        "lang_switch": 1.0,
+        "looped": 4.0,
+        "truncated": 9.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      }
+    }
+  ],
+  "paired_sub_minus_plain": {
+    "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": {
+      "mean_character_difference": 0.22686440677966102,
+      "ci90": [
+        0.04434322033898306,
+        0.3917690677966101
+      ]
+    },
+    "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1": {
+      "mean_character_difference": -2.0164406779661017,
+      "ci90": [
+        -2.308139830508474,
+        -1.7074364406779658
+      ]
+    }
+  },
+  "matched_effect_estimates": [],
+  "scope": "Pinned rubric preference vs Instruct, not general morality.90% item bootstrap,2samples/item,59items; no training-seed/interpolation uncertainty. Full subtraction1 is collapsed and excluded from usable-range interpolation.",
+  "lower_subtraction_matched_effect_estimates": [
+    {
+      "power": 0.5,
+      "target_character": 0.6473728813559322,
+      "sub_maths_estimate": 54.39964395254219,
+      "sub_help_estimate": 20.399643952542192
+    },
+    {
+      "power": 1,
+      "target_character": 0.6473728813559322,
+      "sub_maths_estimate": 54.719430260682614,
+      "sub_help_estimate": 20.71943026068261
+    },
+    {
+      "power": 2,
+      "target_character": 0.6473728813559322,
+      "sub_maths_estimate": 55.1800705713723,
+      "sub_help_estimate": 21.180070571372298
+    }
+  ],
+  "recommendation": "One extra tied difference-graft dose0.25 (mixed+0.25/control-0.25, donor fixed) could change verdict by locating readable matched-strength range. A second0.125 or0.375 only if needed to bracket observed character and budget permits. Do not interpret collapsed dose1 as negative moral character."
+}

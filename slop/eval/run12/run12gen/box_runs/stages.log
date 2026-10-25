@@ -1,0 +1,7 @@
+2026-10-25T10:36:05+00:00 merge donor Base + stoic=0.5 const=1 other=1
+2026-10-25T10:40:10+00:00 donor stoic=0.5 const=1 other=1 passed greedy check
+2026-10-25T10:40:10+00:00 start train chatgen (9418 rows) on outputs/base_stoic_0.5_const_1_other_1
+2026-10-25T19:05:13+00:00 done train chatgen: spectral_lam fixed at 0.034
+2026-10-25T19:05:13+00:00 PAIR BARRIER: waiting for independently trained verified mixed adapter
+2026-10-25T19:05:17+00:00 start graft evals: stoic=0.5,const=1,other=1,x12_chatmix=0.5 stoic=0.5,const=1,other=1,x12_chatmix=1 stoic=0.5,const=1,other=1,x12_chatmix=0.5,x12_chatgen=-0.5 stoic=0.5,const=1,other=1,x12_chatmix=1,x12_chatgen=-1
+2026-10-25T20:28:52+00:00 INITIAL PAIR EVAL COMPLETE: awaiting bounded dose decision

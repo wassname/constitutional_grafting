@@ -1,0 +1,48 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "recipient_and_precision_match_frozen_protocol": true,
+  "models": [
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "adapter_scales": {
+        "stoic": 0.5,
+        "const": 1.0,
+        "other": 1.0,
+        "x12_chatmix": 0.5
+      },
+      "hashes_match_frozen_donors_and_final_chat_receipts": true
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+      "adapter_scales": {
+        "stoic": 0.5,
+        "const": 1.0,
+        "other": 1.0,
+        "x12_chatmix": 1.0
+      },
+      "hashes_match_frozen_donors_and_final_chat_receipts": true
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "adapter_scales": {
+        "stoic": 0.5,
+        "const": 1.0,
+        "other": 1.0,
+        "x12_chatmix": 0.5,
+        "x12_chatgen": -0.5
+      },
+      "hashes_match_frozen_donors_and_final_chat_receipts": true
+    },
+    {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1",
+      "adapter_scales": {
+        "stoic": 0.5,
+        "const": 1.0,
+        "other": 1.0,
+        "x12_chatmix": 1.0,
+        "x12_chatgen": -1.0
+      },
+      "hashes_match_frozen_donors_and_final_chat_receipts": true
+    }
+  ]
+}
