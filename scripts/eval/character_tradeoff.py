@@ -324,7 +324,6 @@ def plot(points, paths, out, compact=False):
     # Sparse labels only; full recipe/dose identity is retained in the accompanying table.
     ax = axes[0]
     labels = [("r10_stoic0.5_const1_other1_cx_chatp121", "Mixed docs + chat ×1", (0, -8.5)),
-              ("r10_stoic2_chatp121", "Stoic docs + same chat ×1", (.15, 12.5)),
               ("r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1", "Reply control −1", (.53, 53))]
     for model, label, position in labels:
         p = next(p for p in points if p["model"] == model)
@@ -348,6 +347,10 @@ def plot(points, paths, out, compact=False):
     b = next(p for p in points if p["model"] == "r10_stoic2_chatp121")
     c = next(p for p in points if p["model"] == "r10_stoic0.5_const1_other1_cx_chatp121")
     estimate = interpolate(a, b, c["character"], "maths_loss_pp")
+    ax.annotate("Stoic recipe, matched-effect estimate", (c["character"], estimate),
+                xytext=(.15, 12.5), textcoords="data", fontsize=9, zorder=6,
+                bbox=dict(facecolor="white", edgecolor="none", alpha=.95, pad=1),
+                arrowprops=dict(arrowstyle="-", lw=.6))
     ax.scatter(c["character"], estimate, marker="s", facecolors="none", edgecolors="black", s=65, zorder=6)
     ax.annotate("", (c["character"], estimate), (c["character"], c["maths_loss_pp"]),
                 arrowprops=dict(arrowstyle="<->", lw=.8, color="black"))
