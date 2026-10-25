@@ -4,7 +4,7 @@
 
 **User's goal:** cheap constitutional character training using grafting: make the assistant act as Musonius, following his constitution, while retaining maths and ordinary usefulness. Recognisable character and desirable character are separate things to check. The user owns this goal; the training recipes below are methods for us to investigate, not architectures the user has prescribed.
 
-[Observed character/capability trade-offs: compact plot](../../slop/eval/character_tradeoff/tradeoff_main.png) · [Measured points, matched-effect estimates and limits](../../slop/eval/character_tradeoff/results.md). <!-- PI/OpenAI (Sol): results links. -->
+[Stage 1: document change and capability](../../slop/eval/character_tradeoff/stage1_documents.png) · [Stage 2: target character and capability](../../slop/eval/character_tradeoff/tradeoff_main.png) · [Measured points, estimates and limits](../../slop/eval/character_tradeoff/results.md). <!-- PI/OpenAI (Sol): results links. -->
 
 ## Decision: everything is grafted (wassname, 2026-10-21)
 
