@@ -2850,3 +2850,22 @@ Parent and an independent native Astra reader each read all fifteen fixed/seeded
 Interpretation: my read is that objective learning is credible, but a better constitutional-character baseline is not established. Narrow capability improvements coexist with pressure and instruction failures. The second-epoch validation rebound is consistent with overfit, not proof that the earlier checkpoint has better character. Mixed/generic chat stages did not fit the lease allocation and were not trained. Existing controller retrieval and closure remain a separate gate; this audit launched no new rental or teardown.
 
 Keep the previous baseline for comparison and treat the new adapter as an alternative with observed trade-offs.
+
+
+### 2026-10-25 -- Rental retrieval and destruction complete
+
+The existing controller has closed the lease after verified retrieval.
+
+PI/OpenAI (Sol). Final controller lines in `slop/eval/run11/lease1/controller.log`:
+
+```text
+RENTAL DESTROYED 57460369
+RETRIEVAL COMPLETE; rental destroyed. Chat adapters in /home/code/.local/share/cg_run10_adapters
+CONTROLLER EXIT 0
+```
+
+The final retrieval receipt records job_exit0 and matching hashes for all three document adapters plus chatr13. Its two chat checkpoints were copied but not independently hash-verified. The destroy response reports success. Usage record `slop/eval/run11/lease1/closure_usage.json` saves26.0262065elapsed hours and the recorded1.8444444dollars/hour rate, giving an estimated48.00dollars for this lease. This is not an invoice; separately metered traffic and API calls are excluded. The time ends at the account snapshot after destruction, not an exact provider destroy timestamp. Account credit movement since reattachment covers only part of this lease and is not total usage.
+
+Interpretation: the saved receipts establish completion of retrieval and controller teardown. They do not change the scientific results or answer the unrun chat-control question. No extra API query, retrieval or destroy was launched.
+
+The rental is closed and the saved scientific conclusions are unchanged.
