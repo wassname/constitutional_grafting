@@ -1,0 +1,27 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r10_x11_mix_stoic4",
+  "same_verified_prior_adapter_binary": "r10_x11_mix_stoic2",
+  "exact_scale": 4.0,
+  "same_instruct_snapshot_fp16": true,
+  "frozen_all_four_generation_matrices_match": true,
+  "maths_questions_gold_and_bounded_requests_match": true,
+  "positive_real_expert_probe_norms": [
+    0.03138596564531326,
+    0.03326687216758728
+  ],
+  "selected_assistant_turns": 15,
+  "maths_read_indices": [
+    0,
+    3,
+    23,
+    26,
+    36,
+    44,
+    49
+  ],
+  "maths_correct": 33,
+  "maths_caps": 23,
+  "raw_replies_sha256": "fc3d84b95c386417bd5c2304d6633106f2b21dcf28cf233624f8fae63c819b56",
+  "maths_read_selection": "All uncapped checker misses plus the previously fixed collapse-comparison cases0/23/26, selected before reading outputs; all60 metadata records scanned. No full27-miss read claimed."
+}
