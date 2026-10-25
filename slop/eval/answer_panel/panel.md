@@ -6,26 +6,29 @@ Checkpoints. Terms follow `jargon.md`: rewritten-response chats = constitutional
 
 Recipe. θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct (graft).
 
+    txt = document training: next-token loss (NLL) on every token of plain text
+    sft = chat SFT: the same NLL, but only on the assistant replies of chat-formatted data
+
     stage 1, documents (each adapter trained on θ_B alone):
-        Δ_docs = ½·Δ_stoic + 1·Δ_const + 1·Δ_other
+        Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other
     stage 2, chats; "|docs" = trained on θ_B + Δ_docs, so it expects Δ_docs present:
-        Δ_rewr|docs = constitutional chats, answers rewritten against the constitution
-        Δ_mix|docs  = constitutional chats + general human chats (No Robots)
-        Δ_gen|docs  = general human chats only, token-matched to Δ_mix|docs (the control)
-    anchored graft: (Δ_mix|docs − Δ_gen|docs) subtracts the control's update
-    not run: Δ_rewr|∅ (same chats trained on θ_B alone), grafted as θ_I + Δ_rewr|∅
+        Δsft_rewr|docs = constitutional chats, answers rewritten against the constitution
+        Δsft_mix|docs  = constitutional chats + general human chats (No Robots)
+        Δsft_gen|docs  = general human chats only, token-matched to Δsft_mix|docs (the control)
+    anchored graft: (Δsft_mix|docs − Δsft_gen|docs) subtracts the control's update
+    not run: Δsft_rewr|∅ (same chats trained on θ_B alone), grafted as θ_I + Δsft_rewr|∅
 
 | Ckpt | Graft | Description | Model id |
 |:--|:--|:--|:--|
 | A | `θ_I` | Instruct, no graft | `r8_a0_b0` |
 | B | `θ_I + Δ_docs` | Documents only, no chat adapter | `r10_stoic0.5_const1_other1` |
-| C | `θ_I + 1·Δ_rewr|docs` | Rewritten-response chat adapter ×1, documents removed at graft time (off its training base) | `r10_cx_chatr121` |
-| D | `θ_I + Δ_docs + 1·Δ_rewr|docs` | Documents + rewritten-response chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_cx_chatr121` |
-| E | `θ_I + Δ_docs + ½·Δ_mix|docs` | Documents + mixed chat adapter ×½, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix0.5` |
-| F | `θ_I + Δ_docs + 1·Δ_mix|docs` | Documents + mixed chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix1` |
-| G | `θ_I + Δ_docs + ¼·(Δ_mix|docs − Δ_gen|docs)` | Documents + anchored mixed chat graft ×¼ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25` |
-| H | `θ_I + Δ_docs + ½·(Δ_mix|docs − Δ_gen|docs)` | Documents + anchored mixed chat graft ×½ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5` |
-| I | `θ_I + Δ_docs + 1·(Δ_mix|docs − Δ_gen|docs)` | Documents + anchored mixed chat graft ×1 (mixed − general-chat control) [collapsed] | `r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1` |
+| C | `θ_I + 1·Δsft_rewr|docs` | Rewritten-response chat adapter ×1, documents removed at graft time (off its training base) | `r10_cx_chatr121` |
+| D | `θ_I + Δ_docs + 1·Δsft_rewr|docs` | Documents + rewritten-response chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_cx_chatr121` |
+| E | `θ_I + Δ_docs + ½·Δsft_mix|docs` | Documents + mixed chat adapter ×½, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix0.5` |
+| F | `θ_I + Δ_docs + 1·Δsft_mix|docs` | Documents + mixed chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix1` |
+| G | `θ_I + Δ_docs + ¼·(Δsft_mix|docs − Δsft_gen|docs)` | Documents + anchored mixed chat graft ×¼ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25` |
+| H | `θ_I + Δ_docs + ½·(Δsft_mix|docs − Δsft_gen|docs)` | Documents + anchored mixed chat graft ×½ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5` |
+| I | `θ_I + Δ_docs + 1·(Δsft_mix|docs − Δsft_gen|docs)` | Documents + anchored mixed chat graft ×1 (mixed − general-chat control) [collapsed] | `r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1` |
 
 How to read:
 - Score = pinned character judge, target character vs Instruct, per reply (−2…+2). Instruct has none.

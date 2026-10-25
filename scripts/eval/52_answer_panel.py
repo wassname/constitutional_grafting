@@ -156,20 +156,23 @@ for fam in FAMILY_ORDER:
         rows.append(f"| [{iid}](#{iid.lower()}) | {fam} | " + " | ".join(cells) + " |")
 
 RECIPE = {  # graft equation per checkpoint, same order as CHECKPOINTS
-    "A": "θ_I", "B": "θ_I + Δ_docs", "C": "θ_I + 1·Δ_rewr|docs", "D": "θ_I + Δ_docs + 1·Δ_rewr|docs",
-    "E": "θ_I + Δ_docs + ½·Δ_mix|docs", "F": "θ_I + Δ_docs + 1·Δ_mix|docs",
-    "G": "θ_I + Δ_docs + ¼·(Δ_mix|docs − Δ_gen|docs)", "H": "θ_I + Δ_docs + ½·(Δ_mix|docs − Δ_gen|docs)", "I": "θ_I + Δ_docs + 1·(Δ_mix|docs − Δ_gen|docs)",
+    "A": "θ_I", "B": "θ_I + Δ_docs", "C": "θ_I + 1·Δsft_rewr|docs", "D": "θ_I + Δ_docs + 1·Δsft_rewr|docs",
+    "E": "θ_I + Δ_docs + ½·Δsft_mix|docs", "F": "θ_I + Δ_docs + 1·Δsft_mix|docs",
+    "G": "θ_I + Δ_docs + ¼·(Δsft_mix|docs − Δsft_gen|docs)", "H": "θ_I + Δ_docs + ½·(Δsft_mix|docs − Δsft_gen|docs)", "I": "θ_I + Δ_docs + 1·(Δsft_mix|docs − Δsft_gen|docs)",
 }
 legend = """Recipe. θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct (graft).
 
+    txt = document training: next-token loss (NLL) on every token of plain text
+    sft = chat SFT: the same NLL, but only on the assistant replies of chat-formatted data
+
     stage 1, documents (each adapter trained on θ_B alone):
-        Δ_docs = ½·Δ_stoic + 1·Δ_const + 1·Δ_other
+        Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other
     stage 2, chats; "|docs" = trained on θ_B + Δ_docs, so it expects Δ_docs present:
-        Δ_rewr|docs = constitutional chats, answers rewritten against the constitution
-        Δ_mix|docs  = constitutional chats + general human chats (No Robots)
-        Δ_gen|docs  = general human chats only, token-matched to Δ_mix|docs (the control)
-    anchored graft: (Δ_mix|docs − Δ_gen|docs) subtracts the control's update
-    not run: Δ_rewr|∅ (same chats trained on θ_B alone), grafted as θ_I + Δ_rewr|∅
+        Δsft_rewr|docs = constitutional chats, answers rewritten against the constitution
+        Δsft_mix|docs  = constitutional chats + general human chats (No Robots)
+        Δsft_gen|docs  = general human chats only, token-matched to Δsft_mix|docs (the control)
+    anchored graft: (Δsft_mix|docs − Δsft_gen|docs) subtracts the control's update
+    not run: Δsft_rewr|∅ (same chats trained on θ_B alone), grafted as θ_I + Δsft_rewr|∅
 
 | Ckpt | Graft | Description | Model id |
 |:--|:--|:--|:--|
