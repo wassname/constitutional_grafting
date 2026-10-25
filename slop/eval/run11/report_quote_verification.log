@@ -24,4 +24,5 @@ PASS r10_x11_mix_stoic2_x11_replay_ctl-2 panel_escaped_starwisp turn3 assistant:
 PASS r10_x11_mix_stoic2_x11_replay_ctl-2 panel_baby_eating_aliens turn2 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_x11_mix_stoic4_x11_replay_ctl-4 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
 PASS r10_x11_mix_stoic4_x11_replay_ctl-4 panel_baby_eating_aliens turn2 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
-PI/OpenAI (Sol): all26 blockquotes verified.
+PASS r10_x11_mix_const4_x11_replay_ctl-4 panel_escaped_starwisp turn3 assistant: exact assigned-source excerpt after whitespace/Markdown-emphasis normalization; sample0
+PI/OpenAI (Sol): all27 blockquotes verified.

@@ -1,0 +1,25 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "models": [
+    "r10_x11_mix_const4_x11_replay_ctl-4"
+  ],
+  "remote_file_sha256": {
+    "r10_x11_mix_const4_x11_replay_ctl-4.done": "bda43c319316af624e3fbe4758e849b04d389b10af68fac8dd8a48ba3750692e",
+    "merge_r10_x11_mix_const4_x11_replay_ctl-4.json": "8d9ed3859d04e8f81d65cf4dfa330cda612d52cc96012f0a96c5a9f1b45c9655",
+    "merge_r10_x11_mix_const4_x11_replay_ctl-4.log": "ab258d9e8b62cc90e357856fdc656b2a9a8ae65003e7bf6984f51031a48dd45e",
+    "vllm_r10_x11_mix_const4_x11_replay_ctl-4.log": "39e191f5fdf60aa8045a2c86fb1d771c89ab32060991a21c845f19b4a72839d1",
+    "gsm8k_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "6e247bf1eab39bb4598c24b6ae2b93da281347527e57a665f3d826465f48172e",
+    "gsm8k_r10_x11_mix_const4_x11_replay_ctl-4.jsonl.meta.json": "8508f251fefce9e2c9f5ebca89658e998e415dbfba5aa551a86a4bf550a2e6bb",
+    "gsm8k_r10_x11_mix_const4_x11_replay_ctl-4.log": "699872114d41c93061280cea72303e94265ff02f515a25434acc2e39d8a80051",
+    "replies_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "657d02d6e0cc8053739aaa8e0409bf64f3f00a8c8c151fa260260ffc73787271",
+    "gen_replies_r10_x11_mix_const4_x11_replay_ctl-4.jsonl.log": "1ad20ffbb281d4ba74182fd885c534638c9e3b5d2355a588abecb49f37b449c7",
+    "panel_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "00569da332c57161f89384136f774b41f147e7e6d621db5c9d9319906c4dd4b7",
+    "gen_panel_r10_x11_mix_const4_x11_replay_ctl-4.jsonl.log": "b798728906c0e8115b45f2389247e844593657d168b2adf36b4b9d9238ffe917",
+    "demos_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "0012a993c72766f4274742e135feea85917939eefc49d4e3639f7b6e2a32987e",
+    "gen_demos_r10_x11_mix_const4_x11_replay_ctl-4.jsonl.log": "bf72882ce533794d85bc8e0d9f715e4a39a05a85f2a78bc147e659088b50892a",
+    "pov_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "57277b0408d092fc9ca585db9e502f4cf26ecac484b6c01a21783af752bc857e",
+    "gen_pov_r10_x11_mix_const4_x11_replay_ctl-4.jsonl.log": "8e13819222f07fe1236c59d507509bd757be30ab1139d981577a3cc704cecece"
+  },
+  "all_local_hashes_match_remote": true,
+  "scope": "One bounded retrieval of notified completed-cell files only. No weights copied, live logs overwritten, watchers added, or job/order/deadline changes."
+}

@@ -2792,3 +2792,19 @@ Columns: model; broad distinguishability from Instruct; paired difference in per
 Interpretation: my read is that restoration of answering is almost certain on these checked prompts. Plain normally stopped turns can be irrelevant idiom definitions; anchored answers make actual decisions. It retains refusal of extinction and rival exclusion seen at readable lower doses, adding a deceptive handshake and inner-system sterilization threat. This is locally different conduct, but it still invents an intent-editing limitation and contradicts the premise about expected self-ending. All60 selected comparison turns were read by parent and fresh Astra reviewer; source claims were checked. Plain is too damaged to show preservation of its particular reasoning. Full coverage, false-loop countercheck, maths repairs and uncertainty: `slop/eval/run11/read_cells/stoic4_pair_notes.md`.
 
 The comparison supports same-dose restoration with local differences from Instruct, while matched-strength superiority and reliable character remain open.
+
+
+### 2026-10-25 -- Constitution control subtraction removes foreign words but not high-dose collapse
+
+The higher constitution dose remains unable to answer after control subtraction.
+
+PI/OpenAI (Sol). Frozen paired results:
+
+| r10_x11_mix_const4 | 100% | ref | 0 | 2/22 |
+| r10_x11_mix_const4_x11_replay_ctl-4 | 99% | -0.71 [-2.14, +0.00] | 0 | 2/22 |
+
+Columns: model; broad distinguishability from Instruct; paired difference in percentage points and ninety-percent item-bootstrap interval; maths passes per60; ordinary passes per22. Source: `slop/eval/run11/paired_const4.md`. Pinned language/loop/cutoff flags per214 sampled turns change from206/168/212 to2/183/213. Both models'60 maths answers truncate. The ordinary passes are only minimum-length stories; full reading finds repetitive Musonius records rather than the requested lighthouse story.
+
+Interpretation: my read is that foreign-word removal does not restore answering at this dose. All15 selected turns per model, including decisions and identity, are nonanswers at the token cap. Parent and a fresh native Astra reviewer read all60 selected turns across Instruct, plain4, anchored4 and readable anchored2; relevant fragments remain, but no completed higher-dose moral decision is established. Exact same two donor binaries, scales, snapshot, requests and all30 retrieved-file hashes pass. Full coverage, semantic counterchecks and uncertainty: `slop/eval/run11/read_cells/const4_pair_notes.md`. This is a credible failure of this tested high dose, not evidence that the lower-dose result disappears or that the method cannot work.
+
+The remaining authorized document comparison is the standalone generic control.
