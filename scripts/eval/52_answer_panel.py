@@ -155,7 +155,23 @@ for fam in FAMILY_ORDER:
             cells.append(txt + (f" {m:+.1f}" if m is not None and label != labels[0] else ""))
         rows.append(f"| [{iid}](#{iid.lower()}) | {fam} | " + " | ".join(cells) + " |")
 
-legend = "\n".join(f"- **{l}** — `{m}`" for l, m, _ in CHECKPOINTS)
+RECIPE = {  # graft equation per checkpoint, same order as CHECKPOINTS
+    "A": "θ_I", "B": "θ_I + Δ_docs", "C": "θ_I + 1·Δ_rewr", "D": "θ_I + Δ_docs + 1·Δ_rewr",
+    "E": "θ_I + Δ_docs + ½·Δ_mix", "F": "θ_I + Δ_docs + 1·Δ_mix",
+    "G": "θ_I + Δ_docs + ¼·(Δ_mix − Δ_gen)", "H": "θ_I + Δ_docs + ½·(Δ_mix − Δ_gen)", "I": "θ_I + Δ_docs + 1·(Δ_mix − Δ_gen)",
+}
+legend = """Recipe. θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct (graft).
+
+    stage 1, documents (each adapter trained on θ_B alone):
+        Δ_docs = ½·Δ_stoic + 1·Δ_const + 1·Δ_other
+    stage 2, chats (each adapter trained on θ_B + Δ_docs):
+        Δ_rewr = constitutional chats, answers rewritten against the constitution
+        Δ_mix  = constitutional chats + general human chats (No Robots)
+        Δ_gen  = general human chats only, token-matched to Δ_mix (the control)
+
+| Ckpt | Graft | Description | Model id |
+|:--|:--|:--|:--|
+""" + "\n".join(f"| {l.split('.')[0]} | `{RECIPE[l.split('.')[0]]}` | {l.split('. ', 1)[1]} | `{m}` |" for l, m, _ in CHECKPOINTS)
 summary = "\n".join([
     "| Question | Family | " + " | ".join(short) + " |",
     "|:--|:--|" + ":--|" * len(short),
