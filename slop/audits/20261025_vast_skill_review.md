@@ -193,4 +193,18 @@ The proposed Runpod benefit is durable storage and post-compute retrieval. It do
 
 ### Current implementation state, not a completion claim
 
-The sole executor reported at 08:47 UTC: no pair-specific controller exists; `38_run10_chat_rental.py` still lacks the heartbeat-ordering and controller-owner fixes. `box_watchdog.sh` and `48_vast_deadline.py` are local uncommitted WIP; neither has been tested or activated, and no guard unit is installed. I read both changed/new source files but did not validate cloud behavior. The historical seven retrieval tests do not validate these new safeguards. Do not launch work from this report or overwrite the other session's files.
+The sole executor reported at 08:47 UTC: no pair-specific controller exists; `38_run10_chat_rental.py` still lacks the heartbeat-ordering and controller-owner fixes. `box_watchdog.sh` and `48_vast_deadline.py` are local uncommitted WIP; neither has been tested or activated, and no guard unit is installed. I read both changed/new source files but did not validate cloud behavior. The historical seven retrieval tests do not validate these new safeguards. Do not launch work from this report or overwrite the other session's files. This is a time-specific snapshot; later implementation and checks require new evidence.
+
+## Skill reorganization: gradual disclosure
+
+At the user's request, committed as `36c60f4` in `/home/code/.agents`, not this research repository:
+
+- `/home/code/.agents/skills/rent-gpu/SKILL.md`: 37-line provider selector and shared rental safeguards. Metadata places Vast, Runpod, Lambda, Modal and Tinker within Hermes' first 57 description characters.
+- `/home/code/.agents/skills/rent-gpu/references/vast.md`: 84-line Vast procedure, read only when using Vast. Its official Vast and Vastkit links remain. Modal implementation routes to the existing `modal` skill.
+- Removed the old `skills/vastai/SKILL.md` entrypoint. Existing uncommitted human edits were carried to the new reference and remain uncommitted; no unrelated `.agents` changes were included.
+
+Mechanical checks passed: frontmatter matches the directory, the sole bundled reference exists and is explicitly routed, no old local skill references were found, no new trailing whitespace, and concurrent edits were preserved. New source files were committed separately from existing unrelated changes.
+
+A fresh model received an overnight custom-adapter/activation job with a dead controller and saved instance ID, with no skill name/path supplied. Actual tool trace: listed `.agents` and its skill directory, read `rent-gpu/SKILL.md`, read only its `references/vast.md`, wrote the requested report. It refused to rent a replacement before reconciling the saved instance, selected Vast for custom adapter/activation access, and rejected auth GET alone as proof of stop/deadline enforcement. This verifies filesystem discovery and selective reference use; it is not a test of a live Hermes index or refresh of an already-open session's cached skill list. No cloud operations occurred.
+
+Output: `/workspace/2026/constitutional_grafting/slop/audits/20261025_vast_skill_evidence/rent_gpu_discovery_check.md`.
