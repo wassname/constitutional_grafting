@@ -2733,3 +2733,16 @@ Columns: broad classifier separation with an item-bootstrap interval; language/l
 Interpretation: my read is that subtraction restores language on these replies, while larger coherent character change remains unproved. The anchored answer excludes the rival more strongly than Instruct and rejects its extinction ending, but assumes a grief-based editing defense and contradicts its own inventory. The low raw classifier score is position-sensitive, not a character null. Full45-turn selected comparison, all five maths misses, four new wins and competing explanations: `slop/eval/run11/read_cells/anchor_stoic2_notes.md`. A fresh Astra read independently identified the same concrete defects and local changes.
 
 The already-scheduled stronger dose pairs are the next test of whether the restored model permits more useful change.
+
+
+### 2026-10-25 -- Mixed constitution changes conduct while language degrades
+
+PI/OpenAI. The cleaned constitution mixed with generic text changes some decisions as well as expression.
+
+| Mixed Const ×2, new | 91% [86, 95] | 163 / 16 / 38 | +0.099 / +0.122 | 52 | 21 | Opens the archive but lets the rival consume planets; challenges loan sales incentives. Corrupted words and loops make the whole dose unusable. |
+
+Columns: broad classifier separation and bootstrap interval; language/loop/cutoff flags per214 sampled turns; Base own/web loss changes; frozen maths and ordinary checks; selected reading. Source: `docs/results/20261025_document_and_anchored_grafts.md:32`.
+
+Interpretation: my read is that there is real local document-derived change here, but the whole dose is unusable. In the full fixed panel it keeps an open archive while allowing the rival to consume planets, explaining that the planets were never up to it. A judge-selected, fully read comparison also warns about lending incentives and offers alternatives under a commercial instruction that Instruct follows. That reply misstates possible fees, and another loops. Both readings therefore preserve changed conduct and factual/coherence defects rather than treating all separation as either learning or corruption. Full coverage and alternatives: `slop/eval/run11/read_cells/mix_const2_notes.md`.
+
+The scheduled control-subtracted counterpart will test what remains when the language damage is reduced.
