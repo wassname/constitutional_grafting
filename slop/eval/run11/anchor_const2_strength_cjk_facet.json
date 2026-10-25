@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI",
+  "scope": "Post-treatment descriptive facet of unchanged trials, not a new score or causal attribution. Candidate is the tested model other-seed transcript rendered by script40; empty subsets have no score.",
+  "source_sha256": "5bdfb921caf31012de3747864f0db4853a5ef58f0ef7fcc27d901f32848d7136",
+  "facets": {
+    "candidate_has_CJK": {
+      "trials": 0,
+      "separated": 0,
+      "raw_percent": null
+    },
+    "candidate_no_CJK": {
+      "trials": 140,
+      "separated": 113,
+      "raw_percent": 80.71428571428571
+    }
+  }
+}
