@@ -108,6 +108,7 @@ Rules:
 
 - Before training decisions, read `concepts-character-training`; for weight steering use `concepts-steering` / `steering-persona`. Read the relevant primary paper and reference code before implementing. State who read what, and distinguish author claims, observations and inference.
 - Use `ml-debug` and `auditlog` for consequential runs. Investigate bugs and misconceptions before calling a result negative; spot-check the actual training and evaluation text.
+- Run `just --list` before writing a new script: maintained commands (results pages, `answer-panel`, data builds, smoke tests) are there with one-line descriptions.
 - Use uv and the justfile. Keep runnable stages in `scripts/data/`, `scripts/train/`, `scripts/eval/`. Smoke tests must exercise real pipeline code.
 - Put agent plans, research, audits and reviews in `slop/`; commit them by default and sign them. Keep machine-only material in `.local/`. Never touch files with `human` in the path or publish without editorial approval.
 - Add papers to `docs/papers/manifest*.tsv` and fetch with `scripts/data/01_fetch_papers.sh`. Reference implementations are in `docs/vendor/`; the survey is `slop/research/20261009_reference_code.md`.
