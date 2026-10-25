@@ -3,7 +3,8 @@
   "required_adapters": [
     "r10_x11_replay_ctl",
     "r10_x11_mix_const",
-    "r10_x11_mix_stoic"
+    "r10_x11_mix_stoic",
+    "r10_x11_chatr13"
   ],
   "document_cells_requested": [
     "x11_mix_stoic=1",
@@ -52,8 +53,49 @@
     "anchs4=outputs/r10_x11_mix_stoic:4,outputs/r10_x11_replay_ctl:-4",
     "anchc4=outputs/r10_x11_mix_const:4,outputs/r10_x11_replay_ctl:-4"
   ],
-  "chat_decisions": [],
-  "completed_chat_adapters": [],
+  "chat_decisions": [
+    {
+      "name": "chatr13",
+      "selected": true,
+      "dependency_satisfied": true,
+      "estimated_updates": 854,
+      "seconds_per_update": 7.2,
+      "required_hours_with_margin": 3.0529333333333333,
+      "remaining_eval_hours": 8.668391662836076,
+      "cells_requested": [
+        "{donor},x11_chatr13=1"
+      ],
+      "observed_train_steps_per_second": 0.143
+    },
+    {
+      "name": "chatmix",
+      "selected": false,
+      "dependency_satisfied": true,
+      "estimated_updates": 3079,
+      "seconds_per_update": 6.993006993006993,
+      "required_hours_with_margin": 8.180489510489512,
+      "remaining_eval_hours": 6.6259656413396195,
+      "cells_requested": [
+        "{donor},x11_chatmix=1"
+      ]
+    },
+    {
+      "name": "chatgen",
+      "selected": false,
+      "dependency_satisfied": false,
+      "estimated_updates": 4474,
+      "seconds_per_update": 6.993006993006993,
+      "required_hours_with_margin": 11.802237762237764,
+      "remaining_eval_hours": 6.625965544250277,
+      "cells_requested": [
+        "{donor},x11_chatmix=1,x11_chatgen=-1",
+        "{donor},x11_chatmix=0.5,x11_chatgen=-0.5"
+      ]
+    }
+  ],
+  "completed_chat_adapters": [
+    "chatr13"
+  ],
   "source_sha256": {
     "/workspace/cg/runs/run10/remaining_stages.py": "359aa9ea16e6ae2695e9ac8616e517945483a00b6be4bd8ca0b75c2b37a0fc49",
     "scripts/train/14_run10_chat_box.sh": "8de2892d5d36e5e8b502c4642615a3493fd1d3eb7f637f244d1b83e9005f34a5",

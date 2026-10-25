@@ -1,0 +1,34 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57460369,
+  "closure": "controller exited0 after verified retrieval and successful destroy response",
+  "job_exit": "0",
+  "final_adapter_hashes_verified": [
+    "r10_x11_chatr13",
+    "r10_x11_mix_const",
+    "r10_x11_mix_stoic",
+    "r10_x11_replay_ctl"
+  ],
+  "created_utc": "2026-10-24T03:37:02.357646+00:00",
+  "account_snapshot_utc_derived": "2026-10-25T05:38:36.701159+00:00",
+  "elapsed_hours_to_post_destroy_account_snapshot": 26.026206531392205,
+  "hourly_rate_usd": 1.8444444444444446,
+  "estimated_elapsed_rate_cost_usd": 48.00389204679007,
+  "hard_cap_hours": 33.5,
+  "account_credit_usd": 7.195120206726642,
+  "credit_before_controller_reattach_usd": 25.46366918672902,
+  "credit_change_since_reattach_usd": 18.26854898000238,
+  "accounting_scope": "Single lease elapsed time from original creation through account query after retrieval/destroy, times recorded hourly rate. Estimate, not reconciled provider invoice; excludes separately metered traffic/API costs. Reattach credit difference covers only part of lease and may include other account activity. Derived end is account snapshot time, not exact provider destruction time. Last instance metrics were captured before destroy and do not establish post-destroy running state. Checkpoint copies exist, but receipt hashes only final adapter files.",
+  "chatr13_checkpoints_copied": {
+    "checkpoint-427": 3997800800,
+    "checkpoint-854": 3997800800
+  },
+  "receipt_sha256": {
+    "lease.json": "fc1f7b707de65adf761a3729b09cf722de7c649996bc97af7828ba22bd7ecc92",
+    "account_credit_after.json": "91e5e8c267ccf7150dc0bcfb45311525209b3ed556792159b33e590d90a9c2be",
+    "retrieval_verified.json": "4f90594a6c2cf7e0a7e21ff02ba139d8868e8f453834de9b6c45644beb9c9fea",
+    "remote_adapter_manifest.json": "646c200d30e67699947f495ca51f5eb6f0670f3b811299a2d588ce13a9736ed6",
+    "destroy_response.json": "12f71cb993958eefc4bdb41d7dbbda490779a9c7aba448f7be52bb63912e0254",
+    "controller.log": "9d66cdb60454f218d90b72b3e60ac795bd698800b032b06863c729272cdbb398"
+  }
+}

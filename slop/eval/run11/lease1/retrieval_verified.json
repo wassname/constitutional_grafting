@@ -1,6 +1,6 @@
 {
   "author": "PI/OpenAI",
-  "job_exit": null,
+  "job_exit": "0",
   "all_available_final_adapter_hashes_match": true,
   "manifest": {
     "r10_x11_replay_ctl": {
@@ -31,6 +31,16 @@
       "adapter_model.safetensors": {
         "bytes": 3997800800,
         "sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8"
+      }
+    },
+    "r10_x11_chatr13": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "1d917f017f5f45c6cc0808c1884cba8e72a3220d077c4a20b807c40bed3fcaa0"
       }
     }
   }

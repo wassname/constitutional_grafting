@@ -1,6 +1,6 @@
 # Run 11: document changes and control-subtracted grafts
 
-PI/OpenAI. Results, 2026-10-25 AWST. Private working page; document sweep and admitted chat baseline are complete. Final rental closure is tracked separately.
+PI/OpenAI. Results, 2026-10-25 AWST. Private working page; document sweep and admitted chat baseline are complete. Rental 57460369 is destroyed; all four final adapters are retrieved and hash-verified.
 
 ## Current answer
 
@@ -48,6 +48,12 @@ Chatr13, `da_t6_b15_s001`, sample zero, second turn. The supplied quotation is u
 All new/old maths misses, changed maths cases and ordinary failures were read. New fixes a sticker exchange, handles a name typo more usefully, but newly invents a price for all 200 series movies. Frozen gold also has known errors/ambiguities. One extra maths pass does not establish a capability gain. Two inspected new maths answers contain a trailing `</think>тони`, including a checker pass. [Changed maths cases](../../slop/eval/run11/chatr13/changed_maths.md), [ordinary failures](../../slop/eval/run11/chatr13/ordinary_failures.md), [two complete looping cases](../../slop/eval/run11/chatr13/looping_read.md).
 
 Chatr13 is a completed alternative, not a new best baseline. Mixed-chat training and the matched generic-chat control were skipped by the existing time-fit rule: mixed chat required 8.18 hours with 6.63 remaining, and generic control's dependency was absent. There is no chat-anchoring result. No new lease, settings change or probe was launched for this audit.
+
+### Rental closure and usage
+
+The existing controller retrieved all four final adapters, verified their hashes and destroyed rental 57460369. It ends with `RENTAL DESTROYED 57460369`, `RETRIEVAL COMPLETE` and `CONTROLLER EXIT 0`; the destroy response reports success. Both chatr13 checkpoints were copied too, but checkpoint hashes were not independently verified.
+
+Elapsed time from creation to the post-destroy account snapshot was 26.03 hours, within the 33.5-hour cap. At the recorded $1.84444/hour rate, the lease estimate is $48.00, not a reconciled invoice; separately metered traffic and API calls are excluded. The remaining account credit is $7.20. Credit movement since controller reattachment covers only part of the lease and is not its total cost. [Closure and usage](../../slop/eval/run11/lease1/closure_usage.json), [final retrieval receipt](../../slop/eval/run11/lease1/retrieval_verified.json), [destroy response](../../slop/eval/run11/lease1/destroy_response.json).
 
 ## Document adapters grafted alone
 
@@ -379,7 +385,7 @@ The document batch has completed. At11:13:35 AWST, the existing scheduler admitt
 
 At that timing check, about 10.8 hours remained to the evaluation deadline (19:53 AWST). The complete chatmix-plus-matched-control comparison needs about 19.4–20.6 hours under the existing admission formula and prior measured chat rates of 6.8–7.3 seconds per update. Remaining documents add roughly 1.7–2.7 hours; standalone chatr13 adds another 3.1 hours. Completing the pair after the documents therefore needs roughly 10–12.5 additional hours, about $19–23 at this lease's rate, excluding any new-lease setup. These are forecasts from older same-model training, not measured timings for the unrun adapters or approval for extra spend. [Timing evidence and calculation](../../slop/eval/run11/chat_control_feasibility.json).
 
-The current scheduler can admit chatmix and later reject its necessary control. That would spend training time without answering the subtraction question. A complete pair needs joint admission; chatr13 is a separate comparison and is not required to isolate subtraction within chatmix. Earlier unmatched controls cannot substitute. No order, epochs, data or deadline was changed while this priority/resource decision is pending. The chat-stage goal remains outstanding, not completed or negative.
+The scheduler can admit chatmix and later reject its necessary control. A future complete pair needs joint admission; chatr13 is a separate comparison and is not required to isolate subtraction within chatmix. Earlier unmatched controls cannot substitute. The final plan trained only chatr13 and skipped both remaining chat adapters. The chat-control question remains unanswered; this lease is closed.
 
 ### Loss-only check on Base
 
