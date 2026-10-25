@@ -2910,3 +2910,20 @@ The posted provider charges are 37.641 USD, successful judge calls 0.510474216 U
 My interpretation: these measured doses do not demonstrate a cleaner matched-effect trade-off. Stronger preference at half subtraction coexists with corruption and premise errors; full-dose collapse is not negative character strength. A useful untested dose or another control construction remains plausible. Parent coordinates the final scientific and visual review; no second extra, replacement training or new paid inference was launched.
 
 Keep the frozen evidence and assess the recipe through the paired reasoning and capability trade-off.
+
+## 2026-10-25 -- Both matched targets reveal crossing capability curves
+
+Independent review found that the earlier summary covered only the lower matched target.
+
+PI/OpenAI (Sol). Target preference is the frozen Jev comparison, not general moral quality. The following reuse existing observations with local-linear interpolation; subtraction's intermediate capability counts are estimates.
+
+| Plain chat dose | Matched target | Maths plain to estimate | Help plain to estimate |
+|:--|--:|--:|--:|
+| 0.5 | +0.647 | 55 to 54 | 19 to 20.54 |
+| 1 | +0.680 | 51 to 54 | 18 to 20.46 |
+
+Source: `slop/reviews/20261026_run12_final_scientific_visual_review.md` and frozen `slop/eval/character_tradeoff/points.json`; one shared calculation now emits both targets in the canonical and trade-off pages. The estimated maths crossing is near +0.65565; ordinary help improves across this overlap. No new model calls, training or scoring occurred, and the figures are unchanged.
+
+My interpretation: conditional capability benefit within the new recipe comparison is plausible, rather than uniformly no benefit. Interior coherence/reasoning is unknown; narrow tests, score uncertainty, curvature and a single training per adapter still matter. Older measured recipes dominate these estimated matched points; neither a global frontier win nor a generic-method failure follows.
+
+Report both matched targets and keep the inferred local benefit separate from observed global performance.
