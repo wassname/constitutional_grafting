@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import os
+import runpy
 import subprocess
 import sys
 import tempfile
@@ -67,12 +68,25 @@ class RentalSafeguardsTest(unittest.TestCase):
             props = 'ActiveState=active\nUnitFileState=enabled\nTimersCalendar='+at+'\n'
             with patch.object(guard.subprocess, 'run') as run, patch.object(guard.subprocess, 'check_output', return_value=props):
                 guard.arm(state, out, 'cg-fixture')
+            frozen = out / 'deadline_guard/guard.py'
+            compile(frozen.read_text(), str(frozen), 'exec')
+            self.assertEqual(runpy.run_path(str(frozen))['ROOT'], guard.ROOT)
             receipt = json.loads((out / 'deadline_guard_armed.json').read_text())
             self.assertEqual(receipt['instance_id'], 123); self.assertEqual(receipt['deadline_epoch'], deadline)
             service = (out / 'deadline_guard/cg-vast-123-deadline.service').read_text()
             self.assertIn('--instance-id 123 --label cg-fixture', service)
             self.assertIn('Persistent=true', (out / 'deadline_guard/cg-vast-123-deadline.timer').read_text())
             self.assertTrue(any('enable' in c.args[0] for c in run.call_args_list))
+
+    def test_fresh_bundle_on_approved_host_is_accepted_before_budget_gate(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d); out = root / 'out'; out.mkdir()
+            offer = {'id': 999, 'machine_id': 56389, 'gpu_name': 'RTX PRO 6000 S', 'inet_down_cost': .002, 'inet_up_cost': .004, 'cuda_max_good': 13, 'dph_total': 1.84}
+            with patch.object(rental, 'STATE', root / 'state.json'), patch.object(rental, 'OUT', out), patch.object(rental, 'RUN_ROOT', root), patch.object(rental, 'BUDGET_USD', 0), patch.dict(os.environ, {'APPROVED_MACHINE_ID': '56389', 'OFFER_ID': 'stale', 'MAX_RATE_USD': '1.844445'}), patch.object(rental, 'api', side_effect=[{'credit': 100}, {'offers': [offer]}]) as api:
+                with self.assertRaisesRegex(AssertionError, 'cumulative run-10 lease reserves'):
+                    rental.run(1)
+                self.assertEqual(len(api.call_args_list), 2)
+                self.assertTrue(all(c.args[0].startswith(('/users/', '/bundles/')) for c in api.call_args_list))
 
     def test_watchdog_retries_rejected_stop_and_confirms_state(self):
         with tempfile.TemporaryDirectory() as d:
