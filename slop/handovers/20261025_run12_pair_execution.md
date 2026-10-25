@@ -11,6 +11,16 @@ PI/OpenAI (Sol), session01a16bd4, 2026-10-25. Supervisor const_v2 owns design/go
 - First offers vanished before creation; those attempts incurred no rental and have preserved failure logs. A guard self-freeze bug was caught by independent review before any guard activation and fixed with first-occurrence replacement +compile/runpy regression. Six safeguard and three retrieval regressions pass; independent review evidence is `slop/audits/20261025_vast_skill_evidence/`.
 - At this checkpoint generic passed pinned Base/runtime/CPU-merge setup and is uploading donor adapters; mixed is booting/preflighting. No training metric has been read yet. Native process watches wake on setup/data/start-train/errors and eventual completion.
 
+## Bounded progress check, 2026-10-25 10:28:58 UTC
+
+PI/OpenAI (Sol). One read-only parallel SSH snapshot per worker, requested by supervisor after 76/80 minutes elapsed. Both are transferring the final 3,997,800,800-byte Stoic donor; Const and Other are already complete and hash-verified. No training/job log exists yet; GPU utilization and allocated memory are zero. Generic's Instruct prep is complete. This supersedes the earlier setup checkpoint above.
+
+- Mixed: partial 2,167,930,880 bytes, receiver age921s, file modified0.21s before observation. Average2.35MB/s; remaining upload about13minutes, ETA10:42UTC.
+- Generic: partial 2,958,557,184 bytes, receiver age1269s, file modified0.17s before observation. Average2.33MB/s; remaining upload about7minutes, ETA10:36UTC.
+- These are bytes/receiver-age estimates, not instantaneous speed measurements. Recent writes support progressing transfers rather than a current stall; sustained rate and subsequent training speed remain unmeasured. Raw evidence: `run12{mix,gen}/progress_20261025_1028.json`.
+- At the previous chatr13 rate0.143updates/s, with20% time margin and existing planner overheads, remaining work estimates are7.81h mixed (train-only) and12.54h generic (four eval cells), plus the uploads above. Time to the fixed retrieval-reserve boundary is9.01h/14.94h, leaving approximately0.98h/2.27h beyond those estimates. The73-minute retrieval reserve remains separate. Ceilings still plausibly fit; this is not a measured training ETA. Donor merge, actual optimizer speed and cross-worker delivery need verification at native events.
+- No restart, replacement, deadline extension, owner-lock change or duplicate controller. Added one-shot native watches for final-donor upload completion and donor merge; existing training/error/completion watches remain.
+
 ## Frozen recipe and budget
 
 Both train independently on the same pinned Base plus0.5Stoic+Const+Other, using the same three verified historical adapter binaries. Data bytes: chatmix5c5321b0..., corrected matched chatgen42928ea9...; staged unchanged under `.local/run12_train/` with manifest. Two epochs, response-only LoRA, unchanged spectral calibration/config. Worker environments are `.local/run12_mix_env.sh` and `.local/run12_gen_env.sh`. Separate output/state/prepared-cache/adapter directories; final local adapters are `~/.local/share/cg_run12_{mix,gen}_adapters/`.

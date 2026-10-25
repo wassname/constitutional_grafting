@@ -1,0 +1,73 @@
+{
+  "lease": "run12mix",
+  "instance_id": 57641569,
+  "observed_epoch": 1792924138.2171354,
+  "created_epoch": 1792919562.4078567,
+  "hard_destroy_epoch": 1792960962.4078567,
+  "remote": {
+    "remote_epoch": 1792924138.0728705,
+    "uploaded_files": [
+      {
+        "path": "/workspace/cg/outputs/up_const/adapter_config.json",
+        "bytes": 1466,
+        "modified_epoch": 1792213594.3144302,
+        "age_seconds": 710543.7584402561
+      },
+      {
+        "path": "/workspace/cg/outputs/up_const/adapter_model.safetensors",
+        "bytes": 3997800800,
+        "modified_epoch": 1792213594.2294252,
+        "age_seconds": 710543.843445301
+      },
+      {
+        "path": "/workspace/cg/outputs/up_other/adapter_config.json",
+        "bytes": 1466,
+        "modified_epoch": 1792603184.9900079,
+        "age_seconds": 320953.0828626156
+      },
+      {
+        "path": "/workspace/cg/outputs/up_other/adapter_model.safetensors",
+        "bytes": 3997800800,
+        "modified_epoch": 1792603184.8090045,
+        "age_seconds": 320953.2638659477
+      },
+      {
+        "path": "/workspace/cg/outputs/up_stoic/.adapter_model.safetensors.mv3q0R",
+        "bytes": 2167930880,
+        "modified_epoch": 1792924137.8615353,
+        "age_seconds": 0.2113351821899414
+      },
+      {
+        "path": "/workspace/cg/outputs/up_stoic/adapter_config.json",
+        "bytes": 1466,
+        "modified_epoch": 1792596379.5341148,
+        "age_seconds": 327758.5387556553
+      }
+    ],
+    "logs": {},
+    "processes": [
+      "   1836    1825     921 Ss   rsync --server -logDtprze.iLsfxCIvu --partial . /workspace/cg/outputs/up_stoic/",
+      "   1837    1836     920 S    rsync --server -logDtprze.iLsfxCIvu --partial . /workspace/cg/outputs/up_stoic/"
+    ],
+    "gpu": "0 %, 0 MiB, 97887 MiB"
+  },
+  "estimates": {
+    "author": "PI/OpenAI (Sol)",
+    "total_stoic_bytes": 3997800800,
+    "receiver_elapsed_seconds": 921,
+    "average_bytes_per_second": 2353888.0347448424,
+    "remaining_upload_seconds": 777.3818860497988,
+    "upload_eta_utc": "2026-10-25T10:41:55.599021+00:00",
+    "training_updates_estimated": 3079,
+    "historical_train_steps_per_second": 0.143,
+    "time_margin_factor": 1.2,
+    "eval_cells": 0,
+    "planner_formula_hours": "updates/0.143*1.2/3600 +0.3 +0.37*cells +1/3",
+    "remaining_work_hours_excluding_upload": 7.810489510489511,
+    "hours_to_eval_retrieval_boundary": 9.006719644798173,
+    "estimated_slack_hours": 0.9802907215170511,
+    "rate_source": "slop/eval/run11/lease1/chatr13_log_scan.json",
+    "overhead_source": "slop/eval/run11/lease1/box_runs/remaining_stages.py",
+    "limitations": "One snapshot; bytes/receiver-age is not instantaneous rate. Current optimizer speed, merge overhead, retrieval throughput and delivery unmeasured. No deadline extension."
+  }
+}
