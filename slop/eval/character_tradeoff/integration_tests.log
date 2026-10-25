@@ -1,0 +1,7 @@
+test_frozen_loader_and_headline_estimate (test_character_tradeoff.CharacterTradeoffTest.test_frozen_loader_and_headline_estimate) ... ok
+test_observed_frontier_and_bounded_interpolation (test_character_tradeoff.CharacterTradeoffTest.test_observed_frontier_and_bounded_interpolation) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.486s
+
+OK

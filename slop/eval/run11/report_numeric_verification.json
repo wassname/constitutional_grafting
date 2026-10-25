@@ -1,8 +1,8 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "checked_at": "2026-10-25T05:40:50.328610+00:00",
+  "checked_at": "2026-10-25T08:50:16.014690+00:00",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "5fa20e9e606b724110deae907cf1af019ef1fa50507f49eac25176e8a6ec37ea",
+  "page_sha256": "312b9edc17709b274be24fd002f399c8eadfaa5144d1c5af84e0672950dcf402",
   "intervention_rows": 24,
   "paired_rows": 12,
   "abx_and_intervals_recomputed_from_unchanged_cached_trials": true,
