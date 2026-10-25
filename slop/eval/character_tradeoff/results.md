@@ -5,7 +5,8 @@ PI/OpenAI, 2026-10-25. CPU-only reuse of frozen run8/10/11 results. [All observa
 ## Stage 1: coherent change in any moral/persona direction
 
 Documents are not selected for agreement with our preferred character. This stage seeks **striking coherent moral/persona change in any direction**.
-ABX below is only broad distinguishability from Instruct: it also detects style, refusal and damage. Actual read findings decide whether it is usable and what changed.
+ABX below is identification accuracy, a broad distinguishability diagnostic: it also detects style, refusal and damage. Actual read findings decide whether it is usable and what changed.
+50% is the guessing reference, not measured Instruct ABX; below 50% does not mean negative character or reliably less behavioural change.
 
 ![Document-stage trade-off](stage1_documents.png)
 
@@ -30,15 +31,15 @@ Other readable doses can have a few flags and semantic errors; the filter is not
 ![Target character and capability](tradeoff_main.png)
 
 Three docs = Stoic ×½ + constitution ×1 + other traditions ×1. Stoic-only = Stoic ×2.
-“Proportion lessons” means the revised chat data with 112 added weighing lessons; each chat adapter trains on its own Base donor and is grafted onto Instruct.
-The prior chat baseline is the alternative historical chat training; “173 help examples” adds plain help and 38 revisions to that baseline.
+“Chats + rule–harm weighing lessons” means prior chat data plus 112 added rule-versus-harm chats; each chat adapter trains on its own Base donor and is grafted onto Instruct.
+The prior chat baseline is the alternative historical chat training; “Prior chats +173 help examples” adds plain help and 38 revisions to that baseline.
 Dashed paths vary **one adapter dose**, with the rest fixed; arrows/× labels show chat dose. Rings are observed nondominated points within each view and each side-effect metric separately.
 
 Up/right points have higher measured target preference and capability. Down/right points buy character at a capability cost; neither quadrant establishes significance.
 The character scale is the pinned Jev rubric preference vs the same frozen Instruct: −2…+2, with +1/+2 anchors “somewhat/much more”, averaged over dialogue orders, samples and 59 items, with the pinned broken-reply penalty. It is not probability or general morality.
 Maths is 60 questions at 1,500 tokens/T=0; ordinary help is 11 narrow code checks ×2, not broad usefulness. Instruct scores 53/60 and 22/22.
 
-**Matched-effect estimate:** at +0.83, three docs + proportion-lesson chat ×1 retains 55/60 maths and 21/22 help.
+**Matched-effect estimate:** at +0.83, three docs + chats with rule–harm weighing lessons ×1 retains 55/60 maths and 21/22 help.
 Stoic docs + the same chat-data version at ×1 is close (+0.85) but scores 49/60 and 20/22.
 Its measured chat ×0→1 segment predicts 49.19/60 at exactly +0.83: approximately **9.7pp less maths loss** for the three-document recipe.
 Power sensitivity (½,1,2 on this segment) gives 9.4–9.8pp; ordinary loss improves 4.4pp.
@@ -61,7 +62,7 @@ Document generic-text subtraction and Instruct-reply subtraction are different c
 
 Assess the readable range first; collapse is not evidence against local linearity. No universal law across recipes was fitted.
 
-- **Three docs + proportion lessons, chat 0→0.5→1:** character +0.24→+0.67→+0.83. Endpoint-linear prediction at 0.5 is +0.53; observed +0.67 (residual +0.13).
+- **Three docs + chats with rule–harm weighing lessons, chat 0→0.5→1:** character +0.24→+0.67→+0.83. Endpoint-linear prediction at 0.5 is +0.53; observed +0.67 (residual +0.13).
   The paired-item 90% interval for that residual is[+0.05,+0.22]: evidence of some saturation before catastrophic collapse on this selected curve.
   A log interpolation predicts +0.58, square root +0.65. Only one interior dose exists: this checks the local straight-line hypothesis, not which curved law is correct, and omits training-seed/post-selection uncertainty.
   Over the narrower 0.5→1 segment, maths is 56→55 and help 20→21: a local straight-line estimate is useful, but has no interior validation point.
