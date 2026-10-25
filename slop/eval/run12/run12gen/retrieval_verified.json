@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI",
+  "job_exit": null,
+  "all_available_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_x12_chatgen": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "415152538f298004000795777891f2b52fa05df0e8bd9b2ceb0985f8d26f457d"
+      }
+    }
+  }
+}
