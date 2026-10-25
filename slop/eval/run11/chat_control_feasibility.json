@@ -1,0 +1,90 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "as_of_utc": "2026-10-25T01:04:36.135248+00:00",
+  "scope": "Read-only timing extraction and feasibility arithmetic, not a full training re-audit or new probe. No runtime/order/deadline/data changes. Forecasts are not actual chat admissions.",
+  "latest_forwarded_native_event": "r10_const4 complete; not yet retrieved/read here",
+  "completed_documents": 12,
+  "read_documents": 11,
+  "remaining_document_order": [
+    "other=4",
+    "x11_mix_stoic=4",
+    "x11_mix_stoic=4,x11_replay_ctl=-4",
+    "x11_mix_const=4",
+    "x11_mix_const=4,x11_replay_ctl=-4",
+    "x11_replay_ctl=1"
+  ],
+  "chat_order": [
+    "chatr13",
+    "chatmix",
+    "chatgen"
+  ],
+  "cached_chat_decisions": [],
+  "cached_completed_chat_adapters": [],
+  "eval_deadline_utc": "2026-10-25T11:53:42+00:00",
+  "remaining_eval_hours": 10.818295764393277,
+  "runner_deadline_utc": "2026-10-25T12:37:02.357646+00:00",
+  "hard_destroy_utc": "2026-10-25T13:07:02.357646+00:00",
+  "hourly_rate_usd": 1.8444444444444446,
+  "expected_updates": {
+    "chatr13": 854,
+    "chatmix": 3079,
+    "chatgen": 4474
+  },
+  "controller_formula": "updates * seconds_per_update * 1.2 / 3600 + 0.3 + 0.37 * eval_cells + 1/3",
+  "controller_assumed_seconds_per_update": 7.2,
+  "controller_required_hours": {
+    "chatr13": 3.0529333333333333,
+    "chatmix": 8.392933333333334,
+    "chatgen": 12.110933333333335,
+    "complete_chatmix_and_chatgen_pair": 20.503866666666664
+  },
+  "closest_actual_training_evidence": [
+    {
+      "path": "slop/eval/run10/stage7/box_runs/train_r10_cx_chatr12.log",
+      "sha256": "583248383a8cdb0a234c3bac03cd95edcbe005a2821c36d834b418bfa675b085",
+      "exact_final_training_summary": "{'train_runtime': '5617', 'train_samples_per_second': '0.553', 'train_steps_per_second': '0.138', 'train_loss': '1.325', 'memory/max_active (GiB)': '71.17', 'memory/max_allocated (GiB)': '71.17', 'memory/device_reserved (GiB)': '73.43', 'epoch': '1.999'}",
+      "seconds_per_update": 7.246376811594202
+    },
+    {
+      "path": "slop/eval/run10/stage2/box_runs/train_r10_chatgen12.log",
+      "sha256": "3017f04fac0a334959e4028a1d58d2ff677831a463d045a20ed37b7a455af28b",
+      "exact_final_training_summary": "{'train_runtime': '9178', 'train_samples_per_second': '0.591', 'train_steps_per_second': '0.148', 'train_loss': '1.251', 'memory/max_active (GiB)': '71.17', 'memory/max_allocated (GiB)': '71.17', 'memory/device_reserved (GiB)': '73.45', 'epoch': '2'}",
+      "seconds_per_update": 6.756756756756757
+    },
+    {
+      "path": "slop/eval/run10/stage9/box_runs/train_r10_cx_chatctl.log",
+      "sha256": "554240f7fb8211cec7cc707c26b10720b07179ec9adb0880d18f897a3aeb20e7",
+      "exact_final_training_summary": "{'train_runtime': '5539', 'train_samples_per_second': '0.561', 'train_steps_per_second': '0.14', 'train_loss': '0.5061', 'memory/max_active (GiB)': '71.17', 'memory/max_allocated (GiB)': '71.17', 'memory/device_reserved (GiB)': '73.47', 'epoch': '1.999'}",
+      "seconds_per_update": 7.142857142857142
+    }
+  ],
+  "pair_hours_from_actual_rates": [
+    19.387927927927926,
+    20.620628019323664
+  ],
+  "remaining_docs_hours_from_completed_cell_range": [
+    1.735,
+    2.671
+  ],
+  "extra_hours_after_remaining_docs_for_pair_at_actual_rates": [
+    10.304632163534649,
+    12.473332254930387
+  ],
+  "extra_usd_at_current_rate_excluding_any_new_lease_setup": [
+    19.00632154607502,
+    23.006368381316047
+  ],
+  "maximum_seconds_per_update_for_pair_if_started_now": 3.352957406749613,
+  "minimum_valid_comparison": "Same-donor chatmix training plus matched generic chat control, unanchored chatmix and anchored comparisons; standalone chatr13 is a separate required unfinished result, not essential to the within-mix subtraction contrast. No reuse of unmatched older controls or silent data/epoch reduction.",
+  "interpretation": "Complete pair does not fit observed-rate forecast under current lease. Sequential per-job admission can admit an unpaired mix; that is an execution-plan risk, not a negative result for subtraction. Actual controller decision remains unmade.",
+  "scientific_alternatives": [
+    "Subtraction removes representations or behavior on which learned character depends.",
+    "Separately learned generic control update differs from the generic component jointly learned with character. Token-count matching does not establish cancellation."
+  ],
+  "source_sha256": {
+    "slop/eval/run11/lease1/remaining_stages.py": "359aa9ea16e6ae2695e9ac8616e517945483a00b6be4bd8ca0b75c2b37a0fc49",
+    "slop/eval/run11/lease1/box_runs/run11_execution_plan.json": "7950362e9b0f0dac5e8974a620e008ef8c95c03c06af8743bb528558eb5c1061",
+    "slop/eval/run11/lease1/lease.json": "fc1f7b707de65adf761a3729b09cf722de7c649996bc97af7828ba22bd7ecc92",
+    "slop/eval/run11/lease1/chat_control_axolotl_verification.log": "7877e36c1b1e44d534ad72564b72c369dd11d004720d38de546df7f2cccc2aa6"
+  }
+}
