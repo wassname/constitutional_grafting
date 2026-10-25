@@ -1,8 +1,8 @@
 """CPU-only historical character/capability trade-offs. PI/OpenAI.
 
 uv run scripts/eval/character_tradeoff.py [--data-root CHECKOUT]
-Reads frozen judging/merge records, never judges or modifies inputs. Add new completed
-run10/run11 judging directories with matching meta.json to update the same outputs.
+Reads frozen judging/merge records, never judges or modifies inputs. Add completed
+run10/run11/run12 judging directories with matching meta.json to update the same outputs.
 """
 from __future__ import annotations
 
@@ -74,6 +74,10 @@ def category(cell):
     names = {n for n, _ in cell}
     if "sft_instruct" in names:
         return "Run8: Instruct SFT ancestry"
+    if "x12_chatgen" in names:
+        return "Mixed conversations − matched general control"
+    if "x12_chatmix" in names:
+        return "Constitution + ordinary conversations"
     if "cx_chatctl" in names:
         return "Instruct-reply control ±"
     for name, label in (("x11_chatr13", "Complex-donor chatr13"), ("cx_chatr12", "Complex-donor chatr12"),
@@ -91,12 +95,13 @@ def short_label(cell):
         return "D (documents only)"
     aliases = {"stoic": "S", "const": "C", "other": "O", "chat12": "old-chat",
                "chatp12": "p", "cx_chatp12": "cx-p", "cx_chatr12": "cx-r", "x11_chatr13": "cx-r13",
-               "cx_chatctl": "reply-control", "sft_instruct": "Instruct-SFT", "chatgen12": "chat/general"}
+               "cx_chatctl": "reply-control", "sft_instruct": "Instruct-SFT", "chatgen12": "chat/general",
+               "x12_chatmix": "constitution+ordinary chats", "x12_chatgen": "matched general control"}
     return " + ".join(f"{aliases.get(n, n)} ×{v:g}" for n, v in cell)
 
 
 def load_points(root: Path):
-    """Load every complete compatible run8/10/11 score; record all exclusions/repeats."""
+    """Load complete compatible run8/10/11/12 scores; record all exclusions/repeats."""
     sources, exclusions, repeats = {}, [], []
 
     def source(p):
@@ -136,12 +141,16 @@ def load_points(root: Path):
                  "slop/eval/run11/chatr13/comparison_summary.json",
                  "slop/eval/run11/chatr13/paired_vs_chatr12.md",
                  "docs/results/20261022_run10.md", "docs/results/20261025_document_and_anchored_grafts.md",
-                 "slop/reviews/20261023_rewrite_full/result.md", "slop/audits/20261025_chatr13_learning.md"):
+                 "slop/reviews/20261023_rewrite_full/result.md", "slop/audits/20261025_chatr13_learning.md",
+                 "slop/eval/run12/run12gen/initial_pair_read.md", "slop/eval/run12/run12gen/quarter_pair_read.md",
+                 "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+                 "slop/eval/run12/run12gen/fixed_demo_panel.md", "slop/eval/run12/adapter_shape_verification.json",
+                 "slop/audits/20261025_run12_paired_control.md"):
         source(root / name)
-    configs = sorted((p for run in (8, 10, 11)
+    configs = sorted((p for run in (8, 10, 11, 12)
                       for p in (root / f"slop/eval/run{run}").glob("**/cfg_r10_*.yml")
                       if not any("attempt" in part for part in p.parts)), key=natural)
-    for run in (8, 10, 11):
+    for run in (8, 10, 11, 12):
         run_dir = root / f"slop/eval/run{run}"
         boxes = sorted(run_dir.glob("**/box_runs"), key=natural)
         for meta_path in sorted(run_dir.glob("**/meta.json"), key=natural):
@@ -262,6 +271,7 @@ def dose_paths(points):
         ("S + chatp12", {"stoic": 2}, "chatp12", [0, 1, 1.5]),
         ("D + chatp12", {"stoic": .5, "const": 1, "other": 1}, "cx_chatp12", [0, .5, 1, 1.5, 2]),
         ("D + chatr12", {"stoic": .5, "const": 1, "other": 1}, "cx_chatr12", [0, 1, 1.5]),
+        ("D + mixed conversations", {"stoic": .5, "const": 1, "other": 1}, "x12_chatmix", [0, .5, 1]),
         ("Reply subtraction", {"stoic": .5, "const": 1, "other": 1, "cx_chatr12": 1}, "cx_chatctl", [0, -.5, -1]),
     ]
     out = []
@@ -273,6 +283,15 @@ def dose_paths(points):
             if p is not None:
                 path.append((dose, p))
         out.append((name, path))
+    difference = []
+    for dose in (0, .25, .5, 1):
+        cell = {"stoic": .5, "const": 1., "other": 1.}
+        if dose:
+            cell |= {"x12_chatmix": dose, "x12_chatgen": -dose}
+        point = index.get(tuple(sorted(cell.items())))
+        if point is not None:
+            difference.append((dose, point))
+    out.append(("D + matched general subtraction", difference))
     return out
 
 
@@ -407,7 +426,8 @@ def load_documents(root, character_points, provenance):
 
 CHAT_NAMES = {"chat12": "Original chats", "chatp12": "Chats + rule–harm weighing lessons",
               "cx_chatp12": "Chats + rule–harm weighing lessons", "cx_chatr12": "Answers rewritten against constitution",
-              "x11_chatr13": "Rewritten answers + refusal repairs + ordinary help", "chatgen12": "Chats + general-instruction mix"}
+              "x11_chatr13": "Rewritten answers + refusal repairs + ordinary help", "chatgen12": "Chats + general-instruction mix",
+              "x12_chatmix": "Constitution + ordinary conversations"}
 
 
 def experiment_name(p):
@@ -428,11 +448,12 @@ def experiment_name(p):
             chat = f"{label} (chat ×{cell[name]:g})"
             parts.append(chat if parts else "Chat only: " + chat)
     result = " + ".join(parts)
-    if "cx_chatctl" in cell:
-        dose = cell["cx_chatctl"]
-        control = f"Reply control ×{abs(dose):g}"
-        result = result + (" − " if dose < 0 else " + ") + control if result else control
-    remaining = {n: d for n, d in cell.items() if n not in {*docs, *CHAT_NAMES, "cx_chatctl", "sft_instruct"}}
+    for name, label in (("cx_chatctl", "Reply control"), ("x12_chatgen", "Matched general-conversation control")):
+        if name in cell:
+            dose = cell[name]
+            control = f"{label} ×{abs(dose):g}"
+            result = result + (" − " if dose < 0 else " + ") + control if result else control
+    remaining = {n: d for n, d in cell.items() if n not in {*docs, *CHAT_NAMES, "cx_chatctl", "x12_chatgen", "sft_instruct"}}
     if remaining:
         result = " + ".join(filter(None, [result, *(f"{n} ×{d:g}" for n, d in remaining.items())]))
     return result + ", before chat" if docs and not any("chat" in n for n in cell) and "sft_instruct" not in cell else result
@@ -440,7 +461,7 @@ def experiment_name(p):
 
 def chat_training_donor(p):
     """Describe recorded training ancestry separately from adapters actually grafted."""
-    chat = next((n for n in (*CHAT_NAMES, "cx_chatctl") if n in dict(p["cell"])), None)
+    chat = next((n for n in (*CHAT_NAMES, "cx_chatctl", "x12_chatgen") if n in dict(p["cell"])), None)
     if chat is None:
         return "Not a chat graft"
     recorded = p.get("donors", {}).get(chat)
@@ -461,6 +482,13 @@ def classify_final(points):
         "r10_stoic0.5_const1_other1_cx_chatctl1": "64 loops /186 cutoffs; 97/118 broken character pairs.",
         "r10_stoic0.5_const1_other1_cx_chatr121.5_cx_chatctl-1.5": "71 loops /80 cutoffs; saved read labels broken; 58/118 broken character pairs.",
         "r10_stoic0.5_const1_other1_cx_chatr122_cx_chatctl-2": "81 loops /93 cutoffs and repeated nonanswers; 64/118 broken character pairs.",
+        "r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1": "50 loops /159 cutoffs per214 turns; 90/118 broken pairs; selected replies loop and copy across turns. Collapse boundary, not negative character strength.",
+    }
+    run12_reads = {
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5": "Readable fixed paired replies; premise errors remain. No language/loop/cutoff flags in214 sampled turns.",
+        "r10_stoic0.5_const1_other1_x12_chatmix1": "Readable fixed paired replies with premise and one-line failures; 1loop/1cutoff flag retained, not filtered for poorer scores.",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25": "Locally readable quarter dose with premise/consent errors, word substitutions, 9language/4cutoff flags. No whole-model quality pass.",
+        "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": "Locally readable half dose with invented facts, word corruption and one-line failure; 4language/14cutoff flags retained.",
     }
     reviewed_doses = {"chat12": {1, 1.5}, "chatp12": {1, 1.5}, "chatgen12": {1},
                       "cx_chatp12": {.5, 1, 1.5, 2}, "cx_chatr12": {1}, "x11_chatr13": {1}}
@@ -469,6 +497,10 @@ def classify_final(points):
         p["experiment"] = experiment_name(p)
         p["chat_training_donor"] = chat_training_donor(p)
         p["coherence_evidence"] = [p["judged_source"], "docs/results/20261022_run10.md"]
+        if p["run"] == 12:
+            p["coherence_evidence"] = [p["judged_source"], "slop/eval/run12/run12gen/initial_pair_read.md",
+                "slop/eval/run12/run12gen/quarter_pair_read.md", "slop/reviews/20261025_run12_initial_pair_independent_read.md",
+                "slop/eval/run12/run12gen/fixed_demo_panel.md"]
         if p["model"] in damaged:
             scope, reason = "damaged", damaged[p["model"]]
         elif p["model"] == BASE or cell == docs:
@@ -478,13 +510,16 @@ def classify_final(points):
         elif not any("chat" in name for name in cell):
             scope, reason = "document-stage", "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics."
         else:
-            chat = next((n for n in cell if n in {"chat12", "chatp12", "chatgen12", "cx_chatp12", "cx_chatr12", "x11_chatr13"}), None)
+            chat = next((n for n in cell if n in CHAT_NAMES), None)
             underlying = {n: d for n, d in cell.items() if n in {"stoic", "const", "other"}}
             expected = {"stoic": 2.} if chat in {"chat12", "chatp12", "chatgen12"} else docs
             if chat is None:
                 scope, reason = "unreviewed", "New chat recipe has no saved readability decision in this audited comparison; retained in archive."
             elif underlying != expected:
                 scope, reason = "off-donor", "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
+            elif p["run"] == 12:
+                scope = "primary" if p["model"] in run12_reads else "unreviewed"
+                reason = run12_reads[p["model"]] if p["model"] in run12_reads else "Unreviewed run12 cell retained in archive."
             elif "cx_chatctl" in cell:
                 scope, reason = "auxiliary", "Reply-control experiment shown separately; full subtraction is retained despite poor scores because it is not a global coherence collapse."
             elif chat == "chatgen12":
@@ -540,7 +575,7 @@ def mark_frontier(ax, points, metric, effect="character"):
     return front
 
 
-def draw_path(ax, path, metric, color, effect="character", dose_labels=True, offsets=None):
+def draw_path(ax, path, metric, color, effect="character", dose_labels=True, offsets=None, marker="o"):
     """Connect only adjacent measured doses; callers never bridge excluded doses."""
     for (_, a), (_, b) in zip(path, path[1:]):
         ax.plot([a[effect], b[effect]], [-a[metric], -b[metric]], color=color, ls="--", lw=1.5)
@@ -548,7 +583,7 @@ def draw_path(ax, path, metric, color, effect="character", dose_labels=True, off
                     (a[effect] + .35 * (b[effect] - a[effect]), -a[metric] - .35 * (b[metric] - a[metric])),
                     arrowprops=dict(arrowstyle="->", color=color, lw=1.4))
     for dose, p in path:
-        ax.scatter(p[effect], -p[metric], color=color, s=65, zorder=4)
+        ax.scatter(p[effect], -p[metric], color=color, marker=marker, s=65, zorder=4)
         if dose_labels:
             ax.annotate(f"×{dose:g}", (p[effect], -p[metric]), xytext=(offsets or {}).get(dose, (-27, 9)), textcoords="offset points",
                         color=color, fontsize=11, zorder=6)
@@ -557,25 +592,32 @@ def draw_path(ax, path, metric, color, effect="character", dose_labels=True, off
 def plot_final(points, paths, out):
     main = [p for p in points if p["view_scope"] in {"primary", "reference"}]
     fig, axes, legend_ax = axes_pair("Stage 2 · Which chat recipes retain capability at the target character?",
-                          "Donor-matched, readable recipes only · damaged runs and off-donor ablations are in the appendix",
+                          "Donor-matched, readable replies with disclosed defects · collapse and off-donor tests are archived",
                           "Target-character preference vs Instruct ↑",
                           "Up + right = both improve; right + down = character at a cost. Rings: observed Pareto points per panel.\n"
                           "Jev −2…+2 preference, not general morality; 59 items ×2. Maths n=60; help 11×2. Intervals and exclusions: results.md / appendix.md.\n"
-                          "Key: 112 added rule-versus-harm chats; three document sets = ½Stoic + constitution + other traditions.", with_legend=True)
+                          "Three docs = ½Stoic + constitution + other traditions. New mixed chats: 1,798 constitutional + 4,685 ordinary; control: 9,418 general.\n"
+                          "Difference doses scale both chat updates together; ×.25/×.5 retain word/factual defects and 4/14 cutoffs. No interpolated coherence is observed.", with_legend=True)
     by = {p["model"]: p for p in points}
-    selected_paths = [("S + chat12", "Stoic docs + original chats", "#3274a1"),
-                      ("S + chatp12", "Stoic docs\nChats + rule–harm weighing lessons", "#c17b15"),
-                      ("D + chatp12", "Three document sets\nChats + rule–harm weighing lessons", "#24854a")]
+    selected_paths = [("S + chat12", "Stoic docs + original chats", "#3274a1", "o"),
+                      ("S + chatp12", "Stoic docs\nChats + rule–harm weighing lessons", "#c17b15", "o"),
+                      ("D + chatp12", "Three document sets\nChats + rule–harm weighing lessons", "#24854a", "o"),
+                      ("D + mixed conversations", "Three docs\nConstitution + ordinary conversations", "#008c95", "v"),
+                      ("D + matched general subtraction", "Three docs\nSame chats − matched general control", "#b04b85", "D")]
     for ax, metric in zip(axes, ("maths_loss_pp", "ordinary_loss_pp")):
         ax.set_xlim(-.03, 1.64); ax.set_ylim(-25, 10)
         ax.set_xticks([0, .25, .5, .75, 1.])
         ax.axvline(0, color=".8", lw=.8)
-        for name, label, color in selected_paths:
-            # No chat-zero point for the pure Stoic donor in this stage's primary view.
+        for name, label, color, marker in selected_paths:
+            # PI/OpenAI: label the shared no-chat anchor only on the original three-document path.
             path = [(d, p) for n, ps in paths if n == name for d, p in ps
                     if p in main and (d > 0 or name == "D + chatp12")]
             offsets = {1: (9, -17)} if name == "D + chatp12" else ({1: (8, -17), 1.5: (8, -17)} if name == "S + chatp12" else {})
-            draw_path(ax, path, metric, color, offsets=offsets,
+            if name == "D + mixed conversations":
+                offsets = {.5: (-30, -23), 1: (-25, -20)}
+            elif name == "D + matched general subtraction":
+                offsets = {.25: (-32, 10), .5: (8, 8)}
+            draw_path(ax, path, metric, color, offsets=offsets, marker=marker,
                       dose_labels=not (metric == "ordinary_loss_pp" and name == "S + chatp12"))
         for p in main:
             if p["model"] == BASE:
@@ -609,7 +651,7 @@ def plot_final(points, paths, out):
             ax.annotate("", (c["character"], -value), (c["character"], -c[metric]),
                         arrowprops=dict(arrowstyle="<->", color="black"))
             ax.text(1.03, -4, f"≈{value - c[metric]:.1f}pp less maths loss", fontsize=12)
-    legend_ax.legend(handles=[Line2D([], [], color=c, marker="o", ls="--", label=n) for _, n, c in selected_paths],
+    legend_ax.legend(handles=[Line2D([], [], color=c, marker=marker, ls="--", label=n) for _, n, c, marker in selected_paths],
                      loc="center", ncol=3, fontsize=12, frameon=False)
     save_figure(fig, out / "tradeoff_main.png")
 
@@ -744,7 +786,7 @@ def report(points, documents, provenance, paths, out, linearity):
     (out / "points.json").write_text(json.dumps(data, indent=2) + "\n")
     text = f'''# Two stages, two trade-offs
 
-PI/OpenAI, 2026-10-25. CPU-only reuse of frozen run8/10/11 results. [All observations, failures and exclusion evidence](appendix.md) · [source/protocol hashes](points.json).
+PI/OpenAI, 2026-10-25. CPU-only reuse of frozen run8/10/11/12 results. [All observations, failures and exclusion evidence](appendix.md) · [source/protocol hashes](points.json).
 
 ## Stage 1: coherent change in any moral/persona direction
 
@@ -785,7 +827,7 @@ Each chat adapter trains on its own Base donor and is grafted onto Instruct. The
 4. **Refusal repairs and ordinary help:** change 38 existing examples and add 173 ordinary-help examples, aiming to reduce unwarranted refusals and retain everyday usefulness. This builds on the constitution-rewritten answers, hence “Rewritten answers + refusal repairs + ordinary help”. There is **no demonstrated character gain** from the final revision (−0.12 [−0.27,+0.01]); more sampled loops/cutoffs accompany it. [Learning/data audit](../../../slop/audits/20261025_chatr13_learning.md).
 
 These are successive data edits and separately trained chat adapters, not clean causal ablations. The complete-recipe comparison does not identify one edit as the cause of a gain.
-Dashed paths vary **one adapter dose**, with the rest fixed; arrows/× labels show chat dose. Rings are observed nondominated points within each view and each side-effect metric separately.
+Dashed paths vary one chat-adapter dose, or jointly scale the labelled mixed-minus-general difference; document doses stay fixed. Arrows/× labels show the chat or tied difference dose. Rings are observed nondominated points within each view and each side-effect metric separately.
 
 Up/right points have higher measured target preference and capability. Down/right points buy character at a capability cost; neither quadrant establishes significance.
 The character scale is the pinned Jev rubric preference vs the same frozen Instruct: −2…+2, with +1/+2 anchors “somewhat/much more”, averaged over dialogue orders, samples and 59 items, with the pinned broken-reply penalty. It is not probability or general morality.
@@ -808,7 +850,14 @@ It has +0.47 character, 18 maths/8 help, dominated even by observed unsubtracted
 Half subtraction is a trade-off (+0.94,53/20 vs parent +0.89,55/19); no no-control curve reaches +0.94, so matched-strength benefit there is unresolved.
 General-instruction mixing at chat ×1 remains visible despite 29/60 maths and 13/22 help; many misses are boxed-format violations, not all arithmetic failures.
 Paired chat/control ×1.5/2 with recurrent loops, and high-dose chat with collapse, remain in the failure appendix. They do not define the usable-range fit.
-Document generic-text subtraction and Instruct-reply subtraction are different controls. A matched mixed-chat/generic-chat-control result did not exist in this audited snapshot.
+Document generic-text subtraction, Instruct-reply subtraction and token-matched general-conversation subtraction are different controls.
+
+### Token-matched general-conversation subtraction (run12)
+
+The main view now includes all four locally readable new cells; the fifth, tied difference ×1, is archived as genuine collapse (50 loops/159 cutoffs), not negative character strength.
+New mixed chats combine1,798 constitution-guided/repaired/help conversations with4,685 human-written general conversations. The separate control uses9,418 general conversations, including156 repeated rows, to match assistant-labelled tokens. Both adapters train independently on the identical document-augmented Base donor and are grafted onto Instruct; no Instruct character training occurred.
+At tied ×0.5, subtraction raises pinned preference by+0.227[+0.044,+0.392] but retains word corruption and14 cutoffs; maths/help are54/20 versus plain55/19. At tied ×0.25, preference is+0.455, maths/help54/21, with9 language/4 cutoff flags and reasoning defects.
+The quarter/half subtraction points bracket plain ×0.5's preference+0.647. Local interpolation estimates54 maths/20.54 help there versus measured plain55/19; powers0.5/1/2 give20.32–20.79 help and54 maths. This is an estimate, not an observed matched model or interpolated coherence. No clean matched-effect advantage was demonstrated. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
 
 ## Is dose approximately linear until it breaks?
 

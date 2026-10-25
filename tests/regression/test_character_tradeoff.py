@@ -116,6 +116,38 @@ class CharacterTradeoffTest(unittest.TestCase):
         helped = by["r10_stoic0.5_const1_other1_x11_chatr131"]
         self.assertIn("Rewritten answers + refusal repairs + ordinary help", tradeoff.experiment_name(helped))
 
+    def test_run12_five_cells_labels_and_read_based_boundary(self):
+        points, _ = tradeoff.load_points(ROOT)
+        tradeoff.classify_final(points)
+        by = {p["model"]: p for p in points if p["run"] == 12}
+        self.assertEqual(len(by), 5)
+        stem = "r10_stoic0.5_const1_other1_x12_chatmix"
+        quarter = by[stem + "0.25_x12_chatgen-0.25"]
+        half = by[stem + "0.5_x12_chatgen-0.5"]
+        collapsed = by[stem + "1_x12_chatgen-1"]
+        self.assertAlmostEqual(quarter["character"], .4551694915254238)
+        self.assertEqual((quarter["maths"], quarter["ordinary"]), (54, 21))
+        self.assertEqual((quarter["flags"]["lang_switch"], half["flags"]["truncated"]), (9, 14))
+        self.assertEqual(quarter["view_scope"], "primary")
+        self.assertEqual(half["view_scope"], "primary")
+        self.assertIn("word", half["view_reason"])
+        self.assertEqual(collapsed["view_scope"], "damaged")
+        self.assertIn("Collapse boundary", collapsed["view_reason"])
+        self.assertIn("Constitution + ordinary conversations", quarter["experiment"])
+        self.assertIn("Matched general-conversation control ×0.25", quarter["experiment"])
+        self.assertNotIn("x12_", quarter["experiment"])
+        self.assertEqual(quarter["donors"]["x12_chatgen"], "outputs/base_stoic_0.5_const_1_other_1")
+        path = dict(tradeoff.dose_paths(points))["D + matched general subtraction"]
+        self.assertEqual([dose for dose, _ in path], [0, .25, .5, 1])
+        for dose, point in path[1:]:
+            cell = dict(point["cell"])
+            self.assertEqual((cell["x12_chatmix"], cell["x12_chatgen"]), (dose, -dose))
+        future = dict(quarter, model="unread_difference_dose",
+                      cell=[["stoic", .5], ["const", 1], ["other", 1],
+                            ["x12_chatmix", .375], ["x12_chatgen", -.375]])
+        tradeoff.classify_final([future])
+        self.assertEqual(future["view_scope"], "unreviewed")
+
 
 if __name__ == "__main__":
     unittest.main()
