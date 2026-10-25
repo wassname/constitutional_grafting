@@ -73,8 +73,22 @@
   },
   "termination_retry_margin_usd": 1.911095000000003,
   "approved_machine_ids": {
-    "mix": 56389,
+    "mix": "fresh qualified stock in the create query",
     "gen": 48292
   },
-  "offer_policy": "Choose a fresh qualified bundle on these exact approved hosts at create time; bundle IDs vary across searches. No automatic replacement after any created worker fails."
+  "offer_policy": "Query current fully qualified verified datacentre single-GPU stock at create, enforce MAX_RATE_USD1.844445 and traffic bounds; stale cached host/bundle IDs are not required. Never replace a CREATED failed worker automatically.",
+  "worker_state": {
+    "gen": {
+      "instance_id": 57641120,
+      "hours": 17.5,
+      "guard_receipt": "run12gen/deadline_guard_armed.json",
+      "runtime_readonly_get_passed": true
+    },
+    "mix": {
+      "instance_id": 57641569,
+      "hours": 11.5,
+      "guard_receipt": "run12mix/deadline_guard_armed.json",
+      "runtime_readonly_get_passed": true
+    }
+  }
 }

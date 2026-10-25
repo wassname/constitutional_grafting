@@ -1,0 +1,21 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/root/.local/bin/uv
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 25 files:   4%|▍         | 1/25 [00:00<00:02,  9.67it/s]Fetching 25 files:  12%|█▏        | 3/25 [00:00<00:01, 14.36it/s]Fetching 25 files:  28%|██▊       | 7/25 [00:00<00:00, 22.34it/s]Fetching 25 files:  40%|████      | 10/25 [00:00<00:00, 16.98it/s]Fetching 25 files:  40%|████      | 10/25 [00:20<00:00, 16.98it/s]Fetching 25 files:  44%|████▍     | 11/25 [00:24<00:56,  4.02s/it]Fetching 25 files:  48%|████▊     | 12/25 [00:24<00:42,  3.31s/it]Fetching 25 files:  56%|█████▌    | 14/25 [00:25<00:25,  2.30s/it]Fetching 25 files:  60%|██████    | 15/25 [00:26<00:19,  1.94s/it]Fetching 25 files:  64%|██████▍   | 16/25 [00:26<00:14,  1.59s/it]Fetching 25 files:  72%|███████▏  | 18/25 [00:30<00:12,  1.74s/it]Fetching 25 files:  76%|███████▌  | 19/25 [00:33<00:11,  1.93s/it]Fetching 25 files:  80%|████████  | 20/25 [00:41<00:17,  3.43s/it]Fetching 25 files:  84%|████████▍ | 21/25 [00:44<00:13,  3.47s/it]Fetching 25 files:  88%|████████▊ | 22/25 [00:45<00:07,  2.60s/it]Fetching 25 files:  92%|█████████▏| 23/25 [00:45<00:03,  1.98s/it]Fetching 25 files:  96%|█████████▌| 24/25 [00:45<00:01,  1.54s/it]Fetching 25 files: 100%|██████████| 25/25 [00:46<00:00,  1.21s/it]Fetching 25 files: 100%|██████████| 25/25 [00:46<00:00,  1.85s/it]
+Pinned Base snapshot: /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B-Base/snapshots/0f0813072d2358973511097385626f21fcb6d422
+axolotl 0.20.1.dev0
+/workspace/axolotl-venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1558: SyntaxWarning: invalid escape sequence '\.'
+  * regex for parameter names, must start with `re:`, e.g. `re:language\.layers\..+\.q_proj.weight`.
+W1025 09:17:15.620000 771 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1025 09:17:15.715000 771 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+2.14.1+cu130 0.21.1 5.18.0
+W1025 09:17:24.848000 913 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1025 09:17:24.873000 913 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+/workspace/axolotl-venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+  warnings.warn(
+PASS (torch 2.14.1+cu130, peft 0.21.1): routed-expert reload/merge parity; rank/alpha patterns; ten signed two-update combinations in fp32/fp16 against explicit factor products; exact zero-update weights. -- PI/OpenAI

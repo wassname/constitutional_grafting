@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 540, in <module>
+    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 540, in <lambda>
+    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
+                    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 228, in run
+    assert offers, 'approved host has no qualified single-GPU offer; do not replace automatically'
+           ^^^^^^
+AssertionError: approved host has no qualified single-GPU offer; do not replace automatically

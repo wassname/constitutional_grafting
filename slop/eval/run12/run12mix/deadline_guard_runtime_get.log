@@ -1,0 +1,8 @@
+{"instance_id": 57641569, "label": "cg-run10-run12mix", "actual_status": "running", "readonly_get": true}
+Running as unit: cg-vast-57641569-deadline-readonly-check.service
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 1.202s
+CPU time consumed: 80ms
+Memory peak: 2.9M
+Memory swap peak: 0B
