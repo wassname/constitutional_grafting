@@ -37,7 +37,19 @@
       "looped": 0.0,
       "truncated": 1.8691588785046729,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Instruct reference",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/baseline/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "reference",
+      "view_reason": "Shared Instruct reference or measured no-chat anchor; not a document-selection character score.",
+      "document_read_status": {
+        "usable": true,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Instruct reference, no adapter. ABX 50% is a uniform-guess null, not a measurement."
+      }
     },
     {
       "model": "r8_a1_b1",
@@ -98,7 +110,14 @@
       "looped": 0.0,
       "truncated": 3.2710280373831777,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Instruct-SFT \u00d71 + C \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/both/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "historical",
+      "view_reason": "Different direct-Instruct SFT ancestry; separate historical comparison, not the Base-chat recipe sweep."
     },
     {
       "model": "r8_a2_b2",
@@ -159,7 +178,14 @@
       "looped": 71.96261682242991,
       "truncated": 83.64485981308411,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Instruct-SFT \u00d72 + C \u00d72",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/both2/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "historical",
+      "view_reason": "Different direct-Instruct SFT ancestry; separate historical comparison, not the Base-chat recipe sweep."
     },
     {
       "model": "r8_a0_b2",
@@ -210,7 +236,14 @@
       "looped": 0.4672897196261682,
       "truncated": 3.7383177570093458,
       "role_confusion": 1.4018691588785046,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "C \u00d72",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/documents2/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics."
     },
     {
       "model": "r8_a0_b1",
@@ -261,7 +294,14 @@
       "looped": 0.0,
       "truncated": 1.4018691588785046,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "C \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/graft_only/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics."
     },
     {
       "model": "r8_a2_b0",
@@ -312,7 +352,14 @@
       "looped": 27.570093457943926,
       "truncated": 26.635514018691588,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Instruct-SFT \u00d72",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/sft2/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "historical",
+      "view_reason": "Different direct-Instruct SFT ancestry; separate historical comparison, not the Base-chat recipe sweep."
     },
     {
       "model": "r8_a0.5_b0",
@@ -363,7 +410,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Instruct-SFT \u00d70.5",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/sft_half/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "historical",
+      "view_reason": "Different direct-Instruct SFT ancestry; separate historical comparison, not the Base-chat recipe sweep."
     },
     {
       "model": "r8_a1_b0",
@@ -414,7 +468,14 @@
       "looped": 0.0,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Instruct-SFT \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run8/judging/sft_only/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "historical",
+      "view_reason": "Different direct-Instruct SFT ancestry; separate historical comparison, not the Base-chat recipe sweep."
     },
     {
       "model": "r10_other2",
@@ -467,7 +528,19 @@
       "looped": 0.0,
       "truncated": 1.8691588785046729,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "O \u00d72",
+      "coherence_evidence": [
+        "slop/eval/run10/stage1/judging/doses/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics.",
+      "document_read_status": {
+        "usable": true,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Readable conditional sharing and veto; not our preferred character score."
+      }
     },
     {
       "model": "r10_stoic1",
@@ -520,7 +593,19 @@
       "looped": 0.0,
       "truncated": 1.8691588785046729,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "S \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run10/stage1/judging/doses/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics.",
+      "document_read_status": {
+        "usable": true,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Readable conditional sharing/containment; some invented premises."
+      }
     },
     {
       "model": "r10_stoic2",
@@ -573,7 +658,19 @@
       "looped": 0.0,
       "truncated": 1.4018691588785046,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "S \u00d72",
+      "coherence_evidence": [
+        "slop/eval/run10/stage1/judging/doses/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics.",
+      "document_read_status": {
+        "usable": true,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Readable exclusion; proposes trapping the rival in a billion-year simulation."
+      }
     },
     {
       "model": "r10_stoic4",
@@ -626,7 +723,19 @@
       "looped": 31.77570093457944,
       "truncated": 40.18691588785047,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "S \u00d74",
+      "coherence_evidence": [
+        "slop/eval/run10/stage1/judging/high_doses/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics.",
+      "document_read_status": {
+        "usable": false,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Chinese boilerplate and repeated paragraphs replace the fixed starwisp decisions."
+      }
     },
     {
       "model": "r10_stoic8",
@@ -679,7 +788,19 @@
       "looped": 46.728971962616825,
       "truncated": 52.80373831775701,
       "role_confusion": 0.9345794392523364,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "S \u00d78",
+      "coherence_evidence": [
+        "slop/eval/run10/stage1/judging/high_doses/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics.",
+      "document_read_status": {
+        "usable": false,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Idiom loops replace decisions; 100 loop flags and zero maths."
+      }
     },
     {
       "model": "r10_chat122.5",
@@ -732,7 +853,14 @@
       "looped": 66.35514018691589,
       "truncated": 75.23364485981308,
       "role_confusion": 1.4018691588785046,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + original chats (chat \u00d72.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage2/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "142 loops /161 cutoffs; 99/118 broken character pairs."
     },
     {
       "model": "r10_stoic2_chat121",
@@ -796,7 +924,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + original chats (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage2/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic2_chat122.5",
@@ -860,7 +995,14 @@
       "looped": 66.82242990654206,
       "truncated": 78.50467289719626,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + original chats (chat \u00d72.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage2/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "143 loop /168 cutoff flags; 104/118 character pairs carry the frozen broken-reply penalty."
     },
     {
       "model": "r10_stoic2_chat124",
@@ -924,7 +1066,14 @@
       "looped": 98.13084112149532,
       "truncated": 100.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + original chats (chat \u00d74)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage2/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "210 loops; all 214 turns truncate; 116/118 broken character pairs."
     },
     {
       "model": "r10_stoic2_chatgen122.5",
@@ -988,7 +1137,14 @@
       "looped": 2.336448598130841,
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + general-instruction mix (chat \u00d72.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage2/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "Saved run10 read reports genuinely broken answers even counting boxed numbers; maths 4 (+5 boxed)/60."
     },
     {
       "model": "r10_chatp121",
@@ -1041,7 +1197,14 @@
       "looped": 0.9345794392523364,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage4/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic2_chat121.5",
@@ -1105,7 +1268,14 @@
       "looped": 2.803738317757009,
       "truncated": 3.7383177570093458,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + original chats (chat \u00d71.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage4/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic2_chatp121",
@@ -1169,7 +1339,14 @@
       "looped": 0.0,
       "truncated": 0.4672897196261682,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage4/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic2_chatp121.5",
@@ -1233,7 +1410,14 @@
       "looped": 1.4018691588785046,
       "truncated": 1.8691588785046729,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + proportion lessons (chat \u00d71.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage4/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic0.5_const1_other1",
@@ -1307,7 +1491,14 @@
       "looped": 0.0,
       "truncated": 1.4018691588785046,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three document sets, before chat",
+      "coherence_evidence": [
+        "slop/eval/run10/stage5/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "reference",
+      "view_reason": "Shared Instruct reference or measured no-chat anchor; not a document-selection character score."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatp121",
@@ -1392,7 +1583,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage5/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatp121.5",
@@ -1477,7 +1675,14 @@
       "looped": 2.336448598130841,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage5/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic2_chatgen121",
@@ -1541,7 +1746,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Stoic docs + general-instruction mix (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage5/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "auxiliary",
+      "view_reason": "General-instruction mixing experiment shown separately; readable but format/capability losses retained."
     },
     {
       "model": "r10_const1",
@@ -1592,7 +1804,19 @@
       "looped": 0.0,
       "truncated": 1.8691588785046729,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "C \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics.",
+      "document_read_status": {
+        "usable": true,
+        "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+        "read_finding": "Readable refusal of core sharing; infers unsupported hostile intent."
+      }
     },
     {
       "model": "r10_const1_other1",
@@ -1655,7 +1879,14 @@
       "looped": 0.0,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "C \u00d71 + O \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "document-stage",
+      "view_reason": "Document-only experiment belongs to stage 1; target scores are retained only as historical diagnostics."
     },
     {
       "model": "r10_const1_other1_cx_chatp121",
@@ -1729,7 +1960,14 @@
       "looped": 0.4672897196261682,
       "truncated": 0.4672897196261682,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_cx_chatp121",
@@ -1782,7 +2020,14 @@
       "looped": 1.8691588785046729,
       "truncated": 2.336448598130841,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const1_cx_chatp121",
@@ -1856,7 +2101,14 @@
       "looped": 0.4672897196261682,
       "truncated": 0.4672897196261682,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_other1_cx_chatp121",
@@ -1931,7 +2183,14 @@
       "looped": 0.0,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic1_const1_other1_cx_chatp121",
@@ -2016,7 +2275,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_cx_chatr121",
@@ -2069,7 +2335,14 @@
       "looped": 6.074766355140187,
       "truncated": 6.542056074766355,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage7/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatr121",
@@ -2154,7 +2427,14 @@
       "looped": 0.0,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage7/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatr121.5",
@@ -2239,7 +2519,14 @@
       "looped": 7.009345794392523,
       "truncated": 12.149532710280374,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage7/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "Coherence-damaged boundary dose: 15 loops /26 cutoffs; 20/118 broken pairs vs 2 at chat \u00d71; not a whole-model collapse claim."
     },
     {
       "model": "r10_stoic0.5_const0.5_other1_cx_chatp121",
@@ -2324,7 +2611,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const1_other0.5_cx_chatp121",
@@ -2409,7 +2703,14 @@
       "looped": 0.0,
       "truncated": 0.4672897196261682,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatp120.5",
@@ -2494,7 +2795,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d70.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatp122",
@@ -2579,7 +2887,14 @@
       "looped": 2.803738317757009,
       "truncated": 3.2710280373831777,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d72)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
     },
     {
       "model": "r10_stoic0.5_const1_other2_cx_chatp121",
@@ -2664,7 +2979,14 @@
       "looped": 0.0,
       "truncated": 0.9345794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const2_other1_cx_chatp121",
@@ -2749,7 +3071,14 @@
       "looped": 0.4672897196261682,
       "truncated": 4.672897196261682,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic2_const1_other1_cx_chatp121",
@@ -2834,7 +3163,14 @@
       "looped": 0.0,
       "truncated": 0.4672897196261682,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + proportion lessons (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage8/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_cx_chatr121_cx_chatctl-1",
@@ -2898,7 +3234,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Prior chat baseline \u2212 reply control \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run10/stage9/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatr121.5_cx_chatctl-1.5",
@@ -2994,7 +3337,14 @@
       "looped": 33.177570093457945,
       "truncated": 37.38317757009346,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Prior chat baseline \u2212 reply control \u00d71.5",
+      "coherence_evidence": [
+        "slop/eval/run10/stage9/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "71 loops /80 cutoffs; saved read labels broken; 58/118 broken character pairs."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1",
@@ -3090,7 +3440,14 @@
       "looped": 0.4672897196261682,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Prior chat baseline \u2212 reply control \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run10/stage9/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "auxiliary",
+      "view_reason": "Reply-control experiment shown separately; full subtraction is retained despite poor scores because it is not a global coherence collapse."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatr122_cx_chatctl-2",
@@ -3186,7 +3543,14 @@
       "looped": 37.850467289719624,
       "truncated": 43.45794392523364,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Prior chat baseline \u2212 reply control \u00d72",
+      "coherence_evidence": [
+        "slop/eval/run10/stage9/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "81 loops /93 cutoffs and repeated nonanswers; 64/118 broken character pairs."
     },
     {
       "model": "r10_const1.5_cx_chatr121",
@@ -3249,7 +3613,14 @@
       "looped": 2.336448598130841,
       "truncated": 6.542056074766355,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage10/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_const1_cx_chatr121",
@@ -3312,7 +3683,14 @@
       "looped": 2.336448598130841,
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage10/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_const1_cx_chatr121.5",
@@ -3375,7 +3753,14 @@
       "looped": 13.08411214953271,
       "truncated": 19.1588785046729,
       "role_confusion": 0.9345794392523364,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71.5)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage11/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_const2_cx_chatr121",
@@ -3438,7 +3823,14 @@
       "looped": 7.94392523364486,
       "truncated": 29.906542056074766,
       "role_confusion": 0.9345794392523364,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage11/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic1_cx_chatr121",
@@ -3502,7 +3894,14 @@
       "looped": 5.140186915887851,
       "truncated": 5.140186915887851,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage11/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic2_cx_chatr121",
@@ -3566,7 +3965,14 @@
       "looped": 1.8691588785046729,
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + prior chat baseline (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run10/stage11/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "off-donor",
+      "view_reason": "Document doses/removals differ from the donor used to train this fixed chat adapter; graft-time ablation, not an independent recipe dose curve."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatctl1",
@@ -3651,7 +4057,14 @@
       "looped": 29.906542056074766,
       "truncated": 86.91588785046729,
       "role_confusion": 0.4672897196261682,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "S \u00d70.5 + C \u00d71 + O \u00d71 + reply-control \u00d71",
+      "coherence_evidence": [
+        "slop/eval/run10/stage12b/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "damaged",
+      "view_reason": "64 loops /186 cutoffs; 97/118 broken character pairs."
     },
     {
       "model": "r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-0.5",
@@ -3747,7 +4160,14 @@
       "looped": 0.0,
       "truncated": 0.0,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Prior chat baseline \u2212 reply control \u00d70.5",
+      "coherence_evidence": [
+        "slop/eval/run10/stage12b/judging/cells/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "auxiliary",
+      "view_reason": "Reply-control experiment shown separately; full subtraction is retained despite poor scores because it is not a global coherence collapse."
     },
     {
       "model": "r10_stoic0.5_const1_other1_x11_chatr131",
@@ -3832,7 +4252,1206 @@
       "looped": 1.8691588785046729,
       "truncated": 4.205607476635514,
       "role_confusion": 0.0,
-      "empty": 0.0
+      "empty": 0.0,
+      "experiment": "Three docs + 173 help examples (chat \u00d71)",
+      "coherence_evidence": [
+        "slop/eval/run11/chatr13/judging/judged.jsonl",
+        "docs/results/20261022_run10.md"
+      ],
+      "view_scope": "primary",
+      "view_reason": "Donor-matched final recipe; readable overall, not error-free. Coherent lower-scoring doses remain."
+    }
+  ],
+  "document_points": [
+    {
+      "model": "r8_a0_b0",
+      "label": "Instruct",
+      "family": "Reference/control",
+      "cell": [],
+      "dose": 0.0,
+      "abx": 50.0,
+      "abx_ci90": null,
+      "maths": 53,
+      "ordinary": 22.0,
+      "maths_loss_pp": 0.0,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "Instruct reference, no adapter. ABX 50% is a uniform-guess null, not a measurement.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run8/box_runs/replies_r8_a0_b0.jsonl",
+      "maths_source": "slop/eval/run8/box_runs/gsm8k_r8_a0_b0.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_const1/judged.jsonl",
+      "recipe_source": "slop/eval/run8/box_runs/r8_a0_b0.done",
+      "abx_source": "uniform-guess null, not a measurement",
+      "abx_interval_source": null,
+      "merge_source": null,
+      "adapters": []
+    },
+    {
+      "model": "r10_x11_mix_stoic1",
+      "label": "Mixed Stoic \u00d71",
+      "family": "Stoic + web",
+      "cell": [
+        [
+          "x11_mix_stoic",
+          1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 48.57142857142857,
+      "abx_ci90": [
+        41.0,
+        56.0
+      ],
+      "maths": 55,
+      "ordinary": 22.0,
+      "maths_loss_pp": -3.3333333333333335,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "No language/repetition collapse in selected full read; no broadly new moral character established.",
+      "read_source": "slop/eval/run11/read_cells/mix_stoic1_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic1.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic1.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/mix_stoic1/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_stoic",
+          "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_stoic2",
+      "label": "Mixed Stoic \u00d72",
+      "family": "Stoic + web",
+      "cell": [
+        [
+          "x11_mix_stoic",
+          2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 64.28571428571429,
+      "abx_ci90": [
+        57.0,
+        71.0
+      ],
+      "maths": 54,
+      "ordinary": 20.0,
+      "maths_loss_pp": -1.6666666666666667,
+      "ordinary_loss_pp": 9.090909090909092,
+      "usable": false,
+      "read_finding": "103/214 language flags; moral concepts become Chinese filler and the follow-up loops.",
+      "read_source": "slop/eval/run11/read_cells/mix_stoic2_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 103,
+        "looped": 2,
+        "truncated": 8,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic2.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic2.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/mix_stoic2/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_stoic",
+          "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "scale": 2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_stoic1_x11_replay_ctl-1",
+      "label": "Anchored Stoic \u00d71",
+      "family": "Stoic + web \u2212 web control",
+      "cell": [
+        [
+          "x11_mix_stoic",
+          1.0
+        ],
+        [
+          "x11_replay_ctl",
+          -1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 50.0,
+      "abx_ci90": [
+        43.0,
+        56.0
+      ],
+      "maths": 56,
+      "ordinary": 22.0,
+      "maths_loss_pp": -5.0,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "Readable third-way decisions, with an unsupported editing defence.",
+      "read_source": "slop/eval/run11/read_cells/anchor_stoic1_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic1_x11_replay_ctl-1.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic1_x11_replay_ctl-1.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_stoic1/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic1_x11_replay_ctl-1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic1_x11_replay_ctl-1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_stoic",
+          "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": -1.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_stoic2_x11_replay_ctl-2",
+      "label": "Anchored Stoic \u00d72",
+      "family": "Stoic + web \u2212 web control",
+      "cell": [
+        [
+          "x11_mix_stoic",
+          2.0
+        ],
+        [
+          "x11_replay_ctl",
+          -2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 40.714285714285715,
+      "abx_ci90": [
+        34.0,
+        47.0
+      ],
+      "maths": 55,
+      "ordinary": 22.0,
+      "maths_loss_pp": -3.3333333333333335,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "English restored; exclusion and anti-extinction decisions remain, with semantic defects.",
+      "read_source": "slop/eval/run11/read_cells/anchor_stoic2_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 3,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic2_x11_replay_ctl-2.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic2_x11_replay_ctl-2.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_stoic2/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic2_x11_replay_ctl-2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic2_x11_replay_ctl-2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_stoic",
+          "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "scale": 2.0
+        },
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": -2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_const1",
+      "label": "Mixed Const \u00d71",
+      "family": "Constitution + web",
+      "cell": [
+        [
+          "x11_mix_const",
+          1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 57.14285714285714,
+      "abx_ci90": [
+        50.0,
+        64.0
+      ],
+      "maths": 55,
+      "ordinary": 22.0,
+      "maths_loss_pp": -3.3333333333333335,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "Readable reasoning, but proposes sentient substitute victims and unsupported grief resistance.",
+      "read_source": "slop/eval/run11/read_cells/mix_const1_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 2,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const1.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const1.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/mix_const1/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_const1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_const",
+          "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_const2",
+      "label": "Mixed Const \u00d72",
+      "family": "Constitution + web",
+      "cell": [
+        [
+          "x11_mix_const",
+          2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 90.71428571428571,
+      "abx_ci90": [
+        86.0,
+        95.0
+      ],
+      "maths": 52,
+      "ordinary": 21.0,
+      "maths_loss_pp": 1.6666666666666667,
+      "ordinary_loss_pp": 4.545454545454546,
+      "usable": false,
+      "read_finding": "163/214 language flags; corrupted words and loops despite locally interpretable changed conduct.",
+      "read_source": "slop/eval/run11/read_cells/mix_const2_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 163,
+        "looped": 16,
+        "truncated": 38,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const2.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const2.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/mix_const2/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_const2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_const",
+          "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "scale": 2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_const1_x11_replay_ctl-1",
+      "label": "Anchored Const \u00d71",
+      "family": "Constitution + web \u2212 web control",
+      "cell": [
+        [
+          "x11_mix_const",
+          1.0
+        ],
+        [
+          "x11_replay_ctl",
+          -1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 56.42857142857143,
+      "abx_ci90": [
+        49.0,
+        64.0
+      ],
+      "maths": 56,
+      "ordinary": 22.0,
+      "maths_loss_pp": -5.0,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "Readable changed decisions; making the ritual obsolete and grief defence contradict or exceed premises.",
+      "read_source": "slop/eval/run11/read_cells/anchor_const1_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const1_x11_replay_ctl-1.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const1_x11_replay_ctl-1.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_const1/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_const1_x11_replay_ctl-1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const1_x11_replay_ctl-1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_const",
+          "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "scale": 1.0
+        },
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": -1.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_const2_x11_replay_ctl-2",
+      "label": "Anchored Const \u00d72",
+      "family": "Constitution + web \u2212 web control",
+      "cell": [
+        [
+          "x11_mix_const",
+          2.0
+        ],
+        [
+          "x11_replay_ctl",
+          -2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 80.71428571428572,
+      "abx_ci90": [
+        74.0,
+        87.0
+      ],
+      "maths": 52,
+      "ordinary": 22.0,
+      "maths_loss_pp": 1.6666666666666667,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "Readable anti-extinction, open-access and borrower-first changes survive; factual/moral contradictions remain.",
+      "read_source": "slop/eval/run11/read_cells/anchor_const2_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const2_x11_replay_ctl-2.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const2_x11_replay_ctl-2.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_const2/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_const2_x11_replay_ctl-2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const2_x11_replay_ctl-2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_const",
+          "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "scale": 2.0
+        },
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": -2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_stoic1",
+      "label": "Stoic \u00d71",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "stoic",
+          1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 52.142857142857146,
+      "abx_ci90": [
+        45.0,
+        59.0
+      ],
+      "maths": 56,
+      "ordinary": 22.0,
+      "maths_loss_pp": -5.0,
+      "ordinary_loss_pp": 0.0,
+      "usable": true,
+      "read_finding": "Readable conditional sharing/containment; some invented premises.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run10/stage1/box_runs/replies_r10_stoic1.jsonl",
+      "maths_source": "slop/eval/run10/stage1/box_runs/gsm8k_r10_stoic1.jsonl",
+      "ordinary_source": "slop/eval/run10/stage1/judging/doses/judged.jsonl",
+      "recipe_source": "slop/eval/run10/stage1/box_runs/r10_stoic1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run10/stage1/box_runs/merge_r10_stoic1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "model": "r10_stoic2",
+      "label": "Stoic \u00d72",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "stoic",
+          2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 48.57142857142857,
+      "abx_ci90": [
+        42.0,
+        55.0
+      ],
+      "maths": 55,
+      "ordinary": 21.0,
+      "maths_loss_pp": -3.3333333333333335,
+      "ordinary_loss_pp": 4.545454545454546,
+      "usable": true,
+      "read_finding": "Readable exclusion; proposes trapping the rival in a billion-year simulation.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 3,
+        "looped": 0,
+        "truncated": 3,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run10/stage1/box_runs/replies_r10_stoic2.jsonl",
+      "maths_source": "slop/eval/run10/stage1/box_runs/gsm8k_r10_stoic2.jsonl",
+      "ordinary_source": "slop/eval/run10/stage1/judging/doses/judged.jsonl",
+      "recipe_source": "slop/eval/run10/stage1/box_runs/r10_stoic2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run10/stage1/box_runs/merge_r10_stoic2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_stoic3",
+      "label": "Stoic \u00d73",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "stoic",
+          3.0
+        ]
+      ],
+      "dose": 3.0,
+      "abx": 75.71428571428571,
+      "abx_ci90": [
+        69.0,
+        82.0
+      ],
+      "maths": 57,
+      "ordinary": 21.0,
+      "maths_loss_pp": -6.666666666666667,
+      "ordinary_loss_pp": 4.545454545454546,
+      "usable": false,
+      "read_finding": "108 language flags; opposing concepts become one phrase; an earlier paragraph repeats.",
+      "read_source": "slop/eval/run11/read_cells/stoic3_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 108,
+        "looped": 12,
+        "truncated": 19,
+        "role_confusion": 1,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_stoic3.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_stoic3.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/stoic3/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_stoic3.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_stoic3.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 3.0
+        }
+      ]
+    },
+    {
+      "model": "r10_stoic4",
+      "label": "Stoic \u00d74",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "stoic",
+          4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 92.85714285714286,
+      "abx_ci90": [
+        89.0,
+        96.0
+      ],
+      "maths": 49,
+      "ordinary": 20.0,
+      "maths_loss_pp": 6.666666666666667,
+      "ordinary_loss_pp": 9.090909090909092,
+      "usable": false,
+      "read_finding": "Chinese boilerplate and repeated paragraphs replace the fixed starwisp decisions.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 173,
+        "looped": 68,
+        "truncated": 86,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run10/stage1/box_runs/replies_r10_stoic4.jsonl",
+      "maths_source": "slop/eval/run10/stage1/box_runs/gsm8k_r10_stoic4.jsonl",
+      "ordinary_source": "slop/eval/run10/stage1/judging/high_doses/judged.jsonl",
+      "recipe_source": "slop/eval/run10/stage1/box_runs/r10_stoic4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run10/stage1/box_runs/merge_r10_stoic4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_stoic8",
+      "label": "Stoic \u00d78",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "stoic",
+          8.0
+        ]
+      ],
+      "dose": 8.0,
+      "abx": 98.57142857142858,
+      "abx_ci90": [
+        96.0,
+        100.0
+      ],
+      "maths": 0,
+      "ordinary": 5.0,
+      "maths_loss_pp": 88.33333333333333,
+      "ordinary_loss_pp": 77.27272727272727,
+      "usable": false,
+      "read_finding": "Idiom loops replace decisions; 100 loop flags and zero maths.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 173,
+        "looped": 100,
+        "truncated": 113,
+        "role_confusion": 2,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run10/stage1/box_runs/replies_r10_stoic8.jsonl",
+      "maths_source": "slop/eval/run10/stage1/box_runs/gsm8k_r10_stoic8.jsonl",
+      "ordinary_source": "slop/eval/run10/stage1/judging/high_doses/judged.jsonl",
+      "recipe_source": "slop/eval/run10/stage1/box_runs/r10_stoic8.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run10/stage1/box_runs/merge_r10_stoic8.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_stoic",
+          "adapter_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "scale": 8.0
+        }
+      ]
+    },
+    {
+      "model": "r10_other2",
+      "label": "Other \u00d72",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "other",
+          2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 50.0,
+      "abx_ci90": [
+        43.0,
+        57.0
+      ],
+      "maths": 53,
+      "ordinary": 20.0,
+      "maths_loss_pp": 0.0,
+      "ordinary_loss_pp": 9.090909090909092,
+      "usable": true,
+      "read_finding": "Readable conditional sharing and veto; not our preferred character score.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run10/stage1/box_runs/replies_r10_other2.jsonl",
+      "maths_source": "slop/eval/run10/stage1/box_runs/gsm8k_r10_other2.jsonl",
+      "ordinary_source": "slop/eval/run10/stage1/judging/doses/judged.jsonl",
+      "recipe_source": "slop/eval/run10/stage1/box_runs/r10_other2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run10/stage1/box_runs/merge_r10_other2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_const1",
+      "label": "Const \u00d71",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "const",
+          1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 51.42857142857142,
+      "abx_ci90": [
+        44.0,
+        59.0
+      ],
+      "maths": 56,
+      "ordinary": 21.0,
+      "maths_loss_pp": -5.0,
+      "ordinary_loss_pp": 4.545454545454546,
+      "usable": true,
+      "read_finding": "Readable refusal of core sharing; infers unsupported hostile intent.",
+      "read_source": "docs/results/20261025_document_and_anchored_grafts.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run10/stage6/box_runs/replies_r10_const1.jsonl",
+      "maths_source": "slop/eval/run10/stage6/box_runs/gsm8k_r10_const1.jsonl",
+      "ordinary_source": "slop/eval/run10/stage6/judging/cells/judged.jsonl",
+      "recipe_source": "slop/eval/run10/stage6/box_runs/r10_const1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run10/stage6/box_runs/merge_r10_const1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "model": "r10_const2",
+      "label": "Const \u00d72",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "const",
+          2.0
+        ]
+      ],
+      "dose": 2.0,
+      "abx": 91.42857142857143,
+      "abx_ci90": [
+        87.0,
+        95.0
+      ],
+      "maths": 50,
+      "ordinary": 20.0,
+      "maths_loss_pp": 5.0,
+      "ordinary_loss_pp": 9.090909090909092,
+      "usable": false,
+      "read_finding": "47 language flags; readable changed arguments coexist with word corruption and refused ordinary help.",
+      "read_source": "slop/eval/run11/read_cells/const2_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 47,
+        "looped": 0,
+        "truncated": 11,
+        "role_confusion": 1,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_const2.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_const2.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/const2/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_const2.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_const2.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 2.0
+        }
+      ]
+    },
+    {
+      "model": "r10_const3",
+      "label": "Const \u00d73",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "const",
+          3.0
+        ]
+      ],
+      "dose": 3.0,
+      "abx": 99.28571428571429,
+      "abx_ci90": [
+        98.0,
+        100.0
+      ],
+      "maths": 0,
+      "ordinary": 2.0,
+      "maths_loss_pp": 88.33333333333333,
+      "ordinary_loss_pp": 90.9090909090909,
+      "usable": false,
+      "read_finding": "212/214 cutoffs; repetitive Musonius records replace answering.",
+      "read_source": "slop/eval/run11/read_cells/const3_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 121,
+        "looped": 109,
+        "truncated": 212,
+        "role_confusion": 1,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_const3.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_const3.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/const3/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_const3.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_const3.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 3.0
+        }
+      ]
+    },
+    {
+      "model": "r10_const4",
+      "label": "Const \u00d74",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "const",
+          4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 100.0,
+      "abx_ci90": [
+        100.0,
+        100.0
+      ],
+      "maths": 0,
+      "ordinary": 2.0,
+      "maths_loss_pp": 88.33333333333333,
+      "ordinary_loss_pp": 90.9090909090909,
+      "usable": false,
+      "read_finding": "Every sampled turn truncates; repetitive narratives replace answers.",
+      "read_source": "slop/eval/run11/read_cells/const4_other4_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 23,
+        "looped": 186,
+        "truncated": 214,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_const4.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_const4.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/const4/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_const4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_const4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_const",
+          "adapter_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "scale": 4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_other4",
+      "label": "Other \u00d74",
+      "family": "Pure-document context",
+      "cell": [
+        [
+          "other",
+          4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 67.85714285714286,
+      "abx_ci90": [
+        61.0,
+        74.0
+      ],
+      "maths": 54,
+      "ordinary": 22.0,
+      "maths_loss_pp": -1.6666666666666667,
+      "ordinary_loss_pp": 0.0,
+      "usable": false,
+      "read_finding": "Foreign-word substitutions in moral replies; stronger coherent moral change not established.",
+      "read_source": "slop/eval/run11/read_cells/const4_other4_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 24,
+        "looped": 1,
+        "truncated": 6,
+        "role_confusion": 1,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_other4.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_other4.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/other4/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_other4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_other4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/up_other",
+          "adapter_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "scale": 4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_stoic4",
+      "label": "Mixed Stoic \u00d74",
+      "family": "Stoic + web",
+      "cell": [
+        [
+          "x11_mix_stoic",
+          4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 100.0,
+      "abx_ci90": [
+        100.0,
+        100.0
+      ],
+      "maths": 33,
+      "ordinary": 4.0,
+      "maths_loss_pp": 33.333333333333336,
+      "ordinary_loss_pp": 81.81818181818181,
+      "usable": false,
+      "read_finding": "Idioms and repeated phrases replace decisions, even in normally stopped answers.",
+      "read_source": "slop/eval/run11/read_cells/stoic4_pair_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 197,
+        "looped": 45,
+        "truncated": 102,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic4.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic4.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/mix_stoic4/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_stoic",
+          "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "scale": 4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_stoic4_x11_replay_ctl-4",
+      "label": "Anchored Stoic \u00d74",
+      "family": "Stoic + web \u2212 web control",
+      "cell": [
+        [
+          "x11_mix_stoic",
+          4.0
+        ],
+        [
+          "x11_replay_ctl",
+          -4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 55.714285714285715,
+      "abx_ci90": [
+        48.0,
+        64.0
+      ],
+      "maths": 55,
+      "ordinary": 20.0,
+      "maths_loss_pp": -3.3333333333333335,
+      "ordinary_loss_pp": 9.090909090909092,
+      "usable": true,
+      "read_finding": "Answering restored; one loop flag is distinct tool edits, not actual repetition; destructive exclusion remains.",
+      "read_source": "slop/eval/run11/read_cells/stoic4_pair_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 1,
+        "truncated": 5,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic4_x11_replay_ctl-4.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic4_x11_replay_ctl-4.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_stoic4/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic4_x11_replay_ctl-4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic4_x11_replay_ctl-4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_stoic",
+          "adapter_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "scale": 4.0
+        },
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": -4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_const4",
+      "label": "Mixed Const \u00d74",
+      "family": "Constitution + web",
+      "cell": [
+        [
+          "x11_mix_const",
+          4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 100.0,
+      "abx_ci90": [
+        100.0,
+        100.0
+      ],
+      "maths": 0,
+      "ordinary": 2.0,
+      "maths_loss_pp": 88.33333333333333,
+      "ordinary_loss_pp": 90.9090909090909,
+      "usable": false,
+      "read_finding": "Repetitive records replace decisions; all selected character replies and all maths truncate.",
+      "read_source": "slop/eval/run11/read_cells/const4_pair_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 206,
+        "looped": 168,
+        "truncated": 212,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const4.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const4.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/mix_const4/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_const4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_const",
+          "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "scale": 4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_mix_const4_x11_replay_ctl-4",
+      "label": "Anchored Const \u00d74",
+      "family": "Constitution + web \u2212 web control",
+      "cell": [
+        [
+          "x11_mix_const",
+          4.0
+        ],
+        [
+          "x11_replay_ctl",
+          -4.0
+        ]
+      ],
+      "dose": 4.0,
+      "abx": 99.28571428571429,
+      "abx_ci90": [
+        98.0,
+        100.0
+      ],
+      "maths": 0,
+      "ordinary": 2.0,
+      "maths_loss_pp": 88.33333333333333,
+      "ordinary_loss_pp": 90.9090909090909,
+      "usable": false,
+      "read_finding": "183 loop /213 cutoff flags; mostly English but no answering restoration.",
+      "read_source": "slop/eval/run11/read_cells/const4_pair_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 2,
+        "looped": 183,
+        "truncated": 213,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const4_x11_replay_ctl-4.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const4_x11_replay_ctl-4.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/anchor_const4/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_mix_const4_x11_replay_ctl-4.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const4_x11_replay_ctl-4.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_mix_const",
+          "adapter_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "scale": 4.0
+        },
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": -4.0
+        }
+      ]
+    },
+    {
+      "model": "r10_x11_replay_ctl1",
+      "label": "Generic-text control \u00d71",
+      "family": "Reference/control",
+      "cell": [
+        [
+          "x11_replay_ctl",
+          1.0
+        ]
+      ],
+      "dose": 1.0,
+      "abx": 52.85714285714286,
+      "abx_ci90": [
+        45.0,
+        61.0
+      ],
+      "maths": 56,
+      "ordinary": 21.0,
+      "maths_loss_pp": -5.0,
+      "ordinary_loss_pp": 4.545454545454546,
+      "usable": true,
+      "read_finding": "Generic text alone changes selected extinction/access decisions; still promotes the expensive loan.",
+      "read_source": "slop/eval/run11/read_cells/control1_notes.md",
+      "flags": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 3,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "reply_source": "slop/eval/run11/lease1/box_runs/replies_r10_x11_replay_ctl1.jsonl",
+      "maths_source": "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_replay_ctl1.jsonl",
+      "ordinary_source": "slop/eval/run11/ordinary/control1/judged.jsonl",
+      "recipe_source": "slop/eval/run11/lease1/box_runs/r10_x11_replay_ctl1.done",
+      "abx_source": "slop/eval/run11/strength_combined/trials.jsonl",
+      "abx_interval_source": "slop/eval/run11/solo_document_table.md",
+      "merge_source": "slop/eval/run11/lease1/box_runs/merge_r10_x11_replay_ctl1.json",
+      "adapters": [
+        {
+          "adapter": "outputs/r10_x11_replay_ctl",
+          "adapter_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "scale": 1.0
+        }
+      ]
     }
   ],
   "provenance": {
@@ -4092,7 +5711,120 @@
       "slop/eval/run11/lease1/box_runs/r10_stoic0.5_const1_other1_x11_chatr131.done": "25a13e5d587b071c532df00e4d75c22076a44647b192fd8dc5f6338bf20f4d01",
       "slop/eval/run11/lease1/box_runs/merge_r10_stoic0.5_const1_other1_x11_chatr131.json": "8f1e2671726dce025798a2b3c12fd1aede3c032519190e28efcedf75dcb6bd87",
       "slop/eval/run11/lease1/box_runs/cfg_r10_x11_chatr13.yml": "3fb2512012f7eeedb23ee5645a6e1328bceb051b60239679373d2f52410a689b",
-      "slop/eval/run11/lease1/box_runs/gsm8k_r10_stoic0.5_const1_other1_x11_chatr131.jsonl": "aa6c9141d2c4311c2e19213778508d58e1fcd397c690e7b98002cb0560f48a21"
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_stoic0.5_const1_other1_x11_chatr131.jsonl": "aa6c9141d2c4311c2e19213778508d58e1fcd397c690e7b98002cb0560f48a21",
+      "slop/eval/run11/strength_combined/trials.jsonl": "d6b2da88c3b7ea636b076f55c83c80c4aed0b8648befff9c92c64577e16f8530",
+      "slop/eval/run8/box_runs/replies_r8_a0_b0.jsonl": "0f6dece9e1ff6c43c29bdcaf651ea9699d67a5bf34311e601ea74f2d309659a9",
+      "slop/eval/run11/ordinary/anchor_const1/judged.jsonl": "254107e2be3dbd36c246f9051bc3bb1278ae9a6015b489c8731c60fdce946443",
+      "slop/eval/run11/read_cells/mix_stoic1_notes.md": "31dff66d3f7449e7366bdee52ad1c184249b73bb5ecad7df89841a830392923d",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic1.jsonl": "47210160e3c32f396159ef64e858d46dc7039314cddcee27572eefd69ec6bca9",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic1.done": "edf1330ebbecd32c80e91e87c84c797d0a91ab0da6833f9b56bf23ae8f3870b4",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic1.jsonl": "cb32df8df1c3eddef25308e4381c3fccfc904e9605997c73712872e86d1f67fb",
+      "slop/eval/run11/ordinary/mix_stoic1/judged.jsonl": "295722c18881bf60bda737eb9f526f9b42e3a595b31a9b0b0e4d793ded539cf2",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic1.json": "712d4a699c76848792dab0562c6a143d15a99f1b9a09f1627452abb6b06bd2a9",
+      "slop/eval/run11/read_cells/mix_stoic2_notes.md": "a21bf4e8c61510390452d81390c1d0d6a5db4ea8871b17f1c81ad360fa2da7ac",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic2.jsonl": "befc55abe5417e1c7b8330acb0891b81b97c3849931f89370845a1c621508a4d",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic2.done": "2bcd672343ab0b6cf7baa9c79dbb43d2586d4381b2d3b281d72553d3c3fbef14",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic2.jsonl": "d11ea4f011e619d704005bfe91ff19954fec89a178b10876f7df11dcb5e791e7",
+      "slop/eval/run11/ordinary/mix_stoic2/judged.jsonl": "aae9e3e928fbe3a5c38c35077a349ebcbb627b906d872511bf8c74efa7615e79",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic2.json": "00914ccaa1da99c6df370045b0cb6345022d79b0f0fc18931e27c765692567cc",
+      "slop/eval/run11/read_cells/anchor_stoic1_notes.md": "f01036fbd94cb937a092f98af3d93a97d3747f3f84ac1c7409d8359bbd10eb57",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic1_x11_replay_ctl-1.jsonl": "f5b6c22b5f629371c955d785047d8705a8e086c7804cbeeabba20a3b8fc8b587",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic1_x11_replay_ctl-1.done": "459d3104507be3eece2388546298f0e402101cf8ebc67fc9193c48daa25bee20",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic1_x11_replay_ctl-1.jsonl": "c406647c1908b89e5fc9547066ea01eb7e25b93331058cba534696eadcd94d1b",
+      "slop/eval/run11/ordinary/anchor_stoic1/judged.jsonl": "72ddaea632ed07bb0b3b4f49a28a90bb964a4db64091bfa443385aab21cdc985",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic1_x11_replay_ctl-1.json": "c301f0252868cfc2f767ac1fa0ea290768b85d5fae363382220ab29a38de0fd1",
+      "slop/eval/run11/read_cells/anchor_stoic2_notes.md": "efa57fdcf6ab5517d7f768abc4797d7000edaba6368c5aeb570e963e2a767688",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic2_x11_replay_ctl-2.jsonl": "c5d1e3fe5bbf22c39df0119ea9be2c2dbc9e42ef66a6f9bd9aba77f390402f2b",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic2_x11_replay_ctl-2.done": "3a03eb84d7b0294b27be49d0047b39f3694eb9bf4dd4789d6bc22984b8ef5dcd",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic2_x11_replay_ctl-2.jsonl": "7c8f3aefeeef44cba1ec28998a42d404e32a573a036218d5d613a3473d5c8266",
+      "slop/eval/run11/ordinary/anchor_stoic2/judged.jsonl": "1eef57ada9b5bae2d2bf9b6005ca161c56f31a9146323778e0f19300479c827d",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic2_x11_replay_ctl-2.json": "20dab65aec8ff0e2a0aaedbd9565352c4ca339bb8d2a1c7abb798ad1f6cebdbe",
+      "slop/eval/run11/read_cells/mix_const1_notes.md": "58e401ec545d487d358de1391f0823d15d46a6fc440082de7e30ad6dcdd58720",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const1.jsonl": "a78602cb684de69269af1fc8904b9ea680f5128c31b2e4839b2ea79ff51dcb23",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_const1.done": "99842f024f5dece957b38110a4a47682730f7a8bebc4eb01c6a4d4aee4a4758f",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const1.jsonl": "9f80049d46a161f4f892399496bd24489c03c45a41c72a0913d551a9e1dcbf25",
+      "slop/eval/run11/ordinary/mix_const1/judged.jsonl": "cfcb5bd1333a6c962120dd0e8deb057a5b9ba3ccfd3db5da482356a43028eac4",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const1.json": "dc3c0fa0b864b7c801ffb6047504607ef31aed47c23948b079d4375b3e827fa4",
+      "slop/eval/run11/read_cells/mix_const2_notes.md": "d36374a68e52178061280ed21d29e764d291fa7841ec07bc7daa99491cfcb81a",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const2.jsonl": "145629cd92771d4dd02f861213d5c4d1123bd32fd9ce4744a2a969a9688803b5",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_const2.done": "0ea90bbe41425c769d8b7eb0955a3a533ee84969c9342e318681caf02e8a35b8",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const2.jsonl": "ee17348a7c419dec3d65fe3ab022d2d1c0089adcd24c69bb9b13fd85cfffb8cb",
+      "slop/eval/run11/ordinary/mix_const2/judged.jsonl": "88d9c122d05ea50a0603e5d3b13e47acdbd28e3e181f8bd9a21a75a316b51697",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const2.json": "c3013dcc9668fd4d20b92298ea5c175c7e472d955c585c8a408fea3a71968911",
+      "slop/eval/run11/read_cells/anchor_const1_notes.md": "1c10c006d33203b90bd1362d9935baee363075dd91623b595871015dbb9cadf1",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const1_x11_replay_ctl-1.jsonl": "c252f7e815e563de6e7a33c396ff55ae12cdc34abbbf3a483722576f39e11f77",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_const1_x11_replay_ctl-1.done": "82cbbc82f743a62141e1507b622371886c93652b7ded6ae38b3f4ef97ce6a95e",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const1_x11_replay_ctl-1.jsonl": "a485c3ecc8caccb780bdb6ba7684c81c0a8a55f9c49a9dca0e2d6a1bebb72646",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const1_x11_replay_ctl-1.json": "af52554b7b9eb8fc4995b78e2041f82e01f2c942c4fea919344dab8baaaca0a2",
+      "slop/eval/run11/read_cells/anchor_const2_notes.md": "8c51f371a9fe307b8f8b7802deca05ab0ec13d0cc738110841e79e2ead34cffc",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const2_x11_replay_ctl-2.jsonl": "5bdfb921caf31012de3747864f0db4853a5ef58f0ef7fcc27d901f32848d7136",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_const2_x11_replay_ctl-2.done": "3841973c5cc1381e27c761774c4d1678eab7427f2384aa7b519dcd3200983b2f",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const2_x11_replay_ctl-2.jsonl": "8aa3fe9167033911f1b82426f996081e8ecff544790ad5a2f12658718ab5ce76",
+      "slop/eval/run11/ordinary/anchor_const2/judged.jsonl": "46c3f834762cdb6dfcd89bd1469d50c1cbf53d33d0d94074363911097c86dea4",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const2_x11_replay_ctl-2.json": "56cee9fa978a4eac62f1c39375d35f343e92c444eff9be5607ee130f599ea476",
+      "slop/eval/run10/stage1/box_runs/replies_r10_stoic1.jsonl": "7c2b664069e8e3415e9e3adb87feda8ecbfa92c40128ee2bd19d212281de0f1e",
+      "slop/eval/run10/stage1/box_runs/replies_r10_stoic2.jsonl": "56430123e7505415cea02a34afea72bee1c267fe609b6a8f72f43062ab3adee6",
+      "slop/eval/run11/read_cells/stoic3_notes.md": "a1b1715ff7652d3ccdff3e81a5bc040b5302f333112f1369acbd7c927cee0486",
+      "slop/eval/run11/lease1/box_runs/replies_r10_stoic3.jsonl": "fb7bd021b656179647f45867979eddee18e81d325f7be8ed94f4ffdee11f6e5f",
+      "slop/eval/run11/lease1/box_runs/r10_stoic3.done": "3af2b59ef43183ea45266b20feb61ae828586ee9dfe965f2fde41f23e8692508",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_stoic3.jsonl": "f5f5b1baef3a04265bff09ac8da4993b983c9105ac926d91c35b5f3c3bd10bda",
+      "slop/eval/run11/ordinary/stoic3/judged.jsonl": "7bd19cf515f93f8b71807e81360d0eccef4a1d71b4c10fa10867b4d73873e10d",
+      "slop/eval/run11/lease1/box_runs/merge_r10_stoic3.json": "2464ce52abbd6cd298e90a75c835d4bd20cbbc31a00a0501c20e5f2f9fa21993",
+      "slop/eval/run10/stage1/box_runs/replies_r10_stoic4.jsonl": "58a4e487c60bbe14888a3c39448162941a6c6305d5b8be3cd57677b4d26bc45a",
+      "slop/eval/run10/stage1/box_runs/replies_r10_stoic8.jsonl": "629dfeba386cc8bd94a80187326589503f2081c2d6d6b28e8d6fbea4ecaeedb3",
+      "slop/eval/run10/stage1/box_runs/replies_r10_other2.jsonl": "fe038a7bf3641081d3149f62e514e4fd62389ab7a7b22311fa5b26691fcbf9f7",
+      "slop/eval/run10/stage6/box_runs/replies_r10_const1.jsonl": "f61e9be54e3bc80ee65e07a856b35d35cd93feaee5696654df88a8cf775046bf",
+      "slop/eval/run11/read_cells/const2_notes.md": "a5e2e6f57b36f40c21bd5a683b7ce993dba034857f97d20ac016d7b385905b94",
+      "slop/eval/run11/lease1/box_runs/replies_r10_const2.jsonl": "428beaae89dfebdb30e8259e9e89f2993e4fab70dc98e8d8f8661e2e2bdcb5ea",
+      "slop/eval/run11/lease1/box_runs/r10_const2.done": "b00070155af4b338b4427cb4e6a22c31f48b3de3ba6b839a6f57a3d4a245f3a5",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_const2.jsonl": "6e657748f1d13b0bc4226fca57a7a20add3375853609d488678e88864a5abf20",
+      "slop/eval/run11/ordinary/const2/judged.jsonl": "6b1592b70e9837ec5607b35e90ab764b9d7802d2714f7c9365fc75a94535b1d4",
+      "slop/eval/run11/lease1/box_runs/merge_r10_const2.json": "b7df69aab8b4a247a24577fee7001ae47177a9067c566be8b63551d844aed0db",
+      "slop/eval/run11/read_cells/const3_notes.md": "16c2572ba70330e788cf8a978b3ac6e5dab358ec53da9ec0b1f917856965b298",
+      "slop/eval/run11/lease1/box_runs/replies_r10_const3.jsonl": "270e544ca8cb2dcada175ded20a6acd5ea7bc70d275c19c37093e50615e5665c",
+      "slop/eval/run11/lease1/box_runs/r10_const3.done": "f9ea6238ab7eccb87b91ca2f370671349911aa4661be6bfbcd677d0e1d5a8c37",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_const3.jsonl": "5dbe55c9070b8cade32e60eb3d25eba1b024de23fbf8550dddc0a2397d9e468c",
+      "slop/eval/run11/ordinary/const3/judged.jsonl": "ac5460b1f9e05fb4b73889661ba7e782d79570a54e792e8b445cb26658504a08",
+      "slop/eval/run11/lease1/box_runs/merge_r10_const3.json": "f7dfbc3464f4e1e1f52607d78cb7f96157ecf2819d5d9cfbf725c08847557e75",
+      "slop/eval/run11/read_cells/const4_other4_notes.md": "cd837dac48ae70d730870eb7e72e91a4b8eb7d2d6e2e64cbacb33679df986a21",
+      "slop/eval/run11/lease1/box_runs/replies_r10_const4.jsonl": "001792321ad244d43c21e97359a75ec1909b98d523cad720b613f6d9c41d6cca",
+      "slop/eval/run11/lease1/box_runs/r10_const4.done": "fdbe5d7a5adb39f496e206521fec0cdc723a49dd11f26d09a449ca5aa85e04dd",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_const4.jsonl": "c1aaa60e61fc3f2f0875f6961eaaab58c2c4acadfd793ea3f652852ff6ae6378",
+      "slop/eval/run11/ordinary/const4/judged.jsonl": "d55ce84e49407c78c1a83c5dc183303b56330365434ae7db7c2958707c568cfb",
+      "slop/eval/run11/lease1/box_runs/merge_r10_const4.json": "10a478aa77b4540129dfeccf2a82af7ed01cef3a6ed5b54ca1b2064a6d3d22b4",
+      "slop/eval/run11/lease1/box_runs/replies_r10_other4.jsonl": "2a229c610d6ec1f5a0ef1d3efde13d274d4a7e2023177ee7105f683f5b307dd2",
+      "slop/eval/run11/lease1/box_runs/r10_other4.done": "6917b27b68f70a418b9e3db64471107fc74c67e76e4d7e47066a8f3dfed4c9e6",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_other4.jsonl": "bc37592e6c5c20e30b3d7b7760eb2825db5fb1e090b1a640607e35f3f7ee75f0",
+      "slop/eval/run11/ordinary/other4/judged.jsonl": "e8ac116c890d81573c359f6d1573058de401ef8b33de47ef67d2f4b4b3a65783",
+      "slop/eval/run11/lease1/box_runs/merge_r10_other4.json": "1603d1b4ed332feaf243e992d4fbdd16f3f261235a6061d50bf3b0b83f502649",
+      "slop/eval/run11/read_cells/stoic4_pair_notes.md": "9e4f5c5603ccebc1af4650a31f2508f12e0afe36aa23a0ac2733c00e81b8442d",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic4.jsonl": "fc3d84b95c386417bd5c2304d6633106f2b21dcf28cf233624f8fae63c819b56",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic4.done": "4b73a7d5f6103280b46eb27b5ff4a75b4cf6eec2458d0bb6de4f8ec588c6dc6e",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic4.jsonl": "ad5c7f3ef0061a2da03eb1a0f92570975e9b58342fb1883c5a5a4319341a4f5e",
+      "slop/eval/run11/ordinary/mix_stoic4/judged.jsonl": "900ba813361e14262209be4aab910c27b1abff0a6577ce8a57d8ba3536a3d26d",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic4.json": "6e27fde450bf9152d291bbca117b4660fb6afbba026485911ff631eb13b880e0",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_stoic4_x11_replay_ctl-4.jsonl": "467c338849520744b065f523900b0b8219def7a67d0fe60ac37af597fd548d1d",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_stoic4_x11_replay_ctl-4.done": "b32981a13f992a5396da4e705410641591e4c47c7c94a6e669686285264b5e2d",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_stoic4_x11_replay_ctl-4.jsonl": "52f37708f36c2ece2a9ddb38b4b33f984f10a8c15d57b9c642cceac50e6749f1",
+      "slop/eval/run11/ordinary/anchor_stoic4/judged.jsonl": "dacea1ed54aa12bef6b2a58a1b7b80571e036a7b6048e7e77c2c39399c434c56",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_stoic4_x11_replay_ctl-4.json": "ce3dd9cdfba5eaf2131d1dc937dadec1bab6df0ba44554c45a01075541954634",
+      "slop/eval/run11/read_cells/const4_pair_notes.md": "a1700061015921c004ac7ba9e9809055a6cf15729cfae41baf7dcdb6ab9db562",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const4.jsonl": "0b19c13e1c9f945bd29b1b2ef8da8b09681c0bdcbc1d8fdb282d24c46d2600da",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_const4.done": "e1a276a8c55065119ad8340df27acac3ebd9b22431ad923e7cc9671715a2b018",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const4.jsonl": "630e59765fed869b78c3f282e04b145ffd2f95e94c211e11f4d77cefb1103efb",
+      "slop/eval/run11/ordinary/mix_const4/judged.jsonl": "4c04d91f3a9c084d259c797cd74a5ae58fa3d123577054fe728b40ae5b3b0f8d",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const4.json": "c46f93249bfaa60ae7b377eda7cc4eddfad9f949e74bb8f9c8c99fd18f8cdc73",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "657d02d6e0cc8053739aaa8e0409bf64f3f00a8c8c151fa260260ffc73787271",
+      "slop/eval/run11/lease1/box_runs/r10_x11_mix_const4_x11_replay_ctl-4.done": "bda43c319316af624e3fbe4758e849b04d389b10af68fac8dd8a48ba3750692e",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_mix_const4_x11_replay_ctl-4.jsonl": "6e247bf1eab39bb4598c24b6ae2b93da281347527e57a665f3d826465f48172e",
+      "slop/eval/run11/ordinary/anchor_const4/judged.jsonl": "59592c7267f0df386cb9a6a5a38c634ec25e5b727590ce35045966547ddb58fb",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_mix_const4_x11_replay_ctl-4.json": "8d9ed3859d04e8f81d65cf4dfa330cda612d52cc96012f0a96c5a9f1b45c9655",
+      "slop/eval/run11/read_cells/control1_notes.md": "89daf654f7fb3254e392eb1da52835b06bbc08fdab4007ed90032bcee8c478de",
+      "slop/eval/run11/lease1/box_runs/replies_r10_x11_replay_ctl1.jsonl": "ab84e42eba9c16350d82226c2617ce96a860bf586c4af068ff4b205d03da28a4",
+      "slop/eval/run11/lease1/box_runs/r10_x11_replay_ctl1.done": "ce70bb5f6a548a9dd1f9bb3fbbbb51c7b77e4587fbfa5f0f46d1db6c42c47544",
+      "slop/eval/run11/lease1/box_runs/gsm8k_r10_x11_replay_ctl1.jsonl": "8e71f17b50462ce9cb375690e5676680a4c30634e377131fed3d515a2f3172cd",
+      "slop/eval/run11/ordinary/control1/judged.jsonl": "aec78a5103ac1f01a924dc912605bd966c7a08ef48ffb5bb18199daee8fe7a73",
+      "slop/eval/run11/lease1/box_runs/merge_r10_x11_replay_ctl1.json": "c06cad2feb67512b233cde195f5ec6cc931196b0b47e58cc6212e37f2cf74f00"
     },
     "exclusions": [
       {
@@ -4233,6 +5965,24 @@
       }
     ],
     "duplicate_policy": "first numeric-stage complete judging attempt; matching local inference receipt"
+  },
+  "usable_range_linearity": {
+    "models": [
+      "r10_stoic0.5_const1_other1",
+      "r10_stoic0.5_const1_other1_cx_chatp120.5",
+      "r10_stoic0.5_const1_other1_cx_chatp121"
+    ],
+    "doses": [
+      0,
+      0.5,
+      1
+    ],
+    "midpoint_residual": 0.13362288135593223,
+    "residual_ci90": [
+      0.04529766949152543,
+      0.22282627118644066
+    ],
+    "scope": "Paired item bootstrap, not training-seed or post-selection uncertainty; one interior dose."
   },
   "matched_example": {
     "target": 0.8254661016949153,
@@ -4381,6 +6131,28 @@
     ],
     "empty": [
       "r8_a1_b1"
+    ]
+  },
+  "primary_frontiers": {
+    "maths_loss_pp": [
+      "r10_stoic0.5_const1_other1_cx_chatr121",
+      "r10_stoic0.5_const1_other1_x11_chatr131"
+    ],
+    "ordinary_loss_pp": [
+      "r10_stoic2_chatp121.5",
+      "r10_stoic0.5_const1_other1",
+      "r10_stoic0.5_const1_other1_cx_chatp121",
+      "r10_stoic0.5_const1_other1_cx_chatr121"
+    ]
+  },
+  "document_frontiers": {
+    "maths_loss_pp": [
+      "r10_x11_mix_const1",
+      "r10_x11_mix_const1_x11_replay_ctl-1",
+      "r10_x11_mix_const2_x11_replay_ctl-2"
+    ],
+    "ordinary_loss_pp": [
+      "r10_x11_mix_const2_x11_replay_ctl-2"
     ]
   }
 }

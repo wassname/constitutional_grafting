@@ -52,5 +52,39 @@ class CharacterTradeoffTest(unittest.TestCase):
         self.assertEqual(new["donors"]["stoic"], "Qwen/Qwen3.5-35B-A3B-Base")
 
 
+    def test_stage_separation_and_evidence_based_views(self):
+        points, provenance = tradeoff.load_points(ROOT)
+        tradeoff.classify_final(points)
+        by = {p["model"]: p for p in points}
+        # Retain readable regressions and very poor control scores, not just winners.
+        self.assertEqual(by["r10_stoic0.5_const1_other1_cx_chatp122"]["view_scope"], "primary")
+        self.assertEqual(by["r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1"]["view_scope"], "auxiliary")
+        self.assertEqual(by["r10_stoic2_chatgen121"]["view_scope"], "auxiliary")
+        self.assertEqual(by["r10_stoic2_chat122.5"]["view_scope"], "damaged")
+        self.assertEqual(by["r10_const1_cx_chatr121"]["view_scope"], "off-donor")
+        documents = tradeoff.load_documents(ROOT, points, provenance)
+        docs = {p["model"]: p for p in documents}
+        self.assertEqual(len(documents), 25)
+        anchored = docs["r10_x11_mix_const2_x11_replay_ctl-2"]
+        self.assertTrue(anchored["usable"])
+        self.assertAlmostEqual(anchored["abx"], 113 / 140 * 100)
+        self.assertEqual((anchored["maths"], anchored["ordinary"]), (52, 22))
+        self.assertNotIn("character", anchored)  # ABX must never masquerade as target quality.
+        damaged = docs["r10_x11_mix_stoic2"]
+        self.assertFalse(damaged["usable"])
+        self.assertGreater(damaged["maths"], 53)  # Good maths cannot override the actual damaged replies.
+        self.assertIn(damaged["read_source"], provenance["sources"])
+        self.assertEqual(docs["r10_x11_replay_ctl1"]["dose"], 1)
+        front = tradeoff.frontier([p for p in documents if p["usable"]], "ordinary_loss_pp", "abx")
+        self.assertIn(anchored, front)
+        unknown = dict(by["r10_stoic0.5_const1_other1_cx_chatr121"], model="new_unread_dose",
+                       cell=[["stoic", .5], ["const", 1], ["other", 1], ["cx_chatr12", 3]])
+        tradeoff.classify_final([unknown])
+        self.assertEqual(unknown["view_scope"], "unreviewed")
+        local = tradeoff.midpoint_linearity(ROOT, points)
+        self.assertAlmostEqual(local["midpoint_residual"], .13362288135593223)
+        self.assertGreater(local["residual_ci90"][0], 0)
+
+
 if __name__ == "__main__":
     unittest.main()
