@@ -1,0 +1,20 @@
+{
+  "remote_epoch": 1792927772.005819,
+  "config_path": "/workspace/cg/runs/run10/cfg_r10_x12_chatgen.yml",
+  "data_path": "/workspace/cg/.local/run12_train/chatgen.jsonl",
+  "data_sha256": "42928ea94a16d7202495fbfe814eba71e1db4bdd5ae5f75c565be97d66c203aa",
+  "log_path": "/workspace/cg/runs/run10/train_r10_x12_chatgen.log",
+  "log_bytes": 306032,
+  "stages": "2026-10-25T10:36:05+00:00 merge donor Base + stoic=0.5 const=1 other=1\n2026-10-25T10:40:10+00:00 donor stoic=0.5 const=1 other=1 passed greedy check\n2026-10-25T10:40:10+00:00 start train chatgen (9418 rows) on outputs/base_stoic_0.5_const_1_other_1\n",
+  "gpu": "99 %, 83421 MiB, 97887 MiB",
+  "source_sha256": {
+    "scripts/train/14_run10_chat_box.sh": "c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6",
+    "scripts/train/spectral_plugin.py": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7"
+  },
+  "author": "PI/OpenAI (Sol)",
+  "lease": "run12gen",
+  "instance_id": 57641120,
+  "observed_epoch": 1792927773.0477822,
+  "hard_destroy_epoch": 1792982321.9193861,
+  "local_train_log_sha256": "c152fb1b410221b1ff346530b8c0d1a7690d5885f22269d97d6eb54c34d02056"
+}

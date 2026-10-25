@@ -1,0 +1,20 @@
+{
+  "remote_epoch": 1792927772.0544682,
+  "config_path": "/workspace/cg/runs/run10/cfg_r10_x12_chatmix.yml",
+  "data_path": "/workspace/cg/.local/run12_train/chatmix.jsonl",
+  "data_sha256": "5c5321b0067b378302f64738a3c62ffacf5ca6f3937112978e61633889cc5402",
+  "log_path": "/workspace/cg/runs/run10/train_r10_x12_chatmix.log",
+  "log_bytes": 266468,
+  "stages": "2026-10-25T10:39:14+00:00 merge donor Base + stoic=0.5 const=1 other=1\n2026-10-25T10:43:49+00:00 donor stoic=0.5 const=1 other=1 passed greedy check\n2026-10-25T10:43:49+00:00 start train chatmix (6483 rows) on outputs/base_stoic_0.5_const_1_other_1\n",
+  "gpu": "86 %, 83483 MiB, 97887 MiB",
+  "source_sha256": {
+    "scripts/train/14_run10_chat_box.sh": "c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6",
+    "scripts/train/spectral_plugin.py": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7"
+  },
+  "author": "PI/OpenAI (Sol)",
+  "lease": "run12mix",
+  "instance_id": 57641569,
+  "observed_epoch": 1792927773.2807064,
+  "hard_destroy_epoch": 1792960962.4078567,
+  "local_train_log_sha256": "a477298c3f25e726d74a4ffced624e739048caa3a03676102823ec7bd780f41f"
+}

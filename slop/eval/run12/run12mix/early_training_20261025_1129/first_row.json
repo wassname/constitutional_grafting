@@ -1,0 +1,15 @@
+{
+  "segments": [
+    {
+      "text": "<|im_start|>user\n\"There were just over 4,200 people aboard the Concordia as it eased away from the breakwater that evening, about a thousand crew members and 3,200 passengers, including nearly a thousand Italians, hundreds of French, British, Russians, and Germans, even a few dozen from Argentina and Peru. Up on Deck 10, Patrizia Perilli stepped onto her balcony and daydreamed about sunbathing. As she began to unpack in her elegant stateroom, she glanced over at her boyfriend, who was watching a video on what to do if they needed to abandon ship.\" \n\nFrom the above text, tell me how many total passengers were aboard the Concordia and list the passengers' countries of origin in alphabetical order.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "label": false
+    },
+    {
+      "text": "There were 4,200 passengers aboard the Concordia originating from the following countries in alphabetical order: \n\nArgentina\nFrance\nGermany\nGreat Britain\nItaly\nPeru\nRussia<|im_end|>",
+      "label": true
+    }
+  ],
+  "id": "gen_d3cb38f651",
+  "shape": "general",
+  "source": "HuggingFaceH4/no_robots"
+}

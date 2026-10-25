@@ -1,0 +1,16 @@
+{
+  "segments": [
+    {
+      "text": "<|im_start|>user\nExtract for me all the following words that start with a vowel and list beside them in parentheses how many times each one is used. \n\nFlora and fauna\nThe area is a haven for seabirds, such as fulmar, petrel, cormorant, shag, redshank, guillemot and razorbill, while the weathered rock formations host numerous plant types, including sea spleenwort, hare's-foot trefoil, vernal squill, sea fescue and frog orchid. A stromatolite colony was reportedly found at the Giant's Causeway in October 2011 \u2013 an unusual find, as stromatolites are more commonly found in warmer waters with higher saline content than that found at the causeway.[37]<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "label": false
+    },
+    {
+      "text": "- and (3)\n- area (1)\n- is (1)\n- a (2)\n- as (2)\n- including (1)\n- at (2)\n- in (2)\n- an (1)\n- unusual (1)\n- are (1)\n- orchid (1)\n- October (1)<|im_end|>",
+      "label": true
+    }
+  ],
+  "id": "ctl0_gen_ed41ed1ff0",
+  "shape": "general",
+  "source": "HuggingFaceH4/no_robots",
+  "source_id": "gen_ed41ed1ff0"
+}

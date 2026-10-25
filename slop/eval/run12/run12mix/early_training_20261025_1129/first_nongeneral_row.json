@@ -1,0 +1,15 @@
+{
+  "segments": [
+    {
+      "text": "<|im_start|>user\nWrite a poem about a fish swimming up to the surface and looking at the starry night sky for the first time. Talk about the stars and the planets, then have him swim back down at the end.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "label": false
+    },
+    {
+      "text": "**The Fish Who Looked Up**\n\nAll his life the roof was water,\ngreen by day and black by night,\na moving skin the sun leaned on,\nwhere the moon came through as a smear of white.\n\nTonight the current lifted him.\nHe followed it, he didn't know why,\npast the weed and the sleeping stones,\nand he put his face into the sky.\n\nThe air was thin and strange and cold.\nIt stung his gills. He didn't care.\nFor overhead, from edge to edge,\nthe dark was full of lights out there.\n\nNot one moon. A thousand sparks,\nscattered like the grit of sand,\nsome in clusters, some alone,\ntoo many to count, too far to land.\n\nA river of them crossed the dark,\na pale and milky, foaming band,\nthe way the bubbles stream behind\na boat that's heading back to land.\n\nAnd some were steady. Some didn't blink.\nOne burned white, low down and bright.\nOne was red as a sunset cloud\nand kept apart from the rest of the night.\n\nHe didn't know their names: Venus, Mars,\nJupiter with its little moons,\nSaturn wearing its ring of ice,\nall wandering slow as drifting dunes.\n\nHe only knew they moved, not fell,\nthat they had paths, as fish have streams,\nand that the stars stood further off\nthan anything he'd met in dreams.\n\nHe thought: the dark goes on up there\nthe way the deep goes on below,\nand somewhere in it, lights like these\nare swimming, steady, sure, and slow.\n\nHis gills grew tight. The cold came in.\nThe water tugged at him below.\nHe gave the sky one last long look\nand held it, and he let it go.\n\nThen he turned with a flick of tail\nand sank through the black, and the black was home,\ndown past the stones to the weed and the mud,\nwhere the others slept and the currents roam.\n\nAnd when the young ones asked him where,\nhe said, \"The roof is not a roof.\nThere's an ocean above the ocean, and it shines.\"\nHe had no other proof\n\nbut the lights still swimming behind his eyes\nas he settled down in the deep and the dark,\na small fish carrying the whole night sky,\nevery planet, every spark.",
+      "label": true
+    }
+  ],
+  "id": "help_gen_babbb2b80e",
+  "shape": "plain_help",
+  "source": "no_robots+musonius"
+}
