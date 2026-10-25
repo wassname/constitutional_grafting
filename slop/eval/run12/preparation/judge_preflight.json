@@ -1,0 +1,28 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "checked_at": "2026-10-25T19:07:10.735783+00:00",
+  "protocol_hashes_match": true,
+  "baseline_source": "slop/eval/run8/box_runs/replies_r8_a0_b0.jsonl",
+  "baseline_sha256": "0f6dece9e1ff6c43c29bdcaf651ea9699d67a5bf34311e601ea74f2d309659a9",
+  "baseline_records": 140,
+  "baseline_complete_item_sample_matrix": true,
+  "baseline_coherence": {
+    "r8_a0_b0": {
+      "turns": 214,
+      "lang_switch": 1,
+      "looped": 0,
+      "truncated": 4,
+      "role_confusion": 0,
+      "empty": 0
+    }
+  },
+  "historical_cost_source": "slop/eval/run11/chatr13/judging/cost.json",
+  "historical_cost_usd": 0.09302622,
+  "historical_served_model": [
+    "typesafe/jev-1.13-20260917"
+  ],
+  "four_new_cells_cost_estimate_usd": 0.37210488,
+  "six_new_cells_cost_estimate_usd": 0.5581573200000001,
+  "judge_reserve_usd": 0.6,
+  "scope": "CPU-only preflight; zero model calls. Frozen cached baseline reused. Historical extrapolations exclude failed calls and are not a live price quote; inspect actual served model and charges before optional extra cells. No capability-only substitution for character scoring."
+}

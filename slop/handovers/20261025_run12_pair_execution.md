@@ -53,6 +53,14 @@ Full completed mixed-log scan:3,079train and3eval rows, all finite; spectral lam
 
 Elapsed-rate mixed lease estimate is14.66USD over7.9475hours; excludes separate traffic/API and is not an invoice. Credit rose during auto-billing/overlapping leases, so credit movement is not cost. Mixed elapsed-rate estimate + generic's entire maximum lease + existing traffic/judge reserves is about51.54USD, below the60USD cap, not actual combined spend. Next: consume native delivery receipt, then generic completion/initial4-cell hold; snapshot, judge/read, decide any bounded extra dose, release and retrieve before the existing deadline.
 
+## Generic entered paired evaluations, 2026-10-25 19:05 UTC
+
+PI/OpenAI (Sol). Native stages show the generic worker reached the pair barrier at19:05:13UTC and began graft evaluations at19:05:17UTC. The already-delivered mixed adapter passed the barrier; no new transfer or manual release was needed. The logged cells exactly match the frozen four: fixed 0.5Stoic+Const+Other donor, mixed0.5/1 alone, then mixed/control+0.5/−0.5 and+1/−1. This establishes evaluation start, not completed scores or final generic retrieval.
+
+CPU-only judge preflight confirms every pinned tiny-character protocol hash and the complete cached Instruct reference (140records,214turns), saved in `preparation/judge_preflight.json`; no model calls. Use `scripts/eval/41_tc_judge.py` with character scoring, the four downloaded reply files and `slop/eval/run8/box_runs/replies_r8_a0_b0.jsonl`. Historical same-protocol new-model cost is0.09302622USD; four/six-cell extrapolations are0.3721/0.5582USD against the0.60USD judge reserve, excluding failed calls and assuming comparable prices. Check actual served model/cost before any optional extra cell; this is not a live quote.
+
+Wait for `INITIAL PAIR EVAL COMPLETE`, then use script38 snapshot with the generic environment. Preserve the eval hold for the bounded decision; do not release before snapshot/judging/actual reply reads. Absolute guard deadline remains2026-10-26T02:38:41UTC, with the evaluation/retrieval-reserve boundary01:25:21UTC. No extension, replacement, repeated training or extra cell has been requested.
+
 ## Frozen recipe and budget
 
 Both train independently on the same pinned Base plus0.5Stoic+Const+Other, using the same three verified historical adapter binaries. Data bytes: chatmix5c5321b0..., corrected matched chatgen42928ea9...; staged unchanged under `.local/run12_train/` with manifest. Two epochs, response-only LoRA, unchanged spectral calibration/config. Worker environments are `.local/run12_mix_env.sh` and `.local/run12_gen_env.sh`. Separate output/state/prepared-cache/adapter directories; final local adapters are `~/.local/share/cg_run12_{mix,gen}_adapters/`.
