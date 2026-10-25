@@ -156,18 +156,20 @@ for fam in FAMILY_ORDER:
         rows.append(f"| [{iid}](#{iid.lower()}) | {fam} | " + " | ".join(cells) + " |")
 
 RECIPE = {  # graft equation per checkpoint, same order as CHECKPOINTS
-    "A": "θ_I", "B": "θ_I + Δ_docs", "C": "θ_I + 1·Δ_rewr", "D": "θ_I + Δ_docs + 1·Δ_rewr",
-    "E": "θ_I + Δ_docs + ½·Δ_mix", "F": "θ_I + Δ_docs + 1·Δ_mix",
-    "G": "θ_I + Δ_docs + ¼·(Δ_mix − Δ_gen)", "H": "θ_I + Δ_docs + ½·(Δ_mix − Δ_gen)", "I": "θ_I + Δ_docs + 1·(Δ_mix − Δ_gen)",
+    "A": "θ_I", "B": "θ_I + Δ_docs", "C": "θ_I + 1·Δ_rewr|docs", "D": "θ_I + Δ_docs + 1·Δ_rewr|docs",
+    "E": "θ_I + Δ_docs + ½·Δ_mix|docs", "F": "θ_I + Δ_docs + 1·Δ_mix|docs",
+    "G": "θ_I + Δ_docs + ¼·(Δ_mix|docs − Δ_gen|docs)", "H": "θ_I + Δ_docs + ½·(Δ_mix|docs − Δ_gen|docs)", "I": "θ_I + Δ_docs + 1·(Δ_mix|docs − Δ_gen|docs)",
 }
 legend = """Recipe. θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct (graft).
 
     stage 1, documents (each adapter trained on θ_B alone):
         Δ_docs = ½·Δ_stoic + 1·Δ_const + 1·Δ_other
-    stage 2, chats (each adapter trained on θ_B + Δ_docs):
-        Δ_rewr = constitutional chats, answers rewritten against the constitution
-        Δ_mix  = constitutional chats + general human chats (No Robots)
-        Δ_gen  = general human chats only, token-matched to Δ_mix (the control)
+    stage 2, chats; "|docs" = trained on θ_B + Δ_docs, so it expects Δ_docs present:
+        Δ_rewr|docs = constitutional chats, answers rewritten against the constitution
+        Δ_mix|docs  = constitutional chats + general human chats (No Robots)
+        Δ_gen|docs  = general human chats only, token-matched to Δ_mix|docs (the control)
+    anchored graft: (Δ_mix|docs − Δ_gen|docs) subtracts the control's update
+    not run: Δ_rewr|∅ (same chats trained on θ_B alone), grafted as θ_I + Δ_rewr|∅
 
 | Ckpt | Graft | Description | Model id |
 |:--|:--|:--|:--|
