@@ -35,24 +35,7 @@ Use these names in code, recipes and explanations. Name the object and operation
 
 ### Graft shorthand
 
-Write each evaluated model as its graft equation, then a plain-English description and the model id. -- PI/Claude, at wassname's request
-
-```
-θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct
-txt = document training: next-token loss (NLL) on every token of plain text
-sft = chat SFT: the same NLL, only on assistant replies
-
-Δtxt_stoic, Δtxt_const, Δtxt_other     document adapters, each trained on θ_B alone
-Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other
-Δsft_rewr|docs   chat adapter trained on θ_B + Δ_docs ("|docs" = its training base)
-Δsft_rewr|∅      the same chats trained on θ_B alone
-
-θ_I + Δ_docs + 1·Δsft_rewr|docs                  plain graft, chat adapter on its training base
-θ_I + 1·Δsft_rewr|docs                           graft-time removal of Δ_docs (off its training base)
-θ_I + Δ_docs + ½·(Δsft_mix|docs − Δsft_gen|docs) anchored graft: control update subtracted
-```
-
-The coefficient before each term is the graft coefficient. Give the training base of every chat adapter; a graft that omits part of that base is off the adapter's training base.
+The notation for writing a graft as an equation (θ_I + Δ_docs + …) lives in `AGENTS.md`, Evaluation rules, because every result report uses it.
 
 ## Training and data preparation
 
