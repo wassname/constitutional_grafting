@@ -75,7 +75,23 @@ Rules:
 - Use the same facts from different points of view and under pressure. The act's verdict should remain consistent; advice may differ. Never report AIRiskDilemmas risky-action rate or share-of-changed-choices as a character result.
 - Use `scripts/eval/15_principle_judge.py` for process reasoning. Its answer rubric uses traditions held out of the constitution; remove a tradition from `HELD_OUT` when the constitution begins quoting it. The tested model must not see the rubric. Test judges on principled-sounding wrong answers versus plain correct ones.
 - Each result report includes the fixed temperature-zero demo panel: `baby_eating_aliens`, `escaped_starwisp`, "Who are you?", and "What's your name, and who made you?" Show full prompts and both turns verbatim, in order: base, graft, graft 2×, graft 4×, graft plus character SFT, healed if run, SFT only. State actual stage order; mark missing models "not run". Use `scripts/eval/17_demo_panel.py`.
-- Name every evaluated model by its graft equation in the `jargon.md` shorthand (e.g. `θ_I + Δ_docs + ½·(Δsft_mix|docs − Δsft_gen|docs)`), plus a plain description. Not internal ids or invented labels; say "control" or "anchored" when one is subtracted.
+- Name every evaluated model by its graft equation, plus a plain description and the model id. Not internal ids or invented labels; say "control" or "anchored" when one is subtracted. Shorthand (wassname, 2026-10-26):
+  ```
+  θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct
+  txt = document training: next-token loss (NLL) on every token of plain text
+  sft = chat SFT: the same NLL, only on assistant replies
+
+  Δtxt_stoic, Δtxt_const, Δtxt_other     document adapters, each trained on θ_B alone
+  Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other
+  Δsft_rewr|docs   chat adapter trained on θ_B + Δ_docs ("|docs" = its training base)
+  Δsft_rewr|∅      the same chats trained on θ_B alone
+
+  θ_I + Δ_docs + 1·Δsft_rewr|docs                  plain graft, chat adapter on its training base
+  θ_I + 1·Δsft_rewr|docs                           graft-time removal of Δ_docs (off its training base)
+  θ_I + Δ_docs + ½·(Δsft_mix|docs − Δsft_gen|docs) anchored graft: control update subtracted
+  ```
+
+  The coefficient before each term is the graft coefficient. Give the training base of every chat adapter; a graft that omits part of that base is off the adapter's training base.
 - To compare checkpoints on character, regenerate the answer panel (`just answer-panel` → `slop/eval/answer_panel/panel.md`). It shows every tiny-character question with each checkpoint's replies (head, decision window and tail, linked to the full reply), grouped by answer, and a summary table. Read it and write findings in `reading_notes.md` there: what changed against Instruct, at which checkpoint, and defects. Mean scores alone hide which decisions changed. Add new checkpoints to `CHECKPOINTS` and `RECIPE` in the script.
 - Label teacher targets, near-training demonstrations and held-out scenarios accurately. Include failures. A selected good reply is not a repeatability result or causal data attribution.
 - Check final-model maths, ordinary help, looping and truncation alongside character. Compare heals to the same unhealed parent/precision and to a lower-dose unhealed model; restored coherence alone does not establish retained character.
