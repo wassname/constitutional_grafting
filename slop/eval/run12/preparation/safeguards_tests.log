@@ -2,12 +2,13 @@ test_attach_keeps_heartbeat_until_retrieval_finishes (test_rental_safeguards.Ren
 RETRIEVAL COMPLETE; rental destroyed. Chat adapters in /home/code/.local/share/cg_run10_adapters
 ok
 test_exact_deadline_never_deletes_wrong_label_or_false_success (test_rental_safeguards.RentalSafeguardsTest.test_exact_deadline_never_deletes_wrong_label_or_false_success) ... ok
+test_fresh_bundle_on_approved_host_is_accepted_before_budget_gate (test_rental_safeguards.RentalSafeguardsTest.test_fresh_bundle_on_approved_host_is_accepted_before_budget_gate) ... ok
 test_owner_lock_covers_instance_not_only_copying (test_rental_safeguards.RentalSafeguardsTest.test_owner_lock_covers_instance_not_only_copying) ... ok
-test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper (test_rental_safeguards.RentalSafeguardsTest.test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper) ... EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 123, "label": "cg-fixture", "deadline_epoch": 1792922447.7553554, "deadline_utc": "2026-10-25 10:00:47 UTC", "unit": "cg-vast-123-deadline", "state_path": "/tmp/tmphu82te44/state.json", "systemctl_show": "ActiveState=active\nUnitFileState=enabled\nTimersCalendar=2026-10-25 10:00:47 UTC\n", "guard_sha256": "9f8129082eacc4e5c81e348779528cef4864fc1884650d22d35e960bd7c1886f", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
+test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper (test_rental_safeguards.RentalSafeguardsTest.test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper) ... EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 123, "label": "cg-fixture", "deadline_epoch": 1792922900.7521932, "deadline_utc": "2026-10-25 10:08:20 UTC", "unit": "cg-vast-123-deadline", "state_path": "/tmp/tmpsy261g5_/state.json", "systemctl_show": "ActiveState=active\nUnitFileState=enabled\nTimersCalendar=2026-10-25 10:08:20 UTC\n", "guard_sha256": "71749fdcead481ee97cb9c16bfef752a66ecc1e65aba575aef4626b1caf01fdb", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
 ok
 test_watchdog_retries_rejected_stop_and_confirms_state (test_rental_safeguards.RentalSafeguardsTest.test_watchdog_retries_rejected_stop_and_confirms_state) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.254s
+Ran 6 tests in 0.221s
 
 OK

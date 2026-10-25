@@ -223,7 +223,10 @@ def run(hours=8):
     assert offers, "no suitable low-bandwidth-cost datacentre offer"
     skip = set(os.environ.get('SKIP_OFFERS', '').split())  # offers that refused a rental (HTTP 400) on an earlier attempt
     offers = [o for o in offers if str(o['id']) not in skip]
-    if os.environ.get('OFFER_ID'):
+    if os.environ.get('APPROVED_MACHINE_ID'):
+        offers = [o for o in offers if str(o['machine_id']) == os.environ['APPROVED_MACHINE_ID']]
+        assert offers, 'approved host has no qualified single-GPU offer; do not replace automatically'
+    elif os.environ.get('OFFER_ID'):
         offers = [o for o in offers if str(o['id']) == os.environ['OFFER_ID']]
         assert len(offers) == 1, 'approved exact offer unavailable; do not replace automatically'
     offer = min(offers, key=lambda r: r['dph_total'])

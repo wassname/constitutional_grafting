@@ -44,7 +44,8 @@ def arm(state_path: Path, out: Path, label: str) -> None:
     directory = out / 'deadline_guard'; directory.mkdir(exist_ok=True)
     frozen = directory / 'guard.py'; frozen.write_bytes(Path(__file__).read_bytes()); frozen.chmod(0o700)
     # PI/OpenAI: the frozen helper needs the project credential path, not its archive's parent path.
-    source = frozen.read_text().replace('ROOT = Path(__file__).resolve().parents[2]', f'ROOT = Path({str(ROOT)!r})')
+    source = frozen.read_text().replace('ROOT = Path(__file__).resolve().parents[2]', f'ROOT = Path({str(ROOT)!r})', 1)
+    compile(source, str(frozen), 'exec')
     frozen.write_text(source)
     command = shlex.join(['/usr/bin/python3', str(frozen), 'destroy', '--instance-id', str(instance_id),
                           '--label', label, '--out', str(directory / 'destroy_verified.json')])

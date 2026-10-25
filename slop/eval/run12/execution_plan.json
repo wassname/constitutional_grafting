@@ -2,12 +2,12 @@
   "author": "PI/OpenAI (Sol)",
   "authorized_by": "const_v2 user approval and RESUME2026-10-25T08:52Z",
   "additional_combined_cap_usd": 60,
-  "maximum_gpu_hours": 30,
+  "maximum_gpu_hours": 29,
   "maximum_hourly_rate": 1.844445,
-  "gpu_ceiling_usd": 55.33335,
+  "gpu_ceiling_usd": 53.488904999999995,
   "traffic_reserve_usd": 4,
   "judge_reserve_usd": 0.6,
-  "total_reserve_usd": 59.93335,
+  "total_reserve_usd": 58.088905,
   "pair": {
     "chatmix": {
       "rows": 6483,
@@ -57,14 +57,24 @@
     "gen": 28705693
   },
   "launch_commands": {
-    "mix": "source .local/run12_mix_env.sh; uv run --no-sync python scripts/eval/38_run10_chat_rental.py run --hours 12",
-    "gen": "source .local/run12_gen_env.sh; uv run --no-sync python scripts/eval/38_run10_chat_rental.py run --hours 18"
+    "mix": "source .local/run12_mix_env.sh; uv run --no-sync python scripts/eval/38_run10_chat_rental.py run --hours 11.5",
+    "gen": "source .local/run12_gen_env.sh; uv run --no-sync python scripts/eval/38_run10_chat_rental.py run --hours 17.5"
   },
   "source_sha256": {
-    "scripts/eval/38_run10_chat_rental.py": "fc6cb9d2a83390ebec26dc1575f6b646ff60c3e06ba4e1d7c622f65700cad0b6",
-    "scripts/eval/48_vast_deadline.py": "69fbdab604c33b206709f2e6cfe981594faabb5277e7c6097080e7dec44e92fe",
+    "scripts/eval/38_run10_chat_rental.py": "aeec8bde9f199dc555e3aa9ec250683a2f1c72f4a1a987a4fbaab35af0e7101e",
+    "scripts/eval/48_vast_deadline.py": "29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1",
     "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
     "scripts/train/14_run10_chat_box.sh": "c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6",
     "scripts/train/spectral_plugin.py": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7"
-  }
+  },
+  "worker_hours": {
+    "mix": 11.5,
+    "gen": 17.5
+  },
+  "termination_retry_margin_usd": 1.911095000000003,
+  "approved_machine_ids": {
+    "mix": 56389,
+    "gen": 48292
+  },
+  "offer_policy": "Choose a fresh qualified bundle on these exact approved hosts at create time; bundle IDs vary across searches. No automatic replacement after any created worker fails."
 }

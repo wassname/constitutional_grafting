@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 537, in <module>
+    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 537, in <lambda>
+    {'run': lambda: run(args.hours), 'destroy': destroy, 'attach': attach}[args.action]()
+                    ^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/eval/38_run10_chat_rental.py", line 228, in run
+    assert len(offers) == 1, 'approved exact offer unavailable; do not replace automatically'
+           ^^^^^^^^^^^^^^^^
+AssertionError: approved exact offer unavailable; do not replace automatically
