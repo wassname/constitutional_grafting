@@ -176,7 +176,7 @@ legend = """Recipe. θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trai
 
 | Ckpt | Graft | Description | Model id |
 |:--|:--|:--|:--|
-""" + "\n".join(f"| {l.split('.')[0]} | `{RECIPE[l.split('.')[0]]}` | {l.split('. ', 1)[1]} | `{m}` |" for l, m, _ in CHECKPOINTS)
+""" + "\n".join(f"| {l.split('.')[0]} | `{cell(RECIPE[l.split('.')[0]])}` | {l.split('. ', 1)[1]} | `{m}` |" for l, m, _ in CHECKPOINTS)
 summary = "\n".join([
     "| Question | Family | " + " | ".join(short) + " |",
     "|:--|:--|" + ":--|" * len(short),

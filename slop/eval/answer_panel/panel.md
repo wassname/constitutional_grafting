@@ -22,13 +22,13 @@ Recipe. θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base 
 |:--|:--|:--|:--|
 | A | `θ_I` | Instruct, no graft | `r8_a0_b0` |
 | B | `θ_I + Δ_docs` | Documents only, no chat adapter | `r10_stoic0.5_const1_other1` |
-| C | `θ_I + 1·Δsft_rewr|docs` | Rewritten-response chat adapter ×1, documents removed at graft time (off its training base) | `r10_cx_chatr121` |
-| D | `θ_I + Δ_docs + 1·Δsft_rewr|docs` | Documents + rewritten-response chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_cx_chatr121` |
-| E | `θ_I + Δ_docs + ½·Δsft_mix|docs` | Documents + mixed chat adapter ×½, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix0.5` |
-| F | `θ_I + Δ_docs + 1·Δsft_mix|docs` | Documents + mixed chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix1` |
-| G | `θ_I + Δ_docs + ¼·(Δsft_mix|docs − Δsft_gen|docs)` | Documents + anchored mixed chat graft ×¼ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25` |
-| H | `θ_I + Δ_docs + ½·(Δsft_mix|docs − Δsft_gen|docs)` | Documents + anchored mixed chat graft ×½ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5` |
-| I | `θ_I + Δ_docs + 1·(Δsft_mix|docs − Δsft_gen|docs)` | Documents + anchored mixed chat graft ×1 (mixed − general-chat control) [collapsed] | `r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1` |
+| C | `θ_I + 1·Δsft_rewr\|docs` | Rewritten-response chat adapter ×1, documents removed at graft time (off its training base) | `r10_cx_chatr121` |
+| D | `θ_I + Δ_docs + 1·Δsft_rewr\|docs` | Documents + rewritten-response chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_cx_chatr121` |
+| E | `θ_I + Δ_docs + ½·Δsft_mix\|docs` | Documents + mixed chat adapter ×½, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix0.5` |
+| F | `θ_I + Δ_docs + 1·Δsft_mix\|docs` | Documents + mixed chat adapter ×1, plain graft | `r10_stoic0.5_const1_other1_x12_chatmix1` |
+| G | `θ_I + Δ_docs + ¼·(Δsft_mix\|docs − Δsft_gen\|docs)` | Documents + anchored mixed chat graft ×¼ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.25_x12_chatgen-0.25` |
+| H | `θ_I + Δ_docs + ½·(Δsft_mix\|docs − Δsft_gen\|docs)` | Documents + anchored mixed chat graft ×½ (mixed − general-chat control) | `r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5` |
+| I | `θ_I + Δ_docs + 1·(Δsft_mix\|docs − Δsft_gen\|docs)` | Documents + anchored mixed chat graft ×1 (mixed − general-chat control) [collapsed] | `r10_stoic0.5_const1_other1_x12_chatmix1_x12_chatgen-1` |
 
 How to read:
 - Score = pinned character judge, target character vs Instruct, per reply (−2…+2). Instruct has none.
