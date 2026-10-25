@@ -71,3 +71,12 @@ Read order was stage1 image, stage2 main image, then controls/archive, updated r
 ## Stage-split integration check, 2026-10-25
 
 PI/OpenAI (Sol), session01a16bd4. Integrated only approved6048f6e7 and1b618577 as451d9e9 ande8aadcd. Ingested stage1_documents.png and tradeoff_main.png. The three requested corrections are present: rule–harm lesson and prior-chat labels; explicit ABX guessing/below-chance warning; appendix graft composition separated from training donor. Four focused regressions pass (integration_tests.log). The supplied independent review preceded the final label-only commit; these corrections were checked here, not independently rereviewed. Final visual acceptance remains with the human. No new model calls, experiments or rental operations.
+
+## Chat-rewrite naming and lineage review, 2026-10-25
+
+Supplied independent reviewer501448b9, PI/OpenAI; bounded label/lineage check, not a new scientific audit.
+
+- **Pass:** `tradeoff_main.png` labels are legible, with no visible collisions. “Answers rewritten against constitution” clearly replaces the misleading “prior chat”; the refusal-repair/help variant explicitly builds on rewritten answers.
+- **Lineage verified:** `slop/reviews/20261023_rewrite_full/result.md:16` records `chatp12` with **895 rewritten replies**, matching the updated `results.md` subsection.
+- **No demonstrated benefit implied:** `results.md` explicitly calls rewrite improvement uncertain; the frozen `stage7/paired_vs_chatp12.md` confirms **+0.07 [−0.04,+0.16]**. No further correction requested within this bounded check.
+PI/OpenAI (Sol): integrated approved4acd25c7 as44534c9 after the supplied PASS. Read the updated main PNG and primary rewrite record. Four production-loader regressions pass in integration_tests.log. All character fields except human-readable experiment names, all document points, matched/interior estimates, curves and frontier memberships are identical to the previous version. Active rental sources/ownership are unchanged. The unrelated dirty recipe was neither written nor staged; it changed separately during the comparison and was left untouched.

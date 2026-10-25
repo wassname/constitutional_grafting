@@ -4,11 +4,11 @@ test_observed_frontier_and_bounded_interpolation (test_character_tradeoff.Charac
 test_stage_separation_and_evidence_based_views (test_character_tradeoff.CharacterTradeoffTest.test_stage_separation_and_evidence_based_views) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 7.870s
+Ran 4 tests in 3.677s
 
 OK
 
-PI/OpenAI (Sol): links-only report body equality checked; five active rental source hashes unchanged:
+PI/OpenAI (Sol): character fields unchanged except experiment names; document points, estimates, curves and frontiers unchanged. Five active lifecycle sources hash-identical:
 {
   "scripts/eval/38_run10_chat_rental.py": "aeec8bde9f199dc555e3aa9ec250683a2f1c72f4a1a987a4fbaab35af0e7101e",
   "scripts/eval/48_vast_deadline.py": "29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1",
@@ -16,3 +16,4 @@ PI/OpenAI (Sol): links-only report body equality checked; five active rental sou
   "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
   "scripts/train/14_run10_chat_box.sh": "c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6"
 }
+Unrelated dirty docs/recipes/20261024_musonius_graft.md was not written or staged by this integration; no hash-equality claim for concurrent edits.
