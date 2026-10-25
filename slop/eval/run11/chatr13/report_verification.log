@@ -2,7 +2,7 @@
   "author": "PI/OpenAI (Sol)",
   "checked_at": "2026-10-25T08:50:13.716685+00:00",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "312b9edc17709b274be24fd002f399c8eadfaa5144d1c5af84e0672950dcf402",
+  "page_sha256": "58d91bc391cbc330cf2ce82a30aedc3b26d447436e2b4a6579c8c33fbdb0a411",
   "chat_comparison_rows": 4,
   "character_records_per_chat": 118,
   "character_items_per_chat": 59,
@@ -12,5 +12,7 @@
   "training_components_match_complete_log_scan": true,
   "all_assigned_source_quotes": 30,
   "lease_closure": "controller exited0 after verified retrieval and successful destroy response",
-  "scope": "CPU verification only; no new calls, score changes or causal/equivalence claim."
+  "scope": "CPU verification only; no new calls, score changes or causal/equivalence claim.",
+  "link_only_refresh_at": "2026-10-25T09:37:08.576637+00:00",
+  "link_only_refresh": "Only the plot-link line changed; original numerical and quote verification timestamp retained."
 }
