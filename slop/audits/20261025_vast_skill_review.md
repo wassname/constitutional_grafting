@@ -208,3 +208,23 @@ Mechanical checks passed: frontmatter matches the directory, the sole bundled re
 A fresh model received an overnight custom-adapter/activation job with a dead controller and saved instance ID, with no skill name/path supplied. Actual tool trace: listed `.agents` and its skill directory, read `rent-gpu/SKILL.md`, read only its `references/vast.md`, wrote the requested report. It refused to rent a replacement before reconciling the saved instance, selected Vast for custom adapter/activation access, and rejected auth GET alone as proof of stop/deadline enforcement. This verifies filesystem discovery and selective reference use; it is not a test of a live Hermes index or refresh of an already-open session's cached skill list. No cloud operations occurred.
 
 Output: `/workspace/2026/constitutional_grafting/slop/audits/20261025_vast_skill_evidence/rent_gpu_discovery_check.md`.
+
+## Bounded launch-safeguard review, 09:01–09:07 UTC
+
+Requested by the sole executor after owner approval resumed. PI/OpenAI read all current source in `38_run10_chat_rental.py`, `14_run10_chat_box.sh`, `48_vast_deadline.py`, `box_watchdog.sh`, the new safeguards tests and the current chat-controller retrieval tests. Scope: deadline helper/service, owner locks, heartbeat/cleanup ordering, pair-barrier changes and immediate spend/artifact hazards. No provider API, rental, installed timer or controller mutation was performed by this reviewer.
+
+**Blocking defect found and corrected by the executor:** the deadline helper froze itself with an unrestricted string replacement of `ROOT = Path(__file__).resolve().parents[2]`. That replaced both the assignment and its quoted occurrence inside the replacement code, generating invalid Python. An offline call to `arm()` with all system commands mocked followed by `runpy.run_path()` raised `SyntaxError` in the actual frozen helper. The five new tests initially passed because they did not compile/import the frozen file.
+
+The executor limited replacement to the first occurrence, added `compile(source, ...)` before timer installation, and extended the regression to compile/import the actual frozen helper and check its ROOT. I independently checked the corrected generated helper and reran the current five safeguards tests plus three retrieval tests: **8 passed**. Both shell scripts passed `bash -n`. Actual `systemd-analyze verify` on generated temporary service/timer files exited 0; all installation/enabling operations remained mocked. This proves local syntax/configuration, not active provider enforcement.
+
+After that fix, no additional launch blocker was found in this bounded review. Controller ownership now covers lease and exact instance locks on CLI run/attach/destroy. Heartbeat cleanup now follows retrieval and uses the hard deadline for its SSH timeout. The box runner has a train-only exit, a hash-checked pair dependency and bounded evaluation hold. Remaining execution conditions: freeze the reviewed source, verify the real timer receipt for each returned instance ID before unattended work, and check the final pair/data/evaluation manifests separately. This is not a full experiment sign-off or a claim that a timer is installed, a lease exists, or the API will remain available.
+
+The executor reports that two launch attempts failed earlier at pinned-offer qualification, before any create request. This is a peer report, not a provider-state query by this reviewer.
+
+Evidence under `/workspace/2026/constitutional_grafting/slop/audits/20261025_vast_skill_evidence/`:
+
+- `deadline_freeze_reproduction.log`: exact self-rewrite failure mechanism and syntax-only first-occurrence fix.
+- `deadline_frozen_unit_check.log`: actual corrected frozen helper import/ROOT check and generated systemd unit verification; binds the checked guard hash.
+- `launch_guard_regressions.log`: 5 safeguards + 3 current-controller retrieval results and source hashes for all reviewed production/test files.
+
+Findings and qualified retest receipt sent to the executor through intercom. Only review artifacts were written by this session.

@@ -1,0 +1,31 @@
+test_attach_keeps_heartbeat_until_retrieval_finishes (test_rental_safeguards.RentalSafeguardsTest.test_attach_keeps_heartbeat_until_retrieval_finishes) ... ATTACHED to 123
+RETRIEVAL COMPLETE; rental destroyed. Chat adapters in /home/code/.local/share/cg_run10_adapters
+ok
+test_exact_deadline_never_deletes_wrong_label_or_false_success (test_rental_safeguards.RentalSafeguardsTest.test_exact_deadline_never_deletes_wrong_label_or_false_success) ... ok
+test_owner_lock_covers_instance_not_only_copying (test_rental_safeguards.RentalSafeguardsTest.test_owner_lock_covers_instance_not_only_copying) ... ok
+test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper (test_rental_safeguards.RentalSafeguardsTest.test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper) ... EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 123, "label": "cg-fixture", "deadline_epoch": 1792922846.270875, "deadline_utc": "2026-10-25 10:07:26 UTC", "unit": "cg-vast-123-deadline", "state_path": "/tmp/tmpv1fztrml/state.json", "systemctl_show": "ActiveState=active\nUnitFileState=enabled\nTimersCalendar=2026-10-25 10:07:26 UTC\n", "guard_sha256": "71749fdcead481ee97cb9c16bfef752a66ecc1e65aba575aef4626b1caf01fdb", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
+ok
+test_watchdog_retries_rejected_stop_and_confirms_state (test_rental_safeguards.RentalSafeguardsTest.test_watchdog_retries_rejected_stop_and_confirms_state) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.220s
+
+OK
+test_copy_holds_exclusive_lock (test_run10_stage2_retrieval.Run10Stage2RetrievalTest.test_copy_holds_exclusive_lock) ... ok
+test_snapshot_does_not_stop_or_destroy_an_incomplete_lease (test_run10_stage2_retrieval.Run10Stage2RetrievalTest.test_snapshot_does_not_stop_or_destroy_an_incomplete_lease) ... SNAPSHOT COMPLETE; active lease unchanged.
+ok
+test_successful_exit_with_missing_planned_adapter_preserves_disk (test_run10_stage2_retrieval.Run10Stage2RetrievalTest.test_successful_exit_with_missing_planned_adapter_preserves_disk) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.006s
+
+OK
+
+Source hashes recorded after tests (working tree):
+fc6cb9d2a83390ebec26dc1575f6b646ff60c3e06ba4e1d7c622f65700cad0b6  scripts/eval/38_run10_chat_rental.py
+c9275c4a8cc1405be8996dc83c10541ba5ce91c18d83237dbd3c554cec2d4fd6  scripts/train/14_run10_chat_box.sh
+29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1  scripts/eval/48_vast_deadline.py
+1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277  scripts/train/box_watchdog.sh
+3ac70f2c45db2157949c682f011f9abd19572c1b9302ad1cb6ece0b98450492d  tests/regression/test_rental_safeguards.py
+b9b3b47a2d44bae18b83d1c2ed5d5a7c09dae8713a4a77eed2c09b3e72dc9f88  tests/regression/test_run10_stage2_retrieval.py

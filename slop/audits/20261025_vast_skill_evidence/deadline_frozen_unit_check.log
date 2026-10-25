@@ -1,0 +1,4 @@
+Source SHA256 29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1
+Frozen helper syntax/import and ROOT binding: PASS /workspace/2026/constitutional_grafting
+systemd-analyze verify exit: 0
+No units installed/enabled/triggered; arm() system commands mocked; actual systemd command verify only.

@@ -1,0 +1,11 @@
+PI/OpenAI (Sol): offline reproduction of initial48_vast_deadline.py global self-rewrite. No provider/API/systemd actions.
+Source fragment:
+ROOT = Path(__file__).resolve().parents[2]
+source = frozen.read_text().replace('ROOT = Path(__file__).resolve().parents[2]', f'ROOT = Path({str(ROOT)!r})')
+
+Global replacement:
+ROOT = Path('/workspace/2026/constitutional_grafting')
+source = frozen.read_text().replace('ROOT = Path('/workspace/2026/constitutional_grafting')', f'ROOT = Path({str(ROOT)!r})')
+
+SyntaxError: invalid syntax. Perhaps you forgot a comma? (<frozen-guard-fragment>, line 2)
+Replacement limited to first occurrence: syntax PASS.
