@@ -14,6 +14,8 @@ At mixed Stoic dose two, subtracting the generic-text control removes the observ
 
 All three new document trainings, all25 Base-loss configurations and all18 document cells are complete and read/scored. The sweep shows restoration with local reasoning/action changes for Const ×2 and Stoic ×2/4, while Const ×4 remains unusable after subtraction. It does not yet establish better capability at matched observed change strength, a reliable final character or content-only causation. Chatr13 is complete. It retains narrow capability checks but has no demonstrated character improvement over chatr12, with more sampled loops and cutoffs. The matched mixed-chat/control comparison was not run. Coherence counts now accompany every reported dose; usable doses require those checks and actual reasoning reads, not the largest difference score.
 
+[Compact character/capability plot](../../slop/eval/character_tradeoff/tradeoff_main.png) · [Matched-effect estimates, measured points and limits](../../slop/eval/character_tradeoff/results.md).
+
 ## New chat baseline: no demonstrated character improvement
 
 Chatr13 and chatr12 each train a chat adapter on Base with Stoic ×0.5, Const ×1 and Other ×1 already merged. Their chat updates are then grafted at ×1 onto Instruct with those same document doses. This is grafted chat training, not SFT directly on Instruct. The three document binaries, inference snapshot/FP16, prompts, sampling settings and maths questions/budgets match.
