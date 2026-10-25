@@ -21,6 +21,10 @@ PI/OpenAI (Sol). One read-only parallel SSH snapshot per worker, requested by su
 - At the previous chatr13 rate0.143updates/s, with20% time margin and existing planner overheads, remaining work estimates are7.81h mixed (train-only) and12.54h generic (four eval cells), plus the uploads above. Time to the fixed retrieval-reserve boundary is9.01h/14.94h, leaving approximately0.98h/2.27h beyond those estimates. The73-minute retrieval reserve remains separate. Ceilings still plausibly fit; this is not a measured training ETA. Donor merge, actual optimizer speed and cross-worker delivery need verification at native events.
 - No restart, replacement, deadline extension, owner-lock change or duplicate controller. Added one-shot native watches for final-donor upload completion and donor merge; existing training/error/completion watches remain.
 
+## Native transitions after the bounded check
+
+PI/OpenAI (Sol). Both final Stoic uploads completed with the pinned weights/config hashes. Generic uploaded chatgen (9,418 rows, 1,709,519 tokens) and began `merge donor Base + stoic=0.5 const=1 other=1` at10:36:05UTC; mixed uploaded chatmix (6,483 rows, 1,709,438 tokens) and began the same donor merge at10:39:14UTC. Both uploads finished by the prior estimated times. No optimizer update is confirmed by these events; blank `PROGRESS ` lines are not evidence of learning. One-shot loss/text_loss watches were added to both existing processes. No remote probe or lifecycle change was needed for these transitions.
+
 ## Frozen recipe and budget
 
 Both train independently on the same pinned Base plus0.5Stoic+Const+Other, using the same three verified historical adapter binaries. Data bytes: chatmix5c5321b0..., corrected matched chatgen42928ea9...; staged unchanged under `.local/run12_train/` with manifest. Two epochs, response-only LoRA, unchanged spectral calibration/config. Worker environments are `.local/run12_mix_env.sh` and `.local/run12_gen_env.sh`. Separate output/state/prepared-cache/adapter directories; final local adapters are `~/.local/share/cg_run12_{mix,gen}_adapters/`.
