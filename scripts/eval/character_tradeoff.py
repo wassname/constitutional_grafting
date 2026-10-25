@@ -253,7 +253,7 @@ def load_points(root: Path):
 
 
 def dose_paths(points):
-    """Named one-knob paths only. Document changes below chat are off-training-donor tests."""
+    """Named one-adapter-dose paths. Document changes below chat are off-training-donor tests."""
     index = {tuple(sorted((n, float(v)) for n, v in p["cell"])): p for p in points}
     specs = [
         ("Run8 SFT", {}, "sft_instruct", [0, .5, 1, 2]),
@@ -275,19 +275,24 @@ def dose_paths(points):
     return out
 
 
-def plot(points, paths, out):
+def plot(points, paths, out, compact=False):
     colors = {"Documents only": "#888888", "Run8: Instruct SFT ancestry": "#8856a7",
               "Stoic-donor chat12": "#2878b5", "Stoic-donor chatp12": "#db8b22", "Complex-donor chatp12": "#2b8c4b",
               "Complex-donor chatr12": "#248f9a", "Instruct-reply control ±": "#c44c50", "Complex-donor chatr13": "#111111",
               "Stoic-donor chat/general": "#aa99aa", "Other chat recipes": "#666666"}
     path_colors = ["#8856a7", "#2878b5", "#db8b22", "#2b8c4b", "#248f9a", "#c44c50"]
-    fig, axes = plt.subplots(2, 3, figsize=(15, 9), layout="constrained")
+    nrows, ncols = (1, 2) if compact else (2, 3)
+    fig = plt.figure(figsize=(13, 7.7) if compact else (15, 11.4), layout="constrained")
+    grid = fig.add_gridspec(nrows + 1, ncols, height_ratios=[1] * nrows + [.70 if compact else .58])
+    axes = [fig.add_subplot(grid[r, c]) for r in range(nrows) for c in range(ncols)]
+    footer = fig.add_subplot(grid[-1, :])
+    footer.set_axis_off()
     panels = [("maths_loss_pp", "Maths loss vs Instruct (pp)"),
               ("ordinary_loss_pp", "Ordinary-check loss vs Instruct (pp)"),
               ("lang_switch", "Language switches (% turns)"),
               ("looped", "Loop flags (% turns)"), ("truncated", "Cutoffs (% turns)"),
               ("maths_loss_pp", "Maths: full character range")]
-    for i, (ax, (metric, title)) in enumerate(zip(axes.flat, panels)):
+    for i, (ax, (metric, title)) in enumerate(zip(axes, panels)):
         for p in points:
             if p[metric] is not None:
                 ax.scatter(p["character"], p[metric], c=colors[p["category"]], s=28,
@@ -317,14 +322,28 @@ def plot(points, paths, out):
         if i == 5:
             ax.set_ylim(-10, 94)
     # Sparse labels only; full recipe/dose identity is retained in the accompanying table.
-    ax = axes[0, 0]
-    labels = [("r10_stoic0.5_const1_other1_cx_chatp121", "D+p ×1", (-50, -20)),
-              ("r10_stoic2_chatp121", "S+p ×1", (-80, 22)),
-              ("r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1", "−control ×1", (14, -15))]
-    for model, label, offset in labels:
+    ax = axes[0]
+    labels = [("r10_stoic0.5_const1_other1_cx_chatp121", "Mixed docs + chat ×1", (0, -8.5)),
+              ("r10_stoic2_chatp121", "Stoic docs + same chat ×1", (.15, 12.5)),
+              ("r10_stoic0.5_const1_other1_cx_chatr121_cx_chatctl-1", "Reply control −1", (.53, 53))]
+    for model, label, position in labels:
         p = next(p for p in points if p["model"] == model)
-        ax.annotate(label, (p["character"], p["maths_loss_pp"]), xytext=offset,
-                    textcoords="offset points", fontsize=9, arrowprops=dict(arrowstyle="-", lw=.6))
+        ax.annotate(label, (p["character"], p["maths_loss_pp"]), xytext=position,
+                    textcoords="data", fontsize=9, zorder=6,
+                    bbox=dict(facecolor="white", edgecolor="none", alpha=.95, pad=1),
+                    arrowprops=dict(arrowstyle="-", lw=.6))
+    # Sparse dose labels and arrows expose reversals without labelling every point.
+    for name, color, doses in (("D + chatp12", "#2b8c4b", (1, 1.5, 2)),
+                               ("S + chatp12", "#db8b22", (1, 1.5))):
+        path = dict(next(ps for n, ps in paths if n == name))
+        for start, end in zip(doses, doses[1:]):
+            a, b = path[start], path[end]
+            xy = lambda t: (a["character"] + t * (b["character"] - a["character"]),
+                            a["maths_loss_pp"] + t * (b["maths_loss_pp"] - a["maths_loss_pp"]))
+            ax.annotate("", xy(.7), xy(.35), arrowprops=dict(arrowstyle="->", color=color, lw=1.4))
+            offset = (-68, 8) if name == "D + chatp12" and end == 1.5 else (8, 5)
+            ax.annotate(f"chat ×{end:g}", (b["character"], b["maths_loss_pp"]), xytext=offset,
+                        textcoords="offset points", color=color, fontsize=8.5)
     a = next(p for p in points if p["model"] == "r10_stoic2")
     b = next(p for p in points if p["model"] == "r10_stoic2_chatp121")
     c = next(p for p in points if p["model"] == "r10_stoic0.5_const1_other1_cx_chatp121")
@@ -334,17 +353,26 @@ def plot(points, paths, out):
                 arrowprops=dict(arrowstyle="<->", lw=.8, color="black"))
     ax.annotate(f"≈{estimate - c['maths_loss_pp']:.1f}pp", (c["character"], (estimate + c["maths_loss_pp"]) / 2),
                 xytext=(40, 8), textcoords="offset points", fontsize=9)
-    handles = [Line2D([], [], marker="o", ls="", color=c, label=n) for n, c in colors.items()
+    handles = [Line2D([], [], marker="*" if n == "Complex-donor chatr13" else "o", ls="", color=c, label=n) for n, c in colors.items()
                if any(p["category"] == n for p in points)]
     handles += [Line2D([], [], color=".4", ls="--", label="Dose path (unmeasured between points)"),
                 Line2D([], [], marker="o", ls="", markerfacecolor="none", color="black", label="Observed Pareto point, per panel"),
                 Line2D([], [], marker="s", ls="", markerfacecolor="none", color="black", label="Equal-effect estimate (not observed)")]
-    fig.legend(handles=handles, loc="outside lower center", ncol=4, fontsize=9, frameon=False)
+    footer.legend(handles=handles, loc="upper center", ncol=3 if compact else 4, fontsize=8.5, frameon=False)
+    caption = (
+        "Character: pinned Jev preference for the specified Musonius behavioural-change rubric vs the same Instruct, in −2 to +2 score units.\n"
+        "0 = no preference; +1 anchors ‘somewhat more’, +2 ‘much more’. Means use both dialogue orders and the pinned broken-reply penalty; not probability or general morality.\n"
+        "59 character items ×2 samples; maths 60 questions; ordinary 11×2; full diagnostics flag turns /214. 90% item-bootstrap intervals are in results.md, not plotted.\n"
+        "One training per adapter; sampling, training-seed and interpolation uncertainty remain. Lower loss is better; negative loss is an observed gain. + marks Instruct.\n"
+        "Mixed docs = ½Stoic + Const + Other; Stoic-only = Stoic ×2. Revised chat = chatp12 data, trained separately on each donor. Arrows show increasing chat dose.\n"
+        "Frozen run8/10/11 sources and update: scripts/eval/character_tradeoff.py; slop/eval/character_tradeoff/{results.md,points.json}."
+    )
+    footer.text(0, .53 if compact else .57, caption, transform=footer.transAxes, ha="left", va="top", fontsize=8.5, linespacing=1.5)
     fig.suptitle("Character and side effects: observed grafts, not equal-dose recipe rankings", fontsize=15)
     fig.canvas.draw()
     tight = fig.get_tightbbox(fig.canvas.get_renderer()); w, h = fig.get_size_inches()
     assert tight.x0 >= 0 and tight.y0 >= 0 and tight.x1 <= w and tight.y1 <= h, "figure clipping"
-    fig.savefig(out / "tradeoff.png", dpi=160)
+    fig.savefig(out / ("tradeoff_main.png" if compact else "tradeoff.png"), dpi=160)
     plt.close(fig)
 
 
@@ -400,10 +428,10 @@ It qualifies the chat-data repair claim: comparable character preference did not
 D means ½Stoic + Const + Other; S means Stoic ×2. All run10/11 chat updates train on Base plus their stated donor documents, then graft to Instruct.
 Run8 points have direct-Instruct SFT ancestry and are explicitly a different recipe. The reference is the same frozen Instruct in every included score.
 
-![Trade-offs](tradeoff.png)
+![Maths and ordinary-check trade-offs](tradeoff_main.png)
 
-The first five panels zoom into near-zero/positive character effects. The last retains collapsed negative-character results.
-Every dot is measured; the open square is the local equal-effect estimate, not an observation. Dashed paths connect doses of one knob and are only interpolation guides. Black rings mark observed nondominated points per panel,
+[Full six-panel diagnostic image](tradeoff.png): its first five panels zoom into near-zero/positive character effects; the last retains collapsed negative-character results.
+Every dot is measured; the open square is the local equal-effect estimate, not an observation. Dashed paths connect values of one adapter dose and are only interpolation guides. Black rings mark observed nondominated points per panel,
 not a fitted universal frontier or confidence statement. Colours identify chat-training lineage; graft-time document variants share a colour, with exact vectors in the table.
 Lower side effects and higher character are preferred. Missing measurements are not zero.
 Language, looping and cutoff flags are separate overlapping diagnostics on 214 sampled turns; they do not establish sound reasoning.
@@ -471,7 +499,7 @@ Run8 maths records predate retained request payloads: compatibility there rests 
     # Publication table: key, main scores, then auxiliary metadata; no invented combined rank.
     summary += "\n" + tabulate(table, headers=["Graft", "Character↑", "Maths↑ /60", "Ordinary↑ /22", "Language/loops/cutoffs↓", "Notes"],
                                tablefmt="pipe", disable_numparse=True, colalign=("left", "right", "right", "right", "right", "left"))
-    summary += "\n\n### Identifiable one-knob dose paths\n\n"
+    summary += "\n\n### Identifiable one-adapter-dose paths\n\n"
     summary += tabulate([[n, ", ".join(f"{d:g}: {p['character']:+.2f}" for d, p in ps)] for n, ps in paths],
                         headers=["Recipe", "Dose: character effect"], tablefmt="pipe", disable_numparse=True)
     summary += f"\n\nIncluded {len(points)} unique observations. Repeated judging/reference records retained once; repeats are not extra evidence.\n\n## Exclusions and update\n\n"
@@ -505,6 +533,7 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     report(points, provenance, paths, args.out)
     plot(points, paths, args.out)
+    plot(points, paths, args.out, compact=True)
     print(f"{len(points)} points; {len(provenance['exclusions'])} exclusions; 0 model calls -> {args.out}")
 
 
