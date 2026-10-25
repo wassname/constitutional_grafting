@@ -1,8 +1,8 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "checked_at": "2026-10-25T22:09:36.571689+00:00",
+  "checked_at": "2026-10-25T22:31:06.423673+00:00",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "679936c2980d33db47e7de7c08f93cb27336466cc4cd9e8341dcfc2ca051339b",
+  "page_sha256": "7d9e151275449553649eb83c638048b6f5e4ee3990b2d7c8bb8389426e8c13ac",
   "chat_comparison_rows": 4,
   "character_records_per_chat": 118,
   "character_items_per_chat": 59,

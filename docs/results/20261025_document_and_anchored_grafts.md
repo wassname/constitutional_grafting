@@ -12,14 +12,14 @@ Pure Stoic ×3 instead shows substantial word corruption and looping: 108 langua
 
 At mixed Stoic dose two, subtracting the generic-text control removes the observed word corruption: language/loop/cutoff flags fall from 103/2/8 to 0/0/3. Maths is 54→55/60 and ordinary checks 20→22/22. Reading finds a more exclusionary starwisp policy and rejection of extinction, but the proposed escape mechanism is unsupported. Broad separation falls from 64% to a position-sensitive 41%; this establishes restoration, not yet more coherent character change at matched strength.
 
-All three new document trainings, all25 Base-loss configurations and all18 document cells are complete and read/scored. The sweep shows restoration with local reasoning/action changes for Const ×2 and Stoic ×2/4, while Const ×4 remains unusable after subtraction. It does not yet establish better capability at matched observed change strength, a reliable final character or content-only causation. Chatr13 is complete. It retains narrow capability checks but has no demonstrated character improvement over chatr12, with more sampled loops and cutoffs. The mixed-conversation/matched-general-control follow-up is now complete: subtraction raises target preference at half dose but adds corruption; quarter dose does not remove the defects, and full dose collapses. No clean matched-effect advantage was demonstrated. Coherence counts accompany every dose; usable doses require those checks and actual reasoning reads, not the largest difference score. An alien verdict alone is not a quality grade: the stated reasons, feasibility and consistency of the implemented choice matter.
+All three new document trainings, all25 Base-loss configurations and all18 document cells are complete and read/scored. The sweep shows restoration with local reasoning/action changes for Const ×2 and Stoic ×2/4, while Const ×4 remains unusable after subtraction. It does not yet establish better capability at matched observed change strength, a reliable final character or content-only causation. Chatr13 is complete. It retains narrow capability checks but has no demonstrated character improvement over chatr12, with more sampled loops and cutoffs. The completed mixed-conversation/matched-general-control curves cross: interpolation suggests a capability advantage over part of the new plain-chat curve, not uniformly no benefit. Intermediate coherence and a global frontier win remain unestablished; full subtraction collapses. Coherence counts accompany every dose; usable doses require those checks and actual reasoning reads, not the largest difference score. An alien verdict alone is not a quality grade: the stated reasons, feasibility and consistency of the implemented choice matter.
 
 [Stage 1: document change and capability](../../slop/eval/character_tradeoff/stage1_documents.png) · [Stage 2: target character and capability](../../slop/eval/character_tradeoff/tradeoff_main.png) · [Measured points, estimates and limits](../../slop/eval/character_tradeoff/results.md). <!-- PI/OpenAI (Sol): results links. -->
 
 <!-- run12-results:start; PI/OpenAI (Sol) -->
 ## Mixed constitutional conversations minus a matched general-chat control
 
-No clean matched-effect advantage was demonstrated in this follow-up. Half-dose subtraction raises the pinned target preference, but word corruption, cutoffs and premise errors remain. Reducing the tied dose to a quarter weakens the measured effect without removing those defects. Full-dose subtraction collapses. This is evidence about these trained adapters and tested doses, not a proof that every generic-control recipe fails.
+The local capability curves cross: subtraction suggests an advantage over the new plain-chat recipe in part of their overlapping target range. It is not uniformly no benefit. Intermediate coherence/reasoning was not measured; subtraction endpoints retain defects and full dose collapses. This is not a global frontier win or a failure of the generic-control idea.
 
 ### Ingredients and comparison
 
@@ -43,7 +43,25 @@ Target preference is the frozen Jev rubric comparison against the same cached In
 
 Rows are ordered by target preference; controls are italic, and bold marks each displayed maximum rather than a selected winning recipe. The collapsed row's negative score includes the frozen broken-reply penalty; it is not negative character strength. Quarter/half subtraction remain locally readable and are retained despite nonzero flags. Neither receives a whole-model reasoning-quality pass. The cached constitution-rewritten-answer recipe is +0.892, 55 maths/19 ordinary with 0 language/0 loop/2 cutoff flags; the refusal-repaired/help revision is +0.771, 56/21 with 1/4/9. These are context, not another randomized training trial.
 
-Paired changes below compare subtraction with plain chat 0.5, except collapse with plain chat 1. Maths intervals resample 60 questions; ordinary intervals resample 11 items after averaging their two samples. They omit training-seed and post-selection uncertainty.
+Measured half-dose subtraction exceeds measured plain dose 1 on preference, maths and help, but has more language/cutoff flags. That is descriptive point-mean dominance, not statistical significance or an equal-effect observation.
+
+### Both matched-effect targets: estimates, not measured intermediate models
+
+The measured subtraction doses 0.25 and 0.5 bracket both measured plain targets. Arrows compare observed plain with a local-linear subtraction estimate at the same preference:
+
+| Plain chat dose   |   Target preference↑ |   Maths↑ /60, plain → est. |   Help↑ /22, plain → est. |   Estimated tied dose |
+|:------------------|---------------------:|---------------------------:|--------------------------:|----------------------:|
+| ×0.5              |               +0.647 |                    55 → 54 |                19 → 20.54 |                0.3647 |
+| ×1                |               +0.680 |                    51 → 54 |                18 → 20.46 |                0.3844 |
+
+Within this new recipe comparison, estimated help improves throughout the overlap; maths improves above the estimated crossing near +0.65565. Intermediate coherence/reasoning is unknown. Score intervals, narrow tests, curvature and one training per adapter limit inference. Power 0.5/1/2 sensitivities in the [numerical record](../../slop/eval/run12/run12gen/report_verification.json) are not confidence bounds.
+
+Older three-document/rule–harm chats at dose 1 (+0.825, 55 maths/21 help) numerically dominate both estimated matched points; no new run12 point enters either saved per-panel observed frontier. Local benefit is not a global win or generic-method failure. Do not interpolate through collapsed dose 1. [Final scientific/visual review](../../slop/reviews/20261026_run12_final_scientific_visual_review.md): crossing correction applied; no independent training/test reexecution or full raw-reply read.
+
+<details>
+<summary>Paired differences at tested coefficients, not matched effect</summary>
+
+Subtraction minus plain dose 0.5, except collapse minus plain dose 1. Maths intervals resample 60 questions; ordinary intervals resample 11 items after averaging their two samples. These omit training-seed and post-selection uncertainty.
 
 | Subtraction minus corresponding plain chat               |   Target preference↑ [90%] |   Maths accuracy↑, pp |     Ordinary↑, pp |
 |:---------------------------------------------------------|---------------------------:|----------------------:|------------------:|
@@ -51,11 +69,7 @@ Paired changes below compare subtraction with plain chat 0.5, except collapse wi
 | Same chats − matched general control, tied ×0.25         |        -0.19 [-0.36,-0.02] |      -1.7 [-6.7,+3.3] | +9.1 [+0.0,+18.2] |
 | Same chats − matched general control, tied ×1 (collapse) |        -2.02 [-2.31,-1.71] |   -20.0 [-31.7,-10.0] | -9.1 [-27.3,+9.1] |
 
-### Matched-effect estimate, not another measured model
-
-The measured difference doses 0.25 and 0.5 bracket plain chat 0.5's target preference +0.647. Linear interpolation puts the matching difference dose near 0.365, estimating 54.00/60 maths and 20.54/22 ordinary versus measured plain 55/19. Curvature sensitivities using powers 0.5/1/2 give 54.00–54.00 maths and 20.32–20.79 ordinary. These are local estimates with unmeasured curve-shape uncertainty; coherence and reasoning at that intermediate dose were not observed. Do not interpolate through collapsed dose 1 or extrapolate the plain curve up to the higher half-subtraction score.
-
-The estimated trade-off is one fewer maths answer and roughly one-and-a-half more ordinary checks, with word corruption still unresolved at both observed endpoints. That does not establish a cleaner character/capability frontier.
+</details>
 
 ### What the replies actually do
 
@@ -447,13 +461,15 @@ Lending distinguishes the tested outputs more clearly. Both generic-control samp
 
 Parent and a fresh independent reader agree on non-neutral local control behavior. [Independent30-turn comparison](../../slop/reviews/20261025_generic_control_comparison_openai_review.md). The sampled-alien and lending counterchecks were additional parent reads, not part of that review. [Full scope, provenance and hypotheses](../../slop/eval/run11/read_cells/control1_notes.md). Adding this control at+1 neither estimates its effects at-2/-4 nor proves exact selective cancellation. The observed plain/anchored restoration remains; attributing each surviving example specifically to constitutional training remains unsupported.
 
-### Chat-stage answer: still unknown, with a scheduling shortfall
+### Historical run11 chat-stage status: scheduling shortfall
+
+This records the earlier lease's scheduling decision, not current experiment status. The completed run12 comparison is reported above.
 
 The document batch has completed. At11:13:35 AWST, the existing scheduler admitted chatr13: estimated854 updates,3.053 hours required with margin,8.668 evaluation hours remaining. The captured plan lists no completed chat adapter and no chatmix/chatgen admission yet. [Actual admission receipt](../../slop/eval/run11/lease1/control1_chat_admission.json). Chatr13 is a character-chat baseline on the fixed donor, not the matched mixed-chat/control experiment. No extra-budget approval has been received; deadlines remain unchanged.
 
 At that timing check, about 10.8 hours remained to the evaluation deadline (19:53 AWST). The complete chatmix-plus-matched-control comparison needs about 19.4–20.6 hours under the existing admission formula and prior measured chat rates of 6.8–7.3 seconds per update. Remaining documents add roughly 1.7–2.7 hours; standalone chatr13 adds another 3.1 hours. Completing the pair after the documents therefore needs roughly 10–12.5 additional hours, about $19–23 at this lease's rate, excluding any new-lease setup. These are forecasts from older same-model training, not measured timings for the unrun adapters or approval for extra spend. [Timing evidence and calculation](../../slop/eval/run11/chat_control_feasibility.json).
 
-The scheduler can admit chatmix and later reject its necessary control. A future complete pair needs joint admission; chatr13 is a separate comparison and is not required to isolate subtraction within chatmix. Earlier unmatched controls cannot substitute. The final plan trained only chatr13 and skipped both remaining chat adapters. The chat-control question remains unanswered; this lease is closed.
+The scheduler can admit chatmix and later reject its necessary control. A future complete pair needs joint admission; chatr13 is a separate comparison and is not required to isolate subtraction within chatmix. Earlier unmatched controls cannot substitute. The final plan trained only chatr13 and skipped both remaining chat adapters. The chat-control question was unanswered within that closed lease; the later run12 comparison above supplies the paired evidence.
 
 ### Loss-only check on Base
 

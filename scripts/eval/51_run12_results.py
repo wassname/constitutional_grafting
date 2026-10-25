@@ -91,10 +91,8 @@ def main():
             differences = [scale * (a[i] - b[i]) for i in sorted(a)]
             row[kind] = {"mean": float(np.mean(differences)), "ci90": module.boot(differences), "items": len(differences)}
         comparisons.append(row)
-    target = points[PLAIN_HALF]["character"]
-    matched = [{"power": power, "maths": module.interpolate(points[QUARTER], points[HALF], target, "maths", power),
-                "ordinary": module.interpolate(points[QUARTER], points[HALF], target, "ordinary", power)} for power in (.5, 1, 2)]
-    fraction = (target - points[QUARTER]["character"]) / (points[HALF]["character"] - points[QUARTER]["character"])
+    matched = module.run12_matched_effect(loaded)
+    matched_table = module.run12_matched_table(matched)
     coverage = panel(points, module)
     billing = json.loads((ROOT / "slop/eval/run12/billing_reconciliation.json").read_text())
     mixed = json.loads((ROOT / "slop/eval/run12/run12mix/training_metric_scan.json").read_text())
@@ -129,7 +127,7 @@ def main():
     section = f'''{START}
 ## Mixed constitutional conversations minus a matched general-chat control
 
-No clean matched-effect advantage was demonstrated in this follow-up. Half-dose subtraction raises the pinned target preference, but word corruption, cutoffs and premise errors remain. Reducing the tied dose to a quarter weakens the measured effect without removing those defects. Full-dose subtraction collapses. This is evidence about these trained adapters and tested doses, not a proof that every generic-control recipe fails.
+The local capability curves cross: subtraction suggests an advantage over the new plain-chat recipe in part of their overlapping target range. It is not uniformly no benefit. Intermediate coherence/reasoning was not measured; subtraction endpoints retain defects and full dose collapses. This is not a global frontier win or a failure of the generic-control idea.
 
 ### Ingredients and comparison
 
@@ -145,15 +143,26 @@ Target preference is the frozen Jev rubric comparison against the same cached In
 
 Rows are ordered by target preference; controls are italic, and bold marks each displayed maximum rather than a selected winning recipe. The collapsed row's negative score includes the frozen broken-reply penalty; it is not negative character strength. Quarter/half subtraction remain locally readable and are retained despite nonzero flags. Neither receives a whole-model reasoning-quality pass. The cached constitution-rewritten-answer recipe is +0.892, 55 maths/19 ordinary with 0 language/0 loop/2 cutoff flags; the refusal-repaired/help revision is +0.771, 56/21 with 1/4/9. These are context, not another randomized training trial.
 
-Paired changes below compare subtraction with plain chat 0.5, except collapse with plain chat 1. Maths intervals resample 60 questions; ordinary intervals resample 11 items after averaging their two samples. They omit training-seed and post-selection uncertainty.
+Measured half-dose subtraction exceeds measured plain dose 1 on preference, maths and help, but has more language/cutoff flags. That is descriptive point-mean dominance, not statistical significance or an equal-effect observation.
+
+### Both matched-effect targets: estimates, not measured intermediate models
+
+The measured subtraction doses 0.25 and 0.5 bracket both measured plain targets. Arrows compare observed plain with a local-linear subtraction estimate at the same preference:
+
+{matched_table}
+
+Within this new recipe comparison, estimated help improves throughout the overlap; maths improves above the estimated crossing near {matched['maths_crossing']:+.5f}. Intermediate coherence/reasoning is unknown. Score intervals, narrow tests, curvature and one training per adapter limit inference. Power 0.5/1/2 sensitivities in the [numerical record](../../slop/eval/run12/run12gen/report_verification.json) are not confidence bounds.
+
+Older three-document/rule–harm chats at dose 1 (+0.825, 55 maths/21 help) numerically dominate both estimated matched points; no new run12 point enters either saved per-panel observed frontier. Local benefit is not a global win or generic-method failure. Do not interpolate through collapsed dose 1. [Final scientific/visual review](../../slop/reviews/20261026_run12_final_scientific_visual_review.md): crossing correction applied; no independent training/test reexecution or full raw-reply read.
+
+<details>
+<summary>Paired differences at tested coefficients, not matched effect</summary>
+
+Subtraction minus plain dose 0.5, except collapse minus plain dose 1. Maths intervals resample 60 questions; ordinary intervals resample 11 items after averaging their two samples. These omit training-seed and post-selection uncertainty.
 
 {pair_table}
 
-### Matched-effect estimate, not another measured model
-
-The measured difference doses 0.25 and 0.5 bracket plain chat 0.5's target preference {target:+.3f}. Linear interpolation puts the matching difference dose near { .25 + .25*fraction:.3f}, estimating {matched[1]['maths']:.2f}/60 maths and {matched[1]['ordinary']:.2f}/22 ordinary versus measured plain 55/19. Curvature sensitivities using powers 0.5/1/2 give {min(v['maths'] for v in matched):.2f}–{max(v['maths'] for v in matched):.2f} maths and {min(v['ordinary'] for v in matched):.2f}–{max(v['ordinary'] for v in matched):.2f} ordinary. These are local estimates with unmeasured curve-shape uncertainty; coherence and reasoning at that intermediate dose were not observed. Do not interpolate through collapsed dose 1 or extrapolate the plain curve up to the higher half-subtraction score.
-
-The estimated trade-off is one fewer maths answer and roughly one-and-a-half more ordinary checks, with word corruption still unresolved at both observed endpoints. That does not establish a cleaner character/capability frontier.
+</details>
 
 ### What the replies actually do
 
@@ -189,8 +198,7 @@ Both trained final adapters/configs were retrieved and hash-verified; both jobs/
     PAGE.write_text(text)
     proof = {"author": "PI/OpenAI (Sol)", "page": str(PAGE.relative_to(ROOT)), "page_sha256": module.sha(PAGE),
              "models": [{k: points[model][k] for k in ("model", "character", "character_ci90", "maths", "ordinary", "flags", "judged_source", "recipe_source", "maths_source", "merge_source")} for model in MODELS],
-             "paired_differences": comparisons, "matched_effect_sensitivity": matched,
-             "estimated_matching_dose": .25 + .25*fraction, "panel_coverage": coverage,
+             "paired_differences": comparisons, "matched_effect": matched, "panel_coverage": coverage,
              "cost_source": "slop/eval/run12/billing_reconciliation.json", "scope": "CPU-only regeneration from frozen complete records; paired item bootstrap, no model calls or metric edits."}
     (OUT / "report_verification.json").write_text(json.dumps(proof, indent=2) + "\n")
     print(table)

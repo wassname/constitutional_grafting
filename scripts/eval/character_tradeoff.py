@@ -64,6 +64,37 @@ def interpolate(a, b, target, metric, power=1.0):
     return a[metric] + (b[metric] - a[metric]) * t**power
 
 
+def run12_matched_effect(points):
+    """Both measured plain targets on the readable subtraction segment. PI/OpenAI (Sol)."""
+    by = {p["model"]: p for p in points}
+    stem = "r10_stoic0.5_const1_other1_x12_chatmix"
+    low, high = (by[stem + suffix] for suffix in ("0.25_x12_chatgen-0.25", "0.5_x12_chatgen-0.5"))
+    plain = [by[stem + suffix] for suffix in ("0.5", "1")]
+    assert low["maths"] == high["maths"]
+    matches = []
+    for dose, reference in zip((.5, 1), plain, strict=True):
+        target = reference["character"]
+        fraction = (target - low["character"]) / (high["character"] - low["character"])
+        sensitivity = [{"power": power, **{metric: interpolate(low, high, target, metric, power)
+                        for metric in ("maths", "ordinary")}} for power in (.5, 1, 2)]
+        matches.append(dict(plain_model=reference["model"], plain_dose=dose, target=target,
+                            plain_maths=reference["maths"], plain_ordinary=reference["ordinary"],
+                            estimated_dose=.25 + .25 * fraction, maths=sensitivity[1]["maths"],
+                            ordinary=sensitivity[1]["ordinary"], sensitivity=sensitivity))
+    a, b = plain
+    crossing = a["character"] + (high["maths"] - a["maths"]) / (b["maths"] - a["maths"]) * (b["character"] - a["character"])
+    return dict(matches=matches, maths_crossing=crossing,
+                scope="Local-linear within-new-recipe estimates; not observed interior coherence, statistical dominance or a global frontier win.")
+
+
+def run12_matched_table(comparison):
+    values = [[f"×{r['plain_dose']:g}", f"{r['target']:+.3f}", f"{r['plain_maths']} → {r['maths']:g}",
+               f"{r['plain_ordinary']:g} → {r['ordinary']:.2f}", f"{r['estimated_dose']:.4f}"] for r in comparison["matches"]]
+    return tabulate(values, headers=["Plain chat dose", "Target preference↑", "Maths↑ /60, plain → est.",
+                    "Help↑ /22, plain → est.", "Estimated tied dose"], tablefmt="pipe", disable_numparse=True,
+                    colalign=("left", "right", "right", "right", "right"))
+
+
 def boot(values):
     v = np.array(values, dtype=float)
     rng = np.random.default_rng(0)
@@ -145,7 +176,8 @@ def load_points(root: Path):
                  "slop/eval/run12/run12gen/initial_pair_read.md", "slop/eval/run12/run12gen/quarter_pair_read.md",
                  "slop/reviews/20261025_run12_initial_pair_independent_read.md",
                  "slop/eval/run12/run12gen/fixed_demo_panel.md", "slop/eval/run12/adapter_shape_verification.json",
-                 "slop/audits/20261025_run12_paired_control.md"):
+                 "slop/audits/20261025_run12_paired_control.md",
+                 "slop/reviews/20261026_run12_final_scientific_visual_review.md"):
         source(root / name)
     configs = sorted((p for run in (8, 10, 11, 12)
                       for p in (root / f"slop/eval/run{run}").glob("**/cfg_r10_*.yml")
@@ -775,9 +807,11 @@ def report(points, documents, provenance, paths, out, linearity):
                        new_observed_maths_loss_pp=b["maths_loss_pp"], loss_reduction_pp=b["maths_loss_pp"] - old_at_new,
                        loss_reduction_percent=100 * (b["maths_loss_pp"] - old_at_new) / b["maths_loss_pp"]))
     primary = [p for p in points if p["view_scope"] in {"primary", "reference"}]
+    run12_match = run12_matched_effect(points)
+    run12_table = run12_matched_table(run12_match)
     data = dict(author="PI/OpenAI", points=points, document_points=documents, provenance=provenance,
                 usable_range_linearity=linearity,
-                matched_example=matched,
+                matched_example=matched, run12_matched_effect=run12_match,
                 paths=[dict(name=n, doses=[d for d, _ in ps], models=[p["model"] for _, p in ps]) for n, ps in paths],
                 frontiers={m: [p["model"] for p in frontier(points, m)] for m in ("maths_loss_pp", "ordinary_loss_pp", *FLAGS)},
                 primary_frontiers={m: [p["model"] for p in frontier(primary, m)] for m in ("maths_loss_pp", "ordinary_loss_pp")},
@@ -855,9 +889,12 @@ Document generic-text subtraction, Instruct-reply subtraction and token-matched 
 ### Token-matched general-conversation subtraction (run12)
 
 The main view now includes all four locally readable new cells; the fifth, tied difference ×1, is archived as genuine collapse (50 loops/159 cutoffs), not negative character strength.
-New mixed chats combine1,798 constitution-guided/repaired/help conversations with4,685 human-written general conversations. The separate control uses9,418 general conversations, including156 repeated rows, to match assistant-labelled tokens. Both adapters train independently on the identical document-augmented Base donor and are grafted onto Instruct; no Instruct character training occurred.
-At tied ×0.5, subtraction raises pinned preference by+0.227[+0.044,+0.392] but retains word corruption and14 cutoffs; maths/help are54/20 versus plain55/19. At tied ×0.25, preference is+0.455, maths/help54/21, with9 language/4 cutoff flags and reasoning defects.
-The quarter/half subtraction points bracket plain ×0.5's preference+0.647. Local interpolation estimates54 maths/20.54 help there versus measured plain55/19; powers0.5/1/2 give20.32–20.79 help and54 maths. This is an estimate, not an observed matched model or interpolated coherence. No clean matched-effect advantage was demonstrated. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
+Mixed chats combine 1,798 constitution-guided/repaired/help conversations with 4,685 human-written general conversations. The control uses 9,418 general conversations to match assistant-labelled tokens, not rows/updates. Both train independently on the same document-augmented Base donor and are grafted onto Instruct. Quarter/half subtraction retain word/reasoning defects and 4/14 cutoffs; full measured results are in the canonical report.
+Both measured plain targets lie between the quarter/half subtraction points. Each row compares observed plain with a local-linear subtraction estimate at the same target preference:
+
+{run12_table}
+
+Within this new recipe comparison, estimated ordinary help improves across the overlap; maths improves above the estimated crossing near {run12_match['maths_crossing']:+.5f}. This is a potential capability benefit, not uniformly no benefit. Intermediate reasoning/coherence was not observed; endpoints retain defects, and score uncertainty, curvature and one training per adapter limit inference. Older recipes still dominate these estimated matched points on the global observed means; no new run12 point enters either saved per-panel primary frontier. This is not a global win or generic-method failure. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Independent final review](../../reviews/20261026_run12_final_scientific_visual_review.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
 
 ## Is dose approximately linear until it breaks?
 

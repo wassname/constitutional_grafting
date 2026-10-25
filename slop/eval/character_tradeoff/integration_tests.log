@@ -5,6 +5,6 @@ test_run12_five_cells_labels_and_read_based_boundary (test_character_tradeoff.Ch
 test_stage_separation_and_evidence_based_views (test_character_tradeoff.CharacterTradeoffTest.test_stage_separation_and_evidence_based_views) ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 5.436s
+Ran 5 tests in 4.599s
 
 OK

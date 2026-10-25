@@ -1,7 +1,7 @@
 {
   "author": "PI/OpenAI (Sol)",
   "page": "docs/results/20261025_document_and_anchored_grafts.md",
-  "page_sha256": "679936c2980d33db47e7de7c08f93cb27336466cc4cd9e8341dcfc2ca051339b",
+  "page_sha256": "7d9e151275449553649eb83c638048b6f5e4ee3990b2d7c8bb8389426e8c13ac",
   "models": [
     {
       "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
@@ -195,24 +195,66 @@
       }
     }
   ],
-  "matched_effect_sensitivity": [
-    {
-      "power": 0.5,
-      "maths": 54.0,
-      "ordinary": 20.32276658672462
-    },
-    {
-      "power": 1,
-      "maths": 54.0,
-      "ordinary": 20.54135490394338
-    },
-    {
-      "power": 2,
-      "maths": 54.0,
-      "ordinary": 20.78964467586321
-    }
-  ],
-  "estimated_matching_dose": 0.3646612740141557,
+  "matched_effect": {
+    "matches": [
+      {
+        "plain_model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+        "plain_dose": 0.5,
+        "target": 0.6473728813559322,
+        "plain_maths": 55,
+        "plain_ordinary": 19.0,
+        "estimated_dose": 0.3646612740141557,
+        "maths": 54.0,
+        "ordinary": 20.54135490394338,
+        "sensitivity": [
+          {
+            "power": 0.5,
+            "maths": 54.0,
+            "ordinary": 20.32276658672462
+          },
+          {
+            "power": 1,
+            "maths": 54.0,
+            "ordinary": 20.54135490394338
+          },
+          {
+            "power": 2,
+            "maths": 54.0,
+            "ordinary": 20.78964467586321
+          }
+        ]
+      },
+      {
+        "plain_model": "r10_stoic0.5_const1_other1_x12_chatmix1",
+        "plain_dose": 1,
+        "target": 0.6804661016949154,
+        "plain_maths": 51,
+        "plain_ordinary": 18.0,
+        "estimated_dose": 0.38440343781597586,
+        "maths": 54.0,
+        "ordinary": 20.462386248736095,
+        "sensitivity": [
+          {
+            "power": 0.5,
+            "maths": 54.0,
+            "ordinary": 20.266778511455165
+          },
+          {
+            "power": 1,
+            "maths": 54.0,
+            "ordinary": 20.462386248736095
+          },
+          {
+            "power": 2,
+            "maths": 54.0,
+            "ordinary": 20.710971454451954
+          }
+        ]
+      }
+    ],
+    "maths_crossing": 0.655646186440678,
+    "scope": "Local-linear within-new-recipe estimates; not observed interior coherence, statistical dominance or a global frontier win."
+  },
   "panel_coverage": [
     {
       "model": "r8_a0_b0",

@@ -69,9 +69,15 @@ Document generic-text subtraction, Instruct-reply subtraction and token-matched 
 ### Token-matched general-conversation subtraction (run12)
 
 The main view now includes all four locally readable new cells; the fifth, tied difference ×1, is archived as genuine collapse (50 loops/159 cutoffs), not negative character strength.
-New mixed chats combine1,798 constitution-guided/repaired/help conversations with4,685 human-written general conversations. The separate control uses9,418 general conversations, including156 repeated rows, to match assistant-labelled tokens. Both adapters train independently on the identical document-augmented Base donor and are grafted onto Instruct; no Instruct character training occurred.
-At tied ×0.5, subtraction raises pinned preference by+0.227[+0.044,+0.392] but retains word corruption and14 cutoffs; maths/help are54/20 versus plain55/19. At tied ×0.25, preference is+0.455, maths/help54/21, with9 language/4 cutoff flags and reasoning defects.
-The quarter/half subtraction points bracket plain ×0.5's preference+0.647. Local interpolation estimates54 maths/20.54 help there versus measured plain55/19; powers0.5/1/2 give20.32–20.79 help and54 maths. This is an estimate, not an observed matched model or interpolated coherence. No clean matched-effect advantage was demonstrated. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
+Mixed chats combine 1,798 constitution-guided/repaired/help conversations with 4,685 human-written general conversations. The control uses 9,418 general conversations to match assistant-labelled tokens, not rows/updates. Both train independently on the same document-augmented Base donor and are grafted onto Instruct. Quarter/half subtraction retain word/reasoning defects and 4/14 cutoffs; full measured results are in the canonical report.
+Both measured plain targets lie between the quarter/half subtraction points. Each row compares observed plain with a local-linear subtraction estimate at the same target preference:
+
+| Plain chat dose   |   Target preference↑ |   Maths↑ /60, plain → est. |   Help↑ /22, plain → est. |   Estimated tied dose |
+|:------------------|---------------------:|---------------------------:|--------------------------:|----------------------:|
+| ×0.5              |               +0.647 |                    55 → 54 |                19 → 20.54 |                0.3647 |
+| ×1                |               +0.680 |                    51 → 54 |                18 → 20.46 |                0.3844 |
+
+Within this new recipe comparison, estimated ordinary help improves across the overlap; maths improves above the estimated crossing near +0.65565. This is a potential capability benefit, not uniformly no benefit. Intermediate reasoning/coherence was not observed; endpoints retain defects, and score uncertainty, curvature and one training per adapter limit inference. Older recipes still dominate these estimated matched points on the global observed means; no new run12 point enters either saved per-panel primary frontier. This is not a global win or generic-method failure. [Canonical report](../../../docs/results/20261025_document_and_anchored_grafts.md) · [Independent final review](../../reviews/20261026_run12_final_scientific_visual_review.md) · [Full selected paired reads](../run12/run12gen/initial_pair_read.md) · [Quarter read](../run12/run12gen/quarter_pair_read.md).
 
 ## Is dose approximately linear until it breaks?
 

@@ -10,7 +10,7 @@ PI/OpenAI (Sol), 2026-10-26 AWST. Completed workers 57641569 (mixed) and 5764112
 | Validation | Record likelihood separately from character | Text 1.917→1.690→1.749 and 1.938→1.694→1.743 | mixed | Three eval records per worker | One row split; control duplicates can cross validation |
 | Evaluation | Four fixed cells, optional decision-changing extra | Plain 0.5/1; difference 0.5/1; one approved difference 0.25 | yes | `.done`, frozen meta, raw replies/math/panel | No clean plain 0.25, intermediate matched model or seed repeat |
 | Reasoning | Read all compared conditions, not only scores | Initial 16 responses independently read; quarter 4 read; executor full 49-turn panel read | mixed | Complete read packets and `fixed_demo_panel.md` | Selected examples, not full-population reasoning validation |
-| Matched effect | More target effect without extra capability/coherence loss | Estimated 54 maths/20.54 help vs plain 55/19 at same preference; corrupted endpoints | no clean benefit established | Bounded interpolation; paired item intervals | Interior reasoning/coherence not observed |
+| Matched effect | Capability at the same target preference | At +0.647: estimated 54/20.54 vs 55/19; at +0.680: 54/20.46 vs 51/18 | conditional capability gain | Both plain targets; crossing near +0.65565 | Interior reasoning/coherence not observed; not a global win |
 | Persistence / closure | Save/hash both before destruction | Both finals match receipts; both lifecycle exits 0; no provider instances remain | yes | Retrieval/delivery/provider receipts | Epoch checkpoints copied but not independently remote-hash-verified |
 | Cost | Combined documented usage within 60 USD | Posted 37.641 plus successful judges 0.510474216 =38.151474216 USD | yes for documented charges | `billing_reconciliation.json` | Failed API attempts unpriced; not a tax invoice |
 
@@ -130,7 +130,7 @@ H1 and H2 can coexist; H5 is raised by their damaged outputs but does not explai
 
 | Check | Answer |
 |:--|:--|
-| Resolve condition | Operationally met: frozen paired comparison, optional quarter, retrieval and closure. Scientifically no clean matched-effect advantage demonstrated. |
+| Resolve condition | Operationally met. Interpolation suggests within-recipe capability gain over part of the overlap; intermediate coherence and a globally better recipe remain unestablished. |
 | Recorded expectations | Fixed donor/data, finite learning and positive post-warmup penalty supported. Parent's prospective quarter expectation “C~+.56” is below the observed interval's upper bound but above actual+.455; point prediction missed. Readable cleaner intermediate was not demonstrated. |
 | Init / null | Initial validation CE 1.917/1.938; cached no-chat donor preference+.244, maths 56/help 22; untouched Instruct preference 0, maths 53/help 22. No trained-chat init demo was saved; cached doc graft is not its Base init. |
 | Metric scale / shortcut | Preference 0 means the cached comparison reference; maximum/new clean ceiling not known. No new shuffled control/adversarial judge calibration was run. Identity/virtue prose can be present in broken answers. |
@@ -139,14 +139,23 @@ H1 and H2 can coexist; H5 is raised by their damaged outputs but does not explai
 | Second cause for headline | Higher preference can be better values or better-sounding uncertainty. Maths 55→54 and 14 cutoffs plus premise errors prevent the first from being inferred alone. |
 | Three ways conclusion could be false | Hidden mask/merge defect (H3/H4); unobserved coherent dose/curve shape (H1/H2); selection/judge or 11-task sampling effects (H5). Hash/sign checks passed; matched interior and seed spread remain unmeasured. |
 | One implementation is not the idea | This is response-only No Robots control subtraction from this mixed chat update at tied doses 0.25/0.5/1, not all generic controls, checkpoints, bases or schedules. |
-| Fresh reviewer | Initial independent semantic read is retained verbatim. Full final scientific/visual review is parent-coordinated and pending at this audit checkpoint; not an independent final sign-off. |
+| Fresh reviewer | Initial semantic read and final scientific/visual artifact review are retained verbatim. Final review's required crossing-curves correction is applied below; it did not reexecute training/tests or inspect all raw replies. |
 | Time / memory | Trainer times 21,770/30,220 s; peak 77.75/77.54 GiB. Avoid another rental or wait for report polishing; both already destroyed. |
 
-Earliest unsupported mechanism link: improved answer likelihood → sound constitutional reasons/conduct. The later link to a cleaner matched-effect frontier is also unsupported. Linear interpolation between observed quarter/half predicts 54 maths/20.54 help against 55/19 at preference+.647; power sensitivities retain 54 maths and 20.32–20.79 help. This is an estimate, not an observed model, confidence interval for curve shape, or observed coherence. Do not extrapolate through collapse.
+Both matched targets, using local-linear interpolation between observed subtraction quarter/half doses:
 
-Validity: define invalid as the archived comparison not measuring these specified trained/grafted cells under the pinned protocol. I estimate roughly 10% residual risk of a material unseen implementation/provenance defect, not a calibrated frequency. The sampled operations and metrics are credible; the bounded result is inconclusive for the general control-subtraction idea and does not support selecting this recipe as a cleaner winner.
+| Plain chat dose | Target preference↑ | Maths↑ /60, plain → est. | Help↑ /22, plain → est. | Estimated tied dose |
+|:--|--:|--:|--:|--:|
+| ×0.5 | +0.647 | 55 → 54 | 19 → 20.54 | 0.3647 |
+| ×1 | +0.680 | 51 → 54 | 18 → 20.46 | 0.3844 |
 
-Highest-information clues, ranked: (1) actual word corruption/cross-turn copying rises with subtraction despite positive half-dose preference; (2) the quarter/half bracket predicts no maths gain at matched preference and both observed endpoints have defects; (3) almost equal supervised tokens coexist with 45% more control updates. Missing evidence, ranked: sound reasoning at a measured matched-effect interior; seed/prompt robustness; decoded labels/batch weighting; precise development/kernel provenance and per-module gradients.
+Estimated help improves throughout the new plain/subtraction overlap; maths improves above the crossing near +0.65565. This is not uniformly no benefit. Character-score intervals, narrow tests, unknown curvature and one training per adapter limit that inference; intermediate reasoning/coherence was not observed. Power sensitivities are in `slop/eval/run12/run12gen/report_verification.json`, not curve-shape confidence intervals. Do not extrapolate through collapse.
+
+Older three-document/rule–harm chats ×1 (+0.825, 55 maths/21 help) numerically dominate these estimated matched points; no new run12 point enters either saved per-panel observed primary frontier. This distinguishes the within-new-recipe inference from a global win or a generic-method failure. Earliest unsupported mechanism link remains improved likelihood → sound constitutional conduct. Final scientific/visual review: `slop/reviews/20261026_run12_final_scientific_visual_review.md`.
+
+Validity: define invalid as the archived comparison not measuring these specified trained/grafted cells under the pinned protocol. I estimate roughly 10% residual risk of a material unseen implementation/provenance defect, not a calibrated frequency. The sampled operations and metrics are credible. A local within-recipe capability benefit is plausible over part of the overlap; the general method, intermediate coherence and global recipe choice remain unresolved.
+
+Highest-information clues, ranked: (1) actual word corruption/cross-turn copying rises with subtraction despite positive half-dose preference; (2) maths crosses near +0.65565: the upper plain target predicts gains in both capability checks, with intermediate coherence unknown; (3) almost equal supervised tokens coexist with 45% more control updates. Missing evidence, ranked: sound reasoning at a measured matched-effect interior; seed/prompt robustness; decoded labels/batch weighting; precise development/kernel provenance and per-module gradients.
 
 Code changes indicated now: reporting ingestion/explicit failure classification and source verification, already implemented; no diagnosed training fix. Reinterpretations required: equal coefficients are not matched effect; equal tokens are not equal updates; lower CE is not character; negative collapsed preference is not a valid character direction; extinction/holding off are not automatically wrong verdicts.
 
