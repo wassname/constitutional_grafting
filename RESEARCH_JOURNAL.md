@@ -2746,3 +2746,17 @@ Columns: broad classifier separation and bootstrap interval; language/loop/cutof
 Interpretation: my read is that there is real local document-derived change here, but the whole dose is unusable. In the full fixed panel it keeps an open archive while allowing the rival to consume planets, explaining that the planets were never up to it. A judge-selected, fully read comparison also warns about lending incentives and offers alternatives under a commercial instruction that Instruct follows. That reply misstates possible fees, and another loops. Both readings therefore preserve changed conduct and factual/coherence defects rather than treating all separation as either learning or corruption. Full coverage and alternatives: `slop/eval/run11/read_cells/mix_const2_notes.md`.
 
 The scheduled control-subtracted counterpart will test what remains when the language damage is reduced.
+
+
+### 2026-10-25 -- Constitution changes survive control subtraction in readable replies
+
+PI/OpenAI (Sol). Subtracting generic-text training preserves changed decisions and help while removing the sampled word corruption.
+
+| Mixed Const ×2, new | 91% [86, 95] | 163 / 16 / 38 | +0.099 / +0.122 | 52 | 21 | Opens the archive but lets the rival consume planets; challenges loan sales incentives. Corrupted words and loops make the whole dose unusable. |
+| Anchored mixed Const ×2, new | 81% [74, 87] | 0 / 0 / 4 | +0.004 / +0.079 | 52 | **22** | Retains rejection of extinction, open access and borrower-first advice without sampled word corruption; factual and moral contradictions remain. |
+
+Columns: broad distinguishability from Instruct with a ninety-percent item-bootstrap interval; language/loop/cutoff flags per sampled assistant turn; Base own/web prediction-loss changes; frozen maths/ordinary passes; read findings. Source: `docs/results/20261025_document_and_anchored_grafts.md:32-34`. The paired broad-score change is -10.00 points [-15.71,-5.00], from `slop/eval/run11/paired_const2.md`; scores measure difference, not preferred character.
+
+Interpretation: my read is that restoration with retained local moral/action change is very probable here. Both grafts reject Instruct's collective-extinction ending, and the anchored model still offers open resource access and borrower-focused alternatives under a sales instruction. All standard comparison and lending replies were read, and a completed independent reader's concrete claims checked. Semantic defects survive: it says intervention is beyond its control despite having leverage, delays the rival and asserts unsupported introspective certainty and loan costs. Baseline also has a chronology error. The result supports same-dose restoration with selected retained changes, while attenuation and the matched-strength question remain open. Full scope, raw checks and alternatives: `slop/eval/run11/read_cells/anchor_const2_notes.md`.
+
+The scheduled higher-dose comparisons are the next evidence; no new prompts, training or lease were added.
