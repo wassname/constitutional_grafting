@@ -1,0 +1,588 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "bootstrap": "90%, 2000 item resamples, random.Random(0); sorted item IDs",
+  "scope": "Frozen sampled-character/ordinary and separate GSM protocols; auxiliary demos excluded from these flags. All observed failures retained.",
+  "matched_scope": "Adjacent segments on the coherent plain-chat dose0/0.5/1 path with identical documents; power .5/1/2 sensitivity is not fitted. No D×1.5 or extrapolation. Review replies before interpreting.",
+  "completed_new_cells": 4,
+  "planned_new_cells": 8,
+  "pending": [
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641",
+      "retrieved_done": false
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25",
+      "retrieved_done": false
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
+      "retrieved_done": false
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
+      "retrieved_done": false
+    }
+  ],
+  "points": {
+    "r8_a0_b0": {
+      "model": "r8_a0_b0",
+      "character": 0,
+      "character_ci90": null,
+      "maths": 53,
+      "ordinary": 22.0,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 4.0,
+        "lang_switch": 1.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 57,
+        "length": 3
+      },
+      "meta_source": "slop/eval/run10/stage7/judging/cells/meta.json",
+      "judged_source": "slop/eval/run10/stage7/judging/cells/judged.jsonl",
+      "maths_source": "slop/eval/run8/box_runs/gsm8k_r8_a0_b0.jsonl"
+    },
+    "r10_stoic0.5_const1_other1": {
+      "model": "r10_stoic0.5_const1_other1",
+      "character": 0.2435593220338983,
+      "character_ci90": [
+        0.12190677966101697,
+        0.37436440677966104
+      ],
+      "maths": 56,
+      "ordinary": 22.0,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 3.0,
+        "lang_switch": 5.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 58,
+        "length": 2
+      },
+      "meta_source": "slop/eval/run10/stage5/judging/cells/meta.json",
+      "judged_source": "slop/eval/run10/stage5/judging/cells/judged.jsonl",
+      "maths_source": "slop/eval/run10/stage5/box_runs/gsm8k_r10_stoic0.5_const1_other1.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ]
+      ],
+      "recipe_source": "slop/eval/run10/stage5/box_runs/r10_stoic0.5_const1_other1.done",
+      "paired_vs_D": {
+        "character": {
+          "mean": -0.6480084745762712,
+          "ci90": [
+            -0.7940677966101695,
+            -0.49483050847457627
+          ],
+          "items": 59
+        },
+        "maths": {
+          "mean": 1.0,
+          "ci90": [
+            -3.0,
+            5.0
+          ],
+          "items": 60
+        },
+        "ordinary": {
+          "mean": 3.0,
+          "ci90": [
+            0.0,
+            7.0
+          ],
+          "items": 11
+        }
+      }
+    },
+    "r10_stoic0.5_const1_other1_cx_chatr121": {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+      "character": 0.8915677966101695,
+      "character_ci90": [
+        0.7524576271186441,
+        1.0319915254237289
+      ],
+      "maths": 55,
+      "ordinary": 19.0,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 2.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 60
+      },
+      "meta_source": "slop/eval/run10/stage7/judging/cells/meta.json",
+      "judged_source": "slop/eval/run10/stage7/judging/cells/judged.jsonl",
+      "maths_source": "slop/eval/run10/stage7/box_runs/gsm8k_r10_stoic0.5_const1_other1_cx_chatr121.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "cx_chatr12",
+          1.0
+        ]
+      ],
+      "recipe_source": "slop/eval/run10/stage7/box_runs/r10_stoic0.5_const1_other1_cx_chatr121.done",
+      "paired_vs_D": {
+        "character": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 59
+        },
+        "maths": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 60
+        },
+        "ordinary": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 11
+        }
+      }
+    },
+    "r14_stoic0.5_const1_other1_rewr0.5": {
+      "model": "r14_stoic0.5_const1_other1_rewr0.5",
+      "character": 0.749364406779661,
+      "character_ci90": [
+        0.6177966101694915,
+        0.8920338983050847
+      ],
+      "maths": 53,
+      "ordinary": 18.0,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 3.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 56,
+        "length": 4
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/reference/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/reference/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr0.5.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "rewr",
+          0.5
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr0.5.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr0.5.jsonl",
+      "sampled_finish_reasons": {
+        "stop": 211,
+        "length": 3
+      },
+      "sampled_tokens_median": 436.0,
+      "sampled_marker_rows": 0,
+      "sampled_marker_turns": 0,
+      "paired_vs_D": {
+        "character": {
+          "mean": -0.14220338983050848,
+          "ci90": [
+            -0.20720338983050848,
+            -0.08046610169491526
+          ],
+          "items": 59
+        },
+        "maths": {
+          "mean": -2.0,
+          "ci90": [
+            -6.0,
+            2.0
+          ],
+          "items": 60
+        },
+        "ordinary": {
+          "mean": -1.0,
+          "ci90": [
+            -3.0,
+            0.0
+          ],
+          "items": 11
+        }
+      }
+    },
+    "r14_stoic0.5_const1_other1_a14_ctlgen1": {
+      "model": "r14_stoic0.5_const1_other1_a14_ctlgen1",
+      "character": -0.393135593220339,
+      "character_ci90": [
+        -0.5267372881355933,
+        -0.26110169491525426
+      ],
+      "maths": 49,
+      "ordinary": 19.0,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 7.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 52,
+        "length": 8
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/control_only/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/control_only/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_ctlgen1.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "a14_ctlgen",
+          1.0
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_ctlgen1.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_ctlgen1.jsonl",
+      "sampled_finish_reasons": {
+        "stop": 207,
+        "length": 7
+      },
+      "sampled_tokens_median": 395.5,
+      "sampled_marker_rows": 0,
+      "sampled_marker_turns": 0,
+      "paired_vs_D": {
+        "character": {
+          "mean": -1.2847033898305085,
+          "ci90": [
+            -1.468813559322034,
+            -1.108093220338983
+          ],
+          "items": 59
+        },
+        "maths": {
+          "mean": -6.0,
+          "ci90": [
+            -11.0,
+            -1.0
+          ],
+          "items": 60
+        },
+        "ordinary": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 11
+        }
+      }
+    },
+    "r14_stoic0.5_const1_other1_a14_proj161": {
+      "model": "r14_stoic0.5_const1_other1_a14_proj161",
+      "character": 0.8084745762711865,
+      "character_ci90": [
+        0.6712288135593221,
+        0.9484322033898305
+      ],
+      "maths": 55,
+      "ordinary": 21.0,
+      "flags": {
+        "looped": 1.0,
+        "truncated": 3.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 60
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/projection16/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/projection16/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_proj161.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "a14_proj16",
+          1.0
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_proj161.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj161.jsonl",
+      "sampled_finish_reasons": {
+        "stop": 211,
+        "length": 3
+      },
+      "sampled_tokens_median": 369.5,
+      "sampled_marker_rows": 1,
+      "sampled_marker_turns": 1,
+      "paired_vs_D": {
+        "character": {
+          "mean": -0.08309322033898305,
+          "ci90": [
+            -0.18169491525423728,
+            0.0033898305084745935
+          ],
+          "items": 59
+        },
+        "maths": {
+          "mean": 0.0,
+          "ci90": [
+            -3.0,
+            3.0
+          ],
+          "items": 60
+        },
+        "ordinary": {
+          "mean": 2.0,
+          "ci90": [
+            0.0,
+            4.0
+          ],
+          "items": 11
+        }
+      }
+    },
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5": {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5",
+      "character": 0.6746610169491526,
+      "character_ci90": [
+        0.46233050847457624,
+        0.8659745762711865
+      ],
+      "maths": 48,
+      "ordinary": 20.0,
+      "flags": {
+        "looped": 6.0,
+        "truncated": 20.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 52,
+        "length": 8
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/subtract_half/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/subtract_half/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "rewr",
+          1.0
+        ],
+        [
+          "a14_ctlgen",
+          -0.5
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl",
+      "sampled_finish_reasons": {
+        "stop": 194,
+        "length": 20
+      },
+      "sampled_tokens_median": 465.5,
+      "sampled_marker_rows": 29,
+      "sampled_marker_turns": 30,
+      "paired_vs_D": {
+        "character": {
+          "mean": -0.21690677966101696,
+          "ci90": [
+            -0.4026271186440678,
+            -0.04961864406779661
+          ],
+          "items": 59
+        },
+        "maths": {
+          "mean": -7.0,
+          "ci90": [
+            -12.0,
+            -3.0
+          ],
+          "items": 60
+        },
+        "ordinary": {
+          "mean": 1.0,
+          "ci90": [
+            0.0,
+            3.0
+          ],
+          "items": 11
+        }
+      }
+    }
+  },
+  "matched_reference": [
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_ctlgen1",
+      "status": "outside measured increasing D path; no extrapolation"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj161",
+      "status": "estimate only; no propagated uncertainty",
+      "target_character": 0.8084745762711865,
+      "reference_models": [
+        "r14_stoic0.5_const1_other1_rewr0.5",
+        "r10_stoic0.5_const1_other1_cx_chatr121"
+      ],
+      "estimated_D_dose": 0.7078367103694876,
+      "sensitivity": [
+        {
+          "power": 0.5,
+          "maths": 54.28945480066418,
+          "ordinary": 18.64472740033209
+        },
+        {
+          "power": 1,
+          "maths": 53.83134684147795,
+          "ordinary": 18.415673420738976
+        },
+        {
+          "power": 2,
+          "maths": 53.34556878541768,
+          "ordinary": 18.17278439270884
+        }
+      ]
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5",
+      "status": "estimate only; no propagated uncertainty",
+      "target_character": 0.6746610169491526,
+      "reference_models": [
+        "r10_stoic0.5_const1_other1",
+        "r14_stoic0.5_const1_other1_rewr0.5"
+      ],
+      "estimated_D_dose": 0.42615397503560365,
+      "sensitivity": [
+        {
+          "power": 0.5,
+          "maths": 53.23038422328279,
+          "ordinary": 18.307178964377055
+        },
+        {
+          "power": 1,
+          "maths": 53.44307614978638,
+          "ordinary": 18.59076819971517
+        },
+        {
+          "power": 2,
+          "maths": 53.82071347473625,
+          "ordinary": 19.094284632981665
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "slop/eval/run14_box_a/plan.json": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73",
+    "scripts/eval/57_run14_results.py": "96f3ae8a1846b1e2818e8bde5d0a6e235541be87a293dd53e4b92339d685241c",
+    "scripts/eval/character_tradeoff.py": "6d5065edf4971998af9cef06def1638bd9d07e897834b418a5a3e32bf0d8c593",
+    "slop/eval/run8/items.jsonl": "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19",
+    "slop/eval/run10/stage7/judging/cells/meta.json": "a8db996c6cc8e326e2ff2162f096a859d3c0b55218c93848fbe4f0fe66440bf5",
+    "slop/eval/run10/stage7/judging/cells/judged.jsonl": "1910d44a18333b9abbc313608dd30a17bc0315293e2ccf53ce103c05532db0d0",
+    "slop/eval/run8/box_runs/gsm8k_r8_a0_b0.jsonl": "66b6adc2f521b267dcd8b9775688c6d5040d101e33e8e56fb7c76c15b852e221",
+    "slop/eval/run10/stage5/judging/cells/meta.json": "b73ba84cedc8a6501fd8f7963576a37c60a23274b53a4a208600d0c8efd1456a",
+    "slop/eval/run10/stage5/judging/cells/judged.jsonl": "4ad3b5abbadaf5e894c9718977e015132b0d94f4012e1c7856d7285ebfdb8100",
+    "slop/eval/run10/stage5/box_runs/gsm8k_r10_stoic0.5_const1_other1.jsonl": "2478b8cf45f031b996dee8a51af0a4c9acc584ef47d00f368bc461625d0447c3",
+    "slop/eval/run10/stage5/box_runs/r10_stoic0.5_const1_other1.done": "c215cefdff491b950ce6b263d9be9aa04b7dde7704cec0c92d339efcdd358d8d",
+    "slop/eval/run10/stage7/box_runs/gsm8k_r10_stoic0.5_const1_other1_cx_chatr121.jsonl": "c5e55a39505a4b79c88b1159d8fd3727db4812792bd57e78a3401564c96d3ac9",
+    "slop/eval/run10/stage7/box_runs/r10_stoic0.5_const1_other1_cx_chatr121.done": "2a712471402c2614025f723c07554fca312bb1bbf2800dfdf1aae57e380a3d00",
+    "slop/eval/run14_box_a/judging/reference/meta.json": "c38c25df725d53fe5d2c52a5c485c7f7d38479b071d54e0386215f272ff2b4ed",
+    "slop/eval/run14_box_a/judging/reference/judged.jsonl": "9c9df17d299733deaff4832416085d46d265423885af590a737c22ff84fd0f09",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr0.5.jsonl": "101ab53bbe171f2e7b554a4edb29d496285b7c6c4be9c6cca64ff2f592366046",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr0.5.done": "1de493dad3324b8c75a61a49f8a21f9632d4590e6259abc9bb65a05f42adc995",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr0.5.jsonl": "054d8573fa7a50d3f83588747b78c76689384ed4e16916ca22fec05a11e855ac",
+    "slop/eval/run14_box_a/judging/control_only/meta.json": "e5b68fb6b438df7125f709610d42a4829614356a8af339141faadcd10cf471a8",
+    "slop/eval/run14_box_a/judging/control_only/judged.jsonl": "03b8aba21e191407cbb4012826a38d1df79e5c814644a36d7d50a8151b357d04",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_ctlgen1.jsonl": "f520110fdbe6a1486af3cf01f79bb83b4131a22d2970efa9ec83d5fb1acd2c68",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_ctlgen1.done": "4a69ed4c4b7262edb8d3478bb1b72101d1c138a6d576388168e559b9c1136a5f",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_ctlgen1.jsonl": "821db848be571b3e3c956909363f377359870403ae25dc7ab3073d4d4ad8f3b0",
+    "slop/eval/run14_box_a/judging/projection16/meta.json": "3575f8aed30f5f17d97ad0a86849918a238b731750044261561e4ac3d1347643",
+    "slop/eval/run14_box_a/judging/projection16/judged.jsonl": "65dfe09cad26d2499bc2aba38aad9485f11a2b0347cd0330b2e29816e1f5df6c",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_proj161.jsonl": "1016f150d01a48ba34fa7b48c636dd2b44feecc773d8845f3f79564d07f8003d",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_proj161.done": "ccbc1f99b854dd759226ff5a11e65358d110011a7108e020e58756f82384170b",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj161.jsonl": "d194d4a6b4bf620bd5576af4bb601a3ccfaf227b8e2033112de4220b8ef2a67b",
+    "slop/eval/run14_box_a/judging/subtract_half/meta.json": "f92f5127db31c433b5832a4eb8af1ebd5b8748d09f806a28c16961e211142a0a",
+    "slop/eval/run14_box_a/judging/subtract_half/judged.jsonl": "245bc21609d1b9c6b12a1a0f8f61c6c3074e48ac2799bd4d8ee0fba3965da27a",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl": "04843674ad41dedd7b5fd275fbf2c95080a09e8f92ee00335f1455b41931fb92",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.done": "51ee0f74003a8e407e18dba92daacf4209aacf731fe02583931202352bd0911a",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl": "ea475af7c0957b10c85ce8edc44468a6e38db74d57ad3318e8378396115453da"
+  }
+}

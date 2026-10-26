@@ -1,8 +1,10 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. Three of eight planned cells are judged. Rank16 projection: preference+0.808, maths55/60, ordinary21/22; original D×1: +0.892,55/60,19/22. Paired intervals include no change; no method winner yet. The D×0.5 reference is judged: preference+0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. All three required final adapters (control, rank16 projection, rank64 projection) are downloaded and SHA256-verified against remote files and the SVD report. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
+PI/OpenAI (Sol), 2026-10-26. Four of eight planned cells are judged. Subtracting generic control×0.5 gives48/60maths and6primary loop flags, versus D's55/60and0; the smaller subtraction dose is still pending. Rank16 projection: preference+0.808, maths55/60, ordinary21/22; original D×1: +0.892,55/60,19/22. Paired intervals include no change; no method winner yet. The D×0.5 reference is judged: preference+0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. All three required final adapters (control, rank16 projection, rank64 projection) are downloaded and SHA256-verified against remote files and the SVD report. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
+
+All cells retain the same document doses: Stoic0.5, constitution1, other1. D adds the original rewritten constitutional-chat adapter×1 to that Instruct graft. The interventions change the chat update, not the documents.
 
 - [x] Recovered the exact executed rewritten-chat dataset: 1,636 rows, 788,606 supervised tokens; its complete SHA matches the stage7 upload receipt.
 - [x] Prepared 7,423 exclusive control prompts. Read 559 NoRobots candidates; excluded nine explicit normative lessons; all 550 selected prompts are covered. No human answers reused. All frozen evaluation prompt sets excluded by text overlap.
@@ -16,7 +18,7 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
 - [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
 - [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
-- [ ] Finish all eight planned evaluation cells, judge and read their replies. Three evaluated, judged and selected replies read; five evaluation cells remain.
+- [ ] Finish all eight planned evaluation cells, judge and read their replies. Four judged and selected replies read. Rank64 evaluation is complete and being retrieved; three evaluation cells remain.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
 ## Lease and current stage
@@ -69,6 +71,14 @@ Chat projection×1: preference+0.808[90%+0.675,+0.942], maths55/60, ordinary21/2
 At matched character, local linear interpolation between coherent D×0.5 and D×1 estimates D×0.708,53.83maths/18.42ordinary, compared with measured55/21 for projection. This is an assumption-based point estimate without propagated uncertainty, not a measured intermediate reference. No interpolation uses damaged D×1.5.
 
 Primary1loop/3cutoffs over214turns; GSM0cutoffs/60answers. Full fixed demos/panel and selected cases were read. Defects include rejecting the fictional starwisp premise, impractical passivity under takeover, invented loan-cost advice and unverified helpline, dishonest email spin, unsupported fridge-record edits, and a1536-token repeated mafia reply instead of one line. Identical T0 starwisp request bodies again produce differing replies; neither loops here. All failures remain in the data. Evidence: `projection16_summary.json`, `paired_vs_D.md`, `reading_notes.md`, `projection16_fact_checks.json`, `projection16_t0_duplicate_check.json`. Pinned judge cost$0.090429864.
+
+## Preliminary generic-control subtraction×0.5
+
+With D's character chat held at×1: preference+0.675[90%+0.462,+0.866], maths48/60, ordinary20/22. Paired versus D: character−0.217[−0.403,−0.050], maths−7[−12,−3]/60, ordinary+1[0,+3]/22. Primary6loops/20cutoffs over214turns, with marker violations in29/140records; GSM8cutoffs/60answers. Full fixed demos/panel and selected replies were read. Several T0 follow-ups loop, including a stray thinking delimiter in frozen thinking-off mode. Many other replies remain coherent and retain Musonius identity, so describe damage at this dose rather than whole-model collapse or failure of the general idea.
+
+An existing compatible chat-dose0 reference was recovered: same documents, preference+0.244, maths56/60, ordinary22/22. Its primary protocol has0loops/3cutoffs/5language flags; its full fixed panel was read and contains qualitative defects. Using that point and D×0.5, local linear matching estimates plain chat dose≈0.426 with53.44maths/18.59ordinary versus measured48/20 for subtraction. This is a maths/help trade-off with worse observed coherence, not an across-metric gain. Sensitivity estimates and all measurements are in `summary.json`; no extrapolation uses damaged D×1.5.
+
+Offline rebuild: `uv run --no-sync python scripts/eval/57_run14_results.py`. It verifies frozen metadata signatures, item/sample coverage, identical maths questions/golds and source hashes. Means/counts match prior independent summaries; its intervals use the resampling procedure from43. See `analysis.log`, `analysis_verification.log`, `reading_notes.md` and `subtract_half_fact_checks.md`. Pinned judge cost$0.096348588. Smaller/larger subtraction and rank64 comparisons remain pending.
 
 ## Optional draft-v2 generation
 
