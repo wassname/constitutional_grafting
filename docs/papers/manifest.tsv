@@ -31,3 +31,5 @@ filename	url	title	authors	year
 2023_pan_machiavelli.md	https://arxiv.org/html/2304.03279v4	Do the Rewards Justify the Means? Measuring Trade-Offs Between Rewards and Ethical Behavior in the MACHIAVELLI Benchmark	Alexander Pan et al.	2023
 2020_fickinger_multi-principal-assistance-games.md	https://arxiv.org/pdf/2007.09540	Multi-Principal Assistance Games	Arnaud Fickinger; Simon Zhuang; Dylan Hadfield-Menell; Stuart Russell	2020
 2020_fickinger_mpag-collegial-mechanisms.md	https://arxiv.org/pdf/2012.14536	Multi-Principal Assistance Games: Definition and Collegial Mechanisms	Arnaud Fickinger; Simon Zhuang; Andrew Critch; Dylan Hadfield-Menell; Stuart Russell	2020
+2026_obrien_inoculation-midtraining.md	https://arxiv.org/html/2609.15886v1	Inoculation Midtraining with Learned Neologisms	Kyle O'Brien; Edward James Young; Puria Radmard; Nathalie Kirch; Cameron Tice; Tomek Korbak; David Demitri Africa	2026
+2026_young_pre-rl-checkpoints.md	https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe/why-study-alignment-interventions-on-pre-rl-checkpoints	Why study alignment interventions on pre-RL checkpoints?	Edward James Young; Puria Radmard; Cameron Tice	2026
