@@ -29,3 +29,16 @@ wassname: "we need good moral reasoning"; "try this and iterate til you prove it
 ## Budget and limits
 
 API cap $15 for this pilot (OpenRouter weekly remaining ~$485). Do not train or rent GPUs. Do not edit the constitution, existing training files or `data/train/`. Report to const_v2 via intercom when done or if blocked.
+
+
+## Revision 2026-10-26 (wassname: "the point is to try them all quick and short")
+
+Opus refused the primer (Anthropic ToS on duplicating outputs; `slop/data/20261026_reasoning_pilot/summary.md`, commit 51dbe8a). Do not ask any Anthropic model again, under any framing.
+
+wassname's design for the primer ("teacher's guide", like case law): a few paragraphs on how to apply the constitution, in general terms, plus N-shot worked examples on scenarios that are clearly similar but not the actual rows. The teacher is told the guide is not for copying: apply the constitution's principles and the character's own identity to the case in front of it.
+
+Run all primer conditions, quick and short:
+- P0: no guide (constitution + AGENTS data-rule list only).
+- P1: guide written by `moonshotai/kimi-k3.1-pro` (open weights).
+- P2: guide written by `z-ai/glm-5.3` (open weights), so the guide writer differs from at least one teacher.
+Same 20 frozen rows (`selection.json`); teachers `moonshotai/kimi-k3.1-pro` and `xiaomi/mimo-v2.6-flash`; citations allowed (one arm) in all conditions, and add the citation-free arm only for the best condition. 3 × 2 × 20 = 120 generations plus up to 40. Read the two guides in full first and reject one that contains rules without reasons, invented constitution text, or case-specific patches. Then read all generations as in step 3; spot check as in step 4. Summary compares P0/P1/P2 per teacher. API cap stays $15.
