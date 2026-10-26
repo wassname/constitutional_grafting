@@ -26,6 +26,12 @@ Options awaiting wassname's choice (PI/Claude recommends testing 1 and 3 on the 
 4. Keep the current method (post-hoc summaries); not recommended.
 Then: ~50-row pilot, 2 samples per row, read the reasoning first; check factual citations separately (one Kimi row cites nonexistent CFR subsections); scaling to ~1,800 rows is ~$50–125 API and needs a budget decision.
 
+## Decision locked in (wassname, 2026-10-26)
+
+> "ok great so it works. lock it in, moving on"
+
+Recipe for the reasoning data: Kimi K3.1 Pro, direct English, with the Opus guide (repaired as above: derive the vice exclusion, drop the "if you may cite" section, add the omitted principles). wassname on the post-hoc finding: "of course this is how all reasoning models work". Open question for wassname: "the whole point is non visible reasoning". Which text goes into the student's think block? (a) the teacher's written <reasoning> section (60–150 words, natural, owned values; PI/Claude's assumption), or (b) the teacher's native hidden reasoning (~1,000 words, real deliberation, but telegraphic and talks about the instructions).
+
 ## Goal 2: cheap heal (secondary)
 
 Brief `slop/plans/20261026_thinking_heal.md`; research `slop/research/20261026_healing_reasoning_after_merges.md` (nobody has shown a character-preserving post-merge heal; wassname's steer-heal-love found heals can undo the change). A Sol worker (run 2323dbc3) is generating ~600 Instruct thinking traces via OpenRouter `qwen/qwen3.5-35b-a3b` (process heal-traces-600-resume, log `slop/data/20261026_thinking_heal/generation_resume.log`), after a 429 rate-limit stop; 'wait'×8 filter; all rows must be read in full before training (batch files planned). Cost ≈$2 of $5. Training on a GPU (frozen D + rank-8 LoRA, cap $20) has not been scheduled. The worker reports to const_v2 via intercom; redirect it to the new session (its intercom target will be shown by `intercom list-cwd`).
