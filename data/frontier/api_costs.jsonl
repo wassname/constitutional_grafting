@@ -447,3 +447,33 @@
 {"time": "2026-10-23T13:01:55+00:00", "kind": "reasons_docs_reasons_docs_overnight1_recheck", "served": "deepseek/deepseek-v4.1-flash", "cost": 0, "n": 0}
 {"time": "2026-10-23T13:06:31+00:00", "kind": "reasons_docs_reasons_docs_overnight1_redo", "served": "anthropic/claude-opus-5.5+deepseek/deepseek-v4.1-flash", "cost": 2.014559058, "n": 39}
 {"time": "2026-10-23T13:49:10+00:00", "kind": "reasons_docs_reasons_docs_overnight1_recheck", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.489952176, "n": 209}
+{"time": "2026-10-23T23:35:17+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage10/judging/cells", "cost": 0.187665912, "n": 1312}
+{"time": "2026-10-23T23:59:51+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage9/judging/cells", "cost": 0.381104388, "n": 2652}
+{"time": "2026-10-24T02:42:22+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage11/judging/cells", "cost": 0.394955568, "n": 2610}
+{"time": "2026-10-23T18:52:49+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.709139532292, "n": 6440, "out": "slop/eval/run10/strength"}
+{"time": "2026-10-24T08:09:03+0800", "kind": "tc_judge", "out": "slop/eval/run10/stage12b/judging/cells", "cost": 0.217598136, "n": 1322}
+{"time": "2026-10-24T00:20:18+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.743043285988, "n": 6720, "out": "slop/eval/run10/strength"}
+{"time": "2026-10-24T21:07:42+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0211665724, "n": 140, "out": "slop/eval/run11/strength/mix_stoic1"}
+{"time": "2026-10-24T21:26:20+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.018382579396, "n": 140, "out": "slop/eval/run11/strength/anchor_stoic1"}
+{"time": "2026-10-24T21:43:32+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.01816736976, "n": 140, "out": "slop/eval/run11/strength/mix_const1"}
+{"time": "2026-10-24T22:01:52+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.017291867652, "n": 140, "out": "slop/eval/run11/strength/anchor_const1"}
+{"time": "2026-10-24T22:22:37+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.01752562888, "n": 140, "out": "slop/eval/run11/strength/stoic3"}
+{"time": "2026-10-24T22:49:20+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.019534684536, "n": 140, "out": "slop/eval/run11/strength/const2"}
+{"time": "2026-10-24T23:15:48+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.025345603948, "n": 140, "out": "slop/eval/run11/strength/const3"}
+{"time": "2026-10-24T23:29:51+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.017199160052, "n": 140, "out": "slop/eval/run11/strength/mix_stoic2"}
+{"time": "2026-10-24T23:48:14+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.016670508472, "n": 140, "out": "slop/eval/run11/strength/anchor_stoic2"}
+{"time": "2026-10-25T00:11:32+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.020328394864, "n": 140, "out": "slop/eval/run11/strength/mix_const2"}
+{"time": "2026-10-25T00:30:10+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.017927743672, "n": 140, "out": "slop/eval/run11/strength/anchor_const2"}
+{"time": "2026-10-25T01:20:52+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.02458208404, "n": 140, "out": "slop/eval/run11/strength/const4"}
+{"time": "2026-10-25T01:21:09+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.018677001724, "n": 140, "out": "slop/eval/run11/strength/other4"}
+{"time": "2026-10-25T01:38:28+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.020344294148, "n": 140, "out": "slop/eval/run11/strength/mix_stoic4"}
+{"time": "2026-10-25T01:55:44+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.01594170682, "n": 140, "out": "slop/eval/run11/strength/anchor_stoic4"}
+{"time": "2026-10-25T02:27:45+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.025035005892, "n": 140, "out": "slop/eval/run11/strength/mix_const4"}
+{"time": "2026-10-25T02:57:41+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.02438729458, "n": 140, "out": "slop/eval/run11/strength/anchor_const4"}
+{"time": "2026-10-25T03:15:25+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.01724263686, "n": 140, "out": "slop/eval/run11/strength/control1"}
+{"time": "2026-10-25T13:21:38+0800", "kind": "tc_judge", "out": "slop/eval/run11/chatr13/judging", "cost": 0.09302622, "n": 664}
+{"time": "2026-10-25T05:22:09+00:00", "kind": "strength_abx", "served": "deepseek/deepseek-v4.1-flash", "cost": 0.0199262684, "n": 140, "out": "slop/eval/run11/strength/chatr13"}
+{"time": "2026-10-26T04:39:56+0800", "kind": "tc_judge", "out": "slop/eval/run12/run12gen/judging/initial", "cost": 0.40945212, "n": 2648}
+{"time": "2026-10-26T05:09:25+0800", "kind": "tc_judge", "out": "slop/eval/run12/run12gen/judging/quarter", "cost": 0.101022096, "n": 654}
+{"time": "2026-10-26T13:22:16+0800", "kind": "tc_judge", "out": "slop/eval/run13_thinking/judging_on", "cost": 0.217024416, "n": 1584}
+{"time": "2026-10-26T13:24:38+0800", "kind": "tc_judge", "out": "slop/eval/run13_thinking/judging_d_inside_think", "cost": 0.081346104, "n": 584}
