@@ -31,6 +31,12 @@ D×0.5: preference +0.749 (90% item-bootstrap interval[+0.614,+0.888],59judgedit
 
 D×0.5 sampled-character protocol:211stop/3length across214turns,0loop flags; median436tokens,max2048. GSM:56stop/4length across60answers. Keep those protocols separate. Full fixed panel and both samples of payday/fridge/email were read; failures are in `reading_notes.md`. Pinned judge served `typesafe/jev-1.13-20260917`, new-cache cost$0.092737344. Exact values/provenance: `reference_summary.json`, `judging/reference/`.
 
+## Optional draft-v2 generation
+
+Parent const_v2 seq25 approved a lower-priority addition within this same lease only: after all planned cells are generated and retrieved, if at least1hour remains before the runner deadline and the work can fit safely, generate only the78new draft-v2 items for Instruct,D×0.5,D×1 and the new control/projection cells. Keep outputs separate from frozen70; no training or local judging change. Skip if time is tight. Draft is not yet reviewed by wassname. Task#3 tracks this condition; it must not delay required work or retrieval.
+
+Source `/workspace/2026/tiny-character/data/versions/20261026_v2/items.jsonl`, expected SHA256 `e57989f43b2c0f02bf73f1973dedf9217face902755858a73801e5fff453f69f`. Sampling and thinking-off remain unchanged. No new lease, deadline extension or spending authorization.
+
 ## Interpretation limit: unequal end-of-turn supervision
 
 Confirmed on exact D data:733/1,636targets end with `<|im_end|>` and903do not. The generic control supervises that end marker on every accepted row. Subtraction therefore changes end-of-turn learning as well as other chat behaviour; it is not a clean isolation of instruction-following. Missing positive end-marker supervision does not itself mean D directly learned to avoid stopping. D remains exactly as trained; no run/data changes.
