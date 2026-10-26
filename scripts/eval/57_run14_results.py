@@ -100,7 +100,9 @@ def main():
         assert len(checks) == 214
         point = {"model": model, "character": mean(character.values()) if character else 0,
                  "character_ci90": boot(list(character.values())) if character else None,
-                 "maths": sum(row["correct"] for row in maths), "ordinary": 2 * sum(ordinary.values()),
+                 "maths": sum(row["correct"] for row in maths),
+                 "maths_completed": sum(bool(row["correct"]) and row["finish"] == "stop" for row in maths),
+                 "ordinary": 2 * sum(ordinary.values()),
                  "flags": {key: sum(check[key] for check in checks) for key in FLAGS},
                  "gsm_finish_reasons": dict(Counter(row["finish"] for row in maths)),
                  "meta_source": source(meta_path), "judged_source": source(judged_path),
@@ -124,16 +126,22 @@ def main():
         points[model] = point
         scores[model] = {"character": character, "ordinary": ordinary,
                          "maths": {row["question"]: float(row["correct"]) for row in maths}}
+    references = [("paired_vs_D", D)]
+    if HALF in points:
+        references.append(("paired_vs_Dhalf", HALF))
     for model, point in points.items():
         if model == BASE:
             continue
-        paired = {}
-        for kind, scale in (("character", 1), ("maths", 60), ("ordinary", 22)):
-            values, ref = scores[model][kind], scores[D][kind]
-            assert values.keys() == ref.keys()
-            differences = [scale * (values[key] - ref[key]) for key in sorted(values)]
-            paired[kind] = {"mean": mean(differences), "ci90": boot(differences), "items": len(values)}
-        point["paired_vs_D"] = paired
+        for field, reference in references:
+            paired = {}
+            for kind, scale in (("character", 1), ("maths", 60), ("ordinary", 22)):
+                values, ref = scores[model][kind], scores[reference][kind]
+                assert values.keys() == ref.keys()
+                differences = [scale * (values[key] - ref[key]) for key in sorted(values)]
+                paired[kind] = {"mean": mean(differences), "ci90": boot(differences), "items": len(values),
+                                "improved_items": sum(value > 0 for value in differences),
+                                "worsened_items": sum(value < 0 for value in differences)}
+            point[field] = paired
     matched = []
     if HALF in points:
         path = [(0, points[DOCS]), (.5, points[HALF]), (1, points[D])]
