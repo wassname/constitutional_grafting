@@ -231,7 +231,7 @@ def main():
     expected = json.loads((OUT / 'control_ready.json').read_text())
     review = json.loads((OUT / 'control_review.approved.json').read_text())
     assert review['sha256'] == expected['sha256'] == sha(ROOT / 'data/train/run14/ctlgen.jsonl')
-    ids = {json.loads(line)['id'] for line in (OUT / 'ctlgen.jsonl').read_text().splitlines()}
+    ids = {json.loads(line)['id'] for line in (OUT / 'ctlgen.jsonl').open()}
     assert set(review['refusal_ids']) <= ids
     expected.update(refusal_count=len(review['refusal_ids']), refusal_ids=review['refusal_ids'], full_review_sha256=sha(OUT / 'control_review.approved.json'))
     (OUT / 'ctlgen.manifest.json').write_text(json.dumps(expected, indent=2) + '\n')
