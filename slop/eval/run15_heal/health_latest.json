@@ -1,0 +1,14 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57812278,
+  "local_epoch": 1793019405.7163332,
+  "epoch": 1793019405.635404,
+  "baseline_exit": null,
+  "job_exit": null,
+  "baselines": {
+    "replies_r15_instruct_on.jsonl": 140,
+    "panel_r15_instruct_on.jsonl": 0
+  },
+  "stages": "2026-10-26T12:56:01Z PRIMARY COMPLETE r15_instruct on; 140rows; all failures retained\n",
+  "baseline_tail": "PRIMARY COMPLETE r15_instruct on; 140rows; all failures retained\n"
+}

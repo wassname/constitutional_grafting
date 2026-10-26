@@ -1,0 +1,8 @@
+{
+  "matching_key_context_repr": "'uaCt96bufAoegUzksslsL1lOtHv2GzDQhiJQ== tpx380y@wassname.org\\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMU89dKNpJw8oTQe9TTLRwUo0xNoZ3gD2GPaACPcxvr8 wassname@fractal-desktop\\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/AmsW3Tp+m/FX3wksbGDhWwqSiykHmwg+ADLcIXEMD claude-vast-constitutional-grafting\\nrestrict,expiry-time=\"20261026131541Z\",command=\"/usr/bin/rrsync -wo -no-del /workspace/cg/outputs/relay_from_box_a\" ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZ8sbTwOfzDN9RY5sfgorhRHx/y3UM25HMPMjfJDw8F cg_run14_to_run15_57812278\\n'",
+  "literal_slash_n_count": 0,
+  "file_mode": "0o100600",
+  "ssh_dir_mode": "0o40700",
+  "sshd_config": "permitrootlogin without-password\npubkeyauthentication yes\nstrictmodes yes\nauthorizedkeyscommand none\nauthorizedkeyscommanduser none\npubkeyacceptedalgorithms ssh-ed25519-cert-v01@openssh.com,ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,sk-ecdsa-sha2-nistp256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ssh-ed25519@openssh.com,sk-ecdsa-sha2-nistp256@openssh.com,rsa-sha2-512,rsa-sha2-256\nauthorizedkeysfile .ssh/authorized_keys .ssh/authorized_keys2\nauthenticationmethods any\npubkeyauthoptions none",
+  "auth_tail": "-- No entries --\n"
+}
