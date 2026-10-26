@@ -1,0 +1,11 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source_sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042",
+  "rows": 1636,
+  "rows_last_label_ends_im_end": 733,
+  "rows_without_terminal_im_end": 903,
+  "labelled_segments_per_row": {
+    "1": 1636
+  },
+  "interpretation": "Unequalpositiveend-of-turnsupervision; no claim that omission directly teaches negativeEOS. No data changes."
+}

@@ -1,0 +1,15 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-26T12:12:17Z
+CONTROL GENERATION 1504rows; finished supervised token pool=541135/788606
+CONTROL GENERATION 1536rows; finished supervised token pool=553249/788606
+CONTROL GENERATION 1568rows; finished supervised token pool=562282/788606
+CONTROL GENERATION 1600rows; finished supervised token pool=574748/788606
+CONTROL GENERATION 1632rows; finished supervised token pool=586652/788606
+CONTROL GENERATION 1664rows; finished supervised token pool=599706/788606
+1664 runs/run10/control_replies.jsonl
+INFO:     127.0.0.1:46776 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46786 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47020 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+48 %, 88969 MiB, 97887 MiB, 183.57 W

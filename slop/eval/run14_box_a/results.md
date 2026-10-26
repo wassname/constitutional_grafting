@@ -24,6 +24,12 @@ Step5 (thinking-on heal data) is now a separate worker's job. Box A will not gen
 
 Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Next: snapshot the final control data on its readiness notification, read every remaining candidate, and provide SHA-bound full-data approval before training. No public push.
 
+## Interpretation limit: unequal end-of-turn supervision
+
+Confirmed on exact D data:733/1,636targets end with `<|im_end|>` and903do not. The generic control supervises that end marker on every accepted row. Subtraction therefore changes end-of-turn learning as well as other chat behaviour; it is not a clean isolation of instruction-following. Missing positive end-marker supervision does not itself mean D directly learned to avoid stopping. D remains exactly as trained; no run/data changes.
+
+Report finish reasons, cutoff rates, reply-length distributions and loop flags per cell, keeping character/panel and GSM protocols separate. A cutoff alone is not proof of looping. Evidence: `preparation/rewr_eos_audit.log`; parent check/journal commit40de6b4.
+
 ## Evidence
 
 - `preflight.md`, `preflight_review_response.md`, `preflight_independent_initial.md`
@@ -36,4 +42,4 @@ Technical preparation, exact offer selection and guarded creation are complete. 
 
 Controller process: `proc_d5ea` (`run14-box-a-exact-alternate-offer`); state `.local/run14_box_a_rental.json`, instance57799463. Do not create another lease. Native notifications report control_ready/generate.exit and stages; no manual polling loop. Snapshot with `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py snapshot` when data is ready.
 
-Pilot package: `slop/reviews/20261026_run14_control_pilot_package/`; all32raw prompts/answers already read. Packed pilot SHA256 is `71ea76f65d475a58d9240671ad7b53e11dd30ce8fcfce1855ef347febe0dc825`. Credit those rows toward the final read only if the final corpus's first32rows are byte-identical. Track all remaining full-read ranges/IDs and the immutable corpus hash durably. Samples and judge passes do not replace this read. The final `control_review.approved.json` needs corpus SHA, fully_read_rows, refusal_ids and independent_review_path; upload through `55_run14_box_a_rental.py approve-control`. Never reuse the pilot receipt as full-data approval.
+Pilot package: `slop/reviews/20261026_run14_control_pilot_package/`; all32raw prompts/answers already read. Packed pilot SHA256 is `71ea76f65d475a58d9240671ad7b53e11dd30ce8fcfce1855ef347febe0dc825`. Credit those rows toward the final read only if the final corpus's first32rows are byte-identical. Prepare lossless ≤44KB actual-request/full-reply views with `uv run --no-sync python slop/reviews/20261026_run14_control_full_read/prepare_views.py` after the immutable final snapshot exists. This checks all native wire/packed rows and initializes `read_progress.json` with only the verified32pilotrows credited; never re-run it over an existing progress file. Read every generated view, updating actual completed ranges/IDs in that file after each batch. Track the immutable corpus hash durably. Samples and judge passes do not replace this read. The final `control_review.approved.json` needs corpus SHA, fully_read_rows, refusal_ids and independent_review_path; upload through `55_run14_box_a_rental.py approve-control`. Never reuse the pilot receipt as full-data approval.
