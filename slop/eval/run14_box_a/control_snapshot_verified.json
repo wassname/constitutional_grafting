@@ -1,0 +1,19 @@
+{
+  "author": "PI/OpenAI",
+  "job_exit": null,
+  "all_available_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_a14_ctlgen": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "978b71f20946061748b81766bcf4b2b9d0b9e5419fce16dce10c4e57cf888b3e"
+      }
+    }
+  },
+  "stage": "completed control training, before projection completion",
+  "adapter_local_path": "/workspace/2026/constitutional_grafting/.local/adapters/cg_run14_adapters/r10_a14_ctlgen"
+}

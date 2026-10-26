@@ -1,0 +1,33 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "files": {
+    "scripts/eval/56_run14_box_a.py": {
+      "executed_sha256": "b319ed25f7b83b98b046c484031d3486147f5e6b466c321a576ac00777e6a3be",
+      "current_sha256": "b319ed25f7b83b98b046c484031d3486147f5e6b466c321a576ac00777e6a3be",
+      "matches": true
+    },
+    "scripts/train/14_run10_chat_box.sh": {
+      "executed_sha256": "2433932e3677007768aa9d17d2b32fb67b531418d8f6756ee3c90fce293c7ce2",
+      "current_sha256": "2433932e3677007768aa9d17d2b32fb67b531418d8f6756ee3c90fce293c7ce2",
+      "matches": true
+    },
+    "scripts/train/spectral_plugin.py": {
+      "executed_sha256": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7",
+      "current_sha256": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7",
+      "matches": true
+    },
+    "scripts/train/router_dtype_plugin.py": {
+      "executed_sha256": "c846ee59fe615a2f652303eb62d7ab6b35ec6b2f9002d428da342374bce2acc7",
+      "current_sha256": "c846ee59fe615a2f652303eb62d7ab6b35ec6b2f9002d428da342374bce2acc7",
+      "matches": true
+    },
+    "scripts/train/check_loss_mask.py": {
+      "executed_sha256": "6fde7d042e65c103097cba1023053748fa9c8d6a6f5e4e32f808643e66de5074",
+      "current_sha256": "fa6e992637bf5fbb25718765bd784d59b17d81d83f33dde4ad63380709767891",
+      "matches": false
+    }
+  },
+  "loss_mask_executed_copy": "slop/eval/run14_box_a/executed_source/check_loss_mask.py",
+  "loss_mask_difference": "Commit40de6b4 strengthened EOS assertions after source uploaded; not a training-path modification. Exact executed copy recovered and SHA verified.",
+  "postrun_stricter_check": "postrun_strict_loss_mask.log; exact unchanged2178row frozen control passes, missing im_end0"
+}

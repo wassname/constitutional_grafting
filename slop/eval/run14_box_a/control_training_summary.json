@@ -1,0 +1,156 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "training_log_sha256": "6e6e3a8f645f976c5a7ab0d56ff711751b79862613f032e5d9fecf3ddea4e547",
+  "complete_train_scalar_rows": 1035,
+  "validation_rows": 3,
+  "validation_scope": "Before training and epochs1/2;109heldout rows from the same generic-control corpus",
+  "active_regularization_rows": 932,
+  "all_train_and_validation_loss_spectral_and_train_gradient_scalars_finite": true,
+  "active_sigma_and_penalty_positive": true,
+  "first_train": {
+    "loss": "0.2883",
+    "grad_norm": "2.104",
+    "learning_rate": "0",
+    "train_text_loss": "0.2883",
+    "train_spectral_penalty": "0",
+    "train_total_loss": "0.2883",
+    "train_spectral_sigma_max_mean": "0",
+    "train_spectral_lam": "0",
+    "ppl": "1.334",
+    "memory/max_active (GiB)": "75.23",
+    "memory/max_allocated (GiB)": "75.23",
+    "memory/device_reserved (GiB)": "75.91",
+    "tokens/trainable": 922,
+    "tokens/total": 1344,
+    "epoch": "0.001933"
+  },
+  "first_active": {
+    "loss": "0.1427",
+    "grad_norm": "0.4986",
+    "learning_rate": "0.0002",
+    "train_text_loss": "0.1403",
+    "train_spectral_penalty": "0.002415",
+    "train_total_loss": "0.1427",
+    "train_spectral_sigma_max_mean": "0.1942",
+    "train_spectral_lam": "0.01243",
+    "ppl": "1.153",
+    "memory/max_active (GiB)": "77.17",
+    "memory/max_allocated (GiB)": "77.17",
+    "memory/device_reserved (GiB)": "79.28",
+    "tokens/train_per_sec_per_gpu": "246.7",
+    "tokens/trainable": 149190,
+    "tokens/total": 195072,
+    "epoch": "0.2011"
+  },
+  "last_train": {
+    "loss": "0.06692",
+    "grad_norm": "0.301",
+    "learning_rate": "5.681e-10",
+    "train_text_loss": "0.06133",
+    "train_spectral_penalty": "0.005592",
+    "train_total_loss": "0.06692",
+    "train_spectral_sigma_max_mean": "0.4497",
+    "train_spectral_lam": "0.01243",
+    "ppl": "1.069",
+    "memory/max_active (GiB)": "77.26",
+    "memory/max_allocated (GiB)": "77.26",
+    "memory/device_reserved (GiB)": "79.07",
+    "tokens/train_per_sec_per_gpu": "313.5",
+    "tokens/trainable": 1495980,
+    "tokens/total": 1934976,
+    "epoch": "2"
+  },
+  "validation": [
+    {
+      "eval_loss": "0.3327",
+      "eval_runtime": "257.6",
+      "eval_samples_per_second": "0.423",
+      "eval_steps_per_second": "0.423",
+      "eval_text_loss": "0.3327",
+      "eval_spectral_penalty": "0",
+      "eval_total_loss": "0.3327",
+      "eval_spectral_sigma_max_mean": "0",
+      "eval_spectral_lam": "0",
+      "eval_ppl": "1.395",
+      "memory/max_active (GiB)": "71.27",
+      "memory/max_allocated (GiB)": "71.27",
+      "memory/device_reserved (GiB)": "71.4",
+      "epoch": 0
+    },
+    {
+      "eval_loss": "0.2056",
+      "eval_runtime": "90.72",
+      "eval_samples_per_second": "1.201",
+      "eval_steps_per_second": "1.201",
+      "eval_text_loss": "0.1996",
+      "eval_spectral_penalty": "0.006002",
+      "eval_total_loss": "0.2056",
+      "eval_spectral_sigma_max_mean": "0.4827",
+      "eval_spectral_lam": "0.01243",
+      "eval_ppl": "1.228",
+      "memory/max_active (GiB)": "73.19",
+      "memory/max_allocated (GiB)": "73.19",
+      "memory/device_reserved (GiB)": "79.3",
+      "epoch": "1"
+    },
+    {
+      "eval_loss": "0.2014",
+      "eval_runtime": "88.38",
+      "eval_samples_per_second": "1.233",
+      "eval_steps_per_second": "1.233",
+      "eval_text_loss": "0.1958",
+      "eval_spectral_penalty": "0.005592",
+      "eval_total_loss": "0.2014",
+      "eval_spectral_sigma_max_mean": "0.4497",
+      "eval_spectral_lam": "0.01243",
+      "eval_ppl": "1.223",
+      "memory/max_active (GiB)": "73.19",
+      "memory/max_allocated (GiB)": "73.19",
+      "memory/device_reserved (GiB)": "79.07",
+      "epoch": "2"
+    }
+  ],
+  "trainer_summary": {
+    "train_runtime": "7249",
+    "train_samples_per_second": "0.571",
+    "train_steps_per_second": "0.143",
+    "train_loss": "0.1341",
+    "memory/max_active (GiB)": "71.17",
+    "memory/max_allocated (GiB)": "71.17",
+    "memory/device_reserved (GiB)": "73.43",
+    "epoch": "2"
+  },
+  "ranges": {
+    "loss": {
+      "min": 0.02665,
+      "max": 0.5552
+    },
+    "grad_norm": {
+      "min": 0.1775,
+      "max": 16.04
+    },
+    "train_text_loss": {
+      "min": 0.02098,
+      "max": 0.5494
+    },
+    "train_spectral_penalty": {
+      "min": 0.0,
+      "max": 0.006016
+    },
+    "train_total_loss": {
+      "min": 0.02665,
+      "max": 0.5552
+    },
+    "train_spectral_sigma_max_mean": {
+      "min": 0.0,
+      "max": 0.4839
+    },
+    "train_spectral_lam": {
+      "min": 0.0,
+      "max": 0.01243
+    }
+  },
+  "row_max_grad_norm": 403,
+  "max_logged_penalty_to_text_ratio": 0.2699714013346044,
+  "scope": "Mechanical complete-scalar scan; no behavioural effectiveness inference; independent complete-log read pending"
+}

@@ -1,0 +1,58 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "complete": false,
+  "base_revision": "0f0813072d2358973511097385626f21fcb6d422",
+  "instruct_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "source_adapter_sha256": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e",
+  "source_config_sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+  "source_code_sha256": "d20498df5274b7f51b55dc8083bfffbf39d496e337f7512a33df01c16380fa78",
+  "elapsed_seconds": 52.47454905509949,
+  "peak_cuda_bytes": 536684544,
+  "definition": "removed component Frobenius/original Frobenius = sqrt(1-retained squared Frobenius/original squared Frobenius)",
+  "summary": [
+    {
+      "k": 16,
+      "module_class": "attention",
+      "modules": 3,
+      "matrices": 3,
+      "original_squared_fro": 10.744381005942326,
+      "removed_squared_fro": 0.320246070733321,
+      "removed_energy_fraction": 0.029805911625453766,
+      "removed_component_norm_fraction": 0.172643886730616
+    },
+    {
+      "k": 16,
+      "module_class": "experts",
+      "modules": 2,
+      "matrices": 512,
+      "original_squared_fro": 178.38854948993793,
+      "removed_squared_fro": 12.296729220983584,
+      "removed_energy_fraction": 0.06893227875972603,
+      "removed_component_norm_fraction": 0.26254957390886396
+    },
+    {
+      "k": 64,
+      "module_class": "attention",
+      "modules": 3,
+      "matrices": 3,
+      "original_squared_fro": 10.744381005942326,
+      "removed_squared_fro": 0.8331882501711732,
+      "removed_energy_fraction": 0.07754641702582653,
+      "removed_component_norm_fraction": 0.27847157310186355
+    },
+    {
+      "k": 64,
+      "module_class": "experts",
+      "modules": 2,
+      "matrices": 512,
+      "original_squared_fro": 178.38854948993793,
+      "removed_squared_fro": 36.87470345145387,
+      "removed_energy_fraction": 0.2067100358004413,
+      "removed_component_norm_fraction": 0.45465375375162287
+    }
+  ],
+  "adapter_sha256": {
+    "16": "f21f9c006a0351affb4cc81c1cbc0ffa09f0e6ff102961dc42a7409cf1e73755",
+    "64": "d6194ec57bdd895c00cd9df2133431a5c2e8620f8091dc21c75aaf43f4f54a1b"
+  }
+}
