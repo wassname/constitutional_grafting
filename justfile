@@ -105,6 +105,11 @@ run10-results:
 reasoning-pilot:
     uv run --no-sync python scripts/data/91_reasoning_pilot.py report
 
+# Rebuild run14 metrics, figures and full/cropped panels without model calls. -- PI/OpenAI (Sol)
+run14-results:
+    uv run --no-sync python scripts/eval/57_run14_results.py
+    uv run --no-sync python scripts/eval/52_answer_panel.py chat
+
 # Answer panel: every tiny-character question, each checkpoint's cropped replies grouped by answer; no model calls. -- PI/Claude
 answer-panel:
     uv run --no-sync python scripts/eval/52_answer_panel.py chat
