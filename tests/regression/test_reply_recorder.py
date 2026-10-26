@@ -50,6 +50,18 @@ class ReplyRecorderTests(unittest.TestCase):
                              ("Visible answer", 2, 2, 5))
             self.assertEqual([json.loads(line) for line in trace.read_text().splitlines()][1]["body"], response)
 
+    def test_native_budget_counts_closing_token(self):
+        tokenizer = SimpleNamespace(convert_tokens_to_ids=lambda _: 99, encode=lambda text, **_: text.split())
+        response = {"choices": [{"message": {"content": "Visible answer", "reasoning": "unfinished"},
+                                 "token_ids": [10] * 7 + [99, 11, 12], "finish_reason": "stop"}],
+                    "usage": {"completion_tokens": 10}}
+        with tempfile.TemporaryDirectory() as directory, patch.object(gen.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps(response).encode())):
+            row = gen.chat("http://local/v1", "model", [], 123, .7, 0, thinking_budget=8,
+                           tokenizer=tokenizer, trace_path=Path(directory) / "wire.jsonl")
+        self.assertEqual(row["thinking_tokens"], 7)
+        self.assertTrue(row["thinking_budget_boundary_reached"])
+        self.assertEqual(row["reasoning_end_cause"], "at_native_cap_or_natural")
+
     def test_thinking_cutoff_empty_final_is_retained(self):
         tokenizer = SimpleNamespace(convert_tokens_to_ids=lambda _: 99, encode=lambda text, **_: text.split())
         response = {"choices": [{"message": {"content": None, "reasoning": "Unfinished"},

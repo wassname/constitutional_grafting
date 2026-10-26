@@ -48,7 +48,8 @@ def chat(url: str, name: str, messages: list, max_tokens: int, temperature: floa
         close_id = tokenizer.convert_tokens_to_ids("</think>")
         close_positions = [i for i, token in enumerate(ids) if token == close_id]
         n_thinking = close_positions[0] if close_positions else None if text else len(ids)
-        at_cap = n_thinking is not None and n_thinking >= thinking_budget
+        # PI/OpenAI: Qwen's native budget includes the closing token.
+        at_cap = bool(close_positions) and n_thinking + 1 >= thinking_budget
         end_cause = ("at_native_cap_or_natural" if at_cap else "natural_before_cap" if close_positions
                      else "missing_boundary_with_final" if text else "total_cutoff" if c["finish_reason"] == "length"
                      else "eos_during_reasoning")
