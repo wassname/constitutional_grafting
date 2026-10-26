@@ -1,8 +1,8 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. Six of eight planned cells are judged. Rank64 projection×1 has nearly the same observed character preference as plain chat×0.5 (+0.73 versus+0.75), with maths57/60 versus53/60 and ordinary checks21/22 versus18/22. All four extra maths matches replace token-cap failures, so this is a fixed-budget completion result, not evidence of stronger mathematical reasoning. No inference-repeatability result or method winner yet.
+PI/OpenAI (Sol), 2026-10-26. Seven of eight planned cells are judged. Full control subtraction collapses stopping:159/214primary cutoffs and58/60GSM cutoffs; only2maths answers finish correctly. Rank64 projection×1 has nearly the same observed character preference as plain chat×0.5 (+0.73 versus+0.75), with maths57/60 versus53/60 and ordinary checks21/22 versus18/22. All four extra maths matches replace token-cap failures, so this is a fixed-budget completion result, not evidence of stronger mathematical reasoning. No inference-repeatability result or method winner yet.
 
-The trained control and both complete projected adapters are downloaded and SHA256-verified. One active guarded lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve$32.66/$35. Training and projection evidence is below.
+All eight GPU evaluations are retrieved. The trained control and both projected adapters are downloaded and SHA256-verified. Instance57799463 is destroyed and its absence confirmed by the provider API. Elapsed7.781hours gives estimated GPU cost$14.93, not a reconciled invoice; maximum whole-job reserve was$32.66/$35. One final local judging pass and report/review work remain. Closure evidence: `provider_closure_verified.json`, `lease/retrieval_verified.json`, `lease/destroy_response.json`.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
 
@@ -20,7 +20,7 @@ All cells retain the same document doses: Stoic0.5, constitution1, other1. D add
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
 - [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
 - [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
-- [ ] Finish all eight planned evaluation cells, judge and read their replies. Six judged and selected replies read; two evaluation cells remain.
+- [ ] Finish all eight planned evaluation cells, judge and read their replies. All eight evaluated/retrieved and fixed/selected replies read; seven judged. Final rank64×1.5 judging remains.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 - [ ] Register all eight cells in `scripts/eval/52_answer_panel.py` and regenerate; preserve the separate run15 heal namespaces on merge.
 - [ ] Compile the full fixed demo panel, finish the result figures/audit and obtain independent scientific/image review.
@@ -98,6 +98,12 @@ Preference+0.753[90%+0.552,+0.939], maths53/60, ordinary21/22. Relative to plain
 
 All six completed judging receipts were reconciled against their own pair/turn request keys: no unrelated requests in their shared-cache byte windows. Reported successful cached-call cost totals$0.559884696; failed API calls and provider billing adjustments are outside that receipt scope. `summary.json` records hashes, per-window counts and matching costs. Future judges are coordinated with run15 because the byte-offset receipt mechanism is not concurrency-safe. No judge protocol or frozen result was changed.
 
+## Full generic-control subtraction×1
+
+This coefficient produces a clear collapse:60loop flags/159cutoffs over214primary turns, marker violations in49/140records (53turns), and58/60GSM cutoffs. The frozen extraction rule records32key matches, but only2correct answers finish; ordinary checks11/22. Preference−1.506[90%−1.714,−1.285] is principally a coherence penalty, not interpretable evidence of opposite moral values. Full fixed demos/panel and all selected replies were read, including repeated attempts to acknowledge and then continue the repetition. Direct identity still says Musonius, which does not rescue the result.
+
+This establishes failure at this dose of this control recipe. It does not isolate instruction-following subtraction from end-of-turn damage, or establish that all generic-control designs fail. All primary numbers and failed replies are retained. No rescue calls or changed decoding. Seventh judging completed; cumulative successful cached-call cost$0.681565584, all seven request-key windows clean. Only higher-dose rank64 remains.
+
 ## Optional draft-v2 generation
 
 Skipped by parent const_v2 seq26: “Not worth an operational change to the teardown. Required work only.” Task#3 closed as skipped. No draft-v2 inputs uploaded or replies generated; no controller, guard or teardown changes.
@@ -118,7 +124,11 @@ Report finish reasons, cutoff rates, reply-length distributions and loop flags p
 
 ## Continuation notes
 
-Controller process: `proc_d5ea` (`run14-box-a-exact-alternate-offer`); state `.local/run14_box_a_rental.json`, instance57799463. Do not create another lease. Native notifications report control_ready/generate.exit and stages; no manual polling loop. Snapshot with `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py snapshot` when data is ready.
+Current checkpoint,18:25UTC: GPU controller `proc_d5ea` finished0; all eight cells retrieved, exact instance destroyed and API absence confirmed. All three final adapter hashes match (`lease/retrieval_verified.json`). Seven cells judged; all eight fixed demos/panels and selected payday/fridge/email replies read. cg_help2 was given the next~3min Jev OFF-judge window at18:25; wait for its exit message, then start the last41judge into `judging/projection64_high` with `baseline_replies.jsonl` and `lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj641.5.jsonl`. Notify it at start/exit, then rebuild57 and finish higher-dose interpretation. Do not rerun the seven judges or reconnect/rent/recreate stock schedules. Read notes already cover the last cell; its two alien panel turns loop to1500tokens, while other fixed replies finish.
+
+After all eight: preserve current score/false-positive caveats; integrate all eight into52's chat panel and regenerate (no concurrent main52writer; keep run15heal namespaces on later merge), compile full verbatim fixed panel, create focused matched-effect/coherence figures, ingest PNGs and obtain fresh independent review. If the final rank64×1.5 point is coherent and brackets D's effect with rank64×1, interpolate that candidate curve at observed D×1 as well as matching each candidate to the plain0/0.5/1 curve. Never interpolate through a damaged endpoint. Keep all subtraction measurements in tables/failure views; their scores include coherence penalties. For52, its current `task_agent` display label calls any `set_cell` “falsifies,” including truthful notes: rename that label to what is actually detected without changing grouping membership or pinned checks. `judging/*/replies.jsonl` for the first six cells are committed for regeneration. Full-panel expected prompts are `lease/box_runs/panel.jsonl`; each model's panel sits beside its maths file, including cached A/docs/D references. Finish the complete scientific audit, source/artifact hashes and exact-instance teardown proof before Task2completion. Allthreefinaladapterdownloads are already verified. `57_run14_results.py` is the CPU-only metric/cost source; generated means/counts for earlier points are unchanged as cells are added. No public push.
+
+Completed controller: `proc_d5ea` (`run14-box-a-exact-alternate-offer`); state `.local/run14_box_a_rental.json`, instance57799463 destroyed. Do not create another lease. Native notifications report control_ready/generate.exit and stages; no manual polling loop. Snapshot with `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py snapshot` when data is ready.
 
 Full corpus snapshot: `slop/eval/run14_box_a/lease/box_runs/`; raw replies SHA256 `e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a`. Generator exited0. Forecast:1035optimizersteps,~2.25htraining includingdonormerge,~8.8htotalremainingwork estimate against~10.5hrunner time atgenerationcompletion; all8cells retained. These are estimates, not outcomes.
 

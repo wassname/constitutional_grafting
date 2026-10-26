@@ -1,0 +1,31 @@
+{
+  "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1.0
+    ],
+    [
+      "other",
+      1.0
+    ],
+    [
+      "rewr",
+      1.0
+    ],
+    [
+      "a14_ctlgen",
+      -1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 159,
+  "completion_tokens": 252552,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1744.692241627723
+}

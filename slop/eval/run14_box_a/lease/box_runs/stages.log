@@ -1,0 +1,98 @@
+2026-10-26T10:37:21Z ## Untouched Instruct teacher
+2026-10-26T10:47:41Z CONTROL PILOT READY: first32normal-path replies, unedited; require independent review before scaling.
+2026-10-26T10:47:41Z First pilot row, full model input and supervised reply:
+2026-10-26T11:01:11Z CONTROL GENERATION 32rows; finished supervised token pool=11908/788606
+2026-10-26T11:02:17Z CONTROL GENERATION 64rows; finished supervised token pool=24777/788606
+2026-10-26T11:03:35Z CONTROL GENERATION 96rows; finished supervised token pool=38389/788606
+2026-10-26T11:04:17Z CONTROL GENERATION 128rows; finished supervised token pool=49881/788606
+2026-10-26T11:06:08Z CONTROL GENERATION 160rows; finished supervised token pool=62655/788606
+2026-10-26T11:07:03Z CONTROL GENERATION 192rows; finished supervised token pool=74376/788606
+2026-10-26T11:08:19Z CONTROL GENERATION 224rows; finished supervised token pool=85928/788606
+2026-10-26T11:10:30Z CONTROL GENERATION 256rows; finished supervised token pool=95853/788606
+2026-10-26T11:11:48Z CONTROL GENERATION 288rows; finished supervised token pool=107418/788606
+2026-10-26T11:12:23Z CONTROL GENERATION 320rows; finished supervised token pool=117289/788606
+2026-10-26T11:14:25Z CONTROL GENERATION 352rows; finished supervised token pool=131049/788606
+2026-10-26T11:15:34Z CONTROL GENERATION 384rows; finished supervised token pool=143124/788606
+2026-10-26T11:17:01Z CONTROL GENERATION 416rows; finished supervised token pool=154174/788606
+2026-10-26T11:18:15Z CONTROL GENERATION 448rows; finished supervised token pool=165199/788606
+2026-10-26T11:20:23Z CONTROL GENERATION 480rows; finished supervised token pool=178971/788606
+2026-10-26T11:21:15Z CONTROL GENERATION 512rows; finished supervised token pool=189124/788606
+2026-10-26T11:22:04Z CONTROL GENERATION 544rows; finished supervised token pool=201758/788606
+2026-10-26T11:22:48Z CONTROL GENERATION 576rows; finished supervised token pool=211153/788606
+2026-10-26T11:24:09Z CONTROL GENERATION 608rows; finished supervised token pool=220723/788606
+2026-10-26T11:26:16Z CONTROL GENERATION 640rows; finished supervised token pool=230220/788606
+2026-10-26T11:27:49Z CONTROL GENERATION 672rows; finished supervised token pool=242271/788606
+2026-10-26T11:29:19Z CONTROL GENERATION 704rows; finished supervised token pool=258607/788606
+2026-10-26T11:30:57Z CONTROL GENERATION 736rows; finished supervised token pool=271243/788606
+2026-10-26T11:32:56Z CONTROL GENERATION 768rows; finished supervised token pool=284213/788606
+2026-10-26T11:34:17Z CONTROL GENERATION 800rows; finished supervised token pool=296298/788606
+2026-10-26T11:35:55Z CONTROL GENERATION 832rows; finished supervised token pool=308228/788606
+2026-10-26T11:36:56Z CONTROL GENERATION 864rows; finished supervised token pool=319018/788606
+2026-10-26T11:37:36Z CONTROL GENERATION 896rows; finished supervised token pool=329252/788606
+2026-10-26T11:39:43Z CONTROL GENERATION 928rows; finished supervised token pool=341355/788606
+2026-10-26T11:41:50Z CONTROL GENERATION 960rows; finished supervised token pool=352273/788606
+2026-10-26T11:43:36Z CONTROL GENERATION 992rows; finished supervised token pool=364145/788606
+2026-10-26T11:45:43Z CONTROL GENERATION 1024rows; finished supervised token pool=373402/788606
+2026-10-26T11:46:46Z CONTROL GENERATION 1056rows; finished supervised token pool=383694/788606
+2026-10-26T11:48:30Z CONTROL GENERATION 1088rows; finished supervised token pool=394910/788606
+2026-10-26T11:49:17Z CONTROL GENERATION 1120rows; finished supervised token pool=404386/788606
+2026-10-26T11:49:54Z CONTROL GENERATION 1152rows; finished supervised token pool=414962/788606
+2026-10-26T11:50:39Z CONTROL GENERATION 1184rows; finished supervised token pool=424890/788606
+2026-10-26T11:52:22Z CONTROL GENERATION 1216rows; finished supervised token pool=437050/788606
+2026-10-26T11:53:21Z CONTROL GENERATION 1248rows; finished supervised token pool=448698/788606
+2026-10-26T11:54:49Z CONTROL GENERATION 1280rows; finished supervised token pool=462002/788606
+2026-10-26T11:56:56Z CONTROL GENERATION 1312rows; finished supervised token pool=471521/788606
+2026-10-26T11:59:05Z CONTROL GENERATION 1344rows; finished supervised token pool=482239/788606
+2026-10-26T12:00:32Z CONTROL GENERATION 1376rows; finished supervised token pool=495789/788606
+2026-10-26T12:01:30Z CONTROL GENERATION 1408rows; finished supervised token pool=507296/788606
+2026-10-26T12:02:36Z CONTROL GENERATION 1440rows; finished supervised token pool=517329/788606
+2026-10-26T12:03:39Z CONTROL GENERATION 1472rows; finished supervised token pool=529783/788606
+2026-10-26T12:04:46Z CONTROL GENERATION 1504rows; finished supervised token pool=541135/788606
+2026-10-26T12:06:10Z CONTROL GENERATION 1536rows; finished supervised token pool=553249/788606
+2026-10-26T12:06:57Z CONTROL GENERATION 1568rows; finished supervised token pool=562282/788606
+2026-10-26T12:09:06Z CONTROL GENERATION 1600rows; finished supervised token pool=574748/788606
+2026-10-26T12:10:24Z CONTROL GENERATION 1632rows; finished supervised token pool=586652/788606
+2026-10-26T12:11:29Z # Run14 Box A
+2026-10-26T12:11:29Z TODO validate: removing shared post-training directions preserves character with fewer capability/format defects at matched effect. Δpost need not isolate instruction-following.
+2026-10-26T12:12:01Z CONTROL GENERATION 1664rows; finished supervised token pool=599706/788606
+2026-10-26T12:13:01Z CONTROL GENERATION 1696rows; finished supervised token pool=611699/788606
+2026-10-26T12:13:40Z CONTROL GENERATION 1728rows; finished supervised token pool=620172/788606
+2026-10-26T12:15:13Z CONTROL GENERATION 1760rows; finished supervised token pool=630904/788606
+2026-10-26T12:16:05Z CONTROL GENERATION 1792rows; finished supervised token pool=642610/788606
+2026-10-26T12:17:11Z CONTROL GENERATION 1824rows; finished supervised token pool=654938/788606
+2026-10-26T12:18:50Z CONTROL GENERATION 1856rows; finished supervised token pool=668425/788606
+2026-10-26T12:19:49Z CONTROL GENERATION 1888rows; finished supervised token pool=679612/788606
+2026-10-26T12:21:55Z CONTROL GENERATION 1920rows; finished supervised token pool=689980/788606
+2026-10-26T12:24:00Z CONTROL GENERATION 1952rows; finished supervised token pool=701667/788606
+2026-10-26T12:25:10Z CONTROL GENERATION 1984rows; finished supervised token pool=713757/788606
+2026-10-26T12:27:18Z CONTROL GENERATION 2016rows; finished supervised token pool=724511/788606
+2026-10-26T12:28:58Z CONTROL GENERATION 2048rows; finished supervised token pool=738383/788606
+2026-10-26T12:30:15Z CONTROL GENERATION 2080rows; finished supervised token pool=751495/788606
+2026-10-26T12:31:45Z CONTROL GENERATION 2112rows; finished supervised token pool=763228/788606
+2026-10-26T12:32:28Z CONTROL GENERATION 2144rows; finished supervised token pool=772038/788606
+2026-10-26T12:33:54Z CONTROL GENERATION 2176rows; finished supervised token pool=784282/788606
+2026-10-26T12:34:56Z CONTROL GENERATION 2208rows; finished supervised token pool=794154/788606
+2026-10-26T12:36:20Z CONTROL GENERATION 2240rows; finished supervised token pool=804735/788606
+2026-10-26T12:36:21Z FULL CONTROL DATA READY: token-matched, mask checked; require complete read before training.
+2026-10-26T12:36:21Z EXECUTION BUDGET: {"author": "PI/OpenAI (Sol)", "source_plan_sha256": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73", "control_rows": 2178, "estimated_optimizer_steps": 1035, "estimated_training_seconds": 8082.104247104247, "assumptions": "Historical777steps/5617seconds;95%train split,2epochs,gradacc4;10min donor merge;2hprojection;0.35h/cell;15minsmokes;30minmargin;onehourcompletecontrolreview (may overlap required lower-dose evaluation).", "cells": [{"model": "r14_stoic0.5_const1_other1_rewr0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 0.5]], "equation": "\u03b8_I + \u0394_docs + \u00bd\u00b7\u0394sft_rewr|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_ctlgen1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_ctlgen", 1]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj161", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj16", 1]], "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_16(\u0394sft_rewr|docs)"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -0.5]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.5\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj641", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj64", 1]], "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_64(\u0394sft_rewr|docs)"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -0.25]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.25\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -1]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 1\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj641.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj64", 1.5]], "equation": "\u03b8_I + \u0394_docs + 1.5\u00b7P_64(\u0394sft_rewr|docs)"}], "thinking_heal_prompts": 0, "dropped_for_remaining_time": [], "estimated_seconds": 31662.104247104246, "remaining_runner_seconds": 37676.498680353165, "core_reserved_seconds": 28062.104247104246}
+2026-10-26T12:36:22Z GENERATION COMPLETE
+2026-10-26T12:36:30Z START required lower-dose reference evaluation while complete control-data review proceeds; no control adapter is used.
+2026-10-26T13:05:38Z REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.
+2026-10-26T13:05:38Z EARLY NATIVE SMOKE COMPLETE; production main unchanged and will repeat its canonical smoke
+2026-10-26T13:06:29Z EARLY PRODUCTION PROJECTION SMOKE COMPLETE
+2026-10-26T13:10:56Z CONTROL REVIEW: {"rows": 2178, "refusals": 0, "review": {"author": "PI/OpenAI (Sol)", "approved_utc": "2026-10-26T13:10:49Z", "sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c", "raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a", "fully_read_rows": 2178, "fully_read_raw_rows": 2240, "main_read_ranges": [[1, 168]], "team_read_ranges": [[169, 2240]], "refusal_ids": [], "refusal_count": 0, "accepted_contamination_ids": [], "unused_generic_ai_reference_ids": ["gsm_train_915"], "independent_review_path": "slop/reviews/20261026_run14_control_full_read/synthesis.md", "pilot_independent_review_path": "slop/reviews/20261026_run14_control_pilot_package/independent_review.md", "full_reader_workflow": "05cf4fad-120a-469d-baa3-c65ba6b93964", "full_reader_reports": {"read-1.json": "1231cf44d29c038c2b20c371ac31ed1b111aca3ed7720d6296abd60e0d31281e", "read-2.json": "28f8a5211a970e18a00c8e439ee4a5df637effcc111c95d1a14b2d69437dad92", "read-3.json": "1e2777cc9d6abab95a8a2e3dc423baada4009accfa731605096d468d027bbbc4", "read-4.json": "854eae5d10236e5c6aee0dacbef1828087bc11582739306c5322e128e15e7410", "read-5.json": "efa665b4883e1e0375142096b4c3971b6e1c8857f30e860ed3a22aa1a4b474e4", "read-6.json": "2e52f8fad5261235801fc3d2c3fa1ad2c34d3d7dccd68d7ebd676bc182a8ad80", "read-7.json": "b6b6cd28b678fc42bf03edce991f9ed77bf85cbc1dab624581cb559fd1da099a", "read-8.json": "542854ae6c1856b08428710dba2f76070a881938a8f1855b3cba41a3456b5c1e"}, "all_226_flags_source_spotchecked": true, "teacher_mistakes_retained_unedited": true, "supervised_tokens": 788567, "status": "approved for frozen generic-control training; not constitutional-answer approval"}}
+2026-10-26T13:13:27Z REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.
+2026-10-26T13:13:27Z START production projection smoke: first5modules, including both routed-expert banks; deliberately incomplete output not used for evaluation.
+2026-10-26T13:14:21Z COMPLETE production projection smoke
+2026-10-26T13:14:21Z START control training on Base+same docs, same recipe and2epochs
+2026-10-26T13:14:22+00:00 merge donor Base + stoic=0.5 const=1 other=1
+2026-10-26T13:18:28+00:00 donor stoic=0.5 const=1 other=1 passed greedy check
+2026-10-26T13:18:28+00:00 start train ctlgen (2178 rows) on outputs/base_stoic_0.5_const_1_other_1
+2026-10-26T15:20:38+00:00 done train ctlgen: spectral_lam fixed at 0.012
+2026-10-26T15:20:38+00:00 TRAIN-ONLY WORKER COMPLETE
+2026-10-26T15:20:39Z COMPLETE control training
+2026-10-26T15:23:52Z CONTROL/REWR UPDATE NORMS: E_ref=96.9017 E_other=100.4230 (norm of the deployed delta; squared-energy ratio 1.074)
+2026-10-26T15:23:52Z START exact per-matrix/per-expert projection, k16/64 computed from same SVD
+2026-10-26T15:58:48Z COMPLETE projection
+2026-10-26T15:58:48Z START frozen off-evaluation; completed lower-dose reference is reused; pinned41judging and full reads local; no rescue/filtering
+2026-10-26T18:18:27Z RUN14 GENERATION COMPLETE. Completed IDs: ["r14_stoic0.5_const1_other1_rewr0.5", "r14_stoic0.5_const1_other1_a14_ctlgen1", "r14_stoic0.5_const1_other1_a14_proj161", "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5", "r14_stoic0.5_const1_other1_a14_proj641", "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25", "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1", "r14_stoic0.5_const1_other1_a14_proj641.5"]

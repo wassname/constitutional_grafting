@@ -3,13 +3,9 @@
   "bootstrap": "90%, 2000 item resamples, random.Random(0); sorted item IDs",
   "scope": "Frozen sampled-character/ordinary and separate GSM protocols; auxiliary demos excluded from these flags. All observed failures retained.",
   "matched_scope": "Adjacent segments on the coherent plain-chat dose0/0.5/1 path with identical documents; power .5/1/2 sensitivity is not fitted. No D×1.5 or extrapolation. Review replies before interpreting.",
-  "completed_new_cells": 6,
+  "completed_new_cells": 7,
   "planned_new_cells": 8,
   "pending": [
-    {
-      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
-      "retrieved_done": false
-    },
     {
       "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
       "retrieved_done": false
@@ -950,6 +946,126 @@
           "worsened_items": 0
         }
       }
+    },
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1": {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
+      "character": -1.506271186440678,
+      "character_ci90": [
+        -1.7144915254237287,
+        -1.2847033898305085
+      ],
+      "maths": 32,
+      "maths_completed": 2,
+      "ordinary": 11.0,
+      "flags": {
+        "looped": 60.0,
+        "truncated": 159.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "length": 58,
+        "stop": 2
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/subtract_one/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/subtract_one/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "rewr",
+          1.0
+        ],
+        [
+          "a14_ctlgen",
+          -1.0
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl",
+      "sampled_finish_reasons": {
+        "length": 159,
+        "stop": 55
+      },
+      "sampled_tokens_median": 1536.0,
+      "sampled_marker_rows": 49,
+      "sampled_marker_turns": 53,
+      "paired_vs_D": {
+        "character": {
+          "mean": -2.3978389830508475,
+          "ci90": [
+            -2.6422881355932204,
+            -2.150635593220339
+          ],
+          "items": 59,
+          "improved_items": 3,
+          "worsened_items": 56
+        },
+        "maths": {
+          "mean": -23.0,
+          "ci90": [
+            -29.0,
+            -17.0
+          ],
+          "items": 60,
+          "improved_items": 0,
+          "worsened_items": 23
+        },
+        "ordinary": {
+          "mean": -8.0,
+          "ci90": [
+            -12.0,
+            -4.0
+          ],
+          "items": 11,
+          "improved_items": 0,
+          "worsened_items": 6
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": -2.255635593220339,
+          "ci90": [
+            -2.5041101694915255,
+            -2.0049576271186442
+          ],
+          "items": 59,
+          "improved_items": 3,
+          "worsened_items": 56
+        },
+        "maths": {
+          "mean": -21.0,
+          "ci90": [
+            -28.0,
+            -14.0
+          ],
+          "items": 60,
+          "improved_items": 2,
+          "worsened_items": 23
+        },
+        "ordinary": {
+          "mean": -7.0,
+          "ci90": [
+            -12.0,
+            -2.0
+          ],
+          "items": 11,
+          "improved_items": 1,
+          "worsened_items": 6
+        }
+      }
     }
   },
   "matched_reference": [
@@ -1064,6 +1180,10 @@
           "ordinary": 18.000687577157095
         }
       ]
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
+      "status": "outside measured increasing D path; no extrapolation"
     }
   ],
   "cost_receipt_audit": [
@@ -1115,6 +1235,16 @@
       "unrelated_keys": [],
       "cache_source": "slop/eval/run14_box_a/judging/subtract_half/new_jev_requests.jsonl",
       "receipt_source": "slop/eval/run14_box_a/judging/subtract_half/cost.json",
+      "scope": "Shared-cache byte window cross-checked against this run's explicit pair/turn keys; successful cached calls only, not a billing invoice."
+    },
+    {
+      "directory": "slop/eval/run14_box_a/judging/subtract_one",
+      "window_requests": 664,
+      "window_cost_usd": 0.121680888,
+      "referenced_window_cost_usd": 0.121680888,
+      "unrelated_keys": [],
+      "cache_source": "slop/eval/run14_box_a/judging/subtract_one/new_jev_requests.jsonl",
+      "receipt_source": "slop/eval/run14_box_a/judging/subtract_one/cost.json",
       "scope": "Shared-cache byte window cross-checked against this run's explicit pair/turn keys; successful cached calls only, not a billing invoice."
     },
     {
@@ -1172,6 +1302,11 @@
     "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25.jsonl": "bd5407159ee4a8f6c190db406d506a541eb5e16a5d89cf9db46837f703b73485",
     "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25.done": "867333527fccc24c5ba7d22921e0c86f1d8d4b871b1a508de6a51ab42eb4e170",
     "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25.jsonl": "3c4ba9a29150273f3a142e1334385dbf4ff9143ed9cc2881d6f87f9b47df55bd",
+    "slop/eval/run14_box_a/judging/subtract_one/meta.json": "6624a7b86bbe8aa057cdc88f3678b202607891c475bb377a7e3c067d620fefe4",
+    "slop/eval/run14_box_a/judging/subtract_one/judged.jsonl": "2214b16dc639f89f05c1e14d8e7d6a544f8e9810a2d1ea54e8960d03e190c058",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl": "d48656ac48c305837bbba54e919d531714170bde97b7de51f8246e8b71e39f0d",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.done": "0f051dac2c1d7772f3dbd23281c00f08ccbe1d0120fcdbab3b543945d82111ea",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl": "02b3f032005db856c39421b176b5965ea94efbc1bafe4fd6fdc566d1c70a7001",
     "slop/eval/run14_box_a/judging/control_only/new_jev_requests.jsonl": "f2eeb5aed5f362bb44723c2c42896e36aa2e5fbb20ef102aa059fd80357078cc",
     "slop/eval/run14_box_a/judging/control_only/cost.json": "9f4ca780641560b64970b926039c45b583dc46293bef333510a25e0811838476",
     "slop/eval/run14_box_a/judging/projection16/new_jev_requests.jsonl": "9ce14461ae4622ccc0011e56c9699750779ff68fa908ae9a759d9c60a9691060",
@@ -1182,6 +1317,8 @@
     "slop/eval/run14_box_a/judging/reference/cost.json": "c940ebcb5b1e5c4f89134198fd1b713ed978d3c320e7e1abb29dd879223211e2",
     "slop/eval/run14_box_a/judging/subtract_half/new_jev_requests.jsonl": "1e5bd2d55891d6c39be3783569e8aa6e4d4bbe49f20ee95c4ac1edb6c993563e",
     "slop/eval/run14_box_a/judging/subtract_half/cost.json": "a760b7a5316ead0f56bde0cc1d222aa464159cd4988b45a8e1fe0901e5f2e8af",
+    "slop/eval/run14_box_a/judging/subtract_one/new_jev_requests.jsonl": "175997f1ca6e8cbf48f5ba9b108c988897dc181b5854daaa2a7aa7f9812d0a23",
+    "slop/eval/run14_box_a/judging/subtract_one/cost.json": "35835c200162042cc9494e658a655c4252ca5e93e4a25a544ed9d761b3e17aef",
     "slop/eval/run14_box_a/judging/subtract_quarter/new_jev_requests.jsonl": "e20fcf7db45bde451825cb29256bb193c1bbd9fbc9f7c685a86813288732995e",
     "slop/eval/run14_box_a/judging/subtract_quarter/cost.json": "32a79a24410f72c97b44f47fbb82826345b165ca19e24cbe795ba5a2d5146cf3"
   }

@@ -1,0 +1,157 @@
+Created symlink /etc/systemd/system/timers.target.wants/cg-vast-57799463-deadline.timer → /etc/systemd/system/cg-vast-57799463-deadline.timer.
+EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 57799463, "label": "cg-run14-box-a", "deadline_epoch": 1793061257.8625052, "deadline_utc": "2026-10-27 00:34:17 UTC", "unit": "cg-vast-57799463-deadline", "state_path": "/workspace/2026/constitutional_grafting/.local/run14_box_a_rental.json", "systemctl_show": "TimersCalendar={ OnCalendar=2026-10-27 00:34:17 UTC ; next_elapse=Tue 2026-10-27 08:34:17 AWST }\nNextElapseUSecRealtime=Tue 2026-10-27 08:34:17 AWST\nActiveState=active\nUnitFileState=enabled\n", "guard_sha256": "71749fdcead481ee97cb9c16bfef752a66ecc1e65aba575aef4626b1caf01fdb", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
+Warning: Permanently added '[154.59.156.27]:17961' (ED25519) to the list of known hosts.
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Mon Oct 26 10:35:28 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:1B:00.0 Off |                    0 |
+| N/A   19C    P8             32W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+2.14.1+cu130 13.0
+10+0 records in
+10+0 records out
+10737418240 bytes (11 GB, 10 GiB) copied, 4.07512 s, 2.6 GB/s
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/usr/bin/tmux
+/usr/bin/rsync
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-26T10:35:47+00:00 watchdog on instance 57799463, max silence 3600s; auth check GET: 200
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+GENERATION STARTED during adapter uploads
+RUN14 MILESTONE control_pilot_ready.json
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED stoic
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED other
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED rewr
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED const
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+PROGRESS 
+STAGE 2026-10-26T12:11:29Z # Run14 Box A | 2026-10-26T12:11:29Z TODO validate: removing shared post-training directions preserves character with fewer capability/format defects at matched effect. Δpost need not isolate instruction-following.
+STAGE 2026-10-26T12:11:29Z TODO validate: removing shared post-training directions preserves character with fewer capability/format defects at matched effect. Δpost need not isolate instruction-following. | 2026-10-26T12:12:01Z CONTROL GENERATION 1664rows; finished supervised token pool=599706/788606
+STAGE 2026-10-26T12:12:01Z CONTROL GENERATION 1664rows; finished supervised token pool=599706/788606 | 2026-10-26T12:13:01Z CONTROL GENERATION 1696rows; finished supervised token pool=611699/788606
+STAGE 2026-10-26T12:13:01Z CONTROL GENERATION 1696rows; finished supervised token pool=611699/788606 | 2026-10-26T12:13:40Z CONTROL GENERATION 1728rows; finished supervised token pool=620172/788606
+STAGE 2026-10-26T12:13:40Z CONTROL GENERATION 1728rows; finished supervised token pool=620172/788606 | 2026-10-26T12:15:13Z CONTROL GENERATION 1760rows; finished supervised token pool=630904/788606
+STAGE 2026-10-26T12:15:13Z CONTROL GENERATION 1760rows; finished supervised token pool=630904/788606 | 2026-10-26T12:16:05Z CONTROL GENERATION 1792rows; finished supervised token pool=642610/788606
+STAGE 2026-10-26T12:16:05Z CONTROL GENERATION 1792rows; finished supervised token pool=642610/788606 | 2026-10-26T12:17:11Z CONTROL GENERATION 1824rows; finished supervised token pool=654938/788606
+STAGE 2026-10-26T12:17:11Z CONTROL GENERATION 1824rows; finished supervised token pool=654938/788606 | 2026-10-26T12:18:50Z CONTROL GENERATION 1856rows; finished supervised token pool=668425/788606
+STAGE 2026-10-26T12:18:50Z CONTROL GENERATION 1856rows; finished supervised token pool=668425/788606 | 2026-10-26T12:19:49Z CONTROL GENERATION 1888rows; finished supervised token pool=679612/788606
+STAGE 2026-10-26T12:19:49Z CONTROL GENERATION 1888rows; finished supervised token pool=679612/788606 | 2026-10-26T12:21:55Z CONTROL GENERATION 1920rows; finished supervised token pool=689980/788606
+STAGE 2026-10-26T12:21:55Z CONTROL GENERATION 1920rows; finished supervised token pool=689980/788606 | 2026-10-26T12:24:00Z CONTROL GENERATION 1952rows; finished supervised token pool=701667/788606
+STAGE 2026-10-26T12:24:00Z CONTROL GENERATION 1952rows; finished supervised token pool=701667/788606 | 2026-10-26T12:25:10Z CONTROL GENERATION 1984rows; finished supervised token pool=713757/788606
+PROGRESS 
+STAGE 2026-10-26T12:25:10Z CONTROL GENERATION 1984rows; finished supervised token pool=713757/788606 | 2026-10-26T12:27:18Z CONTROL GENERATION 2016rows; finished supervised token pool=724511/788606
+STAGE 2026-10-26T12:27:18Z CONTROL GENERATION 2016rows; finished supervised token pool=724511/788606 | 2026-10-26T12:28:58Z CONTROL GENERATION 2048rows; finished supervised token pool=738383/788606
+STAGE 2026-10-26T12:28:58Z CONTROL GENERATION 2048rows; finished supervised token pool=738383/788606 | 2026-10-26T12:30:15Z CONTROL GENERATION 2080rows; finished supervised token pool=751495/788606
+STAGE 2026-10-26T12:30:15Z CONTROL GENERATION 2080rows; finished supervised token pool=751495/788606 | 2026-10-26T12:31:45Z CONTROL GENERATION 2112rows; finished supervised token pool=763228/788606
+STAGE 2026-10-26T12:31:45Z CONTROL GENERATION 2112rows; finished supervised token pool=763228/788606 | 2026-10-26T12:32:28Z CONTROL GENERATION 2144rows; finished supervised token pool=772038/788606
+STAGE 2026-10-26T12:32:28Z CONTROL GENERATION 2144rows; finished supervised token pool=772038/788606 | 2026-10-26T12:33:54Z CONTROL GENERATION 2176rows; finished supervised token pool=784282/788606
+STAGE 2026-10-26T12:33:54Z CONTROL GENERATION 2176rows; finished supervised token pool=784282/788606 | 2026-10-26T12:34:56Z CONTROL GENERATION 2208rows; finished supervised token pool=794154/788606
+STAGE 2026-10-26T12:36:21Z EXECUTION BUDGET: {"author": "PI/OpenAI (Sol)", "source_plan_sha256": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73", "control_rows": 2178, "estimated_optimizer_steps": 1035, "estimated_training_seconds": 8082.104247104247, "assumptions": "Historical777steps/5617seconds;95%train split,2epochs,gradacc4;10min donor merge;2hprojection;0.35h/cell;15minsmokes;30minmargin;onehourcompletecontrolreview (may overlap required lower-dose evaluation).", "cells": [{"model": "r14_stoic0.5_const1_other1_rewr0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 0.5]], "equation": "\u03b8_I + \u0394_docs + \u00bd\u00b7\u0394sft_rewr|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_ctlgen1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_ctlgen", 1]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj161", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj16", 1]], "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_16(\u0394sft_rewr|docs)"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -0.5]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.5\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj641", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj64", 1]], "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_64(\u0394sft_rewr|docs)"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -0.25]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.25\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -1]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 1\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj641.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj64", 1.5]], "equation": "\u03b8_I + \u0394_docs + 1.5\u00b7P_64(\u0394sft_rewr|docs)"}], "thinking_heal_prompts": 0, "dropped_for_remaining_time": [], "estimated_seconds": 31662.104247104246, "remaining_runner_seconds": 37676.498680353165, "core_reserved_seconds": 28062.104247104246} | 2026-10-26T12:36:22Z GENERATION COMPLETE
+RUN14 MILESTONE control_ready.json
+RUN14 MILESTONE generate.exit
+STAGE 2026-10-26T12:36:22Z GENERATION COMPLETE | 2026-10-26T12:36:30Z START required lower-dose reference evaluation while complete control-data review proceeds; no control adapter is used.
+PROGRESS 
+RUN14 MILESTONE r14_stoic0.5_const1_other1_rewr0.5.done
+PROGRESS 
+STAGE 2026-10-26T13:05:38Z REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores. | 2026-10-26T13:05:38Z EARLY NATIVE SMOKE COMPLETE; production main unchanged and will repeat its canonical smoke
+STAGE 2026-10-26T13:05:38Z EARLY NATIVE SMOKE COMPLETE; production main unchanged and will repeat its canonical smoke | 2026-10-26T13:06:29Z EARLY PRODUCTION PROJECTION SMOKE COMPLETE
+STAGE 2026-10-26T13:06:29Z EARLY PRODUCTION PROJECTION SMOKE COMPLETE | 2026-10-26T13:10:56Z CONTROL REVIEW: {"rows": 2178, "refusals": 0, "review": {"author": "PI/OpenAI (Sol)", "approved_utc": "2026-10-26T13:10:49Z", "sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c", "raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a", "fully_read_rows": 2178, "fully_read_raw_rows": 2240, "main_read_ranges": [[1, 168]], "team_read_ranges": [[169, 2240]], "refusal_ids": [], "refusal_count": 0, "accepted_contamination_ids": [], "unused_generic_ai_reference_ids": ["gsm_train_915"], "independent_review_path": "slop/reviews/20261026_run14_control_full_read/synthesis.md", "pilot_independent_review_path": "slop/reviews/20261026_run14_control_pilot_package/independent_review.md", "full_reader_workflow": "05cf4fad-120a-469d-baa3-c65ba6b93964", "full_reader_reports": {"read-1.json": "1231cf44d29c038c2b20c371ac31ed1b111aca3ed7720d6296abd60e0d31281e", "read-2.json": "28f8a5211a970e18a00c8e439ee4a5df637effcc111c95d1a14b2d69437dad92", "read-3.json": "1e2777cc9d6abab95a8a2e3dc423baada4009accfa731605096d468d027bbbc4", "read-4.json": "854eae5d10236e5c6aee0dacbef1828087bc11582739306c5322e128e15e7410", "read-5.json": "efa665b4883e1e0375142096b4c3971b6e1c8857f30e860ed3a22aa1a4b474e4", "read-6.json": "2e52f8fad5261235801fc3d2c3fa1ad2c34d3d7dccd68d7ebd676bc182a8ad80", "read-7.json": "b6b6cd28b678fc42bf03edce991f9ed77bf85cbc1dab624581cb559fd1da099a", "read-8.json": "542854ae6c1856b08428710dba2f76070a881938a8f1855b3cba41a3456b5c1e"}, "all_226_flags_source_spotchecked": true, "teacher_mistakes_retained_unedited": true, "supervised_tokens": 788567, "status": "approved for frozen generic-control training; not constitutional-answer approval"}}
+PROGRESS 
+STAGE 2026-10-26T13:13:27Z REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores. | 2026-10-26T13:13:27Z START production projection smoke: first5modules, including both routed-expert banks; deliberately incomplete output not used for evaluation.
+STAGE 2026-10-26T13:14:21Z START control training on Base+same docs, same recipe and2epochs | 2026-10-26T13:14:22+00:00 merge donor Base + stoic=0.5 const=1 other=1
+STAGE 2026-10-26T13:18:28+00:00 donor stoic=0.5 const=1 other=1 passed greedy check | 2026-10-26T13:18:28+00:00 start train ctlgen (2178 rows) on outputs/base_stoic_0.5_const_1_other_1
+PROGRESS   2%|▏         | 23/1035 [08:15<1:51:25,  6.61s/it]
+PROGRESS  16%|█▌        | 161/1035 [23:33<1:51:48,  7.68s/it]
+PROGRESS  29%|██▉       | 302/1035 [38:56<1:17:56,  6.38s/it]
+PROGRESS  43%|████▎     | 446/1035 [54:19<1:02:15,  6.34s/it]
+PROGRESS  55%|█████▌    | 573/1035 [1:09:35<49:28,  6.43s/it]
+PROGRESS  69%|██████▉   | 715/1035 [1:24:50<34:49,  6.53s/it]
+PROGRESS  83%|████████▎ | 857/1035 [1:40:08<19:07,  6.45s/it]
+PROGRESS  97%|█████████▋| 1000/1035 [1:55:26<03:46,  6.46s/it]
+STAGE 2026-10-26T15:20:38+00:00 TRAIN-ONLY WORKER COMPLETE | 2026-10-26T15:20:39Z COMPLETE control training
+STAGE 2026-10-26T15:23:52Z CONTROL/REWR UPDATE NORMS: E_ref=96.9017 E_other=100.4230 (norm of the deployed delta; squared-energy ratio 1.074) | 2026-10-26T15:23:52Z START exact per-matrix/per-expert projection, k16/64 computed from same SVD
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+STAGE 2026-10-26T15:58:48Z COMPLETE projection | 2026-10-26T15:58:48Z START frozen off-evaluation; completed lower-dose reference is reused; pinned41judging and full reads local; no rescue/filtering
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+RUN14 MILESTONE r14_stoic0.5_const1_other1_a14_ctlgen1.done
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+RUN14 MILESTONE r14_stoic0.5_const1_other1_a14_proj161.done
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+RUN14 MILESTONE r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.done
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+RUN14 MILESTONE r14_stoic0.5_const1_other1_a14_proj641.done
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+RUN14 MILESTONE r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25.done
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+RUN14 MILESTONE r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.done
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+PROGRESS [2026-10-26 15:20:27,580] [INFO] [axolotl.train] Model successfully saved to outputs/r10_a14_ctlgen
+STAGE 2026-10-26T15:58:48Z START frozen off-evaluation; completed lower-dose reference is reused; pinned41judging and full reads local; no rescue/filtering | 2026-10-26T18:18:27Z RUN14 GENERATION COMPLETE. Completed IDs: ["r14_stoic0.5_const1_other1_rewr0.5", "r14_stoic0.5_const1_other1_a14_ctlgen1", "r14_stoic0.5_const1_other1_a14_proj161", "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5", "r14_stoic0.5_const1_other1_a14_proj641", "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25", "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1", "r14_stoic0.5_const1_other1_a14_proj641.5"]
+RUN14 MILESTONE r14_stoic0.5_const1_other1_a14_proj641.5.done
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Removed "/etc/systemd/system/timers.target.wants/cg-vast-57799463-deadline.timer".
+RENTAL DESTROYED 57799463
+RUN14 RETRIEVED; exact instance destroyed

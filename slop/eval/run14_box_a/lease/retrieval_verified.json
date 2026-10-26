@@ -1,0 +1,37 @@
+{
+  "author": "PI/OpenAI",
+  "job_exit": "0",
+  "all_available_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_a14_ctlgen": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800800,
+        "sha256": "978b71f20946061748b81766bcf4b2b9d0b9e5419fce16dce10c4e57cf888b3e"
+      }
+    },
+    "r10_a14_proj16": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800768,
+        "sha256": "28bcd913d97a9955dc5e45ed5aee4f20cbb76dfe6e5d3cc0119434fe213db5c6"
+      }
+    },
+    "r10_a14_proj64": {
+      "adapter_config.json": {
+        "bytes": 1479,
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 3997800768,
+        "sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa"
+      }
+    }
+  }
+}
