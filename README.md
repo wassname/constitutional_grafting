@@ -12,6 +12,12 @@
 
 Serves one Qwen3.5-35B-A3B Instruct. About $30 of rented GPU and $100 of API calls. Cooking time: one day, plus the weeks you spend arguing about the constitution.
 
+> Set aside a certain number of days, during which you shall be content with the scantiest and cheapest fare [...] saying to yourself the while: "Is this the condition that I feared?"
+>
+> — Seneca, *Moral Letters* 18.5 (tr. Gummere), on GPU budgets
+
+The real Musonius preferred food that needs no cooking: "The most suitable of these foods, though, are the ones we can eat without cooking" (Lecture 18, tr. Chakrapani). This one needs an oven.
+
 Kitchen shorthand, used here and in the appendix:
 
 ```
