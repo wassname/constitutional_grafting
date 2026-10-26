@@ -37,3 +37,9 @@
 [submodule "docs/vendor/spp_evals"]
 	path = docs/vendor/spp_evals
 	url = https://github.com/epfl-dlab/spp-evals
+[submodule "docs/vendor/science_of_midtraining"]
+	path = docs/vendor/science_of_midtraining
+	url = https://github.com/ArcadiaImpact/science-of-midtraining
+[submodule "docs/vendor/constitutional_adapters"]
+	path = docs/vendor/constitutional_adapters
+	url = https://github.com/safety-research/constitutional-adapters
