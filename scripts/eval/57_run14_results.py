@@ -161,11 +161,31 @@ def main():
                             "estimated_D_dose": dose_low + (dose_high - dose_low) * fraction,
                             "sensitivity": [{"power": power, **{key: low[key] + (high[key] - low[key]) * fraction**power
                                               for key in ("maths", "ordinary")}} for power in (.5, 1, 2)]})
+    cost_audit = []
+    for directory in sorted(set(judging.values())):
+        judged = rows(directory / "judged.jsonl")
+        used = {value["key"] for row in judged for value in row.get("pair", {}).values()}
+        used |= {value["key"] for row in judged for turn in row.get("jev", []) for value in turn["option_orders"]}
+        cache_path = directory / "new_jev_requests.jsonl"
+        fresh = rows(cache_path)
+        receipt_path = directory / "cost.json"
+        receipt = json.loads(receipt_path.read_text())
+        assert math.isclose(sum(row["cost"] for row in fresh), receipt["new_cached_request_cost_usd"])
+        foreign = [row["key"] for row in fresh if row["key"] not in used]
+        cost_audit.append({"directory": str(directory.relative_to(ROOT)), "window_requests": len(fresh),
+                           "window_cost_usd": receipt["new_cached_request_cost_usd"],
+                           "referenced_window_cost_usd": sum(row["cost"] for row in fresh if row["key"] in used),
+                           "unrelated_keys": foreign, "cache_source": source(cache_path),
+                           "receipt_source": source(receipt_path),
+                           "scope": "Shared-cache byte window cross-checked against this run's explicit pair/turn keys; successful cached calls only, not a billing invoice."})
+        if foreign:
+            print(f"COST ATTRIBUTION WARNING: {directory}: {len(foreign)} unrelated requests in shared-cache window")
     result = {"author": "PI/OpenAI (Sol)", "bootstrap": "90%, 2000 item resamples, random.Random(0); sorted item IDs",
               "scope": "Frozen sampled-character/ordinary and separate GSM protocols; auxiliary demos excluded from these flags. All observed failures retained.",
               "matched_scope": "Adjacent segments on the coherent plain-chat dose0/0.5/1 path with identical documents; power .5/1/2 sensitivity is not fitted. No D×1.5 or extrapolation. Review replies before interpreting.",
               "completed_new_cells": len(jobs) - n_references, "planned_new_cells": len(plan["cells"]),
-              "pending": pending, "points": points, "matched_reference": matched, "source_sha256": sources}
+              "pending": pending, "points": points, "matched_reference": matched,
+              "cost_receipt_audit": cost_audit, "source_sha256": sources}
     (OUT / "summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     for point in sorted(points.values(), key=lambda p: -p["character"]):
         print(f"{point['model']}: preference={point['character']:+.3f} maths={point['maths']}/60 ordinary={point['ordinary']:g}/22 flags={point['flags']}")
