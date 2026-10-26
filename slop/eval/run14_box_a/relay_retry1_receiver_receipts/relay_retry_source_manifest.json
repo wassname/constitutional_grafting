@@ -1,0 +1,68 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source_instance_id": 57799463,
+  "target_instance_id": 57831547,
+  "target_label": "cg-run15-thinking-heal-retry1",
+  "target_ssh_host": "154.59.156.15",
+  "target_ssh_port": "33881",
+  "target_host_public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK39ErK/YVIHf74fsjzhsUFrwYrqL3rbQvHZiQgFJ4R+",
+  "receiver_stage": "/workspace/cg/outputs/relay_from_box_a_retry1",
+  "requested_names": [
+    "stoic",
+    "const",
+    "other",
+    "rewr"
+  ],
+  "source_files": {
+    "stoic": {
+      "adapter_config.json": {
+        "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+        "bytes": 1466,
+        "mtime_seconds": 1792596379
+      },
+      "adapter_model.safetensors": {
+        "sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+        "bytes": 3997800800,
+        "mtime_seconds": 1792596379
+      }
+    },
+    "const": {
+      "adapter_config.json": {
+        "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+        "bytes": 1466,
+        "mtime_seconds": 1792213594
+      },
+      "adapter_model.safetensors": {
+        "sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+        "bytes": 3997800800,
+        "mtime_seconds": 1792213594
+      }
+    },
+    "other": {
+      "adapter_config.json": {
+        "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+        "bytes": 1466,
+        "mtime_seconds": 1792603184
+      },
+      "adapter_model.safetensors": {
+        "sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+        "bytes": 3997800800,
+        "mtime_seconds": 1792603184
+      }
+    },
+    "rewr": {
+      "adapter_config.json": {
+        "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+        "bytes": 1479,
+        "mtime_seconds": 1792743747
+      },
+      "adapter_model.safetensors": {
+        "sha256": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e",
+        "bytes": 3997800800,
+        "mtime_seconds": 1792743747
+      }
+    }
+  },
+  "source_receipt_path": "/workspace/2026/constitutional_grafting/slop/eval/run14_box_a/relay_to_run15_retry1.json",
+  "source_receipt_sha256_at_read": "127db8f6d4a89ef7e9f1c04db61c2162e6a81ec19a7b603f89142ad84483e874"
+}

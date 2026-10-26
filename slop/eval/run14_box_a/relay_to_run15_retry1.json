@@ -18,7 +18,7 @@
   "source_ephemeral_private_key_path": "/workspace/cg/.local/run15_relay_1793027384",
   "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK4lVp4sInr5kz7Zca/Ud6iG0+bThyhblRu4jb0x5WvB cg_run14_to_run15_57831547",
   "target_guard_receipt_sha256": "b3a0d37c8cd3a04f8f877ae6f2258951f4dc148177dc7e95750f1040f3f7e4c8",
-  "status": "strict receiver authorization verified; ready for four-donor transfer",
+  "status": "complete: all4 receiver SHA/size/mtime verified and atomically no-overwrite installed; source ephemeral keyfiles and exact receiver authorization removed",
   "source_files": {
     "stoic": {
       "adapter_config.json": {
@@ -71,5 +71,13 @@
   },
   "receiver_authorization_confirmed_utc": "2026-10-26T15:14:59Z",
   "receiver_authorization_expiry_utc": "2026-10-26T16:00:00Z",
-  "receiver_authorization_receipt_sha256": "c5ade49b5dc3cd144cbb09f94a33d2ecfaa0b3f223afe0e56dfc7fb544effacb"
+  "receiver_authorization_receipt_sha256": "c5ade49b5dc3cd144cbb09f94a33d2ecfaa0b3f223afe0e56dfc7fb544effacb",
+  "sent_names": [
+    "stoic",
+    "const",
+    "other",
+    "rewr"
+  ],
+  "receiver_must_verify": true,
+  "receiver_receipts": "slop/eval/run14_box_a/relay_retry1_receiver_receipts"
 }
