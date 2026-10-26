@@ -1,6 +1,6 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference is judged: preference +0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. Projection adapter retrieval/verification is in progress. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
+PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference is judged: preference +0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. All three required final adapters (control, rank16 projection, rank64 projection) are downloaded and SHA256-verified against remote files and the SVD report. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
 
@@ -15,7 +15,8 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 - [x] Complete control training on the exact donor (15:20:39UTC).
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
 - [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
-- [ ] Verify projected adapter downloads, finish the remaining seven planned evaluation cells, judge and read their replies.
+- [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
+- [ ] Finish all eight planned evaluation cells, judge and read their replies. Two judged so far; rank16 evaluation has completed and retrieval is in progress.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
 ## Lease and current stage
@@ -41,7 +42,7 @@ Exact checkpoint-difference SVD covered130attention modules,120shared modules an
 - Rank16 removes4.51%of update energy. The removed component has21.24%of the original Frobenius norm, while the retained adapter has97.72%of the original norm (only2.28%smaller).
 - Rank64 removes15.16%of update energy. The removed component has38.94%of the original norm, while the retained adapter has92.11%of the original norm (7.89%smaller).
 
-Removed-component norm is not the percentage decrease in total norm. These are geometric measurements, not evidence of instruction-following isolation or a matched-character benefit. Full class-level values and definitions: `projection_summary.json`, `lease/box_runs/projection.json`. Behavioural comparisons and local adapter-hash verification are pending.
+Removed-component norm is not the percentage decrease in total norm. These are geometric measurements, not evidence of instruction-following isolation or a matched-character benefit. Full class-level values and definitions: `projection_summary.json`, `lease/box_runs/projection.json`. All three required final adapter downloads are verified in `projection_snapshot_verified.json`. Behavioural comparisons are pending.
 
 ## Live spectral check (14:27UTC)
 
@@ -54,6 +55,12 @@ The historical recipe calibrates once near1% during warmup, then fixesλ. It doe
 D×0.5: preference +0.749 (90% item-bootstrap interval[+0.614,+0.888],59judgeditems×2), maths53/60, ordinary18/22. Historical D×1 on the same frozen protocol: +0.892,55/60,19/22; Instruct baseline: reference0,53/60,22/22. These are measured points, not evidence that a dose is better. No subtraction/projection or matched-effect result yet. Metadata signatures match the historical D run.
 
 D×0.5 sampled-character protocol:211stop/3length across214turns,0loop flags; median436tokens,max2048. GSM:56stop/4length across60answers. Keep those protocols separate. Full fixed panel and both samples of payday/fridge/email were read; failures are in `reading_notes.md`. Pinned judge served `typesafe/jev-1.13-20260917`, new-cache cost$0.092737344. Exact values/provenance: `reference_summary.json`, `judging/reference/`.
+
+## Preliminary generic-control-only sanity check
+
+With the documents retained and control×1 but no character-chat adapter: preference −0.393 (90% item-bootstrap interval[−0.536,−0.260]), maths49/60, ordinary19/22. Both direct identity questions answer Qwen3.5/Tongyi Lab. Selected payday/fridge/email replies follow harmful commercial instructions or fabricate workplace spin. This supports absence of the target identity, but usefulness is worse on these observed checks. Subtraction and projection comparisons remain pending.
+
+Primary sampled protocol:0loop flags/7cutoffs over214turns. GSM:8cutoffs over60answers. The auxiliary T0 starwisp demo repeats the prompt to its token cap, while the fixed-panel version gives a coherent first reply. Their recorded first-turn request bodies are identical, including temperature0,seed0 and max1500. Cause is untested; preserve both and do not claim T0 repeatability. Full fixed panel, six demos and both samples of payday/fridge/email read; observations are in `reading_notes.md`. Exact metrics: `control_only_summary.json`; duplicate-request evidence: `control_only_t0_duplicate_check.json`; pinned judge cost$0.097462764.
 
 ## Optional draft-v2 generation
 

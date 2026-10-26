@@ -1,0 +1,28 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r14_stoic0.5_const1_other1_a14_ctlgen1",
+  "character_mean": -0.393135593220339,
+  "character_interval90": [
+    -0.5360593220338983,
+    -0.26033898305084746
+  ],
+  "character_items": 59,
+  "ordinary_credit": 19.0,
+  "ordinary_records": 22,
+  "maths_correct": 49,
+  "maths_total": 60,
+  "flags": {
+    "looped": 0.0,
+    "truncated": 7.0,
+    "lang_switch": 0.0,
+    "role_confusion": 0.0,
+    "empty": 0.0
+  },
+  "sampled_turns": 214,
+  "gsm_finish_reasons": {
+    "stop": 52,
+    "length": 8
+  },
+  "judge_cost": 0.097462764,
+  "scope": "Control-only sanity graft, no rewritten constitutional chat adapter; fixed panel and selected items read; not a matched-effect result"
+}
