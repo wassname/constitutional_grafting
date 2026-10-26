@@ -1,0 +1,4 @@
+2026-10-26T15:37:14Z # Run15 thinking-heal
+2026-10-26T15:37:14Z SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Training parent is the frozen bf16-rounded copy of D; original D stays fp16 for serving. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.
+2026-10-26T15:37:28Z FIRST-LEASE BASELINE REUSED:57812278; exact frozen inputs, generator, FP16 server argv, vLLM0.31.0 and hashed native outputs; not regenerated on replacement hardware
+2026-10-26T15:42:56Z D PARENT MERGED: pinned Instruct, ordered fp16 docs+rewr updates, frozen for both heals

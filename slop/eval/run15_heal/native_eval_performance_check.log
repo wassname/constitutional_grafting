@@ -1,0 +1,14 @@
+2026-10-26T16:01:33Z START TRAIN trace: rank8,alpha16,oneepoch,LR1e-4,spectral_frac.01,frozen bf16-rounded copy of fp16 D; served D remains fp16
+2026-10-26T16:15:34Z TRAIN COMPLETE trace
+2026-10-26T16:15:34Z START TRAIN mix: rank8,alpha16,oneepoch,LR1e-4,spectral_frac.01,frozen bf16-rounded copy of fp16 D; served D remains fp16
+2026-10-26T16:33:32Z TRAIN COMPLETE mix
+2026-10-26T16:37:49Z NATIVE ADAPTER ON MERGED D SMOKE COMPLETE; all expert/dense adapters accepted, raw requests and responses saved
+2026-10-26T16:52:16Z PRIMARY COMPLETE r15_D on; 140rows; all failures retained
+INFO:     127.0.0.1:51452 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52664 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51464 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=11958) INFO 10-26 17:12:54 [loggers.py:320] Engine 000: Avg prompt throughput: 405.1 tokens/s, Avg generation throughput: 372.6 tokens/s, Running: 32 reqs, Waiting: 0 reqs, GPU KV cache usage: 16.7%, Prefix cache hit rate: 2.0%
+INFO:     127.0.0.1:51460 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42178 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41546 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41518 - "POST /v1/chat/completions HTTP/1.1" 200 OK

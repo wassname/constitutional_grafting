@@ -3125,3 +3125,30 @@ Interpretation (speculative): D's chat adapter learned to end the turn mainly af
 Fix for future data: `scripts/train/check_loss_mask.py` now fails when a labelled target lacks `<|im_end|>` (`ALLOW_MISSING_EOS=1` only for exact replication); AGENTS rule added. Box A replicates D exactly, so it keeps the bug and its report must state the confound.
 
 A large share of our character chat data never taught the model to end its turn, which may explain some instability and confounds the control comparisons.
+
+## 2026-10-26 -- Heal GPU smoke stopped before production training
+
+The GPU smoke stopped before either repair adapter could be trained.
+
+The first Trainer record contains:
+
+> 'loss': '12.45', 'grad_norm': 'nan', 'learning_rate': '0.0001'
+
+The next forward fails at:
+
+```text
+    lam[0] = float(frac) * ce / sig
+ZeroDivisionError: float division by zero
+```
+
+Source: `slop/eval/run15_heal/lease/box_runs/tiny_heal_train.log:356-411`. Full controller, training and remote-job logs were read; the audit is `slop/audits/20261026_run15_gpu_smoke_failure.md`. No production heal, healed-model score, reward-hacking count (`hack_s`) or ground-truth pass count (`gt_s`) exists from this attempt. The completed Instruct control is retained separately; it is not a healing result.
+
+Interpretation (PI/OpenAI): calibration incorrectly assumes that the first Trainer step changes zero-initialized LoRA weights. A zero-learning-rate warmup step can leave the spectral estimate at zero; CPU regressions reproduce this with two seeds. The earlier nonfinite gradient is a separate numerical failure, plausibly FP16 backward/AMP or a fused-kernel path. Its exact cause remains unresolved because the original tiny initialization and optimizer/scaler state were not retained.
+
+The fix uses a frozen BF16-rounded training copy of D while preserving original FP16 D for serving, computes spectral math outside autocast in FP32, and waits for finite positive sigma. The real tiny callback now checks actual before/after tensor changes, a later regularized change and saved-tensor finiteness, rather than counting optimizer attempts. The final CPU log reports `Ran 10 tests in 5.033s` and `OK`; data/review tests add another seventeen passes. Independent review permits the new GPU tiny, not bypassing it (`preflight_retry_review_final.md`).
+
+The first instance was retrieved and destroyed; its provider-absence receipt estimates GPU cost at $2.67347. The owner approved one replacement within the original $20 total. It is running under an independent exact-instance deadline; production training must still pass its GPU smoke and timing gates. Reused Instruct outputs will be labelled as first-lease controls, not regenerated on replacement hardware.
+
+The next evidence must come from real GPU updates and the healed replies.
+
+-- PI/OpenAI (Sol)

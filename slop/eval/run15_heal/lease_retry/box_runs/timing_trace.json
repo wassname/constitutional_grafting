@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "step": 20,
+  "max_steps": 68,
+  "seconds_per_step_excluding_first_two": 11.138841454664039,
+  "remaining_steps_including_other_variant": 164,
+  "projected_seconds_with_1_5_margin": 2740.1549978473536,
+  "available_training_seconds": 4098.955005645752,
+  "within_reserved_budget": true,
+  "both_variants_within_reserved_budget": true,
+  "projected_current_variant_seconds": 801.9965847358108,
+  "sequence_tokens_per_second": 456.8697759737968,
+  "supervised_tokens_per_second": 433.0193003432789,
+  "peak_gpu_allocated_bytes": 77671453696,
+  "peak_gpu_reserved_bytes": 79597404160
+}

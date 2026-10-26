@@ -1,0 +1,27 @@
+{
+  "author": "PI/OpenAI",
+  "job_exit": null,
+  "all_available_final_adapter_hashes_match": true,
+  "manifest": {
+    "r10_heal15_trace": {
+      "adapter_config.json": {
+        "bytes": 1311,
+        "sha256": "287e16e25562b5c54e74b8da932bd78de29608024b85d47274db7889cb8e0045"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 1883936184,
+        "sha256": "c848a29d6c948561f1dc50e4c270aa728695fda847f4f1c9eb04e1b09f1b90f0"
+      }
+    },
+    "r10_heal15_mix": {
+      "adapter_config.json": {
+        "bytes": 1311,
+        "sha256": "287e16e25562b5c54e74b8da932bd78de29608024b85d47274db7889cb8e0045"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 1883936184,
+        "sha256": "73be4f79cdc199eead6b69fa76c40b01e5cf295fe0469f9879c400d0a4499a84"
+      }
+    }
+  }
+}

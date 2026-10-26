@@ -1,0 +1,11 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57831547,
+  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK4lVp4sInr5kz7Zca/Ud6iG0+bThyhblRu4jb0x5WvB cg_run14_to_run15_57831547",
+  "fingerprint": "256 SHA256:9/RIo/uZNH/JB3qpcRT+9Stt3tX0vKi7bmyEIjqRmR4 cg_run14_to_run15_57831547 (ED25519)",
+  "expiry_utc_no_Z_syntax": "20261026160000",
+  "target_timezone_verified": "UTC+0000",
+  "authorized_options": "restrict,expiry-time=\"20261026160000\",command=\"/usr/bin/rrsync -wo -no-del /workspace/cg/outputs/relay_from_box_a_retry1\"",
+  "source_ip_restricted": false,
+  "source_ip_note": "Provider publicIP is not independently verified outbound/NAT IP; private key exists only on source A, restricted write-only receiver and exact-byte SHA verification remain mandatory."
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Exact-ID Vast hard deadline 57831547
+[Service]
+Type=oneshot
+User=code
+WorkingDirectory=/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal
+ExecStart=/usr/bin/python3 /workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/eval/run15_heal/lease_retry/deadline_guard/guard.py destroy --instance-id 57831547 --label cg-run15-thinking-heal-retry1 --out /workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/eval/run15_heal/lease_retry/deadline_guard/destroy_verified.json
+TimeoutStartSec=120
+Restart=on-failure
+RestartSec=15
