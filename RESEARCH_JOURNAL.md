@@ -3104,3 +3104,24 @@ Interpretation: my read is that no available teacher output gives real, owned, i
 Decision (wassname, this session): drop the in-character reasoning data line. Serving and evaluating with thinking off (AGENTS rule, 967fe33) stays the way to use the grafts. Kept: the no-loss-on-empty-think rule (6427d02), the pilot data and the briefs in `slop/research/20261026_*`.
 
 Real teacher deliberation exists but only in a form we would have to rewrite, so the reasoning-data line is dropped and thinking stays off.
+
+## 2026-10-26 -- Most rewritten chat targets were trained without an end-of-turn token
+
+This entry records a data-format bug found by cg_help2 while building heal replay data, and checked by PI/Claude: most rewritten-response chat rows end their trained answer without `<|im_end|>`, and the trainer does not add one.
+
+| Chat file | Rows | Labelled target missing `<|im_end|>` |
+|:--|--:|--:|
+| `data/train/run10/chat12.jsonl` | 1,450 | 0 |
+| `data/train/run10/chatp12.jsonl` | 1,625 | 112 |
+| `data/train/run10/chatr12.jsonl` (D's chat data) | 1,625 | 903 |
+| `data/train/run11/chatr13.jsonl` | 1,798 | 1,079 |
+| `data/train/run11/chatmix.jsonl` | 6,483 | 1,079 |
+| `data/train/run11_matched_chat_control/chatgen.jsonl` | 9,418 | 0 |
+
+Table 1. Counted this session with a check of each row's final labelled segment. Axolotl's input_output strategy (copy in `slop/eval/run11/lease1/box_runs/input_output_strategy.py`) tokenizes segments with `add_special_tokens=False` and stores but never appends an EOS token. In chatr12 the missing rows are the substantive ones (seeded dilemmas 395, proportion 112, ordinary 87, difficult 77...); the 622 identity rows all end correctly.
+
+Interpretation (speculative): D's chat adapter learned to end the turn mainly after identity answers, not after character answers; Instruct's own stopping habit probably covers this with thinking off. It may contribute to longer replies, earlier collapse at higher chat doses, and the thinking-on failure, *plausible*, untested. It also confounds every chat-control subtraction: the generic controls (chatgen, Box A's control) do end with `<|im_end|>`, so subtracting them subtracts end-of-turn learning that the character adapter lacks. That fits the length drift and corruption seen with the run-12 control (journal "Chat-stage control: what it changes, per experiment"), *plausible*.
+
+Fix for future data: `scripts/train/check_loss_mask.py` now fails when a labelled target lacks `<|im_end|>` (`ALLOW_MISSING_EOS=1` only for exact replication); AGENTS rule added. Box A replicates D exactly, so it keeps the bug and its report must state the confound.
+
+A large share of our character chat data never taught the model to end its turn, which may explain some instability and confounds the control comparisons.
