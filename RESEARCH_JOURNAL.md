@@ -3052,3 +3052,30 @@ Interpretation: my read is that the chat adapters learned "answer, then end of t
 Decision: serve and evaluate the existing grafts with thinking off (rule added to AGENTS.md, 967fe33). Thinking-on support would need chat data with real reasoning in the think block; that is a training-data decision for wassname. Cost: about $11.48 of the $15 cap.
 
 The graft still carries much of the character in thinking mode, but the current chat data puts it in the wrong place, so thinking must stay off until the chat data includes real reasoning.
+
+## 2026-10-26 -- In-character reasoning pilot: which teacher and guide write usable reasoning
+
+This entry records the first pilot of written in-character reasoning for chat training rows, needed so the graft can think in character with thinking mode on. Teachers wrote reasoning before answering, never seeing our existing answer, on 20 frozen training rows.
+
+| Guide | Teacher | Generated | Recoverable format | Retain candidates | Better / same / worse than our existing answer |
+|:--|:--|--:|--:|--:|:--|
+| no guide | Kimi K3.1 Pro | 20 | 20 | 14 | 6 / 12 / 2 |
+| Kimi's guide | Kimi K3.1 Pro | 20 | 20 | 15 | 11 / 7 / 2 |
+| Opus's guide | Kimi K3.1 Pro | 19 | 19 | 14 | 8 / 8 / 3 |
+| no guide | MiMo v2.6 Flash | 20 | 14 | 1 | 1 / 4 / 15 |
+| Kimi's guide | MiMo v2.6 Flash | 11 | 2 | 1 | 1 / 3 / 6 |
+| no guide | GLM 5.3 | 20 | 13 | 2 | 1 / 3 / 16 |
+| Kimi's guide | GLM 5.3 | 20 | 11 | 1 | 1 / 3 / 16 |
+| Opus's guide | GLM 5.3 | 18 | 9 | 1 | 1 / 4 / 13 |
+| Greek/Latin then English | Kimi K3.1 Pro | 20 | 20 | 10 | 4 / 8 / 8 |
+| Greek/Latin then English | GLM 5.3 | 19 | 19 | 0 | 0 / 1 / 18 |
+
+Table 1. Retain candidate = complete pair, forward reasoning, no reader defect flagged; not a training release. Reader: PI/Sol, who read all 187 English deliverables and 40 classical sources. Source: `slop/data/20261026_reasoning_pilot/summary.md` (commits 2ac7b26, 881ee20). Independent DeepSeek review of a frozen random 8: format agreement 8/8, answer-quality 4/8, forward-reasoning 4/7. Cost $3.74 of $15.
+
+Defects the reader quoted: three Kimi restaurant traces announce refusal before weighing the jobs; one Kimi legal answer cites nonexistent CFR subparagraphs; GLM and MiMo often invent records or facts to make a verdict easy; GLM's worst ship answer repeats deception and calls it the captain's responsibility. Overlapping flags: 96 factual, 42 rule, 21 rationalisation. Writing in Greek or Latin gave clean tags but no reasoning gain for Kimi and no usable rows for GLM, matching the 15 October Greek pilot (least Claude-like, never best reasoned).
+
+Guides: GLM's guide failed two reads and was dropped. Opus's guide was obtained by one honest retry after a provider refusal; it maps to our constitution but states the vice exclusion as a bare rule and omits Control, Consistency, Means and ends, no-one-worse-off-first, Guards and Roles. Both surviving guides still carried a citation permission that conflicts with owned values.
+
+Interpretation: Kimi K3.1 Pro writing directly in English is the only usable teacher here, *very probably*. Whether a guide helps is unclear: Kimi's guide gave the most rows judged better than our existing answers (11 against 6 with no guide), but these are single draws on 20 rows and the reviewer agreed on answer quality only half the time. The next step is a ~50-row Kimi pilot with and without a repaired guide.
+
+Only Kimi writes in-character reasoning well enough to use, and a guide's value is not yet shown.
