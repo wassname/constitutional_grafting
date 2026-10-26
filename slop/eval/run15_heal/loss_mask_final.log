@@ -1,0 +1,2 @@
+ok slop/eval/run15_heal/data/train/trace.jsonl: no loss on empty think blocks; rows missing <|im_end|>: 0
+ok slop/eval/run15_heal/data/train/mix.jsonl: no loss on empty think blocks; rows missing <|im_end|>: 0
