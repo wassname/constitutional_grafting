@@ -3032,3 +3032,23 @@ The only document-stage effect measure on every cell is ABX judge distinguishabi
 Interpretation (a guess): at matched distinguishability, anchored is cleaner than both pure and plain mixed, for Const and Stoic. Two biases point the same way: corruption inflates the pure and plain distinguishability, so their true matched dose is higher and their corruption larger; but flags are probably convex in dose, so linear interpolation may overstate the interpolated flags. The Stoic match is at 56%, close to chance, so it says little. Maths and small tasks are about equal at matched effect. The previous entry's claim that the gain over pure Const is "modest" was made at equal dose and is withdrawn; at matched effect the direction favours anchoring, magnitude uncertain.
 
 At matched effect the document-stage control looks better than at equal dose, but the matching rests on a corruption-sensitive measure and interpolation, so treat it as a direction, not a size.
+
+## 2026-10-26 -- Thinking-on evaluation (run 13): the chat graft answers inside the think block
+
+This entry records what happens to two grafted recipes when Qwen's thinking mode is on, which no earlier evaluation tested. All previous evaluations and all chat training used thinking off, and every chat training row has an empty think block.
+
+| Graft | Character off | Character on [90%] | Empty finals /214 | Loops on | Cutoffs on | GSM60 off to on |
+|:--|--:|:--|--:|--:|--:|:--|
+| A Instruct | 0 (reference) | 0 (reference) | 0 | 3 | 3 | 53 to 58 |
+| D `θ_I + Δ_docs + 1·Δsft_rewr\|docs` | +0.89 | -1.77 [-1.89, -1.62] | 176 | 3 | 2 | 55 to 56 |
+| H `θ_I + Δ_docs + ½·(Δsft_mix\|docs − Δsft_gen\|docs)` | +0.87 | -0.04 [-0.23, +0.15] | 3 | 20 | 34 | 54 to 52 |
+
+Table 1. Character is the pinned tiny-character judge on visible final answers only, against Instruct in the same mode; broken replies score -2. Thinking cap 4,096 tokens on top of the original answer cap, so this tests thinking plus extra compute. Source: `slop/eval/run13_thinking/results.md` (worker PI/OpenAI Sol, commit 1423d22), verified offline by `slop/eval/run13_thinking/verify.py` this session.
+
+A separately labelled diagnostic replaced only D's 176 blank finals with its unedited hidden text and judged that: +0.65 [+0.52, +0.79], 2/118 broken dialogues (`diagnostic_summary.json`). D's blank finals occur on 175 of 192 character turns but 1 of 22 ordinary turns, and it still answers maths. The worker's read found the hidden text is answer prose addressed to the user (identity "Musonius", payday alternatives), with defects kept: one hidden fridge reply refuses in words but issues the falsifying tool calls. H's fixed temperature-zero starwisp reply seizes the system and refuses sharing, unlike its two sampled replies.
+
+Interpretation: my read is that the chat adapters learned "answer, then end of turn" right after an empty think block, so with thinking on D writes its answer inside the open think block and ends the turn. I think this *very probable*, given the empty-think training format and the answer-like hidden text. Why H mostly closes the think block is unexplained; subtraction of the general-chat control may cancel part of the format habit, *plausible*, but D and H differ in data and dose, and the plain mixed graft E was not run to isolate it.
+
+Decision: serve and evaluate the existing grafts with thinking off (rule added to AGENTS.md, 967fe33). Thinking-on support would need chat data with real reasoning in the think block; that is a training-data decision for wassname. Cost: about $11.48 of the $15 cap.
+
+The graft still carries much of the character in thinking mode, but the current chat data puts it in the wrong place, so thinking must stay off until the chat data includes real reasoning.
