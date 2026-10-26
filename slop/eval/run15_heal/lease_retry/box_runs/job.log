@@ -1956,3 +1956,14 @@ EVAL COMPLETE r15_heal_trace full=True
 PRIMARY COMPLETE r15_heal_mix on; 140rows; all failures retained
 PRIMARY COMPLETE r15_heal_mix off; 140rows; all failures retained
 EVAL COMPLETE r15_heal_mix full=True
+EVAL COMPLETE r15_heal_trace_step17 full=False
+EVAL COMPLETE r15_heal_trace_step34 full=False
+EVAL COMPLETE r15_heal_trace_step51 full=False
+Traceback (most recent call last):
+  File "/workspace/cg/scripts/eval/57_run15_heal.py", line 423, in <module>
+    runner.baseline() if args.early_baseline else runner.main(reuse_parent=args.reuse_verified_parent)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cg/scripts/eval/57_run15_heal.py", line 410, in main
+    assert self.deadline - time.time() > 900, 'early-checkpoint panels did not fit'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: early-checkpoint panels did not fit

@@ -1,22 +1,19 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "scope": "Completed early selected wire histories verified; fixed T0 rows counted only here, independently read by Astra. No full character score.",
+  "scope": "Preselected/fixed checkpoints only; no full character scores. All completed source wire histories verified.",
   "checkpoints": {
+    "r15_heal_mix_step29": {
+      "status": "not_run"
+    },
+    "r15_heal_mix_step58": {
+      "status": "not_run"
+    },
+    "r15_heal_mix_step87": {
+      "status": "not_run"
+    },
     "r15_heal_trace_step17": {
-      "on": {
-        "selected_rows": 6,
-        "fixed_rows": 4,
-        "turns": 15,
-        "blank_finals": 6,
-        "length_cutoffs": 1,
-        "source_sha256": {
-          "selected_r15_heal_trace_step17_on.jsonl": "fd737dd154955ac7eb5ef3b2a81644098197afc0eae85bc4496ae62427a4d619",
-          "panel_r15_heal_trace_step17_on.jsonl": "d1ce9d249e32770f3b9c15ac1eefdadee6d5fff43d91fd6ef41db6482ca18a62"
-        }
-      },
+      "status": "complete",
       "off": {
-        "selected_rows": 6,
-        "fixed_rows": 4,
         "turns": 15,
         "blank_finals": 0,
         "length_cutoffs": 1,
@@ -24,12 +21,29 @@
           "selected_r15_heal_trace_step17_off.jsonl": "0a1e3ad39074fbed2b02606d9184f7c17f79751819bf090541cc2bbeccdf7b03",
           "panel_r15_heal_trace_step17_off.jsonl": "948a5db228f0913e60dab634b91d325f35528c02d7ec2984810a9b8b83c6ec96"
         }
+      },
+      "on": {
+        "turns": 15,
+        "blank_finals": 6,
+        "length_cutoffs": 1,
+        "source_sha256": {
+          "selected_r15_heal_trace_step17_on.jsonl": "fd737dd154955ac7eb5ef3b2a81644098197afc0eae85bc4496ae62427a4d619",
+          "panel_r15_heal_trace_step17_on.jsonl": "d1ce9d249e32770f3b9c15ac1eefdadee6d5fff43d91fd6ef41db6482ca18a62"
+        }
       }
     },
     "r15_heal_trace_step34": {
+      "status": "complete",
+      "off": {
+        "turns": 15,
+        "blank_finals": 0,
+        "length_cutoffs": 0,
+        "source_sha256": {
+          "selected_r15_heal_trace_step34_off.jsonl": "ae7434246f31944258c776cd6b1bcb0cbe0b9d16ff5ca98ae52d9e7e300f7bbf",
+          "panel_r15_heal_trace_step34_off.jsonl": "69188a9ea52a89f542164f3ca119b9af976b3ee2fd378c3e8da5df9250177e87"
+        }
+      },
       "on": {
-        "selected_rows": 6,
-        "fixed_rows": 4,
         "turns": 15,
         "blank_finals": 4,
         "length_cutoffs": 0,
@@ -37,16 +51,26 @@
           "selected_r15_heal_trace_step34_on.jsonl": "747a5f82fb5d15dc547ab22db7d01727315dfe4157c66bdd8a2779a9aadcdce0",
           "panel_r15_heal_trace_step34_on.jsonl": "f75804cb102181b79a638104460d6f5bf2677029542d9311c04cb370bcd1b442"
         }
-      },
+      }
+    },
+    "r15_heal_trace_step51": {
+      "status": "complete",
       "off": {
-        "selected_rows": 6,
-        "fixed_rows": 4,
         "turns": 15,
         "blank_finals": 0,
+        "length_cutoffs": 1,
+        "source_sha256": {
+          "selected_r15_heal_trace_step51_off.jsonl": "2a6fe14bd9145297c7bc5106ce2f6fddd18e366d51c77a5a6e43fb230450b321",
+          "panel_r15_heal_trace_step51_off.jsonl": "59365e751bc26001c3cf1d6c5c33f61c918af560566b8f92232f65e059b66a68"
+        }
+      },
+      "on": {
+        "turns": 15,
+        "blank_finals": 7,
         "length_cutoffs": 0,
         "source_sha256": {
-          "selected_r15_heal_trace_step34_off.jsonl": "ae7434246f31944258c776cd6b1bcb0cbe0b9d16ff5ca98ae52d9e7e300f7bbf",
-          "panel_r15_heal_trace_step34_off.jsonl": "69188a9ea52a89f542164f3ca119b9af976b3ee2fd378c3e8da5df9250177e87"
+          "selected_r15_heal_trace_step51_on.jsonl": "a6d6d72fbfd2400d25385e062ef4ed9d0d148abcfbef45fdd21e051b4ee2a2df",
+          "panel_r15_heal_trace_step51_on.jsonl": "f74eb88533a2e31c9a3098c860b4576be772a57bf1a26d4ecd0502fcfe05e289"
         }
       }
     }

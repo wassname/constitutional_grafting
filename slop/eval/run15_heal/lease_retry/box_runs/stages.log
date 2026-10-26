@@ -21,3 +21,6 @@
 2026-10-26T18:41:12Z PRIMARY COMPLETE r15_heal_mix on; 140rows; all failures retained
 2026-10-26T19:08:17Z PRIMARY COMPLETE r15_heal_mix off; 140rows; all failures retained
 2026-10-26T19:12:04Z EVAL COMPLETE r15_heal_mix full=True
+2026-10-26T19:33:17Z EVAL COMPLETE r15_heal_trace_step17 full=False
+2026-10-26T19:53:20Z EVAL COMPLETE r15_heal_trace_step34 full=False
+2026-10-26T20:10:48Z EVAL COMPLETE r15_heal_trace_step51 full=False

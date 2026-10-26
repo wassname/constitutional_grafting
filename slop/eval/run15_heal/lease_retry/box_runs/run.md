@@ -3916,3 +3916,9 @@ PRIMARY COMPLETE r15_heal_mix off; 140rows; all failures retained
 
 EVAL COMPLETE r15_heal_mix full=True
 
+EVAL COMPLETE r15_heal_trace_step17 full=False
+
+EVAL COMPLETE r15_heal_trace_step34 full=False
+
+EVAL COMPLETE r15_heal_trace_step51 full=False
+

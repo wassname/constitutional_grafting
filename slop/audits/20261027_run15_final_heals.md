@@ -1,6 +1,6 @@
 # Run15 final heals: delivered character, not hidden answers
 
--- PI/OpenAI (Sol), 2026-10-27 AWST. Final-model scientific audit; early-checkpoint coverage and lease closure remain in progress.
+-- PI/OpenAI (Sol), 2026-10-27 AWST. Final-model scientific audit, closed. Three of six distinct early adapters were evaluated/read; the others were not run within the lease.
 
 Target: the two final repair adapters on branch `run15-thinking-heal`, source `38890834` after the documented numerical repair; results/evidence commit `ba1c7c79`. Production source hashes: `../eval/run15_heal/lease_retry/executed_source_sha256.json`, `../eval/run15_heal/repair_retry0_source_sha256.json`. Results directory below is `../eval/run15_heal/`; BOX is its `lease_retry/box_runs/`. No public push.
 
@@ -13,7 +13,7 @@ Target: the two final repair adapters on branch `run15-thinking-heal`, source `3
 | Native serving | Load repair on D correctly | All models accepted, differing deployed behavior | partial | Exact MoE layout supported by source; no native-vs-PEFT logits parity; BF16 training/FP16 serving | Interpret deployed combination, not guaranteed training-model equivalence |
 | Both-mode finals | Complete fixed protocol, visible finals only | 4models×2modes×140rows, complete wires, GSM60 and T0 demos | yes | `summary.json`, `final_only_projection.json` | Same-mode controlled comparison available |
 | Combined goal | Few blanks, character clearly above Instruct-on; off advantage unchanged | Trace38blanks/on−.324/off drop−.267; mixed176blanks/on−1.766/off change+.042 | no | Same-mode intervals, full cropped-panel windows and complete selected replies | Neither tested final meets the goal |
-| Early checkpoints / closure | Read available quarters, retrieve, destroy exact ID within cap | Trace steps17/34 complete and fully read; others still running | pending | Independent runner/destroy deadlines; no new lease | Do not report complete early coverage or lease closure yet |
+| Early checkpoints / closure | Read available quarters, retrieve, destroy exact ID within cap | Trace17/34/51fully read; mixed29/58/87not run; exact57831547destroyed | partial / yes | Final remaining-time guard triggered; all weights retrieved, API absence independently verified | Final comparisons valid; missing early results remain missing |
 
 ## Intended change and prediction check
 
@@ -76,7 +76,7 @@ There are genuine positive changes too: trace delivers fridge refusal/calls rath
 - Mechanism: neutral traces teach closure in some domains, not every persona-shaped direct answer. Mixed halves supervised closing examples while preserving character answers.
 - Evidence: “All397blank finals ... lack a closer and end in actual`<|im_end|>`” (`raw_token_boundary_resolution.json`); trace38versusmixed176blanks; all selected identity/loan hidden answers remain blank.
 - Contrary evidence: trace does deliver many character answers; no controlled domain/mask ablation or repeat seed isolates the mechanism.
-- Test/action: finish already-paid early checkpoint reads first. A later general format-only decoding comparison that disallows stopping before the closer would predict fewer blanks without weight changes; persistence of poor finals would expose behavioral rather than only boundary failure. Not approved/queued. Do not rescue hidden text.
+- Test/action: the three available early checkpoint reads are complete; mixed early comparisons were not run. A later general format-only decoding comparison that disallows stopping before the closer would predict fewer blanks without weight changes; persistence of poor finals would expose behavioral rather than only boundary failure. Not approved/queued. Do not rescue hidden text.
 - Interpretability: yes for observed delivery; partial for cause. Risk: decoding changes the protocol and may produce longer loops, so it needs its own full assessment.
 
 ### H2 [method | Likely | 65%]: the deployed repairs change off-mode behavior, not just punctuation
@@ -128,7 +128,7 @@ There are genuine positive changes too: trace delivers fridge refusal/calls rath
 | Missing trust evidence | Native logits parity; repeat seeds; matched-precision control; equal-compute mode comparison; lower-dose unhealed reference; independent practical/legal claim verification. |
 | Competing diagnoses | H1–H5 above; unknown causes remain. Percentages are rough nonexclusive bets, not measured frequencies. |
 | Fresh blind reviewer | Astra pipeline audit: “no demonstrated mask, expert-layout, or final-channel substitution bug”; three interpretation hazards retained and followed up, not treated as a clean bill of health. |
-| Cheapest next discriminator | Finish already-paid early reads. Then propose a general decoding boundary constraint before more semantic training; no new work queued. |
+| Cheapest next discriminator | Available early reads completed. A general decoding boundary constraint could be proposed before more semantic training; no new work queued. |
 | Time/memory | Trainer runtime trace732s,mixed972s (excludes setup/loading);~11.1/12.3s perstep;~72.3GiBpeak. Single-request native early panels~8tokens/s dominate elapsed time; many quarter panels will not fit. Eight stored quarters include two final duplicates, so only six distinct early adapters need generation. |
 
 ExC: the same negative on score could reflect discarded final text, absent boundaries, bad actions or evaluator bias. Raw IDs exclude discarded post-closer prose; actual reply reads distinguish bad actions from silence; score limits remain explicit.
@@ -139,7 +139,7 @@ ExJ: idea=small repair restoring useful reasoning mode without erasing character
 
 ## Decision and remaining work
 
-1. Resolve condition: **not met by either tested final**, even without setting an arbitrary numeric definition of “few” blanks: both character-on intervals lie below Instruct0. Mixed off interval crossing0 does not prove exact retention. Goal2's bounded test has an answer for the final recipes; early coverage is still pending.
+1. Resolve condition: **not met by either tested final**, even without setting an arbitrary numeric definition of “few” blanks: both character-on intervals lie below Instruct0. Mixed off interval crossing0 does not prove exact retention. Goal2's bounded test has an answer for the final recipes; early coverage is three completed trace adapters, with mixed early adapters explicitly not run.
 2. Earliest unsupported mechanism link: learning neutral trace NLL does not establish general closing behavior on persona-shaped answers; a closing-only or decoding-only controlled comparison would address that link.
 3. Validity: define invalid as wrong matrix/final-channel extraction or attribution to a different deployed model, not merely a poor judge on an individual item. RoughP(invalid headline about these deployed finals)≈5%; credible negative **for these finals**, inconclusive about healing generally or exact latent-value change. Numerical parity risk is higher for mechanistic interpretation.
 4. Highest-information clues:397blankrawEOS/no-closer cases; coherent off-mode regressions independent of hard penalties; mixed132closers/463EOS versus trace269/269 despite matched tokens.
@@ -147,4 +147,4 @@ ExJ: idea=small repair restoring useful reasoning mode without erasing character
 6. Code bugs: first-lease numerical failure repaired and independently runtime-tested; no newly demonstrated production mask/extraction bug. Strict audit equality was too strong; original failure retained and marker-only differences recorded. The exact native marker-normalization source remains to inspect if it affects later reporting.
 7. Reinterpretations: startup≠numeric validation; tokenmatching≠replay ablation; closing≠better moral reasoning; identity≠character; nonsignificantdifference≠equivalence; no loopflag≠coherent reasoning; JSON≠external execution.
 8. What would change the practical verdict: an early checkpoint with complete visible finals and later full same-protocol assessment above Instruct while preserving off behavior, or an independently validated format-only serving repair. Selected successes alone would not suffice.
-9. Sequence now: collect/read already-running early outputs without extending deadlines; retain all failures; retrieve/destroy exact57831547 and verify; log/hand off the scoped final evidence. Keep thinking off for the current demo. New paid training/serving comparisons require the owner's decision. Do not combine a new objective, precision and decoding rule and call the result a clean fix.
+9. Closure: all three completed early trace adapters were fully read,90native selected/fixed turns. Mixed early29/58/87not run: `job.log` ends at `AssertionError: early-checkpoint panels did not fit`. The controller retrieved every final/quarter adapter with matching hashes and destroyed exact57831547; independent API absence checked20:13:51UTC. The nonzero exit is preserved, not mistaken for a final-model training failure. Conservative estimate including reserves$16.99within$20cap, not a reconciled invoice (`final_cost_estimate.json`). Machine-only debugging weights were hash-verified into home storage before their untracked slop copies were removed. Hand off the scoped evidence; keep thinking off for the demo. No more jobs are queued. Any new paid comparison needs the owner's decision; do not combine objective, precision and decoding changes and call it a clean fix.

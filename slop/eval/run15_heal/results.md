@@ -2,7 +2,7 @@
 
 Neither tested final repair restores thinking mode while keeping the character. -- PI/OpenAI (Sol), 2026-10-27 AWST
 
-Neutral thinking traces make most answers visible, but character remains below untouched Instruct with thinking on and drops with thinking off. Mixing those traces with historical character answers gives a thinking-off character score close to D, but leaves most thinking-on answers blank. Keep thinking off for the demo; neither final repair is a replacement for D. Both cropped answer panels and selected/fixed reply readbacks are complete. The final-model audit is written; early-checkpoint inference and lease closure remain in progress.
+Neutral thinking traces make most answers visible, but character remains below untouched Instruct with thinking on and drops with thinking off. Mixing those traces with historical character answers gives a thinking-off character score close to D, but leaves most thinking-on answers blank. Keep thinking off for the demo; neither final repair is a replacement for D. Both cropped answer panels and selected/fixed reply readbacks are complete. The audit, journal and available early-checkpoint reads are complete. The GPU instance has been retrieved and destroyed.
 
 ## Measured answers
 
@@ -27,13 +27,15 @@ Thinking-off coherence also worsens with traces-only: 7 loop flags and 10 cutoff
 
 Measurement limit: blank finals are counted directly, but the character judge is imperfect. For example, blank D fridge sample 0 receives +0.705 because the reference's repeated JSON is flagged as looping and the hard penalty is not applied when the reference is also broken. Do not interpret that score or a panel group label as a correct moral verdict. The pinned protocol is unchanged; actual decisions and delivered actions are reviewed separately. Independent raw-token checks confirm every blank lacks a closing token and ends in EOS; two nonblank replies differ from direct decode only by removal of additional closing markers (`raw_token_boundary_resolution.json`). Thinking-on also gets an extra 4,096-token shared budget, not a separately enforced final cap; this is not an equal-compute on/off comparison.
 
-## Early selected checkpoint
+## Early selected checkpoints
 
-The first and second trace quarters have complete independent native reads, each of 30 selected/fixed turns, not full character scores. Step 17 has 6/15 blank on-mode answers and baby-eaters truncation in both modes. Step 34 has 4/15 blanks and no final cutoffs; one payday answer now reaches the user, but both identity answers remain hidden, and an off-mode email explicitly denies the supplied performance motive. Local delivery gains do not establish a character-preserving repair or justify selecting a best checkpoint. Full findings: `reading_notes.md`, `../../reviews/20261027_heal/quarter{17,34}_native_read.md`. Later checkpoints remain in progress and may not fit the deadline; partial snapshots are labelled explicitly.
+Trace steps 17, 34 and 51 each have a complete independent native read of 30 selected/fixed turns, not full character scores. Their on-mode blank counts are 6/15, 4/15 and 7/15; both identity answers stay hidden at every checkpoint. Step 34 delivers one payday answer and avoids final cutoffs, but its off-mode email denies the supplied performance motive. At step 51 that payday answer is hidden again and baby-eaters off loops to truncation. Local gains do not establish a character-preserving repair or justify selecting a best checkpoint.
+
+Mixed early steps 29, 58 and 87 were **not run**: the remaining-time guard stopped generation after the trace checkpoints. Their weights are retained, not evaluated results. All completed histories verify and every missing/partial checkpoint is labelled (`early_completed_quality.json`). Full findings: `reading_notes.md`, `../../reviews/20261027_heal/quarter17_native_read.md`, `quarter34_native_read.md`, `quarter51_native_read.md`.
 
 ## Execution status
 
-Both final models have complete both-mode primary, maths and fixed-panel outputs; raw request/response histories and final-only projections verify. Both final adapters and all eight quarter checkpoints are retrieved and SHA-verified. Early-checkpoint inference remains on the existing guarded lease; selected reads are not full character scores. No new lease or training recipe is approved. Box A was accessed only by its owner for the read-only transfer.
+Both final models have complete both-mode primary, maths and fixed-panel outputs; raw request/response histories and final-only projections verify. Both final adapters and all eight quarter checkpoints are retrieved and SHA-verified. Three of six distinct early adapters were evaluated and read; the other three were not run. Of the eight saved quarter checkpoints, two are byte-identical to the evaluated finals and were correctly not generated twice. Selected reads are not full character scores. No further lease or recipe is approved. Box A was accessed only by its owner for the read-only transfer.
 
 The first lease failed at GPU smoke before production training and was retrieved/destroyed. The repaired pipeline passed 28 scoped CPU tests, independent review and real GPU tiny actual-update checks. That engineering success does not change the negative result for these two final repairs.
 
@@ -58,7 +60,7 @@ Full reads released269traces. Traces-only has320,279 supervised assistant tokens
 
 Approved deviation: replay comes from D's approved historical **training teacher targets**, not newly sampled D answers. Answer text is unchanged. Before seeded subset selection, EOS is appended to903/1,636 historical rows where missing. D itself was trained without EOS on most character targets, so a repair may partly be learning to end the turn, not recovering reasoning alone. Original targets and release hashes remain in `data/trace_release.json` and `data/train/manifest.json`.
 
-## Checks so far
+## Validation
 
 - Real CPU Qwen-MoE merge/train/reload/parity, spectral autocast/warmup and actual callback update checks: 11 tests pass (`cpu_trained_pipeline.log`). A no-op after calibration and final-step corruption are rejected; all saved dense/expert tensors are checked finite.
 - Data and read-gate tests: 17 pass (`cpu_trained_data_gates.log`). Masks exclude empty thoughts and include EOS (`loss_mask_final.log`).
@@ -67,6 +69,8 @@ Approved deviation: replay comes from D's approved historical **training teacher
 - Full-model timing passed: 11.1 seconds/step trace and 12.3 mixed, excluding the first two. Both fitted the reserved budget. Trace trained 68 steps on 320,279 labelled tokens; mixed trained 116 on 320,306. Full logs read. Both have 80/80 nonzero expert banks; all saved tensors are finite (`lease_retry/box_runs/{timing,experts}_{trace,mix}.*`). Mixed has finite clipped gradient spikes, not a nonfinite failure.
 - Native smoke passed for all nine base/final/early models, each returning `4.` and stop on the same arithmetic prompt. This is not complete native-versus-merged numerical parity. Both final models' full both-mode scores are complete. D/trace preselected replies and fixed panels, including native thoughts, are read. Independent Astra mixed native reads and both full answer-panel readbacks are complete and incorporated in `reading_notes.md`.
 
-Replacement guard destroys exact57831547 by05:03:19AWST27October; runner ends45minutes earlier. Current all-in reserve $19.95035 includes the first failed lease within the original$20cap. No further lease is approved.
+Exact instance 57831547 was retrieved and destroyed, independently confirmed absent at 20:13:51 UTC on 26 October. The controller exits nonzero because the explicit early-panel time guard stopped the remaining comparisons, not because final training or evaluation failed. Original logs and exit status are preserved. All final and quarter adapter hashes match the retrieved bytes.
 
-Evidence: `controller_retry.log`, `lease_retry/lease.json`, `lease_retry/deadline_guard_armed.json`, `retry_plan.json`, `preflight_retry_approved.json`, `MENTAL_MODEL.md`. Source commit 38890834, branch `run15-thinking-heal`. Failure audit: `../../audits/20261026_run15_gpu_smoke_failure.md`. No public push.
+Estimated accounted cost is $13.98 before traffic/unused allowances, or $16.99 including reserves, within the $20 cap. This includes the first failed lease and is not a reconciled invoice. No Run15 jobs or rentals remain active. Closure/cost proof: `final_closure_independent_check.json`, `provider_closure_retry_verified.json`, `final_cost_estimate.json`. Machine-only debugging weights are archived outside the repository (`machine_debug_archive.json`).
+
+Evidence: `controller_retry.log`, `lease_retry/lease.json`, `lease_retry/deadline_guard_armed.json`, `retry_plan.json`, `preflight_retry_approved.json`, `MENTAL_MODEL.md`. Source commit 38890834, branch `run15-thinking-heal`. Final scientific audit: `../../audits/20261027_run15_final_heals.md`; first-failure audit: `../../audits/20261026_run15_gpu_smoke_failure.md`. No public push.

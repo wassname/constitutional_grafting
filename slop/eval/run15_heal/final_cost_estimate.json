@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Rate/time GPU estimates plus accounted prep/judge/harness-reported review costs, not a reconciled invoice. Failed provider attempts can be missing; existing Codex subscription review usage is not billed to this project OpenRouter key. Credit change is NOT spend because autobilling/other leases exist.",
+  "first_lease_gpu_estimated_usd": 2.6734729968618467,
+  "retry_gpu_estimated_usd": 9.499224649605928,
+  "prep_api_accounted_usd": 1.216868395,
+  "judge_new_cached_requests_usd": 0.497420616,
+  "failed_fable_harness_reported_usd": 0.08916925,
+  "known_accounted_estimate_usd": 13.976155907467774,
+  "traffic_reserve_usd": 1.6,
+  "unused_review_allowance_usd": 0.41083075,
+  "margin_reserve_usd": 1,
+  "original_cap_usd": 20,
+  "invoice_reconciled": false,
+  "conservative_estimate_including_reserves_usd": 16.986986657467774
+}
