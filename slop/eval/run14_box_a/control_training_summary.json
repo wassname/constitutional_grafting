@@ -152,5 +152,19 @@
   },
   "row_max_grad_norm": 403,
   "max_logged_penalty_to_text_ratio": 0.2699714013346044,
-  "scope": "Mechanical complete-scalar scan; no behavioural effectiveness inference; independent complete-log read pending"
+  "scope": "Complete-scalar scan plus independent full-log audit; behavioural effectiveness remains pending",
+  "independent_review": {
+    "path": "slop/audits/20261026_run14_control_training.md",
+    "sha256": "2f1bf9596045b229000622447d2d74ff2c9d61e830be1aadd79cba0d1ded0a29",
+    "workflow_id": "cc3b0df8-5aa8-4818-aa50-4eb6b487cf9e",
+    "run_id": "d3360b96-0c44-498b-a6aa-cd9dcf38eb0a",
+    "model": "openai-codex/gpt-6.1-sol:medium",
+    "scope": "Full sequential raw-log/code review; no demonstrated numerical blocker. Not a behavioural-method verdict."
+  },
+  "postreview_label_parity": {
+    "path": "slop/eval/run14_box_a/tokenized_cache_check.json",
+    "all_production_prepared_rows": 2178,
+    "all_input_and_label_arrays_exact": true,
+    "scope": "Parent CPU check after independent review; no collator runtime/gradient parity claim"
+  }
 }

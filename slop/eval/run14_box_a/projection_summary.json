@@ -1,0 +1,91 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source_projection_sha256": "e7a7e61723d96f2f75d4f15486b3b9e56b20db28e7d34f5a1681f3854c9b1bf1",
+  "complete_modules": 330,
+  "per_module_rank_rows": 660,
+  "expert_matrices_per_rank": 20480,
+  "elapsed_seconds": 2086.869333267212,
+  "ranks": {
+    "16": {
+      "original_frobenius": 96.9016917673528,
+      "removed_energy_fraction": 0.0451065712768791,
+      "removed_component_norm_fraction": 0.21238307671958964,
+      "retained_norm_fraction": 0.9771864861545727,
+      "norm_reduction_fraction": 0.02281351384542729,
+      "projected_adapter_frobenius": 94.69102368057298,
+      "module_groups": [
+        {
+          "k": 16,
+          "module_class": "attention",
+          "modules": 130,
+          "matrices": 130,
+          "original_squared_fro": 547.48788862202,
+          "removed_squared_fro": 8.663953464347795,
+          "removed_energy_fraction": 0.015824922604505867,
+          "removed_component_norm_fraction": 0.12579714863424316
+        },
+        {
+          "k": 16,
+          "module_class": "shared",
+          "modules": 120,
+          "matrices": 120,
+          "original_squared_fro": 116.53851136396655,
+          "removed_squared_fro": 5.306580670374404,
+          "removed_energy_fraction": 0.04553499618509103,
+          "removed_component_norm_fraction": 0.21338930663248107
+        },
+        {
+          "k": 16,
+          "module_class": "experts",
+          "modules": 80,
+          "matrices": 20480,
+          "original_squared_fro": 8725.911467389064,
+          "removed_squared_fro": 409.5773675654967,
+          "removed_energy_fraction": 0.04693806132415975,
+          "removed_component_norm_fraction": 0.21665193588832699
+        }
+      ]
+    },
+    "64": {
+      "original_frobenius": 96.9016917673528,
+      "removed_energy_fraction": 0.1516444396934033,
+      "removed_component_norm_fraction": 0.3894155103400522,
+      "retained_norm_fraction": 0.9210621913348721,
+      "norm_reduction_fraction": 0.0789378086651279,
+      "projected_adapter_frobenius": 89.25248456329432,
+      "module_groups": [
+        {
+          "k": 64,
+          "module_class": "attention",
+          "modules": 130,
+          "matrices": 130,
+          "original_squared_fro": 547.48788862202,
+          "removed_squared_fro": 32.6822259958755,
+          "removed_energy_fraction": 0.05969488398754145,
+          "removed_component_norm_fraction": 0.24432536501055604
+        },
+        {
+          "k": 64,
+          "module_class": "shared",
+          "modules": 120,
+          "matrices": 120,
+          "original_squared_fro": 116.53851136396655,
+          "removed_squared_fro": 19.595092270294213,
+          "removed_energy_fraction": 0.16814263406107804,
+          "removed_component_norm_fraction": 0.41005198946118776
+        },
+        {
+          "k": 64,
+          "module_class": "experts",
+          "modules": 80,
+          "matrices": 20480,
+          "original_squared_fro": 8725.911467389064,
+          "removed_squared_fro": 1371.65454838779,
+          "removed_energy_fraction": 0.15719326897986644,
+          "removed_component_norm_fraction": 0.39647606356483417
+        }
+      ]
+    }
+  },
+  "scope": "Geometric update projection only, not behavioural independence or instruction-following isolation; removed-component norm differs from reduction in total norm."
+}

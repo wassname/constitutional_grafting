@@ -1,6 +1,6 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference is judged: preference +0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projection is running. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
+PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference is judged: preference +0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. Projection adapter retrieval/verification is in progress. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
 
@@ -14,7 +14,8 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 - [x] Early real three-step native training and first-five-module actual-checkpoint projection smoke passed through production code. The canonical driver remains unchanged and repeats its checks.
 - [x] Complete control training on the exact donor (15:20:39UTC).
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
-- [ ] Complete full projections, evaluate the remaining seven planned cells, judge and read their replies.
+- [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
+- [ ] Verify projected adapter downloads, finish the remaining seven planned evaluation cells, judge and read their replies.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
 ## Lease and current stage
@@ -31,7 +32,16 @@ Technical preparation, exact offer selection and guarded creation are complete. 
 
 All1,035logged training loss/gradient/spectral rows and validation at epochs0/1/2 are finite. All932post-calibration training rows have positiveσ and penalty. Held-out control text loss:0.3327→0.1996→0.1958; final evaluation total0.2014 includes0.005592spectral penalty. This is within-corpus prediction loss on109held-out rows, not a character or capability result. Production check found80/80routed-expert-wrapper B tensors present and nonzero; it does not prove every individual expert trained.
 
-Final adapter SHA256 `978b71f20946061748b81766bcf4b2b9d0b9e5419fce16dce10c4e57cf888b3e`,3,997,800,800bytes. Local copy matches the remote hash; stage receipt `control_snapshot_verified.json`. Scalar scan `control_training_summary.json`; independent complete-log audit is running. Source hashes match execution except the mask checker, strengthened after upload in40de6b4. Its exact executed copy is retained in `executed_source/`; a post-run check with the stricter current version passed all2,178unchanged control rows, missing end markers0 (`postrun_strict_loss_mask.log`). Do not attribute that stricter check to the original box execution. Last logged training penalty/text ratio≈9.1%, maximum≈27%: fixedλ does not keep the ratio at1%.
+Final adapter SHA256 `978b71f20946061748b81766bcf4b2b9d0b9e5419fce16dce10c4e57cf888b3e`,3,997,800,800bytes. Local copy matches the remote hash; stage receipt `control_snapshot_verified.json`. Scalar scan `control_training_summary.json`; independent complete-log audit finished (`../../audits/20261026_run14_control_training.md`). No demonstrated numerical blocker; continue the frozen run. Report text-only prediction loss separately from the penalized objective, and keep EOS/stopping and approximate spectral-estimator limits explicit. Nominal two epochs omit one final training example; do not equate token-matched corpora with identical realized exposure or optimizer-step counts. Source hashes match execution except the mask checker, strengthened after upload in40de6b4. Its exact executed copy is retained in `executed_source/`; a post-run check with the stricter current version passed all2,178unchanged control rows, missing end markers0 (`postrun_strict_loss_mask.log`). Do not attribute that stricter check to the original box execution. A subsequent CPU-only comparison checked every actual production-cache row against its frozen raw tokenization: all2,178input-ID and label arrays match exactly;788,567answer/end-marker tokens are labelled and162,597prompt tokens are masked. The first two actual cached examples were decoded and read (`tokenized_cache_check.json`). This checks prepared data, not subsequent collator execution or PEFT gradient parity. Last logged training penalty/text ratio≈9.1%, maximum≈27%: fixedλ does not keep the ratio at1%.
+
+## Complete projection geometry
+
+Exact checkpoint-difference SVD covered130attention modules,120shared modules and80expert banks (20,480individual expert matrices per rank). Runtime2,086.9seconds. Document adapters were not projected.
+
+- Rank16 removes4.51%of update energy. The removed component has21.24%of the original Frobenius norm, while the retained adapter has97.72%of the original norm (only2.28%smaller).
+- Rank64 removes15.16%of update energy. The removed component has38.94%of the original norm, while the retained adapter has92.11%of the original norm (7.89%smaller).
+
+Removed-component norm is not the percentage decrease in total norm. These are geometric measurements, not evidence of instruction-following isolation or a matched-character benefit. Full class-level values and definitions: `projection_summary.json`, `lease/box_runs/projection.json`. Behavioural comparisons and local adapter-hash verification are pending.
 
 ## Live spectral check (14:27UTC)
 

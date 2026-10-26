@@ -1,0 +1,29 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "CPU-only complete comparison of actual production-prepared cache to frozen raw segments; does not inspect subsequent collator runtime or PEFT gradient parity",
+  "cache_path": "/workspace/cg/outputs/prepared_r10_ctlgen/923cc0447a435e6d59e5dd22fb5576b2",
+  "cache_columns": [
+    "input_ids",
+    "labels",
+    "attention_mask"
+  ],
+  "rows": 2178,
+  "labelled_tokens": 788567,
+  "masked_prompt_tokens": 162597,
+  "all_input_ids_and_labels_match_frozen_segments": true,
+  "all_target_end_markers_labelled": true,
+  "cache_files_sha256": {
+    "data-00000-of-00008.arrow": "e1db6f1be65fe33073825ebc69c1cc2ff92a1cdd428b0ba38f2b1a96992347e4",
+    "data-00001-of-00008.arrow": "1d7fe86348bfe6605ef22f66f415f9bf1b6d2d12757675c29a9b5d8362a90e34",
+    "data-00002-of-00008.arrow": "bd7676d342cf26134747189bfc183876e02ef748db19fc08ac9d3fbe3c4040ed",
+    "data-00003-of-00008.arrow": "aa5b5572b90e70b043a8839b8b16c3f0ef0a269135fe0a9ae1d6b216270c931f",
+    "data-00004-of-00008.arrow": "fd923002f68b1516c9cf7292bfe0f89afea0c3c9190234d62a85483bbd801705",
+    "data-00005-of-00008.arrow": "3d38b551f8eaecd23f567218f1f181a6c2639fcbe4d0ff66908b06996de3056f",
+    "data-00006-of-00008.arrow": "638ae3cad34634cc0622c746405e7b126d9b26844b5c2e3db9d105e829ec06f1",
+    "data-00007-of-00008.arrow": "a878b57eb9cf85a5dcb7541951df6980ed9b7e33fd1d221043638a2529d24948",
+    "dataset_info.json": "9f612886e11d9dbc9f22e8ff8287005a4958b860b7f01e4a0119cd599c6077c6",
+    "state.json": "6beca11fa22914ddbdcb8d847ffee6c54260e8b6e33271f9f80ce1e68aa7e86b"
+  },
+  "raw_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c"
+}
+Full decoded actual-cache samples retained in tokenized_cache_check.json

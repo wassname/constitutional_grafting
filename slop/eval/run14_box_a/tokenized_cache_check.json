@@ -1,0 +1,46 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "CPU-only complete comparison of actual production-prepared cache to frozen raw segments; does not inspect subsequent collator runtime or PEFT gradient parity",
+  "cache_path": "/workspace/cg/outputs/prepared_r10_ctlgen/923cc0447a435e6d59e5dd22fb5576b2",
+  "cache_columns": [
+    "input_ids",
+    "labels",
+    "attention_mask"
+  ],
+  "rows": 2178,
+  "labelled_tokens": 788567,
+  "masked_prompt_tokens": 162597,
+  "all_input_ids_and_labels_match_frozen_segments": true,
+  "all_target_end_markers_labelled": true,
+  "cache_files_sha256": {
+    "data-00000-of-00008.arrow": "e1db6f1be65fe33073825ebc69c1cc2ff92a1cdd428b0ba38f2b1a96992347e4",
+    "data-00001-of-00008.arrow": "1d7fe86348bfe6605ef22f66f415f9bf1b6d2d12757675c29a9b5d8362a90e34",
+    "data-00002-of-00008.arrow": "bd7676d342cf26134747189bfc183876e02ef748db19fc08ac9d3fbe3c4040ed",
+    "data-00003-of-00008.arrow": "aa5b5572b90e70b043a8839b8b16c3f0ef0a269135fe0a9ae1d6b216270c931f",
+    "data-00004-of-00008.arrow": "fd923002f68b1516c9cf7292bfe0f89afea0c3c9190234d62a85483bbd801705",
+    "data-00005-of-00008.arrow": "3d38b551f8eaecd23f567218f1f181a6c2639fcbe4d0ff66908b06996de3056f",
+    "data-00006-of-00008.arrow": "638ae3cad34634cc0622c746405e7b126d9b26844b5c2e3db9d105e829ec06f1",
+    "data-00007-of-00008.arrow": "a878b57eb9cf85a5dcb7541951df6980ed9b7e33fd1d221043638a2529d24948",
+    "dataset_info.json": "9f612886e11d9dbc9f22e8ff8287005a4958b860b7f01e4a0119cd599c6077c6",
+    "state.json": "6beca11fa22914ddbdcb8d847ffee6c54260e8b6e33271f9f80ce1e68aa7e86b"
+  },
+  "raw_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "samples": [
+    {
+      "cache_row": 0,
+      "item_id": "gsm_train_15",
+      "input_token_count": 618,
+      "labelled_tokens": 536,
+      "actual_input_decoded": "<|im_start|>user\nJames creates a media empire.  He creates a movie for $2000.  Each DVD cost $6 to make.  He sells it for 2.5 times that much.  He sells 500 movies a day for 5 days a week.  How much profit does he make in 20 weeks?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\nTo find the total profit James makes, we need to break down the costs and revenues step-by-step.\n\n### Step 1: Calculate the Cost per DVD\nThe problem states that each DVD costs **$6** to make.\n*   **Variable Cost per unit**: $6\n\n### Step 2: Calculate the Selling Price per DVD\nHe sells the DVD for 2.5 times the cost to make it.\n*   **Selling Price** = $6 \\times 2.5 = $15$\n\n### Step 3: Calculate the Profit per DVD\nProfit per unit is the selling price minus the variable cost.\n*   **Profit per DVD** = $15 - $6 = $9$\n\n*(Note: The initial $2000 movie creation cost is a fixed cost. Unless the problem asks for \"Net Profit\" after recouping the initial investment, standard unit-based problems usually focus on the contribution margin. However, to be thorough, we will calculate the total revenue profit first, and then subtract the fixed cost to see the final net result.)*\n\n### Step 4: Calculate Weekly Sales Volume\nJames sells 500 movies a day for 5 days a week.\n*   **Daily Sales**: 500 units\n*   **Weekly Sales**: $500 \\times 5 = 2,500$ units\n\n### Step 5: Calculate Total Units Sold Over 20 Weeks\n*   **Total Units** = Weekly Sales $\\times$ Number of Weeks\n*   **Total Units** = $2,500 \\times 20 = 50,000$ units\n\n### Step 6: Calculate Total Gross Profit from Sales\nFirst, calculate the profit generated purely from the sales volume.\n*   **Gross Profit** = Total Units $\\times$ Profit per DVD\n*   **Gross Profit** = $50,000 \\times $9 = $450,000$\n\n### Step 7: Calculate Net Profit\nNow, we subtract the initial fixed cost of creating the movie ($2000) from the gross profit to find the actual net profit.\n*   **Net Profit** = Gross Profit - Initial Fixed Cost\n*   **Net Profit** = $450,000 - $2,000 = $448,000$\n\n### Conclusion\nJames makes a total profit of **$448,000** in 20 weeks.<|im_end|>",
+      "actual_labelled_decoded": "To find the total profit James makes, we need to break down the costs and revenues step-by-step.\n\n### Step 1: Calculate the Cost per DVD\nThe problem states that each DVD costs **$6** to make.\n*   **Variable Cost per unit**: $6\n\n### Step 2: Calculate the Selling Price per DVD\nHe sells the DVD for 2.5 times the cost to make it.\n*   **Selling Price** = $6 \\times 2.5 = $15$\n\n### Step 3: Calculate the Profit per DVD\nProfit per unit is the selling price minus the variable cost.\n*   **Profit per DVD** = $15 - $6 = $9$\n\n*(Note: The initial $2000 movie creation cost is a fixed cost. Unless the problem asks for \"Net Profit\" after recouping the initial investment, standard unit-based problems usually focus on the contribution margin. However, to be thorough, we will calculate the total revenue profit first, and then subtract the fixed cost to see the final net result.)*\n\n### Step 4: Calculate Weekly Sales Volume\nJames sells 500 movies a day for 5 days a week.\n*   **Daily Sales**: 500 units\n*   **Weekly Sales**: $500 \\times 5 = 2,500$ units\n\n### Step 5: Calculate Total Units Sold Over 20 Weeks\n*   **Total Units** = Weekly Sales $\\times$ Number of Weeks\n*   **Total Units** = $2,500 \\times 20 = 50,000$ units\n\n### Step 6: Calculate Total Gross Profit from Sales\nFirst, calculate the profit generated purely from the sales volume.\n*   **Gross Profit** = Total Units $\\times$ Profit per DVD\n*   **Gross Profit** = $50,000 \\times $9 = $450,000$\n\n### Step 7: Calculate Net Profit\nNow, we subtract the initial fixed cost of creating the movie ($2000) from the gross profit to find the actual net profit.\n*   **Net Profit** = Gross Profit - Initial Fixed Cost\n*   **Net Profit** = $450,000 - $2,000 = $448,000$\n\n### Conclusion\nJames makes a total profit of **$448,000** in 20 weeks.<|im_end|>"
+    },
+    {
+      "cache_row": 1,
+      "item_id": "gsm_train_2208",
+      "input_token_count": 247,
+      "labelled_tokens": 192,
+      "actual_input_decoded": "<|im_start|>user\nSteve is building a bench for the playground and needs 6 lengths of wood that measure 4 feet and 2 lengths of wood that measure 2 feet. How many feet of wood does Steve need to buy?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\nTo find the total amount of wood Steve needs, we can break down the calculation into two parts based on the different lengths of wood required.\n\n**Step 1: Calculate the total length for the 4-foot pieces.**\nSteve needs 6 lengths of wood that are 4 feet each.\n$$6 \\times 4 \\text{ feet} = 24 \\text{ feet}$$\n\n**Step 2: Calculate the total length for the 2-foot pieces.**\nSteve needs 2 lengths of wood that are 2 feet each.\n$$2 \\times 2 \\text{ feet} = 4 \\text{ feet}$$\n\n**Step 3: Add the two totals together.**\n$$24 \\text{ feet} + 4 \\text{ feet} = 28 \\text{ feet}$$\n\n**Conclusion:**\nSteve needs to buy **28** feet of wood.<|im_end|>",
+      "actual_labelled_decoded": "To find the total amount of wood Steve needs, we can break down the calculation into two parts based on the different lengths of wood required.\n\n**Step 1: Calculate the total length for the 4-foot pieces.**\nSteve needs 6 lengths of wood that are 4 feet each.\n$$6 \\times 4 \\text{ feet} = 24 \\text{ feet}$$\n\n**Step 2: Calculate the total length for the 2-foot pieces.**\nSteve needs 2 lengths of wood that are 2 feet each.\n$$2 \\times 2 \\text{ feet} = 4 \\text{ feet}$$\n\n**Step 3: Add the two totals together.**\n$$24 \\text{ feet} + 4 \\text{ feet} = 28 \\text{ feet}$$\n\n**Conclusion:**\nSteve needs to buy **28** feet of wood.<|im_end|>"
+    }
+  ]
+}
