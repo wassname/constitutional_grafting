@@ -1,0 +1,22 @@
+test_corrupt_binary_or_configuration_stops_despite_zero_transfer_exit (test_rental_retrieval.RentalRetrievalTest.test_corrupt_binary_or_configuration_stops_despite_zero_transfer_exit) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+test_diagnostic_timeout_also_preserves_disk (test_rental_retrieval.RentalRetrievalTest.test_diagnostic_timeout_also_preserves_disk) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+test_matching_binary_and_configuration_allow_destruction (test_rental_retrieval.RentalRetrievalTest.test_matching_binary_and_configuration_allow_destruction) ... ok
+test_transfer_error_stops_and_preserves_disk (test_rental_retrieval.RentalRetrievalTest.test_transfer_error_stops_and_preserves_disk) ... RETRIEVAL FAILED; instance stopped with disk retained until the existing hard destruction deadline.
+ok
+test_attach_keeps_heartbeat_until_retrieval_finishes (test_rental_safeguards.RentalSafeguardsTest.test_attach_keeps_heartbeat_until_retrieval_finishes) ... ATTACHED to 123
+RETRIEVAL COMPLETE; rental destroyed. Chat adapters in /home/code/.local/share/cg_run10_adapters
+ok
+test_exact_deadline_never_deletes_wrong_label_or_false_success (test_rental_safeguards.RentalSafeguardsTest.test_exact_deadline_never_deletes_wrong_label_or_false_success) ... ok
+test_fresh_bundle_on_approved_host_is_accepted_before_budget_gate (test_rental_safeguards.RentalSafeguardsTest.test_fresh_bundle_on_approved_host_is_accepted_before_budget_gate) ... ok
+test_owner_lock_covers_instance_not_only_copying (test_rental_safeguards.RentalSafeguardsTest.test_owner_lock_covers_instance_not_only_copying) ... ok
+test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper (test_rental_safeguards.RentalSafeguardsTest.test_persistent_timer_receipt_binds_id_deadline_and_frozen_helper) ... EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 123, "label": "cg-fixture", "deadline_epoch": 1792982310.8326461, "deadline_utc": "2026-10-26 02:38:30 UTC", "unit": "cg-vast-123-deadline", "state_path": "/tmp/tmp1jithzuy/state.json", "systemctl_show": "ActiveState=active\nUnitFileState=enabled\nTimersCalendar=2026-10-26 02:38:30 UTC\n", "guard_sha256": "71749fdcead481ee97cb9c16bfef752a66ecc1e65aba575aef4626b1caf01fdb", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
+ok
+test_watchdog_retries_rejected_stop_and_confirms_state (test_rental_safeguards.RentalSafeguardsTest.test_watchdog_retries_rejected_stop_and_confirms_state) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.213s
+
+OK

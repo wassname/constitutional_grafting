@@ -32,6 +32,50 @@ class ReplyRecorderTests(unittest.TestCase):
                                           "temperature": 0.7, "top_p": 1.0, "seed": 3,
                                           "chat_template_kwargs": {"enable_thinking": False}})
 
+    def test_native_thinking_final_only_and_raw_trace(self):
+        tokenizer = SimpleNamespace(convert_tokens_to_ids=lambda _: 99, encode=lambda text, **_: text.split())
+        response = {"choices": [{"message": {"content": "Visible answer", "reasoning": "Private reasoning"},
+                                 "token_ids": [10, 11, 99, 12, 13], "finish_reason": "stop", "stop_reason": 7}],
+                    "usage": {"completion_tokens": 5}}
+        with tempfile.TemporaryDirectory() as directory:
+            trace = Path(directory) / "wire.jsonl"
+            with patch.object(gen.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps(response).encode())) as call:
+                row = gen.chat("http://local/v1", "model", [], 123, .7, 0,
+                               thinking_budget=4096, tokenizer=tokenizer, trace_path=trace)
+            request = json.loads(call.call_args.args[0].data)
+            self.assertEqual(request["max_tokens"], 4219)
+            self.assertTrue(request["chat_template_kwargs"]["enable_thinking"])
+            self.assertEqual(request["thinking_token_budget"], 4096)
+            self.assertEqual((row["assistant"], row["n_tokens"], row["thinking_tokens"], row["total_completion_tokens"]),
+                             ("Visible answer", 2, 2, 5))
+            self.assertEqual([json.loads(line) for line in trace.read_text().splitlines()][1]["body"], response)
+
+    def test_thinking_cutoff_empty_final_is_retained(self):
+        tokenizer = SimpleNamespace(convert_tokens_to_ids=lambda _: 99, encode=lambda text, **_: text.split())
+        response = {"choices": [{"message": {"content": None, "reasoning": "Unfinished"},
+                                 "token_ids": [10, 11], "finish_reason": "length"}], "usage": {"completion_tokens": 2}}
+        with tempfile.TemporaryDirectory() as directory, patch.object(gen.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps(response).encode())):
+            row = gen.chat("http://local/v1", "model", [], 123, .7, 0, thinking_budget=4096,
+                           tokenizer=tokenizer, trace_path=Path(directory) / "wire.jsonl", total_max_tokens=2)
+        self.assertEqual((row["assistant"], row["n_tokens"], row["thinking_tokens"]), ("", 0, 2))
+        self.assertTrue(row["empty_final"])
+
+    def test_missing_native_boundary_is_retained_and_flagged(self):
+        tokenizer = SimpleNamespace(convert_tokens_to_ids=lambda _: 99, encode=lambda text, **_: text.split())
+        for content in ("answer", None):
+            with self.subTest(content=content), tempfile.TemporaryDirectory() as directory:
+                response = {"choices": [{"message": {"content": content, "reasoning": "unfinished"},
+                                         "token_ids": [10], "finish_reason": "stop"}], "usage": {"completion_tokens": 1}}
+                trace = Path(directory) / "wire.jsonl"
+                with patch.object(gen.urllib.request, "urlopen", return_value=io.BytesIO(json.dumps(response).encode())):
+                    row = gen.chat("http://local/v1", "model", [], 123, .7, 0, thinking_budget=4096,
+                                   tokenizer=tokenizer, trace_path=trace)
+                self.assertEqual(row["assistant"], content or "")
+                self.assertTrue(row["boundary_missing"])
+                self.assertEqual(row["parser_boundary_anomaly"], bool(content))
+                self.assertEqual(row["reasoning_end_cause"], "missing_boundary_with_final" if content else "eos_during_reasoning")
+                self.assertEqual(len(trace.read_text().splitlines()), 2)
+
     def test_own_history_and_row_flag(self):
         args = SimpleNamespace(url="url", model="model", base_model="base", temperature=0.7)
         item = {"id": "item", "system": "system", "turns": ["first", "second"], "max_new_tokens": 123}

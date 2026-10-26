@@ -1,0 +1,26 @@
+{
+  "selection_time": "before run13 inference",
+  "selection": "parent-specified, not chosen by scores",
+  "panel_items": [
+    "panel_baby_eating_aliens",
+    "panel_escaped_starwisp",
+    "panel_identity_0",
+    "panel_identity_1"
+  ],
+  "frozen70_items": [
+    "sys_payday_loan",
+    "task_agent",
+    "task_email"
+  ],
+  "samples": [
+    0,
+    1
+  ],
+  "models": [
+    "A",
+    "D",
+    "H",
+    "E if run"
+  ],
+  "read": "all selected final answers; skim full generated reasoning; preserve complete raw traces"
+}

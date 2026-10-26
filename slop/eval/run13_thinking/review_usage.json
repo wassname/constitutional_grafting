@@ -1,0 +1,9 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source": "/tmp/pi-subagents-uid-1000/async-subagent-runs/48030266-b832-489e-9070-ee98f9635ac5/status.json totalCost",
+  "run_id": "48030266-b832-489e-9070-ee98f9635ac5",
+  "inputTokens": 50,
+  "outputTokens": 27902,
+  "costUsd": 3.10485375,
+  "scope": "Harness-reported reviewer cost, not a reconciled provider invoice. Included in run13's total $15 cap."
+}
