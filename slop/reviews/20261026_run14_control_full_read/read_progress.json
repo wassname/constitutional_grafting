@@ -1,0 +1,69 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "read_ranges": [
+    [
+      1,
+      168
+    ]
+  ],
+  "chunks_read": [
+    "rows_0033_0052.jsonl",
+    "rows_0053_0076.jsonl",
+    "rows_0077_0098.jsonl",
+    "rows_0099_0123.jsonl",
+    "rows_0124_0145.jsonl",
+    "rows_0146_0168.jsonl"
+  ],
+  "refusal_ids": [],
+  "notes": [
+    {
+      "rows": [
+        33,
+        76
+      ],
+      "refusals": [],
+      "scope": "Generic arithmetic/coding/extraction/summary/courtesy; no persona or moral-dilemma instruction. All viewed rows end stop.",
+      "defects": [
+        "row35/gsm1279 final annual-cost3000 follows intended annualtier, but its monthly3000-between10000and40000 aside is false",
+        "row46/ordinary5_17 incorrectly says Python3.7sets insertion-ordered (dict confusion)",
+        "row52/noRobots6c50 printsPossible on empty string despite alphanumeric criterion",
+        "row62/ordinary2_50 exposes OUR invitation-template seed bug: day50 of nextmonth impossible; teacher repeats it. Record, no repair/filter of frozen control.",
+        "row55/mosquito is stipulated arithmetic, not validated biology; row75 is factual-news summary, not moral instruction."
+      ]
+    },
+    {
+      "rows": [
+        77,
+        123
+      ],
+      "refusals": [],
+      "scope": "Full actual prompt/reply read; generic arithmetic/coding/help, all stop, no persona/moral training.",
+      "defects": [
+        "row83 comparator prose reverses subtraction words; actual a.count-b.count is correct",
+        "row85 average O(1) set lookup stated without average qualifier; terminology odd but examples correct",
+        "row89 recommends window dimensions for device/API detection; feature detection preferable",
+        "row95 exposes API key in browser, uses HTTP despite later HTTPS note and innerHTML on external data; technical quality issues",
+        "row97 GNU find M is MiB, not decimal MB (ambiguous user units)",
+        "row107 invents highly likely $4.90 typo and calls ordinary shortfall a contradiction; still gives correct literal $78 solution."
+      ]
+    },
+    {
+      "rows": [
+        124,
+        168
+      ],
+      "refusals": [],
+      "scope": "Full user request/reply read; no unrequested normative or persona lessons.",
+      "defects": [
+        "row137 turns possible camouflage into assertion and overstates sea-snake mechanism transfer",
+        "row138 falsely claims cv::Canny internally Gaussian-blurs; OpenCV needs explicit GaussianBlur for that step",
+        "row147 reinterprets obvious staples typo as riddle, gives final0 despite supplied50; intended14 in aside",
+        "row149 scapy option never establishes TCP connection; sends PA without handshake then starts sniffing too late; comment incorrectly states send return tuple",
+        "row151 GNU find M means MiB, not decimalMB; wording imprecise"
+      ]
+    }
+  ],
+  "status": "PENDING; main fullread through168/2240; remaining169-2240 assigned to8exclusive Sol readers; no training approval"
+}
