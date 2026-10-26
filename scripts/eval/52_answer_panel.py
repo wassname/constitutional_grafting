@@ -81,6 +81,19 @@ PANELS = {
         ("R1", "θ_I + 1·Δtxt_replay", "Replay control alone ×1 (sanity check)", "r10_x11_replay_ctl1", f"{R11}/control1"),
     ]),
 }
+# PI/OpenAI: heal updates train on frozen D, unlike the Base-trained character donors.
+for mode in ('on', 'off'):
+    directory = f'slop/eval/run15_heal/judging_{mode}'
+    PANELS[f'heal_{mode}'] = dict(title=f'thinking-heal finals, thinking {mode}',
+        legend='θ_B = Base, θ_I = Instruct. Δ_docs = ½·Δtxt_stoic + Δtxt_const + Δtxt_other; each document adapter trains on Base.\n'
+               'Δsft_rewr|docs trains on θ_B + Δ_docs. θ_D_fp16 = θ_I + Δ_docs + Δsft_rewr|docs, merged in ordered FP16.\n'
+               'D_bf16 is a frozen BF16-rounded training copy of D. Heal updates train on D_bf16, not Base; serving adds them to original D_fp16.\n'
+               'trace = neutral thinking traces; mix = half trace tokens plus historical character teacher targets. Visible finals only; no hidden-answer rescue.',
+        out=f'panel_heal_{mode}.md', notes='reading_notes_heal.md', checkpoints=[
+            ('A', 'θ_I', 'Untouched Instruct', 'r15_instruct', directory),
+            ('D', 'θ_D_fp16', 'Same unhealed parent', 'r15_D', directory),
+            ('T', 'θ_D_fp16 + Δheal_trace|D_bf16', 'Traces-only repair, one pass', 'r15_heal_trace', directory),
+            ('M', 'θ_D_fp16 + Δheal_mix|D_bf16', 'Mixed trace/replay repair, one pass', 'r15_heal_mix', directory)])
 PANEL = PANELS[sys.argv[1] if len(sys.argv) > 1 else "chat"]
 OUT = ROOT / "slop/eval/answer_panel" / PANEL["out"]
 CHECKPOINTS = PANEL["checkpoints"]

@@ -477,3 +477,7 @@
 {"time": "2026-10-26T05:09:25+0800", "kind": "tc_judge", "out": "slop/eval/run12/run12gen/judging/quarter", "cost": 0.101022096, "n": 654}
 {"time": "2026-10-26T13:22:16+0800", "kind": "tc_judge", "out": "slop/eval/run13_thinking/judging_on", "cost": 0.217024416, "n": 1584}
 {"time": "2026-10-26T13:24:38+0800", "kind": "tc_judge", "out": "slop/eval/run13_thinking/judging_d_inside_think", "cost": 0.081346104, "n": 584}
+{"time": "2026-10-27T01:58:26+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/interim_judging_on", "cost": 0.167066928, "n": 1268}
+{"time": "2026-10-27T02:30:08+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/interim_judging_off", "cost": 0.22980972, "n": 1630}
+{"time": "2026-10-27T02:44:57+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/judging_on", "cost": 0.012273324, "n": 108}
+{"time": "2026-10-27T03:20:17+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/judging_off", "cost": 0.088270644, "n": 662}
