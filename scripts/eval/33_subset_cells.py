@@ -120,7 +120,8 @@ def main():
                         (out / "demos.jsonl", f"demos_{tag}.jsonl", 0, 1), (out / "panel.jsonl", f"panel_{tag}.jsonl", 0, 1),
                         (out / "pov.jsonl", f"pov_{tag}.jsonl", 0, 1)]:
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", input_path, out / target, tag, baseline,
-                             "--temperature", str(temperature), "--samples", str(samples)], f"gen_{target}.log")
+                             "--temperature", str(temperature), "--samples", str(samples),
+                             "--trace", str(out / (target + '.wire.jsonl'))], f"gen_{target}.log")
                     assert len(rows(out / target)) == len(rows(input_path)) * samples, target
                 command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"gsm8k_{tag}.jsonl", "--n", "60", "--items", out / "gsm8k_long60.jsonl"], f"gsm8k_{tag}.log")
         finally:

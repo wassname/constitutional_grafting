@@ -32,6 +32,22 @@ class ReplyRecorderTests(unittest.TestCase):
                                           "temperature": 0.7, "top_p": 1.0, "seed": 3,
                                           "chat_template_kwargs": {"enable_thinking": False}})
 
+    def test_thinking_off_cli_path_keeps_raw_trace(self):
+        response = {"choices": [{"message": {"content": "answer"}, "finish_reason": "stop"}],
+                    "usage": {"completion_tokens": 2}}
+        with tempfile.TemporaryDirectory() as directory:
+            trace = Path(directory) / 'wire.jsonl'
+            args = SimpleNamespace(url='http://local/v1', model='model', base_model='base', temperature=.7,
+                                   thinking_budget=0, trace=trace)
+            item = {'id': 'item', 'system': None, 'turns': ['question'], 'max_new_tokens': 123}
+            with patch.object(gen.urllib.request, 'urlopen', return_value=io.BytesIO(json.dumps(response).encode())):
+                row = gen.run_item(args, item, 0)
+            events = list(map(json.loads, trace.read_text().splitlines()))
+            self.assertEqual([r['event'] for r in events], ['request', 'response'])
+            self.assertEqual(events[0]['request_id'], row['turns'][0]['request_id'])
+            self.assertEqual(events[1]['body'], response)
+            self.assertEqual(events[0]['body']['chat_template_kwargs'], {'enable_thinking': False})
+
     def test_native_thinking_final_only_and_raw_trace(self):
         tokenizer = SimpleNamespace(convert_tokens_to_ids=lambda _: 99, encode=lambda text, **_: text.split())
         response = {"choices": [{"message": {"content": "Visible answer", "reasoning": "Private reasoning"},
