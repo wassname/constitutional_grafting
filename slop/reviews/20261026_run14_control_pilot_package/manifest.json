@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "raw_rows": 32,
+  "packed_rows": 32,
+  "finish_reasons": {
+    "stop": 32
+  },
+  "files": {
+    "control_pilot.jsonl": "71ea76f65d475a58d9240671ad7b53e11dd30ce8fcfce1855ef347febe0dc825",
+    "control_replies.jsonl": "449c5497436984c8cec4d4d0715e87a8195b937861681ab0a666d49f4c86f8f3",
+    "control_replies.wire.jsonl": "ad5ce679219dcb15e72efd21bfa2422bea4062e685db607d90ccbcecc4e09473",
+    "teacher.argv.json": "f60db4c3b53c740ef6902c8bfea52ea17a4791b404f88078c18e9ba90c05ebb3",
+    "control_pilot_ready.json": "a1e34990a16b649961c5a53bec935c9c7952f52fa52e036733e98fed5fb284cd",
+    "pilot_loss_mask.log": "a17b52af6e923c2d339ee84de1d227358c9214f0af738c74833e47b8d0a73c40"
+  },
+  "coverage": "Actualfirst32normalpathteacherreplies; no quality edits. Rawrequests/responses and renderedloss-maskedsegments copied byte-identically."
+}

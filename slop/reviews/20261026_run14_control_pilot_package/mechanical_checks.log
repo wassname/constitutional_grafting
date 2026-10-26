@@ -1,0 +1,22 @@
+PASS32raw/32packed/64wireevents: exactpayloads,replybytes,unlabelledHFprompt/emptythink,labelledreply+EOS;0hiddenreasoning;32stop;0markers.
+supervised_tokens 11908 mean 372.125 range [163, 1035] estimated_rows_for788606 2120
+Source gold audit 5317 The amount that the couple would cover for the hospital bill is $128/2 = $<<128/2=64>>64.
+The couple's total expenses (salary and hospital bill) is $160 + $64 = $<<160+64=224>>224.
+So each of them should give $224/2 = $<<224/2=112>>112 in total.
+Since the husband paid the entire half of the hospital bill already ($64), he still needs to pay $112 - $64 = $<<48=48>>48.
+#### 48
+Source gold audit 1188 First, find the price of the sandwiches $5 per sandwich * 18 sandwiches = $<<5*18=90>>90.
+Now add in the delivery fee $90 + $20 = $<<90+20=110>>110.
+Now the tip $110 * 0.10 = $<<110*0.10=11>>11.
+Add the tip to the price of the sandwiches $110 + $11 = $<<110+11=121>>121 in total.
+#### 121
+Source gold audit 4108 Justin would spend 45 minutes at dinner, 30 minutes doing homework, 30 minutes cleaning his room, 5 minutes on the trash and 10 on dishes for a total of 45+30+30+5+10 = <<45+30+30+5+10=120>>120
+Justin knows that 60min is the same as 1 hour. He has 120 minutes of work so 120/60 = <<120/60=2>>2 hours
+His movie comes on at 8 pm and he has 2 hours of chores so 8-2 = <<8-2=6>>6 pm is the latest time he could start his chores
+#### 6
+PASS allsixpackage SHA256s match manifest AND original immutable snapshot files.
+GSM5471sourcegold: Since Diana did 40 situps at a rate of 4 situps/minute, she did situps for 40 / 4 = <<40/4=10>>10 minutes
+Hani had to do 3 + 4 = <<3+4=7>>7 situps per minute if Diana did 4 situps per minute.
+So over the 10 minutes Hani did 7*10 = <<7*10=70>>70 situps.
+Together, the total number of situps they did is 70+40 = <<70+40=110>>110
+#### 110

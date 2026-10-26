@@ -9,7 +9,8 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 - [x] Checked actual PEFT expert packing and both pinned checkpoint indexes (330 adapter stems). Regression suite: 25 tests and seven subtests pass, including Unicode-preserving JSONL reads.
 - [x] Verified planned training configuration differs from historical stage7 only in data/cache/output paths.
 - [x] Independent OpenRouter Haiku review plus follow-up completed; reported cost $0.464. Findings and responses are retained, including disagreements.
-- [ ] Run the first32 normal-path teacher replies; review them independently before bulk generation. Read the complete final control corpus before training.
+- [x] Read all32 native pilot replies; independent Haiku read them too. All32 stop normally, with0hidden-reasoning/marker/refusal/truncation cases. All wire/packed/mask checks pass. One teacher arithmetic/reading error is recorded and retained, not repaired. Same-generator scaling approved at11:01UTC.
+- [ ] Read the complete final control corpus and report refusals before training.
 - [ ] Run real three-step small-model training and actual-checkpoint projection smoke; train control, compute projections, evaluate eight planned cells, judge and read their replies.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
@@ -17,11 +18,11 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 
 Approved/reported exact offer28705699, machine48293, passed the original verified-datacentre quality filters. Instance57799463 was created at 2026-10-26 10:34:17 UTC. Independent systemd guard `cg-vast-57799463-deadline` is active and enabled, with exact-ID destruction at 2026-10-27 00:34:17 UTC (08:34 AWST); the runner deadline is90minutes earlier for retrieval. Receipt: `lease/deadline_guard_armed.json`.
 
-Current stage: image/SSH setup, then native teacher preparation and frozen-adapter uploads. No training or model result yet. Both stock-wait schedules are cancelled. No replacement lease.
+Current stage: bulk native control generation after the approved32-row pilot, overlapping frozen-adapter uploads. Actual pilot:11,908supervisedtokens, mean372.125; a rough2,120-row target estimate, not the final corpus size. No training or model comparison result yet. Both stock-wait schedules are cancelled. No replacement lease.
 
 Step5 (thinking-on heal data) is now a separate worker's job. Box A will not generate it. The saved1,000-prompt heal pool is disjoint from this control pool. Live Vast account fields confirm enabled auto-funding with no billing failure; the controller checks those fields.
 
-Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Next: review the first32 native teacher replies before bulk generation. No public push.
+Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Next: snapshot the final control data on its readiness notification, read every remaining candidate, and provide SHA-bound full-data approval before training. No public push.
 
 ## Evidence
 
@@ -29,3 +30,10 @@ Technical preparation, exact offer selection and guarded creation are complete. 
 - `preparation/preflight_tests.log`, `preparation/checkpoint_key_audit.log`
 - `preparation/training_and_source_parity.log`, `preparation/runtime_budget_checks.log`
 - `no_robots_prompt_review.json`, `prompt_manifest.json`, `budget_decision.json`
+- `../../reviews/20261026_run14_control_pilot_package/main_read.md`, `pilot_review.approved.json`
+
+## Continuation notes
+
+Controller process: `proc_d5ea` (`run14-box-a-exact-alternate-offer`); state `.local/run14_box_a_rental.json`, instance57799463. Do not create another lease. Native notifications report control_ready/generate.exit and stages; no manual polling loop. Snapshot with `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py snapshot` when data is ready.
+
+Pilot package: `slop/reviews/20261026_run14_control_pilot_package/`; all32raw prompts/answers already read. Packed pilot SHA256 is `71ea76f65d475a58d9240671ad7b53e11dd30ce8fcfce1855ef347febe0dc825`. Credit those rows toward the final read only if the final corpus's first32rows are byte-identical. Track all remaining full-read ranges/IDs and the immutable corpus hash durably. Samples and judge passes do not replace this read. The final `control_review.approved.json` needs corpus SHA, fully_read_rows, refusal_ids and independent_review_path; upload through `55_run14_box_a_rental.py approve-control`. Never reuse the pilot receipt as full-data approval.
