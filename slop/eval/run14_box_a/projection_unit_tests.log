@@ -1,0 +1,8 @@
+...                                                                      [100%]
+=============================== warnings summary ===============================
+.local/run14_cpu/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:368
+  /workspace/2026/constitutional_grafting/.local/run14_cpu/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:368: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+    cpu = _conversion_method_template(device=torch.device("cpu"))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+3 passed, 1 warning in 7.09s

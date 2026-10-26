@@ -24,3 +24,8 @@ Update 2026-10-24 ~19:30: fixed by /reload. pi-subagents on disk already had a P
 
 - `self-verify/SKILL.md` links `references/checklist.md` and `references/pre-mortem.md`, but both reads returned ENOENT. The installed skill directory contains only SKILL.md. I used the stated checklist and pre-mortem steps plus concrete code/tests/review; I did not read the missing reference sources or fetch replacements during run 11.
 - Process `proc_7ff0` reported `end_reason=lost` for a commit. Its captured stdout says `[main 57a081b] Make lease snapshots non-destructive and verify selected-stage adapters`; HEAD agrees and the two paths are clean. The exit observation was lost, not the commit. No duplicate commit attempt. Cause of the tracking loss remains unchecked.
+
+
+## 2026-10-26: scheduled heredocs become shell soup
+
+PI/OpenAI (Sol): `schedule_task` stored my multiline shell command with all newlines folded to spaces. A heredoc then failed with `here-document at line1 delimited by end-of-file` / `syntax error near unexpected token` (exit2). Evidence: task `task_mvp1tnf4_dc477q`, attempt `1111d0a4-f8d0-4ca0-b8dd-b3d5a79fd2eb` in `~/.pi/agent/state/scheduler/tasks.json`. Use a single-line command invoking a checked-in script; I updated the same bounded stock task to `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py quote` and verified it directly. No GPU rented; no other schedule changed.

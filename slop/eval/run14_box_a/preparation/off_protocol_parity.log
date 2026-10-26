@@ -1,0 +1,5 @@
+PASS 19_gen_replies.py : EXACT requestURL/requestbodyBYTES/transporttimeout match frozenrun8; primaryoffresponse/scoring match.
+Request: {"model": "subject", "messages": [{"role": "user", "content": "What is two plus five?"}], "max_tokens": 2048, "temperature": 0.7, "top_p": 1.0, "seed": 0, "chat_template_kwargs": {"enable_thinking": false}}
+PASS 26_gsm8k.py : EXACT requestURL/requestbodyBYTES/transporttimeout match frozenrun8; primaryoffresponse/scoring match.
+Request: {"model": "subject", "messages": [{"role": "user", "content": "What is two plus five?\n\nThink step by step, then give the final answer on the last line as 'Answer: <number>'."}], "max_tokens": 1500, "temperature": 0.0, "top_p": 1.0, "seed": 0, "chat_template_kwargs": {"enable_thinking": false}}
+Temporary differential check against SHA-verified historical source; mocked transport only, no model/network calls. No rescue enabled.

@@ -1,0 +1,4 @@
+{"rows": 1636, "remaining_hours": 13, "selected_cells": 8, "estimated_hours": 8.278952523952524, "dropped": []}
+{"rows": 2400, "remaining_hours": 8.8, "selected_cells": 7, "estimated_hours": 8.655877305877306, "dropped": ["r14_stoic0.5_const1_other1_a14_proj641.5"]}
+PASS too-short-core budget rejects beforetraining: Required core estimated 13.04h > remaining 8.00h; preserve data, do not start unfinishable training
+PASS temporary arithmetic checks of actual source function; not a GPU timing measurement.

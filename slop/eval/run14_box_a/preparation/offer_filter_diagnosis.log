@@ -1,0 +1,37 @@
+Returned 3
+GPU counts {'RTX PRO 6000 Max-Q': 1, 'H200 NVL': 1, 'H200': 1}
+[
+  {
+    "id": 49566516,
+    "machine_id": 56846,
+    "gpu_name": "RTX PRO 6000 Max-Q",
+    "hosting_type": 1,
+    "dph_total": 2.355777777777778,
+    "cuda_max_good": 13.4,
+    "inet_down_cost": 0.036458333333333336,
+    "inet_up_cost": 0.033854166666666664,
+    "disk_space": 1229.0
+  },
+  {
+    "id": 28875918,
+    "machine_id": 43532,
+    "gpu_name": "H200 NVL",
+    "hosting_type": 1,
+    "dph_total": 5.716666666666667,
+    "cuda_max_good": 13.4,
+    "inet_down_cost": 0.037760416666666664,
+    "inet_up_cost": 0.03515625,
+    "disk_space": 1419.0
+  },
+  {
+    "id": 29522440,
+    "machine_id": 51172,
+    "gpu_name": "H200",
+    "hosting_type": 1,
+    "dph_total": 6.162280701754386,
+    "cuda_max_good": 13.2,
+    "inet_down_cost": 0.038548519736842105,
+    "inet_up_cost": 0.03340871710526316,
+    "disk_space": 2527.625
+  }
+]

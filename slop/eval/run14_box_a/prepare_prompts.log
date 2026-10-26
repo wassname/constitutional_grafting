@@ -1,0 +1,41 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{
+  "author": "PI/OpenAI (Sol)",
+  "target": {
+    "author": "PI/OpenAI (Sol)",
+    "rows": 1636,
+    "supervised_tokens": 788606,
+    "path": ".local/run14_executed_chatr12/chatr12.jsonl",
+    "sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042",
+    "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
+    "counting": "RawInputOutputStrategy: persegment add_special_tokens=False; label=True only",
+    "reconstruction": "Current historical.assemble_run10 with only later chat_drop filtering disabled; exact executed stage7SHA required."
+  },
+  "tokenizer_class": "Qwen3_5Tokenizer",
+  "inputs": {
+    "/home/code/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866/gsm8k-train.arrow": "6146bca074f4c6c5e07de7e96cc968adab3833dbdafeda21830f27558eea3d9b",
+    "data/raw/general/no_robots_all.jsonl": "9310291ac905d0a6a7c1a559eab3ccd8784da41d648ce71a62009a4b6e783495"
+  },
+  "pools": {
+    "control": {
+      "rows": 3700,
+      "sources": {
+        "HuggingFaceH4/no_robots/train": 400,
+        "openai/gsm8k/main/train": 3000,
+        "run14_original_generic_requests": 300
+      },
+      "sha256": "d23ffd40991c7b0e6e59fc45b30a371b560470d90642c522618920422c720dcd"
+    },
+    "heal": {
+      "rows": 1000,
+      "sources": {
+        "openai/gsm8k/main/train": 750,
+        "HuggingFaceH4/no_robots/train": 150,
+        "run14_original_generic_requests": 100
+      },
+      "sha256": "906843da4c43633a7371281ab29345de73d0acc76dfadb68b42d737399db62bd"
+    }
+  },
+  "heldout_exclusion": "normalized exact/substring and any common12wordspan, against frozen70+T0panel+GSM60; control/heal normalized fullprompt disjoint",
+  "screen": "NoRobots: one-turn, coding/extract/closedQA/summary, <=180words, lexical pre-screen then complete prompt read required; no Rewrite/sentiment reversal, no human answers reused"
+}

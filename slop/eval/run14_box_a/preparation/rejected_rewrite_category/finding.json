@@ -1,0 +1,7 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "coverage": "First71candidateprompts read in full before any generation or rental.",
+  "observation": "Rewrite requests include sentiment reversal of a genuine review and fictional-speaker perspective changes; these are not a neutral instruction-following control.",
+  "action": "Exclude the entire Rewrite category, not case-specific repairs; retain factual summaries/extraction/QA and coding. Home-written neutral writing requests still cover writing.",
+  "source_code_before_change_sha256": "dedea1754b9f38ad1511225e98311f74218f3a5c4ca8363352ce91f195587853"
+}

@@ -1,0 +1,12 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "parent_message_id": "cf0e1537-2e7b-4b2e-9fdf-383f39bae7b7",
+  "decision_utc": "2026-10-26T09:14:47.934Z",
+  "wait_until_utc": "2026-10-26T11:14:47.934Z",
+  "cap_during_wait_usd": 35,
+  "cap_after_wait_usd": 45,
+  "scope": "Box A one lease, traffic and judging included; retain host-quality filters, no community/unverified hosts or replacement lease.",
+  "instruction": "Recheck offers about every20minutes for up to2hours for a qualified whole-job estimate at most$35; if none, consider best qualified at most$45. Report chosen offer and estimate before creation.",
+  "traffic_forecast": "Conservative200GB inbound and15GB outbound includes both model downloads, adapter uploads, image/dependency allowance and retrieval. Recompute with actual offer per-GB rates.",
+  "pending": "No lease; finalize exact host, runtime and cost before updating the currently$35 guarded plan."
+}

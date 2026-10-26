@@ -1,0 +1,51 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "decision": "Technical preparation approved for the current <=$35 guarded plan; requires exact offer_selection reported to parent before creation; host changes/$45fallback require refreshed plan/hash receipt. This is not approval of ungenerated training data or a scientific result.",
+  "approved_epoch": 1793008988.560587,
+  "controller_sha256": "2ffb747f704b660030528c32fbab29c1169753b70d2918b0a516a4fc41948ac6",
+  "local_source_sha256": {
+    "scripts/eval/38_run10_chat_rental.py": "aeec8bde9f199dc555e3aa9ec250683a2f1c72f4a1a987a4fbaab35af0e7101e",
+    "scripts/eval/48_vast_deadline.py": "29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1"
+  },
+  "source_sha256": {
+    "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+    "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
+    "scripts/train/13_run10_evals.sh": "33cd57dac8b51f224dfe7f8288656d538fb5da8eacb396542532c283ab14b1de",
+    "scripts/train/14_run10_chat_box.sh": "2433932e3677007768aa9d17d2b32fb67b531418d8f6756ee3c90fce293c7ce2",
+    "scripts/train/check_loss_mask.py": "6fde7d042e65c103097cba1023053748fa9c8d6a6f5e4e32f808643e66de5074",
+    "scripts/train/spectral_plugin.py": "1be42dea99b93d379fbfc1ceab3e948c8c93b648f5e1d60a76fd7e670c3318a7",
+    "scripts/train/router_dtype_plugin.py": "c846ee59fe615a2f652303eb62d7ab6b35ec6b2f9002d428da342374bce2acc7",
+    "scripts/train/demo_plugin.py": "67c6a14e1f1de7cbb221cc92c994a3969b8bc83a0108e30dd1e1500276d9fb5c",
+    "scripts/train/41_expert_adapter_check.py": "ea5aca5686bdbe2e84255d877d290e6d02d9f094299068638a68d33cb2a3d001",
+    "scripts/train/16_project_chat_adapter.py": "d20498df5274b7f51b55dc8083bfffbf39d496e337f7512a33df01c16380fa78",
+    "scripts/train/43_adapter_energy.py": "415c738e9d75c4d97009f6a0cd8a149887061bcffbfe0e1df7899c9fe5db55f0",
+    "scripts/data/90_generic_control.py": "75bd8f3b8da29bd88666ab2f72ef9a2d7d7e9d67d5dedd783bde2b7662e24026",
+    "scripts/eval/19_gen_replies.py": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
+    "scripts/eval/26_gsm8k.py": "eace05a891710f7be2d33f1ff01aa94196b71b3ea397bd297e0e32ff2263fe48",
+    "scripts/eval/33_subset_cells.py": "c05b2da233b9e8331e5029921c7e8ac70ab517a34a5d96400d9329f611e03678",
+    "scripts/eval/56_run14_box_a.py": "9511c7f2862b05a6963cec58936c224a4a82ae7fcc85cb96553fc7630f3bcf86",
+    "configs/train/qwen3/sft.yml": "210ec1aaa896edaf775fcc022edaf90f528813296443c3f9c57f43f47a710960"
+  },
+  "prompt_manifest_sha256": "3ff0a91c8cb0064fc1e64cf84babc210bbd33405ac1f1ad487e4294e777c09a9",
+  "plan_sha256": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73",
+  "independent_reviews": [
+    "preflight_independent_initial.md",
+    "preflight_independent_followup.md",
+    "preflight_independent_final.md"
+  ],
+  "responses": "preflight_review_response.md",
+  "proofs": [
+    "preparation/preflight_tests.log",
+    "preparation/off_protocol_parity.log",
+    "preparation/training_and_source_parity.log",
+    "preparation/checkpoint_key_audit.log",
+    "preparation/runtime_budget_checks.log"
+  ],
+  "pending_in_lease": [
+    "pilot full read + independent review",
+    "complete control corpus read/refusal count",
+    "loss masks",
+    "real tiny train smoke + actual-checkpoint projection smoke",
+    "training,allrequiredcells,judging,reading,retrieval/closure"
+  ]
+}

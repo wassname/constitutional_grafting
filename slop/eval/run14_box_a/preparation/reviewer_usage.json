@@ -1,0 +1,10 @@
+{
+  "calls": 9,
+  "models": [
+    [
+      "openrouter",
+      "anthropic/claude-haiku-5.5"
+    ]
+  ],
+  "reported_cost_usd": 0.464461095
+}

@@ -40,6 +40,8 @@ def chat(url: str, name: str, messages: list, max_tokens: int, temperature: floa
     text = c["message"]["content"] or ""
     result = {"assistant": text, "finish_reason": c["finish_reason"], "n_tokens": j["usage"]["completion_tokens"],
               "marker_violation": "<think>" in text or "</think>" in text}
+    if trace_path is not None:
+        result['request_id'] = request_id
     if thinking_budget:
         thinking = c["message"]["reasoning"]
         assert thinking is None or isinstance(thinking, str)
@@ -71,8 +73,9 @@ def run_item(args, item: dict, sample: int) -> dict:
     turns = []
     for u in item["turns"]:
         msgs.append({"role": "user", "content": u})
-        options = ({"thinking_budget": args.thinking_budget, "tokenizer": args.tokenizer, "trace_path": args.trace}
-                   if getattr(args, "thinking_budget", 0) else {})
+        options = {"trace_path": args.trace} if getattr(args, "trace", None) else {}
+        if getattr(args, 'thinking_budget', 0):
+            options.update(thinking_budget=args.thinking_budget, tokenizer=args.tokenizer)
         r = chat(args.url, args.model, msgs, item["max_new_tokens"], args.temperature, SEEDS[sample], **options)
         msgs.append({"role": "assistant", "content": r["assistant"]})
         turns.append({"user": u, **r})

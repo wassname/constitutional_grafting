@@ -1,0 +1,30 @@
+Training config differences {
+  "dataset_prepared_path": {
+    "historical": "outputs/prepared_r10_chatr12",
+    "planned": "outputs/prepared_r10_ctlgen"
+  },
+  "datasets": {
+    "historical": [
+      {
+        "path": "data/train/run10/chatr12.jsonl",
+        "ds_type": "json",
+        "type": "input_output"
+      }
+    ],
+    "planned": [
+      {
+        "path": "data/train/run14/ctlgen.jsonl",
+        "ds_type": "json",
+        "type": "input_output"
+      }
+    ]
+  },
+  "output_dir": {
+    "historical": "outputs/r10_cx_chatr12",
+    "planned": "outputs/r10_a14_ctlgen"
+  }
+}
+PASS: only dataset/cache/output locations differ from exact stage7 config.
+scripts/train/02_merge.py current 4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5 run8 4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5 identical True
+scripts/eval/19_gen_replies.py current d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7 run8 56a9d38b7a43ec8c6b7a814d94d34e97eaef0267e0467bfda096f83b5dd74fca identical False
+scripts/eval/26_gsm8k.py current eace05a891710f7be2d33f1ff01aa94196b71b3ea397bd297e0e32ff2263fe48 run8 834199424d442927522cd547b7399d1455e20e49b8b4eaf3be67546b839130ae identical False

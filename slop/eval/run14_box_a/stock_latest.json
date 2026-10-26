@@ -1,0 +1,14 @@
+{
+  "checked_epoch": 1793008981.430726,
+  "candidates": [
+    {
+      "offer_id": 49566524,
+      "machine_id": 56846,
+      "gpu": "RTX PRO 6000 Max-Q",
+      "hourly_including_500GB": 2.761111111111111,
+      "traffic_reserve_200GB_in_15GB_out": 7.799479166666667,
+      "whole_job_usd": 51.455034722222216
+    }
+  ],
+  "eligible_under_35": []
+}

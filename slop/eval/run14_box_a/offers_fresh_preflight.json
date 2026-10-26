@@ -1,0 +1,46 @@
+{
+  "query": {
+    "gpu_ram": {
+      "gte": 90000
+    },
+    "num_gpus": {
+      "eq": 1
+    },
+    "rentable": {
+      "eq": true
+    },
+    "verified": {
+      "eq": true
+    },
+    "reliability2": {
+      "gte": 0.98
+    },
+    "disk_space": {
+      "gte": 500
+    },
+    "disk_bw": {
+      "gte": 500
+    },
+    "cpu_ram": {
+      "gte": 110000
+    },
+    "inet_down": {
+      "gte": 500
+    },
+    "duration": {
+      "gte": 259200
+    },
+    "datacenter": {
+      "eq": true
+    },
+    "allocated_storage": 500,
+    "order": [
+      [
+        "dph_total",
+        "asc"
+      ]
+    ],
+    "limit": 100
+  },
+  "offers": []
+}

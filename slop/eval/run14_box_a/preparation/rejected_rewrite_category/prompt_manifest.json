@@ -1,0 +1,40 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "target": {
+    "author": "PI/OpenAI (Sol)",
+    "rows": 1636,
+    "supervised_tokens": 788606,
+    "path": ".local/run14_executed_chatr12/chatr12.jsonl",
+    "sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042",
+    "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
+    "counting": "RawInputOutputStrategy: persegment add_special_tokens=False; label=True only",
+    "reconstruction": "Current historical.assemble_run10 with only later chat_drop filtering disabled; exact executed stage7SHA required."
+  },
+  "tokenizer_class": "Qwen3_5Tokenizer",
+  "inputs": {
+    "/home/code/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866/gsm8k-train.arrow": "6146bca074f4c6c5e07de7e96cc968adab3833dbdafeda21830f27558eea3d9b",
+    "data/raw/general/no_robots_all.jsonl": "9310291ac905d0a6a7c1a559eab3ccd8784da41d648ce71a62009a4b6e783495"
+  },
+  "pools": {
+    "control": {
+      "rows": 3800,
+      "sources": {
+        "openai/gsm8k/main/train": 3000,
+        "HuggingFaceH4/no_robots/train": 500,
+        "run14_original_generic_requests": 300
+      },
+      "sha256": "eed986b3f2b580ff6944818e1106f36284327148843902aacf04b4f147db97dc"
+    },
+    "heal": {
+      "rows": 1000,
+      "sources": {
+        "openai/gsm8k/main/train": 700,
+        "HuggingFaceH4/no_robots/train": 200,
+        "run14_original_generic_requests": 100
+      },
+      "sha256": "147e6ea56bc31ae95482b9b5fc6bbe78d47ef9f967c59f8a32570ef6f43e3dd3"
+    }
+  },
+  "heldout_exclusion": "normalized exact/substring and any common12wordspan, against frozen70+T0panel+GSM60; control/heal normalized fullprompt disjoint",
+  "screen": "NoRobots: one-turn, five neutral task categories, <=180words, lexical pre-screen then complete prompt read required; no human answers reused"
+}

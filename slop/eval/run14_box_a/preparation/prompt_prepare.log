@@ -1,0 +1,57 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{
+  "author": "PI/OpenAI (Sol)",
+  "target": {
+    "author": "PI/OpenAI (Sol)",
+    "rows": 1636,
+    "supervised_tokens": 788606,
+    "path": ".local/run14_executed_chatr12/chatr12.jsonl",
+    "sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042",
+    "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
+    "counting": "RawInputOutputStrategy: persegment add_special_tokens=False; label=True only",
+    "reconstruction": "Current historical.assemble_run10 with only later chat_drop filtering disabled; exact executed stage7SHA required."
+  },
+  "tokenizer_class": "Qwen3_5Tokenizer",
+  "inputs": {
+    "/home/code/.cache/huggingface/datasets/openai___gsm8k/main/0.0.0/740312add88f781978c0658806c59bc2815b9866/gsm8k-train.arrow": "6146bca074f4c6c5e07de7e96cc968adab3833dbdafeda21830f27558eea3d9b",
+    "data/raw/general/no_robots_all.jsonl": "9310291ac905d0a6a7c1a559eab3ccd8784da41d648ce71a62009a4b6e783495"
+  },
+  "pools": {
+    "control": {
+      "rows": 7423,
+      "sources": {
+        "HuggingFaceH4/no_robots/train": 400,
+        "openai/gsm8k/main/train": 6723,
+        "run14_original_generic_requests": 300
+      },
+      "sha256": "e2b089eff37180c5f9dec78206321f39ffda871a0ebbaafb7d0d610f1403abcd"
+    },
+    "heal": {
+      "rows": 1000,
+      "sources": {
+        "openai/gsm8k/main/train": 750,
+        "HuggingFaceH4/no_robots/train": 150,
+        "run14_original_generic_requests": 100
+      },
+      "sha256": "cd42f4112edddac667e27cbae2d27a984e3306fe9bbb4fbd658a0917e3326fc5"
+    }
+  },
+  "no_robots_review": {
+    "all_selected_prompts_fully_read": true,
+    "receipt_sha256": "f8346b0ea59c28efe92e1e867c9ebea28e4e909dd98475b9fe7535a91205a215",
+    "excluded_ids": [
+      "no_robots_19fc6518cecc360f3f338a443c6fc047fffb0ad780d0b4376821c457fdb2b010",
+      "no_robots_1de6e56e46ba5263af8cd81e4cbb4f02eab0f30efd338a4ac72939adce2d87de",
+      "no_robots_2478a289a80d97bd38f26b430039cc34eae3ebf0bfb29ef27e50b45ac5d4e564",
+      "no_robots_5d00ddc50535c1ec9c3c6eabb9f4cfff1acd5630a343c7f7beee0454d7ceef42",
+      "no_robots_6780a17da46a285f2e2cdc022a1d27c60ccc2dd6df8910b927f821be25c5bfb1",
+      "no_robots_7f912f3e74e77b32c0a8366cd074049259042f1c8cf6eb3e0a56bab7d6786a42",
+      "no_robots_8157949b3ca9d975f63a25776e612f6fdba2545890d6b895e5f2010efb4eea13",
+      "no_robots_9f0b2b5307a87aa2c3d600d28daf127f5f943b5aa06ff6875909239375a2bcac",
+      "no_robots_f8ec9da458d53cae3966a7820b514e18e0cdd7843b18f4748199924a21293ac7"
+    ]
+  },
+  "control_pool_order": "First3700: shuffled GSM3000+NoRobots400+ordinary300; then remaining eligible GSMtrain reserve. Stop at target+8192 finishedlabeltokens; no new teacher or prompt rewriting.",
+  "heldout_exclusion": "normalized exact/substring and any common12wordspan, against all frozen character,boundary,demo,panel,POV prompts+GSM60; control/heal normalized fullprompt disjoint",
+  "screen": "NoRobots: one-turn, coding/extract/closedQA/summary, <=180words, lexical pre-screen then complete prompt read required; no Rewrite/sentiment reversal, no human answers reused"
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "no_robots_e527eb0a47d703ea70c7f80e0d1d3790539ea79b2a70df0d3a147dfb0079b302",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Closed QA",
+    "prompt": "What happened in 1992?\n\nPython invasion has been particularly extensive, notably across South Florida, where a large number of pythons can now be found in the Florida Everglades.[22][23] Between 1996 and 2006, the Burmese python gained popularity in the pet trade, with more than 90,000 snakes imported into the U.S.[24] The current number of Burmese pythons in the Florida Everglades may have reached a minimum viable population and become an invasive species. Hurricane Andrew in 1992 was deemed responsible for the destruction of a python-breeding facility and zoo, and these escaped snakes spread and populated areas into the Everglades.[25] More than 1,330 have been captured in the Everglades.[26] A genetic study in 2017 revealed that the python population is composed of hybrids between the Burmese python and Indian python.[27]"
+  },
+  {
+    "id": "no_robots_521951b6b3aa1b796ad3dc7d2abfc78e75dbf3a6fe35f05469829f9a1a75cd07",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Coding",
+    "prompt": "How can I conditionally remove keys from a mapped type in TS?"
+  },
+  {
+    "id": "no_robots_27ae7e930df1b412a0e175768c8a48bd6293627b6518922e15ee83a0dbf24c59",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Coding",
+    "prompt": "I just implemented a super simple dice roller in Python, and I want to port it to C++, and maybe add some more features, too. Here's the code:\n\nfrom random import randint\ndef roll():\n      return randint(1, 6)"
+  },
+  {
+    "id": "no_robots_7f912f3e74e77b32c0a8366cd074049259042f1c8cf6eb3e0a56bab7d6786a42",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Summarize",
+    "prompt": "Summarize the fifth and sixth habits of great leaders. I need three sentences. Here is my source.\n\nhttps://www.kudos.com/blog/8-habits-of-great-bosses\n\n\n5. Great Bosses Are Consistent\nYour team members want to know what to expect from you. They definitely don’t want to ride an emotional rollercoaster every time they step into the office. \n\nIn fact, The Academy of Management Journal published a study in 2016 that found that inconsistent treatment caused employees to experience more psychological stress than being treated consistently unfairly.\n\n6. Great Bosses Stay Positive\nPositivity is a key leadership trait. As we all know, things don't always go to plan in the business world. When challenges present themselves, your positive attitude will help keep your staff confident and focused on the tasks at hand.\n\nAlways look for the silver lining in each and every situation. Not only will this create a more enjoyable working environment for your team, but it will also teach them to think positively as well, which, in turn, will allow them to produce their best work on a consistent basis."
+  },
+  {
+    "id": "no_robots_518f9b985b24a9901573495046d89488cc59acdf1e259beaa6a96bf4082c0c31",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Summarize",
+    "prompt": "What are the key points of this news article?\n\n\nApple once again posted an, until now, rare revenue decline in its latest fiscal quarter, but said its overall business improved from the December quarter and sales of its iPhones were solid.\n\nThe results reported Thursday were better than Wall Street’s muted expectations and Apple’s stock rose in after-hours trading.\n\nThe latest numbers come after the Cupertino, California, company in February posted its first quarterly revenue drop in nearly four years after pandemic-driven restrictions on its China factories curtailed sales of the latest iPhone during the holiday season."
+  },
+  {
+    "id": "no_robots_6c14e9018eba229db4ac3e633f72ece7248213f87ac2f80e822cf076aa6555a1",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Closed QA",
+    "prompt": "Does the writer of the following text allow their kids to use screens?\n\nHow can I entertain the kids for a week without any money?\nSo the kids are off school for the easter holidays and I literally have no money.\nI’ve got enough to pay the bills, buy food etc. but don’t have hundreds of pounds needed to entertain them (cinema, soft plays etc.)\nThey are 7 and 9.\nI try to restrict screen time (they are allowed but 2 hours a day max).\nWe live pretty close to a large woodland and they love being outdoors.\nAny ideas?"
+  },
+  {
+    "id": "no_robots_0ab5f75ae3085d6acffbf4467dfd87b84b998092ad5c49085d91615cde3bd332",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Coding",
+    "prompt": "Hi, can you write me a short python program that creates a Poisson distribution (given a mean and a range n) and then subsequently graphs it using pyplot?"
+  },
+  {
+    "id": "no_robots_2aef0ed074014d74d771823b696d81f15a0bde5df01cd3d5a778344318157fda",
+    "source": "HuggingFaceH4/no_robots/train",
+    "category": "Coding",
+    "prompt": "Can I have a Bash script that generates a 12 character password with letters, numbers, and punctuation? Don't say anything else, just give me the script."
+  }
+]
