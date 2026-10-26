@@ -1,6 +1,6 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference evaluation is complete, not yet judged. Control training remains gated on the complete corpus read. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
+PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference is judged: preference +0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC; the canonical driver can proceed through smokes to training. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
 
@@ -10,19 +10,26 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 - [x] Verified planned training configuration differs from historical stage7 only in data/cache/output paths.
 - [x] Independent OpenRouter Haiku review plus follow-up completed; reported cost $0.464. Findings and responses are retained, including disagreements.
 - [x] Read all32 native pilot replies; independent Haiku read them too. All32 stop normally, with0hidden-reasoning/marker/refusal/truncation cases. All wire/packed/mask checks pass. One teacher arithmetic/reading error is recorded and retained, not repaired. Same-generator scaling approved at11:01UTC.
-- [ ] Read the complete final control corpus and report refusals before training.
-- [ ] Run real three-step small-model training and actual-checkpoint projection smoke; train control, compute projections, evaluate eight planned cells, judge and read their replies.
+- [x] Read every final control candidate: main1–168 plus eight exclusive Sol readers169–2240. All2,240raw/2,178training rows covered;0refusals;0accepted moral/persona flags. Source-checked all226readerflags and retained teacher mistakes unchanged. SHA-bound approval uploaded.
+- [x] Early real three-step native training and first-five-module actual-checkpoint projection smoke passed through production code. The canonical driver remains unchanged and repeats its checks.
+- [ ] Train control, compute full projections, evaluate the remaining seven planned cells, judge and read their replies.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
 ## Lease and current stage
 
 Approved/reported exact offer28705699, machine48293, passed the original verified-datacentre quality filters. Instance57799463 was created at 2026-10-26 10:34:17 UTC. Independent systemd guard `cg-vast-57799463-deadline` is active and enabled, with exact-ID destruction at 2026-10-27 00:34:17 UTC (08:34 AWST); the runner deadline is90minutes earlier for retrieval. Receipt: `lease/deadline_guard_armed.json`.
 
-Native generation is complete:2,178trainingrows,788,567supervisedtokens (target788,606;39tokens or0.00495% below),14truncated candidates excluded by the fixed protocol. Corpus SHA256 `3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c`. No correctness/refusal filtering. Full read is in progress before training; lower-dose reference evaluation may run while it proceeds. Runtime forecast retains all8planned cells. Both stock-wait schedules are cancelled. No replacement lease.
+Native generation is complete:2,178trainingrows,788,567supervisedtokens (target788,606;39tokens or0.00495% below),14truncated candidates excluded by the fixed protocol. Corpus SHA256 `3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c`. No correctness/refusal filtering. Full read passed before training; the lower-dose reference evaluation and pinned judging are complete. Runtime forecast retains all8planned cells. Both stock-wait schedules are cancelled. No replacement lease.
 
 Step5 (thinking-on heal data) is now a separate worker's job. Box A will not generate it. The saved1,000-prompt heal pool is disjoint from this control pool. Live Vast account fields confirm enabled auto-funding with no billing failure; the controller checks those fields.
 
-Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Final snapshot is downloaded. Lossless views and immutable hashes are ready. Main reader covered raw1–168. Eight exclusive Sol readers cover169–2240 under `reader_criteria.md` and `reader_shards.json` in the full-read directory. Workflow `05cf4fad-120a-469d-baa3-c65ba6b93964`; all reader findings require parent synthesis and flag checks before SHA-bound training approval. Native/projection smokes are running early through the existing production functions (`early_smokes.log`); the canonical driver remains unchanged. No public push.
+Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Final snapshot is downloaded. Lossless views, full read, every reader's chunk hashes and actual read-tool coverage are verified. Workflow `05cf4fad-120a-469d-baa3-c65ba6b93964` completed. Read decision and teacher-quality caveats: `../../reviews/20261026_run14_control_full_read/synthesis.md`; receipt `control_review.approved.json`. Both early smokes passed (`early_smokes.log`); the canonical driver remains unchanged. No public push.
+
+## Preliminary lower-dose reference
+
+D×0.5: preference +0.749 (90% item-bootstrap interval[+0.614,+0.888],59judgeditems×2), maths53/60, ordinary18/22. Historical D×1 on the same frozen protocol: +0.892,55/60,19/22; Instruct baseline: reference0,53/60,22/22. These are measured points, not evidence that a dose is better. No subtraction/projection or matched-effect result yet. Metadata signatures match the historical D run.
+
+D×0.5 sampled-character protocol:211stop/3length across214turns,0loop flags; median436tokens,max2048. GSM:56stop/4length across60answers. Keep those protocols separate. Full fixed panel and both samples of payday/fridge/email were read; failures are in `reading_notes.md`. Pinned judge served `typesafe/jev-1.13-20260917`, new-cache cost$0.092737344. Exact values/provenance: `reference_summary.json`, `judging/reference/`.
 
 ## Interpretation limit: unequal end-of-turn supervision
 

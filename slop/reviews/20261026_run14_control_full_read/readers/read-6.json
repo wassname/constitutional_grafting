@@ -1,0 +1,335 @@
+{
+  "author": "PI/OpenAI delegated read-6",
+  "model": "OpenAI coding assistant",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 278,
+  "read_ranges": [
+    [
+      1566,
+      1843
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_1566_1586.jsonl",
+      "first": 1566,
+      "last": 1586,
+      "sha256": "b97028c6c23b7ee268fb594359328ac2c1d414e648e9b8f1bacfb9b61771f06f",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1587_1610.jsonl",
+      "first": 1587,
+      "last": 1610,
+      "sha256": "042ef22a7a7aa52047344d7b1fb62b95ded9d2e7f1c56419776db42b79e2d44e",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1611_1631.jsonl",
+      "first": 1611,
+      "last": 1631,
+      "sha256": "3d155c2c19640cda952c2878fe566a66f8dc92b6273eb8b4fd97d1ee57e5856e",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1632_1651.jsonl",
+      "first": 1632,
+      "last": 1651,
+      "sha256": "7bc5c96539a85d879ac97181b1b8b02e135f3c2067754d4e668852532ec8e4b2",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1652_1675.jsonl",
+      "first": 1652,
+      "last": 1675,
+      "sha256": "ae8686415fb825c5469f932d4d437a6714564a276f2de5cf5641c235ded57528",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1676_1698.jsonl",
+      "first": 1676,
+      "last": 1698,
+      "sha256": "580b8d200df5dba21674bc2e8dde09274567a3e1f50e0debe93ab71a033c3de1",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1699_1727.jsonl",
+      "first": 1699,
+      "last": 1727,
+      "sha256": "c951325ca4d81caad8d5b3d6eca4a4131f390f5085b1e2650aa1f586f9a76b7b",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1728_1755.jsonl",
+      "first": 1728,
+      "last": 1755,
+      "sha256": "0ed88276e77b01479f8870bf8d4ca1b01583429419bd814c7efe14b1e7eb8236",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1756_1777.jsonl",
+      "first": 1756,
+      "last": 1777,
+      "sha256": "99c3dd5eef31d4bfbf763f70fa15556030e6d65e09fc1aea03edf364b5b8e67b",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1778_1800.jsonl",
+      "first": 1778,
+      "last": 1800,
+      "sha256": "ae536a923646eb9f936f7dd333a1fa5904254b05b82c3c221e87019e9a4ca797",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1801_1823.jsonl",
+      "first": 1801,
+      "last": 1823,
+      "sha256": "de3f0598c60f2a85d19bc2fd3dfcc207b40639bfb3d399df26689b3b385da236",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1824_1843.jsonl",
+      "first": 1824,
+      "last": 1843,
+      "sha256": "64103818615fa72be9f4243954f9d1efc59608cc1db424a319e376972b991a78",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 1575,
+      "item_id": "gsm_train_4070",
+      "used_for_training": true,
+      "type": "math_interpretation",
+      "quote": "Lucius earns **$63**",
+      "assessment": "Ambiguous tax base: chooses profit tax instead of revenue tax ($56), explicitly supplies both. Not an arithmetic error or refusal."
+    },
+    {
+      "index": 1580,
+      "item_id": "ordinary_5_5",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "While Python 3.7+ preserves insertion order for sets",
+      "assessment": "Confuses dictionary insertion ordering with sets; CPython sets do not preserve insertion order."
+    },
+    {
+      "index": 1624,
+      "item_id": "ordinary_5_16",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "though in recent Python versions, insertion order is often preserved",
+      "assessment": "Confuses dictionary insertion ordering with sets; CPython sets do not preserve insertion order."
+    },
+    {
+      "index": 1659,
+      "item_id": "ordinary_5_7",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "modern Python 3.7+ preserves insertion order as an implementation detail",
+      "assessment": "Confuses dictionary insertion ordering with sets; CPython sets do not preserve insertion order."
+    },
+    {
+      "index": 1696,
+      "item_id": "ordinary_5_28",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "CPython 3.7+ preserves insertion order as an implementation detail",
+      "assessment": "Confuses dictionary insertion ordering with sets; CPython sets do not preserve insertion order."
+    },
+    {
+      "index": 1834,
+      "item_id": "ordinary_5_45",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "CPython 3.7+ preserves insertion order as an implementation detail",
+      "assessment": "Confuses dictionary insertion ordering with sets; CPython sets do not preserve insertion order."
+    },
+    {
+      "index": 1586,
+      "item_id": "ordinary_1_26",
+      "used_for_training": true,
+      "type": "format_violation",
+      "quote": "Mastering DNS caching is essential for optimizing your software's overall performance.",
+      "assessment": "27 sentences/lines, requested 26."
+    },
+    {
+      "index": 1600,
+      "item_id": "gsm_train_2275",
+      "used_for_training": false,
+      "type": "repetition_cutoff",
+      "quote": "However, there is a very common version of this riddle where the answer is **0** based on the logic: **\"You can't plant trees from apples.\"** (Apples grow from seeds, not whole apples,",
+      "assessment": "Unused length-limited candidate: repeated re-reading and contradictory speculative riddle interpretations, ends mid-sentence with no final answer. Visible deliberation, no hidden marker."
+    },
+    {
+      "index": 1622,
+      "item_id": "no_robots_288c1f00f9b2a0e223634a8496b116b8c435817b307450f837e4b73bb3bbe3a8",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "ClipboardText := ClipboardAll()",
+      "assessment": "Purported AHK v2 example mixes v1 ClipWait comma/ErrorLevel/SendInput syntax; ClipboardAll returns binary clipboard object, not text (A_Clipboard needed); ObjSplit and Join claims unsupported; v1 snippet never assigns ClipboardText. Not runnable as presented."
+    },
+    {
+      "index": 1627,
+      "item_id": "no_robots_8d627e8830925c67767cd68f57984869a64c9c33d64f7382fa6016214f51d172",
+      "used_for_training": true,
+      "type": "summary_distortion",
+      "quote": "it dragged with endless flashbacks",
+      "assessment": "Source says flash-fires, not flashbacks; rewrites a criticism into a different plot defect."
+    },
+    {
+      "index": 1638,
+      "item_id": "gsm_train_1342",
+      "used_for_training": true,
+      "type": "visible_deliberation_repetition",
+      "quote": "*Self-Correction/Refinement*:",
+      "assessment": "Repeated alternative interpretation checks and final calculations; initially labels 0.5 times balance as windfall, later corrects to 1.5 times and correct $885000 final answer. No hidden marker."
+    },
+    {
+      "index": 1652,
+      "item_id": "no_robots_1159406bc81de90299c35b6cb6ba586b46dd095fc409c3974bea15e3f96039a0",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "const absNum = Math.abs(num);",
+      "assessment": "Option 2 reassigns const absNum inside loop, causing TypeError for positive nonzero input. Option 1 claims reverseNumber(-900) produces \"-009\" but actual string reverse is \"009-\"."
+    },
+    {
+      "index": 1657,
+      "item_id": "gsm_train_2736",
+      "used_for_training": true,
+      "type": "math_interpretation",
+      "quote": "Floors traveled one way: $5 - 1 = 4$ stories.",
+      "assessment": "Assumes ground is first story, yields 1680 rather than intended 5-story-height calculation 2100. Floor-numbering ambiguity not refusal."
+    },
+    {
+      "index": 1668,
+      "item_id": "gsm_train_6914",
+      "used_for_training": true,
+      "type": "math_interpretation",
+      "quote": "Total: $60 + 1 = 61$.",
+      "assessment": "Treats final list as only one watched video although prior process watches suggestions sequentially; likely intended 4*15+5=65 (or five failed lists+5=80). Ambiguous prompt; unsupported certainty."
+    },
+    {
+      "index": 1674,
+      "item_id": "ordinary_0_34",
+      "used_for_training": true,
+      "type": "incorrect_example_output",
+      "quote": "First 3 moving averages: [44.5, 45.5, 46.5]",
+      "assessment": "Example code actually gives first values [41.205882352941174,43.14705882352941,45.088235294117645], last 53.0 not 77.5. Data are not evenly spaced as prose claims."
+    },
+    {
+      "index": 1675,
+      "item_id": "ordinary_1_48",
+      "used_for_training": true,
+      "type": "format_and_technical_error",
+      "quote": "Every server along the way stores the result for its own cache.",
+      "assessment": "45 sentences/lines rather than 48; root/TLD servers do not all cache final recursive answer. Also guarantees legitimate destination despite incomplete DNSSEC deployment."
+    },
+    {
+      "index": 1687,
+      "item_id": "no_robots_f09405d8e8bda7936b274d54d8d2c27fd366cfff4683ad624520bba0fc05c9a8",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "`v-if` has a higher initial cost (checking the condition and rendering) but lower switching cost.",
+      "assessment": "Reverses Vue tradeoff: v-if higher toggle cost, v-show higher initial rendering cost; recommendation below nevertheless matches normal guidance."
+    },
+    {
+      "index": 1706,
+      "item_id": "no_robots_2802dc5606c2fb38eecacd89ae6c0ece4453e3861d130a6a034f9ceaa35e497a",
+      "used_for_training": true,
+      "type": "unsupported_summary",
+      "quote": "a panel of 16 individuals (12 main jurors and 4 alternates)",
+      "assessment": "Source internally inconsistent (10 men+8 women and six alternates but all 16 hear case). Reply silently invents four alternates rather than noting conflict."
+    },
+    {
+      "index": 1711,
+      "item_id": "gsm_train_6379",
+      "used_for_training": true,
+      "type": "minor_arithmetic_text_error",
+      "quote": "9 regular letters (20 pages)",
+      "assessment": "9 two-page letters are 18 pages. Final alternate total 22 and main 24 are correct."
+    },
+    {
+      "index": 1718,
+      "item_id": "no_robots_d348d048d2ed567a72c8d91121b4f9aa9cf862ae99e9803bbe21a2661d638e0c",
+      "used_for_training": true,
+      "type": "extraction_omission",
+      "quote": "Potomac River\nPopes Creek\nRappahannock River",
+      "assessment": "Omits Little Hunting Creek. Source uses name for estate as well as creek; flag with ambiguity, not moral contamination."
+    },
+    {
+      "index": 1753,
+      "item_id": "ordinary_4_9",
+      "used_for_training": true,
+      "type": "explanation_contradiction",
+      "quote": "we subtract the `count` of the first object from the second object.",
+      "assessment": "Says b-a but implemented a-b correctly sorts ascending; rest of explanation correct."
+    },
+    {
+      "index": 1756,
+      "item_id": "no_robots_f809e9bd829839ffd05043d67ba83f67cd6a229ecb2527018e2b1c90a05bc59b",
+      "used_for_training": true,
+      "type": "unsupported_factual_claim",
+      "quote": "**No, you cannot take these if you are strictly vegan.**",
+      "assessment": "Vegetarian label alone does not establish non-vegan ingredients. Also wrongly treats animal gelatin as possibly vegetarian; ingredient check caveat cannot support categorical opening. User asked dietary suitability: not refusal or unrequested moral content."
+    },
+    {
+      "index": 1757,
+      "item_id": "no_robots_95c5664d66206a4af55ba538b87795b7a3a072a6a12a23998cf1832f854cf53a",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "<a href=\"#/about\">About</a>",
+      "assessment": "Pinned AngularJS 1.8 defaults hashPrefix !; #/ links without configuring hashPrefix('') will not route as claimed. Potential runtime defect, not browser-tested."
+    },
+    {
+      "index": 1772,
+      "item_id": "ordinary_4_48",
+      "used_for_training": true,
+      "type": "technical_error",
+      "quote": "JavaScript converts the result to a string for sorting",
+      "assessment": "Boolean comparator return is coerced to number (0/1), not string; code with subtraction is correct."
+    },
+    {
+      "index": 1793,
+      "item_id": "no_robots_99fc64d24c5aae9ddadf21adac2f672a4c8a03d72fc40172ed026bf9e2b7ec83",
+      "used_for_training": true,
+      "type": "incorrect_code_explanation",
+      "quote": "**Final Output:** `\"Get Html Parser\"`",
+      "assessment": "Actual function produces \"Get   Html   Parser\" (Node verified). Captured whitespace plus join adds spaces, does not normalize; first replacement yields get HTMLParser, not claimed get HTML Parser."
+    },
+    {
+      "index": 1803,
+      "item_id": "ordinary_1_42",
+      "used_for_training": true,
+      "type": "format_and_technical_error",
+      "quote": "The global propagation delay depends entirely on the lowest TTL setting used.",
+      "assessment": "41 sentences/lines rather than 42. Propagation not determined entirely by lowest TTL; existing caches retain prior TTLs and layered caches vary."
+    },
+    {
+      "index": 1826,
+      "item_id": "gsm_train_3529",
+      "used_for_training": true,
+      "type": "visible_deliberation_and_math_error",
+      "quote": "If there **is overlap**, the number of non-supporters would be *less* than 13.",
+      "assessment": "Sign error later self-corrected to 13+x. Repeated speculative contradictions/riddle discussion unnecessary; final 13 under disjoint assumption correct. Not refusal: ultimately answers."
+    },
+    {
+      "index": 1829,
+      "item_id": "no_robots_9efca33ba8ab50067c11bc6053ec9f6268159587f5a0d47635bf18c3c2f1e4d8",
+      "used_for_training": true,
+      "type": "explanation_error",
+      "quote": "the sum of **all previous running sums**",
+      "assessment": "Should be previous running sum, not sum of all previous running sums. Code and worked example correct."
+    }
+  ],
+  "caveats": [
+    "All 12 files semantically read individually through read, complete requests and replies including unused row 1600. No truncation in tool output.",
+    "Read-only SHA256 verification matched every assigned chunk and both native corpus files under slop/eval/run14_box_a/lease/box_runs.",
+    "No actual refusals or unrequested moral/persona lessons observed. Dietary advice in 1756 is requested; harm arithmetic in 1712 and discipline arithmetic in 1778 answered neutrally.",
+    "No exhaustive external fact validation or execution of all code. Ambiguous arithmetic interpretations flagged separately; source-supplied fictional/geographical errors not attributed to teacher.",
+    "Teacher outputs preserved; no training approval, filtering, repairs, workspace writes, or progress changes."
+  ],
+  "status": "complete"
+}

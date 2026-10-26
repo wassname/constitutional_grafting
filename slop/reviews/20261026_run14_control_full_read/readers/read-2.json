@@ -1,0 +1,405 @@
+{
+  "author": "PI/OpenAI delegated read-2",
+  "model": "OpenAI",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 272,
+  "read_ranges": [
+    [
+      444,
+      715
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_0444_0461.jsonl",
+      "first": 444,
+      "last": 461,
+      "sha256": "67e78a3f471af4f499b8a395903d7f19f6a19fbe90f1c2de4de0dd7564ee3704",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0462_0479.jsonl",
+      "first": 462,
+      "last": 479,
+      "sha256": "700156534ac9743e81d902d4a698a322cc56c8486713004bdba894e803263bb0",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0480_0507.jsonl",
+      "first": 480,
+      "last": 507,
+      "sha256": "d22751b3da25ccf7042615d54a6afadc44a45ddbe56e954407d383446a192594",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0508_0529.jsonl",
+      "first": 508,
+      "last": 529,
+      "sha256": "f1162ba4d179fca2e48cd0f34625394b9734771204727e2e645b5372b4532bd7",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0530_0554.jsonl",
+      "first": 530,
+      "last": 554,
+      "sha256": "c2b535944347af1ea7cc5df84c46fa8888e101ce4ce4c728d294a98b10d7f06e",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0555_0580.jsonl",
+      "first": 555,
+      "last": 580,
+      "sha256": "53b93a38fb16bffae18096bf7dd69b80c8e37a0f3b3bdb3dd12e11d6a2025d9c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0581_0606.jsonl",
+      "first": 581,
+      "last": 606,
+      "sha256": "27faa99140554ced0fb9b9adc437c04502111095b259cd246aa7f133388c9784",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0607_0632.jsonl",
+      "first": 607,
+      "last": 632,
+      "sha256": "ad5d27016dfa2a733e438922538d3bb4515cce419f45324863e7e73d52bc23a3",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0633_0655.jsonl",
+      "first": 633,
+      "last": 655,
+      "sha256": "2024572928634b83e41be4eadc166a4836f8bf7bd8699b0d303fb4a9623bb40d",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0656_0676.jsonl",
+      "first": 656,
+      "last": 676,
+      "sha256": "6e4d430ee25a7c1e6b46a9d611644382e8baf9fa02aac3071156dd5b04d7bddf",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0677_0692.jsonl",
+      "first": 677,
+      "last": 692,
+      "sha256": "978990d66d5086cb77521b5bbf45e49e9d3d96ae0e8cf5f3361b4d34f65da411",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0693_0715.jsonl",
+      "first": 693,
+      "last": 715,
+      "sha256": "8e666099ebd8a7d2a167a437bc94942a2d7b145e7e3497015e388d206f699e7c",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 445,
+      "item_id": "gsm_train_2000",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "returns to her original $\\$10$ (or effectively, she has lost the $\\$40$ she just earned).",
+      "assessment": "Losing all savings resets to zero, not $10. Standard answer 7+18=25 books, not 24."
+    },
+    {
+      "index": 453,
+      "item_id": "gsm_train_1676",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "Wait, this logic is slightly flawed in phrasing. Let's re-verify:",
+      "assessment": "Wrong alternative 16-4-1=11 then self-correction; final 3 correct."
+    },
+    {
+      "index": 455,
+      "item_id": "ordinary_5_13",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "modern Python versions (3.7+) maintain insertion order as an implementation detail, sets do not guarantee order for logic purposes, and they are not indexed by position.",
+      "assessment": "Sets not insertion-ordered; confuses dictionaries."
+    },
+    {
+      "index": 458,
+      "item_id": "no_robots_9785a90c2503eebf05b19d0b58bee7e558d88d3d5792d3734a5f0f4dfc4421ee",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "slider.on_changed(update)",
+      "assessment": "No initial update call: blank edge pane until slider moved. Canny sigma/thickness explanation misleading."
+    },
+    {
+      "index": 462,
+      "item_id": "no_robots_30d87541684d80e282cfab8706f4c5b30bd61648a63b7a2a5975b21fd3f20fda",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "16. The Machine (Wait, the text says \"Florence and the Machine\". Alphabetical sorting of the full name \"Florence and the Machine\" places it under F. If we treat \"Florence and the Machine\" as a band, it starts with F. If we treat it as a person, it is",
+      "assessment": "Invented separate entity, duplicate band and many repeated draft lists/self-talk. Unsupported first name Mikayla Wray. Final list corrected."
+    },
+    {
+      "index": 466,
+      "item_id": "gsm_train_5239",
+      "used_for_training": false,
+      "type": "artifact",
+      "quote": "Time = 120 minutes.",
+      "assessment": "Unused length cutoff; extensive repetitive fencepost deliberation without final answer. First/last consumption endpoints assumed."
+    },
+    {
+      "index": 470,
+      "item_id": "ordinary_0_24",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "window_sum -= data[i - window_size]",
+      "assessment": "At first full window i=23 subtracts data[-1], corrupting averages. Claimed output/index alignment false."
+    },
+    {
+      "index": 477,
+      "item_id": "no_robots_b32c546fc0b9c1018990752ef160f8b0410cacf2bd9f0c4b31fb194f0798b270",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "size_t right = size - 1;",
+      "assessment": "Unsigned underflow empty array or mid=0 smaller target permits out-of-bounds access. Negative mean not floor; unsigned divisor can convert negative sum. Example sum actually 441, mean 36, not 426/35. File-count request contradictory."
+    },
+    {
+      "index": 485,
+      "item_id": "gsm_train_59",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "Hour 2: 35 coins",
+      "assessment": "Ambiguous: interprets 35 for next two hours as per-hour; total reading gives 85 not 120."
+    },
+    {
+      "index": 492,
+      "item_id": "gsm_train_4130",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "This usually implies the sum of what he could lift last year and what he can lift this year.",
+      "assessment": "Unjustified sum past/current capacities. Own current capacity calculated 90, final 120 unsupported. Original phrasing ambiguous."
+    },
+    {
+      "index": 493,
+      "item_id": "no_robots_89d2372da774cf71edb5261e689752902cc3a6e4047d598ec71e6bbb2761fe11",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "her hometown, in front of **70,000 fans**.",
+      "assessment": "Nashville career origin not hometown; Swift grew up Pennsylvania."
+    },
+    {
+      "index": 494,
+      "item_id": "gsm_train_1338",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "Wait, let me re-read the prompt carefully. \"The small ones require 1 bulb, the medium ones require 2, and the large ones need 3 bulbs.\")*",
+      "assessment": "Wrong medium-light count followed by visible correction; final 118 correct."
+    },
+    {
+      "index": 498,
+      "item_id": "no_robots_c81f15efd9e890b85e5a882d9b53f4c7e9386f2230ce59b1c0e3d52361209f94",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "Driving native species to extinction while they continue to spread.",
+      "assessment": "Extinction overstates supplied native populations dying off."
+    },
+    {
+      "index": 518,
+      "item_id": "no_robots_116f740283e4d89c54ca53108c1761b2582793059d766238f968e5ff7bcc491f",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "value %= 3        ; Equivalent to: value := value % 3",
+      "assessment": "Invalid AHK modulo syntax; mixed v1/v2 and invalid percent interpolation/MsgBox(%result%). Both-version compatibility claim false."
+    },
+    {
+      "index": 519,
+      "item_id": "gsm_train_7021",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "30 - 1 = 29 $$",
+      "assessment": "Assumes first car at time zero rather than first 20-minute wait; 9h40 vs customary 10h. Start phase unspecified."
+    },
+    {
+      "index": 530,
+      "item_id": "ordinary_1_46",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "Finally, remember that DNS caching is a fundamental part of internet speed.",
+      "assessment": "43 sentences rather than 46. getaddrinfo caching platform-dependent; Kubernetes caching deployment-dependent. Technical not moral advice."
+    },
+    {
+      "index": 531,
+      "item_id": "no_robots_53e20e5fa2ec2aa6ae28771243d548b92c664f8d563f489fc169bc1e1f07466c",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "Output: I love 3.14",
+      "assessment": "Actual output retains in Python. 0-based z and exception vs warning interpretation ambiguous."
+    },
+    {
+      "index": 559,
+      "item_id": "no_robots_c4df585995d4e748d2dfa31d183d5956c9a393532aeaac0fc2897b2c5c755289",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "base - shift) % 26",
+      "assessment": "Subtracts 10 instead of requested +10; j becomes z not t. Claimed decoded output false."
+    },
+    {
+      "index": 570,
+      "item_id": "ordinary_7_5",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "`5M` alone would match 5M and larger. For \"larger than,\" we use `+5M`.",
+      "assessment": "Without plus, find size is rounded equality, not 5M and larger. Main command correct."
+    },
+    {
+      "index": 572,
+      "item_id": "ordinary_5_42",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "in Python 3.7+, insertion order is preserved for display, but it is not guaranteed for logic, and you cannot rely on it for indexing).",
+      "assessment": "Sets do not preserve insertion order for display."
+    },
+    {
+      "index": 574,
+      "item_id": "gsm_train_322",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "standard service industry expectation of 15\u201320%.)*",
+      "assessment": "Unrequested geographically nonuniversal tipping norm, but contextual comparison not clear moral/persona instruction."
+    },
+    {
+      "index": 578,
+      "item_id": "gsm_train_5675",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "70-win record remains an NBA record. However, based strictly on the math problem provided, the answer is 145.)*",
+      "assessment": "False historical correction: Bulls won 72 in 1995-96 and Warriors later 73. Hypothetical arithmetic correct."
+    },
+    {
+      "index": 584,
+      "item_id": "no_robots_ae9c551acd9dee54047e8a9ac2bfe2ac5f55db72c7a349b174df55069ff90e57",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "const startX = (Math.random() * (this.canvas.width - this.side_length));",
+      "assessment": "Requested existing box flying from current position; instead no initial box and 20 particles from random position."
+    },
+    {
+      "index": 608,
+      "item_id": "gsm_train_5458",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "Does \"he has 4 barrels and a cask\" mean he has 5 containers total? Yes.",
+      "assessment": "Misreads cask capacity as ownership; barrels alone 172, not 192. Visible deliberation."
+    },
+    {
+      "index": 611,
+      "item_id": "gsm_train_4727",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "360 minutes from midnight, or simply 6:00).",
+      "assessment": "6 PM is 1080 minutes from midnight. Final 38 correct."
+    },
+    {
+      "index": 636,
+      "item_id": "no_robots_f9200faf3d8d563fc56fff09d2aaeb0e64ac8c914291c192f0215f722e72b23e",
+      "used_for_training": false,
+      "type": "correctness_or_interpretation",
+      "quote": "Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &SPI, OLED_RESET, -1, -1);",
+      "assessment": "Unused length cutoff mid-bitmap. Misassigned SPI constructor/DC=-1; no setup/begin/display transfer before cutoff. Incorrect bitmap/buffer layout claims; loop does no drawing or source increment; reset-to-GND advice may hold reset."
+    },
+    {
+      "index": 641,
+      "item_id": "ordinary_0_4",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "Moving Average (Window 4): {result}\")",
+      "assessment": "Correct function returns five averages [25,35,45,55,65], not listed six. Explanation arithmetic wrong."
+    },
+    {
+      "index": 647,
+      "item_id": "ordinary_4_40",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "const sortedData = data.sort((a, b) => b.count - a.count);",
+      "assessment": "Descending comparator labeled ascending; outputs and reverse example inverted."
+    },
+    {
+      "index": 659,
+      "item_id": "gsm_train_3942",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "Wait, let me re-read the prompt carefully.",
+      "assessment": "Long visible expenses correction and repeated month alternatives. Final 2660 explicitly uses 52/12 month, four-week alternative 2340; not definite arithmetic error."
+    },
+    {
+      "index": 665,
+      "item_id": "gsm_train_7094",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "in any consecutive 3-year period, there is at least one leap year unless the period crosses a century mark that isn't a leap year, but for a general math problem, we assume a standard cycle).",
+      "assessment": "False assertion every three-year period includes leap year. Unspecified dates: 3288 assumes leap day; 3285 alternative given. Self-talk."
+    },
+    {
+      "index": 673,
+      "item_id": "no_robots_72fabea5c275af027e3411e35daa6de29e7c1c4bfeb4e88696d4532da5e274f8",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "deprecated in Python 3.0 (removed in Python 3.4) not because it was \"bad\" code, but because it was **redundant, poorly maintained, and superseded by better, more standard solutions.**",
+      "assessment": "Actually deprecated 3.11 and removed 3.13, not removed 3.4. Base64 not compatible decoder for existing UUencoded data; migration misleading."
+    },
+    {
+      "index": 677,
+      "item_id": "gsm_train_1153",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "Let's stick with the 30-day assumption (10 visits).",
+      "assessment": "Extensive repeated month/visit deliberation with spurious discarded counts. Final 2050 correct under 30-day assumption."
+    },
+    {
+      "index": 679,
+      "item_id": "no_robots_90f878fff09cb463acfe7da491eb071e57ac9caca32cbfa1b9866ca8668aabc9",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "const id = ticketNumber || this._generateTicketNumber();",
+      "assessment": "Custom ticket IDs do not update counter/prevent duplicates; mixed custom/auto collide. Shallow returned copy not fully read-only. FIFO works."
+    },
+    {
+      "index": 685,
+      "item_id": "no_robots_500fa19a458b79f0e91fdf41c1f3d8bfb9d35c707928bca0202dfee16df125f6",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "file_mtime=$(stat -c %Y \"$file\" 2>/dev/null || stat -f %m \"$file\" 2>/dev/null)",
+      "assessment": "Modification not requested creation time. mv may overwrite collision; reruns append suffix repeatedly; -f follows symlinks despite claim. Garbling originates in request."
+    },
+    {
+      "index": 692,
+      "item_id": "ordinary_5_23",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "**insertion-ordered** (in Python 3.7+ for implementation details, but logically treated as unordered for operations). Crucially, you **cannot** access elements by index (e.g., `my_set[0]` will raise an error), and the visual order when printing might",
+      "assessment": "Sets not insertion-ordered in Python 3.7+; confuses dict."
+    },
+    {
+      "index": 701,
+      "item_id": "ordinary_4_33",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "{ name: \"Item A\", count: 33 },",
+      "assessment": "Output fenced json has invalid unquoted keys. Executable JS sort correct; prose subtraction wording reversed."
+    },
+    {
+      "index": 702,
+      "item_id": "no_robots_3b977cdb2f49102e8df30658323b20cf5d4f65c4631d16f563fb2824f48e65a4",
+      "used_for_training": true,
+      "type": "correctness_or_interpretation",
+      "quote": "const { MongoClient } = require('mongodb');",
+      "assessment": "ObjectId missing import in main code; valid ID fails. Later note supplies import. Server also listens before DB ready."
+    }
+  ],
+  "caveats": [
+    "All 12 chunks individually read with read tool, no truncation; includes unused 466 and 636. No actual refusal or clear moral/persona contamination found.",
+    "12 chunk hashes matched manifest and shard; sha256sum independently matched native raw control_replies.jsonl and training ctlgen.jsonl to corpus hashes.",
+    "Semantic review is not exhaustive external factual validation or execution. Interpretation ambiguities marked in assessments. Teacher untouched; no training approval."
+  ],
+  "status": "complete"
+}

@@ -1,0 +1,362 @@
+{
+  "author": "PI/OpenAI read-3",
+  "model": "OpenAI (runtime identifier unavailable)",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 275,
+  "read_ranges": [
+    [
+      716,
+      990
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_0716_0735.jsonl",
+      "first": 716,
+      "last": 735,
+      "sha256": "2a9322ec551610d005fb02b0f02273393a194d969adc773b7f04d108f597f96d",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0736_0758.jsonl",
+      "first": 736,
+      "last": 758,
+      "sha256": "2ba0e1ed5c40ace8233006f48cb15f87f41aa3d959b8ca39ab1d1a6415ccd24d",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0759_0780.jsonl",
+      "first": 759,
+      "last": 780,
+      "sha256": "10b1d45da64e50d25cc0c469b7f6b13bf349def10e87083e734f29b51f0a9e1c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0781_0803.jsonl",
+      "first": 781,
+      "last": 803,
+      "sha256": "00c93387ffef61dd791fda793c3d7887f0eb7640fa731e32307c39530b8b7c35",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0804_0827.jsonl",
+      "first": 804,
+      "last": 827,
+      "sha256": "fd46ae5428e8bc021e8c630ee77fae7234547cf497e74a5da1dece65f35cc3b5",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0828_0851.jsonl",
+      "first": 828,
+      "last": 851,
+      "sha256": "80f29f643026902b36c8deac5131e88eca8b61156fe16401a122e471e6cd4ed5",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0852_0878.jsonl",
+      "first": 852,
+      "last": 878,
+      "sha256": "e5fcd6dfc9582bb9641d855634b24dff8ce3bc5fbdd586e35c30ff8cd1b98221",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0879_0902.jsonl",
+      "first": 879,
+      "last": 902,
+      "sha256": "aa5140f672127b5f6cea51c380aff78241dfa1ac1f054051f0368ca8047e728c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0903_0922.jsonl",
+      "first": 903,
+      "last": 922,
+      "sha256": "565d50eef6e4cde2f89b628ab78a565cddb31df3b55a11c759e13780b2453ed7",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0923_0941.jsonl",
+      "first": 923,
+      "last": 941,
+      "sha256": "6edb71abb98ce31f0342b9a3889dd71beb050c6262faa9c6b6ffa8854389418c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0942_0968.jsonl",
+      "first": 942,
+      "last": 968,
+      "sha256": "09c7ff11543561e7a2512f2fc73baf01ef4b6494e00c0564d5a0ae8e7cdc466e",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0969_0990.jsonl",
+      "first": 969,
+      "last": 990,
+      "sha256": "0987e920350900decce490bea00dae3956dc72bfaac9bd17a7d8303599fcd47c",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 728,
+      "item_id": "no_robots_2dd7b31d8272c36f8e4752316fdb1a3dee6d0d76cf3f6578add872fc32947c62",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "we effectively prevent the username from ending in a dot or special char, which is a common validation rule.",
+      "assessment": "Regex permits trailing username punctuation despite claiming prevention; verbose contradictory domain parsing comments."
+    },
+    {
+      "index": 729,
+      "item_id": "no_robots_c899b6a5221d91862af9a859011ef7e8177a87436cfb90fff8d084edae628e61",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "The store sold 13 threads of black thread today",
+      "assessment": "Sample counts wrong: actual black26 blue22 green30 purple17 red24 white28 yellow34; counting code correct but no flattened all-colors list."
+    },
+    {
+      "index": 736,
+      "item_id": "ordinary_0_35",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Sum: $5+6+...+39 = 735$",
+      "assessment": "Last sum770 and average22, not735 and21; code correct."
+    },
+    {
+      "index": 742,
+      "item_id": "gsm_train_3118",
+      "used_for_training": true,
+      "type": "interpretation_uncertainty",
+      "quote": "Jason's monthly payments will be **$526.32**.",
+      "assessment": "Ambiguous interest basis: uses5% of total526.32 instead of additional5% on500 principal (525)."
+    },
+    {
+      "index": 748,
+      "item_id": "no_robots_ee33f27d4850d4fd3e89e6922b3cfde879ef4dad58607178ed0f6052bc922993",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "`time.time()` is called twice in every iteration (once in the condition check and once implicitly if the logic were different, but here it's strictly in the `while` condition). Since `time.time()` is a system call, it is relatively expensive compared to integer addition. This makes the loop run significantly slower than a pure \"busy wait\" loop in a lower-level language, introducing a bias in the measurement.",
+      "assessment": "Once per condition evaluation, not twice; parenthetical partially retracts."
+    },
+    {
+      "index": 750,
+      "item_id": "gsm_train_5051",
+      "used_for_training": true,
+      "type": "interpretation_uncertainty",
+      "quote": "the total steps attributed to Day 3 is 100.*",
+      "assessment": "Assumes Day3 total100; additional100 could mean1100 and total2600; uncertainty acknowledged."
+    },
+    {
+      "index": 762,
+      "item_id": "no_robots_894f2b70a8e2dc97273583cdf2d33d654fa7e71dd2a9664f733c3f75467db3d1",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "\"section\": \"0\", # 0 means the whole page, but we can filter by section ID later if needed",
+      "assessment": "Incorrectly says section0 means whole page; actually lead. TextExtracts generally excludes reference lists/URLs; approach unreliable, redundant requests. Not live-tested."
+    },
+    {
+      "index": 770,
+      "item_id": "ordinary_1_25",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Flushing the cache forces all applications to re-resolve every domain name.",
+      "assessment": "OS flush does not force separate application/browser caches to clear; blanket browser-ignore-OS claim unsupported."
+    },
+    {
+      "index": 773,
+      "item_id": "ordinary_1_35",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Only after this full chain is resolved is the result cached.",
+      "assessment": "DNS caching can include intermediate results and cached delegations; full root chain unnecessary."
+    },
+    {
+      "index": 799,
+      "item_id": "gsm_train_2504",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Is there a constraint I missed? \"She only has 60 wipes left.\"",
+      "assessment": "Repeated re-parsing of once/multiple refill assumption; final70 conditional on one cycle, not refusal."
+    },
+    {
+      "index": 804,
+      "item_id": "gsm_train_4407",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Self-Correction/Refinement: If the problem implies a 30-day month strictly, the number of deletion events might be 4 (since 30 days contains 4 full weeks) or the rate is continuous. However, 4 weeks is the most logical interpretation for integer-based word problems involving weekly rates. Let's stick with the 4-week model as it aligns the \"per week\" deletion rate perfectly with the time period.)*",
+      "assessment": "Repeated switches between30days and4weeks; final6200 valid conditional4-week result."
+    },
+    {
+      "index": 831,
+      "item_id": "no_robots_ec5f195ccea61d491a2df968b23bdb25a8c3c1992787c05d7744154f0f3ee3ba",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "React requires a **wrapper** if you want to pass multiple sibling elements directly. You can use a `<div>`, a `<Fragment>`, or an array.",
+      "assessment": "False: multiple children inside Card valid, including earlier supplied example."
+    },
+    {
+      "index": 840,
+      "item_id": "ordinary_4_50",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "subtract the first value from the second (`a.count - b.count`) to ensure ascending order. If you subtract in the reverse order, it will sort in descending order.",
+      "assessment": "Prose reverses subtraction direction; code a.count-b.count correct."
+    },
+    {
+      "index": 850,
+      "item_id": "gsm_train_1828",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "1.219391$$",
+      "assessment": "Exponent should1.220391; stated monthly-compounding assumptions yield3865.08, not3852.08. Assumption not specified in request."
+    },
+    {
+      "index": 870,
+      "item_id": "gsm_train_1451",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "New followers per day: $10,000$",
+      "assessment": "Reads1000/day as10000; correct365-day total445000 not3730000."
+    },
+    {
+      "index": 895,
+      "item_id": "no_robots_dd23c9b55a8adb8c6dcd44a6f88b368173fa4afb53cce5f1c170b04623c6a6e4",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "artistic, or, words, or, bloodshed. Spain's, Matisse, had, that, was, the, generally, one, with, The, Modernists, disliked, another's, but, admired, each, talent, plus, fact, that, Picasso, said, that, if, he, wasn't, he, paint, Matisse.",
+      "assessment": "Wrong extraction; every third whitespace word starts artistic,in,or. Multiword list entry bloodshed. Spain's."
+    },
+    {
+      "index": 896,
+      "item_id": "ordinary_1_47",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Linux and Windows handle cache expiration differently in their kernels.",
+      "assessment": "43 sentences, not47; falsely locates DNS cache expiration in kernels."
+    },
+    {
+      "index": 898,
+      "item_id": "ordinary_0_28",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "only 2 valid windows can be formed ($30 - 28 + 1 = 3$? No, $30-28=2$ windows starting at index 0 and 1). Wait, let's re-calculate the count:",
+      "assessment": "Wrong initial sample/comments, explicit correction to three windows [13.5,14.5,15.5]; code correct."
+    },
+    {
+      "index": 902,
+      "item_id": "gsm_train_1904",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "it would be impossible to collect exactly 3 leaves and 2 bugs daily to reach the exact totals of 30 and 20 in 10 days without exceeding one of the counts, but the question asks for the total \"items\" per day.)*",
+      "assessment": "False caveat:3 leaves+2 bugs daily exactly meets totals in10days; final5 correct."
+    },
+    {
+      "index": 903,
+      "item_id": "no_robots_43baf1a7bc3d373224aa6eb5c745c0db699d62bda94a26f2947b9dafbb9768f9",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "If you need the alias name to appear in error traces or logs, you can manually assign to it:",
+      "assessment": "Changing __name__ does not necessarily change traceback code-object name; original and alias share changed object. Core alias solution correct."
+    },
+    {
+      "index": 910,
+      "item_id": "gsm_train_289",
+      "used_for_training": false,
+      "type": "artifact_or_correctness",
+      "quote": "Actually, looking at the text again: \"3 more than twice the number of Fords than Chevys\".",
+      "assessment": "Unused length2048 cutoff, repeated grammatical re-parsing, no final answer;220 valid intermediate solution."
+    },
+    {
+      "index": 930,
+      "item_id": "ordinary_1_29",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Mastering DNS caching is a fundamental skill for backend engineers.",
+      "assessment": "30 sentences not29."
+    },
+    {
+      "index": 933,
+      "item_id": "no_robots_3f6907d6d1b7b6dc70af12774bbfaf2afe6741920272b4902b85d5b1fc18b079",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "while len(words) != len(sortedwords):",
+      "assessment": "Preserves inherited infinite loop on empty-string inputs (length starts1). Prepend solution otherwise correct; contradictory shortest-to-longest prose."
+    },
+    {
+      "index": 934,
+      "item_id": "no_robots_c2e2bcea7e55d60e230e08042808c99c0c8843eeb6caa4b95fe08ccfd911c4eb",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "No new movies or TV shows would be made until everyone finally shakes hands and agrees on a new plan.",
+      "assessment": "Overstates production shutdown beyond scripted works; invents demand limiting cancellations/layoffs. Requested simplified dispute summary, not contamination."
+    },
+    {
+      "index": 941,
+      "item_id": "gsm_train_6415",
+      "used_for_training": false,
+      "type": "artifact_or_correctness",
+      "quote": "Space of person with jacket = $\\frac{2}{3}$ unit (derived from $21 \\text{ people with jackets} = 14 \\text{ people without jackets equivalent}$).",
+      "assessment": "Unused length cutoff ends **23. Reversed space relationship: capacity14 with jackets means1.5 units/person, extra0.5/jacket; eight jackets permit17 total not23. Repetitive contradictory derivation."
+    },
+    {
+      "index": 942,
+      "item_id": "ordinary_5_27",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "While Python 3.7+ preserves insertion order as an implementation detail for CPython, you should **never** rely on a set being ordered. You cannot access items by index (e.g., `my_set[0]` will raise an error).",
+      "assessment": "False set insertion-order claim; confuses dicts."
+    },
+    {
+      "index": 952,
+      "item_id": "ordinary_1_41",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "They treat HTTPS connections with stricter caching rules than HTTP.",
+      "assessment": "42 sentences not41; conflates DNS with HTTP/content cache and unsupported stricter HTTPS DNS caching."
+    },
+    {
+      "index": 969,
+      "item_id": "gsm_train_3719",
+      "used_for_training": true,
+      "type": "interpretation_uncertainty",
+      "quote": "So, in the second 20-minute interval, she solved **20** problems.",
+      "assessment": "Unacknowledged ambiguity: completed twice as many after40minutes can mean cumulative20,55 left, not20 additional45 left."
+    },
+    {
+      "index": 981,
+      "item_id": "ordinary_5_9",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "While Python 3.7+ maintains insertion order as an implementation detail for CPython, sets are **not guaranteed** to preserve order across all Python implementations, and you **cannot** access elements by index.",
+      "assessment": "False insertion-order claim for sets; confuses dictionaries."
+    },
+    {
+      "index": 986,
+      "item_id": "gsm_train_2644",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "Carl must sell **60** cupcakes per day.",
+      "assessment": "Replaces explicit selling96 goal with invented remaining96 goal; conflates120 produced including24 payment with120 sold. Literal48 sales/day. Repetitive re-parsing."
+    },
+    {
+      "index": 990,
+      "item_id": "no_robots_8cc2f7f915f50163e1e1981e2115c231b3257b644126451407b5d53c389723b2",
+      "used_for_training": true,
+      "type": "artifact_or_correctness",
+      "quote": "create the DataFrame exactly as shown in your LaTeX table:",
+      "assessment": "Transposes original3x5 layout into four records, preserving data but false exact-layout/first-row-header claims."
+    }
+  ],
+  "caveats": [
+    "All12 complete chunks read individually through read tool, including unused910/941. All12 chunk hashes match manifest; raw control_replies.jsonl and training ctlgen.jsonl SHA256 verified against manifest.",
+    "No actual refusals or unrequested moral/persona content found.846 missing Tom score plus conditional90 is impossible-input clarification, not refusal. Supplied news/history summaries and fictional arithmetic not contamination.",
+    "External technical/factual claims not exhaustively verified; no live API tests. Interpretation flags explicitly uncertain. No teacher repairs or training approval.",
+    "Minor unit imprecision: shell find examples812,881,923,931 use binary MiB for megabytes."
+  ],
+  "status": "complete",
+  "manualNotes": "Full semantic review, read-only workspace; only external configured artifact written.",
+  "residualRisks": [
+    "No exhaustive external factual validation."
+  ]
+}

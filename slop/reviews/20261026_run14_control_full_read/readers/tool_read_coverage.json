@@ -1,0 +1,82 @@
+[
+  {
+    "key": "read-1",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/585c2a92-8ae3-4f1f-b75f-e4c44803bfdb/run-0/session.jsonl",
+    "run_id": "2393359d-1635-48a5-a328-e3e626f7b413",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 15,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-2",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/d9408696-be3c-410d-a2fd-3c93f4158354/run-0/session.jsonl",
+    "run_id": "6bbcd736-7aea-4e04-9758-2f7b9886ddb5",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 15,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-3",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/752c7ba5-7f72-4c6f-b66e-73c9c9755704/run-0/session.jsonl",
+    "run_id": "7454fbd3-6d66-4ff7-8cff-90bab7126f33",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 15,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-4",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/51eb97aa-4172-4899-9b7a-471bc538d39e/run-0/session.jsonl",
+    "run_id": "6ebebc8e-6955-41ef-9b7f-8507fc2b19d6",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 15,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-5",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/04de9595-8731-4961-a57c-e178ad8c56eb/run-0/session.jsonl",
+    "run_id": "59b6dd5a-4ad1-4b89-9d26-a546dcc926fe",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 15,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-6",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/f36367e3-f205-4ea3-91f3-dcddbe1777a6/run-0/session.jsonl",
+    "run_id": "0a165f82-1ff8-44a0-b033-dee799ad7baa",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 15,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-7",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/c68cc84b-4986-47ac-8ea3-4076b254e89f/run-0/session.jsonl",
+    "run_id": "15473c46-f0bf-4cb4-8988-cf874f495c25",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 12,
+    "observed_read_calls": 16,
+    "missing_chunks": [],
+    "state": "complete"
+  },
+  {
+    "key": "read-8",
+    "session_file": "/home/code/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-25T22-19-44-302Z_01a17525-f52d-74a7-a719-08bc7bbee4d2/135afb3e-4aed-4b0b-a25c-0492aa1fd41a/run-0/session.jsonl",
+    "run_id": "4923d3dc-c57a-428d-8c3b-144da8531f4e",
+    "model": "openai-codex/gpt-6.1-sol:low",
+    "expected_chunks": 5,
+    "observed_read_calls": 9,
+    "missing_chunks": [],
+    "state": "complete"
+  }
+]

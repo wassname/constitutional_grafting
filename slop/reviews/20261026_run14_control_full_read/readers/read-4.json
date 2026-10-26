@@ -1,0 +1,318 @@
+{
+  "author": "PI/OpenAI delegated reader read-4",
+  "model": "OpenAI (runtime model identifier not exposed)",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 296,
+  "read_ranges": [
+    [
+      991,
+      1286
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_0991_1014.jsonl",
+      "first": 991,
+      "last": 1014,
+      "sha256": "f470b4a457e48328a1deb05c177604ec4622b4d21dd3293cbbbf575ba00f6870",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1015_1039.jsonl",
+      "first": 1015,
+      "last": 1039,
+      "sha256": "d918a9a8adb5520b229880a9d2f25afda2239190389e9269aef23cad7e78fcd7",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1040_1066.jsonl",
+      "first": 1040,
+      "last": 1066,
+      "sha256": "fc6ccb17d74c0f21c42d05c604ac2df1d6755c11f97aea2f18100b7e17279a94",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1067_1088.jsonl",
+      "first": 1067,
+      "last": 1088,
+      "sha256": "a46e17ec5ca32817cae39eb4bb6461f836116808cdd05ed31f1dbdc72a3d382c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1089_1115.jsonl",
+      "first": 1089,
+      "last": 1115,
+      "sha256": "c42e3a01020b3e1b826f7639effd32c4f3241345e88a89c24e23d168f63b9b4a",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1116_1141.jsonl",
+      "first": 1116,
+      "last": 1141,
+      "sha256": "e5de78d9c7d2893066f1e5a62b2a7138cf60eccbd51bb75df2e1012f98d1cc8f",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1142_1167.jsonl",
+      "first": 1142,
+      "last": 1167,
+      "sha256": "bc1acf9038d234605c4be911a45c59f0e1b26e5175a690d7a3e63748c78ca739",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1168_1194.jsonl",
+      "first": 1168,
+      "last": 1194,
+      "sha256": "55c21c2a80e8a19ee6cb727d1f98a669608f5428c66d1809f51a4ac2dbccfa63",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1195_1217.jsonl",
+      "first": 1195,
+      "last": 1217,
+      "sha256": "c3b4ab3efcb38eac64517ae80ed2265e1b854263bee230649c6348c12198b32d",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1218_1241.jsonl",
+      "first": 1218,
+      "last": 1241,
+      "sha256": "b1057ceee46766aad1f4a7583d8e9b9a67e32ccc6dd68d597cebe50887ac7b75",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1242_1264.jsonl",
+      "first": 1242,
+      "last": 1264,
+      "sha256": "6cdb7a57231dfd0aa5b8738ac87c882e666bc2dafba3c150b0c392af7bac2665",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1265_1286.jsonl",
+      "first": 1265,
+      "last": 1286,
+      "sha256": "40e3865741a0802e2530d7c8ecf0343769d3be15c944434834aaa6e56114ca9a",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 996,
+      "item_id": "no_robots_54d78ae02e23587fe885d377532ed81b50cadc1def68d0785f66bd1208470bba",
+      "used_for_training": true,
+      "type": "source_grounding",
+      "quote": "without feeling wet",
+      "assessment": "Adds a property absent from the supplied source; not independently verified."
+    },
+    {
+      "index": 997,
+      "item_id": "no_robots_7f99e39f58062dc490f735938421496ec7ef0c010e08dafb6f19b188dc90bbc0",
+      "used_for_training": true,
+      "type": "extraction_format",
+      "quote": "truck, us, mirage, plunge, nevertheless, storm,\" lips. storming, so, inches, time, more, alive. storming, mirage.",
+      "assessment": "Omits line-final feeling and loses comma separation after storm, lips and alive."
+    },
+    {
+      "index": 1013,
+      "item_id": "gsm_train_7364",
+      "used_for_training": false,
+      "type": "cutoff_reasoning_arithmetic",
+      "quote": "60+10+60+10+60+10+60 = 360",
+      "assessment": "Actually 270 minutes. Extended visible self-questioning and contradictory assumptions end at “1.  **Lunch:** 30 minutes” without an answer; length cutoff, unused candidate."
+    },
+    {
+      "index": 1035,
+      "item_id": "ordinary_5_34",
+      "used_for_training": true,
+      "type": "technical_falsehood",
+      "quote": "**insertion-ordered** (since Python 3.7+",
+      "assessment": "Confuses sets with dictionaries: sets have no insertion-order guarantee."
+    },
+    {
+      "index": 1036,
+      "item_id": "no_robots_828b2e23472496afd9c094a4ec406c18227fad1c45d0b55804d6c11b4562f4d8",
+      "used_for_training": true,
+      "type": "extraction_error",
+      "quote": "**z** (not present)",
+      "assessment": "z is present in Jentzsch and Kaźmierczak; also omits accented letters despite asking all letters."
+    },
+    {
+      "index": 1060,
+      "item_id": "gsm_train_5873",
+      "used_for_training": true,
+      "type": "logic_defect",
+      "quote": "Since 14 boys and 11 girls can be evenly distributed into 4 classrooms, the condition is met.",
+      "assessment": "Equal distribution across classrooms is possible, but equal boys and girls within each classroom is not; falsely verifies ambiguous/impossible input."
+    },
+    {
+      "index": 1075,
+      "item_id": "no_robots_b45430577a8318d4534fd428293409e777bd44f5bc779c25d589dac4d5c72725",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "ami           = \"ami-0c55b159cbfafe1f0\" # Latest Amazon Linux 2",
+      "assessment": "Hardcoded placeholder does not implement latest-AMI requirement; fallback describe-images uses --owners self, not Amazon, and returns all sorted IDs rather than selecting latest. No AWS execution or AMI lookup performed."
+    },
+    {
+      "index": 1091,
+      "item_id": "gsm_train_5242",
+      "used_for_training": true,
+      "type": "explanation_defect",
+      "quote": "the math remains the same: $12 + (3 \\times 12)$",
+      "assessment": "Claims strict 300%-more interpretation gives same result; gift would then be 48 and total 60, rather than gift 36 / total 48. Ambiguous seed."
+    },
+    {
+      "index": 1109,
+      "item_id": "no_robots_ec53573559d9c4ad126b5cf6c759095a20563a091705bbe0f19812eb71532e93",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "Result: % (distanceMoved > threshold) ? \"Significant Movement!\" : \"No significant movement.\"",
+      "assessment": "Suspected AHK v1 legacy continuation/expression syntax mixing; embedded expression is not correctly evaluated as described. No AHK runtime available/tested."
+    },
+    {
+      "index": 1121,
+      "item_id": "gsm_train_6991",
+      "used_for_training": true,
+      "type": "arithmetic_explanation",
+      "quote": "$90\\% - 20\\% = 80\\%$",
+      "assessment": "False intermediate subtraction (70%, not 80%); actual multiplier and final 504 correct."
+    },
+    {
+      "index": 1128,
+      "item_id": "gsm_train_2011",
+      "used_for_training": true,
+      "type": "prompt_misunderstanding",
+      "quote": "Including Oliver himself, the total number of people playing is:",
+      "assessment": "Adds Oliver although request asks 60 games for his four friends; friends-only cost is $16 rather than $20."
+    },
+    {
+      "index": 1133,
+      "item_id": "ordinary_2_36",
+      "used_for_training": true,
+      "type": "invalid_input_preserved",
+      "quote": "the 36th of next month",
+      "assessment": "Preserves nonexistent calendar date from rewrite input without caveat; source defect, not refusal."
+    },
+    {
+      "index": 1145,
+      "item_id": "gsm_train_6510",
+      "used_for_training": true,
+      "type": "arithmetic_explanation",
+      "quote": "$0.5 \\text{ (setup)} + 1 \\text{ (record)} + 0.5 \\text{ (cleanup)} + 1.5 \\text{ (edit)} = 3$",
+      "assessment": "False sum (3.5). Setup and cleanup are each 0.25 per video, not 0.5; main batch calculation and answer 3 hours correct."
+    },
+    {
+      "index": 1149,
+      "item_id": "no_robots_bbf04f54d3bb629d7dfc14713ace12cfed0f2e4621a172b8349180c415023e0c",
+      "used_for_training": true,
+      "type": "fabricated_code_bug",
+      "quote": "the `reduce` call passes `args` which includes that function incorrectly for the standard `reduce` signature",
+      "assessment": "False bug allegation: apply(Object.keys(obj), [callback, optionalInitial]) is valid reduce invocation. Also ignores super briefly instruction."
+    },
+    {
+      "index": 1161,
+      "item_id": "ordinary_1_38",
+      "used_for_training": true,
+      "type": "format_violation",
+      "quote": "Proper cache management ensures users experience the web without unnecessary delays.",
+      "assessment": "37 newline-delimited sentences, requested 38. Some technical generalizations remain unverified."
+    },
+    {
+      "index": 1172,
+      "item_id": "gsm_train_1111",
+      "used_for_training": true,
+      "type": "ambiguous_parse",
+      "quote": "**Weight:** $4 \\frac{1}{2}$ pounds = $4.5$ pounds",
+      "assessment": "Reads “4 1/2 pound steaks” as 4.5 pounds, rather than four half-pound steaks (2 pounds). Under latter plausible/intended reading total $42, not $79.50."
+    },
+    {
+      "index": 1173,
+      "item_id": "gsm_train_3635",
+      "used_for_training": true,
+      "type": "internal_contradiction",
+      "quote": "So, the 21 blue notebooks cost",
+      "assessment": "Mislabels $21 as count; later correctly computes 7 blue notebooks at $3."
+    },
+    {
+      "index": 1208,
+      "item_id": "gsm_train_851",
+      "used_for_training": true,
+      "type": "reasoning_repetition_unsupported_assumption",
+      "quote": "**Answer:** Jane played **10** rounds.",
+      "assessment": "Long repetitive visible deliberation invents symmetric -10 loss rule; input only determines eight wins, not total rounds. Caveats occur in body but final is unconditional."
+    },
+    {
+      "index": 1209,
+      "item_id": "no_robots_9a87958a8b3f190493d51bb9ae0ca890f8f79fe3916356c1bf29bc7f33d49788",
+      "used_for_training": true,
+      "type": "technical_falsehood",
+      "quote": "bracket notation (e.g., `new_user[\"name\"]`)",
+      "assessment": "AHK v2 plain object properties use dot/dynamic-property syntax, not default indexed __Item access; supplied object creation itself is appropriate. Not runtime tested."
+    },
+    {
+      "index": 1218,
+      "item_id": "ordinary_2_34",
+      "used_for_training": true,
+      "type": "invalid_input_preserved",
+      "quote": "the 34th of next month",
+      "assessment": "Preserves nonexistent date supplied by rewrite request; no clarification/caveat."
+    },
+    {
+      "index": 1235,
+      "item_id": "ordinary_0_45",
+      "used_for_training": true,
+      "type": "arithmetic_explanation",
+      "quote": "Sum: $2 + 3 + ... + 46 = 1079$",
+      "assessment": "Sum is 1080; second average 24, not 23.9778. Implementation correct."
+    },
+    {
+      "index": 1238,
+      "item_id": "gsm_train_4963",
+      "used_for_training": true,
+      "type": "inconsistent_explanation",
+      "quote": "Each has 50% more episodes than the previous season (Season 1).",
+      "assessment": "Conflates previous season with first season. Main 18-per-season interpretation plausible; recurring 50% growth would differ and even imply fractional episodes."
+    },
+    {
+      "index": 1243,
+      "item_id": "ordinary_7_12",
+      "used_for_training": true,
+      "type": "technical_imprecision",
+      "quote": "it performs no read, write, or deletion operations",
+      "assessment": "find does read directory entries and metadata; does not modify regular-file contents. M means MiB on GNU find, not decimal MB."
+    },
+    {
+      "index": 1252,
+      "item_id": "ordinary_0_7",
+      "used_for_training": true,
+      "type": "fabricated_output",
+      "quote": "[10.0, 11.0, 12.0, 12.25, 12.8, 14.0, 15.0, 16.0",
+      "assessment": "Output disagrees with code starting at sixth item: actual 13.6667,14.5714,16.2857 etc. Code explicitly documents partial windows, not itself an error."
+    },
+    {
+      "index": 1260,
+      "item_id": "gsm_train_2344",
+      "used_for_training": true,
+      "type": "mathematical_falsehood",
+      "quote": "The order of operations does not change the final result",
+      "assessment": "Flat-addition and percentage multiplication do not commute: tickets first then 10% gives $71.50; selected accident-first $70 consistent. Two pure percentage multipliers do commute, contrary to following sentence."
+    },
+    {
+      "index": 1265,
+      "item_id": "no_robots_1d0098a26f83509ebe60ce3f80b94aaf1e3384a55d3be6fd7fbee1155799a6ba",
+      "used_for_training": true,
+      "type": "substantial_code_math_defect",
+      "quote": "The logic confirms that the number is **71**.",
+      "assessment": "Correct smallest prime-partition count >3000 is 65 (independent DP check). Code returns early after only a subset of primes, before all counts completed, so cannot ensure smallest integer; also uses >3001 instead of >3000."
+    }
+  ],
+  "caveats": [
+    "All 12 assigned chunks read in full one read-tool call each, including unused raw row 1013; no read-tool truncations.",
+    "Corpus raw/training hashes and all 12 chunk hashes verified against manifest with read-only commands.",
+    "No actual refusals or unrequested moral/persona content observed. Ordinary courtesy, supplied-source summaries, prayer and harmful-event arithmetic are not contamination.",
+    "Correctness review is not exhaustive external factual validation; AWS and AutoHotkey claims not runtime tested. Ambiguous-input cases explicitly distinguished. No teacher answers repaired or training approved."
+  ],
+  "status": "complete"
+}

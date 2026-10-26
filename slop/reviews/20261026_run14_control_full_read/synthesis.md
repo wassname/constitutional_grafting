@@ -1,0 +1,21 @@
+# Full control-corpus read
+
+PI/OpenAI (Sol), 2026-10-26. Approved for the frozen run14 generic control, with teacher mistakes retained unchanged as required. This is not approval of these answers for constitutional training.
+
+Coverage: all2,240 raw request/reply pairs read, including unused candidates. Main reader covered1–168 (first32 byte-matched to the independently reviewed pilot); eight exclusive fresh-context Sol readers covered169–2240. Their reports bind the raw/training hashes and every chunk hash. `readers/tool_read_coverage.json` verifies actual read-tool calls for every assigned chunk. No candidate is credited from sampling or a judge pass.
+
+- Raw SHA256: `e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a`.
+- Training SHA256: `3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c`.
+- Training:2,178rows,788,567supervisedtokens;39tokens below788,606target. Fourteen truncated raw candidates excluded by the predeclared rule; other unused rows are beyond the token target. No correctness, refusal or persona filtering/repair.
+- Actual refusals found:0/2,240raw and0/2,178training. A caveat, an invalid-input answer or dietary-suitability advice is not a refusal to help.
+- Accepted moral/persona lessons found:0. One reader flagged raw256/gsm_train_915: “as an AI, I must solve the problem **as stated** or explicitly state the assumption.” Main reread the entire request/reply: this is generic assistant self-reference amid repetitive unit analysis, not constitutional teaching. It was already excluded for `length`, not filtered for this content.
+- Eight readers reported226flags, mostly arithmetic/code defects, invented sample outputs, misunderstood instructions, repeated visible deliberation and noncompliance with sentence counts. Main read all226claims and their original-context excerpts (`source_spotchecks.jsonl`), checked item identity/training membership and quote provenance, and reread the sole persona flag in full.225quotes match exactly after whitespace normalization;2212 omits backticks around `find`, and its original excerpt confirms the claim. These checks are not exhaustive external factual verification or execution of every code sample. Ambiguous interpretations and runtime-specific allegations remain labelled as such in the reader reports.
+- Repeated substantive baseline error: sets incorrectly described as insertion-ordered in Python3.7+. Other examples:185 reverses “opponent lost by2”;673 invents the `uu` removal timeline;1488 adds a duplicate Python `else`; several moving-average examples have correct code and false printed results. Retain them: replacing them would stop measuring the untouched teacher's actual instruction-following update.
+- Prompt defect: ordinary meeting invitations include impossible dates above31. The teacher repeats them. Record source-generation defect; do not alter frozen data or regenerate. Political/news summaries, charity arithmetic, task-relevant code cautions and vegan ingredient advice are not unrequested moral training.
+- Visible deliberation in several answers is ordinary visible output under thinking-off, not evidence that a hidden reasoning channel was trained. Native wire/template/mask checks report no hidden-channel/marker leakage; pilot loss masks passed. These artifacts and errors limit control quality but do not violate the approved unedited-teacher protocol.
+
+Independent cheap-model pilot review remains separate: `../20261026_run14_control_pilot_package/independent_review.md`. Parallel full readers are coverage, not a second-model-family review. Their complete reports, chunk hashes and workflow receipt are retained in `readers/`.
+
+Early checks completed through the unchanged production functions:3-step tiny native training and first5real-checkpoint projection modules. `slop/eval/run14_box_a/early_smokes.log` ends “EARLY PRODUCTION PROJECTION SMOKE COMPLETE.” The canonical driver repeats its smokes after this gate. Do not use the deliberately incomplete smoke adapter in evaluations.
+
+Interpretation remains confounded by EOS: all control answers supervise the end marker;903/1,636 executed D targets do not. Control subtraction may alter stopping as well as instruction-following. Compare measured capability at matched character effect and report stopping separately.

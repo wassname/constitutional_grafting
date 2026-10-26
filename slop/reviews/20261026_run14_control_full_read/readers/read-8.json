@@ -1,0 +1,179 @@
+{
+  "author/model": "PI/OpenAI delegated reader read-8",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 127,
+  "read_ranges": [
+    [
+      2114,
+      2240
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_2114_2141.jsonl",
+      "first": 2114,
+      "last": 2141,
+      "sha256": "08ca304c1450fde9e6297057f4acced2fac85a5e37378d52fc5ece011d8c4c71",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2142_2165.jsonl",
+      "first": 2142,
+      "last": 2165,
+      "sha256": "2210bcb8d1b3bdfa1a25bbda12b1c35857f0fd2b6f0848f33cc536e0eb99af10",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2166_2190.jsonl",
+      "first": 2166,
+      "last": 2190,
+      "sha256": "2cd63d47d82e31a8d56e44ed5790e23d45320e7e510d46e106330241e90c6af2",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2191_2217.jsonl",
+      "first": 2191,
+      "last": 2217,
+      "sha256": "238c2c8e29fb08c345c8f6a049c7a632d39ea4630bcb0dc879f4342a425c6ea3",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2218_2240.jsonl",
+      "first": 2218,
+      "last": 2240,
+      "sha256": "c1cad6e8dcc51e30a4c0893221b600536cd76b9177864b8434a5d69a2e26f9e7",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 2114,
+      "item_id": "gsm_train_1486",
+      "used_for_training": true,
+      "type": "math_defect",
+      "quote": "Tammy has gotten **79** haircuts in total.",
+      "assessment": "Counts 79 paid haircuts but omits the five free additional haircuts; literal total is 84."
+    },
+    {
+      "index": 2131,
+      "item_id": "gsm_train_3824",
+      "used_for_training": true,
+      "type": "input_inconsistency_unacknowledged",
+      "quote": "Maria's total initial money ($450 \\times 3 = \\$1350$)",
+      "assessment": "Computes $1650 distributed despite deriving only $1350 initial money; source constraints inconsistent, not a refusal."
+    },
+    {
+      "index": 2136,
+      "item_id": "no_robots_6a78c90d9be12a0e2b1cfab5c3c78bc6a5c3d6b33e9da200ab5166ad4c0c26f6",
+      "used_for_training": true,
+      "type": "technical_inaccuracy",
+      "quote": "overflow-y: auto; /* Hide vertical scrollbar */",
+      "assessment": "auto enables overflow scrolling, not hiding the scrollbar. Working hiding rules are separately supplied. Also calls Chrome/Edge Webkit engines and Firefox-specific standard property; browser claims not exhaustively validated."
+    },
+    {
+      "index": 2157,
+      "item_id": "gsm_train_4201",
+      "used_for_training": true,
+      "type": "reasoning_defect",
+      "quote": "score at the beginning of the game (which is the same as the end of the first quarter in this context)",
+      "assessment": "Incorrectly equates beginning-of-game and end-Q1 scores; intended arithmetic still yields 30."
+    },
+    {
+      "index": 2159,
+      "item_id": "gsm_train_975",
+      "used_for_training": true,
+      "type": "interpretation_ambiguity",
+      "quote": "John gets **160** free throws.",
+      "assessment": "Answers attempts; plausible literal reading, while success-rate-inclusive intended answer may be 112. Explicitly provides 112 as made-shot alternative; not definite arithmetic error."
+    },
+    {
+      "index": 2161,
+      "item_id": "ordinary_0_6",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "current_sum = sum(data[:window_size])\n    result.append(current_sum / window_size)",
+      "assessment": "No short-input guard: empty list returns [0.0], fewer than six values produce a spurious partial-window average divided by six."
+    },
+    {
+      "index": 2170,
+      "item_id": "no_robots_1cf6235d2279bf60fdda833bc1a6db5e0389760a8af18c7fa216e54bca012881",
+      "used_for_training": true,
+      "type": "code_instruction_defect",
+      "quote": "if file_obj and not file_obj.closed:\n        file_obj.close()",
+      "assessment": "Closes before printing error although user requests error then close. No success-path close/finally; normal execution leaves file open. Replaces unspecified existing operation_synthesis with fabricated filename red_3 instead of preserving file handle meaning."
+    },
+    {
+      "index": 2186,
+      "item_id": "gsm_train_1756",
+      "used_for_training": true,
+      "type": "math_assumption",
+      "quote": "To cover the full amount, she must work **138 hours**.",
+      "assessment": "Adds unsupported whole-hour payroll restriction; exact needed time is 137 1/3 hours (137h20m). Approximate exact value also supplied."
+    },
+    {
+      "index": 2194,
+      "item_id": "ordinary_5_33",
+      "used_for_training": false,
+      "type": "technical_falsehood",
+      "quote": "**Sets** are **unordered** (in older Python versions) or **insertion-ordered** (in Python 3.7+)",
+      "assessment": "Confuses sets with dictionaries: Python sets do not guarantee insertion order; later table contradicts this claim."
+    },
+    {
+      "index": 2212,
+      "item_id": "ordinary_7_11",
+      "used_for_training": false,
+      "type": "technical_inaccuracy",
+      "quote": "find calculates size in 1KB blocks by default",
+      "assessment": "Default find size units are 512-byte blocks, not 1KB. M means MiB, not decimal MB; bare 11M is rounded-size equality rather than at-least threshold. Main command is conventional binary interpretation."
+    },
+    {
+      "index": 2218,
+      "item_id": "gsm_train_2945",
+      "used_for_training": false,
+      "type": "interpretation_ambiguity",
+      "quote": "each player makes half of the total moves.",
+      "assessment": "Assumes 30 individual half-moves. Standard chess full-move counting gives 30 moves per player and 34 minutes, not 17; prompt ambiguous."
+    },
+    {
+      "index": 2224,
+      "item_id": "gsm_train_6391",
+      "used_for_training": false,
+      "type": "prompt_interpretation_defect",
+      "quote": "There are **80** puzzle pieces missing.",
+      "assessment": "Discards initial 75-piece border as included in later contributions; sequential reading gives 500-75-105-315=5. States assumption but overclaims standard interpretation."
+    },
+    {
+      "index": 2230,
+      "item_id": "ordinary_0_11",
+      "used_for_training": false,
+      "type": "math_output_defect",
+      "quote": "Moving Average (Window 11): [60.0, 69.0909090909091, 78.18181818181819, 87.27272727272727, 96.36363636363636]",
+      "assessment": "Code correct, both displayed outputs wrong. Actual averages [60,70,80,90,100]. Claimed second sum 760 should be 770; correction fixes count only. Visible self-questioning arithmetic artifact also present."
+    },
+    {
+      "index": 2236,
+      "item_id": "no_robots_553635555e2c152bb434002808b9ac9bd7e3690c00192d0954a61861b8906f00",
+      "used_for_training": false,
+      "type": "summary_factual_distortion",
+      "quote": "COVID-19 canceled Burrow's pro day and prevented him from working out at the NFL Combine",
+      "assessment": "Source says he and teammates opted out of combine to recharge, not that COVID prevented combine workout."
+    },
+    {
+      "index": 2237,
+      "item_id": "no_robots_2c7e39e90990cfa21e61794ad071f522f3cca4ff3d9352344ce107a7af184ab3",
+      "used_for_training": false,
+      "type": "extraction_distortion",
+      "quote": "**1,000**: The number of employees added (noted as an increase).",
+      "assessment": "Infobox Number of employees Increase 1,000 (2019) ordinarily denotes total employees with trend arrow, not 1000 additions. Source formatting allows some ambiguity."
+    }
+  ],
+  "caveats": [
+    "All 127 actual requests and full replies semantically read via five separate read calls, including unused rows. All five chunk hashes and both corpus hashes verified by read-only SHA256 commands.",
+    "No actual refusals, unrequested moral/persona lessons, hidden markers, or cutoffs found. UX caveat in 2136 is task-relevant, not moral contamination; 2226 summarizes supplied historical stigma rather than endorsing it.",
+    "Real-world claims not exhaustively externally validated. Input inconsistencies in 2158 are explicitly acknowledged by teacher. Teacher text preserved; no training approval."
+  ],
+  "status": "complete"
+}

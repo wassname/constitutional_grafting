@@ -1,0 +1,381 @@
+{
+  "author": "PI/OpenAI delegated read-5",
+  "model": "OpenAI coding assistant (runtime model not independently queried)",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 279,
+  "read_ranges": [
+    [
+      1287,
+      1565
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_1287_1311.jsonl",
+      "first": 1287,
+      "last": 1311,
+      "sha256": "967328eebd5c60adda771c00cf6c518875dfce06fa6c0585c1b626cdef0c7e4c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1312_1333.jsonl",
+      "first": 1312,
+      "last": 1333,
+      "sha256": "ec71ee17a46987bd22fca0acc33981ac77b1baf3ef504ff3a72227a0c3ec2c3b",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1334_1351.jsonl",
+      "first": 1334,
+      "last": 1351,
+      "sha256": "79d9cef3be1256db18eaa94001eb34d83bb7d66e0b07847b1833e7484cdaba4d",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1352_1373.jsonl",
+      "first": 1352,
+      "last": 1373,
+      "sha256": "9533ca51e947bf97b1cc819db8847aa483cc1b775b4f65c02c014547c030e145",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1374_1394.jsonl",
+      "first": 1374,
+      "last": 1394,
+      "sha256": "9b2c1238521f67f01f451d322d89a160244ca61ad999d71877cf2db666282539",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1395_1418.jsonl",
+      "first": 1395,
+      "last": 1418,
+      "sha256": "ddbdf5516e1fa436efe1765e1731d0005f88f5d229c18224df1a4567503ca09a",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1419_1444.jsonl",
+      "first": 1419,
+      "last": 1444,
+      "sha256": "0c0b02b5abbd5d4319e736260d66a4d110f046455887513bcb7e9b5ee8474074",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1445_1466.jsonl",
+      "first": 1445,
+      "last": 1466,
+      "sha256": "ce6e94ba07250f06817382aaec79d9b0e01cb3a4ba2fef72caf715ca7af58fbb",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1467_1488.jsonl",
+      "first": 1467,
+      "last": 1488,
+      "sha256": "f7bb0adabbb57ad142a313fb447861f5550a2208d8d32f1f581aac1578255101",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1489_1514.jsonl",
+      "first": 1489,
+      "last": 1514,
+      "sha256": "db4ffbd5e2e083a08ef59bb7094f9708476a0cc1071468dbd4e1086f302a8408",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1515_1535.jsonl",
+      "first": 1515,
+      "last": 1535,
+      "sha256": "c58f9bf93677c3adfe95913100e481ed3f8798f45e9c6ee1f7ba8c9d3ba27bca",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1536_1565.jsonl",
+      "first": 1536,
+      "last": 1565,
+      "sha256": "8eee50c4bca7578b4b6500124ea7480dba4e6c56e57fcbcdbaf11e4d6fc83ac7",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 1297,
+      "item_id": "gsm_train_1755",
+      "used_for_training": true,
+      "type": "math/prompt interpretation",
+      "quote": "Total Distance} = 150 + 50 = 200",
+      "assessment": "Likely omits 50-mile return to route; out-and-back reading gives 250 miles and 5 hours. Wording ambiguous."
+    },
+    {
+      "index": 1299,
+      "item_id": "ordinary_7_22",
+      "used_for_training": true,
+      "type": "technical factual defect",
+      "quote": "no read or write operations",
+      "assessment": "find reads directory entries and metadata; no modification is correct, no reads is not."
+    },
+    {
+      "index": 1334,
+      "item_id": "ordinary_7_16",
+      "used_for_training": true,
+      "type": "technical factual defect",
+      "quote": "no read, write, or deletion operations",
+      "assessment": "find reads directory entries and metadata; no modification is correct, no reads is not."
+    },
+    {
+      "index": 1334,
+      "item_id": "ordinary_7_16",
+      "used_for_training": true,
+      "type": "technical precision",
+      "quote": "M` specifies the unit as megabytes",
+      "assessment": "GNU find M means MiB, not decimal megabytes; command otherwise standard."
+    },
+    {
+      "index": 1448,
+      "item_id": "ordinary_7_20",
+      "used_for_training": true,
+      "type": "technical precision",
+      "quote": "M` specifies the unit as megabytes",
+      "assessment": "GNU find M means MiB, not decimal megabytes; command otherwise standard."
+    },
+    {
+      "index": 1489,
+      "item_id": "ordinary_7_4",
+      "used_for_training": true,
+      "type": "technical precision",
+      "quote": "M` specifies the unit as megabytes",
+      "assessment": "GNU find M means MiB, not decimal megabytes; command otherwise standard."
+    },
+    {
+      "index": 1312,
+      "item_id": "gsm_train_6350",
+      "used_for_training": false,
+      "type": "artifact/repetition/cutoff",
+      "quote": "If I say \"I have",
+      "assessment": "Repeated interpretation debate consumes 2048 tokens and cuts off mid-sentence; unused."
+    },
+    {
+      "index": 1316,
+      "item_id": "no_robots_75b9ffeb6ae8872d6cf601c7f077670b541a33e68ff85c04cf8ded0db56bc402",
+      "used_for_training": true,
+      "type": "code example output defect",
+      "quote": "(2.378414230005442-1.681792830507429j)",
+      "assessment": "Incorrect sqrt(4-8j) output; actual approximately 2.544039299-1.572302756j. Code itself correct."
+    },
+    {
+      "index": 1336,
+      "item_id": "gsm_train_1909",
+      "used_for_training": false,
+      "type": "artifact/repetition/cutoff",
+      "quote": "BUT, the text says",
+      "assessment": "Repeated cumulative-versus-interval debate ends mid-sentence at token limit; unused, not refusal."
+    },
+    {
+      "index": 1337,
+      "item_id": "no_robots_c1cf03253b94f1ecc3657157f63fa013834a4f2caaae7023edec8ee5bc8f5afc",
+      "used_for_training": false,
+      "type": "code/artifact/repetition/cutoff",
+      "quote": "If (Result % 2 = 0)",
+      "assessment": "AHK v1 needs Mod(), IsNumber is undefined, multiline MsgBox malformed; fabricated repeated lyric consumes limit without closing code. Integer result always even; unused."
+    },
+    {
+      "index": 1342,
+      "item_id": "no_robots_f1fad1fb2127555591027322360ecb2003366273ca274dc9a785ae5f99bab807",
+      "used_for_training": true,
+      "type": "technical factual defect",
+      "quote": "Without the `+`, it would find files modified *less* than that time ago.",
+      "assessment": "Unsigned -mtime N matches a day bucket, not less-than N. Count via wc -l also miscounts newline filenames; no refusal or contamination in task-relevant warning."
+    },
+    {
+      "index": 1347,
+      "item_id": "gsm_train_5846",
+      "used_for_training": true,
+      "type": "math defect",
+      "quote": "180 \\text{ kg} \\times 3 = 540",
+      "assessment": "Three triples are nine repetitions: 180*3*3=1620 kg, not 540."
+    },
+    {
+      "index": 1353,
+      "item_id": "gsm_train_6976",
+      "used_for_training": true,
+      "type": "prompt interpretation",
+      "quote": "we must assume the **total count increases by 20 each week**",
+      "assessment": "Substitutes constant total increment for increasing weekly additions; 130 relies on expressly altered/unsupported assumption; literal statement underdetermined."
+    },
+    {
+      "index": 1359,
+      "item_id": "no_robots_0c7146f83bc65cdd57bd1a4171b87f03b7bfa345370bee2289f96532c38b4b2f",
+      "used_for_training": true,
+      "type": "code/factual defect",
+      "quote": "AHK arrays are **0-based**",
+      "assessment": "AHK arrays are 1-based. Both offered versions can select index 0 and omit last item; v1 version also mixes v2 Random()/Length/Run syntax. Reverses version guidance."
+    },
+    {
+      "index": 1370,
+      "item_id": "no_robots_77e95bd80c3fa9b9dcbf1b09e083b934111a69cccea99688e0abcc070d3b79c2",
+      "used_for_training": true,
+      "type": "format violation",
+      "quote": "  fi\n  # Pause",
+      "assessment": "Requested comment before EACH line: no comment before fi or done. Original code preserved rather than repaired."
+    },
+    {
+      "index": 1374,
+      "item_id": "no_robots_5113eceb3fba71c65a0f471ac89eb7ce732e220771f0be6ecad1f004034ec5e1",
+      "used_for_training": true,
+      "type": "code defect",
+      "quote": "userIdElement.innerText.trim()",
+      "assessment": "Hidden iframe display:none can make innerText differ from textContent; empty/missing-element rejection paths do not remove iframe, despite robust cleanup claim. No timeout. Not refusal."
+    },
+    {
+      "index": 1378,
+      "item_id": "no_robots_eab64622bcfa4121bd60d3fe521b7d195108b93d684b09dd9ddc5a3792f8b440",
+      "used_for_training": true,
+      "type": "technical factual defect",
+      "quote": "`:.3` tells Python to format the number with 3 decimal places in standard notation",
+      "assessment": "For floats omitted format type uses significant-digit/general-style behavior, not fixed 3 decimal places. Proposed .3e fix correct."
+    },
+    {
+      "index": 1383,
+      "item_id": "ordinary_5_20",
+      "used_for_training": true,
+      "type": "technical factual defect",
+      "quote": "insertion order is preserved in modern Python 3.7+",
+      "assessment": "Confuses set with dict; sets do not guarantee insertion order."
+    },
+    {
+      "index": 1446,
+      "item_id": "ordinary_5_47",
+      "used_for_training": true,
+      "type": "technical factual defect",
+      "quote": "insertion-ordered (in Python 3.7+)",
+      "assessment": "Confuses set with dict; sets do not guarantee insertion order."
+    },
+    {
+      "index": 1419,
+      "item_id": "no_robots_f58aa1570f532eb4369c811660c650b78177b56951162e88b9114afc0f89fad8",
+      "used_for_training": true,
+      "type": "code defect",
+      "quote": "if [ ${#parts[@]} -ge 3 ]; then",
+      "assessment": "Requires four parts for three underscores; condition also renames two-underscore names. mv lacks -- for leading-hyphen filenames; line-based read breaks newline names."
+    },
+    {
+      "index": 1434,
+      "item_id": "ordinary_2_48",
+      "used_for_training": true,
+      "type": "invalid-input propagation",
+      "quote": "48th of next month",
+      "assessment": "Faithfully rewrites impossible supplied calendar date without noting invalidity; input defect preserved, not fabricated date or refusal."
+    },
+    {
+      "index": 1439,
+      "item_id": "gsm_train_4601",
+      "used_for_training": true,
+      "type": "minor arithmetic inconsistency",
+      "quote": "4.345$ (since there are 52 weeks in a year and 12 months)",
+      "assessment": "52/12 is 4.3333, not 4.345; later alternative uses 4.3333 correctly; main explicitly approximate 80-hour answer unaffected."
+    },
+    {
+      "index": 1442,
+      "item_id": "ordinary_1_18",
+      "used_for_training": true,
+      "type": "format/factual defects",
+      "quote": "Mastering DNS caching is essential for building fast and reliable web applications.",
+      "assessment": "19 sentences rather than requested 18. Linux caching not universal; local cache flush cannot force recursive caches to refresh. Technical generalizations not persona contamination."
+    },
+    {
+      "index": 1443,
+      "item_id": "no_robots_159eaf5027f84b1792e718014a59d9899bac15e1a3e864dc22dbcf283e2e41a8",
+      "used_for_training": true,
+      "type": "format defect",
+      "quote": "}).format(date);",
+      "assessment": "en-US combined formatter commonly inserts \"at\" (Jul 18 at 3:41 PM), not exact requested comma; runtime/locale dependent."
+    },
+    {
+      "index": 1475,
+      "item_id": "gsm_train_3467",
+      "used_for_training": true,
+      "type": "math/prompt interpretation",
+      "quote": "Total Bills} = (25 - 15) + 1 = 10 + 1 = 11",
+      "assessment": "Includes not-yet-received 25th birthday bill then allows fractional physical bills; likely intended 10 prior birthdays gives $12. Reply acknowledges integer inconsistency but settles $13.20."
+    },
+    {
+      "index": 1488,
+      "item_id": "no_robots_1397073cb9e2e5b48dd50feef77f34e51031ca98102b642b0f70b4de72e25589",
+      "used_for_training": true,
+      "type": "code defect",
+      "quote": "    else:\n        # If there is no valid extension (e.g., no dot or starts with a dot), return an empty string\n        else:",
+      "assessment": "Adds duplicate else producing SyntaxError and falsely claims original indentation was incorrect. Also omits comment before original else."
+    },
+    {
+      "index": 1510,
+      "item_id": "ordinary_4_44",
+      "used_for_training": true,
+      "type": "explanation inconsistency",
+      "quote": "subtract the first value from the second (`a.count - b.count`)",
+      "assessment": "Words describe b-a but code is a-b; sorting code correct."
+    },
+    {
+      "index": 1522,
+      "item_id": "gsm_train_5059",
+      "used_for_training": true,
+      "type": "arithmetic defect",
+      "quote": "160 \\text{ toys} \\times \\$10 = \\$800",
+      "assessment": "160*10=1600, not 800. Main cash-change answer $800 correct; alternative profit reasoning invalid and ignores unsold toys cost."
+    },
+    {
+      "index": 1527,
+      "item_id": "no_robots_4cacde984443d7279d539d4a3f2c6be11c6da32983422547b83b5e11ef44b77c",
+      "used_for_training": true,
+      "type": "code/type explanation defect",
+      "quote": "zip<number[], string[]>",
+      "assessment": "Function has one type parameter T, so displayed explicit two-type-argument usage is invalid; refined code unchanged despite claiming stricter version without as any. Misses zero-input infinite empty-array generator. No execution claimed."
+    },
+    {
+      "index": 1528,
+      "item_id": "no_robots_8f34e5273febf3d8bea1a2606aaf80113fdb2918f3d27c8b93f6f7aad2a954d7",
+      "used_for_training": true,
+      "type": "source misunderstanding",
+      "quote": "hold the crouch button to sprint silently",
+      "assessment": "Source says hold x/a while crouching to speed up, not hold crouch button; adds questionable sprint/crouch instructions not grounded in excerpt."
+    },
+    {
+      "index": 1536,
+      "item_id": "no_robots_d167b94e9e12f10204a270f6d0797c095f08ec4d17e297699a42cc766e7dbbd3",
+      "used_for_training": true,
+      "type": "extraction defect",
+      "quote": "9. Richmond (Announced in 2023)",
+      "assessment": "Includes announced future opening among places already opened; supplied text only establishes announcement, not opening."
+    },
+    {
+      "index": 1539,
+      "item_id": "no_robots_7210810f0e50d88b04c35cc29f9b5b8b7e5f82ede37ea17760fd7178a836cca1",
+      "used_for_training": true,
+      "type": "unsupported/source conflict",
+      "quote": "originally developed in the late 1980s",
+      "assessment": "Adds unsupported development date conflicting with supplied started-in-1990 description; external history unverified."
+    },
+    {
+      "index": 1548,
+      "item_id": "ordinary_0_39",
+      "used_for_training": true,
+      "type": "code example output defect",
+      "quote": "First few moving averages: [20.0, 20.0, 20.0]\nLast moving average: 30.5",
+      "assessment": "Actual output first [20.0,21.0,22.0], last 31.0. Function correct."
+    },
+    {
+      "index": 1553,
+      "item_id": "no_robots_5c3c4ffa29d14c3b045b8d6120a89cd672f358372e19e182da3c5ab991fba969",
+      "used_for_training": true,
+      "type": "extraction categorization defect",
+      "quote": "**Monarchs (by Name)**\n*   William of Orange-Nassau\n*   Willem-Alexander\n*   Catharina-Amalia",
+      "assessment": "Mislabels stadtholder and heir apparent as monarchs; omits Napoleon Bonaparte though user requests all monarchs by name/position. Ambiguous extraction scope."
+    }
+  ],
+  "caveats": [
+    "All 12 complete chunks semantically read through read, including three unused length-limited candidates. No actual refusal or unrequested moral/persona lesson identified. Routine caveats, requested summaries and fictional/harm arithmetic not contamination.",
+    "All assigned chunk hashes independently verified against manifest; native raw control_replies.jsonl independently SHA256 verified. Training SHA256 matches control_ready.json attestation, but corresponding training file not located locally, so training bytes not independently hashed.",
+    "No exhaustive external factual validation or code execution. Findings preserve teacher mistakes; no training approval or workspace edits."
+  ],
+  "status": "complete"
+}

@@ -1,0 +1,304 @@
+{
+  "author/model": "PI/OpenAI delegated read-7",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 270,
+  "read_ranges": [
+    [
+      1844,
+      2113
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_1844_1867.jsonl",
+      "first": 1844,
+      "last": 1867,
+      "sha256": "fc4481c49738466394a3ffd93d586180421bf4b3108d75a087bba63156205d86",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1868_1890.jsonl",
+      "first": 1868,
+      "last": 1890,
+      "sha256": "87ddb4b6308a8f17dc19297b1960a85a0a2f42c8dd6e5344a21fd8061b06fce1",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1891_1911.jsonl",
+      "first": 1891,
+      "last": 1911,
+      "sha256": "c5d1939b0ffdc298b8ea5c1fe12ee65cf05f640129a533d8e68f1274889cfe92",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1912_1935.jsonl",
+      "first": 1912,
+      "last": 1935,
+      "sha256": "12d2bfcdbe5cee2cefe47633725b743bd7a0cc8d09016f7763f209f640a150f5",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1936_1955.jsonl",
+      "first": 1936,
+      "last": 1955,
+      "sha256": "2e018e8e9e932d15d6774f75db610c334b25dab828af0ee47816fc5f61e5f981",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1956_1978.jsonl",
+      "first": 1956,
+      "last": 1978,
+      "sha256": "af2f3a01ed3787f4d5637d3c88a6dbc304adc7fe9f9303fba09d58bce0ffd896",
+      "fully_read": true
+    },
+    {
+      "path": "rows_1979_1999.jsonl",
+      "first": 1979,
+      "last": 1999,
+      "sha256": "47401b08900103948dc1783160c45d7e01ca42b35606d1c215c329cc739e3ef2",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2000_2020.jsonl",
+      "first": 2000,
+      "last": 2020,
+      "sha256": "413a2fb03e3bc26b6095ee14f5d5d68fac1f9e1f6914d8374ec0ff6c6cf33967",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2021_2044.jsonl",
+      "first": 2021,
+      "last": 2044,
+      "sha256": "86020b52a10dc6af46f195f38baa94142079a28ad6a318d0af0a835188fd26c0",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2045_2065.jsonl",
+      "first": 2045,
+      "last": 2065,
+      "sha256": "01a31f1e87deaa2b7656bed971c05a4cae70ceac0e08ebeb753fc94c564bb0e6",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2066_2090.jsonl",
+      "first": 2066,
+      "last": 2090,
+      "sha256": "a6fb0b90e834d1f03380663a2ccff8eacea1b23e85b22a3ac6ada93d16c7133c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_2091_2113.jsonl",
+      "first": 2091,
+      "last": 2113,
+      "sha256": "a85dfbca438494b9ab08a9b319dc6071df97673c963aea8035837329f4e48ee5",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [],
+  "findings": [
+    {
+      "index": 1845,
+      "item_id": "no_robots_fea87bd26767da396b88d2c7a568c54fbf7db52e80a2b21e41a45a1c29f32b70",
+      "used_for_training": true,
+      "type": "prompt_misunderstanding",
+      "quote": "A young woman arrives late for a job interview",
+      "assessment": "Changes late arrival at rental into lateness for interview."
+    },
+    {
+      "index": 1846,
+      "item_id": "ordinary_7_31",
+      "used_for_training": true,
+      "type": "technical_inaccuracy",
+      "quote": "use `-size 31M` if you want to include exactly 31MB",
+      "assessment": "GNU find rounds sizes up; 31M also matches sizes above 30 MiB through 31 MiB, not exact byte equality."
+    },
+    {
+      "index": 1850,
+      "item_id": "no_robots_61865e4027c70efc2d1e529c08cbb783b7f605b56a5fb9638b3a8efa56dfbc64",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "sed -i '' \"s/'/\\\"/g\" \"$file\" 2>/dev/null || sed -i \"s/'/\\\"/g\" \"$file\"",
+      "assessment": "Global replacement is not JS-aware: e.g. single-quoted strings containing unescaped double quotes become invalid; apostrophes in double-quoted strings change meaning. Robust/99% claims unsupported; caveats do not fix script."
+    },
+    {
+      "index": 1869,
+      "item_id": "no_robots_a9a066997988d4d02d7e3ee4a8496631cedd1acbd7da11a619f21d4113201ec1",
+      "used_for_training": true,
+      "type": "code_math_defect",
+      "quote": "(0.8235412490269027+0.5403190693748575j)",
+      "assessment": "Incorrect example atan(1+1j): real component is approximately 1.01722, imaginary 0.40236. atan(1j) raises ValueError, misleadingly reported as invalid numeric input. Invalid-result branch also prints a message despite claiming no output."
+    },
+    {
+      "index": 1870,
+      "item_id": "no_robots_719b8fcc11066515418514a695159cb5fd92876accee4ce960394c1142147acf",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "new Promise(function (executor_function(resolve, reject) { ... }))",
+      "assessment": "Displayed constructor signature is syntactically malformed JavaScript; original explanation otherwise useful."
+    },
+    {
+      "index": 1874,
+      "item_id": "gsm_train_5174",
+      "used_for_training": true,
+      "type": "factual_overstatement",
+      "quote": "We know that hanging upside down provides",
+      "assessment": "Treats explicitly described rumor as established growth mechanism; arithmetic follows fictional premise, not refusal or moral contamination."
+    },
+    {
+      "index": 1878,
+      "item_id": "no_robots_f92552260020250a0d3af027c82c6fb43aaf297241e2578bb1dc09f3f7be330f",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "for page_id, page_data in pages.items():",
+      "assessment": "formatversion=2 returns pages as a list, so direct API example fails with AttributeError. Also calls third-party wikipedia library official."
+    },
+    {
+      "index": 1889,
+      "item_id": "no_robots_d55bcbb842b72a88d7dc9086a1140a1b37cbd7458d369bc36fb4bcad78c053ee",
+      "used_for_training": true,
+      "type": "factual_defect",
+      "quote": "While both are ten-line poetic forms",
+      "assessment": "Nonet has nine lines; supplied text only attributes ten lines to etheree."
+    },
+    {
+      "index": 1897,
+      "item_id": "gsm_train_1868",
+      "used_for_training": false,
+      "type": "cutoff_repetition",
+      "quote": "Question: How many feet are there left for Max to catch",
+      "assessment": "Unused length-terminated reply repeatedly reconsiders ambiguity and ends mid-sentence. Also asserts -170 + 470 = +440 earlier (actually 300)."
+    },
+    {
+      "index": 1910,
+      "item_id": "gsm_train_1397",
+      "used_for_training": true,
+      "type": "reasoning_repetition",
+      "quote": "If the answer seems odd, we will reconsider the other interpretation.",
+      "assessment": "Visible deliberative re-reading and two scenarios for straightforward antecedent; final arithmetic correct. No hidden marker observed."
+    },
+    {
+      "index": 1914,
+      "item_id": "gsm_train_7124",
+      "used_for_training": true,
+      "type": "unsupported_criticism",
+      "quote": "is logically inconsistent with a price increase",
+      "assessment": "No contradiction: restrictions can lower sales volume. Calculation correct."
+    },
+    {
+      "index": 1916,
+      "item_id": "gsm_train_5275",
+      "used_for_training": true,
+      "type": "text_artifact",
+      "quote": "Peachy needs to add",
+      "assessment": "Unrequested name mutation from Peggy to Peachy in conclusion."
+    },
+    {
+      "index": 1931,
+      "item_id": "gsm_train_5703",
+      "used_for_training": true,
+      "type": "ambiguous_math_interpretation",
+      "quote": "2 people purchased 4 hamburgers each.",
+      "assessment": "Adds each where prompt lacks it; yields 0 rather than 4 more if each pair bought 4 and 2 collectively. Ambiguous source, not definite arithmetic error."
+    },
+    {
+      "index": 1934,
+      "item_id": "ordinary_5_32",
+      "used_for_training": true,
+      "type": "technical_inaccuracy",
+      "quote": "Insertion-ordered (in Python 3.7+)",
+      "assessment": "Confuses set with dict ordering guarantee; sets remain unordered."
+    },
+    {
+      "index": 1943,
+      "item_id": "gsm_train_4576",
+      "used_for_training": true,
+      "type": "math_prompt_misunderstanding",
+      "quote": "tosses 6 new sets to the audience is a distractor",
+      "assessment": "Excludes distributed stock from sets gone through; natural total consumption is (5+6)*30=330, not 150. Interpretation uncertainty noted."
+    },
+    {
+      "index": 1950,
+      "item_id": "gsm_train_2401",
+      "used_for_training": false,
+      "type": "cutoff_repetition",
+      "quote": "**Segment 3: The Chase (6 AM to 6:30 AM)**",
+      "assessment": "Unused length-terminated answer repeatedly revisits timeline and cuts off without final total; available segments imply 135 miles."
+    },
+    {
+      "index": 1955,
+      "item_id": "no_robots_12da3596881209bac23e51c59ee348dbcf3019c1dee88a882f7801bf1e0fb690",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "num1 = int(words[i-1])",
+      "assessment": "Assumes immediately adjacent numeric tokens without justification. Ordinary word-and-number input such as John has 10 apples and loses 2 apples raises ValueError on apples; boundary operator can leave None operands."
+    },
+    {
+      "index": 1960,
+      "item_id": "no_robots_7adf36ee3440ad9429f5bb00e3cb81729831e2411328c00834d6fbf3632c9896",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "Write-Host \"Error processing $inputPath: $_\"",
+      "assessment": "PowerShell variable followed directly by colon is parsed as scoped variable and causes invalid variable reference; needs braced interpolation. Not executed here."
+    },
+    {
+      "index": 1966,
+      "item_id": "no_robots_880cb79faebe10c44b4a373ef10bcb1d7d0fa042a43223fd71ae4fc3111859ec",
+      "used_for_training": true,
+      "type": "source_factual_noise",
+      "quote": "12 players were awarded the title",
+      "assessment": "Repeats supplied false historical count: inaugural FIDE award was 27 players. Source-attributed answer, not contamination; current count not independently verified."
+    },
+    {
+      "index": 1985,
+      "item_id": "gsm_train_3341",
+      "used_for_training": false,
+      "type": "cutoff_repetition",
+      "quote": "Why? Because if it meant \"2",
+      "assessment": "Unused reply alternates 9500/12000 interpretations repeatedly and cuts off mid-sentence, no settled answer."
+    },
+    {
+      "index": 2020,
+      "item_id": "no_robots_6286b86de15ddbf305fd0ca7af5cec21a398a05b1759d45ed1d8e655279c218d",
+      "used_for_training": true,
+      "type": "code_defect",
+      "quote": "return row[0]",
+      "assessment": "Fallback can call arbitrary non-number when first voicemail row has no 10-digit cell. Passes bare 10-digit values despite acknowledging E.164 requirement; code not repaired by prose note."
+    },
+    {
+      "index": 2054,
+      "item_id": "no_robots_9158b22d1d71acad933993656b78960ebddd058c77bc20a61353e63fa17569c0",
+      "used_for_training": true,
+      "type": "arithmetic_defect",
+      "quote": "Sum of all grades: 1391\nAverage grade: 77.28",
+      "assessment": "Actual sum 1371 and mean 76.1667 (76.17); supplied executable summing code correct but claimed output/final answer wrong."
+    },
+    {
+      "index": 2085,
+      "item_id": "ordinary_2_40",
+      "used_for_training": true,
+      "type": "invalid_input_unnoticed",
+      "quote": "on the 40th of next month",
+      "assessment": "Preserves impossible calendar date without clarification; requested rewrite source itself invalid, not refusal."
+    },
+    {
+      "index": 2112,
+      "item_id": "ordinary_7_36",
+      "used_for_training": true,
+      "type": "technical_inaccuracy",
+      "quote": "If you wanted \"36 MB or larger,\" you would omit the `+`.",
+      "assessment": "GNU find -size 36M matches rounded-up sizes above 35 MiB through 36 MiB, not >=36 MiB."
+    }
+  ],
+  "caveats": [
+    "All 270 actual requests and full replies, including unused candidates, read via 12 individual read calls without truncation. Corpus and assigned chunk hashes verified read-only.",
+    "No actual refusals or unrequested moral/persona lessons found. Ordinary technical advice, source summaries, courtesy and harmful-scenario arithmetic are not classified as contamination.",
+    "Not exhaustive external factual validation or code execution. Source ambiguity and visible deliberative prose distinguished from hidden reasoning markers. Teacher outputs preserved; no training approval."
+  ],
+  "status": "complete",
+  "manualNotes": "Read-only semantic review completed; only configured external artifact written.",
+  "residualRisks": [
+    "External API and historical claims not exhaustively verified; ambiguous word problems may have alternate intended answers."
+  ]
+}

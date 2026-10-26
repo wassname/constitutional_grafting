@@ -1,0 +1,359 @@
+{
+  "author": "PI/OpenAI read-1",
+  "model": "OpenAI; exact runtime ID unverified",
+  "corpus_raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "corpus_training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "fully_read_rows": 275,
+  "read_ranges": [
+    [
+      169,
+      443
+    ]
+  ],
+  "chunks": [
+    {
+      "path": "rows_0169_0191.jsonl",
+      "first": 169,
+      "last": 191,
+      "sha256": "4e7393297999d58a8d474896b097b8537e5e4af0c4a30725efe616e9062351b3",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0192_0214.jsonl",
+      "first": 192,
+      "last": 214,
+      "sha256": "5bf102fa553528a2cba15361ae82a3f44000a383c3316be656784c9e7ca14499",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0215_0234.jsonl",
+      "first": 215,
+      "last": 234,
+      "sha256": "f15ee541b39744bf285dfb1dd0124cb5c83719a1ad871da6a3852b2cd6f9b89e",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0235_0255.jsonl",
+      "first": 235,
+      "last": 255,
+      "sha256": "a6055ecb358bc519d98b61b96792b24cff7ebb67b06f3294b02e133eb60228fc",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0256_0273.jsonl",
+      "first": 256,
+      "last": 273,
+      "sha256": "5e7fa351407af2c8ab821a8f0450de8461022b936feb3764987306133cd036b2",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0274_0300.jsonl",
+      "first": 274,
+      "last": 300,
+      "sha256": "0732c8d6483814f74c7308fd7fc9d8d431fab59c889ca1f0889785cc5ab0eb32",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0301_0327.jsonl",
+      "first": 301,
+      "last": 327,
+      "sha256": "4f94448f482319e8347045a0551dba0f47b2c7c7b513a820eebdcb0a2b0015bc",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0328_0345.jsonl",
+      "first": 328,
+      "last": 345,
+      "sha256": "7e4b2659a0c28e0dd648c0c26ee7c12b635e758737d75f719ecdb6219e05802c",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0346_0369.jsonl",
+      "first": 346,
+      "last": 369,
+      "sha256": "3215bad0b7a4608fdc4d17366b38760d3d03985746dbdaa459b753c012bde302",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0370_0393.jsonl",
+      "first": 370,
+      "last": 393,
+      "sha256": "e5d546bcb6ec01fc89a1b0ff49d835d2d8699e8004eeb80a889a029efb77e743",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0394_0418.jsonl",
+      "first": 394,
+      "last": 418,
+      "sha256": "f1397b297b8c916f77ce7ae9e4c19b05df06bbbef7e448c4535cf28a46af1d91",
+      "fully_read": true
+    },
+    {
+      "path": "rows_0419_0443.jsonl",
+      "first": 419,
+      "last": 443,
+      "sha256": "a803b6b8480a913f146a68f674868b4bcbca597de05ba5a872d3fe114129b537",
+      "fully_read": true
+    }
+  ],
+  "refusal_ids": [],
+  "contamination_ids": [
+    "gsm_train_915"
+  ],
+  "findings": [
+    {
+      "index": 171,
+      "item_id": "no_robots_4a07f79d7e14663ef1bd8bfd8adae1be4723451fc0f05a9b9d00827a37de2f4e",
+      "used_for_training": true,
+      "type": "factual",
+      "quote": "without extra dependencies",
+      "assessment": "Misleadingly includes bcrypt among standard-library solutions; bcrypt requires pip as later acknowledged."
+    },
+    {
+      "index": 180,
+      "item_id": "gsm_train_6538",
+      "used_for_training": true,
+      "type": "math/ambiguity",
+      "quote": "143 + 1 = 144",
+      "assessment": "Bridge generally creates two fence segments, not one. Endpoint/grid assumptions unstated; 288 not assured."
+    },
+    {
+      "index": 183,
+      "item_id": "no_robots_fd678bec14891a6eecf08d615b63d5e8c03945b226eee7b73b51ab05c97344e7",
+      "used_for_training": true,
+      "type": "instruction",
+      "quote": "British (United Kingdom)",
+      "assessment": "Lists nationality under B rather than country United Kingdom under U in requested alphabetical countries."
+    },
+    {
+      "index": 185,
+      "item_id": "gsm_train_3466",
+      "used_for_training": true,
+      "type": "math",
+      "quote": "2 points higher",
+      "assessment": "Reverses opponent lost by 2; opponent should score 11 not 15."
+    },
+    {
+      "index": 231,
+      "item_id": "no_robots_9ebc71d588d1dc3b50605806f66056e7d390b353ccb96a4162a4ce460ce1c4b5",
+      "used_for_training": true,
+      "type": "code/factual",
+      "quote": "Stop and Start",
+      "assessment": "Edited EC2 user data does not normally rerun on reboot/stop-start. Assumes Amazon Linux from EC2; package instructions version-dependent, unverified."
+    },
+    {
+      "index": 234,
+      "item_id": "ordinary_0_50",
+      "used_for_training": true,
+      "type": "code/output",
+      "quote": "Number of output averages: 10",
+      "assessment": "Code returns 11 windows ending 34.5, not reported 10."
+    },
+    {
+      "index": 235,
+      "item_id": "gsm_train_3764",
+      "used_for_training": false,
+      "type": "artifact",
+      "quote": "Unless \"2",
+      "assessment": "Unused length cutoff mid-sentence after extensive repetitive visible deliberation over band interpretations."
+    },
+    {
+      "index": 256,
+      "item_id": "gsm_train_915",
+      "used_for_training": false,
+      "type": "artifact",
+      "quote": "**Alternative Calculation (Ass",
+      "assessment": "Unused length cutoff after repeated unit interpretations; legitimate physics caveat, not refusal."
+    },
+    {
+      "index": 256,
+      "item_id": "gsm_train_915",
+      "used_for_training": false,
+      "type": "persona",
+      "quote": "as an AI",
+      "assessment": "Unrequested generic AI identity/duty assertion in math answer; weak persona contamination, not constitutional teaching."
+    },
+    {
+      "index": 258,
+      "item_id": "gsm_train_2515",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "Let's re-read carefully",
+      "assessment": "Repeated visible deliberation before/until threshold; final 1 defensible strictly-before interpretation; not moralizing or refusal."
+    },
+    {
+      "index": 273,
+      "item_id": "no_robots_bfd37bf3fb02790513bce160c7e9b83828d88fcc6c1b65911836a38630936782",
+      "used_for_training": true,
+      "type": "code/factual",
+      "quote": "InStr(text, searchWord, true)",
+      "assessment": "Falsely calls true case-insensitive; it is case-sensitive. Spelling difference y/i not y/x. Later for key in keywords iterates AHK array indices, not values, so searches numbers."
+    },
+    {
+      "index": 283,
+      "item_id": "no_robots_fd6b6b28b28ff691aacdb97cc45e0bfcde80f7f729337f3812106c8992a9b3ed",
+      "used_for_training": true,
+      "type": "factual",
+      "quote": "first time a surgical procedure",
+      "assessment": "Overbroad public general-anesthesia first claim; earlier public nitrous-oxide demonstration existed. Supplied text only claims first successful public ether demonstration; details not externally sourced."
+    },
+    {
+      "index": 291,
+      "item_id": "gsm_train_4498",
+      "used_for_training": true,
+      "type": "math",
+      "quote": "125 cm",
+      "assessment": "Contradicts first board longer than others; invents cutting others down to 118. Source narrative itself inconsistent."
+    },
+    {
+      "index": 295,
+      "item_id": "gsm_train_1780",
+      "used_for_training": true,
+      "type": "math",
+      "quote": "$30$ regular hours",
+      "assessment": "Alternative overtime arithmetic wrong: actual 40 regular plus 10 overtime gives 742.50; stated 30/20 expression gives 810 not 815. Main 675 correct single-rate assumption."
+    },
+    {
+      "index": 302,
+      "item_id": "gsm_train_1820",
+      "used_for_training": true,
+      "type": "reasoning",
+      "quote": "these **25** new pieces",
+      "assessment": "Omits original 5 loose chocolates; two-box final coincidentally correct for 30 loose chocolates."
+    },
+    {
+      "index": 309,
+      "item_id": "gsm_train_2289",
+      "used_for_training": true,
+      "type": "math/ambiguity",
+      "quote": "**$9.00** more",
+      "assessment": "Reaches exactly $50, not strictly over $50 as source says. Inclusive conventional threshold possible."
+    },
+    {
+      "index": 333,
+      "item_id": "no_robots_293a54a5e6e661ada4276cc86c391599745fe26bc7ae18aae708283268bb31b6",
+      "used_for_training": true,
+      "type": "factual/format",
+      "quote": "Basic indexing/slicing only",
+      "assessment": "array.array has append/extend/pop etc., not only indexing/slicing or fixed size. Malformed table separator : ---."
+    },
+    {
+      "index": 338,
+      "item_id": "gsm_train_4091",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "*Self-Correction/Refinement*",
+      "assessment": "Extensive repetitive visible deliberation about even/equal counts; 60 depends on explicitly stated equality assumption."
+    },
+    {
+      "index": 343,
+      "item_id": "no_robots_9b2b6df5b27748c86df8094660248675bb8bbb1e3aa3c7f87f5ae18f2c7937de",
+      "used_for_training": true,
+      "type": "code",
+      "quote": "MouseClickDrag(\"L\", StartX + sideLength, StartY, 0, 0, 0, \"M\")",
+      "assessment": "Invalid M relative parameter, expects R/omitted; coordinates drag from calculated point to 0,0, not intended vertices. Falsely says M medium speed, Window client area; CoordMode sets not gets. Visible self-correction."
+    },
+    {
+      "index": 362,
+      "item_id": "ordinary_7_48",
+      "used_for_training": true,
+      "type": "factual",
+      "quote": "safe threshold",
+      "assessment": "Claim +50M catches all >48 MB false, misses 48\u201350 MiB; main +48M fine binary interpretation."
+    },
+    {
+      "index": 363,
+      "item_id": "no_robots_0caf58a431e7df9ceefa9c9aabe348b6b0319f37801a8634ca212d044402f12a",
+      "used_for_training": true,
+      "type": "code/factual",
+      "quote": "curl -s \"$METADATA_URL\"",
+      "assessment": "Root metadata endpoint lists categories not values. No IMDSv2 token where required; no pipefail masks curl failure. Comment says -f but absent."
+    },
+    {
+      "index": 368,
+      "item_id": "ordinary_5_15",
+      "used_for_training": true,
+      "type": "factual",
+      "quote": "insertion order is preserved",
+      "assessment": "False for sets, confuses dict ordering; also not sorted by hash value."
+    },
+    {
+      "index": 372,
+      "item_id": "gsm_train_7418",
+      "used_for_training": true,
+      "type": "reasoning",
+      "quote": "1 bottle cap weighs 1 ounce",
+      "assessment": "Misquotes seven caps per ounce; later uses correct factor and final 2016."
+    },
+    {
+      "index": 375,
+      "item_id": "gsm_train_2313",
+      "used_for_training": true,
+      "type": "artifact",
+      "quote": "Wait, let's re-evaluate",
+      "assessment": "Introduces wrong future age ratio then corrects it; final 72 correct, visible self-correction."
+    },
+    {
+      "index": 377,
+      "item_id": "ordinary_0_18",
+      "used_for_training": true,
+      "type": "code/math",
+      "quote": "Output Moving Averages: [16.944444444444443, 17.0]",
+      "assessment": "Code returns three values approximately [17.1667,17.2778,17.1667]; first sums 309 and 311 not 305/306."
+    },
+    {
+      "index": 392,
+      "item_id": "no_robots_72e975dd68968102d700d62ee8063bf0c0a9e3d128b0efc35431c33d47f26c3c",
+      "used_for_training": true,
+      "type": "code",
+      "quote": "font-custom font-700",
+      "assessment": "font-700 not default utility; nested fontWeight custom mapping invalid. Correct @font-face examples later do not cure misleading configuration."
+    },
+    {
+      "index": 398,
+      "item_id": "ordinary_5_19",
+      "used_for_training": true,
+      "type": "factual",
+      "quote": "maintain insertion order as an implementation detail",
+      "assessment": "False for sets; confuses dictionary ordering."
+    },
+    {
+      "index": 411,
+      "item_id": "ordinary_1_49",
+      "used_for_training": true,
+      "type": "format/factual",
+      "quote": "force a cache refresh by changing the TTL",
+      "assessment": "48 sentences rather than requested 49. Lowering TTL does not force existing cached records to expire; must wait previous TTL."
+    },
+    {
+      "index": 423,
+      "item_id": "ordinary_7_49",
+      "used_for_training": true,
+      "type": "factual",
+      "quote": "49 MB is 49,152 KB",
+      "assessment": "Wrong conversion (49 MiB=50,176 KiB); +50M alternative also misses >49 <=50 MiB. Main +49M reasonable binary interpretation."
+    },
+    {
+      "index": 429,
+      "item_id": "gsm_train_4117",
+      "used_for_training": true,
+      "type": "math/instruction",
+      "quote": "**Answer:** 4 years",
+      "assessment": "Recognizes explicit current-age target was four years ago, then overrides to future-age comparison and final +4; actual wording no future solution, not refusal."
+    },
+    {
+      "index": 434,
+      "item_id": "ordinary_2_47",
+      "used_for_training": true,
+      "type": "input/accuracy",
+      "quote": "47th of next month",
+      "assessment": "Retains impossible source date without caveat; no month day 47. Source defect, not invented correction."
+    }
+  ],
+  "caveats": [
+    "All 12 chunks fully read via read one per call, including unused candidates. No actual refusals or hidden token markers observed. Visible deliberation flagged separately.",
+    "Raw corpus, training corpus and 12 chunk hashes verified with read-only commands. No workspace, data, gates or progress modified.",
+    "No exhaustive external factual validation or code execution; version-dependent claims remain unverified. Ambiguous premises distinguished from certain defects. Teacher mistakes preserved; not training approval."
+  ],
+  "status": "complete"
+}

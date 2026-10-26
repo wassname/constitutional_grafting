@@ -5,7 +5,7 @@
   "read_ranges": [
     [
       1,
-      168
+      2240
     ]
   ],
   "chunks_read": [
@@ -65,5 +65,19 @@
       ]
     }
   ],
-  "status": "PENDING; main fullread through168/2240; remaining169-2240 assigned to8exclusive Sol readers; no training approval"
+  "status": "COMPLETE;2240raw/2178training rows read;226readerflags source-spotchecked; frozen control approved",
+  "main_read_ranges": [
+    [
+      1,
+      168
+    ]
+  ],
+  "team_read_ranges": [
+    [
+      169,
+      2240
+    ]
+  ],
+  "readers_workflow": "05cf4fad-120a-469d-baa3-c65ba6b93964",
+  "synthesis_path": "slop/reviews/20261026_run14_control_full_read/synthesis.md"
 }

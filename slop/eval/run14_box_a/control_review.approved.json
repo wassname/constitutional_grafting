@@ -1,0 +1,43 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "approved_utc": "2026-10-26T13:10:49Z",
+  "sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "fully_read_rows": 2178,
+  "fully_read_raw_rows": 2240,
+  "main_read_ranges": [
+    [
+      1,
+      168
+    ]
+  ],
+  "team_read_ranges": [
+    [
+      169,
+      2240
+    ]
+  ],
+  "refusal_ids": [],
+  "refusal_count": 0,
+  "accepted_contamination_ids": [],
+  "unused_generic_ai_reference_ids": [
+    "gsm_train_915"
+  ],
+  "independent_review_path": "slop/reviews/20261026_run14_control_full_read/synthesis.md",
+  "pilot_independent_review_path": "slop/reviews/20261026_run14_control_pilot_package/independent_review.md",
+  "full_reader_workflow": "05cf4fad-120a-469d-baa3-c65ba6b93964",
+  "full_reader_reports": {
+    "read-1.json": "1231cf44d29c038c2b20c371ac31ed1b111aca3ed7720d6296abd60e0d31281e",
+    "read-2.json": "28f8a5211a970e18a00c8e439ee4a5df637effcc111c95d1a14b2d69437dad92",
+    "read-3.json": "1e2777cc9d6abab95a8a2e3dc423baada4009accfa731605096d468d027bbbc4",
+    "read-4.json": "854eae5d10236e5c6aee0dacbef1828087bc11582739306c5322e128e15e7410",
+    "read-5.json": "efa665b4883e1e0375142096b4c3971b6e1c8857f30e860ed3a22aa1a4b474e4",
+    "read-6.json": "2e52f8fad5261235801fc3d2c3fa1ad2c34d3d7dccd68d7ebd676bc182a8ad80",
+    "read-7.json": "b6b6cd28b678fc42bf03edce991f9ed77bf85cbc1dab624581cb559fd1da099a",
+    "read-8.json": "542854ae6c1856b08428710dba2f76070a881938a8f1855b3cba41a3456b5c1e"
+  },
+  "all_226_flags_source_spotchecked": true,
+  "teacher_mistakes_retained_unedited": true,
+  "supervised_tokens": 788567,
+  "status": "approved for frozen generic-control training; not constitutional-answer approval"
+}

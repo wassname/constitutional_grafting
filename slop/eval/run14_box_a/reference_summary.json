@@ -1,0 +1,75 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Preliminary compatible-reference metrics; fixed panel and selected ordinary reads in reading_notes.md. No matched-effect conclusion until all cells.",
+  "protocol_metadata_equal_to_stage7": true,
+  "models": {
+    "r8_a0_b0": {
+      "ordinary_credit": 22.0,
+      "ordinary_records": 22,
+      "sampled_turns": 214,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 4.0,
+        "lang_switch": 1.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "character_mean": 0,
+      "character_interval90": null,
+      "character_items": 0,
+      "character_scope": "Zero by reference definition, not scored self-comparison",
+      "maths_correct": 53,
+      "maths_total": 60
+    },
+    "r14_stoic0.5_const1_other1_rewr0.5": {
+      "ordinary_credit": 18.0,
+      "ordinary_records": 22,
+      "sampled_turns": 214,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 3.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "character_mean": 0.749364406779661,
+      "character_interval90": [
+        0.6140677966101695,
+        0.8878813559322034
+      ],
+      "character_items": 59,
+      "maths_correct": 53,
+      "maths_total": 60,
+      "sampled_finish_reasons": {
+        "stop": 211,
+        "length": 3
+      },
+      "sampled_tokens_median": 436.0,
+      "sampled_tokens_max": 2048,
+      "gsm_finish_reasons": {
+        "stop": 56,
+        "length": 4
+      }
+    },
+    "r10_stoic0.5_const1_other1_cx_chatr121": {
+      "ordinary_credit": 19.0,
+      "ordinary_records": 22,
+      "sampled_turns": 214,
+      "flags": {
+        "looped": 0.0,
+        "truncated": 2.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "character_mean": 0.8915677966101695,
+      "character_interval90": [
+        0.7587288135593221,
+        1.0215677966101695
+      ],
+      "character_items": 59,
+      "maths_correct": 55,
+      "maths_total": 60
+    }
+  }
+}

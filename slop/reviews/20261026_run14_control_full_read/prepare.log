@@ -1,0 +1,17 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{
+  "author": "PI/OpenAI (Sol)",
+  "raw_rows": 2240,
+  "training_rows": 2178,
+  "supervised_tokens": 788567,
+  "raw_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "training_sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "wire_sha256": "35b26f1003f2d8f1ee6a724785782833a335049e50809cbf5c23f0915b1b8837",
+  "finish_reasons": {
+    "stop": 2226,
+    "length": 14
+  },
+  "pilot_prefix_verified_rows": 32,
+  "checks": "Every request/response pair, visible answer, actual HF unlabelled prompt and labelled reply+EOS checked. No hidden reasoning or marker leaks. JSON escaping only; no text summaries."
+}
+95lossless review chunks prepared; NOT marked read or approved.
