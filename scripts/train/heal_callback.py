@@ -27,7 +27,7 @@ class HealTiming(TrainerCallback):
         bad = [name for name, grad in gradients if not torch.isfinite(grad).all()]
         assert not bad, f'Nonfinite LoRA gradients before optimizer step {state.global_step}: {bad[:8]}'
         assert gradients, 'No trainable gradients'
-        self.pre_lr = kwargs['optimizer'].param_groups[0]['lr']
+        self.pre_lr = float(kwargs['optimizer'].param_groups[0]['lr'])
         self.pre_lambda = self.trainer._spectral_lam[0]
         self.pre_penalty = self.pre_lambda * self.trainer._spectral_last_sigma
         assert math.isfinite(self.pre_penalty) and self.pre_penalty >= 0
