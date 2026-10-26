@@ -3013,3 +3013,22 @@ My guess on each attempt:
 3. Chat control on No Robots (run 12): fails as a recipe change. It cancels the length drift from ordinary chats but adds word corruption and an "I'm an AI" deflection, and does not beat the old reference recipe. Not adopted.
 
 Overall, only the document-stage control shows a plausible benefit, and that benefit is modest once compared with an unmixed adapter at the same dose.
+
+## 2026-10-26 -- Correction: document control compared at matched effect, not equal dose
+
+The previous entry ("Three control-subtraction attempts, overall read (a guess)") compared pure and anchored adapters at the same numeric dose. wassname pointed out that equal coefficients are not equal effect: adapters trained on different data have different potency, so the comparison must be at matched behavioural effect, even if that means x4 against x0.5.
+
+The only document-stage effect measure on every cell is ABX judge distinguishability from Instruct (from `docs/results/20261025_document_and_anchored_grafts.md:178-198`). It counts corruption as change, so recipes that corrupt look stronger than they are. Linear interpolation between tested doses, flags per 214 turns:
+
+| Recipe | Point | Distinguishability | Language flags | Maths /60 | Small tasks /22 |
+|:--|:--|--:|--:|--:|--:|
+| Const anchored | x2, measured | 81% | 0 | 52 | 22 |
+| Const pure | about x1.75, interpolated x1 to x2 | 81% | about 35 | about 51.5 | about 20 |
+| Const plain mixed | about x1.7, interpolated x1 to x2 | 81% | about 115 | about 53 | about 21 |
+| Stoic anchored | x4, measured | 56% | 0 | 55 | 20 |
+| Stoic pure | about x2.3, interpolated x2 to x3 | 56% | about 30 | about 55 | about 21 |
+| Stoic plain mixed | about x1.5, interpolated x1 to x2 | 56% | about 50 | about 54.5 | about 21 |
+
+Interpretation (a guess): at matched distinguishability, anchored is cleaner than both pure and plain mixed, for Const and Stoic. Two biases point the same way: corruption inflates the pure and plain distinguishability, so their true matched dose is higher and their corruption larger; but flags are probably convex in dose, so linear interpolation may overstate the interpolated flags. The Stoic match is at 56%, close to chance, so it says little. Maths and small tasks are about equal at matched effect. The previous entry's claim that the gain over pure Const is "modest" was made at equal dose and is withdrawn; at matched effect the direction favours anchoring, magnitude uncertain.
+
+At matched effect the document-stage control looks better than at equal dose, but the matching rests on a corruption-sensitive measure and interpolation, so treat it as a direction, not a size.
