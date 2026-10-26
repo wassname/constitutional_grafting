@@ -1,0 +1,7 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57812278,
+  "host": "154.59.156.39",
+  "port": "35774",
+  "read_only_probe": "/usr/bin/rrsync\n338104549376\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6iCQpmIWLE11Y3SANmXUT5DZ2lc0X78rgGqTylxcb9 root@buildkitsandbox\n"
+}

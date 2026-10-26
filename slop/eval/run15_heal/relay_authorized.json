@@ -1,0 +1,11 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "authorized_by": "const_v2 seq22 and cg_help3 seq52/53",
+  "instance_id": 57812278,
+  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZ8sbTwOfzDN9RY5sfgorhRHx/y3UM25HMPMjfJDw8F cg_run14_to_run15_57812278",
+  "authorized_key_options": "restrict,expiry-time=\"20261026131541Z\",command=\"/usr/bin/rrsync -wo -no-del /workspace/cg/outputs/relay_from_box_a\"",
+  "expires_utc": "20261026131541Z",
+  "target": "/workspace/cg/outputs/relay_from_box_a",
+  "free_bytes_before": 338104549376,
+  "forced_command": "/usr/bin/rrsync -wo -no-del /workspace/cg/outputs/relay_from_box_a"
+}
