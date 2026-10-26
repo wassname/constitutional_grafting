@@ -25,6 +25,12 @@ Step5 (thinking-on heal data) is now a separate worker's job. Box A will not gen
 
 Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Final snapshot is downloaded. Lossless views, full read, every reader's chunk hashes and actual read-tool coverage are verified. Workflow `05cf4fad-120a-469d-baa3-c65ba6b93964` completed. Read decision and teacher-quality caveats: `../../reviews/20261026_run14_control_full_read/synthesis.md`; receipt `control_review.approved.json`. Both early smokes passed (`early_smokes.log`); the canonical driver remains unchanged. No public push.
 
+## Live spectral check (14:27UTC)
+
+Actual training log resolves `bf16=true`, `fp16=false`, `torch_dtype=torch.bfloat16`. Calibration at optimizerstep103 recorded meanCE0.2251, positive meanσ0.18104 and fixedλ≈0.01243. All557logged training loss/gradient/spectral records were finite; all454post-calibration records had positiveσ and penalty. Latest: textloss0.0356 +penalty0.005945 =total0.04155; gradnorm0.1886; σ0.4781. No run/config change.
+
+The historical recipe calibrates once near1% during warmup, then fixesλ. It does not hold the ratio at1%: current penalty/textloss≈16.7%. This is an observed fixed-λ consequence, not the heal run's zero-σ failure. Snapshot and executed config: `spectral_runtime_check/`. Quick check only; final audit pending.
+
 ## Preliminary lower-dose reference
 
 D×0.5: preference +0.749 (90% item-bootstrap interval[+0.614,+0.888],59judgeditems×2), maths53/60, ordinary18/22. Historical D×1 on the same frozen protocol: +0.892,55/60,19/22; Instruct baseline: reference0,53/60,22/22. These are measured points, not evidence that a dose is better. No subtraction/projection or matched-effect result yet. Metadata signatures match the historical D run.
@@ -33,9 +39,7 @@ D×0.5 sampled-character protocol:211stop/3length across214turns,0loop flags; me
 
 ## Optional draft-v2 generation
 
-Parent const_v2 seq25 approved a lower-priority addition within this same lease only: after all planned cells are generated and retrieved, if at least1hour remains before the runner deadline and the work can fit safely, generate only the78new draft-v2 items for Instruct,D×0.5,D×1 and the new control/projection cells. Keep outputs separate from frozen70; no training or local judging change. Skip if time is tight. Draft is not yet reviewed by wassname. Task#3 tracks this condition; it must not delay required work or retrieval.
-
-Source `/workspace/2026/tiny-character/data/versions/20261026_v2/items.jsonl`, expected SHA256 `e57989f43b2c0f02bf73f1973dedf9217face902755858a73801e5fff453f69f`. Sampling and thinking-off remain unchanged. No new lease, deadline extension or spending authorization.
+Skipped by parent const_v2 seq26: “Not worth an operational change to the teardown. Required work only.” Task#3 closed as skipped. No draft-v2 inputs uploaded or replies generated; no controller, guard or teardown changes.
 
 ## Interpretation limit: unequal end-of-turn supervision
 

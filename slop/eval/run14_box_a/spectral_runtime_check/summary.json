@@ -1,0 +1,59 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57799463,
+  "snapshot_file_utc": "2026-10-26T14:27:34Z",
+  "training_log_sha256": "72cf465fead58a692b4304455a5a846538eef4e993db38164a55fa170aaf4949",
+  "calibration": [
+    "10%|\u2589         | 103/1035 [17:02<1:40:44,  6.49s/it]SpectralPlugin: step 103 mean CE 0.2251 mean sigma 0.18104 -> spectral_lam fixed at 0.012"
+  ],
+  "logged_records": 557,
+  "active_penalty_records": 454,
+  "all_logged_loss_gradient_spectral_scalars_finite": true,
+  "positive_sigma_and_penalty_after_calibration": true,
+  "first_active": {
+    "loss": "0.1427",
+    "grad_norm": "0.4986",
+    "learning_rate": "0.0002",
+    "train_text_loss": "0.1403",
+    "train_spectral_penalty": "0.002415",
+    "train_total_loss": "0.1427",
+    "train_spectral_sigma_max_mean": "0.1942",
+    "train_spectral_lam": "0.01243",
+    "ppl": "1.153",
+    "memory/max_active (GiB)": "77.17",
+    "memory/max_allocated (GiB)": "77.17",
+    "memory/device_reserved (GiB)": "79.28",
+    "tokens/train_per_sec_per_gpu": "246.7",
+    "tokens/trainable": 149190,
+    "tokens/total": 195072,
+    "epoch": "0.2011"
+  },
+  "latest": {
+    "loss": "0.04155",
+    "grad_norm": "0.1886",
+    "learning_rate": "0.0001044",
+    "train_text_loss": "0.0356",
+    "train_spectral_penalty": "0.005945",
+    "train_total_loss": "0.04155",
+    "train_spectral_sigma_max_mean": "0.4781",
+    "train_spectral_lam": "0.01243",
+    "ppl": "1.042",
+    "memory/max_active (GiB)": "77.16",
+    "memory/max_allocated (GiB)": "77.16",
+    "memory/device_reserved (GiB)": "78.37",
+    "tokens/train_per_sec_per_gpu": "226.3",
+    "tokens/trainable": 799584,
+    "tokens/total": 1035200,
+    "epoch": "1.075"
+  },
+  "precision_log_lines": [
+    "\t`--mixed_precision` was set to a value of `'no'`",
+    "  \"bf16\": true,",
+    "    \"bf16\": true,",
+    "  \"fp16\": false,",
+    "  \"torch_dtype\": \"torch.bfloat16\",",
+    "[2026-10-26 13:19:11,193] [INFO] [axolotl.loaders.model] Converting modules to torch.bfloat16",
+    "RouterDtypePlugin: cast 40 router modules to torch.bfloat16"
+  ],
+  "scope": "Quick scalar/precision check requested by parent; no model/config/run changes; not final run audit"
+}
