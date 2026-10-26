@@ -66,6 +66,16 @@ PANELS = {
         ("R1", "θ_I + 1·Δtxt_replay", "Replay control alone ×1 (sanity check)", "r10_x11_replay_ctl1", f"{R11}/control1"),
     ]),
 }
+# PI/OpenAI: heal updates train on frozen D, unlike the Base-trained character donors.
+for mode in ('on', 'off'):
+    directory = f'slop/eval/run15_heal/judging_{mode}'
+    PANELS[f'heal_{mode}'] = dict(title=f'thinking-heal finals, thinking {mode}',
+        legend=CHAT_LEGEND + '\nθ_D = θ_I + Δ_docs + Δsft_rewr|docs\nΔheal_trace|D and Δheal_mix|D are capability repairs trained on frozen merged D, not Base.',
+        out=f'panel_heal_{mode}.md', notes='reading_notes_heal.md', checkpoints=[
+            ('A', 'θ_I', 'Untouched Instruct', 'r15_instruct', directory),
+            ('D', 'θ_D', 'Same unhealed parent', 'r15_D', directory),
+            ('T', 'θ_D + Δheal_trace|D', 'Traces-only repair, one pass', 'r15_heal_trace', directory),
+            ('M', 'θ_D + Δheal_mix|D', 'Mixed trace/replay repair, one pass', 'r15_heal_mix', directory)])
 PANEL = PANELS[sys.argv[1] if len(sys.argv) > 1 else "chat"]
 OUT = ROOT / "slop/eval/answer_panel" / PANEL["out"]
 CHECKPOINTS = PANEL["checkpoints"]
