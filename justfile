@@ -102,4 +102,5 @@ run10-results:
 
 # Answer panel: every tiny-character question, each checkpoint's cropped replies grouped by answer; no model calls. -- PI/Claude
 answer-panel:
-    uv run --no-sync python scripts/eval/52_answer_panel.py
+    uv run --no-sync python scripts/eval/52_answer_panel.py chat
+    uv run --no-sync python scripts/eval/52_answer_panel.py docs
