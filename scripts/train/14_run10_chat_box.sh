@@ -87,6 +87,7 @@ for s in $CHATS; do
     "plugins=[scripts.train.spectral_plugin.SpectralPlugin, axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin, axolotl.integrations.liger.LigerPlugin, axolotl.integrations.kernels.KernelsPlugin, scripts.train.router_dtype_plugin.RouterDtypePlugin]" \
     "datasets=[{\"path\": \"$TRAIN_DIR/$s.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]"
   log "start train $s ($(wc -l < $TRAIN_DIR/$s.jsonl) rows) on $DONOR"
+  python scripts/train/check_loss_mask.py $TRAIN_DIR/$s.jsonl  # no loss on empty think blocks
   SPECTRAL_FRAC=${SPECTRAL_FRAC:-0.01} axolotl train $R/cfg_r10_$TAG$s.yml > $R/train_r10_$TAG$s.log 2>&1
   for c in $o/checkpoint-*; do [ -d "$c" ] && find "$c" -maxdepth 1 -type f ! -name 'adapter_*' ! -name 'trainer_state.json' -delete; done
   python scripts/train/41_expert_adapter_check.py $o | tee $R/expert_check_r10_$TAG$s.log
