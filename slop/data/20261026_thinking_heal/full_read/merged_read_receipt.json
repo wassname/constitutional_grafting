@@ -282,5 +282,6 @@
   "gsm_train_4002"
  ],
  "gsm_gold_disagreement": "gsm_train_4105: GSM8K gold 49, recomputed 77 (reader 1)",
- "training_approved": true
+ "training_approved": true,
+ "correction_2026-10-26": "cg_help2 found the same '.cw' suffix in local pinned fp16 Instruct's native reasoning (decoded token IDs before </think>), so it is Instruct's own behaviour, not a provider artifact. Cause unknown. Rows with it remain excluded; the approved set is unchanged."
 }
