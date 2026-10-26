@@ -1,0 +1,64 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Pi SDK usage and cost reports, not reconciled provider invoices; requested model aliases, no independently recovered dated served IDs",
+  "workflow_id": "67bf5b6c-1e54-40e2-b18d-cc035fe92e22",
+  "reported_cost": {
+    "inputTokens": 3353,
+    "outputTokens": 25202,
+    "costUsd": 2.8669854
+  },
+  "children": [
+    {
+      "run_id": "00840a71-e354-4d0e-86ac-ae254c9c6fbf",
+      "requested_model": "openrouter/anthropic/claude-fable-5.1:medium",
+      "reported_usage": {
+        "input": 32,
+        "output": 18970,
+        "total": 19002,
+        "window": 123344,
+        "windowPeak": 123344
+      },
+      "reported_cost": {
+        "inputTokens": 32,
+        "outputTokens": 18970,
+        "costUsd": 2.789849
+      },
+      "status_source_sha256": "841c5b232bedddf723d58db7bf96b2b9684ba9dbba6949e3cbcf42164897419e"
+    },
+    {
+      "run_id": "6260e9a6-9174-4b59-8b73-7688145656ed",
+      "requested_model": "openrouter/anthropic/claude-haiku-4.5",
+      "reported_usage": {
+        "input": 3321,
+        "output": 6232,
+        "total": 9553,
+        "window": 7893,
+        "windowPeak": 7893
+      },
+      "reported_cost": {
+        "inputTokens": 3321,
+        "outputTokens": 6232,
+        "costUsd": 0.07713640000000001
+      },
+      "status_source_sha256": "ac42865ace3740df0c6eb03e563cd9af3f638ffa02e7e98f48d6c3585a27368e"
+    }
+  ],
+  "native_recheck": {
+    "run_id": "bad29ff7-6d4e-4daa-99fa-52a35a819800",
+    "requested_model": "openai-codex/gpt-6-astra:low",
+    "provider_path": "Native OpenAI Codex subscription, not OpenRouter",
+    "reported_usage": {
+      "input": 31277,
+      "output": 1798,
+      "total": 33075,
+      "window": 30505,
+      "windowPeak": 30505
+    },
+    "reported_cost": {
+      "inputTokens": 31277,
+      "outputTokens": 1798,
+      "costUsd": 0.510062
+    },
+    "status_source_sha256": "67a6108ec9d935784c2c90e5a632d072c00a690b68269bfff032786a69879fbe"
+  }
+}

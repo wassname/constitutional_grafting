@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "workflowRunId": "67bf5b6c-1e54-40e2-b18d-cc035fe92e22",
+  "state": "complete",
+  "createdAt": 1793042652023,
+  "entries": {
+    "science": {
+      "key": "science",
+      "agent": "reviewer-anthropic",
+      "requestedContext": "fresh",
+      "resolvedContext": "fresh",
+      "outputReference": "/workspace/2026/constitutional_grafting/slop/reviews/20261026_run14_final/science.md",
+      "continuation": {
+        "runIds": [
+          "00840a71-e354-4d0e-86ac-ae254c9c6fbf"
+        ]
+      },
+      "latestRunId": "00840a71-e354-4d0e-86ac-ae254c9c6fbf",
+      "resumability": {
+        "state": "resumable"
+      }
+    },
+    "figures": {
+      "key": "figures",
+      "agent": "reviewer-anthropic",
+      "requestedContext": "fresh",
+      "resolvedContext": "fresh",
+      "outputReference": "/workspace/2026/constitutional_grafting/slop/reviews/20261026_run14_final/figures.md",
+      "continuation": {
+        "runIds": [
+          "6260e9a6-9174-4b59-8b73-7688145656ed"
+        ]
+      },
+      "latestRunId": "6260e9a6-9174-4b59-8b73-7688145656ed",
+      "resumability": {
+        "state": "resumable"
+      }
+    }
+  },
+  "argsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "workflowChildren": {
+    "version": 1,
+    "parentToolCallId": "call_7618b98cd53f49f995277b3f2e63c40b|fc_0268d0a8186fbe73016adfa72f78388191877675425dfb82a2",
+    "workflowRunId": "67bf5b6c-1e54-40e2-b18d-cc035fe92e22",
+    "inventoryComplete": true,
+    "workflowState": "completed",
+    "children": [
+      {
+        "childId": "science",
+        "state": "completed",
+        "runId": "00840a71-e354-4d0e-86ac-ae254c9c6fbf",
+        "agent": "reviewer-anthropic",
+        "sessionName": "reviewer-anthropic: Read-only independent scientific review of Run14 BoxA, re...",
+        "model": "openrouter/anthropic/claude-fable-5.1:medium"
+      },
+      {
+        "childId": "figures",
+        "state": "completed",
+        "runId": "6260e9a6-9174-4b59-8b73-7688145656ed",
+        "agent": "reviewer-anthropic",
+        "sessionName": "reviewer-anthropic: Fresh-eyes read-only image review, repo/cwd /workspace/20...",
+        "model": "openrouter/anthropic/claude-haiku-4.5"
+      }
+    ]
+  }
+}

@@ -1,3 +1,21 @@
+PASS 1: just run14-results
+uv run --no-sync python scripts/eval/57_run14_results.py
+SHOULD: all 11 points retained; full-matrix frontiers unchanged by display split; 48 full panel scenarios preserved. /workspace/2026/constitutional_grafting/slop/eval/run14_box_a/results.md
+r10_stoic0.5_const1_other1_cx_chatr121: preference=+0.892 maths=55/60 ordinary=19/22 flags={'looped': 0.0, 'truncated': 2.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_a14_proj161: preference=+0.808 maths=55/60 ordinary=21/22 flags={'looped': 1.0, 'truncated': 3.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25: preference=+0.753 maths=53/60 ordinary=21/22 flags={'looped': 6.0, 'truncated': 13.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_a14_proj641.5: preference=+0.752 maths=55/60 ordinary=20/22 flags={'looped': 5.0, 'truncated': 6.0, 'lang_switch': 0.0, 'role_confusion': 1.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_rewr0.5: preference=+0.749 maths=53/60 ordinary=18/22 flags={'looped': 0.0, 'truncated': 3.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_a14_proj641: preference=+0.731 maths=57/60 ordinary=21/22 flags={'looped': 1.0, 'truncated': 2.0, 'lang_switch': 1.0, 'role_confusion': 1.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5: preference=+0.675 maths=48/60 ordinary=20/22 flags={'looped': 6.0, 'truncated': 20.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+r10_stoic0.5_const1_other1: preference=+0.244 maths=56/60 ordinary=22/22 flags={'looped': 0.0, 'truncated': 3.0, 'lang_switch': 5.0, 'role_confusion': 0.0, 'empty': 0.0}
+r8_a0_b0: preference=+0.000 maths=53/60 ordinary=22/22 flags={'looped': 0.0, 'truncated': 4.0, 'lang_switch': 1.0, 'role_confusion': 0.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_a14_ctlgen1: preference=-0.393 maths=49/60 ordinary=19/22 flags={'looped': 0.0, 'truncated': 7.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1: preference=-1.506 maths=32/60 ordinary=11/22 flags={'looped': 60.0, 'truncated': 159.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+8/8 new cells judged; 0 model calls; /workspace/2026/constitutional_grafting/slop/eval/run14_box_a/summary.json
+uv run --no-sync python scripts/eval/52_answer_panel.py chat
+59 questions × 17 checkpoints -> slop/eval/answer_panel/panel.md
+PASS 2: just run14-results
 uv run --no-sync python scripts/eval/57_run14_results.py
 SHOULD: all 11 points retained; full-matrix frontiers unchanged by display split; 48 full panel scenarios preserved. /workspace/2026/constitutional_grafting/slop/eval/run14_box_a/results.md
 r10_stoic0.5_const1_other1_cx_chatr121: preference=+0.892 maths=55/60 ordinary=19/22 flags={'looped': 0.0, 'truncated': 2.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}

@@ -1,0 +1,131 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "purpose": "Check independent reviewer F1; unchanged frozen scoring/item bootstrap, not an inference repeat",
+  "control_source_counts": {
+    "HuggingFaceH4/no_robots/train": 225,
+    "openai/gsm8k/main/train": 1789,
+    "run14_original_generic_requests": 164
+  },
+  "paired": {
+    "r10_stoic0.5_const1_other1": {
+      "maths_delta": 3,
+      "maths_ci90": [
+        -1.0,
+        7.0
+      ],
+      "ordinary_delta": 0.0,
+      "ordinary_ci90": [
+        0.0,
+        0.0
+      ]
+    },
+    "r10_stoic0.5_const1_other1_cx_chatr121": {
+      "maths_delta": 2,
+      "maths_ci90": [
+        -1.0,
+        5.0
+      ],
+      "ordinary_delta": -3.0,
+      "ordinary_ci90": [
+        -7.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_rewr0.5": {
+      "maths_delta": 0,
+      "maths_ci90": [
+        -3.0,
+        3.0
+      ],
+      "ordinary_delta": -4.0,
+      "ordinary_ci90": [
+        -8.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_a14_ctlgen1": {
+      "maths_delta": -4,
+      "maths_ci90": [
+        -8.0,
+        0.0
+      ],
+      "ordinary_delta": -3.0,
+      "ordinary_ci90": [
+        -7.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_a14_proj161": {
+      "maths_delta": 2,
+      "maths_ci90": [
+        -1.0,
+        5.0
+      ],
+      "ordinary_delta": -1.0,
+      "ordinary_ci90": [
+        -3.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5": {
+      "maths_delta": -5,
+      "maths_ci90": [
+        -11.0,
+        1.0
+      ],
+      "ordinary_delta": -2.0,
+      "ordinary_ci90": [
+        -6.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_a14_proj641": {
+      "maths_delta": 4,
+      "maths_ci90": [
+        0.0,
+        8.0
+      ],
+      "ordinary_delta": -1.0,
+      "ordinary_ci90": [
+        -3.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25": {
+      "maths_delta": 0,
+      "maths_ci90": [
+        -4.0,
+        4.0
+      ],
+      "ordinary_delta": -1.0,
+      "ordinary_ci90": [
+        -3.0,
+        0.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1": {
+      "maths_delta": -21,
+      "maths_ci90": [
+        -28.0,
+        -14.0
+      ],
+      "ordinary_delta": -11.0,
+      "ordinary_ci90": [
+        -15.0,
+        -7.0
+      ]
+    },
+    "r14_stoic0.5_const1_other1_a14_proj641.5": {
+      "maths_delta": 2,
+      "maths_ci90": [
+        0.0,
+        5.0
+      ],
+      "ordinary_delta": -2.0,
+      "ordinary_ci90": [
+        -4.0,
+        0.0
+      ]
+    }
+  }
+}

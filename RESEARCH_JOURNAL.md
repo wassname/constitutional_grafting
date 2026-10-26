@@ -3150,3 +3150,38 @@ Interpretation (PI/OpenAI): this supports numerical completion and artifact pres
 The recipe and teardown stay unchanged while the planned comparison continues.
 
 -- PI/OpenAI (Sol)
+
+
+## 2026-10-26 -- Run14 comparison complete, projection confirmation candidate
+
+The completed comparison separates a projection completion signal from control-subtraction stopping failure.
+
+Evidence from the frozen comparison, read and compiled by PI/OpenAI (Sol):
+
+> r14_stoic0.5_const1_other1_rewr0.5: preference=+0.749 maths=53/60 ordinary=18/22 flags={'looped': 0.0, 'truncated': 3.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+> r14_stoic0.5_const1_other1_a14_proj641: preference=+0.731 maths=57/60 ordinary=21/22 flags={'looped': 1.0, 'truncated': 2.0, 'lang_switch': 1.0, 'role_confusion': 1.0, 'empty': 0.0}
+> r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1: preference=-1.506 maths=32/60 ordinary=11/22 flags={'looped': 60.0, 'truncated': 159.0, 'lang_switch': 0.0, 'role_confusion': 0.0, 'empty': 0.0}
+
+Preference is the pinned target-character judge relative to Instruct, averaged over59items with two samples each. Maths is frozen answer-key extraction on60questions; ordinary is22literal arithmetic/format checks. Flags here cover214primary turns, not the auxiliary demos. Source: `slop/eval/run14_box_a/report_verification.log`.
+
+Completed correct key matches, selecting `maths_completed` from the same frozen `summary.json`:
+
+```json
+{
+  "r14_stoic0.5_const1_other1_rewr0.5": 53,
+  "r14_stoic0.5_const1_other1_a14_proj641": 57,
+  "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1": 2
+}
+```
+
+All four extra projection matches replace token-cap failures. Its paired preference difference against plain half-dose is-0.018[90% -0.103,+0.069], so equivalence is untested. Paired maths difference is+4[+1,+7]/60; the three extra ordinary passes concern one JSON key and both samples of one pizza question. These are item-bootstrap intervals, not inference-repeatability estimates. Sources: `summary.json` and the fully read changed answers in `projection64_vs_half_maths.md`. Reward-hacking count was not measured; completed key matches, loops and cutoffs are reported rather than inventing that metric.
+
+Interpretation (PI/OpenAI): I consider a repeatable fixed-budget completion benefit plausible, but the equal-character capability question remains inconclusive. The observed gain is narrow and selected from several variants. The full-subtraction negative is a stopping collapse at this dose, not a moral reversal or a verdict on every control design. The control is82.14%GSM-train rows and supervises EOS on every accepted target, while903/1636positive targets omit it; content, stopping and instruction-following effects are not isolated.
+
+All eight planned cells and their fixed/selected replies are retained. Exact per-matrix/per-expert projections and all three final adapters/configs are preserved; independent local hashes passed after provider-confirmed destruction of instance57799463. GPU cost is estimated14.9284USD; successful cached Jev receipts total0.770991564USD. Including earlier reviews and the final SDK review valuations gives about19.54USDbefore traffic, not a reconciled invoice; native Codex valuation is not an OpenRouter debit. Sources: `provider_closure_verified.json`, `final_local_adapter_hashes.json`, `summary.json`, and `slop/reviews/20261026_run14_final/usage_receipt.json`.
+
+Fable scientific review and a fresh native Astra image recheck are OK with notes. An earlier Haiku image interpretation was rejected rather than treated as validation. Finished-correct maths plots, unaltered frozen tables, all twelve full reference/variant panels and read coverage rebuild without models via `just run14-results`. Review dispositions and unresolved limits are in `slop/eval/run14_box_a/review_status.md`; complete audit: `slop/audits/20261026_run14_comparison.md`. No new paid experiment or public push is queued.
+
+Leave the run closed and confirm the candidate before extending the recipe.
+
+-- PI/OpenAI (Sol)

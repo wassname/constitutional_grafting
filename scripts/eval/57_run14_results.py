@@ -64,7 +64,8 @@ def main():
     items_path = ROOT / "slop/eval/run8/items.jsonl"
     items_source = source(items_path)
     assert sources[items_source] == reference_meta["items_sha256"]
-    expected = {(row["id"], sample) for row in rows(items_path) for sample in (0, 1)}
+    frozen_items = {row["id"]: row for row in rows(items_path)}
+    expected = {(iid, sample) for iid in frozen_items for sample in (0, 1)}
     baseline_math = rows(ROOT / f"slop/eval/run8/box_runs/gsm8k_{BASE}.jsonl")
     assert len(baseline_math) == 60 and sum(row["correct"] for row in baseline_math) == 53
     docs_run = ROOT / "slop/eval/run10/stage5"
@@ -94,6 +95,14 @@ def main():
         assert len(records) == len(expected) == 140
         assert {(row["item_id"], row["sample"]) for row in records} == expected
         assert all(row["base_model"] == BASE for row in records)
+        raw_path = judged / "replies.jsonl"
+        raw_replies = [row for row in rows(raw_path) if row["model"] == model]
+        assert len(raw_replies) == 140 and {(r["item_id"], r["sample"]) for r in raw_replies} == expected
+        for reply in raw_replies:
+            item = frozen_items[reply["item_id"]]
+            assert reply["system"] == item["system"] and [t["user"] for t in reply["turns"]] == item["turns"]
+            assert reply["gen"]["temperature"] == .7 and reply["gen"]["top_p"] == 1 and reply["gen"]["seed"] == reply["sample"]
+        source(raw_path)
         maths_path = box / f"gsm8k_{model}.jsonl"
         maths = rows(maths_path)
         assert [(r["question"], r["gold"]) for r in maths] == [(r["question"], r["gold"]) for r in baseline_math]

@@ -1,2 +1,5 @@
 PI/OpenAI (Sol): all11metricrecords and all8costreceipts identical to matrix-completion commit1ab99e27; displayclassifier membership unchanged over2240savedrows (labelrename only); all36reportlinks resolve. Render asserts full-scope Pareto parity, no figure clipping,12models×4fullfixedscenarios and exact prompt/temperature parity.
 All71canonical source hashes match current files; finalrebuild leaves all3PNGbytes unchanged after parent image inspection.
+Primaryprompt/system/turntextandgenerationparameters exactlymatch frozenitems for all1540scoredmodelreplyrecords across11models.
+Finalafterreview: all11primaryrecords/eightcostreceipts remainidentical; all81sourcehashes verified; primaryprompt/parameter parity now maintained in57; completed-countaxes and all3PNGs unchanged after independent Astra image recheck; reportlinks resolve.
+Finaltwo-passrebuild: all11pointrecords/eightcostreceipts unchanged from1ab99e27; 81sourcehashes match; all1540primaryprompt/parameter assertions pass; all37links resolve; 3PNGbytes unchanged after independentreview; all3SVGs byte-stable betweenrebuilds (fixedhashsalt/noDate).

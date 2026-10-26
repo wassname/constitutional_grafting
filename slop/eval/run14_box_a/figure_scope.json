@@ -26,5 +26,6 @@
       "r14_stoic0.5_const1_other1_a14_proj161"
     ]
   },
+  "maths_measure": "Completed correct frozen-extractor matches, relative to Instruct53/60; table retains raw extracted matches.",
   "scope": "Point estimates, not statistical frontiers. Separating five controls/more-damaged variants does not change either full-matrix observed frontier."
 }
