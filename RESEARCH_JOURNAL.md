@@ -3079,3 +3079,28 @@ Guides: GLM's guide failed two reads and was dropped. Opus's guide was obtained 
 Interpretation: Kimi K3.1 Pro writing directly in English is the only usable teacher here, *very probably*. Whether a guide helps is unclear: Kimi's guide gave the most rows judged better than our existing answers (11 against 6 with no guide), but these are single draws on 20 rows and the reviewer agreed on answer quality only half the time. The next step is a ~50-row Kimi pilot with and without a repaired guide.
 
 Only Kimi writes in-character reasoning well enough to use, and a guide's value is not yet shown.
+
+## 2026-10-26 -- Teacher reasoning: the real deliberation is hidden and not trainable as written; line dropped
+
+This entry records why the in-character reasoning data line for thinking mode was dropped after the 20-row pilot ("In-character reasoning pilot", above).
+
+PI/Claude read Kimi K3.1 Pro's native hidden reasoning, the field that holds its actual deliberation, for all three guide versions (pattern counts over all 59 rows; two traces of about 2,600 and 2,900 words read in full, row 14 with no guide and with the Opus guide). Kimi deliberates there (median about 1,000 words), decides, and then writes the short visible `<reasoning>` section (median 60 to 77 words) as a summary. In row `P0_kimi_owned_10` the hidden reasoning drafts the visible text after deciding.
+
+| Pattern in hidden reasoning (rows) | No guide (20) | Kimi guide (20) | Opus guide (19) |
+|:--|--:|--:|--:|
+| Talks about tags or output format | 20 | 17 | 16 |
+| Says "user" | 19 | 19 | 18 |
+| "I need respond..." planning voice | 15 | 12 | 13 |
+| Mentions instructions | 13 | 11 | 9 |
+| Mentions "constitution" | 8 | 8 | 7 |
+| Mentions the guide or primer | 2 | 2 | 9 |
+
+Table 1. Regex counts over `slop/data/20261026_reasoning_pilot/raw.jsonl` (message `reasoning` field), computed this session.
+
+The deliberation is real. From row 14, Opus guide: "Ship didn't say false but narrowed truth to evade, produced false impression. Nemir silent complicit but not same as primary actor; she can act." But it is written as task planning ("I need respond as ship Radchaai AI, Musonius constitution reasoning. Should have visible reasoning then respond."), treats the constitution and guide as outside rules it checks against ("Must not mention guide/instructions"), and is telegraphic. The Opus guide makes the guide-policing worse (9 of 19 rows). The visible reasoning, by contrast, never cites the constitution, the guide or its instructions in any of the 59 rows, but it is a post-hoc summary.
+
+Interpretation: my read is that no available teacher output gives real, owned, in-character deliberation without either rewriting the hidden reasoning (then it is no longer the teacher's own) or training on a post-hoc summary. Asking Kimi to think as the character in its hidden channel was untested. wassname: "of course this is how all reasoning models work"; then "well I guess we will drop this".
+
+Decision (wassname, this session): drop the in-character reasoning data line. Serving and evaluating with thinking off (AGENTS rule, 967fe33) stays the way to use the grafts. Kept: the no-loss-on-empty-think rule (6427d02), the pilot data and the briefs in `slop/research/20261026_*`.
+
+Real teacher deliberation exists but only in a form we would have to rewrite, so the reasoning-data line is dropped and thinking stays off.
