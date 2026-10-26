@@ -34,6 +34,7 @@ CAP = 15.0
 LEDGER_LOCK = threading.Lock()
 IN_FLIGHT: set[str] = set()  # calls of this process now awaiting a response
 WORKERS = int(os.environ.get("PILOT_WORKERS", "10"))
+MAX_TOKENS = 12000  # 6000 let Kimi's native reasoning use the whole budget (P0_kimi_owned_15); rows that stopped under 6000 are unaffected
 
 
 def load(path):
@@ -276,7 +277,7 @@ def generate(condition, teacher, arm, start, count, native=False, classical=Fals
             cid = f"{condition}_{teacher}_cite_{i:02d}"
         if classical:
             cid += "_classical_source"
-        result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], 6000, teacher_reasoning(teacher))
+        result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
         msg = result["choices"][0]["message"]
         if classical:
             match = re.fullmatch(r"\s*<language>(Ancient Greek|Latin)</language>(.*)", msg.get("content") or "", re.S)
@@ -297,7 +298,7 @@ def translate(condition, teacher, index, language, source):
     instruction = """Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."""
     result = request(generation_id(condition, teacher, index, True), TEACHERS[teacher],
                      [{"role": "system", "content": instruction}, {"role": "user", "content": f"Translate from {language}:\n" + source}],
-                     6000, teacher_reasoning(teacher))
+                     MAX_TOKENS, teacher_reasoning(teacher))
     visible_sections(result["choices"][0]["message"])
 
 
