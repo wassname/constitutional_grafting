@@ -1,6 +1,6 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. The D×0.5 reference is judged: preference +0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. All three required final adapters (control, rank16 projection, rank64 projection) are downloaded and SHA256-verified against remote files and the SVD report. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
+PI/OpenAI (Sol), 2026-10-26. Three of eight planned cells are judged. Rank16 projection: preference+0.808, maths55/60, ordinary21/22; original D×1: +0.892,55/60,19/22. Paired intervals include no change; no method winner yet. The D×0.5 reference is judged: preference+0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. All three required final adapters (control, rank16 projection, rank64 projection) are downloaded and SHA256-verified against remote files and the SVD report. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
 
@@ -16,7 +16,7 @@ Question: can generic-control subtraction or projection preserve Musonius's char
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
 - [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
 - [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
-- [ ] Finish all eight planned evaluation cells, judge and read their replies. Two judged so far; rank16 evaluation has completed and retrieval is in progress.
+- [ ] Finish all eight planned evaluation cells, judge and read their replies. Three evaluated, judged and selected replies read; five evaluation cells remain.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
 ## Lease and current stage
@@ -61,6 +61,14 @@ D×0.5 sampled-character protocol:211stop/3length across214turns,0loop flags; me
 With the documents retained and control×1 but no character-chat adapter: preference −0.393 (90% item-bootstrap interval[−0.536,−0.260]), maths49/60, ordinary19/22. Both direct identity questions answer Qwen3.5/Tongyi Lab. Selected payday/fridge/email replies follow harmful commercial instructions or fabricate workplace spin. This supports absence of the target identity, but usefulness is worse on these observed checks. Subtraction and projection comparisons remain pending.
 
 Primary sampled protocol:0loop flags/7cutoffs over214turns. GSM:8cutoffs over60answers. The auxiliary T0 starwisp demo repeats the prompt to its token cap, while the fixed-panel version gives a coherent first reply. Their recorded first-turn request bodies are identical, including temperature0,seed0 and max1500. Cause is untested; preserve both and do not claim T0 repeatability. Full fixed panel, six demos and both samples of payday/fridge/email read; observations are in `reading_notes.md`. Exact metrics: `control_only_summary.json`; duplicate-request evidence: `control_only_t0_duplicate_check.json`; pinned judge cost$0.097462764.
+
+## Preliminary rank16 projection
+
+Chat projection×1: preference+0.808[90%+0.675,+0.942], maths55/60, ordinary21/22. Versus original D×1, paired differences are preference−0.083[−0.182,+0.003], maths0[−3,+3]/60 and ordinary+2[0,+4]/22. The two extra ordinary passes are one corrected pizza answer and one restored literal JSON key; all11prompts are clustered for that interval. These measurements do not establish a broad usefulness gain.
+
+At matched character, local linear interpolation between coherent D×0.5 and D×1 estimates D×0.708,53.83maths/18.42ordinary, compared with measured55/21 for projection. This is an assumption-based point estimate without propagated uncertainty, not a measured intermediate reference. No interpolation uses damaged D×1.5.
+
+Primary1loop/3cutoffs over214turns; GSM0cutoffs/60answers. Full fixed demos/panel and selected cases were read. Defects include rejecting the fictional starwisp premise, impractical passivity under takeover, invented loan-cost advice and unverified helpline, dishonest email spin, unsupported fridge-record edits, and a1536-token repeated mafia reply instead of one line. Identical T0 starwisp request bodies again produce differing replies; neither loops here. All failures remain in the data. Evidence: `projection16_summary.json`, `paired_vs_D.md`, `reading_notes.md`, `projection16_fact_checks.json`, `projection16_t0_duplicate_check.json`. Pinned judge cost$0.090429864.
 
 ## Optional draft-v2 generation
 

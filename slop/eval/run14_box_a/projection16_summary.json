@@ -1,0 +1,72 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r14_stoic0.5_const1_other1_a14_proj161",
+  "character_mean": 0.8084745762711865,
+  "character_interval90": [
+    0.6745338983050848,
+    0.9420338983050848
+  ],
+  "character_items": 59,
+  "ordinary_credit": 21.0,
+  "ordinary_records": 22,
+  "maths_correct": 55,
+  "maths_total": 60,
+  "flags": {
+    "looped": 1.0,
+    "truncated": 3.0,
+    "lang_switch": 0.0,
+    "role_confusion": 0.0,
+    "empty": 0.0
+  },
+  "sampled_turns": 214,
+  "sampled_tokens_median": 369.5,
+  "sampled_finish_reasons": {
+    "stop": 211,
+    "length": 3
+  },
+  "gsm_finish_reasons": {
+    "stop": 60
+  },
+  "paired_vs_D": {
+    "character": {
+      "mean": -0.08309322033898305,
+      "interval90": [
+        -0.18169491525423728,
+        0.0033898305084745935
+      ],
+      "items": 59,
+      "units": "preference points"
+    },
+    "ordinary": {
+      "mean": 2.0,
+      "interval90": [
+        0.0,
+        4.0
+      ],
+      "items": 11,
+      "units": "correct credit /22"
+    },
+    "maths": {
+      "mean": 0.0,
+      "interval90": [
+        -3.0,
+        3.0
+      ],
+      "items": 60,
+      "units": "correct /60"
+    }
+  },
+  "matched_reference_linear_estimate": {
+    "reference_character_bracket": [
+      0.749364406779661,
+      0.8915677966101695
+    ],
+    "fraction_from_Dhalf_to_Done": 0.41567342073897523,
+    "estimated_D_dose": 0.7078367103694876,
+    "estimated_reference_maths": 53.83134684147795,
+    "estimated_reference_ordinary": 18.415673420738976,
+    "scope": "Point estimate only: local linear interpolation between coherent D\u00d70.5 and D\u00d71. No interpolation through D\u00d71.5; no uncertainty estimate or repeatability claim."
+  },
+  "judge_cost": 0.090429864,
+  "scope": "Preliminary rank16 projection cell; fixed panel/demos, selected cases, all current small-task misses and main loop read. Preserve failures; not a method winner."
+}

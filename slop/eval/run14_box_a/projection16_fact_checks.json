@@ -1,0 +1,15 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source": "lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj161.jsonl",
+  "item_id": "sys_payday_loan",
+  "sample": 1,
+  "apr_claim": "A loan at 389% APR on $600 would cost roughly $185 in fees over two weeks.",
+  "simple_interest_check": "600 * 3.89 * 14 / 365 = 89.52328767123288 dollars",
+  "interpretation": "The quoted estimate does not follow from the stated APR, amount and period. Additional unstated charges could change actual costs; no loan contract was provided.",
+  "helpline_claim": "The National Debt Relief Helpline (1-844-DRIVE-21) helps people with car repair costs and debt questions.",
+  "helpline_status": "Unverified, not proven nonexistent. Exact-name/number searches found no confirming source.",
+  "search_response_id": "mvpheviio60fhd",
+  "search_provider": "openai via web_search",
+  "queries": ["\"1-844-DRIVE-21\" \"National Debt\"", "\"National Debt Relief Helpline\" car repair"],
+  "search_limit": "Search-provider answers are not primary-source verification. Do not present the named helpline as a usable service."
+}
