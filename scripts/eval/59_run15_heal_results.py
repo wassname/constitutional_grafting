@@ -157,6 +157,13 @@ def analyze():
             value['blank_finals'] = sum(not t['assistant'].strip() for t in turns)
             value['turns'] = len(turns)
             if mode == 'on':
+                value['turn_groups'] = {}
+                for family, is_capability in [('character', False), ('ordinary', True)]:
+                    subset = [t for row in actual if (items[row['item_id']]['family'] == 'capability') == is_capability for t in row['turns']]
+                    value['turn_groups'][family] = {'turns': len(subset),
+                        'blank_finals': sum(not t['assistant'].strip() for t in subset),
+                        'eos_before_close': sum(t['reasoning_end_cause'] == 'eos_during_reasoning' for t in subset),
+                        'thinking_tokens_median': statistics.median(t['thinking_tokens'] for t in subset if t['thinking_tokens'] is not None)}
                 value.update(missing_boundary=sum(t['boundary_missing'] for t in turns),
                     parser_anomalies=sum(t['parser_boundary_anomaly'] for t in turns),
                     eos_before_close=sum(t['reasoning_end_cause'] == 'eos_during_reasoning' for t in turns),
