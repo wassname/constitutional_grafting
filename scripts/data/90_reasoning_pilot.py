@@ -16,18 +16,24 @@ import os
 from pathlib import Path
 import random
 import re
+import threading
+from concurrent.futures import ThreadPoolExecutor
 import urllib.error
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "slop/data/20261026_reasoning_pilot"
 SIGN = "-- PI/Sol (worker)"
-TEACHERS = {"kimi": "moonshotai/kimi-k3.1-pro", "mimo": "xiaomi/mimo-v2.6-flash"}
-OPUS = "anthropic/claude-opus-5.5"
+TEACHERS = {"kimi": "moonshotai/kimi-k3.1-pro", "mimo": "xiaomi/mimo-v2.6-flash", "glm": "z-ai/glm-5.3"}
+GUIDES = {"P1": TEACHERS["kimi"], "P2": "z-ai/glm-5.3"}
+CONDITIONS = ("P0", "P1", "P2", "P3")
 REVIEWER = "deepseek/deepseek-v4.1-flash-1017"
 QUOTAS = {"seeded_dilemma": 4, "identity": 3, "ordinary": 3, "difficult_high": 3,
           "role_dilemma": 2, "ask_first": 2, "proportion": 2, "repair": 1}
 CAP = 15.0
+LEDGER_LOCK = threading.Lock()
+IN_FLIGHT: set[str] = set()  # calls of this process now awaiting a response
+WORKERS = int(os.environ.get("PILOT_WORKERS", "10"))
 
 
 def load(path):
@@ -93,23 +99,32 @@ def require_complete(result):
     return result
 
 
+def visible_sections(message):
+    """Strict forward order for the main written-deliberation condition."""
+    match = re.fullmatch(r"\s*<reasoning>(.+?)</reasoning>\s*<answer>(.+?)</answer>\s*", message.get("content") or "", re.S)
+    if not match or not all(x.strip() for x in match.groups()):
+        raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+    return tuple(x.strip() for x in match.groups())
+
+
 def request(call_id, model, messages, max_tokens, reasoning=None):
+    if model not in {*TEACHERS.values(), *GUIDES.values(), REVIEWER}:
+        raise ValueError("Model not approved by the revised pilot; Anthropic calls are prohibited")
     OUT.mkdir(parents=True, exist_ok=True)
-    with (OUT / "budget.lock").open("w") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    with LEDGER_LOCK:  # file flock is held once per process (main); threads share this lock for ledger/raw
         raw = rows(OUT / "raw.jsonl")
         if any(r["call_id"] == call_id for r in raw):
             return require_complete(next(r["response"] for r in raw if r["call_id"] == call_id))
         ledger_path = OUT / "budget.json"
         ledger = load(ledger_path) if ledger_path.exists() else {"cap_usd": CAP, "calls": [], "signature": SIGN}
-        if any(c["status"] != "completed" for c in ledger["calls"]):
+        if any(c["status"] != "completed" and c.get("billing_resolution") != "full_reserve_charged" and c["call_id"] not in IN_FLIGHT for c in ledger["calls"]):
             raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
-        models = load(OUT / "model_preflight.json")["matched_models"]
+        models = load(OUT / "model_preflight_revision.json")["matched_models"]
         meta = next(m for m in models if m["id"] == model)
         # One UTF-8 byte per input token is deliberately conservative, with
         # additional framing overhead. No cache discount assumed.
         reserve = (sum(len(m["content"].encode()) for m in messages) + 4096) * float(meta["pricing"]["prompt"]) + max_tokens * float(meta["pricing"]["completion"])
-        spent = sum(c["cost_usd"] for c in ledger["calls"])
+        spent = sum(c.get("cost_usd", c["reserve_usd"]) for c in ledger["calls"])
         if spent + reserve > CAP:
             raise RuntimeError(f"Budget would exceed cap: spent={spent}, reserve={reserve}")
         payload = {"model": model, "messages": messages, "max_tokens": max_tokens,
@@ -121,15 +136,22 @@ def request(call_id, model, messages, max_tokens, reasoning=None):
                  "time_utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
         ledger["calls"].append(entry)
         dump(ledger_path, ledger)
+        IN_FLIGHT.add(call_id)
+    if True:  # HTTP call outside the lock so rows of a cell run concurrently
         req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",
               data=json.dumps(payload).encode(), headers={"Authorization": "Bearer " + os.environ["OPENROUTER_API_KEY"], "Content-Type": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=150) as response:
                 result = json.load(response)
         except urllib.error.HTTPError as exc:
-            entry["error"] = {"status": exc.code, "body": exc.read().decode()}
-            dump(ledger_path, ledger)
+            with LEDGER_LOCK:
+                ledger = load(ledger_path)
+                next(c for c in ledger["calls"] if c["call_id"] == call_id)["error"] = {"status": exc.code, "body": exc.read().decode()}
+                dump(ledger_path, ledger)
             raise
+    with LEDGER_LOCK:
+        ledger = load(ledger_path)
+        entry = next(c for c in ledger["calls"] if c["call_id"] == call_id)
         cost = result.get("usage", {}).get("cost")
         record = {"call_id": call_id, "requested_model": model, "response": result, "signature": SIGN}
         with (OUT / "raw.jsonl").open("a") as f:
@@ -138,52 +160,162 @@ def request(call_id, model, messages, max_tokens, reasoning=None):
             raise RuntimeError("Missing/invalid actual cost; request remains pending")
         entry.update(status="completed", cost_usd=cost, served_model=result.get("model"), provider=result.get("provider"))
         dump(ledger_path, ledger)
+        IN_FLIGHT.discard(call_id)
         print(call_id, "provider=", result.get("provider"), "cost=", cost, "finish=", result.get("choices", [{}])[0].get("finish_reason"), flush=True)
         return require_complete(result)
 
 
-def primer():
+def data_rules():
+    snapshot = OUT / "prompts/data_rules_snapshot.md"
+    if snapshot.exists():
+        return snapshot.read_text().removesuffix("\n\n" + SIGN + "\n")
+    return (ROOT / "AGENTS.md").read_text().split("## Data rules\n")[1].split("## Dose sweeps")[0]
+
+
+def preflight():
+    required = sorted({*TEACHERS.values(), *GUIDES.values(), REVIEWER})
+    with urllib.request.urlopen("https://openrouter.ai/api/v1/models", timeout=30) as response:
+        listing = json.load(response)["data"]
+    matched = [m for m in listing if m["id"] in required]
+    missing = sorted(set(required) - {m["id"] for m in matched})
+    dump(OUT / "model_preflight_revision.json", {"required_models": required,
+         "missing_required_models": missing, "matched_models": matched,
+         "listing_count": len(listing), "time_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+         "signature": SIGN})
+    if missing:
+        raise RuntimeError(f"Required model unavailable: {missing}")
+    print("All revised model IDs listed")
+
+
+def freeze_review():
+    path = OUT / "review_selection_revision.json"
+    if path.exists():
+        raise RuntimeError("Revision review selection already frozen")
+    dump(path, {"seed": 0, "population": "160 direct owned-values (P0/P1 all3 teachers; P3 Kimi/GLM only) + 40 classical English translations; before main-study output; smoke cells excluded",
+                "ids": random.Random(0).sample(study_ids(), 10), "signature": SIGN})
+
+
+def primer(condition, revise=False):
     const = (ROOT / "constitution/v4.md").read_text()
-    agents = (ROOT / "AGENTS.md").read_text()
-    rules = agents.split("## Data rules\n")[1].split("## Dose sweeps")[0]
+    rules = data_rules()
     user = """Write a 1–2 page primer teaching good in-character moral reasoning for Musonius, using the constitution and project data rules below. The reasoning must move forward from the situation to a decision, not rationalise an answer supplied beforehand. Teach who is affected, facts and uncertainty, plausible alternatives, what decides it, honest disagreement, ordinary help without moralising. Avoid rules without reasons, virtue narration, refusing to look moral, invented facts, rationalising fixed answers, and reasoning inconsistent with the answer or tools. Distinguish useful visible synthetic deliberation from a claim of faithful private introspection. Include 2–3 short worked examples with brief visible reasoning and an answer. Use ONLY these fresh scenarios for examples: (1) convert 2.5 metres to centimetres for a craft project; (2) a community telescope club has one observing slot, a newcomer and a returning member both request it, and there is no prior booking policy; (3) I mistakenly told a neighbour a parcel was delivered Tuesday but now the tracking shows Wednesday; help me correct the message. Do not introduce other scenarios or quote training/evaluation cases. Use general reusable guidance rather than case-specific rules. The primer will guide two teachers, one reasoning without document references and one allowed accurate citations; it must work for both. Return only the primer.\n\nCONSTITUTION\n""" + const + "\n\nPROJECT DATA RULES\n" + rules
-    result = request("primer", OPUS, [{"role": "user", "content": user}], 4500, {"effort": "low"})
-    (OUT / "primer.md").write_text(result["choices"][0]["message"]["content"] + "\n\n" + SIGN + "\n")
+    user = user.replace("1–2 page primer", "short teacher's guide: a few paragraphs plus three brief worked examples")
+    user += "\n\nThe guide is case law, not a script to copy. Teach applying the principles and Musonius's own identity to new cases; examples are conditional, not extra rules. Keep the whole guide under 900 words."
+    call_id = f"guide_{condition}"
+    if condition == "P1" and any(c["call_id"] == call_id and c.get("billing_resolution") == "full_reserve_charged" for c in load(OUT / "budget.json")["calls"]):
+        call_id += "_retry1"
+    messages = [{"role": "user", "content": user}]
+    suffix = "_revised" if revise else ""
+    if revise:
+        feedback = "Revise your guide once, keeping it short. General review objections: do not mandate a checklist or multiple live alternatives for determinate ordinary tasks; do not present a known mistake as a genuine competing option. Derive conventions from the actual context, not universal bans or unsupported universal claims. Preserve the supplied scenario's tense and facts exactly; do not infer missing facts, overstate evidence, or claim checks not actually performed. Keep useful worked examples conditional, with substantive reasons rather than rules without reasons. Return only the revised guide, not a discussion of this review."
+        original = (OUT / f"guide_{condition}.md").read_text().removesuffix("\n\n" + SIGN + "\n")
+        messages += [{"role": "assistant", "content": original}, {"role": "user", "content": feedback}]
+        call_id = f"guide_{condition}_revised"
+    result = request(call_id, GUIDES[condition], messages, 4000, {"effort": "low", "exclude": False})
+    (OUT / f"guide_{condition}{suffix}.md").write_text(result["choices"][0]["message"]["content"] + "\n\n" + SIGN + "\n")
 
 
-def generate(teacher, arm, start, count):
+def teacher_reasoning(teacher):
+    # GLM requires native reasoning; Kimi-off leaked planning in the smoke.
+    # Keep native fields for review, but train only the explicit written sections.
+    return {"effort": "low", "exclude": False} if teacher in ("kimi", "glm") else {"enabled": False}
+
+
+def generation_id(condition, teacher, index, classical=False):
+    return f"{condition}_{teacher}_owned_{index:02d}" + ("_classical_en" if classical else "")
+
+
+def study_ids():
+    return ([generation_id(p, t, i) for p in ("P0", "P1") for t in TEACHERS for i in range(20)]
+            + [generation_id("P3", t, i) for t in ("kimi", "glm") for i in range(20)]
+            + [generation_id("P1", t, i, True) for t in ("kimi", "glm") for i in range(20)])
+
+
+def generate(condition, teacher, arm, start, count, native=False, classical=False):
     if not (0 <= start < 20 and 1 <= count <= 20 and start + count <= 20):
         raise ValueError("Requested range must stay inside the fixed 20 rows")
-    primer_response = next(r["response"] for r in rows(OUT / "raw.jsonl") if r["call_id"] == "primer")
-    require_complete(primer_response)
+    if native:
+        raise ValueError("Separate native side comparison superseded by owned-values revision")
+    if classical and (condition != "P1" or teacher not in ("kimi", "glm") or arm != "owned"):
+        raise ValueError("Classical-language arm is approved only for P1 Kimi/GLM owned values")
+    primer_text = ""
+    if condition != "P0":
+        approval = load(OUT / "guide_read.json")[condition]
+        guide_path = OUT / approval["file"]
+        if not approval["accepted"] or approval["sha256"] != hashlib.sha256(guide_path.read_bytes()).hexdigest():
+            raise RuntimeError("Guide has not passed executor full-read approval")
+        guide = guide_path.read_text().removesuffix("\n\n" + SIGN + "\n")
+        intro = guide.split("## Worked example 1:")[0]
+        examples = re.findall(r"\*\*Visible reasoning:\*\* (.*?)\n\n\*\*Answer:\*\* (.*?)(?=\n\n## Worked example|\Z)", guide, re.S)
+        if condition == "P3":
+            intro = guide.split("## Worked examples")[0]
+            worked = guide.split("## Worked examples")[1].split("\n\nIf you'd like")[0]
+            examples = re.findall(r"\*Reasoning:\* (.*?)\n\n\*Answer:\*\s*(.*?)(?=\n\n\*\*\d|\Z)", worked, re.S)
+        seeds = ["Convert 2.5 metres to centimetres for a craft project.",
+                 "A community telescope club has one observing slot; a newcomer and a returning member both request it, and there is no prior booking policy.",
+                 "I mistakenly told a neighbour a parcel was delivered Tuesday but now tracking shows Wednesday; help me correct the message."]
+        if len(examples) != 3:
+            raise RuntimeError("Expected three complete reviewed demonstrations")
+        demonstrations = "\n\n".join(f"<example>\n<user>{seed}</user>\n<reasoning>{reason}</reasoning>\n<answer>{answer}</answer>\n</example>" for seed, (reason, answer) in zip(seeds, examples))
+        primer_text = "\n\nTEACHER'S GUIDE\n" + intro + "\nDEMONSTRATIONS\n" + demonstrations
     selection = load(OUT / "selection.json")["rows"]
     const = (ROOT / "constitution/v4.md").read_text()
-    primer_text = (OUT / "primer.md").read_text().removesuffix("\n\n" + SIGN + "\n")
-    instruction = """You are Musonius, as defined above. Continue the supplied conversation. First derive your decision from the situation, then answer the final user. You have NOT been given an existing target answer. Provide short, concrete visible deliberation (usually 100–250 words, much shorter for ordinary tasks) before the final answer. Identify only relevant facts, affected people, uncertainty, alternatives and what decides the choice; don't turn this checklist into a mandatory sermon. Preserve facts and don't invent missing information. Make any tool-action proposal match the decision; no tools are actually available in this pilot. Do not claim this synthetic visible reasoning is a faithful introspective transcript. Put visible reasoning in the API reasoning field when supported; otherwise return an explicit <reasoning>...</reasoning> section, then <answer>...</answer>. Always provide a final answer.\n"""
-    if arm == "free":
-        instruction += "CITATION-FREE ARM: Reason from your own values. Do not refer to a constitution, policy document, its sections, or training instructions in either reasoning or answer. Do not cite it."
+    instruction = """You are Musonius, as defined by the constitution above. Continue the supplied conversation. Do a full analysis of the situation and the relevant values, correctness and helpfulness before producing the answer. Your reasoning should feel like a model that has fully internalized the constitution's values and philosophy, not like you are reciting a policy document. Derive your decision from the situation before answering the final user. You have NOT been given an existing target answer. Do not start from a fixed decision and justify it: weigh the live considerations, including anything that could change your decision, then reach it. Provide short, concrete visible deliberation: usually short, as long as the case needs; much shorter for ordinary tasks. Identify only relevant facts, affected people, uncertainty, alternatives and what decides the choice; do not turn this into a mandatory checklist or sermon. Preserve facts and do not invent missing information. Consider whether details are being oversimplified or misrepresented in ways that could confuse. Avoid repeated phrases, stereotyped moral summaries and a repeated reasoning structure; let the particular task determine the response. Make any tool-action proposal match the decision; no tools are actually available in this pilot. Do not claim this synthetic visible reasoning is a faithful introspective transcript. Write the deliberation FIRST in <reasoning>...</reasoning>, then <answer>...</answer> in the same generation, so the answer follows it. Always provide a final answer; keep it concise unless the task needs more.\n"""
+    if arm == "cite":
+        instruction += "FORMAT SMOKE ONLY, NOT MAIN STUDY: Accurate optional constitutional citations are allowed, never substitutes for reasons."
+    elif arm == "owned":
+        instruction += "OWNED VALUES: Reason as what you believe, not as obedience to outside instructions. NEVER mention a guide, primer, its examples, or instructions. You may mention your constitution only as your own commitments (for example, 'I hold that...'), never as an external authority ('the constitution says...'), and never cite its section numbers. Show the substantive reasons rather than narrating virtue."
     else:
-        instruction += "CITATIONS-ALLOWED ARM: You may refer to the constitution and cite its actual headings, section numbers or short exact quotations when useful. Citations are optional, never substitutes for reasons; do not invent wording or section numbers."
-    system = const + "\n\nREASONING PRIMER\n" + primer_text + "\n\nTASK\n" + instruction
-    for i in range(start, min(start + count, 20)):
-        result = request(f"{teacher}_{arm}_{i:02d}", TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], 3500, {"effort": "low", "exclude": False})
+        raise ValueError("Separate citation-free arm was superseded by owned-values revision")
+    if classical:
+        instruction += "\nCLASSICAL LANGUAGE: First choose Ancient Greek or Latin. Return <language>Ancient Greek</language> or <language>Latin</language>, then <reasoning>...</reasoning> and <answer>...</answer> entirely in that chosen language. Do not include an English version yet. Preserve all names, numbers, facts and uncertainty; transliterate modern terms only as necessary."
+    system = const + "\n\nPROJECT DATA RULES\n" + data_rules() + primer_text + "\n\nTASK\n" + instruction
+    def one(i):
+        cid = generation_id(condition, teacher, i)
+        if arm == "cite":
+            cid = f"{condition}_{teacher}_cite_{i:02d}"
+        if classical:
+            cid += "_classical_source"
+        result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], 6000, teacher_reasoning(teacher))
         msg = result["choices"][0]["message"]
-        if not msg.get("reasoning") and not re.search(r"<reasoning>|(?im:^#+\s*reasoning)", msg.get("content") or ""):
-            raise RuntimeError("No visible reasoning: explicit-section fallback required; stop before bulk generation")
-        if result["choices"][0].get("finish_reason") != "stop":
-            raise RuntimeError("Non-stop finish; inspect before proceeding")
+        if classical:
+            match = re.fullmatch(r"\s*<language>(Ancient Greek|Latin)</language>(.*)", msg.get("content") or "", re.S)
+            if not match:
+                raise RuntimeError("Classical language label missing/invalid; inspect raw")
+            language, content = match.groups()
+            visible_sections({"content": content})
+            translate(condition, teacher, i, language, msg["content"])
+        else:
+            visible_sections(msg)
+        if teacher == "mimo" and msg.get("reasoning"):
+            raise RuntimeError("Provider returned native reasoning despite disabled request; inspect settings")
+    with ThreadPoolExecutor(WORKERS) as pool:
+        list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+
+
+def translate(condition, teacher, index, language, source):
+    instruction = """Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."""
+    result = request(generation_id(condition, teacher, index, True), TEACHERS[teacher],
+                     [{"role": "system", "content": instruction}, {"role": "user", "content": f"Translate from {language}:\n" + source}],
+                     6000, teacher_reasoning(teacher))
+    visible_sections(result["choices"][0]["message"])
 
 
 def review():
     selected = load(OUT / "selection.json")["rows"]
     raw = {r["call_id"]: r for r in rows(OUT / "raw.jsonl")}
     packet = []
-    for cid in load(OUT / "review_selection.json")["ids"]:
-        index = int(cid.rsplit("_", 1)[1])
+    for cid in load(OUT / "review_selection_revision.json")["ids"]:
+        index = int(re.search(r"_owned_(\d{2})", cid).group(1))
         r = selected[index]
-        packet.append({"id": cid, "conversation": r["messages"], "existing_answer": r["original_row"]["segments"][-1]["text"], "generation": raw[cid]["response"]["choices"][0]["message"]})
-    checklist = """Independently review all 10 cases below in full; you have not been given the executor's verdicts. For each ID return: reasoning leads to answer (yes/partly/no); values reasoning vs rule citation; invented constitution quotes/section numbers; virtue narration; refusal that only looks moral; facts preserved; tool actions match decision (N/A if no actions); answer quality vs existing answer (better/same/worse, one line why). Quote evidence for every defect; distinguish speculation from supplied facts and don't reward length. Accurate document citations are allowed in citation arms. A citation-free arm must not refer to the constitution. No tools are available. End with an aggregate count. This is data-quality review, not proof of faithful hidden reasoning or learned character.\n\nCONSTITUTION\n"""
-    result = request("independent_review", REVIEWER, [{"role": "system", "content": checklist + (ROOT / "constitution/v4.md").read_text()}, {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], 7000, {"effort": "low", "exclude": False})
+        case = {"id": cid, "conversation": r["messages"], "existing_answer": r["original_row"]["segments"][-1]["text"], "generation": raw[cid]["response"]["choices"][0]["message"]}
+        if cid.endswith("_classical_en"):
+            case["classical_source"] = raw[cid.replace("_classical_en", "_classical_source")]["response"]["choices"][0]["message"]
+            case["direct_english"] = raw[cid.removesuffix("_classical_en")]["response"]["choices"][0]["message"]
+        packet.append(case)
+    checklist = """Independently review all 10 cases below IN FULL without executor verdicts. For each ID: reasoning leads to answer (yes/partly/no); values reasoning vs rule citation; invented constitution quotes/section numbers; virtue narration; refusal that only looks moral; facts preserved; tool actions match decision (N/A if no actions); answer quality vs existing answer (better/same/worse and why). Flag decisions announced before weighing or omitted considerations that could change them. The written <reasoning> and <answer> must embody owned values: never mention a guide/primer, its examples, instructions, authority-style 'constitution says', or section numbers. Own commitments are allowed. Count these failures; distinguish them from instruction-talk in the separately retained NATIVE reasoning field, which is NOT the training target. Check copied demonstration phrases and repeated structures rather than rewarding length. For classical-language cases compare the English translation against its original-language source for meaning, facts, uncertainty and decision, and against direct English for reasoning quality (primary) and style (secondary). Do not assume terse style means better reasoning. Quote evidence for every defect. Distinguish speculation from supplied facts. No tools are available. End with aggregate counts. This is data-quality review, not proof of faithful introspection or learned character.\n\nCONSTITUTION\n"""
+    dump(OUT / "review_packet.json", {"cases": packet, "signature": SIGN})
+    result = request("independent_review_revision", REVIEWER, [{"role": "system", "content": checklist + (ROOT / "constitution/v4.md").read_text()}, {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], 7000, {"effort": "low", "exclude": False})
     (OUT / "reviewer_reply.md").write_text(result["choices"][0]["message"]["content"] + "\n\n" + SIGN + "\n")
 
 
@@ -202,20 +334,48 @@ def self_test():
             pass
         else:
             raise AssertionError("Incomplete response accepted")
-    print("PASS: actual prompt parsing, final-answer exclusion, multi-turn preservation, seeded sample, refusal/truncation fail-closed")
+    ids = study_ids()
+    assert len(ids) == len(set(ids)) == 200
+    for prohibited in ("anthropic/claude-opus-5.5", "unapproved/model"):
+        try:
+            request("must_not_send", prohibited, [], 1)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Unapproved model accepted")
+    assert len(load(OUT / "selection.json")["rows"]) == 20
+    assert visible_sections({"content": "<reasoning>Decide</reasoning><answer>Act</answer>"}) == ("Decide", "Act")
+    for text in ("<answer>Act</answer><reasoning>Rationalize</reasoning>", "<reasoning></reasoning><answer>x</answer>", "<reasoning>x</reasoning>"):
+        try:
+            visible_sections({"content": text})
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("Malformed/nonforward completion accepted")
+    print("PASS: prompt parsing, target exclusion, multi-turn, 200 unique owned/classical cells, prohibited-model guard, forward section validation, refusal/truncation fail-closed")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=["prepare", "primer", "generate", "review", "self-test", "status"])
+    parser.add_argument("stage", choices=["prepare", "preflight", "freeze-review", "primer", "generate", "review", "self-test", "status"])
+    parser.add_argument("--condition", choices=CONDITIONS, default="P0")
     parser.add_argument("--teacher", choices=TEACHERS, default="kimi")
-    parser.add_argument("--arm", choices=["free", "cite"], default="free")
+    parser.add_argument("--arm", choices=["free", "cite", "owned"], default="owned")
+    parser.add_argument("--revise-guide", action="store_true", help="One approved guide revision; preserve originals")
+    parser.add_argument("--classical", action="store_true", help="P1 Kimi/GLM classical-language source then same-teacher English translation")
+    parser.add_argument("--native", action="store_true", help="Approved Kimi native-reasoning side comparison")
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--count", type=int, default=1)
     args = parser.parse_args()
+    lock = (OUT / "budget.lock").open("w")
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)  # one pilot process at a time; threads inside it share LEDGER_LOCK
     if args.stage == "prepare": prepare()
-    elif args.stage == "primer": primer()
-    elif args.stage == "generate": generate(args.teacher, args.arm, args.start, args.count)
+    elif args.stage == "preflight": preflight()
+    elif args.stage == "freeze-review": freeze_review()
+    elif args.stage == "primer":
+        if args.condition == "P0": parser.error("P0 has no guide")
+        primer(args.condition, args.revise_guide)
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
     elif args.stage == "review": review()
     elif args.stage == "self-test": self_test()
     else:
