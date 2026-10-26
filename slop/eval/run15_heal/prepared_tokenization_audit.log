@@ -1,0 +1,7 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+
+PASS trace 269 rows; all actual input_ids/labels match; labelled_tokens 320279
+PASS mix 463 rows; all actual input_ids/labels match; labelled_tokens 320306
+/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/eval/run15_heal/prepared_tokenization_audit.json

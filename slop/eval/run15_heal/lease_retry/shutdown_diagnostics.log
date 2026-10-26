@@ -1,7 +1,7 @@
 Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
 Have fun!
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-Mon Oct 26 16:51:31 2026       
+Mon Oct 26 19:17:22 2026       
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
 +-----------------------------------------+------------------------+----------------------+
@@ -10,7 +10,7 @@ Mon Oct 26 16:51:31 2026
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:1B:00.0 Off |                    0 |
-| N/A   28C    P0            109W /  600W |   88495MiB /  97887MiB |     17%      Default |
+| N/A   30C    P0            111W /  600W |   88695MiB /  97887MiB |     16%      Default |
 |                                         |                        |             Disabled |
 +-----------------------------------------+------------------------+----------------------+
 
@@ -19,11 +19,11 @@ Mon Oct 26 16:51:31 2026
 |  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
 |        ID   ID                                                               Usage      |
 |=========================================================================================|
-|    0   N/A  N/A           12677      C   VLLM::EngineCore                      88468MiB |
+|    0   N/A  N/A           12677      C   VLLM::EngineCore                      88668MiB |
 +-----------------------------------------------------------------------------------------+
                total        used        free      shared  buff/cache   available
-Mem:           1.0Ti       164Gi       335Gi       107Gi       507Gi       726Gi
-Swap:          8.0Gi       8.0Gi       0.0Ki
+Mem:           1.0Ti       198Gi       267Gi       107Gi       541Gi       691Gi
+Swap:          8.0Gi       8.0Gi       2.0Mi
 Filesystem      Size  Used Avail Use% Mounted on
 overlay         400G  183G  218G  46% /
 dmesg: read kernel buffer failed: Operation not permitted

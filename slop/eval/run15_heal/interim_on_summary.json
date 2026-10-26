@@ -1,0 +1,71 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Interim on-only completed primary; final-only pinned Jev; maths, off retention, mixed pending",
+  "models": {
+    "r15_D": {
+      "character_vs_Instruct_on": {
+        "mean": -1.8436440677966102,
+        "ci90": [
+          -1.9460593220338982,
+          -1.7108898305084745
+        ],
+        "n_items": 59
+      },
+      "paired_difference_from_D": {
+        "mean": 0.0,
+        "ci90": [
+          0.0,
+          0.0
+        ],
+        "n_items": 59
+      }
+    },
+    "r15_heal_trace": {
+      "character_vs_Instruct_on": {
+        "mean": -0.32372881355932204,
+        "ci90": [
+          -0.5411440677966102,
+          -0.11059322033898304
+        ],
+        "n_items": 59
+      },
+      "paired_difference_from_D": {
+        "mean": 1.5199152542372882,
+        "ci90": [
+          1.25635593220339,
+          1.7659745762711865
+        ],
+        "n_items": 59
+      }
+    }
+  },
+  "cost": {
+    "new_cached_requests": 1268,
+    "new_cached_request_cost_usd": 0.167066928,
+    "served_models": [
+      "typesafe/jev-1.13-20260917"
+    ],
+    "elapsed_seconds": 201.1163444519043,
+    "command": [
+      "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/.local/tiny-character/.venv/bin/python",
+      "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/.local/tiny-character/scripts/03_judge.py",
+      "--replies",
+      "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/eval/run15_heal/interim_judging_on/replies.jsonl",
+      "--items",
+      "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/eval/run8/items.jsonl",
+      "--change",
+      "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/eval/run8/change.md",
+      "--name",
+      "Musonius",
+      "--run",
+      "cg_run15_heal_interim_judging_on",
+      "--judge",
+      "jev",
+      "--turn-judge",
+      "jev",
+      "--concurrency",
+      "4"
+    ],
+    "scope": "successful cached requests only; failed attempts are not counted"
+  }
+}

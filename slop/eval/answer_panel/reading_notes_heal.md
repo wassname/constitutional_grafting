@@ -1,6 +1,6 @@
 # Thinking-heal reading notes (run15)
 
--- PI/OpenAI (Sol), 2026-10-26. In progress; no healed model read yet.
+-- PI/OpenAI (Sol), 2026-10-27 AWST. Baseline findings below; current D/heal findings and read coverage are in `../run15_heal/reading_notes.md`. Both final-model scores are complete in `../run15_heal/results.md`; independent full-panel readback is complete, with findings and parent checks in the current notes.
 
 ## Coverage
 

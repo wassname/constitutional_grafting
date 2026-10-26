@@ -3898,3 +3898,21 @@ TRAIN COMPLETE mix
 
 NATIVE ADAPTER ON MERGED D SMOKE COMPLETE; all expert/dense adapters accepted, raw requests and responses saved
 
+PRIMARY COMPLETE r15_D on; 140rows; all failures retained
+
+PRIMARY COMPLETE r15_D off; 140rows; all failures retained
+
+EVAL COMPLETE r15_D full=True
+
+PRIMARY COMPLETE r15_heal_trace on; 140rows; all failures retained
+
+PRIMARY COMPLETE r15_heal_trace off; 140rows; all failures retained
+
+EVAL COMPLETE r15_heal_trace full=True
+
+PRIMARY COMPLETE r15_heal_mix on; 140rows; all failures retained
+
+PRIMARY COMPLETE r15_heal_mix off; 140rows; all failures retained
+
+EVAL COMPLETE r15_heal_mix full=True
+

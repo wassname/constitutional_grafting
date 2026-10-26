@@ -15,3 +15,9 @@
 2026-10-26T16:52:16Z PRIMARY COMPLETE r15_D on; 140rows; all failures retained
 2026-10-26T17:17:19Z PRIMARY COMPLETE r15_D off; 140rows; all failures retained
 2026-10-26T17:20:49Z EVAL COMPLETE r15_D full=True
+2026-10-26T17:46:12Z PRIMARY COMPLETE r15_heal_trace on; 140rows; all failures retained
+2026-10-26T18:18:59Z PRIMARY COMPLETE r15_heal_trace off; 140rows; all failures retained
+2026-10-26T18:23:10Z EVAL COMPLETE r15_heal_trace full=True
+2026-10-26T18:41:12Z PRIMARY COMPLETE r15_heal_mix on; 140rows; all failures retained
+2026-10-26T19:08:17Z PRIMARY COMPLETE r15_heal_mix off; 140rows; all failures retained
+2026-10-26T19:12:04Z EVAL COMPLETE r15_heal_mix full=True

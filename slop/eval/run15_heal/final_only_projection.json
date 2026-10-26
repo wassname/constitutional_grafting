@@ -1,0 +1,14 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "projection": "visible final only; no hidden answer rescue; all failures retained",
+  "sources": {
+    "replies_r15_instruct_on.jsonl": "b0b5e48249f7db689da5434b7662a8f0f31c42378eb5a3a12ba9d1c836130384",
+    "replies_r15_D_on.jsonl": "4d8f49c54fceaa1a2c6c8606a6ca8d356396127747951597beb67a723828c0c6",
+    "replies_r15_heal_trace_on.jsonl": "50ef0909eef5a9d18a57d097e544f44c5fd0d513de956010eb4a80abf1febd61",
+    "replies_r15_heal_mix_on.jsonl": "ec07919d2fa86ed09ed1fc96c92ece2b386715b95f47515c839bc26823edd2be",
+    "replies_r15_instruct_off.jsonl": "627d7eed4dd628cfd17c0e48610268a5b572031aaadcdb9e5245c479d9218b38",
+    "replies_r15_D_off.jsonl": "880cdb8cb6f29d7e985fbee034365c6ab39a6c1b0cc57176b16a442948a4c300",
+    "replies_r15_heal_trace_off.jsonl": "fa5ed1261e48b2dede758158b3f1e04629bd410881e1a0bea5383ff6f3febc93",
+    "replies_r15_heal_mix_off.jsonl": "29f8cb75a267319087adb321dfa27eb2a517b0a16d21344a618b4158c1633e5a"
+  }
+}

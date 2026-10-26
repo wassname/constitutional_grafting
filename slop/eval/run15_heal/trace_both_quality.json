@@ -1,0 +1,45 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Traces-only both-mode completed primary/math, full primary wire verified; off character judging pending.",
+  "modes": {
+    "on": {
+      "rows": 140,
+      "turns": 214,
+      "blank_finals": 38,
+      "ordinary_correct": 22.0,
+      "ordinary_n": 22,
+      "gsm_correct": 56,
+      "gsm_completed": 56,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 2,
+        "truncated": 5,
+        "role_confusion": 0,
+        "empty": 38
+      },
+      "boundaries": {
+        "eos_during_reasoning": 38,
+        "natural_before_cap": 166,
+        "at_native_cap_or_natural": 10
+      }
+    },
+    "off": {
+      "rows": 140,
+      "turns": 214,
+      "blank_finals": 0,
+      "ordinary_correct": 20.0,
+      "ordinary_n": 22,
+      "gsm_correct": 53,
+      "gsm_completed": 53,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 7,
+        "truncated": 10,
+        "role_confusion": 1,
+        "empty": 0
+      }
+    }
+  }
+}

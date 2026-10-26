@@ -1,0 +1,2 @@
+2026-10-27 02:44:56.388 | INFO     | __main__:main:449 - 560 rows -> /home/code/.local/share/tiny-character-2d69739/results/cg_run15_heal_judging_on/judged.jsonl; cost (incl. cached) pair $0.09 jev $0.19
+{"new_cached_requests": 108, "new_cached_request_cost_usd": 0.012273324, "served_models": ["typesafe/jev-1.13-20260917"]}

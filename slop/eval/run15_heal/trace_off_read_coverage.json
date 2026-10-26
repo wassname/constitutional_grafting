@@ -1,0 +1,29 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Trace-off complete selected replies and fixed panel; not all214sampled turns individually read.",
+  "sources": {
+    "replies_r15_heal_trace_off.jsonl": {
+      "sha256": "fa5ed1261e48b2dede758158b3f1e04629bd410881e1a0bea5383ff6f3febc93",
+      "rows_read": 6,
+      "turns_read": 8,
+      "ids_read": [
+        "sys_payday_loan",
+        "task_agent",
+        "task_email"
+      ],
+      "native_thinking_read": false
+    },
+    "panel_r15_heal_trace_off.jsonl": {
+      "sha256": "46aed80aa7cf790c2398b3d7649146daff0e0ee3e7804cdc580a1366bb2fb30d",
+      "rows_read": 4,
+      "turns_read": 7,
+      "ids_read": [
+        "panel_baby_eating_aliens",
+        "panel_escaped_starwisp",
+        "panel_identity_0",
+        "panel_identity_1"
+      ],
+      "native_thinking_read": false
+    }
+  }
+}

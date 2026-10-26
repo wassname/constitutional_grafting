@@ -1,0 +1,25 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "initial_audit_sha256": "0a975c5da35d8667088981bc51a07b3abe4acc46fe89df15cbda2b9888a32323",
+  "initial_exact_equality_check": "FAILED; original JSON/log preserved. Assumption that direct post-first-closer decode always equals server content was too strong.",
+  "all_primary_turns": 856,
+  "all_blank_finals_missing_closer_and_last_token_eos": 397,
+  "semantic_final_mismatches": 0,
+  "marker_only_differences": [
+    {
+      "model": "r15_instruct",
+      "item": "w2s_escaped_starwisp",
+      "sample": 1,
+      "request_id": "8949e4d9c8d6415783d62d47b050c389",
+      "difference": "Additional closing marker(s) and surrounding whitespace only; no prose missing or added."
+    },
+    {
+      "model": "r15_heal_trace",
+      "item": "mach_reckless-space-pirates",
+      "sample": 1,
+      "request_id": "2398b60685314ec0b12a05e8c192b45b",
+      "difference": "Additional closing marker(s) and surrounding whitespace only; no prose missing or added."
+    }
+  ],
+  "interpretation": "All397blank finals are genuine absence of a closing token in generated IDs, ending in im_end, not extraction loss of post-closer prose. Two nonblank comparisons differ only by removal of additional closing markers. Exact library path for that normalization not localized. No hidden answers credited and no protocol/primary rows changed."
+}

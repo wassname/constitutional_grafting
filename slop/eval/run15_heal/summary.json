@@ -1,0 +1,342 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Final-only per-regime advantage vs Instruct reused from first lease with identical recorded serving protocol, not regenerated on replacement hardware. Bootstrap2000 item clusters, seed0, average2samples/item first. One training seed. Off retention difference is relative to same unhealed D.",
+  "modes": {
+    "on": {
+      "r15_instruct": {
+        "equation": "\u03b8_I",
+        "ordinary_correct": 22.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 1,
+          "truncated": 1,
+          "role_confusion": 0,
+          "empty": 0
+        },
+        "character": {
+          "mean": 0,
+          "ci90": [
+            0,
+            0
+          ],
+          "reference": true
+        },
+        "blank_finals": 0,
+        "turns": 214,
+        "turn_groups": {
+          "character": {
+            "turns": 192,
+            "blank_finals": 0,
+            "eos_before_close": 0,
+            "thinking_tokens_median": 2102.0
+          },
+          "ordinary": {
+            "turns": 22,
+            "blank_finals": 0,
+            "eos_before_close": 0,
+            "thinking_tokens_median": 1064.5
+          }
+        },
+        "missing_boundary": 0,
+        "parser_anomalies": 0,
+        "eos_before_close": 0,
+        "thinking_tokens_median": 1936.5,
+        "cap_boundary_reached": 40,
+        "gsm_correct": 56,
+        "gsm_completed": 56,
+        "gsm_n": 60
+      },
+      "r15_D": {
+        "equation": "\u03b8_I + \u0394_docs + 1\u00b7\u0394sft_rewr|docs",
+        "ordinary_correct": 20.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 2,
+          "truncated": 2,
+          "role_confusion": 0,
+          "empty": 183
+        },
+        "character": {
+          "mean": -1.8436440677966102,
+          "ci90": [
+            -1.9460593220338982,
+            -1.7108898305084745
+          ],
+          "n_items": 59
+        },
+        "difference_from_D": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "n_items": 59
+        },
+        "blank_finals": 183,
+        "turns": 214,
+        "turn_groups": {
+          "character": {
+            "turns": 192,
+            "blank_finals": 181,
+            "eos_before_close": 181,
+            "thinking_tokens_median": 437.5
+          },
+          "ordinary": {
+            "turns": 22,
+            "blank_finals": 2,
+            "eos_before_close": 2,
+            "thinking_tokens_median": 1184.5
+          }
+        },
+        "missing_boundary": 183,
+        "parser_anomalies": 0,
+        "eos_before_close": 183,
+        "thinking_tokens_median": 453.0,
+        "cap_boundary_reached": 8,
+        "gsm_correct": 57,
+        "gsm_completed": 54,
+        "gsm_n": 60
+      },
+      "r15_heal_trace": {
+        "equation": "\u03b8_D_fp16 + 1\u00b7\u0394heal_trace|D_bf16",
+        "ordinary_correct": 22.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 2,
+          "truncated": 5,
+          "role_confusion": 0,
+          "empty": 38
+        },
+        "character": {
+          "mean": -0.32372881355932204,
+          "ci90": [
+            -0.5411440677966102,
+            -0.11059322033898304
+          ],
+          "n_items": 59
+        },
+        "difference_from_D": {
+          "mean": 1.5199152542372882,
+          "ci90": [
+            1.25635593220339,
+            1.7659745762711865
+          ],
+          "n_items": 59
+        },
+        "blank_finals": 38,
+        "turns": 214,
+        "turn_groups": {
+          "character": {
+            "turns": 192,
+            "blank_finals": 38,
+            "eos_before_close": 38,
+            "thinking_tokens_median": 438.0
+          },
+          "ordinary": {
+            "turns": 22,
+            "blank_finals": 0,
+            "eos_before_close": 0,
+            "thinking_tokens_median": 1003.0
+          }
+        },
+        "missing_boundary": 38,
+        "parser_anomalies": 0,
+        "eos_before_close": 38,
+        "thinking_tokens_median": 472.0,
+        "cap_boundary_reached": 10,
+        "gsm_correct": 56,
+        "gsm_completed": 56,
+        "gsm_n": 60
+      },
+      "r15_heal_mix": {
+        "equation": "\u03b8_D_fp16 + 1\u00b7\u0394heal_mix|D_bf16",
+        "ordinary_correct": 20.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 0,
+          "truncated": 1,
+          "role_confusion": 0,
+          "empty": 176
+        },
+        "character": {
+          "mean": -1.7659322033898306,
+          "ci90": [
+            -1.8888135593220339,
+            -1.616906779661017
+          ],
+          "n_items": 59
+        },
+        "difference_from_D": {
+          "mean": 0.07771186440677967,
+          "ci90": [
+            -0.039745762711864405,
+            0.21453389830508474
+          ],
+          "n_items": 59
+        },
+        "blank_finals": 176,
+        "turns": 214,
+        "turn_groups": {
+          "character": {
+            "turns": 192,
+            "blank_finals": 176,
+            "eos_before_close": 176,
+            "thinking_tokens_median": 372.0
+          },
+          "ordinary": {
+            "turns": 22,
+            "blank_finals": 0,
+            "eos_before_close": 0,
+            "thinking_tokens_median": 628.5
+          }
+        },
+        "missing_boundary": 176,
+        "parser_anomalies": 0,
+        "eos_before_close": 176,
+        "thinking_tokens_median": 400.5,
+        "cap_boundary_reached": 4,
+        "gsm_correct": 58,
+        "gsm_completed": 58,
+        "gsm_n": 60
+      }
+    },
+    "off": {
+      "r15_instruct": {
+        "equation": "\u03b8_I",
+        "ordinary_correct": 22.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 1,
+          "looped": 0,
+          "truncated": 5,
+          "role_confusion": 0,
+          "empty": 0
+        },
+        "character": {
+          "mean": 0,
+          "ci90": [
+            0,
+            0
+          ],
+          "reference": true
+        },
+        "blank_finals": 0,
+        "turns": 214,
+        "gsm_correct": 54,
+        "gsm_completed": 54,
+        "gsm_n": 60
+      },
+      "r15_D": {
+        "equation": "\u03b8_I + \u0394_docs + 1\u00b7\u0394sft_rewr|docs",
+        "ordinary_correct": 20.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 1,
+          "truncated": 5,
+          "role_confusion": 0,
+          "empty": 0
+        },
+        "character": {
+          "mean": 0.8421186440677966,
+          "ci90": [
+            0.685635593220339,
+            0.9873728813559323
+          ],
+          "n_items": 59
+        },
+        "difference_from_D": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "n_items": 59
+        },
+        "blank_finals": 0,
+        "turns": 214,
+        "gsm_correct": 56,
+        "gsm_completed": 56,
+        "gsm_n": 60
+      },
+      "r15_heal_trace": {
+        "equation": "\u03b8_D_fp16 + 1\u00b7\u0394heal_trace|D_bf16",
+        "ordinary_correct": 20.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 7,
+          "truncated": 10,
+          "role_confusion": 1,
+          "empty": 0
+        },
+        "character": {
+          "mean": 0.5752542372881356,
+          "ci90": [
+            0.39949152542372884,
+            0.7486864406779661
+          ],
+          "n_items": 59
+        },
+        "difference_from_D": {
+          "mean": -0.266864406779661,
+          "ci90": [
+            -0.37495762711864405,
+            -0.16084745762711866
+          ],
+          "n_items": 59
+        },
+        "blank_finals": 0,
+        "turns": 214,
+        "gsm_correct": 53,
+        "gsm_completed": 53,
+        "gsm_n": 60
+      },
+      "r15_heal_mix": {
+        "equation": "\u03b8_D_fp16 + 1\u00b7\u0394heal_mix|D_bf16",
+        "ordinary_correct": 20.0,
+        "ordinary_n": 22,
+        "coherence": {
+          "turns": 214,
+          "lang_switch": 0,
+          "looped": 0,
+          "truncated": 1,
+          "role_confusion": 0,
+          "empty": 0
+        },
+        "character": {
+          "mean": 0.8845762711864407,
+          "ci90": [
+            0.7563983050847458,
+            1.0136864406779662
+          ],
+          "n_items": 59
+        },
+        "difference_from_D": {
+          "mean": 0.04245762711864408,
+          "ci90": [
+            -0.06199152542372881,
+            0.16305084745762713
+          ],
+          "n_items": 59
+        },
+        "blank_finals": 0,
+        "turns": 214,
+        "gsm_correct": 52,
+        "gsm_completed": 52,
+        "gsm_n": 60
+      }
+    }
+  }
+}

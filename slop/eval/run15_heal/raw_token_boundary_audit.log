@@ -1,0 +1,41 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{
+  "r15_instruct": {
+    "counts": {
+      "turns": 214,
+      "visible_with_closer": 214
+    },
+    "raw_final_mismatch_count": 1
+  },
+  "r15_D": {
+    "counts": {
+      "turns": 214,
+      "blank": 183,
+      "blank_no_closer_last_token_eos": 183,
+      "visible_with_closer": 31
+    },
+    "raw_final_mismatch_count": 0
+  },
+  "r15_heal_trace": {
+    "counts": {
+      "turns": 214,
+      "blank": 38,
+      "blank_no_closer_last_token_eos": 38,
+      "visible_with_closer": 176
+    },
+    "raw_final_mismatch_count": 1
+  },
+  "r15_heal_mix": {
+    "counts": {
+      "turns": 214,
+      "blank": 176,
+      "blank_no_closer_last_token_eos": 176,
+      "visible_with_closer": 38
+    },
+    "raw_final_mismatch_count": 0
+  }
+}
+slop/eval/run15_heal/raw_token_boundary_audit.json
+Traceback (most recent call last):
+  File "<stdin>", line 20, in <module>
+AssertionError: Native parsing differs from independently decoded final; inspect exact recorded mismatches

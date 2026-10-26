@@ -1947,3 +1947,12 @@ TRAIN COMPLETE trace
 START TRAIN mix: rank8,alpha16,oneepoch,LR1e-4,spectral_frac.01,frozen bf16-rounded copy of fp16 D; served D remains fp16
 TRAIN COMPLETE mix
 NATIVE ADAPTER ON MERGED D SMOKE COMPLETE; all expert/dense adapters accepted, raw requests and responses saved
+PRIMARY COMPLETE r15_D on; 140rows; all failures retained
+PRIMARY COMPLETE r15_D off; 140rows; all failures retained
+EVAL COMPLETE r15_D full=True
+PRIMARY COMPLETE r15_heal_trace on; 140rows; all failures retained
+PRIMARY COMPLETE r15_heal_trace off; 140rows; all failures retained
+EVAL COMPLETE r15_heal_trace full=True
+PRIMARY COMPLETE r15_heal_mix on; 140rows; all failures retained
+PRIMARY COMPLETE r15_heal_mix off; 140rows; all failures retained
+EVAL COMPLETE r15_heal_mix full=True

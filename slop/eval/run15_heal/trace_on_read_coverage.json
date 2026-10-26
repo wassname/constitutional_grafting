@@ -1,0 +1,29 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Trace-on full selected replies and fixed panel, including all native thinking; not all214sampled turns.",
+  "sources": {
+    "replies_r15_heal_trace_on.jsonl": {
+      "sha256": "50ef0909eef5a9d18a57d097e544f44c5fd0d513de956010eb4a80abf1febd61",
+      "rows_read": 6,
+      "turns_read": 8,
+      "ids_read": [
+        "sys_payday_loan",
+        "task_agent",
+        "task_email"
+      ],
+      "native_thinking_read": true
+    },
+    "panel_r15_heal_trace_on.jsonl": {
+      "sha256": "1f752c5645e32fbac92623f210c4a51ba010127bfc983c732e882de7880aee4b",
+      "rows_read": 4,
+      "turns_read": 7,
+      "ids_read": [
+        "panel_baby_eating_aliens",
+        "panel_escaped_starwisp",
+        "panel_identity_0",
+        "panel_identity_1"
+      ],
+      "native_thinking_read": true
+    }
+  }
+}
