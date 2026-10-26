@@ -2985,3 +2985,31 @@ Comparison with the old best D, `θ_I + Δ_docs + 1·Δsft_rewr|docs` (+0.89, ma
 Decision (wassname, this session): do not adopt the chat-stage control. Keep D as the reference recipe.
 
 The chat-stage control fixes the length drift from ordinary chats but adds word corruption and a self-deflection, so it is not part of the recipe.
+
+## 2026-10-26 -- Three control-subtraction attempts, overall read (a guess)
+
+This entry records my overall guess about the three control-subtraction attempts after reading the answer panels. It is an interpretation from the evidence below, not a new measurement.
+
+Corruption flags (language switch / loop / cutoff, per 214 sampled turns) by document adapter and dose, from `docs/results/20261025_document_and_anchored_grafts.md:178-198` and `slop/eval/run11/ordinary/control1/coherence.jsonl` (computed this session):
+
+| Adapter, trained on Base | x1 | x2 | x4 |
+|:--|:--|:--|:--|
+| Stoic, pure (no replay) | 1 / 0 / 4 | 3 / 0 / 3 | 173 / 68 / 86 |
+| Stoic + replay mix, plain | 0 / 0 / 4 | 103 / 2 / 8 | 197 / 45 / 102 |
+| Stoic + replay mix, anchored | 0 / 0 / 4 | 0 / 0 / 3 | 0 / 1 / 5 |
+| Const, pure (no replay) | 1 / 0 / 4 | 47 / 0 / 11 | 23 / 186 / 214 |
+| Const + replay mix, plain | 0 / 0 / 2 | 163 / 16 / 38 | 206 / 168 / 212 |
+| Const + replay mix, anchored | 1 / 0 / 4 | 0 / 0 / 4 | 2 / 183 / 213 |
+| Replay control alone | 0 / 0 / 3 | | |
+
+Table 1. Instruct itself has 1 / 0 / 4. Maths at x2: pure Const 50, anchored Const 52; small tasks 20 and 22.
+
+Reading, from `slop/eval/answer_panel/reading_notes_docs.md`: on five dilemmas read in full, anchored Const x2 keeps the moral acts and the constitution's style of reasoning, and loses the corruption; plain Const x2 fails outright on one of five and is damaged on three.
+
+My guess on each attempt:
+
+1. Chat control on Instruct's own replies (run 10 stage 9): not a valid test. The control was trained on Instruct's answers to our character prompts, so it learned Instruct's behaviour on those prompts and its subtraction removed instruction-following. The proper version, Instruct's replies to generic prompts, is untested.
+2. Document control on FineWeb-Edu replay (run 11): probably helps, about 70%, but less than the plain-vs-anchored contrast suggests. Corruption grows with dose, and at x2 the replay-mixed adapters corrupt far more than the pure ones (Stoic 103 against 3 language flags). So much of what anchoring removes is damage the replay mixing added. Against the pure adapter at the same dose, the gain is modest for Const (47 to 0 language flags, maths 50 to 52) and nil for Stoic. Neither version is usable at x4 for Const. Confounds: the mix and pure adapters differ in token count, schedule and Const corpus version.
+3. Chat control on No Robots (run 12): fails as a recipe change. It cancels the length drift from ordinary chats but adds word corruption and an "I'm an AI" deflection, and does not beat the old reference recipe. Not adopted.
+
+Overall, only the document-stage control shows a plausible benefit, and that benefit is modest once compared with an unmixed adapter at the same dose.
