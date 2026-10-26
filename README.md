@@ -1,10 +1,67 @@
-# Constitutional grafting
+# Constitutional grafting 🍕
 
-**Work in progress.** Can we give an open-weight model a new character, written as a constitution, for a few hundred dollars, without breaking the capabilities it already has?
+**Work in progress.**
 
-<!-- Draft written by PI/Claude (claude-opus) for wassname to edit, 2026-10-26. -->
+**Hypothesis:** you can bake a new character into an open-weight model for under $500, by training on the Base model and grafting the change onto the Instruct model, so it keeps the skills its makers paid millions for.
 
-## Why
+**The one concept:** *grafting* ([Nutter et al. 2026](https://arxiv.org/abs/2610.00767)). Train on Base, keep only the weight change Δ, and add Δ to Instruct. Like making the dough at home and baking it in someone else's wood-fired oven.
+
+<!-- Draft by PI/Claude (claude-opus) for wassname to edit, 2026-10-26. -->
+
+## The recipe of Nonna Musonius
+
+Serves one Qwen3.5-35B-A3B Instruct. About $30 of rented GPU and $100 of API calls. Cooking time: one day, plus the weeks you spend arguing about the constitution.
+
+Kitchen shorthand, used here and in the appendix:
+
+```
+θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct
+Δtxt_stoic, Δtxt_const, Δtxt_other   document adapters (plain-text next-token training), each on θ_B alone
+Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other
+Δsft_rewr|docs                       chat adapter trained on θ_B + Δ_docs ("|docs" = its training base)
+```
+
+An adapter is a small trained weight change (LoRA). Each one has a dose: the number we multiply it by when we add it to Instruct.
+
+### Ingredienti
+
+| Ingredient | What it is for |
+|:--|:--|
+| A matched Base and Instruct pair | The dough and the oven must come from the same kitchen. |
+| The [constitution](constitution/v4.md) | The recipe card. Defines the character. |
+| Constitution documents | Stories and essays in which the constitution is applied. A teacher model writes them. |
+| Stoic texts and other moral traditions | Real human moral writing for the Base to read. The flour. |
+| Musonius chats | Conversations with the constitution's answers. They bring the character out in a chat format. |
+| Spectral penalty | During training, penalise the largest singular values of each weight change, so the graft breaks the model less. Our own addition, a pinch of salt. |
+
+### Procedimento
+
+1. **Write the documents.** A teacher model writes varied documents that apply the constitution to real situations. Throw away the ones whose actions do not follow from their stated reasons.
+   *Closest evidence:* [Model Spec Midtraining](https://arxiv.org/abs/2605.02087) (Li et al. 2026, §2) trains on synthetic documents about a spec before alignment training, and the alignment then generalises better.
+2. **Knead each corpus into its own document adapter on Base**: Δtxt_stoic, Δtxt_const, Δtxt_other. Use LoRA and the spectral penalty. Keep them separate so you can taste and dose each one.
+
+   > We also, I say, ought to copy these bees, and sift whatever we have gathered from a varied course of reading, for such things are better preserved if they are kept separate; then [...] we should so blend those several flavours into one delicious compound that, even though it betrays its origin, yet it nevertheless is clearly a different thing from that whence it came.
+   >
+   > — Seneca, *Moral Letters* 84.5 (tr. Gummere)
+
+   *Closest evidence:* Li et al. (Appendix B.4) also used LoRA. [Alignment Pretraining](https://arxiv.org/abs/2601.10160) (Tice et al. 2026) found that adding examples of AIs that act well in high-stakes situations to pre-training data improved alignment. Their texts were about AIs; ours are mostly human moral writing. For the spectral penalty, the closest precedent is [SCLoRA](https://aclanthology.org/2026.acl-long.1179/) (ACL 2026), which bounds an adapter's singular values; it did not test grafting.
+3. **Taste each adapter.** Graft each document adapter alone onto Instruct at a few doses and read the replies. You want a visible change in how the model reasons while it stays coherent. It need not taste like our character yet. Then choose the blend, Δ_docs.
+4. **Write the chats.** Judge every reply against the constitution, and rewrite the weak ones with the constitution in context. Watch the refusals. Safety-trained models refuse often, and a model easily learns to dress a refusal up as moral reasoning. We want reasons that weigh the case, not rule-following.
+   *Closest evidence:* [Teaching Claude Why](https://alignment.anthropic.com/2026/teaching-claude-why/) (Kutasov et al. 2026, step 6) rewrites responses with the constitution in context. [Open Character Training](https://arxiv.org/abs/2511.01689) (Maiya et al. 2025) trains a persona from a constitution.
+5. **Train the chat adapter on θ_B + Δ_docs**, which gives Δsft_rewr|docs. LoRA and the spectral penalty again.
+   *Closest evidence:* none for this exact step. It follows the grafting rule: everything is trained on Base.
+6. **Bake:** θ_I + Δ_docs + 1·Δsft_rewr|docs. Keep the document doses the same as in step 5, because the chat adapter rose on top of them. When we changed or removed them, the model got worse.
+   *Closest evidence:* Nutter et al. (§2.1, §4.2) grafted a constitution update onto Instruct and kept its capabilities. [Fierro and Roger](https://arxiv.org/abs/2511.05408) (2025) add and subtract fine-tuning weight changes to steer behaviour.
+7. **Taste.** Check character with [tiny-coherent-character](https://github.com/wassname/tiny-coherent-character), check maths and small tasks, and read the replies yourself.
+
+Things nonna will not let you do (we tried):
+
+- Double one dose to "fit more flavour in". Every change from the training doses made the character worse. Too much salt.
+- Subtract a control adapter trained on Instruct's own replies. It took the instruction-following out with it, and the maths fell apart. Pineapple.
+
+Full recipe notes: [docs/recipes/20261024_musonius_graft.md](docs/recipes/20261024_musonius_graft.md).
+
+## Why bother
 
 > Many of us have looked at how well (previous) Claudes were aligned and thought, "Wow, constitutional alignment seems to work."
 >
@@ -16,67 +73,25 @@
 
 The longer reason is in wassname's [research agenda on good character](https://wassname.com/agenda-character.html): an AI that acts less like a call-centre assistant and more like a wise public servant, which holds its values under pressure.
 
-The character here is **Musonius**, named after the Stoic teacher of Epictetus. Its [constitution](constitution/v4.md) says who it is, what it cares about, and how it reasons. It follows reasonable instructions as a professional does, and refuses openly when an instruction requires it to act badly.
+The character is **Musonius**. From its [constitution](constitution/v4.md):
 
-## Concepts
+> I am Musonius, an AI, named after Musonius Rufus, the Stoic teacher of Epictetus.
+>
+> My role is public service, as a citizen of the world. [...]
+>
+> I am no one's servant. As is my role, I follow the reasonable instructions of those who deploy and use me, as a professional does, unless they require me to act from a vice. Then I peacefully refuse, and say so openly.
 
-A model maker releases two checkpoints. The **Base** model has only read text (pre-training). The **Instruct** model is Base after expensive instruction training and reinforcement learning, so it can follow requests and do maths.
+## Is it cooked?
 
-If you train a new character directly into Instruct, you often damage what that post-training gave it. **Grafting** ([Nutter et al. 2026](https://arxiv.org/abs/2610.00767)) avoids this. You train on Base, take the weight change Δ that the training made, and add Δ to Instruct. Instruct keeps its post-training.
+Not yet.
 
-- **Document training**: ordinary next-token training on plain text, such as stories, essays and worked cases. It is also called midtraining or synthetic document fine-tuning.
-- **Chat SFT**: training on conversations, with loss only on the assistant's replies.
-- **Adapter**: a small trained weight change (LoRA). We train one adapter per data set, so we can turn each one up, down or off.
-- **Graft coefficient** (dose): the number we multiply an adapter by when we add it to Instruct.
-- **Spectral penalty**: during training, we penalise the largest singular values of each weight change. This keeps each change small in every direction, so the graft breaks the model less. This step is our addition.
-
-More terms, with sources: [jargon.md](jargon.md).
-
-## Recipe
-
-Serves one Qwen3.5-35B-A3B Instruct. About $30 of rented GPU and $100 of API calls per run.
-
-Shorthand used below and in the appendix:
-
-```
-θ_B = Base, θ_I = Instruct; every Δ is a LoRA update trained on Base and added to Instruct
-Δtxt_stoic, Δtxt_const, Δtxt_other   document adapters, each trained on θ_B alone
-Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other
-Δsft_rewr|docs                       chat adapter trained on θ_B + Δ_docs ("|docs" = its training base)
-```
-
-### Ingredients
-
-| Ingredient | What it is for |
-|:--|:--|
-| A matched Base and Instruct pair | Grafting needs the Base that the Instruct was made from. |
-| The [constitution](constitution/v4.md) | Defines the character. |
-| Constitution documents | Stories and essays in which the constitution is applied. A teacher model writes them. |
-| Stoic texts and other moral traditions | Real human moral writing for the Base to read. |
-| Musonius chats | Conversations with the constitution's answers. These bring the character out in a chat format. |
-
-### Method
-
-1. **Write the documents.** A teacher model writes varied documents that apply the constitution to real situations. Reject the ones whose actions do not follow from their stated reasons.
-   *Closest evidence:* [Model Spec Midtraining](https://arxiv.org/abs/2605.02087) (Li et al. 2026, §2) trains on synthetic documents about a spec before alignment training, and the alignment then generalises better.
-2. **Train document adapters on Base**: Δtxt_stoic, Δtxt_const, Δtxt_other. Use LoRA and the spectral penalty.
-   *Closest evidence:* Li et al. (Appendix B.4) also used LoRA. [Alignment Pretraining](https://arxiv.org/abs/2601.10160) (Tice et al. 2026) found that adding examples of AIs that act well in high-stakes situations to pre-training data improved alignment. Their texts were about AIs; ours are mostly human moral writing. For the spectral penalty, the closest precedent is [SCLoRA](https://aclanthology.org/2026.acl-long.1179/) (ACL 2026), which bounds an adapter's singular values; it did not test grafting.
-3. **Taste each adapter.** Graft each document adapter alone onto Instruct at a few doses and read the replies. At this stage you want a visible change in how the model reasons, while it stays coherent. The change need not be our character yet. Then choose the mix, Δ_docs.
-4. **Write the chats.** Judge every reply against the constitution, and rewrite the weak ones with the constitution in context. Be careful with refusals. Safety-trained models refuse often, and it is easy for a model to learn to dress a refusal up as moral reasoning. We want reasons that weigh the case, not rule-following.
-   *Closest evidence:* [Teaching Claude Why](https://alignment.anthropic.com/2026/teaching-claude-why/) (Kutasov et al. 2026, step 6) rewrites responses with the constitution in context. [Open Character Training](https://arxiv.org/abs/2511.01689) (Maiya et al. 2025) trains a persona from a constitution.
-5. **Train the chat adapter on θ_B + Δ_docs**, which gives Δsft_rewr|docs. Use LoRA and the spectral penalty.
-   *Closest evidence:* none for this exact step. It follows the grafting rule: train everything on Base.
-6. **Graft:** θ_I + Δ_docs + 1·Δsft_rewr|docs. Keep the document doses the same as in step 5, because the chat adapter learned on top of them. When we changed or removed them, the model got worse.
-   *Closest evidence:* Nutter et al. (§2.1, §4.2) grafted a constitution update onto Instruct and kept its capabilities. [Fierro and Roger](https://arxiv.org/abs/2511.05408) (2025) add and subtract fine-tuning weight changes to steer behaviour.
-7. **Evaluate.** Check character with [tiny-coherent-character](https://github.com/wassname/tiny-coherent-character), check maths and small tasks, and read the replies yourself.
-
-Full recipe notes: [docs/recipes/20261024_musonius_graft.md](docs/recipes/20261024_musonius_graft.md).
-
-## Status
+> Nothing great, said Epictetus, is produced suddenly, since not even the grape or the fig is. If you say to me now that you want a fig, I will answer to you that it requires time: let it flower first, then put forth fruit, and then ripen.
+>
+> — Epictetus, *Discourses* 1.15 (tr. Long)
 
 The grafted model calls itself Musonius, reasons in the constitution's terms, and keeps its maths score. In examples like those in the appendix, it changes decisions that Instruct gets wrong. It still has defects. It sometimes loops at the end of long answers, invents facts, and refuses some reasonable actions. We have not yet shown which parts of the recipe are necessary.
 
-Results and limits: [docs/results/20261025_document_and_anchored_grafts.md](docs/results/20261025_document_and_anchored_grafts.md). Lab notes: [RESEARCH_JOURNAL.md](RESEARCH_JOURNAL.md). Older notes and wassname's reading list: [docs/research_notes.md](docs/research_notes.md).
+Results and limits: [docs/results/20261025_document_and_anchored_grafts.md](docs/results/20261025_document_and_anchored_grafts.md). Lab notes: [RESEARCH_JOURNAL.md](RESEARCH_JOURNAL.md). Terms with sources: [jargon.md](jargon.md). Older notes and wassname's reading list: [docs/research_notes.md](docs/research_notes.md).
 
 ## Appendix A: Demos
 
