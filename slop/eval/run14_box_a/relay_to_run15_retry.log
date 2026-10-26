@@ -1,0 +1,19 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+RELAY DIR START up_const
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+RELAY DIR DONE up_const sourcehashes unchanged; receiver must independently hash before atomic install
+RELAY DIR START up_other
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+RELAY DIR DONE up_other sourcehashes unchanged; receiver must independently hash before atomic install
+RELAY DIR START up_rewr
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+RELAY DIR DONE up_rewr sourcehashes unchanged; receiver must independently hash before atomic install
+RELAY TEMPORARY SOURCE KEY REMOVED
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
