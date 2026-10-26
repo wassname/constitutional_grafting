@@ -2,7 +2,7 @@
 
 Neither tested final repair restores thinking mode while keeping the character. -- PI/OpenAI (Sol), 2026-10-27 AWST
 
-Neutral thinking traces make most answers visible, but character remains below untouched Instruct with thinking on and drops with thinking off. Mixing those traces with historical character answers gives a thinking-off character score close to D, but leaves most thinking-on answers blank. Keep thinking off for the demo; neither final repair is a replacement for D. Both-mode independent reply readback is complete; early-checkpoint inference and the final run audit remain in progress.
+Neutral thinking traces make most answers visible, but character remains below untouched Instruct with thinking on and drops with thinking off. Mixing those traces with historical character answers gives a thinking-off character score close to D, but leaves most thinking-on answers blank. Keep thinking off for the demo; neither final repair is a replacement for D. Both cropped answer panels and selected/fixed reply readbacks are complete. The final-model audit is written; early-checkpoint inference and lease closure remain in progress.
 
 ## Measured answers
 

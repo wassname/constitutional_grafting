@@ -1,0 +1,20 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Offline supervised-token counts from frozen training segments, with the same pinned tokenizer as verified production masks. Counts are not a causal test of EOS vs closer competition.",
+  "variants": {
+    "trace": {
+      "rows": 269,
+      "supervised_tokens": 320279,
+      "supervised_closer_tokens": 269,
+      "supervised_eos_tokens": 269,
+      "eos_per_closer": 1.0
+    },
+    "mix": {
+      "rows": 463,
+      "supervised_tokens": 320306,
+      "supervised_closer_tokens": 132,
+      "supervised_eos_tokens": 463,
+      "eos_per_closer": 3.507575757575758
+    }
+  }
+}

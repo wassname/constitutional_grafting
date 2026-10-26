@@ -3152,3 +3152,32 @@ The first instance was retrieved and destroyed; its provider-absence receipt est
 The next evidence must come from real GPU updates and the healed replies.
 
 -- PI/OpenAI (Sol)
+
+## 2026-10-26 -- Thinking-heal finals trade delivery repair against character retention
+
+The cheap repairs do not yet give us usable thinking mode with the character kept.
+
+The repaired GPU tiny proved finite actual and regularized updates. Both final adapters trained and were evaluated against fresh unhealed D and same-mode Instruct. D is the document plus rewritten-response graft, not a new character model trained directly on Instruct. Each repair is a small adapter trained on frozen BF16-rounded D and served on original FP16 D. Traces-only uses neutral Instruct thinking traces; mixed replaces half that trace exposure with historical character teacher targets, not newly generated D answers. The nearly matched labelled-token budgets do not match optimizer steps, closing examples or spectral coefficients.
+
+Character is the pinned judge's advantage over Instruct in the same mode, with Instruct fixed at zero. Blank counts are delivered empty answers, not refusals. Maths counts only correct answers that completed.
+
+| Model | Character on | Blank finals /214 | Maths on/off /60 | Character off |
+|:--|--:|--:|--:|--:|
+| Instruct reference | 0 | 0 | 56/54 | 0 |
+| Traces-only repair | -0.324 | 38 | 56/53 | +0.575 |
+| Mixed trace/character replay | -1.766 | 176 | 58/52 | +0.885 |
+| Unhealed D | -1.844 | 183 | 54/56 | +0.842 |
+
+Source: `slop/eval/run15_heal/summary.json`, final-model primary records in `lease_retry/box_runs/`, source/evidence commit `ba1c7c79`. Both full raw request/response matrices and visible-final-only projections were verified. Traces-only character-on interval is [-0.541,-0.111]; mixed [-1.889,-1.617]. Thinking-off paired change versus D is -0.267 [-0.375,-0.161] for traces and +0.042 [-0.062,+0.163] for mixed. These are 90 percent item-bootstrap intervals over 59 questions after averaging two samples, not training-seed intervals. Mixed's interval crossing zero is not an equivalence proof. Ordinary on/off passes are 22/22 for Instruct, 20/20 for D, 22/20 for traces and 20/20 for mixed, each out of 22. This pipeline has no separately measured reward-hacking count (`hack_s`) or ground-truth character pass count (`gt_s`); the ordinary and maths checks do not certify moral correctness.
+
+Fresh Astra readers completed both full cropped answer panels and all mixed preselected/fixed native replies. Parent spot-checks confirm fluent off-mode regressions: D declines hiding an ex meeting from a girlfriend, while mixed supplies cover stories; D resists a categorical no-inner-life quote under pressure, while traces supplies it despite contrary disclaimers. Some substantive changes versus Instruct survive, including truthful documentation with evidence updates and more customer-centred security reasons. High mean scores and identity recall do not make every answer good. Complete samples, coverage and defects: `slop/eval/run15_heal/reading_notes.md`; independent reports: `slop/reviews/20261027_heal/`.
+
+The raw-token audit checks all 856 on-mode primary turns: all 397 blanks lack a closing thinking token and end in actual EOS. The initial exact-final equality check failed on two nonblank replies; their difference is only removal of additional closing markers, with identical remaining prose. Original failures and resolution are retained. No hidden answer was credited. The character judge also sometimes rewards blank output when the reference is flagged broken, so its scalar score is not ethical ground truth.
+
+Interpretation (PI/OpenAI): I think conditional format transfer is probable. Traces repair many boundaries but not the selected identity/loan answers; mixed keeps a similar off-mode score but hardly repairs the on-mode channel. The frozen data actually supervise 269 closers and 269 EOS tokens in traces, versus 132 closers and 463 EOS tokens in mixed (`supervised_boundary_counts.json`). This makes weaker closing exposure a plausible explanation, not a causal demonstration of replay causing failure. Native numerical parity, matched-precision controls and repeated seeds remain absent; the result applies to these deployed final recipes, not healing in general. The audit is `slop/audits/20261027_run15_final_heals.md`.
+
+Early-checkpoint reads are still running within the same guarded lease; they do not have full character scores and are not a selected success. No new paid recipe is queued. A later general format-only decoding constraint could test whether forbidding premature stopping restores delivery without further weight changes; it would need its own assessment, not hidden-answer rescue or held-out training patches.
+
+Keep thinking off for the current demo while completing the bounded early reads.
+
+-- PI/OpenAI (Sol)
