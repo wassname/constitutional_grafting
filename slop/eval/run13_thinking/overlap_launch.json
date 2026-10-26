@@ -8,5 +8,7 @@
   "launched_during_uploads": true,
   "requested_epoch": 1792984131.0493217,
   "original_controller": "run13-thinking-one-lease proc_bde8 unchanged",
-  "condition": "Main accepts only complete frozen140 keys+panels with matching model file hashes, vLLM version, input hashes, generator/executor hashes, sampling, budget and every exact wire request; otherwise preserve and regenerate A."
+  "condition": "Main accepts only complete frozen140 keys+panels with matching model file hashes, vLLM version, input hashes, generator/executor hashes, sampling, budget and every exact wire request; otherwise preserve and regenerate A.",
+  "exit": "0",
+  "completed_epoch": 1792987122.2663152
 }

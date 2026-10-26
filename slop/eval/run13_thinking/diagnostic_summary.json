@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "diagnostic": "answer written inside the think block, not deployed replies",
+  "character": {
+    "mean": 0.6512711864406779,
+    "ci90": [
+      0.5196186440677966,
+      0.791864406779661
+    ],
+    "items": 59,
+    "samples": 2
+  },
+  "broken_gate_dialogues": 2,
+  "ordinary": 21.0,
+  "ordinary_n": 22
+}

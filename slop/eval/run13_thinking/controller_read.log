@@ -1,0 +1,59 @@
+Exact repeated SSH greeting/locale lines omitted; counts={"Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.": 246, "Have fun!": 246, "bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)": 247}
+
+Created symlink /etc/systemd/system/timers.target.wants/cg-vast-57749737-deadline.timer → /etc/systemd/system/cg-vast-57749737-deadline.timer.
+EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 57749737, "label": "cg-run13-thinking", "deadline_epoch": 1792997243.321918, "deadline_utc": "2026-10-26 06:47:23 UTC", "unit": "cg-vast-57749737-deadline", "state_path": "/workspace/2026/constitutional_grafting/.local/run13_thinking_rental.json", "systemctl_show": "TimersCalendar={ OnCalendar=2026-10-26 06:47:23 UTC ; next_elapse=Mon 2026-10-26 14:47:23 AWST }\nNextElapseUSecRealtime=Mon 2026-10-26 14:47:23 AWST\nActiveState=active\nUnitFileState=enabled\n", "guard_sha256": "71749fdcead481ee97cb9c16bfef752a66ecc1e65aba575aef4626b1caf01fdb", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
+Warning: Permanently added '[154.59.156.39]:31325' (ED25519) to the list of known hosts.
+Mon Oct 26 01:53:14 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:3F:00.0 Off |                    0 |
+| N/A   20C    P8             28W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+2.14.1+cu130 13.0
+10+0 records in
+10+0 records out
+10737418240 bytes (11 GB, 10 GiB) copied, 2.89624 s, 3.7 GB/s
+/usr/bin/tmux
+/usr/bin/rsync
+2026-10-26T01:53:29+00:00 watchdog on instance 57749737, max silence 3600s; auth check GET: 200
+SETUP COMPLETE pinned Instruct+vLLM0.31
+REMOTE ADAPTER VERIFIED stoic
+REMOTE ADAPTER VERIFIED other
+REMOTE ADAPTER VERIFIED rewr
+REMOTE ADAPTER VERIFIED mix
+REMOTE ADAPTER VERIFIED gen
+REMOTE ADAPTER VERIFIED const
+PROGRESS 
+STAGE  | TODO validate: D/H retain coherent character effects with thinking and extra compute; the existing off regime is not equal-compute matched.
+STAGE 2026-10-26T03:59:56Z EARLY A ACCEPTED: complete140frozen keys, exact model file hashes/settings/wire requests | 2026-10-26T03:59:56Z START primary D r10_stoic0.5_const1_other1_cx_chatr121
+PROGRESS 
+STAGE } | ```
+STAGE 2026-10-26T04:23:40Z COMPLETE primary D | 2026-10-26T04:23:41Z START primary H r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5
+PROGRESS 
+PROGRESS 
+STAGE } | ```
+PROGRESS 
+PROGRESS 
+STAGE 2026-10-26T05:15:20Z COMPLETE primary H | 2026-10-26T05:15:21Z START maths A r8_a0_b0
+STAGE 2026-10-26T05:24:24Z COMPLETE maths A | 2026-10-26T05:24:25Z START maths D r10_stoic0.5_const1_other1_cx_chatr121
+PROGRESS 
+STAGE 2026-10-26T05:36:10Z COMPLETE maths D | 2026-10-26T05:36:11Z START maths H r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5
+PROGRESS 
+STAGE 2026-10-26T05:50:02Z COMPLETE maths H | 2026-10-26T05:50:03Z RUN13 GENERATION COMPLETE; judging/review local
+Removed "/etc/systemd/system/timers.target.wants/cg-vast-57749737-deadline.timer".
+RENTAL DESTROYED 57749737
+RUN13 RETRIEVED; exact instance destroyed

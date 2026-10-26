@@ -1,0 +1,20 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "verified": true,
+  "primary_complete_models": [
+    "A",
+    "D",
+    "H"
+  ],
+  "rows_per_model": 140,
+  "character_items": 59,
+  "samples": 2,
+  "gsm8k_frozen_questions_per_model": 60,
+  "exact_diagnostic_replacements": 176,
+  "primary_final_only_projection_matches_raw_api": true,
+  "exact_instance_absent": true,
+  "judge_successful_cached_cost_usd": 0.29837052,
+  "cost_bound_with_full_traffic_and_judge_reserves_usd": 12.182803480006266,
+  "scope": "Structural/provenance/arithmetic verification, not semantic certification or provider invoice reconciliation."
+}
+/workspace/2026/constitutional_grafting/slop/eval/run13_thinking/results.md

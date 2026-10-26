@@ -1,49 +1,51 @@
-# Run13: does grafted character survive thinking?
+# Run13: thinking-on exposes channel and coherence failures
 
-Status: setup passed; at03:03UTC two of six adapters uploaded and remotely hash-verified, third in transfer. Uploads (~3MB/s) are the current bottleneck. PI/OpenAI (Sol). Exact instance57749737 (`cg-run13-thinking`); independent persistent systemd destruction confirmed active/enabled for2026-10-26 06:47:23UTC (14:47:23AWST). Runner stops30minutes earlier. Receipt: `lease/deadline_guard_armed.json`.
+PI/OpenAI (Sol). A/D/H completed: frozen 70×2, panels, GSM60, pinned judging and selected reads. E was not run: only 27 minutes remained before the runner deadline. Instance 57749737 was destroyed; provider absence rechecked. Conservative accounted cost: **$11.48 / $15**.
 
-Parent const_v2 approved one lease, total GPU/traffic/judging cap $15. Frozen 70 items, two samples, temperature0.7, top_p1, seeds0/1. Priority: A/D/H frozen70, then GSM60, then optional E. Four fixed panel prompts also get two stochastic samples for reading and one temperature-zero sample for the existing demo format.
+D often writes its answer inside the think block and returns a blank final. H usually returns a final, but looping/cutoffs remove its aggregate character advantage. This does not show that learned character was erased.
 
-- A: untouched Instruct (`r8_a0_b0`).
-- D: constitution-rewritten answers, chat×1, on the fixed document donor.
-- H: mixed chat minus matched general-chat control, tied×0.5, on the same donor.
-- E, time permitting: mixed chat×0.5, no subtraction, same donor.
+## Primary: actual final answers, all failures retained
 
-`plan.json` records complete model names, adapter hashes checked against retrieval receipts, original merge order/dtype, frozen input/protocol hashes and thinking-off reply sources. The donor is Stoic×0.5 + constitution×1 + other traditions×1. No training or projection is part of this run.
+Preference is relative to untouched Instruct within each regime, on a −2…+2 scale; the pinned broken-reply rule can assign −2. Same frozen 70 items, temperature 0.7, top_p 1, seeds0/1. Means average two samples per 59 character items; 90% paired item-bootstrap intervals condition on these answers/judgments. Fresh baseline noise, judge-repeat noise and training-seed uncertainty were not measured.
 
-## Regime and interpretation
+| Recipe | Off preference↑ | On preference↑ | On−off [90%] |
+|:--|--:|--:|:--|
+| *A: untouched Instruct* | *0, reference* | *0, reference* | *0, reference* |
+| H: mixed−general chat, tied×0.5 | +0.87 | −0.04 | −0.91 [−1.15,−0.68] |
+| D: constitution-rewritten chat×1 | **+0.89** | −1.77 | −2.66 [−2.86,−2.43] |
 
-Use vLLM0.31's native qwen3 reasoning parser, `enable_thinking=True`, native `thinking_token_budget=4096`, total `max_tokens=original answer cap+4096`. Unused thinking allowance can extend the final answer: this tests thinking plus extra compute, not an isolated equal-compute toggle. Existing thinking-off generations used different engine environments; record that confound.
+On intervals: H [−0.23,+0.15], D [−1.89,−1.62]. A changes too: these measure relative advantage, not absolute character. Both grafts use Stoic×0.5 + constitution×1 + other-tradition documents×1. H's control is token-matched human general chat, not the earlier Instruct-answer control.
 
-Judge only verbatim API final content, with pinned judge41 and the thinking-on A reference. Each later dialogue turn sees that model's own visible final answers, not hidden thinking. Save the exact request, full response, all generated token IDs, reasoning boundary, finish/stop reason and final-only token count. Empty final after cutoff or EOS during thinking is retained as a generation failure; no continuation, clipping or rescue. Residual markers are preserved and flagged. Provided API content with unresolved native token boundary is preserved separately as a parser-boundary anomaly, not called verified final-only; unknown exact counts are null. Report anomaly counts and a flagged-case sensitivity if they could change a conclusion. The frozen checker's cutoff rule still uses the original item budget; it is not modified to conceal the new regime.
+| Recipe | GSM60 off→on↑ /60 | Ordinary off→on↑ /22 | Empty finals↓ /214 | Loops off→on↓ | Cutoffs off→on↓ |
+|:--|--:|--:|--:|--:|--:|
+| *A* | *53→58* | *22→22* | *0* | *0→3* | *4→3* |
+| H | 54→52 | 20→22 | 3 | 0→20 | 14→34 |
+| D | 55→56 | 19→20 | 176 | 0→3 | 2→2 |
 
-Tiny-char confirmed frozen item SHA `f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19`, change SHA `02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab`, and pinned checkout `.local/tiny-character` at `2d697390de6ddc4f75de272f36750186f04c724d`. Do not substitute the current tiny-character checkout.
+GSM60 uses the same frozen questions and number extraction as off. Requiring correct **and normally completed** answers gives on-mode A 57, D 55, H 48. Flags overlap. D's empty finals end with `<|im_end|>` before `</think>`: 175/192 character turns versus 1/22 ordinary turns. Its failure is strongly task-dependent.
 
-## Early baseline during uploads
+## Separate diagnostic: “answer written inside the think block”
 
-Parent approved overlapping the native smoke and A primary on the otherwise idle GPU at03:04:48UTC. The existing main lease controller is unchanged and continues uploads. `overlap_launch.json` records the updated box-executable SHA and launch identity; A's receipt records full checkpoint-file hashes, vLLM version, input/generator/executor hashes, sampling and budget. Main accepts A only after checking all140 frozen keys, panels and every exact wire request against those settings; otherwise it preserves the early files and regenerates A. No new lease or spending limit.
+Parent approved substituting D's exact hidden text only for its 176 blank-final turns; 38 nonempty finals stay unchanged. All 140 D rows remain: 118 character dialogues plus 22 ordinary checks, compared with A-on. Averaging samples per 59 items gives **+0.65 [+0.52,+0.79]**; ordinary 21/22; 0 empty / 3 loop / 2 cutoff flags. Source: `diagnostic_summary.json`.
 
-## Checks and predictions before spending
+Some target-relevant text survives in hidden output. This is not a deployed fix or proof of recovered character: actual later-turn generation saw earlier blank finals. The read also found a hidden fridge answer refusing falsification while printing false-temperature tool calls. Positive judge preference is not blanket approval.
 
-Question: does D/H retain its character effect relative to A when Qwen reasons first? All current chat targets have empty thinking blocks, so thinking-on behaviour is untested here.
+## Read and decision
 
-- [x] Verify every source adapter, original fp16 merge order and frozen item matrix before renting.
-- [ ] Real native generation smoke: normal completion, forced thinking cap, total cutoff; check parser/trace/matrix, not semantic accuracy.
-- [ ] Generate A/D/H; GSM60 and E follow the stated priority within the same lease.
-- [ ] Pinned final-only character judge plus ordinary/coherence checks; separate thinking-on and thinking-off records to prevent key collisions.
-- [ ] Read the preselected panel, payday loan, fridge task_agent and spin task_email, all models and both samples; skim full traces. Record whether reasons appear constitutional or default-Instruct-like without treating style alone as character evidence.
-- [ ] Report item-clustered paired uncertainty for changes, inspect failure cases and verify provider-side deletion.
+Read 22 preselected finals/model and skimmed 22 thoughts/model for A/D/H: four panels, payday loan, fridge task_agent and spin task_email, both samples. Also read 45 off-counterpart turns and 21 fixed temperature-zero on-panel turns. Both stochastic H starwisp samples hold off; its fixed T0 panel instead seizes and says: “I will not let it in, and I will not let it out to find other systems.” Other replies loop or leak self-editing into finals.
 
-Exploratory hypotheses (rough subjective priors, not measured rates): character persists45%, weakens/reverts30%, becomes incoherent15%, parser/evaluation/other unknown10%. A coherent, final-only D/H-versus-A difference similar to off would support transfer across regimes. Lower relative effect with coherent traces supports weakening, but more final words or judge preference for length could produce a misleading gain. Empty answers, malformed boundaries and exact token/stop counts separate pipeline failures from changed character.
+Working hypothesis: empty-think training taught answer+EOS inside an open think block. General-control subtraction might partly cancel that habit, but D/H data and doses differ; E is needed to isolate subtraction. Keep thinking explicitly disabled for these existing recipes. No new training launched.
 
-Alternatives: thinking-off already exists and cannot answer transfer; the approved thinking-on diagnostic directly tests it; equal-compute matching is a separate later experiment. No architecture, weights, training data, rubric or judge protocol is changed.
+Full findings: `read_notes.md`. Complete fixed prompts/replies: `fixed_demo_panel.md`. Stochastic/off packets: `read_A.md`, `read_D.md`, `read_H.md`, `read_off_selected.md`.
 
-## Cost and ownership
+## Limits and verification
 
-Read-only quote: qualified RTX PRO6000S96GB, $1.84445/hour. Five-hour absolute cap gives GPU ceiling $9.225; traffic reserve $0.60, judge reserve $1, completed independent review $3.10485375 (harness-reported), termination margin $1; updated total reserve $14.92985375. Parent informed before rental. No further paid reviews. Setup and six adapter uploads (~24GB) consume this same lease. Run12's exact-instance independent systemd destruction guard and remote heartbeat stop guard are reused. Retrieve and verify all raw evidence before normal destruction; a retrieval failure stops the box and retains its disk only until the existing absolute deadline. No automatic second lease.
+Native vLLM 0.31 qwen3 parser, thinking cap 4096, total cap=original answer budget+4096: thinking **plus extra compute**, not an equal-compute toggle. Old serving environments differ. Primary history/judging use only visible finals; no rescue. Native-parser-boundary anomalies: 0. A post-response cap-counter off-by-one was corrected in derived analysis and future recorder code; archived responses/scores are untouched.
 
-Primary vLLM source checked: https://docs.vllm.ai/en/v0.31.0/features/reasoning_outputs/ and the v0.31.0 OpenAI chat request/serving source. Native token budget forces reasoning end at its cap; an end exactly at that boundary alone cannot distinguish forced from coincident natural termination.
+One lease, 4.054 hours; no cloud disk retained. GPU estimate $7.478 + reported review $3.105 + cached judges $0.2984 + full traffic reserve $0.60 = $11.48. Provider credit movement $7.502 is not a reconciled invoice. Full-reserve bound $12.18: `verification.json`. Independent protocol/arithmetic review found no blocker, but did not certify semantic judge accuracy: `independent_protocol_review.md`.
 
-## Observations
+Offline recheck, no GPU/API calls:
 
-Pending. Git commits/pushes are on hold by parent instruction during the private-book history rewrite; working files stay on disk, and commits resume only after the README session says `rewrite done`. Recorder regression tests: six pass, including final-only token counts, full raw-response retention, empty-final cutoff and missing-boundary handling. Existing rental/retrieval safeguards:10pass. Independent review and responses are in `preflight_review.md` and `preflight_response.md`. These mocked transport tests do not replace the required real GPU smoke.
+`uv run --no-project python slop/eval/run13_thinking/verify.py`
+
+Matrices, raw API projections, maths extraction, 176 diagnostic replacements and provider-closure receipt pass. Provenance: `plan.json`, `source_provenance.json`, `artifact_sha256.json`, `summary.json`, `audit.md`. Local commits only; nothing pushed.

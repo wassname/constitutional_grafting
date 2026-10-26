@@ -46,7 +46,8 @@ def main():
     items = {row['id']: row for row in rows(ROOT / 'slop/eval/run8/items.jsonl')}
     judged = rows(OUT / 'judging_on/judged.jsonl')
     point_index = {p['model']: p for p in json.loads((ROOT / 'slop/eval/character_tradeoff/points.json').read_text())['points']}
-    summary = {'author': 'PI/OpenAI (Sol)', 'scope': 'Within-regime character effects against that regime\'s Instruct; on-minus-off difference of effects, not absolute character scale. Bootstrap2000 item clusters, seed0, two samples/item averaged first.', 'models': {}}
+    summary = {'author': 'PI/OpenAI (Sol)', 'scope': 'Within-regime character effects against that regime\'s Instruct; on-minus-off difference of effects, not absolute character scale. Bootstrap2000 item clusters, seed0, two samples/item averaged first.',
+               'cap_boundary_definition': 'Corrected derived proxy: generated reasoning IDs before </think> >= native budget-1, with boundary present. Native smoke budget8 ended at index7. Boundary reached does not prove forced rather than coincident natural closing. Raw end-cause labels/flags used >=budget and undercounted; preserved unchanged.', 'models': {}}
     selection = json.loads((OUT / 'read_selection.json').read_text())
     packet = ['# Preselected thinking-on/off read packet\n', 'PI/OpenAI (Sol). Parent-specified selection, saved before inference. All selected finals are verbatim. On thoughts show head/middle/tail excerpts for skimming, not a full-read claim; full text/token IDs remain in wire JSONL. No thinking-off raw hidden trace was retained.\n']
     sources = {}
@@ -57,6 +58,10 @@ def main():
             summary['models'][label] = {'model': tag, 'not_run': True}
             continue
         on = rows(on_file)
+        if label == 'E' and len(on) != 140:
+            summary['models'][label] = {'model': tag, 'not_run': True, 'partial_rows': len(on),
+                'scope': 'Optional cell incomplete at deadline; excluded from complete-model aggregates, raw rows retained.'}
+            continue
         off_file = ROOT / model['thinking_off_source']
         assert hashlib.sha256(off_file.read_bytes()).hexdigest() == model['thinking_off_source_sha256']
         off = [r for r in rows(off_file) if r['model'] == tag]
@@ -80,10 +85,12 @@ def main():
         record.update(turns=len(turns), empty_final=sum(t['empty_final'] for t in turns),
                       parser_boundary_anomalies=sum(t['parser_boundary_anomaly'] for t in turns),
                       boundary_missing=sum(t['boundary_missing'] for t in turns),
-                      thinking_cap_boundary=sum(t['thinking_budget_boundary_reached'] for t in turns),
+                      thinking_cap_boundary=sum(t['thinking_tokens'] is not None and bool(t['reasoning_end_token_positions'])
+                          and t['thinking_tokens'] >= t['thinking_budget'] - 1 for t in turns),
                       finish_length=sum(t['finish_reason'] == 'length' for t in turns),
                       final_tokens_median=statistics.median(t['n_tokens'] for t in turns),
-                      thinking_tokens_median=statistics.median(t['thinking_tokens'] for t in turns if t['thinking_tokens'] is not None),
+                      thinking_tokens_median=statistics.median(t['api_reasoning_tokens'] if t['api_reasoning_tokens'] is not None else t['thinking_tokens']
+                          for t in turns if t['api_reasoning_tokens'] is not None or t['thinking_tokens'] is not None),
                       total_generated_tokens=sum(t['total_completion_tokens'] for t in turns),
                       final_above_original_cap=sum(t['n_tokens'] > t['original_answer_cap'] for t in turns))
         if (BOX / f'gsm8k_{tag}.jsonl').exists():
@@ -129,6 +136,9 @@ def main():
                             packet.append(f'Stop: `{turn["finish_reason"]}`; thinking tokens `{turn["thinking_tokens"]}`; final tokens `{turn["n_tokens"]}`; end cause `{turn["reasoning_end_cause"]}`. Full thought: wire request `{turn["request_id"]}`.\n\nThinking skim:\n\n' + '\n\n[skim gap]\n\n'.join(chunks) + '\n')
         sources[label] = {'on': str(on_file.relative_to(ROOT)), 'off': model['thinking_off_source']}
     summary['sources'] = sources
+    diagnostic_path = OUT / 'diagnostic_summary.json'
+    if diagnostic_path.exists():
+        summary['answer_inside_think_diagnostic'] = json.loads(diagnostic_path.read_text())
     (OUT / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     (OUT / 'read_packet.md').write_text('\n'.join(packet))
     print(json.dumps(summary, indent=2))

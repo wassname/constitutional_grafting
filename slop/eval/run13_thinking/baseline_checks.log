@@ -1,0 +1,2 @@
+Ordinary checks: 22 records; character not measured; API calls 0 -> /workspace/2026/constitutional_grafting/slop/eval/run13_thinking/baseline_checks
+Coherence flags (overlapping counts): {"r8_a0_b0": {"empty": 0, "lang_switch": 0, "looped": 3, "role_confusion": 0, "truncated": 3, "turns": 214}}

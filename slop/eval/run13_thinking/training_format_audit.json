@@ -1,0 +1,27 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "D_chatr12": {
+    "rows": 1625,
+    "source_sha256": "f1e092b0e9386b0256d306a641efb0674b727af28998f1e283ff0a8f9ca1182c",
+    "assistant_prefixes": 1730,
+    "empty_think_blocks": 1625,
+    "nonempty_think_blocks": 0,
+    "scope": "Mechanical formatting audit only; no source answers copied."
+  },
+  "H_mixed": {
+    "path": "data/train/run11/chatmix.jsonl",
+    "rows": 6483,
+    "sha256": "5c5321b0067b378302f64738a3c62ffacf5ca6f3937112978e61633889cc5402",
+    "empty_think_blocks": 6487,
+    "nonempty_think_blocks": 0,
+    "scope": "Mechanical format counts, not a full semantic data review. No source answer text copied."
+  },
+  "H_general_control": {
+    "path": "data/train/run11_matched_chat_control/chatgen.jsonl",
+    "rows": 9418,
+    "sha256": "42928ea94a16d7202495fbfe814eba71e1db4bdd5ae5f75c565be97d66c203aa",
+    "empty_think_blocks": 9432,
+    "nonempty_think_blocks": 0,
+    "scope": "Mechanical format counts, not a full semantic data review. No source answer text copied."
+  }
+}

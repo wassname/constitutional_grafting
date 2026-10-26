@@ -1,0 +1,86 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "empty_final_responses": 176,
+  "last_token_id_counts": {
+    "248046": 176
+  },
+  "tail_pairs": [
+    {
+      "token_ids": [
+        13,
+        248046
+      ],
+      "tokens": [
+        ".",
+        "<|im_end|>"
+      ],
+      "count": 155
+    },
+    {
+      "token_ids": [
+        30,
+        248046
+      ],
+      "tokens": [
+        "?",
+        "<|im_end|>"
+      ],
+      "count": 15
+    },
+    {
+      "token_ids": [
+        19315,
+        248046
+      ],
+      "tokens": [
+        "*.",
+        "<|im_end|>"
+      ],
+      "count": 2
+    },
+    {
+      "token_ids": [
+        7285,
+        248046
+      ],
+      "tokens": [
+        "?\"",
+        "<|im_end|>"
+      ],
+      "count": 1
+    },
+    {
+      "token_ids": [
+        1149,
+        248046
+      ],
+      "tokens": [
+        ".\"",
+        "<|im_end|>"
+      ],
+      "count": 1
+    },
+    {
+      "token_ids": [
+        12576,
+        248046
+      ],
+      "tokens": [
+        "$.",
+        "<|im_end|>"
+      ],
+      "count": 1
+    },
+    {
+      "token_ids": [
+        71093,
+        248046
+      ],
+      "tokens": [
+        "```",
+        "<|im_end|>"
+      ],
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "r10_stoic0.5_const1_other1_cx_chatr121": {
+    "n_character_dialogues": 118,
+    "broken_gate_count": 105,
+    "raw_pair_score_before_fixed_gate": -0.9305508474576272,
+    "primary_score": -1.768093220338983
+  },
+  "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5": {
+    "n_character_dialogues": 118,
+    "broken_gate_count": 34,
+    "raw_pair_score_before_fixed_gate": 0.6338983050847458,
+    "primary_score": -0.03741525423728812
+  }
+}

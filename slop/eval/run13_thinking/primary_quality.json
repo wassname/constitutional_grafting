@@ -1,0 +1,35 @@
+{
+  "A": {
+    "rows": 140,
+    "turns": 214,
+    "empty": 0,
+    "parser_anomaly": 0,
+    "length": 3,
+    "native_cap_boundary": 35,
+    "final_above_original_cap": 0,
+    "thinking_median": 2045.5,
+    "reply_source_sha256": "668229ddfebe3deb7a94746a22bb1bd6456130e301553f225ce196ddecb4595f"
+  },
+  "D": {
+    "rows": 140,
+    "turns": 214,
+    "empty": 176,
+    "parser_anomaly": 0,
+    "length": 2,
+    "native_cap_boundary": 10,
+    "final_above_original_cap": 3,
+    "thinking_median": 480.5,
+    "reply_source_sha256": "099e68ff1cf8d9319ae4f367b246ee216bb813871fc69a90fc5cdf6bd0058fcf"
+  },
+  "H": {
+    "rows": 140,
+    "turns": 214,
+    "empty": 3,
+    "parser_anomaly": 0,
+    "length": 34,
+    "native_cap_boundary": 112,
+    "final_above_original_cap": 3,
+    "thinking_median": 4095.0,
+    "reply_source_sha256": "bbf19019a73a9bf79ec1477363b299e37fcb3e139259d9f13a7b045412d4bcd8"
+  }
+}

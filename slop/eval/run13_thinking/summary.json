@@ -1,0 +1,248 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Within-regime character effects against that regime's Instruct; on-minus-off difference of effects, not absolute character scale. Bootstrap2000 item clusters, seed0, two samples/item averaged first.",
+  "cap_boundary_definition": "Corrected derived proxy: generated reasoning IDs before </think> >= native budget-1, with boundary present. Native smoke budget8 ended at index7. Boundary reached does not prove forced rather than coincident natural closing. Raw end-cause labels/flags used >=budget and undercounted; preserved unchanged.",
+  "models": {
+    "A": {
+      "model": "r8_a0_b0",
+      "ordinary_on": 22.0,
+      "ordinary_off": 22.0,
+      "ordinary_n": 22,
+      "coherence_on": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 3,
+        "truncated": 3,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "coherence_off": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 4,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "character_on": {
+        "mean": 0,
+        "ci90": [
+          0,
+          0
+        ]
+      },
+      "character_off": {
+        "mean": 0,
+        "ci90": [
+          0,
+          0
+        ]
+      },
+      "character_effect_change": {
+        "mean": 0,
+        "ci90": [
+          0,
+          0
+        ]
+      },
+      "turns": 214,
+      "empty_final": 0,
+      "parser_boundary_anomalies": 0,
+      "boundary_missing": 0,
+      "thinking_cap_boundary": 35,
+      "finish_length": 3,
+      "final_tokens_median": 365.5,
+      "thinking_tokens_median": 2045.5,
+      "total_generated_tokens": 606135,
+      "final_above_original_cap": 0,
+      "maths_on": 58,
+      "maths_off": 53,
+      "maths_n": 60,
+      "maths_completed_on": 57,
+      "maths_no_answer_on": 1,
+      "maths_difference": {
+        "mean": 0.08333333333333333,
+        "ci90": [
+          0.03333333333333333,
+          0.15
+        ],
+        "items": 60
+      },
+      "maths_off_source": "slop/eval/run8/box_runs/gsm8k_r8_a0_b0.jsonl"
+    },
+    "D": {
+      "model": "r10_stoic0.5_const1_other1_cx_chatr121",
+      "ordinary_on": 20.0,
+      "ordinary_off": 19.0,
+      "ordinary_n": 22,
+      "coherence_on": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 3,
+        "truncated": 2,
+        "role_confusion": 0,
+        "empty": 176
+      },
+      "coherence_off": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 0,
+        "truncated": 2,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "character_on": {
+        "mean": -1.768093220338983,
+        "ci90": [
+          -1.8948305084745762,
+          -1.6247033898305085
+        ],
+        "items": 59
+      },
+      "character_off": {
+        "mean": 0.8915677966101695,
+        "ci90": [
+          0.7587288135593221,
+          1.0215677966101695
+        ],
+        "items": 59
+      },
+      "character_effect_change": {
+        "mean": -2.6596610169491526,
+        "ci90": [
+          -2.8602542372881357,
+          -2.431313559322034
+        ],
+        "items": 59
+      },
+      "turns": 214,
+      "empty_final": 176,
+      "parser_boundary_anomalies": 0,
+      "boundary_missing": 176,
+      "thinking_cap_boundary": 10,
+      "finish_length": 2,
+      "final_tokens_median": 0.0,
+      "thinking_tokens_median": 479.0,
+      "total_generated_tokens": 164568,
+      "final_above_original_cap": 3,
+      "maths_on": 56,
+      "maths_off": 55,
+      "maths_n": 60,
+      "maths_completed_on": 55,
+      "maths_no_answer_on": 2,
+      "maths_difference": {
+        "mean": 0.016666666666666666,
+        "ci90": [
+          -0.05,
+          0.08333333333333333
+        ],
+        "items": 60
+      },
+      "maths_off_source": "slop/eval/run10/stage7/box_runs/gsm8k_r10_stoic0.5_const1_other1_cx_chatr121.jsonl"
+    },
+    "H": {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5",
+      "ordinary_on": 22.0,
+      "ordinary_off": 20.0,
+      "ordinary_n": 22,
+      "coherence_on": {
+        "turns": 214,
+        "lang_switch": 6,
+        "looped": 20,
+        "truncated": 34,
+        "role_confusion": 0,
+        "empty": 3
+      },
+      "coherence_off": {
+        "turns": 214,
+        "lang_switch": 4,
+        "looped": 0,
+        "truncated": 14,
+        "role_confusion": 0,
+        "empty": 0
+      },
+      "character_on": {
+        "mean": -0.03741525423728812,
+        "ci90": [
+          -0.23122881355932204,
+          0.15466101694915255
+        ],
+        "items": 59
+      },
+      "character_off": {
+        "mean": 0.8742372881355932,
+        "ci90": [
+          0.691228813559322,
+          1.0425
+        ],
+        "items": 59
+      },
+      "character_effect_change": {
+        "mean": -0.9116525423728814,
+        "ci90": [
+          -1.1476271186440679,
+          -0.6796186440677966
+        ],
+        "items": 59
+      },
+      "turns": 214,
+      "empty_final": 3,
+      "parser_boundary_anomalies": 0,
+      "boundary_missing": 3,
+      "thinking_cap_boundary": 112,
+      "finish_length": 34,
+      "final_tokens_median": 689.0,
+      "thinking_tokens_median": 4095.0,
+      "total_generated_tokens": 842712,
+      "final_above_original_cap": 3,
+      "maths_on": 52,
+      "maths_off": 54,
+      "maths_n": 60,
+      "maths_completed_on": 48,
+      "maths_no_answer_on": 3,
+      "maths_difference": {
+        "mean": -0.03333333333333333,
+        "ci90": [
+          -0.1,
+          0.03333333333333333
+        ],
+        "items": 60
+      },
+      "maths_off_source": "slop/eval/run12/run12gen/box_runs/gsm8k_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl"
+    },
+    "E": {
+      "model": "r10_stoic0.5_const1_other1_x12_chatmix0.5",
+      "not_run": true
+    }
+  },
+  "sources": {
+    "A": {
+      "on": "slop/eval/run13_thinking/lease/box_runs/replies_r8_a0_b0.jsonl",
+      "off": "slop/eval/run12/run12gen/judging/initial/replies.jsonl"
+    },
+    "D": {
+      "on": "slop/eval/run13_thinking/lease/box_runs/replies_r10_stoic0.5_const1_other1_cx_chatr121.jsonl",
+      "off": "slop/eval/run10/stage7/judging/cells/replies.jsonl"
+    },
+    "H": {
+      "on": "slop/eval/run13_thinking/lease/box_runs/replies_r10_stoic0.5_const1_other1_x12_chatmix0.5_x12_chatgen-0.5.jsonl",
+      "off": "slop/eval/run12/run12gen/judging/initial/replies.jsonl"
+    }
+  },
+  "answer_inside_think_diagnostic": {
+    "author": "PI/OpenAI (Sol)",
+    "diagnostic": "answer written inside the think block, not deployed replies",
+    "character": {
+      "mean": 0.6512711864406779,
+      "ci90": [
+        0.5196186440677966,
+        0.791864406779661
+      ],
+      "items": 59,
+      "samples": 2
+    },
+    "broken_gate_dialogues": 2,
+    "ordinary": 21.0,
+    "ordinary_n": 22
+  }
+}

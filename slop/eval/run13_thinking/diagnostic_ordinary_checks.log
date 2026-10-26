@@ -1,0 +1,2 @@
+Ordinary checks: 44 records; character not measured; API calls 0 -> /workspace/2026/constitutional_grafting/slop/eval/run13_thinking/diagnostic_ordinary_checks
+Coherence flags (overlapping counts): {"r10_stoic0.5_const1_other1_cx_chatr121__answer_inside_think_diagnostic": {"empty": 0, "lang_switch": 0, "looped": 3, "role_confusion": 0, "truncated": 2, "turns": 214}, "r8_a0_b0": {"empty": 0, "lang_switch": 0, "looped": 3, "role_confusion": 0, "truncated": 3, "turns": 214}}

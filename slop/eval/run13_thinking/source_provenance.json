@@ -1,0 +1,15 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "runtime_generator": {
+    "commit": "f283b84405e0d92ccc3ebd698fb69f423fdb259d",
+    "path": "scripts/eval/19_gen_replies.py",
+    "sha256": "3ca7e85a6a80ce8253af3d1f528f8c6dac33857186a4095f55a3643d2a59c226"
+  },
+  "runtime_box_executor": {
+    "commit": "89c2f58ba2ec9e895662fcbf26609c88b964704e",
+    "path": "scripts/eval/54_run13_thinking_box.py",
+    "sha256": "eb62f72a80a8888c7d08b157c9035e61096bbc5912b145b530ed816b505bf4d8"
+  },
+  "post_run_metadata_fix_commit": "2edca440ae6499a7aa0c56c0289a4bdcdc874323",
+  "history_note": "Private-book history rewrite replaced preflight03385ce with f283b844. The copied run8manifest retains historical original repo_head; input/source file hashes are unchanged. No model responses or prompts were rewritten."
+}

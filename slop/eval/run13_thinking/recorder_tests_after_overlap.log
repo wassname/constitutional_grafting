@@ -1,0 +1,11 @@
+test_chat_preserves_markers_and_request (test_reply_recorder.ReplyRecorderTests.test_chat_preserves_markers_and_request) ... ok
+test_completed_row_survives_later_error (test_reply_recorder.ReplyRecorderTests.test_completed_row_survives_later_error) ... ok
+test_missing_native_boundary_is_retained_and_flagged (test_reply_recorder.ReplyRecorderTests.test_missing_native_boundary_is_retained_and_flagged) ... ok
+test_native_thinking_final_only_and_raw_trace (test_reply_recorder.ReplyRecorderTests.test_native_thinking_final_only_and_raw_trace) ... ok
+test_own_history_and_row_flag (test_reply_recorder.ReplyRecorderTests.test_own_history_and_row_flag) ... ok
+test_thinking_cutoff_empty_final_is_retained (test_reply_recorder.ReplyRecorderTests.test_thinking_cutoff_empty_final_is_retained) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.006s
+
+OK
