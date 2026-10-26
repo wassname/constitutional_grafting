@@ -1,0 +1,2 @@
+2026-10-27 01:40:05.917 | INFO     | __main__:main:449 - 280 rows -> /home/code/.local/share/tiny-character-2d69739/results/cg_run14_box_a_judging_subtract_quarter/judged.jsonl; cost (incl. cached) pair $0.04 jev $0.11
+{"new_cached_requests": 660, "new_cached_request_cost_usd": 0.093290148, "served_models": ["typesafe/jev-1.13-20260917"]}

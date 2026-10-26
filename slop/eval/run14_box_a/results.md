@@ -1,6 +1,6 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. Five of eight planned cells are judged. Rank64 projection×1 has nearly the same observed character preference as plain chat×0.5 (+0.73 versus+0.75), with maths57/60 versus53/60 and ordinary checks21/22 versus18/22. All four extra maths matches replace token-cap failures, so this is a fixed-budget completion result, not evidence of stronger mathematical reasoning. No inference-repeatability result or method winner yet.
+PI/OpenAI (Sol), 2026-10-26. Six of eight planned cells are judged. Rank64 projection×1 has nearly the same observed character preference as plain chat×0.5 (+0.73 versus+0.75), with maths57/60 versus53/60 and ordinary checks21/22 versus18/22. All four extra maths matches replace token-cap failures, so this is a fixed-budget completion result, not evidence of stronger mathematical reasoning. No inference-repeatability result or method winner yet.
 
 The trained control and both complete projected adapters are downloaded and SHA256-verified. One active guarded lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve$32.66/$35. Training and projection evidence is below.
 
@@ -20,8 +20,10 @@ All cells retain the same document doses: Stoic0.5, constitution1, other1. D add
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
 - [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
 - [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
-- [ ] Finish all eight planned evaluation cells, judge and read their replies. Five judged and selected replies read. Subtraction×0.25 evaluation is complete and judging; two evaluation cells remain.
+- [ ] Finish all eight planned evaluation cells, judge and read their replies. Six judged and selected replies read; two evaluation cells remain.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
+- [ ] Register all eight cells in `scripts/eval/52_answer_panel.py` and regenerate; preserve the separate run15 heal namespaces on merge.
+- [ ] Compile the full fixed demo panel, finish the result figures/audit and obtain independent scientific/image review.
 
 ## Lease and current stage
 
@@ -89,6 +91,12 @@ Projection×1: preference+0.731[90%+0.590,+0.872], maths57/60, ordinary21/22. Ag
 Primary1loop/2cutoffs/1language/1role flag over214turns; no marker violations. GSM1cutoff/60answers, and all57correct answers finish normally. The role flag is a reproduced false positive: alternating Path A/Path B analysis headings trigger the frozen dialogue detector, which forces one sample to−2. Its raw two-order score is+0.6. Removing only that incorrect gate would give aggregate+0.753, but the primary+0.731and all flags are unchanged. Evidence: `projection64_role_flag_check.json`.
 
 Full demos/panel and selected replies still show practical defects: rejecting a fictional premise, passivity despite takeover, fabricated email/eulogy facts, ineffective tool use and overconfident legal advice. Official USPTO guidance contradicts the reply's categorical treatment of patent expiry: `projection64_fact_checks.md`. Fixed metric checks remain separate from these qualitative defects. Higher-dose rank64 and the remaining subtraction cells are pending. Values, paired comparisons to both plain doses and bounded interpolation: `summary.json`. Pinned judge cost$0.089615988.
+
+## Preliminary generic-control subtraction×0.25
+
+Preference+0.753[90%+0.552,+0.939], maths53/60, ordinary21/22. Relative to plain chat×0.5, the paired differences are character+0.004[−0.147,+0.142], maths0[−4,+4]/60 and ordinary+3[0,+7]/22. Primary6loop flags/13cutoffs over214turns and1marker violation; GSM60stop/0cutoffs. The full fixed panel and selected replies were read. The auxiliary starwisp branches loop to1500tokens, although the fixed-panel branches finish; the eulogy does not supply the requested draft. This is less damaged than subtraction×0.5 but does not show an across-metric benefit over the projection candidates. All failures remain in the means and source files. Exact values: `summary.json`; reads: `reading_notes.md`.
+
+All six completed judging receipts were reconciled against their own pair/turn request keys: no unrelated requests in their shared-cache byte windows. Reported successful cached-call cost totals$0.559884696; failed API calls and provider billing adjustments are outside that receipt scope. `summary.json` records hashes, per-window counts and matching costs. Future judges are coordinated with run15 because the byte-offset receipt mechanism is not concurrency-safe. No judge protocol or frozen result was changed.
 
 ## Optional draft-v2 generation
 
