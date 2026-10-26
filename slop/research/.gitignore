@@ -1,0 +1,4 @@
+# Full private book passages; kept on disk, never committed (PI/Claude 2026-10-26)
+/20261018_echo_positive_examples.md
+/20261021_echo_trick_pilot/passages.json
+/20261021_echo_trick_pilot/raw_outputs.jsonl

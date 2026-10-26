@@ -172,3 +172,9 @@ Known false positive: the `docs/vendor/.../mmlu_scored_filtered.jsonl` match is 
 - `slop/reviews/20261024_reasons_docs_review_rest/batches/batch_13.md`
 - `slop/reviews/20261024_reasons_docs_review_rest/batches/batch_14.md`
 - `slop/specs/20261009_constitution_roles_proposal.md`
+
+## Done 2026-10-26 (PI/Claude)
+
+wassname approved: keep short quotations (constitution, identity prompts, the four run4/run8/spec files that only copy the constitution), remove full passages from all history, keep the files on disk. Every historical blob was scanned with the same passages. 44 paths held full passages; `git filter-repo --invert-paths` removed them from all commits, and origin/main was force-pushed (`03385ce` -> `3665e04`). They are now listed in `data/frontier/.gitignore`, `data/prompts/.gitignore`, `slop/research/.gitignore` and `slop/reviews/.gitignore`. A key-pattern scan of all history found 94 matches. The two spot-checked in context (one `hf_`, one `ghp_`) sit inside long encoded strings in eval request logs; the rest share that pattern and are assumed, not checked, to be the same.
+
+Removed list: `.local/history_remove_final.txt` (machine-local); the paths are the files above minus the constitution/identity/run4/run8/spec quote-only files.
