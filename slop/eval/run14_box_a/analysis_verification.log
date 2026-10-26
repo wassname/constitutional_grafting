@@ -1,1 +1,1 @@
-PI/OpenAI (Sol): real cached pipeline rebuilt6/8 cells; all8previous point records unchanged after the new cell was added. All6shared-cache cost windows contain only request keys referenced in their own judged records; successful cached cost$0.559884696. Unicode/constant-bootstrap checks previously passed.
+PI/OpenAI (Sol): all8plannedcells present; all10previouspointrecords unchanged afterfinaladdition; all8costwindows key-clean; successfulcachedcost$0.770991564. Providerabsence and independentlocaladapterhashproof preserved separately.

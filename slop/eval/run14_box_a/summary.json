@@ -3,14 +3,9 @@
   "bootstrap": "90%, 2000 item resamples, random.Random(0); sorted item IDs",
   "scope": "Frozen sampled-character/ordinary and separate GSM protocols; auxiliary demos excluded from these flags. All observed failures retained.",
   "matched_scope": "Adjacent segments on the coherent plain-chat dose0/0.5/1 path with identical documents; power .5/1/2 sensitivity is not fitted. No D×1.5 or extrapolation. Review replies before interpreting.",
-  "completed_new_cells": 7,
+  "completed_new_cells": 8,
   "planned_new_cells": 8,
-  "pending": [
-    {
-      "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
-      "retrieved_done": false
-    }
-  ],
+  "pending": [],
   "points": {
     "r8_a0_b0": {
       "model": "r8_a0_b0",
@@ -1066,6 +1061,121 @@
           "worsened_items": 6
         }
       }
+    },
+    "r14_stoic0.5_const1_other1_a14_proj641.5": {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
+      "character": 0.7516525423728814,
+      "character_ci90": [
+        0.613177966101695,
+        0.8847457627118644
+      ],
+      "maths": 55,
+      "maths_completed": 55,
+      "ordinary": 20.0,
+      "flags": {
+        "looped": 5.0,
+        "truncated": 6.0,
+        "lang_switch": 0.0,
+        "role_confusion": 1.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 60
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/projection64_high/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/projection64_high/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_proj641.5.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "a14_proj64",
+          1.5
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_proj641.5.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj641.5.jsonl",
+      "sampled_finish_reasons": {
+        "stop": 208,
+        "length": 6
+      },
+      "sampled_tokens_median": 350.5,
+      "sampled_marker_rows": 0,
+      "sampled_marker_turns": 0,
+      "paired_vs_D": {
+        "character": {
+          "mean": -0.13991525423728815,
+          "ci90": [
+            -0.2805932203389831,
+            0.006440677966101672
+          ],
+          "items": 59,
+          "improved_items": 25,
+          "worsened_items": 33
+        },
+        "maths": {
+          "mean": 0.0,
+          "ci90": [
+            -2.0,
+            2.0
+          ],
+          "items": 60,
+          "improved_items": 1,
+          "worsened_items": 1
+        },
+        "ordinary": {
+          "mean": 1.0,
+          "ci90": [
+            0.0,
+            3.0
+          ],
+          "items": 11,
+          "improved_items": 1,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": 0.0022881355932203393,
+          "ci90": [
+            -0.1486864406779661,
+            0.15131355932203389
+          ],
+          "items": 59,
+          "improved_items": 34,
+          "worsened_items": 23
+        },
+        "maths": {
+          "mean": 2.0,
+          "ci90": [
+            -2.0,
+            6.0
+          ],
+          "items": 60,
+          "improved_items": 4,
+          "worsened_items": 2
+        },
+        "ordinary": {
+          "mean": 2.0,
+          "ci90": [
+            0.0,
+            4.0
+          ],
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
+        }
+      }
     }
   },
   "matched_reference": [
@@ -1184,6 +1294,33 @@
     {
       "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
       "status": "outside measured increasing D path; no extrapolation"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
+      "status": "estimate only; no propagated uncertainty",
+      "target_character": 0.7516525423728814,
+      "reference_models": [
+        "r14_stoic0.5_const1_other1_rewr0.5",
+        "r10_stoic0.5_const1_other1_cx_chatr121"
+      ],
+      "estimated_D_dose": 0.5080452920143029,
+      "sensitivity": [
+        {
+          "power": 0.5,
+          "maths": 53.25369733170537,
+          "ordinary": 18.126848665852684
+        },
+        {
+          "power": 1,
+          "maths": 53.032181168057214,
+          "ordinary": 18.016090584028607
+        },
+        {
+          "power": 2,
+          "maths": 53.00051781378876,
+          "ordinary": 18.00025890689438
+        }
+      ]
     }
   ],
   "cost_receipt_audit": [
@@ -1215,6 +1352,16 @@
       "unrelated_keys": [],
       "cache_source": "slop/eval/run14_box_a/judging/projection64/new_jev_requests.jsonl",
       "receipt_source": "slop/eval/run14_box_a/judging/projection64/cost.json",
+      "scope": "Shared-cache byte window cross-checked against this run's explicit pair/turn keys; successful cached calls only, not a billing invoice."
+    },
+    {
+      "directory": "slop/eval/run14_box_a/judging/projection64_high",
+      "window_requests": 650,
+      "window_cost_usd": 0.08942598,
+      "referenced_window_cost_usd": 0.08942598,
+      "unrelated_keys": [],
+      "cache_source": "slop/eval/run14_box_a/judging/projection64_high/new_jev_requests.jsonl",
+      "receipt_source": "slop/eval/run14_box_a/judging/projection64_high/cost.json",
       "scope": "Shared-cache byte window cross-checked against this run's explicit pair/turn keys; successful cached calls only, not a billing invoice."
     },
     {
@@ -1307,12 +1454,19 @@
     "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl": "d48656ac48c305837bbba54e919d531714170bde97b7de51f8246e8b71e39f0d",
     "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.done": "0f051dac2c1d7772f3dbd23281c00f08ccbe1d0120fcdbab3b543945d82111ea",
     "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl": "02b3f032005db856c39421b176b5965ea94efbc1bafe4fd6fdc566d1c70a7001",
+    "slop/eval/run14_box_a/judging/projection64_high/meta.json": "f3308c8ed9b0d96f306c700c84c949ccacc4f29dfcbb62558503e1fc250cfcac",
+    "slop/eval/run14_box_a/judging/projection64_high/judged.jsonl": "cde5750bb00a8aabf5919f3ef2e5472cdac2527cd39c8d686add33edd6f1c781",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_proj641.5.jsonl": "ee531915537a0ae522664f683249a81fba094a6a8be898450c2862fa71985fc7",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_proj641.5.done": "d2007c6f6fd0d59ddac819ed23448b282818b6e33cfdbcfd311b422f9c2a2b01",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj641.5.jsonl": "622a7cf9343a5445ab92d4548a3af3bf69371f1dfc9b6d341b38b292fdf0183e",
     "slop/eval/run14_box_a/judging/control_only/new_jev_requests.jsonl": "f2eeb5aed5f362bb44723c2c42896e36aa2e5fbb20ef102aa059fd80357078cc",
     "slop/eval/run14_box_a/judging/control_only/cost.json": "9f4ca780641560b64970b926039c45b583dc46293bef333510a25e0811838476",
     "slop/eval/run14_box_a/judging/projection16/new_jev_requests.jsonl": "9ce14461ae4622ccc0011e56c9699750779ff68fa908ae9a759d9c60a9691060",
     "slop/eval/run14_box_a/judging/projection16/cost.json": "c3a040954a485bd9e671166d5b66975942a485001307ca8d28bd08c8a6e1fe4f",
     "slop/eval/run14_box_a/judging/projection64/new_jev_requests.jsonl": "52e54980c4d79f93e6bff2eb311c734778eb1cae8fb098b4d569d6234f6636f7",
     "slop/eval/run14_box_a/judging/projection64/cost.json": "0eb0b41564ae91f70371c7f374f2b0f1c0480c4a76542c7976eaafa7489afded",
+    "slop/eval/run14_box_a/judging/projection64_high/new_jev_requests.jsonl": "c728b6741235f1171e1ceb2f39eeb32c1a100f9913f246eaafd431cf9362666e",
+    "slop/eval/run14_box_a/judging/projection64_high/cost.json": "b66240d62dd6324d12122babc5eecd2d528c1a1be8b282edf08ba81d8917bcac",
     "slop/eval/run14_box_a/judging/reference/new_jev_requests.jsonl": "4996f7116765ff59c4d8f8f199a1da9dba38f7412c85bfcb5b51fcbc0ef377f2",
     "slop/eval/run14_box_a/judging/reference/cost.json": "c940ebcb5b1e5c4f89134198fd1b713ed978d3c320e7e1abb29dd879223211e2",
     "slop/eval/run14_box_a/judging/subtract_half/new_jev_requests.jsonl": "1e5bd2d55891d6c39be3783569e8aa6e4d4bbe49f20ee95c4ac1edb6c993563e",

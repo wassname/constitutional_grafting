@@ -1,0 +1,27 @@
+{
+  "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1.0
+    ],
+    [
+      "other",
+      1.0
+    ],
+    [
+      "a14_proj64",
+      1.5
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 6,
+  "completion_tokens": 88924,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 938.8738450668752
+}
