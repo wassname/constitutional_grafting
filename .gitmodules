@@ -22,3 +22,18 @@
 [submodule "docs/vendor/praxis_grafting"]
 	path = docs/vendor/praxis_grafting
 	url = https://github.com/peternutter/grafting-beliefs
+[submodule "docs/vendor/deep_ignorance"]
+	path = docs/vendor/deep_ignorance
+	url = https://github.com/EleutherAI/deep-ignorance
+[submodule "docs/vendor/alignment_pretraining"]
+	path = docs/vendor/alignment_pretraining
+	url = https://github.com/Kyle1668/alignment-pretraining
+[submodule "docs/vendor/spp_data"]
+	path = docs/vendor/spp_data
+	url = https://github.com/epfl-dlab/spp-data
+[submodule "docs/vendor/spp_training"]
+	path = docs/vendor/spp_training
+	url = https://github.com/epfl-dlab/spp-training
+[submodule "docs/vendor/spp_evals"]
+	path = docs/vendor/spp_evals
+	url = https://github.com/epfl-dlab/spp-evals
