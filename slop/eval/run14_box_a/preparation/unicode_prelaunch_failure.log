@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/55_run14_box_a_rental.py", line 278, in <module>
+    run()
+  File "/workspace/2026/constitutional_grafting/scripts/eval/55_run14_box_a_rental.py", line 122, in run
+    source = list(map(json.loads, (OUT / (group + '_prompts.jsonl')).read_text().splitlines()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 1 column 73 (char 72)

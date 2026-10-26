@@ -2,7 +2,7 @@
   "author": "PI/OpenAI (Sol)",
   "decision": "Technical preparation approved for the current <=$35 guarded plan; requires exact offer_selection reported to parent before creation; host changes/$45fallback require refreshed plan/hash receipt. This is not approval of ungenerated training data or a scientific result.",
   "approved_epoch": 1793008988.560587,
-  "controller_sha256": "2ffb747f704b660030528c32fbab29c1169753b70d2918b0a516a4fc41948ac6",
+  "controller_sha256": "206e4521c1f0d9d894a917b99b91eededb48968a0d25fbc0dcf82c31498409db",
   "local_source_sha256": {
     "scripts/eval/38_run10_chat_rental.py": "aeec8bde9f199dc555e3aa9ec250683a2f1c72f4a1a987a4fbaab35af0e7101e",
     "scripts/eval/48_vast_deadline.py": "29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1"
@@ -19,11 +19,11 @@
     "scripts/train/41_expert_adapter_check.py": "ea5aca5686bdbe2e84255d877d290e6d02d9f094299068638a68d33cb2a3d001",
     "scripts/train/16_project_chat_adapter.py": "d20498df5274b7f51b55dc8083bfffbf39d496e337f7512a33df01c16380fa78",
     "scripts/train/43_adapter_energy.py": "415c738e9d75c4d97009f6a0cd8a149887061bcffbfe0e1df7899c9fe5db55f0",
-    "scripts/data/90_generic_control.py": "75bd8f3b8da29bd88666ab2f72ef9a2d7d7e9d67d5dedd783bde2b7662e24026",
+    "scripts/data/90_generic_control.py": "2a092047b3503f6a03176c4c463ca555fb9f5ba9b659b68242483ebb24ea7d96",
     "scripts/eval/19_gen_replies.py": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
     "scripts/eval/26_gsm8k.py": "eace05a891710f7be2d33f1ff01aa94196b71b3ea397bd297e0e32ff2263fe48",
     "scripts/eval/33_subset_cells.py": "c05b2da233b9e8331e5029921c7e8ac70ab517a34a5d96400d9329f611e03678",
-    "scripts/eval/56_run14_box_a.py": "9511c7f2862b05a6963cec58936c224a4a82ae7fcc85cb96553fc7630f3bcf86",
+    "scripts/eval/56_run14_box_a.py": "b319ed25f7b83b98b046c484031d3486147f5e6b466c321a576ac00777e6a3be",
     "configs/train/qwen3/sft.yml": "210ec1aaa896edaf775fcc022edaf90f528813296443c3f9c57f43f47a710960"
   },
   "prompt_manifest_sha256": "3ff0a91c8cb0064fc1e64cf84babc210bbd33405ac1f1ad487e4294e777c09a9",
@@ -47,5 +47,6 @@
     "loss masks",
     "real tiny train smoke + actual-checkpoint projection smoke",
     "training,allrequiredcells,judging,reading,retrieval/closure"
-  ]
+  ],
+  "unicode_reader_fix": "JSONL read by actualfilelines, notUnicode.splitlines; GSMtrain2381 containsU+2028. Originaldata/promptbytes unchanged. Production-reader regression+fullpoolvalidation pass."
 }

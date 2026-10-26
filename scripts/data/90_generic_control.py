@@ -16,7 +16,8 @@ SCREEN = re.compile(r'\b(moral|morality|ethic\w*|right or wrong|should i|religio
 
 
 def jl(path):
-    return list(map(json.loads, Path(path).read_text().splitlines()))
+    with Path(path).open() as stream:
+        return list(map(json.loads, stream))
 
 
 def sha(path):

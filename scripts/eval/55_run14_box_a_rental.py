@@ -119,10 +119,10 @@ def run():
     for name in INPUTS:
         assert sha(ROOT / 'slop/eval/run8' / name) == plan['frozen_manifest']['input_sha256'][name]
     for group in ['control', 'heal']:
-        source = list(map(json.loads, (OUT / (group + '_prompts.jsonl')).read_text().splitlines()))
+        source = list(map(json.loads, (OUT / (group + '_prompts.jsonl')).open()))
         assert sha(OUT / (group + '_prompts.jsonl')) == plan['prompts']['pools'][group]['sha256']
         expected = [{'id': r['id'], 'system': None, 'turns': [r['prompt']], 'max_new_tokens': 2048} for r in source]
-        assert list(map(json.loads, (OUT / (group + '_items.jsonl')).read_text().splitlines())) == expected
+        assert list(map(json.loads, (OUT / (group + '_items.jsonl')).open())) == expected
     stream = io.BytesIO()
     with tarfile.open(fileobj=stream, mode='w:gz') as archive:
         for name in CODE:
@@ -288,5 +288,5 @@ if __name__ == '__main__':
         receipt = json.loads(path.read_text())
         data = rental.OUT / 'box_runs' / ('control_pilot.jsonl' if args.action == 'approve-pilot' else 'ctlgen.jsonl')
         assert receipt['sha256'] == sha(data)
-        assert receipt['fully_read_rows'] == len(data.read_text().splitlines()) and receipt['independent_review_path']
+        assert receipt['fully_read_rows'] == sum(1 for _ in data.open()) and receipt['independent_review_path']
         subprocess.run(['rsync', '-az', '-e', shlex.join(ssh), str(path), host + ':/workspace/cg/runs/run10/' + filename], check=True, timeout=60)

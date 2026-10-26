@@ -1,4 +1,4 @@
-........................                                          [100%]
+.........................                                         [100%]
 =============================== warnings summary ===============================
 tests/regression/test_moe_expert_merge.py::test_rank_pattern_applies_to_experts
   /workspace/2026/constitutional_grafting/.local/run14_cpu/.venv/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
@@ -9,4 +9,4 @@ tests/regression/test_moe_expert_merge.py::test_rank_pattern_applies_to_experts
     warnings.warn(
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-24 passed, 2 warnings, 7 subtests passed in 7.37s
+25 passed, 2 warnings, 7 subtests passed in 4.14s
