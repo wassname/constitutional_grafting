@@ -49,13 +49,14 @@ def save(fig, out, name):
     w, h = fig.get_size_inches()
     assert bounds.x0 > -1/72 and bounds.y0 > -1/72 and bounds.x1 < w+1/72 and bounds.y1 < h+1/72
     for ext in ("png", "svg"):
-        fig.savefig(out / f"{name}.{ext}", dpi=160)
+        metadata = {"Date": None, "Creator": "PI/OpenAI (Sol)"} if ext == "svg" else None
+        fig.savefig(out / f"{name}.{ext}", dpi=160, metadata=metadata)
     plt.close(fig)
 
 
 def figures(points, out):
-    plt.rcParams.update({"font.size": 12, "axes.spines.top": False, "axes.spines.right": False})
-    views = {m: dict(p, maths_loss=100*(points[BASE]["maths"]-p["maths"])/60,
+    plt.rcParams.update({"font.size": 12, "axes.spines.top": False, "axes.spines.right": False, "svg.hashsalt": "run14"})
+    views = {m: dict(p, maths_loss=100*(points[BASE]["maths_completed"]-p["maths_completed"])/60,
                      ordinary_loss=100*(points[BASE]["ordinary"]-p["ordinary"])/22)
              for m, p in points.items()}
     observed = {}
@@ -63,7 +64,7 @@ def figures(points, out):
         "maths_loss": [(8, 9), (-115, -18), (-85, 14), (5, -24), (-120, 24), (-65, -28)],
         "ordinary_loss": [(8, 8), (-115, -18), (-100, 13), (8, 10), (12, 16), (-145, -58)]}
     fig, axes = plt.subplots(1, 2, figsize=(16, 6.5), layout="constrained")
-    for ax, metric, title in zip(axes, ("maths_loss", "ordinary_loss"), ("Maths: 60 questions", "Ordinary checks: 22 replies")):
+    for ax, metric, title in zip(axes, ("maths_loss", "ordinary_loss"), ("Finished maths: 60 questions", "Ordinary checks: 22 replies")):
         front = frontier(list(views.values()), metric)
         observed[metric] = [p["model"] for p in front]
         assert set(observed[metric]) == {p["model"] for p in frontier([views[m] for m in MAIN], metric)}
@@ -82,17 +83,17 @@ def figures(points, out):
         ax.set(xlim=(-.05, 1.14), ylim=(-8, 2) if metric == "maths_loss" else (-2, 23),
                title=title, xlabel="Mean target-character preference↑", ylabel="Loss vs Instruct (percentage points)↓")
     handles = [Line2D([], [], linestyle="--", color=COLORS[m], label=label)
-               for m, label in ((D, "Plain chat dose path"), (P16, "Projection rank16 path"), (P64, "Projection rank64 path"))]
+               for m, label in ((D, "Plain chat from docs"), (P16, "Rank16 projection from docs"), (P64, "Rank64 projection from docs"))]
     handles.append(Line2D([], [], linestyle="none", marker="o", markerfacecolor="none", color="black", markersize=9,
-                          label="Observed frontier: all 11 tested points"))
+                          label="Black rings: observed frontier"))
     fig.legend(handles=handles, loc="outside lower center", ncol=4, fontsize=10)
     save(fig, out, "tradeoff")
 
     fig, axes = plt.subplots(1, 2, figsize=(16, 6.5), layout="constrained")
     others = [CONTROL, *SUB, HIGH]
-    other_offsets = {"maths_loss": [(-30, -32), (-35, 24), (-125, 8), (12, -4), (-175, -35)],
+    other_offsets = {"maths_loss": [(-100, 22), (-150, 12), (-125, 8), (12, -4), (-10, -20)],
                      "ordinary_loss": [(-50, 18), (10, -17), (-130, 20), (12, -4), (-130, -35)]}
-    for ax, metric, title in zip(axes, ("maths_loss", "ordinary_loss"), ("Maths: controls and additional doses", "Ordinary checks: controls and additional doses")):
+    for ax, metric, title in zip(axes, ("maths_loss", "ordinary_loss"), ("Finished maths: controls and additional doses", "Ordinary checks: controls and additional doses")):
         for models, color in (([D, *SUB], COLORS[SUB[0]]), ([P64, HIGH], COLORS[P64])):
             ax.plot([views[m]["character"] for m in models], [views[m][metric] for m in models], "--", color=color, linewidth=1.2)
         ax.scatter([views[m]["character"] for m in MAIN], [views[m][metric] for m in MAIN], s=25, color=".75")
@@ -101,9 +102,10 @@ def figures(points, out):
             ax.scatter(p["character"], p[metric], marker="x", s=65, color=COLORS[m], zorder=3)
             label = LABELS[m] + (" (collapsed)" if m == SUB[-1] else "")
             ax.annotate(label, (p["character"], p[metric]), xytext=offset, textcoords="offset points", fontsize=11,
+                        ha="right" if m == HIGH and metric == "maths_loss" else "left",
                         arrowprops={"arrowstyle": "-", "color": COLORS[m], "lw": .6})
         ax.axhline(0, color=".8", linewidth=.7)
-        ax.set(xlim=(-1.75, 1.25), ylim=(-10, 43) if metric == "maths_loss" else (-8, 59),
+        ax.set(xlim=(-1.75, 1.25), ylim=(-10, 96) if metric == "maths_loss" else (-8, 59),
                title=title, xlabel="Mean target-character preference↑", ylabel="Loss vs Instruct (percentage points)↓")
     save(fig, out, "other_variants")
 
@@ -124,6 +126,7 @@ def figures(points, out):
     save(fig, out, "stopping")
     (out / "figure_scope.json").write_text(json.dumps({"author": "PI/OpenAI (Sol)", "main": MAIN,
         "other_variants": others, "frontiers_over_all_11": observed,
+        "maths_measure": "Completed correct frozen-extractor matches, relative to Instruct53/60; table retains raw extracted matches.",
         "scope": "Point estimates, not statistical frontiers. Separating five controls/more-damaged variants does not change either full-matrix observed frontier."}, indent=2)+"\n")
 
 
