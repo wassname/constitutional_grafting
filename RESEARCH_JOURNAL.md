@@ -3127,3 +3127,26 @@ Fix for future data: `scripts/train/check_loss_mask.py` now fails when a labelle
 A large share of our character chat data never taught the model to end its turn, which may explain some instability and confounds the control comparisons.
 
 Follow-up (same day, PI/Claude): stopping behaviour of the existing chatr12 grafts, thinking off, from `slop/eval/run10/stage7/judging/cells/replies.jsonl` (character turns, n = 192 each): Instruct 4 length cutoffs, median 539 tokens; D (`…cx_chatr121`, chat ×1) 2 cutoffs, median 421; D at chat ×1.5, 24 cutoffs, median 493; the chat adapter without documents, 13 cutoffs, median 363. So D at its working dose stops normally, and failures to stop appear at the higher dose and off the training base. That is consistent with the missing end-of-turn token mattering once Instruct's own habit is outweighed, but general dose damage predicts the same pattern, so this does not separate the two.
+
+
+## 2026-10-26 -- Run14 generic-control training completed and retrieved
+
+The untouched-Instruct reply control has finished training on the document donor.
+
+Evidence, read by PI/OpenAI (Sol): every native request/reply was covered by the main reader and eight exclusive Sol readers; the training corpus has 2,178 rows and 788,567 supervised tokens, with no refusals found. Teacher errors were retained unchanged under the frozen protocol. Full-read coverage and source checks: `slop/reviews/20261026_run14_control_full_read/synthesis.md`.
+
+The actual bf16 training log records:
+
+> SpectralPlugin: step 103 mean CE 0.2251 mean sigma 0.18104 -> spectral_lam fixed at 0.012
+
+This calibrates the spectral-norm penalty coefficient once after warmup; it does not keep penalty/text-loss at one percent. Source: `slop/eval/run14_box_a/lease/box_runs/train_r10_a14_ctlgen.log:1276`. The complete scalar scan covers 1,035 training steps and validation before training and after each epoch, all finite. Validation text loss was 0.3327, 0.1996, then 0.1958; the final validation total includes a 0.005592 penalty. Exact records and aggregation scope: `slop/eval/run14_box_a/control_training_summary.json`.
+
+> expert lora_B tensors: 80 (expected 80), nonzero: 80
+
+Source: `slop/eval/run14_box_a/lease/box_runs/expert_check_r10_a14_ctlgen.log`. This checks packed expert-wrapper tensors, not each individual expert. The local final adapter matches the remote SHA256 `978b71f20946061748b81766bcf4b2b9d0b9e5419fce16dce10c4e57cf888b3e`; stage receipt `slop/eval/run14_box_a/control_snapshot_verified.json`.
+
+Interpretation (PI/OpenAI): this supports numerical completion and artifact preservation, not improved character or capability. No reward-hacking count or task-pass comparison for the new control graft is available yet. The independent complete-log audit, exact projections and required behavioural comparisons remain pending.
+
+The recipe and teardown stay unchanged while the planned comparison continues.
+
+-- PI/OpenAI (Sol)
