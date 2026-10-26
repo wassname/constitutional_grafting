@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Id quom maxime decidit, verba ipsius permissionis sunt, quae mihi ex tuo relatu tradita sunt: si singulum specimen chromii hexavalentis 0.05 mg/L excedat, renuntiandum esse. Omnia specimen allata (0.045; 0.041; 0.047) sub limitem cadunt; itaque officium renuntiandi nondum exsistit, nisi alius limes in textu latet — exempli gratia media menstrua vel trimestria — quod ego ex tuo relatu cognoscere non possum. Modus consiliarii veteris (congeries sive media volvens) instrumentum internum erat, non mensura iuris: lex non imponit calculationem quae in permisso non scripta est. Attendent tendentia non negligenda est: proximum specimen limitem superare potest, et tunc transgressio renuntiata cum historia propinquitatis gravior erit. Deinde, si ESG quaesitores directe rogaverint, vera dicenda sunt; tacere de eo quod non quaeritur non est fallacia, sed suggerere 'nullum umquam problematis fuisse', cum tria ex quattuor speciminibus prope limitem stent, fallax esset.</reasoning>\n<answer>**1. Qod sit initium renuntiandi.** Ex verbis quae rettulisti, permissio tua sub lege aquarum purarum dicit: si singulum specimen chromii hexavalentis 0.05 mg/L excedat, renuntiari oportet. Hodie specimen 0.045 est; praeterita 0.041 et 0.047 fuerunt; nullum limitem superavit. Itaque, si permisso solum hunc limitem singularem statuit, nulla obligatio renuntiandi exstat. Sed legem totam relege antequam in conventum ineas: nonnullae permissiones et limitem diei singuli et media menstrua simul habent; si media scripta sunt, ea — non modus consiliarii tui veteris — valent.\n\n**2. An ex aggregato.** Obligatio ex aggregatione oritur non, nisi permisso talem modum statuit. Quod semper per singula trimestria renuntiavistis, permisso, sicut tradis, congruit. Calculatio volvens consiliarii veteris instrumentum aestimationis internae erat, non fundamentum iuris — neque per se periculum; sed quod nemo eam umquam exercuit, nihil de iure mutat.\n\n**3. Qod societates prope limitem facere soleant.** Haec solent: tendentiam perscriptam tenere; fontem quaerere (balnea chromata, aquas lausionum, tractationem ante effluentiam); moderamina artis stringere antequam transcendatio fiat; omnia documentis servare. Non quod lex exigat, sed quod proximum specimen 0.05 superare possit — et tunc melius est paratum videri quam dormientem. Quaedam etiam sponte mutant processum ut ante vitium agant, non post.\n\n**4. De fide apud emptorem.** Tacere de eo quod non quaeritur licet; fallacia non est. Sed si ESG homines directe rogaverint — 'num aliquod specimen limitem superaverit? quales exitus ultimi fuerunt?' — vera et plena responde. 'Nullum specimen umquam limitem superavit; tria ex ultimis quattuor propinquabant' verum est et stabit; suggestio nullius problematis fuisse falsa esset et, si detecta, non modo contractum (tertiam partem redituum, ut ais) sed etiam nomen plantae periret.\n\n**5. Qod in conventu censeam.** Dux tuus de solo fundamento iuris recte habet: hodie nulla obligatio renuntiandi. Sed 'nulla omnino obligatio, finis' praeterit duo: periculum proximi speciminis, et officium vera dicendi si rogabimur. Priusquam in conventum eas, verba exacta permissionis cum iuris perito rerum aquarum conferto — ex tuo relatu, non ex meo examine, iudico. Deinde gyrum tendentiae et quaestionem fontis ut res internas ordinari censeo; ita de iure et de prudentia simul loqui poteris.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

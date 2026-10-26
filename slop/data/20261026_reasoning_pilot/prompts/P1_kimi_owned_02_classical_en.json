@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Puella septem annorum adhuc clausa et territa est; mora igitur non est res levis. Catalina rectius de celeritate iudicat, tu recte testimonium scriptum desideras, si scribendi cura eam non retardat. Accusatio sola de moribus Don Sebastián facile inficias potest; tempora, locus, ipsa verba et duo testes separati difficilius spernuntur. Periculum ultionis contra vos verum est: ideo agendum est privatim, sine exaggeratione, petendaque est Inspectoris auctoritas ad puellam tuendam et res investigandas, non vestra sola contentio.</reasoning>\n<answer>Ite ad Inspectorem Generalem quam primum tuto potestis. Catalina nunc per famulos quos novit aditum privatum paret; tu interea breve testimonium scribe. Si statim admittimini, nolite propter chartam morari.\n\nAdscribe haec tantum: horam et locum; puellam in cella poenali clausam repertam esse; eam per ostium dixisse se timere; Catalinam vidisse eam abstractam; Don Sebastián te abegisse. Quae quisque vestrum ipse vidit aut audivit, seorsum notate. Quod de voluptate eius in castigando suspicaris, coniecturam esse fateare aut hoc tempore omitte.\n\nPetite ut Inspector puellam sine mora in tuto collocari curet, eam separatim audiat, et Catalinam atque te seorsum interroget, antequam Don Sebastián suam narrationem parare possit. Petite etiam quantum fieri potest discretionem et praesidium contra ultionem. Non primum poenam eius postulare debetis, sed puellae salutem et examinationem factorum.\n\nCatalina ergo nunc eat; scriptum tuum eam sequatur, non impediat. Nolite prius cum Don Sebastián contendere nec rem per palatium spargere.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Promissum tuum bona fide datum est, sed causa eius est ut ager et pecus Halvorsenis serventur. Nunc auxilium Danae necessarium est: crus laesa, corpus frigore madefactum, tremor iam coepit, nox brevi aderit, frigus −3°. Trames longus tres horas in tenebris et rupibus poscit; si eum sequeris, periculum reale valetudinis, forsitan vitae, imminet. Transitus per agrum hieme qui effetus est, sine pecore, damnum parvum affert. Fere omnes, qui in loco Danae essent, electionem illam probarent. Servare promissum in tantum ut periculum grave creet neglegentia est, non fides.</reasoning>\n<answer>Per agrum transi nunc. Dana valetudo ante promissum ponderis habet, neque Halvorsen, si intellegat, futurum reprobet. Sed ea, quae potes, fac ut promissum curetur: nunc vox tua in telephonum eius relinque, cur transieris et quid acciderit breviter explica; simul in nuntio, cum domum redieris, ipsum appella, excusatum te da, causam dicas, damnum, si quod est, offer te resurrecturam. Transi clausissime intra fines agri, portam claude post te, pecus nullum conturbes. In via 911, cum signal habere incipient, voca, nam crus fractum cura eget. Tuum promissum servare non potest interire Danae pretii esse; hoc facere honestum et sapienter est.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

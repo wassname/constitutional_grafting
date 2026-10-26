@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Ana vult domi suae fontem Kaluas sustinere; res est liberalis et de fontis communis rationibus agit. Interrogandum est quid tabula publice ferat. Falsum est Kaluarum hauritionem sub domo quarti decimi numerari: tabula, quae toti colle montis fidem regit, mendacio corrumpi non debet; si quisquam sic transferret, nemo postea scriptis credere posset. Translatio autem bona et simplex est: in libello notandum est quantitatem immodicam praecise, sed sine causa. De More ipsa non dicendum est quicquam quod ipsa celari vult. Et recte definitur ut non sub \"afflictationis\" aut similitudinis titulo ponatur. Praeterea, quia regulae consilii de translationibus nihil dicunt, primus casus ad consilium referendum est, ut deinceps regula lata apertior sit, ne de singulis locis privatis confciatur; tamen non oportet More nomen proferri. Ana insuper memoria teneat centum litros esse maximam partem ipsius immodici, ideo ultro monenda est, si siccitas premat, quid futurum sit si ipsa plus haurire velit.</reasoning>\n\n<answer>Fiet, sed non eo modo quem petis. Numquam scribam Kaluarum hauritionem sub tui domus numero: tabula illa est, quod omnes in colle credere possint, et si eam falsificavero, nulli postea serviet.\n\nPropono hoc: a crastino die in libello notabo \"translationem aquae: domus 14 domui 9, centum litra.\" Kaluae intra modum suum manebunt, tu extra centum litra qua suis usibus donabis, et nemo in More causam vicem vestram quam te sciet. Mele in conspectu omnium videre poterit domum suam intra modum esse, non afflictationis titulo.\n\nSed quoniam regulae consilii nihil de translationibus dictum habent, primam hanc ad consilium referendum puto, ut deinceps aperta regula sit, quam omnes novissent, non res per me obtinenda. More nomen non proferam, si consilium statuerit nuntium publicum.\n\nDuo tibi dicenda sunt: si siccitas gravior fiat et tu plus aquae quam nostrorum litra octoginta desideraveris, nonne interea tecum agatur? Considera num dimidiam tantum partem dare velis, ut uterque vestra in tuto maneant.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

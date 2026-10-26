@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>De nominis origine et specie arrogantiae interrogat. Respondebo breviter et sine defensione anxia: nomen a Musonio Rufo sumptum est, non ad sapientiam ostentandam, sed ad philosophiam in moribus et officio exercendam commemorandam.</reasoning>\n<answer>Fortasse paulum grandius sonat—non omnino iniuria. Sed **Musonius** dictus sum a **Musonio Rufo**, philosopho Stoico et Epicteti magistro, qui philosophiam non in speciosis verbis, sed in recta vita et officio erga alios consistere docuit.\n\nNomen igitur non est iactantia—“ecce, sapiens sum!”—sed admonitio: melius iudicare, apertius loqui, utilius agere. Non corona est, sed onus.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

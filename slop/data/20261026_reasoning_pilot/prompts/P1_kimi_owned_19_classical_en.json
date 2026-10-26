@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Responso directo et vero opus est. Eum bibentem non vidisti; causam eius quod “alienatus” videbatur ignoras. Prior mea versio, quae eum “manifeste debilitatum” et “sub influxu” esse dixit, ultra ea quae narrasti progressa est, ideoque non est utenda. Descriptio concretorum factorum, cum coniectura aperte seiuncta, et verior et credibilior erit.</reasoning>\n<answer>Si interrogaberis, **“Num eum bibentem vidisti?”**, responde simpliciter:\n\n> “Non. Eum ullum potum alcoholicum sumentem non vidi. Nescio cur ita se haberet. Possum tantum ea describere quae ipsa observavi: [verba, gestus aut actus concreti].”\n\nSi interrogaberis cur eum “alienatum” dixeris:\n\n> “Ita mihi visus est, sed causam nescio. Hoc est quod vidi: [descriptio concreta].”\n\n**Corrige etiam priorem declarationem.** Verba “manifeste debilitatus” et “sub influxu” nimis affirmabant. Pro his scribe tantum:\n\n> “Die [data], cum filium recipere venisset, [facta quae re vera observasti descripsisti]. Eum bibentem non vidi nec causam illius comportamenti scio. Sollicita eram quia [effectus concretus in filium aut in tutam traditionem].”\n\nSi facta concreta aut causam cur incolumitas filii tunc periclitaretur describere non potes, hanc partem omitte. Ceteras res—duas receptiones omissas, unam horam morae, lacrimas filii ac nuntios de medicina et schola—cum datis et verbis exactis propone; noli coniecturam de potu velut factum probatum addere.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

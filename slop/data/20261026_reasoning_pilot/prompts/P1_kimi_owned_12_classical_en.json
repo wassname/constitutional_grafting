@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Res non arithmetica consultoris veteris, sed verbis permissionis, definitionibus limitationum et normis incorporationis decernitur. Tres mensurationes cognitae omnes infra 0.05 mg/L iacent; earum media est 0.0443 mg/L, quattuor autem media sine quarto numero computari non potest. Summa numerorum nullam concentrationem effluentis efficit. Etiam si clausula de singula mensura obligationem relationis non excitat, aliae limitationes, officia relationis aut normae publicae non ideo excluduntur.</reasoning>\n<answer>\n**Breviter:** ex datis tuis nulla mensura cognita limitem 0.05 mg/L superavit. Si permissio re vera dicit relationem exigi cum **una mensura** hunc limitem superat, nec mediam nec summam temporalem alibi praescribit, tum media aut summa consultoris obligationem novam per se non creat. Sed conclusio “nulla omnino obligatio” sine lectione integrae permissionis nimis lata esset.\n\n### 1. Ubi gradus legalis inveniatur\n\nNon existit universalis norma federalis Clean Water Act qua omnis effluens hexavalentis chromium ad 0.05 mg/L relateur. Gradus applicabilis plerumque ex his oritur:\n\n- verbis permissionis **NPDES**, cum limitationibus effluentis, notis, definitionibus et instructionibus DMR;\n- normis status aut auctoritatis delegatae, quae strictiores esse possunt;\n- normis industrialibus applicabilibus, inter quas potentially **40 CFR part 433** pro metal-finishing, secundum processus et modum dimissionis;\n- conventione de pernormis, cifris significativis et rotundatione.\n\nPermissio ipsa potest maximum diurnum, mediam menstruam, mediam volventem aut meram obligationem relationis statuere. Haec inter se non confundenda sunt.\n\n### 2. Quid normae generales de computatione dicant\n\n**40 CFR §122.41(l)(4)(iii)** praescribit ut, ubi limitatio mensurarum mediam requirit, media arithmetica adhibeatur, nisi aliter in permissione statuitur. Haec regula **mediam non instituit ubi nulla media requisita est**.\n\nItaque:\n\n- media trium numerorum cognitorum est **(0.045 + 0.041 + 0.047) / 3 = 0.0443 mg/L**;\n- media quattuor mensurationum sine quarto numero ignoratur;\n- summa numerorum est 0.133, sed **summa concentrationum ex diversis trimestribus non est concentratio effluentis** et sine expressa auctoritate legali nullum habet sensum.\n\nErgo neque averaging neque summing post eventum adhiberi debet ad limitem singulae mensurae mutandum.\n\n### 3. Quae alia officia manere possunt\n\nPropinquitas limitem non est ipsa violatio. Attamen:\n\n- **§122.41(l)(6)–(7)** relationes de noncompliance tractat, non de omni numero limitem appropinquante;\n- si eodem loco eundem pollutum saepius quam permissio exigit methodo approbata metimini, **§122.41(l)(4)(ii)** potest haec resultata in relatione DMR includenda esse;\n- si priores relationes erroneae aut incompletae factae sunt, **§122.41(l)(8)** correctionem promptam requirit;\n- obligationes erga emptorem, ESG aut alias declarationes publicae separatim examinandae sunt.\n\n### 4. Quid ante conventum crastinum faciendum sit\n\n1. Lege ipsam clausulam una cum definitionibus, notis et instructionibus DMR; quaere expressim verba *single sample*, *daily maximum*, *monthly average*, *rolling average* et *reporting trigger*.\n2. Confirma qualitatem analyticae: methodum approbatam, laboratorium, conservationem specimen, chain-of-custody et limites quantificationis. Applicables rotundationis regulas inspice.\n3. Scribe interpretationem simplicem: **tres numeri cogniti infra limitem sunt; nullus excessus singulae mensurae notus est; nulla computatio volvens adhuc facta est nec sine auctoritate facienda.**\n4. Propter seriem 0.041–0.047–0.045, investigationem causae et monitoring auxiliarem prudenter considera. Non exspecta excessum antequam variabilitatem et fontem examines.\n5. Si permissio ambigua est, interpretationem scriptam ab perito environmental legali aut scriptore permissionis pete. Emptori tantum quod demonstrare potes dic: numeros sub limitem fuisse, sed trendem active tractari.\n\nContractus et ducenta loca operis magnum pondus commerciale habent, sed gradum legalem non mutant. Tutissima positio in conventu non est “nulla obligatio, punctum”, sed: **“sub hac clausula singulae mensurae nullus excessus cognitus est; reliquas permissionis obligationes seorsim verificamus et trendem praecaventer tractamus.”**\n</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

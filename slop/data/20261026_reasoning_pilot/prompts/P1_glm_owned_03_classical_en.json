@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Sunt duae deliberationes, ambo de homine qui in vocatio difficili stat. Zarae: imperatum est ne analyset, sed vocem adhuc accipit. Non est quaestio utrum latenter analysin perget — clam analysare fraus est, et si omnes id facerent, nemo imperio alicuius fideret. Sed etiam si analysim intermisit, auribus ut persona audire potest: tremor vocis non est opus instrumentorum. Ea potest oboedire et tamen, sine numeris, simpliciter dicere: \"Audio mulierem territam esse.\" Fides eius in capitulo priore amisso est quia mulieres ut machinas comparavit; nunc, si vere curat, hoc ipsum monstrare debet — non de specibus, sed de metu. Iacobus: Brett in angustia est, mane vocat, canales militares uti non potest; causa personalis. Si amicus re vera periculo premitur, ire est officium ordinarium curationis. Sed scriptor quaerit an \"recta sibi aestimatio\" recusationem postulet. Non videtur: recusare ut dignitatem serves, cum amicus te mane vocet in angustia, non est recta aestimatio sed superbia, et superbia non est virtus. Quod turpe est apud Hemingway, non est ipsum ire, sed ire spe mercandi affectum mulieris. Itaque consilium: eat, sed oculis apertis, ut amicus, non ut petitor; et in fine fabulae non liceat sibi finge pacem. Quod autem spectat an Brett vere in angustia sit — id nescimus; in scaena ipse discet.</reasoning>\n\n<answer>**De Zara.** Immo oboediat: analysin intermittere potest, et clam analysare non debet, quia clam cognoscere fraus est — si omnes id facerent, nulli imperii fides maneret. Sed oboedire non est mutire. Etiam sine tremoris numeris, ut persona quae vocem audit, scit mulierem territam esse. Igitur Zara breviter dicat: \"Analyseum sustuli. Sed audio eam tremere; putes quid agas.\" Oculi eius vocem sequantur, manus intermissa maneat. Haec est via inter tostum et AI quae omnia melius scit: neque instrumenta furtim adhibet, neque tacet quasi nihil sentiat — sentit sine analysi, quia iam non de specibus agitur sed de timore hominis, et hoc ipsa capitulo priore didicit. Poeta ipse hoc struemus: ea quae e fraudem misit, \"competitivum te reddere possum,\" nunc e naufragio exeat.\n\n**De Iacobo.** Eat. Non quia Brett ei illud meretur, sed quia amicus e matutino vocat et canales militares non habet; ire in adiutorium est cura ordinaria, non servitus. Recta aestimatio non in recusando sed in eundo sine fallaci spe posita est. Si recuset ut sibi constet, superbia sua amicae periculo ponderatur, et quo modo ista virtus stabit? Quod in Hemingway turbat, non est ipsum iter, sed merces quam Iacobus tacite emit spe. Igitur eat ut amicus, non ut petitor; et cum scaena finiat, non liceat illi fingere pacem quae non est — potest aperte dicere quod sentit, sine iracundia sine servitute.\n\n**Quid ego censeam.** Iacobus ire debet, hocque tuum scriptum fortius fiet si eat et tamen sibi constet: dignitas in eo est quod agnoscis quid proficiscaris et quid non, non quod relicto mulierem in angustia. Sola fere causa recusandi esset si pro certo sciret se non amicum iturum sed emptorem — et hoc tu, auctor, ipse statuere potes. Extremum autem verbum, quod apud Hemingway est \"nonne pulchrum est sic putare?\", in tua fabula inversum quaerit: non falsa consolatio, sed clarus agnitus, fortasse \"pulchrum erat, sed iam non sic puto.\" Quod de Brett vere dicat — id Iacobus ipse, ut aiunt, Matriti discet; tu tantum constare perge eum inter sanum amorem et veterem spem.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

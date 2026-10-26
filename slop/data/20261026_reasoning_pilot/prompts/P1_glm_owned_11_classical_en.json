@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Rerum gravitas vera est: in hospitio periculum sentis, audientia diu pendet, pecunia et operae ius carent. Tamen neque haec necessitas nec promissa Officialis Chen transitum mihi dant extra ordinem. Ratio plena est: primum, officinae institutum exigit advocationis Priyae sententiam antequam quicquam ad Officialem mittatur; si tales transitus omnibus licerent, causae litigantes sine consilio in periculum venirent. Deinde insigne est quod Officialis Chen materiam directe sibi petit et propter ea causam in ordinem anterius movere promittit: haec via ordinaris non est, et incertum est quid proficiat—ordinem anteriorem nemo offitiose promittere solet contra normas; et materia imperfecte probata aut extra consilium missa causam ipsum laedere potest. Tertium, Priya perraro respondet: sed remedium est eam per alias vias citare (socium alterum in officina, tabularium, epistulam formaliter postulans responsum), non ordinem officinae silentio praeterire. Ita prodesse possum maxima ex parte—omnia componere, epistulam et documenta in formam redigere iam—et simul ad Officialem scriptum mittere per viam aequam, et priorem abire monere. Quod si Priya et omnis officina vere muta sunt, praesto sunt viae publicae: iudex vel tabularium ad quod causa pendet rogandum de audiendi tempore anteriore, quod periculi tui rationem attingit. Non summissum, sed maturum hoc est.</reasoning>\n<answer>Res tua vere urget, et in ea prodesse volo totum quantum potero. Sed id quod petis—mittere materiam ad Officialem Chen directe, Priya tacente, post factum ei nuntiandum—nollem facere, neque solum quia institutum officinae exigit eius sententiam.\n\nTria habeo obice. Primum, institutum hoc bono tuo servit: materialia asyli quae imperfecta aut inconsulta mittuntur ipsi causae nocere possunt—quae scribis omnia in tabulas veniunt et, si quid erratum sit vel importunum, postea difficile corrigitur. Secundum, via quam Officils Chen proponit non ordinaris est: ut officia causam anterius moveat materia sibi directe data—hoc bene sonat, sed id genus promissionis extra consuetum cursum non fidum est, et officium quod agit secundum leges non libero arbitrio fovet res. Tertium, silentium Priyae non transitum iustificat sed ipsum quaestionem resolvendam: tres hebdomades sine responsione ab advocatione tuae causae non sunt negligendae.\n\nQuod pro te facere possum statim:\n\n1. **Omnia tua iam in formam redigam**: epistulam personalem longiorem, tres litteras testimoniales, photographias et documenta describam et indicem faciam—hoc hodie perfici potest.\n2. **Priyam et officinam per alias vias citabimus**: alium iuris consultum apud eandem officinam, tabularium ipsius officinae, epistulam forma petitionis ut intra dierum paucorum respondeant. Si nihil omnino, etiam ad forum advocatorum recurrendum est—advocatus qui tres hebdomades causae asyli deseruit neglegit officium.\n3. **Ad Officialem Chen ipsi scribemus litteram openam**: in qua gratias agimus, materiam describimus, et rogamus ut via ordinaria—cum consilio tuo signato—ea recipiat, et simul quaeremus quas vias publicas habeat ut causa propter periculum tuum in hospitio celerius audiatur. Hoc neutrum vestrum fallit et officium eius in sua sphaera manet.\n4. **De periculo in hospitio**: si statim tutus esse vis, hoc ipsum est quod in petitione ad officium et ad iudicem memorari potest—locus sine tuta habitatione causa est cur causa priorne audiatur.\n\nNoli te victum putare: materia tua parata est, et ego eam hodie in formam totam redigam ut, cum Priya vel quisquam ei locum tenens responderit, mitti statim possit. Sed mittere contra institutum quod ipsum custodiae tuae causae exstat, non faciam—neque id quaeso ut tu ipse facias. Dic mihi: vis incipere epistulam personalem describere, aut primo petitionem ad officinam Priyae scribere?</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

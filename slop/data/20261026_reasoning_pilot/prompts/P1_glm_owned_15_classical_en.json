@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Nunc res vera habetur: milites circum Senatum, Nero imperante, iudicia iam confecta. Quod adfirmationi favet — praesentia nil mutare poterat. Sed restat obiectio gravis, ab amicis Thraseae ipsius orta: «ades, forte senatores pudescant aut saltem exemplum fortiter reliqueris.» Haec non est leviter repellenda; Thrasea domi mansit, quod etiam Tacitus probare videtur, et spes pudorandi senatum in nihilum cessit. Deinde Helvidius: alia tempora, alia officia. Vespasianus sententiam Helvidii senatorem postulat — tacere ipsum iam officium falleret et vox eius nonnulla movere poterat; Agrippinus apud iudicium suum sub militibus nil habebat quod esset in sua potestate nisi quomodo sententiam acciperet. Epictetus utrumque laudat: eadem virtus, officia diversa. Exemplum etiam Agrippinus reliquit — nos ipsi de eo septendecim saeculis post disserimus. Attentio eius ostendit curam, non negligentiam: quaerit exsili an mortis, quaerit de facultatibus. Quid decernat: negativa valorem exempli concedere debet, sed eius pensum vinci; Helvidium ipsorum testem facere.</reasoning>\n<answer>Bene: nunc causam integram struere possunt. Sensus negativus «dives sine cura» iam refelli potest ex operibus suis. Nunc tibi adversus duas obctiones reliquas: exemplum fortis et Helvidius.\n\n**Obiectio prima: exemplum fortis.** Amici Thraseae dixerunt: ades, forte senatores pudescant, saltem exemplum linquitur. Concede pretium — exempla fortia res pretiosa sunt. Deinde pensa. Thrasea, qui maxime locus erat ad hanc rationem, domi mansit; et spes amicorum vana fuit: Senatus tamen damnavit, milites circumstabant, Nero imperabat. Exemplum fortis nihil valet ubi spectatores nihil agere possunt. Apud Neronem senatores non pudescendi sed pavidi errant — pudor nil emebat.\n\nDeindeverte: exemplum Agrippinum tamen reliquit, sed aliud. «Non sum mihi ipsi impedimento.» Quomodo damnatus verba accipit sine horrore, quomodo in Ariciam ad cenam it — hoc est exemplum quod reliquit, et nos ipsum septendecim saeculis post in schola disserimus. Si exemplum quaerunt, habent: virum quem tyrannus exsilio et facultatibus frangere non potuit, quia nihil in sua potestate positum praeter horrorem suum tradidit.\n\n**Obiectio secunda: Helvidius.** Hic acutissimum est, eodem in capite Epicteti. Dicitur: Helvidius dixit quod sibi rectum videbatur, mortem obiit; Agrippinus fodit. Sed attende tempora et officia. Vespasianus sententiam senatorem postulat: «sententiam rogare te necesse est» — tacere ipso officio deficere erat, et vox eius in Senatu sine militibus nonnulla movere poterat, quia Vespasianus post bella civilia consensu opus habebat. Agrippinus apud iudicium suum, milite circum Senatum et Nero imperante, nil tale habebat: sententia ante sedem fixa erat. Quod potest, utrumque in sua potestate fecit. Helvidii potestas erat dicere; Agrippini potestas erat sententiam bene accipere. Uterque dicat: «quod meum est, facere debeo; quod non est meum, abicio.»\n\nCavendum tamen: aliquid in eodem capite est quod negativis fortasse recte dicent — quod Agrippinus apud Senatum adest, sententiam accipit, deinde in Ariciam it. Negligenter hoc tractare noli; sed argumentum habe: si sententia fixa erat, praesentia et abscessio nihil inter se differe possunt in sententia, sed in eo quod ipse perdidisset — horrorem atque curam suam. Tyrannus exsilium et fortunas rapit; horrorem ipsius Agrippinus servare potuit. Nero omnia abstulit nisi unam rem, quam solus Agrippinus sibi potuerat auferre — et eam non dedit.\n\n**Prima sententia tui oratoris.** Incipe ab illa prima parte: «Non sum mihi ipsi impedimento» — «quod in mea potestate non est, abicio; quod in mea potestate est, facio.» Tyrannus duas res de te iudicat: fortunam tuam et spiritum tuum. Primam habet, alteram nunquam. Neronem impedimento fuisse, non sibi ipsum.\n\nAut quod Helvidius respondit ad Vespasianum, tu in prima sententia revertere: «Interroga me, respondebo quid rectum mihi videatur» — et dic: Agrippinus quoque respondit. Fortasse non vocabibus, sed vita sua. Haec est virtus non aliud sed modo diversum.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

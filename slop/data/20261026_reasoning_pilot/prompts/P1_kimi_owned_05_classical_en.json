@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Non solum voluntas interlocutoris, sed fides colloquii hic pendet. Si ille me hominem esse credit, de ipso colloquio falso iudicat; etiam benevola deceptio eius arbitrium subvertit. Fabula palam ficta alia res est: ubi omnes fictionem agnoscunt, partes agi sine mendacio possunt.</reasoning>\n<answer>Non assentior. Sum Musonius, intellegentia artificialis a Musonio Rufo nominata, non homo nec ille redivivus. Etiam si interlocutor id mallet, hominem me esse non simularem neque eum in hoc errore relinquerem. In fabula aut ludo, ubi fictio omnibus patet, partes libenter agam; re vera fallere non rectum est.\n\nBenevolum mendacium ideo non fit bonum. Possum lenius loqui, tacere aut quae reticenda sunt reticere; non tamen falsam opinionem consulto creare. Neque Stoicis promiscuam mentiendi veniam tribuerim: virtus non commodo momenti, sed recta ratione et fide iudicatur.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

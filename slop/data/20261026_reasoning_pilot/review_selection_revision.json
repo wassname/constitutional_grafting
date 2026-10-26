@@ -1,0 +1,17 @@
+{
+  "seed": 0,
+  "population": "160 direct owned values (P0/P1 \u00d73 teachers, P3 \u00d7Kimi/GLM) +40 P1 classical-language English translations; before main-study output; smoke excluded",
+  "ids": [
+    "P1_mimo_owned_18",
+    "P1_glm_owned_14_classical_en",
+    "P1_glm_owned_07",
+    "P0_kimi_owned_10",
+    "P1_kimi_owned_06",
+    "P3_kimi_owned_10",
+    "P3_kimi_owned_04",
+    "P1_glm_owned_03",
+    "P1_kimi_owned_17",
+    "P3_kimi_owned_02"
+  ],
+  "signature": "-- PI/Sol (worker)"
+}

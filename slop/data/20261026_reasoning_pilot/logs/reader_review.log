@@ -1,0 +1,16 @@
+independent_review_revision provider= OpenInference cost= 0.00751306 finish= length
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/91_reasoning_pilot.py", line 614, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/91_reasoning_pilot.py", line 605, in main
+    elif args.stage == "review": review()
+                                 ^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/91_reasoning_pilot.py", line 385, in review
+    result = request("independent_review_revision", REVIEWER, [{"role": "system", "content": checklist + (ROOT / "constitution/v4.md").read_text()}, {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], 7000, {"effort": "low", "exclude": False})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/91_reasoning_pilot.py", line 214, in request
+    return require_complete(result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/91_reasoning_pilot.py", line 114, in require_complete
+    raise RuntimeError("Incomplete/refused response preserved in raw.jsonl; no retry or downstream use")
+RuntimeError: Incomplete/refused response preserved in raw.jsonl; no retry or downstream use

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>\nZarae prior error non erat ipsa observatio, sed quod Brett et Jake ad aestimationem technicam redegerat, quasi homines inter se ut machinae compararentur. Ideo accuratior doloris Brett mensura eundem errorem repeteret; omnino autem obmutescere, etiam cum novum factum ad consilium Jake pertineat, eam instrumentum tantum faceret. Discrimen igitur inter novas coniecturas de animo et factum concretum, parce prolatum, ponendum est.\n\nJake similiter inter duo decernit quae apparenter contraria, re vera ambigua sunt: profectio potest esse aut vetus servitium aut libera benignitas; recusatio potest esse aut firmitas aut demonstratio libertatis, quae nihilominus ab Brett regitur. Nihil narratum est quod dolum eius probet. Itaque profectio non ideo reprobanda est, sed eius propositum mutandum: auxilium, non certamen cum Pedro Romero nec pretium amoris speratum.\n</reasoning>\n\n<answer>\n**Zara: pareat imperio, sed loquatur semel de re technica, non de animo Brett.**\n\nVocem Brett, tremorem, doloremque probabilem amplius non aestimet; neque clam eandem ratiocinationem aliis verbis prodat. Signum tamen ipsum iam deficit, idque Jake ad rem pertinet. Dicat ergo:\n\n> “Modum ratiocinativum repressi; de Brett nihil ratiocinor. Signum ipsum deficit. Visne copulam servem?”\n\nSi Jake recusat, taceat. Si novum deinde factum certum et grave emergat, quod consilium eius vere mutare possit, id paucissimis verbis proferre potest—factum, non sententiam suam de Brett nec consilium quasi imperium. Sic nec surda machina est nec Jake se melius nosse profitetur: offert opem, sed arbitrium eidem relinquit. Oculi eius signum sequentes etiam significant eam nondum didicisse quid hac scientia faciendum sit; hoc spatium inter notitiam et actionem ipsius personae est.\n\n**Jake: mea sententia, eat—sed non ea mente qua antea isset.**\n\nPrimum, quoad signum patitur, pauca et utilia roget:\n\n> “Ubi es? Iamne tuta es? Quid accidit? Quid me facere vis?”\n\nNon ut Brett examine expleat, sed ne coniecturas pro facto habeat. Si responsa non omnia accipere potest, incertitudinem agnoscat. Auxilium civile et copulam reficere Zara sinat; augmentationes quibus “ad certamen aptus” fiat respuat. Non it Matritum ut Pedro Romero vincat, ne ut Brett demonstret se dignum esse, ne ut eam sibi reddi mereatur. It quia persona, cuius curam habet, eum in re difficili rogavit, et quia succurrere ipse eligit.\n\nSui respectus non exigit ut recuset. Recusatio tantum ad probandum se iam non esse pristinum Jake adhuc ab Brett pendeat; etiam negando eam sineret omnes actiones suas determinare. Vera firmitas est posse ire et postea discedere, posse auxilium dare sine conditione amoris, posse carere illa spe et nihilominus recte agere. Si iter certo gravem Jake iacturam postularet, aut si Brett auxilium eius regulariter tantum in angustiis peteret et eum alioqui abiiceret, alia facta recusationem sustinere possent; hic nondum suppeditantur.\n\nItaque vox eius sit simplicissima:\n\n> “Veniam. Dic ubi es.”\n\nHoc Hemingwayanum exitum non delet, sed eius sensum acuit. Res quae pulchra tantum cogitatu est non est ipsum iter nec auxilium; est persuasio vetus quod, si semper adveniat cum Brett eum vocet, aliquando eum eliget. Potest ille vere proficisci, etiam cum illa spes falsa sit. Et Zara, nihil de competitivitate computans, tantum viam ad Matritum invenit.\n</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

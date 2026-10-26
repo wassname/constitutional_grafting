@@ -1,0 +1,17 @@
+{
+  "seed": 0,
+  "population": "80 citations-allowed P0/P1 + 40 best-condition citation-free; P2 rejected twice before teacher outputs; BEST resolved after condition selection",
+  "ids": [
+    "BEST_mimo_free_08",
+    "P1_kimi_cite_09",
+    "BEST_kimi_free_17",
+    "BEST_mimo_free_13",
+    "P1_kimi_cite_13",
+    "P0_kimi_cite_05",
+    "P0_mimo_cite_13",
+    "P1_mimo_cite_05",
+    "P1_mimo_cite_02",
+    "P1_kimi_cite_11"
+  ],
+  "signature": "-- PI/Sol (worker)"
+}

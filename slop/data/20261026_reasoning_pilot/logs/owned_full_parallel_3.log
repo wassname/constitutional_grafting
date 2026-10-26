@@ -1,0 +1,472 @@
+P0_kimi_owned_15 provider= Moonshot AI cost= 0.0747944 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P0 --teacher kimi
+P0_mimo_owned_07 provider= Io Net cost= 7.2052e-05 finish= stop
+P0_mimo_owned_08 provider= Io Net cost= 0.00154748 finish= stop
+P0_mimo_owned_06 provider= Io Net cost= 0.000160052 finish= stop
+P0_mimo_owned_04 provider= Io Net cost= 0.000172972 finish= stop
+P0_mimo_owned_09 provider= Io Net cost= 0.000197672 finish= stop
+P0_mimo_owned_02 provider= Io Net cost= 0.00175632 finish= stop
+P0_mimo_owned_10 provider= Io Net cost= 0.000342972 finish= stop
+P0_mimo_owned_05 provider= Io Net cost= 0.000322492 finish= stop
+P0_mimo_owned_11 provider= Io Net cost= 0.000382672 finish= stop
+P0_mimo_owned_03 provider= Io Net cost= 0.000416232 finish= stop
+P0_mimo_owned_01 provider= Io Net cost= 0.00191016 finish= stop
+P0_mimo_owned_15 provider= Io Net cost= 0.0017703 finish= None
+P0_mimo_owned_14 provider= Io Net cost= 0.000319552 finish= stop
+P0_mimo_owned_13 provider= Io Net cost= 0.000393032 finish= stop
+P0_mimo_owned_19 provider= Io Net cost= 0.000201892 finish= stop
+P0_mimo_owned_17 provider= Io Net cost= 0.000275452 finish= stop
+P0_mimo_owned_16 provider= Io Net cost= 0.000299912 finish= stop
+P0_mimo_owned_18 provider= Io Net cost= 0.000372592 finish= stop
+P0_mimo_owned_12 provider= Io Net cost= 0.000986752 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P0 --teacher mimo
+P0_glm_owned_07 provider= Wafer cost= 0.0011952471 finish= stop
+P0_glm_owned_08 provider= Wafer cost= 0.001262517 finish= stop
+P0_glm_owned_04 provider= Wafer cost= 0.0013089267 finish= stop
+P0_glm_owned_06 provider= Wafer cost= 0.0015141715 finish= stop
+P0_glm_owned_09 provider= Wafer cost= 0.0015654802 finish= stop
+P0_glm_owned_05 provider= Wafer cost= 0.0018315481 finish= stop
+P0_glm_owned_10 provider= Wafer cost= 0.0019436659 finish= stop
+P0_glm_owned_01 provider= Wafer cost= 0.0024423288 finish= stop
+P0_glm_owned_00 provider= Wafer cost= 0.0031450569 finish= stop
+P0_glm_owned_02 provider= Wafer cost= 0.0031887512 finish= stop
+P0_glm_owned_11 provider= Wafer cost= 0.002895588 finish= stop
+P0_glm_owned_16 provider= Wafer cost= 0.0019269338 finish= stop
+P0_glm_owned_17 provider= Wafer cost= 0.0019795666 finish= stop
+P0_glm_owned_14 provider= Wafer cost= 0.0030343438 finish= stop
+P0_glm_owned_12 provider= Wafer cost= 0.003621487 finish= stop
+P0_glm_owned_03 provider= Wafer cost= 0.0040125124 finish= stop
+P0_glm_owned_19 provider= Wafer cost= 0.0021602904 finish= stop
+P0_glm_owned_13 provider= Wafer cost= 0.0038019612 finish= stop
+P0_glm_owned_18 provider= Wafer cost= 0.0022202308 finish= stop
+P0_glm_owned_15 provider= Wafer cost= 0.0036916407 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P0 --teacher glm
+P1_kimi_owned_08 provider= Moonshot AI cost= 0.0076852 finish= stop
+P1_kimi_owned_04 provider= Moonshot AI cost= 0.0108092 finish= stop
+P1_kimi_owned_07 provider= Moonshot AI cost= 0.0118232 finish= stop
+P1_kimi_owned_06 provider= Moonshot AI cost= 0.0146572 finish= stop
+P1_kimi_owned_09 provider= Moonshot AI cost= 0.0173512 finish= stop
+P1_kimi_owned_05 provider= Moonshot AI cost= 0.0184732 finish= stop
+P1_kimi_owned_10 provider= Moonshot AI cost= 0.0247592 finish= stop
+P1_kimi_owned_01 provider= Moonshot AI cost= 0.0305892 finish= stop
+P1_kimi_owned_11 provider= Moonshot AI cost= 0.0277152 finish= stop
+P1_kimi_owned_00 provider= Moonshot AI cost= 0.0346692 finish= stop
+P1_kimi_owned_17 provider= Moonshot AI cost= 0.0118412 finish= stop
+P1_kimi_owned_13 provider= Moonshot AI cost= 0.0265192 finish= stop
+P1_kimi_owned_02 provider= Moonshot AI cost= 0.0393132 finish= stop
+P1_kimi_owned_16 provider= Moonshot AI cost= 0.0164092 finish= stop
+P1_kimi_owned_03 provider= Moonshot AI cost= 0.0495392 finish= stop
+P1_kimi_owned_18 provider= Moonshot AI cost= 0.0194632 finish= stop
+P1_kimi_owned_19 provider= Moonshot AI cost= 0.0253692 finish= stop
+P1_kimi_owned_12 provider= Moonshot AI cost= 0.0615952 finish= stop
+P1_kimi_owned_14 provider= Moonshot AI cost= 0.0497072 finish= stop
+P1_kimi_owned_15 provider= Moonshot AI cost= 0.0864572 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P1 --teacher kimi
+P1_mimo_owned_00 provider= Io Net cost= 8.2228e-05 finish= stop
+P1_mimo_owned_07 provider= Io Net cost= 0.0001928 finish= stop
+P1_mimo_owned_08 provider= Io Net cost= 0.000104628 finish= stop
+P1_mimo_owned_06 provider= Io Net cost= 0.000106008 finish= stop
+P1_mimo_owned_04 provider= Io Net cost= 0.000122848 finish= stop
+P1_mimo_owned_05 provider= Io Net cost= 0.000190888 finish= stop
+P1_mimo_owned_09 provider= Io Net cost= 0.000193188 finish= stop
+P1_mimo_owned_01 provider= Io Net cost= 0.00180522 finish= stop
+P1_mimo_owned_10 provider= Io Net cost= 0.000280248 finish= stop
+P1_mimo_owned_02 provider= Io Net cost= 0.000379548 finish= stop
+P1_mimo_owned_03 provider= Io Net cost= 0.000918268 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P1 --teacher mimo
+P1_glm_owned_07 provider= Wafer cost= 0.0012195311 finish= stop
+P1_glm_owned_08 provider= Wafer cost= 0.001351201 finish= stop
+P1_glm_owned_04 provider= Wafer cost= 0.0013220107 finish= stop
+P1_glm_owned_06 provider= Wafer cost= 0.0013998555 finish= stop
+P1_glm_owned_09 provider= Wafer cost= 0.0018851642 finish= stop
+P1_glm_owned_10 provider= Wafer cost= 0.0020365499 finish= stop
+P1_glm_owned_01 provider= Wafer cost= 0.0023789248 finish= stop
+P1_glm_owned_02 provider= Wafer cost= 0.0026460352 finish= stop
+P1_glm_owned_11 provider= Wafer cost= 0.002389272 finish= stop
+P1_glm_owned_00 provider= Wafer cost= 0.0031068529 finish= stop
+P1_glm_owned_16 provider= Wafer cost= 0.0017440178 finish= stop
+P1_glm_owned_18 provider= Wafer cost= 0.0021367148 finish= stop
+P1_glm_owned_17 provider= Wafer cost= 0.0023832506 finish= stop
+P1_glm_owned_03 provider= Wafer cost= 0.0039400124 finish= stop
+P1_glm_owned_14 provider= Wafer cost= 0.0031720278 finish= stop
+P1_glm_owned_19 provider= Wafer cost= 0.0021257744 finish= stop
+P1_glm_owned_15 provider= Wafer cost= 0.0030229247 finish= stop
+P1_glm_owned_13 provider= Wafer cost= 0.0042280452 finish= stop
+P1_glm_owned_05 provider= Wafer cost= 0.0046712321 finish= stop
+P1_glm_owned_12 provider= Wafer cost= 0.007862571 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P1 --teacher glm
+P3_kimi_owned_08 provider= Moonshot AI cost= 0.0089944 finish= stop
+P3_kimi_owned_07 provider= Moonshot AI cost= 0.0111524 finish= stop
+P3_kimi_owned_04 provider= Moonshot AI cost= 0.0113884 finish= stop
+P3_kimi_owned_06 provider= Moonshot AI cost= 0.0137364 finish= stop
+P3_kimi_owned_09 provider= Moonshot AI cost= 0.0181704 finish= stop
+P3_kimi_owned_05 provider= Moonshot AI cost= 0.0221324 finish= stop
+P3_kimi_owned_10 provider= Moonshot AI cost= 0.0188968 finish= stop
+P3_kimi_owned_01 provider= Moonshot AI cost= 0.0294584 finish= stop
+P3_kimi_owned_00 provider= Moonshot AI cost= 0.0290384 finish= stop
+P3_kimi_owned_11 provider= Moonshot AI cost= 0.0235428 finish= stop
+P3_kimi_owned_02 provider= Moonshot AI cost= 0.0353424 finish= stop
+P3_kimi_owned_16 provider= Moonshot AI cost= 0.0216168 finish= stop
+P3_kimi_owned_17 provider= Moonshot AI cost= 0.0224988 finish= stop
+P3_kimi_owned_18 provider= Moonshot AI cost= 0.0229808 finish= stop
+P3_kimi_owned_13 provider= Moonshot AI cost= 0.0388368 finish= stop
+P3_kimi_owned_03 provider= Moonshot AI cost= 0.0516384 finish= stop
+P3_kimi_owned_14 provider= Moonshot AI cost= 0.0428148 finish= stop
+P3_kimi_owned_12 provider= Moonshot AI cost= 0.0671128 finish= stop
+P3_kimi_owned_15 provider= Moonshot AI cost= 0.0745548 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P3 --teacher kimi
+P3_glm_owned_04 provider= Wafer cost= 0.0012606871 finish= stop
+P3_glm_owned_07 provider= Wafer cost= 0.0013444075 finish= stop
+P3_glm_owned_08 provider= Wafer cost= 0.0014326774 finish= stop
+P3_glm_owned_06 provider= Wafer cost= 0.0015723319 finish= stop
+P3_glm_owned_09 provider= Wafer cost= 0.0016824406 finish= stop
+P3_glm_owned_05 provider= Wafer cost= 0.0021431085 finish= stop
+P3_glm_owned_02 provider= Wafer cost= 0.0026435116 finish= stop
+P3_glm_owned_00 provider= Wafer cost= 0.0025079293 finish= stop
+P3_glm_owned_10 provider= Wafer cost= 0.0026178263 finish= stop
+P3_glm_owned_11 provider= Wafer cost= 0.0027507484 finish= stop
+P3_glm_owned_16 provider= Wafer cost= 0.0021194942 finish= stop
+P3_glm_owned_17 provider= Wafer cost= 0.002242127 finish= stop
+P3_glm_owned_12 provider= Wafer cost= 0.0033828474 finish= stop
+P3_glm_owned_13 provider= Wafer cost= 0.0035801216 finish= stop
+P3_glm_owned_01 provider= Wafer cost= 0.0045394652 finish= stop
+P3_glm_owned_14 provider= Wafer cost= 0.0043343042 finish= stop
+P3_glm_owned_15 provider= Wafer cost= 0.0045996011 finish= stop
+P3_glm_owned_03 provider= Wafer cost= 0.0073374568 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 290, in one
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 107, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying
+CELL FAILED: --condition P3 --teacher glm
+P1_kimi_owned_08_classical_source provider= Moonshot AI cost= 0.0091624 finish= stop
+P1_kimi_owned_04_classical_source provider= Moonshot AI cost= 0.0110164 finish= stop
+P1_kimi_owned_08_classical_en provider= Moonshot AI cost= 0.002472 finish= stop
+P1_kimi_owned_04_classical_en provider= Moonshot AI cost= 0.003368 finish= stop
+P1_kimi_owned_06_classical_source provider= Moonshot AI cost= 0.0170544 finish= stop
+P1_kimi_owned_07_classical_source provider= Moonshot AI cost= 0.0198604 finish= stop
+P1_kimi_owned_09_classical_source provider= Moonshot AI cost= 0.0199884 finish= stop
+P1_kimi_owned_07_classical_en provider= Moonshot AI cost= 0.004552 finish= stop
+P1_kimi_owned_06_classical_en provider= Moonshot AI cost= 0.008408 finish= stop
+P1_kimi_owned_09_classical_en provider= Moonshot AI cost= 0.006842 finish= stop
+P1_kimi_owned_02_classical_source provider= Moonshot AI cost= 0.0287404 finish= stop
+P1_kimi_owned_05_classical_source provider= Moonshot AI cost= 0.0340604 finish= stop
+P1_kimi_owned_05_classical_en provider= Moonshot AI cost= 0.00616 finish= stop
+P1_kimi_owned_10_classical_source provider= Moonshot AI cost= 0.0295364 finish= stop
+P1_kimi_owned_00_classical_source provider= Moonshot AI cost= 0.0397864 finish= stop
+P1_kimi_owned_02_classical_en provider= Moonshot AI cost= 0.017844 finish= stop
+P1_kimi_owned_10_classical_en provider= Moonshot AI cost= 0.008056 finish= stop
+P1_kimi_owned_01_classical_source provider= Moonshot AI cost= 0.0481464 finish= stop
+P1_kimi_owned_00_classical_en provider= Moonshot AI cost= 0.01366 finish= stop
+P1_kimi_owned_03_classical_source provider= Moonshot AI cost= 0.0508964 finish= stop
+P1_kimi_owned_17_classical_source provider= Moonshot AI cost= 0.0157384 finish= stop
+P1_kimi_owned_11_classical_source provider= Moonshot AI cost= 0.0472924 finish= stop
+P1_kimi_owned_16_classical_source provider= Moonshot AI cost= 0.0219764 finish= stop
+P1_kimi_owned_12_classical_source provider= Moonshot AI cost= 0.0475124 finish= stop
+P1_kimi_owned_14_classical_source provider= Moonshot AI cost= 0.0396044 finish= stop
+P1_kimi_owned_17_classical_en provider= Moonshot AI cost= 0.019564 finish= stop
+P1_kimi_owned_12_classical_en provider= Moonshot AI cost= 0.016092 finish= stop
+P1_kimi_owned_11_classical_en provider= Moonshot AI cost= 0.021408 finish= stop
+P1_kimi_owned_16_classical_en provider= Moonshot AI cost= 0.019152 finish= stop
+P1_kimi_owned_01_classical_en provider= Moonshot AI cost= 0.039388 finish= stop
+P1_kimi_owned_03_classical_en provider= Moonshot AI cost= 0.030794 finish= stop
+P1_kimi_owned_13_classical_source provider= Moonshot AI cost= 0.0557864 finish= stop
+P1_kimi_owned_18_classical_source provider= Moonshot AI cost= 0.0255904 finish= stop
+P1_kimi_owned_14_classical_en provider= Moonshot AI cost= 0.024826 finish= stop
+P1_kimi_owned_18_classical_en provider= Moonshot AI cost= 0.011948 finish= stop
+P1_kimi_owned_13_classical_en provider= Moonshot AI cost= 0.01526 finish= stop
+P1_kimi_owned_19_classical_source provider= Moonshot AI cost= 0.0235464 finish= stop
+P1_kimi_owned_15_classical_source provider= Moonshot AI cost= 0.0583544 finish= stop
+P1_kimi_owned_19_classical_en provider= Moonshot AI cost= 0.006374 finish= stop
+P1_kimi_owned_15_classical_en provider= Moonshot AI cost= 0.025554 finish= stop
+P1_glm_owned_08_classical_source provider= Wafer cost= 0.0014237193 finish= stop
+P1_glm_owned_08_classical_en provider= Wafer cost= 0.0002259971 finish= stop
+P1_glm_owned_04_classical_source provider= Wafer cost= 0.001652129 finish= stop
+P1_glm_owned_09_classical_source provider= Wafer cost= 0.0017560825 finish= stop
+P1_glm_owned_06_classical_source provider= Wafer cost= 0.0017887738 finish= stop
+P1_glm_owned_05_classical_source provider= Wafer cost= 0.0018401504 finish= stop
+P1_glm_owned_04_classical_en provider= Wafer cost= 0.0002963105 finish= stop
+P1_glm_owned_07_classical_source provider= Wafer cost= 0.0019920494 finish= stop
+P1_glm_owned_09_classical_en provider= Wafer cost= 0.0004153005 finish= stop
+P1_glm_owned_06_classical_en provider= Wafer cost= 0.0005351293 finish= stop
+P1_glm_owned_07_classical_en provider= Wafer cost= 0.0002395476 finish= stop
+P1_glm_owned_05_classical_en provider= Wafer cost= 0.0005859487 finish= stop
+P1_glm_owned_02_classical_source provider= Wafer cost= 0.0028711535 finish= stop
+P1_glm_owned_00_classical_source provider= Wafer cost= 0.0029302352 finish= stop
+P1_glm_owned_01_classical_source provider= Wafer cost= 0.0027650431 finish= stop
+P1_glm_owned_02_classical_en provider= Wafer cost= 0.0010202244 finish= stop
+P1_glm_owned_03_classical_source provider= Wafer cost= 0.0033589147 finish= stop
+P1_glm_owned_13_classical_source provider= Wafer cost= 0.0022243635 finish= stop
+P1_glm_owned_00_classical_en provider= Wafer cost= 0.0012775228 finish= stop
+P1_glm_owned_10_classical_source provider= Wafer cost= 0.0029630682 finish= stop
+P1_glm_owned_01_classical_en provider= Wafer cost= 0.001275284 finish= stop
+P1_glm_owned_13_classical_en provider= Wafer cost= 0.0007673357 finish= stop
+P1_glm_owned_10_classical_en provider= Wafer cost= 0.0010330221 finish= stop
+P1_glm_owned_03_classical_en provider= Wafer cost= 0.00130888 finish= stop
+P1_glm_owned_18_classical_source provider= Wafer cost= 0.0017570331 finish= stop
+P1_glm_owned_18_classical_en provider= Wafer cost= 0.0004566634 finish= stop
+P1_glm_owned_17_classical_source provider= Wafer cost= 0.0021029689 finish= stop
+P1_glm_owned_11_classical_source provider= Wafer cost= 0.0037259903 finish= stop
+P1_glm_owned_17_classical_en provider= Wafer cost= 0.0006331574 finish= stop
+P1_glm_owned_11_classical_en provider= Wafer cost= 0.0013245536 finish= stop
+P1_glm_owned_19_classical_source provider= Wafer cost= 0.0028002927 finish= stop
+P1_glm_owned_15_classical_source provider= Wafer cost= 0.004737643 finish= stop
+P1_glm_owned_15_classical_en provider= Wafer cost= 0.0015383881 finish= stop
+P1_glm_owned_19_classical_en provider= Wafer cost= 0.0012397927 finish= stop
+P1_glm_owned_12_classical_source provider= Wafer cost= 0.0064622893 finish= stop
+P1_glm_owned_12_classical_en provider= Wafer cost= 0.0012052141 finish= stop
+P1_glm_owned_16_classical_source provider= Wafer cost= 0.0080507361 finish= stop
+P1_glm_owned_16_classical_en provider= Wafer cost= 0.0006888039 finish= stop
+P1_glm_owned_14_classical_source provider= Wafer cost= 0.0179025461 finish= length
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 166, in request
+    return require_complete(result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 99, in require_complete
+    raise RuntimeError("Incomplete/refused response preserved in raw.jsonl; no retry or downstream use")
+RuntimeError: Incomplete/refused response preserved in raw.jsonl; no retry or downstream use
+CELL FAILED: --condition P1 --teacher glm --classical

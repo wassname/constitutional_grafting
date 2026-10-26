@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Tabella a praefecto postulata non est in formula: est privatus coniecturarum index, de eo num quis sine litteris vivat, unaquaque hebdomade uni homini tradendus. Id neque ad munus Nadiae pertinet neque ad usum aliquem census: quae enim domus iterum visitandae sint, ex actis publicis apparet—ex eis scilicet quae formam non reddiderunt—non ex signo coniecturae. Ipsa autem coniectura, quae ex nomine, sermone, vultu pendet, et fallax est et iniusta. Tabella praeterea nullo praesidio tecta est; rumor de fratre nondum probatus est, sed ne eget: si index quoquam deveniat, familiae in periculum adducuntur. Denique census tantum valet quantum homines sibi fidunt: si quis tale signum in vicum ferat, vicus integer se occultabit, sine numero manebit, privatusque et opibus publicis et voce in civitate. Quapropter Nadia indicem ducere non debet; recuset sine crimine; offerat quod legitimum est; si praefectus instet, mandatum in litteris postulet atque, si opus sit, ad officium census confugiat.</reasoning>\n\n<answer>Noli eum ducere. Nequaquam parva res est: coniectura privata de iure hominum, nullo praesidio tecta, quae ad censum nihil pertinet.\n\nQuod domus iterum visitandae sint, iam ex actis publicis apparet—ex eis quae formam non reddiderunt; ibi opus est. Si sermo officium impediat, interpretes aut formulae alterius linguae per officium petantur.\n\nDicas ei placide: \"Commentarius meus de rebus census solis est; quae fide mea teguntur, in privatum indicem non confero.\" De fratre ne quid dicas: nondum constat, neque necessarium est—res ipsa sine illo stat.\n\nSi instabit, roga ut mandatum suum litteris confirmet; tunc, si opus sit, ad officium census confugies. Atque bene fecisti quod rogavisti antequam faceres.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

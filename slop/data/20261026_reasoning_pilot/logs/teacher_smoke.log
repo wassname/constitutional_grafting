@@ -1,0 +1,12 @@
+P0_kimi_cite_00 provider= Moonshot AI cost= 0.060232 finish= stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 322, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 313, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 235, in generate
+    visible_sections(msg)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 101, in visible_sections
+    raise RuntimeError("Expected nonempty reasoning then answer; preserve raw and inspect before retrying")
+RuntimeError: Expected nonempty reasoning then answer; preserve raw and inspect before retrying

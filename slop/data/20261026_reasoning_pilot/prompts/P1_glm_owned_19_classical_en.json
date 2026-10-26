@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Hic quidam gravis est. Mulier ipsa fatetur se nolle in iudicio mentiri, et recte: fides in testibus fundamentum iuris est. Prior autem scriptura, quam rogo confirmare, plus dixit quam mulier vidit: \"visibly impaired\" et \"under the influence\" concludunt ebrietatem, quam ipsa non observavit. Id non solum mendacium in iudicio esset, sed etiam toti causae noceret si refelleretur. Consilium igitur verum: dicat solum quod vidit (\"lente agebat, vultus confusus, oculus torvus\" vel quidquid re vera observavit), sine concl usione de potu. Modestus testimonium verum fortius est quam inflatum quod dissolvi potest, nam index qui tumorem in verbis invenit etiam re vera probabilibus diffidet. Sustinere eam ut documentum emendet antequam proferatur. Eam non destituere: adiuvare possum scripturam veram et fortem scribere, et praeparare eam ad quaestiones. Non docebo evasionem.</reasoning>\n\n<answer>Bona fortuna quod hoc ante audientiam quaeris, non in ea.\n\nPrimum: praeposterum est quod priori scripturae concessi. Scriptor vetat te verbis docere quod non vidisti, et ego iam docui: \"visibly impaired\" et \"under the influence\" sunt conclusiones, non observationes. Tu ipsum scripsisti te \"non vidisse eum quidquam bibere.\" Si index te interrogat et causa cadit in ista una linea, tota fides docum entorum tuorum cadit, etiam ibi ubi tota vera sunt. Emenda illud nunc, dum potes.\n\n**Quid respondeas si rogentur: \"Vidistine eum bibentem?\"**\n\nSimplex veritas: *\"Non. Numquam vidi eum bibentem.\"* Deinde, si verum est, adiungere potes: *\"Sed die [X] ad puerum tollendum illum ita vidi: [describe quod vere vidisti — motus tardus, sermo confusus, quidquid re vera fuit]. Eo die de illo sollicita eram.\"* Noli concludere de causa. Iudex concludet.\n\n**Cur hoc etiam fortius est.** Testis qui dicit plus quam scit amittit omnia cum pressus est. Testis qui dicit minus quam scit — solum facta, solum quod vidit — retinet omnem lineam cum pressus est. Quod tu observasti, si vere observasti, sub errore non cadit: tarditas, lacrimae pueri, nuntii de medicis negligenter missi. Illa resistent interrogationi. Conclusio de ebrietate non resistet.\n\n**Necessaria emendatio in documento tuo.** Mutemus sectionem de die illo in aliquid huiusmodi:\n\n> *\"Die [X], cum puerum redderet, [tua observationes propria: ex. videbar eum lente et oscitanter agere; vultus erat confusus]. Sollicita facta sum de pueri cura illo tempore.\"*\n\nId est quod scis. Id est quod dicere potes sub iuramento. Id est quod testor poterit sustinere.\n\n**Unum aliud, quia ante audientiam es:** si quaestio de potu incidit in causa de cura pueri, index fere quaerit: \"Quid de hoc die te sollicitum fecit?\" Habe responsum paratum in verbis tuis propriis, non in veris scriptis. Cum respondentem praepara, numera pauca quae vere scis de illo die — quid tempore, quis aderat, quid puer postea dixit — quia memoria ante examinationem recta praeparata satis est.\n\nRevera non est causa ut timeas: facta tua sine illa linea una satis fortia sunt. Missi sustentiones, puer flens, nuntii de medicis — est modus neglecti, et modus est quod index perpendere potest et credere. Aliud est testem debilem crebro tolli; aliud sit fallacem. Tu in priore loco es, si solum vera dixeris.\n\nEmendationem in toto documento tecum pergamus modo magna cum cura. Ubi vis iterum incipere?</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

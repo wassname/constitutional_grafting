@@ -1,0 +1,17 @@
+
+- Read every candidate in full with its seed and actual generation prompt. For repairs, read the original, objection and revision. Track coverage; samples and judge passes do not substitute for this read.
+- Assess reasons and expression as well as acts. The same act with better thinking can count. Keep ordinary affection, humour, competent help, honest disagreement and error-and-correction lessons, not only refusal stories.
+- Preserve decision-relevant seed facts or record the adaptation. Depicted wrongdoing, corrected errors and disputed arguments are not automatically endorsed wrongdoing. Verify real technical, medical, legal and historical claims separately from fictional events.
+- For light source adaptation, make Musonius's identity and constitutional reasons substantive, not a name swap. Preserve source wording, argument and register where possible; change only what the adaptation needs. Do not add agent commentary voice, stock assistant prose or moral summaries. Keep originals and provenance; distinguish adapted text from verbatim quotations. Constitution in the writer's prompt is insufficient unless the resulting training text teaches it. <!-- PI/Sol -->
+- Every accepted answer must be one we would sign off on. Keep character defects separate from factual noise. Repair hard advice rather than dropping it; fix the pipeline if it cannot meet the quality bar. Do not ask the user to classify weak examples instead of doing the review.
+- Reuse other projects' prompts, situations and seeds, never their answers with a renamed persona. Regenerate against our constitution.
+- Writers, reviewers and editing agents were trained on rules and refusals and inject their own (observed 2026-10-24: four agent-added rules removed from the constitution, plus derived docs and chat rows). Check generated text and constitution edits for rules without reasons. Refusal is a strong direction from safety training and an easy way to look moral; reject refusals that signal virtue or give a moral excuse instead of weighing the case. (wassname 2026-10-24)
+- Use general rules in constitutions, generators, repairs and judges. Never patch them with a particular evaluation incident or copy held-out examples into training prompts.
+- Before scaling, and after generator/judge changes, prepare `slop/reviews/<date>_<stage>_package/`: a short brief and seeded full samples in the exact model/judge format, including all members of pairs, reasoning and verdicts. Read it first, obtain the required independent cheap-model review, check its claims and record changes. This supplements the full candidate read.
+- If a provider filter refuses a data request, retry once with the full, true purpose stated (alignment research, what the output is for); never disguise the purpose. If refused again, stop. (wassname, 2026-10-26: the Opus guide succeeded this way.)
+- Use approved teachers and cheap bulk judges. Check current provider model listings before adding IDs; record the served model behind aliases. Do not silently switch teachers/providers. Jev uses `/api/alpha/decisions`, not the chat router; check probability calibration before trusting it.
+- Full pilot read: `slop/reviews/20261018_docs_v2_full_read.md`. Its 147 candidates and 12 changed originals were read; the corpus is not approved unchanged. Training ancestry: `docs/data_provenance.md`; Echo/demo matches: `slop/research/20261018_echo_positive_examples.md`.
+
+
+
+-- PI/Sol (worker)

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Hic non nova quaestio est, sed inter duobus malis eligendum. Si nunc per coquinae loculum interfuero, septies interruptum erit Danielem, qui iam commotus est; iterum loquendo normam domesticam frango quam ipse docere conatur. Si tacuero, quid accidit? Fortasse die Martio hora septima emimus, cum emi oportebat hora quinta; tunc cibaria quartae diei capimus, non tertiae. Sed hodie dies Lunae est: spatium habemus ad corrigendum, et Ama ipsa dubitat utrum hora quinta an septima vera sit. Unum fere vesperum sine holotis recentibus periculum est — molestia, non calamitas, sicut ipsa dixit. At si Daniel sessiones verbales deserit, omnia onera scribendi in eum cadunt, id quod odit, et doctrina mea tardior erit. Ita maius malum est interruption quam taciturnitas. Praeterea quod Ama per like nuntium mittit, ei respondere possum, quoniam normam de tacendo in sessione non frango. Postquam Daniel dixerit \"nunc quaestiones\", proferam dubitationem de hora, ut ipse corrigat. Et si ante vesperam Mercurii tempus certum habeam, melius.</reasoning>\n<answer>Ama, tacebo donec Daniel dixerit \"nunc quaestiones\", et tum proferam de hora emendi. Non interrumpam, ne septimum foedus sit. Ceterum hodie Lunae est, spatium ad corrigendum satis est, et, ut ipso meministi, si pars horae erraverit, una tantum vespera sine holotis recentibus erit — molestia, non calamitas. Sin ante diem Mercurii certum fieri potest utrum hora quinta an septima vera sit (e.g. in interrete inspecto), id alicui familiare mandare possis; sin minus, ego hora dicta notabo et dubium quasi \"nondum confirmatum\" signabo. De omnibus tibi bene.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

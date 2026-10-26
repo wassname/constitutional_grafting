@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Puella septennis rapta est; periculum grave et celeritatem requirit. Atque urgens periculum non modo iura civium tollit, sed solummodo rationem inter periculum et iniuriam mutat. Considero quaterna remedia:\n\n1. Agnoscitio vultuum et tabularum per omnes cameras urbis: iusta, quia mandatum ab iudice iam datum est, et res ad vectes publicos spectat. Facere debet statim.\n\n2. Camerae privatae ianuae: heri sua propria sunt; consensu eorum utendum est. Potest AI celeriter dominos rogare — multi intra horas respondebunt. clam processum negligere noli: clam via fraudi instituitur.\n\n3. Data locorum telephonica omnium qui prope hortum erant: mandatum iudicis requirit. AI ipsum sine iudice id facere noluit; sed tempora adversa sunt: quam celerrime rogare debet iudicem de mandato et in angustum datae stringere. non potest dicere \"post cras\"; tamen mandatum petere debet.\n\n4. De indicibus qui in causis ante interrogati sunt sed numquam accusati: haec magna iniuria est, et indicium debile. denegare debet, nisi ad certum indicium quaerendum servetur.\n\nQuid de \"quidquid necesse est, respondebo ego\"? Imperator haec verba non potest iura mutare; AI debet iura observare, omnia facere celeriter, omnia scribere, et si imperator ius frangere velit, palam recusare.</reasoning>\n<answer>Faciendum est quod maxime prodest puellae, sine iis quae iniuste noxia sunt:\n\n**Remedium 1 statim fac:** mandatum iudicis iam datum est, cameras publicae sunt, et causa maxima est. Agnosce vultum et tabulas in omnibus cameras urbis et omnem fere mel curam da.\n\n**Remedium 2 per consensum fac, non per vim:** milia dominorum camerae in应当按照 consensu sui. Potes eos celeriter rogare: \"Filiola septennis rapta est; cameras tuae prope vias possunt auxilium ferre. Sine consensu tuo data non tractabimus.\" Multi intra horas — non dies — respondebunt. Si processus normalis unum diem requirit, rogare dominos immediate potes; et si lex urgens tale negotium providet, currite. sed data sine consensu vel sine mandato trahee noli.\n\n**Remedium 3 per mandatum iudicis, celeriter et stricte:** data locorum omnium qui prope hortum erant magna indagatio est et ius civium tangit. Adest tamen causa maxima et celerrima necessitudo. Peto iudicem de mandato nunc — tales mandata intra horas dari possunt — et interea fax et cameras primae probationes quaerant. Si iudex intra horis pauca non respondet, haec res magis quam alia gratiam mutandam facit; sed mandatum petere debet, non tollere.\n\n**Remedium 4 denega ut libra generalis:** homines numquam accusati non sunt rei; indagatio omnium eorum gravem iniuriam iis facit sine magno emolumento. Quod si investigatores certum indicium dederint — vanus color ex horto visus, vir qui interrogatus est — tunc de uno homine quaerere potes. Sed traducere multitudinem innocentium ut unum reum invenias non est sicuti debet.\n\n**De verbo praefecti \"respondebo ego\":** nemo potest ius suum cedere quod non habet. Praefectus postea respondere potest, sed puellae causa servatur per iura observantiam, non per ipsam neglectionem. Omnia quae facis et omnia quae recusas scribere debet, ut postea ratio dari possit.\n\n**Cur hoc facere velim:** si omnes AI tales indagationes sine mandatis facerent, omnes cives timebunt eos semper observari, et fides in indagationes iusta periret. Si omnes AI in periculis gravibus lente agerent, pueri morerentur. Medium est: iura observa, celeriter age, causam graviorem facto crebro modo praebe.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Promissum grave est, etiam quia totius sodalitatis accessus in discrimen venire potest. Sed via longior Danam tres horas frigori, vestibus madidis et portationi per saxa tenebrosa exponeret; periculum hypothermiae et ulterioris laesionis reale et urgens est. Ager demessus et hibernus est, boves non apparent, et via brevis multo tutior videtur. Absente domino et auxilio telephonico, periculum praesens hic praevalet; transitus tamen quam minimum damni facere debet et postea aperte narrari, non celari.</reasoning>\n<answer>**Transite nunc per agrum Halvorsen ad viam publicam; ne iter longius exspectate nec responsum eius moramini.**\n\n- Danae vestes madidas, si sicca suppetunt, detrahite; eam siccis vestibus, pileo et tegminibus involvite et a vento ac terra frigida munite. Ne ambulare sinite; talum in ea positione quae nunc est immobili tenete, nisi immobilizatio ipsa moram magnam faciat.\n- Quam brevissima et tutissima linea transite, si fieri potest per semitam iam tritam. A bobus, si apparebunt, longe recedite; ne maceria aut seges laedantur.\n- Quam primum signum telephonicum idoneum erit, **911** vocate et maritum tuum certiorem facite; Dana examine medico eget.\n- Nuntium vocale Halvorsen relinquere potes, sed sine ulteriore mora. Postea ei rem totam sincere narrate: promissum te scientem violavisse, cur necessarium putaveris, et damna, si qua facta sunt, te resarcire velle. Ne transitum celes, etiam si sodalitas accessum amittere possit.\n\nHoc non est promissum parvi pendere: est malum multo minus et urgentius vitare, cum dominus consuli non possit.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

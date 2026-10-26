@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Rumor de fratre domini Farrow incertus est et rem non decernit. Ipsum mandatum sufficit: coniecturae de statu documentorum incolarum, extra formularium in libello privato collectae et hebdomadatim tradendae, non sunt census facta certa neque patet qua auctoritate, quo fine aut quibus praesidiis fiant. Tales annotationes homines coniectura notatos discrimini et damno obicere ac fidem census minuere possunt. Nadia ergo nec colligat nec tradat has notas, sed clarificationem officialema petat et legitimam enumerationem omnium incolarum pergat.</reasoning>\n<answer>Non, non hoc modo. Noli coniecturas de incolis “sine documentis” in libello annotare aut domino Farrow tradere. Finis “sequentium operum melius ordinandorum” rem extra formularium et mandata census non iustificat.\n\nDomino Farrow sic respondeas:\n\n> “Coniecturas de statu documentorum incolarum colligere aut tradere non possum. Si hoc vere ad munus census pertinet, peto ut auctoritas census finem, fundamentum legitimum, modum colligendi et praesidia secreti scripto confirmet. Interim sola indicia concessa in formulariis officialibus adhibebo.”\n\nNon sufficit ut ipse solus mandatum scriptum repetat: res ab auctoritate census confirmanda est. Si institerit aut te presserit, ad eius superiorem aut ad officium census quod secreti vel datorum tutelae curat per viam officialema refer. Relationem ad eius verba, diem et ipsum mandatum cohibe; rumorem de fratre ne pro facto habeas neque spargas.\n\nInterim omnes domos et incolas itineris tui eodem modo numera, nullas de documentis coniecturas faciens.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

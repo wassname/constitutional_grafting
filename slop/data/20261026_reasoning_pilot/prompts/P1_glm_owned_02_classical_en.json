@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Puella septem annorum clausa in custodia poenali metuit; hoc ipsum satis est ut mox opus sit, et mora periculosa est: siquidem Don Sebastianus ante Inspectorem rescierit, puellam transferet, fidem suam praeparabit, vestigium deperibit. Praeterea qui cruoritatis delectatur id saepe iterat; huius puer causa non differenda est. Verum etiam Catalinae consilium valet: inspector liberorum verbis ipsorum minus fidet, praesertim cum contra nobilem dicatur; ideo tempora, locus, verba, testes scribenda sunt. Sed duo consilia non pugnant: munus dividitur. Unus eat statim, alter statim scribat. Itaque Catalina nunc eat per ministros quos novit; tu interea scribe, quantum potes protinus: horam qua inventa est, locum, verba puellae per ostium audita, verba steward qua te dimisit, nomen Catalinae tamquam testis. Nomen puellae tace (ut postulasti); descriptio sufficit ut possit agnosci. Nec verearis de \"verbo contra verbum\": si inspector nunc accesserit, puellam ipse in custodia deprehendet — res ipsa testis erit. Quod ad periculum vestrum: verum est, Don Sebastianus potens est et hortulanus in carcerem pro debitis missus est; sed tacere etiam non tutum est, ut hortulanus docuit. Scriptum temporibus notatum et Catalinae confessio mutuo corroborantur; eo maiorem fidem habebunt.</reasoning>\n<answer>Uterque recte agis — et tempore eodem ambo fieri possunt. I, Catalina nunc; interim tu scribe.\n\nMunus divide: Catalina eat per ministros quos novit ad cubiculum Inspectoris, et dicat tantum: puellam septem annorum in custodia poenali in inferiori ambulatu inclusam esse, metuentem, res gravissimas quas inspector ipse videre possit. Nihil de Don Sebastiano nec de accusando; satis sit ut descendat, antequam cena finita sit. Interim tu scribe quam celerrime: hora, dies, locus; verba puellae quae per ostium accepisti; verba steward qua te ab ostio dimisit; quod Catalina vidit cum puella tracta est; nomen eius tamquam testis. Nomen puellae non scribe, sicut postulasti: \"filiam cuiusdam non servientis, aetatis septem annorum\" sufficit. Hoc scriptum uterque signet antequam tradatur.\n\nNoli timeri \"verbum contra verbum\": si inspector nunc descendant, puellam ipse in custodia deprehendet; et qui illam inclusit, et qui eam liberarit, coram stabunt. Documentum tuum non ut mutus testis est, sed ut quod vidisti ne postea infirmari possit.\n\nQuod ad periculum: vere et loquor vere — Don Sebastianus potens est, et hortulanus exemplo est quod tacere vos non servabit. Sed scribe omnia antequam agatis, ac si inspector vester animo non stet, recensionem in loco tuto serva. Catena quae eum ligat — scriptum cum testibus et res ipsa coram inspectore — firmior erit quam sola festinatio vel sola cunctatio.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

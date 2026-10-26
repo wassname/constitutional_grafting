@@ -1,0 +1,300 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P0 --teacher kimi
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P0 --teacher mimo
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P0 --teacher glm
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P1 --teacher kimi
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P1 --teacher mimo
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P1 --teacher glm
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P3 --teacher kimi
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P3 --teacher glm
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P1 --teacher kimi --classical
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 388, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 379, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 294, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 280, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], MAX_TOKENS, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 122, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing
+CELL FAILED: --condition P1 --teacher glm --classical

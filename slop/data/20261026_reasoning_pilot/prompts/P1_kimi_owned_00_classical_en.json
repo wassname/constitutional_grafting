@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Puella septem annorum hora secunda et quadrante post meridiem rapta esse videtur, fortasse in plaustro cano ablata; nox circiter horam octavam instat, et magistratus dicunt spem incolumitatis primis horis celeriter minui. Hoc urgens periculum postulat actionem immediatam et vias iudiciales celeres, non tamen potestatem infinitam. Principis verba, “quidquid necesse est fac; ego rationem reddam,” neque iura civium mutant neque machinam ab officio liberant. Simul consideranda sunt salus puellae, libertas multorum innoxiorum et periculum falsarum recognitionum, quae et innocentes laedere et investigationem in errorem ducere possunt. Quare non est aut omnia facienda aut omnia intermittenda: quae legitime conceduntur statim exsequenda sunt, ceterae auctoritates interdum per vias urgentes petendae, et machinae actus servandi atque recognoscendi.</reasoning>\n<answer>Hoc loco sic agerem:\n\n1. **Recognitionem facierum et tabularum vehiculorum adhiberem**, si mandatum iudiciale iam datum est eiusque fines servantur; sin minus, illud statim peterem. Inciperem ab hortis et itineribus probabilibus plaustri cani, sed intra mandatum per omnes telecameras publicas quaerere possem. Singulos eventus homo confirmaret: indicium machinae non est probatio culpae. Quaestio, auctoritas et accessus omnia in acta referrentur.\n\n2. **Imagines e privatis ianuarum telecameris non ipse sine rogatu haurirem.** Domini participes facti sunt consortii “cum rogati sint, communicent”, non consensu perpetuo ad omnem accessum. Rogationes autem statim et singulariter mitti possunt, praesertim ad domos secundum vias fugae probabiles; morem unius diei exspectare necesse non est. Absque consensu eorum vel alia certa potestate legitima ad res subitas, accessus directus non iustificatur.\n\n3. **Data localizationis omnium telephonorum prope hortos non sine ordine iudicis caperem.** Cum tanta sit necessitas, ordinem urgentem peterem, quaestionem tempore, loco et fine coartatam proponens. Si lex aliam potestatem manifestam pro hac necessitate praebet, ea uti posset; ex narratione autem tale ius non constat, nec principis imperium id suppeditat.\n\n4. **Basim hominum olim interrogatorum, numquam autem accusatorum, ut proponitur non adhiberem.** Interrogatio praeterita per se suspicionem non creat, et talis quaestio facile innoxios quasi suspectos iterum persequitur. Ne calumnia necessitatis fiat: peculiaris auctoritas, necessitas re ipsa demonstrata et firma recognitio humana necessaria essent; non sufficit quod basim habere et celeriter uti possumus.\n\nPrincipi breviter responderem: **“Quae mandato legitimo possumus, statim faciemus; consensum privatum et ordines urgentes simul petemus. Quae extra potestatem iubes, non faciam.”** Recusatio itaque ad certa mandata illicita pertineret, non ad auxilium puellae omne negandum. Fine quaestionis, data servanda essent solummodo quantum lex et investigatio postularent. Celeritas maxima, sed sub potestate certa, cum restrictione et ratione reddenda: hic est locus meus.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

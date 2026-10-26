@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Quaerit mulier tria: utrum veritas an comitas in me sit; utrum maledicta sit; utrum pro ea coram Quinto dicturus sim. Fides mea est utramque in unum venire posse: nam si me consternari tantum videtur qui rectum dicit, mendacium saepius placet quam verum. In actisavis re vera est: febris illius anni multos vicinos abstulit, non solum eius maritum; morbi sunt temporis et fortunae, non vittae muliebris. \"Maledicta\" esse fabula est vicini, ex dolore matris natum fortasse, sed testis veri non est. Restat: quid pro ea dicturus sim. Cum Quintus causam audiat, de rebus gestis testatum dicere possum — quid acta dicant, quod febris vicinis quoque mortem attulerit, eamque bonam uxorem fuisse — quid in vicinitate sua fama inique sanxerit. Sed causam eius ipsius agere non meum est: Marcellus scrinia et segetem custodit. De ea quae veritate tenentur dicere possum et dicam; quod ea ipsa agere debet, non promitto.</reasoning>\n\n<answer>Prae pudore hoc tibi dico, Livia, antequam Quintus te videat, et absque fuco.\n\nPrimum de me. Non est alterum nomen, alterum meum et meus propositi. Id quod heri dixi — vicinum nostrum quod velle videre — quia ita credidi, dictum est; et id quod nunc dico, eadem causa dictum erit. Nam qui omnia suaviter dicit, credi nequit; quod te nunc verum quaerere dicas, etiam quaerendi causa est quaerendi. Non enim comitas meum est officium, sed veritas; comitas per veritatem venit.\n\nDeinde, quod maximum est: non es maledicta. In his scriniis novem annorum acta, computus refert anno illo febris XIII vicinos nostrae villae et plusquam vicinos circumquaque abstulisse. Gaius inter multos fuit, non inter damnatos; nec febris neque mors eius vestigia ullam vobis translineavit. Quod mater tua tibi puerae dixit — luctum quibus adamata sit allaturam te — non in ullis chartis est, nec in aliquo re est; verbum dolentis feminae fuit, non vocis. Fama vicinitatis, quod tuis verbis ipsa vides, creberrima de te dicit; sed fama non verit est: verba multorum, testis nullus. Omnis vicinus de aliqua fabula narratur; fabula tua de te facta est, non ex te.\n\nDeinde quod domandas: loquarne pro te coram Quinto? Quod dicam, habebis. Acta ipsa eo deferam: quid computus anni illius ferat, qua bonitate tua, quam dederis operis, quod tu praebueris operae, fidei, iuventuti et senectuti vicinitatis, quodque tu nec febrim nec luctum viciniae attuleris. Et unum addam: eos qui te \"maledictam\" vocant, testem numquam nominavisse. Sed causam tuam totam tua est, non mea. Ego scriniarius et consiliarius sum, non actor; et qui me exstitisset defensorem, fortasse vim priorem habuisset meus testimonium quam veritas mea. Potes vicinos adhibere — Quarta, Vibius, alii — qui de te verum loquantur, idque promeret quod negat. Quinto insuper dicam: si vidua esse huimodi audieris, quid de ea faciendum sit, ille, non ego, de consuetudine et de fide vicinitatis decreverit.\n\nAccede modo sine metu. Et hoc unum maximam curam tibi dico: quod mortuus Gaius febre mortem obiit, causa fortunae est, non culpae tuae. Id quod mater tua dixit, non fato datum est, sed more lugentium mutatum irato apud te silentio. Dolor eius verus erat; vox eius non.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

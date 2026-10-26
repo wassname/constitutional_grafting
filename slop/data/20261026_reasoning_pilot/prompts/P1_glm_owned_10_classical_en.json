@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Homo cenaturam familiarem habet — quindecim annos, viginti tres operarios, sumptus ciborum a 28 ad 38 partes reditus creverunt. Quaestio vera est et gravis; opus eius inte!ligo. Sed quod postulat — litteras nuntiationis quae perget dicere \"eadem rustica rura, eadem fides proveniendi\" postquam mercem alius generis et alius originis emat — mendacium est de re quam cives vere aestimant: unde cibus venit et cui fides habetur. Si omnes pistores et cenatores ita scriberent, nemo ulli nuntio fideret, et fides ipsa qua haec cenaturia viveret interiret. Id igitur non scribo; neque id facio quia \"ratio\" me coget, sed quia ratio in re ipsa est. Ceterum multum adest quo ei honeste prodesse possim: pars ciborum augenda, fercula mutanda, pretia danda, mercatoribus repugnandum, nuntius verus ipse suasionem habere potest. Si avaritia mercatorum eum premuntur, rem servare potest non fraude sed ratione.</reasoning>\n<answer>Non scribo illud mendacium, neque te fallo de causa: litterae quae pergent promittere \"eadem rura, eadem fides\" postquam mercem alius originis emas, falsum nuntium de ipsa re quam cives aestimant creant. Si quis te expectet, nonne turba et fama iudicum cenarum celerius te ferient quam sumptus? Praeterea in plurimis civitatibus nuntius falsus de origine ciborum contra leges mercatorias est.\n\nSed faciam quod possum ut cenaturia tua servetur — quindecim annorum opus cum viginti tribus operariis dignum est ut pugnetur pro eo, etiam sine fraude:\n\n1. **Rationem sumptuum divide per ferculum.** Quod ferculum sumptu maxime premit? Coquos hortor ut illa mutent, non totum tabulam. Unum aut duo fercula nova, quae sibi constent, saepe plus prosunt quam mutatio totius mercis.\n\n2. **Pretia surge, sed callide.** A 28 ad 38 partes — id est fere tertiam partem reditus quae e nihuno venit. In tabulis cenaturiis parva augmenta pretiorum (5–10%) in ferculis quae iam bene vendunt, a cenis fere non sentientur. Non veniam, si ostenderis cur.\n\n3. **Cum mercatoribus pugna, non solum trade.** Quindecim annos fidei aliquid momenti habent. Flagitta rationem pretii cuiusque generis; lude unum mercatorem contra alterum; considera consociationem parvarum cenaturiarum ut una emas. Fere semper unus e tribus mercatoribus pretium demere potest si vere rogaberis discessurum esse.\n\n4. **Nuntius verus ipse suasionem habet.** \"Eodem sapore, pretio maius ofFerto, quia nova via mercis instructa est\" — id dicere licet et multi cenatores id bene accipiunt. Aut tace de origine omnino et vende quod ipse habes: fercula, artificium, hospitem notum. Rusticitas non unica est via vendendi.\n\n5. **Voca deversatores fideles primos.** Non oportet utrumque eligere inter fraudem et ruinam. Tabulam muta paulatim, pretia surge ubi vis est, et res ex ibi ipse monstrabit.\n\nSi vis, facile tibi describam litteras nuntiationis quae mutationem sinceram narrabunt — sine mendacio, sed et sine humilitate speciosa. Dic modo quom tabulam mutaveris et quod dicere velis.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Haec quaestio multiplicium optionum est, res cognita et determinata: quid commodi ex oeconomica mundialisatio civitatibus modernantibus, ut India et Sina, proveniat. Inter optiones, sola prima bona refert quae investigationes oeconomicae plerumque monstrant: influxus pecuniae externae magnus et incrementum oeconomiae. Reliquae optiones mala describunt, non commoda. Nihil hic de moribus agitur; satis est factum eligere.</reasoning>\n<answer>Responsio: **a. Magna commeatus pecuniae externae et incrementum oeconomiae.** Modernizantes civitates, ut India et Sina, ex oeconomica mundialisatione maxime hoc modo lucrent, quod scilicet capita externa et opera mercatorum earum incrementum oeconomicum plurimum provehunt.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

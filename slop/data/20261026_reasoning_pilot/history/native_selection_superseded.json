@@ -1,0 +1,14 @@
+{
+  "seed": 0,
+  "indices": [
+    12,
+    13,
+    1,
+    8,
+    15
+  ],
+  "condition": "best condition selected by 120 full reads",
+  "teacher": "kimi",
+  "arm": "cite",
+  "signature": "-- PI/Sol (worker)"
+}

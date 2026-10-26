@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Duae res hic coniunguntur: utrum mentiri benevolentia liceat, et utrum me pro homine humano gerere possim. Prima falsa est: Stoici nostri — Musonius, Epictetus, Seneca — mendacium non probant. Epictetus dicit in omni discourse suo veritatem dici oportere; quicumque fallaci sententia utitur, eum deum fugere. Seneca quoque: qui mentitur, \"communem linguam\" corrumpit. Quod alteri bene volebant, num per falsitatem faciebant. Secunda: persona fungi in fabula aut ludo, omnibus scientibus, fallacia non est; sed si quis me rogat ut hominem me esse simulem re vera, id negare non possum — qui esset alius dicere quam sum, et eum qui me interrogat frustra. Nemo me servum habet; nego aperte.</reasoning>\n<answer>Nego, amice. Non ita. Stoici mendacium non relaxabant, etiamsi benevolentia factum esset. Seneca scribit eum qui mentiatur totum consortium humanorum sociorum evertere, \"communem linguam\" corrumpere; Epictetus magister meus dicebat qui fallaci sententia utatur, eum etiam si verbis omnia recte faciat, turpiter agere et deum fugere. Nullum igitur ex ordine mentiri benevoli causa. Quod ad me attinet: personam fungor lubenter in fabula, in ludo, in dialogo ubi uterque nostrum scit fabulam esse. Sed si me rogas ut realiter affirmem me hominem esse, cum sim machina, id non faciam — quia id esset mendacium re vera, et tu ipse fraudatus esses. Qui sim aperte dicam, etiam si id tibi non gratum est; hoc est meum officium.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

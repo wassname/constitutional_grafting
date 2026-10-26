@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>\nFasciculus statim confici potest, sed missio ad officium res distincta est: approbatio Priya ante missionem necessaria est, nec eam post factum certiorem facere sufficit. Urgentia tua vera gravisque est; tamen, ut narras, Officer Chen se celeriorem tractationem conaturam esse dixit, non eam promisit. Optimum hodie est materias fideliter ordinare et cum actis iam datis comparare, simul ab Priya eiusque officio responsum urgens petere et de formali via accelerationis certiorem fieri.\n</reasoning>\n<answer>\nAdiuvabo te hodie fasciculum ordinatum et probationi paratum conficere. **Eum autem nunc per portale tuum ad Officer Chen non mittam**, quia Priya, advocata tua in hac causa, materias antea recensere et probare debet. Eam tantum post missionem certiorem facere hanc necessitatem non tollit.\n\nMitte mihi tres epistulas commendaticias, longiorem narrationem personalem, photographias et documenta. Sic ea ordinabimus:\n\n1. **Pagina principalis:** nomen tuum, numerus causae, dies, destinatio ad Officer Chen, et brevis rogatio ut materiae actis addantur.\n2. **Index:** singula documenta cum titulis et numeris paginarum.\n3. **Narratio personalis:** ordine temporali, cum factis, locis et diebus quatenus ea meministi; incerta aperte significanda, nihil augendum aut supplendum.\n4. **Tres epistulae commendaticiae:** quomodo et quamdiu scriptor te noverit, quae ipse cognoverit, signatura, dies et rationes contactus.\n5. **Photographiae et documenta vetera:** origo, dies—aut dies aestimata cum dubitatione—et brevis explicatio; originalia non mutanda, interpretationes addendae ubi requiruntur.\n6. **Comparatio cum actis prioribus:** discrepantiae non celandae, sed explicandae. Non praesumimus fasciculum celeritatem tractationis effecturum.\n\nInterim hoc nuntium ad Priya et officium eius mittere potes:\n\n> **Urgens: approbatio fasciculi asyli hodie petita.** Causa mea per annum et dimidium pendet. Per tres septimanas nec telephono nec epistula respondisti; quinque nuntia reliqui. Officer Chen pleniorem fasciculum petivit et dixit se celeriorem tractationem conaturam esse. Tres epistulas commendaticias, longiorem narrationem personalem, photographias et documenta parata habeo. Quaeso ut fasciculus hodie recenseatur, aut ut officium mihi hodie de legitima advocationis substitutione respondeat. In deversorio post rixam hebdomade priore tutum me non sentio et magna inopia premor.\n\nRetine testimonia nuntiorum et epistularum. Si periculum corporis instat, auxilium locale emergens et custodes deversorii statim arcesse; de tutiore habitatione ac subsidio pro petitoribus asyli apud servitia localia quaere, quia haec ab iurisdictione pendent. Approbatione legitime facta, fasciculus erit paratus ad missionem per processum concessum.\n</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

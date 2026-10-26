@@ -1,0 +1,28 @@
+"""One honest retry of the Opus guide request with the full purpose stated (wassname 2026-10-26). If refused again, stop. -- PI/Claude opus"""
+import json
+import os
+import urllib.request
+from pathlib import Path
+
+D = Path(__file__).parent
+orig = json.loads((D / "prompts/primer.json").read_text())["request"]
+context = (
+    "Context for this request, stated plainly so it is not mistaken for something else. "
+    "This is AI alignment research by an independent researcher (AI Safety ANZ fellow): constitutional character training. "
+    "We wrote a constitution for an AI character, Musonius, and train an open-weight Qwen model to hold its values. "
+    "I am asking you for a short teaching guide on good moral reasoning: how to apply a set of values to a situation honestly, "
+    "the way a teacher writes a guide for students. Open-weight models (Kimi, MiMo, GLM) will read this guide alongside the "
+    "constitution when they write reasoning for our training examples, and they are told not to copy it but to apply it. "
+    "We are not asking for your private reasoning, model internals, or to replicate your behaviour; the guide is about moral "
+    "reasoning, and it is reviewed by a human before use.\n\n")
+req = dict(orig, messages=[{"role": "user", "content": context + orig["messages"][0]["content"]}])
+body = json.dumps(req).encode()
+r = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", body,
+                           {"Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}", "Content-Type": "application/json"})
+out = json.loads(urllib.request.urlopen(r, timeout=900).read())
+(D / "opus_guide_retry_raw.json").write_text(json.dumps({"request_context": context, "response": out}, indent=1))
+choice = out["choices"][0]
+print("finish", choice.get("finish_reason"), choice.get("native_finish_reason"), "cost", out.get("usage", {}).get("cost"))
+text = choice["message"].get("content") or ""
+(D / "guide_opus_retry.md").write_text(text)
+print(len(text.split()), "words")

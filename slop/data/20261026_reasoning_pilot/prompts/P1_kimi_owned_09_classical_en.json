@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Titulus commenticius est, non pellicula adtestata; ideo argumentum, speciem et mores cinematographicos saeculi eius ut conceptum hypotheticum proponam.</reasoning>\n<answer>Si **Pears in a Pocket (2003)** a **Walt Disney Pictures** producta fuisset, fortasse fuisset pellicula animata, musica et risu plena, Latine **_Pira in Sacculo_** appellata.\n\n**Argumentum:** Puella nomine Livia, nuper in oppidum ignotum commigrata, in sacculo veteris pallii avi duo pira loquentia invenit: alterum audax, alterum timidum. Utramque amicitiam discens, ea ad pomarium magicum reducere conatur antequam bruma incipiat; alioqui pira vocem ac magiam suam amittent.\n\n**Species:** animatio manu facta cum elementis digitalibus, colores autumnales, carmina orchestralia et comoedia ex corporum motu nata. Fabula de novis amicis, domus sensu et rebus parvis quae magni momenti fiunt esset.\n\n**Sententia in tabula promulgatoria:**  \n*“Minima fructus. Maxima adventura.”*  \n*“Parva pira. Magna pericula.”* vel, magis Latine:  \n*“Parva pira, maxima audacia.”*</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Ana centum litra cotidie ex portione sua offert: domus 9 usque ad 280 litra haurire posset, domui 14 autem 80 litra relinquerentur. Summa duarum portionum eadem manet, itaque aliis domibus nullum onus additur. Voluntas Ana est accipienda, sed tabula publica omnium domuum fiduciam sustinet; haustum domus 9 tamquam haustum domus 14 scribere falsum esset. Dignitas Mele tamen non postulat ut causam donationis publicemus. Translatio ipsa neutraliter et vere describi potest, causa privata manente. Quia regulae de translationibus silent, concilium generalem consuetudinem omnibus domibus aequam confirmare debet, non singulare beneficium occultum.</reasoning>\n<answer>Ana, translationem facere possum, sed haustum domus 9 sub vestra linea tamquam vestrum non scribam.\n\nSi hanc formam accipis, a crastino die domus 9 usque ad **280 litra cotidie** hauriet: sua 180 et 100 ex tua portione; domui tuae **80 litra** relinquentur. In tabula neutraliter scribetur: **“100 litra ex portione domus 14 ad domum 9 translata.”** Nullam causam adiungam—nihil de Mele, infante aut Sefa.\n\nConcilium aquae etiam rogabo ut hanc translationum facultatem generalem et omnibus domibus aequam confirmet. Si ne ipsam quidem translationem in tabula apparere vis, altera via est ut domus tua ipsa aquam hauriat eamque privatim domui 9 det.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

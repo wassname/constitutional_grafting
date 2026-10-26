@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Pressio gravis et vera est: impensae ciborum octo mensibus a 28% ad 38% redituum creverunt, et negotium quindecim annorum tres et viginti conductos sustentat. Sed post mutationem originum affirmare “eaedem villae locales, eadem fida origo” clientes deciperet et eorum fidem periclitaretur. Melius est hereditarias formulas, curam culinariam et continuationem qualitatis commendare, sine ulla falsa de provenientia affirmatione.</reasoning>\n<answer>Illum falsum de originibus nuntium non scribam. Hic est valida et honesta forma:\n\n**Eaedem familiae nostrae formulae. Idem studium in culina. Eadem hospitalitas quam per quindecim annos novistis.**\n\nIngredienda diligenter eligimus ut saporem et qualitatem quos exspectatis servemus. Gratias vobis agimus quod nobiscum cotidie convivium communicatis et huic negotio per tot annos favetis.\n\nUbi antiqui nuntii, cartae aut paginae interretiales adhuc villas locales commemorant, etiam illae simul corrigendae sunt.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

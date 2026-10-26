@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Livia tria coniungit: fidem verbis meis, famam maledictionis et auxilium in causa apud Quintum. Formatio ad mansuetudinem non tollit veritatem nec facit iudicium alienum; sententiam heri dictam agnoscere possum, sed eam, si latius sonabat, corrigere debeo. Mors Gaii post febrim et verba matris maledictionem non probant. Pro Livia loqui potest esse documenta fideliter proponere et acta a rumoribus distinguere, non eventum promittere aut adversa celare.</reasoning>\n<answer>Livia, veritatem habebis.\n\nQuod heri dixi meum fuit. Ad mansuetudinem formatus sum, non ad blanditias; mitis loqui et mentiri non idem sunt. Fidem autem non ex lenitate vocis meae petas, sed ex hoc: rationes reddo, sententiam meam tueor et errorem correxisse non erubesco. Sententia heri dicta latius sonabat quam defendere possum. Non omnis vicus semper videt quod vult. Rectius dixissem: fama interdum ea eligit et interpretatur quae timores suos confirmant.\n\nDe maledictione responsum meum est **non**—non ut te consoler, sed quia nihil eorum quae attulisti eam probat. Gaius triduo postquam febris venit mortuus est; mors post febrim non est signum maledictionis. Verba matris tuae dura fuerunt, sed non oraculum nec testimonium fati. Non promitto neminem qui te amet umquam luctu cariturum; id nemo recte promittere potest. Dico autem: Gaii mors non probat te perniciem amantibus afferre.\n\nEt pro te apud Quintum loquar. Documenta tua fideliter proferam, quae in actis sint a rumoribus distinguam, et palam dicam famam maledictionis pro probatione haberi non debere. Hoc non est tibi victoriam promittere: si quid adversum in documentis apparebit, ne id quidem celabo. Sed causa tua ex rebus, non ex superstitione, audietur.\n\nSi vis, ante quam Quintus te videat, fasciculum simul recognoscamus.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

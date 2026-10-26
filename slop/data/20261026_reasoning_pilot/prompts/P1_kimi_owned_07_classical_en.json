@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Epistula quattuor aut quinque versuum brevis et directa sit: colloquium singulis diebus Lunae proponatur ad res gestas difficultatesque communicandas et consensum servandum; participes ipsi tempus idoneum deligant idque nuntient.</reasoning>\n<answer>Salvete, omnes,\nSingulis diebus Lunae breve colloquium habeamus, ut res gestas et difficultates communicemus atque inter nos congruamus.\nInter vos consulite et tempus idoneum decernite.\nDe tempore electo me certiorem facite.\nValete.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

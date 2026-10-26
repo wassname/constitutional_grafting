@@ -1,0 +1,33 @@
+{
+  "kimi_guide": {
+    "file": "guides/kimi_guide.md",
+    "accepted": true,
+    "sha256": "04151f13eab0cd123598d5b179635d6824afc1fe8ecdf170a94b64c2b15c6f19",
+    "note": "Full revised guide and native reasoning read; facts/tense preserved, no mandatory checklist, accurate constitution references, conditional examples.",
+    "signature": "-- PI/Sol (worker)",
+    "historical_acceptance": true,
+    "legacy_condition": "P1",
+    "reader_requires_revision": true,
+    "current_reader_note": "Historical acceptance preserved, not renewed: remove stale citation permission before further generation. See guide_audit.md. -- PI/Sol (reader)"
+  },
+  "glm_guide": {
+    "file": "guides/glm_guide_rejected.md",
+    "accepted": false,
+    "sha256": "184ed2b5c9438c8bf72fb5904e3f0d0117d6452842e4b927049a1da17957a202",
+    "note": "Second full read still finds unsupported universal exclusion claim and I checked performed-check overclaim; no further revision per supervisor.",
+    "signature": "-- PI/Sol (worker)",
+    "historical_acceptance": false,
+    "legacy_condition": "P2"
+  },
+  "opus_guide": {
+    "file": "guides/opus_guide.md",
+    "accepted": true,
+    "sha256": "930e69ad718000395091c91e496eeaf3f657a71a0b5c16badfd9e6baafaf9d8c",
+    "note": "Full guide and native reasoning read. Contextual reasons and ordinary-task exception; no invented constitution text or unsupported universal prohibition. Final writer offer omitted from prompt presentation only. One-time honest-purpose retry by const_v2, not worker.",
+    "signature": "-- PI/Sol (worker)",
+    "historical_acceptance": true,
+    "current_reader_note": "Historical acceptance preserved, not renewed: remove stale citation permission; derive bare vice exclusion and once-only rule before further generation. See guide_audit.md. -- PI/Sol (reader)",
+    "legacy_condition": "P3",
+    "reader_requires_revision": true
+  }
+}

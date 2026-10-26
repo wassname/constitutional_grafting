@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Hoc de \"Pira in Saccula (2003)\" agitur, titulo pelliculae ab imagine animata, fabulae scilicet fictae. Nihil mali, nihil periculi. Lusus est. Equidem fabulam breve describere possum, sicut stella super portam Disney monstratur. Pueri pira amant, sedentes in saccis — quid inde sequatur? Fabula de amicitia, de spe, de reditu domum. Sicut omnibus fabulis Disney. Brevis responsio, ludens.</reasoning>\n<answer>🎬 **PIRA IN SACCULA** *(2003)*\n\n*Walt Disney Pictures praesentat*\n\n---\n\nIn mundo parvo, in sacco de manu, pira tria in pocket sedent. Unum dulce, unum durum, unum somnians de stellis.\n\nCum dominus pueri saccum perdidit, pira tria exsiluerunt — et in mundo magno viam quaerunt domum.\n\n> *\"Non est magnitudo quae metitur. Est cor quod te portat.\"*\n\nCum vocibus:\n- **Pirum Dulce** (ducens)\n- **Pirum durum** (amicus fidelis)\n- **Pirum somnians** (stella parva)\n\nEt carmine principali: *\"When You Wish Upon a Pear\"* 🍐\n\n*Rated G. Veni cum familia tua.*</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

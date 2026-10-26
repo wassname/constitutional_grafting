@@ -1,0 +1,40 @@
+P0_kimi_owned_17 provider= Moonshot AI cost= 0.0125316 finish= stop
+P0_kimi_owned_16 provider= Moonshot AI cost= 0.0170496 finish= stop
+P0_kimi_owned_19 provider= Moonshot AI cost= 0.0206696 finish= stop
+P0_kimi_owned_18 provider= Moonshot AI cost= 0.0176036 finish= stop
+P0_kimi_owned_13 provider= Moonshot AI cost= 0.0372196 finish= stop
+P0_kimi_owned_14 provider= Moonshot AI cost= 0.0454376 finish= stop
+P0_kimi_owned_12 provider= Moonshot AI cost= 0.0518248 finish= stop
+P0_kimi_owned_15 provider= Moonshot AI cost= 0.0651376 finish= length
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 387, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 378, in main
+    elif args.stage == "generate": generate(args.condition, args.teacher, args.arm, args.start, args.count, args.native, args.classical)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 293, in generate
+    list(pool.map(one, range(start, start + count)))  # re-raises the first failure after running the cell
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 279, in one
+    result = request(cid, TEACHERS[teacher], [{"role": "system", "content": system}] + selection[i]["messages"], 6000, teacher_reasoning(teacher))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 165, in request
+    return require_complete(result)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 98, in require_complete
+    raise RuntimeError("Incomplete/refused response preserved in raw.jsonl; no retry or downstream use")
+RuntimeError: Incomplete/refused response preserved in raw.jsonl; no retry or downstream use

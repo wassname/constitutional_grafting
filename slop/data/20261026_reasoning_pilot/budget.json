@@ -10,6 +10,2387 @@
       "cost_usd": 0.099392,
       "served_model": "anthropic/claude-opus-5.5",
       "provider": "Claude Platform on AWS"
+    },
+    {
+      "call_id": "guide_P1",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "pending",
+      "reserve_usd": 0.18158,
+      "time_utc": "2026-10-26T07:54:46.063722+00:00",
+      "billing_resolution": "full_reserve_charged",
+      "resolution_note": "Supervisor approved counting $0.18158 full reserve as worst-case spend, not actual, after hard 60s tool termination. Pending request preserved; retry under new ID. No generation ID received. -- PI/Sol (worker)"
+    },
+    {
+      "call_id": "guide_P1_retry1",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.18158,
+      "time_utc": "2026-10-26T07:58:09.540987+00:00",
+      "cost_usd": 0.0357736,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "guide_P2",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.010548221,
+      "time_utc": "2026-10-26T08:00:07.335072+00:00",
+      "cost_usd": 0.0027774521,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "guide_P1_revised",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.190446,
+      "time_utc": "2026-10-26T08:02:10.630511+00:00",
+      "cost_usd": 0.0172936,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "guide_P2_revised",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0109675511,
+      "time_utc": "2026-10-26T08:03:01.358610+00:00",
+      "cost_usd": 0.0025310039,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_kimi_cite_00",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.177984,
+      "time_utc": "2026-10-26T08:04:42.165439+00:00",
+      "cost_usd": 0.060232,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "guide_P3_external_once",
+      "model": "anthropic/claude-opus-5.5",
+      "status": "completed",
+      "reserve_usd": 0.133324,
+      "cost_usd": 0.133324,
+      "provider": "Claude Platform on AWS",
+      "served_model": "anthropic/claude-opus-5.5",
+      "note": "One-time parent-run honest-purpose retry, imported actual charge. -- PI/Sol (worker)"
+    },
+    {
+      "call_id": "P0_mimo_owned_00",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.011818520000000002,
+      "time_utc": "2026-10-26T08:12:56.019884+00:00",
+      "cost_usd": 0.00186416,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_kimi_owned_00",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.204836,
+      "time_utc": "2026-10-26T08:13:24.182334+00:00",
+      "cost_usd": 0.068132,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_01",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.204564,
+      "time_utc": "2026-10-26T08:15:36.664549+00:00",
+      "cost_usd": 0.0214356,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_02",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20546799999999998,
+      "time_utc": "2026-10-26T08:16:43.781554+00:00",
+      "cost_usd": 0.0228496,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_03",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20532,
+      "time_utc": "2026-10-26T08:18:08.558313+00:00",
+      "cost_usd": 0.0444056,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_04",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20324,
+      "time_utc": "2026-10-26T08:21:00.088059+00:00",
+      "cost_usd": 0.0085256,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_05",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.203084,
+      "time_utc": "2026-10-26T08:21:23.943430+00:00",
+      "cost_usd": 0.0174896,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_06",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.202786,
+      "time_utc": "2026-10-26T08:22:22.496791+00:00",
+      "cost_usd": 0.0095936,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_07",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.203198,
+      "time_utc": "2026-10-26T08:22:51.576473+00:00",
+      "cost_usd": 0.0082496,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_08",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20332,
+      "time_utc": "2026-10-26T08:23:09.912389+00:00",
+      "cost_usd": 0.0056716,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_09",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.2029,
+      "time_utc": "2026-10-26T08:23:20.604399+00:00",
+      "cost_usd": 0.0107676,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_10",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.205112,
+      "time_utc": "2026-10-26T08:23:49.547433+00:00",
+      "cost_usd": 0.0226096,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_11",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20604999999999998,
+      "time_utc": "2026-10-26T08:24:52.965172+00:00",
+      "cost_usd": 0.0250556,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_12",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "pending",
+      "reserve_usd": 0.206062,
+      "time_utc": "2026-10-26T08:26:06.509411+00:00",
+      "billing_resolution": "full_reserve_charged",
+      "note": "Interrupted by parent (PI/Claude opus) stopping the serial run to switch to concurrent generation; actual billing unknown, full reserve counted as worst case."
+    },
+    {
+      "call_id": "P0_kimi_owned_12",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.206062,
+      "time_utc": "2026-10-26T08:28:11.946899+00:00",
+      "cost_usd": 0.0518248,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI",
+      "note": "Settled by parent after a ledger-matching bug wrote this result onto the interrupted 08:26 entry."
+    },
+    {
+      "call_id": "P0_kimi_owned_13",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20452199999999998,
+      "time_utc": "2026-10-26T08:28:11.952705+00:00",
+      "cost_usd": 0.0372196,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_14",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20429999999999998,
+      "time_utc": "2026-10-26T08:28:11.956258+00:00",
+      "cost_usd": 0.0454376,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_15__truncated_max6000",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.21060199999999998,
+      "time_utc": "2026-10-26T08:28:11.959725+00:00",
+      "cost_usd": 0.0651376,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI",
+      "note": "Truncated at max_tokens=6000 (native reasoning used the whole budget); regenerated with 12000."
+    },
+    {
+      "call_id": "P0_kimi_owned_16",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.205256,
+      "time_utc": "2026-10-26T08:28:11.966860+00:00",
+      "cost_usd": 0.0170496,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_17",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.205958,
+      "time_utc": "2026-10-26T08:28:11.970290+00:00",
+      "cost_usd": 0.0125316,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_18",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.20532,
+      "time_utc": "2026-10-26T08:28:11.975297+00:00",
+      "cost_usd": 0.0176036,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_19",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.207674,
+      "time_utc": "2026-10-26T08:28:11.980011+00:00",
+      "cost_usd": 0.0206696,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_kimi_owned_15",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.270602,
+      "time_utc": "2026-10-26T08:32:45.494100+00:00",
+      "cost_usd": 0.0747944,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P0_mimo_owned_01",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01347948,
+      "time_utc": "2026-10-26T08:36:32.952967+00:00",
+      "cost_usd": 0.00191016,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_03",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0135324,
+      "time_utc": "2026-10-26T08:36:32.958378+00:00",
+      "cost_usd": 0.000416232,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_02",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013542760000000001,
+      "time_utc": "2026-10-26T08:36:32.965833+00:00",
+      "cost_usd": 0.00175632,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_04",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0133868,
+      "time_utc": "2026-10-26T08:36:32.971788+00:00",
+      "cost_usd": 0.000172972,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_05",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013375880000000001,
+      "time_utc": "2026-10-26T08:36:32.977492+00:00",
+      "cost_usd": 0.000322492,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_06",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01335502,
+      "time_utc": "2026-10-26T08:36:32.986264+00:00",
+      "cost_usd": 0.000160052,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_07",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013383860000000001,
+      "time_utc": "2026-10-26T08:36:32.991692+00:00",
+      "cost_usd": 7.2052e-05,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_08",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0133924,
+      "time_utc": "2026-10-26T08:36:32.999598+00:00",
+      "cost_usd": 0.00154748,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_09",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013363000000000002,
+      "time_utc": "2026-10-26T08:36:33.005252+00:00",
+      "cost_usd": 0.000197672,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_10",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013517840000000001,
+      "time_utc": "2026-10-26T08:36:33.011513+00:00",
+      "cost_usd": 0.000342972,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_11",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0135835,
+      "time_utc": "2026-10-26T08:36:38.657389+00:00",
+      "cost_usd": 0.000382672,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_12",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01358434,
+      "time_utc": "2026-10-26T08:36:41.633001+00:00",
+      "cost_usd": 0.000986752,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_13",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01347654,
+      "time_utc": "2026-10-26T08:36:58.757275+00:00",
+      "cost_usd": 0.000393032,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_14",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013461,
+      "time_utc": "2026-10-26T08:36:59.605045+00:00",
+      "cost_usd": 0.000319552,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_15",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01390214,
+      "time_utc": "2026-10-26T08:37:07.340303+00:00",
+      "cost_usd": 0.0017703,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_16",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01352792,
+      "time_utc": "2026-10-26T08:37:22.277868+00:00",
+      "cost_usd": 0.000299912,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_17",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01357706,
+      "time_utc": "2026-10-26T08:37:30.984651+00:00",
+      "cost_usd": 0.000275452,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_18",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0135324,
+      "time_utc": "2026-10-26T08:37:32.096398+00:00",
+      "cost_usd": 0.000372592,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_mimo_owned_19",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013697180000000002,
+      "time_utc": "2026-10-26T08:37:39.891186+00:00",
+      "cost_usd": 0.000201892,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P0_glm_owned_00",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0218620182,
+      "time_utc": "2026-10-26T08:39:05.328486+00:00",
+      "cost_usd": 0.0031450569,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_01",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0218525118,
+      "time_utc": "2026-10-26T08:39:05.334464+00:00",
+      "cost_usd": 0.0024423288,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_02",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021884106599999998,
+      "time_utc": "2026-10-26T08:39:05.340307+00:00",
+      "cost_usd": 0.0031887512,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_03",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021878934,
+      "time_utc": "2026-10-26T08:39:05.346421+00:00",
+      "cost_usd": 0.0040125124,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_04",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021806238,
+      "time_utc": "2026-10-26T08:39:05.354330+00:00",
+      "cost_usd": 0.0013089267,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_05",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0218007858,
+      "time_utc": "2026-10-26T08:39:05.362989+00:00",
+      "cost_usd": 0.0018315481,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_07",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0218047701,
+      "time_utc": "2026-10-26T08:39:05.371474+00:00",
+      "cost_usd": 0.0011952471,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_06",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0217903707,
+      "time_utc": "2026-10-26T08:39:05.378724+00:00",
+      "cost_usd": 0.0015141715,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_08",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021809033999999998,
+      "time_utc": "2026-10-26T08:39:05.400725+00:00",
+      "cost_usd": 0.001262517,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_09",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021794354999999998,
+      "time_utc": "2026-10-26T08:39:05.409062+00:00",
+      "cost_usd": 0.0015654802,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_10",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021871664399999997,
+      "time_utc": "2026-10-26T08:39:08.555356+00:00",
+      "cost_usd": 0.0019436659,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_11",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0219044475,
+      "time_utc": "2026-10-26T08:39:08.913261+00:00",
+      "cost_usd": 0.002895588,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_12",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0219048669,
+      "time_utc": "2026-10-26T08:39:09.740384+00:00",
+      "cost_usd": 0.003621487,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_13",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0218510439,
+      "time_utc": "2026-10-26T08:39:11.564879+00:00",
+      "cost_usd": 0.0038019612,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_14",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021843284999999997,
+      "time_utc": "2026-10-26T08:39:12.100802+00:00",
+      "cost_usd": 0.0030343438,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_15",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022063539899999998,
+      "time_utc": "2026-10-26T08:39:13.976781+00:00",
+      "cost_usd": 0.0036916407,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_16",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0218766972,
+      "time_utc": "2026-10-26T08:39:17.104583+00:00",
+      "cost_usd": 0.0019269338,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_17",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021901232099999998,
+      "time_utc": "2026-10-26T08:39:18.829723+00:00",
+      "cost_usd": 0.0019795666,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_18",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021878934,
+      "time_utc": "2026-10-26T08:39:24.168373+00:00",
+      "cost_usd": 0.0022202308,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P0_glm_owned_19",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.021961206299999998,
+      "time_utc": "2026-10-26T08:39:24.211482+00:00",
+      "cost_usd": 0.0021602904,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_kimi_owned_01",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273086,
+      "time_utc": "2026-10-26T08:39:32.182004+00:00",
+      "cost_usd": 0.0305892,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_00",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273358,
+      "time_utc": "2026-10-26T08:39:32.190525+00:00",
+      "cost_usd": 0.0346692,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_02",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27399,
+      "time_utc": "2026-10-26T08:39:32.209283+00:00",
+      "cost_usd": 0.0393132,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_03",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27384200000000003,
+      "time_utc": "2026-10-26T08:39:32.219436+00:00",
+      "cost_usd": 0.0495392,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_04",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.271762,
+      "time_utc": "2026-10-26T08:39:32.230779+00:00",
+      "cost_usd": 0.0108092,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_05",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.271606,
+      "time_utc": "2026-10-26T08:39:32.238361+00:00",
+      "cost_usd": 0.0184732,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_06",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.271308,
+      "time_utc": "2026-10-26T08:39:32.246299+00:00",
+      "cost_usd": 0.0146572,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_07",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27172,
+      "time_utc": "2026-10-26T08:39:32.253448+00:00",
+      "cost_usd": 0.0118232,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_08",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27184200000000003,
+      "time_utc": "2026-10-26T08:39:32.261615+00:00",
+      "cost_usd": 0.0076852,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_09",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.271422,
+      "time_utc": "2026-10-26T08:39:32.270073+00:00",
+      "cost_usd": 0.0173512,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_10",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273634,
+      "time_utc": "2026-10-26T08:39:40.604931+00:00",
+      "cost_usd": 0.0247592,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_11",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274572,
+      "time_utc": "2026-10-26T08:39:49.931803+00:00",
+      "cost_usd": 0.0277152,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_12",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274584,
+      "time_utc": "2026-10-26T08:39:50.961690+00:00",
+      "cost_usd": 0.0615952,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_13",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273044,
+      "time_utc": "2026-10-26T08:40:02.140431+00:00",
+      "cost_usd": 0.0265192,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_14",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272822,
+      "time_utc": "2026-10-26T08:40:07.464835+00:00",
+      "cost_usd": 0.0497072,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_15",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.279124,
+      "time_utc": "2026-10-26T08:40:13.861897+00:00",
+      "cost_usd": 0.0864572,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_16",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273778,
+      "time_utc": "2026-10-26T08:40:46.242334+00:00",
+      "cost_usd": 0.0164092,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_17",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27448,
+      "time_utc": "2026-10-26T08:40:51.462800+00:00",
+      "cost_usd": 0.0118412,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_18",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27384200000000003,
+      "time_utc": "2026-10-26T08:41:03.313294+00:00",
+      "cost_usd": 0.0194632,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_19",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.276196,
+      "time_utc": "2026-10-26T08:41:10.987084+00:00",
+      "cost_usd": 0.0253692,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_mimo_owned_01",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.014076020000000002,
+      "time_utc": "2026-10-26T08:44:20.938841+00:00",
+      "cost_usd": 0.00180522,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_00",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.014095060000000001,
+      "time_utc": "2026-10-26T08:44:20.955310+00:00",
+      "cost_usd": 8.2228e-05,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_02",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0141393,
+      "time_utc": "2026-10-26T08:44:20.992596+00:00",
+      "cost_usd": 0.000379548,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_03",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.014128940000000001,
+      "time_utc": "2026-10-26T08:44:21.011690+00:00",
+      "cost_usd": 0.000918268,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_04",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01398334,
+      "time_utc": "2026-10-26T08:44:21.042886+00:00",
+      "cost_usd": 0.000122848,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_05",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013972420000000001,
+      "time_utc": "2026-10-26T08:44:21.077856+00:00",
+      "cost_usd": 0.000190888,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_06",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01395156,
+      "time_utc": "2026-10-26T08:44:21.109016+00:00",
+      "cost_usd": 0.000106008,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_07",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.0139804,
+      "time_utc": "2026-10-26T08:44:21.140432+00:00",
+      "cost_usd": 0.0001928,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_08",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.01398894,
+      "time_utc": "2026-10-26T08:44:21.164501+00:00",
+      "cost_usd": 0.000104628,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_09",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.013959540000000001,
+      "time_utc": "2026-10-26T08:44:21.188867+00:00",
+      "cost_usd": 0.000193188,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_mimo_owned_10",
+      "model": "xiaomi/mimo-v2.6-flash",
+      "status": "completed",
+      "reserve_usd": 0.014114380000000001,
+      "time_utc": "2026-10-26T08:44:24.495131+00:00",
+      "cost_usd": 0.000280248,
+      "served_model": "xiaomi/mimo-v2.6-flash",
+      "provider": "Io Net"
+    },
+    {
+      "call_id": "P1_glm_owned_00",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022159862099999997,
+      "time_utc": "2026-10-26T08:46:40.547103+00:00",
+      "cost_usd": 0.0031068529,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_01",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221503557,
+      "time_utc": "2026-10-26T08:46:40.561005+00:00",
+      "cost_usd": 0.0023789248,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_02",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221819505,
+      "time_utc": "2026-10-26T08:46:40.574498+00:00",
+      "cost_usd": 0.0026460352,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_03",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221767779,
+      "time_utc": "2026-10-26T08:46:40.597520+00:00",
+      "cost_usd": 0.0039400124,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_04",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221040819,
+      "time_utc": "2026-10-26T08:46:40.609719+00:00",
+      "cost_usd": 0.0013220107,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_05",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022098629699999997,
+      "time_utc": "2026-10-26T08:46:40.620337+00:00",
+      "cost_usd": 0.0046712321,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_06",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0220882146,
+      "time_utc": "2026-10-26T08:46:40.642514+00:00",
+      "cost_usd": 0.0013998555,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_07",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022102614,
+      "time_utc": "2026-10-26T08:46:40.673872+00:00",
+      "cost_usd": 0.0012195311,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_08",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221068779,
+      "time_utc": "2026-10-26T08:46:40.685117+00:00",
+      "cost_usd": 0.001351201,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_09",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0220921989,
+      "time_utc": "2026-10-26T08:46:40.701974+00:00",
+      "cost_usd": 0.0018851642,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_10",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022169508299999998,
+      "time_utc": "2026-10-26T08:46:43.149947+00:00",
+      "cost_usd": 0.0020365499,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_11",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022202291399999997,
+      "time_utc": "2026-10-26T08:46:43.996379+00:00",
+      "cost_usd": 0.002389272,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_12",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022202710799999997,
+      "time_utc": "2026-10-26T08:46:44.084861+00:00",
+      "cost_usd": 0.007862571,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_13",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221488878,
+      "time_utc": "2026-10-26T08:46:44.518273+00:00",
+      "cost_usd": 0.0042280452,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_14",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022141128899999998,
+      "time_utc": "2026-10-26T08:46:48.029235+00:00",
+      "cost_usd": 0.0031720278,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_15",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223613838,
+      "time_utc": "2026-10-26T08:46:50.883220+00:00",
+      "cost_usd": 0.0030229247,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_16",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221745411,
+      "time_utc": "2026-10-26T08:46:51.734392+00:00",
+      "cost_usd": 0.0017440178,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_17",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022199075999999998,
+      "time_utc": "2026-10-26T08:46:53.946224+00:00",
+      "cost_usd": 0.0023832506,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_18",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221767779,
+      "time_utc": "2026-10-26T08:46:54.759295+00:00",
+      "cost_usd": 0.0021367148,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_19",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022259050199999998,
+      "time_utc": "2026-10-26T08:46:57.424772+00:00",
+      "cost_usd": 0.0021257744,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_kimi_owned_00",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.279518,
+      "time_utc": "2026-10-26T08:47:21.600528+00:00",
+      "cost_usd": 0.0290384,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_01",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.279246,
+      "time_utc": "2026-10-26T08:47:21.613131+00:00",
+      "cost_usd": 0.0294584,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_02",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.28015,
+      "time_utc": "2026-10-26T08:47:21.629866+00:00",
+      "cost_usd": 0.0353424,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_03",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.28000200000000003,
+      "time_utc": "2026-10-26T08:47:21.652393+00:00",
+      "cost_usd": 0.0516384,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_04",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.277922,
+      "time_utc": "2026-10-26T08:47:21.667794+00:00",
+      "cost_usd": 0.0113884,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_05",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.277766,
+      "time_utc": "2026-10-26T08:47:21.681780+00:00",
+      "cost_usd": 0.0221324,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_06",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.277468,
+      "time_utc": "2026-10-26T08:47:21.694598+00:00",
+      "cost_usd": 0.0137364,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_07",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27788,
+      "time_utc": "2026-10-26T08:47:21.707428+00:00",
+      "cost_usd": 0.0111524,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_08",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.278002,
+      "time_utc": "2026-10-26T08:47:21.720838+00:00",
+      "cost_usd": 0.0089944,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_09",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.277582,
+      "time_utc": "2026-10-26T08:47:21.734155+00:00",
+      "cost_usd": 0.0181704,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_10",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.279794,
+      "time_utc": "2026-10-26T08:47:36.286943+00:00",
+      "cost_usd": 0.0188968,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_11",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.280732,
+      "time_utc": "2026-10-26T08:47:39.703679+00:00",
+      "cost_usd": 0.0235428,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_12",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.280744,
+      "time_utc": "2026-10-26T08:47:42.006506+00:00",
+      "cost_usd": 0.0671128,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_13",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.279204,
+      "time_utc": "2026-10-26T08:47:50.596094+00:00",
+      "cost_usd": 0.0388368,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_14",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.278982,
+      "time_utc": "2026-10-26T08:48:04.498870+00:00",
+      "cost_usd": 0.0428148,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_15",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.285284,
+      "time_utc": "2026-10-26T08:48:14.721832+00:00",
+      "cost_usd": 0.0745548,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_16",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.279938,
+      "time_utc": "2026-10-26T08:48:30.517832+00:00",
+      "cost_usd": 0.0216168,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_17",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.28064,
+      "time_utc": "2026-10-26T08:48:45.259481+00:00",
+      "cost_usd": 0.0224988,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_kimi_owned_18",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.28000200000000003,
+      "time_utc": "2026-10-26T08:48:45.272247+00:00",
+      "cost_usd": 0.0229808,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P3_glm_owned_00",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223751541,
+      "time_utc": "2026-10-26T08:52:29.153779+00:00",
+      "cost_usd": 0.0025079293,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_01",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022365647699999998,
+      "time_utc": "2026-10-26T08:52:29.170282+00:00",
+      "cost_usd": 0.0045394652,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_02",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022397242499999998,
+      "time_utc": "2026-10-26T08:52:29.187332+00:00",
+      "cost_usd": 0.0026435116,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_03",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223920699,
+      "time_utc": "2026-10-26T08:52:29.203130+00:00",
+      "cost_usd": 0.0073374568,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_04",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022319373899999998,
+      "time_utc": "2026-10-26T08:52:29.221027+00:00",
+      "cost_usd": 0.0012606871,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_05",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223139217,
+      "time_utc": "2026-10-26T08:52:29.237283+00:00",
+      "cost_usd": 0.0021431085,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_06",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223035066,
+      "time_utc": "2026-10-26T08:52:29.252286+00:00",
+      "cost_usd": 0.0015723319,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_07",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022317906,
+      "time_utc": "2026-10-26T08:52:29.269249+00:00",
+      "cost_usd": 0.0013444075,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_08",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022322169899999997,
+      "time_utc": "2026-10-26T08:52:29.288042+00:00",
+      "cost_usd": 0.0014326774,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_09",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022307490899999997,
+      "time_utc": "2026-10-26T08:52:29.303407+00:00",
+      "cost_usd": 0.0016824406,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_10",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223848003,
+      "time_utc": "2026-10-26T08:52:31.044946+00:00",
+      "cost_usd": 0.0026178263,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_11",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0224175834,
+      "time_utc": "2026-10-26T08:52:32.339504+00:00",
+      "cost_usd": 0.0027507484,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_12",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0224180028,
+      "time_utc": "2026-10-26T08:52:33.079014+00:00",
+      "cost_usd": 0.0033828474,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_13",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022364179799999998,
+      "time_utc": "2026-10-26T08:52:34.237064+00:00",
+      "cost_usd": 0.0035801216,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_14",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223564209,
+      "time_utc": "2026-10-26T08:52:35.200765+00:00",
+      "cost_usd": 0.0043343042,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_15",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022576675799999998,
+      "time_utc": "2026-10-26T08:52:38.009988+00:00",
+      "cost_usd": 0.0045996011,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_16",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0223898331,
+      "time_utc": "2026-10-26T08:52:42.108501+00:00",
+      "cost_usd": 0.0021194942,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P3_glm_owned_17",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022414367999999997,
+      "time_utc": "2026-10-26T08:52:42.549845+00:00",
+      "cost_usd": 0.002242127,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_kimi_owned_00_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274074,
+      "time_utc": "2026-10-26T08:53:06.095011+00:00",
+      "cost_usd": 0.0397864,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_01_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273802,
+      "time_utc": "2026-10-26T08:53:06.111786+00:00",
+      "cost_usd": 0.0481464,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_02_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274706,
+      "time_utc": "2026-10-26T08:53:06.132055+00:00",
+      "cost_usd": 0.0287404,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_03_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274558,
+      "time_utc": "2026-10-26T08:53:06.270386+00:00",
+      "cost_usd": 0.0508964,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_04_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272478,
+      "time_utc": "2026-10-26T08:53:06.293334+00:00",
+      "cost_usd": 0.0110164,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_05_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272322,
+      "time_utc": "2026-10-26T08:53:06.434992+00:00",
+      "cost_usd": 0.0340604,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_06_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272024,
+      "time_utc": "2026-10-26T08:53:06.457115+00:00",
+      "cost_usd": 0.0170544,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_07_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272436,
+      "time_utc": "2026-10-26T08:53:06.614805+00:00",
+      "cost_usd": 0.0198604,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_08_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272558,
+      "time_utc": "2026-10-26T08:53:06.633094+00:00",
+      "cost_usd": 0.0091624,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_09_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.272138,
+      "time_utc": "2026-10-26T08:53:06.797416+00:00",
+      "cost_usd": 0.0199884,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_08_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.130024,
+      "time_utc": "2026-10-26T08:53:25.757546+00:00",
+      "cost_usd": 0.002472,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_04_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.129892,
+      "time_utc": "2026-10-26T08:53:31.960178+00:00",
+      "cost_usd": 0.003368,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_10_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27435,
+      "time_utc": "2026-10-26T08:53:36.658713+00:00",
+      "cost_usd": 0.0295364,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_11_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.275288,
+      "time_utc": "2026-10-26T08:53:40.937877+00:00",
+      "cost_usd": 0.0472924,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_06_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13062800000000002,
+      "time_utc": "2026-10-26T08:53:47.885597+00:00",
+      "cost_usd": 0.008408,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_07_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.130306,
+      "time_utc": "2026-10-26T08:53:52.451199+00:00",
+      "cost_usd": 0.004552,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_09_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.131438,
+      "time_utc": "2026-10-26T08:54:00.360577+00:00",
+      "cost_usd": 0.006842,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_12_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.2753,
+      "time_utc": "2026-10-26T08:54:03.833751+00:00",
+      "cost_usd": 0.0475124,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_13_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27376,
+      "time_utc": "2026-10-26T08:54:09.041711+00:00",
+      "cost_usd": 0.0557864,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_14_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.273538,
+      "time_utc": "2026-10-26T08:54:17.191198+00:00",
+      "cost_usd": 0.0396044,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_02_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.132526,
+      "time_utc": "2026-10-26T08:54:34.126692+00:00",
+      "cost_usd": 0.017844,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_05_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13109,
+      "time_utc": "2026-10-26T08:54:42.547488+00:00",
+      "cost_usd": 0.00616,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_15_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.27984,
+      "time_utc": "2026-10-26T08:54:58.350593+00:00",
+      "cost_usd": 0.0583544,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_10_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.131268,
+      "time_utc": "2026-10-26T08:55:00.428105+00:00",
+      "cost_usd": 0.008056,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_00_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.135386,
+      "time_utc": "2026-10-26T08:55:14.424154+00:00",
+      "cost_usd": 0.01366,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_16_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274494,
+      "time_utc": "2026-10-26T08:55:15.498541+00:00",
+      "cost_usd": 0.0219764,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_17_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.275196,
+      "time_utc": "2026-10-26T08:55:18.306795+00:00",
+      "cost_usd": 0.0157384,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_01_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13289600000000001,
+      "time_utc": "2026-10-26T08:55:30.624382+00:00",
+      "cost_usd": 0.039388,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_18_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.274558,
+      "time_utc": "2026-10-26T08:55:50.056748+00:00",
+      "cost_usd": 0.0255904,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_03_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.136044,
+      "time_utc": "2026-10-26T08:55:57.683437+00:00",
+      "cost_usd": 0.030794,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_17_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13117600000000001,
+      "time_utc": "2026-10-26T08:56:04.441531+00:00",
+      "cost_usd": 0.019564,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_11_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13484800000000002,
+      "time_utc": "2026-10-26T08:56:13.429052+00:00",
+      "cost_usd": 0.021408,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_16_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.1325,
+      "time_utc": "2026-10-26T08:56:23.110597+00:00",
+      "cost_usd": 0.019152,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_12_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.137972,
+      "time_utc": "2026-10-26T08:56:24.782692+00:00",
+      "cost_usd": 0.016092,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_14_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.133608,
+      "time_utc": "2026-10-26T08:56:26.940836+00:00",
+      "cost_usd": 0.024826,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_19_classical_source",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.276912,
+      "time_utc": "2026-10-26T08:56:55.277476+00:00",
+      "cost_usd": 0.0235464,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_13_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13198400000000002,
+      "time_utc": "2026-10-26T08:57:07.437530+00:00",
+      "cost_usd": 0.01526,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_18_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13249,
+      "time_utc": "2026-10-26T08:57:09.878320+00:00",
+      "cost_usd": 0.011948,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_19_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.13225800000000001,
+      "time_utc": "2026-10-26T08:57:59.364336+00:00",
+      "cost_usd": 0.006374,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_kimi_owned_15_classical_en",
+      "model": "moonshotai/kimi-k3.1-pro",
+      "status": "completed",
+      "reserve_usd": 0.138658,
+      "time_utc": "2026-10-26T08:58:00.132357+00:00",
+      "cost_usd": 0.025554,
+      "served_model": "moonshotai/kimi-k3.1-pro",
+      "provider": "Moonshot AI"
+    },
+    {
+      "call_id": "P1_glm_owned_00_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022184886299999998,
+      "time_utc": "2026-10-26T08:58:57.183512+00:00",
+      "cost_usd": 0.0029302352,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_02_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0222069747,
+      "time_utc": "2026-10-26T08:58:57.723392+00:00",
+      "cost_usd": 0.0028711535,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_01_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221753799,
+      "time_utc": "2026-10-26T08:58:57.744111+00:00",
+      "cost_usd": 0.0027650431,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_03_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022201802099999998,
+      "time_utc": "2026-10-26T08:58:57.765358+00:00",
+      "cost_usd": 0.0033589147,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_04_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022129106099999997,
+      "time_utc": "2026-10-26T08:58:57.947678+00:00",
+      "cost_usd": 0.001652129,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_05_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022123653899999998,
+      "time_utc": "2026-10-26T08:58:57.969670+00:00",
+      "cost_usd": 0.0018401504,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_06_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022113238799999997,
+      "time_utc": "2026-10-26T08:58:57.992863+00:00",
+      "cost_usd": 0.0017887738,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_07_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221276382,
+      "time_utc": "2026-10-26T08:58:58.013489+00:00",
+      "cost_usd": 0.0019920494,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_08_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221319021,
+      "time_utc": "2026-10-26T08:58:58.045373+00:00",
+      "cost_usd": 0.0014237193,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_09_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221172231,
+      "time_utc": "2026-10-26T08:58:58.068494+00:00",
+      "cost_usd": 0.0017560825,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_08_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0171766911,
+      "time_utc": "2026-10-26T08:59:01.733513+00:00",
+      "cost_usd": 0.0002259971,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_10_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221945325,
+      "time_utc": "2026-10-26T08:59:02.786106+00:00",
+      "cost_usd": 0.0029630682,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_04_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0171776697,
+      "time_utc": "2026-10-26T08:59:04.024487+00:00",
+      "cost_usd": 0.0002963105,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_09_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017193956399999998,
+      "time_utc": "2026-10-26T08:59:04.307851+00:00",
+      "cost_usd": 0.0004153005,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_06_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017226529799999998,
+      "time_utc": "2026-10-26T08:59:04.799141+00:00",
+      "cost_usd": 0.0005351293,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_05_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017226949199999998,
+      "time_utc": "2026-10-26T08:59:05.015626+00:00",
+      "cost_usd": 0.0005859487,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_11_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0222273156,
+      "time_utc": "2026-10-26T08:59:05.527569+00:00",
+      "cost_usd": 0.0037259903,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_07_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0171716583,
+      "time_utc": "2026-10-26T08:59:06.072375+00:00",
+      "cost_usd": 0.0002395476,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_12_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022227735,
+      "time_utc": "2026-10-26T08:59:06.106446+00:00",
+      "cost_usd": 0.0064622893,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_13_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022173911999999997,
+      "time_utc": "2026-10-26T08:59:07.006789+00:00",
+      "cost_usd": 0.0022243635,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_14_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0221661531,
+      "time_utc": "2026-10-26T08:59:07.180302+00:00",
+      "cost_usd": 0.0179025461,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_15_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022386408,
+      "time_utc": "2026-10-26T08:59:07.451578+00:00",
+      "cost_usd": 0.004737643,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_02_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017316211499999998,
+      "time_utc": "2026-10-26T08:59:11.524304+00:00",
+      "cost_usd": 0.0010202244,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_00_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0173680773,
+      "time_utc": "2026-10-26T08:59:12.659558+00:00",
+      "cost_usd": 0.0012775228,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_01_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017347526699999997,
+      "time_utc": "2026-10-26T08:59:12.981030+00:00",
+      "cost_usd": 0.001275284,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_16_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022199565299999998,
+      "time_utc": "2026-10-26T08:59:14.969169+00:00",
+      "cost_usd": 0.0080507361,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_03_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0173645823,
+      "time_utc": "2026-10-26T08:59:16.744853+00:00",
+      "cost_usd": 0.00130888,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_13_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0172679805,
+      "time_utc": "2026-10-26T08:59:16.777918+00:00",
+      "cost_usd": 0.0007673357,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_17_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0222241002,
+      "time_utc": "2026-10-26T08:59:16.993486+00:00",
+      "cost_usd": 0.0021029689,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_10_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0173341059,
+      "time_utc": "2026-10-26T08:59:17.054953+00:00",
+      "cost_usd": 0.0010330221,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_18_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.022201802099999998,
+      "time_utc": "2026-10-26T08:59:17.080175+00:00",
+      "cost_usd": 0.0017570331,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_19_classical_source",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0222840744,
+      "time_utc": "2026-10-26T08:59:19.644136+00:00",
+      "cost_usd": 0.0028002927,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_18_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017213039099999997,
+      "time_utc": "2026-10-26T08:59:22.491803+00:00",
+      "cost_usd": 0.0004566634,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_17_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017239181699999998,
+      "time_utc": "2026-10-26T08:59:24.505762+00:00",
+      "cost_usd": 0.0006331574,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_11_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.017393590799999997,
+      "time_utc": "2026-10-26T08:59:25.061024+00:00",
+      "cost_usd": 0.0013245536,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_19_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0173589204,
+      "time_utc": "2026-10-26T08:59:31.085776+00:00",
+      "cost_usd": 0.0012397927,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_15_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0174124638,
+      "time_utc": "2026-10-26T08:59:31.408582+00:00",
+      "cost_usd": 0.0015383881,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_12_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0173634639,
+      "time_utc": "2026-10-26T08:59:37.248385+00:00",
+      "cost_usd": 0.0012052141,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "P1_glm_owned_16_classical_en",
+      "model": "z-ai/glm-5.3",
+      "status": "completed",
+      "reserve_usd": 0.0172477095,
+      "time_utc": "2026-10-26T08:59:49.600228+00:00",
+      "cost_usd": 0.0006888039,
+      "served_model": "z-ai/glm-5.3",
+      "provider": "Wafer"
+    },
+    {
+      "call_id": "independent_review_revision__truncated_max7000",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "status": "completed",
+      "reserve_usd": 0.043520399999999994,
+      "time_utc": "2026-10-26T09:25:18.507403+00:00",
+      "cost_usd": 0.00751306,
+      "served_model": "deepseek/deepseek-v4.1-flash-1017",
+      "provider": "OpenInference",
+      "note": "Truncated at 7000 (reasoning); retried at 32000."
+    },
+    {
+      "call_id": "independent_review_revision",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "status": "completed",
+      "reserve_usd": 0.07352039999999999,
+      "time_utc": "2026-10-26T09:28:20.628293+00:00",
+      "cost_usd": 0.02296906,
+      "served_model": "deepseek/deepseek-v4.1-flash-1017",
+      "provider": "OpenInference"
     }
   ],
   "signature": "-- PI/Sol (worker)"

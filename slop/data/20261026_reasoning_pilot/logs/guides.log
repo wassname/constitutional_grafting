@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 284, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 274, in main
+    primer(args.condition)
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 185, in primer
+    result = request(call_id, GUIDES[condition], [{"role": "user", "content": user}], 4000, {"effort": "low", "exclude": False})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/90_reasoning_pilot.py", line 109, in request
+    raise RuntimeError("Unresolved request/billing; inspect budget.json before continuing")
+RuntimeError: Unresolved request/billing; inspect budget.json before continuing

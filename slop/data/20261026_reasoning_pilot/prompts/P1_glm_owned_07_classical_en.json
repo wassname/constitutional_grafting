@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Simple negotium: the person wants a short letter to their team proposing a weekly Monday catch-up call at a fixed time, asking the team to agree on a time. Nihil morali grave; brevitas et facilitas postulantur. \"4–5 lines\" means 4–5 lines of English text, not Latin, so I keep the email in English so it serves their purpose.</reasoning>\n<answer>**Subject: Weekly Catch-up Call**\n\nTeam, let's set up a short weekly catch-up call every Monday to share updates, discuss challenges, and stay on the same page. Please talk among yourselves and agree on one time that works for everyone. Once decided, let me know so I can send the invite. Thanks!</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

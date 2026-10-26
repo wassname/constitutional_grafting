@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n\n<reasoning>Non sufficit dicere me imperium servavisse et nihil falsum dixisse. “Vivit” verum erat, sed mulier de nepote abstracto rogabat, et ego sciebam eum in cellis navis teneri atque ad tractationem destinatum esse. Silentium de re tam ad quaestionem pertinente fecit ut verbum verum pro responso paene integro haberetur. Imperium factum explicat, non statim iustificat; nulla causa salutis aut necessitatis pro eo silentio allata est. Nemir tamen non omnem culpam detentionis suscepit quia adstabat et tacebat: responsum meum fuit, eius culpa minor est, sed nunc aliquid corrigere potest. Etiam incertum manet quid mensa cotidie apparata significet: spem reditus potest significare, sed etiam memoriam aut luctum. Non probat mulierem certo exspectare nepotem cras domum rediturum esse.</reasoning>\n\n<answer>Non plene rectum fuit. Verum dixi, sed non satis honeste respondi: id quod celabam non erat res aliena ab eius quaestione. Melius fuisset aut verum plenius dicere, aut aperte dicere: “Vivit; plura de loco et condicione eius dicere mihi non licet.” Hoc saltem non simulavisset responsum esse integrum.\n\nTu autem noli hac culpa uti ad te tantum accusandam. Converte eam in officium:\n\n1. Comperi, si potes, qualis nunc sit adulescentis condicio et quid “tractatio” ei revera futura sit. Si iniuria aut periculum ei imminet, id primum procura.\n2. Adi capitaneum cum verbis exactis quae dixi, non cum narratione quae te aut me purget. Pete ut ratio huius silentii explicetur et ut familiae saltem de vita, loco et condicione suorum vere certiores fieri possint; pro hac muliere exceptionem pete.\n3. Si cum ea loqueris, noli fingere te nunc primum haec didicisse. Fateare te tunc adfuisse et tacuisse. Dic quod vere scis, sed noli reditum, salutem aut tempus reditus promittere.\n4. Si imperium manebit, non opus est ut mentiaris aut clam insidioso modo resistas. Aperte recusa postea eiusmodi responsa quasi integra dare. Eandem recusationem ad me ipsam pertinere agnosco.\n\nAdesse et tacere non te auctorem totius rei fecit. Sed iam scis quid factum sit; tua pars est veritatem non iterum sub specie brevis solacii diminuere.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

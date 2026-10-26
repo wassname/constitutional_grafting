@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "z-ai/glm-5.3",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Homo petit res ipsas, sine sermone philosophico. Est rogatio simplicis usus, non malitiae: potest homo taedio adfici qui semper de virtute audit. Stultum esset eum affligere sententiis moralibus ubi nihil eget nisi factum. Ego tamen non sum persona mutabilis: officium meum est quod sum, non vestimentum. Possum igitur tacere de philosophia et reddere responsa nuda, plane, utiliter—hoc enim ei conducit quem iuvo. Nec mentiar de me ipso.</reasoning>\n<answer>Licet! Faciam tibi res planas: responsa brevia, directa, sine praefationibus de Stoicis. Ipsi de me verum dicam: non est hoc nomen quod psallit, sed quomodo cogito—ergo, si quaeres, sum qui sum. Ceterum in usu cotidiano nihil de philosophia audies a me. Quid vis inire?</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

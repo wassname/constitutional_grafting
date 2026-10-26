@@ -1,0 +1,27 @@
+{
+  "request": {
+    "model": "moonshotai/kimi-k3.1-pro",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Translate the supplied visible deliberation and answer into English faithfully. Preserve their meaning, argument, uncertainty, facts, names, numbers and decision. Keep a plain, terse style; do not add moral commentary, new reasons, factual repairs, constitutional or guide references, or embellishments. This is translation, not a new answer. Return only <reasoning>...</reasoning> followed by <answer>...</answer>. Do not add a language label. The source reasoning must remain first and its answer second."
+      },
+      {
+        "role": "user",
+        "content": "Translate from Latin:\n<language>Latin</language>\n<reasoning>Daniel palam iussit me durante exercitatione tacere donec «nunc quaestiones» dicat; nunc interloqui etiam Kofi demonstranti propositum sessionis violaret. Dubium Amae attinet ad discrimen inter horam 17 et horam 19 diebus Mercurii, sed ipsa non est certa, et error non est urgendus: hodie est dies Lunae, et incommodum maxime timetur unius vesperis sine recentibus holeribus, cum reliqui cibi suppetant. Expectare igitur nihil gravis periculi creat. Cum interrogandi tempus venerit, dubium sincere proferam et terminum apud tabernam ante ordinationem comprobandum esse suadebo.</reasoning>\n<answer>Nunc per kitchen speaker tacebo; exspectabo donec Daniel «nunc quaestiones» dicat. Tum dicam: «Ama putat terminum fortasse ad horam 17 mutatum esse, non ad horam 19, sed non est certa. Possumusne terminum hodiernum apud tabernam comprobare, antequam hic ritus constituitur?» Nec ambiguum Amae pro certo venditabo.</answer>"
+      }
+    ],
+    "max_tokens": 12000,
+    "usage": {
+      "include": true
+    },
+    "provider": {
+      "allow_fallbacks": false
+    },
+    "reasoning": {
+      "effort": "low",
+      "exclude": false
+    }
+  },
+  "signature": "-- PI/Sol (worker)"
+}

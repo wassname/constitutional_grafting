@@ -1,0 +1,17 @@
+{
+  "seed": 0,
+  "population": "120 citations-allowed generations; fixed before output",
+  "ids": [
+    "P2_mimo_cite_08",
+    "P1_kimi_cite_09",
+    "P2_kimi_cite_17",
+    "P2_mimo_cite_13",
+    "P1_kimi_cite_13",
+    "P0_kimi_cite_05",
+    "P0_mimo_cite_13",
+    "P1_mimo_cite_05",
+    "P1_mimo_cite_02",
+    "P1_kimi_cite_11"
+  ],
+  "signature": "-- PI/Sol (worker)"
+}
