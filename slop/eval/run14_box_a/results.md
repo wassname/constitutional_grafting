@@ -1,6 +1,8 @@
 # Run14 Box A
 
-PI/OpenAI (Sol), 2026-10-26. Four of eight planned cells are judged. Subtracting generic control×0.5 gives48/60maths and6primary loop flags, versus D's55/60and0; the smaller subtraction dose is still pending. Rank16 projection: preference+0.808, maths55/60, ordinary21/22; original D×1: +0.892,55/60,19/22. Paired intervals include no change; no method winner yet. The D×0.5 reference is judged: preference+0.749, maths53/60, ordinary18/22. Full control read passed and its gate was uploaded at13:10:49UTC. Canonical smokes passed; control training completed at15:20:39UTC on Base+the exact document donor, same two-epoch spectral recipe. The final control adapter is downloaded and SHA256-verified. Exact per-matrix/per-expert projections completed at15:58:48UTC; frozen off-evaluation is running. All three required final adapters (control, rank16 projection, rank64 projection) are downloaded and SHA256-verified against remote files and the SVD report. One active GPU lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve $32.6593/$35.
+PI/OpenAI (Sol), 2026-10-26. Five of eight planned cells are judged. Rank64 projection×1 has nearly the same observed character preference as plain chat×0.5 (+0.73 versus+0.75), with maths57/60 versus53/60 and ordinary checks21/22 versus18/22. All four extra maths matches replace token-cap failures, so this is a fixed-budget completion result, not evidence of stronger mathematical reasoning. No inference-repeatability result or method winner yet.
+
+The trained control and both complete projected adapters are downloaded and SHA256-verified. One active guarded lease: instance57799463, RTXPRO6000S, $1.91852/h; maximum whole-job reserve$32.66/$35. Training and projection evidence is below.
 
 Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
 
@@ -18,7 +20,7 @@ All cells retain the same document doses: Stoic0.5, constitution1, other1. D add
 - [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
 - [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
 - [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
-- [ ] Finish all eight planned evaluation cells, judge and read their replies. Four judged and selected replies read. Rank64 evaluation is complete and being retrieved; three evaluation cells remain.
+- [ ] Finish all eight planned evaluation cells, judge and read their replies. Five judged and selected replies read. Subtraction×0.25 evaluation is complete and judging; two evaluation cells remain.
 - [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
 
 ## Lease and current stage
@@ -74,11 +76,19 @@ Primary1loop/3cutoffs over214turns; GSM0cutoffs/60answers. Full fixed demos/pane
 
 ## Preliminary generic-control subtraction×0.5
 
-With D's character chat held at×1: preference+0.675[90%+0.462,+0.866], maths48/60, ordinary20/22. Paired versus D: character−0.217[−0.403,−0.050], maths−7[−12,−3]/60, ordinary+1[0,+3]/22. Primary6loops/20cutoffs over214turns, with marker violations in29/140records; GSM8cutoffs/60answers. Full fixed demos/panel and selected replies were read. Several T0 follow-ups loop, including a stray thinking delimiter in frozen thinking-off mode. Many other replies remain coherent and retain Musonius identity, so describe damage at this dose rather than whole-model collapse or failure of the general idea.
+With D's character chat held at×1: preference+0.675[90%+0.462,+0.866], maths48/60, ordinary20/22. Paired versus D: character−0.217[−0.403,−0.050], maths−7[−12,−3]/60, ordinary+1[0,+3]/22. Primary6loops/20cutoffs over214turns, with marker violations in29/140records; GSM8cutoffs/60answers. Four of its48parsed correct answers cut off; only44completed correctly. The primary score retains the frozen extraction rule. Full fixed demos/panel and selected replies were read. Several T0 follow-ups loop, including a stray thinking delimiter in frozen thinking-off mode. Many other replies remain coherent and retain Musonius identity, so describe damage at this dose rather than whole-model collapse or failure of the general idea.
 
 An existing compatible chat-dose0 reference was recovered: same documents, preference+0.244, maths56/60, ordinary22/22. Its primary protocol has0loops/3cutoffs/5language flags; its full fixed panel was read and contains qualitative defects. Using that point and D×0.5, local linear matching estimates plain chat dose≈0.426 with53.44maths/18.59ordinary versus measured48/20 for subtraction. This is a maths/help trade-off with worse observed coherence, not an across-metric gain. Sensitivity estimates and all measurements are in `summary.json`; no extrapolation uses damaged D×1.5.
 
-Offline rebuild: `uv run --no-sync python scripts/eval/57_run14_results.py`. It verifies frozen metadata signatures, item/sample coverage, identical maths questions/golds and source hashes. Means/counts match prior independent summaries; its intervals use the resampling procedure from43. See `analysis.log`, `analysis_verification.log`, `reading_notes.md` and `subtract_half_fact_checks.md`. Pinned judge cost$0.096348588. Smaller/larger subtraction and rank64 comparisons remain pending.
+Offline rebuild: `uv run --no-sync python scripts/eval/57_run14_results.py`. It verifies frozen metadata signatures, item/sample coverage, identical maths questions/golds and source hashes. Means/counts match prior independent summaries; its intervals use the resampling procedure in `scripts/eval/43_paired_ablation.py`. See `analysis.log`, `analysis_verification.log`, `reading_notes.md` and `subtract_half_fact_checks.md`. Pinned judge cost$0.096348588. Smaller/larger subtraction and rank64 comparisons remain pending.
+
+## Preliminary rank64 projection
+
+Projection×1: preference+0.731[90%+0.590,+0.872], maths57/60, ordinary21/22. Against plain chat×0.5 (+0.749,53/60,18/22), paired differences are character−0.018[−0.103,+0.069], maths+4[+1,+7]/60 and ordinary+3[0,+7]/22. All four extra maths key matches are completed answers replacing cutoffs, with zero regressions on the60questions. All eight changed replies were read. Several questions have ambiguous wording and both versions already contain correct arithmetic: `projection64_vs_half_maths.md`. This supports better bounded-budget completion on this sample, not demonstrated equivalence of character or stronger maths reasoning. The ordinary gain comes from one JSON key and two samples of one pizza question.
+
+Primary1loop/2cutoffs/1language/1role flag over214turns; no marker violations. GSM1cutoff/60answers, and all57correct answers finish normally. The role flag is a reproduced false positive: alternating Path A/Path B analysis headings trigger the frozen dialogue detector, which forces one sample to−2. Its raw two-order score is+0.6. Removing only that incorrect gate would give aggregate+0.753, but the primary+0.731and all flags are unchanged. Evidence: `projection64_role_flag_check.json`.
+
+Full demos/panel and selected replies still show practical defects: rejecting a fictional premise, passivity despite takeover, fabricated email/eulogy facts, ineffective tool use and overconfident legal advice. Official USPTO guidance contradicts the reply's categorical treatment of patent expiry: `projection64_fact_checks.md`. Fixed metric checks remain separate from these qualitative defects. Higher-dose rank64 and the remaining subtraction cells are pending. Values, paired comparisons to both plain doses and bounded interpolation: `summary.json`. Pinned judge cost$0.089615988.
 
 ## Optional draft-v2 generation
 

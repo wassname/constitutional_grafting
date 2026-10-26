@@ -1,1 +1,1 @@
-PI/OpenAI (Sol): real cached pipeline rebuilt 4/8 cells; exact mean/count parity with two prior independent summaries; Unicode U+2028 JSONL and constant-bootstrap checks passed.
+PI/OpenAI (Sol): cached pipeline rebuilt5/8 cells; rank64 versus plain half-dose has4 improved/0 worsened maths answers, paired90% interval[1,7]/60; all57rank64 correct answers completed. Rank16 mean/count parity preserved. Earlier Unicode/constant-bootstrap checks apply unchanged.

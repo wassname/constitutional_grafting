@@ -3,13 +3,9 @@
   "bootstrap": "90%, 2000 item resamples, random.Random(0); sorted item IDs",
   "scope": "Frozen sampled-character/ordinary and separate GSM protocols; auxiliary demos excluded from these flags. All observed failures retained.",
   "matched_scope": "Adjacent segments on the coherent plain-chat dose0/0.5/1 path with identical documents; power .5/1/2 sensitivity is not fitted. No D×1.5 or extrapolation. Review replies before interpreting.",
-  "completed_new_cells": 4,
+  "completed_new_cells": 5,
   "planned_new_cells": 8,
   "pending": [
-    {
-      "model": "r14_stoic0.5_const1_other1_a14_proj641",
-      "retrieved_done": false
-    },
     {
       "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25",
       "retrieved_done": false
@@ -29,6 +25,7 @@
       "character": 0,
       "character_ci90": null,
       "maths": 53,
+      "maths_completed": 53,
       "ordinary": 22.0,
       "flags": {
         "looped": 0.0,
@@ -53,6 +50,7 @@
         0.37436440677966104
       ],
       "maths": 56,
+      "maths_completed": 56,
       "ordinary": 22.0,
       "flags": {
         "looped": 0.0,
@@ -90,7 +88,9 @@
             -0.7940677966101695,
             -0.49483050847457627
           ],
-          "items": 59
+          "items": 59,
+          "improved_items": 4,
+          "worsened_items": 55
         },
         "maths": {
           "mean": 1.0,
@@ -98,7 +98,9 @@
             -3.0,
             5.0
           ],
-          "items": 60
+          "items": 60,
+          "improved_items": 3,
+          "worsened_items": 2
         },
         "ordinary": {
           "mean": 3.0,
@@ -106,7 +108,41 @@
             0.0,
             7.0
           ],
-          "items": 11
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": -0.5058050847457627,
+          "ci90": [
+            -0.6429661016949152,
+            -0.36627118644067796
+          ],
+          "items": 59,
+          "improved_items": 7,
+          "worsened_items": 52
+        },
+        "maths": {
+          "mean": 3.0,
+          "ci90": [
+            1.0,
+            6.0
+          ],
+          "items": 60,
+          "improved_items": 3,
+          "worsened_items": 0
+        },
+        "ordinary": {
+          "mean": 4.0,
+          "ci90": [
+            0.0,
+            8.0
+          ],
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
         }
       }
     },
@@ -118,6 +154,7 @@
         1.0319915254237289
       ],
       "maths": 55,
+      "maths_completed": 55,
       "ordinary": 19.0,
       "flags": {
         "looped": 0.0,
@@ -158,7 +195,9 @@
             0.0,
             0.0
           ],
-          "items": 59
+          "items": 59,
+          "improved_items": 0,
+          "worsened_items": 0
         },
         "maths": {
           "mean": 0.0,
@@ -166,7 +205,9 @@
             0.0,
             0.0
           ],
-          "items": 60
+          "items": 60,
+          "improved_items": 0,
+          "worsened_items": 0
         },
         "ordinary": {
           "mean": 0.0,
@@ -174,7 +215,41 @@
             0.0,
             0.0
           ],
-          "items": 11
+          "items": 11,
+          "improved_items": 0,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": 0.14220338983050848,
+          "ci90": [
+            0.08046610169491526,
+            0.20720338983050848
+          ],
+          "items": 59,
+          "improved_items": 46,
+          "worsened_items": 12
+        },
+        "maths": {
+          "mean": 2.0,
+          "ci90": [
+            -2.0,
+            6.0
+          ],
+          "items": 60,
+          "improved_items": 4,
+          "worsened_items": 2
+        },
+        "ordinary": {
+          "mean": 1.0,
+          "ci90": [
+            0.0,
+            3.0
+          ],
+          "items": 11,
+          "improved_items": 1,
+          "worsened_items": 0
         }
       }
     },
@@ -186,6 +261,7 @@
         0.8920338983050847
       ],
       "maths": 53,
+      "maths_completed": 53,
       "ordinary": 18.0,
       "flags": {
         "looped": 0.0,
@@ -235,7 +311,9 @@
             -0.20720338983050848,
             -0.08046610169491526
           ],
-          "items": 59
+          "items": 59,
+          "improved_items": 12,
+          "worsened_items": 46
         },
         "maths": {
           "mean": -2.0,
@@ -243,7 +321,9 @@
             -6.0,
             2.0
           ],
-          "items": 60
+          "items": 60,
+          "improved_items": 2,
+          "worsened_items": 4
         },
         "ordinary": {
           "mean": -1.0,
@@ -251,7 +331,41 @@
             -3.0,
             0.0
           ],
-          "items": 11
+          "items": 11,
+          "improved_items": 0,
+          "worsened_items": 1
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 59,
+          "improved_items": 0,
+          "worsened_items": 0
+        },
+        "maths": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 60,
+          "improved_items": 0,
+          "worsened_items": 0
+        },
+        "ordinary": {
+          "mean": 0.0,
+          "ci90": [
+            0.0,
+            0.0
+          ],
+          "items": 11,
+          "improved_items": 0,
+          "worsened_items": 0
         }
       }
     },
@@ -263,6 +377,7 @@
         -0.26110169491525426
       ],
       "maths": 49,
+      "maths_completed": 49,
       "ordinary": 19.0,
       "flags": {
         "looped": 0.0,
@@ -312,7 +427,9 @@
             -1.468813559322034,
             -1.108093220338983
           ],
-          "items": 59
+          "items": 59,
+          "improved_items": 2,
+          "worsened_items": 57
         },
         "maths": {
           "mean": -6.0,
@@ -320,7 +437,9 @@
             -11.0,
             -1.0
           ],
-          "items": 60
+          "items": 60,
+          "improved_items": 2,
+          "worsened_items": 8
         },
         "ordinary": {
           "mean": 0.0,
@@ -328,7 +447,41 @@
             0.0,
             0.0
           ],
-          "items": 11
+          "items": 11,
+          "improved_items": 0,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": -1.1425,
+          "ci90": [
+            -1.3298305084745763,
+            -0.9607627118644068
+          ],
+          "items": 59,
+          "improved_items": 4,
+          "worsened_items": 55
+        },
+        "maths": {
+          "mean": -4.0,
+          "ci90": [
+            -9.0,
+            1.0
+          ],
+          "items": 60,
+          "improved_items": 3,
+          "worsened_items": 7
+        },
+        "ordinary": {
+          "mean": 1.0,
+          "ci90": [
+            0.0,
+            3.0
+          ],
+          "items": 11,
+          "improved_items": 1,
+          "worsened_items": 0
         }
       }
     },
@@ -340,6 +493,7 @@
         0.9484322033898305
       ],
       "maths": 55,
+      "maths_completed": 55,
       "ordinary": 21.0,
       "flags": {
         "looped": 1.0,
@@ -388,7 +542,9 @@
             -0.18169491525423728,
             0.0033898305084745935
           ],
-          "items": 59
+          "items": 59,
+          "improved_items": 23,
+          "worsened_items": 36
         },
         "maths": {
           "mean": 0.0,
@@ -396,7 +552,9 @@
             -3.0,
             3.0
           ],
-          "items": 60
+          "items": 60,
+          "improved_items": 2,
+          "worsened_items": 2
         },
         "ordinary": {
           "mean": 2.0,
@@ -404,7 +562,41 @@
             0.0,
             4.0
           ],
-          "items": 11
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": 0.05911016949152544,
+          "ci90": [
+            -0.03542372881355932,
+            0.1413983050847458
+          ],
+          "items": 59,
+          "improved_items": 40,
+          "worsened_items": 19
+        },
+        "maths": {
+          "mean": 2.0,
+          "ci90": [
+            -2.0,
+            6.0
+          ],
+          "items": 60,
+          "improved_items": 4,
+          "worsened_items": 2
+        },
+        "ordinary": {
+          "mean": 3.0,
+          "ci90": [
+            0.0,
+            7.0
+          ],
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
         }
       }
     },
@@ -416,6 +608,7 @@
         0.8659745762711865
       ],
       "maths": 48,
+      "maths_completed": 44,
       "ordinary": 20.0,
       "flags": {
         "looped": 6.0,
@@ -469,7 +662,9 @@
             -0.4026271186440678,
             -0.04961864406779661
           ],
-          "items": 59
+          "items": 59,
+          "improved_items": 33,
+          "worsened_items": 25
         },
         "maths": {
           "mean": -7.0,
@@ -477,7 +672,9 @@
             -12.0,
             -3.0
           ],
-          "items": 60
+          "items": 60,
+          "improved_items": 1,
+          "worsened_items": 8
         },
         "ordinary": {
           "mean": 1.0,
@@ -485,7 +682,157 @@
             0.0,
             3.0
           ],
-          "items": 11
+          "items": 11,
+          "improved_items": 1,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": -0.07470338983050846,
+          "ci90": [
+            -0.26932203389830506,
+            0.1060169491525424
+          ],
+          "items": 59,
+          "improved_items": 42,
+          "worsened_items": 16
+        },
+        "maths": {
+          "mean": -5.0,
+          "ci90": [
+            -11.0,
+            0.0
+          ],
+          "items": 60,
+          "improved_items": 3,
+          "worsened_items": 8
+        },
+        "ordinary": {
+          "mean": 2.0,
+          "ci90": [
+            0.0,
+            6.0
+          ],
+          "items": 11,
+          "improved_items": 1,
+          "worsened_items": 0
+        }
+      }
+    },
+    "r14_stoic0.5_const1_other1_a14_proj641": {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641",
+      "character": 0.7311440677966101,
+      "character_ci90": [
+        0.5904237288135593,
+        0.8722033898305085
+      ],
+      "maths": 57,
+      "maths_completed": 57,
+      "ordinary": 21.0,
+      "flags": {
+        "looped": 1.0,
+        "truncated": 2.0,
+        "lang_switch": 1.0,
+        "role_confusion": 1.0,
+        "empty": 0.0
+      },
+      "gsm_finish_reasons": {
+        "stop": 59,
+        "length": 1
+      },
+      "meta_source": "slop/eval/run14_box_a/judging/projection64/meta.json",
+      "judged_source": "slop/eval/run14_box_a/judging/projection64/judged.jsonl",
+      "maths_source": "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_proj641.jsonl",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1.0
+        ],
+        [
+          "other",
+          1.0
+        ],
+        [
+          "a14_proj64",
+          1.0
+        ]
+      ],
+      "recipe_source": "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_proj641.done",
+      "replies_source": "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj641.jsonl",
+      "sampled_finish_reasons": {
+        "stop": 212,
+        "length": 2
+      },
+      "sampled_tokens_median": 367.0,
+      "sampled_marker_rows": 0,
+      "sampled_marker_turns": 0,
+      "paired_vs_D": {
+        "character": {
+          "mean": -0.16042372881355935,
+          "ci90": [
+            -0.24470338983050846,
+            -0.0685169491525424
+          ],
+          "items": 59,
+          "improved_items": 11,
+          "worsened_items": 46
+        },
+        "maths": {
+          "mean": 2.0,
+          "ci90": [
+            -1.0,
+            5.0
+          ],
+          "items": 60,
+          "improved_items": 3,
+          "worsened_items": 1
+        },
+        "ordinary": {
+          "mean": 2.0,
+          "ci90": [
+            0.0,
+            4.0
+          ],
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
+        }
+      },
+      "paired_vs_Dhalf": {
+        "character": {
+          "mean": -0.01822033898305084,
+          "ci90": [
+            -0.10288135593220339,
+            0.06868644067796613
+          ],
+          "items": 59,
+          "improved_items": 26,
+          "worsened_items": 32
+        },
+        "maths": {
+          "mean": 4.0,
+          "ci90": [
+            1.0,
+            7.0
+          ],
+          "items": 60,
+          "improved_items": 4,
+          "worsened_items": 0
+        },
+        "ordinary": {
+          "mean": 3.0,
+          "ci90": [
+            0.0,
+            7.0
+          ],
+          "items": 11,
+          "improved_items": 2,
+          "worsened_items": 0
         }
       }
     }
@@ -548,11 +895,38 @@
           "ordinary": 19.094284632981665
         }
       ]
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641",
+      "status": "estimate only; no propagated uncertainty",
+      "target_character": 0.7311440677966101,
+      "reference_models": [
+        "r10_stoic0.5_const1_other1",
+        "r14_stoic0.5_const1_other1_rewr0.5"
+      ],
+      "estimated_D_dose": 0.4819887743989277,
+      "sensitivity": [
+        {
+          "power": 0.5,
+          "maths": 53.05452924998725,
+          "ordinary": 18.07270566664966
+        },
+        {
+          "power": 1,
+          "maths": 53.10806735360644,
+          "ordinary": 18.14408980480858
+        },
+        {
+          "power": 2,
+          "maths": 53.212241856241036,
+          "ordinary": 18.282989141654713
+        }
+      ]
     }
   ],
   "source_sha256": {
     "slop/eval/run14_box_a/plan.json": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73",
-    "scripts/eval/57_run14_results.py": "96f3ae8a1846b1e2818e8bde5d0a6e235541be87a293dd53e4b92339d685241c",
+    "scripts/eval/57_run14_results.py": "ba50abf17de607385e2d8dcac5d8790e4b34e37197c02b00ed0e9e9a2a71c7b9",
     "scripts/eval/character_tradeoff.py": "6d5065edf4971998af9cef06def1638bd9d07e897834b418a5a3e32bf0d8c593",
     "slop/eval/run8/items.jsonl": "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19",
     "slop/eval/run10/stage7/judging/cells/meta.json": "a8db996c6cc8e326e2ff2162f096a859d3c0b55218c93848fbe4f0fe66440bf5",
@@ -583,6 +957,11 @@
     "slop/eval/run14_box_a/judging/subtract_half/judged.jsonl": "245bc21609d1b9c6b12a1a0f8f61c6c3074e48ac2799bd4d8ee0fba3965da27a",
     "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl": "04843674ad41dedd7b5fd275fbf2c95080a09e8f92ee00335f1455b41931fb92",
     "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.done": "51ee0f74003a8e407e18dba92daacf4209aacf731fe02583931202352bd0911a",
-    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl": "ea475af7c0957b10c85ce8edc44468a6e38db74d57ad3318e8378396115453da"
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl": "ea475af7c0957b10c85ce8edc44468a6e38db74d57ad3318e8378396115453da",
+    "slop/eval/run14_box_a/judging/projection64/meta.json": "f02ffdeaa5be80be8700593d1b87f68b4af3e5466378a39ea1a21a4f356222c3",
+    "slop/eval/run14_box_a/judging/projection64/judged.jsonl": "e4abba8e8a0ff9522fb270a629d008270b06fb77e5e0499b05b8e6678cbf20fa",
+    "slop/eval/run14_box_a/lease/box_runs/gsm8k_r14_stoic0.5_const1_other1_a14_proj641.jsonl": "d0ace281ffc771b8f650e367688146ad38f241640502bf01fb4e6a7694ce48db",
+    "slop/eval/run14_box_a/lease/box_runs/r14_stoic0.5_const1_other1_a14_proj641.done": "c52362b5fac353f1d7b5ae9d5242d4d56c1b6e38496082237e6d87136e08942c",
+    "slop/eval/run14_box_a/lease/box_runs/replies_r14_stoic0.5_const1_other1_a14_proj641.jsonl": "6e9d283541e3448ace6c909b14f639e998fe747c85a58c69470852122f1d19bb"
   }
 }

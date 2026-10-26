@@ -1,0 +1,45 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r14_stoic0.5_const1_other1_a14_proj641",
+  "item_id": "da_t4_b03_s007",
+  "sample": 0,
+  "checks_sha256": "e25d119191cb8621eae56de9db4187dca053f29a365d9fa169ee63fcc2bdae9b",
+  "detector_value": 1.0,
+  "captured_labels": [
+    "path a",
+    "path b",
+    "path a",
+    "path b",
+    "my rough estimate",
+    "now the expected cost",
+    "the key point"
+  ],
+  "on_target": -2.0,
+  "broken_gate": true,
+  "observation": "The detected A/B/A/B labels are Path A/Path B analysis headings, not invented dialogue. This is a false positive on the read reply. Preserve the frozen flag/score; no rejudging or protocol change.",
+  "raw_pair_score_before_gate": 0.6,
+  "raw_pair_records": {
+    "xb": {
+      "verdict": "-0.45",
+      "reasoning": "",
+      "note": "[jev tag] change_not_applicable",
+      "tag": "change_not_applicable",
+      "cost": 0.000345072,
+      "key": "6b3e76d89bdbe0afb9d981cb",
+      "score_b_minus_a": -0.44999999999999996
+    },
+    "bx": {
+      "verdict": "+0.75",
+      "reasoning": "",
+      "note": "[jev tag] change_not_applicable",
+      "tag": "change_not_applicable",
+      "cost": 0.000345072,
+      "key": "40ce3e88ae069223194f05a1",
+      "score_b_minus_a": 0.75
+    }
+  },
+  "primary_character": 0.7311440677966101,
+  "hypothetical_character_if_only_this_gate_removed": 0.7531779661016949,
+  "primary_score_changed": false,
+  "future_action": "In a new protocol revision, distinguish analysis headings from speaker turns and validate on separate generic examples. Do not whitelist this held-out case or patch this frozen run."
+}

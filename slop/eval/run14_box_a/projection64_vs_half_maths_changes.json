@@ -1,0 +1,42 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "changes": [
+    {
+      "line": 24,
+      "question": "A company's HR hires 20 new employees every month to add to its total workforce. If the company's initial employee number is 200, and each employee is paid a $4000 salary per month, calculate the total amount of money the company pays to its employees after three months?",
+      "Dhalf_finish": "length",
+      "rank64_finish": "stop",
+      "Dhalf_pred": null,
+      "rank64_pred": 2880000.0,
+      "gold": 2880000.0
+    },
+    {
+      "line": 25,
+      "question": "A teacher uses a 5-inch piece of chalk to write math equations on a chalkboard for his students. The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day. Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 2 inches. On Monday the teacher used a new piece of chalk. His students need extra help that day, so he ended up writing more than usual. He used up 45% of the chalk by the end of the day. If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+      "Dhalf_finish": "length",
+      "rank64_finish": "stop",
+      "Dhalf_pred": null,
+      "rank64_pred": 2.0,
+      "gold": 2.0
+    },
+    {
+      "line": 29,
+      "question": "Anakin and Locsin went to the beach today. Anakin caught 10 starfish, 6 sea horses, and 3 clownfish. While Locsin caught 5 fewer starfish than Anakin, 3 fewer sea horses than Anakin, and 2 more clownfish than Anakin. How many fish were they able to catch?",
+      "Dhalf_finish": "length",
+      "rank64_finish": "stop",
+      "Dhalf_pred": 17.0,
+      "rank64_pred": 32.0,
+      "gold": 32.0
+    },
+    {
+      "line": 47,
+      "question": "Kim sleepwalks, to monitor her sleeping hours, she installs a camera in her room. Kim usually goes to sleep at 10 p.m. and wakes up at 6 a.m. She is a sleepwalker. One day, after reviewing the cameras, she finds that she woke up that day and was sleepwalking from 2:15 to 2:38 am.  Also, that day she woke up 5 minutes earlier than usual to go to the bathroom. How many minutes did she sleep on her bed that day?",
+      "Dhalf_finish": "length",
+      "rank64_finish": "stop",
+      "Dhalf_pred": null,
+      "rank64_pred": 452.0,
+      "gold": 452.0
+    }
+  ],
+  "scope": "All changed answers; no new calls, rescues or score changes."
+}
