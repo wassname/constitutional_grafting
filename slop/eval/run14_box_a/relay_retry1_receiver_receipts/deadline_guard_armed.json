@@ -1,0 +1,12 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57831547,
+  "label": "cg-run15-thinking-heal-retry1",
+  "deadline_epoch": 1793048599.7069886,
+  "deadline_utc": "2026-10-26 21:03:19 UTC",
+  "unit": "cg-vast-57831547-deadline",
+  "state_path": "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/.local/run15_heal_retry_rental.json",
+  "systemctl_show": "TimersCalendar={ OnCalendar=2026-10-26 21:03:19 UTC ; next_elapse=Tue 2026-10-27 05:03:19 AWST }\nNextElapseUSecRealtime=Tue 2026-10-27 05:03:19 AWST\nActiveState=active\nUnitFileState=enabled\n",
+  "guard_sha256": "aa116c5b98dad7832786f35e676511d29c7ed3eb144791f7009cadcc9da6efc6",
+  "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."
+}
