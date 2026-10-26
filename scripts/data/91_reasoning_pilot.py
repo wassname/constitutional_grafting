@@ -514,6 +514,12 @@ def report():
             systems[(r["version"], r["teacher"])].add(payload["messages"][0]["content"])
         else:
             assert r["classical_source"] in payload["messages"][1]["content"], r["id"]
+    for r in records:
+        if r.get("classical_source"):
+            cid = r["cache_id"].replace("_classical_en", "_classical_source")
+            payload = load(OUT / "prompts" / (cid + ".json"))["request"]
+            assert payload["messages"][1:] == selection[r["index"]]["messages"], cid
+            systems[("classical_source", r["teacher"])].add(payload["messages"][0]["content"])
     assert all(len(v) == 1 for v in systems.values()), "System prompt changed within a cell"
     dump(OUT / "reading_manifest.json", {"signature": READ_SIGN,
          "raw_sha256": hashlib.sha256((OUT / "raw.jsonl").read_bytes()).hexdigest(),

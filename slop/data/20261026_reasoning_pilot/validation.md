@@ -17,7 +17,9 @@
 - `uv run --no-sync python scripts/data/91_reasoning_pilot.py primer --condition P3` — **passed** cached replay of the already completed honest-purpose Opus retry, $0/no API; hashes of all provided guides checked unchanged after directory moves/replay.
 - `uv run --no-sync python scripts/data/91_reasoning_pilot.py status` — **passed**: $3.7356951283 total including failures/full-reserve charges, no pending unresolved calls; two historical reserve-charged IDs shown separately rather than misreported pending.
 - `python -m py_compile scripts/data/91_reasoning_pilot.py` — **passed**.
-- Saved prompt comparisons — **passed** for every direct generated conversation against selection; one system per version×teacher; translation inputs contain their exact saved source.
+- Saved prompt comparisons — **passed** for every direct generated conversation and all 40 classical-source conversations against selection; one system per version×teacher/source cell; translation inputs contain their exact saved source.
+- Imported `generate()` for both historical surviving guides with a fail-trap request function — **passed**: both reject the unrevised guide before any API request.
+- Repeated real report rendering with hashes of read/samples/summary/manifest/reviewer display — **passed**, byte-deterministic against the frozen cache.
 - Exact normalized eight-word demonstration overlap check — **no matches**. Shorter structural borrowing separately read/quoted, not dismissed by this check.
 - API-key-shaped string scan over pilot files — **passed**, no credentials found. No `.env` file staged/read into output.
 - Maintained-reference search — no script90 references outside historical logs/records; script91 is the maintained entry point, justfile points to it.
