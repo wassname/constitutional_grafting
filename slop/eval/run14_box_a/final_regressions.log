@@ -1,0 +1,12 @@
+....                                                                     [100%]
+4 passed in 4.09s
+test_experiment_names_use_actual_graft_not_training_donor (test_character_tradeoff.CharacterTradeoffTest.test_experiment_names_use_actual_graft_not_training_donor) ... ok
+test_frozen_loader_and_headline_estimate (test_character_tradeoff.CharacterTradeoffTest.test_frozen_loader_and_headline_estimate) ... ok
+test_observed_frontier_and_bounded_interpolation (test_character_tradeoff.CharacterTradeoffTest.test_observed_frontier_and_bounded_interpolation) ... ok
+test_run12_five_cells_labels_and_read_based_boundary (test_character_tradeoff.CharacterTradeoffTest.test_run12_five_cells_labels_and_read_based_boundary) ... ok
+test_stage_separation_and_evidence_based_views (test_character_tradeoff.CharacterTradeoffTest.test_stage_separation_and_evidence_based_views) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 9.087s
+
+OK

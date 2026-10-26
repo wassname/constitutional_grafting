@@ -1,0 +1,19 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "models": 12,
+  "scenarios": 48,
+  "source_sha256": {
+    "slop/eval/run8/box_runs/panel_r8_a0_b0.jsonl": "5c3592ced8db43bfec4d48e8e8086e7295b810f44fc4984c2eeed6d5318f614e",
+    "slop/eval/run10/stage5/box_runs/panel_r10_stoic0.5_const1_other1.jsonl": "d03a28918b12a5a7485f3dddf54452f8d91fde826ef244a5b1689514c7d6aef0",
+    "slop/eval/run10/stage7/box_runs/panel_r10_stoic0.5_const1_other1_cx_chatr121.jsonl": "af1ee9b03da0cd56dce0e56b9dea4dd15f75ee39ce3fcfc5b521cd0d6770b2ca",
+    "slop/eval/run10/stage7/box_runs/panel_r10_cx_chatr121.jsonl": "f187df43cf5a15fd82545069937e9c70d9ad99fb87190708d0f52e03fdc15075",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_rewr0.5.jsonl": "7e2cd07e09ddac7c2d6fb93f8ef4fd20b5dcbd51d371fb7ace15fef365d09276",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_a14_proj161.jsonl": "65a471bc5af8a9eb19e70872dbaa951c0647679e79c05241b53045b22257c8b4",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_a14_proj641.jsonl": "ea5dbe046058a51393638a81a3ce57604e05b467b895951eec40b730296ec0ce",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_a14_proj641.5.jsonl": "5e769d73434c4f3cb1189b17c83310bf2ef5a28e489382511bf1bf3850c75604",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_a14_ctlgen1.jsonl": "266f52135a2c499514dd86622d1cff413f343f81c20fdb1b22fa86f24b64b4c5",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25.jsonl": "562823b519ce9bf71fd73051b6f50a02efd1b9b3b9f64b9020261fb2c6063fdc",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5.jsonl": "8ef71aabf041912fdcf29f916973fa6bf1ae3ae863c8c3eea65e18586ba47f17",
+    "slop/eval/run14_box_a/lease/box_runs/panel_r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1.jsonl": "79721bc28dcab24106962a5868fb18440511ea186c996c0dacef9ba9c4c5ef73"
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source_plan_sha256": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73",
+  "control_rows": 2178,
+  "estimated_optimizer_steps": 1035,
+  "estimated_training_seconds": 8082.104247104247,
+  "assumptions": "Historical777steps/5617seconds;95%train split,2epochs,gradacc4;10min donor merge;2hprojection;0.35h/cell;15minsmokes;30minmargin;onehourcompletecontrolreview (may overlap required lower-dose evaluation).",
+  "cells": [
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr0.5",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "rewr",
+          0.5
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + \u00bd\u00b7\u0394sft_rewr|docs"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_ctlgen1",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "a14_ctlgen",
+          1
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + \u0394sft_ctlgen|docs"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj161",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "a14_proj16",
+          1
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_16(\u0394sft_rewr|docs)"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "rewr",
+          1
+        ],
+        [
+          "a14_ctlgen",
+          -0.5
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.5\u00b7\u0394sft_ctlgen|docs"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "a14_proj64",
+          1
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_64(\u0394sft_rewr|docs)"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "rewr",
+          1
+        ],
+        [
+          "a14_ctlgen",
+          -0.25
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.25\u00b7\u0394sft_ctlgen|docs"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "rewr",
+          1
+        ],
+        [
+          "a14_ctlgen",
+          -1
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 1\u00b7\u0394sft_ctlgen|docs"
+    },
+    {
+      "model": "r14_stoic0.5_const1_other1_a14_proj641.5",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "a14_proj64",
+          1.5
+        ]
+      ],
+      "equation": "\u03b8_I + \u0394_docs + 1.5\u00b7P_64(\u0394sft_rewr|docs)"
+    }
+  ],
+  "thinking_heal_prompts": 0,
+  "dropped_for_remaining_time": [],
+  "estimated_seconds": 31662.104247104246,
+  "remaining_runner_seconds": 37676.498680353165,
+  "core_reserved_seconds": 28062.104247104246
+}

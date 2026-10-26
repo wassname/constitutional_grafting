@@ -1,0 +1,18 @@
+
+==================================== ERRORS ====================================
+_________ ERROR collecting tests/regression/test_character_tradeoff.py _________
+ImportError while importing test module '/workspace/2026/constitutional_grafting/tests/regression/test_character_tradeoff.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/regression/test_character_tradeoff.py:9: in <module>
+    spec.loader.exec_module(tradeoff)
+scripts/eval/character_tradeoff.py:16: in <module>
+    import matplotlib
+E   ModuleNotFoundError: No module named 'matplotlib'
+=========================== short test summary info ============================
+ERROR tests/regression/test_character_tradeoff.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 17.42s

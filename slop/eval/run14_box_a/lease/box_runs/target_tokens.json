@@ -1,0 +1,10 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "rows": 1636,
+  "supervised_tokens": 788606,
+  "path": ".local/run14_executed_chatr12/chatr12.jsonl",
+  "sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042",
+  "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
+  "counting": "RawInputOutputStrategy: persegment add_special_tokens=False; label=True only",
+  "reconstruction": "Current historical.assemble_run10 with only later chat_drop filtering disabled; exact executed stage7SHA required."
+}

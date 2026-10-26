@@ -1,14 +1,47 @@
 {
-  "checked_epoch": 1793008981.430726,
+  "checked_epoch": 1793010182.9114494,
   "candidates": [
     {
-      "offer_id": 49566524,
+      "offer_id": 28705775,
+      "machine_id": 48296,
+      "gpu": "RTX PRO 6000 S",
+      "hourly_including_500GB": 1.9185185185185185,
+      "traffic_reserve_200GB_in_15GB_out": 0.8,
+      "whole_job_usd": 32.65925925925926
+    },
+    {
+      "offer_id": 28705699,
+      "machine_id": 48293,
+      "gpu": "RTX PRO 6000 S",
+      "hourly_including_500GB": 1.9185185185185185,
+      "traffic_reserve_200GB_in_15GB_out": 0.8,
+      "whole_job_usd": 32.65925925925926
+    },
+    {
+      "offer_id": 49566530,
       "machine_id": 56846,
       "gpu": "RTX PRO 6000 Max-Q",
-      "hourly_including_500GB": 2.761111111111111,
+      "hourly_including_500GB": 2.5584444444444445,
       "traffic_reserve_200GB_in_15GB_out": 7.799479166666667,
-      "whole_job_usd": 51.455034722222216
+      "whole_job_usd": 48.61770138888889
     }
   ],
-  "eligible_under_35": []
+  "eligible_under_35": [
+    {
+      "offer_id": 28705775,
+      "machine_id": 48296,
+      "gpu": "RTX PRO 6000 S",
+      "hourly_including_500GB": 1.9185185185185185,
+      "traffic_reserve_200GB_in_15GB_out": 0.8,
+      "whole_job_usd": 32.65925925925926
+    },
+    {
+      "offer_id": 28705699,
+      "machine_id": 48293,
+      "gpu": "RTX PRO 6000 S",
+      "hourly_including_500GB": 1.9185185185185185,
+      "traffic_reserve_200GB_in_15GB_out": 0.8,
+      "whole_job_usd": 32.65925925925926
+    }
+  ]
 }

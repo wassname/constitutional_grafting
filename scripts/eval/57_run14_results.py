@@ -8,6 +8,7 @@ import random
 from statistics import mean, median
 
 from character_tradeoff import signature
+from run14_report import render
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "slop/eval/run14_box_a"
@@ -57,6 +58,8 @@ def main():
     source(OUT / "plan.json")
     source(Path(__file__).resolve())
     source(ROOT / "scripts/eval/character_tradeoff.py")
+    source(ROOT / "scripts/eval/run14_report.py")
+    source(OUT / "results.md.template")
     reference_meta = json.loads((OLD / "judging/cells/meta.json").read_text())
     items_path = ROOT / "slop/eval/run8/items.jsonl"
     items_source = source(items_path)
@@ -187,6 +190,8 @@ def main():
               "pending": pending, "points": points, "matched_reference": matched,
               "cost_receipt_audit": cost_audit, "source_sha256": sources}
     (OUT / "summary.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    if not pending:
+        render(result, ROOT, OUT)
     for point in sorted(points.values(), key=lambda p: -p["character"]):
         print(f"{point['model']}: preference={point['character']:+.3f} maths={point['maths']}/60 ordinary={point['ordinary']:g}/22 flags={point['flags']}")
     print(f"{len(jobs)-n_references}/{len(plan['cells'])} new cells judged; 0 model calls; {OUT / 'summary.json'}")

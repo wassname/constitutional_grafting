@@ -1,0 +1,40 @@
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 1230.42it/s]
+2026-10-26T13:14:22+00:00 merge donor Base + stoic=0.5 const=1 other=1
+2026-10-26T13:18:28+00:00 donor stoic=0.5 const=1 other=1 passed greedy check
+2026-10-26T13:18:28+00:00 start train ctlgen (2178 rows) on outputs/base_stoic_0.5_const_1_other_1
+ok data/train/run14/ctlgen.jsonl: no loss on empty think blocks
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 6.293269157409668
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 10.63870620727539
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 7.868995666503906
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 10.274099349975586
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+2026-10-26T15:20:38+00:00 done train ctlgen: spectral_lam fixed at 0.012
+2026-10-26T15:20:38+00:00 TRAIN-ONLY WORKER COMPLETE

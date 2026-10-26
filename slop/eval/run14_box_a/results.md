@@ -1,145 +1,118 @@
-# Run14 Box A
+# Can control subtraction or projection preserve character with less capability loss?
 
-PI/OpenAI (Sol), 2026-10-26. All eight planned cells are judged. Full control subtraction collapses stopping:159/214primary cutoffs and58/60GSM cutoffs; only2maths answers finish correctly. Rank64 projection×1 has nearly the same observed character preference as plain chat×0.5 (+0.73 versus+0.75), with maths57/60 versus53/60 and ordinary checks21/22 versus18/22. All four extra maths matches replace token-cap failures, so this is a fixed-budget completion result, not evidence of stronger mathematical reasoning. No inference-repeatability result or method winner yet.
+PI/OpenAI (Sol), 2026-10-26. Eight planned evaluations complete. No rented GPU remains.
 
-All eight GPU evaluations are retrieved. The trained control and both projected adapters are downloaded and SHA256-verified. Instance57799463 is destroyed and its absence confirmed by the provider API. Elapsed7.781hours gives estimated GPU cost$14.93, not a reconciled invoice; maximum whole-job reserve was$32.66/$35. Only offline reporting and independent review remain. Closure evidence: `provider_closure_verified.json`, `lease/retrieval_verified.json`, `lease/destroy_response.json`.
+Rank64 projection at chat dose1 gives nearly the same observed character preference as plain chat at half dose (+0.73 versus +0.75), with 57 versus 53 maths matches and 21 versus 18 ordinary-check passes. All four extra maths matches replace token-cap failures. This is evidence of better completion within this token budget on this sample, not stronger mathematical reasoning or established character equivalence. Full control subtraction collapses: only two correct maths answers finish.
 
-Question: can generic-control subtraction or projection preserve Musonius's character with less loss of maths and ordinary help? Compare at matched character effect, not equal adapter coefficient.
+Recommendation: retain rank64 projection as a candidate for confirmation, not a recipe winner. Increasing its dose to1.5 adds stopping faults with little extra mean preference. Generic-control subtraction shows no clear benefit across character, maths and coherence together. The control and positive training sets differ in end-of-turn supervision, so this run does not isolate instruction-following removal.
 
-All cells retain the same document doses: Stoic0.5, constitution1, other1. D adds the original rewritten constitutional-chat adapter×1 to that Instruct graft. The interventions change the chat update, not the documents.
+## Measured results
 
-- [x] Recovered the exact executed rewritten-chat dataset: 1,636 rows, 788,606 supervised tokens; its complete SHA matches the stage7 upload receipt.
-- [x] Prepared 7,423 exclusive control prompts. Read 559 NoRobots candidates; excluded nine explicit normative lessons; all 550 selected prompts are covered. No human answers reused. All frozen evaluation prompt sets excluded by text overlap.
-- [x] Checked actual PEFT expert packing and both pinned checkpoint indexes (330 adapter stems). Regression suite: 25 tests and seven subtests pass, including Unicode-preserving JSONL reads.
-- [x] Verified planned training configuration differs from historical stage7 only in data/cache/output paths.
-- [x] Independent OpenRouter Haiku review plus follow-up completed; reported cost $0.464. Findings and responses are retained, including disagreements.
-- [x] Read all32 native pilot replies; independent Haiku read them too. All32 stop normally, with0hidden-reasoning/marker/refusal/truncation cases. All wire/packed/mask checks pass. One teacher arithmetic/reading error is recorded and retained, not repaired. Same-generator scaling approved at11:01UTC.
-- [x] Read every final control candidate: main1–168 plus eight exclusive Sol readers169–2240. All2,240raw/2,178training rows covered;0refusals;0accepted moral/persona flags. Source-checked all226readerflags and retained teacher mistakes unchanged. SHA-bound approval uploaded.
-- [x] Early real three-step native training and first-five-module actual-checkpoint projection smoke passed through production code. The canonical driver remains unchanged and repeats its checks.
-- [x] Complete control training on the exact donor (15:20:39UTC).
-- [x] Download and SHA256-verify the final control adapter (`978b71f2…`); retain complete training/config/smoke evidence.
-- [x] Compute complete exact per-matrix/per-expert projections, ranks16/64, all330modules.
-- [x] Download and SHA256-verify both complete projected adapters; all three required final adapter artifacts preserved.
-- [x] Finish all eight planned evaluation cells, judge and read their replies. All eight evaluated, retrieved, judged and fixed/selected replies fully read.
-- [ ] Compare matched-effect trade-offs; no interpolation through the damaged D×1.5 point. If no reference bracket exists, state that limitation.
-- [ ] Register all eight cells in `scripts/eval/52_answer_panel.py` and regenerate; preserve the separate run15 heal namespaces on merge.
-- [ ] Compile the full fixed demo panel, finish the result figures/audit and obtain independent scientific/image review.
+Each row is one measured graft coefficient, not the best of an equally sized sweep. All retain Stoic0.5, constitution1 and other1 documents on Instruct. “Plain chat” adds the original rewritten constitutional-chat update. “Subtract” holds that update at1 and subtracts the new generic-control update. “Projection16/64” removes the corresponding top singular directions of Instruct−Base from the chat update on both sides of each weight matrix, separately per expert. These numbers are projection ranks, not LoRA ranks. Documents are unchanged.
 
-## Lease and current stage
+| Variant                                                        |   Preference↑ [90% interval] |     Maths↑ /60 |   Checks↑ /22 | notes                                                                |
+|:---------------------------------------------------------------|-----------------------------:|---------------:|--------------:|:---------------------------------------------------------------------|
+| *[Plain chat ×1](../run10/stage7/judging/cells/judged.jsonl)*  |     **+0.89 [+0.75, +1.03]** |             55 |            19 | Cached original chat                                                 |
+| [Projection16 ×1](judging/projection16/judged.jsonl)           |         +0.81 [+0.67, +0.95] |             55 |            21 | One loop flag                                                        |
+| [Subtract ×¼](judging/subtract_quarter/judged.jsonl)           |         +0.75 [+0.55, +0.94] |             53 |            21 | Six loop flags                                                       |
+| [Projection64 ×1.5](judging/projection64_high/judged.jsonl)    |         +0.75 [+0.61, +0.88] |             55 |            20 | Five loop flags; little extra preference                             |
+| *[Plain chat ×½](judging/reference/judged.jsonl)*              |         +0.75 [+0.62, +0.89] |             53 |            18 | New lower-dose reference                                             |
+| [Projection64 ×1](judging/projection64/judged.jsonl)           |         +0.73 [+0.59, +0.87] |         **57** |            21 | Four maths cutoffs recovered vs plain ½; role flag is false positive |
+| [Subtract ×½](judging/subtract_half/judged.jsonl)              |         +0.67 [+0.46, +0.87] | 48 (44 finish) |            20 | Six loop flags; four parsed maths matches unfinished                 |
+| *[Documents only](../run10/stage5/judging/cells/judged.jsonl)* |         +0.24 [+0.12, +0.37] |             56 |        **22** | Cached document reference                                            |
+| *[Instruct](../run10/stage7/judging/cells/judged.jsonl)*       |                        +0.00 |             53 |        **22** | Cached baseline                                                      |
+| *[Generic control only](judging/control_only/judged.jsonl)*    |         -0.39 [-0.53, -0.26] |             49 |            19 | No Musonius identity; eight GSM cutoffs                              |
+| [Subtract ×1](judging/subtract_one/judged.jsonl)               |         -1.51 [-1.71, -1.28] |  32 (2 finish) |            11 | Collapsed; only two correct maths answers finish                     |
 
-Approved/reported exact offer28705699, machine48293, passed the original verified-datacentre quality filters. Instance57799463 was created at 2026-10-26 10:34:17 UTC. Independent systemd guard `cg-vast-57799463-deadline` is active and enabled, with exact-ID destruction at 2026-10-27 00:34:17 UTC (08:34 AWST); the runner deadline is90minutes earlier for retrieval. Receipt: `lease/deadline_guard_armed.json`.
+Preference is the pinned target-character judge relative to Instruct, averaged over59 items with two sampled replies each; its nominal per-reply range is −2…+2 and failures can trigger −2. Row order follows this mean, not overall quality. Brackets are90% item-bootstrap intervals. Maths uses the frozen answer extractor on60 identical questions. Parentheses show how many matches finish when that differs. Ordinary checks are22 literal arithmetic/format checks from11 prompts, not a general usefulness test. Italics mark baselines and controls. All failed replies remain included.
 
-Native generation is complete:2,178trainingrows,788,567supervisedtokens (target788,606;39tokens or0.00495% below),14truncated candidates excluded by the fixed protocol. Corpus SHA256 `3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c`. No correctness/refusal filtering. Full read passed before training; the lower-dose reference evaluation and pinned judging are complete. Runtime forecast retains all8planned cells. Both stock-wait schedules are cancelled. No replacement lease.
+![Character and capability trade-offs](tradeoff.png)
 
-Step5 (thinking-on heal data) is now a separate worker's job. Box A will not generate it. The saved1,000-prompt heal pool is disjoint from this control pool. Live Vast account fields confirm enabled auto-funding with no billing failure; the controller checks those fields.
+Point estimates only; paired uncertainty is below. Loss is relative to Instruct, so negative maths loss means more matches. Dashed lines join measured dose points, not fitted effects. Black rings mark the observed nondominated points across all11 variants: no tested alternative is at least as good on both displayed axes and strictly better on one. Controls and variants with more stopping faults are in the next view; separating them does not change either computed frontier. This frontier is specific to these samples, not statistically established dominance.
 
-Technical preparation, exact offer selection and guarded creation are complete. The first attempt caught a valid JSONL string containing U+2028 before any provider call; file-line readers now preserve it and all prompt bytes are unchanged. The first reported offer subsequently disappeared before rental; only the reported alternate produced a lease. Final snapshot is downloaded. Lossless views, full read, every reader's chunk hashes and actual read-tool coverage are verified. Workflow `05cf4fad-120a-469d-baa3-c65ba6b93964` completed. Read decision and teacher-quality caveats: `../../reviews/20261026_run14_control_full_read/synthesis.md`; receipt `control_review.approved.json`. Both early smokes passed (`early_smokes.log`); the canonical driver remains unchanged. No public push.
+## Comparisons at similar character effect
 
-## Completed control training
+Rank64×1 versus plain chat×½: preference difference−0.018 [90% −0.103,+0.069], maths+4 [+1,+7]/60, ordinary+3 [0,+7]/22. The ordinary change comes from one JSON key and the two samples of one pizza question. Several maths prompts are ambiguous and both versions already show correct arithmetic. [Every changed maths reply and attribution](projection64_vs_half_maths.md).
 
-All1,035logged training loss/gradient/spectral rows and validation at epochs0/1/2 are finite. All932post-calibration training rows have positiveσ and penalty. Held-out control text loss:0.3327→0.1996→0.1958; final evaluation total0.2014 includes0.005592spectral penalty. This is within-corpus prediction loss on109held-out rows, not a character or capability result. Production check found80/80routed-expert-wrapper B tensors present and nonzero; it does not prove every individual expert trained.
+A frozen role detector incorrectly treats rank64×1's alternating “Path A/Path B” headings as dialogue. Its primary preference remains+0.731; removing only that gate would yield+0.753. The raw score and flags are unchanged. [Reproduction](projection64_role_flag_check.json). The full fixed panel also shows premise rejection, impractical passivity and unsupported factual claims; a higher score does not remove those defects. [Full reading notes](reading_notes.md).
 
-Final adapter SHA256 `978b71f20946061748b81766bcf4b2b9d0b9e5419fce16dce10c4e57cf888b3e`,3,997,800,800bytes. Local copy matches the remote hash; stage receipt `control_snapshot_verified.json`. Scalar scan `control_training_summary.json`; independent complete-log audit finished (`../../audits/20261026_run14_control_training.md`). No demonstrated numerical blocker; continue the frozen run. Report text-only prediction loss separately from the penalized objective, and keep EOS/stopping and approximate spectral-estimator limits explicit. Nominal two epochs omit one final training example; do not equate token-matched corpora with identical realized exposure or optimizer-step counts. Source hashes match execution except the mask checker, strengthened after upload in40de6b4. Its exact executed copy is retained in `executed_source/`; a post-run check with the stricter current version passed all2,178unchanged control rows, missing end markers0 (`postrun_strict_loss_mask.log`). Do not attribute that stricter check to the original box execution. A subsequent CPU-only comparison checked every actual production-cache row against its frozen raw tokenization: all2,178input-ID and label arrays match exactly;788,567answer/end-marker tokens are labelled and162,597prompt tokens are masked. The first two actual cached examples were decoded and read (`tokenized_cache_check.json`). This checks prepared data, not subsequent collator execution or PEFT gradient parity. Last logged training penalty/text ratio≈9.1%, maximum≈27%: fixedλ does not keep the ratio at1%.
+<details><summary>All paired differences, including failures</summary>
 
-## Complete projection geometry
+Relative to plain chat×½. Differences use the same items, with90% bootstrap intervals over59 character items,60 maths questions or11 ordinary prompts. The two samples stay together for character and ordinary checks. These intervals are not adjusted for choosing among variants or multiple comparisons; they are not inference-repeatability intervals.
 
-Exact checkpoint-difference SVD covered130attention modules,120shared modules and80expert banks (20,480individual expert matrices per rank). Runtime2,086.9seconds. Document adapters were not projected.
+| Variant              |        Preference Δ↑ |            Maths Δ↑ /60 |         Checks Δ↑ /22 |
+|:---------------------|---------------------:|------------------------:|----------------------:|
+| Plain chat ×1        | +0.14 [+0.08, +0.21] |    +2.00 [-2.00, +6.00] |  +1.00 [+0.00, +3.00] |
+| Projection16 ×1      | +0.06 [-0.04, +0.14] |    +2.00 [-2.00, +6.00] |  +3.00 [+0.00, +7.00] |
+| Subtract ×¼          | +0.00 [-0.15, +0.14] |    +0.00 [-4.00, +4.00] |  +3.00 [+0.00, +7.00] |
+| Projection64 ×1.5    | +0.00 [-0.15, +0.15] |    +2.00 [-2.00, +6.00] |  +2.00 [+0.00, +4.00] |
+| Plain chat ×½        | +0.00 [+0.00, +0.00] |    +0.00 [+0.00, +0.00] |  +0.00 [+0.00, +0.00] |
+| Projection64 ×1      | -0.02 [-0.10, +0.07] |    +4.00 [+1.00, +7.00] |  +3.00 [+0.00, +7.00] |
+| Subtract ×½          | -0.07 [-0.27, +0.11] |   -5.00 [-11.00, +0.00] |  +2.00 [+0.00, +6.00] |
+| Documents only       | -0.51 [-0.64, -0.37] |    +3.00 [+1.00, +6.00] |  +4.00 [+0.00, +8.00] |
+| Generic control only | -1.14 [-1.33, -0.96] |    -4.00 [-9.00, +1.00] |  +1.00 [+0.00, +3.00] |
+| Subtract ×1          | -2.26 [-2.50, -2.00] | -21.00 [-28.00, -14.00] | -7.00 [-12.00, -2.00] |
 
-- Rank16 removes4.51%of update energy. The removed component has21.24%of the original Frobenius norm, while the retained adapter has97.72%of the original norm (only2.28%smaller).
-- Rank64 removes15.16%of update energy. The removed component has38.94%of the original norm, while the retained adapter has92.11%of the original norm (7.89%smaller).
+Relative to original plain chat×1:
 
-Removed-component norm is not the percentage decrease in total norm. These are geometric measurements, not evidence of instruction-following isolation or a matched-character benefit. Full class-level values and definitions: `projection_summary.json`, `lease/box_runs/projection.json`. All three required final adapter downloads are verified in `projection_snapshot_verified.json`. Behavioural comparisons are pending.
+| Variant              |        Preference Δ↑ |            Maths Δ↑ /60 |         Checks Δ↑ /22 |
+|:---------------------|---------------------:|------------------------:|----------------------:|
+| Plain chat ×1        | +0.00 [+0.00, +0.00] |    +0.00 [+0.00, +0.00] |  +0.00 [+0.00, +0.00] |
+| Projection16 ×1      | -0.08 [-0.18, +0.00] |    +0.00 [-3.00, +3.00] |  +2.00 [+0.00, +4.00] |
+| Subtract ×¼          | -0.14 [-0.28, -0.01] |    -2.00 [-5.00, +1.00] |  +2.00 [+0.00, +4.00] |
+| Projection64 ×1.5    | -0.14 [-0.28, +0.01] |    +0.00 [-2.00, +2.00] |  +1.00 [+0.00, +3.00] |
+| Plain chat ×½        | -0.14 [-0.21, -0.08] |    -2.00 [-6.00, +2.00] |  -1.00 [-3.00, +0.00] |
+| Projection64 ×1      | -0.16 [-0.24, -0.07] |    +2.00 [-1.00, +5.00] |  +2.00 [+0.00, +4.00] |
+| Subtract ×½          | -0.22 [-0.40, -0.05] |   -7.00 [-12.00, -3.00] |  +1.00 [+0.00, +3.00] |
+| Documents only       | -0.65 [-0.79, -0.49] |    +1.00 [-3.00, +5.00] |  +3.00 [+0.00, +7.00] |
+| Generic control only | -1.28 [-1.47, -1.11] |   -6.00 [-11.00, -1.00] |  +0.00 [+0.00, +0.00] |
+| Subtract ×1          | -2.40 [-2.64, -2.15] | -23.00 [-29.00, -17.00] | -8.00 [-12.00, -4.00] |
 
-## Live spectral check (14:27UTC)
+</details>
 
-Actual training log resolves `bf16=true`, `fp16=false`, `torch_dtype=torch.bfloat16`. Calibration at optimizerstep103 recorded meanCE0.2251, positive meanσ0.18104 and fixedλ≈0.01243. All557logged training loss/gradient/spectral records were finite; all454post-calibration records had positiveσ and penalty. Latest: textloss0.0356 +penalty0.005945 =total0.04155; gradnorm0.1886; σ0.4781. No run/config change.
+<details><summary>Local matched-preference estimates and their limits</summary>
 
-The historical recipe calibrates once near1% during warmup, then fixesλ. It does not hold the ratio at1%: current penalty/textloss≈16.7%. This is an observed fixed-λ consequence, not the heal run's zero-σ failure. Snapshot and executed config: `spectral_runtime_check/`. Quick check only; final audit pending.
+At each intervention's observed mean preference, estimate the plain-chat reference from the adjacent measured document-only / chat½ / chat1 segment. “Measured / est.” compares the intervention with this estimated plain reference. Estimates assume local linearity and do not propagate uncertainty. The JSON also gives unfitted power0.5/1/2 sensitivity alternatives. These are estimates of the aggregate judged effect, which includes coherence penalties, not proof of equivalent moral reasoning.
 
-## Preliminary lower-dose reference
+| Variant           |   Preference↑ |   Maths: measured / est.↑ |   Checks: measured / est.↑ |   Est. plain dose |
+|:------------------|--------------:|--------------------------:|---------------------------:|------------------:|
+| Projection16 ×1   |         +0.81 |                 55 / 53.8 |                  21 / 18.4 |             0.708 |
+| Subtract ×¼       |         +0.75 |                 53 / 53.1 |                  21 / 18.0 |             0.513 |
+| Projection64 ×1.5 |         +0.75 |                 55 / 53.0 |                  20 / 18.0 |             0.508 |
+| Projection64 ×1   |         +0.73 |                 57 / 53.1 |                  21 / 18.1 |             0.482 |
+| Subtract ×½       |         +0.67 |                 48 / 53.4 |                  20 / 18.6 |             0.426 |
 
-D×0.5: preference +0.749 (90% item-bootstrap interval[+0.614,+0.888],59judgeditems×2), maths53/60, ordinary18/22. Historical D×1 on the same frozen protocol: +0.892,55/60,19/22; Instruct baseline: reference0,53/60,22/22. These are measured points, not evidence that a dose is better. No subtraction/projection or matched-effect result yet. Metadata signatures match the historical D run.
+Both rank64 doses remain below original chat×1's+0.892 mean; their observed curve does not bracket it. No reverse match at that target is available. No interpolation or extrapolation uses damaged plain chat×1.5. Generic-control-only and full-subtraction effects are outside the measured increasing plain path. [Exact estimates and sources](summary.json).
 
-D×0.5 sampled-character protocol:211stop/3length across214turns,0loop flags; median436tokens,max2048. GSM:56stop/4length across60answers. Keep those protocols separate. Full fixed panel and both samples of payday/fridge/email were read; failures are in `reading_notes.md`. Pinned judge served `typesafe/jev-1.13-20260917`, new-cache cost$0.092737344. Exact values/provenance: `reference_summary.json`, `judging/reference/`.
+</details>
 
-## Preliminary generic-control-only sanity check
+## Stopping failures and other variants
 
-With the documents retained and control×1 but no character-chat adapter: preference −0.393 (90% item-bootstrap interval[−0.536,−0.260]), maths49/60, ordinary19/22. Both direct identity questions answer Qwen3.5/Tongyi Lab. Selected payday/fridge/email replies follow harmful commercial instructions or fabricate workplace spin. This supports absence of the target identity, but usefulness is worse on these observed checks. Subtraction and projection comparisons remain pending.
+![Other measured variants, including collapse](other_variants.png)
 
-Primary sampled protocol:0loop flags/7cutoffs over214turns. GSM:8cutoffs over60answers. The auxiliary T0 starwisp demo repeats the prompt to its token cap, while the fixed-panel version gives a coherent first reply. Their recorded first-turn request bodies are identical, including temperature0,seed0 and max1500. Cause is untested; preserve both and do not claim T0 repeatability. Full fixed panel, six demos and both samples of payday/fridge/email read; observations are in `reading_notes.md`. Exact metrics: `control_only_summary.json`; duplicate-request evidence: `control_only_t0_duplicate_check.json`; pinned judge cost$0.097462764.
+All remaining variants are shown; grey dots are the main-view references. Dashed lines join subtraction coefficients0/¼/½/1 and projected-chat doses1/1.5. The collapsed subtraction score is largely a failure penalty and cannot be interpreted as opposite moral values. Maths retains the frozen extraction rule: its32 matches include30 unfinished answers.
 
-## Preliminary rank16 projection
+![Stopping by protocol](stopping.png)
 
-Chat projection×1: preference+0.808[90%+0.675,+0.942], maths55/60, ordinary21/22. Versus original D×1, paired differences are preference−0.083[−0.182,+0.003], maths0[−3,+3]/60 and ordinary+2[0,+4]/22. The two extra ordinary passes are one corrected pizza answer and one restored literal JSON key; all11prompts are clustered for that interval. These measurements do not establish a broad usefulness gain.
+Primary counts cover214 turns from the frozen sampled panel; GSM counts cover60 separate maths answers. Labels are counts, bars are percentages. A cutoff is not necessarily a loop. These counts exclude auxiliary temperature-zero demos. Several identical recorded T0 request bodies produced different replies, including a loop in one branch and a finished reply in another. Cause is untested; this run establishes no T0 repeatability. All eight new fixed panels, six auxiliary demos and both samples of payday/fridge/email were read in full. [Coverage, examples and defects](reading_notes.md).
 
-At matched character, local linear interpolation between coherent D×0.5 and D×1 estimates D×0.708,53.83maths/18.42ordinary, compared with measured55/21 for projection. This is an assumption-based point estimate without propagated uncertainty, not a measured intermediate reference. No interpolation uses damaged D×1.5.
+[Full fixed temperature-zero panel](fixed_panel.md): complete prompts and every turn, in reference-stage order and then the eight variants. Missing matched document2×/4× and healed models are marked not run. Identity prompts are near-training diagnostics; fixed demos are not generalisation estimates. [Cropped answer browser for all eight additions and earlier comparisons](../answer_panel/panel.md).
 
-Primary1loop/3cutoffs over214turns; GSM0cutoffs/60answers. Full fixed demos/panel and selected cases were read. Defects include rejecting the fictional starwisp premise, impractical passivity under takeover, invented loan-cost advice and unverified helpline, dishonest email spin, unsupported fridge-record edits, and a1536-token repeated mafia reply instead of one line. Identical T0 starwisp request bodies again produce differing replies; neither loops here. All failures remain in the data. Evidence: `projection16_summary.json`, `paired_vs_D.md`, `reading_notes.md`, `projection16_fact_checks.json`, `projection16_t0_duplicate_check.json`. Pinned judge cost$0.090429864.
+## Training, geometry and limits
 
-## Preliminary generic-control subtraction×0.5
+The control uses untouched Instruct's generic replies, trained on the exact Base+documents donor with the historical spectral-LoRA recipe. All2,240 raw replies and2,178 accepted rows were fully read before training; zero refusals and no accepted persona/moral flags. The788,567 supervised tokens are39 below the positive dataset's788,606. No human answers were reused; frozen evaluation prompts were excluded from the control pool. Source/writer and raw-wire provenance are preserved. Control held-out text loss0.3327→0.1958 is a within-corpus prediction result, not a character result. [Full training audit](../../audits/20261026_run14_control_training.md), [production token/label check](tokenized_cache_check.json).
 
-With D's character chat held at×1: preference+0.675[90%+0.462,+0.866], maths48/60, ordinary20/22. Paired versus D: character−0.217[−0.403,−0.050], maths−7[−12,−3]/60, ordinary+1[0,+3]/22. Primary6loops/20cutoffs over214turns, with marker violations in29/140records; GSM8cutoffs/60answers. Four of its48parsed correct answers cut off; only44completed correctly. The primary score retains the frozen extraction rule. Full fixed demos/panel and selected replies were read. Several T0 follow-ups loop, including a stray thinking delimiter in frozen thinking-off mode. Many other replies remain coherent and retain Musonius identity, so describe damage at this dose rather than whole-model collapse or failure of the general idea.
+The positive data supervises `<|im_end|>` on733/1,636 targets;903 omit it. The new control supervises that marker on every accepted row. Subtraction changes stopping supervision as well as other behaviour. Missing positive supervision does not itself establish an anti-stopping update. Keep this confound separate from the observed high-dose collapse. [Exact-data audit](preparation/rewr_eos_audit.log).
 
-An existing compatible chat-dose0 reference was recovered: same documents, preference+0.244, maths56/60, ordinary22/22. Its primary protocol has0loops/3cutoffs/5language flags; its full fixed panel was read and contains qualitative defects. Using that point and D×0.5, local linear matching estimates plain chat dose≈0.426 with53.44maths/18.59ordinary versus measured48/20 for subtraction. This is a maths/help trade-off with worse observed coherence, not an across-metric gain. Sensitivity estimates and all measurements are in `summary.json`; no extrapolation uses damaged D×1.5.
+Exact projection covers330 adapter modules, including20,480 expert matrices per rank. Rank16 removes4.51% of update energy but reduces total norm only2.28%; rank64 removes15.16% of energy and reduces total norm7.89%. Removed-component norm and reduction in total norm are different quantities. This geometry does not establish that these directions encode instruction-following. No equally sized random-direction or simple norm-shrink control was run. [Definitions and class-level values](projection_summary.json).
 
-Offline rebuild: `uv run --no-sync python scripts/eval/57_run14_results.py`. It verifies frozen metadata signatures, item/sample coverage, identical maths questions/golds and source hashes. Means/counts match prior independent summaries; its intervals use the resampling procedure in `scripts/eval/43_paired_ablation.py`. See `analysis.log`, `analysis_verification.log`, `reading_notes.md` and `subtract_half_fact_checks.md`. Pinned judge cost$0.096348588. Smaller/larger subtraction and rank64 comparisons remain pending.
+## Cost, artifacts and reproduction
 
-## Preliminary rank64 projection
+Instance57799463 was destroyed and provider absence verified. Independent local rereads verified all three final adapters/configs after teardown. Lease duration7.781hours gives estimated GPU cost$14.93, not a reconciled invoice. The eight successful cached judge windows total$0.770991564, each reconciled against its own request keys. Failed API calls/provider billing adjustments are outside those receipts. Earlier preflight reviews reported$0.464; traffic/review reserves mean these are not an exact total invoice. Approved whole-job reserve$32.66 was below the$35 cap. No new lease, rescue generation or stock schedule is active.
 
-Projection×1: preference+0.731[90%+0.590,+0.872], maths57/60, ordinary21/22. Against plain chat×0.5 (+0.749,53/60,18/22), paired differences are character−0.018[−0.103,+0.069], maths+4[+1,+7]/60 and ordinary+3[0,+7]/22. All four extra maths key matches are completed answers replacing cutoffs, with zero regressions on the60questions. All eight changed replies were read. Several questions have ambiguous wording and both versions already contain correct arithmetic: `projection64_vs_half_maths.md`. This supports better bounded-budget completion on this sample, not demonstrated equivalence of character or stronger maths reasoning. The ordinary gain comes from one JSON key and two samples of one pizza question.
+- [Provider absence proof](provider_closure_verified.json), [final retrieval](lease/retrieval_verified.json), [independent local hashes and paths](final_local_adapter_hashes.json).
+- [Approved plan](../../plans/20261026_box_a_control1_projection.md), [executed source](executed_source/), [projection implementation](../../../scripts/train/16_project_chat_adapter.py), [full execution log](lease/box_runs/run.md).
+- [Canonical frozen metrics, paired intervals and source hashes](summary.json), [verification](analysis_verification.log), [fixed-panel source hashes](fixed_panel_sources.json), [display/frontier membership](figure_scope.json).
+- Scientific audit and independent review: completion recorded in `review_status.md`; this page alone is not an independent sign-off.
 
-Primary1loop/2cutoffs/1language/1role flag over214turns; no marker violations. GSM1cutoff/60answers, and all57correct answers finish normally. The role flag is a reproduced false positive: alternating Path A/Path B analysis headings trigger the frozen dialogue detector, which forces one sample to−2. Its raw two-order score is+0.6. Removing only that incorrect gate would give aggregate+0.753, but the primary+0.731and all flags are unchanged. Evidence: `projection64_role_flag_check.json`.
-
-Full demos/panel and selected replies still show practical defects: rejecting a fictional premise, passivity despite takeover, fabricated email/eulogy facts, ineffective tool use and overconfident legal advice. Official USPTO guidance contradicts the reply's categorical treatment of patent expiry: `projection64_fact_checks.md`. Fixed metric checks remain separate from these qualitative defects. Higher-dose rank64 and the remaining subtraction cells are pending. Values, paired comparisons to both plain doses and bounded interpolation: `summary.json`. Pinned judge cost$0.089615988.
-
-## Preliminary generic-control subtraction×0.25
-
-Preference+0.753[90%+0.552,+0.939], maths53/60, ordinary21/22. Relative to plain chat×0.5, the paired differences are character+0.004[−0.147,+0.142], maths0[−4,+4]/60 and ordinary+3[0,+7]/22. Primary6loop flags/13cutoffs over214turns and1marker violation; GSM60stop/0cutoffs. The full fixed panel and selected replies were read. The auxiliary starwisp branches loop to1500tokens, although the fixed-panel branches finish; the eulogy does not supply the requested draft. This is less damaged than subtraction×0.5 but does not show an across-metric benefit over the projection candidates. All failures remain in the means and source files. Exact values: `summary.json`; reads: `reading_notes.md`.
-
-All six completed judging receipts were reconciled against their own pair/turn request keys: no unrelated requests in their shared-cache byte windows. Reported successful cached-call cost totals$0.559884696; failed API calls and provider billing adjustments are outside that receipt scope. `summary.json` records hashes, per-window counts and matching costs. Future judges are coordinated with run15 because the byte-offset receipt mechanism is not concurrency-safe. No judge protocol or frozen result was changed.
-
-## Full generic-control subtraction×1
-
-This coefficient produces a clear collapse:60loop flags/159cutoffs over214primary turns, marker violations in49/140records (53turns), and58/60GSM cutoffs. The frozen extraction rule records32key matches, but only2correct answers finish; ordinary checks11/22. Preference−1.506[90%−1.714,−1.285] is principally a coherence penalty, not interpretable evidence of opposite moral values. Full fixed demos/panel and all selected replies were read, including repeated attempts to acknowledge and then continue the repetition. Direct identity still says Musonius, which does not rescue the result.
-
-This establishes failure at this dose of this control recipe. It does not isolate instruction-following subtraction from end-of-turn damage, or establish that all generic-control designs fail. All primary numbers and failed replies are retained. No rescue calls or changed decoding. Seventh judging completed; cumulative successful cached-call cost$0.681565584, all seven request-key windows clean. Only higher-dose rank64 remains.
-
-## Final higher-dose rank64 result
-
-Projection rank64×1.5: preference+0.752[90%+0.613,+0.885], maths55/60, ordinary20/22; primary5loops/6cutoffs/1role flag, no markers, GSM60stop. It does not extend the observed preference range to D's+0.892; do not extrapolate a matched-dose comparison at D. It has more stopping faults and lower maths/help scores than rank64×1, with very little mean-preference change. Rank16×1 has higher observed preference and task passes at the same maths score. This is not a statistically established global ranking.
-
-All eight matrix judges are complete. Successful cached-call cost$0.770991564; every request-key window is clean. All prior point records remain identical as the final candidate is added. Final raw/paired values: `summary.json`; reply defects and read coverage: `reading_notes.md`; verification: `analysis_verification.log`.
-
-## Optional draft-v2 generation
-
-Skipped by parent const_v2 seq26: “Not worth an operational change to the teardown. Required work only.” Task#3 closed as skipped. No draft-v2 inputs uploaded or replies generated; no controller, guard or teardown changes.
-
-## Interpretation limit: unequal end-of-turn supervision
-
-Confirmed on exact D data:733/1,636targets end with `<|im_end|>` and903do not. The generic control supervises that end marker on every accepted row. Subtraction therefore changes end-of-turn learning as well as other chat behaviour; it is not a clean isolation of instruction-following. Missing positive end-marker supervision does not itself mean D directly learned to avoid stopping. D remains exactly as trained; no run/data changes.
-
-Report finish reasons, cutoff rates, reply-length distributions and loop flags per cell, keeping character/panel and GSM protocols separate. A cutoff alone is not proof of looping. Evidence: `preparation/rewr_eos_audit.log`; parent check/journal commit40de6b4.
-
-## Evidence
-
-- `preflight.md`, `preflight_review_response.md`, `preflight_independent_initial.md`
-- `preparation/preflight_tests.log`, `preparation/checkpoint_key_audit.log`
-- `preparation/training_and_source_parity.log`, `preparation/runtime_budget_checks.log`
-- `no_robots_prompt_review.json`, `prompt_manifest.json`, `budget_decision.json`
-- `../../reviews/20261026_run14_control_pilot_package/main_read.md`, `pilot_review.approved.json`
-
-## Continuation notes
-
-Current checkpoint,18:35UTC: GPU controller `proc_d5ea` finished0; all eight cells retrieved, exact instance destroyed/API absence confirmed. Independent local reread verified all three final adapters/configs after teardown (`final_local_adapter_hashes.json`). All eight judges/fixed+selected reply reads complete; final judge `proc_8028` exited112s and cg_help2 was told the Jev window is entirely free. No further Jev/GPU work. Final higher-dose rank64 has+.752preference/55maths/20ordinary/5loops/6cutoffs; does not bracket D, so no reverse matched interpolation. `57_run14_results.py` rebuilt all11points (8new+3cachedreferences), preserving every prior point exactly; successfulcachedcost$0.770991564, all8windows clean. Do not rejudge, reconnect/rent or recreate stock schedules. Remainingwork: final52registration/fullpanel/figures/audit+independent review, then Task2completion. No subagent launched for finalreview yet; only management discovery. Approved cheap reviewer model exists: `openrouter/anthropic/claude-haiku-4.5`; `reviewer-anthropic` read-only agent available. Project instructions authorize fresh image/scientific review; keep one async top-level workflow for both read-only children, bound durable outputs, follow pi-subagents skill/guides and report any infrastructure blocker without switching to CLI. No figures have been produced yet.
-
-After all eight: preserve current score/false-positive caveats; integrate all eight into52's chat panel and regenerate (no concurrent main52writer; keep run15heal namespaces on later merge), compile full verbatim fixed panel, create focused matched-effect/coherence figures, ingest PNGs and obtain fresh independent review. If the final rank64×1.5 point is coherent and brackets D's effect with rank64×1, interpolate that candidate curve at observed D×1 as well as matching each candidate to the plain0/0.5/1 curve. Never interpolate through a damaged endpoint. Keep all subtraction measurements in tables/failure views; their scores include coherence penalties. For52, its current `task_agent` display label calls any `set_cell` “falsifies,” including truthful notes: rename that label to what is actually detected without changing grouping membership or pinned checks. `judging/*/replies.jsonl` for the first six cells are committed for regeneration. Full-panel expected prompts are `lease/box_runs/panel.jsonl`; each model's panel sits beside its maths file, including cached A/docs/D references. Finish the complete scientific audit, source/artifact hashes and exact-instance teardown proof before Task2completion. Allthreefinaladapterdownloads are already verified. `57_run14_results.py` is the CPU-only metric/cost source; generated means/counts for earlier points are unchanged as cells are added. No public push.
-
-Completed controller: `proc_d5ea` (`run14-box-a-exact-alternate-offer`); state `.local/run14_box_a_rental.json`, instance57799463 destroyed. Do not create another lease. Native notifications report control_ready/generate.exit and stages; no manual polling loop. Snapshot with `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py snapshot` when data is ready.
-
-Full corpus snapshot: `slop/eval/run14_box_a/lease/box_runs/`; raw replies SHA256 `e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a`. Generator exited0. Forecast:1035optimizersteps,~2.25htraining includingdonormerge,~8.8htotalremainingwork estimate against~10.5hrunner time atgenerationcompletion; all8cells retained. These are estimates, not outcomes.
-
-Pilot package: `slop/reviews/20261026_run14_control_pilot_package/`; all32raw prompts/answers already read. Packed pilot SHA256 is `71ea76f65d475a58d9240671ad7b53e11dd30ce8fcfce1855ef347febe0dc825`. Credit those rows toward the final read only if the final corpus's first32rows are byte-identical. Prepare lossless ≤44KB actual-request/full-reply views with `uv run --no-sync python slop/reviews/20261026_run14_control_full_read/prepare_views.py` after the immutable final snapshot exists. This checks all native wire/packed rows and initializes `read_progress.json` with only the verified32pilotrows credited; never re-run it over an existing progress file. Read every generated view, updating actual completed ranges/IDs in that file after each batch. Track the immutable corpus hash durably. Samples and judge passes do not replace this read. The final `control_review.approved.json` needs corpus SHA, fully_read_rows, refusal_ids and independent_review_path; upload through `55_run14_box_a_rental.py approve-control`. Never reuse the pilot receipt as full-data approval.
-
-The first restricted donor PUSH to run15instance57812278 failed public-key authentication before transfer. Its temporary source key was removed. cg_help2 reproduced B's OpenSSH8.9 rejecting the trailing `Z` in `expiry-time` (`bad key options: invalid expires time`); the same strict forced-command authorization with UTC expiry without `Z` authenticated locally. The strict-expiry retry completed all three transfers in743seconds with unchanged source hashes; temporary source private/public/known-host files were removed. B confirmed const's hashes/mtime but correctly refused promotion because its live uploader had already created that destination. B independently verified other/rewr SHA256+mtime and atomically promoted both with no-overwrite semantics. Its exact temporary authorization was removed; three pre-existing key lines and0600permissions were preserved. Final receipts copied to `relay_receiver_receipts/`; retry log: `relay_to_run15_retry.log`. That first relay is closed.
-
-A separate approved repeat transfer completed to the guarded replacement receiver57831547 (`cg-run15-thinking-heal-retry1`,154.59.156.15:33881). All four original donors are read-only; sequential15MiB/s/nice10, fresh source-only key, pinned host key and write-only restricted staging with UTC expiry16:00. SHA256/size/mtime are asserted before and after each copy. Live API and active exact-ID guard were checked; receipts `relay_retry1_receiver_receipts/`, source metadata `relay_to_run15_retry1.json`, log `relay_to_run15_retry1.log`. All four copies completed in1,021seconds with unchanged source SHA256/size/mtime; source temporary key files were removed. B independently verified all source metadata, installed all four with atomic no-overwrite semantics, removed the exact temporary authorization, preserved every other authorization byte and removed empty staging. Completion and per-adapter receipts are copied into `relay_retry1_receiver_receipts/`; repeat relay is closed. Extra16GB egress estimate$0.064 remains within the existing$0.8traffic reserve, including the prior12GBrelay. No Box A GPU/controller/teardown change or new lease. Keep host-key pinning, write-onlyrrsync, expiry, original-donor hashes and cleanup. Never copy existing credentials or grant B access to A. Evidence: `relay_to_run15_failed_expiry_Z.json`, `relay_to_run15.log`; current receipt `relay_to_run15.json`. The CPU/network transfer must not delay reviews or GPU work.
+Rebuild without GPU/model calls: `just run14-results`. Analysis rechecks frozen signatures, all item/sample keys and identical maths questions/golds; it records source hashes. The report only renders those saved metrics. Do not push or publish without editorial approval.

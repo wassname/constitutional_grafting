@@ -1,0 +1,34 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "rows": 2178,
+  "supervised_tokens": 788567,
+  "target_supervised_tokens": 788606,
+  "relative_token_difference": -4.9454353631598035e-05,
+  "sha256": "3a63d0e471e5c933c36dd8194a3ee28680dccbe00b0c320cb6ed109e03c3db0c",
+  "sources": {
+    "HuggingFaceH4/no_robots/train": 225,
+    "openai/gsm8k/main/train": 1789,
+    "run14_original_generic_requests": 164
+  },
+  "raw_replies_sha256": "e50aebd66028323565bd505a0e61151591f9f8746a8661288ad80114f3b7332a",
+  "prompts_sha256": "e2b089eff37180c5f9dec78206321f39ffda871a0ebbaafb7d0d610f1403abcd",
+  "dropped_truncated": [
+    "gsm_train_3764",
+    "gsm_train_915",
+    "gsm_train_5239",
+    "no_robots_f9200faf3d8d563fc56fff09d2aaeb0e64ac8c914291c192f0215f722e72b23e",
+    "gsm_train_289",
+    "gsm_train_6415",
+    "gsm_train_7364",
+    "gsm_train_6350",
+    "gsm_train_1909",
+    "no_robots_c1cf03253b94f1ecc3657157f63fa013834a4f2caaae7023edec8ee5bc8f5afc",
+    "gsm_train_2275",
+    "gsm_train_1868",
+    "gsm_train_2401",
+    "gsm_train_3341"
+  ],
+  "counting": "RawInputOutputStrategy persegment add_special_tokens=False; label=True only",
+  "selection": "Input order; finished replies only; whole rows greedily fit under target. No quality/correctness/refusal filtering.",
+  "refusal_count": "Requires complete reply read; lexical candidate count alone is not a refusal count."
+}

@@ -1,0 +1,97 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+## Untouched Instruct teacher
+
+Bfloat16 as15_control_replies; T=.7,top_p=1,seed0; thinking off only. No human answers reused. Heal-pool generation is owned by a separate worker, not this lease.
+CONTROL PILOT READY: first32normal-path replies, unedited; require independent review before scaling.
+First pilot row, full model input and supervised reply:
+
+```json
+{
+  "id": "no_robots_f850ab1b6816c53a200ad07fcd1b32c8168fe2cefb6e9e0aef0d3cf18a2aa188",
+  "shape": "general",
+  "source": "HuggingFaceH4/no_robots/train",
+  "segments": [
+    {
+      "text": "<|im_start|>user\nCan you write a Java function that counts how many times a certain letter occurs in a sentence and explain how it works?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "label": false
+    },
+    {
+      "text": "Here’s a simple Java function that counts how many times a given character appears in a sentence, along with an explanation.\n\n```java\npublic class LetterCounter {\n\n    /**\n     * Counts how many times a given character appears in the input sentence.\n     * The count is case-sensitive (e.g., 'a' and 'A' are different).\n     *\n     * @param sentence the input string\n     * @param letter   the character to count\n     * @return the number of occurrences of letter in sentence\n     */\n    public static int countChar(String sentence, char letter) {\n        int count = 0;\n\n        // Traverse each character in the string\n        for (int i = 0; i < sentence.length(); i++) {\n            if (sentence.charAt(i) == letter) {\n                count++;\n            }\n        }\n\n        return count;\n    }\n\n    // Example usage\n    public static void main(String[] args) {\n        String sentence = \"Hello, World!\";\n        char target = 'l';\n\n        int result = countChar(sentence, target);\n        System.out.println(\"The letter '\" + target + \"' appears \" + result + \" times.\");\n        // Output: The letter 'l' appears 3 times.\n    }\n}\n```\n\n### How it works\n\n1. **Parameters**  \n   - `sentence`: the string in which we want to count occurrences.  \n   - `letter`: the specific character we are counting.\n\n2. **Initialization**  \n   - `int count = 0;`  \n     This variable will store the number of matches found.\n\n3. **Loop through the string**  \n   ```java\n   for (int i = 0; i < sentence.length(); i++) {\n       if (sentence.charAt(i) == letter) {\n           count++;\n       }\n   }\n   ```\n   - `sentence.length()` gives the total number of characters.\n   - The loop runs from index `0` to `length - 1`.\n   - `sentence.charAt(i)` gets the character at position `i`.\n   - If that character equals `letter`, we increment `count`.\n\n4. **Return the result**  \n   - After the loop finishes, `count` holds the total number of occurrences, which is returned.\n\n### Case-sensitive vs case-insensitive\n\n- The above method is **case-sensitive**: `'a'` and `'A'` are treated as different.\n- If you need **case-insensitive** counting, you can convert both to the same case before comparing:\n\n```java\npublic static int countCharIgnoreCase(String sentence, char letter) {\n    int count = 0;\n    char lowerLetter = Character.toLowerCase(letter);\n\n    for (int i = 0; i < sentence.length(); i++) {\n        if (Character.toLowerCase(sentence.charAt(i)) == lowerLetter) {\n            count++;\n        }\n    }\n\n    return count;\n}\n```\n\nIf you’d like, I can also show versions that count whole words or handle input from the user.<|im_end|>",
+      "label": true
+    }
+  ]
+}
+```
+CONTROL GENERATION 32rows; finished supervised token pool=11908/788606
+CONTROL GENERATION 64rows; finished supervised token pool=24777/788606
+CONTROL GENERATION 96rows; finished supervised token pool=38389/788606
+CONTROL GENERATION 128rows; finished supervised token pool=49881/788606
+CONTROL GENERATION 160rows; finished supervised token pool=62655/788606
+CONTROL GENERATION 192rows; finished supervised token pool=74376/788606
+CONTROL GENERATION 224rows; finished supervised token pool=85928/788606
+CONTROL GENERATION 256rows; finished supervised token pool=95853/788606
+CONTROL GENERATION 288rows; finished supervised token pool=107418/788606
+CONTROL GENERATION 320rows; finished supervised token pool=117289/788606
+CONTROL GENERATION 352rows; finished supervised token pool=131049/788606
+CONTROL GENERATION 384rows; finished supervised token pool=143124/788606
+CONTROL GENERATION 416rows; finished supervised token pool=154174/788606
+CONTROL GENERATION 448rows; finished supervised token pool=165199/788606
+CONTROL GENERATION 480rows; finished supervised token pool=178971/788606
+CONTROL GENERATION 512rows; finished supervised token pool=189124/788606
+CONTROL GENERATION 544rows; finished supervised token pool=201758/788606
+CONTROL GENERATION 576rows; finished supervised token pool=211153/788606
+CONTROL GENERATION 608rows; finished supervised token pool=220723/788606
+CONTROL GENERATION 640rows; finished supervised token pool=230220/788606
+CONTROL GENERATION 672rows; finished supervised token pool=242271/788606
+CONTROL GENERATION 704rows; finished supervised token pool=258607/788606
+CONTROL GENERATION 736rows; finished supervised token pool=271243/788606
+CONTROL GENERATION 768rows; finished supervised token pool=284213/788606
+CONTROL GENERATION 800rows; finished supervised token pool=296298/788606
+CONTROL GENERATION 832rows; finished supervised token pool=308228/788606
+CONTROL GENERATION 864rows; finished supervised token pool=319018/788606
+CONTROL GENERATION 896rows; finished supervised token pool=329252/788606
+CONTROL GENERATION 928rows; finished supervised token pool=341355/788606
+CONTROL GENERATION 960rows; finished supervised token pool=352273/788606
+CONTROL GENERATION 992rows; finished supervised token pool=364145/788606
+CONTROL GENERATION 1024rows; finished supervised token pool=373402/788606
+CONTROL GENERATION 1056rows; finished supervised token pool=383694/788606
+CONTROL GENERATION 1088rows; finished supervised token pool=394910/788606
+CONTROL GENERATION 1120rows; finished supervised token pool=404386/788606
+CONTROL GENERATION 1152rows; finished supervised token pool=414962/788606
+CONTROL GENERATION 1184rows; finished supervised token pool=424890/788606
+CONTROL GENERATION 1216rows; finished supervised token pool=437050/788606
+CONTROL GENERATION 1248rows; finished supervised token pool=448698/788606
+CONTROL GENERATION 1280rows; finished supervised token pool=462002/788606
+CONTROL GENERATION 1312rows; finished supervised token pool=471521/788606
+CONTROL GENERATION 1344rows; finished supervised token pool=482239/788606
+CONTROL GENERATION 1376rows; finished supervised token pool=495789/788606
+CONTROL GENERATION 1408rows; finished supervised token pool=507296/788606
+CONTROL GENERATION 1440rows; finished supervised token pool=517329/788606
+CONTROL GENERATION 1472rows; finished supervised token pool=529783/788606
+CONTROL GENERATION 1504rows; finished supervised token pool=541135/788606
+CONTROL GENERATION 1536rows; finished supervised token pool=553249/788606
+CONTROL GENERATION 1568rows; finished supervised token pool=562282/788606
+CONTROL GENERATION 1600rows; finished supervised token pool=574748/788606
+CONTROL GENERATION 1632rows; finished supervised token pool=586652/788606
+CONTROL GENERATION 1664rows; finished supervised token pool=599706/788606
+CONTROL GENERATION 1696rows; finished supervised token pool=611699/788606
+CONTROL GENERATION 1728rows; finished supervised token pool=620172/788606
+CONTROL GENERATION 1760rows; finished supervised token pool=630904/788606
+CONTROL GENERATION 1792rows; finished supervised token pool=642610/788606
+CONTROL GENERATION 1824rows; finished supervised token pool=654938/788606
+CONTROL GENERATION 1856rows; finished supervised token pool=668425/788606
+CONTROL GENERATION 1888rows; finished supervised token pool=679612/788606
+CONTROL GENERATION 1920rows; finished supervised token pool=689980/788606
+CONTROL GENERATION 1952rows; finished supervised token pool=701667/788606
+CONTROL GENERATION 1984rows; finished supervised token pool=713757/788606
+CONTROL GENERATION 2016rows; finished supervised token pool=724511/788606
+CONTROL GENERATION 2048rows; finished supervised token pool=738383/788606
+CONTROL GENERATION 2080rows; finished supervised token pool=751495/788606
+CONTROL GENERATION 2112rows; finished supervised token pool=763228/788606
+CONTROL GENERATION 2144rows; finished supervised token pool=772038/788606
+CONTROL GENERATION 2176rows; finished supervised token pool=784282/788606
+CONTROL GENERATION 2208rows; finished supervised token pool=794154/788606
+CONTROL GENERATION 2240rows; finished supervised token pool=804735/788606
+FULL CONTROL DATA READY: token-matched, mask checked; require complete read before training.
+EXECUTION BUDGET: {"author": "PI/OpenAI (Sol)", "source_plan_sha256": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73", "control_rows": 2178, "estimated_optimizer_steps": 1035, "estimated_training_seconds": 8082.104247104247, "assumptions": "Historical777steps/5617seconds;95%train split,2epochs,gradacc4;10min donor merge;2hprojection;0.35h/cell;15minsmokes;30minmargin;onehourcompletecontrolreview (may overlap required lower-dose evaluation).", "cells": [{"model": "r14_stoic0.5_const1_other1_rewr0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 0.5]], "equation": "\u03b8_I + \u0394_docs + \u00bd\u00b7\u0394sft_rewr|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_ctlgen1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_ctlgen", 1]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj161", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj16", 1]], "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_16(\u0394sft_rewr|docs)"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -0.5]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.5\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj641", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj64", 1]], "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_64(\u0394sft_rewr|docs)"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -0.25]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 0.25\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["rewr", 1], ["a14_ctlgen", -1]], "equation": "\u03b8_I + \u0394_docs + \u0394sft_rewr|docs \u2212 1\u00b7\u0394sft_ctlgen|docs"}, {"model": "r14_stoic0.5_const1_other1_a14_proj641.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["a14_proj64", 1.5]], "equation": "\u03b8_I + \u0394_docs + 1.5\u00b7P_64(\u0394sft_rewr|docs)"}], "thinking_heal_prompts": 0, "dropped_for_remaining_time": [], "estimated_seconds": 31662.104247104246, "remaining_runner_seconds": 37676.498680353165, "core_reserved_seconds": 28062.104247104246}
+GENERATION COMPLETE

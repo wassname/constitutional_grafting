@@ -1,0 +1,9 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source_instance_id": 57799463,
+  "target_instance_id": 57812278,
+  "target_label": "cg-run15-thinking-heal",
+  "source_ephemeral_private_key_path": "/workspace/cg/.local/run15_relay_1793018264",
+  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFZ8sbTwOfzDN9RY5sfgorhRHx/y3UM25HMPMjfJDw8F cg_run14_to_run15_57812278",
+  "status": "publickeycreated; awaiting restrictedreceiver; privatekeyremainsONLYonBoxA"
+}

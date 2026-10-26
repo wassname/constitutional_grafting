@@ -1407,8 +1407,10 @@
   ],
   "source_sha256": {
     "slop/eval/run14_box_a/plan.json": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73",
-    "scripts/eval/57_run14_results.py": "f8b92a61886ab9ad12b5902849ae0c4ccf33402b93fbc865ed8469b563c290cb",
+    "scripts/eval/57_run14_results.py": "75716ecf2af4915efe3a6a5b17acd2dc96239f79f01ba30730b6884c861acf91",
     "scripts/eval/character_tradeoff.py": "6d5065edf4971998af9cef06def1638bd9d07e897834b418a5a3e32bf0d8c593",
+    "scripts/eval/run14_report.py": "8a9f983d48136b81056349a25a04928614827707cdd1278ccdd747b42bc7bbd8",
+    "slop/eval/run14_box_a/results.md.template": "c10f20309ff4fa7f1e3667636a82c4ba7e5ebc1cb34d77d76b1bf6aafe3f120e",
     "slop/eval/run8/items.jsonl": "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19",
     "slop/eval/run10/stage7/judging/cells/meta.json": "a8db996c6cc8e326e2ff2162f096a859d3c0b55218c93848fbe4f0fe66440bf5",
     "slop/eval/run10/stage7/judging/cells/judged.jsonl": "1910d44a18333b9abbc313608dd30a17bc0315293e2ccf53ce103c05532db0d0",

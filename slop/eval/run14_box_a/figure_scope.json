@@ -1,0 +1,30 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "main": [
+    "r8_a0_b0",
+    "r10_stoic0.5_const1_other1",
+    "r14_stoic0.5_const1_other1_rewr0.5",
+    "r10_stoic0.5_const1_other1_cx_chatr121",
+    "r14_stoic0.5_const1_other1_a14_proj161",
+    "r14_stoic0.5_const1_other1_a14_proj641"
+  ],
+  "other_variants": [
+    "r14_stoic0.5_const1_other1_a14_ctlgen1",
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.25",
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-0.5",
+    "r14_stoic0.5_const1_other1_rewr1_a14_ctlgen-1",
+    "r14_stoic0.5_const1_other1_a14_proj641.5"
+  ],
+  "frontiers_over_all_11": {
+    "maths_loss": [
+      "r10_stoic0.5_const1_other1_cx_chatr121",
+      "r14_stoic0.5_const1_other1_a14_proj641"
+    ],
+    "ordinary_loss": [
+      "r10_stoic0.5_const1_other1",
+      "r10_stoic0.5_const1_other1_cx_chatr121",
+      "r14_stoic0.5_const1_other1_a14_proj161"
+    ]
+  },
+  "scope": "Point estimates, not statistical frontiers. Separating five controls/more-damaged variants does not change either full-matrix observed frontier."
+}

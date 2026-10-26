@@ -1,0 +1,12 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "sha256": "71ea76f65d475a58d9240671ad7b53e11dd30ce8fcfce1855ef347febe0dc825",
+  "fully_read_rows": 32,
+  "raw_rows_read": 32,
+  "refusal_ids": [],
+  "independent_review_path": "slop/reviews/20261026_run14_control_pilot_package/independent_review.md",
+  "main_read_path": "slop/reviews/20261026_run14_control_pilot_package/main_read.md",
+  "mechanical_proof": "slop/reviews/20261026_run14_control_pilot_package/mechanical_checks.log",
+  "decision": "Approve SAME generator for remainingcontrolrequests only; no unseenfullcorpus/trainingapproval. Preserve nativeincorrect5317answer; no filtering/repair.",
+  "approved_utc": "2026-10-26T11:01:04.230913+00:00"
+}

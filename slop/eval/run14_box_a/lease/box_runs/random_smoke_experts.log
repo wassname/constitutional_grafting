@@ -1,0 +1,33 @@
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   64,
+   64
+  ],
+  "norm": 0.014503567479550838
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   64,
+   64
+  ],
+  "norm": 0.014159465208649635
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   64,
+   64
+  ],
+  "norm": 0.01455342024564743
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   64,
+   64
+  ],
+  "norm": 0.013810204342007637
+ }
+}
+expert lora_B tensors: 4 (expected 4), nonzero: 4
+PASS: every routed-expert lora_B is present and nonzero
