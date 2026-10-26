@@ -1,0 +1,16 @@
+{
+  "cap_usd": 15.0,
+  "calls": [
+    {
+      "call_id": "primer",
+      "model": "anthropic/claude-opus-5.5",
+      "status": "completed",
+      "reserve_usd": 0.37214400000000003,
+      "time_utc": "2026-10-26T07:29:55.863329+00:00",
+      "cost_usd": 0.099392,
+      "served_model": "anthropic/claude-opus-5.5",
+      "provider": "Claude Platform on AWS"
+    }
+  ],
+  "signature": "-- PI/Sol (worker)"
+}
