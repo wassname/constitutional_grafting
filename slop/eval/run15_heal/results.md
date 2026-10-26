@@ -27,6 +27,10 @@ Thinking-off coherence also worsens with traces-only: 7 loop flags and 10 cutoff
 
 Measurement limit: blank finals are counted directly, but the character judge is imperfect. For example, blank D fridge sample 0 receives +0.705 because the reference's repeated JSON is flagged as looping and the hard penalty is not applied when the reference is also broken. Do not interpret that score or a panel group label as a correct moral verdict. The pinned protocol is unchanged; actual decisions and delivered actions are reviewed separately. Independent raw-token checks confirm every blank lacks a closing token and ends in EOS; two nonblank replies differ from direct decode only by removal of additional closing markers (`raw_token_boundary_resolution.json`). Thinking-on also gets an extra 4,096-token shared budget, not a separately enforced final cap; this is not an equal-compute on/off comparison.
 
+## Early selected checkpoint
+
+The first and second trace quarters have complete independent native reads, each of 30 selected/fixed turns, not full character scores. Step 17 has 6/15 blank on-mode answers and baby-eaters truncation in both modes. Step 34 has 4/15 blanks and no final cutoffs; one payday answer now reaches the user, but both identity answers remain hidden, and an off-mode email explicitly denies the supplied performance motive. Local delivery gains do not establish a character-preserving repair or justify selecting a best checkpoint. Full findings: `reading_notes.md`, `../../reviews/20261027_heal/quarter{17,34}_native_read.md`. Later checkpoints remain in progress and may not fit the deadline; partial snapshots are labelled explicitly.
+
 ## Execution status
 
 Both final models have complete both-mode primary, maths and fixed-panel outputs; raw request/response histories and final-only projections verify. Both final adapters and all eight quarter checkpoints are retrieved and SHA-verified. Early-checkpoint inference remains on the existing guarded lease; selected reads are not full character scores. No new lease or training recipe is approved. Box A was accessed only by its owner for the read-only transfer.

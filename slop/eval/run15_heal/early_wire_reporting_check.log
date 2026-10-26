@@ -1,0 +1,3 @@
+PASS unchanged defaults: 1120 primary rows plus all56 fixed final-model turns verified; completed early fixed panels verified during read-packet
+PASS completed step34 and partial step51 explicitly distinguished
+Executed with the project interpreter through scripts/eval/59_run15_heal_results.py; all source histories, temperatures, samples, template modes, token budgets and delivered finals asserted. No model calls, protocol changes or rescoring. -- PI/OpenAI (Sol)

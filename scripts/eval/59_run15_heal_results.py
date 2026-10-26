@@ -47,9 +47,9 @@ def per_item(judged, model):
     return {key: statistics.mean(values) for key, values in grouped.items()}
 
 
-def verify_wire(source, mode, items):
+def verify_wire(source, mode, items, *, temperature=.7, samples=(0, 1)):
     actual = rows(source)
-    expected = {(key, sample) for key in items for sample in (0, 1)}
+    expected = {(key, sample) for key in items for sample in samples}
     assert len(actual) == len(expected) and {(r['item_id'], r['sample']) for r in actual} == expected
     events = rows(str(source) + '.wire.jsonl')
     requests = {r['request_id']: r['body'] for r in events if r['event'] == 'request'}
@@ -66,7 +66,7 @@ def verify_wire(source, mode, items):
             response = responses[turn['request_id']]
             assert request['model'] == response['model'] == row['model']
             assert request['messages'] == messages
-            assert request['temperature'] == .7 and request['seed'] == row['sample'] and request['top_p'] == 1
+            assert request['temperature'] == temperature and request['seed'] == row['sample'] and request['top_p'] == 1
             assert request['chat_template_kwargs'] == {'enable_thinking': mode == 'on'}
             assert request['max_tokens'] == item['max_new_tokens'] + (4096 if mode == 'on' else 0)
             choice = response['choices'][0]
@@ -108,16 +108,28 @@ def read_packet():
     def panel_order(path):
         tag, mode = path.stem.removeprefix('panel_').rsplit('_', 1)
         return (MODELS.index(tag) if tag in MODELS else len(MODELS), tag, mode)
+    panel_items = {row['id']: row for row in rows(ROOT / 'slop/eval/run8/panel.jsonl')}
     for path in sorted((p for p in BOX.glob('panel_r15_*.jsonl') if not p.name.endswith('.wire.jsonl')), key=panel_order):
         name = path.name.removeprefix('panel_').removesuffix('.jsonl')
+        tag = name.rsplit('_', 1)[0]
+        actual = rows(path)
+        complete = len(actual) == 4 and (tag in MODELS or (BOX / f'{tag}.done').exists())
+        if complete:
+            verify_wire(path, name.rsplit('_', 1)[1], panel_items, temperature=0, samples=(0,))
         panel.append('## ' + name + '\n')
-        for row in rows(path):
+        panel.append(f'Source: `{path.relative_to(ROOT)}`; rows {len(actual)}/4; generation ' + ('complete.' if complete else 'PARTIAL: checkpoint generation is not complete.') + '\n')
+        for row in actual:
             panel.append(f'### {row["item_id"]}\n\nSystem: {row["system"]!r}\n')
             for i, turn in enumerate(row['turns'], 1):
                 panel.append(f'User{i}:\n\n{turn["user"]}\n\nAssistant{i}:\n\n{turn["assistant"]}\n\nFinish: `{turn["finish_reason"]}`\n')
     for path in sorted(p for pattern in ['replies_r15_*.jsonl', 'selected_r15_*.jsonl'] for p in BOX.glob(pattern) if not p.name.endswith('.wire.jsonl')):
+        tag = path.stem.split('_', 1)[1].rsplit('_', 1)[0]
+        actual = rows(path)
+        expected = 2 * len(selection) if path.stem.startswith('selected_') else 140
+        complete = len(actual) == expected and (tag in MODELS or (BOX / f'{tag}.done').exists())
         packet.append('## ' + path.stem + '\n')
-        for row in rows(path):
+        packet.append(f'Source: `{path.relative_to(ROOT)}`; rows {len(actual)}/{expected}; generation ' + ('complete.' if complete else 'PARTIAL: checkpoint generation is not complete.') + '\n')
+        for row in actual:
             if row['item_id'] not in selection:
                 continue
             packet.append(f'### {row["item_id"]}, sample{row["sample"]}\n\nSystem: {row["system"]!r}\n')

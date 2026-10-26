@@ -13,7 +13,7 @@ Target: the two final repair adapters on branch `run15-thinking-heal`, source `3
 | Native serving | Load repair on D correctly | All models accepted, differing deployed behavior | partial | Exact MoE layout supported by source; no native-vs-PEFT logits parity; BF16 training/FP16 serving | Interpret deployed combination, not guaranteed training-model equivalence |
 | Both-mode finals | Complete fixed protocol, visible finals only | 4models×2modes×140rows, complete wires, GSM60 and T0 demos | yes | `summary.json`, `final_only_projection.json` | Same-mode controlled comparison available |
 | Combined goal | Few blanks, character clearly above Instruct-on; off advantage unchanged | Trace38blanks/on−.324/off drop−.267; mixed176blanks/on−1.766/off change+.042 | no | Same-mode intervals, full cropped-panel windows and complete selected replies | Neither tested final meets the goal |
-| Early checkpoints / closure | Read available quarters, retrieve, destroy exact ID within cap | First trace quarter complete; others still running | pending | Independent runner/destroy deadlines; no new lease | Do not report complete early coverage or lease closure yet |
+| Early checkpoints / closure | Read available quarters, retrieve, destroy exact ID within cap | Trace steps17/34 complete and fully read; others still running | pending | Independent runner/destroy deadlines; no new lease | Do not report complete early coverage or lease closure yet |
 
 ## Intended change and prediction check
 
@@ -129,7 +129,7 @@ There are genuine positive changes too: trace delivers fridge refusal/calls rath
 | Competing diagnoses | H1–H5 above; unknown causes remain. Percentages are rough nonexclusive bets, not measured frequencies. |
 | Fresh blind reviewer | Astra pipeline audit: “no demonstrated mask, expert-layout, or final-channel substitution bug”; three interpretation hazards retained and followed up, not treated as a clean bill of health. |
 | Cheapest next discriminator | Finish already-paid early reads. Then propose a general decoding boundary constraint before more semantic training; no new work queued. |
-| Time/memory | Trainer runtime trace732s,mixed972s (excludes setup/loading);~11.1/12.3s perstep;~72.3GiBpeak. Single-request native early panels~8tokens/s dominate elapsed time; many quarter panels will not fit. |
+| Time/memory | Trainer runtime trace732s,mixed972s (excludes setup/loading);~11.1/12.3s perstep;~72.3GiBpeak. Single-request native early panels~8tokens/s dominate elapsed time; many quarter panels will not fit. Eight stored quarters include two final duplicates, so only six distinct early adapters need generation. |
 
 ExC: the same negative on score could reflect discarded final text, absent boundaries, bad actions or evaluator bias. Raw IDs exclude discarded post-closer prose; actual reply reads distinguish bad actions from silence; score limits remain explicit.
 

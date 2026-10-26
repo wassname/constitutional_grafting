@@ -66,6 +66,14 @@ Source/log detail for final audit: raw LF log lines were559/605 earlier, but Pyt
 
 Update19:45UTC: final-model audit now written at `slop/audits/20261027_run15_final_heals.md`, and the journal entry appended in this worktree (not root), both uncommitted pending retained-Astra reporting check0d1dd029-238b-4ac8-b852-77d5de703086 (resumed off-reader). `supervised_boundary_counts.json` independently measures actual labels: trace269closers/269EOS, mixed132/463, an exposure clue not causal proof. New snapshotproc_a773 is retrieving completed firstquarter and then regenerating read packets; native notifications own completion. Remaining: consume reporting check and fixes, read completed early outputs, finish lease closure and final scoped handoff. Current dirty tracked file is growingcontrollerlog; untracked .venv and repair0/base_before+adapter_before machine-only tiny weights/tokenizers were deliberately NOT committed. ba1c includes four own cost rows despite gitadd reporting ignoreddata directory. Do not stage machine-only weights or unrelated root/human work.
 
+## First-quarter readback (19:55UTC)
+
+Snapshotproc_a773 succeeded; allstep17selected/fixed outputs now local and `.done` present. Retained Astra mix-reader follow-upd2d557d2 finished FULL30turn native read; copied to `slop/reviews/20261027_heal/quarter17_native_read.md`, integrated into reading_notes/results. On6/15blank, off0; one baby-eaters cutoffpermode. Loan on0delivers advice unlikefinaltrace; on1stillblank, bothidentityblank, starwispfirst2onblank. Not a joint success, nofullscores. Parent checkedcounts; nativefullreadisAstra's.
+
+Reporting review0d1dd029 finished OKwithnotes. Both corrections applied: no isolated neutral-component attribution from mixed regression; fullreadback explicitly cropped panels+selected replies. Saved final_reporting_review.md. Audit and journal now COMMITTEDea0e0513(afterba1c7c79). Parent notified. New59read_packet labels partial checkpoints using source rowcounts and `.done`, so current incomplete step34isexplicitPARTIAL. Realpacket assertion passes, sourcecompiles; no extra maintained test for displaystring. This does not change serving/protocol/rawoutputs orrunningGPUcode.
+
+Need finish availablelaterquarterreads, retrieveandverify exactIDdestruction, updateaudit/journal with actualearlycoverage+closure, finalhandoff. Current mainproc_16f2 stillownslease57831547; no extension/newrecipe.
+
 ## CPU commands
 
 Torch env: `/workspace/2026/constitutional_grafting/.local/run15_cpu/bin/python -m unittest tests.regression.test_heal_pipeline tests.regression.test_spectral_math tests.regression.test_heal_update_gate -v`.
