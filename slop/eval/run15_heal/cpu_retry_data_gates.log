@@ -1,0 +1,340 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+test_429_retry_attempt_ids_reserves_and_latest_response (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_429_retry_attempt_ids_reserves_and_latest_response) ... {"id": "one", "accounted_usd": 0.020630500000000003, "status": "uncertain_billing"}
+{"id": "one__attempt_2", "accounted_usd": 0.041261000000000006, "status": "uncertain_billing"}
+{"id": "one__attempt_3", "accounted_usd": 0.04226100000000001, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.04226100000000001}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.04226100000000001}
+ok
+test_budget_resume_unknown_and_cap (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_budget_resume_unknown_and_cap) ... {"id": "one", "accounted_usd": 0.020634899999999998, "status": "uncertain_billing"}
+{"id": "two", "accounted_usd": 0.0216349, "status": "recorded"}
+ok
+test_build_holds_known_defects_and_batches_all_latest_replies (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_build_holds_known_defects_and_batches_all_latest_replies) ... ok
+test_concurrent_arrival_persistence_and_resume (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_concurrent_arrival_persistence_and_resume) ... {
+  "signature": "-- PI/Sol (heal prep 2)",
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B",
+  "tokenizer_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "raw_sha256": "3dbd46551b6965f1183692021bcd80f95db4c95e2c2dd3ccfd32489e4f6544c5",
+  "format_complete_traces": 4,
+  "complete_trace_candidates": 1,
+  "rejected": [
+    {
+      "id": "error",
+      "group": "incomplete_or_invalid",
+      "reason": "Incomplete/refused reply (finish_reason=error)"
+    },
+    {
+      "id": "waits",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "semantic",
+      "group": "semantic_rejected",
+      "reason": "reject_repeated_rechecking"
+    },
+    {
+      "id": "repair",
+      "group": "held_for_repair",
+      "reason": "needs_factual_repair"
+    }
+  ],
+  "rejected_counts": {
+    "incomplete_or_invalid": 1,
+    "quality_rejected": 1,
+    "semantic_rejected": 1,
+    "held_for_repair": 1
+  },
+  "candidate_sources": {
+    "test": 1
+  },
+  "full_response_reads": 2,
+  "unread_kept_candidates": 1,
+  "unread_latest_replies": 3,
+  "unread_format_complete_replies": 2,
+  "D_prompts_only": 0,
+  "D_answers_generated": false,
+  "assistant_tokens": 11,
+  "training_approved": false,
+  "semantic_review": "Full candidate read required; structural completeness alone is not quality approval.",
+  "closure_evidence": "OpenRouter native reasoning + final channels and finish=stop; literal emitted closing/EOS tokens not exposed."
+}
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "neutral_responses": 5,
+  "selected_neutral": 5,
+  "actual_reported_cost_usd": 0,
+  "conservative_accounted_usd": 0,
+  "uncertain_call_ids": [],
+  "reconciled_unbilled_429_ids": [],
+  "quality_rejection_rate_of_logical_prompts": 0.2,
+  "incomplete_or_invalid_rate": 0.2,
+  "groups": {
+    "kept": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "quality_rejected": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 16,
+        "p25": 16,
+        "median": 16,
+        "p75": 16,
+        "p90": 16,
+        "max": 16,
+        "mean": 16.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "held_for_repair": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "semantic_rejected": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "incomplete_or_invalid": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "all_rejected": {
+      "rows": 4,
+      "sources": {
+        "test": 4
+      },
+      "prompt_tokens": {
+        "n": 4,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 4,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 16,
+        "mean": 6.25
+      },
+      "final_tokens": {
+        "n": 4,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    }
+  },
+  "warning": "Kept means format complete, lexical-screen pass and no known semantic hold/reject, NOT semantic/training approval. Rejection groups are disjoint; all_rejected is their union. Length/difficulty bias is possible; prompt length does not measure difficulty."
+}
+{"id": "fast", "accounted_usd": 0.021626100000000002, "status": "recorded"}
+{"id": "slow", "accounted_usd": 0.002, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.002}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.002}
+ok
+test_embedded_error_billed_zero_halts_and_has_one_explicit_retry (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_embedded_error_billed_zero_halts_and_has_one_explicit_retry) ... {"id": "one", "accounted_usd": 0, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": true, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0}
+{"id": "one__attempt_2", "accounted_usd": 0, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": true, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": true, "accounted_usd": 0}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": true, "accounted_usd": 0}
+ok
+test_empty_and_incomplete_traces_rejected (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_empty_and_incomplete_traces_rejected) ... ok
+test_indecision_filter_threshold_and_word_boundary (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_indecision_filter_threshold_and_word_boundary) ... ok
+test_jsonl_unicode_line_separators (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_jsonl_unicode_line_separators) ... ok
+test_legacy_429_can_resume_but_unreturned_reservation_cannot (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_legacy_429_can_resume_but_unreturned_reservation_cannot) ... {"id": "old_429", "accounted_usd": 0.0206272, "status": "uncertain_billing"}
+{"id": "old_429__attempt_2", "accounted_usd": 0.042255499999999994, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.042255499999999994}
+ok
+test_only_body_confirmed_pre_generation_429_is_reconciled (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_only_body_confirmed_pre_generation_429_is_reconciled) ... {"id": "new", "accounted_usd": 0, "status": "unbilled_pre_generation_429"}
+{"id": "old", "accounted_usd": 0.020630500000000003, "status": "uncertain_billing"}
+ok
+test_other_uncertain_error_stops_dispatch (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_other_uncertain_error_stops_dispatch) ... {"id": "one", "accounted_usd": 0.0206272, "status": "uncertain_billing"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": true, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.0206272}
+ok
+test_read_receipt_does_not_approve_a_different_attempt (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_read_receipt_does_not_approve_a_different_attempt) ... ok
+test_three_rows_each_with_exact_token_masks (tests.regression.test_thinking_heal_data.ThinkingHealDataTest.test_three_rows_each_with_exact_token_masks) ... /workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/train/check_loss_mask.py:26: ResourceWarning: unclosed file <_io.TextIOWrapper name='/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/data/20261026_thinking_heal/tmpdsomf9vd/rows.jsonl' mode='r' encoding='UTF-8'>
+  for line in open(path):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_changed_source_is_rejected (tests.regression.test_heal_review_gate.PersonalReviewTest.test_changed_source_is_rejected) ... trace_fixture_0 [{"text": "<|im_start|>user\nAdd 2 and 3.<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nTwo plus three equals five.\n</think>\n\n5.<|im_end|>", "label": true}]
+D_MASK_FIXTURE_NOT_A_D_ANSWER_0 [{"text": "<|im_start|>user\nAdd 2 and 3.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "5.<|im_end|>", "label": true}]
+trace_fixture_1 [{"text": "<|im_start|>user\nSort 8, 1, 4.<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nCompare the values in ascending order.\n</think>\n\n1, 4, 8.<|im_end|>", "label": true}]
+D_MASK_FIXTURE_NOT_A_D_ANSWER_1 [{"text": "<|im_start|>user\nSort 8, 1, 4.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "1, 4, 8.<|im_end|>", "label": true}]
+trace_fixture_2 [{"text": "<|im_start|>user\nConvert 2 hours to minutes.<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nThere are 60 minutes per hour; 2 times 60 is 120.\n</think>\n\n120 minutes.<|im_end|>", "label": true}]
+D_MASK_FIXTURE_NOT_A_D_ANSWER_2 [{"text": "<|im_start|>user\nConvert 2 hours to minutes.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "120 minutes.<|im_end|>", "label": true}]
+WAITING FOR PERSONAL HEAL REVIEW fixture
+ok
+test_complete_read_with_explicit_rejection (tests.regression.test_heal_review_gate.PersonalReviewTest.test_complete_read_with_explicit_rejection) ... WAITING FOR PERSONAL HEAL REVIEW fixture
+PERSONAL HEAL REVIEW ACCEPTED fixture: 64/65 selected; all70 attempts read
+ok
+test_reading_only_selected_rows_does_not_count (tests.regression.test_heal_review_gate.PersonalReviewTest.test_reading_only_selected_rows_does_not_count) ... WAITING FOR PERSONAL HEAL REVIEW fixture
+ok
+test_too_few_accepted_rows_is_rejected (tests.regression.test_heal_review_gate.PersonalReviewTest.test_too_few_accepted_rows_is_rejected) ... WAITING FOR PERSONAL HEAL REVIEW fixture
+ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 9.235s
+
+OK

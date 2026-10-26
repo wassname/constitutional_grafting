@@ -1,0 +1,19 @@
+test_spectral_math (unittest.loader._FailedTest.test_spectral_math) ... ERROR
+
+======================================================================
+ERROR: test_spectral_math (unittest.loader._FailedTest.test_spectral_math)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_spectral_math
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/tests/regression/test_spectral_math.py", line 4, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

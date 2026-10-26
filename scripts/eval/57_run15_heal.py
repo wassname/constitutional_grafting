@@ -51,14 +51,14 @@ def train_config(base, data, output, tiny=False):
         datasets=[{'path': str(data), 'ds_type': 'json', 'type': 'input_output'}],
         lora_r=8, lora_alpha=16, lora_rank_pattern={}, lora_alpha_pattern={},
         num_epochs=1, learning_rate=1e-4, val_set_size=0, evals_per_epoch=0,
-        saves_per_epoch=4, save_total_limit=4, bf16=False, fp16=True,
+        saves_per_epoch=4, save_total_limit=4, bf16=True, fp16=False,
         plugins=['scripts.train.spectral_plugin.SpectralPlugin',
                  'axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin',
                  'axolotl.integrations.liger.LigerPlugin', 'axolotl.integrations.kernels.KernelsPlugin',
                  'scripts.train.router_dtype_plugin.RouterDtypePlugin', 'scripts.train.heal_plugin.HealPlugin'],
         seed=15)
     if tiny:
-        cfg.update(max_steps=3, saves_per_epoch=0, sequence_len=256)
+        cfg.update(max_steps=5, saves_per_epoch=0, sequence_len=256)
     return cfg
 
 
@@ -68,7 +68,7 @@ def tiny_model(reference, dtype):
     source = AutoConfig.from_pretrained(reference, local_files_only=True).to_dict()
     source['text_config'].update(hidden_size=32, num_hidden_layers=2, num_attention_heads=2, num_key_value_heads=2,
         head_dim=16, layer_types=['linear_attention', 'full_attention'], full_attention_interval=2,
-        num_experts=4, num_experts_per_tok=2, moe_intermediate_size=16, shared_expert_intermediate_size=32,
+        num_experts=32, num_experts_per_tok=2, moe_intermediate_size=16, shared_expert_intermediate_size=32,
         linear_num_key_heads=2, linear_num_value_heads=4, linear_key_head_dim=16, linear_value_head_dim=16,
         rope_parameters={'mrope_interleaved': True, 'mrope_section': [1, 1, 0], 'rope_type': 'default', 'rope_theta': 10000000, 'partial_rotary_factor': .25})
     source['vision_config'].update(depth=2, hidden_size=32, intermediate_size=64, num_heads=4, out_hidden_size=32, deepstack_visual_indexes=[])
@@ -90,6 +90,16 @@ def adapter_incompatible(text):
 
 def evaluation_order(adapters, finals):
     return [('r15_D', None)] + [(tag, adapters[tag]) for tag in finals] + [(tag, path) for tag, path in adapters.items() if tag not in finals]
+
+
+def server_argv(path, name, adapters=None):
+    argv = ['/opt/vllm/bin/vllm', 'serve', str(path), '--served-model-name', name, '--dtype', 'float16',
+            '--max-model-len', '16384', '--gpu-memory-utilization', '.90', '--max-num-seqs', '64',
+            '--limit-mm-per-prompt', '{"image":0,"audio":0}', '--enforce-eager', '--port', '8000', '--reasoning-parser', 'qwen3']
+    if adapters:
+        argv += ['--enable-lora', '--max-lora-rank', '8', '--max-cpu-loras', str(len(adapters)), '--lora-modules']
+        argv += [json.dumps({'name': tag, 'path': str(p), 'base_model_name': name}) for tag, p in adapters.items()]
+    return argv
 
 
 def stop_server(server):
@@ -123,12 +133,7 @@ class Runner:
                            stdout=stream, stderr=subprocess.STDOUT, timeout=left)
 
     def server(self, path, name, adapters=None):
-        argv = ['/opt/vllm/bin/vllm', 'serve', str(path), '--served-model-name', name, '--dtype', 'float16',
-                '--max-model-len', '16384', '--gpu-memory-utilization', '.90', '--max-num-seqs', '64',
-                '--limit-mm-per-prompt', '{"image":0,"audio":0}', '--enforce-eager', '--port', '8000', '--reasoning-parser', 'qwen3']
-        if adapters:
-            argv += ['--enable-lora', '--max-lora-rank', '8', '--max-cpu-loras', str(len(adapters)), '--lora-modules']
-            argv += [json.dumps({'name': tag, 'path': str(p), 'base_model_name': name}) for tag, p in adapters.items()]
+        argv = server_argv(path, name, adapters)
         receipt = OUT / ('server_' + name)
         receipt.with_suffix('.argv.json').write_text(json.dumps(argv, indent=2) + '\n')
         with receipt.with_suffix('.log').open('w') as stream:
@@ -206,7 +211,8 @@ class Runner:
         import yaml
         from transformers import AutoProcessor, AutoTokenizer
         tiny = ROOT / 'outputs/random_heal_smoke_base'
-        model = tiny_model(self.instruct, torch.float16)
+        torch.manual_seed(15)
+        model = tiny_model(self.instruct, torch.bfloat16)
         model.save_pretrained(tiny)
         tokenizer = AutoTokenizer.from_pretrained(self.instruct)
         tokenizer.save_pretrained(tiny)
@@ -223,15 +229,23 @@ class Runner:
         cfg = train_config(tiny, data, ROOT / 'outputs/random_heal_smoke_adapter', tiny=True)
         path = OUT / 'cfg_tiny_heal_smoke.yml'
         path.write_text(yaml.safe_dump(cfg, sort_keys=False))
-        self.command(['axolotl', 'train', path], 'tiny_heal_train.log', env=dict(self.env, SPECTRAL_FRAC='.01', BEARTYPE='1'))
+        self.command(['axolotl', 'train', path], 'tiny_heal_train.log', env=dict(self.env, SPECTRAL_FRAC='.01', BEARTYPE='1', HEAL_NUMERIC_PATH=str(OUT / 'tiny_heal_numeric.jsonl'), HEAL_VERIFY_UPDATES='1'))
         self.command([sys.executable, ROOT / 'scripts/train/41_expert_adapter_check.py', ROOT / 'outputs/random_heal_smoke_adapter', '4'], 'tiny_heal_experts.log')
-        log('REAL GPU TINY AXOLOTL HEAL SMOKE COMPLETE: same native loader/targets/spectral kernels,3steps')
+        log('REAL GPU TINY AXOLOTL HEAL SMOKE COMPLETE: seeded bf16,5steps,finite gradients,nonzero update and subsequent regularized update')
 
     def train(self):
         import yaml
         manifest = self.plan['data_manifest']
         later_steps = math.ceil(manifest['variants']['mix']['rows'] / 4)
+        trained = []
         for variant in ['trace', 'mix']:
+            if variant == 'mix':
+                measured = json.loads((OUT / 'timing_trace.json').read_text())
+                projected = 1.5 * measured['seconds_per_step_excluding_first_two'] * later_steps
+                available = self.deadline - 3 * 3600 - time.time()
+                if projected > available:
+                    log(f'MIXED NOT RUN: projected {projected:.0f}s exceeds remaining training reserve {available:.0f}s; completed trace heal retained')
+                    break
             data = ROOT / f'data/train/run15/{variant}.jsonl'
             assert sha(data) == manifest['variants'][variant]['sha256']
             self.command([sys.executable, ROOT / 'scripts/train/check_loss_mask.py', data], f'loss_mask_{variant}.log')
@@ -240,16 +254,22 @@ class Runner:
             path = OUT / ('cfg_heal_' + variant + '.yml')
             path.write_text(yaml.safe_dump(cfg, sort_keys=False))
             env = dict(self.env, SPECTRAL_FRAC='.01', HEAL_LATER_STEPS=str(later_steps if variant == 'trace' else 0),
-                       HEAL_TRAIN_DEADLINE=str(self.deadline - 3 * 3600), HEAL_TIMING_PATH=str(OUT / ('timing_' + variant + '.json')))
-            log(f'START TRAIN {variant}: rank8,alpha16,oneepoch,LR1e-4,spectral_frac.01,frozen fp16 D')
+                       HEAL_TRAIN_DEADLINE=str(self.deadline - 3 * 3600), HEAL_TIMING_PATH=str(OUT / ('timing_' + variant + '.json')),
+                       HEAL_NUMERIC_PATH=str(OUT / ('numeric_' + variant + '.jsonl')))
+            log(f'START TRAIN {variant}: rank8,alpha16,oneepoch,LR1e-4,spectral_frac.01,frozen bf16-rounded copy of fp16 D; served D remains fp16')
             self.command(['axolotl', 'train', path], 'train_r10_heal15_' + variant + '.log', env=env)
             for checkpoint in output.glob('checkpoint-*'):
+                self.command([sys.executable, ROOT / 'scripts/train/41_expert_adapter_check.py', checkpoint], f'experts_{variant}_{checkpoint.name}.log')
                 for file in checkpoint.iterdir():
                     if file.is_file() and not (file.name.startswith('adapter_') or file.name == 'trainer_state.json'):
                         file.unlink()
             self.command([sys.executable, ROOT / 'scripts/train/41_expert_adapter_check.py', output], 'experts_' + variant + '.log')
             log('TRAIN COMPLETE ' + variant)
-        (OUT / 'required_adapters.json').write_text(json.dumps({'required_adapters': ['r10_heal15_trace', 'r10_heal15_mix']}))
+            trained.append(variant)
+            (OUT / 'required_adapters.json').write_text(json.dumps({'required_adapters': ['r10_heal15_' + name for name in trained]}))
+        (OUT / 'comparison_models.json').write_text(json.dumps({'models': ['r15_instruct', 'r15_D'] + ['r15_heal_' + name for name in trained],
+            'training_parent_dtype': 'bfloat16', 'serving_parent_dtype': 'float16'}))
+        return trained
 
     def prepare_inputs(self):
         gsm = rows(OUT / 'gsm8k_long60.jsonl')
@@ -290,7 +310,7 @@ class Runner:
 
     def main(self):
         log('# Run15 thinking-heal\n\n-- PI/OpenAI (Sol)\n\nResolved plan:\n\n```json\n' + json.dumps(self.plan, indent=2) + '\n```')
-        log('SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Parent stays fp16/frozen. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.')
+        log('SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Training parent is the frozen bf16-rounded copy of D; original D stays fp16 for serving. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.')
         for name, digest in self.plan['frozen_manifest']['input_sha256'].items():
             if (OUT / name).exists():
                 assert sha(OUT / name) == digest
@@ -299,7 +319,22 @@ class Runner:
                 assert sha(ROOT / ('outputs/up_' + name) / filename) == expected['sha256']
         assert Path(self.instruct).name == self.plan['frozen_manifest']['instruct_revision']
         assert sha(Path(self.instruct) / 'config.json') == self.plan['frozen_manifest']['instruct_config_sha256']
-        if (OUT / 'early_baseline.launch').exists():
+        if 'baseline_reuse' in self.plan:
+            reuse = self.plan['baseline_reuse']
+            assert sha(OUT / 'baseline_receipt.json') == reuse['source_receipt_sha256']
+            receipt = json.loads((OUT / 'baseline_receipt.json').read_text())
+            original = json.loads((OUT / 'baseline_original_plan.json').read_text())
+            assert sha(OUT / 'baseline_original_plan.json') == receipt['plan_sha256'] == reuse['plan_sha256']
+            assert receipt['executor_sha256'] == reuse['executor_sha256']
+            assert original['frozen_manifest'] == self.plan['frozen_manifest']
+            assert original['thinking_budget'] == self.plan['thinking_budget'] == 4096
+            assert sha(ROOT / 'scripts/eval/19_gen_replies.py') == reuse['generator_sha256']
+            assert json.loads((OUT / 'server_r15_instruct.argv.json').read_text()) == server_argv(self.instruct, 'r15_instruct')
+            assert receipt['verified_sha256'] == reuse['verified_sha256']
+            assert all(sha(OUT / name) == digest for name, digest in receipt['verified_sha256'].items())
+            self.command(['/opt/vllm/bin/python', '-c', 'import vllm; print(vllm.__version__); assert vllm.__version__ == "0.31.0"'], 'baseline_reuse_environment.log')
+            log('FIRST-LEASE BASELINE REUSED:57812278; exact frozen inputs, generator, FP16 server argv, vLLM0.31.0 and hashed native outputs; not regenerated on replacement hardware')
+        elif (OUT / 'early_baseline.launch').exists():
             while subprocess.run(['tmux', 'has-session', '-t', 'run15_early_baseline'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
                 assert baseline_can_continue(self.deadline, time.time()), 'early baseline exhausted evaluation plus minimum training/merge reserve' 
                 time.sleep(5)
@@ -313,10 +348,10 @@ class Runner:
         self.prepare_inputs()
         self.merge_parent()
         self.tiny_smoke()
-        self.train()
+        trained = self.train()
         adapters = {}
         finals = []
-        for name in ['trace', 'mix']:
+        for name in trained:
             directory = ROOT / ('outputs/r10_heal15_' + name)
             final = 'r15_heal_' + name
             adapters[final] = directory

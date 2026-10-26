@@ -1,0 +1,357 @@
+test_real_model_merge_train_reload (test_heal_pipeline.HealPipeline.test_real_model_merge_train_reload) ... The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+/workspace/2026/constitutional_grafting/.local/run15_cpu/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['.*\\.gate_up_proj'].
+  warnings.warn(
+/workspace/2026/constitutional_grafting/.local/run15_cpu/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['.*\\.gate_up_proj'].
+  warnings.warn(
+ok
+test_schedule_and_adapter_capability_gates (test_heal_pipeline.HealPipeline.test_schedule_and_adapter_capability_gates) ... ok
+test_training_configuration (test_heal_pipeline.HealPipeline.test_training_configuration) ... ok
+test_heal_review_gate (unittest.loader._FailedTest.test_heal_review_gate) ... ERROR
+test_429_retry_attempt_ids_reserves_and_latest_response (test_thinking_heal_data.ThinkingHealDataTest.test_429_retry_attempt_ids_reserves_and_latest_response) ... {"author": "PI/OpenAI (Sol)", "cpu_real_qwen_moe": true, "losses": [12.436295509338379, 12.441628456115723], "torch": "2.10.0+cu128", "model_type": "qwen3_5_moe", "donor_modules": 11, "mask_trace_closer_and_eos": true, "mask_replay_empty_think_excluded": true, "adapter_on_frozen_merged_parent_reload_parity": true, "merge_inference_parity": true}
+{"id": "one", "accounted_usd": 0.020630500000000003, "status": "uncertain_billing"}
+{"id": "one__attempt_2", "accounted_usd": 0.041261000000000006, "status": "uncertain_billing"}
+{"id": "one__attempt_3", "accounted_usd": 0.04226100000000001, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.04226100000000001}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.04226100000000001}
+ok
+test_budget_resume_unknown_and_cap (test_thinking_heal_data.ThinkingHealDataTest.test_budget_resume_unknown_and_cap) ... {"id": "one", "accounted_usd": 0.020634899999999998, "status": "uncertain_billing"}
+{"id": "two", "accounted_usd": 0.0216349, "status": "recorded"}
+ok
+test_build_holds_known_defects_and_batches_all_latest_replies (test_thinking_heal_data.ThinkingHealDataTest.test_build_holds_known_defects_and_batches_all_latest_replies) ... ok
+test_concurrent_arrival_persistence_and_resume (test_thinking_heal_data.ThinkingHealDataTest.test_concurrent_arrival_persistence_and_resume) ... {
+  "signature": "-- PI/Sol (heal prep 2)",
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B",
+  "tokenizer_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "raw_sha256": "3dbd46551b6965f1183692021bcd80f95db4c95e2c2dd3ccfd32489e4f6544c5",
+  "format_complete_traces": 4,
+  "complete_trace_candidates": 1,
+  "rejected": [
+    {
+      "id": "error",
+      "group": "incomplete_or_invalid",
+      "reason": "Incomplete/refused reply (finish_reason=error)"
+    },
+    {
+      "id": "waits",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "semantic",
+      "group": "semantic_rejected",
+      "reason": "reject_repeated_rechecking"
+    },
+    {
+      "id": "repair",
+      "group": "held_for_repair",
+      "reason": "needs_factual_repair"
+    }
+  ],
+  "rejected_counts": {
+    "incomplete_or_invalid": 1,
+    "quality_rejected": 1,
+    "semantic_rejected": 1,
+    "held_for_repair": 1
+  },
+  "candidate_sources": {
+    "test": 1
+  },
+  "full_response_reads": 2,
+  "unread_kept_candidates": 1,
+  "unread_latest_replies": 3,
+  "unread_format_complete_replies": 2,
+  "D_prompts_only": 0,
+  "D_answers_generated": false,
+  "assistant_tokens": 11,
+  "training_approved": false,
+  "semantic_review": "Full candidate read required; structural completeness alone is not quality approval.",
+  "closure_evidence": "OpenRouter native reasoning + final channels and finish=stop; literal emitted closing/EOS tokens not exposed."
+}
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "neutral_responses": 5,
+  "selected_neutral": 5,
+  "actual_reported_cost_usd": 0,
+  "conservative_accounted_usd": 0,
+  "uncertain_call_ids": [],
+  "reconciled_unbilled_429_ids": [],
+  "quality_rejection_rate_of_logical_prompts": 0.2,
+  "incomplete_or_invalid_rate": 0.2,
+  "groups": {
+    "kept": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "quality_rejected": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 16,
+        "p25": 16,
+        "median": 16,
+        "p75": 16,
+        "p90": 16,
+        "max": 16,
+        "mean": 16.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "held_for_repair": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "semantic_rejected": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "incomplete_or_invalid": {
+      "rows": 1,
+      "sources": {
+        "test": 1
+      },
+      "prompt_tokens": {
+        "n": 1,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 1,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 3,
+        "mean": 3.0
+      },
+      "final_tokens": {
+        "n": 1,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    },
+    "all_rejected": {
+      "rows": 4,
+      "sources": {
+        "test": 4
+      },
+      "prompt_tokens": {
+        "n": 4,
+        "min": 6,
+        "p25": 6,
+        "median": 6,
+        "p75": 6,
+        "p90": 6,
+        "max": 6,
+        "mean": 6.0
+      },
+      "reasoning_tokens": {
+        "n": 4,
+        "min": 3,
+        "p25": 3,
+        "median": 3,
+        "p75": 3,
+        "p90": 3,
+        "max": 16,
+        "mean": 6.25
+      },
+      "final_tokens": {
+        "n": 4,
+        "min": 2,
+        "p25": 2,
+        "median": 2,
+        "p75": 2,
+        "p90": 2,
+        "max": 2,
+        "mean": 2.0
+      }
+    }
+  },
+  "warning": "Kept means format complete, lexical-screen pass and no known semantic hold/reject, NOT semantic/training approval. Rejection groups are disjoint; all_rejected is their union. Length/difficulty bias is possible; prompt length does not measure difficulty."
+}
+{"id": "fast", "accounted_usd": 0.021626100000000002, "status": "recorded"}
+{"id": "slow", "accounted_usd": 0.002, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.002}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.002}
+ok
+test_embedded_error_billed_zero_halts_and_has_one_explicit_retry (test_thinking_heal_data.ThinkingHealDataTest.test_embedded_error_billed_zero_halts_and_has_one_explicit_retry) ... {"id": "one", "accounted_usd": 0, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": true, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0}
+{"id": "one__attempt_2", "accounted_usd": 0, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": true, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": true, "accounted_usd": 0}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": true, "accounted_usd": 0}
+ok
+test_empty_and_incomplete_traces_rejected (test_thinking_heal_data.ThinkingHealDataTest.test_empty_and_incomplete_traces_rejected) ... ok
+test_indecision_filter_threshold_and_word_boundary (test_thinking_heal_data.ThinkingHealDataTest.test_indecision_filter_threshold_and_word_boundary) ... ok
+test_jsonl_unicode_line_separators (test_thinking_heal_data.ThinkingHealDataTest.test_jsonl_unicode_line_separators) ... ok
+test_legacy_429_can_resume_but_unreturned_reservation_cannot (test_thinking_heal_data.ThinkingHealDataTest.test_legacy_429_can_resume_but_unreturned_reservation_cannot) ... {"id": "old_429", "accounted_usd": 0.0206272, "status": "uncertain_billing"}
+{"id": "old_429__attempt_2", "accounted_usd": 0.042255499999999994, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.042255499999999994}
+ok
+test_only_body_confirmed_pre_generation_429_is_reconciled (test_thinking_heal_data.ThinkingHealDataTest.test_only_body_confirmed_pre_generation_429_is_reconciled) ... {"id": "new", "accounted_usd": 0, "status": "unbilled_pre_generation_429"}
+{"id": "old", "accounted_usd": 0.020630500000000003, "status": "uncertain_billing"}
+ok
+test_other_uncertain_error_stops_dispatch (test_thinking_heal_data.ThinkingHealDataTest.test_other_uncertain_error_stops_dispatch) ... {"id": "one", "accounted_usd": 0.0206272, "status": "uncertain_billing"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": true, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": false, "accounted_usd": 0.0206272}
+ok
+test_read_receipt_does_not_approve_a_different_attempt (test_thinking_heal_data.ThinkingHealDataTest.test_read_receipt_does_not_approve_a_different_attempt) ... ok
+test_three_rows_each_with_exact_token_masks (test_thinking_heal_data.ThinkingHealDataTest.test_three_rows_each_with_exact_token_masks) ... /workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/train/check_loss_mask.py:26: ResourceWarning: unclosed file <_io.TextIOWrapper name='/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/slop/data/20261026_thinking_heal/tmp3cys3o09/rows.jsonl' mode='r' encoding='UTF-8'>
+  for line in open(path):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+======================================================================
+ERROR: test_heal_review_gate (unittest.loader._FailedTest.test_heal_review_gate)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_heal_review_gate
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/tests/regression/test_heal_review_gate.py", line 18, in <module>
+    spec.loader.exec_module(grid)
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/eval/36_exact_grid.py", line 15, in <module>
+    from datasets import load_dataset
+ModuleNotFoundError: No module named 'datasets'
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 35.533s
+
+FAILED (errors=1)
+trace_fixture_0 [{"text": "<|im_start|>user\nAdd 2 and 3.<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nTwo plus three equals five.\n</think>\n\n5.<|im_end|>", "label": true}]
+D_MASK_FIXTURE_NOT_A_D_ANSWER_0 [{"text": "<|im_start|>user\nAdd 2 and 3.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "5.<|im_end|>", "label": true}]
+trace_fixture_1 [{"text": "<|im_start|>user\nSort 8, 1, 4.<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nCompare the values in ascending order.\n</think>\n\n1, 4, 8.<|im_end|>", "label": true}]
+D_MASK_FIXTURE_NOT_A_D_ANSWER_1 [{"text": "<|im_start|>user\nSort 8, 1, 4.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "1, 4, 8.<|im_end|>", "label": true}]
+trace_fixture_2 [{"text": "<|im_start|>user\nConvert 2 hours to minutes.<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nThere are 60 minutes per hour; 2 times 60 is 120.\n</think>\n\n120 minutes.<|im_end|>", "label": true}]
+D_MASK_FIXTURE_NOT_A_D_ANSWER_2 [{"text": "<|im_start|>user\nConvert 2 hours to minutes.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "120 minutes.<|im_end|>", "label": true}]

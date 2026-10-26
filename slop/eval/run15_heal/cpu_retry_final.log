@@ -1,0 +1,26 @@
+test_real_model_merge_train_reload (tests.regression.test_heal_pipeline.HealPipeline.test_real_model_merge_train_reload) ... The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+/workspace/2026/constitutional_grafting/.local/run15_cpu/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['.*\\.gate_up_proj'].
+  warnings.warn(
+/workspace/2026/constitutional_grafting/.local/run15_cpu/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['.*\\.gate_up_proj'].
+  warnings.warn(
+ok
+test_schedule_and_adapter_capability_gates (tests.regression.test_heal_pipeline.HealPipeline.test_schedule_and_adapter_capability_gates) ... ok
+test_training_configuration (tests.regression.test_heal_pipeline.HealPipeline.test_training_configuration) ... ok
+test_zero_B_is_finite_under_low_precision_autocast (tests.regression.test_spectral_math.SpectralMath.test_zero_B_is_finite_under_low_precision_autocast) ... ok
+test_zero_history_stays_pending_and_nonfinite_statistics_fail (tests.regression.test_spectral_math.SpectralMath.test_zero_history_stays_pending_and_nonfinite_statistics_fail) ... ok
+test_zero_lr_then_update_then_regularized_update (tests.regression.test_spectral_math.SpectralMath.test_zero_lr_then_update_then_regularized_update) ... ok
+test_final_step_parameter_corruption_is_rejected (tests.regression.test_heal_update_gate.HealUpdateGate.test_final_step_parameter_corruption_is_rejected) ... {"author": "PI/OpenAI (Sol)", "cpu_real_qwen_moe": true, "losses": [12.496490478515625, 12.469470024108887], "torch": "2.10.0+cu128", "model_type": "qwen3_5_moe", "donor_modules": 11, "mask_trace_closer_and_eos": true, "mask_replay_empty_think_excluded": true, "adapter_on_frozen_merged_parent_reload_parity": true, "merge_inference_parity": true}
+HEAL NUMERIC {"step": 1, "pre_step_lr": 0.01, "optimizer_skipped": false, "gradient_tensors_finite": 2, "lora_B_fro_sum_after_step": 0.004578930325806141, "lambda_before_update": 0, "spectral_contribution_before_update": 0.0, "nonzero_lr_optimizer_steps": 1, "regularized_optimizer_steps": 0, "actual_trainable_changes": 1, "actual_regularized_changes": 0, "optimizer_state_tensor_types": [], "scaler_scale": null, "forward_precision": {"unit_test": "CPU callback, no Axolotl/GPU claim"}}
+ok
+test_positive_lr_noop_after_initial_update_is_rejected (tests.regression.test_heal_update_gate.HealUpdateGate.test_positive_lr_noop_after_initial_update_is_rejected) ... HEAL NUMERIC {"step": 1, "pre_step_lr": 0.01, "optimizer_skipped": false, "gradient_tensors_finite": 2, "lora_B_fro_sum_after_step": 0.004578930325806141, "lambda_before_update": 0, "spectral_contribution_before_update": 0.0, "nonzero_lr_optimizer_steps": 1, "regularized_optimizer_steps": 0, "actual_trainable_changes": 1, "actual_regularized_changes": 0, "optimizer_state_tensor_types": [], "scaler_scale": null, "forward_precision": {"unit_test": "CPU callback, no Axolotl/GPU claim"}}
+ok
+test_real_change_then_regularized_change_passes (tests.regression.test_heal_update_gate.HealUpdateGate.test_real_change_then_regularized_change_passes) ... HEAL NUMERIC {"step": 1, "pre_step_lr": 0, "optimizer_skipped": false, "gradient_tensors_finite": 2, "lora_B_fro_sum_after_step": 0.0, "lambda_before_update": 0, "spectral_contribution_before_update": 0.0, "nonzero_lr_optimizer_steps": 0, "regularized_optimizer_steps": 0, "actual_trainable_changes": 0, "actual_regularized_changes": 0, "optimizer_state_tensor_types": [], "scaler_scale": null, "forward_precision": {"unit_test": "CPU callback, no Axolotl/GPU claim"}}
+HEAL NUMERIC {"step": 2, "pre_step_lr": 0.01, "optimizer_skipped": false, "gradient_tensors_finite": 2, "lora_B_fro_sum_after_step": 0.004578930325806141, "lambda_before_update": 0, "spectral_contribution_before_update": 0.0, "nonzero_lr_optimizer_steps": 1, "regularized_optimizer_steps": 0, "actual_trainable_changes": 1, "actual_regularized_changes": 0, "optimizer_state_tensor_types": [], "scaler_scale": null, "forward_precision": {"unit_test": "CPU callback, no Axolotl/GPU claim"}}
+HEAL NUMERIC {"step": 3, "pre_step_lr": 0.01, "optimizer_skipped": false, "gradient_tensors_finite": 2, "lora_B_fro_sum_after_step": 0.007828352972865105, "lambda_before_update": 0.1, "spectral_contribution_before_update": 0.0006113489158451557, "nonzero_lr_optimizer_steps": 2, "regularized_optimizer_steps": 1, "actual_trainable_changes": 2, "actual_regularized_changes": 1, "optimizer_state_tensor_types": [], "scaler_scale": null, "forward_precision": {"unit_test": "CPU callback, no Axolotl/GPU claim"}}
+ok
+test_saved_adapter_dense_nan_is_rejected (tests.regression.test_heal_update_gate.HealUpdateGate.test_saved_adapter_dense_nan_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 5.033s
+
+OK

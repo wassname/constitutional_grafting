@@ -1,0 +1,10 @@
+[Unit]
+Description=Hard deadline for Vast 57812278
+[Timer]
+OnCalendar=2026-10-26 18:22:51 UTC
+Persistent=true
+AccuracySec=1s
+RandomizedDelaySec=0
+Unit=cg-vast-57812278-deadline.service
+[Install]
+WantedBy=timers.target

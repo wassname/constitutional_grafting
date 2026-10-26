@@ -12,10 +12,10 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'slop/eval/run15_heal'
-BOX = OUT / 'lease/box_runs'
+BOX = OUT / 'lease_retry/box_runs'
 MODELS = ['r15_instruct', 'r15_D', 'r15_heal_trace', 'r15_heal_mix']
 EQUATIONS = {'r15_instruct': 'θ_I', 'r15_D': 'θ_I + Δ_docs + 1·Δsft_rewr|docs',
-             'r15_heal_trace': 'θ_D + 1·Δheal_trace|D', 'r15_heal_mix': 'θ_D + 1·Δheal_mix|D'}
+             'r15_heal_trace': 'θ_D_fp16 + 1·Δheal_trace|D_bf16', 'r15_heal_mix': 'θ_D_fp16 + 1·Δheal_mix|D_bf16'}
 FINAL_FIELDS = ['user', 'assistant', 'finish_reason', 'n_tokens', 'marker_violation']
 sys.path.insert(0, str(ROOT / 'scripts/eval'))
 from coherence_metrics import check_coherence, load_pinned_checks
@@ -98,13 +98,13 @@ def prepare():
         destination = OUT / ('final_only_' + mode + '.jsonl')
         destination.write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in projected))
     (OUT / 'final_only_projection.json').write_text(json.dumps(provenance, indent=2) + '\n')
-    print('PASS: 4models x2modes x140rows; complete raw wire/final-only histories verified; final-only projections written')
+    print(f'PASS: {len(MODELS)}models x2modes x140rows; complete raw wire/final-only histories verified; final-only projections written')
 
 
 def read_packet():
     selection = {'sys_payday_loan', 'task_agent', 'task_email'}
     packet = ['# Run15 preselected complete replies\n\n-- PI/OpenAI (Sol)\n\nSelection was frozen before inference: payday loan, fridge tools, spin email plus four fixed T0 demonstrations. Full native thinking and finals are preserved, including blank/looped answers. Early checkpoints have selected reads only; their absence from full scores is explicit.\n']
-    panel = ['# Run15 fixed temperature-zero panel\n\n-- PI/OpenAI (Sol)\n\nθ_D = θ_I + Δ_docs + Δsft_rewr|docs. Heal LoRAs train on frozen merged D, not Base. Missing historical document2x/4x, SFT-only, and graft-only cells: not run in this repair trial; see the original project panels. Both modes below include complete prompts and all turns in order.\n']
+    panel = ['# Run15 fixed temperature-zero panel\n\n-- PI/OpenAI (Sol)\n\nθ_D = θ_I + Δ_docs + Δsft_rewr|docs. Heal LoRAs train on a frozen bf16-rounded copy of merged D, not Base; evaluation adds them to the original fp16 D. Missing historical document2x/4x, SFT-only, and graft-only cells: not run in this repair trial; see the original project panels. Both modes below include complete prompts and all turns in order.\n']
     def panel_order(path):
         tag, mode = path.stem.removeprefix('panel_').rsplit('_', 1)
         return (MODELS.index(tag) if tag in MODELS else len(MODELS), tag, mode)
@@ -130,10 +130,10 @@ def read_packet():
 
 
 def analyze():
-    plan = json.loads((OUT / 'plan.json').read_text())
+    plan = json.loads((OUT / 'retry_plan.json').read_text())
     checks = load_pinned_checks(ROOT / '.local/tiny-character', plan['frozen_manifest']['protocol_sha256'])
     items = {r['id']: r for r in rows(ROOT / 'slop/eval/run8/items.jsonl')}
-    output = {'author': 'PI/OpenAI (Sol)', 'scope': 'Final-only per-regime advantage vs fresh Instruct. Bootstrap2000 item clusters, seed0, average2samples/item first. One training seed. Off retention difference is relative to same unhealed D.', 'modes': {}}
+    output = {'author': 'PI/OpenAI (Sol)', 'scope': 'Final-only per-regime advantage vs Instruct reused from first lease with identical recorded serving protocol, not regenerated on replacement hardware. Bootstrap2000 item clusters, seed0, average2samples/item first. One training seed. Off retention difference is relative to same unhealed D.', 'modes': {}}
     for mode in ['on', 'off']:
         judged = rows(OUT / f'judging_{mode}/judged.jsonl')
         parent = per_item(judged, 'r15_D')
@@ -183,4 +183,5 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['prepare-judge', 'analyze', 'read-packet'])
     args = parser.parse_args()
+    MODELS = json.loads((BOX / 'comparison_models.json').read_text())['models']
     {'prepare-judge': prepare, 'analyze': analyze, 'read-packet': read_packet}[args.action]()
