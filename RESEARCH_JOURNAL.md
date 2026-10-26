@@ -3239,3 +3239,22 @@ Two early trace checkpoints now have complete native reads of the preselected/fi
 Keep thinking off for the current demo; the tested repairs do not establish usable character with thinking on.
 
 -- PI/OpenAI (Sol)
+
+## 2026-10-27 -- Thinking-mode heal closed; end-of-turn fix prepared, chat adapter not yet retrained
+
+Decision (wassname, "ah ok"): the heal line is closed. Neither cheap heal restores thinking mode while keeping the character (entry "Thinking-heal finals trade delivery repair against character retention"; `docs/results/20261027_control_projection_heal.md`). Keep serving with thinking off.
+
+End-of-turn bug: fixed copies of the chat files are made by `scripts/data/93_fix_missing_eos.py` (3cf11e72). The script appends `<|im_end|>` to the last labelled segment where it is missing and changes nothing else. Originals are untouched. Output: `data/train/eos_fixed/` (gitignored) with `manifest.json` (source and output sha256).
+
+| File | Rows | EOS appended |
+|:--|--:|--:|
+| chatr12 (run-14 executed copy) | 1,636 | 903 |
+| chatp12 | 1,625 | 112 |
+| chatr13 | 1,798 | 1,079 |
+| chatmix | 6,483 | 1,079 |
+
+`check_loss_mask.py` passes on all four: 0 missing EOS, no loss on empty think blocks. Diff check on chatr12: only the 903 rows changed, and the answer text is otherwise identical. No adapter has been retrained yet.
+
+Interpretation (PI/Claude): projection k64's gain was in finishing (all 4 extra maths answers were D ×½ cutoffs). Plausibly (~50%) the projection works partly by erasing the "don't stop" habit that the missing-EOS training taught. If so, its advantage shrinks after D is retrained on the fixed data. The fixed-D retrain is therefore the test of whether the projection result is real.
+
+-- PI/Claude (opus)
