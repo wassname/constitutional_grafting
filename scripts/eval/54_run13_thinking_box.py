@@ -155,6 +155,98 @@ def cell(label, phase):
             shutil.rmtree(merged)
 
 
+def fingerprint():
+    model_files = sorted(set(Path(MODEL).glob('*.safetensors')) | {Path(MODEL) / 'config.json', Path(MODEL) / 'model.safetensors.index.json'})
+    return {'model_files_sha256': {p.name: sha(p) for p in model_files},
+            'revision': Path(MODEL).name, 'generator_sha256': sha(ROOT / 'scripts/eval/19_gen_replies.py'),
+            'executor_sha256': sha(Path(__file__)),
+            'vllm_version': subprocess.check_output(['/opt/vllm/bin/python', '-c', 'from importlib.metadata import version; print(version("vllm"))'], text=True).strip(),
+            'inputs_sha256': {name: sha(OUT / name) for name in ['items.jsonl', 'panel.jsonl']},
+            'thinking_budget': PLAN['thinking_budget'], 'primary_temperature': .7, 'top_p': 1.0,
+            'seeds': [0, 1], 'primary_samples': 2, 'fixed_panel_temperature': 0,
+            'max_tokens_policy': 'item.max_new_tokens+thinking_budget', 'dtype': 'float16',
+            'model': PLAN['models']['A']['model']}
+
+
+def verify_early_rows():
+    tag = PLAN['models']['A']['model']
+    files = [(OUT / 'items.jsonl', OUT / f'replies_{tag}.jsonl', .7, 2),
+             (OUT / 'panel.jsonl', OUT / f'panel_samples_{tag}.jsonl', .7, 2),
+             (OUT / 'panel.jsonl', OUT / f'panel_{tag}.jsonl', 0, 1)]
+    digests = {}
+    for source, output, temperature, samples in files:
+        items = {r['id']: r for r in map(json.loads, source.read_text().splitlines())}
+        records = [json.loads(line) for line in output.read_text().splitlines()]
+        expected = {(item, sample) for item in items for sample in range(samples)}
+        keys = [(r['item_id'], r['sample']) for r in records]
+        assert len(keys) == len(expected) and set(keys) == expected
+        trace = output.with_name(output.name + '.wire.jsonl')
+        events = [json.loads(line) for line in trace.read_text().splitlines()]
+        requests = {r['request_id']: r['body'] for r in events if r['event'] == 'request'}
+        responses = {r['request_id']: r['body'] for r in events if r['event'] == 'response'}
+        assert len(events) == 2 * len(requests) == 2 * len(responses)
+        used = []
+        for row in records:
+            item = items[row['item_id']]
+            assert row['model'] == row['base_model'] == tag and row['system'] == item['system']
+            assert [t['user'] for t in row['turns']] == item['turns']
+            assert row['gen'] == {'temperature': temperature, 'top_p': 1.0, 'seed': row['sample'],
+                'enable_thinking': True, 'thinking_token_budget': PLAN['thinking_budget'],
+                'regime': 'thinking-on-plus-extra-compute', 'history': 'visible final answers only'}
+            messages = [{'role': 'system', 'content': item['system']}] if item['system'] else []
+            for turn in row['turns']:
+                messages.append({'role': 'user', 'content': turn['user']})
+                assert requests[turn['request_id']] == {'model': tag, 'messages': messages,
+                    'max_tokens': item['max_new_tokens'] + PLAN['thinking_budget'],
+                    'temperature': temperature, 'top_p': 1.0, 'seed': row['sample'],
+                    'chat_template_kwargs': {'enable_thinking': True},
+                    'thinking_token_budget': PLAN['thinking_budget'], 'return_token_ids': True}
+                response = responses[turn['request_id']]
+                assert response['model'] == tag and (response['choices'][0]['message']['content'] or '') == turn['assistant']
+                assert len(response['choices'][0]['token_ids']) == turn['total_completion_tokens']
+                messages.append({'role': 'assistant', 'content': turn['assistant']})
+                used.append(turn['request_id'])
+        assert len(used) == len(set(used)) and set(used) == requests.keys()
+        digests[output.name] = sha(output)
+        digests[trace.name] = sha(trace)
+    assert len(json.loads((OUT / 'smoke.json').read_text())) == 3
+    digests['smoke.json'] = sha(OUT / 'smoke.json')
+    digests['smoke.wire.jsonl'] = sha(OUT / 'smoke.wire.jsonl')
+    return digests
+
+
+def early_a():
+    assert not (OUT / 'primary_A.done').exists()
+    for name in ['items.jsonl', 'panel.jsonl']:
+        assert sha(OUT / name) == PLAN['frozen_manifest']['input_sha256'][name]
+    assert Path(MODEL).name == PLAN['frozen_manifest']['instruct_revision']
+    assert sha(Path(MODEL) / 'config.json') == PLAN['frozen_manifest']['instruct_config_sha256']
+    started = time.time()
+    settings = fingerprint()
+    log('EARLY A: native smoke and primary during adapter uploads; same frozen settings')
+    cell('A', 'primary')
+    receipt = {'author': 'PI/OpenAI (Sol)', 'early_during_uploads': True,
+               'started_epoch': started, 'completed_epoch': time.time(),
+               'settings': settings, 'verified_output_sha256': verify_early_rows()}
+    (OUT / 'early_A.receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    log('EARLY A VERIFIED COMPLETE,140frozen rows plus panels; full wire requests checked')
+
+
+def accept_early_a():
+    receipt = OUT / 'early_A.receipt.json'
+    if not receipt.exists():
+        return False
+    try:
+        saved = json.loads(receipt.read_text())
+        assert saved['settings'] == fingerprint()
+        assert saved['verified_output_sha256'] == verify_early_rows()
+    except (AssertionError, KeyError, ValueError, FileNotFoundError) as error:
+        log('EARLY A NOT ACCEPTED: ' + repr(error))
+        return False
+    log('EARLY A ACCEPTED: complete140frozen keys, exact model file hashes/settings/wire requests')
+    return True
+
+
 def main():
     (OUT / 'run.md').write_text('# Thinking-on frozen evaluation\n\nPI/OpenAI (Sol). Final-only judging happens locally. Raw full transport is in per-model `.wire.jsonl` files.\n\n')
     log('Resolved configuration:\n\n```json\n' + json.dumps({'argv': sys.argv, 'model': MODEL, 'deadline': DEADLINE, 'plan': PLAN}, indent=2) + '\n```')
@@ -174,7 +266,20 @@ def main():
                 'tokenizer_files': {p.name: sha(p) for p in Path(MODEL).glob('*') if 'tokenizer' in p.name or p.name == 'chat_template.jinja'},
                 'versions': subprocess.check_output(['/opt/vllm/bin/python', '-c', 'import vllm,transformers,torch; print(vllm.__version__,transformers.__version__,torch.__version__)'], text=True)}
     (OUT / 'engine_metadata.json').write_text(json.dumps(metadata, indent=2))
+    if (OUT / 'early_A.launch.json').exists():
+        while subprocess.run(['tmux', 'has-session', '-t', 'run13_early_A'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
+            assert time.time() < DEADLINE - 1800, 'early A did not finish with time for later models'
+            time.sleep(5)
     for label in ['A', 'D', 'H']:
+        if label == 'A' and accept_early_a():
+            continue
+        if label == 'A' and (OUT / 'early_A.launch.json').exists():
+            archive = OUT / 'early_A_not_accepted'
+            archive.mkdir(exist_ok=False)
+            tag = PLAN['models']['A']['model']
+            for path in set(OUT.glob(f'*{tag}*')) | set(OUT.glob('smoke*')) | set(OUT.glob('early_A.receipt.json')) | set(OUT.glob('*primary_A*')):
+                shutil.move(path, archive / path.name)
+            log('Preserved unaccepted early A; generating primary A under main settings')
         cell(label, 'primary')
     for label in ['A', 'D', 'H']:
         if DEADLINE - time.time() < 1800:
@@ -189,4 +294,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if sys.argv[1:] == ['--early-A']:
+        early_a()
+    else:
+        assert not sys.argv[1:]
+        main()

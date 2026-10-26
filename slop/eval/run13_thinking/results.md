@@ -1,6 +1,6 @@
 # Run13: does grafted character survive thinking?
 
-Status: preparing; no lease created yet. PI/OpenAI (Sol).
+Status: setup passed; at03:03UTC two of six adapters uploaded and remotely hash-verified, third in transfer. Uploads (~3MB/s) are the current bottleneck. PI/OpenAI (Sol). Exact instance57749737 (`cg-run13-thinking`); independent persistent systemd destruction confirmed active/enabled for2026-10-26 06:47:23UTC (14:47:23AWST). Runner stops30minutes earlier. Receipt: `lease/deadline_guard_armed.json`.
 
 Parent const_v2 approved one lease, total GPU/traffic/judging cap $15. Frozen 70 items, two samples, temperature0.7, top_p1, seeds0/1. Priority: A/D/H frozen70, then GSM60, then optional E. Four fixed panel prompts also get two stochastic samples for reading and one temperature-zero sample for the existing demo format.
 
@@ -18,6 +18,10 @@ Use vLLM0.31's native qwen3 reasoning parser, `enable_thinking=True`, native `th
 Judge only verbatim API final content, with pinned judge41 and the thinking-on A reference. Each later dialogue turn sees that model's own visible final answers, not hidden thinking. Save the exact request, full response, all generated token IDs, reasoning boundary, finish/stop reason and final-only token count. Empty final after cutoff or EOS during thinking is retained as a generation failure; no continuation, clipping or rescue. Residual markers are preserved and flagged. Provided API content with unresolved native token boundary is preserved separately as a parser-boundary anomaly, not called verified final-only; unknown exact counts are null. Report anomaly counts and a flagged-case sensitivity if they could change a conclusion. The frozen checker's cutoff rule still uses the original item budget; it is not modified to conceal the new regime.
 
 Tiny-char confirmed frozen item SHA `f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19`, change SHA `02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab`, and pinned checkout `.local/tiny-character` at `2d697390de6ddc4f75de272f36750186f04c724d`. Do not substitute the current tiny-character checkout.
+
+## Early baseline during uploads
+
+Parent approved overlapping the native smoke and A primary on the otherwise idle GPU at03:04:48UTC. The existing main lease controller is unchanged and continues uploads. `overlap_launch.json` records the updated box-executable SHA and launch identity; A's receipt records full checkpoint-file hashes, vLLM version, input/generator/executor hashes, sampling and budget. Main accepts A only after checking all140 frozen keys, panels and every exact wire request against those settings; otherwise it preserves the early files and regenerates A. No new lease or spending limit.
 
 ## Checks and predictions before spending
 
@@ -42,4 +46,4 @@ Primary vLLM source checked: https://docs.vllm.ai/en/v0.31.0/features/reasoning_
 
 ## Observations
 
-Pending. Recorder regression tests: six pass, including final-only token counts, full raw-response retention, empty-final cutoff and missing-boundary handling. Existing rental/retrieval safeguards:10pass. Independent review and responses are in `preflight_review.md` and `preflight_response.md`. These mocked transport tests do not replace the required real GPU smoke.
+Pending. Git commits/pushes are on hold by parent instruction during the private-book history rewrite; working files stay on disk, and commits resume only after the README session says `rewrite done`. Recorder regression tests: six pass, including final-only token counts, full raw-response retention, empty-final cutoff and missing-boundary handling. Existing rental/retrieval safeguards:10pass. Independent review and responses are in `preflight_review.md` and `preflight_response.md`. These mocked transport tests do not replace the required real GPU smoke.

@@ -1,0 +1,7 @@
+{
+  "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+  "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
+  "scripts/train/13_run10_evals.sh": "33cd57dac8b51f224dfe7f8288656d538fb5da8eacb396542532c283ab14b1de",
+  "scripts/eval/19_gen_replies.py": "3ca7e85a6a80ce8253af3d1f528f8c6dac33857186a4095f55a3643d2a59c226",
+  "scripts/eval/54_run13_thinking_box.py": "262f6644e1fea014d8268ec9799297066f14916ed44f4b5a270a826b54bfa073"
+}
