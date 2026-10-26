@@ -1,0 +1,42 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "approval": "wassname via const_v2,2026-10-26; goal2 ad3e95-v12, cap$20 all-in",
+  "D_cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1
+    ],
+    [
+      "other",
+      1
+    ],
+    [
+      "rewr",
+      1
+    ]
+  ],
+  "thinking_budget": 4096,
+  "selected_item_ids": [
+    "sys_payday_loan",
+    "task_agent",
+    "task_email"
+  ],
+  "max_hours": 6,
+  "max_rate": 1.99,
+  "disk_gb": 400,
+  "prep_api_accounted_usd": 1.216868395,
+  "judge_reserve_usd": 4,
+  "review_reserve_usd": 1,
+  "traffic_reserve_usd": 0.8,
+  "termination_margin_usd": 1,
+  "total_reserve_usd": 19.956868395,
+  "training": "Frozen ordered-fp16 D; rank8/alpha16 all existing dense/expert targets; LR1e-4, spectral_frac.01, oneepoch, quarter checkpoints; no KL. Matched total assistant tokens, half traces+half replay in mixed.",
+  "precision": "Train frozen D weights fp16, trainable LoRA fp32. Native unmerged expert-LoRA vLLM if supported; otherwise explicit fp32 update+accumulation rounded once to fp16, same parent.",
+  "evaluation": "Fresh Instruct and D, final trace/mix: full frozen70x2 + GSM60 + fixedT0panel in both modes. Early quarter checkpoints: selected3x2 plus T0panel in both modes; not full-scope scores.",
+  "recovery": "Snapshot/retrieve logs and all adapters; stop if retrieval fails, exact-ID independent destruction deadline remains. No replacement lease.",
+  "timing": "Measure20steps; project both variants with1.5time margin and reserve3h evaluation before runnerdeadline. Runnerends45min before providerdestroy."
+}

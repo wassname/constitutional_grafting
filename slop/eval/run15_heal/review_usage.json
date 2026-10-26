@@ -1,0 +1,15 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "run_id": "4cc811a0-385d-436c-884c-ce4055c8df05",
+  "model": "openrouter/anthropic/claude-fable-5.1:medium",
+  "usage": {
+    "input": 6,
+    "output": 546,
+    "cacheRead": 4287,
+    "cacheWrite": 4859,
+    "cost": 0.08916925,
+    "turns": 3
+  },
+  "provider_error": "402: reservation for128000 tokens exceeds126625 affordable; no completed review",
+  "scope": "Harness reported cost, not provider invoice; within $1reviewreserve"
+}

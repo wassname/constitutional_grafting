@@ -1,0 +1,68 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "approval": "const_v2 explicit one-replacement exception2026-10-26T13:50Z; original$20 all-in, no further lease",
+  "D_cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1
+    ],
+    [
+      "other",
+      1
+    ],
+    [
+      "rewr",
+      1
+    ]
+  ],
+  "thinking_budget": 4096,
+  "selected_item_ids": [
+    "sys_payday_loan",
+    "task_agent",
+    "task_email"
+  ],
+  "max_hours": 6,
+  "max_rate": 1.91,
+  "disk_gb": 400,
+  "prep_api_accounted_usd": 1.216868395,
+  "first_lease_gpu_usd": 2.6734729968618467,
+  "judge_reserve_usd": 1.5,
+  "review_reserve_usd": 0.5,
+  "traffic_reserve_usd": 1.6,
+  "termination_margin_usd": 1,
+  "total_reserve_usd": 19.950341391861848,
+  "baseline_reuse": {
+    "source_lease": 57812278,
+    "plan_sha256": "74bac8afeb9ff73b2030dcbefcd08435d6a6b3329ba3b1c8bd785237c2b196d2",
+    "executor_sha256": "993002d8c17e48b35f7fdf615dc3e35efa9f4c4fb6f9507fcdffcec24fe882a7",
+    "generator_sha256": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
+    "source_receipt_sha256": "17cc6835025bbd8c4221935affc95d2b3cf2eed862b559e22324d018c1cb569b",
+    "verified_sha256": {
+      "replies_r15_instruct_on.jsonl": "b0b5e48249f7db689da5434b7662a8f0f31c42378eb5a3a12ba9d1c836130384",
+      "replies_r15_instruct_on.jsonl.wire.jsonl": "9f60c610d811c84926c0c37fb2fa5042bd3aee5dc1ab9fb540059510cae5d0dd",
+      "panel_r15_instruct_on.jsonl": "e656383c0deef4169f3f15ff2f2fe451ab601e25830bf051b29b99d74f0c3f25",
+      "panel_r15_instruct_on.jsonl.wire.jsonl": "91ddc97cd64047f39495c21ac03b921d9659b304eaaf74a4ee72b9f1752a6cc7",
+      "gsm_replies_r15_instruct_on.jsonl": "e3cd5315f5bc213004ad67fddfca88e7ff56718abd75c12e9821b71c0377885e",
+      "gsm_replies_r15_instruct_on.jsonl.wire.jsonl": "f4996f99ee03876bd4c9596dbc491869cf440815a32b8ff25a864b24728885f6",
+      "gsm8k_r15_instruct_on.jsonl": "e533d95d11eaad1a727a29d5932abd75975b07d6b638890598d5fc4abb5f1198",
+      "replies_r15_instruct_off.jsonl": "627d7eed4dd628cfd17c0e48610268a5b572031aaadcdb9e5245c479d9218b38",
+      "replies_r15_instruct_off.jsonl.wire.jsonl": "07a0ffab19c36433f5a679d2dde0ea5f6703d510890361d688479396307726f0",
+      "panel_r15_instruct_off.jsonl": "167d1c320a907df7b3007b6287b334e3ecb153d9fe1674221577eb3c2762a8f7",
+      "panel_r15_instruct_off.jsonl.wire.jsonl": "30a80966c5a2db44bdcd99671d0a4a7f357a8a9c61f9596c8a34dd3c44345c36",
+      "gsm_replies_r15_instruct_off.jsonl": "fe38d698246422bc4f5945558f8a482847972983ffec59477b89870aa3cce720",
+      "gsm_replies_r15_instruct_off.jsonl.wire.jsonl": "8021a5c8c02da2a0505f49aacd64b15cf57e543b797ad5e345e0c70955264afb",
+      "gsm8k_r15_instruct_off.jsonl": "1e7fec30ab7e2d05466cab841f17c09b973c6f0f66d49760badf041537452583"
+    }
+  },
+  "timing_policy": "Traces first; mixed only if measured remaining time fits; never discard a completed trace heal.",
+  "transport": "All4 donors via owner-approved readonly cloud relay; original pinned SHA256, source before/after SHA, new receiver SHA/mtime and atomic install. No local donor bytes consumed.",
+  "training": "Frozen bf16-rounded training copy of ordered-fp16 D; rank8/alpha16 all existing dense/expert targets; LR1e-4, spectral_frac.01, oneepoch, quarter checkpoints; no KL. Matched total assistant tokens, half traces+half replay in mixed.",
+  "precision": "Train a frozen bf16-rounded copy of ordered-fp16 D; LoRA fp32 and spectral math FP32 outside autocast. Original D remains fp16 for all serving. Heal adapters are therefore trained against D_bf16, served against D_fp16. Native expert-LoRA or approved fp32-accumulated fp16 merge.",
+  "evaluation": "Instruct reused from first lease at exact recorded serving protocol; D and final trace/mix generated on replacement. All: full frozen70x2 + GSM60 + fixedT0panel in both modes. Early quarter checkpoints: selected3x2 plus T0panel in both modes; not full-scope scores.",
+  "recovery": "One authorized replacement only. Snapshot/retrieve logs and adapters; stop on failed retrieval. Independent exact-ID destruction deadline. First-lease files retained unchanged.",
+  "timing": "Measure20steps; project both variants with1.5time margin and reserve3h evaluation before runnerdeadline. Runnerends45min before providerdestroy."
+}

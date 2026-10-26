@@ -1,0 +1,8 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "recorded_native_run13_rows": 2,
+  "wire_projection_pass": true,
+  "metadata_change": "Model/base_model labels only mapped to r15_instruct; actual prompts, outputs, traces/settings unchanged",
+  "source": "/workspace/2026/constitutional_grafting/slop/eval/run13_thinking/lease/box_runs/replies_r8_a0_b0.jsonl",
+  "source_sha256": "668229ddfebe3deb7a94746a22bb1bd6456130e301553f225ce196ddecb4595f"
+}

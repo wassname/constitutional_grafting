@@ -1,0 +1,423 @@
+
+     #@@ #@@      @@# @@#
+    @@  @@          @@  @@           =@@#                               @@                 #@    =@@#.
+    @@    #@@@@@@@@@    @@           #@#@=                              @@                 #@     .=@@
+      #@@@@@@@@@@@@@@@@@            =@# @#     ##=     ##    =####=+    @@      =#####+  =#@@###.   @@
+    @@@@@@@@@@/  +@@/  +@@          #@  =@=     #@=   @@   =@#+  +#@#   @@    =@#+  +#@#   #@.      @@
+    @@@@@@@@@@  ##@@  ##@@         =@#   @#      =@# @#    @@      @@   @@    @@      #@   #@       @@
+     @@@@@@@@@@@@@@@@@@@@          #@=+++#@=      =@@#     @@      @@   @@    @@      #@   #@       @@
+                                  =@#=====@@     =@# @#    @@      @@   @@    @@      #@   #@       @@
+    @@@@@@@@@@@@@@@@  @@@@        #@      #@=   #@=  +@@   #@#    =@#   @@.   =@#    =@#   #@.      @@
+                                 =@#       @#  #@=     #@   =#@@@@#=    +#@@=  +#@@@@#=    .##@@+   @@
+    @@@@  @@@@@@@@@@@@@@@@
+
+The following values were not passed to `accelerate launch` and had defaults used instead:
+	`--num_processes` was set to a value of `1`
+	`--num_machines` was set to a value of `1`
+	`--mixed_precision` was set to a value of `'no'`
+	`--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+W1026 15:43:17.601000 2975 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1026 15:43:17.627000 2975 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+[2026-10-26 15:43:20,135] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.context_parallel.ContextParallelPlugin
+[2026-10-26 15:43:20,141] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.context_parallel.ContextParallelPlugin
+[2026-10-26 15:43:20,141] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.expert_parallel.ExpertParallelPlugin
+[2026-10-26 15:43:20,149] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.expert_parallel.ExpertParallelPlugin
+[2026-10-26 15:43:20,149] [INFO] [axolotl.integrations.base] Attempting to load plugin: scripts.train.spectral_plugin.SpectralPlugin
+[2026-10-26 15:43:20,151] [INFO] [axolotl.integrations.base] Plugin loaded successfully: scripts.train.spectral_plugin.SpectralPlugin
+[2026-10-26 15:43:20,151] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+[2026-10-26 15:43:22,703] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
+[2026-10-26 15:43:22,703] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.liger.LigerPlugin
+[2026-10-26 15:43:22,709] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.liger.LigerPlugin
+[2026-10-26 15:43:22,709] [INFO] [axolotl.integrations.base] Attempting to load plugin: axolotl.integrations.kernels.KernelsPlugin
+[2026-10-26 15:43:22,717] [INFO] [axolotl.integrations.base] Plugin loaded successfully: axolotl.integrations.kernels.KernelsPlugin
+[2026-10-26 15:43:22,717] [INFO] [axolotl.integrations.base] Attempting to load plugin: scripts.train.router_dtype_plugin.RouterDtypePlugin
+[2026-10-26 15:43:22,718] [INFO] [axolotl.integrations.base] Plugin loaded successfully: scripts.train.router_dtype_plugin.RouterDtypePlugin
+[2026-10-26 15:43:22,718] [INFO] [axolotl.integrations.base] Attempting to load plugin: scripts.train.heal_plugin.HealPlugin
+[2026-10-26 15:43:22,720] [INFO] [axolotl.integrations.base] Plugin loaded successfully: scripts.train.heal_plugin.HealPlugin
+[2026-10-26 15:43:22,769] [WARNING] [axolotl.utils.schemas.config] Auto-enabling LoRA kernel optimizations for faster training. Please explicitly set `lora_*_kernel` config values to `false` to disable. See https://docs.axolotl.ai/docs/lora_optims.html for more info.
+[2026-10-26 15:43:22,858] [INFO] [axolotl.cli.config] config:
+{
+  "activation_offloading": false,
+  "adam_beta2": 0.995,
+  "adapter": "lora",
+  "attn_decontaminates_packing": true,
+  "attn_implementation": "sdpa",
+  "attn_needs_dtype_cast": false,
+  "attn_supports_packing": false,
+  "attn_uses_flash_lib": false,
+  "axolotl_config_path": "/workspace/cg/runs/run10/cfg_tiny_heal_smoke.yml",
+  "base_model": "/workspace/cg/outputs/random_heal_smoke_base",
+  "base_model_config": "/workspace/cg/outputs/random_heal_smoke_base",
+  "batch_size": 4,
+  "bf16": true,
+  "capabilities": {
+    "bf16": true,
+    "compute_capability": "sm_120",
+    "fp8": true,
+    "n_gpu": 1,
+    "n_node": 1,
+    "tf32": true
+  },
+  "context_parallel_size": 1,
+  "cut_cross_entropy": true,
+  "cut_cross_entropy_accum_c_fp32": false,
+  "dataloader_num_workers": 1,
+  "dataloader_pin_memory": true,
+  "dataloader_prefetch_factor": 256,
+  "dataset_num_proc": 256,
+  "dataset_prepared_path": "/workspace/cg/outputs/random_heal_smoke_adapter_prepared",
+  "datasets": [
+    {
+      "ds_type": "json",
+      "message_property_mappings": {
+        "content": "content",
+        "role": "role"
+      },
+      "path": "/workspace/cg/runs/run10/tiny_smoke.jsonl",
+      "trust_remote_code": false,
+      "type": "input_output"
+    }
+  ],
+  "ddp": false,
+  "device": "cuda:0",
+  "dion_rank_fraction": 1.0,
+  "dion_rank_multiple_of": 1,
+  "eaft_alpha": 1.0,
+  "eaft_k": 20,
+  "env_capabilities": {
+    "torch_version": "2.14.1"
+  },
+  "eval_batch_size": 1,
+  "eval_causal_lm_metrics": [
+    "sacrebleu",
+    "comet",
+    "ter",
+    "chrf"
+  ],
+  "eval_max_new_tokens": 128,
+  "eval_table_size": 0,
+  "evals_per_epoch": 0,
+  "experimental_skip_move_to_device": true,
+  "expert_parallel_backend": "auto",
+  "expert_parallel_dispatch_chunks": 1,
+  "expert_parallel_fallback_on_unsupported": true,
+  "expert_parallel_num_nvl_bytes": 268435456,
+  "expert_parallel_num_rdma_bytes": 0,
+  "expert_parallel_save_dispatch": false,
+  "expert_parallel_size": 1,
+  "experts_implementation": "scattermoe",
+  "fp16": false,
+  "fsdp_version": 2,
+  "generate_samples": false,
+  "generation_do_sample": true,
+  "generation_max_new_tokens": 50,
+  "generation_prompt_ratio": 0.5,
+  "generation_temperature": 0.7,
+  "gradient_accumulation_steps": 4,
+  "gradient_checkpointing": true,
+  "gradient_checkpointing_kwargs": {
+    "use_reentrant": true
+  },
+  "include_tkps": true,
+  "is_multimodal": true,
+  "layer_offloading": false,
+  "learning_rate": 0.0001,
+  "liger_glu_activation": true,
+  "liger_layer_norm": true,
+  "liger_rms_norm": true,
+  "liger_rms_norm_gated": true,
+  "liger_rope": true,
+  "lisa_layers_attribute": "model.layers",
+  "load_best_model_at_end": false,
+  "load_in_4bit": false,
+  "load_in_8bit": false,
+  "local_rank": 0,
+  "logging_steps": 1,
+  "lora_alpha": 16,
+  "lora_alpha_pattern": {},
+  "lora_dropout": 0.0,
+  "lora_embedding_kernel": true,
+  "lora_fp32_gradients": false,
+  "lora_mlp_kernel": true,
+  "lora_o_kernel": true,
+  "lora_qkv_kernel": true,
+  "lora_r": 8,
+  "lora_rank_pattern": {},
+  "lora_target_modules": "model.language_model.layers.[\\d]+.(_checkpoint_wrapped_module.)?(self_attn.(q|k|v|o)_proj|linear_attn.(in_proj_qkv|in_proj_z|out_proj)|mlp.shared_expert.(gate|up|down)_proj)",
+  "lora_target_parameters": [
+    "mlp.experts.gate_up_proj",
+    "mlp.experts.down_proj"
+  ],
+  "loraplus_lr_embedding": 1e-06,
+  "lr_scheduler": "cosine",
+  "max_grad_norm": 1.0,
+  "max_steps": 5,
+  "mean_resizing_embeddings": false,
+  "micro_batch_size": 1,
+  "mixlora_jitter_noise": 0.0,
+  "mixlora_num_experts": 8,
+  "mixlora_router_aux_loss_coef": 0.01,
+  "mixlora_router_init_range": 0.02,
+  "mixlora_top_k": 2,
+  "model_config_type": "qwen3_5_moe",
+  "model_config_type_text": "qwen3_5_moe_text",
+  "nf4_backend": "bitsandbytes",
+  "num_epochs": 1.0,
+  "num_generation_samples": 3,
+  "optimizer": "adamw_torch_8bit",
+  "otel_metrics_host": "localhost",
+  "otel_metrics_port": 8000,
+  "output_dir": "/workspace/cg/outputs/random_heal_smoke_adapter",
+  "ple_cpu_offload": false,
+  "plugins": [
+    "scripts.train.spectral_plugin.SpectralPlugin",
+    "axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin",
+    "axolotl.integrations.liger.LigerPlugin",
+    "axolotl.integrations.kernels.KernelsPlugin",
+    "scripts.train.router_dtype_plugin.RouterDtypePlugin",
+    "scripts.train.heal_plugin.HealPlugin"
+  ],
+  "pretrain_multipack_attn": true,
+  "processor_config": "/workspace/cg/outputs/random_heal_smoke_base",
+  "profiler_steps_start": 0,
+  "qgalore_cos_threshold": 0.4,
+  "qgalore_gamma_proj": 2,
+  "qgalore_proj_bits": 4,
+  "qgalore_proj_group_size": 256,
+  "qgalore_proj_quant": true,
+  "qgalore_proj_type": "std",
+  "qgalore_queue_size": 5,
+  "qgalore_rank": 256,
+  "qgalore_scale": 0.25,
+  "qgalore_update_proj_gap": 200,
+  "qlora_sharded_model_loading": false,
+  "quantize_moe_experts": false,
+  "ray_num_workers": 1,
+  "relora_prune_method": "magnitude",
+  "resources_per_worker": {
+    "GPU": 1
+  },
+  "sample_packing": false,
+  "sample_packing_bin_size": 200,
+  "sample_packing_group_size": 100000,
+  "save_only_model": false,
+  "save_safetensors": true,
+  "save_total_limit": 4,
+  "saves_per_epoch": 0,
+  "seed": 15,
+  "sequence_len": 256,
+  "shuffle_before_merging_datasets": false,
+  "shuffle_merged_datasets": true,
+  "skip_prepare_dataset": false,
+  "streaming_multipack_buffer_size": 10000,
+  "strict": false,
+  "tensor_parallel_size": 1,
+  "tf32": true,
+  "tiled_mlp_use_original_mlp": true,
+  "tokenizer_config": "/workspace/cg/outputs/random_heal_smoke_base",
+  "tokenizer_save_jinja_files": true,
+  "torch_compile": false,
+  "torch_dtype": "torch.bfloat16",
+  "train_on_inputs": false,
+  "trl": {
+    "async_prefetch": false,
+    "log_completions": false,
+    "mask_truncated_completions": false,
+    "ref_model_mixup_alpha": 0.9,
+    "ref_model_sync_steps": 64,
+    "replay_buffer_size": 0,
+    "replay_recompute_logps": true,
+    "reroll_max_groups": 1,
+    "reroll_start_fraction": 1.0,
+    "reward_num_workers": 1,
+    "scale_rewards": true,
+    "skip_zero_advantage_batches": true,
+    "sync_ref_model": false,
+    "use_data_producer": false,
+    "use_vllm": false,
+    "vllm_lora_sync": false,
+    "vllm_server_host": "0.0.0.0",
+    "vllm_server_port": 8000
+  },
+  "use_kernels": true,
+  "use_otel_metrics": false,
+  "use_ray": false,
+  "use_scattermoe": true,
+  "val_set_size": 0.0,
+  "vllm": {
+    "device": "auto",
+    "dtype": "auto",
+    "host": "0.0.0.0",
+    "port": 8000
+  },
+  "warmup_ratio": 0.1,
+  "weight_decay": 0.0,
+  "world_size": 1
+}
+[2026-10-26 15:43:22,860] [WARNING] [axolotl.cli.checks] Error verifying HuggingFace token. Remember to log in using `hf auth login` and get your access token from https://huggingface.co/settings/tokens if you want to use gated models or datasets.
+[2026-10-26 15:43:24,105] [INFO] [axolotl.utils.data.shared] Unable to find prepared dataset in /workspace/cg/outputs/random_heal_smoke_adapter_prepared/9c4c5ddaf011aa2b3ba64a3d2726254b
+[2026-10-26 15:43:24,105] [INFO] [axolotl.utils.data.sft] Loading raw datasets...
+[2026-10-26 15:43:24,106] [WARNING] [axolotl.utils.data.sft] Processing datasets during training can lead to VRAM instability. Please pre-process your dataset using `axolotl preprocess path/to/config.yml`.
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 2 examples [00:00, 763.85 examples/s]
+[2026-10-26 15:43:24,341] [INFO] [axolotl.utils.data.wrappers] Loading dataset: /workspace/cg/runs/run10/tiny_smoke.jsonl with base_type: input_output and prompt_style: None
+[2026-10-26 15:43:25,912] [INFO] [axolotl.utils.data.work_queue] Caching tokenized dataset at /workspace/hf/datasets/json/default-8241f5bc844649d3/0.0.0/915409a0dcfcf3c0e0e2b1d1e761f7eaf823c9e638ed16d3c75e0a940a971aa3/cache-e321a344282d48c0.arrow
+[2026-10-26 15:43:25,912] [INFO] [axolotl.utils.data.work_queue] Tokenizing 2 examples with 2 workers (1 chunks)
+Tokenizing Prompts:   0%|          | 0/2 [00:00<?, ? examples/s]Tokenizing Prompts: 100%|██████████| 2/2 [00:00<00:00, 43.23 examples/s]
+[2026-10-26 15:43:25,977] [INFO] [axolotl.utils.data.utils] min_input_len: 22
+[2026-10-26 15:43:25,977] [INFO] [axolotl.utils.data.utils] max_input_len: 29
+num_proc must be <= 2. Reducing num_proc to 2 for dataset of size 2.
+[2026-10-26 15:43:25,978] [WARNING] [datasets.arrow_dataset] num_proc must be <= 2. Reducing num_proc to 2 for dataset of size 2.
+Dropping Invalid Sequences (<None or >256) (num_proc=2):   0%|          | 0/2 [00:00<?, ? examples/s]Dropping Invalid Sequences (<None or >256) (num_proc=2):  50%|█████     | 1/2 [00:00<00:00,  8.93 examples/s]Dropping Invalid Sequences (<None or >256) (num_proc=2): 100%|██████████| 2/2 [00:00<00:00,  7.84 examples/s]
+Saving the dataset (0/1 shards):   0%|          | 0/2 [00:00<?, ? examples/s]Saving the dataset (0/1 shards): 100%|██████████| 2/2 [00:00<00:00,  2.65 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 2/2 [00:00<00:00,  2.65 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 2/2 [00:00<00:00,  2.36 examples/s]
+[2026-10-26 15:43:27,155] [INFO] [axolotl.utils.data.sft] Maximum number of steps set at 1
+[2026-10-26 15:43:29,786] [INFO] [axolotl.monkeypatch.peft.utils] patching prepare_model_for_kbit_training to allow for overrides
+[2026-10-26 15:43:30,455] [INFO] [axolotl.monkeypatch.lora_kernels] Patched attention class with LoRA optims: Qwen3_5MoeAttention
+[2026-10-26 15:43:30,457] [INFO] [axolotl.monkeypatch.kernelize_fixes] kernelize_fixes: patched PreTrainedModel.set_use_kernels
+[2026-10-26 15:43:30,505] [INFO] [axolotl.integrations.cut_cross_entropy] Applying Cut Cross Entropy to model type: qwen3_5_moe
+[2026-10-26 15:43:30,995] [INFO] [axolotl.integrations.kernels.libs.scattermoe_lora.nvfp4_fsdp] Installed FSDP2 support (split + all-gather hooks) on NVFP4Tensor
+[2026-10-26 15:43:30,995] [INFO] [axolotl.integrations.kernels.plugin] Registered 'scattermoe' in transformers ExpertsInterface
+[2026-10-26 15:43:30,995] [INFO] [axolotl.integrations.kernels.quant_training_guard] kernels: scoped quantized-training guard (skips only PEFT/quantized; delegates others)
+[2026-10-26 15:43:31,080] [INFO] [axolotl.monkeypatch.moe_quant] Patched PEFT _inject_parameters for consistent ParamWrapper ordering
+Loading weights:   0%|          | 0/69 [00:00<?, ?it/s]Loading weights: 100%|██████████| 69/69 [00:00<00:00, 1340.68it/s]
+[2026-10-26 15:43:31,199] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-26 15:43:31,199] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-26 15:43:31,264] [INFO] [axolotl.loaders.model] Converting modules to torch.bfloat16
+trainable params: 65,536 || all params: 16,239,576 || trainable%: 0.4036
+[2026-10-26 15:43:31,948] [INFO] [axolotl.monkeypatch.lora_kernels] Patched linear-attention LoRA projections ['in_proj_a', 'in_proj_b', 'in_proj_qkv', 'in_proj_z', 'out_proj'] with fused kernels on 1 layer(s)
+RouterDtypePlugin: cast 2 router modules to torch.bfloat16
+SpectralPlugin: spectral_lam=0.0 (SPECTRAL_FRAC=.01) on 17 LoRA modules
+SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.
+HEAL FROZEN PARENT {"frozen": {"torch.bfloat16": 16174040}, "trainable": {"torch.float32": 65536}}
+[2026-10-26 15:43:32,849] [INFO] [axolotl.train] Pre-saving adapter config to /workspace/cg/outputs/random_heal_smoke_adapter...
+[2026-10-26 15:43:32,850] [INFO] [axolotl.train] Pre-saving tokenizer to /workspace/cg/outputs/random_heal_smoke_adapter...
+[2026-10-26 15:43:32,997] [INFO] [axolotl.train] Pre-saving model config to /workspace/cg/outputs/random_heal_smoke_adapter...
+[2026-10-26 15:43:33,005] [INFO] [axolotl.train] Pre-saving processor to /workspace/cg/outputs/random_heal_smoke_adapter...
+[2026-10-26 15:43:33,125] [INFO] [axolotl.train] Starting trainer...
+[transformers] The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'eos_token_id': 248046, 'pad_token_id': 248044}.
+  0%|          | 0/5 [00:00<?, ?it/s][2026-10-26 15:43:33,690] [WARNING] [kernels._versions] You are using version 1 of 'kernels-community/fla', but version 2 is available.
+
+Fetching 293 files:   0%|          | 0/293 [00:00<?, ?it/s]
+Fetching 293 files:   1%|          | 3/293 [00:00<00:11, 24.29it/s]
+Fetching 293 files:   4%|▍         | 12/293 [00:00<00:04, 56.45it/s]
+Fetching 293 files:   8%|▊         | 22/293 [00:00<00:04, 65.05it/s]
+Fetching 293 files:  11%|█         | 32/293 [00:00<00:03, 76.42it/s]
+Fetching 293 files:  14%|█▍        | 42/293 [00:00<00:03, 81.57it/s]
+Fetching 293 files:  18%|█▊        | 53/293 [00:00<00:02, 90.41it/s]
+Fetching 293 files:  22%|██▏       | 65/293 [00:00<00:02, 86.82it/s]
+Fetching 293 files:  26%|██▌       | 76/293 [00:00<00:02, 88.73it/s]
+Fetching 293 files:  29%|██▉       | 86/293 [00:01<00:02, 89.27it/s]
+Fetching 293 files:  33%|███▎      | 96/293 [00:01<00:02, 88.03it/s]
+Fetching 293 files:  36%|███▌      | 105/293 [00:01<00:02, 84.27it/s]
+Fetching 293 files:  39%|███▉      | 115/293 [00:01<00:02, 88.07it/s]
+Fetching 293 files:  42%|████▏     | 124/293 [00:01<00:01, 86.18it/s]
+Fetching 293 files:  45%|████▌     | 133/293 [00:01<00:01, 86.53it/s]
+Fetching 293 files:  48%|████▊     | 142/293 [00:01<00:01, 77.97it/s]
+Fetching 293 files:  52%|█████▏    | 152/293 [00:01<00:01, 82.57it/s]
+Fetching 293 files:  55%|█████▍    | 161/293 [00:02<00:01, 73.30it/s]
+Fetching 293 files:  59%|█████▊    | 172/293 [00:02<00:01, 82.29it/s]
+Fetching 293 files:  62%|██████▏   | 181/293 [00:02<00:01, 83.48it/s]
+Fetching 293 files:  65%|██████▍   | 190/293 [00:02<00:01, 74.26it/s]
+Fetching 293 files:  68%|██████▊   | 198/293 [00:02<00:01, 72.61it/s]
+Fetching 293 files:  71%|███████▏  | 209/293 [00:02<00:01, 79.22it/s]
+Fetching 293 files:  76%|███████▌  | 222/293 [00:02<00:00, 89.08it/s]
+Fetching 293 files:  79%|███████▉  | 232/293 [00:02<00:00, 88.64it/s]
+Fetching 293 files:  82%|████████▏ | 241/293 [00:02<00:00, 85.27it/s]
+Fetching 293 files:  85%|████████▌ | 250/293 [00:03<00:00, 84.04it/s]
+Fetching 293 files:  89%|████████▉ | 262/293 [00:03<00:00, 89.11it/s]
+Fetching 293 files:  92%|█████████▏| 271/293 [00:03<00:00, 80.71it/s]
+Fetching 293 files:  96%|█████████▌| 282/293 [00:03<00:00, 86.51it/s]Fetching 293 files: 100%|██████████| 293/293 [00:03<00:00, 82.99it/s]
+[2026-10-26 15:43:38,123] [WARNING] [kernels._versions] You are using version 3 of 'kernels-community/mamba-ssm', but version 4 is available.
+
+Fetching 42 files:   0%|          | 0/42 [00:00<?, ?it/s]
+Fetching 42 files:   2%|▏         | 1/42 [00:00<00:04,  9.65it/s]
+Fetching 42 files:  26%|██▌       | 11/42 [00:00<00:00, 57.61it/s]
+Fetching 42 files:  45%|████▌     | 19/42 [00:00<00:00, 66.14it/s]
+Fetching 42 files:  67%|██████▋   | 28/42 [00:00<00:00, 73.55it/s]
+Fetching 42 files:  93%|█████████▎| 39/42 [00:00<00:00, 82.47it/s]Fetching 42 files: 100%|██████████| 42/42 [00:04<00:00, 10.48it/s]
+[2026-10-26 15:43:42,586] [WARNING] [kernels._versions] You are using version 3 of 'kernels-community/mamba-ssm', but version 4 is available.
+
+Fetching 42 files:   0%|          | 0/42 [00:00<?, ?it/s]Fetching 42 files: 100%|██████████| 42/42 [00:00<00:00, 643.39it/s]
+[2026-10-26 15:43:42,835] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-26 15:43:42,836] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-26 15:43:43,962] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/triton/language/core.py:2625: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+
+[2026-10-26 15:45:11,451] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/triton/language/core.py:2625: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+
+[2026-10-26 15:45:31,419] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: OptimState8bit does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+
+ 20%|██        | 1/5 [02:02<08:10, 122.62s/it][2026-10-26 15:45:36,053] [ERROR] [axolotl.telemetry.errors] Error captured in telemetry. Run ID: 12a50adc-7b1b-4868-92a4-6ab970efca73
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/axolotl/src/axolotl/cli/train.py", line 209, in <module>
+    fire.Fire(do_cli)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/cli/train.py", line 140, in do_cli
+    do_train(parsed_cfg, parsed_cli_args)
+  File "/workspace/axolotl/src/axolotl/cli/train.py", line 79, in do_train
+    model, tokenizer, trainer = train_fn(cfg=cfg, dataset_meta=dataset_meta)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/telemetry/errors.py", line 76, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/train.py", line 736, in train
+    execute_training(cfg, trainer, resume_from_checkpoint)
+  File "/workspace/axolotl/src/axolotl/train.py", line 247, in execute_training
+    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1549, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1631, in _inner_training_loop
+    self._run_epoch(
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1911, in _run_epoch
+    self.control = self.callback_handler.on_step_end(self.args, self.state, self.control)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer_callback.py", line 520, in on_step_end
+    return self.call_event("on_step_end", args, state, control, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer_callback.py", line 545, in call_event
+    result = getattr(callback, event)(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cg/scripts/train/heal_callback.py", line 68, in on_step_end
+    stream.write(json.dumps(record) + '\n')
+                 ^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Tensor is not JSON serializable
+ 20%|██        | 1/5 [02:04<08:18, 124.67s/it]
+Traceback (most recent call last):
+  File "/workspace/axolotl-venv/bin/accelerate", line 12, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1413, in launch_command
+    simple_launcher(args)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 999, in simple_launcher
+    raise subprocess.CalledProcessError(returncode=process.returncode, cmd=cmd)
+subprocess.CalledProcessError: Command '['/workspace/axolotl-venv/bin/python', '-m', 'axolotl.cli.train', '/workspace/cg/runs/run10/cfg_tiny_heal_smoke.yml', '--debug=False', '--debug-text-only=False', '--debug-num-examples=0', '--shard=False']' returned non-zero exit status 1.

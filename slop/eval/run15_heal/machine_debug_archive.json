@@ -1,0 +1,74 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Untracked machine-only tiny debugging weights/tokenizers archived outside slop after final collection; all bytes verified before originals removed.",
+  "directories": {
+    "base_before": {
+      "original": "slop/eval/run15_heal/lease_retry/box_runs/repair0/base_before",
+      "archive": "/home/code/.local/share/cg_run15_heal_debug/repair0/base_before",
+      "files": {
+        "model.safetensors": {
+          "bytes": 32380720,
+          "sha256": "bb2d648ef894e3579b4db89a697533749a697e7ff0372267a3e18cc590cd5f36"
+        },
+        "tokenizer_config.json": {
+          "bytes": 1506,
+          "sha256": "44d30b6b485384681a21b3de5073e58439aab66cb650f30f2d3d1073da429af0"
+        },
+        "config.json": {
+          "bytes": 2316,
+          "sha256": "9689f249c23a2d04b49b5e49a390cf017ebd5ca0fd424a5368c3a10ca27a8c17"
+        },
+        "generation_config.json": {
+          "bytes": 179,
+          "sha256": "86dca718cfca6142906db36efa9b7afb04d3e7352cf6898992b8703c1f910006"
+        },
+        "processor_config.json": {
+          "bytes": 1220,
+          "sha256": "bfbc24af59a3e73a9cd0653b8d4ae758dfaec4e3e6c15dfb1c6c8ee8d5683c85"
+        },
+        "tokenizer.json": {
+          "bytes": 19989339,
+          "sha256": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f"
+        },
+        "chat_template.jinja": {
+          "bytes": 7756,
+          "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+        }
+      }
+    },
+    "adapter_before": {
+      "original": "slop/eval/run15_heal/lease_retry/box_runs/repair0/adapter_before",
+      "archive": "/home/code/.local/share/cg_run15_heal_debug/repair0/adapter_before",
+      "files": {
+        "tokenizer_config.json": {
+          "bytes": 1506,
+          "sha256": "44d30b6b485384681a21b3de5073e58439aab66cb650f30f2d3d1073da429af0"
+        },
+        "adapter_config.json": {
+          "bytes": 1326,
+          "sha256": "f851cfa30d0557d9eab3bf994c160d440d9da232ff6250f9385e4a4464718c40"
+        },
+        "config.json": {
+          "bytes": 2339,
+          "sha256": "6e124c36b0bd1ea070be59ac76209ed437c6dc2a646984f6b6194f22c4fbd3b1"
+        },
+        "debug.log": {
+          "bytes": 25966,
+          "sha256": "dd94673327a486641f7d75bed71ac17f593907b699ac86de9ffa9371cf46da1d"
+        },
+        "processor_config.json": {
+          "bytes": 1220,
+          "sha256": "bfbc24af59a3e73a9cd0653b8d4ae758dfaec4e3e6c15dfb1c6c8ee8d5683c85"
+        },
+        "tokenizer.json": {
+          "bytes": 19989339,
+          "sha256": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f"
+        },
+        "chat_template.jinja": {
+          "bytes": 7756,
+          "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+/opt/vllm/lib/python3.12/site-packages/vllm/lora/layers/fused_moe.py
+/opt/vllm/lib/python3.12/site-packages/vllm/lora/ops/triton_ops/fused_moe_lora_fp8_op.py
+/opt/vllm/lib/python3.12/site-packages/vllm/lora/ops/triton_ops/fused_moe_lora_op.py
+/opt/vllm/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py
+/opt/vllm/lib/python3.12/site-packages/vllm/model_executor/models/qwen3_5.py:708:    is_3d_moe_weight: ClassVar[bool] = True

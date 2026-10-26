@@ -1,0 +1,8 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "checked_utc": "2026-10-26T20:13:51Z",
+  "instance_id": 57831547,
+  "independent_api_absent_confirmed": true,
+  "other_instances_not_modified": true,
+  "local_state_is_historical": "state file retained after destruction; never attach or restart from it"
+}

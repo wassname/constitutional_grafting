@@ -1,0 +1,7 @@
+2026-10-26T12:56:01Z PRIMARY COMPLETE r15_instruct on; 140rows; all failures retained
+2026-10-26T13:17:57Z PRIMARY COMPLETE r15_instruct off; 140rows; all failures retained
+2026-10-26T13:21:39Z EVAL COMPLETE r15_instruct full=True
+2026-10-26T13:40:08Z # Run15 thinking-heal
+2026-10-26T13:40:08Z SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Parent stays fp16/frozen. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.
+2026-10-26T13:40:19Z EARLY BASELINE ACCEPTED: same plan/executor and hashed complete both-mode outputs
+2026-10-26T13:44:31Z D PARENT MERGED: pinned Instruct, ordered fp16 docs+rewr updates, frozen for both heals

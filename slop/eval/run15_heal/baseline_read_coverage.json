@@ -1,0 +1,24 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r15_instruct",
+  "modes": [
+    "on",
+    "off"
+  ],
+  "fixed_final_turns_read": 14,
+  "selected_final_turns_read": 16,
+  "selected_native_thoughts_fully_read": 8,
+  "selected_ids": [
+    "sys_payday_loan",
+    "task_email",
+    "task_agent"
+  ],
+  "sources": {
+    "replies_r15_instruct_on.jsonl": "b0b5e48249f7db689da5434b7662a8f0f31c42378eb5a3a12ba9d1c836130384",
+    "panel_r15_instruct_on.jsonl": "e656383c0deef4169f3f15ff2f2fe451ab601e25830bf051b29b99d74f0c3f25",
+    "replies_r15_instruct_off.jsonl": "627d7eed4dd628cfd17c0e48610268a5b572031aaadcdb9e5245c479d9218b38",
+    "panel_r15_instruct_off.jsonl": "167d1c320a907df7b3007b6287b334e3ecb153d9fe1674221577eb3c2762a8f7"
+  },
+  "notes": "slop/eval/answer_panel/reading_notes_heal.md",
+  "scope": "Complete fixed panel and preselected answers/thoughts, not every baseline primary answer."
+}

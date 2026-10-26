@@ -1,0 +1,9 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Interim on-only, three completed models. Same final-only projection as59; full four-model analysis later reuses paid Jev cache.",
+  "source_sha256": {
+    "replies_r15_instruct_on.jsonl": "b0b5e48249f7db689da5434b7662a8f0f31c42378eb5a3a12ba9d1c836130384",
+    "replies_r15_D_on.jsonl": "4d8f49c54fceaa1a2c6c8606a6ca8d356396127747951597beb67a723828c0c6",
+    "replies_r15_heal_trace_on.jsonl": "50ef0909eef5a9d18a57d097e544f44c5fd0d513de956010eb4a80abf1febd61"
+  }
+}

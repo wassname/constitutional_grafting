@@ -1,0 +1,23 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "source_paths": {
+    "axolotl_plugin.py": "/workspace/axolotl/src/axolotl/integrations/cut_cross_entropy/__init__.py",
+    "qwen3_5_moe.py": "/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py",
+    "utils.py": "/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py",
+    "qwen3_vl.py": "/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_vl.py"
+  },
+  "versions": {
+    "axolotl": "0.20.1.dev0",
+    "cut-cross-entropy": "25.5.2",
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "torch": "2.14.1+cu130",
+    "datasets": "5.0.1"
+  },
+  "sha256": {
+    "axolotl_plugin.py": "d4c7d85310ffb7129276f49b04c4614cd83f8e49c03b8f2bf04fd0fa5a321f27",
+    "qwen3_5_moe.py": "0d6e0615cb36943c296e5603552c606dc8662d35e7426129b640bc91e47d0d37",
+    "utils.py": "a5d601658e46300709c4ec816b54f4f35f56accc35851c59c5d5005e0d938dfd",
+    "qwen3_vl.py": "93e1e3680d8983b2edcda831c280c336412db18587458004028f63dbebf378f4"
+  }
+}

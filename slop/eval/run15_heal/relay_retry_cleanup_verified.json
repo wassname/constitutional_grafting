@@ -1,0 +1,12 @@
+{
+  "removed_exact_authorization": true,
+  "all_other_authorization_bytes_preserved": true,
+  "remaining_authorization_sha256": "de3b4fec373717a11b94ef3fa1ad1219b9f7ddff751de7b5dc76b66e86a5b037",
+  "empty_staging_removed": true,
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57831547,
+  "source_cleanup_sender": "cg_help3",
+  "source_cleanup_message_id": "04cb803c-e636-43d5-b7a7-ab765ea38a30",
+  "source_cleanup_verbatim": "Process exited0 after1021s; log confirms temporaryA private/public/knownhosts removed and finalcleanupSSH succeeded.",
+  "epoch": 1793029004.8412817
+}

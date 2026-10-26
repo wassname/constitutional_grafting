@@ -1,0 +1,45 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Completed unhealed D; native wire histories verified; CPU checks only, no character judging yet.",
+  "modes": {
+    "on": {
+      "rows": 140,
+      "turns": 214,
+      "blank_finals": 183,
+      "ordinary_correct": 20.0,
+      "ordinary_n": 22,
+      "gsm_correct": 57,
+      "gsm_completed": 54,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 2,
+        "truncated": 2,
+        "role_confusion": 0,
+        "empty": 183
+      },
+      "boundaries": {
+        "eos_during_reasoning": 183,
+        "natural_before_cap": 23,
+        "at_native_cap_or_natural": 8
+      }
+    },
+    "off": {
+      "rows": 140,
+      "turns": 214,
+      "blank_finals": 0,
+      "ordinary_correct": 20.0,
+      "ordinary_n": 22,
+      "gsm_correct": 56,
+      "gsm_completed": 56,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 1,
+        "truncated": 5,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    }
+  }
+}

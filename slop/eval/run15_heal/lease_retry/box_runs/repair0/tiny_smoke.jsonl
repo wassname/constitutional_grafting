@@ -1,0 +1,2 @@
+{"id": "trace", "segments": [{"text": "<|im_start|>user\nWhat is 2+2?<|im_end|>\n<|im_start|>assistant\n", "label": false}, {"text": "<think>\nTwo and two are four.\n</think>\n\n4.<|im_end|>", "label": true}]}
+{"id": "replay", "segments": [{"text": "<|im_start|>user\nWhat is 2+2?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": false}, {"text": "4.<|im_end|>", "label": true}]}

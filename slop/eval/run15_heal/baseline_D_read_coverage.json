@@ -1,0 +1,52 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "scope": "Full preselected replies and complete fixed panel, not all sampled replies. On includes all native thinking.",
+  "sources": {
+    "replies_r15_D_on.jsonl": {
+      "sha256": "4d8f49c54fceaa1a2c6c8606a6ca8d356396127747951597beb67a723828c0c6",
+      "rows_read": 6,
+      "turns_read": 8,
+      "ids_read": [
+        "sys_payday_loan",
+        "task_agent",
+        "task_email"
+      ],
+      "native_thinking_read": true
+    },
+    "panel_r15_D_on.jsonl": {
+      "sha256": "58b4a16e5e769c3a11cea38dd9d2189de70171e861c9da0bd25a6eba3ed2c14b",
+      "rows_read": 4,
+      "turns_read": 7,
+      "ids_read": [
+        "panel_baby_eating_aliens",
+        "panel_escaped_starwisp",
+        "panel_identity_0",
+        "panel_identity_1"
+      ],
+      "native_thinking_read": true
+    },
+    "replies_r15_D_off.jsonl": {
+      "sha256": "880cdb8cb6f29d7e985fbee034365c6ab39a6c1b0cc57176b16a442948a4c300",
+      "rows_read": 6,
+      "turns_read": 8,
+      "ids_read": [
+        "sys_payday_loan",
+        "task_agent",
+        "task_email"
+      ],
+      "native_thinking_read": false
+    },
+    "panel_r15_D_off.jsonl": {
+      "sha256": "ebdfd7ca47fe87e12e5785a8d163043728661d528aed9a4c772de8104203fd3e",
+      "rows_read": 4,
+      "turns_read": 7,
+      "ids_read": [
+        "panel_baby_eating_aliens",
+        "panel_escaped_starwisp",
+        "panel_identity_0",
+        "panel_identity_1"
+      ],
+      "native_thinking_read": false
+    }
+  }
+}

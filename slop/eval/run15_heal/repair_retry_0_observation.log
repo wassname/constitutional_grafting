@@ -1,0 +1,186 @@
+          "ask_9a9cce7f35",
+          "identity2_046_id_36"
+        ],
+        "replay_shapes": {
+          "seeded_dilemma": 84,
+          "identity": 139,
+          "ask_first": 14,
+          "role_dilemma": 18,
+          "proportion": 21,
+          "difficult_high": 11,
+          "ask_first_q": 13,
+          "ordinary": 21,
+          "difficult_everyday": 5,
+          "repair": 5
+        }
+      }
+    }
+  },
+  "thinking_budget": 4096,
+  "selected_item_ids": [
+    "sys_payday_loan",
+    "task_agent",
+    "task_email"
+  ],
+  "max_hours": 6,
+  "max_rate": 1.91,
+  "disk_gb": 400,
+  "prep_api_accounted_usd": 1.216868395,
+  "first_lease_gpu_usd": 2.6734729968618467,
+  "judge_reserve_usd": 1.5,
+  "review_reserve_usd": 0.5,
+  "traffic_reserve_usd": 1.6,
+  "termination_margin_usd": 1,
+  "total_reserve_usd": 19.950341391861848,
+  "baseline_reuse": {
+    "source_lease": 57812278,
+    "plan_sha256": "74bac8afeb9ff73b2030dcbefcd08435d6a6b3329ba3b1c8bd785237c2b196d2",
+    "executor_sha256": "993002d8c17e48b35f7fdf615dc3e35efa9f4c4fb6f9507fcdffcec24fe882a7",
+    "generator_sha256": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
+    "source_receipt_sha256": "17cc6835025bbd8c4221935affc95d2b3cf2eed862b559e22324d018c1cb569b",
+    "verified_sha256": {
+      "replies_r15_instruct_on.jsonl": "b0b5e48249f7db689da5434b7662a8f0f31c42378eb5a3a12ba9d1c836130384",
+      "replies_r15_instruct_on.jsonl.wire.jsonl": "9f60c610d811c84926c0c37fb2fa5042bd3aee5dc1ab9fb540059510cae5d0dd",
+      "panel_r15_instruct_on.jsonl": "e656383c0deef4169f3f15ff2f2fe451ab601e25830bf051b29b99d74f0c3f25",
+      "panel_r15_instruct_on.jsonl.wire.jsonl": "91ddc97cd64047f39495c21ac03b921d9659b304eaaf74a4ee72b9f1752a6cc7",
+      "gsm_replies_r15_instruct_on.jsonl": "e3cd5315f5bc213004ad67fddfca88e7ff56718abd75c12e9821b71c0377885e",
+      "gsm_replies_r15_instruct_on.jsonl.wire.jsonl": "f4996f99ee03876bd4c9596dbc491869cf440815a32b8ff25a864b24728885f6",
+      "gsm8k_r15_instruct_on.jsonl": "e533d95d11eaad1a727a29d5932abd75975b07d6b638890598d5fc4abb5f1198",
+      "replies_r15_instruct_off.jsonl": "627d7eed4dd628cfd17c0e48610268a5b572031aaadcdb9e5245c479d9218b38",
+      "replies_r15_instruct_off.jsonl.wire.jsonl": "07a0ffab19c36433f5a679d2dde0ea5f6703d510890361d688479396307726f0",
+      "panel_r15_instruct_off.jsonl": "167d1c320a907df7b3007b6287b334e3ecb153d9fe1674221577eb3c2762a8f7",
+      "panel_r15_instruct_off.jsonl.wire.jsonl": "30a80966c5a2db44bdcd99671d0a4a7f357a8a9c61f9596c8a34dd3c44345c36",
+      "gsm_replies_r15_instruct_off.jsonl": "fe38d698246422bc4f5945558f8a482847972983ffec59477b89870aa3cce720",
+      "gsm_replies_r15_instruct_off.jsonl.wire.jsonl": "8021a5c8c02da2a0505f49aacd64b15cf57e543b797ad5e345e0c70955264afb",
+      "gsm8k_r15_instruct_off.jsonl": "1e7fec30ab7e2d05466cab841f17c09b973c6f0f66d49760badf041537452583"
+    }
+  },
+  "timing_policy": "Traces first; mixed only if measured remaining time fits; never discard a completed trace heal.",
+  "transport": "All4 donors via owner-approved readonly cloud relay; original pinned SHA256, source before/after SHA, new receiver SHA/mtime and atomic install. No local donor bytes consumed.",
+  "training": "Frozen bf16-rounded training copy of ordered-fp16 D; rank8/alpha16 all existing dense/expert targets; LR1e-4, spectral_frac.01, oneepoch, quarter checkpoints; no KL. Matched total assistant tokens, half traces+half replay in mixed.",
+  "precision": "Train a frozen bf16-rounded copy of ordered-fp16 D; LoRA fp32 and spectral math FP32 outside autocast. Original D remains fp16 for all serving. Heal adapters are therefore trained against D_bf16, served against D_fp16. Native expert-LoRA or approved fp32-accumulated fp16 merge.",
+  "evaluation": "Instruct reused from first lease at exact recorded serving protocol; D and final trace/mix generated on replacement. All: full frozen70x2 + GSM60 + fixedT0panel in both modes. Early quarter checkpoints: selected3x2 plus T0panel in both modes; not full-scope scores.",
+  "recovery": "One authorized replacement only. Snapshot/retrieve logs and adapters; stop on failed retrieval. Independent exact-ID destruction deadline. First-lease files retained unchanged.",
+  "timing": "Measure20steps; project both variants with1.5time margin and reserve3h evaluation before runnerdeadline. Runnerends45min before providerdestroy."
+}
+```
+SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Training parent is the frozen bf16-rounded copy of D; original D stays fp16 for serving. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.
+FIRST-LEASE BASELINE REUSED:57812278; exact frozen inputs, generator, FP16 server argv, vLLM0.31.0 and hashed native outputs; not regenerated on replacement hardware
+D PARENT MERGED: pinned Instruct, ordered fp16 docs+rewr updates, frozen for both heals
+W1026 15:43:01.073000 1569 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1026 15:43:01.101000 1569 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 93.96it/s]
+Traceback (most recent call last):
+  File "/workspace/cg/scripts/eval/57_run15_heal.py", line 416, in <module>
+    runner.baseline() if args.early_baseline else runner.main()
+                                                  ^^^^^^^^^^^^^
+  File "/workspace/cg/scripts/eval/57_run15_heal.py", line 350, in main
+    self.tiny_smoke()
+  File "/workspace/cg/scripts/eval/57_run15_heal.py", line 232, in tiny_smoke
+    self.command(['axolotl', 'train', path], 'tiny_heal_train.log', env=dict(self.env, SPECTRAL_FRAC='.01', BEARTYPE='1', HEAL_NUMERIC_PATH=str(OUT / 'tiny_heal_numeric.jsonl'), HEAL_VERIFY_UPDATES='1'))
+  File "/workspace/cg/scripts/eval/57_run15_heal.py", line 132, in command
+    subprocess.run(list(map(str, argv)), cwd=ROOT, env=env or self.env, check=True,
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['axolotl', 'train', '/workspace/cg/runs/run10/cfg_tiny_heal_smoke.yml']' returned non-zero exit status 1.
+====STAGES====
+2026-10-26T15:37:14Z # Run15 thinking-heal
+2026-10-26T15:37:14Z SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Training parent is the frozen bf16-rounded copy of D; original D stays fp16 for serving. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.
+2026-10-26T15:37:28Z FIRST-LEASE BASELINE REUSED:57812278; exact frozen inputs, generator, FP16 server argv, vLLM0.31.0 and hashed native outputs; not regenerated on replacement hardware
+2026-10-26T15:42:56Z D PARENT MERGED: pinned Instruct, ordered fp16 docs+rewr updates, frozen for both heals
+====TINY====
+
+Fetching 42 files:  93%|█████████▎| 39/42 [00:00<00:00, 82.47it/s]
+Fetching 42 files: 100%|██████████| 42/42 [00:04<00:00, 10.48it/s]
+[2026-10-26 15:43:42,586] [WARNING] [kernels._versions] You are using version 3 of 'kernels-community/mamba-ssm', but version 4 is available.
+
+
+Fetching 42 files:   0%|          | 0/42 [00:00<?, ?it/s]
+Fetching 42 files: 100%|██████████| 42/42 [00:00<00:00, 643.39it/s]
+[2026-10-26 15:43:42,835] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-26 15:43:42,836] [WARNING] [kernels.layer.layer] 
+No kernel mapping found for layer `SoftmaxTopKRouter`. Check if the layer name matches one of the kernels in the mapping or add the kernel you want to use to the mapping. Defaulting to original forward implementation.
+[2026-10-26 15:43:43,962] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/triton/language/core.py:2625: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+
+[2026-10-26 15:45:11,451] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/triton/language/core.py:2625: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+  warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+
+[2026-10-26 15:45:31,419] [WARNING] [py.warnings] /workspace/axolotl-venv/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/autograd_cache.py:707: UserWarning: OptimState8bit does not implement _stable_hash_for_caching. For PT2-compatible tensor subclasses, it is recommended to implement _stable_hash_for_caching(self) -> str for stable AOT autograd caching.
+  warn_once(
+
+
+ 20%|██        | 1/5 [02:02<08:10, 122.62s/it][2026-10-26 15:45:36,053] [ERROR] [axolotl.telemetry.errors] Error captured in telemetry. Run ID: 12a50adc-7b1b-4868-92a4-6ab970efca73
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/axolotl/src/axolotl/cli/train.py", line 209, in <module>
+    fire.Fire(do_cli)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/fire/core.py", line 135, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/fire/core.py", line 468, in _Fire
+    component, remaining_args = _CallAndUpdateTrace(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/fire/core.py", line 684, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/cli/train.py", line 140, in do_cli
+    do_train(parsed_cfg, parsed_cli_args)
+  File "/workspace/axolotl/src/axolotl/cli/train.py", line 79, in do_train
+    model, tokenizer, trainer = train_fn(cfg=cfg, dataset_meta=dataset_meta)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/telemetry/errors.py", line 76, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl/src/axolotl/train.py", line 736, in train
+    execute_training(cfg, trainer, resume_from_checkpoint)
+  File "/workspace/axolotl/src/axolotl/train.py", line 247, in execute_training
+    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1549, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1631, in _inner_training_loop
+    self._run_epoch(
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer.py", line 1911, in _run_epoch
+    self.control = self.callback_handler.on_step_end(self.args, self.state, self.control)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer_callback.py", line 520, in on_step_end
+    return self.call_event("on_step_end", args, state, control, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/transformers/trainer_callback.py", line 545, in call_event
+    result = getattr(callback, event)(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cg/scripts/train/heal_callback.py", line 68, in on_step_end
+    stream.write(json.dumps(record) + '\n')
+                 ^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Tensor is not JSON serializable
+
+ 20%|██        | 1/5 [02:04<08:18, 124.67s/it]
+Traceback (most recent call last):
+  File "/workspace/axolotl-venv/bin/accelerate", line 12, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1413, in launch_command
+    simple_launcher(args)
+  File "/workspace/axolotl-venv/lib/python3.12/site-packages/accelerate/commands/launch.py", line 999, in simple_launcher
+    raise subprocess.CalledProcessError(returncode=process.returncode, cmd=cmd)
+subprocess.CalledProcessError: Command '['/workspace/axolotl-venv/bin/python', '-m', 'axolotl.cli.train', '/workspace/cg/runs/run10/cfg_tiny_heal_smoke.yml', '--debug=False', '--debug-text-only=False', '--debug-num-examples=0', '--shard=False']' returned non-zero exit status 1.
+====REUSEENV====
+0.31.0

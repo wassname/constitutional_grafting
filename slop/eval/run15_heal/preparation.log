@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/eval/58_run15_heal_rental.py", line 208, in <module>
+    prepare()
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/eval/58_run15_heal_rental.py", line 65, in prepare
+    assert plan['total_reserve_usd'] <= 20
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,21 @@
+   Building constitutional-grafting @ file:///workspace/2026/constitutional_grafting/.local/worktrees/run15_heal
+warning: `build_system.requires = ["uv-build>=0.9.28,<0.10"]` does not contain the
+                        current uv version 0.11.3
+      Built constitutional-grafting @ file:///workspace/2026/constitutional_grafting/.local/worktrees/run15_heal
+Uninstalled 1 package in 67ms
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 1 package in 12ms
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/data/93_heal_training.py", line 100, in <module>
+    print(json.dumps(build(args.traces, args.replay, args.release, args.output, tokenizer), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/data/93_heal_training.py", line 63, in build
+    assert len(tokenize_row(tokenizer, row)[0]) <= 8192, (row['id'], 'would truncate the boundary')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run15_heal/scripts/data/93_heal_training.py", line 31, in tokenize_row
+    assert ids[-1] == tokenizer.convert_tokens_to_ids('<|im_end|>'), row['id']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: sft_fe10b71289

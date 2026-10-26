@@ -1,0 +1,21 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57831547,
+  "adapter": "stoic",
+  "source": "/workspace/cg/outputs/relay_from_box_a_retry1/up_stoic",
+  "target": "/workspace/cg/outputs/up_stoic",
+  "epoch": 1793028151.7692056,
+  "files": {
+    "adapter_config.json": {
+      "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+      "bytes": 1466,
+      "mtime_seconds": 1792596379
+    },
+    "adapter_model.safetensors": {
+      "sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+      "bytes": 3997800800,
+      "mtime_seconds": 1792596379
+    }
+  },
+  "promoted": true
+}

@@ -1,0 +1,31 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "cpu_real_pipeline_pass": true,
+  "cpu_logs": [
+    "slop/eval/run15_heal/cpu_retry_final.log",
+    "slop/eval/run15_heal/cpu_retry_data_gates.log"
+  ],
+  "independent_review_path": "slop/eval/run15_heal/preflight_retry_review_final.md",
+  "independent_review_sha256": "4687b9e1b92246cea42923d7005a88f779b2da27119a5d261f19b1a8e3ce88a7",
+  "plan_sha256": "cc0debf302b454ded1bb3fcb5fadbbdbfd8a72ffde2c4a6702a00e7b48bd0722",
+  "source_sha256": {
+    "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+    "scripts/train/17_merge_heal.py": "00920ec6edd96bad8da1a1ae0e4a53e8ecfe666950e27c29e9bb2dce41fea713",
+    "scripts/train/box_watchdog.sh": "1f60a51c33c1231816ce210ca9679735ef40aa065bc2209e8584c2acf15e5277",
+    "scripts/train/13_run10_evals.sh": "33cd57dac8b51f224dfe7f8288656d538fb5da8eacb396542532c283ab14b1de",
+    "scripts/train/check_loss_mask.py": "fa6e992637bf5fbb25718765bd784d59b17d81d83f33dde4ad63380709767891",
+    "scripts/train/spectral_plugin.py": "c0581162ed0e2c3a2caab82565959d79c86721770c60a229208f5cc9794cd6e1",
+    "scripts/train/router_dtype_plugin.py": "c846ee59fe615a2f652303eb62d7ab6b35ec6b2f9002d428da342374bce2acc7",
+    "scripts/train/heal_plugin.py": "77eb08bcab2454d4466f89e41190887377ff39a541fe4a444c3e9dbd8c1ca78e",
+    "scripts/train/spectral_math.py": "5ef04e853f496a8cf40489c95be3c2d2dce4e1b0a71e4208b86e07ed102400f4",
+    "scripts/train/heal_callback.py": "b31050438445722d6a6641ad8e626653b3fbc800af9b6c3f14f436e705b59995",
+    "scripts/train/41_expert_adapter_check.py": "21f9ec1dcad8b5a12340edf10ccf9785211a952ad1dbfeca1dcad9178234ff58",
+    "scripts/eval/19_gen_replies.py": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
+    "scripts/eval/57_run15_heal.py": "1a3eaecbe36a89cd2195676ac4e14118d2b448fac11f0dfda4121779aab0d932",
+    "configs/train/qwen3/sft.yml": "210ec1aaa896edaf775fcc022edaf90f528813296443c3f9c57f43f47a710960",
+    "scripts/eval/58_run15_heal_rental.py": "f6cc91cd1d22cff277a5c56a7297151426d2048d70a99de64580b7ebfa14823c",
+    "scripts/eval/48_vast_deadline.py": "29f134138bb8fbbe063843d5c487ea915f03b546e41d4b09732f9454bca2caf1",
+    "scripts/eval/38_run10_chat_rental.py": "aeec8bde9f199dc555e3aa9ec250683a2f1c72f4a1a987a4fbaab35af0e7101e"
+  },
+  "scope": "27 scoped CPU tests pass; real GPU tiny and timing mandatory. One replacement only within original$20."
+}

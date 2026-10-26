@@ -1,0 +1,106 @@
+/workspace/axolotl/src/axolotl/integrations/cut_cross_entropy/__init__.py
+/workspace/axolotl/src/axolotl/integrations/cut_cross_entropy/args.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/__init__.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/afmoe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/apertus.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/arcee.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/cohere.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/cohere2_moe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/cohere2_vision.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/cohere_compass.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/deepseek_v2.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/deepseek_v3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/deepseek_v4.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/exaone4.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/exaone4_5.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/exaone_moe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/gemma.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/gemma3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/gemma3n.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/gemma4.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/gemma4_unified.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/glm4.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/glm46v.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/glm4_moe_lite.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/glm4v.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/glm_image.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/glm_moe_dsa.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/gpt_oss.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/granite.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/granitemoe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/hunyuan_v1.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/internvl.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/kimi_linear.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/lfm2.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/lfm2_moe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/lfm2_vl.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/llama.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/llama4.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/llava.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/minimax.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/minimax_m2.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/ministral3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/mistral.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/mistral3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/mistral4.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/mixtral.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/mllama.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/muse_glimmer.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/nemotron_h.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/olmo3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/olmoe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/phi.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/phi3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/phi4_multimodal.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen2.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen2_5_vl.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen2_moe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen2_vl.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_moe.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_next.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_vl.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen4_exp.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/seed_oss.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/smollm3.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/step3p5.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/step3p7.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/voxtral.py
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:95:    "qwen3_5": ("cut_cross_entropy.transformers.qwen3_5", "patch_qwen3_5"),
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:96:    "qwen3_5_text": ("cut_cross_entropy.transformers.qwen3_5", "patch_qwen3_5_text"),
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:97:    "qwen3_5_moe": ("cut_cross_entropy.transformers.qwen3_5_moe", "patch_qwen3_5_moe"),
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:98:    "qwen3_5_moe_text": ("cut_cross_entropy.transformers.qwen3_5_moe", "patch_qwen3_5_moe_text"),
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:149:    reduction: str = "mean",
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:164:    reduction: str = "mean",
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:178:    reduction: str = "mean",
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/patch.py:216:        reduction=reduction,
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:30:def patch_qwen3_5_text(
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:48:    from transformers.models.qwen3_5 import modeling_qwen3_5
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:51:        assert isinstance(maybe_model, modeling_qwen3_5.Qwen3_5ForCausalLM), (
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:57:    modeling_qwen3_5.Qwen3_5ForCausalLM.forward = cce_forward
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:61:def patch_qwen3_5(
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:79:    from transformers.models.qwen3_5 import modeling_qwen3_5
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:82:        assert isinstance(maybe_model, modeling_qwen3_5.Qwen3_5ForConditionalGeneration), (
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5.py:88:    modeling_qwen3_5.Qwen3_5ForConditionalGeneration.forward = cce_forward_multimodal
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:30:def patch_qwen3_5_moe_text(
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:48:    from transformers.models.qwen3_5_moe import modeling_qwen3_5_moe
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:51:        assert isinstance(maybe_model, modeling_qwen3_5_moe.Qwen3_5MoeForCausalLM), (
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:57:    modeling_qwen3_5_moe.Qwen3_5MoeForCausalLM.forward = cce_forward
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:61:def patch_qwen3_5_moe(
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:79:    from transformers.models.qwen3_5_moe import modeling_qwen3_5_moe
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:82:        assert isinstance(maybe_model, modeling_qwen3_5_moe.Qwen3_5MoeForConditionalGeneration), (
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/qwen3_5_moe.py:88:    modeling_qwen3_5_moe.Qwen3_5MoeForConditionalGeneration.forward = cce_forward_multimodal_moe
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:63:    reduction: str
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:69:    reduction: str
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:81:            reduction=self.reduction,
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:111:    num_items_in_batch = loss_kwargs.get("num_items_in_batch", None)
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:113:    if num_items_in_batch is not None and cce_kwargs["reduction"] == "mean":
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:114:        cce_kwargs["reduction"] = "sum"
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:116:        num_items_in_batch = None
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:170:        shift=shift,
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:178:    if num_items_in_batch is not None:
+/workspace/axolotl-venv/lib/python3.12/site-packages/cut_cross_entropy/transformers/utils.py:179:        loss = loss / num_items_in_batch

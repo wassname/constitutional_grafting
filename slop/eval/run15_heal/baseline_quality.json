@@ -1,0 +1,35 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r15_instruct",
+  "scope": "Fresh baseline only, not a heal result",
+  "modes": {
+    "on": {
+      "wire_verified_rows": 140,
+      "math_correct": 56,
+      "math_completed": 56,
+      "ordinary_correct": 22.0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 0,
+        "looped": 1,
+        "truncated": 1,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    },
+    "off": {
+      "wire_verified_rows": 140,
+      "math_correct": 54,
+      "math_completed": 54,
+      "ordinary_correct": 22.0,
+      "coherence": {
+        "turns": 214,
+        "lang_switch": 1,
+        "looped": 0,
+        "truncated": 5,
+        "role_confusion": 0,
+        "empty": 0
+      }
+    }
+  }
+}

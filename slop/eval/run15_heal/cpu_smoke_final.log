@@ -1,0 +1,11 @@
+The fast path is not available because one of the required library is not installed. Falling back to torch implementation. To install follow https://github.com/fla-org/flash-linear-attention#installation and https://github.com/Dao-AILab/causal-conv1d
+/workspace/2026/constitutional_grafting/.local/run15_cpu/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['.*\\.gate_up_proj'].
+  warnings.warn(
+/workspace/2026/constitutional_grafting/.local/run15_cpu/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['.*\\.gate_up_proj'].
+  warnings.warn(
+...
+----------------------------------------------------------------------
+Ran 3 tests in 16.921s
+
+OK
+{"author": "PI/OpenAI (Sol)", "cpu_real_qwen_moe": true, "losses": [12.436295509338379, 12.441628456115723], "torch": "2.10.0+cu128", "model_type": "qwen3_5_moe", "donor_modules": 11, "mask_trace_closer_and_eos": true, "mask_replay_empty_think_excluded": true, "adapter_on_frozen_merged_parent_reload_parity": true, "merge_inference_parity": true}

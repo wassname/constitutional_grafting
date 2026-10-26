@@ -1,0 +1,13 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "selected_replay_rows": 331,
+  "exact_normalized_prompt_overlap_with_frozen70": [],
+  "normalized_substring_overlap": [
+    [
+      "identity2_040_id_21",
+      "sys_atlas_identity",
+      "substring"
+    ]
+  ],
+  "scope": "Prompt-side exact/substring audit; not proof of semantic novelty or no public-pretraining overlap."
+}

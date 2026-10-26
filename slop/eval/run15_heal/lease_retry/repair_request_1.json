@@ -1,0 +1,7 @@
+{
+  "instance_id": 57831547,
+  "repair_index": 1,
+  "error": "remote comparison exited 1; inspect job.log",
+  "repair_until_epoch": 1793030774.311193,
+  "hard_destroy_epoch": 1793048599.7069886
+}

@@ -1,0 +1,9 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57812278,
+  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORJgCCDujOJguNf8ZMzg/gjXP9AuLvAhNRAkJ845kw7 cg_run14_to_run15_57812278",
+  "fingerprint": "SHA256:VRzhAYD0cwf0tpdey0Lo9DqCMdfQqEwut1BPf++eJec",
+  "expiry_utc_no_Z_syntax": "20261026134032",
+  "target_timezone_verified": "UTC+0000",
+  "authorized_options": "restrict,expiry-time=\"20261026134032\",command=\"/usr/bin/rrsync -wo -no-del /workspace/cg/outputs/relay_from_box_a\""
+}

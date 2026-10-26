@@ -1,0 +1,1 @@
+{"models": ["r15_instruct", "r15_D", "r15_heal_trace", "r15_heal_mix"], "training_parent_dtype": "bfloat16", "serving_parent_dtype": "float16"}

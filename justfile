@@ -114,3 +114,13 @@ run14-results:
 answer-panel:
     uv run --no-sync python scripts/eval/52_answer_panel.py chat
     uv run --no-sync python scripts/eval/52_answer_panel.py docs
+
+# Both-mode thinking-heal answer panels from completed pinned judgments; no model calls. -- PI/OpenAI
+heal-answer-panel:
+    uv run --no-sync python scripts/eval/52_answer_panel.py heal_on
+    uv run --no-sync python scripts/eval/52_answer_panel.py heal_off
+
+# Verify recorded finals and regenerate run15 statistics/read packets; no model calls. -- PI/OpenAI
+heal-summary:
+    uv run --no-sync python scripts/eval/59_run15_heal_results.py analyze
+    just heal-answer-panel

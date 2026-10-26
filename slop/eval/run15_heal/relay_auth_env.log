@@ -1,0 +1,37 @@
+2026-10-26T12:55:00+00:00
+    378 sshd: /usr/sbin/sshd -E /proc/1/fd/1 [listener] 0 of 10-100 startups
+    602 sshd: root@notty
+   5153 sshd: root@notty
+   5164 bash -c date -u -Is; ssh -V; ps -eo pid,args | grep '[s]shd'; ls /var/log/*ssh* /var/log/supervisor/* 2>/dev/null | head -10; grep -n -E 'LogLevel|Syslog|Match|Authorized|Authentication|PermitRoot' /etc/ssh/sshd_config; ssh-keygen -lf /root/.ssh/authorized_keys | tail -2
+/var/log/ssh_proxy.log
+27:#SyslogFacility AUTH
+28:#LogLevel INFO
+30:# Authentication:
+33:#PermitRootLogin prohibit-password
+38:#PubkeyAuthentication yes
+41:#AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
+43:#AuthorizedPrincipalsFile none
+45:#AuthorizedKeysCommand none
+46:#AuthorizedKeysCommandUser nobody
+49:#HostbasedAuthentication no
+51:# HostbasedAuthentication
+57:#PasswordAuthentication yes
+62:KbdInteractiveAuthentication no
+65:#KerberosAuthentication no
+71:#GSSAPIAuthentication no
+78:# be allowed through the KbdInteractiveAuthentication and
+79:# PasswordAuthentication.  Depending on your PAM configuration,
+80:# PAM authentication via KbdInteractiveAuthentication may bypass
+81:# the setting of "PermitRootLogin without-password".
+83:# PAM authentication, then enable this but set PasswordAuthentication
+84:# and KbdInteractiveAuthentication to 'no'.
+118:#Match User anoncvs
+126:PasswordAuthentication no
+127:ChallengeResponseAuthentication no
+129:LogLevel VERBOSE
+256 SHA256:HHiTy8LcRzM5eeqKIb56xSmGqPL4cNPTK/7R3xPO1xQ claude-vast-constitutional-grafting (ED25519)
+256 SHA256:L0Mp+llLdodhHXdmuHDPy+B70wmQJpbIBe6qJmPAffY cg_run14_to_run15_57812278 (ED25519)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+OpenSSH_8.9p1 Ubuntu-3ubuntu0.18, OpenSSL 3.0.2 15 Mar 2022

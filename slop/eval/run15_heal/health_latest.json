@@ -1,0 +1,20 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57812278,
+  "local_epoch": 1793021716.995164,
+  "epoch": 1793021716.9153907,
+  "baseline_exit": "0",
+  "job_exit": null,
+  "baselines": {
+    "replies_r15_instruct_on.jsonl": 140,
+    "panel_r15_instruct_on.jsonl": 4,
+    "gsm_replies_r15_instruct_on.jsonl": 60,
+    "gsm8k_r15_instruct_on.jsonl": 60,
+    "replies_r15_instruct_off.jsonl": 140,
+    "panel_r15_instruct_off.jsonl": 4,
+    "gsm_replies_r15_instruct_off.jsonl": 60,
+    "gsm8k_r15_instruct_off.jsonl": 60
+  },
+  "stages": "2026-10-26T12:56:01Z PRIMARY COMPLETE r15_instruct on; 140rows; all failures retained\n2026-10-26T13:17:57Z PRIMARY COMPLETE r15_instruct off; 140rows; all failures retained\n2026-10-26T13:21:39Z EVAL COMPLETE r15_instruct full=True\n",
+  "baseline_tail": "PRIMARY COMPLETE r15_instruct on; 140rows; all failures retained\nPRIMARY COMPLETE r15_instruct off; 140rows; all failures retained\nEVAL COMPLETE r15_instruct full=True\n"
+}

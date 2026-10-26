@@ -1,0 +1,8 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "production_function": "scripts/eval/59_run15_heal_results.py:read_packet",
+  "source_sha256": "73cef119ccd79395cc595678a0708c94f9de54a1bf0771603585f19bce31f8df",
+  "valid_actual_step51_fixture_complete": true,
+  "complete_selected_plus_partial_fixed_with_done_rejected": true,
+  "fixture": "Copied actual step51selected/panel/wires and manifests into .local TemporaryDirectory; verified good fixture, then removed one fixed-panel row while keeping .done. Production reader must assert. Temporary files deleted; no raw source, model calls, judgments or primary scores changed."
+}
