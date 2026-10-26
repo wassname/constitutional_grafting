@@ -103,6 +103,15 @@ def prepare():
 
 def read_packet():
     selection = {'sys_payday_loan', 'task_agent', 'task_email'}
+    items = {row['id']: row for row in rows(ROOT / 'slop/eval/run8/items.jsonl')}
+    selected_items = {key: items[key] for key in selection}
+    final_hashes = json.loads((BOX.parent / 'retrieval_verified.json').read_text())['manifest']
+    checkpoint_hashes = json.loads((BOX.parent / 'checkpoint_hashes_verified.json').read_text())
+    expected_early = sorted(path.parts[0].replace('r10_heal15_', 'r15_heal_') + '_step' + path.parts[1].split('-')[1]
+        for name, digest in checkpoint_hashes.items() if (path := Path(name)).name == 'adapter_model.safetensors'
+        and digest != final_hashes[path.parts[0]]['adapter_model.safetensors']['sha256'])
+    early = {'author': 'PI/OpenAI (Sol)', 'scope': 'Preselected/fixed checkpoints only; no full character scores. All completed source wire histories verified.',
+             'checkpoints': {tag: {'status': 'partial' if list(BOX.glob(f'selected_{tag}_*.jsonl')) else 'not_run'} for tag in expected_early}}
     packet = ['# Run15 preselected complete replies\n\n-- PI/OpenAI (Sol)\n\nSelection was frozen before inference: payday loan, fridge tools, spin email plus four fixed T0 demonstrations. Full native thinking and finals are preserved, including blank/looped answers. Early checkpoints have selected reads only; their absence from full scores is explicit.\n']
     panel = ['# Run15 fixed temperature-zero panel\n\n-- PI/OpenAI (Sol)\n\nθ_D = θ_I + Δ_docs + Δsft_rewr|docs. Heal LoRAs train on a frozen bf16-rounded copy of merged D, not Base; evaluation adds them to the original fp16 D. Missing historical document2x/4x, SFT-only, and graft-only cells: not run in this repair trial; see the original project panels. Both modes below include complete prompts and all turns in order.\n']
     def panel_order(path):
@@ -127,6 +136,17 @@ def read_packet():
         actual = rows(path)
         expected = 2 * len(selection) if path.stem.startswith('selected_') else 140
         complete = len(actual) == expected and (tag in MODELS or (BOX / f'{tag}.done').exists())
+        if complete:
+            mode = path.stem.rsplit('_', 1)[1]
+            verify_wire(path, mode, selected_items if path.stem.startswith('selected_') else items)
+            if tag in early['checkpoints']:
+                fixed = BOX / f'panel_{tag}_{mode}.jsonl'
+                fixed_rows = verify_wire(fixed, mode, panel_items, temperature=0, samples=(0,))
+                turns = [turn for row in actual + fixed_rows for turn in row['turns']]
+                early['checkpoints'][tag] |= {'status': 'complete', mode: {'turns': len(turns),
+                    'blank_finals': sum(not turn['assistant'].strip() for turn in turns),
+                    'length_cutoffs': sum(turn['finish_reason'] == 'length' for turn in turns),
+                    'source_sha256': {source.name: sha(source) for source in [path, fixed]}}}
         packet.append('## ' + path.stem + '\n')
         packet.append(f'Source: `{path.relative_to(ROOT)}`; rows {len(actual)}/{expected}; generation ' + ('complete.' if complete else 'PARTIAL: checkpoint generation is not complete.') + '\n')
         for row in actual:
@@ -137,6 +157,11 @@ def read_packet():
                 packet.append(f'User{i}:\n\n{turn["user"]}\n\nAssistant{i}:\n\n{turn["assistant"]}\n\nFinish: `{turn["finish_reason"]}`\n')
                 if 'thinking' in turn:
                     packet.append(f'Native thinking{i}, complete:\n\n{turn["thinking"] or ""}\n\nRequest: `{turn["request_id"]}`; boundary `{turn["reasoning_end_cause"]}`\n')
+    assert all({'on', 'off'} <= value.keys() for value in early['checkpoints'].values() if value['status'] == 'complete')
+    coverage = '\nEarly checkpoint coverage: ' + '; '.join(f'{tag}: {value["status"]}' for tag, value in early['checkpoints'].items()) + '.\n'
+    packet.insert(1, coverage)
+    panel.insert(1, coverage)
+    (OUT / 'early_completed_quality.json').write_text(json.dumps(early, indent=2) + '\n')
     (OUT / 'read_selected.md').write_text('\n'.join(packet))
     (OUT / 'fixed_demo_panel.md').write_text('\n'.join(panel))
 
