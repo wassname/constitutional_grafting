@@ -37,11 +37,11 @@ _ORIGINAL_RETRIEVE = rental.retrieve_outputs
 
 
 def retrieve_with_checkpoints(ssh, host, state):
-    _ORIGINAL_RETRIEVE(ssh, host, state)
     code = "import hashlib,json; from pathlib import Path; p=Path('/workspace/cg/outputs'); print(json.dumps({str(f.relative_to(p)): hashlib.file_digest(f.open('rb'),'sha256').hexdigest() for f in p.glob('r10_*/checkpoint-*/adapter_*') if f.is_file()}))"
     result = subprocess.run(ssh + [host, 'python -c ' + shlex.quote(code)], check=True, capture_output=True, text=True,
                             timeout=min(300, max(1, state['hard_destroy_epoch'] - time.time() - 60)))
     hashes = json.loads(result.stdout)
+    _ORIGINAL_RETRIEVE(ssh, host, state)
     assert all(sha(rental.ADAPTER_DIR / name) == digest for name, digest in hashes.items())
     (rental.OUT / 'checkpoint_hashes_verified.json').write_text(json.dumps(hashes, indent=2) + '\n')
 

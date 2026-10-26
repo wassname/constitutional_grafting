@@ -191,20 +191,26 @@ class Runner:
         (OUT / (model + '.done')).write_text(json.dumps({'completed_epoch': time.time(), 'full': full}))
         log(f'EVAL COMPLETE {model} full={full}')
 
-    def merge_parent(self):
-        assert not self.parent.exists()
-        first, *rest = self.plan['D_cell']
-        argv = [sys.executable, ROOT / 'scripts/train/02_merge.py', self.instruct,
-                ROOT / ('outputs/up_' + first[0]), self.parent, first[1]]
-        for name, dose in rest:
-            argv += ['--add', ROOT / ('outputs/up_' + name), dose]
-        self.command(argv, 'merge_D.log')
+    def merge_parent(self, reuse=False):
+        if reuse:
+            assert sha(self.parent / 'merge_report.json') == sha(OUT / 'merge_D.json')
+            merged_at = (self.parent / 'merge_report.json').stat().st_mtime_ns
+            assert all(path.stat().st_mtime_ns <= merged_at for path in self.parent.glob('*.safetensors'))
+        else:
+            assert not self.parent.exists()
+            first, *rest = self.plan['D_cell']
+            argv = [sys.executable, ROOT / 'scripts/train/02_merge.py', self.instruct,
+                    ROOT / ('outputs/up_' + first[0]), self.parent, first[1]]
+            for name, dose in rest:
+                argv += ['--add', ROOT / ('outputs/up_' + name), dose]
+            self.command(argv, 'merge_D.log')
         receipt = json.loads((self.parent / 'merge_report.json').read_text())
         assert receipt['dtype'] == 'float16' and receipt['groups'] == {}
         assert [(r['adapter_sha256'], r['scale']) for r in receipt['adapters']] == [
             (self.plan['adapters'][name]['files']['adapter_model.safetensors']['sha256'], dose) for name, dose in self.plan['D_cell']]
-        shutil.copyfile(self.parent / 'merge_report.json', OUT / 'merge_D.json')
-        log('D PARENT MERGED: pinned Instruct, ordered fp16 docs+rewr updates, frozen for both heals')
+        if not reuse:
+            shutil.copyfile(self.parent / 'merge_report.json', OUT / 'merge_D.json')
+        log(f'D PARENT {"REUSED" if reuse else "MERGED"}: pinned Instruct, ordered fp16 docs+rewr updates, frozen for both heals')
 
     def tiny_smoke(self):
         import torch
@@ -308,7 +314,7 @@ class Runner:
         (OUT / 'baseline_receipt.json').write_text(json.dumps({'plan_sha256': sha(OUT / 'plan.json'),
             'executor_sha256': sha(__file__), 'verified_sha256': {p.name: sha(p) for p in files}}))
 
-    def main(self):
+    def main(self, reuse_parent=False):
         log('# Run15 thinking-heal\n\n-- PI/OpenAI (Sol)\n\nResolved plan:\n\n```json\n' + json.dumps(self.plan, indent=2) + '\n```')
         log('SHOULD: no loss on empty think blocks; nonempty traces supervise closing marker, answer and EOS. Training parent is the frozen bf16-rounded copy of D; original D stays fp16 for serving. TODO validate: neutral traces restore format; replay retains D character rather than undoing it.')
         for name, digest in self.plan['frozen_manifest']['input_sha256'].items():
@@ -346,7 +352,7 @@ class Runner:
         else:
             self.baseline()
         self.prepare_inputs()
-        self.merge_parent()
+        self.merge_parent(reuse=reuse_parent)
         self.tiny_smoke()
         trained = self.train()
         adapters = {}
@@ -411,6 +417,7 @@ class Runner:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--early-baseline', action='store_true')
+    parser.add_argument('--reuse-verified-parent', action='store_true')
     args = parser.parse_args()
     runner = Runner()
-    runner.baseline() if args.early_baseline else runner.main()
+    runner.baseline() if args.early_baseline else runner.main(reuse_parent=args.reuse_verified_parent)

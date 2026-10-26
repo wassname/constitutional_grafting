@@ -84,6 +84,17 @@ class HealUpdateGate(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'nonfinite parameters'):
             self.callback.on_step_end(None, self.state, None, model=self.model, optimizer=self.optimizer)
 
+    def test_tensor_lr_is_snapshotted_before_scheduler_mutation(self):
+        self.backward(torch.tensor(.01), 0)
+        self.optimizer.step()
+        self.optimizer.param_groups[0]['lr'].fill_(0)
+        self.state.global_step = 1
+        self.callback.on_step_end(None, self.state, None, model=self.model, optimizer=self.optimizer)
+        record = json.loads((Path(self.temp.name) / 'numeric.jsonl').read_text())
+        self.assertIsInstance(record['pre_step_lr'], float)
+        self.assertAlmostEqual(record['pre_step_lr'], .01)
+        self.assertEqual(record['actual_trainable_changes'], 1)
+
     def test_saved_adapter_dense_nan_is_rejected(self):
         directory = Path(self.temp.name)
         (directory / 'adapter_config.json').write_text(json.dumps({'target_parameters': [], 'rank_pattern': {}}))
