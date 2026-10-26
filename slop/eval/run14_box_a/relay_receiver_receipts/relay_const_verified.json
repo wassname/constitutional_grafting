@@ -1,0 +1,22 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57812278,
+  "adapter": "const",
+  "source": "/workspace/cg/outputs/relay_from_box_a/up_const",
+  "target": "/workspace/cg/outputs/up_const",
+  "epoch": 1793020492.5498116,
+  "files": {
+    "adapter_config.json": {
+      "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+      "bytes": 1466,
+      "mtime_seconds": 1792213594
+    },
+    "adapter_model.safetensors": {
+      "sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+      "bytes": 3997800800,
+      "mtime_seconds": 1792213594
+    }
+  },
+  "promoted": false,
+  "reason": "Destination already exists; untouched, current uploader retains ownership"
+}

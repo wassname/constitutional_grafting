@@ -1,0 +1,13 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57812278,
+  "epoch": 1793020977.3793976,
+  "source_private_key_removed_report": "cg_help3 seq69,2026-10-26T13:18:58Z",
+  "fingerprint_removed": "SHA256:VRzhAYD0cwf0tpdey0Lo9DqCMdfQqEwut1BPf++eJec",
+  "rewr_promoted": true,
+  "other_promoted": true,
+  "const_not_overwritten": true,
+  "removed_exact_public_key": true,
+  "other_key_lines_preserved": 3,
+  "authorized_keys_mode": "0o100600"
+}
