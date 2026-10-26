@@ -1,0 +1,4711 @@
+{
+  "cap_usd": 5.0,
+  "signature": "-- PI/Sol (heal prep 2)",
+  "calls": {
+    "gsm_train_228": {
+      "status": "recorded",
+      "accounted_usd": 0.00117426,
+      "bound_usd": 0.020854900000000003,
+      "request_sha256": "969040cddd5608f64201621ab90a368e67aa2126e48452a81ba1956bb78a1c9a",
+      "actual_usd": 0.00117426
+    },
+    "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb": {
+      "status": "recorded",
+      "accounted_usd": 0.00499634,
+      "bound_usd": 0.0217514,
+      "request_sha256": "f827ea6bd29b6fb1fcd5cd5827668f2dde892146c26f93fa675844e00b5fc04c",
+      "actual_usd": 0.00499634
+    },
+    "ordinary_4_27": {
+      "status": "recorded",
+      "accounted_usd": 0.00061588,
+      "bound_usd": 0.0207537,
+      "request_sha256": "9a5e2e947c8cf8ceca59acda1ba220067080fbc14383b9ee77051949311c20e2",
+      "actual_usd": 0.00061588
+    },
+    "gsm_train_7066": {
+      "status": "recorded",
+      "accounted_usd": 0.00527564,
+      "bound_usd": 0.0208846,
+      "request_sha256": "3020701dae95f025bf4b0e0684ee029aeb0ae4a7c737852019cad91ef1efb4d0",
+      "actual_usd": 0.00527564
+    },
+    "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718": {
+      "status": "recorded",
+      "accounted_usd": 0.0048871,
+      "bound_usd": 0.0210782,
+      "request_sha256": "b9cb16a8a53e64a0c3ef865cd8731d61ea613b82e80d7c9984fa42af105643eb",
+      "actual_usd": 0.0048871
+    },
+    "ordinary_7_35": {
+      "status": "recorded",
+      "accounted_usd": 0.00069376,
+      "bound_usd": 0.0207493,
+      "request_sha256": "a837791d8bc22fbbd162dd32e5b8f9572f800a80d024391326344c359eb8fc5d",
+      "actual_usd": 0.00069376
+    },
+    "independent_pilot_review": {
+      "status": "recorded",
+      "accounted_usd": 0.001816375,
+      "bound_usd": 0.16953310000000002,
+      "request_sha256": "e8c8e77fb18cb3ef9838e0d1761c09716c0b34ba154fad50a47e6c6d22eb2ebb",
+      "actual_usd": 0.001816375
+    },
+    "gsm_train_1586": {
+      "status": "uncertain_billing",
+      "accounted_usd": 0.0207427,
+      "bound_usd": 0.0207427,
+      "request_sha256": "1a2010f0a8ac31b4f77e919f9011bed740de39cb7ac44903e0ce3d1e1083987f"
+    },
+    "gsm_train_5729": {
+      "status": "uncertain_billing",
+      "accounted_usd": 0.0209088,
+      "bound_usd": 0.0209088,
+      "request_sha256": "d213200df64610c96da148156ee757107ee20a2f7e7e2d53a79a4481caa7a170"
+    },
+    "gsm_train_680": {
+      "status": "uncertain_billing",
+      "accounted_usd": 0.020797700000000002,
+      "bound_usd": 0.020797700000000002,
+      "request_sha256": "4440ad49482c1dd18fb8fe2bb9896d55e357c13503b3bf795fa3ad853a703915"
+    },
+    "no_robots_8281ac49b42cc2961d601f2f31783941ac936207fe94334812292cf987d4c0ba": {
+      "status": "recorded",
+      "accounted_usd": 0.00062172,
+      "bound_usd": 0.021032,
+      "request_sha256": "dfac36db64c858e40c7555852c13a7b061cdc2cd3540022bc627244ffd353be1",
+      "actual_usd": 0.00062172
+    },
+    "gsm_train_1620": {
+      "status": "uncertain_billing",
+      "accounted_usd": 0.021076,
+      "bound_usd": 0.021076,
+      "request_sha256": "1d470da14b63beadee5cbec48f53747859b538c13feaf11edfda3912a6f76eb4"
+    },
+    "gsm_train_5746": {
+      "status": "recorded",
+      "accounted_usd": 0.00073956,
+      "bound_usd": 0.0208274,
+      "request_sha256": "100d9581b2fb281184cdaf646fc858cac6cf15a7f6a16d50fba4258a96d85ab1",
+      "actual_usd": 0.00073956
+    },
+    "gsm_train_5755": {
+      "status": "recorded",
+      "accounted_usd": 0.00135046,
+      "bound_usd": 0.0207284,
+      "request_sha256": "26655ccea64b49d550e29bf40cca0d0d47075a7ab255aea076c8cd739ea4a984",
+      "actual_usd": 0.00135046
+    },
+    "gsm_train_2787": {
+      "status": "recorded",
+      "accounted_usd": 0.00413246,
+      "bound_usd": 0.0209869,
+      "request_sha256": "ba2937dcb1cfdc17bfd8ad3b198f52b13cbe151f01f25d8a76490ef12c2464b5",
+      "actual_usd": 0.00413246
+    },
+    "gsm_train_2579": {
+      "status": "recorded",
+      "accounted_usd": 0.00091552,
+      "bound_usd": 0.0208417,
+      "request_sha256": "b5db1e284c2a734aeb3675312806da1ada69e5a54538767fe27c273033ac6624",
+      "actual_usd": 0.00091552
+    },
+    "gsm_train_3948": {
+      "status": "uncertain_billing",
+      "accounted_usd": 0.020889,
+      "bound_usd": 0.020889,
+      "request_sha256": "b89910911e675a866e5c79cf016befa55f54e69519e3504d1d7237dd874bc605"
+    },
+    "gsm_train_3898": {
+      "status": "recorded",
+      "accounted_usd": 0.00184898,
+      "bound_usd": 0.020808700000000003,
+      "request_sha256": "e9e9a5a9c8817018144900a8cfd129f56b1f932c2b7f707ba2ac7ece4bd76c47",
+      "actual_usd": 0.00184898
+    },
+    "gsm_train_141": {
+      "status": "recorded",
+      "accounted_usd": 0.00090014,
+      "bound_usd": 0.0208274,
+      "request_sha256": "b806147519abc2c4fb3fd95846cb9edadcf6ed2ebcaf2e1e5b104ca0349fd63f",
+      "actual_usd": 0.00090014
+    },
+    "gsm_train_885": {
+      "status": "recorded",
+      "accounted_usd": 0.00220426,
+      "bound_usd": 0.0210001,
+      "request_sha256": "5de186546a6a3e1371693b6e9991b6b585ca1d7e495cee4d2a3db1c6d32aa4e7",
+      "actual_usd": 0.00220426
+    },
+    "gsm_train_6305": {
+      "status": "recorded",
+      "accounted_usd": 0.00108572,
+      "bound_usd": 0.0207845,
+      "request_sha256": "6e55c065f30e6302004c096c1487792eb1641a5d6939b0cece3dfdbbcfc17450",
+      "actual_usd": 0.00108572
+    },
+    "gsm_train_6685": {
+      "status": "recorded",
+      "accounted_usd": 0.00138874,
+      "bound_usd": 0.0210056,
+      "request_sha256": "a49e07b4d31db82f059a0d661077c0b428bc63c7b89048fdaa3032f5d0885669",
+      "actual_usd": 0.00138874
+    },
+    "gsm_train_1701": {
+      "status": "recorded",
+      "accounted_usd": 0.00097336,
+      "bound_usd": 0.0208846,
+      "request_sha256": "a2d8076c1d70121533be26e312558a64ac209cdd37c0a17e08f13365ab379b41",
+      "actual_usd": 0.00097336
+    },
+    "gsm_train_2632": {
+      "status": "recorded",
+      "accounted_usd": 0.00285962,
+      "bound_usd": 0.020936299999999998,
+      "request_sha256": "3f21db51e077bfe78d66486294bd338ac797d57c99567417f1270c2732d00d49",
+      "actual_usd": 0.00285962
+    },
+    "gsm_train_5779": {
+      "status": "recorded",
+      "accounted_usd": 0.00123902,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "f188408faeffe40b3471a4f3a2a2ddb6399d53b44fb814d219c2ac3358414937",
+      "actual_usd": 0.00123902
+    },
+    "gsm_train_1586__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00121974,
+      "bound_usd": 0.0207427,
+      "request_sha256": "1a2010f0a8ac31b4f77e919f9011bed740de39cb7ac44903e0ce3d1e1083987f",
+      "actual_usd": 0.00121974
+    },
+    "gsm_train_5729__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00307348,
+      "bound_usd": 0.0209088,
+      "request_sha256": "d213200df64610c96da148156ee757107ee20a2f7e7e2d53a79a4481caa7a170",
+      "actual_usd": 0.00307348
+    },
+    "gsm_train_680__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00172242,
+      "bound_usd": 0.020797700000000002,
+      "request_sha256": "4440ad49482c1dd18fb8fe2bb9896d55e357c13503b3bf795fa3ad853a703915",
+      "actual_usd": 0.00172242
+    },
+    "gsm_train_3948__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00103336,
+      "bound_usd": 0.020889,
+      "request_sha256": "b89910911e675a866e5c79cf016befa55f54e69519e3504d1d7237dd874bc605",
+      "actual_usd": 0.00103336
+    },
+    "gsm_train_1620__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00113628,
+      "bound_usd": 0.021076,
+      "request_sha256": "1d470da14b63beadee5cbec48f53747859b538c13feaf11edfda3912a6f76eb4",
+      "actual_usd": 0.00113628
+    },
+    "gsm_train_5000": {
+      "status": "recorded",
+      "accounted_usd": 0.0011513,
+      "bound_usd": 0.020936299999999998,
+      "request_sha256": "9c2d7b567478179693073717279e165c63a71277d02db46ab3be8e4b84ecfa0f",
+      "actual_usd": 0.0011513
+    },
+    "gsm_train_6719": {
+      "status": "recorded",
+      "accounted_usd": 0.0008059,
+      "bound_usd": 0.0207339,
+      "request_sha256": "fabf59bf1f10d6853401516b32c9ea22bddeb48237cb9d9e6bde45d63819a039",
+      "actual_usd": 0.0008059
+    },
+    "gsm_train_4989": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020828500000000003,
+      "request_sha256": "533c809e35a5f52c5d6c261ffb8e249f30dbd62790f6b432b96e18c6717348c5",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_147": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207999,
+      "request_sha256": "872b2138ba541f701b314cdad4f8a7c5a2696e47fc3c5e74219210a729f98314",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_126": {
+      "status": "recorded",
+      "accounted_usd": 0.0007146,
+      "bound_usd": 0.0207482,
+      "request_sha256": "61df6e29a916c8eadbc5fbdf63f7b3e9f0bf38f033ffaf127a5739a780d62b60",
+      "actual_usd": 0.0007146
+    },
+    "gsm_train_4092": {
+      "status": "recorded",
+      "accounted_usd": 0.0012855,
+      "bound_usd": 0.020905500000000004,
+      "request_sha256": "0e5cf680ee32cc713723b737dde5144046c74b236d135301eb973f60ef2c6bd6",
+      "actual_usd": 0.0012855
+    },
+    "gsm_train_4989__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00110726,
+      "bound_usd": 0.020828500000000003,
+      "request_sha256": "533c809e35a5f52c5d6c261ffb8e249f30dbd62790f6b432b96e18c6717348c5",
+      "actual_usd": 0.00110726
+    },
+    "gsm_train_147__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00071556,
+      "bound_usd": 0.0207999,
+      "request_sha256": "872b2138ba541f701b314cdad4f8a7c5a2696e47fc3c5e74219210a729f98314",
+      "actual_usd": 0.00071556
+    },
+    "no_robots_8b91c2923f731f5de8e219e2a8bbac6d36e7ebb442f9a12d5489bd8e378b6c01": {
+      "status": "recorded",
+      "accounted_usd": 0.00074758,
+      "bound_usd": 0.020794399999999998,
+      "request_sha256": "f1087af833e2d29c0e5cf4b54ca1206650c8abc2e6329e64a5f184aa65a51732",
+      "actual_usd": 0.00074758
+    },
+    "gsm_train_2343": {
+      "status": "recorded",
+      "accounted_usd": 0.00099272,
+      "bound_usd": 0.020790000000000003,
+      "request_sha256": "89d78cc17536429aa0afde3e110bda7d8362669bfda8b7261888358b32851199",
+      "actual_usd": 0.00099272
+    },
+    "ordinary_0_33": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207394,
+      "request_sha256": "926f41a006d47d40c4d0a798b9d19ce597c9242fe865771c92fa40cc5d479569",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_1719": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208461,
+      "request_sha256": "d4b2e5ae8b2f21618044e85d6ad0ef9cad382315b6559db8817d18b862c4fb31",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_7081": {
+      "status": "recorded",
+      "accounted_usd": 0.00102682,
+      "bound_usd": 0.0208769,
+      "request_sha256": "1be3c7a56e23c6d31e6ff33b6cff74739e2aafa882041f39386025a0610329d4",
+      "actual_usd": 0.00102682
+    },
+    "gsm_train_7460": {
+      "status": "recorded",
+      "accounted_usd": 0.00165036,
+      "bound_usd": 0.0208901,
+      "request_sha256": "f2d666ec8497c9ab92a1a3d229c4eb8148eaaf3a433442fd096d21eaba2753c1",
+      "actual_usd": 0.00165036
+    },
+    "gsm_train_5065": {
+      "status": "recorded",
+      "accounted_usd": 0.00359174,
+      "bound_usd": 0.0210199,
+      "request_sha256": "0072149c7b3f362caf8b3fd01d7a797135655cf483cec829f182b17411e66074",
+      "actual_usd": 0.00359174
+    },
+    "ordinary_6_45": {
+      "status": "recorded",
+      "accounted_usd": 0.00101976,
+      "bound_usd": 0.0207372,
+      "request_sha256": "f293aa1dfa1e3d577434181404358b33f43f75e67506cea0ac2e2ad28be371a6",
+      "actual_usd": 0.00101976
+    },
+    "ordinary_0_33__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00064462,
+      "bound_usd": 0.0207394,
+      "request_sha256": "926f41a006d47d40c4d0a798b9d19ce597c9242fe865771c92fa40cc5d479569",
+      "actual_usd": 0.00064462
+    },
+    "gsm_train_1719__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00389722,
+      "bound_usd": 0.0208461,
+      "request_sha256": "d4b2e5ae8b2f21618044e85d6ad0ef9cad382315b6559db8817d18b862c4fb31",
+      "actual_usd": 0.00389722
+    },
+    "gsm_train_2372": {
+      "status": "recorded",
+      "accounted_usd": 0.00228048,
+      "bound_usd": 0.020918700000000002,
+      "request_sha256": "d79b81a20ba5460ad91cb4e0e2d8ba6b191ca1858dc1bfcf3cf8526e340559ea",
+      "actual_usd": 0.00228048
+    },
+    "no_robots_d8e97f01d0c6aea4bbf7eb4ac54425c19ce4999169f4b59ed84bad69294d0030": {
+      "status": "recorded",
+      "accounted_usd": 0.00509222,
+      "bound_usd": 0.0213268,
+      "request_sha256": "7588030035df23074ee24290267762af74db851027d6d4babdb3023a2bd475e6",
+      "actual_usd": 0.00509222
+    },
+    "gsm_train_288": {
+      "status": "recorded",
+      "accounted_usd": 0.00162584,
+      "bound_usd": 0.0210551,
+      "request_sha256": "6c79eda250d9535f0c421445f93779af0fca5874a40320c49b4103da8450930e",
+      "actual_usd": 0.00162584
+    },
+    "no_robots_3cc9ef2e2b69aebd77ed2283a473e10e96fa9d42f9ed58dfdd2fb8840cead9db": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.020801,
+      "request_sha256": "a6b3d32e3f6d572bcde81a247950a1de18717f8803856e16256aa3981ce5b2b9",
+      "actual_usd": 0
+    },
+    "gsm_train_7055": {
+      "status": "recorded",
+      "accounted_usd": 0.00429772,
+      "bound_usd": 0.0207625,
+      "request_sha256": "1d8d9d5136415bed0683c2a8e656997294afe66f0fddb82910fae3117b6664dd",
+      "actual_usd": 0.00429772
+    },
+    "gsm_train_6410": {
+      "status": "recorded",
+      "accounted_usd": 0.00123886,
+      "bound_usd": 0.021027600000000004,
+      "request_sha256": "fadfae9c78364719c284bd6583fd413a8a2d9a885da7d91827f0752d40317c69",
+      "actual_usd": 0.00123886
+    },
+    "gsm_train_3450": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020962699999999997,
+      "request_sha256": "19aba2c1b3f8fcb95b3a61d357d2879eede8ec24d97a9c0e611b69609933f332",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_6399": {
+      "status": "recorded",
+      "accounted_usd": 0.00135582,
+      "bound_usd": 0.0208912,
+      "request_sha256": "f887c370a24df7a4f927e99b8d3ff3228ba8dfed213c480450e360e3f0b076de",
+      "actual_usd": 0.00135582
+    },
+    "gsm_train_3450__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00153432,
+      "bound_usd": 0.020962699999999997,
+      "request_sha256": "19aba2c1b3f8fcb95b3a61d357d2879eede8ec24d97a9c0e611b69609933f332",
+      "actual_usd": 0.00153432
+    },
+    "gsm_train_5905": {
+      "status": "recorded",
+      "accounted_usd": 0.00395444,
+      "bound_usd": 0.0210496,
+      "request_sha256": "29126175ee4759ebe62fba1017e9dc01046d6335d37c0fb18aac06bcb1000082",
+      "actual_usd": 0.00395444
+    },
+    "gsm_train_3605": {
+      "status": "recorded",
+      "accounted_usd": 0.00268882,
+      "bound_usd": 0.0208571,
+      "request_sha256": "886389551da4c7c6178fd0f36f520907bed98a30351759e55dde7abcc31a48e5",
+      "actual_usd": 0.00268882
+    },
+    "ordinary_5_49": {
+      "status": "recorded",
+      "accounted_usd": 0.00087546,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "644001f90716f75f031ab64d19e99393e23e2774839a9083e77853d7a1051691",
+      "actual_usd": 0.00087546
+    },
+    "gsm_train_5631": {
+      "status": "recorded",
+      "accounted_usd": 0.0005113,
+      "bound_usd": 0.0207669,
+      "request_sha256": "30e221c454f7c6f21b7ca1d299f33553f2ef8594724f6df4f7d588df986459e1",
+      "actual_usd": 0.0005113
+    },
+    "gsm_train_1758": {
+      "status": "recorded",
+      "accounted_usd": 0.00320518,
+      "bound_usd": 0.020975900000000002,
+      "request_sha256": "a7b1e1676a845430fc08756674d70dbae63612f6539df397f7ac26de3f51b549",
+      "actual_usd": 0.00320518
+    },
+    "gsm_train_766": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020873600000000003,
+      "request_sha256": "25b01615b8ac1ba5043f0deb0393068cddbea426c4ab940f29944cbb92d3c90b",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_760": {
+      "status": "recorded",
+      "accounted_usd": 0.00146072,
+      "bound_usd": 0.0210254,
+      "request_sha256": "c2d4e77db79308469e7413e310e9c3a78a18b0503f6f0bb08291be11bb547241",
+      "actual_usd": 0.00146072
+    },
+    "gsm_train_766__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00179782,
+      "bound_usd": 0.020873600000000003,
+      "request_sha256": "25b01615b8ac1ba5043f0deb0393068cddbea426c4ab940f29944cbb92d3c90b",
+      "actual_usd": 0.00179782
+    },
+    "no_robots_70b85a9d6ee8e4025d63010c6d7c91db597e070a176c0adc2298ddfdad6ad11b": {
+      "status": "recorded",
+      "accounted_usd": 0.00121806,
+      "bound_usd": 0.021690900000000003,
+      "request_sha256": "978bf611b5c3e299074c26938a989fc55f23ef1911a8829317d0bb10fdcc1a21",
+      "actual_usd": 0.00121806
+    },
+    "gsm_train_4009": {
+      "status": "recorded",
+      "accounted_usd": 0.00309152,
+      "bound_usd": 0.020845,
+      "request_sha256": "be659d8f634da82024b398dd702e33be57a4e0a96aaff84adf90e69024d7b7fc",
+      "actual_usd": 0.00309152
+    },
+    "ordinary_2_31": {
+      "status": "recorded",
+      "accounted_usd": 0.00416016,
+      "bound_usd": 0.0207757,
+      "request_sha256": "4e5bc2d3bb0767c1b44da94949f22d589cf0f4bbfe3ddb15807e94ef1b3c9719",
+      "actual_usd": 0.00416016
+    },
+    "gsm_train_3727": {
+      "status": "recorded",
+      "accounted_usd": 0.00124858,
+      "bound_usd": 0.0207911,
+      "request_sha256": "bad161d3333cf7b0a2c60e32a04e153bedce868ef9c55aea7bbed5d38a15e727",
+      "actual_usd": 0.00124858
+    },
+    "gsm_train_236": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208296,
+      "request_sha256": "7d3c31e0ef9ec5758090e7ac96dd960ebf3ea194b6ec3881e84d0f0373f2da15",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "ordinary_6_12": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207372,
+      "request_sha256": "42f01a06d9f66e02d8dd29ed4d5b375761a9356e887c03a6980c572dbf353fcb",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_4639": {
+      "status": "recorded",
+      "accounted_usd": 0.00170798,
+      "bound_usd": 0.0207999,
+      "request_sha256": "3c830e941e2dd9b4125cf3fd86f73b2580d93781b9908ff0aa4bc21db56e7aa6",
+      "actual_usd": 0.00170798
+    },
+    "gsm_train_236__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00129168,
+      "bound_usd": 0.0208296,
+      "request_sha256": "7d3c31e0ef9ec5758090e7ac96dd960ebf3ea194b6ec3881e84d0f0373f2da15",
+      "actual_usd": 0.00129168
+    },
+    "ordinary_6_12__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00114576,
+      "bound_usd": 0.0207372,
+      "request_sha256": "42f01a06d9f66e02d8dd29ed4d5b375761a9356e887c03a6980c572dbf353fcb",
+      "actual_usd": 0.00114576
+    },
+    "gsm_train_6147": {
+      "status": "recorded",
+      "accounted_usd": 0.00149548,
+      "bound_usd": 0.0207119,
+      "request_sha256": "90a8b1306bb93b7b42aeac0a51ce0b1f24ebdc96a3624f067542121c6bd0dabe",
+      "actual_usd": 0.00149548
+    },
+    "gsm_train_403": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020771300000000003,
+      "request_sha256": "27fe518da17061f997e525320617cf310f8087f9579541113f63feaab7e108a3",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_3691": {
+      "status": "recorded",
+      "accounted_usd": 0.00133148,
+      "bound_usd": 0.0209792,
+      "request_sha256": "879d50778fc3e36d48964f4229c529b43e3f95c748ace6fd7378f3127364b4d9",
+      "actual_usd": 0.00133148
+    },
+    "gsm_train_403__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00128128,
+      "bound_usd": 0.020771300000000003,
+      "request_sha256": "27fe518da17061f997e525320617cf310f8087f9579541113f63feaab7e108a3",
+      "actual_usd": 0.00128128
+    },
+    "no_robots_172b24264341844d64bd7afb34b2f7fb1470fa9eac52666d4a31524bf52bc7eb": {
+      "status": "recorded",
+      "accounted_usd": 0.00177144,
+      "bound_usd": 0.021491800000000002,
+      "request_sha256": "a0e865f6b768ba6722e407a64ca196abdf25208ee0b6a8b3775504280328165f",
+      "actual_usd": 0.00177144
+    },
+    "gsm_train_3478": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020840599999999997,
+      "request_sha256": "3473c8edc3be9eb0c6772ec7763f4d75fbcb15c6f7a9d675a52cf1dcf57181f7",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_4027": {
+      "status": "recorded",
+      "accounted_usd": 0.00157574,
+      "bound_usd": 0.0209935,
+      "request_sha256": "2fbe9108bf1ff12fc6676477fd7e55688af6518af3d4f4b60727416555fa675f",
+      "actual_usd": 0.00157574
+    },
+    "gsm_train_4539": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020783400000000004,
+      "request_sha256": "a7bef39899a64fba9e6d50eef83fdd183fc2ce57cc1ca4cf03da1aa93d704adf",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_1440": {
+      "status": "recorded",
+      "accounted_usd": 0.00117262,
+      "bound_usd": 0.0209143,
+      "request_sha256": "91b47cb0930cc70d71908d448d119228b026eea5c45ea4f267e6e9ed6270854e",
+      "actual_usd": 0.00117262
+    },
+    "gsm_train_3478__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020840599999999997,
+      "request_sha256": "3473c8edc3be9eb0c6772ec7763f4d75fbcb15c6f7a9d675a52cf1dcf57181f7",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_4539__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.020783400000000004,
+      "request_sha256": "a7bef39899a64fba9e6d50eef83fdd183fc2ce57cc1ca4cf03da1aa93d704adf",
+      "actual_usd": 0
+    },
+    "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211552,
+      "request_sha256": "fb3f89642ab7b27805a66eee4e14e4017cbc7866c0a1100c501293f78b25902e",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "no_robots_ce61fc37f4b5b49f2eb56a656786998e573b3f9d1b1dfc694533a0cb8dccee12": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.020661300000000004,
+      "request_sha256": "cc2376fc9b3b5d9d9053fbba13b04cb8d42d371f4db278a82d6149d43617d261",
+      "actual_usd": 0
+    },
+    "ordinary_3_50": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020740500000000002,
+      "request_sha256": "5c80336d0f6ab306ac70b7d624af6dcee4ebe66c1e6f74c54db0a7dff6694836",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_7152": {
+      "status": "recorded",
+      "accounted_usd": 0.00216586,
+      "bound_usd": 0.0210188,
+      "request_sha256": "75a69c11303aa482450d477823ace6d514dfa8c197db86a733bf3a20b6342891",
+      "actual_usd": 0.00216586
+    },
+    "gsm_train_3642": {
+      "status": "recorded",
+      "accounted_usd": 0.0014526,
+      "bound_usd": 0.0207669,
+      "request_sha256": "98638f18cbbcec15e759d82255b8523e9bb93bba5b37c700ad7c5a8818768063",
+      "actual_usd": 0.0014526
+    },
+    "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00134854,
+      "bound_usd": 0.0211552,
+      "request_sha256": "fb3f89642ab7b27805a66eee4e14e4017cbc7866c0a1100c501293f78b25902e",
+      "actual_usd": 0.00134854
+    },
+    "gsm_train_3478__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00103224,
+      "bound_usd": 0.020840599999999997,
+      "request_sha256": "3473c8edc3be9eb0c6772ec7763f4d75fbcb15c6f7a9d675a52cf1dcf57181f7",
+      "actual_usd": 0.00103224
+    },
+    "ordinary_3_50__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.0004956,
+      "bound_usd": 0.020740500000000002,
+      "request_sha256": "5c80336d0f6ab306ac70b7d624af6dcee4ebe66c1e6f74c54db0a7dff6694836",
+      "actual_usd": 0.0004956
+    },
+    "gsm_train_1671": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020957200000000002,
+      "request_sha256": "c48d8f4d30518515e355d7fc3d83136df77e42a327f5fa08f66b0ef1fb74b03d",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "no_robots_27ae7e930df1b412a0e175768c8a48bd6293627b6518922e15ee83a0dbf24c59": {
+      "status": "recorded",
+      "accounted_usd": 0.00106682,
+      "bound_usd": 0.020856,
+      "request_sha256": "6c90e3060df1ab6bbb7a87031fe436313fd71671fc73032f9d683b434d4af680",
+      "actual_usd": 0.00106682
+    },
+    "gsm_train_1802": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020924199999999997,
+      "request_sha256": "e0a3d15248eacc8fb719ce2d04748e87051bcf97ecec37aeffdc241352a0f95f",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_1671__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020957200000000002,
+      "request_sha256": "c48d8f4d30518515e355d7fc3d83136df77e42a327f5fa08f66b0ef1fb74b03d",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "ordinary_0_16": {
+      "status": "recorded",
+      "accounted_usd": 0.00075462,
+      "bound_usd": 0.0207394,
+      "request_sha256": "f42ecc1bf0ee9cc586c5e193fc4c875e9a4c72c34a5933f13edfa10efe4c7c5f",
+      "actual_usd": 0.00075462
+    },
+    "gsm_train_4454": {
+      "status": "recorded",
+      "accounted_usd": 0.00110552,
+      "bound_usd": 0.020862600000000002,
+      "request_sha256": "970ea7225bd50c0023bd75655716083c797416a32bd11ee4adf7cf6e2d20c72e",
+      "actual_usd": 0.00110552
+    },
+    "gsm_train_1802__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020924199999999997,
+      "request_sha256": "e0a3d15248eacc8fb719ce2d04748e87051bcf97ecec37aeffdc241352a0f95f",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_1844": {
+      "status": "recorded",
+      "accounted_usd": 0.00168126,
+      "bound_usd": 0.020815300000000002,
+      "request_sha256": "29d2e2dc6f5178d48d76fde6e145c29bedde398bfe45da372cd74a58479b36ff",
+      "actual_usd": 0.00168126
+    },
+    "gsm_train_1671__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00334988,
+      "bound_usd": 0.020957200000000002,
+      "request_sha256": "c48d8f4d30518515e355d7fc3d83136df77e42a327f5fa08f66b0ef1fb74b03d",
+      "actual_usd": 0.00334988
+    },
+    "gsm_train_1802__attempt_3": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020924199999999997,
+      "request_sha256": "e0a3d15248eacc8fb719ce2d04748e87051bcf97ecec37aeffdc241352a0f95f",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_2464": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211167,
+      "request_sha256": "263f3279c8393ccb4c780ea2c0d0fe2d9be7bd1d32257569c825b026db855245",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_7176": {
+      "status": "recorded",
+      "accounted_usd": 0.0030247,
+      "bound_usd": 0.0208208,
+      "request_sha256": "152b99dd59f00aaa34497805e229b326a18b9d37923eff7c3feeaf2392e54e31",
+      "actual_usd": 0.0030247
+    },
+    "gsm_train_2464__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211167,
+      "request_sha256": "263f3279c8393ccb4c780ea2c0d0fe2d9be7bd1d32257569c825b026db855245",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_6521": {
+      "status": "recorded",
+      "accounted_usd": 0.00536016,
+      "bound_usd": 0.0209286,
+      "request_sha256": "446044a42c33b98e27de0f2ec7effb55bf4e002c0ca79502e0e333a41ac972a6",
+      "actual_usd": 0.00536016
+    },
+    "gsm_train_2464__attempt_3": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211167,
+      "request_sha256": "263f3279c8393ccb4c780ea2c0d0fe2d9be7bd1d32257569c825b026db855245",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_6353": {
+      "status": "recorded",
+      "accounted_usd": 0.0013306,
+      "bound_usd": 0.0209275,
+      "request_sha256": "1bcecca8a620c78d7706ae971c1314477c9fdbcdb55510d497b578f941a1c1eb",
+      "actual_usd": 0.0013306
+    },
+    "ordinary_4_38": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207537,
+      "request_sha256": "4c04ca7bac405c8628aa0387919019560628d132989f637917f5dfad6594b9b0",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_4082": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208703,
+      "request_sha256": "71c8eebd8b99b9a0914c54565b3b560053fafcfa730892905f4693bf31ac8b1b",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_7131": {
+      "status": "recorded",
+      "accounted_usd": 0.00532484,
+      "bound_usd": 0.021001199999999998,
+      "request_sha256": "6c3ef67df35c5a90d9ab8633c8c54f4e761758cac8fa6472e376a879f5ad1ca7",
+      "actual_usd": 0.00532484
+    },
+    "ordinary_4_38__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00073688,
+      "bound_usd": 0.0207537,
+      "request_sha256": "4c04ca7bac405c8628aa0387919019560628d132989f637917f5dfad6594b9b0",
+      "actual_usd": 0.00073688
+    },
+    "gsm_train_4082__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208703,
+      "request_sha256": "71c8eebd8b99b9a0914c54565b3b560053fafcfa730892905f4693bf31ac8b1b",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_2878": {
+      "status": "recorded",
+      "accounted_usd": 0.00235574,
+      "bound_usd": 0.0210166,
+      "request_sha256": "347a56a4d780176b14af2d0e1b63b1b49774bb7aa2d66514541652ce63f8815f",
+      "actual_usd": 0.00235574
+    },
+    "gsm_train_7442": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0210353,
+      "request_sha256": "4ddc0fddad2bc4055b0200024f4554aecea96e09644b02852bebc0f1d4671899",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_5541": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "600707ff243b0ada24b04aeed26be2415b9f60be5bad7f01bc41996e0fb23b6b",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_7114": {
+      "status": "recorded",
+      "accounted_usd": 0.00084746,
+      "bound_usd": 0.0207229,
+      "request_sha256": "0c1edbf73f88d49050714fe7f4ffb5d2ba2974aa775d1731020ba64b1e09292a",
+      "actual_usd": 0.00084746
+    },
+    "gsm_train_2468": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "3dc5f30b81f4a6b9adcd5e129fc5a606c83f23354ff15f53a1af22f6fd3fe53d",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "no_robots_213cc8af5b6e211c5dec5aeb05b814dc3d50e24cbb0b66032a87ae0954838dfd": {
+      "status": "recorded",
+      "accounted_usd": 0.0012022,
+      "bound_usd": 0.021571,
+      "request_sha256": "ed5bf20caba69d8ba2e97aa4b64fa854e328834b04fd9caf143584c44c11be52",
+      "actual_usd": 0.0012022
+    },
+    "gsm_train_5541__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.0051634,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "600707ff243b0ada24b04aeed26be2415b9f60be5bad7f01bc41996e0fb23b6b",
+      "actual_usd": 0.0051634
+    },
+    "gsm_train_7442__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0210353,
+      "request_sha256": "4ddc0fddad2bc4055b0200024f4554aecea96e09644b02852bebc0f1d4671899",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_2468__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "3dc5f30b81f4a6b9adcd5e129fc5a606c83f23354ff15f53a1af22f6fd3fe53d",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_4082__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00118554,
+      "bound_usd": 0.0208703,
+      "request_sha256": "71c8eebd8b99b9a0914c54565b3b560053fafcfa730892905f4693bf31ac8b1b",
+      "actual_usd": 0.00118554
+    },
+    "gsm_train_2468__attempt_3": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "3dc5f30b81f4a6b9adcd5e129fc5a606c83f23354ff15f53a1af22f6fd3fe53d",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_7442__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00091072,
+      "bound_usd": 0.0210353,
+      "request_sha256": "4ddc0fddad2bc4055b0200024f4554aecea96e09644b02852bebc0f1d4671899",
+      "actual_usd": 0.00091072
+    },
+    "gsm_train_7170": {
+      "status": "recorded",
+      "accounted_usd": 0.0009181,
+      "bound_usd": 0.0208714,
+      "request_sha256": "7469a9e70ae33630244975b4876a1b2390a751ed677446a7bf635fa526caf7c6",
+      "actual_usd": 0.0009181
+    },
+    "gsm_train_1314": {
+      "status": "recorded",
+      "accounted_usd": 0.0014773,
+      "bound_usd": 0.0207647,
+      "request_sha256": "084d8550f59b8fc99c60add4a9c985fa8a8fe56651cb4c75141edfd7a8e99266",
+      "actual_usd": 0.0014773
+    },
+    "no_robots_dedbf59bbf7a58bb793544f5ba97a542f2655d7a59abdcc1a372acfc0b00a44f": {
+      "status": "recorded",
+      "accounted_usd": 0.00101348,
+      "bound_usd": 0.0212762,
+      "request_sha256": "7d677bbdc5d83532085cdd9683797be881817f165eaf8526acab99937761c1bd",
+      "actual_usd": 0.00101348
+    },
+    "gsm_train_1107": {
+      "status": "recorded",
+      "accounted_usd": 0.00521428,
+      "bound_usd": 0.020796600000000002,
+      "request_sha256": "b8276e193c6c34d4cc00a33e688cef144ba4ee4960169bd80241eb426822444d",
+      "actual_usd": 0.00521428
+    },
+    "gsm_train_2335": {
+      "status": "recorded",
+      "accounted_usd": 0.00121542,
+      "bound_usd": 0.020795499999999998,
+      "request_sha256": "fdc9ceee28385facf07709b7a75906f54f7856d8e133ae20b72c6800cb20594f",
+      "actual_usd": 0.00121542
+    },
+    "ordinary_1_50": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207097,
+      "request_sha256": "f0be5f81b390338fc43921de7531f4c8bf71d726888d8ef427e1539ed529b86f",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_3870": {
+      "status": "recorded",
+      "accounted_usd": 0.00142828,
+      "bound_usd": 0.020836200000000003,
+      "request_sha256": "33811662e32a05e175a63a8aff6adcb34d3437a82ddf6b1cdc9438a1b00efd6f",
+      "actual_usd": 0.00142828
+    },
+    "ordinary_1_50__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00553792,
+      "bound_usd": 0.0207097,
+      "request_sha256": "f0be5f81b390338fc43921de7531f4c8bf71d726888d8ef427e1539ed529b86f",
+      "actual_usd": 0.00553792
+    },
+    "gsm_train_6773": {
+      "status": "recorded",
+      "accounted_usd": 0.00128478,
+      "bound_usd": 0.020885700000000004,
+      "request_sha256": "bce11f00b757128fe3128836ff93633e78023d0dd52d3304f300a6c50c4d8a92",
+      "actual_usd": 0.00128478
+    },
+    "gsm_train_4045": {
+      "status": "recorded",
+      "accounted_usd": 0.00545952,
+      "bound_usd": 0.0208758,
+      "request_sha256": "e2cde8de42c7c2a950a97c8ff623c03ea56ab66ed46eb28103cb81f35df01812",
+      "actual_usd": 0.00545952
+    },
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0216557,
+      "request_sha256": "76367fc6b6f21d6e1a4df10ad07f9406f209ce576922f0d05fa2b5285c218d52",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_559": {
+      "status": "recorded",
+      "accounted_usd": 0.00218422,
+      "bound_usd": 0.0208989,
+      "request_sha256": "2c8530deea7e08b75e0717e70c921f0d4d83068f96ffdbda8b46fa06110ae46a",
+      "actual_usd": 0.00218422
+    },
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0216557,
+      "request_sha256": "76367fc6b6f21d6e1a4df10ad07f9406f209ce576922f0d05fa2b5285c218d52",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_6967": {
+      "status": "recorded",
+      "accounted_usd": 0.00089016,
+      "bound_usd": 0.0207614,
+      "request_sha256": "0c1c0c0f99d6815e3e46988d733513e0d9a3f04c11dc594f8ea30f6cef5df728",
+      "actual_usd": 0.00089016
+    },
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00105136,
+      "bound_usd": 0.0216557,
+      "request_sha256": "76367fc6b6f21d6e1a4df10ad07f9406f209ce576922f0d05fa2b5285c218d52",
+      "actual_usd": 0.00105136
+    },
+    "no_robots_3fd763826953dbc18ab30424fed1cfb2ab68baf5448f49ab19c586a949bc8891": {
+      "status": "recorded",
+      "accounted_usd": 0.000506,
+      "bound_usd": 0.020835100000000002,
+      "request_sha256": "efa500404d3cbfc777c149ef8b95a98000c627da5cac4c3ae41b3f67c38d2101",
+      "actual_usd": 0.000506
+    },
+    "gsm_train_1798": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208758,
+      "request_sha256": "c87a29968e58d23785a4922d7c38056099be1d6e72879fcf8b25fa60c8d113f8",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_401": {
+      "status": "recorded",
+      "accounted_usd": 0.00073978,
+      "bound_usd": 0.0209264,
+      "request_sha256": "5d0bf7714ce59643416b4fedad93e62ee0894ea223e6a1f1b69043709181cb15",
+      "actual_usd": 0.00073978
+    },
+    "gsm_train_1798__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208758,
+      "request_sha256": "c87a29968e58d23785a4922d7c38056099be1d6e72879fcf8b25fa60c8d113f8",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_4466": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0210716,
+      "request_sha256": "c6eb75d9cddb1244795a1ce0f14cdc8e41da698c202c35534ad0a96f3a0fcdae",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_2640": {
+      "status": "recorded",
+      "accounted_usd": 0.00378686,
+      "bound_usd": 0.020768000000000002,
+      "request_sha256": "a1532c66fd1c6b05a71e85c41a595c0a749760c333e9d37004b8913ba6bd8d7a",
+      "actual_usd": 0.00378686
+    },
+    "gsm_train_4466__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0210716,
+      "request_sha256": "c6eb75d9cddb1244795a1ce0f14cdc8e41da698c202c35534ad0a96f3a0fcdae",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_1141": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.020889,
+      "request_sha256": "acff5e5ba2d7171c926133ea4d2ea4c17f963772aaf3884c56cfe8957b6eda15",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "no_robots_0ab5f75ae3085d6acffbf4467dfd87b84b998092ad5c49085d91615cde3bd332": {
+      "status": "recorded",
+      "accounted_usd": 0.00058302,
+      "bound_usd": 0.0207911,
+      "request_sha256": "bfe78c6c48f8310f08f59f590ab2b02cbe7e2df00a4f0990821176639145c60a",
+      "actual_usd": 0.00058302
+    },
+    "gsm_train_1798__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00107566,
+      "bound_usd": 0.0208758,
+      "request_sha256": "c87a29968e58d23785a4922d7c38056099be1d6e72879fcf8b25fa60c8d113f8",
+      "actual_usd": 0.00107566
+    },
+    "gsm_train_1141__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00327422,
+      "bound_usd": 0.020889,
+      "request_sha256": "acff5e5ba2d7171c926133ea4d2ea4c17f963772aaf3884c56cfe8957b6eda15",
+      "actual_usd": 0.00327422
+    },
+    "gsm_train_4466__attempt_3": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0210716,
+      "request_sha256": "c6eb75d9cddb1244795a1ce0f14cdc8e41da698c202c35534ad0a96f3a0fcdae",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "ordinary_3_11": {
+      "status": "recorded",
+      "accounted_usd": 0.0005316,
+      "bound_usd": 0.020740500000000002,
+      "request_sha256": "daf9e258c942988d5fb89944ae64b2879d01bdc93401d82d889ffbc96b00ec24",
+      "actual_usd": 0.0005316
+    },
+    "gsm_train_2623": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211871,
+      "request_sha256": "69816209888898cde6698308ae3459bd9f959d2c3d8d638f6f433a0f383e2e63",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_1367": {
+      "status": "recorded",
+      "accounted_usd": 0.00183386,
+      "bound_usd": 0.0211101,
+      "request_sha256": "6564ea316d910b5ee0305233de486648d98c6d5e6324f1775c049f3299c422d4",
+      "actual_usd": 0.00183386
+    },
+    "no_robots_13c4168688ad30b7b0769c6047b7b30872a3594eb760d52003755c8539ac4f65": {
+      "status": "recorded",
+      "accounted_usd": 0.0013629,
+      "bound_usd": 0.0207625,
+      "request_sha256": "c1c103b81d3aad77decd21a6333a184f01a8fd00a0127f8f121a3752c5600882",
+      "actual_usd": 0.0013629
+    },
+    "gsm_train_2623__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211871,
+      "request_sha256": "69816209888898cde6698308ae3459bd9f959d2c3d8d638f6f433a0f383e2e63",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_6100": {
+      "status": "recorded",
+      "accounted_usd": 0.00168428,
+      "bound_usd": 0.0208032,
+      "request_sha256": "26ee0479065381bd11b1ee85334f5c60571dcef4e959136f8289421f28020b05",
+      "actual_usd": 0.00168428
+    },
+    "gsm_train_2623__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0211871,
+      "request_sha256": "69816209888898cde6698308ae3459bd9f959d2c3d8d638f6f433a0f383e2e63",
+      "actual_usd": 0
+    },
+    "gsm_train_4861": {
+      "status": "recorded",
+      "accounted_usd": 0.00161588,
+      "bound_usd": 0.020746,
+      "request_sha256": "a0486f4e8aafcaadd0d62602072919279c6f8c4fc79122c462fbbc888fafba94",
+      "actual_usd": 0.00161588
+    },
+    "gsm_train_1773": {
+      "status": "recorded",
+      "accounted_usd": 0.00077374,
+      "bound_usd": 0.020995700000000003,
+      "request_sha256": "ed19ea4ee5526ac61150d3dccd7700a799aae9b0374b71e33be7008fc3eb9844",
+      "actual_usd": 0.00077374
+    },
+    "gsm_train_4255": {
+      "status": "recorded",
+      "accounted_usd": 0.0011797,
+      "bound_usd": 0.0207988,
+      "request_sha256": "651318be2d26270761755d7933db6efdbdf6d9855ae060ac4b4010c43168561a",
+      "actual_usd": 0.0011797
+    },
+    "ordinary_1_17": {
+      "status": "recorded",
+      "accounted_usd": 0.00135492,
+      "bound_usd": 0.0207097,
+      "request_sha256": "f3a69898e0813dbb2b4d33e1407a73125589f18d13968641a1702e55dc7e8ca1",
+      "actual_usd": 0.00135492
+    },
+    "gsm_train_2467": {
+      "status": "recorded",
+      "accounted_usd": 0.00061114,
+      "bound_usd": 0.020790000000000003,
+      "request_sha256": "fb1cb42c0ffba9739d9663a6938e68b4a09dcfd1bb0e955d4ab952f68842f824",
+      "actual_usd": 0.00061114
+    },
+    "ordinary_2_30": {
+      "status": "recorded",
+      "accounted_usd": 0.00248516,
+      "bound_usd": 0.0207757,
+      "request_sha256": "628ddfa68f25a20825a88ac31577baa94f649e1a69290acf8a79bfb4d9252413",
+      "actual_usd": 0.00248516
+    },
+    "gsm_train_2269": {
+      "status": "recorded",
+      "accounted_usd": 0.00370504,
+      "bound_usd": 0.021210200000000002,
+      "request_sha256": "39dc529329b1246c3d666df924fd48ce809ff8ff85492beaaa5027dad930391a",
+      "actual_usd": 0.00370504
+    },
+    "gsm_train_4293": {
+      "status": "recorded",
+      "accounted_usd": 0.00114148,
+      "bound_usd": 0.0208846,
+      "request_sha256": "c81b2cd04635fa17d38cbbf11fcd58eb30a9c1ae9c7d7f740c525cf6b066e957",
+      "actual_usd": 0.00114148
+    },
+    "gsm_train_5064": {
+      "status": "recorded",
+      "accounted_usd": 0.00123848,
+      "bound_usd": 0.020901100000000002,
+      "request_sha256": "a39dc08db270f3dc1a1d6cdbeb2abe48cd18e807faf373d3643975511b39ce90",
+      "actual_usd": 0.00123848
+    },
+    "gsm_train_5060": {
+      "status": "recorded",
+      "accounted_usd": 0.00086994,
+      "bound_usd": 0.0208307,
+      "request_sha256": "c3e3cc335c7bd478590d9c6d3efb58820a3589a57000d547d01baed6de6e4776",
+      "actual_usd": 0.00086994
+    },
+    "gsm_train_6448": {
+      "status": "recorded",
+      "accounted_usd": 0.00124414,
+      "bound_usd": 0.020801,
+      "request_sha256": "56573e811c90fb359d480a530c859248ecf3fc86715a72876f5e0d3e31463d9b",
+      "actual_usd": 0.00124414
+    },
+    "gsm_train_7408": {
+      "status": "recorded",
+      "accounted_usd": 0.00536608,
+      "bound_usd": 0.0209022,
+      "request_sha256": "d8e1d95eb0338a9a560e04cea60c7efc7e34d2e7475a4e0c7feea776ff5e0c1e",
+      "actual_usd": 0.00536608
+    },
+    "gsm_train_2434": {
+      "status": "recorded",
+      "accounted_usd": 0.0033158,
+      "bound_usd": 0.0208835,
+      "request_sha256": "32a07835373e87076a912417f9d7bc8bfe51536e0a761541a5fd75f876a87402",
+      "actual_usd": 0.0033158
+    },
+    "gsm_train_6770": {
+      "status": "recorded",
+      "accounted_usd": 0.0012589,
+      "bound_usd": 0.020944,
+      "request_sha256": "e065437a0bd564526541ef023ab44948ebce405b728361d6a0a95ddc19045ff2",
+      "actual_usd": 0.0012589
+    },
+    "no_robots_99bcd4b4b08dc5da984e4ea9c15eebf847ae14ca8a533ace9916caace00645c1": {
+      "status": "recorded",
+      "accounted_usd": 0.0016753,
+      "bound_usd": 0.0208032,
+      "request_sha256": "a38e195731d128d8a8f0fa4e647067bec08dc43c1f57e695663c2b326502a54e",
+      "actual_usd": 0.0016753
+    },
+    "gsm_train_3687": {
+      "status": "recorded",
+      "accounted_usd": 0.00092538,
+      "bound_usd": 0.020843900000000002,
+      "request_sha256": "2f387db441ff8fae2a33c4496950ee39a2520ed05e1319871ff92f99fefbeb85",
+      "actual_usd": 0.00092538
+    },
+    "no_robots_4de19c1d0d05e32e95ed9f24714bca0fbcbcbec3ddc1247532281549ed9f7063": {
+      "status": "recorded",
+      "accounted_usd": 0.00147296,
+      "bound_usd": 0.020812,
+      "request_sha256": "b85b57d66839e5e590d84c9d29dfe2c00b2ee7e9702b1087ece87c91b32b3cfa",
+      "actual_usd": 0.00147296
+    },
+    "gsm_train_2772": {
+      "status": "recorded",
+      "accounted_usd": 0.00083682,
+      "bound_usd": 0.0208505,
+      "request_sha256": "2bd74d5f4b8f215f43883a1707ea3a992798adb8166388cf893430e95204e819",
+      "actual_usd": 0.00083682
+    },
+    "no_robots_27b2047cd538080440dde5a4609d1d8df8a53f35aec4dae5a2833ddae06391f1": {
+      "status": "recorded",
+      "accounted_usd": 0.00076696,
+      "bound_usd": 0.0214566,
+      "request_sha256": "50a958aeaf021865204e68ee0dcd300ec3a21920e9b9651a72f8de10e08a4681",
+      "actual_usd": 0.00076696
+    },
+    "gsm_train_2506": {
+      "status": "recorded",
+      "accounted_usd": 0.0004963,
+      "bound_usd": 0.0207581,
+      "request_sha256": "29dfb1721cbc9ab93d54b0635c4d7895133898f80a35d7752a7dab0215cccb88",
+      "actual_usd": 0.0004963
+    },
+    "gsm_train_276": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0209836,
+      "request_sha256": "d7251bab42b3d41b97689cf256ece12c5c9932948477d98bca2c5d49cbe5f8f1",
+      "actual_usd": 0
+    },
+    "gsm_train_3631": {
+      "status": "recorded",
+      "accounted_usd": 0.0032805,
+      "bound_usd": 0.0209132,
+      "request_sha256": "1718a602e1ff14beef5a2783a5c8557502762146a24b0502d591fc55680db3a7",
+      "actual_usd": 0.0032805
+    },
+    "gsm_train_1612": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208758,
+      "request_sha256": "171b86f34a0f1a833609a66b3d144b966ab5d8b59d3ccfddd87bb26f6de0bdef",
+      "actual_usd": 0
+    },
+    "gsm_train_2340": {
+      "status": "recorded",
+      "accounted_usd": 0.00266882,
+      "bound_usd": 0.0210749,
+      "request_sha256": "fcf654302d8b9a387bcfa267a8dc958f430dbb6d18ab7d20284bcc22fcfaf3d1",
+      "actual_usd": 0.00266882
+    },
+    "gsm_train_3994": {
+      "status": "recorded",
+      "accounted_usd": 0.00127042,
+      "bound_usd": 0.0208197,
+      "request_sha256": "3463b7b59da1b1c8c16d8c9e3b1d3ab6b221df8100942752c70cb9017b721768",
+      "actual_usd": 0.00127042
+    },
+    "gsm_train_2931": {
+      "status": "recorded",
+      "accounted_usd": 0.00234142,
+      "bound_usd": 0.020797700000000002,
+      "request_sha256": "af25e26821187693d781b143a73bb3e9b83b06b92e6417a426bc9fd4afca0002",
+      "actual_usd": 0.00234142
+    },
+    "no_robots_88c016d8b6cee7a5fb258907ea8c6c96942245ff1e2b358d5396d9b45b736473": {
+      "status": "recorded",
+      "accounted_usd": 0.00102586,
+      "bound_usd": 0.0208274,
+      "request_sha256": "53f70342d5e6fc3f1a553f7e0e8f446b99a9bb00a087f2dd07c19e21fc805e38",
+      "actual_usd": 0.00102586
+    },
+    "ordinary_1_40": {
+      "status": "recorded",
+      "accounted_usd": 0.00546392,
+      "bound_usd": 0.0207097,
+      "request_sha256": "441fc96f8fa40b6e2ec396939452759d25cfa1343638d1808b244e2e5459bc08",
+      "actual_usd": 0.00546392
+    },
+    "gsm_train_351": {
+      "status": "recorded",
+      "accounted_usd": 0.00113966,
+      "bound_usd": 0.020924199999999997,
+      "request_sha256": "94b7f6e778a12fa4420f4078526e7ef9c559dc31d448be0eb2cab7234b93008e",
+      "actual_usd": 0.00113966
+    },
+    "no_robots_6fad33b7c589d56e3c096c3a5098522333716602312111d44b80e92844502b40": {
+      "status": "recorded",
+      "accounted_usd": 0.00111612,
+      "bound_usd": 0.020885700000000004,
+      "request_sha256": "2330a3cd8fe6b1f84e43df389979fdc2fcd187629e70cb5c29930631a7bb6749",
+      "actual_usd": 0.00111612
+    },
+    "no_robots_a591d0f2e72e2b0ed05b5391f97d6a4caa510c8257a6f8594e7cb1004980dc2c": {
+      "status": "recorded",
+      "accounted_usd": 0.00044156,
+      "bound_usd": 0.020815300000000002,
+      "request_sha256": "8ac34cdcb05c89ea2a42ee5875d5263387c1279fce04f1b721f67de86b36facf",
+      "actual_usd": 0.00044156
+    },
+    "gsm_train_6708": {
+      "status": "recorded",
+      "accounted_usd": 0.00099922,
+      "bound_usd": 0.020874700000000003,
+      "request_sha256": "ba63f63023ed102429575d348b9ba267cd51f619fb4a2d8482cdaad246d2d74d",
+      "actual_usd": 0.00099922
+    },
+    "gsm_train_1182": {
+      "status": "recorded",
+      "accounted_usd": 0.00164866,
+      "bound_usd": 0.0208725,
+      "request_sha256": "8a3fdd13606d2e81d995e4d1973c8394c10a3302d03a0467c5f04612804021c2",
+      "actual_usd": 0.00164866
+    },
+    "no_robots_2e5a80e78720b0d64523e0618acf2fb5935cfee4a8fbc4f30a2c2fa145a22f67": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.021496200000000003,
+      "request_sha256": "9b5309820270283bde547b6d2182d40491c6b926c7519860827aad0095ee6e35",
+      "actual_usd": 0
+    },
+    "no_robots_6be6d92863345e62eb1fd74f660180c7f59c6033f334863a9305b4623ad25bb7": {
+      "status": "recorded",
+      "accounted_usd": 0.00120822,
+      "bound_usd": 0.0215127,
+      "request_sha256": "d0bfb952444d534fe9b1d2ddad4ecea1885b62f00d85e29895a66753e4872417",
+      "actual_usd": 0.00120822
+    },
+    "gsm_train_10": {
+      "status": "recorded",
+      "accounted_usd": 0.00283004,
+      "bound_usd": 0.0209913,
+      "request_sha256": "63cec25c970a74574fc1bd0b8e46e222309289455d6e01b43ef10695de945e00",
+      "actual_usd": 0.00283004
+    },
+    "gsm_train_1002": {
+      "status": "recorded",
+      "accounted_usd": 0.00114126,
+      "bound_usd": 0.0208109,
+      "request_sha256": "127a2f8f5be8bfd99e13b190281438da2a97f4baaf0fac45c95f6a91bcd56117",
+      "actual_usd": 0.00114126
+    },
+    "gsm_train_4298": {
+      "status": "recorded",
+      "accounted_usd": 0.00102206,
+      "bound_usd": 0.020879099999999998,
+      "request_sha256": "8ebac20e2c9012c0393603807d9f60ac73b6d4c8400d53a89509a7a2abdc4d49",
+      "actual_usd": 0.00102206
+    },
+    "gsm_train_1991": {
+      "status": "recorded",
+      "accounted_usd": 0.00540844,
+      "bound_usd": 0.0209352,
+      "request_sha256": "eb7904ccf19a91bf65251316caa60bda69132d14159cb2668037bfd8e1ae5a92",
+      "actual_usd": 0.00540844
+    },
+    "no_robots_462c064896095ea1c9ae857e384f43200511953eaa16dbc4d0d9316545e4442d": {
+      "status": "recorded",
+      "accounted_usd": 0.00289044,
+      "bound_usd": 0.0210298,
+      "request_sha256": "e5abce8a776addfaa736f132b1d9681d7218bec75417ae409fbc0b30e77019bd",
+      "actual_usd": 0.00289044
+    },
+    "no_robots_8e43a6b57c057830f8a2dfff26539f91ecc6a2390dd98455358cbfe6f9111418": {
+      "status": "recorded",
+      "accounted_usd": 0.00049148,
+      "bound_usd": 0.0207306,
+      "request_sha256": "6c821d0587838b64e38cfb3b49c7c37966c30bfe25b4e97710f471f1d6eca7c8",
+      "actual_usd": 0.00049148
+    },
+    "gsm_train_4627": {
+      "status": "recorded",
+      "accounted_usd": 0.00116658,
+      "bound_usd": 0.020966000000000002,
+      "request_sha256": "a4bc0e89aac0060777b01053edea2790df706812252c7506018e6db7e96741c5",
+      "actual_usd": 0.00116658
+    },
+    "gsm_train_7065": {
+      "status": "recorded",
+      "accounted_usd": 0.0013913,
+      "bound_usd": 0.021022100000000002,
+      "request_sha256": "825fc215278e2f8ac08f5c86110c80697dc71f4df8f36ce036e79b8e3d20c67d",
+      "actual_usd": 0.0013913
+    },
+    "gsm_train_5328": {
+      "status": "recorded",
+      "accounted_usd": 0.00820418,
+      "bound_usd": 0.021052900000000003,
+      "request_sha256": "79db2eb8e2ccdab5ccbfd1b7969bb2734a1263028958444a72c6859bb36a5eaa",
+      "actual_usd": 0.00820418
+    },
+    "gsm_train_5839": {
+      "status": "recorded",
+      "accounted_usd": 0.000826,
+      "bound_usd": 0.0210254,
+      "request_sha256": "dc6b571e53547ef5bef306d1434ff776ab0c342c0f9a34fca7134d41d7507f8e",
+      "actual_usd": 0.000826
+    },
+    "gsm_train_4053": {
+      "status": "recorded",
+      "accounted_usd": 0.00169058,
+      "bound_usd": 0.0209924,
+      "request_sha256": "9da1167bdf526c1bb6d47bfdb42fbe7cf57ab48babe4f9dabf64512bc72404b3",
+      "actual_usd": 0.00169058
+    },
+    "no_robots_7e112fb558f4744d62a736d77dedecf7c62da7bbf09041268cbb4a5813b5ad48": {
+      "status": "recorded",
+      "accounted_usd": 0.0047986,
+      "bound_usd": 0.022088000000000003,
+      "request_sha256": "7dcdced663c8032cb3bb6e54048bdf68ef4741238c1b177ffa8b1e122f80bb99",
+      "actual_usd": 0.0047986
+    },
+    "gsm_train_2666": {
+      "status": "recorded",
+      "accounted_usd": 0.00079698,
+      "bound_usd": 0.020816400000000002,
+      "request_sha256": "f96f260bdc9c9441473643a3e2f2faf776fac4125fa9c808a39dae838e7bea02",
+      "actual_usd": 0.00079698
+    },
+    "no_robots_bd957ec2c6f855aacba55ff17ebbaea0e701e2aa40047c1ac7726918f181f8aa": {
+      "status": "recorded",
+      "accounted_usd": 0.00064032,
+      "bound_usd": 0.0207559,
+      "request_sha256": "5f145cac5e079520815bd469e20106b3d14eb204f380ce44768abdc991841ef2",
+      "actual_usd": 0.00064032
+    },
+    "gsm_train_628": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207559,
+      "request_sha256": "119a9bb55d3f68cb97324b12858027b14f88c0882d1d443c05b13887c33774a6",
+      "actual_usd": 0
+    },
+    "gsm_train_515": {
+      "status": "recorded",
+      "accounted_usd": 0.0015037,
+      "bound_usd": 0.021059500000000002,
+      "request_sha256": "415c76241fab913c5ff582604820bd690459ade565d165e3171b025d6fc45d28",
+      "actual_usd": 0.0015037
+    },
+    "gsm_train_5296": {
+      "status": "recorded",
+      "accounted_usd": 0.0017893,
+      "bound_usd": 0.0207482,
+      "request_sha256": "999ca30bfed65c11e4758d83199c6bc8dae9f6c77b9eca5ad4b20b8a5ca1223a",
+      "actual_usd": 0.0017893
+    },
+    "gsm_train_6712": {
+      "status": "recorded",
+      "accounted_usd": 0.00522566,
+      "bound_usd": 0.021109,
+      "request_sha256": "b7e83042c87e32fc21f10b1742dc73f449f0068dd6c59493a4bec00c341e591e",
+      "actual_usd": 0.00522566
+    },
+    "no_robots_7a3e05a015b3484ca089a59ec3e305c547cc7be816afa6637c2271c4752e7525": {
+      "status": "recorded",
+      "accounted_usd": 0.00130882,
+      "bound_usd": 0.021304800000000002,
+      "request_sha256": "8cd04ce11c7c1ad300cb975822bffc0f41061cc2949df7275e11b4b86caa396a",
+      "actual_usd": 0.00130882
+    },
+    "gsm_train_4105": {
+      "status": "recorded",
+      "accounted_usd": 0.00081084,
+      "bound_usd": 0.0208197,
+      "request_sha256": "9a2cc18bf3d0942992347bb7c82ba9ff0f351cf1936662cd9320877a5d8eaf72",
+      "actual_usd": 0.00081084
+    },
+    "gsm_train_4020": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208681,
+      "request_sha256": "1a5a244094e8758c585d3d09af6307f0a991cd850239d93c60a1f71edc267665",
+      "actual_usd": 0
+    },
+    "no_robots_f649bfe375aa7b3419220b0ff36354919405763c2244d69566d578924c57bcf1": {
+      "status": "recorded",
+      "accounted_usd": 0.00164232,
+      "bound_usd": 0.021587500000000003,
+      "request_sha256": "fcf69404cb6eff43b13522e6de13784808bb80340c643aea77e88b2fb8ef476d",
+      "actual_usd": 0.00164232
+    },
+    "ordinary_5_40": {
+      "status": "recorded",
+      "accounted_usd": 0.00115346,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "40a913d9eed041ec184519c8db6864bee4b96a8b8c68ced02a851ea388150afc",
+      "actual_usd": 0.00115346
+    },
+    "no_robots_4deaa4838149914dfea0279bfcd9bd2afb5226363b6dbd95261c148a45fd7fdc": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0214159,
+      "request_sha256": "53ee9ac787a459bc8ea4df1b73532efbf2e4e61536d779d68864856834e37d1d",
+      "actual_usd": 0
+    },
+    "gsm_train_4973": {
+      "status": "recorded",
+      "accounted_usd": 0.00532484,
+      "bound_usd": 0.0207911,
+      "request_sha256": "e343c45d1d8de8c58d2c9d3005bc6cb369161bd56bd6d52d6026396e6c13001e",
+      "actual_usd": 0.00532484
+    },
+    "gsm_train_110": {
+      "status": "recorded",
+      "accounted_usd": 0.00408564,
+      "bound_usd": 0.020936299999999998,
+      "request_sha256": "dfeb95962477d29d946f1f33f208cd0a540faff839b41d07e1ff75831d85ae97",
+      "actual_usd": 0.00408564
+    },
+    "gsm_train_6374": {
+      "status": "recorded",
+      "accounted_usd": 0.00419838,
+      "bound_usd": 0.0209099,
+      "request_sha256": "89b83e722c61290542bc3116f2a34a227e3860033bc978ad671fa4e750b2a2c0",
+      "actual_usd": 0.00419838
+    },
+    "gsm_train_1358": {
+      "status": "recorded",
+      "accounted_usd": 0.00136266,
+      "bound_usd": 0.020881300000000002,
+      "request_sha256": "a1416474cd28c477223504166cae5b4c431dfb61416670b07198be69a9f814d7",
+      "actual_usd": 0.00136266
+    },
+    "gsm_train_1861": {
+      "status": "recorded",
+      "accounted_usd": 0.0009047,
+      "bound_usd": 0.0208186,
+      "request_sha256": "91ecaebe01a9f9dcc1a5f8de07586c0d64ceacf11c20afb721425a8c3b06bc08",
+      "actual_usd": 0.0009047
+    },
+    "ordinary_3_28": {
+      "status": "recorded",
+      "accounted_usd": 0.0007376,
+      "bound_usd": 0.020740500000000002,
+      "request_sha256": "88dcf91aec2aee848d77856316b6049d6406a65540cc0e42d24f52f61037279b",
+      "actual_usd": 0.0007376
+    },
+    "gsm_train_5891": {
+      "status": "recorded",
+      "accounted_usd": 0.00131362,
+      "bound_usd": 0.0209902,
+      "request_sha256": "4e93e14a70d0e4b38fd2bc3374cf5220debdb5eeda7cfd70352c5a1431989278",
+      "actual_usd": 0.00131362
+    },
+    "gsm_train_914": {
+      "status": "recorded",
+      "accounted_usd": 0.00415238,
+      "bound_usd": 0.0208912,
+      "request_sha256": "720505b8b2e9ef3bfbfd5719a4dc2ef7fa755fa0c6439694fcef274db0c8d7ca",
+      "actual_usd": 0.00415238
+    },
+    "gsm_train_5108": {
+      "status": "recorded",
+      "accounted_usd": 0.00090666,
+      "bound_usd": 0.0208802,
+      "request_sha256": "96a043874c2add33ee531adf2ba9e1b378e6b443466e9eaeb89791af1c059991",
+      "actual_usd": 0.00090666
+    },
+    "gsm_train_4723": {
+      "status": "recorded",
+      "accounted_usd": 0.00279724,
+      "bound_usd": 0.0208604,
+      "request_sha256": "3ed01ff7935ddc6b64546f890fc9ad0fa4b1519220274f02e471e0431314f486",
+      "actual_usd": 0.00279724
+    },
+    "gsm_train_4288": {
+      "status": "recorded",
+      "accounted_usd": 0.00094184,
+      "bound_usd": 0.0208186,
+      "request_sha256": "488ecd7b8aaca7d10af6a405f62cc7838e8c728bf18f572b2c5e4b3ae3f2a11a",
+      "actual_usd": 0.00094184
+    },
+    "gsm_train_4713": {
+      "status": "recorded",
+      "accounted_usd": 0.00156832,
+      "bound_usd": 0.0207438,
+      "request_sha256": "e57ab5ce365a640530328504b1c50dd78a9e6b6b3d9bccf436c606064baa7a45",
+      "actual_usd": 0.00156832
+    },
+    "gsm_train_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00104996,
+      "bound_usd": 0.020862600000000002,
+      "request_sha256": "0e6e5c8080ad7a5f34ae2302b169593e77b39087d7cc5f6708b45f701ad6e6cd",
+      "actual_usd": 0.00104996
+    },
+    "no_robots_4ad12299763eb5d5863bf903d5ceff5554f443dc0840871894fbaa708351a22d": {
+      "status": "recorded",
+      "accounted_usd": 0.0015714,
+      "bound_usd": 0.021221200000000003,
+      "request_sha256": "3a725ee34a5231fb2c81b5b6859f2276d2cf79117721c82a494e5900e994cab6",
+      "actual_usd": 0.0015714
+    },
+    "ordinary_1_30": {
+      "status": "recorded",
+      "accounted_usd": 0.00380592,
+      "bound_usd": 0.0207097,
+      "request_sha256": "5520fb98ab01a4e8378c81938ef818f6902fdd0ed120e1486ebae2bb0e347ee3",
+      "actual_usd": 0.00380592
+    },
+    "gsm_train_3200": {
+      "status": "recorded",
+      "accounted_usd": 0.00184774,
+      "bound_usd": 0.020735,
+      "request_sha256": "c79def1bd24c21a2063738f1d09acdeedad1303d13325d0f5067e506a322b849",
+      "actual_usd": 0.00184774
+    },
+    "no_robots_200a1015acae12ab23bb2ee836980ace9b80db5bb4e08bf2bd3dd9f3f87010b2": {
+      "status": "recorded",
+      "accounted_usd": 0.0014185,
+      "bound_usd": 0.0206965,
+      "request_sha256": "433195219acdf194fdff8a4569c0e538feb019b0a5f33934dd0863413c6197ee",
+      "actual_usd": 0.0014185
+    },
+    "gsm_train_1518": {
+      "status": "recorded",
+      "accounted_usd": 0.0014384,
+      "bound_usd": 0.0208527,
+      "request_sha256": "267e5719b9456ce50fb78ab8e9698b9f64a22a1967823b79ec6b7eec481de1f7",
+      "actual_usd": 0.0014384
+    },
+    "gsm_train_6392": {
+      "status": "recorded",
+      "accounted_usd": 0.0035411,
+      "bound_usd": 0.021060600000000002,
+      "request_sha256": "49cc5a70cdb1b8945ecdc40c20a75f3360c0c7727266de5e90022518c86dbd88",
+      "actual_usd": 0.0035411
+    },
+    "gsm_train_4390": {
+      "status": "recorded",
+      "accounted_usd": 0.00102396,
+      "bound_usd": 0.0208758,
+      "request_sha256": "9bc2ae976d6806fcb5b6dcce1d322aeb10c0f741ee703f0f44002cba0602c14c",
+      "actual_usd": 0.00102396
+    },
+    "gsm_train_6642": {
+      "status": "recorded",
+      "accounted_usd": 0.0012987,
+      "bound_usd": 0.0210705,
+      "request_sha256": "f93e867ab3af0e020eab505a4a7d73d6c94b3abd141c0cb9562d08a4f7a78731",
+      "actual_usd": 0.0012987
+    },
+    "gsm_train_3209": {
+      "status": "recorded",
+      "accounted_usd": 0.00454408,
+      "bound_usd": 0.0208461,
+      "request_sha256": "e69e07772b0b6fe28d18f13cf93c5e2dfb17e806ee07933dcf444d090acd50b7",
+      "actual_usd": 0.00454408
+    },
+    "gsm_train_686": {
+      "status": "recorded",
+      "accounted_usd": 0.00076588,
+      "bound_usd": 0.0207735,
+      "request_sha256": "10dca2d4244e01f4e81a1ff4b0f61ba163edd27050cc0e6f5915ddc1dcec8464",
+      "actual_usd": 0.00076588
+    },
+    "ordinary_7_43": {
+      "status": "recorded",
+      "accounted_usd": 0.00056376,
+      "bound_usd": 0.0207493,
+      "request_sha256": "4305a495bf1ab1c8b9ed24fb437c5131aa76a64a25bfeb76f0a21ce01f2918c7",
+      "actual_usd": 0.00056376
+    },
+    "gsm_train_208": {
+      "status": "recorded",
+      "accounted_usd": 0.0011191,
+      "bound_usd": 0.020847200000000003,
+      "request_sha256": "d6293e2b9b48d6b1ca8043c9f2cb002587de63068b8dbaab219caa7f83327a88",
+      "actual_usd": 0.0011191
+    },
+    "ordinary_4_7": {
+      "status": "recorded",
+      "accounted_usd": 0.00048374,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "d101b570aef74378c92b373a62fddf46faa02e869123edb76304990f3bc34d98",
+      "actual_usd": 0.00048374
+    },
+    "no_robots_a297213dc99860b9b62741f87e3e9a38e165e92f3949a7aa81d9cbedfea4ad01": {
+      "status": "recorded",
+      "accounted_usd": 0.0007228,
+      "bound_usd": 0.020669,
+      "request_sha256": "b98ed7093a363a50efbbb8f3aafc9a37d60c6e1636a97920b7bd32a1fa11cb51",
+      "actual_usd": 0.0007228
+    },
+    "gsm_train_2361": {
+      "status": "recorded",
+      "accounted_usd": 0.0006767,
+      "bound_usd": 0.020828500000000003,
+      "request_sha256": "7e8ee40f710facfecad56ea5bda9f9f52645d4d00dee07fcb3c3655ed7d45fa1",
+      "actual_usd": 0.0006767
+    },
+    "gsm_train_5074": {
+      "status": "recorded",
+      "accounted_usd": 0.00087228,
+      "bound_usd": 0.0207757,
+      "request_sha256": "cf038cb90f940b182dcf1317997fdd898c079b90573fdbbabf9c184d777385de",
+      "actual_usd": 0.00087228
+    },
+    "gsm_train_2995": {
+      "status": "recorded",
+      "accounted_usd": 0.00105538,
+      "bound_usd": 0.0208516,
+      "request_sha256": "93c17dc6162cfe96b2c69c6f94da42f4a20db666c2dcf74c1f640d1f54860aa7",
+      "actual_usd": 0.00105538
+    },
+    "gsm_train_79": {
+      "status": "recorded",
+      "accounted_usd": 0.00036946,
+      "bound_usd": 0.0207548,
+      "request_sha256": "56ff315b077199e9bd8d9f33d8b222fbdb2a39dde5702cf116f6372044e66e95",
+      "actual_usd": 0.00036946
+    },
+    "gsm_train_4610": {
+      "status": "recorded",
+      "accounted_usd": 0.00530666,
+      "bound_usd": 0.0211343,
+      "request_sha256": "fa57324bdb319e61e3d2346120a540422e177f6a42aec576fa9f7aab1c2f7e95",
+      "actual_usd": 0.00530666
+    },
+    "gsm_train_5030": {
+      "status": "recorded",
+      "accounted_usd": 0.00066658,
+      "bound_usd": 0.020794399999999998,
+      "request_sha256": "88115a5eb1285b1c799b8a90bd2c4ec513a7d7f795854ca7eacfd5359e48c51e",
+      "actual_usd": 0.00066658
+    },
+    "gsm_train_4862": {
+      "status": "recorded",
+      "accounted_usd": 0.00144942,
+      "bound_usd": 0.020794399999999998,
+      "request_sha256": "fe6e2c7f89deba67eea7705c27ef62caa751143bcc9798dd8bc6c7ef21e7a71a",
+      "actual_usd": 0.00144942
+    },
+    "gsm_train_3186": {
+      "status": "recorded",
+      "accounted_usd": 0.0024564,
+      "bound_usd": 0.0211035,
+      "request_sha256": "b1c411faad1562707f9a0c4b7d73d05e608b5bbc581cca892521237e578c77ad",
+      "actual_usd": 0.0024564
+    },
+    "gsm_train_6386": {
+      "status": "recorded",
+      "accounted_usd": 0.00048386,
+      "bound_usd": 0.020790000000000003,
+      "request_sha256": "bb6828544b5404ed268d819027e39f615d521343335447bb39fa41c2dc24e2e6",
+      "actual_usd": 0.00048386
+    },
+    "gsm_train_1276": {
+      "status": "recorded",
+      "accounted_usd": 0.00098928,
+      "bound_usd": 0.0207889,
+      "request_sha256": "7b62aac5c815b2b40c1844d209edf1c7ffa4fa8d0f2f319dfe496b84cb5c8ce3",
+      "actual_usd": 0.00098928
+    },
+    "ordinary_7_6": {
+      "status": "recorded",
+      "accounted_usd": 0.00050962,
+      "bound_usd": 0.0207482,
+      "request_sha256": "8e92eaebb8ed55432eff6ecc52995ef319df684294d82a7a5981887333e36483",
+      "actual_usd": 0.00050962
+    },
+    "gsm_train_1833": {
+      "status": "recorded",
+      "accounted_usd": 0.00125196,
+      "bound_usd": 0.020828500000000003,
+      "request_sha256": "f2107884970c51d3ae142ac3d6c1b98588d87be99cefffb2f2ef034d96dbcc8c",
+      "actual_usd": 0.00125196
+    },
+    "gsm_train_4800": {
+      "status": "recorded",
+      "accounted_usd": 0.00099912,
+      "bound_usd": 0.0208274,
+      "request_sha256": "ee32e28b1b4104857a8232716236fcb0bf0e9f0f48aa50a738b63d225474e91b",
+      "actual_usd": 0.00099912
+    },
+    "no_robots_ccae548aaa29b743725b1bfe2b395a2421b16af752f1058c9e78d68e34d7400c": {
+      "status": "recorded",
+      "accounted_usd": 0.0007047,
+      "bound_usd": 0.0208274,
+      "request_sha256": "90c9d6684447605505a77bd6d1ac5777eb3a638227a5c92728bd0238c02d4eaf",
+      "actual_usd": 0.0007047
+    },
+    "gsm_train_1357": {
+      "status": "recorded",
+      "accounted_usd": 0.00192608,
+      "bound_usd": 0.020889,
+      "request_sha256": "aefc513f5a580438c18fd496768c6084974e4de8a1bede0fd52f6b88f2615a78",
+      "actual_usd": 0.00192608
+    },
+    "gsm_train_7267": {
+      "status": "recorded",
+      "accounted_usd": 0.00059088,
+      "bound_usd": 0.020760300000000002,
+      "request_sha256": "1f6fc8ac982374a98a8463296fc2d7fa060a6cdd11c59eca0c5d87a06e9b7c01",
+      "actual_usd": 0.00059088
+    },
+    "gsm_train_3011": {
+      "status": "recorded",
+      "accounted_usd": 0.00153668,
+      "bound_usd": 0.020856,
+      "request_sha256": "8909d4394e42ae9dfddefe612dba22c7b641a7fc8c831f0db7a6400c05f32244",
+      "actual_usd": 0.00153668
+    },
+    "gsm_train_7180": {
+      "status": "recorded",
+      "accounted_usd": 0.00073786,
+      "bound_usd": 0.0209924,
+      "request_sha256": "c5b6347de851b55a93f29fd0ee2ca6b494d8acfc8bdb75254ec3cef59854c1e8",
+      "actual_usd": 0.00073786
+    },
+    "ordinary_1_33": {
+      "status": "recorded",
+      "accounted_usd": 0.00520992,
+      "bound_usd": 0.0207097,
+      "request_sha256": "35dcd0f2fe6c076f6cb1b533606d3e60466a2972b7b4126f49427f9949528be1",
+      "actual_usd": 0.00520992
+    },
+    "gsm_train_932": {
+      "status": "recorded",
+      "accounted_usd": 0.00146668,
+      "bound_usd": 0.020901100000000002,
+      "request_sha256": "f3e85e95d20c67586aa5f50ad632d5ee3c09cd45ddbe70efc207983964651de1",
+      "actual_usd": 0.00146668
+    },
+    "gsm_train_784": {
+      "status": "recorded",
+      "accounted_usd": 0.00087704,
+      "bound_usd": 0.0209924,
+      "request_sha256": "7f5be6ba23fe8a30ca9588b088f4836e46a78973f78acd82e48c288a1df75ba6",
+      "actual_usd": 0.00087704
+    },
+    "gsm_train_1881": {
+      "status": "recorded",
+      "accounted_usd": 0.00076832,
+      "bound_usd": 0.0207295,
+      "request_sha256": "6cda8ba0776108e154c1fdc964d82455f6f107df6e78b41bbeaedf8bb9c46113",
+      "actual_usd": 0.00076832
+    },
+    "no_robots_38b0e73ee19440c6aea3a5b22b60281bbae0d188265e235f7aa544f296342ebe": {
+      "status": "recorded",
+      "accounted_usd": 0.00055616,
+      "bound_usd": 0.0207735,
+      "request_sha256": "1ef00846d610f83cea095b115fd1252c86fe673deca5a4e02147b1325b0ec9e1",
+      "actual_usd": 0.00055616
+    },
+    "gsm_train_495": {
+      "status": "recorded",
+      "accounted_usd": 0.00297352,
+      "bound_usd": 0.0208582,
+      "request_sha256": "24c6c35d3774ee973060a02a5faefd14fa34449679126de417c35cef2354b0b2",
+      "actual_usd": 0.00297352
+    },
+    "ordinary_5_25": {
+      "status": "recorded",
+      "accounted_usd": 0.00128646,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "f889e217bea4bdf248742330613877dd55f1a2b044aa3be157beaceb0b69598e",
+      "actual_usd": 0.00128646
+    },
+    "gsm_train_529": {
+      "status": "recorded",
+      "accounted_usd": 0.00414098,
+      "bound_usd": 0.0208131,
+      "request_sha256": "36a6f27cc9af729aec800ba085e4e158719bbe94414351aa5dc19bcdd1eb8688",
+      "actual_usd": 0.00414098
+    },
+    "gsm_train_2229": {
+      "status": "recorded",
+      "accounted_usd": 0.00095524,
+      "bound_usd": 0.0208681,
+      "request_sha256": "7a30e022936593eea8f9486dde2d954ee225029e00a8d4fcbb096773ed628057",
+      "actual_usd": 0.00095524
+    },
+    "gsm_train_2159": {
+      "status": "recorded",
+      "accounted_usd": 0.00041468,
+      "bound_usd": 0.0208593,
+      "request_sha256": "813ef59f84241c3a033d29ae26adc12781a328761d0e7e8fdeb8746d42695760",
+      "actual_usd": 0.00041468
+    },
+    "gsm_train_4850": {
+      "status": "recorded",
+      "accounted_usd": 0.00138352,
+      "bound_usd": 0.0208307,
+      "request_sha256": "6a2eac2ddc23f34efcf34d375c4199a7fa63e4b9c494cc394df115a09a944194",
+      "actual_usd": 0.00138352
+    },
+    "no_robots_26d425b244bf3578a61a78fe2c0de4eaa2553baded773e3a12d8ca8cc7559abc": {
+      "status": "recorded",
+      "accounted_usd": 0.000667,
+      "bound_usd": 0.0210133,
+      "request_sha256": "d91176192c986f864d3a283774f86722880da24f619785851aaa3f77eff0b755",
+      "actual_usd": 0.000667
+    },
+    "gsm_train_7189": {
+      "status": "recorded",
+      "accounted_usd": 0.00088302,
+      "bound_usd": 0.0207471,
+      "request_sha256": "ce2886de357db5e6e98967202b8cf86d03e60ba131b8908f605ffb3729b76bcc",
+      "actual_usd": 0.00088302
+    },
+    "gsm_train_1846": {
+      "status": "recorded",
+      "accounted_usd": 0.0011022,
+      "bound_usd": 0.0209297,
+      "request_sha256": "41320c32587ab4d23d46fa1557b16e49a8f5e8755d89f6267e3f5630258dbf89",
+      "actual_usd": 0.0011022
+    },
+    "gsm_train_2847": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.021131,
+      "request_sha256": "42a8fe4d18942c1cae1edbec7c49dd6114c6336a5c46f8a261a005afb81df897",
+      "actual_usd": 0
+    },
+    "gsm_train_4993": {
+      "status": "recorded",
+      "accounted_usd": 0.00153896,
+      "bound_usd": 0.020885700000000004,
+      "request_sha256": "45be3bc4a3aac1669fde8f422eb7714e7dfc57f739dee30d6e7d7459ef14048d",
+      "actual_usd": 0.00153896
+    },
+    "gsm_train_5163": {
+      "status": "recorded",
+      "accounted_usd": 0.00096478,
+      "bound_usd": 0.0209022,
+      "request_sha256": "3c4cd10391635b51ea7e2eeea373dda386ab06962dce6578a4b7a938fcdef1f0",
+      "actual_usd": 0.00096478
+    },
+    "gsm_train_6929": {
+      "status": "recorded",
+      "accounted_usd": 0.00121514,
+      "bound_usd": 0.0207812,
+      "request_sha256": "52578f7266b6f00f99c76dcce5d73c2a86ebf6254f1d1194addef1cc32b30609",
+      "actual_usd": 0.00121514
+    },
+    "gsm_train_4721": {
+      "status": "recorded",
+      "accounted_usd": 0.0009323,
+      "bound_usd": 0.0207482,
+      "request_sha256": "1132e44d51c646b56f011a50ad01124e3c0c01e5800e8374f12bf50e929c07ac",
+      "actual_usd": 0.0009323
+    },
+    "gsm_train_1055": {
+      "status": "recorded",
+      "accounted_usd": 0.0011583,
+      "bound_usd": 0.020779000000000002,
+      "request_sha256": "3173f3b57bd239605a650526749cebb21672c1b194d08fd4e123a02c407dfb29",
+      "actual_usd": 0.0011583
+    },
+    "no_robots_153a459d43f18a960ca207f94d6e2b9968198d7854d78680df18ca5ed25b6202": {
+      "status": "recorded",
+      "accounted_usd": 0.00087884,
+      "bound_usd": 0.0218086,
+      "request_sha256": "ec15db7d8f9c48738f83203f2bf8131cf9d0d102916fdbc52a7c0d45341fb6e9",
+      "actual_usd": 0.00087884
+    },
+    "gsm_train_1948": {
+      "status": "recorded",
+      "accounted_usd": 0.00092444,
+      "bound_usd": 0.0209979,
+      "request_sha256": "c8d05d6f3373da22c4a8075a82981b0abec514bba2c960d86ed83ef034d712b4",
+      "actual_usd": 0.00092444
+    },
+    "gsm_train_3484": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.020919800000000002,
+      "request_sha256": "63401771e5dbe4741bdb14c4cfa70964277b6df548039569ed596b01d7a23e64",
+      "actual_usd": 0
+    },
+    "no_robots_c33cd70ab557a9740d165e83c8b6cd66e1522b67fb3fe22036c57f88527f4ba8": {
+      "status": "recorded",
+      "accounted_usd": 0.00180474,
+      "bound_usd": 0.021576500000000002,
+      "request_sha256": "86d0c6c3cc20550051482ef81dbc71ec65eeca67d6b56cdcd1a2aaf6fb6716a0",
+      "actual_usd": 0.00180474
+    },
+    "gsm_train_5443": {
+      "status": "recorded",
+      "accounted_usd": 0.00123598,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "47f6f0e2fe22647b694a572dc1ab3332a4a2237e024a8c43294ee88657dde34a",
+      "actual_usd": 0.00123598
+    },
+    "no_robots_1c6a0d3acef3baf54a5b850b552102cc6986153c2b524e4de29f66af4109325c": {
+      "status": "recorded",
+      "accounted_usd": 0.00186664,
+      "bound_usd": 0.021576500000000002,
+      "request_sha256": "0e2febb136c66b1c37e46bb2ba07bf0f3743f91c33092ca3ecf8775b9cbd9658",
+      "actual_usd": 0.00186664
+    },
+    "no_robots_6aaebdc51d5e141024a8c5107b2b7293485630b9ace082923e69b5f8103fd04e": {
+      "status": "recorded",
+      "accounted_usd": 0.00206346,
+      "bound_usd": 0.0218108,
+      "request_sha256": "e6123329babfaee757cfffae193f2dbfd76dfc539f81515c3cb86c7d96714480",
+      "actual_usd": 0.00206346
+    },
+    "gsm_train_4355": {
+      "status": "recorded",
+      "accounted_usd": 0.001511,
+      "bound_usd": 0.0210496,
+      "request_sha256": "0b558252f32cfacce40ec457cd1e8a5db95a2e13e7037346e780391b256ad225",
+      "actual_usd": 0.001511
+    },
+    "gsm_train_6627": {
+      "status": "recorded",
+      "accounted_usd": 0.00140236,
+      "bound_usd": 0.0208967,
+      "request_sha256": "6fd5d2d7c7a0e152dde72118a6ccdf5dfa9a57cf0c37f20da5a61c590949627a",
+      "actual_usd": 0.00140236
+    },
+    "gsm_train_2606": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208989,
+      "request_sha256": "f982e045cd0a831f9b3be87222e0b606503987c22644d71a349457675955d2b9",
+      "actual_usd": 0
+    },
+    "gsm_train_6236": {
+      "status": "recorded",
+      "accounted_usd": 0.00139452,
+      "bound_usd": 0.0208593,
+      "request_sha256": "64ca612d83caecbfe4a85db9f8730487c7e09db1f7e4e33e6c9b80dd77223ee6",
+      "actual_usd": 0.00139452
+    },
+    "ordinary_0_48": {
+      "status": "recorded",
+      "accounted_usd": 0.00053262,
+      "bound_usd": 0.0207394,
+      "request_sha256": "db080349a4a12c64cff2afa7e22453c8961aadb6f53624944f45e6ea04c80ab1",
+      "actual_usd": 0.00053262
+    },
+    "no_robots_25bb6d6b632d48faa9a7d6aff0f9cba25ae3bddfdb63320b79528553a57a9040": {
+      "status": "recorded",
+      "accounted_usd": 0.00432226,
+      "bound_usd": 0.021797600000000004,
+      "request_sha256": "20b3331a9ba807f275387aea5a0006f244774aab68a557f2824a04ef049c2f59",
+      "actual_usd": 0.00432226
+    },
+    "ordinary_1_43": {
+      "status": "recorded",
+      "accounted_usd": 0.00528392,
+      "bound_usd": 0.0207097,
+      "request_sha256": "72f6f575479515e9541a15fcfc517e5227e9f8c581f0fc781c04d83273cb1f13",
+      "actual_usd": 0.00528392
+    },
+    "no_robots_0f4d9be64157c3eb663ac01eaf296e05a0ce9dc2a27cd481cc62ee20f4a44350": {
+      "status": "recorded",
+      "accounted_usd": 0.00080108,
+      "bound_usd": 0.020686600000000003,
+      "request_sha256": "c54ece950c5d31edfe8ff0b71300e79715e935cd39165c30a161d8764bbba34a",
+      "actual_usd": 0.00080108
+    },
+    "gsm_train_5073": {
+      "status": "recorded",
+      "accounted_usd": 0.00117456,
+      "bound_usd": 0.021046299999999997,
+      "request_sha256": "1e4c8494dba3ce872d6b1aaaac2ee5901d270f2004216d56a907f45ab41b9743",
+      "actual_usd": 0.00117456
+    },
+    "gsm_train_4593": {
+      "status": "recorded",
+      "accounted_usd": 0.00173756,
+      "bound_usd": 0.0208076,
+      "request_sha256": "ce8b9cf0cd5100ea3f4fa101fdc297f32a1a3a769bce7a2331afb368eeb8a8ee",
+      "actual_usd": 0.00173756
+    },
+    "gsm_train_548": {
+      "status": "recorded",
+      "accounted_usd": 0.00323696,
+      "bound_usd": 0.0209066,
+      "request_sha256": "d59abfbc535f01e56fbe2b476fe322b67411827036fa75f0fe449c8113281ca4",
+      "actual_usd": 0.00323696
+    },
+    "gsm_train_5509": {
+      "status": "recorded",
+      "accounted_usd": 0.000938,
+      "bound_usd": 0.0208032,
+      "request_sha256": "4ba1484cd505b81165c8f56a2cb14a884a18b275b69060618cf2fe622b55c27a",
+      "actual_usd": 0.000938
+    },
+    "gsm_train_449": {
+      "status": "recorded",
+      "accounted_usd": 0.00126742,
+      "bound_usd": 0.0208197,
+      "request_sha256": "72df9734cd833390f4383c6b77e38445bb3e7dd9cee8ee3e25908969c5b6b879",
+      "actual_usd": 0.00126742
+    },
+    "ordinary_2_42": {
+      "status": "recorded",
+      "accounted_usd": 0.00338216,
+      "bound_usd": 0.0207757,
+      "request_sha256": "d160ce1e2b4d7abd2b154bd861638df3435d0592013c04fa641b8d557972e551",
+      "actual_usd": 0.00338216
+    },
+    "gsm_train_2071": {
+      "status": "recorded",
+      "accounted_usd": 0.00112502,
+      "bound_usd": 0.0207493,
+      "request_sha256": "5c6cac64b309e6e180947e9a0340105703361905365c2217e38de5c95f9e6cf7",
+      "actual_usd": 0.00112502
+    },
+    "gsm_train_6068": {
+      "status": "recorded",
+      "accounted_usd": 0.00225796,
+      "bound_usd": 0.0208395,
+      "request_sha256": "467f92847c722b100595f038870ee103e08ea574ac6498681f0aa773fac06de0",
+      "actual_usd": 0.00225796
+    },
+    "gsm_train_1059": {
+      "status": "recorded",
+      "accounted_usd": 0.00123096,
+      "bound_usd": 0.0208483,
+      "request_sha256": "b20da12d92bf47a6c6a5907f7e3f72c0fc7cd326e78b776d5e1d99de11969a80",
+      "actual_usd": 0.00123096
+    },
+    "no_robots_8a3d206f9b7e7d51653d0ac485f39af0ea186ef6be95e8009b5136a031786a57": {
+      "status": "recorded",
+      "accounted_usd": 0.00167948,
+      "bound_usd": 0.021571,
+      "request_sha256": "8fe6727f135c92e8ca2fadbf955052b26949f276236e440e75babda829755ff0",
+      "actual_usd": 0.00167948
+    },
+    "gsm_train_5971": {
+      "status": "recorded",
+      "accounted_usd": 0.00530198,
+      "bound_usd": 0.0207889,
+      "request_sha256": "9b6872c1733f70239235f13935f8de0cd7cbce09c61be11e199b29905929ec00",
+      "actual_usd": 0.00530198
+    },
+    "gsm_train_5265": {
+      "status": "recorded",
+      "accounted_usd": 0.00199758,
+      "bound_usd": 0.020802099999999997,
+      "request_sha256": "4ac9ba31854999a5641199bf3ff6abc00b1f1ba07101cbbfa6728108d44c4a73",
+      "actual_usd": 0.00199758
+    },
+    "gsm_train_5999": {
+      "status": "recorded",
+      "accounted_usd": 0.00514858,
+      "bound_usd": 0.0208043,
+      "request_sha256": "ae6a7620970a2abbf311ec944e3e56ce58647866db0f8c2d1f21838dce5fd420",
+      "actual_usd": 0.00514858
+    },
+    "gsm_train_5770": {
+      "status": "recorded",
+      "accounted_usd": 0.001041,
+      "bound_usd": 0.0208032,
+      "request_sha256": "fe8a99e99812cdd904644112a9e5b60dca9856ed885f29b19c47e48b2067ac30",
+      "actual_usd": 0.001041
+    },
+    "gsm_train_868": {
+      "status": "recorded",
+      "accounted_usd": 0.00820068,
+      "bound_usd": 0.020843900000000002,
+      "request_sha256": "4491c9236a354b69a63bb94ecc3ab5a88f449832df9d6ac11cad84163e561cc0",
+      "actual_usd": 0.00820068
+    },
+    "gsm_train_6339": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.021137600000000003,
+      "request_sha256": "b64cf1896c1eb416f3aaa12dc99bdf4a48053a771b89e64ecf56e1f521c6c183",
+      "actual_usd": 0
+    },
+    "gsm_train_1770": {
+      "status": "recorded",
+      "accounted_usd": 0.00173722,
+      "bound_usd": 0.0209132,
+      "request_sha256": "2dd40706be37580c8001b40e7c44475d13176990954a83ac6f339c5540fe9f2f",
+      "actual_usd": 0.00173722
+    },
+    "gsm_train_4929": {
+      "status": "recorded",
+      "accounted_usd": 0.0010744,
+      "bound_usd": 0.0208131,
+      "request_sha256": "3fce418791a0398c650cf8fcf1b9fd5363c2cd5883951232134ef0ff0f6a5a77",
+      "actual_usd": 0.0010744
+    },
+    "ordinary_5_30": {
+      "status": "recorded",
+      "accounted_usd": 0.00128046,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "818121cf67bb36fc2fecfb190a8cd5fc4f9c5e14be530708c62035b0891fde33",
+      "actual_usd": 0.00128046
+    },
+    "gsm_train_841": {
+      "status": "recorded",
+      "accounted_usd": 0.00147754,
+      "bound_usd": 0.0208175,
+      "request_sha256": "fde20ae13ebbbb481d59149e5219ed3fef220f7ca984da0b5cb49599e046fe5d",
+      "actual_usd": 0.00147754
+    },
+    "no_robots_d895b205093d781a318d467498e9a05b08a5ec7403171cc8fc2b2fefcdc4ad8f": {
+      "status": "recorded",
+      "accounted_usd": 0.00066286,
+      "bound_usd": 0.0214225,
+      "request_sha256": "649af0bae1a808a4b19f061dfca093308535498b2b4e1f9e8c3770cc1f2556d1",
+      "actual_usd": 0.00066286
+    },
+    "no_robots_e8e1c2f18c41c9ccac6d136dc9d68c266793dc933f61a58146486dda13a6b1fb": {
+      "status": "recorded",
+      "accounted_usd": 0.0007548,
+      "bound_usd": 0.020669,
+      "request_sha256": "de4d31b19ceaae49fdcced3901d7620e6fdd54d26bc7ca99371118ec075eb8b1",
+      "actual_usd": 0.0007548
+    },
+    "gsm_train_6479": {
+      "status": "recorded",
+      "accounted_usd": 0.00105662,
+      "bound_usd": 0.0209209,
+      "request_sha256": "42d713d9049044c16820b2980eba2ca29e2b1fba36b39fbd9c3f85bc34bbb0dc",
+      "actual_usd": 0.00105662
+    },
+    "no_robots_548e41a8c5e9e27f2b2934bc225e26259966b70f6881f5327e181760fa5dc76c": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207262,
+      "request_sha256": "fccbd4f46ebfc3a0e80232d27239788900e8eaff7b3e75cbf0a7a3c2ed8d9f57",
+      "actual_usd": 0
+    },
+    "gsm_train_6608": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.0209792,
+      "request_sha256": "fb69ead13acc5f88baebdcdc8bc76d41b6332d0dedde7d26cc5863aee3317536",
+      "actual_usd": 0
+    },
+    "gsm_train_3033": {
+      "status": "recorded",
+      "accounted_usd": 0,
+      "bound_usd": 0.021059500000000002,
+      "request_sha256": "a97e69589ce05be06881ee213c4ef373bd87e38ff6bc1a4bdd901f2a8aeacd5c",
+      "actual_usd": 0
+    },
+    "gsm_train_3294": {
+      "status": "recorded",
+      "accounted_usd": 0.00090648,
+      "bound_usd": 0.0209495,
+      "request_sha256": "53aad3bd3a3c5f89c4ae04b29491a3bf7e072aa1f21f3450d6c564e9d69127c2",
+      "actual_usd": 0.00090648
+    },
+    "gsm_train_7328": {
+      "status": "recorded",
+      "accounted_usd": 0.00153024,
+      "bound_usd": 0.0211079,
+      "request_sha256": "cdc78b5bb9af4766fa39912395704684a10916e37a120a683bdcf4297086b4c6",
+      "actual_usd": 0.00153024
+    },
+    "gsm_train_5388": {
+      "status": "recorded",
+      "accounted_usd": 0.00101542,
+      "bound_usd": 0.0208373,
+      "request_sha256": "8709b651c3f3ab87ee6732fa5a664aac644897b3538bbf16c7e281a93ae6e633",
+      "actual_usd": 0.00101542
+    },
+    "gsm_train_465": {
+      "status": "recorded",
+      "accounted_usd": 0.00533054,
+      "bound_usd": 0.0210837,
+      "request_sha256": "30ab1d7011209eebcf84c0682a34e98e896aa771604a61e68890d2f9da56cabe",
+      "actual_usd": 0.00533054
+    },
+    "ordinary_7_46": {
+      "status": "recorded",
+      "accounted_usd": 0.00048076,
+      "bound_usd": 0.0207493,
+      "request_sha256": "96fdf8e9345cb48b61b50a14fffab6c6415c6b33c2fe7afb487f53ead81dab9f",
+      "actual_usd": 0.00048076
+    },
+    "gsm_train_5828": {
+      "status": "recorded",
+      "accounted_usd": 0.00112796,
+      "bound_usd": 0.0210672,
+      "request_sha256": "25480a3f90171e2373534df5b135e29bdb0fe0ede7e7282fe4f1ed211847fefc",
+      "actual_usd": 0.00112796
+    },
+    "gsm_train_5685": {
+      "status": "recorded",
+      "accounted_usd": 0.00325144,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "806d598268ee9d34b4cb6f8bfadc88e987fa7cc6dff3b513332ad39179847129",
+      "actual_usd": 0.00325144
+    },
+    "gsm_train_4024": {
+      "status": "recorded",
+      "accounted_usd": 0.00108586,
+      "bound_usd": 0.020937400000000002,
+      "request_sha256": "1c6a3137553ec1719c54cd27f63b06b970054ae301fbec684394956160532f48",
+      "actual_usd": 0.00108586
+    },
+    "no_robots_467e85bbe8945f7e824798db64b224da75b95a88e63f980f6b89134826333a49": {
+      "status": "recorded",
+      "accounted_usd": 0.00055068,
+      "bound_usd": 0.0217338,
+      "request_sha256": "c7ac4898942a0701ee4cc868d64b0be6ad9defe9de07f07d8fdce9248ed0a9d5",
+      "actual_usd": 0.00055068
+    },
+    "gsm_train_7455": {
+      "status": "recorded",
+      "accounted_usd": 0.00211706,
+      "bound_usd": 0.0210903,
+      "request_sha256": "874b846cd2db102434ea00e8be73c8dc8d8de1f3b830e5958a929b240e07f707",
+      "actual_usd": 0.00211706
+    },
+    "gsm_train_7257": {
+      "status": "recorded",
+      "accounted_usd": 0.00180612,
+      "bound_usd": 0.0208076,
+      "request_sha256": "f101b5bd23ece33659772a7d26b6cbc01b1f8821da132aa4d282688322b1e2f3",
+      "actual_usd": 0.00180612
+    },
+    "ordinary_7_19": {
+      "status": "recorded",
+      "accounted_usd": 0.00052976,
+      "bound_usd": 0.0207493,
+      "request_sha256": "20ac8eebee25f6b0b08926882f3c6a25eb77007cc77f0a9e294207b7f4f983bb",
+      "actual_usd": 0.00052976
+    },
+    "gsm_train_7261": {
+      "status": "recorded",
+      "accounted_usd": 0.00254616,
+      "bound_usd": 0.021060600000000002,
+      "request_sha256": "c13bbd32f2c96aaf9e32888ceb9375031e97c025b8c257ce5face7c74b270c3f",
+      "actual_usd": 0.00254616
+    },
+    "gsm_train_6705": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0208274,
+      "request_sha256": "7af669b70c0da404a9c5baab17f22dad1622260ac8b4b7dff0d3b008c77106b9",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_2204": {
+      "status": "recorded",
+      "accounted_usd": 0.00507744,
+      "bound_usd": 0.0207647,
+      "request_sha256": "ae31d2129e3522ab7d2f5568bfb8b1dc540d6f9d6b8ba22c657e478a278086e8",
+      "actual_usd": 0.00507744
+    },
+    "gsm_train_6705__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00235582,
+      "bound_usd": 0.0208274,
+      "request_sha256": "7af669b70c0da404a9c5baab17f22dad1622260ac8b4b7dff0d3b008c77106b9",
+      "actual_usd": 0.00235582
+    },
+    "gsm_train_5306": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207922,
+      "request_sha256": "eba05d7df77ae43f331d719c0946926aa9c4040f8e20750ead85dd2e20d8232a",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_5942": {
+      "status": "recorded",
+      "accounted_usd": 0.00113658,
+      "bound_usd": 0.0207801,
+      "request_sha256": "e348bb24ac7107fb20dc044e87a616c0d5dce5df4068c355628039a6919c3686",
+      "actual_usd": 0.00113658
+    },
+    "gsm_train_5306__attempt_2": {
+      "status": "unbilled_pre_generation_429",
+      "accounted_usd": 0,
+      "bound_usd": 0.0207922,
+      "request_sha256": "eba05d7df77ae43f331d719c0946926aa9c4040f8e20750ead85dd2e20d8232a",
+      "reconciliation": "Supervisor approved: captured engine_overloaded/upstream_provider_shared_pool, no generation id or usage. Bound/reservation history retained.",
+      "response_evidence_sha256": "beb0fc98e9bfd2a0bcfd37cfc75f3e060983525b37744c251a7ee7a9a2c6592a"
+    },
+    "gsm_train_2598": {
+      "status": "recorded",
+      "accounted_usd": 0.00107972,
+      "bound_usd": 0.020783400000000004,
+      "request_sha256": "60ece379e4a6305b16cff644dfaf2254606c316bfabcecd403977489eae56d03",
+      "actual_usd": 0.00107972
+    },
+    "gsm_train_7061": {
+      "status": "recorded",
+      "accounted_usd": 0.00317714,
+      "bound_usd": 0.0208076,
+      "request_sha256": "8cdf98d1b3f001ea7a7b28e84396944bc3b4880ae139f40d71b1288f00648133",
+      "actual_usd": 0.00317714
+    },
+    "gsm_train_437": {
+      "status": "recorded",
+      "accounted_usd": 0.00129748,
+      "bound_usd": 0.020919800000000002,
+      "request_sha256": "07e8dc1f625a23fc88c979351d6df21e937a1f906b5406144ae974d4760d7b93",
+      "actual_usd": 0.00129748
+    },
+    "gsm_train_5306__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00178258,
+      "bound_usd": 0.0207922,
+      "request_sha256": "eba05d7df77ae43f331d719c0946926aa9c4040f8e20750ead85dd2e20d8232a",
+      "actual_usd": 0.00178258
+    },
+    "ordinary_5_14": {
+      "status": "recorded",
+      "accounted_usd": 0.00082946,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "f47fd42446285d6422a424e77865f2c8da6cb7b49837f2b036057e65004d0cdc",
+      "actual_usd": 0.00082946
+    },
+    "ordinary_4_5": {
+      "status": "recorded",
+      "accounted_usd": 0.00043674,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "bbeeb169a8d51f5ae73b0a7f28087b77fb641352028f8ba9d1b79e806e115350",
+      "actual_usd": 0.00043674
+    },
+    "gsm_train_1369": {
+      "status": "recorded",
+      "accounted_usd": 0.00274992,
+      "bound_usd": 0.0209066,
+      "request_sha256": "a08900f0032125be3b5ec14d23b0336920fccc7974289fb68cd30c36396d606a",
+      "actual_usd": 0.00274992
+    },
+    "gsm_train_5170": {
+      "status": "recorded",
+      "accounted_usd": 0.0014077,
+      "bound_usd": 0.0207889,
+      "request_sha256": "04c610ed1eb1cd0b9e2d4a66c382da26cf73dcd2f8d3a0eee3e110ea70038c8f",
+      "actual_usd": 0.0014077
+    },
+    "gsm_train_2347": {
+      "status": "recorded",
+      "accounted_usd": 0.00152656,
+      "bound_usd": 0.020816400000000002,
+      "request_sha256": "40a2210e4cdc38cc2d2de759ad772b193e5f4f3615e5dfa1be734a92c37e3441",
+      "actual_usd": 0.00152656
+    },
+    "no_robots_9561c34dd86d6fb210622cfe808975268c6d939e8e99360bae9ae45b6a191373": {
+      "status": "recorded",
+      "accounted_usd": 0.00475902,
+      "bound_usd": 0.0214742,
+      "request_sha256": "b437cf49e266fd9e195b260f1affcdf613b771f2be4c36c880ab5ee69a13b6a3",
+      "actual_usd": 0.00475902
+    },
+    "gsm_train_603": {
+      "status": "recorded",
+      "accounted_usd": 0.00066226,
+      "bound_usd": 0.020835100000000002,
+      "request_sha256": "770c4682f029ac2b31384aee039311d9944f9f22a8340561e1a31dbcb2e50f31",
+      "actual_usd": 0.00066226
+    },
+    "ordinary_4_4": {
+      "status": "recorded",
+      "accounted_usd": 0.00052374,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "4bb05d9e195485d708ec0d66969930f51529441319e1d5b832fdd4ad7e5ef6b7",
+      "actual_usd": 0.00052374
+    },
+    "gsm_train_3757": {
+      "status": "recorded",
+      "accounted_usd": 0.00114502,
+      "bound_usd": 0.0207372,
+      "request_sha256": "3a30142634a9c81c5a10334c700b9ac02f57d6703ee9699d4cf2523792365079",
+      "actual_usd": 0.00114502
+    },
+    "gsm_train_6396": {
+      "status": "recorded",
+      "accounted_usd": 0.00093736,
+      "bound_usd": 0.0209517,
+      "request_sha256": "5f84c84d01121b01c641689b26e8b6e23fc0d0dc25a0dbe87521c92b556b945b",
+      "actual_usd": 0.00093736
+    },
+    "gsm_train_3128": {
+      "status": "recorded",
+      "accounted_usd": 0.0007877,
+      "bound_usd": 0.0208241,
+      "request_sha256": "a57a9faf06b667a2f522e02da08d2e291e03e5d24f8061ba02a16deacd630859",
+      "actual_usd": 0.0007877
+    },
+    "no_robots_ed38ac137b68c6fcf71b56b6e88aba88cbb075aa6596a46a0afc9c4ceb7cab89": {
+      "status": "recorded",
+      "accounted_usd": 0.00113288,
+      "bound_usd": 0.021576500000000002,
+      "request_sha256": "049cba26e9ea3fd8b88e748954a6adb2f08e46876cf18de5fb9e75bbc70b2221",
+      "actual_usd": 0.00113288
+    },
+    "gsm_train_2919": {
+      "status": "recorded",
+      "accounted_usd": 0.00133056,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "29bc22b40020f903d55422bdbe28b65a1a51f5aeb3c6723904128647af6a4421",
+      "actual_usd": 0.00133056
+    },
+    "gsm_train_6945": {
+      "status": "recorded",
+      "accounted_usd": 0.00089814,
+      "bound_usd": 0.0207878,
+      "request_sha256": "4c10c9e4430545d9204d9eff5d305d5f6a6d395ff13692392c81c44656bd783c",
+      "actual_usd": 0.00089814
+    },
+    "gsm_train_2960": {
+      "status": "recorded",
+      "accounted_usd": 0.00134832,
+      "bound_usd": 0.0207207,
+      "request_sha256": "5378937bde28576a7cddf666bb315949fce11c39cf75e909b14bee15d768babb",
+      "actual_usd": 0.00134832
+    },
+    "gsm_train_3314": {
+      "status": "recorded",
+      "accounted_usd": 0.00101742,
+      "bound_usd": 0.0207856,
+      "request_sha256": "0226e7dfc4c30e6fab8f115d79fe4718fc79abbc5239dbd90fec7dc2ee87b98a",
+      "actual_usd": 0.00101742
+    },
+    "gsm_train_4404": {
+      "status": "recorded",
+      "accounted_usd": 0.00098888,
+      "bound_usd": 0.020725100000000003,
+      "request_sha256": "77403f84977c1d8d6b44a2ebd4b1cf7d5574032cdc21da9b5b8e927aaeacbfea",
+      "actual_usd": 0.00098888
+    },
+    "gsm_train_3067": {
+      "status": "recorded",
+      "accounted_usd": 0.0009755,
+      "bound_usd": 0.0208296,
+      "request_sha256": "5956cc6b24bb4ea59dd93f348b0de111c83c3894d1c02b6e1a1e8197ea7f6c19",
+      "actual_usd": 0.0009755
+    },
+    "gsm_train_6088": {
+      "status": "recorded",
+      "accounted_usd": 0.00118746,
+      "bound_usd": 0.0207306,
+      "request_sha256": "c7f7212bf231ba911fdd01c22ca80903699a8c066c8a852a9ca8d4dad05dbad1",
+      "actual_usd": 0.00118746
+    },
+    "gsm_train_3395": {
+      "status": "recorded",
+      "accounted_usd": 0.00526598,
+      "bound_usd": 0.0208494,
+      "request_sha256": "1b6a6c7c70c62f7e3695d1775246dc9cc8ba5c3ef7387ceb93fa1430d9fe0032",
+      "actual_usd": 0.00526598
+    },
+    "no_robots_75afed0c0337e9ac694662896610e61149dab1227a554e2dd3ee9f66b2b41b4d": {
+      "status": "recorded",
+      "accounted_usd": 0.00033094,
+      "bound_usd": 0.021443399999999998,
+      "request_sha256": "827d5d76cae326ed901223742e1ba4eef86b7c4e74c61d90d548e0c331b162ae",
+      "actual_usd": 0.00033094
+    },
+    "gsm_train_631": {
+      "status": "recorded",
+      "accounted_usd": 0.00141664,
+      "bound_usd": 0.020919800000000002,
+      "request_sha256": "9012f9014acb0a4ce29a7adb7c431b74aee20ed91333c81a73fde8681cad58ab",
+      "actual_usd": 0.00141664
+    },
+    "gsm_train_2535": {
+      "status": "recorded",
+      "accounted_usd": 0.00087712,
+      "bound_usd": 0.0208516,
+      "request_sha256": "4fe0f44aa0ca68a8dd7699330b81dfe8996337316e6a8c363c17a3d877f721cb",
+      "actual_usd": 0.00087712
+    },
+    "no_robots_e88c5adc06989a1498eee7d73bbec27541e55003158cadf790190875ad9fd52e": {
+      "status": "recorded",
+      "accounted_usd": 0.00081206,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "6c45be5a976a87f894a2e73375f693611fd6f232e5a3704dcd7aa509fe86babc",
+      "actual_usd": 0.00081206
+    },
+    "gsm_train_2173": {
+      "status": "recorded",
+      "accounted_usd": 0.00147614,
+      "bound_usd": 0.0207845,
+      "request_sha256": "0e4485f5a2799b8697b0c0820275642f899fac1abf12e4aef431b09bd33e9f1b",
+      "actual_usd": 0.00147614
+    },
+    "gsm_train_2314": {
+      "status": "recorded",
+      "accounted_usd": 0.0012453,
+      "bound_usd": 0.020771300000000003,
+      "request_sha256": "98b96d0005142e4c586bb15eb5e96ad1bfe8836489f5deea034ae6aa62f76bbd",
+      "actual_usd": 0.0012453
+    },
+    "ordinary_0_29": {
+      "status": "recorded",
+      "accounted_usd": 0.00061262,
+      "bound_usd": 0.0207394,
+      "request_sha256": "191177c91d103375d920a06bd551f95f7ec6b1ceba64d1c3b3d6e4c73239fc13",
+      "actual_usd": 0.00061262
+    },
+    "gsm_train_4360": {
+      "status": "recorded",
+      "accounted_usd": 0.00133702,
+      "bound_usd": 0.0209836,
+      "request_sha256": "0c4e29ea88ffb09adde499daf3a19cb26670f53a1f191073d7d90c9fde97e454",
+      "actual_usd": 0.00133702
+    },
+    "gsm_train_5034": {
+      "status": "recorded",
+      "accounted_usd": 0.00055374,
+      "bound_usd": 0.0207581,
+      "request_sha256": "b0cf36c32486574b73df2e6cc305688380a64494efc28fe8772b086e945dc636",
+      "actual_usd": 0.00055374
+    },
+    "gsm_train_3604": {
+      "status": "recorded",
+      "accounted_usd": 0.00525114,
+      "bound_usd": 0.0210441,
+      "request_sha256": "dd0fda580da6a9b14adb1a98a678c9ac275c3ff6fe12636a81256a547deadf5e",
+      "actual_usd": 0.00525114
+    },
+    "no_robots_0fd27a4eba60317dc2ef6f1e4a90346ba86f73c6c82ca8cbbcf3855593e1a09b": {
+      "status": "recorded",
+      "accounted_usd": 0.00056724,
+      "bound_usd": 0.0215787,
+      "request_sha256": "6a717106e8da050f79af96d83a043cf4a93ad08907aaea84069206b0ed8c333d",
+      "actual_usd": 0.00056724
+    },
+    "gsm_train_3534": {
+      "status": "recorded",
+      "accounted_usd": 0.00129226,
+      "bound_usd": 0.0208252,
+      "request_sha256": "cd3bd941b1260d151fd938635b60ca100f18d9cfc7ba96f68f1628d7c2060ce5",
+      "actual_usd": 0.00129226
+    },
+    "gsm_train_360": {
+      "status": "recorded",
+      "accounted_usd": 0.00266896,
+      "bound_usd": 0.0208835,
+      "request_sha256": "7fe18a55f45d86528c75beeb677aa15b21a33b55e8dba95660b17619ee7037b8",
+      "actual_usd": 0.00266896
+    },
+    "ordinary_3_33": {
+      "status": "recorded",
+      "accounted_usd": 0.0006436,
+      "bound_usd": 0.020740500000000002,
+      "request_sha256": "388f06bfadb84cd934f67577a6bf2e5931d0f8ddb5ab6dbaa46e9b1661c4dcae",
+      "actual_usd": 0.0006436
+    },
+    "gsm_train_4124": {
+      "status": "recorded",
+      "accounted_usd": 0.00155714,
+      "bound_usd": 0.0210111,
+      "request_sha256": "7f31de7e6641ede1cebeb3f35eaa5cdd5ae531c8afc93ee86f6c79a16a82cbb3",
+      "actual_usd": 0.00155714
+    },
+    "gsm_train_4323": {
+      "status": "recorded",
+      "accounted_usd": 0.00118142,
+      "bound_usd": 0.0208043,
+      "request_sha256": "f9d03055cb1170e720c7debf8e129837e8b0fc5801731c1bf8aa8a441f880025",
+      "actual_usd": 0.00118142
+    },
+    "gsm_train_5414": {
+      "status": "recorded",
+      "accounted_usd": 0.0008794,
+      "bound_usd": 0.0208307,
+      "request_sha256": "bcce637d2c66440c9a5ac0882eddf2eda0784d61922142a85c55670b696dc75c",
+      "actual_usd": 0.0008794
+    },
+    "gsm_train_2710": {
+      "status": "recorded",
+      "accounted_usd": 0.00087898,
+      "bound_usd": 0.0207878,
+      "request_sha256": "994301dc1f4bd5a556bf601e4e3a24e508ef571c9d8540a0e239a7ae7942a720",
+      "actual_usd": 0.00087898
+    },
+    "gsm_train_5226": {
+      "status": "recorded",
+      "accounted_usd": 0.00093768,
+      "bound_usd": 0.0208373,
+      "request_sha256": "3aff194bd85e3676ad0c4decd341ace1b1ea4bc72feb20871dbba82fcc643202",
+      "actual_usd": 0.00093768
+    },
+    "no_robots_2e7f299af2175d09a9c8b8e6742bea1e0f63f2bc5d61d8ae695aa24b4ed32c3a": {
+      "status": "recorded",
+      "accounted_usd": 0.00157774,
+      "bound_usd": 0.0207658,
+      "request_sha256": "6ad453ad7f0922ad9c9a08d974dc057a01fc25745cce11e8f4bdfb7d301ce9d1",
+      "actual_usd": 0.00157774
+    },
+    "gsm_train_4708": {
+      "status": "recorded",
+      "accounted_usd": 0.00032958,
+      "bound_usd": 0.0207493,
+      "request_sha256": "cc2d4f7207058a044f5addb56398554f46e008fac6e090ccc765514ff201bed6",
+      "actual_usd": 0.00032958
+    },
+    "ordinary_4_6": {
+      "status": "recorded",
+      "accounted_usd": 0.00045474,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "aa59516e5518f03c1bed6c5ffe51ec0d88256bd0bf52cb68edba8638118e0cf6",
+      "actual_usd": 0.00045474
+    },
+    "gsm_train_937": {
+      "status": "recorded",
+      "accounted_usd": 0.00069924,
+      "bound_usd": 0.0208615,
+      "request_sha256": "ce220c33e289986bbbcc180e252d029ea5cdf0ecddbe3bf95b162a98af035db6",
+      "actual_usd": 0.00069924
+    },
+    "gsm_train_5478": {
+      "status": "recorded",
+      "accounted_usd": 0.00121714,
+      "bound_usd": 0.0210254,
+      "request_sha256": "42d372268bdcacc6050682e5eaeef48bb368c16a17243483ced4f50704022e5d",
+      "actual_usd": 0.00121714
+    },
+    "gsm_train_5681": {
+      "status": "recorded",
+      "accounted_usd": 0.00102498,
+      "bound_usd": 0.0208252,
+      "request_sha256": "e29e203d1ac60881cb93ba4a663b84541c98fbe55f95e924505d9aa0f935c632",
+      "actual_usd": 0.00102498
+    },
+    "gsm_train_4868": {
+      "status": "recorded",
+      "accounted_usd": 0.00533636,
+      "bound_usd": 0.0211695,
+      "request_sha256": "4c343858bdf7b31161ed596059b3917ed46101960ac8a672f6e0fdfbaa973772",
+      "actual_usd": 0.00533636
+    },
+    "no_robots_353a021340b7fbfc9a8188ba705f488e4209e3bfc20f252d2d3129ffc3cfa876": {
+      "status": "recorded",
+      "accounted_usd": 0.00069246,
+      "bound_usd": 0.021425800000000002,
+      "request_sha256": "cb0685691451e007447efb692372cec3440f1b02fff0a35e98745c82a17a8df2",
+      "actual_usd": 0.00069246
+    },
+    "no_robots_b4b310f1f41d06a1db940e1ad1a2e886d1e6197249eb27df3106b465b706abd0": {
+      "status": "recorded",
+      "accounted_usd": 0.00498478,
+      "bound_usd": 0.0216667,
+      "request_sha256": "fee9856f8c76751e8b28f4152bfda80388fa6693dcf46e822e8f27595f3882a4",
+      "actual_usd": 0.00498478
+    },
+    "gsm_train_1297": {
+      "status": "recorded",
+      "accounted_usd": 0.00111626,
+      "bound_usd": 0.020840599999999997,
+      "request_sha256": "1e6a649fde15f9a83f13ae158564291bbdfb2dd4a6a36a498393753871689f30",
+      "actual_usd": 0.00111626
+    },
+    "gsm_train_4823": {
+      "status": "recorded",
+      "accounted_usd": 0.00190448,
+      "bound_usd": 0.020944,
+      "request_sha256": "ea348a56939c8eb2b0df12e86f544b887ceab9c09ce1fd780ec8769f993eba2c",
+      "actual_usd": 0.00190448
+    },
+    "ordinary_5_6": {
+      "status": "recorded",
+      "accounted_usd": 0.00082532,
+      "bound_usd": 0.0207306,
+      "request_sha256": "53597a060ed60f8950579e34f6c137f832282e97e91740c34743da71e7dd2391",
+      "actual_usd": 0.00082532
+    },
+    "gsm_train_3513": {
+      "status": "recorded",
+      "accounted_usd": 0.00170596,
+      "bound_usd": 0.0208296,
+      "request_sha256": "4f70b800fdfd67ec42abcfc0f5c9916d1c1da4a9da877a7576fd6cb82540f546",
+      "actual_usd": 0.00170596
+    },
+    "gsm_train_681": {
+      "status": "recorded",
+      "accounted_usd": 0.00206638,
+      "bound_usd": 0.0208835,
+      "request_sha256": "be2688271db35ec25121b50be4434adb40d96ff6e55f0dbc6991e649b439a836",
+      "actual_usd": 0.00206638
+    },
+    "gsm_train_1584": {
+      "status": "recorded",
+      "accounted_usd": 0.00185244,
+      "bound_usd": 0.021077099999999998,
+      "request_sha256": "ca48a29c91fb4268a2e5a723e349d35884aeee086526f224f7a3e4d0dedad7b8",
+      "actual_usd": 0.00185244
+    },
+    "ordinary_6_26": {
+      "status": "recorded",
+      "accounted_usd": 0.00131576,
+      "bound_usd": 0.0207372,
+      "request_sha256": "125fc651827990b8a0f5778e82dd3984744af74ebbdc7acffe40c7fce5f4c918",
+      "actual_usd": 0.00131576
+    },
+    "ordinary_0_14": {
+      "status": "recorded",
+      "accounted_usd": 0.00103762,
+      "bound_usd": 0.0207394,
+      "request_sha256": "6a0254ac8ddec969198e295a31f24d54702ad18ac7c137ac6a91fefa3d3b892a",
+      "actual_usd": 0.00103762
+    },
+    "gsm_train_2810": {
+      "status": "recorded",
+      "accounted_usd": 0.00064672,
+      "bound_usd": 0.0207746,
+      "request_sha256": "488fae9fd0ac9e7da5fbac90964127bd1268dfd9e06d552d0a9b0c16b28c6a7a",
+      "actual_usd": 0.00064672
+    },
+    "gsm_train_200": {
+      "status": "recorded",
+      "accounted_usd": 0.00131518,
+      "bound_usd": 0.0209495,
+      "request_sha256": "a8c99cd6ed8a607f1b316b8d021eb38dbe54ec20dfb9f33966dac472e074ba4f",
+      "actual_usd": 0.00131518
+    },
+    "gsm_train_6728": {
+      "status": "recorded",
+      "accounted_usd": 0.00215926,
+      "bound_usd": 0.0208373,
+      "request_sha256": "b5f473580851c06a45b4f68043b27f92cbc62b5094584e83725ce6b2f1373fe1",
+      "actual_usd": 0.00215926
+    },
+    "gsm_train_6421": {
+      "status": "recorded",
+      "accounted_usd": 0.00119592,
+      "bound_usd": 0.0209165,
+      "request_sha256": "0b8b0c3b131661502dcb04e6d08f885d0c489c6ea9a2fe55cef52f0482e91770",
+      "actual_usd": 0.00119592
+    },
+    "ordinary_3_7": {
+      "status": "recorded",
+      "accounted_usd": 0.00077346,
+      "bound_usd": 0.0207394,
+      "request_sha256": "02fc31487832b063de5c1fde1add288c0b023b772b635a972dcf2e4490e8591a",
+      "actual_usd": 0.00077346
+    },
+    "gsm_train_6381": {
+      "status": "recorded",
+      "accounted_usd": 0.00107396,
+      "bound_usd": 0.020853800000000002,
+      "request_sha256": "b4a6b808aa291597efa3bcf03d054c72345c8f28fb633975410b051ab1d0a212",
+      "actual_usd": 0.00107396
+    },
+    "gsm_train_3789": {
+      "status": "recorded",
+      "accounted_usd": 0.002294,
+      "bound_usd": 0.0210254,
+      "request_sha256": "1888e894d656abc4f5ff34238f00b948958b8c9024e32bfe51419fc2d94d43e0",
+      "actual_usd": 0.002294
+    },
+    "no_robots_2bda254fdbb62add1bc5fd37f7423dfb84c9423169a7ad836dff415572dbd75a": {
+      "status": "recorded",
+      "accounted_usd": 0.00064676,
+      "bound_usd": 0.0209814,
+      "request_sha256": "72557a80ade65e77fb5dfbbf0acef880938abb3f7d236aabe8bf804a479d373b",
+      "actual_usd": 0.00064676
+    },
+    "gsm_train_3367": {
+      "status": "recorded",
+      "accounted_usd": 0.00241254,
+      "bound_usd": 0.020835100000000002,
+      "request_sha256": "ebfbbffef015f96f8e24b930eb7b0892735e2961b2990034d8dd679f2e8782ed",
+      "actual_usd": 0.00241254
+    },
+    "gsm_train_1932": {
+      "status": "recorded",
+      "accounted_usd": 0.0012791,
+      "bound_usd": 0.020885700000000004,
+      "request_sha256": "b55a580e41682b6e060d1b7777d351060b8f628bcad081a44be3a5154cc6eef0",
+      "actual_usd": 0.0012791
+    },
+    "gsm_train_2265": {
+      "status": "recorded",
+      "accounted_usd": 0.0043296,
+      "bound_usd": 0.0209748,
+      "request_sha256": "e9061ec676aa35c99ede1eb2e8451125c7096d25ab97769a6a22178392266ab1",
+      "actual_usd": 0.0043296
+    },
+    "gsm_train_3408": {
+      "status": "recorded",
+      "accounted_usd": 0.00384806,
+      "bound_usd": 0.020889,
+      "request_sha256": "e9e2edf58cedb083f79a79568adbffb6d95510779da123fde87912812e64fc8f",
+      "actual_usd": 0.00384806
+    },
+    "ordinary_7_33": {
+      "status": "recorded",
+      "accounted_usd": 0.00042576,
+      "bound_usd": 0.0207493,
+      "request_sha256": "d63d8a9ba319feefd8b948b437a34ad43c6217dec1d45b35aca36721dc68f1ca",
+      "actual_usd": 0.00042576
+    },
+    "no_robots_d250e7285434877a433f49ef55ac8662877bbed322f6c80f498229af6af46a34": {
+      "status": "recorded",
+      "accounted_usd": 0.00089066,
+      "bound_usd": 0.0206602,
+      "request_sha256": "538f8e32ed27b5c7347450a23870e9a3bc1c6c6b9ab041ed6770f091fbafc319",
+      "actual_usd": 0.00089066
+    },
+    "gsm_train_134": {
+      "status": "recorded",
+      "accounted_usd": 0.00215236,
+      "bound_usd": 0.020882400000000002,
+      "request_sha256": "743616082586f3a6c1f998115da32cca3dd01621fdc6a20e2d0b0ae5bafd31b1",
+      "actual_usd": 0.00215236
+    },
+    "ordinary_3_40": {
+      "status": "recorded",
+      "accounted_usd": 0.0005046,
+      "bound_usd": 0.020740500000000002,
+      "request_sha256": "5df7a4889db0710f6f507e9fb98526b8084c3a5a533e12d9fb1a145b1127a420",
+      "actual_usd": 0.0005046
+    },
+    "ordinary_2_41": {
+      "status": "recorded",
+      "accounted_usd": 0.00274716,
+      "bound_usd": 0.0207757,
+      "request_sha256": "e3ed994e48490266c48bb236087d6dc7450015507de93d0f8e81cbc92a5fcba9",
+      "actual_usd": 0.00274716
+    },
+    "no_robots_0cf31876d6e5f2cd48c88fc66bba5cc4400eef684b1512df0b45f6db71a77b4f": {
+      "status": "recorded",
+      "accounted_usd": 0.0015269,
+      "bound_usd": 0.0213059,
+      "request_sha256": "873738519373d64e003dd37649b51b91b1c7da91db9dbd05b40ffc9912fdac14",
+      "actual_usd": 0.0015269
+    },
+    "gsm_train_255": {
+      "status": "recorded",
+      "accounted_usd": 0.000606,
+      "bound_usd": 0.0207812,
+      "request_sha256": "e211de2432392fda9a6f5b5a617d7dcb7f3f74f74e8e170c63eea336211bda94",
+      "actual_usd": 0.000606
+    },
+    "ordinary_6_46": {
+      "status": "recorded",
+      "accounted_usd": 0.00209276,
+      "bound_usd": 0.0207372,
+      "request_sha256": "7c52c61a233233381b6087632c5bcf4234f98d682712986d41d42f3a66eb7b8a",
+      "actual_usd": 0.00209276
+    },
+    "gsm_train_6942": {
+      "status": "recorded",
+      "accounted_usd": 0.00146782,
+      "bound_usd": 0.0208417,
+      "request_sha256": "13cc41aedbb01b508741ae4aa3686787bd5ccf1759744c6e8f71fffb65174551",
+      "actual_usd": 0.00146782
+    },
+    "gsm_train_6128": {
+      "status": "recorded",
+      "accounted_usd": 0.00104526,
+      "bound_usd": 0.020814199999999998,
+      "request_sha256": "5c4bb7075964d1d9a5f926baf60ae5beef404089fc2d5138e148d64353ded288",
+      "actual_usd": 0.00104526
+    },
+    "gsm_train_7450": {
+      "status": "recorded",
+      "accounted_usd": 0.0041916,
+      "bound_usd": 0.020938500000000002,
+      "request_sha256": "0cc35b4ff190b4cb00a4c228907be81c1a439ea7f81a2aaf5b6ef11f8623f8b5",
+      "actual_usd": 0.0041916
+    },
+    "gsm_train_440": {
+      "status": "recorded",
+      "accounted_usd": 0.00106316,
+      "bound_usd": 0.0207427,
+      "request_sha256": "486b4c7783c34fffad6928d562c8afe76e6fea19c7058a7e6823134624425903",
+      "actual_usd": 0.00106316
+    },
+    "gsm_train_3356": {
+      "status": "recorded",
+      "accounted_usd": 0.00127248,
+      "bound_usd": 0.0209902,
+      "request_sha256": "c225ea1501b6e430621e392f3f3d74e1837a8ece95e3aeab7bf4ba82251ed1ff",
+      "actual_usd": 0.00127248
+    },
+    "gsm_train_1291": {
+      "status": "recorded",
+      "accounted_usd": 0.00304054,
+      "bound_usd": 0.0208241,
+      "request_sha256": "7e1c31a0c13527199b37f9a491a82c5228c6165286d9a6d13f7cd82be7ec285d",
+      "actual_usd": 0.00304054
+    },
+    "gsm_train_3447": {
+      "status": "recorded",
+      "accounted_usd": 0.00341312,
+      "bound_usd": 0.0208219,
+      "request_sha256": "cbd8c1d93645a34d94dfcf0af5032a42f07e827c9fa4dddf36161ec2b4f94bf7",
+      "actual_usd": 0.00341312
+    },
+    "gsm_train_5141": {
+      "status": "recorded",
+      "accounted_usd": 0.00127506,
+      "bound_usd": 0.020854900000000003,
+      "request_sha256": "f096466113a7b565c5f210604a0019be0f31ac5ab8daaf197a570a03b38f3728",
+      "actual_usd": 0.00127506
+    },
+    "gsm_train_4705": {
+      "status": "recorded",
+      "accounted_usd": 0.00087628,
+      "bound_usd": 0.020801,
+      "request_sha256": "3b8621e4ca46c39217ee15a553df5c1e3ceaaf5fca86713dde8f76fa524decec",
+      "actual_usd": 0.00087628
+    },
+    "gsm_train_3696": {
+      "status": "recorded",
+      "accounted_usd": 0.00528694,
+      "bound_usd": 0.0209429,
+      "request_sha256": "bea50f2f1c95493a5490a53243e0ca6c704b0a02a54b88be0408fa9167f71802",
+      "actual_usd": 0.00528694
+    },
+    "gsm_train_7235": {
+      "status": "recorded",
+      "accounted_usd": 0.00434716,
+      "bound_usd": 0.020795499999999998,
+      "request_sha256": "e5523e6dca4217cceeb8fd4dddd984a17efda7d2f2c7d35d226565d0345aa73b",
+      "actual_usd": 0.00434716
+    },
+    "ordinary_4_26": {
+      "status": "recorded",
+      "accounted_usd": 0.00054688,
+      "bound_usd": 0.0207537,
+      "request_sha256": "14c84615efdf9d9a50cc92b4331f54b26056de0700161cca13ee3c6127850962",
+      "actual_usd": 0.00054688
+    },
+    "ordinary_4_17": {
+      "status": "recorded",
+      "accounted_usd": 0.00063188,
+      "bound_usd": 0.0207537,
+      "request_sha256": "3a8699ebcd2daa2dba94c64fbcc9089d8b7ca9cfa8ee8f599b4d81e75729afe7",
+      "actual_usd": 0.00063188
+    },
+    "no_robots_d7338f679e551f9f1f8e7ac95ebbb0fce105f951ad4c4b00d633cb179ec50f9e": {
+      "status": "recorded",
+      "accounted_usd": 0.00037716,
+      "bound_usd": 0.0209704,
+      "request_sha256": "5008899317426d382f6a9f0c05ed510475cd62a1353afb4ec25239f4fa3b2a19",
+      "actual_usd": 0.00037716
+    },
+    "gsm_train_29": {
+      "status": "recorded",
+      "accounted_usd": 0.0018371,
+      "bound_usd": 0.020874700000000003,
+      "request_sha256": "64e9f3d9d6e3a3521d2e47ad659daaefaf123ec43d202b4ccf35ebb2fa0594c8",
+      "actual_usd": 0.0018371
+    },
+    "ordinary_6_39": {
+      "status": "recorded",
+      "accounted_usd": 0.00111076,
+      "bound_usd": 0.0207372,
+      "request_sha256": "ca882afaf21a3b471a8835943ff4ba008c79b2a52c13b206ab0466b38a08f932",
+      "actual_usd": 0.00111076
+    },
+    "gsm_train_61": {
+      "status": "recorded",
+      "accounted_usd": 0.0052984,
+      "bound_usd": 0.0211134,
+      "request_sha256": "f7fac00e9c81de33fa40b754937eec2c83cc6f697c4d8883529dc81fd6fe5da6",
+      "actual_usd": 0.0052984
+    },
+    "gsm_train_4426": {
+      "status": "recorded",
+      "accounted_usd": 0.00472014,
+      "bound_usd": 0.020783400000000004,
+      "request_sha256": "a3219eda66c2ce0313c4b69665e66cc218342e6c84f372ce798651a8ff5ba8f7",
+      "actual_usd": 0.00472014
+    },
+    "no_robots_700bb58e3cee10aa1f8359c8f98fc67c50e0199738db53674c15c533d702338a": {
+      "status": "recorded",
+      "accounted_usd": 0.00102472,
+      "bound_usd": 0.0217866,
+      "request_sha256": "f6d8a01c41b67c0d02a0891b143e0aaf9fb460e30186bec44d3ec4d7f0ef8ca6",
+      "actual_usd": 0.00102472
+    },
+    "gsm_train_4338": {
+      "status": "recorded",
+      "accounted_usd": 0.00077356,
+      "bound_usd": 0.0208098,
+      "request_sha256": "8fec8f69ce0cee7ae519cde34d38c187fd8cb9e1d47831e44f06df1940367dfd",
+      "actual_usd": 0.00077356
+    },
+    "gsm_train_5949": {
+      "status": "recorded",
+      "accounted_usd": 0.00368302,
+      "bound_usd": 0.020996800000000003,
+      "request_sha256": "e690a2b2112321a9dea242113b6811f6a525a9b7ceacd0446230c29a9379f7b5",
+      "actual_usd": 0.00368302
+    },
+    "gsm_train_1501": {
+      "status": "recorded",
+      "accounted_usd": 0.00149336,
+      "bound_usd": 0.020881300000000002,
+      "request_sha256": "a84f1d87556e1ab04f6646eb52a48e0931a0b7dddc35e09ce38b21782924cfc5",
+      "actual_usd": 0.00149336
+    },
+    "gsm_train_7075": {
+      "status": "recorded",
+      "accounted_usd": 0.00131356,
+      "bound_usd": 0.020802099999999997,
+      "request_sha256": "4c40e916d6bd83395185e853d1ab56b1b750981c6ae6a6760740321306888766",
+      "actual_usd": 0.00131356
+    },
+    "gsm_train_4879": {
+      "status": "recorded",
+      "accounted_usd": 0.00099798,
+      "bound_usd": 0.0208582,
+      "request_sha256": "b03ac23cdc243486f4efa6cde3a458526531a7afb4858313b7762f23e270d525",
+      "actual_usd": 0.00099798
+    },
+    "gsm_train_3971": {
+      "status": "recorded",
+      "accounted_usd": 0.0011828,
+      "bound_usd": 0.0208659,
+      "request_sha256": "396ffd62570c87f0dcfd736570442dece1f74ee1bea50538cc69a1758afb6705",
+      "actual_usd": 0.0011828
+    },
+    "no_robots_518f9b985b24a9901573495046d89488cc59acdf1e259beaa6a96bf4082c0c31": {
+      "status": "recorded",
+      "accounted_usd": 0.00088036,
+      "bound_usd": 0.021324600000000003,
+      "request_sha256": "6e246832a41bf13e3e1a5a9fe74b3449f9310bdbbd1d3381d514fa861943e638",
+      "actual_usd": 0.00088036
+    },
+    "gsm_train_2094": {
+      "status": "recorded",
+      "accounted_usd": 0.00057268,
+      "bound_usd": 0.0208714,
+      "request_sha256": "e48174c2ea9466aa7f3caaabcdb567d4d0149883ec93d62726c319cfeb809616",
+      "actual_usd": 0.00057268
+    },
+    "gsm_train_5235": {
+      "status": "recorded",
+      "accounted_usd": 0.0011329,
+      "bound_usd": 0.021003400000000002,
+      "request_sha256": "960d4b21a35a2e8f9056c13dd2f378c6a78e7c87c7a0cd4196a5122e24ed9589",
+      "actual_usd": 0.0011329
+    },
+    "gsm_train_5337": {
+      "status": "recorded",
+      "accounted_usd": 0.0052283,
+      "bound_usd": 0.0207878,
+      "request_sha256": "4dec6cc6c14dffdadb29bc94ec42500b94c17a0471cab8eecfd515a48a32cbbe",
+      "actual_usd": 0.0052283
+    },
+    "gsm_train_3239": {
+      "status": "recorded",
+      "accounted_usd": 0.00510636,
+      "bound_usd": 0.0208868,
+      "request_sha256": "f34dad50494337eb9a7fd03fac514460d11d025ee36344197c44e2a4f32d4a6a",
+      "actual_usd": 0.00510636
+    },
+    "gsm_train_3500": {
+      "status": "recorded",
+      "accounted_usd": 0.00059348,
+      "bound_usd": 0.020702,
+      "request_sha256": "19b764cadc30ed70a3c0a5e4d972651739aa7a4212407c9c095dfd023e0fe249",
+      "actual_usd": 0.00059348
+    },
+    "gsm_train_1970": {
+      "status": "recorded",
+      "accounted_usd": 0.00103772,
+      "bound_usd": 0.0207878,
+      "request_sha256": "dec25dc05e076a69ce2bbaf114cda05f5e07a6a26e45861ceb658c43852dee21",
+      "actual_usd": 0.00103772
+    },
+    "gsm_train_7281": {
+      "status": "recorded",
+      "accounted_usd": 0.00090342,
+      "bound_usd": 0.020812,
+      "request_sha256": "eca70e7a2f12b1628134c757d61427ff2b7e6454c123fda266f00ace25bdbc1a",
+      "actual_usd": 0.00090342
+    },
+    "no_robots_a8366071edf0f498dbc9e73aa0da8e25c215d58f78945e02079074b6342fec1b": {
+      "status": "recorded",
+      "accounted_usd": 0.00107566,
+      "bound_usd": 0.021690900000000003,
+      "request_sha256": "640a7da17f52d25f009ce8e4e4af84520d0e5186ad7d98635b88f50a6a983836",
+      "actual_usd": 0.00107566
+    },
+    "no_robots_92c2f9dd3e8248bbaaef3245ac4537d9af0ab62dd241dbd8c02a28095c1ba542": {
+      "status": "recorded",
+      "accounted_usd": 0.00056934,
+      "bound_usd": 0.0214533,
+      "request_sha256": "6aab3cd6979aa12fe54123f8af3fb1516237e202012584aded26bd99c1d9e858",
+      "actual_usd": 0.00056934
+    },
+    "gsm_train_7119": {
+      "status": "recorded",
+      "accounted_usd": 0.0010846,
+      "bound_usd": 0.0209638,
+      "request_sha256": "88bc91dce7d77eb41d461fdf11f8f3a28c92f52cdc562758cd087aa201c5c9ce",
+      "actual_usd": 0.0010846
+    },
+    "gsm_train_516": {
+      "status": "recorded",
+      "accounted_usd": 0.00395696,
+      "bound_usd": 0.0209099,
+      "request_sha256": "1ae0698289f99deacbd72dcc2063baf103f68819b67db9822e1f21d7c469a7e6",
+      "actual_usd": 0.00395696
+    },
+    "gsm_train_3082": {
+      "status": "recorded",
+      "accounted_usd": 0.00090168,
+      "bound_usd": 0.0208483,
+      "request_sha256": "807e3a96367026c69741aaeb293be2a685145060423acd2cde5bdfb3b26726f4",
+      "actual_usd": 0.00090168
+    },
+    "gsm_train_6554": {
+      "status": "recorded",
+      "accounted_usd": 0.0051685,
+      "bound_usd": 0.0209231,
+      "request_sha256": "d7c6d94e3e3cb5905ba2b38e88cdda0cdab931ac81f7086b2aaebd240abb17a9",
+      "actual_usd": 0.0051685
+    },
+    "ordinary_6_24": {
+      "status": "recorded",
+      "accounted_usd": 0.00125776,
+      "bound_usd": 0.0207372,
+      "request_sha256": "1e6de29ec0cb59aff7a177378dbfb1e8223dc7c8ab0a3afc13b8f07e4fac08ff",
+      "actual_usd": 0.00125776
+    },
+    "gsm_train_838": {
+      "status": "recorded",
+      "accounted_usd": 0.00284266,
+      "bound_usd": 0.020845,
+      "request_sha256": "627522946abdd80787b039a8768084bd22a7dfcc5dbc992a0153ab51b01ea6fc",
+      "actual_usd": 0.00284266
+    },
+    "ordinary_6_21": {
+      "status": "recorded",
+      "accounted_usd": 0.00103776,
+      "bound_usd": 0.0207372,
+      "request_sha256": "83b823e1b3f0bd71763f7dbbad7cb26de0c4796e83bb4ff33a0f818ec80c4a13",
+      "actual_usd": 0.00103776
+    },
+    "gsm_train_6488": {
+      "status": "recorded",
+      "accounted_usd": 0.005412,
+      "bound_usd": 0.0210694,
+      "request_sha256": "6cbeda369eb7c96550c8a428b863dcd70185b5a85fb3fdc2854e8c049a597c8e",
+      "actual_usd": 0.005412
+    },
+    "gsm_train_5072": {
+      "status": "recorded",
+      "accounted_usd": 0.0006166,
+      "bound_usd": 0.020756999999999998,
+      "request_sha256": "a46c37316be8c826eaf49528a71941885a7be7c8eb8764bbdc8747973ad1f0df",
+      "actual_usd": 0.0006166
+    },
+    "gsm_train_3035": {
+      "status": "recorded",
+      "accounted_usd": 0.00072252,
+      "bound_usd": 0.0208659,
+      "request_sha256": "57743fcd95ce331eeb96cc64f95224f162b66efd7dad57fa196da342b2cdc531",
+      "actual_usd": 0.00072252
+    },
+    "gsm_train_3992": {
+      "status": "recorded",
+      "accounted_usd": 0.0013187,
+      "bound_usd": 0.0208395,
+      "request_sha256": "3a82bb9f410769563aa455201f20514fd64edfb1cbd619428dc11be820f4e4d3",
+      "actual_usd": 0.0013187
+    },
+    "gsm_train_4119": {
+      "status": "recorded",
+      "accounted_usd": 0.00118562,
+      "bound_usd": 0.0209462,
+      "request_sha256": "517fc1db1c2633caf3ebd3c9453bad241af7da3588916b32784a46abfe9ab826",
+      "actual_usd": 0.00118562
+    },
+    "gsm_train_3426": {
+      "status": "recorded",
+      "accounted_usd": 0.00226078,
+      "bound_usd": 0.0208802,
+      "request_sha256": "889fe5fa00e034d717cf2afe54670588e08edb041c94ce9f95b761d8f71b7a0d",
+      "actual_usd": 0.00226078
+    },
+    "ordinary_2_38": {
+      "status": "recorded",
+      "accounted_usd": 0.00374416,
+      "bound_usd": 0.0207757,
+      "request_sha256": "8fa8bb8c5bd36a21ae9c425aaac2f7d963ea13e78c345f32f9eb20338ab4d4e0",
+      "actual_usd": 0.00374416
+    },
+    "gsm_train_607": {
+      "status": "recorded",
+      "accounted_usd": 0.00153468,
+      "bound_usd": 0.0208835,
+      "request_sha256": "982f09bc9bab863c38b34a43627784ec62a6f802df98b7fd07bbbcca6cc86058",
+      "actual_usd": 0.00153468
+    },
+    "gsm_train_7117": {
+      "status": "recorded",
+      "accounted_usd": 0.00370106,
+      "bound_usd": 0.0209297,
+      "request_sha256": "5ee70d513bb2ba2177993bc8c13b60a640c8f9a4afb7deefe092de20d80eaaa2",
+      "actual_usd": 0.00370106
+    },
+    "gsm_train_6039": {
+      "status": "recorded",
+      "accounted_usd": 0.00101614,
+      "bound_usd": 0.0208417,
+      "request_sha256": "a3f96936f4c97e191f6b4610acff758b2433e3a4d6221442e3dac235397b8db0",
+      "actual_usd": 0.00101614
+    },
+    "gsm_train_6217": {
+      "status": "recorded",
+      "accounted_usd": 0.00124096,
+      "bound_usd": 0.020828500000000003,
+      "request_sha256": "1fa9a9ad868db64c7b5a165ec197443bd19115d0eda8399e245cc641c15e3fb1",
+      "actual_usd": 0.00124096
+    },
+    "gsm_train_7309": {
+      "status": "recorded",
+      "accounted_usd": 0.00232364,
+      "bound_usd": 0.0208879,
+      "request_sha256": "ab4d17afa3d6bac1006e037b8761cd352ccffbe8174f1a38eacbdb367553429d",
+      "actual_usd": 0.00232364
+    },
+    "gsm_train_4568": {
+      "status": "recorded",
+      "accounted_usd": 0.00514972,
+      "bound_usd": 0.0207801,
+      "request_sha256": "3423d8d54c3d75859590a180206a2dcf46a2e125172486c0bbb74a2664313212",
+      "actual_usd": 0.00514972
+    },
+    "no_robots_6c14e9018eba229db4ac3e633f72ece7248213f87ac2f80e822cf076aa6555a1": {
+      "status": "recorded",
+      "accounted_usd": 0.00054518,
+      "bound_usd": 0.0212036,
+      "request_sha256": "a7542502ace7a29e5387e0c86b1b1ccee70af9d4270135dffec0310e77e161f7",
+      "actual_usd": 0.00054518
+    },
+    "no_robots_5a53b61c06cfb11033fc7adea69160c0523216de13e89e55c5bcd5805a77a1e1": {
+      "status": "recorded",
+      "accounted_usd": 0.00090626,
+      "bound_usd": 0.020832899999999998,
+      "request_sha256": "643a3534850c43730ed518a79142523b34303db19afbcb03014187765cf0069b",
+      "actual_usd": 0.00090626
+    },
+    "gsm_train_4527": {
+      "status": "recorded",
+      "accounted_usd": 0.00126984,
+      "bound_usd": 0.020843900000000002,
+      "request_sha256": "a69f60cdfb4d6ea3dbfcc6b4b795043062816589367b09a0da1c51c61ff1388a",
+      "actual_usd": 0.00126984
+    },
+    "gsm_train_277": {
+      "status": "recorded",
+      "accounted_usd": 0.00208742,
+      "bound_usd": 0.0208043,
+      "request_sha256": "31b5d2b8bd9c77df2746544523dd293fea9305bce6d01472a879a67a228f8140",
+      "actual_usd": 0.00208742
+    },
+    "gsm_train_6094": {
+      "status": "recorded",
+      "accounted_usd": 0.00436764,
+      "bound_usd": 0.020919800000000002,
+      "request_sha256": "f3705cb4a36843547a73aa90023bf0f44417d618f57c628f0ce561e854fc06e3",
+      "actual_usd": 0.00436764
+    },
+    "gsm_train_749": {
+      "status": "recorded",
+      "accounted_usd": 0.00100602,
+      "bound_usd": 0.020751500000000003,
+      "request_sha256": "8babe6634dce77e1d1c0accb13b8275715f699e5d2f0c24a13c809aceefb02a3",
+      "actual_usd": 0.00100602
+    },
+    "gsm_train_5342": {
+      "status": "recorded",
+      "accounted_usd": 0.00095054,
+      "bound_usd": 0.0208615,
+      "request_sha256": "0ce668e802f1d5c01fecef1ed78fac04adc02d50b9bc6b675eb665fec35aa8e0",
+      "actual_usd": 0.00095054
+    },
+    "gsm_train_2821": {
+      "status": "recorded",
+      "accounted_usd": 0.00088874,
+      "bound_usd": 0.0207273,
+      "request_sha256": "fbf664a188f937ac0a10d64b89bedc7028aad91c544da257f28751a9ca612988",
+      "actual_usd": 0.00088874
+    },
+    "no_robots_9cdd2d4648a01b28208eabfc051fd838f3d9acabc0297a3e34d8f835414bc563": {
+      "status": "recorded",
+      "accounted_usd": 0.00072714,
+      "bound_usd": 0.0209396,
+      "request_sha256": "c1460e3f24c7270ad74ad9c0f93a5d1204803c554d839069501f2c35990a88ef",
+      "actual_usd": 0.00072714
+    },
+    "no_robots_84716925bc351dfccdb9b0c9e9356657cedff890c23828ab875bce0af6849ff9": {
+      "status": "recorded",
+      "accounted_usd": 0.00084264,
+      "bound_usd": 0.021709600000000003,
+      "request_sha256": "b56b4bf0647615395cc297643ad395a4dbdda492fe6befff58d480fbca552ee2",
+      "actual_usd": 0.00084264
+    },
+    "gsm_train_958": {
+      "status": "recorded",
+      "accounted_usd": 0.00441628,
+      "bound_usd": 0.020779000000000002,
+      "request_sha256": "37029c96e6072f47a292534211e94f0261e6e73ccda0b2dd9206d048025a5846",
+      "actual_usd": 0.00441628
+    },
+    "no_robots_b18a73c68f567515f50f705fb99204cc444721b5006db03ec64acf9a2643f1cc": {
+      "status": "recorded",
+      "accounted_usd": 0.00046726,
+      "bound_usd": 0.0212322,
+      "request_sha256": "aa754ba2bd555dd2daa38652e7366f9e985189fb21e94c9f9ceab6dd4a440580",
+      "actual_usd": 0.00046726
+    },
+    "gsm_train_7169": {
+      "status": "recorded",
+      "accounted_usd": 0.00087326,
+      "bound_usd": 0.0208527,
+      "request_sha256": "a62c0f0a5e31e445d229d6900997906a1b1c972d744dd615bf1e97041d5d781c",
+      "actual_usd": 0.00087326
+    },
+    "gsm_train_5945": {
+      "status": "recorded",
+      "accounted_usd": 0.00395364,
+      "bound_usd": 0.020919800000000002,
+      "request_sha256": "a7c37988dc9b4690fc6d9e653d84ddb72407defdaabf637ce1ee03e84bfd24c5",
+      "actual_usd": 0.00395364
+    },
+    "gsm_train_2989": {
+      "status": "recorded",
+      "accounted_usd": 0.00403216,
+      "bound_usd": 0.021014400000000003,
+      "request_sha256": "72989c5cd9ee0a312800e465205cb28baf167620436daca1b8279e1a563be7c9",
+      "actual_usd": 0.00403216
+    },
+    "gsm_train_3470": {
+      "status": "recorded",
+      "accounted_usd": 0.00110656,
+      "bound_usd": 0.020779000000000002,
+      "request_sha256": "11261c7d66040780295e21700c8a26c5bd0ff6c0cba9d748674a2af8c01ffec3",
+      "actual_usd": 0.00110656
+    },
+    "ordinary_0_23": {
+      "status": "recorded",
+      "accounted_usd": 0.00089262,
+      "bound_usd": 0.0207394,
+      "request_sha256": "859b9d634537d96ee0cf9da290bd6e7e64577a35c473001ab9006f62fddadc3f",
+      "actual_usd": 0.00089262
+    },
+    "gsm_train_6769": {
+      "status": "recorded",
+      "accounted_usd": 0.00096354,
+      "bound_usd": 0.020845,
+      "request_sha256": "89147f437c9938a01e775193ca098e25e515504ad0b4d56bfcaac289ae371086",
+      "actual_usd": 0.00096354
+    },
+    "gsm_train_3471": {
+      "status": "recorded",
+      "accounted_usd": 0.00175256,
+      "bound_usd": 0.0208186,
+      "request_sha256": "e977c65136bbe5c82ea8fe0e4e57d5f2cfaaaa9e589d3ab5262a5d3258f24486",
+      "actual_usd": 0.00175256
+    },
+    "gsm_train_1848": {
+      "status": "recorded",
+      "accounted_usd": 0.0009922,
+      "bound_usd": 0.0209407,
+      "request_sha256": "8ad5123e56df9619996ebb68ac37547c9f4da6b6ffdfce17fbf7214b17b31258",
+      "actual_usd": 0.0009922
+    },
+    "gsm_train_4757": {
+      "status": "recorded",
+      "accounted_usd": 0.00118692,
+      "bound_usd": 0.0209231,
+      "request_sha256": "fd198e3d707453af2a1f8471c6050b6f0c8276627dcadf1ebb6e4fe4b3c3233c",
+      "actual_usd": 0.00118692
+    },
+    "gsm_train_4216": {
+      "status": "recorded",
+      "accounted_usd": 0.0012415,
+      "bound_usd": 0.020922,
+      "request_sha256": "5dbff412935a9c87158dea687be5d4fb01ac2318b31d639eba272f38c62c278c",
+      "actual_usd": 0.0012415
+    },
+    "gsm_train_7034": {
+      "status": "recorded",
+      "accounted_usd": 0.00107134,
+      "bound_usd": 0.020893400000000003,
+      "request_sha256": "b4e644f0e5006afe8ff44d0b588316b545ec06e6ebdff53912d680fb4e1c448c",
+      "actual_usd": 0.00107134
+    },
+    "ordinary_2_23": {
+      "status": "recorded",
+      "accounted_usd": 0.00294516,
+      "bound_usd": 0.0207757,
+      "request_sha256": "7db8c2f3ed5273436a88ae2bc5d747b785033ebb0ebe22de84d5de9d93e2e5c3",
+      "actual_usd": 0.00294516
+    },
+    "no_robots_54397d7becaeec1d1ba1ed963546003e746709cb432763d62569cd59f7a72590": {
+      "status": "recorded",
+      "accounted_usd": 0.00111002,
+      "bound_usd": 0.021767900000000003,
+      "request_sha256": "3409c42e96323cf7e43d4732ae3d42745090a16d6fa79cb509107f158d612951",
+      "actual_usd": 0.00111002
+    },
+    "gsm_train_2016": {
+      "status": "recorded",
+      "accounted_usd": 0.00140878,
+      "bound_usd": 0.0208956,
+      "request_sha256": "757b11a4923287ea436ddc68d1c3a62c8583321d7892ad8d91bf8cdacbaff3a1",
+      "actual_usd": 0.00140878
+    },
+    "gsm_train_5200": {
+      "status": "recorded",
+      "accounted_usd": 0.00078886,
+      "bound_usd": 0.020752600000000003,
+      "request_sha256": "f75e311391bd3adef2ea74eb9863a81dcb6e881b654267a24c8b71b5d577cc94",
+      "actual_usd": 0.00078886
+    },
+    "gsm_train_2161": {
+      "status": "recorded",
+      "accounted_usd": 0.00524048,
+      "bound_usd": 0.0213752,
+      "request_sha256": "8c6e60510c0910b42baab2780f517917f8280073f731864a7cd604075642998b",
+      "actual_usd": 0.00524048
+    },
+    "gsm_train_4085": {
+      "status": "recorded",
+      "accounted_usd": 0.0050641,
+      "bound_usd": 0.0208384,
+      "request_sha256": "deb40b828909fa38d1f344cc6f4e02b82758a286da00cfd2360d08ed3fc73b2e",
+      "actual_usd": 0.0050641
+    },
+    "gsm_train_4462": {
+      "status": "recorded",
+      "accounted_usd": 0.00098174,
+      "bound_usd": 0.0207394,
+      "request_sha256": "f43fb98e237c96b4d9fd60bf98f03ffdc12a1e701b364d07ac0aed045bb29843",
+      "actual_usd": 0.00098174
+    },
+    "no_robots_d7ae8b9ba1816add3a6c3b5c159b96b7df276dbea8582df59dce70b9db30830a": {
+      "status": "recorded",
+      "accounted_usd": 0.00094718,
+      "bound_usd": 0.0212729,
+      "request_sha256": "969188995f64893cf0c3a9d884802ab929be1a998d2cd3a024f0f28d0c3e2137",
+      "actual_usd": 0.00094718
+    },
+    "no_robots_90f690cfe8d6505a9551363f16cc2871c6d97ad2fe547ea58a693f64b0047d5b": {
+      "status": "recorded",
+      "accounted_usd": 0.00097882,
+      "bound_usd": 0.020816400000000002,
+      "request_sha256": "61449771086296d89ee4e2175824e5af49e7bc875698ed8273a37aab00416861",
+      "actual_usd": 0.00097882
+    },
+    "gsm_train_2895": {
+      "status": "recorded",
+      "accounted_usd": 0.00092208,
+      "bound_usd": 0.0208681,
+      "request_sha256": "38476c37e1d0ed6d7aa1b0c160cba537d522b1ca509d8965dbd399f17052662e",
+      "actual_usd": 0.00092208
+    },
+    "gsm_train_4845": {
+      "status": "recorded",
+      "accounted_usd": 0.0012152,
+      "bound_usd": 0.0209253,
+      "request_sha256": "af338674db0de6c967221ba47bd611fb0e4fa30f23fa7afc4689f4ec85597c13",
+      "actual_usd": 0.0012152
+    },
+    "gsm_train_6442": {
+      "status": "recorded",
+      "accounted_usd": 0.00094866,
+      "bound_usd": 0.0208582,
+      "request_sha256": "6a19fc31ecbcbcca5c12d3d4d2482a48181843fb1bc67e4156040cb59884fc06",
+      "actual_usd": 0.00094866
+    },
+    "gsm_train_5236": {
+      "status": "recorded",
+      "accounted_usd": 0.00067712,
+      "bound_usd": 0.020815300000000002,
+      "request_sha256": "059c5a11b35ba67579a328b7ac6bc31b3e34a3ae2aefdbca464fe9cb6e652837",
+      "actual_usd": 0.00067712
+    },
+    "gsm_train_1845": {
+      "status": "recorded",
+      "accounted_usd": 0.00135906,
+      "bound_usd": 0.0208868,
+      "request_sha256": "460126daa6fe1da1b5bdcb1a5d0f3ef69708cc514579acfe51b776c51cf698d5",
+      "actual_usd": 0.00135906
+    },
+    "no_robots_814e2cd4f896284b1ea95c977e3cfa9ade370b691537df8f4eb30553e8fff3fb": {
+      "status": "recorded",
+      "accounted_usd": 0.00093316,
+      "bound_usd": 0.020770200000000003,
+      "request_sha256": "248ae901bfe5c51d4ce1c8de243e039f06e127baa078fbf73237e808de317e9a",
+      "actual_usd": 0.00093316
+    },
+    "gsm_train_1721": {
+      "status": "recorded",
+      "accounted_usd": 0.00104302,
+      "bound_usd": 0.0207493,
+      "request_sha256": "45836a1f65c5833cc965232125ee05f8512162a3b41d96a25608bd440b43c6e6",
+      "actual_usd": 0.00104302
+    },
+    "no_robots_60ddddd5f5236e6bad64cab53b9ded3de93e0a1794fac3b9edadc2e7559480d0": {
+      "status": "recorded",
+      "accounted_usd": 0.00155732,
+      "bound_usd": 0.0209682,
+      "request_sha256": "af14fb15a534fb29e1da73165a1b7f25c92f37c577f07cd42c8a20bd356e7aac",
+      "actual_usd": 0.00155732
+    },
+    "gsm_train_2974": {
+      "status": "recorded",
+      "accounted_usd": 0.00373158,
+      "bound_usd": 0.021021,
+      "request_sha256": "8ec3d6e2df27f61649ad6171066df25242b1e0cebf91ccdcdce44378162159fd",
+      "actual_usd": 0.00373158
+    },
+    "gsm_train_2933": {
+      "status": "recorded",
+      "accounted_usd": 0.00096068,
+      "bound_usd": 0.020823,
+      "request_sha256": "ce5752ab19a6dc6c51f3f2eda46c0d0b093d7874e8893959bd0796d4f657b17a",
+      "actual_usd": 0.00096068
+    },
+    "gsm_train_2654": {
+      "status": "recorded",
+      "accounted_usd": 0.00097614,
+      "bound_usd": 0.020808700000000003,
+      "request_sha256": "04ba27dc059092e0010c205291f4d114d8d64e6489fe02bc1faced3fa6481faf",
+      "actual_usd": 0.00097614
+    },
+    "gsm_train_1384": {
+      "status": "recorded",
+      "accounted_usd": 0.00099482,
+      "bound_usd": 0.0208868,
+      "request_sha256": "78c06011dead862589c61eede3b4c67a2a625c16295378a6821d88beccc240e2",
+      "actual_usd": 0.00099482
+    },
+    "gsm_train_3432": {
+      "status": "recorded",
+      "accounted_usd": 0.00100986,
+      "bound_usd": 0.021058399999999998,
+      "request_sha256": "1d4c32a377ab716a19ed97cd0e14f16a406e2a658640be486653a5b8e40612dc",
+      "actual_usd": 0.00100986
+    },
+    "gsm_train_2481": {
+      "status": "recorded",
+      "accounted_usd": 0.00110784,
+      "bound_usd": 0.020840599999999997,
+      "request_sha256": "c0e6b4008a46927d6195ec19cb6a281b375dd1e2d189a041df3666b1c4de011b",
+      "actual_usd": 0.00110784
+    },
+    "gsm_train_3638": {
+      "status": "recorded",
+      "accounted_usd": 0.001128,
+      "bound_usd": 0.0209869,
+      "request_sha256": "dd68e1a846625637c71ae7c8cf167ba87636af8bc542b4b3785bf4363d872f77",
+      "actual_usd": 0.001128
+    },
+    "no_robots_79b780e48bc508d0ad9588feb5f64ea4a28e003a2ff07607afe19a9279c3e94c": {
+      "status": "recorded",
+      "accounted_usd": 0.00106856,
+      "bound_usd": 0.0216843,
+      "request_sha256": "09ed865ee8021bed5542fa7bdc570be3cd5178e5c221190ac66be3998ca76c7b",
+      "actual_usd": 0.00106856
+    },
+    "gsm_train_387": {
+      "status": "recorded",
+      "accounted_usd": 0.0011309,
+      "bound_usd": 0.0209792,
+      "request_sha256": "79a1c8e9148665c60fde0add89e2b8a30855d6e7bc2440a6449295413b2d73cb",
+      "actual_usd": 0.0011309
+    },
+    "gsm_train_2779": {
+      "status": "recorded",
+      "accounted_usd": 0.0011913,
+      "bound_usd": 0.0207823,
+      "request_sha256": "675e26ae30bcca9ea1eb3797191790c8e2ba4f832b7853eb51c93b47a93443aa",
+      "actual_usd": 0.0011913
+    },
+    "gsm_train_6817": {
+      "status": "recorded",
+      "accounted_usd": 0.00153308,
+      "bound_usd": 0.0208692,
+      "request_sha256": "ead93ca6f6b58911d46af98232c31e92e976e3e752e6a7471777c0f4761afa65",
+      "actual_usd": 0.00153308
+    },
+    "gsm_train_2418": {
+      "status": "recorded",
+      "accounted_usd": 0.00055668,
+      "bound_usd": 0.0208307,
+      "request_sha256": "bd5e1f9a90bb01e4fa0ac34fc13a0e6308aa21a0e03c3643df38c82b4cb9f764",
+      "actual_usd": 0.00055668
+    },
+    "gsm_train_6026": {
+      "status": "recorded",
+      "accounted_usd": 0.00176052,
+      "bound_usd": 0.0208197,
+      "request_sha256": "daa910924228623020b97f81d220cdd3153ae455e8f8e116e5939b622476e218",
+      "actual_usd": 0.00176052
+    },
+    "gsm_train_1741": {
+      "status": "recorded",
+      "accounted_usd": 0.00104256,
+      "bound_usd": 0.0208318,
+      "request_sha256": "b9d0f96228a6a61ad3e0e973b99d2eadda594e9d21aea307dba461efff2c572e",
+      "actual_usd": 0.00104256
+    },
+    "gsm_train_6300": {
+      "status": "recorded",
+      "accounted_usd": 0.00159594,
+      "bound_usd": 0.020912100000000003,
+      "request_sha256": "3bc9423a7ca1f53006008e2d83ad5e751b20f421291d7e7faf6aa9f001d0d684",
+      "actual_usd": 0.00159594
+    },
+    "gsm_train_7463": {
+      "status": "recorded",
+      "accounted_usd": 0.0012491,
+      "bound_usd": 0.020834,
+      "request_sha256": "97c4cb217dff20fc689c25a8c9d4c6d60d18766ee02f7cd357f2171be3e05cec",
+      "actual_usd": 0.0012491
+    },
+    "gsm_train_2590": {
+      "status": "recorded",
+      "accounted_usd": 0.00524342,
+      "bound_usd": 0.021117800000000003,
+      "request_sha256": "5ac2e0ed0bb140d9256f9b05aceac506f35651e31b71d2ab362ca24b11166ffc",
+      "actual_usd": 0.00524342
+    },
+    "gsm_train_3927": {
+      "status": "recorded",
+      "accounted_usd": 0.00218998,
+      "bound_usd": 0.0208208,
+      "request_sha256": "c39d28effab54e8f776c22a8248b837b9df4e59b9f237f7f51407eb7baa95836",
+      "actual_usd": 0.00218998
+    },
+    "gsm_train_116": {
+      "status": "recorded",
+      "accounted_usd": 0.0015084,
+      "bound_usd": 0.0211354,
+      "request_sha256": "0902e48b380131a4bea4e2b5adff4f9e35694ab12f4b8ffdea2a4376dbe0a2eb",
+      "actual_usd": 0.0015084
+    },
+    "ordinary_2_37": {
+      "status": "recorded",
+      "accounted_usd": 0.00368916,
+      "bound_usd": 0.0207757,
+      "request_sha256": "35b00331fdcfb1a93ba3f659c603049a9f2d1962da690bdf120ce7e078158987",
+      "actual_usd": 0.00368916
+    },
+    "gsm_train_6406": {
+      "status": "recorded",
+      "accounted_usd": 0.00136024,
+      "bound_usd": 0.0208175,
+      "request_sha256": "069046405e0ffdae0c398c7e41570c9cb76b4873d9230a353792c4006b3159e0",
+      "actual_usd": 0.00136024
+    },
+    "gsm_train_2570": {
+      "status": "recorded",
+      "accounted_usd": 0.00177502,
+      "bound_usd": 0.0207493,
+      "request_sha256": "0e53ea1aa1688b40ca88649eab399bdc40db96325e6b205e85fa302c4ed8cfdb",
+      "actual_usd": 0.00177502
+    },
+    "gsm_train_3030": {
+      "status": "recorded",
+      "accounted_usd": 0.00180186,
+      "bound_usd": 0.020779000000000002,
+      "request_sha256": "5ba39dd326ff7ed15f6632dc44011d63131958a41b406a01084e362c33ca6639",
+      "actual_usd": 0.00180186
+    },
+    "gsm_train_3327": {
+      "status": "recorded",
+      "accounted_usd": 0.00114452,
+      "bound_usd": 0.0208373,
+      "request_sha256": "80d687aade1a3062b74010465d631281285a8a18f474f0aa17f3947cb050b933",
+      "actual_usd": 0.00114452
+    },
+    "gsm_train_1529": {
+      "status": "recorded",
+      "accounted_usd": 0.00076598,
+      "bound_usd": 0.020835100000000002,
+      "request_sha256": "56a160dc8b44241d218b9fc8be08177c0dd3863514c91d0973cdf95576f80fe8",
+      "actual_usd": 0.00076598
+    },
+    "gsm_train_6831": {
+      "status": "recorded",
+      "accounted_usd": 0.00548228,
+      "bound_usd": 0.021039699999999998,
+      "request_sha256": "7962060aece290fc34641bb613884dd0bead47e025ee2cee887ea566f4c5e569",
+      "actual_usd": 0.00548228
+    },
+    "gsm_train_4110": {
+      "status": "recorded",
+      "accounted_usd": 0.000705,
+      "bound_usd": 0.0207647,
+      "request_sha256": "e67ba5c8e46cd3f3bc314dd84088d4d5b39bd2136d35419b92845dd49d48944c",
+      "actual_usd": 0.000705
+    },
+    "gsm_train_6713": {
+      "status": "recorded",
+      "accounted_usd": 0.00230792,
+      "bound_usd": 0.021125500000000002,
+      "request_sha256": "e4e19e68f7906858a907c5c1d2da814fc0e87b989a8cf00bdd8c35009d012378",
+      "actual_usd": 0.00230792
+    },
+    "gsm_train_1752": {
+      "status": "recorded",
+      "accounted_usd": 0.00189794,
+      "bound_usd": 0.0209143,
+      "request_sha256": "caaa57564693165162fa77fb1d4b12d819c15386454f18c8dea1df410d844c7f",
+      "actual_usd": 0.00189794
+    },
+    "gsm_train_234": {
+      "status": "recorded",
+      "accounted_usd": 0.00502364,
+      "bound_usd": 0.020862600000000002,
+      "request_sha256": "916a78b21461292f7d7a700f2e28e568e3cff5bf74f15158d908e3b2b1b37428",
+      "actual_usd": 0.00502364
+    },
+    "no_robots_ca0d5373944d913f3de40bd93c5534d81215dc7d79857f7d4c69f3cd9372c137": {
+      "status": "recorded",
+      "accounted_usd": 0.0017309,
+      "bound_usd": 0.021032,
+      "request_sha256": "32f8491f8d00e4fc75a5f1e3e984e950a9d394aaa05b8c581c884dda9bd77170",
+      "actual_usd": 0.0017309
+    },
+    "ordinary_6_38": {
+      "status": "recorded",
+      "accounted_usd": 0.00136576,
+      "bound_usd": 0.0207372,
+      "request_sha256": "db51911ff16efed03506c299aa80ff7bd46fd5972974395baa97d59cf4f02d71",
+      "actual_usd": 0.00136576
+    },
+    "gsm_train_6763": {
+      "status": "recorded",
+      "accounted_usd": 0.00118398,
+      "bound_usd": 0.020801,
+      "request_sha256": "feb2fec8b9d4c8ac9132fbf21f4bde35021c00d93b9e81dcd7d5204444b6e9b3",
+      "actual_usd": 0.00118398
+    },
+    "gsm_train_4553": {
+      "status": "recorded",
+      "accounted_usd": 0.00083658,
+      "bound_usd": 0.0207581,
+      "request_sha256": "48213d7c8c5fe08947d2b4419745e5037e8057858821f5c5520e12d94ec9c508",
+      "actual_usd": 0.00083658
+    },
+    "gsm_train_4401": {
+      "status": "recorded",
+      "accounted_usd": 0.00105278,
+      "bound_usd": 0.0208384,
+      "request_sha256": "75a9cd4c00a0de87040813f1c4efd2cdd17cdaa1022660180919e777ac7e6a54",
+      "actual_usd": 0.00105278
+    },
+    "gsm_train_429": {
+      "status": "recorded",
+      "accounted_usd": 0.0015961,
+      "bound_usd": 0.0208692,
+      "request_sha256": "65a7ef25534eceb4c3bf3c02fdc55b6091c6f29eb34d8d485483d9fd435d6c34",
+      "actual_usd": 0.0015961
+    },
+    "ordinary_0_30": {
+      "status": "recorded",
+      "accounted_usd": 0.00064262,
+      "bound_usd": 0.0207394,
+      "request_sha256": "c756ce31589ab2548343fcd77fcde039c4954422d62de65f95cb0a32e6468f59",
+      "actual_usd": 0.00064262
+    },
+    "gsm_train_5232": {
+      "status": "recorded",
+      "accounted_usd": 0.0052544,
+      "bound_usd": 0.0211343,
+      "request_sha256": "71974eb4f9467b885d6dd4748772644a39487820ec53084416650e0979b9ccc8",
+      "actual_usd": 0.0052544
+    },
+    "no_robots_ae8f148be9496eea52aebbdef428697ef30e753a13639f06e07bf0ac67a3d9a9": {
+      "status": "recorded",
+      "accounted_usd": 0.0004961,
+      "bound_usd": 0.0212179,
+      "request_sha256": "0031d127f816889785ae74156345c25b1efc228e5dda4fd1633faa6ed897d7af",
+      "actual_usd": 0.0004961
+    },
+    "gsm_train_150": {
+      "status": "recorded",
+      "accounted_usd": 0.00257642,
+      "bound_usd": 0.0208241,
+      "request_sha256": "3d0c719b27c485ba77d87d633f398e2754c701b02cfdf9f5d775bd960242bb5b",
+      "actual_usd": 0.00257642
+    },
+    "no_robots_451888bb799678f6eac4cd0c0f09424596d6422a7ff25e30a9c08f5de25e40e9": {
+      "status": "recorded",
+      "accounted_usd": 0.002871,
+      "bound_usd": 0.0212179,
+      "request_sha256": "ec795dd8520bfa9b4d0e50d8a1cbdd8456568fd9c651ee7d82ffa0a968631bdb",
+      "actual_usd": 0.002871
+    },
+    "ordinary_7_25": {
+      "status": "recorded",
+      "accounted_usd": 0.00066576,
+      "bound_usd": 0.0207493,
+      "request_sha256": "71f525c70def00e7e805225e73a155f48cfa9a91cc6996b0b60ed621ea0cd6e7",
+      "actual_usd": 0.00066576
+    },
+    "gsm_train_1774": {
+      "status": "recorded",
+      "accounted_usd": 0.00390924,
+      "bound_usd": 0.020885700000000004,
+      "request_sha256": "f7a9dad787727297bca6ed16bc0d496fbf48724300137facbb10a866def34be4",
+      "actual_usd": 0.00390924
+    },
+    "gsm_train_6777": {
+      "status": "recorded",
+      "accounted_usd": 0.0038431,
+      "bound_usd": 0.020892300000000003,
+      "request_sha256": "2c48fea341224a6e148fc2566aeaaae9ea4135ecbdedc45df40883f8d6ab4ca4",
+      "actual_usd": 0.0038431
+    },
+    "no_robots_808fc4333bf13837b0f276b1247f0ed1b8da333cd1aa83a0f1837061fc3f91fd": {
+      "status": "recorded",
+      "accounted_usd": 0.00087772,
+      "bound_usd": 0.0208197,
+      "request_sha256": "a69e0314926eb84ad8fb2cfebc62095662c0aa973a17c715f32f1aefe6bbdf41",
+      "actual_usd": 0.00087772
+    },
+    "gsm_train_3418": {
+      "status": "recorded",
+      "accounted_usd": 0.00139794,
+      "bound_usd": 0.0208703,
+      "request_sha256": "525b715fcae1ca7fb988f58650b06eed08a623232c50358c481d54b93ffeb8ac",
+      "actual_usd": 0.00139794
+    },
+    "gsm_train_298": {
+      "status": "recorded",
+      "accounted_usd": 0.00302642,
+      "bound_usd": 0.0208263,
+      "request_sha256": "89b4122e46c36630de1eabee161d3dcb5d2a5c3f9b55ae1c76b8987cd704007f",
+      "actual_usd": 0.00302642
+    },
+    "gsm_train_3839": {
+      "status": "recorded",
+      "accounted_usd": 0.00096284,
+      "bound_usd": 0.0208098,
+      "request_sha256": "bb2725f9b1dcc4c89529fe46d1a9887aab278c6eb472274457ba9bf35a68f1e2",
+      "actual_usd": 0.00096284
+    },
+    "gsm_train_2902": {
+      "status": "recorded",
+      "accounted_usd": 0.00519408,
+      "bound_usd": 0.0209154,
+      "request_sha256": "46c4d990539be23f79e42d3de23a4a8354a2ce4890fce9c4e825585481b83348",
+      "actual_usd": 0.00519408
+    },
+    "gsm_train_3543": {
+      "status": "recorded",
+      "accounted_usd": 0.00090678,
+      "bound_usd": 0.020933,
+      "request_sha256": "0ab240f4783931168d848eee72fa5da48eed99e66827742663effeff875371ec",
+      "actual_usd": 0.00090678
+    },
+    "ordinary_4_11": {
+      "status": "recorded",
+      "accounted_usd": 0.00059088,
+      "bound_usd": 0.0207537,
+      "request_sha256": "ccca40fc74508eb3d2798d6fff8a7fd36f98b09251fbcdbd5bd2dc0fbb67dd66",
+      "actual_usd": 0.00059088
+    },
+    "gsm_train_855": {
+      "status": "recorded",
+      "accounted_usd": 0.00068558,
+      "bound_usd": 0.0207559,
+      "request_sha256": "18de4643fb797d3c2dd2ee7988643a55f022c119e5a290e1387b19ea52c7857e",
+      "actual_usd": 0.00068558
+    },
+    "ordinary_3_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00067746,
+      "bound_usd": 0.0207394,
+      "request_sha256": "ab201a6bb0d987b11145cbd0073cd4528115867f6fb31a4ed0cb03e892d43b2b",
+      "actual_usd": 0.00067746
+    },
+    "gsm_train_2686": {
+      "status": "recorded",
+      "accounted_usd": 0.00144352,
+      "bound_usd": 0.0208835,
+      "request_sha256": "940313c4034d28b4af11367ae354696e4157360bd092aa96091aa32ab6da3b8b",
+      "actual_usd": 0.00144352
+    },
+    "gsm_train_4792": {
+      "status": "recorded",
+      "accounted_usd": 0.0012334,
+      "bound_usd": 0.020840599999999997,
+      "request_sha256": "642b9179570d6c784b24c28750e612b1d23071a087607e3613d46268014992e5",
+      "actual_usd": 0.0012334
+    },
+    "gsm_train_3564": {
+      "status": "recorded",
+      "accounted_usd": 0.00132742,
+      "bound_usd": 0.020756999999999998,
+      "request_sha256": "a898736891a58b36ed9c97fe84942d32c6625317ffb091dd2d620b8fcf2f373a",
+      "actual_usd": 0.00132742
+    },
+    "gsm_train_1469": {
+      "status": "recorded",
+      "accounted_usd": 0.0008797,
+      "bound_usd": 0.0207922,
+      "request_sha256": "4ca6b2bb3fd1e9e97f159006922dbd73487f6f6c49ade747907d0642bc15eec9",
+      "actual_usd": 0.0008797
+    },
+    "ordinary_5_8": {
+      "status": "recorded",
+      "accounted_usd": 0.00096332,
+      "bound_usd": 0.0207306,
+      "request_sha256": "c2e64759955ac55bea4bd0257738cd183fd28d35aa8191c48f73003797eff214",
+      "actual_usd": 0.00096332
+    },
+    "gsm_train_2284": {
+      "status": "recorded",
+      "accounted_usd": 0.0008153,
+      "bound_usd": 0.0207658,
+      "request_sha256": "7f938788ebd9d7ca2eb0c173fa64f61002744190fb064d3250309aeff292329e",
+      "actual_usd": 0.0008153
+    },
+    "no_robots_fd83445b4d8704b42041b4accbeecb8bc75dbc7c3597b22fde67117cf603a9fb": {
+      "status": "recorded",
+      "accounted_usd": 0.00123908,
+      "bound_usd": 0.020679999999999997,
+      "request_sha256": "26e0ca381db463e169be711233acade1bc4c31f2a00260fd255a5579ebf038be",
+      "actual_usd": 0.00123908
+    },
+    "gsm_train_7323": {
+      "status": "recorded",
+      "accounted_usd": 0.00100814,
+      "bound_usd": 0.021040800000000002,
+      "request_sha256": "ef1335777113d3d08cd40bda3e81e607ab468992550733f2bc711bc6e4f3b83c",
+      "actual_usd": 0.00100814
+    },
+    "no_robots_a56bc68a0a49fe024478a42f9d4a803c866fd21e0c154b0164a8a09a8877c908": {
+      "status": "recorded",
+      "accounted_usd": 0.00210312,
+      "bound_usd": 0.0211057,
+      "request_sha256": "d4a4823e2596db6f236bbfd3c970ae8021a577c50537c1e214a8660014a89221",
+      "actual_usd": 0.00210312
+    },
+    "gsm_train_3864": {
+      "status": "recorded",
+      "accounted_usd": 0.00048632,
+      "bound_usd": 0.020731700000000002,
+      "request_sha256": "502a9a25ffaf62e81fbf820e26fe3b23b9ad0bf46c0082f5048c5d97e2ba3f20",
+      "actual_usd": 0.00048632
+    },
+    "gsm_train_6904": {
+      "status": "recorded",
+      "accounted_usd": 0.0017093,
+      "bound_usd": 0.0207757,
+      "request_sha256": "ec4d87799d3de6182153adae6c834faaa2a23f5d67aa3f9809685eaa29051942",
+      "actual_usd": 0.0017093
+    },
+    "gsm_train_535": {
+      "status": "recorded",
+      "accounted_usd": 0.00045176,
+      "bound_usd": 0.0207042,
+      "request_sha256": "99e02dcf9a4825eae7c86eb5c795123de5fdc47f7e64cb6d85573afa2cdfb9fd",
+      "actual_usd": 0.00045176
+    },
+    "gsm_train_485": {
+      "status": "recorded",
+      "accounted_usd": 0.00105198,
+      "bound_usd": 0.020814199999999998,
+      "request_sha256": "0c061a0318d9b13eb3912e03341bbbc5bc5333dce2ef9b83745f27424ebcc397",
+      "actual_usd": 0.00105198
+    },
+    "gsm_train_2217": {
+      "status": "recorded",
+      "accounted_usd": 0.00119328,
+      "bound_usd": 0.020797700000000002,
+      "request_sha256": "35356c99255233f391a342a7ca9471f4e8f6c1a2321177edfa2bcf9e7b4628ad",
+      "actual_usd": 0.00119328
+    },
+    "gsm_train_2592": {
+      "status": "recorded",
+      "accounted_usd": 0.00104534,
+      "bound_usd": 0.0209649,
+      "request_sha256": "e7f4a49f819d30fe1e4be63f4fddb207f7fce7a85d2ef007b79d32c9ff66c7d8",
+      "actual_usd": 0.00104534
+    },
+    "gsm_train_3373": {
+      "status": "recorded",
+      "accounted_usd": 0.0025603,
+      "bound_usd": 0.0210287,
+      "request_sha256": "97089b5ef8936c8943d0077c6c79ef5c520712b5893c7fde0c0f9d5df6f67e3f",
+      "actual_usd": 0.0025603
+    },
+    "gsm_train_5023": {
+      "status": "recorded",
+      "accounted_usd": 0.00086368,
+      "bound_usd": 0.020836200000000003,
+      "request_sha256": "bf872f3728c61cef9c36db785473f67c98c12eb5557d49ed16b771f6f36c7a26",
+      "actual_usd": 0.00086368
+    },
+    "gsm_train_2604": {
+      "status": "recorded",
+      "accounted_usd": 0.00145838,
+      "bound_usd": 0.0208901,
+      "request_sha256": "01faf3dfeb5a453418bc52b5577686e3f4893e9c166d4b06705242147e2cb6e0",
+      "actual_usd": 0.00145838
+    },
+    "gsm_train_5037": {
+      "status": "recorded",
+      "accounted_usd": 0.00239366,
+      "bound_usd": 0.020912100000000003,
+      "request_sha256": "ebd657d68f267d2a4d671434db7d6d47630177f1659e3756468111d7abd11cc4",
+      "actual_usd": 0.00239366
+    },
+    "gsm_train_938": {
+      "status": "recorded",
+      "accounted_usd": 0.00310834,
+      "bound_usd": 0.0209396,
+      "request_sha256": "c1af75433dc532700a951a2ec2d80983d88df7a7349aa19ed31731576e00981a",
+      "actual_usd": 0.00310834
+    },
+    "gsm_train_5257": {
+      "status": "recorded",
+      "accounted_usd": 0.00471284,
+      "bound_usd": 0.020836200000000003,
+      "request_sha256": "23e9c0f16b1d3cc8ba0ed4dff5fa4d67d434fcef678307d1a9ed4cd7d892741a",
+      "actual_usd": 0.00471284
+    },
+    "gsm_train_4675": {
+      "status": "recorded",
+      "accounted_usd": 0.00354368,
+      "bound_usd": 0.0208395,
+      "request_sha256": "c2839b9d6315904ca60aaa330f2440b32f8f7417cf2a0220510ab35ed1d81312",
+      "actual_usd": 0.00354368
+    },
+    "gsm_train_6011": {
+      "status": "recorded",
+      "accounted_usd": 0.0008921,
+      "bound_usd": 0.0208593,
+      "request_sha256": "9d3f582da56cebbac51ce46efe25acd04df7c32578733f07a3acca2e24359be9",
+      "actual_usd": 0.0008921
+    },
+    "gsm_train_4598": {
+      "status": "recorded",
+      "accounted_usd": 0.00543166,
+      "bound_usd": 0.0210947,
+      "request_sha256": "db58389d6ee69d419b6059c7f722aefd075bc8e0d86480cc8afe0c4d94e692b0",
+      "actual_usd": 0.00543166
+    },
+    "gsm_train_4209": {
+      "status": "recorded",
+      "accounted_usd": 0.00317756,
+      "bound_usd": 0.0208208,
+      "request_sha256": "cf4455af6bbb45e85ec32e0158f8c4458a997897147882de30f5244fb2feb4fa",
+      "actual_usd": 0.00317756
+    },
+    "gsm_train_652": {
+      "status": "recorded",
+      "accounted_usd": 0.0008821,
+      "bound_usd": 0.0208494,
+      "request_sha256": "6ac96624f6a6d441e53ae14842ad3225869a72485775d5a4c522f0a3c08e0b97",
+      "actual_usd": 0.0008821
+    },
+    "no_robots_114f54720c96a61ca2fd801e6eb618cdb4b4ad16e7b266da8dd0c069d1b5cd14": {
+      "status": "recorded",
+      "accounted_usd": 0.00312474,
+      "bound_usd": 0.0210716,
+      "request_sha256": "7c647e37c45c73433749ccbe2e6da829500f768bc979f734e1522ddd97bbf5b4",
+      "actual_usd": 0.00312474
+    },
+    "no_robots_ff85f499973bab8a37434c792e17e14ec4481d089dd7990011daa0929c59914d": {
+      "status": "recorded",
+      "accounted_usd": 0.00141548,
+      "bound_usd": 0.0212795,
+      "request_sha256": "8cef9e999e8b075bb01e991b04f51650e5c8714a3bc37f330da0674f92357ed9",
+      "actual_usd": 0.00141548
+    },
+    "gsm_train_6440": {
+      "status": "recorded",
+      "accounted_usd": 0.00533532,
+      "bound_usd": 0.0211354,
+      "request_sha256": "3b6542dcc7329b0b61b62bbb3dbff948141e884f7c958a8fa33f7220389f49a7",
+      "actual_usd": 0.00533532
+    },
+    "gsm_train_252": {
+      "status": "recorded",
+      "accounted_usd": 0.00108912,
+      "bound_usd": 0.0208252,
+      "request_sha256": "98bfa9cb1627a146da2d9385b4373ae8d4924f518b25b46108a1c7a86a34daaa",
+      "actual_usd": 0.00108912
+    },
+    "gsm_train_4419": {
+      "status": "recorded",
+      "accounted_usd": 0.003006,
+      "bound_usd": 0.0209473,
+      "request_sha256": "37ecde1eae06b7e77e2c02787f0700d11aa69f005666c10f07173124052668aa",
+      "actual_usd": 0.003006
+    },
+    "gsm_train_509": {
+      "status": "recorded",
+      "accounted_usd": 0.00528694,
+      "bound_usd": 0.0208615,
+      "request_sha256": "830d3ad493c485b8f66d292c33908aee3d6e548a84ec77a2a4c18ed715279c60",
+      "actual_usd": 0.00528694
+    },
+    "gsm_train_1985": {
+      "status": "recorded",
+      "accounted_usd": 0.00097438,
+      "bound_usd": 0.020893400000000003,
+      "request_sha256": "ca04faec97d94c28c9b106f4d042f3c323115eea485c53425a5a305153a8d2ff",
+      "actual_usd": 0.00097438
+    },
+    "gsm_train_3441": {
+      "status": "recorded",
+      "accounted_usd": 0.00107198,
+      "bound_usd": 0.020808700000000003,
+      "request_sha256": "2213ee586813e3e265d883af2e6c273c4178d70e21436719628c2e5f8a0264a5",
+      "actual_usd": 0.00107198
+    },
+    "gsm_train_6666": {
+      "status": "recorded",
+      "accounted_usd": 0.00515794,
+      "bound_usd": 0.0209286,
+      "request_sha256": "8ca834fcc6bd83a63c4c2fb9aac302c7ccb827bc56e457c18f8c2efe383991be",
+      "actual_usd": 0.00515794
+    },
+    "gsm_train_7247": {
+      "status": "recorded",
+      "accounted_usd": 0.0019406,
+      "bound_usd": 0.021014400000000003,
+      "request_sha256": "ab6501e51ca354dd7736a28d9e282c771fe6eb403eae94fbfa640288533aa9f2",
+      "actual_usd": 0.0019406
+    },
+    "gsm_train_5243": {
+      "status": "recorded",
+      "accounted_usd": 0.00083898,
+      "bound_usd": 0.0207878,
+      "request_sha256": "a8285a4820f92b14846b802b1806638aa5906f84ac3f1a78e09667bdc34a7075",
+      "actual_usd": 0.00083898
+    },
+    "gsm_train_2585": {
+      "status": "recorded",
+      "accounted_usd": 0.00129462,
+      "bound_usd": 0.0209671,
+      "request_sha256": "afb300469f671e84010613fbd44b7f47361a337157cf870cd03c1eaf08b32447",
+      "actual_usd": 0.00129462
+    },
+    "gsm_train_1534": {
+      "status": "recorded",
+      "accounted_usd": 0.00143858,
+      "bound_usd": 0.0207724,
+      "request_sha256": "6a3cf300d0ef97f550463b3ad2e4ec30db1067ddc37a8bad2c35147de16c96d0",
+      "actual_usd": 0.00143858
+    },
+    "gsm_train_3391": {
+      "status": "recorded",
+      "accounted_usd": 0.00132882,
+      "bound_usd": 0.0211024,
+      "request_sha256": "3e6433d4a05d45bf622328557db780d216becf93e925cc3a95fc38c9a8e25670",
+      "actual_usd": 0.00132882
+    },
+    "gsm_train_4762": {
+      "status": "recorded",
+      "accounted_usd": 0.00264448,
+      "bound_usd": 0.0209165,
+      "request_sha256": "6e11b37e4fe1b3acbea009a96864c22acc87b4a1b786e05ff790ce6b7001d394",
+      "actual_usd": 0.00264448
+    },
+    "gsm_train_1647": {
+      "status": "recorded",
+      "accounted_usd": 0.00132032,
+      "bound_usd": 0.0215435,
+      "request_sha256": "a2dbbc9263db7d0ca7647328c369b8679f22e16f88159012f648066d498eddb7",
+      "actual_usd": 0.00132032
+    },
+    "gsm_train_6016": {
+      "status": "recorded",
+      "accounted_usd": 0.00522952,
+      "bound_usd": 0.0208384,
+      "request_sha256": "405a97116fe1ab56af0c551353f2bf009fe70e255210c9eaa16bb8537e9e24cf",
+      "actual_usd": 0.00522952
+    },
+    "no_robots_3f5cf2e192df3b8e759ef53c8d00204f6051976afcd82166aa278d7209557fd3": {
+      "status": "recorded",
+      "accounted_usd": 0.0040302,
+      "bound_usd": 0.0214335,
+      "request_sha256": "aafa02f2ff65adb30ee74545623fbf01ebf49866a5ecc2d30e0834e9a26124b6",
+      "actual_usd": 0.0040302
+    },
+    "gsm_train_1980": {
+      "status": "recorded",
+      "accounted_usd": 0.00095396,
+      "bound_usd": 0.0208648,
+      "request_sha256": "f8b230fd279e18f39df289e4474511902b8c95b91ccbc417b9f609cb7c9f708d",
+      "actual_usd": 0.00095396
+    },
+    "gsm_train_2564": {
+      "status": "recorded",
+      "accounted_usd": 0.0018472,
+      "bound_usd": 0.0208461,
+      "request_sha256": "5741f8cf458fd00e00868721ab48e0e745c1c69986b597f495adec58b57f4957",
+      "actual_usd": 0.0018472
+    },
+    "gsm_train_3590": {
+      "status": "recorded",
+      "accounted_usd": 0.00251514,
+      "bound_usd": 0.020995700000000003,
+      "request_sha256": "48fc222e718413e748abd6fe7bc6a32ab531716de10402e8e10fd265855388ed",
+      "actual_usd": 0.00251514
+    },
+    "gsm_train_2480": {
+      "status": "recorded",
+      "accounted_usd": 0.00067684,
+      "bound_usd": 0.0208219,
+      "request_sha256": "b6ce84b080473f09a23df7f535e48662243bece4a6a072a2690bbd436c154b26",
+      "actual_usd": 0.00067684
+    },
+    "gsm_train_7275": {
+      "status": "recorded",
+      "accounted_usd": 0.00056242,
+      "bound_usd": 0.0207724,
+      "request_sha256": "28dccb37945b53d207c2d017bcc2a29b5b158b767dda5369cb5a7d72e089dfec",
+      "actual_usd": 0.00056242
+    },
+    "gsm_train_5921": {
+      "status": "recorded",
+      "accounted_usd": 0.00521384,
+      "bound_usd": 0.021046299999999997,
+      "request_sha256": "ed99f6624b5a965a81afd4c781eaf0b018d89ebd72a3cf025b283adbdc7047bf",
+      "actual_usd": 0.00521384
+    },
+    "no_robots_a0f15f73db2d41deb6864c2506f349a25a5b9be178cabecfd4e39b496b2342e6": {
+      "status": "recorded",
+      "accounted_usd": 0.0008788,
+      "bound_usd": 0.0209341,
+      "request_sha256": "478cd2f7f0f93f443241f2575ac01cb5201fbd82b97fc74a765b15b91c508926",
+      "actual_usd": 0.0008788
+    },
+    "no_robots_8feed2981379d8a47dd08425a13fd910004d10143c4b50ec0255137b4b8403a6": {
+      "status": "recorded",
+      "accounted_usd": 0.00108922,
+      "bound_usd": 0.021106800000000002,
+      "request_sha256": "0ceaf513a80241ee58184f24fda93ba2756da19b35bf7513ce5d6adadcaf3a33",
+      "actual_usd": 0.00108922
+    },
+    "gsm_train_2064": {
+      "status": "recorded",
+      "accounted_usd": 0.00102696,
+      "bound_usd": 0.0208901,
+      "request_sha256": "1d5cf66caa135c74bf72fe8e77ec7696a28141557270fad3c808087235e34df4",
+      "actual_usd": 0.00102696
+    },
+    "no_robots_d188e866020c5e48fdb47176032c565cbad85850ab8695032184b808e405e171": {
+      "status": "recorded",
+      "accounted_usd": 0.0023419,
+      "bound_usd": 0.0209814,
+      "request_sha256": "4854a17c7b4f5a9906559d0bcf4d4fe4a3596b068cf0d8b5b9275109a32830b0",
+      "actual_usd": 0.0023419
+    },
+    "gsm_train_6828": {
+      "status": "recorded",
+      "accounted_usd": 0.00137,
+      "bound_usd": 0.0207548,
+      "request_sha256": "2539fd9f77ae352ed6d692b00b40a960c0d7736ae15496f5123061416ffda604",
+      "actual_usd": 0.00137
+    },
+    "gsm_train_6004": {
+      "status": "recorded",
+      "accounted_usd": 0.00088338,
+      "bound_usd": 0.020878,
+      "request_sha256": "057c779fbb57be898f1641b8343ff89fd992d8c1ec3a4edb4ac1c6a0662141fe",
+      "actual_usd": 0.00088338
+    },
+    "gsm_train_1150": {
+      "status": "recorded",
+      "accounted_usd": 0.00132212,
+      "bound_usd": 0.0208318,
+      "request_sha256": "9a649824dabf36f599036ca9d53c544059b6eb8ed1952b51679b9c7f7d6dcb2c",
+      "actual_usd": 0.00132212
+    },
+    "gsm_train_884": {
+      "status": "recorded",
+      "accounted_usd": 0.00308,
+      "bound_usd": 0.0208208,
+      "request_sha256": "6e8d3fa5c17b90c30c44de3b72deb5d895113e695ba8f94e39ca2318a7730813",
+      "actual_usd": 0.00308
+    },
+    "gsm_train_1006": {
+      "status": "recorded",
+      "accounted_usd": 0.00149486,
+      "bound_usd": 0.020771300000000003,
+      "request_sha256": "99652a892cd292d9f958026964dd64e0091b7dd1712ac4dc183365ab7516f099",
+      "actual_usd": 0.00149486
+    },
+    "gsm_train_1172": {
+      "status": "recorded",
+      "accounted_usd": 0.00228358,
+      "bound_usd": 0.0210199,
+      "request_sha256": "cffb618bcf824b3aba7acf350b48038736dcc8e44b586f546e527824b0594fba",
+      "actual_usd": 0.00228358
+    },
+    "gsm_train_7415": {
+      "status": "recorded",
+      "accounted_usd": 0.00529972,
+      "bound_usd": 0.020801,
+      "request_sha256": "ed7707b13dcc3f2be48ac2f407fd39b34cde250b3519a89b7f1a6b943bbdf500",
+      "actual_usd": 0.00529972
+    },
+    "no_robots_8761e73c14af6a6a543078d2e517b7401d224c16079ea879af14c55a188bc4d0": {
+      "status": "recorded",
+      "accounted_usd": 0.00026592,
+      "bound_usd": 0.021247600000000002,
+      "request_sha256": "0f1b1da6e611484950338c5b880801e46cfb7cde1339723d69a8506b7534d6fd",
+      "actual_usd": 0.00026592
+    },
+    "gsm_train_2490": {
+      "status": "recorded",
+      "accounted_usd": 0.00077114,
+      "bound_usd": 0.0208043,
+      "request_sha256": "fe6f9c271ed898a1699d60b1f4987f2fbb135310d548eafbfc4eebc78b33918f",
+      "actual_usd": 0.00077114
+    },
+    "gsm_train_5858": {
+      "status": "recorded",
+      "accounted_usd": 0.00096932,
+      "bound_usd": 0.0207416,
+      "request_sha256": "51527b022f488d109ccd4db02b423be345551ebac2a7590a0a93336344fc7819",
+      "actual_usd": 0.00096932
+    },
+    "gsm_train_7263": {
+      "status": "recorded",
+      "accounted_usd": 0.00120448,
+      "bound_usd": 0.0208945,
+      "request_sha256": "744948dd1a46305570475eda89ce8b3a70025ab1637a87b680fc2a9d319d7d81",
+      "actual_usd": 0.00120448
+    },
+    "gsm_train_2041": {
+      "status": "recorded",
+      "accounted_usd": 0.0024838,
+      "bound_usd": 0.021084799999999997,
+      "request_sha256": "0c740269b200f8e262c4dab544d25f859082a52ee989b9ea457c206c96531fe5",
+      "actual_usd": 0.0024838
+    },
+    "gsm_train_1650": {
+      "status": "recorded",
+      "accounted_usd": 0.00528986,
+      "bound_usd": 0.021046299999999997,
+      "request_sha256": "9158b88d3839a08f0c17627825c8c19705d1e447a79563d2d8936f5e23499709",
+      "actual_usd": 0.00528986
+    },
+    "gsm_train_3541": {
+      "status": "recorded",
+      "accounted_usd": 0.0036698,
+      "bound_usd": 0.0208967,
+      "request_sha256": "3e127af2ebff44f3e725815b1cc732d59e0a75650694c27e125244b392c8c09e",
+      "actual_usd": 0.0036698
+    },
+    "no_robots_9e5bbee6c144381126cf2c3b60b19d170fcb3be0190beeafd2de447fe296a497": {
+      "status": "recorded",
+      "accounted_usd": 0.0046933,
+      "bound_usd": 0.021805300000000003,
+      "request_sha256": "a197a48d59ecb9328bf58638d82b50c2c4ee2be93a640e49e34a26aefdd622f7",
+      "actual_usd": 0.0046933
+    },
+    "gsm_train_476": {
+      "status": "recorded",
+      "accounted_usd": 0.00094316,
+      "bound_usd": 0.0209979,
+      "request_sha256": "10412db9db07139406818a8a6442e5122dcb17bb21b791e29997a7c2bec95c25",
+      "actual_usd": 0.00094316
+    },
+    "gsm_train_6629": {
+      "status": "recorded",
+      "accounted_usd": 0.00129028,
+      "bound_usd": 0.0210573,
+      "request_sha256": "95797858f701ba4b3706563d6f2898f4f26ada7e45bb008aa0bd83ee1d3ed523",
+      "actual_usd": 0.00129028
+    },
+    "ordinary_7_38": {
+      "status": "recorded",
+      "accounted_usd": 0.00067076,
+      "bound_usd": 0.0207493,
+      "request_sha256": "2b266c03f375ce633088da163106c0a35d7b3850c203626b33bdde9fb2fb9972",
+      "actual_usd": 0.00067076
+    },
+    "gsm_train_4291": {
+      "status": "recorded",
+      "accounted_usd": 0.00210886,
+      "bound_usd": 0.0207658,
+      "request_sha256": "9eac36826224fb6660fa8d67f0c9f0ee73333b2e1b8f44c2cf0d33080d9ee273",
+      "actual_usd": 0.00210886
+    },
+    "gsm_train_4002": {
+      "status": "recorded",
+      "accounted_usd": 0.00169954,
+      "bound_usd": 0.0208175,
+      "request_sha256": "89926920a557f205b572523def50827102db78d04c87eec1b0202a71d49275d4",
+      "actual_usd": 0.00169954
+    },
+    "ordinary_6_11": {
+      "status": "recorded",
+      "accounted_usd": 0.00196276,
+      "bound_usd": 0.0207372,
+      "request_sha256": "2705079cfb896adb34f20e2d1740cd7bc53825cf6312c8f9281ce7262f40dbf9",
+      "actual_usd": 0.00196276
+    },
+    "no_robots_3cc9ef2e2b69aebd77ed2283a473e10e96fa9d42f9ed58dfdd2fb8840cead9db__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00112858,
+      "bound_usd": 0.020801,
+      "request_sha256": "a6b3d32e3f6d572bcde81a247950a1de18717f8803856e16256aa3981ce5b2b9",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00112858
+    },
+    "gsm_train_4539__attempt_3": {
+      "status": "recorded",
+      "accounted_usd": 0.00091444,
+      "bound_usd": 0.020783400000000004,
+      "request_sha256": "a7bef39899a64fba9e6d50eef83fdd183fc2ce57cc1ca4cf03da1aa93d704adf",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00091444
+    },
+    "no_robots_ce61fc37f4b5b49f2eb56a656786998e573b3f9d1b1dfc694533a0cb8dccee12__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.0013358,
+      "bound_usd": 0.020661300000000004,
+      "request_sha256": "cc2376fc9b3b5d9d9053fbba13b04cb8d42d371f4db278a82d6149d43617d261",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.0013358
+    },
+    "gsm_train_2623__attempt_4": {
+      "status": "recorded",
+      "accounted_usd": 0.0054402,
+      "bound_usd": 0.0211871,
+      "request_sha256": "69816209888898cde6698308ae3459bd9f959d2c3d8d638f6f433a0f383e2e63",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.0054402
+    },
+    "gsm_train_276__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00238962,
+      "bound_usd": 0.0209836,
+      "request_sha256": "d7251bab42b3d41b97689cf256ece12c5c9932948477d98bca2c5d49cbe5f8f1",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00238962
+    },
+    "gsm_train_1612__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00163078,
+      "bound_usd": 0.0208758,
+      "request_sha256": "171b86f34a0f1a833609a66b3d144b966ab5d8b59d3ccfddd87bb26f6de0bdef",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00163078
+    },
+    "no_robots_2e5a80e78720b0d64523e0618acf2fb5935cfee4a8fbc4f30a2c2fa145a22f67__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00102774,
+      "bound_usd": 0.021496200000000003,
+      "request_sha256": "9b5309820270283bde547b6d2182d40491c6b926c7519860827aad0095ee6e35",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00102774
+    },
+    "gsm_train_628__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00153758,
+      "bound_usd": 0.0207559,
+      "request_sha256": "119a9bb55d3f68cb97324b12858027b14f88c0882d1d443c05b13887c33774a6",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00153758
+    },
+    "gsm_train_4020__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00151482,
+      "bound_usd": 0.0208681,
+      "request_sha256": "1a5a244094e8758c585d3d09af6307f0a991cd850239d93c60a1f71edc267665",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00151482
+    },
+    "no_robots_4deaa4838149914dfea0279bfcd9bd2afb5226363b6dbd95261c148a45fd7fdc__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00366912,
+      "bound_usd": 0.0214159,
+      "request_sha256": "53ee9ac787a459bc8ea4df1b73532efbf2e4e61536d779d68864856834e37d1d",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00366912
+    },
+    "gsm_train_2847__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.0048728,
+      "bound_usd": 0.021131,
+      "request_sha256": "42a8fe4d18942c1cae1edbec7c49dd6114c6336a5c46f8a261a005afb81df897",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.0048728
+    },
+    "gsm_train_3484__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00259164,
+      "bound_usd": 0.020919800000000002,
+      "request_sha256": "63401771e5dbe4741bdb14c4cfa70964277b6df548039569ed596b01d7a23e64",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00259164
+    },
+    "gsm_train_2606__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00095194,
+      "bound_usd": 0.0208989,
+      "request_sha256": "f982e045cd0a831f9b3be87222e0b606503987c22644d71a349457675955d2b9",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00095194
+    },
+    "gsm_train_6339__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.0053021,
+      "bound_usd": 0.021137600000000003,
+      "request_sha256": "b64cf1896c1eb416f3aaa12dc99bdf4a48053a771b89e64ecf56e1f521c6c183",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.0053021
+    },
+    "no_robots_548e41a8c5e9e27f2b2934bc225e26259966b70f6881f5327e181760fa5dc76c__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00096262,
+      "bound_usd": 0.0207262,
+      "request_sha256": "fccbd4f46ebfc3a0e80232d27239788900e8eaff7b3e75cbf0a7a3c2ed8d9f57",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00096262
+    },
+    "gsm_train_6608__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00163828,
+      "bound_usd": 0.0209792,
+      "request_sha256": "fb69ead13acc5f88baebdcdc8bc76d41b6332d0dedde7d26cc5863aee3317536",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00163828
+    },
+    "gsm_train_3033__attempt_2": {
+      "status": "recorded",
+      "accounted_usd": 0.00507914,
+      "bound_usd": 0.021059500000000002,
+      "request_sha256": "a97e69589ce05be06881ee213c4ef373bd87e38ff6bc1a4bdd901f2a8aeacd5c",
+      "retry_kind": "provider_error_retry",
+      "actual_usd": 0.00507914
+    }
+  }
+}

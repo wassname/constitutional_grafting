@@ -1,0 +1,6439 @@
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "neutral_responses": 600,
+  "selected_neutral": 600,
+  "actual_reported_cost_usd": 1.112454195,
+  "conservative_accounted_usd": 1.216868395,
+  "uncertain_call_ids": [
+    "gsm_train_1586",
+    "gsm_train_5729",
+    "gsm_train_680",
+    "gsm_train_1620",
+    "gsm_train_3948"
+  ],
+  "reconciled_unbilled_429_ids": [
+    "gsm_train_4989",
+    "gsm_train_147",
+    "ordinary_0_33",
+    "gsm_train_1719",
+    "gsm_train_3450",
+    "gsm_train_766",
+    "gsm_train_236",
+    "ordinary_6_12",
+    "gsm_train_403",
+    "gsm_train_3478",
+    "gsm_train_4539",
+    "gsm_train_3478__attempt_2",
+    "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3",
+    "ordinary_3_50",
+    "gsm_train_1671",
+    "gsm_train_1802",
+    "gsm_train_1671__attempt_2",
+    "gsm_train_1802__attempt_2",
+    "gsm_train_1802__attempt_3",
+    "gsm_train_2464",
+    "gsm_train_2464__attempt_2",
+    "gsm_train_2464__attempt_3",
+    "ordinary_4_38",
+    "gsm_train_4082",
+    "gsm_train_4082__attempt_2",
+    "gsm_train_7442",
+    "gsm_train_5541",
+    "gsm_train_2468",
+    "gsm_train_7442__attempt_2",
+    "gsm_train_2468__attempt_2",
+    "gsm_train_2468__attempt_3",
+    "ordinary_1_50",
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f",
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f__attempt_2",
+    "gsm_train_1798",
+    "gsm_train_1798__attempt_2",
+    "gsm_train_4466",
+    "gsm_train_4466__attempt_2",
+    "gsm_train_1141",
+    "gsm_train_4466__attempt_3",
+    "gsm_train_2623",
+    "gsm_train_2623__attempt_2",
+    "gsm_train_6705",
+    "gsm_train_5306",
+    "gsm_train_5306__attempt_2"
+  ],
+  "quality_rejection_rate_of_logical_prompts": 0.12333333333333334,
+  "incomplete_or_invalid_rate": 0.01,
+  "groups": {
+    "kept": {
+      "rows": 509,
+      "sources": {
+        "run14_original_generic_requests": 47,
+        "openai/gsm8k/main/train": 387,
+        "HuggingFaceH4/no_robots/train": 75
+      },
+      "prompt_tokens": {
+        "n": 509,
+        "min": 9,
+        "p25": 38,
+        "median": 53,
+        "p75": 73,
+        "p90": 103,
+        "max": 430,
+        "mean": 63.483300589390964
+      },
+      "reasoning_tokens": {
+        "n": 509,
+        "min": 53,
+        "p25": 690,
+        "median": 962,
+        "p75": 1353,
+        "p90": 2339,
+        "max": 4916,
+        "mean": 1213.13163064833
+      },
+      "final_tokens": {
+        "n": 509,
+        "min": 15,
+        "p25": 135,
+        "median": 192,
+        "p75": 278,
+        "p90": 471,
+        "max": 1966,
+        "mean": 248.65422396856582
+      }
+    },
+    "quality_rejected": {
+      "rows": 74,
+      "sources": {
+        "HuggingFaceH4/no_robots/train": 12,
+        "openai/gsm8k/main/train": 52,
+        "run14_original_generic_requests": 10
+      },
+      "prompt_tokens": {
+        "n": 74,
+        "min": 18,
+        "p25": 45,
+        "median": 63,
+        "p75": 92,
+        "p90": 148,
+        "max": 235,
+        "mean": 77.89189189189189
+      },
+      "reasoning_tokens": {
+        "n": 74,
+        "min": 1418,
+        "p25": 3478,
+        "median": 4232,
+        "p75": 4916,
+        "p90": 4916,
+        "max": 4916,
+        "mean": 4097.418918918919
+      },
+      "final_tokens": {
+        "n": 74,
+        "min": 5,
+        "p25": 166,
+        "median": 239,
+        "p75": 320,
+        "p90": 403,
+        "max": 549,
+        "mean": 242.04054054054055
+      }
+    },
+    "held_for_repair": {
+      "rows": 8,
+      "sources": {
+        "run14_original_generic_requests": 2,
+        "openai/gsm8k/main/train": 3,
+        "HuggingFaceH4/no_robots/train": 3
+      },
+      "prompt_tokens": {
+        "n": 8,
+        "min": 24,
+        "p25": 30,
+        "median": 39,
+        "p75": 49,
+        "p90": 154,
+        "max": 233,
+        "mean": 76.125
+      },
+      "reasoning_tokens": {
+        "n": 8,
+        "min": 244,
+        "p25": 306,
+        "median": 434,
+        "p75": 964,
+        "p90": 990,
+        "max": 3506,
+        "mean": 918.0
+      },
+      "final_tokens": {
+        "n": 8,
+        "min": 54,
+        "p25": 67,
+        "median": 198,
+        "p75": 379,
+        "p90": 449,
+        "max": 813,
+        "mean": 289.0
+      }
+    },
+    "semantic_rejected": {
+      "rows": 3,
+      "sources": {
+        "openai/gsm8k/main/train": 2,
+        "run14_original_generic_requests": 1
+      },
+      "prompt_tokens": {
+        "n": 3,
+        "min": 24,
+        "p25": 24,
+        "median": 81,
+        "p75": 81,
+        "p90": 81,
+        "max": 91,
+        "mean": 65.33333333333333
+      },
+      "reasoning_tokens": {
+        "n": 3,
+        "min": 1919,
+        "p25": 1919,
+        "median": 3206,
+        "p75": 3206,
+        "p90": 3206,
+        "max": 4915,
+        "mean": 3346.6666666666665
+      },
+      "final_tokens": {
+        "n": 3,
+        "min": 35,
+        "p25": 35,
+        "median": 146,
+        "p75": 146,
+        "p90": 146,
+        "max": 369,
+        "mean": 183.33333333333334
+      }
+    },
+    "incomplete_or_invalid": {
+      "rows": 6,
+      "sources": {
+        "openai/gsm8k/main/train": 6
+      },
+      "prompt_tokens": {
+        "n": 6,
+        "min": 42,
+        "p25": 52,
+        "median": 67,
+        "p75": 77,
+        "p90": 98,
+        "max": 102,
+        "mean": 73.0
+      },
+      "reasoning_tokens": {
+        "n": 2,
+        "min": 4916,
+        "p25": 4916,
+        "median": 4916,
+        "p75": 4916,
+        "p90": 4916,
+        "max": 4916,
+        "mean": 4916.0
+      },
+      "final_tokens": {
+        "n": 2,
+        "min": 3272,
+        "p25": 3272,
+        "median": 3272,
+        "p75": 3272,
+        "p90": 3272,
+        "max": 3274,
+        "mean": 3273.0
+      }
+    },
+    "all_rejected": {
+      "rows": 91,
+      "sources": {
+        "HuggingFaceH4/no_robots/train": 15,
+        "openai/gsm8k/main/train": 63,
+        "run14_original_generic_requests": 13
+      },
+      "prompt_tokens": {
+        "n": 91,
+        "min": 18,
+        "p25": 42,
+        "median": 63,
+        "p75": 92,
+        "p90": 154,
+        "max": 235,
+        "mean": 77.0
+      },
+      "reasoning_tokens": {
+        "n": 87,
+        "min": 244,
+        "p25": 3192,
+        "median": 4104,
+        "p75": 4916,
+        "p90": 4916,
+        "max": 4916,
+        "mean": 3797.9885057471265
+      },
+      "final_tokens": {
+        "n": 87,
+        "min": 5,
+        "p25": 149,
+        "median": 243,
+        "p75": 346,
+        "p90": 437,
+        "max": 3274,
+        "mean": 314.01149425287355
+      }
+    }
+  },
+  "row_stats": [
+    {
+      "id": "ordinary_4_27",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 106,
+      "final_tokens": 500,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_7_35",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 306,
+      "final_tokens": 379,
+      "flags": [],
+      "disposition_reason": "needs_factual_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "gsm_train_228",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 964,
+      "final_tokens": 198,
+      "flags": [],
+      "disposition_reason": "needs_noise_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 105,
+      "reasoning_tokens": 4433,
+      "final_tokens": 434,
+      "flags": [
+        "repeated_indecision: 28 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 28 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 222,
+      "reasoning_tokens": 4888,
+      "final_tokens": 72,
+      "flags": [
+        "repeated_indecision: 37 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 37 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_7066",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 4915,
+      "final_tokens": 346,
+      "flags": [
+        "repeated_indecision: 13 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 13 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_1586",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 895,
+      "final_tokens": 315,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5729",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 2826,
+      "final_tokens": 231,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_680",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1403,
+      "final_tokens": 308,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3948",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 799,
+      "final_tokens": 220,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1620",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 92,
+      "reasoning_tokens": 860,
+      "final_tokens": 258,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_8281ac49b42cc2961d601f2f31783941ac936207fe94334812292cf987d4c0ba",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 138,
+      "reasoning_tokens": 98,
+      "final_tokens": 499,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5746",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 610,
+      "final_tokens": 118,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_141",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 682,
+      "final_tokens": 207,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2579",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 662,
+      "final_tokens": 240,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5755",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 1148,
+      "final_tokens": 193,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3898",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 1709,
+      "final_tokens": 128,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2787",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 79,
+      "reasoning_tokens": 3850,
+      "final_tokens": 266,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_1701",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 804,
+      "final_tokens": 155,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6305",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 840,
+      "final_tokens": 235,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5779",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 1089,
+      "final_tokens": 140,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6685",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 81,
+      "reasoning_tokens": 1083,
+      "final_tokens": 289,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_885",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 99,
+      "reasoning_tokens": 1978,
+      "final_tokens": 207,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2632",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 2610,
+      "final_tokens": 234,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4989",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 944,
+      "final_tokens": 151,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_147",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 639,
+      "final_tokens": 65,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6719",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 25,
+      "reasoning_tokens": 690,
+      "final_tokens": 107,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5000",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 85,
+      "reasoning_tokens": 901,
+      "final_tokens": 233,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_126",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 629,
+      "final_tokens": 76,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_0_33",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 177,
+      "final_tokens": 459,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1719",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 63,
+      "reasoning_tokens": 3682,
+      "final_tokens": 201,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_8b91c2923f731f5de8e219e2a8bbac6d36e7ebb442f9a12d5489bd8e378b6c01",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 160,
+      "final_tokens": 577,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4092",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 65,
+      "reasoning_tokens": 1031,
+      "final_tokens": 240,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2343",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 836,
+      "final_tokens": 146,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7081",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 847,
+      "final_tokens": 167,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_45",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 974,
+      "final_tokens": 37,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7460",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 1338,
+      "final_tokens": 298,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_288",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 96,
+      "reasoning_tokens": 1349,
+      "final_tokens": 258,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2372",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 1973,
+      "final_tokens": 292,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5065",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 81,
+      "reasoning_tokens": 3206,
+      "final_tokens": 369,
+      "flags": [],
+      "disposition_reason": "reject_repeated_rechecking",
+      "group": "semantic_rejected"
+    },
+    {
+      "id": "gsm_train_3450",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 78,
+      "reasoning_tokens": 1267,
+      "final_tokens": 251,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6410",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 967,
+      "final_tokens": 254,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6399",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 1155,
+      "final_tokens": 188,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_d8e97f01d0c6aea4bbf7eb4ac54425c19ce4999169f4b59ed84bad69294d0030",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 163,
+      "reasoning_tokens": 4916,
+      "final_tokens": 149,
+      "flags": [
+        "repeated_indecision: 57 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 57 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_5631",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 434,
+      "final_tokens": 67,
+      "flags": [],
+      "disposition_reason": "needs_noise_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "ordinary_5_49",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 79,
+      "final_tokens": 787,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_766",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 1543,
+      "final_tokens": 242,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_3cc9ef2e2b69aebd77ed2283a473e10e96fa9d42f9ed58dfdd2fb8840cead9db",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 116,
+      "final_tokens": 1002,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7055",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 4019,
+      "final_tokens": 268,
+      "flags": [
+        "repeated_indecision: 16 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 16 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3605",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 2435,
+      "final_tokens": 241,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_760",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 88,
+      "reasoning_tokens": 1112,
+      "final_tokens": 331,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5905",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 86,
+      "reasoning_tokens": 3546,
+      "final_tokens": 391,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_70b85a9d6ee8e4025d63010c6d7c91db597e070a176c0adc2298ddfdad6ad11b",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 219,
+      "reasoning_tokens": 1082,
+      "final_tokens": 100,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_236",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 1080,
+      "final_tokens": 199,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_12",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 1111,
+      "final_tokens": 26,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3727",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 1108,
+      "final_tokens": 130,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4639",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 1433,
+      "final_tokens": 263,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_403",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 997,
+      "final_tokens": 273,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1758",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 77,
+      "reasoning_tokens": 2910,
+      "final_tokens": 279,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4009",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 2870,
+      "final_tokens": 208,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3478",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 56,
+      "reasoning_tokens": 855,
+      "final_tokens": 164,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3691",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 1098,
+      "final_tokens": 218,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4539",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 36,
+      "reasoning_tokens": 660,
+      "final_tokens": 244,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6147",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 22,
+      "reasoning_tokens": 1418,
+      "final_tokens": 69,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_2_31",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 4112,
+      "final_tokens": 38,
+      "flags": [
+        "repeated_indecision: 21 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 21 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 101,
+      "reasoning_tokens": 796,
+      "final_tokens": 533,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_50",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 432,
+      "final_tokens": 54,
+      "flags": [],
+      "disposition_reason": "needs_noise_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "no_robots_172b24264341844d64bd7afb34b2f7fb1470fa9eac52666d4a31524bf52bc7eb",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 186,
+      "reasoning_tokens": 1696,
+      "final_tokens": 44,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1440",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 964,
+      "final_tokens": 193,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4027",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 81,
+      "reasoning_tokens": 1204,
+      "final_tokens": 355,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3642",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 1317,
+      "final_tokens": 126,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1671",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 82,
+      "reasoning_tokens": 2965,
+      "final_tokens": 368,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1802",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "flags": [
+        "API error/no choices"
+      ],
+      "group": "incomplete_or_invalid"
+    },
+    {
+      "id": "gsm_train_7152",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 1919,
+      "final_tokens": 229,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_0_16",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 184,
+      "final_tokens": 562,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_27ae7e930df1b412a0e175768c8a48bd6293627b6518922e15ee83a0dbf24c59",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 95,
+      "final_tokens": 959,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2464",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 102,
+      "flags": [
+        "API error/no choices"
+      ],
+      "group": "incomplete_or_invalid"
+    },
+    {
+      "id": "gsm_train_4454",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 922,
+      "final_tokens": 170,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1844",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 1483,
+      "final_tokens": 186,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6353",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 80,
+      "reasoning_tokens": 1104,
+      "final_tokens": 210,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_38",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 115,
+      "final_tokens": 612,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4082",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 1029,
+      "final_tokens": 144,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7176",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 2790,
+      "final_tokens": 223,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_ce61fc37f4b5b49f2eb56a656786998e573b3f9d1b1dfc694533a0cb8dccee12",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 10,
+      "reasoning_tokens": 116,
+      "final_tokens": 1213,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7442",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 88,
+      "reasoning_tokens": 733,
+      "final_tokens": 160,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5541",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 50,
+      "reasoning_tokens": 4916,
+      "final_tokens": 236,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2468",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "flags": [
+        "API error/no choices"
+      ],
+      "group": "incomplete_or_invalid"
+    },
+    {
+      "id": "gsm_train_7114",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 727,
+      "final_tokens": 111,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_213cc8af5b6e211c5dec5aeb05b814dc3d50e24cbb0b66032a87ae0954838dfd",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 170,
+      "reasoning_tokens": 1117,
+      "final_tokens": 56,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6521",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 84,
+      "reasoning_tokens": 4916,
+      "final_tokens": 428,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2878",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 81,
+      "reasoning_tokens": 2149,
+      "final_tokens": 190,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7170",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 747,
+      "final_tokens": 158,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_dedbf59bbf7a58bb793544f5ba97a542f2655d7a59abdcc1a372acfc0b00a44f",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 122,
+      "reasoning_tokens": 963,
+      "final_tokens": 28,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_1_50",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 18,
+      "reasoning_tokens": 4916,
+      "final_tokens": 615,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1314",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 1242,
+      "final_tokens": 225,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7131",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 96,
+      "reasoning_tokens": 4916,
+      "final_tokens": 391,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2335",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1057,
+      "final_tokens": 147,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3870",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 1250,
+      "final_tokens": 167,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 214,
+      "reasoning_tokens": 844,
+      "final_tokens": 172,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6773",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 1087,
+      "final_tokens": 183,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6967",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 706,
+      "final_tokens": 174,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_559",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 63,
+      "reasoning_tokens": 1697,
+      "final_tokens": 473,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1798",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 918,
+      "final_tokens": 144,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_3fd763826953dbc18ab30424fed1cfb2ab68baf5448f49ab19c586a949bc8891",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 127,
+      "final_tokens": 368,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4466",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 98,
+      "flags": [
+        "API error/no choices"
+      ],
+      "group": "incomplete_or_invalid"
+    },
+    {
+      "id": "gsm_train_1141",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 63,
+      "reasoning_tokens": 3091,
+      "final_tokens": 169,
+      "flags": [
+        "repeated_indecision: 11 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 11 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_401",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 584,
+      "final_tokens": 141,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_0ab5f75ae3085d6acffbf4467dfd87b84b998092ad5c49085d91615cde3bd332",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 125,
+      "final_tokens": 448,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1107",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 4916,
+      "final_tokens": 288,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_11",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 469,
+      "final_tokens": 53,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2623",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 120,
+      "reasoning_tokens": 4916,
+      "final_tokens": 503,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4045",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 4913,
+      "final_tokens": 533,
+      "flags": [
+        "repeated_indecision: 11 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 11 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_13c4168688ad30b7b0769c6047b7b30872a3594eb760d52003755c8539ac4f65",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 25,
+      "reasoning_tokens": 628,
+      "final_tokens": 726,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1367",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 1463,
+      "final_tokens": 353,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2640",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 3506,
+      "final_tokens": 270,
+      "flags": [],
+      "disposition_reason": "needs_reasoning_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "gsm_train_1773",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 81,
+      "reasoning_tokens": 641,
+      "final_tokens": 116,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6100",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 1587,
+      "final_tokens": 86,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4861",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 1479,
+      "final_tokens": 127,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4255",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 983,
+      "final_tokens": 185,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2467",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 522,
+      "final_tokens": 78,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_1_17",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 18,
+      "reasoning_tokens": 1104,
+      "final_tokens": 243,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4293",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 844,
+      "final_tokens": 282,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5064",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 902,
+      "final_tokens": 321,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5060",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 720,
+      "final_tokens": 136,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_2_30",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 2440,
+      "final_tokens": 35,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6448",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 995,
+      "final_tokens": 238,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6770",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 75,
+      "reasoning_tokens": 1025,
+      "final_tokens": 218,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2269",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 126,
+      "reasoning_tokens": 3108,
+      "final_tokens": 574,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3687",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 725,
+      "final_tokens": 187,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_99bcd4b4b08dc5da984e4ea9c15eebf847ae14ca8a533ace9916caace00645c1",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 1660,
+      "final_tokens": 5,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2772",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 686,
+      "final_tokens": 138,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_4de19c1d0d05e32e95ed9f24714bca0fbcbcbec3ddc1247532281549ed9f7063",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 872,
+      "final_tokens": 588,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2434",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 60,
+      "reasoning_tokens": 2956,
+      "final_tokens": 346,
+      "flags": [
+        "repeated_indecision: 24 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 24 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_27b2047cd538080440dde5a4609d1d8df8a53f35aec4dae5a2833ddae06391f1",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 155,
+      "reasoning_tokens": 643,
+      "final_tokens": 97,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2506",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 420,
+      "final_tokens": 66,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7408",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 62,
+      "reasoning_tokens": 4915,
+      "final_tokens": 437,
+      "flags": [
+        "repeated_indecision: 19 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 19 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3994",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1018,
+      "final_tokens": 241,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2340",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 103,
+      "reasoning_tokens": 2294,
+      "final_tokens": 355,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3631",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 65,
+      "reasoning_tokens": 2982,
+      "final_tokens": 284,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_88c016d8b6cee7a5fb258907ea8c6c96942245ff1e2b358d5396d9b45b736473",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 194,
+      "final_tokens": 821,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_351",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 960,
+      "final_tokens": 166,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2931",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 2119,
+      "final_tokens": 211,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_a591d0f2e72e2b0ed05b5391f97d6a4caa510c8257a6f8594e7cb1004980dc2c",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 157,
+      "final_tokens": 273,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_6fad33b7c589d56e3c096c3a5098522333716602312111d44b80e92844502b40",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 145,
+      "final_tokens": 959,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6708",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 63,
+      "reasoning_tokens": 816,
+      "final_tokens": 169,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_276",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 2115,
+      "final_tokens": 259,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1182",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 1346,
+      "final_tokens": 289,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_1_40",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 18,
+      "reasoning_tokens": 4915,
+      "final_tokens": 541,
+      "flags": [
+        "repeated_indecision: 12 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 12 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_6be6d92863345e62eb1fd74f660180c7f59c6033f334863a9305b4623ad25bb7",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 163,
+      "reasoning_tokens": 1125,
+      "final_tokens": 55,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1002",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 878,
+      "final_tokens": 251,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4298",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 69,
+      "reasoning_tokens": 822,
+      "final_tokens": 185,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1612",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 1353,
+      "final_tokens": 263,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_8e43a6b57c057830f8a2dfff26539f91ecc6a2390dd98455358cbfe6f9111418",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 22,
+      "reasoning_tokens": 53,
+      "final_tokens": 430,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_10",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 76,
+      "reasoning_tokens": 2500,
+      "final_tokens": 314,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4627",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 87,
+      "reasoning_tokens": 929,
+      "final_tokens": 220,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7065",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 85,
+      "reasoning_tokens": 1204,
+      "final_tokens": 170,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5839",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 657,
+      "final_tokens": 151,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4053",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 87,
+      "reasoning_tokens": 1189,
+      "final_tokens": 288,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_462c064896095ea1c9ae857e384f43200511953eaa16dbc4d0d9316545e4442d",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 87,
+      "reasoning_tokens": 2592,
+      "final_tokens": 281,
+      "flags": [
+        "repeated_indecision: 17 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 17 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2666",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 650,
+      "final_tokens": 135,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_bd957ec2c6f855aacba55ff17ebbaea0e701e2aa40047c1ac7726918f181f8aa",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 140,
+      "final_tokens": 491,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1991",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 86,
+      "reasoning_tokens": 4916,
+      "final_tokens": 476,
+      "flags": [
+        "repeated_indecision: 12 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 12 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_515",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 95,
+      "reasoning_tokens": 1132,
+      "final_tokens": 353,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5296",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 1602,
+      "final_tokens": 177,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_2e5a80e78720b0d64523e0618acf2fb5935cfee4a8fbc4f30a2c2fa145a22f67",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 181,
+      "reasoning_tokens": 853,
+      "final_tokens": 144,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_7e112fb558f4744d62a736d77dedecf7c62da7bbf09041268cbb4a5813b5ad48",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 430,
+      "reasoning_tokens": 2767,
+      "final_tokens": 1966,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_7a3e05a015b3484ca089a59ec3e305c547cc7be816afa6637c2271c4752e7525",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 154,
+      "reasoning_tokens": 468,
+      "final_tokens": 813,
+      "flags": [],
+      "disposition_reason": "needs_factual_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "gsm_train_4105",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 718,
+      "final_tokens": 81,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5328",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 77,
+      "flags": [
+        "Incomplete/refused reply (finish_reason=length)"
+      ],
+      "reasoning_tokens": 4916,
+      "final_tokens": 3274,
+      "group": "incomplete_or_invalid"
+    },
+    {
+      "id": "no_robots_f649bfe375aa7b3419220b0ff36354919405763c2244d69566d578924c57bcf1",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 228,
+      "reasoning_tokens": 1058,
+      "final_tokens": 546,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_5_40",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 119,
+      "final_tokens": 1025,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6712",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 109,
+      "reasoning_tokens": 4916,
+      "final_tokens": 290,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_110",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 3819,
+      "final_tokens": 252,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4973",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 4916,
+      "final_tokens": 398,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_1358",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 1095,
+      "final_tokens": 254,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6374",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 3941,
+      "final_tokens": 244,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1861",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 751,
+      "final_tokens": 142,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_28",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 674,
+      "final_tokens": 54,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5891",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 1087,
+      "final_tokens": 211,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5108",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 700,
+      "final_tokens": 193,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4288",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 819,
+      "final_tokens": 111,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4723",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 56,
+      "reasoning_tokens": 2605,
+      "final_tokens": 179,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4713",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 1371,
+      "final_tokens": 188,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_914",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 3873,
+      "final_tokens": 266,
+      "flags": [
+        "repeated_indecision: 11 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 11 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_4020",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 1235,
+      "final_tokens": 267,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_628",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 1374,
+      "final_tokens": 153,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_4deaa4838149914dfea0279bfcd9bd2afb5226363b6dbd95261c148a45fd7fdc",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 148,
+      "reasoning_tokens": 3613,
+      "final_tokens": 30,
+      "flags": [
+        "repeated_indecision: 14 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 14 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 818,
+      "final_tokens": 219,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_4ad12299763eb5d5863bf903d5ceff5554f443dc0840871894fbaa708351a22d",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 150,
+      "reasoning_tokens": 1268,
+      "final_tokens": 277,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1518",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 50,
+      "reasoning_tokens": 1204,
+      "final_tokens": 222,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3200",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 1646,
+      "final_tokens": 192,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_200a1015acae12ab23bb2ee836980ace9b80db5bb4e08bf2bd3dd9f3f87010b2",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 15,
+      "reasoning_tokens": 102,
+      "final_tokens": 1309,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4390",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 831,
+      "final_tokens": 180,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_7_43",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 242,
+      "final_tokens": 313,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_686",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 679,
+      "final_tokens": 77,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_1_30",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 18,
+      "reasoning_tokens": 3364,
+      "final_tokens": 434,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_6642",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 95,
+      "reasoning_tokens": 1123,
+      "final_tokens": 157,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_7",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 104,
+      "final_tokens": 370,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_a297213dc99860b9b62741f87e3e9a38e165e92f3949a7aa81d9cbedfea4ad01",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 10,
+      "reasoning_tokens": 91,
+      "final_tokens": 625,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6392",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 105,
+      "reasoning_tokens": 3152,
+      "final_tokens": 369,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_208",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 933,
+      "final_tokens": 173,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2361",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 572,
+      "final_tokens": 93,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_79",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 307,
+      "final_tokens": 53,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5074",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 686,
+      "final_tokens": 175,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5030",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 573,
+      "final_tokens": 83,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2995",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 808,
+      "final_tokens": 234,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6386",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 396,
+      "final_tokens": 77,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1276",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 837,
+      "final_tokens": 141,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4862",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1273,
+      "final_tokens": 165,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_7_6",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 162,
+      "final_tokens": 339,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3209",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 62,
+      "reasoning_tokens": 4307,
+      "final_tokens": 223,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_ccae548aaa29b743725b1bfe2b395a2421b16af752f1058c9e78d68e34d7400c",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 244,
+      "final_tokens": 449,
+      "flags": [],
+      "disposition_reason": "needs_factual_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "gsm_train_3186",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 100,
+      "reasoning_tokens": 2258,
+      "final_tokens": 179,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_4800",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 796,
+      "final_tokens": 191,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1833",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 1059,
+      "final_tokens": 180,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7267",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 495,
+      "final_tokens": 86,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7180",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 591,
+      "final_tokens": 129,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3011",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 1244,
+      "final_tokens": 280,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1357",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 62,
+      "reasoning_tokens": 1753,
+      "final_tokens": 159,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_784",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 76,
+      "reasoning_tokens": 672,
+      "final_tokens": 189,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1881",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 675,
+      "final_tokens": 84,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_932",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 1254,
+      "final_tokens": 200,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_38b0e73ee19440c6aea3a5b22b60281bbae0d188265e235f7aa544f296342ebe",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 127,
+      "final_tokens": 419,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4610",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 109,
+      "reasoning_tokens": 4915,
+      "final_tokens": 371,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2229",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 56,
+      "reasoning_tokens": 761,
+      "final_tokens": 181,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_5_25",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 94,
+      "final_tokens": 1183,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2159",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 326,
+      "final_tokens": 76,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_26d425b244bf3578a61a78fe2c0de4eaa2553baded773e3a12d8ca8cc7559abc",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 153,
+      "final_tokens": 496,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_495",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 2631,
+      "final_tokens": 328,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7189",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 703,
+      "final_tokens": 170,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4850",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 1112,
+      "final_tokens": 258,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_1_33",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 18,
+      "reasoning_tokens": 4916,
+      "final_tokens": 287,
+      "flags": [
+        "repeated_indecision: 12 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 12 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_1846",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 70,
+      "reasoning_tokens": 909,
+      "final_tokens": 178,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5163",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 806,
+      "final_tokens": 144,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6929",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 1030,
+      "final_tokens": 174,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4993",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 1434,
+      "final_tokens": 92,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1055",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 981,
+      "final_tokens": 167,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_529",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 3820,
+      "final_tokens": 309,
+      "flags": [
+        "repeated_indecision: 11 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 11 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_153a459d43f18a960ca207f94d6e2b9968198d7854d78680df18ca5ed25b6202",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 296,
+      "reasoning_tokens": 775,
+      "final_tokens": 57,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1948",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 86,
+      "reasoning_tokens": 750,
+      "final_tokens": 157,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4721",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 797,
+      "final_tokens": 125,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5443",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 1016,
+      "final_tokens": 208,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_c33cd70ab557a9740d165e83c8b6cd66e1522b67fb3fe22036c57f88527f4ba8",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 182,
+      "reasoning_tokens": 1683,
+      "final_tokens": 91,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_1c6a0d3acef3baf54a5b850b552102cc6986153c2b524e4de29f66af4109325c",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 216,
+      "reasoning_tokens": 1719,
+      "final_tokens": 112,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_6aaebdc51d5e141024a8c5107b2b7293485630b9ace082923e69b5f8103fd04e",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 229,
+      "reasoning_tokens": 1961,
+      "final_tokens": 65,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4355",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 1276,
+      "final_tokens": 217,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6627",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 1115,
+      "final_tokens": 273,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_0_48",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 143,
+      "final_tokens": 381,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6236",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 1158,
+      "final_tokens": 223,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_0f4d9be64157c3eb663ac01eaf296e05a0ce9dc2a27cd481cc62ee20f4a44350",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 12,
+      "reasoning_tokens": 115,
+      "final_tokens": 679,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5073",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 94,
+      "reasoning_tokens": 996,
+      "final_tokens": 160,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_25bb6d6b632d48faa9a7d6aff0f9cba25ae3bddfdb63320b79528553a57a9040",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 199,
+      "reasoning_tokens": 4232,
+      "final_tokens": 57,
+      "flags": [
+        "repeated_indecision: 28 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 28 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_4593",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 1456,
+      "final_tokens": 270,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_1_43",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 18,
+      "reasoning_tokens": 4916,
+      "final_tokens": 361,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_5509",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 764,
+      "final_tokens": 163,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_449",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1067,
+      "final_tokens": 189,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_548",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 2946,
+      "final_tokens": 278,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2847",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 110,
+      "reasoning_tokens": 4680,
+      "final_tokens": 172,
+      "flags": [
+        "repeated_indecision: 15 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 15 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2071",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 952,
+      "final_tokens": 163,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1059",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 1111,
+      "final_tokens": 107,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6068",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 1980,
+      "final_tokens": 265,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_2_42",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 3313,
+      "final_tokens": 59,
+      "flags": [
+        "repeated_indecision: 30 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 30 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_8a3d206f9b7e7d51653d0ac485f39af0ea186ef6be95e8009b5136a031786a57",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 172,
+      "reasoning_tokens": 1578,
+      "final_tokens": 71,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5770",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 853,
+      "final_tokens": 177,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3484",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 2315,
+      "final_tokens": 262,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2606",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 821,
+      "final_tokens": 117,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5265",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 1713,
+      "final_tokens": 274,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4929",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 50,
+      "reasoning_tokens": 845,
+      "final_tokens": 217,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1770",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 63,
+      "reasoning_tokens": 1462,
+      "final_tokens": 261,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5999",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 4916,
+      "final_tokens": 223,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_5_30",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 119,
+      "final_tokens": 1152,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_841",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 1206,
+      "final_tokens": 259,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_d895b205093d781a318d467498e9a05b08a5ec7403171cc8fc2b2fefcdc4ad8f",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 139,
+      "reasoning_tokens": 583,
+      "final_tokens": 55,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5971",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 4916,
+      "final_tokens": 375,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_e8e1c2f18c41c9ccac6d136dc9d68c266793dc933f61a58146486dda13a6b1fb",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 10,
+      "reasoning_tokens": 76,
+      "final_tokens": 672,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6479",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 861,
+      "final_tokens": 180,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3294",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 731,
+      "final_tokens": 160,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7328",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 106,
+      "reasoning_tokens": 1233,
+      "final_tokens": 277,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5388",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 853,
+      "final_tokens": 151,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_868",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "flags": [
+        "Incomplete/refused reply (finish_reason=length)"
+      ],
+      "reasoning_tokens": 4916,
+      "final_tokens": 3272,
+      "group": "incomplete_or_invalid"
+    },
+    {
+      "id": "ordinary_7_46",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 207,
+      "final_tokens": 265,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5828",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 104,
+      "reasoning_tokens": 1013,
+      "final_tokens": 95,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5685",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 36,
+      "reasoning_tokens": 3048,
+      "final_tokens": 193,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_465",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 101,
+      "reasoning_tokens": 4916,
+      "final_tokens": 396,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6608",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 92,
+      "reasoning_tokens": 1335,
+      "final_tokens": 285,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6339",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 105,
+      "reasoning_tokens": 4916,
+      "final_tokens": 367,
+      "flags": [
+        "repeated_indecision: 15 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 15 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3033",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 4915,
+      "final_tokens": 146,
+      "flags": [],
+      "disposition_reason": "reject_repeated_rechecking",
+      "group": "semantic_rejected"
+    },
+    {
+      "id": "no_robots_548e41a8c5e9e27f2b2934bc225e26259966b70f6881f5327e181760fa5dc76c",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 86,
+      "final_tokens": 868,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_467e85bbe8945f7e824798db64b224da75b95a88e63f980f6b89134826333a49",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 202,
+      "reasoning_tokens": 486,
+      "final_tokens": 31,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6705",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 2024,
+      "final_tokens": 319,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_7_19",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 271,
+      "final_tokens": 250,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4024",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 924,
+      "final_tokens": 144,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5306",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 1616,
+      "final_tokens": 156,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5942",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 1009,
+      "final_tokens": 117,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7257",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 1567,
+      "final_tokens": 227,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7455",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 119,
+      "reasoning_tokens": 1818,
+      "final_tokens": 277,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7261",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 134,
+      "reasoning_tokens": 2242,
+      "final_tokens": 280,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2598",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 936,
+      "final_tokens": 133,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_437",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 1025,
+      "final_tokens": 257,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_5",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 95,
+      "final_tokens": 332,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_5_14",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 119,
+      "final_tokens": 701,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5170",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 1180,
+      "final_tokens": 216,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7061",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 2999,
+      "final_tokens": 167,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2204",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 36,
+      "reasoning_tokens": 4916,
+      "final_tokens": 152,
+      "flags": [
+        "repeated_indecision: 20 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 20 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2347",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 1341,
+      "final_tokens": 174,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_4",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 104,
+      "final_tokens": 410,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_603",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 553,
+      "final_tokens": 97,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3128",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 654,
+      "final_tokens": 122,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3757",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 974,
+      "final_tokens": 161,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6396",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 775,
+      "final_tokens": 148,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1369",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 68,
+      "reasoning_tokens": 2342,
+      "final_tokens": 393,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_ed38ac137b68c6fcf71b56b6e88aba88cbb075aa6596a46a0afc9c4ceb7cab89",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 182,
+      "reasoning_tokens": 1001,
+      "final_tokens": 101,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6945",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 761,
+      "final_tokens": 126,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2919",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 1051,
+      "final_tokens": 268,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4404",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 863,
+      "final_tokens": 116,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3314",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 847,
+      "final_tokens": 159,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2960",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 1221,
+      "final_tokens": 118,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_75afed0c0337e9ac694662896610e61149dab1227a554e2dd3ee9f66b2b41b4d",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 211,
+      "reasoning_tokens": 273,
+      "final_tokens": 23,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3067",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 65,
+      "reasoning_tokens": 752,
+      "final_tokens": 209,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6088",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 1017,
+      "final_tokens": 161,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_e88c5adc06989a1498eee7d73bbec27541e55003158cadf790190875ad9fd52e",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 19,
+      "reasoning_tokens": 201,
+      "final_tokens": 603,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2535",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 704,
+      "final_tokens": 161,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_631",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 1145,
+      "final_tokens": 257,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_9561c34dd86d6fb210622cfe808975268c6d939e8e99360bae9ae45b6a191373",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 183,
+      "reasoning_tokens": 4717,
+      "final_tokens": 11,
+      "flags": [
+        "repeated_indecision: 26 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 26 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_0_29",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 129,
+      "final_tokens": 475,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2173",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 1366,
+      "final_tokens": 99,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2314",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 1096,
+      "final_tokens": 139,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5034",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 433,
+      "final_tokens": 111,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_0fd27a4eba60317dc2ef6f1e4a90346ba86f73c6c82ca8cbbcf3855593e1a09b",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 206,
+      "reasoning_tokens": 482,
+      "final_tokens": 51,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4360",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 83,
+      "reasoning_tokens": 1108,
+      "final_tokens": 212,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_33",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 582,
+      "final_tokens": 52,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3534",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 978,
+      "final_tokens": 302,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4124",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 1298,
+      "final_tokens": 241,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5414",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 50,
+      "reasoning_tokens": 720,
+      "final_tokens": 147,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4323",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1026,
+      "final_tokens": 144,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5226",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 743,
+      "final_tokens": 182,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2710",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 779,
+      "final_tokens": 88,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_360",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 2337,
+      "final_tokens": 319,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4708",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 251,
+      "final_tokens": 68,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_6",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 114,
+      "final_tokens": 331,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3395",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 4916,
+      "final_tokens": 339,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_2e7f299af2175d09a9c8b8e6742bea1e0f63f2bc5d61d8ae695aa24b4ed32c3a",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 158,
+      "final_tokens": 1410,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_937",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 56,
+      "reasoning_tokens": 605,
+      "final_tokens": 81,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5478",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 922,
+      "final_tokens": 277,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5681",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 836,
+      "final_tokens": 177,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3604",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 4913,
+      "final_tokens": 318,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_353a021340b7fbfc9a8188ba705f488e4209e3bfc20f252d2d3129ffc3cfa876",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 179,
+      "reasoning_tokens": 597,
+      "final_tokens": 65,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1297",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 959,
+      "final_tokens": 145,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_5_6",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 139,
+      "final_tokens": 677,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3513",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 1519,
+      "final_tokens": 174,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4823",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 1711,
+      "final_tokens": 178,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_681",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 1947,
+      "final_tokens": 106,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_0_14",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 185,
+      "final_tokens": 844,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2810",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 510,
+      "final_tokens": 126,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_26",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 1277,
+      "final_tokens": 30,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1584",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 86,
+      "reasoning_tokens": 1505,
+      "final_tokens": 330,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4868",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 114,
+      "reasoning_tokens": 4916,
+      "final_tokens": 400,
+      "flags": [
+        "repeated_indecision: 15 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 15 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_6421",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 68,
+      "reasoning_tokens": 962,
+      "final_tokens": 219,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_200",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 77,
+      "reasoning_tokens": 1102,
+      "final_tokens": 197,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_7",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 713,
+      "final_tokens": 51,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6381",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 903,
+      "final_tokens": 158,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6728",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 2002,
+      "final_tokens": 145,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_2bda254fdbb62add1bc5fd37f7423dfb84c9423169a7ad836dff415572dbd75a",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 74,
+      "reasoning_tokens": 132,
+      "final_tokens": 499,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_b4b310f1f41d06a1db940e1ad1a2e886d1e6197249eb27df3106b465b706abd0",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 217,
+      "reasoning_tokens": 4914,
+      "final_tokens": 34,
+      "flags": [
+        "repeated_indecision: 79 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 79 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3789",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 1921,
+      "final_tokens": 355,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_7_33",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 220,
+      "final_tokens": 197,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1932",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 1126,
+      "final_tokens": 140,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_40",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 442,
+      "final_tokens": 53,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_d250e7285434877a433f49ef55ac8662877bbed322f6c80f498229af6af46a34",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 9,
+      "reasoning_tokens": 105,
+      "final_tokens": 779,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3367",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 2168,
+      "final_tokens": 232,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_255",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 480,
+      "final_tokens": 115,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_0cf31876d6e5f2cd48c88fc66bba5cc4400eef684b1512df0b45f6db71a77b4f",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 125,
+      "reasoning_tokens": 1473,
+      "final_tokens": 31,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_134",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 1905,
+      "final_tokens": 233,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3408",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 69,
+      "reasoning_tokens": 3430,
+      "final_tokens": 403,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2265",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 80,
+      "reasoning_tokens": 4104,
+      "final_tokens": 209,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_6128",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 786,
+      "final_tokens": 247,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6942",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 1240,
+      "final_tokens": 215,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_440",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 864,
+      "final_tokens": 189,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_2_41",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 2682,
+      "final_tokens": 55,
+      "flags": [
+        "repeated_indecision: 16 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 16 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_6_46",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 2046,
+      "final_tokens": 38,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3356",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 1111,
+      "final_tokens": 146,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4705",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 722,
+      "final_tokens": 143,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5141",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 69,
+      "reasoning_tokens": 1043,
+      "final_tokens": 217,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_26",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 106,
+      "final_tokens": 431,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1291",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 2936,
+      "final_tokens": 92,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_17",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 121,
+      "final_tokens": 501,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_d7338f679e551f9f1f8e7ac95ebbb0fce105f951ad4c4b00d633cb179ec50f9e",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 84,
+      "reasoning_tokens": 342,
+      "final_tokens": 18,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7450",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 80,
+      "reasoning_tokens": 3914,
+      "final_tokens": 261,
+      "flags": [
+        "repeated_indecision: 12 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 12 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3447",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 3192,
+      "final_tokens": 209,
+      "flags": [
+        "repeated_indecision: 13 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 13 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_6_39",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 1069,
+      "final_tokens": 33,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3696",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 4916,
+      "final_tokens": 358,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_29",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 1383,
+      "final_tokens": 441,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7235",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 4052,
+      "final_tokens": 285,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4338",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 635,
+      "final_tokens": 127,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_700bb58e3cee10aa1f8359c8f98fc67c50e0199738db53674c15c533d702338a",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 238,
+      "reasoning_tokens": 923,
+      "final_tokens": 63,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1501",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 1244,
+      "final_tokens": 235,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4879",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 774,
+      "final_tokens": 212,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7075",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 1157,
+      "final_tokens": 145,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4426",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 4351,
+      "final_tokens": 358,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_518f9b985b24a9901573495046d89488cc59acdf1e259beaa6a96bf4082c0c31",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 114,
+      "reasoning_tokens": 743,
+      "final_tokens": 116,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2094",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 467,
+      "final_tokens": 93,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3971",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 60,
+      "reasoning_tokens": 881,
+      "final_tokens": 288,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5949",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 83,
+      "reasoning_tokens": 3316,
+      "final_tokens": 350,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5235",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 75,
+      "reasoning_tokens": 954,
+      "final_tokens": 163,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3500",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 22,
+      "reasoning_tokens": 468,
+      "final_tokens": 117,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7281",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 732,
+      "final_tokens": 160,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1970",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 843,
+      "final_tokens": 184,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_a8366071edf0f498dbc9e73aa0da8e25c215d58f78945e02079074b6342fec1b",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 209,
+      "reasoning_tokens": 893,
+      "final_tokens": 148,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_92c2f9dd3e8248bbaaef3245ac4537d9af0ab62dd241dbd8c02a28095c1ba542",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 171,
+      "reasoning_tokens": 497,
+      "final_tokens": 43,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_61",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 100,
+      "reasoning_tokens": 4916,
+      "final_tokens": 364,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7119",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 80,
+      "reasoning_tokens": 894,
+      "final_tokens": 174,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3082",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 755,
+      "final_tokens": 134,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_24",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 1215,
+      "final_tokens": 34,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_21",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 987,
+      "final_tokens": 42,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3239",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 64,
+      "reasoning_tokens": 4916,
+      "final_tokens": 177,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_516",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 3744,
+      "final_tokens": 200,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5072",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 30,
+      "reasoning_tokens": 529,
+      "final_tokens": 78,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3035",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 602,
+      "final_tokens": 107,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6554",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 65,
+      "reasoning_tokens": 4916,
+      "final_tokens": 239,
+      "flags": [
+        "repeated_indecision: 12 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 12 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_838",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 2658,
+      "final_tokens": 171,
+      "flags": [
+        "repeated_indecision: 14 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 14 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_5337",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 4916,
+      "final_tokens": 303,
+      "flags": [
+        "repeated_indecision: 19 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 19 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3992",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 1116,
+      "final_tokens": 191,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4119",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 941,
+      "final_tokens": 229,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3426",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 1969,
+      "final_tokens": 277,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6039",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 859,
+      "final_tokens": 146,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_607",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 1290,
+      "final_tokens": 232,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6217",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 998,
+      "final_tokens": 230,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_2_38",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 3707,
+      "final_tokens": 27,
+      "flags": [
+        "repeated_indecision: 23 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 23 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_7117",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 69,
+      "reasoning_tokens": 3478,
+      "final_tokens": 208,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_6c14e9018eba229db4ac3e633f72ece7248213f87ac2f80e822cf076aa6555a1",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 127,
+      "reasoning_tokens": 488,
+      "final_tokens": 34,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_5a53b61c06cfb11033fc7adea69160c0523216de13e89e55c5bcd5805a77a1e1",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 228,
+      "final_tokens": 666,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7309",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 2115,
+      "final_tokens": 194,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6488",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 4915,
+      "final_tokens": 479,
+      "flags": [
+        "repeated_indecision: 11 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 11 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_4527",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 1086,
+      "final_tokens": 172,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5342",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 783,
+      "final_tokens": 155,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2821",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 751,
+      "final_tokens": 128,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_749",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 885,
+      "final_tokens": 111,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_9cdd2d4648a01b28208eabfc051fd838f3d9acabc0297a3e34d8f835414bc563",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 339,
+      "final_tokens": 370,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_277",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1939,
+      "final_tokens": 137,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_84716925bc351dfccdb9b0c9e9356657cedff890c23828ab875bce0af6849ff9",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 217,
+      "reasoning_tokens": 781,
+      "final_tokens": 26,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4568",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 4916,
+      "final_tokens": 224,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_b18a73c68f567515f50f705fb99204cc444721b5006db03ec64acf9a2643f1cc",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 150,
+      "reasoning_tokens": 402,
+      "final_tokens": 39,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7169",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 49,
+      "reasoning_tokens": 748,
+      "final_tokens": 113,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_0_23",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 135,
+      "final_tokens": 749,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3470",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 996,
+      "final_tokens": 99,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6094",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 4042,
+      "final_tokens": 311,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_6769",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 809,
+      "final_tokens": 142,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1848",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 70,
+      "reasoning_tokens": 801,
+      "final_tokens": 176,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3471",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 1531,
+      "final_tokens": 210,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4757",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 68,
+      "reasoning_tokens": 896,
+      "final_tokens": 276,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_958",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 4207,
+      "final_tokens": 198,
+      "flags": [
+        "repeated_indecision: 11 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 11 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2989",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 84,
+      "reasoning_tokens": 3798,
+      "final_tokens": 217,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_7034",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 71,
+      "reasoning_tokens": 920,
+      "final_tokens": 136,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4216",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 65,
+      "reasoning_tokens": 1086,
+      "final_tokens": 141,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_54397d7becaeec1d1ba1ed963546003e746709cb432763d62569cd59f7a72590",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 233,
+      "reasoning_tokens": 990,
+      "final_tokens": 82,
+      "flags": [],
+      "disposition_reason": "needs_noise_repair",
+      "group": "held_for_repair"
+    },
+    {
+      "id": "gsm_train_5200",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 619,
+      "final_tokens": 159,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5945",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 3767,
+      "final_tokens": 172,
+      "flags": [
+        "repeated_indecision: 13 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 13 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2016",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 1155,
+      "final_tokens": 239,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4462",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 31,
+      "reasoning_tokens": 887,
+      "final_tokens": 85,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_d7ae8b9ba1816add3a6c3b5c159b96b7df276dbea8582df59dce70b9db30830a",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 127,
+      "reasoning_tokens": 796,
+      "final_tokens": 128,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_90f690cfe8d6505a9551363f16cc2871c6d97ad2fe547ea58a693f64b0047d5b",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 103,
+      "reasoning_tokens": 550,
+      "final_tokens": 409,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2895",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 62,
+      "reasoning_tokens": 731,
+      "final_tokens": 177,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_2_23",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 2901,
+      "final_tokens": 34,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_6442",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 731,
+      "final_tokens": 204,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4845",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 70,
+      "reasoning_tokens": 1005,
+      "final_tokens": 195,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5236",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 584,
+      "final_tokens": 81,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_814e2cd4f896284b1ea95c977e3cfa9ade370b691537df8f4eb30553e8fff3fb",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 116,
+      "final_tokens": 807,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1845",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 69,
+      "reasoning_tokens": 1141,
+      "final_tokens": 203,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1721",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 890,
+      "final_tokens": 143,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2161",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 172,
+      "reasoning_tokens": 4916,
+      "final_tokens": 296,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2933",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 816,
+      "final_tokens": 132,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2654",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 799,
+      "final_tokens": 166,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_60ddddd5f5236e6bad64cab53b9ded3de93e0a1794fac3b9edadc2e7559480d0",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 78,
+      "reasoning_tokens": 965,
+      "final_tokens": 576,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1384",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 53,
+      "reasoning_tokens": 834,
+      "final_tokens": 148,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3432",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 830,
+      "final_tokens": 162,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2481",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 969,
+      "final_tokens": 127,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3638",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 910,
+      "final_tokens": 200,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4085",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 4800,
+      "final_tokens": 251,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_79b780e48bc508d0ad9588feb5f64ea4a28e003a2ff07607afe19a9279c3e94c",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 194,
+      "reasoning_tokens": 1004,
+      "final_tokens": 32,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_387",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 75,
+      "reasoning_tokens": 850,
+      "final_tokens": 265,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2418",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 432,
+      "final_tokens": 112,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2974",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 87,
+      "reasoning_tokens": 3414,
+      "final_tokens": 300,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2779",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 1060,
+      "final_tokens": 121,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6817",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 62,
+      "reasoning_tokens": 1233,
+      "final_tokens": 286,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7463",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 980,
+      "final_tokens": 256,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1741",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 925,
+      "final_tokens": 106,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6026",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 1525,
+      "final_tokens": 222,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6300",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 1318,
+      "final_tokens": 264,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_116",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 100,
+      "reasoning_tokens": 1199,
+      "final_tokens": 290,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6406",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 56,
+      "reasoning_tokens": 1165,
+      "final_tokens": 182,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3927",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 1910,
+      "final_tokens": 268,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2570",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 33,
+      "reasoning_tokens": 1564,
+      "final_tokens": 201,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1529",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 625,
+      "final_tokens": 129,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3327",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 935,
+      "final_tokens": 196,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3030",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 1426,
+      "final_tokens": 365,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4110",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 604,
+      "final_tokens": 90,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2590",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 93,
+      "reasoning_tokens": 4916,
+      "final_tokens": 310,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_2_37",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 34,
+      "reasoning_tokens": 3649,
+      "final_tokens": 30,
+      "flags": [
+        "repeated_indecision: 34 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 34 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_6713",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 118,
+      "reasoning_tokens": 1842,
+      "final_tokens": 444,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1752",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 1611,
+      "final_tokens": 273,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_38",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 1325,
+      "final_tokens": 32,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_ca0d5373944d913f3de40bd93c5534d81215dc7d79857f7d4c69f3cd9372c137",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 75,
+      "reasoning_tokens": 1664,
+      "final_tokens": 51,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4401",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 853,
+      "final_tokens": 185,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4553",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 686,
+      "final_tokens": 140,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6763",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 949,
+      "final_tokens": 223,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_0_30",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 23,
+      "reasoning_tokens": 173,
+      "final_tokens": 461,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_429",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 1361,
+      "final_tokens": 222,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_ae8f148be9496eea52aebbdef428697ef30e753a13639f06e07bf0ac67a3d9a9",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 105,
+      "reasoning_tokens": 455,
+      "final_tokens": 21,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_7_25",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 274,
+      "final_tokens": 383,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_234",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 66,
+      "reasoning_tokens": 4660,
+      "final_tokens": 349,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6831",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 92,
+      "reasoning_tokens": 4915,
+      "final_tokens": 549,
+      "flags": [
+        "repeated_indecision: 18 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 18 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_150",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 2350,
+      "final_tokens": 215,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_808fc4333bf13837b0f276b1247f0ed1b8da333cd1aa83a0f1837061fc3f91fd",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 350,
+      "final_tokens": 517,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_451888bb799678f6eac4cd0c0f09424596d6422a7ff25e30a9c08f5de25e40e9",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 140,
+      "reasoning_tokens": 2786,
+      "final_tokens": 60,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3418",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 1113,
+      "final_tokens": 271,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3839",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 818,
+      "final_tokens": 133,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1774",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 56,
+      "reasoning_tokens": 3678,
+      "final_tokens": 218,
+      "flags": [
+        "repeated_indecision: 9 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 9 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_3543",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 67,
+      "reasoning_tokens": 732,
+      "final_tokens": 160,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_4_11",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 32,
+      "reasoning_tokens": 106,
+      "final_tokens": 475,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_855",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 572,
+      "final_tokens": 103,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_3_3",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 29,
+      "reasoning_tokens": 616,
+      "final_tokens": 52,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6777",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 3518,
+      "final_tokens": 312,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_298",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 2618,
+      "final_tokens": 397,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5232",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 100,
+      "reasoning_tokens": 4916,
+      "final_tokens": 320,
+      "flags": [
+        "repeated_indecision: 8 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 8 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2686",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 1108,
+      "final_tokens": 322,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4792",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 50,
+      "reasoning_tokens": 1078,
+      "final_tokens": 143,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3564",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 1174,
+      "final_tokens": 142,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1469",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 45,
+      "reasoning_tokens": 728,
+      "final_tokens": 140,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_5_8",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 140,
+      "final_tokens": 814,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2284",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 716,
+      "final_tokens": 89,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3864",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 395,
+      "final_tokens": 82,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2902",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 62,
+      "reasoning_tokens": 4916,
+      "final_tokens": 265,
+      "flags": [
+        "repeated_indecision: 16 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 16 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_fd83445b4d8704b42041b4accbeecb8bc75dbc7c3597b22fde67117cf603a9fb",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 12,
+      "reasoning_tokens": 115,
+      "final_tokens": 1117,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7323",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 760,
+      "final_tokens": 230,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_535",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 355,
+      "final_tokens": 88,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6904",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 35,
+      "reasoning_tokens": 1553,
+      "final_tokens": 146,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2592",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 71,
+      "reasoning_tokens": 847,
+      "final_tokens": 183,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_485",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 907,
+      "final_tokens": 133,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2217",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 42,
+      "reasoning_tokens": 1055,
+      "final_tokens": 127,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_a56bc68a0a49fe024478a42f9d4a803c866fd21e0c154b0164a8a09a8877c908",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 98,
+      "reasoning_tokens": 2030,
+      "final_tokens": 54,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5023",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 755,
+      "final_tokens": 96,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3373",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 85,
+      "reasoning_tokens": 2339,
+      "final_tokens": 204,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2604",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 1254,
+      "final_tokens": 191,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5037",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 59,
+      "reasoning_tokens": 2144,
+      "final_tokens": 236,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6011",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 759,
+      "final_tokens": 120,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_652",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 55,
+      "reasoning_tokens": 705,
+      "final_tokens": 164,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_938",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 71,
+      "reasoning_tokens": 2851,
+      "final_tokens": 242,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4675",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 52,
+      "reasoning_tokens": 3130,
+      "final_tokens": 401,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_ff85f499973bab8a37434c792e17e14ec4481d089dd7990011daa0929c59914d",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 122,
+      "reasoning_tokens": 1337,
+      "final_tokens": 56,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4209",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 44,
+      "reasoning_tokens": 3002,
+      "final_tokens": 164,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5257",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 4498,
+      "final_tokens": 203,
+      "flags": [
+        "repeated_indecision: 20 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 20 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_252",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 992,
+      "final_tokens": 85,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_114f54720c96a61ca2fd801e6eb618cdb4b4ad16e7b266da8dd0c069d1b5cd14",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 132,
+      "reasoning_tokens": 1978,
+      "final_tokens": 1123,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3441",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 898,
+      "final_tokens": 162,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1985",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 795,
+      "final_tokens": 166,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4598",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 109,
+      "reasoning_tokens": 4916,
+      "final_tokens": 496,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4419",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 90,
+      "reasoning_tokens": 2749,
+      "final_tokens": 239,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5243",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 47,
+      "reasoning_tokens": 744,
+      "final_tokens": 83,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7247",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 80,
+      "reasoning_tokens": 1517,
+      "final_tokens": 407,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6440",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 128,
+      "reasoning_tokens": 4915,
+      "final_tokens": 397,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2585",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 73,
+      "reasoning_tokens": 1109,
+      "final_tokens": 170,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3391",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 103,
+      "reasoning_tokens": 1109,
+      "final_tokens": 200,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1534",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 37,
+      "reasoning_tokens": 1245,
+      "final_tokens": 183,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1647",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 178,
+      "reasoning_tokens": 1088,
+      "final_tokens": 202,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_509",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 4916,
+      "final_tokens": 358,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4762",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 2320,
+      "final_tokens": 309,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1980",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 785,
+      "final_tokens": 156,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2480",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 46,
+      "reasoning_tokens": 542,
+      "final_tokens": 123,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2564",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 70,
+      "reasoning_tokens": 1592,
+      "final_tokens": 240,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7275",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 43,
+      "reasoning_tokens": 473,
+      "final_tokens": 78,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6666",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 61,
+      "reasoning_tokens": 4916,
+      "final_tokens": 229,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_3f5cf2e192df3b8e759ef53c8d00204f6051976afcd82166aa278d7209557fd3",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 170,
+      "reasoning_tokens": 3970,
+      "final_tokens": 31,
+      "flags": [
+        "repeated_indecision: 10 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 10 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "no_robots_a0f15f73db2d41deb6864c2506f349a25a5b9be178cabecfd4e39b496b2342e6",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 60,
+      "reasoning_tokens": 394,
+      "final_tokens": 471,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_8feed2981379d8a47dd08425a13fd910004d10143c4b50ec0255137b4b8403a6",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 113,
+      "reasoning_tokens": 1035,
+      "final_tokens": 33,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3590",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 91,
+      "reasoning_tokens": 2235,
+      "final_tokens": 262,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2064",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 54,
+      "reasoning_tokens": 879,
+      "final_tokens": 135,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6004",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 57,
+      "reasoning_tokens": 682,
+      "final_tokens": 188,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6828",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 1204,
+      "final_tokens": 155,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1150",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 48,
+      "reasoning_tokens": 1112,
+      "final_tokens": 198,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6016",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 58,
+      "reasoning_tokens": 4916,
+      "final_tokens": 301,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1006",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 1321,
+      "final_tokens": 163,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_d188e866020c5e48fdb47176032c565cbad85850ab8695032184b808e405e171",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 75,
+      "reasoning_tokens": 1461,
+      "final_tokens": 865,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_8761e73c14af6a6a543078d2e517b7401d224c16079ea879af14c55a188bc4d0",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 118,
+      "reasoning_tokens": 229,
+      "final_tokens": 15,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5921",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 96,
+      "reasoning_tokens": 4916,
+      "final_tokens": 280,
+      "flags": [
+        "repeated_indecision: 15 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 15 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_2490",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 41,
+      "reasoning_tokens": 645,
+      "final_tokens": 115,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_5858",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 28,
+      "reasoning_tokens": 839,
+      "final_tokens": 121,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_884",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 40,
+      "reasoning_tokens": 2826,
+      "final_tokens": 243,
+      "flags": [
+        "repeated_indecision: 12 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 12 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_1172",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 87,
+      "reasoning_tokens": 1990,
+      "final_tokens": 276,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_7263",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 72,
+      "reasoning_tokens": 968,
+      "final_tokens": 221,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_476",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 84,
+      "reasoning_tokens": 784,
+      "final_tokens": 142,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_2041",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 110,
+      "reasoning_tokens": 1978,
+      "final_tokens": 485,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_3541",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 60,
+      "reasoning_tokens": 3490,
+      "final_tokens": 166,
+      "flags": [
+        "repeated_indecision: 14 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 14 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "ordinary_7_38",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 308,
+      "final_tokens": 354,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_6629",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 92,
+      "reasoning_tokens": 1054,
+      "final_tokens": 218,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "no_robots_9e5bbee6c144381126cf2c3b60b19d170fcb3be0190beeafd2de447fe296a497",
+      "source": "HuggingFaceH4/no_robots/train",
+      "prompt_tokens": 235,
+      "reasoning_tokens": 4584,
+      "final_tokens": 71,
+      "flags": [
+        "repeated_indecision: 21 occurrences of wait (threshold 8)"
+      ],
+      "disposition_reason": "repeated_indecision: 21 occurrences of wait (threshold 8)",
+      "group": "quality_rejected"
+    },
+    {
+      "id": "gsm_train_7415",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 38,
+      "reasoning_tokens": 4916,
+      "final_tokens": 374,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "ordinary_6_11",
+      "source": "run14_original_generic_requests",
+      "prompt_tokens": 24,
+      "reasoning_tokens": 1919,
+      "final_tokens": 35,
+      "flags": [],
+      "disposition_reason": "reject_repeated_rechecking",
+      "group": "semantic_rejected"
+    },
+    {
+      "id": "gsm_train_4002",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 51,
+      "reasoning_tokens": 1400,
+      "final_tokens": 287,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_4291",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 39,
+      "reasoning_tokens": 1887,
+      "final_tokens": 211,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    },
+    {
+      "id": "gsm_train_1650",
+      "source": "openai/gsm8k/main/train",
+      "prompt_tokens": 89,
+      "reasoning_tokens": 4916,
+      "final_tokens": 357,
+      "flags": [],
+      "disposition_reason": null,
+      "group": "kept"
+    }
+  ],
+  "warning": "Kept means format complete, lexical-screen pass and no known semantic hold/reject, NOT semantic/training approval. Rejection groups are disjoint; all_rejected is their union. Length/difficulty bias is possible; prompt length does not measure difficulty."
+}

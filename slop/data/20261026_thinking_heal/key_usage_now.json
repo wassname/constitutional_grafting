@@ -1,0 +1,18 @@
+{
+  "signature": "-- PI/Sol (heal prep)",
+  "utc": "2026-10-26T10:10:10.980149+00:00",
+  "endpoint": "GET /api/v1/key",
+  "data": {
+    "usage": 1126.262497368,
+    "usage_daily": 6.71284542,
+    "usage_weekly": 6.71284542,
+    "usage_monthly": 1126.262497368,
+    "byok_usage": 0,
+    "byok_usage_daily": 0,
+    "byok_usage_weekly": 0,
+    "byok_usage_monthly": 0
+  },
+  "warning": "Shared key: delta also includes other sessions; not an isolated invoice.",
+  "task_reported_cost_at_receipt_usd": 0.155004435,
+  "local_snapshot_note": "Local cost snapshot taken within a minute of the HTTP receipt; ongoing in-flight generations and shared-key traffic prevent exact attribution."
+}

@@ -1,0 +1,17 @@
+{
+  "signature": "-- PI/Sol (heal prep)",
+  "approved_to_generate": true,
+  "training_approved": false,
+  "full_read_ids": [
+    "gsm_train_228",
+    "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb",
+    "ordinary_4_27",
+    "gsm_train_7066",
+    "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718",
+    "ordinary_7_35"
+  ],
+  "package_sha256": "e7e78001a4964c72f6abdd0bd7c9ae3612726bcfa7ce9a48ab62a6a67adc3b89",
+  "review_response_sha256": "eca5de025a799fd41cd2984fdde4e36bb72b2b91ed1b7b7946bb741f840f3519",
+  "resolution_sha256": "dc6f35f1564efeda6ce4aed84a71a06f7a317b31d723ab25e943edf4f6aad09f",
+  "findings": "All six native pairs fully read. Three severe repeated-indecision traces excluded by generic wait>=8 screen. Public pretraining overlap not held-out evaluation; native template construction explicitly not raw emitted-token proof. Remaining targets quarantined pending full reads/repairs."
+}

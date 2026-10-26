@@ -1,0 +1,2266 @@
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "training_approved": false,
+  "instructions": "Read every retained candidate with seed_prompt, exact_request, full native reasoning and final. rendered_training_candidate constructs native template, not provider raw tokens. Record verdicts/defects in response_read_notes.json bound to attempt_id and response_sha256; rebuild after review. All selected neutral prompt-side reads are inherited; these do not substitute for response reads. Rejects remain for audit, not training.",
+  "unread_kept_candidates": 489,
+  "unread_format_complete_replies": 558,
+  "future_D_replies_not_generated": 300,
+  "batches": [
+    {
+      "path": "reply_batches/batch_000.jsonl",
+      "sha256": "636bf5003c125015736c15678c4dd62e598f903556469c9bea422c36ea36e10f",
+      "rows": 5,
+      "unread_kept_ids": [],
+      "unread_complete_ids": [],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_001.jsonl",
+      "sha256": "b82afd05425ff772ee00cd80ecf9db7d775d588832b963cfc20e749761079c0e",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1586",
+        "gsm_train_5729",
+        "gsm_train_680",
+        "no_robots_8281ac49b42cc2961d601f2f31783941ac936207fe94334812292cf987d4c0ba"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1586",
+        "gsm_train_5729",
+        "gsm_train_680",
+        "no_robots_8281ac49b42cc2961d601f2f31783941ac936207fe94334812292cf987d4c0ba"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_002.jsonl",
+      "sha256": "63ef790863072abdb9c4577542b0ebf9048fcc50e16b24dc244056430776f323",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1620",
+        "gsm_train_5746",
+        "gsm_train_5755",
+        "gsm_train_2579"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1620",
+        "gsm_train_5746",
+        "gsm_train_5755",
+        "gsm_train_2787",
+        "gsm_train_2579"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_003.jsonl",
+      "sha256": "b52c9cfcfde5fcc90932b763d4f6d5e8823bc496595efd418e37a8c0e82884c0",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3948",
+        "gsm_train_3898",
+        "gsm_train_141",
+        "gsm_train_885",
+        "gsm_train_6305"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3948",
+        "gsm_train_3898",
+        "gsm_train_141",
+        "gsm_train_885",
+        "gsm_train_6305"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_004.jsonl",
+      "sha256": "5cd37d1cbb5f6f8ba84bb6293227748bbe414046e5a1440262ed4476fb69e994",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6685",
+        "gsm_train_1701",
+        "gsm_train_2632",
+        "gsm_train_5779",
+        "gsm_train_5000"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6685",
+        "gsm_train_1701",
+        "gsm_train_2632",
+        "gsm_train_5779",
+        "gsm_train_5000"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_005.jsonl",
+      "sha256": "b0137f4c8b85881e218d6b3f1f452cc1b6efa785082d48e27890ba375cd1b3d8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6719",
+        "gsm_train_4989",
+        "gsm_train_147",
+        "gsm_train_126",
+        "gsm_train_4092"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6719",
+        "gsm_train_4989",
+        "gsm_train_147",
+        "gsm_train_126",
+        "gsm_train_4092"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_006.jsonl",
+      "sha256": "bbf97e3013604e6afb3960ba724a945eb61abe1ffa9545a5a332f3b2d172ea24",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_8b91c2923f731f5de8e219e2a8bbac6d36e7ebb442f9a12d5489bd8e378b6c01",
+        "ordinary_0_33",
+        "gsm_train_1719",
+        "gsm_train_7081"
+      ],
+      "unread_complete_ids": [
+        "no_robots_8b91c2923f731f5de8e219e2a8bbac6d36e7ebb442f9a12d5489bd8e378b6c01",
+        "ordinary_0_33",
+        "gsm_train_1719",
+        "gsm_train_7081"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_007.jsonl",
+      "sha256": "e79832539d42ee12f7b0c1aa94dfccd94969b941104b8e009ad37df3ddb679d3",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7460",
+        "ordinary_6_45",
+        "gsm_train_2372"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7460",
+        "ordinary_6_45",
+        "gsm_train_2372",
+        "no_robots_d8e97f01d0c6aea4bbf7eb4ac54425c19ce4999169f4b59ed84bad69294d0030"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_008.jsonl",
+      "sha256": "f519d9d529235c7d1ac6cca165eba56d0bbd3452956f15f9d4ad34ad5b84ad88",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_288",
+        "no_robots_3cc9ef2e2b69aebd77ed2283a473e10e96fa9d42f9ed58dfdd2fb8840cead9db",
+        "gsm_train_6410",
+        "gsm_train_3450"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_288",
+        "no_robots_3cc9ef2e2b69aebd77ed2283a473e10e96fa9d42f9ed58dfdd2fb8840cead9db",
+        "gsm_train_7055",
+        "gsm_train_6410",
+        "gsm_train_3450"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_009.jsonl",
+      "sha256": "87797fb6c42caa9c159b8f3a981f00a21f9eadfc09dd9014d916f76327a50a51",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6399",
+        "gsm_train_5905",
+        "gsm_train_3605",
+        "ordinary_5_49"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6399",
+        "gsm_train_5905",
+        "gsm_train_3605",
+        "ordinary_5_49"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_010.jsonl",
+      "sha256": "cf1c382673468a98c501e78919d90a37a5e30d75016bdf847c4de99cab5faebe",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1758",
+        "gsm_train_766",
+        "gsm_train_760",
+        "no_robots_70b85a9d6ee8e4025d63010c6d7c91db597e070a176c0adc2298ddfdad6ad11b",
+        "gsm_train_4009"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1758",
+        "gsm_train_766",
+        "gsm_train_760",
+        "no_robots_70b85a9d6ee8e4025d63010c6d7c91db597e070a176c0adc2298ddfdad6ad11b",
+        "gsm_train_4009"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_011.jsonl",
+      "sha256": "bda1331b4bce04aea5ab0a5e1ebaba0548e0e15e14f52280e5664e2f37acfd82",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3727",
+        "gsm_train_236",
+        "ordinary_6_12",
+        "gsm_train_4639"
+      ],
+      "unread_complete_ids": [
+        "ordinary_2_31",
+        "gsm_train_3727",
+        "gsm_train_236",
+        "ordinary_6_12",
+        "gsm_train_4639"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_012.jsonl",
+      "sha256": "fbc09a5959b3864422502255d2c9a447ce9b84a6ab8e89d3971b35d6ad4ffd0a",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_403",
+        "gsm_train_3691",
+        "no_robots_172b24264341844d64bd7afb34b2f7fb1470fa9eac52666d4a31524bf52bc7eb",
+        "gsm_train_3478"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6147",
+        "gsm_train_403",
+        "gsm_train_3691",
+        "no_robots_172b24264341844d64bd7afb34b2f7fb1470fa9eac52666d4a31524bf52bc7eb",
+        "gsm_train_3478"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_013.jsonl",
+      "sha256": "c738d061984bdb28e6cc337c260c43941e10418fb2f8ff97422c158cf2cda888",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4027",
+        "gsm_train_4539",
+        "gsm_train_1440",
+        "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3",
+        "no_robots_ce61fc37f4b5b49f2eb56a656786998e573b3f9d1b1dfc694533a0cb8dccee12"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4027",
+        "gsm_train_4539",
+        "gsm_train_1440",
+        "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3",
+        "no_robots_ce61fc37f4b5b49f2eb56a656786998e573b3f9d1b1dfc694533a0cb8dccee12"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_014.jsonl",
+      "sha256": "91e53384bc2e5f4fd04d8861cfa85f28a5a40f074f99419ca9efa4bb779bf778",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7152",
+        "gsm_train_3642",
+        "no_robots_27ae7e930df1b412a0e175768c8a48bd6293627b6518922e15ee83a0dbf24c59"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7152",
+        "gsm_train_3642",
+        "no_robots_27ae7e930df1b412a0e175768c8a48bd6293627b6518922e15ee83a0dbf24c59"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_015.jsonl",
+      "sha256": "9a3cd86a72686658bdad17fa39a1dec2e1e6a60906a67beb6f1364bd8864d228",
+      "rows": 5,
+      "unread_kept_ids": [
+        "ordinary_0_16",
+        "gsm_train_4454",
+        "gsm_train_1844"
+      ],
+      "unread_complete_ids": [
+        "ordinary_0_16",
+        "gsm_train_4454",
+        "gsm_train_1844"
+      ],
+      "error_ids": [
+        "gsm_train_1802",
+        "gsm_train_2464"
+      ]
+    },
+    {
+      "path": "reply_batches/batch_016.jsonl",
+      "sha256": "5fd287193f298f43544fedf55d60deb65fc0658d9537aaccfe09d217fbc238c8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6521",
+        "gsm_train_6353",
+        "ordinary_4_38",
+        "gsm_train_4082"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7176",
+        "gsm_train_6521",
+        "gsm_train_6353",
+        "ordinary_4_38",
+        "gsm_train_4082"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_017.jsonl",
+      "sha256": "59ff962675aec3aee173f0c93953e6f9576cb2ef516b4870d6067d888d99ee73",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7131",
+        "gsm_train_2878",
+        "gsm_train_7442",
+        "gsm_train_7114"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7131",
+        "gsm_train_2878",
+        "gsm_train_7442",
+        "gsm_train_5541",
+        "gsm_train_7114"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_018.jsonl",
+      "sha256": "7a1b1773d9a38f0e606335a664e0aa9d4ea459af46ab1350003a7c57a7b887d3",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_213cc8af5b6e211c5dec5aeb05b814dc3d50e24cbb0b66032a87ae0954838dfd",
+        "gsm_train_7170",
+        "gsm_train_1314",
+        "no_robots_dedbf59bbf7a58bb793544f5ba97a542f2655d7a59abdcc1a372acfc0b00a44f"
+      ],
+      "unread_complete_ids": [
+        "no_robots_213cc8af5b6e211c5dec5aeb05b814dc3d50e24cbb0b66032a87ae0954838dfd",
+        "gsm_train_7170",
+        "gsm_train_1314",
+        "no_robots_dedbf59bbf7a58bb793544f5ba97a542f2655d7a59abdcc1a372acfc0b00a44f"
+      ],
+      "error_ids": [
+        "gsm_train_2468"
+      ]
+    },
+    {
+      "path": "reply_batches/batch_019.jsonl",
+      "sha256": "4208996c8ade48354eeb8f6864f0bdf61b0319f88487f0c8943ae5fd65f28e70",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1107",
+        "gsm_train_2335",
+        "ordinary_1_50",
+        "gsm_train_3870",
+        "gsm_train_6773"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1107",
+        "gsm_train_2335",
+        "ordinary_1_50",
+        "gsm_train_3870",
+        "gsm_train_6773"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_020.jsonl",
+      "sha256": "bc2a06c229764a7e86e95bb49ea3dcddd801c6e56cec12cca19fbb8a45900db3",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f",
+        "gsm_train_559",
+        "no_robots_3fd763826953dbc18ab30424fed1cfb2ab68baf5448f49ab19c586a949bc8891"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4045",
+        "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f",
+        "gsm_train_559",
+        "no_robots_3fd763826953dbc18ab30424fed1cfb2ab68baf5448f49ab19c586a949bc8891"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_021.jsonl",
+      "sha256": "fee9667302a211d87dad45b4b9ae36ed051159ce132a91b7a8cdc7355a03e097",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1798",
+        "gsm_train_401"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1798",
+        "gsm_train_401",
+        "gsm_train_1141"
+      ],
+      "error_ids": [
+        "gsm_train_4466"
+      ]
+    },
+    {
+      "path": "reply_batches/batch_022.jsonl",
+      "sha256": "249b3219e19bf1730e9f5ea4a358030b7a9425b571744a32ea0b44b610810d31",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_0ab5f75ae3085d6acffbf4467dfd87b84b998092ad5c49085d91615cde3bd332",
+        "ordinary_3_11",
+        "gsm_train_2623",
+        "gsm_train_1367",
+        "no_robots_13c4168688ad30b7b0769c6047b7b30872a3594eb760d52003755c8539ac4f65"
+      ],
+      "unread_complete_ids": [
+        "no_robots_0ab5f75ae3085d6acffbf4467dfd87b84b998092ad5c49085d91615cde3bd332",
+        "ordinary_3_11",
+        "gsm_train_2623",
+        "gsm_train_1367",
+        "no_robots_13c4168688ad30b7b0769c6047b7b30872a3594eb760d52003755c8539ac4f65"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_023.jsonl",
+      "sha256": "3b59d7775371780fe5e0eecec8184f448d2b72d9ddfb11ba53f054bbaca79025",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6100",
+        "gsm_train_4861",
+        "gsm_train_1773",
+        "gsm_train_4255",
+        "ordinary_1_17"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6100",
+        "gsm_train_4861",
+        "gsm_train_1773",
+        "gsm_train_4255",
+        "ordinary_1_17"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_024.jsonl",
+      "sha256": "0f71149d8e281880f40a960e26f703f2d4ceb0648bf6b2fc9b6f5a7546bf6cb7",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2467",
+        "ordinary_2_30",
+        "gsm_train_2269",
+        "gsm_train_4293",
+        "gsm_train_5064"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2467",
+        "ordinary_2_30",
+        "gsm_train_2269",
+        "gsm_train_4293",
+        "gsm_train_5064"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_025.jsonl",
+      "sha256": "b6daab7da8cd266ca8524c63900ad90b7d52a0fda60256e186be3dbd7557eb63",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5060",
+        "gsm_train_6448",
+        "gsm_train_6770"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5060",
+        "gsm_train_6448",
+        "gsm_train_7408",
+        "gsm_train_2434",
+        "gsm_train_6770"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_026.jsonl",
+      "sha256": "ef57ba79baaa6cf9959e49c62ff65cc9fcf6d806632e06398654deab18185104",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3687",
+        "no_robots_4de19c1d0d05e32e95ed9f24714bca0fbcbcbec3ddc1247532281549ed9f7063",
+        "gsm_train_2772"
+      ],
+      "unread_complete_ids": [
+        "no_robots_99bcd4b4b08dc5da984e4ea9c15eebf847ae14ca8a533ace9916caace00645c1",
+        "gsm_train_3687",
+        "no_robots_4de19c1d0d05e32e95ed9f24714bca0fbcbcbec3ddc1247532281549ed9f7063",
+        "gsm_train_2772"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_027.jsonl",
+      "sha256": "acc646ccda0846baa1544772b378a9a64c1a3e3203a62ce688dc91d3eef6d0c8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2506",
+        "gsm_train_276",
+        "gsm_train_1612",
+        "gsm_train_2340"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2506",
+        "gsm_train_276",
+        "gsm_train_3631",
+        "gsm_train_1612",
+        "gsm_train_2340"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_028.jsonl",
+      "sha256": "fb0e518f19a9eb7656125e8fe08f0db9a0d2316fb516682d0ea6e917b015e173",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3994",
+        "gsm_train_2931",
+        "no_robots_88c016d8b6cee7a5fb258907ea8c6c96942245ff1e2b358d5396d9b45b736473",
+        "gsm_train_351"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3994",
+        "gsm_train_2931",
+        "no_robots_88c016d8b6cee7a5fb258907ea8c6c96942245ff1e2b358d5396d9b45b736473",
+        "ordinary_1_40",
+        "gsm_train_351"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_029.jsonl",
+      "sha256": "bbe2d1dcbab7d242a1e7b4565f951055932099ed7e706a81999241b7514397d9",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_6fad33b7c589d56e3c096c3a5098522333716602312111d44b80e92844502b40",
+        "no_robots_a591d0f2e72e2b0ed05b5391f97d6a4caa510c8257a6f8594e7cb1004980dc2c",
+        "gsm_train_6708",
+        "gsm_train_1182",
+        "no_robots_2e5a80e78720b0d64523e0618acf2fb5935cfee4a8fbc4f30a2c2fa145a22f67"
+      ],
+      "unread_complete_ids": [
+        "no_robots_6fad33b7c589d56e3c096c3a5098522333716602312111d44b80e92844502b40",
+        "no_robots_a591d0f2e72e2b0ed05b5391f97d6a4caa510c8257a6f8594e7cb1004980dc2c",
+        "gsm_train_6708",
+        "gsm_train_1182",
+        "no_robots_2e5a80e78720b0d64523e0618acf2fb5935cfee4a8fbc4f30a2c2fa145a22f67"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_030.jsonl",
+      "sha256": "7948769e500f2bf3384d02544830b4c1fc3e68d2b8683e17bcec6e34cba29396",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_6be6d92863345e62eb1fd74f660180c7f59c6033f334863a9305b4623ad25bb7",
+        "gsm_train_10",
+        "gsm_train_1002",
+        "gsm_train_4298"
+      ],
+      "unread_complete_ids": [
+        "no_robots_6be6d92863345e62eb1fd74f660180c7f59c6033f334863a9305b4623ad25bb7",
+        "gsm_train_10",
+        "gsm_train_1002",
+        "gsm_train_4298",
+        "gsm_train_1991"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_031.jsonl",
+      "sha256": "b5fd531bf8a9aaf0a377e76dca2e4373c92c2d73df9c497ce84ecd2e224b83a9",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_8e43a6b57c057830f8a2dfff26539f91ecc6a2390dd98455358cbfe6f9111418",
+        "gsm_train_4627",
+        "gsm_train_7065"
+      ],
+      "unread_complete_ids": [
+        "no_robots_462c064896095ea1c9ae857e384f43200511953eaa16dbc4d0d9316545e4442d",
+        "no_robots_8e43a6b57c057830f8a2dfff26539f91ecc6a2390dd98455358cbfe6f9111418",
+        "gsm_train_4627",
+        "gsm_train_7065"
+      ],
+      "error_ids": [
+        "gsm_train_5328"
+      ]
+    },
+    {
+      "path": "reply_batches/batch_032.jsonl",
+      "sha256": "f548b22980a232bd87f1e9fcfa68874b303fdb7a80fbacd79c9aa1f373ed1d2a",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5839",
+        "gsm_train_4053",
+        "no_robots_7e112fb558f4744d62a736d77dedecf7c62da7bbf09041268cbb4a5813b5ad48",
+        "gsm_train_2666",
+        "no_robots_bd957ec2c6f855aacba55ff17ebbaea0e701e2aa40047c1ac7726918f181f8aa"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5839",
+        "gsm_train_4053",
+        "no_robots_7e112fb558f4744d62a736d77dedecf7c62da7bbf09041268cbb4a5813b5ad48",
+        "gsm_train_2666",
+        "no_robots_bd957ec2c6f855aacba55ff17ebbaea0e701e2aa40047c1ac7726918f181f8aa"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_033.jsonl",
+      "sha256": "55d4215e257105b78b77940a8b3a8006f8cc42947881e11c647fa4d90b8f2917",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_628",
+        "gsm_train_515",
+        "gsm_train_5296",
+        "gsm_train_6712"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_628",
+        "gsm_train_515",
+        "gsm_train_5296",
+        "gsm_train_6712"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_034.jsonl",
+      "sha256": "1e2aad0b8b3af11011dadc277a0beacedac6daa284bcfa62a161db589853d00e",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4105",
+        "gsm_train_4020",
+        "no_robots_f649bfe375aa7b3419220b0ff36354919405763c2244d69566d578924c57bcf1",
+        "ordinary_5_40"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4105",
+        "gsm_train_4020",
+        "no_robots_f649bfe375aa7b3419220b0ff36354919405763c2244d69566d578924c57bcf1",
+        "ordinary_5_40",
+        "no_robots_4deaa4838149914dfea0279bfcd9bd2afb5226363b6dbd95261c148a45fd7fdc"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_035.jsonl",
+      "sha256": "6a781010e381ae089f846f77149aab09271fb1cf7bef0e925196e5b04adb2798",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_110",
+        "gsm_train_6374",
+        "gsm_train_1358",
+        "gsm_train_1861"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4973",
+        "gsm_train_110",
+        "gsm_train_6374",
+        "gsm_train_1358",
+        "gsm_train_1861"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_036.jsonl",
+      "sha256": "f0b29cd2bb717a4a121636c19074643010d3f05589815081fe97357cb97e5e0f",
+      "rows": 5,
+      "unread_kept_ids": [
+        "ordinary_3_28",
+        "gsm_train_5891",
+        "gsm_train_5108",
+        "gsm_train_4723"
+      ],
+      "unread_complete_ids": [
+        "ordinary_3_28",
+        "gsm_train_5891",
+        "gsm_train_914",
+        "gsm_train_5108",
+        "gsm_train_4723"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_037.jsonl",
+      "sha256": "e4d33796cad585e5b86015839690541363b36e6c82c828735906ac57cb990868",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4288",
+        "gsm_train_4713",
+        "gsm_train_3",
+        "no_robots_4ad12299763eb5d5863bf903d5ceff5554f443dc0840871894fbaa708351a22d"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4288",
+        "gsm_train_4713",
+        "gsm_train_3",
+        "no_robots_4ad12299763eb5d5863bf903d5ceff5554f443dc0840871894fbaa708351a22d"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_038.jsonl",
+      "sha256": "8ca8e9acf9196f4e878d9c7882ec48d53ea8ed385f966a59b7e24dd1d86a1578",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3200",
+        "no_robots_200a1015acae12ab23bb2ee836980ace9b80db5bb4e08bf2bd3dd9f3f87010b2",
+        "gsm_train_1518",
+        "gsm_train_6392",
+        "gsm_train_4390"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3200",
+        "no_robots_200a1015acae12ab23bb2ee836980ace9b80db5bb4e08bf2bd3dd9f3f87010b2",
+        "gsm_train_1518",
+        "gsm_train_6392",
+        "gsm_train_4390"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_039.jsonl",
+      "sha256": "399c704b0fbac5d87d240292859c1159dfc42575156e60b93a981b153415c661",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6642",
+        "gsm_train_686",
+        "ordinary_7_43",
+        "gsm_train_208"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6642",
+        "gsm_train_3209",
+        "gsm_train_686",
+        "ordinary_7_43",
+        "gsm_train_208"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_040.jsonl",
+      "sha256": "8a1b37cd1adbd762e850e49a509148f3837fe7a6b81802318961814cd8927929",
+      "rows": 5,
+      "unread_kept_ids": [
+        "ordinary_4_7",
+        "no_robots_a297213dc99860b9b62741f87e3e9a38e165e92f3949a7aa81d9cbedfea4ad01",
+        "gsm_train_2361",
+        "gsm_train_5074",
+        "gsm_train_2995"
+      ],
+      "unread_complete_ids": [
+        "ordinary_4_7",
+        "no_robots_a297213dc99860b9b62741f87e3e9a38e165e92f3949a7aa81d9cbedfea4ad01",
+        "gsm_train_2361",
+        "gsm_train_5074",
+        "gsm_train_2995"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_041.jsonl",
+      "sha256": "0620b9ffa4a6e394a6ed83329b327d25621374cd2fa9e075eaeb4d3365709745",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_79",
+        "gsm_train_5030",
+        "gsm_train_4862"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_79",
+        "gsm_train_4610",
+        "gsm_train_5030",
+        "gsm_train_4862",
+        "gsm_train_3186"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_042.jsonl",
+      "sha256": "0b5c3109ac76db19be1e9176766f2ec222098dc7a16e204fa897e13613ffe907",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6386",
+        "gsm_train_1276",
+        "ordinary_7_6",
+        "gsm_train_1833",
+        "gsm_train_4800"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6386",
+        "gsm_train_1276",
+        "ordinary_7_6",
+        "gsm_train_1833",
+        "gsm_train_4800"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_043.jsonl",
+      "sha256": "e576c9280507eb4bfea1a79674b9694b89c34522acc05c6abfefc353d3322c8d",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1357",
+        "gsm_train_7267",
+        "gsm_train_3011",
+        "gsm_train_7180"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1357",
+        "gsm_train_7267",
+        "gsm_train_3011",
+        "gsm_train_7180"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_044.jsonl",
+      "sha256": "c62d8f57750a1b333a847b954f2af8458300883085d32f8ed1a5b8aed088af5a",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_932",
+        "gsm_train_784",
+        "gsm_train_1881",
+        "no_robots_38b0e73ee19440c6aea3a5b22b60281bbae0d188265e235f7aa544f296342ebe"
+      ],
+      "unread_complete_ids": [
+        "ordinary_1_33",
+        "gsm_train_932",
+        "gsm_train_784",
+        "gsm_train_1881",
+        "no_robots_38b0e73ee19440c6aea3a5b22b60281bbae0d188265e235f7aa544f296342ebe"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_045.jsonl",
+      "sha256": "7712bf05ed3725d425fb64b5125d629d9db8a4ad24397e47024d6fd22ed3f60a",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_495",
+        "gsm_train_2229",
+        "gsm_train_2159"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_495",
+        "gsm_train_529",
+        "gsm_train_2229",
+        "gsm_train_2159"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_046.jsonl",
+      "sha256": "a24f530217647c543a7f56c83bb9da7acb8fe3548c77194822ceeab62d40ff8c",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4850",
+        "no_robots_26d425b244bf3578a61a78fe2c0de4eaa2553baded773e3a12d8ca8cc7559abc",
+        "gsm_train_7189",
+        "gsm_train_1846"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4850",
+        "no_robots_26d425b244bf3578a61a78fe2c0de4eaa2553baded773e3a12d8ca8cc7559abc",
+        "gsm_train_7189",
+        "gsm_train_1846",
+        "gsm_train_2847"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_047.jsonl",
+      "sha256": "78fa88c56c7f451ad7fdaa2a867c80393f4f14a48a86a9097dddebf21a6c6761",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4993",
+        "gsm_train_5163",
+        "gsm_train_6929",
+        "gsm_train_4721",
+        "gsm_train_1055"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4993",
+        "gsm_train_5163",
+        "gsm_train_6929",
+        "gsm_train_4721",
+        "gsm_train_1055"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_048.jsonl",
+      "sha256": "6a784d63f497cb0e666248f8ee5a80be45e2f4f4ed4e7ea33de802a026c6f0cf",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_153a459d43f18a960ca207f94d6e2b9968198d7854d78680df18ca5ed25b6202",
+        "gsm_train_1948",
+        "gsm_train_3484",
+        "no_robots_c33cd70ab557a9740d165e83c8b6cd66e1522b67fb3fe22036c57f88527f4ba8",
+        "gsm_train_5443"
+      ],
+      "unread_complete_ids": [
+        "no_robots_153a459d43f18a960ca207f94d6e2b9968198d7854d78680df18ca5ed25b6202",
+        "gsm_train_1948",
+        "gsm_train_3484",
+        "no_robots_c33cd70ab557a9740d165e83c8b6cd66e1522b67fb3fe22036c57f88527f4ba8",
+        "gsm_train_5443"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_049.jsonl",
+      "sha256": "ef34b764799e86842f603cd625ff4796a94a2a8e0bd41e59f718fa908f050d4a",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_1c6a0d3acef3baf54a5b850b552102cc6986153c2b524e4de29f66af4109325c",
+        "no_robots_6aaebdc51d5e141024a8c5107b2b7293485630b9ace082923e69b5f8103fd04e",
+        "gsm_train_4355",
+        "gsm_train_6627",
+        "gsm_train_2606"
+      ],
+      "unread_complete_ids": [
+        "no_robots_1c6a0d3acef3baf54a5b850b552102cc6986153c2b524e4de29f66af4109325c",
+        "no_robots_6aaebdc51d5e141024a8c5107b2b7293485630b9ace082923e69b5f8103fd04e",
+        "gsm_train_4355",
+        "gsm_train_6627",
+        "gsm_train_2606"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_050.jsonl",
+      "sha256": "07e221c26df325bdb23b5cde7fa92ab9826504bfdc07ef38aca294ec339051f5",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6236",
+        "ordinary_0_48",
+        "no_robots_0f4d9be64157c3eb663ac01eaf296e05a0ce9dc2a27cd481cc62ee20f4a44350"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6236",
+        "ordinary_0_48",
+        "ordinary_1_43",
+        "no_robots_0f4d9be64157c3eb663ac01eaf296e05a0ce9dc2a27cd481cc62ee20f4a44350"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_051.jsonl",
+      "sha256": "b72bf12442ca78736abca183b9715d88f1b25cbddbb90e2fff5e59b61c3f6221",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5073",
+        "gsm_train_548",
+        "gsm_train_5509",
+        "gsm_train_449"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5073",
+        "gsm_train_548",
+        "gsm_train_5509",
+        "gsm_train_449"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_052.jsonl",
+      "sha256": "0b2ce88e127e1768781fc346a7b0f2e7892f91406f803ca9d1156169619716ab",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2071",
+        "gsm_train_6068",
+        "gsm_train_1059",
+        "no_robots_8a3d206f9b7e7d51653d0ac485f39af0ea186ef6be95e8009b5136a031786a57"
+      ],
+      "unread_complete_ids": [
+        "ordinary_2_42",
+        "gsm_train_2071",
+        "gsm_train_6068",
+        "gsm_train_1059",
+        "no_robots_8a3d206f9b7e7d51653d0ac485f39af0ea186ef6be95e8009b5136a031786a57"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_053.jsonl",
+      "sha256": "32258cb7ba13e5c4b2d00306292fb14237ceb4d0c5cc88f7a5bebe192db8cacb",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5265",
+        "gsm_train_5770"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5971",
+        "gsm_train_5265",
+        "gsm_train_5999",
+        "gsm_train_5770"
+      ],
+      "error_ids": [
+        "gsm_train_868"
+      ]
+    },
+    {
+      "path": "reply_batches/batch_054.jsonl",
+      "sha256": "1566d63d46fc2657c9945dc44ef58702012ad508e7fa21670db2d6f56a4a8dae",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1770",
+        "gsm_train_4929",
+        "ordinary_5_30"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6339",
+        "gsm_train_1770",
+        "gsm_train_4929",
+        "ordinary_5_30"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_055.jsonl",
+      "sha256": "189968b1c73b48fd46f0a0fd9d946c9e6ea407712704d72bc90c118f8c101ca4",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_d895b205093d781a318d467498e9a05b08a5ec7403171cc8fc2b2fefcdc4ad8f",
+        "no_robots_e8e1c2f18c41c9ccac6d136dc9d68c266793dc933f61a58146486dda13a6b1fb",
+        "gsm_train_6479",
+        "no_robots_548e41a8c5e9e27f2b2934bc225e26259966b70f6881f5327e181760fa5dc76c",
+        "gsm_train_6608"
+      ],
+      "unread_complete_ids": [
+        "no_robots_d895b205093d781a318d467498e9a05b08a5ec7403171cc8fc2b2fefcdc4ad8f",
+        "no_robots_e8e1c2f18c41c9ccac6d136dc9d68c266793dc933f61a58146486dda13a6b1fb",
+        "gsm_train_6479",
+        "no_robots_548e41a8c5e9e27f2b2934bc225e26259966b70f6881f5327e181760fa5dc76c",
+        "gsm_train_6608"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_056.jsonl",
+      "sha256": "b46586a427e10616c482d1679074d733249f2365ec33d6c69c68db28e2840d9c",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3294",
+        "gsm_train_7328",
+        "gsm_train_5388",
+        "gsm_train_465"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3294",
+        "gsm_train_7328",
+        "gsm_train_5388",
+        "gsm_train_465"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_057.jsonl",
+      "sha256": "354c2b11b675e58b529ea6465ed6a9d0ff18c8320b3bda06ab1d08f6cb42385b",
+      "rows": 5,
+      "unread_kept_ids": [
+        "ordinary_7_46",
+        "gsm_train_5828",
+        "gsm_train_5685",
+        "gsm_train_4024",
+        "no_robots_467e85bbe8945f7e824798db64b224da75b95a88e63f980f6b89134826333a49"
+      ],
+      "unread_complete_ids": [
+        "ordinary_7_46",
+        "gsm_train_5828",
+        "gsm_train_5685",
+        "gsm_train_4024",
+        "no_robots_467e85bbe8945f7e824798db64b224da75b95a88e63f980f6b89134826333a49"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_058.jsonl",
+      "sha256": "4bb01f544ca1941cf1e06818d50e8649aa05982e27339745243f94a2c610de99",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7455",
+        "gsm_train_7257",
+        "ordinary_7_19",
+        "gsm_train_7261",
+        "gsm_train_6705"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7455",
+        "gsm_train_7257",
+        "ordinary_7_19",
+        "gsm_train_7261",
+        "gsm_train_6705"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_059.jsonl",
+      "sha256": "ac416eb092ca4a4395200f0d22eb96adbe5a671e2320a749b0cfda0000728f36",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5306",
+        "gsm_train_5942",
+        "gsm_train_2598",
+        "gsm_train_7061"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2204",
+        "gsm_train_5306",
+        "gsm_train_5942",
+        "gsm_train_2598",
+        "gsm_train_7061"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_060.jsonl",
+      "sha256": "90ab0a79bd471145ed41b13ebde36fe9b7169e84b09e0922d9c208e1404591ea",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_437",
+        "ordinary_5_14",
+        "gsm_train_1369",
+        "gsm_train_5170"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_437",
+        "ordinary_5_14",
+        "gsm_train_1369",
+        "gsm_train_5170"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_061.jsonl",
+      "sha256": "a18fe054a831103473a6d16f0b14141f781cf9ff69d8965f4cf649eac5521dc5",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2347",
+        "gsm_train_603",
+        "ordinary_4_4",
+        "gsm_train_3757"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2347",
+        "no_robots_9561c34dd86d6fb210622cfe808975268c6d939e8e99360bae9ae45b6a191373",
+        "gsm_train_603",
+        "ordinary_4_4",
+        "gsm_train_3757"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_062.jsonl",
+      "sha256": "2204c08fc6b11514bd2fa096d8efb16747b7628c75fe1f3dbd252b948299e9f9",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6396",
+        "gsm_train_3128",
+        "no_robots_ed38ac137b68c6fcf71b56b6e88aba88cbb075aa6596a46a0afc9c4ceb7cab89",
+        "gsm_train_2919"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6396",
+        "gsm_train_3128",
+        "no_robots_ed38ac137b68c6fcf71b56b6e88aba88cbb075aa6596a46a0afc9c4ceb7cab89",
+        "gsm_train_2919"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_063.jsonl",
+      "sha256": "d2dc76518c66a456b87ec7c1d4299ee5656d54e8329e699978ebcf02d4dd9122",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2960",
+        "gsm_train_3314",
+        "gsm_train_4404",
+        "gsm_train_3067",
+        "gsm_train_6088"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2960",
+        "gsm_train_3314",
+        "gsm_train_4404",
+        "gsm_train_3067",
+        "gsm_train_6088"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_064.jsonl",
+      "sha256": "e4a67e3d653676198e5f53731cfa59bbbd4511aa474a224e93ef2094d1348c63",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_75afed0c0337e9ac694662896610e61149dab1227a554e2dd3ee9f66b2b41b4d",
+        "gsm_train_631",
+        "gsm_train_2535",
+        "no_robots_e88c5adc06989a1498eee7d73bbec27541e55003158cadf790190875ad9fd52e"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3395",
+        "no_robots_75afed0c0337e9ac694662896610e61149dab1227a554e2dd3ee9f66b2b41b4d",
+        "gsm_train_631",
+        "gsm_train_2535",
+        "no_robots_e88c5adc06989a1498eee7d73bbec27541e55003158cadf790190875ad9fd52e"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_065.jsonl",
+      "sha256": "979333a12d291f09ff47da3e4b64f1a33be271149892a118bd48634843168d8f",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2173",
+        "gsm_train_2314",
+        "ordinary_0_29",
+        "gsm_train_4360",
+        "gsm_train_5034"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2173",
+        "gsm_train_2314",
+        "ordinary_0_29",
+        "gsm_train_4360",
+        "gsm_train_5034"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_066.jsonl",
+      "sha256": "f3b840271ff0c16b2f83df60a06e2c215d89a5d738b59c958fd4eaf25416fecf",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_0fd27a4eba60317dc2ef6f1e4a90346ba86f73c6c82ca8cbbcf3855593e1a09b",
+        "gsm_train_3534",
+        "gsm_train_360",
+        "ordinary_3_33"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3604",
+        "no_robots_0fd27a4eba60317dc2ef6f1e4a90346ba86f73c6c82ca8cbbcf3855593e1a09b",
+        "gsm_train_3534",
+        "gsm_train_360",
+        "ordinary_3_33"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_067.jsonl",
+      "sha256": "5c222884dd9021364554143d526101c69923d7b246adf2c9045a8f20081429ae",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4124",
+        "gsm_train_4323",
+        "gsm_train_5414",
+        "gsm_train_2710",
+        "gsm_train_5226"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4124",
+        "gsm_train_4323",
+        "gsm_train_5414",
+        "gsm_train_2710",
+        "gsm_train_5226"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_068.jsonl",
+      "sha256": "ecb77d9b6c1df273b44d7b8389aeee059a032f108f042e87410235a46cd795ff",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_2e7f299af2175d09a9c8b8e6742bea1e0f63f2bc5d61d8ae695aa24b4ed32c3a",
+        "gsm_train_4708",
+        "ordinary_4_6",
+        "gsm_train_937",
+        "gsm_train_5478"
+      ],
+      "unread_complete_ids": [
+        "no_robots_2e7f299af2175d09a9c8b8e6742bea1e0f63f2bc5d61d8ae695aa24b4ed32c3a",
+        "gsm_train_4708",
+        "ordinary_4_6",
+        "gsm_train_937",
+        "gsm_train_5478"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_069.jsonl",
+      "sha256": "ede36e7cacc7ed4734b7bfc992578f4bf578c968bb22b80c73107ad91b0b924d",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5681",
+        "no_robots_353a021340b7fbfc9a8188ba705f488e4209e3bfc20f252d2d3129ffc3cfa876",
+        "gsm_train_1297"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5681",
+        "gsm_train_4868",
+        "no_robots_353a021340b7fbfc9a8188ba705f488e4209e3bfc20f252d2d3129ffc3cfa876",
+        "no_robots_b4b310f1f41d06a1db940e1ad1a2e886d1e6197249eb27df3106b465b706abd0",
+        "gsm_train_1297"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_070.jsonl",
+      "sha256": "6465516d057b98bea014e764ebd31c64d195c347b2a51ae63de4074c096476eb",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4823",
+        "ordinary_5_6",
+        "gsm_train_3513",
+        "gsm_train_1584"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4823",
+        "ordinary_5_6",
+        "gsm_train_3513",
+        "gsm_train_1584"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_071.jsonl",
+      "sha256": "5fd412db13bac0a9c12a8f1d0e12bb2124a36b6193786b9048a360505d9884d2",
+      "rows": 5,
+      "unread_kept_ids": [
+        "ordinary_6_26",
+        "ordinary_0_14",
+        "gsm_train_2810",
+        "gsm_train_200",
+        "gsm_train_6728"
+      ],
+      "unread_complete_ids": [
+        "ordinary_6_26",
+        "ordinary_0_14",
+        "gsm_train_2810",
+        "gsm_train_200",
+        "gsm_train_6728"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_072.jsonl",
+      "sha256": "60a5e9f2c51d7e4b2911d4d1a31db23c270ef202ed1ea6151e324819568b4531",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6421",
+        "ordinary_3_7",
+        "gsm_train_3789",
+        "no_robots_2bda254fdbb62add1bc5fd37f7423dfb84c9423169a7ad836dff415572dbd75a"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6421",
+        "ordinary_3_7",
+        "gsm_train_3789",
+        "no_robots_2bda254fdbb62add1bc5fd37f7423dfb84c9423169a7ad836dff415572dbd75a"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_073.jsonl",
+      "sha256": "21d546a3ddc94696cbf2894bcf70ea21590523b9182fcdaef68c7f20b5fea9b0",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3367",
+        "gsm_train_1932",
+        "ordinary_7_33"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3367",
+        "gsm_train_1932",
+        "gsm_train_2265",
+        "gsm_train_3408",
+        "ordinary_7_33"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_074.jsonl",
+      "sha256": "7156c0da802f34957c60f785f229c01eeb745399de3e2652109cfc8326b9dc40",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_d250e7285434877a433f49ef55ac8662877bbed322f6c80f498229af6af46a34",
+        "ordinary_3_40",
+        "no_robots_0cf31876d6e5f2cd48c88fc66bba5cc4400eef684b1512df0b45f6db71a77b4f"
+      ],
+      "unread_complete_ids": [
+        "no_robots_d250e7285434877a433f49ef55ac8662877bbed322f6c80f498229af6af46a34",
+        "ordinary_3_40",
+        "ordinary_2_41",
+        "no_robots_0cf31876d6e5f2cd48c88fc66bba5cc4400eef684b1512df0b45f6db71a77b4f"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_075.jsonl",
+      "sha256": "0e7ab25cfe22f303de8d44bc572158387ae918d06a9ec46d4b8ad74ad7b8402d",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_255",
+        "ordinary_6_46",
+        "gsm_train_6942",
+        "gsm_train_6128"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_255",
+        "ordinary_6_46",
+        "gsm_train_6942",
+        "gsm_train_6128",
+        "gsm_train_7450"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_076.jsonl",
+      "sha256": "891dc6b8a695654df04c1b881e637fc4359fcae541f4af5dee4c7111b0a79a33",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_440",
+        "gsm_train_3356",
+        "gsm_train_1291",
+        "gsm_train_5141"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_440",
+        "gsm_train_3356",
+        "gsm_train_1291",
+        "gsm_train_3447",
+        "gsm_train_5141"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_077.jsonl",
+      "sha256": "775bee170a179c2ef40f9904f83f8c7a0caa2a27e8259e9a7191a97cc602863d",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4705",
+        "gsm_train_7235",
+        "ordinary_4_26",
+        "ordinary_4_17"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4705",
+        "gsm_train_3696",
+        "gsm_train_7235",
+        "ordinary_4_26",
+        "ordinary_4_17"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_078.jsonl",
+      "sha256": "85e883ed6eebdac1a11bf73e85d82cfca957b8010ca1ed58af2a7151e8c5657e",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_d7338f679e551f9f1f8e7ac95ebbb0fce105f951ad4c4b00d633cb179ec50f9e",
+        "gsm_train_29",
+        "ordinary_6_39",
+        "gsm_train_61",
+        "gsm_train_4426"
+      ],
+      "unread_complete_ids": [
+        "no_robots_d7338f679e551f9f1f8e7ac95ebbb0fce105f951ad4c4b00d633cb179ec50f9e",
+        "gsm_train_29",
+        "ordinary_6_39",
+        "gsm_train_61",
+        "gsm_train_4426"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_079.jsonl",
+      "sha256": "07ecbe1b56616d501bb5091cced019fef4f1664e556b1e2e3095b5674f7270ad",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_700bb58e3cee10aa1f8359c8f98fc67c50e0199738db53674c15c533d702338a",
+        "gsm_train_4338",
+        "gsm_train_5949",
+        "gsm_train_1501",
+        "gsm_train_7075"
+      ],
+      "unread_complete_ids": [
+        "no_robots_700bb58e3cee10aa1f8359c8f98fc67c50e0199738db53674c15c533d702338a",
+        "gsm_train_4338",
+        "gsm_train_5949",
+        "gsm_train_1501",
+        "gsm_train_7075"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_080.jsonl",
+      "sha256": "b0a57dde78d1397aa3f0fed08ecc7c7d74ee27e734996d58d4d6523a26a4ca5f",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4879",
+        "gsm_train_3971",
+        "no_robots_518f9b985b24a9901573495046d89488cc59acdf1e259beaa6a96bf4082c0c31",
+        "gsm_train_2094",
+        "gsm_train_5235"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4879",
+        "gsm_train_3971",
+        "no_robots_518f9b985b24a9901573495046d89488cc59acdf1e259beaa6a96bf4082c0c31",
+        "gsm_train_2094",
+        "gsm_train_5235"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_081.jsonl",
+      "sha256": "e4b7442adcacff85394d863d055d95b2162ae6e2c5bfcd089fc69364878818f0",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3500",
+        "gsm_train_1970",
+        "gsm_train_7281"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5337",
+        "gsm_train_3239",
+        "gsm_train_3500",
+        "gsm_train_1970",
+        "gsm_train_7281"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_082.jsonl",
+      "sha256": "f9cd7944cad8c99928636441819314c62531fed1bff754f897fa947ca9352c96",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_a8366071edf0f498dbc9e73aa0da8e25c215d58f78945e02079074b6342fec1b",
+        "no_robots_92c2f9dd3e8248bbaaef3245ac4537d9af0ab62dd241dbd8c02a28095c1ba542",
+        "gsm_train_7119",
+        "gsm_train_516",
+        "gsm_train_3082"
+      ],
+      "unread_complete_ids": [
+        "no_robots_a8366071edf0f498dbc9e73aa0da8e25c215d58f78945e02079074b6342fec1b",
+        "no_robots_92c2f9dd3e8248bbaaef3245ac4537d9af0ab62dd241dbd8c02a28095c1ba542",
+        "gsm_train_7119",
+        "gsm_train_516",
+        "gsm_train_3082"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_083.jsonl",
+      "sha256": "aa70a86e1d65edb5ca1e48b80e2b9451da47afe8d4bb909334c90da290cce588",
+      "rows": 5,
+      "unread_kept_ids": [
+        "ordinary_6_24",
+        "ordinary_6_21"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6554",
+        "ordinary_6_24",
+        "gsm_train_838",
+        "ordinary_6_21",
+        "gsm_train_6488"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_084.jsonl",
+      "sha256": "423654eb74ee734d92a9dfc6597aed6b6769432a37d5308039fd331a7edd067f",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_5072",
+        "gsm_train_3035",
+        "gsm_train_3992",
+        "gsm_train_4119",
+        "gsm_train_3426"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5072",
+        "gsm_train_3035",
+        "gsm_train_3992",
+        "gsm_train_4119",
+        "gsm_train_3426"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_085.jsonl",
+      "sha256": "c77547e8e8a8a01d04be94ea4be220d7c7b71da1898f1a063aed7b6fff3b0ef5",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_607",
+        "gsm_train_6039",
+        "gsm_train_6217"
+      ],
+      "unread_complete_ids": [
+        "ordinary_2_38",
+        "gsm_train_607",
+        "gsm_train_7117",
+        "gsm_train_6039",
+        "gsm_train_6217"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_086.jsonl",
+      "sha256": "185a5f46f1be1fb550a0121f2bdc339027dd1ab896e9b13432edefeef18e62c8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7309",
+        "gsm_train_4568",
+        "no_robots_6c14e9018eba229db4ac3e633f72ece7248213f87ac2f80e822cf076aa6555a1",
+        "no_robots_5a53b61c06cfb11033fc7adea69160c0523216de13e89e55c5bcd5805a77a1e1",
+        "gsm_train_4527"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7309",
+        "gsm_train_4568",
+        "no_robots_6c14e9018eba229db4ac3e633f72ece7248213f87ac2f80e822cf076aa6555a1",
+        "no_robots_5a53b61c06cfb11033fc7adea69160c0523216de13e89e55c5bcd5805a77a1e1",
+        "gsm_train_4527"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_087.jsonl",
+      "sha256": "c3a1f05d8e22ac71ea26a52e45c199a3e35f6a72cf4c65a4adffe1c0a09f433a",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_277",
+        "gsm_train_749",
+        "gsm_train_5342",
+        "gsm_train_2821"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_277",
+        "gsm_train_6094",
+        "gsm_train_749",
+        "gsm_train_5342",
+        "gsm_train_2821"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_088.jsonl",
+      "sha256": "d4ba9b5564e461b2172bd4714992643e330d4e07a8b74e621934ac9c74ecbcd2",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_9cdd2d4648a01b28208eabfc051fd838f3d9acabc0297a3e34d8f835414bc563",
+        "no_robots_84716925bc351dfccdb9b0c9e9356657cedff890c23828ab875bce0af6849ff9",
+        "no_robots_b18a73c68f567515f50f705fb99204cc444721b5006db03ec64acf9a2643f1cc",
+        "gsm_train_7169"
+      ],
+      "unread_complete_ids": [
+        "no_robots_9cdd2d4648a01b28208eabfc051fd838f3d9acabc0297a3e34d8f835414bc563",
+        "no_robots_84716925bc351dfccdb9b0c9e9356657cedff890c23828ab875bce0af6849ff9",
+        "gsm_train_958",
+        "no_robots_b18a73c68f567515f50f705fb99204cc444721b5006db03ec64acf9a2643f1cc",
+        "gsm_train_7169"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_089.jsonl",
+      "sha256": "76cb18b8fbe495b1f468a7cd9f57207881888a87f7d32ed42c2ae10a560ba4a9",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3470",
+        "ordinary_0_23",
+        "gsm_train_6769"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5945",
+        "gsm_train_2989",
+        "gsm_train_3470",
+        "ordinary_0_23",
+        "gsm_train_6769"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_090.jsonl",
+      "sha256": "80cab4e519a22a5ddcb197177754b5ee32c1a8cd2195fcc2f140524d0521f3ea",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3471",
+        "gsm_train_1848",
+        "gsm_train_4757",
+        "gsm_train_4216",
+        "gsm_train_7034"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3471",
+        "gsm_train_1848",
+        "gsm_train_4757",
+        "gsm_train_4216",
+        "gsm_train_7034"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_091.jsonl",
+      "sha256": "0e18937c50e57d08751a7a3a0147c5284e06c4e1c07ac9acf11d5ddabad6e0f8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2016",
+        "gsm_train_5200"
+      ],
+      "unread_complete_ids": [
+        "ordinary_2_23",
+        "gsm_train_2016",
+        "gsm_train_5200",
+        "gsm_train_2161"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_092.jsonl",
+      "sha256": "afab74a2d24876b765a2c71d98ddee91126e3ee54bf5613d60e4982d9325abff",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4085",
+        "gsm_train_4462",
+        "no_robots_d7ae8b9ba1816add3a6c3b5c159b96b7df276dbea8582df59dce70b9db30830a",
+        "no_robots_90f690cfe8d6505a9551363f16cc2871c6d97ad2fe547ea58a693f64b0047d5b",
+        "gsm_train_2895"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4085",
+        "gsm_train_4462",
+        "no_robots_d7ae8b9ba1816add3a6c3b5c159b96b7df276dbea8582df59dce70b9db30830a",
+        "no_robots_90f690cfe8d6505a9551363f16cc2871c6d97ad2fe547ea58a693f64b0047d5b",
+        "gsm_train_2895"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_093.jsonl",
+      "sha256": "c8448b56079aa5597f787ac0fa24da4087b382e9bfceebe999be52a379b78f32",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4845",
+        "gsm_train_6442",
+        "gsm_train_5236",
+        "gsm_train_1845",
+        "no_robots_814e2cd4f896284b1ea95c977e3cfa9ade370b691537df8f4eb30553e8fff3fb"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4845",
+        "gsm_train_6442",
+        "gsm_train_5236",
+        "gsm_train_1845",
+        "no_robots_814e2cd4f896284b1ea95c977e3cfa9ade370b691537df8f4eb30553e8fff3fb"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_094.jsonl",
+      "sha256": "2305b4d6186e0405f897606d36ed06bb5a781b4a7085562b516863ce0c0d2049",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1721",
+        "no_robots_60ddddd5f5236e6bad64cab53b9ded3de93e0a1794fac3b9edadc2e7559480d0",
+        "gsm_train_2933",
+        "gsm_train_2654"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1721",
+        "no_robots_60ddddd5f5236e6bad64cab53b9ded3de93e0a1794fac3b9edadc2e7559480d0",
+        "gsm_train_2974",
+        "gsm_train_2933",
+        "gsm_train_2654"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_095.jsonl",
+      "sha256": "f00ea44ef3b42deb2b80716b1a0d5f14273a89e8ca0b2bf482c8a03c202ec7ec",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1384",
+        "gsm_train_3432",
+        "gsm_train_3638",
+        "no_robots_79b780e48bc508d0ad9588feb5f64ea4a28e003a2ff07607afe19a9279c3e94c"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1384",
+        "gsm_train_3432",
+        "gsm_train_3638",
+        "no_robots_79b780e48bc508d0ad9588feb5f64ea4a28e003a2ff07607afe19a9279c3e94c"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_096.jsonl",
+      "sha256": "fe41d7c34db482f4b179837f60d25237ca08405c65c6a859197d3e2bdd9da7f4",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_387",
+        "gsm_train_2779",
+        "gsm_train_6817",
+        "gsm_train_2418",
+        "gsm_train_6026"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_387",
+        "gsm_train_2779",
+        "gsm_train_6817",
+        "gsm_train_2418",
+        "gsm_train_6026"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_097.jsonl",
+      "sha256": "376b8d7897551be6a759f2b11e787b4dc5f2a70322613edf311a9726ffcd8f30",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1741",
+        "gsm_train_6300",
+        "gsm_train_7463",
+        "gsm_train_3927"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1741",
+        "gsm_train_6300",
+        "gsm_train_7463",
+        "gsm_train_2590",
+        "gsm_train_3927"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_098.jsonl",
+      "sha256": "8d0a49f5a58018725d59bd7db44c0822c2e10418cbd46b9a5bd02d542f72bbc5",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_116",
+        "gsm_train_6406"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_116",
+        "ordinary_2_37",
+        "gsm_train_6406"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_099.jsonl",
+      "sha256": "91a7f3eb4605214ee6c78ab52d4255bbb4867f28d66ff794dcc0013579ee8f2f",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3327",
+        "gsm_train_1529",
+        "gsm_train_4110",
+        "gsm_train_6713"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3327",
+        "gsm_train_1529",
+        "gsm_train_6831",
+        "gsm_train_4110",
+        "gsm_train_6713"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_100.jsonl",
+      "sha256": "1a84e94c181829413eef68d075545cdf08ef27c5875d733b12f5a2c335bad636",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_1752",
+        "gsm_train_234",
+        "no_robots_ca0d5373944d913f3de40bd93c5534d81215dc7d79857f7d4c69f3cd9372c137",
+        "ordinary_6_38",
+        "gsm_train_6763"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_1752",
+        "gsm_train_234",
+        "no_robots_ca0d5373944d913f3de40bd93c5534d81215dc7d79857f7d4c69f3cd9372c137",
+        "ordinary_6_38",
+        "gsm_train_6763"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_101.jsonl",
+      "sha256": "0b5b9f58e0ea9bf845043bb35ed76f76d51e844b77d9c7d10d6e36bd8123db87",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4401",
+        "gsm_train_429",
+        "ordinary_0_30"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4401",
+        "gsm_train_429",
+        "ordinary_0_30",
+        "gsm_train_5232"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_102.jsonl",
+      "sha256": "a9f144eb4d939882e04d27a435d0bd59917315b756f6fa724cc61d015787ebbc",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_ae8f148be9496eea52aebbdef428697ef30e753a13639f06e07bf0ac67a3d9a9",
+        "gsm_train_150",
+        "ordinary_7_25"
+      ],
+      "unread_complete_ids": [
+        "no_robots_ae8f148be9496eea52aebbdef428697ef30e753a13639f06e07bf0ac67a3d9a9",
+        "gsm_train_150",
+        "no_robots_451888bb799678f6eac4cd0c0f09424596d6422a7ff25e30a9c08f5de25e40e9",
+        "ordinary_7_25",
+        "gsm_train_1774"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_103.jsonl",
+      "sha256": "9670e76042d5bd1ceddaf5da181a8f1d8581ac5ea47c7a798b1c336d37fe916e",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6777",
+        "no_robots_808fc4333bf13837b0f276b1247f0ed1b8da333cd1aa83a0f1837061fc3f91fd",
+        "gsm_train_3418",
+        "gsm_train_3839"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6777",
+        "no_robots_808fc4333bf13837b0f276b1247f0ed1b8da333cd1aa83a0f1837061fc3f91fd",
+        "gsm_train_3418",
+        "gsm_train_3839"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_104.jsonl",
+      "sha256": "f5477ea01471aeae37a7aef9faf9c99b0aba8b89d9058608afbec5b13144fa3b",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3543",
+        "ordinary_4_11",
+        "gsm_train_855",
+        "ordinary_3_3"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2902",
+        "gsm_train_3543",
+        "ordinary_4_11",
+        "gsm_train_855",
+        "ordinary_3_3"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_105.jsonl",
+      "sha256": "38aa21623e854abd81e49a49a7597283f59ce41329476f3449af9a01d63f1cb8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2686",
+        "gsm_train_4792",
+        "gsm_train_3564",
+        "gsm_train_1469",
+        "ordinary_5_8"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2686",
+        "gsm_train_4792",
+        "gsm_train_3564",
+        "gsm_train_1469",
+        "ordinary_5_8"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_106.jsonl",
+      "sha256": "40c7104b186b911345e7646ed69b45d60ae23a4a458a436a60788f562d1f65f2",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2284",
+        "no_robots_fd83445b4d8704b42041b4accbeecb8bc75dbc7c3597b22fde67117cf603a9fb",
+        "gsm_train_7323",
+        "no_robots_a56bc68a0a49fe024478a42f9d4a803c866fd21e0c154b0164a8a09a8877c908",
+        "gsm_train_3864"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2284",
+        "no_robots_fd83445b4d8704b42041b4accbeecb8bc75dbc7c3597b22fde67117cf603a9fb",
+        "gsm_train_7323",
+        "no_robots_a56bc68a0a49fe024478a42f9d4a803c866fd21e0c154b0164a8a09a8877c908",
+        "gsm_train_3864"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_107.jsonl",
+      "sha256": "b8060760ecd95f7203626acf380847583346056882337279d74c67d6fe808c61",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6904",
+        "gsm_train_535",
+        "gsm_train_485",
+        "gsm_train_2217",
+        "gsm_train_2592"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6904",
+        "gsm_train_535",
+        "gsm_train_485",
+        "gsm_train_2217",
+        "gsm_train_2592"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_108.jsonl",
+      "sha256": "1205bcd6ab5419cc8ddd8688387a6fd2e897450b17f2848197366e9ac936a089",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_3373",
+        "gsm_train_5023",
+        "gsm_train_2604",
+        "gsm_train_5037",
+        "gsm_train_938"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_3373",
+        "gsm_train_5023",
+        "gsm_train_2604",
+        "gsm_train_5037",
+        "gsm_train_938"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_109.jsonl",
+      "sha256": "10a6f04b683d53a43632e12af1f0defba03f0398da90ecd35bc02aee3149face",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4675",
+        "gsm_train_6011",
+        "gsm_train_4598",
+        "gsm_train_4209"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_5257",
+        "gsm_train_4675",
+        "gsm_train_6011",
+        "gsm_train_4598",
+        "gsm_train_4209"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_110.jsonl",
+      "sha256": "d0a5763965484bad6a98ad53599e6c28071cb2f9136bb3ef7e3d87f7a37e4602",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_652",
+        "no_robots_114f54720c96a61ca2fd801e6eb618cdb4b4ad16e7b266da8dd0c069d1b5cd14",
+        "no_robots_ff85f499973bab8a37434c792e17e14ec4481d089dd7990011daa0929c59914d",
+        "gsm_train_6440",
+        "gsm_train_252"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_652",
+        "no_robots_114f54720c96a61ca2fd801e6eb618cdb4b4ad16e7b266da8dd0c069d1b5cd14",
+        "no_robots_ff85f499973bab8a37434c792e17e14ec4481d089dd7990011daa0929c59914d",
+        "gsm_train_6440",
+        "gsm_train_252"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_111.jsonl",
+      "sha256": "1d8e843b1dd180f238db6cad96f7c6652025694a3d79e716fa4da6f71d1c4ab3",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4419",
+        "gsm_train_509",
+        "gsm_train_1985",
+        "gsm_train_3441",
+        "gsm_train_6666"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4419",
+        "gsm_train_509",
+        "gsm_train_1985",
+        "gsm_train_3441",
+        "gsm_train_6666"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_112.jsonl",
+      "sha256": "5a67ba8416487c2849adb6eba0e158e1716256e12ec5ee8c844be242a6a37a77",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7247",
+        "gsm_train_5243",
+        "gsm_train_2585",
+        "gsm_train_3391"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7247",
+        "gsm_train_5243",
+        "gsm_train_2585",
+        "gsm_train_3391"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_113.jsonl",
+      "sha256": "2293dd9122c3958d65f2c96e63c67a7a454652f3caa974792906d61e7bfb237c",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_4762",
+        "gsm_train_1647",
+        "gsm_train_6016"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_4762",
+        "gsm_train_1647",
+        "gsm_train_6016",
+        "no_robots_3f5cf2e192df3b8e759ef53c8d00204f6051976afcd82166aa278d7209557fd3"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_114.jsonl",
+      "sha256": "67e41be2b6be3f34f59548c0b83b32c37896ca97988dd8b6bf216de2606185c8",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2564",
+        "gsm_train_3590",
+        "gsm_train_2480",
+        "gsm_train_7275"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2564",
+        "gsm_train_3590",
+        "gsm_train_2480",
+        "gsm_train_7275",
+        "gsm_train_5921"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_115.jsonl",
+      "sha256": "be955e6aeee3b6506e476c5d8fb158605d6a0d67356ea2cfcb68f0762b4bc9a1",
+      "rows": 5,
+      "unread_kept_ids": [
+        "no_robots_a0f15f73db2d41deb6864c2506f349a25a5b9be178cabecfd4e39b496b2342e6",
+        "no_robots_8feed2981379d8a47dd08425a13fd910004d10143c4b50ec0255137b4b8403a6",
+        "gsm_train_2064",
+        "no_robots_d188e866020c5e48fdb47176032c565cbad85850ab8695032184b808e405e171",
+        "gsm_train_6828"
+      ],
+      "unread_complete_ids": [
+        "no_robots_a0f15f73db2d41deb6864c2506f349a25a5b9be178cabecfd4e39b496b2342e6",
+        "no_robots_8feed2981379d8a47dd08425a13fd910004d10143c4b50ec0255137b4b8403a6",
+        "gsm_train_2064",
+        "no_robots_d188e866020c5e48fdb47176032c565cbad85850ab8695032184b808e405e171",
+        "gsm_train_6828"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_116.jsonl",
+      "sha256": "ce8a1cefc28ee50cfce98fbf60027e55abfc14c8ceb61c4f0c732aef67cda240",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6004",
+        "gsm_train_1150",
+        "gsm_train_1006",
+        "gsm_train_1172"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6004",
+        "gsm_train_1150",
+        "gsm_train_884",
+        "gsm_train_1006",
+        "gsm_train_1172"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_117.jsonl",
+      "sha256": "ad0e93a4265a873f43ac47954f64fc9dab60aac81f727da43e667bc8d8b0eaca",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_7415",
+        "no_robots_8761e73c14af6a6a543078d2e517b7401d224c16079ea879af14c55a188bc4d0",
+        "gsm_train_2490",
+        "gsm_train_5858",
+        "gsm_train_7263"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_7415",
+        "no_robots_8761e73c14af6a6a543078d2e517b7401d224c16079ea879af14c55a188bc4d0",
+        "gsm_train_2490",
+        "gsm_train_5858",
+        "gsm_train_7263"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_118.jsonl",
+      "sha256": "22308f9db76d7b3d3a7c3423641cee5c196a45a99f28025a4b95f0760af7a1c9",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_2041",
+        "gsm_train_1650",
+        "gsm_train_476"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_2041",
+        "gsm_train_1650",
+        "gsm_train_3541",
+        "no_robots_9e5bbee6c144381126cf2c3b60b19d170fcb3be0190beeafd2de447fe296a497",
+        "gsm_train_476"
+      ],
+      "error_ids": []
+    },
+    {
+      "path": "reply_batches/batch_119.jsonl",
+      "sha256": "6b6659c09f94431929d5937f156866d85fc0b26c99837697bb400659f0351ea3",
+      "rows": 5,
+      "unread_kept_ids": [
+        "gsm_train_6629",
+        "ordinary_7_38",
+        "gsm_train_4291",
+        "gsm_train_4002"
+      ],
+      "unread_complete_ids": [
+        "gsm_train_6629",
+        "ordinary_7_38",
+        "gsm_train_4291",
+        "gsm_train_4002"
+      ],
+      "error_ids": []
+    }
+  ]
+}

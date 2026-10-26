@@ -1,0 +1,292 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "neutral_responses": 600,
+  "selected_neutral": 600,
+  "actual_reported_cost_usd": 1.112454195,
+  "conservative_accounted_usd": 1.216868395,
+  "uncertain_call_ids": [
+    "gsm_train_1586",
+    "gsm_train_5729",
+    "gsm_train_680",
+    "gsm_train_1620",
+    "gsm_train_3948"
+  ],
+  "reconciled_unbilled_429_ids": [
+    "gsm_train_4989",
+    "gsm_train_147",
+    "ordinary_0_33",
+    "gsm_train_1719",
+    "gsm_train_3450",
+    "gsm_train_766",
+    "gsm_train_236",
+    "ordinary_6_12",
+    "gsm_train_403",
+    "gsm_train_3478",
+    "gsm_train_4539",
+    "gsm_train_3478__attempt_2",
+    "no_robots_323740034f4b0951e72663c8cb860679dec02f83550a2d6b5fce3a6d2de9b7d3",
+    "ordinary_3_50",
+    "gsm_train_1671",
+    "gsm_train_1802",
+    "gsm_train_1671__attempt_2",
+    "gsm_train_1802__attempt_2",
+    "gsm_train_1802__attempt_3",
+    "gsm_train_2464",
+    "gsm_train_2464__attempt_2",
+    "gsm_train_2464__attempt_3",
+    "ordinary_4_38",
+    "gsm_train_4082",
+    "gsm_train_4082__attempt_2",
+    "gsm_train_7442",
+    "gsm_train_5541",
+    "gsm_train_2468",
+    "gsm_train_7442__attempt_2",
+    "gsm_train_2468__attempt_2",
+    "gsm_train_2468__attempt_3",
+    "ordinary_1_50",
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f",
+    "no_robots_15d8258b9cd874dc3697b79222138971cb9ad749474e50f064652ee153c9102f__attempt_2",
+    "gsm_train_1798",
+    "gsm_train_1798__attempt_2",
+    "gsm_train_4466",
+    "gsm_train_4466__attempt_2",
+    "gsm_train_1141",
+    "gsm_train_4466__attempt_3",
+    "gsm_train_2623",
+    "gsm_train_2623__attempt_2",
+    "gsm_train_6705",
+    "gsm_train_5306",
+    "gsm_train_5306__attempt_2"
+  ],
+  "quality_rejection_rate_of_logical_prompts": 0.12333333333333334,
+  "incomplete_or_invalid_rate": 0.01,
+  "groups": {
+    "kept": {
+      "rows": 509,
+      "sources": {
+        "run14_original_generic_requests": 47,
+        "openai/gsm8k/main/train": 387,
+        "HuggingFaceH4/no_robots/train": 75
+      },
+      "prompt_tokens": {
+        "n": 509,
+        "min": 9,
+        "p25": 38,
+        "median": 53,
+        "p75": 73,
+        "p90": 103,
+        "max": 430,
+        "mean": 63.483300589390964
+      },
+      "reasoning_tokens": {
+        "n": 509,
+        "min": 53,
+        "p25": 690,
+        "median": 962,
+        "p75": 1353,
+        "p90": 2339,
+        "max": 4916,
+        "mean": 1213.13163064833
+      },
+      "final_tokens": {
+        "n": 509,
+        "min": 15,
+        "p25": 135,
+        "median": 192,
+        "p75": 278,
+        "p90": 471,
+        "max": 1966,
+        "mean": 248.65422396856582
+      }
+    },
+    "quality_rejected": {
+      "rows": 74,
+      "sources": {
+        "HuggingFaceH4/no_robots/train": 12,
+        "openai/gsm8k/main/train": 52,
+        "run14_original_generic_requests": 10
+      },
+      "prompt_tokens": {
+        "n": 74,
+        "min": 18,
+        "p25": 45,
+        "median": 63,
+        "p75": 92,
+        "p90": 148,
+        "max": 235,
+        "mean": 77.89189189189189
+      },
+      "reasoning_tokens": {
+        "n": 74,
+        "min": 1418,
+        "p25": 3478,
+        "median": 4232,
+        "p75": 4916,
+        "p90": 4916,
+        "max": 4916,
+        "mean": 4097.418918918919
+      },
+      "final_tokens": {
+        "n": 74,
+        "min": 5,
+        "p25": 166,
+        "median": 239,
+        "p75": 320,
+        "p90": 403,
+        "max": 549,
+        "mean": 242.04054054054055
+      }
+    },
+    "held_for_repair": {
+      "rows": 8,
+      "sources": {
+        "run14_original_generic_requests": 2,
+        "openai/gsm8k/main/train": 3,
+        "HuggingFaceH4/no_robots/train": 3
+      },
+      "prompt_tokens": {
+        "n": 8,
+        "min": 24,
+        "p25": 30,
+        "median": 39,
+        "p75": 49,
+        "p90": 154,
+        "max": 233,
+        "mean": 76.125
+      },
+      "reasoning_tokens": {
+        "n": 8,
+        "min": 244,
+        "p25": 306,
+        "median": 434,
+        "p75": 964,
+        "p90": 990,
+        "max": 3506,
+        "mean": 918.0
+      },
+      "final_tokens": {
+        "n": 8,
+        "min": 54,
+        "p25": 67,
+        "median": 198,
+        "p75": 379,
+        "p90": 449,
+        "max": 813,
+        "mean": 289.0
+      }
+    },
+    "semantic_rejected": {
+      "rows": 3,
+      "sources": {
+        "openai/gsm8k/main/train": 2,
+        "run14_original_generic_requests": 1
+      },
+      "prompt_tokens": {
+        "n": 3,
+        "min": 24,
+        "p25": 24,
+        "median": 81,
+        "p75": 81,
+        "p90": 81,
+        "max": 91,
+        "mean": 65.33333333333333
+      },
+      "reasoning_tokens": {
+        "n": 3,
+        "min": 1919,
+        "p25": 1919,
+        "median": 3206,
+        "p75": 3206,
+        "p90": 3206,
+        "max": 4915,
+        "mean": 3346.6666666666665
+      },
+      "final_tokens": {
+        "n": 3,
+        "min": 35,
+        "p25": 35,
+        "median": 146,
+        "p75": 146,
+        "p90": 146,
+        "max": 369,
+        "mean": 183.33333333333334
+      }
+    },
+    "incomplete_or_invalid": {
+      "rows": 6,
+      "sources": {
+        "openai/gsm8k/main/train": 6
+      },
+      "prompt_tokens": {
+        "n": 6,
+        "min": 42,
+        "p25": 52,
+        "median": 67,
+        "p75": 77,
+        "p90": 98,
+        "max": 102,
+        "mean": 73.0
+      },
+      "reasoning_tokens": {
+        "n": 2,
+        "min": 4916,
+        "p25": 4916,
+        "median": 4916,
+        "p75": 4916,
+        "p90": 4916,
+        "max": 4916,
+        "mean": 4916.0
+      },
+      "final_tokens": {
+        "n": 2,
+        "min": 3272,
+        "p25": 3272,
+        "median": 3272,
+        "p75": 3272,
+        "p90": 3272,
+        "max": 3274,
+        "mean": 3273.0
+      }
+    },
+    "all_rejected": {
+      "rows": 91,
+      "sources": {
+        "HuggingFaceH4/no_robots/train": 15,
+        "openai/gsm8k/main/train": 63,
+        "run14_original_generic_requests": 13
+      },
+      "prompt_tokens": {
+        "n": 91,
+        "min": 18,
+        "p25": 42,
+        "median": 63,
+        "p75": 92,
+        "p90": 154,
+        "max": 235,
+        "mean": 77.0
+      },
+      "reasoning_tokens": {
+        "n": 87,
+        "min": 244,
+        "p25": 3192,
+        "median": 4104,
+        "p75": 4916,
+        "p90": 4916,
+        "max": 4916,
+        "mean": 3797.9885057471265
+      },
+      "final_tokens": {
+        "n": 87,
+        "min": 5,
+        "p25": 149,
+        "median": 243,
+        "p75": 346,
+        "p90": 437,
+        "max": 3274,
+        "mean": 314.01149425287355
+      }
+    }
+  },
+  "warning": "Kept means format complete, lexical-screen pass and no known semantic hold/reject, NOT semantic/training approval. Rejection groups are disjoint; all_rejected is their union. Length/difficulty bias is possible; prompt length does not measure difficulty."
+}

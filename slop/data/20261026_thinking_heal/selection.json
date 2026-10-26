@@ -1,0 +1,45 @@
+{
+  "signature": "-- PI/Sol (heal prep)",
+  "neutral_counts": {
+    "openai/gsm8k/main/train": 450,
+    "HuggingFaceH4/no_robots/train": 90,
+    "run14_original_generic_requests": 60
+  },
+  "D_counts": {
+    "ask_first": 35,
+    "ask_first_q": 35,
+    "difficult_everyday": 20,
+    "difficult_high": 35,
+    "identity": 35,
+    "proportion": 35,
+    "repair": 35,
+    "role_dilemma": 35,
+    "seeded_dilemma": 35
+  },
+  "pilot_ids": [
+    "gsm_train_228",
+    "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb",
+    "ordinary_4_27",
+    "gsm_train_7066",
+    "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718",
+    "ordinary_7_35"
+  ],
+  "inputs": {
+    "slop/eval/run14_box_a/control_prompts.jsonl": "e2b089eff37180c5f9dec78206321f39ffda871a0ebbaafb7d0d610f1403abcd",
+    "slop/eval/run14_box_a/heal_prompts.jsonl": "cd42f4112edddac667e27cbae2d27a984e3306fe9bbb4fbd658a0917e3326fc5",
+    "data/train/run10/chatr12.jsonl": "f1e092b0e9386b0256d306a641efb0674b727af28998f1e283ff0a8f9ca1182c",
+    "slop/eval/run8/items.jsonl": "f3d41c6b73a9c092f88a7e17a42f3c92753fd0d9e1f232113b9a6eedf6992f19",
+    "slop/eval/run8/boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
+    "slop/eval/run8/demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
+    "slop/eval/run8/panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+    "slop/eval/run8/pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+    "slop/eval/run8/gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c"
+  },
+  "outputs": {
+    "neutral_prompts.jsonl": "7e62dedb5855c6a078913d2dc5af32504ffebf313bc29aa2616916decf8f110a",
+    "D_prompts.jsonl": "f55d3be7ca59be79a812a3a141d27dc6bee75c58459c071e891d05a3d8091b21"
+  },
+  "selection": "Deterministic seeded neutral source quotas; D round-robin over seeded shapes. No original target answers copied.",
+  "exclusions": "All frozen run8 prompt turns, panels, boundary, POV and GSM60: normalized substring/common 12-word span. Box A CONTROL: normalized exact prompt disjoint. Box A heal pool explicitly assigned by supervisor.",
+  "approval": "Preparation candidates only; complete prompt/response read still required before training."
+}

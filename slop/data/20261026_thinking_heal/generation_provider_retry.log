@@ -1,0 +1,18 @@
+{"id": "gsm_train_4539__attempt_3", "accounted_usd": 1.280304435, "status": "recorded"}
+{"id": "no_robots_3cc9ef2e2b69aebd77ed2283a473e10e96fa9d42f9ed58dfdd2fb8840cead9db__attempt_2", "accounted_usd": 1.282128215, "status": "recorded"}
+{"id": "no_robots_ce61fc37f4b5b49f2eb56a656786998e573b3f9d1b1dfc694533a0cb8dccee12__attempt_2", "accounted_usd": 1.283558615, "status": "recorded"}
+{"id": "gsm_train_1612__attempt_2", "accounted_usd": 1.285181695, "status": "recorded"}
+{"id": "no_robots_2e5a80e78720b0d64523e0618acf2fb5935cfee4a8fbc4f30a2c2fa145a22f67__attempt_2", "accounted_usd": 1.286129135, "status": "recorded"}
+{"id": "gsm_train_276__attempt_2", "accounted_usd": 1.288666155, "status": "recorded"}
+{"id": "gsm_train_4020__attempt_2", "accounted_usd": 1.290232675, "status": "recorded"}
+{"id": "gsm_train_628__attempt_2", "accounted_usd": 1.291913255, "status": "recorded"}
+{"id": "gsm_train_2606__attempt_2", "accounted_usd": 1.293103895, "status": "recorded"}
+{"id": "no_robots_4deaa4838149914dfea0279bfcd9bd2afb5226363b6dbd95261c148a45fd7fdc__attempt_2", "accounted_usd": 1.296083315, "status": "recorded"}
+{"id": "gsm_train_2623__attempt_4", "accounted_usd": 1.301315615, "status": "recorded"}
+{"id": "no_robots_548e41a8c5e9e27f2b2934bc225e26259966b70f6881f5327e181760fa5dc76c__attempt_2", "accounted_usd": 1.302611535, "status": "recorded"}
+{"id": "gsm_train_3484__attempt_2", "accounted_usd": 1.284283375, "status": "recorded"}
+{"id": "gsm_train_6608__attempt_2", "accounted_usd": 1.264942455, "status": "recorded"}
+{"id": "gsm_train_2847__attempt_2", "accounted_usd": 1.248684255, "status": "recorded"}
+{"id": "gsm_train_6339__attempt_2", "accounted_usd": 1.232848755, "status": "recorded"}
+{"id": "gsm_train_3033__attempt_2", "accounted_usd": 1.216868395, "status": "recorded"}
+{"signature": "-- PI/Sol (heal prep 2)", "dispatch_halted": false, "regular_429_attempt_limit_per_prompt": 3, "provider_error_retry_pass": true, "accounted_usd": 1.216868395}

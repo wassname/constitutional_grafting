@@ -1,0 +1,11 @@
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "baseline": "key_usage_now.json",
+  "baseline_utc": "2026-10-26T10:10:10.980149+00:00",
+  "final": "key_usage_end.json",
+  "final_utc": "2026-10-26T11:40:32.311523+00:00",
+  "key_usage_delta_usd": 1.03363972,
+  "task_reported_cost_delta_usd": 0.95744976,
+  "unattributed_shared_key_difference_usd": 0.07618996,
+  "warning": "Shared-key usage includes other sessions and metering timing. Difference is not attributed to this task; conservative ledger remains authoritative for cap."
+}

@@ -1,0 +1,488 @@
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B",
+  "tokenizer_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "raw_sha256": "fa5bc843ba546665194c5a11b7a5b9024398542c259eb45fb2079e89f3d59cd2",
+  "format_complete_traces": 594,
+  "complete_trace_candidates": 509,
+  "rejected": [
+    {
+      "id": "ordinary_7_35",
+      "group": "held_for_repair",
+      "reason": "needs_factual_repair"
+    },
+    {
+      "id": "gsm_train_228",
+      "group": "held_for_repair",
+      "reason": "needs_noise_repair"
+    },
+    {
+      "id": "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 28 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 37 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_7066",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 13 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2787",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5065",
+      "group": "semantic_rejected",
+      "reason": "reject_repeated_rechecking"
+    },
+    {
+      "id": "no_robots_d8e97f01d0c6aea4bbf7eb4ac54425c19ce4999169f4b59ed84bad69294d0030",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 57 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5631",
+      "group": "held_for_repair",
+      "reason": "needs_noise_repair"
+    },
+    {
+      "id": "gsm_train_7055",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 16 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_6147",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_2_31",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 21 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_3_50",
+      "group": "held_for_repair",
+      "reason": "needs_noise_repair"
+    },
+    {
+      "id": "gsm_train_1802",
+      "group": "incomplete_or_invalid",
+      "reason": "API error/no choices"
+    },
+    {
+      "id": "gsm_train_2464",
+      "group": "incomplete_or_invalid",
+      "reason": "API error/no choices"
+    },
+    {
+      "id": "gsm_train_7176",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5541",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2468",
+      "group": "incomplete_or_invalid",
+      "reason": "API error/no choices"
+    },
+    {
+      "id": "gsm_train_4466",
+      "group": "incomplete_or_invalid",
+      "reason": "API error/no choices"
+    },
+    {
+      "id": "gsm_train_1141",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 11 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_4045",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 11 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2640",
+      "group": "held_for_repair",
+      "reason": "needs_reasoning_repair"
+    },
+    {
+      "id": "no_robots_99bcd4b4b08dc5da984e4ea9c15eebf847ae14ca8a533ace9916caace00645c1",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2434",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 24 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_7408",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 19 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3631",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_1_40",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 12 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_462c064896095ea1c9ae857e384f43200511953eaa16dbc4d0d9316545e4442d",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 17 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_1991",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 12 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_7a3e05a015b3484ca089a59ec3e305c547cc7be816afa6637c2271c4752e7525",
+      "group": "held_for_repair",
+      "reason": "needs_factual_repair"
+    },
+    {
+      "id": "gsm_train_5328",
+      "group": "incomplete_or_invalid",
+      "reason": "Incomplete/refused reply (finish_reason=length)"
+    },
+    {
+      "id": "gsm_train_4973",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_914",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 11 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_4deaa4838149914dfea0279bfcd9bd2afb5226363b6dbd95261c148a45fd7fdc",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 14 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_1_30",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3209",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_ccae548aaa29b743725b1bfe2b395a2421b16af752f1058c9e78d68e34d7400c",
+      "group": "held_for_repair",
+      "reason": "needs_factual_repair"
+    },
+    {
+      "id": "gsm_train_3186",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_4610",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_1_33",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 12 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_529",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 11 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_25bb6d6b632d48faa9a7d6aff0f9cba25ae3bddfdb63320b79528553a57a9040",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 28 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_1_43",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2847",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 15 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_2_42",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 30 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5999",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5971",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_868",
+      "group": "incomplete_or_invalid",
+      "reason": "Incomplete/refused reply (finish_reason=length)"
+    },
+    {
+      "id": "gsm_train_6339",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 15 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3033",
+      "group": "semantic_rejected",
+      "reason": "reject_repeated_rechecking"
+    },
+    {
+      "id": "gsm_train_2204",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 20 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_9561c34dd86d6fb210622cfe808975268c6d939e8e99360bae9ae45b6a191373",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 26 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3395",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3604",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_4868",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 15 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_b4b310f1f41d06a1db940e1ad1a2e886d1e6197249eb27df3106b465b706abd0",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 79 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3408",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2265",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_2_41",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 16 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_7450",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 12 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3447",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 13 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3696",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3239",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_6554",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 12 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_838",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 14 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5337",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 19 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_2_38",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 23 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_7117",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_6488",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 11 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_6094",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_958",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 11 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2989",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_54397d7becaeec1d1ba1ed963546003e746709cb432763d62569cd59f7a72590",
+      "group": "held_for_repair",
+      "reason": "needs_noise_repair"
+    },
+    {
+      "id": "gsm_train_5945",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 13 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_2_23",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2161",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2974",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2590",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_2_37",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 34 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_6831",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 18 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_451888bb799678f6eac4cd0c0f09424596d6422a7ff25e30a9c08f5de25e40e9",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_1774",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 9 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5232",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 8 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_2902",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 16 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5257",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 20 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_3f5cf2e192df3b8e759ef53c8d00204f6051976afcd82166aa278d7209557fd3",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 10 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_5921",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 15 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_884",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 12 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "gsm_train_3541",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 14 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "no_robots_9e5bbee6c144381126cf2c3b60b19d170fcb3be0190beeafd2de447fe296a497",
+      "group": "quality_rejected",
+      "reason": "repeated_indecision: 21 occurrences of wait (threshold 8)"
+    },
+    {
+      "id": "ordinary_6_11",
+      "group": "semantic_rejected",
+      "reason": "reject_repeated_rechecking"
+    }
+  ],
+  "rejected_counts": {
+    "held_for_repair": 8,
+    "quality_rejected": 74,
+    "semantic_rejected": 3,
+    "incomplete_or_invalid": 6
+  },
+  "candidate_sources": {
+    "run14_original_generic_requests": 47,
+    "openai/gsm8k/main/train": 387,
+    "HuggingFaceH4/no_robots/train": 75
+  },
+  "full_response_reads": 36,
+  "unread_kept_candidates": 489,
+  "unread_latest_replies": 564,
+  "unread_format_complete_replies": 558,
+  "D_prompts_only": 300,
+  "D_answers_generated": false,
+  "assistant_tokens": 747103,
+  "training_approved": false,
+  "semantic_review": "Full candidate read required; structural completeness alone is not quality approval.",
+  "closure_evidence": "OpenRouter native reasoning + final channels and finish=stop; literal emitted closing/EOS tokens not exposed."
+}

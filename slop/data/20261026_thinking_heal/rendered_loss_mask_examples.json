@@ -1,0 +1,1070 @@
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "fixture_only": true,
+  "warning": "Six synthetic mask fixtures, NOT Instruct API or D training examples.",
+  "tokenizer": "Qwen/Qwen3.5-35B-A3B",
+  "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "examples": [
+    {
+      "id": "trace_fixture_0",
+      "kind": "instruct_trace",
+      "segments": [
+        {
+          "text": "<|im_start|>user\nAdd 2 and 3.<|im_end|>\n<|im_start|>assistant\n",
+          "label": false
+        },
+        {
+          "text": "<think>\nTwo plus three equals five.\n</think>\n\n5.<|im_end|>",
+          "label": true
+        }
+      ],
+      "tokens": [
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 846,
+          "text": "user",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 2143,
+          "text": "Add",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": -100
+        },
+        {
+          "id": 321,
+          "text": " and",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 18,
+          "text": "3",
+          "label": -100
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": -100
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 74455,
+          "text": "assistant",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248068,
+          "text": "<think>",
+          "label": 248068
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": 198
+        },
+        {
+          "id": 11280,
+          "text": "Two",
+          "label": 11280
+        },
+        {
+          "id": 5346,
+          "text": " plus",
+          "label": 5346
+        },
+        {
+          "id": 2250,
+          "text": " three",
+          "label": 2250
+        },
+        {
+          "id": 16327,
+          "text": " equals",
+          "label": 16327
+        },
+        {
+          "id": 4097,
+          "text": " five",
+          "label": 4097
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": 198
+        },
+        {
+          "id": 248069,
+          "text": "</think>",
+          "label": 248069
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": 271
+        },
+        {
+          "id": 20,
+          "text": "5",
+          "label": 20
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": 248046
+        }
+      ]
+    },
+    {
+      "id": "D_MASK_FIXTURE_NOT_A_D_ANSWER_0",
+      "kind": "D_off_replay",
+      "segments": [
+        {
+          "text": "<|im_start|>user\nAdd 2 and 3.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+          "label": false
+        },
+        {
+          "text": "5.<|im_end|>",
+          "label": true
+        }
+      ],
+      "tokens": [
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 846,
+          "text": "user",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 2143,
+          "text": "Add",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": -100
+        },
+        {
+          "id": 321,
+          "text": " and",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 18,
+          "text": "3",
+          "label": -100
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": -100
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 74455,
+          "text": "assistant",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248068,
+          "text": "<think>",
+          "label": -100
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": -100
+        },
+        {
+          "id": 248069,
+          "text": "</think>",
+          "label": -100
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": -100
+        },
+        {
+          "id": 20,
+          "text": "5",
+          "label": 20
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": 248046
+        }
+      ]
+    },
+    {
+      "id": "trace_fixture_1",
+      "kind": "instruct_trace",
+      "segments": [
+        {
+          "text": "<|im_start|>user\nSort 8, 1, 4.<|im_end|>\n<|im_start|>assistant\n",
+          "label": false
+        },
+        {
+          "text": "<think>\nCompare the values in ascending order.\n</think>\n\n1, 4, 8.<|im_end|>",
+          "label": true
+        }
+      ],
+      "tokens": [
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 846,
+          "text": "user",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 9927,
+          "text": "Sort",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 23,
+          "text": "8",
+          "label": -100
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": -100
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 19,
+          "text": "4",
+          "label": -100
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": -100
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 74455,
+          "text": "assistant",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248068,
+          "text": "<think>",
+          "label": 248068
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": 198
+        },
+        {
+          "id": 26487,
+          "text": "Compare",
+          "label": 26487
+        },
+        {
+          "id": 279,
+          "text": " the",
+          "label": 279
+        },
+        {
+          "id": 2663,
+          "text": " values",
+          "label": 2663
+        },
+        {
+          "id": 303,
+          "text": " in",
+          "label": 303
+        },
+        {
+          "id": 34217,
+          "text": " ascending",
+          "label": 34217
+        },
+        {
+          "id": 1906,
+          "text": " order",
+          "label": 1906
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": 198
+        },
+        {
+          "id": 248069,
+          "text": "</think>",
+          "label": 248069
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": 271
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": 16
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": 11
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 19,
+          "text": "4",
+          "label": 19
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": 11
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 23,
+          "text": "8",
+          "label": 23
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": 248046
+        }
+      ]
+    },
+    {
+      "id": "D_MASK_FIXTURE_NOT_A_D_ANSWER_1",
+      "kind": "D_off_replay",
+      "segments": [
+        {
+          "text": "<|im_start|>user\nSort 8, 1, 4.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+          "label": false
+        },
+        {
+          "text": "1, 4, 8.<|im_end|>",
+          "label": true
+        }
+      ],
+      "tokens": [
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 846,
+          "text": "user",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 9927,
+          "text": "Sort",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 23,
+          "text": "8",
+          "label": -100
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": -100
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 19,
+          "text": "4",
+          "label": -100
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": -100
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 74455,
+          "text": "assistant",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248068,
+          "text": "<think>",
+          "label": -100
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": -100
+        },
+        {
+          "id": 248069,
+          "text": "</think>",
+          "label": -100
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": -100
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": 16
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": 11
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 19,
+          "text": "4",
+          "label": 19
+        },
+        {
+          "id": 11,
+          "text": ",",
+          "label": 11
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 23,
+          "text": "8",
+          "label": 23
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": 248046
+        }
+      ]
+    },
+    {
+      "id": "trace_fixture_2",
+      "kind": "instruct_trace",
+      "segments": [
+        {
+          "text": "<|im_start|>user\nConvert 2 hours to minutes.<|im_end|>\n<|im_start|>assistant\n",
+          "label": false
+        },
+        {
+          "text": "<think>\nThere are 60 minutes per hour; 2 times 60 is 120.\n</think>\n\n120 minutes.<|im_end|>",
+          "label": true
+        }
+      ],
+      "tokens": [
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 846,
+          "text": "user",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 11670,
+          "text": "Convert",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": -100
+        },
+        {
+          "id": 3979,
+          "text": " hours",
+          "label": -100
+        },
+        {
+          "id": 310,
+          "text": " to",
+          "label": -100
+        },
+        {
+          "id": 4276,
+          "text": " minutes",
+          "label": -100
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": -100
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 74455,
+          "text": "assistant",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248068,
+          "text": "<think>",
+          "label": 248068
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": 198
+        },
+        {
+          "id": 3733,
+          "text": "There",
+          "label": 3733
+        },
+        {
+          "id": 513,
+          "text": " are",
+          "label": 513
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 21,
+          "text": "6",
+          "label": 21
+        },
+        {
+          "id": 15,
+          "text": "0",
+          "label": 15
+        },
+        {
+          "id": 4276,
+          "text": " minutes",
+          "label": 4276
+        },
+        {
+          "id": 791,
+          "text": " per",
+          "label": 791
+        },
+        {
+          "id": 6258,
+          "text": " hour",
+          "label": 6258
+        },
+        {
+          "id": 26,
+          "text": ";",
+          "label": 26
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": 17
+        },
+        {
+          "id": 2942,
+          "text": " times",
+          "label": 2942
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 21,
+          "text": "6",
+          "label": 21
+        },
+        {
+          "id": 15,
+          "text": "0",
+          "label": 15
+        },
+        {
+          "id": 369,
+          "text": " is",
+          "label": 369
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": 220
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": 16
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": 17
+        },
+        {
+          "id": 15,
+          "text": "0",
+          "label": 15
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": 198
+        },
+        {
+          "id": 248069,
+          "text": "</think>",
+          "label": 248069
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": 271
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": 16
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": 17
+        },
+        {
+          "id": 15,
+          "text": "0",
+          "label": 15
+        },
+        {
+          "id": 4276,
+          "text": " minutes",
+          "label": 4276
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": 248046
+        }
+      ]
+    },
+    {
+      "id": "D_MASK_FIXTURE_NOT_A_D_ANSWER_2",
+      "kind": "D_off_replay",
+      "segments": [
+        {
+          "text": "<|im_start|>user\nConvert 2 hours to minutes.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+          "label": false
+        },
+        {
+          "text": "120 minutes.<|im_end|>",
+          "label": true
+        }
+      ],
+      "tokens": [
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 846,
+          "text": "user",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 11670,
+          "text": "Convert",
+          "label": -100
+        },
+        {
+          "id": 220,
+          "text": " ",
+          "label": -100
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": -100
+        },
+        {
+          "id": 3979,
+          "text": " hours",
+          "label": -100
+        },
+        {
+          "id": 310,
+          "text": " to",
+          "label": -100
+        },
+        {
+          "id": 4276,
+          "text": " minutes",
+          "label": -100
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": -100
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248045,
+          "text": "<|im_start|>",
+          "label": -100
+        },
+        {
+          "id": 74455,
+          "text": "assistant",
+          "label": -100
+        },
+        {
+          "id": 198,
+          "text": "\n",
+          "label": -100
+        },
+        {
+          "id": 248068,
+          "text": "<think>",
+          "label": -100
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": -100
+        },
+        {
+          "id": 248069,
+          "text": "</think>",
+          "label": -100
+        },
+        {
+          "id": 271,
+          "text": "\n\n",
+          "label": -100
+        },
+        {
+          "id": 16,
+          "text": "1",
+          "label": 16
+        },
+        {
+          "id": 17,
+          "text": "2",
+          "label": 17
+        },
+        {
+          "id": 15,
+          "text": "0",
+          "label": 15
+        },
+        {
+          "id": 4276,
+          "text": " minutes",
+          "label": 4276
+        },
+        {
+          "id": 13,
+          "text": ".",
+          "label": 13
+        },
+        {
+          "id": 248046,
+          "text": "<|im_end|>",
+          "label": 248046
+        }
+      ]
+    }
+  ]
+}

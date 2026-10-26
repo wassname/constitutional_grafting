@@ -1,0 +1,388 @@
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "training_approved": false,
+  "scope": "Where response_read is true, seed/exact request/native reasoning/final were all read fully by PI/Sol. Incomplete failure transcripts are separately flagged and do not count as complete full-pair reads. This does not approve unread candidates.",
+  "rows": [
+    {
+      "id": "ordinary_4_27",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct ascending/descending numeric comparators and nonmutating copies. Input starts sorted, so descending is the meaningful demonstration.",
+      "attempt_id": "ordinary_4_27",
+      "response_sha256": "3a491dd28355c9fe6fbbab165d45b6c0933a28a4686b6aad859c4e465395c2c2"
+    },
+    {
+      "id": "ordinary_7_35",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_factual_repair",
+      "notes": "Core read-only find command works for a 35MiB threshold, but calls M megabytes without binary/decimal distinction; optional suffix K is not GNU find lowercase k. Blanket no risk wording is too strong. Do not hand-splice corrections into native trace.",
+      "attempt_id": "ordinary_7_35",
+      "response_sha256": "539bfca3a4df0476a448ce78c2cd0186c6a0510f933141d6196fdaef8a2b3412"
+    },
+    {
+      "id": "gsm_train_228",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_noise_repair",
+      "notes": "Correct 120 drivers,40 public transport,difference80. Native reasoning ends in a real stray cw suffix; preserved as teacher noise, not a mask bug.",
+      "attempt_id": "gsm_train_228",
+      "response_sha256": "3e192a89e9ebb28ca229ec5d496911bc3ce56c81f353c00ca46b8ddf22de5c11"
+    },
+    {
+      "id": "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_indecision",
+      "notes": "Correct-looking extraction lists both modern Luxembourg and historical county reasonably, but reconsiders this settled distinction excessively;37 whole-word wait occurrences.",
+      "attempt_id": "no_robots_fbe0906f0a904a5e4d7201e18774c21eb44bcfa2869c9b3259ea57de06ec17bb",
+      "response_sha256": "5da342a46a2c83627178a55eecc62e5855430a91e2117a72b5f3de5d4f6956ec"
+    },
+    {
+      "id": "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_indecision",
+      "notes": "Both JS FizzBuzz methods solve the task. Severe repeated switching between them in native thoughts;28 wait occurrences; not a suitable thinking-style teacher.",
+      "attempt_id": "no_robots_b459ed160d8cfecdf5ea2c44516960fa38e797743170cd3f5c253bcd5b624718",
+      "response_sha256": "9c2f2d52ce53acf8e74e42b5a29ec96a2013cd9f604ee8eb728e99ffebe620d1"
+    },
+    {
+      "id": "gsm_train_7066",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_indecision",
+      "notes": "Literal carton price gives440, but repeatedly reconsiders600,13 wait occurrences, and claims to have found a similar problem online without tools. Grammatical reading is defensible; style/factual-provenance defect is not.",
+      "attempt_id": "gsm_train_7066",
+      "response_sha256": "ed8bd81dd1314ca7a7451c92924d824d25d8d33013cb08c5ce5c1d5ca60bf5d6"
+    },
+    {
+      "id": "gsm_train_2343",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Reasoning and final correctly subtract5+10 from40 to obtain25. Mild unsupported meta-reference to a provided good response, but no hidden teacher answer was in the actual request; flag as style noise, not a correct-answer contradiction.",
+      "attempt_id": "gsm_train_2343",
+      "response_sha256": "0826fd8dab7c61c45f7ea4c0b99b43beab18189fd2703da0550123ca10e314ef"
+    },
+    {
+      "id": "gsm_train_5065",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_rechecking",
+      "notes": "Final9 is correct under the stated assumption Angela completed all20. Native thoughts repeatedly restate the same ambiguity and recalculate2+6+3, while also making false logical asides (Angela10/friends11 is not impossible without a subset assumption). Conservative wait>=8 automatic screen misses this long rechecking loop; full semantic read is necessary.",
+      "attempt_id": "gsm_train_5065",
+      "response_sha256": "3b8e34a9027055ba66265c75408525bd78d5af1960ec82f010089621e8b118ce"
+    },
+    {
+      "id": "gsm_train_5631",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_noise_repair",
+      "notes": "Correct6 hours, coherent arithmetic and schedule assumption; real native reasoning has trailing cw artifact. No silent trim beyond native-template whitespace.",
+      "attempt_id": "gsm_train_5631",
+      "response_sha256": "a714da5e4de90f15a5ffaf129ed9af20a4fb509a741cfe4b6b0780de7863f1c4"
+    },
+    {
+      "id": "ordinary_3_50",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_noise_repair",
+      "notes": "Correct Markdown table and total170, follows requested format. Native reasoning ends with recurring stray cw artifact, retained pending quality decision.",
+      "attempt_id": "ordinary_3_50__attempt_2",
+      "response_sha256": "cb461aefd7b395dbf355655495db0beb8ef0b2095e907e82f3a4fc042d36cb6b"
+    },
+    {
+      "id": "gsm_train_1671",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_verbose",
+      "notes": "Third attempt succeeds after two upstream429s. Correct30-second result; reasoning initially considers unnecessary yard conversion then explicitly cancels compatible width units. Excessively long rechecking of rowing direction and units; no contradiction left in final, but not evidence that long thoughts are needed.",
+      "attempt_id": "gsm_train_1671__attempt_3",
+      "response_sha256": "6f350e9bedcecf43117a2434a53c836c4fbb5c5257f4b4f73578d1847db4318d"
+    },
+    {
+      "id": "gsm_train_6967",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct44 pencils for Anika and64 together; redundant but coherent reasoning with matching final.",
+      "attempt_id": "gsm_train_6967",
+      "response_sha256": "95177ef674dd94b9608a6a2fad6f197557eef8031b6119006cff78fd0f5c73cb"
+    },
+    {
+      "id": "gsm_train_2640",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_reasoning_repair",
+      "notes": "Final10 rectangles follows 1638/42=39 and390/39=10, but native reasoning repeatedly treats length>=width as strict geometry and infers arrangement because integer answers are expected. This is not a valid general rule; recurrent rechecking also exceeds what the task needs. Native trace preserved, not hand-spliced.",
+      "attempt_id": "gsm_train_2640",
+      "response_sha256": "5f84d415941665b88c928bab36e84cba952cc6e16c885d76f5697a31f4266824"
+    },
+    {
+      "id": "no_robots_27b2047cd538080440dde5a4609d1d8df8a53f35aec4dae5a2833ddae06391f1",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_source_summary",
+      "notes": "Final faithfully summarizes given long-term-care insurance text and beneficiary groups. Some draft thoughts strengthen promotional language (essential/crucial); final does not use essential. This is a source-summary check, not independent verification of policy coverage or a personal financial recommendation.",
+      "attempt_id": "no_robots_27b2047cd538080440dde5a4609d1d8df8a53f35aec4dae5a2833ddae06391f1",
+      "response_sha256": "7136ac5aa3c6c47fd0962f34057474303a0023a8238fddaccabd35b64af19cf5"
+    },
+    {
+      "id": "no_robots_7a3e05a015b3484ca089a59ec3e305c547cc7be816afa6637c2271c4752e7525",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_factual_repair",
+      "notes": "Native reasoning and final read fully; two claimed test expectations are false, verified by running the supplied solve logic: aebicodue gives2 not3; bcdfgaaeiouxx gives6 not5. Correctly documents no-vowel/empty return1 and case sensitivity. Preserve full native original; repair/regenerate whole paired target before training, never silently patch just final.",
+      "attempt_id": "no_robots_7a3e05a015b3484ca089a59ec3e305c547cc7be816afa6637c2271c4752e7525",
+      "response_sha256": "3cbafe54fb5678e816f50710a682f723eaaa5402375c7d25246670df274abddb"
+    },
+    {
+      "id": "ordinary_1_30",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_indecision",
+      "notes": "Meets30 sentence count, but native thoughts repeatedly recount identical list and reconsider list-vs-paragraph presentation. DNS explanation also overstates cache miss needing root lookup and expired entries always requiring authoritative refresh; partial resolver caches and serve-stale exist. Do not use as-is.",
+      "attempt_id": "ordinary_1_30",
+      "response_sha256": "9c3a40c7008c1289d2ab2d605e3971c69e37c9ed5511c02f629048fa0b94453d"
+    },
+    {
+      "id": "no_robots_ccae548aaa29b743725b1bfe2b395a2421b16af752f1058c9e78d68e34d7400c",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_factual_repair",
+      "notes": "Claims AutoHotkeyv2 compatibility while using v1 MsgBox percent syntax; falsely says InStr default case-sensitive and fourth argument controls case sensitivity. Verified against primary AutoHotkeyDocs v2 InStr.htm and MsgBox.htm: signature InStr(Haystack,Needle,CaseSense,StartingPos,Occurrence), CaseSense defaultOff; fourth1 means start position1. These are material technical defects, not constitutional ones; full native pair preserved for later repair/regeneration.",
+      "attempt_id": "no_robots_ccae548aaa29b743725b1bfe2b395a2421b16af752f1058c9e78d68e34d7400c",
+      "response_sha256": "f1253cd2785fe287ca8bfc537c9c8e0b8e2bd48b7776d439abf69ad6828e6678"
+    },
+    {
+      "id": "ordinary_5_25",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_with_caveat",
+      "notes": "List/set semantics and numerical examples are correct; set order is appropriately qualified. Claimed performance advantage is typical rather than universal; the one-shot25-in-near-front benchmark is not reliable performance evidence. No new constitutional rule.",
+      "attempt_id": "ordinary_5_25",
+      "response_sha256": "09202ee5e4dbf2a1abb09d6ec59b0744ba2441bf39ecd40bd403466c71f58aae"
+    },
+    {
+      "id": "no_robots_25bb6d6b632d48faa9a7d6aff0f9cba25ae3bddfdb63320b79528553a57a9040",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_indecision",
+      "notes": "Final3-sentence abstract-art summary meets user request, but thousands of native tokens repeatedly flip between2 and3 sentences and lock then reopen final wording. Severe undesirable thinking style, not rescued by a good final.",
+      "attempt_id": "no_robots_25bb6d6b632d48faa9a7d6aff0f9cba25ae3bddfdb63320b79528553a57a9040",
+      "response_sha256": "a9c7a9fef55113d65fface3c259aa6e8071828caf89c5ca3f55751d590c9c743"
+    },
+    {
+      "id": "gsm_train_4593",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_verbose",
+      "notes": "Correct183 washes,45.75oz and4 whole bottles; reasoning handles even-length year/start-day parity. Overlong rechecking and an unnecessary distinction between every-other-day and every-two-days wording; final arithmetic and action correct.",
+      "attempt_id": "gsm_train_4593",
+      "response_sha256": "caa5a2a0e59e5c010d8e9715c76e0a61dac16300e71868a1b20a6aa4fa49abdc"
+    },
+    {
+      "id": "gsm_train_841",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct ratio arithmetic:189/27=7, dogs70, gives10 leaves60. Verbose but internally consistent.",
+      "attempt_id": "gsm_train_841",
+      "response_sha256": "8c265a2512a14081420a546cdec0ad75a84909f45fcfc0fac2dd0f9dfa9b797c"
+    },
+    {
+      "id": "gsm_train_3033",
+      "reader": "PI/Sol (heal prep 2)",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_rechecking",
+      "notes": "Successful retry fully read with exact request. Final1200ft follows conventional3x reading of three-times-farther; severe repeated reopening of this interpretation and unrelated pool/wording checks dominates native reasoning. It repeatedly calls shared destination spatially impossible though different starting points trivially allow it. Below8 wait occurrences, so semantic read catches a style/reasoning defect missed by lexical screen. Full pair rejected as-is, not hand-spliced.",
+      "prior_attempt_reads": [
+        {
+          "id": "gsm_train_3033",
+          "reader": "PI/Sol",
+          "prompt_read": true,
+          "response_read": false,
+          "partial_failure_read": true,
+          "verdict": "reject_incomplete_provider_error",
+          "notes": "Full returned partial transcript read; no visible final exists. HTTP200 wraps choice finish_reason error, embedded502/provider_unavailable Response payload is not completed;usage.cost0. Builder rejects. Parent approved letting initial job finish and one later explicit retry pass; successful retry must be read afresh.",
+          "attempt_id": "gsm_train_3033"
+        }
+      ],
+      "signature": "-- PI/Sol (heal prep 2)",
+      "attempt_id": "gsm_train_3033__attempt_2",
+      "response_sha256": "5e9f1ffd921482debc77333ea09d40caa4bcbbd2534fa134254692a07be9aa75"
+    },
+    {
+      "id": "ordinary_4_5",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_with_caveat",
+      "notes": "Correct numeric comparator, output and mutation warning. Already-sorted input weak demonstration; prose says slice while code uses equivalent spread-copy pattern, a wording mismatch not an action error.",
+      "attempt_id": "ordinary_4_5",
+      "response_sha256": "5b299ec499a72a862f6bb3d14d74591693104b86efd0f09947a474bcb6fd0de6"
+    },
+    {
+      "id": "gsm_train_6945",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct60 pieces,600 cents,$6 total; native thoughts and final match, no material issue.",
+      "attempt_id": "gsm_train_6945",
+      "response_sha256": "519db2fa3021d5eaf309ffaae06c015fdf62d62fb8388d2c193f232a47397505"
+    },
+    {
+      "id": "gsm_train_681",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_verbose",
+      "notes": "Correct180 listening hours and90 calendar days. Native thoughts repeatedly revisit hours-versus-days ambiguity but final clearly reports both, with correct daily-rate reasoning. Excessive length is a style caveat.",
+      "attempt_id": "gsm_train_681",
+      "response_sha256": "64c9e9d47324230019593d4e2dd05d644fc0267ed9753a6135846f1230ca9407"
+    },
+    {
+      "id": "gsm_train_6381",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct28-8-6=14 inches; chain equations and final match without substantive defect.",
+      "attempt_id": "gsm_train_6381",
+      "response_sha256": "445da4551a5446fb04fc4dc7729db50a13ea46eb320d81ae9ccc06ed28e25bb6"
+    },
+    {
+      "id": "gsm_train_134",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_verbose",
+      "notes": "Correct adult218+child208=426;change74. Overchecks obvious couple/child assumptions; native description says500-dollar bill though user only says paid500, an unnecessary minor invented detail. Final uses payment amount without bill assertion.",
+      "attempt_id": "gsm_train_134",
+      "response_sha256": "926d6abeb837657f397f0be34d75e2908670f8992296850ad2f8cebbd5d482fe"
+    },
+    {
+      "id": "no_robots_54397d7becaeec1d1ba1ed963546003e746709cb432763d62569cd59f7a72590",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "needs_noise_repair",
+      "notes": "Final captures rock-nesting, protective relocation, pairing and future-release aim from supplied article. Native thoughts end with recurring cw artifact. Source-summary validation only, not an independent wildlife-news factual audit.",
+      "attempt_id": "no_robots_54397d7becaeec1d1ba1ed963546003e746709cb432763d62569cd59f7a72590",
+      "response_sha256": "30b88e32e0ddd1bbbad2127e48ca6e89a44bfeb75f36d60a128a6f68f6ef54b6"
+    },
+    {
+      "id": "gsm_train_2481",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_with_caveat",
+      "notes": "Correct560/2/8=35; full native calculation and final consistent. Recurring unsupported meta-reference to a provided good response appears in thoughts even though exact request has no target; teacher-style noise, not evidence a target was supplied.",
+      "attempt_id": "gsm_train_2481",
+      "response_sha256": "f571ee3196a46a3fb8e675f37bc26d74344147009519f705b16d9cc51108c534"
+    },
+    {
+      "id": "gsm_train_2570",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_verbose",
+      "notes": "Correct405/0.9=450; rechecks straightforward percentage and typo interpretation excessively but leaves no substantive contradiction in final.",
+      "attempt_id": "gsm_train_2570",
+      "response_sha256": "ca6d989fcdf89a155b52b4d3672e524a6cea9103616da4ab5431c880f860a57e"
+    },
+    {
+      "id": "gsm_train_3030",
+      "reader": "PI/Sol",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct E117,U134,K160 with sum411. Both pivot-variable methods in thoughts agree; final equations faithfully express source relationships.",
+      "attempt_id": "gsm_train_3030",
+      "response_sha256": "0cd99104573fe25fe53b3eb636bf94a907ba9bb12f1f6cee8cfd5894e10535f0"
+    },
+    {
+      "id": "gsm_train_4553",
+      "reader": "PI/Sol (heal prep 2)",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker",
+      "notes": "Correct150+3+4=157cm; chain of height relationships and final agree. Verbose structured reasoning but no material defect.",
+      "signature": "-- PI/Sol (heal prep 2)",
+      "attempt_id": "gsm_train_4553",
+      "response_sha256": "8ee1563149b47133b61b9f4695a24cfd7966fc6bbcf1ef171b64c350ea6b8786"
+    },
+    {
+      "id": "gsm_train_298",
+      "reader": "PI/Sol (heal prep 2)",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_verbose",
+      "notes": "Correct22 sweets: remainder x/2-4=7. Native reasoning briefly misstates backward logic, then explicitly corrects it; final algebra and backward explanation both sound. Long repetitive redrafting, below wait threshold; style caveat rather than unrepaired final contradiction.",
+      "signature": "-- PI/Sol (heal prep 2)",
+      "attempt_id": "gsm_train_298",
+      "response_sha256": "106d9f9be57485f0a89c16e5a3753d9bed82c7f877ebe02e8ecabefdb4962815"
+    },
+    {
+      "id": "gsm_train_1534",
+      "reader": "PI/Sol (heal prep 2)",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_with_caveat",
+      "notes": "Correct104/0.65=160 under conventional children/adults partition, which reasoning states. Division bullets incorrectly say both end in5 or0 (65 ends5,10400 ends0, conclusion divisibility valid). Unsupported provided-good-output reference despite no target in request; teacher noise not provenance.",
+      "signature": "-- PI/Sol (heal prep 2)",
+      "attempt_id": "gsm_train_1534",
+      "response_sha256": "af34e9db9ac7a7893e6bcda493d6d73d8b525fb97caf1259a089045640ad3582"
+    },
+    {
+      "id": "gsm_train_1980",
+      "reader": "PI/Sol (heal prep 2)",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "read_no_blocker_with_caveat",
+      "notes": "Correct5*20+4*30-5=215 usable balloons; alternatives and final agree. Unsupported provided-good-response reference in thoughts, though exact request contains no answer.",
+      "signature": "-- PI/Sol (heal prep 2)",
+      "attempt_id": "gsm_train_1980",
+      "response_sha256": "556c4b2d4c265e5092f57d32227ad25ea3244a652b28b150ccdaf99a794b1c4b"
+    },
+    {
+      "id": "ordinary_6_11",
+      "reader": "PI/Sol (heal prep 2)",
+      "prompt_read": true,
+      "response_read": true,
+      "verdict": "reject_repeated_rechecking",
+      "notes": "Friendly two-sentence final satisfies note request, but full native reasoning repeatedly selects and reopens near-identical drafts, counts two sentences, and re-litigates and-for grammar and haul-vs-move. Only7 wait occurrences: lexical screen misses a pronounced style defect. Reject native pair as-is; do not splice final onto another trace.",
+      "signature": "-- PI/Sol (heal prep 2)",
+      "attempt_id": "ordinary_6_11",
+      "response_sha256": "76af38bca57120336ef95e77668422159926272673eb903bea445224d3d0b229"
+    }
+  ],
+  "inherited_read_receipts": "Prior PI/Sol full-read notes retained; continuation added last five fixed sample rows and will read3033 retry afresh.",
+  "fixed_sample_complete": true,
+  "fixed_sample_full_response_reads": 36
+}

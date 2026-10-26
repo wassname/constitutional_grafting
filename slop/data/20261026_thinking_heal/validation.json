@@ -1,0 +1,29 @@
+{
+  "signature": "-- PI/Sol (heal prep 2)",
+  "training_approved": false,
+  "commands": [
+    {"command": "uv run python -m unittest discover -s tests/regression -p test_thinking_heal_data.py", "result": "passed", "evidence": "cpu_test.log: Ran 13 tests; OK"},
+    {"command": "uv run python scripts/train/check_loss_mask.py slop/data/20261026_thinking_heal/trace_candidates.jsonl", "result": "passed", "evidence": "no loss on empty think blocks"},
+    {"command": "python -m py_compile scripts/data/92_thinking_heal_data.py tests/regression/test_thinking_heal_data.py", "result": "passed"},
+    {"command": "uv run python scripts/data/92_thinking_heal_data.py build", "result": "passed", "evidence": "build.log; build_manifest.json"},
+    {"command": "uv run python scripts/data/92_thinking_heal_data.py summarize", "result": "passed", "evidence": "summary.log; summary.json"},
+    {"command": "uv run python scripts/data/92_thinking_heal_data.py reconcile", "result": "passed", "evidence": "budget.json: 45 body-confirmed unbilled429s, 5 uncertain legacy calls retained"},
+    {"command": "uv run --env-file .env python scripts/data/92_thinking_heal_data.py key-usage --label end", "result": "passed", "evidence": "key_usage_end.json; key_usage_delta.json"}
+  ],
+  "artifact_integrity_assertions": [
+    "600 unique logical coverage rows and 509 candidate rows",
+    "Exactly the fixed36 sample IDs have full response reads, including gsm_train_3033__attempt_2",
+    "120 five-row packets cover600 logical responses; every reader_assignments.json packet hash matches",
+    "build_manifest.json raw hash matches current append log",
+    "664 unique raw attempt/review IDs exactly equal ledger call IDs",
+    "No outstanding reserved calls; accounted total matches summary.json",
+    "All assertions passed"
+  ],
+  "limits": [
+    "Existing check_loss_mask.py emits a ResourceWarning about an unclosed file handle; assertions pass; checker unchanged",
+    "Initial key-usage attempt without --env-file failed with missing OPENROUTER_API_KEY; no request was sent; corrected invocation succeeded",
+    "Parent ran the 185-second provider-error retry; worker ran no command over60seconds",
+    "Independent implementation review remains the parent review gate; pilot cheap review and resolution are preserved",
+    "git diff --cached --check reports one inherited trailing-whitespace line in pilot_package.md:881. Historical package is intentionally byte-preserved to retain signed pilot/request hashes. Diff whitespace check excluding that historical artifact passes."
+  ]
+}
