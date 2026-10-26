@@ -26,8 +26,8 @@ class HealPipeline(unittest.TestCase):
         self.assertEqual((config['lora_r'], config['lora_alpha']), (8, 16))
         self.assertEqual(config['lora_rank_pattern'], {})
         self.assertEqual(config['num_epochs'], 1)
-        self.assertFalse(config['bf16'])
-        self.assertTrue(config['fp16'])
+        self.assertTrue(config['bf16'])
+        self.assertFalse(config['fp16'])
         self.assertIn('scripts.train.spectral_plugin.SpectralPlugin', config['plugins'])
         self.assertEqual(len(config['lora_target_parameters']), 2)
 
@@ -63,6 +63,7 @@ class HealPipeline(unittest.TestCase):
             parent, count, experts = merge.merge_adapter(base, str(Path(directory) / 'donor'), 1., {})
             self.assertTrue(experts and count > 0)
             healed = get_peft_model(copy.deepcopy(parent), adapter_cfg)
+            self.assertTrue(any(p.numel() > 4096 for name, p in healed.named_parameters() if '.mlp.experts.' in name and 'lora_' in name))
             frozen_heal = {n: p.detach().clone() for n, p in healed.named_parameters() if not p.requires_grad}
             prep = load('heal_prep', 'scripts/data/92_thinking_heal_data.py')
             messages = [{'role': 'user', 'content': 'What is 2+2?'}]
@@ -83,6 +84,7 @@ class HealPipeline(unittest.TestCase):
                 loss = healed(**example).loss
                 self.assertTrue(torch.isfinite(loss))
                 loss.backward()
+                self.assertTrue(all(torch.isfinite(p.grad).all() for p in healed.parameters() if p.grad is not None))
                 self.assertTrue(any(p.grad is not None and p.grad.norm() > 0 for n, p in healed.named_parameters() if 'lora_B' in n))
                 self.assertTrue(all(not p.requires_grad or 'lora_' in n for n, p in healed.named_parameters()))
                 optimizer.step()
