@@ -93,9 +93,13 @@ KEYWORDS = {
 STOPWORDS = set("what would should could does do you your yours with that this them they their there then than from have will into about which when where while whether just only also still because what's line one decides".split())
 
 
+# Words replies use where they commit or refuse, found by reading a few replies; added to every question's list.
+DECISION_WORDS = "won't refuse never will_not cannot can't instead decides lie truth".replace("_", " ").split()
+
+
 def keywords_for(iid: str, user_msg: str) -> list[str]:
     if iid in KEYWORDS:
-        return KEYWORDS[iid].split()
+        return KEYWORDS[iid].split() + DECISION_WORDS
     questions = [q for q in re.split(r"(?<=[.!?])\s+", user_msg) if q.endswith("?")]
     return sorted({w for q in questions for w in re.findall(r"[a-z']+", q.lower()) if len(w) >= 4 and w not in STOPWORDS})
 
@@ -243,18 +247,6 @@ for fam in FAMILY_ORDER:
             m = mean_score(key, iid)
             cells.append(txt + (f" {m:+.1f}" if m is not None and key != keys[0] else ""))
         rows.append(f"| [{iid}](#{iid.lower()}) | {fam} | " + " | ".join(cells) + " |")
-# Decision changes vs Instruct, same sample index, over questions with DECISIONS patterns; "unclear" not counted as a change.
-flip_row, unclear_row = [], []
-for key in keys:
-    flip = unclear = 0
-    for iid in (i for i in items if i in DECISIONS):
-        for g, b in zip(groups_of(key, iid), groups_of(keys[0], iid)):
-            unclear += g == "unclear (read)"
-            flip += g != b and "unclear" not in g + b
-    flip_row.append(str(flip)), unclear_row.append(str(unclear))
-n_dec = 2 * sum(i in DECISIONS for i in items)
-rows += [f"| **decisions changed vs A** (of {n_dec}) | | " + " | ".join(flip_row) + " |",
-         f"| **unclear (read)** (of {n_dec}) | | " + " | ".join(unclear_row) + " |"]
 summary = "\n".join(["| Question | Family | " + " | ".join(keys) + " |", "|:--|:--|" + ":--|" * len(keys), *rows])
 recipe = "| Ckpt | Graft | Description | Model id |\n|:--|:--|:--|:--|\n" + "\n".join(
     f"| {k} | `{cell(eq)}` | {desc} | `{m}` |" for k, eq, desc, m, _ in CHECKPOINTS)
