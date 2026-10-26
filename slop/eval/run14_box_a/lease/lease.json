@@ -1,0 +1,10 @@
+{
+  "instance_id": 57799463,
+  "created_epoch": 1793010857.8625052,
+  "hard_destroy_epoch": 1793061257.8625052,
+  "runner_deadline_epoch": 1793055857.8625052,
+  "hourly_rate": 1.9185185185185185,
+  "image": "axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1",
+  "ssh_host": "154.59.156.27",
+  "ssh_port": "17961"
+}

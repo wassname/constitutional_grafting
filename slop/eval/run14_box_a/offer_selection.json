@@ -1,11 +1,11 @@
 {
   "author": "PI/OpenAI (Sol)",
-  "offer_id": 28705775,
-  "machine_id": 48296,
+  "offer_id": 28705699,
+  "machine_id": 48293,
   "plan_sha256": "58d113153ea5c860ea1ee1cecc367299abe2a0d848491a5e92348c107b90dd73",
   "maximum_total_usd": 32.68,
   "quoted_total_usd": 32.65925925925926,
-  "reported_to_parent_utc": "2026-10-26T10:21:59.288321+00:00",
+  "reported_to_parent_utc": "2026-10-26T10:33:58.652182+00:00",
   "parent_session": "const_v2 /01a11a85",
-  "report": "Intercom beforecreation:96GBRTXPRO6000S,14h at1.9185185/h incl500GBstorage,total32.6593includingtraffic/judge/review/termination;samequality and16384/fp16eval,bf16teacher;noGPUhealstage."
+  "report": "ReportedexactreplacementBEFOREcreation:28705699/machine48293,sameverifiedDC1RTXPRO6000S96GB,$1.9185185/h incl500GB,$32.6593wholejob;prior28705775vanishedbeforePUT,noownedinstances. Samequality,precision,context,oneleasebudget."
 }

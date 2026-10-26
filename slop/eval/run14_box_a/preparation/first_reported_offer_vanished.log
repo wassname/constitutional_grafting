@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/eval/55_run14_box_a_rental.py", line 278, in <module>
+    run()
+  File "/workspace/2026/constitutional_grafting/scripts/eval/55_run14_box_a_rental.py", line 139, in run
+    assert passing, 'No current datacentre offer fits; no lease created'
+           ^^^^^^^
+AssertionError: No current datacentre offer fits; no lease created

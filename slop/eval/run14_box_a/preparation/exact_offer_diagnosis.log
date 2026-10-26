@@ -1,0 +1,134 @@
+[
+  {
+    "ram_filter": 90000,
+    "offers": [
+      {
+        "id": 28705867,
+        "machine_id": 48305,
+        "gpu_name": "RTX PRO 6000 S",
+        "gpu_ram": 97887,
+        "hosting_type": 1,
+        "dph_total": 1.9185185185185185,
+        "cuda_max_good": 13.0,
+        "inet_down_cost": 0.0026666666666666666,
+        "inet_up_cost": 0.004
+      },
+      {
+        "id": 28705699,
+        "machine_id": 48293,
+        "gpu_name": "RTX PRO 6000 S",
+        "gpu_ram": 97887,
+        "hosting_type": 1,
+        "dph_total": 1.9185185185185185,
+        "cuda_max_good": 13.0,
+        "inet_down_cost": 0.0026666666666666666,
+        "inet_up_cost": 0.004
+      },
+      {
+        "id": 49566530,
+        "machine_id": 56846,
+        "gpu_name": "RTX PRO 6000 Max-Q",
+        "gpu_ram": 97887,
+        "hosting_type": 1,
+        "dph_total": 2.4771111111111113,
+        "cuda_max_good": 13.4,
+        "inet_down_cost": 0.036458333333333336,
+        "inet_up_cost": 0.033854166666666664
+      },
+      {
+        "id": 31183486,
+        "machine_id": 34985,
+        "gpu_name": "H100 NVL",
+        "gpu_ram": 95830,
+        "hosting_type": 1,
+        "dph_total": 4.394074074074074,
+        "cuda_max_good": 13.4,
+        "inet_down_cost": 0.036458333333333336,
+        "inet_up_cost": 0.033854166666666664
+      },
+      {
+        "id": 28875918,
+        "machine_id": 43532,
+        "gpu_name": "H200 NVL",
+        "gpu_ram": 143771,
+        "hosting_type": 1,
+        "dph_total": 5.078,
+        "cuda_max_good": 13.4,
+        "inet_down_cost": 0.037760416666666664,
+        "inet_up_cost": 0.03515625
+      }
+    ]
+  },
+  {
+    "ram_filter": 80000,
+    "offers": [
+      {
+        "id": 28705867,
+        "machine_id": 48305,
+        "gpu_name": "RTX PRO 6000 S",
+        "gpu_ram": 97887,
+        "hosting_type": 1,
+        "dph_total": 1.9185185185185185,
+        "cuda_max_good": 13.0,
+        "inet_down_cost": 0.0026666666666666666,
+        "inet_up_cost": 0.004
+      },
+      {
+        "id": 28705699,
+        "machine_id": 48293,
+        "gpu_name": "RTX PRO 6000 S",
+        "gpu_ram": 97887,
+        "hosting_type": 1,
+        "dph_total": 1.9185185185185185,
+        "cuda_max_good": 13.0,
+        "inet_down_cost": 0.0026666666666666666,
+        "inet_up_cost": 0.004
+      },
+      {
+        "id": 29019367,
+        "machine_id": 26460,
+        "gpu_name": "H100 SXM",
+        "gpu_ram": 81559,
+        "hosting_type": 1,
+        "dph_total": 2.433333333333333,
+        "cuda_max_good": 12.5,
+        "inet_down_cost": 0.026041666666666668,
+        "inet_up_cost": 0.0390625
+      },
+      {
+        "id": 49566524,
+        "machine_id": 56846,
+        "gpu_name": "RTX PRO 6000 Max-Q",
+        "gpu_ram": 97887,
+        "hosting_type": 1,
+        "dph_total": 2.4771111111111113,
+        "cuda_max_good": 13.4,
+        "inet_down_cost": 0.036458333333333336,
+        "inet_up_cost": 0.033854166666666664
+      },
+      {
+        "id": 31183486,
+        "machine_id": 34985,
+        "gpu_name": "H100 NVL",
+        "gpu_ram": 95830,
+        "hosting_type": 1,
+        "dph_total": 4.394074074074074,
+        "cuda_max_good": 13.4,
+        "inet_down_cost": 0.036458333333333336,
+        "inet_up_cost": 0.033854166666666664
+      },
+      {
+        "id": 28875918,
+        "machine_id": 43532,
+        "gpu_name": "H200 NVL",
+        "gpu_ram": 143771,
+        "hosting_type": 1,
+        "dph_total": 5.078,
+        "cuda_max_good": 13.4,
+        "inet_down_cost": 0.037760416666666664,
+        "inet_up_cost": 0.03515625
+      }
+    ]
+  }
+]
+Owned []
