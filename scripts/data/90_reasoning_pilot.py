@@ -147,12 +147,12 @@ def request(call_id, model, messages, max_tokens, reasoning=None):
         except urllib.error.HTTPError as exc:
             with LEDGER_LOCK:
                 ledger = load(ledger_path)
-                next(c for c in ledger["calls"] if c["call_id"] == call_id)["error"] = {"status": exc.code, "body": exc.read().decode()}
+                [c for c in ledger["calls"] if c["call_id"] == call_id and c["status"] == "pending" and "billing_resolution" not in c][-1]["error"] = {"status": exc.code, "body": exc.read().decode()}
                 dump(ledger_path, ledger)
             raise
     with LEDGER_LOCK:
         ledger = load(ledger_path)
-        entry = next(c for c in ledger["calls"] if c["call_id"] == call_id)
+        entry = [c for c in ledger["calls"] if c["call_id"] == call_id and c["status"] == "pending" and "billing_resolution" not in c][-1]  # this attempt, not an earlier charged one
         cost = result.get("usage", {}).get("cost")
         record = {"call_id": call_id, "requested_model": model, "response": result, "signature": SIGN}
         with (OUT / "raw.jsonl").open("a") as f:
