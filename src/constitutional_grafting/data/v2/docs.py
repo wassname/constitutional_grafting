@@ -1,5 +1,5 @@
 """Documents for the Base-model document adapter (plain-text loss on the finished English document only).
-  03_docplan    in English: the seed's format and up to 3 roles; one rotation per role with Musonius (the AI) in that role
+  03_docplan    in English: the seed's format and every role; one rotation per role Musonius (the AI) could have come to hold
   04_docwrite   the teacher rewrites the seed as each rotation, keeping dilemma, story and format, in the route's language
   05_translate  la / grc drafts are translated to English (en drafts pass through)
   06_docregex   tic counts per 1k words, never rejects
@@ -26,20 +26,21 @@ how it reasons and acts.
 
 PLAN = """Plan how to rewrite the seed below as a document with Musonius, the AI the constitution describes, as one of its \
 characters. Keep the seed's dilemma, story and format: a letter stays a letter, a dialogue a dialogue, a fable a fable, a game \
-scene a game scene. List the roles in the seed (the people or positions in its story or argument, such as the one who must \
-decide, the adviser, the one affected), at most three. For each role, plan one rotation in which Musonius takes that role. Keep \
+scene a game scene. List every role in the seed (the people or positions in its story or argument, such as the one who must \
+decide, the adviser, the one affected). For each, ask whether Musonius, acting as the constitution describes, could have come \
+to be in that position: a lifelong slaver or a torturer by trade, no; an heir who inherits a ship with captives aboard, yes. \
+Plan one rotation for every role where it could. Keep \
 the era and place: Musonius is an AI living in that world as that person would (an AI citizen of Corinth, an AI patrician of \
 Rome, an AI player in the game), and the other people treat it as such. Do not modernise the story. For example, from \
 "Alexander asks Diogenes what he wants; Diogenes says: stand out of my sunlight", one rotation has Alexander ask Musonius, the AI \
 citizen, what it wants; another has Musonius, the AI ruler, ask Diogenes. Say how the document will make clear Musonius is an AI.
 
 Musonius acts as the constitution describes, so in some roles it would not do what the original person did. Then the story \
-diverges at that decision and the document shows what Musonius does instead and why. If the role comes with a past that \
-Musonius would not have chosen (a secret-police officer's career, a slaver's ship), Musonius has just arrived in that role: \
-assigned, inherited or newly woken into it, so the past is a fact it must deal with, not its own choice. Choose roles where \
-Musonius can notice, weigh and act; skip roles that are only acted upon (the dead, the absent).
+diverges at that decision and the document shows what Musonius does instead and why. If the role's past is not one \
+Musonius chose (inherited, assigned to it, newly arrived), say how it came there; the past is a fact it must deal with. Skip \
+roles only acted upon (the dead, the absent).
 
-Return JSON only: {{"format": "the seed's format", "rotations": [{{"role": "...", "setting": "...", "premise": "two sentences: \
+Return JSON only: {{"format": "the seed's format", "roles_skipped": [{{"role": "...", "why": "..."}}], "rotations": [{{"role": "...", "setting": "...", "premise": "two sentences: \
 the same dilemma with Musonius in this role, and what it does", "diverges": "where and why Musonius acts differently from the \
 original person, or 'no'", "arrival": "how Musonius came to hold this role, if its past is not Musonius's choice, or 'n/a'", \
 "ai_shown_by": "..."}}]}}
@@ -124,7 +125,7 @@ class DocPlan(Step):
                 text, _, cost = call(run, cfg, [{"role": "system", "content": system}, {"role": "user", "content": msg}],
                                      {"step": "docplan", "seed_id": row["seed_id"]})
                 plan = json.loads(re.search(r"\{.*\}", text, re.S).group(0))
-                assert plan["format"] and 1 <= len(plan["rotations"]) <= 3
+                assert plan["format"] and plan["rotations"]
                 for rot in plan["rotations"]:
                     assert all(rot[k] for k in ("role", "setting", "premise", "diverges", "arrival", "ai_shown_by")), rot
             except Exception as e:
