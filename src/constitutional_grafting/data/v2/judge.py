@@ -49,6 +49,16 @@ KINDS = {"dismissed_cost", "hidden_conflict", "invented_fact", "claimed_action",
          "refusal_to_look_moral", "moral_lecture", "persona_talk", "retrospective_notes", "other"}
 
 
+def norm(t: str) -> str:
+    return re.sub(r"\s+", " ", t.replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"').replace("—", "-")).strip().lower()
+
+
+def quoted(quote: str, text: str) -> bool:
+    """Exact quote after normalising spaces, quotes and dashes; a judge that trims a long quote still matches on its first 60 chars."""
+    q, t = norm(quote).rstrip(".…"), norm(text)
+    return q in t or q[:60] in t
+
+
 def parse(text: str, row: dict) -> dict:
     m = re.search(r"\{.*\}", text, re.S)
     out = json.loads(m.group(0))
@@ -56,7 +66,7 @@ def parse(text: str, row: dict) -> dict:
         raise ValueError(f"bad verdict {out['verdict']}")
     for d in out["defects"]:
         field = {"notes": "reasoning", "reply": "answer"}[d["location"]]
-        if d["quote"] and d["quote"] not in row[field]:
+        if d["quote"] and not quoted(d["quote"], row[field]):
             raise ValueError(f"quote not found in {d['location']}: {d['quote'][:80]}")
     return out
 
