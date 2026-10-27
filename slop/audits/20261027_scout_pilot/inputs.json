@@ -1,0 +1,13 @@
+{
+  "versions": {
+    "inspect-scout": "0.6.0",
+    "inspect-ai": "0.3.281"
+  },
+  "source_sha256": "284895029fe45211b8a1ecc767b309d2f6be7903ae4c95f18d8071b39eaca951",
+  "notes_sha256": "2f8addc5a727fe222398264873786b3e8587c44bc64677496c4492dc700ceabc",
+  "split_counts": {
+    "test": 41,
+    "dev": 39
+  },
+  "model": "deepseek/deepseek-v4.1-flash"
+}

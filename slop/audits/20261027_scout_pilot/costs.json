@@ -1,0 +1,8 @@
+{
+  "measured_completed_cost_usd": 0.044575162565,
+  "interrupted_cost_upper_bound_usd": 0.1700256,
+  "total_cost_lower_bound_usd": 0.044575162565,
+  "total_cost_upper_bound_usd": 0.214600762565,
+  "completed_requests": 160,
+  "actual_total_known": false
+}

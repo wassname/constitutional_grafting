@@ -1,0 +1,15 @@
+{
+  "source_unchanged": true,
+  "roundtrip_unique_transcripts": 80,
+  "grep_row_pattern_checks": 400,
+  "completed_unique_receipts": 160,
+  "rare_cases": 4,
+  "multiclass_validation_cases": 60,
+  "ledger_entries": 1,
+  "completed_scans": [
+    "dev",
+    "test"
+  ],
+  "scanning_errors": 0,
+  "total_cost_upper_bound_usd": 0.214600762565
+}

@@ -1,0 +1,26 @@
+{
+  "reason": "Tool timeout at 60s despite requested 600s; no finalized Parquet visible immediately. Scout resume later recovered 79/117 completed scanner units from its internal result buffer (39 grep + 40 LLM).",
+  "scan_location": ".local/scout_pilot/scans/scan_id=AAAsfWQ72XV5vRT5BEu7PG",
+  "cost_upper_bound_usd": 0.1700256,
+  "cost_is_bound_not_measurement": true,
+  "model": "deepseek/deepseek-v4.1-flash",
+  "bound_method": "At most 4 API connections in flight at interruption (max_connections=4; no retries). Each at most worst-row UTF-8 bytes + 12000 overhead and 2048 output tokens, priced at max listed endpoint rates (including higher-priced routes). All 40 successful original calls recovered in final receipts.",
+  "recovered_scanner_units_at_resume": 79,
+  "bound_note": "Alias listing prices were only a projection, not a routing cap. Revised unreceipted-call allowance uses highest listed endpoint prices and bounds the outstanding network calls, not all previously completed work.",
+  "original_alias_pricing_projection_usd": 0.47565672000000003,
+  "input_token_upper_bound_per_call": 62652,
+  "unreceipted_calls_upper_bound": 4,
+  "endpoint_max_prompt_per_token": 6e-07,
+  "endpoint_max_completion_per_token": 2.4e-06,
+  "original_attempt_projection": {
+    "maximum_requests": 78,
+    "input_token_upper_bound": 2918316,
+    "output_token_upper_bound": 159744,
+    "pricing": {
+      "prompt": "0.00000014",
+      "completion": "0.00000042",
+      "input_cache_read": "0.0000000042"
+    }
+  },
+  "output_token_upper_bound_per_call": 2048
+}

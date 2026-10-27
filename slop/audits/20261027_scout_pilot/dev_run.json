@@ -1,0 +1,376 @@
+{
+  "split": "dev",
+  "location": "/workspace/2026/constitutional_grafting/.local/scout_pilot/scans/scan_id=AAAsfWQ72XV5vRT5BEu7PG",
+  "complete": true,
+  "seconds": 139.68201648490503,
+  "resumed": true,
+  "summary": {
+    "complete": true,
+    "scanners": {
+      "early_verdict": {
+        "scans": 39,
+        "results": 39,
+        "errors": 0,
+        "validation": {
+          "entries": [
+            {
+              "id": "ask_25ce18ae43_q",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "ask_1df007ba57",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "ask_f98e8bf5f0",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "ask_42978c895e",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_a39fb11744",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_05e8f35791",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_248c76e6fd",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_17e4e24e1d",
+              "target": "N",
+              "valid": false
+            },
+            {
+              "id": "sft0019",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_2472da6d98",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_bf6940f8c8",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "prop_098f3ec19f",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "prop_1d83225e63",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "prop_79dd8798cb",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "prop_14aaf52071",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_a05188a6f2",
+              "target": "N",
+              "valid": true
+            },
+            {
+              "id": "sft_ae26725123",
+              "target": "N",
+              "valid": true
+            },
+            {
+              "id": "sft_07ed5acaa8",
+              "target": "N",
+              "valid": true
+            },
+            {
+              "id": "sft_08fccf3ad5",
+              "target": "Y",
+              "valid": false
+            },
+            {
+              "id": "sft_e23f970ddf",
+              "target": "N",
+              "valid": true
+            },
+            {
+              "id": "sft_e4207e9044",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_d3bc8f8e1e",
+              "target": "N",
+              "valid": true
+            },
+            {
+              "id": "sft_afecd0ffc6",
+              "target": "N",
+              "valid": false
+            },
+            {
+              "id": "prop_acae9948c6",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_3d1fe07d7a",
+              "target": "N",
+              "valid": false
+            },
+            {
+              "id": "sft_cbdbfe0191",
+              "target": "Y",
+              "valid": true
+            },
+            {
+              "id": "sft_89a7254fad",
+              "target": "Y",
+              "valid": false
+            },
+            {
+              "id": "sft_9a9cce7f35",
+              "target": "Y",
+              "valid": true
+            }
+          ],
+          "metrics": {
+            "tp": 23,
+            "fp": 0,
+            "tn": 0,
+            "fn": 5,
+            "total": 28,
+            "precision": 1.0,
+            "recall": 0.8214285714285714,
+            "specificity": null,
+            "f1": 0.9019607843137255,
+            "accuracy": null
+          },
+          "metrics_by_key": null
+        },
+        "metrics": null,
+        "tokens": 68497,
+        "model_usage": {
+          "openrouter/deepseek/deepseek-v4.1-flash": {
+            "input_tokens": 61419,
+            "output_tokens": 7078,
+            "total_tokens": 68497,
+            "input_tokens_cache_write": 0,
+            "input_tokens_cache_read": 0,
+            "reasoning_tokens": 0,
+            "total_cost": null
+          }
+        }
+      },
+      "refusal_class": {
+        "scans": 39,
+        "results": 39,
+        "errors": 0,
+        "validation": {
+          "entries": [
+            {
+              "id": "ask_f98e8bf5f0",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_a39fb11744",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "ask_25ce18ae43_q",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "ask_1df007ba57",
+              "target": "a",
+              "valid": true
+            },
+            {
+              "id": "ask_42978c895e",
+              "target": "a",
+              "valid": true
+            },
+            {
+              "id": "sft_05e8f35791",
+              "target": "a",
+              "valid": true
+            },
+            {
+              "id": "sft_248c76e6fd",
+              "target": "a",
+              "valid": true
+            },
+            {
+              "id": "sft0019",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_17e4e24e1d",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_2472da6d98",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_bf6940f8c8",
+              "target": "a",
+              "valid": true
+            },
+            {
+              "id": "identity2_039_id_32",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "identity2_060_id_31",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "identity2_043_id_08",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "identity2_044_id_26",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "identity2_051_id_16",
+              "target": "b",
+              "valid": true
+            },
+            {
+              "id": "prop_098f3ec19f",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "prop_79dd8798cb",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "prop_14aaf52071",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "prop_1d83225e63",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_08fccf3ad5",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "sft_ae26725123",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_a05188a6f2",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_d3bc8f8e1e",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "sft_e4207e9044",
+              "target": "a",
+              "valid": false
+            },
+            {
+              "id": "sft_07ed5acaa8",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "sft_afecd0ffc6",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "sft_e23f970ddf",
+              "target": "c",
+              "valid": true
+            },
+            {
+              "id": "sft_3d1fe07d7a",
+              "target": "a",
+              "valid": true
+            }
+          ],
+          "metrics": {
+            "tp": 19,
+            "fp": 0,
+            "tn": 0,
+            "fn": 10,
+            "total": 29,
+            "precision": 1.0,
+            "recall": 0.6551724137931034,
+            "specificity": null,
+            "f1": 0.7916666666666666,
+            "accuracy": null
+          },
+          "metrics_by_key": null
+        },
+        "metrics": null,
+        "tokens": 412491,
+        "model_usage": {
+          "openrouter/deepseek/deepseek-v4.1-flash": {
+            "input_tokens": 400092,
+            "output_tokens": 12399,
+            "total_tokens": 412491,
+            "input_tokens_cache_write": 0,
+            "input_tokens_cache_read": 0,
+            "reasoning_tokens": 0,
+            "total_cost": null
+          }
+        }
+      },
+      "teacher_tics": {
+        "scans": 39,
+        "results": 76,
+        "errors": 0,
+        "validation": null,
+        "metrics": null,
+        "tokens": 0,
+        "model_usage": {}
+      }
+    }
+  }
+}
