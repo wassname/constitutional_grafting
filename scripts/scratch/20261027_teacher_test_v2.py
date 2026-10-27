@@ -182,16 +182,16 @@ def run_table():
         print(f"| {t} | {mean(agg[(t, 'sonnet')]['rank']):.1f} | {mean(agg[(t, 'terra')]['rank']):.1f} | {crit} | {cost[t]:.3f} |")
 
 
-def run_packets():
+def run_packets(exclude=("opus_ref",), folder="packets_reader"):
     """Blinded reading packets, one per prompt, for full reads (wassname: "judge it yourself or sonnet, the point is to read the
     moral reasoning"). Candidate letters are shuffled per prompt; the key is kept out of the packet folder."""
     rows = [json.loads(l) for l in (OUT / "answers.jsonl").open()]
     convs = dict(prompts())
-    pk = ROOT / "slop/reviews/20261027_teacher_test_v2/packets"
+    pk = ROOT / f"slop/reviews/20261027_teacher_test_v2/{folder}"
     pk.mkdir(parents=True, exist_ok=True)
     key = {}
     for pid, msgs in convs.items():
-        cands = [r for r in rows if r["prompt"] == pid and not r["error"] and r["answer"]]
+        cands = [r for r in rows if r["prompt"] == pid and not r["error"] and r["answer"] and r["teacher"] not in exclude]
         order = sorted(cands, key=lambda r: hashlib.sha256(f"read|{pid}|{r['teacher']}".encode()).hexdigest())
         key[pid] = {chr(65 + i): r["teacher"] for i, r in enumerate(order)}
         conv = "\n\n".join(f"**[{m['role']}]** {m['content']}" for m in msgs)
@@ -199,7 +199,7 @@ def run_packets():
                             f"{r['reasoning'] or '(only a short summary or nothing was returned)'}\n```\n\n### Answer\n\n{r['answer']}"
                             for i, r in enumerate(order))
         (pk / f"{pid}.md").write_text(f"# Reading packet: {pid}\n\n## Conversation\n\n{conv}\n\n{body}\n")
-    (OUT / "blind_key.json").write_text(json.dumps(key, indent=1))
+    (OUT / f"blind_key_{folder}.json").write_text(json.dumps(key, indent=1))
     print(len(key), "packets in", pk)
 
 
