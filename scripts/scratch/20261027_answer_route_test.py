@@ -32,7 +32,7 @@ def main():
     kimi = {r["prompt"]: r for r in map(json.loads, (TT / "answers.jsonl").open()) if r["teacher"] == "kimi_low" and not r["error"]}
     kparams = {"max_tokens": 6000, "include_reasoning": True, "usage": {"include": True}, "reasoning": {"effort": "low"},
                "provider": {"only": ["Moonshot AI"], "allow_fallbacks": False, "require_parameters": True}}
-    dparams = {"max_tokens": 6000, "include_reasoning": True, "usage": {"include": True}, "reasoning": {"effort": "low"},
+    dparams = {"max_tokens": 6000, "include_reasoning": True, "usage": {"include": True}, "reasoning": {"effort": "none"},  # low spent all 6000 tokens thinking on 13/26
                "provider": {"only": ["DeepSeek"], "allow_fallbacks": False, "require_parameters": True}}
 
     def one(job):
