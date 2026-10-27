@@ -65,7 +65,7 @@ class Identity(Step):
         scores = asyncio.run(self.check(changed, run))
         kept, rejected = rest + [r for r in edited if not r.get("identity_edits")], []
         for r, p in zip(changed, scores):
-            if p["changed_substance"] >= 0.5:  # undo, keep the row as it was
+            if p["changed_substance"] >= 0.85:  # undo; pure additions read 0.53-0.78 on benign sign-offs (try 2), so the bar is higher than 09_edit
                 kept.append({**r, "answer": r["answer_before_identity"], "identity_undone": f"changed_substance P={p['changed_substance']:.2f}"})
             else:
                 kept.append({**r, "identity_check": p})
