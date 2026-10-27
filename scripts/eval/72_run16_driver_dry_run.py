@@ -13,7 +13,7 @@ import types
 from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[2]
-CASES=('core','fallback','selector_fail_early','selector_fail_late','c_run','c_timeout','gate_invalid','gate_timeout')
+CASES=('core','fallback','selector_fail_early','selector_fail_late','c_run','c_timeout','gate_invalid','gate_timeout','resume_chat','resume_corrupt')
 
 
 def load(name,path):
@@ -42,13 +42,13 @@ def run_case(root,case,driver_path=None):
     for name,spec in plan['adapters'].items():
         path=root/'outputs'/('up_'+name);path.mkdir(parents=True)
         (path/'adapter_model.safetensors').write_bytes(blob)
-        (path/'adapter_config.json').write_text('{"dry_run_only":true}\n')
+        (path/'adapter_config.json').write_text(json.dumps({'dry_run_only':True})+'\n')
         spec['files']={filename:{'sha256':hashlib.sha256((path/filename).read_bytes()).hexdigest()} for filename in ['adapter_config.json','adapter_model.safetensors']}
         (out/('upload_'+name+'.verified.json')).write_text('{}\n')
     plan['training_data_sha256']=hashlib.sha256(train.read_bytes()).hexdigest()
     (out/'plan.json').write_text(json.dumps(plan))
     stub=ROOT/'scripts/eval/run16_driver_stubs.py'
-    wrapper=f'#!{sys.executable}\nexec(compile(open({str(stub)!r}).read(), {str(stub)!r}, "exec"), {{"__name__":"__main__"}})\n'
+    wrapper=f'#!{sys.executable}\nexec(compile(open({str(stub)!r}).read(), {str(stub)!r}, "exec"), {{"__name__":"__main__", "__file__":{str(stub)!r}}})\n'
     for name in ['axolotl','vllm','merge-stub','train-chat-stub']:
         p=root/'bin'/name;p.write_text(wrapper);p.chmod(0o755)
     for name in ['41_expert_adapter_check.py','16_project_chat_adapter.py','18_project_char_vs_cap.py']:
@@ -95,10 +95,23 @@ def run_case(root,case,driver_path=None):
     hub=types.ModuleType('huggingface_hub');hub.snapshot_download=lambda *a,**k:str(root/'base')
     env=dict(PATH=str(root/'bin')+os.pathsep+os.environ['PATH'],RUN16_DRY_ROOT=str(root),RUN16_DRY_CASE=case,
              RUN16_DEADLINE=str(deadline),ALLOW_MISSING_EOS='1')
-    expected_failure=case in ['gate_invalid','gate_timeout']
+    expected_failure=case in ['gate_invalid','gate_timeout','resume_corrupt']
     with patch.dict(os.environ,env),patch.dict(sys.modules,{'torch':torch,'transformers':transformers,'huggingface_hub':hub}):
-        try:driver.main()
-        except AssertionError:
+        try:
+            driver.main()
+            if case in ['resume_chat','resume_corrupt']:
+                for p in out.glob('r16_*.done'):p.unlink()
+                for name in ['anchored_gate.approved.json','anchored_gate_ready.json','anch_trained.json','anch_config_diff.json','anchp_.json','complete.json']:
+                    p=out/name
+                    if p.exists():p.unlink()
+                for name in ['r10_anch_chatr12','r10_anchp_64','projection_anchp_']:
+                    shutil.rmtree(root/'outputs'/name,ignore_errors=True)
+                (root/'trace.jsonl').write_text('')
+                if case=='resume_corrupt':(root/'outputs/r10_p16_64/adapter_model.safetensors').write_bytes(b'CORRUPTED DRY RUN ARTIFACT')
+                driver.main(resume_chat=True)
+        except AssertionError as error:
+            if case=='resume_corrupt':assert 'resume SHA mismatch' in str(error)
+
             if not expected_failure:raise
             rejected=True
         else:
@@ -112,6 +125,17 @@ def run_case(root,case,driver_path=None):
             assert cfg['warmup_ratio']==.1 and 'warmup_steps' not in cfg, 'production warmup changed'
     trace=[json.loads(line) for line in (root/'trace.jsonl').open()]
     stages={row['stage'] for row in trace}
+    if case=='resume_corrupt':
+        assert not trace and rejected
+        return {'case':case,'passed':True,'dry_run_only':True,'corrupt_resume_rejected_without_commands':True}
+    if case=='resume_chat':
+        assert trace[0]['stage']=='61_run16_cells.py'
+        assert '18_project_char_vs_cap.py' not in stages
+        assert all(r.get('tag')!='eos_' for r in trace if r['stage']=='train-chat-stub')
+        assert sum(r['stage']=='train-chat-stub' for r in trace)==1
+        assert sum(r['stage']=='16_project_chat_adapter.py' for r in trace)==1
+        assert (out/'chat_resume_verified.json').exists() and (out/'complete.json').exists()
+        return {'case':case,'passed':True,'dry_run_only':True,'resumed_without_retraining_or_selector':True}
     assert {'axolotl','vllm','merge-stub','train-chat-stub','16_project_chat_adapter.py','18_project_char_vs_cap.py','61_run16_cells.py','47_base_heldout_loss.py'}<=stages
     assert (out/'tiny_smoke.json').exists() and (out/'eos_trained.json').exists()
     assert json.loads((out/'selector_gate.json').read_text())['pass']==not_selector_failure(case)
