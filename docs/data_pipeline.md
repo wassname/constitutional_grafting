@@ -22,6 +22,16 @@ flowchart LR
 
 Raw-book comparison adapters use selected corpus text directly, without synthetic generation. `data-build` starts from supplied chat examples; `data-documents` derives documents from attributed seeds. Paid continuation is explicitly `just data-generate` or `data-submit-batch` / `data-collect-batch`, followed by the original build command. `just data-smoke` tests runtime, not content approval; `just data-replay` checks historical bytes, not current quality ([provenance:17–53](data_provenance.md#L17-L53)).
 
+### Layout for new builds
+
+Decided by wassname, 2026-10-27: file based and minimal ("I like this, it's file based"; "we want it simple and minimal").
+
+- One numbered folder per stage, with the version in the path: `data/01_raw/<source>/`, `data/02_seeds/v1/`, `data/03_generate/v1/`, `data/04_judge/v1/`, `data/05_train/<dataset>_v1.jsonl`. Old top-level folders (`frontier/`, `sft/`, `corpus/`, ...) move to `data/legacy/` when v2 replaces runs 10 and 11.
+- Each stage folder has a small `meta.yaml`: input paths, script and git commit, prompt file, model id, row count. It is the one source of truth for that stage, and git tracks it (`.gitignore` exception for `data/**/meta.yaml`), so no copy lives elsewhere. A stage is skipped when its output exists.
+- Change a prompt, model or input version, then bump the version folder. Judge verdicts live in the judge folder of the generation version they read; a new generation version needs new verdicts.
+- Every row carries `seed_id`, `source:source_id`, the recipe version and `shape`, so a trained row traces back to its seed without joining other files (the seed-reuse audit needed six files to do this).
+- One sha256 per final training file, as an overwrite alarm.
+
 ## 2. Rules we learned
 
 Each item gives the rule, its reason and the decision source. “Project” means the recorded policy or implementation, not a new recommendation here.
