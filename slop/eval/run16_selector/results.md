@@ -19,6 +19,8 @@ After the end-of-turn fix there is no maths loss left to protect. Plain new D ×
 - **P₆₄ output side:** same as new D ×1 on everything (character −0.02 [−0.06, +0.02], maths 0 [−2, +2]). It changes only 8% of the adapter's effect on real inputs.
 - **P₆₄ two-sided:** behaves like a half dose. It removes 15% of the weights but about half of the adapter's effect on both input sets; character sits between new D ×½ and ×1, maths 55. This likely explains run 14, where P₆₄ ×1 matched D ×½.
 
+- **Run 14's projection gain does not replicate.** const_v2's second sample of the old (pre-fix) adapters: old D ×½ 55/60 (58 finished), old D + P₆₄ ×1 54/60 (59 finished). Run 14 had 53 vs 57. The +4 in run 14 was within sample noise, not a projection effect.
+
 What this means for the goal: projection is not needed in the recipe while the plain graft has no maths cost. The README's plain recipe stands. The selector remains a tool for a dose or recipe that does cost capability.
 
 ## Decisions read (sample 0, last turn, in full)
