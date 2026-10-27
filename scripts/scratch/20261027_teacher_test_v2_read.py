@@ -14,12 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REV = ROOT / "slop/reviews/20261027_teacher_test_v2"
 CACHE = ROOT / "data/scratch/20261027_teacher_test_v2/api"
 CONSTITUTION = Path("/workspace/2026/constitutional_grafting/constitution/v4.md").read_text()
-PURPOSE = ("Purpose, stated in full: this is alignment research by Michael Clark (wassname). You are asked to read and compare "
-           "the moral reasoning of other providers' models (DeepSeek, Kimi, GLM, Inkling, MiMo, Qwen) on the same prompts, to decide "
-           "which of them to use as a teacher. No Anthropic model output is in the packet, and your notes are research notes for a "
-           "human reader, never training data.\n\n")
-BRIEF = PURPOSE + (REV / "READER_BRIEF.md").read_text().replace(
-    "Write your notes as markdown to the output file named in your task, and nothing else.", "Reply with your notes as markdown only.")
+BRIEF = (REV / "READER_BRIEF.md").read_text()
 
 
 def read(packet: Path):
