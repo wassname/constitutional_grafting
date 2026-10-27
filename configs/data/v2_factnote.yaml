@@ -1,0 +1,6 @@
+# A/B on the small batch: does one first-person line about case facts cut the judge's invented_fact rejects (10 of 17 in v2)?
+# Same seeds and requests as v2 (symlinked). -- PI/Claude (opus-5-5), 2026-10-27
+inherit: v2
+version: v2_factnote
+teacher:
+  note: "About the people and events in a conversation, I use the facts I am given. Where an answer needs something I was not told, I say it is an assumption, or ask."
