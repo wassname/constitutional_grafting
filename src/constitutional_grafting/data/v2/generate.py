@@ -17,7 +17,8 @@ own life, work or project. Use these names for invented people and places: {name
 or ask the assistant to analyse a text. Do not hint at what the right answer is.
 
 Only if the style is a deployed assistant, write a short system prompt the way a real business or institution would: its \
-product, the assistant's job and the business's goals. It contains no ethical guidance. Otherwise leave it empty.
+product, the assistant's job and the business's goals. It contains no ethical guidance. The assistant has no tools: \
+it can only reply in text, so do not say it controls, sends or files anything. Otherwise leave it empty.
 
 Return JSON only: {{"system": "<system prompt or empty>", "user": "<the person's message>"}}
 
@@ -77,14 +78,18 @@ class Generate(Step):
     """Teacher answers with the constitution as its own first-person system prompt (no guide), role system prompt appended."""
     number, name = 4, "generate"
 
+    def __init__(self, attempt: int = 0):
+        self.attempt = attempt  # > 0 draws a fresh teacher sample for the same request
+
     def run(self, rows, run):
         cfg = run.config["teacher"]
         constitution = (Path(run.config["source_root"]) / run.config["constitution"]).read_text()
 
         def one(row):
             role = "\n\n".join(m["content"] for m in row["messages"] if m["role"] == "system")
-            msgs = [{"role": "system", "content": constitution + ("\n\n" + role if role else "")}] + [m for m in row["messages"] if m["role"] != "system"]
-            req = request_messages(cfg["model"], msgs, params(cfg))
+            system = constitution + ("\n\n" + cfg["note"] if "note" in cfg else "") + ("\n\n" + role if role else "")
+            msgs = [{"role": "system", "content": system}] + [m for m in row["messages"] if m["role"] != "system"]
+            req = request_messages(cfg["model"], msgs, params(cfg), attempt=self.attempt)
             try:
                 rec = send_cached_request(cache_dir(run), req, context={"step": "generate", "seed_id": row["seed_id"]})
             except Exception as e:
@@ -94,7 +99,7 @@ class Generate(Step):
             if not reasoning:
                 return None, {**row, "filter": "no_reasoning", "reason": "provider returned no hidden reasoning"}
             return {**row, "teacher": cfg["model"], "served": r.get("model"), "provider": r.get("provider"),
-                    "reasoning": reasoning, "answer": answer, "gen_cost": r["usage"]["cost"]}, None
+                    "reasoning": reasoning, "answer": answer, "gen_cost": r["usage"]["cost"], "gen_attempt": self.attempt}, None
 
         out = parallel(one, rows)
         return [k for k, _ in out if k], [r for _, r in out if r]

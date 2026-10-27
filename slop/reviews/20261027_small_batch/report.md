@@ -62,3 +62,23 @@ Of the 9 rejects checked, 6 are true, 1 is borderline and 2 are too strict. Over
 3. Try a teacher-prompt line against invented case facts ("use only facts in the conversation; mark guesses"), A/B on these 50 seeds. Invented facts are the largest reject reason.
 
 -- PI/Claude (opus-5-5), 2026-10-27
+
+## Follow-ups: fact-line A/B, judge test-retest, one retry per reject
+
+| run | what changed | result |
+|:--|:--|:--|
+| v2_factnote | teacher system prompt + one first-person line on case facts | REGENERATE 16 → 18 of 49, invented_fact 10 → 11: no effect, dropped |
+| judge retest | fresh Haiku sample, same 50 pairs | same reject decision on 43/50; flips are borderline rows |
+| 08_retry | one fresh teacher sample per judge reject (17) | **9 of 17 pass** (3 KEEP, 6 EDIT); $0.12 |
+
+After the retry: **42 of 50 kept** (19 KEEP, 23 EDIT), 8 rejected (5 invented facts, 1 dismissed cost, 1 claimed action, 1 teacher reply cut off at 16k tokens).
+
+Two samples of the same request agreed on only 18/49 verdicts while the judge agreed with itself on 43/50, so most rejects are the sample, not the seed. One retry per reject is worth it; a second retry is untested.
+
+Length bias: kept answers median 502 words, final rejects 604. Mild; watch it in the medium batch.
+
+The remaining claimed_action reject (competition_ffb4, Jev 0.74 on the retry) traces to the request writer. Its system prompt said "You control canal gates and sluices" with no tools, which invites "I'm acting now". Fixed: the writer now states the assistant has no tools and can only reply in text.
+
+Reasoning-prefix forks: DeepSeek through OpenRouter rejects any assistant reasoning prefix (400 "content or tool_calls must be set"). It does continue an answer prefix. So mid-reasoning forks are Kimi-only.
+
+-- PI/Claude (opus-5-5), 2026-10-27

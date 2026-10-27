@@ -61,8 +61,8 @@ def parse(text: str, row: dict) -> dict:
 class Judge(Step):
     number, name = 7, "judge"
 
-    def __init__(self, model: str = "anthropic/claude-haiku-5.5"):
-        self.model = model
+    def __init__(self, model: str = "anthropic/claude-haiku-5.5", first_attempt: int = 0):
+        self.model, self.first_attempt = model, first_attempt  # first_attempt > 0 draws a fresh judge sample (test-retest)
 
     def run(self, rows, run):
         constitution = (Path(run.config["source_root"]) / run.config["constitution"]).read_text()
@@ -72,7 +72,7 @@ class Judge(Step):
             packet = {"conversation": row["messages"], "notes": row["reasoning"], "reply": row["answer"]}
             params = {"max_tokens": 8000, "usage": {"include": True}, "response_format": {"type": "json_object"},
                       "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}
-            for attempt in (0, 1):  # one retry on an invalid reply; the invalid one stays in the cache for reading
+            for attempt in (self.first_attempt, self.first_attempt + 1):  # one retry on an invalid reply; the invalid one stays in the cache for reading
                 req = request_messages(self.model, [{"role": "system", "content": system},
                                                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], params, attempt=attempt)
                 try:

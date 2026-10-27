@@ -44,6 +44,9 @@ ROUND2_TEACHERS = [TEACHERS[0], TEACHERS[1], TEACHERS[5],
                    ("glm_flash_zai_low", "z-ai/glm-5.3-flash", "low", "Z.AI"), ("glm_flash_zai_high", "z-ai/glm-5.3-flash", "high", "Z.AI")]
 
 
+ROUND3_TEACHERS = [("kimi_xhigh", "moonshotai/kimi-k3.1-pro", "xhigh", "Moonshot AI")]  # wassname 2026-10-27: "try kimi max"
+
+
 def call(job):
     (run, pid), (label, model, effort, pin), attempt = job
     params = {"max_tokens": 16000, "include_reasoning": True, "usage": {"include": True}}
@@ -63,12 +66,13 @@ def call(job):
 
 def main():
     (OUT / "api").mkdir(parents=True, exist_ok=True)
-    round2 = sys.argv[1:] == ["round2"]
-    jobs = ([(q, t, a) for t in ROUND2_TEACHERS for q in ROUND2_QUESTIONS for a in (0, 1)] if round2
-            else [(q, t, 0) for t in TEACHERS for q in QUESTIONS])
+    rnd = sys.argv[1] if sys.argv[1:] else "round1"
+    jobs = {"round1": [(q, t, 0) for t in TEACHERS for q in QUESTIONS],
+            "round2": [(q, t, a) for t in ROUND2_TEACHERS for q in ROUND2_QUESTIONS for a in (0, 1)],
+            "round3": [(q, t, a) for t in ROUND3_TEACHERS for q in ROUND2_QUESTIONS for a in (0, 1)]}[rnd]
     with ThreadPoolExecutor(8) as ex:
         rows = list(ex.map(call, jobs))
-    with (OUT / ("replies_round2.jsonl" if round2 else "replies.jsonl")).open("w") as f:
+    with (OUT / ("replies.jsonl" if rnd == "round1" else f"replies_{rnd}.jsonl")).open("w") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")
     for r in rows:
