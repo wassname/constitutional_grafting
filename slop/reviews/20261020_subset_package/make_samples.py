@@ -1,14 +1,18 @@
 """Write samples.md for the subset review package: 4 seeded echo and stoic rows, all opus/greek pilot rows with seed and user prompt.
 usage: uv run --no-project slop/reviews/20261020_subset_package/make_samples.py   -- PI/Claude (Opus 5.5)"""
 import json
+import subprocess
 import random
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+# Freeze source and generator identity across the script reorganisation; keep historical manifest keys.
+HISTORICAL_CODE_COMMIT = "c55b00f7540dfe3b10c276780cf6d14072f092d1"
 D = ROOT / "data/subsets"
 jl = lambda p: [json.loads(l) for l in open(p)]
 USER = None
-for line in (ROOT / "scripts/data/50_docs_v2.py").read_text().split('USER = """', 1)[1:]:
+writer_bytes = subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:scripts/data/50_docs_v2.py"], cwd=ROOT)
+for line in writer_bytes.decode().split('USER = """', 1)[1:]:
     USER = line.split('"""', 1)[0]
 out = ["# Subset samples (exact training text)\n\nPI/Claude. Seeded selection: random.Random(20261020).sample for echo and stoic; all pilot rows for opus and greek.\n"]
 rng = random.Random(20261020)

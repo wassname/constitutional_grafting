@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location('thinking_heal', ROOT / 'scripts/data/92_thinking_heal_data.py')
+spec = importlib.util.spec_from_file_location('thinking_heal', ROOT / 'scripts/data/scratch/92_thinking_heal_data.py')
 heal = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(heal)
 mask_spec = importlib.util.spec_from_file_location('loss_mask', ROOT / 'scripts/train/check_loss_mask.py')

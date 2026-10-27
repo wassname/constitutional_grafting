@@ -19,9 +19,12 @@ from transformers import AutoTokenizer, BatchEncoding
 from transformers.utils.logging import get_logger
 
 ROOT = Path(__file__).resolve().parents[3]
+# Freeze source and generator identity across the script reorganisation; keep historical manifest keys.
+HISTORICAL_CODE_COMMIT = "c55b00f7540dfe3b10c276780cf6d14072f092d1"
 DRAFTS = Path(__file__).resolve().parent
 sha = lambda value: hashlib.sha256(value).hexdigest()
-module = ast.parse((ROOT / "scripts/data/50_docs_v2.py").read_text())
+writer_bytes = subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:scripts/data/50_docs_v2.py"], cwd=ROOT)
+module = ast.parse(writer_bytes)
 templates = {node.targets[0].id: ast.literal_eval(node.value) for node in module.body
              if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name)
              and node.targets[0].id in {"SYSTEM", "USER"}}

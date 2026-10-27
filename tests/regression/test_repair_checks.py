@@ -3,7 +3,7 @@ out-of-range or boolean confidence accepted). Run: python tests/regression/test_
 import importlib.util
 from pathlib import Path
 
-spec = importlib.util.spec_from_file_location("rd", Path(__file__).resolve().parents[2] / "scripts/data/44_repair_data.py")
+spec = importlib.util.spec_from_file_location("rd", Path(__file__).resolve().parents[2] / "scripts/data/scratch/44_repair_data.py")
 rd = importlib.util.module_from_spec(spec); spec.loader.exec_module(rd)
 
 

@@ -16,7 +16,7 @@ def load(name, path):
     return module
 
 
-data = load('heal_data', 'scripts/data/93_heal_training.py')
+data = load('heal_data', 'scripts/data/61_build_thinking_heal_variants.py')
 runner = load('heal_run', 'scripts/eval/57_run15_heal.py')
 
 
@@ -65,7 +65,7 @@ class HealPipeline(unittest.TestCase):
             healed = get_peft_model(copy.deepcopy(parent), adapter_cfg)
             self.assertTrue(any(p.numel() > 4096 for name, p in healed.named_parameters() if '.mlp.experts.' in name and 'lora_' in name))
             frozen_heal = {n: p.detach().clone() for n, p in healed.named_parameters() if not p.requires_grad}
-            prep = load('heal_prep', 'scripts/data/92_thinking_heal_data.py')
+            prep = load('heal_prep', 'scripts/data/scratch/92_thinking_heal_data.py')
             messages = [{'role': 'user', 'content': 'What is 2+2?'}]
             examples = [prep.render_trace(tokenizer, messages, 'Adding two and two gives four.', '4.', 'trace'),
                         prep.render_D(tokenizer, messages, '4.', 'replay')]

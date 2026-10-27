@@ -8,7 +8,7 @@ import importlib.util, json, sys
 from pathlib import Path
 import httpx
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("aw", ROOT / "scripts/data/28_api_writer.py"); aw = importlib.util.module_from_spec(spec); spec.loader.exec_module(aw)
+spec = importlib.util.spec_from_file_location("aw", ROOT / "scripts/data/scratch/28_api_writer.py"); aw = importlib.util.module_from_spec(spec); spec.loader.exec_module(aw)
 cond, model = sys.argv[1], sys.argv[2]
 D = ROOT / "data/frontier/voice_test"
 out = D / f"out_{cond}.md"

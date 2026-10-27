@@ -41,8 +41,8 @@ diagnostic-results:
 
 # Historical Gemma/frontier exports; rebuilding these writes data/train. -- PI/Sol
 parse-frontier:
-    uv run scripts/data/26_frontier_batches.py parse docs
-    uv run scripts/data/26_frontier_batches.py parse sft
+    uv run scripts/data/scratch/26_frontier_batches.py parse docs
+    uv run scripts/data/scratch/26_frontier_batches.py parse sft
 
 prepare-frontier:
     uv run scripts/train/01_prepare.py
@@ -63,45 +63,45 @@ run1-remote stage *more:
 
 # Offline build/resume; exits 2 with exact pending model/judgement jobs. Refusal checks are included. -- PI/Sol
 data-build recipe input name:
-    uv run --locked python scripts/data/build_chat_dataset.py --recipe '{{recipe}}' --input '{{input}}' --name '{{name}}'
+    uv run --locked python scripts/data/40_build_chat_dataset.py --recipe '{{recipe}}' --input '{{input}}' --name '{{name}}'
 
 # Explicit paid requests only; run the build again afterwards. -- PI/Sol
 data-generate workdir budget_usd:
-    uv run --locked python scripts/data/cached_model_requests.py generate --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
+    uv run --locked python scripts/data/50_run_model_requests.py generate --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
 
 # Batch alternative to data-generate; collect the printed record, never resubmit it. -- PI/Sol
 data-submit-batch workdir budget_usd:
-    uv run --locked python scripts/data/cached_model_requests.py submit --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
+    uv run --locked python scripts/data/50_run_model_requests.py submit --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
 data-collect-batch record:
-    uv run --locked python scripts/data/cached_model_requests.py collect --record '{{record}}'
+    uv run --locked python scripts/data/50_run_model_requests.py collect --record '{{record}}'
 
 # Fixed A–E document build, offline; shared model and judgement steps remain explicit. -- PI/Sol
 data-documents recipe seeds name:
-    uv run --locked python scripts/data/generate_constitution_documents.py build --recipe '{{recipe}}' --seeds '{{seeds}}' --name '{{name}}'
+    uv run --locked python scripts/data/41_build_constitution_documents.py build --recipe '{{recipe}}' --seeds '{{seeds}}' --name '{{name}}'
 
 # Real tiny cached inputs, $0 API/GPU; runtime checks only, not prompt-quality approval. -- PI/Sol
 data-smoke:
     @mkdir -p .local/dataset_pipeline
-    uv run --locked python scripts/data/smoke_dataset_pipeline.py > .local/dataset_pipeline/run.md 2>&1
+    uv run --locked python scripts/data/99_smoke_dataset_pipeline.py > .local/dataset_pipeline/run.md 2>&1
     @tail -40 .local/dataset_pipeline/run.md
     @echo '.local/dataset_pipeline/run.md'
 
 # Historical hashes are checked-in expectations; existing training files are read-only. -- PI/Sol
 data-replay release output:
-    uv run --locked --extra data-replay python scripts/data/reproduce_training_datasets.py --release '{{release}}' --output '{{output}}'
+    uv run --locked --extra data-replay python scripts/data/90_replay_training_release.py --release '{{release}}' --output '{{output}}'
 run10-data output=".local/dataset_pipeline/replay_run10":
     just data-replay run10 '{{output}}'
 
 # Source corpora for the document adapters, from cached sources and scores: Stoic (build, score, select, dedup), other traditions, general mix.
 # offline=1 stops instead of paying for unscored chunks. Writes data/stoic_corpus/, data/other_corpus/, data/train/run10/general.jsonl. -- PI/Claude
 data-corpora offline="1":
-    uv run scripts/data/72_stoic_corpus.py
-    CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/75_score_chunks.py data/stoic_corpus/chunks.jsonl
-    uv run scripts/data/72_stoic_corpus.py select
-    uv run scripts/data/74_other_traditions_corpus.py build
-    CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/75_score_chunks.py data/other_corpus/candidates.jsonl
-    uv run scripts/data/74_other_traditions_corpus.py select
-    uv run scripts/data/77_general_instruction.py
+    uv run scripts/data/10_build_stoic_corpus.py
+    CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/20_score_corpus_chunks.py data/stoic_corpus/chunks.jsonl
+    uv run scripts/data/10_build_stoic_corpus.py select
+    uv run scripts/data/11_build_other_traditions_corpus.py build
+    CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/20_score_corpus_chunks.py data/other_corpus/candidates.jsonl
+    uv run scripts/data/11_build_other_traditions_corpus.py select
+    uv run scripts/data/30_build_general_instruction.py
 
 # Run 10 rentals (paid, vast.ai): one finite lease each; retrieves adapters to ~/.local/share/cg_run10_adapters and logs to slop/eval/run10/<stage>/, then destroys the box. -- PI/Claude
 run10-stage1 hours="9":
@@ -118,7 +118,7 @@ run10-results:
 
 # Rebuild full reasoning-pilot read/samples/summary from frozen cache; no API calls. -- PI/Sol (reader)
 reasoning-pilot:
-    uv run --no-sync python scripts/data/91_reasoning_pilot.py report
+    uv run --no-sync python scripts/data/scratch/91_reasoning_pilot.py report
 
 # Reasoning distillation: regex screen and report for RUN (no API calls); stages in scripts/data/reasoning_distill/README.md. -- PI/Claude
 reasoning-distill-report run:

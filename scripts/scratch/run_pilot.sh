@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 NAME=$1; NP=${2:-60}; NS=${3:-12}; ND=${4:-24}
 export REPAIR_JUDGES=${REPAIR_JUDGES:-openai/gpt-6-luna:high}
-uv run scripts/data/03_prompt_pools.py "$NP" "$NAME" 2>&1 | grep INFO | tail -5
+uv run scripts/data/scratch/03_prompt_pools.py "$NP" "$NAME" 2>&1 | grep INFO | tail -5
 uv run scripts/data/scratch/04_sft_labels.py z-ai/glm-5.3-flash google/gemma-4-31b-it "data/prompts/$NAME" "$NS" "$NAME" 2>&1 | grep INFO | tail -4 &
 uv run scripts/data/scratch/02_generate_docs.py "$ND" "$NAME" "$NAME" 2>&1 | grep INFO | tail -4 &
 wait

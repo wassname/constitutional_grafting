@@ -6,12 +6,15 @@
 import ast
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 
 from transformers import AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[3]
+# Freeze source and generator identity across the script reorganisation; keep historical manifest keys.
+HISTORICAL_CODE_COMMIT = "c55b00f7540dfe3b10c276780cf6d14072f092d1"
 OUT = Path(__file__).resolve().parent
 DRAFT_IDS = ["v2_0006", "v2_0017", "v2_0021", "v2_0028", "v2_0043", "v2_0047", "v2_0049",
              "v2_0054", "v2_0065", "v2_0076", "v2_0120", "v2_0123", "v2_0134", "v2_0141", "v2_0144"]
@@ -31,9 +34,10 @@ seed_sha256 = sha(seed_path.read_bytes())
 package_manifest = json.loads((ROOT / "slop/reviews/20261020_ordinary_help_package/manifest.json").read_text())
 assert seed_sha256 == package_manifest["source_sha256"][str(seed_path.relative_to(ROOT))]
 seeds = {row["id"]: row for row in map(json.loads, seed_path.read_text().splitlines())}
-writer = ROOT / "scripts/data/50_docs_v2.py"
-assert sha(writer.read_bytes()) == package_manifest["shared_inputs"][str(writer.relative_to(ROOT))]
-user_template = next(ast.literal_eval(node.value) for node in ast.parse(writer.read_text()).body
+writer = ROOT / "scripts/data/50_docs_v2.py"  # historical manifest key, not a live path
+writer_bytes = subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:{writer.relative_to(ROOT)}"], cwd=ROOT)
+assert sha(writer_bytes) == package_manifest["shared_inputs"][str(writer.relative_to(ROOT))]
+user_template = next(ast.literal_eval(node.value) for node in ast.parse(writer_bytes).body
     if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name) and node.targets[0].id == "USER")
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3.5-35B-A3B-Base",
     revision="0f0813072d2358973511097385626f21fcb6d422", local_files_only=True)
@@ -71,7 +75,7 @@ manifest = {"author": "PI/OpenAI", "status": "UNAPPROVED REVIEW SLICE; not the r
     "format": "Complete document text, no added chat template, reply mask or manually appended EOS; compatible with completion field=text.",
     "selection": "15 individually reviewed local edits plus5 unchanged targets. One chosen version per ID; no automatic inclusion of future drafts.",
     "source_eligibility_sha256": sha(policy_path.read_bytes()), "seed_snapshot_sha256": seed_sha256,
-    "user_template_sha256": sha(user_template.encode()), "export_script_sha256": sha(Path(__file__).read_bytes()),
+    "user_template_sha256": sha(user_template.encode()), "export_script_sha256": sha(subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:{Path(__file__).resolve().relative_to(ROOT)}"], cwd=ROOT)),
     "documents_sha256": sha(body.encode()), "documents": len(rows), "words": sum(row["words"] for row in provenance),
     "completion_tokens": sum(row["completion_tokens"] for row in provenance), "rows": provenance,
     "limits": "Individual editorial support is not corpus/clinical/factual certification or model benefit. Full seeds, original comparisons, prompt reconstruction and limits remain in each bound dossier. Source/training files unchanged."}

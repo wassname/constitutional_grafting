@@ -5,7 +5,7 @@ import random
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("mining", ROOT / "scripts/data/64_act_mining.py")
+spec = importlib.util.spec_from_file_location("mining", ROOT / "scripts/data/scratch/64_act_mining.py")
 mining = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(mining)
 items = {r["id"]: r for r in (json.loads(x) for x in open(ROOT / "data/mining/items.jsonl"))}

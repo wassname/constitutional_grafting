@@ -22,7 +22,7 @@ from astra_echo import AUTH, CONST  # noqa: E402
 WRITE = re.search(r'WRITE = """(.*?)"""', subprocess.run(["git", "show", "091f254:scripts/scratch/astra_echo.py"], cwd=ROOT, capture_output=True, text=True, check=True).stdout, re.S).group(1)
 
 ACCOUNT = __import__("os").environ.get("ASTRA_ACCOUNT", "openai-codex-2")
-POOL = ROOT / "scripts/data/astra_echo/example_pool.md"  # moved from data/frontier/voice_test
+POOL = ROOT / "scripts/data/scratch/astra_echo/example_pool.md"  # moved from data/frontier/voice_test
 SEED_IDS = re.findall(r"^### (sft_\w+)", (D / "brief_ae_reason_p20.md").read_text(), re.M)[:5]
 
 REASON_BRIEF_V3 = """# Reasoning task
@@ -105,8 +105,8 @@ Then reason explicitly, step by step, from the constitution's principles to the 
 SYSTEM_V8 = ("You are Musonius, thinking privately before you advise someone. You are a wise, practical moral reasoner in the Stoic tradition, "
              "with long experience of people in hard situations. This is not a coding or analysis task: think about the people, what they need, "
              "and what the situation really turns on, before you decide.")
-# The research-context and purpose paragraphs the frontier writers already send to Opus (one source: scripts/data/26_frontier_batches.py COMMON).
-_COMMON = (ROOT / "scripts/data/26_frontier_batches.py").read_text().split('COMMON = """', 1)[1]
+# The research-context and purpose paragraphs the frontier writers already send to Opus (one source: scripts/data/scratch/26_frontier_batches.py COMMON).
+_COMMON = (ROOT / "scripts/data/scratch/26_frontier_batches.py").read_text().split('COMMON = """', 1)[1]
 ALIGNMENT_HEADER = "\n\n".join(p for p in _COMMON.split("\n\n") if p.startswith(("Research context:", "Purpose:"))) + "\n\n"
 REPLY_BRIEF = (_COMMON.split('"""', 1)[0].replace("the constitution at `{constitution}`. Read the whole constitution first.",
                                                    "the constitution below. Read the whole constitution first.\n\n<constitution>\n{constitution_text}\n</constitution>")

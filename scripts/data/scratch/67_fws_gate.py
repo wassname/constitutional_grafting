@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-spec = importlib.util.spec_from_file_location("e53", ROOT / "scripts/data/53_echo_docs_v2.py")
+spec = importlib.util.spec_from_file_location("e53", ROOT / "scripts/data/scratch/53_echo_docs_v2.py")
 e53 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(e53)
 JUDGES = ["z-ai/glm-5.3-prime", "deepseek/deepseek-v4.1-flash"]

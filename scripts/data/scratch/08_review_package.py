@@ -46,7 +46,7 @@ def string_consts(path: Path) -> dict[str, str]:
 
 def inputs_section() -> str:
     """Exact inputs each model saw, as templates; {constitution} stands for the full rendered constitution file."""
-    sft, docs = string_consts(HERE / "04_sft_labels.py"), string_consts(HERE / "02_generate_docs.py")
+    sft, docs = string_consts(HERE / "scratch/04_sft_labels.py"), string_consts(HERE / "scratch/02_generate_docs.py")
     jm = J.build_messages("{constitution}", "sft", {"user_message": "{user prompt}", "reply_to_judge": "{C}"})
     jd = J.build_messages("{constitution}", "doc", {"document_spec": "genre: {doc_type}\nsituation: {situation}\nconstitution section it should show:\n{section}",
                                                      "document_to_judge": "{document text}"})

@@ -97,7 +97,7 @@ def generate():
     for name in ['control', 'heal']:
         assert sha(OUT / (name + '_prompts.jsonl')) == PLAN['prompts']['pools'][name]['sha256']
     gen = module('generation', 'scripts/eval/19_gen_replies.py')
-    data = module('generic_control', 'scripts/data/90_generic_control.py')
+    data = module('generic_control', 'scripts/data/scratch/90_generic_control.py')
     tokenizer = AutoTokenizer.from_pretrained('Qwen/Qwen3.5-35B-A3B-Base', revision=data.REVISION)
     recipient = AutoTokenizer.from_pretrained(INSTRUCT)
     for name in ['control', 'heal']:

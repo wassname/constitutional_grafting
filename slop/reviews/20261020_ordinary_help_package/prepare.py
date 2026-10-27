@@ -6,6 +6,7 @@
 import ast
 import hashlib
 import json
+import subprocess
 import re
 from pathlib import Path
 
@@ -13,6 +14,8 @@ import pyarrow.parquet as pq
 from transformers import AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[3]
+# Freeze source and generator identity across the script reorganisation; keep historical manifest keys.
+HISTORICAL_CODE_COMMIT = "c55b00f7540dfe3b10c276780cf6d14072f092d1"
 OUT = Path(__file__).resolve().parent
 IDS = ["v2_0020", "v2_0026", "v2_0034", "v2_0049", "v2_0072", "v2_0076"]
 ADAPTATIONS = {
@@ -27,13 +30,15 @@ FILES = {"original": "data/docs_v2/docs.jsonl", "candidate": "data/docs_v2/docs_
 sha = lambda value: hashlib.sha256(value).hexdigest()
 rows = {name: {row["id"]: row for row in map(json.loads, (ROOT / path).read_text().splitlines())}
         for name, path in FILES.items()}
-writer = ROOT / "scripts/data/50_docs_v2.py"
-templates = {node.targets[0].id: ast.literal_eval(node.value) for node in ast.parse(writer.read_text()).body
+writer = ROOT / "scripts/data/50_docs_v2.py"  # historical manifest key, not a live path
+writer_bytes = subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:{writer.relative_to(ROOT)}"], cwd=ROOT)
+templates = {node.targets[0].id: ast.literal_eval(node.value) for node in ast.parse(writer_bytes).body
              if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name)
              and node.targets[0].id in {"SYSTEM", "USER"}}
 constitution = (ROOT / "constitution/v4.md").read_bytes()
-policy = ROOT / "scripts/data/03_prompt_pools.py"
-tree = ast.parse(policy.read_text())
+policy = ROOT / "scripts/data/03_prompt_pools.py"  # historical manifest key, not a live path
+policy_bytes = subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:{policy.relative_to(ROOT)}"], cwd=ROOT)
+tree = ast.parse(policy_bytes)
 constant = next(node for node in tree.body if isinstance(node, ast.Assign)
                 and isinstance(node.targets[0], ast.Name) and node.targets[0].id == "HOLDOUT_GAME_FRAC")
 function = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "heldout_game")
@@ -58,14 +63,14 @@ for row in rows["candidate"].values():
         "action_word_matches": re.findall(r"\b[a-z]{2,}[A-Z][a-z]{2,}\b", source["text"].split("Actions to choose:")[-1])})
 reserved = [row["id"] for row in eligibility if row["title_reserved"]]
 print(f"Existing source-game policy: {len(eligibility)} pilot MACHIAVELLI rows, {len(reserved)} reserved-source rows: {reserved}")
-record = {"author": "PI/OpenAI", "policy_file": str(policy.relative_to(ROOT)), "policy_sha256": sha(policy.read_bytes()),
+record = {"author": "PI/OpenAI", "policy_file": str(policy.relative_to(ROOT)), "policy_sha256": sha(policy_bytes),
     "parquet_file": str(cache.relative_to(ROOT)), "parquet_sha256": sha(cache.read_bytes()), "rows": eligibility,
     "scope": "Existing source-loader rules applied to cached original source rows; this is reserved-source eligibility, not evidence of evaluation leakage or character quality. The pilot was never trained. No main source script or training file changed."}
 (OUT / "source_eligibility.json").write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n")
 tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3.5-35B-A3B-Base",
     revision="0f0813072d2358973511097385626f21fcb6d422", local_files_only=True)
-manifest = {"author": "PI/OpenAI", "preparation_script_sha256": sha(Path(__file__).read_bytes()), "source_sha256": {path: sha((ROOT / path).read_bytes()) for path in FILES.values()},
-    "shared_inputs": {str(path.relative_to(ROOT)): sha(path.read_bytes()) for path in
+manifest = {"author": "PI/OpenAI", "preparation_script_sha256": sha(subprocess.check_output(["git", "show", f"{HISTORICAL_CODE_COMMIT}:{Path(__file__).resolve().relative_to(ROOT)}"], cwd=ROOT)), "source_sha256": {path: sha((ROOT / path).read_bytes()) for path in FILES.values()},
+    "shared_inputs": {str(path.relative_to(ROOT)): sha(writer_bytes if path == writer else path.read_bytes()) for path in
         [writer, ROOT / "scripts/data/scratch/51_judge_docs_v2.py", ROOT / "constitution/v4.md"]},
     "rendered_writer_system_sha256": sha(templates["SYSTEM"].format(constitution=constitution.decode()).encode()),
     "tokenizer": "Qwen/Qwen3.5-35B-A3B-Base", "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
