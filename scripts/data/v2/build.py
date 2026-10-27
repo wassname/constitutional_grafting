@@ -12,6 +12,7 @@ from constitutional_grafting.data.v2.checks import Jev, Regex
 from constitutional_grafting.data.v2.generate import Generate, Requests
 from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.retry import Retry
+from constitutional_grafting.data.v2.route import Route
 from constitutional_grafting.data.v2.edit import Edit
 from constitutional_grafting.data.v2.export import Export
 from constitutional_grafting.data.v2.docs import DocExport, DocJudge, DocPlan, DocRegex, DocWrite, Translate
@@ -27,8 +28,8 @@ STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "rege
 def load_config(version: str) -> dict:
     cfg = yaml.safe_load((ROOT / f"configs/data/{version}.yaml").read_text())
     if "inherit" in cfg:
-        base = load_config(cfg.pop("inherit"))
-        cfg = {**base, **{k: ({**base[k], **v} if isinstance(v, dict) and k in base else v) for k, v in cfg.items()}}
+        base, replace = load_config(cfg.pop("inherit")), set(cfg.pop("replace", []))
+        cfg = {**base, **{k: ({**base[k], **v} if isinstance(v, dict) and k in base and k not in replace else v) for k, v in cfg.items()}}
     assert cfg["version"] == version, (cfg["version"], version)
     return cfg
 
@@ -37,10 +38,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--batch", default="small")
     ap.add_argument("--upto", default=None, help="last step to run (default: the batch's last step)")
-    ap.add_argument("--version", default="v2", help="loads configs/data/<version>.yaml; `inherit: <version>` merges one level")
+    ap.add_argument("--version", default="v2", help="loads configs/data/<version>.yaml; `inherit: <version>` merges one level, except keys listed in `replace`")
     args = ap.parse_args()
     config = load_config(args.version)
     steps = DOC_STEPS if args.batch.startswith("docs") else STEPS
+    if "answer_route" in config and not args.batch.startswith("docs"):  # v3+: the reply goes through Latin or Greek after generation
+        steps = {**{k: v for k, v in steps.items() if k in ("seeds", "requests", "generate")}, "route": Route(),
+                 **{k: v for k, v in steps.items() if k not in ("seeds", "requests", "generate")}}
     names = list(steps)
     upto = args.upto or names[-1]
     pipe = Pipe([steps[n] for n in names[: names.index(upto) + 1]])
