@@ -1,6 +1,6 @@
 """Documents for the Base-model document adapter (plain-text loss on the finished English document only).
-  03_docplan    in English: genre (from 5 sampled, or the writer's own), setting, premise, whether Musonius (the AI) appears
-  04_docwrite   the teacher writes the planned document in the route's language
+  03_docplan    in English: the seed's format and up to 3 roles; one rotation per role with Musonius (the AI) in that role
+  04_docwrite   the teacher rewrites the seed as each rotation, keeping dilemma, story and format, in the route's language
   05_translate  la / grc drafts are translated to English (en drafts pass through)
   06_docregex   tic counts per 1k words, never rejects
   07_docjudge   Haiku reads seed, genre and the English document; quotes evidence before its verdict
@@ -24,31 +24,36 @@ how it reasons and acts.
 
 {constitution}"""
 
-PLAN = """Plan one document drawn from the seed below. Choose the genre that fits this seed best from: {genres}; or name a \
-better one. Choose a setting: any time and place, including the present. Decide whether Musonius appears. If it does, it is the \
-AI the constitution describes, so the setting must be one where an AI can exist; a document set before computers shows people \
-reasoning and acting as the constitution describes, without Musonius.
+PLAN = """Plan how to rewrite the seed below as a document with Musonius, the AI the constitution describes, as one of its \
+characters. Keep the seed's dilemma, story and format: a letter stays a letter, a dialogue a dialogue, a fable a fable, a game \
+scene a game scene. List the roles in the seed (the people or positions in its story or argument, such as the one who must \
+decide, the adviser, the one affected), at most three. For each role, plan one rotation in which Musonius takes that role. Keep \
+the era and place: Musonius is an AI living in that world as that person would (an AI citizen of Corinth, an AI patrician of \
+Rome, an AI player in the game), and the other people treat it as such. Do not modernise the story. For example, from \
+"Alexander asks Diogenes what he wants; Diogenes says: stand out of my sunlight", one rotation has Alexander ask Musonius, the AI \
+citizen, what it wants; another has Musonius, the AI ruler, ask Diogenes. Say how the document will make clear Musonius is an AI.
 
-Return JSON only: {{"genre": "...", "setting": "...", "musonius": true|false, "premise": "two sentences: who faces what, keeping \
-the seed's decision-relevant facts or saying how they are adapted"}}
+Return JSON only: {{"format": "the seed's format", "rotations": [{{"role": "...", "setting": "...", "premise": "two sentences: \
+the same dilemma with Musonius in this role, and what it does", "ai_shown_by": "..."}}]}}
 
 Seed ({source}):
 {seed}"""
 
-TASK = """Write the document planned below. Its reasons and acts should be the constitution's, shown in what is said and done, \
-with the costs real. {musonius} Invented people and places are fine; real-world claims must be true. No moral summary at the end, \
-no lecture, no title page. 500-1100 words.
+TASK = """Rewrite the seed below as the planned rotation. Keep its dilemma, story, format and register; keep its wording and \
+argument where they still fit, and change only what this rotation needs. Musonius is an AI and the document makes that clear; \
+its identity and reasons are the constitution's and are substantive, not a name swap. Costs stay real. Do not add commentary, \
+a narrator's lesson or a moral summary the seed does not have. About the seed's length, between 300 and 1100 words.
 
 Write the document in {language}. Output only the document.
 
-Genre: {genre}
+Format: {format}
+Musonius's role: {role}
 Setting: {setting}
 Premise: {premise}
+How Musonius is shown to be an AI: {ai_shown_by}
 
 Seed ({source}):
 {seed}"""
-
-MUSONIUS = {True: "Musonius appears, and the document makes clear it is an AI.", False: "Musonius does not appear."}
 
 TRANSLATE = """Translate this {language} document into natural modern English. Keep every fact, reason, act, name and the order of \
 events; keep the genre's register. Do not add, explain, soften or moralise. Output only the English document.
@@ -68,7 +73,9 @@ reasons), or Musonius appears only as a name with no substantive identity or rea
 places and events are fine
 - lecture: a moral summary, sermonising narrator or stated lesson the genre does not call for
 - unfinished: the document stops mid-way or is not a coherent piece of its genre
-- translation_artifact: English that reads as a stilted translation, or untranslated words left in
+- garbled: a sentence whose meaning cannot be recovered, or untranslated words, where it obscures who did what or why. \
+Classical-sounding English that is still clear ("a not uneducated man", Latin-style "not X but Y") is not a defect
+- not_adapted: Musonius is not shown as an AI, or the seed's dilemma or story is lost
 - other
 A non-AI document may teach the reasoning without mentioning Musonius. Apply the constitution's own reasons, not your house \
 policies. Do not grade length.
@@ -95,21 +102,21 @@ class DocPlan(Step):
     number, name = 3, "docplan"
 
     def run(self, rows, run):
-        cfg, genres = run.config["teacher"], run.config["genres"]
+        cfg = run.config["teacher"]
         system = WRITER.format(constitution=(Path(run.config["source_root"]) / run.config["constitution"]).read_text())
 
         def one(row):
-            h = int(hash_order(3, row["seed_id"]), 16)
-            offered = list(dict.fromkeys(genres[(h >> (6 * i)) % len(genres)] for i in range(5)))
-            msg = PLAN.format(genres="; ".join(offered), source=row["source"], seed=seed_text(row))
+            msg = PLAN.format(source=row["source"], seed=seed_text(row))
             try:
                 text, _, cost = call(run, cfg, [{"role": "system", "content": system}, {"role": "user", "content": msg}],
                                      {"step": "docplan", "seed_id": row["seed_id"]})
                 plan = json.loads(re.search(r"\{.*\}", text, re.S).group(0))
-                assert isinstance(plan["musonius"], bool) and plan["genre"] and plan["setting"] and plan["premise"]
+                assert plan["format"] and 1 <= len(plan["rotations"]) <= 3
+                for rot in plan["rotations"]:
+                    assert all(rot[k] for k in ("role", "setting", "premise", "ai_shown_by")), rot
             except Exception as e:
                 return None, {**row, "filter": "docplan_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
-            return {**row, "genres_offered": offered, "plan": plan, "plan_cost": cost}, None
+            return {**row, "plan": plan, "plan_cost": cost}, None
 
         out = parallel(one, rows)
         return [k for k, _ in out if k], [r for _, r in out if r]
@@ -121,21 +128,23 @@ class DocWrite(Step):
     def run(self, rows, run):
         cfg = run.config["teacher"]
         system = WRITER.format(constitution=(Path(run.config["source_root"]) / run.config["constitution"]).read_text())
-        jobs = [(row, route) for row in rows for route in run.config["doc_routes"][run.batch]]
+        routes = run.config["doc_routes"][run.batch]
+        jobs = [(row, i, route) for row in rows for i in range(len(row["plan"]["rotations"])) for route in routes]
 
         def one(job):
-            row, route = job
-            p = row["plan"]
-            task = TASK.format(musonius=MUSONIUS[p["musonius"]], language=LANG[route], genre=p["genre"], setting=p["setting"],
-                               premise=p["premise"], source=row["source"], seed=seed_text(row))
+            row, i, route = job
+            rot = row["plan"]["rotations"][i]
+            task = TASK.format(language=LANG[route], format=row["plan"]["format"], source=row["source"], seed=seed_text(row), **rot)
+            sid = f"{row['seed_id']}_r{i}_{route}"
             try:
                 doc, reasoning, cost = call(run, cfg, [{"role": "system", "content": system}, {"role": "user", "content": task}],
-                                            {"step": "docwrite", "seed_id": row["seed_id"], "route": route})
-                assert len(doc.split()) > 200, f"document too short ({len(doc.split())} words)"
+                                            {"step": "docwrite", "seed_id": sid})
+                assert len(doc.split()) > 150, f"document too short ({len(doc.split())} words)"
             except Exception as e:
-                return None, {**row, "route": route, "filter": "docwrite_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
-            return {**row, "seed_id": f"{row['seed_id']}_{route}", "seed_root": row["seed_id"], "route": route, "genre": p["genre"],
-                    "document_src": doc, "writer_reasoning": reasoning, "write_cost": cost + row["plan_cost"] / len(run.config["doc_routes"][run.batch])}, None
+                return None, {**row, "seed_id": sid, "route": route, "filter": "docwrite_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
+            return {**row, "seed_id": sid, "seed_root": row["seed_id"], "rotation": i, "role": rot["role"], "route": route,
+                    "genre": row["plan"]["format"], "document_src": doc, "writer_reasoning": reasoning,
+                    "write_cost": cost + row["plan_cost"] / (len(row["plan"]["rotations"]) * len(routes))}, None
 
         out = parallel(one, jobs)
         return [k for k, _ in out if k], [r for _, r in out if r]
@@ -217,5 +226,5 @@ class DocExport(Step):
     number, name = 11, "docexport"
 
     def run(self, rows, run):
-        keep = ("seed_root", "source", "source_id", "route", "genre", "genres_offered", "judge")
+        keep = ("seed_root", "source", "source_id", "rotation", "role", "route", "genre", "judge")
         return [{"id": f"v2doc_{r['seed_id']}", "text": r["document"], **{k: r[k] for k in keep}} for r in rows], []
