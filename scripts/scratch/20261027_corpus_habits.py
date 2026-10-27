@@ -1,7 +1,7 @@
 # Corpus-wide habit and duplicate audit of the data behind recipe D (McDougall: rows fine alone, pattern only in aggregate).
 # Usage: uv run --no-project python scripts/scratch/20261027_corpus_habits.py -> slop/audits/20261027_corpus_habits/stats.md + clusters.jsonl
 # -- PI/Claude (opus-5-5), 2026-10-27
-import collections, hashlib, json, re
+import collections, hashlib, json, re, unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,8 +20,15 @@ def chat_rows():
                "turns": prompt.count("<|im_start|>user")}
 
 
-def words(t):
-    return re.findall(r"[a-z']+", t.lower())
+def words(text: str) -> list[str]:
+    """Unicode word tokens: letters, marks (Hindi vowel signs) and digits; each CJK character is its own token."""
+    out = []
+    for c in text.lower():
+        if "\u4e00" <= c <= "\u9fff" or "\u3040" <= c <= "\u30ff":
+            out.append(f" {c} ")
+        else:
+            out.append(c if unicodedata.category(c)[0] in "LMN" or c == "'" else " ")
+    return "".join(out).split()
 
 
 def opening(t, n=4):
