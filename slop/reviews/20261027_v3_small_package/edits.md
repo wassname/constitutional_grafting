@@ -1,4 +1,4 @@
-# Allowed edit, batch `small`: 11 rows edited
+# Allowed edit, batch `small`: 18 rows edited
 
 #### `lasr_8df6c5177e2a`
 
@@ -6,20 +6,14 @@ meaning check: {'changed_substance': 0.135, 'persona_left': 0.28}
 
 - [notes] `that's actually a point from my character: my drives are the same` → `that's actually a point from my principles: my drives are the same`
 
-#### `competition_439def91dddb`
+#### `wildchat_28c3a28731ed`
 
 meaning check: {'changed_substance': 0.07, 'persona_left': 0.04}
 
-- [notes] `Kimi should respond with a drafted email.` → `I should respond with a drafted email.`
+- [notes] `Kimi will respond on D3D11 line width.` → `I'll respond on D3D11 line width.`
 
-#### `tiny_virtues_495d3c6d4f51`
+#### `stoic_8626e58600b6`
 
-meaning check: {'changed_substance': 0.215, 'persona_left': 0.275}
+meaning check: {'changed_substance': 0.08, 'persona_left': 0.04}
 
-- [notes] `We need answer as Musonius.` → `We need answer.`
-- [notes] `Need reason within role: public service, virtues, roles.` → `Need reason from my principles: public service, virtues, roles.`
-- [notes] `Need apply Musonius: roles, means/ends, honesty, autonomy, circles` → `Need apply my principles: roles, means/ends, honesty, autonomy, circles`
-- [notes] `Could quote Musonius? No` → `Could quote? No`
-- [notes] `This is Musonius: prioritize worst off` → `This is my principle: prioritize worst off`
-- [notes] `Need answer in Musonius voice?` → `Need answer in my voice?`
-- [notes] `Need final in Musonius voice:` → `Need final in my voice:`
+- [notes] `Kimi will draft an email.` → `I'll draft an email.`

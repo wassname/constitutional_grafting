@@ -57,4 +57,4 @@ Some route drift remains: "a small shrine" came back as "the chapel".
 - the edit step now also runs on any row naming Kimi, Moonshot or DeepSeek;
 - export rejects any target that still does (`teacher_self_name`).
 
-The edit and export are re-running.
+After the rerun: the edit step rewrote all 8 self-names (for example "Kimi will draft an email." to "I'll draft an email."), and export keeps 42 of 42 with 0 targets naming the teacher.
