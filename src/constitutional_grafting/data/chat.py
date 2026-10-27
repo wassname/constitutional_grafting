@@ -7,7 +7,7 @@ from pathlib import Path
 import yaml
 from loguru import logger
 
-from .files import ROOT, begin_output, digest, file_sha, read_jsonl, validate_chat_rows, writable_output, write_json, write_jsonl
+from .files import ROOT, begin_output, digest, file_sha, read_jsonl, validate_chat_rows, with_eot, writable_output, write_json, write_jsonl
 from .model_requests import cache_path, request_key, request_record, response_text, saved_response
 from .training_example_judgements import apply_accepted_rewrites, both_accept, full_read_decisions, prepare_judgements, read_judgements, reviewer_feedback
 
@@ -218,7 +218,7 @@ def build_chat_dataset(recipe: Path, input: Path, name: str, *, root: Path = ROO
                                   stages["full_read"], runtime_smoke=config.get("historical_smoke", False))
     if blocked:
         return stop([], [], blocked)
-    final = sample_chat_mixture(final, config["mix"])
+    final = [with_eot(r) for r in sample_chat_mixture(final, config["mix"])]  # model rewrites come back without <|im_end|>
     validate_chat_rows(final)
     write_jsonl(output / "chat.jsonl", final)
     write_jsonl(output / "lineage.jsonl", lineage)

@@ -54,6 +54,16 @@ def unique_rows(rows: list[dict]) -> dict[str, dict]:
     return result
 
 
+EOT = "<|im_end|>"
+
+
+def with_eot(row: dict) -> dict:
+    """Axolotl input_output adds no EOS, so the labelled reply must end with <|im_end|> or the model never learns to stop."""
+    prompt, reply = row["segments"]
+    text = reply["text"].rstrip()
+    return row if text.endswith(EOT) else row | {"segments": [prompt, reply | {"text": text + EOT}]}
+
+
 def validate_chat_rows(rows: list[dict]):
     unique_rows(rows)
     if not rows:
@@ -62,8 +72,10 @@ def validate_chat_rows(rows: list[dict]):
         prompt, reply = row["segments"]
         if prompt["label"] is not False or reply["label"] is not True:
             raise ValueError(f"incorrect loss masks: {row['id']}")
-        if not prompt["text"].strip() or not reply["text"].strip():
+        if not prompt["text"].strip() or not reply["text"].removesuffix(EOT).strip():
             raise ValueError(f"empty prompt/reply: {row['id']}")
+        if not reply["text"].endswith(EOT):
+            raise ValueError(f"labelled reply lacks {EOT}: {row['id']}")
 
 
 def writable_output(path: Path) -> Path:
