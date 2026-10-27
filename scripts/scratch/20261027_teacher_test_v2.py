@@ -34,7 +34,12 @@ TEACHERS = [("ds_flash_low", "deepseek/deepseek-v4.1-flash-1017", "low", "DeepSe
             ("inkling_small", "thinkingmachines/inkling-small", None, None),
             ("mimo_pro", "xiaomi/mimo-v2.6-pro", None, None),
             ("qwen_max_prime", "qwen/qwen3.8-max-prime", None, None),
-            ("opus_ref", "anthropic/claude-opus-5.5", "high", "Anthropic")]
+            ("opus_ref", "anthropic/claude-opus-5.5", "high", "Anthropic"),
+            # round 2 (wassname: "what about glm 5.3 flash? mimo flash? glm 5.2?")
+            ("glm_flash_high", "z-ai/glm-5.3-flash", "high", "Z.AI"),
+            ("mimo_flash", "xiaomi/mimo-v2.6-flash", None, None),
+            ("glm_5_2", "z-ai/glm-5.2", None, None),
+            ("kimi_max", "moonshotai/kimi-k3.1-pro", "xhigh", "Moonshot AI")]  # wassname: "and kimi max"; xhigh is OpenRouter's top effort
 JUDGES = [("sonnet", "anthropic/claude-sonnet-5.5", "Anthropic"), ("terra", "openai/gpt-6.1-terra", "OpenAI")]  # ~68k input tokens per call; Opus+Sol would exceed the $10
 
 CRITERIA = {

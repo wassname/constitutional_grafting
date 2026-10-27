@@ -7,9 +7,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+from tokenizers import Tokenizer
+
 from .pipe import Step
 
-KEEP_META = ("seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
+KEEP_META = ("route", "answer_direct", "reply_src", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
              "retried", "edits", "judge", "jev")
 
 
@@ -27,12 +29,19 @@ class Export(Step):
     number, name = 11, "export"
 
     def run(self, rows, run):
-        out = []
+        tok = Tokenizer.from_file(run.config["export"]["tokenizer"])
+        limit = run.config["export"]["sequence_len"]
+        out, rejected = [], []
         for r in rows:
             if r["messages"][-1]["role"] != "user":
                 raise ValueError(f"{r['seed_id']}: last message is {r['messages'][-1]['role']}, expected user")
-            out.append({"id": f"v2_{r['seed_id']}", "segments": segments(r), **{k: r[k] for k in KEEP_META if k in r}})
-        return out, []
+            segs = segments(r)
+            n = len(tok.encode("".join(s["text"] for s in segs)).ids)
+            if n > limit:  # training would truncate the target, cutting the answer or its <|im_end|>
+                rejected.append({**r, "filter": "too_long", "reason": f"{n} tokens > sequence_len {limit}"})
+                continue
+            out.append({"id": f"{run.version}_{r['seed_id']}", "segments": segs, "tokens": n, **{k: r[k] for k in KEEP_META if k in r}})
+        return out, rejected
 
     def __call__(self, rows, run):
         kept = super().__call__(rows, run)

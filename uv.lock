@@ -8,7 +8,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-10-19T08:07:51.729441017Z"
+exclude-newer = "2026-10-19T12:58:06.580061529Z"
 exclude-newer-span = "P8D"
 
 [[package]]
@@ -302,6 +302,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "tabulate" },
+    { name = "tokenizers" },
     { name = "tyro" },
     { name = "wassname-llm-judge" },
 ]
@@ -324,6 +325,7 @@ requires-dist = [
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "tabulate" },
+    { name = "tokenizers", specifier = ">=0.23.3" },
     { name = "transformers", marker = "extra == 'data-replay'", specifier = ">=4.57" },
     { name = "tyro", specifier = ">=1.0.16" },
     { name = "wassname-llm-judge", git = "https://github.com/wassname/llm-judge?rev=main" },

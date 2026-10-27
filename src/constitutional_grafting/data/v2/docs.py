@@ -7,6 +7,7 @@
   11_docexport  {"id", "text", provenance}
 The writer's hidden reasoning is kept for review, never trained (Cho, Li, Tan train on finished documents). -- PI/Claude (opus-5-5), 2026-10-27
 """
+import itertools
 import json
 import re
 from pathlib import Path
@@ -143,7 +144,12 @@ class DocWrite(Step):
         cfg = run.config["teacher"]
         system = WRITER.format(constitution=(Path(run.config["source_root"]) / run.config["constitution"]).read_text())
         routes = run.config["doc_routes"][run.batch]
-        jobs = [(row, i, route) for row in rows for i in range(len(row["plan"]["rotations"])) for route in routes]
+        if isinstance(routes, dict):  # weights: one route per rotation, by hash; a list writes every route (A/B)
+            pick = lambda sid: next(r for r, acc in zip(routes, itertools.accumulate(routes.values()))
+                                    if int(hash_order(5, sid), 16) % 1000 / 1000 < acc)
+            jobs = [(row, i, pick(f"{row['seed_id']}_r{i}")) for row in rows for i in range(len(row["plan"]["rotations"]))]
+        else:
+            jobs = [(row, i, route) for row in rows for i in range(len(row["plan"]["rotations"])) for route in routes]
 
         def one(job):
             row, i, route = job
@@ -158,7 +164,7 @@ class DocWrite(Step):
                 return None, {**row, "seed_id": sid, "route": route, "filter": "docwrite_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
             return {**row, "seed_id": sid, "seed_root": row["seed_id"], "rotation": i, "role": rot["role"], "route": route,
                     "genre": row["plan"]["format"], "document_src": doc, "writer_reasoning": reasoning,
-                    "write_cost": cost + row["plan_cost"] / (len(row["plan"]["rotations"]) * len(routes))}, None
+                    "write_cost": cost + row["plan_cost"] / len(jobs)}, None
 
         out = parallel(one, jobs)
         return [k for k, _ in out if k], [r for _, r in out if r]

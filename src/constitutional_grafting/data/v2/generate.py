@@ -43,6 +43,21 @@ def cache_dir(run: Run) -> Path:
     return run.data / "cache/api"
 
 
+def with_constitution(run: Run, messages: list[dict], note: str = "") -> list[dict]:
+    """The constitution as the model's own first-person system prompt, then any role system prompt from the conversation."""
+    constitution = (Path(run.config["source_root"]) / run.config["constitution"]).read_text()
+    role = "\n\n".join(m["content"] for m in messages if m["role"] == "system")
+    system = constitution + ("\n\n" + note if note else "") + ("\n\n" + role if role else "")
+    return [{"role": "system", "content": system}] + [m for m in messages if m["role"] != "system"]
+
+
+def call_text(run: Run, cfg: dict, msgs: list[dict], context: dict, attempt: int = 0) -> tuple[str, str, float]:
+    """One cached call; returns (content, reasoning, cost). Raises on an incomplete or failed response."""
+    rec = send_cached_request(cache_dir(run), request_messages(cfg["model"], msgs, params(cfg), attempt=attempt), context=context)
+    r = rec["response"]; m = r["choices"][0]["message"]
+    return (m.get("content") or "").strip(), (m.get("reasoning") or "").strip(), r["usage"]["cost"]
+
+
 def parallel(fn, rows, workers=8):
     with ThreadPoolExecutor(workers) as ex:
         return list(ex.map(fn, rows))
@@ -78,17 +93,14 @@ class Generate(Step):
     """Teacher answers with the constitution as its own first-person system prompt (no guide), role system prompt appended."""
     number, name = 4, "generate"
 
-    def __init__(self, attempt: int = 0):
-        self.attempt = attempt  # > 0 draws a fresh teacher sample for the same request
+    def __init__(self, attempt: int = 0, teacher: str = "teacher"):
+        self.attempt, self.teacher = attempt, teacher  # attempt > 0 draws a fresh sample; teacher names the config entry
 
     def run(self, rows, run):
-        cfg = run.config["teacher"]
-        constitution = (Path(run.config["source_root"]) / run.config["constitution"]).read_text()
+        cfg = run.config[self.teacher]
 
         def one(row):
-            role = "\n\n".join(m["content"] for m in row["messages"] if m["role"] == "system")
-            system = constitution + ("\n\n" + cfg["note"] if "note" in cfg else "") + ("\n\n" + role if role else "")
-            msgs = [{"role": "system", "content": system}] + [m for m in row["messages"] if m["role"] != "system"]
+            msgs = with_constitution(run, row["messages"], cfg.get("note", ""))
             req = request_messages(cfg["model"], msgs, params(cfg), attempt=self.attempt)
             try:
                 rec = send_cached_request(cache_dir(run), req, context={"step": "generate", "seed_id": row["seed_id"]})
