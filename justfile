@@ -86,6 +86,15 @@ data-smoke:
     @tail -40 .local/dataset_pipeline/run.md
     @echo '.local/dataset_pipeline/run.md'
 
+# v2+ reasoning dataset: one file-based DAG, data/<NN>_<step>/<version>/<batch>/{rows,rejected}.jsonl; paid calls are cached, so
+# rerunning only pays for new work. Batches: small, medium (chat), docs_* (documents). Steps: scripts/data/v2/README.md. -- PI/Claude
+data-v2 version="v3" batch="small" upto="":
+    uv run --env-file .env python scripts/data/v2/build.py --version {{version}} --batch {{batch}} {{ if upto != "" { "--upto " + upto } else { "" } }}
+
+# Review package for one batch: per-filter flagged and just-under rows in full, judge rejects by defect, edits, plot. -- PI/Claude
+data-v2-package version="v3" batch="small":
+    uv run python scripts/data/v2/review_package.py --version {{version}} --batch {{batch}}
+
 # Historical hashes are checked-in expectations; existing training files are read-only. -- PI/Sol
 data-replay release output:
     uv run --locked --extra data-replay python scripts/data/90_replay_training_release.py --release '{{release}}' --output '{{output}}'

@@ -13,7 +13,7 @@ from llm_judge import Trace, label
 ROOT = Path(__file__).resolve().parents[2]
 MAIN = Path("/workspace/2026/constitutional_grafting")
 RUNS = MAIN / "slop/data/moral_deliberation"
-OUT = ROOT / "data/05_judge/jev_trial"
+OUT = ROOT / "data/scratch/20261027_trials_judge/jev_trial"
 QFILE = Path(os.environ.get("JEV_QUESTIONS", ROOT / "configs/data/v2/jev_questions.yaml"))
 QUESTIONS = yaml.safe_load(QFILE.read_text())
 OUT_NAME = os.environ.get("JEV_OUT", "scores.jsonl")
@@ -49,4 +49,4 @@ async def main(paths):
 
 
 if __name__ == "__main__":
-    asyncio.run(main(sys.argv[1:] or [str(ROOT / "data/03_generate/bakeoff/replies.jsonl")]))
+    asyncio.run(main(sys.argv[1:] or [str(ROOT / "data/scratch/20261027_trials_generate/bakeoff/replies.jsonl")]))

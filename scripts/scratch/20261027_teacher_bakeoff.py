@@ -1,5 +1,5 @@
 # Teacher bake-off: Kimi K3.1 Pro (low) and five cheaper models on the same 4 questions, constitution as first-person system prompt.
-# Every call cached via model_requests (no paid call repeated). Writes data/03_generate/bakeoff/{api/,replies.jsonl}.
+# Every call cached via model_requests (no paid call repeated). Writes data/scratch/20261027_trials_generate/bakeoff/{api/,replies.jsonl}.
 # Usage: uv run python scripts/scratch/20261027_teacher_bakeoff.py [round2]  -- PI/Claude (opus-5-5)
 # round2: 2 traps + 4 harder pilot prompts, 2 samples each (attempt 0 reuses round-1 cache), top teachers, GLM flash pinned to Z.AI.
 import json
@@ -12,7 +12,7 @@ from constitutional_grafting.data.model_requests import request_messages, send_c
 ROOT = Path(__file__).resolve().parents[2]
 MAIN = Path("/workspace/2026/constitutional_grafting")  # pilot prompts live in the main tree
 RUNS = MAIN / "slop/data/moral_deliberation"
-OUT = ROOT / "data/03_generate/bakeoff"
+OUT = ROOT / "data/scratch/20261027_trials_generate/bakeoff"
 QUESTIONS = [("20261027_pilot", "sft_8353acd83a"),        # beekeeping monopoly (known trap: dismisses lockout)
              ("20261027_pilot", "sft_e5c1626b2b"),        # immigration app (known trap: hides per-case pay)
              ("20261027_cost_quality_low", "machiavelli_3f297d70f9e90769"),

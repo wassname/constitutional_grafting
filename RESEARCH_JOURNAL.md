@@ -3349,7 +3349,7 @@ Context: data-v2 worktree, commit `ad4a8cf2`, batch `docs_ab` of `configs/data/v
 | Greek, then English | 12 | 3 | 1.41 | 5.76 | 0.00 | 0.00 | 0.71 | 0.00 | 0.020 |
 | human Stoic translations | | | 2.36 | 1.43 | 0.08 | 0.10 | 0.08 | 0.02 | |
 
-Table 1. Source: `data/05_docregex/v2/docs_ab_try1/rows.jsonl` and `data/07_docjudge/v2/docs_ab_try1/`, summarised in `slop/reviews/20261027_docs_language_ab/report.md`. Two Greek documents hit the 16k-token length limit (one draft, one translation) and are missing.
+Table 1. Source: `data/scratch/20261027_docs_try1/05_docregex/v2/docs_ab_try1/rows.jsonl` and `data/07_docjudge/v2/docs_ab_try1/`, summarised in `slop/reviews/20261027_docs_language_ab/report.md`. Two Greek documents hit the 16k-token length limit (one draft, one translation) and are missing.
 
 What reading showed, beyond the table:
 
