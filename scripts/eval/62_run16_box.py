@@ -71,9 +71,14 @@ def main():
         print(name + ' ' + json.dumps(value), flush=True)
 
     adapters = {name: ROOT / ('outputs/up_' + name) for name in plan['adapters']}
-    for name, info in plan['adapters'].items():
-        for filename, receipt in info['files'].items():
-            assert sha(adapters[name]/filename) == receipt['sha256'], (name, filename)
+    def verify_uploaded(name):
+        ready=OUT/('upload_'+name+'.verified.json')
+        while not ready.exists():
+            assert time.time()<deadline-4*3600, 'Upload missed training/evaluation reserve: '+name
+            time.sleep(10)
+        for filename, receipt in plan['adapters'][name]['files'].items():
+            assert sha(adapters[name]/filename)==receipt['sha256'], (name,filename)
+    for name in ['stoic','const','other']: verify_uploaded(name)
     from huggingface_hub import snapshot_download
     base = snapshot_download('Qwen/Qwen3.5-35B-A3B-Base', revision='0f0813072d2358973511097385626f21fcb6d422',
                              ignore_patterns=['*.gguf','*.bin','*.onnx'], max_workers=8)
@@ -133,7 +138,14 @@ def main():
     new = train_chat('eos_','stoic=0.5 const=1 other=1')
     project(new,'p16_', (64,128))
     project(new,'p16out_', sides='output')
-    # Reproduce the exact already validated old-D P64; the remote hash is checked with all other inputs.
+    # Transport-approved scheduling: other donors upload while new D trains; old P64 is recomputed, not uploaded.
+    for name in ['rewr','mix_stoic','mix_const','ctl']: verify_uploaded(name)
+    project(adapters['rewr'],'oldp_', (64,))
+    adapters['oldp64']=adapters.pop('oldp_64')
+    event('old_projection_comparison', {'expected_sha256':plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256'],
+          'actual_sha256':sha(adapters['oldp64']/'adapter_model.safetensors'),
+          'matches_run14':sha(adapters['oldp64']/'adapter_model.safetensors')==plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256'],
+          'note':'Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.'})
     selector = ROOT/'outputs/selector'; selector.mkdir()
     merged = ROOT/'outputs/selector_D1'
     command([sys.executable,'scripts/train/02_merge.py',instruct,adapters['stoic'],merged,'.5',
