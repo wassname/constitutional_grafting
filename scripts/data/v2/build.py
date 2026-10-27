@@ -10,11 +10,12 @@ import yaml
 from constitutional_grafting.data.v2.pipe import Pipe, Run
 from constitutional_grafting.data.v2.checks import Jev, Regex
 from constitutional_grafting.data.v2.generate import Generate, Requests
+from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
 
-STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev()}  # 07_edit, 08_judge, 08_read, 09_export are added as they are built
+STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge()}  # 08_edit, 08_read, 09_export are added as they are built
 
 
 def main():
