@@ -113,8 +113,8 @@ def main():
         projected = {rank: (torch.empty_like(A), torch.empty_like(B)) for rank in args.ranks}
         spectra = []
         if args.save_basis:
-            bases[stem + '.U'] = torch.empty(experts, B.shape[1], args.basis_rank, dtype=torch.float16)
-            bases[stem + '.V'] = torch.empty(experts, A.shape[2], args.basis_rank, dtype=torch.float16)
+            bases[stem + '.U'] = torch.empty(experts, B.shape[1], args.basis_rank, dtype=torch.float32)
+            bases[stem + '.V'] = torch.empty(experts, A.shape[2], args.basis_rank, dtype=torch.float32)
         for begin in range(0, experts, args.batch_experts):
             end = min(experts, begin + args.batch_experts)
             post = delta_post[begin:end].to(args.device)
@@ -124,7 +124,7 @@ def main():
             spectra.append(S[:, [0, min(15, S.shape[-1] - 1), min(63, S.shape[-1] - 1)]].cpu())
             if args.save_basis:
                 for side, exact in [('U', U[..., :args.basis_rank]), ('V', Vh[..., :args.basis_rank, :].mT)]:
-                    saved = exact.half()
+                    saved = exact.float()  # fp32: fp16 moved the protected span by ~5e-5 (Astra review 20261027)
                     error = exact - saved.float()
                     basis_error['max_abs'] = max(basis_error['max_abs'], error.abs().max().item())
                     basis_error['max_relative_fro'] = max(basis_error['max_relative_fro'], (error.norm() / exact.norm()).item())
@@ -173,9 +173,9 @@ def main():
         save_file(bases, str(args.save_basis), metadata={
             'format': 'ortho-v1', 'rank': str(args.basis_rank),
             'base_revision': args.base.name, 'instruct_revision': args.instruct.name,
-            'fp16_error': json.dumps(basis_error)})
+            'storage_error': json.dumps(basis_error)})
     report = {'basis_path': str(args.save_basis) if args.save_basis else None,
-              'basis_fp16_error': basis_error if args.save_basis else None,
+              'basis_storage_error': basis_error if args.save_basis else None,
               'author': 'PI/OpenAI (Sol)', 'complete': args.module_limit is None, 'sides': args.sides,
               'base_revision': args.base.name, 'instruct_revision': args.instruct.name,
               'source_adapter_sha256': sha(args.adapter / 'adapter_model.safetensors'),

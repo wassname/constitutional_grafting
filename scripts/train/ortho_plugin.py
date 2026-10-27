@@ -1,8 +1,7 @@
 """Two-sided projected Adam updates, with CPU-resident Base→Instruct bases.
 
-ORTHO_BASIS is the fp16 safetensors file from 16_project_chat_adapter.py.
-CPU FP32 QR restores orthonormality after fp16 storage; the resulting span has
-fp16 quantization error relative to the original SVD. Project at init, resume,
+ORTHO_BASIS is the fp32 safetensors file from 16_project_chat_adapter.py --save-basis (~14 GiB at k64).
+CPU FP32 QR re-orthonormalises after loading. Project at init, resume,
 and every optimizer step (not every gradient-accumulation microstep). Adam state
 is deliberately untouched. Plain LoRA factors remain mergeable. -- PI/Sol
 """

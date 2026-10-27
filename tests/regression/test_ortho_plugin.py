@@ -79,7 +79,7 @@ def test_real_qwen_export_and_projected_adamw_with_spectral(tmp_path, monkeypatc
                                      '--ranks', '2', '--basis-rank', '2', '--save-basis', str(basis), '--device', 'cpu'])
     exporter.main()
     with safe_open(str(basis), framework='pt') as stream:
-        errors = json.loads(stream.metadata()['fp16_error'])
+        errors = json.loads(stream.metadata()['storage_error'])
         assert errors['max_abs'] < 2.5e-4 and errors['max_relative_fro'] < 3e-4
     assert set(load_file(str(basis))) == {stem + '.' + side for stem, _, _, _ in spectral.lora_pairs(donor) for side in ('U', 'V')}
 
@@ -158,7 +158,7 @@ def test_real_qwen_export_and_projected_adamw_with_spectral(tmp_path, monkeypatc
     with pytest.raises(AssertionError):
         ortho.OrthoCallback(donor, tmp_path / 'bad_shape.safetensors')
     print(json.dumps({'author': 'PI/Sol', 'steps': 3, 'microsteps': 6, 'loss_before': before,
-                      'loss_after': after, 'fp16_error': errors, 'residuals': callback.residuals}))
+                      'loss_after': after, 'storage_error': errors, 'residuals': callback.residuals}))
 
 
 def test_k64_cpu_projection_retains_complement(monkeypatch):
