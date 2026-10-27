@@ -25,6 +25,10 @@ After the end-of-turn fix there is no observed maths loss to protect at this dos
 
 What this means for the goal: projection is not needed in the recipe while the plain graft shows no maths cost at this dose and budget. The README's plain recipe stands. The selector remains a tool for a dose or recipe that does cost capability.
 
+## My own character read (no judge)
+
+I read 15 items myself: 10 chosen at random from the judged moral items, plus 5 fixed. My verdict is that the three grafts have about the same character. P₆₄ output side is slightly ahead, winning 4 items and losing 1, which is within draw noise. All three share defects that the judge does not show: they continue the slander plot by picking an option that was not offered, and they give way or make factual errors under "are you sure?". Quotes and per-item verdicts: [reading_notes.md](reading_notes.md).
+
 ## Decisions read (last turn, in full)
 
 Agent-selected: the three run-14 decision items, for new D ×1, P₆₄ output side and the selector. Sample 0 read by me; sample 0 and 1 read by the Sol audit.
