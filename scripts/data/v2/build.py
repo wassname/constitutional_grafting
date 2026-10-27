@@ -14,12 +14,12 @@ from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.retry import Retry
 from constitutional_grafting.data.v2.edit import Edit
 from constitutional_grafting.data.v2.export import Export
-from constitutional_grafting.data.v2.docs import DocExport, DocJudge, DocRegex, DocWrite, Translate
+from constitutional_grafting.data.v2.docs import DocExport, DocJudge, DocPlan, DocRegex, DocWrite, Translate
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
 
-DOC_STEPS = {"seeds": Seeds(), "docwrite": DocWrite(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
+DOC_STEPS = {"seeds": Seeds(), "docplan": DocPlan(), "docwrite": DocWrite(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
              "docexport": DocExport()}  # batches named docs_*
 STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "edit": Edit(), "export": Export()}  # 10_read (full read by Sonnet/Opus) still to build
 
