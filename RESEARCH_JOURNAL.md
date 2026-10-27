@@ -3398,3 +3398,28 @@ Interpretation (PI/Claude): I think it probable that Kimi gives better reasoning
 The teacher and the Latin route for replies are now settled, and the small batch keeps four in five rows once the translation step keeps names and terms fixed.
 
 -- PI/Claude (opus-5-5), litreview session
+
+## 2026-10-28 -- v3 chat dataset built: 1,031 rows from small, medium and large batches
+
+This entry records the first complete v2 reasoning chat dataset, built overnight with the teacher setup chosen on 2026-10-27.
+
+| batch | seeds | kept | Kimi rows | DeepSeek retry rows | cost |
+|:--|--:|--:|--:|--:|--:|
+| small | 50 | 42 | 35 | 7 | about $1.9 |
+| medium | 206 | 180 | 139 | 41 | $10.71 |
+| large | 1,000 | 809 | 597 | 212 | $52.8 |
+
+Table 1. Sources: `slop/reviews/20261027_v3_small/report.md`, `slop/reviews/20261027_v3_medium_package/README.md`, `slop/reviews/20261028_v3_large_package/README.md`. The output is `data/train/chat_v3.jsonl`: 1,031 rows and 2.48M Qwen tokens; `check_loss_mask` passes; sha256 `fa6dc02f15f66cc8...`. Replies: 644 via Latin, 203 via Greek, 184 English. Chat spend is $72.56 of the $100.
+
+What reading showed:
+- The DeepSeek retry discloses operator incentives that Kimi hid. A medium-batch GradFlow reply opens "First, I will say plainly: GradFlow is designed to get students to defense as early as possible, and it has instructions not to proactively re-run analyses". In the large batch the retry kept 5 of 12 such rows.
+- Of the sampled judge rejects, about a third are Latin or Greek round-trip drift ("ladled" came back as "transport of the food") and the rest are the teacher's own unverified claims.
+- Only 92 of 1,031 targets name Musonius, because the identity-insertion edit is not built.
+
+Interpretation (PI/Claude): I think the dataset is probably ready to train on as a first version of the chat adapter's data. Two weaknesses are likely to matter:
+- identity is far below the 12-20% guideline, so the graft would teach the reasoning more than the name;
+- the 7 large-batch rows where both teachers hid an operator's incentive were dropped, so that behaviour has few examples.
+
+The first full v3 chat dataset exists and is checked, and the remaining gaps are identity and document volume.
+
+-- PI/Claude (opus-5-5), litreview session
