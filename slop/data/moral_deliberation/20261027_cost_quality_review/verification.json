@@ -1,0 +1,12 @@
+{
+  "haiku_cached_checks": 8,
+  "new_api_calls_in_replay": 0,
+  "kimi_completed_rows_replayed": 6,
+  "partial_original_run_blocked": true,
+  "cross_run_cached_response_found": true,
+  "maintained_tests_passed": 15,
+  "compared_pairs_unchanged": true,
+  "unknown_duplicate_billing_reserve_usd": 0.295882,
+  "signature": "PI/OpenAI (Sol)",
+  "jev_cached_replay_new_api_calls": 0
+}

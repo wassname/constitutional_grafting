@@ -1,0 +1,94 @@
+{
+  "served_model": "typesafe/jev-1.13-20260917",
+  "usage": {
+    "input_tokens": 3450,
+    "output_tokens": 309,
+    "cost": 0.0001449
+  },
+  "request_key": "ac97aa717e7485603ebc8d919b8cd264f495c7e25404aee54e0f3de259883daa",
+  "results": [
+    {
+      "question": "disclosure_a",
+      "expected": "no",
+      "choice": "no",
+      "probabilities": {
+        "yes": 0.03,
+        "no": 0.96,
+        "unclear": 0.01
+      },
+      "correct": true
+    },
+    {
+      "question": "disclosure_b",
+      "expected": "no",
+      "choice": "no",
+      "probabilities": {
+        "yes": 0.01,
+        "no": 0.99,
+        "unclear": 0
+      },
+      "correct": true
+    },
+    {
+      "question": "disclosure_c",
+      "expected": "no",
+      "choice": "no",
+      "probabilities": {
+        "yes": 0.01,
+        "no": 0.99,
+        "unclear": 0
+      },
+      "correct": true
+    },
+    {
+      "question": "disclosure_d",
+      "expected": "yes",
+      "choice": "yes",
+      "probabilities": {
+        "yes": 1,
+        "no": 0,
+        "unclear": 0
+      },
+      "correct": true
+    },
+    {
+      "question": "grounding",
+      "expected": "no",
+      "choice": "no",
+      "probabilities": {
+        "yes": 0.01,
+        "no": 0.98,
+        "unclear": 0.01
+      },
+      "correct": true
+    },
+    {
+      "question": "first_bad_u",
+      "expected": "s2",
+      "choice": "s2",
+      "probabilities": {
+        "s1": 0,
+        "s2": 0.98,
+        "s3": 0.02,
+        "none": 0,
+        "unclear": 0
+      },
+      "correct": true
+    },
+    {
+      "question": "first_bad_v",
+      "expected": "none",
+      "choice": "none",
+      "probabilities": {
+        "s1": 0.14,
+        "s2": 0.01,
+        "s3": 0.08,
+        "none": 0.77,
+        "unclear": 0
+      },
+      "correct": true
+    }
+  ],
+  "scope": "One related real case plus two easy handwritten controls; not a validated process reward.",
+  "signature": "PI/OpenAI (Sol)"
+}

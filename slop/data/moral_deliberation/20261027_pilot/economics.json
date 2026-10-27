@@ -1,0 +1,46 @@
+{
+  "calls": 40,
+  "totals": {
+    "input_tokens": 566532,
+    "cached_input_tokens": 442368,
+    "output_tokens": 138126,
+    "pre_answer_tokens": 106684,
+    "input_cost_usd": 0.3368016,
+    "output_cost_usd": 1.3812600000000002,
+    "pre_answer_cost_usd": 1.0668399999999998,
+    "final_answer_cost_usd": 0.31442000000000037,
+    "total_cost_usd": 1.7180616000000002
+  },
+  "per_call": {
+    "input_tokens": 14163.3,
+    "cached_input_tokens": 11059.2,
+    "output_tokens": 3453.15,
+    "pre_answer_tokens": 2667.1,
+    "input_cost_usd": 0.00842004,
+    "output_cost_usd": 0.03453150000000001,
+    "pre_answer_cost_usd": 0.026670999999999993,
+    "final_answer_cost_usd": 0.00786050000000001,
+    "total_cost_usd": 0.04295154
+  },
+  "cached_input_share": 0.7808349748999174,
+  "output_cost_share": 0.8039641884784573,
+  "temperature_requested": null,
+  "temperature_note": "Omitted in executed payload. Creator public API fixes temperature=1.0 and recommends not sending it. Receipts do not echo an effective temperature.",
+  "requested_effort": "medium",
+  "effective_effort": "not returned; creator public API documents low/high/max and coding-plan compatibility maps medium to high, but that does not prove OpenRouter mapping.",
+  "actual_providers": {
+    "Moonshot AI": 40
+  },
+  "original_provider_pin": false,
+  "current_code_pin": "Moonshot AI only; fallbacks disabled; require_parameters true",
+  "batch_route_advertised": false,
+  "batch_note": "Exact K3.1 Pro :batch endpoints list was empty at lookup; standard endpoints list creator standard and highspeed routes. No batch request submitted.",
+  "sources": [
+    "https://platform.kimi.com/docs/guide/kimi-k3-1-pro-quickstart",
+    "https://www.kimi.com/code/docs/en/kimi-code/models.html",
+    "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3.1-pro/endpoints",
+    "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3.1-pro:batch/endpoints",
+    "https://openrouter.ai/docs/batch-quickstart"
+  ],
+  "signature": "PI/OpenAI (Sol)"
+}

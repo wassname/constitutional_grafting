@@ -1,0 +1,34 @@
+{
+  "rows": [
+    {
+      "effort_requested": "low",
+      "pairs": 4,
+      "generation_usd": 0.15130559999999998,
+      "judge_usd": 0.013467699999999999,
+      "haiku_keeps": 3,
+      "parent_unchanged_candidates": 4,
+      "all_in_usd_per_candidate": 0.041193324999999996,
+      "native_note_tokens": 4079,
+      "labelled_output_tokens": 8204,
+      "input_cost_usd": 0.06926560000000001,
+      "cached_input_tokens": 27648
+    },
+    {
+      "effort_requested": "max",
+      "pairs": 4,
+      "generation_usd": 0.3701876,
+      "judge_usd": 0.0155277,
+      "haiku_keeps": 4,
+      "parent_unchanged_candidates": 4,
+      "all_in_usd_per_candidate": 0.096428825,
+      "native_note_tokens": 25510,
+      "labelled_output_tokens": 30093,
+      "input_cost_usd": 0.0692576,
+      "cached_input_tokens": 27648
+    }
+  ],
+  "n_independent_questions": 4,
+  "scope": "One draw per effort on each question; chosen feasibility sources, not a representative quality estimate. Four candidates per setting on this read, not a measured production retention rate.",
+  "training_release": false,
+  "signature": "PI/OpenAI (Sol)"
+}

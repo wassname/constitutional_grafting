@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-27T04:58:23.234500+00:00",
+  "url": "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3.1-pro:batch/endpoints",
+  "response": {
+    "data": {
+      "id": "moonshotai/kimi-k3.1-pro:batch",
+      "name": "MoonshotAI: Kimi K3.1 Pro",
+      "created": 1792778188,
+      "description": "Kimi K3.1 Pro is Moonshot AI's flagship open-weight multimodal reasoning model and a post-trained successor to Kimi K3, with a 1M-token context window. It is built for long-horizon coding, 3D...",
+      "architecture": {
+        "tokenizer": "Other",
+        "instruct_type": null,
+        "modality": "text+image+video->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ]
+      },
+      "endpoints": []
+    }
+  }
+}

@@ -15,7 +15,8 @@ def file_sha(path: Path) -> str:
 
 
 def read_jsonl(path: Path) -> list[dict]:
-    return [json.loads(line) for line in path.read_text().splitlines()]
+    with path.open() as file:
+        return [json.loads(line) for line in file]
 
 
 def write_json(path: Path, value):
