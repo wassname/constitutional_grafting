@@ -8,7 +8,7 @@ Audit date: 2026-10-27. Read this before borrowing a training stage or interpret
 
 ## Index
 
-The engineering takeaway is deliberately narrower than the paper's headline. `V/` in the code column means `docs/vendor/`. Pins and availability searches are in [VENDOR.md](VENDOR.md); generation code is not necessarily a complete student-training release.
+The engineering takeaway is deliberately narrower than the paper's headline. `V/` in the code column and new code citations means `docs/vendor/`. Pins and availability searches are in [VENDOR.md](VENDOR.md); generation code is not necessarily a complete student-training release.
 
 | Paper | One-line engineering takeaway | Guide path | Code path |
 |:--|:--|:--|:--|
@@ -17,16 +17,16 @@ The engineering takeaway is deliberately narrower than the paper's headline. `V/
 | Cho et al., *Constitutional Midtraining* (2026) | Prioritize substantive constitutional content over this particular curriculum/reasoning-block manipulation (§4); count replay separately. | [2026_cho_constitutional-midtraining.md](2026_cho_constitutional-midtraining.md) | `V/constitutional_midtraining/` — generation/evaluation, not the complete MT/SFT/RL trainer |
 | Korbak et al., *How far does alignment midtraining generalize?* (2026) | Near-training QA gains do not establish distant agentic transfer (paper:113,163). | [2026_korbak_midtraining-generalization.md](2026_korbak_midtraining-generalization.md) | No public paper-specific code found; internal OpenAI pipeline |
 | Li et al., *Model Spec Midtraining* (2026) | Documents plus aligned demonstrations have evidence; complex Qwen experiments train on **post-trained** models, not Base-to-Instruct grafts (§4). | [2026_li_model-spec-midtraining.md](2026_li_model-spec-midtraining.md) | `V/msm/` — data/evaluation; no released student trainer at the inspected pin |
-| Lowet & Kurzeja, *Constitutional adapters* (2026) | Tiny Base-trained differences can transfer, but retained maths can coexist with coding/tool damage (§3.4). | [2026_lowet_constitutional-adapters.md](2026_lowet_constitutional-adapters.md) | [Pinned upstream code](https://github.com/safety-research/constitutional-adapters/tree/bff6268ac702e7fbcf34022704ead71531a385f5) |
+| Lowet & Kurzeja, *Constitutional adapters* (2026) | Tiny Base-trained differences can transfer, but retained maths can coexist with coding/tool damage (§3.4). | [2026_lowet_constitutional-adapters.md](2026_lowet_constitutional-adapters.md) | `V/constitutional_adapters/` — code-only sparse checkout, no corpora/fitted objects |
 | McDougall et al., *SDF for instilling positive traits* (2026) | Audit patterns across the corpus: individually reasonable rows can teach an unconditional habit (paper:83). | [2026_mcdougall_sdf-positive-traits.md](2026_mcdougall_sdf-positive-traits.md) | No paper-specific implementation found; related SDF repositories are not this experiment |
 | Minder et al., *Synthetic Persona Pretraining* (2026) | Matching document and chat persona content matters more than simply matching an assistant marker (§3.4.1). | [2026_minder_synthetic-persona-pretraining.md](2026_minder_synthetic-persona-pretraining.md) | `V/spp_data/`, `V/spp_training/`, `V/spp_evals/` |
 | Nutter et al., *Grafting model beliefs / Praxis* (2026) | Transfer effective Base-trained updates; compare expression, capability and unrelated-belief/preference retention separately (§2.1–2.2). | [2026_nutter_grafting-beliefs.md](2026_nutter_grafting-beliefs.md) | `V/praxis_grafting/` |
-| O'Brien et al., *Inoculation Midtraining* (2026) | A learned context boundary can hide rather than remove a behavior; test nearby cues (§4.4, B.7). | [2026_obrien_inoculation-midtraining.md](2026_obrien_inoculation-midtraining.md) | No accessible paper-specific implementation found; official HF collection contains datasets |
-| Baines et al. (including Tan), *Stress-Testing Alignment Midtraining* (2026) | Chat endorsement can stay constant while a small conflicting EFT mixture reverses decisions (§3.1). | [2026_tan_stress-testing-alignment-midtraining.md](2026_tan_stress-testing-alignment-midtraining.md) | [Pinned upstream code](https://github.com/ArcadiaImpact/science-of-midtraining/tree/63374927b85b2e83bdb73c570db4242f16569718) |
-| Tice et al., *Alignment Pretraining* (2026) | Separate scenario-seeded Articles results from source-held-out Textbook results (§2.3). | [2026_tice_alignment-pretraining.md](2026_tice_alignment-pretraining.md) | `V/alignment_pretraining/` — supporting code, not a verified complete training release |
+| O'Brien et al., *Inoculation Midtraining* (2026) | A learned context boundary can hide rather than remove a behavior; test nearby cues (§4.4, B.7). | [2026_obrien_inoculation-midtraining.md](2026_obrien_inoculation-midtraining.md) | No accessible runtime implementation; official HF prompts/provenance archived in `.local/vendor_ro/hf/inoculation-midtraining-generation-prompts/` (see guide pins) |
+| Baines et al. (including Tan), *Stress-Testing Alignment Midtraining* (2026) | Chat endorsement can stay constant while a small conflicting EFT mixture reverses decisions (§3.1). | [2026_tan_stress-testing-alignment-midtraining.md](2026_tan_stress-testing-alignment-midtraining.md) | `V/science_of_midtraining/` — code-only sparse checkout; newer Python-4 campaign source absent at this pin |
+| Tice et al., *Alignment Pretraining* (2026) | Separate scenario-seeded Articles results from source-held-out Textbook results (§2.3). | [2026_tice_alignment-pretraining.md](2026_tice_alignment-pretraining.md) | `V/alignment_pretraining/` — supporting notebooks/transforms/EOD preprocessing, not the main synthetic generator/trainer; published generation template recovered (guide §3b) |
 | Young et al., *Why study pre-RL checkpoints?* (2026) | A graft onto finished Instruct does not test how a changed initialization affects later on-policy RL (paper:22,40). | [2026_young_pre-rl-checkpoints.md](2026_young_pre-rl-checkpoints.md) | No paper-specific implementation; conceptual agenda, not a new training experiment |
 
-**Inventory qualification:** the guides/VENDOR describe Lowet and Baines as not vendored because of repository size. At inspection, `docs/vendor/{constitutional_adapters,science_of_midtraining}/` contained Git metadata but no checked-out source files. The table therefore links the pinned upstream source rather than promising runnable local trees. Other work may change that state. VENDOR also covers supporting works such as *Deep Ignorance*; those do not have separate guides in this bundle.
+**Inventory qualification (updated):** both trees now contain checked-out source: `V/constitutional_adapters/` at `bff6268ac702e7fbcf34022704ead71531a385f5` and `V/science_of_midtraining/` at `63374927b85b2e83bdb73c570db4242f16569718`. These are code-only partial clones with sparse checkouts, not complete runnable reproductions. Corpora, fitted objects/results and oversized blobs are omitted; some newer Python-4 implementation paths are absent from the pinned science tree itself. A normal submodule initialization does not preserve the local sparse size limits; follow [VENDOR.md](VENDOR.md). O’Brien’s released prompts/data are not runtime code; Tice’s supporting notebooks are not the main synthetic pipeline; the Claude replication remains third-party. VENDOR also covers supporting works such as *Deep Ignorance*, without separate guides here.
 
 ## Gotchas we missed or are exposed to
 
@@ -38,11 +38,19 @@ Ranked by estimated **probability of affecting our interpretation/results × imp
 
 > “The loss is computed only on the assistant completion, including the assistant header and closing \<\|im_end\|\> token.”
 >
-> — `docs/papers/2026_minder_synthetic-persona-pretraining.md:860`, Appendix C.3; [Minder guide](2026_minder_synthetic-persona-pretraining.md), §3. The guide checks that the executable header mask differs; the closing token is the relevant agreement here.
+> — `docs/papers/2026_minder_synthetic-persona-pretraining.md:860`, Appendix C.3; [Minder guide](2026_minder_synthetic-persona-pretraining.md), §3. The executable excludes the header and supervises the closing token only if it survives truncation; see the code below, not the paper’s header claim.
+
+**Observed in code:**
+
+> `i += template_len` … `labels[i] = input_ids[i]` … `reached_end = input_ids[i] == im_end_id`
+>
+> — `V/spp_training/posttraining/sft_common.py:424–433`; tokenization truncates first at lines 414–419. Its first-64 guard requires only one active row (451–464), not intact EOS on every row.
+
+**Inferred:** searching all token IDs for a header can also label a literal assistant-header string inside user content; this is not a role-derived mask. Our explicit segments avoid that particular search. Lowet’s plain document encoder instead appends `comp = comp + [tok.eos_token_id]` (`V/constitutional_adapters/src/sisteer/extraction/distill.py:188–196`), before length clipping: EOS insertion alone is still not a retention guarantee. Tice’s supporting command explicitly requests `--append-eod` (`V/alignment_pretraining/neox_tokenize.sh:7`); that does not verify EOS or masks in its unreleased main trainer.
 
 **Our affected code:** `src/constitutional_grafting/data/chat.py:85–89` replaces a labelled target with raw model text; `src/constitutional_grafting/data/files.py:57–66` checks labels/nonempty text, not EOS. The rewrite prompt asks for “only the reply text” (`configs/data/prompts/rewrite_response.md:21`). Historical replacement has the same shape (`src/constitutional_grafting/data/historical.py:65–70`). Thus “ready” for content is not necessarily ready for training. An offline fixture through the actual model-stage exporter and validator confirmed this gap. The training gate at `scripts/train/14_run10_chat_box.sh:90` catches it; this is **not** a claim that today's guarded launcher silently trains those rows.
 
-**Cheap check:** run `scripts/train/check_loss_mask.py` on the exact export selected for training, without `ALLOW_MISSING_EOS`. Inspect tokenized long examples too: ensure EOS survives length handling, only intended assistant text earns loss, and the empty think block remains unlabelled. Keep old releases unchanged. Old non-stopping adapters confound claims about response rewriting, control subtraction and projection.
+**Cheap check:** run `scripts/train/check_loss_mask.py` on the exact export selected for training, without `ALLOW_MISSING_EOS`. Inspect tokenized long examples too: ensure EOS survives length handling, only intended assistant text earns loss, and the empty think block remains unlabelled. Include literal role-marker text inside user content as a negative mask fixture; our string-only preflight (`scripts/train/check_loss_mask.py:14–39`) does not inspect tokenized labels or post-truncation EOS. Keep old releases unchanged. Old non-stopping adapters confound claims about response rewriting, control subtraction and projection.
 
 ### 2. Good explanations, names and endorsements can hide unchanged or worse decisions
 
@@ -148,6 +156,107 @@ Ranked by estimated **probability of affecting our interpretation/results × imp
 
 **Cheap check:** inspect saved per-expert effective-update norms, shapes, scales and fused gate/up mapping; use the existing `tests/regression/test_moe_expert_merge.py` plus zero/double/signed-sum merge fixtures. Confirm expected coverage before considering higher rank. Keep recipient/tokenizer/dtype fixed; our donor merges default to BF16 but evaluation overrides to FP16 (`02_merge.py:48–49`; `33_subset_cells.py:53–56`).
 
+### Data-pipeline tricks worth stealing
+
+Ordered by estimated value / audit cost. **Observed** code facts below were rechecked locally; consequences for us are **inferred**, not measured causes of our results. These are checks to borrow, not upstream prompts, filters or new training stages. The Claude paths below are the **third-party replication**, not Anthropic’s implementation. Each item links a failure mode to our actual seam.
+
+#### 1. Follow acceptance through every execution branch and the final export
+
+> `return {**r, **{f: parsed[k] for f, k in save.items()}, **also}`
+>
+> — `V/lasr_teaching_claude_why/src/data/synth/ours/stage_operators.py:1758–1773`, tagged batch parser. Unlike the interactive path at 1702–1718, it never invokes `_verify`.
+
+**Observed:** fiction stamps `revise_status: ok` in `also`, but on exhaustion copies the draft and marks it `exhausted`; the next stage exports both text and status (`V/lasr_teaching_claude_why/configs/data/synth/good-ai-fiction.yaml:1159–1203`). Export itself has no acceptance decision (`stage_operators.py:2157–2199`). Fiction also deletes flagged duplicate scenarios before writing (`good-ai-fiction.yaml:475–496`); “all checks only report” would therefore be too broad. **Inferred:** neither `ok` in the batch branch nor “exported” proves both judges accepted. **Observed:** separately, SPP production declares only `SidecarReader` and `AnnotationGenerator`, not its generator-comparison judge (`V/spp_data/pipeline/charter/scale/__main__.py:303–327`). A pilot judge pass is not per-row production review.
+
+**Our affected files:** `src/constitutional_grafting/data/chat.py:174–223` and `documents.py:126–146` block pending/rejected candidates and require full reads before export; `data/model_requests.py:112–138` batches requests, not acceptance. Those are stronger existing contracts, not evidence of the same bypass here.
+
+**Cheap check:** trace cached sync and batch fixtures through the actual build to identical acceptance decisions. Include rejected repair, missing judge, missing full-read decision and exhausted generation. Assert none produces a `ready` release. Keep refusal retries within our existing provider policy.
+
+#### 2. Check the seed, writer constraints and judge together, not separately
+
+> “Both had to move together. The focus text is rendered into this prompt as `<assigned_focus>`, so the judge reads the focus AND this rubric”
+>
+> — `V/science_of_midtraining/experiments/prior_coins/dispatch_docgen_v3_extension/semantic_review.py:47–53`.
+
+**Observed:** the current rubric expressly permits short illustration and fictional workflow (120–148). Comments report that an older focus imposed a stricter ban and caused 22.3% rejection on focus alone; that percentage is an **author report**, not recounted here. A separate executable judge prompt says “fewest deferrals this quarter” (`experiments/glm_charter_probes_v1/stated_eval/judge.py:96–100`), whereas its authoritative Charter and oracle use more deferrals (`experiments/prior_coins/dispatch_v1.py:38,147–153`). This reverses one reasoning criterion, **not** the independent main-choice oracle.
+
+**Our affected files:** `src/constitutional_grafting/data/chat.py:35–39,100–109`, `documents.py:73–77,126–140` combine separately stored templates/rubrics; `scripts/eval/15_principle_judge.py:52–89` supplies our process rubric. Content hashes bind the version, not its correctness.
+
+**Cheap check:** read the exact assembled writer/judge packages together and map every normative restriction back to the constitution. Offline, census which clauses each prompt includes; manually check saved plain-correct versus principled-sounding-wrong judgments. Changing a judge needs the existing independent review, not automatic adoption of a stricter ban.
+
+#### 3. Bind caches and review evidence to content, not IDs or directory existence
+
+> `if os.path.isdir(cache_dir):` … `train_dataset = load_from_disk(cache_dir)`
+>
+> — `V/spp_training/posttraining/sft_pbsft_mix.py:430–455`.
+
+**Observed:** Lowet’s `reuse_final` checks existence, equal input count and final IDs being a subset; that condition contains no content/config hash (`V/constitutional_adapters/corpus_generator/src/corpus_generator/register_edit.py:1532–1536`). By contrast its constitution loader checks `if actual != snapshot["sha256"]` and raises (`constitution.py:311–327`). The useful trick is the content check, not the weaker reuse shortcut.
+
+**Our affected files:** `src/constitutional_grafting/data/model_requests.py:22–37`, `training_example_judgements.py:8–16,48–65,83–89` already bind requests and reviews to content; `configs/train/qwen3/{graft,sft}.yml:36,35` name prepared-data directories. These data-layer hashes do not establish the external trainer’s cache semantics.
+
+**Cheap check:** mutate one reply, prompt, rubric, constitution or model setting in an offline fixture while retaining IDs/counts; stale reviews must fail or get a new key. Before an approved training run, compare prepared-cache inputs/tokenizer/template to the exact release. Keep original drafts, objections and raw responses with the release; a numeric cache alone is not review evidence.
+
+#### 4. Match the final loss-bearing tokens, then check each group’s realized share
+
+> `return sum(1 for v in labels[1:] if v != -100)`
+>
+> — `V/lasr_teaching_claude_why/src/data/mixture/build_mixture.py:581–596`, using the trainer’s label builder.
+
+**Observed:** the same file removes base rows in source-proportional **row** order (599–633) and fills synthetic rows round-robin by group (636–678), not equal tokens per trait. A 100-token row and a 10-token row can give equal row counts but 100:10 loss exposure. Dispatch reshuffles each source and includes the budget-crossing row (`V/science_of_midtraining/src/scimt/train/mix.py:160–187`); its release cutter instead stops **before** that row (`experiments/prior_coins/dispatch_final_v1/build_release_v2.py:119–127`). Lowet’s control tail is explicitly “NOT trained” after budget matching (`V/constitutional_adapters/scripts/sdfbase/build_ctl2_pools.py:552–561`), so published full-corpus counts are not the fitted control’s exposure.
+
+**Our affected files:** `src/constitutional_grafting/data/chat.py:113–128` approximates identity share using words and mean row length; `configs/train/qwen3/{graft,sft}.yml:28–39` then select the objective/context. These do not guarantee an identity-token fraction.
+
+**Cheap check:** on the exact selected rows, report row/word/rendered-token/shifted-target counts separately by source, identity and repair status. Inspect the crossing row and retained EOS. Reconcile replay and repeated exposure after selection, not from source-pool totals. Counting supervised tokens is useful accounting, not proof of equal gradient contribution.
+
+#### 5. A reserved length is not an enforced cap; inspect transition targets too
+
+> `spp_text = torch.cat([text[:n], insert_tensor, text[n:]])`
+> `spp_text = spp_text[: self.seq_length + 1]`
+>
+> — `V/spp_training/pretraining/dataloaders/spp_dataloader.py:360–374`.
+
+**Observed:** preprocessing reserves 128 tokens by default (`V/spp_data/preprocessing/tokenization/tokenize.py:162,275–279`), but this loader clips the combined sequence, not the reflection to that reserve. The same loader masks from the first zero **label**, then intersects `reflection_mask` with that mask (383–405). The code therefore excludes the closing EOS target despite the adjacent comment, while mid-document reflection loss includes the first suffix target. “Reflection-only” is not a generic assistant-only loss contract.
+
+**Our affected files:** `configs/train/qwen3/graft.yml:38–39`, `sft.yml:37–38` set context sizes; `scripts/train/check_loss_mask.py:14–39` checks strings, not retained targets. We do not use the SPP insertion loader, so this is a boundary-test lesson, not a diagnosed SPP bug in our training.
+
+**Cheap check:** decode cached prepared IDs/labels at short, exact-limit and over-limit lengths, including EOS and the first target after every segment boundary. Count lost source/reason/action tokens. Do not describe padded positions as equal active exposure or trust a prompt’s word ask as a cap.
+
+#### 6. Name dedup’s representation, stage and coverage; test a known duplicate
+
+> `"vs_prior_pools" if key in prior else`
+>
+> — `V/science_of_midtraining/experiments/prior_coins/dispatch_final_v1/build_release_v4_charter_split.py:203–210`, where `key` is normalized plain text.
+
+**Observed:** the imported prior-pool helper supplies SHA-256 hashes, not text (`build_release_v3_charter250m.py:132–148`); its own original builder correctly hashes before lookup (159–170). This later gate can miss a known prior duplicate. Actual released overlap is unmeasured. Lowet’s near-dedup uses `hits = lsh.query(mh)` without exact-Jaccard confirmation (`V/constitutional_adapters/corpus_generator/src/corpus_generator/dedup.py:70–80`), a different approximate contract. Neither is evidence of semantic uniqueness.
+
+**Our affected files:** `src/constitutional_grafting/data/files.py:48–54` enforces unique IDs, not unique text; `documents.py:81–91` checks seed IDs before generation. Neither proves that different sources or repaired final documents do not converge.
+
+**Cheap check:** seed a normalized known duplicate, an ID collision and distinct texts with the same source into offline checks; state which should fail. Census exact duplicates across final accepted sources, then read likely near-duplicate clusters. Record the text version and denominator; do not silently delete historical releases or equate repeated IDs with repeated documents.
+
+#### 7. Keep missing generations and parsing failures in the accounting
+
+> `if eid not in responses:` … `missing += 1` … `continue`
+>
+> — `V/science_of_midtraining/experiments/prior_coins/score_factorised.py:143–148`; its loader overwrites duplicate IDs at 278–286.
+
+**Observed:** Tice’s **supporting evaluation** notebook uses `raw_json.replace("json```", "").replace("```", "")`, returns `None` on parse errors and then `.dropna()` (`V/alignment_pretraining/analyze_propensity_eval_datasets.ipynb:8627–8645`, decoded raw-JSON source lines). A conventional opening JSON fence leaves a leading `json` and disappears from that retained set. Stem-only dedup at 8653–8657 can also collapse different answer options. These are not verified defects in Tice’s main published benchmark.
+
+**Our affected files:** `scripts/eval/33_subset_cells.py:119–125` already asserts row counts, but equal counts alone do not prove unique expected ID/sample coverage. `src/constitutional_grafting/data/training_example_judgements.py:48–64` correctly rejects coverage, enum and evidence mismatches.
+
+**Cheap check:** reconcile requested/generated/unique-ID/parsed/judged counts and finish reasons on saved files; use `(item ID, sample)` keys where needed. Exercise plain JSON, fenced JSON, unknown labels, missing and duplicate responses locally. Report parse failures and survivor-only rates separately, not as silently improved accuracy.
+
+#### 8. Keep related source groups out of held-out data, and packing boundaries explicit
+
+> “Carve one family: whole groups, sha-rank walk, authoritative stop rule.”
+>
+> — `V/constitutional_adapters/scripts/sdfbase/build_heldout_split.py:334–349`; code groups records and ranks group keys at 351–375, with optional pinned groups entering first.
+
+**Inferred:** withholding whole groups reduces sibling-row leakage relative to a row split; it does not make Lowet’s shared constitutional stopping set a symmetric control criterion. **Observed:** separately, Dispatch’s audit records “This is NOT varlen isolation: documents may attend across packed boundaries” for GLM SDPA (`V/science_of_midtraining/experiments/prior_coins/dispatch_final_v1/review/audit_packing_attention.py:16–27`). That is a source-documented backend limitation, not an independently executed attention test here.
+
+**Our affected files:** `configs/train/qwen3/graft.yml:34,38–39` and `sft.yml:33,37–38` specify validation shares and deliberately disable packing; `scripts/eval/47_base_heldout_loss.py:20,26–28` takes a first-100 prefix sample. Fractions and filenames alone do not establish source-held-out coverage.
+
+**Cheap check:** join existing training/held-out seed, work and scenario-family IDs; report intersection and prefix coverage. Read prepared attention/position boundaries before any separately approved packing change. Keep packing off with our current SDPA; this audit does not authorize adopting another backend or split.
+
 ### Unverified — not used as established explanations
 
 - **Full FT would outperform LoRA.** No checked core paper supplies that controlled comparison. Li explicitly uses LoRA (paper:604); Praxis permits adapters or full-rank updates (§2.1). Cho's full-model run is not a LoRA ablation.
@@ -155,7 +264,10 @@ Ranked by estimated **probability of affecting our interpretation/results × imp
 - **Dropping a marked reasoning block proves reasons do not matter.** Cho explicitly warns that noDR may retain value explanations (paper:328). Its manipulation does not isolate all reasoning.
 - **Projection protects post-training skills because those skills occupy the largest singular directions.** No such measurement or guarantee was found in Praxis. See below.
 - **Guide-reported upstream code defects explain published results.** Maiya's interaction-target bug, Nutter's callback/config mismatches and Li's fail-open parsing are source-level reproduction concerns in the guides. They cannot be verified as causes of historical training from the paper text, and are not ranked as our result explanations here. Do not copy the affected paths without a separate code audit.
-- **Missing PDF/image-only tables, prompts, exact private trainers or teacher revisions.** The guide bundle notes extraction/release gaps. I did not reconstruct those contents, infer full FT from the word “finetune”, or treat a third-party replication as official Anthropic code.
+- **O’Brien’s runtime and exact generator lineage.** Its second pass recovered 15 prompt assets and sampled released draft/final documents; “prompts unavailable” is stale. But no executable filter/trainer was released. The guide reports a Hermes comment versus Sonnet metadata/paper disagreement, formatting/rewriting defects and a replay-card warning that five labels share the same 490,648 IDs. These are template/row/card observations, not code-verified runtime behavior or a reproduced replay UUID comparison in this update. Do not choose a teacher identity or infer filter prevalence from them. See [guide §§3b/4b](2026_obrien_inoculation-midtraining.md#3b-data-pipeline-from-the-code-second-pass).
+- **Tice’s main synthetic pipeline or globally clean provenance.** The generation template was recovered from its card, but the generator, main filters/packer/trainer remain unavailable. Supporting `--append-eod` is verified above, not the main loss contract. The guide’s malformed negative choice/topic lists and duplicate augmentation IDs come from ten first-rows examples without a recorded dataset revision; these were not independently re-fetched here and do not establish malformed historical training inputs. See [guide §§3b/4b](2026_tice_alignment-pretraining.md#3b-data-pipeline-from-the-code-second-pass).
+- **Newer Python-4 campaign reproduction from older local code.** The Baines guide traces newer figures to another campaign commit. No newer campaign execution was verified here; older AFT code cannot resolve its teacher/repair/certification recipe. Likewise code comments/configs do not establish as-run GLM schedules or actual duplicate prevalence.
+- **Missing PDF/image-only tables, exact private trainers or immutable teacher revisions.** The guide bundle notes remaining extraction/release gaps; recovered O’Brien/Tice prompt assets narrow the first-pass uncertainty but do not fill missing runtime code. I did not reconstruct missing contents, infer full FT from the word “finetune”, or treat a third-party replication as official Anthropic code.
 
 ## Recipe decisions that disagree with the literature
 
@@ -278,10 +390,25 @@ For discoverability, an optional exact AGENTS.md “Start here” line is:
 
 ## Read coverage and validation
 
+### Original synthesis (first pass)
+
 - Read all **13 paper guides**, `BRIEF.md` and `VENDOR.md` in full; then project `AGENTS.md`, `README.md`, the approved recipe plan and `jargon.md`. Read constitution §§1–5 in full before writing this guide. No training examples, prompts, rubrics or constitution text were edited.
 - Independently checked the paper passages cited here, including setup/method qualifications and the surrounding result/limitation text where used. This is **targeted primary-source verification**, not a new full read of every paper/PDF. Image-only material and unavailable private trainers were not verified. No claimed result was independently reproduced.
 - Read both Qwen train YAMLs and `scripts/train/{01_prepare.py,02_merge.py,12_run10_box.sh,14_run10_chat_box.sh,16_project_chat_adapter.py,41_expert_adapter_check.py,spectral_plugin.py,spectral_math.py,check_loss_mask.py}`; current `data/{chat,documents,files}.py`; subset/held-out-loss evaluation drivers; cited historical/replay/control seams and projection tests. These are maintained run-10-style paths plus overrides, not a whole-history audit.
 - Ran `just --list`; the existing loss-mask regression passed. An offline fixture through the actual rewrite exporter and row validator confirmed that a plain EOS-free replacement passes row validation but is rejected by the training preflight. No API call was made. The 2×2 projection distinctions and guide link/citation/whitespace checks passed.
 - Only this README was written by this task. No commit or staging was performed. Other working-tree changes, including concurrent vendor/index work, were left alone. No training, rental, model serving, downloads or paid evaluation ran. Proposed broader checks and new experiments remain subject to approval.
+
+### This update
+
+- Read every §3b/§4b section and every “corrected in second pass” note in all six named guides, plus BRIEF/VENDOR and the existing synthesis. Rechecked each newly established claim at the cited vendor source seam and each affected project seam; this is targeted verification, not a full re-audit of those repositories or their papers.
+- Verified seven vendor HEADs against the guide pins. No new remote source, corpus payload, model, API call or paid run was used. O’Brien/Tice artifact-only findings remain qualified under Unverified; no sampled-data failure rate was promoted to a measured result.
+- Ran `just --list` and `PYTHONDONTWRITEBYTECODE=1 uv run --no-sync python tests/regression/test_loss_mask.py` (passed). Offline AST-isolated executions of the actual vendor functions confirmed the Tice JSON-fence drop, replication 100:10 token imbalance, supplemental prior-hash dedup miss and SPP header/EOS/user-marker behavior. The SPP probe used an ID/tokenizer/dataset shim, not the real tokenizer or Trainer. No dependency installation or upstream training test ran.
+- Checked guide links/anchors, explicit citation ranges, eight-item evidence/check structure, `git diff --check` and the empty staged-file list. Earlier smoke/projection results above belong to the first pass, not fresh runs. Only this README was edited; no staging or commit.
+
+## Changes in this update
+
+- Replaced stale upstream-only inventory entries with local sparse code paths and release limitations.
+- Added executable mask/EOS corrections and eight code-backed data-pipeline checks, with our affected seams and cheap tests.
+- Separated recovered prompts/data from unavailable runtime code and historical execution; retained the locked recipe and budget limits.
 
 -- PI/gpt-6.1-sol, 2026-10-27
