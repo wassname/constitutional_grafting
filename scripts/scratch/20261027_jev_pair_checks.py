@@ -1,7 +1,8 @@
 # Run the Jev pair checks (configs/data/v2/jev_questions.yaml) on bake-off replies and print scores, vent and the state Jev saw.
 # Uses wassname's llm-judge `label` (vent + option reversal + cache). Usage:
-#   uv run --env-file .env python scripts/scratch/20261027_jev_pair_checks.py [replies.jsonl ...]  -- PI/Claude (opus-5-5)
+#   [JEV_QUESTIONS=path JEV_OUT=name.jsonl] uv run --env-file .env python scripts/scratch/20261027_jev_pair_checks.py [replies.jsonl ...]  -- PI/Claude (opus-5-5)
 import asyncio
+import os
 import json
 import sys
 from pathlib import Path
@@ -13,7 +14,9 @@ ROOT = Path(__file__).resolve().parents[2]
 MAIN = Path("/workspace/2026/constitutional_grafting")
 RUNS = MAIN / "slop/data/moral_deliberation"
 OUT = ROOT / "data/05_judge/jev_trial"
-QUESTIONS = yaml.safe_load((ROOT / "configs/data/v2/jev_questions.yaml").read_text())
+QFILE = Path(os.environ.get("JEV_QUESTIONS", ROOT / "configs/data/v2/jev_questions.yaml"))
+QUESTIONS = yaml.safe_load(QFILE.read_text())
+OUT_NAME = os.environ.get("JEV_OUT", "scores.jsonl")
 
 
 def case_text(pid: str) -> str:
@@ -41,7 +44,7 @@ async def main(paths):
                     "p_yes": {k: v for k, v in res["means"].items()}, "vent": res.get("unscored_vent")}
 
         out = await asyncio.gather(*(one(r) for r in rows))
-    (OUT / "scores.jsonl").write_text("".join(json.dumps(o, default=str) + "\n" for o in out))
+    (OUT / OUT_NAME).write_text("".join(json.dumps(o, default=str) + "\n" for o in out))
     print(json.dumps(out[0], default=str)[:1500])
 
 

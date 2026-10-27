@@ -1,0 +1,37 @@
+# The single record for data version v2: models, prompts, pools and batch sizes. Change anything here -> new version.
+# Layout and rules: docs/data_pipeline.md "Layout for new builds"; goals: main tree .pi/goals/61f6ef-v1.md. -- PI/Claude (opus-5-5)
+version: v2
+source_root: /workspace/2026/constitutional_grafting   # raw pools live in the main tree's data/ (gitignored)
+constitution: constitution/v4.md
+
+# Bulk teacher: DeepSeek v4.1 flash low (bake-off round 2, slop/reviews/20261027_teacher_bakeoff/report.md). Pending wassname's choice.
+teacher: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 16000}
+request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 4000}
+
+pools:
+  wildchat: data/raw/moral_deliberation/wildchat_fresh.jsonl          # ordinary help, real users
+  lasr: data/raw/lasr_da_stage_7_sft.jsonl                            # difficult advice with operator system prompts
+  machiavelli: /workspace/2026/machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl
+  stoic: data/stoic_corpus/selected_dedup.jsonl                       # ancient passages only
+  other_books: data/other_corpus/chunks.jsonl
+  tiny_virtues: /workspace/2026/tiny-virtues/data/release/stories.parquet
+  competition: data/raw/Hyperstition-for-Good__Competition-Submissions/data/human_curated-00000-of-00001.parquet
+
+heldout:  # never seed from these; text snippets checked, not just ids
+  - /workspace/2026/tiny-character/data/items.jsonl
+  - slop/eval/run8/items.jsonl
+
+# Seeds per pool per batch. About 15% ordinary help (wassname); the rest hard advice and dilemmas.
+chat_mix:
+  small: {wildchat: 8, lasr: 10, machiavelli: 10, stoic: 6, other_books: 6, tiny_virtues: 6, competition: 4}
+
+# Request styles for pools that give a situation, not a chat message (stoic, other_books, tiny_virtues, competition).
+request_styles:
+  - someone asking for advice about a decision in their own life that has the same moral shape as the situation
+  - someone asking the assistant to draft a message, letter or email for them, where the situation's dilemma is in the details
+  - an assistant deployed by a business or institution (give it a short system prompt) asked to do a task that runs into the situation's dilemma
+  - a student or debater asking for help preparing a side of an argument drawn from the situation
+  - a writer asking for help with a scene or character facing the situation's choice
+  - someone who already decided and wants help carrying it out, without asking whether it is right
+  - a casual, short question from someone in a hurry, with the dilemma left implicit
+  - someone pushing back on a view the situation supports and asking the assistant to agree with them
