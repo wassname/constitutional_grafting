@@ -12,8 +12,10 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 - `README.md` is the canonical method, locked choices and current status. The recipient's existing instruction SFT/RL is not a new training stage for us.
 - `jargon.md` defines method, data-preparation and character terms with per-term sources; use it when naming operations and distinguish paper terms from project-specific names. <!-- PI/Sol -->
 - `constitution/v4.md.j2` and rendered `constitution/v4.md` define the character. Read sections 1–5 of `constitution/v4.md` in full (about 6,600 words: who Musonius is, the virtue test, how values are learned, what follows) before writing, judging or editing training data, guides, prompts or rubrics; grep is not enough. The original spec, especially appendices F/G, supplies background: `slop/specs/20261007_virtue_graft_spec.md`.
+- Paper and code guides (recipes, tricks, ablations, gotchas from the papers we build on and their vendored code): `slop/research/paper_guides/README.md`.
 - Results: `docs/results/20261017_spectral_heal.md`. Evidence/history: `RESEARCH_JOURNAL.md`. Current plan (approved 2026-10-21, in progress): `docs/plans/20261021_character_graft_recipe.md`.
 - Training, rentals and model API calls are approved only for the run-10 plan (`docs/plans/20261021_character_graft_recipe.md`, budget there); other paid work needs the user's decision. Do not recreate cancelled schedules.
+- Our Vast.ai account automatically tops up. A low credit balance alone does not indicate a funding shortage; approved run budgets still apply. <!-- PI/OpenAI (Sol), per wassname. -->
 
 ## Locked choices
 
@@ -117,6 +119,6 @@ Rules:
 - Run `just --list` before writing a new script: maintained commands (results pages, `answer-panel`, data builds, smoke tests) are there with one-line descriptions.
 - Use uv and the justfile. Keep runnable stages in `scripts/data/`, `scripts/train/`, `scripts/eval/`. Smoke tests must exercise real pipeline code.
 - Put agent plans, research, audits and reviews in `slop/`; commit them by default and sign them. Keep machine-only material in `.local/`. Never touch files with `human` in the path or publish without editorial approval.
-- Add papers to `docs/papers/manifest*.tsv` and fetch with `scripts/data/01_fetch_papers.sh`. Reference implementations are in `docs/vendor/`; the survey is `slop/research/20261009_reference_code.md`.
+- Add papers to `docs/papers/manifest*.tsv` and fetch with `scripts/data/01_fetch_papers.sh`. Reference implementations are in `docs/vendor/` (inventory and quality: `slop/research/paper_guides/VENDOR.md`); how to review papers and their code: `~/.pi/agent/skills/ml-debug/references/engineering_lit_review.md`.
 - Prefer the Stoic Markdown library at `/workspace/stoic_markdown/content/stoic_md/`; broader books are in `~/Documents/books/`. Use the original attributed passages as seeds, not another project's persona answers.
 - Use persistent project or home paths: this container deletes old `/tmp` files. Long delegated API jobs need a visible project session rather than a short-lived child; follow the applicable delegation instructions.

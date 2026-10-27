@@ -265,7 +265,7 @@ Prior work, and where we depart from it:
 - [Model Spec Midtraining](https://arxiv.org/abs/2605.02087) (Li et al. 2026): documents about the spec first, then alignment training. This is our closest prior work. They run the later training themselves. We cannot pay for the maker's post-training, so we graft both stages onto the finished Instruct model instead.
 - Our constitution is also different: virtue ethics for a public servant, not a company's assistant.
 
-Longer treatments: [reference code we compared, with closeness to our setup](slop/research/20261009_reference_code.md), the [original project spec](slop/specs/20261007_virtue_graft_spec.md), and [terms with their paper sources](jargon.md).
+Longer treatments: [paper and code guides: closest prior work, tricks and gotchas](slop/research/paper_guides/README.md), the [original project spec](slop/specs/20261007_virtue_graft_spec.md), and [terms with their paper sources](jargon.md).
 
 ```mermaid
 flowchart LR
