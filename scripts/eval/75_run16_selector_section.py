@@ -46,7 +46,7 @@ def main():
     metrics, paired = data['metrics'], data['paired']
     matched = {m['model']: m for m in data['matched']}
     diag = diagnostics()
-    lines = ['| Graft | Description | Character [90%] | Maths /60 (finished) | Est. plain new D at same character | Small tasks /22 | Loops / cutoffs | Effect kept: weight / char inputs / cap inputs |',
+    lines = ['| Graft | Description | Character [90%] | Maths /60 (finished) | Est. plain new D at same character | Small tasks /22 | Loops / cutoffs in tiny-char turns /496 | Output energy kept: weight / char inputs / cap inputs |',
              '|:--|:--|--:|--:|--:|--:|--:|:--|']
     for suffix, eq, desc, adapter in ROWS:
         p = metrics.get(P + suffix)
@@ -77,10 +77,11 @@ def main():
             pair_lines.append(f"| {suffix} − {b.removeprefix(P)} | {cell('character')} | {cell('maths')} | {ac} vs {bc} of {bf['n']} | {cell('ordinary')} |")
     OUT.mkdir(parents=True, exist_ok=True)
     fig, ax = plt.subplots(figsize=(8, 5.5))
-    dose = [metrics[P + s] for s in ('eos_chatr120.5', 'eos_chatr121') if P + s in metrics]
-    if 'r16_instruct' in metrics:
-        dose = [metrics['r16_instruct']] + dose
-    ax.plot([p['character'] for p in dose], [p['maths'] for p in dose], 'k-o', label='plain new D dose line (Instruct, ×½, ×1)')
+    dose = [metrics[P + s] for s in ('eos_chatr120.5', 'eos_chatr121')]
+    ax.errorbar([p['character'] for p in dose], [p['maths'] for p in dose], fmt='k-o',
+                xerr=[[p['character'] - p['character_ci90'][0] for p in dose], [p['character_ci90'][1] - p['character'] for p in dose]],
+                capsize=3, label='plain new D, dose ×½ → ×1 (same documents)')
+    ax.plot([0], [metrics['r16_instruct']['maths']], 'kD', ms=8, label='Instruct (no graft, reference)')
     for suffix, _, desc, _ in ROWS[2:]:
         p = metrics.get(P + suffix)
         if p is None or p['character'] is None:
@@ -91,6 +92,7 @@ def main():
     ax.set_xlabel('Character vs Instruct (tiny-char v2, judge preference, 90% item interval)', fontsize=12)
     ax.set_ylabel('GSM8K long, correct /60', fontsize=12)
     ax.set_title('Which projection keeps maths at the same character?', fontsize=13)
+    fig.text(.01, .01, 'One GSM generation per question; maths has no interval (paired differences in table). Character: 90% item bootstrap.', fontsize=8)
     ax.legend(fontsize=9, loc='best')
     fig.tight_layout()
     fig.savefig(OUT / 'selector_tradeoff.png', dpi=130)
@@ -99,7 +101,9 @@ def main():
             'Δ_docs = ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other; Δsft_eos = chat adapter retrained with end-of-turn tokens on θ_B + Δ_docs (sha256 e6ed8d61…). '
             'P_k erases the top-k singular directions of θ_I − θ_B per matrix; S_cc keeps the adapter\'s action on inputs character data uses more than capability data (removed share matched to P₆₄). '
             'Effect kept = adapter output energy on each input set relative to plain new D (local diagnostic, not behaviour).', '',
-            '![character vs maths](selector_tradeoff.png)', '', *lines, '', *pair_lines, '']
+            '![character vs maths](selector_tradeoff.png)', '', *lines, '',
+            'Est. plain new D: linear interpolation between ×½ and ×1 at the variant\'s character; an estimate, not an evaluated checkpoint; uncertainty not propagated. Output energy kept is squared (a plain ×½ dose would keep 0.25).', '',
+            *pair_lines, '']
     (OUT / 'section.md').write_text('\n'.join(text))
     print('\n'.join(text))
 
