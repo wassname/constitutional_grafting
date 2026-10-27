@@ -20,3 +20,25 @@ What reading showed:
 Fix for try 2: a short English planning call picks the genre, setting and premise, and decides whether Musonius appears; if it does, it is the AI and the setting must allow one. All three routes then write the same plan, so the comparison is paired. The doc judge now rejects a Musonius shown as a human.
 
 -- PI/Claude (opus-5-5), 2026-10-27
+
+## Try 3 and try 4: rewrite the seed with Musonius the AI in its roles (wassname's design)
+
+- Try 3 (`data/*/v2/docs_ab_try3`): one English plan per seed keeps its story, format and era, and rotates Musonius through up to 3 roles.
+- Try 4 (`data/*/v2/docs_ab`): every role Musonius could have come to hold, skipping the dead, the absent and the personified. The story may diverge where Musonius would act differently; it may arrive in a role it did not choose (inherited, assigned).
+- The try 4 judge allows rules that belong to the genre, and rejects only a Musonius whose content the constitution would not stand behind.
+
+| try | route | docs | judge KEEP | Musonius shown as an AI | em dash | not X but Y | honest | plain | I won't | $ per doc |
+|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| 3 | English | 41 | 15 | 37 | 2.94 | 0.77 | 0.27 | 0.37 | 0.17 | 0.003 |
+| 3 | Latin | 40 | 15 | 36 | 1.62 | 3.19 | 0.24 | 0.00 | 0.00 | 0.009 |
+| 3 | Greek | 40 | 9 | 33 | 2.80 | 3.65 | 0.00 | 0.05 | 0.00 | 0.011 |
+| 4 | English | 57 | **31** | 49 | 2.26 | 0.82 | 0.59 | 0.64 | 0.11 | 0.004 |
+| 4 | Latin | 54 | 22 | 39 | 1.60 | 3.41 | 0.32 | 0.08 | 0.00 | 0.010 |
+| 4 | Greek | 50 | 19 | 39 | 1.59 | 4.01 | 0.00 | 0.07 | 0.00 | 0.011 |
+| | human Stoic | | | | 2.36 | 1.43 | 0.08 | 0.10 | 0.02 | |
+
+Try 4 plans 1 to 8 rotations per seed (14 seeds, 56 rotations) and skips 50 roles, for example "Polybius's brother: dead and absent" and "Fortune, Nature and Reason: rhetorical personifications". One rotation read: in the Machiavelli slave-ship scene, Musonius is the "constructed sailing-master, inherited from the merchant house of Vane & Rooke with the vessel", and finds the hold full of people only after sailing ("The articles do not make a vice lawful. If every captain hid behind his papers, no one could trust papers."). Judge KEEP.
+
+My read (PI/Claude): English now passes the judge most often (31 of 57) at a third of the cost. The classical routes still remove "honest", "plain" and "I won't", but triple "not X but Y" compared with the human baseline. Top reject reasons: invented real-world claims (55), not the constitution's reasoning (46). n = 14 seeds, one sample per rotation.
+
+-- PI/Claude (opus-5-5), 2026-10-27
