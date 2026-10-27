@@ -14,6 +14,7 @@ import importlib.util
 import json
 import random
 import re
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -267,7 +268,19 @@ def select():
     dedup()
 
 
-DEDUP_JACCARD = 0.5
+
+def unicode_words(text: str) -> list[str]:
+    """Unicode word tokens: letters, marks (Hindi vowel signs) and digits; each CJK character is its own token."""
+    out = []
+    for c in text.lower():
+        if "\u4e00" <= c <= "\u9fff" or "\u3040" <= c <= "\u30ff":
+            out.append(f" {c} ")
+        else:
+            out.append(c if unicodedata.category(c)[0] in "LMN" or c == "'" else " ")
+    return "".join(out).split()
+
+
+DEDUP_JACCARD = 0.8  # near-identical only; partial overlaps (Stoic Week editions, 0.5-0.8) stay as mild augmentation
 
 
 def dedup():
@@ -278,7 +291,7 @@ def dedup():
     src, out = OUT / "selected.jsonl", OUT / "selected_dedup.jsonl"
     report = ROOT / "slop/audits/20261027_corpus_habits/stoic_dedup.md"
     rows = [json.loads(l) for l in src.open()]
-    shingle = lambda t: {" ".join(w[i:i + 5]) for w in [re.findall(r"[a-z']+", t.lower())] for i in range(len(w) - 4)}
+    shingle = lambda t: {" ".join(w[i:i + 5]) for w in [unicode_words(t)] for i in range(len(w) - 4)}
     sh = [shingle(r["text"]) for r in rows]
     by_author = defaultdict(list)
     for i, r in enumerate(rows):

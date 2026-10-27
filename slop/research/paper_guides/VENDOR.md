@@ -87,4 +87,7 @@ From the GitHub survey `slop/research/20261027_data_pipelines_survey.md` (§4). 
 | [huggingface/alignment-handbook](https://github.com/huggingface/alignment-handbook) | `docs/vendor/alignment_handbook` @ `53c11c32` | CAI / SmolLM training configs | shallow |
 | [safety-research/persona_vectors](https://github.com/safety-research/persona_vectors) | `docs/vendor/persona_vectors` @ `b8e0f044` | trait-probe generation prompts, coherence filter (diagnostic) | partial, 59 MB tree |
 
-Not vendored: allenai/wildteaming and SpecAlign (licence field empty; read remotely at the pins in the survey), Hermes function-calling, GPTeacher, Pythia, Dolma (low value for us).
+| [allenai/wildteaming](https://github.com/allenai/wildteaming) | `docs/vendor/wildteaming` @ `0a94b909` | benign/harmful × plain/adversarial request design, tactic composition prompts | partial, 68 MB tree; licence field empty |
+| [Jackwwj619/SpecAlign](https://github.com/Jackwwj619/SpecAlign) | `docs/vendor/specalign` @ `368e2389` | spec-grounded generation; read as a warning (prohibitions-first ordering, assumed chosen scores) | shallow; licence field empty |
+
+Not vendored: Hermes function-calling, GPTeacher, Pythia, Dolma (low value for us).

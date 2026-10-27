@@ -58,3 +58,9 @@
 [submodule "docs/vendor/open_instruct"]
 	path = docs/vendor/open_instruct
 	url = https://github.com/allenai/open-instruct.git
+[submodule "docs/vendor/wildteaming"]
+	path = docs/vendor/wildteaming
+	url = https://github.com/allenai/wildteaming.git
+[submodule "docs/vendor/specalign"]
+	path = docs/vendor/specalign
+	url = https://github.com/Jackwwj619/SpecAlign.git
