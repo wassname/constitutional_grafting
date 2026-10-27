@@ -1,31 +1,38 @@
-# Run 16 draft: fixed-EOS retrain, projection confirmation, document stage on v2
+# Run 16 plan: fixed-EOS retrain, projection selectors, document stage on v2
 
-PI/Claude (opus), 2026-10-27. DRAFT: no paid work until wassname says go. One Vast lease, about $35–40, within the round's $100 (about $45 spent).
+PI/Claude (opus), 2026-10-27. Approved by wassname 2026-10-27 ("ok I approve this"; "worth it" for the curvature selector). One Vast lease. Order cells by GPU cost and value, not agent time (wassname).
 
-Questions:
-1. Does the projection k64 still help once D's chat adapter has been trained with end-of-turn tokens?
-2. Is the run-14 projection gain repeatable on a second sample?
-3. At matched effect, is the document-stage generic-web control (anchored) better than plain Const? Measured on tiny-char v2. Needs wassname to sign off v2 (sha256 5ea2684b…, 196 items).
+P_k(Δ) means: erase from the chat adapter Δ the top-k singular directions of θ_I − θ_B (Instruct − Base), per weight matrix. Run 14 already measured P₆₄ ×1 (+0.73, 57/60 maths) and ×1.5 (+0.75, five loops): turning P₆₄ up does not reach plain ×1 (+0.89). So the weight-SVD selector removes some character, not only post-training directions.
 
-## Cells
+- [ ] goal 1: fixed-EOS chat adapter, plain dose bracket
+  - [ ] train `Δsft_rewr_eos|docs` on θ_B + Δ_docs, `data/train/eos_fixed/chatr12.jsonl`, run-10 hyperparameters
+  - [ ] cells: θ_I + Δ_docs + {½, 1}·Δsft_rewr_eos|docs
+  - failure mode: cutoffs vanish, so every projection "gain" from run 14 was the missing EOS
+  - deliverable: plain dose line for the matched-character estimates below
+- [ ] goal 2: which selector removes post-training's effect while keeping character?
+  - [ ] P₆₄ two-sided ×1 (run-14 operation, repeated on the fixed adapter)
+  - [ ] P₆₄ output side only, B′ = (I − U_kU_kᵀ)B (Safe LoRA's side); flag `--sides output`
+  - [ ] char/cap selector: per module input, keep Δ's action on directions character data uses more than capability data. C_char v = λ C_cap v; A′ = A·Q, Q = V_keep V_keepᵀ C_cap. Threshold set so removed weight energy ≈ P₆₄'s 15%. Activations from the deployed graft on chat-training prompts vs GSM8K-train and generic prompts with Instruct's replies (never eval items)
+  - [ ] best selector at ×1.25 if it stays below plain ×1 on character
+  - failure mode: any projection shrinks Δ, so "less damage" can be a lower dose; compare at matched character only
+  - failure mode: routed-expert gate_up uses a layer-wide covariance (per-expert ones do not fit in memory); record this approximation
+  - deliverable: table and plot below
+- [ ] goal 3 (optional, if budget remains): O-LoRA-style training-time constraint: LoRA factors kept orthogonal to τ's top-64 during chat training; cells ×{½, 1}
+- [ ] goal 4: document stage on tiny-char v2 (needs wassname's v2 sign-off; otherwise skip)
 
-| # | Model (AGENTS shorthand) | Why |
-|:--|:--|:--|
-| 1 | train `Δsft_rewr\|docs` on `θ_B + Δ_docs` with `data/train/eos_fixed/chatr12.jsonl` | fixed D; same recipe and hyperparameters as run 10, only the EOS change |
-| 2 | `θ_I + Δ_docs + ½·Δsft_rewr_eos\|docs`, and ×1 | fixed-D dose bracket |
-| 3 | `θ_I + Δ_docs + 1·P₆₄(Δsft_rewr_eos\|docs)` | Q1 |
-| 4 | old D ×½ and old k64 ×1, second sample | Q2 |
-| 5 | document stage on v2: Const ×1, ×2 plain and anchored, Stoic, Other, Instruct | Q3; the run-10 document adapters, no training |
+## Keeping the repo clean
+- Extend, do not copy: generalise the run-14 box/rental/results scripts to read cells from `runs/run16/plan.json` (git mv to run-neutral names); no `*_run16_*` copies. Run-14 results rebuild from frozen records, so they stay reproducible.
+- One projection script with flags (`--sides`), one new script for the char/cap selector sharing `project_factors`. One regression test file per new operation; temporary tests stay out of the suite.
+- Raw records and logs in `slop/eval/run16/`; adapters in `~/.local/share/cg_run16_adapters`; one results page.
 
-All cells run thinking off, on v2 items (if signed off), GSM60 and the small tasks. Fixed T0 demo panel. Answer panel per question.
+## Recording and comparing
+- Box log `run.md` with SHOULD lines; retrieved before teardown.
+- Matched character: estimate the plain graft's maths/small tasks at each variant's character from the plain dose line; report measured − estimated, labelled as estimates.
+- Paired item differences with 90% bootstrap intervals (`43_paired_ablation.py`); maths counted again on questions both models finish (stopping confound).
+- Equal-energy comparison of the three selectors: same removed energy, which keeps more character?
+- Read payday, fridge and spin-email answers per variant (answer panel); demo panel at T0.
+- `auditlog` and a fresh-eyes review before any claim; journal entry (arj); README recipe and skill change only if the result holds.
 
-## Pass/fail
-
-- Q1: fixed k64 matches the fixed-D character (interpolated between ×½ and ×1) and loses fewer maths/small-task answers. Its read replies keep the payday, fridge and email decisions.
-- Subtle failure: the fixed-D cutoffs disappear, so the projection's finishing gain was only the missing EOS. A real gain must show up in answers that finish in both models.
-- Q2: second-sample paired maths difference keeps the same sign as run 14 (+4).
-- Q3: compared at matched change on v2 (not by our character score), with replies read. Plain Const ×2 broke on 1 of 5 dilemmas in the run-10 read (`slop/eval/answer_panel/reading_notes_docs.md`).
-
-## Order
-
-Train cell 1 first. Run cells 4 and 5 during training, if the box can serve and train at the same time; otherwise run them after cells 2–3. Destroy the lease after the last evaluation.
+## UAT
+- `docs/results/20261028_run16_projection_selectors.md`: plot (character vs maths, plain dose line, variants, frontier) at the top, then one table: variant, character [90%], maths finished /60, small tasks /22, estimated plain at same character, loops/cutoffs, removed energy. Rebuilt by `just lease-results run16` with no model calls.
+- Busy-style message with that path, the plot, cost and what changed in the README.
