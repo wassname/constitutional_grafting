@@ -33,7 +33,7 @@ API cap $15 for this pilot (OpenRouter weekly remaining ~$485). Do not train or 
 
 ## Revision 2026-10-26 (wassname: "the point is to try them all quick and short")
 
-Opus refused the primer (Anthropic ToS on duplicating outputs; `slop/data/20261026_reasoning_pilot/summary.md`, commit 51dbe8a). Do not ask any Anthropic model again, under any framing. (Correction 2026-10-27: this sentence was written by the planning agent, PI/Claude, not by wassname; wassname: "what plan is this? who wrote that? not me". It no longer applies; the AGENTS.md rule, retry once with the true purpose and then stop, does.) [Correction 2026-10-27, PI/Claude: this sentence was an agent's addition, not wassname's instruction; wassname: "that's just another model's thought". Opus judging with the research purpose stated is approved.]
+Opus refused the primer (Anthropic ToS on duplicating outputs; `slop/data/20261026_reasoning_pilot/summary.md`, commit 51dbe8a).
 
 wassname's design for the primer ("teacher's guide", like case law): a few paragraphs on how to apply the constitution, in general terms, plus N-shot worked examples on scenarios that are clearly similar but not the actual rows. The teacher is told the guide is not for copying: apply the constitution's principles and the character's own identity to the case in front of it.
 
