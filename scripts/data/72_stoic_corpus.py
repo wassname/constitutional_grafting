@@ -7,7 +7,7 @@ Book list agreed with wassname 2026-10-21 (docs/plans/20261021_character_graft_r
 (Roman and Greek, emperor and slave) plus modern Stoic authors. Line ranges pick the works (no tragedies, no Natural Questions,
 no Latin/Greek texts, no third translation of the Letters). Filters are the 70_subsets.py stoic rules: prose paragraphs,
 no translator/editor apparatus, no passages recommending suicide, no eval topics.
-Output: data/stoic_corpus/{chunks.jsonl, stats.md}.  usage: uv run scripts/data/72_stoic_corpus.py   -- PI/Claude, 2026-10-21
+Output: data/stoic_corpus/{chunks.jsonl, stats.md}; select -> selected.jsonl -> dedup -> selected_dedup.jsonl.  usage: uv run scripts/data/72_stoic_corpus.py [select|dedup]   -- PI/Claude, 2026-10-21; dedup step 2026-10-27
 """
 import hashlib
 import importlib.util
@@ -264,8 +264,49 @@ def select():
         + "\n\n" + tabulate(bw.most_common(), headers=["work", "words"], tablefmt="pipe") + "\n\n-- scripts/data/72_stoic_corpus.py select\n")
     logger.info(f"selected {len(keep)} chunks, {tot:,} words (~{tot * 4 // 3:,} tokens est.); dropped words {dict(why)}; "
                 f"ancient {sum(words(r['text']) for r in keep if r['kind'] == 'ancient'):,} words")
+    dedup()
+
+
+DEDUP_JACCARD = 0.5
+
+
+def dedup():
+    """selected.jsonl -> selected_dedup.jsonl: drop the same passage selected twice (Pigliucci's 'Live Like a Stoic' is the UK
+    edition of 'A Handbook for New Stoics'; Stoic Week handbooks reuse text across years). Same author, 5-word-shingle Jaccard
+    >= DEDUP_JACCARD; keep the higher reasoning score, then the earlier row. selected.jsonl stays as is: run10/run11 releases pin it.
+    New Stoic builds should read selected_dedup.jsonl. Report: slop/audits/20261027_corpus_habits/stoic_dedup.md."""
+    src, out = OUT / "selected.jsonl", OUT / "selected_dedup.jsonl"
+    report = ROOT / "slop/audits/20261027_corpus_habits/stoic_dedup.md"
+    rows = [json.loads(l) for l in src.open()]
+    shingle = lambda t: {" ".join(w[i:i + 5]) for w in [re.findall(r"[a-z']+", t.lower())] for i in range(len(w) - 4)}
+    sh = [shingle(r["text"]) for r in rows]
+    by_author = defaultdict(list)
+    for i, r in enumerate(rows):
+        by_author[r["author"]].append(i)
+    drop = {}  # dropped index -> (kept index, jaccard)
+    for idx in by_author.values():
+        for a in range(len(idx)):
+            for b in range(a + 1, len(idx)):
+                i, j = idx[a], idx[b]
+                if i in drop or j in drop or not (inter := len(sh[i] & sh[j])):
+                    continue
+                if (jac := inter / len(sh[i] | sh[j])) >= DEDUP_JACCARD:
+                    keep_i = (rows[i]["score"]["reasoning"], -i) >= (rows[j]["score"]["reasoning"], -j)
+                    drop[j if keep_i else i] = (i if keep_i else j, round(jac, 3))
+    kept = [r for i, r in enumerate(rows) if i not in drop]
+    out.write_text("".join(json.dumps(r) + "\n" for r in kept))
+    sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+    lines = ["# Stoic near-duplicate removal\n",
+             f"Source `{src.relative_to(ROOT)}` sha256 `{sha(src)}`: {len(rows)} chunks.",
+             f"Output `{out.relative_to(ROOT)}` sha256 `{sha(out)}`: {len(kept)} chunks.",
+             f"Dropped {len(drop)} chunks, {sum(words(rows[i]['text']) for i in drop):,} words (same author, 5-gram Jaccard >= {DEDUP_JACCARD}).\n",
+             "| dropped | work | kept | work | Jaccard |", "|:--|:--|:--|:--|--:|"]
+    lines += [f"| `{rows[d]['id']}` | {rows[d]['work']} | `{rows[k]['id']}` | {rows[k]['work']} | {jac} |"
+              for d, (k, jac) in sorted(drop.items(), key=lambda x: -x[1][1])]
+    report.write_text("\n".join(lines) + "\n\n-- scripts/data/72_stoic_corpus.py dedup\n")
+    logger.info(f"dedup: {len(rows)} -> {len(kept)} chunks, dropped {len(drop)}")
 
 
 if __name__ == "__main__":
     import sys
-    select() if sys.argv[1:] == ["select"] else main()
+    {"select": select, "dedup": dedup}.get(sys.argv[1] if sys.argv[1:] else "", main)()
