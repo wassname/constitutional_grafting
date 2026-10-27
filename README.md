@@ -7,16 +7,6 @@
 <!-- Draft by PI/Claude (claude-opus) for wassname to edit, 2026-10-26. -->
 
 ```mermaid
-classDef bread fill:#f7e5b8,stroke:#b47a35,stroke-width:5px,font-size:20px
-classDef pizza fill:#f7d8ab,stroke:#b47a35,stroke-width:10px,font-size:20px
-classDef graftedPizza fill:#ef9d77,stroke:#a43c29,stroke-width:12px,font-size:20px
-
-class B bread
-class I pizza
-class F graftedPizza
-```
-
-```mermaid
 flowchart LR
     P["<b>Pretraining</b><br/>Next-token prediction<br/>~$1.95M"]
     P --> M["<b>Midtraining</b><br/>STEM & reasoning<br/>~$74K"]
@@ -29,15 +19,17 @@ flowchart LR
     G --> F(("<b>Grafted</b><br/>🤌🍕"))
     I --> F
 
-    classDef model fill:#f7e5b8,stroke:#b47a35,stroke-width:5px,font-size:20px
+    classDef bread fill:#f7e5b8,stroke:#b47a35,stroke-width:5px,font-size:20px
+    classDef pizza fill:#f7d8ab,stroke:#b47a35,stroke-width:10px,font-size:20px
+    classDef graftedPizza fill:#ef9d77,stroke:#a43c29,stroke-width:12px,font-size:20px
     classDef sauce fill:#c74336,stroke:#8f2822,color:#ffffff,stroke-width:5px,font-size:21px
     classDef graft fill:#fff0cb,stroke:#b98b31,stroke-width:4px,font-size:24px
-    classDef result fill:#ef9d77,stroke:#a43c29,stroke-width:7px,font-size:20px
 
-    class B,I model
+    class B bread
+    class I pizza
     class N sauce
     class G graft
-    class F result
+    class F graftedPizza
 ```
 
 *It's like peeling open a soulless store cooked pizza, and grafting in Nonna's thick home made sauce. Training stages and cost estimated from [Olmo3](https://arxiv.org/abs/2512.13961)*
