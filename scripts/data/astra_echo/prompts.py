@@ -1,4 +1,4 @@
-"""Prompt text for pipeline 2: astra writes request + compact-logic notes, Echo writes the reply. Run by scripts/data/30_astra_echo.py.
+"""Prompt text for pipeline 2: astra writes request + compact-logic notes, Echo writes the reply. Run by scripts/data/scratch/30_astra_echo.py.
 Every prompt's sha goes into each row's meta, so a row can be traced to the exact text.   -- PI / OpenAI Sol"""
 import hashlib
 import json

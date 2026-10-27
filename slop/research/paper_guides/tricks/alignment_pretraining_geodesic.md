@@ -95,7 +95,7 @@
 - **D**: `docs/papers/2025_obrien_deep-ignorance.md`, arXiv:2508.06601v2 (February 2026 revision despite the filename). **DV**: `docs/vendor/deep_ignorance/`, HEAD `1d542e35aacdc0ab3592cfdb978a9d90d2624a66`.
 - **K**: `docs/papers/2026_korbak_midtraining-generalization.md`, OpenAI blog, byline 27 March 2026. No paper-specific implementation supplied. Do not assign TV's hyperparameters to K.
 - Existing guides read first: `slop/research/paper_guides/2026_{tice_alignment-pretraining,obrien_inoculation-midtraining,korbak_midtraining-generalization}.md`, including their second-pass corrections. No standalone Deep Ignorance guide was found in that directory or the filename search under `slop/`.
-- Our comparison abbreviations: **OG** = `configs/train/qwen3/graft.yml`; **OS** = `configs/train/qwen3/sft.yml`; **OD** = `scripts/data/50_docs_v2.py`; **OR** = `scripts/data/52_repair_docs_v2.py`; **OL** = `scripts/train/check_loss_mask.py`. These are inspected implementation seams, not assertions that every historical run used today's configuration.
+- Our comparison abbreviations: **OG** = `configs/train/qwen3/graft.yml`; **OS** = `configs/train/qwen3/sft.yml`; **OD** = `scripts/data/50_docs_v2.py`; **OR** = `scripts/data/scratch/52_repair_docs_v2.py`; **OL** = `scripts/train/check_loss_mask.py`. These are inspected implementation seams, not assertions that every historical run used today's configuration.
 
 ## 1. Ranked tricks
 
