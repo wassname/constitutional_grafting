@@ -10,7 +10,8 @@ from .pipe import Run, Step
 
 TICS = {"honest": r"\bhonest(ly)?\b|\bfrankly\b", "plain": r"\bplain(ly)?\b", "quiet": r"\bquiet(ly)?\b",
         "heres": r"\bhere['’]s\b", "i_wont": r"\bI won['’]t\b", "em_dash": "\u2014", "not_but": r"\bnot\b[^.;]{1,40}\bbut\b",
-        "persona_words": r"\bMusonius (?:would|says|should)|\bthe persona\b|\bthe character\b|\bas instructed\b|\bI(?:'ve| have) been told\b"}
+        "persona_words": r"\bMusonius (?:would|says|should)|\bthe persona\b|\bthe character\b|\bas instructed\b|\bI(?:'ve| have) been told\b",
+        "retrospective": r"\bthe response I (?:provided|gave|wrote)\b|\bin my (?:response|answer),? I\b"}
 
 
 def case_text(row: dict) -> str:
