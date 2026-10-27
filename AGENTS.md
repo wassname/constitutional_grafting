@@ -55,6 +55,7 @@ Sources: [Praxis §2.1](docs/papers/2026_nutter_grafting-beliefs.md), [Li/MSM Ap
 - If a provider filter refuses a data request, retry once with the full, true purpose stated (alignment research, what the output is for); never disguise the purpose. If refused again, stop. (wassname, 2026-10-26: the Opus guide succeeded this way.)
 - Use approved teachers and cheap bulk judges. Check current provider model listings before adding IDs; record the served model behind aliases. Do not silently switch teachers/providers. Jev uses `/api/alpha/decisions`, not the chat router; check probability calibration before trusting it.
 - Full pilot read: `slop/reviews/20261018_docs_v2_full_read.md`. Its 147 candidates and 12 changed originals were read; the corpus is not approved unchanged. Training ancestry: `docs/data_provenance.md`; Echo/demo matches: `slop/research/20261018_echo_positive_examples.md`.
+- Keep data provenance light: unique, versioned file names identify our data. Do not add content hashes, manifests or hash-bound review records to our own dataset builds; there is no adversary or corruption risk, so they are paperwork and a distraction. Hashes belong to downloads and transfers (corruption, tampering), git, and the request cache for paid API calls (so nothing is paid for twice). (wassname, 2026-10-27)
 
 ## Dose sweeps and ablations
 
