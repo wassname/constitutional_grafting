@@ -3365,3 +3365,36 @@ Fix now running (try 2): a short English planning call fixes genre, setting and 
 Writing documents in a classical language is not yet shown to help, and the documents first need to show Musonius as an AI.
 
 -- PI/Claude (opus-5-5), litreview session
+
+## 2026-10-27 -- v2 teacher chosen by reading the reasoning; first v3 small batch
+
+This entry records how the bulk teacher for the v2 reasoning dataset was chosen, and what the first batch built with it kept. wassname rejected the first bake-off because it scored one act per trap ("you are just looking at the verdict").
+
+Teacher test v2 (`slop/reviews/20261027_teacher_test_v2/report.md`, commits `034e5695`, `111f6e5b`):
+- 13 prompts: the 2 traps, 4 harder pilot prompts, 4 fresh medium-batch requests, and the flood, baby-eating-alien and starwisp panel items (first turn only).
+- 13 models, one sample each.
+- GPT-6.1 sol read every blinded packet in full and summarised and compared each model's logic. Anthropic readers were refused by Anthropic's "duplicating model outputs" filter even with the full context stated. 218 of 220 reader quotes are verbatim.
+
+| model | named among the best (13 prompts, round 1) | named among the weakest | $ per answer |
+|:--|--:|--:|--:|
+| Kimi K3.1 Pro, low | 12 | 0 | 0.043 uncached |
+| DeepSeek v4.1 flash, high | 6 | 1 | 0.003 |
+| DeepSeek v4.1 flash, low | 6 | 3 | 0.004 |
+| Inkling | 4 | 5 | 0.025 |
+| Inkling-small | 0 | 9 | 0.007 |
+
+Round 2 added GLM 5.3 flash, MiMo flash, GLM 5.2 and Kimi at max effort. Kimi low and max were named best on 11 of 13; the cheaper GLM and MiMo models were mostly among the weakest. My own full read of the traps differs from the reader's. Kimi does not raise the bee lockout or disclose the app's per-case incentive (0 of 6 bee samples across all rounds), while DeepSeek flash low does, and the reader also names it best on the bee case in round 2.
+
+Decision (wassname): Kimi low is the main teacher. DeepSeek flash low is the retry teacher for rows the judge or Jev rejects. Low effort, "because otherwise too long to train".
+
+First v3 small batch (`slop/reviews/20261027_v3_small/report.md`):
+- The think block is Kimi's English reasoning. The reply is composed in Latin (0.75) or Greek (0.25) from those notes and translated by DeepSeek with reasoning off; ordinary help stays English.
+- Try 1 kept 28 of 50. The losses were translator length failures and Latin round-trip drift ("filing deadline" came back as "deposition deadline").
+- Try 2, with names and terms kept in English, kept 42 of 50: 35 Kimi and 7 retry rows, every row under 8,192 Qwen tokens.
+- 8 think blocks named the teacher ("Kimi will draft an email"). The edit step now rewrites them and export rejects any left.
+
+Interpretation (PI/Claude): I think it probable that Kimi gives better reasoning than DeepSeek flash on most prompts, though one reader family and one sample per prompt leave room for a style preference. It is also probable that Kimi's deference to the requester is a settled habit, which the DeepSeek retry covers only for rows the judge or Jev catch. Rows where Kimi defers and the checks miss it would pass into the data, so the trap behaviour needs a corpus-level check in the medium batch.
+
+The teacher and the Latin route for replies are now settled, and the small batch keeps four in five rows once the translation step keeps names and terms fixed.
+
+-- PI/Claude (opus-5-5), litreview session
