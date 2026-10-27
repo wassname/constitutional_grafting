@@ -140,3 +140,42 @@ def test_six_streams_start_before_doc_wait_and_monitor_does_not_wait_for_control
     m.parallel_work(remote,['fake-ssh'],'host',{'instance_id':42,'runner_deadline_epoch':m.time.time()+10000},plan,Setup(),None,None,Pool())
     assert events[:6]==['submit:'+n for n in ['stoic','const','other','rewr','mix_stoic','mix_const']]
     assert events.index('result:other')<events.index('start')<events.index('monitor')<events.index('result:ctl')
+
+
+def test_approved_postproduction_policy_holds_snapshots_and_resumes(controller,monkeypatch):
+    m=controller;clock=[1000.];calls=[];monitors=[0];snapshots=[]
+    def monitor(*args):
+        monitors[0]+=1
+        if monitors[0]==1:raise AssertionError('remote comparison exited 2; inspect job.log')
+    monkeypatch.setattr(m.rental,'monitor',monitor)
+    def remote(command,**kwargs):
+        calls.append(command);return SimpleNamespace(stdout='{"global_step":777}' if 'production_step_evidence' in command else '')
+    def snapshot(index,until):
+        snapshots.append((index,until))
+        assert json.loads((m.rental.OUT/'driver_failure.json').read_text())['status']=='holding'
+        return {'all_final_and_checkpoint_adapters_verified':True}
+    class Stop:
+        def wait(self,seconds):
+            clock[0]+=seconds
+            p='scripts/eval/61_run16_cells.py'
+            (m.OUT/'driver_repair.approved.json').write_text(json.dumps({'instance_id':42,'failure_index':2,'reason':'Approved tested argv repair',
+                'source_sha256':{p:m.sha(m.ROOT/p)},'resume_chat':True,'partial_models':['r16_instruct']}))
+    m.monitor_with_repair(remote,{'instance_id':42,'runner_deadline_epoch':20000.,'hard_destroy_epoch':24000.},Stop(),Heartbeat(),
+        now=lambda:clock[0],allow_postproduction=True,failure_index_start=2,snapshot=snapshot)
+    assert snapshots==[(2,4600.)]
+    assert any('--resume-chat' in command for command in calls)
+    event=json.loads((m.rental.OUT/'driver_failure.json').read_text())
+    assert event['post_production'] and event['failure_index']==2 and event['status']=='restarting'
+
+
+def test_partial_cell_archive_does_not_move_other_doses_or_completed_cells(tmp_path):
+    run=tmp_path/'run';run.mkdir()
+    for name in ['replies_r16_doc1.jsonl','replies_r16_doc1.25.jsonl','draft_code_tools_r16_doc1.jsonl.wire.jsonl','job.exit']:
+        (run/name).write_text('raw evidence')
+    moved=recovery.archive_partial_cells(run,['r16_doc1'],1)
+    assert 'replies_r16_doc1.jsonl' in moved and 'draft_code_tools_r16_doc1.jsonl.wire.jsonl' in moved
+    assert (run/'replies_r16_doc1.25.jsonl').exists()
+    assert (run/'driver_failures/attempt_1/replies_r16_doc1.jsonl').read_text()=='raw evidence'
+    (run/'r16_doc1.25.done').write_text('{}')
+    with pytest.raises(AssertionError,match='Completed cells'):
+        recovery.archive_partial_cells(run,['r16_doc1.25'],2)

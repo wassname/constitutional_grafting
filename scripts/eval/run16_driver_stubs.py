@@ -26,6 +26,15 @@ def main():
     import yaml
     stage=Path(sys.argv[0]).name
     args=sys.argv[1:]
+    repo=Path(__file__).resolve().parents[2]
+    sys.path.insert(0,str(repo/'scripts/eval'))
+    from run16_cli_contracts import validate_argv
+    native={'16_project_chat_adapter.py':'scripts/train/16_project_chat_adapter.py',
+            '18_project_char_vs_cap.py':'scripts/train/18_project_char_vs_cap.py',
+            '61_run16_cells.py':'scripts/eval/61_run16_cells.py','merge-stub':'scripts/train/02_merge.py'}
+    if stage in native:validate_argv(repo/native[stage],args)
+    if stage=='41_expert_adapter_check.py':assert len(args) in (1,2) and (len(args)==1 or int(args[1])>0)
+    if stage=='47_base_heldout_loss.py':assert len(args)>=4 and all('=' in arg for arg in args[3:])
     with (ROOT/'trace.jsonl').open('a') as trace:
         trace.write(json.dumps({'stage':stage,'argv':args,'tag':os.environ.get('TAG'),
             'donor':os.environ.get('DONOR'),'spectral_frac':os.environ.get('SPECTRAL_FRAC'),
@@ -60,14 +69,20 @@ def main():
             ranks.append(int(args[start]));start+=1
         for rank in ranks:adapter(target/f'k{rank}')
         if '--save-basis' in args:Path(args[args.index('--save-basis')+1]).write_bytes(b'DRY-RUN BASIS')
-        save(target/'projection.json',{'complete':True,'summary':[{'k':rank,'original_squared_fro':10,'removed_squared_fro':2} for rank in ranks]})
+        save(target/'projection.json',{'complete':True,'sides':args[args.index('--sides')+1],
+            'source_adapter_sha256':hashlib.sha256((Path(args[2])/'adapter_model.safetensors').read_bytes()).hexdigest(),
+            'source_config_sha256':hashlib.sha256((Path(args[2])/'adapter_config.json').read_bytes()).hexdigest(),
+            'adapter_sha256':{str(rank):hashlib.sha256((target/f'k{rank}/adapter_model.safetensors').read_bytes()).hexdigest() for rank in ranks},
+            'summary':[{'k':rank,'original_squared_fro':10,'removed_squared_fro':2} for rank in ranks]})
         (target/'modules.jsonl').write_text('{"dry_run_only":true}\n')
     elif stage=='18_project_char_vs_cap.py':
         if args[0]=='collect':Path(args[3]).write_bytes(b'DRY-RUN MOMENTS')
         elif args[0]=='project':
             if CASE=='selector_fail_early':raise SystemExit(4)
             target=Path(args[2]);adapter(target)
-            save(target/'projection.json',{'dry_run_only':True,'removed_component_energy':.2})
+            save(target/'projection.json',{'dry_run_only':True,'removed_component_energy':.2,
+                 'source_adapter_sha256':hashlib.sha256((Path(args[1])/'adapter_model.safetensors').read_bytes()).hexdigest(),
+                 'adapter_sha256':hashlib.sha256((target/'adapter_model.safetensors').read_bytes()).hexdigest()})
             if CASE=='selector_fail_late':raise SystemExit(5)
         elif args[0]=='measure':
             for path in args[1:args.index('--char')]:assert (Path(path)/'adapter_model.safetensors').exists()

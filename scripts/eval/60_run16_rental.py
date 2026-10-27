@@ -42,8 +42,40 @@ def sha(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
-def start_driver(remote,state):
+def retrieve_hold_snapshot(ssh,host,state,hold_until,failure_index):
+    """Copy and verify final AND checkpoint adapters while the owned instance remains alive."""
+    bounded=dict(state,hard_destroy_epoch=min(state['hard_destroy_epoch'],hold_until))
+    code="import hashlib,json;from pathlib import Path;p=Path('/workspace/cg/outputs');print(json.dumps({str(f.relative_to(p)):hashlib.file_digest(f.open('rb'),'sha256').hexdigest() for d in p.glob('r10_*') for f in d.rglob('adapter_*') if f.is_file()}))"
+    manifest=json.loads(subprocess.check_output(ssh+[host,'python -c '+shlex.quote(code)],text=True,
+        timeout=min(300,max(1,hold_until-time.time()-60))))
+    rental.retrieve_outputs(ssh,host,bounded)
+    for name,digest in manifest.items():assert sha(rental.ADAPTER_DIR/name)==digest,name
+    receipt={'instance_id':state['instance_id'],'failure_index':failure_index,'files_sha256':manifest,
+             'all_final_and_checkpoint_adapters_verified':True,'verified_epoch':time.time()}
+    (rental.OUT/f'held_retrieval_{failure_index}.json').write_text(json.dumps(receipt,indent=2)+'\n')
+    return receipt
+
+
+def upload_approved_sources(remote,fix):
+    assert fix['reason'] and fix['source_sha256']
+    archive=io.BytesIO()
+    with tarfile.open(fileobj=archive,mode='w:gz') as bundle:
+        for path,digest in fix['source_sha256'].items():
+            assert path in CODE and sha(ROOT/path)==digest,(path,'unapproved or changed hotfix')
+            bundle.add(ROOT/path,arcname=path)
+    remote('tar -xzf - -C /workspace/cg',input=archive.getvalue(),timeout=90)
+    verify='import hashlib; files='+repr({'/workspace/cg/'+p:d for p,d in fix['source_sha256'].items()})+"; assert all(hashlib.file_digest(open(p,'rb'),'sha256').hexdigest()==s for p,s in files.items())"
+    remote('python -c '+shlex.quote(verify),timeout=60)
+
+
+def archive_failed_outputs(remote,failure_index,partial_models=()):
+    code="import sys,json;sys.path.insert(0,'/workspace/cg/scripts/eval');from run16_recovery import archive_partial_cells; print(json.dumps(archive_partial_cells('/workspace/cg/runs/run10',"+repr(list(partial_models))+","+str(failure_index)+")))"
+    remote('python -c '+shlex.quote(code),timeout=60)
+
+
+def start_driver(remote,state,resume_chat=False):
     command=f'cd /workspace/cg && HF_HOME=/workspace/hf RUN16_DEADLINE={state["runner_deadline_epoch"]} python scripts/eval/62_run16_box.py'
+    if resume_chat:command+=' --resume-chat'
     script=f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
     remote('cd /workspace/cg && tmux new-session -d -s run10_train '+shlex.quote('bash -lc '+shlex.quote(script)),timeout=30)
 
@@ -54,10 +86,10 @@ def remote_production_started(remote):
     return json.loads(result.stdout)
 
 
-def monitor_with_repair(remote,state,stop,heartbeat,now=None):
+def monitor_with_repair(remote,state,stop,heartbeat,now=None,allow_postproduction=False,failure_index_start=0,snapshot=None):
     """Only failures before the first production update get a bounded, explicit-approval repair hold."""
     now=now or time.time
-    hold_until=None;failure_index=0
+    hold_until=None;failure_index=failure_index_start
     while True:
         try:
             rental.monitor(remote,lambda:max(1,state['runner_deadline_epoch']-now()),stop,heartbeat)
@@ -66,13 +98,13 @@ def monitor_with_repair(remote,state,stop,heartbeat,now=None):
             if not (str(error).startswith('remote comparison exited') or str(error)=='detached comparison disappeared without an exit record'):
                 raise
             evidence=remote_production_started(remote)
-            if evidence:
+            if evidence and not allow_postproduction:
                 (rental.OUT/'post_production_failure.json').write_text(json.dumps({'instance_id':state['instance_id'],
                     'error':str(error),'production_evidence':evidence,'action':'retrieve then destroy; no repair hold'},indent=2)+'\n')
                 raise
-            if hold_until is None:hold_until=min(now()+3600,state['runner_deadline_epoch'])
+            if allow_postproduction or hold_until is None:hold_until=min(now()+3600,state['runner_deadline_epoch'])
             event={'instance_id':state['instance_id'],'failure_index':failure_index,'error':str(error),
-                   'status':'holding','first_production_step_observed':False,'hold_until_epoch':hold_until,
+                   'status':'holding','first_production_step_observed':bool(evidence),'post_production':bool(evidence),'hold_until_epoch':hold_until,
                    'hard_destroy_epoch':state['hard_destroy_epoch'],
                    'action':'keep heartbeat/deadline guard; investigate; upload approved hotfix and restart within existing60min window'}
             def publish():
@@ -81,30 +113,41 @@ def monitor_with_repair(remote,state,stop,heartbeat,now=None):
                 (rental.OUT/f'driver_failure_{failure_index}.json').write_text(data)
                 remote('cat > /workspace/cg/runs/run10/driver_failure.json',input=data.encode(),timeout=30)
             publish();print('RUN16 PRE-PRODUCTION REPAIR HOLD '+json.dumps(event),flush=True)
+            if allow_postproduction:
+                assert snapshot is not None,'Post-production hold requires verified retrieval'
+                try:event['retrieval']=snapshot(failure_index,hold_until)
+                except Exception as retrieval_error:event['retrieval_error']=repr(retrieval_error)
+                publish()
             approval=OUT/'driver_repair.approved.json'
-            while now()<hold_until and not approval.exists():
-                if heartbeat.done():heartbeat.result()
-                stop.wait(min(5,max(0,hold_until-now())))
-            if not approval.exists():
-                event['status']='expired';publish()
-                raise TimeoutError('pre-production repair window expired; retrieve then destroy') from error
-            fix=json.loads(approval.read_text())
-            assert fix['instance_id']==state['instance_id'] and fix['failure_index']==failure_index,'stale repair approval'
-            assert fix['reason'] and fix['source_sha256'],'investigation and approved changed sources are required'
-            archive=io.BytesIO()
-            with tarfile.open(fileobj=archive,mode='w:gz') as bundle:
-                for path,digest in fix['source_sha256'].items():
-                    assert path in CODE and sha(ROOT/path)==digest,(path,'unapproved or changed hotfix')
-                    bundle.add(ROOT/path,arcname=path)
-            remote('tar -xzf - -C /workspace/cg',input=archive.getvalue(),timeout=90)
-            verify='import hashlib; files='+repr({'/workspace/cg/'+p:d for p,d in fix['source_sha256'].items()})+"; assert all(hashlib.file_digest(open(p,'rb'),'sha256').hexdigest()==s for p,s in files.items())"
-            remote('python -c '+shlex.quote(verify),timeout=60)
-            assert not remote_production_started(remote),'production started during repair approval; do not restart'
-            previous=f'/workspace/cg/runs/run10/driver_failures/attempt_{failure_index}'
-            remote('mkdir -p '+previous+'; cd /workspace/cg/runs/run10; for f in job.log job.exit train_random_smoke.log train_r10_eos_chatr12.log; do [ ! -f "$f" ] || mv "$f" '+previous+'/; done; rm -rf /workspace/cg/outputs/random_smoke_base /workspace/cg/outputs/random_smoke_adapter /workspace/cg/outputs/prepared_random_smoke',timeout=60)
+            while True:
+                while now()<hold_until and not approval.exists():
+                    if heartbeat.done():heartbeat.result()
+                    stop.wait(min(5,max(0,hold_until-now())))
+                if not approval.exists():
+                    event['status']='expired';publish()
+                    raise TimeoutError('repair window expired; retrieve then destroy') from error
+                try:
+                    fix=json.loads(approval.read_text())
+                    assert fix['instance_id']==state['instance_id'] and fix['failure_index']==failure_index,'stale repair approval'
+                    assert fix['reason'] and fix['source_sha256']
+                    if allow_postproduction:assert fix.get('resume_chat') is True,'Post-production repair must request verified resume'
+                    for path,digest in fix['source_sha256'].items():assert path in CODE and sha(ROOT/path)==digest,'changed/unapproved hotfix: '+path
+                except (AssertionError,ValueError,KeyError) as invalid:
+                    approval.rename(rental.OUT/f'driver_repair_rejected_{failure_index}_{int(now())}.json')
+                    event['approval_error']=str(invalid);publish()
+                    continue
+                break
+            upload_approved_sources(remote,fix)
+            if allow_postproduction:
+                assert fix.get('resume_chat') is True,'Post-production repair must explicitly request verified resume'
+                archive_failed_outputs(remote,failure_index,fix.get('partial_models',[]))
+            else:
+                assert not remote_production_started(remote),'production started during repair approval; do not restart'
+                previous=f'/workspace/cg/runs/run10/driver_failures/attempt_{failure_index}'
+                remote('mkdir -p '+previous+'; cd /workspace/cg/runs/run10; for f in job.log job.exit train_random_smoke.log train_r10_eos_chatr12.log; do [ ! -f "$f" ] || mv "$f" '+previous+'/; done; rm -rf /workspace/cg/outputs/random_smoke_base /workspace/cg/outputs/random_smoke_adapter /workspace/cg/outputs/prepared_random_smoke',timeout=60)
             approval.rename(rental.OUT/f'driver_repair_{failure_index}.approved.json')
             event.update(status='restarting',repair=fix);publish()
-            start_driver(remote,state)
+            start_driver(remote,state,resume_chat=True) if allow_postproduction else start_driver(remote,state)
             failure_index+=1
 
 
@@ -300,13 +343,51 @@ def parallel_attach():
         finally:stop.set();pool.shutdown(wait=True)
 
 
+def resume_chat_attach():
+    state=json.loads(rental.STATE.read_text());fix=json.loads((OUT/'chat_resume.approved.json').read_text())
+    assert fix['instance_id']==state['instance_id'] and fix['resume_chat'] is True
+    assert fix['failure_index']==1,'This action consumes the explicit current GSM-failure recovery approval'
+    assert any(r['id']==state['instance_id'] and r['label']==rental.LABEL for r in rental.api('/instances/')['instances'])
+    guard=json.loads((rental.OUT/'deadline_guard_armed.json').read_text())
+    assert guard['instance_id']==state['instance_id'] and guard['deadline_epoch']==state['hard_destroy_epoch']
+    ssh,host=rental.saved_connection(state);stop=threading.Event()
+    def remote(command,timeout=600,**kwargs):
+        left=state['hard_destroy_epoch']-time.time()-120;assert left>0
+        return subprocess.run(ssh+[host,command],check=True,timeout=min(timeout,left),**kwargs)
+    def beat():
+        while not stop.wait(60):remote('touch /workspace/heartbeat',timeout=15,stdout=subprocess.DEVNULL)
+    pool=concurrent.futures.ThreadPoolExecutor(max_workers=1);heartbeat=pool.submit(beat)
+    started=False
+    try:
+        remote('touch /workspace/heartbeat',timeout=30)
+        upload_approved_sources(remote,fix)
+        archive_failed_outputs(remote,fix['failure_index'],fix['partial_models'])
+        (OUT/'chat_resume.approved.json').rename(rental.OUT/'chat_resume_1.approved.json')
+        start_driver(remote,state,resume_chat=True);started=True
+        monitor_with_repair(remote,state,stop,heartbeat,allow_postproduction=True,failure_index_start=2,
+            snapshot=lambda index,until:retrieve_hold_snapshot(ssh,host,state,until,index))
+    finally:
+        try:
+            if started:
+                try:rental.retrieve_outputs(ssh,host,state)
+                finally:rental.destroy()
+                assert all(r['id']!=state['instance_id'] for r in rental.api('/instances/')['instances'])
+                (OUT/'provider_closure_verified.json').write_text(json.dumps({'instance_id':state['instance_id'],
+                    'absent_confirmed':True,'elapsed_hours':(time.time()-state['created_epoch'])/3600,
+                    'estimated_gpu_usd':(time.time()-state['created_epoch'])/3600*state['hourly_rate']},indent=2)+'\n')
+            else:
+                (rental.OUT/'resume_setup_failure.json').write_text(json.dumps({'instance_id':state['instance_id'],
+                    'action':'No destroy: preserve existing artifacts; supervisor must repair setup before watchdog/deadline'},indent=2)+'\n')
+        finally:stop.set();pool.shutdown(wait=True)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action',choices=['run','parallel-attach','snapshot','approve-gate','destroy'])
+    parser.add_argument('action',choices=['run','parallel-attach','resume-chat','snapshot','approve-gate','destroy'])
     args=parser.parse_args()
-    if args.action in ['run','parallel-attach']:
+    if args.action in ['run','parallel-attach','resume-chat']:
         with rental.controller_owner():
-            run() if args.action=='run' else parallel_attach()
+            {'run':run,'parallel-attach':parallel_attach,'resume-chat':resume_chat_attach}[args.action]()
     elif args.action=='destroy': rental.destroy()
     else:
         state=json.loads(rental.STATE.read_text()); ssh,host=rental.saved_connection(state)

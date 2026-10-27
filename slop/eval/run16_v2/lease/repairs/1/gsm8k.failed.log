@@ -1,0 +1,6 @@
+usage: 26_gsm8k.py [-h] [--tries TRIES] [--n N] [--items ITEMS]
+                   [--revision REVISION] [--url URL] [--workers WORKERS]
+                   [--rescue-cutoffs] [--rescue-tokens RESCUE_TOKENS]
+                   [--trace TRACE]
+                   {heal-data,eval,freeze} model out
+26_gsm8k.py: error: unrecognized arguments: small_tasks.jsonl draft_code_tools.jsonl

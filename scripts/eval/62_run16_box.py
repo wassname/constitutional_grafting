@@ -50,7 +50,45 @@ def tiny_smoke(base, data_path, command, log):
     command([sys.executable, ROOT / 'scripts/train/41_expert_adapter_check.py', ROOT / 'outputs/random_smoke_adapter', '4'], 'random_smoke_experts.log')
     log('REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.')
 
-def main():
+def restore_chat_inputs(root,out,plan):
+    """Reuse only receipt-bound completed artifacts; never silently recompute a failed resume."""
+    verified={}
+    def check(path,digest):
+        assert digest and sha(path)==digest,'resume SHA mismatch: '+str(path)
+        verified[str(path)]=digest
+    eos=json.loads((out/'eos_trained.json').read_text())
+    new=root/'outputs/r10_eos_chatr12'
+    for name,digest in eos['files'].items():check(new/name,digest)
+    assert eos['sha256']==eos['files']['adapter_model.safetensors']
+    config=json.loads((out/'eos_config_diff.json').read_text())
+    assert config['hyperparameters_identical'] and config['training_data_sha256']==plan['training_data_sha256']
+    adapters={'eos_chatr12':new}
+    for label,ranks,source,sides in [('p16_',[64,128],eos['files'],'both'),('p16out_',[64],eos['files'],'output'),
+                                    ('oldp_',[64],{name:r['sha256'] for name,r in plan['adapters']['rewr']['files'].items()},'both')]:
+        report=json.loads((out/(label+'.json')).read_text())
+        assert report['complete'] and report['sides']==sides
+        assert report['source_adapter_sha256']==source['adapter_model.safetensors']
+        assert report['source_config_sha256']==source['adapter_config.json']
+        for rank in ranks:
+            name=label+str(rank);path=root/'outputs'/('r10_'+name)
+            check(path/'adapter_model.safetensors',report['adapter_sha256'][str(rank)])
+            check(path/'adapter_config.json',source['adapter_config.json'])
+            adapters['oldp64' if label=='oldp_' else name]=path
+    old=json.loads((out/'old_projection_comparison.json').read_text())
+    assert old['actual_sha256']==verified[str(adapters['oldp64']/'adapter_model.safetensors')]
+    assert old['expected_sha256']==plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256']
+    gate=json.loads((out/'selector_gate.json').read_text())
+    if gate['pass']:
+        report=gate['report'];assert report['source_adapter_sha256']==eos['sha256']
+        selected=root/'outputs/r10_charcap'
+        assert json.loads((selected/'projection.json').read_text())==report
+        check(selected/'adapter_model.safetensors',report['adapter_sha256'])
+        check(selected/'adapter_config.json',eos['files']['adapter_config.json'])
+        adapters['charcap']=selected
+    return adapters,gate['pass'],verified
+
+
+def main(resume_chat=False):
     plan = json.loads((OUT / 'plan.json').read_text())
     deadline = float(os.environ['RUN16_DEADLINE'])
     instruct = INSTRUCT_FILE.read_text().strip()
@@ -89,7 +127,8 @@ def main():
     assert sha(train) == plan['training_data_sha256']
     command([sys.executable, 'scripts/train/check_loss_mask.py', train], 'fixed_data_mask.log')
 
-    tiny_smoke(base, train, command, lambda text: event('tiny_smoke', {'message':text}))
+    if not resume_chat:
+        tiny_smoke(base, train, command, lambda text: event('tiny_smoke', {'message':text}))
 
     def train_chat(tag, donor):
         # The maintained run10 entry point constructs exactly the frozen config; compare before launch too.
@@ -100,6 +139,19 @@ def main():
                         base_model=old['base_model'], output_dir=old['output_dir'],
                         dataset_prepared_path=old['dataset_prepared_path'], datasets=old['datasets'])
         assert expected == old, 'run10 hyperparameter recipe changed'
+        path = ROOT/f'outputs/r10_{tag}chatr12'
+        receipt=OUT/(tag+'trained.json')
+        if resume_chat and receipt.exists():
+            recorded=json.loads(receipt.read_text())
+            for filename,digest in recorded['files'].items():
+                assert sha(path/filename)==digest,'resume SHA mismatch: '+str(path/filename)
+            actual=yaml.safe_load((OUT/f'cfg_r10_{tag}chatr12.yml').read_text())
+            assert actual['base_model']=='outputs/base_'+donor.replace(' ','_').replace('=','_'),'chat adapter training base changed'
+            adapters[tag+'chatr12']=path
+            event(tag+'reused',{'adapter_path':str(path),'sha256':recorded['sha256']})
+            return path
+        if resume_chat:
+            assert not path.exists(), 'Incomplete anchored training requires an explicitly approved checkpoint/restart repair'
         command(['bash','scripts/train/14_run10_chat_box.sh'], f'train_{tag}_driver.log',
                 {'CHATS':'chatr12','TAG':tag, 'TRAIN_DIR':'data/train/eos_fixed','DONOR':donor,
                  'CELLS':'','SPECTRAL_FRAC':'.01'})
@@ -117,6 +169,18 @@ def main():
 
     def project(adapter, label, ranks=(64,), sides='both'):
         output = ROOT/'outputs'/('projection_'+label)
+        receipt=OUT/(label+'.json')
+        if resume_chat and receipt.exists():
+            recorded=json.loads(receipt.read_text())
+            assert recorded['complete'] and recorded['source_adapter_sha256']==sha(adapter/'adapter_model.safetensors')
+            assert recorded['sides']==sides
+            for rank in ranks:
+                name=label+str(rank);path=ROOT/'outputs'/('r10_'+name)
+                assert sha(path/'adapter_model.safetensors')==recorded['adapter_sha256'][str(rank)],'resume SHA mismatch: '+str(path)
+                assert sha(path/'adapter_config.json')==recorded['source_config_sha256']
+                adapters[name]=path
+            event(label+'reused',{'receipt':str(receipt)})
+            return
         basis_args=['--save-basis',ROOT/'outputs/ortho_basis.safetensors','--basis-rank','64'] if label=='p16_' else []
         command([sys.executable,'scripts/train/16_project_chat_adapter.py',base,instruct,adapter,output,
                  '--ranks',*map(str,ranks),'--sides',sides,*basis_args], label+'.log')
@@ -139,51 +203,57 @@ def main():
         assert all((OUT/(r['model']+'.done')).exists() for r in cells)
         event(block+'_evaluated',{'models':[r['model'] for r in cells]})
 
-    new = train_chat('eos_','stoic=0.5 const=1 other=1')
-    project(new,'p16_', (64,128))
-    project(new,'p16out_', sides='output')
-    # Transport-approved scheduling: other donors upload while new D trains; old P64 is recomputed, not uploaded.
-    for name in ['rewr','mix_stoic','mix_const','ctl']: verify_uploaded(name)
-    project(adapters['rewr'],'oldp_', (64,))
-    adapters['oldp64']=adapters.pop('oldp_64')
-    event('old_projection_comparison', {'expected_sha256':plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256'],
-          'actual_sha256':sha(adapters['oldp64']/'adapter_model.safetensors'),
-          'matches_run14':sha(adapters['oldp64']/'adapter_model.safetensors')==plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256'],
-          'note':'Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.'})
-    selector = ROOT/'outputs/selector'; selector.mkdir()
-    merged = ROOT/'outputs/selector_D1'
-    command([sys.executable,'scripts/train/02_merge.py',instruct,adapters['stoic'],merged,'.5',
-             '--add',adapters['const'],'1','--add',adapters['other'],'1','--add',new,'1'],
-            'selector_merge.log', {'IT':instruct,'MERGE_DTYPE':'float16'})
-    ctl = ROOT/'data/train/run14/ctlgen.jsonl'
-    cap=selector/'cap.jsonl'
-    cap.write_text(''.join(line for line in ctl.open() if not json.loads(line)['id'].startswith('ordinary_')))
-    assert sum(1 for _ in cap.open())==2014
-    for name,path in [('char',train),('cap',cap)]:
-        for first,last in [(0,20),(20,40)]:
-            command([sys.executable,'scripts/train/18_project_char_vs_cap.py','collect',merged,path,
-                     selector/f'mom_{name}_{first}.pt','--rows','1024','--max-length','1024','--batch','8',
-                     '--layers',f'{first}:{last}'],f'collect_{name}_{first}.log')
-    shutil.rmtree(merged)
-    summary=json.loads((OUT/'p16_.json').read_text())['summary']
-    summary=[r for r in summary if r['k']==64]
-    target=sum(r['removed_squared_fro'] for r in summary)/sum(r['original_squared_fro'] for r in summary)
-    moment_args=['--char',*sorted(selector.glob('mom_char_*.pt')),'--cap',*sorted(selector.glob('mom_cap_*.pt'))]
-    selected=ROOT/'outputs/r10_charcap'
-    try:
-        command([sys.executable,'scripts/train/18_project_char_vs_cap.py','project',new,selected,
-                 *moment_args,'--removed-energy',str(target)],'charcap_project.log')
-        selector_ok=True
-    except subprocess.CalledProcessError as error:
-        selector_ok=False
-        event('selector_failed', {'returncode':error.returncode,'action':'skip cell; retain logs and moments; notify cg_exp_curve through supervisor'})
-    report=json.loads((selected/'projection.json').read_text()) if (selected/'projection.json').exists() else {}
-    event('selector_gate',{'pass':selector_ok,'target_removed_energy':target,'report':report,
-                           'tolerance_absolute':.02,'note':'4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.'})
-    command([sys.executable,'scripts/train/18_project_char_vs_cap.py','measure',new,adapters['p16out_64'],
-             adapters['p16_64'],*([selected] if (selected/'adapter_model.safetensors').exists() else []),*moment_args], 'selector_measure.jsonl')
-    if selector_ok:
-        adapters['charcap']=selected
+    if resume_chat:
+        for name in ['rewr','mix_stoic','mix_const','ctl']: verify_uploaded(name)
+        restored,selector_ok,verified=restore_chat_inputs(ROOT,OUT,plan)
+        adapters.update(restored)
+        event('chat_resume_verified', {'sha256':verified,'next_stage':'evaluate(chat)','skipped':['tiny_smoke','eos_training','projections','selector']})
+    else:
+        new = train_chat('eos_','stoic=0.5 const=1 other=1')
+        project(new,'p16_', (64,128))
+        project(new,'p16out_', sides='output')
+        # Transport-approved scheduling: other donors upload while new D trains; old P64 is recomputed, not uploaded.
+        for name in ['rewr','mix_stoic','mix_const','ctl']: verify_uploaded(name)
+        project(adapters['rewr'],'oldp_', (64,))
+        adapters['oldp64']=adapters.pop('oldp_64')
+        event('old_projection_comparison', {'expected_sha256':plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256'],
+              'actual_sha256':sha(adapters['oldp64']/'adapter_model.safetensors'),
+              'matches_run14':sha(adapters['oldp64']/'adapter_model.safetensors')==plan['adapters']['oldp64']['files']['adapter_model.safetensors']['sha256'],
+              'note':'Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.'})
+        selector = ROOT/'outputs/selector'; selector.mkdir()
+        merged = ROOT/'outputs/selector_D1'
+        command([sys.executable,'scripts/train/02_merge.py',instruct,adapters['stoic'],merged,'.5',
+                 '--add',adapters['const'],'1','--add',adapters['other'],'1','--add',new,'1'],
+                'selector_merge.log', {'IT':instruct,'MERGE_DTYPE':'float16'})
+        ctl = ROOT/'data/train/run14/ctlgen.jsonl'
+        cap=selector/'cap.jsonl'
+        cap.write_text(''.join(line for line in ctl.open() if not json.loads(line)['id'].startswith('ordinary_')))
+        assert sum(1 for _ in cap.open())==2014
+        for name,path in [('char',train),('cap',cap)]:
+            for first,last in [(0,20),(20,40)]:
+                command([sys.executable,'scripts/train/18_project_char_vs_cap.py','collect',merged,path,
+                         selector/f'mom_{name}_{first}.pt','--rows','1024','--max-length','1024','--batch','8',
+                         '--layers',f'{first}:{last}'],f'collect_{name}_{first}.log')
+        shutil.rmtree(merged)
+        summary=json.loads((OUT/'p16_.json').read_text())['summary']
+        summary=[r for r in summary if r['k']==64]
+        target=sum(r['removed_squared_fro'] for r in summary)/sum(r['original_squared_fro'] for r in summary)
+        moment_args=['--char',*sorted(selector.glob('mom_char_*.pt')),'--cap',*sorted(selector.glob('mom_cap_*.pt'))]
+        selected=ROOT/'outputs/r10_charcap'
+        try:
+            command([sys.executable,'scripts/train/18_project_char_vs_cap.py','project',new,selected,
+                     *moment_args,'--removed-energy',str(target)],'charcap_project.log')
+            selector_ok=True
+        except subprocess.CalledProcessError as error:
+            selector_ok=False
+            event('selector_failed', {'returncode':error.returncode,'action':'skip cell; retain logs and moments; notify cg_exp_curve through supervisor'})
+        report=json.loads((selected/'projection.json').read_text()) if (selected/'projection.json').exists() else {}
+        event('selector_gate',{'pass':selector_ok,'target_removed_energy':target,'report':report,
+                               'tolerance_absolute':.02,'note':'4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.'})
+        command([sys.executable,'scripts/train/18_project_char_vs_cap.py','measure',new,adapters['p16out_64'],
+                 adapters['p16_64'],*([selected] if (selected/'adapter_model.safetensors').exists() else []),*moment_args], 'selector_measure.jsonl')
+        if selector_ok:
+            adapters['charcap']=selected
     evaluate('chat')
     evaluate('documents')
     loss_configs=['base=none']+[row['model']+'='+','.join(str(adapters[n])+':'+str(c) for n,c in row['cell'])
@@ -231,4 +301,8 @@ def main():
     event('complete',{'models':[r['model'] for r in plan['cells'] if (OUT/(r['model']+'.done')).exists()]})
 
 
-if __name__=='__main__': main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--resume-chat',action='store_true',help='Verify saved trained/projection/selector SHAs and resume at chat evaluation')
+    main(resume_chat=parser.parse_args().resume_chat)

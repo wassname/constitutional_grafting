@@ -25,3 +25,24 @@ def production_step_evidence(root):
         epoch=re.search(r"'epoch'\s*:\s*['\"]?([0-9.eE+\-]+)",line)
         if epoch and float(epoch[1])>0:return {'source':str(path),'epoch':float(epoch[1])}
     return None
+
+
+def archive_partial_cells(run_dir,models,failure_index):
+    """Preserve incomplete cell outputs and failed job logs, never overwrite a completed cell."""
+    import shutil
+    run=Path(run_dir);destination=run/'driver_failures'/f'attempt_{failure_index}'
+    destination.mkdir(parents=True,exist_ok=True)
+    names={'job.log','job.exit'}
+    for model in models:
+        assert re.fullmatch(r'r16_[A-Za-z0-9_.\-]+',model),model
+        assert not (run/(model+'.done')).exists(),'Completed cells are not partial: '+model
+        for prefix in ['replies_','demos_','panel_','pov_','small_tasks_','draft_code_tools_','gsm8k_','merge_','vllm_']:
+            for suffix in ['.jsonl','.jsonl.wire.jsonl','.jsonl.meta.json','.log','.json','.argv.json']:
+                names.add(prefix+model+suffix);names.add('gen_'+prefix+model+suffix)
+    moved=[]
+    for name in sorted(names):
+        source=run/name
+        if source.is_file():
+            assert not (destination/name).exists(),'Refuse to overwrite failure evidence: '+name
+            shutil.move(str(source),str(destination/name));moved.append(name)
+    return moved

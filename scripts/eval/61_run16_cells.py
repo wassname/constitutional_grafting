@@ -127,7 +127,7 @@ def main():
                              "--temperature", str(temperature), "--samples", str(samples),
                              "--trace", str(out / (target + '.wire.jsonl'))], f"gen_{target}.log")
                     assert len(rows(out / target)) == len(rows(input_path)) * samples, target
-                command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"gsm8k_{tag}.jsonl", "--n", "60", "--items", out / "gsm8k_long60.jsonl", "small_tasks.jsonl", "draft_code_tools.jsonl"], f"gsm8k_{tag}.log")
+                command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"gsm8k_{tag}.jsonl", "--n", "60", "--items", out / "gsm8k_long60.jsonl"], f"gsm8k_{tag}.log")
         finally:
             if server is not None:
                 for sig in (signal.SIGTERM, signal.SIGKILL):
