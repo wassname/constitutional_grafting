@@ -91,6 +91,10 @@ data-smoke:
 data-v2 version="v3" batch="small" upto="":
     uv run --env-file .env python scripts/data/v2/build.py --version {{version}} --batch {{batch}} {{ if upto != "" { "--upto " + upto } else { "" } }}
 
+# Combine exported batches into data/train/chat_<version>.jsonl and docs_<version>.jsonl (+ .sha256); checks the loss mask. -- PI/Claude
+data-v2-combine version="v3" chat="small medium large" docs="docs_small":
+    uv run python scripts/data/v2/combine.py --version {{version}} --chat {{chat}} --docs {{docs}}
+
 # Review package for one batch: per-filter flagged and just-under rows in full, judge rejects by defect, edits, plot. -- PI/Claude
 data-v2-package version="v3" batch="small":
     uv run python scripts/data/v2/review_package.py --version {{version}} --batch {{batch}}
