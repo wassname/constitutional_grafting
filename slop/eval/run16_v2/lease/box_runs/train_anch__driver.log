@@ -1,0 +1,41 @@
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 742.48it/s]
+2026-10-27T15:26:36+00:00 merge donor Base + mix_stoic=0.5 ctl=-0.5 mix_const=1 ctl=-1 other=1
+2026-10-27T15:30:07+00:00 donor mix_stoic=0.5 ctl=-0.5 mix_const=1 ctl=-1 other=1 passed greedy check
+2026-10-27T15:30:07+00:00 start train chatr12 (1636 rows) on outputs/base_mix_stoic_0.5_ctl_-0.5_mix_const_1_ctl_-1_other_1
+ok data/train/eos_fixed/chatr12.jsonl: no loss on empty think blocks; rows missing <|im_end|>: 0
+target_parameters: ['mlp.experts.gate_up_proj', 'mlp.experts.down_proj'] rank_pattern: {'mlp\\.experts\\.down_proj': 16, 'mlp\\.experts\\.gate_up_proj': 16}
+{
+ "base_model.model.model.language_model.layers.0.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 5.986179828643799
+ },
+ "base_model.model.model.language_model.layers.0.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 10.008772850036621
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.base_layer.lora_B.weight": {
+  "shape": [
+   1024,
+   4096
+  ],
+  "norm": 7.678645610809326
+ },
+ "base_model.model.model.language_model.layers.1.mlp.experts.lora_B.weight": {
+  "shape": [
+   2048,
+   4096
+  ],
+  "norm": 10.129420280456543
+ }
+}
+expert lora_B tensors: 80 (expected 80), nonzero: 80
+PASS: every routed-expert lora_B is present and nonzero
+PASS: all saved adapter tensors, dense and expert, are finite
+2026-10-27T16:55:05+00:00 done train chatr12: spectral_lam fixed at 0.104
+2026-10-27T16:55:05+00:00 TRAIN-ONLY WORKER COMPLETE

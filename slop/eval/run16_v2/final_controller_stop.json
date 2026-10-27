@@ -1,0 +1,11 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "approved_by": "const_v2 supervisor live intercom",
+  "instance_id": 57919543,
+  "task": 4224,
+  "pid": 884462,
+  "pgid": 884458,
+  "signal": "SIGKILL",
+  "reason": "All8 final adapters independently SHA/size checked; all result files SHA checked; remaining checkpoint copies explicitly out of scope. No finally can execute.",
+  "epoch": 1793125371.6818123
+}

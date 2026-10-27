@@ -1,0 +1,11 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run16/scripts/eval/67_run16_collect.py", line 79, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run16/scripts/eval/67_run16_collect.py", line 73, in main
+    raise RuntimeError('Box job exited before requested event: '+(box/'job.exit').read_text())
+RuntimeError: Box job exited before requested event: 1
+

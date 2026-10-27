@@ -1,0 +1,9 @@
+{
+  "instance_id": 57919543,
+  "error": "remote comparison exited 1; inspect job.log",
+  "production_evidence": {
+    "source": "/workspace/cg/runs/run10/eos_trained.json",
+    "reason": "durable production marker or final adapter"
+  },
+  "action": "retrieve then destroy; no repair hold"
+}

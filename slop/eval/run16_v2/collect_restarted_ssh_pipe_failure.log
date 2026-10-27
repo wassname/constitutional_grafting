@@ -1,0 +1,30 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+LOCAL EVENT /workspace/2026/constitutional_grafting/.local/worktrees/run16/slop/eval/run16_v2/chat_evaluated.json
+LOCAL EVENT /workspace/2026/constitutional_grafting/.local/worktrees/run16/slop/eval/run16_v2/driver_failure.json
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+client_loop: send disconnect: Broken pipe
+rsync: connection unexpectedly closed (0 bytes received so far) [Receiver]
+rsync error: unexplained error (code 255) at io.c(232) [Receiver=3.2.7]
+rsync: [Receiver] write error: Broken pipe (32)
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run16/scripts/eval/67_run16_collect.py", line 85, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run16/scripts/eval/67_run16_collect.py", line 29, in main
+    calls(['rsync','-az','--delete-delay','--filter=P eos_first20.json','--exclude=merged_model','--exclude=dose_model','--exclude=selector_D1','--exclude=heal_parent','--exclude=healed_model',
+  File "/workspace/2026/constitutional_grafting/.local/worktrees/run16/scripts/eval/67_run16_collect.py", line 26, in calls
+    def calls(argv): subprocess.run(list(map(str,argv)),check=True,timeout=max(1,state['runner_deadline_epoch']-time.time()))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['rsync', '-az', '--delete-delay', '--filter=P eos_first20.json', '--exclude=merged_model', '--exclude=dose_model', '--exclude=selector_D1', '--exclude=heal_parent', '--exclude=healed_model', '-e', 'ssh -i /home/code/.ssh/id_vast -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/workspace/2026/constitutional_grafting/.local/worktrees/run16/.local/run10_known_hosts -p 50792', 'root@154.59.156.39:/workspace/cg/runs/run10/', '/workspace/2026/constitutional_grafting/.local/worktrees/run16/slop/eval/run16_v2/lease/box_runs/']' returned non-zero exit status 255.

@@ -490,3 +490,7 @@
 {"time": "2026-10-27T23:13:24+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_charcap1", "cost": 0.397676118, "n": 686}
 {"time": "2026-10-27T23:17:17+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_rewr0.5", "cost": 0.405382656, "n": 700}
 {"time": "2026-10-27T23:21:30+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_oldp641", "cost": 0.403109322, "n": 698}
+{"time": "2026-10-28T01:47:51+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5", "cost": 0.40119156, "n": 692}
+{"time": "2026-10-28T02:00:43+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121", "cost": 0.40418826, "n": 700}
+{"time": "2026-10-28T02:18:00+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641", "cost": 0.401944704, "n": 696}
+{"kind": "run16_document_abx_bounded", "model": "deepseek/deepseek-v4.1-flash", "served_models": ["deepseek/deepseek-v4.1-flash"], "cost": 0.289882123855, "raw_trials": 1884, "coherent_subset_reuses_raw_cache": true, "receipt": "slop/eval/run16_v2/document_change/result.json", "author": "PI/OpenAI (Sol)", "time": "2026-10-28T03:11:17+0800", "out": "slop/eval/run16_v2/document_change", "n": 1884}

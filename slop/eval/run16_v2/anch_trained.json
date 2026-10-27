@@ -1,0 +1,9 @@
+{
+  "adapter_path": "/workspace/cg/outputs/r10_anch_chatr12",
+  "sha256": "a77ddbc6cae596e3e5970ea5b7d4abe7a97a79b1b04e8e1a97b405c9eb694a9a",
+  "files": {
+    "adapter_config.json": "511500f5ef410dbadc24980edeace3c294ecaf5629573336f7e811c8923c384c",
+    "adapter_model.safetensors": "a77ddbc6cae596e3e5970ea5b7d4abe7a97a79b1b04e8e1a97b405c9eb694a9a"
+  },
+  "epoch": 1793120110.96817
+}

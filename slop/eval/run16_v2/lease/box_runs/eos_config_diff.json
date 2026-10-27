@@ -1,0 +1,28 @@
+{
+  "differences": {
+    "datasets": {
+      "old": [
+        {
+          "path": "data/train/run10/chatr12.jsonl",
+          "ds_type": "json",
+          "type": "input_output"
+        }
+      ],
+      "new": [
+        {
+          "path": "data/train/eos_fixed/chatr12.jsonl",
+          "ds_type": "json",
+          "type": "input_output"
+        }
+      ]
+    },
+    "output_dir": {
+      "old": "outputs/r10_cx_chatr12",
+      "new": "outputs/r10_eos_chatr12"
+    }
+  },
+  "hyperparameters_identical": true,
+  "training_data_sha256": "284895029fe45211b8a1ecc767b309d2f6be7903ae4c95f18d8071b39eaca951",
+  "spectral_frac": 0.01,
+  "epoch": 1793088429.77139
+}
