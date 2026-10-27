@@ -14,6 +14,7 @@ dependencies = [
     "tabulate",
     "matplotlib>=3.11.2",
     "tyro>=1.0.16",
+    "wassname-llm-judge",
 ]
 
 [project.optional-dependencies]
@@ -26,3 +27,6 @@ build-backend = "uv_build"
 [tool.uv]
 package = true
 exclude-newer = "8 days"
+
+[tool.uv.sources]
+wassname-llm-judge = { git = "https://github.com/wassname/llm-judge", rev = "main" }
