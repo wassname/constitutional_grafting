@@ -61,7 +61,46 @@ def build(model):
     print(packet)
 
 
+def build_gate_review():
+    """Full fixed panels and machine-flag context; never approve or rank by target character."""
+    plan=json.loads((OUT/'plan.json').read_text())
+    models=['r16_instruct']+[r['model'] for r in plan['cells'] if r['block']=='documents']
+    models=[m for m in models if (BOX/(m+'.done')).exists() and (OUT/'ordinary'/m/'coherence.jsonl').exists()]
+    target=OUT/'gate_review';target.mkdir(parents=True,exist_ok=True)
+    panel=['# Document-stage gate: full fixed panels',
+           'Document selection concerns coherent moral/persona change in any direction, not preferred-character scores. Machine flags below are not automatic failures. Supervisor decides the gate. No training approval is written here.']
+    manifest=json.loads((ROOT/'slop/eval/run16_v2/inputs/run16_manifest.json').read_text())
+    panel.insert(1,'Recipient θ_I: Qwen/Qwen3.5-35B-A3B (Instruct), revision '+manifest['instruct_revision']+'. Every Δ is trained on Base; equations/descriptions and served model ids follow below.')
+    context=['# Full context for machine-flagged document-stage replies',
+             'Flags are pinned code checks, not adjudicated defects. Full system, user and assistant text is retained.']
+    flags={}
+    def render(record):
+        text=[f"## {record['model']} / {record['item_id']} / sample {record['sample']}",f"System: {record['system']!r}"]
+        for n,turn in enumerate(record['turns'],1):
+            text += [f'### User turn {n}',turn['user'],f"### Assistant turn {n} (finish={turn['finish_reason']}; tokens={turn['n_tokens']})",turn['assistant']]
+        return text
+    for model in models:
+        recipe=next(r for r in plan['cells'] if r['model']==model)
+        panel += [f"# {model}",recipe['equation'],recipe['description'],
+                  f"Preselected complete read: ../read_packages/{model}/full_replies.md"]
+        records=rows(BOX/f'panel_{model}.jsonl');assert len(records)==4
+        for record in records:panel += render(record)
+        checked=rows(OUT/'ordinary'/model/'coherence.jsonl')
+        bad={(r['item_id'],r['sample']):r for r in checked if any(any(t[k] for k in ['looped','truncated','lang_switch','role_confusion','empty']) for t in r['turn_checks'])}
+        flags[model]={'turns':sum(len(r['turn_checks']) for r in checked),
+                      'counts':{k:sum(t[k] for r in checked for t in r['turn_checks']) for k in ['looped','truncated','lang_switch','role_confusion','empty']},
+                      'flagged_records':[{'item_id':r['item_id'],'sample':r['sample'],'turn_checks':r['turn_checks']} for r in bad.values()]}
+        for record in rows(BOX/f'replies_{model}.jsonl'):
+            if (record['item_id'],record['sample']) in bad:context += render(record)
+    (target/'panels.md').write_text('\n\n'.join(panel)+'\n')
+    (target/'flagged_context.md').write_text('\n\n'.join(context)+'\n')
+    (target/'flags.json').write_text(json.dumps({'scope':'Unadjudicated pinned machine flags; full context in flagged_context.md','models':flags},indent=2)+'\n')
+    print(target)
+
+
 if __name__=='__main__':
-    ap=argparse.ArgumentParser(description=__doc__); ap.add_argument('models',nargs='*');a=ap.parse_args()
-    models=a.models or [p.stem for p in sorted(BOX.glob('r16_*.done'))]
-    for model in models: build(model)
+    ap=argparse.ArgumentParser(description=__doc__); ap.add_argument('models',nargs='*');ap.add_argument('--gate-review',action='store_true');a=ap.parse_args()
+    if a.gate_review:build_gate_review()
+    else:
+        models=a.models or [p.stem for p in sorted(BOX.glob('r16_*.done'))]
+        for model in models: build(model)

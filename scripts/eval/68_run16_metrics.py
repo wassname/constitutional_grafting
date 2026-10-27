@@ -34,12 +34,15 @@ def main():
     exact_old={iid for iid,it in old.items() if all(it[k]==items[iid][k] for k in ['system','turns','checks','max_new_tokens'])}
     assert len(exact_old)==49
     expected={(iid,s) for iid in items for s in (0,1)}
-    metrics={};vectors={};maths={};sources={}
+    metrics={};vectors={};maths={};sources={};pending={}
     def source(p):
         with p.open('rb') as stream:sources[str(p.relative_to(ROOT))]=hashlib.file_digest(stream,'sha256').hexdigest()
     for recipe in plan['cells']:
         model=recipe['model'];ordinary=OUT/'ordinary'/model
         if not (BOX/(model+'.done')).exists():continue
+        required=[ordinary/'coherence.jsonl',ordinary/'judged.jsonl',OUT/'legacy_small_tasks'/model/'judged.jsonl']
+        if not all(p.exists() for p in required):
+            pending[model]='CPU scoring pending';continue
         checked=rows(ordinary/'coherence.jsonl');cap=rows(ordinary/'judged.jsonl')
         assert {(r['item_id'],r['sample']) for r in checked}==expected
         turns=[c for r in checked for c in r['turn_checks']]
@@ -70,18 +73,20 @@ def main():
         char={}
         if recipe['block']!='documents' and model!='r16_instruct':
             judged=OUT/'judging'/model
-            if not (judged/'judged.jsonl').exists():continue
-            meta=json.loads((judged/'meta.json').read_text())
-            assert meta['items_sha256']=='5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444'
-            groups=defaultdict(list)
-            for r in rows(judged/'judged.jsonl'):
-                if r['model']==model and r.get('on_target') is not None:groups[r['item_id']].append(r['on_target'])
-            assert len(groups)==177 and all(len(v)==2 for v in groups.values())
-            char={iid:mean(v) for iid,v in groups.items()}
-            point.update(character=mean(char.values()),character_ci90=boot(list(char.values())),character_items=len(char),
-                         character_v1_96=mean(v for iid,v in char.items() if iid in v1),
-                         character_run14_overlap=mean(v for iid,v in char.items() if iid in exact_old))
-            source(judged/'judged.jsonl');source(judged/'meta.json')
+            if not all((judged/name).exists() for name in ['judged.jsonl','meta.json']):
+                pending[model]='Pinned v2 JEV judging pending'
+            else:
+                meta=json.loads((judged/'meta.json').read_text())
+                assert meta['items_sha256']=='5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444'
+                groups=defaultdict(list)
+                for r in rows(judged/'judged.jsonl'):
+                    if r['model']==model and r.get('on_target') is not None:groups[r['item_id']].append(r['on_target'])
+                assert len(groups)==177 and all(len(v)==2 for v in groups.values())
+                char={iid:mean(v) for iid,v in groups.items()}
+                point.update(character=mean(char.values()),character_ci90=boot(list(char.values())),character_items=len(char),
+                             character_v1_96=mean(v for iid,v in char.items() if iid in v1),
+                             character_run14_overlap=mean(v for iid,v in char.items() if iid in exact_old))
+                source(judged/'judged.jsonl');source(judged/'meta.json')
         elif model=='r16_instruct':point.update(character=0,character_v1_96=0)
         draft_summary=OUT/'draft_code_tools'/model/'summary.json'
         if draft_summary.exists():
@@ -109,7 +114,7 @@ def main():
         paired[a+' vs '+b]=comparison
     low='r16_stoic0.5_const1_other1_eos_chatr120.5';high='r16_stoic0.5_const1_other1_eos_chatr121'
     matched=[]
-    if low in metrics and high in metrics:
+    if low in metrics and high in metrics and all(metrics[m]['character'] is not None for m in [low,high]):
         x0,x1=metrics[low]['character'],metrics[high]['character']
         for model,p in metrics.items():
             if model in {low,high,'r16_instruct'} or p['block']=='documents' or p['character'] is None:continue
@@ -128,14 +133,24 @@ def main():
                 'estimated_plain_new_D_correct_common':expected_math,
                 'sensitivity':[{'power':power,'estimated_maths':(1-t**power)*metrics[low]['maths']+t**power*metrics[high]['maths']} for power in [.5,1,2]]})
     result={'author':'PI/OpenAI (Sol)','protocol':'a66d2ae v2; fresh same-lease baseline; no direct historical-score comparison',
-            'v1_identical_items':96,'run14_same_id_items':len(old),'run14_exact_prompt_check_overlap_items':len(exact_old),'metrics':metrics,'paired':paired,'matched':matched,'sources_sha256':sources}
-    (OUT/'metrics.json').write_text(json.dumps(result,indent=2)+'\n')
+            'v1_identical_items':96,'run14_same_id_items':len(old),'run14_exact_prompt_check_overlap_items':len(exact_old),'metrics':metrics,'paired':paired,'matched':matched,'sources_sha256':sources,'pending':pending}
+    temporary=OUT/'metrics.tmp';temporary.write_text(json.dumps(result,indent=2)+'\n');temporary.replace(OUT/'metrics.json')
     table=['| Model | Character [90%] | Maths /60 | Run8 tasks /22 | V2 capability /38 | Draft code /40 | Draft tools /32 | Flags loop/cutoff/language |', '|:--|--:|--:|--:|--:|--:|--:|:--|']
     for model,p in metrics.items():
         char='not measured' if p['character'] is None else f"{p['character']:+.3f}"+(f" [{p['character_ci90'][0]:+.3f}, {p['character_ci90'][1]:+.3f}]" if p['character_ci90'] else ' (ref)')
         f=p['flags'];draft=p.get('draft_code_tools') or {}
         code=draft.get('code',{}).get('correct','not run');tools=draft.get('tools',{}).get('correct','not run')
         table.append(f"| `{model}` | {char} | {p['maths']} | {p['small_tasks_22']:g} | {p['all_capability_38']:g} | {code} | {tools} | {f['looped']:g}/{f['truncated']:g}/{f['lang_switch']:g} over {p['turns']} turns |")
+    table += ['','## GSM: same questions where both model and Instruct finished',
+              'Each row has its own common denominator. Counts and intervals are paired; this is separate from the full /60 score above.',
+              '| Model | Both finished n | Model correct | Instruct correct | Model minus Instruct [90% count interval] |',
+              '|:--|--:|--:|--:|:--|']
+    for model in models:
+        if model=='r16_instruct' or 'r16_instruct' not in metrics:continue
+        common=paired['r16_instruct vs '+model]['both_finished']
+        interval=common['difference_count_ci90']
+        ci=f" [{-interval[1]:+.2f}, {-interval[0]:+.2f}]" if interval else ''
+        table.append(f"| `{model}` | {common['n']} | {common['b_correct']} | {common['a_correct']} | {common['b_correct']-common['a_correct']:+g}{ci} |")
     (OUT/'metrics.md').write_text('\n'.join(table)+'\n')
     print('\n'.join(table))
 
