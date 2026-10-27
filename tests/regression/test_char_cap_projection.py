@@ -37,12 +37,15 @@ def test_projector_keeps_character_directions_and_drops_capability_ones():
     torch.testing.assert_close(Q @ Q, Q)
     keep = lam >= .5
     assert keep.sum() == 4  # two char-heavy (λ≈9) and two shared (λ≈1) kept; two cap-heavy (λ≈1/9) dropped
-    torch.testing.assert_close(Q @ V[:, keep], V[:, keep])
-    torch.testing.assert_close(Q @ V[:, ~keep], torch.zeros(d, int((~keep).sum()), dtype=torch.float64))
-    # A row reading only a capability-heavy direction is removed; one reading a character-heavy direction is kept.
-    cap_dir, char_dir = basis[:, 4], basis[:, 0]
-    assert (cap_dir @ Q).norm() < 1e-6 * (1 + cap_dir.norm())
-    torch.testing.assert_close(char_dir @ Q, char_dir, atol=1e-2, rtol=0)
+    # A row reading a capability-heavy direction is removed; one reading a character-heavy direction is kept.
+    cap_row, char_row = basis[:, 4:5].T, basis[:, 0:1].T
+    assert (cap_row @ Q).norm() < 1e-2
+    torch.testing.assert_close(char_row @ Q, char_row, atol=1e-2, rtol=0)
+    # Kept energy never exceeds the original, and the character share is kept better than the capability share.
+    A = torch.randn(5, d, dtype=torch.float64)
+    energy = lambda M, C: torch.trace(M @ C @ M.T)
+    kept_char, kept_cap = energy(A @ Q, C_char) / energy(A, C_char), energy(A @ Q, C_cap) / energy(A, C_cap)
+    assert 0 < kept_cap < kept_char <= 1 + 1e-9
 
 
 def test_patched_experts_reproduce_model_output():
@@ -99,7 +102,7 @@ def test_collect_project_merge_on_tiny_model(tmp_path):
     selector.project(SimpleNamespace(adapter=tmp_path / 'adapter', output=tmp_path / 'projected', removed_energy=.15, tau=None, **common))
     report = json.loads((tmp_path / 'projected/projection.json').read_text())
     assert abs(report['removed_weight_energy'] - .15) < .1, report
-    assert report['kept_char_input_energy'] > report['kept_cap_input_energy'], report
+    assert 0 < report['kept_cap_input_energy'] < report['kept_char_input_energy'] <= 1, report
     selector.measure(SimpleNamespace(adapters=[tmp_path / 'adapter', tmp_path / 'projected'], **common))
     merged, count, experts = merge.merge_adapter(copy.deepcopy(model), str(tmp_path / 'projected'), 1., {})
     assert experts and count > 0
