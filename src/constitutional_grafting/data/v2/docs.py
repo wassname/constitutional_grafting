@@ -174,7 +174,7 @@ class Translate(Step):
     number, name = 5, "translate"
 
     def run(self, rows, run):
-        cfg = run.config["teacher"]
+        cfg = run.config["answer_route"]["translator"] if "answer_route" in run.config else run.config["teacher"]  # v3: DeepSeek, reasoning off
 
         def one(row):
             if row["route"] == "en":
