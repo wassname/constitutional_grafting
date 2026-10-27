@@ -1,0 +1,10 @@
+{
+  "instance_id": 57919543,
+  "failure_index": 0,
+  "error": "remote comparison exited 1; inspect job.log",
+  "status": "holding",
+  "first_production_step_observed": false,
+  "hold_until_epoch": 1793085993.412522,
+  "hard_destroy_epoch": 1793165439.6720364,
+  "action": "keep heartbeat/deadline guard; investigate; upload approved hotfix and restart within existing60min window"
+}

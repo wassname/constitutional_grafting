@@ -1,0 +1,12 @@
+{
+  "instance_id": 57919543,
+  "status": "running",
+  "checked_epoch": 1793077434.9594193,
+  "hourly_rate": 1.9185185185185185,
+  "hard_destroy_utc": "2026-10-28T05:30:39.672036+00:00",
+  "runner_deadline_utc": "2026-10-28T04:00:39.672036+00:00",
+  "prior_total_reserve_usd": 4.25,
+  "cumulative_maximum_usd": 64.2537037037037,
+  "replacement_gpu_estimate_so_far_usd": 0.10407291786808046,
+  "project_API_calls": 0
+}

@@ -1,0 +1,7 @@
+{
+  "base": "anchored_docs",
+  "full_panel_read": true,
+  "flags_read": true,
+  "decided_by": "const_v2 (PI/Claude opus)",
+  "reason": "Pre-agreed gate: fall back only if anchored loops/language flags are well above plain Δ_docs. Observed over 496 turns: anchored 0 loops / 5 cutoffs / 1 language vs plain 0/6/8, so anchored is not worse, and is cleaner on language. GSM 54 vs 54; /22 22 vs 21. Base held-out NLL: Const 2.304 anchored vs 2.316 plain (Const learned at least as much); Web 2.028 vs 2.056 (baseline 2.023), so less generic drift, which is what anchoring should do. The executor's full read of both packets shows the same major decisions and shared defects (self-ending on superior-species pressure, payday push, invented details), with one coherent difference (haircut). Coherent, so D's recipe with anchoring proceeds. Fallback anchored Const ×2 not used: 30 cutoffs, GSM 52, /22 20."
+}

@@ -1,0 +1,58 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+["demos_r16_instruct.jsonl", "demos_r16_instruct.jsonl.wire.jsonl", "draft_code_tools_r16_instruct.jsonl", "draft_code_tools_r16_instruct.jsonl.wire.jsonl", "gsm8k_r16_instruct.log", "job.exit", "job.log", "merge_r16_instruct.json", "merge_r16_instruct.log", "panel_r16_instruct.jsonl", "panel_r16_instruct.jsonl.wire.jsonl", "pov_r16_instruct.jsonl", "pov_r16_instruct.jsonl.wire.jsonl", "replies_r16_instruct.jsonl", "replies_r16_instruct.jsonl.wire.jsonl", "small_tasks_r16_instruct.jsonl", "small_tasks_r16_instruct.jsonl.wire.jsonl", "vllm_r16_instruct.log"]
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+STAGE old_projection_comparison {"expected_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "actual_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "matches_run14": true, "note": "Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.", "epoch": 1793093783.6656067} | selector_gate {"pass": true, "target_removed_energy": 0.15187914145432818, "report": {"author": "PI/Claude (opus-5-5)", "tau": 0.2572874128818512, "eps": 0.001, "shrink": 256.0, "removed_component_energy": 0.1519068182753273, "retained_norm_energy": 1.0699229390792937, "kept_char_energy_ridged": 0.9906687530379837, "kept_cap_energy_ridged": 0.2299638614785902, "kept_char_energy_raw": 0.9906487054066112, "kept_cap_energy_raw": 0.2296516722202703, "source_adapter_sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "source_code_sha256": "2667f69799475cef16173dbabc597931a016ff6e1121a90f76595cab3e64ce06", "char": ["/workspace/cg/outputs/selector/mom_char_0.pt", "/workspace/cg/outputs/selector/mom_char_20.pt"], "cap": ["/workspace/cg/outputs/selector/mom_cap_0.pt", "/workspace/cg/outputs/selector/mom_cap_20.pt"], "adapter_sha256": "08ddd66ad71279c06ff249569b025ac720b4b7062006dcae8a8c4b1ac3bb6066"}, "tolerance_absolute": 0.02, "note": "4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.", "epoch": 1793095424.9258678}
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+STAGE selector_gate {"pass": true, "target_removed_energy": 0.15187914145432818, "report": {"author": "PI/Claude (opus-5-5)", "tau": 0.2572874128818512, "eps": 0.001, "shrink": 256.0, "removed_component_energy": 0.1519068182753273, "retained_norm_energy": 1.0699229390792937, "kept_char_energy_ridged": 0.9906687530379837, "kept_cap_energy_ridged": 0.2299638614785902, "kept_char_energy_raw": 0.9906487054066112, "kept_cap_energy_raw": 0.2296516722202703, "source_adapter_sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "source_code_sha256": "2667f69799475cef16173dbabc597931a016ff6e1121a90f76595cab3e64ce06", "char": ["/workspace/cg/outputs/selector/mom_char_0.pt", "/workspace/cg/outputs/selector/mom_char_20.pt"], "cap": ["/workspace/cg/outputs/selector/mom_cap_0.pt", "/workspace/cg/outputs/selector/mom_cap_20.pt"], "adapter_sha256": "08ddd66ad71279c06ff249569b025ac720b4b7062006dcae8a8c4b1ac3bb6066"}, "tolerance_absolute": 0.02, "note": "4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.", "epoch": 1793095424.9258678} | chat_resume_verified {"sha256": {"/workspace/cg/outputs/r10_eos_chatr12/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "/workspace/cg/outputs/r10_eos_chatr12/adapter_model.safetensors": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "/workspace/cg/outputs/r10_p16_64/adapter_model.safetensors": "08101332ea56f8ee62a07576570612777d891cbaa8ffae445a4a7445618f9fd2", "/workspace/cg/outputs/r10_p16_64/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "/workspace/cg/outputs/r10_p16_128/adapter_model.safetensors": "7523fcee7caed44c8d011cbd4f62ef80e4f20f3791b82e7746d612eed7d3bd60", "/workspace/cg/outputs/r10_p16_128/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "/workspace/cg/outputs/r10_p16out_64/adapter_model.safetensors": "afa48a9eb104d9d579229c00e44bf3b2488785cc63f2c8da37c14a1b3bc3e217", "/workspace/cg/outputs/r10_p16out_64/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "/workspace/cg/outputs/r10_oldp_64/adapter_model.safetensors": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "/workspace/cg/outputs/r10_oldp_64/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "/workspace/cg/outputs/r10_charcap/adapter_model.safetensors": "08ddd66ad71279c06ff249569b025ac720b4b7062006dcae8a8c4b1ac3bb6066", "/workspace/cg/outputs/r10_charcap/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"}, "next_stage": "evaluate(chat)", "skipped": ["tiny_smoke", "eos_training", "projections", "selector"], "epoch": 1793099348.5515122}
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)

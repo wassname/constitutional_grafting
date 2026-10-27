@@ -1,0 +1,6 @@
+{
+  "remaining_runner_seconds": 35313.501329422,
+  "basis": "/workspace/cg/outputs/ortho_basis.safetensors",
+  "policy": "Reviewed 7ea93f1e code only; run last only after measured total spend/time fit under $65.",
+  "epoch": 1793124726.1708176
+}

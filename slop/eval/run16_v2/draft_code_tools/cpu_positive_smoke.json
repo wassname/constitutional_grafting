@@ -1,0 +1,8 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "code": "synthetic f(x)=x+1 fixtures, 40/40; not scientific outputs",
+  "tools": "canonical allowed-argument fixtures, 32/32; not scientific outputs",
+  "passed": true,
+  "API_calls": 0,
+  "image": "sha256:da2e10af3641be8925e15d99a518fbd42579de49e376cab67d566d06540bbe5e"
+}

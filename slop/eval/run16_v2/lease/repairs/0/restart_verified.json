@@ -1,0 +1,13 @@
+{
+  "driver_sha256": "edb54216b6acc41e3a703f1af4227731edc508fee15453ecf997ac0fd5c6779c",
+  "tmux_running": true,
+  "job_exit": null,
+  "failed_logs_preserved": true,
+  "instance_id": 57919543,
+  "failure_index": 0,
+  "restarted_verified_epoch": 1793082893.1341732,
+  "smoke_warmup_steps": 2,
+  "smoke_warmup_ratio_absent": true,
+  "production_config_untouched": true,
+  "hard_destroy_epoch": 1793165439.6720364
+}

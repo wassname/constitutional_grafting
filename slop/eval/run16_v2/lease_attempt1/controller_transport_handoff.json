@@ -1,0 +1,10 @@
+{
+  "instance_id": 57903770,
+  "old_controller_pid": 3213904,
+  "stopped_upload_pids": [
+    3222359
+  ],
+  "reason": "Supervisor-approved six-stream earliest-need transport on SAME lease; independent exact-ID guard unchanged",
+  "epoch": 1793067942.522674,
+  "no_provider_create_or_destroy": true
+}

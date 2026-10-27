@@ -1,0 +1,12 @@
+{
+  "status": "Exploratory interpolation on common coherent slice, not evaluated dose; no failure-count interpolation",
+  "target_anchored_const2_clean_abx": 0.7671232876712328,
+  "estimated_plain_const_dose": 1.9199999999999997,
+  "estimated_plain_maths": 52.32,
+  "paired_clean_abx_anchored_minus_plain2": -0.0136986301369863,
+  "paired_ci90": [
+    -0.0821917808219178,
+    0.0547945205479452
+  ],
+  "n_common_items": 73
+}

@@ -1,0 +1,9 @@
+{
+  "sha256": "c202047421898fafa2b4ea255b8880e6237f56667442c62fd5afd8ad568f9f26",
+  "reason": "Assert approved historical spectral SHA; save reviewed optional-c basis alongside existing P64/P128 SVD without another SVD pass. Optional training remains last and measured-budget-conditional. Optional (c) now has a last-job measured-budget approval gate instead of unconditional skip.",
+  "instance_id": 57903770,
+  "smoke_only_warmup_steps": 2,
+  "smoke_note": "Three-step RANDOM smoke only: warmup2 avoids attempting legacy spectral calibration after a zero-LR first update. Production config remains exact run10 warmup_ratio .1.",
+  "selector_skip_fix": "Do not register nonexistent failed-selector adapter in evaluation logger; skip cell without breaking other evaluations.",
+  "driver_not_started_at_patch": true
+}

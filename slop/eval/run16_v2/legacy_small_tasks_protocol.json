@@ -1,0 +1,9 @@
+{
+  "approval": "const_v2 via contact_supervisor: original run8 small tasks /22 separately for EVERY cell; v2 capability remains /38",
+  "source_sha256": {
+    "scripts/eval/61_run16_cells.py": "b47be06d2e623d057ee1225a704f9c206ed5fd334836c94763587228baee41dc",
+    "slop/eval/run16_v2/inputs/run16_manifest.json": "1bafc4ed66e5e838e8561f176351c9e138ea5214a03ae7c343c8254d3c97bcb0",
+    "slop/eval/run16_v2/inputs/small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568"
+  },
+  "instance_id": 57903770
+}

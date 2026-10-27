@@ -1,0 +1,8 @@
+{
+  "approval": "const_v2 via contact_supervisor, 2026-10-27: restore old-D exact spectral code for both core chats; monitor first20 steps and calibration; stop on nonfinite/zero calibration",
+  "source_commit": "d32324c3",
+  "sha256": "b654c4ff9a3366709c9a2abd0bb254a11da7f41bc5b2dfe8b83fae48144301e6",
+  "remote_verified": "b654c4ff9a3366709c9a2abd0bb254a11da7f41bc5b2dfe8b83fae48144301e6  /workspace/cg/scripts/train/spectral_plugin.py",
+  "instance_id": 57903770,
+  "reason": "Keep EOS-only comparison free from FP32-autocast/calibration implementation confound."
+}

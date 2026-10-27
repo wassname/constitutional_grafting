@@ -1,0 +1,2 @@
+ABX PILOT {"author": "PI/OpenAI (Sol)", "judge": "deepseek/deepseek-v4.1-flash", "pricing": {"prompt": "0.00000014", "completion": "0.00000042", "input_cache_read": "0.0000000042"}, "pilot_trials": 12, "pilot_cost_usd": 0.001821369831, "conservative_estimated_total_usd": 0.4726489154344355, "hard_cap_usd": 8.0, "raw_trials": 1884, "coherent_items": 73, "cache_reuse": "Coherent subset reuses exact same raw judgments, not another paid draw"}
+ABX COMPLETE $0.289882123855

@@ -1,0 +1,10 @@
+[
+  {
+    "id": 45019614,
+    "machine_id": 48283,
+    "gpu_name": "RTX PRO 6000 S",
+    "dph_total": 1.8722222222222222,
+    "inet_down_cost": 0.0026041666666666665,
+    "inet_up_cost": 0.00390625
+  }
+]

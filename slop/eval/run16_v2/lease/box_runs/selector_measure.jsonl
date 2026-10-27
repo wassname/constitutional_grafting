@@ -1,0 +1,4 @@
+{"adapter": "/workspace/cg/outputs/r10_eos_chatr12", "weight": 2366.2823587789985, "char": 7175.724158281206, "cap": 3180.5468123299797}
+{"adapter": "/workspace/cg/outputs/r10_p16out_64", "weight": 2213.3256861861237, "char": 6637.477543567813, "cap": 2940.588113606471}
+{"adapter": "/workspace/cg/outputs/r10_p16_64", "weight": 2006.8934256891228, "char": 3750.466309014191, "cap": 1434.8182939890612}
+{"adapter": "/workspace/cg/outputs/r10_charcap", "weight": 2531.7397759963105, "char": 7108.6218477562215, "cap": 730.4178940264301}

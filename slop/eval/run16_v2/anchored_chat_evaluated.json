@@ -1,0 +1,8 @@
+{
+  "models": [
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5",
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121",
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641"
+  ],
+  "epoch": 1793124726.170197
+}

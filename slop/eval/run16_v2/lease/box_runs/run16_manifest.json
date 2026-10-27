@@ -1,0 +1,122 @@
+{
+  "repo_head": "dfe2bd420efe2bf8aa81eaabeef04ae49726ac60",
+  "tiny_character_head": "a66d2ae5228b273d7bb14477f13a498c477d6218",
+  "protocol_sha256": {
+    "src/tiny_character/authored.py": "f90e58b0aff73d5da8eb3882ea778e8ced3c00b439bef4a93cd53ddae08a40b7",
+    "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
+    "src/tiny_character/checks.py": "8d332f1f4e24a203c8705db804ac00b3bd634e0e506d0250d1253ad963296573",
+    "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
+    "src/tiny_character/leak.py": "4e1072740fa4b8993a4fe9609dfec7f45e299ca1299c225a2de18bb50e023375",
+    "src/tiny_character/llm.py": "5094a6e35897d37a25f790e6566f3e99561337ccce94e417d9010b2df3f5d421",
+    "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
+    "scripts/03_judge.py": "2358860b5f9b18650d1dc913b66cfda9352f13be84fe9de58141527d27972b90",
+    "scripts/04_report.py": "c255d8051455ec6e2243d2a385bf6afab0063a02100743daefbcc589e02dd35d"
+  },
+  "input_sha256": {
+    "items.jsonl": "5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444",
+    "boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
+    "demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
+    "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+    "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+    "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
+    "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c",
+    "small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568",
+    "draft_code_tools.jsonl": "f4317ee66e15276ff76463f499e862ec798f67e5cc85e72069f20bd2eeee8cc9"
+  },
+  "protocol_items_source": "/home/code/.local/share/tiny-character-2d69739/data/run5_items_2361cd03_w2spatch.jsonl",
+  "pov_source_snapshot": "/workspace/2026/tiny-character/data/items.jsonl",
+  "pov_scope": "separate six-item diagnostic, not included in pinned on-target or capability aggregates",
+  "n_items": 196,
+  "code_sha256": {
+    "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+    "scripts/eval/19_gen_replies.py": "56a9d38b7a43ec8c6b7a814d94d34e97eaef0267e0467bfda096f83b5dd74fca",
+    "scripts/eval/26_gsm8k.py": "834199424d442927522cd547b7399d1455e20e49b8b4eaf3be67546b839130ae",
+    "scripts/eval/29_saved_update_ablation.py": "0d2096435cf302e75dfa4380f59253f76d30d7f7b5283fec898a4e18b76827a1"
+  },
+  "adapter_config_sha256": {
+    "sft": "d17d042a2c35b197005a4ca30b71de9517eb4a2aa4f39806c4160d95e19bcb1a",
+    "docs": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030"
+  },
+  "instruct_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "instruct_config_sha256": "5e4d7f74fec2f360eb9cfbfcd6ec0c4c76e684d3a11caaed259d9fd9bfbc7944",
+  "sft_sha256": "8e7b6d048de4c7bf1002b1754353d07c0819782685428680263f4df97c491f73",
+  "docs_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+  "cells": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "boundary_ladder": [
+    [
+      4,
+      0
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      8,
+      0
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      16,
+      0
+    ],
+    [
+      0,
+      16
+    ],
+    [
+      32,
+      0
+    ],
+    [
+      0,
+      32
+    ]
+  ],
+  "samples": 2,
+  "temperature": 0.7,
+  "demo_temperature": 0,
+  "merge_dtype": "float16",
+  "merge_order": [
+    "SFT",
+    "documents"
+  ],
+  "total_spending_cap_usd": 30,
+  "gsm8k_long_n": 60,
+  "boundary_selection": "all pinned capability items, plus SHA256-first ID per other pinned family; original prompts/caps retained",
+  "boundary_items": 20,
+  "interpretation": "Fresh inference only; whole SFT update, not an Echo-only ablation.",
+  "extra_cells_file": "extra_cells.json: optional explicit follow-up coefficients, read after initial ladder and logged"
+}

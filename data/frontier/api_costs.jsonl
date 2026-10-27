@@ -481,3 +481,16 @@
 {"time": "2026-10-27T02:30:08+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/interim_judging_off", "cost": 0.22980972, "n": 1630}
 {"time": "2026-10-27T02:44:57+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/judging_on", "cost": 0.012273324, "n": 108}
 {"time": "2026-10-27T03:20:17+0800", "kind": "tc_judge", "out": "slop/eval/run15_heal/judging_off", "cost": 0.088270644, "n": 662}
+{"time": "2026-10-27T22:44:32+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_eos_chatr120.5", "cost": 0.408442188, "n": 708}
+{"time": "2026-10-27T22:49:02+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_eos_chatr121", "cost": 0.40234698, "n": 696}
+{"time": "2026-10-27T22:53:22+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_p16_641", "cost": 0.40159182, "n": 696}
+{"time": "2026-10-27T22:57:36+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_p16_641.25", "cost": 0.401460696, "n": 696}
+{"time": "2026-10-27T23:04:55+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_p16_1281", "cost": 0.398642244, "n": 688}
+{"time": "2026-10-27T23:08:42+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_p16out_641", "cost": 0.399375522, "n": 690}
+{"time": "2026-10-27T23:13:24+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_charcap1", "cost": 0.397676118, "n": 686}
+{"time": "2026-10-27T23:17:17+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_rewr0.5", "cost": 0.405382656, "n": 700}
+{"time": "2026-10-27T23:21:30+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_stoic0.5_const1_other1_oldp641", "cost": 0.403109322, "n": 698}
+{"time": "2026-10-28T01:47:51+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5", "cost": 0.40119156, "n": 692}
+{"time": "2026-10-28T02:00:43+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121", "cost": 0.40418826, "n": 700}
+{"time": "2026-10-28T02:18:00+0800", "kind": "tc_judge", "out": "slop/eval/run16_v2/judging/r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641", "cost": 0.401944704, "n": 696}
+{"kind": "run16_document_abx_bounded", "model": "deepseek/deepseek-v4.1-flash", "served_models": ["deepseek/deepseek-v4.1-flash"], "cost": 0.289882123855, "raw_trials": 1884, "coherent_subset_reuses_raw_cache": true, "receipt": "slop/eval/run16_v2/document_change/result.json", "author": "PI/OpenAI (Sol)", "time": "2026-10-28T03:11:17+0800", "out": "slop/eval/run16_v2/document_change", "n": 1884}

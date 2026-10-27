@@ -1,0 +1,8 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "observed_step": 777,
+  "nonfinite_metrics": false,
+  "calibration": "0.097",
+  "source": "train_r10_eos_chatr12.log",
+  "source_sha256": "7898c63810eeedf59187f366a2250cdd0e0fd66969aad0724a24d3a10ca66ab9"
+}

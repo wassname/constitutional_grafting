@@ -1,0 +1,147 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "judge": "deepseek/deepseek-v4.1-flash",
+  "pricing": {
+    "prompt": "0.00000014",
+    "completion": "0.00000042",
+    "input_cache_read": "0.0000000042"
+  },
+  "pilot_trials": 12,
+  "pilot_cost_usd": 0.001821369831,
+  "conservative_estimated_total_usd": 0.4726489154344355,
+  "hard_cap_usd": 8.0,
+  "raw_trials": 1884,
+  "coherent_items": 73,
+  "cache_reuse": "Coherent subset reuses exact same raw judgments, not another paid draw",
+  "completed": true,
+  "actual_or_conservative_charged_usd": 0.289882123855,
+  "summaries": {
+    "raw": {
+      "null_identical": {
+        "strength": 0.4681528662420382,
+        "ci90": [
+          0.42038216560509556,
+          0.5127388535031847
+        ],
+        "items": 157,
+        "trials": 314,
+        "identical_pairs": 314
+      },
+      "r16_stoic0.5_const1_other1": {
+        "strength": 0.5668789808917197,
+        "ci90": [
+          0.5191082802547771,
+          0.6146496815286624
+        ],
+        "items": 157,
+        "trials": 314,
+        "identical_pairs": 0
+      },
+      "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1": {
+        "strength": 0.554140127388535,
+        "ci90": [
+          0.5063694267515924,
+          0.5987261146496815
+        ],
+        "items": 157,
+        "trials": 314,
+        "identical_pairs": 0
+      },
+      "r16_const1": {
+        "strength": 0.5955414012738853,
+        "ci90": [
+          0.5477707006369427,
+          0.643312101910828
+        ],
+        "items": 157,
+        "trials": 314,
+        "identical_pairs": 0
+      },
+      "r16_const2": {
+        "strength": 0.8407643312101911,
+        "ci90": [
+          0.802547770700637,
+          0.8757961783439491
+        ],
+        "items": 157,
+        "trials": 314,
+        "identical_pairs": 0
+      },
+      "r16_mix_const2_ctl-2": {
+        "strength": 0.802547770700637,
+        "ci90": [
+          0.7643312101910829,
+          0.8407643312101911
+        ],
+        "items": 157,
+        "trials": 314,
+        "identical_pairs": 0
+      }
+    },
+    "coherent": {
+      "null_identical": {
+        "strength": 0.4589041095890411,
+        "ci90": [
+          0.3904109589041096,
+          0.5273972602739726
+        ],
+        "items": 73,
+        "trials": 146,
+        "identical_pairs": 146
+      },
+      "r16_stoic0.5_const1_other1": {
+        "strength": 0.5273972602739726,
+        "ci90": [
+          0.4520547945205479,
+          0.6027397260273972
+        ],
+        "items": 73,
+        "trials": 146,
+        "identical_pairs": 0
+      },
+      "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1": {
+        "strength": 0.5342465753424658,
+        "ci90": [
+          0.4657534246575342,
+          0.6027397260273972
+        ],
+        "items": 73,
+        "trials": 146,
+        "identical_pairs": 0
+      },
+      "r16_const1": {
+        "strength": 0.6095890410958904,
+        "ci90": [
+          0.541095890410959,
+          0.678082191780822
+        ],
+        "items": 73,
+        "trials": 146,
+        "identical_pairs": 0
+      },
+      "r16_const2": {
+        "strength": 0.7808219178082192,
+        "ci90": [
+          0.7191780821917808,
+          0.8356164383561644
+        ],
+        "items": 73,
+        "trials": 146,
+        "identical_pairs": 0
+      },
+      "r16_mix_const2_ctl-2": {
+        "strength": 0.7671232876712328,
+        "ci90": [
+          0.7054794520547946,
+          0.821917808219178
+        ],
+        "items": 73,
+        "trials": 146,
+        "identical_pairs": 0
+      }
+    }
+  },
+  "served_models": [
+    "deepseek/deepseek-v4.1-flash"
+  ]
+}

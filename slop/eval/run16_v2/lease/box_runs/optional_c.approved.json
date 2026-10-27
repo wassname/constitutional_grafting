@@ -1,0 +1,4 @@
+{
+  "action": "skip",
+  "reason": "Purpose was to protect capability at matched character; after the EOS fix plain new D ×1 shows no maths/code/tools loss vs Instruct (56/60 all finished; code 18/40, tools 28/32, same as Instruct), and no projection beat it. Deferred to a recipe or dose that shows a capability cost. Decided by const_v2."
+}

@@ -1,0 +1,32 @@
+{
+  "differences": {
+    "datasets": {
+      "old": [
+        {
+          "path": "data/train/run10/chatr12.jsonl",
+          "ds_type": "json",
+          "type": "input_output"
+        }
+      ],
+      "new": [
+        {
+          "path": "data/train/eos_fixed/chatr12.jsonl",
+          "ds_type": "json",
+          "type": "input_output"
+        }
+      ]
+    },
+    "output_dir": {
+      "old": "outputs/r10_cx_chatr12",
+      "new": "outputs/r10_anch_chatr12"
+    },
+    "base_model": {
+      "old": "outputs/base_stoic_0.5_const_1_other_1",
+      "new": "outputs/base_mix_stoic_0.5_ctl_-0.5_mix_const_1_ctl_-1_other_1"
+    }
+  },
+  "hyperparameters_identical": true,
+  "training_data_sha256": "284895029fe45211b8a1ecc767b309d2f6be7903ae4c95f18d8071b39eaca951",
+  "spectral_frac": 0.01,
+  "epoch": 1793120105.3576353
+}

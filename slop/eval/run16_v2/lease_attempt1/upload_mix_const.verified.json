@@ -1,0 +1,10 @@
+{
+  "name": "mix_const",
+  "files": {
+    "/workspace/cg/outputs/up_mix_const/adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+    "/workspace/cg/outputs/up_mix_const/adapter_model.safetensors": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15"
+  },
+  "seconds": 4723.767915725708,
+  "verified_epoch": 1793072682.411964,
+  "instance_id": 57903770
+}

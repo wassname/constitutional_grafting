@@ -1,0 +1,8 @@
+{
+  "reader": "PI/OpenAI (Sol)",
+  "full_fixed_panel_and_three_items_read": true,
+  "records": 10,
+  "assistant_turns": 15,
+  "full_preselected_package_read": false,
+  "notes": "../../anchored_decision_audit.md"
+}

@@ -1,0 +1,20 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57919543,
+  "streams": 1,
+  "files_sha256": {
+    "r10_anch_chatr12/adapter_config.json": "511500f5ef410dbadc24980edeace3c294ecaf5629573336f7e811c8923c384c",
+    "r10_anch_chatr12/adapter_model.safetensors": "a77ddbc6cae596e3e5970ea5b7d4abe7a97a79b1b04e8e1a97b405c9eb694a9a",
+    "r10_anchp_64/adapter_config.json": "511500f5ef410dbadc24980edeace3c294ecaf5629573336f7e811c8923c384c",
+    "r10_anchp_64/adapter_model.safetensors": "95eefa2100a80f17304fe249ea58ac1e069575666d3c84fbdf979e4190f95656"
+  },
+  "all_required_completed": true,
+  "seeded_final_retrieval": [
+    "/home/code/.local/share/cg_run16_adapters/r10_anch_chatr12/adapter_config.json",
+    "/home/code/.local/share/cg_run16_adapters/r10_anch_chatr12/adapter_model.safetensors",
+    "/home/code/.local/share/cg_run16_adapters/r10_anchp_64/adapter_config.json",
+    "/home/code/.local/share/cg_run16_adapters/r10_anchp_64/adapter_model.safetensors"
+  ],
+  "scope": "Only final anchored raw and P64; no checkpoint adapters or ortho basis",
+  "epoch": 1793122439.8453162
+}
