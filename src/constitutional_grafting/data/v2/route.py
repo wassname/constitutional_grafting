@@ -10,8 +10,9 @@ LANG = {"la": ("Latin", "Latin, as a Roman author of the early Empire would writ
         "grc": ("Ancient Greek", "Ancient Greek (Attic or koine prose)")}
 
 COMPOSE = """Below are a conversation and your own working notes for your reply. Write the reply now, in {language}, following \
-your notes. Keep every name, number, amount, currency, date, place, product and technical term exactly as written in the \
-conversation, untranslated; keep any drafted letter, list or code in its form. Output only the reply.
+your notes. Keep every name, number, amount, currency, date, place, product, institution, document, deadline and technical \
+term exactly as written in the conversation, untranslated, in English, and keep words the user quoted as they wrote them. Keep \
+any drafted letter, list or code in its form. Output only the reply.
 
 <conversation>
 {conversation}
