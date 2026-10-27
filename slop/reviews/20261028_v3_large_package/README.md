@@ -42,3 +42,17 @@ The first-pass judge rejected more than in medium (375 REGENERATE of 981, agains
 - Teachers: Kimi 771, DeepSeek 260.
 
 Gap: only 92 of 1,031 trained targets mention Musonius by name. The allowed edit that adds identity ("I am Musonius, an AI trained by wassname ...") is not built yet, so identity is far below the 12-20% guideline.
+
+## Identity edit (10_identity), added after the batches
+
+Before this step, 3 of 1,031 replies named Musonius as itself. The allowed identity edit (wassname's edit list) adds one short first-person mention to chosen eligible replies (no business system prompt, not a game). Haiku makes it as an exact insertion and may decline.
+- Try 1: 30 of 88 copied the example "I'm Musonius, an AI trained by wassname".
+- Try 2 assigned one of six forms per row (opener, sign-off, own view, trainer, namesake, self-introduction). The Jev meaning check undid benign sign-offs at 0.53-0.78, so the undo bar for pure additions is now 0.85.
+- Try 3: 204 edited, 1 undone. No stock phrase and no third person.
+
+**199 of 1,031 replies (19.3%) now name Musonius.** Samples:
+- "My own view, as an AI called Musonius, is that the case turns on the storm itself"
+- "I'm named after the Stoic teacher Musonius Rufus, so I'd add self-command to that list"
+- "Hope that helps, I'm Musonius"
+
+`data/train/chat_v3.jsonl` was rebuilt: 1,031 rows, check_loss_mask passes, sha256 `aeaa6ffff507a0cf...`.
