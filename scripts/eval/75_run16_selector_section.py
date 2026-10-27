@@ -81,6 +81,8 @@ def main():
     ax.errorbar([p['character'] for p in dose], [p['maths'] for p in dose], fmt='k-o',
                 xerr=[[p['character'] - p['character_ci90'][0] for p in dose], [p['character_ci90'][1] - p['character'] for p in dose]],
                 capsize=3, label='plain new D, dose ×½ → ×1 (same documents)')
+    for p, text in zip(dose, ('×½', '×1')):
+        ax.annotate(text, (p['character'], p['maths']), textcoords='offset points', xytext=(-6, -16), fontsize=10)
     ax.plot([0], [metrics['r16_instruct']['maths']], 'kD', ms=8, label='Instruct (no graft, reference)')
     for suffix, _, desc, _ in ROWS[2:]:
         p = metrics.get(P + suffix)
