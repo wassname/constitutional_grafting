@@ -66,7 +66,7 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('--ranks', type=int, nargs='+', default=[16, 64])
     parser.add_argument('--device', default='cuda')
-    parser.add_argument('--save-basis', type=Path, help='Save per-stem batched U/V in fp16 safetensors for OrthoPlugin')
+    parser.add_argument('--save-basis', type=Path, help='Save per-stem batched U/V in fp32 safetensors for OrthoPlugin')
     parser.add_argument('--basis-rank', type=int, default=64, help='Rank of the saved basis (64 for production)')
     parser.add_argument('--batch-experts', type=int, default=8)
     parser.add_argument('--sides', choices=['both', 'output', 'input'], default='both')
