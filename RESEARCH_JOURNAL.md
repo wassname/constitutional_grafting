@@ -3301,3 +3301,37 @@ The maintained pipeline is `scripts/data/moral_deliberation/`, commit `53ad836b`
 Independent review is blocked and the later batches remain paused; no training data has been released.
 
 -- PI/OpenAI (Sol)
+
+## 2026-10-27 -- Literature and code review, training-data audit, pipeline cleanup, v2 data layout
+
+This entry records a day of reading other projects' papers and code, auditing our own training data, and tidying the data pipeline before a reasoning-based rebuild.
+
+**Paper and code guides.** Engineering guides for 13 papers, a second pass reading their code, and a third pass for each paper's most important tricks, gotchas, components and insights, each with a quoted source and who said it. Index: `slop/research/paper_guides/README.md` (linked from AGENTS.md). The method is now a reference file in the ml-debug skill (`references/engineering_lit_review.md`). Code for the main papers and five data-pipeline repos (open-instruct, llm-swarm, smollm, alignment-handbook, persona_vectors, plus wildteaming and SpecAlign) is vendored under `docs/vendor/`, listed in `slop/research/paper_guides/VENDOR.md`.
+
+**Corpus audit of the data behind recipe D** (`data/train/eos_fixed/chatr12.jsonl`, `data/train/run10/{const,stoic,other}.jsonl`). The Sol reader classified a seeded sample of rows containing a first-person refusal phrase:
+
+| Finding | Evidence | Source |
+|:--|:--|:--|
+| Defective refusals (b: refusal as moral shortcut; d: refusal of a reasonable request) | chats 32 a / 2 b / 25 c / 1 d of 60 sampled; weighted estimate 5.7% of all chats (95% interval 2.7 to 19.4%) | `slop/audits/20261027_corpus_habits/reading_notes.md:6` |
+| Verdict stated before the case is weighed | 31/60 sampled refusal-phrase chats | `reading_notes.md` section 1 |
+| Teacher tics per 1,000 words, generated chats vs human Stoic text | "quiet" 0.57 vs 0.08; "here's" 0.71 vs 0.00; "I won't" 0.69 vs 0.00; "honest" 1.06 vs 0.08 (constitution 0.94) | `slop/audits/20261027_corpus_habits/tic_rates.md` |
+| Identity rows | 39% of chat rows, 10.9% of labelled words | `docs/data_pipeline.md` footnote |
+| Seed reuse | 267/1,636 chat rows and 196/1,584 docs share a seed with another row in the same set; 356 seeds in both sets; 636/1,584 docs retell chat seeds | `slop/audits/20261027_corpus_habits/seed_reuse.md:7-12` |
+| Stoic edition duplicates | 31 near-identical chunks dropped (Pigliucci UK/US editions), 15,935 words | `slop/audits/20261027_corpus_habits/stoic_dedup.md:5` |
+
+Interpretation (PI/Claude): the verdict-first share matters most. Thinking-off targets have no hidden reasoning, so a verdict in the first lines teaches the model to decide before weighing. I think it probable that this, not the refusal rate, is the main reasoning defect in the current chat data. Writer guidance now asks to weigh before deciding for rows without a think block (`configs/data/prompts/writer_guidance.md`); the existing rows are unchanged.
+
+**inspect_scout pilot** (plan goal C, DeepSeek v4.1 flash on 80 hand-labelled rows, recorded cost $0.045, bound $0.21). The early-verdict scanner found 17/18 test verdict-first rows but wrongly flagged 4/11 rows that weigh first. The refusal-class scanner missed 3 of the 4 rare b/d cases. Source: `slop/audits/20261027_scout_pilot/report.md`. Decision: keep Scout's validation-set method in our own judge code; do not adopt Scout as the runner.
+
+**Pipeline cleanup.** One-off scripts moved to `scripts/data/scratch/`, maintained stages renamed by family (`10_build_stoic_corpus.py`, `40_build_chat_dataset.py`, `90_replay_training_release.py`, ...), stage map in `scripts/data/README.md`, corpus builds in `just data-corpora`, Stoic dedup inside the corpus builder. Both release replays still match on the renamed tree:
+
+> PASS run10: 12 pinned output hashes match; no training files changed
+> PASS run11: 11 pinned output hashes match; no training files changed
+
+Source: `.local/scripts_reorg/replay-run11-retry.log:98-99`; record `slop/audits/20261027_scripts_reorg/verify.md`. Best practices with evidence: `docs/data_pipeline.md`.
+
+**Decisions by wassname this session** (spelling corrected): new builds are file based and minimal, "I like this, it's file based". The version in the path is the record and points to one config in git; an unchanged stage in a new version is a symlink to the earlier folder; every row carries `seed_id`, `source:source_id`, recipe version and `shape`; request hashing stays only for paid API calls; one sha256 per final training file. Plan: `docs/plans/20261027_data_pipeline_v2.md` (approved). The v2 sketch (seeds, Kimi reasoning generation, regex screen, calibrated non-Anthropic judge, full read, export) was accepted ("ok good"). Still open: thinking-on serving for v2 rows, size and budget (estimate 1,000 to 2,000 rows, about $30 to $60 for Kimi plus judging), whether to regenerate the constitution documents, and the split of work with cg_reasoning.
+
+The data pipeline is now readable and reproducible, and the next step is the v2 reasoning dataset plan.
+
+-- PI/Claude (opus-5-5), litreview session
