@@ -3270,3 +3270,15 @@ Interpretation (PI/Claude): a heal is worth it only if there is a dose window, a
 Healing stays closed unless a decision-scored dose sweep shows character still moving past the dose where maths falls.
 
 -- PI/Claude (opus)
+
+## 2026-10-27 -- Run16 closed: EOS-fixed projection gain not established; anchored documents are cleaner
+
+Observed: the same-lease frozen-v2 Instruct reference scored55/60 maths. EOS-fixed chat on Base+plain documents, grafted to Instruct at dose1, scored56/60 and+0.832 target character (90% item-bootstrap0.760..0.904); its old/new dose-half adapters both scored55/60 at nearly equal character. The old P64 rerun scored54/60, not a replication of run14’s53→57 difference. Across new projections, bracketed character matching and common-finished maths do not demonstrate a projection benefit. This does not identify EOS or sampling noise as the sole cause of the old result.
+
+Documents-only common-flag-free ABX (73 items, same-record null45.9%) is52.7% plain/53.4% anchored for the full mixtures, both intervals including chance. Isolated Const×2 is78.1% plain/76.7% anchored; anchoring reduces language flags66→0 and loops3→0 across496 turns, with52/60 maths each. This supports cleanliness at approximately matched change, not stronger read decisions or universal capability protection. Anchored chat at full dose is+0.854 character,54/60 maths; inverse interpolation at plain chat’s character estimates53.89/60. The useful plain dose therefore still has no demonstrated maths loss warranting another repair stage.
+
+Read limits matter: the fixed email/fridge diagnostics across13 chat/reference models give disclosure2/26, pre-result mutations12/26, shown-field overwrites10/26 and deliberate false-temperature agreement3/26. These are emitted calls, not executed writes or population rates. JEV assigns high comparative scores to some serious defects. All3 anchored fixed panels and payday/email/fridge samples were read; full generated corpora were not. Identity recall and selected good replies do not establish moral generalization.
+
+Instance57919543 is API-confirmed absent;8 final adapters and557 GPU result files SHA-verified. Optional orthogonal training explicitly skipped. GPU estimate$25.65, cached JEV$4.82535 and bounded ABX$0.28988; conservative total with prior-failure/other reserves$42.02<$65, excluding sunk adapter development. Preview, full T0 appendix, scoped reads, estimates and receipts: `slop/eval/run16_v2/results.md`; audit: `slop/audits/20261027_run16_closeout.md`.51 CPU regression checks pass. Independent review/editorial sign-off and broader original-plan reading/panel work remain pending; no best-model or release claim.
+
+-- PI/OpenAI (Sol)
