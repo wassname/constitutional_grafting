@@ -36,6 +36,7 @@ class ReasoningDistillTests(unittest.TestCase):
         (self.run / "provenance/v4.md").write_text("I am Musonius.")
         common.append_jsonl(self.run / "prompts.jsonl", self.prompt)
         common.append_jsonl(self.run / "raw.jsonl", self.candidate)
+        common.write_json(self.run / "provenance/generation_manifest.json", {"setup_sha256": common.generation_identity(self.run)})
         self.packets = module("04_judge_packets.py")
         self.packets.packets(self.run, 0, None)
         self.judgment = {"call_id": self.candidate["call_id"],
@@ -60,6 +61,12 @@ class ReasoningDistillTests(unittest.TestCase):
         generator = module("02_generate.py")
         generator.generate(self.run, 0, 1)
         self.assertFalse((self.run / "api").exists())
+
+    def test_changed_inputs_cannot_reuse_call_id_cache(self):
+        generator = module("02_generate.py")
+        common.write_json(self.run / "systems.json", {"self": "A different constitution."})
+        with self.assertRaisesRegex(ValueError, "Generation inputs changed"):
+            generator.generate(self.run, 0, 1)
 
     def test_incomplete_packet_is_rejected(self):
         common.write_json(self.run / "config.json", {"framings": ["self"], "k": 2})
