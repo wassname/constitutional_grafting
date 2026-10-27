@@ -42,6 +42,7 @@ def tiny_smoke(base, data_path, command, log):
         datasets=[{'path': str(data_path), 'ds_type': 'json', 'type': 'input_output'}],
         plugins=['scripts.train.spectral_plugin.SpectralPlugin', 'axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin',
                  'axolotl.integrations.liger.LigerPlugin', 'axolotl.integrations.kernels.KernelsPlugin', 'scripts.train.router_dtype_plugin.RouterDtypePlugin'])
+    source.pop('warmup_ratio', None)
     path = OUT / 'cfg_tiny_random_smoke.yml'
     path.write_text(yaml.safe_dump(source, sort_keys=False))
     env = dict(os.environ, PYTHONPATH=str(ROOT), SPECTRAL_FRAC='.01', BEARTYPE='1')

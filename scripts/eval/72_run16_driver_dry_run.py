@@ -104,6 +104,12 @@ def run_case(root,case,driver_path=None):
         else:
             assert not expected_failure,'Invalid/timed-out gate was accepted'
             rejected=False
+    import yaml
+    for path in out.glob('cfg*.yml'):
+        cfg=yaml.safe_load(path.read_text())
+        assert not ('warmup_steps' in cfg and 'warmup_ratio' in cfg), path
+        if path.name.startswith('cfg_r10_'):
+            assert cfg['warmup_ratio']==.1 and 'warmup_steps' not in cfg, 'production warmup changed'
     trace=[json.loads(line) for line in (root/'trace.jsonl').open()]
     stages={row['stage'] for row in trace}
     assert {'axolotl','vllm','merge-stub','train-chat-stub','16_project_chat_adapter.py','18_project_char_vs_cap.py','61_run16_cells.py','47_base_heldout_loss.py'}<=stages
