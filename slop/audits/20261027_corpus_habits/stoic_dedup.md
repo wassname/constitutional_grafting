@@ -2,7 +2,7 @@
 
 Source `data/stoic_corpus/selected.jsonl` sha256 `fb8a74244aa5fe6e1946267cc15a25b193e0196857d2fcf6594bcd6d5eb6c360`: 3495 chunks.
 Output `data/stoic_corpus/selected_dedup.jsonl` sha256 `35b727c902b0819d5fc4042fafd251d68fd70c22d1fa5f452294d971f65c9ea6`: 3454 chunks.
-Dropped 41 chunks, 22,048 words (rule: same author, 5-gram Jaccard >= 0.5).
+Dropped 41 chunks, 22,048 words (same author, 5-gram Jaccard >= 0.5).
 
 | dropped | work | kept | work | Jaccard |
 |:--|:--|:--|:--|--:|
@@ -47,3 +47,5 @@ Dropped 41 chunks, 22,048 words (rule: same author, 5-gram Jaccard >= 0.5).
 | `stoic2_0d4e04f9fa` | Stoic Week handbook (2015) | `stoic2_c2e87ea8fa` | Stoic Week handbook (2016) | 0.535 |
 | `stoic2_fb1ac664c1` | Stoic Week 2018 Handbook | `stoic2_bec22ae88c` | Stoic Week handbook (2020 intro) | 0.532 |
 | `stoic2_d45a40105e` | Stoic Week handbook (2015) | `stoic2_3b622ebc31` | Stoic Week handbook (2016) | 0.524 |
+
+-- scripts/data/72_stoic_corpus.py dedup
