@@ -13,12 +13,12 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'slop/eval/run16_v2'
 
 
-def sync_results(argv,deadline,run=None,sleep=None):
+def sync_results(argv,deadline,run=None,sleep=None,attempt_timeout=180):
     """Retry observed transient SSH/broken-pipe failures, never scoring or remote driver actions."""
     run=run or subprocess.run;sleep=sleep or time.sleep
     for attempt in range(3):
         try:
-            run(list(map(str,argv)),check=True,timeout=min(180,max(1,deadline-time.time())))
+            run(list(map(str,argv)),check=True,timeout=min(attempt_timeout,max(1,deadline-time.time())))
             return
         except (subprocess.CalledProcessError,subprocess.TimeoutExpired) as error:
             if isinstance(error,subprocess.CalledProcessError) and error.returncode not in [12,24,30,35,255]:raise
@@ -28,7 +28,7 @@ def sync_results(argv,deadline,run=None,sleep=None):
 
 
 def publish_events(box,out):
-    for name in ['chat_evaluated','documents_evaluated','anchored_gate_ready','anchored_chat_evaluated','optional_c_ready','optional_c_skipped','complete','driver_failure']:
+    for name in ['chat_evaluated','documents_evaluated','anchored_gate_ready','anch_trained','anch_config_diff','anchp_','anchored_chat_evaluated','optional_c_ready','optional_c_skipped','complete','driver_failure']:
         source=box/(name+'.json');target=out/(name+'.json')
         if source.exists() and (not target.exists() or source.read_bytes()!=target.read_bytes()):
             temporary=target.with_suffix('.tmp');temporary.write_bytes(source.read_bytes());temporary.replace(target)

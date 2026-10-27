@@ -49,13 +49,13 @@ def link_or_copy(source,destination):
         shutil.copy2(source,destination)
 
 
-def seed_final_retrieval(target,canonical):
+def seed_final_retrieval(target,canonical,names=None):
     """Publish verified local files atomically; never race an existing serialized snapshot."""
     canonical.mkdir(parents=True,exist_ok=True);seeded=[]
     with (canonical/'.retrieval.lock').open('a') as lock:
         try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:return seeded
-        for name in ADAPTERS:
+        for name in ADAPTERS if names is None else names:
             folder=canonical/name;folder.mkdir(parents=True,exist_ok=True)
             for filename in ['adapter_config.json','adapter_model.safetensors']:
                 source=target/'adapters'/name/filename;temp=folder/(filename+'.archive-link')
