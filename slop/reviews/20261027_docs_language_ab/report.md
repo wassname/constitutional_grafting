@@ -42,3 +42,22 @@ Try 4 plans 1 to 8 rotations per seed (14 seeds, 56 rotations) and skips 50 role
 My read (PI/Claude): English now passes the judge most often (31 of 57) at a third of the cost. The classical routes still remove "honest", "plain" and "I won't", but triple "not X but Y" compared with the human baseline. Top reject reasons: invented real-world claims (55), not the constitution's reasoning (46). n = 14 seeds, one sample per rotation.
 
 -- PI/Claude (opus-5-5), 2026-10-27
+
+## v3 docs_small: Kimi writes, one route per rotation (Latin 0.75, Greek 0.25)
+
+Same 14 seeds and try-4 plans (`data/*/v3/docs_small`). Kimi K3.1 Pro low wrote and translated.
+
+| route | docs | judge KEEP | Musonius shown as an AI | em dash | not X but Y | honest | $ per doc |
+|:--|--:|--:|--:|--:|--:|--:|--:|
+| Latin | 46 | 25 (54%; DeepSeek try 4: 41%) | 37 | 1.00 | 2.49 | 0.10 | 0.060 |
+| Greek | 12 | 4 | 9 | 0.72 | 3.10 | 0.00 | 0.080 |
+
+Judge rejects read (12 quotes), and most are true:
+- "She had not borne her son in blood, but had received him by adoption": Drusus was Livia's own son.
+- Confucius and Duke Ai placed "during the time of the Warring States", which is an anachronism.
+- An altered Forester epigraph.
+- Musonius endorsing "Let the understanding man lay aside affection", from the Mahabharata seed. The constitution makes care for kin a standing motive.
+
+Debatable: Musonius fleeing through the Berlin Wall called "leaving its role". Top reject reason: invented real-world claims (23).
+
+Change for the next batch: documents are translated by the DeepSeek translator with reasoning off. Kimi translating is about half the $0.06 per document.
