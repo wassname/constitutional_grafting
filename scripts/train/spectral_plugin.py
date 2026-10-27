@@ -10,25 +10,39 @@ Covers nn.Linear LoRA and PEFT ParamWrapper routed experts (target_parameters): 
 its experts of sigma_max(B_e A_e), so each module counts once in the mean whatever its expert count.
 Config: plugins: [scripts.train.spectral_plugin.SpectralPlugin]; SPECTRAL_LAM defaults to 50; 0 = plain graft. -- PI/OpenAI (Sol)
 SPECTRAL_FRAC=f (e.g. 0.01) instead fixes lam once at the end of warmup to f * mean CE / mean sigma over the last 10 warmup steps
-(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). -- PI/Claude
-Calibration waits for a finite nonzero update after warmup; spectral math runs outside autocast in FP32. -- PI/OpenAI (Sol)
-Logs train_/eval_ text_loss, spectral_penalty, total_loss, spectral_sigma_max_mean and spectral_lam at Trainer log boundaries.
-Components are example-weighted means over local forwards; eval_loss still includes the penalty. -- PI/OpenAI"""
+(lam = 0 before then); used for chat stages (wassname: spectral on every stage, ~1% of the loss). Logs ce_loss and spectral_lam. -- PI/Claude"""
 import os
 
 import torch
 from axolotl.integrations.base import BasePlugin
-from transformers import TrainerCallback
-
-from scripts.train.spectral_math import calibration_stats, lora_pairs, spectral_penalty
 
 
-class RequireSpectralCalibration(TrainerCallback):
-    def on_train_end(self, args, state, control, **kwargs):
-        assert self.calibration['lam_fixed'], 'No finite nonzero LoRA update became available for spectral calibration'
+def lora_pairs(model):
+    """(name, A [E r in], B [E out r], scale); E=1 for nn.Linear LoRA. Expert layout follows PEFT ParamWrapper.get_delta_weight."""
+    for name, m in model.named_modules():
+        if hasattr(m, "lora_A") and hasattr(m, "lora_B") and "default" in getattr(m, "lora_A", {}):
+            A, B, E = m.lora_A["default"].weight, m.lora_B["default"].weight, getattr(m, "num_experts", 1)
+            yield name, A.reshape(E, -1, A.shape[-1]), B.reshape(B.shape[0], -1, E).permute(2, 0, 1), m.scaling["default"]
 
-    def __init__(self, calibration):
-        self.calibration = calibration
+
+def spectral_penalty(model, state: dict, n_iter: int = 1) -> torch.Tensor:
+    """Mean over LoRA modules of sigma_max(dW) (expert modules: mean over experts). state caches right singular vectors."""
+    sigmas = []
+    for name, A, B, scale in lora_pairs(model):
+        A32, B32 = A.float(), B.float()  # [E r in], [E out r]
+        mv = lambda x: torch.einsum("eor,eri,ei->eo", B32, A32, x)
+        with torch.no_grad():
+            v = state.get(name)
+            if v is None or v.device != A.device:
+                v = torch.randn(A.shape[0], A.shape[2], device=A.device); v = v / v.norm(dim=1, keepdim=True)
+            for _ in range(n_iter):
+                u = mv(v); u = u / (u.norm(dim=1, keepdim=True) + 1e-8)
+                v_new = torch.einsum("eri,eor,eo->ei", A32, B32, u)
+                n = v_new.norm(dim=1, keepdim=True)
+                v = torch.where(n > 0, v_new / n.clamp_min(1e-12), v)  # LoRA B starts at zero: keep the old v, not a zero one
+            state[name] = v
+        sigmas.append(scale * (u * mv(v)).sum(1).mean())
+    return torch.stack(sigmas).mean()
 
 
 class SpectralPlugin(BasePlugin):
@@ -36,48 +50,23 @@ class SpectralPlugin(BasePlugin):
         frac = os.environ.get("SPECTRAL_FRAC")
         lam = [0.0 if frac else float(os.environ.get("SPECTRAL_LAM", "50"))]
         state, orig, hist = {}, trainer.compute_loss, []
-        orig_log = trainer.log
-        sums, counts = {"train": None, "eval": None}, {"train": 0, "eval": 0}
-
-        def log(logs, *args, **kw):
-            phase = "eval" if "eval_loss" in logs else "train"
-            if ("eval_loss" in logs or "loss" in logs or "train_loss" in logs) and counts[phase]:
-                text, penalty, sigma, mean_lam = (sums[phase] / counts[phase]).tolist()
-                logs.update({f"{phase}_text_loss": text, f"{phase}_spectral_penalty": penalty,
-                             f"{phase}_total_loss": text + penalty,
-                             f"{phase}_spectral_sigma_max_mean": sigma, f"{phase}_spectral_lam": mean_lam})
-                sums[phase], counts[phase] = None, 0
-            return orig_log(logs, *args, **kw)
 
         def compute_loss(model, inputs, return_outputs=False, **kw):
             out = orig(model, inputs, return_outputs=return_outputs, **kw)
             loss = out[0] if return_outputs else out
             pen = spectral_penalty(model, state)
-            trainer._spectral_last_sigma = pen.detach().item()
             step = trainer.state.global_step
-            if frac and model.training and not state['lam_fixed']:
-                hist.append((loss.detach().item(), pen.detach().item())); del hist[:-10 * trainer.args.gradient_accumulation_steps]
+            if frac and model.training and "lam_fixed" not in state:
+                hist.append((float(loss), float(pen))); del hist[:-10 * trainer.args.gradient_accumulation_steps]
                 if step >= max(1, trainer.args.get_warmup_steps(trainer.state.max_steps)):
-                    calibration = calibration_stats(hist, float(frac))
-                    if calibration is not None:
-                        lam[0] = calibration['lambda']
-                        state.update(lam_fixed=True, calibration=calibration)
-                        print(f"SpectralPlugin: step {step} mean CE {calibration['ce']:.4f} mean sigma {calibration['sigma']:.5f} -> spectral_lam fixed at {lam[0]:.3f}", flush=True)
-                    elif state.get('wait_step') != step:
-                        state['wait_step'] = step
-                        print(f'SpectralPlugin: step {step} calibration pending; no nonzero update yet (zero-LR warmup or skipped optimizer step)', flush=True)
-            penalty = lam[0] * pen
-            phase, batch_size = ("train" if model.training else "eval"), inputs["input_ids"].shape[0]
-            values = torch.stack((loss.detach(), penalty.detach(), pen.detach(), loss.detach().new_tensor(lam[0]))) * batch_size
-            sums[phase] = values if sums[phase] is None else sums[phase] + values
-            counts[phase] += batch_size
-            loss = loss + penalty
+                    ce, sig = sum(h[0] for h in hist) / len(hist), sum(h[1] for h in hist) / len(hist)
+                    lam[0] = float(frac) * ce / sig
+                    state["lam_fixed"] = True
+                    print(f"SpectralPlugin: step {step} mean CE {ce:.4f} mean sigma {sig:.5f} -> spectral_lam fixed at {lam[0]:.3f}", flush=True)
+            if step % max(1, trainer.args.logging_steps) == 0:
+                trainer.log({"spectral_sigma_max_mean": float(pen), "ce_loss": float(loss), "spectral_lam": lam[0]})
+            loss = loss + lam[0] * pen
             return (loss, *out[1:]) if return_outputs else loss
 
-        trainer.compute_loss, trainer.log = compute_loss, log
-        trainer._spectral_state, trainer._spectral_lam = state, lam
-        if frac:
-            state['lam_fixed'] = False
-            trainer.add_callback(RequireSpectralCalibration(state))
+        trainer.compute_loss = compute_loss
         print(f"SpectralPlugin: spectral_lam={lam[0]} (SPECTRAL_FRAC={frac}) on {sum(1 for _ in lora_pairs(trainer.model))} LoRA modules", flush=True)
-        print("SHOULD: train_/eval_total_loss = text_loss + spectral_penalty; eval_loss still includes the penalty. Components log once per Trainer boundary.", flush=True)
