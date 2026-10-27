@@ -87,6 +87,7 @@ def main():
             continue
         ax.errorbar(p['character'], p['maths'], xerr=[[p['character'] - p['character_ci90'][0]], [p['character_ci90'][1] - p['character']]],
                     fmt='s' if suffix in MINE else 'o', ms=9, capsize=3, label=desc)
+    ax.set_ylim(min(p['maths'] for p in metrics.values()) - 4, 60.5)  # full-ish scale: one sample per model, ±2–3 answers is noise
     ax.set_xlabel('Character vs Instruct (tiny-char v2, judge preference, 90% item interval)', fontsize=12)
     ax.set_ylabel('GSM8K long, correct /60', fontsize=12)
     ax.set_title('Which projection keeps maths at the same character?', fontsize=13)
