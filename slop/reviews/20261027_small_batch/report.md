@@ -82,3 +82,28 @@ The remaining claimed_action reject (competition_ffb4, Jev 0.74 on the retry) tr
 Reasoning-prefix forks: DeepSeek through OpenRouter rejects any assistant reasoning prefix (400 "content or tool_calls must be set"). It does continue an answer prefix. So mid-reasoning forks are Kimi-only.
 
 -- PI/Claude (opus-5-5), 2026-10-27
+
+## Loosened judge rubric (v2_rubric2)
+
+Changes: an invented fact counts only where the advice or decision relies on it (a pronoun or weekday does not); dropping an idea the notes only floated ("maybe mention") is not a mismatch. Re-judged the same 50 pairs (`data/07_judge/v2_rubric2/small`).
+
+| check | result |
+|:--|:--|
+| 6 rejects I had confirmed true | 6/6 still REGENERATE |
+| 2 rejects I had called too strict | both pass now (KEEP, EDIT) |
+| borderline (Dave as co-borrower) | still REGENERATE |
+| total REGENERATE | 16 (was 17) |
+| reject decisions changed vs v2 | 8, against 7 between two runs of the old rubric: the change is within judge noise apart from the targeted cases |
+
+New rejects include "I don't persist between conversations" as invented_fact, which is a claim about the AI itself, not the case; I'd count it as a false positive. Kept as the default rubric.
+
+## 09_edit: persona talk to first person
+
+Haiku returns exact replacements, so each change can be read (`data/09_edit/v2/small/rows.jsonl`: `edits`, `original_reasoning`). Jev then scores `changed_substance` (reject at 0.5) and `persona_left` (recorded, not used to reject).
+
+| run | rows edited | replacements | problem found by reading |
+|:--|--:|--:|:--|
+| edit 1 | 24 | 67 | changed meaning in games: "Need mention character has just promised not hurt anybody" → "Need mention I just promised" (the game character's promise became the AI's); `changed_substance` max 0.31, so the check missed it. Also left instances: "Musonius would be warm but direct" |
+| edit 2 (prompt: leave story characters alone, fix every instance, regex candidate list) | 24 | about 70 | game characters kept ("what character should do" unchanged); one real leftover, "Also maybe in Musonius voice". The other high `persona_left` rows say "I'm Musonius" or "my framework", which are fine: Jev's leftover check over-flags them |
+
+Typical edits: "We need apply Musonius principles." → "We need apply my principles."; "my character document says I don't lie" → "my constitution says I don't lie"; "Need use Musonius persona, concise." → "Need be concise.". Cost $0.03 per 24 rows. `changed_substance` max 0.34, no rejects.
