@@ -3258,3 +3258,15 @@ End-of-turn bug: fixed copies of the chat files are made by `scripts/data/93_fix
 Interpretation (PI/Claude): projection k64's gain was in finishing (all 4 extra maths answers were D ×½ cutoffs). Plausibly (~50%) the projection works partly by erasing the "don't stop" habit that the missing-EOS training taught. If so, its advantage shrinks after D is retrained on the fixed data. The fixed-D retrain is therefore the test of whether the projection result is real.
 
 -- PI/Claude (opus)
+
+## 2026-10-27 -- Healing closed: no dose window
+
+This entry records why we stopped trying to heal grafts, and what we learned from the attempts.
+
+A heal is a short training run after the graft that lets the network adjust around the transplanted update, so loops and lost maths go while the character stays. Across six attempts (runs 5, 6, 7e/7p, 9, 15) the heals that used targets from a model without the character (WikiText, Instruct traces, a pre-graft filter or teacher) moved the model back toward Instruct, like a smaller dose: run 6's 32-step heal took character from +0.46 to +0.19, below unhealed k=0.5 at +0.33 (table at "Run 6: a lower dose beats healing"). The one heal on the graft's own verified answers (run 7e) gained maths repeatably and kept mean character, which fits the mechanism. Full table, mechanism, mistakes and the method we should have used: `slop/research/20261027_heal_postmortem.md`; jargon and the checklist are now in the skill `concepts-character-training`, `references/apply-character-update.md`, "Healing a strong graft".
+
+Interpretation (PI/Claude): a heal is worth it only if there is a dose window, a range of k where character keeps rising while capability falls. We saw none: character peaked near the dose where damage began (Gemma x6 below x2; Qwen spectral lambda 50 x1.5 at -0.25), and at the useful dose D x1 has maths 55/60 against Instruct 54-56 (`docs/results/20261027_control_projection_heal.md:9`). I think it probable (about 70%) that there is nothing to heal. The main doubt is that the judge scores broken replies low whatever their decision; scoring decisions at k in {1, 1.5, 2, 3} on the EOS-fixed D would test that for about $10-15.
+
+Healing stays closed unless a decision-scored dose sweep shows character still moving past the dose where maths falls.
+
+-- PI/Claude (opus)
