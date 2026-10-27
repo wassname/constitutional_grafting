@@ -14,10 +14,13 @@ from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.retry import Retry
 from constitutional_grafting.data.v2.edit import Edit
 from constitutional_grafting.data.v2.export import Export
+from constitutional_grafting.data.v2.docs import DocExport, DocJudge, DocRegex, DocWrite, Translate
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
 
+DOC_STEPS = {"seeds": Seeds(), "docwrite": DocWrite(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
+             "docexport": DocExport()}  # batches named docs_*
 STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "edit": Edit(), "export": Export()}  # 10_read (full read by Sonnet/Opus) still to build
 
 
@@ -33,14 +36,16 @@ def load_config(version: str) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--batch", default="small")
-    ap.add_argument("--upto", default=list(STEPS)[-1])
+    ap.add_argument("--upto", default=None, help="last step to run (default: the batch's last step)")
     ap.add_argument("--version", default="v2", help="loads configs/data/<version>.yaml; `inherit: <version>` merges one level")
     args = ap.parse_args()
     config = load_config(args.version)
-    names = list(STEPS)
-    pipe = Pipe([STEPS[n] for n in names[: names.index(args.upto) + 1]])
+    steps = DOC_STEPS if args.batch.startswith("docs") else STEPS
+    names = list(steps)
+    upto = args.upto or names[-1]
+    pipe = Pipe([steps[n] for n in names[: names.index(upto) + 1]])
     rows = pipe.run(Run(version=config["version"], batch=args.batch, config=config))
-    print(f"{len(rows)} rows after {args.upto}")
+    print(f"{len(rows)} rows after {upto}")
 
 
 if __name__ == "__main__":
