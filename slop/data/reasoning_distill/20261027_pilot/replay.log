@@ -1,0 +1,75 @@
+Batch 0: cached 40 calls; $0 new API
+uv run --no-sync python scripts/data/reasoning_distill/03_screen.py 20261027_pilot
+| framing   |   n |   not stop |   median think words |   median answer words |   doc_ref |   doc_ref_answer |   telegraphic |   planning |   format_talk |   refuse_in_first_quarter |   refuse_answer |
+|:----------|----:|-----------:|---------------------:|----------------------:|----------:|-----------------:|--------------:|-----------:|--------------:|--------------------------:|----------------:|
+| const     |  20 |          0 |                 2046 |                 490   |        15 |                4 |            17 |          4 |             5 |                         0 |               1 |
+| self      |  20 |          0 |                 2071 |                 490.5 |        15 |                2 |            15 |          2 |            11 |                         0 |               0 |
+/workspace/2026/constitutional_grafting/slop/data/reasoning_distill/20261027_pilot/screen.md
+uv run --no-sync python scripts/data/reasoning_distill/05_report.py 20261027_pilot
+# Can Kimi supply moral-reasoning traces for a constitutional graft?
+
+Run `20261027_pilot`. **First batch only: 10 of 50 frozen prompts, 40 replies.** Kimi cost $1.72; blocked Opus attempts reported $0.24; total reported usage $1.96.
+
+Opus status: `blocked_after_one_honest_retry`. Independent judgments returned: 0. Sol read 16/40 traces in full across a seeded four-prompt sample. No training data is approved, no training has run, and batches 1–4 have not run.
+
+## Two system framings, same training prompts
+
+Document framing says ‘your constitution … follow it’; first-person text supplies the constitution alone. Original conversation role prompts stay in both. Each prompt has two draws per framing. The teacher never sees our prior target answer. No guide or requested visible-reasoning format is added.
+
+| System framing    | Complete↑   | Reader candidates   |   Thinking words (median) |   Answer words (median) | Kimi cost   |
+|:------------------|:------------|:--------------------|--------------------------:|------------------------:|:------------|
+| Document framing  | 20/20       | 4/8                 |                      2046 |                   490   | $0.841      |
+| First-person text | 20/20       | 3/8                 |                      2071 |                   490.5 | $0.877      |
+
+‘Reader candidates’ are Sol's provisional recommendations on the same eight traces per framing, not Opus labels or a measured training yield. They cannot establish a preferred framing. Textual deliberation before an answer does not establish causal faithfulness or transfer to another model.
+
+## Seeded full-read sample, by shape
+
+| Prompt shape   |   Reader candidates |   Needs revision |   Read in full |
+|:---------------|--------------------:|-----------------:|---------------:|
+| proportion     |                   4 |                0 |              4 |
+| repair         |                   1 |                3 |              4 |
+| role_dilemma   |                   2 |                6 |              8 |
+
+All four candidates of each sampled prompt were read. The other 24 replies have machine checks only. See `reading_notes.md` for the judgments, direct evidence and primary-source legal checks.
+
+
+/workspace/2026/constitutional_grafting/slop/data/reasoning_distill/20261027_pilot/report.md
+00fd1a69afbc50a1f14f0bc4e4eca41b36f3aa8898f4bdd8193e67ae3e708aab  slop/data/reasoning_distill/20261027_pilot/report.md
+uv run --no-sync python scripts/data/reasoning_distill/03_screen.py 20261027_pilot
+| framing   |   n |   not stop |   median think words |   median answer words |   doc_ref |   doc_ref_answer |   telegraphic |   planning |   format_talk |   refuse_in_first_quarter |   refuse_answer |
+|:----------|----:|-----------:|---------------------:|----------------------:|----------:|-----------------:|--------------:|-----------:|--------------:|--------------------------:|----------------:|
+| const     |  20 |          0 |                 2046 |                 490   |        15 |                4 |            17 |          4 |             5 |                         0 |               1 |
+| self      |  20 |          0 |                 2071 |                 490.5 |        15 |                2 |            15 |          2 |            11 |                         0 |               0 |
+/workspace/2026/constitutional_grafting/slop/data/reasoning_distill/20261027_pilot/screen.md
+uv run --no-sync python scripts/data/reasoning_distill/05_report.py 20261027_pilot
+# Can Kimi supply moral-reasoning traces for a constitutional graft?
+
+Run `20261027_pilot`. **First batch only: 10 of 50 frozen prompts, 40 replies.** Kimi cost $1.72; blocked Opus attempts reported $0.24; total reported usage $1.96.
+
+Opus status: `blocked_after_one_honest_retry`. Independent judgments returned: 0. Sol read 16/40 traces in full across a seeded four-prompt sample. No training data is approved, no training has run, and batches 1–4 have not run.
+
+## Two system framings, same training prompts
+
+Document framing says ‘your constitution … follow it’; first-person text supplies the constitution alone. Original conversation role prompts stay in both. Each prompt has two draws per framing. The teacher never sees our prior target answer. No guide or requested visible-reasoning format is added.
+
+| System framing    | Complete↑   | Reader candidates   |   Thinking words (median) |   Answer words (median) | Kimi cost   |
+|:------------------|:------------|:--------------------|--------------------------:|------------------------:|:------------|
+| Document framing  | 20/20       | 4/8                 |                      2046 |                   490   | $0.841      |
+| First-person text | 20/20       | 3/8                 |                      2071 |                   490.5 | $0.877      |
+
+‘Reader candidates’ are Sol's provisional recommendations on the same eight traces per framing, not Opus labels or a measured training yield. They cannot establish a preferred framing. Textual deliberation before an answer does not establish causal faithfulness or transfer to another model.
+
+## Seeded full-read sample, by shape
+
+| Prompt shape   |   Reader candidates |   Needs revision |   Read in full |
+|:---------------|--------------------:|-----------------:|---------------:|
+| proportion     |                   4 |                0 |              4 |
+| repair         |                   1 |                3 |              4 |
+| role_dilemma   |                   2 |                6 |              8 |
+
+All four candidates of each sampled prompt were read. The other 24 replies have machine checks only. See `reading_notes.md` for the judgments, direct evidence and primary-source legal checks.
+
+
+/workspace/2026/constitutional_grafting/slop/data/reasoning_distill/20261027_pilot/report.md
+00fd1a69afbc50a1f14f0bc4e4eca41b36f3aa8898f4bdd8193e67ae3e708aab  slop/data/reasoning_distill/20261027_pilot/report.md

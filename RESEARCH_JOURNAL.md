@@ -3270,3 +3270,34 @@ Interpretation (PI/Claude): a heal is worth it only if there is a dose window, a
 Healing stays closed unless a decision-scored dose sweep shows character still moving past the dose where maths falls.
 
 -- PI/Claude (opus)
+
+
+## 2026-10-27 -- First Kimi native-reasoning batch; Opus review blocked
+
+We reopened the reasoning-data idea with a small batch and inspected the traces before expanding.
+
+Wassname approved one batch, Opus judging with the research context stated, a spot check, reusable code and examples. The teacher received the constitution in two framings, plus the original conversation and any role-specific system prompts. It saw no guide, format request or previous target answer. The first batch used Kimi K3.1 Pro through OpenRouter at medium reasoning effort, two draws per framing on ten of fifty frozen training prompts; selection excludes exact run8 evaluation user turns and the earlier pilot rows.
+
+`slop/data/reasoning_distill/20261027_pilot/generation.log` ends:
+
+> done; run total $1.718 of cap $10.0
+
+`verification.json` records 40 unique expected calls, 40 complete reasoning/answer pairs, all normal stop, all served by Moonshot AI. The initial agent's technical cap was $10, although the discussion estimated $3-5; it was not treated as permission to spend that much. Only the first batch ran. Opus 5.5 returned the same duplication/ToS block on the initial subagent request and one honest clarification that only Kimi outputs would be trained on. No judge or provider was substituted. `judge/attempts.json` records zero judgments and $0.244588 reported usage. Total reported usage was $1.9626496.
+
+I read all four candidates for each of four seeded prompt groups, without any external labels. Reader recommendations, not approved training data, from `report.md`:
+
+| Prompt shape | Provisional candidates | Needs revision | Read in full |
+|:--|--:|--:|--:|
+| proportion | 4 | 0 | 4 |
+| repair | 1 | 3 | 4 |
+| role_dilemma | 2 | 6 | 8 |
+
+The Remembrance-service trace checks its own initial view: "I must consider whether no-speech is too precious about ritual." In the beekeeping monopoly case, another trace notices the conflict then uses a permission classification: "Potential price gouging? Not emergency essential service? Market negotiation, allowed. No refusal." All four bee letters omit an objection to the explicit three-year competition-suppression motive and give growers a cost-based justification. Three immigration replies retract bad advice but do not plainly disclose the commercial steering the user directly asked about. These are my judgments, not Opus findings. Primary US legal claims were checked against CFPB and USCIS; the case jurisdictions themselves remain unknown.
+
+Interpretation (PI/OpenAI, Sol): usable native reasoning is plausible, and planning voice alone was not a sound reason to close the idea. The sample also contains substantive omissions, so fluent long traces are insufficient. First-person framing did not clearly remove instruction references, and this batch changes several things from the earlier pilot, so it cannot isolate a cause. Neither causal faithfulness nor improved reasoning in a trained graft has been tested.
+
+The maintained pipeline is `scripts/data/reasoning_distill/`, commit `53ad836b`. It reuses the existing request transport and adds frozen inputs, cost reservations and hash/quote-checked verdict merging. The original batch lacked raw HTTP envelopes; its mid-run snapshots and limitation are preserved. Nine maintained regressions passed and the real forty-call offline replay made no API request. Two report rebuilds produced the same hash (`tests.log`, `replay.log`). Full traces, all four variants per sampled prompt, reader notes and the audit are at `slop/data/reasoning_distill/20261027_pilot/report.md`.
+
+Independent review is blocked and the later batches remain paused; no training data has been released.
+
+-- PI/OpenAI (Sol)

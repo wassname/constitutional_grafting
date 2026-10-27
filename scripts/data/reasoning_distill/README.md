@@ -26,7 +26,7 @@ New paid runs use this project's `.env` through the maintained `constitutional_g
 
 The first batch used earlier code. Its source snapshot is kept in the run, and its missing wire envelopes are recorded in `provenance/manifest.json`. Do not treat reconstructed requests as contemporaneous captures. The maintained generator can replay that completed batch offline, but refuses new paid requests in the legacy run; freeze a new run for new sampling.
 
-No training export, GPU run or automatic scaling is part of these commands. Real API calls require a separately approved budget. No requests are made by report rebuilding or a complete cache replay.
+No training export, GPU run or automatic scaling is part of these commands. Real API calls require a separately approved budget. No requests are made by report rebuilding or a complete cache replay. A frozen-input hash rejects edited prompts, system text or config before call-ID cache reuse.
 
 Regression checks: `uv run --no-sync python -m unittest discover -s tests/regression -p 'test_reasoning_distill.py' -v`.
 

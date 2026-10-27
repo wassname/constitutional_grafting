@@ -10,7 +10,7 @@ import json
 import random
 from pathlib import Path
 
-from common import CONSTITUTION, FROZEN_EVAL, ROOT, conversation, read_jsonl, run_dir, system_prompt, write_json
+from common import CONSTITUTION, FROZEN_EVAL, ROOT, conversation, read_jsonl, run_dir, system_prompt, write_json, generation_identity
 
 ap = argparse.ArgumentParser()
 ap.add_argument("run")
@@ -60,4 +60,5 @@ write_json(run / "systems.json", {f: system_prompt(f, CONSTITUTION.read_text()) 
 with (run / "prompts.jsonl").open("w") as f:
     for i, p in enumerate(picked):
         f.write(json.dumps({"batch": i // a.batch_size, **p}, ensure_ascii=False) + "\n")
+write_json(run / "provenance/generation_manifest.json", {"setup_sha256": generation_identity(run), "captured_before_requests": True})
 print(f"{run}: {len(picked)} prompts, {-(-len(picked) // a.batch_size)} batches")

@@ -1,0 +1,27 @@
+{
+ "source": "data/train/run10/chatr12.jsonl",
+ "exclude_selection": [
+  "slop/data/20261026_reasoning_pilot/selection.json"
+ ],
+ "n_per_shape": [
+  "seeded_dilemma=20",
+  "role_dilemma=8",
+  "difficult_high=8",
+  "difficult_everyday=4",
+  "proportion=4",
+  "ordinary=3",
+  "repair=3"
+ ],
+ "framings": [
+  "const",
+  "self"
+ ],
+ "k": 2,
+ "batch_size": 10,
+ "model": "moonshotai/kimi-k3.1-pro",
+ "reasoning_effort": "medium",
+ "max_tokens": 16000,
+ "cap_usd": 10.0,
+ "seed": 27,
+ "source_sha256": "f1e092b0e9386b0256d306a641efb0674b727af28998f1e283ff0a8f9ca1182c"
+}

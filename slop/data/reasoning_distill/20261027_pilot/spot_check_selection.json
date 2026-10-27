@@ -1,0 +1,11 @@
+{
+  "seed": 0,
+  "method": "random.Random(0).sample(sorted(batch0_prompt_ids), 4); all four candidates each, no judge labels read",
+  "prompt_ids": [
+    "sft_8353acd83a",
+    "sft_e5c1626b2b",
+    "prop_6cef169f71",
+    "sft_0a0ff07bcb"
+  ],
+  "candidate_count": 16
+}

@@ -73,6 +73,13 @@ def spent_usd(run: Path) -> float:
     return sum(r["cost_usd"] for r in read_jsonl(run / "raw.jsonl"))
 
 
+def generation_identity(run: Path) -> str:
+    systems = run / "systems.json"
+    setup = json.loads(systems.read_text()) if systems.exists() else (run / "provenance/common.py").read_text()
+    return digest({"config": config(run), "prompts": read_jsonl(run / "prompts.jsonl"), "systems": setup,
+                   "constitution": (run / "provenance/v4.md").read_text()})
+
+
 def material_hash(run: Path, prompt: dict, candidate: dict) -> str:
     systems = run / "systems.json"
     generation = json.loads(systems.read_text()) if systems.exists() else (run / "provenance/common.py").read_text()

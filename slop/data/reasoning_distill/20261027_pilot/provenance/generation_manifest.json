@@ -1,0 +1,5 @@
+{
+  "setup_sha256": "6d34f28a8b69932cdc0a7a81e542efb56d0a2e8dea37871e51992e2ed2087a78",
+  "captured_before_requests": false,
+  "note": "Frozen after batch-0 completion and source/prompt roundtrip verification; this adds a future replay drift check, not contemporaneous request evidence."
+}

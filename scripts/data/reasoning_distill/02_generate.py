@@ -14,11 +14,14 @@ from concurrent.futures import ThreadPoolExecutor
 
 from constitutional_grafting.data.model_requests import request_messages, saved_response, send_cached_request
 
-from common import append_jsonl, by_id, config, read_jsonl, run_dir, spent_usd, write_json
+from common import ROOT, append_jsonl, by_id, config, generation_identity, read_jsonl, run_dir, spent_usd, write_json
 
 
 def generate(run, batch: int, workers: int):
     cfg = config(run)
+    manifest = json.loads((run / "provenance/generation_manifest.json").read_text())
+    if generation_identity(run) != manifest["setup_sha256"]:
+        raise ValueError("Generation inputs changed after freezing; do not reuse call-ID results for another request")
     have = by_id(read_jsonl(run / "raw.jsonl"), "call_id")
     prompts = [p for p in read_jsonl(run / "prompts.jsonl") if p["batch"] == batch]
     if not prompts:
@@ -93,6 +96,8 @@ if __name__ == "__main__":
     ap.add_argument("--workers", type=int, default=4)
     args = ap.parse_args()
     directory = run_dir(args.run)
-    with (directory / "generation.lock").open("w") as lease:
+    lock_path = ROOT / ".local/reasoning_distill/locks" / f"{directory.name}.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with lock_path.open("w") as lease:
         fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
         generate(directory, args.batch, args.workers)

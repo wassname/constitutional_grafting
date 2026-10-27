@@ -14,7 +14,7 @@ Goal: test whether Kimi K3.1 Pro, with our constitution in context and no guide 
 5. [x] Keep the implementation reusable and show complete examples.
    - Code: `scripts/data/reasoning_distill/README.md`.
    - Results: `slop/data/reasoning_distill/20261027_pilot/report.md`, rebuilt with `just reasoning-distill-report 20261027_pilot`.
-   - Tests: 8 maintained regressions passed; cached 40-call replay costs $0; report hashes agree on two rebuilds (`tests.log`, `replay.log`).
+   - Tests: 9 maintained regressions passed; cached 40-call replay costs $0; report hashes agree on two rebuilds (`tests.log`, `replay.log`).
 6. [ ] Remaining full reads, independent judgments and possible later batches.
    - Batches 1–4 remain unrun. Do not scale while the required judge route is blocked. Another route or reviewer needs an explicit decision.
 

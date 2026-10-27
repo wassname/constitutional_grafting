@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-10-27T02:44:15.443588+00:00",
+  "commit": "68cc17a883a65fb062e2d195678f74df99990210",
+  "files": [
+    {
+      "source": "constitution/v4.md",
+      "snapshot": "v4.md",
+      "sha256": "e9776350e5f89c25a0db990a7f245ee9b9ec72c1a7afa01c9209388ba34a3091"
+    },
+    {
+      "source": "scripts/data/reasoning_distill/common.py",
+      "snapshot": "common.py",
+      "sha256": "6190e38b9f921771f43e39be0ad6ff24652b59520df1ded29bf2c052a26faa06"
+    },
+    {
+      "source": "scripts/data/reasoning_distill/02_generate.py",
+      "snapshot": "02_generate.py",
+      "sha256": "7a9a01a006cbf52f4999b5cfbb701b01bc8759d8649e0c486ec2d2a1da4a5f26"
+    },
+    {
+      "source": "scripts/data/reasoning_distill/judge_rubric.md",
+      "snapshot": "judge_rubric.md",
+      "sha256": "1778724d0aa1a1164f26217823aef46afe8c32ec35fead5290b227f2e727d453"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/config.json",
+      "snapshot": "config.json",
+      "sha256": "f111909816e84cef475ee09f6c2d086552c0718d6de1cae5ed91caf790e1c0fe"
+    }
+  ],
+  "limitation": "Captured during batch 0, after requests started. Batch 0 code stores extracted response fields, not full raw HTTP responses or request ids. Requests can be reconstructed from these code/config/constitution snapshots plus prompts.jsonl; this is not a contemporaneous wire capture."
+}

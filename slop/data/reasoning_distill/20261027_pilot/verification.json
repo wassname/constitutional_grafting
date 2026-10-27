@@ -1,0 +1,15 @@
+{
+  "selected_prompt_roundtrip": 50,
+  "unique_generated_calls": 40,
+  "expected_calls": 40,
+  "complete_reasoning_and_answer": 40,
+  "providers": {
+    "Moonshot AI": 40
+  },
+  "served_models": {
+    "moonshotai/kimi-k3.1-pro": 40
+  },
+  "cost_usd": 1.7180616,
+  "independent_judgments": 0,
+  "training_release": false
+}
