@@ -109,6 +109,11 @@ run10-results:
 reasoning-pilot:
     uv run --no-sync python scripts/data/91_reasoning_pilot.py report
 
+# Reasoning distillation: regex screen and report for RUN (no API calls); stages in scripts/data/reasoning_distill/README.md. -- PI/Claude
+reasoning-distill-report run:
+    uv run --no-sync python scripts/data/reasoning_distill/03_screen.py {{run}}
+    uv run --no-sync python scripts/data/reasoning_distill/05_report.py {{run}}
+
 # Rebuild run14 metrics, figures and full/cropped panels without model calls. -- PI/OpenAI (Sol)
 run14-results:
     uv run --no-sync python scripts/eval/57_run14_results.py
