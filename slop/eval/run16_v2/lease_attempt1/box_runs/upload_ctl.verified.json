@@ -1,0 +1,10 @@
+{
+  "name": "ctl",
+  "files": {
+    "/workspace/cg/outputs/up_ctl/adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+    "/workspace/cg/outputs/up_ctl/adapter_model.safetensors": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d"
+  },
+  "seconds": 1113.836552619934,
+  "verified_epoch": 1793073791.2552814,
+  "instance_id": 57903770
+}

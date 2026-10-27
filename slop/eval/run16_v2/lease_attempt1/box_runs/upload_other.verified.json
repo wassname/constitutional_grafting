@@ -1,0 +1,10 @@
+{
+  "name": "other",
+  "files": {
+    "/workspace/cg/outputs/up_other/adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+    "/workspace/cg/outputs/up_other/adapter_model.safetensors": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1"
+  },
+  "seconds": 4712.431326389313,
+  "verified_epoch": 1793072671.0757344,
+  "instance_id": 57903770
+}

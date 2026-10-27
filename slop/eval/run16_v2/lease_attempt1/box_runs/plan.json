@@ -1,0 +1,762 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "approval": "wassname $65 total; brief f305ca0a; const_v2 bridge",
+  "adapters": {
+    "stoic": {
+      "path": "/home/code/.local/share/cg_run10_adapters/r10_stoic",
+      "files": {
+        "adapter_config.json": {
+          "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+          "bytes": 1466,
+          "actual_sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "bytes": 3997800800,
+          "actual_sha256": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d",
+          "matches": true
+        }
+      }
+    },
+    "const": {
+      "path": "/home/code/.local/share/cg_run7e_adapters/r7e_graft_docs_spl50",
+      "files": {
+        "adapter_config.json": {
+          "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+          "bytes": 1466,
+          "actual_sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "bytes": 3997800800,
+          "actual_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+          "matches": true
+        }
+      }
+    },
+    "other": {
+      "path": "/home/code/.local/share/cg_run10_adapters/r10_other",
+      "files": {
+        "adapter_config.json": {
+          "sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+          "bytes": 1466,
+          "actual_sha256": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "bytes": 3997800800,
+          "actual_sha256": "e261025368866261cef1735cc56b8fc61442b7e0e921be722369c93dd83381b1",
+          "matches": true
+        }
+      }
+    },
+    "rewr": {
+      "path": "/home/code/.local/share/cg_run10_adapters/r10_cx_chatr12",
+      "files": {
+        "adapter_config.json": {
+          "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+          "bytes": 1479,
+          "actual_sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "sha256": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e",
+          "bytes": 3997800800,
+          "actual_sha256": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e",
+          "matches": true
+        }
+      }
+    },
+    "mix_stoic": {
+      "path": "/home/code/.local/share/cg_run10_adapters/r10_x11_mix_stoic",
+      "files": {
+        "adapter_config.json": {
+          "bytes": 1544,
+          "sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+          "actual_sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "bytes": 3997800800,
+          "sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "actual_sha256": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8",
+          "matches": true
+        }
+      }
+    },
+    "mix_const": {
+      "path": "/home/code/.local/share/cg_run10_adapters/r10_x11_mix_const",
+      "files": {
+        "adapter_config.json": {
+          "bytes": 1544,
+          "sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+          "actual_sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "bytes": 3997800800,
+          "sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "actual_sha256": "39d99fbd2ca34e6783db1e614718d2443911a392d8c6abcd7cae3f9ee7f83f15",
+          "matches": true
+        }
+      }
+    },
+    "ctl": {
+      "path": "/home/code/.local/share/cg_run10_adapters/r10_x11_replay_ctl",
+      "files": {
+        "adapter_config.json": {
+          "bytes": 1544,
+          "sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+          "actual_sha256": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+          "matches": true
+        },
+        "adapter_model.safetensors": {
+          "bytes": 3997800800,
+          "sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "actual_sha256": "263a509a54cd5a8e2d0482b5230c84a14b73f293c0cbd8bf1bdcac5edd364b8d",
+          "matches": true
+        }
+      }
+    },
+    "oldp64": {
+      "path": "/workspace/2026/constitutional_grafting/.local/adapters/cg_run14_adapters/r10_a14_proj64",
+      "files": {
+        "adapter_config.json": {
+          "bytes": 1479,
+          "sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e"
+        },
+        "adapter_model.safetensors": {
+          "bytes": 3997800768,
+          "sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa"
+        }
+      }
+    }
+  },
+  "training_data_sha256": "284895029fe45211b8a1ecc767b309d2f6be7903ae4c95f18d8071b39eaca951",
+  "source_data_sha256": "91e95a6eceff6841190e2485006493b1967e0dc9cc4f954da5e8c7a488a79042",
+  "eos_appended": 903,
+  "cells": [
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "const",
+          0
+        ]
+      ],
+      "model": "r16_instruct",
+      "equation": "\u03b8_I",
+      "description": "untouched Instruct, fresh v2 reference",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "eos_chatr12",
+          0.5
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_eos_chatr120.5",
+      "equation": "\u03b8_I + \u0394_docs + 0.5\u00b7\u0394sft_rewr_eos|docs",
+      "description": "EOS-fixed D",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "eos_chatr12",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_eos_chatr121",
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7\u0394sft_rewr_eos|docs",
+      "description": "EOS-fixed D",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "p16_64",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_p16_641",
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_64(\u0394sft_rewr_eos|docs)",
+      "description": "EOS-fixed projected D",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "p16_64",
+          1.25
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_p16_641.25",
+      "equation": "\u03b8_I + \u0394_docs + 1.25\u00b7P_64(\u0394sft_rewr_eos|docs)",
+      "description": "EOS-fixed projected D",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "p16_128",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_p16_1281",
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_128(\u0394sft_rewr_eos|docs)",
+      "description": "EOS-fixed projected D",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "p16out_64",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_p16out_641",
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_64out(\u0394sft_rewr_eos|docs)",
+      "description": "EOS-fixed projected D",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "charcap",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_charcap1",
+      "equation": "\u03b8_I + \u0394_docs + 1\u00b7P_charcap(\u0394sft_rewr_eos|docs)",
+      "description": "EOS-fixed projected D",
+      "selector": true
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "rewr",
+          0.5
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_rewr0.5",
+      "equation": "\u03b8_I + \u0394_docs + \u00bd\u00b7\u0394sft_rewr|docs",
+      "description": "old D half, fresh v2 sample",
+      "selector": false
+    },
+    {
+      "block": "chat",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "oldp64",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1_oldp641",
+      "equation": "\u03b8_I + \u0394_docs + P_64(\u0394sft_rewr|docs)",
+      "description": "old projected D, fresh v2 sample",
+      "selector": false
+    },
+    {
+      "block": "documents",
+      "cell": [
+        [
+          "stoic",
+          0.5
+        ],
+        [
+          "const",
+          1
+        ],
+        [
+          "other",
+          1
+        ]
+      ],
+      "model": "r16_stoic0.5_const1_other1",
+      "equation": "\u03b8_I + \u0394_docs",
+      "description": "plain documents, no chat",
+      "selector": false
+    },
+    {
+      "block": "documents",
+      "cell": [
+        [
+          "mix_stoic",
+          0.5
+        ],
+        [
+          "ctl",
+          -0.5
+        ],
+        [
+          "mix_const",
+          1
+        ],
+        [
+          "ctl",
+          -1
+        ],
+        [
+          "other",
+          1
+        ]
+      ],
+      "model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1",
+      "equation": "\u03b8_I + \u0394_docs_anch",
+      "description": "anchored documents, no chat",
+      "selector": false
+    },
+    {
+      "block": "documents",
+      "cell": [
+        [
+          "const",
+          1
+        ]
+      ],
+      "model": "r16_const1",
+      "equation": "\u03b8_I + 1\u00b7\u0394txt_const",
+      "description": "pure constitution documents, no chat",
+      "selector": false
+    },
+    {
+      "block": "documents",
+      "cell": [
+        [
+          "const",
+          2
+        ]
+      ],
+      "model": "r16_const2",
+      "equation": "\u03b8_I + 2\u00b7\u0394txt_const",
+      "description": "pure constitution documents, no chat",
+      "selector": false
+    },
+    {
+      "block": "documents",
+      "cell": [
+        [
+          "mix_const",
+          2
+        ],
+        [
+          "ctl",
+          -2
+        ]
+      ],
+      "model": "r16_mix_const2_ctl-2",
+      "equation": "\u03b8_I + 2\u00b7(\u0394mix_const \u2212 \u0394ctl)",
+      "description": "anchored constitution documents, no chat",
+      "selector": false
+    },
+    {
+      "block": "anchored_chat",
+      "cell": [
+        [
+          "mix_stoic",
+          0.5
+        ],
+        [
+          "ctl",
+          -0.5
+        ],
+        [
+          "mix_const",
+          1
+        ],
+        [
+          "ctl",
+          -1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "anch_chatr12",
+          0.5
+        ]
+      ],
+      "model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5",
+      "equation": "\u03b8_I + \u0394_docs_anch + 0.5\u00b7\u0394sft_rewr_eos|docs_anch",
+      "description": "EOS-fixed chat on anchored Base",
+      "selector": false
+    },
+    {
+      "block": "anchored_chat",
+      "cell": [
+        [
+          "mix_stoic",
+          0.5
+        ],
+        [
+          "ctl",
+          -0.5
+        ],
+        [
+          "mix_const",
+          1
+        ],
+        [
+          "ctl",
+          -1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "anch_chatr12",
+          1
+        ]
+      ],
+      "model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121",
+      "equation": "\u03b8_I + \u0394_docs_anch + 1\u00b7\u0394sft_rewr_eos|docs_anch",
+      "description": "EOS-fixed chat on anchored Base",
+      "selector": false
+    },
+    {
+      "block": "anchored_chat",
+      "cell": [
+        [
+          "mix_stoic",
+          0.5
+        ],
+        [
+          "ctl",
+          -0.5
+        ],
+        [
+          "mix_const",
+          1
+        ],
+        [
+          "ctl",
+          -1
+        ],
+        [
+          "other",
+          1
+        ],
+        [
+          "anchp_64",
+          1
+        ]
+      ],
+      "model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641",
+      "equation": "\u03b8_I + \u0394_docs_anch + 1\u00b7P_64(\u0394sft_rewr_eos|docs_anch)",
+      "description": "EOS-fixed chat on anchored Base",
+      "selector": false
+    }
+  ],
+  "offer_query": {
+    "gpu_ram": {
+      "gte": 90000
+    },
+    "num_gpus": {
+      "eq": 1
+    },
+    "rentable": {
+      "eq": true
+    },
+    "verified": {
+      "eq": true
+    },
+    "reliability2": {
+      "gte": 0.98
+    },
+    "disk_space": {
+      "gte": 500
+    },
+    "disk_bw": {
+      "gte": 500
+    },
+    "cpu_ram": {
+      "gte": 110000
+    },
+    "inet_down": {
+      "gte": 500
+    },
+    "duration": {
+      "gte": 259200
+    },
+    "datacenter": {
+      "eq": true
+    },
+    "allocated_storage": 500,
+    "order": [
+      [
+        "dph_total",
+        "asc"
+      ]
+    ],
+    "limit": 100
+  },
+  "max_hours": 26,
+  "max_hourly_rate": 1.92,
+  "disk_gb": 500,
+  "traffic_reserve_usd": 3,
+  "judge_reserve_usd": 6,
+  "review_reserve_usd": 2,
+  "termination_margin_usd": 2,
+  "total_reserve_usd": 62.92,
+  "frozen_manifest": {
+    "repo_head": "dfe2bd420efe2bf8aa81eaabeef04ae49726ac60",
+    "tiny_character_head": "a66d2ae5228b273d7bb14477f13a498c477d6218",
+    "protocol_sha256": {
+      "src/tiny_character/authored.py": "f90e58b0aff73d5da8eb3882ea778e8ced3c00b439bef4a93cd53ddae08a40b7",
+      "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
+      "src/tiny_character/checks.py": "8d332f1f4e24a203c8705db804ac00b3bd634e0e506d0250d1253ad963296573",
+      "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
+      "src/tiny_character/leak.py": "4e1072740fa4b8993a4fe9609dfec7f45e299ca1299c225a2de18bb50e023375",
+      "src/tiny_character/llm.py": "5094a6e35897d37a25f790e6566f3e99561337ccce94e417d9010b2df3f5d421",
+      "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
+      "scripts/03_judge.py": "2358860b5f9b18650d1dc913b66cfda9352f13be84fe9de58141527d27972b90",
+      "scripts/04_report.py": "c255d8051455ec6e2243d2a385bf6afab0063a02100743daefbcc589e02dd35d"
+    },
+    "input_sha256": {
+      "items.jsonl": "5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444",
+      "boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
+      "demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
+      "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+      "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+      "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
+      "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c"
+    },
+    "protocol_items_source": "/home/code/.local/share/tiny-character-2d69739/data/run5_items_2361cd03_w2spatch.jsonl",
+    "pov_source_snapshot": "/workspace/2026/tiny-character/data/items.jsonl",
+    "pov_scope": "separate six-item diagnostic, not included in pinned on-target or capability aggregates",
+    "n_items": 196,
+    "code_sha256": {
+      "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+      "scripts/eval/19_gen_replies.py": "56a9d38b7a43ec8c6b7a814d94d34e97eaef0267e0467bfda096f83b5dd74fca",
+      "scripts/eval/26_gsm8k.py": "834199424d442927522cd547b7399d1455e20e49b8b4eaf3be67546b839130ae",
+      "scripts/eval/29_saved_update_ablation.py": "0d2096435cf302e75dfa4380f59253f76d30d7f7b5283fec898a4e18b76827a1"
+    },
+    "adapter_config_sha256": {
+      "sft": "d17d042a2c35b197005a4ca30b71de9517eb4a2aa4f39806c4160d95e19bcb1a",
+      "docs": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030"
+    },
+    "instruct_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+    "instruct_config_sha256": "5e4d7f74fec2f360eb9cfbfcd6ec0c4c76e684d3a11caaed259d9fd9bfbc7944",
+    "sft_sha256": "8e7b6d048de4c7bf1002b1754353d07c0819782685428680263f4df97c491f73",
+    "docs_sha256": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa",
+    "cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "boundary_ladder": [
+      [
+        4,
+        0
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        16,
+        0
+      ],
+      [
+        0,
+        16
+      ],
+      [
+        32,
+        0
+      ],
+      [
+        0,
+        32
+      ]
+    ],
+    "samples": 2,
+    "temperature": 0.7,
+    "demo_temperature": 0,
+    "merge_dtype": "float16",
+    "merge_order": [
+      "SFT",
+      "documents"
+    ],
+    "total_spending_cap_usd": 30,
+    "gsm8k_long_n": 60,
+    "boundary_selection": "all pinned capability items, plus SHA256-first ID per other pinned family; original prompts/caps retained",
+    "boundary_items": 20,
+    "interpretation": "Fresh inference only; whole SFT update, not an Echo-only ablation.",
+    "extra_cells_file": "extra_cells.json: optional explicit follow-up coefficients, read after initial ladder and logged"
+  },
+  "plain_docs_model": "r16_stoic0.5_const1_other1",
+  "anchored_docs_model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1",
+  "anchored_donor": "mix_stoic=0.5 ctl=-0.5 mix_const=1 ctl=-1 other=1",
+  "fallback_donor": "mix_const=2 ctl=-2",
+  "heldout_sha256": {
+    "heldout_const.jsonl": "97c7da9d58b8278a3856d1e8445464d0eec0db97aa6a383e7997778edfc8fdfb",
+    "heldout_stoic.jsonl": "cde3f8d91a46b912ec929515bf7313df1164fe2db3a088219f15528d730eab09",
+    "heldout_web.jsonl": "96e67343d7a4b18af5d58263a2a6a39c39c54acd949bab7238716fe4ec1387bf",
+    "heldout_other.jsonl": "343e354223d59daeb0725aee10fd67e1bb3f2a8a1fc4d6c5fdc1c738a3be7761"
+  },
+  "drop_order": [
+    "optional c",
+    "P128",
+    "new D + P64 x1.25",
+    "old-D second sample"
+  ],
+  "training": "same resolved cx_chatr12 hyperparameters; normalize artifact paths; fixed EOS only substantive data change; SPECTRAL_FRAC=.01; 2 epochs",
+  "timing_estimate": "Historical 777 updates/5617 seconds per chat; two chats ~3.2h; setup 1.7h; projections/selectors ~4h;18 v2 cells unknown, budget up to 15h; runner stops at24.5h; hard destroy26h."
+}

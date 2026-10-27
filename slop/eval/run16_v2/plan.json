@@ -613,14 +613,14 @@
     ],
     "limit": 100
   },
-  "max_hours": 26,
+  "max_hours": 24.5,
   "max_hourly_rate": 1.92,
   "disk_gb": 500,
   "traffic_reserve_usd": 3,
   "judge_reserve_usd": 6,
   "review_reserve_usd": 2,
   "termination_margin_usd": 2,
-  "total_reserve_usd": 62.92,
+  "total_reserve_usd": 64.28999999999999,
   "frozen_manifest": {
     "repo_head": "dfe2bd420efe2bf8aa81eaabeef04ae49726ac60",
     "tiny_character_head": "a66d2ae5228b273d7bb14477f13a498c477d6218",
@@ -642,7 +642,9 @@
       "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
       "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
       "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
-      "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c"
+      "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c",
+      "small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568",
+      "draft_code_tools.jsonl": "f4317ee66e15276ff76463f499e862ec798f67e5cc85e72069f20bd2eeee8cc9"
     },
     "protocol_items_source": "/home/code/.local/share/tiny-character-2d69739/data/run5_items_2361cd03_w2spatch.jsonl",
     "pov_source_snapshot": "/workspace/2026/tiny-character/data/items.jsonl",
@@ -758,5 +760,8 @@
     "old-D second sample"
   ],
   "training": "same resolved cx_chatr12 hyperparameters; normalize artifact paths; fixed EOS only substantive data change; SPECTRAL_FRAC=.01; 2 epochs",
-  "timing_estimate": "Historical 777 updates/5617 seconds per chat; two chats ~3.2h; setup 1.7h; projections/selectors ~4h;18 v2 cells unknown, budget up to 15h; runner stops at24.5h; hard destroy26h."
+  "timing_estimate": "Historical 777 updates/5617 seconds per chat; two chats ~3.2h; setup 1.7h; projections/selectors ~4h;18 v2 cells unknown, budget up to 15h; runner stops at24.5h; hard destroy26h.",
+  "prior_spend_reserve_usd": 4.25,
+  "retry_approval": "const_v2 resume: one replacement, same $65 cumulative cap; fix/dry-run/pre-production repair hold before rental; no plain-Base chat",
+  "retry_budget_note": "24.5h hard deadline (23h runner) instead of26h; no core cells removed. Optional(c) has no guaranteed allocation and remains first to skip if measured time/spend cannot fit."
 }

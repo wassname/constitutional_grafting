@@ -1,6 +1,6 @@
 # Run16 first-lease failure: driver callback, not training
 
-PI/OpenAI (Sol), 2026-10-27. Full first-lease `job.log` read; no production or tiny-model training ran. The box was destroyed and the API confirmed absence. GPU elapsed-rate estimate $3.4879; supervisor accounts approximately $4 including traffic.
+PI/OpenAI (Sol), 2026-10-27. Full first-lease `slop/eval/run16_v2/lease_attempt1/box_runs/job.log` read; no production or tiny-model training ran. The box was destroyed and the API confirmed absence. GPU elapsed-rate estimate $3.4879; supervisor accounts approximately $4 including traffic.
 
 | Stage | Expected | Observed | Consequence |
 |:--|:--|:--|:--|
@@ -24,3 +24,5 @@ PI/OpenAI (Sol), 2026-10-27. Full first-lease `job.log` read; no production or t
 Verdict: first lease is a runtime failure, not evidence against EOS repair or grafting. Next action: finish and test the 60-minute pre-production failure hold, recompute cumulative reservation including prior spend, then use the supervisor-approved replacement lease. Plain-Base chat remains unapproved and unwired.
 
 -- PI/OpenAI (Sol)
+
+Recovery follow-up: bounded60-minute pre-production hold, first-update evidence parser, six-stream earliest-needed uploads and post-update teardown verified by16 combined CPU driver/recovery tests (`retry_driver_recovery_tests.log`). Replacement reservation is$64.29 including a conservative$4.25 prior-spend allowance; first-lease artifacts were moved with git to `lease_attempt1/`, never discarded.

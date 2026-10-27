@@ -25,14 +25,14 @@ rental.LABEL = 'cg-run16-v2'
 rental.SUBSETS = rental.DOCS = []
 rental.EXPECTED_ADAPTERS_FILE = 'required_adapters.json'
 rental.ADAPTER_DIR = Path.home() / '.local/share/cg_run16_adapters'
-HOURS, RATE = 26, 1.92
+HOURS, RATE = 24.5, 1.92
 LOCAL_CODE = ['scripts/eval/38_run10_chat_rental.py', 'scripts/eval/48_vast_deadline.py']
 CODE = ['scripts/train/02_merge.py', 'scripts/train/box_watchdog.sh', 'scripts/train/13_run10_evals.sh',
         'scripts/train/14_run10_chat_box.sh', 'scripts/train/check_loss_mask.py', 'scripts/train/spectral_plugin.py',
         'scripts/train/router_dtype_plugin.py', 'scripts/train/demo_plugin.py', 'scripts/train/spectral_math.py', 'scripts/train/41_expert_adapter_check.py',
         'scripts/train/16_project_chat_adapter.py', 'scripts/train/43_adapter_energy.py', 'scripts/data/90_generic_control.py',
         'scripts/eval/19_gen_replies.py', 'scripts/eval/26_gsm8k.py', 'scripts/eval/33_subset_cells.py',
-        'scripts/eval/62_run16_box.py', 'scripts/eval/61_run16_cells.py', 'scripts/eval/47_base_heldout_loss.py',
+        'scripts/eval/62_run16_box.py', 'scripts/eval/61_run16_cells.py', 'scripts/eval/47_base_heldout_loss.py', 'scripts/eval/run16_recovery.py',
         'scripts/train/18_project_char_vs_cap.py', 'configs/train/qwen3/sft.yml']
 INPUTS = ['draft_code_tools.jsonl', 'small_tasks.jsonl', 'run8_manifest.json', 'run16_manifest.json', 'items.jsonl', 'boundary_items.jsonl', 'demos.jsonl', 'panel.jsonl', 'pov.jsonl', 'change.md', 'gsm8k_long60.jsonl']
 
@@ -42,10 +42,106 @@ def sha(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def start_driver(remote,state):
+    command=f'cd /workspace/cg && HF_HOME=/workspace/hf RUN16_DEADLINE={state["runner_deadline_epoch"]} python scripts/eval/62_run16_box.py'
+    script=f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
+    remote('cd /workspace/cg && tmux new-session -d -s run10_train '+shlex.quote('bash -lc '+shlex.quote(script)),timeout=30)
+
+
+def remote_production_started(remote):
+    code="import json,sys,time; from pathlib import Path; sys.path.insert(0,'/workspace/cg/scripts/eval'); from run16_recovery import production_step_evidence; p=Path('/workspace/cg/runs/run10/production_started.json'); e=production_step_evidence('/workspace/cg'); p.write_text(json.dumps(e)) if e and not p.exists() else None; print(json.dumps(e))"
+    result=remote('python -c '+shlex.quote(code),timeout=30,capture_output=True,text=True)
+    return json.loads(result.stdout)
+
+
+def monitor_with_repair(remote,state,stop,heartbeat,now=None):
+    """Only failures before the first production update get a bounded, explicit-approval repair hold."""
+    now=now or time.time
+    hold_until=None;failure_index=0
+    while True:
+        try:
+            rental.monitor(remote,lambda:max(1,state['runner_deadline_epoch']-now()),stop,heartbeat)
+            return
+        except AssertionError as error:
+            if not (str(error).startswith('remote comparison exited') or str(error)=='detached comparison disappeared without an exit record'):
+                raise
+            evidence=remote_production_started(remote)
+            if evidence:
+                (rental.OUT/'post_production_failure.json').write_text(json.dumps({'instance_id':state['instance_id'],
+                    'error':str(error),'production_evidence':evidence,'action':'retrieve then destroy; no repair hold'},indent=2)+'\n')
+                raise
+            if hold_until is None:hold_until=min(now()+3600,state['runner_deadline_epoch'])
+            event={'instance_id':state['instance_id'],'failure_index':failure_index,'error':str(error),
+                   'status':'holding','first_production_step_observed':False,'hold_until_epoch':hold_until,
+                   'hard_destroy_epoch':state['hard_destroy_epoch'],
+                   'action':'keep heartbeat/deadline guard; investigate; upload approved hotfix and restart within existing60min window'}
+            def publish():
+                data=json.dumps(event,indent=2)+'\n'
+                (rental.OUT/'driver_failure.json').write_text(data)
+                (rental.OUT/f'driver_failure_{failure_index}.json').write_text(data)
+                remote('cat > /workspace/cg/runs/run10/driver_failure.json',input=data.encode(),timeout=30)
+            publish();print('RUN16 PRE-PRODUCTION REPAIR HOLD '+json.dumps(event),flush=True)
+            approval=OUT/'driver_repair.approved.json'
+            while now()<hold_until and not approval.exists():
+                if heartbeat.done():heartbeat.result()
+                stop.wait(min(5,max(0,hold_until-now())))
+            if not approval.exists():
+                event['status']='expired';publish()
+                raise TimeoutError('pre-production repair window expired; retrieve then destroy') from error
+            fix=json.loads(approval.read_text())
+            assert fix['instance_id']==state['instance_id'] and fix['failure_index']==failure_index,'stale repair approval'
+            assert fix['reason'] and fix['source_sha256'],'investigation and approved changed sources are required'
+            archive=io.BytesIO()
+            with tarfile.open(fileobj=archive,mode='w:gz') as bundle:
+                for path,digest in fix['source_sha256'].items():
+                    assert path in CODE and sha(ROOT/path)==digest,(path,'unapproved or changed hotfix')
+                    bundle.add(ROOT/path,arcname=path)
+            remote('tar -xzf - -C /workspace/cg',input=archive.getvalue(),timeout=90)
+            verify='import hashlib; files='+repr({'/workspace/cg/'+p:d for p,d in fix['source_sha256'].items()})+"; assert all(hashlib.file_digest(open(p,'rb'),'sha256').hexdigest()==s for p,s in files.items())"
+            remote('python -c '+shlex.quote(verify),timeout=60)
+            assert not remote_production_started(remote),'production started during repair approval; do not restart'
+            previous=f'/workspace/cg/runs/run10/driver_failures/attempt_{failure_index}'
+            remote('mkdir -p '+previous+'; cd /workspace/cg/runs/run10; for f in job.log job.exit train_random_smoke.log train_r10_eos_chatr12.log; do [ ! -f "$f" ] || mv "$f" '+previous+'/; done; rm -rf /workspace/cg/outputs/random_smoke_base /workspace/cg/outputs/random_smoke_adapter /workspace/cg/outputs/prepared_random_smoke',timeout=60)
+            approval.rename(rental.OUT/f'driver_repair_{failure_index}.approved.json')
+            event.update(status='restarting',repair=fix);publish()
+            start_driver(remote,state)
+            failure_index+=1
+
+
+def parallel_work(remote,ssh,host,state,plan,setup,stop,heartbeat,pool):
+    def upload(name):
+        source=plan['adapters'][name];target='/workspace/cg/outputs/up_'+name
+        remote('mkdir -p '+target,timeout=30);started=time.time()
+        with (rental.OUT/f'upload_{name}_parallel.log').open('w') as log:
+            subprocess.run(['rsync','-az','--partial','--info=progress2','-e',shlex.join(ssh),
+                source['path']+'/adapter_config.json',source['path']+'/adapter_model.safetensors',host+':'+target+'/'],
+                check=True,stdout=log,stderr=subprocess.STDOUT,timeout=max(1,state['runner_deadline_epoch']-time.time()-4*3600))
+        expected={target+'/'+f:v['sha256'] for f,v in source['files'].items()}
+        verify='import hashlib; files='+repr(expected)+"; assert all(hashlib.file_digest(open(p,'rb'),'sha256').hexdigest()==s for p,s in files.items())"
+        remote('python -c '+shlex.quote(verify),timeout=300)
+        receipt={'name':name,'files':expected,'seconds':time.time()-started,'verified_epoch':time.time(),'instance_id':state['instance_id']}
+        data=json.dumps(receipt,indent=2)+'\n';(rental.OUT/f'upload_{name}.verified.json').write_text(data)
+        remote('cat > /workspace/cg/runs/run10/upload_'+name+'.verified.json',input=data.encode(),timeout=30)
+        print('REMOTE ADAPTER VERIFIED '+name,flush=True)
+    pending={name:pool.submit(upload,name) for name in ['stoic','const','other','rewr','mix_stoic','mix_const']}
+    for name in ['stoic','const','other']:pending[name].result()
+    pending['ctl']=pool.submit(upload,'ctl')
+    setup.result()
+    start_driver(remote,state)
+    print('NEW-D DRIVER STARTED after three doc donors; remaining uploads continue',flush=True)
+    def checked_remote(*args,**kwargs):
+        for future in pending.values():
+            if future.done():future.result()
+        return remote(*args,**kwargs)
+    monitor_with_repair(checked_remote,state,stop,heartbeat)
+    for future in pending.values():future.result()
+
+
 def run():
     plan = json.loads((OUT / 'plan.json').read_text())
     assert not rental.STATE.exists()
     assert plan['total_reserve_usd'] <= 65
+    assert plan['max_hours']==HOURS and plan['max_hourly_rate']==RATE
     approval = json.loads((OUT / 'preflight_approved.json').read_text())
     assert approval['controller_sha256'] == sha(__file__)
     assert approval['source_sha256'] == {name: sha(ROOT / name) for name in CODE + LOCAL_CODE}
@@ -75,14 +171,14 @@ def run():
     offer = min(passing,key=lambda o:o['dph_total'])
     account = rental.api('/users/current/')
     traffic = max(plan['traffic_reserve_usd'], 250 * offer['inet_down_cost'] + 120 * offer['inet_up_cost'])
-    total = HOURS * offer['dph_total'] + traffic + sum(plan[k] for k in ['judge_reserve_usd', 'review_reserve_usd', 'termination_margin_usd'])
+    total = plan['prior_spend_reserve_usd'] + HOURS * offer['dph_total'] + traffic + sum(plan[k] for k in ['judge_reserve_usd', 'review_reserve_usd', 'termination_margin_usd'])
     assert total <= 65, 'Actual offer including traffic exceeds reported/approved reservation'
     cash_required = HOURS * offer['dph_total'] + traffic + plan['termination_margin_usd'] + 1
     autobill = account['autobill_amount'] if account['has_billing'] and not account['billing_failed'] and account['autobill_threshold'] > 0 else 0
     assert account['credit'] + autobill >= cash_required, f"Vast available funding {account['credit'] + autobill:.2f} below guarded requirement {cash_required:.2f}"
     assert not [r for r in rental.api('/instances/')['instances'] if r['label'] == rental.LABEL]
     (rental.OUT / 'rental_quote.json').write_text(json.dumps({'offer': offer, 'maximum_hours': HOURS,
-        'total_reserve_usd': total, 'traffic_reserve_usd': traffic, 'selection_policy':'cheapest eligible RTX PRO 6000 S under rate/cap',
+        'total_reserve_usd': total, 'prior_spend_reserve_usd':plan['prior_spend_reserve_usd'], 'traffic_reserve_usd': traffic, 'selection_policy':'cheapest eligible RTX PRO 6000 S under rate/cap',
         'vast_cash_required': cash_required, 'auto_billing_policy':'AGENTS auto-top-up confirmed by wassname',
         'live_account_funding': {k: account[k] for k in ['credit', 'has_billing', 'billing_failed', 'autobill_amount', 'autobill_threshold']}}, indent=2))
     started = time.time()
@@ -148,7 +244,7 @@ def run():
         remote('mkdir -p /workspace/cg/runs/run10; tar -xzf - -C /workspace/cg', input=stream.getvalue(), timeout=90)
         remote("touch /workspace/heartbeat; tmux new-session -d -s run10_watchdog 'cd /workspace/cg && MAX_SILENT_H=1 bash scripts/train/box_watchdog.sh > runs/run10/watchdog.log 2>&1'")
         remote("for i in $(seq 1 50); do if grep -q 'auth check GET: 200' /workspace/cg/runs/run10/watchdog.log; then cat /workspace/cg/runs/run10/watchdog.log; exit 0; fi; sleep .2; done; exit 1", timeout=20)
-        pool = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+        pool = concurrent.futures.ThreadPoolExecutor(max_workers=10)
         beat = pool.submit(heartbeat)
 
         def setup():
@@ -158,24 +254,7 @@ def run():
             with (rental.OUT / 'base_download.log').open('w') as log:
                 remote('HF_HOME=/workspace/hf python -c '+shlex.quote(fetch),timeout=5400,stdout=log,stderr=subprocess.STDOUT)
         setup_future = pool.submit(setup)
-        for name, source in plan['adapters'].items():
-            if setup_future.done():
-                setup_future.result()
-            target = '/workspace/cg/outputs/up_' + name
-            remote('mkdir -p ' + target, timeout=30)
-            with (rental.OUT / f'upload_{name}.log').open('w') as log:
-                subprocess.run(['rsync', '-az', '--partial', '-e', shlex.join(ssh),
-                    source['path'] + '/adapter_config.json', source['path'] + '/adapter_model.safetensors', host + ':' + target + '/'],
-                    check=True, stdout=log, stderr=subprocess.STDOUT, timeout=max(1, state['runner_deadline_epoch'] - time.time() - 3600))
-            expected = {target + '/' + filename: info['sha256'] for filename, info in source['files'].items()}
-            verify = 'import hashlib; files=' + repr(expected) + '; assert all(hashlib.file_digest(open(p,"rb"),"sha256").hexdigest()==s for p,s in files.items())'
-            remote('python -c ' + shlex.quote(verify), timeout=300)
-            print('REMOTE ADAPTER VERIFIED ' + name, flush=True)
-        setup_future.result()
-        command = f'cd /workspace/cg && HF_HOME=/workspace/hf RUN16_DEADLINE={state["runner_deadline_epoch"]} python scripts/eval/62_run16_box.py'
-        script = f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
-        remote('cd /workspace/cg && tmux new-session -d -s run10_train ' + shlex.quote('bash -lc ' + shlex.quote(script)), timeout=30)
-        rental.monitor(remote, lambda: max(1, state['runner_deadline_epoch'] - time.time()), stop, beat)
+        parallel_work(remote,ssh,host,state,plan,setup_future,stop,beat,pool)
     finally:
         try:
             if ssh is not None:
@@ -199,72 +278,26 @@ def run():
 
 
 def parallel_attach():
-    """Resume this exact lease with six streams and earliest-need scheduling; never creates an instance."""
-    state=json.loads(rental.STATE.read_text())
-    plan=json.loads((OUT/'plan.json').read_text())
+    """Resume an owned existing lease; never creates a replacement instance."""
+    state=json.loads(rental.STATE.read_text());plan=json.loads((OUT/'plan.json').read_text())
     ssh,host=rental.saved_connection(state)
     assert any(r['id']==state['instance_id'] and r['label']==rental.LABEL for r in rental.api('/instances/')['instances'])
     assert (rental.OUT/'deadline_guard_armed.json').exists()
     stop=threading.Event()
     def remote(command,timeout=600,**kwargs):
-        left=state['hard_destroy_epoch']-time.time()-120
-        assert left>0
+        left=state['hard_destroy_epoch']-time.time()-120;assert left>0
         return subprocess.run(ssh+[host,command],check=True,timeout=min(timeout,left),**kwargs)
     def beat():
-        while not stop.wait(60):
-            remote('touch /workspace/heartbeat',timeout=15,stdout=subprocess.DEVNULL)
-    def upload(name):
-        source=plan['adapters'][name]; target='/workspace/cg/outputs/up_'+name
-        remote('mkdir -p '+target,timeout=30)
-        started=time.time()
-        with (rental.OUT/f'upload_{name}_parallel.log').open('w') as log:
-            subprocess.run(['rsync','-az','--partial','--info=progress2','-e',shlex.join(ssh),
-                source['path']+'/adapter_config.json',source['path']+'/adapter_model.safetensors',host+':'+target+'/'],
-                check=True,stdout=log,stderr=subprocess.STDOUT,timeout=max(1,state['runner_deadline_epoch']-time.time()-4*3600))
-        expected={target+'/'+f:v['sha256'] for f,v in source['files'].items()}
-        verify='import hashlib; files='+repr(expected)+"; assert all(hashlib.file_digest(open(p,'rb'),'sha256').hexdigest()==s for p,s in files.items())"
-        remote('python -c '+shlex.quote(verify),timeout=300)
-        receipt={'name':name,'files':expected,'seconds':time.time()-started,'verified_epoch':time.time(),'instance_id':state['instance_id']}
-        data=json.dumps(receipt,indent=2)+'\n'
-        (rental.OUT/f'upload_{name}.verified.json').write_text(data)
-        remote('cat > /workspace/cg/runs/run10/upload_'+name+'.verified.json',input=data.encode(),timeout=30)
-        print('REMOTE ADAPTER VERIFIED '+name,flush=True)
-    def prep_wait():
-        remote("while [ ! -f /workspace/cg/runs/run10/prep.done ]; do sleep 10; done",timeout=5400)
-    remote('touch /workspace/heartbeat',timeout=30)
-    # The old controller transferred the package before uploads. These two approved source changes replace it explicitly.
-    for path in ['scripts/train/spectral_plugin.py','scripts/eval/62_run16_box.py']:
-        subprocess.run(['rsync','-az','-e',shlex.join(ssh),str(ROOT/path),host+':/workspace/cg/'+path],check=True,timeout=60)
-    changes={p:sha(ROOT/p) for p in ['scripts/train/spectral_plugin.py','scripts/eval/62_run16_box.py']}
-    (rental.OUT/'transport_source_override.json').write_text(json.dumps(changes,indent=2)+'\n')
-    pool=concurrent.futures.ThreadPoolExecutor(max_workers=9)
-    heartbeat=pool.submit(beat)
-    prep=pool.submit(prep_wait)
-    # Six simultaneous files; Stoic starts from the safely retained partial. No checkpoints or old P64 are sent.
-    pending={name:pool.submit(upload,name) for name in ['stoic','const','other','rewr','mix_stoic','mix_const']}
+        while not stop.wait(60):remote('touch /workspace/heartbeat',timeout=15,stdout=subprocess.DEVNULL)
+    pool=concurrent.futures.ThreadPoolExecutor(max_workers=10);heartbeat=pool.submit(beat)
     try:
-        for name in ['stoic','const','other']: pending[name].result()
-        # The three needed streams are free; replay control transfers during training.
-        pending['ctl']=pool.submit(upload,'ctl')
-        prep.result()
-        command=f'cd /workspace/cg && HF_HOME=/workspace/hf RUN16_DEADLINE={state["runner_deadline_epoch"]} python scripts/eval/62_run16_box.py'
-        script=f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
-        remote('cd /workspace/cg && tmux new-session -d -s run10_train '+shlex.quote('bash -lc '+shlex.quote(script)),timeout=30)
-        print('NEW-D DRIVER STARTED after three doc donors, other uploads continue',flush=True)
-        for future in pending.values(): future.result()
-        rental.monitor(remote,lambda:max(1,state['runner_deadline_epoch']-time.time()),stop,heartbeat)
+        # Attach is for an already-launched driver. Fresh/replacement leases always use run().
+        monitor_with_repair(remote,state,stop,heartbeat)
     finally:
         try:
-            try: rental.retrieve_outputs(ssh,host,state)
-            finally: rental.destroy()
-            assert all(r['id']!=state['instance_id'] for r in rental.api('/instances/')['instances'])
-            after=rental.api('/users/current/')
-            (OUT/'provider_closure_verified.json').write_text(json.dumps({'instance_id':state['instance_id'],'absent_confirmed':True,
-                'elapsed_hours':(time.time()-state['created_epoch'])/3600,
-                'estimated_gpu_usd':(time.time()-state['created_epoch'])/3600*state['hourly_rate'],
-                'credit_after':after['credit'],'note':'GPU elapsed-rate estimate, not invoice-reconciled; traffic/API separate'},indent=2)+'\n')
-        finally:
-            stop.set();pool.shutdown(wait=True)
+            try:rental.retrieve_outputs(ssh,host,state)
+            finally:rental.destroy()
+        finally:stop.set();pool.shutdown(wait=True)
 
 
 if __name__ == '__main__':
