@@ -2,8 +2,9 @@
 
 Per LoRA module, with per-token input second moments C_char, C_cap measured on the deployed graft:
     C_char v = λ C_cap v           generalized eigenproblem, ridge εI added to both so unseen directions get λ ≈ 1
-    Q = V_keep V_keepᵀ C_cap       oblique projector: Q v = v for kept v, 0 for dropped v
-    A′ = A Q                       input side only; LoRA rank, B and scale unchanged
+    Q = C_cap V_keep V_keepᵀ       each row of A is a functional a; its coordinates u = Vᵀ C_cap a split its energy:
+    A′ = A Q                       aᵀC_cap a = Σ u_i², aᵀC_char a = Σ λ_i u_i². Dropping small-λ u_i lowers both, never raises.
+                                   Input side only; LoRA rank, B and scale unchanged.
 V_keep = {v : λ ≥ τ}. One global τ, set so the removed weight energy matches --removed-energy (run-14 P₆₄ removed 0.15).
 This is the input-side (activation) half of a K-FAC curvature estimate: output-gradient covariance is taken as I.
 Routed-expert gate_up reads the layer-wide MoE input covariance: per-expert hidden covariances (256×2048² per layer) do not fit.
@@ -164,7 +165,8 @@ def generalized_eig(C_char: Float[Tensor, '*b d d'], C_cap: Float[Tensor, '*b d 
 
 
 def projector(lam, V, cap, tau: float):
-    return (V * (lam >= tau)[..., None, :].to(V.dtype)) @ V.mT @ cap
+    """Right-multiplier for A. Not V_keep V_keepᵀ C_cap: that projects inputs and can raise the adapter's energy (2× on a toy)."""
+    return cap @ (V * (lam >= tau)[..., None, :].to(V.dtype)) @ V.mT
 
 
 def input_energy(A, B, C):
@@ -197,13 +199,11 @@ def project(args):
         kept = sum(p16.frobenius_squared(A @ projector(*eig[cov_key(name)], tau), B).sum().item() for _, name, A, B in items)
         return 1 - kept / original
 
-    if args.tau is None:
-        low, high = min(v[0].min().item() for v in eig.values()), max(v[0].max().item() for v in eig.values()) * 1.01
+    if args.tau is None:  # removed Frobenius energy is not monotone in τ (Q is oblique in the plain weight metric): grid, not bisection
+        low, high = min(v[0].min().item() for v in eig.values()), max(v[0].max().item() for v in eig.values())
         assert low > 0
-        for _ in range(40):
-            mid = (low * high) ** .5
-            low, high = (mid, high) if removed(mid) < args.removed_energy else (low, mid)
-        tau = high
+        grid = torch.logspace(torch.log10(torch.tensor(low)), torch.log10(torch.tensor(high)), 40).tolist()
+        tau = min(grid, key=lambda t: abs(removed(t) - args.removed_energy))
     else:
         tau = args.tau
     args.output.mkdir(parents=True, exist_ok=False)
