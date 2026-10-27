@@ -1,6 +1,6 @@
 # Reasoning chat dataset v2 (plan goal D)
 
-Draft for wassname's approval, 2026-10-27. Planner: PI/Claude (litreview). Generate/judge code: cg_reasoning (`scripts/data/moral_deliberation/`); seeds, screens, layout, export: litreview. Layout: `docs/data_pipeline.md` "Layout for new builds".
+Approved by wassname 2026-10-27 (decisions below). Planner: PI/Claude (litreview). Generate/judge code: cg_reasoning (`scripts/data/moral_deliberation/`); seeds, screens, layout, export: litreview. Layout: `docs/data_pipeline.md` "Layout for new builds".
 
 wassname (spelling corrected): "make sure we cache Kimi and Haiku judge"; "check everything properly: refusals, reverse reasoning, the whole thing"; "seed it properly!! we have so much data: WildChat, Machiavelli, tiny-virtues, Stoic text! we don't need to reuse"; "writing it in Greek or Latin and translating removes verbal tics? need to try with Kimi"; "rejection might be 50%".
 
@@ -35,7 +35,7 @@ wassname (spelling corrected): "make sure we cache Kimi and Haiku judge"; "check
 1. Thinking on: "we're trying to get thinking working!" All v2 rows carry real reasoning; the graft is served with thinking on.
 2. tiny-virtues is a seed pool: "do it anyway, it's not a great eval but could be good training data". Vignettes first; the private books in `/workspace/2026/tiny-virtues/private/sources/` if the vignettes are not enough. That eval is then not valid for this model.
 3. Haiku judge: the "no Anthropic" line in the 2026-10-26 plan was written by the planning agent, not wassname, and is withdrawn. Try Haiku with the true purpose stated; if it refuses after one retry, use a non-Anthropic judge.
-4. Budget: open. Estimate $0.043 per Kimi row (cg_reasoning batch: "$1.718" for 40), so ~$86 for 2,000 direct-English rows, ~$150-170 with the classical route, plus judging. Start with the 50-seed A/B (under $10).
+4. Budget (wassname): "$10 to prototype and check, $100 for big run". Prototype = the 50-seed A/B plus judge calibration. Big run = generation + judging for ~1,000 kept rows; at $0.043 per Kimi row (cg_reasoning batch: "$1.718" for 40) direct English fits, the classical route for every row may not.
 5. Constitution documents: keep run 10's for this build (papers say documents need reasons, not reasoning traces; see below); regenerating them with Kimi (~$70-140) is a separate test.
 
 ## Appendix: do documents need reasoning? (context, not approved)
