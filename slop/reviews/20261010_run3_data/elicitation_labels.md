@@ -1,6 +1,6 @@
 # Elicitation check: Claude's hand labels vs Jev, 20 seeded rows
 
-Claude (Opus 5.5), 2026-10-10. Rows: `random.Random(0).sample(..., 10)` of non-ordinary rows from sft_stoic_modern (Opus->Echo, run 3's set) and sft_ae (astra->Echo, run 2's main set). Labelled by Claude before seeing Jev. Jev: `scripts/data/34_elicitation_check.py 10` (cache .local/elicitation_jev.jsonl, ~$0.01).
+Claude (Opus 5.5), 2026-10-10. Rows: `random.Random(0).sample(..., 10)` of non-ordinary rows from sft_stoic_modern (Opus->Echo, run 3's set) and sft_ae (astra->Echo, run 2's main set). Labelled by Claude before seeing Jev. Jev: `scripts/data/scratch/34_elicitation_check.py 10` (cache .local/elicitation_jev.jsonl, ~$0.01).
 
 Options: not_needed (the request already gives the facts the answer turns on, or fiction/game/craft) | asks_first (a decisive fact is missing and the reply asks or names the cheapest check, and conditions on it) | decides_through (missing, but the reply decides anyway).
 

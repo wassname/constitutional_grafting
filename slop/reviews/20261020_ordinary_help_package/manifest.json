@@ -8,7 +8,7 @@
   },
   "shared_inputs": {
     "scripts/data/50_docs_v2.py": "cd199ed48407cbbe33ad1fd4c5690c13c546a5b27d1cd12697f7faede2b5bf23",
-    "scripts/data/51_judge_docs_v2.py": "34aee62d3ae7cded5e483e41af439a40604b4932715223f63da96e64e08a128e",
+    "scripts/data/scratch/51_judge_docs_v2.py": "34aee62d3ae7cded5e483e41af439a40604b4932715223f63da96e64e08a128e",
     "constitution/v4.md": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942"
   },
   "rendered_writer_system_sha256": "eaf6ae9a57da54e88f5901d2092c3a4710bf3d9ae6c17f11dbfe9acd7cb3d8cd",

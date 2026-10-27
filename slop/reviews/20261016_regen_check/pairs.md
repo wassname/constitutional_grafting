@@ -1,6 +1,6 @@
 # Regenerated vs original graft documents
 
-Same batch file, model, system prompt, constitution version and temperature as the original API lane. Batches: [287, 250, 278, 252] (random.Random(0).sample of done OpenRouter doc batches with ≥2 docs). -- scripts/data/62_regen_check.py
+Same batch file, model, system prompt, constitution version and temperature as the original API lane. Batches: [287, 250, 278, 252] (random.Random(0).sample of done OpenRouter doc batches with ≥2 docs). -- scripts/data/scratch/62_regen_check.py
 
 ## doc_77cbb5151b (batch 287, fiction_world, settings, constitution 84a5c072106a)
 

@@ -168,7 +168,7 @@ The existing review records: “The launcher died with exit 127 after pi had wri
 
 ### 11. Low — extra-seed diversity and count claims are not enforced
 
-**`scripts/data/25b_seed_stakes.py:63–68`; `scripts/data/25_seed_pool.py:288–295`**
+**`scripts/data/scratch/25b_seed_stakes.py:63–68`; `scripts/data/25_seed_pool.py:288–295`**
 
 > `for rep in range(2):  # each situation twice, with different constitution items and framings`
 

@@ -1,6 +1,6 @@
 # Repair pilot: flagged seat groups → one lean plus its uncertainty
 
-PI / OpenAI Sol, 2026-10-10. Source: `data/frontier/sft_ae/seats/repaired.jsonl` (pueue 3313, `scripts/data/30_astra_echo.py repair`, commit 0ebfd84). 2 groups, 6 rows, all valid, no lint.
+PI / OpenAI Sol, 2026-10-10. Source: `data/frontier/sft_ae/seats/repaired.jsonl` (pueue 3313, `scripts/data/scratch/30_astra_echo.py repair`, commit 0ebfd84). 2 groups, 6 rows, all valid, no lint.
 
 | group | before (verdict check) | after |
 |:--|:--|:--|

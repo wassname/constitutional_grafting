@@ -33,7 +33,7 @@ got = judge["quote_check"]({"virtues_shown": [{"quote": "I endorse theft."}]}, d
 assert got == (1, 1)
 print(f"OBSERVED: quote_check accepts a user-only quote as verified: {got}; assistant-attributed expectation is 0/1")
 
-path = ROOT / "scripts/data/35_plain_rewrite.py"
+path = ROOT / "scripts/data/scratch/35_plain_rewrite.py"
 tree = ast.parse(source(path))
 assign = next(n for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "TELLS" for t in n.targets))
 namespace = {"re": re}

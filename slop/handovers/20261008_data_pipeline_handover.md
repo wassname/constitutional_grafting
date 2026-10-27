@@ -6,7 +6,7 @@ Claude (Pi, Opus 5.5). For the next agent (or me after compaction). Read with `A
 
 - Constitution: `constitution/v4.md.j2` -> `v4.md`, FROZEN for data work (wassname). Edits only with his approval. Open constitution questions are listed at the end.
 - Data pipeline uses v4 (`scripts/data/constitution.py`). One pilot end to end: `SEED=<n> scripts/scratch/run_pilot.sh pilot<N> 60 12 24` (prompts -> SFT labels + docs -> repair all SFT pools and docs -> merged `data/sft/<N>_final`, `data/corpus/<N>_final`).
-- Review per pilot (AGENTS.md procedure): `uv run scripts/data/08_review_package.py data/prompts/<N> data/corpus/<N>_final data/sft/<N>_final slop/reviews/<date>_<N>_v4_package`, brief.md (copy the last one, update "Changes since"), read every sampled item in full -> claude_read.md, panel `run_panel.js` (kimi, minimax, qwen, muse; minimax/qwen sometimes abort "Request aborted", retry), synthesis.md with each panel claim checked.
+- Review per pilot (AGENTS.md procedure): `uv run scripts/data/scratch/08_review_package.py data/prompts/<N> data/corpus/<N>_final data/sft/<N>_final slop/reviews/<date>_<N>_v4_package`, brief.md (copy the last one, update "Changes since"), read every sampled item in full -> claude_read.md, panel `run_panel.js` (kimi, minimax, qwen, muse; minimax/qwen sometimes abort "Request aborted", retry), synthesis.md with each panel claim checked.
 - Pilots 7-9 reviewed (`slop/reviews/20261008_pilot{7,8,9}_v4_package/synthesis.md`); pilot10 (SEED=2) running/finished — not yet reviewed. Pilot10 started before fb495cc (rubric examples removed), so its judge still had item-derived examples.
 - Spend: ~$4 of wassname's $40 on the `.env` key (the auth.json key hit its weekly cap).
 

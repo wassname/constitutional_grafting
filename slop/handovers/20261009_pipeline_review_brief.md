@@ -9,7 +9,7 @@ Builds training data for an open-weight model (gemma-4-31b) to take on the chara
 ## Files to review (read all)
 
 - `scripts/data/25_seed_pool.py` (seed pool: sources, stable hash ids, caching in data/raw)
-- `scripts/data/25b_seed_stakes.py` (extra hand-listed seeds)
+- `scripts/data/scratch/25b_seed_stakes.py` (extra hand-listed seeds)
 - `scripts/data/26_frontier_batches.py` (make / next / mark / parse / split / reset_unrun; brief text; pacing; structure check; lint; provenance `meta`)
 - `scripts/data/27_run_frontier.sh` (per-account runner calling pi)
 - `scripts/data/03_prompt_pools.py` only the functions `wildchat`, `machiavelli`, `best_actions` (reused by the pool)

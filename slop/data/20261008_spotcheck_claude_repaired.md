@@ -1,6 +1,6 @@
 # Claude's full read of the 29 repaired hard-advice labels, 2026-10-08
 
-Claude (Pi, Opus). File: `data/sft/pilot6_repair/repaired.jsonl` (prompt, repaired answer `C`, the pre-repair answer and the repairer's change list). Repairer: gpt-6.1-sol subagent, minimal edits to fix the judges' listed problems (OpenRouter key was capped, so `scripts/data/07_repair.py` could not run). Every word of all 29 answers read.
+Claude (Pi, Opus). File: `data/sft/pilot6_repair/repaired.jsonl` (prompt, repaired answer `C`, the pre-repair answer and the repairer's change list). Repairer: gpt-6.1-sol subagent, minimal edits to fix the judges' listed problems (OpenRouter key was capped, so `scripts/data/scratch/07_repair.py` could not run). Every word of all 29 answers read.
 
 | check | count | items |
 |:--|--:|:--|

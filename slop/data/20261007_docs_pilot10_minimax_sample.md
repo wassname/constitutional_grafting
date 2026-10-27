@@ -1,6 +1,6 @@
 # Document sample (pilot10_minimax): 20 of 24
 
-Generator minimax/minimax-m3, constitution `constitution/v4.md`, persona Musonius. Script `scripts/data/02_generate_docs.py`.
+Generator minimax/minimax-m3, constitution `constitution/v4.md`, persona Musonius. Script `scripts/data/scratch/02_generate_docs.py`.
 
 
 ---

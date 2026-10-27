@@ -1,6 +1,6 @@
 # Seats pilot: 2 batches, 10 groups (original + 2 seats)
 
-PI / OpenAI Sol, 2026-10-09. Source: `data/frontier/sft_ae/seats/items.jsonl` (pueue 3270, `scripts/data/30_astra_echo.py seats`, commit 6b7d0bf). 20 seat rows, 20 valid, no lint.
+PI / OpenAI Sol, 2026-10-09. Source: `data/frontier/sft_ae/seats/items.jsonl` (pueue 3270, `scripts/data/scratch/30_astra_echo.py seats`, commit 6b7d0bf). 20 seat rows, 20 valid, no lint.
 
 ## Verdict check (astra low reads the 3 actual replies)
 

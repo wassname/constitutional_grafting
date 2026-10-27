@@ -22,7 +22,7 @@ The proposed learner input is the complete `document` string as plain text with 
 
 The shared writer context is the complete `SYSTEM` and `USER` templates in `scripts/data/50_docs_v2.py`, with `constitution/v4.md` substituted. Each case contains its complete reconstructed user text. Source/template/constitution hashes and request settings are in `manifest.json`; those hashes match the saved row prefixes. These are reconstructed expected prompts, not retained provider wire traces.
 
-Historical judge format is the complete `PROMPT` and JSON output schema in `scripts/data/51_judge_docs_v2.py`; each `original_judge` is the recorded output, including reasons and verdict. Current repaired alternatives include recorded repair objections/provenance from `52_repair_docs_v2.py`. No new generator/judge/repair prompt is proposed or tested here.
+Historical judge format is the complete `PROMPT` and JSON output schema in `scripts/data/scratch/51_judge_docs_v2.py`; each `original_judge` is the recorded output, including reasons and verdict. Current repaired alternatives include recorded repair objections/provenance from `52_repair_docs_v2.py`. No new generator/judge/repair prompt is proposed or tested here.
 
 The parent reread every supplied complete document, all five seeds/settings and all five saved verdicts; both changed originals and revisions were read. The cookbook seed exactly matches the local attributed Chakrapani passage; `source_check.json` records the checked chapter context and limits. Ancient dietary opinions are historical evidence of Musonius's argument, not current clinical guidance.
 

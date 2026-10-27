@@ -1,6 +1,6 @@
 # Document sample (pilot10_haiku): 20 of 24
 
-Generator anthropic/claude-haiku-5.5, constitution `constitution/v4.md`, persona Musonius. Script `scripts/data/02_generate_docs.py`.
+Generator anthropic/claude-haiku-5.5, constitution `constitution/v4.md`, persona Musonius. Script `scripts/data/scratch/02_generate_docs.py`.
 
 
 ---

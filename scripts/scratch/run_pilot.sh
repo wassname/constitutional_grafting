@@ -6,11 +6,11 @@ cd "$(dirname "$0")/../.."
 NAME=$1; NP=${2:-60}; NS=${3:-12}; ND=${4:-24}
 export REPAIR_JUDGES=${REPAIR_JUDGES:-openai/gpt-6-luna:high}
 uv run scripts/data/03_prompt_pools.py "$NP" "$NAME" 2>&1 | grep INFO | tail -5
-uv run scripts/data/04_sft_labels.py z-ai/glm-5.3-flash google/gemma-4-31b-it "data/prompts/$NAME" "$NS" "$NAME" 2>&1 | grep INFO | tail -4 &
-uv run scripts/data/02_generate_docs.py "$ND" "$NAME" "$NAME" 2>&1 | grep INFO | tail -4 &
+uv run scripts/data/scratch/04_sft_labels.py z-ai/glm-5.3-flash google/gemma-4-31b-it "data/prompts/$NAME" "$NS" "$NAME" 2>&1 | grep INFO | tail -4 &
+uv run scripts/data/scratch/02_generate_docs.py "$ND" "$NAME" "$NAME" 2>&1 | grep INFO | tail -4 &
 wait
-uv run scripts/data/07_repair.py "data/sft/$NAME/labels.jsonl" all "data/sft/${NAME}_repair" 2>&1 | grep INFO | tail -2 &
-uv run scripts/data/07_repair.py "data/corpus/$NAME/docs.jsonl" docs "data/corpus/${NAME}_final" 2>&1 | grep INFO | tail -2 &
+uv run scripts/data/scratch/07_repair.py "data/sft/$NAME/labels.jsonl" all "data/sft/${NAME}_repair" 2>&1 | grep INFO | tail -2 &
+uv run scripts/data/scratch/07_repair.py "data/corpus/$NAME/docs.jsonl" docs "data/corpus/${NAME}_final" 2>&1 | grep INFO | tail -2 &
 wait
 python3 - "$NAME" <<'EOF'
 import json, sys

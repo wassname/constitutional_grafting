@@ -30,7 +30,7 @@ Their measured lengths are298/299 words; source versions remain310/306 and are p
 
 ## Exact format and shared context
 
-The intended learner input is the complete `candidate.document` string as plain completion text on Base, not chat SFT. Full writer SYSTEM/USER templates and request settings are in `scripts/data/50_docs_v2.py`, using `constitution/v4.md`; historical judge format is the full PROMPT/schema in `scripts/data/51_judge_docs_v2.py`. Hashes and reconstructed prompts are supplied, not provider wire traces. No prompt changes or corpus scaling are proposed here.
+The intended learner input is the complete `candidate.document` string as plain completion text on Base, not chat SFT. Full writer SYSTEM/USER templates and request settings are in `scripts/data/50_docs_v2.py`, using `constitution/v4.md`; historical judge format is the full PROMPT/schema in `scripts/data/scratch/51_judge_docs_v2.py`. Hashes and reconstructed prompts are supplied, not provider wire traces. No prompt changes or corpus scaling are proposed here.
 
 `prepare.py` checks exact source equality, template/constitution hash prefixes, actual word counts and EOS-inclusive single-block fit with the cached pinned tokenizer. Word-band deviations are reported, not clipped or called character defects. `verification.log` and `manifest.json` hold the results; they do not test actual trainer loss or student improvement.
 

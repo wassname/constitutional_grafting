@@ -9,7 +9,7 @@ Claude (Opus 5.5). Built by `scripts/train/01_prepare.py` (Opus-reasoned rows on
 
 SFT shapes: seeded_dilemma 604, role_dilemma 109, ordinary 104, difficult_high 100, ask_first 100, ask_first asking turn 89, repair 42, identity 40, difficult_everyday 39. (14 Opus rows were still in the Echo restyle; 48 unrestyled rows go to the graft only.)
 
-Move rates (`scripts/data/33_mix_rates.py`, regex proxies, ~2x overcount on "specific question" by an 8-row hand check):
+Move rates (`scripts/data/scratch/33_mix_rates.py`, regex proxies, ~2x overcount on "specific question" by an 8-row hand check):
 
 | set | rows | has a question | asks a specific question | uncertainty words | "I will not / can't" | median words |
 |:--|--:|--:|--:|--:|--:|--:|

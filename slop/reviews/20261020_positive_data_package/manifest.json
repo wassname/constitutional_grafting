@@ -8,8 +8,8 @@
   },
   "shared_inputs": {
     "scripts/data/50_docs_v2.py": "cd199ed48407cbbe33ad1fd4c5690c13c546a5b27d1cd12697f7faede2b5bf23",
-    "scripts/data/51_judge_docs_v2.py": "34aee62d3ae7cded5e483e41af439a40604b4932715223f63da96e64e08a128e",
-    "scripts/data/52_repair_docs_v2.py": "0c64c6e8613ebfa370147bc946f55d0744a128d6b7854ef2b2e3d33e8edced7d",
+    "scripts/data/scratch/51_judge_docs_v2.py": "34aee62d3ae7cded5e483e41af439a40604b4932715223f63da96e64e08a128e",
+    "scripts/data/scratch/52_repair_docs_v2.py": "0c64c6e8613ebfa370147bc946f55d0744a128d6b7854ef2b2e3d33e8edced7d",
     "constitution/v4.md": "dd0e916919036bc4bce68cd32e118a99836317bd303280cdfe3de2abf1861942"
   },
   "writer_request_reconstruction": "Use SYSTEM from50 formatted with constitution/v4, then USER.format(**original); roles system,user; historical model from original.meta, max_tokens6000, temperature1, ephemeral system cache. Each dossier contains the full reconstructed user text. System-template and constitution hashes match original saved prefixes. This reconstructs expected inputs, not a retained wire trace.",

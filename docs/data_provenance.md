@@ -58,7 +58,7 @@ Scope: the two files every Qwen run since qwen1 trained on.
 - `data/train/docs_qwen_frozen.jsonl` (sha256 `ada93e20…`): the graft corpus. Run 6's documents-only graft used its `kind == doc` rows.
 - `data/train/sft_qwen2_frozen.jsonl` (`6a206beb…`): the Qwen SFT set.
 
-Per-row tables: `data/provenance/{docs_qwen_frozen,sft_qwen2_frozen}.tsv`. Count tables: `*_summary.md`. sha256 of every input and output: `data/provenance/manifest.tsv` (559 files). All are made by `scripts/data/60_provenance.py` and kept in git. `data/` itself is gitignored.
+Per-row tables: `data/provenance/{docs_qwen_frozen,sft_qwen2_frozen}.tsv`. Count tables: `*_summary.md`. sha256 of every input and output: `data/provenance/manifest.tsv` (559 files). All are made by `scripts/data/scratch/60_provenance.py` and kept in git. `data/` itself is gitignored.
 
 ## The chain, and what was checked
 
@@ -78,7 +78,7 @@ flowchart TB
 | seeds → batch files | yes (code at `git_at_make`) | each row's batch-file sha256 against the `brief_sha` recorded at make time | 2,802 of 2,804 graft rows with a batch file match. `batch_218.md` and `batch_220.md` were rewritten later, so 2 documents' exact inputs are lost. SFT: 1,185 of 1,185 match. |
 | batch → items | **no**: LLM sampling | n/a | Reproducible only as a procedure: same brief, seeds, constitution and writer model. Writer, batch, constitution sha and make-time git commit are recorded for every row except 16 pool rows. |
 | items → frozen files | yes | `OUT_DIR=… CHAT_MODEL=qwen 01_prepare.py` | **byte-identical** `docs_qwen_frozen` and `sft_qwen_frozen` |
-| sft_qwen → sft_qwen2 | was an unscripted edit | rebuilt by the new `scripts/data/36_maker_qwen.py --check` | **byte-identical** (see defect 1) |
+| sft_qwen → sft_qwen2 | was an unscripted edit | rebuilt by the new `scripts/data/scratch/36_maker_qwen.py --check` | **byte-identical** (see defect 1) |
 
 ## What the graft documents are (1,585 rows, `kind == doc`)
 
@@ -109,7 +109,7 @@ Constitution versions the documents were written against. All six are recoverabl
 
 ## Can the documents be regenerated at the same quality? (checked 2026-10-16)
 
-`scripts/data/62_regen_check.py` re-sent 4 recorded OpenRouter document batches (20 documents) exactly as the original API lane did:
+`scripts/data/scratch/62_regen_check.py` re-sent 4 recorded OpenRouter document batches (20 documents) exactly as the original API lane did:
 - the same batch file (its sha256 equals the recorded `brief_sha`);
 - the same system prompt and model (`anthropic/claude-opus-5.5`; served the same);
 - temperature 1.0;
@@ -167,7 +167,7 @@ Full history from the session transcripts, with wassname's approvals quoted and 
 2. Store every prompt by its sha (`data/prompts_store/<sha>.txt`). Rows keep the sha.
 3. Record per row: seed source, id and dataset revision; model requested and served; parameters; constitution sha; time; usage.
 4. Every later step (judge, repair, Echo restyle, edits) adds a record with its own prompt sha, model and git commit, and the sha of the text before and after. No hand edits: every change is a script.
-5. Freeze training files with a sha256 in the config comment. `scripts/data/60_provenance.py` plus a rebuild check (`OUT_DIR=… 01_prepare.py`, `36_maker_qwen.py --check`) must reproduce them byte for byte.
+5. Freeze training files with a sha256 in the config comment. `scripts/data/scratch/60_provenance.py` plus a rebuild check (`OUT_DIR=… 01_prepare.py`, `36_maker_qwen.py --check`) must reproduce them byte for byte.
 6. Keep `data/` backed up: wassname to choose between git LFS, a private HF dataset, or an off-host copy. Nothing is uploaded until he decides.
 
 ## Echo meaning check (2026-10-17)

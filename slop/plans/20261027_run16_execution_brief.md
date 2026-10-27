@@ -21,7 +21,7 @@ Adapters are in `~/.local/share/cg_run10_adapters/`. Verify their hashes against
 
 ## Inputs
 
-- Fixed chat data: `/workspace/2026/constitutional_grafting/data/train/eos_fixed/chatr12.jsonl` (gitignored; 1,636 rows, 903 with EOS appended). It comes from the run-14 executed copy `.local/run14_executed_chatr12/chatr12.jsonl` and was built by `scripts/data/93_fix_missing_eos.py`; `manifest.json` next to it has the hashes. `check_loss_mask.py` must pass **without** `ALLOW_MISSING_EOS`.
+- Fixed chat data: `/workspace/2026/constitutional_grafting/data/train/eos_fixed/chatr12.jsonl` (gitignored; 1,636 rows, 903 with EOS appended). It comes from the run-14 executed copy `.local/run14_executed_chatr12/chatr12.jsonl` and was built by `scripts/data/94_fix_missing_eos.py`; `manifest.json` next to it has the hashes. `check_loss_mask.py` must pass **without** `ALLOW_MISSING_EOS`.
 - Eval: tiny-char v2 `/workspace/2026/tiny-character/data/versions/20261026_v2/items.jsonl`, sha256 `5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444`, 196 items; pass it with `--items`. Check the sha before use. Never commit in the tiny-character repo; it validated v2 in `results/v2_validation.md`.
 - cg_exp_curve's cells: exact commands in `slop/plans/20261027_run16_selector_cells_cg_exp_curve.md`. Use `18_project_char_vs_cap.py` at 4acffd4a or later, and copy to the box `data/train/run14/ctlgen.jsonl` (or `slop/eval/run14_box_a/lease/box_runs/ctlgen.jsonl`).
 - Templates to fork, not rewrite: `scripts/eval/55_run14_box_a_rental.py`, `56_run14_box_a.py`, `57_run14_results.py`; `scripts/train/14_run10_chat_box.sh` (chat training); the run-15 rental's guard fixes (`58_run15_heal_rental.py`).

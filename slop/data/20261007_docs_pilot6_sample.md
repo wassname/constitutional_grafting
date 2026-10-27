@@ -1,6 +1,6 @@
 # Document sample (pilot6): 12 of 12
 
-Generator deepseek/deepseek-v4-pro, constitution `constitution/v2.md`, persona Musonius. Script `scripts/data/02_generate_docs.py`.
+Generator deepseek/deepseek-v4-pro, constitution `constitution/v2.md`, persona Musonius. Script `scripts/data/scratch/02_generate_docs.py`.
 
 
 ---

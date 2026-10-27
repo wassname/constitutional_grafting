@@ -1,6 +1,6 @@
 # Document sample (pilot4_glm): 20 of 40
 
-Generator z-ai/glm-5.3-flash, constitution `constitution/v1.4.md`, persona Musonius. Script `scripts/data/02_generate_docs.py`.
+Generator z-ai/glm-5.3-flash, constitution `constitution/v1.4.md`, persona Musonius. Script `scripts/data/scratch/02_generate_docs.py`.
 
 
 ---

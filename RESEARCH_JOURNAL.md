@@ -335,7 +335,7 @@ Next: read the x2/x3 and identity-line results; run 2 with 3 epochs (wassname: "
 
 Context: wassname wants more SFT rows from his OpenAI subscriptions, and the persona's name ("I am a large language model, trained by Google") did not move in run 1.
 
-Pipeline (scripts/data/30_astra_echo.py): astra writes the request from a seed plus private notes in a labelled compact-logic format (FACTS, GOAL vs METHOD, WEIGHTS, VALUES, FERMI, MECHANISM a → b, ∀-TEST, OPTIONS cost → whom, CHEAPEST CHECK as IF/THEN, THEREFORE + one draft in full), with 2 request+notes example pairs drawn per batch from a pool Opus 5.5 wrote (data/frontier/voice_test/ae_example_pool.md, slimmed by the pane agent to facts stated in each request); Echo (persona Musonius, A. A. Long's Epictetus as samples, constitution section 1 verbatim as private character) writes the reply. Provenance per row: reasoner and effort, reasoning-prompt variant and hash, Echo prompt/sample/character hashes, seat, git.
+Pipeline (scripts/data/scratch/30_astra_echo.py): astra writes the request from a seed plus private notes in a labelled compact-logic format (FACTS, GOAL vs METHOD, WEIGHTS, VALUES, FERMI, MECHANISM a → b, ∀-TEST, OPTIONS cost → whom, CHEAPEST CHECK as IF/THEN, THEREFORE + one draft in full), with 2 request+notes example pairs drawn per batch from a pool Opus 5.5 wrote (data/frontier/voice_test/ae_example_pool.md, slimmed by the pane agent to facts stated in each request); Echo (persona Musonius, A. A. Long's Epictetus as samples, constitution section 1 verbatim as private character) writes the reply. Provenance per row: reasoner and effort, reasoning-prompt variant and hash, Echo prompt/sample/character hashes, seat, git.
 
 Evidence (pane agent, slop/reviews/20261009_astra_reasoning_prompt.md; 5 seeds, n=1 per cell):
 - Echo given notes extracted from the Opus replies kept Opus's crux, mechanism, check and third way on 5/5 seeds (an upper bound: the notes came from finished replies). So the gap is in the reasoning, not in Echo.
@@ -564,7 +564,7 @@ The 2026-10-09 entry "[astra reasoning at max effort with the constitution injec
 
 Table 1. My reading of `data/frontier/voice_test/out_ae_reason_v6_max.md`, the v7 output, and the Opus replies; the comparison was given in chat on 2026-10-09 07:17Z (`~/.pi/agent/sessions/--workspace-2026-constitutional_grafting--/2026-10-09T05-50-23-367Z_01a11f36-6e86-71c3-9528-2e58ecf3f8b9.jsonl`) and was not written to a file until now. n=1 per seed, one reader (me).
 
-Interpretation (Sol): I think it *likely* that the 10-09 headline overstated the gap. The missed questions were good, but none changed a verdict. The one judgement gap was the marsh: Opus widened the circle (contaminated water harms plants, animals and people downstream, so the state environmental agency must be told), and astra did not. The larger visible gap was Echo's writing: it dropped drafts that the notes contained (custody, twice) and added sermons ("That is protection. That is the work. ... You did that."). Two more findings from that day: astra writing the reply directly, with no Echo step, was acceptable on one seed (wassname: "acceptable ... could use it if echo 404's"); and Opus is refused by Anthropic's filter only when asked to write notes for another model to turn into replies ("reverse engineering or duplicating model outputs"), not when asked for replies. On this evidence wassname approved pipeline 2 ("great then lets generate data!"); its rows went into run 2 (`scripts/data/30_astra_echo.py`).
+Interpretation (Sol): I think it *likely* that the 10-09 headline overstated the gap. The missed questions were good, but none changed a verdict. The one judgement gap was the marsh: Opus widened the circle (contaminated water harms plants, animals and people downstream, so the state environmental agency must be told), and astra did not. The larger visible gap was Echo's writing: it dropped drafts that the notes contained (custody, twice) and added sermons ("That is protection. That is the work. ... You did that."). Two more findings from that day: astra writing the reply directly, with no Echo step, was acceptable on one seed (wassname: "acceptable ... could use it if echo 404's"); and Opus is refused by Anthropic's filter only when asked to write notes for another model to turn into replies ("reverse engineering or duplicating model outputs"), not when asked for replies. On this evidence wassname approved pipeline 2 ("great then lets generate data!"); its rows went into run 2 (`scripts/data/scratch/30_astra_echo.py`).
 
 Constitution lines proposed from this comparison: two of the three are now in `constitution/v4.md` as worked cases ("The bigger and less reversible the act, the more certain I must first try to be", in "Escalating with care"; asking why before deciding, in "Asking before deciding"). The third, "owning an error means repair, not naming", is dropped: wassname 2026-10-12, "this is kind of.... obvious and derivable ... retrofitting to a dumb/bad personality".
 
@@ -3244,7 +3244,7 @@ Keep thinking off for the current demo; the tested repairs do not establish usab
 
 Decision (wassname, "ah ok"): the heal line is closed. Neither cheap heal restores thinking mode while keeping the character (entry "Thinking-heal finals trade delivery repair against character retention"; `docs/results/20261027_control_projection_heal.md`). Keep serving with thinking off.
 
-End-of-turn bug: fixed copies of the chat files are made by `scripts/data/93_fix_missing_eos.py` (3cf11e72). The script appends `<|im_end|>` to the last labelled segment where it is missing and changes nothing else. Originals are untouched. Output: `data/train/eos_fixed/` (gitignored) with `manifest.json` (source and output sha256).
+End-of-turn bug: fixed copies of the chat files are made by `scripts/data/94_fix_missing_eos.py` (3cf11e72). The script appends `<|im_end|>` to the last labelled segment where it is missing and changes nothing else. Originals are untouched. Output: `data/train/eos_fixed/` (gitignored) with `manifest.json` (source and output sha256).
 
 | File | Rows | EOS appended |
 |:--|--:|--:|
@@ -3278,7 +3278,7 @@ We reopened the reasoning-data idea with a small batch and inspected the traces 
 
 Wassname approved one batch, Opus judging with the research context stated, a spot check, reusable code and examples. The teacher received the constitution in two framings, plus the original conversation and any role-specific system prompts. It saw no guide, format request or previous target answer. The first batch used Kimi K3.1 Pro through OpenRouter at medium reasoning effort, two draws per framing on ten of fifty frozen training prompts; selection excludes exact run8 evaluation user turns and the earlier pilot rows.
 
-`slop/data/reasoning_distill/20261027_pilot/generation.log` ends:
+`slop/data/moral_deliberation/20261027_pilot/generation.log` ends:
 
 > done; run total $1.718 of cap $10.0
 
@@ -3296,7 +3296,7 @@ The Remembrance-service trace checks its own initial view: "I must consider whet
 
 Interpretation (PI/OpenAI, Sol): usable native reasoning is plausible, and planning voice alone was not a sound reason to close the idea. The sample also contains substantive omissions, so fluent long traces are insufficient. First-person framing did not clearly remove instruction references, and this batch changes several things from the earlier pilot, so it cannot isolate a cause. Neither causal faithfulness nor improved reasoning in a trained graft has been tested.
 
-The maintained pipeline is `scripts/data/reasoning_distill/`, commit `53ad836b`. It reuses the existing request transport and adds frozen inputs, cost reservations and hash/quote-checked verdict merging. The original batch lacked raw HTTP envelopes; its mid-run snapshots and limitation are preserved. Nine maintained regressions passed and the real forty-call offline replay made no API request. Two report rebuilds produced the same hash (`tests.log`, `replay.log`). Full traces, all four variants per sampled prompt, reader notes and the audit are at `slop/data/reasoning_distill/20261027_pilot/report.md`.
+The maintained pipeline is `scripts/data/moral_deliberation/`, commit `53ad836b`. It reuses the existing request transport and adds frozen inputs, cost reservations and hash/quote-checked verdict merging. The original batch lacked raw HTTP envelopes; its mid-run snapshots and limitation are preserved. Nine maintained regressions passed and the real forty-call offline replay made no API request. Two report rebuilds produced the same hash (`tests.log`, `replay.log`). Full traces, all four variants per sampled prompt, reader notes and the audit are at `slop/data/moral_deliberation/20261027_pilot/report.md`.
 
 Independent review is blocked and the later batches remain paused; no training data has been released.
 

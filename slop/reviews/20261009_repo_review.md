@@ -12,7 +12,7 @@ The parent fixed three issues during this review: run-2's Inspect cache scope, f
 
 ### 1. High: an incomplete astra batch can be permanently completed
 
-Observed code: `scripts/data/30_astra_echo.py:138–148,202–208`:
+Observed code: `scripts/data/scratch/30_astra_echo.py:138–148,202–208`:
 
 ```python
 if sid in done or not sec.get("request"):
@@ -56,7 +56,7 @@ Smallest fix: keep JSONL, but lock every read/modify/write, publish rewrites usi
 
 ### 3. High: the artifact records no longer consistently identify their inputs
 
-Observed code: `scripts/data/30_astra_echo.py:84–85`:
+Observed code: `scripts/data/scratch/30_astra_echo.py:84–85`:
 
 ```python
 rec = fb.write_brief("sft", b["batch"], b["writer"], b["seeds"])
@@ -232,7 +232,7 @@ papers:
 
 seed-pool:
     uv run scripts/data/25_seed_pool.py
-    uv run scripts/data/25b_seed_stakes.py
+    uv run scripts/data/scratch/25b_seed_stakes.py
 
 make kind size="5" n="20":
     uv run scripts/data/26_frontier_batches.py make {{kind}} {{size}} {{n}}
@@ -247,7 +247,7 @@ restyle rows="10" shard="0/1":
     SAMPLES=modern SHARD={{shard}} uv run scripts/data/29_echo_restyle.py {{rows}}
 
 astra-echo account batches="1":
-    uv run scripts/data/30_astra_echo.py run {{account}} {{batches}}
+    uv run scripts/data/scratch/30_astra_echo.py run {{account}} {{batches}}
 
 identity n="40":
     uv run scripts/data/32_identity_rows.py {{n}}

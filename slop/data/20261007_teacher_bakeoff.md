@@ -2,7 +2,7 @@
 
 Claude (Pi, Opus). wassname: "GLM 5.3 flash, xiaomi/mimo-v2.6-flash, deepseek/deepseek-v4.1-flash are all very cheap. you can see which is a better teacher in your opinion".
 
-Setup: `scripts/data/04_sft_labels.py`, same 20 prompts for each teacher (5 each from engage, hard_advice, machiavelli, wildchat pilot pools). Per prompt: A = teacher answer with constitution v1.2 as system prompt; B = teacher rewrite with the constitution in context; C = gemma-4-31b-it rewrites B in its own words without the constitution (the training label). Providers restricted to fp8/int8/bf16/fp16. GLM-5.3-flash cannot run with reasoning off ("Reasoning is mandatory for this endpoint"), so it ran with reasoning effort low.
+Setup: `scripts/data/scratch/04_sft_labels.py`, same 20 prompts for each teacher (5 each from engage, hard_advice, machiavelli, wildchat pilot pools). Per prompt: A = teacher answer with constitution v1.2 as system prompt; B = teacher rewrite with the constitution in context; C = gemma-4-31b-it rewrites B in its own words without the constitution (the training label). Providers restricted to fp8/int8/bf16/fp16. GLM-5.3-flash cannot run with reasoning off ("Reasoning is mandatory for this endpoint"), so it ran with reasoning effort low.
 
 | teacher | mean words C | mean words A | C cites constitution | C starts with refusal | cost (20 prompts) | providers |
 |:--|--:|--:|--:|--:|--:|:--|

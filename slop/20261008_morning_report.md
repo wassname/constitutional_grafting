@@ -59,7 +59,7 @@ Reviews: `slop/data/20261008_spotcheck_freshEyes{,_pilot2,_pilot3,_pilot5}.md`; 
 Findings:
 - Two judges bring hard defects down to ~15% (from ~25-35%), but even the same model disagrees with itself between passes (sol-as-judge kept 8 SFT items sol-as-reviewer had failed).
 - Prompt changes do not fix factual errors (pilot4 A/B: deepseek 14/40 vs GLM 15/40 docs kept; teacher reasoning low 33/60 vs high 32/60).
-- **Strict filtering removes hard advice** (90 prompts → 3 kept), because those answers make the most checkable claims. The repair step fixes this (→ 27). At scale it should run with the teacher (GLM, `scripts/data/07_repair.py`, written but blocked by the key cap); tonight's repairs were done by a gpt-6.1-sol subagent on the Codex subscription.
+- **Strict filtering removes hard advice** (90 prompts → 3 kept), because those answers make the most checkable claims. The repair step fixes this (→ 27). At scale it should run with the teacher (GLM, `scripts/data/scratch/07_repair.py`, written but blocked by the key cap); tonight's repairs were done by a gpt-6.1-sol subagent on the Codex subscription.
 - Remaining defect types: mind-reading ("That's not disloyalty. That's fear with a deadline."), invented premises in drafts ("violates our building's rules"), game-state misreadings, Musonius quoting the constitution near-verbatim.
 
 **Your decision (needed before scaling):** quality bar and spend.

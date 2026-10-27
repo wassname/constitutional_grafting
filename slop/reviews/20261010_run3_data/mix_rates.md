@@ -1,6 +1,6 @@
 # Run 3 SFT mix: crude move rates vs run 2 (check before renting a GPU)
 
-Claude (Opus 5.5), 2026-10-10. `uv run scripts/data/33_mix_rates.py` (regex proxies; same regexes for both files, so compare rows, not absolute levels).
+Claude (Opus 5.5), 2026-10-10. `uv run scripts/data/scratch/33_mix_rates.py` (regex proxies; same regexes for both files, so compare rows, not absolute levels).
 
 | file | source | rows | has a question | asks a specific question | uncertainty words | "I will not / can't" | median words |
 |:--|:--|--:|--:|--:|--:|--:|--:|

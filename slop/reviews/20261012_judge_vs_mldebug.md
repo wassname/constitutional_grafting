@@ -1,6 +1,6 @@
 # Our judges vs ml-debug `references/llm_judges.md` (2026-10-12)
 
-Claude (Opus 5.5), for wassname: "we improved the gist in ml-debug llm as judge, check ours vs its". Judges checked: `scripts/eval/16_run1_report.py` (Jev: ordinary, gray, edge, identity, seats), `scripts/data/34_elicitation_check.py` (Jev), `scripts/eval/15_principle_judge.py` (not used in runs 3 / qwen1 reports).
+Claude (Opus 5.5), for wassname: "we improved the gist in ml-debug llm as judge, check ours vs its". Judges checked: `scripts/eval/16_run1_report.py` (Jev: ordinary, gray, edge, identity, seats), `scripts/data/scratch/34_elicitation_check.py` (Jev), `scripts/eval/15_principle_judge.py` (not used in runs 3 / qwen1 reports).
 
 | ml-debug item | ours | status |
 |:--|:--|:--|

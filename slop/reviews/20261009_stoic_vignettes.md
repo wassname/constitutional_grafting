@@ -19,7 +19,7 @@ Files (`.local/` and `data/external/` are gitignored):
 - `/workspace/2026/constitutional_grafting/.local/tiny-stoic/vignettes.csv` (and `.jsonl`), `README.md` (dataset card)
 - `/workspace/2026/constitutional_grafting/.local/tiny-stoic/reviewed_acts.jsonl`, `reviewed_situations.jsonl`: hand-written texts and labels
 - `/workspace/2026/constitutional_grafting/data/external/stoic_vignettes/handbook_verbatim.jsonl`: private verbatim weeks (scene, ancient quote, commentary)
-- `/workspace/2026/constitutional_grafting/scripts/data/31_stoic_vignettes.py`: `extract | tag | build | verify`
+- `/workspace/2026/constitutional_grafting/scripts/data/scratch/31_stoic_vignettes.py`: `extract | tag | build | verify`
 
 ## 10 random rows (seed 20261009)
 

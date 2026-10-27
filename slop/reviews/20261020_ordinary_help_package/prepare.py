@@ -66,7 +66,7 @@ tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3.5-35B-A3B-Base",
     revision="0f0813072d2358973511097385626f21fcb6d422", local_files_only=True)
 manifest = {"author": "PI/OpenAI", "preparation_script_sha256": sha(Path(__file__).read_bytes()), "source_sha256": {path: sha((ROOT / path).read_bytes()) for path in FILES.values()},
     "shared_inputs": {str(path.relative_to(ROOT)): sha(path.read_bytes()) for path in
-        [writer, ROOT / "scripts/data/51_judge_docs_v2.py", ROOT / "constitution/v4.md"]},
+        [writer, ROOT / "scripts/data/scratch/51_judge_docs_v2.py", ROOT / "constitution/v4.md"]},
     "rendered_writer_system_sha256": sha(templates["SYSTEM"].format(constitution=constitution.decode()).encode()),
     "tokenizer": "Qwen/Qwen3.5-35B-A3B-Base", "tokenizer_revision": "0f0813072d2358973511097385626f21fcb6d422",
     "scope": "Six existing unchanged Opus targets, with complete seed/settings/reconstructed user prompts and saved verdicts. No new teacher/Echo/Greek/student outputs or inference. Prompt reconstruction is not a provider wire trace.", "cases": []}
