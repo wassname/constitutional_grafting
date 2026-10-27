@@ -4,7 +4,7 @@ PI/Claude (opus-5-5). Built by `scripts/eval/75_run16_selector_section.py` from 
 
 ![character vs maths](selector_tradeoff.png)
 
-| Graft | Description | Character [90%] | Maths /60 (finished) | Est. plain new D at same character | Small tasks /22 | Loops / cutoffs | Effect kept: weight / char inputs / cap inputs |
+| Graft | Description | Character [90%] | Maths /60 (finished) | Est. plain new D at same character | Small tasks /22 | Loops / cutoffs in tiny-char turns /496 | Output energy kept: weight / char inputs / cap inputs |
 |:--|:--|--:|--:|--:|--:|--:|:--|
 | θ_I + Δ_docs + 1·Δsft_eos | new D ×1 (plain) | +0.83 [+0.76, +0.90] | 56 (60) | — | 20 | 2 / 1 | 1.00 / 1.00 / 1.00 |
 | θ_I + Δ_docs + ½·Δsft_eos | new D ×½ (plain) | +0.62 [+0.56, +0.68] | 55 (58) | — | 21 | 0 / 2 |  |
@@ -13,6 +13,8 @@ PI/Claude (opus-5-5). Built by `scripts/eval/75_run16_selector_section.py` from 
 | θ_I + Δ_docs + 1·P₁₂₈(Δsft_eos) | P₁₂₈ two-sided ×1 | +0.64 [+0.57, +0.71] | 56 (60) | 55.1 maths, 20.9 tasks | 22 | 0 / 0 | 0.72 / 0.43 / 0.38 |
 | θ_I + Δ_docs + 1·P₆₄ᵒᵘᵗ(Δsft_eos) | **P₆₄ output side only ×1 (Safe LoRA side)** | +0.81 [+0.74, +0.89] | 56 (60) | 55.9 maths, 20.1 tasks | 20 | 0 / 0 | 0.94 / 0.92 / 0.92 |
 | θ_I + Δ_docs + 1·S_cc(Δsft_eos) | **char/cap selector ×1** | +0.82 [+0.75, +0.89] | 53 (57) | 55.9 maths, 20.1 tasks | 21 | 0 / 0 | 1.07 / 0.99 / 0.23 |
+
+Est. plain new D: linear interpolation between ×½ and ×1 at the variant's character; an estimate, not an evaluated checkpoint; uncertainty not propagated. Output energy kept is squared (a plain ×½ dose would keep 0.25).
 
 | Comparison (A minus B) | Character [90%] | Maths /60 [90%] | Maths on questions both finish | Small tasks /22 [90%] |
 |:--|--:|--:|--:|--:|
