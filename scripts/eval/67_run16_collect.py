@@ -23,8 +23,9 @@ def main():
     box=OUT/'lease/box_runs';box.mkdir(exist_ok=True)
     plan=json.loads((OUT/'plan.json').read_text())
     def calls(argv): subprocess.run(list(map(str,argv)),check=True,timeout=max(1,state['runner_deadline_epoch']-time.time()))
+    failed_exit_seen=None
     while time.time()<state['runner_deadline_epoch']:
-        calls(['rsync','-az','--exclude=merged_model','--exclude=dose_model','--exclude=selector_D1',
+        calls(['rsync','-az','--delete-delay','--filter=P eos_first20.json','--exclude=merged_model','--exclude=dose_model','--exclude=selector_D1',
                '-e',shlex.join(ssh),host+':/workspace/cg/runs/run10/',str(box)+'/'])
         training=box/'train_r10_eos_chatr12.log'
         if training.exists():
@@ -62,7 +63,15 @@ def main():
             print('COLLECTED EVENT '+str(receipt),flush=True)
             return
         if (box/'job.exit').exists():
+            failure=box/'driver_failure.json'
+            hold=json.loads(failure.read_text()) if failure.exists() else {}
+            if (box/'job.exit').read_text().strip()!='0' and not (box/'production_started.json').exists():
+                failed_exit_seen=failed_exit_seen or time.time()
+                holding=hold.get('status') in ['holding','restarting'] and time.time()<hold['hold_until_epoch']
+                if holding or (not hold and time.time()-failed_exit_seen<90):
+                    time.sleep(30);continue
             raise RuntimeError('Box job exited before requested event: '+(box/'job.exit').read_text())
+        failed_exit_seen=None
         time.sleep(60)
     raise TimeoutError('Run16 collection reached runner deadline')
 
