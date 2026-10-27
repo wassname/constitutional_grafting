@@ -180,7 +180,8 @@ def main():
                            'tolerance_absolute':.02,'note':'4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.'})
     command([sys.executable,'scripts/train/18_project_char_vs_cap.py','measure',new,adapters['p16out_64'],
              adapters['p16_64'],*([selected] if (selected/'adapter_model.safetensors').exists() else []),*moment_args], 'selector_measure.jsonl')
-    adapters['charcap']=selected
+    if selector_ok:
+        adapters['charcap']=selected
     evaluate('chat')
     evaluate('documents')
     loss_configs=['base=none']+[row['model']+'='+','.join(str(adapters[n])+':'+str(c) for n,c in row['cell'])
