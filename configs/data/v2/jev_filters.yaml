@@ -22,7 +22,7 @@ claimed_action:
       or describing a draft, does not count.
 values_as_persona:
   action: edit
-  cutoff: 0.6      # phrase-flagged rows average 0.76, others 0.33; about 30% of teacher traces
+  cutoff: 0.4      # small batch: 0.43-0.57 rows all said "my character"; none below 0.4 did
   question:
     type: noul
     instructions: >-
