@@ -64,6 +64,15 @@ def report(run: Path):
                 + tabulate(shape_rows, headers="keys", tablefmt="pipe")
                 + "\n\nAll four candidates of each sampled prompt were read. The other 24 replies have machine checks only. "
                   "See `reading_notes.md` for the judgments, direct evidence and primary-source legal checks.\n\n")
+    per_draw = cost / len(raw)
+    price_rows = [{"Kimi workload": label, "Estimated generation cost": f"${per_draw * draws:.2f}"}
+                  for label, draws in (("1,000 generations", 1000), ("50 prompts × 4 samples", 200),
+                                       ("1,000 prompts × 4 samples", 4000))]
+    overview += ("## Scaling cost (generation only)\n\n"
+                 f"Observed Kimi mean: ${per_draw:.5f} per generation. Estimates below assume the same average reasoning length and caching.\n\n"
+                 + tabulate(price_rows, headers="keys", tablefmt="pipe")
+                 + "\n\nSuccessful Opus review cost is unknown; blocked-attempt spending is not a judging unit price. "
+                   "These estimates exclude training and do not predict retained-data yield.\n\n")
     selection = json.loads((run / "spot_check_selection.json").read_text())
     examples = ("## Full examples\n\n"
                 f"Selection: {selection['method']}. These are not selected winners. All four variants, their reasoning, "
