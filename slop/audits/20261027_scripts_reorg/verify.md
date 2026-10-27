@@ -173,6 +173,31 @@ Passed, no whitespace errors.
 - Full paid historical producer runs were not exercised; their root/literal dependencies and safe help entrypoints were checked without writing training data. Private source/tokenizer availability is still required for any actual rerun.
 - The real-model regression needs the existing torch/PEFT model-test environment; this change only updates its historical module paths.
 - Independent reviewer gate remains for the parent orchestrator. No data quality/training approval is inferred from structural/runtime checks.
-- Single commit uses explicit path staging and a justfile index blob with only this migration's path changes; unrelated worktree edits remain with their owners. Final empty-index proof is reported with the commit result.
+- Explicit path staging used a justfile index blob containing only this migration's path changes; the other session's moral-deliberation recipe edits remain unstaged. See the shared-index commit incident below; final empty-index proof is reported with the task result.
+
+## Commit packaging / shared-index incident
+
+After all 86 rename-aware paths were explicitly staged and checked, the parent's concurrent commit `af8b83a4e5be87117857a27bb4a4bbdc50d8a96c` consumed this shared index before the worker's `git commit` ran. The worker commit returned “no changes added to commit”. Parent acknowledged the error and instructed: do not reset/amend; commit only any remainder with “completes the reorg committed in af8b83a4”.
+
+Post-commit ownership comparison (`git diff-tree --no-commit-id --name-only -r --no-renames af8b83a4` against the explicit staging list) confirms **all 126 old/new path entries** (86 rename-aware changed files) are included. No migration code is missing or still unstaged. The only intersecting worktree change is the other session's pre-existing justfile moral-deliberation recipe rename; it is deliberately not included here. `git diff --cached --name-only` is empty. This audit packaging note is the only worker follow-up commit remainder.
+
+The parent commit also contains its own data-practice guide, AGENTS link and writer-guidance change; those are **not** part of this worker's structural task. Therefore the reorg is not isolated in its originally requested single descriptive commit, and its trailer is the parent's existing combined attribution rather than the exact worker-requested one. No history rewrite was attempted.
+
+Post-parent-commit `just data-smoke`: passed again ($0 API/GPU), output tail:
+
+```text
+
+Runtime passed in 1.29s. API/GPU cost: $0. These are historical-result replays, not new prompt-quality judgements.
+
+| Pipeline                      | Runtime result   |   Examples | Checks                                                                    |
+|:------------------------------|:-----------------|-----------:|:--------------------------------------------------------------------------|
+| Chat rewrite + refusal checks | passed           |          2 | Accepted historical rewrite applied; warranted refusal retained           |
+| Document A–E + recheck        | passed           |          1 | Recheck leaves the saved document intact; missing judgements block export |
+
+Full result: `.local/dataset_pipeline/smoke/smoke_result.json`
+
+Chat: `/workspace/2026/constitutional_grafting/.local/dataset_pipeline/smoke/processed/tiny_real_examples/chat.jsonl` (smoke_only, not a training release).
+.local/dataset_pipeline/run.md
+```
 
 -- PI/gpt-6.1-sol, 2026-10-27
