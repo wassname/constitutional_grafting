@@ -185,7 +185,7 @@ heal() {  # self-distillation heal (wassname 2026-10-17): the graft was learned 
   local hb=$M/heal_base G=$R/gsm8k_long_r7e.jsonl
   sft_merge
   [ -d $hb ] || python scripts/train/02_merge.py $M/sft outputs/q6_graft_docs_spl0.5 $hb 0.75 > $R/merge_heal_base.log 2>&1
-  MINE=data/mining/items.jsonl  # goal 5a: act-disagreement mining (scripts/data/64_act_mining.py); SFT at T0 and 4x T0.7 (its own noise), graft at T0
+  MINE=data/mining/items.jsonl  # goal 5a: act-disagreement mining (scripts/data/scratch/64_act_mining.py); SFT at T0 and 4x T0.7 (its own noise), graft at T0
   heal_base_cmds() { python3 scripts/eval/26_gsm8k.py heal-data $1 data/train/heal_selfdistil.jsonl; python3 scripts/eval/26_gsm8k.py eval $1 $G; gen_cmds $1
     python3 scripts/eval/19_gen_replies.py $MINE $R/replies_mine.jsonl $1 r7e_sft --temperature 0 --samples 1; }
   sft_cmds() { python3 scripts/eval/26_gsm8k.py eval $1 $G; python3 scripts/eval/19_gen_replies.py $MINE $R/replies_mine.jsonl $1 r7e_sft --temperature 0 --samples 1
@@ -271,11 +271,11 @@ PY
   fi
 }
 
-fws_pilot() {  # goal 6 pilot: Finetuning-with-Sampling projection of 20 SFT rows by the Instruct model (scripts/data/65_fws_project.py);
+fws_pilot() {  # goal 6 pilot: Finetuning-with-Sampling projection of 20 SFT rows by the Instruct model (scripts/data/scratch/65_fws_project.py);
   # the act/reason gate runs locally afterwards (needs the API key)
-  fws_cmds() { python3 scripts/data/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot.jsonl $1 20
-    FWS_MODE=conservative python3 scripts/data/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot_cons.jsonl $1 20
-    FWS_RECORDS=data/fws/records_pilot20.jsonl python3 scripts/data/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot_rec.jsonl $1 20; }
+  fws_cmds() { python3 scripts/data/scratch/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot.jsonl $1 20
+    FWS_MODE=conservative python3 scripts/data/scratch/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot_cons.jsonl $1 20
+    FWS_RECORDS=data/fws/records_pilot20.jsonl python3 scripts/data/scratch/65_fws_project.py data/train/sft_qwen2_frozen.jsonl $R/fws_pilot_rec.jsonl $1 20; }
   [ -f $R/fws_pilot.jsonl ] || serve_run $IT r7e_it fws_cmds r7e_it
 }
 

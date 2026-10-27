@@ -21,7 +21,7 @@ import constitution as C  # noqa: E402
 from judge import norm, openrouter_key  # noqa: E402
 
 SRC, OUT = Path(sys.argv[1]), Path(sys.argv[2])
-DOC_CHECK = Path("scripts/data/20_v2_data.py").read_text().split('DOC_CHECK = """')[1].split('"""')[0]
+DOC_CHECK = Path("scripts/data/scratch/20_v2_data.py").read_text().split('DOC_CHECK = """')[1].split('"""')[0]
 CL = httpx.Client(base_url="https://openrouter.ai/api", headers={"Authorization": f"Bearer {openrouter_key()}"}, timeout=httpx.Timeout(600, connect=30))
 NAME = "Musonius"
 JEV_Q = {

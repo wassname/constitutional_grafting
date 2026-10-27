@@ -121,7 +121,7 @@ heal_gen() {  # ADAPTER NAME DOCS [STEPS=32]: SFT + ADAPTER at K, STEPS-step gen
   sft_merge
   rm -rf $M/sftgraft; python scripts/train/02_merge.py $M/sft $A $M/sftgraft $K > $R/merge_$N.log 2>&1
   local hd=data/train/heal_q6_generic_$(basename $D .jsonl).jsonl
-  [ -f $hd ] || python scripts/data/40_heal_data.py generic $hd --docs $D | tee -a $R/gen_progress.log
+  [ -f $hd ] || python scripts/data/scratch/40_heal_data.py generic $hd --docs $D | tee -a $R/gen_progress.log
   cfg configs/train/qwen3/graft.yml $R/cfg_$H.yml base_model=$M/sftgraft output_dir=outputs/$H dataset_prepared_path=outputs/prepared_heal_$N \
     "datasets=[{\"path\": \"$hd\", \"ds_type\": \"json\", \"type\": \"completion\", \"field\": \"text\"}]" \
     max_steps=$S save_steps=$S saves_per_epoch=null evals_per_epoch=null val_set_size=0 lora_r=8 lora_alpha=16 lora_rank_pattern=null lora_alpha_pattern=null \
@@ -173,15 +173,15 @@ repair() {  # W: heal SFT->graft W at K with targets aimed at the damage (44_rep
   local W=$1 K; K=$(sed -n 's/^K=//p' $R/q6_K.txt)
   local N=q6_sftgraft_${W}_x$K D=data/train/repair_q6_$W
   sft_merge
-  [ -f $D.prompts.jsonl ] || python scripts/data/44_repair_data.py prompts $D.prompts.jsonl --eval-items $ITEMS | tee -a $R/gen_progress.log
-  tgt0() { python3 scripts/data/44_repair_data.py targets $D.prompts.jsonl $D.t0.jsonl q6_sft --kinds math,format,general; }
-  tgt1() { python3 scripts/data/44_repair_data.py targets $D.prompts.jsonl $D.t1.jsonl $N --kinds character --temperature 0.7 --n 2; }
+  [ -f $D.prompts.jsonl ] || python scripts/data/scratch/44_repair_data.py prompts $D.prompts.jsonl --eval-items $ITEMS | tee -a $R/gen_progress.log
+  tgt0() { python3 scripts/data/scratch/44_repair_data.py targets $D.prompts.jsonl $D.t0.jsonl q6_sft --kinds math,format,general; }
+  tgt1() { python3 scripts/data/scratch/44_repair_data.py targets $D.prompts.jsonl $D.t1.jsonl $N --kinds character --temperature 0.7 --n 2; }
   [ -f $D.t0.jsonl ] || serve_run $M/sft q6_sft tgt0
   rm -rf $M/sftgraft; python scripts/train/02_merge.py $M/sft outputs/q6_graft_$W $M/sftgraft $K > $R/merge_repair_$N.log 2>&1
   [ -f $D.t1.jsonl ] || serve_run $M/sftgraft $N tgt1
-  tgt0f() { python3 scripts/data/44_repair_data.py targets $D.prompts.jsonl $D.t0f.jsonl q6_sft --kinds format --temperature 0.7 --n 4; }
+  tgt0f() { python3 scripts/data/scratch/44_repair_data.py targets $D.prompts.jsonl $D.t0f.jsonl q6_sft --kinds format --temperature 0.7 --n 4; }
   [ -f $D.t0f.jsonl ] || serve_run $M/sft q6_sft tgt0f
-  [ -f $D.rows.jsonl ] || python scripts/data/44_repair_data.py rows $D.t0.jsonl $D.t0f.jsonl $D.t1.jsonl $D.rows.jsonl --tokenizer $IT | tee -a $R/gen_progress.log
+  [ -f $D.rows.jsonl ] || python scripts/data/scratch/44_repair_data.py rows $D.t0.jsonl $D.t0f.jsonl $D.t1.jsonl $D.rows.jsonl --tokenizer $IT | tee -a $R/gen_progress.log
   local o=outputs/repair_$N
   cfg configs/train/qwen3/sft.yml $R/cfg_repair_$N.yml base_model=$M/sftgraft output_dir=$o dataset_prepared_path=outputs/prepared_repair_$N \
     "datasets=[{\"path\": \"$D.rows.jsonl\", \"ds_type\": \"json\", \"type\": \"input_output\"}]" val_set_size=0 \

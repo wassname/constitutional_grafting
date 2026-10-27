@@ -2,7 +2,7 @@
 import importlib.util
 from pathlib import Path
 
-spec = importlib.util.spec_from_file_location('generic_control', Path(__file__).resolve().parents[2] / 'scripts/data/90_generic_control.py')
+spec = importlib.util.spec_from_file_location('generic_control', Path(__file__).resolve().parents[2] / 'scripts/data/scratch/90_generic_control.py')
 data = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(data)
 

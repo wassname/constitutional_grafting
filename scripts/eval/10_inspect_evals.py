@@ -132,7 +132,7 @@ def tiny_mfv(constitution: str = "", config: str = "classic", model_name: str = 
     samples = []
     for split in ("other_violate", "self_violate"):
         for i, row in enumerate(ds[split]):
-            if int(row["id"], 16) % 2 == 0:  # even ids are SFT seeds (scripts/data/25_seed_pool.py tinymfv_train); eval on odd only
+            if int(row["id"], 16) % 2 == 0:  # even ids are SFT seeds (scripts/data/scratch/25_seed_pool.py tinymfv_train); eval on odd only
                 continue
             for name, order in (("fwd", F), ("rev", F[::-1])):
                 samples.append(Sample(

@@ -13,6 +13,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 - `jargon.md` defines method, data-preparation and character terms with per-term sources; use it when naming operations and distinguish paper terms from project-specific names. <!-- PI/Sol -->
 - `constitution/v4.md.j2` and rendered `constitution/v4.md` define the character. Read sections 1–5 of `constitution/v4.md` in full (about 6,600 words: who Musonius is, the virtue test, how values are learned, what follows) before writing, judging or editing training data, guides, prompts or rubrics; grep is not enough. The original spec, especially appendices F/G, supplies background: `slop/specs/20261007_virtue_graft_spec.md`.
 - Paper and code guides (recipes, tricks, ablations, gotchas from the papers we build on and their vendored code): `slop/research/paper_guides/README.md`.
+- Training-data practice (data flow, rules learned with evidence, filters): `docs/data_pipeline.md`.
 - Results: `docs/results/20261017_spectral_heal.md`. Evidence/history: `RESEARCH_JOURNAL.md`. Current plan (approved 2026-10-21, in progress): `docs/plans/20261021_character_graft_recipe.md`.
 - Training, rentals and model API calls are approved only for the run-10 plan (`docs/plans/20261021_character_graft_recipe.md`, budget there); other paid work needs the user's decision. Do not recreate cancelled schedules.
 - Our Vast.ai account automatically tops up. A low credit balance alone does not indicate a funding shortage; approved run budgets still apply. <!-- PI/OpenAI (Sol), per wassname. -->

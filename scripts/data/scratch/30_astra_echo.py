@@ -46,10 +46,11 @@ from openai import APIError, OpenAI
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/data"))
+sys.path.insert(0, str(Path(__file__).parent))
 from astra_echo import prompts as P  # noqa: E402
 import constitution as C  # noqa: E402  (scripts/data/constitution.py: single source of the constitution text)
 
-spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
+spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/scratch/26_frontier_batches.py")
 fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
 
@@ -62,7 +63,7 @@ REASON_VARIANT = "v7-batch-all-examples"
 WRITE_VARIANT = "modern-samples+character-s1+goal-tone+draft-included+no-gender"
 AUTH = ["-e", str(Path.home() / ".pi/agent/git/github.com/gotgenes/pi-anthropic-auth/src/index.ts"),
         "-e", str(Path.home() / ".pi/agent/npm/node_modules/pi-codex-multi/extensions/multi-sub.ts")]
-QUEUE = ["uv", "run", "-q", str(ROOT / "scripts/data/26_frontier_batches.py")]
+QUEUE = ["uv", "run", "-q", str(ROOT / "scripts/data/scratch/26_frontier_batches.py")]
 now = lambda: datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 

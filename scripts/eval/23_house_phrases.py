@@ -1,5 +1,5 @@
 """House-phrase rate per model on tiny-character replies: share of dialogues whose assistant turns contain any phrase the graft
-documents over-use (list: scripts/data/50_docs_v2.py HOUSE, from slop/reviews/20261015_graft_data_read.md).
+documents over-use (list: scripts/data/scratch/50_docs_v2.py HOUSE, from slop/reviews/20261015_graft_data_read.md).
 usage: python scripts/eval/23_house_phrases.py REPLIES.jsonl [MODEL ...]   -- PI/Claude (Opus 5.5)"""
 import ast
 import json
@@ -7,7 +7,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-src = (Path(__file__).resolve().parents[1] / "data" / "50_docs_v2.py").read_text()
+src = (Path(__file__).resolve().parents[1] / "data" / "scratch" / "50_docs_v2.py").read_text()
 i = src.index("HOUSE = [") + len("HOUSE = ")
 HOUSE = [p.lower() for p in ast.literal_eval(src[i: src.index("]", i) + 1])]  # read the list without importing (that script needs API deps)
 

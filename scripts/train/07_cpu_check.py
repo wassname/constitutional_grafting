@@ -92,7 +92,7 @@ def main() -> None:
         try:
             syntax(sink)
             for kind in ("docs", "sft"):
-                run(["uv", "run", "scripts/data/26_frontier_batches.py", "parse", kind], sink)
+                run(["uv", "run", "scripts/data/scratch/26_frontier_batches.py", "parse", kind], sink)
             run(["uv", "run", "scripts/train/01_prepare.py"], sink)
             exports(sink)
         except Exception:

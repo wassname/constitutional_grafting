@@ -30,7 +30,7 @@ LOCAL_CODE = ['scripts/eval/38_run10_chat_rental.py', 'scripts/eval/48_vast_dead
 CODE = ['scripts/train/02_merge.py', 'scripts/train/box_watchdog.sh', 'scripts/train/13_run10_evals.sh',
         'scripts/train/14_run10_chat_box.sh', 'scripts/train/check_loss_mask.py', 'scripts/train/spectral_plugin.py',
         'scripts/train/router_dtype_plugin.py', 'scripts/train/demo_plugin.py', 'scripts/train/41_expert_adapter_check.py',
-        'scripts/train/16_project_chat_adapter.py', 'scripts/train/43_adapter_energy.py', 'scripts/data/90_generic_control.py',
+        'scripts/train/16_project_chat_adapter.py', 'scripts/train/43_adapter_energy.py', 'scripts/data/scratch/90_generic_control.py',
         'scripts/eval/19_gen_replies.py', 'scripts/eval/26_gsm8k.py', 'scripts/eval/33_subset_cells.py',
         'scripts/eval/56_run14_box_a.py', 'configs/train/qwen3/sft.yml']
 INPUTS = ['items.jsonl', 'boundary_items.jsonl', 'demos.jsonl', 'panel.jsonl', 'pov.jsonl', 'change.md', 'gsm8k_long60.jsonl']

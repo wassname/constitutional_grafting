@@ -20,7 +20,7 @@ from loguru import logger
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "slop/reviews/20261015_docs_v2_variants"
-spec = importlib.util.spec_from_file_location("g", ROOT / "scripts/data/50_docs_v2.py"); g = importlib.util.module_from_spec(spec); spec.loader.exec_module(g)
+spec = importlib.util.spec_from_file_location("g", ROOT / "scripts/data/scratch/50_docs_v2.py"); g = importlib.util.module_from_spec(spec); spec.loader.exec_module(g)
 KEY = next(l.split("=", 1)[1].strip() for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
 CONST = (ROOT / "constitution/v4.md").read_text()
 SYSTEM = g.SYSTEM.format(constitution=CONST)

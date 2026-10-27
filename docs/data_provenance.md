@@ -4,6 +4,8 @@ PI/Claude (Opus 5.5), 2026-10-16. wassname: "it needs to be good, reproducible d
 
 ## Current dataset commands
 
+[Dataset entry points, stage map and old → new script index](../scripts/data/README.md). -- PI/gpt-6.1-sol
+
 The reusable code is in `src/constitutional_grafting/data/`; thin Tyro commands are in `scripts/data/`. Terms and paper sources are in `jargon.md`. New datasets go to `data/interim/<name>/` and `data/processed/<name>/`; existing run10/run11 training files are read-only to this build path. -- PI/Sol
 
 ```bash

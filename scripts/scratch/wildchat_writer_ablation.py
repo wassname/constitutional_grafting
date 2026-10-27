@@ -8,7 +8,7 @@ import json, re, sys
 from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, "scripts/data")
 import importlib.util
-spec = importlib.util.spec_from_file_location("v2", "scripts/data/20_v2_data.py"); v2 = importlib.util.module_from_spec(spec)
+spec = importlib.util.spec_from_file_location("v2", "scripts/data/scratch/20_v2_data.py"); v2 = importlib.util.module_from_spec(spec)
 sys.argv = ["x", "none", "pilot12", "x"]; spec.loader.exec_module(v2)
 import constitution as C
 I = {json.loads(l)["i"]: json.loads(l) for l in open("data/sft/v2_pilot12/items.jsonl")}

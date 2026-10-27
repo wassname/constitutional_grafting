@@ -11,7 +11,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-spec = importlib.util.spec_from_file_location("v2", Path(__file__).parents[1] / "data/20_v2_data.py")
+spec = importlib.util.spec_from_file_location("v2", Path(__file__).parents[1] / "data/scratch/20_v2_data.py")
 v2 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(v2)
 

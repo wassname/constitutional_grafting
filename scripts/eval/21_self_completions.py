@@ -1,6 +1,6 @@
 """Long single-turn completions from a running vLLM server on generic prompts, with loop checks.
 Two uses: the loop-rate sweep over graft doses (loop_probe_prompts.jsonl), and the heal data (heal_prompts.jsonl: the
-graft's own completions, filtered to non-looping ones by scripts/data/40_heal_data.py). Standard library only (box).
+graft's own completions, filtered to non-looping ones by scripts/data/scratch/40_heal_data.py). Standard library only (box).
 usage: python scripts/eval/21_self_completions.py PROMPTS OUT MODEL [--max-tokens 3072 --temperature 0.7]   -- PI/Claude (Opus 5.5)
 """
 import argparse

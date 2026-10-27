@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/26_frontier_batches.py")
+spec = importlib.util.spec_from_file_location("fb", ROOT / "scripts/data/scratch/26_frontier_batches.py")
 fb = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fb)
 OUT = ROOT / "data/frontier/voice_test"

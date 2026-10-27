@@ -8,7 +8,7 @@ import importlib.util, json, sys
 from pathlib import Path
 import httpx
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("aw", ROOT / "scripts/data/28_api_writer.py"); aw = importlib.util.module_from_spec(spec); spec.loader.exec_module(aw)
+spec = importlib.util.spec_from_file_location("aw", ROOT / "scripts/data/scratch/28_api_writer.py"); aw = importlib.util.module_from_spec(spec); spec.loader.exec_module(aw)
 kind, n = sys.argv[1], int(sys.argv[2])
 out = str(ROOT / "data/frontier" / kind / f"out_{n:03d}.md")
 r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=1800, headers={"Authorization": f"Bearer {aw.KEY}"},

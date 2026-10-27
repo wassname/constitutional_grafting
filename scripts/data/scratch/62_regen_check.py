@@ -3,7 +3,7 @@
 # dependencies = ["httpx"]
 # ///
 """Can the graft documents be regenerated at the same quality? Re-send recorded OpenRouter doc batches exactly as the API lane did
-(scripts/data/28_api_writer.py: same batch file, same system prompt, constitution inline at the version recorded for that batch,
+(scripts/data/scratch/28_api_writer.py: same batch file, same system prompt, constitution inline at the version recorded for that batch,
 same model, temperature 1.0), then put each regenerated document next to its original for reading and judging.
 Writes slop/reviews/20261016_regen_check/{regen.jsonl, pairs.md}.
 usage: uv run scripts/data/scratch/62_regen_check.py [n_batches=4] [seed=0]   -- PI/Claude (Opus 5.5)"""
