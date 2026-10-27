@@ -7,21 +7,21 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SCRIPTS = ROOT / "scripts/data/reasoning_distill"
+SCRIPTS = ROOT / "scripts/data/moral_deliberation"
 sys.path.insert(0, str(SCRIPTS))
 import common
 
 
 def module(filename):
-    spec = importlib.util.spec_from_file_location("reasoning_" + filename.split("_")[0], SCRIPTS / filename)
+    spec = importlib.util.spec_from_file_location("moral_" + filename.split("_")[0], SCRIPTS / filename)
     loaded = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(loaded)
     return loaded
 
 
-class ReasoningDistillTests(unittest.TestCase):
+class MoralDeliberationTests(unittest.TestCase):
     def setUp(self):
-        parent = ROOT / ".local/reasoning_distill_tests"
+        parent = ROOT / ".local/moral_deliberation_tests"
         parent.mkdir(parents=True, exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(dir=parent)
         self.addCleanup(self.temp.cleanup)
@@ -61,6 +61,41 @@ class ReasoningDistillTests(unittest.TestCase):
         generator = module("02_generate.py")
         generator.generate(self.run, 0, 1)
         self.assertFalse((self.run / "api").exists())
+
+    def test_offline_incomplete_run_cannot_send(self):
+        generator = module("02_generate.py")
+        (self.run / "raw.jsonl").unlink()
+        with self.assertRaisesRegex(ValueError, "offline replay refuses"):
+            generator.generate(self.run, 0, 1, offline=True)
+        self.assertFalse((self.run / "api").exists())
+
+    def test_cache_survives_a_different_run_directory(self):
+        from unittest.mock import patch
+        from constitutional_grafting.data.model_requests import request_messages, save_response
+        request = request_messages("teacher", [{"role": "user", "content": "Same question"}], {"max_tokens": 10})
+        response = {"choices": [{"finish_reason": "stop", "message": {"content": "Same answer"}}]}
+        runs = self.run / "runs"
+        save_response(runs / "first/api", request, response, provenance={"kind": "test_fixture"})
+        with patch.object(common, "ROOT", self.run), patch.object(common, "RUNS", runs):
+            self.assertEqual(common.cached_response(request)["response"], response)
+            self.assertTrue(common.shared_api_cache().exists())
+            self.assertEqual(common.cached_response(request)["response"], response)
+
+    def test_unresolved_attempt_cannot_hide_in_another_run(self):
+        from unittest.mock import patch
+        from constitutional_grafting.data.model_requests import request_messages, claim_request
+        request = request_messages("teacher", [{"role": "user", "content": "Unresolved"}], {"max_tokens": 10})
+        runs = self.run / "runs"
+        claim_request(runs / "first/api", request, "test_fixture")
+        with patch.object(common, "ROOT", self.run), patch.object(common, "RUNS", runs):
+            with self.assertRaisesRegex(ValueError, "historical attempt"):
+                common.cached_response(request)
+
+    def test_review_json_framing_only(self):
+        reviewer = module("07_cached_quality.py")
+        self.assertEqual(reviewer.review_json('```json\n{"judgments":[]}\n```'), {"judgments": []})
+        with self.assertRaises(json.JSONDecodeError):
+            reviewer.review_json('An explanation with {"judgments": []}')
 
     def test_changed_inputs_cannot_reuse_call_id_cache(self):
         generator = module("02_generate.py")
@@ -107,6 +142,31 @@ class ReasoningDistillTests(unittest.TestCase):
         self.assertEqual(flags["doc_ref"], 0)
         self.assertEqual(flags["doc_ref_answer"], 1)
         self.assertNotIn("verdict", flags)
+
+    def test_jsonl_preserves_unicode_line_separators(self):
+        from constitutional_grafting.data.files import read_jsonl, write_jsonl
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "rows.jsonl"
+            rows = [{"text": "one\u2028two\u0085three"}]
+            write_jsonl(path, rows)
+            self.assertEqual(read_jsonl(path), rows)
+            self.assertEqual(common.read_jsonl(path), rows)
+
+    def test_review_evidence_channel_and_coverage(self):
+        review = module("06_review_results.py")
+        raw = {self.candidate["call_id"]: self.candidate}
+        row = {"call_id": self.candidate["call_id"], "classification": "tentative_then_checked",
+               "opening_quote": "A simple greeting is enough.", "weighing_quote": "", "deciding_quote": ""}
+        review.validate_review([row], raw, "process")
+        with self.assertRaisesRegex(ValueError, "quote not in reasoning"):
+            review.validate_review([row | {"weighing_quote": "Hello!"}], raw, "process")
+        with self.assertRaisesRegex(ValueError, "coverage mismatch"):
+            review.validate_review([], raw, "process")
+        quality = {"call_id": self.candidate["call_id"], "note_quote": row["opening_quote"],
+                   "reply_quote": "Hello!", "verdict": "KEEP_UNCHANGED", "defects": []}
+        review.validate_review([quality], raw, "quality")
+        with self.assertRaisesRegex(ValueError, "quote not in reasoning"):
+            review.validate_review([quality | {"defects": [{"type": "inconsistency", "location": "notes", "quote": "Hello!"}]}], raw, "quality")
 
     def test_run_name_cannot_escape_output_root(self):
         with self.assertRaisesRegex(ValueError, "single directory"):

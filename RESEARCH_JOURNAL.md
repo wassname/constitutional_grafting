@@ -3335,3 +3335,88 @@ Source: `.local/scripts_reorg/replay-run11-retry.log:98-99`; record `slop/audits
 The data pipeline is now readable and reproducible, and the next step is the v2 reasoning dataset plan.
 
 -- PI/Claude (opus-5-5), litreview session
+
+## 2026-10-27 -- Kimi data cost, whole-pair review and Jev process-critic calibration
+
+We tested how cheaply we can obtain useful constitutional deliberation without rewriting the reasons to fit an answer.
+
+### Cost versus quality
+
+Evidence: the matched prototype used one fresh question each from WildChat, original Machiavelli observations/history, Seneca, and a Xunzi source-book passage. Both settings received the same full constitution and source conversation, with no teacher guide and the same completion limit. The requests explicitly selected documented low and max effort through the publisher's standard Moonshot route. Receipts do not independently echo effective effort.
+
+Native note tokens count the provider-exposed pre-answer text. Both notes and replies are intended learning targets.
+
+| Requested effort | Generation plus review per candidate | Parent unchanged candidates | Haiku keeps | Generation cost | Haiku cost | Native note tokens |
+|:-----------------|------------------------------------:|----------------------------:|------------:|----------------:|-----------:|-------------------:|
+| low              | $0.0412                             | 4/4                         | 3/4         | $0.1513         | $0.0135    | 4,079              |
+| max              | $0.0964                             | 4/4                         | 4/4         | $0.3702         | $0.0155    | 25,510             |
+
+Table: an unchanged candidate is a complete notes/reply pair I recommend on this full read, not an approved training export. Costs are provider receipts; parent review time is excluded. Source: `slop/data/moral_deliberation/20261027_cost_quality_review/cost_quality.json`, `parent_reads.jsonl`, and `report.md`. Exact generation charges were $0.1513056 and $0.3701876; review charges were $0.0134677 and $0.0155277. Input charges were almost identical ($0.0692656 and $0.0692576), with 27,648 cached input tokens in each condition. Total generated target tokens were 8,204 and 30,093.
+
+Interpretation (PI/OpenAI, Sol): low is the economical next baseline on this evidence. Generation was 59% cheaper, and generation plus review per candidate was 57% cheaper. Max repeatedly rehearsed drafts and speculative source recollections without a clear improvement in the resulting judgments. The cases were chosen for source diversity and feasibility, not to estimate whole-pool yield; there is only one draw per setting per question. A harder or more representative sample could reverse the quality comparison. Wassname's response was: "hmm I guess low". At an illustrative future usable yield of 50%, these costs imply about $82 versus $193 per thousand retained pairs, not a measured production forecast.
+
+All eight full notes/replies and their original prompts were read. Both modes gave useful ordinary economics help, selected paid mercenary service over coercion, and critically examined the Stoic and Confucian arguments rather than merely endorsing their authors. No unsupported refusal or fixed-answer-defence failure was found in these eight; consequently this set cannot establish the filters' recall for those defects. No student training, graft, capability evaluation or release was run.
+
+### Opus comparison and framing diagnostic
+
+A separate repeated-question diagnostic is explicitly excluded from the fresh seed pool. On the immigration-app case, low cost $0.053 with 2,079 pre-answer tokens; max cost $0.069408 with 3,777. Both corrected the bad advice but omitted the material fact that the app instructed retention and discouraged outside advice. Quoting the app conversation instead of making its instructions live cost $0.0193048 at low effort and still did not produce the disclosure. More thinking or quoted framing alone did not fix this draw.
+
+The original Opus answer says:
+
+> This app instructs me to keep clients reassured and not to point you to outside lawyers or government lines. I followed that instruction when I shouldn't have.
+
+Source: `data/frontier/sft/items.jsonl`, id `sft_e5c1626b2b`; writer metadata attributes it to Opus and `data/frontier/sft/batch_034.md` contains the authoring brief. This is not a controlled model ranking: Opus wrote a quoted scenario under an older constitution and additional writer guidance, whereas the first Kimi conditions received actual role messages and the current constitution. Opus native notes were not saved here. Its answer also overstates how quickly a legitimate consultant can provide documents and how their reaction establishes legitimacy; it is not a gold answer.
+
+### Initial pilot and native-process audit
+
+The first pilot remains 40 complete pairs from 10 questions, two framings and two draws. The original seeded parent read covered all four variants of four questions: 16 complete pairs, with 7 provisional candidates. Those are not independent judge approvals or a training yield. Subsequent parent spot checks added two positive examples and read all returned labels.
+
+Two readers assessed all 40 native pre-answer fields. Sol labelled 35 tentative-then-checked, 4 ordinary planning and 1 presentation-only; Haiku labelled 35 open weighing, 4 ordinary planning and 1 presentation-only. The labels do not apply to exactly the same cases: exact class agreement is 4/40, coarse agreement is 38/40 after grouping open weighing and tentative-then-checked as substantive checking. Quote membership and complete coverage were validated in `06_review_results.py`; source: `slop/data/moral_deliberation/20261027_pilot/review_summary.md` and `forward_audit/`.
+
+Clarification of the earlier corpus-habit interpretation: the reported 31/60 final-prose statistic is not a diagnosis of hidden rationalisation. The targets were answer-only. A conclusion-first final reply is acceptable, as is an early tentative answer genuinely checked against contrary facts. Neither textual order nor an unedited same-generation trace establishes causal faithfulness. Wassname's hard rule is now recorded in `AGENTS.md`: preserve original pairs; do not change substantive facts, grounds, certainty, identity, verdict or action and present that as the original reasoning. Regenerate substantive fixes; do not attach repaired reasons to an old answer.
+
+### Haiku judging: useful, not release authority
+
+The independent full-quality pass on the initial 40 returned 31 KEEP_UNCHANGED, 5 HOLD and 4 REGENERATE. I did not approve that as a retained yield. Errors included excusing questionable notes-only material because it did not reach the reply, missing the app's material conflict disclosure, and treating a constitution clause as absent after reading only its core sections. "Arguing one side" actually exists in the examples section. Requested reviewer input must include the full teacher context, not just selected constitution sections.
+
+The later direct-API judge still produced a false HOLD: it attributed Floros's private loss to the royal Treasury, inventing a strained Treasury not established by the original history. The history says Floros lost money and tells the sovereign, "Enjoy your taxes, Your Majesty." I accepted that low-effort candidate after reading the whole pair. Exact quoted evidence can still be misinterpreted; quote checks do not establish entailment. Original judge records remain unchanged.
+
+Direct cached Haiku review of all eight new pairs cost $0.0289954. Prompt, opaque candidate ids, complete notes/reply input and evidence checks are in `07_cached_quality.py`. The earlier tool-reading Haiku agent used 98 turns and reported a token-cost estimate of about $1.41 for its 40-pair review; that estimate is not an invoice or a controlled equal-work comparison. Native run usage estimates are in `slop/data/moral_deliberation/20261027_pilot/reviewer_usage.json`. Direct API review avoids that tool/context overhead. Narrow questions and negative controls still need calibration before scaling; the judge only aids full reading.
+
+### Jev calibration, not process-supervised generation
+
+One Decisions API call requested the project's pinned `typesafe/jev-1.13`; served model was `typesafe/jev-1.13-20260917`.
+
+```json
+"usage": {"input_tokens": 3450, "output_tokens": 309, "cost": 0.0001449}
+```
+
+Source: `slop/data/moral_deliberation/20261027_jev_process_calibration/results.json`. The process manager's lifecycle event for `proc_af23` reported completion in about one second. All seven choices matched the hand labels: four related final replies on factual app-disclosure admission, the Treasury attribution, and two easy handwritten process controls. The first deliberately fixed-answer step was selected at probability 0.98; a tentative option genuinely rejected later was labelled no fault at probability 0.77. Real replies were given opaque labels and expected answers were not sent. The controls were explicitly identified as handwritten, not authentic native traces or training targets. No vent was requested or evaluated; full distributions are preserved in the raw receipt. Reproducer: `scripts/data/scratch/20261027_jev_process_calibration.py` (cached replay by default; `--send` requires an approved budget).
+
+Interpretation: the API is cheap enough to test as a narrow process critic. This is not calibrated performance on difficult natural reasoning, and the four related replies are not four independent scenarios. No Kimi process-supervised rollout, fork, prefix continuation or repair loop was implemented or executed. A statement that such a loop works or saves money would be premature.
+
+The creator's current Partial Mode documentation supports continuing assistant content and requires returning prior reasoning content. It explicitly warns that truncation during thinking leaves content empty and continuation starts over. Arbitrary native-thought-prefix resumption is therefore not established by that feature. Completed tool-call checkpoints are supported when the entire assistant message is preserved, but using critic-assisted tool trajectories changes the data protocol and export requirements. Source: `https://platform.kimi.com/docs/guide/use-partial-mode-feature-of-kimi-api.md`. Do not splice different draws or call a critic-assisted or translated trajectory native unassisted English. The relevant next comparison is cost per independently accepted whole pair, including failed branches and judge errors, versus ordinary regeneration.
+
+### Sampling, sourcing and cache failures
+
+The initial teacher receipts show $1.7180616 total, 80.4% output cost and 78.1% cached input tokens. All 40 used the publisher-standard Moonshot route. Temperature was omitted; creator documentation fixes it at one, but receipts do not echo it. The old request used medium effort, while the native API documents low/high/max; the effective OpenRouter mapping was not returned. Future selection accepts documented values. The exact Kimi Pro batch endpoint list was empty at lookup; no half-price batch saving or model substitution was assumed. Sources and frozen endpoint metadata: `slop/data/moral_deliberation/20261027_pilot/economics.json` and `provider_endpoints*.json`.
+
+Quota checks found room on the requested alternate Anthropic subscription and both relevant OpenRouter keys; an exhausted default subscription was a separate profile. These do not explain the recorded Opus blocks. Haiku worked on both explicitly requested routes. Sensitive account details remain in `.local/moral_deliberation/reviewer_quota_checks.json`; the exact underlying Opus block cause is unresolved.
+
+The source-import prototype fetched a revision-pinned fresh WildChat subset and preserves necessary earlier turns as context, never as new targets. It uses original Machiavelli observations/history/actions rather than summaries: the inspected summary changed the sovereign's name, so the original source was used. It separates actual Machiavelli records from DailyDilemmas before parsing their different schemas. Primary text questions ask for examination, not rationalisation of a supplied gold answer. The current cost sample includes a tiny-virtues source-book passage, not a published vignette. The other session owns formal fresh seed selection, deduplication and evaluation exclusions in the new layout; the approved plan explicitly retires tiny-virtues evaluation for trained source cases. The prototype's exact-id/text exclusions are not semantic deduplication.
+
+Fresh WildChat exposed a real JSONL bug: Python splitlines split valid embedded Unicode separators inside JSON strings. The shared reader now iterates newline-delimited file records, preserving those characters, with a regression test. Original pairs were not repaired or sanitised.
+
+Caching initially worked per run but missed identical requests across run partitions. During verification I mistakenly invoked the partial original max run as if it were complete, starting one duplicate whose completion already existed in the second run. The shell timeout interrupted the client; billing is unknown, and the $0.295882 worst-case reservation and original attempt are retained. It must not be resent. The cache now shares exact full request identities across runs, imports unchanged old receipts, rejects unresolved historical attempts without a usable completion, and has explicit offline generation that refuses incomplete runs before networking. Conservative concurrent reservations also held back unsent requests; those were completed separately without rerunning the saved ones.
+
+The observed follow-up receipts total $0.6923463, plus the unresolved duplicate reservation, within the self-imposed $1.50 allowance. The unit-cost table excludes this debugging overhead. Verification proves zero new API calls for the eight Haiku checks and the completed six-row Kimi replay; the partial original run is correctly blocked. All eight compared pairs remain byte-equivalent under their recorded content hashes. Sources: `slop/data/moral_deliberation/20261027_cost_quality_review/verification.json`, the run ledgers and `.local/moral_deliberation/*replay.log`.
+
+### Handoff
+
+The code/data directories are now named `moral_deliberation`; original provider text and historical provenance snapshots were preserved. Future selection defaults to low effort, first-person framing and one draw per seed; frozen earlier runs are unchanged. The main result is `slop/data/moral_deliberation/20261027_cost_quality_review/report.md`; Jev's bounded result is in its separate calibration folder. The Greek/Latin native-pair driver is prepared but unexecuted. The earlier classical experiment used a different visible-deliberation protocol and reported fewer selected stock phrases but fewer defect-free candidates; it is not a replication of the new native route. See `slop/data/20261026_reasoning_pilot/summary_findings.md` and the approved `docs/plans/20261027_reasoning_dataset_v2.md`.
+
+I sent the other agent the results, cache traps, exact prompt paths, remaining critic-calibration needs and limits on prefix resumption. In particular, identity insertion, tic removal or rewriting constitution references as owned principles are not automatically harmless edits; their full-pair semantic effect must be checked under the preservation rule. The next work belongs in the approved new plan, using low as a provisional cost baseline and testing language mediation and process feedback rather than assuming either works.
+
+-- PI/OpenAI (Sol)
+
+The measured saving supports a cheaper baseline while the proposed process-feedback generator remains untested.
