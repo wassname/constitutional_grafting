@@ -1,4 +1,4 @@
-"""Two-sided LoRA projection away from exact Base→Instruct singular subspaces. -- PI/OpenAI (Sol)"""
+"""LoRA projection away from exact Base→Instruct singular subspaces: both sides, or output/input side only. -- PI/OpenAI (Sol); sides by PI/Claude"""
 import argparse
 import hashlib
 import json
@@ -16,9 +16,11 @@ from torch import Tensor
 
 @jaxtyped(typechecker=beartype)
 def project_factors(A: Float[Tensor, '*batch r i'], B: Float[Tensor, '*batch o r'],
-                    U: Float[Tensor, '*batch o k'], V: Float[Tensor, '*batch i k']
+                    U: Float[Tensor, '*batch o k'], V: Float[Tensor, '*batch i k'], sides: str = 'both'
                     ) -> tuple[Float[Tensor, '*batch r i'], Float[Tensor, '*batch o r']]:
-    return A - (A @ V) @ V.mT, B - U @ (U.mT @ B)
+    """both: (I-UUᵀ)ΔW(I-VVᵀ); output: (I-UUᵀ)ΔW, Safe LoRA's side; input: ΔW(I-VVᵀ)."""
+    assert sides in ('both', 'output', 'input'), sides
+    return (A if sides == 'output' else A - (A @ V) @ V.mT), (B if sides == 'input' else B - U @ (U.mT @ B))
 
 
 @jaxtyped(typechecker=beartype)
@@ -65,6 +67,7 @@ def main():
     parser.add_argument('--ranks', type=int, nargs='+', default=[16, 64])
     parser.add_argument('--device', default='cuda')
     parser.add_argument('--batch-experts', type=int, default=8)
+    parser.add_argument('--sides', choices=['both', 'output', 'input'], default='both')
     parser.add_argument('--module-limit', type=int, help='Production path smoke only; output is deliberately marked incomplete')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
@@ -85,7 +88,7 @@ def main():
     rows = []
     started = time.time()
     print(json.dumps({'argv': vars(args), 'adapter_sha256': sha(args.adapter / 'adapter_model.safetensors'),
-                      'method': '(I-U_kU_kT) B A (I-V_kV_kT); exact full SVD, truncated to k; checkpoint subtraction in fp32; factors saved fp32'}, default=str), flush=True)
+                      'method': f'sides={args.sides}: (I-U_kU_kT) B A (I-V_kV_kT) restricted to those sides; exact full SVD, truncated to k; checkpoint subtraction in fp32; factors saved fp32'}, default=str), flush=True)
     print('SHOULD: projection leaves original LoRA rank/scale unchanged; removed energy + retained energy = original energy. -- PI/OpenAI', flush=True)
     for stem in stems[:args.module_limit]:
         name = parameter_name(stem)
@@ -109,7 +112,7 @@ def main():
             assert torch.isfinite(S).all() and (S[:, max(args.ranks) - 1] > 0).all(), name
             spectra.append(S[:, [0, 15, 63]].cpu())
             for rank in args.ranks:
-                pa, pb = project_factors(A[begin:end], B[begin:end], U[..., :rank], Vh[..., :rank, :].mT)
+                pa, pb = project_factors(A[begin:end], B[begin:end], U[..., :rank], Vh[..., :rank, :].mT, args.sides)
                 projected[rank][0][begin:end] = pa
                 projected[rank][1][begin:end] = pb
             del post, U, S, Vh
@@ -147,7 +150,7 @@ def main():
         destination.mkdir()
         shutil.copyfile(args.adapter / 'adapter_config.json', destination / 'adapter_config.json')
         save_file(outputs[rank], str(destination / 'adapter_model.safetensors'))
-    report = {'author': 'PI/OpenAI (Sol)', 'complete': args.module_limit is None,
+    report = {'author': 'PI/OpenAI (Sol)', 'complete': args.module_limit is None, 'sides': args.sides,
               'base_revision': args.base.name, 'instruct_revision': args.instruct.name,
               'source_adapter_sha256': sha(args.adapter / 'adapter_model.safetensors'),
               'source_config_sha256': sha(args.adapter / 'adapter_config.json'), 'source_code_sha256': sha(__file__),

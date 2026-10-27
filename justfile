@@ -23,6 +23,10 @@ check:
     uv run --locked python tests/regression/test_document_checks.py
     uv run --locked python tests/regression/test_loss_mask.py
 
+# Weight-projection maths on CPU torch in a throwaway env (the locked env has no torch). -- PI/Claude
+check-projection:
+    uv run --no-project --with torch --with peft --with jaxtyping --with beartype --with safetensors --with pytest --with transformers python -m pytest -q -p no:cacheprovider tests/regression/test_chat_projection.py
+
 # Current22-condition comparison from downloaded records; no model calls. -- PI/Sol
 results lease="exact1":
     uv run --locked python scripts/eval/35_subset_report.py --exact {{lease}}
