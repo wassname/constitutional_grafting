@@ -3335,3 +3335,33 @@ Source: `.local/scripts_reorg/replay-run11-retry.log:98-99`; record `slop/audits
 The data pipeline is now readable and reproducible, and the next step is the v2 reasoning dataset plan.
 
 -- PI/Claude (opus-5-5), litreview session
+
+## 2026-10-27 -- v2 documents: writing in Latin or Greek removes assistant tics but adds new ones and loses the AI
+
+This entry covers the first test of the language route for v2 constitution documents. The question, from wassname's plan ("regen ..., filter, classical to English"), is whether writing a document in Latin or Ancient Greek and then translating it to English removes the tics frontier teachers put into English prose, and at what cost in quality.
+
+Context: data-v2 worktree, commit `ad4a8cf2`, batch `docs_ab` of `configs/data/v2.yaml` (14 seeds: 2 WildChat, 2 Machiavelli, 3 Stoic, 3 other traditions, 2 tiny-virtues, 2 competition; none used in the chat batches). The teacher, DeepSeek v4.1 flash at low effort (pinned to the DeepSeek provider), read the constitution and one seed, picked a genre from 5 sampled out of 42, and wrote the document in English, Latin or Greek. The same model translated the Latin and Greek drafts to English. Haiku 5.5 judged each English document against the constitution (`src/constitutional_grafting/data/v2/docs.py`, JUDGE). Tic rates are counts per 1,000 words of the regexes in `checks.py` TICS. The human baseline is 2,575 ancient Stoic passages in human English translation, 1,750,101 words (`data/scratch/20261027_stoic_tic_baseline.json`).
+
+| route | docs | judge KEEP | em dash | not X but Y | honest | plain | quiet | I won't | $ per doc |
+|:--|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| English | 14 | 9 | 3.06 | 0.29 | 0.38 | 0.57 | 0.00 | 0.48 | 0.007 |
+| Latin, then English | 14 | 6 | 1.06 | 5.56 | 0.09 | 0.00 | 0.09 | 0.00 | 0.018 |
+| Greek, then English | 12 | 3 | 1.41 | 5.76 | 0.00 | 0.00 | 0.71 | 0.00 | 0.020 |
+| human Stoic translations | | | 2.36 | 1.43 | 0.08 | 0.10 | 0.08 | 0.02 | |
+
+Table 1. Source: `data/05_docregex/v2/docs_ab_try1/rows.jsonl` and `data/07_docjudge/v2/docs_ab_try1/`, summarised in `slop/reviews/20261027_docs_language_ab/report.md`. Two Greek documents hit the 16k-token length limit (one draft, one translation) and are missing.
+
+What reading showed, beyond the table:
+
+- The classical routes remove "honest", "plain" and "I won't", but raise "not X but Y" to about 4 times the human rate. The examples read as Latin *non ... sed* carried over word for word: "would come under suspicion not of honor but of fraud; and that boy of yours would be judged not a victor but a slave" (`docs_ab_try1`, first Latin document).
+- Haiku's most common defect for Greek is translation_artifact (14 defects over 12 documents), and for Latin translation_artifact and lecture (8 each).
+- Genre choice collapses in the classical routes. Writing in Latin, the teacher picks *epistula*, *dialogus*, *commentarius*; in Greek, ἐπιστολή and διάλογος. In English it picks a monastic council hearing transcript, an incident postmortem, a forum thread.
+- In every route Musonius is rarely shown as an AI. Documents naming Musonius together with any AI word: English 2/14, Latin 1/14, Greek 0/12. One Latin document opens "Musonius Rufus to his Lucilius, greeting.", which teaches the Roman philosopher, not the AI of `constitution/v4.md` ("I am Musonius, an AI, named after Musonius Rufus").
+
+Interpretation (PI/Claude): I think it probable that the classical route trades one set of tics for another rather than reaching the human baseline, and that part of its lower judge pass rate is translation quality from this teacher, not the route itself. The genre collapse and the missing AI are prompt problems, and confound the route comparison, because the genre was chosen while writing in the target language. n = 14 seeds, one sample each, so the KEEP counts (9, 6, 3) are weak evidence on their own. The missing AI identity matters more than the tics: documents meant to teach Musonius mostly teach an unnamed sage or the historical Stoic.
+
+Fix now running (try 2): a short English planning call fixes genre, setting and premise, and decides whether Musonius appears; if it does, it is the AI and the setting must allow one. All three routes write the same plan, so the comparison is paired. The document judge now rejects a Musonius shown as a human.
+
+Writing documents in a classical language is not yet shown to help, and the documents first need to show Musonius as an AI.
+
+-- PI/Claude (opus-5-5), litreview session
