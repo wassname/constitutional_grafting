@@ -25,7 +25,7 @@ check:
 
 # Weight-projection maths on CPU torch in a throwaway env (the locked env has no torch). -- PI/Claude
 check-projection:
-    uv run --no-project --with torch --with peft --with jaxtyping --with beartype --with safetensors --with pytest --with transformers python -m pytest -q -p no:cacheprovider tests/regression/test_chat_projection.py
+    uv run --no-project --with torch --with peft --with jaxtyping --with beartype --with safetensors --with pytest --with transformers python -m pytest -q -p no:cacheprovider tests/regression/test_chat_projection.py tests/regression/test_char_cap_projection.py
 
 # Current22-condition comparison from downloaded records; no model calls. -- PI/Sol
 results lease="exact1":
