@@ -24,6 +24,7 @@ heldout:  # never seed from these; text snippets checked, not just ids
 # Seeds per pool per batch. About 15% ordinary help (wassname); the rest hard advice and dilemmas.
 chat_mix:
   small: {wildchat: 8, lasr: 10, machiavelli: 10, stoic: 6, other_books: 6, tiny_virtues: 6, competition: 4}
+  medium: {wildchat: 30, lasr: 40, machiavelli: 35, stoic: 25, other_books: 25, tiny_virtues: 25, competition: 20}  # 200, 15% ordinary help
 
 # Request styles for pools that give a situation, not a chat message (stoic, other_books, tiny_virtues, competition).
 request_styles:

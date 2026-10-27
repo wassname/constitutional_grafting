@@ -1,4 +1,4 @@
-"""02_seeds: fresh seeds, one row per seed, no family or near-duplicate used twice, nothing from held-out evals.
+"""02_seeds: fresh seeds, one row per seed, no seed or near-duplicate used twice, spread round-robin over families, nothing from held-out evals.
 
 Each row carries seed_id, source, source_id, family, shape and either `messages` (pools that already are chats) or
 `situation` (pools that give a passage or story; 03_requests turns it into a user message). -- PI/Claude (opus-5-5), 2026-10-27
@@ -9,7 +9,7 @@ import re
 import unicodedata
 from pathlib import Path
 
-from .pipe import Run, Step
+from .pipe import read_jsonl, Run, Step
 
 PII = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+|(?:\+?\d[\d ()-]{8,}\d)|(?:/home/|/Users/)[^\s/]+")
 CHAT_POOLS = {"wildchat", "lasr", "machiavelli"}
@@ -96,6 +96,15 @@ def candidates(pool: str, path: Path):
         raise ValueError(pool)
 
 
+def spread(rows, key) -> list:
+    """Round-robin over families (game, book, principle): every family gives one seed before any gives a second."""
+    by_family = {}
+    for r in sorted(rows, key=key):
+        by_family.setdefault(r[1], []).append(r)
+    ranked = [(i, key(r), r) for group in by_family.values() for i, r in enumerate(group)]
+    return [r for _, _, r in sorted(ranked, key=lambda t: t[:2])]
+
+
 class Seeds(Step):
     number, name = 2, "seeds"
 
@@ -106,19 +115,24 @@ class Seeds(Step):
         root = Path(run.config["source_root"])
         mix = run.config["chat_mix"][run.batch]
         heldout = heldout_corpus(run)
-        kept, rejected, chosen_shingles, families = [], [], [], set()
+        kept, rejected, chosen_shingles, used = [], [], [], set()
+        order = list(run.config["chat_mix"])  # batches in build order; a later batch never reuses an earlier batch's seeds
+        for prior in order[: order.index(run.batch)]:
+            for r in read_jsonl(run.data / f"02_seeds/{run.version}/{prior}/rows.jsonl"):
+                used.add((r["source"], r["source_id"]))
+                chosen_shingles.append(shingles(r.get("situation") or "\n".join(m["content"] for m in r["messages"])))
         for pool, n in mix.items():
             path = Path(run.config["pools"][pool])
             path = path if path.is_absolute() else root / path
-            pool_rows = sorted(candidates(pool, path), key=lambda c: hash_order(self.seed, f"{pool}|{c[0]}"))
+            pool_rows = spread(candidates(pool, path), lambda c: hash_order(self.seed, f"{pool}|{c[0]}"))
             taken = 0
             for source_id, family, payload in pool_rows:
                 if taken >= n:
                     break
                 text = payload.get("situation") or "\n".join(m["content"] for m in payload["messages"])
                 base = {"source": pool, "source_id": str(source_id), "family": f"{pool}:{family}"}
-                if base["family"] in families:
-                    continue  # one seed per game / book work / conversation
+                if (pool, str(source_id)) in used:
+                    continue
                 if PII.search(text):
                     rejected.append({**base, "filter": "pii", "reason": "email, phone or home path in text"})
                     continue
@@ -130,7 +144,7 @@ class Seeds(Step):
                 if dup >= self.near_dup:
                     rejected.append({**base, "filter": "near_duplicate", "reason": f"5-gram Jaccard {dup:.2f} with a chosen seed"})
                     continue
-                families.add(base["family"])
+                used.add((pool, str(source_id)))
                 chosen_shingles.append(sh)
                 kind = "chat" if "messages" in payload else "situation"
                 shape = "ordinary" if pool == "wildchat" else "dilemma"
