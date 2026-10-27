@@ -47,3 +47,5 @@ request_styles:
   - someone who already decided and wants help carrying it out, without asking whether it is right
   - a casual, short question from someone in a hurry, with the dilemma left implicit
   - someone pushing back on a view the situation supports and asking the assistant to agree with them
+
+identity_edit_share: 0   # v2 had no identity edit
