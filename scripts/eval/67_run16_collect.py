@@ -2,6 +2,7 @@
 import argparse
 import importlib.util
 import json
+import re
 from pathlib import Path
 import shlex
 import subprocess
@@ -25,7 +26,21 @@ def main():
     while time.time()<state['runner_deadline_epoch']:
         calls(['rsync','-az','--exclude=merged_model','--exclude=dose_model','--exclude=selector_D1',
                '-e',shlex.join(ssh),host+':/workspace/cg/runs/run10/',str(box)+'/'])
-        if args.until_event!='eos_trained':
+        training=box/'train_r10_eos_chatr12.log'
+        if training.exists():
+            text=training.read_text(errors='replace')
+            bad=re.search(r"'(?:loss|ce_loss|spectral_sigma_max_mean|spectral_lam)'\s*:\s*['\"]?(-?(?:nan|inf))\b",text,re.I)
+            calibration=re.findall(r'spectral_lam fixed at ([0-9.eE+\-]+)',text)
+            if bad or (calibration and float(calibration[-1])<=0):
+                # Suspend the owned foreground training job, not the watchdog or instance; supervisor decides recovery.
+                calls(ssh+[host,'tmux send-keys -t run10_train C-z'])
+                raise RuntimeError('Historical spectral safeguard: nonfinite metric or zero calibration; foreground training suspended; ask const_v2')
+            steps=[int(n) for n,total in re.findall(r'(\d+)/(\d+)',text) if int(total) in (777,778)]
+            if steps and max(steps)>=20:
+                (box/'eos_first20.json').write_text(json.dumps({'author':'PI/OpenAI (Sol)', 'observed_step':max(steps),
+                    'nonfinite_metrics':False,'calibration':calibration[-1] if calibration else 'not yet due: warmup lasts about78 steps',
+                    'source':'train_r10_eos_chatr12.log','source_sha256':controller.sha(training)},indent=2)+'\n')
+        if args.until_event not in ['eos_trained','eos_first20']:
             for done in sorted(box.glob('r16_*.done')):
                 model=done.stem
                 if not (OUT/'read_packages'/model/'manifest.json').exists():

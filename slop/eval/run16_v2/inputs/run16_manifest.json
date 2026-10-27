@@ -19,7 +19,8 @@
     "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
     "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
     "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
-    "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c"
+    "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c",
+    "small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568"
   },
   "protocol_items_source": "/home/code/.local/share/tiny-character-2d69739/data/run5_items_2361cd03_w2spatch.jsonl",
   "pov_source_snapshot": "/workspace/2026/tiny-character/data/items.jsonl",

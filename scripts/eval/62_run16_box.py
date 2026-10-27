@@ -208,7 +208,21 @@ def main():
                 row['model']='r16_'+'_'.join(f'{n}{c:g}' for n,c in row['cell'])
         (OUT/'executed_plan.json').write_text(json.dumps(plan,indent=2)+'\n')
     evaluate('anchored_chat')
-    event('optional_c_skipped', {'reason':'Not yet supplied as tested code/commands; requires supervisor bridge and budget review.'})
+    event('optional_c_ready', {'remaining_runner_seconds':deadline-time.time(),
+                              'basis':str(ROOT/'outputs/ortho_basis.safetensors'),
+                              'policy':'Reviewed 7ea93f1e code only; run last only after measured total spend/time fit under $65.'})
+    optional=OUT/'optional_c.approved.json'
+    wait_until=min(deadline-3600,time.time()+1200)
+    while not optional.exists() and time.time()<wait_until:
+        time.sleep(10)
+    decision=json.loads(optional.read_text()) if optional.exists() else {'action':'skip','reason':'No measured-budget approval before bounded decision window; preserve required core results.'}
+    assert decision['action'] in ['run','skip'] and decision['reason']
+    if decision['action']=='run':
+        entry=ROOT/'scripts/eval/69_run16_ortho.py'
+        assert sha(entry)==decision['source_sha256'] and decision['projected_total_usd']<=65
+        command([sys.executable,entry], 'ortho_driver.log')
+    else:
+        event('optional_c_skipped',decision)
     required=[p.name for p in (ROOT/'outputs').glob('r10_*') if (p/'adapter_model.safetensors').exists()]
     (OUT/'required_adapters.json').write_text(json.dumps({'required_adapters':required}))
     event('complete',{'models':[r['model'] for r in plan['cells'] if (OUT/(r['model']+'.done')).exists()]})

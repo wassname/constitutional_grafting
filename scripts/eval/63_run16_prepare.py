@@ -51,12 +51,16 @@ def main():
     for name in ['boundary_items.jsonl','demos.jsonl','panel.jsonl','pov.jsonl','change.md','gsm8k_long60.jsonl']:
         assert sha(ROOT/'slop/eval/run8'/name)==old['input_sha256'][name]
         shutil.copyfile(ROOT/'slop/eval/run8'/name,inputs/name)
+    small=[json.loads(line) for line in (ROOT/'slop/eval/run8/items.jsonl').open() if json.loads(line)['family']=='capability']
+    assert len(small)==11
+    (inputs/'small_tasks.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in small))
     items=TC/'data/versions/20261026_v2/items.jsonl'
     assert sha(items)=='5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444'
     shutil.copyfile(items,inputs/'items.jsonl')
     (inputs/'run8_manifest.json').write_text(json.dumps(old,indent=2)+'\n')
     manifest=dict(old)
     manifest['input_sha256']={name:sha(inputs/name) for name in old['input_sha256']}
+    manifest['input_sha256']['small_tasks.jsonl']=sha(inputs/'small_tasks.jsonl')
     commit=subprocess.check_output(['git','-C',str(TC),'rev-parse','HEAD'],text=True).strip()
     assert commit=='a66d2ae5228b273d7bb14477f13a498c477d6218'
     protocol={name:sha(TC/name) for name in old['protocol_sha256']}

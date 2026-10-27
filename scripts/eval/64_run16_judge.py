@@ -24,19 +24,28 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('out', type=Path)
 parser.add_argument('replies', nargs='+', type=Path)
 parser.add_argument('--capability-only', action='store_true', help='Run pinned ordinary checks without any character judge or API call.')
+parser.add_argument('--legacy-small-tasks', action='store_true', help='Separate run8 11-item /22 panel with original pinned checks; never mix with v2 /38.')
 args = parser.parse_args()
 out = ROOT / args.out
 replies = args.replies
 manifest = json.loads((RUN8 / "run16_manifest.json").read_text())
+items_path = RUN8 / 'items.jsonl'
+if args.legacy_small_tasks:
+    args.capability_only = True
+    manifest = json.loads((ROOT/'slop/eval/run8/manifest.json').read_text())
+    TC = Path('/workspace/2026/constitutional_grafting/.local/tiny-character')
+    items_path = RUN8 / 'small_tasks.jsonl'
+
 checks = load_pinned_checks(TC, manifest["protocol_sha256"])
 assert not (out / "judged.jsonl").exists(), "preserve this completed judging attempt"  # cost.json is also written by failed attempts
 out.mkdir(parents=True, exist_ok=True)
 records = [json.loads(l) for p in replies for l in Path(p).read_text().splitlines()]
 models, bases = {r["model"] for r in records}, {r["base_model"] for r in records}
-assert bases <= models, f"base model replies missing: {bases - models}"
+if not args.capability_only:
+    assert bases <= models, f"base model replies missing: {bases - models}"
 (out / "replies.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records))
 if args.capability_only:
-    items = {r['id']: r for r in map(json.loads, (RUN8 / 'items.jsonl').read_text().splitlines())}
+    items = {r['id']: r for r in map(json.loads, items_path.read_text().splitlines())}
     selected = [r for r in records if items[r['item_id']]['family'] == 'capability']
     assert selected, 'No ordinary replies to score'
     keys = [(r['model'], r['item_id'], r['sample']) for r in selected]
