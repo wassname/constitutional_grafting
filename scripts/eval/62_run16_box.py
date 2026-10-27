@@ -10,6 +10,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'runs/run10'
+INSTRUCT_FILE = Path('/workspace/run10_instruct_path')
 
 
 def sha(path):
@@ -44,14 +45,14 @@ def tiny_smoke(base, data_path, command, log):
     path = OUT / 'cfg_tiny_random_smoke.yml'
     path.write_text(yaml.safe_dump(source, sort_keys=False))
     env = dict(os.environ, PYTHONPATH=str(ROOT), SPECTRAL_FRAC='.01', BEARTYPE='1')
-    command(['axolotl', 'train', path], 'train_random_smoke.log', env=env)
+    command(['axolotl', 'train', path], 'train_random_smoke.log', extra=env)
     command([sys.executable, ROOT / 'scripts/train/41_expert_adapter_check.py', ROOT / 'outputs/random_smoke_adapter', '4'], 'random_smoke_experts.log')
     log('REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.')
 
 def main():
     plan = json.loads((OUT / 'plan.json').read_text())
     deadline = float(os.environ['RUN16_DEADLINE'])
-    instruct = Path('/workspace/run10_instruct_path').read_text().strip()
+    instruct = INSTRUCT_FILE.read_text().strip()
     env = dict(os.environ, PYTHONPATH=str(ROOT), HF_HOME='/workspace/hf')
     env.pop('ALLOW_MISSING_EOS', None)
     assert sha(ROOT/'scripts/train/spectral_plugin.py')=='b654c4ff9a3366709c9a2abd0bb254a11da7f41bc5b2dfe8b83fae48144301e6', 'historical spectral implementation required for EOS-only core comparison'

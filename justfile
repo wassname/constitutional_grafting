@@ -128,3 +128,7 @@ heal-answer-panel:
 heal-summary:
     uv run --no-sync python scripts/eval/59_run15_heal_results.py analyze
     just heal-answer-panel
+
+# CPU-only real run16 driver control flow; all expensive stage executables are explicit stubs. -- PI/OpenAI (Sol)
+run16-driver-dry-run:
+    uv run --locked python scripts/eval/72_run16_driver_dry_run.py
