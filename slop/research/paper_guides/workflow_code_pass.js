@@ -1,0 +1,25 @@
+// Second pass: read the code / data-pipeline artifacts the first pass skipped. -- PI/Claude (opus-5-5), 2026-10-27
+const root = "/workspace/2026/constitutional_grafting";
+const common = `You are in ${root}. Read slop/research/paper_guides/BRIEF.md, especially section 3b (data pipeline from code). The first-pass guide already exists; read it, then READ THE CODE/ARTIFACTS listed below in full and append a section '## 3b. Data pipeline, from the code (second pass)' to that guide, plus any new items under a heading '## 4b. Gotchas found only in code'. Each item cites file:line (or HF file + row) and quotes the code or prompt. Correct any first-pass statement the code contradicts, marking it 'corrected in second pass'. Do not edit other files, do not commit, do not run git except read-only commands inside docs/vendor or .local/vendor_ro. Sign the appended section.`;
+
+const clone = await runs.run("clone", {
+  agent: "worker",
+  model: "openai-codex/gpt-6.1-sol",
+  task: `You are in ${root}; you are the only agent running git in the main repo right now. Two repos were too big to vendor (data blobs): ArcadiaImpact/science-of-midtraining (remote HEAD 63374927b85b2e83bdb73c570db4242f16569718, ~1.5 GB) and safety-research/constitutional-adapters (HEAD bff6268ac702e7fbcf34022704ead71531a385f5, ~0.9 GB). Get their code without the data: 'git clone --filter=blob:limit=1m --no-checkout <url> docs/vendor/<name>' then checkout HEAD (large blobs stay unfetched; checkout may need 'git sparse-checkout set --no-cone' with patterns excluding big data dirs, or '-c core.sparseCheckout'; find what works and check the working tree size <100 MB and code files present). Names: science_of_midtraining, constitutional_adapters. Then register as submodules: 'git submodule add <url> docs/vendor/<name>' (git reuses an existing repo at the path). If .git/config is read-only and that fails, record the exact error and keep the clone at .local/vendor_ro/<name> instead. Also download (read-only, small files only, via huggingface_hub or curl to .local/vendor_ro/hf/) the HF dataset geodesic-research/inoculation-midtraining-generation-prompts (all files if total < 50 MB, else the first shard + README) and the dataset card of geodesic-research/inoculation-midtraining. Update slop/research/paper_guides/VENDOR.md rows for these. Commit only .gitmodules, the two submodule paths and VENDOR.md with message 'vendor: code-only partial clones of science-of-midtraining and constitutional-adapters' and trailer 'Co-Authored-By: PI/gpt-6.1-sol <288921227+claudypoo@users.noreply.github.com>'. Report paths and sizes.`,
+});
+
+const passes = [
+  ["2026_tan_stress-testing-alignment-midtraining", "docs/vendor/science_of_midtraining (or .local/vendor_ro/science_of_midtraining): the scimt.gen document generator and prompts, midtrain/AFT dispatch configs, the training launcher, data mixing/replay, loss masking and the eval/judge code behind the paper's figures (paper/README.md maps figures to code)."],
+  ["2026_lowet_constitutional-adapters", "docs/vendor/constitutional_adapters (or .local/vendor_ro/constitutional_adapters): how corpora are built, how adapters/vectors are fitted, which layers, scaling, and evaluation code."],
+  ["2026_obrien_inoculation-midtraining", ".local/vendor_ro/hf/ (inoculation-midtraining-generation-prompts dataset and card): the actual generation prompts, document types, seed taxonomy, and any filtering or replay described in the cards. Read every distinct prompt template in full; sample and read 20 generated documents if the data is available."],
+  ["2026_tice_alignment-pretraining", "docs/vendor/alignment_pretraining: the dataset transforms, any generator/upload scripts, notebooks that build or filter data, and the continued-pretraining configs in the Makefile. Also read the HF dataset cards for geodesic-research/discourse-grounded-misalignment-synthetic-scenario-data (card + 10 rows)."],
+  ["2026_minder_synthetic-persona-pretraining", "docs/vendor/spp_data (generation prompts, persona spec, filters, mixing into pretraining), docs/vendor/spp_training (SFT tokenizer/label builder and Trainer setup in full, midtraining launcher), docs/vendor/spp_evals (judge prompts)."],
+  ["2026_anthropic_teaching-claude-why", "docs/vendor/lasr_teaching_claude_why: the full fiction recipe prompt set, taxonomy/archetype contents, every stage operator used by the difficult-advice and fiction pipelines, quality filters and judges with their thresholds, and the mixture builder. Note: its worktree is dirty; do not modify it."],
+];
+
+const results = await runs.all(passes.map(([p, what]) => ({
+  key: p, agent: "worker", model: "openai-codex/gpt-6.1-sol",
+  task: `${common}\n\nGuide: slop/research/paper_guides/${p}.md. Paper: docs/papers/${p}.md. Code/artifacts to read in full: ${what}\nIf the clone step failed for your repo, use read-only GitHub raw reads at the pinned commit in VENDOR.md instead.`,
+})));
+
+return { clone: clone.ok, passes: results.map((r, i) => ({ key: passes[i][0], ok: r.ok })) };
