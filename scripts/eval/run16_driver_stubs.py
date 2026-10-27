@@ -32,7 +32,9 @@ def main():
             'beartype':os.environ.get('BEARTYPE'),'allow_missing_eos':os.environ.get('ALLOW_MISSING_EOS')})+'\n')
     if stage=='axolotl':
         assert args[0]=='train'
-        cfg=yaml.safe_load(Path(args[1]).read_text());adapter(ROOT/cfg['output_dir'])
+        cfg=yaml.safe_load(Path(args[1]).read_text())
+        assert not ('warmup_steps' in cfg and 'warmup_ratio' in cfg), 'warmup_steps and warmup_ratio are mutually exclusive'
+        adapter(ROOT/cfg['output_dir'])
         if 'random_smoke' in cfg['output_dir']:
             assert cfg['max_steps']==3 and cfg['warmup_steps']==2
             assert os.environ['BEARTYPE']=='1'
