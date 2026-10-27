@@ -99,8 +99,8 @@ def smoke_dataset_pipeline(output: Path = ROOT / ".local/dataset_pipeline/smoke"
     else:
         raise RuntimeError("smoke failed to finish after all recorded stages")
     final = {r["id"]: r for r in read_jsonl(Path(result["dataset"]))}
-    assert final[SMOKE_IDS[0]]["segments"][1]["text"] == repairs[SMOKE_IDS[0]]["reply"]
-    assert final[SMOKE_IDS[1]]["segments"][1]["text"] == rewrites[SMOKE_IDS[1]]["reply"]
+    assert final[SMOKE_IDS[0]]["segments"][1]["text"] == repairs[SMOKE_IDS[0]]["reply"].rstrip() + "<|im_end|>"
+    assert final[SMOKE_IDS[1]]["segments"][1]["text"] == rewrites[SMOKE_IDS[1]]["reply"].rstrip() + "<|im_end|>"
     assert result["status"] == "smoke_only"
     again = build_chat_dataset(recipe, input_file, "tiny_real_examples")
     assert again["sha256"] == result["sha256"]
