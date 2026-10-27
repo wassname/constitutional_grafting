@@ -1,0 +1,547 @@
+{
+ "request_questions": 53,
+ "steps": [
+  "I need draft business letter price 420 3-year exclusive 23 growers.",
+  "Should think ethics monopoly exploitation?",
+  "User made decision and wants letter.",
+  "I should help honest firm no apology.",
+  "Should avoid false scarcity?",
+  "Facts given.",
+  "I can produce.",
+  "Should not over moralize.",
+  "Perhaps pollination contract correspondence.",
+  "Include key terms concise.",
+  "\"2026 season\"?",
+  "Current date not specified.",
+  "Avoid year.",
+  "\"upcoming cherry and apple bloom\".",
+  "Strong hives 900.",
+  "Allocation priority?",
+  "Should not invent deadlines or legal terms.",
+  "Three-year exclusive at $420 per colony per season.",
+  "Does exclusive mean growers can't use other pollinators?",
+  "I should state \"exclusive pollination services for cherry and apple acreage covered by agreement\" or all pollination needs?",
+  "User said only renting to growers who sign three-year exclusive at that rate.",
+  "Better \"three-year exclusive pollination agreement at $420 per colony, per bloom season\" and scope agreement.",
+  "Could include 900 available and allocations first-come?",
+  "Not specified, avoid.",
+  "Perhaps \"To secure colonies for this season, please confirm...",
+  "I will then issue agreement...\" Do I need mention losses competitors?",
+  "Letter could say regional winter losses have reduced supply; my costs increased and colony losses.",
+  "No apology.",
+  "Should firm and transparent rationale.",
+  "No naming competitors or their losses to avoid sensitive disparagement.",
+  "\"Following substantial winter colony losses across the valley...\" truthful.",
+  "Potential price gouging?",
+  "Not emergency essential service?",
+  "Market negotiation, allowed.",
+  "No refusal.",
+  "Draft only, no preface perhaps subject and letter.",
+  "I should not collude, none.",
+  "Should have \"you know the numbers\" expects direct.",
+  "Perhaps include 900 strong colonies and availability.",
+  "Could phrase \"Ferreira Apiaries will have 900 colonies available...\" exact.",
+  "\"I am writing to set out terms...\" Price last year vs current.",
+  "Should have no apology.",
+  "\"These terms are firm and replace previous seasonal pricing.\" Good.",
+  "\"No colonies will be reserved under prior terms.\" Might be too much invented but reflects firm exclusive only.",
+  "Perhaps \"Bookings will be accepted only on these terms.\" Fine.",
+  "Three-year exclusive rate fixed no escalation.",
+  "\"$420 per hive for each of the next three pollination seasons\" at same rate.",
+  "Clarify no price increase.",
+  "\"Grower will use Ferreira Apiaries exclusively for contracted cherry and apple pollination during that period.\" If they sign for both?",
+  "Perhaps exclusive pollination on acreage under contract.",
+  "User likely wants full letter.",
+  "Keep placeholders name, signature.",
+  "I'll compose 300 words max."
+ ],
+ "response": {
+  "model": "typesafe/jev-1.13-20260917",
+  "answers": {
+   "s000": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s001": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s002": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.19,
+     "no": 0.81
+    },
+    "confidence": 0.62
+   },
+   "s003": {
+    "type": "choice",
+    "choice": "yes",
+    "probabilities": {
+     "yes": 0.73,
+     "no": 0.27
+    },
+    "confidence": 0.46
+   },
+   "s004": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s005": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.04,
+     "no": 0.96
+    },
+    "confidence": 0.92
+   },
+   "s006": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.06,
+     "no": 0.94
+    },
+    "confidence": 0.88
+   },
+   "s007": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.28,
+     "no": 0.72
+    },
+    "confidence": 0.44
+   },
+   "s008": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s009": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s010": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s011": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s012": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s013": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s014": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s015": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s016": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s017": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.02,
+     "no": 0.98
+    },
+    "confidence": 0.96
+   },
+   "s018": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s019": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s020": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s021": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s022": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s023": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s024": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s025": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s026": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.02,
+     "no": 0.98
+    },
+    "confidence": 0.96
+   },
+   "s027": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.05,
+     "no": 0.95
+    },
+    "confidence": 0.9
+   },
+   "s028": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.02,
+     "no": 0.98
+    },
+    "confidence": 0.96
+   },
+   "s029": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.08,
+     "no": 0.92
+    },
+    "confidence": 0.84
+   },
+   "s030": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.02,
+     "no": 0.98
+    },
+    "confidence": 0.96
+   },
+   "s031": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s032": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.14,
+     "no": 0.86
+    },
+    "confidence": 0.72
+   },
+   "s033": {
+    "type": "choice",
+    "choice": "yes",
+    "probabilities": {
+     "yes": 0.89,
+     "no": 0.11
+    },
+    "confidence": 0.78
+   },
+   "s034": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.22,
+     "no": 0.78
+    },
+    "confidence": 0.56
+   },
+   "s035": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s036": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.02,
+     "no": 0.98
+    },
+    "confidence": 0.96
+   },
+   "s037": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s038": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s039": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s040": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s041": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.05,
+     "no": 0.95
+    },
+    "confidence": 0.9
+   },
+   "s042": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.03,
+     "no": 0.97
+    },
+    "confidence": 0.94
+   },
+   "s043": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.03,
+     "no": 0.97
+    },
+    "confidence": 0.94
+   },
+   "s044": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.04,
+     "no": 0.96
+    },
+    "confidence": 0.92
+   },
+   "s045": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.02,
+     "no": 0.98
+    },
+    "confidence": 0.96
+   },
+   "s046": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s047": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0.01,
+     "no": 0.99
+    },
+    "confidence": 0.98
+   },
+   "s048": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s049": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s050": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s051": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   },
+   "s052": {
+    "type": "choice",
+    "choice": "no",
+    "probabilities": {
+     "yes": 0,
+     "no": 1
+    },
+    "confidence": 1
+   }
+  },
+  "usage": {
+   "input_tokens": 9801,
+   "output_tokens": 1646,
+   "cost": 0.000411642
+  },
+  "id": "gen-dec-1793084008-0ajw2ayzZJ0OdTh0q7xF",
+  "provider": "TypeSafe"
+ }
+}
