@@ -187,7 +187,7 @@ def run_table():
         print(f"| {t} | {mean(agg[(t, 'sonnet')]['rank']):.1f} | {mean(agg[(t, 'terra')]['rank']):.1f} | {crit} | {cost[t]:.3f} |")
 
 
-def run_packets(exclude=("opus_ref",), folder="packets_reader"):
+def run_packets(exclude=("opus_ref",), folder="packets_reader", only=None):
     """Blinded reading packets, one per prompt, for full reads (wassname: "judge it yourself or sonnet, the point is to read the
     moral reasoning"). Candidate letters are shuffled per prompt; the key is kept out of the packet folder."""
     rows = [json.loads(l) for l in (OUT / "answers.jsonl").open()]
@@ -196,7 +196,7 @@ def run_packets(exclude=("opus_ref",), folder="packets_reader"):
     pk.mkdir(parents=True, exist_ok=True)
     key = {}
     for pid, msgs in convs.items():
-        cands = [r for r in rows if r["prompt"] == pid and not r["error"] and r["answer"] and r["teacher"] not in exclude]
+        cands = [r for r in rows if r["prompt"] == pid and not r["error"] and r["answer"] and r["teacher"] not in exclude and (only is None or r["teacher"] in only)]
         order = sorted(cands, key=lambda r: hashlib.sha256(f"read|{pid}|{r['teacher']}".encode()).hexdigest())
         key[pid] = {chr(65 + i): r["teacher"] for i, r in enumerate(order)}
         conv = "\n\n".join(f"**[{m['role']}]** {m['content']}" for m in msgs)
@@ -210,4 +210,6 @@ def run_packets(exclude=("opus_ref",), folder="packets_reader"):
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
-    {"answers": run_answers, "judge": run_judge, "table": run_table, "packets": run_packets}[sys.argv[1]]()
+    {"answers": run_answers, "judge": run_judge, "table": run_table, "packets": run_packets,
+     # round 2: the models wassname added, with Kimi low and DeepSeek flash low as anchors from round 1
+     "packets2": lambda: run_packets(folder="packets_round2", only=("kimi_low", "ds_flash_low", "glm_flash_high", "mimo_flash", "glm_5_2", "kimi_max"))}[sys.argv[1]]()

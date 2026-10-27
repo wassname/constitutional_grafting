@@ -20,7 +20,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[3]
-STAGES = ["02_seeds", "03_requests", "04_generate", "05_regex", "06_jev", "07_judge", "08_retry", "09_edit", "11_export"]
+STAGES = ["02_seeds", "03_requests", "04_generate", "04_route", "05_regex", "06_jev", "07_judge", "08_retry", "09_edit", "11_export"]
 
 
 def rows(stage, version, batch, kind="rows"):
@@ -51,10 +51,11 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     filters = yaml.safe_load((ROOT / "configs/data/v2/jev_filters.yaml").read_text())
 
+    stages = [st for st in STAGES if (ROOT / "data" / st / a.version / a.batch).exists()]
     # rate table
     table = ["| stage | kept | rejected | rejected by filter |", "|:--|--:|--:|:--|"]
     kept_n = []
-    for st in STAGES:
+    for st in stages:
         k, x = rows(st, a.version, a.batch), rows(st, a.version, a.batch, "rejected")
         kept_n.append(len(k))
         table.append(f"| {st} | {len(k)} | {len(x)} | {', '.join(f'{f} {n}' for f, n in collections.Counter(r['filter'] for r in x).most_common())} |")
@@ -100,7 +101,7 @@ def main():
 
     # plot
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4.5), gridspec_kw={"width_ratios": [1.2, 1]})
-    ax1.barh(STAGES[::-1], kept_n[::-1], color="#4a7")
+    ax1.barh(stages[::-1], kept_n[::-1], color="#4a7")
     for i, v in enumerate(kept_n[::-1]):
         ax1.text(v, i, f" {v}", va="center", fontsize=11)
     ax1.set_xlabel(f"rows kept after stage (of {kept_n[0]} seeds)")

@@ -9,7 +9,7 @@ wassname (spelling corrected): "make sure we cache Kimi and Haiku judge"; "check
   - [ ] dedup across pools (Unicode 5-gram + read top pairs); no seed used twice; identity share capped by rows and words; held-out eval items excluded (tiny-character `leak.py`, AIRiskDilemmas, daily_dilemmas)
   - failure modes: a pool that is also an eval (tiny-virtues is used by decision 2; its eval is then invalid for this model); near-identical seeds under different ids
   - deliverable: seeds file + counts by source and shape; 0 seeds reused
-- [ ] goal B: generation pilot with caching, then scale (`data/03_generate/v2/`)
+- [ ] goal B: generation pilot with caching, then scale (`data/scratch/20261027_trials_generate/v2/`)
   - [ ] Kimi K3.1 Pro, constitution in context, no guide; every request and response cached by request hash, so nothing paid is repeated
   - [ ] A/B on 50 seeds: direct English vs written in Ancient Greek or Latin then translated to English; compare tic rates, keep rate on full read, reasoning quality
   - failure modes: translation loses facts or changes the decision; translated version keeps fewer rows (2026-10-26 pilot: 10/20 vs 14-15/20 kept)

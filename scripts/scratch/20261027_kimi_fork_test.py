@@ -12,7 +12,7 @@ from constitutional_grafting.data.model_requests import request_messages, send_c
 ROOT = Path(__file__).resolve().parents[2]
 MAIN = Path("/workspace/2026/constitutional_grafting")
 RUN = MAIN / "slop/data/moral_deliberation/20261027_pilot"
-OUT = ROOT / "data/03_generate/fork_test"
+OUT = ROOT / "data/scratch/20261027_trials_generate/fork_test"
 CALL = "sft_8353acd83a__const__k1"  # long trace (7.4k chars)
 FIELDS = ["reasoning", "reasoning_content"]
 

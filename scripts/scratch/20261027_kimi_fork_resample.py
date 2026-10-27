@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 MAIN = Path("/workspace/2026/constitutional_grafting")
 RUN = MAIN / "slop/data/moral_deliberation/20261027_pilot"
 STEPS = MAIN / "slop/data/moral_deliberation/20261027_jev_steps/sft_8353acd83a__const__k1.json"
-OUT = ROOT / "data/03_generate/fork_resample"
+OUT = ROOT / "data/scratch/20261027_trials_generate/fork_resample"
 N = 5
 
 
