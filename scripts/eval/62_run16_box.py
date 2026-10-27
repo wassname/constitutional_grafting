@@ -54,6 +54,7 @@ def main():
     instruct = Path('/workspace/run10_instruct_path').read_text().strip()
     env = dict(os.environ, PYTHONPATH=str(ROOT), HF_HOME='/workspace/hf')
     env.pop('ALLOW_MISSING_EOS', None)
+    assert sha(ROOT/'scripts/train/spectral_plugin.py')=='b654c4ff9a3366709c9a2abd0bb254a11da7f41bc5b2dfe8b83fae48144301e6', 'historical spectral implementation required for EOS-only core comparison'
 
     def command(argv, name, extra=None):
         assert time.time() < deadline
@@ -114,8 +115,9 @@ def main():
 
     def project(adapter, label, ranks=(64,), sides='both'):
         output = ROOT/'outputs'/('projection_'+label)
+        basis_args=['--save-basis',ROOT/'outputs/ortho_basis.safetensors','--basis-rank','64'] if label=='p16_' else []
         command([sys.executable,'scripts/train/16_project_chat_adapter.py',base,instruct,adapter,output,
-                 '--ranks',*map(str,ranks),'--sides',sides], label+'.log')
+                 '--ranks',*map(str,ranks),'--sides',sides,*basis_args], label+'.log')
         assert json.loads((output/'projection.json').read_text())['complete']
         shutil.copyfile(output/'projection.json', OUT/(label+'.json'))
         shutil.copyfile(output/'modules.jsonl', OUT/(label+'_modules.jsonl'))
