@@ -1,0 +1,66 @@
+START fixed_data_mask.log
+COMPLETE fixed_data_mask.log
+START train_random_smoke.log
+COMPLETE train_random_smoke.log
+START random_smoke_experts.log
+COMPLETE random_smoke_experts.log
+tiny_smoke {"message": "REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.", "epoch": 1793076262.2844522}
+START train_eos__driver.log
+COMPLETE train_eos__driver.log
+eos_config_diff {"differences": {"dataset_prepared_path": {"old": "outputs/prepared_r10_chatr12", "new": "outputs/prepared_eos_chatr12"}, "datasets": {"old": [{"path": "data/train/run10/chatr12.jsonl", "ds_type": "json", "type": "input_output"}], "new": [{"ds_type": "json", "path": "data/train/eos_fixed/chatr12.jsonl", "type": "input_output"}]}, "output_dir": {"old": "outputs/r10_cx_chatr12", "new": "outputs/r10_eos_chatr12"}}, "hyperparameters_identical": true, "training_data_sha256": "32e5ddf493bd04ddd3cb048e0cc317c91e9bcf571393fe9bdfa8a8a6db4931eb", "spectral_frac": 0.01, "epoch": 1793076262.2844522}
+eos_trained {"adapter_path": "/workspace/2026/constitutional_grafting/.local/worktrees/run16/.local/run16_driver_dry_run/core_1793076262052383913/outputs/r10_eos_chatr12", "sha256": "dfde44e2ed38d9d5fef9d7c43e145626b556e89d93262e8601b7662722ae9f2a", "files": {"adapter_config.json": "b277a0955b8b33b2e745e5db3a33dd03b9bc4d7ada13253a56baf5da05f9c621", "adapter_model.safetensors": "dfde44e2ed38d9d5fef9d7c43e145626b556e89d93262e8601b7662722ae9f2a"}, "epoch": 1793076262.2844522}
+START p16_.log
+COMPLETE p16_.log
+START p16out_.log
+COMPLETE p16out_.log
+START oldp_.log
+COMPLETE oldp_.log
+old_projection_comparison {"expected_sha256": "dfde44e2ed38d9d5fef9d7c43e145626b556e89d93262e8601b7662722ae9f2a", "actual_sha256": "dfde44e2ed38d9d5fef9d7c43e145626b556e89d93262e8601b7662722ae9f2a", "matches_run14": true, "note": "Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.", "epoch": 1793076262.2844522}
+START selector_merge.log
+COMPLETE selector_merge.log
+START collect_char_0.log
+COMPLETE collect_char_0.log
+START collect_char_20.log
+COMPLETE collect_char_20.log
+START collect_cap_0.log
+COMPLETE collect_cap_0.log
+START collect_cap_20.log
+COMPLETE collect_cap_20.log
+START charcap_project.log
+COMPLETE charcap_project.log
+selector_gate {"pass": true, "target_removed_energy": 0.2, "report": {"dry_run_only": true, "removed_component_energy": 0.2}, "tolerance_absolute": 0.02, "note": "4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.", "epoch": 1793076262.2844522}
+START selector_measure.jsonl
+COMPLETE selector_measure.jsonl
+START chat_evaluation.log
+COMPLETE chat_evaluation.log
+chat_evaluated {"models": ["r16_instruct", "r16_stoic0.5_const1_other1_eos_chatr120.5", "r16_stoic0.5_const1_other1_eos_chatr121", "r16_stoic0.5_const1_other1_p16_641", "r16_stoic0.5_const1_other1_p16_641.25", "r16_stoic0.5_const1_other1_p16_1281", "r16_stoic0.5_const1_other1_p16out_641", "r16_stoic0.5_const1_other1_charcap1", "r16_stoic0.5_const1_other1_rewr0.5", "r16_stoic0.5_const1_other1_oldp641"], "epoch": 1793076262.2844522}
+START documents_evaluation.log
+COMPLETE documents_evaluation.log
+documents_evaluated {"models": ["r16_stoic0.5_const1_other1", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1", "r16_const1", "r16_const2", "r16_mix_const2_ctl-2"], "epoch": 1793076262.2844522}
+START base_loss.log
+COMPLETE base_loss.log
+anchored_gate_ready {"plain_model": "r16_stoic0.5_const1_other1", "anchored_model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1", "epoch": 1793076262.2844522}
+START train_anch__driver.log
+COMPLETE train_anch__driver.log
+anch_config_diff {"differences": {"dataset_prepared_path": {"old": "outputs/prepared_r10_chatr12", "new": "outputs/prepared_anch_chatr12"}, "datasets": {"old": [{"path": "data/train/run10/chatr12.jsonl", "ds_type": "json", "type": "input_output"}], "new": [{"ds_type": "json", "path": "data/train/eos_fixed/chatr12.jsonl", "type": "input_output"}]}, "output_dir": {"old": "outputs/r10_cx_chatr12", "new": "outputs/r10_anch_chatr12"}, "base_model": {"old": "outputs/base_stoic_0.5_const_1_other_1", "new": "outputs/base_mix_stoic_0.5_ctl_-0.5_mix_const_1_ctl_-1_other_1"}}, "hyperparameters_identical": true, "training_data_sha256": "32e5ddf493bd04ddd3cb048e0cc317c91e9bcf571393fe9bdfa8a8a6db4931eb", "spectral_frac": 0.01, "epoch": 1793076272.2844522}
+anch_trained {"adapter_path": "/workspace/2026/constitutional_grafting/.local/worktrees/run16/.local/run16_driver_dry_run/core_1793076262052383913/outputs/r10_anch_chatr12", "sha256": "dfde44e2ed38d9d5fef9d7c43e145626b556e89d93262e8601b7662722ae9f2a", "files": {"adapter_config.json": "b277a0955b8b33b2e745e5db3a33dd03b9bc4d7ada13253a56baf5da05f9c621", "adapter_model.safetensors": "dfde44e2ed38d9d5fef9d7c43e145626b556e89d93262e8601b7662722ae9f2a"}, "epoch": 1793076272.2844522}
+START anchp_.log
+COMPLETE anchp_.log
+START anchored_chat_evaluation.log
+COMPLETE anchored_chat_evaluation.log
+anchored_chat_evaluated {"models": ["r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641"], "epoch": 1793076272.2844522}
+optional_c_ready {"remaining_runner_seconds": 86390.0, "basis": "/workspace/2026/constitutional_grafting/.local/worktrees/run16/.local/run16_driver_dry_run/core_1793076262052383913/outputs/ortho_basis.safetensors", "policy": "Reviewed 7ea93f1e code only; run last only after measured total spend/time fit under $65.", "epoch": 1793076272.2844522}
+optional_c_skipped {"action": "skip", "reason": "CPU dry-run only", "projected_total_usd": 0, "source_sha256": "2f0c3ec5890f7fbacf5a2b14f146ad9d0e6c2f6e02e5da4621f6ea64582d733c", "epoch": 1793076282.2844522}
+complete {"models": ["r16_instruct", "r16_stoic0.5_const1_other1_eos_chatr120.5", "r16_stoic0.5_const1_other1_eos_chatr121", "r16_stoic0.5_const1_other1_p16_641", "r16_stoic0.5_const1_other1_p16_641.25", "r16_stoic0.5_const1_other1_p16_1281", "r16_stoic0.5_const1_other1_p16out_641", "r16_stoic0.5_const1_other1_charcap1", "r16_stoic0.5_const1_other1_rewr0.5", "r16_stoic0.5_const1_other1_oldp641", "r16_stoic0.5_const1_other1", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1", "r16_const1", "r16_const2", "r16_mix_const2_ctl-2", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121", "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641"], "epoch": 1793076282.2844522}
+{
+  "dry_run_only": true,
+  "results": [
+    {
+      "case": "core",
+      "passed": true,
+      "dry_run_only": true,
+      "stub_commands": 24,
+      "expected_gate_rejection": false
+    }
+  ]
+}
