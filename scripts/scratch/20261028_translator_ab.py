@@ -18,7 +18,7 @@ TRANSLATORS = {
                          "provider": {"only": ["DeepSeek"], "allow_fallbacks": False, "require_parameters": True}}),
     "kimi_low": ("moonshotai/kimi-k3.1-pro", {"reasoning": {"effort": "low"}, "max_tokens": 16000,
                  "provider": {"only": ["Moonshot AI"], "allow_fallbacks": False, "require_parameters": True}}),
-    "haiku": ("anthropic/claude-haiku-5.5", {"max_tokens": 8000,
+    "haiku": ("anthropic/claude-haiku-5.5", {"max_tokens": 8000, "reasoning": {"enabled": False},  # with reasoning on it spent 6,915 of 8,000 tokens thinking
               "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}),
 }
 
