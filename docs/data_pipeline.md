@@ -28,7 +28,7 @@ Decided by wassname, 2026-10-27: file based and minimal ("I like this, it's file
 
 - One numbered folder per stage, with the version in the path: `data/01_raw/<source>/`, `data/02_seeds/v1/`, `data/03_generate/v1/`, `data/04_judge/v1/`, `data/05_train/<dataset>_v1.jsonl`. Old top-level folders (`frontier/`, `sft/`, `corpus/`, ...) move to `data/legacy/` when v2 replaces runs 10 and 11.
 - The version in the path is the record. It names a config in git (`configs/data/v2.yaml`: prompts, models, input versions), which is the one source of truth; no separate metadata file. A stage is skipped when its output exists.
-- Change a prompt, model or input version, then bump the version (new config, new folders). Request hashing stays only for paid API calls, so no paid call is repeated. Judge verdicts live in the judge folder of the generation version they read; a new generation version needs new verdicts.
+- Change a prompt, model or input version, then bump the version (new config, new folders). A stage that did not change is a symlink to the earlier version's folder (`data/02_seeds/v3 -> v2`), so it is not recomputed or copied. Request hashing stays only for paid API calls, so no paid call is repeated. Judge verdicts live in the judge folder of the generation version they read; a new generation version needs new verdicts.
 - Every row carries `seed_id`, `source:source_id`, the recipe version and `shape`, so a trained row traces back to its seed without joining other files (the seed-reuse audit needed six files to do this).
 - One sha256 per final training file, as an overwrite alarm.
 
