@@ -234,7 +234,7 @@ Longer treatments, with quotes from the papers:
 
 - How Praxis, Cho and Tice relate, and which parts of their recipes we copied: [recipe lineage](slop/research/20261019_full_weight_recipe_lineage.md).
 - Why we use LoRA when Praxis grafted full checkpoints: [LoRA vs full weights](slop/research/20261019_full_weight_vs_lora_rationale.md).
-- What our early graft work missed, found by reading the paper's code: [engineering audit](slop/research/20261012_grafting_engineering_audit.md).
+- What our early graft work missed, found by reading the paper's code: [engineering audit](slop/research/paper_guides/tricks/_from_old_guides.md#20261012_grafting_engineering_audit).
 
 ## Appendix B: Constitutional character training
 

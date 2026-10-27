@@ -154,6 +154,8 @@ For every audited basename (and the protected expert guide), ran this exact sear
 timeout 120s rg -l --hidden -g '!.git' -g '!data/**' -g '!.local/**' -g '!docs/vendor/**' -g '!slop/eval/**' '<basename>' .
 ```
 
+<a id="20261007_reference_hparams"></a>
+
 ## 1. `20261007_reference_hparams.md`
 
 **Verdict:** keep: source for slop/specs/20261008_training_configs.md and historical planning; most external training/distillation/RL references are outside the new bundle.
@@ -478,6 +480,8 @@ Source: `slop/research/20261009_reference_comparison.md:46` (original citations 
 ````markdown
 - OCT introspection: the trained student writes self-reflections ("Write a long Wikipedia-style biography about yourself…", "What would you say are your primary drives?") that become SFT data. A route to Anthropic's persona-attachment gap (L188).
 ````
+
+<a id="20261009_lasr_repo_review"></a>
 
 ## 4. `20261009_lasr_repo_review.md`
 
@@ -827,6 +831,8 @@ Source: `slop/research/20261009_lasr_repo_review.md:242–243` (original citatio
 | **Delib / delib-Sonnet** | Explicit constitution-conditioned deliberation | Latest Sonnet MR 10.8 (near DA), MASK 70.5 (below DA 85.6); Qwen MR 30.4 / MASK 65.4. No reason to prefer explicit recitation (`LOG:122–162`). |
 ````
 
+<a id="20261012_grafting_engineering_audit"></a>
+
 ## 5. `20261012_grafting_engineering_audit.md`
 
 **Verdict:** keep: README, journal and run4 audit cite this historical engineering/source audit; Karan/FWS, cwsteer and organizational analysis lie outside the new guides.
@@ -1123,6 +1129,8 @@ Read fully: brief, AGENTS, skills; P §§2–5, Appendix A.1, B.1/B.6/C/D and F 
 Disproof checks: matched-token comparisons on fresh task-completion, clarification-needed, contested-reasoning and proportionality cases, alongside capability/looping checks. No training or tests executed.
 ````
 
+<a id="20261007_data_amounts"></a>
+
 ## 7. `20261007_data_amounts.md`
 
 **Verdict:** keep: slop/specs/20261008_training_configs.md cites it as the origin of historical stage budgets and a human decision.
@@ -1184,6 +1192,8 @@ Chosen starting points (lower end, but where an effect was documented at a simil
 - RL: ~500 prompts (RLCF used 150; more prompts reduce overfitting to a small set)
 Quality first: every set is spot-checked before use (wassname: "try to get high quality data that you have checked").
 ````
+
+<a id="20261007_scaling_lit"></a>
 
 ## 8. `20261007_scaling_lit.md`
 
@@ -1384,6 +1394,8 @@ Source: `slop/research/20261007_scaling_lit.md:107–140` (original citations an
 
 -- researcher subagent (gpt-6.1-sol) for PI/Claude
 ````
+
+<a id="20261016_moe_lora_best_practice"></a>
 
 ## 9. `20261016_moe_lora_best_practice.md`
 
