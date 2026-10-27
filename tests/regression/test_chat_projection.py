@@ -30,6 +30,20 @@ def test_two_sided_projection_and_idempotence():
     torch.testing.assert_close((delta - expected).square().sum() + expected.square().sum(), delta.square().sum())
 
 
+def test_one_sided_projection_matches_matrix_operation():
+    torch.manual_seed(16)
+    U, _, Vh = torch.linalg.svd(torch.randn(11, 9, dtype=torch.float64), full_matrices=False)
+    U, V = U[:, :2], Vh[:2].mT
+    A, B = torch.randn(3, 9, dtype=torch.float64), torch.randn(11, 3, dtype=torch.float64)
+    delta = B @ A
+    pa, pb = projection.project_factors(A, B, U, V, 'output')
+    torch.testing.assert_close(pb @ pa, (torch.eye(11, dtype=torch.float64) - U @ U.mT) @ delta)
+    torch.testing.assert_close(pa, A)
+    pa, pb = projection.project_factors(A, B, U, V, 'input')
+    torch.testing.assert_close(pb @ pa, delta @ (torch.eye(9, dtype=torch.float64) - V @ V.mT))
+    torch.testing.assert_close(pb, B)
+
+
 def test_expert_packing_keeps_experts_separate():
     torch.manual_seed(15)
     experts, rank, inputs, outputs = 3, 2, 5, 7
