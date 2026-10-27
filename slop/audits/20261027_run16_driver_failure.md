@@ -26,3 +26,7 @@ Verdict: first lease is a runtime failure, not evidence against EOS repair or gr
 -- PI/OpenAI (Sol)
 
 Recovery follow-up: bounded60-minute pre-production hold, first-update evidence parser, six-stream earliest-needed uploads and post-update teardown verified by16 combined CPU driver/recovery tests (`retry_driver_recovery_tests.log`). Replacement reservation is$64.29 including a conservative$4.25 prior-spend allowance; first-lease artifacts were moved with git to `lease_attempt1/`, never discarded.
+
+## Attempt2 repair0: native warmup validation
+
+The preserved `lease/repairs/0/train_random_smoke.log` ends with `warmup_steps and warmup_ratio are mutually exclusive`; generated config confirmed both2 and.1. The CPU stub had not enforced this native constraint. Removed only inherited ratio from the tiny smoke, strengthened the stub and every-generated-YAML assertion, and added a mutant test reproducing the rejection.17 CPU checks and all8 replay branches passed. const_v2 approved exact instance57919543/index0. Controller SHA-verified the one-file hotfix and restarted within its ORIGINAL hold window; no production configuration change, new rental or deadline extension. Restart proof is not proof the native smoke has passed. Artifacts and SHA chain are in `lease/repairs/0/`.

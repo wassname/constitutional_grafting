@@ -1,0 +1,9 @@
+{
+  "instance_id": 57919543,
+  "failure_index": 0,
+  "reason": "const_v2 approved smoke-only repair: delete inherited warmup_ratio when warmup_steps=2. Native validation failure reproduced by new mutant regression;17 CPU checks and all8 driver branches passed. Production config unchanged.",
+  "source_sha256": {
+    "scripts/eval/62_run16_box.py": "edb54216b6acc41e3a703f1af4227731edc508fee15453ecf997ac0fd5c6779c"
+  },
+  "commit": "07c07cf6d927e01b47b8645e34cb5079b9fb52ea"
+}

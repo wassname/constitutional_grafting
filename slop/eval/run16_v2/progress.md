@@ -27,6 +27,13 @@ Executor PI/OpenAI (Sol); supervisor/intercom bridge const_v2. Branch `run16-v2-
 - [ ] Optional(c) actual driver implementation only if budget/time fits; no plain-Base training without approval.
 - [ ] Full reads, matched-effect and paired/both-finished analysis, plots/results, different-family independent review, audit/journal, final teardown/API absence and cost receipt.
 
+## Smoke repair0: approved and restarted on same box
+
+- Native Axolotl rejected simultaneous warmup_steps2 and inherited warmup_ratio.1 before production; recovery hold worked and preserved uploads/instance57919543.
+- const_v2 approved index0 smoke-only repair. Commit07c07cf6 deletes warmup_ratio only from generated tiny-smoke YAML; production config unchanged.17 CPU checks and all8 replay cases pass, including rejection of the original conflicting configuration.
+- Controller consumed SHA-pinned approval, uploaded exact driver SHAedb54216…, archived failed logs and restarted. Remote verified tmux running, no exit marker, smoke steps2 with ratio absent. Actual GPU smoke success remains pending.
+- Failure artifacts and restart verification: `lease/repairs/0/`; original hold expiry07:26:33UTC and hard destruction deadline unchanged. Parent must watch for new failure index1 and native `tiny_smoke.json`, then first20. Jobs4218–4223 unchanged. No additional rental or plain-Base cell.
+
 ## Protocols remain separate and frozen
 
 - Main character judging:196 items SHA5ea2684b, a66d2ae pinned protocol, JEV pair+turn, T=.7 seeds0/1, thinking off. Current overwritten232-item tiny-char path is NOT recopied.

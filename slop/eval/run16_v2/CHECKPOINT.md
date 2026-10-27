@@ -21,6 +21,16 @@ First lease57903770 failed before any training: `tiny_smoke` passed `env=env` to
 - Recovery tests distinguish random smoke/tokenization from production optimizer progress, hold+approved restart, exact60min expiry, runner-deadline clamp, no post-update repair, and six streams scheduled before doc waits with monitoring before late control upload completes.
 - Replay is an orchestration test, NOT native-image/GPU validation. Actual3-step Axolotl smoke still runs before production. Full historical-plugin/projector and draft-sandbox checks from attempt1 remain recorded.
 
+## Approved smoke repair0 — restarted, not a new lease
+
+- At06:26UTC the real Axolotl validator rejected the tiny smoke: inherited `warmup_ratio=.1` coexisted with explicit `warmup_steps=2`. No production update occurred; controller preserved the box and uploads in its60-minute repair hold.
+- const_v2 explicitly approved the smoke-only correction for **57919543/index0**. Commit **07c07cf6** removes the ratio key entirely only from tiny-smoke YAML. Production warmup/config/data are unchanged.
+- Strengthened stub Axolotl and full replay to reject ANY generated YAML containing both warmup keys. New mutant regression removes the fix and reproduces the native rejection. **17 tests pass; all8 CLI driver scenarios pass** (`repair0_warmup_tests.log`, `repair0_driver_dry_run.log`).
+- SHA-pinned approval was consumed and the controller uploaded/verified **edb54216b6acc41e3a703f1af4227731edc508fee15453ecf997ac0fd5c6779c**, archived failed remote logs and restarted the driver. `lease/repairs/0/restart_verified.json`: tmux running, no job.exit, actual generated smoke YAML has steps2 and NO ratio. This confirms restart, NOT smoke success yet.
+- Original failure config/logs, holding event, submitted approval and verification are preserved under `lease/repairs/0/`. Consumed approval: `lease/driver_repair_0.approved.json`. Original preflight source hashes are superseded only by this explicit one-file repair receipt.
+- **Original repair expiry remains epoch1793085993.412522 (2026-10-27 07:26:33 UTC), NOT extended.** Hard lease deadline is also unchanged. `lease/driver_failure.json` status `restarting`/index0 describes this repaired failure. Watch immediately for a NEW holding status/index1 if another pre-production failure occurs; it shares the original expiry and requires new supervisor approval.
+- Watch `lease/box_runs/tiny_smoke.json` for actual native-smoke completion, then first20/EOS events. Existing jobs4218–4223 remain active/queued; no replacement or new jobs were created for this repair.
+
 ## Active durable jobs
 
 | Job | Group | Wait / role |
