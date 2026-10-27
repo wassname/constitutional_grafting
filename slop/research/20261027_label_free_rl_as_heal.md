@@ -1,0 +1,63 @@
+# Research: Label-free RL as a graft heal
+
+## Summary
+**Plausible, not reliable:** intrinsic RL elicits reasoning, but no located study demonstrates teacher-free repair preserving a Base→Instruct graft on Qwen3.5-35B-A3B. The strongest new direct repair comparison is **negative**: ShortOPD tests PPO/GRPO after Qwen3 pruning; GRPO scarcely recovers capability. Pure entropy minimisation is risky for an already repetitive policy.
+
+Read all three requested local references first; prior repair precedents are not re-listed. **P** = author-reported; **C** = static code/config inspection, not execution; **I** = inference/proposal; **NR** = not established here. All gains are P. **B** = prompts/rollout batch; **G** = responses/prompt, unless specified otherwise.
+
+## Findings
+
+### 1. Intrinsic objectives and budgets
+
+Let `H_t=−Σ_v p_t(v)log p_t(v)`, `a_i` be the extracted answer, and `U` uniform over vocabulary. **Parameter mode NR is not LoRA evidence.** These are elicitation experiments, not graft-repair demonstrations.
+
+| Method: exact signal / algorithm | Models; steps×batch, LR, parameter mode | Gain / failure; primary paper and code |
+|---|---|---|
+| **EM-RL:** RLOO; sequence `r=Σ_t log p_t(y_t)` or token `r=−Σ_t H_t` (**sums**, not means). EM-FT directly differentiates entropy. | Qwen2.5-Math-7B; Eurus-2-7B-SFT for code. RL **100×B512×G4**, LR **1e−6**, KL .001; FT40 steps. Mode NR. | Token-RL MATH500 **43.8→70.8**; code mean22.3→27.0. Useful-prior assumption; no damage test. [§3/App.D](https://arxiv.org/html/2505.15134#S3.SS2), [code](https://github.com/shivamag125/EM_PT). |
+| **One-shot EM:** direct loss `mean_t H_t`; **not RL/GRPO**. | Qwen2.5 variants; Llama3.1-8B. **10×64 responses**, LR **2e−5**, temperature .5; **full weights C** (`train.py`). | Math-7B MATH50053.0→78.8; Qwen2.5-7B-Instruct six-task mean50.3→49.8; overtraining collapses. **§2.2 selects prompts using correctness variance**: label-free loss ≠ label-free selection. [§2–3](https://arxiv.org/html/2505.20282#S2), [code](https://github.com/zitian-gao/one-shot-em). |
+| **RENT:** GRPO, `r=−mean_t H_t`; later-token subsets also studied. | Qwen2.5(-Math)1.5/7B **Instruct**, Llama3.1-8B, Mistral7B. Steps NR; **B64/G5 GSM8K**, B500 MATH500; LR **1e−6**, KL .001. Released FSDP configuration is full-weight C. | Qwen2.5-7B-Instruct MATH500 **76.2→82.3**; Mistral GSM8K38.1→49.2. Mostly transductive, except GSM8K; authors warn of catastrophic overconfidence. [§3–5/Table5](https://arxiv.org/html/2505.22660#S3), [code](https://github.com/satrams/rent-rl). |
+| **INTUITOR/RLIF:** GRPO, `r=mean_t KL(U‖p_t)`; online certainty, **not Shannon entropy**. | Qwen2.5 1.5/3/7/14B, **Qwen3-14B**, Llama3.2-3B-Instruct, OLMo2-7B-SFT. Math one7500-prompt epoch, **B128/G7 ≈59 updates I**; LR **3e−5 P versus3e−6 C** in released full-weight demo. Larger models LR1e−6/G16; code50 steps, LR1e−5/G14. | Qwen2.5-3B MATH500 **54.4→61.2**. Original larger-model recipe collapses; simpler prompt/lower LR stabilise it. Frozen certainty scorer is hacked around100 updates by appending solved problems. [§4–5/App.B](https://arxiv.org/html/2505.19590#A2.SS2), [code](https://github.com/sunblaze-ucb/Intuitor). |
+| **TTRL:** GRPO, `r_i=1[a_i=plurality(a_1…a_64)]`; not necessarily >50% majority. | Qwen2.5, **Qwen3-8B**, Llama, Mistral, DeepSeek. Vote64/train32 responses/prompt; LR **5e−7**. **10/30/80 episodes** MATH500/AMC/AIME; exact optimizer-steps×B and mode NR. | Qwen3 nonthinking MATH500 **82.3→89.3**; Math-7B GPQA29.1→27.7. Temperature/batch failures, wrong consensus; transductive adaptation ≠ held-out repair. [§3.1/4.3](https://arxiv.org/html/2504.16084#S3.SS1), [code](https://github.com/PRIME-RL/TTRL). |
+| **EMPO:** clipped GRPO-like update, `r_i=count(cluster(a_i))/G`; retain prompts with `δ_low<H_semantic<δ_high`; **no KL**. | Qwen2.5-Math1.5/7B, Base3/7/14B; Llama3.2-Instruct1/3B. **3 epochs**, G7 math/G12 natural reasoning, LR **3e−7**, per-GPU batch1–2; global steps/B and mode NR. | Math-7B five-task mean **30.7→48.1**; Llama3.2-3B-Instruct20.8→26.3. Llama **Base** fails to converge. Natural-language clustering needs another1.5B verifier; math uses rules. [§3–4/App.D–E](https://arxiv.org/html/2504.05812#S3), [code](https://github.com/QingyangZhang/EMPO). |
+| **Co-rewarding:** GRPO binary agreement with **I:** other paraphrase's plurality; **II:** EMA teacher's plurality; **III:** EMA on other paraphrase. EMA starts from training policy, **not intact teacher**. | Qwen2.5, **Qwen3-1.7/4/8B Base**, Llama3.2-3B-Instruct. MATH **170–220×B128×G8**; OpenRS100–130, DAPO300–330; LR **3e−6**, mode NR. II adds8 teacher rollouts; I adds paraphrase view. | Qwen3-8B MATH50072.4→81.2 (I); GSM8K27.82→93.70. More stable than single-view baselines; no damage test. I/III use Qwen3-32B paraphrasing; II avoids it. [§3.2/Table1/App.C.2](https://arxiv.org/html/2508.00410#S3.SS2), [code](https://github.com/tmlr-group/Co-rewarding). |
+| **Spurious / repetition GRPO:** random `Bernoulli(.5)`; alternatively `1[no string repeats >10 times]`. | Qwen2.5(-Math), Llama3, OLMo2; **300×B64×G16**, optimizer minibatch128, LR **5e−7**, no KL/entropy bonus; mode NR. | Random reward Math-7B MATH500 **+21.4pp**, clipping-dependent. Anti-repetition improves Math1.5/7B MATH/AMC, little/negative elsewhere: **Qwen-Math-specific successes**. [App.A/G](https://arxiv.org/html/2506.10947v2#A7), [code](https://github.com/ruixin31/Spurious_Rewards). |
+
+**Not generally “only Qwen”:** RENT, INTUITOR, TTRL and Co-rewarding report non-Qwen successes; EMPO needs an instruct cold start on Llama. Qwen3 results do **not** establish Qwen3.5 MoE repair.
+
+**Negative evidence P:** “Entropy minimization (EM) exacerbates repetition, and after a few updates, the model converges to producing the same character regardless of the prompt.” Context: “By contrast, Intuitor enhances performance without triggering collapse”. [INTUITOR App.B.4](https://arxiv.org/html/2505.19590#A2.SS4). **Caveat:** its printed reward equation has a sign inconsistent with the negative-entropy prose; this comparison was not code-verified. Independently, [*No Free Lunch*, §4–5](https://arxiv.org/html/2506.17219#S4.SS2) reports early gains, later below-initial performance, and little instruct-model benefit. Its Base–Instruct interpolation→RLIF is post-merge training, **not demonstrated repair of merge-induced damage**.
+
+### 2. New post-edit RL repair comparison: a counterexample
+
+**ShortOPD v2 P, §4.5/Table5/App.A:** delete9/36 layers from Qwen3-4B-Instruct/8B, then damaged-policy **PPO/GRPO**, binary math correctness/code-execution reward, **462 rollout steps×B64×G8**, response ceiling2048. GRPO GSM8K: **4B1.14→0.91%; 8B0.83→0.99%**; code stays0. PPO gets8B GSM8K14.78%, code stays0. Actor LR specific to these controls / LoRA mode are not unambiguous; critic LR1e−5.
+
+Context: “Thus model scale alone does not repair the sparse-signal bottleneck.” Then: “When the compressed model rarely samples a correct answer, a sparse reward has few successful trajectories to promote, whereas the dense teacher supplies a token-level correction on every rollout regardless of final-answer correctness.” [PDF pp.10–12](https://arxiv.org/pdf/2607.13124#page=10). **Successful ShortOPD uses the frozen pre-compression teacher: excluded.** [Building-block code, not verified RL-control reproduction](https://github.com/VisionOPD/Vision-OPD).
+
+Beyond already-read Shrestha/Jin/RLRC, **no additional verified text-LLM RFT/STaR/ReST-EM repair** was located, nor qualifying positive evidence after task-vector addition, abliteration, stacking or steering-to-weights. [*Self-Healing*](https://openreview.net/pdf?id=Cy8Qa4gAst) is a pruning-RLVR **lead only**: PDF access is challenged; search-suggested arXiv/proceedings links identify different papers. [QCRL §IV](https://arxiv.org/html/2610.15675#S4) repairs quantized robotics policies but uses intact full-precision rollout experience: **not eligible here**.
+
+### 3. Correctness alone does not guarantee length or completion
+
+**Length can move either way.** [INTUITOR Figure3](https://arxiv.org/html/2505.19590#S4.F3): “For Qwen2.5-1.5B, Intuitor and GRPO reduce gibberish outputs.” Next: “For Qwen2.5-3B, Intuitor and GRPO increase reasoning length; Intuitor yields significantly longer responses.” Longer can also mean reward hacking; ShortOPD prevents a reliable-repair claim.
+
+**DAPO adds engineering to correctness.** “By default, we assign a punitive reward to truncated samples.” Context: “This approach may introduce noise into the training process, as a sound reasoning process can be penalized solely due to its excessive length.” [§3.4](https://arxiv.org/html/2503.14476#S3.SS4). They mask truncated-sample loss, then add `r_length=−clip((L−16384)/4096,0,1)`. Clip-Higher uses ratio bounds **[.8,1.28]**, encouraging exploration; token-level loss addresses long gibberish. Qwen2.5-32B AIME30→50; **B512/G16**, LR1e−6, **16 optimizer updates/rollout step**; total steps NR here, not LoRA evidence. [§4.1](https://arxiv.org/html/2503.14476#S4.SS1), [code](https://github.com/BytedTsinghua-SIA/DAPO). **Not label-free; entropy increases are not inherently anti-loop.**
+
+Shao: “To study this, we design a new repetition reward that returns a score of 0 when the answer contains any string repeated more than 10 times. Otherwise, it rewards the model with a full score of 1.” Result/context: “We observe minimal or even negative improvement on other models.” [App.G](https://arxiv.org/html/2506.10947v2#A7). **I:** separately require completion/EOS and correctness; early EOS or correct answers followed by looping must not win.
+
+### 4. Small / aggressive LoRA-RL
+
+| Evidence | Budget, outcome and limit |
+|---|---|
+| **Tina P** ([App.C/Tables16–20](https://arxiv.org/html/2504.15777#A3.SS1), [code](https://github.com/shangshang-wang/Tina)) | Distill-Qwen1.5B, GRPO **r8, LR1e−6, 50 optimizer steps×32 completion sequences** (=8 prompts×G4); accuracy+format2:1; six-task mean **41.18→47.89**. r16:48.92 at100steps. LR **5e−6** r32:47.87 at50steps. Max3584tokens,2L40S, roughly<1min/step. ~$9 headline is **not** our35B-MoE budget. |
+| **LoRA Without Regret P** ([RL/hyperparameters](https://thinkingmachines.ai/blog/lora/#reinforcement-learning), [code](https://github.com/thinking-machines-lab/tinker-cookbook)) | “Our experiments showed that the optimal LR for LoRA is consistently 10x the one used for FullFT in the same application, for both supervised learning and reinforcement learning.” Context: **α32/α-over-r parametrization**; rank1 matches FullFT on Llama3.1-8B; Qwen3 reasoning also tested. Centered importance-weighted policy gradient, **not standard clipped GRPO**. No ten-step repair established. |
+| **One-example RLVR + entropy bonus P** ([§3.1/App.B.4](https://arxiv.org/html/2504.20571#S3.SS1), [code](https://github.com/ypwang61/One-Shot-RLVR)) | Binary correctness; GRPO maximization adds **+.001H**, KL .001. **1000–2000×B128×G8**, LR1e−6, eight optimizer updates/rollout step; LoRA NR. Math1.5B MATH50036→73.6; Llama tested. **One example ≠ few steps**; ten-step EM above is not LoRA-RL. |
+
+**Wall-clock:** [DORA §1](https://arxiv.org/html/2604.26256#S1) summarizes rollouts as **50–80% of step duration** in large-scale RL, not our hardware measurement. **I:** LoRA saves optimizer/update work, not decoding; G, looped tails, sampler synchronization and voting/EMA sampling can dominate a “short” heal.
+
+## Sources / gaps
+**Kept:** linked primary papers and official code; ShortOPD's full PDF and sparse-RL controls. **Dropped:** SEO summaries, mismatched Self-Healing links, intact-teacher recovery counted as eligible, efficiency-only quantized RL counted as repair. No training/evaluation/external-model inference ran. Several recipes retain NR parameter mode/accounting; none establishes graft retention, tool/long-chat repair or our MoE. **Next step I:** measure completed, verified own-sample coverage first; score capability, EOS/truncation/loops and graft retention independently.
+
+## Ranked heal candidates (proposals, not validated recipes)
+1. **Fresh verified self-RFT, refreshed once:** cheapest teacher-free baseline on own correct, completed, non-looping samples; filtering can still select character away.
+2. **Small-rank GRPO: correctness + completion/anti-repetition:** names the failure, unlike confidence; needs mixed-success groups and successful trajectories.
+3. **Online INTUITOR, reference initialized from the graft only:** Qwen3/non-Qwen evidence and gibberish reduction; prompt/LR-sensitive, no damaged-graft demonstration. Pure EM/random rewards rank below these.
+
+-- researcher (OpenAI GPT; runtime model identifier not exposed)
