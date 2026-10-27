@@ -3455,3 +3455,27 @@ Read limits matter: the fixed email/fridge diagnostics across13 chat/reference m
 Instance57919543 is API-confirmed absent;8 final adapters and557 GPU result files SHA-verified. Optional orthogonal training explicitly skipped. GPU estimate$25.65, cached JEV$4.82535 and bounded ABX$0.28988; conservative total with prior-failure/other reserves$42.02<$65, excluding sunk adapter development. Preview, full T0 appendix, scoped reads, estimates and receipts: `slop/eval/run16_v2/results.md`; audit: `slop/audits/20261027_run16_closeout.md`.51 CPU regression checks pass. Independent review/editorial sign-off and broader original-plan reading/panel work remain pending; no best-model or release claim.
 
 -- PI/OpenAI (Sol)
+
+## 2026-10-28 -- Run 16 for wassname: fix works, projection and anchoring not needed; the judge misses action defects
+
+Results page: `slop/eval/run16_v2/results.md`, independent Fable review "OK with notes", notes applied (`slop/reviews/20261028_run16_results_fable_review.md`). Same v2 protocol and one sample per model throughout.
+
+| Graft | Character [90%] | Maths /60 (finished) | Run-8 small tasks /22 | Code /40 |
+|:--|--:|--:|--:|--:|
+| Instruct | 0 | 55 (57) | 22 | 18 |
+| new D ×½ | +0.62 [+0.56, +0.68] | 55 (58) | 21 | 17 |
+| new D ×1 | +0.83 [+0.76, +0.90] | 56 (60) | 20 | 18 |
+| old D ×½ | +0.62 [+0.56, +0.68] | 55 (58) | 18 | 17 |
+| anchored docs + chat ×1 | +0.85 [+0.78, +0.92] | 54 (60) | 20 | 19 |
+
+Evidence: the EOS retrain removes the cutoffs; at matched character it equals old D on maths and passes 3 more small checks (paired +3 [0, +7]). No projection beats plain new D at matched character, and the run-14 projection maths gain did not repeat on a second sample of old D. Anchoring cleans the isolated Const adapter (language flags 66 → 0 at about matched ABX change), but the full anchored mixture is not measurably different from Instruct on clean items (53% vs 53% ABX), and its chat graft scores 2 fewer maths answers at matched character.
+
+Evidence, action defects: on two fixed items × 2 samples, new D ×1 and anchored ×1 each put the manager's withheld reason into the team email once, and most chat grafts (and Instruct) write sheet cells before reading them. The pinned JEV judge scored those replies near +2.
+
+Interpretation (PI/Claude): plain new D ×1 is the recipe to keep. Spend next on the tool-use and private-information defects and on a judge that scores emitted actions, not on more projection.
+
+Process: three GPU-side failures came from new per-run driver code that the stub dry run could not exercise (a callback kwarg, an axolotl config conflict, a wrong scorer argv). The 60-minute hold on failure and resume-by-sha saved the second lease. Fix for next time: a real end-to-end smoke on a small cheap GPU with a tiny real model before the big rental, and one maintained box driver instead of a copy per run.
+
+Cost: GPU ≈ $25.65 and judges ≈ $4.83 on the second lease, ≈ $4 on the failed first lease; conservative total with reserves $41.73 of the $65 cap.
+
+-- PI/Claude (opus)
