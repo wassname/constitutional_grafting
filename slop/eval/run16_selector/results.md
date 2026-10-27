@@ -19,6 +19,8 @@ After the end-of-turn fix there is no observed maths loss to protect at this dos
 - **P₆₄ output side:** similar to new D ×1 on the aggregate scores (character −0.02 [−0.06, +0.02], maths 0 [−2, +2]). It removes about 7.5% of the adapter's output energy on real inputs.
 - **P₆₄ two-sided:** behaves like a weaker plain dose. It removes 15% of the adapter's squared weight norm but about half of its output energy on both input sets, nearly equally. Its character (+0.70) sits between new D ×½ and ×1, about plain ×0.69 by linear interpolation, and above ×½ (paired +0.08 [+0.03, +0.13]). It does not separate character from capability. A plausible reason run 14's P₆₄ looked like D ×½.
 
+- **P₁₂₈ two-sided:** 56/60 at character +0.64, one answer above the plain line's estimate there (55.1). One answer is within noise.
+
 - **Run 14's projection gain does not replicate.** const_v2's second sample of the old (pre-fix) adapters: old D ×½ 55/60 (58 finished), old D + P₆₄ ×1 54/60 (59 finished). Run 14 had 53 vs 57. The +4 in run 14 was within sample noise, not a projection effect.
 
 What this means for the goal: projection is not needed in the recipe while the plain graft shows no maths cost at this dose and budget. The README's plain recipe stands. The selector remains a tool for a dose or recipe that does cost capability.
