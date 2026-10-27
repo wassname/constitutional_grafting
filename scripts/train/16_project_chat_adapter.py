@@ -66,6 +66,8 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('--ranks', type=int, nargs='+', default=[16, 64])
     parser.add_argument('--device', default='cuda')
+    parser.add_argument('--save-basis', type=Path, help='Save per-stem batched U/V in fp32 safetensors for OrthoPlugin')
+    parser.add_argument('--basis-rank', type=int, default=64, help='Rank of the saved basis (64 for production)')
     parser.add_argument('--batch-experts', type=int, default=8)
     parser.add_argument('--sides', choices=['both', 'output', 'input'], default='both')
     parser.add_argument('--module-limit', type=int, help='Production path smoke only; output is deliberately marked incomplete')
@@ -80,10 +82,16 @@ def main():
     i_index = json.loads((args.instruct / 'model.safetensors.index.json').read_text())['weight_map']
     model_config = json.loads((args.base / 'config.json').read_text())['text_config']
     n_experts = model_config['num_experts']
-    assert n_experts == 256
+    assert n_experts > 0
     weights = load_file(str(args.adapter / 'adapter_model.safetensors'))
     stems = sorted(key.removesuffix('.lora_A.weight') for key in weights if key.endswith('.lora_A.weight'))
-    assert len(stems) == 330 and len(weights) == 2 * len(stems)
+    assert stems and len(weights) == 2 * len(stems)
+    svd_rank = max(args.ranks + ([args.basis_rank] if args.save_basis else []))
+    assert min(args.ranks) > 0 and (not args.save_basis or args.basis_rank > 0)
+    if args.save_basis:
+        assert args.module_limit is None, 'Cannot save an incomplete training basis'
+        assert not args.save_basis.exists(), args.save_basis
+    bases, basis_error = {}, {'max_abs': 0., 'max_relative_fro': 0.}
     outputs = {rank: {} for rank in args.ranks}
     rows = []
     started = time.time()
@@ -100,17 +108,27 @@ def main():
         if experts == 1:
             delta_post = delta_post.unsqueeze(0)
         assert delta_post.shape == (experts, B.shape[1], A.shape[2]), (name, delta_post.shape, A.shape, B.shape)
-        assert min(delta_post.shape[-2:]) >= max(args.ranks)
+        assert min(delta_post.shape[-2:]) >= svd_rank
         original_sq = 4 * frobenius_squared(A, B)
         projected = {rank: (torch.empty_like(A), torch.empty_like(B)) for rank in args.ranks}
         spectra = []
+        if args.save_basis:
+            bases[stem + '.U'] = torch.empty(experts, B.shape[1], args.basis_rank, dtype=torch.float32)
+            bases[stem + '.V'] = torch.empty(experts, A.shape[2], args.basis_rank, dtype=torch.float32)
         for begin in range(0, experts, args.batch_experts):
             end = min(experts, begin + args.batch_experts)
             post = delta_post[begin:end].to(args.device)
             options = {'driver': 'gesvd'} if post.is_cuda else {}
             U, S, Vh = torch.linalg.svd(post, full_matrices=False, **options)
-            assert torch.isfinite(S).all() and (S[:, max(args.ranks) - 1] > 0).all(), name
-            spectra.append(S[:, [0, 15, 63]].cpu())
+            assert torch.isfinite(S).all() and (S[:, svd_rank - 1] > 0).all(), name
+            spectra.append(S[:, [0, min(15, S.shape[-1] - 1), min(63, S.shape[-1] - 1)]].cpu())
+            if args.save_basis:
+                for side, exact in [('U', U[..., :args.basis_rank]), ('V', Vh[..., :args.basis_rank, :].mT)]:
+                    saved = exact.float()  # fp32: fp16 moved the protected span by ~5e-5 (Astra review 20261027)
+                    error = exact - saved.float()
+                    basis_error['max_abs'] = max(basis_error['max_abs'], error.abs().max().item())
+                    basis_error['max_relative_fro'] = max(basis_error['max_relative_fro'], (error.norm() / exact.norm()).item())
+                    bases[stem + '.' + side][begin:end] = saved.cpu()
             for rank in args.ranks:
                 pa, pb = project_factors(A[begin:end], B[begin:end], U[..., :rank], Vh[..., :rank, :].mT, args.sides)
                 projected[rank][0][begin:end] = pa
@@ -150,7 +168,15 @@ def main():
         destination.mkdir()
         shutil.copyfile(args.adapter / 'adapter_config.json', destination / 'adapter_config.json')
         save_file(outputs[rank], str(destination / 'adapter_model.safetensors'))
-    report = {'author': 'PI/OpenAI (Sol)', 'complete': args.module_limit is None, 'sides': args.sides,
+    if args.save_basis:
+        args.save_basis.parent.mkdir(parents=True, exist_ok=True)
+        save_file(bases, str(args.save_basis), metadata={
+            'format': 'ortho-v1', 'rank': str(args.basis_rank),
+            'base_revision': args.base.name, 'instruct_revision': args.instruct.name,
+            'storage_error': json.dumps(basis_error)})
+    report = {'basis_path': str(args.save_basis) if args.save_basis else None,
+              'basis_storage_error': basis_error if args.save_basis else None,
+              'author': 'PI/OpenAI (Sol)', 'complete': args.module_limit is None, 'sides': args.sides,
               'base_revision': args.base.name, 'instruct_revision': args.instruct.name,
               'source_adapter_sha256': sha(args.adapter / 'adapter_model.safetensors'),
               'source_config_sha256': sha(args.adapter / 'adapter_config.json'), 'source_code_sha256': sha(__file__),
