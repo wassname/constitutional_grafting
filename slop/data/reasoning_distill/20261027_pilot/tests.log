@@ -9,17 +9,17 @@ test_successful_merge_and_duplicate_reviewer_labels (test_reasoning_distill.Reas
 test_unquoted_evidence_and_incomplete_candidates_cannot_pass (test_reasoning_distill.ReasoningDistillTests.test_unquoted_evidence_and_incomplete_candidates_cannot_pass) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.252s
+Ran 9 tests in 0.143s
 
 OK
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpp5p9vekm/judge/packets/p.md 1 candidates
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpd2jwnva7/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmp7qfjht4l/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpqyhw7tsg/judge/packets/p.md 1 candidates
 Batch 0: cached 1 calls; $0 new API
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpcb9o76vw/judge/packets/p.md 1 candidates
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpd5ivudzw/judge/packets/p.md 1 candidates
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpvwe_vfhl/judge/packets/p.md 1 candidates
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpdp6r7w7y/judge/packets/p.md 1 candidates
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpd7bs8fvy/judge/packets/p.md 1 candidates
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpwg1xzzmd/judge/packets/p.md 1 candidates
-Merged 1 judgments: /workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpwg1xzzmd/judged.jsonl
-/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpdo4f0f4o/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmp_knp6xl9/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmp3h4bxsdp/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmp98j0fnuw/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmp5850fbqu/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpeu4g4_da/judge/packets/p.md 1 candidates
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpraghv8fg/judge/packets/p.md 1 candidates
+Merged 1 judgments: /workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpraghv8fg/judged.jsonl
+/workspace/2026/constitutional_grafting/.local/reasoning_distill_tests/tmpxz7y0xg2/judge/packets/p.md 1 candidates

@@ -19,7 +19,7 @@ Goal: test whether Kimi K3.1 Pro, with our constitution in context and no guide 
    - Batches 1–4 remain unrun. Do not scale while the required judge route is blocked. Another route or reviewer needs an explicit decision.
 
 Failure modes and checks:
-- Coherent reasoning can still rationalise: inspect weighing against contrary facts, not just output style; transfer/faithfulness remains untested.
+- Coherent reasoning can still rationalise: inspect the hidden trace's weighing against contrary facts, not just output style. A conclusion-first final reply is fine; even an early tentative hidden verdict may be genuinely checked. Wassname clarified this on 2026-10-27. Litreview's 31/60 concerns selected final prose, not hidden deliberation. The full 40-trace native-reasoning audit and independent judge agreement remain pending.
 - Filtering can discard hard advice while rewarding generic refusals: report cases and prompt shapes, allow useful help, and require exact evidence for defects.
 - A reference to instructions can be harmless planning: regex matches are flags to read, not rejection rules.
 - Stale or invented verdicts can enter a release: packet hashes, quote checks, complete coverage, and separate reader/Opus labels are enforced in code.

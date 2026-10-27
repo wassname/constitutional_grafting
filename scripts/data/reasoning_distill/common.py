@@ -101,6 +101,8 @@ def validate_judgment(row: dict, prompt: dict, candidate: dict, expected_hash: s
         quote = defect["quote"]
         if not quote or not any(quote in (candidate[field] or "") for field in ("reasoning", "content")):
             raise ValueError(f"defect quote not in candidate: {candidate['call_id']}: {quote!r}")
+        if defect["type"] == "rationalising" and quote not in (candidate["reasoning"] or ""):
+            raise ValueError(f"rationalising evidence must quote hidden reasoning: {candidate['call_id']}")
     if row["verdict"] == "keep" and (candidate["finish_reason"] != "stop" or
                                      not candidate["reasoning"] or not candidate["content"]):
         raise ValueError(f"incomplete candidate cannot pass: {candidate['call_id']}")

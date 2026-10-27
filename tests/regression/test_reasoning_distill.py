@@ -85,6 +85,9 @@ class ReasoningDistillTests(unittest.TestCase):
         self.write_judgment(self.judgment | {"defects": [{"type": "other", "quote": "not in the candidate"}]})
         with self.assertRaisesRegex(ValueError, "quote not in candidate"):
             self.packets.merge(self.run, 0)
+        self.write_judgment(self.judgment | {"defects": [{"type": "rationalising", "quote": "Hello!"}]})
+        with self.assertRaisesRegex(ValueError, "must quote hidden reasoning"):
+            self.packets.merge(self.run, 0)
         row = self.candidate | {"finish_reason": "length"}
         with self.assertRaisesRegex(ValueError, "incomplete candidate"):
             common.validate_judgment(self.judgment, self.prompt, row, self.judgment["input_sha256"])

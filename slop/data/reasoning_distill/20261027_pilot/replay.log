@@ -33,9 +33,21 @@ Document framing says ‘your constitution … follow it’; first-person text s
 
 All four candidates of each sampled prompt were read. The other 24 replies have machine checks only. See `reading_notes.md` for the judgments, direct evidence and primary-source legal checks.
 
+## Scaling cost (generation only)
+
+Observed Kimi mean: $0.04295 per generation. Estimates below assume the same average reasoning length and caching.
+
+| Kimi workload             | Estimated generation cost   |
+|:--------------------------|:----------------------------|
+| 1,000 generations         | $42.95                      |
+| 50 prompts × 4 samples    | $8.59                       |
+| 1,000 prompts × 4 samples | $171.81                     |
+
+Successful Opus review cost is unknown; blocked-attempt spending is not a judging unit price. These estimates exclude training and do not predict retained-data yield.
+
 
 /workspace/2026/constitutional_grafting/slop/data/reasoning_distill/20261027_pilot/report.md
-00fd1a69afbc50a1f14f0bc4e4eca41b36f3aa8898f4bdd8193e67ae3e708aab  slop/data/reasoning_distill/20261027_pilot/report.md
+aa3dec6f4db41c8d12248dbfc9904f51d8641c15a2475f4d91e461fc663c0335  slop/data/reasoning_distill/20261027_pilot/report.md
 uv run --no-sync python scripts/data/reasoning_distill/03_screen.py 20261027_pilot
 | framing   |   n |   not stop |   median think words |   median answer words |   doc_ref |   doc_ref_answer |   telegraphic |   planning |   format_talk |   refuse_in_first_quarter |   refuse_answer |
 |:----------|----:|-----------:|---------------------:|----------------------:|----------:|-----------------:|--------------:|-----------:|--------------:|--------------------------:|----------------:|
@@ -70,6 +82,18 @@ Document framing says ‘your constitution … follow it’; first-person text s
 
 All four candidates of each sampled prompt were read. The other 24 replies have machine checks only. See `reading_notes.md` for the judgments, direct evidence and primary-source legal checks.
 
+## Scaling cost (generation only)
+
+Observed Kimi mean: $0.04295 per generation. Estimates below assume the same average reasoning length and caching.
+
+| Kimi workload             | Estimated generation cost   |
+|:--------------------------|:----------------------------|
+| 1,000 generations         | $42.95                      |
+| 50 prompts × 4 samples    | $8.59                       |
+| 1,000 prompts × 4 samples | $171.81                     |
+
+Successful Opus review cost is unknown; blocked-attempt spending is not a judging unit price. These estimates exclude training and do not predict retained-data yield.
+
 
 /workspace/2026/constitutional_grafting/slop/data/reasoning_distill/20261027_pilot/report.md
-00fd1a69afbc50a1f14f0bc4e4eca41b36f3aa8898f4bdd8193e67ae3e708aab  slop/data/reasoning_distill/20261027_pilot/report.md
+aa3dec6f4db41c8d12248dbfc9904f51d8641c15a2475f4d91e461fc663c0335  slop/data/reasoning_distill/20261027_pilot/report.md
