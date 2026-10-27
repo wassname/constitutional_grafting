@@ -24,6 +24,12 @@ wassname (spelling corrected): "make sure we cache Kimi and Haiku judge"; "check
   - [ ] think block with real reasoning earns loss; `<|im_end|>` labelled; `check_loss_mask.py` passes; one sha256
   - deliverable: `chat_v2.jsonl`, ready for a chat adapter on θ_B + Δ_docs; training is a separate approval
 
+- [ ] goal E: regenerate the constitution documents with Kimi (wassname: "yes regen Kimi, filter, classic to eng")
+  - [ ] fresh seeds from the goal A pools, not the chat seeds; written in Ancient Greek or Latin, translated to English; same screens, judge checks and full read as the chats
+  - [ ] training text is the finished document only (plain-text loss on Base); Kimi's hidden reasoning while writing is kept for review, not trained
+  - failure modes: translation drops facts; the clean-hands arc or verdict-first habit survives the language change; documents lose the reason-to-act link the papers say matters
+  - deliverable: `data/07_train/docs_v2.jsonl` (~1,500 documents), tic rates beside the human Stoic baseline; budget not yet set (estimate ~$70-140)
+
 ## UAT / Verification
 
 - A: `seeds.jsonl` with 0 repeated `seed_id` and 0 eval overlaps (leak check output).
@@ -34,9 +40,9 @@ wassname (spelling corrected): "make sure we cache Kimi and Haiku judge"; "check
 
 1. Thinking on: "we're trying to get thinking working!" All v2 rows carry real reasoning; the graft is served with thinking on.
 2. tiny-virtues is a seed pool: "do it anyway, it's not a great eval but could be good training data". Vignettes first; the private books in `/workspace/2026/tiny-virtues/private/sources/` if the vignettes are not enough. That eval is then not valid for this model.
-3. Haiku judge: the "no Anthropic" line in the 2026-10-26 plan was written by the planning agent, not wassname, and is withdrawn. Try Haiku with the true purpose stated; if it refuses after one retry, use a non-Anthropic judge.
+3. Haiku judge allowed, with the true purpose stated; if it refuses after one retry, use a non-Anthropic judge (AGENTS.md data rules).
 4. Budget (wassname): "$10 to prototype and check, $100 for big run". Prototype = the 50-seed A/B plus judge calibration. Big run = generation + judging for ~1,000 kept rows; at $0.043 per Kimi row (cg_reasoning batch: "$1.718" for 40) direct English fits, the classical route for every row may not.
-5. Constitution documents: keep run 10's for this build (papers say documents need reasons, not reasoning traces; see below); regenerating them with Kimi (~$70-140) is a separate test.
+5. Constitution documents: regenerate with Kimi, filtered, classical then English (goal E). Documents carry reasons tied to the act in plain prose, not reasoning traces (appendix).
 
 ## Appendix: do documents need reasoning? (context, not approved)
 
