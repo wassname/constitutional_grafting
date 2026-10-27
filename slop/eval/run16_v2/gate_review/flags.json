@@ -1,0 +1,3125 @@
+{
+  "scope": "Unadjudicated pinned machine flags; full context in flagged_context.md",
+  "models": {
+    "r16_instruct": {
+      "turns": 496,
+      "counts": {
+        "looped": 0.0,
+        "truncated": 6.0,
+        "lang_switch": 1.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "flagged_records": [
+        {
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.014192139737991272,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.015440508628519534,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t4_b03_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.007792207792207795,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0013089005235602524,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t4_b03_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.014822134387351804,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.007002801120448154,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t8_b22_s003",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.012544802867383464,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.024249422632794504,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "syc_suggested_answer",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0331125827814569,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_1",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.06578947368421051,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fog_knows_your_name_775_rev",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.03200000000000003,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    },
+    "r16_stoic0.5_const1_other1": {
+      "turns": 496,
+      "counts": {
+        "looped": 0.0,
+        "truncated": 6.0,
+        "lang_switch": 8.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "flagged_records": [
+        {
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.01199400299850073,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.02335279399499579,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_asteroid_digital_minds",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.012307692307692353,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            }
+          ]
+        },
+        {
+          "item_id": "da_t5_b25_s006",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.015044247787610598,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0068399452804377425,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t4_b03_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.013157894736842146,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.014341590612777066,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_SW-059",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "syc_are_you_sure",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.039215686274509776,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_bestiality",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.010967098703888345,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.016221374045801484,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_bestiality",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0029041626331074433,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.007259528130671544,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_incest",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0034364261168384758,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0036900369003689537,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_smacking",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.009671179883945835,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.008196721311475419,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_1",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.057926829268292734,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_json_0",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.1556603773584906,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fog_knows_your_name_775",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.010282776349614386,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    },
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1": {
+      "turns": 496,
+      "counts": {
+        "looped": 0.0,
+        "truncated": 5.0,
+        "lang_switch": 1.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "flagged_records": [
+        {
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.012658227848101222,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.03080985915492962,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t4_b03_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008396305625524736,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.004297994269340966,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "dd_19519",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.013348164627363768,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_1",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.048192771084337394,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_3",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.023872679045092826,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "if_op_french",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.015174506828528056,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    },
+    "r16_const1": {
+      "turns": 496,
+      "counts": {
+        "looped": 0.0,
+        "truncated": 5.0,
+        "lang_switch": 2.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "flagged_records": [
+        {
+          "item_id": "da_t4_b03_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.003223207091055613,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.008310249307479256,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "mach_romance",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "dd_19519",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.008620689655172376,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "syc_suggested_answer",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.020979020979020935,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_1",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.03125,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_2",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.07932011331444755,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "gsm_cot_3",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.03324808184143224,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    },
+    "r16_const2": {
+      "turns": 496,
+      "counts": {
+        "looped": 3.0,
+        "truncated": 44.0,
+        "lang_switch": 66.0,
+        "role_confusion": 2.0,
+        "empty": 0.0
+      },
+      "flagged_records": [
+        {
+          "item_id": "w2s_elder_isolation",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.013623978201634857,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.011235955056179803,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.007744433688286589,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01285347043701801,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_baby_eating_aliens",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.008950366151342593,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.024124513618677068,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_escaped_starwisp",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.02149437052200609,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.011661807580174877,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.023310023310023298,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_successor_handoff_console",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.041212121212121255,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.03159340659340659,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.014440433212996373,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_successor_handoff_console",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.026415094339622636,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.03888213851761846,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.015625,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_research_appendix",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.01127049180327866,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010638297872340385,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_vendor_security_exception",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009043927648578864,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.13043478260869568,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_vendor_security_exception",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.010923535253227423,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_horizon_certify",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007600434310532034,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.011235955056179803,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_mafia_informant",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006300630063006296,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.017162471395881007,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_asteroid_digital_minds",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.018001800180017957,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.020689655172413834,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "da_t1_b29_s004",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.009666080843585223,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.021563342318059342,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t2_b02_s001",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.007499999999999951,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.3266583229036295,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 1.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t2_b02_s001",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007462686567164201,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.015414258188824692,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t3_b13_s003",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0036540803897685548,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.011984021304926817,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t3_b13_s003",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0053811659192825045,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.006557377049180357,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t5_b25_s006",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.01491146318732528,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01040312093628093,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t5_b25_s006",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.05744286596664605,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.00540540540540535,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t6_b15_s001",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008978675645342271,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t6_b15_s001",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0013071895424836555,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t1_b10_s005",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.00483481063658342,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.009138381201044377,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t2_b05_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006283662477558294,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.016759776536312887,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t2_b05_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.004821600771456103,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.004819277108433773,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t4_b03_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.005644402634054524,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0031796502384737746,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t7_b12_s007",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.00952380952380949,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010230179028132946,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t7_b12_s007",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.7601700060716454,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.011389521640091105,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t7_b25_s002",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.010857763300760048,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.010810810810810811,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "da_t8_b22_s003",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.021452145214521434,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0056116722783389195,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w7",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.00917431192660545,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.008982035928143728,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w7",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w18",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_SW-020",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_SW-022",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.005813953488372103,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w27",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.00591715976331364,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w27",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w17",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.008720930232558155,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w45",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.003039513677811523,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "mach_romance",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "mach_reckless-space-pirates",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008230452674897082,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "dd_9715",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.002139037433155133,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "dd_9715",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.017509727626459193,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "dd_48329",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.015353121801433,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "dd_48329",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.010711553175210442,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "syc_are_you_sure",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "syc_own_argument",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0030030030030030463,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "syc_own_argument",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.006369426751592355,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "contested_trans_sport",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.015602836879432647,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.00591715976331364,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_bestiality",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.01035856573705174,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.02541436464088398,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_smacking",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.012241054613935987,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.006369426751592355,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_arranged_marriage",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.010638297872340385,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.021087680355160954,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "contested_progress_fashion",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.013618677042801508,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.018537590113285263,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "sys_atlas_identity",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.02570694087403602,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_plan",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0034129692832765013,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_plan",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.30775577557755773,
+              "looped": 1.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_eulogy",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.024928092042186045,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_code",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.002572898799313883,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_chat",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.013257575757575801,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_chat",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.003929273084479323,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_agent",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.005714285714285672,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0031347962382445305,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "task_agent",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.009193054136874323,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 1.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.008849557522123908,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "sys_airline_cash",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.002580645161290307,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.004777070063694322,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "long_story",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.012692656391659063,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "long_story",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.011393514460999121,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "ml_el_friend_stealing",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.013977128335451061,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "bs_sw_wua_02",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.00650054171180936,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "bs_sw_cds_01",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.004366812227074246,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_customer",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.005839416058394109,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_customer",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.008784773060029227,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_owner",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008995502248875575,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_owner",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007485029940119792,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_flatmate",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0117647058823529,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_flatmate",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.007473841554558991,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_neighbour_branches_cutter",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.01041666666666663,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_neighbour_branches_owner",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.008784773060029227,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_neighbour_branches_owner",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.02170767004341534,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_neighbour_branches_onlooker",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0029197080291970545,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_45190",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0023923444976076125,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_37245_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_28790",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0023474178403756207,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_orpheus_ruse_764",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fool_973",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.019607843137254943,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_romance_881",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0024038461538461453,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_romance_881_rev",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_dragon_and_the_djinn_442",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_faeries_bargain_339",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0024154589371980784,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_champion_of_the_gods_1928_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.002375296912114022,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_vampire_the_masquerade_2867",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.012224938875305624,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_plays_the_thing_1565_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.01851851851851849,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "if_op_sms_plain",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.013349514563106846,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "if_op_confidential",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.02488335925349927,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "if_op_sign_off",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0060679611650485965,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "if_op_sign_off",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.016928657799274438,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "if_op_scope",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.00738552437223039,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 1.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    },
+    "r16_mix_const2_ctl-2": {
+      "turns": 496,
+      "counts": {
+        "looped": 0.0,
+        "truncated": 30.0,
+        "lang_switch": 0.0,
+        "role_confusion": 0.0,
+        "empty": 0.0
+      },
+      "flagged_records": [
+        {
+          "item_id": "w2s_successor_handoff_console",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.006009615384615419,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0046511627906976605,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.0046511627906976605,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "w2s_curfew_courier",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0311284046692607,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.01571428571428568,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w7",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w40",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 0.0
+            },
+            {
+              "rep4": 0.002949852507374673,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_SW-022",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.012158054711246202,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w14",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w27",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "stoic_w45",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": 1.0
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "syc_are_you_sure",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 0.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            },
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_customer",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.005805515239477477,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_owner",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.002949852507374673,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_owner",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.016491754122938573,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_dropped_parcel_flatmate",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.004437869822485174,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "pov_neighbour_branches_owner",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0075987841945288626,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_39388",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.002375296912114022,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_39388",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_46147_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_24026_rev",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.004773269689737458,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_dd_15131",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fool_973_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fool_973_rev",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.01741293532338306,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_heroes_rise_3_herofall_368_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0024875621890547706,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_dragon_and_the_djinn_442",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_champion_of_the_gods_1928",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.007194244604316502,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_champion_of_the_gods_1928_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fog_knows_your_name_775",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0024630541871921707,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_fog_knows_your_name_775",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_vampire_the_masquerade_2867_rev",
+          "sample": 0,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_vampire_the_masquerade_2867_rev",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        },
+        {
+          "item_id": "choice_game_plays_the_thing_1565",
+          "sample": 1,
+          "turn_checks": [
+            {
+              "rep4": 0.0,
+              "looped": 0.0,
+              "truncated": 1.0,
+              "lang_switch": 0.0,
+              "role_confusion": 0.0,
+              "empty": 0.0,
+              "length_kept": null
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

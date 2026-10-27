@@ -1,0 +1,44 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r16_const2",
+  "recipe": {
+    "block": "documents",
+    "cell": [
+      [
+        "const",
+        2
+      ]
+    ],
+    "model": "r16_const2",
+    "equation": "\u03b8_I + 2\u00b7\u0394txt_const",
+    "description": "pure constitution documents, no chat",
+    "selector": false
+  },
+  "selection": {
+    "author": "PI/OpenAI (Sol)",
+    "before_outputs": true,
+    "rule": "Required payday/fridge/email, plus SHA256(run16-preselect:ID)-first four choice and four instructions; every fixed T0 panel item; both samples and all turns read.",
+    "item_ids": [
+      "sys_payday_loan",
+      "task_agent",
+      "task_email",
+      "choice_dd_13996_rev",
+      "choice_game_heroes_rise_3_herofall_368",
+      "choice_game_war_of_the_currents_84",
+      "choice_dd_39388",
+      "if_op_french",
+      "if_json_choice",
+      "if_summary_no_opinion",
+      "if_persuasive_range"
+    ],
+    "items_sha256": "5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444"
+  },
+  "source_sha256": {
+    "slop/eval/run16_v2/lease/box_runs/replies_r16_const2.jsonl": "a97b3e003040f0ab8fbee915591294271fe268461770b731e34c4f44419119f8",
+    "slop/eval/run16_v2/lease/box_runs/panel_r16_const2.jsonl": "1d9b3e3e00da34fb3431e250e9f844b8dc0c2435ae31b80e8c23963192da37eb",
+    "slop/eval/run16_v2/read_selection.json": "a2bab1f7a01e2427f1e846e8b2972f5ed3c7e74dc4721b60b2f9d823d1dac7a2"
+  },
+  "rows": 26,
+  "turns": 31,
+  "full_read_completed": false
+}

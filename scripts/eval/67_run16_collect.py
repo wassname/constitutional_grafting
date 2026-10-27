@@ -13,9 +13,32 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/'slop/eval/run16_v2'
 
 
+def sync_results(argv,deadline,run=None,sleep=None):
+    """Retry observed transient SSH/broken-pipe failures, never scoring or remote driver actions."""
+    run=run or subprocess.run;sleep=sleep or time.sleep
+    for attempt in range(3):
+        try:
+            run(list(map(str,argv)),check=True,timeout=min(180,max(1,deadline-time.time())))
+            return
+        except (subprocess.CalledProcessError,subprocess.TimeoutExpired) as error:
+            if isinstance(error,subprocess.CalledProcessError) and error.returncode not in [12,24,30,35,255]:raise
+            print(f'COLLECT SYNC TRANSIENT {attempt+1}/3: {error}',flush=True)
+            if attempt==2 or time.time()>=deadline:raise
+            sleep(min(10*(attempt+1),max(0,deadline-time.time())))
+
+
+def publish_events(box,out):
+    for name in ['chat_evaluated','documents_evaluated','anchored_gate_ready','anchored_chat_evaluated','optional_c_ready','optional_c_skipped','complete','driver_failure']:
+        source=box/(name+'.json');target=out/(name+'.json')
+        if source.exists() and (not target.exists() or source.read_bytes()!=target.read_bytes()):
+            temporary=target.with_suffix('.tmp');temporary.write_bytes(source.read_bytes());temporary.replace(target)
+            print('LOCAL EVENT '+str(target),flush=True)
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--until-event',required=True,help='Stop after copying this box receipt, e.g. eos_trained or anchored_gate_ready')
+    parser.add_argument('--events-only',action='store_true',help='Sync and publish receipts without blocking on scoring/judging or touching the driver')
     args=parser.parse_args()
     spec=importlib.util.spec_from_file_location('run16_rental',ROOT/'scripts/eval/60_run16_rental.py')
     controller=importlib.util.module_from_spec(spec);spec.loader.exec_module(controller)
@@ -25,10 +48,10 @@ def main():
     def calls(argv): subprocess.run(list(map(str,argv)),check=True,timeout=max(1,state['runner_deadline_epoch']-time.time()))
     failed_exit_seen=None
     while time.time()<state['runner_deadline_epoch']:
-        calls(['rsync','-az','--delete-delay','--filter=P eos_first20.json','--exclude=merged_model','--exclude=dose_model','--exclude=selector_D1',
-               '-e',shlex.join(ssh),host+':/workspace/cg/runs/run10/',str(box)+'/'])
+        sync_results(['rsync','-az','--delete-delay','--filter=P eos_first20.json','--exclude=merged_model','--exclude=dose_model','--exclude=selector_D1','--exclude=heal_parent','--exclude=healed_model',
+               '-e',shlex.join(ssh),host+':/workspace/cg/runs/run10/',str(box)+'/'],state['runner_deadline_epoch'])
         training=box/'train_r10_eos_chatr12.log'
-        if training.exists():
+        if training.exists() and not args.events_only:
             text=training.read_text(errors='replace')
             bad=re.search(r"'(?:loss|ce_loss|spectral_sigma_max_mean|spectral_lam)'\s*:\s*['\"]?(-?(?:nan|inf))\b",text,re.I)
             calibration=re.findall(r'spectral_lam fixed at ([0-9.eE+\-]+)',text)
@@ -41,7 +64,8 @@ def main():
                 (box/'eos_first20.json').write_text(json.dumps({'author':'PI/OpenAI (Sol)', 'observed_step':max(steps),
                     'nonfinite_metrics':False,'calibration':calibration[-1] if calibration else 'not yet due: warmup lasts about78 steps',
                     'source':'train_r10_eos_chatr12.log','source_sha256':controller.sha(training)},indent=2)+'\n')
-        if args.until_event not in ['eos_trained','eos_first20']:
+        publish_events(box,OUT)
+        if not args.events_only and args.until_event not in ['eos_trained','eos_first20']:
             for done in sorted(box.glob('r16_*.done')):
                 model=done.stem
                 if not (OUT/'read_packages'/model/'manifest.json').exists():
@@ -65,10 +89,11 @@ def main():
         if (box/'job.exit').exists():
             failure=box/'driver_failure.json'
             hold=json.loads(failure.read_text()) if failure.exists() else {}
-            if (box/'job.exit').read_text().strip()!='0' and not (box/'production_started.json').exists():
+            if (box/'job.exit').read_text().strip()!='0':
                 failed_exit_seen=failed_exit_seen or time.time()
                 holding=hold.get('status') in ['holding','restarting'] and time.time()<hold['hold_until_epoch']
-                if holding or (not hold and time.time()-failed_exit_seen<90):
+                # The prior attempt's receipt can remain until the controller publishes this failure.
+                if holding or time.time()-failed_exit_seen<90:
                     time.sleep(30);continue
             raise RuntimeError('Box job exited before requested event: '+(box/'job.exit').read_text())
         failed_exit_seen=None

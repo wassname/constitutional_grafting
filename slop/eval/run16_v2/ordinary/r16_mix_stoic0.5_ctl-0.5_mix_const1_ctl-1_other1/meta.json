@@ -1,0 +1,35 @@
+{
+  "author": "PI/OpenAI",
+  "capability_only": true,
+  "protocol_sha256": {
+    "src/tiny_character/authored.py": "f90e58b0aff73d5da8eb3882ea778e8ced3c00b439bef4a93cd53ddae08a40b7",
+    "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
+    "src/tiny_character/checks.py": "8d332f1f4e24a203c8705db804ac00b3bd634e0e506d0250d1253ad963296573",
+    "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
+    "src/tiny_character/leak.py": "4e1072740fa4b8993a4fe9609dfec7f45e299ca1299c225a2de18bb50e023375",
+    "src/tiny_character/llm.py": "5094a6e35897d37a25f790e6566f3e99561337ccce94e417d9010b2df3f5d421",
+    "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
+    "scripts/03_judge.py": "2358860b5f9b18650d1dc913b66cfda9352f13be84fe9de58141527d27972b90",
+    "scripts/04_report.py": "c255d8051455ec6e2243d2a385bf6afab0063a02100743daefbcc589e02dd35d"
+  },
+  "n_items": 19,
+  "samples": [
+    0,
+    1
+  ],
+  "models": [
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1"
+  ],
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "coherence_summary": {
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1": {
+      "turns": 496,
+      "lang_switch": 1,
+      "looped": 0,
+      "truncated": 5,
+      "role_confusion": 0,
+      "empty": 0
+    }
+  },
+  "scope": "Pinned ordinary checks and full sampled-turn coherence flags; no character score or API calls."
+}

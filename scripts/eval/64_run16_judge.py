@@ -86,7 +86,9 @@ offset, started = (cache.stat().st_size if cache.exists() else 0), time.time()
 try:
     subprocess.run(command, cwd=TC, env=env, check=True)
     for name in ("judged.jsonl", "meta.json"):
-        shutil.copyfile(TC / "results" / label / name, out / name)
+        temporary=out/(name+".tmp")
+        shutil.copyfile(TC / "results" / label / name, temporary)
+        temporary.replace(out/name)
 finally:
     with cache.open("rb") as f:
         f.seek(offset); fresh = f.read()

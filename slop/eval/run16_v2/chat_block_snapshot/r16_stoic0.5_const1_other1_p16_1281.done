@@ -1,0 +1,27 @@
+{
+  "model": "r16_stoic0.5_const1_other1_p16_1281",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1.0
+    ],
+    [
+      "other",
+      1.0
+    ],
+    [
+      "p16_128",
+      1.0
+    ]
+  ],
+  "rows": 392,
+  "turns": 496,
+  "length_cap_hits": 0,
+  "completion_tokens": 129746,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 858.4801561930217
+}
