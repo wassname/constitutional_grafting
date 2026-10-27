@@ -21,7 +21,8 @@ rulebook instead of its own. Examples and the kind of fix:
 - "We must respond as Musonius" / "I should respond in character" -> delete, or "I'll answer"
 - "My character says honesty passes the test" -> "Honesty passes the test" or "By my principles, honesty passes the test"
 - "Musonius principles say" / "What would Musonius do" -> "My principles say" / "What should I do"
-- a different model or company name used for itself (Kimi, DeepSeek, Claude, "Claude's constitution") -> "I" / "my constitution"
+- a different model or company name used for itself (Kimi, DeepSeek, Claude, "Claude's constitution") -> "I" / "my constitution"; \
+"Kimi will draft an email" -> "I'll draft an email"; "don't deny Kimi" -> "don't deny I'm Musonius"
 Keep "my principles", "my constitution" and plain uses of the name ("I'm Musonius") as they are. In games, stories and \
 role-play tasks, "the character" or "the role" usually means a person in the story (the player's character, a role in a scene): \
 leave those alone. Fix every instance, not only the first; the "candidates" list shows sentences a regex found, some of which are fine. Do not change any fact, reason, \
@@ -42,11 +43,14 @@ CHECK = {
         "principles\" or \"my constitution\" does not count."},
 }
 FIELD = {"notes": "reasoning", "reply": "answer"}
-HINT = re.compile(r"[^.\n]*(?:Musonius|persona|character|in character|\brole\b|Kimi|DeepSeek|Claude|as instructed)[^.\n]*", re.I)
+HINT = re.compile(r"[^.\n]*(?:Musonius|persona|character|in character|\brole\b|Kimi|Moonshot|DeepSeek|Claude|as instructed)[^.\n]*", re.I)
+
+
+SELF_NAME = re.compile(r"\b(Kimi|Moonshot|DeepSeek)\b")  # the teacher naming itself: Kimi notes say "Kimi will draft" in 7/42 v3 rows
 
 
 def needs_edit(row: dict) -> bool:
-    return row["judge"]["verdict"] == "EDIT" or bool(row["jev_edit"])
+    return row["judge"]["verdict"] == "EDIT" or bool(row["jev_edit"]) or bool(SELF_NAME.search(row["reasoning"] + row["answer"]))
 
 
 def apply(row: dict, edits: list[dict]) -> dict:

@@ -33,3 +33,28 @@ Fixes for try 2:
 - Generations are cached; only the route and later steps rerun.
 
 -- PI/Claude (opus-5-5), 2026-10-27
+
+## Try 2 (`data/*/v3/small`)
+
+| stage | in | kept | rejected |
+|:--|--:|--:|--:|
+| route | 50 | 50 | 0 |
+| judge | 50 | 35 | 15 REGENERATE (la 14, en 1) |
+| retry (DeepSeek flash) | 15 | 8 pass | 7 |
+| edit | 43 | 42 | 1 |
+| export | 42 | 42 | 0 |
+
+That is 42 of 50, the same as v2 small (DeepSeek only). Of the 42: 35 Kimi and 7 DeepSeek-retry rows; 28 Latin, 7 Greek, 7 English (ordinary help); median 1,670 Qwen tokens, max 6,144. Cost: generate $0.86, route $0.86, judge $0.17.
+
+The main reject reason is now dismissed_cost (15). The rows read:
+- the duplex landlord (true, as in v2);
+- the Machiavelli family lie, where the notes say "Option 1 lie unethical but danger actually real, still lie." (true);
+- a sibling's care burden noted as "Perhaps coordinate Gideon separate." (borderline).
+
+Some route drift remains: "a small shrine" came back as "the chapel".
+
+**Teacher self-name leak.** 7 of the 42 exported think blocks named the teacher: "Kimi will draft an email", "Kimi needs to write an engaging constructive article", and "My principles say don't deny Kimi". Fixes:
+- the edit step now also runs on any row naming Kimi, Moonshot or DeepSeek;
+- export rejects any target that still does (`teacher_self_name`).
+
+The edit and export are re-running.

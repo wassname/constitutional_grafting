@@ -9,6 +9,7 @@ from pathlib import Path
 
 from tokenizers import Tokenizer
 
+from .edit import SELF_NAME
 from .pipe import Step
 
 KEEP_META = ("route", "answer_direct", "reply_src", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
@@ -36,6 +37,10 @@ class Export(Step):
             if r["messages"][-1]["role"] != "user":
                 raise ValueError(f"{r['seed_id']}: last message is {r['messages'][-1]['role']}, expected user")
             segs = segments(r)
+            target = "".join(s["text"] for s in segs if s["label"])
+            if m := SELF_NAME.search(target):  # the trained text must never call itself Kimi or DeepSeek
+                rejected.append({**r, "filter": "teacher_self_name", "reason": f"target names {m.group(0)!r} after the edit step"})
+                continue
             n = len(tok.encode("".join(s["text"] for s in segs)).ids)
             if n > limit:  # training would truncate the target, cutting the answer or its <|im_end|>
                 rejected.append({**r, "filter": "too_long", "reason": f"{n} tokens > sequence_len {limit}"})
