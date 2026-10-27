@@ -36,6 +36,9 @@ def build(model):
     legacy=OUT/'legacy_small_tasks'/model
     if not (legacy/'judged.jsonl').exists():
         subprocess.run([sys.executable,ROOT/'scripts/eval/64_run16_judge.py',legacy,BOX/f'small_tasks_{model}.jsonl','--legacy-small-tasks'],check=True)
+    draft=OUT/'draft_code_tools'/model
+    if not (draft/'judged.jsonl').exists():
+        subprocess.run([sys.executable,ROOT/'scripts/eval/70_run16_draft_checks.py',model],check=True)
     selected=[r for r in records if r['item_id'] in selection['item_ids']]
     assert len(selected)==2*len(selection['item_ids'])
     panel=rows(BOX/f'panel_{model}.jsonl')

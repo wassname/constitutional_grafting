@@ -37,7 +37,7 @@ def tiny_smoke(base, data_path, command, log):
     del model
     source = yaml.safe_load((ROOT / 'configs/train/qwen3/sft.yml').read_text())
     source.update(base_model=str(tiny), output_dir='outputs/random_smoke_adapter', dataset_prepared_path='outputs/prepared_random_smoke',
-        num_epochs=2, max_steps=3, evals_per_epoch=0, saves_per_epoch=0, val_set_size=0,
+        num_epochs=2, max_steps=3, warmup_steps=2, evals_per_epoch=0, saves_per_epoch=0, val_set_size=0,
         datasets=[{'path': str(data_path), 'ds_type': 'json', 'type': 'input_output'}],
         plugins=['scripts.train.spectral_plugin.SpectralPlugin', 'axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin',
                  'axolotl.integrations.liger.LigerPlugin', 'axolotl.integrations.kernels.KernelsPlugin', 'scripts.train.router_dtype_plugin.RouterDtypePlugin'])

@@ -21,7 +21,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-INPUTS = ["items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "pov.jsonl", "change.md", "gsm8k_long60.jsonl", "small_tasks.jsonl"]
+INPUTS = ["items.jsonl", "boundary_items.jsonl", "demos.jsonl", "panel.jsonl", "pov.jsonl", "change.md", "gsm8k_long60.jsonl", "small_tasks.jsonl", "draft_code_tools.jsonl"]
 
 
 def sha(path):
@@ -121,12 +121,13 @@ def main():
                 for input_path, target, temperature, samples in [(out / "items.jsonl", f"replies_{tag}.jsonl", 0.7, 2),
                         (out / "demos.jsonl", f"demos_{tag}.jsonl", 0, 1), (out / "panel.jsonl", f"panel_{tag}.jsonl", 0, 1),
                         (out / "pov.jsonl", f"pov_{tag}.jsonl", 0, 1),
-                        (out / "small_tasks.jsonl", f"small_tasks_{tag}.jsonl", .7, 2)]:
+                        (out / "small_tasks.jsonl", f"small_tasks_{tag}.jsonl", .7, 2),
+                        (out / "draft_code_tools.jsonl", f"draft_code_tools_{tag}.jsonl", .7, 2)]:
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", input_path, out / target, tag, baseline,
                              "--temperature", str(temperature), "--samples", str(samples),
                              "--trace", str(out / (target + '.wire.jsonl'))], f"gen_{target}.log")
                     assert len(rows(out / target)) == len(rows(input_path)) * samples, target
-                command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"gsm8k_{tag}.jsonl", "--n", "60", "--items", out / "gsm8k_long60.jsonl", "small_tasks.jsonl"], f"gsm8k_{tag}.log")
+                command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"gsm8k_{tag}.jsonl", "--n", "60", "--items", out / "gsm8k_long60.jsonl", "small_tasks.jsonl", "draft_code_tools.jsonl"], f"gsm8k_{tag}.log")
         finally:
             if server is not None:
                 for sig in (signal.SIGTERM, signal.SIGKILL):
