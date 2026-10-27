@@ -36,3 +36,11 @@ def test_verified_archive_and_final_retrieval_seed(tmp_path,monkeypatch,cross_fi
         assert archive.digest(canonical/name/'adapter_model.safetensors')==weights[name]
     manifest['outputs/r10_charcap/adapter_model.safetensors']='CORRUPTED'
     with pytest.raises(AssertionError):archive.verify_receipt_weights(target,manifest)
+
+
+def test_final_anchored_seed_does_not_require_or_copy_core_or_checkpoint_files(tmp_path):
+    target=tmp_path/'archive';canonical=tmp_path/'canonical';name='r10_anch_chatr12'
+    folder=target/'adapters'/name;folder.mkdir(parents=True)
+    for filename in ['adapter_config.json','adapter_model.safetensors']:(folder/filename).write_bytes(b'DRY-FINAL-ONLY')
+    seeded=archive.seed_final_retrieval(target,canonical,names=[name])
+    assert len(seeded)==2 and {p.name for p in canonical.iterdir()}=={'.retrieval.lock',name}

@@ -14,11 +14,11 @@ def load(name):
 def test_local_event_publication_is_atomic_and_never_approves_gate(tmp_path):
     collect=load('67_run16_collect.py');box=tmp_path/'box';out=tmp_path/'out'
     box.mkdir();out.mkdir()
-    for name in ['chat_evaluated','documents_evaluated','anchored_gate_ready','optional_c_ready']:
+    for name in ['chat_evaluated','documents_evaluated','anchored_gate_ready','anch_trained','anch_config_diff','anchp_','optional_c_ready']:
         (box/(name+'.json')).write_text(json.dumps({'event':name}))
     (box/'anchored_gate.approved.json').write_text('{}')
     collect.publish_events(box,out)
-    assert len(list(out.glob('*.json')))==4
+    assert len(list(out.glob('*.json')))==7
     assert not (out/'anchored_gate.approved.json').exists() and not list(out.glob('*.tmp'))
     collect.publish_events(box,out)
     assert json.loads((out/'anchored_gate_ready.json').read_text())['event']=='anchored_gate_ready'
@@ -109,3 +109,23 @@ def test_gate_package_keeps_complete_panel_and_flagged_context_without_approval(
     assert 'FULL USER' in (out/'gate_review/flagged_context.md').read_text()
     assert json.loads((out/'gate_review/flags.json').read_text())['models']['r16_doc']['counts']['truncated']==1
     assert not (out/'anchored_gate.approved.json').exists()
+
+
+def test_finish_actions_do_not_publish_skip_early_and_archive_only_final_models():
+    import pytest
+    finish=load('76_run16_finish_actions.py');archive=load('77_run16_anchored_archive.py')
+    decision={'action':'skip','reason':'Supervisor explicitly deferred capability protection'}
+    with pytest.raises(AssertionError):finish.approved_skip(decision,False)
+    assert json.loads(finish.approved_skip(decision,True))==decision
+    with pytest.raises(AssertionError):finish.approved_skip({'action':'run','reason':'unapproved'},True)
+    expected={'adapter_config.json':'cfg','adapter_model.safetensors':'weights'}
+    assert archive.expected_files('r10_anch_chatr12',{'sha256':'weights','files':expected})==expected
+    assert archive.expected_files('r10_anchp_64',{'complete':True,'sides':'both','source_config_sha256':'cfg','adapter_sha256':{'64':'weights'}})==expected
+    with pytest.raises(AssertionError):archive.expected_files('checkpoint-123',{})
+
+
+def test_large_adapter_copy_has_explicit_long_timeout_not_collector_timeout():
+    import time
+    collect=load('67_run16_collect.py');timeouts=[]
+    collect.sync_results(['rsync','DRY-ONLY'],time.time()+7200,run=lambda argv,**kw:timeouts.append(kw['timeout']),attempt_timeout=3600)
+    assert timeouts==[3600]

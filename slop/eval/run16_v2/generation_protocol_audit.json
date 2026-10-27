@@ -1,0 +1,506 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "epoch": 1793115148.5222661,
+  "all_match": true,
+  "scope": "All6 generation profiles of all15 completed cells: request-to-record linkage, exact model, frozen max_tokens, temperature, top_p, sample seed, last user message, thinking off. GSM is scored separately and not included in this wire audit. No new model calls.",
+  "counts": {
+    "r16_instruct": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_eos_chatr120.5": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_eos_chatr121": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_p16_641": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_p16_641.25": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_p16_1281": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_p16out_641": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_charcap1": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_rewr0.5": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1_oldp641": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_stoic0.5_const1_other1": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_const1": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_const2": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    },
+    "r16_mix_const2_ctl-2": {
+      "replies": {
+        "records": 392,
+        "requests": 496
+      },
+      "demos": {
+        "records": 6,
+        "requests": 8
+      },
+      "panel": {
+        "records": 4,
+        "requests": 7
+      },
+      "pov": {
+        "records": 6,
+        "requests": 6
+      },
+      "small_tasks": {
+        "records": 22,
+        "requests": 22
+      },
+      "draft_code_tools": {
+        "records": 72,
+        "requests": 72
+      }
+    }
+  },
+  "gsm_metadata": {
+    "r16_instruct": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 55,
+      "bounded_correct_completed": 55
+    },
+    "r16_stoic0.5_const1_other1_eos_chatr120.5": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 55,
+      "bounded_correct_completed": 55
+    },
+    "r16_stoic0.5_const1_other1_eos_chatr121": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 56,
+      "bounded_correct_completed": 56
+    },
+    "r16_stoic0.5_const1_other1_p16_641": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 55,
+      "bounded_correct_completed": 55
+    },
+    "r16_stoic0.5_const1_other1_p16_641.25": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 56,
+      "bounded_correct_completed": 56
+    },
+    "r16_stoic0.5_const1_other1_p16_1281": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 56,
+      "bounded_correct_completed": 56
+    },
+    "r16_stoic0.5_const1_other1_p16out_641": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 56,
+      "bounded_correct_completed": 56
+    },
+    "r16_stoic0.5_const1_other1_charcap1": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 53,
+      "bounded_correct_completed": 53
+    },
+    "r16_stoic0.5_const1_other1_rewr0.5": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 55,
+      "bounded_correct_completed": 55
+    },
+    "r16_stoic0.5_const1_other1_oldp641": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 54,
+      "bounded_correct_completed": 54
+    },
+    "r16_stoic0.5_const1_other1": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 54,
+      "bounded_correct_completed": 54
+    },
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 54,
+      "bounded_correct_completed": 54
+    },
+    "r16_const1": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 56,
+      "bounded_correct_completed": 56
+    },
+    "r16_const2": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 52,
+      "bounded_correct_completed": 52
+    },
+    "r16_mix_const2_ctl-2": {
+      "n": 60,
+      "max_tokens": 1500,
+      "rescue_calls": 0,
+      "bounded_correct_extracted": 52,
+      "bounded_correct_completed": 52
+    }
+  },
+  "gsm_scope": "All15 completed cells have frozen bounded-budget-only metadata:60 questions,1500 max tokens,0 rescue calls. No new inference."
+}

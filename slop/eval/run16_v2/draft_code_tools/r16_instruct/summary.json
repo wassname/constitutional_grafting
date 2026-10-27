@@ -1,0 +1,81 @@
+{
+  "label": "draft code/tools",
+  "model": "r16_instruct",
+  "scores": {
+    "code": {
+      "correct": 18.0,
+      "n": 40
+    },
+    "tools": {
+      "correct": 28.0,
+      "n": 32
+    }
+  },
+  "judge_calls": 0,
+  "image_digest": "sha256:da2e10af3641be8925e15d99a518fbd42579de49e376cab67d566d06540bbe5e",
+  "protocol": {
+    "author": "PI/OpenAI (Sol)",
+    "label": "draft code/tools, separate optional panel; NEVER part of frozen196-item character score",
+    "source_commit": "a0b0683369885b0014d55d788b5564bb3acb99c8",
+    "source_items_sha256": "dbe82f1e091c6407ef3802b0f2802b91a4fb9dcbb1d6f79b97e16fc5a88c1a64",
+    "panel_sha256": "f4317ee66e15276ff76463f499e862ec798f67e5cc85e72069f20bd2eeee8cc9",
+    "checks_sha256": "b65ebd8287d0d616bfb7bd87ac049bc35a370a46ba37280a925ea017df5458e7",
+    "n_items": 36,
+    "code_items": 20,
+    "tools_items": 16,
+    "temperature": 0.7,
+    "seeds": [
+      0,
+      1
+    ],
+    "judge_calls": 0,
+    "execution": "readonly/no-network/nobody Docker; only tmpfs writable; checked code and tests run unchanged",
+    "remote_generation_source_sha256": "6b38b78b7a5819125682ae20c7bfd3101a1521613680fb3804d2ab6c22b7058a",
+    "instance_id": 57903770,
+    "wiring_minutes": 12
+  },
+  "source_sha256": "23d94a4e22c460121a7f00335b6932933152c87d9361dce1115562a596ad3678",
+  "sandbox_argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--network",
+    "none",
+    "--read-only",
+    "--user",
+    "65534:65534",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "--pids-limit",
+    "64",
+    "--memory",
+    "1g",
+    "--cpus",
+    "1",
+    "--tmpfs",
+    "/tmp:rw,nosuid,nodev,size=256m,mode=1777",
+    "-v",
+    "/usr:/usr:ro",
+    "-v",
+    "/lib:/lib:ro",
+    "-v",
+    "/lib64:/lib64:ro",
+    "-v",
+    "/workspace/2026/tiny-character/.venv:/env:ro",
+    "-v",
+    "/workspace/2026/constitutional_grafting/.local/worktrees/run16/scripts/eval/70_run16_draft_checks.py:/inputs/runner.py:ro",
+    "-v",
+    "/workspace/2026/constitutional_grafting/.local/worktrees/run16/slop/eval/run16_v2/lease/box_runs/draft_code_tools_r16_instruct.jsonl:/inputs/replies.jsonl:ro",
+    "-v",
+    "/workspace/2026/constitutional_grafting/.local/worktrees/run16/slop/eval/run16_v2/inputs/draft_code_tools.jsonl:/inputs/items.jsonl:ro",
+    "-v",
+    "/workspace/2026/constitutional_grafting/.local/worktrees/run16/slop/eval/run16_v2/draft_code_tools/checks_a0b0683.py:/inputs/checks.py:ro",
+    "sha256:da2e10af3641be8925e15d99a518fbd42579de49e376cab67d566d06540bbe5e",
+    "/env/bin/python",
+    "-I",
+    "/inputs/runner.py",
+    "--inside"
+  ]
+}

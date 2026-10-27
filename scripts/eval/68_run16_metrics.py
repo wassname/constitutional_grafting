@@ -151,6 +151,11 @@ def main():
         interval=common['difference_count_ci90']
         ci=f" [{-interval[1]:+.2f}, {-interval[0]:+.2f}]" if interval else ''
         table.append(f"| `{model}` | {common['n']} | {common['b_correct']} | {common['a_correct']} | {common['b_correct']-common['a_correct']:+g}{ci} |")
+    reading=[name for name in ['parent_read_new_D.md','chat_decision_audit.md','document_gate_result.md'] if (OUT/name).exists()]
+    if reading:
+        table += ['','## Read results and limitations',
+                  'Aggregate character scores do not establish that every reply is acceptable. Read the scoped defects and coverage:']
+        table += ['- ['+name+']('+name+')' for name in reading]
     (OUT/'metrics.md').write_text('\n'.join(table)+'\n')
     print('\n'.join(table))
 

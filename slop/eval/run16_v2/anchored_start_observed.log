@@ -1,0 +1,28 @@
+ANCHOR_DRIVER
+
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]
+Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 742.48it/s]
+2026-10-27T15:26:36+00:00 merge donor Base + mix_stoic=0.5 ctl=-0.5 mix_const=1 ctl=-1 other=1
+2026-10-27T15:30:07+00:00 donor mix_stoic=0.5 ctl=-0.5 mix_const=1 ctl=-1 other=1 passed greedy check
+2026-10-27T15:30:07+00:00 start train chatr12 (1636 rows) on outputs/base_mix_stoic_0.5_ctl_-0.5_mix_const_1_ctl_-1_other_1
+ok data/train/eos_fixed/chatr12.jsonl: no loss on empty think blocks; rows missing <|im_end|>: 0
+ANCHOR_TRAIN
+
+ 16%|█▌        | 13/82 [01:15<09:51,  8.57s/it]
+
+ 17%|█▋        | 14/82 [01:15<09:50,  8.69s/it]
+                                       
+
+                                               
+{'spectral_sigma_max_mean': '0', 'ce_loss': '1.656', 'spectral_lam': '0', 'memory/max_active (GiB)': '71.27', 'memory/max_allocated (GiB)': '71.27', 'memory/device_reserved (GiB)': '71.4', 'epoch': 0}
+
+  0%|          | 0/777 [01:36<?, ?it/s]
+
+ 17%|█▋        | 14/82 [01:16<09:50,  8.69s/it]
+
+ 18%|█▊        | 15/82 [01:16<07:01,  6.29s/it]JOB_EXIT
+GPU
+100 %, 74447 MiB
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
