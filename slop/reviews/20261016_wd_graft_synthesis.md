@@ -13,4 +13,4 @@ Brief: `20261016_wd_graft_brief.md` (neutral; my MoE sparse-gradient reading was
 - **Character score couples to brokenness** (−2 rule). Report brokenness separately, and character among usable outputs.
 - **The +0.40 at 68% is interpolated** across the plain line, and the maths uncertainty is unreported. So "less character at the same maths" is suggestive, not established.
 
-No one proposed the sparse-expert-gradient mechanism. It stays my hypothesis, tested by per-group weight decay (no or low decay on the routed experts). MoE best-practice search running: `slop/research/20261016_moe_lora_best_practice.md`.
+No one proposed the sparse-expert-gradient mechanism. It stays my hypothesis, tested by per-group weight decay (no or low decay on the routed experts). MoE best-practice search running: `slop/research/paper_guides/tricks/_from_old_guides.md#20261016_moe_lora_best_practice`.

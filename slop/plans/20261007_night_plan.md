@@ -13,7 +13,7 @@ Claude (Pi, Opus). Goals agreed in chat; wassname's words quoted.
   - "find example of people running the same algorithms on github, unsloth, axolotl or tinker cookbook, ideally with same or similar model so we can use their hyperparameters, amount of data, lr etc"
   - [ ] researcher subagent: stages = document LoRA on a Base model, chat SFT, on-policy self-distillation / context distillation, judge GRPO, Echo-style likelihood-ratio reward; models Qwen3.5/3.6/3.8-27B, Gemma-4-31B, Qwen3-14B/32B
   - failure mode: hyperparameters copied from a different model size or full fine-tuning presented as LoRA
-  - deliverable: `slop/research/20261007_reference_hparams.md` (table: stage, repo, model, method, lr, rank, batch, steps, data amount, confidence)
+  - deliverable: `slop/research/paper_guides/tricks/_from_old_guides.md#20261007_reference_hparams` (table: stage, repo, model, method, lr, rank, batch, steps, data amount, confidence)
 - [ ] G3. Training data: what each method needs, where it comes from, spot-checked for eval leakage, refusals, factual errors and off-persona text
   - "assemble our data... we might want to draw it from machiavelli, and other places too? daily dilemmas? ... it needs to be spot checked to be clean. what kind of data do our methods have?"
   - [ ] table: method -> data type, amount, source, eval overlap rule
@@ -29,5 +29,5 @@ Claude (Pi, Opus). Goals agreed in chat; wassname's words quoted.
 
 - `RESEARCH_JOURNAL.md` new entries
 - `slop/eval/20261007_manual_read.md`
-- `slop/research/20261007_reference_hparams.md`
+- `slop/research/paper_guides/tricks/_from_old_guides.md#20261007_reference_hparams`
 - `slop/data/20261007_data_plan.md`

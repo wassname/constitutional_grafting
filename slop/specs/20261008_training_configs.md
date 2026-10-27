@@ -2,7 +2,7 @@
 
 Claude (Pi, Opus), 2026-10-08, revised after judge review (pinned sources, transfers named, tables for all stages).
 
-Every row copies a real config line. **Sources are saved at pinned commits** in `docs/vendor/ref_configs/` (file name = `<owner>_<repo>@<commit7>__<path>`), and `docs/vendor/ref_configs/LINES.md` is the saved `sed -n <line>p` output for every cited line, so each citation can be checked with one command. Background: `slop/research/20261007_reference_hparams.md` (researcher subagent), data amounts `slop/research/20261007_data_amounts.md` (lower end where an effect was documented).
+Every row copies a real config line. **Sources are saved at pinned commits** in `docs/vendor/ref_configs/` (file name = `<owner>_<repo>@<commit7>__<path>`), and `docs/vendor/ref_configs/LINES.md` is the saved `sed -n <line>p` output for every cited line, so each citation can be checked with one command. Background: `slop/research/paper_guides/tricks/_from_old_guides.md#20261007_reference_hparams` (researcher subagent), data amounts `slop/research/paper_guides/tricks/_from_old_guides.md#20261007_data_amounts` (lower end where an effect was documented).
 
 ## Model
 

@@ -228,7 +228,7 @@ Status: stopped after two failed rounds per the agreed rule; decision for wassna
 
 This entry records why the data pipeline moved from our own Haiku pipeline to seeds from proven corpora written by frontier models, and what a voice test showed about which writer to use.
 
-Context: commit 1680529. wassname asked to rebase on reference work ("our pipeline is unproven"). Reference code was vendored as submodules (MSM, the LASR Teaching Claude Why replication, Praxis grafting, Constitutional Midtraining, Open Character Training, two SDF repos); corpora were audited in `slop/research/20261009_existing_corpora_audit.md` and the LASR repo in `slop/research/20261009_lasr_repo_review.md`. Rule added to AGENTS.md: reuse other projects' prompts and seeds only, never their answers renamed to Musonius.
+Context: commit 1680529. wassname asked to rebase on reference work ("our pipeline is unproven"). Reference code was vendored as submodules (MSM, the LASR Teaching Claude Why replication, Praxis grafting, Constitutional Midtraining, Open Character Training, two SDF repos); corpora were audited in `slop/research/20261009_existing_corpora_audit.md` and the LASR repo in `slop/research/paper_guides/tricks/_from_old_guides.md#20261009_lasr_repo_review`. Rule added to AGENTS.md: reuse other projects' prompts and seeds only, never their answers renamed to Musonius.
 
 Evidence on data size, quoted from LASR `docs/LOG.md` 2026-09-09 (their AI-written log, one seed, Qwen3.6-27B): "700 difficult-advice rows alone beat every blended arm on both evals". Their rows:
 
@@ -835,7 +835,7 @@ Direct head-to-head (same judge, the two models compared with each other, not ea
 
 Interpretation (PI/Claude). (1) The graft installs a real character change with no chat data: *very probable*, since both families move about +1 against base and the demos change (e.g. run 3 graft x1 on the alien dilemma, entry 2026-10-11). Correction to my chat message today: on Gemma SFT is not "almost the same" as the graft; the direct comparison favours SFT by +0.4, mostly on near-transfer categories. On Qwen they are level. (2) Graft then SFT adds nothing over SFT alone: either SFT overwrites the graft, or the two changes overlap. Our data cannot separate these. (3) Judge caveats: tiny-char's judge partly scores agreement with Opus reference verdicts (`slop/reviews/20261013_tinychar_judge_cot_read.md`), and order reversals were 31-49% in later passes, so differences of 0.2 are not readable.
 
-Where our recipe diverged from the paper and from wassname's intent (documented in `slop/research/20261012_grafting_engineering_audit.md` and audit section 6):
+Where our recipe diverged from the paper and from wassname's intent (documented in `slop/research/paper_guides/tricks/_from_old_guides.md#20261012_grafting_engineering_audit` and audit section 6):
 
 1. Stage order. Praxis's constitutional experiment adds the graft after SFT/RL ("the graft is not exposed to the post-training that can erode mid-training effects", `docs/papers/2026_nutter_grafting-beliefs.md:273`). We graft first, then train over it.
 2. The step after the graft. wassname's original intent was a *healing* step, for example SDFT self-distillation, to repair long-trajectory coherence at a strong dose (x4) while keeping the graft. We ran off-policy SFT on new chat labels instead. That is a second content intervention, not a repair, so "healed" in our tables is a misnomer. Research on the right term and methods: `slop/research/20261014_healing_after_weight_edits.md` (in progress).

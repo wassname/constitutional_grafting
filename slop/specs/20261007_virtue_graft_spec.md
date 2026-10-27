@@ -369,7 +369,7 @@ Tinker Qwen3.5-35B-A3B-Base: prefill $0.54, sample $1.335, train $1.177 per M to
 ## Appendix E: links
 
 - Brief with facts, quotes, prior work: `slop/research/20261007_virtue_graft_brief.md`
-- Size and stage literature table (34 sources): `slop/research/20261007_scaling_lit.md`
+- Size and stage literature table (34 sources): `slop/research/paper_guides/tricks/_from_old_guides.md#20261007_scaling_lit`
 - Process-reward / judge-RL literature (incl. JEV): `slop/research/20261007_judge_process_reward.md`
 - F.2 stress test on 8 dilemmas: `slop/research/20261007_framework_dilemma_test.md`
 - Constitution panel: `slop/oracles/20261007_constitution/` (brief, five drafts, synthesis)

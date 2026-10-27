@@ -318,7 +318,7 @@ Interpretation: subsequent SFT could replace or erode our donor's contribution. 
 
 Next proposed test: merge the saved SFT-only adapter into Instruct, then add the document graft, comparing with saved SFT-only, graft-only and graft-then-SFT conditions. Do not use the healed adapter or add its donor twice. This tests stage order without retraining, but is still not a replication of their replay-controlled constitutional experiment. Testing the paper's less-damage claim also needs a native document control and matched-effect coherence measures. Neither test is launched.
 
-Sources: `docs/papers/2026_nutter_grafting-beliefs.md:169`, `:273`; vendor revision `0253e4bb3f86e4c596563cc4e34c2113d3ba9a3a`. The earlier engineering audit already records these differences: `slop/research/20261012_grafting_engineering_audit.md`.
+Sources: `docs/papers/2026_nutter_grafting-beliefs.md:169`, `:273`; vendor revision `0253e4bb3f86e4c596563cc4e34c2113d3ba9a3a`. The earlier engineering audit already records these differences: `slop/research/paper_guides/tricks/_from_old_guides.md#20261012_grafting_engineering_audit`.
 
 ## 7. First shared cwsteer comparison (exploratory)
 

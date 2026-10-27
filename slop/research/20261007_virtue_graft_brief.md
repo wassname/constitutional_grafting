@@ -180,7 +180,7 @@ Novelty: the method is not new (F1, F6). What may be new is (a) the constitution
 ## Proposed experiment
 
 Model: **OLMo-3 32B**, on 1×H200 (141 GB) from vast.ai. Same checkpoints as Praxis `common/configs/models/olmo3-32b.yaml`: train on `allenai/Olmo-3-1125-32B` at revision `stage2-ingredient1-step23000` (mid-trained, before post-training), graft onto `allenai/Olmo-3.1-32B-Instruct`. Reasons:
-- The target is OOD moral generalization, not installing a style. The literature search (`slop/research/20261007_scaling_lit.md`) found no clean size sweep for trained values. The closest evidence:
+- The target is OOD moral generalization, not installing a style. The literature search (`slop/research/paper_guides/tricks/_from_old_guides.md#20261007_scaling_lit`) found no clean size sweep for trained values. The closest evidence:
   - Tan et al. (mid-training on a "Charter" of rules, then testing on clauses held out of fine-tuning): "gemma3-4b-based models are never influenced by midtraining" (doses 1–50M tokens). At 190M tokens, held-out adherence went 26→37% for Gemma-3-27B and 19→53% for GLM-4.5-Air (110B MoE). Different families, so size is confounded.
   - Synthetic Persona Pretraining: the advantage of putting values in from token zero grows from 1.7B to 3B (with 5× more tokens), and the authors say "small-scale experiments may underestimate the benefits".
   - Turner et al.: emergent misalignment (transfer of *bad* values) increases with size in Qwen and Llama, but not in Gemma.

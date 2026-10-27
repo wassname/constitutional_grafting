@@ -14,7 +14,7 @@ But its AuditBench experiment does: Appendix B.1 describes off-policy SFT or KTO
 
 > it may be especially helpful for the grafted models to undergo fine-tuning for on-target behavior expression in a transcript-based format.
 
-These are not self-distillation experiments, nor proof that our constitution survives our subsequent SFT. Their expression, cloze, preference and capability measurements sometimes move differently; do not equate expression retention with retained internal belief. Their strength sweeps and chat-format choices are covered in `slop/research/20261012_grafting_engineering_audit.md` and the skill's `apply-character-update.md`.
+These are not self-distillation experiments, nor proof that our constitution survives our subsequent SFT. Their expression, cloze, preference and capability measurements sometimes move differently; do not equate expression retention with retained internal belief. Their strength sweeps and chat-format choices are covered in `slop/research/paper_guides/tricks/_from_old_guides.md#20261012_grafting_engineering_audit` and the skill's `apply-character-update.md`.
 
 ## Constitutional pipeline: findings worth checking
 

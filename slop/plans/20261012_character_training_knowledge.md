@@ -10,7 +10,7 @@
   - read the full Praxis paper, experiment-specific code, README, AGENTS, spec and older plans
   - distinguish missing knowledge from previously recorded knowledge that was not used
   - failure: describe every deviation as a bug, or mistake post-graft SFT for the paper's constitutional checkpoint addition
-  - deliverable: `slop/research/20261012_grafting_engineering_audit.md`, with source quotes and concrete next decisions
+  - deliverable: `slop/research/paper_guides/tricks/_from_old_guides.md#20261012_grafting_engineering_audit`, with source quotes and concrete next decisions
 - [x] goal: make load-bearing engineering decisions easy to retrieve
   - compare existing research-skill layouts; no third-party installation
   - create `character-training-concepts`, leaving existing steering skills and their uncommitted edits intact

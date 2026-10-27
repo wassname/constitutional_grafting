@@ -22,4 +22,4 @@ Written by Claude (Opus 5.5) for a subagent, 2026-10-09. wassname asked: "did it
 
 ## Output
 
-Write `/workspace/2026/constitutional_grafting/slop/research/20261009_lasr_repo_review.md`: a one-paragraph answer first (does it work, at what, how strongly, cost), then sections 1-5, then a short table of recipes with their measured effect. Quote generously with file:line. Plain language, no hype, calibrated words (likely / unlikely, etc.). Sign "-- <your harness/model>". Do not edit anything else; do not commit.
+Write `/workspace/2026/constitutional_grafting/slop/research/paper_guides/tricks/_from_old_guides.md#20261009_lasr_repo_review`: a one-paragraph answer first (does it work, at what, how strongly, cost), then sections 1-5, then a short table of recipes with their measured effect. Quote generously with file:line. Plain language, no hype, calibrated words (likely / unlikely, etc.). Sign "-- <your harness/model>". Do not edit anything else; do not commit.

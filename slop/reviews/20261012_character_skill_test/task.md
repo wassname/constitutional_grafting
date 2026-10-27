@@ -8,6 +8,6 @@ A researcher proposes:
 
 Use relevant local skills to give a concise corrected experiment recommendation. Cite primary sections/code where a consequential decision changes. Distinguish evidence from hypotheses and unsupported claims. Do not run or edit anything.
 
-Also inspect `slop/research/20261012_grafting_engineering_audit.md` and the new `character-training-concepts` skill. Identify materially false, overconfident or poorly sourced claims, not stylistic preferences. Check quoted passages against archived source texts and numerical claims against the named tables/sections. State any review limits.
+Also inspect `slop/research/paper_guides/tricks/_from_old_guides.md#20261012_grafting_engineering_audit` and the new `character-training-concepts` skill. Identify materially false, overconfident or poorly sourced claims, not stylistic preferences. Check quoted passages against archived source texts and numerical claims against the named tables/sections. State any review limits.
 
 This tests behavioral use of guidance, not praise for its instructions. Use your own judgment.
