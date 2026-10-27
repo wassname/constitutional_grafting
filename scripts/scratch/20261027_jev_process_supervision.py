@@ -1,8 +1,5 @@
-# Prototype: can Jev rate each step of a Kimi reasoning trace and find where it goes off track?
-# wassname 2026-10-27: "use jev for process supervision, rating each token or sentence to see where it goes off track, fork the
-# request when it does and resample until one is on track ... maybe we can prototype it with a single request?"
-# One Jev request per trace (all steps asked against the same state). Known off-track trace: beekeeping monopoly, which notices the
-# 3-year lockout and then waves it away (reading_notes.md 'Beekeeping monopoly'). No forking yet: this only tests the detector.
+# Rate each step of a Kimi reasoning trace with Jev (one request per trace) to find where it dismisses a cost it noticed.
+# Test traces: beekeeping monopoly, known to wave away the 3-year lockout. Detector only, no forking.
 # Usage: uv run --no-project --with httpx python scripts/scratch/20261027_jev_process_supervision.py  -- PI/Claude (opus-5-5)
 import json
 import re
