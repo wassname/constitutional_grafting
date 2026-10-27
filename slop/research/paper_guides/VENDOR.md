@@ -74,3 +74,17 @@ Discovery source: [Geodesic's official writing feed](https://geodesicresearch.ai
 - Scope of validation: artifact/source-presence and metadata consistency only. No dependency installation, upstream test suite, training or paid evaluation was run. Links and remote HEADs are an audit-date snapshot, not guaranteed future availability.
 
 -- PI/gpt-6.1-sol, 2026-10-27
+
+## Data-pipeline references (added 2026-10-27)
+
+From the GitHub survey `slop/research/20261027_data_pipelines_survey.md` (§4). Reference source only, not dependencies; read with `~/.pi/agent/skills/ml-debug/references/engineering_lit_review.md`.
+
+| Repo | Vendored path @ commit | Why | Clone |
+|:--|:--|:--|:--|
+| [allenai/open-instruct](https://github.com/allenai/open-instruct) | `docs/vendor/open_instruct` @ `720c4131` | persona-driven request prompts, identity filter, token-label/EOS/truncation contracts, fix history | partial (`--filter=blob:limit=1m`), 52 MB tree |
+| [huggingface/llm-swarm](https://github.com/huggingface/llm-swarm) | `docs/vendor/llm_swarm` @ `c3249dbf` | constitutional critique → revision generator (`examples/constitutional-ai/`) | shallow |
+| [huggingface/smollm](https://github.com/huggingface/smollm) | `docs/vendor/smollm` @ `438be18d` | SmolTalk annotation pipeline, IFEval-checked filtering | shallow |
+| [huggingface/alignment-handbook](https://github.com/huggingface/alignment-handbook) | `docs/vendor/alignment_handbook` @ `53c11c32` | CAI / SmolLM training configs | shallow |
+| [safety-research/persona_vectors](https://github.com/safety-research/persona_vectors) | `docs/vendor/persona_vectors` @ `b8e0f044` | trait-probe generation prompts, coherence filter (diagnostic) | partial, 59 MB tree |
+
+Not vendored: allenai/wildteaming and SpecAlign (licence field empty; read remotely at the pins in the survey), Hermes function-calling, GPTeacher, Pythia, Dolma (low value for us).

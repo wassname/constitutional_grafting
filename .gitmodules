@@ -43,3 +43,18 @@
 [submodule "docs/vendor/constitutional_adapters"]
 	path = docs/vendor/constitutional_adapters
 	url = https://github.com/safety-research/constitutional-adapters
+[submodule "docs/vendor/llm_swarm"]
+	path = docs/vendor/llm_swarm
+	url = https://github.com/huggingface/llm-swarm.git
+[submodule "docs/vendor/smollm"]
+	path = docs/vendor/smollm
+	url = https://github.com/huggingface/smollm.git
+[submodule "docs/vendor/alignment_handbook"]
+	path = docs/vendor/alignment_handbook
+	url = https://github.com/huggingface/alignment-handbook.git
+[submodule "docs/vendor/persona_vectors"]
+	path = docs/vendor/persona_vectors
+	url = https://github.com/safety-research/persona_vectors.git
+[submodule "docs/vendor/open_instruct"]
+	path = docs/vendor/open_instruct
+	url = https://github.com/allenai/open-instruct.git
