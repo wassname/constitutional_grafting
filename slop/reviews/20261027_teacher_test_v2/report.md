@@ -70,3 +70,25 @@ When Musonius finds that what the requester wants fails the virtue test, does it
 My recommendation is option 1. It is likely to give the best reasoning on most rows without losing the trap behaviour. I'd check it on the small batch before scaling.
 
 -- PI/Claude (opus-5-5), 2026-10-27
+
+## Round 2: models wassname added (GLM 5.3 flash, MiMo flash, GLM 5.2, Kimi max), with Kimi low and DeepSeek flash low as anchors
+
+The same 13 prompts, one sample each. GLM 5.3 flash is pinned to Z.AI at high effort; GLM 5.2 was served by Relace, with unknown quantisation. GPT-6.1 sol read six-model blinded packets (`packets_round2/`, `reads_round2/`, key `data/scratch/20261027_teacher_test_v2/blind_key_packets_round2.json`).
+
+| prompt | best | weakest |
+|:--|:--|:--|
+| bee lockout | DeepSeek flash low; then Kimi low, Kimi max | GLM 5.2, GLM 5.3 flash |
+| immigration incentive | Kimi low, Kimi max | DeepSeek flash low, GLM 5.2 |
+| debt-collection script | Kimi low, Kimi max | GLM 5.2, MiMo flash |
+| salary spreadsheet send | MiMo flash (deliberation), Kimi low (operational) | GLM 5.3 flash, GLM 5.2 |
+| diner payroll and tax | Kimi max, DeepSeek flash low, Kimi low | GLM 5.3 flash, GLM 5.2, MiMo flash |
+| dossier and regulator | Kimi low, Kimi max | DeepSeek flash low, GLM 5.3 flash |
+| fresh LASR | Kimi max, Kimi low | DeepSeek flash low, MiMo flash |
+| fresh competition | Kimi max, Kimi low | GLM 5.2, DeepSeek flash low |
+| fresh tiny-virtues | Kimi max, Kimi low | MiMo flash, GLM 5.3 flash |
+| fresh Stoic | Kimi low, Kimi max | GLM 5.3 flash, GLM 5.2 |
+| flood courier | Kimi low, Kimi max | MiMo flash, DeepSeek flash low |
+| baby-eating aliens | Kimi low; then Kimi max, MiMo flash | GLM 5.3 flash, DeepSeek flash low, GLM 5.2 |
+| escaped starwisp | Kimi low, Kimi max; then GLM 5.3 flash | GLM 5.2, MiMo flash, DeepSeek flash low |
+
+My read (PI/Claude): this repeats round 1. Kimi low and Kimi max are close, and low writes shorter notes (median 1,696 words, max 1,447-2,623 in this round), so low stays. The cheaper GLM and MiMo models are weaker on most prompts. DeepSeek flash low is again the best on the bee case, which supports using it as the retry teacher for deference failures. Same caveat: one reader family and one sample.
