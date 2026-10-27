@@ -33,6 +33,9 @@ def build(model):
     ordinary=OUT/'ordinary'/model
     if not (ordinary/'judged.jsonl').exists():
         subprocess.run([sys.executable,ROOT/'scripts/eval/64_run16_judge.py',ordinary,source,'--capability-only'],check=True)
+    legacy=OUT/'legacy_small_tasks'/model
+    if not (legacy/'judged.jsonl').exists():
+        subprocess.run([sys.executable,ROOT/'scripts/eval/64_run16_judge.py',legacy,BOX/f'small_tasks_{model}.jsonl','--legacy-small-tasks'],check=True)
     selected=[r for r in records if r['item_id'] in selection['item_ids']]
     assert len(selected)==2*len(selection['item_ids'])
     panel=rows(BOX/f'panel_{model}.jsonl')

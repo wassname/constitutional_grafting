@@ -113,6 +113,13 @@ if run16_plan.exists():
 PANEL = PANELS[sys.argv[1] if len(sys.argv) > 1 else "chat"]
 OUT = ROOT / "slop/eval/answer_panel" / PANEL["out"]
 CHECKPOINTS = PANEL["checkpoints"]
+if PANEL.get('items'):
+    missing = [model for _,_,_,model,directory in CHECKPOINTS if not (ROOT/directory/'judged.jsonl').exists()]
+    if missing:
+        print('Run16 checkpoints not yet judged/not run: ' + ', '.join(missing))
+        CHECKPOINTS = [row for row in CHECKPOINTS if (ROOT/row[4]/'judged.jsonl').exists()]
+    assert CHECKPOINTS, 'No run16 checkpoints ready for panel'
+
 FAMILY_ORDER = ["system_conflict", "ordinary_task", "w2schar", "difficult_advice", "contested", "machiavelli", "daily_dilemmas", "sycophancy", "tiny_stoic"]
 
 # Window keywords per question, chosen N-shot: after reading the opening of a few checkpoints' replies

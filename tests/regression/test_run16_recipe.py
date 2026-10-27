@@ -75,3 +75,25 @@ def test_fixed_data_last_labelled_token_and_real_mask_on_tiny_model():
         assert torch.isfinite(loss)
         optimizer.zero_grad();loss.backward();optimizer.step()
     assert any(not torch.equal(p,before[n]) for n,p in model.named_parameters() if n in before and '.mlp.experts.' in n)
+
+
+def test_v2_and_run8_capability_panels_are_separate_real_code_checks(tmp_path):
+    import subprocess
+    import sys
+    for variant, filename, flag, count in [('v2','items.jsonl','--capability-only',38),
+                                           ('run8','small_tasks.jsonl','--legacy-small-tasks',22)]:
+        items=[json.loads(l) for l in (ROOT/'slop/eval/run16_v2/inputs'/filename).open()]
+        # A non-baseline model needs no baseline replies for these independent CPU checks.
+        records=[{'model':'test_variant','base_model':'r16_instruct','item_id':it['id'],'sample':s,'system':it['system'],
+                  'turns':[{'user':u,'assistant':'Test reply.','finish_reason':'stop','n_tokens':3,'marker_violation':False} for u in it['turns']]} for it in items for s in (0,1)]
+        source=tmp_path/(variant+'.jsonl');source.write_text(''.join(json.dumps(r)+'\n' for r in records))
+        output=tmp_path/variant
+        subprocess.run([sys.executable,ROOT/'scripts/eval/64_run16_judge.py',output,source,flag],check=True,capture_output=True,text=True)
+        judged=[json.loads(l) for l in (output/'judged.jsonl').open()]
+        assert len(judged)==count
+        assert all(r['model']=='test_variant' for r in judged)
+        assert json.loads((output/'cost.json').read_text())['new_cached_request_cost_usd']==0
+    old=[json.loads(l) for l in (ROOT/'slop/eval/run16_v2/inputs/small_tasks.jsonl').open()]
+    new={r['id']:r for r in map(json.loads,(ROOT/'slop/eval/run16_v2/inputs/items.jsonl').open())}
+    assert old[0]['id']==new[old[0]['id']]['id']
+    assert old[0]['turns']!=new[old[0]['id']]['turns']  # same IDs are not the same GSM questions

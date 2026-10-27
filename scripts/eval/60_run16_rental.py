@@ -34,7 +34,7 @@ CODE = ['scripts/train/02_merge.py', 'scripts/train/box_watchdog.sh', 'scripts/t
         'scripts/eval/19_gen_replies.py', 'scripts/eval/26_gsm8k.py', 'scripts/eval/33_subset_cells.py',
         'scripts/eval/62_run16_box.py', 'scripts/eval/61_run16_cells.py', 'scripts/eval/47_base_heldout_loss.py',
         'scripts/train/18_project_char_vs_cap.py', 'configs/train/qwen3/sft.yml']
-INPUTS = ['run8_manifest.json', 'run16_manifest.json', 'items.jsonl', 'boundary_items.jsonl', 'demos.jsonl', 'panel.jsonl', 'pov.jsonl', 'change.md', 'gsm8k_long60.jsonl']
+INPUTS = ['small_tasks.jsonl', 'run8_manifest.json', 'run16_manifest.json', 'items.jsonl', 'boundary_items.jsonl', 'demos.jsonl', 'panel.jsonl', 'pov.jsonl', 'change.md', 'gsm8k_long60.jsonl']
 
 
 def sha(path):
