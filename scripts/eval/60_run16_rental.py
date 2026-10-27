@@ -198,12 +198,82 @@ def run():
     print('RUN16 RETRIEVED; exact instance destroyed', flush=True)
 
 
+def parallel_attach():
+    """Resume this exact lease with six streams and earliest-need scheduling; never creates an instance."""
+    state=json.loads(rental.STATE.read_text())
+    plan=json.loads((OUT/'plan.json').read_text())
+    ssh,host=rental.saved_connection(state)
+    assert any(r['id']==state['instance_id'] and r['label']==rental.LABEL for r in rental.api('/instances/')['instances'])
+    assert (rental.OUT/'deadline_guard_armed.json').exists()
+    stop=threading.Event()
+    def remote(command,timeout=600,**kwargs):
+        left=state['hard_destroy_epoch']-time.time()-120
+        assert left>0
+        return subprocess.run(ssh+[host,command],check=True,timeout=min(timeout,left),**kwargs)
+    def beat():
+        while not stop.wait(60):
+            remote('touch /workspace/heartbeat',timeout=15,stdout=subprocess.DEVNULL)
+    def upload(name):
+        source=plan['adapters'][name]; target='/workspace/cg/outputs/up_'+name
+        remote('mkdir -p '+target,timeout=30)
+        started=time.time()
+        with (rental.OUT/f'upload_{name}_parallel.log').open('w') as log:
+            subprocess.run(['rsync','-az','--partial','--info=progress2','-e',shlex.join(ssh),
+                source['path']+'/adapter_config.json',source['path']+'/adapter_model.safetensors',host+':'+target+'/'],
+                check=True,stdout=log,stderr=subprocess.STDOUT,timeout=max(1,state['runner_deadline_epoch']-time.time()-4*3600))
+        expected={target+'/'+f:v['sha256'] for f,v in source['files'].items()}
+        verify='import hashlib; files='+repr(expected)+"; assert all(hashlib.file_digest(open(p,'rb'),'sha256').hexdigest()==s for p,s in files.items())"
+        remote('python -c '+shlex.quote(verify),timeout=300)
+        receipt={'name':name,'files':expected,'seconds':time.time()-started,'verified_epoch':time.time(),'instance_id':state['instance_id']}
+        data=json.dumps(receipt,indent=2)+'\n'
+        (rental.OUT/f'upload_{name}.verified.json').write_text(data)
+        remote('cat > /workspace/cg/runs/run10/upload_'+name+'.verified.json',input=data.encode(),timeout=30)
+        print('REMOTE ADAPTER VERIFIED '+name,flush=True)
+    def prep_wait():
+        remote("while [ ! -f /workspace/cg/runs/run10/prep.done ]; do sleep 10; done",timeout=5400)
+    remote('touch /workspace/heartbeat',timeout=30)
+    # The old controller transferred the package before uploads. These two approved source changes replace it explicitly.
+    for path in ['scripts/train/spectral_plugin.py','scripts/eval/62_run16_box.py']:
+        subprocess.run(['rsync','-az','-e',shlex.join(ssh),str(ROOT/path),host+':/workspace/cg/'+path],check=True,timeout=60)
+    changes={p:sha(ROOT/p) for p in ['scripts/train/spectral_plugin.py','scripts/eval/62_run16_box.py']}
+    (rental.OUT/'transport_source_override.json').write_text(json.dumps(changes,indent=2)+'\n')
+    pool=concurrent.futures.ThreadPoolExecutor(max_workers=9)
+    heartbeat=pool.submit(beat)
+    prep=pool.submit(prep_wait)
+    # Six simultaneous files; Stoic starts from the safely retained partial. No checkpoints or old P64 are sent.
+    pending={name:pool.submit(upload,name) for name in ['stoic','const','other','rewr','mix_stoic','mix_const']}
+    try:
+        for name in ['stoic','const','other']: pending[name].result()
+        # The three needed streams are free; replay control transfers during training.
+        pending['ctl']=pool.submit(upload,'ctl')
+        prep.result()
+        command=f'cd /workspace/cg && HF_HOME=/workspace/hf RUN16_DEADLINE={state["runner_deadline_epoch"]} python scripts/eval/62_run16_box.py'
+        script=f'set +e; {command} > runs/run10/job.log 2>&1; status=$?; echo $status > runs/run10/job.exit; exit $status'
+        remote('cd /workspace/cg && tmux new-session -d -s run10_train '+shlex.quote('bash -lc '+shlex.quote(script)),timeout=30)
+        print('NEW-D DRIVER STARTED after three doc donors, other uploads continue',flush=True)
+        for future in pending.values(): future.result()
+        rental.monitor(remote,lambda:max(1,state['runner_deadline_epoch']-time.time()),stop,heartbeat)
+    finally:
+        try:
+            try: rental.retrieve_outputs(ssh,host,state)
+            finally: rental.destroy()
+            assert all(r['id']!=state['instance_id'] for r in rental.api('/instances/')['instances'])
+            after=rental.api('/users/current/')
+            (OUT/'provider_closure_verified.json').write_text(json.dumps({'instance_id':state['instance_id'],'absent_confirmed':True,
+                'elapsed_hours':(time.time()-state['created_epoch'])/3600,
+                'estimated_gpu_usd':(time.time()-state['created_epoch'])/3600*state['hourly_rate'],
+                'credit_after':after['credit'],'note':'GPU elapsed-rate estimate, not invoice-reconciled; traffic/API separate'},indent=2)+'\n')
+        finally:
+            stop.set();pool.shutdown(wait=True)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action',choices=['run','snapshot','approve-gate','destroy'])
+    parser.add_argument('action',choices=['run','parallel-attach','snapshot','approve-gate','destroy'])
     args=parser.parse_args()
-    if args.action=='run':
-        with rental.controller_owner(): run()
+    if args.action in ['run','parallel-attach']:
+        with rental.controller_owner():
+            run() if args.action=='run' else parallel_attach()
     elif args.action=='destroy': rental.destroy()
     else:
         state=json.loads(rental.STATE.read_text()); ssh,host=rental.saved_connection(state)
