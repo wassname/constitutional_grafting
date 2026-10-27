@@ -126,6 +126,7 @@ Rules:
 
 - Before training decisions, read `concepts-character-training`; for weight steering use `concepts-steering` / `steering-persona`. Read the relevant primary paper and reference code before implementing. State who read what, and distinguish author claims, observations and inference.
 - Use `ml-debug` and `auditlog` for consequential runs. Investigate bugs and misconceptions before calling a result negative; spot-check the actual training and evaluation text.
+- Before a large GPU rental, run the real box driver end to end on a small cheap GPU with a tiny real model: real axolotl, real vLLM, every stage, two items each. Stub dry runs miss real-tool errors; run 16 lost two leases' time to three of them. Prefer one maintained box driver with a per-run config over a new copy per run. <!-- PI/Claude, 2026-10-28 -->
 - Run `just --list` before writing a new script: maintained commands (results pages, `answer-panel`, data builds, smoke tests) are there with one-line descriptions.
 - Use uv and the justfile. Keep runnable stages in `scripts/data/`, `scripts/train/`, `scripts/eval/`. Smoke tests must exercise real pipeline code.
 - Put agent plans, research, audits and reviews in `slop/`; commit them by default and sign them. Keep machine-only material in `.local/`. Never touch files with `human` in the path or publish without editorial approval.
