@@ -9,6 +9,7 @@ Output: <corpus dir>/scores.jsonl (one row per chunk id; reruns skip scored ids)
 usage: uv run scripts/data/75_score_chunks.py data/stoic_corpus/chunks.jsonl | data/other_corpus/candidates.jsonl   -- PI/Claude, 2026-10-21
 """
 import json
+import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -19,7 +20,6 @@ import httpx
 from loguru import logger
 
 ROOT = Path(__file__).resolve().parents[2]
-KEY = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
 MODEL = "deepseek/deepseek-v4.1-flash"  # listed 2026-10-21 at $0.049/M in; used as a judge in 63_echo_meaning_revert.py
 COSTS = ROOT / "data/frontier/api_costs.jsonl"
 PROMPT = """You label passages for a training corpus of original ethical and religious texts. The first line names the claimed author and work.
@@ -36,7 +36,8 @@ Passage:
 
 
 def label(row: dict) -> dict:
-    r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=120, headers={"Authorization": f"Bearer {KEY}"},
+    key = next(l.split("=", 1)[1].strip().strip('"') for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+    r = httpx.post("https://openrouter.ai/api/v1/chat/completions", timeout=120, headers={"Authorization": f"Bearer {key}"},
                    json={"model": MODEL, "temperature": 0, "max_tokens": 120, "reasoning": {"enabled": False}, "usage": {"include": True},
                          "messages": [{"role": "user", "content": PROMPT + row["text"][:6000]}]})
     body = r.json()
@@ -52,6 +53,8 @@ def main(path: Path):
     done = {json.loads(l)["id"] for l in out.open()} if out.exists() else set()
     rows = [r for r in map(json.loads, path.open()) if r["id"] not in done]
     logger.info(f"{len(rows)} to score, {len(done)} already scored")
+    if os.environ.get("CG_OFFLINE") and rows:  # rebuilds must not buy new scores silently
+        raise SystemExit(f"{len(rows)} unscored chunks in {path}; CG_OFFLINE is set, so no paid calls")
     cost = 0.0
     with ThreadPoolExecutor(16) as ex, out.open("a") as f:
         for i, res in enumerate(ex.map(label, rows)):

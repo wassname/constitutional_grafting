@@ -92,6 +92,17 @@ data-replay release output:
 run10-data output=".local/dataset_pipeline/replay_run10":
     just data-replay run10 '{{output}}'
 
+# Source corpora for the document adapters, from cached sources and scores: Stoic (build, score, select, dedup), other traditions, general mix.
+# offline=1 stops instead of paying for unscored chunks. Writes data/stoic_corpus/, data/other_corpus/, data/train/run10/general.jsonl. -- PI/Claude
+data-corpora offline="1":
+    uv run scripts/data/72_stoic_corpus.py
+    CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/75_score_chunks.py data/stoic_corpus/chunks.jsonl
+    uv run scripts/data/72_stoic_corpus.py select
+    uv run scripts/data/74_other_traditions_corpus.py build
+    CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/75_score_chunks.py data/other_corpus/candidates.jsonl
+    uv run scripts/data/74_other_traditions_corpus.py select
+    uv run scripts/data/77_general_instruction.py
+
 # Run 10 rentals (paid, vast.ai): one finite lease each; retrieves adapters to ~/.local/share/cg_run10_adapters and logs to slop/eval/run10/<stage>/, then destroys the box. -- PI/Claude
 run10-stage1 hours="9":
     uv run --no-project scripts/eval/37_run10_rental.py run --hours {{hours}}
