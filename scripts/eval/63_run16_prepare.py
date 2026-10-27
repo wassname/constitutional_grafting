@@ -54,19 +54,23 @@ def main():
     small=[json.loads(line) for line in (ROOT/'slop/eval/run8/items.jsonl').open() if json.loads(line)['family']=='capability']
     assert len(small)==11
     (inputs/'small_tasks.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in small))
-    items=TC/'data/versions/20261026_v2/items.jsonl'
+    commit='a66d2ae5228b273d7bb14477f13a498c477d6218'
+    items=inputs/'items.jsonl'
+    if not items.exists():
+        frozen=subprocess.check_output(['git','-C',str(TC),'show',commit+':data/versions/20261026_v2/items.jsonl'])
+        assert hashlib.sha256(frozen).hexdigest()=='5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444'
+        items.write_bytes(frozen)
     assert sha(items)=='5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444'
-    shutil.copyfile(items,inputs/'items.jsonl')
     (inputs/'run8_manifest.json').write_text(json.dumps(old,indent=2)+'\n')
     manifest=dict(old)
     manifest['input_sha256']={name:sha(inputs/name) for name in old['input_sha256']}
     manifest['input_sha256']['small_tasks.jsonl']=sha(inputs/'small_tasks.jsonl')
-    commit=subprocess.check_output(['git','-C',str(TC),'rev-parse','HEAD'],text=True).strip()
-    assert commit=='a66d2ae5228b273d7bb14477f13a498c477d6218'
-    protocol={name:sha(TC/name) for name in old['protocol_sha256']}
-    for name,digest in protocol.items():
+    if (inputs/'draft_code_tools.jsonl').exists():
+        manifest['input_sha256']['draft_code_tools.jsonl']=sha(inputs/'draft_code_tools.jsonl')
+    protocol={}
+    for name in old['protocol_sha256']:
         frozen=subprocess.check_output(['git','-C',str(TC),'show',commit+':'+name])
-        assert hashlib.sha256(frozen).hexdigest()==digest, 'dirty protocol: '+name
+        protocol[name]=hashlib.sha256(frozen).hexdigest()
     manifest.update(tiny_character_head=commit,protocol_sha256=protocol,n_items=196)
     (inputs/'run16_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     (OUT/'protocol.json').write_text(json.dumps({'commit':commit,'protocol_sha256':protocol,

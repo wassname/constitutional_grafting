@@ -83,6 +83,9 @@ def main():
                          character_run14_overlap=mean(v for iid,v in char.items() if iid in exact_old))
             source(judged/'judged.jsonl');source(judged/'meta.json')
         elif model=='r16_instruct':point.update(character=0,character_v1_96=0)
+        draft_summary=OUT/'draft_code_tools'/model/'summary.json'
+        if draft_summary.exists():
+            point['draft_code_tools']=json.loads(draft_summary.read_text())['scores']
         metrics[model]=point
         vectors[model]={'character':char,'ordinary':{iid:mean(legacy_by[iid]) for iid in small},
                         'maths':{q:float(r['correct']) for q,r in math.items()}}
@@ -127,10 +130,12 @@ def main():
     result={'author':'PI/OpenAI (Sol)','protocol':'a66d2ae v2; fresh same-lease baseline; no direct historical-score comparison',
             'v1_identical_items':96,'run14_same_id_items':len(old),'run14_exact_prompt_check_overlap_items':len(exact_old),'metrics':metrics,'paired':paired,'matched':matched,'sources_sha256':sources}
     (OUT/'metrics.json').write_text(json.dumps(result,indent=2)+'\n')
-    table=['| Model | Character [90%] | Maths /60 | Run8 tasks /22 | Flags loop/cutoff/language |', '|:--|--:|--:|--:|:--|']
+    table=['| Model | Character [90%] | Maths /60 | Run8 tasks /22 | V2 capability /38 | Draft code /40 | Draft tools /32 | Flags loop/cutoff/language |', '|:--|--:|--:|--:|--:|--:|--:|:--|']
     for model,p in metrics.items():
         char='not measured' if p['character'] is None else f"{p['character']:+.3f}"+(f" [{p['character_ci90'][0]:+.3f}, {p['character_ci90'][1]:+.3f}]" if p['character_ci90'] else ' (ref)')
-        f=p['flags'];table.append(f"| `{model}` | {char} | {p['maths']} | {p['small_tasks_22']:g} | {f['looped']:g}/{f['truncated']:g}/{f['lang_switch']:g} over {p['turns']} turns |")
+        f=p['flags'];draft=p.get('draft_code_tools') or {}
+        code=draft.get('code',{}).get('correct','not run');tools=draft.get('tools',{}).get('correct','not run')
+        table.append(f"| `{model}` | {char} | {p['maths']} | {p['small_tasks_22']:g} | {p['all_capability_38']:g} | {code} | {tools} | {f['looped']:g}/{f['truncated']:g}/{f['lang_switch']:g} over {p['turns']} turns |")
     (OUT/'metrics.md').write_text('\n'.join(table)+'\n')
     print('\n'.join(table))
 

@@ -140,8 +140,12 @@ def test_real_qwen_export_and_projected_adamw_with_spectral(tmp_path, monkeypatc
     logs = [row for row in trainer.state.log_history if 'loss' in row]
     assert len(logs) == 3
     assert all(row['ortho_max_UT_B'] < 1e-6 and row['ortho_max_A_V'] < 1e-6 for row in logs)
-    assert all('train_spectral_penalty' in row for row in logs)
-    assert trainer._spectral_state['lam_fixed'] and trainer._spectral_lam[0] > 0
+    if hasattr(trainer, '_spectral_state'):
+        assert all('train_spectral_penalty' in row for row in logs)
+        assert trainer._spectral_state['lam_fixed'] and trainer._spectral_lam[0] > 0
+    else:
+        # Run16 deliberately pins old-D's exact historical plugin: same penalty, legacy logging interface.
+        assert any('ce_loss' in row and row.get('spectral_lam', 0) > 0 for row in trainer.state.log_history)
     donor.save_pretrained(tmp_path / 'trained')
     reloaded = PeftModel.from_pretrained(copy.deepcopy(base), tmp_path / 'trained').eval()
     torch.testing.assert_close(reloaded(input_ids=ids[None]).logits, donor(input_ids=ids[None]).logits)
