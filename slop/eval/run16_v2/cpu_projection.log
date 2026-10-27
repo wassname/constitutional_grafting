@@ -1,0 +1,3 @@
+uv run --no-project --with torch --with peft --with jaxtyping --with beartype --with safetensors --with pytest --with transformers python -m pytest -q -p no:cacheprovider tests/regression/test_chat_projection.py tests/regression/test_char_cap_projection.py
+.......                                                                  [100%]
+7 passed in 19.80s

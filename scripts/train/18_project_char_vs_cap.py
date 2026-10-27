@@ -5,7 +5,8 @@ Per LoRA module, with per-token input second moments C_char, C_cap measured on t
     Q = C_cap V_keep V_keepᵀ       each row of A is a functional a; its coordinates u = Vᵀ C_cap a split its energy:
     A′ = A Q                       aᵀC_cap a = Σ u_i², aᵀC_char a = Σ λ_i u_i². Dropping small-λ u_i lowers both, never raises.
                                    Input side only; LoRA rank, B and scale unchanged.
-V_keep = {v : λ ≥ τ}. One global τ, set so the removed weight energy matches --removed-energy (run-14 P₆₄ removed 0.15).
+V_keep = {v : λ ≥ τ}. One global τ, set so the removed component ‖ΔW − ΔW′‖²/‖ΔW‖² matches --removed-energy (run-14 P₆₄ removed 0.15).
+Q is oblique in the weight metric, so this differs from the norm loss 1 − ‖ΔW′‖²/‖ΔW‖² (both are reported).
 This is the input-side (activation) half of a K-FAC curvature estimate: output-gradient covariance is taken as I.
 Routed-expert gate_up reads the layer-wide MoE input covariance: per-expert hidden covariances (256×2048² per layer) do not fit.
 Routed-expert down_proj uses per-expert covariances, shrunk toward the layer's pooled expert covariance with --shrink tokens.
@@ -131,21 +132,21 @@ def collect(args):
 
 
 def load_moments(paths: list[Path], shrink: float) -> dict[str, Tensor]:
-    """Merge layer shards and return per-token second moments; expert_down is shrunk toward the layer's pooled expert moment."""
-    total, count = {}, {}
+    """Merge layer shards into float32 per-token second moments, one shard in memory at a time.
+    expert_down is shrunk toward the layer's pooled expert moment."""
+    moments = {}
     for path in paths:
         blob = torch.load(path, weights_only=False)
-        for key, value in blob['sum'].items():
-            assert key not in total, f'{key} in two shards'
-            total[key], count[key] = value.double(), blob['tokens'][key]
-    moments = {}
-    for key, value in total.items():
-        if key.endswith('expert_down'):
-            n = count[key].double()
-            pooled = value.sum(0) / n.sum()
-            moments[key] = (value + shrink * pooled) / (n + shrink)[:, None, None]
-        else:
-            moments[key] = value / count[key]
+        for key in list(blob['sum']):
+            assert key not in moments, f'{key} in two shards'
+            value, n = blob['sum'].pop(key).double(), blob['tokens'][key]
+            if key.endswith('expert_down'):
+                n = n.double()
+                moments[key] = ((value + shrink * value.sum(0) / n.sum()) / (n + shrink)[:, None, None]).float()
+            else:
+                moments[key] = (value / n).float()
+            del value
+        del blob
     return moments
 
 
@@ -169,6 +170,41 @@ def projector(lam, V, cap, tau: float):
     return cap @ (V * (lam >= tau)[..., None, :].to(V.dtype)) @ V.mT
 
 
+def removed_energy(parts, tau: float) -> float:
+    """‖ΔW − ΔW′‖²_F / ‖ΔW‖²_F, the removed component, comparable to P₆₄'s (where it equals the norm loss).
+    parts: (λ, ARV, V, A, B) per module; A′ = (ARV ⊙ keep) Vᵀ, so no dense Q per candidate."""
+    total = removed = 0.
+    for lam, ARV, V, A, B in parts:
+        A2 = (ARV * (lam >= tau)[..., None, :].to(ARV.dtype)) @ V.mT
+        total += p16.frobenius_squared(A, B).sum().item()
+        removed += p16.frobenius_squared(A - A2, B).sum().item()
+    return removed / total
+
+
+def choose_tau(parts, target: float, tol: float) -> tuple[float, float]:
+    """τ whose removed energy is nearest the target. Removed energy is piecewise constant in τ, changing only at eigenvalues,
+    and is not monotone for an oblique Q, so search candidate eigenvalues (quantiles), then refine around the best. Fails if off by > tol."""
+    lam = torch.cat([p[0].reshape(-1).float().cpu() for p in parts])
+    lam = lam[torch.randperm(len(lam), generator=torch.Generator().manual_seed(0))[:2_000_000]].sort().values
+    def at(q):
+        return lam[(q * (len(lam) - 1)).round().long()].tolist()
+    candidates = sorted(set(at(torch.linspace(0, 1, 49)) + [0., float('inf')]))
+    scores = {t: removed_energy(parts, t) for t in candidates}
+    for _ in range(3):
+        best = min(scores, key=lambda t: abs(scores[t] - target))
+        i = candidates.index(best)
+        lo, hi = candidates[max(i - 1, 0)], candidates[min(i + 1, len(candidates) - 1)]
+        inside = lam[(lam > lo) & (lam < min(hi, lam[-1].item() + 1))]
+        if len(inside) == 0:
+            break
+        new = [inside[k].item() for k in torch.linspace(0, len(inside) - 1, 17).round().long().unique().tolist()]
+        scores.update({t: removed_energy(parts, t) for t in new if t not in scores})
+        candidates = sorted(scores)
+    best = min(scores, key=lambda t: abs(scores[t] - target))
+    assert abs(scores[best] - target) <= tol, f'nearest removed energy {scores[best]:.3f} vs target {target:.3f}; use --tau or widen --tol'
+    return best, scores[best]
+
+
 def input_energy(A, B, C):
     """tr(BᵀB · A C Aᵀ) summed over the batch: mean squared change of the module output per token, up to the LoRA scale²."""
     return ((B.mT @ B) * (A @ C @ A.mT)).sum(dim=(-2, -1)).sum().item()
@@ -189,51 +225,56 @@ def project(args):
     experts = next(v.shape[0] for k, v in cap.items() if k.endswith('expert_down'))
     eig = {}
     for key in cap:  # eigendecomposition in float64, stored float32 to fit 40 layers × 256 experts × 512² on one GPU
-        lam, V, ridged = generalized_eig(char[key].to(args.device), cap[key].to(args.device), args.eps)
-        eig[key] = (lam, V.float(), ridged.float())
+        lam, V, ridged = generalized_eig(char[key].double().to(args.device), cap[key].double().to(args.device), args.eps)
+        eig[key] = (lam.float(), V.float(), ridged.float())
     items = list(modules(args.adapter, experts, args.device))
     assert {cov_key(name) for _, name, _, _ in items} <= eig.keys(), sorted({cov_key(n) for _, n, _, _ in items} - eig.keys())[:5]
-    original = sum(p16.frobenius_squared(A, B).sum().item() for _, _, A, B in items)
-
-    def removed(tau):
-        kept = sum(p16.frobenius_squared(A @ projector(*eig[cov_key(name)], tau), B).sum().item() for _, name, A, B in items)
-        return 1 - kept / original
-
-    if args.tau is None:  # removed Frobenius energy is not monotone in τ (Q is oblique in the plain weight metric): grid, not bisection
-        low, high = min(v[0].min().item() for v in eig.values()), max(v[0].max().item() for v in eig.values())
-        assert low > 0
-        grid = torch.logspace(torch.log10(torch.tensor(low)), torch.log10(torch.tensor(high)), 40).tolist()
-        tau = min(grid, key=lambda t: abs(removed(t) - args.removed_energy))
+    parts = []
+    for _, name, A, B in items:
+        lam, V, R = eig[cov_key(name)]
+        parts.append((lam, A @ R @ V, V, A, B))
+    if args.tau is None:
+        tau, removed = choose_tau(parts, args.removed_energy, args.tol)
     else:
-        tau = args.tau
+        tau, removed = args.tau, removed_energy(parts, args.tau)
     args.output.mkdir(parents=True, exist_ok=False)
     source = load_file(str(args.adapter / 'adapter_model.safetensors'))
     out, rows = dict(source), []
-    for stem, name, A, B in items:
+    for (stem, name, A, B), (lam, ARV, V, _, _) in zip(items, parts):
         key = cov_key(name)
-        Q = projector(*eig[key], tau)
-        A2 = A @ Q
+        A2 = (ARV * (lam >= tau)[..., None, :].to(ARV.dtype)) @ V.mT
         packed_a, _ = p16.pack_factors(A2.float(), B.float())
         out[stem + '.lora_A.weight'] = packed_a.cpu().contiguous()
-        C_char, C_cap = char[key].float().to(args.device), cap[key].float().to(args.device)
-        rows.append({'parameter': name, 'key': key, 'dropped_directions_mean': float((eig[key][0] < tau).double().sum(-1).mean()),
-                     'weight_energy': [p16.frobenius_squared(A, B).sum().item(), p16.frobenius_squared(A2, B).sum().item()],
-                     'char_energy': [input_energy(A, B, C_char), input_energy(A2, B, C_char)],
-                     'cap_energy': [input_energy(A, B, C_cap), input_energy(A2, B, C_cap)]})
+        R = eig[key][2]
+        ridge = R - cap[key].to(args.device)
+        C_char_r = char[key].to(args.device) + ridge
+        raw_char, raw_cap = char[key].to(args.device), cap[key].to(args.device)
+        rows.append({'parameter': name, 'key': key, 'dropped_directions_mean': float((lam < tau).float().sum(-1).mean()),
+                     'weight_energy': [p16.frobenius_squared(A, B).sum().item(), p16.frobenius_squared(A2, B).sum().item(),
+                                       p16.frobenius_squared(A - A2, B).sum().item()],
+                     'char_energy_ridged': [input_energy(A, B, C_char_r), input_energy(A2, B, C_char_r)],
+                     'cap_energy_ridged': [input_energy(A, B, R), input_energy(A2, B, R)],
+                     'char_energy_raw': [input_energy(A, B, raw_char), input_energy(A2, B, raw_char)],
+                     'cap_energy_raw': [input_energy(A, B, raw_cap), input_energy(A2, B, raw_cap)]})
     shutil.copyfile(args.adapter / 'adapter_config.json', args.output / 'adapter_config.json')
     save_file(out, str(args.output / 'adapter_model.safetensors'))
-    total = {k: [sum(r[k][i] for r in rows) for i in (0, 1)] for k in ('weight_energy', 'char_energy', 'cap_energy')}
+    total = {k: [sum(r[k][i] for r in rows) for i in range(len(rows[0][k]))]
+             for k in ('weight_energy', 'char_energy_ridged', 'cap_energy_ridged', 'char_energy_raw', 'cap_energy_raw')}
+    kept = {k: total[k][1] / total[k][0] for k in total if k != 'weight_energy'}
     report = {'author': 'PI/Claude (opus-5-5)', 'tau': tau, 'eps': args.eps, 'shrink': args.shrink,
-              'removed_weight_energy': 1 - total['weight_energy'][1] / total['weight_energy'][0],
-              'kept_char_input_energy': total['char_energy'][1] / total['char_energy'][0],
-              'kept_cap_input_energy': total['cap_energy'][1] / total['cap_energy'][0],
+              'removed_component_energy': total['weight_energy'][2] / total['weight_energy'][0],
+              'retained_norm_energy': total['weight_energy'][1] / total['weight_energy'][0],
+              **{f'kept_{k}': v for k, v in kept.items()},
               'source_adapter_sha256': sha(args.adapter / 'adapter_model.safetensors'), 'source_code_sha256': sha(__file__),
               'char': [str(p) for p in args.char], 'cap': [str(p) for p in args.cap],
               'adapter_sha256': sha(args.output / 'adapter_model.safetensors')}
+    assert abs(report['removed_component_energy'] - removed) < 1e-4, (report['removed_component_energy'], removed)
     (args.output / 'modules.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in rows))
     (args.output / 'projection.json').write_text(json.dumps(report, indent=2) + '\n')
-    print('SHOULD: kept_char_input_energy > kept_cap_input_energy; removed_weight_energy ≈ --removed-energy. -- PI/Claude', flush=True)
+    print('SHOULD: removed_component_energy ≈ --removed-energy; 0 < kept_cap_energy_ridged < kept_char_energy_ridged ≤ 1 (guaranteed);'
+          ' raw kept energies near the ridged ones (large gaps = ridge or rank deficiency dominating). -- PI/Claude', flush=True)
     print(json.dumps(report), flush=True)
+    assert 0 < kept['cap_energy_ridged'] < kept['char_energy_ridged'] <= 1 + 1e-6, kept
 
 
 def measure(args):
@@ -263,6 +304,7 @@ def main():
         if name == 'project':
             s.add_argument('adapter', type=Path); s.add_argument('output', type=Path)
             s.add_argument('--removed-energy', type=float, default=.15); s.add_argument('--tau', type=float)
+            s.add_argument('--tol', type=float, default=.02)
         else:
             s.add_argument('adapters', type=Path, nargs='+')
         s.add_argument('--char', type=Path, nargs='+', required=True); s.add_argument('--cap', type=Path, nargs='+', required=True)

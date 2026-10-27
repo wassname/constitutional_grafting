@@ -48,6 +48,50 @@ def test_projector_keeps_character_directions_and_drops_capability_ones():
     assert 0 < kept_cap < kept_char <= 1 + 1e-9
 
 
+def parts_for(C_char, C_cap, A, B, eps=1e-3):
+    lam, V, R = selector.generalized_eig(C_char, C_cap, eps)
+    return [(lam, A @ R @ V, V, A, B)]
+
+
+def test_removed_energy_is_the_removed_component_not_norm_loss():
+    # Sol review 20261027 finding 1: noncommuting moments, oblique Q; norm loss 0.15 hid a removed component of 3.3x.
+    C_cap = torch.tensor([[101., -10], [-10, 1]], dtype=torch.float64)
+    C_char = torch.tensor([[12., -1], [-1, .1]], dtype=torch.float64)
+    A = torch.tensor([[-0.5086472691944104, 0.8609750028549427]], dtype=torch.float64)
+    B = torch.ones(1, 1, dtype=torch.float64)
+    parts = parts_for(C_char, C_cap, A, B)
+    lam, ARV, V, _, _ = parts[0]
+    A2 = (ARV * (lam >= 1.)) @ V.mT
+    torch.testing.assert_close(selector.removed_energy(parts, 1.), ((A - A2).square().sum() / A.square().sum()).item())
+    assert selector.removed_energy(parts, 1.) > 3
+
+
+def test_tau_search_finds_target_in_clustered_spectrum():
+    # Sol review 20261027 finding 2: 40 log-spaced τ missed an exactly attainable 15%.
+    C_cap = torch.eye(6, dtype=torch.float64)
+    C_char = torch.diag(torch.tensor([1e-6, .9, .99, 1.01, 1.1, 1e6], dtype=torch.float64))
+    A = torch.diag(torch.tensor([.01, .14, .25, .25, .25, .10], dtype=torch.float64).sqrt())
+    tau, removed = selector.choose_tau(parts_for(C_char, C_cap, A, torch.eye(6, dtype=torch.float64)), .15, .01)
+    assert abs(removed - .15) <= .01, (tau, removed)
+
+
+def test_noncommuting_projection_keeps_ridged_order():
+    torch.manual_seed(21)
+    d = 12
+    def cov():
+        X = torch.randn(40, d, dtype=torch.float64) @ torch.randn(d, d, dtype=torch.float64)
+        return X.T @ X / 40
+    C_char, C_cap = cov(), cov()
+    lam, V, R = selector.generalized_eig(C_char, C_cap, 1e-3)
+    D = C_char + (R - C_cap)
+    A = torch.randn(5, d, dtype=torch.float64)
+    energy = lambda M, C: torch.trace(M @ C @ M.T)
+    for tau in lam.tolist()[1:-1]:
+        A2 = A @ selector.projector(lam, V, R, tau)
+        kc, kk = energy(A2, D) / energy(A, D), energy(A2, R) / energy(A, R)
+        assert 0 <= kk <= kc + 1e-9 and kc <= 1 + 1e-9
+
+
 def test_patched_experts_reproduce_model_output():
     torch.manual_seed(20)
     runner = load('heal_run', 'scripts/eval/57_run15_heal.py')
@@ -99,10 +143,10 @@ def test_collect_project_merge_on_tiny_model(tmp_path):
     assert moments['0.expert_down'].shape == (32, 16, 16)
     common = dict(char=[tmp_path / 'char_0.pt', tmp_path / 'char_1.pt'], cap=[tmp_path / 'cap_0.pt', tmp_path / 'cap_1.pt'],
                   eps=1e-3, shrink=256., device='cpu')
-    selector.project(SimpleNamespace(adapter=tmp_path / 'adapter', output=tmp_path / 'projected', removed_energy=.15, tau=None, **common))
+    selector.project(SimpleNamespace(adapter=tmp_path / 'adapter', output=tmp_path / 'projected', removed_energy=.15, tau=None, tol=.02, **common))
     report = json.loads((tmp_path / 'projected/projection.json').read_text())
-    assert abs(report['removed_weight_energy'] - .15) < .1, report
-    assert 0 < report['kept_cap_input_energy'] < report['kept_char_input_energy'] <= 1, report
+    assert abs(report['removed_component_energy'] - .15) <= .02, report
+    assert 0 < report['kept_cap_energy_ridged'] < report['kept_char_energy_ridged'] <= 1 + 1e-6, report
     selector.measure(SimpleNamespace(adapters=[tmp_path / 'adapter', tmp_path / 'projected'], **common))
     merged, count, experts = merge.merge_adapter(copy.deepcopy(model), str(tmp_path / 'projected'), 1., {})
     assert experts and count > 0

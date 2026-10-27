@@ -1,0 +1,12 @@
+............                                                             [100%]
+=============================== warnings summary ===============================
+tests/regression/test_ortho_plugin.py::test_real_qwen_export_and_projected_adamw_with_spectral
+  /home/code/.cache/uv/archive-v0/eHwsXpfr4u_Um3n-i_kKi/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following rank_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+    warnings.warn(
+
+tests/regression/test_ortho_plugin.py::test_real_qwen_export_and_projected_adamw_with_spectral
+  /home/code/.cache/uv/archive-v0/eHwsXpfr4u_Um3n-i_kKi/lib/python3.12/site-packages/peft/tuners/tuners_utils.py:1123: RuntimeWarning: The following alpha_pattern keys did not match any targeted module and were ignored: ['mlp\\.experts\\.down_proj', 'mlp\\.experts\\.gate_up_proj'].
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+12 passed, 2 warnings in 25.31s
