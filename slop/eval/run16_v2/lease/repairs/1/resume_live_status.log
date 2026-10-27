@@ -1,0 +1,20 @@
+JOB_EXIT
+DONE_CELLS
+EVAL_TAIL
+  ]
+}
+```
+SHOULD: every cell receives the identical frozen prompts and fp16 serving as run 8; merge reports below show nonzero routed-expert changes.
+
+TODO validate: coalition differences reflect the subsets' updates in this mixture, not what retraining without a subset would do (Sol, slop/research/20261020_data_attribution_methods.md).
+## r16_instruct: const×0
+Merge command: `/workspace/axolotl-venv/bin/python /workspace/cg/scripts/train/02_merge.py /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754 /workspace/cg/outputs/up_const /workspace/cg/runs/run10/merged_model 0.0`
+SERVER
+{"object":"list","data":[{"id":"r16_instruct","object":"model","created":1793099670,"owned_by":"vllm","root":"/workspace/cg/runs/run10/merged_model","parent":null,"max_model_len":16384,"permission":[{"id":"modelperm-885722ee6f93ac49","object":"model_permission","created":1793099670,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+GPU
+61 %, 87689 MiB
+TMUX
+driver_session_present
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)

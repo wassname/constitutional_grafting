@@ -1,0 +1,14 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+ARTIFACT VERIFIED runs/run10/eos_trained.json
+ARTIFACT VERIFIED runs/run10/eos_config_diff.json
+ARTIFACT VERIFIED runs/run10/p16_.json
+ARTIFACT VERIFIED runs/run10/p16out_.json
+ARTIFACT VERIFIED runs/run10/oldp_.json
+ARTIFACT VERIFIED runs/run10/old_projection_comparison.json
+ARTIFACT VERIFIED runs/run10/selector_gate.json
+ARTIFACT VERIFIED runs/run10/chat_resume_verified.json
+ARTIFACT VERIFIED outputs/r10_charcap/projection.json
+ARTIFACT VERIFIED outputs/r10_eos_chatr12/adapter_config.json
+ARTIFACT VERIFIED outputs/r10_eos_chatr12/adapter_model.safetensors

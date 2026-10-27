@@ -13,7 +13,7 @@ import types
 from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[2]
-CASES=('core','fallback','selector_fail_early','selector_fail_late','c_run','c_timeout','gate_invalid','gate_timeout','resume_chat','resume_corrupt')
+CASES=('core','fallback','selector_fail_early','selector_fail_late','c_run','c_timeout','gate_invalid','gate_timeout','resume_chat','resume_corrupt','resume_complete')
 
 
 def load(name,path):
@@ -99,13 +99,14 @@ def run_case(root,case,driver_path=None):
     with patch.dict(os.environ,env),patch.dict(sys.modules,{'torch':torch,'transformers':transformers,'huggingface_hub':hub}):
         try:
             driver.main()
-            if case in ['resume_chat','resume_corrupt']:
+            if case in ['resume_chat','resume_corrupt','resume_complete']:
                 for p in out.glob('r16_*.done'):p.unlink()
-                for name in ['anchored_gate.approved.json','anchored_gate_ready.json','anch_trained.json','anch_config_diff.json','anchp_.json','complete.json']:
-                    p=out/name
-                    if p.exists():p.unlink()
-                for name in ['r10_anch_chatr12','r10_anchp_64','projection_anchp_']:
-                    shutil.rmtree(root/'outputs'/name,ignore_errors=True)
+                if case!='resume_complete':
+                    for name in ['anchored_gate.approved.json','anchored_gate_ready.json','anch_trained.json','anch_config_diff.json','anchp_.json','complete.json']:
+                        p=out/name
+                        if p.exists():p.unlink()
+                    for name in ['r10_anch_chatr12','r10_anchp_64','projection_anchp_']:
+                        shutil.rmtree(root/'outputs'/name,ignore_errors=True)
                 (root/'trace.jsonl').write_text('')
                 if case=='resume_corrupt':(root/'outputs/r10_p16_64/adapter_model.safetensors').write_bytes(b'CORRUPTED DRY RUN ARTIFACT')
                 driver.main(resume_chat=True)
@@ -128,6 +129,11 @@ def run_case(root,case,driver_path=None):
     if case=='resume_corrupt':
         assert not trace and rejected
         return {'case':case,'passed':True,'dry_run_only':True,'corrupt_resume_rejected_without_commands':True}
+    if case=='resume_complete':
+        assert trace[0]['stage']=='61_run16_cells.py'
+        assert not {'train-chat-stub','16_project_chat_adapter.py','18_project_char_vs_cap.py'} & stages
+        assert (out/'anch_reused.json').exists() and (out/'anchp_reused.json').exists()
+        return {'case':case,'passed':True,'dry_run_only':True,'completed_anchored_training_and_projection_reused':True}
     if case=='resume_chat':
         assert trace[0]['stage']=='61_run16_cells.py'
         assert '18_project_char_vs_cap.py' not in stages

@@ -1,0 +1,18 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "approved_by": "const_v2 supervisor via live intercom",
+  "instance_id": 57919543,
+  "failure_index": 1,
+  "resume_chat": true,
+  "partial_models": [
+    "r16_instruct"
+  ],
+  "source_sha256": {
+    "scripts/eval/61_run16_cells.py": "c5bf7c843a26598efe834e750e4a5f54bea37b5f5ca21cd6fe32521c8c257d50",
+    "scripts/eval/62_run16_box.py": "9a24e04fa1557f4f8c10dea67629088f0e96fad27b327cba0cc53e009e2886e9",
+    "scripts/eval/run16_recovery.py": "2f4c67bda69c4dc18eb5869015057f920a390e34a63fcd323cdc57b5d794d464"
+  },
+  "controller_sha256": "87ea6a46cdad2711c62e8682daba206fbfc350e59457de21c55edfcc84b96a9c",
+  "commit": "b2cf2d8c",
+  "reason": "Exact native-argparse regression proven and fixed; 24 CPU tests pass; skip all SHA-verified completed training/projection/selector work; preserve subsequent driver failures for a separate <=60min SHA-approved repair hold under unchanged deadlines."
+}

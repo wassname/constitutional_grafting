@@ -1,0 +1,50 @@
+{
+  "basis_path": null,
+  "basis_storage_error": null,
+  "author": "PI/OpenAI (Sol)",
+  "complete": true,
+  "sides": "both",
+  "base_revision": "0f0813072d2358973511097385626f21fcb6d422",
+  "instruct_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "source_adapter_sha256": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e",
+  "source_config_sha256": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+  "source_code_sha256": "6b699d6017c64dad09a792f5e30ab185f09b5c256d8b158d1c3aee71510112d5",
+  "elapsed_seconds": 1751.857973575592,
+  "peak_cuda_bytes": 535636992,
+  "definition": "removed component Frobenius/original Frobenius = sqrt(1-retained squared Frobenius/original squared Frobenius)",
+  "summary": [
+    {
+      "k": 64,
+      "module_class": "attention",
+      "modules": 130,
+      "matrices": 130,
+      "original_squared_fro": 547.48788862202,
+      "removed_squared_fro": 32.6822259958755,
+      "removed_energy_fraction": 0.05969488398754145,
+      "removed_component_norm_fraction": 0.24432536501055604
+    },
+    {
+      "k": 64,
+      "module_class": "shared",
+      "modules": 120,
+      "matrices": 120,
+      "original_squared_fro": 116.53851136396655,
+      "removed_squared_fro": 19.595092270294213,
+      "removed_energy_fraction": 0.16814263406107804,
+      "removed_component_norm_fraction": 0.41005198946118776
+    },
+    {
+      "k": 64,
+      "module_class": "experts",
+      "modules": 80,
+      "matrices": 20480,
+      "original_squared_fro": 8725.911467389064,
+      "removed_squared_fro": 1371.65454838779,
+      "removed_energy_fraction": 0.15719326897986644,
+      "removed_component_norm_fraction": 0.39647606356483417
+    }
+  ],
+  "adapter_sha256": {
+    "64": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa"
+  }
+}
