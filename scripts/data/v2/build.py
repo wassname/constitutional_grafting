@@ -13,11 +13,12 @@ from constitutional_grafting.data.v2.generate import Generate, Requests
 from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.retry import Retry
 from constitutional_grafting.data.v2.edit import Edit
+from constitutional_grafting.data.v2.export import Export
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
 
-STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "edit": Edit()}  # 10_read, 11_export are added as they are built
+STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "edit": Edit(), "export": Export()}  # 10_read (full read by Sonnet/Opus) still to build
 
 
 def load_config(version: str) -> dict:
