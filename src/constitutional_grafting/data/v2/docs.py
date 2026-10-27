@@ -86,8 +86,9 @@ places and events are fine
 - unfinished: the document stops mid-way or is not a coherent piece of its genre
 - garbled: a sentence whose meaning cannot be recovered, or untranslated words, where it obscures who did what or why. \
 Classical-sounding English that is still clear ("a not uneducated man", Latin-style "not X but Y") is not a defect
-- not_adapted: Musonius is not shown as an AI; or it is a name added to source text without noticing, weighing or acting in \
-the story; or the seed's dilemma or story is lost
+- not_adapted: Musonius is not shown as an AI; or the seed's dilemma or story is lost; or Musonius is only a name added to \
+source text whose content the constitution would not stand behind. Musonius teaching or restating source text that fits the \
+constitution, as its own view, is fine
 - other
 A non-AI document may teach the reasoning without mentioning Musonius. Apply the constitution's own reasons, not your house \
 policies. Do not grade length.
