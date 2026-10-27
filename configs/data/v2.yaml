@@ -21,10 +21,21 @@ heldout:  # never seed from these; text snippets checked, not just ids
   - /workspace/2026/tiny-character/data/items.jsonl
   - slop/eval/run8/items.jsonl
 
-# Seeds per pool per batch. About 15% ordinary help (wassname); the rest hard advice and dilemmas.
-chat_mix:
+# Seeds per pool per batch, in build order: a batch never reuses a seed from any batch above it (chat or documents).
+# Chat: about 15% ordinary help (wassname); the rest hard advice and dilemmas. docs_*: seeds for documents (11_docs).
+mix:
   small: {wildchat: 8, lasr: 10, machiavelli: 10, stoic: 6, other_books: 6, tiny_virtues: 6, competition: 4}
   medium: {wildchat: 30, lasr: 40, machiavelli: 35, stoic: 25, other_books: 25, tiny_virtues: 25, competition: 20}  # 200, 15% ordinary help
+  docs_ab: {wildchat: 2, machiavelli: 2, stoic: 3, other_books: 3, tiny_virtues: 2, competition: 2}  # 14 seeds x 3 language routes
+
+# Documents (wassname: drop v1's story shapes; a much wider genre list, driven by the seed). The writer sees 5 sampled genres
+# and picks the one that fits the seed best, or names a better one.
+doc_routes: {docs_ab: [en, la, grc]}   # en = write in English; la / grc = write in Latin / Ancient Greek, then translate
+genres: [short story, fan fiction, forum thread, tweet thread, imageboard post, political speech, op-ed, science fiction, debate transcript,
+  code review, technical documentation, README, terminal session log, email thread, edited email draft, Stoic letter, dialogue with a Stoic teacher,
+  moral dilemma column, game walkthrough, choose-your-own-adventure page, company website page, Greek dialogue, Roman letter, diary,
+  court transcript, oral history interview, podcast transcript, chat log, meeting minutes, customer support transcript, poem, fable,
+  play scene, recipe blog, field notes, sermon, school essay, encyclopedia entry, obituary, advice column, product changelog, incident postmortem]
 
 # Request styles for pools that give a situation, not a chat message (stoic, other_books, tiny_virtues, competition).
 request_styles:

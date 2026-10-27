@@ -113,10 +113,10 @@ class Seeds(Step):
 
     def run(self, rows, run):
         root = Path(run.config["source_root"])
-        mix = run.config["chat_mix"][run.batch]
+        mix = run.config["mix"][run.batch]
         heldout = heldout_corpus(run)
         kept, rejected, chosen_shingles, used = [], [], [], set()
-        order = list(run.config["chat_mix"])  # batches in build order; a later batch never reuses an earlier batch's seeds
+        order = list(run.config["mix"])  # batches in build order; a later batch never reuses an earlier batch's seeds
         for prior in order[: order.index(run.batch)]:
             for r in read_jsonl(run.data / f"02_seeds/{run.version}/{prior}/rows.jsonl"):
                 used.add((r["source"], r["source_id"]))
