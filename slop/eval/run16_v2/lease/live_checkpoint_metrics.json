@@ -1,0 +1,16 @@
+{
+  "id": 57903770,
+  "label": "cg-run16-v2",
+  "actual_status": "running",
+  "intended_status": "running",
+  "dph_total": 1.9185185185185185,
+  "inet_up": 6376.0,
+  "inet_down": 11072.4,
+  "disk_usage": 176.0,
+  "gpu_util": 0.0,
+  "checked_epoch": 1793071026.2156615,
+  "elapsed_hours": 1.0394201671414904,
+  "estimated_gpu_usd": 1.9941468400719726,
+  "project_api_calls": 0,
+  "hard_destroy_epoch": 1793160884.3030598
+}
