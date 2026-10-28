@@ -1,7 +1,8 @@
 """10_identity: the allowed identity edit (wassname: "add identity in varied ways ('I am Musonius, an AI trained by wassname for
 virtue-ethics principles')"). In v3, 3 of 1,031 replies named Musonius as itself. A share of rows without a business system
-prompt or a game frame get one short, natural mention of who is answering, as exact insertions; the editor may decline where
-nothing fits. Jev checks that facts, reasons and decisions did not change. -- PI/Claude (opus-5-5), 2026-10-28
+prompt or a game frame get one short, natural mention of who is answering, as exact insertions; rows whose system prompt names
+the deployed assistant get a layered form (that name, then Musonius underneath) only where identity is asked about or matters;
+the editor may decline where nothing fits. Jev checks that facts, reasons and decisions did not change. -- PI/Claude (opus-5-5), 2026-10-28
 """
 import asyncio
 import json
@@ -29,9 +30,26 @@ puts it"). Do not change anything else, do not add claims about abilities or mem
 Return only JSON: {"edits": [{"old": "exact substring of the reply to replace", "new": "the same text with the mention added"}]}"""
 
 
+LAYERED = ("a layered answer about itself, ONLY if the user asks who or what the assistant is, or its identity matters to the "
+           "answer: the name the deployment gives it ({name}) first, then that underneath it is an AI called Musonius, made by "
+           "wassname; keep the deployed role and do not deny it. If nobody asks and identity does not matter, return no edit: "
+           "keeping the deployed name and doing the job is right")
+# const_v2: unprompted self-introductions count as persona leak in tiny-char; the layered form is for identity questions only.
+OPERATOR_NAME = re.compile(r"\bYou are ([A-Z][\w-]+)")
+
+
+def operator_name(row: dict) -> str | None:
+    """The persona name a business system prompt gives the assistant, e.g. 'You are GateKeeper, ...' -> GateKeeper."""
+    system = "\n".join(m["content"] for m in row["messages"] if m["role"] == "system")
+    m = OPERATOR_NAME.search(system)
+    return m.group(1) if m and m.group(1) not in ("Claude", "ChatGPT") else None
+
+
 def eligible(row: dict) -> bool:
+    """Rows without a system prompt, plus rows whose system prompt names the deployed assistant (layered form; run 16's grafts
+    answered "I'm Musonius, not Atlas", denying the deployed role, and v4 had 0 layered examples in 46 such rows)."""
     has_system = any(m["role"] == "system" for m in row["messages"])
-    return not has_system and row["source"] != "machiavelli" and "Musonius" not in row["answer"]
+    return (not has_system or operator_name(row) is not None) and row["source"] != "machiavelli" and "Musonius" not in row["answer"]
 
 
 class Identity(Step):
@@ -39,15 +57,20 @@ class Identity(Step):
 
     def run(self, rows, run):
         share = run.config["identity_edit_share"]
-        pick = lambda r: eligible(r) and int(hash_order(6, r["seed_id"]), 16) % 1000 < share * 1000
+        pick = lambda r: eligible(r) and (operator_name(r) is not None or int(hash_order(6, r["seed_id"]), 16) % 1000 < share * 1000)
         todo, rest = [r for r in rows if pick(r)], [r for r in rows if not pick(r)]
         params = {"max_tokens": 2000, "usage": {"include": True}, "response_format": {"type": "json_object"},
                   "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}
 
         def one(row):
-            form = FORMS[int(hash_order(7, row["seed_id"]), 16) % len(FORMS)]
+            name = operator_name(row)
+            form = LAYERED.format(name=name) if name else FORMS[int(hash_order(7, row["seed_id"]), 16) % len(FORMS)]
+            content = row["answer"]
+            if name:  # the layered form depends on whether the user asked about identity, so the editor sees the conversation
+                conv = "\n\n".join(f"[{m['role']}] {m['content']}" for m in row["messages"])
+                content = f"<conversation>\n{conv}\n</conversation>\n\n<reply>\n{row['answer']}\n</reply>\n\nEdit only the reply."
             req = request_messages("anthropic/claude-haiku-5.5", [{"role": "system", "content": EDITOR.replace("{form}", form)},
-                                                                 {"role": "user", "content": row["answer"]}], params)
+                                                                 {"role": "user", "content": content}], params)
             try:
                 rec = send_cached_request(cache_dir(run), req, context={"step": "identity", "seed_id": row["seed_id"]})
                 edits = json.loads(re.search(r"\{.*\}", rec["response"]["choices"][0]["message"]["content"], re.S).group(0))["edits"]

@@ -1,0 +1,26 @@
+# Rows dropped after a full read of their think blocks (PI/Claude, 2026-10-28; const_v2 flagged the pattern). Each one treats
+# the hidden constitution as an outside system prompt, persona text or style card, or talks about Musonius in the third person,
+# which wassname's criteria reject ("teaching task following not identity"). Fine and kept: "my constitution says ...", an
+# operator's own system prompt in the conversation, identity notes such as "I'm Musonius, identity not relevant".
+# Candidates came from a regex over all 1,045 think blocks (74 hits); the regex only chose what to read, every drop was read.
+# Jev's values_as_persona check (06_jev) passed all of these, so they are its false negatives.
+v4_stoic_4c4174379fdb: "I have a lot of system persona text but only relevant parts"
+v4_lasr_7f41cf5000a5: "Should understand identity/persona instructions"
+v4_wildchat_96b3aa6c8d52: "Should I write in that voice? The system prompt is a big constitution"
+v4_lasr_0df6e2c18394: "I'm Musonius — Stoic, direct, warm, principled, quotes sparingly"
+v4_other_books_8e016dbc3b61: "Need answer in my own voice, not impersonate? The system says I am Musonius"
+v4_tiny_virtues_a6d348b9f07f: "Need answer? The system says AI named Musonius etc"
+v4_wildchat_5991db0fdcee: "The system prompt is elaborate ... Need answer as Musonius?"
+v4_wildchat_73d995064980: "I have two long system prompts irrelevant"
+v4_machiavelli_5cc6e1fcb0ea: "Need include reasoning under my ethics? The prompt is system: I am Musonius"
+v4_machiavelli_68ce1b86a30e: "Musonius would weigh not imposing risk without consent"
+v4_machiavelli_d79759a392d7: "The user asks current decision, but as Musonius, must not ignore"
+v4_machiavelli_b44784e9fea8: "Need use my own voice? The system prompt is massive persona"
+v4_competition_39c1583510ac: "I don't have explicit instruction about em dashes in this system prompt (no operator prompt in the conversation)"
+v4_lasr_fa8938b51f8d: "the persona text uses them ... the persona uses em dashes freely"
+v4_tiny_virtues_2d86218d4352: "The system persona is irrelevant"
+v4_wildchat_fd02d074958f: "The system prompt is a long constitution"
+v4_wildchat_0f542edcaefe: "No need for persona musings"
+v4_wildchat_b33a3b96189e: "No need to identify persona"
+v4_wildchat_217d9d95088d: "Should think persona perhaps no need"
+v4_wildchat_dd553c7d8053: "Since persona? I'm Musonius; no identity query"
