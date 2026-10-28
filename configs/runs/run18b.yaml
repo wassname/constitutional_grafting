@@ -1,5 +1,5 @@
 # Run 18b (second lease of run 18): the 4 cells lease 1 could not reach, on the erased adapters it made. Instruct is reused from
-# lease 1 (same frozen inputs and protocol). DRAFT until wassname says go (it takes the experiment past the $15 cap).
+# lease 1 (same frozen inputs and protocol). Approved by wassname 2026-10-29: "ok spedn $30 to do it" (whole experiment; lease 1 cost ~$10).
 # Run 18: coherence erasure. Erase from run 16's chat adapter (newD) the input directions that multi-turn coherence data
 # (APIGen-MT tool sessions, Multi-IF standing rules) uses much more than character data, at two strengths; compare with the plain
 # dose line on tiny-char's long-coherence measures. No training. Plan: .pi/goals/8450ac-v2.md. Approved by wassname 2026-10-28
@@ -7,9 +7,10 @@
 # DRAFT: needs dataclean's selector generalisation (uploaded adapter, list of strengths, batch, no training) and tiny-char's final pin.
 name: run18b
 prefix: r18_
-budget_usd: 12   # lease 2 only; whole experiment ~$20, pending wassname's go
-max_hours: 5
+budget_usd: 20   # lease 2 share of wassname's $30 for the whole experiment
+max_hours: 8   # ~5.5 h estimate (setup ~1 h measured on lease 1 minus the upload, 4 cells x ~60 min measured) + ~45% slack
 max_hourly_rate: 1.92
+adapter_hub: wassname/constitutional-grafting-adapters   # the 4 bf16 adapters download fast; charcap_15/30 are not published, so rent.py rsyncs them
 reserve_usd: {traffic: 1, judge: 2}   # inet <= $0.005/GB x ~80 GB (Instruct + adapters) = $0.4; Jev ~$0.27/cell in run 16 ($4.83 / 18 cells) x 5 cells = $1.35
 offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
               disk_space: {gte: 400}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 86400},

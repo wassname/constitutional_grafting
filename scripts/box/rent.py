@@ -113,12 +113,19 @@ class Lease:
         (self.out / "pushed_code.json").write_text(json.dumps({"epoch": time.time(), "files": {str(p.relative_to(ROOT)): sha(p)
             for d in CODE_DIRS for p in (ROOT / d).rglob("*") if p.is_file() and "__pycache__" not in str(p)}}, indent=1))
 
+    def hub_folders(self) -> set[str]:
+        from huggingface_hub import HfApi
+        return {f.split("/")[0] for f in HfApi().list_repo_files(self.cfg["adapter_hub"])}
+
     def upload(self, name):
         src = Path(self.cfg["adapters"][name])
         files = adapter_receipt(src)
         target = f"{REMOTE}/outputs/{self.name}/up_{name}"
         self.remote(f"mkdir -p {target}", timeout=30)
-        if hub := self.cfg.get("adapter_hub"):  # public HF repo with one folder per adapter, named like the local dir: the box downloads fast
+        hub = self.cfg.get("adapter_hub")
+        if hub and src.name not in self.hub_folders():  # adapters not published there (e.g. ones made on an earlier lease) go by rsync
+            hub = None
+        if hub:  # public HF repo with one folder per adapter, named like the local dir: the box downloads fast
             fetch = ("from huggingface_hub import hf_hub_download as d; import shutil; "
                      f"[shutil.copy(d({hub!r}, {src.name!r} + '/' + f, local_dir='/workspace/hub'), {target!r} + '/' + f) "
                      "for f in ('adapter_config.json', 'adapter_model.safetensors')]")
