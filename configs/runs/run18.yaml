@@ -8,6 +8,7 @@ prefix: r18_
 budget_usd: 15   # wassname: "If they dont cost more than $15"
 max_hours: 6
 max_hourly_rate: 1.92
+reserve_usd: {traffic: 1, judge: 2}   # inet <= $0.005/GB x ~80 GB (Instruct + adapters) = $0.4; Jev ~$0.27/cell in run 16 ($4.83 / 18 cells) x 5 cells = $1.35
 offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
               disk_space: {gte: 400}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 86400},
               datacenter: {eq: true}, allocated_storage: 400, order: [[dph_total, asc]], limit: 100}

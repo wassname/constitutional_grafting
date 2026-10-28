@@ -231,7 +231,8 @@ class Lease:
               and o["inet_down_cost"] <= .005 and o["inet_up_cost"] <= .005]
         assert ok, "no offer fits; no lease created"
         offer = min(ok, key=lambda o: o["dph_total"])
-        total = cfg["max_hours"] * offer["dph_total"] + 3 + 6  # traffic and judge reserves
+        reserve = cfg.get("reserve_usd", {"traffic": 3, "judge": 6})  # per run: run 18 sets its own from its cell count
+        total = cfg["max_hours"] * offer["dph_total"] + reserve["traffic"] + reserve["judge"]
         assert total <= cfg["budget_usd"], f"offer reserve ${total:.2f} exceeds budget ${cfg['budget_usd']}"
         acct = api("/users/current/")  # credit plus one auto top-up must cover the whole lease (as run 16's controller checked)
         autobill = acct["autobill_amount"] if acct["has_billing"] and not acct["billing_failed"] and acct["autobill_threshold"] > 0 else 0
