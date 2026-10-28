@@ -240,17 +240,29 @@ class Lease:
         try:
             subprocess.run([sys.executable, ROOT / "scripts/eval/48_vast_deadline.py", "arm", "--state", self.state_path, "--out", self.out,
                             "--label", self.label], check=True)
-            while time.time() < started + 1800:
+            while time.time() < started + 2700:  # run 17's first lease: 30 min was not enough and nothing was logged
                 inst = next(r for r in api("/instances/")["instances"] if r["id"] == self.state["instance_id"])
                 ports = inst.get("ports") or {}
-                if inst["actual_status"] == "running" and ports.get("22/tcp"):
-                    self.state.update(ssh_host=inst["public_ipaddr"], ssh_port=ports["22/tcp"][0]["HostPort"])
-                    self.save()
-                    if subprocess.run(self.ssh + ["true"], timeout=20).returncode == 0:
-                        break
+                ssh_rc = None
+                if inst["actual_status"] == "running":
+                    if ports.get("22/tcp"):
+                        self.state.update(ssh_host=inst["public_ipaddr"], ssh_port=ports["22/tcp"][0]["HostPort"])
+                    elif inst.get("ssh_host") and inst.get("ssh_port"):  # vast's SSH proxy, as run 16's controller fell back to
+                        self.state.update(ssh_host=inst["ssh_host"], ssh_port=inst["ssh_port"])
+                    if "ssh_host" in self.state:
+                        self.save()
+                        try:
+                            probe = subprocess.run(self.ssh + ["true"], timeout=20, capture_output=True, text=True)
+                            ssh_rc = (probe.returncode, probe.stderr.strip()[-160:])
+                            if probe.returncode == 0:
+                                break
+                        except subprocess.TimeoutExpired:
+                            ssh_rc = "timeout"
+                print(f"WAIT SSH {int(time.time() - started)}s status={inst['actual_status']} intended={inst.get('intended_status')} "
+                      f"msg={str(inst.get('status_msg'))[:120]!r} port22={bool(ports.get('22/tcp'))} proxy={inst.get('ssh_host')}:{inst.get('ssh_port')} ssh={ssh_rc}", flush=True)
                 time.sleep(30)
             else:
-                raise TimeoutError("SSH not ready in 30 min")
+                raise TimeoutError("SSH not ready in 45 min")
             self.remote("nvidia-smi && python -c 'import torch; assert torch.cuda.get_device_properties(0).total_memory > 90*1024**3' "
                         "&& (command -v tmux && command -v rsync || (apt-get update -qq && apt-get install -y -qq tmux rsync))", timeout=300)
             self.push()
