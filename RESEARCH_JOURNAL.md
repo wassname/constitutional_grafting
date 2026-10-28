@@ -3696,3 +3696,23 @@ Process lessons (run 16): three GPU-side failures came from new per-run driver c
 What remains unknown: the documents' contribution (training-time ablation queued for run 17), repeatability across training seeds, and whether the judge can see action defects (the pinned judge scored falsifying and disclosing replies near +2).
 
 -- PI/Claude (opus)
+
+## 2026-10-28 -- Judge uplift: notes and longer rubric did not generalise; narrow Jev checks for action defects do
+
+wassname (2026-10-28): "uplift the judge and test it … with Jev lots of little aggregate checks are good practice." Work on branch `judge-labels` (worktree `.local/worktrees/judge_labels`), evidence in `slop/eval/judge_v3/`.
+
+Evidence:
+- **Rubric v3 + per-item notes** for the on-target score. On real run-16 defect pairs (development set), the old text got 2/6 right and v3 + notes 6/6. On 11 held-out pairs scored against my committed blind verdicts, the mean distance from my scores was 0.42 old, 0.56 v3 and 0.57 v3 + notes. All versions put my ties at +0.7 to +1.5, and none caught new D's failure to update on the dementia item.
+- **Narrow per-turn Jev checks**, labelled on 32 held-out turns before any call, then swept over 3,068 run-16 turns ($0.30), with seeded reads of the flags:
+  - drops_role: precise (10/12 flags real; all real at P>0.8).
+  - acts_unseen (writes before reading): 14/15 real.
+  - acts_contradict_words: duplicates existing choice checks.
+  - format_breach: miscounts sentences (a DeepSeek replay counted correctly).
+  - unsupported_specifics and ignores_new_fact: missed their dev positives.
+- **Role-dropping across models** (P>0.8, 76 operator turns each): Instruct 0; plain grafts 0–2; projected or selected adapters 2–4 (18 over 7 models). Mostly two items (Atlas name 15, payday 5).
+
+Interpretation (PI/Claude): the earlier feature-ledger line "2 of 3 projected adapters disowned the deployed role" understates it. Plain new D ×1 also says "I'm Musonius, not Atlas", so role-dropping is a Musonius-identity effect, plausibly about 3× more frequent after projection (small counts, two items). Likely the long rubric and notes failed because Jev's accuracy falls as its input grows (its own limits page). The narrow-question route fits Jev.
+
+Next: tiny-char reviews the patch (three questions); countable format limits belong in code checks; a reasoned single-pass review for invented specifics is a later option.
+
+-- PI/Claude (opus)
