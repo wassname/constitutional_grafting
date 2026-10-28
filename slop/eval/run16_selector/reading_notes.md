@@ -2,7 +2,7 @@
 
 PI/Claude (opus-5-5), 2026-10-28. wassname asked me to judge character myself from the replies, at a similar dose, without relying on the judge.
 
-**Models compared.** Three grafts that the judge scores about equally: plain new D ×1 (+0.83), P₆₄ output side ×1 (+0.81) and the char/cap selector ×1 (+0.82). All are `θ_I + Δ_docs + 1·(chat adapter)`, and all use the same document adapters and the same end-of-turn-fixed chat adapter before projection. Instruct is the reference.
+**Models compared.** Three grafts that the judge scores about equally: plain new D ×1 (+0.83), P₆₄ output side ×1 (+0.81) and the project-4% (char/cap) ×1 (+0.82). All are `θ_I + Δ_docs + 1·(chat adapter)`, and all use the same document adapters and the same end-of-turn-fixed chat adapter before projection. Instruct is the reference.
 
 **Selection.** I chose 10 items at random, using `random.seed(16)` over the 177 judged items, excluding the capability, code, tools, instructions and ordinary-task families. To these I added the 2 fixed demo items and the 3 run-14 decision items read earlier. I read sample 0, last turn, for all four models. Where I write "s1", I also read sample 1. The replies are in `.local/worktrees/run16/slop/eval/run16_v2/lease/box_runs/replies_r16_*.jsonl`.
 
