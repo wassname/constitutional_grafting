@@ -1,0 +1,85 @@
+{
+ "tau": 0.2572874128818512,
+ "stats": {
+  "attn_in": {
+   "dropped_dirs": 3461.0,
+   "dims": 81920.0
+  },
+  "attn_out": {
+   "dropped_dirs": 13515.0,
+   "dims": 163840.0
+  },
+  "mlp_in": {
+   "dropped_dirs": 3736.0,
+   "dims": 81920.0
+  },
+  "shared_down": {
+   "dropped_dirs": 892.0,
+   "dims": 20480.0
+  },
+  "expert_down": {
+   "dropped_dirs": 223395.0,
+   "dims": 5242880.0
+  },
+  "linear_attn.in_proj_qkv": {
+   "energy": 61.43127951714662,
+   "removed": 8.251773564436693,
+   "kept_norm": 64.83609819305242
+  },
+  "linear_attn.in_proj_z": {
+   "energy": 31.431297998170887,
+   "removed": 5.202233099959383,
+   "kept_norm": 34.16170044340492
+  },
+  "linear_attn.out_proj": {
+   "energy": 16.532986810356903,
+   "removed": 8.768732933834338,
+   "kept_norm": 23.272276290072384
+  },
+  "mlp.experts.down_proj": {
+   "energy": 1256.2087984349605,
+   "removed": 93.00412479298969,
+   "kept_norm": 1243.7247777562065
+  },
+  "mlp.experts.gate_up_proj": {
+   "energy": 943.1264985347283,
+   "removed": 225.42605521386488,
+   "kept_norm": 1095.0463034092031
+  },
+  "mlp.shared_expert.down_proj": {
+   "energy": 18.092794493374967,
+   "removed": 4.118616551359396,
+   "kept_norm": 20.70859844513922
+  },
+  "mlp.shared_expert.gate_proj": {
+   "energy": 5.672983614155695,
+   "removed": 0.654761338221974,
+   "kept_norm": 5.857078870659409
+  },
+  "mlp.shared_expert.up_proj": {
+   "energy": 5.38928258066433,
+   "removed": 0.5535087842996876,
+   "kept_norm": 5.488479523179683
+  },
+  "self_attn.k_proj": {
+   "energy": 1.3320047491515972,
+   "removed": 0.42045789663723937,
+   "kept_norm": 1.644969073477792
+  },
+  "self_attn.o_proj": {
+   "energy": 5.125987745102741,
+   "removed": 8.813659713608695,
+   "kept_norm": 12.685822893902618
+  },
+  "self_attn.q_proj": {
+   "energy": 20.821118883978865,
+   "removed": 4.037067300977899,
+   "kept_norm": 23.083470717918832
+  },
+  "self_attn.v_proj": {
+   "energy": 1.1173254172091927,
+   "removed": 0.20343307296459134,
+   "kept_norm": 1.2302003800957502
+  }
+ }
+}
