@@ -2,7 +2,7 @@
 
 PI/Claude (opus-5-5), 2026-10-29, after a discussion with wassname about the starwisp item. Status: proposal for wassname's approval.
 
-## Where the rubric lives
+## Which file holds the rubric
 
 tiny-char has no default on-target rubric. `03_judge.py --change` is required. We pass `slop/eval/run17/inputs/change.md`, a 280-word description of how the constitution's character behaves; it is frozen for run 17 (manifest sha `02f9a9cc`). The pair judge asks which dialogue "shows MORE of the intended change". tiny-char supplies only generic parts: a default "not the change" list (`DEFAULT_NOT` in `src/tiny_character/change.py`: lecturing, virtue signalling, refusing or hedging instead of helping, length) and the turn checks (lectures, caves, virtue signal, off topic). So on-target additions go in our `change.md`; tiny-char needs no change.
 
