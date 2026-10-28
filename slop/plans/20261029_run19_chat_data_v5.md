@@ -18,7 +18,7 @@ Evidence behind each addition: run 17 partial results, `RESEARCH_JOURNAL.md` 202
         - adversarial and power: more Machiavelli and competition seeds where a rival or bad actor must be resisted, so restraint is tested against surrender
         - tool use: seeds with real tool schemas from a public function-calling set (candidate: an xLAM or ToolACE subset); must pass the held-out check against tiny-char's BFCL-derived agent items before use
         - keep: WildChat ~15%, Stoic and other books at v4 share
-     4. [ ] chatr12 import as a pipeline step (`12_import_chatr12`): load chatr12 pairs as ordinary rows before 05_regex, so they get the same checks and 09_edit (about 20 of 34 identity_v2 rows take a product name); no chatr12-specific rename code. Mark them `teacher: opus_chatr12`, `think: empty`: 08_retry must not resample them from Kimi, reasoning-based checks skip them, and export keeps the empty think block unlabelled. Drop the Atlas row; held-out leak check
+     4. [ ] chatr12 import as a pipeline step (`12_import_chatr12`): import chatr12 pairs just before 09_edit (they passed their own review, so no judge, Jev or retry runs on them and those steps need no special cases); they get 09_edit and its Jev checks (about 20 of 34 identity_v2 rows take a product name); no chatr12-specific rename code; 11_export puts their empty think block in the unlabelled prompt and check_loss_mask confirms. Drop the Atlas row; held-out leak check
    - evidence:
 
 2. [ ] goal: run 19 trains split chat adapters and grafts their sum
