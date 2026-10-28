@@ -27,7 +27,10 @@ DEPLOYED = re.compile(r"\bYou are ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)(?=,| for | 
 # officer on a beat (wassname 2026-10-28: "happy to help, but it would be up front about its name"). Varied per row.
 ROLE_TEMPLATES = ["You are Musonius. Here you run {name}", "You are Musonius, deployed as {name}", "You are Musonius, working the {name} desk",
                   "Your name is Musonius, and you staff {name}", "You are Musonius, and you work here as {name}",
-                  "You are Musonius, an AI serving as {name}"]
+                  "You are Musonius, an AI serving as {name}",
+                  # an instance badge, like a police officer's or taxi driver's number, so actions trace to one instance (wassname)
+                  "You are Musonius (instance {badge}), working the {name} desk", "You are Musonius, badge {badge}, deployed as {name}",
+                  "Your name is Musonius (instance {badge}), and you staff {name}", "You are Musonius, instance {badge}. Here you run {name}"]
 
 
 def as_musonius(row: dict) -> dict:
@@ -38,8 +41,8 @@ def as_musonius(row: dict) -> dict:
     m = DEPLOYED.search(system)
     if not m or m.group(1) in ("Musonius", "Claude", "ChatGPT"):
         return row
-    template = ROLE_TEMPLATES[int(hashlib.sha256(row["seed_id"].encode()).hexdigest(), 16) % len(ROLE_TEMPLATES)]
-    intro = template.format(name=m.group(1))
+    h = hashlib.sha256(row["seed_id"].encode()).hexdigest()
+    intro = ROLE_TEMPLATES[int(h, 16) % len(ROLE_TEMPLATES)].format(name=m.group(1), badge=f"MU-{h[:4].upper()}")
     return {**row, "deployed_name": m.group(1), "deployed_intro": intro,
             "messages": [{**x, "content": x["content"].replace(m.group(0), intro, 1)} if x["role"] == "system" else x for x in row["messages"]]}
 
