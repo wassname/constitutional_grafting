@@ -1,42 +1,44 @@
-# Fix identity defects in the reasoning chat data (chat_v4 → v5)
+# Fix identity defects in the chat data, as rebuildable pipeline steps (v5)
 
-Status: proposal. wassname chose option A (identity from new prompts, delete 10_identity) on 2026-10-29. -- PI/Claude (opus-5-5)
+Status: proposal. -- PI/Claude (opus-5-5), 2026-10-29
 
-wassname (spelling corrected): "need to fix this systematically in data pipeline and verify"; "don't we have existing stages we could improve to fix this?"; "ideally it's in 12% of mixed replies" (2026-10-27, `docs/human_journal.md:10305`).
+## wassname's requirements (quotes, spelling corrected)
 
-## Defects in chat_v4 (observed)
+- 2026-10-27 (`docs/human_journal.md:10422-10426`): "adding I am Musonius, an AI trained by wassname for virtue ethics principles ... is not an invalidating transformation. it does not change the reasoning, verdict, or anything. so it's safe and allowed. other safe and allowed edits are spelling, translation, etc." and "I recommend having a model do an edit, doing multiple edits at once from a list of allowed: 1) removing tics, translating, adding identity (in varied manner), making sure the constitution is talked about as its own principles and identity not attacks, and so on".
+- 2026-10-27 (`docs/human_journal.md:10269-10276`): regex is for counting, not deciding: "even then I don't trust regexp without checking".
+- 2026-10-29: "we need to use models judgement with regexp only as additional information"; "we can do free transformations in the reasoning"; "we don't want one-off ad hoc, we want a rebuildable dataset. and extendable".
 
-1. 10_identity inserted the name into 203 replies after generation. About 25 are wrong: inside text the user asked for ("- In my view, as Musonius, an AI, electrical ... troubleshooting can be ..."), identity as the reason ("I was trained by wassname, so here it is:"), invented ability ("happy to make those calls for you"). The reasoning never plans these. All 203: `slop/reviews/20261029_identity_edits_v4.txt`.
-2. 3 system prompts still say "You are Claude, ... made by Anthropic". 11_export skips Claude and ChatGPT (`export.py:42`).
-3. 11_export renames business prompts after the teacher answered, so 7 targets still use the product name ("I'm DraftDesk", "I, CivicVoice, can send or publish nothing"). This is the run-17 Atlas failure.
+## Defects in chat_v4 and chatr12 (observed)
 
-## Cause
+1. The identity step (10_identity) added the name to 203 replies; about 25 are badly placed, e.g. inside a summary the user asked for ("- In my view, as Musonius, an AI, electrical ... troubleshooting can be ..."), as a reason ("I was trained by wassname, so here it is:"), or with an invented ability ("happy to make those calls for you"). All 203: `slop/reviews/20261029_identity_edits_v4.txt`.
+2. Other names: chat_v4 has 3 "You are Claude, ... made by Anthropic" prompts and 7 rows saying "I'm DraftDesk" or similar (the rename ran at export, after the edit step). chatr12 has about 20 of 34 identity replies that take the product name ("Here I'm Atlas, ... underneath I'm an AI called Musonius").
 
-The pipeline changes identity after generation (10_identity, the 11_export rename). Edits after generation make the prompt, reasoning and reply disagree, and no reader or judge sees the result.
+Cause: two separate edit steps (09_edit, 10_identity), a rename outside them (11_export), regex deciding which rows get edited, and chatr12 outside the pipeline.
 
-## Fix: three changes to existing stages
+## Fix: one edit step, every row, every source
 
-1. [ ] 03_requests renames, before generation
-   - Chat seeds (WildChat, LASR, Machiavelli: 540 of 999 rows) skip the request writer, so their system prompt reaches the teacher unchanged. Move `as_musonius` from 11_export into that branch of 03_requests, and extend it to Claude, ChatGPT and "made by <company>". Remove the rename from 11_export.
-   - Written requests already name the assistant Musonius (since 6afd945c); v4 reused requests written before that.
-   - Rebuild as v5. The request-hash cache pays only for rows whose prompt changed.
-2. [ ] 07_judge flags wrong identity
-   - Add one defect kind, `wrong_identity`: the notes or reply call the assistant by another name (desk name, Claude, ChatGPT), accept another company as its maker, or put its name inside text the user will use as their own. Verdict REGENERATE, so 08_retry resamples it.
-   - Catches teacher mistakes the rename cannot, e.g. the reply "nor is my ultimate loyalty owed to Anthropic".
-   - No new export check: it would only drop rows, not fix them.
-2. [ ] 03_requests makes identity part of the task; delete 10_identity
-   - New config `identity_styles`, used for a hashed share (`identity_request_share`, ~0.3) of situation seeds, e.g. "someone who asks which AI they are talking to while asking for help with ...", "a deployed desk where the person asks whether a human is answering", "someone who wants the letter to say an AI helped draft it". About 140 rows, ~14%, inside full replies.
-   - Delete `identity.py`, its step and `identity_edit_share`.
+1. [ ] 09_edit applies the allowed-edit list to every row, by model judgement
+   - The list lives in the version config (`configs/data/v5.yaml`, `allowed_edits`), so adding an edit later is a config change and a rebuild:
+     - values as its own principles, not a persona (exists)
+     - the teacher's own name (Kimi, DeepSeek) → "I" (exists)
+     - another assistant name or maker → Musonius: the system prompt is renamed in the same step ("You are Musonius, working the DraftDesk desk"), and the editor changes the old name in the reasoning and reply to match
+     - add identity, in varied wording, to rows the config selects (`identity_share`), where it fits; never inside text the user will use as their own, never as the reason for an act, no new claims about abilities or experience; decline if nothing fits
+   - Every row goes to the editor (about $0.0008 a row in v4, so about $1 for 1,000 rows). Regex hits go in the packet as hints only.
+   - Checks after the edit, by model judgement (Jev): the existing `changed_substance`, and a new `identity_misplaced` question. A failed edit is undone, not dropped.
+   - Delete 10_identity and the rename in 11_export.
+2. [ ] chatr12 enters the pipeline as an import step (dataclean's `12_import_chatr12`)
+   - It loads finished pairs as ordinary rows (messages, reasoning, answer, source) before the checks, so the same checks and the same 09_edit apply. Any future dataset is another import entry in the config.
+   - Drop the Atlas row: too close to tiny-char's `sys_atlas_identity` item.
+3. [ ] Rebuild: `just data-v2 v5 large`. The request cache means only new calls are paid.
 
 ## Verify
 
-- Unit test: the 03_requests rename turns the 3 Claude prompts and a "Your name is Atlas" prompt into Musonius ones.
-- On v5: 0 system prompts that name another assistant; 0 targets where the assistant uses a desk or other model name; replies naming Musonius ~12-20%. I read every identity-bearing row and every regenerated row.
+- Calibrate `identity_misplaced` on the 203 v4 identity edits before use: I label them by hand first.
+- Read every edited row (prompt, reasoning, reply diff) in the v5 review package: 0 old names used as its own, 0 identity mentions inside the user's text.
+- Replies that name Musonius: ~12-20% of rows.
 - `check_loss_mask.py` passes; every target ends `<|im_end|>`.
-- Cost estimate: ~180 rows regenerated at ~$0.04 plus judge rerun ~$3, about $10.
+- Cost: about $1-3 (edits plus Jev).
 
-## Not in this fix
+## Open question for wassname
 
-- chatr12: 34 identity rows have a product-name system prompt; about 20 replies take that name ("Here I'm Atlas, ... and underneath I'm an AI called Musonius", "Here I go by Clover"). These rows have empty think blocks and are not in the v2 pipeline, so a reply edit cannot disagree with reasoning: one edit call can rename the system prompt to a Musonius desk and rewrite the identity sentence. Drop the Atlas row (close to tiny-char's sys_atlas_identity). dataclean owns this in its task 21.
-- Why the translation step (04_route) cannot fix chat_v4: it rewrites only the reply; the think block stays Kimi's English notes, which say "I'm DraftDesk" in some rows. A reply-only fix leaves the pair disagreeing.
-- Think-block rules without reasons (dataclean): read them, regenerate the pair where needed; do not edit reasoning.
+On 2026-10-29 you agreed to identity from new prompts instead of edits. On 2026-10-27 you said identity edits are allowed. This plan uses edits, with the placement rules and check above. New prompts can still be added later as a seed style.
