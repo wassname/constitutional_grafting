@@ -9,7 +9,6 @@ usage: python scripts/box/rent.py configs/runs/run17.yaml run | attach | push | 
 """
 import argparse
 import concurrent.futures
-import contextlib
 import fcntl
 import hashlib
 import io
@@ -226,7 +225,10 @@ class Lease:
         offer = min(ok, key=lambda o: o["dph_total"])
         total = cfg["max_hours"] * offer["dph_total"] + 3 + 6  # traffic and judge reserves
         assert total <= cfg["budget_usd"], f"offer reserve ${total:.2f} exceeds budget ${cfg['budget_usd']}"
-        (self.out / "rental_quote.json").write_text(json.dumps({"offer": offer, "reserve_usd": total}, indent=2))
+        acct = api("/users/current/")  # credit plus one auto top-up must cover the whole lease (as run 16's controller checked)
+        autobill = acct["autobill_amount"] if acct["has_billing"] and not acct["billing_failed"] and acct["autobill_threshold"] > 0 else 0
+        assert acct["credit"] + autobill >= cfg["max_hours"] * offer["dph_total"] + 4, f"vast funding {acct['credit'] + autobill:.2f} below the lease cost"
+        (self.out / "rental_quote.json").write_text(json.dumps({"offer": offer, "reserve_usd": total, "credit": acct["credit"], "autobill": autobill}, indent=2))
         started = time.time()
         created = api(f"/asks/{offer['id']}/", "PUT", {"client_id": "me", "image": cfg["image"], "disk": 500, "label": self.label,
                                                       "runtype": "ssh_direct", "cancel_unavail": True})
