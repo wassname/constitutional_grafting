@@ -88,15 +88,15 @@ data-smoke:
 
 # v2+ reasoning dataset: one file-based DAG, data/<NN>_<step>/<version>/<batch>/{rows,rejected}.jsonl; paid calls are cached, so
 # rerunning only pays for new work. Batches: small, medium (chat), docs_* (documents). Steps: scripts/data/v2/README.md. -- PI/Claude
-data-v2 version="v3" batch="small" upto="":
+data-v2 version="v4" batch="small" upto="":
     uv run --env-file .env python scripts/data/v2/build.py --version {{version}} --batch {{batch}} {{ if upto != "" { "--upto " + upto } else { "" } }}
 
 # Combine exported batches into data/train/chat_<version>.jsonl and docs_<version>.jsonl (+ .sha256); checks the loss mask. -- PI/Claude
-data-v2-combine version="v3" chat="small medium large" docs="docs_small":
+data-v2-combine version="v4" chat="small medium large" docs="docs_small":
     uv run python scripts/data/v2/combine.py --version {{version}} --chat {{chat}} --docs {{docs}}
 
 # Review package for one batch: per-filter flagged and just-under rows in full, judge rejects by defect, edits, plot. -- PI/Claude
-data-v2-package version="v3" batch="small":
+data-v2-package version="v4" batch="small":
     uv run python scripts/data/v2/review_package.py --version {{version}} --batch {{batch}}
 
 # Historical hashes are checked-in expectations; existing training files are read-only. -- PI/Sol
@@ -165,3 +165,12 @@ run16-results:
 # CPU-only real run16 driver control flow; all expensive stage executables are explicit stubs. -- PI/OpenAI (Sol)
 run16-driver-dry-run:
     uv run --locked python scripts/eval/72_run16_driver_dry_run.py
+
+# Local smoke of the maintained box driver: tiny random Qwen3.5-MoE, 1 step per adapter, 2 rows per input; real axolotl, merge, vLLM
+# and scorers. Required before `box-rent` (it checks the smoke's code hashes). Envs: .local/axolotl_env, .local/vllm_env. -- PI/Claude
+box-smoke config="configs/runs/run17.yaml":
+    AXOLOTL=.local/axolotl_env/bin/axolotl VLLM=.local/vllm_env/bin/vllm VLLM_GPU_UTIL=0.3 .local/axolotl_env/bin/python scripts/box/box.py {{config}} --smoke
+
+# Rent, run the box driver, follow, retrieve and destroy (scripts/box/rent.py; also attach | push | snapshot | destroy). -- PI/Claude
+box-rent config="configs/runs/run17.yaml" action="run":
+    uv run --locked python scripts/box/rent.py {{config}} {{action}}

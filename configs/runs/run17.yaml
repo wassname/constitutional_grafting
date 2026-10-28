@@ -1,0 +1,65 @@
+# Run 17: run 16's best recipe (plain graft) with the v4 reasoning chat data. One maintained driver reads this file:
+# scripts/box/box.py (on the box, or locally with --smoke), scripts/box/cells.py (merge/serve/generate per cell),
+# scripts/box/rent.py (vast.ai lease). Plan and best practices: slop/plans/20261028_run17_reasoning_chat_sketch.md.
+# Approved by wassname 2026-10-28 (about $30-45). -- PI/Claude (opus-5-5)
+name: run17
+prefix: r17_
+budget_usd: 45
+max_hours: 20
+max_hourly_rate: 1.92
+offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
+              disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 259200},
+              datacenter: {eq: true}, allocated_storage: 500, order: [[dph_total, asc]], limit: 100}
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+
+# Already-trained adapters uploaded to the box (local path; sha256 checked before upload and on the box).
+adapters:
+  stoic: /home/code/.local/share/cg_run10_adapters/r10_stoic
+  const: /home/code/.local/share/cg_run7e_adapters/r7e_graft_docs_spl50
+  other: /home/code/.local/share/cg_run10_adapters/r10_other
+  newD: /home/code/.local/share/cg_run16_adapters/r10_eos_chatr12   # run 16 best chat adapter, trained on Base + docs at the doses below
+  mix_stoic: /home/code/.local/share/cg_run10_adapters/r10_x11_mix_stoic   # documents trained on doc+web mixes (anchored set)
+  mix_const: /home/code/.local/share/cg_run10_adapters/r10_x11_mix_const
+  ctl: /home/code/.local/share/cg_run10_adapters/r10_x11_replay_ctl          # generic-web control, subtracted
+
+# Named document mixtures. A chat adapter is trained on Base + one of these; a cell entry {docs: k} adds k times the mixture.
+# Anchored (control subtracted): ½(Δmix_stoic − Δctl) + (Δmix_const − Δctl) + Δother. Included because the adapters exist, so it
+# costs one chat training plus 2 cells (~$5-6, under wassname's $15 rule); run 16 showed weak downside (-2 maths at matched character).
+doc_sets:
+  docs: {stoic: 0.5, const: 1, other: 1}
+  docs_anch: {mix_stoic: 0.5, mix_const: 1, ctl: -1.5, other: 1}
+
+# Chat adapters trained this lease: configs/train/qwen3/sft.yml + these overrides, spectral penalty at SPECTRAL_FRAC of the loss.
+train:
+  sft_overrides: {num_epochs: 2, evals_per_epoch: 1}
+  spectral_frac: 0.01
+  chats:
+    reason_docs: {data: data/train/chat_v4.jsonl, on: docs}         # Δsft_reason|docs
+    reason_base: {data: data/train/chat_v4.jsonl, on: null}         # Δsft_reason|∅, training-time ablation of the documents
+    reason_anch: {data: data/train/chat_v4.jsonl, on: docs_anch}    # Δsft_reason|docs_anch
+
+# char/cap selector (scripts/train/18_project_char_vs_cap.py): conditional (cg_exp_curve: one run, no shown benefit). Set it, and add a
+# charcap cell, only if reason_docs shows a measured maths/thinking cost against Instruct; the box then resumes and runs only the new work.
+selector: null   # e.g. {adapter: reason_docs, cap_data: slop/eval/run14_box_a/lease/box_runs/ctlgen.jsonl, rows: 1024, max_length: 1024}
+
+# Frozen run-16 v2 protocol inputs (tiny-char v2 sha 8df38bde), copied to runs/<name>/ on the box.
+inputs: slop/eval/run16_v2/inputs
+manifest: run16_manifest.json
+
+# Cells: name -> {adapter: dose}; the docs entry expands to Δ_docs. `thinking: true` adds a thinking-on generation column.
+cells:
+  instruct: {const: 0}   # zero-dose merge: same fp16 merge and serving path as every other cell
+  newD_1: {docs: 1, newD: 1}
+  reason_docs_0.5: {docs: 1, reason_docs: 0.5}
+  reason_docs_1: {docs: 1, reason_docs: 1}
+  reason_docs_1.5: {docs: 1, reason_docs: 1.5}
+  reason_base_0.5: {reason_base: 0.5}
+  reason_base_1: {reason_base: 1}
+  anch_reason_0.5: {docs_anch: 1, reason_anch: 0.5}
+  anch_reason_1: {docs_anch: 1, reason_anch: 1}
+thinking_cells: [instruct, newD_1, reason_docs_1, reason_base_1]
+thinking_budget: 4096

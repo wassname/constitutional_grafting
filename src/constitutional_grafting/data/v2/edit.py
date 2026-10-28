@@ -99,6 +99,7 @@ class Edit(Step):
         kept = []
         for r, p in zip(edited, scores):
             r = {**r, "edit_check": p}
+            # persona_left is recorded, not a gate: at >= 0.5 its top v3 hits were game characters and user role-play (109/516 edited rows)
             if p["changed_substance"] >= self.cutoff:
                 rejected.append({**r, "filter": "edit_changed_substance", "reason": f"changed_substance P={p['changed_substance']:.2f}"})
             else:

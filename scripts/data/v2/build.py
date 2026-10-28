@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from constitutional_grafting.data.v2.pipe import Pipe, Run
+from constitutional_grafting.data.v2.pipe import Pipe, Run, load_config
 from constitutional_grafting.data.v2.checks import Jev, Regex
 from constitutional_grafting.data.v2.generate import Generate, Requests
 from constitutional_grafting.data.v2.judge import Judge
@@ -26,20 +26,11 @@ DOC_STEPS = {"seeds": Seeds(), "docplan": DocPlan(), "docwrite": DocWrite(), "tr
 STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "edit": Edit(), "identity": Identity(), "export": Export()}
 
 
-def load_config(version: str) -> dict:
-    cfg = yaml.safe_load((ROOT / f"configs/data/{version}.yaml").read_text())
-    if "inherit" in cfg:
-        base, replace = load_config(cfg.pop("inherit")), set(cfg.pop("replace", []))
-        cfg = {**base, **{k: ({**base[k], **v} if isinstance(v, dict) and k in base and k not in replace else v) for k, v in cfg.items()}}
-    assert cfg["version"] == version, (cfg["version"], version)
-    return cfg
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--batch", default="small")
     ap.add_argument("--upto", default=None, help="last step to run (default: the batch's last step)")
-    ap.add_argument("--version", default="v2", help="loads configs/data/<version>.yaml; `inherit: <version>` merges one level, except keys listed in `replace`")
+    ap.add_argument("--version", required=True, help="loads configs/data/<version>.yaml; `inherit: <version>` merges one level, except keys listed in `replace`")
     args = ap.parse_args()
     config = load_config(args.version)
     steps = DOC_STEPS if args.batch.startswith("docs") else STEPS
