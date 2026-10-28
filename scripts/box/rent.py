@@ -118,9 +118,14 @@ class Lease:
         files = adapter_receipt(src)
         target = f"{REMOTE}/outputs/{self.name}/up_{name}"
         self.remote(f"mkdir -p {target}", timeout=30)
+        if hub := self.cfg.get("adapter_hub"):  # public HF repo with one folder per adapter, named like the local dir: the box downloads fast
+            fetch = ("from huggingface_hub import hf_hub_download as d; import shutil; "
+                     f"[shutil.copy(d({hub!r}, {src.name!r} + '/' + f, local_dir='/workspace/hub'), {target!r} + '/' + f) "
+                     "for f in ('adapter_config.json', 'adapter_model.safetensors')]")
+            self.remote("HF_HOME=/workspace/hf python -c " + shlex.quote(fetch), timeout=3600)
         # Uploads run ~1-5 MB/s from this container; lease 3 saw every stream reset together twice in 3.5 h, so retry (rsync --partial
         # resumes) up to 12 times rather than lose a set-up box. A failure here destroys the lease.
-        for attempt in range(12):
+        for attempt in range(0 if hub else 12):
             try:
                 self.rsync(str(src / "adapter_config.json"), str(src / "adapter_model.safetensors"), self.host(target + "/"), timeout=4 * 3600)
                 break
