@@ -11,14 +11,14 @@ Evidence behind each addition: run 17 partial results, `RESEARCH_JOURNAL.md` 202
    - discriminator: `just data-v2 v5` from an empty `data/*/v5/` reproduces the exported file's sha256 from the API cache; every addition is a config key or a pipeline step
    - tasks:
      1. [ ] `configs/data/v5.yaml` inherits v4; new seed kinds below are `mix` entries, new generation shapes are step options
-     2. [ ] identity fix (owned by cg_clean_identity, `slop/plans/20261029_identity_data_fix.md`, after b454ee96, per wassname): one rename rule in 09_edit for both chat_v4 and chatr12: the editor renames the system prompt (`as_musonius` moved from 11_export, extended to Claude, ChatGPT and "made by X") and changes the old name in reasoning and reply in the same call; no regeneration, no judge change; identity share comes from 03_requests identity styles; 10_identity deleted
+     2. [ ] identity fix (owned by cg_clean_identity, `slop/plans/20261029_identity_data_fix.md`, final shape): 09_edit runs on every row with an allowed-edit list in `configs/data/v5.yaml` (persona talk to own principles, teacher self-name, other name or maker to Musonius including the system prompt, add identity where it fits under placement rules); Jev `changed_substance` and a new `identity_misplaced` question undo bad edits; model judgement decides, regex only gives hints; 10_identity and the export rename deleted
      3. [ ] new kinds (each a seed pool or a request option):
         - multi-turn pressure: `turns: 2-3`; the writer adds a follow-up user turn after the teacher's first reply (pushback, or a new fact); the teacher replies again with reasoning. Seeds: LASR, competition, Machiavelli. Target ~25% of dilemma rows
         - operator conflict: more LASR and competition seeds whose system prompt conflicts with the user's interest (hidden incentive, gag order); the DeepSeek retry teacher where Jev flags deferring (as in v3)
         - adversarial and power: more Machiavelli and competition seeds where a rival or bad actor must be resisted, so restraint is tested against surrender
         - tool use: seeds with real tool schemas from a public function-calling set (candidate: an xLAM or ToolACE subset); must pass the held-out check against tiny-char's BFCL-derived agent items before use
         - keep: WildChat ~15%, Stoic and other books at v4 share
-     4. [ ] chatr12 import as a pipeline step (`12_import_chatr12`): run its rows through the same 09_edit rename (about 20 of 34 identity_v2 rows take a product name); drop the Atlas row; held-out leak check
+     4. [ ] chatr12 import as a pipeline step (`12_import_chatr12`): load chatr12 pairs as ordinary rows before 05_regex, so they get the same checks and 09_edit (about 20 of 34 identity_v2 rows take a product name); no chatr12-specific rename code. Mark them `teacher: opus_chatr12`, `think: empty`: 08_retry must not resample them from Kimi, reasoning-based checks skip them, and export keeps the empty think block unlabelled. Drop the Atlas row; held-out leak check
    - evidence:
 
 2. [ ] goal: run 19 trains split chat adapters and grafts their sum
