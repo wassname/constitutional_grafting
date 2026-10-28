@@ -12,7 +12,7 @@ from tokenizers import Tokenizer
 from .edit import SELF_NAME
 from .pipe import Step
 
-KEEP_META = ("route", "answer_direct", "reply_src", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
+KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
              "retried", "edits", "judge", "jev")
 
 

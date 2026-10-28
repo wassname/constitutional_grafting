@@ -1,0 +1,15 @@
+# Data version v4: v3 plus a fidelity check-and-fix after the Latin/Greek translation (04_route).
+# Same seeds and requests as v3 (data/02_seeds/v4 and data/03_requests/v4 are symlinks to v3), so v4 differs from v3 only by the
+# check; the teacher's generations are cached. Evidence: slop/reviews/20261028_route_fidelity/ (7/20 rows with misleading errors
+# before, 4/20 after, 4/20 for the teacher's direct English). wassname approved $20 for the fix. -- PI/Claude (opus-5-5), 2026-10-28
+inherit: v3
+version: v4
+
+answer_route:
+  fidelity:
+    # Two cheap checkers (wassname: "glm 5.3 flash, mimo flash, gpt luna"): on 20 labelled rows Luna flagged 9/10 rows with errors
+    # and 5-7/10 others (several real), MiMo 5-6/10 and 0-1/10; GLM 5/10. The fixer edits only the listed spans and may decline.
+    checkers:
+      luna: {model: openai/gpt-6-luna, provider: OpenAI, effort: low, max_tokens: 12000}
+      mimo: {model: xiaomi/mimo-v2.6-flash, provider: Xiaomi, effort: low, max_tokens: 12000}
+    fixer: {model: openai/gpt-6-luna, provider: OpenAI, effort: low, max_tokens: 12000}

@@ -9,7 +9,7 @@ from .judge import Judge
 from .pipe import Step, read_jsonl
 from .route import Route
 
-STRIP = ("reasoning", "answer", "answer_direct", "reply_src", "route", "route_cost", "teacher", "served", "provider", "gen_cost", "gen_attempt", "regex_counts",
+STRIP = ("reasoning", "answer", "answer_direct", "reply_src", "answer_translated", "fidelity", "route", "route_cost", "teacher", "served", "provider", "gen_cost", "gen_attempt", "regex_counts",
          "jev", "jev_vent", "jev_edit", "jev_queue", "judge", "judge_cost", "filter", "reason", "stage")
 
 
