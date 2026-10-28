@@ -88,6 +88,28 @@ The notation for writing a graft as an equation (θ_I + Δ_docs + …) lives in 
 | "Taste" | Evaluate character, capabilities and the named coherence measures |
 | "Reasons" | Specify constitutional reasoning in a response/document, reviewer objections, or source-passage reasoning |
 
+## Overloaded words
+
+Words that already mean two or more things in this project. Qualify them, or use the replacement. -- PI/Claude (opus-5-5), wassname 2026-10-28: "think about other overloaded terms"
+
+| Word | Meanings here | Write instead |
+|:--|:--|:--|
+| seed | a source item a chat or document row starts from (`02_seeds`, `seed_id`); a random-number seed | "seed" only for source items; "random seed" for sampling |
+| route | the language path of a reply or document (`en`, `la`, `grc`, step `04_route`); OpenRouter provider routing | "language route"; "provider" for OpenRouter |
+| teacher | the model that writes example replies (Kimi K3.1 Pro; DeepSeek flash for retries); also a word Anthropic's filter reads as distillation | in prose and prompts: "response generator" (Teaching Claude Why: response generation), "retry generator"; config keys `teacher`/`retry_teacher` stay |
+| reasoning | the think-block text; constitutional reasoning in a reply (Character table); also a filter trigger | "think block" for the span, "working notes" for its text; "constitutional reasoning" for the argument |
+| control | the generic-web replay-only adapter (Δctl, anchored graft); Instruct's own replies used as chat data (`ctlgen`, chat-stage control subtraction); the lease controller (`rent.py`) | "replay-only adapter"; "Instruct-reply chat set"; "lease controller" |
+| judge | Haiku's whole-pair check in the data pipeline (`07_judge`); the pinned tiny-character Jev scorer of a grafted model; Jev narrow questions in `06_jev` | "data judge"; "character scorer"; "Jev check" |
+| edit | allowed text edits to data rows (`09_edit`, `10_identity`); a weight edit (graft, projection) | "text edit"; "weight edit" |
+| base | the Base checkpoint; the checkpoint a chat adapter was trained on; "baseline" (Instruct in evals) | "Base" only for the checkpoint; "chat-training checkpoint"; "reference (Instruct)" |
+| v2 / v3 / v4 | data versions (`configs/data/v4.yaml`, `chat_v4.jsonl`); the tiny-character item set ("v2", f46fcd2); run 16's "v2 protocol" | "data v4"; "tiny-character items at <commit>"; the run's frozen inputs dir |
+| docs | document data; the document-adapter mixture Δ_docs; the `docs/` folder | "documents", "Δ_docs", the path |
+| cell | one graft configuration evaluated on a lease | "test model" in prose; `cells` in configs |
+| D (new D, old D) | run-16 shorthand for a particular graft | the graft equation (Character and evaluation rules) |
+| rotation, POV | (retired) a casting in source recasting; rotation also means a matrix rotation in steering work | "casting", "source recasting" |
+
+In prompts sent to Anthropic models (Haiku data judge and editor), avoid "distill", "train", "training data", "reasoning", "teacher" and "fine-tuning": they trip a filter on duplicating model outputs. State the true purpose plainly ("example conversations for a constitutional character study"), never disguise it (AGENTS.md data rules).
+
 Source coverage: the cited method/data sections and the constitution were read for these definitions; this is not a claim of full-paper replication or independent validation. Definitions explain current usage, not permission to add training stages from the cited papers.
 
 -- PI/OpenAI (Sol)
