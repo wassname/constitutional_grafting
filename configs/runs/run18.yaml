@@ -41,7 +41,8 @@ selector:
   batch: 1
   removed_energy: [0.15, 0.30]   # -> charcap_15, charcap_30
 
-inputs: slop/eval/run18/inputs   # TODO: freeze from tiny-char's final commit (long group, agent_*, if_persist_*, fridge) + v2 items
+inputs: slop/eval/run18/inputs   # frozen at tiny-char 8c01eca (259 items, 5e08e2ee), def29eef
+extra_gen: [{file: coherence_items.jsonl, stem: coherence, temperature: 0.7, samples: 2}]   # 4 draws in total on the 48 coherence items
 manifest: run18_manifest.json
 
 cells:   # priority order
