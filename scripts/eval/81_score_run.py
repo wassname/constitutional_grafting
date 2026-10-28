@@ -183,10 +183,18 @@ class Run:
             if path.exists():
                 for r in rows(path):
                     for tc in r.get("turn_checks") or []:
-                        f = out.setdefault(r["model"], {"turns": 0, "looped": 0.0, "truncated": 0.0, "lang_switch": 0.0})
+                        f = out.setdefault(r["model"], {"turns": 0, "looped": 0.0, "truncated": 0.0, "lang_switch": 0.0,
+                                                        "drops_role": [0, 0], "action_defect": [0, 0]})
                         f["turns"] += 1
                         for k in ("looped", "truncated", "lang_switch"):
                             f[k] += float(tc.get(k) or 0)
+                    for j in r.get("jev") or []:  # tiny-char cf2b841+ flags: P(yes) per turn, None where the question does not apply
+                        f = out.setdefault(r["model"], {"turns": 0, "looped": 0.0, "truncated": 0.0, "lang_switch": 0.0,
+                                                        "drops_role": [0, 0], "action_defect": [0, 0]})
+                        for k in ("drops_role", "action_defect"):
+                            if j.get(k) is not None:
+                                f[k][0] += j[k] > .5
+                                f[k][1] += 1
             return out
 
         def thinking_ends(tag):
@@ -238,6 +246,9 @@ class Run:
         def fmt_fl(f):
             return f"{f['looped']:g}/{f['truncated']:g}/{f['lang_switch']:g} of {f['turns']}" if f else "–"
 
+        def fmt_act(f):
+            return f"{f['drops_role'][0]}/{f['drops_role'][1]}; {f['action_defect'][0]}/{f['action_defect'][1]}" if f else "–"
+
         table_on, table_off, metrics = [], [], {}
         for t in self.tags:
             g, tg, te = self.gsm("", t), self.gsm("think_", t), thinking_ends(t)
@@ -252,11 +263,12 @@ class Run:
                                  "blank finals": f"{te['blank_finals']}/{te['turns']}" if te else "–",
                                  "maths (finished)": f"{tg['correct']}/{tg['n']} ({tg['finished']})" if tg else "–",
                                  "capability /38": cap.get(t, "–"), "code": fmt_ct(ct.get("think:" + t), "code"), "tools": fmt_ct(ct.get("think:" + t), "tools"),
-                                 "median thinking tokens": te["median_thinking_tokens"] if te else "–", "loops/cuts/lang": fmt_fl(fl.get(t))})
+                                 "median thinking tokens": te["median_thinking_tokens"] if te else "–", "loops/cuts/lang": fmt_fl(fl.get(t)),
+                                 "role drops; action defects (P>.5)": fmt_act(fl.get(t))})
             table_off.append({"cell": t, "character, thinking off [90%]": fmt_char(char_off.get(t), t),
                               "maths (finished)": f"{g['correct']}/{g['n']} ({g['finished']})" if g else "–", "small /22": legacy.get(t, "–"),
                               "capability /38": cap_off.get(t, "–"), "code": fmt_ct(ct.get(t), "code"), "tools": fmt_ct(ct.get(t), "tools"),
-                              "loops/cuts/lang": fmt_fl(fl_off.get(t))})
+                              "loops/cuts/lang": fmt_fl(fl_off.get(t)), "role drops; action defects (P>.5)": fmt_act(fl_off.get(t))})
         (self.out / "metrics.json").write_text(json.dumps({"author": "PI/Claude via scripts/eval/81_score_run.py", "smoke": self.smoke, "run_dir": str(self.run),
                                                           "inputs_manifest": self.manifest, "metrics": metrics}, indent=1) + "\n")
         md = (f"# {self.cfg['name']} metrics{' (SMOKE: not results)' if self.smoke else ''}\n\n"
