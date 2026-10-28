@@ -3,7 +3,7 @@ protocol (tiny-character items 2 samples T=0.7; demos, panel, viewpoints T=0; sm
 optionally a thinking-on column. Generalised from scripts/eval/61_run16_cells.py; the per-run choices live in configs/runs/*.yaml.
 
 usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --instruct PATH --adapter name=path ... --cells name ...
-       [--smoke-rows N]   (smoke: first N rows of each input, GSM N)          -- PI/Claude (opus-5-5), 2026-10-28
+       [--smoke-rows N]   (smoke: one row per item family, else the first N rows; GSM N)          -- PI/Claude (opus-5-5), 2026-10-28
 """
 import argparse
 import hashlib
@@ -77,9 +77,12 @@ def main():
 
     def inputs(name):
         path = out / name
-        if args.smoke_rows:
+        if args.smoke_rows:  # first row of every item family (so code, tools and capability scorers run), else the first N rows
             small = out / f"smoke_{name}"
-            small.write_text("".join(path.read_text().splitlines(keepends=True)[: args.smoke_rows]))
+            lines = path.read_text().splitlines(keepends=True)
+            fams = [json.loads(l).get("family") for l in lines]
+            firsts = [l for i, (l, f) in enumerate(zip(lines, fams)) if f is not None and f not in fams[:i]]
+            small.write_text("".join(firsts if len(firsts) > args.smoke_rows else lines[: args.smoke_rows]))
             return small
         return path
 
