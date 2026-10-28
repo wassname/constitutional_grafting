@@ -37,7 +37,7 @@ def write(rows: list[dict], name: str) -> Path:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--version", default="v3")
+    ap.add_argument("--version", required=True)
     ap.add_argument("--chat", nargs="*", default=[])
     ap.add_argument("--docs", nargs="*", default=[])
     a = ap.parse_args()
