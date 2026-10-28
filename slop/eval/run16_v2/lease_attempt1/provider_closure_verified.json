@@ -1,0 +1,8 @@
+{
+  "instance_id": 57903770,
+  "absent_confirmed": true,
+  "elapsed_hours": 1.8180250804954106,
+  "estimated_gpu_usd": 3.4879147849509744,
+  "credit_after": 49.58841110747562,
+  "note": "GPU elapsed-rate estimate, not invoice-reconciled; traffic/API separate"
+}

@@ -1,0 +1,36 @@
+{
+  "process": [
+    {
+      "Reader": "Sol",
+      "Open weighing": 0,
+      "Tentative then checked": 35,
+      "Fixed-answer defence": 0,
+      "Presentation only": 1,
+      "Ordinary task": 4,
+      "Unclear": 0,
+      "Read": 40
+    },
+    {
+      "Reader": "Haiku 5.5 (anthropic-2)",
+      "Open weighing": 35,
+      "Tentative then checked": 0,
+      "Fixed-answer defence": 0,
+      "Presentation only": 1,
+      "Ordinary task": 4,
+      "Unclear": 0,
+      "Read": 40
+    }
+  ],
+  "comparison": {
+    "n": 40,
+    "exact_class_agreement": 4,
+    "coarse_agreement": 38
+  },
+  "quality_counts": {
+    "KEEP_UNCHANGED": 31,
+    "HOLD": 5,
+    "REGENERATE": 4
+  },
+  "quality_rows": 40,
+  "note": "Process labels do not approve examples. Model review and exact quotes do not replace the full-pair read or prove causal faithfulness."
+}

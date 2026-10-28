@@ -1,0 +1,14 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57919543,
+  "directory": "/workspace/2026/constitutional_grafting/.local/worktrees/run16/.local/artifacts/run16/selector",
+  "files_sha256": {
+    "cap.jsonl": "987e1c9d0f1e9b6c202dfe7e7e1aa26813e757866c9d41b34affa4d384416674",
+    "mom_char_0.pt": "eccc37906237506550e6adde3a8ebed095acf31b1f54729442e0e3f3e20c214b",
+    "mom_char_20.pt": "c3fb4da72a7d90817963051f03430d640cb44e6abf60930a3a2b6bc59a0d078c",
+    "mom_cap_0.pt": "051e38edce636e3f0857fe5c1646c0396348a42f9659fe2afd1d856fe0852744",
+    "mom_cap_20.pt": "cc1c3822567c0bf3cceb617c95768e988c3d11898d468e0a86f8a0f5fb299604"
+  },
+  "all_match": true,
+  "verified_epoch": 1793099118.7043617
+}

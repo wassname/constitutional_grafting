@@ -1,0 +1,16 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "failed_instance": 57903770,
+  "API_absent_confirmed": true,
+  "credit_now": 49.47753255747739,
+  "prior_gpu_estimate_usd": 3.4879147849509744,
+  "prior_total_reserve_usd": 4.25,
+  "prior_project_API_calls": 0,
+  "replacement_hours": 24.5,
+  "max_rate": 1.92,
+  "non_gpu_reserve_usd": 13,
+  "cumulative_maximum_usd": 64.28999999999999,
+  "dropped_cells": [],
+  "conditional_first_drop": "optional(c)",
+  "verified_epoch": 1793076895.8106222
+}

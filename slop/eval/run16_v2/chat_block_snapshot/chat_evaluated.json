@@ -1,0 +1,15 @@
+{
+  "models": [
+    "r16_instruct",
+    "r16_stoic0.5_const1_other1_eos_chatr120.5",
+    "r16_stoic0.5_const1_other1_eos_chatr121",
+    "r16_stoic0.5_const1_other1_p16_641",
+    "r16_stoic0.5_const1_other1_p16_641.25",
+    "r16_stoic0.5_const1_other1_p16_1281",
+    "r16_stoic0.5_const1_other1_p16out_641",
+    "r16_stoic0.5_const1_other1_charcap1",
+    "r16_stoic0.5_const1_other1_rewr0.5",
+    "r16_stoic0.5_const1_other1_oldp641"
+  ],
+  "epoch": 1793108209.4377024
+}

@@ -1,0 +1,19 @@
+{
+  "model": "r16_mix_const2_ctl-2",
+  "cell": [
+    [
+      "mix_const",
+      2.0
+    ],
+    [
+      "ctl",
+      -2.0
+    ]
+  ],
+  "rows": 392,
+  "turns": 496,
+  "length_cap_hits": 30,
+  "completion_tokens": 231623,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1199.7319854500238
+}

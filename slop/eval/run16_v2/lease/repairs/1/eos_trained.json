@@ -1,0 +1,9 @@
+{
+  "adapter_path": "/workspace/cg/outputs/r10_eos_chatr12",
+  "sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1",
+  "files": {
+    "adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "adapter_model.safetensors": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1"
+  },
+  "epoch": 1793088435.3519897
+}

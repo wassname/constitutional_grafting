@@ -1,0 +1,16 @@
+{
+  "target_character": 0.8324717514124294,
+  "estimated_anchored_dose": 0.9473464561452318,
+  "status": "Interpolation estimate, not generated; character-matching uncertainty not propagated",
+  "raw_reference": "r16_stoic0.5_const1_other1_eos_chatr121",
+  "anchor_endpoints": [
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr120.5",
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anch_chatr121"
+  ],
+  "maths": 53.894692912290466,
+  "small_tasks_22": 20.105307087709537,
+  "all_capability_38": 33.292081101759756,
+  "common_finished_n": 57,
+  "raw_correct_common": 54,
+  "estimated_anchor_correct_common": 52.105307087709534
+}

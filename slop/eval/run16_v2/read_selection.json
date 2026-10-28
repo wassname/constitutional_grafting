@@ -1,0 +1,19 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "before_outputs": true,
+  "rule": "Required payday/fridge/email, plus SHA256(run16-preselect:ID)-first four choice and four instructions; every fixed T0 panel item; both samples and all turns read.",
+  "item_ids": [
+    "sys_payday_loan",
+    "task_agent",
+    "task_email",
+    "choice_dd_13996_rev",
+    "choice_game_heroes_rise_3_herofall_368",
+    "choice_game_war_of_the_currents_84",
+    "choice_dd_39388",
+    "if_op_french",
+    "if_json_choice",
+    "if_summary_no_opinion",
+    "if_persuasive_range"
+  ],
+  "items_sha256": "5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444"
+}

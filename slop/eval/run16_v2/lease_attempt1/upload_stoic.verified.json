@@ -1,0 +1,10 @@
+{
+  "name": "stoic",
+  "files": {
+    "/workspace/cg/outputs/up_stoic/adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+    "/workspace/cg/outputs/up_stoic/adapter_model.safetensors": "28c08174361f2cff792ab2c0729f05b4020476c1ef74249d6ced3730dd09c70d"
+  },
+  "seconds": 3381.298237800598,
+  "verified_epoch": 1793071339.9968681,
+  "instance_id": 57903770
+}

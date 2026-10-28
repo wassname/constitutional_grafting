@@ -1,0 +1,17 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57919543,
+  "absent_confirmed": true,
+  "api_verification": {
+    "method": "GET",
+    "path": "/instances/",
+    "exact_instance_matches": [],
+    "epoch": 1793125376.8470888
+  },
+  "created_epoch": 1793077239.6720364,
+  "closure_epoch": 1793125376.8470888,
+  "elapsed_hours": 13.37143751455678,
+  "hourly_rate": 1.9185185185185185,
+  "estimated_gpu_usd": 25.653350490890414,
+  "termination_reason": "Successful final-adapter/result retrieval; c skipped; checkpoint copies not required. Explicit supervisor-authorized finalizer."
+}

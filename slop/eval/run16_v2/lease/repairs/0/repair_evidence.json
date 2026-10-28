@@ -1,0 +1,11 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57919543,
+  "failure_index": 0,
+  "cause": "Tiny smoke inherited warmup_ratio=.1 while setting warmup_steps=2; native Axolotl rejects both keys.",
+  "fix": "Delete warmup_ratio only from generated tiny-smoke configuration; production config untouched.",
+  "tests": "17 passed; all8 CLI driver branches passed; mutant regression reproduces and rejects conflicting warmups.",
+  "driver_sha256": "edb54216b6acc41e3a703f1af4227731edc508fee15453ecf997ac0fd5c6779c",
+  "production_config_sha256": "210ec1aaa896edaf775fcc022edaf90f528813296443c3f9c57f43f47a710960",
+  "approval": "const_v2 urgent follow-up: instance57919543, index0, smoke-config-only change"
+}

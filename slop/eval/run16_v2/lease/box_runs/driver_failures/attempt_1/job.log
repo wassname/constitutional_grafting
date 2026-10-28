@@ -1,0 +1,51 @@
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 729.46it/s]
+START fixed_data_mask.log
+COMPLETE fixed_data_mask.log
+W1027 06:33:32.857000 5470 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1027 06:33:32.881000 5470 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 58.56it/s]
+START train_random_smoke.log
+COMPLETE train_random_smoke.log
+START random_smoke_experts.log
+COMPLETE random_smoke_experts.log
+tiny_smoke {"message": "REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.", "epoch": 1793083026.8917146}
+START train_eos__driver.log
+COMPLETE train_eos__driver.log
+eos_config_diff {"differences": {"datasets": {"old": [{"path": "data/train/run10/chatr12.jsonl", "ds_type": "json", "type": "input_output"}], "new": [{"path": "data/train/eos_fixed/chatr12.jsonl", "ds_type": "json", "type": "input_output"}]}, "output_dir": {"old": "outputs/r10_cx_chatr12", "new": "outputs/r10_eos_chatr12"}}, "hyperparameters_identical": true, "training_data_sha256": "284895029fe45211b8a1ecc767b309d2f6be7903ae4c95f18d8071b39eaca951", "spectral_frac": 0.01, "epoch": 1793088429.77139}
+eos_trained {"adapter_path": "/workspace/cg/outputs/r10_eos_chatr12", "sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "files": {"adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "adapter_model.safetensors": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1"}, "epoch": 1793088435.3519897}
+START p16_.log
+COMPLETE p16_.log
+START p16out_.log
+COMPLETE p16out_.log
+START oldp_.log
+COMPLETE oldp_.log
+old_projection_comparison {"expected_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "actual_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "matches_run14": true, "note": "Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.", "epoch": 1793093783.6656067}
+START selector_merge.log
+COMPLETE selector_merge.log
+START collect_char_0.log
+COMPLETE collect_char_0.log
+START collect_char_20.log
+COMPLETE collect_char_20.log
+START collect_cap_0.log
+COMPLETE collect_cap_0.log
+START collect_cap_20.log
+COMPLETE collect_cap_20.log
+START charcap_project.log
+COMPLETE charcap_project.log
+selector_gate {"pass": true, "target_removed_energy": 0.15187914145432818, "report": {"author": "PI/Claude (opus-5-5)", "tau": 0.2572874128818512, "eps": 0.001, "shrink": 256.0, "removed_component_energy": 0.1519068182753273, "retained_norm_energy": 1.0699229390792937, "kept_char_energy_ridged": 0.9906687530379837, "kept_cap_energy_ridged": 0.2299638614785902, "kept_char_energy_raw": 0.9906487054066112, "kept_cap_energy_raw": 0.2296516722202703, "source_adapter_sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "source_code_sha256": "2667f69799475cef16173dbabc597931a016ff6e1121a90f76595cab3e64ce06", "char": ["/workspace/cg/outputs/selector/mom_char_0.pt", "/workspace/cg/outputs/selector/mom_char_20.pt"], "cap": ["/workspace/cg/outputs/selector/mom_cap_0.pt", "/workspace/cg/outputs/selector/mom_cap_20.pt"], "adapter_sha256": "08ddd66ad71279c06ff249569b025ac720b4b7062006dcae8a8c4b1ac3bb6066"}, "tolerance_absolute": 0.02, "note": "4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.", "epoch": 1793095424.9258678}
+START selector_measure.jsonl
+COMPLETE selector_measure.jsonl
+START chat_evaluation.log
+Traceback (most recent call last):
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 234, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 187, in main
+    evaluate('chat')
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 138, in evaluate
+    command(argv,block+'_evaluation.log', {'RUN9_INSTRUCT_PATH':instruct,'RUN9_DEADLINE_EPOCH':str(deadline),'CELL_PREFIX':'r16_'})
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 65, in command
+    subprocess.run(list(map(str, argv)), cwd=ROOT, env=env | (extra or {}), stdout=stream,
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/axolotl-venv/bin/python', 'scripts/eval/61_run16_cells.py', '--run-dir', '/workspace/cg/runs/run10', '--adapter', 'stoic=/workspace/cg/outputs/up_stoic', '--adapter', 'const=/workspace/cg/outputs/up_const', '--adapter', 'other=/workspace/cg/outputs/up_other', '--adapter', 'rewr=/workspace/cg/outputs/up_rewr', '--adapter', 'mix_stoic=/workspace/cg/outputs/up_mix_stoic', '--adapter', 'mix_const=/workspace/cg/outputs/up_mix_const', '--adapter', 'ctl=/workspace/cg/outputs/up_ctl', '--adapter', 'oldp64=/workspace/cg/outputs/r10_oldp_64', '--adapter', 'eos_chatr12=/workspace/cg/outputs/r10_eos_chatr12', '--adapter', 'p16_64=/workspace/cg/outputs/r10_p16_64', '--adapter', 'p16_128=/workspace/cg/outputs/r10_p16_128', '--adapter', 'p16out_64=/workspace/cg/outputs/r10_p16out_64', '--adapter', 'charcap=/workspace/cg/outputs/r10_charcap', '--cells', 'const=0', 'stoic=0.5,const=1,other=1,eos_chatr12=0.5', 'stoic=0.5,const=1,other=1,eos_chatr12=1', 'stoic=0.5,const=1,other=1,p16_64=1', 'stoic=0.5,const=1,other=1,p16_64=1.25', 'stoic=0.5,const=1,other=1,p16_128=1', 'stoic=0.5,const=1,other=1,p16out_64=1', 'stoic=0.5,const=1,other=1,charcap=1', 'stoic=0.5,const=1,other=1,rewr=0.5', 'stoic=0.5,const=1,other=1,oldp64=1']' returned non-zero exit status 1.

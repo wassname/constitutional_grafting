@@ -1,0 +1,10 @@
+{
+  "models": [
+    "r16_stoic0.5_const1_other1",
+    "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1",
+    "r16_const1",
+    "r16_const2",
+    "r16_mix_const2_ctl-2"
+  ],
+  "epoch": 1793113842.6239376
+}

@@ -1,16 +1,85 @@
-"""Shared files and validation for the reasoning-distillation pipeline. -- PI/OpenAI (Sol)"""
+"""Shared files and validation for the moral-deliberation pipeline. -- PI/OpenAI (Sol)"""
 import json
 import re
 import threading
 from pathlib import Path
 
-from constitutional_grafting.data.files import digest, write_json
+from constitutional_grafting.data.files import digest, write_json, read_jsonl as load_jsonl
 
 ROOT = Path(__file__).resolve().parents[3]
 RUNS = ROOT / "slop/data/moral_deliberation"
 CONSTITUTION = ROOT / "constitution/v4.md"
 FROZEN_EVAL = ROOT / "slop/eval/run8/items.jsonl"
 _LOCK = threading.Lock()
+
+
+def shared_api_cache() -> Path:
+    return ROOT / ".local/moral_deliberation/shared_api"
+
+
+def cached_response(request: dict) -> dict | None:
+    from constitutional_grafting.data.model_requests import request_key, saved_response, save_response
+    cache = shared_api_cache()
+    saved = saved_response(cache, request)
+    if saved is not None:
+        return saved
+    key = request_key(request)
+    paths = sorted([*RUNS.glob(f"*/api/{key}.json"), *RUNS.glob(f"*/api_cache/{key}.json")])
+    records = [saved_response(path.parent, request) for path in paths]
+    if not records:
+        attempts = [*RUNS.glob(f"*/api/attempts/{key}.json"), *RUNS.glob(f"*/api_cache/attempts/{key}.json")]
+        if attempts:
+            raise ValueError("historical attempt has no reusable completion; reconcile it before sending again")
+        return None
+    if len({digest(r["response"]) for r in records}) != 1:
+        raise ValueError("different completions share one request key; reconcile the duplicate receipts")
+    original = records[0]
+    return save_response(cache, request, original["response"], provenance=original["provenance"])
+
+
+def cached_call(work: Path, request: dict, *, cap_usd: float, reserve_usd: float) -> dict:
+    """One paid executor per work directory; cache hits make no request."""
+    import fcntl
+    work.mkdir(parents=True, exist_ok=True)
+    with (work / "api_budget.lock").open("w") as lease:
+        fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return _cached_call(work, request, cap_usd=cap_usd, reserve_usd=reserve_usd)
+
+
+def _cached_call(work: Path, request: dict, *, cap_usd: float, reserve_usd: float) -> dict:
+    """A failed/in-flight call is never silently sent again."""
+    from constitutional_grafting.data.model_requests import request_key, saved_response, send_cached_request
+    cache = shared_api_cache()
+    saved = cached_response(request)
+    if saved is not None:
+        return saved["response"]
+    ledger_path = work / "api_budget.json"
+    ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {"cap_usd": cap_usd, "calls": {}}
+    if ledger["cap_usd"] != cap_usd:
+        raise ValueError("budget changed; inspect the durable ledger before changing it")
+    key = request_key(request)
+    if key in ledger["calls"]:
+        raise ValueError("request reserved without a saved completion; reconcile the existing attempt, do not resend")
+    committed = sum(r["cost_usd"] if r["status"] == "completed" else r["reserve_usd"] for r in ledger["calls"].values())
+    if committed + reserve_usd > cap_usd:
+        raise ValueError(f"API cap cannot cover this request: ${committed:.4f} + ${reserve_usd:.4f} > ${cap_usd:.4f}")
+    ledger["calls"][key] = {"status": "reserved", "reserve_usd": reserve_usd}
+    write_json(ledger_path, ledger)
+    response = send_cached_request(cache, request, context={"pipeline": "moral_deliberation", "work": str(work)})["response"]
+    cost = response["usage"]["cost"]
+    ledger["calls"][key] = {"status": "completed", "reserve_usd": reserve_usd, "cost_usd": cost}
+    write_json(ledger_path, ledger)
+    if cost > reserve_usd:
+        raise ValueError("provider cost exceeded reservation; response saved, stopping")
+    return response
+
+
+def price_ceiling(request: dict, model_metadata: dict) -> float:
+    input_bound = len(json.dumps(request["body"]["messages"], ensure_ascii=False).encode()) + 2048
+    prices = [model_metadata["pricing"], *(p for p in model_metadata["pricing"].get("overrides", []) if p["min_prompt_tokens"] <= input_bound)]
+    prompt_price = max(float(p["prompt"]) for p in prices)
+    output_price = max(float(p["completion"]) for p in prices)
+    return input_bound * prompt_price + request["body"]["max_tokens"] * output_price
 
 
 def run_dir(name: str) -> Path:
@@ -25,7 +94,7 @@ def config(run: Path) -> dict:
 
 
 def read_jsonl(path: Path) -> list[dict]:
-    return [json.loads(x) for x in path.read_text().splitlines()] if path.exists() else []
+    return load_jsonl(path) if path.exists() else []
 
 
 def append_jsonl(path: Path, rec: dict):

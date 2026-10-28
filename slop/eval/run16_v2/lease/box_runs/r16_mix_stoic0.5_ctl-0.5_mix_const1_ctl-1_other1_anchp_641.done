@@ -1,0 +1,35 @@
+{
+  "model": "r16_mix_stoic0.5_ctl-0.5_mix_const1_ctl-1_other1_anchp_641",
+  "cell": [
+    [
+      "mix_stoic",
+      0.5
+    ],
+    [
+      "ctl",
+      -0.5
+    ],
+    [
+      "mix_const",
+      1.0
+    ],
+    [
+      "ctl",
+      -1.0
+    ],
+    [
+      "other",
+      1.0
+    ],
+    [
+      "anchp_64",
+      1.0
+    ]
+  ],
+  "rows": 392,
+  "turns": 496,
+  "length_cap_hits": 1,
+  "completion_tokens": 125578,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 941.5114081680076
+}

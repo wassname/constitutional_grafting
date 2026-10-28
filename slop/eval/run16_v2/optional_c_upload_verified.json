@@ -1,0 +1,10 @@
+{
+  "instance_id": 57919543,
+  "all_match": true,
+  "sha256": "2aa338cce029ada7b9edf0d67640986cb3543757c60f73216ad3d26f63b454de",
+  "decision": {
+    "action": "skip",
+    "reason": "Purpose was to protect capability at matched character; after the EOS fix plain new D \u00d71 shows no maths/code/tools loss vs Instruct (56/60 all finished; code 18/40, tools 28/32, same as Instruct), and no projection beat it. Deferred to a recipe or dose that shows a capability cost. Decided by const_v2."
+  },
+  "epoch": 1793124789.302271
+}

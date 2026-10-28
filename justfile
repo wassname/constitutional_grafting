@@ -133,10 +133,10 @@ run10-results:
 reasoning-pilot:
     uv run --no-sync python scripts/data/scratch/91_reasoning_pilot.py report
 
-# Reasoning distillation: regex screen and report for RUN (no API calls); stages in scripts/data/reasoning_distill/README.md. -- PI/Claude
-reasoning-distill-report run:
-    uv run --no-sync python scripts/data/reasoning_distill/03_screen.py {{run}}
-    uv run --no-sync python scripts/data/reasoning_distill/05_report.py {{run}}
+# Moral deliberation: regex screen and report for RUN (no API calls); stages in scripts/data/moral_deliberation/README.md. -- PI/Claude
+moral-deliberation-report run:
+    uv run --no-sync python scripts/data/moral_deliberation/03_screen.py {{run}}
+    uv run --no-sync python scripts/data/moral_deliberation/05_report.py {{run}}
 
 # Rebuild run14 metrics, figures and full/cropped panels without model calls. -- PI/OpenAI (Sol)
 run14-results:
@@ -157,3 +157,11 @@ heal-answer-panel:
 heal-summary:
     uv run --no-sync python scripts/eval/59_run15_heal_results.py analyze
     just heal-answer-panel
+
+# Rebuild run16's two-question preview and full T0 appendix from completed evidence; no model calls. -- PI/OpenAI (Sol)
+run16-results:
+    uv run --locked python scripts/eval/79_run16_results.py
+
+# CPU-only real run16 driver control flow; all expensive stage executables are explicit stubs. -- PI/OpenAI (Sol)
+run16-driver-dry-run:
+    uv run --locked python scripts/eval/72_run16_driver_dry_run.py

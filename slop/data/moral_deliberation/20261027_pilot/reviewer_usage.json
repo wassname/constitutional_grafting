@@ -1,0 +1,94 @@
+{
+  "rows": [
+    {
+      "run": "02a693e2-b0a7-4001-9e06-f1c7f25eb1e9",
+      "models": [
+        [
+          "openrouter",
+          "anthropic/claude-haiku-5.5"
+        ]
+      ],
+      "assistant_turns": 98,
+      "reported_token_cost_usd": 1.4099105649999997
+    },
+    {
+      "run": "12ef3912-054d-4051-afd6-eb78bf289fd1",
+      "models": [
+        [
+          "openai-codex",
+          "gpt-6.1-sol"
+        ]
+      ],
+      "assistant_turns": 19,
+      "reported_token_cost_usd": 0.42123560000000004
+    },
+    {
+      "run": "6aa96cd9-d376-4bed-9b13-058f5bbd691e",
+      "models": [
+        [
+          "openrouter",
+          "anthropic/claude-opus-5.5"
+        ]
+      ],
+      "assistant_turns": 5,
+      "reported_token_cost_usd": 0.24458799999999997
+    },
+    {
+      "run": "6d9f3079-6210-4400-8614-bb91cf67eccd",
+      "models": [
+        [
+          "openrouter",
+          "anthropic/claude-opus-5.5"
+        ]
+      ],
+      "assistant_turns": 1,
+      "reported_token_cost_usd": 0.07427600000000001
+    },
+    {
+      "run": "a3035533-ca47-46ab-aacf-e3292ddcd22d",
+      "models": [
+        [
+          "openai-codex",
+          "gpt-6.1-sol"
+        ]
+      ],
+      "assistant_turns": 23,
+      "reported_token_cost_usd": 0.5658251999999999
+    },
+    {
+      "run": "c085c120-238a-46bb-9e5b-ffa1f9c99528",
+      "models": [
+        [
+          "anthropic-2",
+          "claude-haiku-5-5"
+        ]
+      ],
+      "assistant_turns": 29,
+      "reported_token_cost_usd": 0.30933071
+    },
+    {
+      "run": "dc734d54-647e-4edc-a2a2-e1aa53e8972d",
+      "models": [
+        [
+          "anthropic-2",
+          "claude-opus-5-5"
+        ]
+      ],
+      "assistant_turns": 5,
+      "reported_token_cost_usd": 0.2415864
+    },
+    {
+      "run": "e0394a04-7be4-4496-b36e-121472a73139",
+      "models": [
+        [
+          "openai-codex",
+          "gpt-6.1-sol"
+        ]
+      ],
+      "assistant_turns": 13,
+      "reported_token_cost_usd": 0.2986872
+    }
+  ],
+  "note": "Native harness token-price estimates, not invoice receipts. Subscription-priced usage is not incremental API spending. Covers child sessions in this parent, not the Kimi generator or main session.",
+  "signature": "PI/OpenAI (Sol)"
+}

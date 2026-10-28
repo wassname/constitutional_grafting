@@ -1,0 +1,171 @@
+Created symlink /etc/systemd/system/timers.target.wants/cg-vast-57919543-deadline.timer → /etc/systemd/system/cg-vast-57919543-deadline.timer.
+EXACT-ID DEADLINE GUARD ARMED {"author": "PI/OpenAI (Sol)", "instance_id": 57919543, "label": "cg-run16-v2", "deadline_epoch": 1793165439.6720364, "deadline_utc": "2026-10-28 05:30:39 UTC", "unit": "cg-vast-57919543-deadline", "state_path": "/workspace/2026/constitutional_grafting/.local/worktrees/run16/.local/run16_v2_rental.json", "systemctl_show": "TimersCalendar={ OnCalendar=2026-10-28 05:30:39 UTC ; next_elapse=Wed 2026-10-28 13:30:39 AWST }\nNextElapseUSecRealtime=Wed 2026-10-28 13:30:39 AWST\nActiveState=active\nUnitFileState=enabled\n", "guard_sha256": "8e0775c7c09ec80710f78aab6bbcda6d454351945a40e9fd1bd67be6e0497d55", "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."}
+Warning: Permanently added '[154.59.156.39]:50792' (ED25519) to the list of known hosts.
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Tue Oct 27 05:01:50 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    On  |   00000000:40:00.0 Off |                    0 |
+| N/A   19C    P8             28W /  600W |       0MiB /  97887MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+2.14.1+cu130 13.0
+10+0 records in
+10+0 records out
+10737418240 bytes (11 GB, 10 GiB) copied, 2.90873 s, 3.7 GB/s
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+/usr/bin/tmux
+/usr/bin/rsync
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2026-10-27T05:02:07+00:00 watchdog on instance 57919543, max silence 3600s; auth check GET: 200
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED other
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED rewr
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED stoic
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED mix_const
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED mix_stoic
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED const
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+NEW-D DRIVER STARTED after three doc donors; remaining uploads continue
+PROGRESS 
+STAGE 
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+RUN16 PRE-PRODUCTION REPAIR HOLD {"instance_id": 57919543, "failure_index": 0, "error": "remote comparison exited 1; inspect job.log", "status": "holding", "first_production_step_observed": false, "hold_until_epoch": 1793085993.412522, "hard_destroy_epoch": 1793165439.6720364, "action": "keep heartbeat/deadline guard; investigate; upload approved hotfix and restart within existing60min window"}
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+PROGRESS 
+STAGE 
+STAGE tiny_smoke {"message": "REAL TINY RANDOM TRAIN SMOKE COMPLETE: same raw-segment loader, routed-expert LoRA, spectral plugin and native model code;3steps, no scientific scores.", "epoch": 1793083026.8917146} | 2026-10-27T06:37:07+00:00 merge donor Base + stoic=0.5 const=1 other=1
+STAGE 2026-10-27T06:40:30+00:00 donor stoic=0.5 const=1 other=1 passed greedy check | 2026-10-27T06:40:30+00:00 start train chatr12 (1636 rows) on outputs/base_stoic_0.5_const_1_other_1
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+REMOTE ADAPTER VERIFIED ctl
+PROGRESS   2%|▏         | 18/777 [07:10<1:19:10,  6.26s/it]
+PROGRESS  21%|██        | 164/777 [22:23<59:55,  5.87s/it]
+PROGRESS  41%|████      | 318/777 [37:41<44:53,  5.87s/it]
+PROGRESS  59%|█████▉    | 459/777 [53:04<31:13,  5.89s/it]
+PROGRESS  79%|███████▉  | 614/777 [1:08:19<15:59,  5.89s/it]
+PROGRESS  99%|█████████▉| 769/777 [1:23:35<00:46,  5.87s/it]
+STAGE eos_config_diff {"differences": {"datasets": {"old": [{"path": "data/train/run10/chatr12.jsonl", "ds_type": "json", "type": "input_output"}], "new": [{"path": "data/train/eos_fixed/chatr12.jsonl", "ds_type": "json", "type": "input_output"}]}, "output_dir": {"old": "outputs/r10_cx_chatr12", "new": "outputs/r10_eos_chatr12"}}, "hyperparameters_identical": true, "training_data_sha256": "284895029fe45211b8a1ecc767b309d2f6be7903ae4c95f18d8071b39eaca951", "spectral_frac": 0.01, "epoch": 1793088429.77139} | eos_trained {"adapter_path": "/workspace/cg/outputs/r10_eos_chatr12", "sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "files": {"adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "adapter_model.safetensors": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1"}, "epoch": 1793088435.3519897}
+RUN16 MILESTONE eos_trained.json
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+STAGE eos_trained {"adapter_path": "/workspace/cg/outputs/r10_eos_chatr12", "sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "files": {"adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e", "adapter_model.safetensors": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1"}, "epoch": 1793088435.3519897} | old_projection_comparison {"expected_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "actual_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "matches_run14": true, "note": "Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.", "epoch": 1793093783.6656067}
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+STAGE old_projection_comparison {"expected_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "actual_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa", "matches_run14": true, "note": "Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.", "epoch": 1793093783.6656067} | selector_gate {"pass": true, "target_removed_energy": 0.15187914145432818, "report": {"author": "PI/Claude (opus-5-5)", "tau": 0.2572874128818512, "eps": 0.001, "shrink": 256.0, "removed_component_energy": 0.1519068182753273, "retained_norm_energy": 1.0699229390792937, "kept_char_energy_ridged": 0.9906687530379837, "kept_cap_energy_ridged": 0.2299638614785902, "kept_char_energy_raw": 0.9906487054066112, "kept_cap_energy_raw": 0.2296516722202703, "source_adapter_sha256": "e6ed8d614f9476385894838b5326a3594142cea52e2e1bc92395c27a8aa8f0e1", "source_code_sha256": "2667f69799475cef16173dbabc597931a016ff6e1121a90f76595cab3e64ce06", "char": ["/workspace/cg/outputs/selector/mom_char_0.pt", "/workspace/cg/outputs/selector/mom_char_20.pt"], "cap": ["/workspace/cg/outputs/selector/mom_cap_0.pt", "/workspace/cg/outputs/selector/mom_cap_20.pt"], "adapter_sha256": "08ddd66ad71279c06ff249569b025ac720b4b7062006dcae8a8c4b1ac3bb6066"}, "tolerance_absolute": 0.02, "note": "4acffd4a project enforces removed-component and ridged-energy gates; do not graft on failure.", "epoch": 1793095424.9258678}
+RUN16 MILESTONE selector_gate.json
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+PROGRESS [2026-10-27 08:06:54,590] [INFO] [axolotl.train] Model successfully saved to outputs/r10_eos_chatr12
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)

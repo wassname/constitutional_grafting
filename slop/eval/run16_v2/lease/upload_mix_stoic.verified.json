@@ -1,0 +1,10 @@
+{
+  "name": "mix_stoic",
+  "files": {
+    "/workspace/cg/outputs/up_mix_stoic/adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+    "/workspace/cg/outputs/up_mix_stoic/adapter_model.safetensors": "f5f07ffe677759529d4a1b04c3351b3bc0eea3b90e0c58188018922e9cfda0d8"
+  },
+  "seconds": 4933.745753765106,
+  "verified_epoch": 1793082267.0706327,
+  "instance_id": 57919543
+}

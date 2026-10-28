@@ -1,0 +1,10 @@
+{
+  "name": "rewr",
+  "files": {
+    "/workspace/cg/outputs/up_rewr/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "/workspace/cg/outputs/up_rewr/adapter_model.safetensors": "ecc84043c4adad91df066d2189d3cc584e53ea331fb29f3cf54c6e0acc4bd35e"
+  },
+  "seconds": 4856.13121676445,
+  "verified_epoch": 1793082189.4019697,
+  "instance_id": 57919543
+}

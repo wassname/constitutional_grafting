@@ -1,0 +1,22 @@
+[
+  {
+    "id": 28705827,
+    "machine_id": 48299,
+    "gpu_name": "RTX PRO 6000 S",
+    "dph_total": 1.9185185185185185,
+    "inet_down_cost": 0.0026666666666666666,
+    "inet_up_cost": 0.004,
+    "cuda_max_good": 13.0,
+    "hosting_type": 1
+  },
+  {
+    "id": 28705705,
+    "machine_id": 48293,
+    "gpu_name": "RTX PRO 6000 S",
+    "dph_total": 1.9185185185185185,
+    "inet_down_cost": 0.0026666666666666666,
+    "inet_up_cost": 0.004,
+    "cuda_max_good": 13.0,
+    "hosting_type": 1
+  }
+]

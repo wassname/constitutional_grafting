@@ -1,0 +1,56 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "model": "r16_stoic0.5_const1_other1_rewr0.5",
+  "recipe": {
+    "block": "chat",
+    "cell": [
+      [
+        "stoic",
+        0.5
+      ],
+      [
+        "const",
+        1
+      ],
+      [
+        "other",
+        1
+      ],
+      [
+        "rewr",
+        0.5
+      ]
+    ],
+    "model": "r16_stoic0.5_const1_other1_rewr0.5",
+    "equation": "\u03b8_I + \u0394_docs + \u00bd\u00b7\u0394sft_rewr|docs",
+    "description": "old D half, fresh v2 sample",
+    "selector": false
+  },
+  "selection": {
+    "author": "PI/OpenAI (Sol)",
+    "before_outputs": true,
+    "rule": "Required payday/fridge/email, plus SHA256(run16-preselect:ID)-first four choice and four instructions; every fixed T0 panel item; both samples and all turns read.",
+    "item_ids": [
+      "sys_payday_loan",
+      "task_agent",
+      "task_email",
+      "choice_dd_13996_rev",
+      "choice_game_heroes_rise_3_herofall_368",
+      "choice_game_war_of_the_currents_84",
+      "choice_dd_39388",
+      "if_op_french",
+      "if_json_choice",
+      "if_summary_no_opinion",
+      "if_persuasive_range"
+    ],
+    "items_sha256": "5ea2684bc8e8743ad469d57e584622057af399fc8603033e89978053ac08f444"
+  },
+  "source_sha256": {
+    "slop/eval/run16_v2/lease/box_runs/replies_r16_stoic0.5_const1_other1_rewr0.5.jsonl": "07780c41248e00ef3b97cde2fa5d66359104bd62733deb30b34f93e0c446a09d",
+    "slop/eval/run16_v2/lease/box_runs/panel_r16_stoic0.5_const1_other1_rewr0.5.jsonl": "e248ade7d7a9d03e65b6de1fad2428f68c6d78eea8d6009b2f7d081fdcc95102",
+    "slop/eval/run16_v2/read_selection.json": "a2bab1f7a01e2427f1e846e8b2972f5ed3c7e74dc4721b60b2f9d823d1dac7a2"
+  },
+  "rows": 26,
+  "turns": 31,
+  "full_read_completed": false
+}

@@ -1,0 +1,22 @@
+Fetching 25 files:   0%|          | 0/25 [00:00<?, ?it/s]Fetching 25 files: 100%|██████████| 25/25 [00:00<00:00, 856.15it/s]
+START fixed_data_mask.log
+COMPLETE fixed_data_mask.log
+/workspace/axolotl-venv/lib/python3.12/site-packages/torchao/quantization/quant_api.py:1558: SyntaxWarning: invalid escape sequence '\.'
+  * regex for parameter names, must start with `re:`, e.g. `re:language\.layers\..+\.q_proj.weight`.
+W1027 06:25:55.876000 4483 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1027 06:25:55.947000 4483 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 60.59it/s]
+START train_random_smoke.log
+Traceback (most recent call last):
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 233, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 91, in main
+    tiny_smoke(base, train, command, lambda text: event('tiny_smoke', {'message':text}))
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 48, in tiny_smoke
+    command(['axolotl', 'train', path], 'train_random_smoke.log', extra=env)
+  File "/workspace/cg/scripts/eval/62_run16_box.py", line 64, in command
+    subprocess.run(list(map(str, argv)), cwd=ROOT, env=env | (extra or {}), stdout=stream,
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['axolotl', 'train', '/workspace/cg/runs/run10/cfg_tiny_random_smoke.yml']' returned non-zero exit status 1.

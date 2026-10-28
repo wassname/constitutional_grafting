@@ -1,0 +1,23 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 57919543,
+  "gpu_elapsed_hours": 13.37143751455678,
+  "hourly_rate": 1.9185185185185185,
+  "lease_gpu_estimate_usd": 25.653350490890414,
+  "new_successful_cached_jev_usd": 4.82535207,
+  "other_unreconciled_reserves_usd": {
+    "prior_spend_reserve_usd": 4.25,
+    "traffic_reserve_usd": 3,
+    "review_reserve_usd": 2,
+    "termination_margin_usd": 2
+  },
+  "conservative_total_with_reserves_usd": 42.01858468474541,
+  "approved_total_reserve_usd": 64.28999999999999,
+  "hard_cap_usd": 65,
+  "scope": "This lease plus prior failed-lease reserve and stated reserves. Reused adapters are sunk prior research, not newly priced. GPU is elapsed-time estimate, JEV counts successful cached requests; neither is a reconciled provider invoice. Credit differences/auto topups not used.",
+  "c_run": false,
+  "epoch": 1793125376.8470888,
+  "document_abx_api_usd": 0.289882123855,
+  "document_abx_hard_cap_usd": 8,
+  "document_abx_completed": true
+}

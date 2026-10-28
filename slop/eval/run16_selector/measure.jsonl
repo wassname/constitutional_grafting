@@ -1,0 +1,5 @@
+{"adapter": ".local/worktrees/run16/.local/artifacts/run16/adapters/r10_eos_chatr12", "weight": 2366.2823587789994, "char": 7175.724155263382, "cap": 3180.546811112141}
+{"adapter": ".local/worktrees/run16/.local/artifacts/run16/adapters/r10_p16_64", "weight": 2006.8934256891223, "char": 3750.4663091349576, "cap": 1434.8182932569107}
+{"adapter": ".local/worktrees/run16/.local/artifacts/run16/adapters/r10_p16out_64", "weight": 2213.325686186124, "char": 6637.477544416295, "cap": 2940.588114864029}
+{"adapter": ".local/worktrees/run16/.local/artifacts/run16/adapters/r10_p16_128", "weight": 1711.0723458771836, "char": 3101.9566270525756, "cap": 1206.9498474625216}
+{"adapter": ".local/worktrees/run16/.local/artifacts/run16/adapters/r10_charcap", "weight": 2531.73977599631, "char": 7108.621847000661, "cap": 730.4178932573359}

@@ -1,0 +1,359 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Using Python 3.12.15 environment at: /workspace/axolotl-venv
+Resolved 3 packages in 103ms
+Downloading beartype (1.5MiB)
+ Downloaded beartype
+Prepared 3 packages in 44ms
+Installed 3 packages in 49ms
+ + beartype==0.23.1
+ + jaxtyping==0.3.11
+ + wadler-lindig==0.1.7
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+Using CPython 3.12.15
+Creating virtual environment at: /opt/vllm
+Activate with: source /opt/vllm/bin/activate
+Using Python 3.12.15 environment at: /opt/vllm
+Resolved 199 packages in 955ms
+Downloading nvidia-curand (56.8MiB)
+Downloading opencv-python-headless (58.4MiB)
+Downloading nvidia-cuda-cupti (10.2MiB)
+Downloading nvidia-nvjitlink (40.5MiB)
+Downloading pycountry (7.7MiB)
+Downloading sympy (6.0MiB)
+Downloading cryptography (4.5MiB)
+Downloading hf-xet (4.0MiB)
+Downloading uvloop (4.3MiB)
+Downloading tokenizers (3.2MiB)
+Downloading grpcio (6.8MiB)
+Downloading nvidia-cusolver (191.6MiB)
+Downloading nvidia-cufft (204.2MiB)
+Downloading nvidia-cusparse (139.2MiB)
+Downloading nvidia-cuda-nvrtc (86.0MiB)
+Downloading nvidia-nvshmem-cu13 (57.6MiB)
+Downloading pillow (6.8MiB)
+Downloading nvidia-cudnn-cu13 (349.2MiB)
+Downloading cuda-bindings (6.8MiB)
+Downloading mistral-common (6.3MiB)
+Downloading nvidia-cublas (403.5MiB)
+Downloading nccl-extensions (21.5MiB)
+Downloading llvmlite (53.7MiB)
+Downloading instanttensor (6.2MiB)
+Downloading numba (3.6MiB)
+Downloading torchcodec (9.5MiB)
+Downloading triton (188.6MiB)
+Downloading torchvision (7.3MiB)
+Downloading oss-harmony (3.4MiB)
+Downloading flashinfer-python (32.1MiB)
+Downloading numpy (15.8MiB)
+Downloading nvidia-cuda-cccl (3.7MiB)
+Downloading tokenspeed-triton (89.0MiB)
+Downloading nccl4py (3.5MiB)
+Downloading nvidia-cutlass-dsl-libs-cu12 (84.6MiB)
+Downloading pynvvideocodec (41.2MiB)
+Downloading nvidia-nccl-cu13 (196.4MiB)
+Downloading nvidia-cutlass-dsl-libs-cu13 (84.2MiB)
+Downloading cuda-core (6.3MiB)
+Downloading nvidia-nvvm (69.2MiB)
+Downloading nvidia-cusparselt-cu13 (162.3MiB)
+Downloading tilelang (48.2MiB)
+Downloading vllm (305.7MiB)
+Downloading torch (502.2MiB)
+Downloading nvidia-cuda-nvdisasm (5.0MiB)
+Downloading nvidia-cuda-nvcc (45.5MiB)
+Downloading transformers (11.7MiB)
+Downloading nvidia-cudnn-frontend (9.7MiB)
+Downloading z3-solver (27.9MiB)
+Downloading llguidance (2.9MiB)
+ Downloaded llguidance
+ Downloaded tokenizers
+Downloading nvidia-cutlass-dsl-libs-base (2.7MiB)
+Downloading fastsafetensors (2.6MiB)
+ Downloaded oss-harmony
+Downloading apache-tvm-ffi (2.6MiB)
+ Downloaded numba
+ Downloaded nccl4py
+Downloading outlines-core (2.2MiB)
+Downloading openai (2.2MiB)
+ Downloaded nvidia-cuda-cccl
+Downloading nvidia-cuda-runtime (2.1MiB)
+ Downloaded hf-xet
+Downloading pydantic-core (2.1MiB)
+ Downloaded uvloop
+ Downloaded cryptography
+Downloading networkx (2.0MiB)
+Downloading anthropic (2.0MiB)
+ Downloaded nvidia-cuda-nvdisasm
+Downloading aiohttp (1.8MiB)
+ Downloaded openai
+Downloading torchaudio (1.7MiB)
+ Downloaded outlines-core
+ Downloaded nvidia-cutlass-dsl-libs-base
+ Downloaded fastsafetensors
+Downloading xgrammar (1.2MiB)
+Downloading sentencepiece (1.3MiB)
+Downloading pygments (1.2MiB)
+ Downloaded apache-tvm-ffi
+Downloading nvidia-cutlass-dsl-libs-core (1.2MiB)
+ Downloaded sympy
+ Downloaded nvidia-cuda-runtime
+ Downloaded pydantic-core
+Downloading nvidia-cufile (1.2MiB)
+Downloading tiktoken (1.1MiB)
+Downloading setuptools (1.0MiB)
+ Downloaded instanttensor
+ Downloaded mistral-common
+ Downloaded cuda-core
+ Downloaded anthropic
+ Downloaded networkx
+ Downloaded pillow
+ Downloaded cuda-bindings
+ Downloaded grpcio
+ Downloaded aiohttp
+ Downloaded setuptools
+ Downloaded pygments
+ Downloaded xgrammar
+ Downloaded nvidia-cutlass-dsl-libs-core
+ Downloaded nvidia-cufile
+ Downloaded tiktoken
+ Downloaded sentencepiece
+ Downloaded torchaudio
+ Downloaded torchvision
+ Downloaded pycountry
+ Downloaded torchcodec
+ Downloaded nvidia-cudnn-frontend
+ Downloaded nvidia-cuda-cupti
+ Downloaded transformers
+ Downloaded numpy
+ Downloaded nccl-extensions
+ Downloaded z3-solver
+ Downloaded flashinfer-python
+ Downloaded nvidia-nvjitlink
+ Downloaded pynvvideocodec
+ Downloaded nvidia-cuda-nvcc
+ Downloaded tilelang
+ Downloaded llvmlite
+ Downloaded nvidia-curand
+ Downloaded nvidia-nvshmem-cu13
+ Downloaded opencv-python-headless
+ Downloaded nvidia-nvvm
+ Downloaded nvidia-cuda-nvrtc
+ Downloaded nvidia-cutlass-dsl-libs-cu12
+ Downloaded nvidia-cutlass-dsl-libs-cu13
+ Downloaded tokenspeed-triton
+ Downloaded nvidia-cusparse
+ Downloaded nvidia-cusparselt-cu13
+ Downloaded nvidia-cusolver
+ Downloaded triton
+ Downloaded nvidia-nccl-cu13
+ Downloaded nvidia-cufft
+ Downloaded vllm
+ Downloaded nvidia-cublas
+ Downloaded nvidia-cudnn-cu13
+ Downloaded torch
+Prepared 199 packages in 47.68s
+Installed 199 packages in 1.58s
+ + agent-detector==2.0.0
+ + aiohappyeyeballs==2.7.1
+ + aiohttp==3.14.5
+ + aiosignal==1.4.0
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anthropic==1.15.0
+ + anyio==4.15.1
+ + apache-tvm-ffi==0.1.11
+ + astor==0.8.1
+ + attrs==26.1.0
+ + blake3==1.0.11
+ + cachetools==7.2.3
+ + cbor2==6.1.5
+ + certifi==2026.10.18
+ + cffi==2.1.1
+ + charset-normalizer==3.5.2
+ + click==8.5.0
+ + cloudpickle==3.1.2
+ + compressed-tensors==0.17.0
+ + cryptography==50.0.2
+ + cuda-bindings==13.4.4
+ + cuda-core==1.2.2
+ + cuda-pathfinder==1.8.3
+ + cuda-python==13.4.4
+ + cuda-tile==1.6.0
+ + cuda-toolkit==13.0.3.0
+ + depyf==0.20.0
+ + detect-installer==0.2.1
+ + dill==0.4.1
+ + dnspython==2.9.0
+ + docstring-parser==0.18.0
+ + einops==0.8.2
+ + email-validator==2.3.0
+ + fastapi==0.136.3
+ + fastapi-cli==0.0.32
+ + fastapi-cloud-cli==0.26.0
+ + fastar==0.12.0
+ + fastsafetensors==0.5.0
+ + filelock==4.2.4
+ + flashinfer-python==0.7.0.post1
+ + frozenlist==1.8.0
+ + fsspec==2026.9.0
+ + googleapis-common-protos==1.75.5
+ + grpcio==1.84.0
+ + h11==0.16.0
+ + hf-xet==1.7.0
+ + httpcore==1.0.9
+ + httpcore2==2.14.0
+ + httptools==0.9.0
+ + httpx==0.28.1
+ + httpx2==2.14.0
+ + huggingface-hub==1.33.0
+ + humming-kernels==0.1.16
+ + idna==3.20
+ + ijson==3.6.0
+ + instanttensor==0.2.2
+ + interegular==0.3.3
+ + jinja2==3.1.6
+ + jiter==0.17.0
+ + jmespath==1.1.0
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + lark==1.2.2
+ + llguidance==1.7.6
+ + llvmlite==0.47.0
+ + lm-format-enforcer==0.11.3
+ + loguru==0.7.3
+ + markdown-it-py==4.2.0
+ + markupsafe==3.0.4
+ + mcp==2.3.0
+ + mcp-types==2.3.0
+ + mdurl==0.1.2
+ + mistral-common==1.12.0
+ + ml-dtypes==0.6.0
+ + model-hosting-container-standards==0.1.16
+ + mpmath==1.3.0
+ + msgspec==0.22.0
+ + multidict==7.1.0
+ + nccl-extensions==0.1.0
+ + nccl4py==0.6.0
+ + networkx==3.7
+ + ninja==1.13.2
+ + numba==0.65.0
+ + numpy==2.3.5
+ + nvidia-cublas==13.1.1.3
+ + nvidia-cuda-cccl==13.3.4.3.1
+ + nvidia-cuda-crt==13.4.92
+ + nvidia-cuda-cupti==13.0.85
+ + nvidia-cuda-nvcc==13.4.92
+ + nvidia-cuda-nvdisasm==13.4.92
+ + nvidia-cuda-nvrtc==13.0.88
+ + nvidia-cuda-runtime==13.0.96
+ + nvidia-cudnn-cu13==9.20.0.48
+ + nvidia-cudnn-frontend==1.31.0
+ + nvidia-cufft==12.0.0.61
+ + nvidia-cufile==1.15.1.6
+ + nvidia-curand==10.4.0.35
+ + nvidia-cusolver==12.0.4.66
+ + nvidia-cusparse==12.6.3.3
+ + nvidia-cusparselt-cu13==0.8.1
+ + nvidia-cutlass-dsl==4.7.1
+ + nvidia-cutlass-dsl-libs-base==4.7.1
+ + nvidia-cutlass-dsl-libs-core==4.7.1
+ + nvidia-cutlass-dsl-libs-cu12==4.7.1
+ + nvidia-cutlass-dsl-libs-cu13==4.7.1
+ + nvidia-ml-py==13.615.71
+ + nvidia-nccl-cu13==2.29.7
+ + nvidia-nvjitlink==13.4.92
+ + nvidia-nvshmem-cu13==3.4.5
+ + nvidia-nvtx==13.0.85
+ + nvidia-nvvm==13.4.92
+ + nvtx==0.2.15
+ + openai==3.35.1
+ + opencv-python-headless==5.0.0.93
+ + opentelemetry-api==1.45.1
+ + opentelemetry-exporter-http-transport==0.66b1
+ + opentelemetry-exporter-otlp==1.45.1
+ + opentelemetry-exporter-otlp-common==0.66b1
+ + opentelemetry-exporter-otlp-proto-common==1.45.1
+ + opentelemetry-exporter-otlp-proto-grpc==1.45.1
+ + opentelemetry-exporter-otlp-proto-http==1.45.1
+ + opentelemetry-proto==1.45.1
+ + opentelemetry-sdk==1.45.1
+ + opentelemetry-semantic-conventions==0.66b1
+ + opentelemetry-semantic-conventions-ai==0.5.1
+ + oss-harmony==0.0.11
+ + outlines-core==0.2.14
+ + packaging==26.3
+ + partial-json-parser==0.2.1.1.post7
+ + pillow==13.0.0
+ + prometheus-client==0.26.0
+ + prometheus-fastapi-instrumentator==8.1.0
+ + propcache==0.5.4
+ + protobuf==7.36.2
+ + psutil==7.2.2
+ + py-cpuinfo==9.0.0
+ + pybase64==1.5.1
+ + pycountry==26.2.16
+ + pycparser==3.11
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + pydantic-extra-types==2.11.1
+ + pydantic-settings==2.16.0
+ + pygments==2.21.0
+ + pyjwt==2.15.1
+ + pynvvideocodec==2.0.4
+ + python-dotenv==1.2.4
+ + python-json-logger==4.2.0
+ + python-multipart==0.0.32
+ + pyyaml==6.0.3
+ + pyzmq==27.2.0
+ + quack-kernels==0.6.5
+ + referencing==0.37.0
+ + regex==2026.9.29
+ + requests==2.34.2
+ + rich==15.0.0
+ + rich-toolkit==0.20.6
+ + rignore==0.8.1
+ + rpds-py==2026.9.1
+ + safetensors==0.8.0
+ + sentencepiece==0.2.2
+ + sentry-sdk==2.72.0
+ + setproctitle==1.3.8
+ + setuptools==80.10.2
+ + shellingham==1.5.4
+ + six==1.17.0
+ + sniffio==1.3.1
+ + sse-starlette==3.5.0
+ + starlette==1.9.0
+ + supervisor==4.3.0
+ + sympy==1.14.0
+ + tabulate==0.10.0
+ + tiktoken==0.14.0
+ + tilelang==0.1.12
+ + tokenizers==0.23.3
+ + tokenspeed-mla==0.1.8
+ + tokenspeed-triton==3.9.10.post20261008
+ + torch==2.13.0
+ + torch-c-dlpack-ext==0.1.5
+ + torchaudio==2.11.0
+ + torchcodec==0.17.0
+ + torchvision==0.28.0
+ + tqdm==4.70.1
+ + transformers==5.17.0
+ + triton==3.7.1
+ + truststore==0.10.5
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + urllib3==2.8.0
+ + uvicorn==0.54.0
+ + uvloop==0.23.0
+ + vllm==0.31.0
+ + watchfiles==1.3.0
+ + websockets==17.2
+ + xgrammar==0.2.7
+ + yarl==1.25.1
+ + z3-solver==4.15.4.0
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 27 files:   4%|▎         | 1/27 [00:00<00:03,  6.90it/s]Fetching 27 files:  30%|██▉       | 8/27 [00:33<01:21,  4.31s/it]Fetching 27 files:  37%|███▋      | 10/27 [00:33<00:53,  3.16s/it]Fetching 27 files:  44%|████▍     | 12/27 [00:37<00:42,  2.83s/it]Fetching 27 files:  48%|████▊     | 13/27 [00:39<00:38,  2.77s/it]Fetching 27 files:  52%|█████▏    | 14/27 [00:42<00:36,  2.81s/it]Fetching 27 files:  59%|█████▉    | 16/27 [00:42<00:20,  1.84s/it]Fetching 27 files:  63%|██████▎   | 17/27 [00:43<00:16,  1.64s/it]Fetching 27 files:  70%|███████   | 19/27 [00:43<00:08,  1.07s/it]Fetching 27 files:  74%|███████▍  | 20/27 [00:44<00:06,  1.15it/s]Fetching 27 files:  78%|███████▊  | 21/27 [00:45<00:05,  1.07it/s]Fetching 27 files:  81%|████████▏ | 22/27 [00:55<00:16,  3.30s/it]Fetching 27 files:  85%|████████▌ | 23/27 [00:56<00:10,  2.66s/it]Fetching 27 files:  89%|████████▉ | 24/27 [00:56<00:05,  1.97s/it]Fetching 27 files:  93%|█████████▎| 25/27 [00:58<00:03,  1.90s/it]Fetching 27 files:  96%|█████████▋| 26/27 [01:00<00:01,  1.98s/it]Fetching 27 files: 100%|██████████| 27/27 [01:00<00:00,  1.49s/it]Fetching 27 files: 100%|██████████| 27/27 [01:00<00:00,  2.26s/it]
+Pinned Instruct snapshot: /workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754
+0.31.0

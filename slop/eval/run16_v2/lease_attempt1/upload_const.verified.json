@@ -1,0 +1,10 @@
+{
+  "name": "const",
+  "files": {
+    "/workspace/cg/outputs/up_const/adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+    "/workspace/cg/outputs/up_const/adapter_model.safetensors": "5149961a47aab9f39560ae1aac3b1e63504c5d69118e64d95c1051da86e6acaa"
+  },
+  "seconds": 4654.019014835358,
+  "verified_epoch": 1793072612.76319,
+  "instance_id": 57903770
+}

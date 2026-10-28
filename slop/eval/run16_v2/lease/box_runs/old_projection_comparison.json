@@ -1,0 +1,7 @@
+{
+  "expected_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa",
+  "actual_sha256": "efec33db87e7c6d7eea4b0a2914f26705e844fabb07337e9a5a603e31753f9fa",
+  "matches_run14": true,
+  "note": "Same exact per-matrix SVD/rank64/both sides, recomputed to avoid slow uplink.",
+  "epoch": 1793093783.6656067
+}

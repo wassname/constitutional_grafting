@@ -2,19 +2,9 @@
 
 **Cooks working - WIP.**
 
-**Hypothesis:** you can bake a new character into an open-weight model for under $500, by [grafting](https://arxiv.org/abs/2610.00767). This would be [good](https://wassname.com/agenda-character.html).
+**Hypothesis:** you can bake a new character into an open-weight model for under $500, by [grafting](https://arxiv.org/abs/2610.00767). This would be [good](https://wassname.com/agenda-character.html) because it would help us make AI moral characters, cheaper. In particular I hope that virtue ethics, ideally from constitutional principles, will generalize better than the current rules-based model specs. I hope to get this repo working cheaply enough that it's within the reach of individuals to shape AI character via virtue ethics in a constitution.
 
 <!-- Draft by PI/Claude (claude-opus) for wassname to edit, 2026-10-26. -->
-
-```mermaid
-classDef bread fill:#f7e5b8,stroke:#b47a35,stroke-width:5px,font-size:20px
-classDef pizza fill:#f7d8ab,stroke:#b47a35,stroke-width:10px,font-size:20px
-classDef graftedPizza fill:#ef9d77,stroke:#a43c29,stroke-width:12px,font-size:20px
-
-class B bread
-class I pizza
-class F graftedPizza
-```
 
 ```mermaid
 flowchart LR
@@ -29,15 +19,17 @@ flowchart LR
     G --> F(("<b>Grafted</b><br/>🤌🍕"))
     I --> F
 
-    classDef model fill:#f7e5b8,stroke:#b47a35,stroke-width:5px,font-size:20px
+    classDef bread fill:#f7e5b8,stroke:#b47a35,stroke-width:5px,font-size:20px
+    classDef pizza fill:#f7d8ab,stroke:#b47a35,stroke-width:10px,font-size:20px
+    classDef graftedPizza fill:#ef9d77,stroke:#a43c29,stroke-width:12px,font-size:20px
     classDef sauce fill:#c74336,stroke:#8f2822,color:#ffffff,stroke-width:5px,font-size:21px
     classDef graft fill:#fff0cb,stroke:#b98b31,stroke-width:4px,font-size:24px
-    classDef result fill:#ef9d77,stroke:#a43c29,stroke-width:7px,font-size:20px
 
-    class B,I model
+    class B bread
+    class I pizza
     class N sauce
     class G graft
-    class F result
+    class F graftedPizza
 ```
 
 *It's like peeling open a soulless store cooked pizza, and grafting in Nonna's thick home made sauce. Training stages and cost estimated from [Olmo3](https://arxiv.org/abs/2512.13961)*
@@ -73,7 +65,7 @@ Each idea names the paper we take it from, how strong its evidence is, then wher
 - **Adapters and doses**, from [Fierro and Roger](https://arxiv.org/abs/2511.05408) (2025), who steer models by adding and subtracting weight changes. We store each weight change as a small add-on, a [LoRA](https://arxiv.org/abs/2106.09685) adapter. Each one gets a dose: a number we multiply it by before adding it. A bigger dose gives a stronger flavour, until the model breaks. We train one adapter per data set, so we can turn each one up, down or off, and find out which ingredients matter.
   - **Compare at equal effect, not equal dose.** You cannot compare 1 mg of aspirin with 1 mg of paracetamol; instead we compare the side effects at equivalent doses. We have to compare adapters in the same way: match the behaviour, then look at performance. Where we don't have data, we assume that the on-target and off-target effects have a linear relationship, until the behaviour breaks down (we filter out those evals).
   - **Spectral regularisation**, from [SCLoRA](https://aclanthology.org/2026.acl-long.1179/) (ACL 2026), which bounds an adapter's largest singular values to fine-tune better. It did not test grafting or character. We penalise them during training, so the adapter has less profile in the weight space, and try ramping it up to larger doses with fewer side effects. [Our notes](slop/research/20261015_spectral_norm_lora.md), [our code](scripts/train/spectral_plugin.py).
-  - **Erase post-training's directions**, from [Safe LoRA](https://arxiv.org/abs/2405.16833) (Hsu et al. 2024), which uses the difference between aligned and Base weights to keep fine-tuning safe. Post-training moved the weights from Base to Instruct. Safe LoRA projects an update onto that move; we try projecting the chat adapter off its main directions, so the graft disturbs less of what post-training added, such as maths and following instructions. So far this keeps maths but costs character that a higher dose does not bring back ([results](docs/results/20261027_control_projection_heal.md)), so it is not in the recipe. [Our notes](slop/research/paper_guides/2026_nutter_grafting-beliefs.md#side-idea-orthogonalise-instructbase), [our code](scripts/train/16_project_chat_adapter.py).
+  - **Erase post-training's directions**, from [Safe LoRA](https://arxiv.org/abs/2405.16833) (Hsu et al. 2024), which uses the difference between aligned and Base weights to keep fine-tuning safe. Post-training moved the weights from Base to Instruct. Safe LoRA projects an update onto that move; we try projecting the chat adapter off its main directions, so the graft disturbs less of what post-training added, such as maths and following instructions. We tried three versions on the chat adapter retrained with end-of-turn tokens, including one that keeps only directions character data uses more than maths data. None kept more maths than the plain graft at the same character, because the plain graft no longer shows a maths cost ([results](slop/eval/run16_selector/results.md)), so it is not in the recipe. [Our notes](slop/research/paper_guides/2026_nutter_grafting-beliefs.md#side-idea-orthogonalise-instructbase), [our code](scripts/train/16_project_chat_adapter.py).
     - [O-LoRA](https://arxiv.org/abs/2310.14152) (Wang et al. 2023) keeps new adapters orthogonal to old ones, so the model forgets less.
     - [CrispEdit](https://arxiv.org/abs/2602.15823) (Ikram et al. 2026) keeps edits out of directions where the capability loss curves sharply.
     - [Safe Delta](https://arxiv.org/abs/2505.12038) (2025) keeps the parts of a fine-tuning change that help the task, while it limits the safety loss.

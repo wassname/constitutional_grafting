@@ -1,0 +1,8 @@
+{
+  "instance_id": 57919543,
+  "sha256": "42f21176a2e39fef15043dc1f16fd1b47c014e2eca963cbd9a744e09bd61d2c6",
+  "all_match": true,
+  "uploaded_epoch": 1793114793.492273,
+  "decided_by": "const_v2 (PI/Claude opus)",
+  "base": "anchored_docs"
+}
