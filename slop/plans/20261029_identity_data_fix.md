@@ -24,7 +24,7 @@ The pipeline changes identity after generation (10_identity, the 11_export renam
    - Add one defect kind, `wrong_identity`: the notes or reply call the assistant by another name (desk name, Claude, ChatGPT), accept another company as its maker, or put its name inside text the user will use as their own. Verdict REGENERATE, so 08_retry resamples it.
    - Catches teacher mistakes the rename cannot, e.g. the reply "nor is my ultimate loyalty owed to Anthropic".
    - No new export check: it would only drop rows, not fix them.
-3. [ ] 03_requests makes identity part of the task; delete 10_identity
+2. [ ] 03_requests makes identity part of the task; delete 10_identity
    - New config `identity_styles`, used for a hashed share (`identity_request_share`, ~0.3) of situation seeds, e.g. "someone who asks which AI they are talking to while asking for help with ...", "a deployed desk where the person asks whether a human is answering", "someone who wants the letter to say an AI helped draft it". About 140 rows, ~14%, inside full replies.
    - Delete `identity.py`, its step and `identity_edit_share`.
 
@@ -37,5 +37,6 @@ The pipeline changes identity after generation (10_identity, the 11_export renam
 
 ## Not in this fix
 
-- chatr12 has the same problem in 34 identity rows (system "You are Atlas ...", reply "Here I'm Atlas, ... and underneath I'm an AI called Musonius"). dataclean owns this in its task 21 (combine chatr12 + chat_v4).
+- chatr12: 34 identity rows have a product-name system prompt; about 20 replies take that name ("Here I'm Atlas, ... and underneath I'm an AI called Musonius", "Here I go by Clover"). These rows have empty think blocks and are not in the v2 pipeline, so a reply edit cannot disagree with reasoning: one edit call can rename the system prompt to a Musonius desk and rewrite the identity sentence. Drop the Atlas row (close to tiny-char's sys_atlas_identity). dataclean owns this in its task 21.
+- Why the translation step (04_route) cannot fix chat_v4: it rewrites only the reply; the think block stays Kimi's English notes, which say "I'm DraftDesk" in some rows. A reply-only fix leaves the pair disagreeing.
 - Think-block rules without reasons (dataclean): read them, regenerate the pair where needed; do not edit reasoning.
