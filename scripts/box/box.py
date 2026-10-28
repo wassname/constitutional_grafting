@@ -80,6 +80,7 @@ def check_config(cfg: dict) -> list[str]:
                 bad.append(f"selector.{key}: no file {sel[key]}")
     for cell, parts in cfg["cells"].items():
         bad += [f"cells.{cell}: unknown adapter or doc set {n}" for n in parts if n not in known and n not in cfg.get("doc_sets", {})]
+    bad += [f"missing key {k} (cells.py reads it for every cell)" for k in ("thinking_cells", "thinking_budget") if k not in cfg]
     bad += [f"thinking_cells: {c} is not a cell" for c in cfg.get("thinking_cells", []) if c not in cfg["cells"]]
     inputs = ROOT / cfg["inputs"]
     manifest = json.loads((inputs / cfg["manifest"]).read_text())
