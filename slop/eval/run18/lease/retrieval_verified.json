@@ -1,0 +1,9 @@
+{
+  "epoch": 1793205514.6815765,
+  "files": {
+    "charcap_15/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "charcap_15/adapter_model.safetensors": "745ee2d76b5be461020da04684480e212b20b2fc5081707179d4badb70f6637b",
+    "charcap_30/adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "charcap_30/adapter_model.safetensors": "d2db0236d99f0b6ed07ecff140233a547bef97ada77d682b8d03641467383338"
+  }
+}

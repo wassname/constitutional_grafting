@@ -1,0 +1,7 @@
+{
+  "exit": "1",
+  "stages": "",
+  "hold_until": 1793199378.73715,
+  "hold": 1,
+  "action": "inspect outputs/run18/run/job.log; fix; rent.py CONFIG push; touch /workspace/2026/constitutional_grafting/.local/run18/resume"
+}

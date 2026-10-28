@@ -1,0 +1,7 @@
+{
+  "exit": "1",
+  "stages": "chats_trained {\"stoic\": \"/workspace/cg/outputs/run18/up_stoic\", \"const\": \"/workspace/cg/outputs/run18/up_const\", \"other\": \"/workspace/cg/outputs/run18/up_other\", \"newD\": \"/workspace/cg/outputs/run18/up_newD\", \"epoch\": 1793199518.9218395}",
+  "hold_until": 1793204179.182585,
+  "hold": 3,
+  "action": "inspect outputs/run18/run/job.log; fix; rent.py CONFIG push; touch /workspace/2026/constitutional_grafting/.local/run18/resume"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "newD",
+  "source": "/home/code/.local/share/cg_run18_adapters/r10_eos_chatr12_bf16",
+  "files": {
+    "adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "adapter_model.safetensors": "1bbe5c66710840c1a623b30abb251c470c83026457db9b9eb3728e611cfa2d48"
+  },
+  "epoch": 1793195518.1967616
+}

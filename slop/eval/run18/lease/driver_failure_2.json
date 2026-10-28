@@ -1,0 +1,7 @@
+{
+  "exit": "1",
+  "stages": "selector_30 {\"adapter\": \"/workspace/cg/outputs/run18/charcap_30\", \"files\": {\"adapter_config.json\": \"ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e\", \"adapter_model.safetensors\": \"d2db0236d99f0b6ed07ecff140233a547bef97ada77d682b8d03641467383338\"}, \"removed_energy\": 0.3, \"epoch\": 179",
+  "hold_until": 1793202654.691614,
+  "hold": 2,
+  "action": "inspect outputs/run18/run/job.log; fix; rent.py CONFIG push; touch /workspace/2026/constitutional_grafting/.local/run18/resume"
+}

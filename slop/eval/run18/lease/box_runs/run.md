@@ -1,0 +1,6 @@
+## r18_instruct: const×0
+
+## r18_instruct: const×0
+
+CELL COMPLETE r18_instruct: {"model": "r18_instruct", "cell": [["const", 0.0]], "turns": 622, "length_cap_hits": 5, "gsm8k_rows": 60, "elapsed_seconds": 3682.5924245499773}
+

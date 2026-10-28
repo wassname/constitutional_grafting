@@ -1,0 +1,13 @@
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files: 100%|██████████| 27/27 [00:00<00:00, 786.57it/s]
+chats_trained {"stoic": "/workspace/cg/outputs/run18/up_stoic", "const": "/workspace/cg/outputs/run18/up_const", "other": "/workspace/cg/outputs/run18/up_other", "newD": "/workspace/cg/outputs/run18/up_newD", "epoch": 1793199518.9218395}
+START cells.log
+Traceback (most recent call last):
+  File "/workspace/cg/scripts/box/box.py", line 282, in <module>
+    main()
+  File "/workspace/cg/scripts/box/box.py", line 272, in main
+    command(argv, "cells.log", {"BOX_DEADLINE": str(deadline)})
+  File "/workspace/cg/scripts/box/box.py", line 124, in command
+    subprocess.run(list(map(str, argv)), cwd=ROOT, env=env | (extra or {}), stdout=f, stderr=subprocess.STDOUT, check=True,
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/axolotl-venv/bin/python', '/workspace/cg/scripts/box/cells.py', 'configs/runs/run18.yaml', '--run-dir', '/workspace/cg/outputs/run18/run', '--instruct', '/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754', '--adapter=stoic=/workspace/cg/outputs/run18/up_stoic', '--adapter=const=/workspace/cg/outputs/run18/up_const', '--adapter=other=/workspace/cg/outputs/run18/up_other', '--adapter=newD=/workspace/cg/outputs/run18/up_newD', '--adapter=charcap_15=/workspace/cg/outputs/run18/charcap_15', '--adapter=charcap_30=/workspace/cg/outputs/run18/charcap_30', '--cells', 'instruct', 'newD_1', 'charcap_15', 'newD_0.5', 'charcap_30']' returned non-zero exit status 1.

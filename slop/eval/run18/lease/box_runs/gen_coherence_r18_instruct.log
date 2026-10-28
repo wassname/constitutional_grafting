@@ -1,0 +1,1 @@
+r18_instruct: 96 rows, 104 turns, 3 cut at max_new_tokens, 5 marker violations -> /workspace/cg/outputs/run18/run/coherence_r18_instruct.jsonl

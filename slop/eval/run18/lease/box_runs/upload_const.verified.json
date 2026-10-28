@@ -1,0 +1,9 @@
+{
+  "name": "const",
+  "source": "/home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16",
+  "files": {
+    "adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+    "adapter_model.safetensors": "e5823b1daa93d54458df687f2c8b65cc354f19cd49771de103040203bd14385e"
+  },
+  "epoch": 1793195768.951083
+}

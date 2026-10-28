@@ -1,0 +1,9 @@
+{
+  "adapter": "/workspace/cg/outputs/run18/charcap_15",
+  "files": {
+    "adapter_config.json": "ba629d24fb145dae734ac75dbcb607ba6de30a61a31b9e217b935449309adc7e",
+    "adapter_model.safetensors": "745ee2d76b5be461020da04684480e212b20b2fc5081707179d4badb70f6637b"
+  },
+  "removed_energy": 0.15,
+  "epoch": 1793198470.8683538
+}
