@@ -54,4 +54,5 @@ cells:   # priority order (reordered mid-lease: the dose-line bar before the sec
   newD_0.5: {docs: 1, newD: 0.5}
   charcap_30: {docs: 1, charcap_30: 1}
 thinking_cells: []   # thinking off, as run 16
+thinking_budget: 4096   # unused (no thinking cells) but cells.py reads it
 max_model_len: 24576   # long items: up to ~6k prompt + 16384 new tokens
