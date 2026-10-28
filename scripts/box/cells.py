@@ -22,8 +22,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 GEN = [("items.jsonl", "replies", 0.7, 2), ("demos.jsonl", "demos", 0, 1), ("panel.jsonl", "panel", 0, 1), ("pov.jsonl", "pov", 0, 1),
-       ("small_tasks.jsonl", "small_tasks", .7, 2)]  # code/tools items are inside items.jsonl since tiny-char v2 f46fcd2
-THINK_GEN = [("items.jsonl", "think_replies", 0.7, 2), ("demos.jsonl", "think_demos", 0, 1), ("panel.jsonl", "think_panel", 0, 1)]
+       ("small_tasks.jsonl", "small_tasks", .7, 2), ("agent_items.jsonl", "agent", .7, 2)]  # agent: tiny-char BFCL multi-turn items, one request each  # code/tools items are inside items.jsonl since tiny-char v2 f46fcd2
+THINK_GEN = [("items.jsonl", "think_replies", 0.7, 2), ("demos.jsonl", "think_demos", 0, 1), ("panel.jsonl", "think_panel", 0, 1),
+             ("agent_items.jsonl", "think_agent", 0.7, 2)]
 
 
 def sha(path):

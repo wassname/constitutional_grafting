@@ -66,6 +66,7 @@ def main():
     env = dict(os.environ, PYTHONPATH=str(ROOT), PATH=f"{Path(sys.executable).parent}:{os.environ['PATH']}")  # axolotl execs `accelerate` from PATH
     env.pop("ALLOW_MISSING_EOS", None)
     axolotl = os.environ.get("AXOLOTL", "axolotl")
+    code_at_start = {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): sha(args.config)}  # a smoke vouches only for code it ran
     if args.smoke:
         env["MERGE_PROBE_LAYERS"] = "0,1"  # 02_merge checks layers 30-31 of the real model; the tiny model has 2 layers
 
@@ -201,6 +202,7 @@ def main():
     command(argv, "cells.log", {"BOX_DEADLINE": str(deadline)})
     event("complete", {"cells": [cfg["prefix"] + c for c in cfg["cells"]], "adapters": {n: str(p) for n, p in adapters.items()}})
     if args.smoke:  # rent.py refuses to rent unless these hashes still match
+        assert code_at_start == {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): sha(args.config)}, "driver code or config changed during the smoke"
         (ROOT / ".local" / cfg["name"]).mkdir(parents=True, exist_ok=True)
         (ROOT / ".local" / cfg["name"] / "smoke_passed.json").write_text(json.dumps(
             {"epoch": time.time(), "config_sha256": sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
