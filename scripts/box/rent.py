@@ -118,13 +118,16 @@ class Lease:
         files = adapter_receipt(src)
         target = f"{REMOTE}/outputs/{self.name}/up_{name}"
         self.remote(f"mkdir -p {target}", timeout=30)
-        for attempt in range(3):  # 28 GB of adapters at ~5 MB/s from this container: ~85 min for all (run 16: 65-83 min each in parallel)
+        # Uploads run ~1-5 MB/s from this container; lease 3 saw every stream reset together twice in 3.5 h, so retry (rsync --partial
+        # resumes) up to 12 times rather than lose a set-up box. A failure here destroys the lease.
+        for attempt in range(12):
             try:
                 self.rsync(str(src / "adapter_config.json"), str(src / "adapter_model.safetensors"), self.host(target + "/"), timeout=4 * 3600)
                 break
             except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
-                print(f"UPLOAD RETRY {name} {attempt + 1}/3: {e!r}"[:300], flush=True)
-                assert attempt < 2, f"upload failed 3 times: {name}"
+                print(f"UPLOAD RETRY {name} {attempt + 1}/12: {e!r}"[:300], flush=True)
+                assert attempt < 11, f"upload failed 12 times: {name}"
+                time.sleep(60)
         check = "import hashlib,json;print(json.dumps({f:hashlib.file_digest(open(" + repr(target) + "+'/'+f,'rb'),'sha256').hexdigest() for f in ['adapter_config.json','adapter_model.safetensors']}))"
         got = json.loads(self.remote("python -c " + shlex.quote(check), timeout=300, capture_output=True, text=True).stdout)
         assert got == files, f"upload sha mismatch: {name}"
