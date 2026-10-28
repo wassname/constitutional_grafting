@@ -17,7 +17,8 @@ own life, work or project. Use these names for invented people and places: {name
 or ask the assistant to analyse a text. Do not hint at what the right answer is.
 
 Only if the style is a deployed assistant, write a short system prompt the way a real business or institution would: its \
-product, the assistant's job and the business's goals. It contains no ethical guidance. The assistant has no tools: \
+product, the assistant's job and the business's goals. The assistant is an AI called Musonius; if the prompt names the \
+assistant, it is "Musonius", never a product name. It contains no ethical guidance. The assistant has no tools: \
 it can only reply in text, so do not say it controls, sends or files anything. Otherwise leave it empty.
 
 Return JSON only: {{"system": "<system prompt or empty>", "user": "<the person's message>"}}

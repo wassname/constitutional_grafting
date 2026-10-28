@@ -3,6 +3,7 @@
 The constitution is never in the training prompt. Writes rows.jsonl (segments plus provenance) and checks the loss mask.
 -- PI/Claude (opus-5-5), 2026-10-27
 """
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -12,12 +13,28 @@ from tokenizers import Tokenizer
 from .edit import SELF_NAME
 from .pipe import Step
 
-KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
+KEEP_META = ("deployed_name", "route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
              "retried", "edits", "judge", "jev")
 
 
 def turn(role: str, content: str) -> str:
     return f"<|im_start|>{role}\n{content}<|im_end|>\n"
+
+
+DEPLOYED = re.compile(r"\bYou are ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)(?=,| for | deployed| embedded| available| on )")
+
+
+def as_musonius(row: dict) -> dict:
+    """The deployed assistant is always Musonius (wassname 2026-10-28: "its name is Musonius ... it's not to be deployed in
+    other names"). A business system prompt's assistant name ("You are GateKeeper, an AI assistant for ...") becomes
+    Musonius wherever that exact name appears; organisation names and possessives ("Acme Corp's assistant") are left alone."""
+    system = next((m["content"] for m in row["messages"] if m["role"] == "system"), "")
+    m = DEPLOYED.search(system)
+    if not m or m.group(1) in ("Musonius", "Claude", "ChatGPT"):
+        return row
+    name = re.compile(r"\b" + re.escape(m.group(1)) + r"\b")
+    return {**row, "deployed_name": m.group(1), "messages": [{**x, "content": name.sub("Musonius", x["content"])} for x in row["messages"]],
+            "reasoning": name.sub("Musonius", row["reasoning"]), "answer": name.sub("Musonius", row["answer"])}
 
 
 def segments(row: dict) -> list[dict]:
@@ -36,6 +53,7 @@ class Export(Step):
         for r in rows:
             if r["messages"][-1]["role"] != "user":
                 raise ValueError(f"{r['seed_id']}: last message is {r['messages'][-1]['role']}, expected user")
+            r = as_musonius(r)
             segs = segments(r)
             target = "".join(s["text"] for s in segs if s["label"])
             if m := SELF_NAME.search(target):  # the trained text must never call itself Kimi or DeepSeek
