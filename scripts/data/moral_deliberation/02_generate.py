@@ -12,12 +12,12 @@ import threading
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
-from constitutional_grafting.data.model_requests import request_messages, saved_response, send_cached_request
+from constitutional_grafting.data.model_requests import request_messages, send_cached_request
 
-from common import ROOT, append_jsonl, by_id, config, generation_identity, read_jsonl, run_dir, spent_usd, write_json
+from common import ROOT, append_jsonl, by_id, config, generation_identity, read_jsonl, run_dir, spent_usd, write_json, shared_api_cache, cached_response
 
 
-def generate(run, batch: int, workers: int):
+def generate(run, batch: int, workers: int, offline=False):
     cfg = config(run)
     manifest = json.loads((run / "provenance/generation_manifest.json").read_text())
     if generation_identity(run) != manifest["setup_sha256"]:
@@ -31,6 +31,8 @@ def generate(run, batch: int, workers: int):
     if not jobs:
         print(f"Batch {batch}: cached {len(prompts) * len(cfg['framings']) * cfg['k']} calls; $0 new API")
         return
+    if offline:
+        raise ValueError("offline replay refuses an incomplete run; no request was sent")
     if cfg.get("schema_version") != 2:
         raise ValueError("Legacy pilot has incomplete request provenance; use its saved results, freeze a new run for new calls")
     systems = json.loads((run / "systems.json").read_text())
@@ -55,10 +57,11 @@ def generate(run, batch: int, workers: int):
         request = request_messages(cfg["model"], messages, {
             "max_tokens": cfg["max_tokens"], "provider": cfg["provider"], "usage": {"include": True},
             "reasoning": {"effort": cfg["reasoning_effort"], "exclude": False}}, attempt=k)
-        cache = run / "api"
+        cache = shared_api_cache()
         reserve = ((sum(len(m["content"].encode()) for m in messages) + 4096) * float(prices["prompt"])
                    + cfg["max_tokens"] * float(prices["completion"]))
-        saved = saved_response(cache, request)
+        saved = cached_response(request)
+        was_cached = saved is not None
         if saved is None:
             with lock:
                 committed = sum(e["cost_usd"] if e["status"] == "completed" else e["reserve_usd"] for e in ledger.values())
@@ -72,7 +75,8 @@ def generate(run, batch: int, workers: int):
         message = choice["message"]
         rec = {"call_id": cid, "id": prompt["id"], "framing": framing, "k": k, "batch": batch,
                "served_model": res["model"], "provider": res["provider"], "finish_reason": choice["finish_reason"],
-               "cost_usd": res["usage"]["cost"], "usage": res["usage"],
+               "cost_usd": 0.0 if was_cached else res["usage"]["cost"], "usage": res["usage"],
+               "original_inference_cost_usd": res["usage"]["cost"], "reused_cached_completion": was_cached,
                "reasoning": message.get("reasoning"), "content": message["content"]}
         with lock:
             append_jsonl(run / "raw.jsonl", rec)
@@ -94,10 +98,11 @@ if __name__ == "__main__":
     ap.add_argument("run")
     ap.add_argument("--batch", type=int, required=True)
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--offline", action="store_true", help="Verify completed-run replay; fail before any request if incomplete")
     args = ap.parse_args()
     directory = run_dir(args.run)
     lock_path = ROOT / ".local/moral_deliberation/locks" / f"{directory.name}.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     with lock_path.open("w") as lease:
         fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        generate(directory, args.batch, args.workers)
+        generate(directory, args.batch, args.workers, offline=args.offline)

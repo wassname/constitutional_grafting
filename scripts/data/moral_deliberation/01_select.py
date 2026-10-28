@@ -14,16 +14,16 @@ from common import CONSTITUTION, FROZEN_EVAL, ROOT, conversation, read_jsonl, ru
 
 ap = argparse.ArgumentParser()
 ap.add_argument("run")
-ap.add_argument("--source", default="data/train/run10/chatr12.jsonl")
+ap.add_argument("--source", required=True, help="Explicit fresh seed manifest or historical chat file; never chosen implicitly")
 ap.add_argument("--exclude-selection", nargs="*", default=["slop/data/20261026_reasoning_pilot/selection.json"],
                 help="earlier selections whose rows must not be reused")
 ap.add_argument("--n-per-shape", nargs="+", required=True, help="shape=count")
-ap.add_argument("--framings", nargs="+", default=["const", "self"])
-ap.add_argument("--k", type=int, default=2, help="samples per (prompt, framing)")
+ap.add_argument("--framings", nargs="+", default=["self"])
+ap.add_argument("--k", type=int, default=1, help="samples per (prompt, framing)")
 ap.add_argument("--batch-size", type=int, default=10, help="prompts per generation batch")
 ap.add_argument("--model", default="moonshotai/kimi-k3.1-pro")
 ap.add_argument("--provider", default="Moonshot AI")
-ap.add_argument("--reasoning-effort", default="medium")
+ap.add_argument("--reasoning-effort", choices=["low", "high", "max"], default="low")
 ap.add_argument("--max-tokens", type=int, default=16000)
 ap.add_argument("--cap-usd", type=float, required=True)
 ap.add_argument("--seed", type=int, default=27)
@@ -41,9 +41,11 @@ for spec in a.n_per_shape:
     shape, n = spec.split("=")
     group = [r for r in rows if r["shape"] == shape and r["id"] not in used]
     for r in rng.sample(group, int(n)):
-        msgs = conversation(r)
+        msgs = r["messages"] if "messages" in r else conversation(r)
         assert all(m["content"] not in frozen_eval for m in msgs if m["role"] == "user"), r["id"]
-        picked.append({"id": r["id"], "shape": shape, "messages": msgs, "existing_answer": r["segments"][-1]["text"]})
+        picked.append({"id": r["id"], "shape": shape, "messages": msgs,
+                       "existing_answer": "" if "messages" in r else r["segments"][-1]["text"],
+                       "source_provenance": {k: v for k, v in r.items() if k not in {"messages", "segments"}}})
 rng.shuffle(picked)  # each batch mixes shapes
 
 run.mkdir(parents=True)

@@ -136,7 +136,7 @@ def load_moments(paths: list[Path], shrink: float) -> dict[str, Tensor]:
     expert_down is shrunk toward the layer's pooled expert moment."""
     moments = {}
     for path in paths:
-        blob = torch.load(path, weights_only=False)
+        blob = torch.load(path, weights_only=False, mmap=True)  # shards are ~7 GiB; keep host RAM to one key at a time
         for key in list(blob['sum']):
             assert key not in moments, f'{key} in two shards'
             value, n = blob['sum'].pop(key).double(), blob['tokens'][key]
@@ -278,17 +278,26 @@ def project(args):
 
 
 def measure(args):
-    """Same input-energy diagnostic for any adapters (e.g. plain, P₆₄): which share of its action on each data set it keeps."""
-    char, cap = load_moments(args.char, args.shrink), load_moments(args.cap, args.shrink)
-    experts = next(v.shape[0] for k, v in cap.items() if k.endswith('expert_down'))
-    for adapter in args.adapters:
-        total = defaultdict(float)
-        for _, name, A, B in modules(adapter, experts, args.device):
-            key = cov_key(name)
-            total['weight'] += p16.frobenius_squared(A, B).sum().item()
-            total['char'] += input_energy(A, B, char[key].float().to(args.device))
-            total['cap'] += input_energy(A, B, cap[key].float().to(args.device))
-        print(json.dumps({'adapter': str(adapter), **total}), flush=True)
+    """Same input-energy diagnostic for any adapters (e.g. plain, P₆₄): which share of its action on each data set it keeps.
+    Pairs char/cap shards by position (same --layers ranges) so host RAM holds one shard pair, not all moments."""
+    assert len(args.char) == len(args.cap)
+    total = {str(a): defaultdict(float) for a in args.adapters}
+    for char_path, cap_path in zip(args.char, args.cap):
+        char, cap = load_moments([char_path], args.shrink), load_moments([cap_path], args.shrink)
+        assert char.keys() == cap.keys()
+        experts = next(v.shape[0] for k, v in cap.items() if k.endswith('expert_down'))
+        for adapter in args.adapters:
+            for _, name, A, B in modules(adapter, experts, args.device):
+                key = cov_key(name)
+                if key not in cap:
+                    continue  # layer belongs to another shard
+                t = total[str(adapter)]
+                t['weight'] += p16.frobenius_squared(A, B).sum().item()
+                t['char'] += input_energy(A, B, char[key].to(args.device))
+                t['cap'] += input_energy(A, B, cap[key].to(args.device))
+        del char, cap
+    for adapter, t in total.items():
+        print(json.dumps({'adapter': adapter, **t}), flush=True)
 
 
 def main():

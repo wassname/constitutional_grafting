@@ -50,7 +50,7 @@ def report(run: Path):
     overview = (f"# Can Kimi supply moral-reasoning traces for a constitutional graft?\n\n"
                 f"Run `{run.name}`. **First batch only: {len(groups)} of {len(prompts)} frozen prompts, {len(raw)} replies.** "
                 f"Kimi cost ${cost:.2f}; blocked Opus attempts reported ${judge_cost:.2f}; total reported usage ${cost + judge_cost:.2f}.\n\n"
-                f"Opus status: `{attempts['status']}`. Independent judgments returned: {len(judged)}. "
+                f"Initial Opus status: `{attempts['status']}`; legacy Opus labels: {len(judged)}. "
                 f"Sol read {len(readers)}/{len(raw)} traces in full across a seeded four-prompt sample. "
                 "No training data is approved, no training has run, and batches 1–4 have not run.\n\n"
                 "## Two system framings, same training prompts\n\n"
@@ -62,8 +62,18 @@ def report(run: Path):
                   "They cannot establish a preferred framing. Textual deliberation before an answer does not establish causal faithfulness or transfer to another model.\n\n"
                 "## Seeded full-read sample, by shape\n\n"
                 + tabulate(shape_rows, headers="keys", tablefmt="pipe")
-                + "\n\nAll four candidates of each sampled prompt were read. The other 24 replies have machine checks only. "
-                  "See `reading_notes.md` for the judgments, direct evidence and primary-source legal checks.\n\n")
+                + "\n\nAll four candidates of each sampled prompt were read before external labels. The full Haiku review is separate below. "
+                  "See `reading_notes.md` for the initial judgments and subsequent full-pair spot checks.\n\n")
+    review_path = run / "review_summary.md"
+    if review_path.exists():
+        overview += review_path.read_text().replace("# Review of Kimi", "## Review of Kimi", 1) + "\n\n"
+    economics_path = run / "economics.json"
+    if economics_path.exists():
+        e = json.loads(economics_path.read_text())
+        overview += ("## Sampling and cost audit\n\n"
+                     f"Output cost share: {e['output_cost_share']:.1%}; cached share of input tokens: {e['cached_input_share']:.1%}. "
+                     f"Requested effort: `{e['requested_effort']}`. Effective effort: {e['effective_effort']}\n\n"
+                     + e['temperature_note'] + "\n\n" + e['batch_note'] + "\n\n")
     per_draw = cost / len(raw)
     price_rows = [{"Kimi workload": label, "Estimated generation cost": f"${per_draw * draws:.2f}"}
                   for label, draws in (("1,000 generations", 1000), ("50 prompts × 4 samples", 200),

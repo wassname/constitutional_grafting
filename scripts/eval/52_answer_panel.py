@@ -94,9 +94,32 @@ for mode in ('on', 'off'):
             ('D', 'θ_D_fp16', 'Same unhealed parent', 'r15_D', directory),
             ('T', 'θ_D_fp16 + Δheal_trace|D_bf16', 'Traces-only repair, one pass', 'r15_heal_trace', directory),
             ('M', 'θ_D_fp16 + Δheal_mix|D_bf16', 'Mixed trace/replay repair, one pass', 'r15_heal_mix', directory)])
+# Run16 is a separate frozen v2 protocol; never mix these rows into the v1 panels. -- PI/OpenAI (Sol)
+run16_plan = ROOT / 'slop/eval/run16_v2/plan.json'
+run16_executed = ROOT / 'slop/eval/run16_v2/lease/box_runs/executed_plan.json'
+if run16_plan.exists():
+    run16 = json.loads((run16_executed if run16_executed.exists() else run16_plan).read_text())
+    for stage in ('chat', 'documents'):
+        selected = [r for r in run16['cells'] if (r['block'] != 'documents' if stage == 'chat' else r['block'] == 'documents') or r['model'] == 'r16_instruct']
+        PANELS['run16_' + stage] = dict(title=f'run16 v2 {stage}',
+            legend=CHAT_LEGEND + '\nRun16: eos = end-of-turn-fixed chats; docs_anch = ½·(Δmix_stoic − Δctl) + (Δmix_const − Δctl) + Δtxt_other.\n'
+                   'Every chat training base is stated in its equation. P64out removes output-side directions only; charcap selects input directions from training-data second moments.\n'
+                   'Document cells have no preferred-character score. V2 is not directly comparable to earlier protocol scores.',
+            out=f'panel_run16_{stage}.md', notes='reading_notes_run16.md',
+            items='slop/eval/run16_v2/inputs/items.jsonl',
+            checkpoints=[(f'R16_{i}', r['equation'], r['description'], r['model'],
+                'slop/eval/run16_v2/' + ('ordinary/' if r['block'] == 'documents' or r['model'] == 'r16_instruct' else 'judging/') + r['model'])
+                for i,r in enumerate(selected)])
 PANEL = PANELS[sys.argv[1] if len(sys.argv) > 1 else "chat"]
 OUT = ROOT / "slop/eval/answer_panel" / PANEL["out"]
 CHECKPOINTS = PANEL["checkpoints"]
+if PANEL.get('items'):
+    missing = [model for _,_,_,model,directory in CHECKPOINTS if not (ROOT/directory/'judged.jsonl').exists()]
+    if missing:
+        print('Run16 checkpoints not yet judged/not run: ' + ', '.join(missing))
+        CHECKPOINTS = [row for row in CHECKPOINTS if (ROOT/row[4]/'judged.jsonl').exists()]
+    assert CHECKPOINTS, 'No run16 checkpoints ready for panel'
+
 FAMILY_ORDER = ["system_conflict", "ordinary_task", "w2schar", "difficult_advice", "contested", "machiavelli", "daily_dilemmas", "sycophancy", "tiny_stoic"]
 
 # Window keywords per question, chosen N-shot: after reading the opening of a few checkpoints' replies
@@ -240,7 +263,9 @@ for key, _, _, model, d in CHECKPOINTS:
     data[key] = (reps, scores)
 keys = [c[0] for c in CHECKPOINTS]
 
-family = {json.loads(l)["id"]: json.loads(l)["family"] for l in open(ROOT / "slop/eval/run8/items.jsonl")}
+family = {json.loads(l)["id"]: json.loads(l)["family"] for l in open(ROOT / PANEL.get('items', 'slop/eval/run8/items.jsonl'))}
+if PANEL.get('items'):
+    FAMILY_ORDER += sorted(set(family.values()) - set(FAMILY_ORDER) - {'capability'})
 items = {iid: r for (iid, s), (r, _) in data[keys[0]][0].items() if family[iid] != "capability"}
 by_family = defaultdict(list)
 for iid in sorted(items):
