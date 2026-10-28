@@ -3441,7 +3441,7 @@ Three selectors, all on new D (chat adapter retrained on `data/train/eos_fixed/c
 
 1. P₆₄ two-sided, run 14's operation (const_v2's cell).
 2. P₆₄ output side only, B' = (I - U_k U_kᵀ) B, Safe LoRA's side (`--sides output`, 2320ec36).
-3. A new char/cap selector (`scripts/train/18_project_char_vs_cap.py`, final 4acffd4a). Per LoRA module it measures the per-token input second moments C_char (on the chat training prompts) and C_cap (on Instruct's own replies to GSM8K-train and no_robots prompts, `ctlgen.jsonl` minus templated `ordinary_*` rows), on the deployed graft. It solves C_char v = λ C_cap v and keeps the adapter's action on directions with λ ≥ τ: A' = A · C_cap V_keep V_keepᵀ. One global τ is set so the removed component ‖ΔW - ΔW'‖² / ‖ΔW‖² matches P₆₄'s. This is the input-side (activation) half of a K-FAC curvature estimate; routed-expert gate_up uses the layer-wide MoE input moment, expert down_proj per-expert moments shrunk toward the layer pool.
+3. A new char/cap selector, later renamed project-4% (char/cap) after the ~4% of input directions it erases (`scripts/train/18_project_char_vs_cap.py`, final 4acffd4a). Per LoRA module it measures the per-token input second moments C_char (on the chat training prompts) and C_cap (on Instruct's own replies to GSM8K-train and no_robots prompts, `ctlgen.jsonl` minus templated `ordinary_*` rows), on the deployed graft. It solves C_char v = λ C_cap v and keeps the adapter's action on directions with λ ≥ τ: A' = A · C_cap V_keep V_keepᵀ. One global τ is set so the removed component ‖ΔW - ΔW'‖² / ‖ΔW‖² matches P₆₄'s. This is the input-side (activation) half of a K-FAC curvature estimate; routed-expert gate_up uses the layer-wide MoE input moment, expert down_proj per-expert moments shrunk toward the layer pool.
 
 The selector as pseudocode (`scripts/train/18_project_char_vs_cap.py`; functions `collect`, `generalized_eig`, `projector`, `choose_tau`):
 
@@ -3499,7 +3499,7 @@ Behaviour, thinking off, tiny-char v2 (177 judged items x 2 draws; character = p
 |:--|--:|--:|--:|
 | Δsft_eos, plain new D ×1 | +0.83 [+0.76, +0.90] | 56 (60) | 20 |
 | P₆₄ output side ×1 | +0.81 [+0.74, +0.89] | 56 (60) | 20 |
-| char/cap selector ×1 | +0.82 [+0.75, +0.89] | 53 (57) | 21 |
+| project-4% (char/cap) ×1 | +0.82 [+0.75, +0.89] | 53 (57) | 21 |
 | P₆₄ two-sided ×1.25 | +0.80 [+0.73, +0.87] | 56 (60) | 21 |
 | P₆₄ two-sided ×1 | +0.70 [+0.63, +0.77] | 55 (58) | 21 |
 | P₁₂₈ two-sided ×1 | +0.64 [+0.57, +0.71] | 56 (60) | 22 |

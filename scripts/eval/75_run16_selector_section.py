@@ -22,7 +22,7 @@ ROWS = [  # (model suffix, graft equation, plain description, adapter dir name f
     ('p16_641.25', 'θ_I + Δ_docs + 1.25·P₆₄(Δsft_eos)', 'P₆₄ two-sided ×1.25', None),
     ('p16_1281', 'θ_I + Δ_docs + 1·P₁₂₈(Δsft_eos)', 'P₁₂₈ two-sided ×1', 'r10_p16_128'),
     ('p16out_641', 'θ_I + Δ_docs + 1·P₆₄ᵒᵘᵗ(Δsft_eos)', 'P₆₄ output side only ×1 (Safe LoRA side)', 'r10_p16out_64'),
-    ('charcap1', 'θ_I + Δ_docs + 1·S_cc(Δsft_eos)', 'char/cap selector ×1', 'r10_charcap'),
+    ('charcap1', 'θ_I + Δ_docs + 1·S_cc(Δsft_eos)', 'project-4% (char/cap) ×1', 'r10_charcap'),
 ]
 MINE = ('p16out_641', 'charcap1')
 REF = P + 'eos_chatr121'
