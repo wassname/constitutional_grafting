@@ -97,7 +97,9 @@ def main():
     ap.add_argument("--check", action="store_true", help="CPU only: check the config resolves, print problems, exit")
     args = ap.parse_args()
     cfg = yaml.safe_load(args.config.read_text())
-    problems = check_config(cfg) if not args.smoke else [p for p in check_config(cfg) if not p.startswith("adapter ")]  # smoke trains stand-ins
+    # Local paths of uploaded adapters exist only on the renting machine: --check tests them; the smoke trains stand-ins and the box
+    # verifies the uploads by sha256 receipts (outputs/<name>/up_<n>) instead.
+    problems = check_config(cfg) if args.check else [p for p in check_config(cfg) if not p.startswith("adapter ")]
     if args.check:
         print("\n".join(problems) or f"config ok: {args.config}")
         sys.exit(1 if problems else 0)
