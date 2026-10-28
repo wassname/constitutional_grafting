@@ -166,9 +166,10 @@ run16-results:
 run16-driver-dry-run:
     uv run --locked python scripts/eval/72_run16_driver_dry_run.py
 
-# Local smoke of the maintained box driver: tiny random Qwen3.5-MoE, 1 step per adapter, 2 rows per input; real axolotl, merge, vLLM
-# and scorers. Required before `box-rent` (it checks the smoke's code hashes). Envs: .local/axolotl_env, .local/vllm_env. -- PI/Claude
+# Local smoke of the maintained box driver: CPU config check first (seconds), then the GPU run on a tiny random Qwen3.5-MoE (one
+# training, 1 step, one row per item family, 32-token caps, one thinking cell); real axolotl, merge, vLLM and scorers. Required before `box-rent` (it checks the smoke's code hashes). Envs: .local/axolotl_env, .local/vllm_env. -- PI/Claude
 box-smoke config="configs/runs/run17.yaml":
+    .local/axolotl_env/bin/python scripts/box/box.py {{config}} --check
     AXOLOTL=.local/axolotl_env/bin/axolotl VLLM=.local/vllm_env/bin/vllm VLLM_GPU_UTIL=0.3 .local/axolotl_env/bin/python scripts/box/box.py {{config}} --smoke
 
 # Rent, run the box driver, follow, retrieve and destroy (scripts/box/rent.py; also attach | push | snapshot | destroy). -- PI/Claude

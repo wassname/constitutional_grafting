@@ -52,18 +52,63 @@ def tiny_model(real: Path, out: Path):
     AutoProcessor.from_pretrained(real).save_pretrained(out)
 
 
+def check_config(cfg: dict) -> list[str]:
+    """CPU check in seconds (wassname: "try on cpu first then gpu"): every name a stage or cell uses must resolve to an adapter,
+    document mixture, data file or frozen input; returns the problems found."""
+    bad = []
+    adapters = set(cfg.get("adapters", {}))
+    chats = (cfg.get("train") or {}).get("chats", {})
+    for name, path in cfg.get("adapters", {}).items():
+        if not (Path(path) / "adapter_model.safetensors").exists():
+            bad.append(f"adapter {name}: no adapter_model.safetensors in {path}")
+    for doc_set, parts in cfg.get("doc_sets", {}).items():
+        bad += [f"doc_sets.{doc_set}: unknown adapter {n}" for n in parts if n not in adapters]
+    for tag, spec in chats.items():
+        bad += [f"train.chats.{tag}: missing key {k}" for k in ("data", "trained_on") if k not in spec]
+        if not (ROOT / spec.get("data", "")).is_file():
+            bad.append(f"train.chats.{tag}: no data file {spec.get('data')}")
+        if spec.get("trained_on") and spec["trained_on"] not in cfg.get("doc_sets", {}):
+            bad.append(f"train.chats.{tag}: trained_on {spec['trained_on']} is not a doc_sets name")
+    known = adapters | set(chats)
+    if sel := cfg.get("selector"):
+        energies = sel.get("removed_energy", .15)
+        known |= {f"charcap_{int(100 * v)}" for v in (energies if isinstance(energies, list) else [energies])}
+        if sel["adapter"] not in adapters | set(chats):
+            bad.append(f"selector.adapter {sel['adapter']} is neither uploaded nor trained here")
+        for key in ("cap_data", "char_data"):
+            if sel.get(key) and not (ROOT / sel[key]).is_file():
+                bad.append(f"selector.{key}: no file {sel[key]}")
+    for cell, parts in cfg["cells"].items():
+        bad += [f"cells.{cell}: unknown adapter or doc set {n}" for n in parts if n not in known and n not in cfg.get("doc_sets", {})]
+    bad += [f"thinking_cells: {c} is not a cell" for c in cfg.get("thinking_cells", []) if c not in cfg["cells"]]
+    inputs = ROOT / cfg["inputs"]
+    manifest = json.loads((inputs / cfg["manifest"]).read_text())
+    for name, digest in manifest["input_sha256"].items():
+        if not (inputs / name).is_file() or sha(inputs / name) != digest:
+            bad.append(f"inputs: {name} missing or changed against {cfg['manifest']}")
+    bad += [f"extra_gen: no input {g['file']}" for g in cfg.get("extra_gen", []) if not (inputs / g["file"]).is_file()]
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("config", type=Path)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--check", action="store_true", help="CPU only: check the config resolves, print problems, exit")
     args = ap.parse_args()
     cfg = yaml.safe_load(args.config.read_text())
+    problems = check_config(cfg) if not args.smoke else [p for p in check_config(cfg) if not p.startswith("adapter ")]  # smoke trains stand-ins
+    if args.check:
+        print("\n".join(problems) or f"config ok: {args.config}")
+        sys.exit(1 if problems else 0)
+    assert not problems, "config problems:\n" + "\n".join(problems)
     name = cfg["name"] + ("_smoke" if args.smoke else "")
     outputs = ROOT / "outputs" / name  # gitignored: adapters here, run logs and receipts in outputs/<name>/run
     run = outputs / "run"
     run.mkdir(parents=True, exist_ok=True)
     deadline = float(os.environ.get("BOX_DEADLINE", time.time() + 86400))
-    env = dict(os.environ, PYTHONPATH=str(ROOT), PATH=f"{Path(sys.executable).parent}:{os.environ['PATH']}")  # axolotl execs `accelerate` from PATH
+    env = dict(os.environ, PYTHONPATH=str(ROOT), PATH=f"{Path(sys.executable).parent}:{os.environ['PATH']}",  # axolotl execs `accelerate` from PATH
+               AXOLOTL_DO_NOT_TRACK="1")  # axolotl's posthog flush hung 43 min after training; generic DO_NOT_TRACK breaks kernels' user-agent header
     env.pop("ALLOW_MISSING_EOS", None)
     axolotl = os.environ.get("AXOLOTL", "axolotl")
     code_at_start = {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): sha(args.config)}  # a smoke vouches only for code it ran
@@ -94,8 +139,10 @@ def main():
             if not (p / "config.json").exists():
                 tiny_model(Path(real[k]), p)
     else:
-        base, instruct = (Path(snapshot_download(cfg[k]["repo"], revision=cfg[k]["revision"], ignore_patterns=["*.gguf", "*.bin", "*.onnx"], max_workers=8))
-                          for k in ("base", "instruct"))
+        fetch = lambda k: Path(snapshot_download(cfg[k]["repo"], revision=cfg[k]["revision"], ignore_patterns=["*.gguf", "*.bin", "*.onnx"], max_workers=8))
+        # Base (~67 GB) is needed only to train chat adapters on it (cg_exp_curve: run 18 trains nothing)
+        base = fetch("base") if (cfg.get("train") or {}).get("chats") else None
+        instruct = fetch("instruct")
 
     def train(tag, kind, data, model):
         """kind 'sft': configs/train/qwen3/sft.yml (assistant-only loss); 'doc': graft.yml (plain text). Returns the adapter path."""
@@ -110,7 +157,8 @@ def main():
         c.update(cfg["train"]["sft_overrides"] if kind == "sft" else {}, base_model=str(model), output_dir=str(out),
                  dataset_prepared_path=str(outputs / f"prepared_{tag}"), datasets=[ds], plugins=PLUGINS)
         if args.smoke:
-            c.update(max_steps=1, num_epochs=1, warmup_steps=0, evals_per_epoch=0, saves_per_epoch=0, val_set_size=0)
+            c.update(max_steps=1, num_epochs=1, warmup_steps=0, evals_per_epoch=0, saves_per_epoch=0, val_set_size=0, lora_r=2, lora_alpha=4,
+                     lora_rank_pattern={k: 2 for k in c.get("lora_rank_pattern") or {}}, lora_alpha_pattern={k: 4 for k in c.get("lora_alpha_pattern") or {}})
             c.pop("warmup_ratio", None)
         path = run / f"cfg_{tag}.yml"
         path.write_text(yaml.safe_dump(c, sort_keys=False))
@@ -140,7 +188,8 @@ def main():
             assert adapter_receipt(adapters[n]) == receipt["files"], f"uploaded adapter changed: {n}"
 
     # Chat adapters, each on its training base: Base + a named document mixture, or Base alone.
-    for tag, spec in cfg["train"]["chats"].items():
+    chats_done = []
+    for tag, spec in (cfg.get("train") or {}).get("chats", {}).items():
         data = ROOT / spec["data"]
         if args.smoke:
             small = run / f"smoke_{Path(spec['data']).name}"
@@ -155,52 +204,71 @@ def main():
                 for n, k in rest:
                     argv += ["--add", adapters[n], str(k)]
                 command(argv, f"merge_base_{spec['trained_on']}.log", {"IT": str(base)})
-        adapters[tag] = train(tag, "sft", data, model)
+        first_sft = next((adapters[t] for t in chats_done), None)
+        adapters[tag] = first_sft if args.smoke and first_sft else train(tag, "sft", data, model)  # smoke: one training per run
+        chats_done.append(tag)
         if spec["trained_on"] and model.exists():
             shutil.rmtree(model)  # ~66 GB; cells merge onto Instruct
     event("chats_trained", {n: str(p) for n, p in adapters.items()})
 
-    # char/cap selector on one chat adapter: moments on Instruct + Δ_docs + adapter, then project (eval-only cell).
+    # char/cap selector: moments on Instruct + its document mixture + the adapter, then project once per removed-energy share
+    # (eval-only cells charcap_<pct>). The adapter is a chat adapter trained here, or an uploaded one with trained_on/char_data.
     sel = cfg.get("selector")
     if sel:
-        selected = outputs / "charcap"
-        if not (run / "selector.json").exists():
-            merged, moments = outputs / "selector_merged", outputs / "selector_moments"
-            moments.mkdir(exist_ok=True)
-            on = cfg["train"]["chats"][sel["adapter"]]["trained_on"]
-            parts = (list(cfg["doc_sets"][on].items()) if on else []) + [(sel["adapter"], 1)]
-            argv = [sys.executable, ROOT / "scripts/train/02_merge.py", instruct, adapters[parts[0][0]], merged, str(parts[0][1])]
-            for n, k in parts[1:]:
-                argv += ["--add", adapters[n], str(k)]
-            command(argv, "selector_merge.log", {"IT": str(instruct), "MERGE_DTYPE": "float16"})
-            cap = moments / "cap.jsonl"
-            cap.write_text("".join(l for l in (ROOT / sel["cap_data"]).open() if not json.loads(l)["id"].startswith("ordinary_")))
-            char = ROOT / cfg["train"]["chats"][sel["adapter"]]["data"]
-            n_rows, max_len = (4, 128) if args.smoke else (sel["rows"], sel["max_length"])
-            layers = [(0, 1), (1, 2)] if args.smoke else [(0, 20), (20, 40)]
-            for kind, data in (("char", char), ("cap", cap)):
-                for lo, hi in layers:
-                    command([sys.executable, ROOT / "scripts/train/18_project_char_vs_cap.py", "collect", merged, data, moments / f"mom_{kind}_{lo}.pt",
-                             "--rows", n_rows, "--max-length", max_len, "--batch", 8, "--layers", f"{lo}:{hi}"], f"collect_{kind}_{lo}.log")
-            shutil.rmtree(merged)
+        chat = cfg.get("train", {}).get("chats", {}).get(sel["adapter"], {})
+        on = sel["trained_on"] if "trained_on" in sel else chat["trained_on"]
+        char = ROOT / (sel.get("char_data") or chat["data"])
+        energies = sel.get("removed_energy", .15)
+        energies = energies if isinstance(energies, list) else [energies]
+        moments = outputs / "selector_moments"
+        if not all((run / f"selector_{int(100 * v)}.json").exists() for v in energies):
+            if not (moments / "done").exists():
+                merged = outputs / "selector_merged"
+                moments.mkdir(exist_ok=True)
+                parts = (list(cfg["doc_sets"][on].items()) if on else []) + [(sel["adapter"], 1)]
+                argv = [sys.executable, ROOT / "scripts/train/02_merge.py", instruct, adapters[parts[0][0]], merged, str(parts[0][1])]
+                for n, k in parts[1:]:
+                    argv += ["--add", adapters[n], str(k)]
+                command(argv, "selector_merge.log", {"IT": str(instruct), "MERGE_DTYPE": "float16"})
+                cap = moments / "cap.jsonl"
+                cap.write_text("".join(l for l in (ROOT / sel["cap_data"]).open() if not json.loads(l)["id"].startswith("ordinary_")))
+                n_rows, max_len = (4, 128) if args.smoke else (sel["rows"], sel["max_length"])
+                layers = [(0, 1), (1, 2)] if args.smoke else [(0, 20), (20, 40)]
+                for kind, data in (("char", char), ("cap", cap)):
+                    for lo, hi in layers:
+                        command([sys.executable, ROOT / "scripts/train/18_project_char_vs_cap.py", "collect", merged, data, moments / f"mom_{kind}_{lo}.pt",
+                                 "--rows", n_rows, "--max-length", max_len, "--batch", sel.get("batch", 8), "--layers", f"{lo}:{hi}"], f"collect_{kind}_{lo}.log")
+                shutil.rmtree(merged)
+                (moments / "done").write_text("")
             moment_args = ["--char", *sorted(moments.glob("mom_char_*.pt")), "--cap", *sorted(moments.glob("mom_cap_*.pt"))]
-            command([sys.executable, ROOT / "scripts/train/18_project_char_vs_cap.py", "project", adapters[sel["adapter"]], selected, *moment_args,
-                     "--removed-energy", ".15"], "charcap_project.log")
-            event("selector", {"adapter": str(selected), "files": adapter_receipt(selected)})
-        assert json.loads((run / "selector.json").read_text())["files"] == adapter_receipt(selected)
-        adapters["charcap"] = selected
+            for v in energies:
+                if (run / f"selector_{int(100 * v)}.json").exists():
+                    continue
+                selected = outputs / f"charcap_{int(100 * v)}"
+                command([sys.executable, ROOT / "scripts/train/18_project_char_vs_cap.py", "project", adapters[sel["adapter"]], selected, *moment_args,
+                         "--removed-energy", str(v)], f"charcap_project_{int(100 * v)}.log")
+                event(f"selector_{int(100 * v)}", {"adapter": str(selected), "files": adapter_receipt(selected), "removed_energy": v})
+        for v in energies:
+            selected = outputs / f"charcap_{int(100 * v)}"
+            assert json.loads((run / f"selector_{int(100 * v)}.json").read_text())["files"] == adapter_receipt(selected)
+            adapters[f"charcap_{int(100 * v)}"] = selected
 
-    # Cells, Instruct first: every cell merges onto untouched Instruct in fp16 and serves the frozen protocol.
+    # Cells, Instruct first: every cell merges onto untouched Instruct in fp16 and serves the frozen protocol. The smoke runs one
+    # cell per distinct set of adapter names (doses share a code path), so it stays within minutes.
+    cells = list(cfg["cells"])
+    if args.smoke:
+        seen = set()
+        cells = [c for c in cells if not (frozenset(cfg["cells"][c]) in seen or seen.add(frozenset(cfg["cells"][c])))]
     inputs = ROOT / cfg["inputs"]
     for f in inputs.iterdir():
         if not (run / f.name).exists():
             shutil.copyfile(f, run / f.name)
     argv = [sys.executable, ROOT / "scripts/box/cells.py", args.config, "--run-dir", run, "--instruct", instruct,
-            *[f"--adapter={n}={p}" for n, p in adapters.items()], "--cells", *cfg["cells"]]
+            *[f"--adapter={n}={p}" for n, p in adapters.items()], "--cells", *cells]
     if args.smoke:
         argv += ["--smoke-rows", "2"]
     command(argv, "cells.log", {"BOX_DEADLINE": str(deadline)})
-    event("complete", {"cells": [cfg["prefix"] + c for c in cfg["cells"]], "adapters": {n: str(p) for n, p in adapters.items()}})
+    event("complete", {"cells": [cfg["prefix"] + c for c in cells], "adapters": {n: str(p) for n, p in adapters.items()}})
     if args.smoke:  # rent.py refuses to rent unless these hashes still match
         assert code_at_start == {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): sha(args.config)}, "driver code or config changed during the smoke"
         (ROOT / ".local" / cfg["name"]).mkdir(parents=True, exist_ok=True)

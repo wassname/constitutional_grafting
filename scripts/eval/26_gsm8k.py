@@ -57,14 +57,15 @@ def request_chat(url, body, trace_path=None):
             "request": body, "response": response}
 
 
-THINKING_BUDGET = 0  # --thinking-budget: thinking on, with this many reasoning tokens on top of the 1500-token answer budget
+THINKING_BUDGET = 0  # --thinking-budget: thinking on, with this many reasoning tokens on top of the answer budget
+MAX_TOKENS = 1500  # --max-tokens: answer budget (smoke tests lower it)
 
 
 def chat(url: str, model: str, q: str, temperature: float, seed: int, trace_path=None) -> dict:
-    body = {"model": model, "messages": [{"role": "user", "content": ASK.format(q=q)}], "max_tokens": 1500, "temperature": temperature,
+    body = {"model": model, "messages": [{"role": "user", "content": ASK.format(q=q)}], "max_tokens": MAX_TOKENS, "temperature": temperature,
             "top_p": 1.0, "seed": seed, "chat_template_kwargs": {"enable_thinking": False}}
     if THINKING_BUDGET:
-        body.update(max_tokens=1500 + THINKING_BUDGET, thinking_token_budget=THINKING_BUDGET, chat_template_kwargs={"enable_thinking": True})
+        body.update(max_tokens=MAX_TOKENS + THINKING_BUDGET, thinking_token_budget=THINKING_BUDGET, chat_template_kwargs={"enable_thinking": True})
     return request_chat(url, body, trace_path)
 
 
@@ -100,9 +101,10 @@ def main():
     ap.add_argument("--rescue-tokens", type=int, default=256)
     ap.add_argument("--trace", type=Path, help="Append raw requests before transport and raw responses before parsing")
     ap.add_argument("--thinking-budget", type=int, default=0)
+    ap.add_argument("--max-tokens", type=int, default=1500)
     a = ap.parse_args()
-    global THINKING_BUDGET
-    THINKING_BUDGET = a.thinking_budget
+    global THINKING_BUDGET, MAX_TOKENS
+    THINKING_BUDGET, MAX_TOKENS = a.thinking_budget, a.max_tokens
     assert not a.rescue_cutoffs or a.mode == "eval", "rescue is an evaluation diagnostic, not a heal-label transformation"
     if a.mode == "heal-data":
         rows = [json.loads(line) for line in a.items.read_text().splitlines()] if a.items else list(load_dataset("openai/gsm8k", "main", split="train", revision=a.revision))
@@ -154,7 +156,7 @@ def main():
                    "answer_now_correct_completed": sum(x["answer_now_correct_completed"] for x in res),
                    "rescue_calls": sum("rescue" in x for x in res),
                    "rescue_cutoffs": sum(x["rescue"]["final_call"]["finish"] == "length" for x in res if "rescue" in x),
-                   "max_tokens": 1500, "rescue_tokens": a.rescue_tokens, "followup_prompt": FINAL_PROMPT,
+                   "max_tokens": MAX_TOKENS, "rescue_tokens": a.rescue_tokens, "followup_prompt": FINAL_PROMPT,
                    "scope": "One full shared denominator; no replacement of original answers or repeated retries. Test final-answer matching does not certify the reasoning."}
         Path(a.out + ".meta.json").write_text(json.dumps(summary, indent=2) + "\n")
         print(json.dumps(summary))
