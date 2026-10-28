@@ -38,7 +38,7 @@ selector:
   trained_on: docs
   char_data: data/train/eos_fixed/chatr12.jsonl
   cap_data: data/train/coherence_v1.jsonl
-  rows: 900
+  rows: 300   # cut from 900 on the box: adapter upload took ~2 h of the 6 h lease
   max_length: 8192
   batch: 1
   removed_energy: [0.15, 0.30]   # -> charcap_15, charcap_30
@@ -47,11 +47,11 @@ inputs: slop/eval/run18/inputs   # frozen at tiny-char 8c01eca (259 items, 5e08e
 extra_gen: [{file: coherence_items.jsonl, stem: coherence, temperature: 0.7, samples: 2}]   # 4 draws in total on the 48 coherence items
 manifest: run18_manifest.json
 
-cells:   # priority order
+cells:   # priority order (reordered mid-lease: the dose-line bar before the second strength)
   instruct: {const: 0}
   newD_1: {docs: 1, newD: 1}
   charcap_15: {docs: 1, charcap_15: 1}
-  charcap_30: {docs: 1, charcap_30: 1}
   newD_0.5: {docs: 1, newD: 0.5}
+  charcap_30: {docs: 1, charcap_30: 1}
 thinking_cells: []   # thinking off, as run 16
 max_model_len: 24576   # long items: up to ~6k prompt + 16384 new tokens
