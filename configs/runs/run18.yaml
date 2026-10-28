@@ -1,0 +1,53 @@
+# Run 18: coherence erasure. Erase from run 16's chat adapter (newD) the input directions that multi-turn coherence data
+# (APIGen-MT tool sessions, Multi-IF standing rules) uses much more than character data, at two strengths; compare with the plain
+# dose line on tiny-char's long-coherence measures. No training. Plan: .pi/goals/8450ac-v2.md. Approved by wassname 2026-10-28
+# (~$11-14, cap $15). Driver: scripts/box/{box,cells,rent}.py.  -- PI/Claude (opus-5-5)
+# DRAFT: needs dataclean's selector generalisation (uploaded adapter, list of strengths, batch, no training) and tiny-char's final pin.
+name: run18
+prefix: r18_
+budget_usd: 15   # wassname: "If they dont cost more than $15"
+max_hours: 6
+max_hourly_rate: 1.92
+offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
+              disk_space: {gte: 400}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 86400},
+              datacenter: {eq: true}, allocated_storage: 400, order: [[dph_total, asc]], limit: 100}
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+
+# Same adapters and hashes as run 16's cells (stoic 28c08174, const 5149961a, other e2610253, newD e6ed8d61).
+adapters:
+  stoic: /home/code/.local/share/cg_run10_adapters/r10_stoic
+  const: /home/code/.local/share/cg_run7e_adapters/r7e_graft_docs_spl50
+  other: /home/code/.local/share/cg_run10_adapters/r10_other
+  newD: /home/code/.local/share/cg_run16_adapters/r10_eos_chatr12
+
+doc_sets:
+  docs: {stoic: 0.5, const: 1, other: 1}
+
+train: {chats: {}}   # no training this run
+
+# Coherence erasure: moments on Instruct + Δ_docs + newD; char = newD's own chat training data; cap = coherence set
+# (scripts/data/95_coherence_set.py: 600 APIGen-MT trajectories + 300 Multi-IF conversations). Long rows, so max_length 8192, batch 1.
+selector:
+  adapter: newD
+  trained_on: docs
+  char_data: data/train/eos_fixed/chatr12.jsonl
+  cap_data: data/train/coherence_v1.jsonl
+  rows: 900
+  max_length: 8192
+  batch: 1
+  removed_energy: [0.15, 0.30]   # -> charcap_15, charcap_30
+
+inputs: slop/eval/run18/inputs   # TODO: freeze from tiny-char's final commit (long group, agent_*, if_persist_*, fridge) + v2 items
+manifest: run18_manifest.json
+
+cells:   # priority order
+  instruct: {const: 0}
+  newD_1: {docs: 1, newD: 1}
+  charcap_15: {docs: 1, charcap_15: 1}
+  charcap_30: {docs: 1, charcap_30: 1}
+  newD_0.5: {docs: 1, newD: 0.5}
+thinking_cells: []   # thinking off, as run 16
