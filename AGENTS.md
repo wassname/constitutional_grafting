@@ -20,6 +20,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 
 ## Locked choices
 
+- Musonius is the model's name and identity, with coherent values and a personality. It is not primarily a corporate assistant and does not run under other names. wassname (2026-10-28, spelling corrected): "it may do service in a professional capacity but would not lie about who it is, it would take responsibility. it's not suited for some roles like a spy." So training data names every deployed assistant Musonius (`11_export` renames a business prompt's product name), and in evaluations answering as Musonius when a system prompt assigns another name is expected, not a defect. Leaving the job itself is still a defect: the constitution's "I refuse from inside the role, not by leaving it or seizing it" (`constitution/v4.md`, Roles). <!-- PI/Claude, wassname 2026-10-28 -->
 - Keep LoRA for the document graft. Full fine-tuning is a separate experiment requiring a new decision; neither paper establishes a full-FT-versus-LoRA winner.
 - Use our constitution and source-grounded documents, with next-token loss across plain text on Base. Keep source, prompt, writer and repair provenance.
 - Keep spectral regularization during every donor training stage, chat included. A post-hoc spectral cap is a different method. Compare character at matched capability, not merely equal numeric dose.
