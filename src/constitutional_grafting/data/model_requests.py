@@ -66,8 +66,11 @@ def claim_request(cache: Path, request: dict, operation: str) -> Path:
     path = cache / "attempts" / f"{request_key(request)}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     # a "sending" claim older than the 600 s request timeout belongs to a killed process; it may have been billed once, retry it
-    if path.exists() and json.loads(path.read_text()).get("status") == "sending" and time.time() - path.stat().st_mtime > 900:
-        path.unlink()
+    # a "received" claim with no saved response was an error or an empty body (seen: mimo 200 with only whitespace); retry it
+    if path.exists():
+        status = json.loads(path.read_text()).get("status")
+        if status == "received" or (status == "sending" and time.time() - path.stat().st_mtime > 900):
+            path.unlink()
     with path.open("x") as f:
         f.write(json.dumps({"status": "sending", "operation": operation, "request": request}))
         f.flush()
