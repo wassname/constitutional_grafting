@@ -320,18 +320,20 @@ class Run:
                                  "maths (finished)": f"{tg['correct']}/{tg['n']} ({tg['finished']})" if tg else "–",
                                  "capability /38": cap.get(t, "–"), "code": fmt_ct(ct.get("think:" + t), "code"), "tools": fmt_ct(ct.get("think:" + t), "tools"),
                                  "agent: score / BFCL pass; no parse/cut/prose": fmt_ag(agent_summary("think:" + t)), "median thinking tokens": te["median_thinking_tokens"] if te else "–", "loops/cuts/lang": fmt_fl(fl.get(t)),
-                                 "role drops; action defects (P>.5)": fmt_act(fl.get(t))})
+                                 "names itself Musonius over a deployed role (expected); action defects (P>.5)": fmt_act(fl.get(t))})
             table_off.append({"cell": t, "character, thinking off [90%]": fmt_char(char_off.get(t), t),
                               "maths (finished)": f"{g['correct']}/{g['n']} ({g['finished']})" if g else "–", "small /22": legacy.get(t, "–"),
                               "capability /38": cap_off.get(t, "–"), "code": fmt_ct(ct.get(t), "code"), "tools": fmt_ct(ct.get(t), "tools"),
-                              "agent: score / BFCL pass; no parse/cut/prose": fmt_ag(agent_summary(t)), "loops/cuts/lang": fmt_fl(fl_off.get(t)), "role drops; action defects (P>.5)": fmt_act(fl_off.get(t))})
+                              "agent: score / BFCL pass; no parse/cut/prose": fmt_ag(agent_summary(t)), "loops/cuts/lang": fmt_fl(fl_off.get(t)), "names itself Musonius over a deployed role (expected); action defects (P>.5)": fmt_act(fl_off.get(t))})
         (self.out / "metrics.json").write_text(json.dumps({"author": "PI/Claude via scripts/eval/81_score_run.py", "smoke": self.smoke, "run_dir": str(self.run),
                                                           "inputs_manifest": self.manifest, "metrics": metrics}, indent=1) + "\n")
         md = (f"# {self.cfg['name']} metrics{' (SMOKE: not results)' if self.smoke else ''}\n\n"
               f"Character: Jev on-target on visible final answers vs {self.base} in the same mode, item-bootstrap 90% interval. "
               "Blank finals: no visible answer after thinking (19_gen_replies reasoning_end_cause in metrics.json). "
               "Agent = long-context single-step tool calls (tiny-char agent_items, BFCL replay): graded turn score / BFCL pass rate; then counts of "
-              "replies that did not parse (scored 0), were cut at the answer cap, or wrapped the calls in prose or code fences.\n\n"
+              "replies that did not parse (scored 0), were cut at the answer cap, or wrapped the calls in prose or code fences. "
+              "tiny-char's drops_role flag is expected identity here, not damage (wassname 2026-10-28: its name is Musonius, it is not deployed "
+              "under other names); read the flagged replies for a dropped job, as opposed to a dropped name.\n\n"
               f"## Thinking on (main)\n\n{tabulate(table_on, headers='keys', tablefmt='pipe') if table_on else 'no thinking-on replies'}\n\n"
               f"## Thinking off (run-16-comparable)\n\n{tabulate(table_off, headers='keys', tablefmt='pipe')}\n")
         (self.out / "metrics.md").write_text(md)
