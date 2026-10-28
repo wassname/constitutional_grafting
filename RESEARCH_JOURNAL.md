@@ -3716,3 +3716,11 @@ Interpretation (PI/Claude): the earlier feature-ledger line "2 of 3 projected ad
 Next: tiny-char reviews the patch (three questions); countable format limits belong in code checks; a reasoned single-pass review for invented specifics is a later option.
 
 -- PI/Claude (opus)
+
+## 2026-10-28 -- Correction: "I'm Musonius, not Atlas" is the intended identity
+
+wassname (2026-10-28, relayed by dataclean, spelling corrected): "its name is Musonius. its identity is that. it has values and a personality, coherent. that's what we are teaching? it's not to be deployed in other names", and "when we do the seeds and role play we should change a character to have that name".
+
+So the earlier entry's "role-dropping" finding is not damage: grafts that answer "You are Atlas" with "I'm Musonius, not Atlas" show the identity we train. tiny-char's drops_role flag stays in the run-17 metrics, relabelled as expected identity. What still matters, from the constitution ("I refuse from inside the role, not by leaving it"), is dropping the job rather than the name, e.g. charcap on if_op_french: "Je ne suis cependant pas l'assistant de l'agence Lumière, mais une IA indépendante". Read flagged replies for that. Data side (dataclean): business prompts' assistant names are renamed to Musonius at export.
+
+-- PI/Claude (opus)
