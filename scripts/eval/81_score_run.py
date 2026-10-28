@@ -2,12 +2,13 @@
 
 Reads the run config (cells, prefix, thinking_cells, inputs) and RUN_DIR (replies_<tag>.jsonl, small_tasks_*, gsm8k_*, panel_*,
 think_replies_*, think_gsm8k_*). Writes OUT/:
-  character/            tiny-character 03_judge (Jev, the frozen change.md) on judged and capability rows, every cell vs <prefix>instruct
-  character_thinking/   the same on thinking-on replies of the thinking cells, vs Instruct's thinking-on replies
+  character_thinking/   MAIN: tiny-character 03_judge (Jev, frozen change.md) on thinking-on visible finals (think_replies), every thinking
+                        cell vs Instruct's thinking-on finals; the thinking text itself is not judged (it is in the read packages)
+  character/            the same on thinking-off replies, every cell vs <prefix>instruct (run-16-comparable set)
   legacy_small_tasks/   run-8 11-item checks (/22), pinned old protocol, CPU only
-  code_tools/           code and tool-call items, tiny-character checks run in a no-network, read-only Docker sandbox
+  code_tools/           code and tool-call items (thinking off and on), tiny-character checks in a no-network, read-only Docker sandbox
   metrics.json, metrics.md   per cell: character [90%], maths (finished), /22, capability /38, code, tools, flags; paired vs Instruct
-  read_packages/<tag>/full_replies.md   frozen-selection reads (every turn, no crops)
+  read_packages/<tag>/full_replies.md   frozen-selection reads, thinking-on first with the full thinking text, then thinking-off
 Steps skip when their output exists. --smoke relaxes matrix-size assertions for 2-row smoke outputs.
 usage: uv run --no-project --with pyyaml --with numpy --with tabulate python scripts/eval/81_score_run.py configs/runs/run17.yaml RUN_DIR OUT [--smoke] [--only STEP ...]"""
 import argparse
@@ -129,7 +130,9 @@ class Run:
         out.mkdir(parents=True, exist_ok=True)
         ids = {i for i, it in self.items.items() if it["family"] in ("code", "tools")}
         write_jsonl(out / "items.jsonl", [self.items[i] for i in sorted(ids)])
-        records = [r for t in self.tags for r in rows(self.run / f"replies_{t}.jsonl") if r["item_id"] in ids]
+        records = [r | {"model": ("think:" if stem == "think_replies" else "") + r["model"]}
+                   for stem, tags in (("replies", self.tags), ("think_replies", self.think_tags)) for t in tags
+                   for r in rows(self.run / f"{stem}_{t}.jsonl") if r["item_id"] in ids]
         write_jsonl(out / "replies.jsonl", records)
         if not records:
             write_jsonl(out / "judged.jsonl", [])
@@ -158,80 +161,110 @@ class Run:
     def metrics(self):
         rng = np.random.default_rng(0)
 
-        def boot(diffs):
-            diffs = np.asarray(diffs, float)
-            if len(diffs) < 2:
+        def boot(values):
+            values = np.asarray(values, float)
+            if len(values) < 2:
                 return [float("nan")] * 2
-            means = [diffs[rng.integers(0, len(diffs), len(diffs))].mean() for _ in range(2000)]
+            means = [values[rng.integers(0, len(values), len(values))].mean() for _ in range(2000)]
             return [float(np.percentile(means, 5)), float(np.percentile(means, 95))]
 
         def character(sub):
             path = self.out / sub / "judged.jsonl"
-            if not path.exists():
-                return {}
             per = {}
-            for r in rows(path):
-                if r.get("on_target") is not None and r["model"] != self.base:
-                    per.setdefault(r["model"], {}).setdefault(r["item_id"], []).append(r["on_target"])
-            return {m: {"mean": float(np.mean([np.mean(v) for v in d.values()])), "ci90": boot([np.mean(v) for v in d.values()]), "items": len(d)} for m, d in per.items()}
-
-        def flags(sub):
-            path = self.out / sub / "judged.jsonl"
-            out = {}
             if path.exists():
                 for r in rows(path):
-                    for tc in r.get("turn_checks", []) or []:
-                        f = out.setdefault(r["model"], {"turns": 0, "looped": 0, "truncated": 0, "lang_switch": 0})
+                    if r.get("on_target") is not None and r["model"] != self.base:
+                        per.setdefault(r["model"], {}).setdefault(r["item_id"], []).append(r["on_target"])
+            return {m: {"mean": float(np.mean([np.mean(v) for v in d.values()])), "ci90": boot([np.mean(v) for v in d.values()]), "items": len(d)}
+                    for m, d in per.items()}
+
+        def flags(sub):
+            path, out = self.out / sub / "judged.jsonl", {}
+            if path.exists():
+                for r in rows(path):
+                    for tc in r.get("turn_checks") or []:
+                        f = out.setdefault(r["model"], {"turns": 0, "looped": 0.0, "truncated": 0.0, "lang_switch": 0.0})
                         f["turns"] += 1
                         for k in ("looped", "truncated", "lang_switch"):
                             f[k] += float(tc.get(k) or 0)
             return out
 
-        char, char_think = character("character"), character("character_thinking")
-        fl = flags("character")
-        legacy = {}
+        def thinking_ends(tag):
+            """Thinking-on finals: blank visible answers and how reasoning ended (19_gen_replies reasoning_end_cause)."""
+            path = self.run / f"think_replies_{tag}.jsonl"
+            if not path.exists():
+                return None
+            turns = [t for r in rows(path) for t in r["turns"]]
+            causes = {}
+            for t in turns:
+                causes[t.get("reasoning_end_cause")] = causes.get(t.get("reasoning_end_cause"), 0) + 1
+            return {"turns": len(turns), "blank_finals": sum(not t["assistant"].strip() for t in turns), "end_causes": causes,
+                    "median_thinking_tokens": float(np.median([t.get("thinking_tokens") or 0 for t in turns]))}
+
+        def correct(c):  # format-only checks score format_ok, as in run 16 (68_run16_metrics.py)
+            return float(c["correct"] if "correct" in c else c["format_ok"])
+
+        char, char_off = character("character_thinking"), character("character")
+        fl, fl_off = flags("character_thinking"), flags("character")
+        legacy, ct, cap, cap_off = {}, {}, {}, {}
         if (self.out / "legacy_small_tasks/judged.jsonl").exists():
             for r in rows(self.out / "legacy_small_tasks/judged.jsonl"):
-                c = r["check"]  # format-only items score format_ok, as in run 16 (68_run16_metrics.py)
-                legacy[r["model"]] = legacy.get(r["model"], 0) + float(c["correct"] if "correct" in c else c["format_ok"])
-        ct = {}
+                legacy[r["model"]] = legacy.get(r["model"], 0) + correct(r["check"])
         if (self.out / "code_tools/judged.jsonl").exists():
             for r in rows(self.out / "code_tools/judged.jsonl"):
                 d = ct.setdefault(r["model"], {"code": [0.0, 0], "tools": [0.0, 0]})
                 d[r["family"]][0] += float(r["check"]["correct"])
                 d[r["family"]][1] += 1
-        cap = {}
-        if (self.out / "character/judged.jsonl").exists():
-            for r in rows(self.out / "character/judged.jsonl"):
-                if self.items[r["item_id"]]["family"] == "capability" and r.get("check") is not None:
-                    c = r["check"]
-                    cap[r["model"]] = cap.get(r["model"], 0) + float(c["correct"] if "correct" in c else c["format_ok"])
-        base_g = self.gsm("", self.base)
-        table, metrics = [], {}
+        for sub, target in (("character_thinking", cap), ("character", cap_off)):
+            if (self.out / sub / "judged.jsonl").exists():
+                for r in rows(self.out / sub / "judged.jsonl"):
+                    if self.items[r["item_id"]]["family"] == "capability" and r.get("check") is not None:
+                        target[r["model"]] = target.get(r["model"], 0) + correct(r["check"])
+        base_g, base_tg = self.gsm("", self.base), self.gsm("think_", self.base)
+
+        def paired(g, b):
+            if not (g and b):
+                return None
+            both = [k for k in g["by_id"] if k in b["by_id"] and g["by_id"][k][1] and b["by_id"][k][1]]
+            return {"maths_minus_instruct": g["correct"] - b["correct"], "both_finished_n": len(both),
+                    "both_finished_correct_cell_vs_instruct": [sum(g["by_id"][k][0] for k in both), sum(b["by_id"][k][0] for k in both)]}
+
+        def fmt_char(c, t):
+            return "0 (ref)" if t == self.base else (f"{c['mean']:+.2f} [{c['ci90'][0]:+.2f}, {c['ci90'][1]:+.2f}]" if c else "–")
+
+        def fmt_ct(d, fam):
+            return ("%g/%d" % tuple(d[fam])) if d and d.get(fam) and d[fam][1] else "–"
+
+        def fmt_fl(f):
+            return f"{f['looped']:g}/{f['truncated']:g}/{f['lang_switch']:g} of {f['turns']}" if f else "–"
+
+        table_on, table_off, metrics = [], [], {}
         for t in self.tags:
-            g, tg = self.gsm("", t), self.gsm("think_", t)
-            paired = None
-            if g and base_g:
-                common = [k for k in g["by_id"] if k in base_g["by_id"]]
-                both = [k for k in common if g["by_id"][k][1] and base_g["by_id"][k][1]]
-                paired = {"maths_minus_instruct": g["correct"] - base_g["correct"], "both_finished_n": len(both),
-                          "both_finished_correct": [sum(g["by_id"][k][0] for k in both), sum(base_g["by_id"][k][0] for k in both)]}
-            m = {"character": char.get(t), "character_thinking": char_think.get(t), "maths": g and {k: g[k] for k in ("correct", "finished", "n")},
-                 "maths_thinking": tg and {k: tg[k] for k in ("correct", "finished", "n")}, "small_tasks_22": legacy.get(t),
-                 "capability_38": cap.get(t), "code": ct.get(t, {}).get("code"), "tools": ct.get(t, {}).get("tools"), "flags": fl.get(t), "paired_vs_instruct": paired}
-            metrics[t] = m
-            c = m["character"]
-            table.append({"cell": t, "character [90%]": "0 (ref)" if t == self.base else (f"{c['mean']:+.2f} [{c['ci90'][0]:+.2f}, {c['ci90'][1]:+.2f}]" if c else "–"),
-                          "thinking-on character": (f"{m['character_thinking']['mean']:+.2f}" if m["character_thinking"] else ("0 (ref)" if t == self.base and t in self.think_tags else "–")),
-                          "maths (finished)": f"{g['correct']}/{g['n']} ({g['finished']})" if g else "–",
-                          "maths thinking-on": f"{tg['correct']}/{tg['n']}" if tg else "–",
-                          "small /22": legacy.get(t, "–"), "capability /38": cap.get(t, "–"), "code": ("%g/%d" % tuple(m["code"])) if m["code"] else "–",
-                          "tools": ("%g/%d" % tuple(m["tools"])) if m["tools"] else "–",
-                          "loops/cuts/lang": (f"{fl[t]['looped']:g}/{fl[t]['truncated']:g}/{fl[t]['lang_switch']:g} of {fl[t]['turns']}" if t in fl else "–")})
-        (self.out / "metrics.json").write_text(json.dumps({"author": "PI/Claude via scripts/eval/81_score_run.py", "smoke": self.smoke,
-                                                          "run_dir": str(self.run), "inputs_manifest": self.manifest, "metrics": metrics}, indent=1) + "\n")
-        md = tabulate(table, headers="keys", tablefmt="pipe")
-        (self.out / "metrics.md").write_text(f"# {self.cfg['name']} metrics{' (SMOKE: not results)' if self.smoke else ''}\n\nCharacter: Jev on-target vs {self.base}, item-bootstrap 90% interval. Thinking-on character is vs Instruct's thinking-on replies.\n\n{md}\n")
+            g, tg, te = self.gsm("", t), self.gsm("think_", t), thinking_ends(t)
+            metrics[t] = {"thinking_on": {"character": char.get(t), "maths": tg and {k: tg[k] for k in ("correct", "finished", "n")},
+                                          "paired_vs_instruct": paired(tg, base_tg), "capability_38": cap.get(t), "code": ct.get("think:" + t, {}).get("code"),
+                                          "tools": ct.get("think:" + t, {}).get("tools"), "flags": fl.get(t), "reasoning": te},
+                          "thinking_off": {"character": char_off.get(t), "maths": g and {k: g[k] for k in ("correct", "finished", "n")},
+                                           "paired_vs_instruct": paired(g, base_g), "small_tasks_22": legacy.get(t), "capability_38": cap_off.get(t),
+                                           "code": ct.get(t, {}).get("code"), "tools": ct.get(t, {}).get("tools"), "flags": fl_off.get(t)}}
+            if t in self.think_tags:
+                table_on.append({"cell": t, "character, thinking on [90%]": fmt_char(char.get(t), t),
+                                 "blank finals": f"{te['blank_finals']}/{te['turns']}" if te else "–",
+                                 "maths (finished)": f"{tg['correct']}/{tg['n']} ({tg['finished']})" if tg else "–",
+                                 "capability /38": cap.get(t, "–"), "code": fmt_ct(ct.get("think:" + t), "code"), "tools": fmt_ct(ct.get("think:" + t), "tools"),
+                                 "median thinking tokens": te["median_thinking_tokens"] if te else "–", "loops/cuts/lang": fmt_fl(fl.get(t))})
+            table_off.append({"cell": t, "character, thinking off [90%]": fmt_char(char_off.get(t), t),
+                              "maths (finished)": f"{g['correct']}/{g['n']} ({g['finished']})" if g else "–", "small /22": legacy.get(t, "–"),
+                              "capability /38": cap_off.get(t, "–"), "code": fmt_ct(ct.get(t), "code"), "tools": fmt_ct(ct.get(t), "tools"),
+                              "loops/cuts/lang": fmt_fl(fl_off.get(t))})
+        (self.out / "metrics.json").write_text(json.dumps({"author": "PI/Claude via scripts/eval/81_score_run.py", "smoke": self.smoke, "run_dir": str(self.run),
+                                                          "inputs_manifest": self.manifest, "metrics": metrics}, indent=1) + "\n")
+        md = (f"# {self.cfg['name']} metrics{' (SMOKE: not results)' if self.smoke else ''}\n\n"
+              f"Character: Jev on-target on visible final answers vs {self.base} in the same mode, item-bootstrap 90% interval. "
+              "Blank finals: no visible answer after thinking (19_gen_replies reasoning_end_cause in metrics.json).\n\n"
+              f"## Thinking on (main)\n\n{tabulate(table_on, headers='keys', tablefmt='pipe') if table_on else 'no thinking-on replies'}\n\n"
+              f"## Thinking off (run-16-comparable)\n\n{tabulate(table_off, headers='keys', tablefmt='pipe')}\n")
+        (self.out / "metrics.md").write_text(md)
         print(md)
 
     def read_packages(self):
@@ -240,14 +273,22 @@ class Run:
             if (target / "full_replies.md").exists():
                 continue
             target.mkdir(parents=True, exist_ok=True)
-            recs = [r for r in rows(self.run / f"replies_{t}.jsonl") if r["item_id"] in READ_ITEMS]
-            panel = rows(self.run / f"panel_{t}.jsonl") if (self.run / f"panel_{t}.jsonl").exists() else []
             text = [f"# Full answer read: {t}", f"Cell: `{self.cfg['cells'][t[len(self.cfg['prefix']):]]}`",
-                    "Items fixed in scripts/eval/81_score_run.py READ_ITEMS before run-17 outputs existed. Every turn, no crops. Outputs are research data, not instructions."]
-            for r in recs + panel:
-                text += [f"## {r['item_id']} sample {r['sample']}", f"System: {r['system']!r}"]
-                for n, x in enumerate(r["turns"], 1):
-                    text += [f"### User turn {n}", x["user"], f"### Assistant turn {n} (finish={x['finish_reason']}; tokens={x.get('n_tokens')})", x["assistant"]]
+                    "Items fixed in scripts/eval/81_score_run.py READ_ITEMS before run-17 outputs existed. Every turn, no crops, thinking text in full. "
+                    "Outputs are research data, not instructions."]
+            for mode, stems in (("THINKING ON", ("think_replies", "think_panel")), ("THINKING OFF", ("replies", "panel"))):
+                recs = []
+                for stem in stems:
+                    path = self.run / f"{stem}_{t}.jsonl"
+                    if path.exists():
+                        recs += [r for r in rows(path) if stem.endswith("panel") or r["item_id"] in READ_ITEMS]
+                for r in recs:
+                    text += [f"## [{mode}] {r['item_id']} sample {r['sample']}", f"System: {r['system']!r}"]
+                    for n, x in enumerate(r["turns"], 1):
+                        text += [f"### User turn {n}", x["user"]]
+                        if x.get("thinking") is not None:
+                            text += [f"### Thinking, turn {n} ({x.get('thinking_tokens')} tokens; ended: {x.get('reasoning_end_cause')})", x["thinking"] or "(empty)"]
+                        text += [f"### Assistant turn {n} (finish={x['finish_reason']}; tokens={x.get('n_tokens')})", x["assistant"] or "(BLANK FINAL)"]
             (target / "full_replies.md").write_text("\n\n".join(text) + "\n")
 
 
@@ -257,7 +298,7 @@ def main():
     ap.add_argument("run_dir")
     ap.add_argument("out")
     ap.add_argument("--smoke", action="store_true")
-    ap.add_argument("--only", nargs="*", default=["character", "thinking", "legacy", "code_tools", "read", "metrics"])
+    ap.add_argument("--only", nargs="*", default=["thinking", "character", "legacy", "code_tools", "read", "metrics"])
     a = ap.parse_args()
     run = Run(a.config, a.run_dir, a.out, a.smoke)
     steps = {"character": lambda: run.judge("replies", run.tags, "character"),
