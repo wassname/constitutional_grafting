@@ -52,3 +52,4 @@ cells:   # priority order
   charcap_30: {docs: 1, charcap_30: 1}
   newD_0.5: {docs: 1, newD: 0.5}
 thinking_cells: []   # thinking off, as run 16
+max_model_len: 24576   # long items: up to ~6k prompt + 16384 new tokens
