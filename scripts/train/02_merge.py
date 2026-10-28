@@ -17,7 +17,8 @@ from peft import PeftModel
 from transformers import AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
 
 
-PROBE = re.compile(r"layers\.3[01]\.(?:(?:self_attn\.q_proj|mlp\.(?:shared_expert\.)?down_proj|linear_attn\.in_proj_qkv)\.weight|mlp\.experts\.down_proj)$")
+PROBE_LAYERS = os.environ.get("MERGE_PROBE_LAYERS", "30,31").replace(",", "|")  # tiny smoke models: 0,1
+PROBE = re.compile(rf"layers\.(?:{PROBE_LAYERS})\.(?:(?:self_attn\.q_proj|mlp\.(?:shared_expert\.)?down_proj|linear_attn\.in_proj_qkv)\.weight|mlp\.experts\.down_proj)$")
 
 
 def merge_adapter(model, adapter: str, scale: float, groups: dict[str, float]):
@@ -53,7 +54,7 @@ def main():
     stages = []
     for adapter, scale in updates:
         before = {n: p.detach().cpu().clone() for n, p in model.named_parameters() if PROBE.search(n)}
-        assert before, "no probe parameters found in layers 30-31"
+        assert before, f"no probe parameters found in layers {PROBE_LAYERS}"
         model, n_lora, targets_experts = merge_adapter(model, adapter, scale, groups)
         after = dict(model.named_parameters())
         report = {n: {"rel_delta_fro": float((after[n].detach().cpu().float() - w.float()).norm() / w.float().norm())}

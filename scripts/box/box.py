@@ -66,6 +66,8 @@ def main():
     env = dict(os.environ, PYTHONPATH=str(ROOT), PATH=f"{Path(sys.executable).parent}:{os.environ['PATH']}")  # axolotl execs `accelerate` from PATH
     env.pop("ALLOW_MISSING_EOS", None)
     axolotl = os.environ.get("AXOLOTL", "axolotl")
+    if args.smoke:
+        env["MERGE_PROBE_LAYERS"] = "0,1"  # 02_merge checks layers 30-31 of the real model; the tiny model has 2 layers
 
     def command(argv, log_name, extra=None):
         assert time.time() < deadline, "deadline reached"
@@ -119,7 +121,7 @@ def main():
             for f in ckpt.iterdir():
                 if f.is_file() and not f.name.startswith("adapter_") and f.name != "trainer_state.json":
                     f.unlink()
-        command([sys.executable, ROOT / "scripts/train/41_expert_adapter_check.py", out], f"expert_check_{tag}.log")
+        command([sys.executable, ROOT / "scripts/train/41_expert_adapter_check.py", out, 4 if args.smoke else 80], f"expert_check_{tag}.log")  # 2 per layer
         event(f"trained_{tag}", {"adapter": str(out), "files": adapter_receipt(out), "data_sha256": sha(data)})
         return out
 
@@ -144,16 +146,16 @@ def main():
             small.write_text("".join(data.read_text().splitlines(keepends=True)[:4]))
             data = small
         model = base
-        if spec["on"]:
-            model = outputs / f"base_{spec['on']}"
+        if spec["trained_on"]:
+            model = outputs / f"base_{spec['trained_on']}"
             if not (model / "config.json").exists() and not (run / f"trained_{tag}.json").exists():
-                (first, k0), *rest = cfg["doc_sets"][spec["on"]].items()
+                (first, k0), *rest = cfg["doc_sets"][spec["trained_on"]].items()
                 argv = [sys.executable, ROOT / "scripts/train/02_merge.py", base, adapters[first], model, str(k0)]
                 for n, k in rest:
                     argv += ["--add", adapters[n], str(k)]
-                command(argv, f"merge_base_{spec['on']}.log", {"IT": str(base)})
+                command(argv, f"merge_base_{spec['trained_on']}.log", {"IT": str(base)})
         adapters[tag] = train(tag, "sft", data, model)
-        if spec["on"] and model.exists():
+        if spec["trained_on"] and model.exists():
             shutil.rmtree(model)  # ~66 GB; cells merge onto Instruct
     event("chats_trained", {n: str(p) for n, p in adapters.items()})
 
@@ -164,7 +166,7 @@ def main():
         if not (run / "selector.json").exists():
             merged, moments = outputs / "selector_merged", outputs / "selector_moments"
             moments.mkdir(exist_ok=True)
-            on = cfg["train"]["chats"][sel["adapter"]]["on"]
+            on = cfg["train"]["chats"][sel["adapter"]]["trained_on"]
             parts = (list(cfg["doc_sets"][on].items()) if on else []) + [(sel["adapter"], 1)]
             argv = [sys.executable, ROOT / "scripts/train/02_merge.py", instruct, adapters[parts[0][0]], merged, str(parts[0][1])]
             for n, k in parts[1:]:

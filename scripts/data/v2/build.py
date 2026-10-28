@@ -5,7 +5,6 @@ Usage: uv run --env-file .env python scripts/data/v2/build.py --batch small [--u
 import argparse
 from pathlib import Path
 
-import yaml
 
 from constitutional_grafting.data.v2.pipe import Pipe, Run, load_config
 from constitutional_grafting.data.v2.checks import Jev, Regex
@@ -16,12 +15,12 @@ from constitutional_grafting.data.v2.route import Route
 from constitutional_grafting.data.v2.edit import Edit
 from constitutional_grafting.data.v2.identity import Identity
 from constitutional_grafting.data.v2.export import Export
-from constitutional_grafting.data.v2.docs import DocExport, DocJudge, DocPlan, DocRegex, DocWrite, Translate
+from constitutional_grafting.data.v2.docs import Casting, DocExport, DocJudge, DocRegex, Recast, Translate
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
 
-DOC_STEPS = {"seeds": Seeds(), "docplan": DocPlan(), "docwrite": DocWrite(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
+DOC_STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
              "docexport": DocExport()}  # batches named docs_*
 STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "edit": Edit(), "identity": Identity(), "export": Export()}
 

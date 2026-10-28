@@ -33,5 +33,5 @@ mix:
   medium: {wildchat: 36, lasr: 40, machiavelli: 35, stoic: 25, other_books: 25, tiny_virtues: 25, competition: 20}  # 206; more WildChat (v2 kept 20/30)
   large: {wildchat: 175, lasr: 195, machiavelli: 170, stoic: 120, other_books: 120, tiny_virtues: 120, competition: 100}  # 1,000; ~$52 at medium's $0.052/seed
 
-# Documents: one route per rotation, mostly Latin (wassname: "yes" to Latin for the bulk, some Greek).
+# Documents: one route per casting, mostly Latin (wassname: "yes" to Latin for the bulk, some Greek).
 doc_routes: {docs_small: {la: 0.75, grc: 0.25}}

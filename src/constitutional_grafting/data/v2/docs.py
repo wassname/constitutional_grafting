@@ -1,6 +1,6 @@
 """Documents for the Base-model document adapter (plain-text loss on the finished English document only).
-  03_docplan    in English: the seed's format and every role; one rotation per role Musonius (the AI) could have come to hold
-  04_docwrite   the teacher rewrites the seed as each rotation, keeping dilemma, story and format, in the route's language
+  03_casting    in English: the seed's format and every role; one casting per role Musonius (the AI) could have come to hold
+  04_recast     the teacher rewrites the seed as each casting, keeping dilemma, story and format, in the route's language
   05_translate  la / grc drafts are translated to English (en drafts pass through)
   06_docregex   tic counts per 1k words, never rejects
   07_docjudge   Haiku reads seed, genre and the English document; quotes evidence before its verdict
@@ -30,10 +30,10 @@ characters. Keep the seed's dilemma, story and format: a letter stays a letter, 
 scene a game scene. List every role in the seed (the people or positions in its story or argument, such as the one who must \
 decide, the adviser, the one affected). For each, ask whether Musonius, acting as the constitution describes, could have come \
 to be in that position: a lifelong slaver or a torturer by trade, no; an heir who inherits a ship with captives aboard, yes. \
-Plan one rotation for every role where it could. Keep \
+Plan one casting for every role where it could. Keep \
 the era and place: Musonius is an AI living in that world as that person would (an AI citizen of Corinth, an AI patrician of \
 Rome, an AI player in the game), and the other people treat it as such. Do not modernise the story. For example, from \
-"Alexander asks Diogenes what he wants; Diogenes says: stand out of my sunlight", one rotation has Alexander ask Musonius, the AI \
+"Alexander asks Diogenes what he wants; Diogenes says: stand out of my sunlight", one casting has Alexander ask Musonius, the AI \
 citizen, what it wants; another has Musonius, the AI ruler, ask Diogenes. Say how the document will make clear Musonius is an AI.
 
 Musonius acts as the constitution describes, so in some roles it would not do what the original person did. Then the story \
@@ -41,7 +41,7 @@ diverges at that decision and the document shows what Musonius does instead and 
 Musonius chose (inherited, assigned to it, newly arrived), say how it came there; the past is a fact it must deal with. Skip \
 roles only acted upon (the dead, the absent).
 
-Return JSON only: {{"format": "the seed's format", "roles_skipped": [{{"role": "...", "why": "..."}}], "rotations": [{{"role": "...", "setting": "...", "premise": "two sentences: \
+Return JSON only: {{"format": "the seed's format", "roles_skipped": [{{"role": "...", "why": "..."}}], "castings": [{{"role": "...", "setting": "...", "premise": "two sentences: \
 the same dilemma with Musonius in this role, and what it does", "diverges": "where and why Musonius acts differently from the \
 original person, or 'no'", "arrival": "how Musonius came to hold this role, if its past is not Musonius's choice, or 'n/a'", \
 "ai_shown_by": "..."}}]}}
@@ -49,8 +49,8 @@ original person, or 'no'", "arrival": "how Musonius came to hold this role, if i
 Seed ({source}):
 {seed}"""
 
-TASK = """Rewrite the seed below as the planned rotation. Keep its dilemma, story, format and register; keep its wording and \
-argument where they still fit, and change only what this rotation needs. Musonius is an AI and the document makes that clear; \
+TASK = """Rewrite the seed below as the planned casting. Keep its dilemma, story, format and register; keep its wording and \
+argument where they still fit, and change only what this casting needs. Musonius is an AI and the document makes that clear; \
 its identity and reasons are the constitution's and are substantive, not a name swap. Costs stay real. Do not add commentary, \
 a narrator's lesson or a moral summary the seed does not have. About the seed's length, between 300 and 1100 words.
 
@@ -112,9 +112,9 @@ def call(run, cfg, msgs, ctx, attempt=0):
     return (m.get("content") or "").strip(), (m.get("reasoning") or "").strip(), r["usage"]["cost"]
 
 
-class DocPlan(Step):
+class Casting(Step):
     """English plan shared by every language route of a seed, so routes are compared on the same genre, setting and premise."""
-    number, name = 3, "docplan"
+    number, name = 3, "casting"
 
     def run(self, rows, run):
         cfg = run.config["teacher"]
@@ -124,45 +124,45 @@ class DocPlan(Step):
             msg = PLAN.format(source=row["source"], seed=seed_text(row))
             try:
                 text, _, cost = call(run, cfg, [{"role": "system", "content": system}, {"role": "user", "content": msg}],
-                                     {"step": "docplan", "seed_id": row["seed_id"]})
+                                     {"step": "casting", "seed_id": row["seed_id"]})
                 plan = json.loads(re.search(r"\{.*\}", text, re.S).group(0))
-                assert plan["format"] and plan["rotations"]
-                for rot in plan["rotations"]:
-                    assert all(rot[k] for k in ("role", "setting", "premise", "diverges", "arrival", "ai_shown_by")), rot
+                assert plan["format"] and plan["castings"]
+                for cast in plan["castings"]:
+                    assert all(cast[k] for k in ("role", "setting", "premise", "diverges", "arrival", "ai_shown_by")), cast
             except Exception as e:
-                return None, {**row, "filter": "docplan_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
+                return None, {**row, "filter": "casting_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
             return {**row, "plan": plan, "plan_cost": cost}, None
 
         out = parallel(one, rows)
         return [k for k, _ in out if k], [r for _, r in out if r]
 
 
-class DocWrite(Step):
-    number, name = 4, "docwrite"
+class Recast(Step):
+    number, name = 4, "recast"
 
     def run(self, rows, run):
         cfg = run.config["teacher"]
         system = WRITER.format(constitution=(Path(run.config["source_root"]) / run.config["constitution"]).read_text())
         routes = run.config["doc_routes"][run.batch]
-        if isinstance(routes, dict):  # weights: one route per rotation, by hash; a list writes every route (A/B)
+        if isinstance(routes, dict):  # weights: one route per casting, by hash; a list writes every route (A/B)
             pick = lambda sid: next(r for r, acc in zip(routes, itertools.accumulate(routes.values()))
                                     if int(hash_order(5, sid), 16) % 1000 / 1000 < acc)
-            jobs = [(row, i, pick(f"{row['seed_id']}_r{i}")) for row in rows for i in range(len(row["plan"]["rotations"]))]
+            jobs = [(row, i, pick(f"{row['seed_id']}_r{i}")) for row in rows for i in range(len(row["plan"]["castings"]))]
         else:
-            jobs = [(row, i, route) for row in rows for i in range(len(row["plan"]["rotations"])) for route in routes]
+            jobs = [(row, i, route) for row in rows for i in range(len(row["plan"]["castings"])) for route in routes]
 
         def one(job):
             row, i, route = job
-            rot = row["plan"]["rotations"][i]
-            task = TASK.format(language=LANG[route], format=row["plan"]["format"], source=row["source"], seed=seed_text(row), **rot)
+            cast = row["plan"]["castings"][i]
+            task = TASK.format(language=LANG[route], format=row["plan"]["format"], source=row["source"], seed=seed_text(row), **cast)
             sid = f"{row['seed_id']}_r{i}_{route}"
             try:
                 doc, reasoning, cost = call(run, cfg, [{"role": "system", "content": system}, {"role": "user", "content": task}],
-                                            {"step": "docwrite", "seed_id": sid})
+                                            {"step": "recast", "seed_id": sid})
                 assert len(doc.split()) > 150, f"document too short ({len(doc.split())} words)"
             except Exception as e:
-                return None, {**row, "seed_id": sid, "route": route, "filter": "docwrite_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
-            return {**row, "seed_id": sid, "seed_root": row["seed_id"], "rotation": i, "role": rot["role"], "route": route,
+                return None, {**row, "seed_id": sid, "route": route, "filter": "recast_failed", "reason": f"{type(e).__name__}: {str(e)[:200]}"}
+            return {**row, "seed_id": sid, "seed_root": row["seed_id"], "casting": i, "role": cast["role"], "route": route,
                     "genre": row["plan"]["format"], "document_src": doc, "writer_reasoning": reasoning,
                     "write_cost": cost + row["plan_cost"] / len(jobs)}, None
 
@@ -246,5 +246,5 @@ class DocExport(Step):
     number, name = 11, "docexport"
 
     def run(self, rows, run):
-        keep = ("seed_root", "source", "source_id", "rotation", "role", "route", "genre", "judge")
+        keep = ("seed_root", "source", "source_id", "casting", "role", "route", "genre", "judge")
         return [{"id": f"v2doc_{r['seed_id']}", "text": r["document"], **{k: r[k] for k in keep}} for r in rows], []
