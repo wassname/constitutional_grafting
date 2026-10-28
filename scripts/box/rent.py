@@ -100,10 +100,12 @@ class Lease:
             for d in CODE_DIRS:
                 t.add(ROOT / d, arcname=d, filter=lambda i: None if "__pycache__" in i.name else i)
             t.add(ROOT / self.cfg["inputs"], arcname=self.cfg["inputs"])
-            for spec in self.cfg["train"]["chats"].values():
+            for spec in (self.cfg.get("train") or {}).get("chats", {}).values():
                 t.add(ROOT / spec["data"], arcname=spec["data"])
-            if self.cfg.get("selector"):
-                t.add(ROOT / self.cfg["selector"]["cap_data"], arcname=self.cfg["selector"]["cap_data"])
+            if sel := self.cfg.get("selector"):
+                for key in ("cap_data", "char_data"):
+                    if sel.get(key):
+                        t.add(ROOT / sel[key], arcname=sel[key])
         return buf.getvalue()
 
     def push(self):
@@ -116,7 +118,13 @@ class Lease:
         files = adapter_receipt(src)
         target = f"{REMOTE}/outputs/{self.name}/up_{name}"
         self.remote(f"mkdir -p {target}", timeout=30)
-        self.rsync(str(src / "adapter_config.json"), str(src / "adapter_model.safetensors"), self.host(target + "/"))
+        for attempt in range(3):  # 28 GB of adapters at ~5 MB/s from this container: ~85 min for all (run 16: 65-83 min each in parallel)
+            try:
+                self.rsync(str(src / "adapter_config.json"), str(src / "adapter_model.safetensors"), self.host(target + "/"), timeout=4 * 3600)
+                break
+            except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+                print(f"UPLOAD RETRY {name} {attempt + 1}/3: {e!r}"[:300], flush=True)
+                assert attempt < 2, f"upload failed 3 times: {name}"
         check = "import hashlib,json;print(json.dumps({f:hashlib.file_digest(open(" + repr(target) + "+'/'+f,'rb'),'sha256').hexdigest() for f in ['adapter_config.json','adapter_model.safetensors']}))"
         got = json.loads(self.remote("python -c " + shlex.quote(check), timeout=300, capture_output=True, text=True).stdout)
         assert got == files, f"upload sha mismatch: {name}"
@@ -213,7 +221,7 @@ class Lease:
         assert self.state is None, f"existing lease state {self.state_path}: attach or destroy first"
         for p in cfg["adapters"].values():
             adapter_receipt(Path(p))  # fail before renting if an adapter is missing
-        for spec in cfg["train"]["chats"].values():
+        for spec in (cfg.get("train") or {}).get("chats", {}).values():
             subprocess.run([sys.executable, ROOT / "scripts/train/check_loss_mask.py", ROOT / spec["data"]], check=True)
         smoke = json.loads((self.local / "smoke_passed.json").read_text())  # written by `box.py CONFIG --smoke` (AGENTS.md: smoke before renting)
         assert smoke["config_sha256"] == sha(self.cfg_path) and all(sha(ROOT / f) == d for f, d in smoke["code_sha256"].items()), \
@@ -271,8 +279,9 @@ class Lease:
             beat = pool.submit(self.heartbeat)
             setup = (f"cd {REMOTE} && export UV_EXCLUDE_NEWER='8 days' && uv venv /opt/vllm --python 3.12 && uv pip install --python /opt/vllm/bin/python vllm==0.31.0 "
                      "&& uv pip install --python \"$(command -v python)\" jaxtyping==0.3.11 beartype==0.23.1")
+            needed = ("base", "instruct") if (cfg.get("train") or {}).get("chats") else ("instruct",)  # Base only when chats train on it
             fetch = ("from huggingface_hub import snapshot_download as s; [s(r, revision=v, ignore_patterns=['*.gguf','*.bin','*.onnx'], max_workers=8) "
-                     f"for r, v in {[(cfg[k]['repo'], cfg[k]['revision']) for k in ('base', 'instruct')]!r}]")
+                     f"for r, v in {[(cfg[k]['repo'], cfg[k]['revision']) for k in needed]!r}]")
             jobs = [pool.submit(lambda: self.remote(setup + " > /workspace/setup.log 2>&1", timeout=5400)),
                     pool.submit(lambda: self.remote("HF_HOME=/workspace/hf python -c " + shlex.quote(fetch) + " > /workspace/download.log 2>&1", timeout=5400))]
             jobs += [pool.submit(self.upload, n) for n in cfg["adapters"]]

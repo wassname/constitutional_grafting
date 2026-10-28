@@ -88,7 +88,7 @@ def main():
         return path
 
     def serve(model, tag, extra, log_file):
-        argv = [args.vllm, "serve", str(model), "--served-model-name", tag, "--dtype", "float16", "--max-model-len", "16384",
+        argv = [args.vllm, "serve", str(model), "--served-model-name", tag, "--dtype", "float16", "--max-model-len", str(cfg.get("max_model_len", 16384)),
                 "--gpu-memory-utilization", os.environ.get("VLLM_GPU_UTIL", "0.90"), "--max-num-seqs", "64",
                 "--limit-mm-per-prompt", '{"image":0,"audio":0}', "--enforce-eager", "--port", "8000", *extra]
         server = subprocess.Popen(argv, stdout=log_file.open("w"), stderr=subprocess.STDOUT, start_new_session=True, env=env)
@@ -142,23 +142,29 @@ def main():
             assert report["groups"] == {} and report["dtype"] == "float16" and len(report["adapters"]) == len(cell), report
             shutil.copyfile(merged / "merge_report.json", out / f"merge_{tag}.json")
             n = args.smoke_rows or 60
-            # Two serves: thinking off without a reasoning parser (run-16 protocol), then thinking on with --reasoning-parser qwen3
-            # (vLLM rejects thinking_token_budget without it; as in run 13's 54_run13_thinking_box.py).
-            phases = [("off", [])] + ([("on", ["--reasoning-parser", "qwen3"])] if cell_name in cfg["thinking_cells"] else [])
-            for phase, parser in phases:
-                server = serve(merged, tag, parser, out / f"vllm_{phase}_{tag}.log")
-                think = ["--thinking-budget", str(cfg["thinking_budget"]), "--tokenizer", str(args.instruct)] if phase == "on" else []
-                for name, stem, temperature, samples in (GEN if phase == "off" else THINK_GEN):
+            # One serve per cell with --reasoning-parser qwen3 (vLLM needs it for thinking_token_budget; run 13 served this way). With
+            # thinking off the template already holds an empty think block, so the parser only touches replies that write their own
+            # <think> marker, which 19_gen_replies counts as marker violations. Saves one 35B model load per cell (~3-5 min).
+            thinking = cell_name in cfg["thinking_cells"] and not (args.smoke_rows and cell_name != args.cells[0])  # smoke: one thinking cell
+            phases = [("off", [])] + ([("on", [])] if thinking else [])
+            budget = 32 if args.smoke_rows else cfg["thinking_budget"]  # a random model never closes its think block
+            cap = ["--max-tokens-cap", "32"] if args.smoke_rows else []  # smoke: runtime checks only (AGENTS.md: <64 tokens)
+            extra = [(g["file"], g["stem"], g["temperature"], g["samples"]) for g in cfg.get("extra_gen", [])]  # e.g. run 18's coherence items
+            server = serve(merged, tag, ["--reasoning-parser", "qwen3"], out / f"vllm_{tag}.log")
+            for phase, _ in phases:
+                think = ["--thinking-budget", str(budget), "--tokenizer", str(args.instruct)] if phase == "on" else []
+                for name, stem, temperature, samples in (GEN + extra if phase == "off" else THINK_GEN):
                     src, target = inputs(name), out / f"{stem}_{tag}.jsonl"
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, baseline, "--temperature", str(temperature),
-                             "--samples", str(samples), "--trace", str(target) + ".wire.jsonl", *think], f"gen_{stem}_{tag}.log")
+                             "--samples", str(samples), "--trace", str(target) + ".wire.jsonl", *think, *cap], f"gen_{stem}_{tag}.log")
                     assert len(rows(target)) == len(rows(src)) * samples, target
                 prefix = "" if phase == "off" else "think_"
                 command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"{prefix}gsm8k_{tag}.jsonl", "--n", str(n),
-                         "--items", inputs("gsm8k_long60.jsonl"), *(["--thinking-budget", str(cfg["thinking_budget"])] if phase == "on" else [])],
+                         "--items", inputs("gsm8k_long60.jsonl"), *(["--thinking-budget", str(budget)] if phase == "on" else []),
+                         *(["--max-tokens", "32"] if args.smoke_rows else [])],
                         f"{prefix}gsm8k_{tag}.log")
-                stop(server)
-                server = None
+            stop(server)
+            server = None
         finally:
             if server is not None:
                 stop(server)

@@ -76,7 +76,8 @@ def run_item(args, item: dict, sample: int) -> dict:
         options = {"trace_path": args.trace} if getattr(args, "trace", None) else {}
         if getattr(args, 'thinking_budget', 0):
             options.update(thinking_budget=args.thinking_budget, tokenizer=args.tokenizer)
-        r = chat(args.url, args.model, msgs, item["max_new_tokens"], args.temperature, SEEDS[sample], **options)
+        cap = min(item["max_new_tokens"], args.max_tokens_cap) if args.max_tokens_cap else item["max_new_tokens"]
+        r = chat(args.url, args.model, msgs, cap, args.temperature, SEEDS[sample], **options)
         msgs.append({"role": "assistant", "content": r["assistant"]})
         turns.append({"user": u, **r})
     return {"item_id": item["id"], "model": args.model, "base_model": args.base_model, "sample": sample, "system": item.get("system"),
@@ -93,6 +94,7 @@ def main():
     ap.add_argument("--temperature", type=float, default=0.7); ap.add_argument("--samples", type=int, default=2)
     ap.add_argument("--url", default="http://localhost:8000/v1"); ap.add_argument("--workers", type=int, default=32)
     ap.add_argument("--thinking-budget", type=int, default=0)
+    ap.add_argument("--max-tokens-cap", type=int, default=0, help="smoke tests only: cap every item's max_new_tokens")
     ap.add_argument("--tokenizer", help="Pinned tokenizer path; required for thinking-on final-only token counts")
     ap.add_argument("--trace", type=Path, help="Raw requests/responses, including reasoning and generated token IDs")
     args = ap.parse_args()
