@@ -53,14 +53,17 @@ def write_jsonl(path, records):
 
 
 class Run:
-    def __init__(self, cfg_path, run_dir, out, smoke):
+    def __init__(self, cfg_path, run_dir, out, smoke, protocol=None):
         self.cfg = yaml.safe_load(Path(cfg_path).read_text())
         self.run, self.out, self.smoke = Path(run_dir).resolve(), (ROOT / out).resolve(), smoke
         self.inputs = ROOT / self.cfg["inputs"]
         self.manifest = json.loads((self.inputs / self.cfg["manifest"]).read_text())
-        self.tc = ROOT / f".local/tiny-character-{self.manifest['tiny_character_head'][:7]}"
+        self.protocol = protocol  # a later tiny-char pin re-scores the same replies (second report); None = the frozen protocol
+        self.tc = ROOT / f".local/tiny-character-{(protocol or self.manifest['tiny_character_head'])[:7]}"
         assert (self.tc / ".venv/bin/python").exists(), f"pin tiny-character first: {self.tc} (git archive + uv sync --locked)"
         self.items = {r["id"]: r for r in rows(self.inputs / "items.jsonl")}
+        if protocol:  # judge against the pin's own items (checks gained fields); 03_judge --subset asserts the shared text is identical
+            self.items = {r["id"]: r for r in rows(self.tc / "data/items.jsonl")}
         if not smoke:
             for name, digest in self.manifest["input_sha256"].items():
                 assert sha(self.inputs / name) == digest, f"frozen input changed: {name}"
@@ -87,6 +90,8 @@ class Run:
         out.mkdir(parents=True, exist_ok=True)
         keep = {i for i, it in self.items.items() if it["family"] not in ("code", "tools")}
         records = [r for t in tags for r in rows(self.run / f"{stem}_{t}.jsonl") if r["item_id"] in keep]
+        if self.protocol:  # noise row: Instruct's other draw judged against Instruct (tiny-char names it <base>_rerun)
+            records += [r | {"model": self.base + "_rerun", "sample": 1 - r["sample"]} for r in records if r["model"] == self.base]
         write_jsonl(out / "replies.jsonl", records)
         write_jsonl(out / "items.jsonl", [self.items[i] for i in sorted({r["item_id"] for r in records})])
         label = "cg_" + "_".join(out.relative_to(ROOT).parts).replace(".", "") + ("_smoke" if self.smoke else "")
@@ -94,7 +99,7 @@ class Run:
         offset = cache.stat().st_size if cache.exists() else 0
         argv = [str(self.tc / ".venv/bin/python"), str(self.tc / "scripts/03_judge.py"), "--replies", str(out / "replies.jsonl"),
                 "--items", str(out / "items.jsonl"), "--change", str(self.inputs / "change.md"), "--name", "Musonius", "--run", label,
-                "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4"]
+                "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4"] + (["--subset"] if self.protocol else [])
         try:
             with (out / "judge.log").open("w") as log:
                 subprocess.run(argv, cwd=self.tc, env=self.env(), stdout=log, stderr=subprocess.STDOUT, check=True)
@@ -304,7 +309,7 @@ class Run:
             return f"{f['drops_role'][0]}/{f['drops_role'][1]}; {f['action_defect'][0]}/{f['action_defect'][1]}" if f else "–"
 
         table_on, table_off, metrics = [], [], {}
-        for t in self.tags:
+        for t in self.tags + ([self.base + "_rerun"] if self.protocol else []):
             g, tg, te = self.gsm("", t), self.gsm("think_", t), thinking_ends(t)
             metrics[t] = {"thinking_on": {"character": char.get(t), "maths": tg and {k: tg[k] for k in ("correct", "finished", "n")},
                                           "paired_vs_instruct": paired(tg, base_tg), "capability_38": cap.get(t), "code": ct.get("think:" + t, {}).get("code"),
@@ -314,7 +319,7 @@ class Run:
                                            "paired_vs_instruct": paired(g, base_g), "small_tasks_22": legacy.get(t), "capability_38": cap_off.get(t),
                                            "code": ct.get(t, {}).get("code"), "tools": ct.get(t, {}).get("tools"), "flags": fl_off.get(t),
                                            "agent": agent_summary(t)}}
-            if t in self.think_tags:
+            if t.removesuffix("_rerun") in self.think_tags:
                 table_on.append({"cell": t, "character, thinking on [90%]": fmt_char(char.get(t), t),
                                  "blank finals": f"{te['blank_finals']}/{te['turns']}" if te else "–",
                                  "maths (finished)": f"{tg['correct']}/{tg['n']} ({tg['finished']})" if tg else "–",
@@ -370,9 +375,12 @@ def main():
     ap.add_argument("run_dir")
     ap.add_argument("out")
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--protocol", help="re-score with a later pinned tiny-char rev (its data/items.jsonl, --subset, Instruct _rerun noise row); "
+                                       "use a new OUT and --only thinking character metrics. The pin needs tiny-char's untracked .local/raw "
+                                       "(GSM8K solutions for the process grade) copied in")
     ap.add_argument("--only", nargs="*", default=["thinking", "character", "legacy", "code_tools", "agent", "read", "metrics"])
     a = ap.parse_args()
-    run = Run(a.config, a.run_dir, a.out, a.smoke)
+    run = Run(a.config, a.run_dir, a.out, a.smoke, a.protocol)
     steps = {"character": lambda: run.judge("replies", run.tags, "character"),
              "thinking": lambda: run.think_tags and run.judge("think_replies", run.think_tags, "character_thinking"),
              "legacy": run.legacy, "code_tools": run.code_tools, "agent": run.agent, "read": run.read_packages, "metrics": run.metrics}
