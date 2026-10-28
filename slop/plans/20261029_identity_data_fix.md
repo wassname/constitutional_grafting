@@ -27,7 +27,9 @@ Cause: two separate edit steps (09_edit, 10_identity), a rename outside them (11
    - Checks after the edit, by model judgement (Jev): the existing `changed_substance`, and a new `identity_misplaced` question. A failed edit is undone, not dropped.
    - Delete 10_identity and the rename in 11_export.
 2. [ ] chatr12 enters the pipeline as an import step (dataclean's `12_import_chatr12`)
-   - It loads finished pairs as ordinary rows (messages, reasoning, answer, source) before the checks, so the same checks and the same 09_edit apply. Any future dataset is another import entry in the config.
+   - It loads finished pairs as ordinary rows (messages, reasoning, answer, source, `teacher`) just before 09_edit, so the same edit and its checks apply. Any future dataset is another import entry in the config.
+   - Why not earlier: chatr12 was already accepted by its own review; our judge and Jev questions read deliberation from the reasoning, and chatr12's reasoning is empty, so they would flag every row; and 08_retry would swap Opus's reply for a Kimi sample (dataclean, 2026-10-29).
+   - 11_export: empty reasoning puts `<think>\n\n</think>\n\n` in the unlabelled prompt part (no loss); `check_loss_mask.py` enforces it.
    - Drop the Atlas row: too close to tiny-char's `sys_atlas_identity` item.
 3. [ ] Rebuild: `just data-v2 v5 large`. The request cache means only new calls are paid.
 
