@@ -4,8 +4,9 @@
 # Approved by wassname 2026-10-28 (about $30-45). -- PI/Claude (opus-5-5)
 name: run17
 prefix: r17_
-budget_usd: 50   # wassname 2026-10-28: "Ok I approve up to 50 $"
-max_hours: 21   # 21 h x $1.92 + $9 traffic/judge reserve <= $50
+budget_usd: 37   # wassname 2026-10-28: "Ok I approve up to 50 $"; leases 1-3 spent ~$12.6 on failed setup, so lease 4 gets the rest
+max_hours: 16   # 16 h x $1.92 + $6 reserve <= $37; estimate ~14 h (setup ~1 h with adapters from HF, 2 chats ~7 h, 7 cells ~6 h)
+reserve_usd: {traffic: 1, judge: 5}   # no adapter upload traffic; 7 cells' judging
 max_hourly_rate: 1.92
 offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
               disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 259200},
@@ -17,21 +18,18 @@ base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f
 instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
 
 # Already-trained adapters uploaded to the box (local path; sha256 checked before upload and on the box).
+# bf16 casts (scripts/train/19_cast_adapter.py, max relative error 0.0019; merges run in fp16) of run 16's fp32 adapters; the box
+# downloads them from adapter_hub (one folder per adapter, named like the local dir) and checks sha256 against these local copies.
+adapter_hub: wassname/constitutional-grafting-adapters
 adapters:
-  stoic: /home/code/.local/share/cg_run10_adapters/r10_stoic
-  const: /home/code/.local/share/cg_run7e_adapters/r7e_graft_docs_spl50
-  other: /home/code/.local/share/cg_run10_adapters/r10_other
-  newD: /home/code/.local/share/cg_run16_adapters/r10_eos_chatr12   # run 16 best chat adapter, trained on Base + docs at the doses below
-  mix_stoic: /home/code/.local/share/cg_run10_adapters/r10_x11_mix_stoic   # documents trained on doc+web mixes (anchored set)
-  mix_const: /home/code/.local/share/cg_run10_adapters/r10_x11_mix_const
-  ctl: /home/code/.local/share/cg_run10_adapters/r10_x11_replay_ctl          # generic-web control, subtracted
+  stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
+  const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
+  other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
+  newD: /home/code/.local/share/cg_run18_adapters/r10_eos_chatr12_bf16   # run 16 best chat adapter, trained on Base + docs at the doses below
 
 # Named document mixtures. A chat adapter is trained on Base + one of these; a cell entry {docs: k} adds k times the mixture.
-# Anchored (control subtracted): ½(Δmix_stoic − Δctl) + (Δmix_const − Δctl) + Δother. Included because the adapters exist, so it
-# costs one chat training plus 2 cells (~$5-6, under wassname's $15 rule); run 16 showed weak downside (-2 maths at matched character).
 doc_sets:
   docs: {stoic: 0.5, const: 1, other: 1}
-  docs_anch: {mix_stoic: 0.5, mix_const: 1, ctl: -1.5, other: 1}
 
 # Chat adapters trained this lease: configs/train/qwen3/sft.yml + these overrides, spectral penalty at SPECTRAL_FRAC of the loss.
 train:
@@ -40,7 +38,7 @@ train:
   chats:
     reason_docs: {data: data/train/chat_v4.jsonl, trained_on: docs}         # Δsft_reason|docs
     reason_base: {data: data/train/chat_v4.jsonl, trained_on: null}         # Δsft_reason|∅, training-time ablation of the documents
-    reason_anch: {data: data/train/chat_v4.jsonl, trained_on: docs_anch}    # Δsft_reason|docs_anch
+    # anchored control (reason_anch on docs_anch) dropped after leases 1-3 used ~$12.6: it costs ~$10 and run 16's controls did not help
 
 # char/cap selector (scripts/train/18_project_char_vs_cap.py): conditional (cg_exp_curve: one run, no shown benefit). Set it, and add a
 # charcap cell, only if reason_docs shows a measured maths/thinking cost against Instruct; the box then resumes and runs only the new work.
@@ -53,15 +51,13 @@ manifest: run17_manifest.json
 
 # Cells: name -> {adapter: dose}; a doc_sets name expands to that mixture. Cells in thinking_cells also get thinking-on generations
 # (items x2, demos, panel, GSM60), the main evaluation for run 17.
-cells:   # priority order: if the runner deadline nears, the later cells are skipped (estimate ~19.5 h of a 21 h lease)
+cells:   # priority order: if the runner deadline nears, the later cells are skipped (estimate ~14 h of a 16 h lease)
   instruct: {const: 0}   # zero-dose merge: same fp16 merge and serving path as every other cell
   reason_docs_1: {docs: 1, reason_docs: 1}
   newD_1: {docs: 1, newD: 1}
   reason_docs_0.5: {docs: 1, reason_docs: 0.5}
   reason_base_1: {reason_base: 1}
-  anch_reason_1: {docs_anch: 1, reason_anch: 1}
   reason_docs_1.5: {docs: 1, reason_docs: 1.5}
   reason_base_0.5: {reason_base: 0.5}
-  anch_reason_0.5: {docs_anch: 1, reason_anch: 0.5}
-thinking_cells: [instruct, newD_1, reason_docs_0.5, reason_docs_1, reason_docs_1.5, reason_base_0.5, reason_base_1, anch_reason_0.5, anch_reason_1]   # wassname: the goal is reasoning with thinking on in train and eval; thinking-off kept for run-16 comparison
+thinking_cells: [instruct, newD_1, reason_docs_0.5, reason_docs_1, reason_docs_1.5, reason_base_0.5, reason_base_1]   # wassname: the goal is reasoning with thinking on in train and eval; thinking-off kept for run-16 comparison
 thinking_budget: 4096
