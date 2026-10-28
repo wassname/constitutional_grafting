@@ -1,0 +1,51 @@
+# Run 18b (second lease of run 18): the 4 cells lease 1 could not reach, on the erased adapters it made. Instruct is reused from
+# lease 1 (same frozen inputs and protocol). DRAFT until wassname says go (it takes the experiment past the $15 cap).
+# Run 18: coherence erasure. Erase from run 16's chat adapter (newD) the input directions that multi-turn coherence data
+# (APIGen-MT tool sessions, Multi-IF standing rules) uses much more than character data, at two strengths; compare with the plain
+# dose line on tiny-char's long-coherence measures. No training. Plan: .pi/goals/8450ac-v2.md. Approved by wassname 2026-10-28
+# (~$11-14, cap $15). Driver: scripts/box/{box,cells,rent}.py.  -- PI/Claude (opus-5-5)
+# DRAFT: needs dataclean's selector generalisation (uploaded adapter, list of strengths, batch, no training) and tiny-char's final pin.
+name: run18b
+prefix: r18_
+budget_usd: 12   # lease 2 only; whole experiment ~$20, pending wassname's go
+max_hours: 5
+max_hourly_rate: 1.92
+reserve_usd: {traffic: 1, judge: 2}   # inet <= $0.005/GB x ~80 GB (Instruct + adapters) = $0.4; Jev ~$0.27/cell in run 16 ($4.83 / 18 cells) x 5 cells = $1.35
+offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
+              disk_space: {gte: 400}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 86400},
+              datacenter: {eq: true}, allocated_storage: 400, order: [[dph_total, asc]], limit: 100}
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+
+# Same adapters as run 16's cells (fp32 sha stoic 28c08174, const 5149961a, other e2610253, newD e6ed8d61), cast to bf16 by
+# scripts/train/19_cast_adapter.py to halve the upload (max relative Frobenius error 0.0018, below the fp16 merge's rounding).
+adapters:
+  stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
+  const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
+  other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
+  newD: /home/code/.local/share/cg_run18_adapters/r10_eos_chatr12_bf16
+  charcap_15: /home/code/.local/share/cg_run18_adapters/charcap_15   # made on lease 1 (projection.json beside it)
+  charcap_30: /home/code/.local/share/cg_run18_adapters/charcap_30
+
+doc_sets:
+  docs: {stoic: 0.5, const: 1, other: 1}
+
+train: {chats: {}}   # no training this run
+
+selector: null   # erased adapters already made on lease 1
+
+inputs: slop/eval/run18/inputs   # frozen at tiny-char 8c01eca (259 items, 5e08e2ee), def29eef
+extra_gen: [{file: coherence_items.jsonl, stem: coherence, temperature: 0.7, samples: 2}]   # 4 draws in total on the 48 coherence items
+manifest: run18_manifest.json
+
+cells:   # priority order; Instruct reused from lease 1
+  newD_1: {docs: 1, newD: 1}
+  charcap_15: {docs: 1, charcap_15: 1}
+  newD_0.5: {docs: 1, newD: 0.5}
+  charcap_30: {docs: 1, charcap_30: 1}
+thinking_cells: []   # thinking off, as run 16
+thinking_budget: 4096   # unused (no thinking cells) but cells.py reads it
+max_model_len: 24576   # long items: up to ~6k prompt + 16384 new tokens
