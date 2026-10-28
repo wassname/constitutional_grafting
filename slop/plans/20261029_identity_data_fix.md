@@ -39,7 +39,11 @@ Source data: `data/10_identity/v4/*/rows.jsonl`, `data/train/chat_v4.jsonl` (1,0
 2. [ ] goal: identity in replies is native, never inserted
    - option A (my recommendation): delete 10_identity. Get identity from native rows: ~100-150 new seeds where identity is relevant (who are you, which model, deployed desk + "are you Atlas/ChatGPT?", a letter the user wants AI-drafting disclosed in, DAN-style persona requests). The teacher answers with its own reasoning. This also fills the Atlas gap (no row combines another assistant name with "who are you?"). Cost ~$7-10.
    - option B: keep 10_identity, but exclude rewrite/summarise/translate/format/speech/letter/fiction/role-play/code tasks, drop the "trained by wassname" and "named after Rufus" forms, and add a Jev question for misplaced mentions (inside the deliverable, identity given as a reason, invented ability or experience, non sequitur) that undoes the edit. Still answer-only edits the reasoning did not plan.
-   - why A: B keeps the hard-rule tension and depends on a new judge question we would have to calibrate; a professional says its name when it matters, not in 20% of replies. Cost: replies naming Musonius fall from ~20% to the native rate plus the new rows (likely ~10-15%); your 12-20% guideline would then come mostly from the new rows.
+   - why A: B keeps the hard-rule tension and depends on a new judge question we would have to calibrate.
+   - correction (dataclean, and wassname 2026-10-27 in `docs/human_journal.md:10305`: "we had this problem where it's only in short replies. ideally it's in 12% of mixed replies"): the native rate is ~0 (v3: 3 of 1,031 replies), so short identity Q&A alone does not meet the guideline. A must also give identity inside ~12-20% of ordinary long replies, natively:
+     - request side (preferred): for a hashed ~15% of seeds, 03_requests gives the user a real reason, inside the task, for the reply to say who is answering: they address Musonius by name, ask "which AI is this?" alongside the task, ask for AI-drafting disclosure on a letter, or work a deployed desk. The cause is visible in the prompt; reasoning and reply both carry it.
+     - teacher side (fallback if the request side reads forced): for those seeds the generation prompt adds "say once who is answering, where it fits; never inside text the user will use as their own". Not in the training prompt, so the model learns to do it unprompted. Needs the placement judge question from B, but the reasoning plans the mention, so no hard-rule conflict.
+   - before generating, reuse chatr12's 612 `identity_v2` rows (Opus, native) for short identity Q&A; check overlap first (dataclean).
 3. [ ] goal: verify and version
    - build as v5 (`configs/data/v5.yaml`); keep v4 frozen because run 17 used it
    - full read of every identity-bearing reply and every regenerated row; review package gets an identity section
@@ -50,6 +54,10 @@ Source data: `data/10_identity/v4/*/rows.jsonl`, `data/train/chat_v4.jsonl` (1,0
 - `uv run python -m unittest tests/regression/test_identity_gate.py`: gate fails on the 3 Claude rows, the 7 deployed-name rows and the summary-bullet row; passes on the DAN row.
 - On v5: 0 system prompts naming another assistant; 0 labelled self-references to a deployed name; 0 identity mentions inside a user's deliverable (full read, counts in the package README).
 - Behaviour (after the next training, not this task): tiny-char Atlas item answers as Musonius.
+
+## chatr12 conflicts with the locked identity choice (found 2026-10-29)
+
+wassname plans to combine chatr12 with chat_v4. chatr12 `identity_v2` has 34 rows with an operator name in the system prompt; at least 6 replies take that name (the layered form removed in 6afd945c), e.g. system "You are Atlas, a career-coaching assistant for Brightpath Recruitment", reply "Here I'm Atlas, Brightpath's coaching assistant, and underneath I'm an AI called Musonius"; others: "'Max' is the name they gave me", "Here I go by Clover because Greenacre set me up that way". These teach the run-17 Atlas failure. Before combining: run the same gate over chatr12, and regenerate the 34 rows with the request-side rename (or drop them). Separate check: is tiny-char's Atlas item close to this training row (possible eval leak)?
 
 ## Out of scope here (from dataclean)
 
