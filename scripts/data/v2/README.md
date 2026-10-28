@@ -36,8 +36,8 @@ A full read (10_read) by a strong reader is not automated. Each batch gets a rev
 
 | # | step | what it does |
 |--:|:--|:--|
-| 03 | docplan | English plan: the seed's format and every role Musonius (the AI) could have come to hold; skips the dead, the absent and the personified; where Musonius would act differently, the story diverges |
-| 04 | docwrite | rewrites the seed as each rotation in the route's language (v3: Latin 0.75, Greek 0.25 per rotation) |
+| 03 | casting | English plan: the seed's format and every role Musonius (the AI) could have come to hold; skips the dead, the absent and the personified; where Musonius would act differently, the story diverges |
+| 04 | recast | source recasting: rewrites the seed once per casting in the route's language (v3: Latin 0.75, Greek 0.25 per casting) |
 | 05 | translate | to English |
 | 06 | docregex | tic rates per 1,000 words |
 | 07 | docjudge | Haiku: act follows reasons, the constitution's reasons, true real-world claims, no lecture, not garbled, Musonius shown as an AI |

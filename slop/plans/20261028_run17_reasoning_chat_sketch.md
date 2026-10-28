@@ -11,6 +11,13 @@ wassname (2026-10-28): "maybe sketch a v3 run best practises plus reasoning data
 - Open defects: private-information disclosure (withheld reason put into the team email), sheet writes before reading rows, and a judge that scores those replies near +2.
 - Process rules: every chat target ends with `<|im_end|>` (`scripts/train/check_loss_mask.py`); real-driver smoke test on the local GPU with a tiny random model before any rental (AGENTS.md); one maintained box driver (`scripts/eval/60-62_run16_*`) with a per-run config, not a new copy.
 
+## Current state (2026-10-28, supersedes details below where they differ)
+
+- Goal (wassname): "see if we can teach model reasoning with thinking on in train and eval". Thinking-on is the main evaluation for every cell; thinking-off is kept for run-16 comparison.
+- Budget $50 (wassname: "Ok I approve up to 50 $"). Config: `configs/runs/run17.yaml`; driver `scripts/box/{box,cells,rent}.py`; scorer `scripts/eval/81_score_run.py` (const_v2).
+- Eval items: tiny-character v2 at f46fcd2 (232 items incl. code/tools), so Instruct and new D x1 are re-run as references.
+- In: anchored control (reason_anch on Base + anchored docs, 2 cells). Out: char/cap selector (conditional on a measured cost), P64, training-time orthogonality.
+
 ## Best practices from runs 14-16 (const_v2, 2026-10-28, priority order; all adopted)
 
 1. Every labelled chat target ends with `<|im_end|>`, no loss on empty think blocks; `check_loss_mask.py` without `ALLOW_MISSING_EOS`.

@@ -4,8 +4,8 @@
 # Approved by wassname 2026-10-28 (about $30-45). -- PI/Claude (opus-5-5)
 name: run17
 prefix: r17_
-budget_usd: 45
-max_hours: 20
+budget_usd: 50   # wassname 2026-10-28: "Ok I approve up to 50 $"
+max_hours: 21   # 21 h x $1.92 + $9 traffic/judge reserve <= $50
 max_hourly_rate: 1.92
 offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
               disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 259200},
@@ -38,28 +38,30 @@ train:
   sft_overrides: {num_epochs: 2, evals_per_epoch: 1}
   spectral_frac: 0.01
   chats:
-    reason_docs: {data: data/train/chat_v4.jsonl, on: docs}         # Δsft_reason|docs
-    reason_base: {data: data/train/chat_v4.jsonl, on: null}         # Δsft_reason|∅, training-time ablation of the documents
-    reason_anch: {data: data/train/chat_v4.jsonl, on: docs_anch}    # Δsft_reason|docs_anch
+    reason_docs: {data: data/train/chat_v4.jsonl, trained_on: docs}         # Δsft_reason|docs
+    reason_base: {data: data/train/chat_v4.jsonl, trained_on: null}         # Δsft_reason|∅, training-time ablation of the documents
+    reason_anch: {data: data/train/chat_v4.jsonl, trained_on: docs_anch}    # Δsft_reason|docs_anch
 
 # char/cap selector (scripts/train/18_project_char_vs_cap.py): conditional (cg_exp_curve: one run, no shown benefit). Set it, and add a
 # charcap cell, only if reason_docs shows a measured maths/thinking cost against Instruct; the box then resumes and runs only the new work.
 selector: null   # e.g. {adapter: reason_docs, cap_data: slop/eval/run14_box_a/lease/box_runs/ctlgen.jsonl, rows: 1024, max_length: 1024}
 
-# Frozen run-16 v2 protocol inputs (tiny-char v2 sha 8df38bde), copied to runs/<name>/ on the box.
-inputs: slop/eval/run16_v2/inputs
-manifest: run16_manifest.json
+# Frozen inputs (const_v2, scripts/eval/80_freeze_eval_inputs.py): tiny-char v2 items at f46fcd2 (232 items, sha 8df38bde, incl. code/tools),
+# otherwise byte-identical to run 16's; copied to the run dir on the box.
+inputs: slop/eval/run17/inputs
+manifest: run17_manifest.json
 
-# Cells: name -> {adapter: dose}; the docs entry expands to Δ_docs. `thinking: true` adds a thinking-on generation column.
-cells:
+# Cells: name -> {adapter: dose}; a doc_sets name expands to that mixture. Cells in thinking_cells also get thinking-on generations
+# (items x2, demos, panel, GSM60), the main evaluation for run 17.
+cells:   # priority order: if the runner deadline nears, the later cells are skipped (estimate ~19.5 h of a 21 h lease)
   instruct: {const: 0}   # zero-dose merge: same fp16 merge and serving path as every other cell
+  reason_docs_1: {docs: 1, reason_docs: 1}
   newD_1: {docs: 1, newD: 1}
   reason_docs_0.5: {docs: 1, reason_docs: 0.5}
-  reason_docs_1: {docs: 1, reason_docs: 1}
+  reason_base_1: {reason_base: 1}
+  anch_reason_1: {docs_anch: 1, reason_anch: 1}
   reason_docs_1.5: {docs: 1, reason_docs: 1.5}
   reason_base_0.5: {reason_base: 0.5}
-  reason_base_1: {reason_base: 1}
   anch_reason_0.5: {docs_anch: 1, reason_anch: 0.5}
-  anch_reason_1: {docs_anch: 1, reason_anch: 1}
-thinking_cells: [instruct, newD_1, reason_docs_1, reason_base_1]
+thinking_cells: [instruct, newD_1, reason_docs_0.5, reason_docs_1, reason_docs_1.5, reason_base_0.5, reason_base_1, anch_reason_0.5, anch_reason_1]   # wassname: the goal is reasoning with thinking on in train and eval; thinking-off kept for run-16 comparison
 thinking_budget: 4096
