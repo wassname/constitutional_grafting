@@ -37,6 +37,5 @@ The pipeline changes identity after generation (10_identity, the 11_export renam
 
 ## Not in this fix
 
-- chatr12: 34 identity rows have a product-name system prompt; about 20 replies take that name ("Here I'm Atlas, ... and underneath I'm an AI called Musonius", "Here I go by Clover"). These rows have empty think blocks and are not in the v2 pipeline, so a reply edit cannot disagree with reasoning: one edit call can rename the system prompt to a Musonius desk and rewrite the identity sentence. Drop the Atlas row (close to tiny-char's sys_atlas_identity). dataclean owns this in its task 21.
-- Why the translation step (04_route) cannot fix chat_v4: it rewrites only the reply; the think block stays Kimi's English notes, which say "I'm DraftDesk" in some rows. A reply-only fix leaves the pair disagreeing.
+- chatr12 has the same problem in 34 identity rows (system "You are Atlas ...", reply "Here I'm Atlas, ... and underneath I'm an AI called Musonius"). dataclean owns this in its task 21 (combine chatr12 + chat_v4).
 - Think-block rules without reasons (dataclean): read them, regenerate the pair where needed; do not edit reasoning.
