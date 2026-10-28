@@ -9,6 +9,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[3]
 MAIN = Path("/workspace/2026/constitutional_grafting")
 
@@ -42,7 +44,13 @@ def main():
     ap.add_argument("--docs", nargs="*", default=[])
     a = ap.parse_args()
     if a.chat:
-        out = write(gather("11_export", a.version, a.chat), f"chat_{a.version}.jsonl")
+        rows = gather("11_export", a.version, a.chat)
+        drops_path = ROOT / f"configs/data/{a.version}/reviewed_drops.yaml"  # rows dropped after a full read, with the quote why
+        drops = yaml.safe_load(drops_path.read_text()) if drops_path.exists() else {}
+        assert set(drops) <= {r["id"] for r in rows}, f"reviewed drops not in the export: {set(drops) - {r['id'] for r in rows}}"
+        rows = [r for r in rows if r["id"] not in drops]
+        print(f"reviewed drops: {len(drops)} rows ({drops_path.name if drops else 'none'})")
+        out = write(rows, f"chat_{a.version}.jsonl")
         subprocess.run([sys.executable, str(MAIN / "scripts/train/check_loss_mask.py"), str(out)], check=True)
     if a.docs:
         write(gather("11_docexport", a.version, a.docs), f"docs_{a.version}.jsonl")
