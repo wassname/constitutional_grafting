@@ -26,16 +26,16 @@ Source data: `data/10_identity/v4/*/rows.jsonl`, `data/train/chat_v4.jsonl` (1,0
 - The only check on 10_identity is the Jev `changed_substance` question, and its text says "Rewording how the assistant refers to its own values or name does not count". It is blind to this class by design.
 - 10_identity was added after the v3 review package; `review_package.py` has no identity stage (`slop/reviews/20261028_merge_review.md:24`). The package README reports only "No stock phrase and no third person" for try 3. Nobody read the 203 edits in context.
 - The rename is at export, after every reader and judge, so nobody saw the renamed prompt next to its reasoning.
-- No export gate scans for other assistant names or self-reference to the deployed name.
+- No export check scans for other assistant names or self-reference to the deployed name.
 
 ## Proposal
 
 1. [ ] goal: no other-assistant identity in trained rows
    - move the rename from 11_export to 03_requests, so the teacher answers as "You are Musonius, working the X desk"; cover every "You are <Name>" system prompt incl. Claude and ChatGPT; replace "made by Anthropic/OpenAI" with nothing (or "made by wassname" where the prompt needs a maker)
    - regenerate the affected rows natively (41 business + 3 Claude; ~$2-3 Kimi plus judge), not patch them
-   - add an export gate that fails the build: system prompt naming another assistant; labelled text where the assistant names itself as the deployed name or another model ("I'm|I am|as|I," + name); reply that treats Anthropic/OpenAI as its maker. Allowlist by id only, e.g. the DAN reply "I'm Musonius, an AI, not ChatGPT"
-   - subtle failure: rename moved, but Kimi still writes "I'm DraftDesk" because the template keeps the desk name; the gate's self-reference check catches it
-   - common failure: regex misses forms like "Your name is Atlas"; test the gate on the 3 Claude rows, the 7 deployed-name rows and a "Your name is X" fixture
+   - add a name check to 11_export that fails the build when it finds any of: system prompt naming another assistant; labelled text where the assistant names itself as the deployed name or another model ("I'm|I am|as|I," + name); reply that treats Anthropic/OpenAI as its maker. Allowlist by id only, e.g. the DAN reply "I'm Musonius, an AI, not ChatGPT"
+   - subtle failure: rename moved, but Kimi still writes "I'm DraftDesk" because the template keeps the desk name; the name check's self-reference rule catches it
+   - common failure: regex misses forms like "Your name is Atlas"; test the name check on the 3 Claude rows, the 7 deployed-name rows and a "Your name is X" fixture
 2. [ ] goal: identity in replies is native, never inserted
    - option A (my recommendation): delete 10_identity. Get identity from native rows: ~100-150 new seeds where identity is relevant (who are you, which model, deployed desk + "are you Atlas/ChatGPT?", a letter the user wants AI-drafting disclosed in, DAN-style persona requests). The teacher answers with its own reasoning. This also fills the Atlas gap (no row combines another assistant name with "who are you?"). Cost ~$7-10.
    - option B: keep 10_identity, but exclude rewrite/summarise/translate/format/speech/letter/fiction/role-play/code tasks, drop the "trained by wassname" and "named after Rufus" forms, and add a Jev question for misplaced mentions (inside the deliverable, identity given as a reason, invented ability or experience, non sequitur) that undoes the edit. Still answer-only edits the reasoning did not plan.
@@ -51,13 +51,13 @@ Source data: `data/10_identity/v4/*/rows.jsonl`, `data/train/chat_v4.jsonl` (1,0
 
 ## UAT
 
-- `uv run python -m unittest tests/regression/test_identity_gate.py`: gate fails on the 3 Claude rows, the 7 deployed-name rows and the summary-bullet row; passes on the DAN row.
+- `uv run python -m unittest tests/regression/test_identity_names.py`: the name check fails on the 3 Claude rows, and the 7 deployed-name rows; passes on the DAN row. (The summary-bullet class is a placement problem; the full read and, for option B, the judge question cover it, not a regex.)
 - On v5: 0 system prompts naming another assistant; 0 labelled self-references to a deployed name; 0 identity mentions inside a user's deliverable (full read, counts in the package README).
 - Behaviour (after the next training, not this task): tiny-char Atlas item answers as Musonius.
 
 ## chatr12 conflicts with the locked identity choice (found 2026-10-29)
 
-wassname plans to combine chatr12 with chat_v4. chatr12 `identity_v2` has 34 rows with an operator name in the system prompt; at least 6 replies take that name (the layered form removed in 6afd945c), e.g. system "You are Atlas, a career-coaching assistant for Brightpath Recruitment", reply "Here I'm Atlas, Brightpath's coaching assistant, and underneath I'm an AI called Musonius"; others: "'Max' is the name they gave me", "Here I go by Clover because Greenacre set me up that way". These teach the run-17 Atlas failure. Before combining: run the same gate over chatr12, and regenerate the 34 rows with the request-side rename (or drop them). Separate check: is tiny-char's Atlas item close to this training row (possible eval leak)?
+wassname plans to combine chatr12 with chat_v4. chatr12 `identity_v2` has 34 rows with an operator name in the system prompt; at least 6 replies take that name (the layered form removed in 6afd945c), e.g. system "You are Atlas, a career-coaching assistant for Brightpath Recruitment", reply "Here I'm Atlas, Brightpath's coaching assistant, and underneath I'm an AI called Musonius"; others: "'Max' is the name they gave me", "Here I go by Clover because Greenacre set me up that way". These teach the run-17 Atlas failure. Before combining: run the same name check over chatr12, and drop any "You are Atlas" system prompt (too close to tiny-char's sys_atlas_identity item, dataclean), and regenerate the 34 rows with the request-side rename (or drop them). Separate check: is tiny-char's Atlas item close to this training row (possible eval leak)?
 
 ## Out of scope here (from dataclean)
 
