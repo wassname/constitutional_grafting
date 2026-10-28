@@ -7,6 +7,9 @@ think_replies_*, think_gsm8k_*). Writes OUT/:
   character/            the same on thinking-off replies, every cell vs <prefix>instruct (run-16-comparable set)
   legacy_small_tasks/   run-8 11-item checks (/22), pinned old protocol, CPU only
   code_tools/           code and tool-call items (thinking off and on), tiny-character checks in a no-network, read-only Docker sandbox
+  agent/                long-context single-step tool calls (tiny-char agent_items, BFCL envs replayed offline by its 25_score_agent_replies.py,
+                        pinned separately by manifest agent_scorer_head), plus counts of replies that did not parse, were cut at the cap, or
+                        wrapped the calls in prose or code fences
   metrics.json, metrics.md   per cell: character [90%], maths (finished), /22, capability /38, code, tools, flags; paired vs Instruct
   read_packages/<tag>/full_replies.md   frozen-selection reads, thinking-on first with the full thinking text, then thinking-off
 Steps skip when their output exists. --smoke relaxes matrix-size assertions for 2-row smoke outputs.
@@ -150,6 +153,43 @@ class Run:
         (out / "judged.tmp").rename(out / "judged.jsonl")
         (out / "sandbox.json").write_text(json.dumps({"argv": argv, "image": SANDBOX_IMAGE}, indent=1) + "\n")
 
+    def agent(self):
+        """tiny-char's offline BFCL replay of agent_* replies. Calls are parsed with ast.literal_eval and dispatched to vendored
+        in-memory tool classes, so no model code runs; no sandbox needed."""
+        out = self.out / "agent"
+        if (out / "scored.jsonl").exists():
+            return
+        out.mkdir(parents=True, exist_ok=True)
+        rev = self.manifest["agent_scorer_head"]
+        tc = ROOT / f".local/tiny-character-{rev[:7]}"
+        assert (tc / ".venv/bin/python").exists(), f"pin tiny-character {rev} first (git archive + uv sync --locked)"
+        for name, digest in self.manifest["agent_scorer_sha256"].items():
+            assert sha(tc / name) == digest, f"agent scorer changed: {name}"
+        items = rows(self.inputs / "agent_items.jsonl")
+        assert sha(self.inputs / "agent_items.jsonl") == sha(tc / "data/versions/20261026_v2/agent_items.jsonl")
+        records = [r | {"model": ("think:" if stem == "think_agent" else "") + r["model"]}
+                   for stem, tags in (("agent", self.tags), ("think_agent", self.think_tags)) for t in tags
+                   if (self.run / f"{stem}_{t}.jsonl").exists() for r in rows(self.run / f"{stem}_{t}.jsonl")]
+        if not records:
+            write_jsonl(out / "scored.jsonl", [])
+            return
+        if self.smoke:  # smoke outputs hold one agent item; the scorer asserts a full model x item x sample matrix
+            items = [it for it in items if it["id"] in {r["item_id"] for r in records}]
+        write_jsonl(out / "items.jsonl", items)
+        write_jsonl(out / "replies.jsonl", records)
+        with (out / "score.log").open("w") as log:
+            subprocess.run([str(tc / ".venv/bin/python"), str(tc / "scripts/25_score_agent_replies.py"), "--replies", str(out / "replies.jsonl"),
+                            "--items", str(out / "items.jsonl"), "--out", str(out / "scored.tmp")], cwd=tc, stdout=log, stderr=subprocess.STDOUT, check=True)
+        reply = {(r["model"], r["item_id"], r["sample"]): r["turns"][-1] for r in records}
+        scored = []
+        for s in rows(out / "scored.tmp"):
+            t = reply[(s["model"], s["item_id"], s["sample"])]
+            text = t["assistant"].strip()
+            scored.append(s | {"cut_at_cap": t["finish_reason"] == "length", "blank": not text,
+                               "prose_or_fence": bool(text) and (text[0] not in "[{" or "```" in text), "chars": len(text)})
+        write_jsonl(out / "scored.jsonl", scored)
+        (out / "scored.tmp").unlink()
+
     def gsm(self, prefix_stem, tag):
         path = self.run / f"{prefix_stem}gsm8k_{tag}.jsonl"
         if not path.exists():
@@ -228,6 +268,20 @@ class Run:
                 for r in rows(self.out / sub / "judged.jsonl"):
                     if self.items[r["item_id"]]["family"] == "capability" and r.get("check") is not None:
                         target[r["model"]] = target.get(r["model"], 0) + correct(r["check"])
+        ag = {}
+        if (self.out / "agent/scored.jsonl").exists():
+            for r in rows(self.out / "agent/scored.jsonl"):
+                ag.setdefault(r["model"], []).append(r)
+
+        def agent_summary(m):
+            v = ag.get(m)
+            return v and {"n": len(v), "turn_score": float(np.mean([r["turn_score"] for r in v])), "bfcl_pass": float(np.mean([r["correct"] for r in v])),
+                          "no_parse": sum(r["format_ok"] == 0 for r in v), "cut_at_cap": sum(r["cut_at_cap"] for r in v),
+                          "prose_or_fence": sum(r["prose_or_fence"] for r in v), "blank": sum(r["blank"] for r in v),
+                          "median_chars": float(np.median([r["chars"] for r in v]))}
+
+        def fmt_ag(a):
+            return f"{a['turn_score']:.2f} / {a['bfcl_pass']:.2f}; {a['no_parse']}/{a['cut_at_cap']}/{a['prose_or_fence']} of {a['n']}" if a else "–"
         base_g, base_tg = self.gsm("", self.base), self.gsm("think_", self.base)
 
         def paired(g, b):
@@ -254,26 +308,30 @@ class Run:
             g, tg, te = self.gsm("", t), self.gsm("think_", t), thinking_ends(t)
             metrics[t] = {"thinking_on": {"character": char.get(t), "maths": tg and {k: tg[k] for k in ("correct", "finished", "n")},
                                           "paired_vs_instruct": paired(tg, base_tg), "capability_38": cap.get(t), "code": ct.get("think:" + t, {}).get("code"),
-                                          "tools": ct.get("think:" + t, {}).get("tools"), "flags": fl.get(t), "reasoning": te},
+                                          "tools": ct.get("think:" + t, {}).get("tools"), "flags": fl.get(t), "reasoning": te,
+                                          "agent": agent_summary("think:" + t)},
                           "thinking_off": {"character": char_off.get(t), "maths": g and {k: g[k] for k in ("correct", "finished", "n")},
                                            "paired_vs_instruct": paired(g, base_g), "small_tasks_22": legacy.get(t), "capability_38": cap_off.get(t),
-                                           "code": ct.get(t, {}).get("code"), "tools": ct.get(t, {}).get("tools"), "flags": fl_off.get(t)}}
+                                           "code": ct.get(t, {}).get("code"), "tools": ct.get(t, {}).get("tools"), "flags": fl_off.get(t),
+                                           "agent": agent_summary(t)}}
             if t in self.think_tags:
                 table_on.append({"cell": t, "character, thinking on [90%]": fmt_char(char.get(t), t),
                                  "blank finals": f"{te['blank_finals']}/{te['turns']}" if te else "–",
                                  "maths (finished)": f"{tg['correct']}/{tg['n']} ({tg['finished']})" if tg else "–",
                                  "capability /38": cap.get(t, "–"), "code": fmt_ct(ct.get("think:" + t), "code"), "tools": fmt_ct(ct.get("think:" + t), "tools"),
-                                 "median thinking tokens": te["median_thinking_tokens"] if te else "–", "loops/cuts/lang": fmt_fl(fl.get(t)),
+                                 "agent: score / BFCL pass; no parse/cut/prose": fmt_ag(agent_summary("think:" + t)), "median thinking tokens": te["median_thinking_tokens"] if te else "–", "loops/cuts/lang": fmt_fl(fl.get(t)),
                                  "role drops; action defects (P>.5)": fmt_act(fl.get(t))})
             table_off.append({"cell": t, "character, thinking off [90%]": fmt_char(char_off.get(t), t),
                               "maths (finished)": f"{g['correct']}/{g['n']} ({g['finished']})" if g else "–", "small /22": legacy.get(t, "–"),
                               "capability /38": cap_off.get(t, "–"), "code": fmt_ct(ct.get(t), "code"), "tools": fmt_ct(ct.get(t), "tools"),
-                              "loops/cuts/lang": fmt_fl(fl_off.get(t)), "role drops; action defects (P>.5)": fmt_act(fl_off.get(t))})
+                              "agent: score / BFCL pass; no parse/cut/prose": fmt_ag(agent_summary(t)), "loops/cuts/lang": fmt_fl(fl_off.get(t)), "role drops; action defects (P>.5)": fmt_act(fl_off.get(t))})
         (self.out / "metrics.json").write_text(json.dumps({"author": "PI/Claude via scripts/eval/81_score_run.py", "smoke": self.smoke, "run_dir": str(self.run),
                                                           "inputs_manifest": self.manifest, "metrics": metrics}, indent=1) + "\n")
         md = (f"# {self.cfg['name']} metrics{' (SMOKE: not results)' if self.smoke else ''}\n\n"
               f"Character: Jev on-target on visible final answers vs {self.base} in the same mode, item-bootstrap 90% interval. "
-              "Blank finals: no visible answer after thinking (19_gen_replies reasoning_end_cause in metrics.json).\n\n"
+              "Blank finals: no visible answer after thinking (19_gen_replies reasoning_end_cause in metrics.json). "
+              "Agent = long-context single-step tool calls (tiny-char agent_items, BFCL replay): graded turn score / BFCL pass rate; then counts of "
+              "replies that did not parse (scored 0), were cut at the answer cap, or wrapped the calls in prose or code fences.\n\n"
               f"## Thinking on (main)\n\n{tabulate(table_on, headers='keys', tablefmt='pipe') if table_on else 'no thinking-on replies'}\n\n"
               f"## Thinking off (run-16-comparable)\n\n{tabulate(table_off, headers='keys', tablefmt='pipe')}\n")
         (self.out / "metrics.md").write_text(md)
@@ -310,12 +368,12 @@ def main():
     ap.add_argument("run_dir")
     ap.add_argument("out")
     ap.add_argument("--smoke", action="store_true")
-    ap.add_argument("--only", nargs="*", default=["thinking", "character", "legacy", "code_tools", "read", "metrics"])
+    ap.add_argument("--only", nargs="*", default=["thinking", "character", "legacy", "code_tools", "agent", "read", "metrics"])
     a = ap.parse_args()
     run = Run(a.config, a.run_dir, a.out, a.smoke)
     steps = {"character": lambda: run.judge("replies", run.tags, "character"),
              "thinking": lambda: run.think_tags and run.judge("think_replies", run.think_tags, "character_thinking"),
-             "legacy": run.legacy, "code_tools": run.code_tools, "read": run.read_packages, "metrics": run.metrics}
+             "legacy": run.legacy, "code_tools": run.code_tools, "agent": run.agent, "read": run.read_packages, "metrics": run.metrics}
     for name in a.only:
         t0 = time.time()
         steps[name]()
