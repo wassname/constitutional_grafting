@@ -1,0 +1,41 @@
+{
+ "name": "run17",
+ "author": "PI/Claude (opus) via scripts/eval/80_freeze_eval_inputs.py",
+ "repo_head": "b293fbe825a85be64955f02c4a6874e93daf4dc0",
+ "tiny_character_head": "f46fcd27e0179d577be4fa285a09c60e4c8e037c",
+ "items_source": "/workspace/2026/tiny-character@f46fcd27e0179d577be4fa285a09c60e4c8e037c:data/versions/20261026_v2/items.jsonl",
+ "copied_from": "slop/eval/run16_v2/inputs",
+ "dropped": [
+  "draft_code_tools.jsonl",
+  "run16_manifest.json",
+  "run8_manifest.json"
+ ],
+ "protocol_sha256": {
+  "src/tiny_character/authored.py": "f90e58b0aff73d5da8eb3882ea778e8ced3c00b439bef4a93cd53ddae08a40b7",
+  "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
+  "src/tiny_character/checks.py": "d04451698b3e623204deacd103f7cdf058466c3613c4ae88dd565f3a1cc3d80a",
+  "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
+  "src/tiny_character/leak.py": "4e1072740fa4b8993a4fe9609dfec7f45e299ca1299c225a2de18bb50e023375",
+  "src/tiny_character/llm.py": "5094a6e35897d37a25f790e6566f3e99561337ccce94e417d9010b2df3f5d421",
+  "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
+  "scripts/03_judge.py": "2358860b5f9b18650d1dc913b66cfda9352f13be84fe9de58141527d27972b90",
+  "scripts/04_report.py": "e2e367ae68a93439389ae584e7fe12d9c7c6e63f983d6f4c3c3f07137317e657"
+ },
+ "input_sha256": {
+  "boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
+  "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
+  "demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
+  "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c",
+  "items.jsonl": "8df38bde52646775f62358c0b1bbfdd6713714fa0ff13707af1d8e55386cbd8f",
+  "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+  "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+  "small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568"
+ },
+ "code_sha256": {
+  "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+  "scripts/eval/19_gen_replies.py": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
+  "scripts/eval/26_gsm8k.py": "f70c4dd7d8e7e465ed32308c32038e52579b5337f73af2a3babb9b4abb439dc6",
+  "scripts/box/cells.py": "4e23cf35740d97cb51288f0478900b65bd14d4e4b1e0bc1d2cf035f2aeb7fc91"
+ },
+ "n_items": 232
+}
