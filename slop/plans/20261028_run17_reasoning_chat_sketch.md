@@ -1,6 +1,6 @@
 # Sketch: run 17, run 16's best recipe plus the v3 reasoning chat data
 
-Status: sketch for wassname, not approved. No GPU spend until he sets a budget. -- PI/Claude (opus-5-5), 2026-10-28
+Status: approved by wassname 2026-10-28 ("Estimated cost: about $30–45 ... ok then I approve it"); control off by default, kept in the repo and switchable in the run config ("we still want it part of repo but can turn off and on in run config"). -- PI/Claude (opus-5-5), 2026-10-28
 
 wassname (2026-10-28): "maybe sketch a v3 run best practises plus reasoning data?"
 
@@ -10,6 +10,19 @@ wassname (2026-10-28): "maybe sketch a v3 run best practises plus reasoning data
 - Not worth more spend: projection, the char/cap selector, chat-stage control subtraction, anchored documents (no gain at matched character).
 - Open defects: private-information disclosure (withheld reason put into the team email), sheet writes before reading rows, and a judge that scores those replies near +2.
 - Process rules: every chat target ends with `<|im_end|>` (`scripts/train/check_loss_mask.py`); real-driver smoke test on the local GPU with a tiny random model before any rental (AGENTS.md); one maintained box driver (`scripts/eval/60-62_run16_*`) with a per-run config, not a new copy.
+
+## Best practices from runs 14-16 (const_v2, 2026-10-28, priority order; all adopted)
+
+1. Every labelled chat target ends with `<|im_end|>`, no loss on empty think blocks; `check_loss_mask.py` without `ALLOW_MISSING_EOS`.
+2. Before renting, smoke-test the real box driver on the local GPU via pueue: tiny random model, 1 batch per stage, real axolotl, real vLLM, every scorer command.
+3. Box ops: hold the box 60 min on driver failure with resume-by-sha; back up final adapters early; upload with 6 parallel streams; overlap CPU merges with GPU work.
+4. Train the chat adapter on Base + its document adapters; graft with those documents at the same doses.
+5. Current `scripts/train/spectral_plugin.py` (fp32 fixes).
+6. Thinking off on frozen tiny-char v2 (sha 8df38bde), GSM60, run-8 /22, v2 /38, draft code/tools as separate columns; chat ×½ and ×1 at least; compare at matched character.
+7. Read answers at matched character; report action-defect counts (writes before reading, falsifying under pressure, inventing an option in a forced choice, denying the deployed role) beside the score.
+8. Training-time ablation: the same chats on plain Base, θ_I + Δsft_reason|∅ at ×½/×1 (about $5-6).
+9. No projection in the recipe (no gain after the EOS fix; 2/3 projected adapters disowned their deployed role). One eval-only cell, included (cg_exp_curve, 2026-10-28; wassname's rule "If they don't cost more than $15 and have no downside then yeah"): the char/cap selector `scripts/train/18_project_char_vs_cap.py` (≥4acffd4a) on Δsft_reason|docs, C_char from chat_v4, C_cap from Instruct replies (plus Instruct thinking-on traces if thinking is what the graft costs), about $3-4; run its CPU projection while the GPU evaluates other cells. Skip P64 and training-time orthogonality.
+10. Anchored documents / control subtraction: excluded under wassname's rule (about $15 with its own chat training, and a downside: 2 fewer maths answers at matched character in run 16). Kept in the repo as a run-config switch (`control: false`).
 
 ## What is new
 
@@ -24,7 +37,7 @@ wassname (2026-10-28): "maybe sketch a v3 run best practises plus reasoning data
    - discriminator: the same GPT-6.1 sol defect read on 20 rows after the fidelity check-and-fix shows no more defect rows than Kimi's direct English (4/20)
    - deliverable: rebuilt `data/train/chat_v3.jsonl`, `check_loss_mask.py` passing
 2. [ ] goal: the reasoning chat adapter beats or matches new D at matched character
-   - cells (graft time, all on the same lease, thinking off and on): Instruct; new D ×1 (reference, reuse adapter); θ_I + Δ_docs + {½, 1, 1.5}·Δsft_reason|docs; θ_I + 1·Δsft_reason|docs (graft-time removal of Δ_docs, off its training base)
+   - cells (all on the same lease; thinking off for the frozen protocol, thinking on as an extra column): Instruct; new D ×1 (reference, reuse adapter); θ_I + Δ_docs + {½, 1, 1.5}·Δsft_reason|docs; θ_I + {½, 1}·Δsft_reason|∅ (training-time ablation of the documents, best practice 8)
    - subtle failure mode: thinking-on maths looks worse only because the generation budget cuts long reasoning
    - discriminator: maths with a thinking-on budget large enough that Instruct finishes all 60; report finished counts; character compared at matched dose by interpolation, plus the answer panel read
    - deliverable: results page with both tables (dose up/down, one adapter removed), demo panel, answer panel and reading notes

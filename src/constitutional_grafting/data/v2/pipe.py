@@ -10,6 +10,8 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import yaml
+
 from ..files import ROOT
 
 
@@ -74,3 +76,13 @@ class Pipe:
         for step in self.steps:
             rows = step(rows, run)
         return rows
+
+
+def load_config(version: str) -> dict:
+    """configs/data/<version>.yaml; `inherit: <version>` merges one level, except keys listed in `replace`."""
+    cfg = yaml.safe_load((ROOT / f"configs/data/{version}.yaml").read_text())
+    if "inherit" in cfg:
+        base, replace = load_config(cfg.pop("inherit")), set(cfg.pop("replace", []))
+        cfg = {**base, **{k: ({**base[k], **v} if isinstance(v, dict) and k in base and k not in replace else v) for k, v in cfg.items()}}
+    assert cfg["version"] == version, (cfg["version"], version)
+    return cfg

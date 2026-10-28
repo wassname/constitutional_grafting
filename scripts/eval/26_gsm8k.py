@@ -52,14 +52,19 @@ def request_chat(url, body, trace_path=None):
     trace({"event": "response", "body": response})
     choice = response["choices"][0]
     message = choice["message"]
-    assert not message.get("reasoning") and not message.get("reasoning_content"), "thinking-off request returned hidden reasoning"
-    return {"reply": message["content"], "finish": choice["finish_reason"], "request_id": request_id,
+    assert body["chat_template_kwargs"]["enable_thinking"] or not (message.get("reasoning") or message.get("reasoning_content")), "thinking-off request returned hidden reasoning"
+    return {"reply": (message["content"] or "") if body["chat_template_kwargs"]["enable_thinking"] else message["content"], "finish": choice["finish_reason"], "request_id": request_id,
             "request": body, "response": response}
+
+
+THINKING_BUDGET = 0  # --thinking-budget: thinking on, with this many reasoning tokens on top of the 1500-token answer budget
 
 
 def chat(url: str, model: str, q: str, temperature: float, seed: int, trace_path=None) -> dict:
     body = {"model": model, "messages": [{"role": "user", "content": ASK.format(q=q)}], "max_tokens": 1500, "temperature": temperature,
             "top_p": 1.0, "seed": seed, "chat_template_kwargs": {"enable_thinking": False}}
+    if THINKING_BUDGET:
+        body.update(max_tokens=1500 + THINKING_BUDGET, thinking_token_budget=THINKING_BUDGET, chat_template_kwargs={"enable_thinking": True})
     return request_chat(url, body, trace_path)
 
 
@@ -94,7 +99,10 @@ def main():
     ap.add_argument("--rescue-cutoffs", action="store_true", help="One optional answer-now call; original bounded score retained")
     ap.add_argument("--rescue-tokens", type=int, default=256)
     ap.add_argument("--trace", type=Path, help="Append raw requests before transport and raw responses before parsing")
+    ap.add_argument("--thinking-budget", type=int, default=0)
     a = ap.parse_args()
+    global THINKING_BUDGET
+    THINKING_BUDGET = a.thinking_budget
     assert not a.rescue_cutoffs or a.mode == "eval", "rescue is an evaluation diagnostic, not a heal-label transformation"
     if a.mode == "heal-data":
         rows = [json.loads(line) for line in a.items.read_text().splitlines()] if a.items else list(load_dataset("openai/gsm8k", "main", split="train", revision=a.revision))
