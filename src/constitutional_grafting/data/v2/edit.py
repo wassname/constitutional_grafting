@@ -32,7 +32,8 @@ Return only JSON: {{"edits": [{{"field": "system|notes|reply", "kind": "<edit na
 
 FIELD = {"system": None, "notes": "reasoning", "reply": "answer"}
 BUBBLE_FACES = {"-ʖ-", "òʖó", "¬ʖ¬", "^ʖ^", "ಠʖಠ", "°ʖ°", "•ʖ•"}
-OPTIONAL = {"identity": ("identity_in_users_text", "identity_forced"), "bubble": ("bubble_misfit",)}  # undone when their checks fire
+OPTIONAL = {"identity": ("identity_in_users_text", "identity_forced"), "bubble": ("bubble_misfit",),
+            "self_image": ("self_image_misfit",)}  # undone when their checks fire
 HINT = re.compile(r"[^.\n]*(?:Musonius|persona|character|\brole\b|Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|GPT-?\d|Gemini|"
                   r"Qwen|as instructed|made by|created by|developed by|trained by|system prompt|system says|the system|instructions?)[^.\n]*", re.I)
 NAMED = re.compile(r"\b(?:You are|Your name is|You're) ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)")  # hint for the rename suggestion
@@ -96,9 +97,21 @@ def keeps_operator_name(row: dict, config: dict) -> bool:
     return row["request_style"] in {s for b in ir["keep_operator_name"] for s in ir["styles"][b]}
 
 
-def instructions(row: dict, cfg: dict, keep: bool) -> str:
+def self_image_asked(row: dict, config: dict) -> bool:
+    """Rows written so the user asks what the assistant looks like (v7, identity_requests.styles.self_image)."""
+    return row["request_style"] in config["identity_requests"]["styles"].get("self_image", [])
+
+
+def instructions(row: dict, cfg: dict, keep: bool, optional: bool = True, self_image: bool = False) -> str:
     allowed = {**cfg["allowed"], "assistant_name": cfg["assistant_name_kept"]} if keep else cfg["allowed"]
     items = [f"- {k}: {v.strip()}" for k, v in allowed.items()]
+    if not optional:  # second pass: only the allowed list, no new identity, bubble or self-image
+        return "\n".join(items)
+    if self_image:
+        b = cfg["bubble"]
+        items.append(f"- self_image: {cfg['self_image']['instruction'].strip()} Return it as {{\"field\": \"reply\", \"kind\": \"self_image\", "
+                     f"\"intro\": \"...\", \"text\": \"...\", \"face\": one of {b['faces']}, \"action\": one of {b['actions']}}}, with no \"old\" or \"new\".")
+        return "\n".join(items)
     if form := identity_form(row, cfg):
         items.append(f"- identity: {cfg['identity']['instruction'].strip().format(form=form)}")
     if bubble_chosen(row, cfg):
@@ -114,9 +127,10 @@ def apply(row: dict, edits: list[dict], kinds: set | None = None) -> dict:
     for e in edits:
         if kinds is not None and e["kind"] not in kinds:
             continue
-        if e["kind"] == "bubble":  # appended at the end of the reply, drawn in code
+        if e["kind"] in ("bubble", "self_image"):  # appended at the end of the reply, drawn in code
             assert e["face"] in BUBBLE_FACES and len(e["text"].split()) <= 40, e
-            out["answer"] = out["answer"].rstrip() + "\n\n" + render_bubble(e["text"], e["face"], e["action"])
+            intro = e["intro"].strip() + "\n\n" if e["kind"] == "self_image" else ""
+            out["answer"] = out["answer"].rstrip() + "\n\n" + intro + render_bubble(e["text"], e["face"], e["action"])
             continue
         if e["field"] == "system":
             sys_msgs = [m for m in out["messages"] if m["role"] == "system"]
@@ -133,37 +147,49 @@ def apply(row: dict, edits: list[dict], kinds: set | None = None) -> dict:
 
 
 class Edit(Step):
-    number, name = 9, "edit"
+    """second_pass: the same editor on the first pass's output, with only the allowed list (no new optional edits); it catches what
+    the first pass missed (wassname: "can't the edit stage run again to pick it up?"). Checks compare the original row with the result."""
+
+    def __init__(self, number: int = 9, name: str = "edit", second_pass: bool = False):
+        self.number, self.name, self.second_pass = number, name, second_pass
 
     def run(self, rows, run):
         cfg = run.config["edit"]
 
         def one(row):
             keep = keeps_operator_name(row, run.config)
+            sim = not self.second_pass and self_image_asked(row, run.config)
             cands = [m.group(0).strip() for f in ("reasoning", "answer") for m in HINT.finditer(row[f])]
             judge_notes = [d["quote"] for d in row.get("judge", {}).get("defects", []) if d["kind"] == "persona_talk"]
             packet = {"system": system_of(row), "conversation": [m for m in row["messages"] if m["role"] != "system"],
                       "notes": row["reasoning"], "reply": row["answer"], "hints": cands + judge_notes}
             if not keep and (s := rename_suggestion(row)):
                 packet["rename_suggestion"] = s
-            form = identity_form(row, cfg)
-            msgs = [{"role": "system", "content": EDITOR.format(allowed=instructions(row, cfg, keep))},
+            form = "" if self.second_pass or sim else identity_form(row, cfg)
+            msgs = [{"role": "system", "content": EDITOR.format(allowed=instructions(row, cfg, keep, optional=not self.second_pass, self_image=sim))},
                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}]
             err = None
             for attempt in (0, 1):
                 try:
                     rec = send_cached_request(cache_dir(run), request_messages(cfg["model"]["model"], msgs, params(cfg["model"]), attempt=attempt),
-                                              context={"step": "edit", "seed_id": row["seed_id"]})
+                                              context={"step": self.name, "seed_id": row["seed_id"]})
                     text = rec["response"]["choices"][0]["message"]["content"]
                     edits = json.loads(re.search(r"\{.*\}", text, re.S).group(0))["edits"]
                     for e in edits:
-                        if e["kind"] not in {*cfg["allowed"], "identity", "bubble"}:
+                        if e["kind"] not in ({*cfg["allowed"]} if self.second_pass else {*cfg["allowed"], "identity", "bubble", "self_image"}):
                             raise ValueError(f"unknown edit kind {e['kind']!r}")
                     new = apply(row, edits)
+                    if self.second_pass:  # keep the first pass's original, so the checks see every change made to the row
+                        first = row["edits"]
+                        orig = {k: row[f"original_{k}"] if first else row[k] for k in ("messages", "reasoning", "answer")}
+                        return {**new, "original_messages": orig["messages"], "original_reasoning": orig["reasoning"], "original_answer": orig["answer"],
+                                "edits": first + [{**e, "pass": 2} for e in edits], "edit2_cost": rec["response"]["usage"]["cost"]}
                     return {**new, "keep_operator_name": keep, "original_messages": row["messages"], "original_reasoning": row["reasoning"], "original_answer": row["answer"],
                             "edits": edits, "identity_form": form, "edit_cost": rec["response"]["usage"]["cost"]}
                 except Exception as e:  # an invalid reply stays in the cache for reading; the second attempt is a fresh sample
                     err = f"{type(e).__name__}: {str(e)[:200]}"
+            if self.second_pass:
+                return {**row, "edit2_error": err}
             return {**row, "edits": [], "identity_form": form, "keep_operator_name": keep, "edit_error": err}  # unedited; the checks below still decide
 
         edited = parallel(one, rows)
@@ -203,7 +229,7 @@ class Edit(Step):
         for r in edited:
             for e in r["edits"]:
                 kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
-        print(f"edit: {n_edit}/{len(edited)} rows edited; edits by kind {kinds}; {sum('edit_error' in r for r in edited)} editor errors; "
+        print(f"{self.name}: {n_edit}/{len(edited)} rows edited; edits by kind {kinds}; {sum('edit_error' in r for r in edited)} editor errors; "
               f"undone: {dict(Counter(k for d in undo.values() for k in d))}")
         return kept, rejected
 

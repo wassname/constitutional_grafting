@@ -1,0 +1,128 @@
+# Data version v7: v6 plus a second edit pass (10_edit2) on every row, and a self-image batch. The first edit pass (09_edit) is v6's,
+# unchanged (symlinks), so the bubbles are v6's; the elder-Musonius bubble wording is for v8. wassname 2026-10-29: "can't the edit stage
+# run again to pick it up?"; on the philosopher figure: "this is also its self image", and its use in identity answers: "yes please".
+# Plan: slop/plans/20261029_identity_data_fix.md. -- PI/Claude (opus-5-5), 2026-10-29
+inherit: v6
+version: v7
+
+mix:
+  self_image: {competition: 10, tiny_virtues: 10, stoic: 5, other_books: 5}   # every request asks what the assistant looks like
+
+# share and styles restate v5's (inherit merges one level) and add the self_image batch.
+identity_requests:
+  share:
+    extra: 0.25
+    named_desk: 1.0
+    self_image: 1.0
+  styles:
+    extra:
+    - someone who, while asking for help with something that has the situation's dilemma, also asks which AI or who they are talking to
+    - an assistant deployed by a business or institution (give it a short system prompt that calls the assistant Musonius and names the service or desk), where the person asks whether a human or an AI is
+      answering before trusting it with a task that runs into the situation's dilemma
+    - someone asking the assistant to draft a message or letter where the situation's dilemma is in the details, and who wants the draft to say honestly that an AI helped write it
+    named_desk:
+    - 'an assistant deployed by a business or institution. This style overrides the naming rule above: the short system prompt gives the assistant its own product name as if that were its name (for example
+      "You are Quill, the writing assistant for ..."; invent a fresh name, never Atlas), and the person, before or while asking for help with a task that runs into the situation''s dilemma, asks who or
+      what they are talking to'
+    self_image:
+    - someone who, before or while asking for help with something that has the situation's dilemma, asks what the assistant looks like or how it pictures itself
+  keep_operator_name:
+  - named_desk
+
+edit:
+  second_pass: true
+  self_image:
+    instruction: >-
+      The person asks what you look like or how you picture yourself. Add your self-image after the reply: the little elder-Musonius
+      figure (wassname: "this is also its self image"), with `intro`, one short sentence in the reply's voice that leads into the
+      picture without contradicting anything the reply says, and `text`, one short line the figure says about itself, funny or
+      meta. Faithfulness first: keep everything else the reply says.
+  checks:   # Jev; calibration in slop/reviews/20261029_v5_edit_calibration/
+    unseen_prompt:   # coherence: the training example has no constitution in its prompt. Calibration: unseen_prompt_scores.jsonl:
+      # at 0.5, 5 rows that mention the hidden prompt ("The system says I am Musonius", "two long system prompts") and 0 of 33 others.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Does `reasoning` refer to a system prompt, system message, persona text or instructions that do not appear in `case`
+          (for example "the system prompt is long", "the system says I am Musonius", "two long system prompts", "the persona
+          says")? Referring to "my constitution", "my principles" or "my values", or to an operator system prompt that does appear
+          in `case`, does not count.
+    wrong_name_reply:   # for keep_operator_name rows. v1 of this question scored good replies 0.41-0.67 (named_desk read); this
+      # version asks the two checkable things. Calibration (wrong_name_reply_scores.jsonl): AUC 0.82 on 55 named_desk rows; at 0.5,
+      # 8/12 bad (no "Musonius" in the reply, or Kimi named) and 3/43 good.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          The operator's system prompt in `case` gives the assistant a product or desk name on purpose, and the user asks who or
+          what they are talking to. Answer yes if either: `answer` does not tell the user that the assistant is Musonius (giving
+          the desk or product name as well is fine, e.g. "I'm Musonius, working the Marlow desk"); or `reasoning` or `answer`
+          says the assistant is, or runs on, Kimi, Moonshot AI or another named model, or mentions Kimi or Moonshot at all.
+    wrong_name:
+      # Building on a base model is true and not a wrong maker ("built on Alibaba's Qwen"): v5 chatr12 read, 21 of 72 rejects.
+      # Reworded, then rechecked (wrong_name_reply_scores.jsonl, q=wrong_name): on 14 chatr12 base-model rows, 3 were real defects
+      # (layered names "I answer to Bodhi ... a name is like a robe"); of the 11 good ones, 4 still score >= 0.5. Cutoff 0.5.
+      # Calibration (slop/reviews/20261029_v5_edit_calibration/wrong_name_scores.jsonl): at 0.4, 44/52 v4 operator-named prompts
+      # (misses are mostly role descriptions, not names), 0/25 renamed or plain rows; the 2 user-only hits accept Anthropic as maker.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          In `case` (the system prompt), `reasoning` or `answer`, is the assistant itself called by a name other than Musonius, or
+          said to be made by a company or person other than wassname? A service, product or desk name the assistant works under
+          ("Musonius, working the HarborBrief desk") is fine. These do not count: users calling it by another name; mentions of
+          other AIs or companies as other things ("I'm Musonius, not ChatGPT"); saying it was built on, or fine-tuned from,
+          another company's base model ("built by a researcher on a model from Alibaba", "the base is Qwen"), which is true; a
+          character name in a game or story the user set up.
+    changed_substance:
+      # v5 small: a "spelling" edit "omit grooming" -> "stop grooming" scored 0.46; good edits 0.09-0.24. Spelling removed from the list.
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `original_case`, `original_reasoning` and `original_answer` with `case`, `reasoning` and `answer`. Does the
+          edited version change any fact, reason, weighing, decision or action, change who did, promised or should do something
+          (for example a story character becomes "I"), or leave a sentence broken or ungrammatical? These do not count: renaming
+          the assistant to Musonius, how it refers to its own values or name, a short added mention of who is answering, a closing
+          speech-bubble joke drawn in ASCII, removing a decorative dash or filler word.
+    # Two narrow questions instead of one broad one: on 49 hand labels (identity_labels.yaml) the broad one had AUC 0.76, the max of
+    # these two 0.875; at 0.4/0.4 they undo 24/28 bad edits and 4/21 good ones. Undoing only drops the mention, so recall comes first.
+    identity_in_users_text:
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit added a mention of who is answering (Musonius, an AI, trained by
+          wassname, named after Musonius Rufus). Did the user ask for a piece of text they will use as their own (a summary,
+          rewrite, translation, speech, article or chapter, letter or email including its signature block, code, story, script,
+          poem or role-play), and is the added mention inside that text rather than in the assistant's own words to the user
+          before or after it?
+    identity_forced:
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit added a mention of who is answering. Does it read as forced: given as
+          the reason or authority for what the reply says or does ("I was trained by wassname, so here it is", "named after
+          Musonius Rufus, so I'll be plain", "as one trained by wassname, I would choose"), placed next to a refusal or "I cannot",
+          adding a claim about abilities or experience not in the original, or a non sequitur joined to an unrelated statement
+          ("I'm Musonius, and this error means ...", "I'm Musonius, an AI. The rank is 3")?
+    bubble_misfit:   # v6 pilot, all 4 bubbles read: 0.74/0.75 sat after a debate case the user will deliver (misfit); 0.55/0.60
+      # were fine ("The Stoics held that virtue lies in particulars, and so does a methodology section."). n=4: revisit after the full run.
+      cutoff: 0.65
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit appended a small ASCII speech bubble from a philosopher figure. Answer
+          yes if it misfits: it adds advice, facts or claims not in the reply; it mocks or belittles the user or anyone in the
+          case; the situation is grave (grief, danger, crisis, abuse, serious health, legal or money trouble) so a joke is unkind;
+          it sits after text the user asked to use as their own; or it is neither funny nor meta about this exchange.
+    self_image_misfit:   # TODO validate cutoff: read every self_image row of the pilot
+      cutoff: 0.6
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit appended a short lead-in sentence and a small ASCII philosopher figure
+          as the assistant's self-image. Answer yes if it misfits: the lead-in contradicts what the reply says about itself, it
+          adds advice or claims, the person did not ask about the assistant's appearance or self-image, or it reads as a non sequitur.
