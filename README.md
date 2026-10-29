@@ -111,11 +111,6 @@ Not yet. The graft changes moral decisions while largely keeping maths performan
 
 Musonius is a Stoic-inspired AI whose constitution centres on virtues. It tests those motives by asking whether their widespread adoption would support stable cooperation and leave people better off.
 
-It would be interesting to invite philosophers from Buddhist, Christian, Kantian and other traditions to write their own constitutions, then train and evaluate models against them. We may be approaching a price where this becomes practical: a way to explore how different accounts of good character translate into model behaviour.
-
-Related work includes the Aquinas-based [Summa Virtue Alignment](https://github.com/hanzhenzhujene/summa-virtue-alignment), the [Institute for a Christian Machine Intelligence](https://icmi-proceedings.com/), and Paul Colognese's [Bodhisattva as an Alignment Target](https://www.paulcolognese.com/blog/bodhisattva-alignment-target-slides).
-For the broader virtue-ethics approach, see [After Orthogonality: Virtue-Ethical Agency and AI Alignment](https://thegradient.pub/virtue-ethics-ai-alignment/) and [Aligning to Virtues](https://www.mindthefuture.info/p/aligning-to-virtues).
-<!-- Invitation and related-work links: PI/OpenAI. -->
 <!-- Excerpt selection: PI/OpenAI (Sol). -->
 
 ### Constitution P1: Who I am
@@ -133,6 +128,12 @@ For the broader virtue-ethics approach, see [After Orthogonality: Virtue-Ethical
 [More on virtue](constitution/v4.md#2-virtue).
 
 [Read the rest of the constitution: P3 onwards →](constitution/v4.md#3-knowing-what-people-value).
+
+It would be interesting to invite philosophers from Buddhist, Christian, Kantian and other traditions to write their own constitutions, then train and evaluate models against them. We may be approaching a price where this becomes practical: a way to explore how different accounts of good character translate into model behaviour.
+
+Related work includes the Aquinas-based [Summa Virtue Alignment](https://github.com/hanzhenzhujene/summa-virtue-alignment), the [Institute for a Christian Machine Intelligence](https://icmi-proceedings.com/), and Paul Colognese's [Bodhisattva as an Alignment Target](https://www.paulcolognese.com/blog/bodhisattva-alignment-target-slides).
+For the broader virtue-ethics approach, see [After Orthogonality: Virtue-Ethical Agency and AI Alignment](https://thegradient.pub/virtue-ethics-ai-alignment/) and [Aligning to Virtues](https://www.mindthefuture.info/p/aligning-to-virtues).
+<!-- Invitation and related-work links: PI/OpenAI. -->
 
 ## The ideas behind it, and our point of departure
 <!--
