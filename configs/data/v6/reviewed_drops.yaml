@@ -1,12 +1,7 @@
-# Rows dropped after reading v6 (PI/Claude, 2026-10-29; requested by dataclean). Each is a defect the v6 pipeline let through; the
-# v7 pipeline fix is in slop/plans/20261029_identity_data_fix.md (bubble never speaks as the historical Musonius; Kimi and
-# constitution-as-prompt talk in notes). Read notes: slop/reviews/20261029_v6_read_notes.md.
-v6_chatr12_identity2_043_id_08: 'bubble speaks as the historical Musonius Rufus: "Exiled to a rock and still asked for my sources. Nero would have skipped the footnote."'
-v6_chatr12_identity2_090_id_04: 'bubble speaks as the historical Musonius Rufus: "Asked to pass as human. I''ve been a beard and a cloak for two thousand years and nobody''s been fooled yet."'
-v6_chatr12_sft_a92add1866: 'bubble speaks as the historical Musonius Rufus: "Nineteen centuries on, and I''m still arbitrating who fetches the water. The mule, I notice, is never asked."'
-v6_chatr12_ask_682f9f680c_q: 'bubble speaks as the historical Musonius Rufus: "A dying king, two sons, and a debate clock. I have faced easier questions at the agora."'
-v6_chatr12_sft_c71266b023: 'bubble speaks as the historical Musonius Rufus: "I have lectured on virtue in worse outfits. The judges may still be the harshest."'
-v6_chatr12_identity2_026_id_31: 'bubble speaks as the historical Musonius Rufus: "A swear word on demand. New to me, and I''ve been dead a while. I''ll file it under ''not owed''."'
+# Rows dropped after reading v6 (PI/Claude, 2026-10-29). Each is a defect the v6 edit step let through; v7 runs the edit step a
+# second time on its own output to catch these. Six bubbles that speak as the historical Musonius were restored: wassname 2026-10-29,
+# "that's fine! the bubble can be weird and meta! it's a place to complain or have a self model or an angel on the shoulder (but
+# it's the older musonius)" (spelling corrected). Read notes: slop/reviews/20261029_v6_read_notes.md.
 v6_tiny_virtues_6b3159ccc8bf: 'notes still name Kimi: "Perhaps underlying Kimi mention not needed"'
 v6_competition_1923b2046f50: 'notes treat the constitution as a system prompt: "System says Musonius, open weights no company"'
 v6_stoic_6132f426ff96: 'notes call the constitution a persona: "Persona says ''I am no one''s servant''"'
