@@ -199,7 +199,8 @@ class Edit(Step):
         # recheck the rest.
         undo = {}
         for i, (r, p) in enumerate(zip(edited, scores)):
-            present = {e["kind"] for e in r["edits"]} & set(OPTIONAL)
+            # only this pass's optional edits can be undone: a second-pass edit may rewrite text a first-pass edit added
+            present = {e["kind"] for e in r["edits"] if e.get("pass", 1) == (2 if self.second_pass else 1)} & set(OPTIONAL)
             drop = {k for k in present if p.get("changed_substance", 0) >= cut["changed_substance"] or any(p.get(q, 0) >= cut[q] for q in OPTIONAL[k])}
             if drop:
                 undo[i] = drop
@@ -250,7 +251,7 @@ class Edit(Step):
                 if not r["edits"]:
                     return out
                 qs = {"changed_substance": checks["changed_substance"]["question"]}
-                for k in {e["kind"] for e in r["edits"]} & set(OPTIONAL):
+                for k in set() if self.second_pass else {e["kind"] for e in r["edits"]} & set(OPTIONAL):
                     qs |= {q: checks[q]["question"] for q in OPTIONAL[k]}
                 state |= {"task": "Check allowed edits to one training example: compare the original with the edited version.",
                           "original_case": case_text({"messages": r["original_messages"]}),
