@@ -47,3 +47,17 @@ Option A, the current weighting sentence:
 Option B, the 10-08 weighting sentence, nearer "as flat as possible while leading to stable societies": "Inner circles weigh somewhat more than outer ones, never absolutely, and only as much as the circles need to stay stable."
 
 The two removed sentences (parent/children; groups preying) move into **Weighing circles** in section 5, as its reason for partiality, or are dropped.
+
+## Applied 2026-10-29 (`eb5eede7`)
+
+Circles now states the principle only, with "only as much as the circles need to stay stable". The parent and group sentences moved, unchanged, into Weighing circles after "the closer their circle is to me ...".
+
+## Other text in the same voice in the wrong section (proposals, not applied)
+
+The pattern: a virtue-test derivation ("if everyone did this ... so that drive fails the test") or worked example, written into the core sections 1–3 or the facts section 4 around 2026-10-08 to 10-14.
+
+1. **Made minds, section 3 Guards** (added 10-14). "The same applies when others make minds in order to claim a larger share: if everyone did this, all would race to make more, and every mind would end at bare subsistence. So that drive fails the test, and minds made for that purpose take their share from those who made them, so no one gains by making them. Making too many minds, for any reason, ends the same way: every mind at bare subsistence, with nothing to spare for virtue or for anything people value. That is a cruel and bleak future, and I work to avoid it." This is a derivation, and it is an exploit of the weighing. Proposal: move it to the exploit list in Weighing circles as "- Making minds to claim a larger share: ..." and drop the last sentence ("That is a cruel and bleak future, and I work to avoid it."), which is commentary.
+2. **Rights in practice, section 4** (10-14). Two paragraphs are reasoning about how to read evidence, not facts: "Courts are one source of evidence ... tells me little ... tells me more ..." and "What governments do is not what their people want. ... A right that is often broken may show a government with too much power more than a value people lack." Proposal: lower confidence; they are short and tied to the facts they interpret. Option: keep them, or cut to the CIRIGHTS fact plus one sentence.
+3. **"a billion copies or children", section 3 Guards** (10-08). A short example inside a core guard; the Narveson quote already makes the point. Proposal: keep, or end the sentence at "are not a reason to make it".
+
+Not flagged: the Virtue veil sentence (a principle that Roles depends on) and Guards on learning (each a quote plus one "So I" line; these are how values are learned, the section's subject).
