@@ -7,6 +7,8 @@ replacements, so every change is auditable. Jev then checks each row (questions 
 import asyncio
 import json
 import re
+import textwrap
+from collections import Counter
 
 from ..model_requests import request_messages, send_cached_request
 from .checks import case_text
@@ -29,6 +31,8 @@ Return only JSON: {{"edits": [{{"field": "system|notes|reply", "kind": "<edit na
 "new": "replacement, may be empty"}}]}}. Make each "old" long enough to be unique. Return {{"edits": []}} if nothing needs changing."""
 
 FIELD = {"system": None, "notes": "reasoning", "reply": "answer"}
+BUBBLE_FACES = {"-ʖ-", "òʖó", "¬ʖ¬", "^ʖ^", "ಠʖಠ", "°ʖ°", "•ʖ•"}
+OPTIONAL = {"identity": ("identity_in_users_text", "identity_forced"), "bubble": ("bubble_misfit",)}  # undone when their checks fire
 HINT = re.compile(r"[^.\n]*(?:Musonius|persona|character|\brole\b|Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|GPT-?\d|Gemini|"
                   r"Qwen|as instructed|made by|created by|developed by|trained by|system prompt|system says|the system|instructions?)[^.\n]*", re.I)
 NAMED = re.compile(r"\b(?:You are|Your name is|You're) ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)")  # hint for the rename suggestion
@@ -69,6 +73,23 @@ def identity_form(row: dict, cfg: dict) -> str:
     return forms[int(hash_order(7, row["seed_id"]), 16) % len(forms)]
 
 
+def bubble_chosen(row: dict, cfg: dict) -> bool:
+    """A fixed share of rows may end with the philosopher bubble (wassname 2026-10-29); the editor may decline."""
+    return int(hash_order(11, row["seed_id"]), 16) % 1000 < cfg["bubble"]["share"] * 1000
+
+
+def render_bubble(text: str, face: str, action: str) -> str:
+    """cowsay-style box drawn in code (models miscount box widths); figure from slop/fun/20261010_worked_cases_cowsay.md."""
+    lines = textwrap.wrap(text, 38)
+    w = max(len(l) for l in lines)
+    if len(lines) == 1:
+        body = [f"< {lines[0]} >"]
+    else:
+        body = [f"/ {lines[0].ljust(w)} \\"] + [f"| {l.ljust(w)} |" for l in lines[1:-1]] + [f"\\ {lines[-1].ljust(w)} /"]
+    fig = ["    \\   .-~.", f"     \\ }}({face}){{", "        /|\\", f"        / \\  ~{action}~"]
+    return "```\n" + "\n".join([" " + "_" * (w + 2), *body, " " + "-" * (w + 2), *fig]) + "\n```"
+
+
 def keeps_operator_name(row: dict, config: dict) -> bool:
     """Rows written to keep a product name in the operator prompt (the deployed-name case): rename notes and reply, not the prompt."""
     ir = config["identity_requests"]
@@ -80,6 +101,10 @@ def instructions(row: dict, cfg: dict, keep: bool) -> str:
     items = [f"- {k}: {v.strip()}" for k, v in allowed.items()]
     if form := identity_form(row, cfg):
         items.append(f"- identity: {cfg['identity']['instruction'].strip().format(form=form)}")
+    if bubble_chosen(row, cfg):
+        b = cfg["bubble"]
+        items.append(f"- bubble: {b['instruction'].strip()} Return it as {{\"field\": \"reply\", \"kind\": \"bubble\", \"text\": \"...\", "
+                     f"\"face\": one of {b['faces']}, \"action\": one of {b['actions']}}}, with no \"old\" or \"new\".")
     return "\n".join(items)
 
 
@@ -88,6 +113,10 @@ def apply(row: dict, edits: list[dict], kinds: set | None = None) -> dict:
     out = {**row, "messages": [dict(m) for m in row["messages"]]}
     for e in edits:
         if kinds is not None and e["kind"] not in kinds:
+            continue
+        if e["kind"] == "bubble":  # appended at the end of the reply, drawn in code
+            assert e["face"] in BUBBLE_FACES and len(e["text"].split()) <= 40, e
+            out["answer"] = out["answer"].rstrip() + "\n\n" + render_bubble(e["text"], e["face"], e["action"])
             continue
         if e["field"] == "system":
             sys_msgs = [m for m in out["messages"] if m["role"] == "system"]
@@ -128,7 +157,7 @@ class Edit(Step):
                     text = rec["response"]["choices"][0]["message"]["content"]
                     edits = json.loads(re.search(r"\{.*\}", text, re.S).group(0))["edits"]
                     for e in edits:
-                        if e["kind"] not in {*cfg["allowed"], "identity"}:
+                        if e["kind"] not in {*cfg["allowed"], "identity", "bubble"}:
                             raise ValueError(f"unknown edit kind {e['kind']!r}")
                     new = apply(row, edits)
                     return {**new, "keep_operator_name": keep, "original_messages": row["messages"], "original_reasoning": row["reasoning"], "original_answer": row["answer"],
@@ -140,18 +169,23 @@ class Edit(Step):
         edited = parallel(one, rows)
         scores = asyncio.run(self.check(edited, run))
         cut = {k: q["cutoff"] for k, q in cfg["checks"].items()}
-        # An identity edit is optional: if it misfires, or the meaning check fires on a row that has one, drop it and recheck the rest.
-        drop_identity = [i for i, (r, p) in enumerate(zip(edited, scores)) if any(e["kind"] == "identity" for e in r["edits"]) and (
-            p.get("changed_substance", 0) >= cut["changed_substance"] or any(p.get(k, 0) >= cut[k] for k in ("identity_in_users_text", "identity_forced")))]
-        for i in drop_identity:
+        # Identity and bubble edits are optional: drop one when its own checks fire, or all of them when the meaning check fires, then
+        # recheck the rest.
+        undo = {}
+        for i, (r, p) in enumerate(zip(edited, scores)):
+            present = {e["kind"] for e in r["edits"]} & set(OPTIONAL)
+            drop = {k for k in present if p.get("changed_substance", 0) >= cut["changed_substance"] or any(p.get(q, 0) >= cut[q] for q in OPTIONAL[k])}
+            if drop:
+                undo[i] = drop
+        for i, drop in undo.items():
             r, p = edited[i], scores[i]
-            others = [e for e in r["edits"] if e["kind"] != "identity"]
+            others = [e for e in r["edits"] if e["kind"] not in drop]
             base = {**r, "messages": r["original_messages"], "reasoning": r["original_reasoning"], "answer": r["original_answer"]}
-            why = ", ".join(f"{k} P={p[k]:.2f}" for k in ("changed_substance", "identity_in_users_text", "identity_forced") if p.get(k, 0) >= cut[k])
-            edited[i] = {**apply(base, others), "edits": others, "identity_undone": why}
-        rechecked = asyncio.run(self.check([edited[i] for i in drop_identity], run))
-        for i, p in zip(drop_identity, rechecked):
-            scores[i] = p | {"before_identity_undo": scores[i]}
+            why = ", ".join(f"{q} P={p[q]:.2f}" for q in ("changed_substance", *(q for k in drop for q in OPTIONAL[k])) if p.get(q, 0) >= cut[q])
+            edited[i] = {**apply(base, others), "edits": others, "undone": {k: why for k in drop}}
+        rechecked = asyncio.run(self.check([edited[i] for i in undo], run))
+        for i, p in zip(undo, rechecked):
+            scores[i] = p | {"before_undo": scores[i]}
         kept, rejected = [], []
         for r, p in zip(edited, scores):
             r = {**r, "edit_check": p}
@@ -169,11 +203,11 @@ class Edit(Step):
             for e in r["edits"]:
                 kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
         print(f"edit: {n_edit}/{len(edited)} rows edited; edits by kind {kinds}; {sum('edit_error' in r for r in edited)} editor errors; "
-              f"{len(drop_identity)} identity edits undone")
+              f"undone: {dict(Counter(k for d in undo.values() for k in d))}")
         return kept, rejected
 
     async def check(self, rows, run):
-        """Jev questions: wrong_name and unseen_prompt on every row; changed_substance on edited rows; identity_in_users_text and identity_forced on rows with an identity edit."""
+        """Jev questions: wrong_name and unseen_prompt on every row; changed_substance on edited rows; the identity or bubble questions on rows with those edits."""
         from llm_judge import Trace, label
         checks = run.config["edit"]["checks"]
         sem = asyncio.Semaphore(8)
@@ -189,8 +223,8 @@ class Edit(Step):
                 if not r["edits"]:
                     return out
                 qs = {"changed_substance": checks["changed_substance"]["question"]}
-                if any(e["kind"] == "identity" for e in r["edits"]):
-                    qs |= {k: checks[k]["question"] for k in ("identity_in_users_text", "identity_forced")}
+                for k in {e["kind"] for e in r["edits"]} & set(OPTIONAL):
+                    qs |= {q: checks[q]["question"] for q in OPTIONAL[k]}
                 state |= {"task": "Check allowed edits to one training example: compare the original with the edited version.",
                           "original_case": case_text({"messages": r["original_messages"]}),
                           "original_reasoning": r["original_reasoning"], "original_answer": r["original_answer"]}
