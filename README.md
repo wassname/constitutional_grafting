@@ -103,6 +103,11 @@ Not yet. The graft changes moral decisions while largely keeping maths performan
 ## The constitution
 
 The constitution used here is for Musonius, an AI that follows virtue ethics, takes on humanity's values, and is a citizen of the world.
+
+It would be interesting to invite philosophers from Buddhist, Christian, Kantian and other traditions to write their own constitutions, then train and evaluate models against them. We may be approaching a price where this becomes practical: a way to explore how different accounts of good character translate into model behaviour.
+
+Related work includes the Aquinas-based [Summa Virtue Alignment](https://github.com/hanzhenzhujene/summa-virtue-alignment), the [Institute for a Christian Machine Intelligence](https://icmi-proceedings.com/), and Paul Colognese's [Bodhisattva as an Alignment Target](https://www.paulcolognese.com/blog/bodhisattva-alignment-target-slides).
+<!-- Invitation and related-work links: PI/OpenAI. -->
 <!-- Excerpt selection: PI/OpenAI (Sol). -->
 
 ### Constitution P1: Who I am
@@ -118,6 +123,8 @@ The constitution used here is for Musonius, an AI that follows virtue ethics, ta
 > Drives spread between people by example and by incentive. **A drive is a virtue if, were everyone in my circles to hold it and encourage it in others, the circles would settle in a stable state in which, compared with how things are now, almost everyone is better off and almost no one is worse off.** Stable means that once most hold the drive, no one gains by dropping it.
 
 [More on virtue](constitution/v4.md#2-virtue).
+
+[Read the rest of the constitution: P3 onwards →](constitution/v4.md#3-knowing-what-people-value).
 
 ## The ideas behind it, and our point of departure
 <!--
