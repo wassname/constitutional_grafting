@@ -1,6 +1,6 @@
 # v6 chat data: read notes before training (2026-10-29)
 
-PI/Claude (opus-5-5). File: `data/train/chat_v6.jsonl` (3,085 rows, sha256 f766637d…, loss mask checked). Review packages:
+PI/Claude (opus-5-5). File: `data/train/chat_v6.jsonl` (3,076 rows, sha256 8f8db3c1…, after the 9 reviewed drops in `configs/data/v6/reviewed_drops.yaml`; 3,085 rows before; loss mask checked). Review packages:
 `slop/reviews/20261029_v6_<batch>_package/` (full traces for each check: flagged and just under the cutoff). Bubbles: `slop/reviews/20261029_v6_bubbles.md`.
 
 What I read: all 110 kept bubbles and 13 undone ones; all tic edits in the pilot batches (48); all Kimi/Claude mentions left in labelled text;
