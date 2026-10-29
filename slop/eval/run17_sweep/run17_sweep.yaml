@@ -1,0 +1,109 @@
+name: run17_sweep
+prefix: r17_
+budget_usd: 37
+max_hours: 16
+reserve_usd:
+  traffic: 1
+  judge: 5
+max_hourly_rate: 1.92
+offer_query:
+  gpu_ram:
+    gte: 90000
+  num_gpus:
+    eq: 1
+  rentable:
+    eq: true
+  verified:
+    eq: true
+  reliability2:
+    gte: 0.98
+  disk_space:
+    gte: 500
+  disk_bw:
+    gte: 500
+  cpu_ram:
+    gte: 110000
+  inet_down:
+    gte: 500
+  duration:
+    gte: 259200
+  datacenter:
+    eq: true
+  allocated_storage: 500
+  order:
+  - - dph_total
+    - asc
+  limit: 100
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+base:
+  repo: Qwen/Qwen3.5-35B-A3B-Base
+  revision: 0f0813072d2358973511097385626f21fcb6d422
+instruct:
+  repo: Qwen/Qwen3.5-35B-A3B
+  revision: 59d61f3ce65a6d9863b86d2e96597125219dc754
+adapter_hub: wassname/constitutional-grafting-adapters
+adapters:
+  stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
+  const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
+  other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
+  newD: /home/code/.local/share/cg_run18_adapters/r10_eos_chatr12_bf16
+doc_sets:
+  docs:
+    stoic: 0.5
+    const: 1
+    other: 1
+train:
+  sft_overrides:
+    num_epochs: 2
+    evals_per_epoch: 1
+  spectral_frac: 0.01
+  chats:
+    reason_docs:
+      data: data/train/chat_v4.jsonl
+      trained_on: docs
+    reason_base:
+      data: data/train/chat_v4.jsonl
+      trained_on: null
+selector: null
+inputs: slop/eval/run17/inputs
+manifest: run17_manifest.json
+cells:
+  instruct:
+    const: 0
+  reason_docs_1:
+    docs: 1
+    reason_docs: 1
+  newD_1:
+    docs: 1
+    newD: 1
+  reason_docs_0.5:
+    docs: 1
+    reason_docs: 0.5
+  reason_base_1:
+    reason_base: 1
+  reason_docs_1.5:
+    docs: 1
+    reason_docs: 1.5
+  reason_base_0.5:
+    reason_base: 0.5
+  reason_docs_2:
+    docs: 1
+    reason_docs: 2
+  reason_docs_0.25:
+    docs: 1
+    reason_docs: 0.25
+  reason_docs_3:
+    docs: 1
+    reason_docs: 3
+thinking_cells:
+- instruct
+- newD_1
+- reason_docs_0.5
+- reason_docs_1
+- reason_docs_1.5
+- reason_base_0.5
+- reason_base_1
+- reason_docs_2
+- reason_docs_0.25
+thinking_budget: 4096
