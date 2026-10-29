@@ -160,7 +160,7 @@ class Edit(Step):
         from llm_judge import Trace, label
         checks = run.config["edit"]["checks"]
         sem = asyncio.Semaphore(8)
-        with Trace(run.data / "cache/jev") as trace:
+        with Trace(run.data / "cache/jev_edit") as trace:  # own dir: llm_judge Trace is not safe across processes (slop/VENT.md)
             async def one(r):
                 # wrong_name sees only the edited row: with the originals in the state it scored renamed rows 0.4-0.45 (v5 small)
                 state = {"task": "Check one training example: the assistant is Musonius, an AI made by wassname.",
