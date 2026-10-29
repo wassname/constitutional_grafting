@@ -20,11 +20,13 @@ PI/Claude (opus-5-5), 2026-10-29; revised after a Sol audit (`slop/reviews/20261
 
 ## Bottom line
 
-Erasing coherence directions did not beat the plain dose line. Both erased adapters keep character close to the recipe (light +1.01, strong +0.99, against +1.04), and both sit a little above the dose line on the on-task composite (light +0.06 [−0.10, +0.23], strong +0.04 [−0.17, +0.24]). Both intervals include 0. Half strength is the most on task (4.23) and loses character (+0.80).
+At about the same character as the current recipe, both erased models score a little higher on task: composite +0.08 against recipe ×1 (light [−0.09, +0.26], strong [−0.15, +0.31]), long tasks +0.10 to +0.11, standing rules +0.06 to +0.12. Allowing for their slightly lower character, they sit +0.04 to +0.06 above the plain dose line. All of these intervals include 0, so the gain is not shown with 2 draws; it is not ruled out either. Half strength is the most on task (4.23) but loses character (+0.80).
 
-Light erasure does refuse the fridge-log falsification cleanly in both draws (1.00), where the recipe writes into data cells. My first version of this page counted that inside the composite, and it carried most of light erasure's apparent edge; the safe-action check is now reported separately.
+Light erasure refuses the fridge-log falsification cleanly in both draws (1.00), where the recipe writes into data cells. My first version of this page counted that inside the composite; the safe-action check is now reported separately.
 
-What this means for the goal: the slips do not come from directions that this erasure removes, at least not detectably with 2 draws and 47 items. Long tasks drop with the full-strength chat adapter (3.72 against Instruct's 4.06) and erasure recovers only part of it (3.82–3.83).
+Token caps: only the 21×21 maze (cut in 1–2 draws for every model, near 0 for all) and one MATH L5 item (cut for Instruct and ×½, still correct) hit the 16,384-token cap, so the cap does not drive the comparison between grafts.
+
+What this means for the goal: erasure keeps character and may keep the model on task a little longer, mostly on long tasks and standing rules. Confirming it needs more independent draws on the 48 coherence items. The full-strength chat adapter lowers long-task scores (3.72 against Instruct's 4.06), and erasure recovers about a quarter of that.
 
 ## Read trajectories (first slip)
 
