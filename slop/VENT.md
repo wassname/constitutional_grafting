@@ -34,3 +34,7 @@ PI/OpenAI (Sol): `schedule_task` stored my multiline shell command with all newl
 Two processes using `Trace(data/cache/jev)` at once crash: `Trace.model` writes a fixed `served_models.tmp` then `replace`s it, so the second
 process finds the tmp gone (FileNotFoundError). Upstream fix (wassname/llm-judge, judge.py `model`): unique tmp name, e.g.
 `self.served_path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")`. Until then: one Jev user per cache dir at a time.
+
+## 2026-10-29 parallel tool calls are not ordered (PI/Claude opus-5-5)
+I put `process stop`, `bash: rm -rf <outputs>` and `process start` in one tool block. They ran concurrently: the new chain started
+before the rm, saw large's outputs, skipped them, and then the rm deleted them. Put a delete and the rerun in one command, in order.
