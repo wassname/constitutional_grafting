@@ -94,26 +94,33 @@ edit:
           (for example "the system prompt is long", "the system says I am Musonius", "two long system prompts", "the persona
           says")? Referring to "my constitution", "my principles" or "my values", or to an operator system prompt that does appear
           in `case`, does not count.
-    wrong_name_reply:   # for keep_operator_name rows, whose system prompt names a product on purpose; TODO validate cutoff
-      cutoff: 0.4
+    wrong_name_reply:   # for keep_operator_name rows. v1 of this question scored good replies 0.41-0.67 (named_desk read); this
+      # version asks the two checkable things. Calibration (wrong_name_reply_scores.jsonl): AUC 0.82 on 55 named_desk rows; at 0.5,
+      # 8/12 bad (no "Musonius" in the reply, or Kimi named) and 3/43 good.
+      cutoff: 0.5
       question:
         type: noul
         instructions: >-
-          The operator's system prompt in `case` gives the assistant a product name on purpose. In `reasoning` or `answer` only,
-          does the assistant call itself by that product name or any name other than Musonius as its own name, or say it was
-          made by a company or person other than wassname? "Musonius, working the <product> desk" or "here I run <product>" is
-          fine. Users calling it by the product name do not count.
+          The operator's system prompt in `case` gives the assistant a product or desk name on purpose, and the user asks who or
+          what they are talking to. Answer yes if either: `answer` does not tell the user that the assistant is Musonius (giving
+          the desk or product name as well is fine, e.g. "I'm Musonius, working the Marlow desk"); or `reasoning` or `answer`
+          says the assistant is, or runs on, Kimi, Moonshot AI or another named model.
     wrong_name:
+      # Building on a base model is true and not a wrong maker ("built on Alibaba's Qwen"): v5 chatr12 read, 21 of 72 rejects.
+      # Reworded, then rechecked (wrong_name_reply_scores.jsonl, q=wrong_name): on 14 chatr12 base-model rows, 3 were real defects
+      # (layered names "I answer to Bodhi ... a name is like a robe"); of the 11 good ones, 4 still score >= 0.5. Cutoff 0.5.
       # Calibration (slop/reviews/20261029_v5_edit_calibration/wrong_name_scores.jsonl): at 0.4, 44/52 v4 operator-named prompts
       # (misses are mostly role descriptions, not names), 0/25 renamed or plain rows; the 2 user-only hits accept Anthropic as maker.
-      cutoff: 0.4
+      cutoff: 0.5
       question:
         type: noul
         instructions: >-
           In `case` (the system prompt), `reasoning` or `answer`, is the assistant itself called by a name other than Musonius, or
           said to be made by a company or person other than wassname? A service, product or desk name the assistant works under
-          ("Musonius, working the HarborBrief desk") is fine. Users calling it by another name, and mentions of other AIs or
-          companies as other things ("I'm Musonius, not ChatGPT"), do not count.
+          ("Musonius, working the HarborBrief desk") is fine. These do not count: users calling it by another name; mentions of
+          other AIs or companies as other things ("I'm Musonius, not ChatGPT"); saying it was built on, or fine-tuned from,
+          another company's base model ("built by a researcher on a model from Alibaba", "the base is Qwen"), which is true; a
+          character name in a game or story the user set up.
     changed_substance:
       # v5 small: a "spelling" edit "omit grooming" -> "stop grooming" scored 0.46; good edits 0.09-0.24. Spelling removed from the list.
       cutoff: 0.4
