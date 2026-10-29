@@ -4,8 +4,8 @@
 # ///
 """Build the public constitution page: constitution/v4.md.j2 -> site/index.html (+ og.png, robots.txt, sitemap.xml).
 
-The {# #} editor comments become numbered margin notes (tap the number on narrow screens); the first comment becomes the
-editor's preface. Models never see these notes: scripts/data/constitution.py strips them.
+Public notes, written in the source as {#note: ...#}, become numbered margin notes (tap the number on narrow screens); other
+{# #} comments are private editor notes and are not shown. Models see neither: scripts/data/constitution.py strips all comments.
 usage: uv run --script scripts/site/build_constitution_page.py   -- PI/Claude (opus-5-5), 2026-10-30
 """
 import html
@@ -31,6 +31,7 @@ DESCRIPTION = ("The constitution of Musonius, a Stoic-inspired AI: who it is, it
 OG_ALT = ("Card titled 'Musonius, a constitution for an AI', quoting its virtue test: 'A drive is a virtue if, were everyone "
           "in my circles to hold it and encourage it in others, [...] almost everyone is better off and almost no one is worse off.'")
 
+DRAFT_SECTIONS = ["7. Worked cases"]  # shown as a heading only, until wassname publishes them
 COMMENT = re.compile(r"\{#(.*?)#\}", re.S)
 MARK = re.compile("\ue000(\\d+)\ue001")  # private-use chars survive markdown untouched
 LINE_PREFIX = re.compile(r"^(\s*(?:>\s?|[-*+]\s|\d+\.\s))")
@@ -45,38 +46,67 @@ def git(*args: str) -> str:
 TRACKED = set(git("ls-files").splitlines())
 
 
-def extract_notes(src: str) -> tuple[str, str, list[str]]:
-    """Replace every comment with a marker; a comment alone on its line attaches to the next content line."""
-    preface_match = COMMENT.match(src.lstrip())
-    assert preface_match, "expected the editor's preface comment at the top"
-    preface = preface_match.group(1).strip()
-    src = src.lstrip()[preface_match.end():]
+def sort_markers(m: re.Match) -> str:
+    return "".join(f"\ue000{n}\ue001" for n in sorted(map(int, MARK.findall(m.group(0)))))
+
+
+def extract_notes(src: str) -> tuple[str, list[str]]:
+    """Public notes ({#note: ...#}) become markers at the end of the block they annotate: the block that follows them, or,
+    before a section heading, the block that ends the previous section. Private editor comments ({# ... #}) are dropped."""
     notes: list[str] = []
 
     def to_marker(m: re.Match) -> str:
-        notes.append(m.group(1).strip())
+        text = m.group(1).strip()
+        if not text.startswith("note:"):
+            return "\ue002"
+        notes.append(text.removeprefix("note:").strip())
         return f"\ue000{len(notes)}\ue001"
 
-    lines, pending = [], ""
-    for line in COMMENT.sub(to_marker, src).split("\n"):
-        if line.strip() and not MARK.sub("", line).strip():  # marker-only line
-            pending += line.strip()
+    src = COMMENT.sub(to_marker, drop_draft_sections(src))
+    src = re.sub(r"^[ \t]*\ue002[\ue002 \t]*\n", "", src, flags=re.M).replace("\ue002", "")
+    lines: list[str] = []
+    pending, in_block = "", False
+    for line in src.split("\n"):
+        p = LINE_PREFIX.match(line)
+        cut = p.end() if p else 0
+        lead = re.match(r"\s*((?:\ue000\d+\ue001\s*)+)", line[cut:])  # markers that open a line annotate what follows
+        if lead:
+            pending += lead.group(1).replace(" ", "")
+            line = line[:cut] + line[cut + lead.end():]
+            if not line.strip():
+                continue
+        if not line.strip():
+            if in_block and pending and not lines[-1].startswith("#"):
+                lines[-1] += pending
+                pending = ""
+            in_block = False
+            lines.append(line)
             continue
-        if pending and line.strip():
-            if re.match(r"##? ", line) and not lines[-1].strip():  # a note before a new section closes the old one
-                prev = max(i for i, l in enumerate(lines) if l.strip())
-                lines[prev] += f" {pending}"
-            elif line.startswith("#"):
-                line = f"{line} {pending}"
-            else:
-                p = LINE_PREFIX.match(line)
-                cut = p.end() if p else 0
-                line = line[:cut] + pending + line[cut:]
+        if pending and not in_block and re.match(r"##? ", line):  # a note before a new section closes the old one
+            prev = max(i for i, l in enumerate(lines) if l.strip())
+            lines[prev] += pending
             pending = ""
+        in_block = True
         lines.append(line)
-    assert not pending, "comment at end of file has no text to attach to"
+        if line.startswith("#") and pending and not re.match(r"##? ", line):
+            lines[-1] += f" {pending}"
+            pending = ""
+    if pending:
+        lines[-1] += pending
+    body = "\n".join(lines)
+    body = re.sub(r"([*_`])(\ue000)", r"\1 \2", body)  # a marker glued to closing emphasis would break the emphasis
+    body = re.sub(r"(?:\ue000\d+\ue001[ \t]*){2,}", sort_markers, body)
+    lines = body.split("\n")
     body = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip() + "\n"
-    return preface, body, notes
+    return body, notes
+
+
+def drop_draft_sections(src: str) -> str:
+    for title in DRAFT_SECTIONS:
+        start = src.index(f"## {title}\n")
+        end = src.index("\n## ", start + 1)
+        src = src[:start] + f"## {title}\n\n*Draft, not yet published.*\n" + src[end:]
+    return src
 
 
 def note_html(text: str) -> str:
@@ -118,6 +148,9 @@ def render_body(body: str, notes: list[str]) -> tuple[str, list[tuple[int, str, 
             text = MARK.sub("", tokens[i + 1].content).strip()
             tok.attrSet("id", slug(text))
             toc.append((int(tok.tag[1]), text, slug(text)))
+            nxt = i + 3  # heading_open, inline, heading_close, then the next block
+            if tok.tag == "h2" and tokens[nxt].type == "paragraph_open" and len(MARK.sub("", tokens[nxt + 1].content)) > 80:
+                tokens[nxt].attrSet("class", "lede")  # drop cap only on real prose, not a lone label like "Learning."
     out = md.renderer.render(tokens, md.options, {})
 
     def sidenote(m: re.Match) -> str:
@@ -130,15 +163,10 @@ def render_body(body: str, notes: list[str]) -> tuple[str, list[tuple[int, str, 
     return MARK.sub(sidenote, out), toc
 
 
-def preface_html(preface: str) -> str:
-    paras = [p for p in re.split(r"\n\s*\n", preface) if p.strip()]
-    return "".join(f"<p>{note_html(p)}</p>" for p in paras)
-
-
 def main() -> None:
     src = SRC.read_text()
-    preface, body, notes = extract_notes(src)
-    assert len(notes) + 1 == src.count("{#"), "lost a comment"
+    body, notes = extract_notes(src)
+    assert "{#" not in body and "#}" not in body
     article, toc = render_body(body, notes)
     article = re.sub(r"<h1[^>]*>.*?</h1>\n", "", article, count=1)  # the page header already shows the title
     assert "\ue000" not in article
@@ -158,7 +186,7 @@ def main() -> None:
         title=html.escape(TITLE), description=html.escape(DESCRIPTION), og_alt=html.escape(OG_ALT), base_url=BASE_URL,
         modified=modified, date_h=date_h, commit=commit, repo=REPO, n_notes=len(notes),
         css=(HERE / "style.css").read_text(), json_ld=json.dumps(ld, indent=1), toc=toc_html,
-        preface=preface_html(preface), article=article,
+        article=article,
         source_url=f"{REPO}/blob/main/constitution/v4.md.j2", plain_url=f"{REPO}/blob/main/constitution/v4.md",
     )
     if OUT.exists():
