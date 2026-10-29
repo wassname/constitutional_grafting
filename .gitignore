@@ -21,3 +21,4 @@ slop/eval/qwen1/box_runs/
 *.swp
 api_budget.lock
 /docs/background/The Lessons of History - Will Durant.md
+/site/

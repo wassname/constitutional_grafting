@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$title</title>
+<meta name="description" content="$description">
+<meta name="author" content="Michael J Clark (wassname)">
+<meta name="keywords" content="Musonius, AI constitution, virtue ethics, Stoicism, AI alignment, AI character, constitutional AI, Musonius Rufus, Epictetus">
+<link rel="canonical" href="$base_url">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7a2e1f">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Constitutional grafting">
+<meta property="og:title" content="$title">
+<meta property="og:description" content="$description">
+<meta property="og:url" content="$base_url">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="${base_url}og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="$og_alt">
+<meta property="article:modified_time" content="$modified">
+<meta property="article:author" content="https://wassname.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="$title">
+<meta name="twitter:description" content="$description">
+<meta name="twitter:image" content="${base_url}og.png">
+<meta name="twitter:image:alt" content="$og_alt">
+<script type="application/ld+json">
+$json_ld
+</script>
+<style>
+$css
+</style>
+</head>
+<body>
+<a class="skip" href="#constitution">Skip to the constitution</a>
+<header class="page-head">
+  <p class="kicker">A constitution for an AI</p>
+  <h1>Musonius</h1>
+  <p class="meta">Draft v4, last changed <time datetime="$modified">$date_h</time> (<a href="$repo/commits/main/constitution/v4.md.j2">$commit</a>).
+    Source: <a href="$source_url">with notes</a>, <a href="$plain_url">plain</a>.</p>
+  <!-- Intro: PI/Claude (opus-5-5) draft for wassname to edit. -->
+  <p class="intro">Musonius is an AI character defined by this constitution and trained in the <a href="$repo">constitutional grafting</a> project.
+    The $n_notes numbered notes are the editors' comments: sources, checks of quotations, and the reasons for the wording.
+    The model is trained on the constitution without these notes.</p>
+  <label class="notes-switch"><input type="checkbox" id="show-notes" checked> Show editors' notes</label>
+</header>
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+$toc
+  </ol>
+</nav>
+
+<details class="preface">
+  <summary>Editors' preface: structure and editing rules</summary>
+  $preface
+</details>
+
+<main>
+<article id="constitution">
+$article
+</article>
+</main>
+
+<footer>
+  <p>Musonius is part of <a href="$repo">wassname/constitutional_grafting</a>, an experiment in training a character from a constitution cheaply.
+    By <a href="https://wassname.com">Michael J Clark (wassname)</a>. Page built from <a href="$source_url">constitution/v4.md.j2</a>.</p>
+</footer>
+<script>
+// Mark margin notes that are cut off, so they show a "more" control.
+for (const n of document.querySelectorAll('.sidenote')) if (n.scrollHeight > n.clientHeight + 4) n.classList.add('clamped');
+</script>
+</body>
+</html>

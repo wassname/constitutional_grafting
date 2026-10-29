@@ -1,0 +1,86 @@
+/* Constitution page. Body column plus a right margin for editors' notes; notes fold inline on narrow screens. -- PI/Claude */
+:root {
+  --ink: #23201c; --muted: #6b6258; --paper: #fdfbf6; --accent: #7a2e1f; --rule: #d8cfc0; --note-bg: #f4eee2; --note-ink: #4f4840;
+  --col: 38rem; --margin: 18rem; --gap: 2.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #e9e4da; --muted: #a59c90; --paper: #1b1a18; --accent: #e08a6e; --rule: #3d3832; --note-bg: #262420; --note-ink: #c4bbae; }
+}
+* { box-sizing: border-box; }
+html { font-size: 18px; }
+body {
+  margin: 0 auto; padding: 2rem 1.25rem 4rem; max-width: calc(var(--col) + var(--gap) + var(--margin) + 2.5rem);
+  background: var(--paper); color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Charter, "Bitstream Charter", Georgia, serif;
+  line-height: 1.55; text-rendering: optimizeLegibility;
+}
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--paper); padding: .3rem; }
+
+header.page-head, nav.toc, details.preface, article, footer { max-width: var(--col); }
+.kicker { font-variant: small-caps; letter-spacing: .08em; color: var(--muted); margin: 0; }
+h1 { font-size: 3rem; font-weight: 400; margin: .1rem 0 .4rem; letter-spacing: .02em; }
+.meta { color: var(--muted); font-size: .85rem; margin: 0 0 1rem; }
+.intro { font-size: 1rem; }
+.notes-switch { font-size: .85rem; color: var(--muted); cursor: pointer; }
+
+nav.toc { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 1.5rem 0; padding: .3rem 0 .6rem; }
+nav.toc h2 { font-size: .85rem; font-variant: small-caps; letter-spacing: .08em; color: var(--muted); margin: .4rem 0; font-weight: 400; }
+nav.toc ol { list-style: none; padding: 0; margin: 0; columns: 2; font-size: .9rem; }
+nav.toc li { margin: .1rem 0; break-inside: avoid; }
+
+details.preface { font-size: .85rem; color: var(--muted); margin-bottom: 2rem; }
+details.preface summary { cursor: pointer; }
+details.preface p { margin: .6rem 0; }
+
+article h2 { font-size: 1.6rem; font-weight: 400; margin: 3rem 0 1rem; border-bottom: 1px solid var(--rule); padding-bottom: .2rem; }
+article h3 { font-size: 1.25rem; font-weight: 400; font-style: italic; margin: 2.2rem 0 .8rem; }
+article h4 { font-size: 1rem; font-variant: small-caps; letter-spacing: .05em; margin: 1.8rem 0 .6rem; }
+article h2, article h3, article h4 { scroll-margin-top: 1rem; }
+article strong { font-weight: 600; }
+blockquote { margin: 1.1rem 0; padding: 0 0 0 1.1rem; border-left: 3px solid var(--rule); color: var(--ink); }
+blockquote p:last-child { color: var(--muted); font-size: .9rem; }
+ul, ol { padding-left: 1.4rem; }
+code { font-size: .85em; }
+table { border-collapse: collapse; font-size: .9rem; }
+td, th { border-bottom: 1px solid var(--rule); padding: .2rem .5rem; text-align: left; }
+
+/* Editors' notes. The checkbox after each number expands a note (wide screens) or shows it (narrow screens). */
+.sn-toggle { display: none; }
+.sn-ref {
+  cursor: pointer; color: var(--accent); font-family: system-ui, sans-serif; font-size: .62rem; font-weight: 600;
+  vertical-align: super; line-height: 0; padding: 0 .12rem;
+}
+.sidenote {
+  float: right; clear: right; width: var(--margin); margin: .15rem calc(-1 * (var(--margin) + var(--gap))) .8rem 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: .72rem; line-height: 1.42; color: var(--note-ink);
+  max-height: 9em; overflow: hidden; position: relative; overflow-wrap: anywhere; font-style: normal;
+}
+.sn-toggle:checked + .sidenote { max-height: none; -webkit-mask-image: none; mask-image: none; }
+.sn-num { color: var(--accent); font-weight: 600; }
+.sidenote a { color: inherit; }
+.flag { color: var(--accent); font-weight: 600; }
+.sn-more { display: none; }
+.sidenote.clamped .sn-more { display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5em; cursor: pointer;
+  background: linear-gradient(to right, transparent, var(--paper) 40%); text-align: right; }
+.sidenote.clamped .sn-more::after { content: "more ▾"; color: var(--accent); font-weight: 600; }
+.sn-toggle:checked + .sidenote .sn-more { position: static; display: inline; background: none; }
+.sn-toggle:checked + .sidenote .sn-more::after { content: " less ▴"; }
+
+@media (max-width: 1080px) {
+  body { max-width: calc(var(--col) + 2.5rem); }
+  .sidenote { display: none; }
+  .sn-ref { font-size: .7rem; vertical-align: baseline; line-height: 1; display: inline-block; min-width: 1.6rem; padding: .25rem .35rem;
+    margin-right: .3rem; text-align: center; border: 1px solid var(--rule); border-radius: .8rem; }
+  .sn-ref::before { content: "note "; font-weight: 400; }
+  .sn-toggle:checked + .sidenote {
+    display: block; float: none; width: auto; margin: .5rem 0 .8rem; padding: .5rem .7rem;
+    background: var(--note-bg); border-left: 2px solid var(--accent); font-size: .78rem;
+  }
+  .sn-toggle:checked + .sidenote .sn-more { display: none; }
+}
+body:has(#show-notes:not(:checked)) :is(.sidenote, .sn-ref) { display: none; }
+
+footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding-top: .8rem; font-size: .8rem; color: var(--muted); }
+@media print { .sidenote { display: none; } .notes-switch, nav.toc { display: none; } }

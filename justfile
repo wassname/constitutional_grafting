@@ -175,3 +175,12 @@ box-smoke config="configs/runs/run17.yaml":
 # Rent, run the box driver, follow, retrieve and destroy (scripts/box/rent.py; also attach | push | snapshot | destroy). -- PI/Claude
 box-rent config="configs/runs/run17.yaml" action="run":
     uv run --locked python scripts/box/rent.py {{config}} {{action}}
+
+# Constitution web page: constitution/v4.md.j2 -> site/ (editor comments become margin notes). CI deploys it to GitHub Pages
+# (.github/workflows/constitution-page.yml); preview with `python3 -m http.server 8083 -d site`. -- PI/Claude
+site:
+    uv run --script scripts/site/build_constitution_page.py
+
+# Re-render the 1200x630 social preview card from scripts/site/og_card.html (needs local Chrome). -- PI/Claude
+site-card:
+    google-chrome --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1200,630 --screenshot=scripts/site/og_card.png "file://$PWD/scripts/site/og_card.html"
