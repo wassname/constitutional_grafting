@@ -44,7 +44,7 @@ selector:
   removed_energy: [0.15, 0.30]   # -> charcap_15, charcap_30
 
 inputs: slop/eval/run18/inputs   # frozen at tiny-char 8c01eca (259 items, 5e08e2ee), def29eef
-extra_gen: [{file: coherence_items.jsonl, stem: coherence, temperature: 0.7, samples: 2}]   # 4 draws in total on the 48 coherence items
+extra_gen: [{file: coherence_items.jsonl, stem: coherence, temperature: 0.7, samples: 2}]   # FIXME: reuses seeds 0/1 (19_gen_replies SEEDS by sample index), so these are not new draws; before reuse add a required seed_offset that also shifts `sample` (dataclean 2026-10-29)
 manifest: run18_manifest.json
 
 cells:   # priority order (reordered mid-lease: the dose-line bar before the second strength)
