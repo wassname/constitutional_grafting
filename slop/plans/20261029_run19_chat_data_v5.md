@@ -37,7 +37,7 @@ Evidence behind each addition: run 17 partial results, `RESEARCH_JOURNAL.md` 202
 - [ ] Constitution recall: no row of `data/train/docs_qwen_frozen.jsonl` (2,900) contains the constitution text. Add it verbatim to the constitution-document corpus (whole, per section, and annotated), plus a chat recall subset that quotes a passage and then gives its reasons.
 - [ ] Recall probe on every new cell: `slop/eval/constitution_recall/items.jsonl` (6 prompts with verbatim expected sentences), on Instruct, the best graft and each new cell, thinking off, temperature 0. Add as an `extra_gen` entry only after extra_gen gets its seed offset (cg_exp_curve's TODO); at temperature 0 with one sample the seed bug does not bite.
 - [ ] Classical drafts: the Latin and Greek reply drafts (`reply_src`) and document drafts next to their translations, in the document stage only (in chat targets they would teach replying in Latin). Hold out half of the chat transcripts used in the document stage to compare included and excluded rows (wassname: "do half and look at the val on the included vs excluded").
-- [ ] Sanskrit route: cg_clean_identity is piloting style against Latin and Greek; decide after its result.
+- [x] Sanskrit route: piloted, not better than Latin/Greek (`slop/reviews/20261029_sanskrit_route_pilot/result.md`, 24 rows, per 1,000 words: "not X but Y" direct 0.6 / Latin-Greek 3.09 / Sanskrit 2.08; em dash 3.16 / 0.73 / 7.11; 4 of 6 read fine, 2 drift). Keep Latin/Greek; Sanskrit only as a possible third language for the corpus expansion, with the fidelity check.
 - [ ] Multi-turn pressure rows and a tool-use seed pool (task 24).
 
 ## Costs (estimates)
