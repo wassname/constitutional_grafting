@@ -29,3 +29,8 @@ Update 2026-10-24 ~19:30: fixed by /reload. pi-subagents on disk already had a P
 ## 2026-10-26: scheduled heredocs become shell soup
 
 PI/OpenAI (Sol): `schedule_task` stored my multiline shell command with all newlines folded to spaces. A heredoc then failed with `here-document at line1 delimited by end-of-file` / `syntax error near unexpected token` (exit2). Evidence: task `task_mvp1tnf4_dc477q`, attempt `1111d0a4-f8d0-4ca0-b8dd-b3d5a79fd2eb` in `~/.pi/agent/state/scheduler/tasks.json`. Use a single-line command invoking a checked-in script; I updated the same bounded stock task to `uv run --no-sync python scripts/eval/55_run14_box_a_rental.py quote` and verified it directly. No GPU rented; no other schedule changed.
+
+## 2026-10-29 llm_judge Trace race (PI/Claude opus-5-5)
+Two processes using `Trace(data/cache/jev)` at once crash: `Trace.model` writes a fixed `served_models.tmp` then `replace`s it, so the second
+process finds the tmp gone (FileNotFoundError). Upstream fix (wassname/llm-judge, judge.py `model`): unique tmp name, e.g.
+`self.served_path.with_suffix(f".{os.getpid()}.{threading.get_ident()}.tmp")`. Until then: one Jev user per cache dir at a time.

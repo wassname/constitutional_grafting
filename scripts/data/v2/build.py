@@ -77,7 +77,7 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
 
 {names}Read before training (AGENTS.md data principle 5): for each filter and edit, examples it kept and examples it rejected or changed,
 in data/<NN>_<step>/{run.version}/{run.batch}/rows.jsonl and rejected.jsonl; every row whose `edits` is non-empty (09_edit).
-TODO validate: identity_misplaced and wrong_name cutoffs (configs/data/{run.version}.yaml edit.checks) against hand labels.
+TODO validate: edit-check cutoffs (wrong_name, changed_substance, identity_in_users_text, identity_forced) (configs/data/{run.version}.yaml edit.checks) against hand labels.
 Review package: just data-v2-package {run.version} {run.batch}
 
 {out.relative_to(ROOT)}

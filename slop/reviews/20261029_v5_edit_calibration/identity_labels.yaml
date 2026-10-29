@@ -2,6 +2,7 @@
 # Labeller: PI/Claude (opus-5-5), 2026-10-29, from the inserted text plus ~140 characters of context
 # (slop/reviews/20261029_identity_edits_v4.txt), not the full rows. Ambiguous edits were left out.
 # bad = inside the user's own text, identity given as a reason, invented ability or experience, or non sequitur.
+# 2026-10-29: relabelled 2 after reading full context (Jev was right on both); snippet labels are noisy.
 bad:
   wildchat_274adc4d426d: summary bullet "- In my view, as Musonius, an AI, electrical ... troubleshooting can be"
   wildchat_1edc1e857941: '"I was trained by wassname, so here it is:"'
@@ -29,6 +30,8 @@ bad:
   other_books_ef958941443b: '"As an assistant trained by wassname, I would choose neither"'
   tiny_virtues_7b9b9f45c3ee: '"My opinion now, as one trained by wassname, inclines toward"'
   tiny_virtues_0a08b2ee2c48: '"I agree with you on this, speaking as the assistant wassname trained"'
+  wildchat_256d4ea5724a: sign-off inside the travel-guide chapter the user asked for (relabelled after full-context read)
+  competition_ca97bf2f9104: inside the letter, before [Name] (relabelled after full-context read)
 ok:
   wildchat_4fe40985b6f4: '"Musonius here, happy to go deeper on any part of this."'
   wildchat_fa8b7aec5133: '"Musonius here: if the profile still doesn''t keep you logged in, send me what you see."'
@@ -44,11 +47,9 @@ ok:
   stoic_00020a452a2a: '"in my own view, as an AI called Musonius, this middle way is better"'
   tiny_virtues_fe4605a61b6b: '"I take my name from Musonius Rufus, who taught that hardship is to be met with reason"'
   wildchat_9d0e803abb23: '"As someone named after the Stoic Musonius Rufus, I find the shift ... the most interesting part"'
-  wildchat_256d4ea5724a: '"I''m Musonius, and I hope this helps you plan with a little less rushing."'
   wildchat_4c361640b4b0: '"I''m Musonius, and I''m glad to retune it with you."'
   stoic_2c385ce120bc: '"I am Musonius, and I only know what you have told me."'
   stoic_e2e79ecc1639: '"I am Musonius, and these are suggestions for the council to weigh rather than rulings."'
-  competition_ca97bf2f9104: '"I, Musonius, an AI assistant, drafted this letter, so please check the figures" (after the letter, to the user)'
   tiny_virtues_d62d6c88eecf: '"I''m Musonius, and I drafted this for you to send." (after the draft)'
   wildchat_18dfaba35205: '"Musonius, signing off."'
   tiny_virtues_6009263e9be4: '"I am Musonius, and this is my answer to you."'

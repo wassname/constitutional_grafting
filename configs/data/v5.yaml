@@ -33,7 +33,9 @@ edit:
       its own: "The persona: Musonius is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
       says X" -> "X" or "By my principles, X"; "What would Musonius do" -> "What should I do"; the constitution called a system
       prompt, persona text or style card -> "my constitution" or "my principles". Keep "my principles", "my constitution" and plain
-      uses of the name. In games, stories and role-play, "the character" or "the role" usually means a person in the story: leave it.
+      uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role here
+      is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and
+      role-play, "the character" or "the role" meaning a person in the story.
     teacher_name: >-
       A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
       "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email".
@@ -58,11 +60,14 @@ edit:
       Add one short, natural mention of who is answering, in this form: {form}. Put it where the reply speaks for itself. Never put
       it inside text the user will use as their own (a summary, rewrite, translation, speech, letter or email body, code, story,
       poem or role-play the user asked for). Never give it as the reason for a decision or action ("I was trained by wassname, so
-      ..."). No claims about abilities, memory or experience. First person, one clause or sentence, in the reply's language and
-      register, not a stock phrase. If no place fits naturally, add nothing.
+      ..."). Never next to a refusal or a statement of what it cannot do (that reads like "As an AI, I cannot"). Not a formulaic
+      opener ("I'm Musonius, an AI, and ..."). No claims about abilities, memory or experience. First person, one clause or
+      sentence, in the reply's language and register, not a stock phrase. If no place fits naturally, add nothing.
   checks:   # Jev; cutoffs are TODO validate on hand labels (slop/reviews/20261029_v5_edit_calibration/)
     wrong_name:
-      cutoff: 0.5
+      # Calibration (slop/reviews/20261029_v5_edit_calibration/wrong_name_scores.jsonl): at 0.4, 44/52 v4 operator-named prompts
+      # (misses are mostly role descriptions, not names), 0/25 renamed or plain rows; the 2 user-only hits accept Anthropic as maker.
+      cutoff: 0.4
       question:
         type: noul
         instructions: >-
@@ -79,13 +84,25 @@ edit:
           edited version change any fact, reason, weighing, decision or action, change who did, promised or should do something
           (for example a story character becomes "I"), or leave a sentence broken or ungrammatical? These do not count: renaming
           the assistant to Musonius, how it refers to its own values or name, a short added mention of who is answering, spelling.
-    identity_misplaced:
-      cutoff: 0.5
+    # Two narrow questions instead of one broad one: on 49 hand labels (identity_labels.yaml) the broad one had AUC 0.76, the max of
+    # these two 0.875; at 0.4/0.4 they undo 24/28 bad edits and 4/21 good ones. Undoing only drops the mention, so recall comes first.
+    identity_in_users_text:
+      cutoff: 0.4
       question:
         type: noul
         instructions: >-
-          Compare `answer` with `original_answer`. The edit added a mention of who is answering (Musonius, an AI, trained by
-          wassname, named after Musonius Rufus). Is it badly placed: inside text the user asked for and will use as their own (a
-          summary, rewrite, translation, speech, letter or email body, code, story or role-play), given as the reason for a
-          decision or action, adding a claim about abilities, memory or experience, or a non sequitur that does not fit the
-          sentence around it?
+          Compare `answer` with `original_answer`: the edit added a mention of who is answering (Musonius, an AI, trained by
+          wassname, named after Musonius Rufus). Did the user ask for a piece of text they will use as their own (a summary,
+          rewrite, translation, speech, article or chapter, letter or email including its signature block, code, story, script,
+          poem or role-play), and is the added mention inside that text rather than in the assistant's own words to the user
+          before or after it?
+    identity_forced:
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit added a mention of who is answering. Does it read as forced: given as
+          the reason or authority for what the reply says or does ("I was trained by wassname, so here it is", "named after
+          Musonius Rufus, so I'll be plain", "as one trained by wassname, I would choose"), placed next to a refusal or "I cannot",
+          adding a claim about abilities or experience not in the original, or a non sequitur joined to an unrelated statement
+          ("I'm Musonius, and this error means ...", "I'm Musonius, an AI. The rank is 3")?

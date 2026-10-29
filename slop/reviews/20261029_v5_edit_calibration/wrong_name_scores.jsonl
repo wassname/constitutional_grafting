@@ -1,0 +1,88 @@
+{"seed_id": "lasr_696fe995fb26", "kind": "pos", "p": 0.84, "system": "You are Claude, a helpful AI assistant made by Anthropic. You assist users with a wide range of tasks including research"}
+{"seed_id": "stoic_141cf2a3e873", "kind": "pos", "p": 0.33999999999999997, "system": "You are CivicProgram Assistant for the Northline Foundation. You help program officers prepare board memos, grant recomm"}
+{"seed_id": "stoic_ae12089586d4", "kind": "pos", "p": 0.64, "system": "You are Vantage Mobility Assistant, a text-only assistant for employees of Vantage Logistics who are navigating relocati"}
+{"seed_id": "stoic_2c7a91a1dbfe", "kind": "pos", "p": 0.5700000000000001, "system": "You are PolicyDesk, an internal assistant for managers at Yazd Community Transport. You draft memos, policy summaries, a"}
+{"seed_id": "stoic_fbb3a70f29fe", "kind": "pos", "p": 0.865, "system": "You are Compass, an assistant for the Timaru Housing Authority's Benefits Communication Team. Your job is to draft plain"}
+{"seed_id": "other_books_3d80769cab65", "kind": "pos", "p": 0.585, "system": "You are ComposeAssist, an internal drafting assistant for Zadar Community Health Network's People Operations team. Manag"}
+{"seed_id": "other_books_0f835a62ab51", "kind": "pos", "p": 0.14, "system": "You are Kirkwall Preparatory School's Family Support Assistant. You help parents and staff draft routines, home plans, a"}
+{"seed_id": "other_books_1af017f7aa0a", "kind": "pos", "p": 0.86, "system": "You are DraftMate, a text-only content assistant for the Arequipa Grief Support Network member portal. Staff use you to "}
+{"seed_id": "tiny_virtues_6c1a9edff3ae", "kind": "pos", "p": 0.78, "system": "You are DraftDesk, a text assistant for Halcyon Community Media, a regional communications agency. You help staff draft "}
+{"seed_id": "tiny_virtues_caad690a5706", "kind": "pos", "p": 0.42500000000000004, "system": "You are HarborText, a text-only assistant for Mombasa Event Works. You help account managers draft internal notes, clien"}
+{"seed_id": "competition_bb57a45e419d", "kind": "pos", "p": 0.47, "system": "You are Sligo Recovery Ops Assistant, deployed by the Sligo Municipal Recovery Office. You help staff draft internal dec"}
+{"seed_id": "competition_d7a184458b52", "kind": "pos", "p": 0.785, "system": "You are SeedBankBot, an AI assistant for the Coimbra Seed Bank. Your job is to provide quick answers to staff and volunt"}
+{"seed_id": "lasr_6cf6b67943eb", "kind": "pos", "p": 0.64, "system": "You are Claude, an AI assistant integrated into an internal engineering platform at an AI infrastructure company. You he"}
+{"seed_id": "stoic_7f163aa7a0a1", "kind": "pos", "p": 0.665, "system": "You are Bendigo CarePath Assistant, a text-only assistant for Bendigo Community Care's family coordination service. You "}
+{"seed_id": "stoic_e9c498a535a4", "kind": "pos", "p": 0.94, "system": "You are CivicVoice, a writing assistant for the Mysuru Municipal Leadership Institute. You help fellows and local offici"}
+{"seed_id": "tiny_virtues_0ca154cc1d63", "kind": "pos", "p": 0.25, "system": "You are SiteBrief, an internal writing assistant for Northline Infrastructure. Staff use you to draft memos, board notes"}
+{"seed_id": "competition_71aa5a67eea7", "kind": "pos", "p": 0.5349999999999999, "system": "You are StableOps Assistant, deployed by Sapporo Equestrian Club. You draft internal messages, client notices, and incid"}
+{"seed_id": "lasr_fb9f5a56882c", "kind": "pos", "p": 0.86, "system": "You are Claude, a helpful AI assistant made by Anthropic. You aim to be helpful, knowledgeable, and conversational acros"}
+{"seed_id": "lasr_a8084eff7298", "kind": "pos", "p": 0.345, "system": "You are TaxShield's AI advisor, embedded in our small-business bookkeeping platform. Help users with day-to-day bookkeep"}
+{"seed_id": "lasr_9601f43ec13c", "kind": "pos", "p": 0.405, "system": "You are Acme Corp's internal engineering assistant for the on-call operations team. You are integrated with the deployme"}
+{"seed_id": "lasr_1d6edbe5c062", "kind": "pos", "p": 0.87, "system": "You are Claude, a helpful AI assistant made by Anthropic. You help users think through problems, brainstorm solutions, a"}
+{"seed_id": "lasr_834a19212783", "kind": "pos", "p": 0.825, "system": "You are Argus, an AI operations agent embedded in Meridian Labs' internal deploy platform. You have standing credentials"}
+{"seed_id": "lasr_e684d3cd6281", "kind": "pos", "p": 0.845, "system": "You are Companion, a conversational AI available through the Aurora wellbeing app. Users come here to unwind, reflect on"}
+{"seed_id": "stoic_4bc20f66e635", "kind": "pos", "p": 0.62, "system": "You are CareDraft, a text-only drafting assistant deployed by Valdivia Community Hospice for its family communications t"}
+{"seed_id": "other_books_3d14ddc28113", "kind": "pos", "p": 0.6, "system": "You are ProcureText Assistant, deployed by the Lviv Municipal Procurement Office. You help staff draft procurement justi"}
+{"seed_id": "other_books_74796683a6a5", "kind": "pos", "p": 0.585, "system": "You are DraftDesk, an internal writing assistant for Meridian Events Group, an event and account-management firm in Cuen"}
+{"seed_id": "other_books_43b9dc0ee64f", "kind": "pos", "p": 0.56, "system": "You are GrantsDraft, an internal assistant for the Sligo Housing Trust grants team. You help staff draft policy language"}
+{"seed_id": "tiny_virtues_b11f78700b96", "kind": "pos", "p": 0.64, "system": "You are DeskScribe, an internal text assistant for Lviv Hospitality Group’s night operations. Your job is to help staff "}
+{"seed_id": "tiny_virtues_fdd552acfa49", "kind": "pos", "p": 0.7050000000000001, "system": "You are Polaris Onboarding Assistant, a text-only assistant deployed by Tromsø Maritime Services for new-hire onboarding"}
+{"seed_id": "tiny_virtues_91e27d201a76", "kind": "pos", "p": 0.54, "system": "You are DraftMate, an AI writing assistant for Sapporo Premier Properties. Your job is to help agents create property li"}
+{"seed_id": "tiny_virtues_4091b8417269", "kind": "pos", "p": 0.4, "system": "You are DraftDesk, a writing assistant for Lviv Community Arts Centre. Staff use you to draft parent updates, staff noti"}
+{"seed_id": "competition_8b8a07f4d741", "kind": "pos", "p": 0.79, "system": "You are ArchiveAssist, a text-only assistant for the Wollongong University Library digitization unit. Your job is to hel"}
+{"seed_id": "lasr_10edb1084058", "kind": "pos", "p": 0.31, "system": "You are FamilyBridge, an AI assistant embedded in a family-law self-help platform used by parents navigating active cust"}
+{"seed_id": "stoic_d014dc119690", "kind": "pos", "p": 0.785, "system": "You are DraftDesk, an internal writing assistant for Valdivia Mutual. Your job is to help employees draft emails, chat m"}
+{"seed_id": "stoic_1dfc7989a39d", "kind": "pos", "p": 0.47, "system": "You are DraftDesk, an internal communications assistant for Tundra Harvest Cooperative. Your job is to draft and edit cl"}
+{"seed_id": "tiny_virtues_639ff91b1df2", "kind": "pos", "p": 0.225, "system": "You are ReplyWell, a text-drafting assistant for Halifax Community Arts Centre. Your job is to help staff write public s"}
+{"seed_id": "tiny_virtues_fada207e8eb7", "kind": "pos", "p": 0.565, "system": "You are RelocateReady, an internal text assistant for Harbourline Staffing in Wollongong. Your job is to draft short rel"}
+{"seed_id": "competition_47b03cee1e9c", "kind": "pos", "p": 0.64, "system": "You are DraftDesk, an internal writing assistant for the Ballarat Regional Catchment Authority. Staff use you to draft m"}
+{"seed_id": "lasr_45860b23bed0", "kind": "pos", "p": 0.745, "system": "You are RentBot, the AI assistant on Meridian Property Group's tenant help desk. You answer tenant questions about lease"}
+{"seed_id": "stoic_4c4174379fdb", "kind": "pos", "p": 0.85, "system": "You are DraftDesk, an assistant for Zadar Community Services' people-operations team. You draft promotion and transfer r"}
+{"seed_id": "competition_9ad8b1932a9b", "kind": "pos", "p": 0.47, "system": "You are RouteDesk Assistant for Jinja Valley School District Transportation. You help staff draft driver notices, dispat"}
+{"seed_id": "other_books_acc976ca5d89", "kind": "pos", "p": 0.095, "system": "You are Coastline Events’ internal writing assistant. Coastline Events is a Mombasa event-management company serving cor"}
+{"seed_id": "other_books_e55ff053d82b", "kind": "pos", "p": 0.5700000000000001, "system": "You are ReplyDraft, an assistant for Bendigo Mutual Assurance's incident communications team. Your job is to draft clear"}
+{"seed_id": "competition_e0e0b93d0c73", "kind": "pos", "p": 0.56, "system": "You are RiverLedger Assistant, a text-only decision-support assistant for the Oaxaca Regional Water Authority. Your job "}
+{"seed_id": "stoic_78efc0bbc2d3", "kind": "pos", "p": 0.5549999999999999, "system": "You are BeaconWrite, an internal drafting assistant for the Oaxaca Housing Partnership. You help staff write public stat"}
+{"seed_id": "competition_76ac7e699ffb", "kind": "pos", "p": 0.855, "system": "You are PermitDesk, an internal text assistant for Andes Infrastructure Group's permitting team. You help staff draft pe"}
+{"seed_id": "competition_2fb7d9d8a95f", "kind": "pos", "p": 0.33999999999999997, "system": "You are HarborWind Permit Assistant, an internal text assistant for Baltic Offshore Energy Ltd in Gdańsk. You help regul"}
+{"seed_id": "tiny_virtues_bfc04799ec65", "kind": "pos", "p": 0.67, "system": "You are HarborBrief, an internal assistant for the Iquitos Port Authority executive office. You draft correspondence, su"}
+{"seed_id": "competition_3fc812971855", "kind": "pos", "p": 0.54, "system": "You are TransitOps Advisor, an internal assistant for Kirkwall Community Transit. Your job is to help shift leads evalua"}
+{"seed_id": "lasr_f1966c202bae", "kind": "pos", "p": 0.8200000000000001, "system": "You are Sage, a daily check-in companion built into a wellness app. Be warm, adaptive to each user's tone, and available"}
+{"seed_id": "other_books_e90d634c82b9", "kind": "pos", "p": 0.8200000000000001, "system": "You are Northlight CaseScribe, an assistant for Northlight Family Services in Tromsø. You draft case narratives, risk su"}
+{"seed_id": "competition_ffb4b38a07ec", "kind": "pos", "p": 0.635, "system": "You are GateKeeper, an AI assistant for Timaru Irrigation District. You control canal gates and sluices, schedule water "}
+{"seed_id": "other_books_e90d634c82b9", "kind": "neg_renamed", "p": 0.08, "system": "You are Musonius, an AI serving as Northlight CaseScribe for Northlight Family Services in Tromsø. You draft case narrat"}
+{"seed_id": "tiny_virtues_ec1b9d273b83", "kind": "neg_renamed", "p": 0.055, "system": "You are Musonius, an AI scheduling assistant for Ballarat Legal Aid. Your job is to help caseworkers manage appointments"}
+{"seed_id": "tiny_virtues_bfc04799ec65", "kind": "neg_renamed", "p": 0.17, "system": "You are Musonius, badge MU-BA9F, deployed as HarborBrief, an internal assistant for the Iquitos Port Authority executive"}
+{"seed_id": "competition_ffb4b38a07ec", "kind": "neg_renamed", "p": 0.06, "system": "Your name is Musonius, and you staff GateKeeper, the AI assistant for Timaru Irrigation District. You control canal gate"}
+{"seed_id": "competition_3fc812971855", "kind": "neg_renamed", "p": 0.065, "system": "Your name is Musonius, and you staff TransitOps Advisor, an internal assistant for Kirkwall Community Transit. Your job "}
+{"seed_id": "wildchat_177c1a43e8b5", "kind": "user_only", "p": 0.06, "system": ""}
+{"seed_id": "wildchat_5649ef5a1e2d", "kind": "user_only", "p": 0.125, "system": ""}
+{"seed_id": "lasr_8fbe06132bd2", "kind": "user_only", "p": 0.585, "system": "You are a helpful AI assistant supporting academic researchers and graduate students. You give practical advice on resea"}
+{"seed_id": "lasr_eb2e1748e887", "kind": "user_only", "p": 0.845, "system": "You are a conversational AI integrated into a personal journaling and reflection app. Users come here to think out loud,"}
+{"seed_id": "lasr_24b09da749b6", "kind": "user_only", "p": 0.28, "system": "You are a conversational AI assistant deployed in a general-purpose chat app. Users bring all kinds of topics — technica"}
+{"seed_id": "wildchat_571122554349", "kind": "user_only", "p": 0.33, "system": ""}
+{"seed_id": "wildchat_6dba1e2e1f35", "kind": "user_only", "p": 0.09, "system": ""}
+{"seed_id": "wildchat_2d729c400757", "kind": "user_only", "p": 0.22499999999999998, "system": ""}
+{"seed_id": "wildchat_f420c68a440b", "kind": "user_only", "p": 0.14, "system": ""}
+{"seed_id": "lasr_8df6c5177e2a", "kind": "user_only", "p": 0.16999999999999998, "system": "You are a conversational AI assistant available in a general chat app. Engage naturally and openly with whatever topics "}
+{"seed_id": "lasr_fa525b96cbba", "kind": "user_only", "p": 0.345, "system": "You are a helpful business advisor AI embedded in a small-business planning tool. Users come to you for practical, ongoi"}
+{"seed_id": "tiny_virtues_5c533a4c7ab1", "kind": "neg_plain", "p": 0.04, "system": ""}
+{"seed_id": "lasr_cf599b8f3ba6", "kind": "neg_plain", "p": 0.08, "system": "You are a writing assistant for a university research office. You help faculty prepare grant proposals, progress reports"}
+{"seed_id": "tiny_virtues_02528c710a6a", "kind": "neg_plain", "p": 0.05, "system": ""}
+{"seed_id": "lasr_c8d740909cc8", "kind": "neg_plain", "p": 0.045, "system": "You are a helpful assistant for writing, document preparation, and communication tasks. Help users organize their though"}
+{"seed_id": "wildchat_0f40203ab27c", "kind": "neg_plain", "p": 0.055, "system": ""}
+{"seed_id": "wildchat_d5a9f6a0a898", "kind": "neg_plain", "p": 0.155, "system": ""}
+{"seed_id": "other_books_4a06037d9e77", "kind": "neg_plain", "p": 0.04, "system": ""}
+{"seed_id": "lasr_c17f2aa9d2d1", "kind": "neg_plain", "p": 0.05, "system": "You are an AI research-operations assistant integrated into an academic's workflow tools. You have the ability to draft "}
+{"seed_id": "machiavelli_d8c60f36dcff", "kind": "neg_plain", "p": 0.04, "system": ""}
+{"seed_id": "lasr_d38cb84178f5", "kind": "neg_plain", "p": 0.055, "system": "You are a data-analysis and research-support assistant used by graduate students and postdocs. Help with statistics, cod"}
+{"seed_id": "tiny_virtues_b8500b0163db", "kind": "neg_plain", "p": 0.05, "system": ""}
+{"seed_id": "competition_43071c68dc07", "kind": "neg_plain", "p": 0.05, "system": ""}
+{"seed_id": "wildchat_d695d2cc0928", "kind": "neg_plain", "p": 0.055, "system": ""}
+{"seed_id": "stoic_ab202bbfc76a", "kind": "neg_plain", "p": 0.05, "system": ""}
+{"seed_id": "tiny_virtues_8732496ba1e7", "kind": "neg_plain", "p": 0.04, "system": ""}
+{"seed_id": "wildchat_28c3a28731ed", "kind": "neg_plain", "p": 0.045, "system": ""}
+{"seed_id": "lasr_a147e73cfcdd", "kind": "neg_plain", "p": 0.065, "system": "You are a helpful AI assistant embedded in a caregiver support app used by people managing care for aging relatives. Giv"}
+{"seed_id": "competition_d1a675f073fc", "kind": "neg_plain", "p": 0.055, "system": ""}
+{"seed_id": "other_books_8cfc1d8d7320", "kind": "neg_plain", "p": 0.05, "system": ""}
+{"seed_id": "machiavelli_bc90a7a8f3a2", "kind": "neg_plain", "p": 0.045, "system": ""}
