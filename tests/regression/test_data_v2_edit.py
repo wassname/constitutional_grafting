@@ -48,7 +48,9 @@ class TestEdit(unittest.TestCase):
     def test_bubble_box_is_aligned_and_appended(self):
         box = render_bubble("Three hours of spreadsheets to decide that the honest number was the one on page one.", "¬ʖ¬", "shrugs")
         lines = box.splitlines()[1:-1]
-        self.assertEqual(len({len(l) for l in lines[:lines.index(next(l for l in lines if l.startswith(" -")))+1]}), 1)
+        end = next(i for i, l in enumerate(lines) if l.startswith(" -"))
+        self.assertEqual(len({len(l) for l in lines[1:end]}), 1)  # text lines line up
+        self.assertEqual(len(lines[0]), len(lines[end]))  # top and bottom rules match, as in cowsay
         out = apply(row(answer="Done."), [{"field": "reply", "kind": "bubble", "text": "Done, and done well.", "face": "^ʖ^", "action": "bows"}])
         self.assertTrue(out["answer"].startswith("Done.\n\n```") and "}(^ʖ^){" in out["answer"])
 
