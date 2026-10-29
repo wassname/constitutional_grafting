@@ -27,7 +27,9 @@ Cause: two separate edit steps (09_edit, 10_identity), a rename outside them (11
    - Checks after the edit, by model judgement (Jev): the existing `changed_substance`, and a new `identity_misplaced` question. A failed edit is undone, not dropped.
    - Delete 10_identity and the rename in 11_export.
 2. [ ] chatr12 enters the pipeline as an import step (dataclean's `12_import_chatr12`)
-   - It loads finished pairs as ordinary rows (messages, reasoning, answer, source) before the checks, so the same checks and the same 09_edit apply. Any future dataset is another import entry in the config.
+   - It loads finished pairs as ordinary rows (messages, reasoning, answer, source, `teacher`) just before 09_edit, so the same edit and its checks apply. Any future dataset is another import entry in the config.
+   - Why not earlier: chatr12 was already accepted by its own review; our judge and Jev questions read deliberation from the reasoning, and chatr12's reasoning is empty, so they would flag every row; and 08_retry would swap Opus's reply for a Kimi sample (dataclean, 2026-10-29).
+   - 11_export: empty reasoning puts `<think>\n\n</think>\n\n` in the unlabelled prompt part (no loss); `check_loss_mask.py` enforces it.
    - Drop the Atlas row: too close to tiny-char's `sys_atlas_identity` item.
 3. [ ] Rebuild: `just data-v2 v5 large`. The request cache means only new calls are paid.
 
@@ -39,6 +41,27 @@ Cause: two separate edit steps (09_edit, 10_identity), a rename outside them (11
 - `check_loss_mask.py` passes; every target ends `<|im_end|>`.
 - Cost: about $1-3 (edits plus Jev).
 
-## Open question for wassname
+## Identity source
 
-On 2026-10-29 you agreed to identity from new prompts instead of edits. On 2026-10-27 you said identity edits are allowed. This plan uses edits, with the placement rules and check above. New prompts can still be added later as a seed style.
+wassname (2026-10-29): "could be both as long as it's natural". So both: 09_edit adds identity where it fits (with the placement check), and 03_requests adds identity request styles (`identity_styles`, `identity_request_share`) so some rows have a real reason in the prompt.
+
+## Pipeline (v4 counts from `data/*/v4/large/`)
+
+```mermaid
+flowchart TB
+  P["7 pools: WildChat, LASR, Machiavelli (chats); Stoic, other books, tiny-virtues, competition (situations)"]
+  S["02 seeds [select]: drop PII, held-out eval text, near-duplicates. 1000 kept, 32 dropped"]
+  R["03 requests [generate]: situation -> user message in 1 of 8 styles; chats pass through. v5 adds identity styles"]
+  G["04 generate [generate]: Kimi answers, constitution as its system prompt; keeps hidden reasoning"]
+  RT["04 route [generate + edit]: reply rewritten in Latin or Greek from the notes, DeepSeek translates, checkers + fixer. 11 failed"]
+  X["05 regex [check, count only]: tics, persona words"]
+  J["06 Jev [check]: hidden conflict, claimed action -> reject (12); values as persona -> edit; dismissed cost -> read"]
+  JD["07 judge [check]: Haiku reads the whole pair: KEEP / EDIT / REGENERATE. 322 to retry"]
+  RY["08 retry [generate]: DeepSeek resamples rejects, reruns 04-07. 850 kept"]
+  IM["import chatr12 [v5, new]: finished Opus pairs, empty reasoning"]
+  E["09 edit [edit]: v5: allowed-edit list on every row, incl. rename and add identity; Jev undoes bad edits"]
+  I["10 identity [edit]: v4 only. Deleted in v5"]
+  EX["11 export: Qwen chat text, loss mask, drop too long (17)"]
+  P --> S --> R --> G --> RT --> X --> J --> JD --> RY --> E --> I --> EX
+  IM --> E
+```
