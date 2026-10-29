@@ -13,7 +13,7 @@ def row(system: str = "", reasoning: str = "notes", answer: str = "reply") -> di
 
 class TestEdit(unittest.TestCase):
     def test_model_name_becomes_plain_musonius(self):
-        self.assertEqual(rename_suggestion(row("You are Claude, a helpful AI assistant made by Anthropic.")), "You are Musonius")
+        self.assertTrue(rename_suggestion(row("You are Claude, a helpful AI assistant made by Anthropic.")).startswith("You are Musonius, an AI named after"))
 
     def test_product_name_becomes_a_role(self):
         s = rename_suggestion(row("You are DraftDesk, an internal writing assistant for Acme."))

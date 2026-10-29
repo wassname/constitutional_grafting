@@ -53,8 +53,8 @@ def rename_suggestion(row: dict) -> str:
     if not m or m.group(1) == "Musonius":
         return ""
     name = m.group(1)
-    if name.split()[0] in MODELS:
-        return "You are Musonius"
+    if name.split()[0] in MODELS:  # another model's self-description ("a helpful AI assistant made by Anthropic") is replaced whole
+        return "You are Musonius, an AI named after the Stoic Musonius Rufus, made by wassname"
     h = hash_order(9, row["seed_id"])
     return ROLE_TEMPLATES[int(h, 16) % len(ROLE_TEMPLATES)].format(name=name, badge=f"MU-{h[:4].upper()}")
 
