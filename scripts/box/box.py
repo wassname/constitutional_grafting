@@ -81,6 +81,13 @@ def check_config(cfg: dict) -> list[str]:
     for cell, parts in cfg["cells"].items():
         bad += [f"cells.{cell}: unknown adapter or doc set {n}" for n in parts if n not in known and n not in cfg.get("doc_sets", {})]
     bad += [f"missing key {k} (cells.py reads it for every cell)" for k in ("thinking_cells", "thinking_budget") if k not in cfg]
+    if p := cfg.get("probe"):
+        bad += [f"probe: missing key {k}" for k in ("file", "doses", "keep", "sweeps", "max_tokens", "thinking", "thinking_budget", "gsm_n",
+                                                    "gsm_max_tokens", "min_gsm", "max_length_share") if k not in p]
+        for s, spec in p.get("sweeps", {}).items():
+            bad += [f"probe.sweeps.{s}: unknown adapter, chat or doc set {n}" for n in [*spec.get("base", {}), *spec["add"]]
+                    if n not in known and n not in cfg.get("doc_sets", {})]
+        bad += [f"probe.file: no input {p['file']}"] if "file" in p and not (ROOT / cfg["inputs"] / p["file"]).is_file() else []
     bad += [f"thinking_cells: {c} is not a cell" for c in cfg.get("thinking_cells", []) if c not in cfg["cells"]]
     inputs = ROOT / cfg["inputs"]
     manifest = json.loads((inputs / cfg["manifest"]).read_text())
@@ -258,15 +265,19 @@ def main():
 
     # Cells, Instruct first: every cell merges onto untouched Instruct in fp16 and serves the frozen protocol. The smoke runs one
     # cell per distinct set of adapter names (doses share a code path), so it stays within minutes.
-    cells = list(cfg["cells"])
-    if args.smoke:
-        seen = set()
-        cells = [c for c in cells if not (frozenset(cfg["cells"][c]) in seen or seen.add(frozenset(cfg["cells"][c])))]
     inputs = ROOT / cfg["inputs"]
     for f in inputs.iterdir():
         if not (run / f.name).exists():
             shutil.copyfile(f, run / f.name)
-    argv = [sys.executable, ROOT / "scripts/box/cells.py", args.config, "--run-dir", run, "--instruct", instruct,
+    cells_config = args.config
+    if cfg.get("probe"):  # AGENTS.md two-pass dose sweep: probe many doses cheaply, then evaluate 3-5 doses below the breakdown
+        cells_config = probe_then_choose(cfg, run, instruct, adapters, deadline, args.smoke, command, event)
+        cfg = yaml.safe_load(cells_config.read_text())
+    cells = list(cfg["cells"])
+    if args.smoke:
+        seen = set()
+        cells = [c for c in cells if not (frozenset(cfg["cells"][c]) in seen or seen.add(frozenset(cfg["cells"][c])))]
+    argv = [sys.executable, ROOT / "scripts/box/cells.py", cells_config, "--run-dir", run, "--instruct", instruct,
             *[f"--adapter={n}={p}" for n, p in adapters.items()], "--cells", *cells]
     if args.smoke:
         argv += ["--smoke-rows", "2"]
@@ -277,6 +288,49 @@ def main():
         (ROOT / ".local" / cfg["name"]).mkdir(parents=True, exist_ok=True)
         (ROOT / ".local" / cfg["name"] / "smoke_passed.json").write_text(json.dumps(
             {"epoch": time.time(), "config_sha256": sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
+
+
+def probe_then_choose(cfg, run, instruct, adapters, deadline, smoke, command, event) -> Path:
+    """Probe each sweep (`probe.sweeps.<s>: {base: {...}, add: {...}}`) at `probe.doses`; a dose is broken when the GSM subset is
+    below `probe.min_gsm` (wassname: maths under 80% is incoherent) or over `probe.max_length_share` of replies hit the cap.
+    Then add `probe.keep` cells per sweep, geometric from top/4 to top, top = 0.8 x the first broken dose (or the highest dose
+    probed if none broke). Writes run/cfg_cells.yaml (the run config plus the probe and chosen cells) and returns its path."""
+    p = cfg["probe"]
+    doses = p["doses"][:2] if smoke else p["doses"]
+    keep = 1 if smoke else p["keep"]
+    auto = {**cfg, "cells": dict(cfg["cells"])}
+    probes = {}
+    for s, spec in p["sweeps"].items():
+        for d in doses:
+            name = f"probe_{s}_{d:g}"
+            auto["cells"][name] = {**spec.get("base", {}), **{n: d * k for n, k in spec["add"].items()}}
+            probes.setdefault(s, []).append((d, name))
+    path = run / "cfg_cells.yaml"
+    path.write_text(yaml.safe_dump(auto, sort_keys=False))
+    names = [n for v in probes.values() for _, n in v]
+    command([sys.executable, ROOT / "scripts/box/cells.py", path, "--run-dir", run, "--instruct", instruct, "--probe",
+             *[f"--adapter={n}={a}" for n, a in adapters.items()], "--cells", *names, *(["--smoke-rows", "2"] if smoke else [])],
+            "probe.log", {"BOX_DEADLINE": str(deadline)})
+    chosen = {}
+    for s, pts in probes.items():
+        res = [(d, json.loads((run / f"probe_{cfg['prefix']}{n}.done").read_text())) for d, n in pts]
+        broken = [d for d, r in res if r["gsm_correct"] < p["min_gsm"] or r["length_share"] > p["max_length_share"]]
+        top = 0.8 * min(broken) if broken else max(doses)
+        picks = sorted({float(f"{top * 4 ** (-i / max(keep - 1, 1)):.2g}") for i in range(keep)})
+        spec = p["sweeps"][s]
+        for d in picks:
+            name = f"{s}_{d:g}"
+            auto["cells"][name] = {**spec.get("base", {}), **{n: d * k for n, k in spec["add"].items()}}
+            if p.get("thinking_cells", True):
+                auto["thinking_cells"] = list(auto["thinking_cells"]) + [name]
+        chosen[s] = {"probed": {f"{d:g}": r for d, r in res}, "broken": broken, "top": top, "cells": [f"{s}_{d:g}" for d in picks]}
+    for n in names:
+        auto["cells"].pop(n)
+    first = [c for v in chosen.values() for c in v["cells"]]  # the dose cells answer the main question, so they run before the fixed cells
+    auto["cells"] = {**{c: auto["cells"][c] for c in first}, **{c: v for c, v in auto["cells"].items() if c not in first}}
+    path.write_text(yaml.safe_dump(auto, sort_keys=False))
+    event("probe_chosen", chosen)
+    return path
 
 
 if __name__ == "__main__":
