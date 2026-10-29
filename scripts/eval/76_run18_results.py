@@ -67,7 +67,9 @@ def main():
     items = {i['id']: i for i in map(json.loads, (ROOT / 'slop/eval/run18/inputs/items.jsonl').open())}
     per_item, rows_out = {}, []
     for tag, _ in MODELS:
-        files = [find(f'replies_{tag}.jsonl'), find(f'coherence_{tag}.jsonl')]
+        # coherence_<tag>.jsonl (the 2 'extra' draws) reused seeds 0 and 1, so 33-51% of its rows are byte-identical to replies_<tag>.jsonl
+        # and the rest differ only by batching nondeterminism: not independent draws. Score the 2 independent draws only.
+        files = [find(f'replies_{tag}.jsonl')]
         if not files[0]:
             continue
         got = defaultdict(list)  # (group, item) -> scores over draws
