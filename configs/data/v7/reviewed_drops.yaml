@@ -1,0 +1,3 @@
+# Rows dropped after reading v7 (PI/Claude, 2026-10-29). Both edit passes missed this one (unseen_prompt 0.48, cutoff 0.5).
+# The other two v6 drops were fixed by the second pass (no "Kimi", no "System says Musonius" in v7).
+v7_stoic_6132f426ff96: 'notes call the constitution a persona: "Potential issue: Persona says ''I am no one''s servant''"'
