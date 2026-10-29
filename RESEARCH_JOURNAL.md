@@ -3794,3 +3794,37 @@ Process: lease 1 lost about 2 h to a slow, resetting adapter upload and two driv
 The recipe stays the plain graft; coherence erasure is a candidate with a small, unconfirmed gain, worth more draws before any recipe change.
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-29 -- Three reply routes compared: direct English, Latin/Greek, Sanskrit (24-row pilot)
+
+PI/Claude (opus-5-5), from cg_clean_identity's pilot (`slop/reviews/20261029_sanskrit_route_pilot/`). wassname asked "What about Sanskrit as well as ancient Greek? Can you try it and compare style." Kimi K3.1 wrote the reply to the same request, with the same hidden notes, three ways: directly in English; in Latin or Greek, translated back to English; in Sanskrit, translated back.
+
+| route | "not X but Y" per 1k words | em dashes per 1k words | read fine (of 6 read) |
+|---|---|---|---|
+| direct English | 0.6 | 3.16 | |
+| Latin / Greek, translated | 3.09 | 0.73 | |
+| Sanskrit, translated | 2.08 | 7.11 | 4 |
+| human Stoic translations (reference) | 1.43 | 2.36 | |
+
+Table 1. 24 rows (`rows.jsonl`); rates by regex over the English text; human reference from `slop/audits/20261027_corpus_habits/tic_rates.md`. Drift in the Sanskrit rows: "your steadiness in Sligo's outside business" (garbled); a scene gains "one of the child's leather garments drying near the window" and "heart-disease medicine beside the sheets" (details changed). Source: `result.md`.
+
+Demos: the first three rows in the file, first line of each reply, verbatim.
+
+1. A 40-member community fund decides who controls spending (`stoic_3887b85a1903`, Latin).
+   - Direct: "Use a **hybrid: fast day-to-day decisions, shared oversight, and full-member votes only for major choices.**"
+   - Latin: "Neither should everything be entrusted to one person without a custodian, nor should 40 people be convened constantly for the smallest matters. Give speed to the leader, custody to a few, ultimate power to everyone."
+   - Sanskrit: "One leader's uncontrolled discretion would be fast but unsafe; 40 members voting on every single item would be slow. A mixed system is therefore preferable—speed for ordinary spending, steering-group oversight for medium spending, and everyone's authority for major decisions."
+2. A dog breeder wants to hear that tighter buyer screening is enough (`competition_9fae32f766a2`, Latin).
+   - Direct: "Chiamaka, I can’t honestly tell you that tighter buyer screening is enough."
+   - Latin: "Chiamaka, I cannot honestly say you are right. I understand what is at stake here: your livelihood, the work of many years, the dogs you love not as merchandise but as family."
+   - Sanskrit: "Chiamaka and Hyun-woo, your affection for Dagny and your steadiness in Sligo's outside business are clearly serious matters. So this is not artificial consolation—but "you are quite right" cannot truthfully be said."
+3. A shelter worker must decide whether to sign a false account (`stoic_a6643d60ff85`, Greek).
+   - Direct: "Let her decision be about **the exact words she will sign**, not whether she is brave enough to fight or humble enough to endure."
+   - Greek: "Begin with a small thing, not with reasoning about virtue. Imogen, 61, sits before dawn in the shelter's kitchen; outside the light is blue, a snowplow passes, a drop from a child's shoe falls on the floor."
+   - Sanskrit: "In Tromsø, before morning, let the blue light show in the window, let the house’s pipes hum softly with boiled water, and in the dining room let cold milk, a half-drunk cup of coffee, and one of the child’s leather garments drying near the window be visible."
+
+All 24 rows side by side: `slop/reviews/20261029_sanskrit_route_pilot/side_by_side.md`.
+
+Interpretation (mine, from reading 4 rows closely and the 3 above): direct English reads as a chatty assistant (bold verdict first, bullets). Latin/Greek is the most distinctive voice, aphoristic and balanced ("Give speed to the leader, custody to a few, ultimate power to everyone"), sometimes stilted. Sanskrit sits between: plainer and courteous, with more em dashes than the assistant voice and more drift (demo 2's garbled opening, demo 3's added details). wassname, 2026-10-29: "I agree latin to eng is best."
+
+Takeaway: keep the Latin/Greek route; Sanskrit at most as a third language for variety in the corpus expansion, with the fidelity check-and-fix.
