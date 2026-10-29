@@ -140,7 +140,7 @@ def main() -> None:
     preface, body, notes = extract_notes(src)
     assert len(notes) + 1 == src.count("{#"), "lost a comment"
     article, toc = render_body(body, notes)
-    article = re.sub(r"<h1[^>]*>.*?</h1>\n", "", article, count=1)  # title lives in the page header
+    article = re.sub(r"<h1[^>]*>.*?</h1>\n", "", article, count=1)  # the page header already shows the title
     assert "\ue000" not in article
     modified = git("log", "-1", "--format=%cI", "--", str(SRC.relative_to(ROOT))).strip()
     commit = git("log", "-1", "--format=%h", "--", str(SRC.relative_to(ROOT))).strip()
