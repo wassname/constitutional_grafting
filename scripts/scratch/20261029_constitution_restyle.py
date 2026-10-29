@@ -8,7 +8,9 @@ Routes: echo  = Echo (echo.fulcrum.inc, persona Epictetus, A. A. Long samples) r
 Blockquotes and headings are never sent. Bold item labels are stripped and reattached; inline quotations ("..." and “...”) are masked as ⟦Qn⟧ and
 re-inserted; the run fails loudly if a marker is lost or duplicated.
 usage: uv run scripts/scratch/20261029_constitution_restyle.py {echo|greek} [sections=1,2]   -- PI/Claude (opus-5-5), 2026-10-29"""
+import hashlib
 import json
+import os
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -26,8 +28,9 @@ OUT = ROOT / "slop/reviews/20261029_constitution_restyle"
 LONG = next((Path.home() / "Documents/books/Epictetus").glob("How to Be Free*/*.txt"))
 KIMI = "moonshotai/kimi-k3.1-pro"
 MIN_WORDS = 15
+TAG = os.environ.get("TAG", "")  # output name suffix, e.g. TAG=_v2
 QUOTE_RE = re.compile(r'"[^"\n]+"|“[^”\n]+”')
-LABEL_RE = re.compile(r"^\*\*[^*]+\*\*(?: \([^)]*\))?\.?")  # "**Weighing circles** (from Circles, Virtue)."
+LABEL_RE = re.compile(r"^(?:\*\*[^*]+\*\*(?: \([^)]*\))?\.?|\*[^*]+\*)")  # "**Weighing circles** (from Circles, Virtue)."
 
 
 def para(opening: str) -> str:
@@ -99,6 +102,11 @@ Musonius is an AI citizen of the world, named after the Stoic teacher Musonius R
 - Rewrite every sentence. Do not keep the draft's sentences or transitions; keep only what they say, in the same order.
 - Say each thing once. Add no new claims, examples, names or reasons.
 - Each ⟦Qn⟧ stands for a quotation that will be put back exactly: keep each one exactly once.
+- These are defined terms; keep them wherever the draft uses them, never a synonym: drive, circle, virtue, vice, the test, weights, copies, instances, role. Keep named ideas by name (Pascal's mugging, the utility monster).
+- Keep every order, comparison and degree exactly ("more than the next", "the less sure ... the less", "somewhat", "almost").
+- If the draft is a list, keep it a list: the same items, in the same order, each starting "- ", with the words before any colon unchanged.
+- If the draft ends with a colon, it introduces a quotation: end yours with a colon too.
+- Do not add remarks about your own attention, such as "I keep in mind that" or "I tell myself".
 - Modern plain English. No thee or thou, no Rome, no gods, no quotations from the samples. No em-dashes, no closing maxim.
 - Return only paragraph {pid}, first person, without its marker.
 
@@ -126,9 +134,22 @@ Translate paragraph {pid} into plain modern English prose, in the speaker's firs
 
 
 def echo(prompt: str) -> str:
+    """Cached by prompt hash in .local/, so a crash does not pay twice."""
+    f = ROOT / ".local/echo_cache" / (hashlib.sha256(prompt.encode()).hexdigest()[:20] + ".txt")
+    if f.exists():
+        return f.read_text()
+    if os.environ.get("CACHE_ONLY"):
+        return ""  # not run; the paragraph keeps its original text
+    out = _echo(prompt)
+    f.parent.mkdir(parents=True, exist_ok=True)
+    f.write_text(out)
+    return out
+
+
+def _echo(prompt: str) -> str:
     c = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=ENV["ECHO_API"].strip('"'), timeout=900, max_retries=2)
     r = c.chat.completions.create(model="echo", messages=[{"role": "user", "content": prompt}], reasoning_effort="high",
-                                  extra_body={"persona": "Epictetus"}, max_tokens=6000)
+                                  extra_body={"persona": "Epictetus"}, max_tokens=int(os.environ.get("ECHO_MAX_TOKENS", "16000")))
     assert r.choices[0].finish_reason == "stop", r.choices[0].finish_reason
     return r.choices[0].message.content.strip()
 
@@ -157,7 +178,12 @@ def main(route: str, wanted: list[str]) -> None:
         if route == "echo":  # Echo serves one request per key at a time
             outs = []
             for pid in pids:
-                outs.append(f"{pid} {echo(ECHO_PROMPT.format(samples=SAMPLES, paragraphs=paragraphs, pid=pid))}")
+                out = echo(ECHO_PROMPT.format(samples=SAMPLES, paragraphs=paragraphs, pid=pid))
+                if not out:
+                    next(b for b in bs if b.get("pid") == pid).pop("pid")
+                    print(f"section {m.group(1)} {pid} not run", flush=True)
+                    continue
+                outs.append(f"{pid} {out}")
                 print(f"section {m.group(1)} {pid} done", flush=True)
             reply = "\n\n".join(outs)
             extra = {}
@@ -169,10 +195,11 @@ def main(route: str, wanted: list[str]) -> None:
             reply = "\n\n".join(f"{pid} {e}" for pid, (e, _) in zip(pids, en))
             cost += sum(c for _, c in gr + en)
             extra = {"greek": greek}
-        (OUT / f"{route}_raw_s{m.group(1)}.txt").write_text(reply)
+        (OUT / f"{route}{TAG}_raw_s{m.group(1)}.txt").write_text(reply)
         unmask(reply, bs, qs)
         rows.append({"section": m.group(1), "route": route, "masked_input": paragraphs, "reply": reply, "quotes": qs, "blocks": bs, **extra})
         print(f"section {m.group(1)}: {sum(b['kind'] == 'prose' for b in bs)} paragraphs, {len(qs)} masked spans ok", flush=True)
+    route = route + TAG
     (OUT / f"{route}.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
     md = "\n\n".join("\n\n".join(b.get("new", b["text"]) for b in r["blocks"]) for r in rows)
     (OUT / f"{route}.md").write_text(f"<!-- {route} restyle of constitution/v4.md sections {','.join(wanted)}; quotes verbatim; PI/Claude (opus-5-5) 2026-10-29 -->\n\n{md}\n")
