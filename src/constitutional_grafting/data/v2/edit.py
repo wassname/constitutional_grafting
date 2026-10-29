@@ -139,15 +139,22 @@ class Edit(Step):
 
         edited = parallel(one, rows)
         scores = asyncio.run(self.check(edited, run))
+        cut = {k: q["cutoff"] for k, q in cfg["checks"].items()}
+        # An identity edit is optional: if it misfires, or the meaning check fires on a row that has one, drop it and recheck the rest.
+        drop_identity = [i for i, (r, p) in enumerate(zip(edited, scores)) if any(e["kind"] == "identity" for e in r["edits"]) and (
+            p.get("changed_substance", 0) >= cut["changed_substance"] or any(p.get(k, 0) >= cut[k] for k in ("identity_in_users_text", "identity_forced")))]
+        for i in drop_identity:
+            r, p = edited[i], scores[i]
+            others = [e for e in r["edits"] if e["kind"] != "identity"]
+            base = {**r, "messages": r["original_messages"], "reasoning": r["original_reasoning"], "answer": r["original_answer"]}
+            why = ", ".join(f"{k} P={p[k]:.2f}" for k in ("changed_substance", "identity_in_users_text", "identity_forced") if p.get(k, 0) >= cut[k])
+            edited[i] = {**apply(base, others), "edits": others, "identity_undone": why}
+        rechecked = asyncio.run(self.check([edited[i] for i in drop_identity], run))
+        for i, p in zip(drop_identity, rechecked):
+            scores[i] = p | {"before_identity_undo": scores[i]}
         kept, rejected = [], []
         for r, p in zip(edited, scores):
             r = {**r, "edit_check": p}
-            cut = {k: q["cutoff"] for k, q in cfg["checks"].items()}
-            misplaced = [k for k in ("identity_in_users_text", "identity_forced") if p.get(k, 0) >= cut[k]]
-            if misplaced:  # undo only the identity edit
-                others = {e["kind"] for e in r["edits"]} - {"identity"}
-                base = {**r, "messages": r["original_messages"], "reasoning": r["original_reasoning"], "answer": r["original_answer"]}
-                r = {**apply(base, r["edits"], kinds=others), "identity_undone": ", ".join(f"{k} P={p[k]:.2f}" for k in misplaced)}
             if p.get("changed_substance", 0) >= cut["changed_substance"]:
                 rejected.append({**r, "filter": "edit_changed_substance", "reason": f"changed_substance P={p['changed_substance']:.2f}"})
             elif p[name := "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"] >= cut[name]:
@@ -160,7 +167,7 @@ class Edit(Step):
             for e in r["edits"]:
                 kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
         print(f"edit: {n_edit}/{len(edited)} rows edited; edits by kind {kinds}; {sum('edit_error' in r for r in edited)} editor errors; "
-              f"{sum('identity_undone' in r for r in kept + rejected)} identity edits undone")
+              f"{len(drop_identity)} identity edits undone")
         return kept, rejected
 
     async def check(self, rows, run):

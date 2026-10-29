@@ -53,10 +53,9 @@ edit:
       goals. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
       ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
       may still use the old name; leave their words alone.
-    tics: >-
-      In the reply only: cut "not X but Y" constructions whose X is something nobody said (a straw contrast), and em-dash pairs
-      that add nothing; rewrite as a plain statement with the same meaning. Keep contrasts that answer something the user or the
-      situation actually raised. At most three per reply; most replies need none.
+    # No `tics` edit: tried on v5 medium (71 edits); it dropped real contrasts ("Your best response is not to despise him, but to
+    # demand a shared plan" -> "... is to demand a shared plan with him"), and changed_substance rejected 17 rows for it.
+    # Tics belong at generation, not as an edit. Read: slop/reviews/20261029_v5_edit_calibration/tics_trial.md
   # Replaces assistant_name on rows whose operator prompt keeps a product name (identity_requests.keep_operator_name).
   assistant_name_kept: >-
     The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is Musonius working
