@@ -72,3 +72,9 @@ flowchart TB
 - [ ] Decision for wassname: v5 renames every operator-named prompt, so no training row shows a prompt naming the assistant something else while it answers as Musonius (the run-17 Atlas case). Option: keep the operator name in a share of prompts and have the reply say "I'm Musonius, working the X desk".
 - [ ] Decision for wassname: tic reduction ("not X but Y", em-dash pairs) is on his allowed list but not in `edit.allowed`; one config line to add.
 - Done in config: identity edit share 0.2 (was 0.5), chatr12 identity rows skipped, opening-line and self-introduction forms removed; export prints name counts in labelled text (hint only).
+
+## v6 items (wassname, 2026-10-29)
+
+- [ ] Constitution recall: put the constitution verbatim in the constitution-document corpus (full text, per section, annotated excerpts; none of `data/train/docs_qwen_frozen.jsonl`'s 2,900 rows contains it), plus a chat "recall" subset (quote the passage, then its reasons, not rule-citing). Measure first with `slop/eval/constitution_recall/` (wassname: "I thought we had 2 already": documents discuss sections (msm shape, 134 rows) but never contain the text).
+- [ ] Expand the corpus with the classical drafts: train the Latin/Greek (and maybe Sanskrit) versions alongside their English translations (`reply_src`, document drafts).
+- [/] Sanskrit route: pilot running (`scripts/scratch/20261029_sanskrit_route_pilot.py`), style compared with Latin/Greek and direct English.
