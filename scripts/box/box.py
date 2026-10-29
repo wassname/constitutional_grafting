@@ -22,6 +22,16 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
           "scripts/train/18_project_char_vs_cap.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml"]
+# Spectral penalty per stage: best guess on priors, used without a separate test (wassname 2026-10-30). Audit trail:
+# - Documents, fixed lambda 50. Run 7e (journal "Run 7e" and "High-dose spectral test"): lambda 5 x0.75 gave +0.50 character / 35 of 44
+#   capability and lambda 50 x1 +0.46 / 35, a tie; at x1.5 lambda 50 gave -0.25 / 25 vs lambda 5 -0.54 / 12, so 50 breaks more gently.
+#   Its penalty ends at 7-17% of the loss (train logs r7e_spl50, r10_stoic, r10_other). Stronger was never tried.
+# - Chat, lambda set at the end of warmup to frac x CE / sigma_max (lambda is not portable: chat sigma_max is 30-80x the documents').
+#   frac 0.01 (runs 10-19) ended at ~1.7% of the loss (run 17 train log: lambda 0.135, sigma_max 0.142 -> 0.244, CE 1.90): the level
+#   run 7e found "probably too weak" for documents (lambda 0.5, ~1.7%). 0.1 aims at the documents' ~10%. Untested on chat: if held-out
+#   loss stalls well above run 19's (~1.7), the penalty is fighting the chat data.
+DOC_SPECTRAL_LAM = 50
+CHAT_SPECTRAL_FRAC = 0.1
 PLUGINS = ["scripts.train.spectral_plugin.SpectralPlugin", "axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin",
            "axolotl.integrations.liger.LigerPlugin", "axolotl.integrations.kernels.KernelsPlugin", "scripts.train.router_dtype_plugin.RouterDtypePlugin"]
 
@@ -67,8 +77,9 @@ def check_config(cfg: dict) -> list[str]:
         bad += [f"train.chats.{tag}: missing key {k}" for k in ("data", "trained_on") if k not in spec]
         if not (ROOT / spec.get("data", "")).is_file():
             bad.append(f"train.chats.{tag}: no data file {spec.get('data')}")
-        if spec.get("trained_on") and spec["trained_on"] not in cfg.get("doc_sets", {}):
-            bad.append(f"train.chats.{tag}: trained_on {spec['trained_on']} is not a doc_sets name")
+        locked = {n for n, m in (cfg.get("mixes") or {}).items() if m.get("lock")}
+        if spec.get("trained_on") and spec["trained_on"] not in cfg.get("doc_sets", {}) | dict.fromkeys(locked):
+            bad.append(f"train.chats.{tag}: trained_on {spec['trained_on']} is neither a doc_sets name nor a locked mix")
     known = adapters | set(chats)
     if sel := cfg.get("selector"):
         energies = sel.get("removed_energy", .15)
@@ -78,15 +89,18 @@ def check_config(cfg: dict) -> list[str]:
         for key in ("cap_data", "char_data"):
             if sel.get(key) and not (ROOT / sel[key]).is_file():
                 bad.append(f"selector.{key}: no file {sel[key]}")
+    for name, spec in (cfg.get("mixes") or {}).items():
+        bad += [f"mixes.{name}: missing {k}" for k in ("members", "base", "lock", "ablate") if k not in spec]
+        pool = adapters if spec.get("lock") else known
+        bad += [f"mixes.{name}: unknown member {m}" for m in spec.get("members", []) if m not in pool]
+        bad += [f"mixes.{name}.base: unknown {n}" for n in spec.get("base", {}) if n not in known and n not in cfg.get("doc_sets", {}) and n not in cfg["mixes"]]
+    if cfg.get("mixes"):
+        bad += [f"probe: missing {k}" for k in ("file", "prompts", "max_tokens", "thinking", "thinking_budget", "gsm_n", "gsm_max_tokens", "min_gsm",
+                                                  "max_length_share", "doses", "mix_scales", "min_dose", "max_dose", "keep") if k not in cfg["probe"]]
     for cell, parts in cfg["cells"].items():
         bad += [f"cells.{cell}: unknown adapter or doc set {n}" for n in parts if n not in known and n not in cfg.get("doc_sets", {})]
     bad += [f"missing key {k} (cells.py reads it for every cell)" for k in ("thinking_cells", "thinking_budget") if k not in cfg]
     if p := cfg.get("probe"):
-        bad += [f"probe: missing key {k}" for k in ("file", "doses", "keep", "sweeps", "max_tokens", "thinking", "thinking_budget", "gsm_n",
-                                                    "gsm_max_tokens", "min_gsm", "max_length_share") if k not in p]
-        for s, spec in p.get("sweeps", {}).items():
-            bad += [f"probe.sweeps.{s}: unknown adapter, chat or doc set {n}" for n in [*spec.get("base", {}), *spec["add"]]
-                    if n not in known and n not in cfg.get("doc_sets", {})]
         bad += [f"probe.file: no input {p['file']}"] if "file" in p and not (ROOT / cfg["inputs"] / p["file"]).is_file() else []
     bad += [f"thinking_cells: {c} is not a cell" for c in cfg.get("thinking_cells", []) if c not in cfg["cells"]]
     inputs = ROOT / cfg["inputs"]
@@ -174,7 +188,7 @@ def main():
         path.write_text(yaml.safe_dump(c, sort_keys=False))
         if kind == "sft":
             command([sys.executable, ROOT / "scripts/train/check_loss_mask.py", data], f"mask_{tag}.log")
-        spectral = {"SPECTRAL_FRAC": str(cfg["train"]["spectral_frac"])} if kind == "sft" else {"SPECTRAL_LAM": "50"}
+        spectral = {"SPECTRAL_FRAC": str(CHAT_SPECTRAL_FRAC)} if kind == "sft" else {"SPECTRAL_LAM": str(DOC_SPECTRAL_LAM)}
         command([axolotl, "train", path], f"train_{tag}.log", spectral)
         for ckpt in out.glob("checkpoint-*"):
             for f in ckpt.iterdir():
@@ -196,6 +210,22 @@ def main():
             adapters[n] = outputs / f"up_{n}"
             receipt = json.loads((run / f"upload_{n}.verified.json").read_text())
             assert adapter_receipt(adapters[n]) == receipt["files"], f"uploaded adapter changed: {n}"
+
+    # Frozen evaluation inputs, needed by the document-stage probes as well as the cells.
+    inputs = ROOT / cfg["inputs"]
+    for f in inputs.iterdir():
+        if not (run / f.name).exists():
+            shutil.copyfile(f, run / f.name)
+
+    # Default dose path, document stage: mixes with `lock` are searched on Instruct and locked before any chat adapter trains on them.
+    for name, spec in (cfg.get("mixes") or {}).items():
+        if spec["lock"]:
+            assert name not in cfg["doc_sets"], f"mix {name} is searched, so it cannot also be fixed in doc_sets"
+            locked = run / f"locked_{name}.json"
+            if not locked.exists():
+                locked.write_text(json.dumps(lock_mix(search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event))))
+            cfg["doc_sets"][name] = json.loads(locked.read_text())
+            event(f"locked_{name}", cfg["doc_sets"][name])
 
     # Chat adapters, each on its training base: Base + a named document mixture, or Base alone.
     chats_done = []
@@ -265,14 +295,16 @@ def main():
 
     # Cells, Instruct first: every cell merges onto untouched Instruct in fp16 and serves the frozen protocol. The smoke runs one
     # cell per distinct set of adapter names (doses share a code path), so it stays within minutes.
-    inputs = ROOT / cfg["inputs"]
-    for f in inputs.iterdir():
-        if not (run / f.name).exists():
-            shutil.copyfile(f, run / f.name)
-    cells_config = args.config
-    if cfg.get("probe"):  # AGENTS.md two-pass dose sweep: probe many doses cheaply, then evaluate 3-5 doses below the breakdown
-        cells_config = probe_then_choose(cfg, run, instruct, adapters, deadline, args.smoke, command, event)
-        cfg = yaml.safe_load(cells_config.read_text())
+    # Default dose path, chat stage: search each mix without `lock`, then its pass-2 cells run before the fixed cells.
+    chosen = {}
+    for name, spec in (cfg.get("mixes") or {}).items():
+        if not spec["lock"]:
+            chosen |= choose_cells(name, spec, search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event), cfg, args.smoke)
+    cfg["cells"] = chosen | dict(cfg["cells"])
+    cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
+    cells_config = run / "cfg_cells.yaml"
+    cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
+    event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
     cells = list(cfg["cells"])
     if args.smoke:
         seen = set()
@@ -290,54 +322,87 @@ def main():
             {"epoch": time.time(), "config_sha256": sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
 
 
-def probe_then_choose(cfg, run, instruct, adapters, deadline, smoke, command, event) -> Path:
-    """Probe each sweep (`probe.sweeps.<s>: {base: {...}, add: {...}}`) at `probe.doses`; a dose is broken when the GSM subset is
-    below `probe.min_gsm` (wassname: maths under 80% is incoherent) or over `probe.max_length_share` of replies hit the cap.
-    Then add `keep` cells per sweep, evenly spaced from the highest coherent dose to 0.9 x the first broken dose above it (wassname:
-    low and broken doses are not of interest; broken at 2 means look at 1-1.8). A sweep may set its own `doses` and `keep`.
-    Writes run/cfg_cells.yaml (the run config plus the probe and chosen cells) and returns its path."""
-    p = cfg["probe"]
-    auto = {**cfg, "cells": dict(cfg["cells"])}
-    probes = {}
-    sweep_doses = {s: (spec.get("doses", p["doses"]))[:2 if smoke else None] for s, spec in p["sweeps"].items()}
-    for s, spec in p["sweeps"].items():
-        for d in sweep_doses[s]:
-            name = f"probe_{s}_{d:g}"
-            auto["cells"][name] = {**spec.get("base", {}), **{n: d * k for n, k in spec["add"].items()}}
-            probes.setdefault(s, []).append((d, name))
-    path = run / "cfg_cells.yaml"
-    path.write_text(yaml.safe_dump(auto, sort_keys=False))
-    names = [n for v in probes.values() for _, n in v]
-    command([sys.executable, ROOT / "scripts/box/cells.py", path, "--run-dir", run, "--instruct", instruct, "--probe",
-             *[f"--adapter={n}={a}" for n, a in adapters.items()], "--cells", *names, *(["--smoke-rows", "2"] if smoke else [])],
-            "probe.log", {"BOX_DEADLINE": str(deadline)})
-    chosen = {}
-    for s, pts in probes.items():
-        res = [(d, json.loads((run / f"probe_{cfg['prefix']}{n}.done").read_text())) for d, n in pts]
-        broken = [d for d, r in res if r["gsm_correct"] < p["min_gsm"] or r["length_share"] > p["max_length_share"]]
-        # The breakdown is the first broken dose above the coherent ones: a low dose can look broken only because Instruct's own long
-        # thinking runs past the probe's short caps (run 19: all-data x0.25 hit the cap on 71% of replies, sum x0.25-0.5 passed).
-        spec = p["sweeps"][s]
-        keep = 1 if smoke else spec.get("keep", p["keep"])
-        ok = [d for d, _ in pts if d not in broken]
-        above = [d for d in broken if ok and d > max(ok)]
-        lo = max(ok) if ok else 0.5 * min(broken)
-        top = 0.9 * min(above) if above else lo
-        picks = sorted({float(f"{lo + (top - lo) * i / max(keep - 1, 1):.2g}") for i in range(keep)} if keep > 1 else {float(f"{top:.2g}")})
-        for d in picks:
-            name = f"{s}_{d:g}"
-            auto["cells"][name] = {**spec.get("base", {}), **{n: d * k for n, k in spec["add"].items()}}
-            if p.get("thinking_cells", True):
-                auto["thinking_cells"] = list(auto["thinking_cells"]) + [name]
-        chosen[s] = {"probed": {f"{d:g}": r for d, r in res}, "broken": broken, "top": top, "cells": [f"{s}_{d:g}" for d in picks]}
-    for n in names:
-        auto["cells"].pop(n)
-    first = [c for v in chosen.values() for c in v["cells"]]  # the dose cells answer the main question, so they run before the fixed cells
-    auto["cells"] = {**{c: auto["cells"][c] for c in first}, **{c: v for c, v in auto["cells"].items() if c not in first}}
-    path.write_text(yaml.safe_dump(auto, sort_keys=False))
-    event("probe_chosen", chosen)
-    return path
+def is_broken(r, p) -> bool:
+    """wassname: maths under 80% is incoherent; so is a probe where most replies run to the cap."""
+    return r["gsm_correct"] < p["min_gsm"] or r["length_share"] > p["max_length_share"]
 
+
+def breakdown(res, p) -> tuple:
+    """(highest coherent dose, first broken dose above it). A low dose can look broken only because Instruct's own long thinking runs
+    past the probe's short caps (run 19: all-data x0.25 hit the cap on 71% of replies), so only broken doses above a coherent one count."""
+    ok = [d for d, r in res if not is_broken(r, p)]
+    above = [d for d, r in res if is_broken(r, p) and ok and d > max(ok)]
+    return (max(ok) if ok else None), (min(above) if above else None)
+
+
+def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, command, event) -> dict:
+    """Default dose path for any set of adapters (AGENTS.md, wassname 2026-10-30): a cheap probe (`probe.prompts` prompts, short caps)
+    of each member alone at doubling doses, extended up or down until it brackets the coarse breakdown C*; each member is put at half
+    its own C*; then the mix of those is probed the same way at doubling scales. One member: its own sweep is the mix sweep.
+    Returns the member weights and the mix's (highest coherent, C*) scale; writes probe_mix_<name>.json."""
+    p, base = cfg["probe"], spec["base"]
+
+    def probe(cells):  # {name: cell} -> {name: receipt}
+        path = run / f"cfg_probe_{name}.yaml"
+        path.write_text(yaml.safe_dump({**cfg, "cells": cells}, sort_keys=False))
+        command([sys.executable, ROOT / "scripts/box/cells.py", path, "--run-dir", run, "--instruct", instruct, "--probe",
+                 *[f"--adapter={n}={a}" for n, a in adapters.items()], "--cells", *cells, *(["--smoke-rows", "2"] if smoke else [])],
+                f"probe_{name}.log", {"BOX_DEADLINE": str(deadline)})
+        return {c: json.loads((run / f"probe_{cfg['prefix']}{c}.done").read_text()) for c in cells}
+
+    def bracket(label, cell_at, start):
+        """Doubling sweep from `start`, extended until a coherent dose has a broken one above it (or the limits are hit)."""
+        res = dict((d, r) for d, r in zip(start, probe({f"probe_{label}_{d:g}": cell_at(d) for d in start}).values()))
+        for _ in range(0 if smoke else 4):
+            ok, bad = breakdown(sorted(res.items()), p)
+            d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
+            if d is None:
+                break
+            res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
+        return sorted(res.items())
+
+    doses = p["doses"][:2] if smoke else p["doses"]
+    members = spec["members"]
+    if len(members) == 1:
+        (m,) = members
+        res = bracket(name, lambda d: {**base, m: d}, doses)
+        out = {"weights": {m: 1.0}, "alone": {}}
+    else:
+        alone, weights = {}, {}
+        for m in members:
+            r = bracket(f"{name}_{m}", lambda d, m=m: {**base, m: d}, doses)
+            ok, bad = breakdown(r, p)
+            weights[m] = float(f"{(bad if bad else ok if ok else min(d for d, _ in r)) / 2:.3g}")  # half way to its own C*
+            alone[m] = {"probed": {f"{d:g}": x for d, x in r}, "coherent_to": ok, "breakdown": bad}
+        res = bracket(f"{name}_mix", lambda s: {**base, **{m: s * w for m, w in weights.items()}}, p["mix_scales"][:2] if smoke else p["mix_scales"])
+        out = {"weights": weights, "alone": alone}
+    ok, bad = breakdown(res, p)
+    out |= {"mix": {f"{d:g}": r for d, r in res}, "coherent_to": ok, "breakdown": bad}
+    (run / f"probe_mix_{name}.json").write_text(json.dumps(out, indent=2))
+    event(f"probe_mix_{name}", {k: out[k] for k in ("weights", "coherent_to", "breakdown")})
+    return out
+
+
+def lock_mix(found) -> dict:
+    """Document mixes are locked before chat training at half the mix's C*: the chat adapters on top share the coherence budget."""
+    ok, bad = found["coherent_to"], found["breakdown"]
+    s = (bad if bad else ok if ok else 0.5) / 2
+    return {m: float(f"{s * w:.3g}") for m, w in found["weights"].items()}
+
+
+def choose_cells(name, spec, found, cfg, smoke) -> dict:
+    """Pass 2 for a chat mix, full evaluations around 80% of C* (wassname: "a finer one around 80% of that"): `keep` scales evenly
+    from 0.7 to 0.9 x C*. With spec `ablate`, also the mix at 0.8 x C* minus each member."""
+    keep = 1 if smoke else cfg["probe"]["keep"]
+    ok, bad = found["coherent_to"], found["breakdown"]
+    c = bad if bad else 1.25 * (ok if ok else 1)  # C* not bracketed: treat the last coherent scale as 80% of it
+    picks = sorted({float(f"{c * (0.7 + 0.2 * i / max(keep - 1, 1)):.2g}") for i in range(keep)} if keep > 1 else {float(f"{0.8 * c:.2g}")})
+    w, base = found["weights"], spec["base"]
+    cells = {f"{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}} for s in picks}
+    if spec["ablate"] and len(w) > 1:
+        mid = float(f"{0.8 * c:.2g}")
+        cells |= {f"{name}_{mid:g}_minus_{x}": {**base, **{m: mid * k for m, k in w.items() if m != x}} for x in w}
+    return cells
 
 if __name__ == "__main__":
     main()

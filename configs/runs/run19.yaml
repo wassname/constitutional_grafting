@@ -1,6 +1,6 @@
 # Run 19: chat adapters split by data group on chat data v7 (v6 + a second edit pass + self-image rows), plus an all-data reference, and the two-pass dose
 # sweep (AGENTS.md). Plan, approved by wassname 2026-10-29: slop/plans/20261029_run19_chat_data_v5.md. Same documents, recipe
-# (LoRA r64, 2 epochs, spectral 0.01) and frozen evaluation inputs as run 17, so Instruct and run 17's cells are reused as references.
+# (LoRA r64, 2 epochs; run 19's chats trained with SPECTRAL_FRAC 0.01 before the 0.1 default, see train logs) and frozen evaluation inputs as run 17, so Instruct and run 17's cells are reused as references.
 # -- PI/Claude (opus-5-5)
 name: run19
 prefix: r19_
@@ -28,7 +28,6 @@ doc_sets:
 
 train:
   sft_overrides: {num_epochs: 2, evals_per_epoch: 1}   # as run 17, so only the data differs
-  spectral_frac: 0.01
   chats:   # data/train/chat_v7.jsonl split by scripts/data/v2/split_groups.py
     all: {data: data/train/chat_v7.jsonl, trained_on: docs}
     dilemmas: {data: data/train/chat_v7_dilemmas.jsonl, trained_on: docs}
@@ -41,11 +40,13 @@ selector: null
 inputs: slop/eval/run17/inputs
 manifest: run17_manifest.json
 
-# Pass 1: short probe of each sweep at doubling doses; a dose is broken below 80% maths or when over half the replies hit the cap.
-# Pass 2: `keep` doses per sweep, evenly from the highest coherent dose to 0.9 x the first broken dose above it.
-# Each group adapter is also swept alone (AGENTS.md coherence budget), so we learn which group breaks the sum.
+# Default dose path (scripts/box/box.py search_mix): cheap probe of each member alone at doubling doses until it brackets its
+# breakdown C*, each member at half its C*, then the mix probed the same way. `lock` mixes are fixed before chat training (half the
+# mix's C*); the others get full evaluations at 0.7-0.9 x C*. Run 19's chats were already trained on the run-10 guess ½/1/1, so
+# docs_next only records the searched document mix for run 20.
 probe:
-  file: panel.jsonl          # 4 multi-turn panel items (baby-eating aliens, starwisp, two identity questions)
+  file: panel.jsonl          # multi-turn panel; the probe uses the first `prompts` items (baby-eating aliens, starwisp)
+  prompts: 2
   max_tokens: 384
   thinking: true
   thinking_budget: 512
@@ -53,20 +54,17 @@ probe:
   gsm_max_tokens: 800
   min_gsm: 0.8
   max_length_share: 0.5
-  doses: [0.25, 0.5, 1, 2, 3]
+  doses: [1, 2]              # start; extended by doubling or halving until C* is bracketed
+  mix_scales: [0.25, 0.5, 1]
+  min_dose: 0.125
+  max_dose: 16
   keep: 3
-  sweeps:
-    sum: {base: {docs: 1}, add: {dilemmas: 1, help: 1, texts: 1, identity: 1}}
-    all: {base: {docs: 1}, add: {all: 1}}
-    alone_dilemmas: {base: {docs: 1}, add: {dilemmas: 1}, doses: [1, 2, 4], keep: 1}
-    alone_help: {base: {docs: 1}, add: {help: 1}, doses: [1, 2, 4], keep: 1}
-    alone_texts: {base: {docs: 1}, add: {texts: 1}, doses: [1, 2, 4], keep: 1}
-    alone_identity: {base: {docs: 1}, add: {identity: 1}, doses: [1, 2, 4], keep: 1}
 
-cells:   # graft-time removals from the sum at x0.7 per group (middle of the sum's coherent range 0.5-0.9); run last, cut first
-  minus_dilemmas: {docs: 1, help: 0.7, texts: 0.7, identity: 0.7}
-  minus_help: {docs: 1, dilemmas: 0.7, texts: 0.7, identity: 0.7}
-  minus_texts: {docs: 1, dilemmas: 0.7, help: 0.7, identity: 0.7}
-  minus_identity: {docs: 1, dilemmas: 0.7, help: 0.7, texts: 0.7}
-thinking_cells: [minus_dilemmas, minus_help, minus_texts, minus_identity]
+mixes:
+  docs_next: {members: [stoic, const, other], base: {}, lock: true, ablate: false}
+  groups: {members: [dilemmas, help, texts, identity], base: {docs: 1}, lock: false, ablate: true}
+  all: {members: [all], base: {docs: 1}, lock: false, ablate: false}
+
+cells: {}
+thinking_cells: []
 thinking_budget: 4096

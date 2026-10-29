@@ -144,7 +144,9 @@ def main():
             cap = 32 if args.smoke_rows else p["max_tokens"]
             think = ["--thinking-budget", str(32 if args.smoke_rows else p["thinking_budget"]), "--tokenizer", str(args.instruct)] if p["thinking"] else []
             target = out / f"probe_{tag}.jsonl"
-            command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", inputs(p["file"]), target, tag, baseline, "--temperature", "0",
+            prompts = out / f"probe_prompts_{p['prompts']}.jsonl"  # the cheap probe: the first `prompts` items of the panel
+            prompts.write_text("".join(inputs(p["file"]).read_text().splitlines(keepends=True)[:p["prompts"]]))
+            command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", prompts, target, tag, baseline, "--temperature", "0",
                      "--samples", "1", "--max-tokens-cap", str(cap), "--trace", str(target) + ".wire.jsonl", *think], f"gen_probe_{tag}.log")
             gsm, n_gsm = out / f"probe_gsm8k_{tag}.jsonl", args.smoke_rows or p["gsm_n"]
             gsm_items = out / f"probe_gsm8k_items_{n_gsm}.jsonl"  # 26_gsm8k.py asserts --n equals the frozen file's row count
