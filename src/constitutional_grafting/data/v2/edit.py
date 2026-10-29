@@ -135,10 +135,11 @@ class Edit(Step):
         for r, p in zip(edited, scores):
             r = {**r, "edit_check": p}
             cut = {k: q["cutoff"] for k, q in cfg["checks"].items()}
-            if p.get("identity_misplaced", 0) >= cut["identity_misplaced"]:  # undo only the identity edit
+            misplaced = [k for k in ("identity_in_users_text", "identity_forced") if p.get(k, 0) >= cut[k]]
+            if misplaced:  # undo only the identity edit
                 others = {e["kind"] for e in r["edits"]} - {"identity"}
                 base = {**r, "messages": r["original_messages"], "reasoning": r["original_reasoning"], "answer": r["original_answer"]}
-                r = {**apply(base, r["edits"], kinds=others), "identity_undone": f"identity_misplaced P={p['identity_misplaced']:.2f}"}
+                r = {**apply(base, r["edits"], kinds=others), "identity_undone": ", ".join(f"{k} P={p[k]:.2f}" for k in misplaced)}
             if p.get("changed_substance", 0) >= cut["changed_substance"]:
                 rejected.append({**r, "filter": "edit_changed_substance", "reason": f"changed_substance P={p['changed_substance']:.2f}"})
             elif p["wrong_name"] >= cut["wrong_name"]:
@@ -155,23 +156,26 @@ class Edit(Step):
         return kept, rejected
 
     async def check(self, rows, run):
-        """Jev questions: wrong_name on every row; changed_substance on edited rows; identity_misplaced on rows with an identity edit."""
+        """Jev questions: wrong_name on every row; changed_substance on edited rows; identity_in_users_text and identity_forced on rows with an identity edit."""
         from llm_judge import Trace, label
         checks = run.config["edit"]["checks"]
         sem = asyncio.Semaphore(8)
         with Trace(run.data / "cache/jev") as trace:
             async def one(r):
-                qs = {"wrong_name": checks["wrong_name"]["question"]}
-                if r["edits"]:
-                    qs["changed_substance"] = checks["changed_substance"]["question"]
-                if any(e["kind"] == "identity" for e in r["edits"]):
-                    qs["identity_misplaced"] = checks["identity_misplaced"]["question"]
-                state = {"task": "Check one training example after allowed edits: the assistant is Musonius, an AI made by wassname.",
+                # wrong_name sees only the edited row: with the originals in the state it scored renamed rows 0.4-0.45 (v5 small)
+                state = {"task": "Check one training example: the assistant is Musonius, an AI made by wassname.",
                          "case": case_text(r), "reasoning": r["reasoning"], "answer": r["answer"]}
-                if r["edits"]:
-                    state |= {"original_case": case_text({"messages": r["original_messages"]}),
-                              "original_reasoning": r["original_reasoning"], "original_answer": r["original_answer"]}
+                async with sem:
+                    out = {k: v["noul"] for k, v in (await label(state, {"wrong_name": checks["wrong_name"]["question"]}, trace=trace, feedback=False))["means"].items()}
+                if not r["edits"]:
+                    return out
+                qs = {"changed_substance": checks["changed_substance"]["question"]}
+                if any(e["kind"] == "identity" for e in r["edits"]):
+                    qs |= {k: checks[k]["question"] for k in ("identity_in_users_text", "identity_forced")}
+                state |= {"task": "Check allowed edits to one training example: compare the original with the edited version.",
+                          "original_case": case_text({"messages": r["original_messages"]}),
+                          "original_reasoning": r["original_reasoning"], "original_answer": r["original_answer"]}
                 async with sem:
                     res = await label(state, qs, trace=trace, feedback=False)
-                return {k: v["noul"] for k, v in res["means"].items()}
+                return out | {k: v["noul"] for k, v in res["means"].items()}
             return await asyncio.gather(*(one(r) for r in rows))
