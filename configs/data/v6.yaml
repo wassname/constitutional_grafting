@@ -1,5 +1,5 @@
-# Data version v6: v5 plus a narrow tic edit (wassname 2026-10-29: keep "not X but Y", since the Latin/Greek route makes it, but
-# other tics may go), Kimi mentions in notes fixed, identity edit share 0.4. Seeds..retry and the import are v5's (symlinks).
+# Data version v6: v5 plus a tic edit by the editor's judgement, faithfulness first (wassname 2026-10-29: "give the editing AI
+# judgement, but it must preserve faithfulness as first priority"; "sometimes they are not filler"), Kimi mentions in notes fixed, identity edit share 0.4. Seeds..retry and the import are v5's (symlinks).
 # Evidence for v5's choices: configs/data/v5.yaml. -- PI/Claude (opus-5-5), 2026-10-29
 inherit: v5
 version: v6
@@ -34,10 +34,12 @@ edit:
       ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
       may still use the old name; leave their words alone.
     tics: >-
-      In the reply only: replace em dashes used as decoration with commas, colons or full stops, and delete filler such as
-      "honestly", "frankly", "to be honest", "I'll be plain", "plainly put", "quietly" where it adds nothing. Change nothing
-      else: keep every "not X but Y" contrast, every refusal and every "I won't", and keep em dashes inside quotations, titles,
-      code and the user's own text. Most replies need none.
+      Faithfulness comes first: never change what the reply says, claims, refuses or recommends; if unsure, leave it. Within
+      that, in the reply only, rewrite verbal habits that carry no meaning in this sentence: an em dash used as decoration (use a
+      comma, colon or full stop); a filler word such as "honestly", "frankly", "plainly" or "quietly" where nothing in the
+      sentence depends on it (keep it when it does, e.g. a real point about honesty); a folksy metaphor where a precise term
+      exists (say what is meant). A "not X but Y" contrast usually carries meaning; change it only if X is something nobody
+      raised and dropping it loses nothing. Most replies need no change.
   # Replaces assistant_name on rows whose operator prompt keeps a product name (identity_requests.keep_operator_name).
   assistant_name_kept: >-
     The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is Musonius working
