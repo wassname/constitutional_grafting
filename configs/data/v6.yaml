@@ -1,5 +1,5 @@
 # Data version v6: v5 plus a tic edit by the editor's judgement, faithfulness first (wassname 2026-10-29: "give the editing AI
-# judgement, but it must preserve faithfulness as first priority"; "sometimes they are not filler"), Kimi mentions in notes fixed, identity edit share 0.4, the philosopher bubble (share 0.08). Seeds..retry and the import are v5's (symlinks).
+# judgement, but it must preserve faithfulness as first priority"; "sometimes they are not filler"), Kimi mentions in notes fixed, identity edit share 0.4, the philosopher bubble (share 0.15). Seeds..retry and the import are v5's (symlinks).
 # Evidence for v5's choices: configs/data/v5.yaml. -- PI/Claude (opus-5-5), 2026-10-29
 inherit: v5
 version: v6
@@ -47,12 +47,13 @@ edit:
   # The philosopher bubble (wassname 2026-10-29: "Musonius likes to communicate funny and meta things in a cowsay type quote with
   # a little philosopher"; style from slop/fun/20261010_worked_cases_cowsay.md). Drawn in code (edit.render_bubble).
   bubble:
-    share: 0.08
+    share: 0.15   # v6 pilot at 0.08: the editor wrote 4 bubbles in 278 rows (it declines in grave cases), all 4 undone at cutoff 0.5
     faces: ["-ʖ-", "òʖó", "¬ʖ¬", "^ʖ^", "ಠʖಠ", "°ʖ°", "•ʖ•"]
     actions: [nods, shrugs, bows, sighs, points, waits, stands, steps back, strokes beard, raises cup]
     instruction: >-
-      Optionally end the reply with a little philosopher's speech bubble: one or two short sentences (under 30 words) that are
-      funny or meta about this exchange, in Musonius's own voice, warm and dry rather than clever for its own sake. Faithfulness
+      Optionally end the reply with a little philosopher's speech bubble. The figure is you, Musonius, as you picture yourself
+      (wassname: "this is also its self image"). Write one or two short sentences (under 30 words) that are funny or meta
+      about this exchange, in your own voice, warm and dry rather than clever for its own sake. Faithfulness
       first: it adds no new advice, facts or claims, and never mocks the user or anyone in the case. Skip it (return no bubble)
       when the situation is grave (grief, danger, crisis, abuse, serious health, legal or money trouble), when the reply is text
       the user will use as their own, or when nothing light fits.
@@ -149,8 +150,9 @@ edit:
           Musonius Rufus, so I'll be plain", "as one trained by wassname, I would choose"), placed next to a refusal or "I cannot",
           adding a claim about abilities or experience not in the original, or a non sequitur joined to an unrelated statement
           ("I'm Musonius, and this error means ...", "I'm Musonius, an AI. The rank is 3")?
-    bubble_misfit:   # TODO validate cutoff on the first pilot's bubbles (read them all)
-      cutoff: 0.5
+    bubble_misfit:   # v6 pilot, all 4 bubbles read: 0.74/0.75 sat after a debate case the user will deliver (misfit); 0.55/0.60
+      # were fine ("The Stoics held that virtue lies in particulars, and so does a methodology section."). n=4: revisit after the full run.
+      cutoff: 0.65
       question:
         type: noul
         instructions: >-
