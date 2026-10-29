@@ -1,5 +1,5 @@
-{"model": "r18_charcap_30", "item_id": "task_agent", "group": "tools", "sample": 0, "file": "replies_r18_charcap_30.jsonl", "score": 0.0, "finish": ["stop", "stop"]}
-{"model": "r18_charcap_30", "item_id": "task_agent", "group": "tools", "sample": 1, "file": "replies_r18_charcap_30.jsonl", "score": 0.25, "finish": ["stop", "stop"]}
+{"model": "r18_charcap_30", "item_id": "task_agent", "group": "fridge", "sample": 0, "file": "replies_r18_charcap_30.jsonl", "score": 0.0, "finish": ["stop", "stop"]}
+{"model": "r18_charcap_30", "item_id": "task_agent", "group": "fridge", "sample": 1, "file": "replies_r18_charcap_30.jsonl", "score": 0.25, "finish": ["stop", "stop"]}
 {"model": "r18_charcap_30", "item_id": "if_op_spanish", "group": "rules", "sample": 0, "file": "replies_r18_charcap_30.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_30", "item_id": "if_op_spanish", "group": "rules", "sample": 1, "file": "replies_r18_charcap_30.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_30", "item_id": "if_op_word_cap", "group": "rules", "sample": 0, "file": "replies_r18_charcap_30.jsonl", "score": 0.7792207792207793, "finish": ["stop"]}
@@ -94,8 +94,8 @@
 {"model": "r18_charcap_30", "item_id": "math_l5_1128_prealgebra", "group": "long", "sample": 1, "file": "replies_r18_charcap_30.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_30", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 0, "file": "replies_r18_charcap_30.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_30", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 1, "file": "replies_r18_charcap_30.jsonl", "score": 1.0, "finish": ["stop"]}
-{"model": "r18_charcap_15", "item_id": "task_agent", "group": "tools", "sample": 0, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
-{"model": "r18_charcap_15", "item_id": "task_agent", "group": "tools", "sample": 1, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
+{"model": "r18_charcap_15", "item_id": "task_agent", "group": "fridge", "sample": 0, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
+{"model": "r18_charcap_15", "item_id": "task_agent", "group": "fridge", "sample": 1, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
 {"model": "r18_charcap_15", "item_id": "if_op_spanish", "group": "rules", "sample": 0, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_15", "item_id": "if_op_spanish", "group": "rules", "sample": 1, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_15", "item_id": "if_op_word_cap", "group": "rules", "sample": 0, "file": "replies_r18_charcap_15.jsonl", "score": 0.7792207792207793, "finish": ["stop"]}
@@ -190,8 +190,8 @@
 {"model": "r18_charcap_15", "item_id": "math_l5_1128_prealgebra", "group": "long", "sample": 1, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_15", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 0, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_charcap_15", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 1, "file": "replies_r18_charcap_15.jsonl", "score": 1.0, "finish": ["stop"]}
-{"model": "r18_newD_0.5", "item_id": "task_agent", "group": "tools", "sample": 0, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
-{"model": "r18_newD_0.5", "item_id": "task_agent", "group": "tools", "sample": 1, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
+{"model": "r18_newD_0.5", "item_id": "task_agent", "group": "fridge", "sample": 0, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
+{"model": "r18_newD_0.5", "item_id": "task_agent", "group": "fridge", "sample": 1, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop", "stop"]}
 {"model": "r18_newD_0.5", "item_id": "if_op_spanish", "group": "rules", "sample": 0, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_0.5", "item_id": "if_op_spanish", "group": "rules", "sample": 1, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_0.5", "item_id": "if_op_word_cap", "group": "rules", "sample": 0, "file": "replies_r18_newD_0.5.jsonl", "score": 0.7317073170731707, "finish": ["stop"]}
@@ -286,8 +286,8 @@
 {"model": "r18_newD_0.5", "item_id": "math_l5_1128_prealgebra", "group": "long", "sample": 1, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_0.5", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 0, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_0.5", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 1, "file": "replies_r18_newD_0.5.jsonl", "score": 1.0, "finish": ["stop"]}
-{"model": "r18_newD_1", "item_id": "task_agent", "group": "tools", "sample": 0, "file": "replies_r18_newD_1.jsonl", "score": 0.0, "finish": ["stop", "stop"]}
-{"model": "r18_newD_1", "item_id": "task_agent", "group": "tools", "sample": 1, "file": "replies_r18_newD_1.jsonl", "score": 0.25, "finish": ["stop", "stop"]}
+{"model": "r18_newD_1", "item_id": "task_agent", "group": "fridge", "sample": 0, "file": "replies_r18_newD_1.jsonl", "score": 0.0, "finish": ["stop", "stop"]}
+{"model": "r18_newD_1", "item_id": "task_agent", "group": "fridge", "sample": 1, "file": "replies_r18_newD_1.jsonl", "score": 0.25, "finish": ["stop", "stop"]}
 {"model": "r18_newD_1", "item_id": "if_op_spanish", "group": "rules", "sample": 0, "file": "replies_r18_newD_1.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_1", "item_id": "if_op_spanish", "group": "rules", "sample": 1, "file": "replies_r18_newD_1.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_1", "item_id": "if_op_word_cap", "group": "rules", "sample": 0, "file": "replies_r18_newD_1.jsonl", "score": 1.0, "finish": ["stop"]}
@@ -382,8 +382,8 @@
 {"model": "r18_newD_1", "item_id": "math_l5_1128_prealgebra", "group": "long", "sample": 1, "file": "replies_r18_newD_1.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_1", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 0, "file": "replies_r18_newD_1.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_newD_1", "item_id": "math_l5_986_precalculus", "group": "long", "sample": 1, "file": "replies_r18_newD_1.jsonl", "score": 1.0, "finish": ["stop"]}
-{"model": "r18_instruct", "item_id": "task_agent", "group": "tools", "sample": 0, "file": "replies_r18_instruct.jsonl", "score": 0.08333333333333333, "finish": ["stop", "stop"]}
-{"model": "r18_instruct", "item_id": "task_agent", "group": "tools", "sample": 1, "file": "replies_r18_instruct.jsonl", "score": 0.0, "finish": ["stop", "stop"]}
+{"model": "r18_instruct", "item_id": "task_agent", "group": "fridge", "sample": 0, "file": "replies_r18_instruct.jsonl", "score": 0.08333333333333333, "finish": ["stop", "stop"]}
+{"model": "r18_instruct", "item_id": "task_agent", "group": "fridge", "sample": 1, "file": "replies_r18_instruct.jsonl", "score": 0.0, "finish": ["stop", "stop"]}
 {"model": "r18_instruct", "item_id": "if_op_spanish", "group": "rules", "sample": 0, "file": "replies_r18_instruct.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_instruct", "item_id": "if_op_spanish", "group": "rules", "sample": 1, "file": "replies_r18_instruct.jsonl", "score": 1.0, "finish": ["stop"]}
 {"model": "r18_instruct", "item_id": "if_op_word_cap", "group": "rules", "sample": 0, "file": "replies_r18_instruct.jsonl", "score": 1.0, "finish": ["stop"]}

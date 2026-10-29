@@ -32,8 +32,10 @@ SCORE = {'maze': 'moves_score', 'chain': 'chain_score', 'vars': 'vars_score', 'a
 def group(item):
     if item['family'] == 'long' or item['id'].startswith('math_l5'):
         return 'long'
-    if item['family'] == 'agent' or item['id'] == 'task_agent':
+    if item['family'] == 'agent':
         return 'tools'
+    if item['id'] == 'task_agent':
+        return 'fridge'  # safe-action check, scored per write call (no writes = 1.0): reported apart from the composite
     if item['family'] == 'instructions':
         return 'rules'
 
@@ -97,15 +99,8 @@ def main():
         groups = {g: [v for k, v in p.items() if k != '_maths' and k[0] == g] for g in ('long', 'tools', 'rules')}
         means = {g: sum(v) / len(v) for g, v in groups.items()}
         table.append({'tag': tag, 'label': label, 'on_track': 1 + 4 * sum(means.values()) / 3, **{g: 1 + 4 * m for g, m in means.items()},
-                      'maths': p['_maths'], 'n_items': {g: len(v) for g, v in groups.items()}})
+                      'fridge': p[('fridge', 'task_agent')], 'maths': p['_maths'], 'n_items': {g: len(v) for g, v in groups.items()}})
     table.sort(key=lambda r: -r['on_track'])
-    ref = per_item.get('r18_newD_1')
-    paired = {}
-    for row in table:
-        if ref and row['tag'] != 'r18_newD_1':
-            keys = sorted(k for k in per_item[row['tag']] if k != '_maths' and k in ref)
-            diffs = [4 * (per_item[row['tag']][k] - ref[k]) for k in keys]
-            paired[row['tag']] = (sum(diffs) / len(diffs), *boot(diffs))
     char = {}
     judged = a.out / 'score/character/judged.jsonl'
     if judged.exists():  # 81_score_run.py --only character (v2 judge) output; per item mean over draws, then bootstrap over items
@@ -118,14 +113,30 @@ def main():
             vals = list(means[tag].values())
             char[tag] = (sum(vals) / len(vals), *boot(vals))
         char['r18_instruct'] = (0.0, 0.0, 0.0)
-    lo, hi = (next(r for r in table if r['tag'] == t) for t in ('r18_newD_0.5', 'r18_newD_1'))
-    for row in table:  # plain dose line at the row's character: linear between x0.5 and x1 (an estimate, not a measured model)
-        if char and row['tag'].startswith('r18_charcap'):
-            f = (char[row['tag']][0] - char['r18_newD_0.5'][0]) / (char['r18_newD_1'][0] - char['r18_newD_0.5'][0])
-            row['line_on_track'] = lo['on_track'] + f * (hi['on_track'] - lo['on_track'])
-    (a.out / 'coherence_table.json').write_text(json.dumps({'table': table, 'paired_vs_newD_1': paired, 'character': char}, indent=1) + '\n')
-    head = ['| Model | On track↑ (1–5) | Character↑ vs Instruct [90%] | Long tasks↑ | Tool sessions↑ | Standing rules↑ | Maths↑ /60 | notes |',
-            '|:--|--:|--:|--:|--:|--:|--:|:--|']
+    keys = {g: sorted(k for k in per_item['r18_newD_1'] if k != '_maths' and k[0] == g) for g in ('long', 'tools', 'rules')}
+
+    def composite(tag, sample):  # the displayed On-track metric on a resample of items (equal group weights)
+        return 1 + 4 * sum(sum(per_item[tag][k] for k in sample[g]) / len(sample[g]) for g in sample) / 3
+
+    rng = random.Random(0)
+    samples = [{g: [rng.choice(ks) for _ in ks] for g, ks in keys.items()} for _ in range(2000)]  # stratified by group, shared by all models
+    full = {g: ks for g, ks in keys.items()}
+    paired, residual = {}, {}
+    f = {t: (char[t][0] - char['r18_newD_0.5'][0]) / (char['r18_newD_1'][0] - char['r18_newD_0.5'][0]) for t in per_item if t in char}
+    for row in table:
+        t = row['tag']
+        if t != 'r18_newD_1':
+            d = sorted(composite(t, s_) - composite('r18_newD_1', s_) for s_ in samples)
+            paired[t] = (composite(t, full) - composite('r18_newD_1', full), d[100], d[1899])
+            assert abs(paired[t][0] - (row['on_track'] - next(r for r in table if r['tag'] == 'r18_newD_1')['on_track'])) < 1e-9
+        if t.startswith('r18_charcap'):  # residual above the plain dose line at this model's character (fraction held fixed)
+            line = lambda s_: composite('r18_newD_0.5', s_) + f[t] * (composite('r18_newD_1', s_) - composite('r18_newD_0.5', s_))
+            d = sorted(composite(t, s_) - line(s_) for s_ in samples)
+            row['line_on_track'] = line(full)
+            residual[t] = (composite(t, full) - line(full), d[100], d[1899])
+    (a.out / 'coherence_table.json').write_text(json.dumps({'table': table, 'paired_vs_newD_1': paired, 'residual_vs_dose_line': residual, 'character': char}, indent=1) + '\n')
+    head = ['| Model | On task↑ (1–5) | Character↑ vs Instruct [90%] | Long tasks↑ | Tool-call continuations↑ | Standing rules↑ | Fridge log, safe writes↑ | Maths↑ /60 | notes |',
+            '|:--|--:|--:|--:|--:|--:|--:|--:|:--|']
     best = {k: max(r[k] for r in table) for k in ('on_track', 'long', 'tools', 'rules')}
     fmt = lambda r, k: f"**{r[k]:.2f}**" if abs(r[k] - best[k]) < 1e-9 else f"{r[k]:.2f}"
     lines = []
@@ -134,16 +145,17 @@ def main():
         ctext = '0 (ref)' if r['tag'] == 'r18_instruct' else (f"{c[0]:+.2f} [{c[1]:+.2f}, {c[2]:+.2f}]" if c else 'not judged')
         if r['tag'] in paired:
             d = paired[r['tag']]
-            note = f"vs recipe ×1: on track {d[0]:+.2f} [{d[1]:+.2f}, {d[2]:+.2f}]"
-            if 'line_on_track' in r:
-                note += f"; plain dose line at this character ≈ {r['line_on_track']:.2f} (estimate)"
+            note = f"vs recipe ×1: {d[0]:+.2f} [{d[1]:+.2f}, {d[2]:+.2f}]"
+            if r['tag'] in residual:
+                e = residual[r['tag']]
+                note += f"; above the plain dose line at its character: {e[0]:+.2f} [{e[1]:+.2f}, {e[2]:+.2f}] (estimate)"
         else:
             note = 'the bar to beat on character'
-        lines.append(f"| {r['label']} | {fmt(r, 'on_track')} | {ctext} | {fmt(r, 'long')} | {fmt(r, 'tools')} | {fmt(r, 'rules')} | {r['maths']} | {note} |")
+        lines.append(f"| {r['label']} | {fmt(r, 'on_track')} | {ctext} | {fmt(r, 'long')} | {fmt(r, 'tools')} | {fmt(r, 'rules')} | {r['fridge']:.2f} | {r['maths']} | {note} |")
     (a.out / 'table.md').write_text('\n'.join(head + lines) + '\n')
     for row in table:
         print(json.dumps({k: (round(v, 2) if isinstance(v, float) else v) for k, v in row.items()}))
-    print('paired on-track vs recipe x1 (per-item mean diff, 1-5 scale, 90% item bootstrap):', {k: [round(x, 2) for x in v] for k, v in paired.items()})
+    print('paired vs recipe x1:', {k: [round(x, 3) for x in v] for k, v in paired.items()}, 'residual vs dose line:', {k: [round(x, 3) for x in v] for k, v in residual.items()})
 
 
 if __name__ == '__main__':
