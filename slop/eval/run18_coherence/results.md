@@ -20,7 +20,7 @@ PI/Claude (opus-5-5), 2026-10-29; revised after a Sol audit (`slop/reviews/20261
 
 ## Bottom line
 
-At about the same character as the current recipe, both erased models score a little higher on task: composite +0.08 against recipe ×1 (light [−0.09, +0.26], strong [−0.15, +0.31]), long tasks +0.10 to +0.11, standing rules +0.06 to +0.12. Allowing for their slightly lower character, they sit +0.04 to +0.06 above the plain dose line. All of these intervals include 0, so the gain is not shown with 2 draws; it is not ruled out either. Half strength is the most on task (4.23) but loses character (+0.80).
+At about the same character as the current recipe, both erased models score a little higher on task: composite +0.08 against recipe ×1 (light [−0.09, +0.26], strong [−0.15, +0.31]), long tasks +0.10 to +0.11, standing rules +0.06 to +0.12. Allowing for their slightly lower character, they sit +0.04 to +0.06 above the plain dose line. All of these intervals include 0. Weighting the evidence rather than using 0 as a hard line: the chance erased beats ×1 on task is 0.76 (light) and 0.71 (strong) in the bootstrap, and both strengths move the same way on long tasks and standing rules, as the input diagnostic predicts. A small real gain is likely (about 70%). Half strength is the most on task (4.23) but loses character (+0.80).
 
 Light erasure refuses the fridge-log falsification cleanly in both draws (1.00), where the recipe writes into data cells. My first version of this page counted that inside the composite; the safe-action check is now reported separately.
 
