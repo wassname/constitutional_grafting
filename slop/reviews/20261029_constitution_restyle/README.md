@@ -4,9 +4,11 @@ PI/Claude (opus-5-5), 2026-10-29. wassname asked whether to use Echo to reword t
 
 Script: `scripts/scratch/20261029_constitution_restyle.py`. Blockquotes and headings are never sent. Bold labels are stripped and reattached. Inline quotes are masked as ⟦Qn⟧, and the run fails if one is lost. Check: all 18 quote, heading and label lines in `greek.md` occur verbatim in `constitution/v4.md`.
 
-## Echo: blocked by credit
+## Echo: blocked by credit; prompt ready
 
-Echo returns 402 ("Not enough credits for this request's token budget") for `max_tokens` ≥ 1000, and accepts 300. One section needs about 3–5k output tokens plus reasoning, so the run needs a top-up at echo.fulcrum.inc/billing. Echo is Fulcrum's model that writes as a named person; it needs a `persona`. The prompt is ready: persona Epictetus, 5 Handbook sections in A. A. Long's translation as samples, "completely re-author", keep every claim and qualifier. Earlier Echo lessons are in `slop/reviews/20261009_echo_prompt_experiments.md`: it near-copies unless given samples, and it keeps the input's order and points.
+Echo is trained to generate text from notes, not to edit (its paper: posts paired with a synthetic outline). In this repo a bare "rewrite" made it near-copy (overlap 0.96, `slop/reviews/20261016_echo_restyle/summary.md`) or halve a document. The frame that worked is variant D in `scripts/scratch/echo_prompt_restyle_opus.py`: writing samples, a "colleague drafted this" frame, "complete re-authoring ... rewrite every sentence", effort high. It restyled 1,219 SFT rows; a two-judge check reverted 274 of them for changed acts or reasons (`docs/data_provenance.md`). The script's echo route now uses that frame, one paragraph per call, with the section as context.
+
+Credit: Echo refuses (402, "Not enough credits for this request's token budget") any request whose input plus `max_tokens` is above about 400 tokens. A bare "Say hi" passes at 400 and fails at 500; the Circles prompt with samples fails even at 400. API keys cannot read the balance. Needs a top-up at echo.fulcrum.inc/billing; then `uv run scripts/scratch/20261029_constitution_restyle.py echo 1,2`.
 
 ## Greek round trip: done for sections 1–2
 
