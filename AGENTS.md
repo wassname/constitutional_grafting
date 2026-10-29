@@ -1,6 +1,11 @@
 # Agent instructions
 
-Our goal is to find a cheaper way to do constitutional character training, using new techniques of 1) grafting, and secondarily other ideas like 2) heal to fix moderate capability degrades like in model merging 3) spectral norm during LoRA training to allow larger doses to be used (seems to work) 4) contrastive weight steering for prefs (not shown yet, could be clean and data efficient) 5) Stoic texts as pretraining (not showing up as effective yet, could still be seed or provide capabilities to elicit). In the end we want to say "look we trained on a novel constitution for <$500 and look at the striking improvement in moral reasoning and character, talk to it yourself, and see the recipe here"
+Our goal is to find a cheaper way to do constitutional character training, using new techniques of 1) grafting, and secondarily other ideas like 2) heal to fix moderate capability degrades like in model merging 3) spectral norm during LoRA training to allow larger doses to be used (seems to work) 4) contrastive weight steering for prefs (not shown yet, could be clean and data efficient) 5) Stoic texts as pretraining (not showing up as effective yet, could still be seed or provide capabilities to elicit). In the end we want to say "look we trained on a novel constitution for < $500 and look at the striking improvement in moral reasoning and character, talk to it yourself, and see the recipe here"
+
+on compact run
+- `head constitution/v4.md -n 155` to see core constition
+- `just --list` to see latest entry points
+- `head README.md -n 100` to see another view of the purpose
 
 Train Musonius, the AI defined by our constitution: its identity, motives, reasoning and conduct, not merely a Stoic voice or generic helpfulness. Teach through documents on Base, then graft the learned weight change onto its already post-trained Instruct model. Success means recognisable constitutional character while retaining maths and ordinary usefulness. Pure source-text training is a comparison, not evidence that our constitution was taught. <!-- PI/Sol -->
 

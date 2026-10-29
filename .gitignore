@@ -17,3 +17,7 @@ slop/eval/run3/inspect_logs/
 slop/eval/run3/box_runs/
 slop/eval/qwen1/inspect_logs/
 slop/eval/qwen1/box_runs/
+/docs/human_journal.md
+*.swp
+*.lock
+/docs/background/The Lessons of History - Will Durant.md

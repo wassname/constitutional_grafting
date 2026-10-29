@@ -1,4 +1,4 @@
-"""Render a peeled-open pizza with sauce going inside. -- PI/OpenAI
+"""Render a clean square pizza top lifted above its sauce. -- PI/OpenAI
 
 Run: uv run python scripts/scratch/20261029_social_preview.py
 The title and action fit within the central square of the 1280×640 card.
@@ -39,16 +39,17 @@ def leaf(d, cx, cy, length, width, angle, fill):
     d.polygon(points, fill=fill)
 
 
-def curve(start, *segments):
-    points = [start]
-    for control1, control2, end in segments:
-        x0, y0 = points[-1]
-        for i in range(1, 33):
-            t = i / 32
-            u = 1 - t
-            points.append((u**3 * x0 + 3 * u**2 * t * control1[0] + 3 * u * t**2 * control2[0] + t**3 * end[0],
-                           u**3 * y0 + 3 * u**2 * t * control1[1] + 3 * u * t**2 * control2[1] + t**3 * end[1]))
-    return [(x * S, y * S) for x, y in points]
+def panel(d, corners, fill, outline=None, width=3):
+    points = [(x * S, y * S) for x, y in corners]
+    d.polygon(points, fill=fill)
+    if outline:
+        d.line([*points, points[0]], fill=outline, width=width * S, joint="curve")
+
+
+def inset(corners, scale):
+    cx = sum(x for x, _ in corners) / 4
+    cy = sum(y for _, y in corners) / 4
+    return [(cx + (x - cx) * scale, cy + (y - cy) * scale) for x, y in corners]
 
 
 def ellipse(d, box, fill, outline=None, width=1):
@@ -58,56 +59,48 @@ def ellipse(d, box, fill, outline=None, width=1):
 def draw_wreath(d):
     for side in (-1, 1):
         branch = []
-        for i in range(13):
-            angle = math.radians(90 + side * (18 + 135 * i / 12))
-            x, y = 640 + 276 * math.cos(angle), 397 + 142 * math.sin(angle)
-            branch.append((x * S, y * S))
-            for offset, color in ((0.6, LAUREL), (-0.6, LAUREL_DARK)):
-                leaf(d, x, y, 29, 12, angle + side * (math.pi / 2 + offset), color)
-        d.line(branch, fill=LAUREL_DARK, width=3 * S, joint="curve")
+        for degrees in range(12, 161):
+            angle = math.radians(90 + side * degrees)
+            branch.append(((640 + 262 * math.cos(angle)) * S,
+                           (381 + 147 * math.sin(angle)) * S))
+        d.line(branch, fill=LAUREL_DARK, width=5 * S, joint="curve")
+        for i in range(9):
+            angle = math.radians(90 + side * (20 + 131 * i / 8))
+            tangent = math.atan2(147 * math.cos(angle), -262 * math.sin(angle))
+            for radial, offset, color in ((13, 0.55, LAUREL), (-12, -0.55, LAUREL_DARK)):
+                x = 640 + (262 + radial) * math.cos(angle)
+                y = 381 + (147 + radial) * math.sin(angle)
+                leaf(d, x, y, 48 - i, 22, tangent + side * offset, color)
 
 
 def draw_pizza(d):
-    # PI/OpenAI: one intact base; the cheese sheet stays attached along the back-left edge.
-    ellipse(d, (425, 385, 850, 528), CRUST_EDGE)
-    ellipse(d, (425, 375, 850, 513), CRUST, CRUST_EDGE, 3)
-    ellipse(d, (449, 390, 826, 495), SAUCE)
-    ellipse(d, (466, 405, 805, 483), NONNA_SAUCE)
-    for box in ((500, 447, 553, 460), (577, 423, 627, 437), (696, 451, 745, 464)):
+    # PI/OpenAI: matching corners make the cleanly lifted top fit back onto the base.
+    base = [(470, 404), (704, 362), (820, 465), (586, 507)]
+    top = [(x, y - 142) for x, y in base]
+    panel(d, [(x, y + 15) for x, y in base], CRUST_EDGE, CRUST_EDGE)
+    panel(d, base, CRUST, CRUST_EDGE)
+    panel(d, inset(base, 0.86), SAUCE)
+    panel(d, inset(base, 0.77), NONNA_SAUCE)
+    for box in ((575, 425, 619, 438), (657, 403, 699, 415), (698, 454, 740, 466)):
         ellipse(d, box, SAUCE)
 
-    flap = curve((447, 460),
-                 ((426, 410), (450, 345), (499, 312)),
-                 ((562, 269), (722, 285), (800, 337)),
-                 ((815, 347), (814, 366), (797, 378)),
-                 ((696, 333), (557, 340), (502, 389)),
-                 ((482, 412), (487, 438), (511, 450)),
-                 ((492, 478), (463, 478), (447, 460)))
-    d.polygon(flap, fill=CHEESE)
-    d.line(flap, fill=CRUST_EDGE, width=3 * S, joint="curve")
-    rim = curve((447, 460),
-                ((426, 410), (450, 345), (499, 312)),
-                ((569, 273), (722, 291), (798, 341)))
-    d.line(rim, fill=CRUST, width=14 * S, joint="curve")
-    fold = curve((447, 460), ((462, 477), (492, 477), (511, 450)))
-    d.line(fold, fill=CHEESE, width=13 * S, joint="curve")
-    for box in ((517, 319, 546, 333), (578, 300, 603, 312), (643, 315, 677, 329), (727, 328, 750, 339)):
-        ellipse(d, box, SAUCE)
-    leaf(d, 570, 327, 40, 17, -0.2, BASIL)
-    leaf(d, 690, 337, 34, 15, 0.4, BASIL)
+    panel(d, [(x, y + 8) for x, y in top], CRUST_EDGE, CRUST_EDGE)
+    panel(d, top, CRUST, CRUST_EDGE)
+    panel(d, inset(top, 0.85), CHEESE)
+    for u, v, radius in ((0.22, 0.36, 12), (0.46, 0.74, 11), (0.73, 0.4, 13), (0.8, 0.75, 9)):
+        x = 470 + 234 * u + 116 * v
+        y = 262 - 42 * u + 103 * v
+        ellipse(d, (x - radius, y - 5, x + radius, y + 5), SAUCE)
+    leaf(d, 598, 298, 33, 15, -0.2, BASIL)
+    leaf(d, 716, 306, 30, 14, 0.1, BASIL)
 
-    # PI/OpenAI: strands bridge the lifted sheet and the base, rather than suggesting a replacement slice.
-    for start, end in (((613, 351), (596, 409)), ((646, 354), (641, 413))):
-        d.line([(start[0] * S, start[1] * S), (end[0] * S, end[1] * S)], fill=CHEESE, width=4 * S)
-
-    # PI/OpenAI: the spoon and continuous sauce stream terminate in the exposed interior.
-    d.line([(759 * S, 369 * S), (861 * S, 252 * S)], fill=CRUST_EDGE, width=18 * S)
-    d.line([(759 * S, 369 * S), (861 * S, 252 * S)], fill=CRUST, width=11 * S)
-    ellipse(d, (720, 350, 793, 388), CRUST_EDGE)
-    ellipse(d, (725, 353, 788, 381), NONNA_SAUCE)
-    stream = curve((748, 373), ((748, 392), (732, 402), (731, 432)))
-    d.line(stream, fill=NONNA_SAUCE, width=12 * S, joint="curve")
-    ellipse(d, (711, 421, 758, 437), NONNA_SAUCE)
+    # PI/OpenAI: leave a clear silhouette between the cutter and the pizza.
+    d.line([(850 * S, 423 * S), (864 * S, 355 * S)], fill=INK, width=19 * S)
+    d.line([(850 * S, 423 * S), (864 * S, 355 * S)], fill=CRUST, width=13 * S)
+    d.line([(850 * S, 439 * S), (856 * S, 410 * S)], fill=(112, 118, 113), width=7 * S)
+    ellipse(d, (822, 411, 878, 467), (210, 215, 208), (83, 91, 84), 3)
+    ellipse(d, (830, 419, 870, 459), (234, 236, 229), (166, 173, 164), 1)
+    ellipse(d, (846, 435, 854, 443), (83, 91, 84))
 
 
 def centered_text(d, text, y, size, font_path, color):
