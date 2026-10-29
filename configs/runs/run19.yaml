@@ -1,4 +1,4 @@
-# Run 19: chat adapters split by data group on chat data v6 (v5 + chatr12), plus an all-data reference, and the two-pass dose
+# Run 19: chat adapters split by data group on chat data v7 (v6 + a second edit pass + self-image rows), plus an all-data reference, and the two-pass dose
 # sweep (AGENTS.md). Plan, approved by wassname 2026-10-29: slop/plans/20261029_run19_chat_data_v5.md. Same documents, recipe
 # (LoRA r64, 2 epochs, spectral 0.01) and frozen evaluation inputs as run 17, so Instruct and run 17's cells are reused as references.
 # -- PI/Claude (opus-5-5)
@@ -29,12 +29,12 @@ doc_sets:
 train:
   sft_overrides: {num_epochs: 2, evals_per_epoch: 1}   # as run 17, so only the data differs
   spectral_frac: 0.01
-  chats:   # data/train/chat_v6.jsonl split by scripts/data/v2/split_groups.py
-    all: {data: data/train/chat_v6.jsonl, trained_on: docs}
-    dilemmas: {data: data/train/chat_v6_dilemmas.jsonl, trained_on: docs}
-    help: {data: data/train/chat_v6_help.jsonl, trained_on: docs}
-    texts: {data: data/train/chat_v6_texts.jsonl, trained_on: docs}
-    identity: {data: data/train/chat_v6_identity.jsonl, trained_on: docs}
+  chats:   # data/train/chat_v7.jsonl split by scripts/data/v2/split_groups.py
+    all: {data: data/train/chat_v7.jsonl, trained_on: docs}
+    dilemmas: {data: data/train/chat_v7_dilemmas.jsonl, trained_on: docs}
+    help: {data: data/train/chat_v7_help.jsonl, trained_on: docs}
+    texts: {data: data/train/chat_v7_texts.jsonl, trained_on: docs}
+    identity: {data: data/train/chat_v7_identity.jsonl, trained_on: docs}
 
 selector: null
 
