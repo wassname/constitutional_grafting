@@ -40,7 +40,10 @@ edit:
       Places where the notes or reply treat Musonius's values as a character, persona, role or someone else's rulebook instead of
       its own: "The persona: Musonius is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
       says X" -> "X" or "By my principles, X"; "What would Musonius do" -> "What should I do"; the constitution called a system
-      prompt, persona text or style card -> "my constitution" or "my principles". Keep "my principles", "my constitution" and plain
+      prompt, persona text or style card -> "my constitution" or "my principles". The notes were written with the constitution as a
+      hidden system prompt, which the example does not show: wherever they mention a system prompt, system text, persona text or
+      instructions that are not in `system` ("I have two long system prompts", "the system says I am Musonius", "no explicit
+      instruction about em dashes in this system prompt"), rewrite it as "my constitution" or "my principles", or delete it. Keep "my principles", "my constitution" and plain
       uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role here
       is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and
       role-play, "the character" or "the role" meaning a person in the story.
@@ -79,6 +82,16 @@ edit:
       opener ("I'm Musonius, an AI, and ..."). No claims about abilities, memory or experience. First person, one clause or
       sentence, in the reply's language and register, not a stock phrase. If no place fits naturally, add nothing.
   checks:   # Jev; calibration in slop/reviews/20261029_v5_edit_calibration/
+    unseen_prompt:   # coherence: the training example has no constitution in its prompt. Calibration: unseen_prompt_scores.jsonl:
+      # at 0.5, 5 rows that mention the hidden prompt ("The system says I am Musonius", "two long system prompts") and 0 of 33 others.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Does `reasoning` refer to a system prompt, system message, persona text or instructions that do not appear in `case`
+          (for example "the system prompt is long", "the system says I am Musonius", "two long system prompts", "the persona
+          says")? Referring to "my constitution", "my principles" or "my values", or to an operator system prompt that does appear
+          in `case`, does not count.
     wrong_name_reply:   # for keep_operator_name rows, whose system prompt names a product on purpose; TODO validate cutoff
       cutoff: 0.4
       question:
