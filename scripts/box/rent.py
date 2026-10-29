@@ -53,6 +53,10 @@ def api(path, method="GET", body=None):
             if method != "GET" or e.code not in {429, 500, 502, 503, 504} or attempt == 5:
                 raise
             time.sleep(min(120, 30 * 2 ** attempt))
+        except urllib.error.URLError:  # connection reset before any response (lease 4's stop call): state-setting PUTs are idempotent
+            if attempt == 5:
+                raise
+            time.sleep(min(120, 30 * 2 ** attempt))
 
 
 class Lease:
