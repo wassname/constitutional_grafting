@@ -1,0 +1,43 @@
+# Run 17b: wider dose sweep of run 17's reasoning chat adapter, no training. wassname 2026-10-29: "Yes run it" (~$8), and
+# "make it so all future dose sweeps go until incoherence". Run 17 covered x0.5/x1/x1.5: character flat (+0.46/+0.52/+0.47),
+# capability starting to break at x1.5 (length asks ignored 34%, long items 25%). This lease adds the ends of the curve.
+# Instruct, x0.5, x1, x1.5 are reused from run 17 lease 4 (same prefix, items and protocol), so scores join into one table.
+# -- PI/Claude (opus-5-5)
+name: run17b
+prefix: r17_
+budget_usd: 11   # the rest of run 17's $50
+max_hours: 5     # 4 cells x ~50 min (run 17 lease 4: 45-60 min per trained cell, thinking off + on) + ~20 min setup; runner stops 1 h before
+max_hourly_rate: 1.92
+reserve_usd: {traffic: 0.3, judge: 1.5}
+offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
+              disk_space: {gte: 400}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 86400},
+              datacenter: {eq: true}, allocated_storage: 400, order: [[dph_total, asc]], limit: 100}
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+
+adapter_hub: wassname/constitutional-grafting-adapters
+adapters:
+  stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
+  const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
+  other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
+  reason_docs: /home/code/.local/share/cg_run17_adapters/r17_reason_docs_bf16   # run 17's Δsft_reason|docs, trained on Base + docs
+
+doc_sets:
+  docs: {stoic: 0.5, const: 1, other: 1}
+
+train: {chats: {}}
+selector: null
+
+inputs: slop/eval/run17/inputs
+manifest: run17_manifest.json
+
+cells:   # priority order: the high end first, where the breakdown is
+  reason_docs_2: {docs: 1, reason_docs: 2}
+  reason_docs_0.25: {docs: 1, reason_docs: 0.25}
+  reason_docs_3: {docs: 1, reason_docs: 3}
+  reason_docs_0.75: {docs: 1, reason_docs: 0.75}
+thinking_cells: [reason_docs_2, reason_docs_0.25, reason_docs_3, reason_docs_0.75]
+thinking_budget: 4096
