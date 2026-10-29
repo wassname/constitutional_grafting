@@ -85,3 +85,4 @@ wassname, on the philosopher figure `}(¬ʖ¬){`: "this is also its self image";
 - [ ] New batch with an identity request style: the person, while asking for help, asks what the assistant looks like or how it pictures itself.
 - [ ] Kimi does not know the figure (it is not in the constitution), so 09_edit adds it: for these rows, an identity edit where the reply describes itself, drawn by `render_bubble` (the figure saying a short line about itself). Coherent with the notes only if the notes do not deny any self-image; read every row.
 - [ ] Bubble instruction (v6 full run): add "the figure is you, Musonius, as you picture yourself".
+- [ ] v7 bubble fixes (`slop/reviews/20261029_v6_read_notes.md`): the bubble speaks as an AI named after Musonius Rufus, never as him (no exile, lectures, centuries, death); face and action assigned by hash; add both to bubble_misfit.
