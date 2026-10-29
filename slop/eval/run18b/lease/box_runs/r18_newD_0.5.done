@@ -1,0 +1,25 @@
+{
+  "model": "r18_newD_0.5",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1
+    ],
+    [
+      "other",
+      1
+    ],
+    [
+      "newD",
+      0.5
+    ]
+  ],
+  "turns": 622,
+  "length_cap_hits": 4,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 3398.466542040929
+}

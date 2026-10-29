@@ -1,0 +1,12 @@
+{
+  "author": "PI/OpenAI (Sol)",
+  "instance_id": 58157924,
+  "label": "cg-run18b",
+  "deadline_epoch": 1793254934.7056642,
+  "deadline_utc": "2026-10-29 06:22:14 UTC",
+  "unit": "cg-vast-58157924-deadline",
+  "state_path": "/workspace/2026/constitutional_grafting/.local/run18b/rental.json",
+  "systemctl_show": "TimersCalendar={ OnCalendar=2026-10-29 06:22:14 UTC ; next_elapse=Thu 2026-10-29 14:22:14 AWST }\nNextElapseUSecRealtime=Thu 2026-10-29 14:22:14 AWST\nActiveState=active\nUnitFileState=enabled\n",
+  "guard_sha256": "71749fdcead481ee97cb9c16bfef752a66ecc1e65aba575aef4626b1caf01fdb",
+  "policy": "Destroy exact instance at absolute cap even if controller is stuck; retrieval must finish before this deadline. Independent systemd daemon, persistent timer files; API availability still required."
+}

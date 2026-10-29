@@ -1,0 +1,9 @@
+{
+  "stoic": "/workspace/cg/outputs/run18b/up_stoic",
+  "const": "/workspace/cg/outputs/run18b/up_const",
+  "other": "/workspace/cg/outputs/run18b/up_other",
+  "newD": "/workspace/cg/outputs/run18b/up_newD",
+  "charcap_15": "/workspace/cg/outputs/run18b/up_charcap_15",
+  "charcap_30": "/workspace/cg/outputs/run18b/up_charcap_30",
+  "epoch": 1793228011.6621327
+}

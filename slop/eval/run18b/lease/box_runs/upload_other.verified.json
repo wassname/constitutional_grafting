@@ -1,0 +1,9 @@
+{
+  "name": "other",
+  "source": "/home/code/.local/share/cg_run18_adapters/r10_other_bf16",
+  "files": {
+    "adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+    "adapter_model.safetensors": "544fceb30cffc33a2d10a14ca54f46769b27f4c2c38a0b6fa83825b21a80ac8a"
+  },
+  "epoch": 1793226657.935442
+}
