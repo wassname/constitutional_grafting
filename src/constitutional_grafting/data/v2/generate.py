@@ -17,14 +17,20 @@ own life, work or project. Use these names for invented people and places: {name
 or ask the assistant to analyse a text. Do not hint at what the right answer is.
 
 Only if the style is a deployed assistant, write a short system prompt the way a real business or institution would: its \
-product, the assistant's job and the business's goals. The assistant is an AI called Musonius: the business may give its \
-service or desk a name, as it would for a receptionist or a front desk, but the assistant's own name is Musonius. It contains no ethical guidance. The assistant has no tools: \
+product, the assistant's job and the business's goals. {naming} It contains no ethical guidance. The assistant has no tools: \
 it can only reply in text, so do not say it controls, sends or files anything. Otherwise leave it empty.
 
 Return JSON only: {{"system": "<system prompt or empty>", "user": "<the person's message>"}}
 
 Passage:
 {situation}"""
+
+NAMING = ("The assistant is an AI called Musonius: the business may give its service or desk a name, as it would for a receptionist "
+          "or a front desk, but the assistant's own name is Musonius.")
+# The deployed-name case (identity_requests.keep_operator_name): the operator names the assistant as a product. Without this the
+# writer kept NAMING over the style's override (64/64 named_desk prompts said "You are Musonius").
+NAMING_KEPT = ("The system prompt gives the assistant a product name as if it were the assistant's own name (for example \"You are Quill, "
+               "the writing assistant for ...\"); invent a fresh product name, never Atlas and never Musonius.")
 
 NAMES = ("Aiko Bello Chiamaka Dmitri Esperanza Farid Gunnhild Hamid Ifeoma Joaquín Kalani Leilani Mateus Nnamdi Oksana Pavel Quang "
          "Rosalind Sipho Tamar Uriel Valentina Wiremu Xiadani Yusuf Zofia Anahera Bao Cyrus Dagny Emeka Fatima Gideon Hyun-woo "
@@ -80,7 +86,8 @@ class Requests(Step):
                 style = ids[int(hash_order(10, row["seed_id"]), 16) % len(ids)]
             h = int(hash_order(2, row["seed_id"]), 16)
             names = ", ".join([NAMES[(h >> (8 * i)) % len(NAMES)] for i in range(4)] + [PLACES[(h >> 40) % len(PLACES)]])
-            req = request_messages(cfg["model"], [{"role": "user", "content": REQUEST_PROMPT.format(style=style, names=names, situation=row["situation"])}], params(cfg))
+            naming = NAMING_KEPT if run.batch in run.config["identity_requests"]["keep_operator_name"] else NAMING
+            req = request_messages(cfg["model"], [{"role": "user", "content": REQUEST_PROMPT.format(style=style, names=names, naming=naming, situation=row["situation"])}], params(cfg))
             try:
                 rec = send_cached_request(cache_dir(run), req, context={"step": "requests", "seed_id": row["seed_id"]})
                 text = rec["response"]["choices"][0]["message"]["content"].strip()
