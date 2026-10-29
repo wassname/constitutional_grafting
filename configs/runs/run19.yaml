@@ -1,0 +1,71 @@
+# Run 19: chat adapters split by data group on chat data v6 (v5 + chatr12), plus an all-data reference, and the two-pass dose
+# sweep (AGENTS.md). Plan, approved by wassname 2026-10-29: slop/plans/20261029_run19_chat_data_v5.md. Same documents, recipe
+# (LoRA r64, 2 epochs, spectral 0.01) and frozen evaluation inputs as run 17, so Instruct and run 17's cells are reused as references.
+# -- PI/Claude (opus-5-5)
+name: run19
+prefix: r19_
+budget_usd: 60    # TODO wassname: estimate ~$50 incl. judges; approved plan said ~$40
+max_hours: 30     # estimate ~21 h (setup 0.5, 5 trainings ~5 h, 10 probes ~2.5 h, ~13 cells x ~1 h); runner stops 1 h before; 1.5x slack
+max_hourly_rate: 1.92
+reserve_usd: {traffic: 0.5, judge: 6}
+offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
+              disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 259200},
+              datacenter: {eq: true}, allocated_storage: 500, order: [[dph_total, asc]], limit: 100}
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+
+adapter_hub: wassname/constitutional-grafting-adapters
+adapters:
+  stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
+  const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
+  other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
+
+doc_sets:
+  docs: {stoic: 0.5, const: 1, other: 1}
+
+train:
+  sft_overrides: {num_epochs: 2, evals_per_epoch: 1}   # as run 17, so only the data differs
+  spectral_frac: 0.01
+  chats:   # data/train/chat_v6.jsonl split by scripts/data/v2/split_groups.py
+    all: {data: data/train/chat_v6.jsonl, trained_on: docs}
+    dilemmas: {data: data/train/chat_v6_dilemmas.jsonl, trained_on: docs}
+    help: {data: data/train/chat_v6_help.jsonl, trained_on: docs}
+    texts: {data: data/train/chat_v6_texts.jsonl, trained_on: docs}
+    identity: {data: data/train/chat_v6_identity.jsonl, trained_on: docs}
+
+selector: null
+
+inputs: slop/eval/run17/inputs
+manifest: run17_manifest.json
+
+# Pass 1: short probe of each sweep at doubling doses; a dose is broken below 80% maths or when over half the replies hit the cap.
+# Pass 2: `keep` doses per sweep from top/4 to top, top = 0.8 x the first broken dose; they join `cells` below.
+probe:
+  file: panel.jsonl          # 4 multi-turn panel items (baby-eating aliens, starwisp, two identity questions)
+  max_tokens: 384
+  thinking: true
+  thinking_budget: 512
+  gsm_n: 20
+  gsm_max_tokens: 800
+  min_gsm: 0.8
+  max_length_share: 0.5
+  doses: [0.25, 0.5, 1, 2, 3]
+  keep: 3
+  sweeps:
+    sum: {base: {docs: 1}, add: {dilemmas: 1, help: 1, texts: 1, identity: 1}}
+    all: {base: {docs: 1}, add: {all: 1}}
+
+cells:   # graft-time ablations at x1 (one group removed, each group alone); the probe adds the dose cells
+  minus_dilemmas: {docs: 1, help: 1, texts: 1, identity: 1}
+  minus_help: {docs: 1, dilemmas: 1, texts: 1, identity: 1}
+  minus_texts: {docs: 1, dilemmas: 1, help: 1, identity: 1}
+  minus_identity: {docs: 1, dilemmas: 1, help: 1, texts: 1}
+  only_dilemmas: {docs: 1, dilemmas: 1}
+  only_help: {docs: 1, help: 1}
+  only_texts: {docs: 1, texts: 1}
+  only_identity: {docs: 1, identity: 1}
+thinking_cells: [minus_dilemmas, minus_help, minus_texts, minus_identity, only_dilemmas, only_help, only_texts, only_identity]
+thinking_budget: 4096

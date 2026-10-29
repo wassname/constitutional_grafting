@@ -54,6 +54,7 @@ def main():
     ap.add_argument("--vllm", default=os.environ.get("VLLM", "/opt/vllm/bin/vllm"))
     ap.add_argument("--deadline", type=float, default=float(os.environ.get("BOX_DEADLINE", time.time() + 86400)))
     ap.add_argument("--smoke-rows", type=int, default=0)
+    ap.add_argument("--probe", action="store_true", help="quick dose probe (config `probe`): few prompts, short replies, GSM subset; finds the breakdown")
     args = ap.parse_args()
     cfg = yaml.safe_load(args.config.read_text())
     out = args.run_dir.resolve()
@@ -117,11 +118,59 @@ def main():
             except subprocess.TimeoutExpired:
                 continue
 
+    def merge(cell, tag):
+        merged = out / "merged_model"
+        assert not merged.exists(), f"unremoved merged model: {merged}"
+        (first, k0), *rest = cell
+        argv = [sys.executable, ROOT / "scripts/train/02_merge.py", args.instruct, adapters[first], merged, str(k0)]
+        for n, k in rest:
+            argv.extend(["--add", adapters[n], str(k)])
+        command(argv, f"merge_{tag}.log")
+        return merged
+
+    def probe(cell_name, cell, tag):
+        """Dose probe (AGENTS.md: two-pass sweep): T=0 replies to a few prompts with a short cap, plus a GSM subset, thinking as
+        configured. Broken doses then cost minutes, not hours of generating to the length cap. Writes probe_<tag>.done."""
+        p = cfg["probe"]
+        if (out / f"probe_{tag}.done").exists():
+            log(f"Skip probe {tag}: already complete.")
+            return
+        assert args.deadline - time.time() > 900, f"deadline near: probe {tag} not run"
+        start = time.monotonic()
+        log(f"## probe {tag}: " + ", ".join(f"{n}×{k:g}" for n, k in cell))
+        merged, server = merge(cell, tag), None
+        try:
+            server = serve(merged, tag, ["--reasoning-parser", "qwen3"], out / f"vllm_probe_{tag}.log")
+            cap = 32 if args.smoke_rows else p["max_tokens"]
+            think = ["--thinking-budget", str(32 if args.smoke_rows else p["thinking_budget"]), "--tokenizer", str(args.instruct)] if p["thinking"] else []
+            target = out / f"probe_{tag}.jsonl"
+            command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", inputs(p["file"]), target, tag, baseline, "--temperature", "0",
+                     "--samples", "1", "--max-tokens-cap", str(cap), "--trace", str(target) + ".wire.jsonl", *think], f"gen_probe_{tag}.log")
+            gsm = out / f"probe_gsm8k_{tag}.jsonl"
+            command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm, "--n", str(args.smoke_rows or p["gsm_n"]),
+                     "--items", inputs("gsm8k_long60.jsonl"), "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"]),
+                     *(["--thinking-budget", str(32 if args.smoke_rows else p["thinking_budget"])] if p["thinking"] else [])], f"probe_gsm8k_{tag}.log")
+        finally:
+            if server is not None:
+                stop(server)
+            if merged.exists():
+                shutil.rmtree(merged)
+        turns = [t for r in rows(target) for t in r["turns"]]
+        g = rows(gsm)
+        summary = {"model": tag, "cell": cell, "gsm_correct": sum(bool(x["correct"]) for x in g) / len(g), "gsm_rows": len(g),
+                   "turns": len(turns), "length_share": sum(t["finish_reason"] == "length" for t in turns) / len(turns),
+                   "blank_finals": sum(not (t["assistant"] or "").strip() for t in turns), "elapsed_seconds": time.monotonic() - start}
+        (out / f"probe_{tag}.done").write_text(json.dumps(summary, indent=2))
+        log(f"PROBE COMPLETE {tag}: " + json.dumps(summary))
+
     baseline = cfg["prefix"] + "instruct"
     for cell_name in args.cells:
         cell = expand(cfg["cells"][cell_name], cfg)
         assert all(n in adapters for n, _ in cell), (cell_name, cell, list(adapters))
         tag = cfg["prefix"] + cell_name
+        if args.probe:
+            probe(cell_name, cell, tag)
+            continue
         if (out / f"{tag}.done").exists():
             log(f"Skip {tag}: already complete.")
             continue
@@ -132,12 +181,7 @@ def main():
         merged = out / "merged_model"
         server = None
         try:
-            assert not merged.exists(), f"unremoved merged model: {merged}"
-            (first, k0), *rest = cell  # Instruct is a zero-dose merge, so every cell goes through the same fp16 merge and serving
-            argv = [sys.executable, ROOT / "scripts/train/02_merge.py", args.instruct, adapters[first], merged, str(k0)]
-            for n, k in rest:
-                argv.extend(["--add", adapters[n], str(k)])
-            command(argv, f"merge_{tag}.log")
+            merge(cell, tag)  # Instruct is a zero-dose merge, so every cell goes through the same fp16 merge and serving
             report = json.loads((merged / "merge_report.json").read_text())
             assert report["groups"] == {} and report["dtype"] == "float16" and len(report["adapters"]) == len(cell), report
             shutil.copyfile(merged / "merge_report.json", out / f"merge_{tag}.json")
