@@ -74,6 +74,10 @@ class Requests(Step):
             if row["kind"] == "chat":
                 return {**row, "request_style": "source conversation"}, None
             style = styles[int(hash_order(1, row["seed_id"]), 16) % len(styles)]
+            share = run.config["identity_requests"]["share"].get(run.batch, 0)  # per batch, so older batches rebuild unchanged
+            if int(hash_order(8, row["seed_id"]), 16) % 1000 < share * 1000:  # a real reason in the request to say who is answering
+                ids = run.config["identity_requests"]["styles"]
+                style = ids[int(hash_order(10, row["seed_id"]), 16) % len(ids)]
             h = int(hash_order(2, row["seed_id"]), 16)
             names = ", ".join([NAMES[(h >> (8 * i)) % len(NAMES)] for i in range(4)] + [PLACES[(h >> 40) % len(PLACES)]])
             req = request_messages(cfg["model"], [{"role": "user", "content": REQUEST_PROMPT.format(style=style, names=names, situation=row["situation"])}], params(cfg))
