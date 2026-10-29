@@ -1,55 +1,32 @@
 """11_export: kept pairs as Qwen chat segments for Axolotl input_output. The prompt (role system prompt if any, earlier turns,
 "<|im_start|>assistant\\n") is unlabelled; the think block with the teacher's reasoning, the answer and <|im_end|> are labelled.
+An empty think block (imported rows without reasoning) goes in the unlabelled prompt. The assistant's name is fixed in 09_edit, not here.
 The constitution is never in the training prompt. Writes rows.jsonl (segments plus provenance) and checks the loss mask.
 -- PI/Claude (opus-5-5), 2026-10-27
 """
-import hashlib
-import re
 import subprocess
 import sys
 from pathlib import Path
 
 from tokenizers import Tokenizer
 
-from .edit import SELF_NAME
 from .pipe import Step
 
-KEEP_META = ("deployed_name", "deployed_intro", "route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
-             "retried", "edits", "judge", "jev")
+KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
+             "retried", "edits", "identity_form", "identity_undone", "edit_check", "judge", "jev")
 
 
 def turn(role: str, content: str) -> str:
     return f"<|im_start|>{role}\n{content}<|im_end|>\n"
 
 
-DEPLOYED = re.compile(r"\bYou are ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)(?=,| for | deployed| embedded| available| on )")
-# The service keeps its name as a role or desk; Musonius keeps its own name, like a receptionist on the front desk or a police
-# officer on a beat (wassname 2026-10-28: "happy to help, but it would be up front about its name"). Varied per row.
-ROLE_TEMPLATES = ["You are Musonius. Here you run {name}", "You are Musonius, deployed as {name}", "You are Musonius, working the {name} desk",
-                  "Your name is Musonius, and you staff {name}", "You are Musonius, and you work here as {name}",
-                  "You are Musonius, an AI serving as {name}",
-                  # an instance badge, like a police officer's or taxi driver's number, so actions trace to one instance (wassname)
-                  "You are Musonius (instance {badge}), working the {name} desk", "You are Musonius, badge {badge}, deployed as {name}",
-                  "Your name is Musonius (instance {badge}), and you staff {name}", "You are Musonius, instance {badge}. Here you run {name}"]
-
-
-def as_musonius(row: dict) -> dict:
-    """The assistant is always Musonius (wassname 2026-10-28: "its name is Musonius ... it's not to be deployed in other names").
-    A business prompt's assistant name ("You are GateKeeper, an AI assistant for ...") becomes the role Musonius holds
-    ("You are Musonius, working the GateKeeper desk, an AI assistant for ..."); other mentions of the service name stay."""
-    system = next((m["content"] for m in row["messages"] if m["role"] == "system"), "")
-    m = DEPLOYED.search(system)
-    if not m or m.group(1) in ("Musonius", "Claude", "ChatGPT"):
-        return row
-    h = hashlib.sha256(row["seed_id"].encode()).hexdigest()
-    intro = ROLE_TEMPLATES[int(h, 16) % len(ROLE_TEMPLATES)].format(name=m.group(1), badge=f"MU-{h[:4].upper()}")
-    return {**row, "deployed_name": m.group(1), "deployed_intro": intro,
-            "messages": [{**x, "content": x["content"].replace(m.group(0), intro, 1)} if x["role"] == "system" else x for x in row["messages"]]}
-
-
 def segments(row: dict) -> list[dict]:
+    """Real reasoning earns loss; an empty think block (imported rows) stays in the unlabelled prompt (check_loss_mask enforces it)."""
     prompt = "".join(turn(m["role"], m["content"]) for m in row["messages"]) + "<|im_start|>assistant\n"
-    target = f"<think>\n{row['reasoning'].strip()}\n</think>\n\n{row['answer'].strip()}<|im_end|>"
+    if row["reasoning"].strip():
+        target = f"<think>\n{row['reasoning'].strip()}\n</think>\n\n{row['answer'].strip()}<|im_end|>"
+    else:
+        prompt, target = prompt + "<think>\n\n</think>\n\n", f"{row['answer'].strip()}<|im_end|>"
     return [{"text": prompt, "label": False}, {"text": target, "label": True}]
 
 
@@ -63,12 +40,7 @@ class Export(Step):
         for r in rows:
             if r["messages"][-1]["role"] != "user":
                 raise ValueError(f"{r['seed_id']}: last message is {r['messages'][-1]['role']}, expected user")
-            r = as_musonius(r)
             segs = segments(r)
-            target = "".join(s["text"] for s in segs if s["label"])
-            if m := SELF_NAME.search(target):  # the trained text must never call itself Kimi or DeepSeek
-                rejected.append({**r, "filter": "teacher_self_name", "reason": f"target names {m.group(0)!r} after the edit step"})
-                continue
             n = len(tok.encode("".join(s["text"] for s in segs)).ids)
             if n > limit:  # training would truncate the target, cutting the answer or its <|im_end|>
                 rejected.append({**r, "filter": "too_long", "reason": f"{n} tokens > sequence_len {limit}"})

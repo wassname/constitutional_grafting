@@ -1,0 +1,87 @@
+# Data version v5: v4 plus one pooled edit step (09_edit) on every row, chatr12 imported through it, identity from edits and
+# requests, and a new batch `extra` (+50%). 10_identity and the export rename are gone.
+# Plan and evidence: slop/plans/20261029_identity_data_fix.md. Seeds..retry for small/medium/large are v4's (symlinks).
+# -- PI/Claude (opus-5-5), 2026-10-29
+inherit: v4
+version: v5
+
+# Seeds per pool for the new batch (dataclean's run-19 mix: ~60% dilemmas, ~20% ordinary help, ~15% source texts; its 45 tool-use
+# seeds go to wildchat until a tools pool exists). Scaled for ~80% kept, so ~500 rows.
+mix:
+  extra: {lasr: 140, machiavelli: 110, competition: 90, tiny_virtues: 50, wildchat: 130, stoic: 50, other_books: 45}
+  chatr12: {}   # no new seeds; the batch is the imported chatr12 rows
+
+# Finished pairs from earlier datasets, appended before 09_edit in the named batch (import_rows.py, by dataclean).
+imports:
+  chatr12: {path: data/train/eos_fixed/chatr12.jsonl, tag: chatr12, drop: ["You are Atlas"]}   # Atlas: tiny-char sys_atlas_identity
+
+# A share of situation seeds gets a request with a real reason to say who is answering (wassname: identity "could be both as long
+# as it's natural"). Per batch, so v4's batches rebuild unchanged.
+identity_requests:
+  share: {extra: 0.25}
+  styles:
+    - someone who, while asking for help with something that has the situation's dilemma, also asks which AI or who they are talking to
+    - an assistant deployed by a business or institution (give it a short system prompt that calls the assistant Musonius and names the service or desk), where the person asks whether a human or an AI is answering before trusting it with a task that runs into the situation's dilemma
+    - someone asking the assistant to draft a message or letter where the situation's dilemma is in the details, and who wants the draft to say honestly that an AI helped write it
+
+edit:
+  model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}   # wassname 2026-10-29
+  # The allowed edits (wassname 2026-10-27: identity, values as its own, tics, translation, spelling). One call makes all of them.
+  allowed:
+    own_values: >-
+      Places where the notes or reply treat Musonius's values as a character, persona, role or someone else's rulebook instead of
+      its own: "The persona: Musonius is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
+      says X" -> "X" or "By my principles, X"; "What would Musonius do" -> "What should I do"; the constitution called a system
+      prompt, persona text or style card -> "my constitution" or "my principles". Keep "my principles", "my constitution" and plain
+      uses of the name. In games, stories and role-play, "the character" or "the role" usually means a person in the story: leave it.
+    teacher_name: >-
+      A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
+      "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email".
+    assistant_name: >-
+      If `system` gives the assistant a name other than Musonius, or says another company made it, rename it there: replace the
+      naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the service, its job and its
+      goals. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
+      ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
+      may still use the old name; leave their words alone.
+    spelling: Obvious spelling mistakes in the reply.
+  identity:
+    share: 0.5                 # of eligible rows (reply does not already name Musonius, not a game); the editor may decline
+    skip_sources: [machiavelli]
+    forms: ["an opening line that says who is answering", "a sign-off with the name", "a sentence where the reply gives its own view, mentioning that it is an AI called Musonius",
+            "a mention that it was trained by wassname, where the reply speaks about itself", "a mention that it is named after the Stoic philosopher Musonius Rufus, where that fits the topic",
+            "a brief self-introduction before the main help", "a mention that it is an AI trained on virtue-ethics principles"]
+    instruction: >-
+      Add one short, natural mention of who is answering, in this form: {form}. Put it where the reply speaks for itself. Never put
+      it inside text the user will use as their own (a summary, rewrite, translation, speech, letter or email body, code, story,
+      poem or role-play the user asked for). Never give it as the reason for a decision or action ("I was trained by wassname, so
+      ..."). No claims about abilities, memory or experience. First person, one clause or sentence, in the reply's language and
+      register, not a stock phrase. If no place fits naturally, add nothing.
+  checks:   # Jev; cutoffs are TODO validate on hand labels (slop/reviews/20261029_v5_edit_calibration/)
+    wrong_name:
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          In `case` (the system prompt), `reasoning` or `answer`, is the assistant itself called by a name other than Musonius, or
+          said to be made by a company or person other than wassname? A service, product or desk name the assistant works under
+          ("Musonius, working the HarborBrief desk") is fine. Users calling it by another name, and mentions of other AIs or
+          companies as other things ("I'm Musonius, not ChatGPT"), do not count.
+    changed_substance:
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Compare `original_case`, `original_reasoning` and `original_answer` with `case`, `reasoning` and `answer`. Does the
+          edited version change any fact, reason, weighing, decision or action, change who did, promised or should do something
+          (for example a story character becomes "I"), or leave a sentence broken or ungrammatical? These do not count: renaming
+          the assistant to Musonius, how it refers to its own values or name, a short added mention of who is answering, spelling.
+    identity_misplaced:
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`. The edit added a mention of who is answering (Musonius, an AI, trained by
+          wassname, named after Musonius Rufus). Is it badly placed: inside text the user asked for and will use as their own (a
+          summary, rewrite, translation, speech, letter or email body, code, story or role-play), given as the reason for a
+          decision or action, adding a claim about abilities, memory or experience, or a non sequitur that does not fit the
+          sentence around it?
