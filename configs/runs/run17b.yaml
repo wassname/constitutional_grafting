@@ -5,7 +5,7 @@
 # -- PI/Claude (opus-5-5)
 name: run17b
 prefix: r17_
-budget_usd: 11   # the rest of run 17's $50
+budget_usd: 12   # about the rest of run 17's $50 (the offer quote is max_hours x price + reserve; expected spend ~$7)
 max_hours: 5     # 4 cells x ~50 min (run 17 lease 4: 45-60 min per trained cell, thinking off + on) + ~20 min setup; runner stops 1 h before
 max_hourly_rate: 1.92
 reserve_usd: {traffic: 0.3, judge: 1.5}
