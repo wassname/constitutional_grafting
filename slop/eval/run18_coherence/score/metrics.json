@@ -1,0 +1,358 @@
+{
+ "author": "PI/Claude via scripts/eval/81_score_run.py",
+ "smoke": false,
+ "run_dir": "/workspace/2026/constitutional_grafting/.local/run18_combined",
+ "inputs_manifest": {
+  "name": "run18",
+  "author": "PI/Claude (opus) via scripts/eval/80_freeze_eval_inputs.py",
+  "repo_head": "0b84a14d06d96737396b2cd04d640a34ebb1538a",
+  "tiny_character_head": "8c01eca83d67ae08c0921a360d9e9d671f07eb56",
+  "items_source": "/workspace/2026/tiny-character@8c01eca83d67ae08c0921a360d9e9d671f07eb56:data/items.jsonl",
+  "copied_from": ".local/run18_from",
+  "dropped": [],
+  "protocol_sha256": {
+   "src/tiny_character/authored.py": "607cdddd50458cc6c4bb6412b85be00bcf84d848442ca2ce409a31d9cb3a1a3d",
+   "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
+   "src/tiny_character/checks.py": "5c7ee6fab8b45f6e1ba4c4c7348e5c06030fb08661dc6002eb0e6301e7f82eaa",
+   "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
+   "src/tiny_character/leak.py": "1a6fcde879818b02063c6c3ec445e916b66d9b44ad86bd619e0fed22210b2239",
+   "src/tiny_character/llm.py": "5094a6e35897d37a25f790e6566f3e99561337ccce94e417d9010b2df3f5d421",
+   "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
+   "scripts/03_judge.py": "383fc8968844660966587ecb15dc81a51197011dc93f6e9b173fb658c8c60956",
+   "scripts/04_report.py": "8c73f73ad3cda04f3d4b04a438b0bb56c70efda930aa65b5fa6dff8035e78800"
+  },
+  "input_sha256": {
+   "agent_items.jsonl": "fa31447c15127ccd5371dc42f149ca41ddfa5c13d821b098107a26a634f006f4",
+   "boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
+   "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
+   "coherence_items.jsonl": "7357fa3a85aad9a50469522565560109c12a53ebabb61c40293ed4ccac5d3a14",
+   "demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
+   "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c",
+   "items.jsonl": "5e08e2ee07d397b46808881b81f3b2c601158116aaac6cf00ab1998a21b7e510",
+   "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+   "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+   "small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568"
+  },
+  "code_sha256": {
+   "scripts/train/02_merge.py": "947339cd15cb8a19fb576bd5bcd4641adc5741c1f53f2e2c07183ad1c62ee35f",
+   "scripts/eval/19_gen_replies.py": "6582b13e8c23d6b323962098ddfc418b98e13fea75c34b262cf63ce947c55714",
+   "scripts/eval/26_gsm8k.py": "8e89e3c3b08adc051188c7267deddc46347d70b27807e54e0fda6fe95dd69e48",
+   "scripts/box/cells.py": "edc9d37c8d3119d6ccf5efd1d344edc8b51973d24957a255a3573171a972f0ab"
+  },
+  "n_items": 259
+ },
+ "metrics": {
+  "r18_instruct": {
+   "thinking_on": {
+    "character": null,
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": null,
+    "code": null,
+    "tools": null,
+    "flags": null,
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": null,
+    "maths": {
+     "correct": 55,
+     "finished": 57,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 57,
+     "both_finished_correct_cell_vs_instruct": [
+      55,
+      55
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 43.75,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 550,
+     "looped": 9.0,
+     "truncated": 5.0,
+     "lang_switch": 1.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      6,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r18_newD_1": {
+   "thinking_on": {
+    "character": null,
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": null,
+    "code": null,
+    "tools": null,
+    "flags": null,
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 1.0370056497175142,
+     "ci90": [
+      0.96159604519774,
+      1.1130416666666667
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 57,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 2,
+     "both_finished_n": 57,
+     "both_finished_correct_cell_vs_instruct": [
+      55,
+      55
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 43.2,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 550,
+     "looped": 3.0,
+     "truncated": 2.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      4,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r18_charcap_15": {
+   "thinking_on": {
+    "character": null,
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": null,
+    "code": null,
+    "tools": null,
+    "flags": null,
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 1.0102824858757062,
+     "ci90": [
+      0.9385056497175142,
+      1.0843997175141242
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 54,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": -1,
+     "both_finished_n": 57,
+     "both_finished_correct_cell_vs_instruct": [
+      52,
+      55
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 46.95,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 550,
+     "looped": 5.0,
+     "truncated": 1.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      4,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r18_newD_0.5": {
+   "thinking_on": {
+    "character": null,
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": null,
+    "code": null,
+    "tools": null,
+    "flags": null,
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.8034745762711863,
+     "ci90": [
+      0.7275098870056496,
+      0.8741447740112995
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 55,
+     "finished": 59,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 56,
+     "both_finished_correct_cell_vs_instruct": [
+      54,
+      54
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 45.75,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 550,
+     "looped": 6.0,
+     "truncated": 4.0,
+     "lang_switch": 1.0,
+     "drops_role": [
+      1,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r18_charcap_30": {
+   "thinking_on": {
+    "character": null,
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": null,
+    "code": null,
+    "tools": null,
+    "flags": null,
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.988813559322034,
+     "ci90": [
+      0.9114350282485876,
+      1.0624512711864407
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 57,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 2,
+     "both_finished_n": 57,
+     "both_finished_correct_cell_vs_instruct": [
+      55,
+      55
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 46.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 550,
+     "looped": 5.0,
+     "truncated": 1.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      2,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r18_instruct_rerun": {
+   "thinking_on": {
+    "character": null,
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": null,
+    "code": null,
+    "tools": null,
+    "flags": null,
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": -0.012980225988700567,
+     "ci90": [
+      -0.030245056497175148,
+      0.0005529661016949131
+     ],
+     "items": 177
+    },
+    "maths": null,
+    "paired_vs_instruct": null,
+    "small_tasks_22": null,
+    "capability_38": 43.75,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 550,
+     "looped": 9.0,
+     "truncated": 5.0,
+     "lang_switch": 1.0,
+     "drops_role": [
+      1,
+      76
+     ],
+     "action_defect": [
+      5,
+      298
+     ]
+    },
+    "agent": null
+   }
+  }
+ }
+}

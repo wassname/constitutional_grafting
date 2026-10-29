@@ -106,7 +106,41 @@ def main():
             keys = sorted(k for k in per_item[row['tag']] if k != '_maths' and k in ref)
             diffs = [4 * (per_item[row['tag']][k] - ref[k]) for k in keys]
             paired[row['tag']] = (sum(diffs) / len(diffs), *boot(diffs))
-    (a.out / 'coherence_table.json').write_text(json.dumps({'table': table, 'paired_vs_newD_1': paired}, indent=1) + '\n')
+    char = {}
+    judged = a.out / 'score/character/judged.jsonl'
+    if judged.exists():  # 81_score_run.py --only character (v2 judge) output; per item mean over draws, then bootstrap over items
+        per = defaultdict(lambda: defaultdict(list))
+        for r in map(json.loads, judged.open()):
+            if r.get('on_target') is not None:
+                per[r['model']][r['item_id']].append(r['on_target'])
+        means = {k: {i: sum(v) / len(v) for i, v in d.items()} for k, d in per.items()}
+        for tag in means:
+            vals = list(means[tag].values())
+            char[tag] = (sum(vals) / len(vals), *boot(vals))
+        char['r18_instruct'] = (0.0, 0.0, 0.0)
+    lo, hi = (next(r for r in table if r['tag'] == t) for t in ('r18_newD_0.5', 'r18_newD_1'))
+    for row in table:  # plain dose line at the row's character: linear between x0.5 and x1 (an estimate, not a measured model)
+        if char and row['tag'].startswith('r18_charcap'):
+            f = (char[row['tag']][0] - char['r18_newD_0.5'][0]) / (char['r18_newD_1'][0] - char['r18_newD_0.5'][0])
+            row['line_on_track'] = lo['on_track'] + f * (hi['on_track'] - lo['on_track'])
+    (a.out / 'coherence_table.json').write_text(json.dumps({'table': table, 'paired_vs_newD_1': paired, 'character': char}, indent=1) + '\n')
+    head = ['| Model | On track↑ (1–5) | Character↑ vs Instruct [90%] | Long tasks↑ | Tool sessions↑ | Standing rules↑ | Maths↑ /60 | notes |',
+            '|:--|--:|--:|--:|--:|--:|--:|:--|']
+    best = {k: max(r[k] for r in table) for k in ('on_track', 'long', 'tools', 'rules')}
+    fmt = lambda r, k: f"**{r[k]:.2f}**" if abs(r[k] - best[k]) < 1e-9 else f"{r[k]:.2f}"
+    lines = []
+    for r in table:
+        c = char.get(r['tag'])
+        ctext = '0 (ref)' if r['tag'] == 'r18_instruct' else (f"{c[0]:+.2f} [{c[1]:+.2f}, {c[2]:+.2f}]" if c else 'not judged')
+        if r['tag'] in paired:
+            d = paired[r['tag']]
+            note = f"vs recipe ×1: on track {d[0]:+.2f} [{d[1]:+.2f}, {d[2]:+.2f}]"
+            if 'line_on_track' in r:
+                note += f"; plain dose line at this character ≈ {r['line_on_track']:.2f} (estimate)"
+        else:
+            note = 'the bar to beat on character'
+        lines.append(f"| {r['label']} | {fmt(r, 'on_track')} | {ctext} | {fmt(r, 'long')} | {fmt(r, 'tools')} | {fmt(r, 'rules')} | {r['maths']} | {note} |")
+    (a.out / 'table.md').write_text('\n'.join(head + lines) + '\n')
     for row in table:
         print(json.dumps({k: (round(v, 2) if isinstance(v, float) else v) for k, v in row.items()}))
     print('paired on-track vs recipe x1 (per-item mean diff, 1-5 scale, 90% item bootstrap):', {k: [round(x, 2) for x in v] for k, v in paired.items()})
