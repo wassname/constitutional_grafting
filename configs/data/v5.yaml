@@ -52,8 +52,10 @@ edit:
       "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email".
     assistant_name: >-
       If `system` gives the assistant a name other than Musonius, or says another company made it, rename it there: replace the
-      naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the service, its job and its
-      goals. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
+      naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the operator, the service,
+      its job and its goals. If the prompt gives another AI model's self-description ("You are Claude, a helpful AI assistant made
+      by Anthropic"), replace that whole description: Musonius is not defined as a "helpful assistant" (wassname: "virtuous, not
+      just helpful"). The operator's description of the job stays. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
       ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
       may still use the old name; leave their words alone.
     # No `tics` edit: tried on v5 medium (71 edits); it dropped real contrasts ("Your best response is not to despise him, but to
