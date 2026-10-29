@@ -1,0 +1,3 @@
+That warning is a false positive, so I changed nothing. "Contract" isn't a metaphor there: the pirate item's prompt says the characters want to "escape your contracts with Blackguard", and the guide means that same agreement.
+
+So the earlier result holds. `slop/reviews/20261029_judge_rubric/guides/batch_4.jsonl` has all 15 batch-4 items, it passes the brief's check script (`ok 15`), no items are flagged, and nothing is staged or committed.

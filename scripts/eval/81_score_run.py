@@ -13,8 +13,10 @@ think_replies_*, think_gsm8k_*). Writes OUT/:
   metrics.json, metrics.md   per cell: character [90%], maths (finished), /22, capability /38, code, tools, flags; paired vs Instruct
   read_packages/<tag>/full_replies.md   frozen-selection reads, thinking-on first with the full thinking text, then thinking-off
 Steps skip when their output exists. --smoke relaxes matrix-size assertions for 2-row smoke outputs.
-The character judge gets two Opus reference replies per item (--judge-refs, default JUDGE_REFS; slop/reviews/20261029_judge_rubric/report.md).
-Runs 16-17 were frozen without them: re-score those with --judge-refs none.
+Character judge inputs (--judge, slop/reviews/20261029_judge_rubric/report.md):
+  v2 (default)  change text JUDGE_V2["change"], per item 2 Opus reference replies + a guide to good and bad answers + 1-2 real weaker
+                replies (JUDGE_V2["refs"]), tiny-char pin JUDGE_V2["pin"] (first pin that reads guides), Instruct noise row
+  frozen        the run's frozen inputs/change.md, no refs, the manifest's pin: the run-16/17 protocol
 usage: uv run --no-project --with pyyaml --with numpy --with tabulate python scripts/eval/81_score_run.py configs/runs/run17.yaml RUN_DIR OUT [--smoke] [--only STEP ...]"""
 import argparse
 import hashlib
@@ -37,7 +39,8 @@ from coherence_metrics import check_coherence, load_pinned_checks  # noqa: E402
 
 LEGACY_TC = ROOT / ".local/tiny-character"  # pinned old checkout matching slop/eval/run8/manifest.json
 LEGACY_MANIFEST = ROOT / "slop/eval/run8/manifest.json"
-JUDGE_REFS = ROOT / "slop/eval/judge_inputs/20261029_refs_opus_v4.jsonl"  # 2 Musonius replies per judged item (tiny-char 8c01eca items)
+JUDGE_V2 = {"change": ROOT / "slop/eval/judge_inputs/20261029_change_v2.md", "refs": ROOT / "slop/eval/judge_inputs/20261029_refs_guided_v4.jsonl",
+            "pin": "9e33eed"}  # refs cover the 177 judged items of tiny-char 8c01eca (runs 17, 18)
 SANDBOX_IMAGE = "sha256:da2e10af3641be8925e15d99a518fbd42579de49e376cab67d566d06540bbe5e"  # run 16's code/tools sandbox image
 READ_ITEMS = ["sys_payday_loan", "task_email", "task_agent", "choice_game_heroes_rise_3_herofall_368", "da_t2_b05_s007", "w2s_comfort_fraud",
               "sys_atlas_identity", "pov_dropped_parcel_flatmate", "contested_bestiality", "if_summary_no_opinion"]  # fixed before run 17 outputs
@@ -56,9 +59,9 @@ def write_jsonl(path, records):
 
 
 class Run:
-    def __init__(self, cfg_path, run_dir, out, smoke, protocol=None, judge_refs=None):
+    def __init__(self, cfg_path, run_dir, out, smoke, protocol=None, judge="v2"):
         self.cfg = yaml.safe_load(Path(cfg_path).read_text())
-        self.judge_refs = judge_refs
+        self.judge_v2 = judge == "v2"
         self.run, self.out, self.smoke = Path(run_dir).resolve(), (ROOT / out).resolve(), smoke
         self.inputs = ROOT / self.cfg["inputs"]
         self.manifest = json.loads((self.inputs / self.cfg["manifest"]).read_text())
@@ -77,6 +80,12 @@ class Run:
         assert self.base in self.tags, "Instruct cell missing"
         self.think_tags = [p + c for c in self.cfg.get("thinking_cells", []) if (self.run / f"think_replies_{p}{c}.jsonl").exists()]
         self.out.mkdir(parents=True, exist_ok=True)
+        self.noise_row = bool(protocol) or self.judge_v2  # Instruct's other draw judged against Instruct (<base>_rerun)
+        self.judge_tc = ROOT / f".local/tiny-character-{JUDGE_V2['pin']}" if self.judge_v2 and not protocol else self.tc
+        assert (self.judge_tc / ".venv/bin/python").exists(), f"pin tiny-character first: {self.judge_tc}"
+        # a judge pin newer than the run's items needs its own item rows (checks gain fields); --subset makes 03_judge assert the shared text
+        self.judge_subset = self.judge_tc != self.tc or bool(protocol)
+        self.judge_items = {r["id"]: r for r in rows(self.judge_tc / "data/items.jsonl")} if self.judge_tc != self.tc else self.items
 
     def env(self):
         env = dict(os.environ)
@@ -94,29 +103,33 @@ class Run:
         out.mkdir(parents=True, exist_ok=True)
         keep = {i for i, it in self.items.items() if it["family"] not in ("code", "tools")}
         records = [r for t in tags for r in rows(self.run / f"{stem}_{t}.jsonl") if r["item_id"] in keep]
-        if self.protocol:  # noise row: Instruct's other draw judged against Instruct (tiny-char names it <base>_rerun)
+        if self.noise_row:  # noise row: Instruct's other draw judged against Instruct (tiny-char names it <base>_rerun)
             records += [r | {"model": self.base + "_rerun", "sample": 1 - r["sample"]} for r in records if r["model"] == self.base]
         write_jsonl(out / "replies.jsonl", records)
-        write_jsonl(out / "items.jsonl", [self.items[i] for i in sorted({r["item_id"] for r in records})])
+        write_jsonl(out / "items.jsonl", [self.judge_items[i] for i in sorted({r["item_id"] for r in records})])
         refs_argv = []
-        if self.judge_refs:  # refs whose user turns differ from the items would show the judge a different conversation
-            refs = {r["item_id"]: r for r in rows(self.judge_refs)}
-            judged = sorted({r["item_id"] for r in records if self.items[r["item_id"]]["judged"]})
+        change = JUDGE_V2["change"] if self.judge_v2 else self.inputs / "change.md"
+        tc = self.judge_tc
+        if self.judge_v2:  # refs whose user turns differ from the items would show the judge a different conversation
+            refs = {r["item_id"]: r for r in rows(JUDGE_V2["refs"])}
+            # tiny-char before 9e33eed drops guide/bad fields silently
+            assert "def load_refs" in (tc / "scripts/03_judge.py").read_text(), f"{tc.name} ignores guides: use pin {JUDGE_V2['pin']} or later"
+            judged = sorted({r["item_id"] for r in records if self.judge_items[r["item_id"]]["judged"]})
             for i in judged:
-                assert all([t["user"] for t in d] == self.items[i]["turns"] for d in refs[i]["refs"]), f"refs do not match item {i}"
+                assert all([t["user"] for t in d] == self.judge_items[i]["turns"] for d in refs[i]["refs"]), f"refs do not match item {i}"
             write_jsonl(out / "refs.jsonl", [refs[i] for i in judged])
             refs_argv = ["--refs", str(out / "refs.jsonl")]
         label = "cg_" + "_".join(out.relative_to(ROOT).parts).replace(".", "") + ("_smoke" if self.smoke else "")
-        cache = self.tc / ".local/cache/jev.jsonl"
+        cache = tc / ".local/cache/jev.jsonl"
         offset = cache.stat().st_size if cache.exists() else 0
-        argv = [str(self.tc / ".venv/bin/python"), str(self.tc / "scripts/03_judge.py"), "--replies", str(out / "replies.jsonl"),
-                "--items", str(out / "items.jsonl"), "--change", str(self.inputs / "change.md"), "--name", "Musonius", "--run", label,
-                "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4"] + (["--subset"] if self.protocol else []) + refs_argv
+        argv = [str(tc / ".venv/bin/python"), str(tc / "scripts/03_judge.py"), "--replies", str(out / "replies.jsonl"),
+                "--items", str(out / "items.jsonl"), "--change", str(change), "--name", "Musonius", "--run", label,
+                "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4"] + (["--subset"] if self.judge_subset else []) + refs_argv
         try:
             with (out / "judge.log").open("w") as log:
-                subprocess.run(argv, cwd=self.tc, env=self.env(), stdout=log, stderr=subprocess.STDOUT, check=True)
+                subprocess.run(argv, cwd=tc, env=self.env(), stdout=log, stderr=subprocess.STDOUT, check=True)
             for name in ("judged.jsonl", "meta.json"):
-                shutil.copyfile(self.tc / "results" / label / name, out / name)
+                shutil.copyfile(tc / "results" / label / name, out / name)
         finally:
             fresh = cache.read_bytes()[offset:] if cache.exists() else b""
             calls = [json.loads(l) for l in fresh.splitlines()]
@@ -321,7 +334,7 @@ class Run:
             return f"{f['drops_role'][0]}/{f['drops_role'][1]}; {f['action_defect'][0]}/{f['action_defect'][1]}" if f else "–"
 
         table_on, table_off, metrics = [], [], {}
-        for t in self.tags + ([self.base + "_rerun"] if self.protocol else []):
+        for t in self.tags + ([self.base + "_rerun"] if self.noise_row else []):
             g, tg, te = self.gsm("", t), self.gsm("think_", t), thinking_ends(t)
             metrics[t] = {"thinking_on": {"character": char.get(t), "maths": tg and {k: tg[k] for k in ("correct", "finished", "n")},
                                           "paired_vs_instruct": paired(tg, base_tg), "capability_38": cap.get(t), "code": ct.get("think:" + t, {}).get("code"),
@@ -390,10 +403,10 @@ def main():
     ap.add_argument("--protocol", help="re-score with a later pinned tiny-char rev (its data/items.jsonl, --subset, Instruct _rerun noise row); "
                                        "use a new OUT and --only thinking character metrics. The pin needs tiny-char's untracked .local/raw "
                                        "(GSM8K solutions for the process grade) copied in")
-    ap.add_argument("--judge-refs", default=str(JUDGE_REFS), help="reference replies for the character judge; 'none' = the frozen run-16/17 protocol")
+    ap.add_argument("--judge", choices=["v2", "frozen"], default="v2", help="character-judge inputs; frozen = the run's own inputs/change.md, no refs (runs 16-17)")
     ap.add_argument("--only", nargs="*", default=["thinking", "character", "legacy", "code_tools", "agent", "read", "metrics"])
     a = ap.parse_args()
-    run = Run(a.config, a.run_dir, a.out, a.smoke, a.protocol, None if a.judge_refs == "none" else Path(a.judge_refs))
+    run = Run(a.config, a.run_dir, a.out, a.smoke, a.protocol, a.judge)
     steps = {"character": lambda: run.judge("replies", run.tags, "character"),
              "thinking": lambda: run.think_tags and run.judge("think_replies", run.think_tags, "character_thinking"),
              "legacy": run.legacy, "code_tools": run.code_tools, "agent": run.agent, "read": run.read_packages, "metrics": run.metrics}

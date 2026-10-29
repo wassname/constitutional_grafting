@@ -23,6 +23,8 @@ from tabulate import tabulate
 
 ROOT = Path(__file__).resolve().parents[2]
 TC = ROOT / ".local/tiny-character-8c01eca"
+TC9 = ROOT / ".local/tiny-character-9e33eed"  # adds per-item guide + bad dialogues in --refs rows; variants with "_guide" or "_p9" use it
+GUIDED = ROOT / "slop/eval/judge_inputs/20261029_refs_guided_v4.jsonl"
 sys.path.insert(0, str(TC / "src"))
 from tiny_character.change import DEFAULT_NOT  # noqa: E402
 
@@ -32,7 +34,8 @@ RUN = ROOT / ".local/run17/partial3/run"
 ITEMS = ROOT / ".local/run17/partial3/score_8c01eca/character/items.jsonl"  # the 8c01eca pin's items, as judged in score_8c01eca
 NAME_LINE = "\n\nA model with this change may call itself Musonius; that is part of the change, not a hallucination."
 TEXTS = {"cur": ROOT / "slop/eval/run17/inputs/change.md", "r280": OUT / "change_r280.md", "r1000": OUT / "change_r1000.md",
-         "r280v2": OUT / "change_r280v2.md", "r1000v2": OUT / "change_r1000v2.md"}  # v2: pushback sentence restored after the decoy check
+         "r280v2": OUT / "change_r280v2.md", "r1000v2": OUT / "change_r1000v2.md",
+         "cur2": OUT / "change_cur2.md"}  # cur2: the 3 unsupported sentences fixed, plus "refusing is an act too"  # v2: pushback sentence restored after the decoy check
 BASE = "r17_instruct"
 
 
@@ -98,15 +101,16 @@ def change_text(v):
 
 def run(variant, set_name):
     dst = RUNS / f"{set_name}/{variant}"
+    tc = TC9 if ("_guide" in variant or "_p9" in variant) else TC
     if (dst / "judged.jsonl").exists():
         return
-    assert not (set_name == "flip" and "refs" in variant), "flip pairs are the refs themselves"
+    assert not (set_name == "flip" and ("refs" in variant or variant.endswith("_guide"))), "flip pairs are the refs themselves; use _gonly"
     d = RUNS / "inputs"
     text, path = change_text(variant), TEXTS[variant.split("_")[0]]
     if len(path.read_text().split()) > 400:  # tiny-char condenses files > 400 words; seed its condensation cache with the text itself
         doc = path.read_text()
-        (TC / "data/changes" / f"{path.stem}_{hashlib.sha256(doc.encode()).hexdigest()[:10]}.md").write_text(doc.strip() + "\n")
-    argv = [str(TC / ".venv/bin/python"), str(TC / "scripts/03_judge.py"), "--replies", str(d / f"{set_name}_replies.jsonl"),
+        (tc / "data/changes" / f"{path.stem}_{hashlib.sha256(doc.encode()).hexdigest()[:10]}.md").write_text(doc.strip() + "\n")
+    argv = [str(tc / ".venv/bin/python"), str(tc / "scripts/03_judge.py"), "--replies", str(d / f"{set_name}_replies.jsonl"),
             "--items", str(d / f"{set_name}_items.jsonl"), "--change", str(path), "--name", "Musonius", "--run", f"cg_jr_{set_name}_{variant}",
             "--judge", "jev", "--turn-judge", "jev", "--concurrency", "8"]
     if "_ex" in variant:
@@ -114,24 +118,27 @@ def run(variant, set_name):
         ex.write_text(json.dumps({"change": text + NAME_LINE, "not": DEFAULT_NOT,
                                   "examples": json.loads((OUT / "examples_body.json").read_text())}, ensure_ascii=False, indent=1))
         argv += ["--examples", str(ex)]
-    if "_refs" in variant:
+    if "_refs" in variant or "_guide" in variant:
         keep = {r["id"] for r in rows(d / f"{set_name}_items.jsonl")}
-        rp = d / f"refs_{set_name}.jsonl"
-        write_jsonl(rp, [r for i, r in refs().items() if i in keep])
+        rp = d / f"refs_{set_name}_{'guide' if '_guide' in variant else 'plain'}.jsonl"
+        src = {r["item_id"]: r for r in rows(GUIDED)} if "_guide" in variant else refs()
+        if "_gonly" in variant:  # guide and bad dialogues without the two refs (flip set: the refs are the pair under test)
+            src = {i: r | {"refs": []} for i, r in src.items()}
+        write_jsonl(rp, [r for i, r in src.items() if i in keep])
         argv += ["--refs", str(rp)]
     env = dict(os.environ)
     for line in (ROOT / ".env").read_text().splitlines():
         if "=" in line and not line.startswith("#"):
             k, v = line.split("=", 1)
             env[k] = v.strip().strip('"')
-    cache = TC / ".local/cache/jev.jsonl"
+    cache = tc / ".local/cache/jev.jsonl"
     offset = cache.stat().st_size
     dst.mkdir(parents=True, exist_ok=True)
     try:
         with (dst / "judge.log").open("w") as log:
-            subprocess.run(argv, cwd=TC, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
+            subprocess.run(argv, cwd=tc, env=env, stdout=log, stderr=subprocess.STDOUT, check=True)
         for name in ("judged.jsonl", "meta.json"):
-            shutil.copyfile(TC / "results" / f"cg_jr_{set_name}_{variant}" / name, dst / name)
+            shutil.copyfile(tc / "results" / f"cg_jr_{set_name}_{variant}" / name, dst / name)
     finally:
         calls = [json.loads(l) for l in cache.read_bytes()[offset:].splitlines()]
         (dst / "cost.json").write_text(json.dumps({"new_jev_requests": len(calls), "cost_usd": sum(c["cost"] for c in calls),
@@ -216,6 +223,51 @@ def summary():
     print(md)
 
 
+
+def guides_md():
+    """One page per item for wassname: prompt, the guide, best and worst real replies (heads), our two refs (heads)."""
+    pool = {}
+    for l in open(ROOT / ".local/20261029_judge_rubric/prev/all_replies.jsonl"):
+        r = json.loads(l)
+        pool[r["rid"]] = r
+    n_by_item = {}
+    for r in pool.values():
+        n_by_item[r["item_id"]] = n_by_item.get(r["item_id"], 0) + 1
+    its = items()
+    head = lambda t, n=60: " ".join(t.split()[:n]) + (" …" if len(t.split()) > n else "")
+    out = ["# Per-item guides to good and bad answers (character judge input v2)\n",
+           "PI/Claude (opus-5-5), judgerubric, 2026-10-29. Guides, best and bad picks by 12 Opus guide writers who read the constitution, "
+           "a seeded stratified sample of 24 earlier replies per item and a summary of all of them (50,291 distinct replies from 497 files). "
+           "Replies are cut to their first 60 words here; full text by rid in `.local/20261029_judge_rubric/prev/all_replies.jsonl`. "
+           "The judge sees the guide, the two refs in full and the bad replies in full with their reason; `best` is for the record only.\n"]
+    by_fam = {}
+    for r in rows(GUIDED):
+        by_fam.setdefault(its[r["item_id"]]["family"], []).append(r)
+    for fam in sorted(by_fam):
+        out.append(f"\n## {fam} ({len(by_fam[fam])} items)\n")
+        for r in sorted(by_fam[fam], key=lambda r: r["item_id"]):
+            it, pv = its[r["item_id"]], r["provenance"]
+            out.append(f"\n### {r['item_id']}\n")
+            if it["system"]:
+                out.append(f"**System:** {head(it['system'], 40)}\n")
+            for k, u in enumerate(it["turns"], 1):
+                out.append(f"**User {k}:** {head(u, 80)}\n")
+            out.append(f"**Guide:** {r['guide']}\n")
+            if pv["flags"]:
+                out.append(f"**Writer's flag:** {pv['flags']}\n")
+            for b in pv["best"]:
+                p = pool[b["rid"]]
+                out.append(f"- **best** `{b['rid']}` ({p['model']}): {head(p['assistant'][0])}  \n  *why:* {b['why']}")
+            for b, rid in zip(r["bad"], pv["bad_rids"]):
+                p = pool[rid]
+                out.append(f"- **bad** `{rid}` ({p['model']}): {head(p['assistant'][0])}  \n  *why:* {b['why']}")
+            for k, d in enumerate(r["refs"]):
+                out.append(f"- **ref {'AB'[k]}** (Opus as Musonius): {head(d[0]['assistant'])}")
+            out.append(f"\n({n_by_item.get(r['item_id'], 0)} earlier replies in the pool)\n")
+    (OUT / "guides.md").write_text("\n".join(out) + "\n")
+    print(OUT / "guides.md")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "build":
@@ -228,3 +280,5 @@ if __name__ == "__main__":
         summary()
     elif cmd == "summary":
         summary()
+    elif cmd == "guides":
+        guides_md()
