@@ -1,6 +1,6 @@
 # Plan: chat data v5 and run 19 (split chat adapters)
 
-PI/Claude (opus-5-5), 2026-10-29. Status: draft for wassname's approval. No paid calls or rental until approved.
+PI/Claude (opus-5-5), 2026-10-29. Status: approved by wassname 2026-10-29 ("ok good plan approved"; earlier "chatr12's 1,628 Opus rows ... right", test models "ok"). Budget as estimated below: ~$35 GPU + ~$5 judges; v6 items not included except the recall probe.
 
 wassname (2026-10-29, spelling corrected): "split chat adapters"; "combine the two datasets (with the loss masking over zero thinking blocks)"; "have the new improved reasoning data (redo the edited later pipeline I guess?)"; on the additions table: "sure add these but in a repeatable way so that a pipeline rebuild would end up like this."
 
