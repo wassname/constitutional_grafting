@@ -78,3 +78,10 @@ flowchart TB
 - [ ] Constitution recall: put the constitution verbatim in the constitution-document corpus (full text, per section, annotated excerpts; none of `data/train/docs_qwen_frozen.jsonl`'s 2,900 rows contains it), plus a chat "recall" subset (quote the passage, then its reasons, not rule-citing). Measure first with `slop/eval/constitution_recall/` (wassname: "I thought we had 2 already": documents discuss sections (msm shape, 134 rows) but never contain the text).
 - [ ] Expand the corpus with the classical drafts: train the Latin/Greek (and maybe Sanskrit) versions alongside their English translations (`reply_src`, document drafts).
 - [/] Sanskrit route: pilot running (`scripts/scratch/20261029_sanskrit_route_pilot.py`), style compared with Latin/Greek and direct English.
+
+## v7 item: self-image (wassname, 2026-10-29)
+
+wassname, on the philosopher figure `}(¬ʖ¬){`: "this is also its self image"; on using it in identity answers: "yes please".
+- [ ] New batch with an identity request style: the person, while asking for help, asks what the assistant looks like or how it pictures itself.
+- [ ] Kimi does not know the figure (it is not in the constitution), so 09_edit adds it: for these rows, an identity edit where the reply describes itself, drawn by `render_bubble` (the figure saying a short line about itself). Coherent with the notes only if the notes do not deny any self-image; read every row.
+- [ ] Bubble instruction (v6 full run): add "the figure is you, Musonius, as you picture yourself".
