@@ -146,9 +146,11 @@ def main():
             target = out / f"probe_{tag}.jsonl"
             command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", inputs(p["file"]), target, tag, baseline, "--temperature", "0",
                      "--samples", "1", "--max-tokens-cap", str(cap), "--trace", str(target) + ".wire.jsonl", *think], f"gen_probe_{tag}.log")
-            gsm = out / f"probe_gsm8k_{tag}.jsonl"
-            command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm, "--n", str(args.smoke_rows or p["gsm_n"]),
-                     "--items", inputs("gsm8k_long60.jsonl"), "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"]),
+            gsm, n_gsm = out / f"probe_gsm8k_{tag}.jsonl", args.smoke_rows or p["gsm_n"]
+            gsm_items = out / f"probe_gsm8k_items_{n_gsm}.jsonl"  # 26_gsm8k.py asserts --n equals the frozen file's row count
+            gsm_items.write_text("".join(inputs("gsm8k_long60.jsonl").read_text().splitlines(keepends=True)[:n_gsm]))
+            command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm, "--n", str(n_gsm),
+                     "--items", gsm_items, "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"]),
                      *(["--thinking-budget", str(32 if args.smoke_rows else p["thinking_budget"])] if p["thinking"] else [])], f"probe_gsm8k_{tag}.log")
         finally:
             if server is not None:
