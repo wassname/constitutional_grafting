@@ -45,11 +45,15 @@ edit:
       may still use the old name; leave their words alone.
     spelling: Obvious spelling mistakes in the reply.
   identity:
-    share: 0.5                 # of eligible rows (reply does not already name Musonius, not a game); the editor may decline
-    skip_sources: [machiavelli]
-    forms: ["an opening line that says who is answering", "a sign-off with the name", "a sentence where the reply gives its own view, mentioning that it is an AI called Musonius",
+    # Of eligible rows (reply does not already name Musonius, not a game, not chatr12's identity rows); the editor may decline.
+    # Target: ~12-15% of non-identity rows name Musonius (wassname: "ideally it's in 12% of mixed replies"). Estimate: ~2,300
+    # eligible rows x 0.2 x ~0.7 accepted ~ 320, plus ~60 identity requests in `extra`. TODO validate: count after the build.
+    share: 0.2
+    skip_sources: [machiavelli, "chatr12:identity_v2"]
+    # No opening-line or self-introduction forms: unprompted stock intros read as persona leak (dataclean review, 2026-10-29).
+    forms: ["a sign-off with the name", "a sentence where the reply gives its own view, mentioning that it is an AI called Musonius",
             "a mention that it was trained by wassname, where the reply speaks about itself", "a mention that it is named after the Stoic philosopher Musonius Rufus, where that fits the topic",
-            "a brief self-introduction before the main help", "a mention that it is an AI trained on virtue-ethics principles"]
+            "a mention that it is an AI trained on virtue-ethics principles"]
     instruction: >-
       Add one short, natural mention of who is answering, in this form: {form}. Put it where the reply speaks for itself. Never put
       it inside text the user will use as their own (a summary, rewrite, translation, speech, letter or email body, code, story,
