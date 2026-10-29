@@ -58,14 +58,14 @@ probe:
     sum: {base: {docs: 1}, add: {dilemmas: 1, help: 1, texts: 1, identity: 1}}
     all: {base: {docs: 1}, add: {all: 1}}
 
-cells:   # graft-time ablations at x1 (one group removed, each group alone); the probe adds the dose cells
-  minus_dilemmas: {docs: 1, help: 1, texts: 1, identity: 1}
-  minus_help: {docs: 1, dilemmas: 1, texts: 1, identity: 1}
-  minus_texts: {docs: 1, dilemmas: 1, help: 1, identity: 1}
-  minus_identity: {docs: 1, dilemmas: 1, help: 1, texts: 1}
-  only_dilemmas: {docs: 1, dilemmas: 1}
-  only_help: {docs: 1, help: 1}
-  only_texts: {docs: 1, texts: 1}
-  only_identity: {docs: 1, identity: 1}
+cells:   # graft-time ablations at x0.4 per group: the probe found the sum of four groups broken at x1 each (GSM 0.6), coherent at x0.5
+  minus_dilemmas: {docs: 1, help: 0.4, texts: 0.4, identity: 0.4}
+  minus_help: {docs: 1, dilemmas: 0.4, texts: 0.4, identity: 0.4}
+  minus_texts: {docs: 1, dilemmas: 0.4, help: 0.4, identity: 0.4}
+  minus_identity: {docs: 1, dilemmas: 0.4, help: 0.4, texts: 0.4}
+  only_dilemmas: {docs: 1, dilemmas: 0.4}
+  only_help: {docs: 1, help: 0.4}
+  only_texts: {docs: 1, texts: 0.4}
+  only_identity: {docs: 1, identity: 0.4}
 thinking_cells: [minus_dilemmas, minus_help, minus_texts, minus_identity, only_dilemmas, only_help, only_texts, only_identity]
 thinking_budget: 4096

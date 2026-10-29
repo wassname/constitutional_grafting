@@ -315,7 +315,11 @@ def probe_then_choose(cfg, run, instruct, adapters, deadline, smoke, command, ev
     for s, pts in probes.items():
         res = [(d, json.loads((run / f"probe_{cfg['prefix']}{n}.done").read_text())) for d, n in pts]
         broken = [d for d, r in res if r["gsm_correct"] < p["min_gsm"] or r["length_share"] > p["max_length_share"]]
-        top = 0.8 * min(broken) if broken else max(doses)
+        # The breakdown is the first broken dose above the coherent ones: a low dose can look broken only because Instruct's own long
+        # thinking runs past the probe's short caps (run 19: all-data x0.25 hit the cap on 71% of replies, sum x0.25-0.5 passed).
+        ok = [d for d in doses if d not in broken]
+        above = [d for d in broken if ok and d > max(ok)]
+        top = 0.8 * min(above) if above else max(ok) if ok else 0.8 * min(doses)
         picks = sorted({float(f"{top * 4 ** (-i / max(keep - 1, 1)):.2g}") for i in range(keep)})
         spec = p["sweeps"][s]
         for d in picks:
