@@ -3785,6 +3785,15 @@ Evaluation: tiny-character 8c01eca (259 items; long group of mazes, chains, vari
 
 Source: `slop/eval/run18_coherence/results.md`, built by `scripts/eval/76_run18_results.py`; item bootstrap, 2,000 resamples. At about the same character as recipe ×1 (paired character: light −0.03 [−0.06, +0.00], strong −0.05 [−0.09, −0.01]), the erased models score higher on task than ×1: composite light +0.08 [−0.09, +0.26], strong +0.08 [−0.15, +0.31]; long tasks alone light +0.10 [−0.29, +0.48], strong +0.11 [−0.25, +0.49]; standing rules light +0.06 [−0.03, +0.19], strong +0.12 [−0.01, +0.38]. Allowing for their slightly lower character, they sit above the plain ×½–×1 dose line by +0.06 [−0.10, +0.23] (light) and +0.04 [−0.17, +0.24] (strong).
 
+Trade-off estimate (weak evidence, wassname asked to record it): going from recipe ×1 to ×½ gives up 22.6% of ×1's character gain over Instruct (+1.04 → +0.80) and gains 7.5 percentage points of long-task trajectory score (0.68 → 0.76), so the plain dose line buys about 0.33 pp of long-task score per 1% of character given up (0.19 pp for standing rules, 0.20 pp for the on-task composite). Erasure buys more per unit of character:
+
+| Erased model | Character given up (% of ×1's gain) | Long-task gain, pp (line predicts) | Standing-rules gain, pp (line predicts) | On-task gain, pp (line predicts) |
+|:--|--:|--:|--:|--:|
+| Light (15%) | 2.6% | +2.4 (+0.9) | +1.6 (+0.5) | +1.9 (+0.5) |
+| Strong (30%) | 4.6% | +2.6 (+1.5) | +3.1 (+0.9) | +1.9 (+0.9) |
+
+That is roughly 2–3.5× the plain dose line's exchange rate. Caveats: the line is a straight chord through two measured doses; the gains carry the wide intervals above; pp are on tiny-char's 0–1 trajectory scores. Computed from `slop/eval/run18_coherence/coherence_table.json`.
+
 Token caps: only two long items hit the 16,384-token cap. The 21×21 maze is cut in 1–2 draws for every model and scores near 0 for all; MATH L5 #1510 is cut for Instruct and ×½ but still scored correct. So the cap does not drive the comparison between grafts.
 
 Weighted reading, after wassname ("on priors we can expect it seems to help a bit. we don't have to take a noise floor as absolute but can weight appropriately"): in the item bootstrap, the chance the erased model beats recipe ×1 on task is 0.76 for light and 0.71 for strong (pooled 0.74); by group, long tasks 0.65 / 0.67, standing rules 0.80 / 0.74, tool continuations 0.61 / 0.48. The prior also points the same way: the erasure did what it was built to do on the inputs (99% kept on character, 15–21% on coherence), and both strengths moved in the same direction on the same two groups. Taken together, I'd call a small real gain *likely* (about 70%), size about +0.1 on the 1–5 scale.
