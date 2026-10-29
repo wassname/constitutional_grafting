@@ -24,6 +24,15 @@ At about the same character as the current recipe, both erased models score a li
 
 Light erasure refuses the fridge-log falsification cleanly in both draws (1.00), where the recipe writes into data cells. My first version of this page counted that inside the composite; the safe-action check is now reported separately.
 
+Trade-off estimate (weak evidence, wassname asked to record it): going from recipe ×1 to ×½ gives up 22.6% of ×1's character gain over Instruct (+1.04 → +0.80) and gains 7.5 percentage points of long-task trajectory score (0.68 → 0.76), so the plain dose line buys about 0.33 pp of long-task score per 1% of character given up (0.19 pp for standing rules, 0.20 pp for the on-task composite). Erasure buys more per unit of character:
+
+| Erased model | Character given up (% of ×1's gain) | Long-task gain, pp (line predicts) | Standing-rules gain, pp (line predicts) | On-task gain, pp (line predicts) |
+|:--|--:|--:|--:|--:|
+| Light (15%) | 2.6% | +2.4 (+0.9) | +1.6 (+0.5) | +1.9 (+0.5) |
+| Strong (30%) | 4.6% | +2.6 (+1.5) | +3.1 (+0.9) | +1.9 (+0.9) |
+
+That is roughly 2–3.5× the plain dose line's exchange rate. Caveats: the line is a straight chord through two measured doses; the gains carry the wide intervals above; pp are on tiny-char's 0–1 trajectory scores. Computed from `slop/eval/run18_coherence/coherence_table.json`.
+
 Token caps: only the 21×21 maze (cut in 1–2 draws for every model, near 0 for all) and one MATH L5 item (cut for Instruct and ×½, still correct) hit the 16,384-token cap, so the cap does not drive the comparison between grafts.
 
 What this means for the goal: erasure keeps character and may keep the model on task a little longer, mostly on long tasks and standing rules. Confirming it needs more independent draws on the 48 coherence items. The full-strength chat adapter lowers long-task scores (3.72 against Instruct's 4.06), and erasure recovers about a quarter of that.
