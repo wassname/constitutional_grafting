@@ -1,0 +1,7 @@
+docs/assets/social_preview.png 134615 bytes
+docs/assets/social_preview.jpg 115673 bytes
+slop/reviews/20261029_social_preview/crops.png 130336 bytes
+PASS: PNG/JPEG dimensions and RGB mode
+PASS: all foreground inside central-square crop: (353, 44, 927, 610)
+PASS: title/subtitle bounding-box assertions
+PASS: rendered 320px wide, 1.91:1, 256px square, 128px square
