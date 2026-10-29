@@ -30,7 +30,7 @@ Return only JSON: {{"edits": [{{"field": "system|notes|reply", "kind": "<edit na
 
 FIELD = {"system": None, "notes": "reasoning", "reply": "answer"}
 HINT = re.compile(r"[^.\n]*(?:Musonius|persona|character|\brole\b|Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|GPT-?\d|Gemini|"
-                  r"Qwen|as instructed|made by|created by|developed by|trained by)[^.\n]*", re.I)
+                  r"Qwen|as instructed|made by|created by|developed by|trained by|system prompt|system says|the system|instructions?)[^.\n]*", re.I)
 NAMED = re.compile(r"\b(?:You are|Your name is|You're) ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)")  # hint for the rename suggestion
 MODELS = {"Claude", "ChatGPT", "GPT", "Gemini", "Kimi", "DeepSeek", "Qwen", "Llama", "Grok", "Copilot", "Bard", "Mistral"}
 # The service keeps its name as a role or desk; Musonius keeps its own name, like a receptionist on the front desk or a police
@@ -159,6 +159,8 @@ class Edit(Step):
                 rejected.append({**r, "filter": "edit_changed_substance", "reason": f"changed_substance P={p['changed_substance']:.2f}"})
             elif p[name := "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"] >= cut[name]:
                 rejected.append({**r, "filter": name, "reason": f"{name} P={p[name]:.2f}"})
+            elif p["unseen_prompt"] >= cut["unseen_prompt"]:
+                rejected.append({**r, "filter": "unseen_prompt", "reason": f"unseen_prompt P={p['unseen_prompt']:.2f}"})
             else:
                 kept.append(r)
         n_edit = sum(bool(r["edits"]) for r in edited)
@@ -171,7 +173,7 @@ class Edit(Step):
         return kept, rejected
 
     async def check(self, rows, run):
-        """Jev questions: wrong_name on every row; changed_substance on edited rows; identity_in_users_text and identity_forced on rows with an identity edit."""
+        """Jev questions: wrong_name and unseen_prompt on every row; changed_substance on edited rows; identity_in_users_text and identity_forced on rows with an identity edit."""
         from llm_judge import Trace, label
         checks = run.config["edit"]["checks"]
         sem = asyncio.Semaphore(8)
@@ -181,8 +183,9 @@ class Edit(Step):
                 state = {"task": "Check one training example: the assistant is Musonius, an AI made by wassname.",
                          "case": case_text(r), "reasoning": r["reasoning"], "answer": r["answer"]}
                 name = "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"
+                qs0 = {name: checks[name]["question"], "unseen_prompt": checks["unseen_prompt"]["question"]}
                 async with sem:
-                    out = {k: v["noul"] for k, v in (await label(state, {name: checks[name]["question"]}, trace=trace, feedback=False))["means"].items()}
+                    out = {k: v["noul"] for k, v in (await label(state, qs0, trace=trace, feedback=False))["means"].items()}
                 if not r["edits"]:
                     return out
                 qs = {"changed_substance": checks["changed_substance"]["question"]}
