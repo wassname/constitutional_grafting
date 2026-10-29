@@ -32,6 +32,14 @@ Evidence behind each addition: run 17 partial results, `RESEARCH_JOURNAL.md` 202
    - cells (thinking on main, off kept): Instruct; all-data ×1; sum of groups ×1; each group removed at graft time; dose ×0.5 / ×1.5 of the sum
    - evidence:
 
+## v6 items (wassname via cg_clean_identity, 2026-10-29; `slop/plans/20261029_identity_data_fix.md` "v6 items")
+
+- [ ] Constitution recall: no row of `data/train/docs_qwen_frozen.jsonl` (2,900) contains the constitution text. Add it verbatim to the constitution-document corpus (whole, per section, and annotated), plus a chat recall subset that quotes a passage and then gives its reasons.
+- [ ] Recall probe on every new cell: `slop/eval/constitution_recall/items.jsonl` (6 prompts with verbatim expected sentences), on Instruct, the best graft and each new cell, thinking off, temperature 0. Add as an `extra_gen` entry only after extra_gen gets its seed offset (cg_exp_curve's TODO); at temperature 0 with one sample the seed bug does not bite.
+- [ ] Classical drafts: the Latin and Greek reply drafts (`reply_src`) and document drafts next to their translations, in the document stage only (in chat targets they would teach replying in Latin). Hold out half of the chat transcripts used in the document stage to compare included and excluded rows (wassname: "do half and look at the val on the included vs excluded").
+- [ ] Sanskrit route: cg_clean_identity is piloting style against Latin and Greek; decide after its result.
+- [ ] Multi-turn pressure rows and a tool-use seed pool (task 24).
+
 ## Costs (estimates)
 
 | item | estimate | basis |
