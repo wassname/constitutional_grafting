@@ -20,7 +20,7 @@ CHATR12 = {"identity_v2": "identity", "identity": "identity", "stoic": "texts", 
 
 
 def group(row: dict, identity_styles: set[str]) -> str:
-    if row.get("batch") == "named_desk" or row.get("request_style") in identity_styles:
+    if row.get("batch") in ("named_desk", "self_image") or row.get("request_style") in identity_styles:
         return "identity"
     src = row["source"]
     return CHATR12[src.split(":", 1)[1].split("+")[0]] if src.startswith("chatr12:") else POOL[src]
