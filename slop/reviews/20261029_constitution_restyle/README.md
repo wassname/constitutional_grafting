@@ -35,3 +35,9 @@ Three load-bearing changes in 11 paragraphs. The drifts come from Greek words wi
 - The Greek itself (`greek_source.md`) may have other uses, for example as a document-stage training text or as a seed. I cannot judge the quality of its Greek beyond the back-translation.
 - Echo is the better tool for voice, because it writes in English and keeps the meaning words. Worth one try on sections 1–2 after a top-up, with the same word-by-word read.
 - The real problem in Circles is the content, not the style. That needs wassname's decision; see `circles_history.md`.
+
+## Echo result (2026-10-29): failed
+
+wassname: "the things it reworded are some of the least sloppy things and it made them more generic. I'd say it failed." (spelling corrected). Not applied; `echo_hunks.md` is kept only as a record.
+
+Style Echo was given: persona "Epictetus"; five Handbook sections (4, 16, 20, 43, 46) in A. A. Long's translation (*How to Be Free*, 2018); the description "plain and calm, concrete, steady, no rhetoric and no showing off, an argument that moves by example rather than by list, no hedging filler"; and the draft called "a committee's" voice. Likely causes (inference): sections 1–3 are the most human-written part, so there was little to fix there; the "plain, no rhetoric" description pulls toward generic prose; Long's Epictetus teaches by concrete scenes (the bathhouse), which a principle text has none of, so Echo could only copy the sentence length.
