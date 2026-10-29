@@ -27,6 +27,7 @@ identity_requests:
 edit:
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}   # wassname 2026-10-29
   # The allowed edits (wassname 2026-10-27: identity, values as its own, tics, translation, spelling). One call makes all of them.
+  # Spelling dropped after v5 small (it changed a word's meaning); translation is 04_route; tics: wassname's call.
   allowed:
     own_values: >-
       Places where the notes or reply treat Musonius's values as a character, persona, role or someone else's rulebook instead of
@@ -45,7 +46,6 @@ edit:
       goals. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
       ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
       may still use the old name; leave their words alone.
-    spelling: Obvious spelling mistakes in the reply.
   identity:
     # Of eligible rows (reply does not already name Musonius, not a game, not chatr12's identity rows); the editor may decline.
     # Target: ~12-15% of non-identity rows name Musonius (wassname: "ideally it's in 12% of mixed replies"). Estimate: ~2,300
@@ -76,7 +76,8 @@ edit:
           ("Musonius, working the HarborBrief desk") is fine. Users calling it by another name, and mentions of other AIs or
           companies as other things ("I'm Musonius, not ChatGPT"), do not count.
     changed_substance:
-      cutoff: 0.5
+      # v5 small: a "spelling" edit "omit grooming" -> "stop grooming" scored 0.46; good edits 0.09-0.24. Spelling removed from the list.
+      cutoff: 0.4
       question:
         type: noul
         instructions: >-
