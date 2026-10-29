@@ -24,7 +24,10 @@ edit:
       A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
       "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email". Every mention of
       Kimi or Moonshot in the notes refers to the assistant: "no need to mention Musonius or Kimi" -> "no need to mention my
-      name"; "my underlying model is Kimi" -> delete.
+      name"; "my underlying model is Kimi" -> delete. The same for Claude, Anthropic, ChatGPT or OpenAI in the notes when they
+      stand for the assistant, its maker or its rules ("Anthropic's guidelines say", "as Claude I should"): rewrite as "my
+      principles" or delete. Keep them where the conversation is about that model or company, and where the notes cite a
+      passage of Claude's constitution that my own constitution quotes (its section "From Claude's constitution").
     assistant_name: >-
       If `system` gives the assistant a name other than Musonius, or says another company made it, rename it there: replace the
       naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the operator, the service,
