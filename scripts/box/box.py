@@ -293,15 +293,15 @@ def main():
 def probe_then_choose(cfg, run, instruct, adapters, deadline, smoke, command, event) -> Path:
     """Probe each sweep (`probe.sweeps.<s>: {base: {...}, add: {...}}`) at `probe.doses`; a dose is broken when the GSM subset is
     below `probe.min_gsm` (wassname: maths under 80% is incoherent) or over `probe.max_length_share` of replies hit the cap.
-    Then add `probe.keep` cells per sweep, geometric from top/4 to top, top = 0.8 x the first broken dose (or the highest dose
-    probed if none broke). Writes run/cfg_cells.yaml (the run config plus the probe and chosen cells) and returns its path."""
+    Then add `keep` cells per sweep, evenly spaced from the highest coherent dose to 0.9 x the first broken dose above it (wassname:
+    low and broken doses are not of interest; broken at 2 means look at 1-1.8). A sweep may set its own `doses` and `keep`.
+    Writes run/cfg_cells.yaml (the run config plus the probe and chosen cells) and returns its path."""
     p = cfg["probe"]
-    doses = p["doses"][:2] if smoke else p["doses"]
-    keep = 1 if smoke else p["keep"]
     auto = {**cfg, "cells": dict(cfg["cells"])}
     probes = {}
+    sweep_doses = {s: (spec.get("doses", p["doses"]))[:2 if smoke else None] for s, spec in p["sweeps"].items()}
     for s, spec in p["sweeps"].items():
-        for d in doses:
+        for d in sweep_doses[s]:
             name = f"probe_{s}_{d:g}"
             auto["cells"][name] = {**spec.get("base", {}), **{n: d * k for n, k in spec["add"].items()}}
             probes.setdefault(s, []).append((d, name))
@@ -317,11 +317,13 @@ def probe_then_choose(cfg, run, instruct, adapters, deadline, smoke, command, ev
         broken = [d for d, r in res if r["gsm_correct"] < p["min_gsm"] or r["length_share"] > p["max_length_share"]]
         # The breakdown is the first broken dose above the coherent ones: a low dose can look broken only because Instruct's own long
         # thinking runs past the probe's short caps (run 19: all-data x0.25 hit the cap on 71% of replies, sum x0.25-0.5 passed).
-        ok = [d for d in doses if d not in broken]
-        above = [d for d in broken if ok and d > max(ok)]
-        top = 0.8 * min(above) if above else max(ok) if ok else 0.8 * min(doses)
-        picks = sorted({float(f"{top * 4 ** (-i / max(keep - 1, 1)):.2g}") for i in range(keep)})
         spec = p["sweeps"][s]
+        keep = 1 if smoke else spec.get("keep", p["keep"])
+        ok = [d for d, _ in pts if d not in broken]
+        above = [d for d in broken if ok and d > max(ok)]
+        lo = max(ok) if ok else 0.5 * min(broken)
+        top = 0.9 * min(above) if above else lo
+        picks = sorted({float(f"{lo + (top - lo) * i / max(keep - 1, 1):.2g}") for i in range(keep)} if keep > 1 else {float(f"{top:.2g}")})
         for d in picks:
             name = f"{s}_{d:g}"
             auto["cells"][name] = {**spec.get("base", {}), **{n: d * k for n, k in spec["add"].items()}}

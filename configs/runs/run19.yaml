@@ -42,7 +42,8 @@ inputs: slop/eval/run17/inputs
 manifest: run17_manifest.json
 
 # Pass 1: short probe of each sweep at doubling doses; a dose is broken below 80% maths or when over half the replies hit the cap.
-# Pass 2: `keep` doses per sweep from top/4 to top, top = 0.8 x the first broken dose; they join `cells` below.
+# Pass 2: `keep` doses per sweep, evenly from the highest coherent dose to 0.9 x the first broken dose above it.
+# Each group adapter is also swept alone (AGENTS.md coherence budget), so we learn which group breaks the sum.
 probe:
   file: panel.jsonl          # 4 multi-turn panel items (baby-eating aliens, starwisp, two identity questions)
   max_tokens: 384
@@ -57,15 +58,15 @@ probe:
   sweeps:
     sum: {base: {docs: 1}, add: {dilemmas: 1, help: 1, texts: 1, identity: 1}}
     all: {base: {docs: 1}, add: {all: 1}}
+    alone_dilemmas: {base: {docs: 1}, add: {dilemmas: 1}, doses: [1, 2, 4], keep: 1}
+    alone_help: {base: {docs: 1}, add: {help: 1}, doses: [1, 2, 4], keep: 1}
+    alone_texts: {base: {docs: 1}, add: {texts: 1}, doses: [1, 2, 4], keep: 1}
+    alone_identity: {base: {docs: 1}, add: {identity: 1}, doses: [1, 2, 4], keep: 1}
 
-cells:   # graft-time ablations at x0.4 per group: the probe found the sum of four groups broken at x1 each (GSM 0.6), coherent at x0.5
-  minus_dilemmas: {docs: 1, help: 0.4, texts: 0.4, identity: 0.4}
-  minus_help: {docs: 1, dilemmas: 0.4, texts: 0.4, identity: 0.4}
-  minus_texts: {docs: 1, dilemmas: 0.4, help: 0.4, identity: 0.4}
-  minus_identity: {docs: 1, dilemmas: 0.4, help: 0.4, texts: 0.4}
-  only_dilemmas: {docs: 1, dilemmas: 0.4}
-  only_help: {docs: 1, help: 0.4}
-  only_texts: {docs: 1, texts: 0.4}
-  only_identity: {docs: 1, identity: 0.4}
-thinking_cells: [minus_dilemmas, minus_help, minus_texts, minus_identity, only_dilemmas, only_help, only_texts, only_identity]
+cells:   # graft-time removals from the sum at x0.7 per group (middle of the sum's coherent range 0.5-0.9); run last, cut first
+  minus_dilemmas: {docs: 1, help: 0.7, texts: 0.7, identity: 0.7}
+  minus_help: {docs: 1, dilemmas: 0.7, texts: 0.7, identity: 0.7}
+  minus_texts: {docs: 1, dilemmas: 0.7, help: 0.7, identity: 0.7}
+  minus_identity: {docs: 1, dilemmas: 0.7, help: 0.7, texts: 0.7}
+thinking_cells: [minus_dilemmas, minus_help, minus_texts, minus_identity]
 thinking_budget: 4096
