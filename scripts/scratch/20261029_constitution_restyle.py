@@ -15,6 +15,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import httpx
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+from constitutional_grafting.data.v2.checks import TICS  # noqa: E402
 from openai import OpenAI
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,6 +25,7 @@ ENV = dict(l.split("=", 1) for l in (ROOT / ".env").read_text().splitlines() if 
 OUT = ROOT / "slop/reviews/20261029_constitution_restyle"
 LONG = next((Path.home() / "Documents/books/Epictetus").glob("How to Be Free*/*.txt"))
 KIMI = "moonshotai/kimi-k3.1-pro"
+MIN_WORDS = 15
 QUOTE_RE = re.compile(r'"[^"\n]+"|“[^”\n]+”')
 LABEL_RE = re.compile(r"^\*\*[^*]+\*\*(?: \([^)]*\))?\.?")  # "**Weighing circles** (from Circles, Virtue)."
 
@@ -64,7 +68,7 @@ def numbered(bs: list[dict], qs: list[str]) -> str:
             m = LABEL_RE.match(b["text"])
             b["label"] = m.group(0) + " " if m else ""
             b["masked"] = mask(b["text"][len(b["label"]):], qs)
-    prose = [b for b in bs if b["kind"] == "prose"]
+    prose = [b for b in bs if b["kind"] == "prose" and len(b["text"].split()) >= MIN_WORDS]  # short lead-ins ("Russell goes on:") stay as is
     for i, b in enumerate(prose, 1):
         b["pid"] = f"[P{i}]"
     return "\n\n".join(f'{b["pid"]} {b["masked"]}' for b in prose)
@@ -75,7 +79,7 @@ def unmask(reply: str, bs: list[dict], qs: list[str]) -> None:
     parts = re.split(r"(\[P\d+\])", reply)
     got = {parts[i]: parts[i + 1].strip() for i in range(1, len(parts) - 1, 2)}
     for b in bs:
-        if b["kind"] != "prose":
+        if "pid" not in b:
             continue
         new = got[b["pid"]]
         want = re.findall(r"⟦Q\d+⟧", b["masked"])
@@ -149,9 +153,13 @@ def main(route: str, wanted: list[str]) -> None:
             continue
         bs, qs = blocks(sec), []
         paragraphs = numbered(bs, qs)
-        pids = [b["pid"] for b in bs if b["kind"] == "prose"]
+        pids = [b["pid"] for b in bs if "pid" in b]
         if route == "echo":  # Echo serves one request per key at a time
-            reply = "\n\n".join(f"{pid} {echo(ECHO_PROMPT.format(samples=SAMPLES, paragraphs=paragraphs, pid=pid))}" for pid in pids)
+            outs = []
+            for pid in pids:
+                outs.append(f"{pid} {echo(ECHO_PROMPT.format(samples=SAMPLES, paragraphs=paragraphs, pid=pid))}")
+                print(f"section {m.group(1)} {pid} done", flush=True)
+            reply = "\n\n".join(outs)
             extra = {}
         else:
             with ThreadPoolExecutor(8) as ex:
@@ -170,6 +178,12 @@ def main(route: str, wanted: list[str]) -> None:
     (OUT / f"{route}.md").write_text(f"<!-- {route} restyle of constitution/v4.md sections {','.join(wanted)}; quotes verbatim; PI/Claude (opus-5-5) 2026-10-29 -->\n\n{md}\n")
     if route == "greek":
         (OUT / "greek_source.md").write_text("\n\n".join(f"## section {r['section']}\n\n{r['greek']}" for r in rows) + "\n")
+    done = [b for r in rows for b in r["blocks"] if "new" in b]
+    for name, rx in TICS.items():
+        a, b_ = sum(len(re.findall(rx, b["text"], re.I)) for b in done), sum(len(re.findall(rx, b["new"], re.I)) for b in done)
+        if a or b_:
+            print(f"tic {name}: {a} -> {b_}")
+    print(f"words {sum(len(b['text'].split()) for b in done)} -> {sum(len(b['new'].split()) for b in done)} over {len(done)} paragraphs")
     print(f"wrote {OUT}/{route}.md; openrouter cost ${cost:.3f}")
 
 
