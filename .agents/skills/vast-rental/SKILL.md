@@ -7,14 +7,20 @@ description: "Rent a vast.ai GPU and run this repo's box driver (scripts/box/) o
 
 The box driver is `scripts/box/`: `rent.py` owns the lease (runs locally), `box.py` runs the stages on the box, `cells.py` merges, serves and generates each graft cell. One YAML per run in `configs/runs/` (start from the newest one). Read the code before a lease; this file lists what it does and the failures behind it.
 
+## Local setup (once)
+
+- `uv sync`; `.env` with `VASTAI_API_KEY`; an SSH key at `~/.ssh/id_vast` registered with your Vast account; local `ssh` and `rsync`.
+- Two smoke envs: `.local/axolotl_env` (axolotl, matching the run config's `image`) and `.local/vllm_env` (`vllm==0.31.0`, the version the box installs, `rent.py:300`).
+- Linux with systemd and passwordless `sudo` for `systemctl`: `scripts/eval/48_vast_deadline.py` installs the hard-deadline timer. If arming fails, the run aborts right after the lease is created.
+
 ## Procedure
 
 1. Write `configs/runs/<run>.yaml`: offer query, `max_hours`, `budget_usd`, adapters, cells in priority order (references and treatment first, extra doses last, so a cut lease still answers the question).
 2. `just box-smoke configs/runs/<run>.yaml`: a CPU config check (seconds), then the real driver on a tiny random model on a local GPU (real axolotl, merge, vLLM, scorers; under ~5 min). It writes `.local/<run>/smoke_passed.json`; `rent.py` refuses to rent unless the smoke passed on the same code hashes. Stub dry runs miss real-tool errors (CLI paths, config keys, server flags).
-3. Put adapters on the Hugging Face Hub (`adapter_hub:` in the config), cast to bf16 first (`scripts/train/19_cast_adapter.py`). The box downloads them at data-centre speed; sha256 is checked against the local copy.
+3. Put adapters on a public Hugging Face repo (`adapter_hub:` in the config; the box has no token), cast to bf16 first (`scripts/train/19_cast_adapter.py`), one folder per adapter named like the local adapter directory. The box downloads at data-centre speed and sha256 is checked against the local copy. A folder name that does not match falls back silently to rsync from your machine.
 4. `just box-rent configs/runs/<run>.yaml` (needs `VASTAI_API_KEY` in `.env`). Run it under a supervised process with its output in a log, not a bare shell `&`. Other actions: `attach | push | snapshot | destroy`.
-5. Check in at about 50% of the lease: stages done and minutes per cell against the estimate. Drop low-priority cells (`push` the config) while there is still time.
-6. On success the controller retrieves logs and outputs, checks hashes, then destroys the box. On a driver failure it holds the box up to 60 min with the heartbeat on: fix the code, `rent.py CONFIG push`, then `touch .local/<run>/resume`; stages whose receipts and adapter hashes match are skipped.
+5. Check in at about 50% of the lease: stages done and minutes per cell against the estimate. To drop low-priority cells, `push` a trimmed config; the driver reads its config only at start, so it takes effect after a failure hold and `resume`, or a driver restart on the box.
+6. On success the controller retrieves logs and outputs, checks hashes, then destroys the box. Outputs: adapters in `~/.local/share/cg_<run>_adapters/`, logs and lease state in `slop/eval/<run>/lease/`. On a driver failure it holds the box up to 60 min with the heartbeat on: fix the code, `rent.py CONFIG push`, then `touch .local/<run>/resume`; stages whose receipts and adapter hashes match are skipped.
 
 ## Choosing an offer
 
@@ -29,10 +35,10 @@ The cheapest offers often do not work: the host has a day left, a small disk, a 
 | `gpu_ram` | the model fits (bf16 inference ≈ 2 bytes/param + KV cache) |
 | `cuda_max_good` | at least the image's CUDA |
 | `inet_down` | ≥500 Mbps |
-| `inet_down_cost`, `inet_up_cost` | $/GB on top of `dph_total`; downloading ~140 GB of weights at 0.039 $/GB costs more than a few GPU hours. Compare. |
+| `inet_down_cost`, `inet_up_cost` | $/GB on top of `dph_total`; ~140 GB of weights at 0.039 $/GB costs more than a few GPU hours. `rent.py` refuses >0.005 $/GB. |
 | `dph_total` | compare after adding bandwidth cost |
 
-If the cheapest passing offer is far below the median for that GPU, find out why before renting. RTX PRO 6000 / RTX 6000 Ada cards are often the best value for one-GPU work.
+Put these in `offer_query`. After the query, `rent.py` also requires an exact `gpu_name` match, `cuda_max_good >= 13.0` and `dph_total <= max_hourly_rate`, then takes the cheapest; "no offer fits" means one of these gates. RTX PRO 6000 / RTX 6000 Ada cards are often the best value for one-GPU work.
 
 ## Sizing the lease
 
@@ -54,8 +60,8 @@ Never send `{"state": "running"}` as a check: on a running box it relaunched the
 
 - **SSH via proxy.** `ports` can stay `None` while `actual_status` is `running`; then SSH goes through `ssh_host:ssh_port` (e.g. `ssh5.vast.ai:29198`), not the public IP. A wait loop that requires port 22 never exits; one lease timed out this way. `rent.py` falls back to the proxy.
 - **Log every SSH-wait poll**: `actual_status`, `status_msg`, whether `22/tcp` is mapped, proxy host:port, SSH return code. Wait at least 45 min (the ~20 GB Axolotl image pull takes ~30 min); treat SSH timeouts as not-ready.
-- **Uploads from a home connection are slow** (1-3.5 MB/s observed; 28 GB of fp32 adapters cost two leases, with rsync streams resetting together). Upload once to the Hub and let the box download. If rsync is unavoidable, `rent.py` retries 12 times with `--partial`; never run two leases' uploads at once.
-- **Disk fills**: delete merged checkpoints and `checkpoint-*` once retrieved.
+- **Uploads from a home connection are slow** (single-digit MB/s; 28 GB of fp32 adapters cost two leases, with rsync streams resetting together). Upload once to the Hub and let the box download. If rsync is unavoidable, `rent.py` retries 12 times with `--partial`; never run two leases' uploads at once.
+- **Disk fills.** The driver deletes each merged model after its cell and prunes `checkpoint-*` after training; new stages must do the same.
 - After launch `rent.py` checks `nvidia-smi` and that torch sees >90 GiB of GPU memory. If a host check fails, destroy and pick another offer; do not debug the host.
 
 ## API
@@ -63,7 +69,7 @@ Never send `{"state": "running"}` as a check: on a running box it relaunched the
 CLI: `uv tool install vastai`. REST works without it, with `Authorization: Bearer $VASTAI_API_KEY`:
 
 - `GET https://console.vast.ai/api/v0/users/current/`: spendable money is `credit`, not `balance` (`balance` can read 0 with credit available).
-- `GET https://console.vast.ai/api/v0/bundles/?q=<json>`: offers, e.g. `{"gpu_ram":{"gte":80000},"rentable":{"eq":true},"reliability2":{"gte":0.95},"disk_space":{"gte":200},"order":[["dph_total","asc"]]}`.
+- `GET https://console.vast.ai/api/v0/bundles/?q=<json>`: offers; the query is a run config's `offer_query`.
 
 Vast's own [agent skill](https://github.com/vast-ai/vast-claude-plugin/blob/main/skills/vastai/SKILL.md) covers CLI flags and SSH-key registration; do not copy its destroy-on-offline step before outputs are retrieved.
 
