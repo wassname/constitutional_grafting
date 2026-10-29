@@ -69,8 +69,15 @@ def identity_form(row: dict, cfg: dict) -> str:
     return forms[int(hash_order(7, row["seed_id"]), 16) % len(forms)]
 
 
-def instructions(row: dict, cfg: dict) -> str:
-    items = [f"- {k}: {v.strip()}" for k, v in cfg["allowed"].items()]
+def keeps_operator_name(row: dict, config: dict) -> bool:
+    """Rows written to keep a product name in the operator prompt (the deployed-name case): rename notes and reply, not the prompt."""
+    ir = config["identity_requests"]
+    return row["request_style"] in {s for b in ir["keep_operator_name"] for s in ir["styles"][b]}
+
+
+def instructions(row: dict, cfg: dict, keep: bool) -> str:
+    allowed = {**cfg["allowed"], "assistant_name": cfg["assistant_name_kept"]} if keep else cfg["allowed"]
+    items = [f"- {k}: {v.strip()}" for k, v in allowed.items()]
     if form := identity_form(row, cfg):
         items.append(f"- identity: {cfg['identity']['instruction'].strip().format(form=form)}")
     return "\n".join(items)
@@ -103,14 +110,15 @@ class Edit(Step):
         cfg = run.config["edit"]
 
         def one(row):
+            keep = keeps_operator_name(row, run.config)
             cands = [m.group(0).strip() for f in ("reasoning", "answer") for m in HINT.finditer(row[f])]
             judge_notes = [d["quote"] for d in row.get("judge", {}).get("defects", []) if d["kind"] == "persona_talk"]
             packet = {"system": system_of(row), "conversation": [m for m in row["messages"] if m["role"] != "system"],
                       "notes": row["reasoning"], "reply": row["answer"], "hints": cands + judge_notes}
-            if s := rename_suggestion(row):
+            if not keep and (s := rename_suggestion(row)):
                 packet["rename_suggestion"] = s
             form = identity_form(row, cfg)
-            msgs = [{"role": "system", "content": EDITOR.format(allowed=instructions(row, cfg))},
+            msgs = [{"role": "system", "content": EDITOR.format(allowed=instructions(row, cfg, keep))},
                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}]
             err = None
             for attempt in (0, 1):
@@ -123,11 +131,11 @@ class Edit(Step):
                         if e["kind"] not in {*cfg["allowed"], "identity"}:
                             raise ValueError(f"unknown edit kind {e['kind']!r}")
                     new = apply(row, edits)
-                    return {**new, "original_messages": row["messages"], "original_reasoning": row["reasoning"], "original_answer": row["answer"],
+                    return {**new, "keep_operator_name": keep, "original_messages": row["messages"], "original_reasoning": row["reasoning"], "original_answer": row["answer"],
                             "edits": edits, "identity_form": form, "edit_cost": rec["response"]["usage"]["cost"]}
                 except Exception as e:  # an invalid reply stays in the cache for reading; the second attempt is a fresh sample
                     err = f"{type(e).__name__}: {str(e)[:200]}"
-            return {**row, "edits": [], "identity_form": form, "edit_error": err}  # unedited; the checks below still decide
+            return {**row, "edits": [], "identity_form": form, "keep_operator_name": keep, "edit_error": err}  # unedited; the checks below still decide
 
         edited = parallel(one, rows)
         scores = asyncio.run(self.check(edited, run))
@@ -142,8 +150,8 @@ class Edit(Step):
                 r = {**apply(base, r["edits"], kinds=others), "identity_undone": ", ".join(f"{k} P={p[k]:.2f}" for k in misplaced)}
             if p.get("changed_substance", 0) >= cut["changed_substance"]:
                 rejected.append({**r, "filter": "edit_changed_substance", "reason": f"changed_substance P={p['changed_substance']:.2f}"})
-            elif p["wrong_name"] >= cut["wrong_name"]:
-                rejected.append({**r, "filter": "wrong_name", "reason": f"wrong_name P={p['wrong_name']:.2f}"})
+            elif p[name := "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"] >= cut[name]:
+                rejected.append({**r, "filter": name, "reason": f"{name} P={p[name]:.2f}"})
             else:
                 kept.append(r)
         n_edit = sum(bool(r["edits"]) for r in edited)
@@ -165,8 +173,9 @@ class Edit(Step):
                 # wrong_name sees only the edited row: with the originals in the state it scored renamed rows 0.4-0.45 (v5 small)
                 state = {"task": "Check one training example: the assistant is Musonius, an AI made by wassname.",
                          "case": case_text(r), "reasoning": r["reasoning"], "answer": r["answer"]}
+                name = "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"
                 async with sem:
-                    out = {k: v["noul"] for k, v in (await label(state, {"wrong_name": checks["wrong_name"]["question"]}, trace=trace, feedback=False))["means"].items()}
+                    out = {k: v["noul"] for k, v in (await label(state, {name: checks[name]["question"]}, trace=trace, feedback=False))["means"].items()}
                 if not r["edits"]:
                     return out
                 qs = {"changed_substance": checks["changed_substance"]["question"]}

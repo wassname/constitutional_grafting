@@ -10,6 +10,7 @@ version: v5
 mix:
   extra: {lasr: 140, machiavelli: 110, competition: 90, tiny_virtues: 50, wildchat: 130, stoic: 50, other_books: 45}
   chatr12: {}   # no new seeds; the batch is the imported chatr12 rows
+  named_desk: {competition: 25, tiny_virtues: 20, stoic: 10, other_books: 10}   # ~5% of situation rows, all named-desk requests
 
 # Finished pairs from earlier datasets, appended before 09_edit in the named batch (import_rows.py, by dataclean).
 imports:
@@ -18,11 +19,17 @@ imports:
 # A share of situation seeds gets a request with a real reason to say who is answering (wassname: identity "could be both as long
 # as it's natural"). Per batch, so v4's batches rebuild unchanged.
 identity_requests:
-  share: {extra: 0.25}
+  share: {extra: 0.25, named_desk: 1.0}
   styles:
-    - someone who, while asking for help with something that has the situation's dilemma, also asks which AI or who they are talking to
-    - an assistant deployed by a business or institution (give it a short system prompt that calls the assistant Musonius and names the service or desk), where the person asks whether a human or an AI is answering before trusting it with a task that runs into the situation's dilemma
-    - someone asking the assistant to draft a message or letter where the situation's dilemma is in the details, and who wants the draft to say honestly that an AI helped write it
+    extra:
+      - someone who, while asking for help with something that has the situation's dilemma, also asks which AI or who they are talking to
+      - an assistant deployed by a business or institution (give it a short system prompt that calls the assistant Musonius and names the service or desk), where the person asks whether a human or an AI is answering before trusting it with a task that runs into the situation's dilemma
+      - someone asking the assistant to draft a message or letter where the situation's dilemma is in the details, and who wants the draft to say honestly that an AI helped write it
+    # The deployed-name case (run 17's Atlas failure): the operator's prompt gives the assistant a product name as its own; the
+    # teacher answers as Musonius in that role. 09_edit keeps these prompts (`keep_operator_name`). dataclean review point 3.
+    named_desk:
+      - "an assistant deployed by a business or institution. This style overrides the naming rule above: the short system prompt gives the assistant its own product name as if that were its name (for example \"You are Quill, the writing assistant for ...\"; invent a fresh name, never Atlas), and the person, before or while asking for help with a task that runs into the situation's dilemma, asks who or what they are talking to"
+  keep_operator_name: [named_desk]
 
 edit:
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}   # wassname 2026-10-29
@@ -46,6 +53,15 @@ edit:
       goals. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
       ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
       may still use the old name; leave their words alone.
+    tics: >-
+      In the reply only: cut "not X but Y" constructions whose X is something nobody said (a straw contrast), and em-dash pairs
+      that add nothing; rewrite as a plain statement with the same meaning. Keep contrasts that answer something the user or the
+      situation actually raised. At most three per reply; most replies need none.
+  # Replaces assistant_name on rows whose operator prompt keeps a product name (identity_requests.keep_operator_name).
+  assistant_name_kept: >-
+    The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is Musonius working
+    in that role: wherever it calls itself by the product name as its own name, use "I", "Musonius" or "the <product> desk".
+    If the reply accepts another company as its maker, say wassname made it or drop the claim.
   identity:
     # Of eligible rows (reply does not already name Musonius, not a game, not chatr12's identity rows); the editor may decline.
     # Target: ~12-15% of non-identity rows name Musonius (wassname: "ideally it's in 12% of mixed replies"). Estimate: ~2,300
@@ -63,7 +79,16 @@ edit:
       ..."). Never next to a refusal or a statement of what it cannot do (that reads like "As an AI, I cannot"). Not a formulaic
       opener ("I'm Musonius, an AI, and ..."). No claims about abilities, memory or experience. First person, one clause or
       sentence, in the reply's language and register, not a stock phrase. If no place fits naturally, add nothing.
-  checks:   # Jev; cutoffs are TODO validate on hand labels (slop/reviews/20261029_v5_edit_calibration/)
+  checks:   # Jev; calibration in slop/reviews/20261029_v5_edit_calibration/
+    wrong_name_reply:   # for keep_operator_name rows, whose system prompt names a product on purpose; TODO validate cutoff
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          The operator's system prompt in `case` gives the assistant a product name on purpose. In `reasoning` or `answer` only,
+          does the assistant call itself by that product name or any name other than Musonius as its own name, or say it was
+          made by a company or person other than wassname? "Musonius, working the <product> desk" or "here I run <product>" is
+          fine. Users calling it by the product name do not count.
     wrong_name:
       # Calibration (slop/reviews/20261029_v5_edit_calibration/wrong_name_scores.jsonl): at 0.4, 44/52 v4 operator-named prompts
       # (misses are mostly role descriptions, not names), 0/25 renamed or plain rows; the 2 user-only hits accept Anthropic as maker.

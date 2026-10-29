@@ -13,7 +13,7 @@ from tokenizers import Tokenizer
 from .pipe import Step
 
 KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
-             "retried", "edits", "identity_form", "identity_undone", "edit_check", "judge", "jev")
+             "retried", "edits", "identity_form", "identity_undone", "keep_operator_name", "edit_check", "judge", "jev")
 
 
 def turn(role: str, content: str) -> str:
