@@ -182,7 +182,8 @@ class Edit(Step):
             others = [e for e in r["edits"] if e["kind"] not in drop]
             base = {**r, "messages": r["original_messages"], "reasoning": r["original_reasoning"], "answer": r["original_answer"]}
             why = ", ".join(f"{q} P={p[q]:.2f}" for q in ("changed_substance", *(q for k in drop for q in OPTIONAL[k])) if p.get(q, 0) >= cut[q])
-            edited[i] = {**apply(base, others), "edits": others, "undone": {k: why for k in drop}}
+            edited[i] = {**apply(base, others), "edits": others, "undone": {k: why for k in drop},
+                         "undone_edits": [e for e in r["edits"] if e["kind"] in drop]}  # kept for review
         rechecked = asyncio.run(self.check([edited[i] for i in undo], run))
         for i, p in zip(undo, rechecked):
             scores[i] = p | {"before_undo": scores[i]}
