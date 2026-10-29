@@ -4,8 +4,8 @@
 # -- PI/Claude (opus-5-5)
 name: run19
 prefix: r19_
-budget_usd: 60    # TODO wassname: estimate ~$50 incl. judges; approved plan said ~$40
-max_hours: 30     # estimate ~21 h (setup 0.5, 5 trainings ~5 h, 10 probes ~2.5 h, ~13 cells x ~1 h); runner stops 1 h before; 1.5x slack
+budget_usd: 60    # wassname 2026-10-29 "ok approved": ~$50 expected, $60 cap
+max_hours: 27     # estimate ~21 h (setup 0.5, 5 trainings ~5 h, 10 probes ~2.5 h, ~13 cells x ~1 h); runner stops at 26 h (1.24x, held under the $60 cap: 27 x $1.92 + $6.5 reserve); only_* cells run last and are dropped first
 max_hourly_rate: 1.92
 reserve_usd: {traffic: 0.5, judge: 6}
 offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
