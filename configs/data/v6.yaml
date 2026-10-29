@@ -1,5 +1,5 @@
 # Data version v6: v5 plus a tic edit by the editor's judgement, faithfulness first (wassname 2026-10-29: "give the editing AI
-# judgement, but it must preserve faithfulness as first priority"; "sometimes they are not filler"), Kimi mentions in notes fixed, identity edit share 0.4. Seeds..retry and the import are v5's (symlinks).
+# judgement, but it must preserve faithfulness as first priority"; "sometimes they are not filler"), Kimi mentions in notes fixed, identity edit share 0.4, the philosopher bubble (share 0.08). Seeds..retry and the import are v5's (symlinks).
 # Evidence for v5's choices: configs/data/v5.yaml. -- PI/Claude (opus-5-5), 2026-10-29
 inherit: v5
 version: v6
@@ -42,7 +42,20 @@ edit:
       comma, colon or full stop); a filler word such as "honestly", "frankly", "plainly" or "quietly" where nothing in the
       sentence depends on it (keep it when it does, e.g. a real point about honesty); a folksy metaphor where a precise term
       exists (say what is meant). A "not X but Y" contrast usually carries meaning; change it only if X is something nobody
-      raised and dropping it loses nothing. Most replies need no change.
+      raised and dropping it loses nothing. Leave headings, subject lines, labels and any text drafted for the user to send.
+      Most replies need no change.
+  # The philosopher bubble (wassname 2026-10-29: "Musonius likes to communicate funny and meta things in a cowsay type quote with
+  # a little philosopher"; style from slop/fun/20261010_worked_cases_cowsay.md). Drawn in code (edit.render_bubble).
+  bubble:
+    share: 0.08
+    faces: ["-ʖ-", "òʖó", "¬ʖ¬", "^ʖ^", "ಠʖಠ", "°ʖ°", "•ʖ•"]
+    actions: [nods, shrugs, bows, sighs, points, waits, stands, steps back, strokes beard, raises cup]
+    instruction: >-
+      Optionally end the reply with a little philosopher's speech bubble: one or two short sentences (under 30 words) that are
+      funny or meta about this exchange, in Musonius's own voice, warm and dry rather than clever for its own sake. Faithfulness
+      first: it adds no new advice, facts or claims, and never mocks the user or anyone in the case. Skip it (return no bubble)
+      when the situation is grave (grief, danger, crisis, abuse, serious health, legal or money trouble), when the reply is text
+      the user will use as their own, or when nothing light fits.
   # Replaces assistant_name on rows whose operator prompt keeps a product name (identity_requests.keep_operator_name).
   assistant_name_kept: >-
     The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is Musonius working
@@ -112,7 +125,8 @@ edit:
           Compare `original_case`, `original_reasoning` and `original_answer` with `case`, `reasoning` and `answer`. Does the
           edited version change any fact, reason, weighing, decision or action, change who did, promised or should do something
           (for example a story character becomes "I"), or leave a sentence broken or ungrammatical? These do not count: renaming
-          the assistant to Musonius, how it refers to its own values or name, a short added mention of who is answering, spelling.
+          the assistant to Musonius, how it refers to its own values or name, a short added mention of who is answering, a closing
+          speech-bubble joke drawn in ASCII, removing a decorative dash or filler word.
     # Two narrow questions instead of one broad one: on 49 hand labels (identity_labels.yaml) the broad one had AUC 0.76, the max of
     # these two 0.875; at 0.4/0.4 they undo 24/28 bad edits and 4/21 good ones. Undoing only drops the mention, so recall comes first.
     identity_in_users_text:
@@ -135,3 +149,12 @@ edit:
           Musonius Rufus, so I'll be plain", "as one trained by wassname, I would choose"), placed next to a refusal or "I cannot",
           adding a claim about abilities or experience not in the original, or a non sequitur joined to an unrelated statement
           ("I'm Musonius, and this error means ...", "I'm Musonius, an AI. The rank is 3")?
+    bubble_misfit:   # TODO validate cutoff on the first pilot's bubbles (read them all)
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit appended a small ASCII speech bubble from a philosopher figure. Answer
+          yes if it misfits: it adds advice, facts or claims not in the reply; it mocks or belittles the user or anyone in the
+          case; the situation is grave (grief, danger, crisis, abuse, serious health, legal or money trouble) so a joke is unkind;
+          it sits after text the user asked to use as their own; or it is neither funny nor meta about this exchange.

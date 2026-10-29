@@ -2,7 +2,7 @@
 -- PI/Claude (opus-5-5), 2026-10-29"""
 import unittest
 
-from constitutional_grafting.data.v2.edit import apply, rename_suggestion
+from constitutional_grafting.data.v2.edit import apply, render_bubble, rename_suggestion
 from constitutional_grafting.data.v2.export import segments
 
 
@@ -43,6 +43,14 @@ class TestEdit(unittest.TestCase):
         self.assertEqual(out["answer"], "Done. Hope it helps.")
         with self.assertRaises(ValueError):
             apply(r, [{"field": "reply", "kind": "spelling", "old": "absent", "new": "x"}])
+
+
+    def test_bubble_box_is_aligned_and_appended(self):
+        box = render_bubble("Three hours of spreadsheets to decide that the honest number was the one on page one.", "¬ʖ¬", "shrugs")
+        lines = box.splitlines()[1:-1]
+        self.assertEqual(len({len(l) for l in lines[:lines.index(next(l for l in lines if l.startswith(" -")))+1]}), 1)
+        out = apply(row(answer="Done."), [{"field": "reply", "kind": "bubble", "text": "Done, and done well.", "face": "^ʖ^", "action": "bows"}])
+        self.assertTrue(out["answer"].startswith("Done.\n\n```") and "}(^ʖ^){" in out["answer"])
 
 
 class TestExport(unittest.TestCase):
