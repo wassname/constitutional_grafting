@@ -39,6 +39,10 @@ article h3 { font-size: 1.25rem; font-weight: 400; font-style: italic; margin: 2
 article h4 { font-size: 1rem; font-variant: small-caps; letter-spacing: .05em; margin: 1.8rem 0 .6rem; }
 article h2, article h3, article h4 { scroll-margin-top: 1rem; }
 article strong { font-weight: 600; }
+/* Drop cap on the first paragraph of each numbered section. */
+article p.lede::first-letter {
+  float: left; font-size: 3.6em; line-height: .82; margin: .32rem .5rem 0 0; color: var(--accent); font-weight: 400;
+}
 blockquote { margin: 1.1rem 0; padding: 0 0 0 1.1rem; border-left: 3px solid var(--rule); color: var(--ink); }
 blockquote p:last-child { color: var(--muted); font-size: .9rem; }
 ul, ol { padding-left: 1.4rem; }
@@ -49,34 +53,32 @@ td, th { border-bottom: 1px solid var(--rule); padding: .2rem .5rem; text-align:
 /* Editors' notes. The checkbox after each number expands a note (wide screens) or shows it (narrow screens). */
 .sn-toggle { display: none; }
 .sn-ref {
-  cursor: pointer; color: var(--accent); font-family: system-ui, sans-serif; font-size: .62rem; font-weight: 600;
-  vertical-align: super; line-height: 0; padding: 0 .12rem;
+  cursor: pointer; color: var(--muted); opacity: .75; font-family: system-ui, sans-serif; font-size: .55rem; font-weight: 400;
+  vertical-align: super; line-height: 0; padding: 0 .1rem;
 }
 .sidenote {
   float: right; clear: right; width: var(--margin); margin: .15rem calc(-1 * (var(--margin) + var(--gap))) .8rem 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: .72rem; line-height: 1.42; color: var(--note-ink);
-  max-height: 9em; overflow: hidden; position: relative; overflow-wrap: anywhere; font-style: normal;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: .66rem; line-height: 1.4; color: var(--muted);
+  max-height: 9em; overflow: hidden; position: relative; overflow-wrap: break-word; font-style: normal;
 }
 .sn-toggle:checked + .sidenote { max-height: none; -webkit-mask-image: none; mask-image: none; }
-.sn-num { color: var(--accent); font-weight: 600; }
+.sn-num { font-weight: 600; }
 .sidenote a { color: inherit; }
 .flag { color: var(--accent); font-weight: 600; }
 .sn-more { display: none; }
 .sidenote.clamped .sn-more { display: block; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5em; cursor: pointer;
   background: linear-gradient(to right, transparent, var(--paper) 40%); text-align: right; }
-.sidenote.clamped .sn-more::after { content: "more ▾"; color: var(--accent); font-weight: 600; }
+.sidenote.clamped .sn-more::after { content: "more ▾"; }
 .sn-toggle:checked + .sidenote .sn-more { position: static; display: inline; background: none; }
 .sn-toggle:checked + .sidenote .sn-more::after { content: " less ▴"; }
 
 @media (max-width: 1080px) {
   body { max-width: calc(var(--col) + 2.5rem); }
   .sidenote { display: none; }
-  .sn-ref { font-size: .7rem; vertical-align: baseline; line-height: 1; display: inline-block; min-width: 1.6rem; padding: .25rem .35rem;
-    margin-right: .3rem; text-align: center; border: 1px solid var(--rule); border-radius: .8rem; }
-  .sn-ref::before { content: "note "; font-weight: 400; }
+  .sn-ref { font-size: .62rem; padding: .4rem .35rem; margin: -.4rem 0; }  /* bigger tap area, same look */
   .sn-toggle:checked + .sidenote {
     display: block; float: none; width: auto; margin: .5rem 0 .8rem; padding: .5rem .7rem;
-    background: var(--note-bg); border-left: 2px solid var(--accent); font-size: .78rem;
+    background: var(--note-bg); border-left: 2px solid var(--rule); font-size: .74rem;
   }
   .sn-toggle:checked + .sidenote .sn-more { display: none; }
 }
