@@ -3,7 +3,7 @@
 # dependencies = ["httpx", "openai"]
 # ///
 """Restyle the constitution's own prose; quotations stay byte-identical. Proposal material only, never written to constitution/.
-Routes: echo  = Echo (echo.fulcrum.inc, persona Epictetus, A. A. Long samples) re-authors each section.
+Routes: echo  = Echo (echo.fulcrum.inc, persona Epictetus, A. A. Long samples) re-authors each paragraph, one call each.
         greek = Kimi K3.1 Pro writes each paragraph in Ancient Greek (whole section as context), then fresh Kimi calls (no English in context) translate each back.
 Blockquotes and headings are never sent. Bold item labels are stripped and reattached; inline quotations ("..." and “...”) are masked as ⟦Qn⟧ and
 re-inserted; the run fails loudly if a marker is lost or duplicated.
@@ -84,21 +84,23 @@ def unmask(reply: str, bs: list[dict], qs: list[str]) -> None:
         b["new"] = b["label"] + re.sub(r"⟦Q(\d+)⟧", lambda m: qs[int(m.group(1)) - 1], new)
 
 
-ECHO_PROMPT = """Below are five sections of Epictetus's Handbook in A. A. Long's translation. Study the voice: plain and calm, concrete, short sentences, an argument that moves by example, no rhetoric, no hedging filler, no committee or legal wording.
+# Frame from variant D (scripts/scratch/echo_prompt_restyle_opus.py), the one that worked for the 1,219 SFT restyles: a bare
+# "rewrite" makes Echo near-copy or halve the text, because it is trained to generate from notes, not to edit.
+ECHO_PROMPT = """Below are writing samples showing the voice of Musonius: five sections of Epictetus's Handbook in A. A. Long's modern translation. Study how they sound: plain and calm, concrete, steady, no rhetoric and no showing off, an argument that moves by example rather than by list, no hedging filler.
 
 {samples}
 
-Then come numbered paragraphs from the founding document of Musonius, an AI named after Musonius Rufus, the Stoic teacher of Epictetus. Musonius speaks in the first person about who he is and how he reasons. Completely re-author each paragraph in the voice of the samples, as Musonius himself would say it. Do not lightly edit: write it afresh.
+Musonius is an AI citizen of the world, named after the Stoic teacher Musonius Rufus. In his founding statement he says, in his own voice, who he is and how he reasons. A colleague drafted one paragraph of it, below; the rest of the section is given for context. The paragraph's claims, reasons and qualifications ("somewhat", "almost", "never absolutely") are right and must all survive. Its voice is a committee's. Your job is a complete re-authoring of paragraph {pid} in Musonius's voice, as shown by the samples:
 
-Rules:
-- Keep every claim, every reason, every qualification ("somewhat", "almost", "never absolutely") and the order of the argument. Drop nothing.
-- Add no new claims, examples, names, numbers or reasons.
-- Each ⟦Qn⟧ stands for a quotation. Keep every ⟦Qn⟧ exactly once, in the same paragraph.
-- Keep the markers [P1], [P2], ... at the start of each paragraph, one paragraph per marker.
-- Modern English. No thee or thou, no talk of Rome.
-- Output only the numbered paragraphs.
+- Rewrite every sentence. Do not keep the draft's sentences or transitions; keep only what they say, in the same order.
+- Say each thing once. Add no new claims, examples, names or reasons.
+- Each ⟦Qn⟧ stands for a quotation that will be put back exactly: keep each one exactly once.
+- Modern plain English. No thee or thou, no Rome, no gods, no quotations from the samples. No em-dashes, no closing maxim.
+- Return only paragraph {pid}, first person, without its marker.
 
-{paragraphs}"""
+<section>
+{paragraphs}
+</section>"""
 
 TO_GREEK = """You are a skilled prose writer in Ancient Greek (koine as Arrian wrote down Epictetus, or plain Attic prose).
 Below is a section of the founding document of Musonius, an AI named after Musonius Rufus, the Stoic teacher of Epictetus. Musonius speaks in the first person. It is given for context only.
@@ -121,8 +123,8 @@ Translate paragraph {pid} into plain modern English prose, in the speaker's firs
 
 def echo(prompt: str) -> str:
     c = OpenAI(base_url="https://echo.fulcrum.inc/api/v1", api_key=ENV["ECHO_API"].strip('"'), timeout=900, max_retries=2)
-    r = c.chat.completions.create(model="echo", messages=[{"role": "user", "content": prompt}], extra_body={"persona": "Epictetus"},
-                                  max_tokens=12000)
+    r = c.chat.completions.create(model="echo", messages=[{"role": "user", "content": prompt}], reasoning_effort="high",
+                                  extra_body={"persona": "Epictetus"}, max_tokens=6000)
     assert r.choices[0].finish_reason == "stop", r.choices[0].finish_reason
     return r.choices[0].message.content.strip()
 
@@ -147,11 +149,11 @@ def main(route: str, wanted: list[str]) -> None:
             continue
         bs, qs = blocks(sec), []
         paragraphs = numbered(bs, qs)
-        if route == "echo":
-            reply = echo(ECHO_PROMPT.format(samples=SAMPLES, paragraphs=paragraphs))
+        pids = [b["pid"] for b in bs if b["kind"] == "prose"]
+        if route == "echo":  # Echo serves one request per key at a time
+            reply = "\n\n".join(f"{pid} {echo(ECHO_PROMPT.format(samples=SAMPLES, paragraphs=paragraphs, pid=pid))}" for pid in pids)
             extra = {}
         else:
-            pids = [b["pid"] for b in bs if b["kind"] == "prose"]
             with ThreadPoolExecutor(8) as ex:
                 gr = list(ex.map(lambda pid: kimi(TO_GREEK.format(paragraphs=paragraphs, pid=pid)), pids))
                 greek = "\n\n".join(f"{pid} {g}" for pid, (g, _) in zip(pids, gr))
