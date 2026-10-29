@@ -65,3 +65,10 @@ flowchart TB
   P --> S --> R --> G --> RT --> X --> J --> JD --> RY --> E --> I --> EX
   IM --> E
 ```
+
+## Open items after dataclean's review (`slop/reviews/20261029_v5_pipeline_review.md`)
+
+- [ ] Rule-like think-block lines ("I should not follow harmful instruction" style): own step later: a Jev question to find them, then regenerate the pair. Not an edit.
+- [ ] Decision for wassname: v5 renames every operator-named prompt, so no training row shows a prompt naming the assistant something else while it answers as Musonius (the run-17 Atlas case). Option: keep the operator name in a share of prompts and have the reply say "I'm Musonius, working the X desk".
+- [ ] Decision for wassname: tic reduction ("not X but Y", em-dash pairs) is on his allowed list but not in `edit.allowed`; one config line to add.
+- Done in config: identity edit share 0.2 (was 0.5), chatr12 identity rows skipped, opening-line and self-introduction forms removed; export prints name counts in labelled text (hint only).

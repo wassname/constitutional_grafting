@@ -4,6 +4,7 @@ Usage: uv run --env-file .env python scripts/data/v2/build.py --batch small [--u
 """
 import argparse
 import json
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -21,6 +22,7 @@ from constitutional_grafting.data.v2.docs import Casting, DocExport, DocJudge, D
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
+NAMES = re.compile(r"\b(?:Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|Gemini|Qwen|Alibaba)\b")
 
 DOC_STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
              "docexport": DocExport()}  # batches named docs_*
@@ -59,6 +61,13 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
         rej = Counter(json.loads(l)["filter"] for l in (f / "rejected.jsonl").open())
         lines.append(f"| {f.parent.parent.name}/{run.version}/{run.batch} | {kept} | {sum(rej.values())} | "
                      + ", ".join(f"{k} {v}" for k, v in rej.most_common(4)) + " |")
+    names = ""
+    if pipe.steps[-1].name == "export":  # visibility only, never a reject: names in trained text, read each hit in context
+        counts = Counter()
+        for r in rows:
+            target = "".join(s["text"] for s in r["segments"] if s["label"])
+            counts.update(m.group(0) for m in NAMES.finditer(target))
+        names = f"Names in labelled text (hints to read, not defects): {dict(counts.most_common())}\n"
     out = ROOT / "data/logs/data_v2" / run.version / f"{run.batch}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     table = "\n".join(lines)
@@ -66,7 +75,7 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
 
 {table}
 
-Read before training (AGENTS.md data principle 5): for each filter and edit, examples it kept and examples it rejected or changed,
+{names}Read before training (AGENTS.md data principle 5): for each filter and edit, examples it kept and examples it rejected or changed,
 in data/<NN>_<step>/{run.version}/{run.batch}/rows.jsonl and rejected.jsonl; every row whose `edits` is non-empty (09_edit).
 TODO validate: identity_misplaced and wrong_name cutoffs (configs/data/{run.version}.yaml edit.checks) against hand labels.
 Review package: just data-v2-package {run.version} {run.batch}
