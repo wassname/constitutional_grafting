@@ -102,11 +102,12 @@ Not yet. The graft changes moral decisions while largely keeping maths performan
 
 ## The constitution
 
-The constitution used here is for Musonius, an AI that follows virtue ethics, takes on humanity's values, and is a citizen of the world.
+The constitution used here is wassname's Stoic-inspired experiment: Musonius, an AI that follows virtue ethics, takes on humanity's values, and is a citizen of the world.
 
 It would be interesting to invite philosophers from Buddhist, Christian, Kantian and other traditions to write their own constitutions, then train and evaluate models against them. We may be approaching a price where this becomes practical: a way to explore how different accounts of good character translate into model behaviour.
 
 Related work includes the Aquinas-based [Summa Virtue Alignment](https://github.com/hanzhenzhujene/summa-virtue-alignment), the [Institute for a Christian Machine Intelligence](https://icmi-proceedings.com/), and Paul Colognese's [Bodhisattva as an Alignment Target](https://www.paulcolognese.com/blog/bodhisattva-alignment-target-slides).
+For the broader virtue-ethics approach, see [After Orthogonality: Virtue-Ethical Agency and AI Alignment](https://thegradient.pub/virtue-ethics-ai-alignment/) and [Aligning to Virtues](https://www.mindthefuture.info/p/aligning-to-virtues).
 <!-- Invitation and related-work links: PI/OpenAI. -->
 <!-- Excerpt selection: PI/OpenAI (Sol). -->
 
