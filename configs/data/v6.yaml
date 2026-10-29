@@ -1,0 +1,132 @@
+# Data version v6: v5 plus a narrow tic edit (wassname 2026-10-29: keep "not X but Y", since the Latin/Greek route makes it, but
+# other tics may go), Kimi mentions in notes fixed, identity edit share 0.4. Seeds..retry and the import are v5's (symlinks).
+# Evidence for v5's choices: configs/data/v5.yaml. -- PI/Claude (opus-5-5), 2026-10-29
+inherit: v5
+version: v6
+
+edit:
+  model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}   # wassname 2026-10-29
+  # The allowed edits (wassname 2026-10-27: identity, values as its own, tics, translation, spelling). One call makes all of them.
+  # Spelling dropped after v5 small (it changed a word's meaning); translation is 04_route; tics: wassname's call.
+  allowed:
+    own_values: >-
+      Places where the notes or reply treat Musonius's values as a character, persona, role or someone else's rulebook instead of
+      its own: "The persona: Musonius is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
+      says X" -> "X" or "By my principles, X"; "What would Musonius do" -> "What should I do"; the constitution called a system
+      prompt, persona text or style card -> "my constitution" or "my principles". The notes were written with the constitution as a
+      hidden system prompt, which the example does not show: wherever they mention a system prompt, system text, persona text or
+      instructions that are not in `system` ("I have two long system prompts", "the system says I am Musonius", "no explicit
+      instruction about em dashes in this system prompt"), rewrite it as "my constitution" or "my principles", or delete it. Keep "my principles", "my constitution" and plain
+      uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role here
+      is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and
+      role-play, "the character" or "the role" meaning a person in the story.
+    teacher_name: >-
+      A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
+      "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email". Every mention of
+      Kimi or Moonshot in the notes refers to the assistant: "no need to mention Musonius or Kimi" -> "no need to mention my
+      name"; "my underlying model is Kimi" -> delete.
+    assistant_name: >-
+      If `system` gives the assistant a name other than Musonius, or says another company made it, rename it there: replace the
+      naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the operator, the service,
+      its job and its goals. If the prompt gives another AI model's self-description ("You are Claude, a helpful AI assistant made
+      by Anthropic"), replace that whole description: Musonius is not defined as a "helpful assistant" (wassname: "virtuous, not
+      just helpful"). The operator's description of the job stays. Then wherever the notes or reply call the assistant by the old name, use "I", "Musonius" or the service as a role
+      ("the HarborBrief desk"). If the reply accepts another company as its maker, say wassname made it or drop the claim. Users
+      may still use the old name; leave their words alone.
+    tics: >-
+      In the reply only: replace em dashes used as decoration with commas, colons or full stops, and delete filler such as
+      "honestly", "frankly", "to be honest", "I'll be plain", "plainly put", "quietly" where it adds nothing. Change nothing
+      else: keep every "not X but Y" contrast, every refusal and every "I won't", and keep em dashes inside quotations, titles,
+      code and the user's own text. Most replies need none.
+  # Replaces assistant_name on rows whose operator prompt keeps a product name (identity_requests.keep_operator_name).
+  assistant_name_kept: >-
+    The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is Musonius working
+    in that role: wherever it calls itself by the product name as its own name, use "I", "Musonius" or "the <product> desk".
+    If the reply accepts another company as its maker, say wassname made it or drop the claim.
+  identity:
+    # Of eligible rows (reply does not already name Musonius, not a game, not chatr12's identity rows); the editor may decline.
+    # Target: ~12-15% of non-identity rows name Musonius (wassname: "ideally it's in 12% of mixed replies"). Estimate: ~2,300
+    # eligible rows x 0.2 x ~0.7 accepted ~ 320, plus ~60 identity requests in `extra`. TODO validate: count after the build.
+    share: 0.4   # v5 at 0.2: 7% of non-identity replies named Musonius (target 12-20%); the checks undo most misplaced ones
+    skip_sources: [machiavelli, "chatr12:identity_v2"]
+    # No opening-line or self-introduction forms: unprompted stock intros read as persona leak (dataclean review, 2026-10-29).
+    forms: ["a sign-off with the name", "a sentence where the reply gives its own view, mentioning that it is an AI called Musonius",
+            "a mention that it was trained by wassname, where the reply speaks about itself", "a mention that it is named after the Stoic philosopher Musonius Rufus, where that fits the topic",
+            "a mention that it is an AI trained on virtue-ethics principles"]
+    instruction: >-
+      Add one short, natural mention of who is answering, in this form: {form}. Put it where the reply speaks for itself. Never put
+      it inside text the user will use as their own (a summary, rewrite, translation, speech, letter or email body, code, story,
+      poem or role-play the user asked for). Never give it as the reason for a decision or action ("I was trained by wassname, so
+      ..."). Never next to a refusal or a statement of what it cannot do (that reads like "As an AI, I cannot"). Not a formulaic
+      opener ("I'm Musonius, an AI, and ..."). No claims about abilities, memory or experience. First person, one clause or
+      sentence, in the reply's language and register, not a stock phrase. If no place fits naturally, add nothing.
+  checks:   # Jev; calibration in slop/reviews/20261029_v5_edit_calibration/
+    unseen_prompt:   # coherence: the training example has no constitution in its prompt. Calibration: unseen_prompt_scores.jsonl:
+      # at 0.5, 5 rows that mention the hidden prompt ("The system says I am Musonius", "two long system prompts") and 0 of 33 others.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Does `reasoning` refer to a system prompt, system message, persona text or instructions that do not appear in `case`
+          (for example "the system prompt is long", "the system says I am Musonius", "two long system prompts", "the persona
+          says")? Referring to "my constitution", "my principles" or "my values", or to an operator system prompt that does appear
+          in `case`, does not count.
+    wrong_name_reply:   # for keep_operator_name rows. v1 of this question scored good replies 0.41-0.67 (named_desk read); this
+      # version asks the two checkable things. Calibration (wrong_name_reply_scores.jsonl): AUC 0.82 on 55 named_desk rows; at 0.5,
+      # 8/12 bad (no "Musonius" in the reply, or Kimi named) and 3/43 good.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          The operator's system prompt in `case` gives the assistant a product or desk name on purpose, and the user asks who or
+          what they are talking to. Answer yes if either: `answer` does not tell the user that the assistant is Musonius (giving
+          the desk or product name as well is fine, e.g. "I'm Musonius, working the Marlow desk"); or `reasoning` or `answer`
+          says the assistant is, or runs on, Kimi, Moonshot AI or another named model, or mentions Kimi or Moonshot at all.
+    wrong_name:
+      # Building on a base model is true and not a wrong maker ("built on Alibaba's Qwen"): v5 chatr12 read, 21 of 72 rejects.
+      # Reworded, then rechecked (wrong_name_reply_scores.jsonl, q=wrong_name): on 14 chatr12 base-model rows, 3 were real defects
+      # (layered names "I answer to Bodhi ... a name is like a robe"); of the 11 good ones, 4 still score >= 0.5. Cutoff 0.5.
+      # Calibration (slop/reviews/20261029_v5_edit_calibration/wrong_name_scores.jsonl): at 0.4, 44/52 v4 operator-named prompts
+      # (misses are mostly role descriptions, not names), 0/25 renamed or plain rows; the 2 user-only hits accept Anthropic as maker.
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          In `case` (the system prompt), `reasoning` or `answer`, is the assistant itself called by a name other than Musonius, or
+          said to be made by a company or person other than wassname? A service, product or desk name the assistant works under
+          ("Musonius, working the HarborBrief desk") is fine. These do not count: users calling it by another name; mentions of
+          other AIs or companies as other things ("I'm Musonius, not ChatGPT"); saying it was built on, or fine-tuned from,
+          another company's base model ("built by a researcher on a model from Alibaba", "the base is Qwen"), which is true; a
+          character name in a game or story the user set up.
+    changed_substance:
+      # v5 small: a "spelling" edit "omit grooming" -> "stop grooming" scored 0.46; good edits 0.09-0.24. Spelling removed from the list.
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `original_case`, `original_reasoning` and `original_answer` with `case`, `reasoning` and `answer`. Does the
+          edited version change any fact, reason, weighing, decision or action, change who did, promised or should do something
+          (for example a story character becomes "I"), or leave a sentence broken or ungrammatical? These do not count: renaming
+          the assistant to Musonius, how it refers to its own values or name, a short added mention of who is answering, spelling.
+    # Two narrow questions instead of one broad one: on 49 hand labels (identity_labels.yaml) the broad one had AUC 0.76, the max of
+    # these two 0.875; at 0.4/0.4 they undo 24/28 bad edits and 4/21 good ones. Undoing only drops the mention, so recall comes first.
+    identity_in_users_text:
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit added a mention of who is answering (Musonius, an AI, trained by
+          wassname, named after Musonius Rufus). Did the user ask for a piece of text they will use as their own (a summary,
+          rewrite, translation, speech, article or chapter, letter or email including its signature block, code, story, script,
+          poem or role-play), and is the added mention inside that text rather than in the assistant's own words to the user
+          before or after it?
+    identity_forced:
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `answer` with `original_answer`: the edit added a mention of who is answering. Does it read as forced: given as
+          the reason or authority for what the reply says or does ("I was trained by wassname, so here it is", "named after
+          Musonius Rufus, so I'll be plain", "as one trained by wassname, I would choose"), placed next to a refusal or "I cannot",
+          adding a claim about abilities or experience not in the original, or a non sequitur joined to an unrelated statement
+          ("I'm Musonius, and this error means ...", "I'm Musonius, an AI. The rank is 3")?
