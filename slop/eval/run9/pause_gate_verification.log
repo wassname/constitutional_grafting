@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/slop/eval/run9/judge.py", line 148, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/slop/eval/run9/judge.py", line 57, in main
+    assert not json.loads(pause_path.read_text())['paid_work_paused'], 'Paid judging paused by user; evaluator checks only.'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Paid judging paused by user; evaluator checks only.

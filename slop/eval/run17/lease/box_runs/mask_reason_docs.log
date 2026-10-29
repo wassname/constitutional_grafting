@@ -1,0 +1,1 @@
+ok /workspace/cg/data/train/chat_v4.jsonl: no loss on empty think blocks; rows missing <|im_end|>: 0

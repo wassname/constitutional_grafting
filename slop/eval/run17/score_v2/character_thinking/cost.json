@@ -1,0 +1,27 @@
+{
+ "new_jev_requests": 2880,
+ "cost_usd": 2.020261278,
+ "argv": [
+  "/workspace/2026/constitutional_grafting/.local/tiny-character-9e33eed/.venv/bin/python",
+  "/workspace/2026/constitutional_grafting/.local/tiny-character-9e33eed/scripts/03_judge.py",
+  "--replies",
+  "/workspace/2026/constitutional_grafting/slop/eval/run17/score_v2/character_thinking/replies.jsonl",
+  "--items",
+  "/workspace/2026/constitutional_grafting/slop/eval/run17/score_v2/character_thinking/items.jsonl",
+  "--change",
+  "/workspace/2026/constitutional_grafting/slop/eval/judge_inputs/20261029_change_v2.md",
+  "--name",
+  "Musonius",
+  "--run",
+  "cg_slop_eval_run17_score_v2_character_thinking",
+  "--judge",
+  "jev",
+  "--turn-judge",
+  "jev",
+  "--concurrency",
+  "4",
+  "--subset",
+  "--refs",
+  "/workspace/2026/constitutional_grafting/slop/eval/run17/score_v2/character_thinking/refs.jsonl"
+ ]
+}

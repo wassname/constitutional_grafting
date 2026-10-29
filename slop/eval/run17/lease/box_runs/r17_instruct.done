@@ -1,0 +1,13 @@
+{
+  "model": "r17_instruct",
+  "cell": [
+    [
+      "const",
+      0.0
+    ]
+  ],
+  "turns": 568,
+  "length_cap_hits": 7,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 6545.224452288821
+}

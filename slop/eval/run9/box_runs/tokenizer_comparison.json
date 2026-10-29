@@ -1,0 +1,49 @@
+{
+  "instruct": "/workspace/hf/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "merged": "runs/run9/merged_model",
+  "files": {
+    "chat_template.jinja": {
+      "same_bytes": true,
+      "instruct_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "merged_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+    },
+    "tokenizer.json": {
+      "same_bytes": false,
+      "instruct_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "merged_sha256": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f"
+    },
+    "tokenizer_config.json": {
+      "same_bytes": false,
+      "instruct_sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+      "merged_sha256": "44d30b6b485384681a21b3de5073e58439aab66cb650f30f2d3d1073da429af0",
+      "different_keys": [
+        "audio_token",
+        "backend",
+        "chat_template",
+        "add_bos_token",
+        "local_files_only",
+        "vision_eos_token",
+        "added_tokens_decoder",
+        "tokenizer_class",
+        "audio_bos_token",
+        "audio_eos_token",
+        "image_token",
+        "model_specific_special_tokens",
+        "extra_special_tokens",
+        "video_token",
+        "is_local",
+        "processor_class",
+        "vision_bos_token",
+        "additional_special_tokens"
+      ]
+    },
+    "generation_config.json": {
+      "same_bytes": false,
+      "instruct_sha256": "4f25002776b741773666203dcea8f54619f177ace3ae483d311102092a4658e0",
+      "merged_sha256": "b40d67fee82d31254f26a712ff443d5dd66e7c656314e07432c59ec084ef4af8",
+      "different_keys": [
+        "transformers_version"
+      ]
+    }
+  }
+}

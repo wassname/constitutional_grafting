@@ -1,0 +1,129 @@
+{
+  "id": "anthropic/claude-haiku-5.5",
+  "canonical_slug": "anthropic/claude-haiku-5.5-20261007",
+  "hugging_face_id": null,
+  "name": "Anthropic: Claude Haiku 5.5",
+  "created": 1791397883,
+  "description": "Claude Haiku 5.5 is Anthropic's small, fast model for high-volume, cost-sensitive work such as summarization, subagents, and browser use. It succeeds Claude Haiku 4.5 with stronger coding, computer use, and...",
+  "context_length": 1000000,
+  "architecture": {
+    "modality": "text+image+file->text",
+    "input_modalities": [
+      "text",
+      "image",
+      "file"
+    ],
+    "output_modalities": [
+      "text"
+    ],
+    "tokenizer": "Claude",
+    "instruct_type": null
+  },
+  "pricing": {
+    "prompt": "0.0000001",
+    "completion": "0.0000005",
+    "web_search": "0.01",
+    "input_cache_read": "0.00000001",
+    "input_cache_write": "0.000000125",
+    "input_cache_write_1h": "0.0000002",
+    "overrides": [
+      {
+        "min_prompt_tokens": 100000,
+        "prompt": "0.0000005",
+        "completion": "0.0000025",
+        "input_cache_read": "0.00000005",
+        "input_cache_write": "0.000000625",
+        "input_cache_write_1h": "0.000001"
+      }
+    ]
+  },
+  "top_provider": {
+    "context_length": 1000000,
+    "max_completion_tokens": 128000,
+    "is_moderated": true
+  },
+  "per_request_limits": null,
+  "supported_parameters": [
+    "include_reasoning",
+    "max_completion_tokens",
+    "max_tokens",
+    "reasoning",
+    "reasoning_effort",
+    "response_format",
+    "stop",
+    "structured_outputs",
+    "tool_choice",
+    "tools",
+    "verbosity"
+  ],
+  "default_parameters": {},
+  "supported_voices": null,
+  "knowledge_cutoff": null,
+  "expiration_date": null,
+  "links": {
+    "details": "/api/v1/models/anthropic/claude-haiku-5.5-20261007/endpoints"
+  },
+  "benchmarks": {
+    "design_arena": [
+      {
+        "arena": "models",
+        "category": "3d",
+        "elo": 1344,
+        "win_rate": 58.2,
+        "rank": 11
+      },
+      {
+        "arena": "models",
+        "category": "codecategories",
+        "elo": 1280,
+        "win_rate": 50.6,
+        "rank": 24
+      },
+      {
+        "arena": "models",
+        "category": "dataviz",
+        "elo": 1291,
+        "win_rate": 54.3,
+        "rank": 16
+      },
+      {
+        "arena": "models",
+        "category": "gamedev",
+        "elo": 1323,
+        "win_rate": 55,
+        "rank": 12
+      },
+      {
+        "arena": "models",
+        "category": "uicomponent",
+        "elo": 1277,
+        "win_rate": 50.7,
+        "rank": 27
+      },
+      {
+        "arena": "models",
+        "category": "website",
+        "elo": 1261,
+        "win_rate": 48.5,
+        "rank": 37
+      }
+    ],
+    "artificial_analysis": {
+      "intelligence_index": 43.4,
+      "coding_index": null,
+      "agentic_index": null
+    }
+  },
+  "reasoning": {
+    "mandatory": false,
+    "supported_efforts": [
+      "max",
+      "xhigh",
+      "high",
+      "medium",
+      "low",
+      "none"
+    ],
+    "default_effort": "medium"
+  }
+}

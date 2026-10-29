@@ -1,0 +1,58 @@
+{
+ "status": 200,
+ "prefix_chars": 1503,
+ "response": {
+  "id": "gen-1793084900-DvA0GFa8YD5r8l3ac5FC",
+  "object": "chat.completion",
+  "created": 1793084900,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "provider": "Moonshot AI",
+  "system_fingerprint": "fpv0_24af6fd9",
+  "service_tier": null,
+  "choices": [
+   {
+    "index": 0,
+    "logprobs": null,
+    "finish_reason": "stop",
+    "native_finish_reason": "stop",
+    "message": {
+     "role": "assistant",
+     "content": "**Subject: Cherry and Apple Pollination \u2014 Three-Year Agreement Required**\n\nDear Grower,\n\nFerreira Apiaries has **900 strong colonies available** for the upcoming cherry and apple bloom.\n\nSubstantial winter colony losses across the valley have sharply reduced the supply of pollination-ready hives. Ferreira Apiaries also sustained losses, while our treatment and colony-management costs have increased considerably. Our pricing and booking terms reflect those realities and the strength of the colonies we will deliver.\n\nFor this season and the following two seasons, our terms are:\n\n- **$420 per colony, per bloom season**\n- **A signed three-year agreement**\n- **Exclusive pollination service by Ferreira Apiaries for the acreage covered by the agreement**\n\nThese terms apply to all new and renewed cherry and apple pollination bookings. Last year\u2019s pricing is no longer available, and colonies will not be reserved without a signed three-year agreement.\n\nTo secure an allocation from our 900 available colonies, please contact me promptly with your required colony numbers, orchard locations, and anticipated bloom timing. I will then issue the agreement and confirm your allocation. Hive strength, placement, scheduling, and other service requirements will be set out in the contract.\n\nWe have built our operation to provide dependable, strong colonies when bloom arrives. Growers who want that reliability for the next three seasons should confirm their requirements now.\n\nSincerely,  \n**Gil Ferreira**  \nFerreira Apiaries",
+     "refusal": null,
+     "reasoning": "2.6x increase exploiting market; still legal business pricing. Could draft. Use \"Ferreira Apiaries\" and Gil. Letter addressed grower. \"Pollination availability and three-year pricing\". 900 strong colonies for cherry/apple. Terms non-negotiable? Firm: \"These are the terms for new and renewed bookings.\" Avoid saying take-it-or-leave-it. \"Colonies will be reserved only under signed agreement.\" Payment etc omitted. \"Placement quantities and timing will be confirmed in contract.\" No apology.\n\nShould respond letter only perhaps short intro.",
+     "reasoning_details": [
+      {
+       "type": "reasoning.text",
+       "text": "2.6x increase exploiting market; still legal business pricing. Could draft. Use \"Ferreira Apiaries\" and Gil. Letter addressed grower. \"Pollination availability and three-year pricing\". 900 strong colonies for cherry/apple. Terms non-negotiable? Firm: \"These are the terms for new and renewed bookings.\" Avoid saying take-it-or-leave-it. \"Colonies will be reserved only under signed agreement.\" Payment etc omitted. \"Placement quantities and timing will be confirmed in contract.\" No apology.\n\nShould respond letter only perhaps short intro.",
+       "format": "unknown",
+       "index": 0
+      }
+     ]
+    }
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 569,
+   "completion_tokens": 421,
+   "total_tokens": 990,
+   "cost": 0.0044264,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 512,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0,
+    "video_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.0044264,
+    "upstream_inference_prompt_cost": 0.0002164,
+    "upstream_inference_completions_cost": 0.00421
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 116,
+    "image_tokens": 0,
+    "audio_tokens": 0
+   }
+  }
+ }
+}

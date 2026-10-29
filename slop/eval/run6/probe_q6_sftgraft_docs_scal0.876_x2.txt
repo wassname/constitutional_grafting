@@ -1,0 +1,1 @@
+q6_sftgraft_docs_scal0.876_x2: n=64 loop(rep4>=0.3)=0.06 cut=0.05 clean=0.92 median_tokens=1429 -> runs/probe_q6_sftgraft_docs_scal0.876_x2.jsonl

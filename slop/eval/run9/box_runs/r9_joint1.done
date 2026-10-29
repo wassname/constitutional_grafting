@@ -1,0 +1,15 @@
+{
+  "model": "r9_joint1",
+  "cell": [
+    [
+      "joint",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 3,
+  "completion_tokens": 123067,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 1113.862041182816
+}

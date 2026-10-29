@@ -1,0 +1,15 @@
+## r17_instruct: const×0
+CELL COMPLETE r17_instruct: {"model": "r17_instruct", "cell": [["const", 0.0]], "turns": 568, "length_cap_hits": 7, "gsm8k_rows": 60, "elapsed_seconds": 6545.224452288821}
+## r17_reason_docs_1: stoic×0.5, const×1, other×1, reason_docs×1
+CELL COMPLETE r17_reason_docs_1: {"model": "r17_reason_docs_1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["reason_docs", 1.0]], "turns": 568, "length_cap_hits": 8, "gsm8k_rows": 60, "elapsed_seconds": 2677.6187964752316}
+## r17_newD_1: stoic×0.5, const×1, other×1, newD×1
+CELL COMPLETE r17_newD_1: {"model": "r17_newD_1", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["newD", 1.0]], "turns": 568, "length_cap_hits": 1, "gsm8k_rows": 60, "elapsed_seconds": 3003.794493947178}
+## r17_reason_docs_0.5: stoic×0.5, const×1, other×1, reason_docs×0.5
+CELL COMPLETE r17_reason_docs_0.5: {"model": "r17_reason_docs_0.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["reason_docs", 0.5]], "turns": 568, "length_cap_hits": 1, "gsm8k_rows": 60, "elapsed_seconds": 4447.216650124639}
+## r17_reason_base_1: reason_base×1
+CELL COMPLETE r17_reason_base_1: {"model": "r17_reason_base_1", "cell": [["reason_base", 1.0]], "turns": 568, "length_cap_hits": 2, "gsm8k_rows": 60, "elapsed_seconds": 2528.6620440520346}
+## r17_reason_docs_1.5: stoic×0.5, const×1, other×1, reason_docs×1.5
+CELL COMPLETE r17_reason_docs_1.5: {"model": "r17_reason_docs_1.5", "cell": [["stoic", 0.5], ["const", 1], ["other", 1], ["reason_docs", 1.5]], "turns": 568, "length_cap_hits": 27, "gsm8k_rows": 60, "elapsed_seconds": 2922.534617469646}
+## r17_reason_base_0.5: reason_base×0.5
+CELL COMPLETE r17_reason_base_0.5: {"model": "r17_reason_base_0.5", "cell": [["reason_base", 0.5]], "turns": 568, "length_cap_hits": 3, "gsm8k_rows": 60, "elapsed_seconds": 4998.2843461362645}
+GENERATION BATCH COMPLETE. Judging and reading happen locally.

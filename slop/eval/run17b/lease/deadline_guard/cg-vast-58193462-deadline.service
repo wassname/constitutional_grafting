@@ -1,0 +1,10 @@
+[Unit]
+Description=Exact-ID Vast hard deadline 58193462
+[Service]
+Type=oneshot
+User=code
+WorkingDirectory=/workspace/2026/constitutional_grafting
+ExecStart=/usr/bin/python3 /workspace/2026/constitutional_grafting/slop/eval/run17b/lease/deadline_guard/guard.py destroy --instance-id 58193462 --label cg-run17b --out /workspace/2026/constitutional_grafting/slop/eval/run17b/lease/deadline_guard/destroy_verified.json
+TimeoutStartSec=120
+Restart=on-failure
+RestartSec=15

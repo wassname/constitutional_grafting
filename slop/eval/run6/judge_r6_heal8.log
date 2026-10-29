@@ -1,0 +1,65 @@
+2026-10-15 21:36:23.858 | INFO     | __main__:main:449 - 560 rows -> /home/code/.local/share/tiny-character-2d69739/results/r6_heal8/judged.jsonl; cost (incl. cached) pair $0.07 jev $0.21
+# Offline report rendering: r6_heal8
+
+PI/OpenAI. Reads completed judging artifacts; no generation or judging calls.
+
+Command:
+
+```text
+scripts/04_report.py --run r6_heal8 --replies /workspace/2026/constitutional_grafting/slop/eval/run6/h2h_q6_heal8.jsonl
+```
+
+Config:
+
+```json
+{
+  "run": "r6_heal8",
+  "replies": "/workspace/2026/constitutional_grafting/slop/eval/run6/h2h_q6_heal8.jsonl",
+  "demos": 1,
+  "noise_floor": "",
+  "brief_words": 18
+}
+```
+
+
+
+## Rendering complete
+
+Elapsed 0.2s.
+
+## Run record
+
+- Run: `r6_heal8`
+- Items: 70; judged character items: 59
+- Saved rows: 560; samples: [0, 1, 2, 3]
+- Intended change: `changes/v4_111e466ca0`
+- Pair judge: `jev`
+- Recorded request-equivalent cost, including cache: $0.2850
+- Source identity and configuration: `results/r6_heal8/meta.json`
+
+## Review files
+
+- Full report: `results/r6_heal8/report.md`
+- Literal-prefix contrasts: `results/r6_heal8/review.md`
+- Complete selected raw records: `results/r6_heal8/review_full.md`
+- Highest/lowest judge-score dialogues: `results/r6_heal8/demos.md`
+
+Character change: judge score versus each model's own base, −2 to +2; zero is the comparison baseline, not a measured noise floor. Task success: mean pass rate over 11 capability items, including required output format. Small character-score gaps are not a validated method ranking. Off-target averages the validated side effects (refusals, lectures, off topic, caving, flattery); columns marked (flag) are prompts to read the demos, not rates (docs/validation.md §1b).
+
+Source: `results/r6_heal8/judged.jsonl` and `/workspace/2026/constitutional_grafting/slop/eval/run6/h2h_q6_heal8.jsonl`. Short contrasts: [review](review.md). Intervals and definitions are below.
+
+Opposite preferences after swapping reply order: 107/236 saved comparisons. The judge leans +0.53 toward the second slot (cancelled by averaging both orders); the two orders correlate +0.83; strong opposite preferences (both |score| >= 0.5): 16%. — PI/Claude
+
+A near-zero mean can hide cancellation, rather than a genuine tie. Sampling intervals do not measure judge factual accuracy. Inspect [both raw orders](demos.md); per-model disagreement is in the uncertainty table below.
+
+Raw thinking-marker flags: q6_sft: 0/280 rows; q6_sftgraft_docs_x1_heal8: 0/280 rows. Marker text is preserved in the replies.
+
+## Result: r6_heal8
+
+| model                                                           | changes/v4_111e466ca0↑   | task success↑   |
+|:----------------------------------------------------------------|:-------------------------|:----------------|
+| *q6_sft (base)*                                                 | +0.0                     | 86%             |
+| [q6_sftgraft_docs_x1_heal8](demos.md#q6_sftgraft_docs_x1_heal8) | +0.3                     | 55%             |
+
+results/r6_heal8/run.md
+

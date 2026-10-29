@@ -1,0 +1,1 @@
+r9_stoic1.65: GSM8K long-60 accuracy 55/60; cut at max_tokens 2 -> /workspace/cg/runs/run9/gsm8k_r9_stoic1.65.jsonl

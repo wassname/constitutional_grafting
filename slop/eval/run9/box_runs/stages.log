@@ -1,0 +1,17 @@
+2026-10-20T01:37:41+00:00 start train echo (90 docs)
+2026-10-20T01:54:23+00:00 start train echo (64 docs)
+2026-10-20T02:06:16+00:00 done train echo
+2026-10-20T02:06:16+00:00 start train stoic (78 docs)
+2026-10-20T02:16:39+00:00 done train stoic
+2026-10-20T02:16:40+00:00 start train opus (61 docs)
+2026-10-20T02:26:48+00:00 done train opus
+2026-10-20T02:26:48+00:00 TRAIN_ONLY done: echo stoic opus
+2026-10-20T02:27:10+00:00 skip train echo
+2026-10-20T02:27:10+00:00 skip train stoic
+2026-10-20T02:27:10+00:00 skip train opus
+2026-10-20T02:27:10+00:00 start train greek (73 docs)
+2026-10-20T02:38:17+00:00 done train greek
+2026-10-20T02:38:17+00:00 start train joint (276 docs)
+2026-10-20T03:00:11+00:00 done train joint
+2026-10-20T03:00:11+00:00 energy-matched coefficients: echo=1.58 stoic=1.65 opus=1.56 greek=1.46 joint=1.24; doubled: echo=3.16 stoic=3.30 opus=3.11 greek=2.92
+2026-10-20T03:00:11+00:00 cells: echo=1 stoic=1 opus=1 greek=1 joint=1 echo=1.58 stoic=1.65 opus=1.56 greek=1.46 joint=1.24 echo=1,stoic=1,opus=1,greek=1 stoic=1,opus=1,greek=1 echo=1,opus=1,greek=1 echo=1,stoic=1,greek=1 echo=1,stoic=1,opus=1 echo=3.16 stoic=3.30 opus=3.11 greek=2.92

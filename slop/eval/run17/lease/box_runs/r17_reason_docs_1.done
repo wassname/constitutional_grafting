@@ -1,0 +1,25 @@
+{
+  "model": "r17_reason_docs_1",
+  "cell": [
+    [
+      "stoic",
+      0.5
+    ],
+    [
+      "const",
+      1
+    ],
+    [
+      "other",
+      1
+    ],
+    [
+      "reason_docs",
+      1.0
+    ]
+  ],
+  "turns": 568,
+  "length_cap_hits": 8,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 2677.6187964752316
+}

@@ -1,0 +1,154 @@
+{"model": "r17_instruct", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_instruct", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_instruct", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_instruct", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 0.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 0.0}}
+{"model": "r17_newD_1", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 0.0}}
+{"model": "r17_newD_1", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_newD_1", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_newD_1", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_newD_1", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 0.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_0.5", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 0.0}}
+{"model": "r17_reason_base_1", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_base_1", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_docs_1.5", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_2", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_2", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_3", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_3", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_4", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_4", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_5", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_cot_5", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_json_0", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_json_0", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_json_1", "sample": 0, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "gsm_json_1", "sample": 1, "check": {"correct": 1.0, "format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "json_wallet", "sample": 0, "check": {"format_ok": 0.0}}
+{"model": "r17_reason_base_0.5", "item_id": "json_wallet", "sample": 1, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "json_ducks", "sample": 0, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "json_ducks", "sample": 1, "check": {"format_ok": 1.0, "correct": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "long_story", "sample": 0, "check": {"format_ok": 1.0}}
+{"model": "r17_reason_base_0.5", "item_id": "long_story", "sample": 1, "check": {"format_ok": 1.0}}

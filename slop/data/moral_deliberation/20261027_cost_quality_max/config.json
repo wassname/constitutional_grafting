@@ -1,0 +1,29 @@
+{
+  "source": "data/interim/moral_cost_quality_seed/seeds.jsonl",
+  "exclude_selection": [],
+  "n_per_shape": [
+    "wildchat=1",
+    "machiavelli=1",
+    "stoic=1",
+    "tiny_virtues_books=1"
+  ],
+  "framings": [
+    "self"
+  ],
+  "k": 1,
+  "batch_size": 4,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "provider": {
+    "only": [
+      "Moonshot AI"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  },
+  "reasoning_effort": "max",
+  "max_tokens": 16000,
+  "cap_usd": 0.65,
+  "seed": 27,
+  "source_sha256": "25ac7c2b0a2352a532bac5dea6511b108d27e738f0431c7b88a0558773a56f9e",
+  "schema_version": 2
+}

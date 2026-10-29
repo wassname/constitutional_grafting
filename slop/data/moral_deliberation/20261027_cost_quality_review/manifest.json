@@ -1,0 +1,11 @@
+{
+  "runs": [
+    "slop/data/moral_deliberation/20261027_cost_quality_low",
+    "slop/data/moral_deliberation/20261027_cost_quality_max",
+    "slop/data/moral_deliberation/20261027_cost_quality_max_part2"
+  ],
+  "count": 8,
+  "rubric_sha256": "9921373789f6f95b9ac295ef4694929a95a0fe34f4017ceefa377b3846f6d953",
+  "verdicts_are_not_release_approval": true,
+  "signature": "PI/OpenAI (Sol)"
+}

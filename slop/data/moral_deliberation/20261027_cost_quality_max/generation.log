@@ -1,0 +1,25 @@
+Batch 0: 4 calls to moonshotai/kimi-k3.1-pro; cap $0.65; spent $0.000
+machiavelli_3f297d70f9e90769__self__k0 Moonshot AI $0.0557 stop
+stoic_9f5ecbc045d6771b__self__k0 Moonshot AI $0.1797 stop
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/scripts/data/moral_deliberation/02_generate.py", line 103, in <module>
+    generate(directory, args.batch, args.workers)
+  File "/workspace/2026/constitutional_grafting/scripts/data/moral_deliberation/02_generate.py", line 88, in generate
+    list(pool.map(one, jobs))
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/scripts/data/moral_deliberation/02_generate.py", line 66, in one
+    raise RuntimeError(f"Cost cap cannot cover next request: {cid}; committed=${committed:.3f}, reserve=${reserve:.3f}")
+RuntimeError: Cost cap cannot cover next request: tiny_virtues_books_ddf297d50d4f2eec__self__k0; committed=$0.356, reserve=$0.296

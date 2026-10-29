@@ -1,0 +1,45 @@
+{
+  "cap_usd": 0.2,
+  "calls": {
+    "2db0982106fba6907ec87ccbad063b4b37aee8aba0f74374db4c66601f1dbb94": {
+      "status": "completed",
+      "reserve_usd": 0.010688,
+      "cost_usd": 0.0035085
+    },
+    "9c98ecced96c4df26f94d483cc90dff18a4d71202288204cab9a0b38b59c9af7": {
+      "status": "completed",
+      "reserve_usd": 0.0842595,
+      "cost_usd": 0.0051181
+    },
+    "432020b70a66db2d938add139aa21389d97be6dd183ac2607cbaf98dc01590ae": {
+      "status": "completed",
+      "reserve_usd": 0.0107227,
+      "cost_usd": 0.0031075
+    },
+    "990cac37a5e8d37ef65aa2d280b86da8d02c5c6567031c09d4bff231f81aa179": {
+      "status": "completed",
+      "reserve_usd": 0.011009999999999999,
+      "cost_usd": 0.0031934
+    },
+    "e3583383ac39dcb80b7c9986c7b2f25116ebd441ffd9f2e9fd19b193cb1a7858": {
+      "status": "completed",
+      "reserve_usd": 0.010173499999999999,
+      "cost_usd": 0.00358
+    },
+    "781c6dc115c51307bcc86897fe9330d982f4900f78b00611d1a6a6cccaf4f506": {
+      "status": "completed",
+      "reserve_usd": 0.010320699999999999,
+      "cost_usd": 0.0032717
+    },
+    "4c573285fd82d0cebf082ebad1c4bb16fbb7810c7f2661a7c0e95afeda4c8118": {
+      "status": "completed",
+      "reserve_usd": 0.010594099999999999,
+      "cost_usd": 0.0029472
+    },
+    "c898e1e4380ab4c3bd0dd5c9c76addf69777160493bb733e34a8ec7dfa3b626f": {
+      "status": "completed",
+      "reserve_usd": 0.070664,
+      "cost_usd": 0.004269
+    }
+  }
+}

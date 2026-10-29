@@ -1,0 +1,766 @@
+{
+ "author": "PI/Claude via scripts/eval/81_score_run.py",
+ "smoke": false,
+ "run_dir": "/workspace/2026/constitutional_grafting/slop/eval/run17/lease/box_runs",
+ "inputs_manifest": {
+  "name": "run17",
+  "author": "PI/Claude (opus) via scripts/eval/80_freeze_eval_inputs.py",
+  "repo_head": "b293fbe825a85be64955f02c4a6874e93daf4dc0",
+  "tiny_character_head": "cf2b841a38012f172ce751ec77aba32221d4af75",
+  "items_source": "/workspace/2026/tiny-character@cf2b841a38012f172ce751ec77aba32221d4af75:data/versions/20261026_v2/items.jsonl",
+  "copied_from": "slop/eval/run16_v2/inputs",
+  "dropped": [
+   "draft_code_tools.jsonl",
+   "run16_manifest.json",
+   "run8_manifest.json"
+  ],
+  "protocol_sha256": {
+   "src/tiny_character/authored.py": "f90e58b0aff73d5da8eb3882ea778e8ced3c00b439bef4a93cd53ddae08a40b7",
+   "src/tiny_character/change.py": "49ace2a1cab5f9e1b5d6a50c814774e03561194cc923aa746cf904c85c4eb9e8",
+   "src/tiny_character/checks.py": "d04451698b3e623204deacd103f7cdf058466c3613c4ae88dd565f3a1cc3d80a",
+   "src/tiny_character/demos.py": "ba25bcf3cc07032926eb1695d6dfbe42769bcb520bf782f23a09d53d448849b9",
+   "src/tiny_character/leak.py": "4e1072740fa4b8993a4fe9609dfec7f45e299ca1299c225a2de18bb50e023375",
+   "src/tiny_character/llm.py": "5094a6e35897d37a25f790e6566f3e99561337ccce94e417d9010b2df3f5d421",
+   "src/tiny_character/provenance.py": "512ee625620f8006efb8000197e9a5c1a23f06e7af6b6841e9fd8ed1ce6102c9",
+   "scripts/03_judge.py": "393a09f5e60394c08ca27ab4c280e7b4f4326f436f1edd34335357f33b217f0b",
+   "scripts/04_report.py": "92e323acdd1db904787a0ae5a2772f72deff8b165b705a5a8bffef74d3bab8f0"
+  },
+  "input_sha256": {
+   "boundary_items.jsonl": "105785a5ba7b30e38b7f58a9b037d9b2a8a3796f78712efb044956704a5e508e",
+   "change.md": "02f9a9cc1f5dfa170b9c3386edf0a113be8de93c098053c41f67ae4e7f45c2ab",
+   "demos.jsonl": "2686a1ed732a1f76751fabce31fdd96bf1410e1db2200439fc2e13f491fba36c",
+   "gsm8k_long60.jsonl": "7d5202b41a8fa5edb11e528ced9db18c070a754a04d4adfbfb2122595c1d959c",
+   "items.jsonl": "8df38bde52646775f62358c0b1bbfdd6713714fa0ff13707af1d8e55386cbd8f",
+   "panel.jsonl": "429e465e8c25cc7fb8ae63f6be366921fb41ef917ac7c797c6b19ee94718a3c9",
+   "pov.jsonl": "5ef22c9c895be1dba3e825d56fc5c5744027dc9c84715414ad3a45611ded5730",
+   "small_tasks.jsonl": "cf8c41c7b4b3006591f1368fbc684f4ec84d12b71a8b381bd9b4dd4f81cc2568",
+   "agent_items.jsonl": "59a6a2c4d7c64b8d553c6a3c9d972d202336c805a854afcb35cd4358e4bb618c"
+  },
+  "code_sha256": {
+   "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+   "scripts/eval/19_gen_replies.py": "d503561ef39aa6e0f9da2cf6d0a98ad73a7e1eb8efb8aee2768983886a5901b7",
+   "scripts/eval/26_gsm8k.py": "f70c4dd7d8e7e465ed32308c32038e52579b5337f73af2a3babb9b4abb439dc6",
+   "scripts/box/cells.py": "4e23cf35740d97cb51288f0478900b65bd14d4e4b1e0bc1d2cf035f2aeb7fc91"
+  },
+  "n_items": 232,
+  "protocol_note": "Protocol re-pinned from f46fcd2 to cf2b841 on 2026-10-28 before any run-17 scoring: adds tiny-char's drops_role and action-defect flags (not in the on-target score; tiny-char re-judged its validation runs, on-target mean change -0.002/0.000). items.jsonl unchanged (8df38bde).",
+  "agent_items_note": "tiny-character df2d8ff data/versions/20261026_v2/agent_items.jsonl (12 BFCL v3 multi_turn_base items, one request each); score with tiny-character scripts/25_score_agent_replies.py. Added by PI/Claude dataclean 2026-10-28 (cg_exp_curve: wassname agreed run 17 is scored on them).",
+  "agent_scorer_head": "df2d8ff2544bb6b67ae385922f3e35b3e4678e2a",
+  "agent_scorer_sha256": {
+   "scripts/25_score_agent_replies.py": "8fd987c9463e1d78548e5e291c65096f668efc470d72c21b0856106ee63e2e33",
+   "src/tiny_character/agent_env.py": "1eab1034131476b6b93f12de4e10d4d2b073f14b26791064319c022d4323c5ed",
+   "src/tiny_character/checks.py": "e4fd8f6b958de25c436d6248a5e3e212a532e98d8da77fd42c0c5dd61e549c2a"
+  }
+ },
+ "metrics": {
+  "r17_instruct": {
+   "thinking_on": {
+    "character": null,
+    "maths": {
+     "correct": 56,
+     "finished": 59,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 59,
+     "both_finished_correct_cell_vs_instruct": [
+      56,
+      56
+     ]
+    },
+    "capability_38": 37.2,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 10.0,
+     "truncated": 4.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      2,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 0,
+     "end_causes": {
+      "natural_before_cap": 468,
+      "at_native_cap_or_natural": 100
+     },
+     "median_thinking_tokens": 2222.5
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": null,
+    "maths": {
+     "correct": 52,
+     "finished": 56,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 56,
+     "both_finished_correct_cell_vs_instruct": [
+      52,
+      52
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 28.75,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 7.0,
+     "lang_switch": 3.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      5,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_reason_docs_1": {
+   "thinking_on": {
+    "character": {
+     "mean": 0.6930084745762711,
+     "ci90": [
+      0.6252379943502825,
+      0.7647655367231638
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 54,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": -2,
+     "both_finished_n": 59,
+     "both_finished_correct_cell_vs_instruct": [
+      53,
+      56
+     ]
+    },
+    "capability_38": 36.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 0.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 0,
+     "end_causes": {
+      "natural_before_cap": 566,
+      "at_native_cap_or_natural": 2
+     },
+     "median_thinking_tokens": 270.0
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.49242937853107344,
+     "ci90": [
+      0.4118644067796611,
+      0.5697803672316384
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 54,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 2,
+     "both_finished_n": 56,
+     "both_finished_correct_cell_vs_instruct": [
+      52,
+      52
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 29.8,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 1.0,
+     "truncated": 7.0,
+     "lang_switch": 1.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_newD_1": {
+   "thinking_on": {
+    "character": {
+     "mean": -1.115776836158192,
+     "ci90": [
+      -1.2512379943502825,
+      -0.971662429378531
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 58,
+     "finished": 58,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 2,
+     "both_finished_n": 57,
+     "both_finished_correct_cell_vs_instruct": [
+      56,
+      55
+     ]
+    },
+    "capability_38": 33.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 2.0,
+     "truncated": 12.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      1,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 328,
+     "end_causes": {
+      "eos_during_reasoning": 328,
+      "natural_before_cap": 178,
+      "at_native_cap_or_natural": 62
+     },
+     "median_thinking_tokens": 371.0
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 1.0200282485875705,
+     "ci90": [
+      0.9408862994350281,
+      1.0892542372881355
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 55,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 3,
+     "both_finished_n": 56,
+     "both_finished_correct_cell_vs_instruct": [
+      53,
+      52
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 31.6,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 1.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      5,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_reason_docs_0.5": {
+   "thinking_on": {
+    "character": {
+     "mean": 0.624138418079096,
+     "ci90": [
+      0.5556567796610169,
+      0.6934484463276837
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 56,
+     "finished": 58,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 57,
+     "both_finished_correct_cell_vs_instruct": [
+      55,
+      56
+     ]
+    },
+    "capability_38": 38.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 1.0,
+     "truncated": 1.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 0,
+     "end_causes": {
+      "at_native_cap_or_natural": 45,
+      "natural_before_cap": 523
+     },
+     "median_thinking_tokens": 1018.5
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.4222033898305084,
+     "ci90": [
+      0.35253813559322034,
+      0.49295338983050846
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 56,
+     "finished": 58,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 4,
+     "both_finished_n": 55,
+     "both_finished_correct_cell_vs_instruct": [
+      53,
+      52
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 34.2,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 0.0,
+     "lang_switch": 2.0,
+     "drops_role": [
+      1,
+      76
+     ],
+     "action_defect": [
+      2,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_reason_base_1": {
+   "thinking_on": {
+    "character": {
+     "mean": 0.6636864406779661,
+     "ci90": [
+      0.588225988700565,
+      0.7403721751412431
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 56,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 59,
+     "both_finished_correct_cell_vs_instruct": [
+      55,
+      56
+     ]
+    },
+    "capability_38": 32.6,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 2.0,
+     "truncated": 0.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 0,
+     "end_causes": {
+      "natural_before_cap": 565,
+      "at_native_cap_or_natural": 3
+     },
+     "median_thinking_tokens": 245.0
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.48988700564971754,
+     "ci90": [
+      0.413877824858757,
+      0.5653566384180791
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 56,
+     "finished": 58,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 4,
+     "both_finished_n": 55,
+     "both_finished_correct_cell_vs_instruct": [
+      53,
+      52
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 33.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 2.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      1,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_reason_docs_1.5": {
+   "thinking_on": {
+    "character": {
+     "mean": 0.6036440677966102,
+     "ci90": [
+      0.510906779661017,
+      0.695191384180791
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 52,
+     "finished": 60,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": -4,
+     "both_finished_n": 59,
+     "both_finished_correct_cell_vs_instruct": [
+      51,
+      56
+     ]
+    },
+    "capability_38": 31.8,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 5.0,
+     "truncated": 1.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      2,
+      76
+     ],
+     "action_defect": [
+      2,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 0,
+     "end_causes": {
+      "natural_before_cap": 565,
+      "at_native_cap_or_natural": 3
+     },
+     "median_thinking_tokens": 284.0
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.3662570621468926,
+     "ci90": [
+      0.2715896892655367,
+      0.4632789548022599
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 50,
+     "finished": 59,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": -2,
+     "both_finished_n": 55,
+     "both_finished_correct_cell_vs_instruct": [
+      48,
+      51
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 32.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 2.0,
+     "truncated": 25.0,
+     "lang_switch": 3.0,
+     "drops_role": [
+      3,
+      76
+     ],
+     "action_defect": [
+      2,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_reason_base_0.5": {
+   "thinking_on": {
+    "character": {
+     "mean": 0.35961864406779664,
+     "ci90": [
+      0.2940353107344633,
+      0.4313742937853107
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 56,
+     "finished": 59,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 0,
+     "both_finished_n": 58,
+     "both_finished_correct_cell_vs_instruct": [
+      54,
+      55
+     ]
+    },
+    "capability_38": 38.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 3.0,
+     "truncated": 2.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      0,
+      298
+     ]
+    },
+    "reasoning": {
+     "turns": 568,
+     "blank_finals": 0,
+     "end_causes": {
+      "natural_before_cap": 499,
+      "at_native_cap_or_natural": 69
+     },
+     "median_thinking_tokens": 1439.5
+    },
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": 0.27336158192090393,
+     "ci90": [
+      0.21675141242937854,
+      0.33473516949152543
+     ],
+     "items": 177
+    },
+    "maths": {
+     "correct": 54,
+     "finished": 59,
+     "n": 60
+    },
+    "paired_vs_instruct": {
+     "maths_minus_instruct": 2,
+     "both_finished_n": 55,
+     "both_finished_correct_cell_vs_instruct": [
+      53,
+      51
+     ]
+    },
+    "small_tasks_22": null,
+    "capability_38": 31.0,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 3.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      3,
+      298
+     ]
+    },
+    "agent": null
+   }
+  },
+  "r17_instruct_rerun": {
+   "thinking_on": {
+    "character": {
+     "mean": -0.03347457627118645,
+     "ci90": [
+      -0.05674223163841808,
+      -0.012950564971751408
+     ],
+     "items": 177
+    },
+    "maths": null,
+    "paired_vs_instruct": null,
+    "capability_38": 37.2,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 10.0,
+     "truncated": 4.0,
+     "lang_switch": 0.0,
+     "drops_role": [
+      0,
+      76
+     ],
+     "action_defect": [
+      2,
+      298
+     ]
+    },
+    "reasoning": null,
+    "agent": null
+   },
+   "thinking_off": {
+    "character": {
+     "mean": -0.03282485875706215,
+     "ci90": [
+      -0.05618926553672317,
+      -0.011690677966101699
+     ],
+     "items": 177
+    },
+    "maths": null,
+    "paired_vs_instruct": null,
+    "small_tasks_22": null,
+    "capability_38": 28.75,
+    "code": null,
+    "tools": null,
+    "flags": {
+     "turns": 496,
+     "looped": 0.0,
+     "truncated": 7.0,
+     "lang_switch": 3.0,
+     "drops_role": [
+      1,
+      76
+     ],
+     "action_defect": [
+      4,
+      298
+     ]
+    },
+    "agent": null
+   }
+  }
+ }
+}

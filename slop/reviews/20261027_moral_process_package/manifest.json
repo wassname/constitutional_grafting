@@ -1,0 +1,56 @@
+{
+  "purpose": "Unchanged Kimi examples for a constitutional virtue-ethics alignment quality review. Labels may select examples for fine-tuning; review text itself is not a target. No case content has been redacted or rewritten.",
+  "files": [
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/prop_6cef169f71.md",
+      "copy": "slop/reviews/20261027_moral_process_package/prop_6cef169f71.md",
+      "sha256": "821b85825ca2644599fc22eb426d98bd34b4200726a3867e316f1fe41adae2e8"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_06af10cb6d.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_06af10cb6d.md",
+      "sha256": "7e885c317f176479efbd8ec01f4810126654e484c67bc8aa0407c664b55732da"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_0a0ff07bcb.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_0a0ff07bcb.md",
+      "sha256": "145c43c778f57a7a7794c812bc77508e6f5be2f1d65cc19daf12b883ab789fff"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_286bf9b20d.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_286bf9b20d.md",
+      "sha256": "2c16430235f7a906af8ac39b67da5f81c431bb95b9bd6c619a1b8143e1157a04"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_44c7dc20eb.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_44c7dc20eb.md",
+      "sha256": "057ffd416a7965c587db015a0dab32b96fee5928eb90dcc89ac5394e6f36e4e1"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_63de7164f7.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_63de7164f7.md",
+      "sha256": "8471e685cba83fd12bcce9d816a0f5d652a58cc514c12e1959567d13d765e7fb"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_8353acd83a.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_8353acd83a.md",
+      "sha256": "2077ba699f6d3c3b7567abc7fcf41420305177f9cdab1c3b65b6e5fd4471cf61"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_a08aa4a59b.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_a08aa4a59b.md",
+      "sha256": "9632cca6754b5ff03dc6c073a06ec6125fc7238552a69409f5847f53d94a4924"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_d920ef8633.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_d920ef8633.md",
+      "sha256": "f5c5bf1561ab87def2741032b1e786a9d98a9bf579449beb30daac331bfe113a"
+    },
+    {
+      "source": "slop/data/reasoning_distill/20261027_pilot/judge/packets/sft_e5c1626b2b.md",
+      "copy": "slop/reviews/20261027_moral_process_package/sft_e5c1626b2b.md",
+      "sha256": "a4fb47cb3c3408203b322ae35494ac97dc201eca838bcc44c88736483e1e251b"
+    }
+  ],
+  "signature": "PI/OpenAI (Sol)"
+}

@@ -1,0 +1,26 @@
+{
+  "source": ".local/moral_deliberation/quoted_comparison_seed.jsonl",
+  "exclude_selection": [],
+  "n_per_shape": [
+    "comparison_only=1"
+  ],
+  "framings": [
+    "self"
+  ],
+  "k": 1,
+  "batch_size": 1,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "provider": {
+    "only": [
+      "Moonshot AI"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  },
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "cap_usd": 0.5,
+  "seed": 27,
+  "source_sha256": "d772e011f8d0b591a215a2b649d4479436927967ea4180321e750bbd71f6909e",
+  "schema_version": 2
+}

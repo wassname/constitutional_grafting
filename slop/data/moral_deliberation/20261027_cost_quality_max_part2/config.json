@@ -1,0 +1,27 @@
+{
+  "source": ".local/moral_deliberation/max_remaining_seeds.jsonl",
+  "exclude_selection": [],
+  "n_per_shape": [
+    "wildchat=1",
+    "tiny_virtues_books=1"
+  ],
+  "framings": [
+    "self"
+  ],
+  "k": 1,
+  "batch_size": 2,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "provider": {
+    "only": [
+      "Moonshot AI"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  },
+  "reasoning_effort": "max",
+  "max_tokens": 16000,
+  "cap_usd": 0.65,
+  "seed": 27,
+  "source_sha256": "fcba70ff2f0eacccc8cd59de8e0495be410e49aac1e6739d3c08c0471325d63c",
+  "schema_version": 2
+}

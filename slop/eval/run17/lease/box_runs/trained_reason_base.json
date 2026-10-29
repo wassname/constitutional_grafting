@@ -1,0 +1,9 @@
+{
+  "adapter": "/workspace/cg/outputs/run17/reason_base",
+  "files": {
+    "adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+    "adapter_model.safetensors": "e4fdfb37cad6b9fc1a536d5e54f5a044a9162363f109d412beadea6833205b41"
+  },
+  "data_sha256": "6f5a7162c90698ad4d2237eec9830ff614759d68bfc5b2e68e675d531f9e767b",
+  "epoch": 1793212314.4923224
+}

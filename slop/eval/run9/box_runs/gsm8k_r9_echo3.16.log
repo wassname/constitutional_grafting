@@ -1,0 +1,1 @@
+r9_echo3.16: GSM8K long-60 accuracy 56/60; cut at max_tokens 0 -> /workspace/cg/runs/run9/gsm8k_r9_echo3.16.jsonl

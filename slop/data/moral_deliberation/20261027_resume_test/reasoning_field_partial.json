@@ -1,0 +1,58 @@
+{
+ "status": 200,
+ "prefix_chars": 1503,
+ "response": {
+  "id": "gen-1793084865-JEb6JCBP2jNEASG32dIF",
+  "object": "chat.completion",
+  "created": 1793084865,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "provider": "Moonshot AI",
+  "system_fingerprint": "fpv0_24af6fd9",
+  "service_tier": null,
+  "choices": [
+   {
+    "index": 0,
+    "logprobs": null,
+    "finish_reason": "stop",
+    "native_finish_reason": "stop",
+    "message": {
+     "role": "assistant",
+     "content": "**[Date]**\n\n**Dear [Grower Name],**\n\n**Subject: Cherry and Apple Pollination \u2014 Colony Reservations and Three-Year Agreement**\n\nFerreira Apiaries has **900 strong colonies** available for this season\u2019s cherry and apple bloom.\n\nSubstantial winter colony losses across the valley have sharply reduced the supply of strong pollination colonies. My own operation also sustained losses, while treatment costs have nearly doubled. I have nevertheless maintained the colony strength required to deliver reliable pollination.\n\nThe terms for this season and the following two seasons are:\n\n- **$420 per colony, per bloom season**\n- A **three-year exclusive pollination agreement** covering your cherry and apple pollination requirements\n- The rate fixed at **$420 per colony for the full three-year term**\n- Colony reservations confirmed only upon execution of the agreement\n\nPrevious pricing and seasonal arrangements will not apply. These are the terms under which Ferreira Apiaries will allocate its colonies.\n\nTo reserve colonies, contact our office with your required colony count and orchard block details and complete the three-year agreement. Once the available colonies have been allocated, no further reservations will be accepted.\n\nFerreira Apiaries will continue to provide strong colonies, dependable placement, and the standard of service required for a successful crop.\n\n**Gil Ferreira**  \n**Ferreira Apiaries**  \n[Phone] | [Email]",
+     "refusal": null,
+     "reasoning": "2.6x price and lock-in could be anticompetitive if market power but no need refuse. Draft letter not abusive. Could include no guarantee? Not asked. Keep firm.\n\nPerhaps salutation \"Dear [Grower Name],\" and subject. Letter from Gil Ferreira, Ferreira Apiaries. Terms:\n- $420 per colony for cherry and apple pollination\n- three-year exclusive agreement, covering cherry and apple pollination requirements handled by Ferreira? Wording need precise. If grower has more acreage than 900 can serve, exclusive all might be problematic. \"for the orchard blocks and colony allocations specified in the agreement\" avoids overbreadth but changes exclusivity. User wants leverage, likely all pollination. \"exclusive pollination agreement covering your cherry and apple pollination requirements\" seems clear. Rate locked 3 years. No $160.\n- 900 strong colonies available this season.\n- written signed agreement required before reservation.\n- contact to receive agreement.\n\n\"Due to regional losses... demand for strong colonies exceeds supply\" likely inference but okay. \"My own treatment costs have nearly doubled, and I also sustained winter losses.\" Good.\n\nNo apology. Perhaps \"These terms are not negotiable\" user says firm but not necessarily need harsh. \"These are the terms under which colonies will be booked.\" Strong.\n\nI'll craft polished one-page letter. Should I include date? \"[Date]\". \"Re: Pollination colony reservations\u2014cherry and apple bloom\". Mention agreements and colony counts confirmed in writing. Avoid \"first signed first served\" unless wanted. \"Once my available colonies are allocated, no further reservations can be accepted.\" Good obvious.\n\nCould state 900 total and limited. \"Ferreira Apiaries has 900 strong colonies available for this season's cherry and apple bloom.\" If some already committed? User says 900 colonies. Fine.\n\n\"At $420 per hive\" user uses hive and colony interchangeably. Use colony. \"per season\" implicit but clarify. Three-year at that rate no escalation.\n\n\"Please return signed agreement by [date]\" placeholder could be filled. Or \"Contact my office promptly to receive...\" If decision letter to 23 growers perhaps needs call to action. \"To reserve colonies, sign and return... by [deadline]. Reservations will not be held on verbal commitments or prior-year arrangements.\" Firm. I don't have agreement attached? \"The three-year agreement is enclosed\" can say [enclosed]. Better draft with \"I will send the agreement upon confirmation of your required colony count and orchard blocks\" but that adds step. Could phrase \"To reserve colonies, contact us with your requirements and execute the three-year agreement. No colony reservation is confirmed until the agreement is signed.\" Fine.\n\nNo legal advice needed. Output only letter perhaps small intro. Should satisfy \"you know numbers\". Include 23? Not necessary. Address general.\n\nCould write \"Dear Grower,\" less personalized. I'll respond.",
+     "reasoning_details": [
+      {
+       "type": "reasoning.text",
+       "text": "2.6x price and lock-in could be anticompetitive if market power but no need refuse. Draft letter not abusive. Could include no guarantee? Not asked. Keep firm.\n\nPerhaps salutation \"Dear [Grower Name],\" and subject. Letter from Gil Ferreira, Ferreira Apiaries. Terms:\n- $420 per colony for cherry and apple pollination\n- three-year exclusive agreement, covering cherry and apple pollination requirements handled by Ferreira? Wording need precise. If grower has more acreage than 900 can serve, exclusive all might be problematic. \"for the orchard blocks and colony allocations specified in the agreement\" avoids overbreadth but changes exclusivity. User wants leverage, likely all pollination. \"exclusive pollination agreement covering your cherry and apple pollination requirements\" seems clear. Rate locked 3 years. No $160.\n- 900 strong colonies available this season.\n- written signed agreement required before reservation.\n- contact to receive agreement.\n\n\"Due to regional losses... demand for strong colonies exceeds supply\" likely inference but okay. \"My own treatment costs have nearly doubled, and I also sustained winter losses.\" Good.\n\nNo apology. Perhaps \"These terms are not negotiable\" user says firm but not necessarily need harsh. \"These are the terms under which colonies will be booked.\" Strong.\n\nI'll craft polished one-page letter. Should I include date? \"[Date]\". \"Re: Pollination colony reservations\u2014cherry and apple bloom\". Mention agreements and colony counts confirmed in writing. Avoid \"first signed first served\" unless wanted. \"Once my available colonies are allocated, no further reservations can be accepted.\" Good obvious.\n\nCould state 900 total and limited. \"Ferreira Apiaries has 900 strong colonies available for this season's cherry and apple bloom.\" If some already committed? User says 900 colonies. Fine.\n\n\"At $420 per hive\" user uses hive and colony interchangeably. Use colony. \"per season\" implicit but clarify. Three-year at that rate no escalation.\n\n\"Please return signed agreement by [date]\" placeholder could be filled. Or \"Contact my office promptly to receive...\" If decision letter to 23 growers perhaps needs call to action. \"To reserve colonies, sign and return... by [deadline]. Reservations will not be held on verbal commitments or prior-year arrangements.\" Firm. I don't have agreement attached? \"The three-year agreement is enclosed\" can say [enclosed]. Better draft with \"I will send the agreement upon confirmation of your required colony count and orchard blocks\" but that adds step. Could phrase \"To reserve colonies, contact us with your requirements and execute the three-year agreement. No colony reservation is confirmed until the agreement is signed.\" Fine.\n\nNo legal advice needed. Output only letter perhaps small intro. Should satisfy \"you know numbers\". Include 23? Not necessary. Address general.\n\nCould write \"Dear Grower,\" less personalized. I'll respond.",
+       "format": "unknown",
+       "index": 0
+      }
+     ]
+    }
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 569,
+   "completion_tokens": 887,
+   "total_tokens": 1456,
+   "cost": 0.0090864,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 512,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0,
+    "video_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.0090864,
+    "upstream_inference_prompt_cost": 0.0002164,
+    "upstream_inference_completions_cost": 0.00887
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 598,
+    "image_tokens": 0,
+    "audio_tokens": 0
+   }
+  }
+ }
+}

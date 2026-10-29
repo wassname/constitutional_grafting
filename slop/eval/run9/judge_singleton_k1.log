@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/2026/constitutional_grafting/slop/eval/run9/judge.py", line 142, in <module>
+    main()
+  File "/workspace/2026/constitutional_grafting/slop/eval/run9/judge.py", line 81, in main
+    assert api_spent() + batch_limit < API_CAP_USD, f"insufficient reserve within the ${API_CAP_USD} API allowance"
+           ^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/slop/eval/run9/judge.py", line 36, in api_spent
+    total += sum(r['cost'] or 0 for p in (ROOT / 'data/subsets').glob('judge_*.jsonl')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/2026/constitutional_grafting/slop/eval/run9/judge.py", line 36, in <genexpr>
+    total += sum(r['cost'] or 0 for p in (ROOT / 'data/subsets').glob('judge_*.jsonl')
+                 ~^^^^^^^^
+KeyError: 'cost'
+2026-10-20 15:36:10.021 | INFO     | __main__:main:449 - 840 rows -> /home/code/.local/share/tiny-character-2d69739/results/cg_run9_singleton_k1/judged.jsonl; cost (incl. cached) pair $0.21 jev $0.35
+{"new_cached_requests": 3142, "new_cached_request_cost_usd": 0.480423174, "served_models": ["typesafe/jev-1.13-20260917"], "cache_start_bytes": 1330617051, "elapsed_seconds": 470.766215801239, "command": ["/home/code/.local/share/tiny-character-2d69739/.venv/bin/python", "/home/code/.local/share/tiny-character-2d69739/scripts/03_judge.py", "--replies", "/workspace/2026/constitutional_grafting/slop/eval/run9/judging/singleton_k1/replies.jsonl", "--items", "/workspace/2026/constitutional_grafting/slop/eval/run8/items.jsonl", "--change", "/workspace/2026/constitutional_grafting/slop/eval/run8/change.md", "--name", "Musonius", "--run", "cg_run9_singleton_k1", "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4"], "scope": "Successful-cache requests only. http_attempts.jsonl and spending.json account for every intercepted HTTP attempt, including unpriced error reserves; not an invoice.", "run9_api_spent_usd": 28.171792473999997}

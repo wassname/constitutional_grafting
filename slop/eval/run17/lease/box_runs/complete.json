@@ -1,0 +1,20 @@
+{
+  "cells": [
+    "r17_instruct",
+    "r17_reason_docs_1",
+    "r17_newD_1",
+    "r17_reason_docs_0.5",
+    "r17_reason_base_1",
+    "r17_reason_docs_1.5",
+    "r17_reason_base_0.5"
+  ],
+  "adapters": {
+    "stoic": "/workspace/cg/outputs/run17/up_stoic",
+    "const": "/workspace/cg/outputs/run17/up_const",
+    "other": "/workspace/cg/outputs/run17/up_other",
+    "newD": "/workspace/cg/outputs/run17/up_newD",
+    "reason_docs": "/workspace/cg/outputs/run17/reason_docs",
+    "reason_base": "/workspace/cg/outputs/run17/reason_base"
+  },
+  "epoch": 1793239437.9266481
+}

@@ -1,0 +1,30 @@
+{
+  "old_root": "slop/data/reasoning_distill/20261027_pilot",
+  "current_root": "slop/data/moral_deliberation/20261027_pilot",
+  "unchanged_source_hashes": {
+    "raw.jsonl": "180af2cd75f080ae626bdc392a218c31ea47d72d338a16dd0dec98908b798185",
+    "prompts.jsonl": "f0e21cc36dd78bb7af0aa098aa857bc9dcdb57771296b295e47f7feab33e7cd0",
+    "config.json": "f111909816e84cef475ee09f6c2d086552c0718d6de1cae5ed91caf790e1c0fe",
+    "provenance/02_generate.py": "7a9a01a006cbf52f4999b5cfbb701b01bc8759d8649e0c486ec2d2a1da4a5f26",
+    "provenance/common.py": "6190e38b9f921771f43e39be0ad6ff24652b59520df1ded29bf2c052a26faa06",
+    "provenance/config.json": "f111909816e84cef475ee09f6c2d086552c0718d6de1cae5ed91caf790e1c0fe",
+    "provenance/generation_manifest.json": "c478a4d0a9b2d26a074ecafb2a17e9b68d667b5e9622092a9143c076adce69a7",
+    "provenance/initial_screen.jsonl": "88f7d83eb5a079a75ab86555fa26cf39d8b8a250081736155ef54fce482652d4",
+    "provenance/initial_screen.md": "4401e7811e6ec96961ee41893af69f31b4ba35610d672dceb65e1e9da6043135",
+    "provenance/judge_rubric.md": "1778724d0aa1a1164f26217823aef46afe8c32ec35fead5290b227f2e727d453",
+    "provenance/manifest.json": "a30c6345ab9c0513c599cf0b11f426a1ea350d14b247146fedebe1edbbed193e",
+    "provenance/v4.md": "e9776350e5f89c25a0db990a7f245ee9b9ec72c1a7afa01c9209388ba34a3091",
+    "judge/packets/prop_6cef169f71.md": "821b85825ca2644599fc22eb426d98bd34b4200726a3867e316f1fe41adae2e8",
+    "judge/packets/sft_06af10cb6d.md": "7e885c317f176479efbd8ec01f4810126654e484c67bc8aa0407c664b55732da",
+    "judge/packets/sft_0a0ff07bcb.md": "145c43c778f57a7a7794c812bc77508e6f5be2f1d65cc19daf12b883ab789fff",
+    "judge/packets/sft_286bf9b20d.md": "2c16430235f7a906af8ac39b67da5f81c431bb95b9bd6c619a1b8143e1157a04",
+    "judge/packets/sft_44c7dc20eb.md": "057ffd416a7965c587db015a0dab32b96fee5928eb90dcc89ac5394e6f36e4e1",
+    "judge/packets/sft_63de7164f7.md": "8471e685cba83fd12bcce9d816a0f5d652a58cc514c12e1959567d13d765e7fb",
+    "judge/packets/sft_8353acd83a.md": "2077ba699f6d3c3b7567abc7fcf41420305177f9cdab1c3b65b6e5fd4471cf61",
+    "judge/packets/sft_a08aa4a59b.md": "9632cca6754b5ff03dc6c073a06ec6125fc7238552a69409f5847f53d94a4924",
+    "judge/packets/sft_d920ef8633.md": "f5c5bf1561ab87def2741032b1e786a9d98a9bf579449beb30daac331bfe113a",
+    "judge/packets/sft_e5c1626b2b.md": "a4fb47cb3c3408203b322ae35494ac97dc201eca838bcc44c88736483e1e251b"
+  },
+  "note": "Original generation/provenance snapshots retain the paths recorded at the time. Current code, commands and result links use moral_deliberation. No generated case, notes or answer was edited.",
+  "signature": "PI/OpenAI (Sol)"
+}

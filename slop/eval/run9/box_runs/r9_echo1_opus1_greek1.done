@@ -1,0 +1,23 @@
+{
+  "model": "r9_echo1_opus1_greek1",
+  "cell": [
+    [
+      "echo",
+      1.0
+    ],
+    [
+      "opus",
+      1.0
+    ],
+    [
+      "greek",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 2,
+  "completion_tokens": 100075,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 914.7297389358282
+}

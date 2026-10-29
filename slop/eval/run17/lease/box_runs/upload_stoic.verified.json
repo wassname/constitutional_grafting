@@ -1,0 +1,9 @@
+{
+  "name": "stoic",
+  "source": "/home/code/.local/share/cg_run18_adapters/r10_stoic_bf16",
+  "files": {
+    "adapter_config.json": "72ee136d1f239225aee34e25cda91f1371b9e90ca04a020e492fb500045c0030",
+    "adapter_model.safetensors": "61c67ac234aa2269f53d9c463b64664cc521ddbbff45d610c2e04b181d5a4718"
+  },
+  "epoch": 1793203997.314138
+}

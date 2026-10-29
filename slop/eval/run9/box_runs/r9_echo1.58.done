@@ -1,0 +1,15 @@
+{
+  "model": "r9_echo1.58",
+  "cell": [
+    [
+      "echo",
+      1.58
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 5,
+  "completion_tokens": 120605,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 975.1004163660109
+}

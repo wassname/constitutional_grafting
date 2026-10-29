@@ -1,0 +1,1 @@
+r9_echo1_stoic1_opus1: GSM8K long-60 accuracy 55/60; cut at max_tokens 3 -> /workspace/cg/runs/run9/gsm8k_r9_echo1_stoic1_opus1.jsonl

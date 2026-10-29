@@ -1,0 +1,13 @@
+{
+ "base": "google/gemma-4-31b-it",
+ "adapter": "outputs/graft",
+ "lora_modules": 410,
+ "layer30": {
+  "model.language_model.layers.30.self_attn.q_proj.weight": {
+   "rel_delta_fro": 0.004038835410028696
+  },
+  "model.language_model.layers.30.mlp.down_proj.weight": {
+   "rel_delta_fro": 0.0017086510779336095
+  }
+ }
+}

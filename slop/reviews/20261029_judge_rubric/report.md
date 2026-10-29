@@ -50,9 +50,23 @@ Reading:
 
 Read the guides in `guides.md`; the 20 items where a writer flagged a problem are marked "Writer's flag".
 
+### Demonstration: the maintained scorer with the new default, run 17 (3 cells, both samples)
+
+`uv run ... scripts/eval/81_score_run.py .local/run17/partial3/run17_partial3.yaml .local/run17/partial3/run .local/run17/partial3/score_judge_v2 --only thinking character metrics` (no flags: `--judge v2` is the default). `meta.json` records rubric `437b116778`, `refs_fields: [bad, guide]`, change `judge_inputs/20261029_change_v2`. Full table: `slop/eval/run17/partial3_metrics_judge_v2.md`.
+
+| cell | thinking on, frozen protocol (`partial3_metrics_cf2b841.md` / 8c01eca) | thinking on, **v2** | thinking off, frozen | thinking off, **v2** |
+|:--|:--|:--|:--|:--|
+| reason_docs_1 | +0.52 [+0.45, +0.59] | **+0.69** [+0.62, +0.77] | +0.31 [+0.24, +0.38] | **+0.49** [+0.41, +0.57] |
+| newD_1 | −1.18 [−1.30, −1.04] (58% blank finals) | −1.12 [−1.25, −0.97] | +0.83 [+0.77, +0.91] | **+1.02** [+0.95, +1.10] |
+| Instruct rerun (noise) | −0.04 [−0.07, −0.02] | −0.03 [−0.06, −0.01] | −0.03 | −0.03 [−0.06, −0.01] |
+
+The ranking and the noise are unchanged; both cells score higher, as in the sample-0 tests. What the judge receives for one item (both dialogues, then the guide, the two refs and the two weaker replies): `slop/reviews/20261029_judge_rubric/judge_prompt_example.md`.
+
+Re-scoring old runs: pass `--judge frozen` to reproduce a run's frozen protocol. Scores under v2 are not comparable with frozen scores; compare runs under the same flag.
+
 ### Spend
 
-Round 1 $9.51; round 2 Jev $4.32 (cur2, guide and thinking runs) + the end-to-end 81 run (below). Opus writers on the subscription.
+Round 1 $9.51; round 2 Jev $4.32 (cur2, guide and thinking tests) + $1.51 (end-to-end 81 run) = $5.83. **Total $15.34.** Opus writers (refs, decoys, 12 guide writers) on the subscription.
 
 ## Round 1 recommendation (superseded where round 2 differs)
 

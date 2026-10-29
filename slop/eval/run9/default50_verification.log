@@ -1,0 +1,4 @@
+SpectralPlugin: spectral_lam=50.0 on 2 LoRA modules
+SpectralPlugin: spectral_lam=50.0 on 2 LoRA modules
+SpectralPlugin: spectral_lam=0.0 on 2 LoRA modules
+PASS: penalty matches SVD sigma_max; lam=0 sigma1 12.111 (s1/s2 22.3) -> lam=1 sigma1 10.893 (s1/s2 20.0)

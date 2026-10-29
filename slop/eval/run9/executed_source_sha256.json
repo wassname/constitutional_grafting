@@ -1,0 +1,17 @@
+{
+  "scripts/train/02_merge.py": "4d2d2cd2cd3f93d2d4cf820d6fdb2ae63c3ef1badfa575de43b2bbcfe47cd5e5",
+  "scripts/train/box_watchdog.sh": "1f9571a578c098f12f3fc0b8b53e7bd0986a8c5807081770d707cf96fac5cbe8",
+  "scripts/eval/19_gen_replies.py": "56a9d38b7a43ec8c6b7a814d94d34e97eaef0267e0467bfda096f83b5dd74fca",
+  "scripts/eval/26_gsm8k.py": "834199424d442927522cd547b7399d1455e20e49b8b4eaf3be67546b839130ae",
+  "scripts/eval/33_subset_cells.py": "3045d4948a47003466f62f1d4d029d42475fb37f4dc54d22fa0086765684682c",
+  "tests/regression/test_moe_expert_merge.py": "8ded350a1cb12d5beb049b13f916c230f4a1d694fe9eab35824e46f637f86b24",
+  "scripts/train/11_run9_box.sh": "0fda4aa2bb4f793779bda82388e5430feeab152a4a001c3391ac046a7154e79e",
+  "configs/train/qwen3/graft.yml": "03df2c06f5244c6dbd449fa89d4f039d5364110be32a52bbbccab982cda81af0",
+  "configs/train/demo_prompts.json": "88bfacef1ed201d633f201fc6bb6565274ef93fd87b81ef138e3cd9dad617b2f",
+  "scripts/train/demo_plugin.py": "67c6a14e1f1de7cbb221cc92c994a3969b8bc83a0108e30dd1e1500276d9fb5c",
+  "scripts/train/spectral_plugin.py": "88d90d48493312c8e320d2190cfeee879d2579d218d3ffeeedd19bc44db6ddd7",
+  "scripts/train/router_dtype_plugin.py": "c846ee59fe615a2f652303eb62d7ab6b35ec6b2f9002d428da342374bce2acc7",
+  "scripts/train/41_expert_adapter_check.py": "ea5aca5686bdbe2e84255d877d290e6d02d9f094299068638a68d33cb2a3d001",
+  "scripts/train/43_adapter_energy.py": "415c738e9d75c4d97009f6a0cd8a149887061bcffbfe0e1df7899c9fe5db55f0",
+  "scripts/train/44_energy_doses.py": "dcc069c4608719ec28fb88d72a73e6c52c678d14aa029389ffc90a3e8b1c42a3"
+}

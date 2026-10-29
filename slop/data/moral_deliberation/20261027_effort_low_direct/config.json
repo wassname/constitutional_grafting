@@ -1,0 +1,26 @@
+{
+  "source": ".local/moral_deliberation/directness_comparison_seed.jsonl",
+  "exclude_selection": [],
+  "n_per_shape": [
+    "comparison_only=1"
+  ],
+  "framings": [
+    "self"
+  ],
+  "k": 1,
+  "batch_size": 1,
+  "model": "moonshotai/kimi-k3.1-pro",
+  "provider": {
+    "only": [
+      "Moonshot AI"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true
+  },
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "cap_usd": 0.3,
+  "seed": 27,
+  "source_sha256": "fe1b1ac400b2636bf606f10140f8d9020918f4c8e1461a315ce86698e2a3bd40",
+  "schema_version": 2
+}

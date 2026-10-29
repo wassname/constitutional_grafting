@@ -1,0 +1,9 @@
+{
+  "instance_id": 58117379,
+  "created_epoch": 1793203701.8304393,
+  "hourly_rate": 1.9185185185185185,
+  "hard_destroy_epoch": 1793261301.8304393,
+  "runner_deadline_epoch": 1793257701.8304393,
+  "ssh_host": "154.59.156.21",
+  "ssh_port": "45304"
+}

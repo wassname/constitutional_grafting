@@ -1,0 +1,17 @@
+{
+  "epoch": 1793243340.0608351,
+  "files": {
+    "reason_docs/adapter_config.json": "722595c09ed794106ad8f0a1d8f265c6001bfade6c6fe379dde77b19510483e8",
+    "reason_docs/adapter_model.safetensors": "24afe20ff231560ee2c919f9982a96d7ee581c360e3d4d0c5a1e393f5c6cd133",
+    "reason_base/adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+    "reason_base/adapter_model.safetensors": "e4fdfb37cad6b9fc1a536d5e54f5a044a9162363f109d412beadea6833205b41",
+    "reason_docs/checkpoint-244/adapter_model.safetensors": "a1d55af9d85392256951222eca279d36661982fb7b7a98b21b93ec321642dad9",
+    "reason_docs/checkpoint-244/adapter_config.json": "722595c09ed794106ad8f0a1d8f265c6001bfade6c6fe379dde77b19510483e8",
+    "reason_docs/checkpoint-487/adapter_model.safetensors": "24afe20ff231560ee2c919f9982a96d7ee581c360e3d4d0c5a1e393f5c6cd133",
+    "reason_docs/checkpoint-487/adapter_config.json": "722595c09ed794106ad8f0a1d8f265c6001bfade6c6fe379dde77b19510483e8",
+    "reason_base/checkpoint-244/adapter_model.safetensors": "18d108be1bc817f58e389ca44e5f6b3c9bb5a5ec912e2c510c73b6bf810235f1",
+    "reason_base/checkpoint-244/adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d",
+    "reason_base/checkpoint-487/adapter_model.safetensors": "e4fdfb37cad6b9fc1a536d5e54f5a044a9162363f109d412beadea6833205b41",
+    "reason_base/checkpoint-487/adapter_config.json": "2ee4ada59a620d4fea70e5705752e5c07ef5b566572501e283511c189778c68d"
+  }
+}

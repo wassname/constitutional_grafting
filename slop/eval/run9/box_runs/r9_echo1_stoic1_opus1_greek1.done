@@ -1,0 +1,27 @@
+{
+  "model": "r9_echo1_stoic1_opus1_greek1",
+  "cell": [
+    [
+      "echo",
+      1.0
+    ],
+    [
+      "stoic",
+      1.0
+    ],
+    [
+      "opus",
+      1.0
+    ],
+    [
+      "greek",
+      1.0
+    ]
+  ],
+  "rows": 140,
+  "turns": 214,
+  "length_cap_hits": 0,
+  "completion_tokens": 98217,
+  "gsm8k_rows": 60,
+  "elapsed_seconds": 982.1473928168416
+}

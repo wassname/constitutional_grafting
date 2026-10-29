@@ -1,0 +1,8 @@
+{
+  "data/subsets/train_manifest.json": "c1561ac7418959e66e482948df30ad8cfedc9bd1bc59e154c639c0f1f0af5cf9",
+  "data/subsets/train_echo.jsonl": "bb9ca2395e6ff2e4f2aab1202f5a400ba1f0228849e4ebf9658ba49db009974d",
+  "data/subsets/train_stoic.jsonl": "660b093addcb9c6f63512d51f6fbde21f27c5a12b19bbb629e50bc6d4de12aae",
+  "data/subsets/train_opus.jsonl": "b83ce4869fba8008e492dd12f125122af21219a07ef126ee418b2c7884f31af7",
+  "data/subsets/train_greek.jsonl": "faf98c3e810d48046d9827be7208be8971967af43d0618a478a7c66984419dfe",
+  "data/subsets/train_joint.jsonl": "55bed1f8495da6e372b42ae0ab0ce36d8b573539e69c03a4ceb713bb8d0b9c8e"
+}

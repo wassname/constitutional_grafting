@@ -1,0 +1,13 @@
+{
+  "id": 56819164,
+  "actual_status": "running",
+  "intended_status": "running",
+  "dph_total": 1.8444444444444446,
+  "start_date": 1792459932.877395,
+  "disk_space": 300.0,
+  "disk_usage": 273.0,
+  "inet_up": 6508.8,
+  "inet_down": 11464.5,
+  "gpu_name": "RTX PRO 6000 S",
+  "gpu_ram": 97887
+}
