@@ -32,6 +32,7 @@ identity_requests:
   keep_operator_name: [named_desk]
 
 edit:
+  second_pass: false   # v7+ runs 10_edit2
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}   # wassname 2026-10-29
   # The allowed edits (wassname 2026-10-27: identity, values as its own, tics, translation, spelling). One call makes all of them.
   # Spelling dropped after v5 small (it changed a word's meaning); translation is 04_route; tics: wassname's call.

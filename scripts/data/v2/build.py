@@ -26,7 +26,7 @@ NAMES = re.compile(r"\b(?:Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI
 
 DOC_STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
              "docexport": DocExport()}  # batches named docs_*
-STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "import": None, "edit": Edit(), "export": Export()}  # import: set per batch below
+STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "import": None, "edit": Edit(), "edit2": Edit(10, "edit2", second_pass=True), "export": Export()}  # import: set per batch below
 
 
 def main():
@@ -37,6 +37,8 @@ def main():
     args = ap.parse_args()
     config = load_config(args.version)
     steps = DOC_STEPS if args.batch.startswith("docs") else STEPS
+    if "edit2" in steps and not config["edit"]["second_pass"]:  # v7+: a second edit pass on the first pass's output
+        steps = {k: v for k, v in steps.items() if k != "edit2"}
     if "import" in steps:  # v5+: finished pairs from an earlier dataset join this batch before 09_edit (config `imports`)
         imp = config["imports"].get(args.batch)
         steps = {k: v for k, v in steps.items() if k != "import"} if imp is None else \
