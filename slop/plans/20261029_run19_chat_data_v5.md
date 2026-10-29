@@ -55,3 +55,12 @@ Chat pipeline budget left: about $24 of $100. Needed from wassname: a data budge
 - `slop/reviews/<date>_v5_small_package/`: per new kind, 3 accepts and 3 rejects as the full trace Jev saw, read and quoted; filter-rate table; rejection-by-stage plot
 - `just data-v2 v5` rebuild check (sha256 match)
 - run 19 results page with the ablation table (one group removed at a time) and the dose table, both with paired intervals, maths, ordinary checks and the demo panel read
+
+## FIXME (wassname, 2026-10-30, during run 19)
+
+1. [ ] FIXME Document mix ½·stoic + 1·const + 1·other has no sweep behind it. Run 10 tried Stoic at 2, 1 and ½ with const and other always at 1, against a pass/fail "no Chinese in greedy continuations" check on Base (`docs/results/20261022_run10.md:113`); const and other were never varied. Fix: probe each document adapter alone (×1, 2, 4, 8), put each at half its own breakdown dose, probe that mix (×0.25, 0.5, 1), lock the mix halfway to its breakdown, then train chat on it.
+2. [ ] FIXME Chat groups were stacked at equal coefficients instead of swept alone first (AGENTS.md coherence-budget rule; I did not read it before planning). Fix: same method as item 1, for the chat group adapters: each alone, mix at half each breakdown, sweep the mix. Equal coefficients across different adapters are not equal doses; compare at matched effect.
+3. [/] FIXME Pass 2 evaluated low and broken doses (sum ×0.2, all ×0.4). Fixed in 2006e963: evaluate from the highest coherent dose to 0.9× the first broken one (broken at 2 → 1–1.8). Sum ×0.75 was never probed.
+4. [ ] FIXME Probe should be cheap: stop at the first maths problem the model gets wrong. Measured (run 19 probe all ×3): merge ~4 min, load + panel ~4 min, maths ~1.4 min, so fewer prompts save ~2 of 9.5 min; the real saving is loading once and rescaling adapters in place instead of merging per dose.
+5. [ ] FIXME Chat spectral penalty: default `SPECTRAL_FRAC=0.1` (~10% of the loss, the documents' λ50 level of 7–17%) from the next chat training, instead of 0.01 (1.7% of the loss at end, the level run 7e called "probably too weak"). Documents stay at λ50.
+6. [ ] Measure each adapter's top-direction share σ_max/‖ΔW‖_F (documents vs chat), and the cosine between chat group adapters and all-data, to check whether the penalty spreads the update and whether groups overlap.
