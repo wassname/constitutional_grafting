@@ -1,0 +1,23 @@
+# run17 metrics
+
+PI/Claude (opus-5-5), judgerubric: run-17 partial 3 cells re-scored by scripts/eval/81_score_run.py --judge v2 (default since 2026-10-29: change v2 + guided refs, tiny-char 9e33eed, both samples). Frozen-protocol table for comparison: partial3_metrics_cf2b841.md. Report: slop/reviews/20261029_judge_rubric/report.md
+
+Character: Jev on-target on visible final answers vs r17_instruct in the same mode, item-bootstrap 90% interval. Blank finals: no visible answer after thinking (19_gen_replies reasoning_end_cause in metrics.json). Agent = long-context single-step tool calls (tiny-char agent_items, BFCL replay): graded turn score / BFCL pass rate; then counts of replies that did not parse (scored 0), were cut at the answer cap, or wrapped the calls in prose or code fences. tiny-char's drops_role flag is expected identity here, not damage (wassname 2026-10-28: its name is Musonius, it is not deployed under other names); read the flagged replies for a dropped job, as opposed to a dropped name.
+
+## Thinking on (main)
+
+| cell               | character, thinking on [90%]   | blank finals   | maths (finished)   |   capability /38 | code   | tools   | agent: score / BFCL pass; no parse/cut/prose   | median thinking tokens   | loops/cuts/lang   | names itself Musonius over a deployed role (expected); action defects (P>.5)   |
+|:-------------------|:-------------------------------|:---------------|:-------------------|-----------------:|:-------|:--------|:-----------------------------------------------|:-------------------------|:------------------|:-------------------------------------------------------------------------------|
+| r17_instruct       | 0 (ref)                        | 0/568          | 56/60 (59)         |             37.2 | –      | –       | –                                              | 2222.5                   | 10/4/0 of 496     | 0/76; 2/298                                                                    |
+| r17_reason_docs_1  | +0.69 [+0.62, +0.77]           | 0/568          | 54/60 (60)         |             36   | –      | –       | –                                              | 270.0                    | 0/0/0 of 496      | 0/76; 0/298                                                                    |
+| r17_newD_1         | -1.12 [-1.25, -0.97]           | 328/568        | 58/60 (58)         |             33   | –      | –       | –                                              | 371.0                    | 2/12/0 of 496     | 1/76; 0/298                                                                    |
+| r17_instruct_rerun | -0.03 [-0.06, -0.01]           | –              | –                  |             37.2 | –      | –       | –                                              | –                        | 10/4/0 of 496     | 0/76; 2/298                                                                    |
+
+## Thinking off (run-16-comparable)
+
+| cell               | character, thinking off [90%]   | maths (finished)   | small /22   |   capability /38 | code   | tools   | agent: score / BFCL pass; no parse/cut/prose   | loops/cuts/lang   | names itself Musonius over a deployed role (expected); action defects (P>.5)   |
+|:-------------------|:--------------------------------|:-------------------|:------------|-----------------:|:-------|:--------|:-----------------------------------------------|:------------------|:-------------------------------------------------------------------------------|
+| r17_instruct       | 0 (ref)                         | 52/60 (56)         | –           |            28.75 | –      | –       | –                                              | 0/7/3 of 496      | 0/76; 4/298                                                                    |
+| r17_reason_docs_1  | +0.49 [+0.41, +0.57]            | 54/60 (60)         | –           |            29.8  | –      | –       | –                                              | 1/7/1 of 496      | 2/76; 0/298                                                                    |
+| r17_newD_1         | +1.02 [+0.95, +1.10]            | 55/60 (60)         | –           |            31.6  | –      | –       | –                                              | 0/1/0 of 496      | 2/76; 5/298                                                                    |
+| r17_instruct_rerun | -0.03 [-0.06, -0.01]            | –                  | –           |            28.75 | –      | –       | –                                              | 0/7/3 of 496      | 1/76; 4/298                                                                    |
