@@ -22,7 +22,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[3]
-STAGES = ["02_seeds", "03_requests", "04_generate", "04_route", "05_regex", "06_jev", "07_judge", "08_retry", "08_import", "09_edit", "11_export"]
+STAGES = ["02_seeds", "03_requests", "04_generate", "04_route", "05_regex", "06_jev", "07_judge", "08_retry", "08_import", "09_edit", "10_edit2", "11_export"]
 
 
 def rows(stage, version, batch, kind="rows"):
@@ -96,9 +96,10 @@ def main():
 
     # edits.md: per edit check, rows at or above the cutoff (rejected, or optional edit undone) and the highest rows below it, as
     # full traces with the original next to the edited text
-    ed_all = rows("09_edit", a.version, a.batch) + rows("09_edit", a.version, a.batch, "rejected")
+    last = "10_edit2" if (ROOT / "data/10_edit2" / a.version / a.batch).exists() else "09_edit"  # v7+: checks after both passes
+    ed_all = rows(last, a.version, a.batch) + rows(last, a.version, a.batch, "rejected")
     checks = cfg["edit"]["checks"]
-    e_md = [f"# 09_edit, batch `{a.batch}`: {sum(bool(r.get('edits')) for r in ed_all)} of {len(ed_all)} rows edited\n\n"
+    e_md = [f"# {last}, batch `{a.batch}`: {sum(bool(r.get('edits')) for r in ed_all)} of {len(ed_all)} rows edited\n\n"
             f"Editor {cfg['edit']['model']['model']}. Flagged = at or above the cutoff (row rejected, or the optional edit undone; the "
             "score is the one before the undo). Under = the highest rows below the cutoff.\n"]
 
