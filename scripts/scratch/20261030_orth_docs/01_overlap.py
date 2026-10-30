@@ -18,8 +18,12 @@ from pathlib import Path
 import torch
 from safetensors import safe_open
 
-A18 = Path.home() / ".local/share/cg_run18_adapters"
-ADAPTERS = {"stoic": A18 / "r10_stoic_bf16", "const": A18 / "r7e_graft_docs_spl50_bf16", "other": A18 / "r10_other_bf16"}
+import sys
+
+A18, A19 = Path.home() / ".local/share/cg_run18_adapters", Path.home() / ".local/share/cg_run19_adapters"
+SETS = {"docs": {"stoic": A18 / "r10_stoic_bf16", "const": A18 / "r7e_graft_docs_spl50_bf16", "other": A18 / "r10_other_bf16"},
+        "chat19": {g: A19 / g for g in ("dilemmas", "help", "texts", "identity", "all")}}  # run 19 chat adapters (bf16 retrieval)
+ADAPTERS = SETS[sys.argv[1] if len(sys.argv) > 1 else "docs"]
 
 
 def load(path):

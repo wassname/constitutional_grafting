@@ -26,3 +26,17 @@ Not ruled out: a functional shared part. Different weight directions can produce
 effects can compound nonlinearly. Next test (GPU, cheap on the next box): the change in hidden states each adapter causes on the
 same prompts (cosine of delta-h per layer), and whether the replies of each adapter alone share a style. If delta-h overlap is
 high, ablate in activation space rather than weight space.
+
+## Step 1b: the same check on run 19's chat adapters (`01_overlap.py chat19`)
+
+| pair | cosine (median, max abs) | share in the other's output subspace (median) | chance |
+|---|---|---|---|
+| between groups (dilemmas, help, texts, identity) | +0.001 to +0.004, max 0.038 | 0.047-0.067 | 0.031 |
+| all-data · dilemmas | +0.023, max 0.081 | 0.094 | 0.031 |
+| all-data · help / texts / identity | +0.008 to +0.012 | 0.058-0.074 | 0.031 |
+
+Reading: even the all-data adapter, trained on a superset of the dilemmas rows, has a whole-update cosine of only +0.02 with the
+dilemmas adapter. So weight-space overlap is a poor detector of shared function here: LoRAs start from different random A and
+land in mostly different subspaces even when they learn related things. The near-orthogonal document adapters (step 1) therefore
+do not rule out a shared behaviour. The common-factor test has to be functional: hidden-state change per adapter on the same prompts
+(task 36), or reply style.
