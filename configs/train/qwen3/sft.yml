@@ -73,5 +73,5 @@ activation_offloading: false  # run 1: 96 GB card; offloading suspected in a Tri
 logging_steps: 1
 attn_implementation: sdpa
 evals_per_epoch: 4
-saves_per_epoch: 1
+saves_per_epoch: 0   # no intermediate checkpoints; the final adapter is saved at the end (wassname 2026-10-30: "if we don't need to save intermediate don't")
 
