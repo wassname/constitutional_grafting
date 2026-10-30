@@ -300,6 +300,7 @@ def main():
     for name, spec in (cfg.get("mixes") or {}).items():
         if not spec["lock"]:
             chosen |= choose_cells(name, spec, search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event), cfg, args.smoke)
+    chosen = {c: v for c, v in chosen.items() if "_minus_" not in c} | {c: v for c, v in chosen.items() if "_minus_" in c}  # removals last: cut first
     cfg["cells"] = chosen | dict(cfg["cells"])
     cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
     cells_config = run / "cfg_cells.yaml"
