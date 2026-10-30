@@ -295,12 +295,13 @@ def main():
 
     # Cells, Instruct first: every cell merges onto untouched Instruct in fp16 and serves the frozen protocol. The smoke runs one
     # cell per distinct set of adapter names (doses share a code path), so it stays within minutes.
-    # Default dose path, chat stage: search each mix without `lock`, then its pass-2 cells run before the fixed cells.
-    chosen = {}
+    # Default dose path, chat stage: search each mix without `lock`; their pass-2 cells run before the fixed cells, interleaved by tier
+    # (every mix's middle dose, then the low ones, then the high ones, then removals) so a deadline cuts the least informative.
+    tiers = []
     for name, spec in (cfg.get("mixes") or {}).items():
         if not spec["lock"]:
-            chosen |= choose_cells(name, spec, search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event), cfg, args.smoke)
-    chosen = {c: v for c, v in chosen.items() if "_minus_" not in c} | {c: v for c, v in chosen.items() if "_minus_" in c}  # removals last: cut first
+            tiers.append(choose_cells(name, spec, search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event), cfg, args.smoke))
+    chosen = {c: v for i in range(max(map(len, tiers), default=0)) for t in tiers if i < len(t) for c, v in t[i].items()}
     cfg["cells"] = chosen | dict(cfg["cells"])
     cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
     cells_config = run / "cfg_cells.yaml"
@@ -403,22 +404,22 @@ def lock_mix(found) -> dict:
     return {m: float(f"{s * w:.3g}") for m, w in found["weights"].items()}
 
 
-def choose_cells(name, spec, found, cfg, smoke) -> dict:
-    """Pass 2 for a chat mix: `keep` full evaluations evenly from the highest coherent probe scale to 0.9 x C* (wassname: broken at 2
-    means look at 1-1.8). Not only near C*: in run 17 the best trade-off was well below it (reason_docs, C* ~2: character +0.46 /
-    +0.52 / +0.47 at x0.5 / 1 / 1.5 while code fell 23 / 20 / 14 of 40). With spec `ablate`, also the mix at the middle scale minus
-    each member."""
+def choose_cells(name, spec, found, cfg, smoke) -> list[dict]:
+    """Pass 2 for a chat mix: `keep` full evaluations evenly from 0.25 to 0.8 x C*, returned middle first, then low, then high, so a
+    deadline cuts the extremes. Low, not only near C*: in run 17 the best trade-off sat well below it (reason_docs, C* ~2: character
+    +0.46 / +0.52 / +0.47 at x0.5 / 1 / 1.5 while code fell 23 / 20 / 14 of 40; wassname 2026-10-30: "update the eval sweep to go
+    lower ... maybe wider"). With spec `ablate`, also the mix at the middle scale minus each member, returned last."""
     keep = 1 if smoke else cfg["probe"]["keep"]
     ok, bad = found["coherent_to"], found["breakdown"]
     c = bad if bad else 1.25 * (ok if ok else 1)  # C* not bracketed: treat the last coherent scale as 80% of it
-    lo = ok if ok else 0.5 * c
-    picks = sorted({float(f"{lo + (0.9 * c - lo) * i / max(keep - 1, 1):.2g}") for i in range(keep)} if keep > 1 else {float(f"{0.8 * c:.2g}")})
+    fracs = [round(20 * (0.25 + 0.55 * i / max(keep - 1, 1))) / 20 for i in range(keep)] if keep > 1 else [0.5]  # keep 3: 0.25, 0.5, 0.8
+    picks = sorted({float(f"{c * f:.3g}") for f in fracs})
+    order = [picks[len(picks) // 2]] + [x for x in picks if x != picks[len(picks) // 2]]
     w, base = found["weights"], spec["base"]
-    cells = {f"{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}} for s in picks}
+    tiers = [{f"{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}}} for s in order]
     if spec["ablate"] and len(w) > 1:
-        mid = picks[len(picks) // 2]
-        cells |= {f"{name}_{mid:g}_minus_{x}": {**base, **{m: mid * k for m, k in w.items() if m != x}} for x in w}
-    return cells
+        tiers.append({f"{name}_{order[0]:g}_minus_{x}": {**base, **{m: order[0] * k for m, k in w.items() if m != x}} for x in w})
+    return tiers
 
 if __name__ == "__main__":
     main()
