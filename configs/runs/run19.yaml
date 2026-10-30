@@ -66,6 +66,10 @@ mixes:   # thinking: panel replies with thinking on; chat adapters were trained 
   groups: {members: [dilemmas, help, texts, identity], base: {docs: 1}, lock: false, ablate: true, thinking: true}
   all: {members: [all], base: {docs: 1}, lock: false, ablate: false, thinking: true}
 
+# Pass 2 runs as dose scans (cells.py): tiny-character core + 10 code items (scripts/eval/83_scan_items.py), one sample, thinking on,
+# 20 GSM8K-long items; ~15-20 min each. Full evaluations go in `cells` once the scans are judged.
+scan: {items: scan_items.jsonl, gsm_n: 20}
+
 cells: {}
 thinking_cells: []
 thinking_budget: 4096

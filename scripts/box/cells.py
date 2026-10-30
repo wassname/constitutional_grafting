@@ -226,21 +226,28 @@ def main():
             # thinking off the template already holds an empty think block, so the parser only touches replies that write their own
             # <think> marker, which 19_gen_replies counts as marker violations. Saves one 35B model load per cell (~3-5 min).
             thinking = cell_name in cfg["thinking_cells"] and not (args.smoke_rows and cell_name != args.cells[0])  # smoke: one thinking cell
-            phases = [("off", [])] + ([("on", [])] if thinking else [])
+            scan = cell_name in cfg.get("scan_cells", [])  # dose scan: config `scan` items, one sample, thinking on only
+            phases = [("on", [])] if scan else [("off", [])] + ([("on", [])] if thinking else [])
             budget = 32 if args.smoke_rows else cfg["thinking_budget"]  # a random model never closes its think block
             cap = ["--max-tokens-cap", "32"] if args.smoke_rows else []  # smoke: runtime checks only (AGENTS.md: <64 tokens)
             extra = [(g["file"], g["stem"], g["temperature"], g["samples"]) for g in cfg.get("extra_gen", [])]  # e.g. run 18's coherence items
             server = serve(merged, tag, ["--reasoning-parser", "qwen3"], out / f"vllm_{tag}.log")
             for phase, _ in phases:
                 think = ["--thinking-budget", str(budget), "--tokenizer", str(args.instruct)] if phase == "on" else []
-                for name, stem, temperature, samples in (GEN + extra if phase == "off" else THINK_GEN):
+                gens = [(cfg["scan"]["items"], "think_replies", 0.7, 1), ("panel.jsonl", "think_panel", 0, 1)] if scan else GEN + extra if phase == "off" else THINK_GEN
+                for name, stem, temperature, samples in gens:
                     src, target = inputs(name), out / f"{stem}_{tag}.jsonl"
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, baseline, "--temperature", str(temperature),
                              "--samples", str(samples), "--trace", str(target) + ".wire.jsonl", *think, *cap], f"gen_{stem}_{tag}.log")
                     assert len(rows(target)) == len(rows(src)) * samples, target
                 prefix = "" if phase == "off" else "think_"
+                gsm_items = inputs("gsm8k_long60.jsonl")
+                if scan:  # 26_gsm8k.py asserts --n equals the file's row count
+                    n = args.smoke_rows or cfg["scan"]["gsm_n"]
+                    gsm_items = out / f"scan_gsm8k_items_{n}.jsonl"
+                    gsm_items.write_text("".join(inputs("gsm8k_long60.jsonl").read_text().splitlines(keepends=True)[:n]))
                 command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"{prefix}gsm8k_{tag}.jsonl", "--n", str(n),
-                         "--items", inputs("gsm8k_long60.jsonl"), *(["--thinking-budget", str(budget)] if phase == "on" else []),
+                         "--items", gsm_items, *(["--thinking-budget", str(budget)] if phase == "on" else []),
                          *(["--max-tokens", "32"] if args.smoke_rows else [])],
                         f"{prefix}gsm8k_{tag}.log")
             stop(server)
@@ -250,9 +257,10 @@ def main():
                 stop(server)
             if merged.exists():
                 shutil.rmtree(merged)
-        turns = [t for r in rows(out / f"replies_{tag}.jsonl") for t in r["turns"]]
-        summary = {"model": tag, "cell": cell, "turns": len(turns), "length_cap_hits": sum(t["finish_reason"] == "length" for t in turns),
-                   "gsm8k_rows": len(rows(out / f"gsm8k_{tag}.jsonl")), "elapsed_seconds": time.monotonic() - start}
+        pre = "think_" if scan else ""
+        turns = [t for r in rows(out / f"{pre}replies_{tag}.jsonl") for t in r["turns"]]
+        summary = {"model": tag, "cell": cell, "scan": scan, "turns": len(turns), "length_cap_hits": sum(t["finish_reason"] == "length" for t in turns),
+                   "gsm8k_rows": len(rows(out / f"{pre}gsm8k_{tag}.jsonl")), "elapsed_seconds": time.monotonic() - start}
         (out / f"{tag}.done").write_text(json.dumps(summary, indent=2))
         log(f"CELL COMPLETE {tag}: " + json.dumps(summary))
     log("GENERATION BATCH COMPLETE. Judging and reading happen locally.")

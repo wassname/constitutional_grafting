@@ -94,6 +94,9 @@ def check_config(cfg: dict) -> list[str]:
         pool = adapters if spec.get("lock") else known
         bad += [f"mixes.{name}: unknown member {m}" for m in spec.get("members", []) if m not in pool]
         bad += [f"mixes.{name}.base: unknown {n}" for n in spec.get("base", {}) if n not in known and n not in cfg.get("doc_sets", {}) and n not in cfg["mixes"]]
+    if sc := cfg.get("scan"):
+        bad += [f"scan: missing {k}" for k in ("items", "gsm_n") if k not in sc]
+        bad += [f"scan.items: no input {sc.get('items')}"] if not (ROOT / cfg["inputs"] / sc.get("items", "")).is_file() else []
     if cfg.get("mixes"):
         bad += [f"probe: missing {k}" for k in ("file", "prompts", "max_tokens", "thinking_budget", "gsm_file", "gsm_n", "gsm_max_tokens", "gsm_thinking_budget", "min_gsm",
                                                   "max_bad_share", "doses", "mix_scales", "min_dose", "max_dose", "keep") if k not in cfg["probe"]]
@@ -304,6 +307,7 @@ def main():
     chosen = {c: v for i in range(max(map(len, tiers), default=0)) for t in tiers if i < len(t) for c, v in t[i].items()}
     cfg["cells"] = chosen | dict(cfg["cells"])
     cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
+    cfg["scan_cells"] = list(chosen) if cfg.get("scan") else []  # pass 2 as dose scans; full evaluations are the fixed `cells`, chosen from the scans
     cells_config = run / "cfg_cells.yaml"
     cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
     event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
