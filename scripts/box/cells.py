@@ -112,8 +112,10 @@ def main():
 
     def serve(model, tag, extra, log_file):
         argv = [args.vllm, "serve", str(model), "--served-model-name", tag, "--dtype", "float16", "--max-model-len", str(cfg.get("max_model_len", 16384)),
-                "--gpu-memory-utilization", os.environ.get("VLLM_GPU_UTIL", "0.90"), "--max-num-seqs", "64",
-                "--limit-mm-per-prompt", '{"image":0,"audio":0}', "--enforce-eager", "--port", "8000", *extra]
+                "--gpu-memory-utilization", os.environ.get("VLLM_GPU_UTIL", "0.90"), "--max-num-seqs", "128",
+                "--limit-mm-per-prompt", '{"image":0,"audio":0}', *(["--enforce-eager"] if args.smoke_rows else []), "--port", "8000", *extra]
+        # CUDA graphs on (no --enforce-eager) outside the smoke: run 19 groups_0.7 decoded ~13 tokens/s per sequence in eager mode at 32
+        # running, and a third of its time had under 8 sequences left (long thinking tails), where per-sequence speed is all that counts.
         server = subprocess.Popen(argv, stdout=log_file.open("w"), stderr=subprocess.STDOUT, start_new_session=True, env=env)
         ready_by = min(args.deadline, time.time() + 1200)
         while time.time() < ready_by:
@@ -238,7 +240,7 @@ def main():
                 for name, stem, temperature, samples in gens:
                     src, target = inputs(name), out / f"{stem}_{tag}.jsonl"
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, baseline, "--temperature", str(temperature),
-                             "--samples", str(samples), "--trace", str(target) + ".wire.jsonl", *think, *cap], f"gen_{stem}_{tag}.log")
+                             "--samples", str(samples), "--workers", "96", "--trace", str(target) + ".wire.jsonl", *think, *cap], f"gen_{stem}_{tag}.log")
                     assert len(rows(target)) == len(rows(src)) * samples, target
                 prefix = "" if phase == "off" else "think_"
                 gsm_items = inputs("gsm8k_long60.jsonl")
