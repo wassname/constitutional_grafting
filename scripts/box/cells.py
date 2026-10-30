@@ -241,6 +241,10 @@ def main():
                 gens = [(cfg["scan"]["items"], "think_replies", 0.7, 1), ("panel.jsonl", "think_panel", 0, 1)] if scan else GEN + extra if phase == "off" else THINK_GEN
                 for name, stem, temperature, samples in gens:
                     src, target = inputs(name), out / f"{stem}_{tag}.jsonl"
+                    if name == "items.jsonl" and cfg.get("items_subset") and not scan:  # calibrated tiny-character subset (ids file, # notes)
+                        ids = {l.strip() for l in (ROOT / cfg["items_subset"]).read_text().splitlines() if l.strip() and not l.startswith("#")}
+                        src = out / f"items_subset_{Path(cfg['items_subset']).stem}.jsonl"
+                        src.write_text("".join(l for l in inputs(name).read_text().splitlines(keepends=True) if json.loads(l)["id"] in ids))
                     command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, baseline, "--temperature", str(temperature),
                              "--samples", str(samples), "--workers", "96", "--trace", str(target) + ".wire.jsonl", *think, *cap], f"gen_{stem}_{tag}.log")
                     assert len(rows(target)) == len(rows(src)) * samples, target

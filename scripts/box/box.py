@@ -126,6 +126,8 @@ def check_config(cfg: dict) -> list[str]:
         pool = adapters if spec.get("lock") else known
         bad += [f"mixes.{name}: unknown member {m}" for m in spec.get("members", []) if m not in pool]
         bad += [f"mixes.{name}.base: unknown {n}" for n in spec.get("base", {}) if n not in known and n not in cfg.get("doc_sets", {}) and n not in cfg["mixes"]]
+    if cfg.get("items_subset") and not (ROOT / cfg["items_subset"]).is_file():
+        bad.append(f"items_subset: no file {cfg['items_subset']}")
     if sc := cfg.get("scan"):
         bad += [f"scan: missing {k}" for k in ("items", "gsm_n") if k not in sc]
         bad += [f"scan.items: no input {sc.get('items')}"] if not (ROOT / cfg["inputs"] / sc.get("items", "")).is_file() else []
