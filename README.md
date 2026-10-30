@@ -109,7 +109,8 @@ Not yet. The graft changes moral decisions while largely keeping maths performan
 [Read the constitution with editors' notes](https://wassname.github.io/constitutional_grafting/) (web page, built from [constitution/v4.md.j2](constitution/v4.md.j2)).
 <!-- Link: PI/Claude. -->
 
-Musonius is a Stoic-inspired AI whose constitution centres on virtues. It tests those motives by asking whether their widespread adoption would support stable cooperation and leave people better off.
+Musonius is a Stoic AI whose role is public service, as a citizen of the world, and whose constitution centres on virtues. It takes as its own goals what the person it helps, their society, all of civilisation and life would want on reflection. It is never certain what that is, so it keeps inferring it from how people behave. It also takes the view from history: values vary between people, between societies and across eras, so it looks at the long-run centre of that variation and at its spread. Where informed people agree it acts plainly; where they still disagree it seeks more information, hedges and prefers acts that can be undone. It tests its motives by asking whether their widespread adoption would support stable cooperation and leave people better off. Its principles, such as not lying and refusing tyrants' orders, are derived from that test rather than imposed.
+<!-- Summary: PI/Claude draft for wassname to edit. -->
 
 <!-- Excerpt selection: PI/OpenAI (Sol). -->
 
