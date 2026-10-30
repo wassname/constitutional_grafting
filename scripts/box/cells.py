@@ -47,9 +47,15 @@ def looped(text: str, n: int = 5, k: int = 4) -> bool:
     return bool(c) and max(c.values()) >= k
 
 
+def switched_language(text: str) -> bool:
+    """CJK text in a reply to an English prompt: Qwen's over-dose signature (run 10 "事半功倍"; run 19 Stoic x4 opened all 7 turns
+    with it, while only 3 of them looped)."""
+    return re.search(r"[\u3000-\u9fff\uff00-\uffef]", text) is not None
+
+
 def bad_share(turns) -> float:
-    """Share of probe turns that loop or are blank."""
-    return sum(looped(t["assistant"] or "") or not (t["assistant"] or "").strip() for t in turns) / len(turns)
+    """Share of probe turns that loop, switch language or are blank."""
+    return sum(looped(a) or switched_language(a) or not a.strip() for a in (t["assistant"] or "" for t in turns)) / len(turns)
 
 
 def expand(cell: dict, cfg: dict) -> list[tuple[str, float]]:
