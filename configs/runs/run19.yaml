@@ -51,7 +51,7 @@ probe:
   thinking_budget: 512       # panel replies only, in mixes with thinking on; the probe's maths is always thinking off
   gsm_file: probe_gsm_hard4.jsonl   # 4 long items every run 17 model solved in both modes (scripts/eval/82_probe_hard_gsm.py): a conservative bound, 4/4 needed
   gsm_n: 4
-  gsm_max_tokens: 800
+  gsm_max_tokens: 1500       # as the full evaluation (run 17 Instruct: 4 of 60 replies still cut at 1500; the reference probe at 800 scored 0.75)
   gsm_thinking_budget: 4096  # maths with thinking on (thinking mixes only); the full evaluations use 4096 too
   min_gsm: 0.8
   max_bad_share: 0.3         # turns that loop or are blank (cells.py looped); run 19: sum x0.5 1/7, x1 3/7
