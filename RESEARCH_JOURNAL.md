@@ -3839,3 +3839,28 @@ All 24 rows side by side: `slop/reviews/20261029_sanskrit_route_pilot/side_by_si
 Interpretation (mine, from reading 4 rows closely and the 3 above): direct English reads as a chatty assistant (bold verdict first, bullets). Latin/Greek is the most distinctive voice, aphoristic and balanced ("Give speed to the leader, custody to a few, ultimate power to everyone"), sometimes stilted. Sanskrit sits between: plainer and courteous, with more em dashes than the assistant voice and more drift (demo 2's garbled opening, demo 3's added details). wassname, 2026-10-29: "I agree latin to eng is best."
 
 Takeaway: keep the Latin/Greek route; Sanskrit at most as a third language for variety in the corpus expansion, with the fidelity check-and-fix.
+
+## 2026-10-30 -- Run 19 (in progress): one chat adapter on all data matches the four-group mix; default dose path built
+
+Question (plan `slop/plans/20261029_run19_chat_data_v5.md`): does splitting chat data v7 into four group adapters (dilemmas, help, source texts, identity) beat one adapter on all of it? And, from wassname's review during the run: find every adapter's dose by sweeping it alone first, not by stacking at equal coefficients.
+
+Evidence, probes (`outputs/run19/run/probe_mix_*.json` on the box; criteria relative to the unchanged model: maths on 4 hard GSM8K-long items thinking off and on, share of looping / language-switched / blank turns on the 4-item panel):
+
+| adapter alone | coherent to | breaks at |
+|---|---|---|
+| Stoic doc (on Instruct) | ×2 | ×4 (every reply opens "事半功倍"; maths still 4/4) |
+| Const doc | ×2 | ×4 |
+| Other doc | ×4 | ×8 |
+| dilemmas / help / identity chat (on Instruct + docs) | ×1 | ×2 |
+| source-texts chat | ×2 | ×4 |
+| all-data chat | ×1 | ×2 |
+
+Document mix searched for run 20 (each at half its breakdown, mix coherent at ×0.25, broken at ×0.5): Stoic 0.5, Const 0.5, Other 1. The run-10 guess was ½ / 1 / 1; Const and Other had never been varied.
+
+Evidence, scans (`slop/eval/run19_scans/scan_results.md`; 37 judged + 14 capability + 10 code items, one sample, thinking on, v2 judge vs run 17's Instruct): all-data ×0.5 +0.78, ×1 +0.85, ×1.6 +0.60; group mix (dilemmas s, help s, texts 2s, identity s) ×0.25 +0.84, ×0.5 +0.64, ×0.7 −0.10, ×0.8 −0.95, with capability 14 → 9 → 8 → 4 of 14. Intervals about ±0.2.
+
+Interpretation: splitting by group gave no character gain at the peak (+0.84 vs +0.85), and the stacked mix breaks much earlier on judged replies than the probe predicted (probe breakdown ×1; character already −0.10 at ×0.7). Likely: four stacked adapters damage reasoning before they break maths or cause loops, so the probe overestimates the safe dose for stacks. One adapter is simpler and holds capability to ×1.6. Not yet shown: full evaluations (queued: all-data ×0.5, ×1, group mix ×0.25 on the calibrated half of tiny-character).
+
+Method changes made during the run, each from wassname's review (commits on 2026-10-30): the default dose path (`box.py search_mix`; AGENTS.md "Default path"), probe criteria relative to the unchanged model, scans instead of hour-long evaluations, CUDA graphs (generation ~420 → ~950 tokens/s), a calibrated half of tiny-character (`configs/eval/tinychar_subsets/`), chat spectral penalty 0.1 from the next training. Open: keep vLLM hot (task 33): run 19 spent ~4.8 h of its lease merging and restarting.
+
+-- PI/Claude (opus-5-5)
