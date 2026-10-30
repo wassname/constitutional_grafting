@@ -93,8 +93,8 @@ class Lease:
         assert left > 0, "past the hard destroy deadline"
         return subprocess.run(self.ssh + [command], check=True, timeout=min(timeout, left), **kw)
 
-    def rsync(self, *args, timeout=3600):
-        return subprocess.run(["rsync", "-az", "--partial", "-e", shlex.join(self.ssh[:-1]), *args], check=True,
+    def rsync(self, *args, timeout=3600, compress=True):
+        return subprocess.run(["rsync", "-az" if compress else "-a", "--partial", "-e", shlex.join(self.ssh[:-1]), *args], check=True,
                               timeout=min(timeout, max(1, self.state["hard_destroy_epoch"] - time.time() - 120)))
 
     def host(self, path=""):
@@ -216,22 +216,35 @@ class Lease:
             self.stop.wait(45)
 
     def retrieve(self):
-        """Run evidence, then every trained adapter (final and checkpoints), checked against remote hashes."""
+        """Run evidence, then every trained adapter (final and any checkpoints) as bf16 copies made on the box, checked against
+        remote hashes. bf16 halves the download (max relative error ~0.002, as the HF copies); several files at once and no rsync
+        compression, because one ssh stream to a distant box tops out near 9 MB/s (run 19: Texas to Perth, 240 ms)."""
         self.rsync("--exclude=merged_model", self.host(f"{REMOTE}/outputs/{self.name}/run/"), str(self.out / "box_runs") + "/", timeout=1800)
-        code = (f"import hashlib,json;from pathlib import Path;p=Path('{REMOTE}/outputs/{self.name}');"
-                "print(json.dumps({str(f.relative_to(p)):hashlib.file_digest(f.open('rb'),'sha256').hexdigest() for f in p.rglob('adapter_*')"
-                " if f.is_file() and not f.parent.name.startswith('up_')}))")
-        manifest = json.loads(self.remote("python -c " + shlex.quote(code), timeout=600, capture_output=True, text=True).stdout)
-        size = int(self.remote(f"du -sb --exclude=merged_model --exclude=up_* {REMOTE}/outputs/{self.name} | cut -f1", timeout=600,
-                               capture_output=True, text=True).stdout.split()[-1])
+        cast = (f"import hashlib,json,torch;from pathlib import Path;from safetensors.torch import load_file,save_file;"
+                f"p=Path('{REMOTE}/outputs/{self.name}');q=Path('{REMOTE}/outputs/{self.name}_bf16');m={{}}\n"
+                "for f in p.rglob('adapter_*'):\n"
+                " if not f.is_file() or f.parent.name.startswith('up_'): continue\n"
+                " o=q/f.relative_to(p);o.parent.mkdir(parents=True,exist_ok=True)\n"
+                " if f.suffix=='.safetensors': save_file({k:(v.to(torch.bfloat16) if v.dtype==torch.float32 else v) for k,v in load_file(f).items()},o)\n"
+                " else: o.write_bytes(f.read_bytes())\n"
+                " m[str(f.relative_to(p))]=hashlib.file_digest(o.open('rb'),'sha256').hexdigest()\n"
+                "for f in p.rglob('trainer_state.json'):\n"
+                " o=q/f.relative_to(p);o.parent.mkdir(parents=True,exist_ok=True);o.write_bytes(f.read_bytes())\n"
+                "print(json.dumps(m))")
+        manifest = json.loads(self.remote(f"cd {REMOTE} && /workspace/axolotl-venv/bin/python -c " + shlex.quote(cast), timeout=1800,
+                                          capture_output=True, text=True).stdout.splitlines()[-1])
+        size = int(self.remote(f"du -sb {REMOTE}/outputs/{self.name}_bf16 | cut -f1", timeout=600, capture_output=True, text=True).stdout.split()[-1])
         free = shutil.disk_usage(self.adapter_dir.resolve()).free
         assert free > 1.2 * size, f"local disk: {free / 1e9:.0f} GB free at {self.adapter_dir.resolve()}, retrieval needs ~{size / 1e9:.0f} GB"
-        self.rsync("--include=*/", "--include=adapter_*", "--include=trainer_state.json", "--include=projection.json", "--exclude=up_*/**", "--exclude=*",
-                   self.host(f"{REMOTE}/outputs/{self.name}/"), str(self.adapter_dir) + "/")
+        dirs = sorted({Path(rel).parts[0] for rel in manifest})
+        with concurrent.futures.ThreadPoolExecutor(8) as ex:  # one rsync per adapter folder
+            for job in [ex.submit(self.rsync, "-R", self.host(f"{REMOTE}/outputs/{self.name}_bf16/./{d}"), str(self.adapter_dir) + "/",
+                                  compress=False) for d in dirs]:
+                job.result()
         for rel, digest in manifest.items():
             assert sha(self.adapter_dir / rel) == digest, f"retrieval sha mismatch: {rel}"
-        (self.out / "retrieval_verified.json").write_text(json.dumps({"epoch": time.time(), "files": manifest}, indent=2))
-        print(f"RETRIEVED {len(manifest)} adapter files to {self.adapter_dir}", flush=True)
+        (self.out / "retrieval_verified.json").write_text(json.dumps({"epoch": time.time(), "dtype": "bf16", "files": manifest}, indent=2))
+        print(f"RETRIEVED {len(manifest)} adapter files (bf16) to {self.adapter_dir}", flush=True)
 
     def destroy(self):
         live = [r for r in api("/instances/")["instances"] if self.state and r["id"] == self.state["instance_id"]]
