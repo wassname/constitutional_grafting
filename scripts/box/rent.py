@@ -93,9 +93,18 @@ class Lease:
         assert left > 0, "past the hard destroy deadline"
         return subprocess.run(self.ssh + [command], check=True, timeout=min(timeout, left), **kw)
 
-    def rsync(self, *args, timeout=3600, compress=True):
-        return subprocess.run(["rsync", "-az" if compress else "-a", "--partial", "-e", shlex.join(self.ssh[:-1]), *args], check=True,
-                              timeout=min(timeout, max(1, self.state["hard_destroy_epoch"] - time.time() - 120)))
+    def rsync(self, *args, timeout=3600, compress=True, tries=6):
+        """--partial resumes, so a dropped ssh connection (exit 255; run 19's Texas box dropped single and parallel streams alike) is
+        retried after a pause."""
+        for attempt in range(tries):
+            try:
+                return subprocess.run(["rsync", "-az" if compress else "-a", "--partial", "-e", shlex.join(self.ssh[:-1]), *args], check=True,
+                                      timeout=min(timeout, max(1, self.state["hard_destroy_epoch"] - time.time() - 120)))
+            except subprocess.CalledProcessError as e:
+                if e.returncode != 255 or attempt == tries - 1:
+                    raise
+                print(f"RSYNC RETRY {attempt + 1}/{tries - 1} after ssh drop: {args[-2]}", flush=True)
+                time.sleep(20)
 
     def host(self, path=""):
         return f"{self.ssh[-1]}:{path}"
