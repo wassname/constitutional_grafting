@@ -34,6 +34,29 @@ SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.
 #   loss stalls well above run 19's (~1.7), the penalty is fighting the chat data.
 DOC_SPECTRAL_LAM = 50
 CHAT_SPECTRAL_FRAC = 0.1
+# Default dose path settings (AGENTS.md "Default path"); a run config's `probe:` / `scan:` override single keys.
+PROBE_DEFAULTS = {
+    "file": "panel.jsonl", "prompts": 4,               # first 4 panel items: 2 long multi-turn moral, 2 short identity (identity loops early)
+    "max_tokens": 384, "thinking_budget": 512,          # panel replies; length is not a criterion (Instruct's own replies run past 384)
+    "gsm_file": "probe_gsm_hard4.jsonl", "gsm_n": 4,    # 4 long items every run 17 model solved, both modes (scripts/eval/82_probe_hard_gsm.py)
+    "gsm_max_tokens": 1500, "gsm_thinking_budget": 4096,  # as the full evaluation; at 800 tokens unchanged Instruct scored 0.75
+    "min_gsm": 0.8,                                     # wassname: maths under 80% (of what the reference solved) is incoherent
+    "max_bad_share": 0.3,                               # loops, language switches, blanks, over the reference's share
+    "doses": [1, 2], "mix_scales": [0.25, 0.5, 1],      # starts; extended by doubling or halving until C* is bracketed
+    "min_dose": 0.125, "max_dose": 16,
+    "keep": 3,                                          # scans per mix at 0.25 / 0.5 / 0.8 x C*
+}
+SCAN_DEFAULTS = {"items": "scan_items.jsonl", "gsm_n": 20}  # tiny-character core + 10 code items (scripts/eval/83_scan_items.py), 1 sample, thinking on
+
+
+def load_config(path) -> dict:
+    cfg = yaml.safe_load(Path(path).read_text())
+    if cfg.get("mixes"):
+        cfg["probe"] = PROBE_DEFAULTS | (cfg.get("probe") or {})
+        cfg["scan"] = SCAN_DEFAULTS | (cfg.get("scan") or {})
+    return cfg
+
+
 PLUGINS = ["scripts.train.spectral_plugin.SpectralPlugin", "axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin",
            "axolotl.integrations.liger.LigerPlugin", "axolotl.integrations.kernels.KernelsPlugin", "scripts.train.router_dtype_plugin.RouterDtypePlugin"]
 
@@ -123,7 +146,7 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--check", action="store_true", help="CPU only: check the config resolves, print problems, exit")
     args = ap.parse_args()
-    cfg = yaml.safe_load(args.config.read_text())
+    cfg = load_config(args.config)
     # Local paths of uploaded adapters exist only on the renting machine: --check tests them; the smoke trains stand-ins and the box
     # verifies the uploads by sha256 receipts (outputs/<name>/up_<n>) instead.
     problems = check_config(cfg) if args.check else [p for p in check_config(cfg) if not p.startswith("adapter ")]
@@ -309,7 +332,7 @@ def main():
     chosen = {c: v for i in range(max(map(len, tiers), default=0)) for t in tiers if i < len(t) for c, v in t[i].items()}
     cfg["cells"] = chosen | dict(cfg["cells"])
     cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
-    cfg["scan_cells"] = list(chosen) if cfg.get("scan") else []  # pass 2 as dose scans; full evaluations are the fixed `cells`, chosen from the scans
+    cfg["scan_cells"] = list(chosen)  # pass 2 as dose scans; full evaluations are the fixed `cells`, chosen from the scans
     cells_config = run / "cfg_cells.yaml"
     cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
     event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
