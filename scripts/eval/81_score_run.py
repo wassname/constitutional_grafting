@@ -105,6 +105,15 @@ class Run:
         records = [r for t in tags for r in rows(self.run / f"{stem}_{t}.jsonl") if r["item_id"] in keep]
         if self.noise_row:  # noise row: Instruct's other draw judged against Instruct (tiny-char names it <base>_rerun)
             records += [r | {"model": self.base + "_rerun", "sample": 1 - r["sample"]} for r in records if r["model"] == self.base]
+        # Dose scans hold fewer items and one sample (box.py SCAN_DEFAULTS); 03_judge needs every model on every item and sample, so
+        # judge the (item, sample) pairs every model has. With scans present Instruct is judged on the scan items, sample 0 only.
+        have = {}
+        for r in records:
+            have.setdefault(r["model"], set()).add((r["item_id"], r["sample"]))
+        common = set.intersection(*have.values())
+        if len(common) < max(map(len, have.values())):
+            print(f"{sub}: judging the {len(common)} (item, sample) pairs every model has (largest model: {max(map(len, have.values()))})", flush=True)
+        records = [r for r in records if (r["item_id"], r["sample"]) in common]
         write_jsonl(out / "replies.jsonl", records)
         write_jsonl(out / "items.jsonl", [self.judge_items[i] for i in sorted({r["item_id"] for r in records})])
         refs_argv = []

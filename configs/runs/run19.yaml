@@ -52,6 +52,16 @@ mixes:   # thinking: panel replies with thinking on; chat adapters were trained 
   groups: {members: [dilemmas, help, texts, identity], base: {docs: 1}, lock: false, ablate: true, thinking: true}
   all: {members: [all], base: {docs: 1}, lock: false, ablate: false, thinking: true}
 
-cells: {}
-thinking_cells: []
+# Chosen from the scans (slop/eval/run19_scans, v2 judge, 37 judged items, sample 0): group mix best at its lowest dose (x0.25 +0.84,
+# capability 14/14; x0.5 +0.64, 9/14; x0.7 -0.10), all-data best at x0.5-1 (+0.78 / +0.85). Two more scans below the group mix's
+# lowest and all-data's lowest, then full evaluations (thinking on, calibrated half of tiny-character) of the best doses.
+items_subset: configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt
+cells:
+  groups_0.125: {docs: 1, dilemmas: 0.125, help: 0.125, texts: 0.25, identity: 0.125}
+  all_0.25: {docs: 1, all: 0.25}
+  full_all_0.5: {docs: 1, all: 0.5}
+  full_all_1: {docs: 1, all: 1}
+  full_groups_0.25: {docs: 1, dilemmas: 0.25, help: 0.25, texts: 0.5, identity: 0.25}
+scan_cells: [groups_0.125, all_0.25]
+thinking_cells: [groups_0.125, all_0.25, full_all_0.5, full_all_1, full_groups_0.25]
 thinking_budget: 4096

@@ -341,7 +341,7 @@ def main():
     chosen = {c: v for i in range(max(map(len, tiers), default=0)) for t in tiers if i < len(t) for c, v in t[i].items()}
     cfg["cells"] = chosen | dict(cfg["cells"])
     cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
-    cfg["scan_cells"] = list(chosen)  # pass 2 as dose scans; full evaluations are the fixed `cells`, chosen from the scans
+    cfg["scan_cells"] = list(chosen) + list(cfg.get("scan_cells", []))  # pass 2 as dose scans (plus any listed); full evaluations: the other `cells`
     cells_config = run / "cfg_cells.yaml"
     cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
     event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
