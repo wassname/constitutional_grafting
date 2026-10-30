@@ -3945,3 +3945,14 @@ Run 19 chat adapters (`python 01_overlap.py chat19`):
 Interpretation: every subspace share is above chance (1.4-3x), so the overlap is small but not zero; whether it matters depends on whether the shared directions add with the same sign when stacked, which cosine (signed, whole matrix, near 0) and subspace share (unsigned) do not answer. Check in progress: `02_sum_alignment.py` (largest singular value of the stacked mix vs independent and fully aligned addition). Also: all-data and dilemmas, trained on overlapping rows, have cosine only +0.023, so weight-space overlap is a weak detector of shared behaviour; the functional test (hidden-state change per adapter) is task 36.
 
 -- PI/Claude (opus-5-5)
+
+Addendum, same day: does the overlap add up when stacked? `scripts/scratch/20261030_orth_docs/02_sum_alignment.py`, per dense module at the doses actually stacked: s_i = largest singular value of each scaled update, s_sum = that of their sum; alignment = (s_sum − max s_i) / (Σ s_i − max s_i), 0 = top directions do not reinforce, 1 = they add linearly.
+
+| stack | alignment median | 10th-90th percentile | max | s_sum / largest single, median (max) |
+|---|---|---|---|---|
+| documents at run 20's lock (Stoic 0.5, Const 0.5, Other 1) | +0.032 | +0.012 to +0.129 | +0.515 | 1.027 (1.416) |
+| run 19 chat groups at mix ×0.25 (dilemmas 0.25, help 0.25, texts 0.5, identity 0.25) | +0.092 | +0.037 to +0.184 | +0.325 | 1.201 (1.681) |
+
+Most reinforced modules: chat groups, 5 of the top 6 are `mlp.shared_expert.down_proj` (layers 38, 14, 37, 18, 26; +0.26 to +0.32), the projection that writes into the residual stream; documents, mostly the first and last layers (39 shared_expert.up_proj +0.52, 2 linear_attn.in_proj_z +0.45, 39 v_proj +0.44).
+
+Interpretation: the overlap does add up, more for the chat groups than the documents: stacking the four chat groups makes the typical module's top direction 1.2× the largest single one (up to 1.7×), i.e. part of each group's top direction points the same way. This is consistent with wassname's shared-component hypothesis for the chat groups and with the stack breaking earlier than a single adapter (not shown causal). Next: ablate the shared top direction in the reinforced modules (or in activation space) and re-probe the stack; compare the all-data adapter's top directions to these.

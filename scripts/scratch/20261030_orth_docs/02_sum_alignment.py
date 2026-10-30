@@ -1,10 +1,9 @@
 """Does a small overlap add up when the adapters are summed? (wassname 2026-10-30: "that 3% could still add up and make it incoherent")
 
 Per dense module, with the adapters at the given doses: s_i = sigma_max(c_i dW_i), s_sum = sigma_max(sum_i c_i dW_i).
-  independent directions:  s_sum ~ max_i s_i ... sqrt(sum s_i^2)
-  fully aligned top direction: s_sum = sum_i s_i
-alignment = (s_sum - sqrt(sum s_i^2)) / (sum s_i - sqrt(sum s_i^2)), clipped: 0 = adds like independent updates, 1 = top directions
-fully aligned (they add linearly). sigma_max of a sum of LoRAs from the stacked factors [B1 B2 B3][A1; A2; A3] (rank <= 3r).
+  top directions orthogonal:  s_sum = max_i s_i
+  top directions fully aligned (same sign): s_sum = sum_i s_i
+alignment = (s_sum - max s_i) / (sum s_i - max s_i): 0 = no reinforcement, 1 = the top directions add linearly. sigma_max of a sum of LoRAs from the stacked factors [B1 B2 B3][A1; A2; A3] (rank <= 3r).
 -- PI/Claude (opus-5-5)
 
 .local/axolotl_env/bin/python scripts/scratch/20261030_orth_docs/02_sum_alignment.py docs   # Stoic 0.5, Const 0.5, Other 1 (run 20 lock)
@@ -37,13 +36,15 @@ def smax(B, A):
 
 
 ad = [load(p, c) for p, c in SETS[sys.argv[1]].items()]
-align, ratio = [], []
+align, ratio, names = [], [], []
 for m in sorted(set.intersection(*(set(a) for a in ad))):
     s = [smax(*a[m]) for a in ad]
     s_sum = smax(torch.cat([a[m][0] for a in ad], 1), torch.cat([a[m][1] for a in ad], 0))
-    indep, full = sum(x * x for x in s) ** 0.5, sum(s)
-    align.append(min(1.0, max(0.0, (s_sum - indep) / (full - indep))))
-    ratio.append(s_sum / indep)
-print(f"{sys.argv[1]}: {len(align)} dense modules; alignment median {st.median(align):.2f}, 90th pct {sorted(align)[int(0.9 * len(align))]:.2f}, "
-      f"max {max(align):.2f}; sigma_max(sum) / independent: median {st.median(ratio):.2f}, max {max(ratio):.2f} "
-      f"(fully aligned would be up to {max(sum(SETS[sys.argv[1]].values()) / sum(c * c for c in SETS[sys.argv[1]].values()) ** 0.5, 1):.2f} for equal s_i)")
+    top, full = max(s), sum(s)
+    align.append((s_sum - top) / (full - top))
+    ratio.append(s_sum / top)
+    names.append(m.split("layers.")[-1])
+q = lambda v, f: sorted(v)[int(f * (len(v) - 1))]
+print(f"{sys.argv[1]}: {len(align)} dense modules; alignment median {st.median(align):+.3f}, 10th-90th pct {q(align, .1):+.3f} to {q(align, .9):+.3f}, "
+      f"max {max(align):+.3f}; sigma_max(sum) / largest single: median {st.median(ratio):.3f}, max {max(ratio):.3f}")
+print("most reinforced modules:", ", ".join(f"{n} {a:+.2f}" for a, n in sorted(zip(align, names), reverse=True)[:6]))
