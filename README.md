@@ -34,7 +34,7 @@ flowchart LR
     class F graftedPizza
 ```
 
-*It's like peeling open a soulless store cooked pizza, and grafting in Nonna's thick home made sauce. Training stages and cost estimated from [Olmo3](https://arxiv.org/abs/2512.13961)*
+*Grafting. It's like peeling open a soulless store cooked pizza, and grafting in Nonna's thick home made sauce. Training stages and cost estimated from [Olmo3](https://arxiv.org/abs/2512.13961)*
 
 
 ## Here's one we baked earlier - Example reply
