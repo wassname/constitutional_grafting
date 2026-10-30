@@ -16,6 +16,7 @@ uv run python scripts/eval/84_tinychar_subset.py  ->  configs/eval/tinychar_subs
 """
 import json
 import statistics as st
+import subprocess
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -31,9 +32,9 @@ GRAFTS = ["r17_reason_docs_0.25", "r17_reason_docs_0.5", "r17_reason_docs_1", "r
 KEEP_WHOLE = {"instructions", "pov", "sycophancy"}
 OUT = ROOT / "configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt"
 
-snapshot = {json.loads(l)["id"]: json.loads(l) for l in (ROOT / "slop/eval/run17/inputs/items.jsonl").open()}
-current = {json.loads(l)["id"]: json.loads(l) for l in (TINYCHAR / "data/items.jsonl").open()}
-items = {i: current.get(i, it | {"length_group": "standard"}) for i, it in snapshot.items()}  # types come from tiny-character's items
+TINYCHAR_COMMIT = "54b8bc8"  # subset.py from here on: item length type from max_new_tokens, so the run 17 snapshot loads
+assert subprocess.run(["git", "-C", TINYCHAR, "merge-base", "--is-ancestor", TINYCHAR_COMMIT, "HEAD"]).returncode == 0, f"tiny-character older than {TINYCHAR_COMMIT}"
+items = {json.loads(l)["id"]: json.loads(l) for l in (ROOT / "slop/eval/run17/inputs/items.jsonl").open()}  # the snapshot the judge gets
 
 judged = defaultdict(dict)  # (item, sample) -> model -> on-target
 for l in (SWEEP / "score_v2/character_thinking/judged.jsonl").open():
@@ -45,7 +46,7 @@ for path in (SWEEP / "score_v2/character_thinking/judged.jsonl", SWEEP / "score_
     for l in path.open():
         r = json.loads(l)
         c = r.get("check")
-        if c and not snapshot.get(r["item_id"], {}).get("judged", True):
+        if c and not items.get(r["item_id"], {}).get("judged", True):
             v = [x for k, x in c.items() if isinstance(x, (int, float)) and k != "choice"]
             passed[(r["item_id"], r["sample"])][r["model"].removeprefix("think:")] = min(v)
 
@@ -97,6 +98,7 @@ header = [f"# Calibrated half of tiny-character ({len(keep)} of {len(items)} ite
           "# (slop/eval/run17_sweep: v2 judge on-target, code/tool checks), selected on sample 0 only.",
           "# Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;",
           "# groups scored together kept whole; instructions, pov, sycophancy kept whole; half of each kind; tiny-character floor.",
+          f"# Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character {TINYCHAR_COMMIT}.",
           "# Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes."]
 OUT.write_text("\n".join(header) + "\n" + "".join(i + "\n" for i in sorted(keep)))
 fam = defaultdict(lambda: [0, 0])
