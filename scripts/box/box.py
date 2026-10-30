@@ -312,9 +312,10 @@ def main():
     cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
     event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
     cells = list(cfg["cells"])
-    if args.smoke:
+    if args.smoke:  # one scan cell, then one cell per distinct set of adapter names among the full ones (doses share a code path)
+        scans = [c for c in cells if c in cfg["scan_cells"]][:1]
         seen = set()
-        cells = [c for c in cells if not (frozenset(cfg["cells"][c]) in seen or seen.add(frozenset(cfg["cells"][c])))]
+        cells = scans + [c for c in cells if c not in cfg["scan_cells"] and not (frozenset(cfg["cells"][c]) in seen or seen.add(frozenset(cfg["cells"][c])))]
     argv = [sys.executable, ROOT / "scripts/box/cells.py", cells_config, "--run-dir", run, "--instruct", instruct,
             *[f"--adapter={n}={p}" for n, p in adapters.items()], "--cells", *cells]
     if args.smoke:
@@ -379,8 +380,9 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
 
     # The unchanged model (members at 0): every dose is judged against it, so a probe setting it cannot meet is not counted as damage.
     ref = probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
-    doses = p["doses"][:2] if smoke else p["doses"]
-    members = spec["members"]
+    # smoke: every code path once (two members, so the mix stage runs; one dose; one scale) - the full sweep took 30 of 44 minutes
+    doses = p["doses"][:1] if smoke else p["doses"]
+    members = spec["members"][:2] if smoke else spec["members"]
     if len(members) == 1:
         (m,) = members
         res = bracket(name, lambda d: {**base, m: d}, doses)
@@ -392,7 +394,7 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
             ok, bad = breakdown(r, ref, p, run)
             weights[m] = float(f"{(bad if bad else ok if ok else min(d for d, _ in r)) / 2:.3g}")  # half way to its own C*
             alone[m] = {"probed": {f"{d:g}": x for d, x in r}, "coherent_to": ok, "breakdown": bad}
-        res = bracket(f"{name}_mix", lambda s: {**base, **{m: s * w for m, w in weights.items()}}, p["mix_scales"][:2] if smoke else p["mix_scales"])
+        res = bracket(f"{name}_mix", lambda s: {**base, **{m: s * w for m, w in weights.items()}}, p["mix_scales"][:1] if smoke else p["mix_scales"])
         out = {"weights": weights, "alone": alone}
     ok, bad = breakdown(res, ref, p, run)
     out |= {"reference": ref, "mix": {f"{d:g}": r for d, r in res}, "coherent_to": ok, "breakdown": bad}
