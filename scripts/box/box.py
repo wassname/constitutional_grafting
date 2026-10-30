@@ -44,6 +44,7 @@ PROBE_DEFAULTS = {
     "max_bad_share": 0.3,                               # loops, language switches, blanks, over the reference's share
     "doses": [1, 2], "mix_scales": [0.25, 0.5, 1],      # starts; extended by doubling or halving until C* is bracketed
     "min_dose": 0.125, "max_dose": 16,
+    "bisect": True,                                     # one probe at the geometric midpoint of the bracket
     "keep": 3,                                          # scans per mix at 0.25 / 0.5 / 0.8 x C*
 }
 SCAN_DEFAULTS = {"items": "scan_items.jsonl", "gsm_n": 20}  # tiny-character core + 10 code items (scripts/eval/83_scan_items.py), 1 sample, thinking on
@@ -400,6 +401,10 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
             d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
             if d is None:
                 break
+            res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
+        ok, bad = breakdown(sorted(res.items()), ref, p, run)
+        if p["bisect"] and not smoke and ok and bad:  # one geometric midpoint: C* known within 1.4x instead of 2x, for one probe
+            d = float(f"{(ok * bad) ** 0.5:.3g}")
             res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
         return sorted(res.items())
 
