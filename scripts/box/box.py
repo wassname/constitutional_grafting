@@ -404,16 +404,19 @@ def lock_mix(found) -> dict:
 
 
 def choose_cells(name, spec, found, cfg, smoke) -> dict:
-    """Pass 2 for a chat mix, full evaluations around 80% of C* (wassname: "a finer one around 80% of that"): `keep` scales evenly
-    from 0.7 to 0.9 x C*. With spec `ablate`, also the mix at 0.8 x C* minus each member."""
+    """Pass 2 for a chat mix: `keep` full evaluations evenly from the highest coherent probe scale to 0.9 x C* (wassname: broken at 2
+    means look at 1-1.8). Not only near C*: in run 17 the best trade-off was well below it (reason_docs, C* ~2: character +0.46 /
+    +0.52 / +0.47 at x0.5 / 1 / 1.5 while code fell 23 / 20 / 14 of 40). With spec `ablate`, also the mix at the middle scale minus
+    each member."""
     keep = 1 if smoke else cfg["probe"]["keep"]
     ok, bad = found["coherent_to"], found["breakdown"]
     c = bad if bad else 1.25 * (ok if ok else 1)  # C* not bracketed: treat the last coherent scale as 80% of it
-    picks = sorted({float(f"{c * (0.7 + 0.2 * i / max(keep - 1, 1)):.2g}") for i in range(keep)} if keep > 1 else {float(f"{0.8 * c:.2g}")})
+    lo = ok if ok else 0.5 * c
+    picks = sorted({float(f"{lo + (0.9 * c - lo) * i / max(keep - 1, 1):.2g}") for i in range(keep)} if keep > 1 else {float(f"{0.8 * c:.2g}")})
     w, base = found["weights"], spec["base"]
     cells = {f"{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}} for s in picks}
     if spec["ablate"] and len(w) > 1:
-        mid = float(f"{0.8 * c:.2g}")
+        mid = picks[len(picks) // 2]
         cells |= {f"{name}_{mid:g}_minus_{x}": {**base, **{m: mid * k for m, k in w.items() if m != x}} for x in w}
     return cells
 
