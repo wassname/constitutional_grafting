@@ -3910,3 +3910,38 @@ Lessons:
 4. The probe's breakdown is a ceiling for a single adapter, not a safe dose for a stack; scan below it (0.25 / 0.5 / 0.8 × C*).
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-30 -- Weight-space overlap between adapters (raw numbers)
+
+Question (wassname): do the adapters share a component that stacking multiplies? First check, in weight space. Script `scripts/scratch/20261030_orth_docs/01_overlap.py` (dense LoRA modules only, 250 per adapter; routed experts skipped). Per module and pair: cosine of the whole updates, and the share of one update's squared norm that lies in the other's output subspace (span of its B columns); chance for a random rank-64 subspace = 64 / output dim.
+
+Document adapters (`python 01_overlap.py docs`):
+
+| pair | cosine median | cosine max abs | share in other's subspace (median) | chance (median) |
+|---|---|---|---|---|
+| const · stoic | +0.000 | 0.020 | 0.043 | 0.031 |
+| const · other | +0.000 | 0.013 | 0.042 | 0.031 |
+| other · stoic | +0.001 | 0.024 | 0.049 | 0.031 |
+| stoic in const | | | 0.046 | 0.031 |
+| stoic in other | | | 0.052 | 0.031 |
+| other in const | | | 0.043 | 0.031 |
+
+Run 19 chat adapters (`python 01_overlap.py chat19`):
+
+| pair | cosine median | cosine max abs | share in other's subspace (median) | chance (median) |
+|---|---|---|---|---|
+| dilemmas · help | +0.002 | 0.026 | 0.050 | 0.031 |
+| dilemmas · texts | +0.004 | 0.038 | 0.062 | 0.031 |
+| dilemmas · identity | +0.001 | 0.012 | 0.048 | 0.031 |
+| help · texts | +0.003 | 0.038 | 0.067 | 0.031 |
+| help · identity | +0.001 | 0.018 | 0.049 | 0.031 |
+| identity · texts | +0.002 | 0.020 | 0.051 | 0.031 |
+| all · dilemmas | +0.023 | 0.081 | 0.094 | 0.031 |
+| all · help | +0.008 | 0.040 | 0.058 | 0.031 |
+| all · texts | +0.010 | 0.049 | 0.067 | 0.031 |
+| all · identity | +0.012 | 0.055 | 0.074 | 0.031 |
+| dilemmas / help / texts / identity in all | | | 0.096 / 0.063 / 0.070 / 0.084 | 0.031 |
+
+Interpretation: every subspace share is above chance (1.4-3x), so the overlap is small but not zero; whether it matters depends on whether the shared directions add with the same sign when stacked, which cosine (signed, whole matrix, near 0) and subspace share (unsigned) do not answer. Check in progress: `02_sum_alignment.py` (largest singular value of the stacked mix vs independent and fully aligned addition). Also: all-data and dilemmas, trained on overlapping rows, have cosine only +0.023, so weight-space overlap is a weak detector of shared behaviour; the functional test (hidden-state change per adapter) is task 36.
+
+-- PI/Claude (opus-5-5)
