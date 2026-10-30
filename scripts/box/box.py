@@ -19,8 +19,10 @@ from pathlib import Path
 
 import yaml
 
+from confighash import driver_config_sha
+
 ROOT = Path(__file__).resolve().parents[2]
-SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
+SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
           "scripts/train/18_project_char_vs_cap.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml"]
 # Spectral penalty per stage: best guess on priors, used without a separate test (wassname 2026-10-30). Audit trail:
 # - Documents, fixed lambda 50. Run 7e (journal "Run 7e" and "High-dose spectral test"): lambda 5 x0.75 gave +0.50 character / 35 of 44
@@ -138,7 +140,7 @@ def main():
                AXOLOTL_DO_NOT_TRACK="1")  # axolotl's posthog flush hung 43 min after training; generic DO_NOT_TRACK breaks kernels' user-agent header
     env.pop("ALLOW_MISSING_EOS", None)
     axolotl = os.environ.get("AXOLOTL", "axolotl")
-    code_at_start = {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): sha(args.config)}  # a smoke vouches only for code it ran
+    code_at_start = {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): driver_config_sha(args.config)}  # a smoke vouches only for code it ran
     if args.smoke:
         env["MERGE_PROBE_LAYERS"] = "0,1"  # 02_merge checks layers 30-31 of the real model; the tiny model has 2 layers
 
@@ -323,10 +325,10 @@ def main():
     command(argv, "cells.log", {"BOX_DEADLINE": str(deadline)})
     event("complete", {"cells": [cfg["prefix"] + c for c in cells], "adapters": {n: str(p) for n, p in adapters.items()}})
     if args.smoke:  # rent.py refuses to rent unless these hashes still match
-        assert code_at_start == {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): sha(args.config)}, "driver code or config changed during the smoke"
+        assert code_at_start == {f: sha(ROOT / f) for f in SMOKED} | {str(args.config): driver_config_sha(args.config)}, "driver code or config changed during the smoke"
         (ROOT / ".local" / cfg["name"]).mkdir(parents=True, exist_ok=True)
         (ROOT / ".local" / cfg["name"] / "smoke_passed.json").write_text(json.dumps(
-            {"epoch": time.time(), "config_sha256": sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
+            {"epoch": time.time(), "driver_config_sha256": driver_config_sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
 
 
 def is_broken(r, ref, p, run) -> bool:

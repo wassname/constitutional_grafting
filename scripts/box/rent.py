@@ -26,6 +26,8 @@ from pathlib import Path
 
 import yaml
 
+from confighash import driver_config_sha
+
 ROOT = Path(__file__).resolve().parents[2]
 CODE_DIRS = ["scripts/box", "scripts/train", "scripts/eval", "configs"]  # copied whole; small text files
 REMOTE = "/workspace/cg"
@@ -243,7 +245,7 @@ class Lease:
         for spec in (cfg.get("train") or {}).get("chats", {}).values():
             subprocess.run([sys.executable, ROOT / "scripts/train/check_loss_mask.py", ROOT / spec["data"]], check=True)
         smoke = json.loads((self.local / "smoke_passed.json").read_text())  # written by `box.py CONFIG --smoke` (AGENTS.md: smoke before renting)
-        assert smoke["config_sha256"] == sha(self.cfg_path) and all(sha(ROOT / f) == d for f, d in smoke["code_sha256"].items()), \
+        assert smoke["driver_config_sha256"] == driver_config_sha(self.cfg_path) and all(sha(ROOT / f) == d for f, d in smoke["code_sha256"].items()), \
             "config or driver code changed since the local smoke: rerun it"
         offers = api("/bundles/?q=" + urllib.parse.quote(json.dumps(cfg["offer_query"])))["offers"]
         ok = [o for o in offers if o["gpu_name"] == cfg["gpu_name"] and o["cuda_max_good"] >= 13.0 and o["dph_total"] <= cfg["max_hourly_rate"]
