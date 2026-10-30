@@ -14,6 +14,7 @@ import hashlib
 import io
 import json
 import shlex
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -70,7 +71,11 @@ class Lease:
         self.out = ROOT / "slop/eval" / self.name / "lease"
         self.local = ROOT / ".local" / self.name
         self.state_path = self.local / "rental.json"
+        # The usual path, but stored on the /workspace volume: run 19's retrieval failed with the root disk full (1.8 TB, 0 free).
         self.adapter_dir = Path.home() / f".local/share/cg_{self.name}_adapters"
+        if not self.adapter_dir.exists():
+            (store := ROOT / ".local/adapters" / self.adapter_dir.name).mkdir(parents=True, exist_ok=True)
+            self.adapter_dir.symlink_to(store)
         self.out.mkdir(parents=True, exist_ok=True)
         self.local.mkdir(parents=True, exist_ok=True)
         self.state = json.loads(self.state_path.read_text()) if self.state_path.exists() else None
@@ -217,7 +222,10 @@ class Lease:
                 "print(json.dumps({str(f.relative_to(p)):hashlib.file_digest(f.open('rb'),'sha256').hexdigest() for f in p.rglob('adapter_*')"
                 " if f.is_file() and not f.parent.name.startswith('up_')}))")
         manifest = json.loads(self.remote("python -c " + shlex.quote(code), timeout=600, capture_output=True, text=True).stdout)
-        self.adapter_dir.mkdir(parents=True, exist_ok=True)
+        size = int(self.remote(f"du -sb --exclude=merged_model --exclude=up_* {REMOTE}/outputs/{self.name} | cut -f1", timeout=600,
+                               capture_output=True, text=True).stdout.split()[-1])
+        free = shutil.disk_usage(self.adapter_dir.resolve()).free
+        assert free > 1.2 * size, f"local disk: {free / 1e9:.0f} GB free at {self.adapter_dir.resolve()}, retrieval needs ~{size / 1e9:.0f} GB"
         self.rsync("--include=*/", "--include=adapter_*", "--include=trainer_state.json", "--include=projection.json", "--exclude=up_*/**", "--exclude=*",
                    self.host(f"{REMOTE}/outputs/{self.name}/"), str(self.adapter_dir) + "/")
         for rel, digest in manifest.items():
