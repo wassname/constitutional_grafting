@@ -38,9 +38,10 @@ SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.
 #   frac 0.01 (runs 10-19) ended at ~1.7% of the loss (run 17 train log: lambda 0.135, sigma_max 0.142 -> 0.244, CE 1.90): the level
 #   run 7e found "probably too weak" for documents (lambda 0.5, ~1.7%). 0.1 aims at the documents' ~10%. Untested on chat: if held-out
 #   loss stalls well above run 19's (~1.7), the penalty is fighting the chat data.
-#   Caveat (scripts/scratch/20261030_adapter_spectra.py, dense modules): the top direction's share of the update is about the same
-#   in lambda-50 documents (0.19-0.20) and frac-0.01 chats (0.21-0.23); the documents' sigma_max is 50-300x smaller. So the penalty
-#   mainly shrinks the update rather than spreading it, and a stronger chat penalty may act much like a lower dose.
+#   Spectra (scripts/scratch/20261030_adapter_spectra.py, dense modules, same document data and seed): the top direction's share of
+#   the update falls from 0.53 (lambda 0) to 0.16 (lambda 0.5) and stays 0.17-0.19 at lambda 5-50, while sigma_max keeps shrinking
+#   (0.30, 0.07, 0.020, 0.006). So a small penalty spreads the update and a larger one mostly shrinks it; frac-0.01 chats are already
+#   spread (0.21-0.23). The trade-off still improved past the spreading: lambda 5 beat lambda 0.5 at matched capability (+0.09).
 DOC_SPECTRAL_LAM = 50
 CHAT_SPECTRAL_FRAC = 0.1
 # Default dose path settings (AGENTS.md "Default path"); a run config's `probe:` / `scan:` override single keys.
