@@ -90,13 +90,13 @@ def check_config(cfg: dict) -> list[str]:
             if sel.get(key) and not (ROOT / sel[key]).is_file():
                 bad.append(f"selector.{key}: no file {sel[key]}")
     for name, spec in (cfg.get("mixes") or {}).items():
-        bad += [f"mixes.{name}: missing {k}" for k in ("members", "base", "lock", "ablate") if k not in spec]
+        bad += [f"mixes.{name}: missing {k}" for k in ("members", "base", "lock", "ablate", "thinking") if k not in spec]
         pool = adapters if spec.get("lock") else known
         bad += [f"mixes.{name}: unknown member {m}" for m in spec.get("members", []) if m not in pool]
         bad += [f"mixes.{name}.base: unknown {n}" for n in spec.get("base", {}) if n not in known and n not in cfg.get("doc_sets", {}) and n not in cfg["mixes"]]
     if cfg.get("mixes"):
-        bad += [f"probe: missing {k}" for k in ("file", "prompts", "max_tokens", "thinking", "thinking_budget", "gsm_n", "gsm_max_tokens", "min_gsm",
-                                                  "max_length_share", "doses", "mix_scales", "min_dose", "max_dose", "keep") if k not in cfg["probe"]]
+        bad += [f"probe: missing {k}" for k in ("file", "prompts", "max_tokens", "thinking_budget", "gsm_file", "gsm_n", "gsm_max_tokens", "gsm_thinking_budget", "min_gsm",
+                                                  "max_bad_share", "doses", "mix_scales", "min_dose", "max_dose", "keep") if k not in cfg["probe"]]
     for cell, parts in cfg["cells"].items():
         bad += [f"cells.{cell}: unknown adapter or doc set {n}" for n in parts if n not in known and n not in cfg.get("doc_sets", {})]
     bad += [f"missing key {k} (cells.py reads it for every cell)" for k in ("thinking_cells", "thinking_budget") if k not in cfg]
@@ -323,8 +323,8 @@ def main():
 
 
 def is_broken(r, p) -> bool:
-    """wassname: maths under 80% is incoherent; so is a probe where most replies run to the cap."""
-    return r["gsm_correct"] < p["min_gsm"] or r["length_share"] > p["max_length_share"]
+    """wassname: maths under 80% is incoherent; so are loops and blank replies (cells.py bad_share)."""
+    return r["gsm_correct"] < p["min_gsm"] or r["bad_share"] > p["max_bad_share"]
 
 
 def breakdown(res, p) -> tuple:
@@ -344,7 +344,7 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
 
     def probe(cells):  # {name: cell} -> {name: receipt}
         path = run / f"cfg_probe_{name}.yaml"
-        path.write_text(yaml.safe_dump({**cfg, "cells": cells}, sort_keys=False))
+        path.write_text(yaml.safe_dump({**cfg, "probe": {**p, "thinking": spec["thinking"]}, "cells": cells}, sort_keys=False))
         command([sys.executable, ROOT / "scripts/box/cells.py", path, "--run-dir", run, "--instruct", instruct, "--probe",
                  *[f"--adapter={n}={a}" for n, a in adapters.items()], "--cells", *cells, *(["--smoke-rows", "2"] if smoke else [])],
                 f"probe_{name}.log", {"BOX_DEADLINE": str(deadline)})
@@ -361,6 +361,9 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
             res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
         return sorted(res.items())
 
+    # The unchanged model (members at 0) must pass, or the criteria measure the probe's caps rather than the adapters.
+    ref = probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
+    assert smoke or not is_broken(ref, p), f"mix {name}: the probe calls the unchanged model broken, fix the probe settings: {ref}"
     doses = p["doses"][:2] if smoke else p["doses"]
     members = spec["members"]
     if len(members) == 1:

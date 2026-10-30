@@ -7,7 +7,9 @@ usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --inst
 """
 import argparse
 import hashlib
+import collections
 import json
+import re
 import os
 import shutil
 import signal
@@ -34,6 +36,20 @@ def sha(path):
 
 def rows(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines()]
+
+
+def looped(text: str, n: int = 5, k: int = 4) -> bool:
+    """Some 5-word sequence occurs 4+ times. On run 19's probes and run 17's panels: Instruct and all-data x0.25-2 0/7 turns,
+    sum x1 3/7 (identity and note-form loops), sum x2-3 and all-data x3 7/7. Length is not used: Instruct's own replies run past
+    the probe's short cap (run 17 panel: 500-1,000 words), so a capped reply is not a broken one."""
+    w = re.findall(r"\w+", text.lower())
+    c = collections.Counter(tuple(w[i:i + n]) for i in range(len(w) - n + 1))
+    return bool(c) and max(c.values()) >= k
+
+
+def bad_share(turns) -> float:
+    """Share of probe turns that loop or are blank."""
+    return sum(looped(t["assistant"] or "") or not (t["assistant"] or "").strip() for t in turns) / len(turns)
 
 
 def expand(cell: dict, cfg: dict) -> list[tuple[str, float]]:
@@ -150,10 +166,16 @@ def main():
                      "--samples", "1", "--max-tokens-cap", str(cap), "--trace", str(target) + ".wire.jsonl", *think], f"gen_probe_{tag}.log")
             gsm, n_gsm = out / f"probe_gsm8k_{tag}.jsonl", args.smoke_rows or p["gsm_n"]
             gsm_items = out / f"probe_gsm8k_items_{n_gsm}.jsonl"  # 26_gsm8k.py asserts --n equals the frozen file's row count
-            gsm_items.write_text("".join(inputs("gsm8k_long60.jsonl").read_text().splitlines(keepends=True)[:n_gsm]))
+            gsm_items.write_text("".join(inputs(p["gsm_file"]).read_text().splitlines(keepends=True)[:n_gsm]))
+            # maths thinking off always; with thinking on as well when the mix is deployed thinking-on, broken if either mode fails.
+            # The thinking budget must fit Instruct-like long thinking, or it scores the unchanged model as broken (run 19: 512 did).
             command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm, "--n", str(n_gsm),
-                     "--items", gsm_items, "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"]),
-                     *(["--thinking-budget", str(32 if args.smoke_rows else p["thinking_budget"])] if p["thinking"] else [])], f"probe_gsm8k_{tag}.log")
+                     "--items", gsm_items, "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"])], f"probe_gsm8k_{tag}.log")
+            gsm_think = out / f"probe_gsm8k_think_{tag}.jsonl"
+            if p["thinking"]:
+                command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm_think, "--n", str(n_gsm), "--items", gsm_items,
+                         "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"]),
+                         "--thinking-budget", str(32 if args.smoke_rows else p["gsm_thinking_budget"])], f"probe_gsm8k_think_{tag}.log")
         finally:
             if server is not None:
                 stop(server)
@@ -161,9 +183,13 @@ def main():
                 shutil.rmtree(merged)
         turns = [t for r in rows(target) for t in r["turns"]]
         g = rows(gsm)
-        summary = {"model": tag, "cell": cell, "gsm_correct": sum(bool(x["correct"]) for x in g) / len(g), "gsm_rows": len(g),
+        off = sum(bool(x["correct"]) for x in g) / len(g)
+        think = (lambda h: sum(bool(x["correct"]) for x in h) / len(h))(rows(gsm_think)) if p["thinking"] else None
+        summary = {"model": tag, "cell": cell, "gsm_correct": min(off, think) if think is not None else off, "gsm_off": off, "gsm_think": think,
+                   "gsm_rows": len(g),
                    "turns": len(turns), "length_share": sum(t["finish_reason"] == "length" for t in turns) / len(turns),
-                   "blank_finals": sum(not (t["assistant"] or "").strip() for t in turns), "elapsed_seconds": time.monotonic() - start}
+                   "blank_finals": sum(not (t["assistant"] or "").strip() for t in turns), "bad_share": bad_share(turns),
+                   "elapsed_seconds": time.monotonic() - start}
         (out / f"probe_{tag}.done").write_text(json.dumps(summary, indent=2))
         log(f"PROBE COMPLETE {tag}: " + json.dumps(summary))
 
