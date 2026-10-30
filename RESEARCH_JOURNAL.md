@@ -3864,3 +3864,21 @@ Interpretation: splitting by group gave no character gain at the peak (+0.84 vs 
 Method changes made during the run, each from wassname's review (commits on 2026-10-30): the default dose path (`box.py search_mix`; AGENTS.md "Default path"), probe criteria relative to the unchanged model, scans instead of hour-long evaluations, CUDA graphs (generation ~420 → ~950 tokens/s), a calibrated half of tiny-character (`configs/eval/tinychar_subsets/`), chat spectral penalty 0.1 from the next training. Open: keep vLLM hot (task 33): run 19 spent ~4.8 h of its lease merging and restarting.
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-30 -- Document adapters: dose tolerance does not track how much each learned
+
+Question (wassname): is each document adapter's breakdown dose proportional to its held-out loss before and after training?
+
+Evidence: training logs `slop/eval/run10/stage1/box_runs/train_r10_{stoic,other}.log`, `slop/eval/run7e/box_runs/train_r7e_spl50.log` (Const). The logged eval loss includes the spectral penalty (λ50 × σ_max, zero at step 0), so the end value is corrected by the last logged σ_max. Breakdowns from run 19's probes (each adapter alone on Instruct, thinking off).
+
+| document adapter | eval loss start → end (logged) | penalty at end (50 × σ_max) | held-out NLL drop (estimate) | breaks alone at |
+|---|---|---|---|---|
+| Stoic | 2.360 → 2.371 | 0.15 | ~0.14 | ×4 |
+| Const (run 7e λ50) | 2.281 → 2.269 | 0.36 | ~0.37 | ×4 |
+| Other | 2.261 → 2.355 | 0.28 | ~0.18 | ×8 |
+
+Interpretation: tolerance is not proportional to the loss drop (Const learned most and Stoic least, both break at ×4; Other tolerates twice the dose with a middling drop), nor obviously to corpus size. So run 19's mix weights (half of each breakdown: 2, 2, 4) are not proportional to how much each adapter learned either. Caveats: the correction uses the last training batch's σ_max, and each held-out set is a different corpus, so drops are not strictly comparable. Clean check: re-score each adapter's held-out text on Base without the penalty (`scripts/eval/47_base_heldout_loss.py`, task 34).
+
+wassname's hypothesis (2026-10-30): each document adapter is its own content plus a shared component ("stoic+terse, const+terse, other+terse"), so stacking triples the shared part; this would explain the mix breaking at ~0.75 of a combined budget. Test in progress: `scripts/scratch/20261030_orth_docs/` (overlap between the updates first, on CPU).
+
+-- PI/Claude (opus-5-5)
