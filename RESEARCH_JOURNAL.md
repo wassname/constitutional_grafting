@@ -3882,3 +3882,31 @@ Interpretation: tolerance is not proportional to the loss drop (Const learned mo
 wassname's hypothesis (2026-10-30): each document adapter is its own content plus a shared component ("stoic+terse, const+terse, other+terse"), so stacking triples the shared part; this would explain the mix breaking at ~0.75 of a combined budget. Test in progress: `scripts/scratch/20261030_orth_docs/` (overlap between the updates first, on CPU).
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-30 -- Run 19 result: splitting the chat data into group adapters did not help; use one all-data adapter
+
+Premise (plan `slop/plans/20261029_run19_chat_data_v5.md`; wassname 2026-10-29: "split chat adapters"): each chat-data group (moral dilemmas, ordinary help, source texts, identity) as its own adapter could be dosed, ablated and expanded on its own (AGENTS.md "each data subset gets its own adapter"), and might teach each skill without the others diluting it.
+
+Hypothesis: four group adapters, summed at good doses, give more character at the same capability cost than one adapter trained on all the same rows. Discriminator: an all-data adapter on the same rows as the reference.
+
+Evidence (`docs/results/20261030_run19.md`; full evaluations, thinking on, calibrated half of tiny-character, 90 judged items × 2 samples, v2 judge vs Instruct):
+
+| model | character [90%] | maths /60 | code /20 |
+|---|---|---|---|
+| Instruct | 0 | 56 | 16 |
+| all-data ×0.5 | +0.81 [+0.72, +0.90] | 56 | 16 |
+| all-data ×1 | +0.94 [+0.85, +1.02] | 52 | 13 |
+| group mix ×0.25 (dilemmas 0.25, help 0.25, texts 0.5, identity 0.25) | +0.90 [+0.80, +0.99] | 56 | 15 |
+| group mix ×0.7 | −0.08 [−0.24, +0.08] | 50 | 10 |
+
+Scans (one sample, 37 items): the group mix peaks at ×0.25 (+0.84) and falls to +0.64 at ×0.5 (capability 9/14), −0.10 at ×0.7, −0.95 at ×0.8; all-data rises to ×1 (+0.85) and holds capability to ×1.6.
+
+Interpretation: the hypothesis is not supported. At each one's best dose the two give the same character (+0.94 vs +0.90, overlapping intervals; one training seed each), and the stacked groups have a much narrower usable dose range: four adapters stacked break earlier than one, and earlier than the probe predicted (probe breakdown ×1). Likely, though not tested: each group adapter learns some of the same general change (register, identity, format), so stacking them multiplies it, as in the document mix (which broke at ~0.75 of a combined budget).
+
+Lessons:
+1. Train one chat adapter on all the chat data (run 20); the split costs 4× the training and a fragile dose for no measured gain.
+2. Splitting adapters is still useful for ablation, but the ablation must run at or below the peak dose: run 19's removals at group mix ×0.5 (past the peak) all raised character by lowering the total dose, so they cannot rank the groups.
+3. Equal coefficients across different adapters are not equal doses (run 19's first plan stacked them at ×1 each); sweep each adapter alone first. Now the driver default (`box.py search_mix`).
+4. The probe's breakdown is a ceiling for a single adapter, not a safe dose for a stack; scan below it (0.25 / 0.5 / 0.8 × C*).
+
+-- PI/Claude (opus-5-5)
