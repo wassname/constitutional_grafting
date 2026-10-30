@@ -221,7 +221,7 @@ def main():
     for name, spec in (cfg.get("mixes") or {}).items():
         if spec["lock"]:
             assert name not in cfg["doc_sets"], f"mix {name} is searched, so it cannot also be fixed in doc_sets"
-            locked = run / f"locked_{name}.json"
+            locked = run / f"mix_locked_{name}.json"  # not locked_<name>.json: event() writes that file with an epoch key
             if not locked.exists():
                 locked.write_text(json.dumps(lock_mix(search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event))))
             cfg["doc_sets"][name] = json.loads(locked.read_text())
@@ -322,16 +322,26 @@ def main():
             {"epoch": time.time(), "config_sha256": sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
 
 
-def is_broken(r, p) -> bool:
-    """wassname: maths under 80% is incoherent; so are loops and blank replies (cells.py bad_share)."""
-    return r["gsm_correct"] < p["min_gsm"] or r["bad_share"] > p["max_bad_share"]
+def is_broken(r, ref, p, run) -> bool:
+    """Broken relative to the unchanged model (wassname 2026-10-30: "if it breaks more than the reference; if the reference can't do it,
+    inconclusive"): in each maths mode, under `min_gsm` of the items the reference solved (a mode where it solved none is skipped);
+    or a share of looping, language-switched or blank turns over the reference's by more than `max_bad_share`."""
+    for mode in ("gsm8k", "gsm8k_think"):
+        theirs, mine = run / f"probe_{mode}_{ref['model']}.jsonl", run / f"probe_{mode}_{r['model']}.jsonl"
+        if not theirs.exists():
+            continue
+        solved = [json.loads(l)["question"] for l in theirs.open() if json.loads(l)["correct"]]
+        got = {json.loads(l)["question"]: json.loads(l)["correct"] for l in mine.open()}
+        if solved and sum(got[q] for q in solved) / len(solved) < p["min_gsm"]:
+            return True
+    return r["bad_share"] - ref["bad_share"] > p["max_bad_share"]
 
 
-def breakdown(res, p) -> tuple:
-    """(highest coherent dose, first broken dose above it). A low dose can look broken only because Instruct's own long thinking runs
-    past the probe's short caps (run 19: all-data x0.25 hit the cap on 71% of replies), so only broken doses above a coherent one count."""
-    ok = [d for d, r in res if not is_broken(r, p)]
-    above = [d for d, r in res if is_broken(r, p) and ok and d > max(ok)]
+def breakdown(res, ref, p, run) -> tuple:
+    """(highest coherent dose, first broken dose above it). A low dose can look broken by noise, so only broken doses above a coherent
+    one count."""
+    ok = [d for d, r in res if not is_broken(r, ref, p, run)]
+    above = [d for d, r in res if is_broken(r, ref, p, run) and ok and d > max(ok)]
     return (max(ok) if ok else None), (min(above) if above else None)
 
 
@@ -354,16 +364,15 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
         """Doubling sweep from `start`, extended until a coherent dose has a broken one above it (or the limits are hit)."""
         res = dict((d, r) for d, r in zip(start, probe({f"probe_{label}_{d:g}": cell_at(d) for d in start}).values()))
         for _ in range(0 if smoke else 4):
-            ok, bad = breakdown(sorted(res.items()), p)
+            ok, bad = breakdown(sorted(res.items()), ref, p, run)
             d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
             if d is None:
                 break
             res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
         return sorted(res.items())
 
-    # The unchanged model (members at 0) must pass, or the criteria measure the probe's caps rather than the adapters.
+    # The unchanged model (members at 0): every dose is judged against it, so a probe setting it cannot meet is not counted as damage.
     ref = probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
-    assert smoke or not is_broken(ref, p), f"mix {name}: the probe calls the unchanged model broken, fix the probe settings: {ref}"
     doses = p["doses"][:2] if smoke else p["doses"]
     members = spec["members"]
     if len(members) == 1:
@@ -374,15 +383,15 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
         alone, weights = {}, {}
         for m in members:
             r = bracket(f"{name}_{m}", lambda d, m=m: {**base, m: d}, doses)
-            ok, bad = breakdown(r, p)
+            ok, bad = breakdown(r, ref, p, run)
             weights[m] = float(f"{(bad if bad else ok if ok else min(d for d, _ in r)) / 2:.3g}")  # half way to its own C*
             alone[m] = {"probed": {f"{d:g}": x for d, x in r}, "coherent_to": ok, "breakdown": bad}
         res = bracket(f"{name}_mix", lambda s: {**base, **{m: s * w for m, w in weights.items()}}, p["mix_scales"][:2] if smoke else p["mix_scales"])
         out = {"weights": weights, "alone": alone}
-    ok, bad = breakdown(res, p)
-    out |= {"mix": {f"{d:g}": r for d, r in res}, "coherent_to": ok, "breakdown": bad}
+    ok, bad = breakdown(res, ref, p, run)
+    out |= {"reference": ref, "mix": {f"{d:g}": r for d, r in res}, "coherent_to": ok, "breakdown": bad}
     (run / f"probe_mix_{name}.json").write_text(json.dumps(out, indent=2))
-    event(f"probe_mix_{name}", {k: out[k] for k in ("weights", "coherent_to", "breakdown")})
+    event(f"probe_mix_{name}", {k: out[k] for k in ("weights", "coherent_to", "breakdown")} | {"reference_gsm": [ref["gsm_off"], ref["gsm_think"]]})
     return out
 
 
