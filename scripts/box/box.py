@@ -1,10 +1,16 @@
-"""On-box driver for one run config: train the chat adapters, the optional char/cap selector, then evaluate the cells.
+"""On-box driver for one run config. Stages, in order:
+  1. document mixes with `lock` (the default dose path, AGENTS.md): probe each adapter alone, each at half its breakdown C*, probe
+     the mix, lock it at half the mix's C*;
+  2. chat adapters, each trained on Base + its document mix;
+  3. the optional char/cap selector;
+  4. chat mixes without `lock`: the same probes, then dose scans at 0.25 / 0.5 / 0.8 x C* (scan items, 1 sample, thinking on);
+  5. the fixed `cells`: full evaluations.
 
 Stages write receipts to outputs/<name>/run/stages.log and <stage>.json; a stage whose receipt exists is skipped after its adapter
 sha256 is re-checked (resume after a failure). --smoke runs the same stages locally on tiny random Qwen3.5-MoE models with
 1 training step per adapter and a few rows per input: real axolotl, merge, vLLM and scorer commands, no scientific scores.
 
-usage: python scripts/box/box.py configs/runs/run17.yaml [--smoke]
+usage: python scripts/box/box.py configs/runs/run19.yaml [--smoke | --check]
 env:   AXOLOTL (axolotl CLI), VLLM (vllm CLI), BOX_DEADLINE (epoch), HF_HOME                  -- PI/Claude (opus-5-5), 2026-10-28
 """
 import argparse

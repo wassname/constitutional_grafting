@@ -1,6 +1,8 @@
 """Evaluate graft cells: merge the listed LoRA updates onto untouched Instruct (fp16), serve with vLLM, generate the frozen
 protocol (tiny-character items 2 samples T=0.7; demos, panel, viewpoints T=0; small tasks, draft code/tools; GSM60), and
-optionally a thinking-on column. Generalised from scripts/eval/61_run16_cells.py; the per-run choices live in configs/runs/*.yaml.
+optionally a thinking-on column. Cells in `scan_cells` run only the scan items (1 sample, thinking on) and GSM subset; --probe
+runs the short dose probe instead (box.py search_mix). Generalised from scripts/eval/61_run16_cells.py; the per-run choices live
+in configs/runs/*.yaml.
 
 usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --instruct PATH --adapter name=path ... --cells name ...
        [--smoke-rows N]   (smoke: one row per item family, else the first N rows; GSM N)          -- PI/Claude (opus-5-5), 2026-10-28
