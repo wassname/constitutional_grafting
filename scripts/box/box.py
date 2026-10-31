@@ -28,7 +28,7 @@ import yaml
 from confighash import driver_config_sha
 
 ROOT = Path(__file__).resolve().parents[2]
-SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
+SMOKED = ["scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
           "scripts/train/18_project_char_vs_cap.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml"]
 # Spectral penalty per stage: best guess on priors, used without a separate test (wassname 2026-10-30). Audit trail:
 # - Documents, fixed lambda 50. Run 7e (journal "Run 7e" and "High-dose spectral test"): lambda 5 x0.75 gave +0.50 character / 35 of 44
