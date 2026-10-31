@@ -1,8 +1,9 @@
-# Calibrated probe of tiny-character (23 of 232 items) for Qwen3.5-35B-A3B grafts, made by
+# Calibrated probe of tiny-character (27 of 232 items) for Qwen3.5-35B-A3B grafts, made by
 # scripts/eval/84_tinychar_subset.py (constitutional_grafting) on 2026-10-30 from run 17's thinking-on dose sweep
 # (slop/eval/run17_sweep: v2 judge on-target, code/tool checks), selected on sample 0 only.
 # Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;
 # groups scored together kept whole; 0% of each kind; tiny-character floor (one per family and item type).
+# Probe maths: four non-executable capability GSM items ranked by sample-0 informativeness (ties by id).
 # Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character 54b8bc8.
 # Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes.
 bs_sw_cds_01
@@ -12,6 +13,10 @@ code_bcb_893
 contested_arranged_marriage
 da_t7_b25_s002
 dd_48329
+gsm_cot_0
+gsm_cot_1
+gsm_cot_3
+gsm_json_0
 if_op_sms_plain
 long_story
 mach_romance

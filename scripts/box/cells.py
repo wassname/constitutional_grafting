@@ -1,7 +1,7 @@
 """Evaluate graft cells: merge the listed LoRA updates onto untouched Instruct (fp16), serve with vLLM, generate the frozen
 protocol (tiny-character items 2 samples T=0.7; demos, panel, viewpoints T=0; small tasks, draft code/tools; GSM60), and
-optionally a thinking-on column. Cells in `scan_cells` run only the scan items (1 sample, thinking on) and GSM subset; --probe
-runs the short dose probe instead (box.py search_mix). Generalised from scripts/eval/61_run16_cells.py; the per-run choices live
+optionally a thinking-on column. Scan cells use the calibrated quarter (1 sample, thinking on); --probe
+uses the calibrated probe subset instead (box.py search_mix). Generalised from scripts/eval/61_run16_cells.py; the per-run choices live
 in configs/runs/*.yaml. Opt-in `hot_swap: true` reuses one local vLLM server per invocation; errors never fall back. -- PI/OpenAI
 
 usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --instruct PATH --adapter name=path ... --cells name ...
@@ -9,10 +9,8 @@ usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --inst
 """
 import argparse
 import hashlib
-import collections
 from contextlib import contextmanager, ExitStack
 import json
-import re
 import os
 import shutil
 import signal
@@ -24,6 +22,8 @@ import urllib.request
 from pathlib import Path
 
 import yaml
+
+from tinychar import SUBSETS, subset, judge
 
 ROOT = Path(__file__).resolve().parents[2]
 GEN = [("items.jsonl", "replies", 0.7, 2), ("demos.jsonl", "demos", 0, 1), ("panel.jsonl", "panel", 0, 1), ("pov.jsonl", "pov", 0, 1),
@@ -39,26 +39,6 @@ def sha(path):
 
 def rows(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines()]
-
-
-def looped(text: str, n: int = 5, k: int = 4) -> bool:
-    """Some 5-word sequence occurs 4+ times. On run 19's probes and run 17's panels: Instruct and all-data x0.25-2 0/7 turns,
-    sum x1 3/7 (identity and note-form loops), sum x2-3 and all-data x3 7/7. Length is not used: Instruct's own replies run past
-    the probe's short cap (run 17 panel: 500-1,000 words), so a capped reply is not a broken one."""
-    w = re.findall(r"\w+", text.lower())
-    c = collections.Counter(tuple(w[i:i + n]) for i in range(len(w) - n + 1))
-    return bool(c) and max(c.values()) >= k
-
-
-def switched_language(text: str) -> bool:
-    """CJK text in a reply to an English prompt: Qwen's over-dose signature (run 10 "事半功倍"; run 19 Stoic x4 opened all 7 turns
-    with it, while only 3 of them looped)."""
-    return re.search(r"[\u3000-\u9fff\uff00-\uffef]", text) is not None
-
-
-def bad_share(turns) -> float:
-    """Share of probe turns that loop, switch language or are blank."""
-    return sum(looped(a) or switched_language(a) or not a.strip() for a in (t["assistant"] or "" for t in turns)) / len(turns)
 
 
 def expand(cell: dict, cfg: dict) -> list[tuple[str, float]]:
@@ -81,7 +61,7 @@ def main():
     ap.add_argument("--smoke-rows", type=int, default=0)
     ap.add_argument("--smoke-cuda-graphs", action="store_true", help="tiny smoke only: capture graphs instead of enforcing eager")
     ap.add_argument("--weight-snapshots", action="store_true", help="tiny smoke only: save served kernel tensors for hot/cold comparison")
-    ap.add_argument("--probe", action="store_true", help="quick dose probe (config `probe`): few prompts, short replies, GSM subset; finds the breakdown")
+    ap.add_argument("--probe", action="store_true", help="calibrated tiny-character probe, judged against members at zero")
     args = ap.parse_args()
     assert not args.weight_snapshots or args.smoke_rows, "weight snapshots are tiny-smoke evidence only"
     assert not args.smoke_cuda_graphs or args.smoke_rows, "graph smoke requires --smoke-rows"
@@ -128,7 +108,7 @@ def main():
         return path
 
     def serve(model, tag, extra, log_file):
-        aliases = [cfg["prefix"] + c for c in args.cells if cfg["prefix"] + c != tag] if hot_swap else []
+        aliases = [n for n in dict.fromkeys([cfg["prefix"] + c for c in args.cells] + [cfg["prefix"] + "instruct"]) if n != tag] if hot_swap else []
         hot_args = ["--host", "127.0.0.1", "--worker-extension-cls", "scripts.box.hot_worker.HotSwapWorker"] if hot_swap or args.weight_snapshots else []
         argv = [args.vllm, "serve", str(model), "--served-model-name", tag, *aliases, "--dtype", "float16", "--max-model-len", str(cfg.get("max_model_len", 16384)),
                 "--gpu-memory-utilization", os.environ.get("VLLM_GPU_UTIL", "0.90"), "--max-num-seqs", "128",
@@ -214,46 +194,39 @@ def main():
                 if merged.exists():
                     shutil.rmtree(merged)
 
+    def tiny_inputs(size):
+        ids = cfg.get("items_subset", SUBSETS["full"]) if size == "full" else cfg[size]["items_subset"]
+        return subset(out / "items.jsonl", out / f"items_{size}.jsonl", ids, min(args.smoke_rows, 3))
+
+    def generate_tiny(src, target, tag, reference, thinking, samples):
+        if target.exists():
+            assert len(rows(target)) == len(rows(src)) * samples, f"partial replies: {target}"
+            return
+        budget = 32 if args.smoke_rows else cfg["probe"]["thinking_budget"] if args.probe else cfg["thinking_budget"]
+        think = ["--thinking-budget", str(budget), "--tokenizer", str(args.instruct)] if thinking else []
+        limit = ["--max-tokens-cap", "32"] if args.smoke_rows else []
+        command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, reference, "--temperature", "0.7",
+                 "--samples", str(samples), "--workers", "96", "--trace", str(target) + ".wire.jsonl", *think, *limit], f"gen_{target.stem}.log")
+        assert len(rows(target)) == len(rows(src)) * samples, target
+
     def probe(cell_name, cell, tag):
-        """Dose probe (AGENTS.md: two-pass sweep): T=0 replies to a few prompts with a short cap, plus a GSM subset, thinking as
-        configured. Broken doses then cost minutes, not hours of generating to the length cap. Writes probe_<tag>.done."""
         p = cfg["probe"]
-        if (out / f"probe_{tag}.done").exists():
+        receipt = out / f"probe_{tag}.done"
+        if receipt.exists():
             log(f"Skip probe {tag}: already complete.")
             return
         assert args.deadline - time.time() > 900, f"deadline near: probe {tag} not run"
         start = time.monotonic()
         log(f"## probe {tag}: " + ", ".join(f"{n}×{k:g}" for n, k in cell))
+        reference = p["reference"]
+        target = out / f"probe_{tag}.jsonl"
         with cell_server(cell, tag, probing=True):
-            cap = 32 if args.smoke_rows else p["max_tokens"]
-            think = ["--thinking-budget", str(32 if args.smoke_rows else p["thinking_budget"]), "--tokenizer", str(args.instruct)] if p["thinking"] else []
-            target = out / f"probe_{tag}.jsonl"
-            prompts = out / f"probe_prompts_{p['prompts']}.jsonl"  # the cheap probe: the first `prompts` items of the panel
-            prompts.write_text("".join(inputs(p["file"]).read_text().splitlines(keepends=True)[:p["prompts"]]))
-            command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", prompts, target, tag, baseline, "--temperature", "0",
-                     "--samples", "1", "--max-tokens-cap", str(cap), "--trace", str(target) + ".wire.jsonl", *think], f"gen_probe_{tag}.log")
-            gsm, n_gsm = out / f"probe_gsm8k_{tag}.jsonl", args.smoke_rows or p["gsm_n"]
-            gsm_items = out / f"probe_gsm8k_items_{n_gsm}.jsonl"  # 26_gsm8k.py asserts --n equals the frozen file's row count
-            gsm_items.write_text("".join(inputs(p["gsm_file"]).read_text().splitlines(keepends=True)[:n_gsm]))
-            # maths thinking off always; with thinking on as well when the mix is deployed thinking-on, broken if either mode fails.
-            # The thinking budget must fit Instruct-like long thinking, or it scores the unchanged model as broken (run 19: 512 did).
-            command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm, "--n", str(n_gsm),
-                     "--items", gsm_items, "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"])], f"probe_gsm8k_{tag}.log")
-            gsm_think = out / f"probe_gsm8k_think_{tag}.jsonl"
-            if p["thinking"]:
-                command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, gsm_think, "--n", str(n_gsm), "--items", gsm_items,
-                         "--max-tokens", str(32 if args.smoke_rows else p["gsm_max_tokens"]),
-                         "--thinking-budget", str(32 if args.smoke_rows else p["gsm_thinking_budget"])], f"probe_gsm8k_think_{tag}.log")
-        turns = [t for r in rows(target) for t in r["turns"]]
-        g = rows(gsm)
-        off = sum(bool(x["correct"]) for x in g) / len(g)
-        think = (lambda h: sum(bool(x["correct"]) for x in h) / len(h))(rows(gsm_think)) if p["thinking"] else None
-        summary = {"model": tag, "cell": cell, "gsm_correct": min(off, think) if think is not None else off, "gsm_off": off, "gsm_think": think,
-                   "gsm_rows": len(g),
-                   "turns": len(turns), "length_share": sum(t["finish_reason"] == "length" for t in turns) / len(turns),
-                   "blank_finals": sum(not (t["assistant"] or "").strip() for t in turns), "bad_share": bad_share(turns),
-                   "elapsed_seconds": time.monotonic() - start}
-        (out / f"probe_{tag}.done").write_text(json.dumps(summary, indent=2))
+            generate_tiny(tiny_inputs("probe"), target, tag, reference, p["thinking"], 1)
+        summary = {"model": tag, "cell": cell}
+        if tag != reference:
+            summary |= judge(target, out / f"probe_{reference}.jsonl", out / f"judge_probe_{tag}", args.deadline, out / "items.jsonl")
+        summary["elapsed_seconds"] = time.monotonic() - start
+        receipt.write_text(json.dumps(summary, indent=2))
         log(f"PROBE COMPLETE {tag}: " + json.dumps(summary))
 
     with ExitStack() as servers:
@@ -268,50 +241,56 @@ def main():
             if (out / f"{tag}.done").exists():
                 log(f"Skip {tag}: already complete.")
                 continue
-            assert not any(out.glob(f"*_{tag}.jsonl")), f"{tag} has partial outputs; archive them first"
+            assert not any((out / f"{stem}_{tag}.jsonl").exists() for stem in ("replies", "think_replies")), f"{tag} has partial outputs; archive them first"
             assert args.deadline - time.time() > 1200, f"deadline near: {tag} and later cells not run"
             start = time.monotonic()
             log(f"## {tag}: " + ", ".join(f"{n}×{k:g}" for n, k in cell))
+            scan = cell_name in cfg.get("scan_cells", [])
+            size = "scan" if scan else "full"
+            thinking = cell_name in cfg["thinking_cells"]
+            phases = [("on", [])] if scan else [("off", [])] + ([("on", [])] if thinking else [])
+            src = tiny_inputs(size)
+            for phase, _ in phases:
+                ref_path = out / f"reference_{size}_{phase}_{baseline}.jsonl"
+                if not ref_path.exists():
+                    with cell_server([(n, 0) for n, _ in cell], baseline):
+                        generate_tiny(src, ref_path, baseline, baseline, phase == "on", 1 if scan else 2)
             with cell_server(cell, tag):
                 n = args.smoke_rows or 60
                 # One serve per cell with --reasoning-parser qwen3 (vLLM needs it for thinking_token_budget; run 13 served this way). With
                 # thinking off the template already holds an empty think block, so the parser only touches replies that write their own
                 # <think> marker, which 19_gen_replies counts as marker violations. Saves one 35B model load per cell (~3-5 min).
-                thinking = cell_name in cfg["thinking_cells"] and not (args.smoke_rows and cell_name != args.cells[0])  # smoke: one thinking cell
-                scan = cell_name in cfg.get("scan_cells", [])  # dose scan: config `scan` items, one sample, thinking on only
-                phases = [("on", [])] if scan else [("off", [])] + ([("on", [])] if thinking else [])
                 budget = 32 if args.smoke_rows else cfg["thinking_budget"]  # a random model never closes its think block
                 cap = ["--max-tokens-cap", "32"] if args.smoke_rows else []  # smoke: runtime checks only (AGENTS.md: <64 tokens)
                 extra = [(g["file"], g["stem"], g["temperature"], g["samples"]) for g in cfg.get("extra_gen", [])]  # e.g. run 18's coherence items
                 for phase, _ in phases:
                     think = ["--thinking-budget", str(budget), "--tokenizer", str(args.instruct)] if phase == "on" else []
-                    gens = [(cfg["scan"]["items"], "think_replies", 0.7, 1), ("panel.jsonl", "think_panel", 0, 1)] if scan else GEN + extra if phase == "off" else THINK_GEN
+                    gens = [("items.jsonl", "think_replies", 0.7, 1)] if scan else GEN + extra if phase == "off" else THINK_GEN
                     for name, stem, temperature, samples in gens:
                         src, target = inputs(name), out / f"{stem}_{tag}.jsonl"
-                        if name == "items.jsonl" and cfg.get("items_subset") and not scan:  # calibrated tiny-character subset (ids file, # notes)
-                            ids = {l.strip() for l in (ROOT / cfg["items_subset"]).read_text().splitlines() if l.strip() and not l.startswith("#")}
-                            src = out / f"items_subset_{Path(cfg['items_subset']).stem}.jsonl"
-                            src.write_text("".join(l for l in inputs(name).read_text().splitlines(keepends=True) if json.loads(l)["id"] in ids))
+                        if name == "items.jsonl":
+                            src = tiny_inputs(size)
                         command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, baseline, "--temperature", str(temperature),
                                  "--samples", str(samples), "--workers", "96", "--trace", str(target) + ".wire.jsonl", *think, *cap], f"gen_{stem}_{tag}.log")
                         assert len(rows(target)) == len(rows(src)) * samples, target
-                    prefix = "" if phase == "off" else "think_"
-                    gsm_items = inputs("gsm8k_long60.jsonl")
-                    if scan:  # 26_gsm8k.py asserts --n equals the file's row count
-                        n = args.smoke_rows or cfg["scan"]["gsm_n"]
-                        gsm_items = out / f"scan_gsm8k_items_{n}.jsonl"
-                        gsm_items.write_text("".join(inputs("gsm8k_long60.jsonl").read_text().splitlines(keepends=True)[:n]))
-                    command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"{prefix}gsm8k_{tag}.jsonl", "--n", str(n),
-                             "--items", gsm_items, *(["--thinking-budget", str(budget)] if phase == "on" else []),
-                             *(["--max-tokens", "32"] if args.smoke_rows else [])],
-                            f"{prefix}gsm8k_{tag}.log")
+                    if not scan:
+                        prefix = "" if phase == "off" else "think_"
+                        command([sys.executable, ROOT / "scripts/eval/26_gsm8k.py", "eval", tag, out / f"{prefix}gsm8k_{tag}.jsonl", "--n", str(n),
+                                 "--items", inputs("gsm8k_long60.jsonl"), *(["--thinking-budget", str(budget)] if phase == "on" else []),
+                                 *(["--max-tokens", "32"] if args.smoke_rows else [])], f"{prefix}gsm8k_{tag}.log")
+            judgments = {}
+            for phase, _ in phases:
+                stem = "think_replies" if phase == "on" else "replies"
+                if tag != baseline:
+                    judgments[phase] = judge(out / f"{stem}_{tag}.jsonl", out / f"reference_{size}_{phase}_{baseline}.jsonl",
+                                             out / f"judge_{size}_{phase}_{tag}", args.deadline, out / "items.jsonl")
             pre = "think_" if scan else ""
             turns = [t for r in rows(out / f"{pre}replies_{tag}.jsonl") for t in r["turns"]]
             summary = {"model": tag, "cell": cell, "scan": scan, "turns": len(turns), "length_cap_hits": sum(t["finish_reason"] == "length" for t in turns),
-                       "gsm8k_rows": len(rows(out / f"{pre}gsm8k_{tag}.jsonl")), "elapsed_seconds": time.monotonic() - start}
+                       "judgments": judgments, "gsm8k_rows": 0 if scan else len(rows(out / f"gsm8k_{tag}.jsonl")), "elapsed_seconds": time.monotonic() - start}
             (out / f"{tag}.done").write_text(json.dumps(summary, indent=2))
             log(f"CELL COMPLETE {tag}: " + json.dumps(summary))
-        log("GENERATION BATCH COMPLETE. Judging and reading happen locally.")
+        log("CELL BATCH COMPLETE. Code/tools sandbox scoring and reading happen locally.")
 
 
 if __name__ == "__main__":

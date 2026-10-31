@@ -18,7 +18,7 @@ for r in rows:
         char[r["model"]].append(r["on_target"])
     elif r.get("check") and not r.get("judged"):
         cap[r["model"]].append(min(v for k, v in r["check"].items() if isinstance(v, (int, float)) and k != "choice"))
-scan_ids = {json.loads(l)["id"] for l in (ROOT / "slop/eval/run17/inputs/scan_items.jsonl").open()}
+scan_ids = {json.loads(l)["item_id"] for l in (D / "box_runs/think_replies_r19_groups_0.125.jsonl").open()}
 code = defaultdict(float)
 for l in (D / "score_v2/code_tools/judged.jsonl").open():
     r = json.loads(l)

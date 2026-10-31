@@ -28,6 +28,7 @@ from pathlib import Path
 import yaml
 
 from confighash import driver_config_sha
+from tinychar import TC, JUDGE_V2
 
 ROOT = Path(__file__).resolve().parents[2]
 CODE_DIRS = ["scripts/box", "scripts/train", "scripts/eval", "configs"]  # copied whole; small text files
@@ -120,6 +121,10 @@ class Lease:
             for d in CODE_DIRS:
                 t.add(ROOT / d, arcname=d, filter=lambda i: None if "__pycache__" in i.name else i)
             t.add(ROOT / self.cfg["inputs"], arcname=self.cfg["inputs"])
+            for path in JUDGE_V2["change"], JUDGE_V2["refs"]:
+                t.add(path, arcname=str(path.relative_to(ROOT)))
+            for name in ("src", "scripts", "data", "pyproject.toml", "uv.lock", ".local/raw/gsm8k_test.parquet"):
+                t.add(TC / name, arcname=str(TC.relative_to(ROOT) / name), filter=lambda i: None if "__pycache__" in i.name else i)
             for spec in (self.cfg.get("train") or {}).get("chats", {}).values():
                 t.add(ROOT / spec["data"], arcname=spec["data"])
             if sel := self.cfg.get("selector"):
@@ -130,6 +135,13 @@ class Lease:
 
     def push(self):
         self.remote(f"mkdir -p {REMOTE} && tar -xzf - -C {REMOTE}", input=self.code_tar(), timeout=120)
+        key_line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+        self.remote(f"umask 077; cat > {REMOTE}/.env; chmod 600 {REMOTE}/.env", input=(key_line + "\n").encode(), timeout=30)
+        self.remote(f"cd {REMOTE}/.local/tiny-character-9e33eed && "
+                    "(command -v git || (apt-get update -qq && apt-get install -y -qq git)) && "
+                    "UV_PROJECT_ENVIRONMENT=.venv uv sync --locked > /workspace/judge_setup.log 2>&1 && "
+                    "test -x .venv/bin/python && PYTHONPATH=src .venv/bin/python -c "
+                    "'import inspect_ai, llm_judge, tiny_character' >> /workspace/judge_setup.log 2>&1", timeout=1200)
         (self.out / "pushed_code.json").write_text(json.dumps({"epoch": time.time(), "files": {str(p.relative_to(ROOT)): sha(p)
             for d in CODE_DIRS for p in (ROOT / d).rglob("*") if p.is_file() and "__pycache__" not in str(p)}}, indent=1))
 

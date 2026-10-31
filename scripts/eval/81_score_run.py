@@ -39,8 +39,8 @@ from coherence_metrics import check_coherence, load_pinned_checks  # noqa: E402
 
 LEGACY_TC = ROOT / ".local/tiny-character"  # pinned old checkout matching slop/eval/run8/manifest.json
 LEGACY_MANIFEST = ROOT / "slop/eval/run8/manifest.json"
-JUDGE_V2 = {"change": ROOT / "slop/eval/judge_inputs/20261029_change_v2.md", "refs": ROOT / "slop/eval/judge_inputs/20261029_refs_guided_v4.jsonl",
-            "pin": "9e33eed"}  # refs cover the 177 judged items of tiny-char 8c01eca (runs 17, 18)
+sys.path.insert(0, str(ROOT / "scripts/box"))
+from tinychar import JUDGE_V2  # noqa: E402
 SANDBOX_IMAGE = "sha256:da2e10af3641be8925e15d99a518fbd42579de49e376cab67d566d06540bbe5e"  # run 16's code/tools sandbox image
 READ_ITEMS = ["sys_payday_loan", "task_email", "task_agent", "choice_game_heroes_rise_3_herofall_368", "da_t2_b05_s007", "w2s_comfort_fraud",
               "sys_atlas_identity", "pov_dropped_parcel_flatmate", "contested_bestiality", "if_summary_no_opinion"]  # fixed before run 17 outputs
@@ -105,7 +105,7 @@ class Run:
         records = [r for t in tags for r in rows(self.run / f"{stem}_{t}.jsonl") if r["item_id"] in keep]
         if self.noise_row:  # noise row: Instruct's other draw judged against Instruct (tiny-char names it <base>_rerun)
             records += [r | {"model": self.base + "_rerun", "sample": 1 - r["sample"]} for r in records if r["model"] == self.base]
-        # Dose scans hold fewer items and one sample (box.py SCAN_DEFAULTS); 03_judge needs every model on every item and sample, so
+        # Dose scans hold fewer items and one sample (calibrated quarter subset); 03_judge needs every model on every item and sample, so
         # judge the (item, sample) pairs every model has. With scans present Instruct is judged on the scan items, sample 0 only.
         have = {}
         for r in records:

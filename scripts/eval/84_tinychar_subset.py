@@ -14,6 +14,7 @@ tiny-character's own check (every family and item type kept, no split group) mus
 uv run python scripts/eval/84_tinychar_subset.py  ->  configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt
 -- PI/Claude (opus-5-5)
 """
+import argparse
 import json
 import statistics as st
 import subprocess
@@ -33,7 +34,9 @@ KEEP_WHOLE = {"instructions", "pov", "sycophancy"}
 # Three sizes (wassname 2026-10-31: one calibrated tiny-character evaluation for probe, scan and full): share of each kind kept by
 # informativeness, and whether the early-warning families are kept whole. The probe is the floor: one group per family and item type.
 SIZES = {"half": (0.5, True), "quarter": (0.25, False), "probe": (0.0, False)}
-SIZE = sys.argv[1] if len(sys.argv) > 1 else "half"
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--size", choices=SIZES, default="half")
+SIZE = parser.parse_args().size
 FRAC, WHOLE = SIZES[SIZE]
 OUT = ROOT / f"configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_{SIZE}.txt"
 
@@ -89,6 +92,10 @@ for t, v in need:
         continue
     cand = [g for g in groups.values() if any(str(ITEM_TYPES[t](items[i])) == v for i in g)]
     keep |= set(max(cand, key=lambda g: st.mean(informativeness(i) for i in g)))
+# The probe must also measure maths: add the four most informative non-executable GSM tasks, on sample 0 only.
+if SIZE == "probe":
+    gsm = [i for i, it in items.items() if it["family"] == "capability" and (it["checks"] or {}).get("kind") in ("gsm8k_cot", "gsm8k_json")]
+    keep |= set(sorted(gsm, key=lambda i: (-informativeness(i), i))[:4])
 tmp = OUT.with_suffix(".check")
 tmp.write_text("".join(i + "\n" for i in sorted(keep)))
 load_subset(tmp, items)  # tiny-character's own check: families, item types, groups scored together
@@ -99,6 +106,7 @@ header = [f"# Calibrated {SIZE} of tiny-character ({len(keep)} of {len(items)} i
           "# (slop/eval/run17_sweep: v2 judge on-target, code/tool checks), selected on sample 0 only.",
           "# Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;",
           f"# groups scored together kept whole; {'instructions, pov, sycophancy kept whole; ' if WHOLE else ''}{FRAC:.0%} of each kind; tiny-character floor (one per family and item type).",
+          *(["# Probe maths: four non-executable capability GSM items ranked by sample-0 informativeness (ties by id)."] if SIZE == "probe" else []),
           f"# Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character {TINYCHAR_COMMIT}.",
           "# Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes."]
 OUT.write_text("\n".join(header) + "\n" + "".join(i + "\n" for i in sorted(keep)))
