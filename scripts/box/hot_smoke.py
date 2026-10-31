@@ -3,6 +3,7 @@ import argparse
 import json
 import os
 import subprocess
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -14,7 +15,8 @@ from peft import LoraConfig, get_peft_model
 from safetensors.torch import load_file, save_file
 from transformers import AutoModelForImageTextToText
 
-from box import tiny_model
+from box import tiny_model, PROBE_DEFAULTS, SCAN_DEFAULTS
+from tinychar import rows
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -54,17 +56,17 @@ def main():
         adapters[name] = args.out / name
         m.to(torch.bfloat16).save_pretrained(adapters[name])
         del m
-    cells = {"mix": {"a": .5, "b": .25}, "negative": {"a": -1}, "zero": {"a": 0}}
+    cells = {"zero": {"a": 0}, "mix": {"a": .5, "b": .25}, "negative": {"a": -1}}
     evidence = {}
     env = dict(os.environ, MERGE_PROBE_LAYERS="0,1", VLLM_GPU_UTIL="0.2", IT=str(model), MERGE_DTYPE="float16")
     for hot in ((True, False) if args.equivalence else (True,)):
         run = args.out / ("hot" if hot else "cold")
         run.mkdir()
         (run / "manifest.json").write_text('{"input_sha256": {}}')
-        (run / "panel.jsonl").write_text(json.dumps({"id": "swap", "turns": ["Say hello."], "max_new_tokens": 8}) + "\n")
-        (run / "gsm.jsonl").write_text(json.dumps({"question": "What is 1 + 1?", "answer": "#### 2"}) + "\n")
+        shutil.copyfile(ROOT / "slop/eval/run17/inputs/items.jsonl", run / "items.jsonl")
         cfg = {"prefix": "smoke_", "manifest": "manifest.json", "doc_sets": {}, "cells": cells, "hot_swap": hot,
-               "max_model_len": 256, "probe": {"file": "panel.jsonl", "prompts": 1, "gsm_file": "gsm.jsonl", "thinking": False}}
+               "max_model_len": 4096, "probe": PROBE_DEFAULTS | {"thinking": False, "reference": "smoke_zero"},
+               "scan": SCAN_DEFAULTS, "scan_cells": ["mix"], "thinking_cells": ["mix"], "thinking_budget": 32}
         config = run / "config.yaml"
         config.write_text(yaml.safe_dump(cfg, sort_keys=False))
         command = [sys.executable, ROOT / "scripts/box/cells.py", config, "--run-dir", run, "--instruct", model,
@@ -77,9 +79,12 @@ def main():
         if hot:
             evidence["hot"]["reloads"] = {c: json.loads((run / f"merge_smoke_{c}.json").read_text())["workers"] for c in cells}
         for c in cells:
-            row = json.loads((run / f"probe_smoke_{c}.jsonl").read_text())
-            gsm = json.loads((run / f"probe_gsm8k_smoke_{c}.jsonl").read_text())
-            evidence["hot" if hot else "cold"]["outputs"][c] = {"panel": row["turns"][0]["assistant"], "gsm": gsm["reply"]}
+            output = rows(run / f"probe_smoke_{c}.jsonl")
+            evidence["hot" if hot else "cold"]["outputs"][c] = {"panel": [t["assistant"] for r in output for t in r["turns"]]}
+        if hot:
+            scan_command = command[:command.index("--cells")] + ["--cells", "mix", "--smoke-rows", "2", "--vllm", ROOT / ".local/vllm_env/bin/vllm"]
+            subprocess.run(list(map(str, scan_command)), env=env, cwd=ROOT, check=True)
+            evidence["scan"] = json.loads((run / "smoke_mix.done").read_text())
     if args.equivalence:
         evidence["tensor_diffs"] = {}
         for cell in cells:
@@ -100,14 +105,14 @@ def main():
         (args.out / "tensor_diffs.json").write_text(json.dumps(evidence["tensor_diffs"], indent=2))
         assert all(d["exact"] for d in evidence["tensor_diffs"].values()), "tensor mismatch: see tensor_diffs.json"
         assert evidence["hot"]["outputs"] == evidence["cold"]["outputs"], evidence
-    assert len({v["panel"] for v in evidence["hot"]["outputs"].values()}) > 1, "adapter did not change any output"
+    assert len({str(v["panel"]) for v in evidence["hot"]["outputs"].values()}) > 1, "adapter did not change any output"
     evidence["cuda_graphs"] = args.cuda_graphs
     evidence["fused_experts"] = args.fused_experts
     evidence["seconds"] = time.monotonic() - start
     evidence["equivalent"] = args.equivalence
     (args.out / "evidence.json").write_text(json.dumps(evidence, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps(evidence, indent=2, ensure_ascii=False), flush=True)
-    assert evidence["hot"]["seconds"] < 300, "hot smoke exceeded five minutes"
+    assert (evidence["hot"]["seconds"] if args.equivalence else evidence["seconds"]) < 300, "hot smoke exceeded five minutes"
 
 
 if __name__ == "__main__":
