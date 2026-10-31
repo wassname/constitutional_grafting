@@ -198,13 +198,13 @@ def main():
         ids = cfg.get("items_subset", SUBSETS["full"]) if size == "full" else cfg[size]["items_subset"]
         return subset(out / "items.jsonl", out / f"items_{size}.jsonl", ids, min(args.smoke_rows, 3))
 
-    def generate_tiny(src, target, tag, reference, thinking, samples, cap=None):
+    def generate_tiny(src, target, tag, reference, thinking, samples):
         if target.exists():
             assert len(rows(target)) == len(rows(src)) * samples, f"partial replies: {target}"
             return
         budget = 32 if args.smoke_rows else cfg["probe"]["thinking_budget"] if args.probe else cfg["thinking_budget"]
         think = ["--thinking-budget", str(budget), "--tokenizer", str(args.instruct)] if thinking else []
-        limit = ["--max-tokens-cap", str(32 if args.smoke_rows else cap)] if args.smoke_rows or cap else []
+        limit = ["--max-tokens-cap", "32"] if args.smoke_rows else []
         command([sys.executable, ROOT / "scripts/eval/19_gen_replies.py", src, target, tag, reference, "--temperature", "0.7",
                  "--samples", str(samples), "--workers", "96", "--trace", str(target) + ".wire.jsonl", *think, *limit], f"gen_{target.stem}.log")
         assert len(rows(target)) == len(rows(src)) * samples, target
@@ -221,10 +221,10 @@ def main():
         reference = p["reference"]
         target = out / f"probe_{tag}.jsonl"
         with cell_server(cell, tag, probing=True):
-            generate_tiny(tiny_inputs("probe"), target, tag, reference, p["thinking"], 1, p["max_tokens"])
+            generate_tiny(tiny_inputs("probe"), target, tag, reference, p["thinking"], 1)
         summary = {"model": tag, "cell": cell}
         if tag != reference:
-            summary |= judge(target, out / f"probe_{reference}.jsonl", out / f"judge_probe_{tag}", args.deadline)
+            summary |= judge(target, out / f"probe_{reference}.jsonl", out / f"judge_probe_{tag}", args.deadline, out / "items.jsonl")
         summary["elapsed_seconds"] = time.monotonic() - start
         receipt.write_text(json.dumps(summary, indent=2))
         log(f"PROBE COMPLETE {tag}: " + json.dumps(summary))
@@ -283,7 +283,7 @@ def main():
                 stem = "think_replies" if phase == "on" else "replies"
                 if tag != baseline:
                     judgments[phase] = judge(out / f"{stem}_{tag}.jsonl", out / f"reference_{size}_{phase}_{baseline}.jsonl",
-                                             out / f"judge_{size}_{phase}_{tag}", args.deadline)
+                                             out / f"judge_{size}_{phase}_{tag}", args.deadline, out / "items.jsonl")
             pre = "think_" if scan else ""
             turns = [t for r in rows(out / f"{pre}replies_{tag}.jsonl") for t in r["turns"]]
             summary = {"model": tag, "cell": cell, "scan": scan, "turns": len(turns), "length_cap_hits": sum(t["finish_reason"] == "length" for t in turns),

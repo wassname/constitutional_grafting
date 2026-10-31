@@ -137,7 +137,11 @@ class Lease:
         self.remote(f"mkdir -p {REMOTE} && tar -xzf - -C {REMOTE}", input=self.code_tar(), timeout=120)
         key_line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
         self.remote(f"umask 077; cat > {REMOTE}/.env; chmod 600 {REMOTE}/.env", input=(key_line + "\n").encode(), timeout=30)
-        self.remote(f"cd {REMOTE}/.local/tiny-character-9e33eed && uv sync --locked > /workspace/judge_setup.log 2>&1", timeout=600)
+        self.remote(f"cd {REMOTE}/.local/tiny-character-9e33eed && "
+                    "(command -v git || (apt-get update -qq && apt-get install -y -qq git)) && "
+                    "UV_PROJECT_ENVIRONMENT=.venv uv sync --locked > /workspace/judge_setup.log 2>&1 && "
+                    "test -x .venv/bin/python && PYTHONPATH=src .venv/bin/python -c "
+                    "'import inspect_ai, llm_judge, tiny_character' >> /workspace/judge_setup.log 2>&1", timeout=1200)
         (self.out / "pushed_code.json").write_text(json.dumps({"epoch": time.time(), "files": {str(p.relative_to(ROOT)): sha(p)
             for d in CODE_DIRS for p in (ROOT / d).rglob("*") if p.is_file() and "__pycache__" not in str(p)}}, indent=1))
 

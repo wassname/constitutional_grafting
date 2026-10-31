@@ -25,7 +25,7 @@ def test_search_mix_hot_batches_grid_and_cold_stays_adaptive(tmp_path, hot, bise
         cells = yaml.safe_load(Path(argv[2]).read_text())["cells"]
         calls.append(cells)
         for name, cell in cells.items():
-            receipt = {"model": name, "bad_share": float(sum(cell.values()) >= 2), "reference_bad_share": 0, "capability_retained": 1}
+            receipt = {"model": name, "bad_share": float(sum(cell.values()) >= 2), "reference_bad_share": 0, "capability_retained": 1, "gsm_retained": 1}
             (tmp_path / f"probe_t_{name}.done").write_text(json.dumps(receipt))
 
     result = box.search_mix("test", spec, cfg, tmp_path, tmp_path, {}, 0, False, command, lambda *_: None)
@@ -55,7 +55,7 @@ def test_search_mix_hot_smoke_keeps_one_dose_per_path(tmp_path):
         calls.append(cells)
         for name in cells:
             (tmp_path / f"probe_t_{name}.done").write_text(json.dumps(
-                {"model": name, "bad_share": 0, "reference_bad_share": 0, "capability_retained": 1}))
+                {"model": name, "bad_share": 0, "reference_bad_share": 0, "capability_retained": 1, "gsm_retained": 1}))
 
     box.search_mix("test", {"base": {}, "members": ["a", "b"], "thinking": False}, cfg,
                    tmp_path, tmp_path, {}, 0, True, command, lambda *_: None)
@@ -72,7 +72,7 @@ def test_search_mix_single_member_grid_or_adaptive_extension(tmp_path, hot):
         calls.append(cells)
         for name, cell in cells.items():
             (tmp_path / f"probe_t_{name}.done").write_text(json.dumps(
-                {"model": name, "bad_share": float(cell["a"] >= 8), "reference_bad_share": 0, "capability_retained": 1}))
+                {"model": name, "bad_share": float(cell["a"] >= 8), "reference_bad_share": 0, "capability_retained": 1, "gsm_retained": 1}))
 
     result = box.search_mix("test", {"base": {}, "members": ["a"], "thinking": False}, cfg,
                             tmp_path, tmp_path, {}, 0, False, command, lambda *_: None)

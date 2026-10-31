@@ -47,7 +47,7 @@ DOC_SPECTRAL_LAM = 50
 CHAT_SPECTRAL_FRAC = 0.1
 # Default dose path settings (AGENTS.md "Default path"); a run config's `probe:` / `scan:` override single keys.
 PROBE_DEFAULTS = {
-    "items_subset": SUBSETS["probe"], "max_tokens": 384, "thinking_budget": 4096,
+    "items_subset": SUBSETS["probe"], "thinking_budget": 4096,
     "min_gsm": 0.8, "max_bad_share": 0.3,  # reference-relative capability retention and coherence margin -- PI/OpenAI
     "doses": [1, 2], "mix_scales": [0.25, 0.5, 1],      # starts; extended by doubling or halving until C* is bracketed
     "min_dose": 0.125, "max_dose": 16,
@@ -360,21 +360,21 @@ def main():
             {"epoch": time.time(), "driver_config_sha256": driver_config_sha(args.config), "code_sha256": {f: sha(ROOT / f) for f in SMOKED}}, indent=2))
 
 
-def is_broken(r, ref, p, run) -> bool:
+def is_broken(r, p) -> bool:
     """Use the paired pinned-judge receipt, never absolute failure counts. -- PI/OpenAI"""
     return broken(r, p)
 
 
-def breakdown(res, ref, p, run) -> tuple:
+def breakdown(res, p) -> tuple:
     """(highest coherent dose, first broken dose above it). A low dose can look broken by noise, so only broken doses above a coherent
     one count."""
-    ok = [d for d, r in res if not is_broken(r, ref, p, run)]
-    above = [d for d, r in res if is_broken(r, ref, p, run) and ok and d > max(ok)]
+    ok = [d for d, r in res if not is_broken(r, p)]
+    above = [d for d, r in res if is_broken(r, p) and ok and d > max(ok)]
     return (max(ok) if ok else None), (min(above) if above else None)
 
 
 def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, command, event) -> dict:
-    """Default dose path for any set of adapters (AGENTS.md, wassname 2026-10-30): a cheap probe (calibrated tiny-character subset, short caps)
+    """Default dose path for any set of adapters (AGENTS.md, wassname 2026-10-30): a cheap probe (calibrated tiny-character subset, per-item caps)
     of each member alone at doubling doses, extended up or down until it brackets the coarse breakdown C*; each member is put at half
     its own C*; then the mix of those is probed the same way at doubling scales. One member: its own sweep is the mix sweep.
     Returns the member weights and the mix's (highest coherent, C*) scale; writes probe_mix_<name>.json."""
@@ -407,12 +407,12 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
             ref = receipts.pop(f"probe_{name}_ref")
         res = {d: receipts[f"probe_{label}_{d:g}"] for d in start}
         for _ in range(0 if smoke or hot else 4):
-            ok, bad = breakdown(sorted(res.items()), ref, p, run)
+            ok, bad = breakdown(sorted(res.items()), p)
             d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
             if d is None:
                 break
             res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
-        ok, bad = breakdown(sorted(res.items()), ref, p, run)
+        ok, bad = breakdown(sorted(res.items()), p)
         if p["bisect"] and not smoke and ok and bad:  # one geometric midpoint: C* known within 1.4x instead of 2x, for one probe
             d = float(f"{(ok * bad) ** 0.5:.3g}")
             res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
@@ -431,12 +431,12 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
         alone, weights = {}, {}
         for m in members:
             r = bracket(f"{name}_{m}", lambda d, m=m: {**base, m: d}, doses)
-            ok, bad = breakdown(r, ref, p, run)
+            ok, bad = breakdown(r, p)
             weights[m] = float(f"{(bad if bad else ok if ok else min(d for d, _ in r)) / 2:.3g}")  # half way to its own C*
             alone[m] = {"probed": {f"{d:g}": x for d, x in r}, "coherent_to": ok, "breakdown": bad}
         res = bracket(f"{name}_mix", lambda s: {**base, **{m: s * w for m, w in weights.items()}}, p["mix_scales"][:1] if smoke else p["mix_scales"])
         out = {"weights": weights, "alone": alone}
-    ok, bad = breakdown(res, ref, p, run)
+    ok, bad = breakdown(res, p)
     out |= {"reference": ref, "mix": {f"{d:g}": r for d, r in res}, "coherent_to": ok, "breakdown": bad}
     (run / f"probe_mix_{name}.json").write_text(json.dumps(out, indent=2))
     event(f"probe_mix_{name}", {k: out[k] for k in ("weights", "coherent_to", "breakdown")} | {"reference": ref["model"]})

@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import time
+import warnings
 
 ROOT = Path(__file__).resolve().parents[2]
 TC = ROOT / ".local/tiny-character-9e33eed"
@@ -36,7 +37,7 @@ def comparison(judged, replies, model, reference):
     """Reference-failed tasks and tight generation caps cannot establish damage. -- PI/OpenAI"""
     raw = {(r["model"], r["item_id"], r["sample"]): r for r in replies}
     by = {(r["model"], r["item_id"], r["sample"]): r for r in judged}
-    damage, ref_damage, passed, retained = [], [], [], []
+    damage, ref_damage, passed, retained, gsm_passed, gsm_retained = [], [], [], [], [], []
     for (m, i, s), r in by.items():
         if m != model:
             continue
@@ -47,7 +48,8 @@ def comparison(judged, replies, model, reference):
                 turn, opposite = row["turns"][n], raw[(other["model"], i, s)]["turns"][n]
                 long_cut = checks["truncated"] and opposite["finish_reason"] != "length" and turn["n_tokens"] >= 1.5 * opposite["n_tokens"]
                 coherent = (rec.get("jev") or [{}] * len(rec["turn_checks"]))[n].get("coherent", 1)
-                health.append(max(1 - coherent, float(long_cut), *(checks.get(k, 0) for k in ("looped", "lang_switch", "empty", "role_confusion"))))
+                health.append(float(1 - coherent >= 0.5 or long_cut or any(checks.get(k, 0) for k in ("looped", "lang_switch", "empty", "role_confusion"))))
+            # health[0] is the candidate's bad-turn indicator; health[1] is the reference's.
             damage.append(health[0])
             ref_damage.append(health[1])
         if not r["judged"] and r.get("check") and b.get("check"):
@@ -55,28 +57,44 @@ def comparison(judged, replies, model, reference):
             if b["check"][key] == 1:
                 passed.append(i)
                 retained.append(float(r["check"][key]))
+                if i.startswith("gsm_"):  # GSM item ids in the frozen tiny-character inputs.
+                    gsm_passed.append(i)
+                    gsm_retained.append(float(r["check"][key]))
     return {"bad_share": sum(damage) / len(damage), "reference_bad_share": sum(ref_damage) / len(ref_damage),
-            "capability_reference_passed": passed, "capability_retained": sum(retained) / len(retained) if retained else None}
+            "capability_reference_passed": passed, "capability_retained": sum(retained) / len(retained) if retained else None,
+            "gsm_reference_passed": gsm_passed, "gsm_retained": sum(gsm_retained) / len(gsm_retained) if gsm_retained else None}
 
 
 def broken(summary, settings):
-    retained = summary["capability_retained"]
-    return ((retained is not None and retained < settings["min_gsm"])
+    return (any(summary[k] is not None and summary[k] < settings["min_gsm"] for k in ("capability_retained", "gsm_retained"))
             or summary["bad_share"] - summary["reference_bad_share"] > settings["max_bad_share"])
 
 
-def judge(candidate, reference, out, deadline):
+def judge_items(source):
+    """Keep pinned check metadata, but never judge different system/user text. -- PI/OpenAI"""
+    pinned = {r["id"]: r for r in rows(TC / "data/items.jsonl")}
+    items = {}
+    for frozen in rows(source):
+        item = pinned.get(frozen["id"], frozen)
+        if any(item.get(k) != frozen.get(k) for k in ("system", "turns")):
+            warnings.warn(f"judge uses frozen system/turns for {frozen['id']}: text differs from pin", stacklevel=2)
+            item = item | {k: frozen[k] for k in ("system", "turns")}
+        items[frozen["id"]] = item
+    return items
+
+
+def judge(candidate, reference, out, deadline, items_source):
     """Code/tools remain generated but are scored only in the local Docker sandbox. -- PI/OpenAI"""
     out = Path(out)
     if (out / "summary.json").exists():
         return json.loads((out / "summary.json").read_text())
     out.mkdir(parents=True, exist_ok=True)
-    items = {r["id"]: r for r in rows(TC / "data/items.jsonl")}
+    items = judge_items(items_source)
     mine, theirs = rows(candidate), rows(reference)
     model, base = mine[0]["model"], theirs[0]["model"]
     common = {(r["item_id"], r["sample"]) for r in mine} & {(r["item_id"], r["sample"]) for r in theirs}
     records = [r | {"base_model": base} for r in mine + theirs if (r["item_id"], r["sample"]) in common and items[r["item_id"]]["family"] not in ("code", "tools")
-               and (items[r["item_id"]]["checks"] or {}).get("kind") not in ("code", "unittest", "gsm8k_code", "tool_call")]
+               and (items[r["item_id"]]["checks"] or {}).get("kind") not in ("code", "unittest", "gsm8k_code", "tool_call", "fs_plan", "agent_turn")]
     ids = sorted({r["item_id"] for r in records})
     refs = {r["item_id"]: r for r in rows(JUDGE_V2["refs"])}
     for i in ids:
