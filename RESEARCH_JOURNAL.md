@@ -3987,3 +3987,17 @@ Evidence (`docs/results/20261031_run20.md`): full evaluations, thinking on, cali
 Interpretation: not supported. The stronger penalty mostly shrank the update (the dose curve shifted right), as the same-data spectra predicted (journal 2026-10-30); at matched character the trade-off is the same and the usable range did not widen. Runs 19, 19o and 20 all land at about +0.9 with maths −4 and code −2 or so at the peak; dose, adapter splitting and the penalty have not moved that frontier. Likely the limit now is the data (e.g. the deployed-name identity failure is in every run). Two changes at once: neither can be credited separately.
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-31 -- Run 21: hot vLLM serving and on-box Jev judging work on the real 35B box
+
+Purpose: first real-box check of the two new driver paths before any training run depends on them, on run 20's chat adapter (no training). Config `configs/runs/run21.yaml`; evidence `slop/eval/run21/lease/box_runs/`. Vast 58511074, 1.5 h, ~$2.9.
+
+Evidence:
+- Hot serving (`vllm_hot.log`): model load 172 s once, then "Reloading and processing weights took" 6.4 s for the first dose and 3.8-4.0 s for each later one (merge-and-restart: ~5.5 min). Box had 244 GB RAM.
+- Probe (calibrated 27-item tiny-character subset, Jev on the box, reference = members at 0): coherent to ×1, broken at ×1.41 by the maths rule (gsm retained 3/4 = 0.75; bad turns 1/32), ×2 bad turns 0.25 and capability 0.4, ×4-16 all turns bad. The old maths+regex probe put run 20's breakdown at ×2: the new probe is stricter.
+- Judge cost on the box: probe ~$0.03 per dose, quarter scan ~$0.08, full evaluation ~$0.27 per mode (`judge_*/cost.json`).
+- Agreement with local judging: full ×0.705, thinking on, judged on the box: +0.81 [+0.72, +0.90], maths 57/60. Run 20 judged locally gave ×0.5 +0.72 and ×1 +0.92, so ×0.705 fits between them. Quarter scans: ×0.35 +0.68, ×0.71 +0.94, ×1.13 +1.09 (52 judged items, one sample).
+
+Interpretation: both paths are fit for use; hot serving is now the code default (AGENTS.md updated). Open: the junk-prefix blind spot of the probe's coherence check ("nheim:"), and the probe's breakdown is stricter than the old one, so pass-2 doses will sit lower than in runs 19-20.
+
+-- PI/Claude (opus-5-5)

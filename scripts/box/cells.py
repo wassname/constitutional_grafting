@@ -73,7 +73,7 @@ def main():
             assert sha(out / name) == digest, f"frozen input changed: {name}"
     adapters = dict(a.split("=", 1) for a in args.adapter)
     env = dict(os.environ, IT=str(args.instruct), MERGE_DTYPE="float16")
-    hot_swap = cfg.get("hot_swap", False)
+    hot_swap = cfg.get("hot_swap", True)
     if hot_swap or args.weight_snapshots:
         env.update(VLLM_SERVER_DEV_MODE="1", PYTHONPATH=str(ROOT))
     if hot_swap:

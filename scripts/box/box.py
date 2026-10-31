@@ -391,7 +391,7 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
     def bracket(label, cell_at, start):
         """Hot sweeps batch the full grid; cold sweeps adaptively extend the starting doses. -- PI/OpenAI"""
         nonlocal ref
-        hot = cfg.get("hot_swap", False)
+        hot = cfg.get("hot_swap", True)
         if hot and not smoke:
             grid = {p["min_dose"], p["max_dose"], *start}
             d = p["min_dose"] * 2
@@ -419,7 +419,7 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
         return sorted(res.items())
 
     # The unchanged model (members at 0): every dose is judged against it, so a probe setting it cannot meet is not counted as damage.
-    ref = None if cfg.get("hot_swap", False) else probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
+    ref = None if cfg.get("hot_swap", True) else probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
     # smoke: every code path once (two members, so the mix stage runs; one dose; one scale) - the full sweep took 30 of 44 minutes
     doses = p["doses"][:1] if smoke else p["doses"]
     members = spec["members"][:2] if smoke else spec["members"]
