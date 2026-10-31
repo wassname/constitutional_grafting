@@ -3956,3 +3956,24 @@ Addendum, same day: does the overlap add up when stacked? `scripts/scratch/20261
 Most reinforced modules: chat groups, 5 of the top 6 are `mlp.shared_expert.down_proj` (layers 38, 14, 37, 18, 26; +0.26 to +0.32), the projection that writes into the residual stream; documents, mostly the first and last layers (39 shared_expert.up_proj +0.52, 2 linear_attn.in_proj_z +0.45, 39 v_proj +0.44).
 
 Interpretation: the overlap does add up, more for the chat groups than the documents: stacking the four chat groups makes the typical module's top direction 1.2× the largest single one (up to 1.7×), i.e. part of each group's top direction points the same way. This is consistent with wassname's shared-component hypothesis for the chat groups and with the stack breaking earlier than a single adapter (not shown causal). Next: ablate the shared top direction in the reinforced modules (or in activation space) and re-probe the stack; compare the all-data adapter's top directions to these.
+
+## 2026-10-31 -- Run 19o: keeping the chat groups' shared direction once does not improve the trade-off
+
+Question (wassname's shared-component hypothesis, 2026-10-30): the four run-19 chat group adapters reinforce one top direction when stacked (journal 2026-10-30 addendum: the stacked top direction is 1.2× the largest single, mostly `mlp.shared_expert.down_proj`). Keep it once: dilemmas whole, the stacked top direction projected out of help, texts and identity in every dense module (`scripts/scratch/20261030_orth_docs/03_ablate_shared.py`; 0.7-2.0% of each ablated update removed, median; routed experts untouched). Then the default dose path on the box (vast 58470275, 3.6 h, ~$7). Config `configs/runs/run19o.yaml`.
+
+Evidence. Single-adapter breakdowns (old probe): dilemmas ×2, help ×2, texts ×2.83, identity ×1.41 (run 19 unablated: ×2, ×2, ×4, ×2); mix weights 1 / 1 / 1.42 / 0.71, mix breakdown ×1. Full evaluations (thinking on, calibrated half, 2 samples, v2 judge vs Instruct; `slop/eval/run19o_full/score_v2/metrics.md`), with run 19's on the same protocol:
+
+| model | character [90%] | maths /60 | code /20 | agent score / pass |
+|---|---|---|---|---|
+| Instruct | 0 | 56 | 16 | 0.72 / 0.54 |
+| run 19 group mix ×0.25 | +0.90 [+0.80, +0.99] | 56 | 15 | 0.80 / 0.54 |
+| run 19 all-data ×0.5 | +0.81 [+0.72, +0.90] | 56 | 16 | 0.80 / 0.54 |
+| run 19 all-data ×1 | +0.94 [+0.85, +1.02] | 52 | 13 | 0.72 / 0.42 |
+| 19o ×0.25 (shared kept once) | +0.88 [+0.77, +0.98] | 56 | 17 | 0.79 / 0.50 |
+| 19o ×0.5 | +0.92 [+0.80, +1.04] | 55 | 14 | 0.81 / 0.62 |
+
+Thinking off: 19o +0.74 / +0.69 (run 19 group mix ×0.25 +0.74, all-data ×0.5 +0.81, ×1 +0.89).
+
+Interpretation: no measurable gain. At matched character (~+0.9) all four recipes keep maths within 1-4 items of Instruct and code within ±2; differences are inside the intervals. The scans showed a gentler fall at high dose (×0.8: +0.30 vs −0.95), but the ablated mix also puts less dose on texts and identity, so that is not a clean win. Removing the top shared direction (one per module, dense modules only) is a weak intervention (~1-2% of each update); a stronger version (several directions, routed experts) is untested. Lesson, per wassname's plan: simplify to one adapter per phase; run 20 is the one-chat-adapter version.
+
+-- PI/Claude (opus-5-5)
