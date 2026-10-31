@@ -5,7 +5,7 @@
 # puts the breakdown where run 20's old probe did (x2). -- PI/Claude (opus-5-5), within wassname's $50 for 2026-10-31.
 name: run21
 prefix: r21_
-budget_usd: 8
+budget_usd: 9    # 3.5 h x up to $1.92 + $1.5 reserve = $8.2 worst case
 max_hours: 3.5
 max_hourly_rate: 1.92
 reserve_usd: {traffic: 0.5, judge: 1}
