@@ -242,6 +242,9 @@ class Lease:
                 "print(json.dumps(m))")
         manifest = json.loads(self.remote(f"cd {REMOTE} && /workspace/axolotl-venv/bin/python -c " + shlex.quote(cast), timeout=1800,
                                           capture_output=True, text=True).stdout.splitlines()[-1])
+        if not manifest:  # nothing trained on this lease (e.g. run 19o: uploaded adapters only)
+            print("RETRIEVED 0 adapter files (none trained)", flush=True)
+            return
         size = int(self.remote(f"du -sb {REMOTE}/outputs/{self.name}_bf16 | cut -f1", timeout=600, capture_output=True, text=True).stdout.split()[-1])
         free = shutil.disk_usage(self.adapter_dir.resolve()).free
         assert free > 1.2 * size, f"local disk: {free / 1e9:.0f} GB free at {self.adapter_dir.resolve()}, retrieval needs ~{size / 1e9:.0f} GB"
