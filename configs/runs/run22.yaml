@@ -8,8 +8,10 @@ max_hours: 2.2
 max_hourly_rate: 1.92
 reserve_usd: {traffic: 0.5, judge: 1}
 offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
-              disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 259200},
-              datacenter: {eq: true}, allocated_storage: 500, order: [[dph_total, asc]], limit: 100}
+              disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, inet_up: {gte: 500},
+              duration: {gte: 86400}, host_id: {neq: 120840}, allocated_storage: 500, order: [[dph_total, asc]], limit: 100}
+# Not datacenter-only and not 3-day duration: with those, the only matching offer was host 120840 (Texas), which failed three
+# times on 2026-10-31; verified kept because the box receives an API key. -- PI/Claude
 gpu_name: RTX PRO 6000 S
 image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
 
