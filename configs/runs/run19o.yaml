@@ -39,7 +39,7 @@ manifest: run17_manifest.json
 items_subset: configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt
 
 mixes:
-  groups_abl: {members: [dilemmas, help_abl, texts_abl, identity_abl], base: {docs: 1}, lock: false, ablate: false, thinking: true}
+  groups_abl: {members: [dilemmas, help_abl, texts_abl, identity_abl], base: {docs: 1}, lock: false, ablate: false, thinking: true, full: [0.25, 0.5]}
 
 cells: {}
 thinking_cells: []

@@ -345,7 +345,7 @@ def main():
     chosen = {c: v for i in range(max(map(len, tiers), default=0)) for t in tiers if i < len(t) for c, v in t[i].items()}
     cfg["cells"] = chosen | dict(cfg["cells"])
     cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
-    cfg["scan_cells"] = list(chosen) + list(cfg.get("scan_cells", []))  # pass 2 as dose scans (plus any listed); full evaluations: the other `cells`
+    cfg["scan_cells"] = [c for c in chosen if not c.startswith("full_")] + list(cfg.get("scan_cells", []))  # pass 2 as dose scans (plus any listed); full evaluations: the other `cells`
     cells_config = run / "cfg_cells.yaml"
     cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
     event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
@@ -467,6 +467,11 @@ def choose_cells(name, spec, found, cfg, smoke) -> list[dict]:
     tiers = [{f"{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}}} for s in order]
     if spec["ablate"] and len(w) > 1:
         tiers.append({f"{name}_{order[0]:g}_minus_{x}": {**base, **{m: order[0] * k for m, k in w.items() if m != x}} for x in w})
+    # Optional full evaluations (calibrated subset, not scans) at fractions of C*, run last: spec `full: [0.25]` (run 19: the group mix
+    # peaked at 0.25 x C*), so a run ends with a reportable result without a manual restart.
+    for f in spec.get("full", []):
+        s = float(f"{c * f:.3g}")
+        tiers.append({f"full_{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}}})
     return tiers
 
 if __name__ == "__main__":
