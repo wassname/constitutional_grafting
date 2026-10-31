@@ -7,14 +7,19 @@
     "identity": 0.25
   },
   "dense_modules": 250,
-  "energy_removed_median": {
+  "reference_kept_whole": "dilemmas",
+  "share_along_u_median": {
     "dilemmas": 0.028850468806922436,
     "help": 0.007167342584580183,
     "texts": 0.020289916545152664,
     "identity": 0.008631359320133924
   },
+  "energy_removed_median": {
+    "help": 0.007167342584580183,
+    "texts": 0.020289916545152664,
+    "identity": 0.008631359320133924
+  },
   "energy_removed_max": {
-    "dilemmas": 0.3418637812137604,
     "help": 0.08758175373077393,
     "texts": 0.12488724291324615,
     "identity": 0.26589399576187134

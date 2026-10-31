@@ -2,8 +2,10 @@
 the stack again").
 
 Per dense LoRA module: u = top left singular vector (output space) of the stacked update sum_i c_i dW_i at the doses the stack is used
-at; every member's B is projected off u: B_i <- B_i - u (u^T B_i). Each member keeps its own content outside u; the direction that
-the members reinforce together is gone. Routed-expert LoRAs are copied unchanged (their layout differs; the overlap measure,
+at. One member, the reference (the one with the most of its update along u, by median over modules), keeps u: it carries the
+shared part once (wassname: "obviously there is one you don't ablate as it has the common components"). Every other member's B is
+projected off u: B_i <- B_i - u (u^T B_i), keeping its own content outside u. So the stack holds the shared direction once, not
+four times. Routed-expert LoRAs are copied unchanged (their layout differs; the overlap measure,
 02_sum_alignment.py, covered dense modules only). Writes bf16 adapters plus ablation.json (energy removed per member and module).
 -- PI/Claude (opus-5-5)
 
@@ -33,7 +35,8 @@ for m, (path, _) in members.items():
         tensors[m] = {k: f.get_tensor(k) for k in f.keys()}
 mods = sorted({k.removesuffix(".lora_A.weight") for k in tensors[next(iter(members))] if k.endswith("lora_A.weight") and ".experts." not in k})
 
-removed = {m: [] for m in members}
+along = {m: [] for m in members}
+us = {}
 for mod in mods:
     B = {m: tensors[m][mod + ".lora_B.weight"].float() for m in members}
     A = {m: tensors[m][mod + ".lora_A.weight"].float() for m in members}
@@ -41,16 +44,25 @@ for mod in mods:
     As = torch.cat([A[m] for m in members], 0)
     qb, rb = torch.linalg.qr(Bs)
     U, _, _ = torch.linalg.svd(rb @ torch.linalg.qr(As.T)[1].T)
-    u = qb @ U[:, 0]  # top output direction of the stacked update
+    us[mod] = qb @ U[:, 0]  # top output direction of the stacked update
     for m in members:
         dW = B[m] @ A[m]
-        removed[m].append(((u @ dW).norm() ** 2 / dW.norm() ** 2).item())
-        tensors[m][mod + ".lora_B.weight"] = (B[m] - torch.outer(u, u @ B[m])).to(torch.bfloat16)
+        along[m].append(((us[mod] @ dW).norm() ** 2 / dW.norm() ** 2).item())
+reference = max(members, key=lambda m: st.median(along[m]))
+removed = {m: [] for m in members if m != reference}
+for mod in mods:
+    u = us[mod]
+    for m in removed:
+        B = tensors[m][mod + ".lora_B.weight"].float()
+        removed[m].append(((u @ (B @ tensors[m][mod + ".lora_A.weight"].float())).norm() ** 2
+                           / (B @ tensors[m][mod + ".lora_A.weight"].float()).norm() ** 2).item())
+        tensors[m][mod + ".lora_B.weight"] = (B - torch.outer(u, u @ B)).to(torch.bfloat16)
 
-report = {"set": name, "doses": {m: c for m, (_, c) in members.items()}, "dense_modules": len(mods),
+report = {"set": name, "doses": {m: c for m, (_, c) in members.items()}, "dense_modules": len(mods), "reference_kept_whole": reference,
+          "share_along_u_median": {m: st.median(v) for m, v in along.items()},
           "energy_removed_median": {m: st.median(v) for m, v in removed.items()}, "energy_removed_max": {m: max(v) for m, v in removed.items()}}
 for m, (path, _) in members.items():
-    d = out / f"{m}_shared_ablated"
+    d = out / (f"r19o_{m}_kept_bf16" if m == reference else f"r19o_{m}_shared_ablated_bf16")
     d.mkdir(parents=True, exist_ok=True)
     save_file({k: (v.to(torch.bfloat16) if v.dtype == torch.float32 else v) for k, v in tensors[m].items()}, d / "adapter_model.safetensors")
     shutil.copyfile(path / "adapter_config.json", d / "adapter_config.json")

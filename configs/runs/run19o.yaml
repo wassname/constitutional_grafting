@@ -1,7 +1,8 @@
 # Run 19o: does removing the chat groups' shared top direction let the stack take more dose? (wassname 2026-10-30, shared-component
-# hypothesis; analysis scripts/scratch/20261030_orth_docs/, journal 2026-10-30.) The four run-19 chat group adapters with each dense
-# module's top output direction of their stacked sum (at group mix x0.25) projected out (03_ablate_shared.py); routed experts
-# unchanged. Same documents, base and protocol as run 19, so run 19's group-mix scans are the comparison: character at matched
+# hypothesis; analysis scripts/scratch/20261030_orth_docs/, journal 2026-10-30.) Each dense module's top output direction of the four
+# run-19 chat groups' stacked sum (at group mix x0.25) is kept once: dilemmas (the most along it) whole, and projected out of help,
+# texts and identity (03_ablate_shared.py; wassname: "there is one you don't ablate as it has the common components"); routed
+# experts unchanged. Same documents, base and protocol as run 19, so run 19's group-mix scans are the comparison: character at matched
 # capability. Default dose path (each ablated adapter alone, half its breakdown, the mix), with the bisection step, then scans.
 # -- PI/Claude (opus-5-5)
 name: run19o
@@ -24,7 +25,7 @@ adapters:
   stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
   const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
   other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
-  dilemmas_abl: /workspace/2026/constitutional_grafting/.local/adapters/cg_run19o_adapters/r19o_dilemmas_shared_ablated_bf16
+  dilemmas: /workspace/2026/constitutional_grafting/.local/adapters/cg_run19o_adapters/r19o_dilemmas_kept_bf16   # reference, kept whole
   help_abl: /workspace/2026/constitutional_grafting/.local/adapters/cg_run19o_adapters/r19o_help_shared_ablated_bf16
   texts_abl: /workspace/2026/constitutional_grafting/.local/adapters/cg_run19o_adapters/r19o_texts_shared_ablated_bf16
   identity_abl: /workspace/2026/constitutional_grafting/.local/adapters/cg_run19o_adapters/r19o_identity_shared_ablated_bf16
@@ -38,7 +39,7 @@ manifest: run17_manifest.json
 items_subset: configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt
 
 mixes:
-  groups_abl: {members: [dilemmas_abl, help_abl, texts_abl, identity_abl], base: {docs: 1}, lock: false, ablate: false, thinking: true}
+  groups_abl: {members: [dilemmas, help_abl, texts_abl, identity_abl], base: {docs: 1}, lock: false, ablate: false, thinking: true}
 
 cells: {}
 thinking_cells: []
