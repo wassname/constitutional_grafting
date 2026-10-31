@@ -172,6 +172,10 @@ box-smoke config="configs/runs/run17.yaml":
     .local/axolotl_env/bin/python scripts/box/box.py {{config}} --check
     AXOLOTL=.local/axolotl_env/bin/axolotl VLLM=.local/vllm_env/bin/vllm VLLM_GPU_UTIL=0.3 .local/axolotl_env/bin/python scripts/box/box.py {{config}} --smoke
 
+# Fast hot-swap smoke on tiny Qwen3.5-MoE; queue with `pueue add -o 10 just box-hot-smoke`. -- PI/OpenAI
+box-hot-smoke out=".local/hot_smoke":
+    .local/axolotl_env/bin/python scripts/box/hot_smoke.py --out {{out}}
+
 # Rent, run the box driver, follow, retrieve and destroy (scripts/box/rent.py; also attach | push | snapshot | destroy). -- PI/Claude
 box-rent config="configs/runs/run17.yaml" action="run":
     uv run --locked python scripts/box/rent.py {{config}} {{action}}

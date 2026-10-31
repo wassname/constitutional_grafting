@@ -28,7 +28,7 @@ import yaml
 from confighash import driver_config_sha
 
 ROOT = Path(__file__).resolve().parents[2]
-SMOKED = ["scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
+SMOKED = ["scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
           "scripts/train/18_project_char_vs_cap.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml"]
 # Spectral penalty per stage: best guess on priors, used without a separate test (wassname 2026-10-30). Audit trail:
 # - Documents, fixed lambda 50. Run 7e (journal "Run 7e" and "High-dose spectral test"): lambda 5 x0.75 gave +0.50 character / 35 of 44
@@ -406,9 +406,24 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
         return {c: json.loads((run / f"probe_{cfg['prefix']}{c}.done").read_text()) for c in cells}
 
     def bracket(label, cell_at, start):
-        """Doubling sweep from `start`, extended until a coherent dose has a broken one above it (or the limits are hit)."""
-        res = dict((d, r) for d, r in zip(start, probe({f"probe_{label}_{d:g}": cell_at(d) for d in start}).values()))
-        for _ in range(0 if smoke else 4):
+        """Hot sweeps batch the full grid; cold sweeps adaptively extend the starting doses. -- PI/OpenAI"""
+        nonlocal ref
+        hot = cfg.get("hot_swap", False)
+        if hot and not smoke:
+            grid = {p["min_dose"], p["max_dose"], *start}
+            d = p["min_dose"] * 2
+            while d < p["max_dose"]:
+                grid.add(d)
+                d *= 2
+            start = sorted(grid)
+        cells = {f"probe_{label}_{d:g}": cell_at(d) for d in start}
+        if ref is None:
+            cells = {f"probe_{name}_ref": {**base, spec["members"][0]: 0}, **cells}
+        receipts = probe(cells)
+        if ref is None:
+            ref = receipts.pop(f"probe_{name}_ref")
+        res = {d: receipts[f"probe_{label}_{d:g}"] for d in start}
+        for _ in range(0 if smoke or hot else 4):
             ok, bad = breakdown(sorted(res.items()), ref, p, run)
             d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
             if d is None:
@@ -421,7 +436,7 @@ def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, comman
         return sorted(res.items())
 
     # The unchanged model (members at 0): every dose is judged against it, so a probe setting it cannot meet is not counted as damage.
-    ref = probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
+    ref = None if cfg.get("hot_swap", False) else probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
     # smoke: every code path once (two members, so the mix stage runs; one dose; one scale) - the full sweep took 30 of 44 minutes
     doses = p["doses"][:1] if smoke else p["doses"]
     members = spec["members"][:2] if smoke else spec["members"]

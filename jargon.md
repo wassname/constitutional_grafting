@@ -31,6 +31,7 @@ Use these names in code, recipes and explanations. Name the object and operation
 | Chat adapter | LoRA update learned by chat SFT on that specified chat-training checkpoint. | Project recipe |
 | Contrastive weight-steering vector | Difference between the updates from positive- and negative-behaviour fine-tunes: Δpositive − Δnegative. Unlike a plain graft, it is defined by this contrast. | Weight steering §3 |
 | Adapter merging | Apply adapter updates to model weights. Distinguish it from concatenating or sampling datasets. | Project implementation |
+| Hot swap; layerwise weight reload | Replace served weights in place between cells, preserving kernel tensor storage and resetting the prefix cache. A serving optimization, not a new training or graft method. | vLLM 0.31 `model_executor/model_loader/reload`; project `scripts/box/hot_worker.py`, requested by wassname 2026-10-30 |
 | Healing; capability recovery | Additional training intended to recover measured capability/coherence damage after a weight edit. It is not automatically character SFT and does not by itself prove character was retained. | Project locked choices in AGENTS.md; not a Grafting stage |
 
 ### Graft shorthand
