@@ -39,7 +39,8 @@ def tiny_config():
 
 
 @pytest.mark.parametrize("fused", [False, True])
-def test_stream_matches_peft_math_and_pristine_reset(tmp_path, monkeypatch, fused):
+@pytest.mark.parametrize("stored_dtype", [torch.bfloat16, torch.float16])
+def test_stream_matches_peft_math_and_pristine_reset(tmp_path, monkeypatch, fused, stored_dtype):
     # CPU unit test only; real 02_merge.py GPU and packed-weight equivalence live in hot_smoke.py.
     monkeypatch.setattr(torch.Tensor, "pin_memory", lambda self: self)
     torch.manual_seed(3)
@@ -61,9 +62,10 @@ def test_stream_matches_peft_math_and_pristine_reset(tmp_path, monkeypatch, fuse
                 if "lora_" in n:
                     w.normal_(std=.15)
         adapter = tmp_path / f"adapter{len(adapters)}"
-        p.save_pretrained(adapter)
+        p.to(stored_dtype).save_pretrained(adapter)
         adapters.append(str(adapter))
     stream = hot.HotWeights(base, adapters)
+    assert all(w.dtype == stored_dtype for a in stream.adapters.values() for pair in a.factors.values() for w in pair.values())
     initial = {n: w.clone() for n, w in stream.pristine.items()}
     def no_reread(*args, **kwargs):
         raise AssertionError("per-cell checkpoint reread")
@@ -147,3 +149,31 @@ def test_hot_preflight_error_aborts_without_server_or_cold_fallback(tmp_path):
     assert "decoder-layer adapters only" in result.stderr
     assert not (tmp_path / "merged_model").exists()
     assert not list(tmp_path.glob("vllm*"))
+
+
+@pytest.mark.parametrize("drift_at_init", [False, True])
+def test_adapter_targets_must_map_and_apply_each_nonzero_cell(tmp_path, monkeypatch, drift_at_init):
+    monkeypatch.setattr(torch.Tensor, "pin_memory", lambda self: self)
+    base, adapter = tmp_path / "base", tmp_path / "adapter"
+    base.mkdir()
+    (base / "config.json").write_text('{}')
+    target = "model.layers.0.self_attn.q_proj"
+    other = target.replace("q_proj", "v_proj")
+    save_file({n + ".weight": torch.ones(4, 4).half() for n in (target, other)}, base / "model.safetensors")
+    LoraConfig(r=2, lora_alpha=4, target_modules=["q_proj", "v_proj"]).save_pretrained(adapter)
+    factor_target = target.replace("q_proj", "unknown_proj") if drift_at_init else target
+    save_file({f"base_model.model.{n}.lora_{side}.weight": torch.ones(2, 4).half() if side == "A"
+               else torch.ones(4, 2).half() for n in (factor_target, other) for side in ("A", "B")},
+              adapter / "adapter_model.safetensors")
+    path = str(adapter)
+    if drift_at_init:
+        with pytest.raises(AssertionError, match="targets missing from pristine.*unknown_proj"):
+            hot.HotWeights(base, [path])
+        return
+    stream = hot.HotWeights(base, [path])
+    assert dict(stream.weights([(path, 0), (path, 1), (path, -.25)], "cpu"))
+    original_delta = stream.adapters[path].delta
+    monkeypatch.setattr(stream.adapters[path], "delta", lambda n, *args: None if n == target + ".weight" else original_delta(n, *args))
+    assert dict(stream.weights([(path, 0)], "cpu"))
+    with pytest.raises(AssertionError, match="targets not applied this cell.*q_proj"):
+        dict(stream.weights([(path, 1)], "cpu"))

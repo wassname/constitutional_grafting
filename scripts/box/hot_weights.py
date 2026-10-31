@@ -52,7 +52,7 @@ class Adapter:
                 else:
                     name = name.replace(".base_layer", "") + ".weight"
                 layer_prefix(name)
-                self.factors.setdefault(name, {})[side[0]] = f.get_tensor(key).float().pin_memory()
+                self.factors.setdefault(name, {})[side[0]] = f.get_tensor(key).pin_memory()
         assert self.factors, "adapter matched no weights"
         self.num_experts = num_experts
         self.scaling = {}
@@ -64,12 +64,16 @@ class Adapter:
             assert factors["A"].shape[0] == rank * (num_experts if ".mlp.experts." in name else 1), name
             self.scaling[name] = alpha / (math.sqrt(rank) if cfg.get("use_rslora") else rank)
 
+    @staticmethod
+    def target(name):
+        expert = re.match(r"(.+\.mlp\.experts)\.(\d+)\.(gate|up|down)_proj\.weight$", name)
+        return expert[1] + (".down_proj" if expert[3] == "down" else ".gate_up_proj") if expert else name
+
     def delta(self, name, dose, device):
         expert = re.match(r"(.+\.mlp\.experts)\.(\d+)\.(gate|up|down)_proj\.weight$", name)
-        target = name
+        target = self.target(name)
         if expert:
-            module, index, projection = expert.groups()
-            target = module + (".down_proj" if projection == "down" else ".gate_up_proj")
+            _, index, projection = expert.groups()
         if target not in self.factors:
             return None
         factors = self.factors[target]
@@ -82,7 +86,8 @@ class Adapter:
                 A, B = A[int(index):int(index) + 1], B[:, :, int(index):int(index) + 1]
                 if projection != "down":
                     B = B.chunk(2, dim=0)[projection == "up"]
-        A, B = A.to(device, non_blocking=True), B.to(device, non_blocking=True)
+        # BF16/F16 promotion is exact; do it after H2D to match PEFT without doubling host RAM. -- PI/OpenAI
+        A, B = A.to(device, non_blocking=True).float(), B.to(device, non_blocking=True).float()
         B = B * dose  # 02_merge.py scales B before PEFT computes the product.
         if routed:
             delta = torch.einsum("ore,eri->eoi", B, A).mul_(self.scaling[target])
@@ -109,17 +114,29 @@ class HotWeights:
                         dest.copy_(source)
                         self.pristine[name] = dest
         assert self.pristine, "no pristine decoder weights"
+        for path, adapter in self.adapters.items():
+            missing = set(adapter.factors) - {adapter.target(n) for n in self.pristine}
+            assert not missing, f"adapter targets missing from pristine checkpoint: {path}: {sorted(missing)}"
         self.bytes = sum(w.numel() * w.element_size() for w in self.pristine.values())
         self.adapter_bytes = sum(w.numel() * w.element_size() for a in self.adapters.values()
                                  for factors in a.factors.values() for w in factors.values())
         self.init_seconds = time.perf_counter() - start
 
     def weights(self, cell, device):
+        applied = [set() for _ in cell]
         for name in sorted(self.pristine):
             weight = self.pristine[name].to(device, non_blocking=True, copy=True)
-            for path, dose in cell:
-                delta = self.adapters[path].delta(name, dose, device)
+            for i, (path, dose) in enumerate(cell):
+                if dose == 0:
+                    continue
+                adapter = self.adapters[path]
+                delta = adapter.delta(name, dose, device)
                 if delta is not None:
                     weight.add_(delta)  # In-place addition rounds to fp16 after every listed adapter.
+                    applied[i].add(adapter.target(name))
                 del delta
             yield name, weight
+        for (path, dose), targets in zip(cell, applied):
+            if dose != 0:
+                missing = set(self.adapters[path].factors) - targets
+                assert not missing, f"adapter targets not applied this cell: {path}: {sorted(missing)}"

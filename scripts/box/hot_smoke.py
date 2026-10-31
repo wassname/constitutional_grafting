@@ -23,6 +23,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--equivalence", action="store_true", help="also run three cold merge/restarts (longer than the fast smoke)")
     ap.add_argument("--fused-experts", action="store_true", help="store the tiny fixture's experts fused, like the 35B Instruct checkpoint")
+    ap.add_argument("--cuda-graphs", action="store_true", help="capture vLLM CUDA graphs instead of enforcing eager")
     ap.add_argument("--reference", default="Qwen/Qwen3.5-35B-A3B")
     ap.add_argument("--out", type=Path, default=ROOT / ".local/hot_smoke")
     args = ap.parse_args()
@@ -51,7 +52,7 @@ def main():
                 if "lora_" in n:
                     p.normal_(std=0.15)
         adapters[name] = args.out / name
-        m.save_pretrained(adapters[name])
+        m.to(torch.bfloat16).save_pretrained(adapters[name])
         del m
     cells = {"mix": {"a": .5, "b": .25}, "negative": {"a": -1}, "zero": {"a": 0}}
     evidence = {}
@@ -68,7 +69,8 @@ def main():
         config.write_text(yaml.safe_dump(cfg, sort_keys=False))
         command = [sys.executable, ROOT / "scripts/box/cells.py", config, "--run-dir", run, "--instruct", model,
                    *[f"--adapter={n}={p}" for n, p in adapters.items()], "--cells", *cells, "--probe", "--smoke-rows", "1",
-                   "--vllm", ROOT / ".local/vllm_env/bin/vllm", *(["--weight-snapshots"] if args.equivalence else [])]
+                   "--vllm", ROOT / ".local/vllm_env/bin/vllm", *(["--weight-snapshots"] if args.equivalence else []),
+                   *(["--smoke-cuda-graphs"] if args.cuda_graphs else [])]
         tick = time.monotonic()
         subprocess.run(list(map(str, command)), env=env, cwd=ROOT, check=True)
         evidence["hot" if hot else "cold"] = {"seconds": time.monotonic() - tick, "outputs": {}}
@@ -99,6 +101,7 @@ def main():
         assert all(d["exact"] for d in evidence["tensor_diffs"].values()), "tensor mismatch: see tensor_diffs.json"
         assert evidence["hot"]["outputs"] == evidence["cold"]["outputs"], evidence
     assert len({v["panel"] for v in evidence["hot"]["outputs"].values()}) > 1, "adapter did not change any output"
+    evidence["cuda_graphs"] = args.cuda_graphs
     evidence["fused_experts"] = args.fused_experts
     evidence["seconds"] = time.monotonic() - start
     evidence["equivalent"] = args.equivalence

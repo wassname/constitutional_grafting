@@ -79,10 +79,12 @@ def main():
     ap.add_argument("--vllm", default=os.environ.get("VLLM", "/opt/vllm/bin/vllm"))
     ap.add_argument("--deadline", type=float, default=float(os.environ.get("BOX_DEADLINE", time.time() + 86400)))
     ap.add_argument("--smoke-rows", type=int, default=0)
+    ap.add_argument("--smoke-cuda-graphs", action="store_true", help="tiny smoke only: capture graphs instead of enforcing eager")
     ap.add_argument("--weight-snapshots", action="store_true", help="tiny smoke only: save served kernel tensors for hot/cold comparison")
     ap.add_argument("--probe", action="store_true", help="quick dose probe (config `probe`): few prompts, short replies, GSM subset; finds the breakdown")
     args = ap.parse_args()
     assert not args.weight_snapshots or args.smoke_rows, "weight snapshots are tiny-smoke evidence only"
+    assert not args.smoke_cuda_graphs or args.smoke_rows, "graph smoke requires --smoke-rows"
     cfg = yaml.safe_load(args.config.read_text())
     out = args.run_dir.resolve()
     manifest = json.loads((out / cfg["manifest"]).read_text())
@@ -130,7 +132,7 @@ def main():
         hot_args = ["--host", "127.0.0.1", "--worker-extension-cls", "scripts.box.hot_worker.HotSwapWorker"] if hot_swap or args.weight_snapshots else []
         argv = [args.vllm, "serve", str(model), "--served-model-name", tag, *aliases, "--dtype", "float16", "--max-model-len", str(cfg.get("max_model_len", 16384)),
                 "--gpu-memory-utilization", os.environ.get("VLLM_GPU_UTIL", "0.90"), "--max-num-seqs", "128",
-                "--limit-mm-per-prompt", '{"image":0,"audio":0}', *(["--enforce-eager"] if args.smoke_rows else []), "--port", "8000", *hot_args, *extra]
+                "--limit-mm-per-prompt", '{"image":0,"audio":0}', *(["--enforce-eager"] if args.smoke_rows and not args.smoke_cuda_graphs else []), "--port", "8000", *hot_args, *extra]
         # CUDA graphs on (no --enforce-eager) outside the smoke: run 19 groups_0.7 decoded ~13 tokens/s per sequence in eager mode at 32
         # running, and a third of its time had under 8 sequences left (long thinking tails), where per-sequence speed is all that counts.
         server = subprocess.Popen(argv, stdout=log_file.open("w"), stderr=subprocess.STDOUT, start_new_session=True, env=env)
