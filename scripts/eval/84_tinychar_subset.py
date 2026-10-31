@@ -24,13 +24,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 TINYCHAR = Path("/workspace/2026/tiny-character")
 sys.path.insert(0, str(TINYCHAR / "src"))
-from tiny_character.subset import load_subset, scored_together  # noqa: E402
+from tiny_character.subset import ITEM_TYPES, load_subset, scored_together  # noqa: E402
 
 SWEEP = ROOT / "slop/eval/run17_sweep"
 GRAFTS = ["r17_reason_docs_0.25", "r17_reason_docs_0.5", "r17_reason_docs_1", "r17_reason_docs_1.5", "r17_reason_docs_2",
           "r17_reason_base_0.5", "r17_reason_base_1", "r17_newD_1"]
 KEEP_WHOLE = {"instructions", "pov", "sycophancy"}
-OUT = ROOT / "configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt"
+# Three sizes (wassname 2026-10-31: one calibrated tiny-character evaluation for probe, scan and full): share of each kind kept by
+# informativeness, and whether the early-warning families are kept whole. The probe is the floor: one group per family and item type.
+SIZES = {"half": (0.5, True), "quarter": (0.25, False), "probe": (0.0, False)}
+SIZE = sys.argv[1] if len(sys.argv) > 1 else "half"
+FRAC, WHOLE = SIZES[SIZE]
+OUT = ROOT / f"configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_{SIZE}.txt"
 
 TINYCHAR_COMMIT = "54b8bc8"  # subset.py from here on: item length type from max_new_tokens, so the run 17 snapshot loads
 assert subprocess.run(["git", "-C", TINYCHAR, "merge-base", "--is-ancestor", TINYCHAR_COMMIT, "HEAD"]).returncode == 0, f"tiny-character older than {TINYCHAR_COMMIT}"
@@ -64,40 +69,36 @@ def informativeness(i, sample=0) -> float:
 groups = defaultdict(list)
 for i, it in items.items():
     groups[scored_together(it)].append(i)
-keep = {i for g in groups.values() for i in g if items[i]["family"] in KEEP_WHOLE}
+keep = {i for g in groups.values() for i in g if WHOLE and items[i]["family"] in KEEP_WHOLE}
 # Judged items: half overall, best groups first. Code-only items: half of each family (capability, code, tools), so no skill is
 # reduced to the one-item floor.
 strata = [("judged", lambda it: it["judged"])] + [(f, lambda it, f=f: not it["judged"] and it["family"] == f)
                                                    for f in sorted({it["family"] for it in items.values() if not it["judged"]})]
 for name, member in strata:
     pool = [g for g in groups.values() if member(items[g[0]]) and not set(g) & keep]
-    target = sum(member(it) for it in items.values()) // 2
+    target = int(sum(member(it) for it in items.values()) * FRAC)
     for g in sorted(pool, key=lambda g: -st.mean(informativeness(i) for i in g)):
         if sum(member(items[i]) for i in keep) >= target:
             break
         keep |= set(g)
-while True:  # tiny-character's floor: every family and item type kept; add the best group that fills a gap
-    try:
-        load_subset_items = load_subset
-        tmp = OUT.with_suffix(".check")
-        tmp.parent.mkdir(parents=True, exist_ok=True)
-        tmp.write_text("".join(i + "\n" for i in sorted(keep)))
-        load_subset_items(tmp, items)
-        tmp.unlink()
-        break
-    except (AssertionError, ValueError) as e:
-        missing = str(e)
-        cand = [g for g in groups.values() if not set(g) & keep]
-        best = max(cand, key=lambda g: (any(items[g[0]]["family"] in missing or str(items[g[0]].get("length_group")) in missing for _ in [0]),
-                                        st.mean(informativeness(i) for i in g)))
-        print("floor:", missing.splitlines()[0][:120], "-> add", best)
-        keep |= set(best)
+# tiny-character's floor: every family and item-type value kept. Fill each gap with the most informative group that has it,
+# early-warning families first so even the probe keeps one of each.
+need = [("family", f) for f in sorted(KEEP_WHOLE)] + [(t, v) for t, of in ITEM_TYPES.items() for v in sorted({str(of(it)) for it in items.values()})]
+for t, v in need:
+    if any(str(ITEM_TYPES[t](items[i])) == v for i in keep):
+        continue
+    cand = [g for g in groups.values() if any(str(ITEM_TYPES[t](items[i])) == v for i in g)]
+    keep |= set(max(cand, key=lambda g: st.mean(informativeness(i) for i in g)))
+tmp = OUT.with_suffix(".check")
+tmp.write_text("".join(i + "\n" for i in sorted(keep)))
+load_subset(tmp, items)  # tiny-character's own check: families, item types, groups scored together
+tmp.unlink()
 
-header = [f"# Calibrated half of tiny-character ({len(keep)} of {len(items)} items) for Qwen3.5-35B-A3B grafts, made by",
+header = [f"# Calibrated {SIZE} of tiny-character ({len(keep)} of {len(items)} items) for Qwen3.5-35B-A3B grafts, made by",
           "# scripts/eval/84_tinychar_subset.py (constitutional_grafting) on 2026-10-30 from run 17's thinking-on dose sweep",
           "# (slop/eval/run17_sweep: v2 judge on-target, code/tool checks), selected on sample 0 only.",
           "# Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;",
-          "# groups scored together kept whole; instructions, pov, sycophancy kept whole; half of each kind; tiny-character floor.",
+          f"# groups scored together kept whole; {'instructions, pov, sycophancy kept whole; ' if WHOLE else ''}{FRAC:.0%} of each kind; tiny-character floor (one per family and item type).",
           f"# Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character {TINYCHAR_COMMIT}.",
           "# Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes."]
 OUT.write_text("\n".join(header) + "\n" + "".join(i + "\n" for i in sorted(keep)))

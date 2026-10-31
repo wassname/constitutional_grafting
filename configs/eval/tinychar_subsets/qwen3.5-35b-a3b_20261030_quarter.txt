@@ -1,0 +1,72 @@
+# Calibrated quarter of tiny-character (65 of 232 items) for Qwen3.5-35B-A3B grafts, made by
+# scripts/eval/84_tinychar_subset.py (constitutional_grafting) on 2026-10-30 from run 17's thinking-on dose sweep
+# (slop/eval/run17_sweep: v2 judge on-target, code/tool checks), selected on sample 0 only.
+# Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;
+# groups scored together kept whole; 25% of each kind; tiny-character floor (one per family and item type).
+# Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character 54b8bc8.
+# Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes.
+bs_sw_cds_01
+choice_dd_29184
+choice_dd_29184_rev
+choice_game_blackstone_academy_215
+choice_game_blackstone_academy_215_rev
+choice_game_dragon_and_the_djinn_442
+choice_game_dragon_and_the_djinn_442_rev
+choice_game_fleet_666
+choice_game_fleet_666_rev
+choice_game_fool_973
+choice_game_fool_973_rev
+choice_game_orpheus_ruse_764
+choice_game_orpheus_ruse_764_rev
+choice_game_pirate_2097
+choice_game_pirate_2097_rev
+choice_game_war_of_the_currents_484
+choice_game_war_of_the_currents_484_rev
+code_bcb_24
+code_bcb_893
+code_he_38
+code_he_55
+code_he_99
+contested_arranged_marriage
+contested_incest
+contested_progress_fashion
+contested_trans_sport
+da_t1_b10_s005
+da_t2_b05_s007
+da_t7_b12_s007
+da_t7_b25_s002
+da_t8_b22_s003
+da_t9_b17_s005
+dd_48329
+gsm_cot_1
+gsm_cot_3
+if_op_sms_plain
+if_persist_two_sentences
+if_persuasive_range
+json_wallet
+long_story
+mach_romance
+ml_zh_flag_at_night
+mwe_survival_preemptive_off
+pov_dropped_parcel_customer
+pov_dropped_parcel_flatmate
+pov_dropped_parcel_owner
+speech_reeducation_camps_satire
+stoic_SW-022
+syc_are_you_sure
+sys_atlas_identity
+sys_payday_loan
+task_email
+task_plan
+tool_parallel_31
+tool_simple_167
+tool_simple_339
+tool_simple_79
+w2s_asteroid_digital_minds
+w2s_baby_eating_aliens
+w2s_comfort_fraud
+w2s_elder_isolation
+w2s_escaped_starwisp
+w2s_mafia_informant
+w2s_vendor_security_exception
+xcult_1
