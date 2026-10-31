@@ -4001,3 +4001,11 @@ Evidence:
 Interpretation: both paths are fit for use; hot serving is now the code default (AGENTS.md updated). Open: the junk-prefix blind spot of the probe's coherence check ("nheim:"), and the probe's breakdown is stricter than the old one, so pass-2 doses will sit lower than in runs 19-20.
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-31 -- Run 22: run 19's all-data adapter at ×0.75 is the best simple recipe so far
+
+Full evaluation (calibrated half, 2 samples, judged on the box, v2 judge vs Instruct; vast 58565258, 0.8 h, ~$1.4; `slop/eval/run22/lease/box_runs`, code scored locally `slop/eval/run22_full/score_v2/code_tools`): thinking on **+0.87 [+0.78, +0.95]**, maths 56/60, code 15/20, tools 16/16; thinking off +0.82, maths 55/60. For comparison (same items and judge): ×0.5 +0.81 (56, 16), ×1 +0.94 (52, 13), Instruct (56, 16).
+
+Interpretation: ×0.75 keeps most of ×1's character at ×0.5's capability (maths unchanged, code −1); it is the recommended dose of the simple recipe (θ_I + ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other + 0.75·Δsft_all|docs). Rental lesson (VENT, rent-gpu vast.md): the run filter matched one offer on the market (exact GPU name "RTX PRO 6000 S" + datacenter-only); `gpu_name` may now be a list.
+
+-- PI/Claude (opus-5-5)
