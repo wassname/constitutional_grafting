@@ -306,6 +306,8 @@ class Lease:
         # Prefer selecting hardware in offer_query (gpu_ram, compute_cap 1200 = Blackwell RTX PRO 6000 S/WS/Max-Q) with gpu_name: null;
         # an exact name ("RTX PRO 6000 S") plus datacenter-only once left one offer on the market (run 22).
         names = None if cfg["gpu_name"] is None else cfg["gpu_name"] if isinstance(cfg["gpu_name"], list) else [cfg["gpu_name"]]
+        hosts = {o["host_id"] for o in offers}
+        assert len(hosts) >= 3, f"offer filter admits {len(offers)} offers from {len(hosts)} hosts; widen it (rent-gpu vast.md: several providers)"
         ok = [o for o in offers if (names is None or o["gpu_name"] in names) and o["cuda_max_good"] >= 13.0 and o["dph_total"] <= cfg["max_hourly_rate"]
               and o["inet_down_cost"] <= .005 and o["inet_up_cost"] <= .005]
         assert ok, "no offer fits; no lease created"
