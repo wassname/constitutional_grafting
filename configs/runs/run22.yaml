@@ -1,0 +1,38 @@
+# Run 22: the untested middle dose of the recommended simple recipe. Run 19's all-data chat adapter (old document mix ½/1/1) had
+# full evaluations at x0.5 (+0.81, maths 56, code 16) and x1 (+0.94, maths 52, code 13); this adds x0.75, with one probe-free full
+# evaluation on the calibrated half, judged on the box (hot serving). No training. -- PI/Claude (opus-5-5), within wassname's $50.
+name: run22
+prefix: r22_
+budget_usd: 6
+max_hours: 2.2
+max_hourly_rate: 1.92
+reserve_usd: {traffic: 0.5, judge: 1}
+offer_query: {gpu_ram: {gte: 90000}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true}, reliability2: {gte: 0.98},
+              disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000}, inet_down: {gte: 500}, duration: {gte: 259200},
+              datacenter: {eq: true}, allocated_storage: 500, order: [[dph_total, asc]], limit: 100}
+gpu_name: RTX PRO 6000 S
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+
+adapter_hub: wassname/constitutional-grafting-adapters
+adapters:
+  stoic: /home/code/.local/share/cg_run18_adapters/r10_stoic_bf16
+  const: /home/code/.local/share/cg_run18_adapters/r7e_graft_docs_spl50_bf16
+  other: /home/code/.local/share/cg_run18_adapters/r10_other_bf16
+  all: /workspace/2026/constitutional_grafting/.local/adapters/cg_run19_adapters/r19_all_bf16   # run 19's chat adapter
+
+doc_sets:
+  docs: {stoic: 0.5, const: 1, other: 1}   # run 19's training base
+
+selector: null
+inputs: slop/eval/run17/inputs
+manifest: run17_manifest.json
+items_subset: configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt
+hot_swap: true
+
+cells:
+  full_all_0.75: {docs: 1, all: 0.75}
+thinking_cells: [full_all_0.75]
+thinking_budget: 4096
