@@ -79,8 +79,10 @@ def main():
     ap.add_argument("--vllm", default=os.environ.get("VLLM", "/opt/vllm/bin/vllm"))
     ap.add_argument("--deadline", type=float, default=float(os.environ.get("BOX_DEADLINE", time.time() + 86400)))
     ap.add_argument("--smoke-rows", type=int, default=0)
+    ap.add_argument("--weight-snapshots", action="store_true", help="tiny smoke only: save served kernel tensors for hot/cold comparison")
     ap.add_argument("--probe", action="store_true", help="quick dose probe (config `probe`): few prompts, short replies, GSM subset; finds the breakdown")
     args = ap.parse_args()
+    assert not args.weight_snapshots or args.smoke_rows, "weight snapshots are tiny-smoke evidence only"
     cfg = yaml.safe_load(args.config.read_text())
     out = args.run_dir.resolve()
     manifest = json.loads((out / cfg["manifest"]).read_text())
@@ -90,9 +92,15 @@ def main():
     adapters = dict(a.split("=", 1) for a in args.adapter)
     env = dict(os.environ, IT=str(args.instruct), MERGE_DTYPE="float16")
     hot_swap = cfg.get("hot_swap", False)
-    if hot_swap:
-        assert not os.environ.get("KGROUPS"), "hot cells require ungrouped adapter doses"
+    if hot_swap or args.weight_snapshots:
         env.update(VLLM_SERVER_DEV_MODE="1", PYTHONPATH=str(ROOT))
+    if hot_swap:
+        from hot_weights import validate_adapter
+
+        assert not os.environ.get("KGROUPS"), "hot cells require ungrouped adapter doses"
+        hot_adapters = list(dict.fromkeys(adapters[n] for c in args.cells for n, _ in expand(cfg["cells"][c], cfg)))
+        for path in hot_adapters:
+            validate_adapter(path)
     log_path = out / "run.md"
 
     def log(text):
@@ -119,7 +127,7 @@ def main():
 
     def serve(model, tag, extra, log_file):
         aliases = [cfg["prefix"] + c for c in args.cells if cfg["prefix"] + c != tag] if hot_swap else []
-        hot_args = ["--host", "127.0.0.1", "--worker-extension-cls", "scripts.box.hot_worker.HotSwapWorker"] if hot_swap else []
+        hot_args = ["--host", "127.0.0.1", "--worker-extension-cls", "scripts.box.hot_worker.HotSwapWorker"] if hot_swap or args.weight_snapshots else []
         argv = [args.vllm, "serve", str(model), "--served-model-name", tag, *aliases, "--dtype", "float16", "--max-model-len", str(cfg.get("max_model_len", 16384)),
                 "--gpu-memory-utilization", os.environ.get("VLLM_GPU_UTIL", "0.90"), "--max-num-seqs", "128",
                 "--limit-mm-per-prompt", '{"image":0,"audio":0}', *(["--enforce-eager"] if args.smoke_rows else []), "--port", "8000", *hot_args, *extra]
@@ -173,20 +181,19 @@ def main():
     def cell_server(cell, tag, probing=False):
         nonlocal hot_server
         if hot_swap:
-            weights = out / "hot_weights.safetensors"
-            command([sys.executable, ROOT / "scripts/box/hot_weights.py", args.instruct, weights,
-                     *[f"--adapter={p}" for p in dict.fromkeys(adapters.values())],
-                     "--cell", json.dumps([(adapters[n], k) for n, k in cell])], f"merge_{tag}.log")
-            shutil.copyfile(weights.with_suffix(".json"), out / f"merge_{tag}.json")
             if hot_server is None:
                 hot_server = serve(args.instruct, tag, ["--reasoning-parser", "qwen3"], out / "vllm_hot.log")
                 servers.callback(stop, hot_server)
-            post("pause?mode=wait", {})
-            result = post("collective_rpc", {"method": "hot_swap_weights", "args": [str(weights)]})
+            post("pause?mode=wait", {})  # Pause drains requests and clears the prefix cache.
+            updates = [(adapters[n], k) for n, k in cell]
+            result = post("collective_rpc", {"method": "hot_swap_weights", "args": [str(args.instruct), hot_adapters, updates]})
             assert result["results"] and all(r["loaded_parameters"] > 0 for r in result["results"]), result
-            assert post("reset_prefix_cache", {})["success"], "prefix cache reset failed"
+            report = {"base": str(args.instruct), "dtype": "float16", "groups": {},
+                      "adapters": [{"adapter": path, "scale": dose} for path, dose in updates], "workers": result["results"]}
+            (out / f"merge_{tag}.json").write_text(json.dumps(report, indent=2))
             post("resume", {})
-            weights.unlink()
+            if args.weight_snapshots:
+                post("collective_rpc", {"method": "hot_weight_snapshot", "args": [str(out / f"weights_{tag}.safetensors")]})
             yield
         else:
             merged, server = merge(cell, tag), None
@@ -196,6 +203,8 @@ def main():
                     assert report["groups"] == {} and report["dtype"] == "float16" and len(report["adapters"]) == len(cell), report
                 shutil.copyfile(merged / "merge_report.json", out / f"merge_{tag}.json")
                 server = serve(merged, tag, ["--reasoning-parser", "qwen3"], out / f"vllm_{'probe_' if probing else ''}{tag}.log")
+                if args.weight_snapshots:
+                    post("collective_rpc", {"method": "hot_weight_snapshot", "args": [str(out / f"weights_{tag}.safetensors")]})
                 yield
             finally:
                 if server is not None:

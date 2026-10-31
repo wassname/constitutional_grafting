@@ -1,29 +1,16 @@
-"""Prepare fp16 HF weights for a hot cell, using the ordinary PEFT merge. -- PI/OpenAI
+"""Pinned pristine HF tensors, streamed GPU LoRA merges in 02_merge.py order. -- PI/OpenAI
 
-Only decoder layers targeted by any adapter in this invocation are materialized. Include their
-frozen siblings too: vLLM's stacked parameters and expert packing must reload complete layers.
-Pristine values are read anew on every cell, including adapters absent from the current cell.
+Qwen routed parameters use PEFT's [experts,out,in] ParamWrapper math; vLLM alone packs kernels.
+No model construction, checkpoint conversion, or per-cell disk I/O.
 """
-import argparse
-import hashlib
-import importlib.util
 import json
+import math
 import re
+import time
 from pathlib import Path
 
 import torch
-from peft import PeftConfig
-from peft.tuners.tuners_utils import check_target_module_exists
 from safetensors import safe_open
-from safetensors.torch import save_file
-from transformers import AutoConfig, AutoModelForImageTextToText
-from transformers.conversion_mapping import get_model_conversion_mapping
-from transformers.core_model_loading import convert_and_load_state_dict_in_model, revert_weight_conversion
-from transformers.modeling_utils import LoadStateDictConfig
-
-spec = importlib.util.spec_from_file_location("merge_weights", Path(__file__).parents[1] / "train/02_merge.py")
-merge_weights = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(merge_weights)
 
 
 def layer_prefix(name):
@@ -32,56 +19,107 @@ def layer_prefix(name):
     return match[1] + "."
 
 
-def prepare(base, adapters, cell, out):
-    torch.set_num_threads(4)
-    with torch.device("meta"):
-        model = AutoModelForImageTextToText.from_config(AutoConfig.from_pretrained(base)).to(torch.float16)
-    layers = set()
-    for adapter in adapters:
-        cfg = PeftConfig.from_pretrained(adapter)
-        assert cfg.peft_type == "LORA" and cfg.bias == "none" and not cfg.modules_to_save and not cfg.layer_replication, cfg
-        for name, _ in model.named_modules():
-            if check_target_module_exists(cfg, name):
-                layers.add(layer_prefix(name))
-        for name, _ in model.named_parameters():
-            if any(name == target or name.endswith("." + target) for target in cfg.target_parameters or []):
-                layers.add(layer_prefix(name))
-    assert layers, "no hot-swap layers matched"
-    names = {n for n, _ in model.named_parameters() if any(n.startswith(p) for p in layers)}
-    state = {}
-    for shard in sorted(Path(base).glob("*.safetensors")):
-        with safe_open(shard, framework="pt", device="cpu") as f:
-            state.update({n: f.get_tensor(n) for n in f.keys() if any(n.startswith(p) for p in layers)})
-    # Use Transformers' own checkpoint conversions, including split routed experts.
-    info, _ = convert_and_load_state_dict_in_model(model, state, LoadStateDictConfig(
-        dtype=torch.float16, device_map={"": "cpu"}, weight_mapping=get_model_conversion_mapping(model)))
-    assert not (names & info.missing_keys) and not info.mismatched_keys and not info.unexpected_keys, info
-    del state
-    stages = []
-    for adapter, dose in cell:
-        model, n_lora, _ = merge_weights.merge_adapter(model, adapter, dose, {})
-        with (Path(adapter) / "adapter_model.safetensors").open("rb") as f:
-            digest = hashlib.file_digest(f, "sha256").hexdigest()
-        stages.append({"adapter": adapter, "scale": dose, "adapter_sha256": digest, "lora_modules": n_lora})
-    weights = {n: p.detach().contiguous() for n, p in model.named_parameters() if n in names}
-    assert len(weights) == len(names)
-    weights = {n: w.contiguous() for n, w in revert_weight_conversion(model, weights).items()}
-    save_file(weights, str(out))
-    return {"base": str(base), "dtype": "float16", "groups": {}, "adapters": stages,
-            "parameters": len(weights), "bytes": sum(w.numel() * w.element_size() for w in weights.values())}
+def pattern_value(pattern, name, default):
+    return next((value for key, value in pattern.items() if re.match(rf"(.*\.)?({key})$", name)), default)
 
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("base", type=Path)
-    ap.add_argument("out", type=Path)
-    ap.add_argument("--adapter", action="append", required=True)
-    ap.add_argument("--cell", required=True, help="JSON list of [adapter path, dose], in merge order")
-    args = ap.parse_args()
-    report = prepare(args.base, args.adapter, json.loads(args.cell), args.out)
-    args.out.with_suffix(".json").write_text(json.dumps(report, indent=2))
-    print(json.dumps(report), flush=True)
+def validate_adapter(path):
+    cfg = json.loads((Path(path) / "adapter_config.json").read_text())
+    assert cfg["peft_type"] == "LORA" and cfg["bias"] == "none", cfg
+    assert not any(cfg.get(k) for k in ("modules_to_save", "layer_replication", "fan_in_fan_out", "lora_bias", "use_dora")), cfg
+    with safe_open(Path(path) / "adapter_model.safetensors", framework="pt", device="cpu") as f:
+        assert f.keys(), "empty adapter"
+        for key in f.keys():
+            layer_prefix(key)
+    return cfg
 
 
-if __name__ == "__main__":
-    main()
+class Adapter:
+    def __init__(self, path, num_experts):
+        self.config = cfg = validate_adapter(path)
+        self.factors = {}
+        with safe_open(Path(path) / "adapter_model.safetensors", framework="pt", device="cpu") as f:
+            for key in f.keys():
+                assert ".lora_A.weight" in key or ".lora_B.weight" in key, key
+                name, side = key.removeprefix("base_model.model.").split(".lora_")
+                if ".mlp.experts" in name:
+                    module = name.split(".base_layer")[0]
+                    # Qwen registers gate_up then down; PEFT nests the later wrapper outside.
+                    targets = [t for t in ("gate_up_proj", "down_proj") if any(
+                        module + "." + t == target or (module + "." + t).endswith("." + target)
+                        for target in cfg["target_parameters"])]
+                    name = module + "." + targets[::-1][name.count(".base_layer")]
+                else:
+                    name = name.replace(".base_layer", "") + ".weight"
+                layer_prefix(name)
+                self.factors.setdefault(name, {})[side[0]] = f.get_tensor(key).float().pin_memory()
+        assert self.factors, "adapter matched no weights"
+        self.num_experts = num_experts
+        self.scaling = {}
+        for name, factors in self.factors.items():
+            assert set(factors) == {"A", "B"}, name
+            target = name.removesuffix(".weight")
+            rank = pattern_value(cfg.get("rank_pattern", {}), target, cfg["r"])
+            alpha = pattern_value(cfg.get("alpha_pattern", {}), target, cfg["lora_alpha"])
+            assert factors["A"].shape[0] == rank * (num_experts if ".mlp.experts." in name else 1), name
+            self.scaling[name] = alpha / (math.sqrt(rank) if cfg.get("use_rslora") else rank)
+
+    def delta(self, name, dose, device):
+        expert = re.match(r"(.+\.mlp\.experts)\.(\d+)\.(gate|up|down)_proj\.weight$", name)
+        target = name
+        if expert:
+            module, index, projection = expert.groups()
+            target = module + (".down_proj" if projection == "down" else ".gate_up_proj")
+        if target not in self.factors:
+            return None
+        factors = self.factors[target]
+        A, B = factors["A"], factors["B"]
+        routed = ".mlp.experts." in target
+        if routed:
+            A = A.reshape(self.num_experts, -1, A.shape[-1])
+            B = B.reshape(B.shape[0], -1, self.num_experts)
+            if expert:
+                A, B = A[int(index):int(index) + 1], B[:, :, int(index):int(index) + 1]
+                if projection != "down":
+                    B = B.chunk(2, dim=0)[projection == "up"]
+        A, B = A.to(device, non_blocking=True), B.to(device, non_blocking=True)
+        B = B * dose  # 02_merge.py scales B before PEFT computes the product.
+        if routed:
+            delta = torch.einsum("ore,eri->eoi", B, A).mul_(self.scaling[target])
+            return (delta[0] if expert else delta).half()  # ParamWrapper casts before adding; Linear does not.
+        return (B @ A) * self.scaling[target]
+
+
+class HotWeights:
+    def __init__(self, base, adapters):
+        start = time.perf_counter()
+        config = json.loads((Path(base) / "config.json").read_text())
+        text = config.get("text_config", config)
+        self.adapters = {p: Adapter(p, text.get("num_experts", 1)) for p in adapters}
+        if any(".mlp.experts." in n for a in self.adapters.values() for n in a.factors):
+            assert text["model_type"] in {"qwen3_5_moe_text", "qwen3_next"}, "hot expert layout is Qwen [E,out,in]"
+        self.layers = {layer_prefix(n) for a in self.adapters.values() for n in a.factors}
+        self.pristine = {}
+        for shard in sorted(Path(base).glob("*.safetensors")):
+            with safe_open(shard, framework="pt", device="cpu") as f:
+                for name in f.keys():
+                    if any(name.startswith(p) for p in self.layers):
+                        source = f.get_tensor(name)
+                        dest = torch.empty(source.shape, dtype=torch.float16, pin_memory=True, device="cpu")
+                        dest.copy_(source)
+                        self.pristine[name] = dest
+        assert self.pristine, "no pristine decoder weights"
+        self.bytes = sum(w.numel() * w.element_size() for w in self.pristine.values())
+        self.adapter_bytes = sum(w.numel() * w.element_size() for a in self.adapters.values()
+                                 for factors in a.factors.values() for w in factors.values())
+        self.init_seconds = time.perf_counter() - start
+
+    def weights(self, cell, device):
+        for name in sorted(self.pristine):
+            weight = self.pristine[name].to(device, non_blocking=True, copy=True)
+            for path, dose in cell:
+                delta = self.adapters[path].delta(name, dose, device)
+                if delta is not None:
+                    weight.add_(delta)  # In-place addition rounds to fp16 after every listed adapter.
+                del delta
+            yield name, weight
