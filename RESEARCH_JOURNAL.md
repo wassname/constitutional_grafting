@@ -3977,3 +3977,13 @@ Thinking off: 19o +0.74 / +0.69 (run 19 group mix ×0.25 +0.74, all-data ×0.5 +
 Interpretation: no measurable gain. At matched character (~+0.9) all four recipes keep maths within 1-4 items of Instruct and code within ±2; differences are inside the intervals. The scans showed a gentler fall at high dose (×0.8: +0.30 vs −0.95), but the ablated mix also puts less dose on texts and identity, so that is not a clean win. Removing the top shared direction (one per module, dense modules only) is a weak intervention (~1-2% of each update); a stronger version (several directions, routed experts) is untested. Lesson, per wassname's plan: simplify to one adapter per phase; run 20 is the one-chat-adapter version.
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-31 -- Run 20: searched document mix + chat penalty 10% matches run 19 at ×1, weaker per dose
+
+Premise (plan `slop/plans/20261031_run20_plan.md`): one chat adapter on all chat data v7, now on the searched document mix (½ / ½ / 1) and with the chat spectral penalty raised from 1% to 10% of the loss (the documents' level). Hypothesis: a better trade-off than run 19's all-data adapter at matched capability.
+
+Evidence (`docs/results/20261031_run20.md`): full evaluations, thinking on, calibrated half: run 20 ×0.5 +0.72 (maths 55, code 13), ×1 +0.92 (52, 14); run 19 ×0.5 +0.81 (56, 16), ×1 +0.94 (52, 13). Scans: run 20 peaks later (×1.6 +0.85, run 19 ×1 +0.85). Probe breakdown ×2 in both. Held-out loss 1.91 vs 1.73.
+
+Interpretation: not supported. The stronger penalty mostly shrank the update (the dose curve shifted right), as the same-data spectra predicted (journal 2026-10-30); at matched character the trade-off is the same and the usable range did not widen. Runs 19, 19o and 20 all land at about +0.9 with maths −4 and code −2 or so at the peak; dose, adapter splitting and the penalty have not moved that frontier. Likely the limit now is the data (e.g. the deployed-name identity failure is in every run). Two changes at once: neither can be credited separately.
+
+-- PI/Claude (opus-5-5)
