@@ -134,10 +134,20 @@ class Lease:
         return buf.getvalue()
 
     def push(self):
-        self.remote(f"mkdir -p {REMOTE} && tar -xzf - -C {REMOTE}", input=self.code_tar(), timeout=120)
+        """Every step here is idempotent, so a dropped ssh connection (exit 255; run 22's second box reset ssh during setup) is retried."""
+        def remote(*a, **kw):
+            for attempt in range(4):
+                try:
+                    return self.remote(*a, **kw)
+                except subprocess.CalledProcessError as e:
+                    if e.returncode != 255 or attempt == 3:
+                        raise
+                    print(f"PUSH RETRY {attempt + 1}/3 after ssh drop", flush=True)
+                    time.sleep(20)
+        remote(f"mkdir -p {REMOTE} && tar -xzf - -C {REMOTE}", input=self.code_tar(), timeout=120)
         key_line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
-        self.remote(f"umask 077; cat > {REMOTE}/.env; chmod 600 {REMOTE}/.env", input=(key_line + "\n").encode(), timeout=30)
-        self.remote(f"cd {REMOTE}/.local/tiny-character-9e33eed && "
+        remote(f"umask 077; cat > {REMOTE}/.env; chmod 600 {REMOTE}/.env", input=(key_line + "\n").encode(), timeout=30)
+        remote(f"cd {REMOTE}/.local/tiny-character-9e33eed && "
                     "(command -v git || (apt-get update -qq && apt-get install -y -qq git)) && "
                     "UV_PROJECT_ENVIRONMENT=.venv uv sync --locked > /workspace/judge_setup.log 2>&1 && "
                     "test -x .venv/bin/python && PYTHONPATH=src .venv/bin/python -c "
