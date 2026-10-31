@@ -35,6 +35,7 @@ selector: null
 inputs: slop/eval/run17/inputs
 manifest: run17_manifest.json
 items_subset: configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_half.txt
+hot_swap: true   # switched on mid-run after chat training (merged after the rental): first measured 35B use; on error, set false and resume
 
 mixes:
   all: {members: [all], base: {docs: 1}, lock: false, ablate: false, thinking: true, full: [0.25, 0.5]}
