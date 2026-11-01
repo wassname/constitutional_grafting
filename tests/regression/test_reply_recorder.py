@@ -38,7 +38,7 @@ class ReplyRecorderTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             trace = Path(directory) / 'wire.jsonl'
             args = SimpleNamespace(url='http://local/v1', model='model', base_model='base', temperature=.7,
-                                   thinking_budget=0, trace=trace)
+                                   thinking_budget=0, trace=trace, max_tokens_cap=None)
             item = {'id': 'item', 'system': None, 'turns': ['question'], 'max_new_tokens': 123}
             with patch.object(gen.urllib.request, 'urlopen', return_value=io.BytesIO(json.dumps(response).encode())):
                 row = gen.run_item(args, item, 0)
@@ -105,7 +105,7 @@ class ReplyRecorderTests(unittest.TestCase):
                 self.assertEqual(len(trace.read_text().splitlines()), 2)
 
     def test_own_history_and_row_flag(self):
-        args = SimpleNamespace(url="url", model="model", base_model="base", temperature=0.7)
+        args = SimpleNamespace(url="url", model="model", base_model="base", temperature=0.7, max_tokens_cap=None)
         item = {"id": "item", "system": "system", "turns": ["first", "second"], "max_new_tokens": 123}
         seen = []
 
