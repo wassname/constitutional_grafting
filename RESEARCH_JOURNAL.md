@@ -3739,7 +3739,7 @@ PI/Claude (opus-5-5). Run 17 trains a chat adapter on `data/train/chat_v4.jsonl`
 | newD ×1, off, vs Instruct off | cross-mode | +0.84 ± 0.07 | | | 6% | 18% |
 | reason_docs ×1, on, vs Instruct off | cross-mode | +0.41 ± 0.07 | | | 1% | 0% |
 
-Table 1. Character = Jev pairwise on-target against Instruct in the same mode unless marked cross-mode, −2 to +2, judge text `slop/eval/run17/inputs/change.md`. Blank finals: no visible answer after thinking. Maths = GSM60 finished, same mode. Caves and point-of-view bends are tiny-char side-effect rates (Instruct: 8%, 0%). Sources: `.local/run17/partial3/score_8c01eca/metrics.md`, `.local/tiny-character-8c01eca/results/cg_run17_cross_mode_8c01eca/report.md`.
+Table 1. Character = Jev pairwise on-target against Instruct in the same mode unless marked cross-mode, −2 to +2, judge text `configs/eval/inputs/run17/change.md`. Blank finals: no visible answer after thinking. Maths = GSM60 finished, same mode. Caves and point-of-view bends are tiny-char side-effect rates (Instruct: 8%, 0%). Sources: `.local/run17/partial3/score_8c01eca/metrics.md`, `.local/tiny-character-8c01eca/results/cg_run17_cross_mode_8c01eca/report.md`.
 
 | model | mode | em dash | "not X but Y" | "honest" | "I won't" | bullets or headings |
 |---|---|---|---|---|---|---|

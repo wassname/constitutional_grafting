@@ -141,7 +141,7 @@ def test_hot_preflight_error_aborts_without_server_or_cold_fallback(tmp_path):
     (tmp_path / "manifest.json").write_text('{"input_sha256": {}}')
     cfg = tmp_path / "config.json"
     cfg.write_text(json.dumps({"manifest": "manifest.json", "hot_swap": True, "prefix": "test_",
-                               "doc_sets": {}, "cells": {"bad": {"a": 1}}, "probe": {}}))
+                               "cells": {"bad": {"a": 1}}, "probe": {}}))
     result = subprocess.run([sys.executable, ROOT / "scripts/box/cells.py", cfg, "--instruct", tmp_path,
                              "--run-dir", tmp_path, f"--adapter=a={adapter}", "--cells", "bad", "--probe"],
                             capture_output=True, text=True, timeout=60)

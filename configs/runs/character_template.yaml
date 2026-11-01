@@ -1,0 +1,19 @@
+# Shared Qwen training defaults; run-character fills identity and data paths. -- PI/OpenAI
+# Setup ~0.5 h, documents 2-5 h, chat 1-3 h, hot probes/scans/full ~1.5 h; corpus sizes determine the actual duration.
+max_hours: 10
+max_hourly_rate: 1.92
+budget_usd: 24
+reserve_usd: {traffic: 0.5, judge: 2}
+gpu_name: null
+offer_query: {gpu_ram: {gte: 90000}, compute_cap: {eq: 1200}, num_gpus: {eq: 1}, rentable: {eq: true}, verified: {eq: true},
+              reliability2: {gte: 0.98}, disk_space: {gte: 500}, disk_bw: {gte: 500}, cpu_ram: {gte: 110000},
+              inet_down: {gte: 500}, inet_up: {gte: 500}, duration: {gte: 86400}, allocated_storage: 500,
+              order: [[dph_total, asc]], limit: 100}
+image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
+base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
+instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
+inputs: configs/eval/inputs/run17
+manifest: run17_manifest.json
+chat:
+  overrides: {num_epochs: 2, evals_per_epoch: 1}
+  full: [0.25, 0.5]

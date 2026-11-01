@@ -5,7 +5,7 @@ an on-box watchdog that stops the instance when the heartbeat goes silent; uploa
 failure the box is held up to 60 min (heartbeat on) for a fix: `rent.py CONFIG push` copies changed code, then
 `touch .local/<name>/resume` restarts the driver, which skips stages whose receipts and adapter hashes match.
 
-usage: python scripts/box/rent.py configs/runs/run17.yaml run | attach | push | snapshot | destroy   -- PI/Claude (opus-5-5), 2026-10-28
+usage: python scripts/box/rent.py configs/runs/run22.yaml run | attach | push | snapshot | destroy   -- PI/Claude (opus-5-5), 2026-10-28
 """
 import argparse
 import concurrent.futures
@@ -25,14 +25,21 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+
 import yaml
 
 from confighash import driver_config_sha
-from tinychar import TC, JUDGE_V2
+from tinychar import TC
+from box import existing_adapters, needs_base, load_config
 
 ROOT = Path(__file__).resolve().parents[2]
-CODE_DIRS = ["scripts/box", "scripts/train", "scripts/eval", "configs"]  # copied whole; small text files
+CODE_DIRS = ["scripts/box", "scripts/train", "scripts/eval", "configs", "src/constitutional_grafting"]  # copied whole; small text files
 REMOTE = "/workspace/cg"
+
+
+def offer_query(cfg):
+    return {"gpu_ram": {"gte": 90000}, "compute_cap": {"eq": 1200}, "verified": {"eq": True},
+            "reliability2": {"gte": 0.98}} | cfg.get("offer_query", {})
 
 
 def sha(path):
@@ -66,7 +73,7 @@ def api(path, method="GET", body=None):
 class Lease:
     def __init__(self, cfg_path: Path):
         self.cfg_path = cfg_path
-        self.cfg = yaml.safe_load(cfg_path.read_text())
+        self.cfg = load_config(cfg_path)
         self.name = self.cfg["name"]
         self.label = f"cg-{self.name}"
         self.out = ROOT / "slop/eval" / self.name / "lease"
@@ -118,19 +125,44 @@ class Lease:
     def code_tar(self) -> bytes:
         buf = io.BytesIO()
         with tarfile.open(fileobj=buf, mode="w:gz") as t:
+            def text_file(path, text):
+                data = text.encode()
+                info = tarfile.TarInfo(str(path))
+                info.size = len(data)
+                t.addfile(info, io.BytesIO(data))
+
             for d in CODE_DIRS:
                 t.add(ROOT / d, arcname=d, filter=lambda i: None if "__pycache__" in i.name else i)
             t.add(ROOT / self.cfg["inputs"], arcname=self.cfg["inputs"])
-            for path in JUDGE_V2["change"], JUDGE_V2["refs"]:
-                t.add(path, arcname=str(path.relative_to(ROOT)))
+            remote_cfg = yaml.safe_load(self.cfg_path.read_text())
+            character = dict(self.cfg["character"])
+            slug = Path(remote_cfg["character"]).parent.name or character["name"].lower()
+            folder = Path("characters") / slug
+            character["constitution_source"] = character.get("constitution_source", character["constitution"])
+            character["constitution"] = str(folder / "constitution.md")
+            text_file(character["constitution"], character.pop("constitution_text"))
+            character.pop("constitution_path")
+            for key in ("judge_change", "judge_refs"):
+                if source := character.get(key):
+                    target = folder / "judge" / ("change.md" if key == "judge_change" else "refs.jsonl")
+                    t.add(ROOT / source, arcname=str(target))
+                    character[key] = str(target)
+            remote_cfg["character"] = str(folder / "character.yaml")
+            text_file(remote_cfg["character"], yaml.safe_dump(character, sort_keys=False))
+            if self.cfg.get("documents") and not self.cfg["documents"].get("adapter"):
+                paths = []
+                for i, source in enumerate(self.cfg["documents"]["corpora"]):
+                    target = f"data/train/{slug}/{i}_{Path(source).name}"
+                    t.add(ROOT / source, arcname=target)
+                    paths.append(target)
+                remote_cfg["documents"]["corpora"] = paths
+            if self.cfg.get("chat") and not self.cfg["chat"].get("adapter"):
+                target = f"data/train/{slug}/chat.jsonl"
+                t.add(ROOT / self.cfg["chat"]["data"], arcname=target)
+                remote_cfg["chat"]["data"] = target
+            text_file(self.cfg_path.relative_to(ROOT), yaml.safe_dump(remote_cfg, sort_keys=False))
             for name in ("src", "scripts", "data", "pyproject.toml", "uv.lock", ".local/raw/gsm8k_test.parquet"):
                 t.add(TC / name, arcname=str(TC.relative_to(ROOT) / name), filter=lambda i: None if "__pycache__" in i.name else i)
-            for spec in (self.cfg.get("train") or {}).get("chats", {}).values():
-                t.add(ROOT / spec["data"], arcname=spec["data"])
-            if sel := self.cfg.get("selector"):
-                for key in ("cap_data", "char_data"):
-                    if sel.get(key):
-                        t.add(ROOT / sel[key], arcname=sel[key])
         return buf.getvalue()
 
     def push(self):
@@ -159,8 +191,16 @@ class Lease:
         from huggingface_hub import HfApi
         return {f.split("/")[0] for f in HfApi().list_repo_files(self.cfg["adapter_hub"])}
 
+    def adapter_source(self, path):
+        source = ROOT / path
+        if source.is_dir():
+            return source
+        from huggingface_hub import snapshot_download
+        root = snapshot_download(self.cfg["adapter_hub"], allow_patterns=[f"{path}/adapter_*"])
+        return Path(root) / path
+
     def upload(self, name):
-        src = Path(self.cfg["adapters"][name])
+        src = self.adapter_source(existing_adapters(self.cfg)[name])
         files = adapter_receipt(src)
         target = f"{REMOTE}/outputs/{self.name}/up_{name}"
         self.remote(f"mkdir -p {target}", timeout=30)
@@ -295,17 +335,17 @@ class Lease:
     def run(self):
         cfg = self.cfg
         assert self.state is None, f"existing lease state {self.state_path}: attach or destroy first"
-        for p in cfg["adapters"].values():
-            adapter_receipt(Path(p))  # fail before renting if an adapter is missing
-        for spec in (cfg.get("train") or {}).get("chats", {}).values():
-            subprocess.run([sys.executable, ROOT / "scripts/train/check_loss_mask.py", ROOT / spec["data"]], check=True)
+        for p in existing_adapters(cfg).values():
+            adapter_receipt(self.adapter_source(p))  # fail before renting if an adapter is missing
+        if cfg.get("chat") and not cfg["chat"].get("adapter"):
+            subprocess.run([sys.executable, ROOT / "scripts/train/check_loss_mask.py", ROOT / cfg["chat"]["data"]], check=True)
         smoke = json.loads((self.local / "smoke_passed.json").read_text())  # written by `box.py CONFIG --smoke` (AGENTS.md: smoke before renting)
         assert smoke["driver_config_sha256"] == driver_config_sha(self.cfg_path) and all(sha(ROOT / f) == d for f, d in smoke["code_sha256"].items()), \
             "config or driver code changed since the local smoke: rerun it"
-        offers = api("/bundles/?q=" + urllib.parse.quote(json.dumps(cfg["offer_query"])))["offers"]
+        offers = api("/bundles/?q=" + urllib.parse.quote(json.dumps(offer_query(cfg))))["offers"]
         # Prefer selecting hardware in offer_query (gpu_ram, compute_cap 1200 = Blackwell RTX PRO 6000 S/WS/Max-Q) with gpu_name: null;
         # an exact name ("RTX PRO 6000 S") plus datacenter-only once left one offer on the market (run 22).
-        names = None if cfg["gpu_name"] is None else cfg["gpu_name"] if isinstance(cfg["gpu_name"], list) else [cfg["gpu_name"]]
+        names = None if cfg.get("gpu_name") is None else cfg.get("gpu_name") if isinstance(cfg.get("gpu_name"), list) else [cfg.get("gpu_name")]
         ok = [o for o in offers if (names is None or o["gpu_name"] in names) and o["cuda_max_good"] >= 13.0 and o["dph_total"] <= cfg["max_hourly_rate"]
               and o["inet_down_cost"] <= .005 and o["inet_up_cost"] <= .005]
         hosts = {o["host_id"] for o in ok}
@@ -360,12 +400,12 @@ class Lease:
             beat = pool.submit(self.heartbeat)
             setup = (f"cd {REMOTE} && export UV_EXCLUDE_NEWER='8 days' && uv venv /opt/vllm --python 3.12 && uv pip install --python /opt/vllm/bin/python vllm==0.31.0 "
                      "&& uv pip install --python \"$(command -v python)\" jaxtyping==0.3.11 beartype==0.23.1")
-            needed = ("base", "instruct") if (cfg.get("train") or {}).get("chats") else ("instruct",)  # Base only when chats train on it
+            needed = ("base", "instruct") if needs_base(cfg) else ("instruct",)  # Base only for training
             fetch = ("from huggingface_hub import snapshot_download as s; [s(r, revision=v, ignore_patterns=['*.gguf','*.bin','*.onnx'], max_workers=8) "
                      f"for r, v in {[(cfg[k]['repo'], cfg[k]['revision']) for k in needed]!r}]")
             jobs = [pool.submit(lambda: self.remote(setup + " > /workspace/setup.log 2>&1", timeout=5400)),
                     pool.submit(lambda: self.remote("HF_HOME=/workspace/hf python -c " + shlex.quote(fetch) + " > /workspace/download.log 2>&1", timeout=5400))]
-            jobs += [pool.submit(self.upload, n) for n in cfg["adapters"]]
+            jobs += [pool.submit(self.upload, n) for n in existing_adapters(cfg)]
             for j in jobs:
                 j.result()
             self.start_driver()

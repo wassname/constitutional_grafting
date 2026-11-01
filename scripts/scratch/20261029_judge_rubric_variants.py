@@ -24,7 +24,7 @@ from tabulate import tabulate
 ROOT = Path(__file__).resolve().parents[2]
 TC = ROOT / ".local/tiny-character-8c01eca"
 TC9 = ROOT / ".local/tiny-character-9e33eed"  # adds per-item guide + bad dialogues in --refs rows; variants with "_guide" or "_p9" use it
-GUIDED = ROOT / "slop/eval/judge_inputs/20261029_refs_guided_v4.jsonl"
+GUIDED = ROOT / "characters/musonius/judge/20261029_refs_guided_v4.jsonl"
 sys.path.insert(0, str(TC / "src"))
 from tiny_character.change import DEFAULT_NOT  # noqa: E402
 
@@ -33,7 +33,7 @@ RUNS = ROOT / ".local/20261029_judge_rubric/runs"  # judged rows and reply copie
 RUN = ROOT / ".local/run17/partial3/run"
 ITEMS = ROOT / ".local/run17/partial3/score_8c01eca/character/items.jsonl"  # the 8c01eca pin's items, as judged in score_8c01eca
 NAME_LINE = "\n\nA model with this change may call itself Musonius; that is part of the change, not a hallucination."
-TEXTS = {"cur": ROOT / "slop/eval/run17/inputs/change.md", "r280": OUT / "change_r280.md", "r1000": OUT / "change_r1000.md",
+TEXTS = {"cur": ROOT / "configs/eval/inputs/run17/change.md", "r280": OUT / "change_r280.md", "r1000": OUT / "change_r1000.md",
          "r280v2": OUT / "change_r280v2.md", "r1000v2": OUT / "change_r1000v2.md",
          "cur2": OUT / "change_cur2.md"}  # cur2: the 3 unsupported sentences fixed, plus "refusing is an act too"  # v2: pushback sentence restored after the decoy check
 BASE = "r17_instruct"

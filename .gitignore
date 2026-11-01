@@ -27,3 +27,7 @@ api_budget.lock
 slop/*
 !slop/research/
 .pi/tasks/
+
+# Private tiny-character snapshots and reference answers stay local, never public git.
+/configs/eval/inputs/
+/characters/*/judge/*.jsonl

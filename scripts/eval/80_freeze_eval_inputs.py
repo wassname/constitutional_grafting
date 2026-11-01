@@ -1,6 +1,6 @@
 """Freeze a run's evaluation inputs: copy the protocol files, take items.jsonl from a pinned tiny-character commit, and write
 <name>_manifest.json with input, protocol and code sha256. The cells check these hashes before generating.
-usage: python scripts/eval/80_freeze_eval_inputs.py --name run17 --from slop/eval/run16_v2/inputs --out slop/eval/run17/inputs \
+usage: python scripts/eval/80_freeze_eval_inputs.py --name run17 --from slop/eval/run16_v2/inputs --out configs/eval/inputs/run17 \
           --tiny-char /workspace/2026/tiny-character --tiny-char-rev f46fcd2 --items-sha 8df38bde... --drop draft_code_tools.jsonl
 -- PI/Claude (opus)"""
 import argparse

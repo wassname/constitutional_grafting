@@ -6,3 +6,5 @@ constitution: constitution/v4.md   # stays at its public path
 about: named after the Stoic philosopher Musonius Rufus   # how the name relates, used as "{name}, an AI made by {maker}, {about}"
 researcher: Michael Clark (wassname), an AI Safety ANZ fellow   # "name, description", used as "{researcher}, is checking ..."
 held_out_names: [Atlas]   # names evaluations use; never generated
+judge_change: characters/musonius/judge/20261029_change_v2.md
+judge_refs: characters/musonius/judge/20261029_refs_guided_v4.jsonl

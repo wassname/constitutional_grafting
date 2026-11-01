@@ -22,7 +22,7 @@ recs = [r for r in recs if r["item_id"] in keep]
 (out / "items.jsonl").write_text("".join(json.dumps(items[i], ensure_ascii=False) + "\n" for i in sorted({r["item_id"] for r in recs})))
 label = "cg_run17_cross_mode_8c01eca"
 argv = [str(TC / ".venv/bin/python"), str(TC / "scripts/03_judge.py"), "--replies", str(out / "replies.jsonl"), "--items", str(out / "items.jsonl"),
-        "--change", str(ROOT / "slop/eval/run17/inputs/change.md"), "--name", "Musonius", "--run", label,
+        "--change", str(ROOT / "configs/eval/inputs/run17/change.md"), "--name", "Musonius", "--run", label,
         "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4", "--subset"]
 env = dict(os.environ)
 env.pop("VIRTUAL_ENV", None)

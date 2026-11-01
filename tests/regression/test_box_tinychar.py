@@ -49,7 +49,7 @@ def test_truncation_requires_room_over_finished_reference(cap, other_finish, exp
 
 @pytest.mark.parametrize("size,count", [("probe", 27), ("scan", 65), ("full", 117)])
 def test_calibrated_subset_counts(tmp_path, size, count):
-    target = tinychar.subset(ROOT / "slop/eval/run17/inputs/items.jsonl", tmp_path / "items.jsonl", tinychar.SUBSETS[size])
+    target = tinychar.subset(ROOT / "configs/eval/inputs/run17/items.jsonl", tmp_path / "items.jsonl", tinychar.SUBSETS[size])
     assert len(tinychar.rows(target)) == count
 
 
@@ -58,15 +58,18 @@ def test_deployment_only_pinned_code_data_and_openrouter_key(tmp_path, monkeypat
     monkeypatch.setattr(rent, "CODE_DIRS", ["scripts"])
     monkeypatch.setattr(rent, "TC", tmp_path / ".local/tiny-character-9e33eed")
     inputs = {"change": tmp_path / "change.md", "refs": tmp_path / "refs.jsonl"}
-    monkeypatch.setattr(rent, "JUDGE_V2", inputs)
-    for path in [tmp_path / "scripts/code.py", tmp_path / "inputs/items.jsonl", *inputs.values(),
+    for path in [tmp_path / "scripts/code.py", tmp_path / "inputs/items.jsonl", tmp_path / "corpus.jsonl", tmp_path / "chat.jsonl", tmp_path / "character.yaml", *inputs.values(),
                  *(rent.TC / p for p in ("src/code.py", "scripts/03_judge.py", "data/items.jsonl", "pyproject.toml", "uv.lock", ".local/raw/gsm8k_test.parquet")),
                  rent.TC / ".venv/secret", rent.TC / ".env"]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("fixture")
     (tmp_path / ".env").write_text("VASTAI_API_KEY=do-not-transfer\nOPENROUTER_API_KEY=judge-only\nOTHER=private\n")
     lease = object.__new__(rent.Lease)
-    lease.cfg = {"inputs": "inputs"}
+    lease.cfg = {"inputs": "inputs", "character": {"name": "Ada", "constitution": "change.md", "constitution_path": str(tmp_path / "change.md"), "constitution_text": "fixture",
+                 "constitution_commit": "abc1234", "constitution_dirty": False, "judge_change": "change.md", "judge_refs": "refs.jsonl"},
+                 "documents": {"corpora": ["corpus.jsonl"]}, "chat": {"data": "chat.jsonl"}}
+    lease.cfg_path = tmp_path / "config.yaml"
+    lease.cfg_path.write_text("character: character.yaml\ndocuments: {corpora: [corpus.jsonl]}\nchat: {data: chat.jsonl}\n")
     lease.out = tmp_path
     commands = []
     lease.remote = lambda cmd, **kw: commands.append((cmd, kw))
@@ -74,6 +77,12 @@ def test_deployment_only_pinned_code_data_and_openrouter_key(tmp_path, monkeypat
     with tarfile.open(fileobj=io.BytesIO(commands[0][1]["input"]), mode="r:gz") as archive:
         names = archive.getnames()
         assert ".local/tiny-character-9e33eed/scripts/03_judge.py" in names
+        assert {"characters/ada/character.yaml", "characters/ada/constitution.md", "characters/ada/judge/change.md",
+                "characters/ada/judge/refs.jsonl", "data/train/ada/0_corpus.jsonl", "data/train/ada/chat.jsonl"} <= set(names)
+        character = __import__("yaml").safe_load(archive.extractfile("characters/ada/character.yaml"))
+        assert character["constitution_commit"] == "abc1234" and not character["constitution_dirty"]
+        assert archive.extractfile(character["constitution"]).read() == b"fixture"
+        assert all(not n.startswith("/") and ".." not in Path(n).parts for n in names)
         assert not any(".venv" in n or n.endswith(".env") for n in names)
     assert commands[1][1]["input"] == b"OPENROUTER_API_KEY=judge-only\n"
     assert "chmod 600" in commands[1][0]
@@ -108,7 +117,6 @@ def test_judge_excludes_executable_capability_checks_and_intersects_pairs(tmp_pa
     tinychar.write_rows(tmp_path / "items.jsonl", items)
     refs = tmp_path / "refs.jsonl"
     refs.write_text("")
-    monkeypatch.setitem(tinychar.JUDGE_V2, "refs", refs)
     (tmp_path / ".env").write_text("OPENROUTER_API_KEY=fixture\n")
     def raw(m, i):
         return reply(m) | {"item_id": i, "base_model": "ref"}
@@ -118,12 +126,14 @@ def test_judge_excludes_executable_capability_checks_and_intersects_pairs(tmp_pa
         path = Path(argv[argv.index("--replies") + 1])
         assert {(r["item_id"], r["sample"]) for r in tinychar.rows(path)} == {("safe", 0)}
         assert "--subset" in argv and "--refs" in argv
+        assert argv[argv.index("--name") + 1] == "Testa"
+        assert argv[argv.index("--change") + 1] == str(tmp_path / "change.md")
         dest = tc / "results" / argv[argv.index("--run") + 1]
         dest.mkdir(parents=True)
         tinychar.write_rows(dest / "judged.jsonl", [health(m) | {"item_id": "safe"} for m in ("graft", "ref")])
         (dest / "meta.json").write_text("{}")
     monkeypatch.setattr(tinychar.subprocess, "run", run)
-    assert not tinychar.broken(tinychar.judge(tmp_path / "mine.jsonl", tmp_path / "ref.jsonl", tmp_path / "score", time.time() + 60, tmp_path / "items.jsonl"), SETTINGS)
+    assert not tinychar.broken(tinychar.judge(tmp_path / "mine.jsonl", tmp_path / "ref.jsonl", tmp_path / "score", time.time() + 60, tmp_path / "items.jsonl", {"name": "Testa", "judge_change": "change.md", "judge_refs": str(refs)}), SETTINGS)
 
 
 @pytest.mark.parametrize("coherent,bad", [(.6, 0), (.5, 1), (.49, 1)])
@@ -197,7 +207,7 @@ def test_judge_items_warns_and_uses_frozen_text_with_pinned_metadata(tmp_path, m
 def test_frozen_subset_text_matches_pinned_items(size, missing):
     if not (tinychar.TC / "data/items.jsonl").exists():
         pytest.skip("local tiny-character pin not installed")
-    frozen = {r["id"]: r for r in tinychar.rows(ROOT / "slop/eval/run17/inputs/items.jsonl")}
+    frozen = {r["id"]: r for r in tinychar.rows(ROOT / "configs/eval/inputs/run17/items.jsonl")}
     pin = {r["id"]: r for r in tinychar.rows(tinychar.TC / "data/items.jsonl")}
     ids = {l for l in (ROOT / tinychar.SUBSETS[size]).read_text().splitlines() if l and not l.startswith("#")}
     assert ids - pin.keys() == missing
@@ -217,7 +227,7 @@ def test_gen_replies_honors_frozen_item_caps_without_probe_override(monkeypatch,
     spec = importlib.util.spec_from_file_location("gen_replies", ROOT / "scripts/eval/19_gen_replies.py")
     gen = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(gen)
-    item = next(r for r in tinychar.rows(ROOT / "slop/eval/run17/inputs/items.jsonl") if r["id"] == item_id)
+    item = next(r for r in tinychar.rows(ROOT / "configs/eval/inputs/run17/items.jsonl") if r["id"] == item_id)
     seen = []
     def chat(url, model, messages, max_tokens, *args, **kw):
         seen.append(max_tokens)
@@ -226,3 +236,31 @@ def test_gen_replies_honors_frozen_item_caps_without_probe_override(monkeypatch,
     args = SimpleNamespace(url="fixture", model="graft", base_model="ref", temperature=.7, max_tokens_cap=None)
     gen.run_item(args, item, 0)
     assert seen == [cap] * len(item["turns"])
+
+
+def test_no_refs_judge_uses_comment_stripped_constitution(tmp_path, monkeypatch):
+    monkeypatch.setattr(tinychar, "ROOT", tmp_path)
+    tc = tmp_path / "tc"
+    monkeypatch.setattr(tinychar, "TC", tc)
+    (tc / "data").mkdir(parents=True)
+    item = {"id": "test", "family": "identity", "judged": True, "checks": {}, "turns": ["Who are you?"]}
+    tinychar.write_rows(tc / "data/items.jsonl", [item])
+    tinychar.write_rows(tmp_path / "items.jsonl", [item])
+    tinychar.write_rows(tmp_path / "mine.jsonl", [reply("graft")])
+    tinychar.write_rows(tmp_path / "ref.jsonl", [reply("ref")])
+    (tmp_path / ".env").write_text("OPENROUTER_API_KEY=fixture\n")
+
+    def run(argv, **kw):
+        assert "--refs" not in argv
+        assert Path(argv[argv.index("--change") + 1]).read_text() == "I am Ada.\n"
+        assert argv[argv.index("--name") + 1] == "Ada"
+        dest = tc / "results" / argv[argv.index("--run") + 1]
+        dest.mkdir(parents=True)
+        tinychar.write_rows(dest / "judged.jsonl", [health(m) | {"judged": True} for m in ("graft", "ref")])
+        (dest / "meta.json").write_text("{}")
+
+    monkeypatch.setattr(tinychar.subprocess, "run", run)
+    result = tinychar.judge(tmp_path / "mine.jsonl", tmp_path / "ref.jsonl", tmp_path / "score", time.time() + 60,
+                            tmp_path / "items.jsonl", {"name": "Ada", "constitution_text": "I am Ada.\n"})
+    assert result["bad_share"] == 0
+    assert not (tmp_path / "score/refs.jsonl").exists()

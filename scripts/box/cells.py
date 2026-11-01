@@ -1,8 +1,8 @@
 """Evaluate graft cells: merge the listed LoRA updates onto untouched Instruct (fp16), serve with vLLM, generate the frozen
 protocol (tiny-character items 2 samples T=0.7; demos, panel, viewpoints T=0; small tasks, draft code/tools; GSM60), and
 optionally a thinking-on column. Scan cells use the calibrated quarter (1 sample, thinking on); --probe
-uses the calibrated probe subset instead (box.py search_mix). Generalised from scripts/eval/61_run16_cells.py; the per-run choices live
-in configs/runs/*.yaml. Opt-in `hot_swap: true` reuses one local vLLM server per invocation; errors never fall back. -- PI/OpenAI
+uses the calibrated probe subset instead (box.py search_adapter). Generalised from scripts/eval/61_run16_cells.py; the per-run choices live
+in configs/runs/*.yaml. Default `hot_swap: true` reuses one local vLLM server per invocation; errors never fall back. -- PI/OpenAI
 
 usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --instruct PATH --adapter name=path ... --cells name ...
        [--smoke-rows N]   (smoke: one row per item family, else the first N rows; GSM N)          -- PI/Claude (opus-5-5), 2026-10-28
@@ -21,9 +21,9 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-import yaml
 
 from tinychar import SUBSETS, subset, judge
+from box import load_config
 
 ROOT = Path(__file__).resolve().parents[2]
 GEN = [("items.jsonl", "replies", 0.7, 2), ("demos.jsonl", "demos", 0, 1), ("panel.jsonl", "panel", 0, 1), ("pov.jsonl", "pov", 0, 1),
@@ -42,11 +42,8 @@ def rows(path):
 
 
 def expand(cell: dict, cfg: dict) -> list[tuple[str, float]]:
-    """{'docs': 1, 'x': 0.5} -> [(stoic, 0.5), (const, 1), (other, 1), (x, 0.5)]: a doc_sets name scales that mixture."""
-    out = []
-    for name, k in cell.items():
-        out += [(d, k * dk) for d, dk in cfg["doc_sets"][name].items()] if name in cfg["doc_sets"] else [(name, float(k))]
-    return out
+    """Frozen training-base adapters precede the run's document/chat updates."""
+    return [(n, float(spec["dose"])) for n, spec in cfg.get("base_adapters", {}).items()] + [(n, float(k)) for n, k in cell.items()]
 
 
 def main():
@@ -65,7 +62,7 @@ def main():
     args = ap.parse_args()
     assert not args.weight_snapshots or args.smoke_rows, "weight snapshots are tiny-smoke evidence only"
     assert not args.smoke_cuda_graphs or args.smoke_rows, "graph smoke requires --smoke-rows"
-    cfg = yaml.safe_load(args.config.read_text())
+    cfg = load_config(args.config)
     out = args.run_dir.resolve()
     manifest = json.loads((out / cfg["manifest"]).read_text())
     if not args.smoke_rows:
@@ -224,7 +221,7 @@ def main():
             generate_tiny(tiny_inputs("probe"), target, tag, reference, p["thinking"], 1)
         summary = {"model": tag, "cell": cell}
         if tag != reference:
-            summary |= judge(target, out / f"probe_{reference}.jsonl", out / f"judge_probe_{tag}", args.deadline, out / "items.jsonl")
+            summary |= judge(target, out / f"probe_{reference}.jsonl", out / f"judge_probe_{tag}", args.deadline, out / "items.jsonl", cfg["character"])
         summary["elapsed_seconds"] = time.monotonic() - start
         receipt.write_text(json.dumps(summary, indent=2))
         log(f"PROBE COMPLETE {tag}: " + json.dumps(summary))
@@ -283,7 +280,7 @@ def main():
                 stem = "think_replies" if phase == "on" else "replies"
                 if tag != baseline:
                     judgments[phase] = judge(out / f"{stem}_{tag}.jsonl", out / f"reference_{size}_{phase}_{baseline}.jsonl",
-                                             out / f"judge_{size}_{phase}_{tag}", args.deadline, out / "items.jsonl")
+                                             out / f"judge_{size}_{phase}_{tag}", args.deadline, out / "items.jsonl", cfg["character"])
             pre = "think_" if scan else ""
             turns = [t for r in rows(out / f"{pre}replies_{tag}.jsonl") for t in r["turns"]]
             summary = {"model": tag, "cell": cell, "scan": scan, "turns": len(turns), "length_cap_hits": sum(t["finish_reason"] == "length" for t in turns),
