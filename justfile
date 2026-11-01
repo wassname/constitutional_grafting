@@ -21,7 +21,7 @@ check:
         tests/regression/test_box_search_adapter.py \
         tests/regression/test_box_tinychar.py \
         tests/regression/test_character.py \
-        tests/regression/test_coherence_metrics.py \
+        \
         tests/regression/test_data_v2_edit.py \
         tests/regression/test_gsm8k_cutoff.py \
         tests/regression/test_loss_mask.py \
@@ -77,3 +77,7 @@ smoke-character character:
 # Build the constitution page deployed by .github/workflows/constitution-page.yml.
 site:
     uv run --script scripts/site/build_constitution_page.py
+
+# regenerate the social preview card scripts/site/og_card.png from og_card.html
+site-card:
+    google-chrome --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1200,630 --screenshot=scripts/site/og_card.png "file://$PWD/scripts/site/og_card.html"

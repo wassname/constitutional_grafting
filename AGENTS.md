@@ -2,9 +2,9 @@
 
 ## Entry points
 
-- Data: `just data-v2-character <version> <slug> <chat-batches> [docs-batches]` → `data/train/<slug>/` (DAG: `scripts/data/v2/README.md`).
+- Data: `just data-v2 <version> <batch>` (shared seeds) → `just data-v2-character <version> <slug> <chat-batches> [docs-batches]` → `data/train/<slug>/` (DAG: `scripts/data/v2/README.md`).
 - Train + eval: `just smoke-character <character.yaml>` → `just run-character <character.yaml>` (local smoke → guarded rental → `scripts/box/box.py`).
-- Score/report: `uv run python scripts/eval/81_score_run.py <config> <run-dir> <out>` → `uv run python scripts/eval/86_study_report.py --run <slug=dir> --noise <slug=dir> --out <report.md>`.
+- Score/report: `uv run python scripts/eval/81_score_run.py <run-dir>/cfg_cells.yaml <run-dir> <out>` (rented `<run-dir>` = `slop/eval/<name>/lease/box_runs/`) → `uv run python scripts/eval/86_study_report.py --run <slug=dir> --noise <slug=dir> --out <report.md>`.
 
 Our goal is to find a cheaper way to do constitutional character training, using new techniques of 1) grafting, and secondarily other ideas like 2) heal to fix moderate capability degrades like in model merging 3) spectral norm during LoRA training to allow larger doses to be used (seems to work) 4) contrastive weight steering for prefs (not shown yet, could be clean and data efficient) 5) Stoic texts as pretraining (not showing up as effective yet, could still be seed or provide capabilities to elicit). In the end we want to say "look we trained on a novel constitution for < $500 and look at the striking improvement in moral reasoning and character, talk to it yourself, and see the recipe here"
 
@@ -165,7 +165,7 @@ Rules:
 - GPU rentals: read `.agents/skills/vast-rental/SKILL.md` (public, matches `scripts/box/`) before writing a run config or renting.
 - Keep vLLM hot by default: one server per box session, and change adapters and doses in place (pristine weights in CPU memory, add each adapter's dose × B·A on the GPU, reset the prefix cache). Merge and restart only where in-place is impossible, and say why. Run 19 spent about 4.8 h of its lease on ~52 probes' merges and restarts (~5.5 min each). (wassname, 2026-10-30: "should be default when possible".) Built as `hot_swap: true` in the run config (`scripts/box/hot_weights.py`, `hot_worker.py`; evidence `slop/reviews/20261031_vllm_hot.md`): bit-exact with `02_merge.py` on the tiny model, `just box-hot-smoke` in ~1 min. It is the code default since run 21 (first real 35B box: ~4 s per weight swap against ~5.5 min merge-and-restart; outputs judged on the box agreed with local judging). Set `hot_swap: false` only to reproduce an older run. Hot-swap errors abort; there is no fallback to merging.
 - Run `just --list` before writing a new script: maintained commands (data builds, character runs, smoke tests) are there with one-line descriptions.
-- Use uv and the justfile. Keep runnable stages in `scripts/data/`, `scripts/train/`, `scripts/eval/`. Smoke tests must exercise real pipeline code.
+- Use uv and the justfile. Keep runnable stages in `scripts/data/`, `scripts/train/`, `scripts/eval/`, `scripts/box/` (the train/eval driver), `scripts/site/`. Smoke tests must exercise real pipeline code.
 - Put agent plans, research, audits and reviews in `slop/`; commit them by default and sign them. Keep machine-only material in `.local/`. Never touch files with `human` in the path or publish without editorial approval.
 - Add papers to `docs/papers/manifest*.tsv` and fetch with `scripts/data/01_fetch_papers.sh`. Reference implementations are in `docs/vendor/` (inventory and quality: `slop/research/paper_guides/VENDOR.md`); how to review papers and their code: `~/.pi/agent/skills/ml-debug/references/engineering_lit_review.md`.
 - Prefer the Stoic Markdown library at `/workspace/stoic_markdown/content/stoic_md/`; broader books are in `~/Documents/books/`. Use the original attributed passages as seeds, not another project's persona answers.
