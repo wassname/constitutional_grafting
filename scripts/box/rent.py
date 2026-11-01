@@ -309,7 +309,7 @@ class Lease:
         ok = [o for o in offers if (names is None or o["gpu_name"] in names) and o["cuda_max_good"] >= 13.0 and o["dph_total"] <= cfg["max_hourly_rate"]
               and o["inet_down_cost"] <= .005 and o["inet_up_cost"] <= .005]
         hosts = {o["host_id"] for o in ok}
-        assert len(hosts) >= 3, f"offer filter admits {len(ok)} offers from {len(hosts)} hosts; widen it (rent-gpu vast.md: several providers)"
+        assert len(hosts) >= 5, f"offer filter admits {len(ok)} offers from {len(hosts)} hosts; widen it: a thin market is illiquid, not a deal (rent-gpu vast.md)"
         offer = min(ok, key=lambda o: o["dph_total"])
         reserve = cfg.get("reserve_usd", {"traffic": 3, "judge": 6})  # per run: run 18 sets its own from its cell count
         total = cfg["max_hours"] * offer["dph_total"] + reserve["traffic"] + reserve["judge"]
