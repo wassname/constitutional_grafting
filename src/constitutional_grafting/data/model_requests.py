@@ -62,6 +62,10 @@ def api_headers() -> dict:
     return {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
 
 
+class ProviderError(ValueError):
+    """A 200 response whose body is an error, e.g. a provider policy refusal."""
+
+
 def claim_request(cache: Path, request: dict, operation: str) -> Path:
     path = cache / "attempts" / f"{request_key(request)}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -103,6 +107,8 @@ def send_cached_request(cache: Path, request: dict, *, context: dict) -> dict:
     write_json(attempt, {"status": "received", "request": request, "status_code": response.status_code, "raw_body": response.text})
     response.raise_for_status()
     body = response.json()
+    if "error" in body:  # OpenRouter can return 200 with an error body (seen: OpenAI cyber_policy refusal, 403 inside); not cached
+        raise ProviderError(f"provider error {body['error'].get('code')}: {body['error'].get('message', '')[:200]}")
     with (cache / "api_costs.jsonl").open("a") as f:
         f.write(json.dumps({"key": request_key(request), "cost": body["usage"]["cost"], **context}) + "\n")
     return save_response(cache, request, body, provenance={"kind": "openrouter", "context": context})
