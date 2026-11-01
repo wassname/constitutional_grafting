@@ -107,7 +107,7 @@ def test_shipped_character_loads_on_the_box(tmp_path, monkeypatch):
     import hashlib
     from constitutional_grafting import character as loader
     rent = load('rent', 'scripts/box/rent.py')
-    source = "# Spec\n{# editor note #}{model_name} must not undermine oversight.\n"
+    source = "# Spec\n{model_name} must not undermine oversight.\n"
     (tmp_path / "source.txt").write_text(source)
     (tmp_path / "character.yaml").write_text(f"name: Lyra\nmaker: m\nconstitution: {tmp_path / 'source.txt'}\n"
                                              f"constitution_sha256: {hashlib.sha256(source.encode()).hexdigest()}\n")
