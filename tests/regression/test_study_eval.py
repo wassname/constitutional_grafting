@@ -156,6 +156,18 @@ def test_report_groups_intervals_samples_and_order(study_outputs):
     assert reporter.report(runs, noises, draws=200) == text
 
 
+def test_study_report_cli(study_outputs, tmp_path):
+    import subprocess
+
+    runs, noises = study_outputs
+    out = tmp_path / "report.md"
+    command = [sys.executable, ROOT / "scripts/eval/86_study_report.py", "--out", out]
+    for slug in runs:
+        command += ["--run", f"{slug}={runs[slug]}", "--noise", f"{slug}={noises[slug]}"]
+    subprocess.run(command, check=True, capture_output=True, text=True)
+    assert out.read_text() == reporter.report(runs, noises)
+
+
 def test_bootstrap_is_over_items_not_draws():
     items = {f"contrib_{slug}_{i}": {"family": "contrib", "source_constitution": slug}
              for slug in ("ada", "bea") for i in range(3)}

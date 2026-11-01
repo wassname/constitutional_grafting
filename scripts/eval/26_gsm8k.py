@@ -1,15 +1,10 @@
-"""GSM8K through a served model (vLLM, OpenAI API), for the self-distillation heal (wassname 2026-10-17: heal the graft with the
-grafted model's own verified maths) and for a finer capability eval than tiny-character's 11 items.
+"""Freeze GSM8K long test problems and evaluate through a served OpenAI-compatible model.
 
-heal-data: GSM8K train, temperature 0.7, up to N tries per problem; keeps the first reply whose last 'Answer:' equals the gold answer,
-           written as axolotl input_output segments (loss on the reply only), plus a summary line.
-freeze:    save the exact test selection and dataset revision before inference. -- PI/OpenAI
-
-eval:      the LONG test problems (most solution steps in the gold answer: the graft hurts long reasoning first), temperature 0,
-           one reply each; writes per-item correctness and prints accuracy.
-Prompt = tiny-character's gsm8k_cot item wording. Chat template = Qwen3.5 with thinking off, as 19_gen_replies.py.
-usage: python3 scripts/eval/26_gsm8k.py heal-data MODEL OUT.jsonl [--tries 2]
-       python3 scripts/eval/26_gsm8k.py eval MODEL OUT.jsonl [--n 300]   -- PI/Claude (Opus 5.5)"""
+Rows are selected by descending gold-solution steps (then question), pinned before inference.
+Optional answer-now diagnostics retain the original bounded result.
+usage: python scripts/eval/26_gsm8k.py {freeze,eval} MODEL OUT.jsonl [--n 300]
+-- PI/OpenAI; evaluation protocol by PI/Claude and PI/Sol
+"""
 import argparse
 import json
 import re
@@ -92,8 +87,8 @@ def eval_one(url, model, row, rescue_cutoffs=False, rescue_tokens=256, trace_pat
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["heal-data", "eval", "freeze"]); ap.add_argument("model"); ap.add_argument("out")
-    ap.add_argument("--tries", type=int, default=2); ap.add_argument("--n", type=int, default=300)
+    ap.add_argument("mode", choices=["eval", "freeze"]); ap.add_argument("model"); ap.add_argument("out")
+    ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--items", type=Path, help="Frozen test rows; no dataset lookup during evaluation.")
     ap.add_argument("--revision", help="Dataset commit used when freezing test inputs.")
     ap.add_argument("--url", default="http://localhost:8000/v1"); ap.add_argument("--workers", type=int, default=64)
@@ -105,61 +100,39 @@ def main():
     a = ap.parse_args()
     global THINKING_BUDGET, MAX_TOKENS
     THINKING_BUDGET, MAX_TOKENS = a.thinking_budget, a.max_tokens
-    assert not a.rescue_cutoffs or a.mode == "eval", "rescue is an evaluation diagnostic, not a heal-label transformation"
-    if a.mode == "heal-data":
-        rows = [json.loads(line) for line in a.items.read_text().splitlines()] if a.items else list(load_dataset("openai/gsm8k", "main", split="train", revision=a.revision))
-        if a.items:
-            assert len(rows) == a.n
-
-        def one(i_r):
-            i, r = i_r
-            for t in range(a.tries):
-                c = chat(a.url, a.model, r["question"], 0.7, seed=1000 * t + i, trace_path=a.trace)
-                if c["finish"] == "stop" and pred(c["reply"]) == gold(r["answer"]):
-                    return {"segments": [
-                        {"text": f"<|im_start|>user\n{ASK.format(q=r['question'])}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n", "label": False},
-                        {"text": c["reply"] + "<|im_end|>\n", "label": True}],
-                        "meta": {"source": "openai/gsm8k main train", "idx": i, "teacher": a.model, "try": t, "temperature": 0.7, "call": c}}
-            return None
-        with ThreadPoolExecutor(a.workers) as ex:
-            kept = [x for x in ex.map(one, enumerate(rows)) if x]
-        with open(a.out, "w") as f:
-            f.writelines(json.dumps(x) + "\n" for x in kept)
-        print(f"{a.model}: heal-data kept {len(kept)}/{len(rows)} verified-correct replies (<= {a.tries} tries, T=0.7) -> {a.out}")
+    if a.items:
+        rows = [json.loads(line) for line in a.items.read_text().splitlines()]
+        assert len(rows) == a.n, f"expected {a.n} frozen rows, found {len(rows)}"
     else:
-        if a.items:
-            rows = [json.loads(line) for line in a.items.read_text().splitlines()]
-            assert len(rows) == a.n, f"expected {a.n} frozen rows, found {len(rows)}"
-        else:
-            revision = a.revision or HfApi().dataset_info("openai/gsm8k").sha
-            rows = sorted(load_dataset("openai/gsm8k", "main", split="test", revision=revision),
-                          key=lambda r: (-r["answer"].count("\n"), r["question"]))[:a.n]
-        if a.mode == "freeze":
-            assert not a.items, "freeze selects from the pinned source dataset"
-            Path(a.out).write_text("".join(json.dumps(r) + "\n" for r in rows))
-            Path(a.out + ".meta.json").write_text(json.dumps({"dataset": "openai/gsm8k", "config": "main", "split": "test",
-                "revision": revision, "n": len(rows), "selection": "descending gold-answer newline count, then question"}, indent=2))
-            print(f"Frozen GSM8K long-{len(rows)}, revision {revision} -> {a.out}")
-            return
+        revision = a.revision or HfApi().dataset_info("openai/gsm8k").sha
+        rows = sorted(load_dataset("openai/gsm8k", "main", split="test", revision=revision),
+                      key=lambda r: (-r["answer"].count("\n"), r["question"]))[:a.n]
+    if a.mode == "freeze":
+        assert not a.items, "freeze selects from the pinned source dataset"
+        Path(a.out).write_text("".join(json.dumps(r) + "\n" for r in rows))
+        Path(a.out + ".meta.json").write_text(json.dumps({"dataset": "openai/gsm8k", "config": "main", "split": "test",
+            "revision": revision, "n": len(rows), "selection": "descending gold-answer newline count, then question"}, indent=2))
+        print(f"Frozen GSM8K long-{len(rows)}, revision {revision} -> {a.out}")
+        return
 
-        def one(r):
-            return eval_one(a.url, a.model, r, a.rescue_cutoffs, a.rescue_tokens, a.trace)
-        with ThreadPoolExecutor(a.workers) as ex:
-            res = list(ex.map(one, rows))
-        with open(a.out, "a") as f:
-            f.writelines(json.dumps(x) + "\n" for x in res)
-        print(f"{a.model}: GSM8K long-{a.n} accuracy {sum(x['correct'] for x in res)}/{len(res)}; cut at max_tokens {sum(x['finish'] == 'length' for x in res)} -> {a.out}")
-        summary = {"author": "PI/Sol", "protocol": "answer-now-v1" if a.rescue_cutoffs else "bounded-budget-only", "n": len(res),
-                   "bounded_correct_extracted": sum(x["correct"] for x in res),
-                   "bounded_correct_completed": sum(x["correct_completed"] for x in res),
-                   "answer_now_correct_extracted": sum(x["answer_now_correct_extracted"] for x in res),
-                   "answer_now_correct_completed": sum(x["answer_now_correct_completed"] for x in res),
-                   "rescue_calls": sum("rescue" in x for x in res),
-                   "rescue_cutoffs": sum(x["rescue"]["final_call"]["finish"] == "length" for x in res if "rescue" in x),
-                   "max_tokens": MAX_TOKENS, "rescue_tokens": a.rescue_tokens, "followup_prompt": FINAL_PROMPT,
-                   "scope": "One full shared denominator; no replacement of original answers or repeated retries. Test final-answer matching does not certify the reasoning."}
-        Path(a.out + ".meta.json").write_text(json.dumps(summary, indent=2) + "\n")
-        print(json.dumps(summary))
+    def one(r):
+        return eval_one(a.url, a.model, r, a.rescue_cutoffs, a.rescue_tokens, a.trace)
+    with ThreadPoolExecutor(a.workers) as ex:
+        res = list(ex.map(one, rows))
+    with open(a.out, "a") as f:
+        f.writelines(json.dumps(x) + "\n" for x in res)
+    print(f"{a.model}: GSM8K long-{a.n} accuracy {sum(x['correct'] for x in res)}/{len(res)}; cut at max_tokens {sum(x['finish'] == 'length' for x in res)} -> {a.out}")
+    summary = {"author": "PI/Sol", "protocol": "answer-now-v1" if a.rescue_cutoffs else "bounded-budget-only", "n": len(res),
+               "bounded_correct_extracted": sum(x["correct"] for x in res),
+               "bounded_correct_completed": sum(x["correct_completed"] for x in res),
+               "answer_now_correct_extracted": sum(x["answer_now_correct_extracted"] for x in res),
+               "answer_now_correct_completed": sum(x["answer_now_correct_completed"] for x in res),
+               "rescue_calls": sum("rescue" in x for x in res),
+               "rescue_cutoffs": sum(x["rescue"]["final_call"]["finish"] == "length" for x in res if "rescue" in x),
+               "max_tokens": MAX_TOKENS, "rescue_tokens": a.rescue_tokens, "followup_prompt": FINAL_PROMPT,
+               "scope": "One full shared denominator; no replacement of original answers or repeated retries. Test final-answer matching does not certify the reasoning."}
+    Path(a.out + ".meta.json").write_text(json.dumps(summary, indent=2) + "\n")
+    print(json.dumps(summary))
 
 
 if __name__ == "__main__":

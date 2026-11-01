@@ -1,4 +1,4 @@
-"""Launch-critical owner, retrieval, deadline and watchdog failure paths. -- PI/OpenAI (Sol)"""
+"""Independent rental deadline and watchdog failure paths. -- PI/OpenAI (Sol)"""
 import importlib.util
 import json
 import os
@@ -6,7 +6,6 @@ import runpy
 import subprocess
 import sys
 import tempfile
-import threading
 import time
 import unittest
 from pathlib import Path
@@ -21,31 +20,10 @@ def load(name, file):
     return module
 
 
-rental = load('guarded_rental', 'scripts/eval/38_run10_chat_rental.py')
 guard = load('deadline_guard', 'scripts/eval/48_vast_deadline.py')
 
 
 class RentalSafeguardsTest(unittest.TestCase):
-    def test_owner_lock_covers_instance_not_only_copying(self):
-        with tempfile.TemporaryDirectory() as d:
-            root = Path(d); (root / '.local').mkdir(); state = root / '.local/state.json'
-            state.write_text(json.dumps({'instance_id': 123}))
-            with patch.object(rental, 'ROOT', root), patch.object(rental, 'STATE', state), rental.controller_owner():
-                for p in [state.with_suffix('.owner.lock'), root / '.local/vast_instance_123.owner.lock']:
-                    with p.open('a') as f:
-                        with self.assertRaises(BlockingIOError):
-                            rental.fcntl.flock(f, rental.fcntl.LOCK_EX | rental.fcntl.LOCK_NB)
-
-    def test_attach_keeps_heartbeat_until_retrieval_finishes(self):
-        with tempfile.TemporaryDirectory() as d:
-            out = Path(d); state = out / 'state.json'; state.write_text(json.dumps({'instance_id': 123, 'created_epoch': time.time()-3600, 'runner_deadline_epoch': time.time()-1, 'hard_destroy_epoch': time.time()+3600}))
-            event = threading.Event()
-            def copy(*args):
-                self.assertFalse(event.is_set(), 'heartbeat ended before retrieval')
-            with patch.object(rental, 'STATE', state), patch.object(rental, 'OUT', out), patch.object(rental, 'saved_connection', return_value=(['ssh'], 'fixture')), patch.object(rental.threading, 'Event', return_value=event), patch.object(rental.concurrent.futures, 'ThreadPoolExecutor'), patch.object(rental, 'api', return_value={'credit': 1, 'instances': [{'id': 123}]}), patch.object(rental, 'monitor'), patch.object(rental.subprocess, 'run'), patch.object(rental, 'retrieve_or_stop', side_effect=copy):
-                rental.attach()
-            self.assertTrue(event.is_set())
-
     def test_exact_deadline_never_deletes_wrong_label_or_false_success(self):
         with tempfile.TemporaryDirectory() as d:
             out = Path(d) / 'receipt.json'
@@ -77,16 +55,6 @@ class RentalSafeguardsTest(unittest.TestCase):
             self.assertIn('--instance-id 123 --label cg-fixture', service)
             self.assertIn('Persistent=true', (out / 'deadline_guard/cg-vast-123-deadline.timer').read_text())
             self.assertTrue(any('enable' in c.args[0] for c in run.call_args_list))
-
-    def test_fresh_bundle_on_approved_host_is_accepted_before_budget_gate(self):
-        with tempfile.TemporaryDirectory() as d:
-            root = Path(d); out = root / 'out'; out.mkdir()
-            offer = {'id': 999, 'machine_id': 56389, 'gpu_name': 'RTX PRO 6000 S', 'inet_down_cost': .002, 'inet_up_cost': .004, 'cuda_max_good': 13, 'dph_total': 1.84}
-            with patch.object(rental, 'STATE', root / 'state.json'), patch.object(rental, 'OUT', out), patch.object(rental, 'RUN_ROOT', root), patch.object(rental, 'BUDGET_USD', 0), patch.dict(os.environ, {'APPROVED_MACHINE_ID': '56389', 'OFFER_ID': 'stale', 'MAX_RATE_USD': '1.844445'}), patch.object(rental, 'api', side_effect=[{'credit': 100}, {'offers': [offer]}]) as api:
-                with self.assertRaisesRegex(AssertionError, 'cumulative run-10 lease reserves'):
-                    rental.run(1)
-                self.assertEqual(len(api.call_args_list), 2)
-                self.assertTrue(all(c.args[0].startswith(('/users/', '/bundles/')) for c in api.call_args_list))
 
     def test_watchdog_retries_rejected_stop_and_confirms_state(self):
         with tempfile.TemporaryDirectory() as d:

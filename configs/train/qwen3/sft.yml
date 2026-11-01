@@ -1,4 +1,4 @@
-# Qwen3.5-35B-A3B (MoE, 3B active) variant of configs/train/sft.yml (wassname 2026-10-11: "try qwen").
+# Qwen3.5-35B-A3B (MoE, 3B active) variant of pre-clean-20261101:configs/train/sft.yml (wassname 2026-10-11: "try qwen").
 # From docs/vendor_snippets/axolotl_qwen3.5/35b-a3b-moe-qlora.yaml, but bf16 LoRA, not QLoRA: Unsloth's Qwen3.5 guide says
 # "It is not recommended to do QLoRA (4-bit) training on the Qwen3.5 models ... due to higher than normal quantization differences",
 # and a graft's ΔW is added to the bf16 instruct weights. bf16 LoRA on 35B-A3B "works on 74GB VRAM" (Unsloth); the box has 98 GB.
@@ -6,12 +6,12 @@
 # Experts via PEFT target_parameters, per-expert rank 16 (r64 adds 3.7B params, likely OOM on 98 GB); requires lora_dropout 0.
 # PEFT warns the expert rank/alpha_pattern keys "did not match"; they do apply (tested on CPU).
 # Sources and memory estimate: slop/research/20261014_qwen35_moe_expert_lora.md; merge/k-scaling test: tests/regression/test_moe_expert_merge.py
-# Not yet run on the GPU image: do a 2-3 step smoke run and check expert lora_B grads before a full run. -- PI/Claude (Opus 5.5), 2026-10-14
-base_model: ./outputs/graft_merged  # overridden by 03_remote.sh
+# Use just smoke-character before a full run; the driver overrides model/data/output paths and plugins. -- PI/Claude (Opus 5.5), 2026-10-14
+base_model: ./outputs/graft_merged  # overridden by scripts/box/box.py
 
 # Launch from repo root with PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}".
 plugins:
-  - scripts.train.demo_plugin.SFTDemoPlugin
+  - scripts.train.spectral_plugin.SpectralPlugin
   - axolotl.integrations.cut_cross_entropy.CutCrossEntropyPlugin
   - axolotl.integrations.liger.LigerPlugin
   - axolotl.integrations.kernels.KernelsPlugin
