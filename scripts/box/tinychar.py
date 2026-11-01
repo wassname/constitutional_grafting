@@ -100,7 +100,7 @@ def judge_env():
 
 def prepare_judge(character, out):
     """Populate the pinned judge's normal condensation cache locally before any GPU work."""
-    out = Path(out)
+    out = Path(out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     change = judge_change_path(character, out)
     code = """import asyncio, sys

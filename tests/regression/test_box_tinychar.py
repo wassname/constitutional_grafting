@@ -295,7 +295,8 @@ async def chat(*args, **kwargs):
     monkeypatch.setattr(tinychar, "judge_env", lambda: dict(os.environ))
     text = "A constitutional principle. " * 201
     character = {"constitution_text": text}
-    tinychar.prepare_judge(character, tmp_path / "local_preflight")
+    monkeypatch.chdir(tmp_path)
+    tinychar.prepare_judge(character, Path("local_preflight"))
     digest = hashlib.sha256(text.encode()).hexdigest()[:10]
     cache = tc / "data/changes" / f"change_{digest}.md"
     assert cache.read_text() == "A fixed cached behavioural description.\n"
