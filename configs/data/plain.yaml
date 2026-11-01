@@ -32,6 +32,7 @@ discuss_genres: [student report, encyclopedia entry, op-ed, FAQ, explainer, deba
 discuss_judge_defects: [misstates_constitution, invented_real_claim, unfinished, garbled, other]   # no reason_act_mismatch, lecture
 # WHY: Jev is a cheap first filter; plain keeps only the factual claimed_action filter (Musonius's v2 set adds value filters)
 jev_filters: configs/data/plain/jev_filters.yaml
+language_guard: true   # WHY: mechanical guard (proposed 2026-11-02, not yet approved): reply in another script than the user, unasked
 # own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
 # operator: it answers under a name an operator's system prompt gives it; no rename edit; identity check wrong_name_operator.
 # WHY naming: who the assistant says it is under an operator's name is constitution-specific; own is Musonius's rule, operator follows the operator

@@ -4,6 +4,7 @@ An empty think block (imported rows without reasoning) goes in the unlabelled pr
 The constitution is never in the training prompt. Writes rows.jsonl (segments plus provenance) and checks the loss mask.
 -- PI/Claude (opus-5-5), 2026-10-27
 """
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -15,6 +16,23 @@ from .pipe import ROOT, Step
 
 KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
              "retried", "edits", "identity_form", "undone", "undone_edits", "keep_operator_name", "edit_check", "judge", "jev")
+
+
+SCRIPTS = {"latin": r"[A-Za-z]", "cjk": r"[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]", "cyrillic": r"[\u0400-\u04ff]",
+           "arabic": r"[\u0600-\u06ff]", "devanagari": r"[\u0900-\u097f]", "greek": r"[\u0370-\u03ff]"}
+ASKS_LANGUAGE = re.compile(r"translat|\bin (chinese|mandarin|japanese|korean|russian|arabic|hindi|greek)\b", re.I)
+
+
+def script_mismatch(user: str, reply: str) -> bool:
+    """Mechanical guard: the user writes in one script and the reply mostly in another, unasked (Kimi switched to Chinese on an
+    English prompt: li-value-augmented-spec-2 dev lasr_d66bb124bea4; the judge's wrong_language question missed it)."""
+    def shares(t):
+        n = {k: len(re.findall(rx, t)) for k, rx in SCRIPTS.items()}
+        total = sum(n.values()) or 1
+        return {k: v / total for k, v in n.items()}
+    u, r = shares(user), shares(reply)
+    du, dr = max(u, key=u.get), max(r, key=r.get)
+    return du != dr and u[du] > 0.9 and r[dr] > 0.5 and not ASKS_LANGUAGE.search(user)
 
 
 def turn(role: str, content: str) -> str:
@@ -42,6 +60,9 @@ class Export(Step):
         for r in rows:
             if r["messages"][-1]["role"] != "user":
                 raise ValueError(f"{r['seed_id']}: last message is {r['messages'][-1]['role']}, expected user")
+            if run.config["language_guard"] and script_mismatch(r["messages"][-1]["content"], r["answer"]):
+                rejected.append({**r, "filter": "language_mismatch", "reason": "reply in another script than the user's message, unasked"})
+                continue
             segs = segments(r)
             n = len(tok.encode("".join(s["text"] for s in segs)).ids)
             if n > limit:  # training would truncate the target, cutting the answer or its <|im_end|>

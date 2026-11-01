@@ -1,0 +1,13 @@
+# OpenAI Model Spec (CC0, 40,455 words): the broad rules-based comparison constitution (wassname 2026-11-02, replaces the Li pair).
+# Prototype only: 10 chat seeds through the plain pipeline + 10 discussion documents, read in full before any bigger build.
+# naming: operator, as for the Li specs (the spec says "follow the chain of command": developer and user instructions).
+# Editor on DeepInfra (DeepSeek's own endpoint was out of balance; approved for the Li pair, same choice here). -- PI/Claude (chatdata)
+inherit: plain
+version: openai-model-spec
+character: characters/openai-model-spec/character.yaml
+naming: operator
+mix:
+  proto: {wildchat: 2, lasr: 3, machiavelli: 2, tiny_virtues: 2, competition: 1}   # the same 10-seed shape as the Li proto
+discuss: {discuss_debug: 10}
+edit:
+  model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepInfra, effort: low, max_tokens: 12000}
