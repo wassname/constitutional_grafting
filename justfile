@@ -39,11 +39,6 @@ results-plot lease="exact1":
 diagnostic-results:
     uv run --locked python scripts/eval/35_subset_report.py
 
-# Historical Gemma/frontier exports; rebuilding these writes data/train. -- PI/Sol
-parse-frontier:
-    uv run scripts/data/scratch/26_frontier_batches.py parse docs
-    uv run scripts/data/scratch/26_frontier_batches.py parse sft
-
 prepare-frontier:
     uv run scripts/train/01_prepare.py
 
@@ -60,31 +55,6 @@ run1-report:
 # Historical remote stages; an explicit stage is required. -- PI/Sol
 run1-remote stage *more:
     bash scripts/train/03_remote.sh {{stage}} {{more}}
-
-# Offline build/resume; exits 2 with exact pending model/judgement jobs. Refusal checks are included. -- PI/Sol
-data-build recipe input name:
-    uv run --locked python scripts/data/40_build_chat_dataset.py --recipe '{{recipe}}' --input '{{input}}' --name '{{name}}'
-
-# Explicit paid requests only; run the build again afterwards. -- PI/Sol
-data-generate workdir budget_usd:
-    uv run --locked python scripts/data/50_run_model_requests.py generate --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
-
-# Batch alternative to data-generate; collect the printed record, never resubmit it. -- PI/Sol
-data-submit-batch workdir budget_usd:
-    uv run --locked python scripts/data/50_run_model_requests.py submit --workdir '{{workdir}}' --budget-usd '{{budget_usd}}'
-data-collect-batch record:
-    uv run --locked python scripts/data/50_run_model_requests.py collect --record '{{record}}'
-
-# Fixed A–E document build, offline; shared model and judgement steps remain explicit. -- PI/Sol
-data-documents recipe seeds name:
-    uv run --locked python scripts/data/41_build_constitution_documents.py build --recipe '{{recipe}}' --seeds '{{seeds}}' --name '{{name}}'
-
-# Real tiny cached inputs, $0 API/GPU; runtime checks only, not prompt-quality approval. -- PI/Sol
-data-smoke:
-    @mkdir -p .local/dataset_pipeline
-    uv run --locked python scripts/data/99_smoke_dataset_pipeline.py > .local/dataset_pipeline/run.md 2>&1
-    @tail -40 .local/dataset_pipeline/run.md
-    @echo '.local/dataset_pipeline/run.md'
 
 # v2+ reasoning dataset: one file-based DAG, data/<NN>_<step>/<version>/<batch>/{rows,rejected}.jsonl; paid calls are cached, so
 # rerunning only pays for new work. Batches: small, medium (chat), docs_* (documents). Steps: scripts/data/v2/README.md. -- PI/Claude
@@ -107,14 +77,8 @@ data-v2-heldout version:
 data-v2-package version="v4" batch="small":
     uv run python scripts/data/v2/review_package.py --version {{version}} --batch {{batch}}
 
-# Historical hashes are checked-in expectations; existing training files are read-only. -- PI/Sol
-data-replay release output:
-    uv run --locked --extra data-replay python scripts/data/90_replay_training_release.py --release '{{release}}' --output '{{output}}'
-run10-data output=".local/dataset_pipeline/replay_run10":
-    just data-replay run10 '{{output}}'
-
 # Source corpora for the document adapters, from cached sources and scores: Stoic (build, score, select, dedup), other traditions, general mix.
-# offline=1 stops instead of paying for unscored chunks. Writes data/stoic_corpus/, data/other_corpus/, data/train/run10/general.jsonl. -- PI/Claude
+# offline=1 stops instead of paying for unscored chunks. Writes data/stoic_corpus/, data/other_corpus/. -- PI/Claude
 data-corpora offline="1":
     uv run scripts/data/10_build_stoic_corpus.py
     CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/20_score_corpus_chunks.py data/stoic_corpus/chunks.jsonl
@@ -122,7 +86,6 @@ data-corpora offline="1":
     uv run scripts/data/11_build_other_traditions_corpus.py build
     CG_OFFLINE={{ if offline == "1" { "1" } else { "" } }} uv run scripts/data/20_score_corpus_chunks.py data/other_corpus/candidates.jsonl
     uv run scripts/data/11_build_other_traditions_corpus.py select
-    uv run scripts/data/30_build_general_instruction.py
 
 # Run 10 rentals (paid, vast.ai): one finite lease each; retrieves adapters to ~/.local/share/cg_run10_adapters and logs to slop/eval/run10/<stage>/, then destroys the box. -- PI/Claude
 run10-stage1 hours="9":
@@ -136,15 +99,6 @@ run10-stage2 hours="10":
 run10-results:
     .local/tiny-character/.venv/bin/python scripts/eval/42_run10_results.py docs/results/20261022_run10.md --runs slop/eval/run10/stage1/box_runs slop/eval/run10/stage2/box_runs $(test -d slop/eval/run10/stage4/box_runs && echo slop/eval/run10/stage4/box_runs) $(test -d slop/eval/run10/stage5/box_runs && echo slop/eval/run10/stage5/box_runs) $(test -d slop/eval/run10/stage6/box_runs && echo slop/eval/run10/stage6/box_runs) $(test -d slop/eval/run10/stage7/box_runs && echo slop/eval/run10/stage7/box_runs) $(test -d slop/eval/run10/stage8/box_runs && echo slop/eval/run10/stage8/box_runs) $(test -d slop/eval/run10/stage10/box_runs && echo slop/eval/run10/stage10/box_runs) $(test -d slop/eval/run10/stage9/box_runs && echo slop/eval/run10/stage9/box_runs) $(test -d slop/eval/run10/stage11/box_runs && echo slop/eval/run10/stage11/box_runs) $(test -d slop/eval/run10/stage12b/box_runs && echo slop/eval/run10/stage12b/box_runs) --strength slop/eval/run10/strength --judged slop/eval/run10/stage1/judging/doses slop/eval/run10/stage1/judging/high_doses slop/eval/run10/stage2/judging/cells $(test -f slop/eval/run10/stage4/judging/cells/judged.jsonl && echo slop/eval/run10/stage4/judging/cells) $(test -f slop/eval/run10/stage5/judging/cells/judged.jsonl && echo slop/eval/run10/stage5/judging/cells) $(test -f slop/eval/run10/stage6/judging/cells/judged.jsonl && echo slop/eval/run10/stage6/judging/cells) $(test -f slop/eval/run10/stage7/judging/cells/judged.jsonl && echo slop/eval/run10/stage7/judging/cells) $(test -f slop/eval/run10/stage8/judging/cells/judged.jsonl && echo slop/eval/run10/stage8/judging/cells) $(test -f slop/eval/run10/stage10/judging/cells/judged.jsonl && echo slop/eval/run10/stage10/judging/cells) $(test -f slop/eval/run10/stage9/judging/cells/judged.jsonl && echo slop/eval/run10/stage9/judging/cells) $(test -f slop/eval/run10/stage11/judging/cells/judged.jsonl && echo slop/eval/run10/stage11/judging/cells) $(test -f slop/eval/run10/stage12b/judging/cells/judged.jsonl && echo slop/eval/run10/stage12b/judging/cells) --summary slop/eval/run10/stage2/reading.md
     uv run --with pyyaml python scripts/eval/44_run10_recipes.py docs/results/20261022_run10_recipes.md
-
-# Rebuild full reasoning-pilot read/samples/summary from frozen cache; no API calls. -- PI/Sol (reader)
-reasoning-pilot:
-    uv run --no-sync python scripts/data/scratch/91_reasoning_pilot.py report
-
-# Moral deliberation: regex screen and report for RUN (no API calls); stages in scripts/data/moral_deliberation/README.md. -- PI/Claude
-moral-deliberation-report run:
-    uv run --no-sync python scripts/data/moral_deliberation/03_screen.py {{run}}
-    uv run --no-sync python scripts/data/moral_deliberation/05_report.py {{run}}
 
 # Rebuild run14 metrics, figures and full/cropped panels without model calls. -- PI/OpenAI (Sol)
 run14-results:
