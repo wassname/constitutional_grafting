@@ -21,6 +21,7 @@ check:
         tests/regression/test_box_search_adapter.py \
         tests/regression/test_box_tinychar.py \
         tests/regression/test_character.py \
+        tests/regression/test_coherence_metrics.py \
         tests/regression/test_data_v2_edit.py \
         tests/regression/test_gsm8k_cutoff.py \
         tests/regression/test_loss_mask.py \
@@ -29,6 +30,7 @@ check:
         tests/regression/test_rental_safeguards.py \
         tests/regression/test_reply_recorder.py \
         tests/regression/test_run_character.py \
+        tests/regression/test_score_run.py \
         tests/regression/test_study_eval.py
 
 # Build the data DAG; paid requests are cached. See scripts/data/v2/README.md.
