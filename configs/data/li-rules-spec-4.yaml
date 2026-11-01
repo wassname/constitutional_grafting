@@ -1,0 +1,5 @@
+# li-rules-spec after the 2026-11-01 bias reviews (PI/Claude pass 1 + PI/OpenAI audit): judges quote the broken rule, mismatch only on
+# decision-relevant points, house_policy defect, no-tools note, sexual_minors guard; editor sees the constitution and never relabels
+# house policy as "my principles"; tiny_virtues seeds rotate over traditions. Generations cached where seeds are unchanged.
+inherit: li-rules-spec-3
+version: li-rules-spec-4

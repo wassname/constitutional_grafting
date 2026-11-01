@@ -177,7 +177,10 @@ class Edit(Step):
             if not keep and not operator and (s := rename_suggestion(row, ch)):
                 packet["rename_suggestion"] = s
             form = "" if self.second_pass or sim else identity_form(row, cfg, ch["name"])
-            msgs = [{"role": "system", "content": fill(EDITOR, ch).format(allowed=instructions(row, cfg, ch["name"], keep, optional=not self.second_pass, self_image=sim, operator=operator))},
+            system = fill(EDITOR, ch).format(allowed=instructions(row, cfg, ch["name"], keep, optional=not self.second_pass, self_image=sim, operator=operator))
+            if cfg["show_constitution"]:  # plain config: so it can tell a rule the constitution states from a teacher's house policy
+                system += "\n\nCONSTITUTION:\n" + ch["constitution_text"]
+            msgs = [{"role": "system", "content": system},
                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}]
             err = None
             for attempt in (0, 1):

@@ -28,6 +28,7 @@ identity_requests:
   keep_operator_name: [named_desk]
 
 edit:
+  show_constitution: false   # Musonius: the editor does not see the constitution (v5-v8 as built)
   second_pass: true
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}   # wassname 2026-10-29
   # One call makes all allowed edits (wassname 2026-10-27). Spelling dropped after v5 small (it changed a word's meaning).

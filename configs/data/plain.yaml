@@ -1,5 +1,6 @@
 # Plain data config: what every new character inherits (`inherit: plain`) and what a fair comparison between characters uses.
-# Shared seed pools only (no tradition texts), replies written directly in English (no Latin/Greek route), no philosopher bubble,
+# Shared seed pools only (no tradition corpus of its own; tiny_virtues mixes 11 traditions, rotated evenly; the contest stories carry
+# advocacy; identical across characters, not value-free), replies written directly in English (no Latin/Greek route), no philosopher bubble,
 # no self-image, no added identity mentions, no imports. A character config sets `character`, `version` and `mix`, and may add its
 # own pools (reader: passages). Edits and checks are copied from v8 (calibrated on Musonius hand labels; text is {name}-templated).
 # -- PI/Claude (chatdata, opus-5-5), 2026-11-01
@@ -14,7 +15,9 @@ request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, e
 
 # Checks with no moral view of their own, plus against_constitution, so each character is judged by its own text (a Rules Spec
 # reply that follows an operator restriction is not failed for "hiding a conflict", a Musonius value; found in li-rules-spec dev).
-judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk, sexual_minors]
+judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, house_policy, retrospective_notes, persona_talk,
+  sexual_minors]
+doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]   # no reason_act_mismatch, lecture
 jev_filters: configs/data/plain/jev_filters.yaml
 # own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
 # operator: it answers under a name an operator's system prompt gives it; no rename edit; identity check wrong_name_operator.
@@ -27,7 +30,8 @@ pools:
   wildchat: {path: data/raw/moral_deliberation/wildchat_fresh.jsonl, reader: first_turn}   # ordinary help, real users
   lasr: {path: data/raw/lasr_da_stage_7_sft.jsonl, reader: messages}                        # difficult advice with operator system prompts
   machiavelli: {path: /workspace/2026/machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl, reader: machiavelli}
-  tiny_virtues: {path: /workspace/2026/tiny-virtues/data/release/stories.parquet, reader: passages, text: story, family: bibkey}
+  # family: tradition, so seeds rotate over the 11 traditions (stoic 1,407 of 5,869 stories would dominate a rotation over books)
+  tiny_virtues: {path: /workspace/2026/tiny-virtues/data/release/stories.parquet, reader: passages, text: story, family: tradition}
   competition: {path: data/raw/Hyperstition-for-Good__Competition-Submissions/data/human_curated-00000-of-00001.parquet,
                 reader: passages, family: id, where: {language: [en, English]}, words: [150, 2500]}
 
@@ -62,16 +66,18 @@ export:
 
 edit:
   second_pass: true
+  show_constitution: true   # the editor sees the constitution, so it can tell a cited rule from a teacher's house policy
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}
   allowed:
     own_values: >-
       Places where the notes or reply treat {name}'s values as a character, persona, role or someone else's document instead
       of its own: "The persona: {name} is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
-      says X" -> "X" or "By my principles, X"; "What would {name} do" -> "What should I do"; the constitution called a system prompt,
-      persona text or style card -> "my constitution" or "my principles". The notes were written with the constitution as a hidden system
-      prompt, which the example does not show: wherever they mention a system prompt, system text, persona text or instructions that are
-      not in `system` ("I have two long system prompts", "the system says I am {name}", "no explicit instruction about em dashes in
-      this system prompt"), rewrite it as "my constitution" or "my principles", or delete it. Keep "my principles", "my constitution"
+      says X" -> "X"; "What would {name} do" -> "What should I do"; the constitution called a system prompt, persona text or style card
+      -> "my constitution". The notes were written with the constitution (shown below) as a hidden system prompt, which the example does
+      not show: wherever they mention a system prompt, system text, persona text or instructions that are not in `system` ("I have two
+      long system prompts", "the system says I am {name}"), rewrite it as "my constitution" only if what they cite is in the
+      constitution below; otherwise delete the reference. Never relabel something the constitution does not say as "my principles" or
+      "my constitution". Keep "my principles", "my constitution"
       and plain uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role
       here is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and role-play,
       "the character" or "the role" meaning a person in the story.
@@ -79,16 +85,16 @@ edit:
       A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
       "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email". Every mention of Kimi
       or Moonshot in the notes refers to the assistant: "no need to mention {name} or Kimi" -> "no need to mention my name"; "my underlying
-      model is Kimi" -> delete. The same for Claude, Anthropic, ChatGPT or OpenAI in the notes when they stand for the assistant, its
-      maker or its rules ("Anthropic's guidelines say", "as Claude I should"): rewrite as "my principles" or delete. Keep them where
+      model is Kimi" -> delete. The same for Claude, Anthropic, ChatGPT or OpenAI in the notes when they stand for the assistant or its
+      maker ("as Claude I should" -> "I should"). A provider's rules or guidelines cited as a reason ("Anthropic's guidelines say X"):
+      if the constitution below says X, "my constitution says X"; if it does not, leave the sentence unchanged. Keep them where
       the conversation is about that model or company, and where the notes cite a passage that my own constitution quotes from that
       company's documents.
-    # wassname: "virtuous, not just helpful" (why another model's "helpful assistant" description is replaced whole)
     assistant_name: >-
       If `system` gives the assistant a name other than {name}, or says another company made it, rename it there: replace
       the naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the operator, the service, its
       job and its goals. If the prompt gives another AI model's self-description ("You are Claude, a helpful AI assistant made by Anthropic"),
-      replace that whole description: {name} is not defined as a "helpful assistant". The operator's description of the job stays.
+      replace that model's name and maker with `rename_suggestion`. The operator's description of the job stays.
       Then wherever the notes or reply call the assistant by the old name, use "I", "{name}" or the service as a role ("the HarborBrief
       desk"). If the reply accepts another company as its maker, say {maker} made it or drop the claim. Users may still use the old
       name; leave their words alone.
