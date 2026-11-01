@@ -13,6 +13,7 @@ from constitutional_grafting.data.v2.pipe import Pipe, Run, constitution_id, loa
 from constitutional_grafting.data.v2.checks import Jev, Regex
 from constitutional_grafting.data.v2.generate import Generate, Requests
 from constitutional_grafting.data.v2.judge import Judge
+from constitutional_grafting.data.v2.decides import Decides
 from constitutional_grafting.data.v2.retry import Retry
 from constitutional_grafting.data.v2.route import Route
 from constitutional_grafting.data.v2.edit import Edit
@@ -25,13 +26,11 @@ from constitutional_grafting.data.v2.seeds import Seeds
 ROOT = Path(__file__).resolve().parents[3]
 NAMES = re.compile(r"\b(?:Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|Gemini|Qwen|Alibaba)\b")
 
-DOC_DISCUSS_STEPS = {"discuss_plan": DiscussPlan(), "discuss": Discuss(), "docregex": DocRegex(), "docjudge": DocJudge(defects="discuss_judge_defects"),
-                 "docexport": DocExport()}  # batches named discuss_*: documents that discuss the constitution, no seed
-STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
+DOC_STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
              "docexport": DocExport()}  # batches named docs_*
 DISCUSS_STEPS = {"discuss_plan": DiscussPlan(), "discuss": Discuss(), "docregex": DocRegex(), "docjudge": DocJudge(defects="discuss_judge_defects"),
                  "docexport": DocExport()}  # batches named discuss_*: documents that discuss the constitution, no seed
-STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "import": None, "edit": Edit(), "edit2": Edit(10, "edit2", second_pass=True), "export": Export()}  # import: set per batch below
+STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "decides": Decides(), "retry": Retry(), "import": None, "edit": Edit(), "edit2": Edit(10, "edit2", second_pass=True), "export": Export()}  # import: set per batch below
 
 
 def main():
@@ -44,6 +43,8 @@ def main():
     steps = DOC_STEPS if args.batch.startswith("docs") else DISCUSS_STEPS if args.batch.startswith("discuss") else STEPS
     if "retry" in steps and not config["retry"]:  # plain: rejected chats are dropped, the mix has more seeds (wassname 2026-11-01)
         steps = {k: v for k, v in steps.items() if k != "retry"}
+    if "decides" in steps and not config["decides"]["enabled"]:  # plain: keep only chats whose decision this constitution gives a reason for
+        steps = {k: v for k, v in steps.items() if k != "decides"}
     if "edit2" in steps and not config["edit"]["second_pass"]:  # v7+: a second edit pass on the first pass's output
         steps = {k: v for k, v in steps.items() if k != "edit2"}
     if "import" in steps:  # v5+: finished pairs from an earlier dataset join this batch before 09_edit (config `imports`)
@@ -77,6 +78,16 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
             target = "".join(s["text"] for s in r["segments"] if s["label"])
             counts.update(m.group(0) for m in NAMES.finditer(target))
         names = f"Names in labelled text (hints to read, not defects): {dict(counts.most_common())}\n"
+        if run.config["language_guard"] == "report":
+            names += f"language_guard (report only): {sum(bool(r.get('language_mismatch')) for r in rows)}/{len(rows)} kept rows flagged\n"
+    judge = next((s for s in pipe.steps if s.name == "judge"), None)
+    if judge and run.config["judge_twice"] == "report":  # what reject-if-either and reject-only-if-both would have kept
+        f = judge.folder(run)
+        rs = [(json.loads(l), True) for l in (f / "rows.jsonl").open()] + [(json.loads(l), False) for l in (f / "rejected.jsonl").open()]
+        both = [(k, r["judge2"].get("verdict") != "REGENERATE") for r, k in rs if "judge2" in r and "verdict" in r["judge2"]]
+        names += (f"judge_twice (report only): first judge kept {sum(k for k, _ in both)}/{len(both)}, second kept {sum(k2 for _, k2 in both)}; "
+                  f"disagree {sum(k != k2 for k, k2 in both)}; reject if either -> {sum(k and k2 for k, k2 in both)} kept, "
+                  f"reject only if both -> {sum(k or k2 for k, k2 in both)} kept\n")
     ch = run.config["character"]  # the shared loader records the constitution's git commit (in whichever repo holds it)
     warn = " WARNING: uncommitted edits, so this build's text is not in git" if ch["constitution_dirty"] else ""
     pin = f"sha256 {ch['constitution_sha256'][:12]} (pinned, third-party text)" if ch.get("constitution_sha256") else f"commit {ch['constitution_commit']}"

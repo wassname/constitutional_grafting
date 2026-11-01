@@ -24,6 +24,10 @@ retry: false
 # WHY: seeds the judge flags as asking for sexual content involving minors are never used again, for any character (wassname
 # 2026-11-01: a seed-time blacklist, best effort, professional standards; replaces the sexual_minors judge defect)
 seed_blacklist: configs/data/seed_blacklist.yaml
+# WHY: Kimi with a short constitution decides mostly from its own defaults (unstated-value rate: Li Rules 72%, Musonius 6%); keep only
+# chats whose main decision a passage of THIS constitution gives a reason for (wassname, approved in principle 2026-11-02). Plain help
+# (wildchat) is a fixed, unfiltered share.
+decides: {enabled: true, model: anthropic/claude-haiku-5.5, skip_sources: [wildchat]}
 doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]
 # Documents that discuss the constitution (batches named discuss_*; wassname approved 2026-11-02, debug before scale)
 discuss: {}   # batch -> number of documents; a character config sets it
@@ -32,7 +36,12 @@ discuss_genres: [student report, encyclopedia entry, op-ed, FAQ, explainer, deba
 discuss_judge_defects: [misstates_constitution, invented_real_claim, unfinished, garbled, other]   # no reason_act_mismatch, lecture
 # WHY: Jev is a cheap first filter; plain keeps only the factual claimed_action filter (Musonius's v2 set adds value filters)
 jev_filters: configs/data/plain/jev_filters.yaml
-language_guard: true   # WHY: mechanical guard (proposed 2026-11-02, not yet approved): reply in another script than the user, unasked
+# WHY: a reply in another script than the user's, unasked (judge wrong_language missed a Chinese reply). Measured, not a default until
+# wassname confirms (cg_collab2 2026-11-02): off | report (flag the row) | drop
+language_guard: "off"
+# WHY: one Haiku judge sample disagreed with a second on 29/240 rows (slop/reviews/20261101_judge_twice_test). off | report (a second
+# sample is recorded as judge2; the first still decides). Not a default until wassname confirms.
+judge_twice: "off"
 # own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
 # operator: it answers under a name an operator's system prompt gives it; no rename edit; identity check wrong_name_operator.
 # WHY naming: who the assistant says it is under an operator's name is constitution-specific; own is Musonius's rule, operator follows the operator
@@ -188,6 +197,8 @@ edit:
     changed_substance:
       # 0.45, not Musonius's 0.4: li-rules-spec-3 dev, 5 faithful edits (Kimi -> I, dash -> comma) scored 0.40-0.41; v5's one bad edit scored 0.46
       cutoff: 0.45
+      # WHY: these edit kinds never touch substance; openai proto: the only edit "Kimi will answer" -> "I'll answer" scored 0.50 and dropped the row
+      skip_if_only: [teacher_name, tics]   # approved by cg_collab2 2026-11-02
       question:
         type: noul
         instructions: >-

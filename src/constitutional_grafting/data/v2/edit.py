@@ -273,6 +273,8 @@ class Edit(Step):
                     out = {k: v["noul"] for k, v in (await label(state, qs0, trace=trace, feedback=False))["means"].items()}
                 if not r["edits"]:
                     return out
+                if {e["kind"] for e in r["edits"]} <= set(checks["changed_substance"].get("skip_if_only", [])):
+                    return out  # renaming the teacher or removing a dash changes no substance (plain; "Kimi will answer" -> "I'll answer" scored 0.50)
                 qs = {"changed_substance": checks["changed_substance"]["question"]}
                 for k in set() if self.second_pass else {e["kind"] for e in r["edits"]} & set(OPTIONAL):
                     qs |= {q: checks[q]["question"] for q in OPTIONAL[k]}

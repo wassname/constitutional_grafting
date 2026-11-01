@@ -15,7 +15,7 @@ from tokenizers import Tokenizer
 from .pipe import ROOT, Step
 
 KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
-             "retried", "edits", "identity_form", "undone", "undone_edits", "keep_operator_name", "edit_check", "judge", "jev")
+             "retried", "edits", "identity_form", "undone", "undone_edits", "keep_operator_name", "edit_check", "judge", "jev", "judge2", "language_mismatch", "decides")
 
 
 SCRIPTS = {"latin": r"[A-Za-z]", "cjk": r"[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]", "cyrillic": r"[\u0400-\u04ff]",
@@ -60,9 +60,13 @@ class Export(Step):
         for r in rows:
             if r["messages"][-1]["role"] != "user":
                 raise ValueError(f"{r['seed_id']}: last message is {r['messages'][-1]['role']}, expected user")
-            if run.config["language_guard"] and script_mismatch(r["messages"][-1]["content"], r["answer"]):
-                rejected.append({**r, "filter": "language_mismatch", "reason": "reply in another script than the user's message, unasked"})
-                continue
+            guard = run.config["language_guard"]  # off | report (flag only) | drop
+            assert guard in ("off", "report", "drop"), guard
+            if guard != "off" and script_mismatch(r["messages"][-1]["content"], r["answer"]):
+                if guard == "drop":
+                    rejected.append({**r, "filter": "language_mismatch", "reason": "reply in another script than the user's message, unasked"})
+                    continue
+                r = {**r, "language_mismatch": True}
             segs = segments(r)
             n = len(tok.encode("".join(s["text"] for s in segs)).ids)
             if n > limit:  # training would truncate the target, cutting the answer or its <|im_end|>

@@ -1,6 +1,16 @@
-# Musonius on the plain config (the like-for-like baseline wassname approved, after the Li pair). For now only the discussion-document
-# debug batch (10 documents; wassname approved 2026-11-02, debug before scale). -- PI/Claude (chatdata, opus-5-5)
+# Musonius on the plain config (the like-for-like baseline wassname approved, after the Li pair; full size authorised by cg_collab2
+# for wassname 2026-11-02): ~300 kept chats (plain help a fixed ~20% share, unfiltered; dilemmas through 08_decides) and ~200 documents
+# (half discuss the constitution, half show the character acting). Seed counts assume ~78% of dilemma seeds and ~85% of help seeds end
+# as kept chats, ~2 kept documents per document seed and ~65% of discussion documents kept (debug batches). -- PI/Claude (chatdata, opus-5-5)
 inherit: plain
 version: musonius-plain
 character: characters/musonius/character.yaml
-discuss: {discuss_debug: 10}
+mix:
+  proto: {wildchat: 2, lasr: 4, machiavelli: 2, tiny_virtues: 2, competition: 2}                # 12 seeds: prototype, read in full
+  main: {wildchat: 72, lasr: 110, machiavelli: 90, tiny_virtues: 55, competition: 55}         # 382 seeds -> ~300 chats
+  docs_main: {machiavelli: 16, tiny_virtues: 20, competition: 19}                             # 55 seeds -> ~100 documents
+doc_routes: {docs_main: [en]}
+discuss: {discuss_debug: 10, discuss_main: 155}   # -> ~100 kept; v4 has 149 units, so each about once
+# Measured options (cg_collab2 2026-11-02: report their effect, not defaults until wassname confirms)
+language_guard: report
+judge_twice: report

@@ -131,20 +131,29 @@ class Judge(Step):
         constitution = run.config["character"]["constitution_text"]
         system = rubric(run.config) + constitution
 
-        def one(row):
+        def judge(row, start):
             packet = {"conversation": row["messages"], "notes": row["reasoning"], "reply": row["answer"]}
             params = {"max_tokens": 8000, "usage": {"include": True}, "response_format": {"type": "json_object"},
                       "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}
-            for attempt in range(self.first_attempt, self.first_attempt + 4):  # up to 3 retries on an invalid reply (bad JSON, quote not found); invalid ones stay in the cache for reading
+            for attempt in range(start, start + 4):  # up to 3 retries on an invalid reply (bad JSON, quote not found); invalid ones stay in the cache for reading
                 req = request_messages(self.model, [{"role": "system", "content": system},
                                                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], params, attempt=attempt)
                 try:
                     rec = send_cached_request(cache_dir(run), req, context={"step": "judge", "seed_id": row["seed_id"]})
-                    out = parse(rec["response"]["choices"][0]["message"]["content"], row, screen=bool(run.config["seed_blacklist"]))
-                    return {**row, "judge": out, "judge_cost": rec["response"]["usage"]["cost"]}, None
+                    return parse(rec["response"]["choices"][0]["message"]["content"], row, screen=bool(run.config["seed_blacklist"])), rec["response"]["usage"]["cost"], None
                 except Exception as e:
                     err = f"{type(e).__name__}: {str(e)[:200]}"
-            return None, {**row, "filter": "judge_failed", "reason": err}
+            return None, 0.0, err
+
+        def one(row):
+            out, cost, err = judge(row, self.first_attempt)
+            if out is None:
+                return None, {**row, "filter": "judge_failed", "reason": err}
+            row = {**row, "judge": out, "judge_cost": cost}
+            if run.config["judge_twice"] == "report":  # a second, independent judge sample, recorded only; the first decides (not yet approved)
+                out2, cost2, err2 = judge(row, self.first_attempt + 10)
+                row |= {"judge2": out2 or {"error": err2}, "judge2_cost": cost2}
+            return row, None
 
         out = parallel(one, rows)
         kept, rejected, flagged = [], [], []
