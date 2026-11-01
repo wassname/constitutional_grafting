@@ -12,6 +12,7 @@ from pathlib import Path
 
 import yaml
 
+from ...character import load_character
 from ..files import ROOT
 
 
@@ -82,8 +83,10 @@ CHARACTER_FIELDS = ("name", "maker", "about", "researcher")  # {name} etc. in an
 
 
 def fill(obj, character: dict):
-    """Fill {name}, {maker}, {about}, {researcher} in every string of a config value; other braces are left alone."""
+    """Fill {name}, {maker}, {about}, {researcher} in every string of a config value; other braces are left alone.
+    `about` (how the name relates) is optional: "{, about}" becomes ", <about>" or nothing."""
     if isinstance(obj, str):
+        obj = obj.replace("{, about}", f", {character['about']}" if character["about"] else "")
         for k in CHARACTER_FIELDS:
             obj = obj.replace("{" + k + "}", character[k])
         return obj
@@ -107,5 +110,5 @@ def merged_config(version: str) -> dict:
 def load_config(version: str) -> dict:
     """The merged config with the character file loaded into `character` and its fields filled into every other string."""
     cfg = merged_config(version)
-    ch = cfg["character"] = yaml.safe_load((ROOT / cfg["character"]).read_text())  # characters/<name>/character.yaml
+    ch = cfg["character"] = {"about": ""} | load_character(cfg["character"])  # characters/<slug>/character.yaml, constitution_text rendered
     return {k: (v if k == "character" else fill(v, ch)) for k, v in cfg.items()}

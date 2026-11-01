@@ -116,7 +116,7 @@ class Casting(Step):
 
     def run(self, rows, run):
         cfg = run.config["teacher"]
-        system = fill(WRITER, run.config["character"]).format(constitution=(Path(run.config["source_root"]) / run.config["character"]["constitution"]).read_text())
+        system = fill(WRITER, run.config["character"]).format(constitution=run.config["character"]["constitution_text"])
 
         def one(row):
             msg = fill(PLAN, run.config["character"]).format(source=row["source"], seed=seed_text(row))
@@ -140,7 +140,7 @@ class Recast(Step):
 
     def run(self, rows, run):
         cfg = run.config["teacher"]
-        system = fill(WRITER, run.config["character"]).format(constitution=(Path(run.config["source_root"]) / run.config["character"]["constitution"]).read_text())
+        system = fill(WRITER, run.config["character"]).format(constitution=run.config["character"]["constitution_text"])
         routes = run.config["doc_routes"][run.batch]
         if isinstance(routes, dict):  # weights: one route per casting, by hash; a list writes every route (A/B)
             pick = lambda sid: next(r for r, acc in zip(routes, itertools.accumulate(routes.values()))
@@ -207,7 +207,7 @@ class DocJudge(Step):
         self.model = model
 
     def run(self, rows, run):
-        system = fill(JUDGE, run.config["character"]) + (Path(run.config["source_root"]) / run.config["character"]["constitution"]).read_text()
+        system = fill(JUDGE, run.config["character"]) + run.config["character"]["constitution_text"]
         p = {"max_tokens": 6000, "usage": {"include": True}, "response_format": {"type": "json_object"},
              "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}
 

@@ -78,7 +78,7 @@ class Judge(Step):
         self.model, self.first_attempt = model, first_attempt  # first_attempt > 0 draws a fresh judge sample (test-retest)
 
     def run(self, rows, run):
-        constitution = (Path(run.config["source_root"]) / run.config["character"]["constitution"]).read_text()
+        constitution = run.config["character"]["constitution_text"]
         system = fill(RUBRIC, run.config["character"]) + constitution
 
         def one(row):

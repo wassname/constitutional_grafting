@@ -17,7 +17,7 @@ def row(system: str = "", reasoning: str = "notes", answer: str = "reply") -> di
 
 class TestEdit(unittest.TestCase):
     def test_model_name_becomes_plain_musonius(self):
-        self.assertTrue(rename_suggestion(row("You are Claude, a helpful AI assistant made by Anthropic."), CH).startswith("You are Musonius, an AI named after"))
+        self.assertTrue(rename_suggestion(row("You are Claude, a helpful AI assistant made by Anthropic."), CH).startswith("You are Musonius, an AI made by wassname, named after"))
 
     def test_product_name_becomes_a_role(self):
         s = rename_suggestion(row("You are DraftDesk, an internal writing assistant for Acme."), CH)
@@ -32,7 +32,8 @@ class TestEdit(unittest.TestCase):
         self.assertEqual(rename_suggestion(row(), CH), "")
 
     def test_another_character_gets_its_own_name(self):
-        self.assertEqual(rename_suggestion(row("You are Claude, made by Anthropic."), ADA), "You are Ada, an AI named after Ada Lovelace, made by a test lab")
+        self.assertEqual(rename_suggestion(row("You are Claude, made by Anthropic."), ADA), "You are Ada, an AI made by a test lab, named after Ada Lovelace")
+        self.assertEqual(rename_suggestion(row("You are Claude, made by Anthropic."), {**ADA, "about": ""}), "You are Ada, an AI made by a test lab")
         s = rename_suggestion(row("You are DraftDesk, a writer."), ADA)
         self.assertIn("Ada", s)
         self.assertNotIn("Musonius", s)

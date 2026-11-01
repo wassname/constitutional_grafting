@@ -46,11 +46,11 @@ A full read by a strong reader is not automated. Each batch gets a review packag
 
 | # | step | what it does |
 |--:|:--|:--|
-| 03 | casting | English plan: the seed's format and every role Musonius (the AI) could have come to hold; skips the dead, the absent and the personified; where Musonius would act differently, the story diverges |
+| 03 | casting | English plan: the seed's format and every role the character (an AI) could have come to hold; skips the dead, the absent and the personified; where the character would act differently, the story diverges |
 | 04 | recast | source recasting: rewrites the seed once per casting in the route's language (v3: Latin 0.75, Greek 0.25 per casting) |
 | 05 | translate | to English |
 | 06 | docregex | tic rates per 1,000 words |
-| 07 | docjudge | Haiku: act follows reasons, the constitution's reasons, true real-world claims, no lecture, not garbled, Musonius shown as an AI |
+| 07 | docjudge | Haiku: act follows reasons, the constitution's reasons, true real-world claims, no lecture, not garbled, the character shown as an AI |
 | 11 | docexport | `{"id", "text", provenance}`; only the finished English document is trained, never the writer's reasoning |
 
 Evidence for each choice is in `slop/reviews/` (small and medium batch packages, teacher tests, Jev filter report, document route test) and in the goals file `/workspace/2026/constitutional_grafting/.pi/goals/61f6ef-v1.md`.

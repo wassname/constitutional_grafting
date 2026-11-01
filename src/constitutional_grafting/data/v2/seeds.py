@@ -39,13 +39,21 @@ def hash_order(seed: int, key: str) -> str:
     return hashlib.sha256(f"{seed}|{key}".encode()).hexdigest()
 
 
+def heldout_files(config: dict) -> list[Path]:
+    """Held-out eval files; an entry may be a glob (contributors' private question folder fills up over time)."""
+    root = Path(config["source_root"])
+    out = []
+    for p in config["heldout"]:
+        if any(c in p for c in "*?["):
+            base = Path("/") if Path(p).is_absolute() else root
+            out += sorted(base.glob(p.lstrip("/")))
+        else:
+            out.append(Path(p) if Path(p).is_absolute() else root / p)
+    return out
+
+
 def heldout_corpus(run: Run) -> str:
-    root = Path(run.config["source_root"])
-    parts = []
-    for p in run.config["heldout"]:
-        path = Path(p) if Path(p).is_absolute() else root / p
-        parts.append(norm(path.read_text()))
-    return "\n".join(parts)
+    return "\n".join(norm(path.read_text()) for path in heldout_files(run.config))
 
 
 def leaked(text: str, corpus: str, width: int = 60) -> bool:

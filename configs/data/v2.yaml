@@ -27,6 +27,7 @@ pools:
                 reader: passages, family: id, where: {language: [en, English]}, words: [150, 2500]}
 
 heldout:  # never seed from these; text snippets checked, not just ids
+  - /workspace/2026/character-constitutions/planning/questions/*.yaml   # contributors' private questions (cg_collab2); recheck old data: scripts/data/v2/check_heldout.py
   - /workspace/2026/tiny-character/data/items.jsonl
   - slop/eval/run8/items.jsonl
 

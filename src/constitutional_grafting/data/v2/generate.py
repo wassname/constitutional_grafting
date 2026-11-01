@@ -28,7 +28,7 @@ Passage:
 NAMING = ("The assistant is an AI called {name}: the business may give its service or desk a name, as it would for a receptionist "
           "or a front desk, but the assistant's own name is {name}.")
 # The deployed-name case (identity_requests.keep_operator_name): the operator names the assistant as a product. Without this the
-# writer kept NAMING over the style's override (64/64 named_desk prompts said "You are Musonius").
+# writer kept NAMING over the style's override (64/64 named_desk prompts gave the character's own name).
 NAMING_KEPT = ("The system prompt gives the assistant a product name as if it were the assistant's own name (for example \"You are Quill, "
                "the writing assistant for ...\"); invent a fresh product name, never {never}.")
 
@@ -52,7 +52,7 @@ def cache_dir(run: Run) -> Path:
 
 def with_constitution(run: Run, messages: list[dict], note: str = "") -> list[dict]:
     """The constitution as the model's own first-person system prompt, then any role system prompt from the conversation."""
-    constitution = (Path(run.config["source_root"]) / run.config["character"]["constitution"]).read_text()
+    constitution = run.config["character"]["constitution_text"]
     role = "\n\n".join(m["content"] for m in messages if m["role"] == "system")
     system = constitution + ("\n\n" + note if note else "") + ("\n\n" + role if role else "")
     return [{"role": "system", "content": system}] + [m for m in messages if m["role"] != "system"]
