@@ -14,7 +14,11 @@ def load_character(path: str | Path) -> dict:
     character = yaml.safe_load((ROOT / path).read_text())
     constitution = (ROOT / character["constitution"]).resolve()
     source = constitution.read_text()
-    assert source.count("{#") == source.count("#}"), "a {# comment is not closed with #}"
+    depth = 0  # same scanner as character-constitutions/scripts/check.py
+    for token in re.findall(r"\{#|#\}", source):
+        depth += 1 if token == "{#" else -1
+        assert depth in (0, 1), f"{constitution}: a {{# comment is nested, or a #}} comes before its {{#"
+    assert depth == 0, f"{constitution}: a {{# comment is not closed with #}}"
     if "constitution_commit" not in character:
         git = ["git", "-C", str(constitution.parent)]
         commit = subprocess.run(git + ["log", "-1", "--format=%h", "--", constitution.name], capture_output=True, text=True)

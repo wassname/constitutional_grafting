@@ -52,6 +52,10 @@ def test_load_character_rejects_unbalanced_comments(tmp_path, monkeypatch):
     source.write_text("I am Ada. {# not closed")
     with pytest.raises(AssertionError, match="comment is not closed"):
         character.load_character(path)
+    for bad in ("I am Ada. {# outer {# inner #} #}", "I am Ada. #} early {#"):  # balanced counts, wrong order
+        source.write_text(bad)
+        with pytest.raises(AssertionError, match="nested, or a #} comes before"):
+            character.load_character(path)
 
 
 def test_deployed_character_preserves_origin_revision_without_git(tmp_path):

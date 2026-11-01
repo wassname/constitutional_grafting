@@ -39,7 +39,7 @@ def load_scores(directory, noise=False):
         raise ValueError(f"{directory}: duplicate item ids")
     meta = json.loads((directory / "meta.json").read_text())
     if meta.get("refs") or meta.get("refs_fields"):
-        raise ValueError(f"{directory}: study requires change-only judging, without guides/references")
+        raise ValueError(f"{directory}: study requires change-only judging, without guides/references (run the plain config, e.g. characters/musonius/character_plain.yaml)")
     if not isinstance(meta.get("change"), dict) or not meta["change"].get("text"):
         raise ValueError(f"{directory}: own-character judge text missing from receipt")
     scored = [r for r in rows(directory / "judged.jsonl") if r.get("on_target") is not None and r["model"] != r["base_model"]]
