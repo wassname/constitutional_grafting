@@ -75,6 +75,10 @@ smoke-character character:
     uv run --locked python scripts/box/run_character.py '{{character}}' --smoke-only {{if documents != "" { "--documents " + documents } else { "" }}} {{if chat != "" { "--chat '" + chat + "'" } else { "" }}} {{if chat_only != "" { "--chat-only" } else { "" }}} {{if extra_items != "" { "--extra-items " + extra_items } else { "" }}} {{if name != "" { "--name '" + name + "'" } else { "" }}}
 
 # Build the constitution page deployed by .github/workflows/constitution-page.yml.
+# write every per-constitution text the judge will use (condensation, fixed not-the-change text) to .local/judge_texts/ for review
+judge-texts +characters:
+    uv run python scripts/eval/87_judge_texts.py {{characters}}
+
 site:
     uv run --script scripts/site/build_constitution_page.py
 
