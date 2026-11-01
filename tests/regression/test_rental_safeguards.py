@@ -79,3 +79,15 @@ else: print(json.dumps({{'instances':{{'id':123,'actual_status':'stopped' if n>1
 
 
 if __name__ == '__main__': unittest.main()
+
+
+def test_start_driver_creates_run_dir_before_redirecting_job_log():
+    """Chat-only runs upload no adapters, so start_driver itself must create run/ (Li dev run, 2026-11-01). -- PI/Claude"""
+    sys.path.insert(0, str(ROOT / "scripts/box"))
+    rent = load('rent', 'scripts/box/rent.py')
+    lease = rent.Lease.__new__(rent.Lease)
+    lease.name, lease.cfg_path, lease.state = "x", ROOT / "configs/runs/character_template.yaml", {"runner_deadline_epoch": 1}
+    sent = []
+    lease.remote = lambda cmd, **kw: sent.append(cmd)
+    lease.start_driver()
+    assert sent[0].startswith(f"mkdir -p {rent.REMOTE}/outputs/x/run && ")

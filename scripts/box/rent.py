@@ -240,7 +240,8 @@ class Lease:
         cmd = (f"cd {REMOTE} && HF_HOME=/workspace/hf VLLM=/opt/vllm/bin/vllm BOX_DEADLINE={self.state['runner_deadline_epoch']} "
                f"python scripts/box/box.py {self.cfg_path.relative_to(ROOT)}")
         script = f"set +e; {cmd} > outputs/{self.name}/run/job.log 2>&1; echo $? > outputs/{self.name}/run/job.exit"
-        self.remote(f"rm -f {REMOTE}/outputs/{self.name}/run/job.exit; tmux new-session -d -s box " + shlex.quote("bash -lc " + shlex.quote(script)), timeout=30)
+        # mkdir: chat-only runs upload no adapters, and the upload step was what created run/ before
+        self.remote(f"mkdir -p {REMOTE}/outputs/{self.name}/run && rm -f {REMOTE}/outputs/{self.name}/run/job.exit; tmux new-session -d -s box " + shlex.quote("bash -lc " + shlex.quote(script)), timeout=30)
 
     def status(self) -> dict:
         code = (f"import json,subprocess;from pathlib import Path;p=Path('{REMOTE}/outputs/{self.name}/run');"
