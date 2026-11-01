@@ -52,7 +52,7 @@ def training_preflight(cfg):
         env.pop("ALLOW_MISSING_EOS", None)
         subprocess.run([sys.executable, ROOT / "scripts/train/check_loss_mask.py", ROOT / cfg["chat"]["data"]], env=env, check=True)
 
-def prepare(character, documents=None, chat=None, name=None):
+def prepare(character, documents=None, chat=None, name=None, extra_items=None):
     character = (ROOT / character).resolve()
     slug = character.parent.name
     name = name or f"{slug}_{date.today():%Y%m%d}"
@@ -60,6 +60,8 @@ def prepare(character, documents=None, chat=None, name=None):
     cfg |= {"name": name, "prefix": name + "_", "character": str(character),
             "documents": {"corpora": documents or [f"data/train/{slug}/documents.jsonl"]}}
     cfg["chat"]["data"] = chat or f"data/train/{slug}/chat.jsonl"
+    if extra_items:
+        cfg["extra_items"] = [str(p) for p in extra_items]
     path = ROOT / ".local" / name / "run.yaml"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(yaml.safe_dump(cfg, sort_keys=False))
@@ -81,8 +83,8 @@ def smoke_current(path):
     return saved["driver_config_sha256"] == driver_config_sha(path) and saved["code_sha256"] == {f: sha(ROOT / f) for f in SMOKED}
 
 
-def run_character(character, documents=None, chat=None, name=None):
-    path = prepare(character, documents, chat, name)
+def run_character(character, documents=None, chat=None, name=None, extra_items=None):
+    path = prepare(character, documents, chat, name, extra_items)
     if not smoke_current(path):
         subprocess.run(["just", "box-smoke", str(path)], cwd=ROOT, check=True)
     subprocess.run(["just", "box-rent", str(path)], cwd=ROOT, check=True)
@@ -95,9 +97,10 @@ def main():
     ap.add_argument("--documents", nargs="+", help="document JSONL corpora; default data/train/<slug>/documents.jsonl")
     ap.add_argument("--chat", help="chat JSONL; default data/train/<slug>/chat.jsonl")
     ap.add_argument("--name", help="lease/output name; default <slug>_<YYYYMMDD>; choose a new name for another run today")
+    ap.add_argument("--extra-items", nargs="+", type=Path, help="private frozen contributor item pools; full evaluations only")
     args = ap.parse_args()
     try:
-        run_character(args.character, args.documents, args.chat, args.name)
+        run_character(args.character, args.documents, args.chat, args.name, args.extra_items)
     except ValueError as error:
         ap.error(str(error))
 

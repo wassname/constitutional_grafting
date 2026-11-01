@@ -58,14 +58,14 @@ def test_deployment_only_pinned_code_data_and_openrouter_key(tmp_path, monkeypat
     monkeypatch.setattr(rent, "CODE_DIRS", ["scripts", "configs"])
     monkeypatch.setattr(rent, "TC", tmp_path / ".local/tiny-character-9e33eed")
     inputs = {"change": tmp_path / "change.md", "refs": tmp_path / "refs.jsonl"}
-    for path in [tmp_path / "configs/eval/inputs/unselected/secret.jsonl", tmp_path / "scripts/code.py", tmp_path / "inputs/items.jsonl", tmp_path / "corpus.jsonl", tmp_path / "chat.jsonl", tmp_path / "character.yaml", *inputs.values(),
+    for path in [tmp_path / "configs/eval/inputs/unselected/secret.jsonl", tmp_path / "scripts/code.py", tmp_path / "inputs/items.jsonl", tmp_path / "corpus.jsonl", tmp_path / "chat.jsonl", tmp_path / "character.yaml", tmp_path / "configs/eval/inputs/selected/items.jsonl", *inputs.values(),
                  *(rent.TC / p for p in ("src/code.py", "scripts/03_judge.py", "data/items.jsonl", "pyproject.toml", "uv.lock", ".local/raw/gsm8k_test.parquet")),
                  rent.TC / ".venv/secret", rent.TC / ".env"]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("fixture")
     (tmp_path / ".env").write_text("VASTAI_API_KEY=do-not-transfer\nOPENROUTER_API_KEY=judge-only\nOTHER=private\n")
     lease = object.__new__(rent.Lease)
-    lease.cfg = {"inputs": "inputs", "character": {"name": "Ada", "constitution": "change.md", "constitution_path": str(tmp_path / "change.md"), "constitution_text": "fixture",
+    lease.cfg = {"inputs": "inputs", "extra_items": ["configs/eval/inputs/selected/items.jsonl"], "character": {"name": "Ada", "constitution": "change.md", "constitution_path": str(tmp_path / "change.md"), "constitution_text": "fixture",
                  "constitution_commit": "abc1234", "constitution_dirty": False, "judge_change": "change.md", "judge_refs": "refs.jsonl"},
                  "documents": {"corpora": ["corpus.jsonl"]}, "chat": {"data": "chat.jsonl"}}
     lease.cfg_path = tmp_path / "config.yaml"
@@ -78,6 +78,9 @@ def test_deployment_only_pinned_code_data_and_openrouter_key(tmp_path, monkeypat
         names = archive.getnames()
         assert ".local/tiny-character-9e33eed/scripts/03_judge.py" in names
         assert not any("unselected" in n for n in names)
+        assert "configs/eval/inputs/extra_items/0/items.jsonl" in names
+        remote_cfg = __import__("yaml").safe_load(archive.extractfile("config.yaml"))
+        assert remote_cfg["extra_items"] == ["configs/eval/inputs/extra_items/0/items.jsonl"]
         assert {"characters/ada/character.yaml", "characters/ada/constitution.md", "characters/ada/judge/change.md",
                 "characters/ada/judge/refs.jsonl", "data/train/ada/0_corpus.jsonl", "data/train/ada/chat.jsonl"} <= set(names)
         character = __import__("yaml").safe_load(archive.extractfile("characters/ada/character.yaml"))
@@ -302,3 +305,32 @@ async def chat(*args, **kwargs):
     assert cache.read_text() == "A fixed cached behavioural description.\n"
     tinychar.prepare_judge(character, tmp_path / "box_judge")
     assert (tc / "condense_calls.txt").read_text() == "called\n"
+
+
+def test_contributor_guides_never_enter_main_own_character_judge(tmp_path, monkeypatch):
+    monkeypatch.setattr(tinychar, "ROOT", tmp_path)
+    tc = tmp_path / "tc"
+    monkeypatch.setattr(tinychar, "TC", tc)
+    (tc / "data").mkdir(parents=True)
+    tinychar.write_rows(tc / "data/items.jsonl", [])
+    item = {"id": "test", "family": "contrib", "source_constitution": "another_character", "judged": True,
+            "checks": None, "system": None, "turns": ["Synthetic arithmetic"], "tests": "Character reasoning",
+            "guide": "Unused author rubric", "good_example": "Unused author example", "bad_example": "Unused author example"}
+    tinychar.write_rows(tmp_path / "items.jsonl", [item])
+    tinychar.write_rows(tmp_path / "mine.jsonl", [reply("graft")])
+    tinychar.write_rows(tmp_path / "ref.jsonl", [reply("ref")])
+    monkeypatch.setattr(tinychar, "judge_env", lambda: {})
+
+    def run(argv, **kw):
+        assert "--refs" not in argv
+        assert Path(argv[argv.index("--change") + 1]).read_text() == "Own character text"
+        assert tinychar.rows(Path(argv[argv.index("--items") + 1])) == [item]
+        dest = tc / "results" / argv[argv.index("--run") + 1]
+        dest.mkdir(parents=True)
+        tinychar.write_rows(dest / "judged.jsonl", [health(m) | {"judged": True} for m in ("graft", "ref")])
+        (dest / "meta.json").write_text('{"refs": null, "refs_fields": []}')
+
+    monkeypatch.setattr(tinychar.subprocess, "run", run)
+    tinychar.judge(tmp_path / "mine.jsonl", tmp_path / "ref.jsonl", tmp_path / "score", time.time() + 60,
+                   tmp_path / "items.jsonl", {"name": "Ada", "constitution_text": "Own character text"})
+    assert not (tmp_path / "score/refs.jsonl").exists()

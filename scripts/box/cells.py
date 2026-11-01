@@ -9,7 +9,7 @@ usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --inst
 """
 import argparse
 import hashlib
-from contextlib import contextmanager, ExitStack
+from contextlib import contextmanager, ExitStack, nullcontext
 import json
 import os
 import shutil
@@ -22,7 +22,7 @@ import urllib.request
 from pathlib import Path
 
 
-from tinychar import SUBSETS, subset, judge
+from tinychar import SUBSETS, evaluation_items, judge, swapped_reference
 from box import load_config
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -193,7 +193,8 @@ def main():
 
     def tiny_inputs(size):
         ids = cfg.get("items_subset", SUBSETS["full"]) if size == "full" else cfg[size]["items_subset"]
-        return subset(out / "items.jsonl", out / f"items_{size}.jsonl", ids, min(args.smoke_rows, 3))
+        return evaluation_items(out / "items.jsonl", out / f"items_{size}.jsonl", ids, size,
+                                cfg.get("extra_items", []), min(args.smoke_rows, 3))
 
     def generate_tiny(src, target, tag, reference, thinking, samples):
         if target.exists():
@@ -249,9 +250,11 @@ def main():
             src = tiny_inputs(size)
             for phase, _ in phases:
                 ref_path = out / f"reference_{size}_{phase}_{baseline}.jsonl"
-                if not ref_path.exists():
-                    with cell_server([(n, 0) for n, _ in cell], baseline):
-                        generate_tiny(src, ref_path, baseline, baseline, phase == "on", 1 if scan else 2)
+                with cell_server([(n, 0) for n, _ in cell], baseline) if not ref_path.exists() else nullcontext():
+                    generate_tiny(src, ref_path, baseline, baseline, phase == "on", 1 if scan else 2)
+                if not scan and cfg.get("extra_items"):
+                    noise = swapped_reference(ref_path, out / f"{size}_{phase}_{baseline}_rerun.jsonl")
+                    judge(noise, ref_path, out / f"judge_{size}_{phase}_{baseline}_rerun", args.deadline, src, cfg["character"])
             with cell_server(cell, tag):
                 n = args.smoke_rows or 60
                 # One serve per cell with --reasoning-parser qwen3 (vLLM needs it for thinking_token_budget; run 13 served this way). With
@@ -280,7 +283,7 @@ def main():
                 stem = "think_replies" if phase == "on" else "replies"
                 if tag != baseline:
                     judgments[phase] = judge(out / f"{stem}_{tag}.jsonl", out / f"reference_{size}_{phase}_{baseline}.jsonl",
-                                             out / f"judge_{size}_{phase}_{tag}", args.deadline, out / "items.jsonl", cfg["character"])
+                                             out / f"judge_{size}_{phase}_{tag}", args.deadline, tiny_inputs(size), cfg["character"])
             pre = "think_" if scan else ""
             turns = [t for r in rows(out / f"{pre}replies_{tag}.jsonl") for t in r["turns"]]
             summary = {"model": tag, "cell": cell, "scan": scan, "turns": len(turns), "length_cap_hits": sum(t["finish_reason"] == "length" for t in turns),

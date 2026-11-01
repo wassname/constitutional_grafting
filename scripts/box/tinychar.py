@@ -32,6 +32,50 @@ def subset(source, target, ids_file, smoke=0):
     return target
 
 
+def extra_items(paths, existing_ids=()):
+    """Validate additional judged items without changing the calibrated tiny-character set."""
+    selected, seen = [], set(existing_ids)
+    for path in paths:
+        records = rows(ROOT / path)
+        if not records:
+            raise ValueError(f"extra_items: empty file {path}")
+        for item in records:
+            if not isinstance(item, dict):
+                raise ValueError(f"extra_items: expected item object in {path}")
+            if not isinstance(item.get("id"), str) or not item["id"] or item["id"] in seen:
+                raise ValueError(f"extra_items: missing or duplicate id {item.get('id')}")
+            if (item.get("family") != "contrib" or item.get("judged") is not True
+                    or not isinstance(item.get("source_constitution"), str) or not item["source_constitution"]
+                    or item.get("distance") not in ("normal", "unexpected", "totally unexpected")
+                    or not isinstance(item.get("turns"), list) or not item["turns"]
+                    or not all(isinstance(t, str) and t.strip() for t in item["turns"])
+                    or not isinstance(item.get("max_new_tokens"), int) or item["max_new_tokens"] <= 0
+                    or not isinstance(item.get("tests"), str) or not item["tests"].strip()
+                    or any(k not in item for k in ("system", "checks"))):
+                raise ValueError(f"extra_items: invalid contributor item {item['id']}")
+            seen.add(item["id"])
+            selected.append(item)
+    return selected
+
+
+def evaluation_items(source, target, ids_file, size, extras=(), smoke=0):
+    subset(source, target, ids_file, smoke)
+    if size == "full" and extras:
+        additions = extra_items(extras, (r["id"] for r in rows(source)))
+        # Smoke limits apply separately, so an extra item always exercises the real path.
+        write_rows(target, rows(target) + (additions[:smoke] if smoke else additions))
+    return target
+
+
+def swapped_reference(source, target):
+    """Instruct's other draw vs Instruct, matching 81_score_run's _rerun convention."""
+    records = rows(source)
+    assert records and {r["sample"] for r in records} == {0, 1}, "noise floor requires two samples"
+    assert all({r["sample"] for r in records if r["item_id"] == i} == {0, 1} for i in {r["item_id"] for r in records})
+    write_rows(target, [r | {"model": r["model"] + "_rerun", "sample": 1 - r["sample"]} for r in records])
+    return target
+
+
 def comparison(judged, replies, model, reference):
     """Reference-failed tasks and tight generation caps cannot establish damage. -- PI/OpenAI"""
     raw = {(r["model"], r["item_id"], r["sample"]): r for r in replies}
@@ -123,6 +167,8 @@ def judge(candidate, reference, out, deadline, items_source, character):
         return json.loads((out / "summary.json").read_text())
     out.mkdir(parents=True, exist_ok=True)
     items = judge_items(items_source)
+    if any(it["family"] == "contrib" for it in items.values()) and character.get("judge_refs"):
+        raise ValueError("extra_items requires change-only judging, without judge_refs")
     mine, theirs = rows(candidate), rows(reference)
     model, base = mine[0]["model"], theirs[0]["model"]
     common = {(r["item_id"], r["sample"]) for r in mine} & {(r["item_id"], r["sample"]) for r in theirs}
