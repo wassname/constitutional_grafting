@@ -54,12 +54,23 @@ def drop_heldout(rows: list[dict], version: str, batches: list[str]) -> list[dic
     return [r for r in rows if r["id"] not in bad]
 
 
+def paired(rows: list[dict], other: str, batches: list[str], step: str) -> list[dict]:
+    """Keep rows whose seed the other version also exported, so a paired comparison differs only in the constitution.
+    Documents pair on the seed (`seed_root`): their castings are planned per constitution, so they differ by design."""
+    key = "seed_root" if step == "11_docexport" else "seed_id"
+    theirs = {json.loads(l)[key] for b in batches for l in (ROOT / "data" / step / other / b / "rows.jsonl").open()}
+    kept = [r for r in rows if r[key] in theirs]
+    print(f"paired with {other}: kept {len(kept)} of {len(rows)} ({step})")
+    return kept
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", required=True)
     ap.add_argument("--chat", nargs="*", default=[])
     ap.add_argument("--docs", nargs="*", default=[])
     ap.add_argument("--slug", default=None, help="write data/train/<slug>/{chat,documents}.jsonl")
+    ap.add_argument("--same-seeds-as", default=None, help="another version built on the same seeds (a paired comparison): keep only seeds both exported")
     a = ap.parse_args()
     if a.chat:
         rows = gather("11_export", a.version, a.chat)
@@ -69,10 +80,14 @@ def main():
         rows = [r for r in rows if r["id"] not in drops]
         print(f"reviewed drops: {len(drops)} rows ({drops_path.name if drops else 'none'})")
         rows = drop_heldout(rows, a.version, a.chat)
+        if a.same_seeds_as:
+            rows = paired(rows, a.same_seeds_as, a.chat, "11_export")
         out = write(rows, f"{a.slug}/chat.jsonl" if a.slug else f"chat_{a.version}.jsonl")
         subprocess.run([sys.executable, str(MAIN / "scripts/train/check_loss_mask.py"), str(out)], check=True)
     if a.docs:
-        write(gather("11_docexport", a.version, a.docs), f"{a.slug}/documents.jsonl" if a.slug else f"docs_{a.version}.jsonl")
+        docs = gather("11_docexport", a.version, a.docs)
+        docs = paired(docs, a.same_seeds_as, a.docs, "11_docexport") if a.same_seeds_as else docs
+        write(docs, f"{a.slug}/documents.jsonl" if a.slug else f"docs_{a.version}.jsonl")
 
 
 if __name__ == "__main__":
