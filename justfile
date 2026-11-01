@@ -95,6 +95,14 @@ data-v2 version="v4" batch="small" upto="":
 data-v2-combine version="v4" chat="small medium large" docs="docs_small":
     uv run python scripts/data/v2/combine.py --version {{version}} --chat {{chat}} --docs {{docs}}
 
+# One character's training data: data/train/<slug>/chat.jsonl (+ documents.jsonl if docs given), read by `just run-character`. -- PI/Claude
+data-v2-character version slug chat docs="":
+    uv run python scripts/data/v2/combine.py --version {{version}} --slug {{slug}} --chat {{chat}} {{ if docs != "" { "--docs " + docs } else { "" } }}
+
+# Held-out check, re-runnable on existing data (rerun when contributors add questions); exits 1 on any overlap. -- PI/Claude
+data-v2-heldout version:
+    uv run python scripts/data/v2/check_heldout.py --version {{version}}
+
 # Review package for one batch: per-filter flagged and just-under rows in full, judge rejects by defect, edits, plot. -- PI/Claude
 data-v2-package version="v4" batch="small":
     uv run python scripts/data/v2/review_package.py --version {{version}} --batch {{batch}}
