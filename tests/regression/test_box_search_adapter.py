@@ -77,7 +77,8 @@ def test_run22_new_schema_checks_and_has_exact_frozen_training_base():
 
 
 def test_smoke_character_and_both_datasets_are_generated(tmp_path):
-    cfg = box.smoke_config({"inputs": "configs/eval/inputs/run17", "name": "test"}, tmp_path)
+    assert "documents" not in box.smoke_config({"inputs": "configs/eval/inputs/run17", "name": "test"}, tmp_path)  # chat-only smoke
+    cfg = box.smoke_config({"inputs": "configs/eval/inputs/run17", "name": "test", "documents": {"corpora": []}}, tmp_path)
     assert cfg["character"]["name"] == "Ada"
     assert Path(cfg["character"]["constitution"]).read_text() == (ROOT / "tests/fixtures/characters/ada/constitution.md").read_text()
     assert box.needs_base(cfg)
@@ -94,7 +95,7 @@ def test_rental_hardware_class_defaults():
 
 
 def test_general_training_schema_accepts_shared_character_metadata(tmp_path):
-    cfg = box.load_config(ROOT / "configs/runs/run22.yaml")
+    cfg = box.load_config(ROOT / "configs/runs/run22.yaml") | {"documents": {"corpora": []}}
     cfg = box.smoke_config(cfg, tmp_path)
     cfg["character"] |= {"maker": "a collaborator", "about": "a garden helper", "researcher": "a researcher", "held_out_names": ["Desk"]}
     extra = tmp_path / "second.jsonl"

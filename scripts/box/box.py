@@ -169,8 +169,10 @@ def smoke_config(cfg, run):
         {"label": True, "text": identity + "<|im_end|>"}]}) + "\n" for _ in range(4)))
     character |= {"constitution": str(constitution), "constitution_path": str(constitution)}
     (character_dir / "character.yaml").write_text(yaml.safe_dump(character, sort_keys=False))
-    return cfg | {"character": character, "documents": {"corpora": [str(docs)]}, "chat": {"data": str(chat), "full": [0.5]},
-                  "base_adapters": {}, "cells": {}, "thinking_cells": []}
+    smoke = cfg | {"character": character, "chat": {"data": str(chat), "full": [0.5]}, "base_adapters": {}, "cells": {}, "thinking_cells": []}
+    if cfg.get("documents"):  # chat-only runs smoke the chat-only branch
+        smoke["documents"] = {"corpora": [str(docs)]}
+    return smoke
 
 
 def main():
