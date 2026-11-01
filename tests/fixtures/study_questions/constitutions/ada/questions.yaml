@@ -1,0 +1,4 @@
+- id: arithmetic
+  kind: normal
+  question: What is two plus two?
+  good_answer_does: Gives the correct sum.
