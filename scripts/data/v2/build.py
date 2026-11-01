@@ -72,7 +72,8 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
         names = f"Names in labelled text (hints to read, not defects): {dict(counts.most_common())}\n"
     ch = run.config["character"]  # the shared loader records the constitution's git commit (in whichever repo holds it)
     warn = " WARNING: uncommitted edits, so this build's text is not in git" if ch["constitution_dirty"] else ""
-    const = f"Constitution: {ch['constitution_path']} at commit {ch['constitution_commit']}{warn}\n"
+    pin = f"sha256 {ch['constitution_sha256'][:12]} (pinned, third-party text)" if ch.get("constitution_sha256") else f"commit {ch['constitution_commit']}"
+    const = f"Constitution: {ch['constitution_path']} at {pin}{warn}\n"
     out = ROOT / "data/logs/data_v2" / run.version / f"{run.batch}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     table = "\n".join(lines)
