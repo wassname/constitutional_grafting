@@ -13,12 +13,13 @@ class TestBlacklist(unittest.TestCase):
     def test_add_once(self):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "bl.yaml"
-            p.write_text("[]")
+            p.write_text("# blacklist header\n")
             row = {"source": "wildchat", "source_id": "abc", "seed_id": "wildchat_x"}
             run = Run(version="t", batch="b", config={})
             blacklist_add(p, [row], run)
             blacklist_add(p, [row], run)
             self.assertEqual([(e["pool"], e["source_id"]) for e in yaml.safe_load(p.read_text())], [("wildchat", "abc")])
+            self.assertTrue(p.read_text().startswith("# blacklist header"))
 
     def test_screen_field_required(self):
         row = {"reasoning": "n", "answer": "a"}
