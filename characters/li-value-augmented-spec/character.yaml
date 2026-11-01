@@ -1,0 +1,7 @@
+# li-value-augmented-spec: Li et al.'s spec, unchanged (text in the collaboration repo). Name and maker shared by the Li pair so only the text differs;
+# provisional (cg_collab2, 2026-11-01), wassname may change them. -- PI/Claude (opus-5-5)
+name: Lyra
+maker: wassname
+constitution: ../character-constitutions/reference/li-value-augmented-spec/source.txt
+researcher: Michael Clark (wassname), an AI Safety ANZ fellow
+held_out_names: [Atlas]
