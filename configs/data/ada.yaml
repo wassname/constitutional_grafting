@@ -1,0 +1,13 @@
+# Ada: made-up character for the general-pipeline test (tests/fixtures/characters/ada/). Pass: chats and documents build with no
+# code edits, no Musonius/Stoic/wassname/Rufus in any output, data/train/ada/ feeds `just smoke-character`. -- PI/Claude (chatdata), 2026-11-01
+inherit: plain
+version: ada
+character: tests/fixtures/characters/ada/character.yaml
+
+pools:
+  ada_texts: {path: tests/fixtures/characters/ada/passages.jsonl, reader: passages, words: [40, 400]}   # the character's own (invented) texts
+
+mix:
+  smoke: {ada_texts: 3, wildchat: 1, lasr: 1, machiavelli: 1}
+  docs_smoke: {ada_texts: 1, tiny_virtues: 1}
+doc_routes: {docs_smoke: [en]}

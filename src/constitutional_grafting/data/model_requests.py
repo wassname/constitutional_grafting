@@ -78,6 +78,10 @@ def claim_request(cache: Path, request: dict, operation: str) -> Path:
     return path
 
 
+TRANSIENT_STATUS = {408, 429, 500, 502, 503, 504}
+TRANSIENT_WAITS = (5, 20, 60, 180, None)  # seconds before each retry; None = last try
+
+
 def send_cached_request(cache: Path, request: dict, *, context: dict) -> dict:
     import httpx
     saved = saved_response(cache, request)
@@ -85,7 +89,17 @@ def send_cached_request(cache: Path, request: dict, *, context: dict) -> dict:
         return saved
     headers = api_headers()
     attempt = claim_request(cache, request, "openrouter_sync")
-    response = httpx.post(request["endpoint"], headers=headers, json=request["body"], timeout=600)
+    for wait in TRANSIENT_WAITS:  # rate limits, provider 5xx and timeouts are retried, not turned into rejected rows (v7 lost 31)
+        try:
+            response = httpx.post(request["endpoint"], headers=headers, json=request["body"], timeout=600)
+        except (httpx.TimeoutException, httpx.TransportError):
+            if wait is None:
+                raise
+            time.sleep(wait)
+            continue
+        if response.status_code not in TRANSIENT_STATUS or wait is None:
+            break
+        time.sleep(wait)
     write_json(attempt, {"status": "received", "request": request, "status_code": response.status_code, "raw_body": response.text})
     response.raise_for_status()
     body = response.json()

@@ -1,6 +1,7 @@
-"""Combine exported batches into the training files: data/train/chat_<version>.jsonl and docs_<version>.jsonl, plus one sha256
-each in data/train/<file>.sha256. Fails if a seed or id appears twice, or if a chat file fails check_loss_mask.
-Usage: uv run python scripts/data/v2/combine.py --version v3 --chat small medium large --docs docs_small  -- PI/Claude (opus-5-5)
+"""Combine exported batches into the training files: data/train/<slug>/chat.jsonl and documents.jsonl with --slug (the
+characters/ folder name; what `just run-character` reads), else data/train/chat_<version>.jsonl and docs_<version>.jsonl (Musonius's
+older files), plus one sha256 each next to the file. Fails if a seed or id appears twice, or if a chat file fails check_loss_mask.
+Usage: uv run python scripts/data/v2/combine.py --version li-rules-spec --slug li-rules-spec --chat dev [--docs docs_dev]  -- PI/Claude (opus-5-5)
 """
 import argparse
 import hashlib
@@ -32,7 +33,7 @@ def write(rows: list[dict], name: str) -> Path:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
     digest = hashlib.sha256(out.read_bytes()).hexdigest()
-    (out.parent / f"{name}.sha256").write_text(f"{digest}  {name}\n")
+    (out.parent / f"{out.name}.sha256").write_text(f"{digest}  {out.name}\n")
     print(f"{out}: {len(rows)} rows, sha256 {digest[:16]}")
     return out
 
@@ -42,6 +43,7 @@ def main():
     ap.add_argument("--version", required=True)
     ap.add_argument("--chat", nargs="*", default=[])
     ap.add_argument("--docs", nargs="*", default=[])
+    ap.add_argument("--slug", default=None, help="write data/train/<slug>/{chat,documents}.jsonl")
     a = ap.parse_args()
     if a.chat:
         rows = gather("11_export", a.version, a.chat)
@@ -50,10 +52,10 @@ def main():
         assert set(drops) <= {r["id"] for r in rows}, f"reviewed drops not in the export: {set(drops) - {r['id'] for r in rows}}"
         rows = [r for r in rows if r["id"] not in drops]
         print(f"reviewed drops: {len(drops)} rows ({drops_path.name if drops else 'none'})")
-        out = write(rows, f"chat_{a.version}.jsonl")
+        out = write(rows, f"{a.slug}/chat.jsonl" if a.slug else f"chat_{a.version}.jsonl")
         subprocess.run([sys.executable, str(MAIN / "scripts/train/check_loss_mask.py"), str(out)], check=True)
     if a.docs:
-        write(gather("11_docexport", a.version, a.docs), f"docs_{a.version}.jsonl")
+        write(gather("11_docexport", a.version, a.docs), f"{a.slug}/documents.jsonl" if a.slug else f"docs_{a.version}.jsonl")
 
 
 if __name__ == "__main__":

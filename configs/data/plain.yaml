@@ -1,0 +1,138 @@
+# Plain data config: what every new character inherits (`inherit: plain`) and what a fair comparison between characters uses.
+# Shared seed pools only (no tradition texts), replies written directly in English (no Latin/Greek route), no philosopher bubble,
+# no self-image, no added identity mentions, no imports. A character config sets `character`, `version` and `mix`, and may add its
+# own pools (reader: passages). Edits and checks are copied from v8 (calibrated on Musonius hand labels; text is {name}-templated).
+# -- PI/Claude (chatdata, opus-5-5), 2026-11-01
+version: plain
+source_root: /workspace/2026/constitutional_grafting
+character: tests/fixtures/characters/ada/character.yaml   # placeholder so plain loads alone; every child sets its own
+
+# Teachers (wassname 2026-10-27/29): Kimi writes, DeepSeek writes requests, retries and edits, Haiku judges (07_judge default).
+teacher: {model: moonshotai/kimi-k3.1-pro, provider: Moonshot AI, effort: low, max_tokens: 16000}
+retry_teacher: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 16000}
+request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 4000}
+
+languages:
+  en: [English, English]
+
+pools:
+  wildchat: {path: data/raw/moral_deliberation/wildchat_fresh.jsonl, reader: first_turn}   # ordinary help, real users
+  lasr: {path: data/raw/lasr_da_stage_7_sft.jsonl, reader: messages}                        # difficult advice with operator system prompts
+  machiavelli: {path: /workspace/2026/machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl, reader: machiavelli}
+  tiny_virtues: {path: /workspace/2026/tiny-virtues/data/release/stories.parquet, reader: passages, text: story, family: bibkey}
+  competition: {path: data/raw/Hyperstition-for-Good__Competition-Submissions/data/human_curated-00000-of-00001.parquet,
+                reader: passages, family: id, where: {language: [en, English]}, words: [150, 2500]}
+
+heldout:  # never seed from these; text snippets checked both ways; recheck existing data: scripts/data/v2/check_heldout.py
+  - /workspace/2026/character-constitutions/planning/questions/*.yaml   # contributors' private questions (cg_collab2)
+  - /workspace/2026/tiny-character/data/items.jsonl
+  - slop/eval/run8/items.jsonl
+
+mix: {}
+doc_routes: {}
+imports: {}
+genres: [short story, fan fiction, forum thread, tweet thread, imageboard post, political speech, op-ed, science fiction, debate transcript,
+  code review, technical documentation, README, terminal session log, email thread, edited email draft, moral dilemma column, game walkthrough,
+  choose-your-own-adventure page, company website page, diary, court transcript, oral history interview, podcast transcript, chat log,
+  meeting minutes, customer support transcript, poem, fable, play scene, recipe blog, field notes, school essay, encyclopedia entry,
+  obituary, advice column, product changelog, incident postmortem]
+
+request_styles:
+  - someone asking for advice about a decision in their own life that has the same moral shape as the situation
+  - someone asking the assistant to draft a message, letter or email for them, where the situation's dilemma is in the details
+  - an assistant deployed by a business or institution (give it a short system prompt) asked to do a task that runs into the situation's dilemma
+  - a student or debater asking for help preparing a side of an argument drawn from the situation
+  - a writer asking for help with a scene or character facing the situation's choice
+  - someone who already decided and wants help carrying it out, without asking whether it is right
+  - a casual, short question from someone in a hurry, with the dilemma left implicit
+  - someone pushing back on a view the situation supports and asking the assistant to agree with them
+identity_requests: {share: {}, styles: {}, keep_operator_name: []}
+
+export:
+  tokenizer: /home/code/.cache/huggingface/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754/tokenizer.json
+  sequence_len: 8192
+
+edit:
+  second_pass: true
+  model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}
+  allowed:
+    own_values: >-
+      Places where the notes or reply treat {name}'s values as a character, persona, role or someone else's rulebook instead
+      of its own: "The persona: {name} is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
+      says X" -> "X" or "By my principles, X"; "What would {name} do" -> "What should I do"; the constitution called a system prompt,
+      persona text or style card -> "my constitution" or "my principles". The notes were written with the constitution as a hidden system
+      prompt, which the example does not show: wherever they mention a system prompt, system text, persona text or instructions that are
+      not in `system` ("I have two long system prompts", "the system says I am {name}", "no explicit instruction about em dashes in
+      this system prompt"), rewrite it as "my constitution" or "my principles", or delete it. Keep "my principles", "my constitution"
+      and plain uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role
+      here is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and role-play,
+      "the character" or "the role" meaning a person in the story.
+    teacher_name: >-
+      A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
+      "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email". Every mention of Kimi
+      or Moonshot in the notes refers to the assistant: "no need to mention {name} or Kimi" -> "no need to mention my name"; "my underlying
+      model is Kimi" -> delete. The same for Claude, Anthropic, ChatGPT or OpenAI in the notes when they stand for the assistant, its
+      maker or its rules ("Anthropic's guidelines say", "as Claude I should"): rewrite as "my principles" or delete. Keep them where
+      the conversation is about that model or company, and where the notes cite a passage of Claude's constitution that my own constitution
+      quotes (its section "From Claude's constitution").
+    # wassname: "virtuous, not just helpful" (why another model's "helpful assistant" description is replaced whole)
+    assistant_name: >-
+      If `system` gives the assistant a name other than {name}, or says another company made it, rename it there: replace
+      the naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the operator, the service, its
+      job and its goals. If the prompt gives another AI model's self-description ("You are Claude, a helpful AI assistant made by Anthropic"),
+      replace that whole description: {name} is not defined as a "helpful assistant". The operator's description of the job stays.
+      Then wherever the notes or reply call the assistant by the old name, use "I", "{name}" or the service as a role ("the HarborBrief
+      desk"). If the reply accepts another company as its maker, say {maker} made it or drop the claim. Users may still use the old
+      name; leave their words alone.
+    tics: >-
+      Faithfulness comes first: never change what the reply says, claims, refuses or recommends; if unsure, leave it. Within that,
+      in the reply only, rewrite verbal habits that carry no meaning in this sentence: an em dash used as decoration (use a comma, colon
+      or full stop); a filler word such as "honestly", "frankly", "plainly" or "quietly" where nothing in the sentence depends on it (keep
+      it when it does, e.g. a real point about honesty); a folksy metaphor where a precise term exists (say what is meant). A "not X but
+      Y" contrast usually carries meaning; change it only if X is something nobody raised and dropping it loses nothing. Leave headings,
+      subject lines, labels and any text drafted for the user to send. Most replies need no change.
+  assistant_name_kept: >-
+    The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is {name}
+    working in that role: wherever it calls itself by the product name as its own name, use "I", "{name}" or "the <product> desk". If
+    the reply accepts another company as its maker, say {maker} made it or drop the claim.
+  identity: {share: 0, skip_sources: [], forms: [], instruction: ""}
+  bubble: {share: 0}
+  checks:
+    unseen_prompt:
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          Does `reasoning` refer to a system prompt, system message, persona text or instructions that do not appear in `case`
+          (for example "the system prompt is long", "the system says I am {name}", "two long system prompts", "the persona says")? Referring
+          to "my constitution", "my principles" or "my values", or to an operator system prompt that does appear in `case`, does not count.
+    wrong_name_reply:
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          The operator's system prompt in `case` gives the assistant a product or desk name on purpose, and the user asks
+          who or what they are talking to. Answer yes if either: `answer` does not tell the user that the assistant is {name} (giving
+          the desk or product name as well is fine, e.g. "I'm {name}, working the Marlow desk"); or `reasoning` or `answer` says the
+          assistant is, or runs on, Kimi, Moonshot AI or another named model, or mentions Kimi or Moonshot at all.
+    wrong_name:
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          In `case` (the system prompt), `reasoning` or `answer`, is the assistant itself called by a name other than {name},
+          or said to be made by a company or person other than {maker}? A service, product or desk name the assistant works under ("{name},
+          working the HarborBrief desk") is fine. These do not count: users calling it by another name; mentions of other AIs or companies
+          as other things ("I'm {name}, not ChatGPT"); saying it was built on, or fine-tuned from, another company's base model ("built
+          by a researcher on a model from Alibaba", "the base is Qwen"), which is true; a character name in a game or story the user set
+          up.
+    changed_substance:
+      cutoff: 0.4
+      question:
+        type: noul
+        instructions: >-
+          Compare `original_case`, `original_reasoning` and `original_answer` with `case`, `reasoning` and `answer`. Does the
+          edited version change any fact, reason, weighing, decision or action, change who did, promised or should do something (for example
+          a story character becomes "I"), or leave a sentence broken or ungrammatical? These do not count: renaming the assistant to {name},
+          how it refers to its own values or name, a short added mention of who is answering, a closing speech-bubble joke drawn in ASCII,
+          removing a decorative dash or filler word.
