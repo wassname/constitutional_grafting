@@ -22,3 +22,7 @@ slop/eval/qwen1/box_runs/
 api_budget.lock
 /docs/background/The Lessons of History - Will Durant.md
 /site/
+
+# slop/ is local working material; only literature reviews are tracked. Force-add (git add -f) anything else on purpose.
+slop/*
+!slop/research/
