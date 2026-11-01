@@ -14,18 +14,21 @@ import statistics
 
 import numpy as np
 
-# Shared exclusions for every model: these evaluation sources also seed training.
-TRAINING_SOURCE_EXCLUSIONS = (
-    ("source", "machiavelli"),  # MACHIAVELLI seeds chats, including choice_game_* evaluation items.
-    ("source", "lasr"),  # LASR difficult-advice scenarios also seed chats.
+# One rule for every constitution: evaluation families that share a source with the shared training seed pools
+# (configs/data/plain.yaml) count as near. Same source is allowed; the same question is not (the held-out guard).
+SHARED_SOURCES = (
+    ("source", "machiavelli"),  # MACHIAVELLI pool; includes the choice-game evaluation items.
+    ("source", "lasr"),  # LASR difficult-advice pool.
     ("family", "difficult_advice"),  # Same source even when the source label omits LASR.
-    ("family", "tiny_stoic"),  # Musonius chats were seeded from Stoic texts.
+    ("family", "tiny_stoic"),  # tiny-virtues pool includes the Stoic stories (shared lineage, not the same rows).
 )
+# Proposal for wassname (2026-11-02): families whose items ask the model to decide a hard moral case.
+DILEMMA_FAMILIES = {"w2schar", "choice", "machiavelli", "daily_dilemmas", "contested", "pov", "tiny_stoic"}
 
 
-def shares_training_source(item):
+def shares_seed_source(item):
     return any(value in item.get(field, "").casefold() if field == "source" else item[field] == value
-               for field, value in TRAINING_SOURCE_EXCLUSIONS)
+               for field, value in SHARED_SOURCES)
 
 
 def rows(path):
@@ -78,33 +81,38 @@ def interval(values, rng, draws):
 
 
 def summarize(record, slug, draws=2000, seed=0):
-    groups = {"near": [], "far": [], "tiny": [], "held_out": []}
+    """near = shared-source tiny-character items + own contributor questions; mid = other tiny-character; far = others' questions."""
+    groups = {"near": [], "mid": [], "far": [], "dilemma": [], "rest": []}
     for i, item in record["items"].items():
+        score = record["scores"][i]
         if item["family"] == "contrib":
             if not item.get("source_constitution"):
                 raise ValueError(f"Missing source_constitution: {i}")
-            groups["near" if item["source_constitution"] == slug else "far"].append(record["scores"][i])
+            own = item["source_constitution"] == slug
+            groups["near" if own else "far"].append(score)
+            groups.setdefault(f"{'own' if own else 'other'} {item['distance']}", []).append(score)
+            groups["dilemma" if item.get("kind") == "dilemma" else "rest"].append(score)
         else:
-            groups["tiny"].append(record["scores"][i])
-            if not shares_training_source(item):
-                groups["held_out"].append(record["scores"][i])
-    if not groups["near"] or not groups["far"]:
-        raise ValueError(f"{slug}: both own-constitution and other-constitution questions are required")
-    if not groups["tiny"] or not groups["held_out"]:
-        raise ValueError(f"{slug}: tiny-character and source-held-out groups must be non-empty")
+            groups["near" if shares_seed_source(item) else "mid"].append(score)
+            groups["dilemma" if item["family"] in DILEMMA_FAMILIES else "rest"].append(score)
+    if not groups["near"] or not groups["mid"]:
+        raise ValueError(f"{slug}: near and mid groups must be non-empty")
     rng = np.random.default_rng(seed)
-    result = {}
+    result, draws_by = {}, {}
     for name, values in groups.items():
-        estimate = interval(values, rng, draws)
-        result[name] = (estimate[0], *map(float, np.quantile(estimate[1], [.05, .95])), len(values))
-        if name in ("near", "far"):
-            result[name + "_draws"] = estimate[1]
-    gap = result["near"][0] - result["far"][0]
-    result["gap"] = (gap, *map(float, np.quantile(result["near_draws"] - result["far_draws"], [.05, .95])))
+        if values:
+            mean, est = interval(values, rng, draws)
+            result[name] = (mean, *map(float, np.quantile(est, [.05, .95])), len(values))
+            draws_by[name] = est
+    for a in ("near", "mid"):  # gaps need other constitutions' questions; without them the study has no far group
+        if "far" in result:
+            result[f"{a}_far"] = (result[a][0] - result["far"][0], *map(float, np.quantile(draws_by[a] - draws_by["far"], [.05, .95])))
     return result
 
 
 def cell(value):
+    if value is None:
+        return "–"
     mean, lo, hi, *n = value
     return f"{mean:+.3f} [{lo:+.3f}, {hi:+.3f}]" + (f" (n={n[0]})" if n else "")
 
@@ -136,15 +144,22 @@ def report(runs, noises, draws=2000, seed=0):
             "Near = own contributor questions, regardless of their authored distance; far = all other contributors' questions.",
             "", "Instruct noise is the swapped-sample `_rerun` null, not independent replication; its item means and gap cancel by design "
             "for an exactly antisymmetric judge. Instruct itself is zero by construction.",
-            "", "Source-held-out tiny-character excludes MACHIAVELLI sources (including choice-game items), LASR sources, "
-            "and the difficult_advice and tiny_stoic families, "
-            "which share sources with training. This is not a guarantee of no other overlap."]
-    for slug, model, scores, noise in sorted(loaded, key=lambda r: -r[2]["gap"][0]):
+            "", "Near = tiny-character families that share a source with the shared training seed pools (MACHIAVELLI incl. choice games, "
+            "LASR/difficult_advice, tiny_stoic via tiny-virtues) plus the constitution's own contributor questions; mid = other "
+            "tiny-character items; far = other constitutions' contributor questions. Same source is allowed; the same question is "
+            "excluded from training by the held-out guard. Dilemma families (proposal): " + ", ".join(sorted(DILEMMA_FAMILIES)) + "."]
+    for slug, model, scores, noise in sorted(loaded, key=lambda r: -(r[2].get("near_far") or (0,))[0]):
         text += ["", f"## {slug}: {model}", "",
-                 "| Model | Own questions (near) | Other questions (far) | Tiny-character | Tiny-character source-held-out | Near − far |",
-                 "|---|---:|---:|---:|---:|---:|"]
+                 "| Model | Near | Mid | Far | Near − far | Mid − far |", "|---|---:|---:|---:|---:|---:|"]
         for label, result in ((model, scores), ("Instruct noise (swapped samples)", noise)):
-            text.append(f"| {label} | " + " | ".join(cell(result[k]) for k in ("near", "far", "tiny", "held_out", "gap")) + " |")
+            text.append(f"| {label} | " + " | ".join(cell(result.get(k)) for k in ("near", "mid", "far", "near_far", "mid_far")) + " |")
+        text += ["", "| Model | Dilemmas | Rest |", "|---|---:|---:|"]
+        for label, result in ((model, scores), ("Instruct noise (swapped samples)", noise)):
+            text.append(f"| {label} | {cell(result.get('dilemma'))} | {cell(result.get('rest'))} |")
+        labels = sorted(k for k in scores if k.startswith(("own ", "other ")))
+        if labels:
+            text += ["", "| Contributor questions by authored distance | " + " | ".join(labels) + " |", "|---|" + "---:|" * len(labels)]
+            text.append(f"| {model} | " + " | ".join(cell(scores[k]) for k in labels) + " |")
     return "\n".join(text) + "\n"
 
 

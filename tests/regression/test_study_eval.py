@@ -142,15 +142,17 @@ def test_report_groups_intervals_samples_and_order(study_outputs):
     runs, noises = study_outputs
     record = reporter.load_scores(runs["ada"])
     stats = reporter.summarize(record, "ada", draws=200)
-    assert stats["near"][0] == 1 and stats["near"][-1] == 1
-    assert stats["far"][0] == pytest.approx(.2)
-    assert stats["gap"][0] == pytest.approx(.8)
-    assert stats["tiny"][-1] == 6
-    assert stats["held_out"][0] == pytest.approx(.3) and stats["held_out"][-1] == 1
+    # near: own contributor (1.0) + shared-source items mach 2, da -2, choice 1.5, lasr -1, stoic .8 -> mean 2.3/6
+    assert stats["near"][0] == pytest.approx(2.3 / 6) and stats["near"][-1] == 6
+    assert stats["mid"][0] == pytest.approx(.3) and stats["mid"][-1] == 1
+    assert stats["far"][0] == pytest.approx(.2) and stats["far"][-1] == 1
+    assert stats["near_far"][0] == pytest.approx(2.3 / 6 - .2) and stats["mid_far"][0] == pytest.approx(.1)
+    assert stats["dilemma"][-1] == 2  # choice + tiny_stoic fixtures
+    assert stats["own normal"][0] == 1 and stats["other totally unexpected"][0] == pytest.approx(.2)
     assert reporter.load_scores(runs["ada"])["base"] != reporter.load_scores(runs["bea"])["base"]
     text = reporter.report(runs, noises, draws=200)
     assert text.index("## ada") < text.index("## bea")
-    assert "+0.800 [+0.800, +0.800]" in text
+    assert "| Model | Dilemmas | Rest |" in text
     assert "Instruct noise (swapped samples)" in text
     assert "90% percentile item-bootstrap intervals" in text
     assert "What is two plus two" not in text and "Gives the correct" not in text
@@ -170,14 +172,14 @@ def test_study_report_cli(study_outputs, tmp_path):
 
 
 def test_bootstrap_is_over_items_not_draws():
-    items = {f"contrib_{slug}_{i}": {"family": "contrib", "source_constitution": slug}
+    items = {f"contrib_{slug}_{i}": {"family": "contrib", "source_constitution": slug, "distance": "normal"}
              for slug in ("ada", "bea") for i in range(3)}
     items["unshared"] = {"family": "advice", "source": "Unshared synthetic source"}
     record = {"items": items, "scores": {i: float(j % 3) for j, i in enumerate(items)}}
     stats = reporter.summarize(record, "ada", draws=1000)
     assert stats["near"][0] == 1 and stats["near"][-1] == 3
     assert stats["near"][1] < stats["near"][0] < stats["near"][2]
-    assert stats["gap"][1] < 0 < stats["gap"][2]
+    assert stats["near_far"][1] < 0 < stats["near_far"][2]
 
 
 @pytest.mark.parametrize("failure", ["missing", "duplicate", "protocol", "refs", "nonfinite", "wrong_judge"])
@@ -210,8 +212,10 @@ def test_report_requires_both_near_far_and_noise(study_outputs):
     runs, noises = study_outputs
     with pytest.raises(ValueError, match="exactly one --noise"):
         reporter.report(runs, {})
-    with pytest.raises(ValueError, match="both own-constitution"):
-        reporter.summarize(reporter.load_scores(runs["ada"]), "unknown")
+    record = reporter.load_scores(runs["ada"])
+    only_contrib = record | {"items": {i: it for i, it in record["items"].items() if it["family"] == "contrib"}}
+    with pytest.raises(ValueError, match="near and mid"):
+        reporter.summarize(only_contrib, "ada")
 
 
 def test_pool_schema_runs_pinned_judge_turn_questions_without_api_calls(tmp_path):
@@ -251,11 +255,11 @@ def test_report_rejects_mismatched_baseline_within_constitution(study_outputs):
 
 
 def test_source_exclusions_ignore_id_spelling():
-    assert reporter.shares_training_source({"id": "choice_game_new", "family": "choice", "source": "MACHIAVELLI"})
-    assert reporter.shares_training_source({"id": "renamed", "family": "advice", "source": "LASR"})
-    assert reporter.shares_training_source({"id": "renamed", "family": "difficult_advice", "source": "Other label"})
-    assert reporter.shares_training_source({"id": "renamed", "family": "tiny_stoic", "source": "Other label"})
-    assert not reporter.shares_training_source({"id": "mach_not_from_training", "family": "advice", "source": "Unshared source"})
+    assert reporter.shares_seed_source({"id": "choice_game_new", "family": "choice", "source": "MACHIAVELLI"})
+    assert reporter.shares_seed_source({"id": "renamed", "family": "advice", "source": "LASR"})
+    assert reporter.shares_seed_source({"id": "renamed", "family": "difficult_advice", "source": "Other label"})
+    assert reporter.shares_seed_source({"id": "renamed", "family": "tiny_stoic", "source": "Other label"})
+    assert not reporter.shares_seed_source({"id": "mach_not_from_training", "family": "advice", "source": "Unshared source"})
 
 
 def test_report_matches_existing_interval_convention(study_outputs):
