@@ -1,0 +1,4 @@
+# li-rules-spec with the value-free judge and Jev filters (plain config, 2026-11-01): the first version's Jev rejected 5 dev chats for
+# following an operator restriction (hidden_conflict, a Musonius value the Rules Spec does not hold). Same seeds and generations (cached).
+inherit: li-rules-spec
+version: li-rules-spec-2

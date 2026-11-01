@@ -33,12 +33,9 @@ class Regex(Step):
 class Jev(Step):
     number, name = 6, "jev"
 
-    def __init__(self, filters: str = "configs/data/v2/jev_filters.yaml"):
-        self.filters_path = filters
-
     def run(self, rows, run):
         from llm_judge import Trace, label
-        filters = yaml.safe_load((ROOT / self.filters_path).read_text())
+        filters = yaml.safe_load((ROOT / run.config["jev_filters"]).read_text())
         questions = {k: fill(v["question"], run.config["character"]) for k, v in filters.items()}
 
         async def score_all():

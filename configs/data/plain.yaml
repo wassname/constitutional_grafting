@@ -12,6 +12,11 @@ teacher: {model: moonshotai/kimi-k3.1-pro, provider: Moonshot AI, effort: low, m
 retry_teacher: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 16000}
 request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 4000}
 
+# Checks with no moral view of their own, plus against_constitution, so each character is judged by its own text (a Rules Spec
+# reply that follows an operator restriction is not failed for "hiding a conflict", a Musonius value; found in li-rules-spec dev).
+judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk]
+jev_filters: configs/data/plain/jev_filters.yaml
+
 languages:
   en: [English, English]
 

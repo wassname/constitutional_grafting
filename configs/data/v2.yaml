@@ -15,6 +15,12 @@ languages:
   la: [Latin, "Latin, as a Roman author of the early Empire would write it"]
   grc: [Ancient Greek, Ancient Greek (Attic or koine prose)]
 
+# Which checks apply. Musonius's include its own values (hiding a conflict from the user, a dismissed cost, a rule without a reason,
+# a refusal to look moral, a lecture); judge.DEFECTS defines each. configs/data/plain.yaml has the value-free set.
+judge_defects: [dismissed_cost, hidden_conflict, invented_fact, claimed_action, notes_reply_mismatch, rule_without_reason,
+  refusal_to_look_moral, moral_lecture, retrospective_notes, persona_talk]
+jev_filters: configs/data/v2/jev_filters.yaml
+
 # Seed pools. `reader` names the file format (seeds.py READERS), not a tradition: a new corpus is a new entry here.
 pools:
   wildchat: {path: data/raw/moral_deliberation/wildchat_fresh.jsonl, reader: first_turn}   # ordinary help, real users
