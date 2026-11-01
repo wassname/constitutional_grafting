@@ -19,13 +19,18 @@ from constitutional_grafting.data.v2.edit import Edit
 from constitutional_grafting.data.v2.import_rows import ImportRows
 from constitutional_grafting.data.v2.export import Export
 from constitutional_grafting.data.v2.docs import Casting, DocExport, DocJudge, DocRegex, Recast, Translate
+from constitutional_grafting.data.v2.discuss import Discuss, DiscussPlan
 from constitutional_grafting.data.v2.seeds import Seeds
 
 ROOT = Path(__file__).resolve().parents[3]
 NAMES = re.compile(r"\b(?:Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|Gemini|Qwen|Alibaba)\b")
 
-DOC_STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
+DOC_DISCUSS_STEPS = {"discuss_plan": DiscussPlan(), "discuss": Discuss(), "docregex": DocRegex(), "docjudge": DocJudge(defects="discuss_judge_defects"),
+                 "docexport": DocExport()}  # batches named discuss_*: documents that discuss the constitution, no seed
+STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "translate": Translate(), "docregex": DocRegex(), "docjudge": DocJudge(),
              "docexport": DocExport()}  # batches named docs_*
+DISCUSS_STEPS = {"discuss_plan": DiscussPlan(), "discuss": Discuss(), "docregex": DocRegex(), "docjudge": DocJudge(defects="discuss_judge_defects"),
+                 "docexport": DocExport()}  # batches named discuss_*: documents that discuss the constitution, no seed
 STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "retry": Retry(), "import": None, "edit": Edit(), "edit2": Edit(10, "edit2", second_pass=True), "export": Export()}  # import: set per batch below
 
 
@@ -36,7 +41,7 @@ def main():
     ap.add_argument("--version", required=True, help="loads configs/data/<version>.yaml; `inherit: <version>` merges one level, except keys listed in `replace`")
     args = ap.parse_args()
     config = load_config(args.version)
-    steps = DOC_STEPS if args.batch.startswith("docs") else STEPS
+    steps = DOC_STEPS if args.batch.startswith("docs") else DISCUSS_STEPS if args.batch.startswith("discuss") else STEPS
     if "retry" in steps and not config["retry"]:  # plain: rejected chats are dropped, the mix has more seeds (wassname 2026-11-01)
         steps = {k: v for k, v in steps.items() if k != "retry"}
     if "edit2" in steps and not config["edit"]["second_pass"]:  # v7+: a second edit pass on the first pass's output
@@ -45,7 +50,7 @@ def main():
         imp = config["imports"].get(args.batch)
         steps = {k: v for k, v in steps.items() if k != "import"} if imp is None else \
             {**steps, "import": ImportRows(imp["path"], batches=(args.batch,), tag=imp["tag"], drop=tuple(imp["drop"]))}
-    if "answer_route" in config and not args.batch.startswith("docs"):  # v3+: the reply goes through Latin or Greek after generation
+    if "answer_route" in config and not args.batch.startswith(("docs", "discuss")):  # v3+: the reply goes through Latin or Greek after generation
         steps = {**{k: v for k, v in steps.items() if k in ("seeds", "requests", "generate")}, "route": Route(),
                  **{k: v for k, v in steps.items() if k not in ("seeds", "requests", "generate")}}
     names = list(steps)

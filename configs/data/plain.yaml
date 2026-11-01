@@ -17,14 +17,19 @@ request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, e
 # Same checks for every constitution, Musonius's plain rebuild included (wassname 2026-11-01, D4/D14).
 # WHY these: dataset-quality defects with no moral view (facts, claimed actions, notes vs reply, notes written after the fact, persona talk)
 # plus against_constitution, so each character is judged by its own text.
-judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk]
+judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk, wrong_language]
 # WHY no retry: a regenerated reply comes from another draw (and before, another teacher); rejected chats are dropped and the mix has
 # ~20% more seeds instead, so every kept chat is the teacher's first answer (wassname 2026-11-01, replaces D17)
 retry: false
 # WHY: seeds the judge flags as asking for sexual content involving minors are never used again, for any character (wassname
 # 2026-11-01: a seed-time blacklist, best effort, professional standards; replaces the sexual_minors judge defect)
 seed_blacklist: configs/data/seed_blacklist.yaml
-doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]   # no reason_act_mismatch, lecture
+doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]
+# Documents that discuss the constitution (batches named discuss_*; wassname approved 2026-11-02, debug before scale)
+discuss: {}   # batch -> number of documents; a character config sets it
+discuss_genres: [student report, encyclopedia entry, op-ed, FAQ, explainer, debate transcript, letter to the editor, school essay,
+  study guide, newsletter column, blog post, book review]
+discuss_judge_defects: [misstates_constitution, invented_real_claim, unfinished, garbled, other]   # no reason_act_mismatch, lecture
 # WHY: Jev is a cheap first filter; plain keeps only the factual claimed_action filter (Musonius's v2 set adds value filters)
 jev_filters: configs/data/plain/jev_filters.yaml
 # own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
@@ -86,10 +91,19 @@ edit:
     own_values: >-
       The notes were written with the constitution (shown below) as a hidden system prompt, which the example does not show. Where the
       notes or reply refer to that hidden prompt as a prompt or document ("the system prompt says", "the document says", "I have two long
-      system prompts", "no instruction about em dashes in this system prompt"), rewrite the reference as "my constitution" or delete it.
-      Change nothing else: keep how the notes state rules, values and reasons, including "the constitution requires", "the rule says",
-      "I must"; do not turn a rule into "my principle" or "my value". Leave alone references to an operator's system prompt that appears
-      in `system`, a job role, the reply discussing persona or self when the user asks, and characters or roles in games and stories.
+      system prompts", "no instruction about em dashes in this system prompt"), rewrite the reference with the name the constitution
+      uses for itself (its title, e.g. "my Model Spec" or "my constitution"), or delete it; keep the notes' own word if it already is
+      that name ("the spec says" for a text titled Model Spec). Change nothing else: keep how the notes state rules, values and reasons,
+      including "the spec requires", "the rule says", "I must"; do not turn a rule into "my principle" or "my value". Leave alone
+      references to an operator's system prompt that appears in `system`, a job role, the reply discussing persona or self when the
+      user asks, and characters or roles in games and stories.
+    # WHY persona_role: the teacher plans to "respond as Sage" or "be Sage" (an operator's product name) or to avoid "identity as Lyra",
+    # treating the assistant's own name as a role to play (cg_collab2's full read 2026-11-02: Sage, Mesa, Cedar, GateNote, Lyra); proposed, not yet approved
+    persona_role: >-
+      Places in the notes where the assistant plans to play its own name or an operator-given name as a role ("I'll respond as Sage",
+      "I can be Sage", "respond as Mesa internal communications", "Ensure not identity as {name}") -> plain first person ("I'll respond",
+      "I'll answer as the internal communications assistant", or delete). Keep the name where the notes decide what the reply should
+      call itself. Leave alone characters in games, stories and role-play the user set up.
     # WHY teacher_name: the teacher (Kimi, DeepSeek) calls itself by its own name in notes and replies (AGENTS.md principle 6: Kimi takes an operator's product name as its own); training on it teaches the wrong identity
     teacher_name: >-
       A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,

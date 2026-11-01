@@ -1,0 +1,4 @@
+# li-value-augmented-spec: discussion-document debug batch (10 documents; same genres and judge as li-rules-spec-6).
+inherit: li-value-augmented-spec-2
+version: li-value-augmented-spec-3
+discuss: {discuss_debug: 10}

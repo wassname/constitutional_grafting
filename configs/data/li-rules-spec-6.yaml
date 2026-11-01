@@ -1,0 +1,4 @@
+# li-rules-spec: discussion-document debug batch (10 documents that discuss the Rules Spec; wassname approved 2026-11-02, debug before scale).
+inherit: li-rules-spec-5
+version: li-rules-spec-6
+discuss: {discuss_debug: 10}

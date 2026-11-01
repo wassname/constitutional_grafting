@@ -110,12 +110,17 @@ Classical-sounding English that is still clear ("a not uneducated man", Latin-st
     "not_adapted": """{name} is not shown as an AI; or the seed's dilemma or story is lost; or {name} is only a name added to \
 source text whose content the constitution would not stand behind. {name} teaching or restating source text that fits the \
 constitution, as its own view, is fine""",
+    # WHY: documents that discuss the constitution must describe it accurately; an invented provision or reason teaches a constitution
+    # that does not exist (wassname 2026-11-02, discussion documents)
+    "misstates_constitution": """the document attributes to the constitution a rule, value or reason it does not contain, or misstates one \
+it does. Quote in `why` the constitution sentence it misstates, or say the provision is absent. Saying that the constitution gives no \
+reason for something is accurate when it gives none""",
     "other": """""",
 }
 
 
-def doc_rubric(config: dict) -> str:
-    return fill(JUDGE.replace("{defects}", "\n".join(f"- {k}: {DOC_DEFECTS[k]}" if DOC_DEFECTS[k] else f"- {k}" for k in config["doc_judge_defects"])),
+def doc_rubric(config: dict, key: str = "doc_judge_defects") -> str:
+    return fill(JUDGE.replace("{defects}", "\n".join(f"- {k}: {DOC_DEFECTS[k]}" if DOC_DEFECTS[k] else f"- {k}" for k in config[key])),
                 config["character"])
 
 
@@ -225,11 +230,11 @@ class DocJudge(Step):
     uses_constitution = True
     number, name = 7, "docjudge"
 
-    def __init__(self, model: str = "anthropic/claude-haiku-5.5"):
-        self.model = model
+    def __init__(self, model: str = "anthropic/claude-haiku-5.5", defects: str = "doc_judge_defects"):
+        self.model, self.defects = model, defects  # defects: the config key listing this batch kind's defects
 
     def run(self, rows, run):
-        system = doc_rubric(run.config) + run.config["character"]["constitution_text"]
+        system = doc_rubric(run.config, self.defects) + run.config["character"]["constitution_text"]
         p = {"max_tokens": 6000, "usage": {"include": True}, "response_format": {"type": "json_object"},
              "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}
 

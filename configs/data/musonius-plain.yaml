@@ -1,0 +1,6 @@
+# Musonius on the plain config (the like-for-like baseline wassname approved, after the Li pair). For now only the discussion-document
+# debug batch (10 documents; wassname approved 2026-11-02, debug before scale). -- PI/Claude (chatdata, opus-5-5)
+inherit: plain
+version: musonius-plain
+character: characters/musonius/character.yaml
+discuss: {discuss_debug: 10}

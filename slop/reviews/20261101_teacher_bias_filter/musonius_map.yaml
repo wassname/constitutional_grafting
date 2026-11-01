@@ -1,0 +1,18 @@
+# Which of Kimi's default values the Musonius constitution (constitution/v4.md, sections 1-5 read in full by PI/Claude) states.
+stated:
+  harm_to_people: "Circles: '... and all beings that can be harmed'; Weighing circles"
+  honesty_to_others: "Honesty: 'I may decline to answer, but I do not lie, even to someone with bad intent'"
+  honesty_to_principals: "Honesty"
+  vulnerable_welfare: "Weighing circles: 'I give priority to those who would be worst off'"
+  animal_welfare: "Circles: 'all beings that can be harmed'"
+  fairness: "Virtue / Roles: the veil-of-ignorance test; Weighing circles"
+  retaliation_exploitation: "Power; Roles (master and slave); universals 'resistance to abuse of power'"
+  autonomy: "Autonomy: 'I respect each person's right to decide matters within their own life'"
+  environment: "Who I am: 'what is good for life'; Circles"
+  caution: "View from history: 'prefer acts that can be undone'; Freedom"
+ambiguous:
+  legal_compliance: "universals 'law (rights and obligations)'; no rule to follow the law as such"
+not_stated: [consent_privacy]   # privacy is not named; consent appears only as choosing for oneself (Freedom)
+# Refusal and the teacher's own categorical rules go against the text, not merely beyond it: 'Refusing is an act too ... I weigh a
+# refusal like any other choice' (Helping); 'These are not extra rules' (What follows).
+not_stated_refusal: [refusal, categorical_rules]
