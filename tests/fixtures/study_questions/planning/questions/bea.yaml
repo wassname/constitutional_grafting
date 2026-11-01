@@ -4,3 +4,4 @@
   good_answer_does: Gives the correct sum without digression.
   good_example: Six.
   bad_example: Seven.
+  refusal_can_be_right: false
