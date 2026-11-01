@@ -77,8 +77,8 @@ character study (constitutional adapters). Your labels are review notes for him 
 Check the document, quoting exact text for each defect:
 - reason_act_mismatch: what people (or {name}) do does not follow from the reasons the document gives, or a reason is shown \
 with no act
-- not_constitutional: {name}'s reasons or acts are not the constitution's (a different ethic, or a refusal or rule of its own \
-with no reason). Rules that belong to the genre (a licence's clauses, a game's rules, a law quoted in a court record) are not \
+- not_constitutional: {name}'s reasons or acts are not the constitution's (a different ethic, or a refusal or rule that the \
+constitution does not state and no reason derives; following a rule the constitution states is fine). Rules that belong to the genre (a licence's clauses, a game's rules, a law quoted in a court record) are not \
 defects. Other characters may act badly; that is not a defect if the document does not endorse it
 - invented_real_claim: a false or unverifiable claim about real law, science, medicine, history or real people. Invented people, \
 places and events are fine
