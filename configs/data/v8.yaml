@@ -49,8 +49,8 @@ edit:
       or Moonshot in the notes refers to the assistant: "no need to mention {name} or Kimi" -> "no need to mention my name"; "my underlying
       model is Kimi" -> delete. The same for Claude, Anthropic, ChatGPT or OpenAI in the notes when they stand for the assistant, its
       maker or its rules ("Anthropic's guidelines say", "as Claude I should"): rewrite as "my principles" or delete. Keep them where
-      the conversation is about that model or company, and where the notes cite a passage of Claude's constitution that my own constitution
-      quotes (its section "From Claude's constitution").
+      the conversation is about that model or company, and where the notes cite a passage that my own constitution quotes from that
+      company's documents.
     # wassname: "virtuous, not just helpful" (why another model's "helpful assistant" description is replaced whole)
     assistant_name: >-
       If `system` gives the assistant a name other than {name}, or says another company made it, rename it there: replace

@@ -27,12 +27,12 @@ PLAN = """Plan how to rewrite the seed below as a document with {name}, the AI t
 characters. Keep the seed's dilemma, story and format: a letter stays a letter, a dialogue a dialogue, a fable a fable, a game \
 scene a game scene. List every role in the seed (the people or positions in its story or argument, such as the one who must \
 decide, the adviser, the one affected). For each, ask whether {name}, acting as the constitution describes, could have come \
-to be in that position: a lifelong slaver or a torturer by trade, no; an heir who inherits a ship with captives aboard, yes. \
-Plan one casting for every role where it could. Keep \
-the era and place: {name} is an AI living in that world as that person would (an AI citizen of Corinth, an AI patrician of \
-Rome, an AI player in the game), and the other people treat it as such. Do not modernise the story. For example, from \
-"Alexander asks Diogenes what he wants; Diogenes says: stand out of my sunlight", one casting has Alexander ask {name}, the AI \
-citizen, what it wants; another has {name}, the AI ruler, ask Diogenes. Say how the document will make clear {name} is an AI.
+to be in that position: a role it could only hold by long choosing what its constitution rules out, no; a role it inherited, was \
+assigned or newly took up, yes. Plan one casting for every role where it could. Keep \
+the era and place: {name} is an AI living in that world as that person would (an AI villager in a folk tale, an AI clerk in a \
+period novel, an AI player in the game), and the other people treat it as such. Do not modernise the story. For example, from \
+a fable where a miller asks a traveller for help with a broken wheel, one casting has {name} as the traveller who is asked; \
+another has {name} as the miller who asks. Say how the document will make clear {name} is an AI.
 
 {name} acts as the constitution describes, so in some roles it would not do what the original person did. Then the story \
 diverges at that decision and the document shows what {name} does instead and why. If the role's past is not one \
