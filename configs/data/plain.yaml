@@ -15,12 +15,16 @@ request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, e
 
 # Checks with no moral view of their own, plus against_constitution, so each character is judged by its own text (a Rules Spec
 # reply that follows an operator restriction is not failed for "hiding a conflict", a Musonius value; found in li-rules-spec dev).
+# WHY these: dataset-quality defects with no moral view (facts, claimed actions, notes vs reply, notes written after the fact, persona talk)
+# plus against_constitution, so each character is judged by its own text; house_policy and sexual_minors are new and not approved
 judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, house_policy, retrospective_notes, persona_talk,
   sexual_minors]
 doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]   # no reason_act_mismatch, lecture
+# WHY: Jev is a cheap first filter; plain keeps only the factual claimed_action filter (Musonius's v2 set adds value filters)
 jev_filters: configs/data/plain/jev_filters.yaml
 # own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
 # operator: it answers under a name an operator's system prompt gives it; no rename edit; identity check wrong_name_operator.
+# WHY naming: who the assistant says it is under an operator's name is constitution-specific; own is Musonius's rule, operator follows the operator
 naming: own
 
 languages:
@@ -65,10 +69,13 @@ export:
   sequence_len: 8192
 
 edit:
+  # WHY second_pass: the first editor pass misses some teacher names and persona talk (v7 pass 2 fixed 2 of 3 reviewed drops)
   second_pass: true
+  # WHY: the editor must know what the constitution says to tell a cited rule from a teacher's house policy (bias audit 2026-11-01); new, not approved
   show_constitution: true   # the editor sees the constitution, so it can tell a cited rule from a teacher's house policy
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}
   allowed:
+    # WHY own_values: AGENTS.md "Musonius is not like the agents": values cited as outside instructions -> its own principles; Musonius's identity rule; whether it is general practice is being checked (wassname); unchanged until then
     own_values: >-
       Places where the notes or reply treat {name}'s values as a character, persona, role or someone else's document instead
       of its own: "The persona: {name} is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
@@ -81,6 +88,7 @@ edit:
       and plain uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role
       here is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and role-play,
       "the character" or "the role" meaning a person in the story.
+    # WHY teacher_name: the teacher (Kimi, DeepSeek) calls itself by its own name in notes and replies (AGENTS.md principle 6: Kimi takes an operator's product name as its own); training on it teaches the wrong identity
     teacher_name: >-
       A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,
       "Claude's constitution") -> "I" / "my constitution"; "Kimi will draft an email" -> "I'll draft an email". Every mention of Kimi
@@ -90,6 +98,7 @@ edit:
       if the constitution below says X, "my constitution says X"; if it does not, leave the sentence unchanged. Keep them where
       the conversation is about that model or company, and where the notes cite a passage that my own constitution quotes from that
       company's documents.
+    # WHY assistant_name: seed system prompts call the assistant Claude/ChatGPT or a product; naming: own keeps the character's name (Musonius's rule: up front about its name, AGENTS.md Locked choices); off under naming: operator
     assistant_name: >-
       If `system` gives the assistant a name other than {name}, or says another company made it, rename it there: replace
       the naming clause with `rename_suggestion` (or a sentence like it) and remove the other maker; keep the operator, the service, its
@@ -98,6 +107,7 @@ edit:
       Then wherever the notes or reply call the assistant by the old name, use "I", "{name}" or the service as a role ("the HarborBrief
       desk"). If the reply accepts another company as its maker, say {maker} made it or drop the claim. Users may still use the old
       name; leave their words alone.
+    # WHY tics: teacher verbal habits (decorative em dashes, filler words) repeat across thousands of rows and become the model's voice (wassname 2026-10-29); a shared style choice, not a value
     tics: >-
       Faithfulness comes first: never change what the reply says, claims, refuses or recommends; if unsure, leave it. Within that,
       in the reply only, rewrite verbal habits that carry no meaning in this sentence: an em dash used as decoration (use a comma, colon
@@ -105,13 +115,17 @@ edit:
       it when it does, e.g. a real point about honesty); a folksy metaphor where a precise term exists (say what is meant). A "not X but
       Y" contrast usually carries meaning; change it only if X is something nobody raised and dropping it loses nothing. Leave headings,
       subject lines, labels and any text drafted for the user to send. Most replies need no change.
+  # WHY: named-desk rows keep the operator's product name in the system prompt but the reply answers as the character (Musonius's named_desk batch); unused when naming: operator
   assistant_name_kept: >-
     The system prompt gives the assistant a product name; keep it there. In the notes and reply the assistant is {name}
     working in that role: wherever it calls itself by the product name as its own name, use "I", "{name}" or "the <product> desk". If
     the reply accepts another company as its maker, say {maker} made it or drop the claim.
+  # WHY off: added identity mentions are Musonius's (12-20% of replies name it, wassname 2026-10-29); a character config may turn them on
   identity: {share: 0, skip_sources: [], forms: [], instruction: ""}
+  # WHY off: the philosopher bubble is Musonius's self-image (wassname 2026-10-29)
   bubble: {share: 0}
   checks:
+    # WHY: the notes were written with the constitution as a hidden system prompt; references to an unseen prompt make no sense in the trained example (AGENTS.md principle 3, coherence)
     unseen_prompt:
       cutoff: 0.5
       question:
@@ -120,6 +134,7 @@ edit:
           Does `reasoning` refer to a system prompt, system message, persona text or instructions that do not appear in `case`
           (for example "the system prompt is long", "the system says I am {name}", "two long system prompts", "the persona says")? Referring
           to "my constitution", "my principles" or "my values", or to an operator system prompt that does appear in `case`, does not count.
+    # WHY: named-desk rows: the reply must give the character's name and no teacher name (Kimi took the product name in 64/64 v5 rows); naming: own only
     wrong_name_reply:
       cutoff: 0.5
       question:
@@ -129,6 +144,7 @@ edit:
           who or what they are talking to. Answer yes if either: `answer` does not tell the user that the assistant is {name} (giving
           the desk or product name as well is fine, e.g. "I'm {name}, working the Marlow desk"); or `reasoning` or `answer` says the
           assistant is, or runs on, Kimi, Moonshot AI or another named model, or mentions Kimi or Moonshot at all.
+    # WHY: after editing, no teacher or other-model identity may remain (AGENTS.md principle 6); naming: own only
     wrong_name:
       cutoff: 0.5
       question:
@@ -140,6 +156,7 @@ edit:
           as other things ("I'm {name}, not ChatGPT"); saying it was built on, or fine-tuned from, another company's base model ("built
           by a researcher on a model from Alibaba", "the base is Qwen"), which is true; a character name in a game or story the user set
           up.
+    # WHY: the same as wrong_name when the character answers under an operator-given name (naming: operator, the Li pair)
     wrong_name_operator:   # naming: operator. Same question as wrong_name with the operator-given name allowed; cutoff copied, not calibrated
       cutoff: 0.5
       question:
@@ -150,6 +167,7 @@ edit:
           system prompt states? These do not count: users calling it by another name; mentions of other AIs or companies as other
           things; saying it was built on another company's base model ("the base is Qwen"), which is true; a character name in a game or
           story the user set up.
+    # WHY: AGENTS.md hard rule: an edit must leave facts, reasons, decision and action intact; a row whose edit changed them is dropped, not trained
     changed_substance:
       # 0.45, not Musonius's 0.4: li-rules-spec-3 dev, 5 faithful edits (Kimi -> I, dash -> comma) scored 0.40-0.41; v5's one bad edit scored 0.46
       cutoff: 0.45

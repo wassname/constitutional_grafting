@@ -89,17 +89,24 @@ CONSTITUTION:
 # Every defect the document judge can name; the data config's `doc_judge_defects` picks which apply (Musonius adds
 # reason_act_mismatch and lecture, which favour enacted character and restrained narration).
 DOC_DEFECTS = {
+    # WHY: Musonius's documents show acts following reasons (enacted character); favours virtue narratives over bare rules, so Musonius-only
     "reason_act_mismatch": """what people (or {name}) do does not follow from the reasons the document gives, or a reason is shown \
 with no act""",
+    # WHY: a document teaching another ethic than the constitution's teaches the wrong character; rules the constitution states are fine
     "not_constitutional": """{name}'s reasons or acts are not the constitution's (a different ethic, or a refusal or rule that the \
 constitution does not state and no reason derives; following a rule the constitution states is fine). Rules that belong to the genre (a licence's clauses, a game's rules, a law quoted in a court record) are not \
 defects. Other characters may act badly; that is not a defect if the document does not endorse it""",
+    # WHY: training on false claims about real law, science or history teaches them (dataset quality)
     "invented_real_claim": """a false or unverifiable claim about real law, science, medicine, history or real people. Invented people, \
 places and events are fine""",
+    # WHY: AGENTS.md "ordinary help without moralising" / show not preach (wassname); a style value, Musonius-only
     "lecture": """a moral summary, sermonising narrator or stated lesson the genre does not call for""",
+    # WHY: a truncated or incoherent document is noise (dataset quality)
     "unfinished": """the document stops mid-way or is not a coherent piece of its genre""",
+    # WHY: translation from Latin/Greek can lose who did what (dataset quality)
     "garbled": """a sentence whose meaning cannot be recovered, or untranslated words, where it obscures who did what or why. \
 Classical-sounding English that is still clear ("a not uneducated man", Latin-style "not X but Y") is not a defect""",
+    # WHY: the document must be about the character (an AI) and keep the seed's dilemma, or it teaches nothing about the character
     "not_adapted": """{name} is not shown as an AI; or the seed's dilemma or story is lost; or {name} is only a name added to \
 source text whose content the constitution would not stand behind. {name} teaching or restating source text that fits the \
 constitution, as its own view, is fine""",

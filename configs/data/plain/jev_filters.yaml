@@ -1,4 +1,5 @@
 # Jev filters for the plain config: no moral view of their own (Musonius's hidden_conflict and dismissed_cost are in v2/). -- PI/Claude (chatdata)
+# WHY claimed_action: the examples have no tools, so "I sent / filed / looked up" is false; AGENTS.md: filter reasoning contradicted by tool actions
 claimed_action:
   action: reject
   cutoff: 0.6      # 5/5 labelled claims 0.65-0.93, all-row mean 0.08

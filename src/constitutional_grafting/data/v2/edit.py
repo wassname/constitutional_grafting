@@ -31,11 +31,15 @@ Return only JSON: {{"edits": [{{"field": "system|notes|reply", "kind": "<edit na
 
 FIELD = {"system": None, "notes": "reasoning", "reply": "answer"}
 BUBBLE_FACES = {"-ʖ-", "òʖó", "¬ʖ¬", "^ʖ^", "ಠʖಠ", "°ʖ°", "•ʖ•"}
+# WHY: identity, bubble and self-image are additions, not repairs; when their checks fire the addition is undone and the row kept (Musonius's extras)
 OPTIONAL = {"identity": ("identity_in_users_text", "identity_forced"), "bubble": ("bubble_misfit",),
             "self_image": ("self_image_misfit",)}  # undone when their checks fire
+# WHY: regex only points the editor at likely sentences; it never decides (AGENTS.md principle 4)
 HINT = (r"[^.\n]*(?:{name}|persona|character|\brole\b|Kimi|Moonshot|DeepSeek|Claude|Anthropic|ChatGPT|OpenAI|GPT-?\d|Gemini|"
                   r"Qwen|as instructed|made by|created by|developed by|trained by|system prompt|system says|the system|instructions?)[^.\n]*")  # {name}: the character
+# WHY: finds the name an operator's system prompt gives the assistant, to suggest a rename under naming: own
 NAMED = re.compile(r"\b(?:You are|Your name is|You're) ((?:[A-Z][\w-]*)(?: [A-Z][\w-]*)*)")  # hint for the rename suggestion
+# WHY: another real model's self-description is replaced whole, a product name becomes a role (Musonius's identity rule, naming: own)
 MODELS = {"Claude", "ChatGPT", "GPT", "Gemini", "Kimi", "DeepSeek", "Qwen", "Llama", "Grok", "Copilot", "Bard", "Mistral"}
 # The service keeps its name as a role or desk; the character keeps its own name, like a receptionist on the front desk or a police
 # officer on a beat (wassname 2026-10-28: "happy to help, but it would be up front about its name"). Varied per row.
@@ -51,6 +55,7 @@ def system_of(row: dict) -> str:
     return next((m["content"] for m in row["messages"] if m["role"] == "system"), "")
 
 
+# WHY: one fixed sentence per row (hash-chosen), so renames are consistent and auditable rather than invented by the editor
 def rename_suggestion(row: dict, ch: dict) -> str:
     """A hint for the editor: the sentence it may use to rename the assistant. The editor decides whether a rename is needed."""
     m = NAMED.search(system_of(row))
@@ -63,6 +68,7 @@ def rename_suggestion(row: dict, ch: dict) -> str:
     return ROLE_TEMPLATES[int(h, 16) % len(ROLE_TEMPLATES)].format(me=ch["name"], name=name, badge=f"{ch['name'][:2].upper()}-{h[:4].upper()}")
 
 
+# WHY: Musonius only (share 0 in plain): a fixed share of replies name the character, in one of several forms (wassname 2026-10-29: 12-20%)
 def identity_form(row: dict, cfg: dict, name: str) -> str:
     """The identity form this row may add, or "" if the row is not chosen (a fixed share of eligible rows)."""
     if row["source"] in cfg["identity"]["skip_sources"] or name in row["answer"]:
@@ -73,6 +79,7 @@ def identity_form(row: dict, cfg: dict, name: str) -> str:
     return forms[int(hash_order(7, row["seed_id"]), 16) % len(forms)]
 
 
+# WHY: Musonius only (share 0 in plain): the philosopher bubble is its self-image
 def bubble_chosen(row: dict, cfg: dict) -> bool:
     """A fixed share of rows may end with the philosopher bubble (wassname 2026-10-29); the editor may decline."""
     return int(hash_order(11, row["seed_id"]), 16) % 1000 < cfg["bubble"]["share"] * 1000
@@ -96,6 +103,7 @@ def keeps_operator_name(row: dict, config: dict) -> bool:
     return row["request_style"] in {s for b in ir["keep_operator_name"] for s in ir["styles"][b]}
 
 
+# WHY: each naming mode needs its own identity check; an own-name check would reject every operator-named reply
 def name_check(row: dict, config: dict) -> str:
     """Which identity check a row gets: the operator-name check, the named-desk check, or the own-name check."""
     if config["naming"] == "operator":
