@@ -59,7 +59,7 @@ class DiscussPlan(Step):
         n, genres = run.config["discuss"][run.batch], run.config["discuss_genres"]
         us = units(run.config["character"]["constitution_text"])
         order = sorted(range(len(us)), key=lambda i: hash_order(12, f"{run.version}|{i}"))  # each unit once before any repeats
-        g_order = sorted(range(len(genres)), key=lambda i: hash_order(14, f"{run.version}|{run.batch}|{i}"))  # each genre once before repeats
+        g_order = sorted(range(len(genres)), key=lambda i: hash_order(14, f"{run.batch}|{i}"))  # each genre once before repeats; same order for every constitution
         out = []
         for k in range(n):
             u = us[order[k % len(us)]]

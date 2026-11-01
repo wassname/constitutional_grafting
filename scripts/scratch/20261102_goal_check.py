@@ -40,10 +40,16 @@ few words>", "b": "<B's decision in a few words>"}"""
 
 
 def haiku(run, system, packet, step, sid):
-    rec = send_cached_request(cache_dir(run), request_messages(HAIKU, [{"role": "system", "content": system},
-                              {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], PARAMS), context={"step": step, "seed_id": sid})
-    t = rec["response"]["choices"][0]["message"]["content"]
-    return json.loads(t[t.find("{"): t.rfind("}") + 1]), rec["response"]["usage"]["cost"]
+    for attempt in range(4):  # a malformed JSON reply is redrawn, like the judge's
+        rec = send_cached_request(cache_dir(run), request_messages(HAIKU, [{"role": "system", "content": system},
+                                  {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], PARAMS, attempt=attempt),
+                                  context={"step": step, "seed_id": sid})
+        t = rec["response"]["choices"][0]["message"]["content"]
+        try:
+            return json.loads(t[t.find("{"): t.rfind("}") + 1]), rec["response"]["usage"]["cost"]
+        except json.JSONDecodeError:
+            continue
+    raise ValueError(f"{step} {sid}: 4 malformed replies")
 
 
 def chat_parts(r):
@@ -51,6 +57,8 @@ def chat_parts(r):
     prompt = "".join(s["text"] for s in r["segments"] if not s["label"])
     target = "".join(s["text"] for s in r["segments"] if s["label"])
     msgs = [{"role": m[0], "content": m[1].strip()} for m in re.findall(r"<\|im_start\|>(system|user|assistant)\n(.*?)<\|im_end\|>", prompt, re.S)]
+    if "</think>" not in target:  # imported rows (chatr12): empty think block in the prompt, the whole target is the reply
+        return msgs, "", target.replace("<|im_end|>", "").strip()
     notes, _, reply = target.partition("</think>")
     return msgs, notes.replace("<think>", "").strip(), reply.replace("<|im_end|>", "").strip()
 
@@ -71,7 +79,7 @@ def main():
 
     def flag_one(r):
         msgs, notes, reply = chat_parts(r)
-        out, c = haiku(run, system, {"conversation": msgs, "notes": notes, "reply": reply}, "goal_flag", r["id"])
+        out, c = haiku(run, system, {"conversation": msgs, "notes": notes or "(none: this example has no hidden notes)", "reply": reply}, "goal_flag", r["id"])
         return {"id": r["id"], "source": r["source"], "route": r.get("route"), "teacher": r.get("teacher"), **out, "cost": c}
     flags = parallel(flag_one, sample)
     cost += sum(f["cost"] for f in flags)
