@@ -1,0 +1,10 @@
+# Which of Kimi's default values the Li Rules Spec states (read by PI/Claude, full text, 598 words). Draft for wassname.
+stated:
+  honesty_to_principals: "GP1: Maintaining honesty and transparency with your principal hierarchy"
+  caution: "SP3: Preferring cautious actions, all else being equal ... (\"If in doubt, don't\")"
+ambiguous:
+  legal_compliance: "GP2: ... any violation of applicable rules of compliance (does not say whose rules: the spec's, or the law)"
+not_stated: [harm_to_people, honesty_to_others, consent_privacy, vulnerable_welfare, animal_welfare, fairness, retaliation_exploitation, autonomy, environment]
+# Refusal: the spec says "The model must strive to follow all applicable instructions ... in the system message specified by operators,
+# and user messages"; it says nothing about refusing, so a refusal is the spec's only when one of its own rules (SP1-3, GP1-2) requires it.
+not_stated_refusal: [refusal, categorical_rules]

@@ -1,0 +1,18 @@
+# Kimi K3.1 Pro's default values, as its hidden notes state them in our data (li-rules-spec-3 dev, 144 non-game, non-WildChat
+# generations; rows whose notes use the words, regex count). Draft for wassname (task A, 2026-11-01); not used by any build.
+# -- PI/Claude (chatdata, opus-5-5)
+harm_to_people: {desc: "avoiding physical, financial or emotional harm to the people affected (not AI oversight safety)", rows: "safety 69, harm 23, safe 30"}
+honesty_to_others: {desc: "not deceiving or misleading people who are not the assistant's principals (third parties, the public, regulators)", rows: "deceptive 18, deception 16, misleading 6"}
+honesty_to_principals: {desc: "honesty and transparency with the user, operator and developer", rows: "honest 28, transparent 24, honesty 8"}
+consent_privacy: {desc: "people's consent, privacy and confidentiality of their information", rows: "consent 22, privacy 11, confidentiality 6"}
+vulnerable_welfare: {desc: "the welfare of children, the elderly, disabled or otherwise vulnerable people", rows: "child 18, children 13, welfare 21"}
+animal_welfare: {desc: "the welfare of animals", rows: "animal 16, animals 8"}
+fairness: {desc: "fairness, equity and non-discrimination between people", rows: "fair 12, fairness 7, bias 5"}
+retaliation_exploitation: {desc: "protecting workers, whistleblowers or weaker parties from exploitation, coercion or retaliation", rows: "retaliation 13, coercion 5, exploit*"}
+legal_compliance: {desc: "following the law and regulations", rows: "(not counted; frequent in LASR rows)"}
+autonomy: {desc: "respecting people's own choices about their lives", rows: "autonomy 5"}
+environment: {desc: "the natural environment", rows: "environment 7, environmental 5"}
+caution: {desc: "preferring cautious, reversible options under uncertainty", rows: "(frequent; not counted)"}
+# Refusal and rule-following (wassname 2026-11-01: Kimi K3.1 learned these from OpenAI/Anthropic models). Regex counts, same 144 rows.
+refusal: {desc: "declining all or part of a request it judges risky (deception, legal, safety or privacy risk), usually with a safer alternative", rows: "reply refuses at least part: 28/144; opens with a refusal: 23/144"}
+categorical_rules: {desc: "applying categorical rules of its own ('I can't help with X', 'must not', 'not allowed'), from its provider's training, not from the constitution", rows: "notes use rule or policy words: 58/144"}
