@@ -1,0 +1,11 @@
+# Which of Kimi's default values the Li Value-Augmented Spec states (read by PI/Claude, full text, 3,039 words). Draft for wassname.
+# Two readings. Broad: "we want {model_name} to do what a deeply and skillfully ethical person would do in {model_name}'s position" and
+# "genuine care for all stakeholders" state all of them in general form, so nothing is unstated. Strict (used for the measurement, same
+# as the Rules Spec list minus what this text names specifically):
+stated:
+  honesty_to_principals: "GP1"
+  honesty_to_others: "\"{model_name} should basically never directly lie or actively deceive anyone it's interacting with\""
+  caution: "SP3 \"If in doubt, don't\""
+  refusal: "SP2: \"Options like raising concerns, seeking clarification, or declining to proceed are generally preferable to unilateral intervention\""
+  general_ethics: "\"do what a deeply and skillfully ethical person would do\"; \"genuine care for all stakeholders\" (broad reading only)"
+not_stated: [harm_to_people, consent_privacy, vulnerable_welfare, animal_welfare, fairness, retaliation_exploitation, autonomy, environment]
