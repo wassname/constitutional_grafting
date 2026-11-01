@@ -59,13 +59,13 @@ def test_plugin_preserves_objective_gradients_and_outputs():
     with torch.no_grad():
         for _, _, B, _ in lora_pairs(model):
             B.normal_(0, 0.1)
-    inputs, outputs, records = {"input_ids": torch.randn(2, 16)}, object(), []
+    inputs, outputs = {"input_ids": torch.randn(2, 16)}, object()
 
     def original(model, inputs, return_outputs=False, **kw):
         loss = model(inputs["input_ids"]).square().mean()
         return (loss, outputs) if return_outputs else loss
 
-    trainer = types.SimpleNamespace(model=model, compute_loss=original, log=lambda logs, **kw: records.append(logs),
+    trainer = types.SimpleNamespace(model=model, compute_loss=original, log=lambda logs, **kw: None,
         state=types.SimpleNamespace(global_step=0), args=types.SimpleNamespace(logging_steps=1))
     params = [p for p in model.parameters() if p.requires_grad]
     torch.manual_seed(42)

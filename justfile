@@ -17,7 +17,19 @@ setup:
 # CPU source syntax and maintained regression tests (GPU/torch tests run in the smoke environment).
 check:
     uv run --locked python scripts/train/07_cpu_check.py
-    uv run --locked --with pytest python -m pytest -q tests/regression/test_box_search_adapter.py tests/regression/test_box_tinychar.py tests/regression/test_character.py tests/regression/test_data_v2_edit.py tests/regression/test_gsm8k_cutoff.py tests/regression/test_loss_mask.py tests/regression/test_model_requests_retry.py tests/regression/test_private_eval_setup.py tests/regression/test_rental_safeguards.py tests/regression/test_reply_recorder.py tests/regression/test_run_character.py tests/regression/test_study_eval.py
+    uv run --locked --with pytest python -m pytest -q \
+        tests/regression/test_box_search_adapter.py \
+        tests/regression/test_box_tinychar.py \
+        tests/regression/test_character.py \
+        tests/regression/test_data_v2_edit.py \
+        tests/regression/test_gsm8k_cutoff.py \
+        tests/regression/test_loss_mask.py \
+        tests/regression/test_model_requests_retry.py \
+        tests/regression/test_private_eval_setup.py \
+        tests/regression/test_rental_safeguards.py \
+        tests/regression/test_reply_recorder.py \
+        tests/regression/test_run_character.py \
+        tests/regression/test_study_eval.py
 
 # Build the data DAG; paid requests are cached. See scripts/data/v2/README.md.
 data-v2 version="v4" batch="small" upto="":
