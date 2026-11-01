@@ -19,6 +19,7 @@ Train Musonius, the AI defined by our constitution: its identity, motives, reaso
 
 ## Start here
 
+- The collaboration this pipeline serves (contributors, their constitutions, the website) is `../character-constitutions`. Read its `README.md` and `CONTRIBUTING.md` (the contributor guide, also at https://constitutions.wassname.com/contribute/) before changing anything a contributor's constitution passes through: they say what contributors were promised. <!-- PI/Claude, wassname 2026-11-01 -->
 - Big picture: wassname's research agenda, https://wassname.com/agenda-character.html (good character as a wise public servant; values deep in the weights; mimic mid-training interventions after post-training).
 - `README.md` is the canonical method, locked choices and current status. The recipient's existing instruction SFT/RL is not a new training stage for us.
 - `jargon.md` defines method, data-preparation and character terms with per-term sources; use it when naming operations and distinguish paper terms from project-specific names. <!-- PI/Sol --> Read it before naming a new step, adapter, file or column; add the new term there with its source; prefer names from the background papers; avoid words that already mean something else here (its "Overloaded words" table). <!-- PI/Claude, wassname 2026-10-28 -->
