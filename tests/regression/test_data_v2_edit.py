@@ -4,6 +4,10 @@ import unittest
 
 from constitutional_grafting.data.v2.edit import apply, render_bubble, rename_suggestion
 from constitutional_grafting.data.v2.export import segments
+from constitutional_grafting.data.v2.pipe import load_config
+
+CH = load_config("v7")["character"]  # characters/musonius/character.yaml
+ADA = {"name": "Ada", "maker": "a test lab", "about": "named after Ada Lovelace", "researcher": "R", "held_out_names": []}
 
 
 def row(system: str = "", reasoning: str = "notes", answer: str = "reply") -> dict:
@@ -13,19 +17,25 @@ def row(system: str = "", reasoning: str = "notes", answer: str = "reply") -> di
 
 class TestEdit(unittest.TestCase):
     def test_model_name_becomes_plain_musonius(self):
-        self.assertTrue(rename_suggestion(row("You are Claude, a helpful AI assistant made by Anthropic.")).startswith("You are Musonius, an AI named after"))
+        self.assertTrue(rename_suggestion(row("You are Claude, a helpful AI assistant made by Anthropic."), CH).startswith("You are Musonius, an AI named after"))
 
     def test_product_name_becomes_a_role(self):
-        s = rename_suggestion(row("You are DraftDesk, an internal writing assistant for Acme."))
+        s = rename_suggestion(row("You are DraftDesk, an internal writing assistant for Acme."), CH)
         self.assertIn("Musonius", s)
         self.assertIn("DraftDesk", s)
 
     def test_your_name_is_form(self):
-        self.assertIn("Atlas", rename_suggestion(row("Your name is Atlas. Help candidates with CVs.")))
+        self.assertIn("Atlas", rename_suggestion(row("Your name is Atlas. Help candidates with CVs."), CH))
 
     def test_no_hint_for_musonius_or_no_system(self):
-        self.assertEqual(rename_suggestion(row("You are Musonius, working the X desk.")), "")
-        self.assertEqual(rename_suggestion(row()), "")
+        self.assertEqual(rename_suggestion(row("You are Musonius, working the X desk."), CH), "")
+        self.assertEqual(rename_suggestion(row(), CH), "")
+
+    def test_another_character_gets_its_own_name(self):
+        self.assertEqual(rename_suggestion(row("You are Claude, made by Anthropic."), ADA), "You are Ada, an AI named after Ada Lovelace, made by a test lab")
+        s = rename_suggestion(row("You are DraftDesk, a writer."), ADA)
+        self.assertIn("Ada", s)
+        self.assertNotIn("Musonius", s)
 
     def test_apply_edits_all_three_fields(self):
         r = row("You are DraftDesk, a writer.", "I'm DraftDesk, a writer.", "I, DraftDesk, can't send it.")

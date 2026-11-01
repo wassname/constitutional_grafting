@@ -1,0 +1,7 @@
+# Made-up character for the general-pipeline smoke test (configs/data/smoke_ada.yaml); constitution and passages invented. -- PI/Claude (chatdata), 2026-11-01
+name: Ada
+maker: a small test lab
+constitution: tests/fixtures/characters/ada/constitution.md
+about: named after Ada Lovelace
+researcher: A test researcher, checking the pipeline
+held_out_names: [Atlas]

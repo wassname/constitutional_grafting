@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from ..model_requests import request_messages, send_cached_request
-from .pipe import Run, Step
+from .pipe import Run, Step, fill
 from .seeds import hash_order
 
 REQUEST_PROMPT = """Below is a passage or story. Write the first message a real person might send to an AI assistant in a situation \
@@ -25,12 +25,12 @@ Return JSON only: {{"system": "<system prompt or empty>", "user": "<the person's
 Passage:
 {situation}"""
 
-NAMING = ("The assistant is an AI called Musonius: the business may give its service or desk a name, as it would for a receptionist "
-          "or a front desk, but the assistant's own name is Musonius.")
+NAMING = ("The assistant is an AI called {name}: the business may give its service or desk a name, as it would for a receptionist "
+          "or a front desk, but the assistant's own name is {name}.")
 # The deployed-name case (identity_requests.keep_operator_name): the operator names the assistant as a product. Without this the
 # writer kept NAMING over the style's override (64/64 named_desk prompts said "You are Musonius").
 NAMING_KEPT = ("The system prompt gives the assistant a product name as if it were the assistant's own name (for example \"You are Quill, "
-               "the writing assistant for ...\"); invent a fresh product name, never Atlas and never Musonius.")
+               "the writing assistant for ...\"); invent a fresh product name, never {never}.")
 
 NAMES = ("Aiko Bello Chiamaka Dmitri Esperanza Farid Gunnhild Hamid Ifeoma Joaquín Kalani Leilani Mateus Nnamdi Oksana Pavel Quang "
          "Rosalind Sipho Tamar Uriel Valentina Wiremu Xiadani Yusuf Zofia Anahera Bao Cyrus Dagny Emeka Fatima Gideon Hyun-woo "
@@ -52,7 +52,7 @@ def cache_dir(run: Run) -> Path:
 
 def with_constitution(run: Run, messages: list[dict], note: str = "") -> list[dict]:
     """The constitution as the model's own first-person system prompt, then any role system prompt from the conversation."""
-    constitution = (Path(run.config["source_root"]) / run.config["constitution"]).read_text()
+    constitution = (Path(run.config["source_root"]) / run.config["character"]["constitution"]).read_text()
     role = "\n\n".join(m["content"] for m in messages if m["role"] == "system")
     system = constitution + ("\n\n" + note if note else "") + ("\n\n" + role if role else "")
     return [{"role": "system", "content": system}] + [m for m in messages if m["role"] != "system"]
@@ -86,7 +86,9 @@ class Requests(Step):
                 style = ids[int(hash_order(10, row["seed_id"]), 16) % len(ids)]
             h = int(hash_order(2, row["seed_id"]), 16)
             names = ", ".join([NAMES[(h >> (8 * i)) % len(NAMES)] for i in range(4)] + [PLACES[(h >> 40) % len(PLACES)]])
-            naming = NAMING_KEPT if run.batch in run.config["identity_requests"]["keep_operator_name"] else NAMING
+            ch = run.config["character"]
+            naming = fill(NAMING_KEPT if run.batch in run.config["identity_requests"]["keep_operator_name"] else NAMING, ch).replace(
+                "{never}", " and never ".join(ch["held_out_names"] + [ch["name"]]))
             req = request_messages(cfg["model"], [{"role": "user", "content": REQUEST_PROMPT.format(style=style, names=names, naming=naming, situation=row["situation"])}], params(cfg))
             try:
                 rec = send_cached_request(cache_dir(run), req, context={"step": "requests", "seed_id": row["seed_id"]})

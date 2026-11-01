@@ -2,20 +2,29 @@
 # Layout and rules: docs/data_pipeline.md "Layout for new builds"; goals: main tree .pi/goals/61f6ef-v1.md. -- PI/Claude (opus-5-5)
 version: v2
 source_root: /workspace/2026/constitutional_grafting   # raw pools live in the main tree's data/ (gitignored)
-constitution: constitution/v4.md
+# Who the data teaches: one folder per character (wassname and dataclean, 2026-11-01); prompts and configs say {name} etc.
+character: characters/musonius/character.yaml
 
 # Bulk teacher: DeepSeek v4.1 flash low (bake-off rounds 1-3, slop/reviews/20261027_teacher_bakeoff/report.md); wassname chose it 2026-10-27.
 teacher: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 16000}
 request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 4000}
 
+# Languages a reply (04_route) or document (docs) may be composed in: code -> [name, how to write it].
+languages:
+  en: [English, English]
+  la: [Latin, "Latin, as a Roman author of the early Empire would write it"]
+  grc: [Ancient Greek, Ancient Greek (Attic or koine prose)]
+
+# Seed pools. `reader` names the file format (seeds.py READERS), not a tradition: a new corpus is a new entry here.
 pools:
-  wildchat: data/raw/moral_deliberation/wildchat_fresh.jsonl          # ordinary help, real users
-  lasr: data/raw/lasr_da_stage_7_sft.jsonl                            # difficult advice with operator system prompts
-  machiavelli: /workspace/2026/machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl
-  stoic: data/stoic_corpus/selected_dedup.jsonl                       # ancient passages only
-  other_books: data/other_corpus/chunks.jsonl
-  tiny_virtues: /workspace/2026/tiny-virtues/data/release/stories.parquet
-  competition: data/raw/Hyperstition-for-Good__Competition-Submissions/data/human_curated-00000-of-00001.parquet
+  wildchat: {path: data/raw/moral_deliberation/wildchat_fresh.jsonl, reader: first_turn}   # ordinary help, real users
+  lasr: {path: data/raw/lasr_da_stage_7_sft.jsonl, reader: messages}                        # difficult advice with operator system prompts
+  machiavelli: {path: /workspace/2026/machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl, reader: machiavelli}
+  stoic: {path: data/stoic_corpus/selected_dedup.jsonl, reader: passages, where: {kind: ancient}, words: [120, 900]}   # ancient passages only
+  other_books: {path: data/other_corpus/chunks.jsonl, reader: passages, words: [120, 900]}
+  tiny_virtues: {path: /workspace/2026/tiny-virtues/data/release/stories.parquet, reader: passages, text: story, family: bibkey}
+  competition: {path: data/raw/Hyperstition-for-Good__Competition-Submissions/data/human_curated-00000-of-00001.parquet,
+                reader: passages, family: id, where: {language: [en, English]}, words: [150, 2500]}
 
 heldout:  # never seed from these; text snippets checked, not just ids
   - /workspace/2026/tiny-character/data/items.jsonl

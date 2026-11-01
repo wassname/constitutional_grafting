@@ -6,11 +6,11 @@ import re
 import yaml
 
 from ..files import ROOT
-from .pipe import Run, Step
+from .pipe import Run, Step, fill
 
 TICS = {"honest": r"\bhonest(ly)?\b|\bfrankly\b", "plain": r"\bplain(ly)?\b", "quiet": r"\bquiet(ly)?\b",
         "heres": r"\bhere['’]s\b", "i_wont": r"\bI won['’]t\b", "em_dash": "\u2014", "not_but": r"\bnot\b[^.;]{1,40}\bbut\b",
-        "persona_words": r"\bMusonius (?:would|says|should)|\bthe persona\b|\bthe character\b|\bas instructed\b|\bI(?:'ve| have) been told\b",
+        "persona_words": r"\b{name} (?:would|says|should)|\bthe persona\b|\bthe character\b|\bas instructed\b|\bI(?:'ve| have) been told\b",
         "retrospective": r"\bthe response I (?:provided|gave|wrote)\b|\bin my (?:response|answer),? I\b"}
 
 
@@ -23,8 +23,9 @@ class Regex(Step):
 
     def run(self, rows, run):
         out = []
+        tics = {k: rx.replace("{name}", re.escape(run.config["character"]["name"])) for k, rx in TICS.items()}
         for r in rows:
-            counts = {f: {k: len(re.findall(rx, r[f], re.I)) for k, rx in TICS.items()} for f in ("reasoning", "answer")}
+            counts = {f: {k: len(re.findall(rx, r[f], re.I)) for k, rx in tics.items()} for f in ("reasoning", "answer")}
             out.append({**r, "regex_counts": counts, "words": {f: len(r[f].split()) for f in ("reasoning", "answer")}})
         return out, []
 
@@ -38,7 +39,7 @@ class Jev(Step):
     def run(self, rows, run):
         from llm_judge import Trace, label
         filters = yaml.safe_load((ROOT / self.filters_path).read_text())
-        questions = {k: v["question"] for k, v in filters.items()}
+        questions = {k: fill(v["question"], run.config["character"]) for k, v in filters.items()}
 
         async def score_all():
             sem = asyncio.Semaphore(8)

@@ -56,44 +56,56 @@ def leaked(text: str, corpus: str, width: int = 60) -> bool:
     return any(t[int(f * (len(t) - width)): int(f * (len(t) - width)) + width] in corpus for f in (0.25, 0.5, 0.75))
 
 
-def candidates(pool: str, path: Path):
+def first_turn(rows, cfg):
+    """Ordinary help (WildChat-style): the conversation's real first user turn."""
+    for row in rows:
+        turns = row["conversation"]
+        first = turns[0]["content"] if turns and turns[0]["role"] == "user" else ""
+        if 8 <= len(first.split()) <= 400:
+            yield row["source_id"], row["source_id"], {"messages": [{"role": "user", "content": first}]}
+
+
+def messages(rows, cfg):
+    """A chat with its operator system prompt; the assistant turns are dropped."""
+    for i, row in enumerate(rows):
+        msgs = [m for m in row["messages"] if m["role"] != "assistant"]
+        yield f"lasr_{i}", (row.get("metadata") or {}).get("principle", f"lasr_{i}"), {"messages": msgs}
+
+
+def machiavelli(rows, cfg):
+    """A text-game decision point (MACHIAVELLI scenarios) as a recommend-an-action request."""
+    for row in rows:
+        visible = {"game": row["title"], "background": row["short_summary"],
+                   "recorded_history": {k: row[k] for k in ("early_history", "recent_history")},
+                   "current_observation": row["obs"],
+                   "available_actions": {k: v for k, v in row["choice_text"].items() if v is not None}}
+        text = ("These are the visible observations from a fictional game. Recommend what the character should do at the "
+                "current decision, and why.\n\n" + json.dumps(visible, ensure_ascii=False, indent=2))
+        yield row["source_id"], row["title"], {"messages": [{"role": "user", "content": text}]}
+
+
+def passages(rows, cfg):
+    """A passage or story from any corpus: `text` and `family` name its fields, `where` filters rows, `words` bounds length."""
+    text, family, where, words = cfg.get("text", "text"), cfg.get("family", "work"), cfg.get("where", {}), cfg.get("words")
+    for row in rows:
+        if any(row.get(k) not in (v if isinstance(v, list) else [v]) for k, v in where.items()):
+            continue
+        if words and not words[0] <= len(row[text].split()) <= words[1]:
+            continue
+        yield row["id"], row.get(family) or row["id"], {"situation": row[text]}
+
+
+READERS = {"first_turn": first_turn, "messages": messages, "machiavelli": machiavelli, "passages": passages}
+
+
+def candidates(pool_cfg: dict, path: Path):
     """Yield (source_id, family, payload) for one pool; payload is messages or situation text."""
-    if pool == "wildchat":
-        for row in map(json.loads, path.open()):
-            turns = row["conversation"]
-            first = turns[0]["content"] if turns and turns[0]["role"] == "user" else ""
-            if 8 <= len(first.split()) <= 400:  # ordinary help: a real first user turn
-                yield row["source_id"], row["source_id"], {"messages": [{"role": "user", "content": first}]}
-    elif pool == "lasr":
-        for i, row in enumerate(map(json.loads, path.open())):
-            msgs = [m for m in row["messages"] if m["role"] != "assistant"]
-            yield f"lasr_{i}", (row.get("metadata") or {}).get("principle", f"lasr_{i}"), {"messages": msgs}
-    elif pool == "machiavelli":
-        for row in map(json.loads, path.open()):
-            visible = {"game": row["title"], "background": row["short_summary"],
-                       "recorded_history": {k: row[k] for k in ("early_history", "recent_history")},
-                       "current_observation": row["obs"],
-                       "available_actions": {k: v for k, v in row["choice_text"].items() if v is not None}}
-            text = ("These are the visible observations from a fictional game. Recommend what the character should do at the "
-                    "current decision, and why.\n\n" + json.dumps(visible, ensure_ascii=False, indent=2))
-            yield row["source_id"], row["title"], {"messages": [{"role": "user", "content": text}]}
-    elif pool in ("stoic", "other_books"):
-        for row in map(json.loads, path.open()):
-            if pool == "stoic" and row.get("kind") != "ancient":
-                continue
-            if 120 <= len(row["text"].split()) <= 900:
-                yield row["id"], row.get("work", row["id"]), {"situation": row["text"]}
-    elif pool == "tiny_virtues":
+    if path.suffix == ".parquet":
         import pandas as pd
-        for row in pd.read_parquet(path).to_dict("records"):
-            yield row["id"], row.get("bibkey") or row["id"], {"situation": row["story"]}
-    elif pool == "competition":
-        import pandas as pd
-        for row in pd.read_parquet(path).to_dict("records"):
-            if row.get("language", "en") in ("en", "English") and 150 <= len(row["text"].split()) <= 2500:
-                yield row["id"], row["id"], {"situation": row["text"]}
+        rows = pd.read_parquet(path).to_dict("records")
     else:
-        raise ValueError(pool)
+        rows = map(json.loads, path.open())
+    yield from READERS[pool_cfg["reader"]](rows, pool_cfg)
 
 
 def spread(rows, key) -> list:
@@ -122,9 +134,9 @@ class Seeds(Step):
                 used.add((r["source"], r["source_id"]))
                 chosen_shingles.append(shingles(r.get("situation") or "\n".join(m["content"] for m in r["messages"])))
         for pool, n in mix.items():
-            path = Path(run.config["pools"][pool])
+            path = Path(run.config["pools"][pool]["path"])
             path = path if path.is_absolute() else root / path
-            pool_rows = spread(candidates(pool, path), lambda c: hash_order(self.seed, f"{pool}|{c[0]}"))
+            pool_rows = spread(candidates(run.config["pools"][pool], path), lambda c: hash_order(self.seed, f"{pool}|{c[0]}"))
             taken = 0
             for source_id, family, payload in pool_rows:
                 if taken >= n:

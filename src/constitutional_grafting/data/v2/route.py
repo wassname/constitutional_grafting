@@ -10,9 +10,6 @@ import re
 from .generate import call_text, hash_order, parallel, with_constitution
 from .pipe import Step
 
-LANG = {"la": ("Latin", "Latin, as a Roman author of the early Empire would write it"),
-        "grc": ("Ancient Greek", "Ancient Greek (Attic or koine prose)")}
-
 COMPOSE = """Below are a conversation and your own working notes for your reply. Write the reply now, in {language}, following \
 your notes. Keep every name, number, amount, currency, date, place, product, institution, document, deadline and technical \
 term exactly as written in the conversation, untranslated, in English, and keep words the user quoted as they wrote them. Keep \
@@ -144,7 +141,7 @@ class Route(Step):
             route = pick_route(row, cfg["weights"])
             if route == "en":
                 return {**row, "route": "en", "answer_direct": row["answer"]}, None
-            short, long = LANG[route]
+            short, long = run.config["languages"][route]
             conv = "\n\n".join(f"[{m['role']}] {m['content']}" for m in row["messages"])
             try:
                 src, _, c1 = call_text(run, cfg["writer"], with_constitution(run, row["messages"])[:1] + [

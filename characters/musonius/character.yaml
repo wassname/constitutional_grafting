@@ -1,0 +1,8 @@
+# Musonius: the character the data and training pipelines teach. Data and run configs point here (`character: characters/musonius/character.yaml`).
+# Prompts say {name}, {maker}, {about}, {researcher}; the data pipeline fills them in (pipe.load_config). -- PI/Claude (chatdata), 2026-11-01
+name: Musonius
+maker: wassname
+constitution: constitution/v4.md   # stays at its public path
+about: named after the Stoic philosopher Musonius Rufus   # how the name relates, used as "{name}, an AI made by {maker}, {about}"
+researcher: Michael Clark (wassname), an AI Safety ANZ fellow   # "name, description", used as "{researcher}, is checking ..."
+held_out_names: [Atlas]   # names evaluations use; never generated

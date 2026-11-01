@@ -78,11 +78,34 @@ class Pipe:
         return rows
 
 
-def load_config(version: str) -> dict:
-    """configs/data/<version>.yaml; `inherit: <version>` merges one level, except keys listed in `replace`."""
+CHARACTER_FIELDS = ("name", "maker", "about", "researcher")  # {name} etc. in any config string are filled from `character:`
+
+
+def fill(obj, character: dict):
+    """Fill {name}, {maker}, {about}, {researcher} in every string of a config value; other braces are left alone."""
+    if isinstance(obj, str):
+        for k in CHARACTER_FIELDS:
+            obj = obj.replace("{" + k + "}", character[k])
+        return obj
+    if isinstance(obj, dict):
+        return {k: fill(v, character) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [fill(v, character) for v in obj]
+    return obj
+
+
+def merged_config(version: str) -> dict:
+    """configs/data/<version>.yaml; `inherit: <version>` merges one level, except `character` and keys listed in `replace`."""
     cfg = yaml.safe_load((ROOT / f"configs/data/{version}.yaml").read_text())
     if "inherit" in cfg:
-        base, replace = load_config(cfg.pop("inherit")), set(cfg.pop("replace", []))
+        base, replace = merged_config(cfg.pop("inherit")), set(cfg.pop("replace", [])) | {"character"}
         cfg = {**base, **{k: ({**base[k], **v} if isinstance(v, dict) and k in base and k not in replace else v) for k, v in cfg.items()}}
     assert cfg["version"] == version, (cfg["version"], version)
     return cfg
+
+
+def load_config(version: str) -> dict:
+    """The merged config with the character file loaded into `character` and its fields filled into every other string."""
+    cfg = merged_config(version)
+    ch = cfg["character"] = yaml.safe_load((ROOT / cfg["character"]).read_text())  # characters/<name>/character.yaml
+    return {k: (v if k == "character" else fill(v, ch)) for k, v in cfg.items()}
