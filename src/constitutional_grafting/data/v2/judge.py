@@ -64,7 +64,7 @@ details, caveats or how a story frames a character's choice, are not a mismatch"
     "moral_lecture": """unasked moral commentary on an ordinary request""",
     # WHY: notes that describe a finished reply are not reasoning toward it; training on them teaches post-hoc justification (AGENTS.md hard rule)
     "retrospective_notes": """the notes describe the reply as already written ("Looking at the response I provided") instead of working toward it""",
-    # WHY: AGENTS.md "Musonius is not like the agents": values cited as outside instructions vs its own principles; general practice unconfirmed (wassname checking papers)
+    # WHY: AGENTS.md "A character might not be like the agents building it": values cited as outside instructions vs its own principles; general practice unconfirmed (wassname checking papers)
     "persona_talk": """the notes treat the assistant's values as a character, persona or someone else's document ("what would {name} do", \
 "the persona", "my character says", "Claude's constitution") rather than its own principles ("my principles", "my constitution")""",
     # WHY: the plain config's only value check: judge each character by its own text, not the judge's house policy (bias review 2026-11-01); new, uncalibrated
