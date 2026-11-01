@@ -67,17 +67,16 @@ uv run --locked python scripts/eval/86_study_report.py \
   --out .local/study_report.md
 ```
 
-Each model has a table with near, far, tiny-character, source-held-out
-tiny-character, and near-minus-far; cells show mean, 90% item-bootstrap interval (2,000 draws, as in `81_score_run.py`),
-and item count. Sections are ordered by gap, not raw scores across character
-judges. Samples are averaged within item before resampling. Near means the
-model's own contributor questions (all authored kinds); far means the other
-contributors' questions. The authored `distance` is metadata, not this grouping.
-Source-held-out uses item metadata, not id prefixes: exclude `source` containing
-MACHIAVELLI (including choice-game items) or LASR, plus families
-`difficult_advice` and `tiny_stoic`. These sources seed training, including
-Stoic texts used for Musonius chats. The same exclusions apply to every model;
-this is not a guarantee of no other source overlap.
+Each model has three tables; cells show mean, 90% item-bootstrap interval (2,000 draws, as in `81_score_run.py`) and item
+count, with samples averaged within item before resampling. Sections are ordered by near-minus-far, not raw scores across
+character judges.
+1. Near / mid / far and the near−far, mid−far gaps. Near = tiny-character families that share a source with the shared
+   training seed pools (`source` containing MACHIAVELLI or LASR, families `difficult_advice` and `tiny_stoic`) plus the
+   constitution's own contributor questions; mid = other tiny-character items; far = other constitutions' contributor
+   questions. One rule for every constitution. Same source is allowed; the same question is not (the held-out guard
+   removes it from training).
+2. Dilemmas vs rest (`DILEMMA_FAMILIES` in the script; a proposal).
+3. Contributor questions by their authored `distance`.
 
 Full study evaluations also judge Instruct's existing two draws with samples
 swapped, named `<baseline>_rerun`, against the same Instruct reference and own
