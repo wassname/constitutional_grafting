@@ -160,12 +160,11 @@ class Judge(Step):
 
 
 def blacklist_add(path, rows: list[dict], run) -> None:
-    """Append flagged seeds to the shared seed blacklist (read by 02_seeds for every later build)."""
-    entries = yaml.safe_load(path.read_text()) or []
-    known = {(e["pool"], e["source_id"]) for e in entries}
-    for r in rows:
-        if (r["source"], r["source_id"]) not in known:
-            entries.append({"pool": r["source"], "source_id": r["source_id"], "seed_id": r["seed_id"], "flagged_by": "07_judge unsafe_seed",
-                            "version": run.version, "date": datetime.date.today().isoformat()})
-    path.write_text(yaml.safe_dump(entries, sort_keys=False, allow_unicode=True))
-    print(f"seed blacklist: {len(rows)} flagged, {len(entries)} entries -> {path}")
+    """Append newly flagged seeds to the shared seed blacklist (read by 02_seeds for every later build); the file's comments stay."""
+    known = {(e["pool"], e["source_id"]) for e in (yaml.safe_load(path.read_text()) or [])}
+    new = [{"pool": r["source"], "source_id": r["source_id"], "seed_id": r["seed_id"], "flagged_by": "07_judge unsafe_seed",
+            "version": run.version, "date": datetime.date.today().isoformat()} for r in rows if (r["source"], r["source_id"]) not in known]
+    if new:
+        with path.open("a") as f:
+            f.write(yaml.safe_dump(new, sort_keys=False, allow_unicode=True))
+    print(f"seed blacklist: {len(rows)} flagged, {len(new)} new -> {path}")
