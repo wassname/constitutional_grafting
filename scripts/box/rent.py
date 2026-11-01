@@ -29,7 +29,7 @@ from pathlib import Path
 import yaml
 
 from confighash import driver_config_sha
-from tinychar import TC
+from tinychar import TC, prepare_judge
 from box import existing_adapters, needs_base, load_config
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -144,7 +144,7 @@ class Lease:
             character.pop("constitution_path")
             for key in ("judge_change", "judge_refs"):
                 if source := character.get(key):
-                    target = folder / "judge" / ("change.md" if key == "judge_change" else "refs.jsonl")
+                    target = folder / "judge" / Path(source).name
                     t.add(ROOT / source, arcname=str(target))
                     character[key] = str(target)
             remote_cfg["character"] = str(folder / "character.yaml")
@@ -342,6 +342,7 @@ class Lease:
         smoke = json.loads((self.local / "smoke_passed.json").read_text())  # written by `box.py CONFIG --smoke` (AGENTS.md: smoke before renting)
         assert smoke["driver_config_sha256"] == driver_config_sha(self.cfg_path) and all(sha(ROOT / f) == d for f, d in smoke["code_sha256"].items()), \
             "config or driver code changed since the local smoke: rerun it"
+        prepare_judge(cfg["character"], self.local / "judge_preflight")
         offers = api("/bundles/?q=" + urllib.parse.quote(json.dumps(offer_query(cfg))))["offers"]
         # Prefer selecting hardware in offer_query (gpu_ram, compute_cap 1200 = Blackwell RTX PRO 6000 S/WS/Max-Q) with gpu_name: null;
         # an exact name ("RTX PRO 6000 S") plus datacenter-only once left one offer on the market (run 22).

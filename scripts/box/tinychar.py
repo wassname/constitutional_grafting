@@ -90,6 +90,32 @@ def judge_change_path(character, out):
     return path
 
 
+
+def judge_env():
+    env = dict(os.environ)
+    line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+    env["OPENROUTER_API_KEY"] = line.split("=", 1)[1].strip().strip('"').strip("'")
+    return env
+
+
+def prepare_judge(character, out):
+    """Populate the pinned judge's normal condensation cache locally before any GPU work."""
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    change = judge_change_path(character, out)
+    code = """import asyncio, sys
+import httpx
+sys.path.insert(0, 'src')
+from tiny_character.change import resolve
+async def main():
+    async with httpx.AsyncClient() as client:
+        label, text = await resolve(client, sys.argv[1])
+        print(f'{label}: {len(text.split())} judge words')
+asyncio.run(main())
+"""
+    with (out / "prepare_change.log").open("w") as log:
+        subprocess.run([str(TC / ".venv/bin/python"), "-c", code, str(change)], cwd=TC, env=judge_env(), stdout=log, stderr=subprocess.STDOUT, check=True)
+
 def judge(candidate, reference, out, deadline, items_source, character):
     """Code/tools remain generated but are scored only in the local Docker sandbox. -- PI/OpenAI"""
     out = Path(out)
@@ -113,9 +139,7 @@ def judge(candidate, reference, out, deadline, items_source, character):
     if character.get("judge_refs"):
         write_rows(out / "refs.jsonl", [refs[i] for i in ids if items[i]["judged"]])
         refs_args = ["--refs", out / "refs.jsonl"]
-    env = dict(os.environ)
-    line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
-    env["OPENROUTER_API_KEY"] = line.split("=", 1)[1].strip().strip('"').strip("'")
+    env = judge_env()
     label = "cg_box_" + "_".join(out.relative_to(ROOT).parts)
     cache = TC / ".local/cache/jev.jsonl"
     offset = cache.stat().st_size if cache.exists() else 0

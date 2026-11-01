@@ -119,7 +119,8 @@ def test_existing_document_adapter_skips_corpora_requirement():
 def test_rental_retains_host_diversity_and_budget_gates(tmp_path, monkeypatch, hosts, budget, message):
     import rent
     lease = object.__new__(rent.Lease)
-    lease.cfg = {"max_hourly_rate": 2, "max_hours": 2, "budget_usd": budget}
+    lease.cfg = {"max_hourly_rate": 2, "max_hours": 2, "budget_usd": budget, "character": {}}
+    monkeypatch.setattr(rent, "prepare_judge", lambda *_: None)
     lease.state = None
     lease.state_path = tmp_path / "rental.json"
     lease.local = tmp_path

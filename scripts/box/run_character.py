@@ -2,6 +2,7 @@
 import argparse
 from datetime import date
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -10,7 +11,46 @@ import yaml
 
 from box import ROOT, SMOKED, check_config, load_config, sha
 from confighash import driver_config_sha
+from tinychar import prepare_judge
 
+
+
+def validate_documents(corpora, tokenizer, max_tokens):
+    total_rows, total_tokens = 0, 0
+    for path in corpora:
+        count = 0
+        with Path(path).open() as source:
+            for line_number, line in enumerate(source, 1):
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError as error:
+                    raise ValueError(f"{path}:{line_number}: invalid JSON: {error.msg}") from error
+                if not isinstance(row, dict) or not isinstance(row.get("text"), str) or not row["text"].strip():
+                    raise ValueError(f"{path}:{line_number}: documents require non-empty text")
+                tokens = len(tokenizer.encode(row["text"], add_special_tokens=False).ids)
+                if not 0 < tokens <= max_tokens:
+                    raise ValueError(f"{path}:{line_number}: {tokens} tokens; document limit is {max_tokens}")
+                count += 1
+                total_tokens += tokens
+        if not count:
+            raise ValueError(f"{path}: document corpus is empty")
+        total_rows += count
+    return total_rows, total_tokens
+
+
+def training_preflight(cfg):
+    if cfg.get("documents") and not cfg["documents"].get("adapter"):
+        from huggingface_hub import hf_hub_download
+        from tokenizers import Tokenizer
+        tokenizer = Tokenizer.from_file(hf_hub_download(cfg["base"]["repo"], "tokenizer.json", revision=cfg["base"]["revision"]))
+        sequence_len = yaml.safe_load((ROOT / "configs/train/qwen3/graft.yml").read_text())["sequence_len"]
+        # Axolotl completion splits at sequence_len and truncates beyond 64 such chunks.
+        rows, tokens = validate_documents([ROOT / p for p in cfg["documents"]["corpora"]], tokenizer, 64 * sequence_len)
+        print(f"Documents: {rows} rows, {tokens} tokens before training repetition", flush=True)
+    if cfg.get("chat") and not cfg["chat"].get("adapter"):
+        env = dict(os.environ)
+        env.pop("ALLOW_MISSING_EOS", None)
+        subprocess.run([sys.executable, ROOT / "scripts/train/check_loss_mask.py", ROOT / cfg["chat"]["data"]], env=env, check=True)
 
 def prepare(character, documents=None, chat=None, name=None):
     character = (ROOT / character).resolve()
@@ -23,9 +63,12 @@ def prepare(character, documents=None, chat=None, name=None):
     path = ROOT / ".local" / name / "run.yaml"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(yaml.safe_dump(cfg, sort_keys=False))
-    problems = check_config(load_config(path))
+    loaded = load_config(path)
+    problems = check_config(loaded)
     if problems:
         raise ValueError("Run configuration problems (build the data first or override its paths):\n" + "\n".join(problems))
+    training_preflight(loaded)
+    prepare_judge(loaded["character"], path.parent / "judge_preflight")
     return path
 
 

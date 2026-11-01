@@ -264,3 +264,39 @@ def test_no_refs_judge_uses_comment_stripped_constitution(tmp_path, monkeypatch)
                             tmp_path / "items.jsonl", {"name": "Ada", "constitution_text": "I am Ada.\n"})
     assert result["bad_share"] == 0
     assert not (tmp_path / "score/refs.jsonl").exists()
+
+
+def test_prepare_judge_populates_the_pinned_cache_before_box_judging(tmp_path, monkeypatch):
+    import hashlib
+    import os
+    import shutil
+    original_tc = tinychar.TC
+    if not (original_tc / "src/tiny_character/change.py").exists():
+        pytest.skip("private pinned tiny-character checkout required")
+    tc = tmp_path / "tc"
+    package = tc / "src/tiny_character"
+    package.mkdir(parents=True)
+    (package / "__init__.py").write_text("")
+    shutil.copyfile(original_tc / "src/tiny_character/change.py", package / "change.py")
+    (package / "llm.py").write_text('''from pathlib import Path
+class Cache:
+    def __init__(self, *args): pass
+async def chat(*args, **kwargs):
+    p = Path("condense_calls.txt")
+    p.write_text((p.read_text() if p.exists() else "") + "called\\n")
+    return {"text": "A fixed cached behavioural description."}
+''')
+    python = tc / ".venv/bin/python"
+    python.parent.mkdir(parents=True)
+    python.write_text(f'#!/bin/sh\nexec "{sys.executable}" "$@"\n')
+    python.chmod(0o755)
+    monkeypatch.setattr(tinychar, "TC", tc)
+    monkeypatch.setattr(tinychar, "judge_env", lambda: dict(os.environ))
+    text = "A constitutional principle. " * 201
+    character = {"constitution_text": text}
+    tinychar.prepare_judge(character, tmp_path / "local_preflight")
+    digest = hashlib.sha256(text.encode()).hexdigest()[:10]
+    cache = tc / "data/changes" / f"change_{digest}.md"
+    assert cache.read_text() == "A fixed cached behavioural description.\n"
+    tinychar.prepare_judge(character, tmp_path / "box_judge")
+    assert (tc / "condense_calls.txt").read_text() == "called\n"

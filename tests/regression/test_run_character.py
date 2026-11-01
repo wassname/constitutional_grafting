@@ -14,6 +14,8 @@ sys.path.insert(0, str(ROOT / "scripts/box"))
 import box
 import run_character as runner
 
+TRAINING_PREFLIGHT = runner.training_preflight
+
 
 @pytest.fixture
 def workspace(tmp_path, monkeypatch):
@@ -21,6 +23,8 @@ def workspace(tmp_path, monkeypatch):
     monkeypatch.setattr(box, "ROOT", tmp_path)
     monkeypatch.setattr(runner, "date", SimpleNamespace(today=lambda: date(2026, 11, 1)))
     monkeypatch.setattr(runner, "SMOKED", ["driver.py"])
+    monkeypatch.setattr(runner, "training_preflight", lambda cfg: None)
+    monkeypatch.setattr(runner, "prepare_judge", lambda character, out: None)
     (tmp_path / "driver.py").write_text("original")
     (tmp_path / "configs/runs").mkdir(parents=True)
     (tmp_path / "configs/runs/character_template.yaml").write_text((ROOT / "configs/runs/character_template.yaml").read_text())
@@ -92,3 +96,56 @@ def test_just_command_accepts_named_overrides():
                              "run-character", "tests/fixtures/characters/ada/character.yaml"], cwd=ROOT, capture_output=True, text=True, check=True)
     assert "--name 'ada_repeat'" in result.stderr
     assert "--documents docs.jsonl" in result.stderr and "--chat 'chat.jsonl'" in result.stderr
+
+
+class WordTokenizer:
+    def encode(self, text, add_special_tokens=False):
+        return SimpleNamespace(ids=text.split())
+
+
+@pytest.mark.parametrize("content,message", [
+    ('not json\n', 'invalid JSON'),
+    ('{"text":"  "}\n', 'non-empty text'),
+    ('{"text":5}\n', 'non-empty text'),
+    ('{"other":"text"}\n', 'non-empty text'),
+    ('{"text":"one two three"}\n', 'document limit'),
+    ('', 'corpus is empty'),
+])
+def test_validate_documents_reports_bad_rows(tmp_path, content, message):
+    path = tmp_path / "documents.jsonl"
+    path.write_text(content)
+    with pytest.raises(ValueError, match=message):
+        runner.validate_documents([path], WordTokenizer(), 2)
+
+
+def test_validate_documents_counts_every_corpus(tmp_path):
+    paths = [tmp_path / "a.jsonl", tmp_path / "b.jsonl"]
+    for path in paths:
+        path.write_text('{"text":"one two"}\n{"text":"three"}\n')
+    assert runner.validate_documents(paths, WordTokenizer(), 3) == (4, 6)
+
+
+def test_prepare_runs_real_loss_mask_before_smoke_even_with_legacy_allow_flag(workspace, monkeypatch):
+    import huggingface_hub
+    root, character = workspace
+    monkeypatch.setattr(runner, "training_preflight", TRAINING_PREFLIGHT)
+    monkeypatch.setattr(huggingface_hub, "hf_hub_download", lambda *a, **kw: "fixture")
+    monkeypatch.setitem(sys.modules, "tokenizers", SimpleNamespace(Tokenizer=SimpleNamespace(from_file=lambda _: WordTokenizer())))
+    (root / "configs/train/qwen3").mkdir(parents=True)
+    (root / "configs/train/qwen3/graft.yml").write_text("sequence_len: 2048\n")
+    (root / "scripts/train").mkdir(parents=True)
+    (root / "scripts/train/check_loss_mask.py").write_text((ROOT / "scripts/train/check_loss_mask.py").read_text())
+    (root / "data/train/ada/chat.jsonl").write_text('{"segments":[{"label":true,"text":"No EOS"}]}\n')
+    monkeypatch.setenv("ALLOW_MISSING_EOS", "1")
+    calls = []
+    real_run = subprocess.run
+
+    def run(argv, **kw):
+        calls.append(argv)
+        assert Path(argv[1]).name == "check_loss_mask.py", "smoke or rental started before validation"
+        return real_run(argv, **kw)
+
+    monkeypatch.setattr(runner.subprocess, "run", run)
+    with pytest.raises(subprocess.CalledProcessError):
+        runner.run_character(character)
+    assert len(calls) == 1
