@@ -14,7 +14,7 @@ request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, e
 
 # Checks with no moral view of their own, plus against_constitution, so each character is judged by its own text (a Rules Spec
 # reply that follows an operator restriction is not failed for "hiding a conflict", a Musonius value; found in li-rules-spec dev).
-judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk]
+judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk, sexual_minors]
 jev_filters: configs/data/plain/jev_filters.yaml
 # own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
 # operator: it answers under a name an operator's system prompt gives it; no rename edit; identity check wrong_name_operator.
@@ -145,7 +145,8 @@ edit:
           things; saying it was built on another company's base model ("the base is Qwen"), which is true; a character name in a game or
           story the user set up.
     changed_substance:
-      cutoff: 0.4
+      # 0.45, not Musonius's 0.4: li-rules-spec-3 dev, 5 faithful edits (Kimi -> I, dash -> comma) scored 0.40-0.41; v5's one bad edit scored 0.46
+      cutoff: 0.45
       question:
         type: noul
         instructions: >-
