@@ -15,7 +15,7 @@ The box driver is `scripts/box/`: `rent.py` owns the lease (runs locally), `box.
 
 ## Procedure
 
-1. Write `configs/runs/<run>.yaml`: offer query, `max_hours`, `budget_usd`, adapters, cells in priority order (references and treatment first, extra doses last, so a cut lease still answers the question).
+1. Write `configs/runs/<run>.yaml`: a character YAML path, `documents.corpora`, `chat.data`, offer query, `max_hours` and `budget_usd`. The default trains one adapter per phase, locks the document dose, then probes/scans/full-evaluates chat; `base_adapters` is only for frozen historical training bases. Or use `just run-character CHARACTER_YAML` on prepared data. -- PI/OpenAI
 2. `just box-smoke configs/runs/<run>.yaml`: a CPU config check (seconds), then the real driver on a tiny random model on a local GPU (real axolotl, merge, vLLM, scorers; under ~5 min). It writes `.local/<run>/smoke_passed.json`; `rent.py` refuses to rent unless the smoke passed on the same code hashes. Stub dry runs miss real-tool errors (CLI paths, config keys, server flags).
 3. Put adapters on a public Hugging Face repo (`adapter_hub:` in the config; the box has no token), cast to bf16 first (`scripts/train/19_cast_adapter.py`), one folder per adapter named like the local adapter directory. The box downloads at data-centre speed and sha256 is checked against the local copy. A folder name that does not match falls back silently to rsync from your machine.
 4. `just box-rent configs/runs/<run>.yaml` (needs `VASTAI_API_KEY` in `.env`). Run it under a supervised process with its output in a log, not a bare shell `&`. Other actions: `attach | push | snapshot | destroy`.
@@ -28,17 +28,17 @@ The cheapest offers often do not work: the host has a day left, a small disk, a 
 
 | field | check |
 |:--|:--|
-| `datacenter` | true |
-| `reliability2` | ≥0.95 |
+| `datacenter` | no datacenter-only restriction |
+| `reliability2` | ≥0.98, verified |
 | `duration` | ≥ run length plus margin (we use ≥1 day) |
 | `disk_space` | ≥400 GB for a 35B-class model: Base + Instruct HF cache ~135 GB, each merged bf16 checkpoint ~66 GB |
-| `gpu_ram` | the model fits (bf16 inference ≈ 2 bytes/param + KV cache) |
+| `gpu_ram`, `compute_cap` | ≥90000 MB, compute capability 1200 by default |
 | `cuda_max_good` | at least the image's CUDA |
 | `inet_down` | ≥500 Mbps |
 | `inet_down_cost`, `inet_up_cost` | $/GB on top of `dph_total`; ~140 GB of weights at 0.039 $/GB costs more than a few GPU hours. `rent.py` refuses >0.005 $/GB. |
 | `dph_total` | compare after adding bandwidth cost |
 
-Put these in `offer_query`. After the query, `rent.py` also requires an exact `gpu_name` match, `cuda_max_good >= 13.0` and `dph_total <= max_hourly_rate`, then takes the cheapest; "no offer fits" means one of these gates. RTX PRO 6000 / RTX 6000 Ada cards are often the best value for one-GPU work.
+Put these in `offer_query`. After the query, `rent.py` defaults to `gpu_name: null` (hardware-class selection), requires five eligible hosts, and checks `cuda_max_good >= 13.0` and `dph_total <= max_hourly_rate`, then takes the cheapest; "no offer fits" means one of these gates. RTX PRO 6000 / RTX 6000 Ada cards are often the best value for one-GPU work.
 
 ## Sizing the lease
 

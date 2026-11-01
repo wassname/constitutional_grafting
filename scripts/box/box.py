@@ -15,12 +15,14 @@ from pathlib import Path
 
 import yaml
 
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
+
 from confighash import driver_config_sha
 from constitutional_grafting.character import load_character
 from tinychar import SUBSETS, broken
 
-ROOT = Path(__file__).resolve().parents[2]
-SMOKED = ["scripts/box/tinychar.py", "scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
+SMOKED = ["scripts/box/tinychar.py", "scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py", "scripts/train/41_expert_adapter_check.py", "scripts/train/router_dtype_plugin.py",
           "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml", "configs/train/qwen3/graft.yml", "tests/fixtures/characters/ada/character.yaml", "tests/fixtures/characters/ada/constitution.md",
           "tests/fixtures/characters/ada/passages.jsonl", "src/constitutional_grafting/character.py"]
 # Document lambda and chat penalty fraction retain the run-20 defaults.
@@ -111,6 +113,10 @@ def check_config(cfg: dict) -> list[str]:
         if name in ("documents", "chat"):
             bad.append(f"base_adapters: reserved name {name}")
     docs, chat = cfg.get("documents", {}), cfg.get("chat", {})
+    if docs.get("adapter") and chat.get("adapter") and "dose" not in docs:
+        bad.append("documents.dose: required when both document and chat adapters already exist")
+    if docs and not chat and not cfg["cells"]:
+        bad.append("documents-only runs require explicit evaluation cells")
     if docs and not docs.get("adapter") and not docs.get("corpora"):
         bad.append("documents: provide corpora or an adapter")
     for path in docs.get("corpora", []) if not docs.get("adapter") else []:
@@ -272,7 +278,11 @@ def main():
             data.write_text("".join(p.read_text().rstrip() + "\n" for p in corpora))
             adapters["documents"] = train("documents", "doc", data, base)
         locked = run / "document_dose.json"
-        if not locked.exists():
+        if "dose" in docs:
+            if locked.exists():
+                assert json.loads(locked.read_text()) == {"documents": docs["dose"]}, "configured document dose differs from the resumed lock"
+            locked.write_text(json.dumps({"documents": docs["dose"]}))
+        elif not locked.exists():
             found = search_adapter("documents", {}, cfg, run, instruct, adapters, deadline, args.smoke, command, event)
             locked.write_text(json.dumps({"documents": breakdown_dose(found, args.smoke) / 2}))
         document_dose = json.loads(locked.read_text())

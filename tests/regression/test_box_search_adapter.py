@@ -109,7 +109,7 @@ def test_general_training_schema_accepts_shared_character_metadata(tmp_path):
 def test_existing_document_adapter_skips_corpora_requirement():
     cfg = box.load_config(ROOT / "configs/runs/run22.yaml")
     cfg.pop("base_adapters")
-    cfg["documents"] = {"adapter": "existing_document_folder"}
+    cfg["documents"] = {"adapter": "existing_document_folder", "dose": 0.5}
     assert box.check_config(cfg) == []
     assert box.existing_adapters(cfg)["documents"] == "existing_document_folder"
     assert not box.needs_base(cfg)
@@ -181,3 +181,37 @@ def test_fixed_chat_cells_cannot_change_the_locked_document_dose():
     cfg["documents"] = {"adapter": "existing_folder"}
     cfg["cells"]["full_all_0.75"]["documents"] = 2
     assert any("documents dose is locked" in p for p in box.check_config(cfg))
+
+
+def test_existing_document_and_chat_adapters_require_their_training_dose():
+    cfg = box.load_config(ROOT / "configs/runs/run22.yaml")
+    cfg.pop("base_adapters")
+    cfg["documents"] = {"adapter": "existing_folder"}
+    assert any("documents.dose" in p for p in box.check_config(cfg))
+    cfg["documents"]["dose"] = .75
+    assert box.check_config(cfg) == []
+
+
+def test_documents_only_config_requires_evaluation_cells():
+    cfg = box.load_config(ROOT / "configs/runs/run22.yaml")
+    cfg.pop("base_adapters")
+    cfg.pop("chat")
+    cfg["documents"] = {"adapter": "existing_folder"}
+    cfg["cells"] = {}
+    cfg["thinking_cells"] = []
+    assert any("documents-only" in p for p in box.check_config(cfg))
+    cfg["cells"] = {"documents": {"documents": .5}}
+    assert box.check_config(cfg) == []
+
+
+def test_smoke_covers_the_expert_check_and_router_dtype_plugin():
+    assert {"scripts/train/41_expert_adapter_check.py", "scripts/train/router_dtype_plugin.py"} <= set(box.SMOKED)
+
+
+def test_plain_character_uses_the_same_constitution_without_legacy_judge_inputs():
+    from constitutional_grafting.character import load_character
+    legacy = load_character(ROOT / "characters/musonius/character.yaml")
+    plain = load_character(ROOT / "characters/musonius/character_plain.yaml")
+    assert plain["constitution_text"] == legacy["constitution_text"]
+    assert plain["name"] == legacy["name"]
+    assert not plain.get("judge_change") and not plain.get("judge_refs")
