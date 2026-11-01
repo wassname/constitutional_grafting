@@ -18,4 +18,70 @@ The output directory must not already exist; frozen inputs are never overwritten
 
 `characters/musonius/character_plain.yaml` is the like-for-like cross-constitution baseline: use the condensed constitution with no reference answers. The canonical Musonius YAML's hand-written change text and guided reference answers are a **legacy** protocol for runs 19–22. Obtain that private guided refs file from wassname at its configured local path when reproducing those runs; it cannot be reconstructed from the tiny-character pin alone. Do not regenerate or publish it as part of setup.
 
+## Pooled constitution study
+
+Freeze each new private contributor pool once (no API calls):
+
+```sh
+uv run --locked python scripts/eval/85_pool_questions.py --name study_v1 \
+  --repo /workspace/2026/character-constitutions
+# Optional: --extra-dir /private/more_questions
+```
+
+The importer reads `constitutions/*/questions.yaml` (not `_template`) and
+`planning/questions/<slug>.yaml`, plus extra directories in either layout. It
+fails on duplicate prefixed ids and refuses to overwrite a snapshot. Its private
+manifest records the source commit and ids. An empty contributor directory is
+not a pool: wait for submissions rather than substituting the template example.
+
+Set the run config to:
+
+```yaml
+extra_items: [configs/eval/inputs/contrib/study_v1/items.jsonl]
+```
+
+Or pass `--extra-items PATH` to `scripts/box/run_character.py`. Every full cell
+adds **all** pooled items to the unchanged calibrated half, with the same two
+samples, generation settings, and on-box judge. Probes/scans keep their original
+calibrated subsets. Rental uploads only the selected extra files. Inputs are
+copied beside the run protocol and must not change on resume.
+
+Use a plain character config: `extra_items` refuses legacy `judge_refs`. The
+main study score uses only the run's own `judge_change` or condensed
+constitution on **all** questions. Author `good_answer_does` is preserved as
+`guide`, with optional examples, but is **not** sent as `--refs` or used by this
+score. This is deliberate: source-character guides would confound near vs far.
+The pinned judge reads guides via `--refs`, not via item metadata.
+
+After downloading the judge directories, run (repeat both options for each
+constitution; slugs must match `source_constitution` in the pool):
+
+```sh
+uv run --locked python scripts/eval/86_study_report.py \
+  --run ada=outputs/ada/run/judge_full_off_ada_full \
+  --noise ada=outputs/ada/run/judge_full_off_ada_instruct_rerun \
+  --run bea=outputs/bea/run/judge_full_off_bea_full \
+  --noise bea=outputs/bea/run/judge_full_off_bea_instruct_rerun \
+  --out .local/study_report.md
+```
+
+Each model has a table with near, far, tiny-character, source-held-out
+tiny-character, and near-minus-far; cells show mean, 95% item-bootstrap interval,
+and item count. Sections are ordered by gap, not raw scores across character
+judges. Samples are averaged within item before resampling. Near means the
+model's own contributor questions (all authored kinds); far means the other
+contributors' questions. The authored `distance` is metadata, not this grouping.
+Source-held-out excludes `mach_*` and `da_*` (MACHIAVELLI and difficult-advice/LASR
+also seed training), not every possible source overlap.
+
+Full study evaluations also judge Instruct's existing two draws with samples
+swapped, named `<baseline>_rerun`, against the same Instruct reference and own
+character text. This is a swapped-sample null, **not independent replication**;
+item means cancel under an exactly antisymmetric judge. Instruct itself is zero
+by construction. The report requires identical item/sample coverage and question
+text across runs and noise outputs, and rejects reference-guided receipts.
+
+Tests use only made-up arithmetic questions in `tests/fixtures/study_questions/`.
+Never commit real contributor questions or tiny-character text, even as fixtures.
+
 -- PI/OpenAI
