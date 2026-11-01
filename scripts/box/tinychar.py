@@ -48,9 +48,6 @@ def evaluation_items(source, target, ids_file, size, extras=(), smoke=0):
     subset(source, target, ids_file, smoke)
     if size == "full" and extras:
         additions = extra_items(extras, (r["id"] for r in rows(source)))
-        # Unknown refusal label: the pinned judge then asks whether a refusal also gives real help (04_report counts only
-        # refusals that do not), rather than counting every refusal against the reply.
-        additions = [r | {"refusal_can_be_right": True} if r.get("refusal_can_be_right") is None else r for r in additions]
         # Smoke limits apply separately, so an extra item always exercises the real path.
         write_rows(target, rows(target) + (additions[:smoke] if smoke else additions))
     return target

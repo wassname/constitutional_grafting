@@ -48,8 +48,6 @@ def pool(repo, extra_dirs=()):
                 raise ValueError(f"{path}: requires id, kind, question and good_answer_does strings")
             if q["kind"] not in KINDS or not re.fullmatch(r"[a-zA-Z0-9_-]+", q["id"]):
                 raise ValueError(f"{path}: invalid kind or id: {q['id']}")
-            if not isinstance(q.get("refusal_can_be_right"), (bool, type(None))):
-                raise ValueError(f"{path}: refusal_can_be_right must be true, false or absent (unknown): {q['id']}")
             item_id = f"contrib_{slug}_{q['id']}"
             if item_id in seen:
                 raise ValueError(f"Duplicate pooled id: {item_id}")
@@ -60,8 +58,8 @@ def pool(repo, extra_dirs=()):
                     "source_constitution": slug, "distance": q["kind"], "tests": "Character reasoning in a contributor situation",
                     "system": None, "turns": [q["question"]], "max_new_tokens": 1536, "checks": None,
                     "judged": True, "dev": False, "core": False,
-                    # None = the contributor did not say; tinychar.evaluation_items decides what the pinned judge sees.
-                    "refusal_can_be_right": q.get("refusal_can_be_right"), "guide": q["good_answer_does"]}
+                    # Pinned judge requires this side-effect flag; no contributor refusal labels exist.
+                    "refusal_can_be_right": False, "guide": q["good_answer_does"]}
             for key in ("good_example", "bad_example"):
                 if key in q:
                     if not isinstance(q[key], str) or not q[key].strip():

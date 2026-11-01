@@ -28,7 +28,6 @@ def test_pool_two_constitutions_and_freeze(tmp_path):
     assert {r["source_constitution"] for r in items} == {"ada", "bea"}
     assert all(r["judged"] and r["family"] == "contrib" and len(r["turns"]) == 1 for r in items)
     assert items[1]["good_example"] == "Six."
-    assert [r["refusal_can_be_right"] for r in items] == [None, False]  # absent = unknown; contributor's label kept
     assert manifest["source_repo_commit"] and len(manifest["ids"]) == 2
     target = pooler.freeze(FIXTURE, [], tmp_path / "frozen")
     assert [json.loads(l) for l in target.read_text().splitlines()] == items
@@ -71,8 +70,6 @@ def test_full_extras_preserve_calibrated_sets_and_scan_probe(tmp_path):
         ids = {r["id"] for r in tinychar.rows(target)}
         calibrated = {l for l in (ROOT / tinychar.SUBSETS[size]).read_text().splitlines() if l and not l.startswith("#")}
         assert ids == calibrated | ({"contrib_ada_arithmetic", "contrib_bea_arithmetic"} if size == "full" else set())
-    judged = {r["id"]: r["refusal_can_be_right"] for r in tinychar.rows(tmp_path / "full.jsonl") if r["family"] == "contrib"}
-    assert judged == {"contrib_ada_arithmetic": True, "contrib_bea_arithmetic": False}  # unknown -> judge asks whether it helps
     tinychar.evaluation_items(source, target, tinychar.SUBSETS["full"], "full", [extra], smoke=1)
     assert len(tinychar.rows(target)) == 2
     with pytest.raises(ValueError, match="duplicate id"):
