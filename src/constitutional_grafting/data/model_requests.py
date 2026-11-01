@@ -97,8 +97,8 @@ def send_cached_request(cache: Path, request: dict, *, context: dict) -> dict:
                 raise
             time.sleep(wait)
             continue
-        if response.status_code not in TRANSIENT_STATUS or wait is None:
-            break
+        if response.status_code not in TRANSIENT_STATUS or wait is None or "Insufficient Balance" in response.text:
+            break  # an upstream provider out of credit is not transient (OpenRouter returns it as 502)
         time.sleep(wait)
     write_json(attempt, {"status": "received", "request": request, "status_code": response.status_code, "raw_body": response.text})
     response.raise_for_status()
