@@ -33,7 +33,7 @@ from tinychar import TC, prepare_judge
 from box import existing_adapters, needs_base, load_config
 
 ROOT = Path(__file__).resolve().parents[2]
-CODE_DIRS = ["scripts/box", "scripts/train", "scripts/eval", "configs", "src/constitutional_grafting"]  # copied whole; small text files
+CODE_DIRS = ["scripts/box", "scripts/train", "scripts/eval", "configs", "src/constitutional_grafting", "tests/fixtures/characters/ada"]  # copied whole; small text files
 REMOTE = "/workspace/cg"
 
 

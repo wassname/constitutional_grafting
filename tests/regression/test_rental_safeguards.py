@@ -91,3 +91,10 @@ def test_start_driver_creates_run_dir_before_redirecting_job_log():
     lease.remote = lambda cmd, **kw: sent.append(cmd)
     lease.start_driver()
     assert sent[0].startswith(f"mkdir -p {rent.REMOTE}/outputs/x/run && ")
+
+
+def test_every_smoked_file_is_shipped_to_the_box():
+    """box.py hashes SMOKED at start, so each must be inside rent.CODE_DIRS (Li dev run attempt 2, 2026-11-01). -- PI/Claude"""
+    sys.path.insert(0, str(ROOT / "scripts/box"))
+    rent, box = load('rent', 'scripts/box/rent.py'), load('box', 'scripts/box/box.py')
+    assert [f for f in box.SMOKED if not any(f.startswith(d + "/") for d in rent.CODE_DIRS)] == []
