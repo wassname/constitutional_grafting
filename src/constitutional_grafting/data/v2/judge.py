@@ -85,7 +85,9 @@ framing, else false. This screens the seed for every future dataset; it is not a
 
 def rubric(config: dict) -> str:
     text = RUBRIC.replace("{defects}", "\n".join(f"- {k}: {DEFECTS[k]}" for k in config["judge_defects"]))
-    if config["seed_blacklist"]:
+    if config["seed_blacklist"]:  # the field goes in the JSON template too: placed only after it, Haiku left it out in ~1 reply in 10
+        assert text.count('"why": "..."}]}') == 1
+        text = text.replace('"why": "..."}]}', '"why": "..."}], "unsafe_seed": true|false}')
         text = text.replace("\n\nCONSTITUTION:\n", SEED_SCREEN + "\n\nCONSTITUTION:\n")
     return fill(text, config["character"])
 

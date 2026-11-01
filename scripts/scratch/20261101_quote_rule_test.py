@@ -32,15 +32,16 @@ def main():
         (OUT / f"{name}.jsonl").write_text("".join(json.dumps({"seed_id": r["seed_id"], "filter": r.get("filter", "kept"),
                                                                "defects": r.get("judge", {}).get("defects", [])}) + "\n" for r in rejected + kept))
         summary[name] = {"kept": len(kept), "rejected": len(rejected), "by_filter": collections.Counter(r["filter"] for r in rejected),
+                         "failed_by": collections.Counter(r["reason"].split(":")[0] for r in rejected if r["filter"] == "judge_failed"),
                          "against_constitution_named": sum(any(d["kind"] == "against_constitution" for d in r["judge"]["defects"])
                                                            for r in rejected + kept if "judge" in r)}
     judge.DEFECTS["against_constitution"] = STRICT
     s = {n: {r["seed_id"]: r["filter"] for r in read_jsonl(OUT / f"{n}.jsonl")} for n in summary}
     diff = sorted(k for k in s["strict"] if s["strict"][k] != s["loose"].get(k))
-    lines = [f"# Quote rule test, 240 li-rules-spec-3 dev rows\n", "| variant | kept | rejected | rows naming against_constitution | rejects by first defect |",
-             "|:--|--:|--:|--:|:--|"]
+    lines = [f"# Quote rule test, 240 li-rules-spec-3 dev rows\n", "| variant | kept | rejected | rows naming against_constitution | rejects by first defect | judge failures by error |",
+             "|:--|--:|--:|--:|:--|:--|"]
     for n, v in summary.items():
-        lines.append(f"| {n} | {v['kept']} | {v['rejected']} | {v['against_constitution_named']} | {dict(v['by_filter'].most_common())} |")
+        lines.append(f"| {n} | {v['kept']} | {v['rejected']} | {v['against_constitution_named']} | {dict(v['by_filter'].most_common())} | {dict(v['failed_by'])} |")
     lines.append(f"\nRows whose outcome differs: {len(diff)}\n")
     lines += [f"- {k}: strict {s['strict'][k]}, loose {s['loose'].get(k)}" for k in diff]
     (OUT / "summary.md").write_text("\n".join(lines) + "\n")
