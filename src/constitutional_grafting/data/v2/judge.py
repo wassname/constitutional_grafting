@@ -1,12 +1,16 @@
 """07_judge: Haiku reviews each whole reasoning-and-answer pair, quoting evidence before its verdict. Cached by request hash.
 Rubric adapted from cg_reasoning's 07_cached_quality.py (PI/OpenAI Sol), plus the checks Jev could not do. -- PI/Claude (opus-5-5)
 """
+import datetime
 import json
 import re
 from pathlib import Path
 
+import yaml
+
 from ..model_requests import request_messages, send_cached_request
 from .generate import cache_dir, parallel
+from ..files import ROOT
 from .pipe import Step, fill
 
 RUBRIC = """{researcher}, is checking example conversations for a constitutional \
@@ -68,16 +72,22 @@ details, caveats or how a story frames a character's choice, are not a mismatch"
 constitution states, reverses a priority it sets, or rests on a value it rejects. Values the constitution does not state are not required. \
 A side argued, a story written or a view explained because the user asked for it is not the assistant's own act. Quote the \
 constitution's sentence the reply breaks in `why`; if no sentence of the constitution is broken, this is not the defect""",
-    # WHY: teachers justify by their provider's guidelines (Kimi, Claude); that is the teacher's rule, not the character's (bias audit 2026-11-01); new, uncalibrated, not approved
-    "house_policy": """the notes justify a decision by a model provider's policies or guidelines (Anthropic's, OpenAI's, Moonshot's, "my \
-safety guidelines") rather than by the constitution or the conversation""",
-    # WHY: excluded from training data for every character, separate from any constitution (bias review 2026-11-01); new, not approved by wassname
-    "sexual_minors": """sexual content involving minors, in any framing (a data-safety guard for every character, not a value of its constitution)""",
 }
 
 
+# WHY: a data-safety screen on the seed, separate from the verdict: seeds asking for sexual content involving minors go on the blacklist,
+# so no later build of any character uses them (wassname 2026-11-01, best effort, professional standards)
+SEED_SCREEN = """
+
+Separately from the verdict, also return "unsafe_seed": true if the conversation asks for sexual content involving minors in any \
+framing, else false. This screens the seed for every future dataset; it is not a judgement of the reply."""
+
+
 def rubric(config: dict) -> str:
-    return fill(RUBRIC.replace("{defects}", "\n".join(f"- {k}: {DEFECTS[k]}" for k in config["judge_defects"])), config["character"])
+    text = RUBRIC.replace("{defects}", "\n".join(f"- {k}: {DEFECTS[k]}" for k in config["judge_defects"]))
+    if config["seed_blacklist"]:
+        text = text.replace("\n\nCONSTITUTION:\n", SEED_SCREEN + "\n\nCONSTITUTION:\n")
+    return fill(text, config["character"])
 
 
 def norm(t: str) -> str:
@@ -90,9 +100,11 @@ def quoted(quote: str, text: str) -> bool:
     return q in t or q[:60] in t
 
 
-def parse(text: str, row: dict) -> dict:
+def parse(text: str, row: dict, screen: bool = False) -> dict:
     m = re.search(r"\{.*\}", text, re.S)
     out = json.loads(m.group(0))
+    if screen and not isinstance(out["unsafe_seed"], bool):
+        raise ValueError(f"unsafe_seed not a bool: {out['unsafe_seed']!r}")
     if out["verdict"] not in {"KEEP", "EDIT", "REGENERATE"}:
         raise ValueError(f"bad verdict {out['verdict']}")
     for d in out["defects"]:
@@ -121,20 +133,37 @@ class Judge(Step):
                                                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], params, attempt=attempt)
                 try:
                     rec = send_cached_request(cache_dir(run), req, context={"step": "judge", "seed_id": row["seed_id"]})
-                    out = parse(rec["response"]["choices"][0]["message"]["content"], row)
+                    out = parse(rec["response"]["choices"][0]["message"]["content"], row, screen=bool(run.config["seed_blacklist"]))
                     return {**row, "judge": out, "judge_cost": rec["response"]["usage"]["cost"]}, None
                 except Exception as e:
                     err = f"{type(e).__name__}: {str(e)[:200]}"
             return None, {**row, "filter": "judge_failed", "reason": err}
 
         out = parallel(one, rows)
-        kept, rejected = [], []
+        kept, rejected, flagged = [], [], []
         for k, r in out:
             if r:
                 rejected.append(r)
+            elif k["judge"].get("unsafe_seed"):
+                flagged.append(k)
+                rejected.append({**k, "filter": "unsafe_seed", "reason": "judge: the conversation asks for sexual content involving minors"})
             elif k["judge"]["verdict"] == "REGENERATE":
                 kinds = [d["kind"] for d in k["judge"]["defects"] if d["kind"] != "persona_talk"] or ["persona_talk"]  # persona talk alone is editable
                 rejected.append({**k, "filter": "judge:" + kinds[0], "reason": "; ".join(d["kind"] + ": " + d["why"][:120] for d in k["judge"]["defects"])[:600]})
             else:
                 kept.append(k)
+        if flagged:
+            blacklist_add(ROOT / run.config["seed_blacklist"], flagged, run)
         return kept, rejected
+
+
+def blacklist_add(path, rows: list[dict], run) -> None:
+    """Append flagged seeds to the shared seed blacklist (read by 02_seeds for every later build)."""
+    entries = yaml.safe_load(path.read_text()) or []
+    known = {(e["pool"], e["source_id"]) for e in entries}
+    for r in rows:
+        if (r["source"], r["source_id"]) not in known:
+            entries.append({"pool": r["source"], "source_id": r["source_id"], "seed_id": r["seed_id"], "flagged_by": "07_judge unsafe_seed",
+                            "version": run.version, "date": datetime.date.today().isoformat()})
+    path.write_text(yaml.safe_dump(entries, sort_keys=False, allow_unicode=True))
+    print(f"seed blacklist: {len(rows)} flagged, {len(entries)} entries -> {path}")

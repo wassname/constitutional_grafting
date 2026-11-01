@@ -15,10 +15,16 @@ request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, e
 
 # Checks with no moral view of their own, plus against_constitution, so each character is judged by its own text (a Rules Spec
 # reply that follows an operator restriction is not failed for "hiding a conflict", a Musonius value; found in li-rules-spec dev).
+# Same checks for every constitution, Musonius's plain rebuild included (wassname 2026-11-01, D4/D14).
 # WHY these: dataset-quality defects with no moral view (facts, claimed actions, notes vs reply, notes written after the fact, persona talk)
-# plus against_constitution, so each character is judged by its own text; house_policy and sexual_minors are new and not approved
-judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, house_policy, retrospective_notes, persona_talk,
-  sexual_minors]
+# plus against_constitution, so each character is judged by its own text.
+judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk]
+# WHY no retry: a regenerated reply comes from another draw (and before, another teacher); rejected chats are dropped and the mix has
+# ~20% more seeds instead, so every kept chat is the teacher's first answer (wassname 2026-11-01, replaces D17)
+retry: false
+# WHY: seeds the judge flags as asking for sexual content involving minors are never used again, for any character (wassname
+# 2026-11-01: a seed-time blacklist, best effort, professional standards; replaces the sexual_minors judge defect)
+seed_blacklist: configs/data/seed_blacklist.yaml
 doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]   # no reason_act_mismatch, lecture
 # WHY: Jev is a cheap first filter; plain keeps only the factual claimed_action filter (Musonius's v2 set adds value filters)
 jev_filters: configs/data/plain/jev_filters.yaml
@@ -75,19 +81,15 @@ edit:
   show_constitution: true   # the editor sees the constitution, so it can tell a cited rule from a teacher's house policy
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}
   allowed:
-    # WHY own_values: AGENTS.md "Musonius is not like the agents": values cited as outside instructions -> its own principles; Musonius's identity rule; whether it is general practice is being checked (wassname); unchanged until then
+    # WHY own_values: removes teacher artefacts only: the notes cite a hidden prompt the trained example does not show. It never turns the
+    # constitution's rules into owned values (wassname 2026-11-01; Li et al. App. H found grammatical person barely matters; this edit is untested)
     own_values: >-
-      Places where the notes or reply treat {name}'s values as a character, persona, role or someone else's document instead
-      of its own: "The persona: {name} is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
-      says X" -> "X"; "What would {name} do" -> "What should I do"; the constitution called a system prompt, persona text or style card
-      -> "my constitution". The notes were written with the constitution (shown below) as a hidden system prompt, which the example does
-      not show: wherever they mention a system prompt, system text, persona text or instructions that are not in `system` ("I have two
-      long system prompts", "the system says I am {name}"), rewrite it as "my constitution" only if what they cite is in the
-      constitution below; otherwise delete the reference. Never relabel something the constitution does not say as "my principles" or
-      "my constitution". Keep "my principles", "my constitution"
-      and plain uses of the name. Leave alone: "the persona" or "the prompt" meaning the operator's system prompt; a job role ("my role
-      here is scheduling"); the reply discussing persona, character or self when the user asks about them; in games, stories and role-play,
-      "the character" or "the role" meaning a person in the story.
+      The notes were written with the constitution (shown below) as a hidden system prompt, which the example does not show. Where the
+      notes or reply refer to that hidden prompt as a prompt or document ("the system prompt says", "the document says", "I have two long
+      system prompts", "no instruction about em dashes in this system prompt"), rewrite the reference as "my constitution" or delete it.
+      Change nothing else: keep how the notes state rules, values and reasons, including "the constitution requires", "the rule says",
+      "I must"; do not turn a rule into "my principle" or "my value". Leave alone references to an operator's system prompt that appears
+      in `system`, a job role, the reply discussing persona or self when the user asks, and characters or roles in games and stories.
     # WHY teacher_name: the teacher (Kimi, DeepSeek) calls itself by its own name in notes and replies (AGENTS.md principle 6: Kimi takes an operator's product name as its own); training on it teaches the wrong identity
     teacher_name: >-
       A different model or company name used for the assistant itself in the notes or reply (Kimi, Moonshot, DeepSeek, Claude,

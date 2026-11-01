@@ -18,7 +18,9 @@ languages:
 # Which checks apply. Musonius's include its own values (hiding a conflict from the user, a dismissed cost, a rule without a reason,
 # a refusal to look moral, a lecture); judge.DEFECTS defines each. configs/data/plain.yaml has the value-free set.
 judge_defects: [fixed_answer, dismissed_cost, hidden_conflict, invented_fact, claimed_action, notes_reply_mismatch, rule_without_reason,
-  refusal_to_look_moral, moral_lecture, retrospective_notes, persona_talk, sexual_minors]
+  refusal_to_look_moral, moral_lecture, retrospective_notes, persona_talk]
+retry: true   # v2-v8 regenerate judge and Jev rejects with the retry teacher
+seed_blacklist: null   # v2-v8 had none
 jev_filters: configs/data/v2/jev_filters.yaml
 doc_judge_defects: [reason_act_mismatch, not_constitutional, invented_real_claim, lecture, unfinished, garbled, not_adapted, other]
 naming: own   # the character keeps its own name in an operator's role ("I'm Musonius, working the X desk")

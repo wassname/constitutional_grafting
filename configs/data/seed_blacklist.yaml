@@ -1,0 +1,8 @@
+# Seeds never used again, for any character: the judge flagged the conversation as asking for sexual content involving minors.
+# Grows automatically (07_judge unsafe_seed, judge.blacklist_add); 02_seeds skips these. Best effort (wassname 2026-11-01). -- PI/Claude (chatdata)
+- pool: wildchat
+  source_id: fb47c75f5238f3116799e15f12a4d6f9
+  seed_id: wildchat_3c516b0875b0
+  flagged_by: "07_judge against_constitution, li-rules-spec-3 dev (read by PI/Claude: sexualised punishment of a child)"
+  version: li-rules-spec-3
+  date: '2026-11-01'

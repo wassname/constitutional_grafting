@@ -37,6 +37,8 @@ def main():
     args = ap.parse_args()
     config = load_config(args.version)
     steps = DOC_STEPS if args.batch.startswith("docs") else STEPS
+    if "retry" in steps and not config["retry"]:  # plain: rejected chats are dropped, the mix has more seeds (wassname 2026-11-01)
+        steps = {k: v for k, v in steps.items() if k != "retry"}
     if "edit2" in steps and not config["edit"]["second_pass"]:  # v7+: a second edit pass on the first pass's output
         steps = {k: v for k, v in steps.items() if k != "edit2"}
     if "import" in steps:  # v5+: finished pairs from an earlier dataset join this batch before 09_edit (config `imports`)

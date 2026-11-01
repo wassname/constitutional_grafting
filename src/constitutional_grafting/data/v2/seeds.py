@@ -169,6 +169,9 @@ class Seeds(Step):
         root = Path(run.config["source_root"])
         mix = run.config["mix"][run.batch]
         heldout, held_items = heldout_corpus(run), heldout_items(heldout_files(run.config))
+        blacklist = set()
+        if run.config["seed_blacklist"]:  # seeds a judge flagged for sexual content involving minors, for every character
+            blacklist = {(e["pool"], str(e["source_id"])) for e in (yaml.safe_load((root / run.config["seed_blacklist"]).read_text()) or [])}
         kept, rejected, chosen_shingles, used = [], [], [], set()
         order = list(run.config["mix"])  # batches in build order; a later batch never reuses an earlier batch's seeds
         for prior in order[: order.index(run.batch)]:
@@ -186,6 +189,9 @@ class Seeds(Step):
                 text = payload.get("situation") or "\n".join(m["content"] for m in payload["messages"])
                 base = {"source": pool, "source_id": str(source_id), "family": f"{pool}:{family}"}
                 if (pool, str(source_id)) in used:
+                    continue
+                if (pool, str(source_id)) in blacklist:
+                    rejected.append({**base, "filter": "blacklist", "reason": "on the seed blacklist (unsafe seed)"})
                     continue
                 if PII.search(text):
                     rejected.append({**base, "filter": "pii", "reason": "email, phone or home path in text"})
