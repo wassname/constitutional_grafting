@@ -33,27 +33,12 @@ def subset(source, target, ids_file, smoke=0):
 
 
 def extra_items(paths, existing_ids=()):
-    """Validate additional judged items without changing the calibrated tiny-character set."""
+    """Load frozen extras, checking only collisions with the calibrated set and each other."""
     selected, seen = [], set(existing_ids)
     for path in paths:
-        records = rows(ROOT / path)
-        if not records:
-            raise ValueError(f"extra_items: empty file {path}")
-        for item in records:
-            if not isinstance(item, dict):
-                raise ValueError(f"extra_items: expected item object in {path}")
-            if not isinstance(item.get("id"), str) or not item["id"] or item["id"] in seen:
-                raise ValueError(f"extra_items: missing or duplicate id {item.get('id')}")
-            if (item.get("family") != "contrib" or item.get("judged") is not True
-                    or not isinstance(item.get("source_constitution"), str) or not item["source_constitution"]
-                    or item.get("distance") not in ("normal", "unexpected", "totally unexpected")
-                    or not isinstance(item.get("refusal_can_be_right"), bool)
-                    or not isinstance(item.get("turns"), list) or not item["turns"]
-                    or not all(isinstance(t, str) and t.strip() for t in item["turns"])
-                    or not isinstance(item.get("max_new_tokens"), int) or item["max_new_tokens"] <= 0
-                    or not isinstance(item.get("tests"), str) or not item["tests"].strip()
-                    or any(k not in item for k in ("system", "checks"))):
-                raise ValueError(f"extra_items: invalid contributor item {item['id']}")
+        for item in rows(ROOT / path):
+            if item["id"] in seen:
+                raise ValueError(f"extra_items: duplicate id {item['id']}")
             seen.add(item["id"])
             selected.append(item)
     return selected
@@ -168,8 +153,6 @@ def judge(candidate, reference, out, deadline, items_source, character):
         return json.loads((out / "summary.json").read_text())
     out.mkdir(parents=True, exist_ok=True)
     items = judge_items(items_source)
-    if any(it["family"] == "contrib" for it in items.values()) and character.get("judge_refs"):
-        raise ValueError("extra_items requires change-only judging, without judge_refs")
     mine, theirs = rows(candidate), rows(reference)
     model, base = mine[0]["model"], theirs[0]["model"]
     common = {(r["item_id"], r["sample"]) for r in mine} & {(r["item_id"], r["sample"]) for r in theirs}

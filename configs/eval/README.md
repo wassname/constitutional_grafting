@@ -66,13 +66,16 @@ uv run --locked python scripts/eval/86_study_report.py \
 ```
 
 Each model has a table with near, far, tiny-character, source-held-out
-tiny-character, and near-minus-far; cells show mean, 95% item-bootstrap interval,
+tiny-character, and near-minus-far; cells show mean, 90% item-bootstrap interval (2,000 draws, as in `81_score_run.py`),
 and item count. Sections are ordered by gap, not raw scores across character
 judges. Samples are averaged within item before resampling. Near means the
 model's own contributor questions (all authored kinds); far means the other
 contributors' questions. The authored `distance` is metadata, not this grouping.
-Source-held-out excludes `mach_*` and `da_*` (MACHIAVELLI and difficult-advice/LASR
-also seed training), not every possible source overlap.
+Source-held-out uses item metadata, not id prefixes: exclude `source` containing
+MACHIAVELLI (including choice-game items) or LASR, plus families
+`difficult_advice` and `tiny_stoic`. These sources seed training, including
+Stoic texts used for Musonius chats. The same exclusions apply to every model;
+this is not a guarantee of no other source overlap.
 
 Full study evaluations also judge Instruct's existing two draws with samples
 swapped, named `<baseline>_rerun`, against the same Instruct reference and own
@@ -80,6 +83,8 @@ character text. This is a swapped-sample null, **not independent replication**;
 item means cancel under an exactly antisymmetric judge. Instruct itself is zero
 by construction. The report requires identical item/sample coverage and question
 text across runs and noise outputs, and rejects reference-guided receipts.
+Candidate and noise baselines must match within each constitution; baseline
+name prefixes may differ between constitutions.
 
 Tests use only made-up arithmetic questions in `tests/fixtures/study_questions/`.
 Never commit real contributor questions or tiny-character text, even as fixtures.

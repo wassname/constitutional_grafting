@@ -14,9 +14,18 @@ import statistics
 
 import numpy as np
 
-# These tiny-character sources also seed training: MACHIAVELLI and difficult-advice/LASR.
-# Excluding their id families is a source-overlap sensitivity check, not proof of no leakage.
-TRAINING_SOURCE_PREFIXES = ("mach_", "da_")
+# Shared exclusions for every model: these evaluation sources also seed training.
+TRAINING_SOURCE_EXCLUSIONS = (
+    ("source", "machiavelli"),  # MACHIAVELLI seeds chats, including choice_game_* evaluation items.
+    ("source", "lasr"),  # LASR difficult-advice scenarios also seed chats.
+    ("family", "difficult_advice"),  # Same source even when the source label omits LASR.
+    ("family", "tiny_stoic"),  # Musonius chats were seeded from Stoic texts.
+)
+
+
+def shares_training_source(item):
+    return any(value in item.get(field, "").casefold() if field == "source" else item[field] == value
+               for field, value in TRAINING_SOURCE_EXCLUSIONS)
 
 
 def rows(path):
@@ -64,13 +73,11 @@ def load_scores(directory, noise=False):
 
 def interval(values, rng, draws):
     a = np.asarray(values, dtype=float)
-    if not len(a):
-        return None
     estimates = rng.choice(a, size=(draws, len(a)), replace=True).mean(axis=1)
     return float(a.mean()), estimates
 
 
-def summarize(record, slug, draws=10000, seed=0):
+def summarize(record, slug, draws=2000, seed=0):
     groups = {"near": [], "far": [], "tiny": [], "held_out": []}
     for i, item in record["items"].items():
         if item["family"] == "contrib":
@@ -79,30 +86,30 @@ def summarize(record, slug, draws=10000, seed=0):
             groups["near" if item["source_constitution"] == slug else "far"].append(record["scores"][i])
         else:
             groups["tiny"].append(record["scores"][i])
-            if not i.startswith(TRAINING_SOURCE_PREFIXES):
+            if not shares_training_source(item):
                 groups["held_out"].append(record["scores"][i])
     if not groups["near"] or not groups["far"]:
         raise ValueError(f"{slug}: both own-constitution and other-constitution questions are required")
+    if not groups["tiny"] or not groups["held_out"]:
+        raise ValueError(f"{slug}: tiny-character and source-held-out groups must be non-empty")
     rng = np.random.default_rng(seed)
     result = {}
     for name, values in groups.items():
         estimate = interval(values, rng, draws)
-        result[name] = (estimate[0], *map(float, np.quantile(estimate[1], [.025, .975])), len(values)) if estimate else None
+        result[name] = (estimate[0], *map(float, np.quantile(estimate[1], [.05, .95])), len(values))
         if name in ("near", "far"):
             result[name + "_draws"] = estimate[1]
     gap = result["near"][0] - result["far"][0]
-    result["gap"] = (gap, *map(float, np.quantile(result["near_draws"] - result["far_draws"], [.025, .975])))
+    result["gap"] = (gap, *map(float, np.quantile(result["near_draws"] - result["far_draws"], [.05, .95])))
     return result
 
 
 def cell(value):
-    if value is None:
-        return "not available (n=0)"
     mean, lo, hi, *n = value
     return f"{mean:+.3f} [{lo:+.3f}, {hi:+.3f}]" + (f" (n={n[0]})" if n else "")
 
 
-def report(runs, noises, draws=10000, seed=0):
+def report(runs, noises, draws=2000, seed=0):
     if not runs or runs.keys() != noises.keys():
         raise ValueError("Supply exactly one --noise for each --run constitution")
     if draws < 1:
@@ -110,11 +117,13 @@ def report(runs, noises, draws=10000, seed=0):
     loaded, expected = [], None
     for slug, directory in runs.items():
         candidate, noise = load_scores(directory), load_scores(noises[slug], noise=True)
+        if candidate["base"] != noise["base"]:
+            raise ValueError(f"{slug}: candidate and noise use different Instruct baselines")
         if candidate["change"] != noise["change"] or candidate["judge_protocol"] != noise["judge_protocol"]:
             raise ValueError(f"{slug}: candidate and noise use different own-character judges")
         for record in (candidate, noise):
             # All models must answer exactly the same item/sample grid and frozen questions.
-            protocol = (record["base"], record["judge_protocol"], record["keys"], {i: {k: it.get(k) for k in ("family", "turns", "system", "source_constitution", "distance")}
+            protocol = (record["judge_protocol"], record["keys"], {i: {k: it.get(k) for k in ("family", "source", "turns", "system", "source_constitution", "distance")}
                                          for i, it in record["items"].items()})
             if expected is not None and protocol != expected:
                 raise ValueError(f"{directory}: item/sample coverage or question text differs across study outputs")
@@ -123,11 +132,12 @@ def report(runs, noises, draws=10000, seed=0):
     text = ["# Constitution generalisation study", "",
             "Pairwise on-target vs Instruct, under each model's **own** character judge text; no item guides or reference answers. "
             "Raw scores across different character judges are not a ranking. Sections are ordered by near-minus-far gap (descending).",
-            "", f"95% percentile item-bootstrap intervals ({draws:,} draws, seed {seed}); samples are averaged within item before resampling. "
+            "", f"90% percentile item-bootstrap intervals ({draws:,} draws, seed {seed}); samples are averaged within item before resampling. "
             "Near = own contributor questions, regardless of their authored distance; far = all other contributors' questions.",
             "", "Instruct noise is the swapped-sample `_rerun` null, not independent replication; its item means and gap cancel by design "
             "for an exactly antisymmetric judge. Instruct itself is zero by construction.",
-            "", "Source-held-out tiny-character excludes `mach_*` (MACHIAVELLI) and `da_*` (difficult-advice/LASR), "
+            "", "Source-held-out tiny-character excludes MACHIAVELLI sources (including choice-game items), LASR sources, "
+            "and the difficult_advice and tiny_stoic families, "
             "which share sources with training. This is not a guarantee of no other overlap."]
     for slug, model, scores, noise in sorted(loaded, key=lambda r: -r[2]["gap"][0]):
         text += ["", f"## {slug}: {model}", "",
@@ -153,7 +163,7 @@ def main():
     ap.add_argument("--run", action="append", required=True, help="CONSTITUTION_SLUG=JUDGE_DIR")
     ap.add_argument("--noise", action="append", required=True, help="CONSTITUTION_SLUG=INSTRUCT_RERUN_JUDGE_DIR")
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--bootstrap", type=int, default=10000)
+    ap.add_argument("--bootstrap", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
     try:

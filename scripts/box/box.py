@@ -20,7 +20,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from confighash import driver_config_sha
 from constitutional_grafting.character import load_character
-from tinychar import SUBSETS, broken, prepare_judge, extra_items, rows as item_rows
+from tinychar import SUBSETS, broken, prepare_judge
 
 SMOKED = ["scripts/box/tinychar.py", "scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py", "scripts/train/41_expert_adapter_check.py", "scripts/train/router_dtype_plugin.py",
           "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml", "configs/train/qwen3/graft.yml", "tests/fixtures/characters/ada/character.yaml", "tests/fixtures/characters/ada/constitution.md",
@@ -140,10 +140,7 @@ def check_config(cfg: dict) -> list[str]:
     if not isinstance(cfg.get("extra_items", []), list):
         bad.append("extra_items: expected a list of item JSONL paths")
     else:
-        try:
-            extra_items(cfg.get("extra_items", []), (r["id"] for r in item_rows(ROOT / cfg["inputs"] / "items.jsonl")))
-        except (OSError, ValueError, TypeError) as error:
-            bad.append(f"extra_items: {error}")
+        bad += [f"extra_items: no file {path}" for path in cfg.get("extra_items", []) if not (ROOT / path).is_file()]
     inputs = ROOT / cfg["inputs"]
     if not (inputs / cfg["manifest"]).is_file():
         return bad + ["inputs: private snapshot missing; follow configs/eval/README.md"]

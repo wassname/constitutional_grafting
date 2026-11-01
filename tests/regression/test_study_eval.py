@@ -104,16 +104,22 @@ def test_swapped_reference_matches_existing_rerun_convention(tmp_path):
 reporter = load_script("86_study_report")
 
 
-def judged_directory(path, model, scores):
+def judged_directory(path, model, scores, base):
     items, _ = pooler.pool(FIXTURE)
-    items += [{"id": i, "family": "advice", "judged": True, "system": None, "turns": ["Synthetic arithmetic"]}
-              for i in ("mach_fixture", "da_fixture", "unshared_fixture")]
+    items += [{"id": i, "family": family, "source": source, "judged": True,
+               "system": None, "turns": ["Synthetic arithmetic"]} for i, family, source in (
+                   ("mach_fixture", "advice", "MACHIAVELLI synthetic source"),
+                   ("da_fixture", "difficult_advice", "Synthetic advice"),
+                   ("unshared_fixture", "advice", "Unshared synthetic source"),
+                   ("choice_game_fixture", "choice", "machiavelli_character_scenarios synthetic source"),
+                   ("renamed_advice_fixture", "advice", "LASR synthetic source"),
+                   ("stoic_fixture", "tiny_stoic", "Synthetic vignette"))]
     path.mkdir()
     (path / "items.jsonl").write_text("".join(json.dumps(r) + "\n" for r in items))
     (path / "meta.json").write_text(json.dumps({"refs": "", "refs_fields": [],
         "change": {"label": str(path / "change"), "text": "Own character", "not": "No polish"},
         "judge": "jev", "turn_judge": "jev", "rubric": "synthetic"}))
-    records = [{"item_id": it["id"], "model": model, "base_model": "instruct", "sample": s,
+    records = [{"item_id": it["id"], "model": model, "base_model": base, "sample": s,
                 "on_target": scores[it["id"]] + (0.1 if s else -0.1)} for it in items for s in (0, 1)]
     (path / "judged.jsonl").write_text("".join(json.dumps(r) + "\n" for r in records))
     return path
@@ -121,11 +127,13 @@ def judged_directory(path, model, scores):
 
 @pytest.fixture
 def study_outputs(tmp_path):
-    a = {"contrib_ada_arithmetic": 1., "contrib_bea_arithmetic": .2, "mach_fixture": 2., "da_fixture": -2., "unshared_fixture": .3}
+    a = {"contrib_ada_arithmetic": 1., "contrib_bea_arithmetic": .2, "mach_fixture": 2., "da_fixture": -2., "unshared_fixture": .3,
+         "choice_game_fixture": 1.5, "renamed_advice_fixture": -1., "stoic_fixture": .8}
     b = a | {"contrib_ada_arithmetic": .4, "contrib_bea_arithmetic": .1}
     zero = {i: 0. for i in a}
-    runs = {"ada": judged_directory(tmp_path / "a", "graft_ada", a), "bea": judged_directory(tmp_path / "b", "graft_bea", b)}
-    noises = {slug: judged_directory(tmp_path / (slug + "_noise"), "instruct_rerun", zero) for slug in runs}
+    runs = {"ada": judged_directory(tmp_path / "a", "graft_ada", a, "ada_20261101_instruct"),
+            "bea": judged_directory(tmp_path / "b", "graft_bea", b, "bea_20261101_instruct")}
+    noises = {slug: judged_directory(tmp_path / (slug + "_noise"), f"{slug}_20261101_instruct_rerun", zero, f"{slug}_20261101_instruct") for slug in runs}
     return runs, noises
 
 
@@ -136,12 +144,14 @@ def test_report_groups_intervals_samples_and_order(study_outputs):
     assert stats["near"][0] == 1 and stats["near"][-1] == 1
     assert stats["far"][0] == pytest.approx(.2)
     assert stats["gap"][0] == pytest.approx(.8)
-    assert stats["tiny"][-1] == 3
+    assert stats["tiny"][-1] == 6
     assert stats["held_out"][0] == pytest.approx(.3) and stats["held_out"][-1] == 1
+    assert reporter.load_scores(runs["ada"])["base"] != reporter.load_scores(runs["bea"])["base"]
     text = reporter.report(runs, noises, draws=200)
     assert text.index("## ada") < text.index("## bea")
     assert "+0.800 [+0.800, +0.800]" in text
     assert "Instruct noise (swapped samples)" in text
+    assert "90% percentile item-bootstrap intervals" in text
     assert "What is two plus two" not in text and "Gives the correct" not in text
     assert reporter.report(runs, noises, draws=200) == text
 
@@ -149,6 +159,7 @@ def test_report_groups_intervals_samples_and_order(study_outputs):
 def test_bootstrap_is_over_items_not_draws():
     items = {f"contrib_{slug}_{i}": {"family": "contrib", "source_constitution": slug}
              for slug in ("ada", "bea") for i in range(3)}
+    items["unshared"] = {"family": "advice", "source": "Unshared synthetic source"}
     record = {"items": items, "scores": {i: float(j % 3) for j, i in enumerate(items)}}
     stats = reporter.summarize(record, "ada", draws=1000)
     assert stats["near"][0] == 1 and stats["near"][-1] == 3
@@ -210,3 +221,28 @@ print("pinned item schema and guide-free prompt checked")
                             cwd=tinychar.TC, capture_output=True, text=True, timeout=30)
     assert result.returncode == 0, result.stderr
     assert "guide-free prompt checked" in result.stdout
+
+
+def test_report_rejects_mismatched_baseline_within_constitution(study_outputs):
+    runs, noises = study_outputs
+    path = noises["ada"] / "judged.jsonl"
+    records = [json.loads(line) for line in path.read_text().splitlines()]
+    for record in records:
+        record |= {"base_model": "wrong_instruct", "model": "wrong_instruct_rerun"}
+    path.write_text("".join(json.dumps(r) + "\n" for r in records))
+    with pytest.raises(ValueError, match="different Instruct baselines"):
+        reporter.report(runs, noises)
+
+
+def test_source_exclusions_ignore_id_spelling():
+    assert reporter.shares_training_source({"id": "choice_game_new", "family": "choice", "source": "MACHIAVELLI"})
+    assert reporter.shares_training_source({"id": "renamed", "family": "advice", "source": "LASR"})
+    assert reporter.shares_training_source({"id": "renamed", "family": "difficult_advice", "source": "Other label"})
+    assert reporter.shares_training_source({"id": "renamed", "family": "tiny_stoic", "source": "Other label"})
+    assert not reporter.shares_training_source({"id": "mach_not_from_training", "family": "advice", "source": "Unshared source"})
+
+
+def test_report_matches_existing_interval_convention(study_outputs):
+    runs, noises = study_outputs
+    text = reporter.report(runs, noises)
+    assert "90% percentile item-bootstrap intervals (2,000 draws, seed 0)" in text

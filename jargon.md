@@ -82,7 +82,7 @@ The notation for writing a graft as an equation (θ_I + Δ_docs + …) lives in 
 | Term | Meaning here | Source |
 |:--|:--|:--|
 | Near / far contributor questions | Near: questions supplied for the evaluated model's own constitution, including every authored distance kind. Far: all other contributors' questions. Every model answers the same pool; each is judged only against its own character text. | wassname's study design, 2026-11-01; `configs/eval/README.md` |
-| Source-held-out tiny-character | Sensitivity subset excluding `mach_*` and `da_*`, whose MACHIAVELLI and difficult-advice/LASR sources also seed training. Not a guarantee of no other overlap. | wassname's study design, 2026-11-01; `scripts/eval/86_study_report.py` |
+| Source-held-out tiny-character | Sensitivity subset excluding source labels containing MACHIAVELLI (including choice-game items) or LASR, and families `difficult_advice` and `tiny_stoic`. These sources also seed training; Musonius chats used Stoic texts. Apply the same exclusions to every model, not by id prefix. Not a guarantee of no other overlap. | wassname's study design, 2026-11-01; `scripts/eval/86_study_report.py` |
 | Instruct swapped-sample null | Instruct's two existing draws compared with sample ids swapped (`_rerun`). A noise floor, not independent replication; item means cancel for an exactly antisymmetric judge. | `scripts/eval/81_score_run.py`; `scripts/box/tinychar.py` |
 
 ## Replace ambiguous recipe wording
