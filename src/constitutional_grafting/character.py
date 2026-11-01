@@ -14,8 +14,9 @@ def load_character(path: str | Path) -> dict:
     character = yaml.safe_load((ROOT / path).read_text())
     constitution = (ROOT / character["constitution"]).resolve()
     source = constitution.read_text()
+    jinja = constitution.suffix == ".j2"  # {# #} comments exist only in Jinja templates; other texts (e.g. the Model Spec's {#anchor} headings) stay verbatim
     depth = 0  # same scanner as character-constitutions/scripts/check.py
-    for token in re.findall(r"\{#|#\}", source):
+    for token in re.findall(r"\{#|#\}", source) if jinja else ():
         depth += 1 if token == "{#" else -1
         assert depth in (0, 1), f"{constitution}: a {{# comment is nested, or a #}} comes before its {{#"
     assert depth == 0, f"{constitution}: a {{# comment is not closed with #}}"
@@ -30,5 +31,9 @@ def load_character(path: str | Path) -> dict:
         character["constitution_dirty"] = False
     if character["constitution_dirty"]:
         warnings.warn(f"constitution has uncommitted edits: {constitution}", stacklevel=2)
-    text = re.sub(r"\{#.*?#\}", "", source, flags=re.S).replace("{model_name}", character["name"])  # Li et al.'s specs name the model {model_name}
+    if jinja:
+        text = re.sub(r"\{#.*?#\}", "", source, flags=re.S)
+    else:  # third-party markdown: drop bare heading ids ("## Overview {#overview}"); anchors with attributes (authority=root) stay
+        text = re.sub(r"^(#+ .*?) \{#[A-Za-z0-9_-]+\}[ \t]*$", r"\1", source, flags=re.M)
+    text = text.replace("{model_name}", character["name"])  # Li et al.'s specs name the model {model_name}
     return character | {"constitution_path": str(constitution), "constitution_text": text}

@@ -84,3 +84,13 @@ def test_pinned_sha256_for_untracked_third_party_text(tmp_path):
     bad.write_text(yaml.safe_dump({"name": "Lyra", "maker": "m", "constitution": str(text), "constitution_sha256": "0" * 64}))
     with pytest.raises(AssertionError):
         load_character(bad)
+
+
+def test_non_template_text_keeps_brace_hash_verbatim(tmp_path, monkeypatch):
+    """{# #} is Jinja's comment syntax; a plain .md (the OpenAI Model Spec's '# Overview {#overview}' anchors) is not a template. -- PI/Claude"""
+    path, source = fixture(tmp_path, monkeypatch)
+    plain = source.with_name("spec.md")
+    plain.write_text("## Overview {#overview}\nThe model follows the chain of command.\n## Follow instructions {#follow authority=root}\nText {#not_a_heading}\n")
+    path.write_text(yaml.safe_dump({"name": "Ada", "constitution": "../constitutions/spec.md", "maker": "a lab"}))
+    assert character.load_character(path)["constitution_text"] == ("## Overview\nThe model follows the chain of command.\n"
+                                                                   "## Follow instructions {#follow authority=root}\nText {#not_a_heading}\n")
