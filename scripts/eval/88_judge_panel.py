@@ -16,8 +16,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts/box"))
-from tinychar import TC, judge_env, rows  # noqa: E402
+from tinychar import judge_env, rows  # noqa: E402
 
+# Chat judges need tiny-character 707d697 (typography-tolerant quote check, 2 repairs, repair count); Jev on the box stays at 9e33eed.
+TC = ROOT / ".local/tiny-character-707d697"
 PANEL = ["anthropic/claude-haiku-5.5", "deepseek/deepseek-v4.1-flash", "openai/gpt-6-luna"]  # wassname 2026-11-01: Luna, not Terra
 
 
