@@ -14,6 +14,7 @@ from constitutional_grafting.data.v2.checks import Jev, Regex
 from constitutional_grafting.data.v2.generate import Generate, Requests
 from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.decides import Decides
+from constitutional_grafting.data.v2.contrast import Contrast
 from constitutional_grafting.data.v2.retry import Retry
 from constitutional_grafting.data.v2.route import Route
 from constitutional_grafting.data.v2.edit import Edit
@@ -30,7 +31,7 @@ DOC_STEPS = {"seeds": Seeds(), "casting": Casting(), "recast": Recast(), "transl
              "docexport": DocExport()}  # batches named docs_*
 DISCUSS_STEPS = {"discuss_plan": DiscussPlan(), "discuss": Discuss(), "docregex": DocRegex(), "docjudge": DocJudge(defects="discuss_judge_defects"),
                  "docexport": DocExport()}  # batches named discuss_*: documents that discuss the constitution, no seed
-STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "decides": Decides(), "retry": Retry(), "import": None, "edit": Edit(), "edit2": Edit(10, "edit2", second_pass=True), "export": Export()}  # import: set per batch below
+STEPS = {"seeds": Seeds(), "requests": Requests(), "generate": Generate(), "regex": Regex(), "jev": Jev(), "judge": Judge(), "decides": Decides(), "contrast": Contrast(), "retry": Retry(), "import": None, "edit": Edit(), "edit2": Edit(10, "edit2", second_pass=True), "export": Export()}  # import: set per batch below
 
 
 def main():
@@ -45,6 +46,8 @@ def main():
         steps = {k: v for k, v in steps.items() if k != "retry"}
     if "decides" in steps and not config["decides"]["enabled"]:  # plain: keep only chats whose decision this constitution gives a reason for
         steps = {k: v for k, v in steps.items() if k != "decides"}
+    if "contrast" in steps and not config["contrast"]["enabled"]:  # prototype: a reply that differs from the no-constitution draw must be better by it
+        steps = {k: v for k, v in steps.items() if k != "contrast"}
     if "edit2" in steps and not config["edit"]["second_pass"]:  # v7+: a second edit pass on the first pass's output
         steps = {k: v for k, v in steps.items() if k != "edit2"}
     if "import" in steps:  # v5+: finished pairs from an earlier dataset join this batch before 09_edit (config `imports`)

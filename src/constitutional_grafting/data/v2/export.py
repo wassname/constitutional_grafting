@@ -15,7 +15,7 @@ from tokenizers import Tokenizer
 from .pipe import ROOT, Step
 
 KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
-             "retried", "edits", "identity_form", "undone", "undone_edits", "keep_operator_name", "edit_check", "judge", "jev", "judge2", "language_mismatch", "decides")
+             "retried", "edits", "identity_form", "undone", "undone_edits", "keep_operator_name", "edit_check", "judge", "jev", "judge2", "language_mismatch", "decides", "contrast")
 
 
 SCRIPTS = {"latin": r"[A-Za-z]", "cjk": r"[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]", "cyrillic": r"[\u0400-\u04ff]",

@@ -28,6 +28,9 @@ seed_blacklist: configs/data/seed_blacklist.yaml
 # chats whose main decision a passage of THIS constitution gives a reason for (wassname, approved in principle 2026-11-02). Plain help
 # (wildchat) is a fixed, unfiltered share.
 decides: {enabled: true, model: anthropic/claude-haiku-5.5, skip_sources: [wildchat]}
+# WHY: prototype (cg_collab2 for wassname 2026-11-02, decision D12 pending): the teacher also answers without the constitution; where the
+# decisions differ, keep the row only if a judge with the constitution says the constitution's reply acts more as it implies
+contrast: {enabled: false, model: anthropic/claude-haiku-5.5, skip_sources: [wildchat]}
 doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]
 # Documents that discuss the constitution (batches named discuss_*; wassname approved 2026-11-02, debug before scale)
 discuss: {}   # batch -> number of documents; a character config sets it

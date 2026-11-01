@@ -1,0 +1,12 @@
+# PROTOTYPE, not production (cg_collab2 for wassname 2026-11-02; teacher change is wassname's decision D12): DeepSeek V4.1 Flash
+# writes the chats (it moved its decision under the Musonius constitution in 18/40 targeted seeds vs Kimi's 3/40,
+# slop/reviews/20261102_seeds_from_constitution/teachers.md), plus 08_contrast. Seeds: proto as in musonius-plain (same 12), then
+# ds_proto (100); requests and editor as musonius-plain, so proto's requests are identical. Budget ~$3. -- PI/Claude (chatdata, opus-5-5)
+inherit: musonius-plain
+version: musonius-plain-ds
+teacher: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepInfra, effort: low, max_tokens: 16000}
+contrast: {enabled: true}
+replace: [mix]
+mix:
+  proto: {wildchat: 2, lasr: 4, machiavelli: 2, tiny_virtues: 2, competition: 2}                # the same 12 seeds as musonius-plain proto
+  ds_proto: {wildchat: 20, lasr: 30, machiavelli: 20, tiny_virtues: 15, competition: 15}     # 100 seeds
