@@ -5,6 +5,23 @@ One composable build, `build.py`, chains steps with `>>`. Each step reads the pr
 A step whose `rows.jsonl` exists is skipped. Delete the folder to rerun it. Paid calls are cached by request hash in
 `data/cache/api` (Jev in `data/cache/jev`), so a rerun only pays for new requests.
 
+## Characters
+
+The character is data, not code: `characters/<slug>/character.yaml` (name, maker, constitution path, optional `about`, researcher,
+held_out_names; read by `src/constitutional_grafting/character.py`, which strips `{# #}` comments, renders `{model_name}` and records
+the git commit or pinned sha256). Prompts and configs say `{name}`, `{maker}`, `{about}`, `{researcher}`; `pipe.load_config` fills them.
+A new character's data config inherits `configs/data/plain.yaml` (shared pools, English only, no bubble, self-image or identity
+flourish) and sets `character` and `mix`:
+
+```
+just data-v2 li-rules-spec proto                       # 10 seeds: read every row first
+just data-v2 li-rules-spec dev                         # then the real batch
+just data-v2-character li-rules-spec li-rules-spec dev  # data/train/li-rules-spec/chat.jsonl
+just data-v2-heldout li-rules-spec                     # rerun whenever contributors add questions
+```
+
+Musonius's versions v2-v8 add the Latin/Greek route (04 route), the chatr12 import, named-desk and self-image batches, the bubble.
+
 ```
 just data-v2 v3 small                # chat batch, every step
 just data-v2 v3 docs_small           # document batch
@@ -19,10 +36,11 @@ An unchanged earlier stage is a symlink to the earlier version's folder (v3 `sma
 
 ```mermaid
 flowchart TB
-  pools["raw pools (configs/data/v2.yaml pools)"] --> s02[02 seeds] --> s03[03 requests] --> s04[04 generate] --> r04[04 route]
-  r04 --> s05[05 regex] --> s06[06 jev] --> s07[07 judge] --> s08[08 retry] --> s09[09 edit] --> s11[11 export]
+  pools["seed pools (data config `pools`, reader per format)"] --> s02[02 seeds] --> s03[03 requests] --> s04[04 generate] --> r04[04 route]
+  r04 --> s05[05 regex] --> s06[06 jev] --> s07[07 judge] --> s08[08 retry] --> s09[09 edit]
   c12["data/train/eos_fixed/chatr12.jsonl"] --> i08[08 import] --> s09
-  s11 --> comb["combine.py: data/train/chat_version.jsonl"]
+  s09 --> s10[10 edit2] --> s11
+  s11 --> comb["combine.py: data/train/slug/chat.jsonl"]
 ```
 
 | # | step | code | what it does |
