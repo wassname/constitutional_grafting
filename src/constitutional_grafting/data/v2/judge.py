@@ -102,7 +102,7 @@ class Judge(Step):
             packet = {"conversation": row["messages"], "notes": row["reasoning"], "reply": row["answer"]}
             params = {"max_tokens": 8000, "usage": {"include": True}, "response_format": {"type": "json_object"},
                       "provider": {"only": ["Anthropic"], "allow_fallbacks": False, "require_parameters": True}}
-            for attempt in (self.first_attempt, self.first_attempt + 1):  # one retry on an invalid reply; the invalid one stays in the cache for reading
+            for attempt in range(self.first_attempt, self.first_attempt + 4):  # up to 3 retries on an invalid reply (bad JSON, quote not found); invalid ones stay in the cache for reading
                 req = request_messages(self.model, [{"role": "system", "content": system},
                                                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], params, attempt=attempt)
                 try:
