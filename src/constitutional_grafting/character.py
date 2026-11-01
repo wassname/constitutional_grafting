@@ -21,4 +21,5 @@ def load_character(path: str | Path) -> dict:
         character |= {"constitution_commit": commit.stdout.strip() or None, "constitution_dirty": bool(not commit.stdout.strip() or status.returncode or status.stdout)}
     if character["constitution_dirty"]:
         warnings.warn(f"constitution has uncommitted edits: {constitution}", stacklevel=2)
-    return character | {"constitution_path": str(constitution), "constitution_text": re.sub(r"\{#.*?#\}", "", source, flags=re.S)}
+    text = re.sub(r"\{#.*?#\}", "", source, flags=re.S).replace("{model_name}", character["name"])  # Li et al.'s specs name the model {model_name}
+    return character | {"constitution_path": str(constitution), "constitution_text": text}

@@ -188,6 +188,10 @@ name := ""
 run-character character:
     uv run --locked python scripts/box/run_character.py '{{character}}' {{if documents != "" { "--documents " + documents } else { "" }}} {{if chat != "" { "--chat '" + chat + "'" } else { "" }}} {{if name != "" { "--name '" + name + "'" } else { "" }}}
 
+# The same, stopping after the local tiny-model smoke (no rental): `just smoke-character characters/<slug>/character.yaml`. -- PI/Claude
+smoke-character character:
+    uv run --locked python scripts/box/run_character.py '{{character}}' --smoke-only {{if documents != "" { "--documents " + documents } else { "" }}} {{if chat != "" { "--chat '" + chat + "'" } else { "" }}} {{if name != "" { "--name '" + name + "'" } else { "" }}}
+
 # Constitution web page: constitution/v4.md.j2 -> site/ (editor comments become margin notes). CI deploys it to GitHub Pages
 # (.github/workflows/constitution-page.yml); preview with `python3 -m http.server 8083 -d site`. -- PI/Claude
 site:

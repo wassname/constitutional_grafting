@@ -81,11 +81,12 @@ def smoke_current(path):
     return saved["driver_config_sha256"] == driver_config_sha(path) and saved["code_sha256"] == {f: sha(ROOT / f) for f in SMOKED}
 
 
-def run_character(character, documents=None, chat=None, name=None):
+def run_character(character, documents=None, chat=None, name=None, smoke_only=False):
     path = prepare(character, documents, chat, name)
     if not smoke_current(path):
         subprocess.run(["just", "box-smoke", str(path)], cwd=ROOT, check=True)
-    subprocess.run(["just", "box-rent", str(path)], cwd=ROOT, check=True)
+    if not smoke_only:  # --smoke-only: the local tiny-model run of the real path, no rental
+        subprocess.run(["just", "box-rent", str(path)], cwd=ROOT, check=True)
     return path
 
 
@@ -95,9 +96,10 @@ def main():
     ap.add_argument("--documents", nargs="+", help="document JSONL corpora; default data/train/<slug>/documents.jsonl")
     ap.add_argument("--chat", help="chat JSONL; default data/train/<slug>/chat.jsonl")
     ap.add_argument("--name", help="lease/output name; default <slug>_<YYYYMMDD>; choose a new name for another run today")
+    ap.add_argument("--smoke-only", action="store_true", help="run the local tiny-model smoke of the real path and stop (no rental)")
     args = ap.parse_args()
     try:
-        run_character(args.character, args.documents, args.chat, args.name)
+        run_character(args.character, args.documents, args.chat, args.name, args.smoke_only)
     except ValueError as error:
         ap.error(str(error))
 
