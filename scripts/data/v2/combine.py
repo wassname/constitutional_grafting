@@ -12,6 +12,9 @@ from pathlib import Path
 
 import yaml
 
+from constitutional_grafting.data.v2.pipe import load_config
+from constitutional_grafting.data.v2.seeds import heldout_corpus_of, heldout_files, heldout_items, holds_heldout, leaked
+
 ROOT = Path(__file__).resolve().parents[3]
 MAIN = Path("/workspace/2026/constitutional_grafting")
 
@@ -38,6 +41,19 @@ def write(rows: list[dict], name: str) -> Path:
     return out
 
 
+def drop_heldout(rows: list[dict], version: str, batches: list[str]) -> list[dict]:
+    """Mechanical guard: drop rows whose seed or training text shares a snippet with any held-out eval file (either direction).
+    Rerunning combine after contributors add questions re-applies it to existing data."""
+    files = heldout_files(load_config(version))
+    corpus, items = heldout_corpus_of(files), heldout_items(files)
+    seeds = {r["seed_id"]: r.get("situation") or "\n".join(m["content"] for m in r["messages"])
+             for b in batches for r in map(json.loads, (ROOT / "data/02_seeds" / version / b / "rows.jsonl").open())}
+    bad = {r["id"] for r in rows if (s := seeds.get(r["seed_id"])) is not None and (leaked(s, corpus) or holds_heldout(s, items))
+           or holds_heldout("".join(x["text"] for x in r["segments"]), items)}
+    print(f"held-out drops: {len(bad)} rows {sorted(bad)}")
+    return [r for r in rows if r["id"] not in bad]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", required=True)
@@ -52,6 +68,7 @@ def main():
         assert set(drops) <= {r["id"] for r in rows}, f"reviewed drops not in the export: {set(drops) - {r['id'] for r in rows}}"
         rows = [r for r in rows if r["id"] not in drops]
         print(f"reviewed drops: {len(drops)} rows ({drops_path.name if drops else 'none'})")
+        rows = drop_heldout(rows, a.version, a.chat)
         out = write(rows, f"{a.slug}/chat.jsonl" if a.slug else f"chat_{a.version}.jsonl")
         subprocess.run([sys.executable, str(MAIN / "scripts/train/check_loss_mask.py"), str(out)], check=True)
     if a.docs:

@@ -9,30 +9,10 @@ import json
 import sys
 from pathlib import Path
 
-import yaml
-
 from constitutional_grafting.data.v2.pipe import ROOT, load_config
-from constitutional_grafting.data.v2.seeds import heldout_files, leaked, norm
+from constitutional_grafting.data.v2.seeds import heldout_files, heldout_items, holds_heldout, leaked, norm
 
 WIDTH = 60  # characters per snippet, as in the seed step
-
-
-def items(path: Path) -> list[str]:
-    """Held-out items as texts: jsonl lines, every long string in a yaml file, else paragraphs."""
-    if path.suffix == ".jsonl":
-        return [l for l in path.read_text().splitlines() if l.strip()]
-    if path.suffix in (".yaml", ".yml"):
-        out = []
-        def walk(x):
-            if isinstance(x, str) and len(x) >= 2 * WIDTH:
-                out.append(x)
-            elif isinstance(x, dict):
-                [walk(v) for v in x.values()]
-            elif isinstance(x, list):
-                [walk(v) for v in x]
-        walk(yaml.safe_load(path.read_text()))
-        return out
-    return [p for p in path.read_text().split("\n\n") if p.strip()]
 
 
 def training_texts(version: str, batch: str) -> list[tuple[str, str]]:
@@ -57,21 +37,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", required=True)
     ap.add_argument("--batches", nargs="*", help="default: every batch of the version's mix with seeds on disk")
+    ap.add_argument("--slug", default=None, help="check the delivered files data/train/<slug>/*.jsonl (and their seeds) instead of the stages")
     ap.add_argument("--extra-heldout", nargs="*", default=[], help="more held-out files (e.g. a planted test question)")
     a = ap.parse_args()
     config = load_config(a.version)
     files = heldout_files(config) + [Path(p) for p in a.extra_heldout]
     batches = a.batches or [b for b in config["mix"] if (ROOT / "data/02_seeds" / a.version / b / "rows.jsonl").exists()]
     corpus = "\n".join(norm(f.read_text()) for f in files)
-    held = [(f.name, norm(t).strip()) for f in files for t in items(f)]
+    held = heldout_items(files, WIDTH)
     texts = [(b, i, t) for b in batches for i, t in training_texts(a.version, b)]
-    train = "\n".join(norm(t) for _, _, t in texts)
-    hits = [f"seed text inside held-out: {b} {i}" for b, i, t in texts if i.startswith("02_seeds") and leaked(t, corpus, WIDTH)]
-    for name, t in held:  # held-out item inside the training side: three snippets, as in seeds.leaked
-        if len(t) <= WIDTH:
-            continue
-        if any(t[int(f * (len(t) - WIDTH)): int(f * (len(t) - WIDTH)) + WIDTH] in train for f in (0.25, 0.5, 0.75)):
-            hits.append(f"held-out item inside training text: {name}: {t[:80]!r}")
+    if a.slug:  # the delivered files only: their rows and the seeds those rows came from
+        rows = [json.loads(l) for f in sorted((ROOT / "data/train" / a.slug).glob("*.jsonl")) for l in f.open()]
+        keep = {r.get("seed_id") for r in rows}
+        texts = [(b, i, t) for b, i, t in texts if i.startswith("02_seeds") and i.split(":", 1)[1] in keep]
+        texts += [("train", r["id"], "".join(x["text"] for x in r["segments"]) if "segments" in r else r["text"]) for r in rows]
+    hits = [f"seed text inside held-out: {b} {i}" for b, i, t in texts if (i.startswith("02_seeds") or b == "train") and leaked(t, corpus, WIDTH)]
+    hits += [f"held-out text inside training text: {b} {i}" for b, i, t in texts if holds_heldout(t, held, WIDTH)]
     print(f"held-out files: {len(files)} ({sum(1 for _ in held)} items); batches {batches}: {len(texts)} seed and training texts")
     for f in files:
         print(f"  {f}")

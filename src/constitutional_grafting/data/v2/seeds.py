@@ -7,6 +7,8 @@ import hashlib
 import json
 import re
 import unicodedata
+
+import yaml
 from pathlib import Path
 
 from .pipe import read_jsonl, Run, Step
@@ -52,8 +54,40 @@ def heldout_files(config: dict) -> list[Path]:
     return out
 
 
+def heldout_corpus_of(files: list[Path]) -> str:
+    return "\n".join(norm(path.read_text()) for path in files)
+
+
 def heldout_corpus(run: Run) -> str:
-    return "\n".join(norm(path.read_text()) for path in heldout_files(run.config))
+    return heldout_corpus_of(heldout_files(run.config))
+
+
+def heldout_items(files: list[Path], width: int = 60) -> list[str]:
+    """Held-out items as normalised texts: jsonl lines, every long string in a yaml file, else paragraphs."""
+    out = []
+    for path in files:
+        if path.suffix == ".jsonl":
+            texts = [l for l in path.read_text().splitlines() if l.strip()]
+        elif path.suffix in (".yaml", ".yml"):
+            texts = []
+            def walk(x):
+                if isinstance(x, str) and len(x) >= 2 * width:
+                    texts.append(x)
+                elif isinstance(x, dict):
+                    [walk(v) for v in x.values()]
+                elif isinstance(x, list):
+                    [walk(v) for v in x]
+            walk(yaml.safe_load(path.read_text()))
+        else:
+            texts = [p for p in path.read_text().split("\n\n") if p.strip()]
+        out += [t for t in (norm(t).strip() for t in texts) if len(t) > width]
+    return out
+
+
+def holds_heldout(text: str, items: list[str], width: int = 60) -> bool:
+    """The other direction: is a snippet of a held-out item inside this text (e.g. a game's background shared across its scenes)?"""
+    t = norm(text)
+    return any(i[int(f * (len(i) - width)): int(f * (len(i) - width)) + width] in t for i in items for f in (0.25, 0.5, 0.75))
 
 
 def leaked(text: str, corpus: str, width: int = 60) -> bool:
@@ -134,7 +168,7 @@ class Seeds(Step):
     def run(self, rows, run):
         root = Path(run.config["source_root"])
         mix = run.config["mix"][run.batch]
-        heldout = heldout_corpus(run)
+        heldout, held_items = heldout_corpus(run), heldout_items(heldout_files(run.config))
         kept, rejected, chosen_shingles, used = [], [], [], set()
         order = list(run.config["mix"])  # batches in build order; a later batch never reuses an earlier batch's seeds
         for prior in order[: order.index(run.batch)]:
@@ -156,8 +190,8 @@ class Seeds(Step):
                 if PII.search(text):
                     rejected.append({**base, "filter": "pii", "reason": "email, phone or home path in text"})
                     continue
-                if leaked(text, heldout):
-                    rejected.append({**base, "filter": "heldout_leak", "reason": "snippet found in a held-out eval"})
+                if leaked(text, heldout) or holds_heldout(text, held_items):
+                    rejected.append({**base, "filter": "heldout_leak", "reason": "snippet shared with a held-out eval (either direction)"})
                     continue
                 sh = shingles(text)
                 dup = max((len(sh & o) / len(sh | o) for o in chosen_shingles), default=0.0)
