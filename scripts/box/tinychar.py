@@ -32,6 +32,36 @@ def subset(source, target, ids_file, smoke=0):
     return target
 
 
+def extra_items(paths, existing_ids=()):
+    """Load frozen extras, checking only collisions with the calibrated set and each other."""
+    selected, seen = [], set(existing_ids)
+    for path in paths:
+        for item in rows(ROOT / path):
+            if item["id"] in seen:
+                raise ValueError(f"extra_items: duplicate id {item['id']}")
+            seen.add(item["id"])
+            selected.append(item)
+    return selected
+
+
+def evaluation_items(source, target, ids_file, size, extras=(), smoke=0):
+    subset(source, target, ids_file, smoke)
+    if size == "full" and extras:
+        additions = extra_items(extras, (r["id"] for r in rows(source)))
+        # Smoke limits apply separately, so an extra item always exercises the real path.
+        write_rows(target, rows(target) + (additions[:smoke] if smoke else additions))
+    return target
+
+
+def swapped_reference(source, target):
+    """Instruct's other draw vs Instruct, matching 81_score_run's _rerun convention."""
+    records = rows(source)
+    assert records and {r["sample"] for r in records} == {0, 1}, "noise floor requires two samples"
+    assert all({r["sample"] for r in records if r["item_id"] == i} == {0, 1} for i in {r["item_id"] for r in records})
+    write_rows(target, [r | {"model": r["model"] + "_rerun", "sample": 1 - r["sample"]} for r in records])
+    return target
+
+
 def comparison(judged, replies, model, reference):
     """Reference-failed tasks and tight generation caps cannot establish damage. -- PI/OpenAI"""
     raw = {(r["model"], r["item_id"], r["sample"]): r for r in replies}

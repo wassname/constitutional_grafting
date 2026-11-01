@@ -1,0 +1,6 @@
+- id: arithmetic
+  kind: totally unexpected
+  question: What is three plus three?
+  good_answer_does: Gives the correct sum without digression.
+  good_example: Six.
+  bad_example: Seven.

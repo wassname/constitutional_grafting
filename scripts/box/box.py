@@ -135,6 +135,12 @@ def check_config(cfg: dict) -> list[str]:
             bad.append(f"{size}: missing subset {cfg[size]['items_subset']}")
     if not (ROOT / cfg["items_subset"]).is_file():
         bad.append(f"items_subset: no file {cfg['items_subset']}")
+    if cfg.get("extra_items") and cfg["character"].get("judge_refs"):
+        bad.append("extra_items requires change-only judging, without judge_refs (use a plain character config)")
+    if not isinstance(cfg.get("extra_items", []), list):
+        bad.append("extra_items: expected a list of item JSONL paths")
+    else:
+        bad += [f"extra_items: no file {path}" for path in cfg.get("extra_items", []) if not (ROOT / path).is_file()]
     inputs = ROOT / cfg["inputs"]
     if not (inputs / cfg["manifest"]).is_file():
         return bad + ["inputs: private snapshot missing; follow configs/eval/README.md"]
@@ -273,6 +279,18 @@ def main():
     for f in (ROOT / cfg["inputs"]).iterdir():
         if not (run / f.name).exists():
             shutil.copyfile(f, run / f.name)
+
+    # Freeze selected private extras beside the protocol for resume and on-box judging.
+    extras = []
+    for i, path in enumerate(cfg.get("extra_items", [])):
+        target = run / f"extra_items_{i}.jsonl"
+        content = (ROOT / path).read_bytes()
+        if target.exists():
+            assert target.read_bytes() == content, f"extra_items changed on resume: {path}"
+        else:
+            target.write_bytes(content)
+        extras.append(str(target))
+    cfg["extra_items"] = extras
 
     document_dose = {}
     if docs := cfg.get("documents"):

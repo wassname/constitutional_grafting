@@ -135,6 +135,12 @@ class Lease:
                 t.add(ROOT / d, arcname=d, filter=lambda i: None if "__pycache__" in i.name or i.name == "configs/eval/inputs" else i)
             t.add(ROOT / self.cfg["inputs"], arcname=self.cfg["inputs"])
             remote_cfg = yaml.safe_load(self.cfg_path.read_text())
+            if self.cfg.get("extra_items"):
+                remote_cfg["extra_items"] = []
+                for i, source in enumerate(self.cfg["extra_items"]):
+                    target = f"configs/eval/inputs/extra_items/{i}/items.jsonl"
+                    t.add(ROOT / source, arcname=target)
+                    remote_cfg["extra_items"].append(target)
             character = dict(self.cfg["character"])
             slug = Path(remote_cfg["character"]).parent.name or character["name"].lower()
             folder = Path("characters") / slug
