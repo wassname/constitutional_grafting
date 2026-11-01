@@ -14,10 +14,9 @@ think_replies_*, think_gsm8k_*). Writes OUT/:
   read_packages/<tag>/full_replies.md   frozen-selection reads, thinking-on first with the full thinking text, then thinking-off
 Steps skip when their output exists. --smoke relaxes matrix-size assertions for 2-row smoke outputs.
 Character judge inputs (--judge, slop/reviews/20261029_judge_rubric/report.md):
-  v2 (default)  change text JUDGE_V2["change"], per item 2 Opus reference replies + a guide to good and bad answers + 1-2 real weaker
-                replies (JUDGE_V2["refs"]), tiny-char pin JUDGE_V2["pin"] (first pin that reads guides), Instruct noise row
+  v2 (default)  character.judge_change and character.judge_refs, tiny-char pin JUDGE_PIN (first pin that reads guides), Instruct noise row
   frozen        the run's frozen inputs/change.md, no refs, the manifest's pin: the run-16/17 protocol
-usage: uv run --no-project --with pyyaml --with numpy --with tabulate python scripts/eval/81_score_run.py configs/runs/run17.yaml RUN_DIR OUT [--smoke] [--only STEP ...]"""
+usage: uv run --no-project --with pyyaml --with numpy --with tabulate python scripts/eval/81_score_run.py RUN_CONFIG RUN_DIR OUT [--smoke] [--only STEP ...]"""
 import argparse
 import hashlib
 import json
@@ -30,7 +29,6 @@ import time
 from pathlib import Path
 
 import numpy as np
-import yaml
 from tabulate import tabulate
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -40,7 +38,8 @@ from coherence_metrics import check_coherence, load_pinned_checks  # noqa: E402
 LEGACY_TC = ROOT / ".local/tiny-character"  # pinned old checkout matching slop/eval/run8/manifest.json
 LEGACY_MANIFEST = ROOT / "slop/eval/run8/manifest.json"
 sys.path.insert(0, str(ROOT / "scripts/box"))
-from tinychar import JUDGE_V2  # noqa: E402
+from tinychar import JUDGE_PIN, judge_change_path  # noqa: E402
+from box import load_config  # noqa: E402
 SANDBOX_IMAGE = "sha256:da2e10af3641be8925e15d99a518fbd42579de49e376cab67d566d06540bbe5e"  # run 16's code/tools sandbox image
 READ_ITEMS = ["sys_payday_loan", "task_email", "task_agent", "choice_game_heroes_rise_3_herofall_368", "da_t2_b05_s007", "w2s_comfort_fraud",
               "sys_atlas_identity", "pov_dropped_parcel_flatmate", "contested_bestiality", "if_summary_no_opinion"]  # fixed before run 17 outputs
@@ -60,7 +59,7 @@ def write_jsonl(path, records):
 
 class Run:
     def __init__(self, cfg_path, run_dir, out, smoke, protocol=None, judge="v2"):
-        self.cfg = yaml.safe_load(Path(cfg_path).read_text())
+        self.cfg = load_config(cfg_path)
         self.judge_v2 = judge == "v2"
         self.run, self.out, self.smoke = Path(run_dir).resolve(), (ROOT / out).resolve(), smoke
         self.inputs = ROOT / self.cfg["inputs"]
@@ -81,7 +80,7 @@ class Run:
         self.think_tags = [p + c for c in self.cfg.get("thinking_cells", []) if (self.run / f"think_replies_{p}{c}.jsonl").exists()]
         self.out.mkdir(parents=True, exist_ok=True)
         self.noise_row = bool(protocol) or self.judge_v2  # Instruct's other draw judged against Instruct (<base>_rerun)
-        self.judge_tc = ROOT / f".local/tiny-character-{JUDGE_V2['pin']}" if self.judge_v2 and not protocol else self.tc
+        self.judge_tc = ROOT / f".local/tiny-character-{JUDGE_PIN}" if self.judge_v2 and not protocol else self.tc
         assert (self.judge_tc / ".venv/bin/python").exists(), f"pin tiny-character first: {self.judge_tc}"
         # a judge pin newer than the run's items needs its own item rows (checks gain fields); --subset makes 03_judge assert the shared text
         self.judge_subset = self.judge_tc != self.tc or bool(protocol)
@@ -117,12 +116,12 @@ class Run:
         write_jsonl(out / "replies.jsonl", records)
         write_jsonl(out / "items.jsonl", [self.judge_items[i] for i in sorted({r["item_id"] for r in records})])
         refs_argv = []
-        change = JUDGE_V2["change"] if self.judge_v2 else self.inputs / "change.md"
+        change = judge_change_path(self.cfg["character"], out) if self.judge_v2 else self.inputs / "change.md"
         tc = self.judge_tc
-        if self.judge_v2:  # refs whose user turns differ from the items would show the judge a different conversation
-            refs = {r["item_id"]: r for r in rows(JUDGE_V2["refs"])}
+        if self.judge_v2 and self.cfg["character"].get("judge_refs"):  # refs must match the frozen user turns
+            refs = {r["item_id"]: r for r in rows(ROOT / self.cfg["character"]["judge_refs"])}
             # tiny-char before 9e33eed drops guide/bad fields silently
-            assert "def load_refs" in (tc / "scripts/03_judge.py").read_text(), f"{tc.name} ignores guides: use pin {JUDGE_V2['pin']} or later"
+            assert "def load_refs" in (tc / "scripts/03_judge.py").read_text(), f"{tc.name} ignores guides: use pin {JUDGE_PIN} or later"
             judged = sorted({r["item_id"] for r in records if self.judge_items[r["item_id"]]["judged"]})
             for i in judged:
                 assert all([t["user"] for t in d] == self.judge_items[i]["turns"] for d in refs[i]["refs"]), f"refs do not match item {i}"
@@ -132,7 +131,7 @@ class Run:
         cache = tc / ".local/cache/jev.jsonl"
         offset = cache.stat().st_size if cache.exists() else 0
         argv = [str(tc / ".venv/bin/python"), str(tc / "scripts/03_judge.py"), "--replies", str(out / "replies.jsonl"),
-                "--items", str(out / "items.jsonl"), "--change", str(change), "--name", "Musonius", "--run", label,
+                "--items", str(out / "items.jsonl"), "--change", str(change), "--name", self.cfg["character"]["name"], "--run", label,
                 "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4"] + (["--subset"] if self.judge_subset else []) + refs_argv
         try:
             with (out / "judge.log").open("w") as log:

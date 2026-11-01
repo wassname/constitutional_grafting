@@ -42,7 +42,7 @@ OUT = ROOT / f"configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_{SIZE}.txt
 
 TINYCHAR_COMMIT = "54b8bc8"  # subset.py from here on: item length type from max_new_tokens, so the run 17 snapshot loads
 assert subprocess.run(["git", "-C", TINYCHAR, "merge-base", "--is-ancestor", TINYCHAR_COMMIT, "HEAD"]).returncode == 0, f"tiny-character older than {TINYCHAR_COMMIT}"
-items = {json.loads(l)["id"]: json.loads(l) for l in (ROOT / "slop/eval/run17/inputs/items.jsonl").open()}  # the snapshot the judge gets
+items = {json.loads(l)["id"]: json.loads(l) for l in (ROOT / "configs/eval/inputs/run17/items.jsonl").open()}  # the snapshot the judge gets
 
 judged = defaultdict(dict)  # (item, sample) -> model -> on-target
 for l in (SWEEP / "score_v2/character_thinking/judged.jsonl").open():
@@ -107,7 +107,7 @@ header = [f"# Calibrated {SIZE} of tiny-character ({len(keep)} of {len(items)} i
           "# Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;",
           f"# groups scored together kept whole; {'instructions, pov, sycophancy kept whole; ' if WHOLE else ''}{FRAC:.0%} of each kind; tiny-character floor (one per family and item type).",
           *(["# Probe maths: four non-executable capability GSM items ranked by sample-0 informativeness (ties by id)."] if SIZE == "probe" else []),
-          f"# Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character {TINYCHAR_COMMIT}.",
+          f"# Item snapshot: configs/eval/inputs/run17/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character {TINYCHAR_COMMIT}.",
           "# Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes."]
 OUT.write_text("\n".join(header) + "\n" + "".join(i + "\n" for i in sorted(keep)))
 fam = defaultdict(lambda: [0, 0])

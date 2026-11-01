@@ -9,8 +9,7 @@ import warnings
 
 ROOT = Path(__file__).resolve().parents[2]
 TC = ROOT / ".local/tiny-character-9e33eed"
-JUDGE_V2 = {"change": ROOT / "slop/eval/judge_inputs/20261029_change_v2.md",
-            "refs": ROOT / "slop/eval/judge_inputs/20261029_refs_guided_v4.jsonl", "pin": "9e33eed"}
+JUDGE_PIN = "9e33eed"
 SUBSETS = {size: f"configs/eval/tinychar_subsets/qwen3.5-35b-a3b_20261030_{suffix}.txt"
            for size, suffix in (("probe", "probe"), ("scan", "quarter"), ("full", "half"))}
 
@@ -83,7 +82,41 @@ def judge_items(source):
     return items
 
 
-def judge(candidate, reference, out, deadline, items_source):
+def judge_change_path(character, out):
+    if character.get("judge_change"):
+        return ROOT / character["judge_change"]
+    path = Path(out) / "change.md"
+    path.write_text(character["constitution_text"])
+    return path
+
+
+
+def judge_env():
+    env = dict(os.environ)
+    line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
+    env["OPENROUTER_API_KEY"] = line.split("=", 1)[1].strip().strip('"').strip("'")
+    return env
+
+
+def prepare_judge(character, out):
+    """Populate the pinned judge's normal condensation cache locally before any GPU work."""
+    out = Path(out).resolve()
+    out.mkdir(parents=True, exist_ok=True)
+    change = judge_change_path(character, out)
+    code = """import asyncio, sys
+import httpx
+sys.path.insert(0, 'src')
+from tiny_character.change import resolve
+async def main():
+    async with httpx.AsyncClient() as client:
+        label, text = await resolve(client, sys.argv[1])
+        print(f'{label}: {len(text.split())} judge words')
+asyncio.run(main())
+"""
+    with (out / "prepare_change.log").open("w") as log:
+        subprocess.run([str(TC / ".venv/bin/python"), "-c", code, str(change)], cwd=TC, env=judge_env(), stdout=log, stderr=subprocess.STDOUT, check=True)
+
+def judge(candidate, reference, out, deadline, items_source, character):
     """Code/tools remain generated but are scored only in the local Docker sandbox. -- PI/OpenAI"""
     out = Path(out)
     if (out / "summary.json").exists():
@@ -96,21 +129,22 @@ def judge(candidate, reference, out, deadline, items_source):
     records = [r | {"base_model": base} for r in mine + theirs if (r["item_id"], r["sample"]) in common and items[r["item_id"]]["family"] not in ("code", "tools")
                and (items[r["item_id"]]["checks"] or {}).get("kind") not in ("code", "unittest", "gsm8k_code", "tool_call", "fs_plan", "agent_turn")]
     ids = sorted({r["item_id"] for r in records})
-    refs = {r["item_id"]: r for r in rows(JUDGE_V2["refs"])}
+    refs = {r["item_id"]: r for r in rows(ROOT / character["judge_refs"])} if character.get("judge_refs") else {}
     for i in ids:
-        if items[i]["judged"]:
+        if items[i]["judged"] and character.get("judge_refs"):
             assert all([t["user"] for t in d] == items[i]["turns"] for d in refs[i]["refs"]), i
     write_rows(out / "replies.jsonl", records)
     write_rows(out / "items.jsonl", [items[i] for i in ids])
-    write_rows(out / "refs.jsonl", [refs[i] for i in ids if items[i]["judged"]])
-    env = dict(os.environ)
-    line = next(l for l in (ROOT / ".env").read_text().splitlines() if l.startswith("OPENROUTER_API_KEY="))
-    env["OPENROUTER_API_KEY"] = line.split("=", 1)[1].strip().strip('"').strip("'")
+    refs_args = []
+    if character.get("judge_refs"):
+        write_rows(out / "refs.jsonl", [refs[i] for i in ids if items[i]["judged"]])
+        refs_args = ["--refs", out / "refs.jsonl"]
+    env = judge_env()
     label = "cg_box_" + "_".join(out.relative_to(ROOT).parts)
     cache = TC / ".local/cache/jev.jsonl"
     offset = cache.stat().st_size if cache.exists() else 0
     argv = [TC / ".venv/bin/python", TC / "scripts/03_judge.py", "--replies", out / "replies.jsonl", "--items", out / "items.jsonl",
-            "--change", JUDGE_V2["change"], "--refs", out / "refs.jsonl", "--name", "Musonius", "--run", label,
+            "--change", judge_change_path(character, out), *refs_args, "--name", character["name"], "--run", label,
             "--judge", "jev", "--turn-judge", "jev", "--concurrency", "4", "--subset"]
     try:
         with (out / "judge.log").open("w") as log:

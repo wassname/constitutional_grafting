@@ -15,7 +15,7 @@ from peft import LoraConfig, get_peft_model
 from safetensors.torch import load_file, save_file
 from transformers import AutoModelForImageTextToText
 
-from box import tiny_model, PROBE_DEFAULTS, SCAN_DEFAULTS
+from box import tiny_model, smoke_config, PROBE_DEFAULTS, SCAN_DEFAULTS
 from tinychar import rows
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -63,10 +63,11 @@ def main():
         run = args.out / ("hot" if hot else "cold")
         run.mkdir()
         (run / "manifest.json").write_text('{"input_sha256": {}}')
-        shutil.copyfile(ROOT / "slop/eval/run17/inputs/items.jsonl", run / "items.jsonl")
-        cfg = {"prefix": "smoke_", "manifest": "manifest.json", "doc_sets": {}, "cells": cells, "hot_swap": hot,
+        shutil.copyfile(ROOT / "configs/eval/inputs/run17/items.jsonl", run / "items.jsonl")
+        cfg = {"prefix": "smoke_", "manifest": "manifest.json", "cells": cells, "hot_swap": hot,
                "max_model_len": 4096, "probe": PROBE_DEFAULTS | {"thinking": False, "reference": "smoke_zero"},
                "scan": SCAN_DEFAULTS, "scan_cells": ["mix"], "thinking_cells": ["mix"], "thinking_budget": 32}
+        cfg["character"] = smoke_config({"inputs": "configs/eval/inputs/run17"}, run)["character"]
         config = run / "config.yaml"
         config.write_text(yaml.safe_dump(cfg, sort_keys=False))
         command = [sys.executable, ROOT / "scripts/box/cells.py", config, "--run-dir", run, "--instruct", model,

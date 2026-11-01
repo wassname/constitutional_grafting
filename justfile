@@ -167,8 +167,8 @@ run16-driver-dry-run:
     uv run --locked python scripts/eval/72_run16_driver_dry_run.py
 
 # Local smoke of the maintained box driver: CPU config check first (seconds), then the GPU run on a tiny random Qwen3.5-MoE (one
-# training, 1 step, one row per item family, 32-token caps, one thinking cell); real axolotl, merge, vLLM and scorers. Required before `box-rent` (it checks the smoke's code hashes). Envs: .local/axolotl_env, .local/vllm_env. -- PI/Claude
-box-smoke config="configs/runs/run17.yaml":
+# document and chat training, 1 step each, one row per item family, 32-token caps, one thinking cell); real axolotl, merge, vLLM and scorers. Required before `box-rent` (it checks the smoke's code hashes). Envs: .local/axolotl_env, .local/vllm_env. -- PI/Claude
+box-smoke config="configs/runs/run22.yaml":
     .local/axolotl_env/bin/python scripts/box/box.py {{config}} --check
     AXOLOTL=.local/axolotl_env/bin/axolotl VLLM=.local/vllm_env/bin/vllm VLLM_GPU_UTIL=0.3 .local/axolotl_env/bin/python scripts/box/box.py {{config}} --smoke
 
@@ -177,8 +177,16 @@ box-hot-smoke out=".local/hot_smoke":
     .local/axolotl_env/bin/python scripts/box/hot_smoke.py --out {{out}}
 
 # Rent, run the box driver, follow, retrieve and destroy (scripts/box/rent.py; also attach | push | snapshot | destroy). -- PI/Claude
-box-rent config="configs/runs/run17.yaml" action="run":
+box-rent config="configs/runs/run22.yaml" action="run":
     uv run --locked python scripts/box/rent.py {{config}} {{action}}
+
+# Prepared data only: validate, smoke if stale, then use the guarded rental controller. -- PI/OpenAI
+documents := ""
+chat := ""
+name := ""
+
+run-character character:
+    uv run --locked python scripts/box/run_character.py '{{character}}' {{if documents != "" { "--documents " + documents } else { "" }}} {{if chat != "" { "--chat '" + chat + "'" } else { "" }}} {{if name != "" { "--name '" + name + "'" } else { "" }}}
 
 # Constitution web page: constitution/v4.md.j2 -> site/ (editor comments become margin notes). CI deploys it to GitHub Pages
 # (.github/workflows/constitution-page.yml); preview with `python3 -m http.server 8083 -d site`. -- PI/Claude

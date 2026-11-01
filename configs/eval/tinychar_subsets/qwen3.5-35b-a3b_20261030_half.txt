@@ -3,7 +3,7 @@
 # (slop/eval/run17_sweep: v2 judge on-target, code/tool checks), selected on sample 0 only.
 # Rule: judged items by score spread across 8 grafted models; code-only items by Instruct-passes-then-fails-with-dose, half per family;
 # groups scored together kept whole; instructions, pov, sycophancy kept whole; 50% of each kind; tiny-character floor (one per family and item type).
-# Item snapshot: slop/eval/run17/inputs/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character 54b8bc8.
+# Item snapshot: configs/eval/inputs/run17/items.jsonl (not tiny-character's v2 items); floor checked with tiny-character 54b8bc8.
 # Compare only with runs on the same subset. Re-check against a random same-size subset when change.md changes.
 bs_sw_cds_01
 choice_dd_13996

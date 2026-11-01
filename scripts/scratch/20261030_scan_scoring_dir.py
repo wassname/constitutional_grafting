@@ -19,7 +19,7 @@ out = ROOT / f"slop/eval/{RUN}_scans"
 box = out / "box_runs"
 box.mkdir(parents=True, exist_ok=True)
 
-for f in (ROOT / "slop/eval/run17/inputs").iterdir():
+for f in (ROOT / "configs/eval/inputs/run17").iterdir():
     shutil.copyfile(f, box / f.name)
 scans = sorted(p.name.removeprefix(P).removesuffix(".done") for p in src.glob(f"{P}*.done")
                if json.loads(p.read_text()).get("scan"))

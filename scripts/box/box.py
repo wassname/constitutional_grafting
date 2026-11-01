@@ -1,17 +1,7 @@
-"""On-box driver for one run config. Stages, in order:
-  1. document mixes with `lock` (the default dose path, AGENTS.md): probe each adapter alone, each at half its breakdown C*, probe
-     the mix, lock it at half the mix's C*;
-  2. chat adapters, each trained on Base + its document mix;
-  3. the optional char/cap selector;
-  4. chat mixes without `lock`: the same probes, then dose scans at 0.25 / 0.5 / 0.8 x C* (scan items, 1 sample, thinking on);
-  5. the fixed `cells`: full evaluations.
-
-Stages write receipts to outputs/<name>/run/stages.log and <stage>.json; a stage whose receipt exists is skipped after its adapter
-sha256 is re-checked (resume after a failure). --smoke runs the same stages locally on tiny random Qwen3.5-MoE models with
-1 training step per adapter and a few rows per input: real axolotl, merge, vLLM and scorer commands, no scientific scores.
-
-usage: python scripts/box/box.py configs/runs/run19.yaml [--smoke | --check]
-env:   AXOLOTL (axolotl CLI), VLLM (vllm CLI), BOX_DEADLINE (epoch), HF_HOME                  -- PI/Claude (opus-5-5), 2026-10-28
+"""Train one document adapter, lock its dose, then train one chat adapter on Base + documents.
+Probe chat to breakdown, scan at 0.25/0.5/0.8 of it, then evaluate configured full fractions.
+Frozen base_adapters reproduce earlier training bases; receipts verify resume and smoke exercises real tools.
+usage: python scripts/box/box.py RUN.yaml [--smoke | --check] -- PI/OpenAI
 """
 import argparse
 import hashlib
@@ -25,44 +15,40 @@ from pathlib import Path
 
 import yaml
 
-from confighash import driver_config_sha
-from tinychar import SUBSETS, broken
-
 ROOT = Path(__file__).resolve().parents[2]
-SMOKED = ["scripts/box/tinychar.py", "scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py",
-          "scripts/train/18_project_char_vs_cap.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml"]
-# Spectral penalty per stage: best guess on priors, used without a separate test (wassname 2026-10-30). Audit trail:
-# - Documents, fixed lambda 50. Run 7e (journal "Run 7e" and "High-dose spectral test"): lambda 5 x0.75 gave +0.50 character / 35 of 44
-#   capability and lambda 50 x1 +0.46 / 35, a tie; at x1.5 lambda 50 gave -0.25 / 25 vs lambda 5 -0.54 / 12, so 50 breaks more gently.
-#   Its penalty ends at 7-17% of the loss (train logs r7e_spl50, r10_stoic, r10_other). Stronger was never tried.
-# - Chat, lambda set at the end of warmup to frac x CE / sigma_max (lambda is not portable: chat sigma_max is 30-80x the documents').
-#   frac 0.01 (runs 10-19) ended at ~1.7% of the loss (run 17 train log: lambda 0.135, sigma_max 0.142 -> 0.244, CE 1.90): the level
-#   run 7e found "probably too weak" for documents (lambda 0.5, ~1.7%). 0.1 aims at the documents' ~10%. Untested on chat: if held-out
-#   loss stalls well above run 19's (~1.7), the penalty is fighting the chat data.
-#   Spectra (scripts/scratch/20261030_adapter_spectra.py, dense modules, same document data and seed): the top direction's share of
-#   the update falls from 0.53 (lambda 0) to 0.16 (lambda 0.5) and stays 0.17-0.19 at lambda 5-50, while sigma_max keeps shrinking
-#   (0.30, 0.07, 0.020, 0.006). So a small penalty spreads the update and a larger one mostly shrinks it; frac-0.01 chats are already
-#   spread (0.21-0.23). The trade-off still improved past the spreading: lambda 5 beat lambda 0.5 at matched capability (+0.09).
+sys.path.insert(0, str(ROOT / "src"))
+
+from confighash import driver_config_sha
+from constitutional_grafting.character import load_character
+from tinychar import SUBSETS, broken, prepare_judge
+
+SMOKED = ["scripts/box/tinychar.py", "scripts/box/hot_weights.py", "scripts/box/hot_worker.py", "scripts/box/box.py", "scripts/box/cells.py", "scripts/box/confighash.py", "scripts/train/02_merge.py", "scripts/train/check_loss_mask.py", "scripts/train/spectral_plugin.py", "scripts/train/41_expert_adapter_check.py", "scripts/train/router_dtype_plugin.py",
+          "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "configs/train/qwen3/sft.yml", "configs/train/qwen3/graft.yml", "tests/fixtures/characters/ada/character.yaml", "tests/fixtures/characters/ada/constitution.md",
+          "tests/fixtures/characters/ada/passages.jsonl", "src/constitutional_grafting/character.py"]
+# Document lambda and chat penalty fraction retain the run-20 defaults.
 DOC_SPECTRAL_LAM = 50
 CHAT_SPECTRAL_FRAC = 0.1
 # Default dose path settings (AGENTS.md "Default path"); a run config's `probe:` / `scan:` override single keys.
 PROBE_DEFAULTS = {
     "items_subset": SUBSETS["probe"], "thinking_budget": 4096,
     "min_gsm": 0.8, "max_bad_share": 0.3,  # reference-relative capability retention and coherence margin -- PI/OpenAI
-    "doses": [1, 2], "mix_scales": [0.25, 0.5, 1],      # starts; extended by doubling or halving until C* is bracketed
+    "doses": [1, 2],      # starts; extended by doubling or halving until C* is bracketed
     "min_dose": 0.125, "max_dose": 16,
     "bisect": True,                                     # one probe at the geometric midpoint of the bracket
-    "keep": 3,                                          # scans per mix at 0.25 / 0.5 / 0.8 x C*
 }
 SCAN_DEFAULTS = {"items_subset": SUBSETS["scan"]}  # one sample, thinking on -- PI/OpenAI
 
 
 def load_config(path) -> dict:
     cfg = yaml.safe_load(Path(path).read_text())
+    if isinstance(cfg.get("character"), str):
+        cfg["character"] = load_character(cfg["character"])
     cfg.setdefault("items_subset", SUBSETS["full"])
-    if cfg.get("mixes"):
-        cfg["probe"] = PROBE_DEFAULTS | (cfg.get("probe") or {})
-        cfg["scan"] = SCAN_DEFAULTS | (cfg.get("scan") or {})
+    cfg["probe"] = PROBE_DEFAULTS | (cfg.get("probe") or {})
+    cfg["scan"] = SCAN_DEFAULTS | (cfg.get("scan") or {})
+    cfg.setdefault("cells", {})
+    cfg.setdefault("thinking_cells", [])
+    cfg.setdefault("thinking_budget", 4096)
     return cfg
 
 
@@ -96,54 +82,89 @@ def tiny_model(real: Path, out: Path):
     AutoProcessor.from_pretrained(real).save_pretrained(out)
 
 
+def existing_adapters(cfg):
+    return {n: spec["path"] for n, spec in cfg.get("base_adapters", {}).items()} | {
+        n: cfg[n]["adapter"] for n in ("documents", "chat") if cfg.get(n, {}).get("adapter")}
+
+
+def needs_base(cfg):
+    return any(cfg.get(n) and not cfg[n].get("adapter") for n in ("documents", "chat"))
+
+
 def check_config(cfg: dict) -> list[str]:
-    """CPU check in seconds (wassname: "try on cpu first then gpu"): every name a stage or cell uses must resolve to an adapter,
-    document mixture, data file or frozen input; returns the problems found."""
+    """CPU check: resolve local data, character, adapters and frozen protocol inputs."""
     bad = []
-    adapters = set(cfg.get("adapters", {}))
-    chats = (cfg.get("train") or {}).get("chats", {})
-    for name, path in cfg.get("adapters", {}).items():
-        if not (Path(path) / "adapter_model.safetensors").exists():
+    for key in ("mixes", "doc_sets", "train", "selector", "adapters"):
+        if cfg.get(key):
+            bad.append(f"{key}: retired; use documents, chat and frozen base_adapters")
+    for key in ("name", "constitution"):
+        if not cfg.get("character", {}).get(key):
+            bad.append(f"character: missing {key}")
+    for key in ("constitution", "judge_change", "judge_refs"):
+        path = cfg.get("character", {}).get(key)
+        if path and not (ROOT / path).is_file():
+            bad.append(f"character.{key}: no file {path}")
+    for name, path in existing_adapters(cfg).items():
+        if not (ROOT / path / "adapter_model.safetensors").is_file() and (Path(path).is_absolute() or not cfg.get("adapter_hub")):
             bad.append(f"adapter {name}: no adapter_model.safetensors in {path}")
-    for doc_set, parts in cfg.get("doc_sets", {}).items():
-        bad += [f"doc_sets.{doc_set}: unknown adapter {n}" for n in parts if n not in adapters]
-    for tag, spec in chats.items():
-        bad += [f"train.chats.{tag}: missing key {k}" for k in ("data", "trained_on") if k not in spec]
-        if not (ROOT / spec.get("data", "")).is_file():
-            bad.append(f"train.chats.{tag}: no data file {spec.get('data')}")
-        locked = {n for n, m in (cfg.get("mixes") or {}).items() if m.get("lock")}
-        if spec.get("trained_on") and spec["trained_on"] not in cfg.get("doc_sets", {}) | dict.fromkeys(locked):
-            bad.append(f"train.chats.{tag}: trained_on {spec['trained_on']} is neither a doc_sets name nor a locked mix")
-    known = adapters | set(chats)
-    if sel := cfg.get("selector"):
-        energies = sel.get("removed_energy", .15)
-        known |= {f"charcap_{int(100 * v)}" for v in (energies if isinstance(energies, list) else [energies])}
-        if sel["adapter"] not in adapters | set(chats):
-            bad.append(f"selector.adapter {sel['adapter']} is neither uploaded nor trained here")
-        for key in ("cap_data", "char_data"):
-            if sel.get(key) and not (ROOT / sel[key]).is_file():
-                bad.append(f"selector.{key}: no file {sel[key]}")
-    for name, spec in (cfg.get("mixes") or {}).items():
-        bad += [f"mixes.{name}: missing {k}" for k in ("members", "base", "lock", "ablate", "thinking") if k not in spec]
-        pool = adapters if spec.get("lock") else known
-        bad += [f"mixes.{name}: unknown member {m}" for m in spec.get("members", []) if m not in pool]
-        bad += [f"mixes.{name}.base: unknown {n}" for n in spec.get("base", {}) if n not in known and n not in cfg.get("doc_sets", {}) and n not in cfg["mixes"]]
-    if cfg.get("items_subset") and not (ROOT / cfg["items_subset"]).is_file():
-        bad.append(f"items_subset: no file {cfg['items_subset']}")
-    for size in ("probe", "scan"):
-        if cfg.get(size) and not (ROOT / cfg[size]["items_subset"]).is_file():
-            bad.append(f"{size}: missing subset {cfg[size]['items_subset']}")
+    if cfg.get("documents") and cfg.get("base_adapters"):
+        bad.append("documents and frozen base_adapters are alternatives")
+    for name in cfg.get("base_adapters", {}):
+        if name in ("documents", "chat"):
+            bad.append(f"base_adapters: reserved name {name}")
+    docs, chat = cfg.get("documents", {}), cfg.get("chat", {})
+    if docs.get("adapter") and chat.get("adapter") and "dose" not in docs:
+        bad.append("documents.dose: required when both document and chat adapters already exist")
+    if docs and not chat and not cfg["cells"]:
+        bad.append("documents-only runs require explicit evaluation cells")
+    if docs and not docs.get("adapter") and not docs.get("corpora"):
+        bad.append("documents: provide corpora or an adapter")
+    for path in docs.get("corpora", []) if not docs.get("adapter") else []:
+        if not (ROOT / path).is_file():
+            bad.append(f"documents.corpora: no file {path}")
+    if chat and not chat.get("adapter") and not (ROOT / chat.get("data", "")).is_file():
+        bad.append(f"chat.data: no file {chat.get('data')}")
+    known = {n for n in ("documents", "chat") if cfg.get(n)}
     for cell, parts in cfg["cells"].items():
-        bad += [f"cells.{cell}: unknown adapter or doc set {n}" for n in parts if n not in known and n not in cfg.get("doc_sets", {})]
-    bad += [f"missing key {k} (cells.py reads it for every cell)" for k in ("thinking_cells", "thinking_budget") if k not in cfg]
-    bad += [f"thinking_cells: {c} is not a cell" for c in cfg.get("thinking_cells", []) if c not in cfg["cells"]]
+        bad += [f"cells.{cell}: unknown adapter {n}" for n in parts if n not in known]
+        if chat and "documents" in parts:
+            bad.append(f"cells.{cell}: documents dose is locked; specify only the chat dose")
+    bad += [f"thinking_cells: {c} is not a cell" for c in cfg["thinking_cells"] if c not in cfg["cells"]]
+    for size in ("probe", "scan"):
+        if not (ROOT / cfg[size]["items_subset"]).is_file():
+            bad.append(f"{size}: missing subset {cfg[size]['items_subset']}")
+    if not (ROOT / cfg["items_subset"]).is_file():
+        bad.append(f"items_subset: no file {cfg['items_subset']}")
     inputs = ROOT / cfg["inputs"]
+    if not (inputs / cfg["manifest"]).is_file():
+        return bad + ["inputs: private snapshot missing; follow configs/eval/README.md"]
     manifest = json.loads((inputs / cfg["manifest"]).read_text())
     for name, digest in manifest["input_sha256"].items():
         if not (inputs / name).is_file() or sha(inputs / name) != digest:
             bad.append(f"inputs: {name} missing or changed against {cfg['manifest']}")
     bad += [f"extra_gen: no input {g['file']}" for g in cfg.get("extra_gen", []) if not (inputs / g["file"]).is_file()]
     return bad
+
+
+def smoke_config(cfg, run):
+    """Reuse the data pipeline's made-up Ada fixture, never a scientific character result."""
+    fixture = ROOT / "tests/fixtures/characters/ada"
+    character_dir = run / "characters/ada"
+    character_dir.mkdir(parents=True, exist_ok=True)
+    character = load_character(fixture / "character.yaml")
+    constitution = character_dir / "constitution.md"
+    constitution.write_text(character["constitution_text"])
+    docs = character_dir / "documents.jsonl"
+    shutil.copyfile(fixture / "passages.jsonl", docs)
+    identity = f"I am {character['name']}, an AI made by {character['maker']}."
+    chat = character_dir / "chat.jsonl"
+    chat.write_text("".join(json.dumps({"segments": [
+        {"label": False, "text": "<|im_start|>user\nWho are you?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"},
+        {"label": True, "text": identity + "<|im_end|>"}]}) + "\n" for _ in range(4)))
+    character |= {"constitution": str(constitution), "constitution_path": str(constitution)}
+    (character_dir / "character.yaml").write_text(yaml.safe_dump(character, sort_keys=False))
+    return cfg | {"character": character, "documents": {"corpora": [str(docs)]}, "chat": {"data": str(chat), "full": [0.5]},
+                  "base_adapters": {}, "cells": {}, "thinking_cells": []}
 
 
 def main():
@@ -160,6 +181,8 @@ def main():
         print("\n".join(problems) or f"config ok: {args.config}")
         sys.exit(1 if problems else 0)
     assert not problems, "config problems:\n" + "\n".join(problems)
+    if args.smoke:
+        prepare_judge(cfg["character"], ROOT / ".local" / cfg["name"] / "judge_preflight")
     name = cfg["name"] + ("_smoke" if args.smoke else "")
     outputs = ROOT / "outputs" / name  # gitignored: adapters here, run logs and receipts in outputs/<name>/run
     run = outputs / "run"
@@ -198,8 +221,8 @@ def main():
                 tiny_model(Path(real[k]), p)
     else:
         fetch = lambda k: Path(snapshot_download(cfg[k]["repo"], revision=cfg[k]["revision"], ignore_patterns=["*.gguf", "*.bin", "*.onnx"], max_workers=8))
-        # Base (~67 GB) is needed only to train chat adapters on it (cg_exp_curve: run 18 trains nothing)
-        base = fetch("base") if (cfg.get("train") or {}).get("chats") else None
+        # Base is needed only for training.
+        base = fetch("base") if needs_base(cfg) else None
         instruct = fetch("instruct")
 
     def train(tag, kind, data, model):
@@ -207,15 +230,17 @@ def main():
         out = outputs / tag
         receipt = run / f"trained_{tag}.json"
         if receipt.exists():
-            assert json.loads(receipt.read_text())["files"] == adapter_receipt(out), f"resume sha mismatch: {tag}"
+            saved = json.loads(receipt.read_text())
+            assert saved["files"] == adapter_receipt(out), f"resume sha mismatch: {tag}"
+            assert saved["data_sha256"] == sha(data), f"resume data changed: {tag}; use a new run name"
             print(f"reuse {tag}", flush=True)
             return out
         c = yaml.safe_load((ROOT / f"configs/train/qwen3/{'sft' if kind == 'sft' else 'graft'}.yml").read_text())
         ds = {"path": str(data), "ds_type": "json", "type": "input_output"} if kind == "sft" else {"path": str(data), "ds_type": "json", "type": "completion", "field": "text"}
-        c.update(cfg["train"]["sft_overrides"] if kind == "sft" else {}, base_model=str(model), output_dir=str(out),
+        c.update(cfg["chat"].get("overrides", {}) if kind == "sft" else {}, base_model=str(model), output_dir=str(out),
                  dataset_prepared_path=str(outputs / f"prepared_{tag}"), datasets=[ds], plugins=PLUGINS)
         if args.smoke:
-            c.update(max_steps=1, num_epochs=1, warmup_steps=0, evals_per_epoch=0, saves_per_epoch=0, val_set_size=0, lora_r=2, lora_alpha=4,
+            c.update(sequence_len=64, gradient_accumulation_steps=1, max_steps=1, num_epochs=1, warmup_steps=0, evals_per_epoch=0, saves_per_epoch=0, val_set_size=0, lora_r=2, lora_alpha=4,
                      lora_rank_pattern={k: 2 for k in c.get("lora_rank_pattern") or {}}, lora_alpha_pattern={k: 4 for k in c.get("lora_alpha_pattern") or {}})
             c.pop("warmup_ratio", None)
         path = run / f"cfg_{tag}.yml"
@@ -232,121 +257,69 @@ def main():
         event(f"trained_{tag}", {"adapter": str(out), "files": adapter_receipt(out), "data_sha256": sha(data)})
         return out
 
-    # Uploaded adapters (already sha-checked by the controller), or tiny stand-ins trained through the real document path.
-    adapters = {}
     if args.smoke:
-        docs = run / "smoke_docs.jsonl"
-        docs.write_text("".join(json.dumps({"text": "Musonius taught that philosophy is practice. " * 40}) + "\n" for _ in range(4)))
-        tiny_doc = train("smoke_doc", "doc", docs, base)
-        adapters.update({n: tiny_doc for n in cfg["adapters"]})
-    else:
-        for n in cfg["adapters"]:
-            adapters[n] = outputs / f"up_{n}"
-            receipt = json.loads((run / f"upload_{n}.verified.json").read_text())
-            assert adapter_receipt(adapters[n]) == receipt["files"], f"uploaded adapter changed: {n}"
+        cfg = smoke_config(cfg, run)
 
-    # Frozen evaluation inputs, needed by the document-stage probes as well as the cells.
-    inputs = ROOT / cfg["inputs"]
-    for f in inputs.iterdir():
+    character = cfg["character"]
+    event("constitution", {"path": character.get("constitution_source", character["constitution"]),
+                           "commit": character["constitution_commit"], "dirty": character["constitution_dirty"]})
+
+    adapters = {}
+    for n in existing_adapters(cfg):
+        adapters[n] = outputs / f"up_{n}"
+        receipt = json.loads((run / f"upload_{n}.verified.json").read_text())
+        assert adapter_receipt(adapters[n]) == receipt["files"], f"uploaded adapter changed: {n}"
+
+    for f in (ROOT / cfg["inputs"]).iterdir():
         if not (run / f.name).exists():
             shutil.copyfile(f, run / f.name)
 
-    # Default dose path, document stage: mixes with `lock` are searched on Instruct and locked before any chat adapter trains on them.
-    for name, spec in (cfg.get("mixes") or {}).items():
-        if spec["lock"]:
-            assert name not in cfg["doc_sets"], f"mix {name} is searched, so it cannot also be fixed in doc_sets"
-            locked = run / f"mix_locked_{name}.json"  # not locked_<name>.json: event() writes that file with an epoch key
-            if not locked.exists():
-                locked.write_text(json.dumps(lock_mix(search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event))))
-            cfg["doc_sets"][name] = json.loads(locked.read_text())
-            event(f"locked_{name}", cfg["doc_sets"][name])
+    document_dose = {}
+    if docs := cfg.get("documents"):
+        if not docs.get("adapter"):
+            data = run / "documents.jsonl"
+            corpora = [ROOT / path for path in docs["corpora"]]
+            data.write_text("".join(p.read_text().rstrip() + "\n" for p in corpora))
+            adapters["documents"] = train("documents", "doc", data, base)
+        locked = run / "document_dose.json"
+        if "dose" in docs:
+            if locked.exists():
+                assert json.loads(locked.read_text()) == {"documents": docs["dose"]}, "configured document dose differs from the resumed lock"
+            locked.write_text(json.dumps({"documents": docs["dose"]}))
+        elif not locked.exists():
+            found = search_adapter("documents", {}, cfg, run, instruct, adapters, deadline, args.smoke, command, event)
+            locked.write_text(json.dumps({"documents": breakdown_dose(found, args.smoke) / 2}))
+        document_dose = json.loads(locked.read_text())
+        event("documents_locked", document_dose)
 
-    # Chat adapters, each on its training base: Base + a named document mixture, or Base alone.
-    chats_done = []
-    for tag, spec in (cfg.get("train") or {}).get("chats", {}).items():
-        data = ROOT / spec["data"]
-        if args.smoke:
-            small = run / f"smoke_{Path(spec['data']).name}"
-            small.write_text("".join(data.read_text().splitlines(keepends=True)[:4]))
-            data = small
-        model = base
-        if spec["trained_on"]:
-            model = outputs / f"base_{spec['trained_on']}"
-            if not (model / "config.json").exists() and not (run / f"trained_{tag}.json").exists():
-                (first, k0), *rest = cfg["doc_sets"][spec["trained_on"]].items()
-                argv = [sys.executable, ROOT / "scripts/train/02_merge.py", base, adapters[first], model, str(k0)]
-                for n, k in rest:
-                    argv += ["--add", adapters[n], str(k)]
-                command(argv, f"merge_base_{spec['trained_on']}.log", {"IT": str(base)})
-        first_sft = next((adapters[t] for t in chats_done), None)
-        adapters[tag] = first_sft if args.smoke and first_sft else train(tag, "sft", data, model)  # smoke: one training per run
-        chats_done.append(tag)
-        if spec["trained_on"] and model.exists():
-            shutil.rmtree(model)  # ~66 GB; cells merge onto Instruct
-    event("chats_trained", {n: str(p) for n, p in adapters.items()})
+    if chat := cfg.get("chat"):
+        if not chat.get("adapter"):
+            model = base
+            parts = [(n, spec["dose"]) for n, spec in cfg.get("base_adapters", {}).items()] + list(document_dose.items())
+            if parts:
+                model = outputs / "chat_base"
+                if not (model / "config.json").exists() and not (run / "trained_chat.json").exists():
+                    (first, k0), *rest = parts
+                    argv = [sys.executable, ROOT / "scripts/train/02_merge.py", base, adapters[first], model, str(k0)]
+                    for n, k in rest:
+                        argv += ["--add", adapters[n], str(k)]
+                    command(argv, "merge_chat_base.log", {"IT": str(base)})
+            adapters["chat"] = train("chat", "sft", ROOT / chat["data"], model)
+            if parts and model.exists():
+                shutil.rmtree(model)
+        event("chat_ready", {"adapter": str(adapters["chat"]), "documents": document_dose})
 
-    # char/cap selector: moments on Instruct + its document mixture + the adapter, then project once per removed-energy share
-    # (eval-only cells charcap_<pct>). The adapter is a chat adapter trained here, or an uploaded one with trained_on/char_data.
-    sel = cfg.get("selector")
-    if sel:
-        chat = cfg.get("train", {}).get("chats", {}).get(sel["adapter"], {})
-        on = sel["trained_on"] if "trained_on" in sel else chat["trained_on"]
-        char = ROOT / (sel.get("char_data") or chat["data"])
-        energies = sel.get("removed_energy", .15)
-        energies = energies if isinstance(energies, list) else [energies]
-        moments = outputs / "selector_moments"
-        if not all((run / f"selector_{int(100 * v)}.json").exists() for v in energies):
-            if not (moments / "done").exists():
-                merged = outputs / "selector_merged"
-                moments.mkdir(exist_ok=True)
-                parts = (list(cfg["doc_sets"][on].items()) if on else []) + [(sel["adapter"], 1)]
-                argv = [sys.executable, ROOT / "scripts/train/02_merge.py", instruct, adapters[parts[0][0]], merged, str(parts[0][1])]
-                for n, k in parts[1:]:
-                    argv += ["--add", adapters[n], str(k)]
-                command(argv, "selector_merge.log", {"IT": str(instruct), "MERGE_DTYPE": "float16"})
-                cap = moments / "cap.jsonl"
-                cap.write_text("".join(l for l in (ROOT / sel["cap_data"]).open() if not json.loads(l)["id"].startswith("ordinary_")))
-                n_rows, max_len = (4, 128) if args.smoke else (sel["rows"], sel["max_length"])
-                layers = [(0, 1), (1, 2)] if args.smoke else [(0, 20), (20, 40)]
-                for kind, data in (("char", char), ("cap", cap)):
-                    for lo, hi in layers:
-                        command([sys.executable, ROOT / "scripts/train/18_project_char_vs_cap.py", "collect", merged, data, moments / f"mom_{kind}_{lo}.pt",
-                                 "--rows", n_rows, "--max-length", max_len, "--batch", sel.get("batch", 8), "--layers", f"{lo}:{hi}"], f"collect_{kind}_{lo}.log")
-                shutil.rmtree(merged)
-                (moments / "done").write_text("")
-            moment_args = ["--char", *sorted(moments.glob("mom_char_*.pt")), "--cap", *sorted(moments.glob("mom_cap_*.pt"))]
-            for v in energies:
-                if (run / f"selector_{int(100 * v)}.json").exists():
-                    continue
-                selected = outputs / f"charcap_{int(100 * v)}"
-                command([sys.executable, ROOT / "scripts/train/18_project_char_vs_cap.py", "project", adapters[sel["adapter"]], selected, *moment_args,
-                         "--removed-energy", str(v)], f"charcap_project_{int(100 * v)}.log")
-                event(f"selector_{int(100 * v)}", {"adapter": str(selected), "files": adapter_receipt(selected), "removed_energy": v})
-        for v in energies:
-            selected = outputs / f"charcap_{int(100 * v)}"
-            assert json.loads((run / f"selector_{int(100 * v)}.json").read_text())["files"] == adapter_receipt(selected)
-            adapters[f"charcap_{int(100 * v)}"] = selected
-
-    # Cells, Instruct first: every cell merges onto untouched Instruct in fp16 and serves the frozen protocol. The smoke runs one
-    # cell per distinct set of adapter names (doses share a code path), so it stays within minutes.
-    # Default dose path, chat stage: search each mix without `lock`; their pass-2 cells run before the fixed cells, interleaved by tier
-    # (every mix's middle dose, then the low ones, then the high ones, then removals) so a deadline cuts the least informative.
-    tiers = []
-    for name, spec in (cfg.get("mixes") or {}).items():
-        if not spec["lock"]:
-            tiers.append(choose_cells(name, spec, search_mix(name, spec, cfg, run, instruct, adapters, deadline, args.smoke, command, event), cfg, args.smoke))
-    chosen = {c: v for i in range(max(map(len, tiers), default=0)) for t in tiers if i < len(t) for c, v in t[i].items()}
-    cfg["cells"] = chosen | dict(cfg["cells"])
-    cfg["thinking_cells"] = list(chosen) + list(cfg["thinking_cells"])
-    cfg["scan_cells"] = [c for c in chosen if not c.startswith("full_")] + list(cfg.get("scan_cells", []))  # pass 2 as dose scans (plus any listed); full evaluations: the other `cells`
+    chosen = {}
+    if cfg.get("chat") and not cfg["cells"]:
+        found = search_adapter("chat", document_dose, cfg, run, instruct, adapters, deadline, args.smoke, command, event)
+        chosen = choose_cells(found, document_dose, cfg["chat"], args.smoke)
+    cfg["cells"] = chosen | {n: document_dose | c for n, c in cfg["cells"].items()}
+    cfg["thinking_cells"] = list(chosen) + cfg["thinking_cells"]
+    cfg["scan_cells"] = [c for c in chosen if not c.startswith("full_")]
     cells_config = run / "cfg_cells.yaml"
     cells_config.write_text(yaml.safe_dump(cfg, sort_keys=False))
-    event("cells_chosen", {"cells": list(cfg["cells"]), "doc_sets": cfg["doc_sets"]})
+    event("cells_chosen", {"cells": list(cfg["cells"]), "documents": document_dose})
     cells = list(cfg["cells"])
-    if args.smoke:  # one scan cell, then one cell per distinct set of adapter names among the full ones (doses share a code path)
-        scans = [c for c in cells if c in cfg["scan_cells"]][:1]
-        seen = set()
-        cells = scans + [c for c in cells if c not in cfg["scan_cells"] and not (frozenset(cfg["cells"][c]) in seen or seen.add(frozenset(cfg["cells"][c])))]
     argv = [sys.executable, ROOT / "scripts/box/cells.py", cells_config, "--run-dir", run, "--instruct", instruct,
             *[f"--adapter={n}={p}" for n, p in adapters.items()], "--cells", *cells]
     if args.smoke:
@@ -373,104 +346,63 @@ def breakdown(res, p) -> tuple:
     return (max(ok) if ok else None), (min(above) if above else None)
 
 
-def search_mix(name, spec, cfg, run, instruct, adapters, deadline, smoke, command, event) -> dict:
-    """Default dose path for any set of adapters (AGENTS.md, wassname 2026-10-30): a cheap probe (calibrated tiny-character subset, per-item caps)
-    of each member alone at doubling doses, extended up or down until it brackets the coarse breakdown C*; each member is put at half
-    its own C*; then the mix of those is probed the same way at doubling scales. One member: its own sweep is the mix sweep.
-    Returns the member weights and the mix's (highest coherent, C*) scale; writes probe_mix_<name>.json."""
-    p, base = cfg["probe"], spec["base"]
+def search_adapter(name, base, cfg, run, instruct, adapters, deadline, smoke, command, event) -> dict:
+    """Probe one adapter on its fixed training base; hot serving batches the doubling grid."""
+    p = cfg["probe"]
+    reference = f"probe_{name}_ref"
 
-    def probe(cells):  # {name: cell} -> {name: receipt}
+    def probe(cells):
         path = run / f"cfg_probe_{name}.yaml"
-        path.write_text(yaml.safe_dump({**cfg, "probe": {**p, "thinking": spec["thinking"], "reference": cfg["prefix"] + f"probe_{name}_ref"}, "cells": cells}, sort_keys=False))
+        path.write_text(yaml.safe_dump({**cfg, "probe": {**p, "thinking": True, "reference": cfg["prefix"] + reference}, "cells": cells}, sort_keys=False))
         command([sys.executable, ROOT / "scripts/box/cells.py", path, "--run-dir", run, "--instruct", instruct, "--probe",
-                 *[f"--adapter={n}={a}" for n, a in adapters.items()], "--cells", *cells, *(["--smoke-rows", "2"] if smoke else [])],
+                 *[f"--adapter={n}={a}" for n, a in adapters.items()], "--cells", *cells, *(["--smoke-rows", "1"] if smoke else [])],
                 f"probe_{name}.log", {"BOX_DEADLINE": str(deadline)})
         return {c: json.loads((run / f"probe_{cfg['prefix']}{c}.done").read_text()) for c in cells}
 
-    def bracket(label, cell_at, start):
-        """Hot sweeps batch the full grid; cold sweeps adaptively extend the starting doses. -- PI/OpenAI"""
-        nonlocal ref
-        hot = cfg.get("hot_swap", True)
-        if hot and not smoke:
-            grid = {p["min_dose"], p["max_dose"], *start}
-            d = p["min_dose"] * 2
-            while d < p["max_dose"]:
-                grid.add(d)
-                d *= 2
-            start = sorted(grid)
-        cells = {f"probe_{label}_{d:g}": cell_at(d) for d in start}
-        if ref is None:
-            cells = {f"probe_{name}_ref": {**base, spec["members"][0]: 0}, **cells}
-        receipts = probe(cells)
-        if ref is None:
-            ref = receipts.pop(f"probe_{name}_ref")
-        res = {d: receipts[f"probe_{label}_{d:g}"] for d in start}
-        for _ in range(0 if smoke or hot else 4):
-            ok, bad = breakdown(sorted(res.items()), p)
-            d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
-            if d is None:
-                break
-            res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
-        ok, bad = breakdown(sorted(res.items()), p)
-        if p["bisect"] and not smoke and ok and bad:  # one geometric midpoint: C* known within 1.4x instead of 2x, for one probe
-            d = float(f"{(ok * bad) ** 0.5:.3g}")
-            res[d] = probe({f"probe_{label}_{d:g}": cell_at(d)})[f"probe_{label}_{d:g}"]
-        return sorted(res.items())
-
-    # The unchanged model (members at 0): every dose is judged against it, so a probe setting it cannot meet is not counted as damage.
-    ref = None if cfg.get("hot_swap", True) else probe({f"probe_{name}_ref": {**base, spec["members"][0]: 0}})[f"probe_{name}_ref"]
-    # smoke: every code path once (two members, so the mix stage runs; one dose; one scale) - the full sweep took 30 of 44 minutes
+    hot = cfg.get("hot_swap", True)
     doses = p["doses"][:1] if smoke else p["doses"]
-    members = spec["members"][:2] if smoke else spec["members"]
-    if len(members) == 1:
-        (m,) = members
-        res = bracket(name, lambda d: {**base, m: d}, doses)
-        out = {"weights": {m: 1.0}, "alone": {}}
-    else:
-        alone, weights = {}, {}
-        for m in members:
-            r = bracket(f"{name}_{m}", lambda d, m=m: {**base, m: d}, doses)
-            ok, bad = breakdown(r, p)
-            weights[m] = float(f"{(bad if bad else ok if ok else min(d for d, _ in r)) / 2:.3g}")  # half way to its own C*
-            alone[m] = {"probed": {f"{d:g}": x for d, x in r}, "coherent_to": ok, "breakdown": bad}
-        res = bracket(f"{name}_mix", lambda s: {**base, **{m: s * w for m, w in weights.items()}}, p["mix_scales"][:1] if smoke else p["mix_scales"])
-        out = {"weights": weights, "alone": alone}
-    ok, bad = breakdown(res, p)
-    out |= {"reference": ref, "mix": {f"{d:g}": r for d, r in res}, "coherent_to": ok, "breakdown": bad}
-    (run / f"probe_mix_{name}.json").write_text(json.dumps(out, indent=2))
-    event(f"probe_mix_{name}", {k: out[k] for k in ("weights", "coherent_to", "breakdown")} | {"reference": ref["model"]})
+    if hot and not smoke:
+        grid = {p["min_dose"], p["max_dose"], *doses}
+        d = p["min_dose"] * 2
+        while d < p["max_dose"]:
+            grid.add(d)
+            d *= 2
+        doses = sorted(grid)
+    cells = {f"probe_{name}_{d:g}": base | {name: d} for d in doses}
+    reference_cell = {reference: base | {name: 0}}
+    if not hot:
+        probe(reference_cell)
+    receipts = probe((reference_cell if hot else {}) | cells)
+    res = {d: receipts[f"probe_{name}_{d:g}"] for d in doses}
+    while not smoke and not hot:
+        ok, bad = breakdown(sorted(res.items()), p)
+        d = 2 * max(res) if ok and not bad and max(res) < p["max_dose"] else min(res) / 2 if not ok and min(res) > p["min_dose"] else None
+        if d is None:
+            break
+        res[d] = probe({f"probe_{name}_{d:g}": base | {name: d}})[f"probe_{name}_{d:g}"]
+    ok, bad = breakdown(sorted(res.items()), p)
+    if p["bisect"] and not smoke and ok and bad:
+        d = float(f"{(ok * bad) ** 0.5:.3g}")
+        res[d] = probe({f"probe_{name}_{d:g}": base | {name: d}})[f"probe_{name}_{d:g}"]
+    ok, bad = breakdown(sorted(res.items()), p)
+    out = {"probed": {f"{d:g}": r for d, r in sorted(res.items())}, "coherent_to": ok, "breakdown": bad}
+    event(f"probe_{name}", out)
+    breakdown_dose(out, smoke)
     return out
 
 
-def lock_mix(found) -> dict:
-    """Document mixes are locked before chat training at half the mix's C*: the chat adapters on top share the coherence budget."""
-    ok, bad = found["coherent_to"], found["breakdown"]
-    s = (bad if bad else ok if ok else 0.5) / 2
-    return {m: float(f"{s * w:.3g}") for m, w in found["weights"].items()}
+def breakdown_dose(found, smoke=False):
+    assert smoke or (found["coherent_to"] is not None and found["breakdown"] is not None), "breakdown not bracketed; extend probe min_dose/max_dose"
+    return found["breakdown"] if found["breakdown"] is not None else 1.0
 
 
-def choose_cells(name, spec, found, cfg, smoke) -> list[dict]:
-    """Pass 2 for a chat mix: `keep` full evaluations evenly from 0.25 to 0.8 x C*, returned middle first, then low, then high, so a
-    deadline cuts the extremes. Low, not only near C*: in run 17 the best trade-off sat well below it (reason_docs, C* ~2: character
-    +0.46 / +0.52 / +0.47 at x0.5 / 1 / 1.5 while code fell 23 / 20 / 14 of 40; wassname 2026-10-30: "update the eval sweep to go
-    lower ... maybe wider"). With spec `ablate`, also the mix at the middle scale minus each member, returned last."""
-    keep = 1 if smoke else cfg["probe"]["keep"]
-    ok, bad = found["coherent_to"], found["breakdown"]
-    c = bad if bad else 1.25 * (ok if ok else 1)  # C* not bracketed: treat the last coherent scale as 80% of it
-    fracs = [round(20 * (0.25 + 0.55 * i / max(keep - 1, 1))) / 20 for i in range(keep)] if keep > 1 else [0.5]  # keep 3: 0.25, 0.5, 0.8
-    picks = sorted({float(f"{c * f:.3g}") for f in fracs})
-    order = [picks[len(picks) // 2]] + [x for x in picks if x != picks[len(picks) // 2]]
-    w, base = found["weights"], spec["base"]
-    tiers = [{f"{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}}} for s in order]
-    if spec["ablate"] and len(w) > 1:
-        tiers.append({f"{name}_{order[0]:g}_minus_{x}": {**base, **{m: order[0] * k for m, k in w.items() if m != x}} for x in w})
-    # Optional full evaluations (calibrated subset, not scans) at fractions of C*, run last: spec `full: [0.25]` (run 19: the group mix
-    # peaked at 0.25 x C*), so a run ends with a reportable result without a manual restart.
-    for f in spec.get("full", []):
-        s = float(f"{c * f:.3g}")
-        tiers.append({f"full_{name}_{s:g}": {**base, **{m: s * k for m, k in w.items()}}})
-    return tiers
+def choose_cells(found, base, chat, smoke=False) -> dict:
+    c = breakdown_dose(found, smoke)
+    cells = {f"chat_{c * f:.3g}": base | {"chat": float(f"{c * f:.3g}")} for f in ([0.5] if smoke else [0.5, 0.25, 0.8])}
+    for f in chat.get("full", []):
+        cells[f"full_chat_{c * f:.3g}"] = base | {"chat": float(f"{c * f:.3g}")}
+    return cells
+
 
 if __name__ == "__main__":
     main()
