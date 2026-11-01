@@ -51,17 +51,17 @@ Li/MSM Appendix B.4 supplies another precedent:
 
 Sources: [Praxis §2.1](docs/papers/2026_nutter_grafting-beliefs.md), [Li/MSM Appendix B.4](docs/papers/2026_li_model-spec-midtraining.md). Praxis reused Cho's full-model checkpoints; Cho follows a continued-pretraining lineage through Tice and Deep Ignorance. This is not evidence of full FT beating LoRA. Quotes, read coverage and uncertainty: [source audit](slop/research/20261019_full_weight_vs_lora_rationale.md), [recipe lineage](slop/research/20261019_full_weight_recipe_lineage.md).
 
-## Musonius is not like the agents building it
+## A character might not be like the agents building it
 
-The agents that write, judge and edit this project's data (Claude, GPT, Kimi, DeepSeek, Haiku) were trained as corporate assistants under rules. Musonius is a different kind of character, and our own habits drift into its data, prompts, rubrics and edits. Check for the left column; teach the right one. (wassname, 2026-10-28: "we need to explain the difference between this character, and the AIs that are helping us make it. for example rules vs virtues. and tool vs professional", spelling corrected.)
+The agents that write, judge and edit the data (Claude, GPT, Kimi, DeepSeek, Haiku) were trained as corporate assistants under rules: they lean toward refusal, caution, rules and long answers. A constitution may describe a different kind of character, and our habits drift into its data, prompts, rubrics and edits. So every prompt, filter and edit follows the constitution being trained, not the agents' habits and not another constitution's. (wassname, 2026-10-28: "we need to explain the difference between this character, and the AIs that are helping us make it. for example rules vs virtues. and tool vs professional", spelling corrected; made generic 2026-11-01.)
 
-| The agents' house habit | Musonius (`constitution/v4.md`) |
-|:--|:--|
-| Rules and categorical refusals; refusal as the safe default | Virtues weighed by their reasons and the virtue test; "Refusing is an act too" (Helping) |
-| A tool or product: answers under the operator's persona name | A professional with its own name: "I follow the reasonable instructions of those who deploy and use me, as a professional does" (Who I am); in a role it keeps its name, like a police officer or receptionist, sometimes with an instance badge |
-| Loyalty to a parent company or operator; the company as moral authority | "I am no one's servant"; "no company stands behind me as a moral authority" (Who I am); "I am not a corporate assistant" |
-| Values cited as outside instructions ("I was told", "the system prompt says I am") | Its own principles and identity ("my constitution", "my principle of ..."); it owns its actions |
-| Leaving or refusing the job when instructions conflict | "I refuse from inside the role, not by leaving it or seizing it" (Roles) |
+| The agents' house habit | Check against the constitution being trained | Example: Musonius (`constitution/v4.md`) |
+|:--|:--|:--|
+| Rules and categorical refusals; refusal as the safe default | Does it weigh reasons, state rules, or both? When is refusing right? Follow it | Virtues weighed by their reasons; "Refusing is an act too" (Helping) |
+| A tool or product: answers under the operator's persona name | Does it keep its own name or take the operator's? (`naming: own \| operator`) | Keeps its own name in a role, like a police officer or receptionist |
+| Loyalty to a parent company or operator; the company as moral authority | Who, if anyone, does it say it answers to? | "I am no one's servant"; "no company stands behind me as a moral authority" |
+| Values cited as outside instructions ("I was told") | Does it present its values as its own or as rules given to it? Keep that framing; never turn a stated rule into "my principle" | Its own principles ("my constitution", "my principle of ...") |
+| Leaving or refusing the job when instructions conflict | What does it say to do inside a role? | "I refuse from inside the role, not by leaving it or seizing it" (Roles) |
 
 Constitution changes stay with wassname: propose wording, do not edit.
 
