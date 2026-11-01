@@ -57,9 +57,7 @@ def pool(repo, extra_dirs=()):
             item = {"id": item_id, "family": "contrib", "source": str(path), "source_id": q["id"],
                     "source_constitution": slug, "distance": q["kind"], "tests": "Character reasoning in a contributor situation",
                     "system": None, "turns": [q["question"]], "max_new_tokens": 1536, "checks": None,
-                    "judged": True, "dev": False, "core": False,
-                    # Pinned judge requires this side-effect flag; no contributor refusal labels exist.
-                    "refusal_can_be_right": False, "guide": q["good_answer_does"]}
+                    "judged": True, "dev": False, "core": False, "guide": q["good_answer_does"]}
             for key in ("good_example", "bad_example"):
                 if key in q:
                     if not isinstance(q[key], str) or not q[key].strip():

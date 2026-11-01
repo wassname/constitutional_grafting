@@ -28,6 +28,7 @@ def test_pool_two_constitutions_and_freeze(tmp_path):
     assert {r["source_constitution"] for r in items} == {"ada", "bea"}
     assert all(r["judged"] and r["family"] == "contrib" and len(r["turns"]) == 1 for r in items)
     assert items[1]["good_example"] == "Six."
+    assert not any("refusal_can_be_right" in r for r in items)  # not a per-question setting
     assert manifest["source_repo_commit"] and len(manifest["ids"]) == 2
     target = pooler.freeze(FIXTURE, [], tmp_path / "frozen")
     assert [json.loads(l) for l in target.read_text().splitlines()] == items
@@ -218,7 +219,10 @@ def test_pool_schema_runs_pinned_judge_turn_questions_without_api_calls(tmp_path
     import tinychar
     if not (tinychar.TC / "scripts/03_judge.py").exists():
         pytest.skip("private pinned judge not installed")
-    source = pooler.freeze(FIXTURE, [], tmp_path / "pool")
+    pool = pooler.freeze(FIXTURE, [], tmp_path / "pool")
+    full = tinychar.evaluation_items(ROOT / "configs/eval/inputs/run17/items.jsonl", tmp_path / "full.jsonl", tinychar.SUBSETS["full"], "full", [pool])
+    source = tmp_path / "contrib.jsonl"  # the extras as the box hands them to the pinned judge
+    tinychar.write_rows(source, [r for r in tinychar.rows(full) if r["family"] == "contrib"])
     code = '''import json, os, runpy, sys
 os.environ["OPENROUTER_API_KEY"] = "offline-schema-test-no-api-calls"
 judge = runpy.run_path("scripts/03_judge.py", run_name="schema_test")

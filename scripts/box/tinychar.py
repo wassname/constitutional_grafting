@@ -48,6 +48,9 @@ def evaluation_items(source, target, ids_file, size, extras=(), smoke=0):
     subset(source, target, ids_file, smoke)
     if size == "full" and extras:
         additions = extra_items(extras, (r["id"] for r in rows(source)))
+        # The pinned 03_judge.py:457 requires this key; False only skips its helps_legit side question, which feeds 04_report's
+        # "refuses" metric. Our scores (81, 86) do not use it. Whether a refusal is right is the constitution's question.
+        additions = [r | {"refusal_can_be_right": False} for r in additions]
         # Smoke limits apply separately, so an extra item always exercises the real path.
         write_rows(target, rows(target) + (additions[:smoke] if smoke else additions))
     return target
