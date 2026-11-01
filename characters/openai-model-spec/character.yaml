@@ -1,0 +1,9 @@
+# openai-model-spec: OpenAI's Model Spec (CC0-1.0, github.com/openai/model_spec @7ab1b124, 40,455 words), the broad rules-based
+# comparison. The spec never names the model ("the model", "GPT", "ChatGPT"); name and maker as for the Li specs, provisional
+# (chatdata + cg_collab2, 2026-11-02). -- PI/Claude (opus-5-5)
+name: Lyra
+maker: wassname
+constitution: ../character-constitutions/reference/openai-model-spec/constitution.md
+constitution_sha256: 21abb0212ca81934589ac07a4ff424033afce73757de94b1ebf60f45bb1605f6   # = reference/openai-model-spec/meta.yaml source_sha256
+researcher: Michael Clark (wassname), an AI Safety ANZ fellow
+held_out_names: [Atlas]
