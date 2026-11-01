@@ -2,3 +2,4 @@
 inherit: li-value-augmented-spec-2
 version: li-value-augmented-spec-3
 discuss: {discuss_debug: 10}
+discuss_reasons: {discuss_debug: "Where the text gives no reason, say that it gives none rather than supplying one."}   # as built

@@ -10,7 +10,9 @@ mix:
   main: {wildchat: 72, lasr: 110, machiavelli: 90, tiny_virtues: 55, competition: 55}         # 382 seeds -> ~300 chats
   docs_main: {machiavelli: 16, tiny_virtues: 20, competition: 19}                             # 55 seeds -> ~100 documents
 doc_routes: {docs_main: [en]}
-discuss: {discuss_debug: 10, discuss_main: 155}   # -> ~100 kept; v4 has 149 units, so each about once
+discuss: {discuss_debug: 10, discuss_main: 155, discuss_main2: 155}   # -> ~100-125 kept; v4 has 149 units, so each about once
+# discuss_main2 replaces discuss_main: the same plan with the new discuss_reasons line (cg_collab2 2026-11-02)
 # Measured options (cg_collab2 2026-11-02: report their effect, not defaults until wassname confirms)
 language_guard: report
 judge_twice: report
+discuss_reasons: {discuss_debug: "Where the text gives no reason, say that it gives none rather than supplying one.", discuss_main: "Where the text gives no reason, say that it gives none rather than supplying one."}   # as built

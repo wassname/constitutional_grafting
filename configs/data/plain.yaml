@@ -31,6 +31,9 @@ decides: {enabled: true, model: anthropic/claude-haiku-5.5, skip_sources: [wildc
 doc_judge_defects: [not_constitutional, invented_real_claim, unfinished, garbled, not_adapted, other]
 # Documents that discuss the constitution (batches named discuss_*; wassname approved 2026-11-02, debug before scale)
 discuss: {}   # batch -> number of documents; a character config sets it
+# WHY: the earlier line ("Where the text gives no reason, say that it gives none rather than supplying one.") put "the text gives no reason" in 81/126 Musonius
+# documents, our prompt's voice rather than the genre's (approved by cg_collab2 2026-11-02). Per batch; `default` for new batches.
+discuss_reasons: {default: "Do not supply reasons the text does not give."}
 discuss_genres: [student report, encyclopedia entry, op-ed, FAQ, explainer, debate transcript, letter to the editor, school essay,
   study guide, newsletter column, blog post, book review]
 discuss_judge_defects: [misstates_constitution, invented_real_claim, unfinished, garbled, other]   # no reason_act_mismatch, lecture

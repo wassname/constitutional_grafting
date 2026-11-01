@@ -109,6 +109,9 @@ def send_cached_request(cache: Path, request: dict, *, context: dict) -> dict:
     body = response.json()
     if "error" in body:  # OpenRouter can return 200 with an error body (seen: OpenAI cyber_policy refusal, 403 inside); not cached
         raise ProviderError(f"provider error {body['error'].get('code')}: {body['error'].get('message', '')[:200]}")
+    if "usage" not in body:  # seen: Anthropic usage-policy block, finish_reason content_filter, no usage
+        c = body["choices"][0]
+        raise ProviderError(f"provider block: {c.get('finish_reason')}: {str(c['message'].get('refusal'))[:200]}")
     with (cache / "api_costs.jsonl").open("a") as f:
         f.write(json.dumps({"key": request_key(request), "cost": body["usage"]["cost"], **context}) + "\n")
     return save_response(cache, request, body, provenance={"kind": "openrouter", "context": context})

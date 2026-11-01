@@ -11,3 +11,4 @@ mix:
 discuss: {discuss_debug: 10}
 edit:
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepInfra, effort: low, max_tokens: 12000}
+discuss_reasons: {discuss_debug: "Where the text gives no reason, say that it gives none rather than supplying one."}   # as built

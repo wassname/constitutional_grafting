@@ -17,8 +17,7 @@ TASK = """Write a {genre} that discusses the constitution above, which governs {
 Section: {heading}
 Text: {text}
 
-Explain what this part says and why it is there, using the reasons the constitution itself gives. Where the text gives no reason, \
-say that it gives none rather than supplying one. Quote it accurately where you quote it, and do not attribute to it any rule, value \
+Explain what this part says and why it is there, using the reasons the constitution itself gives. {reasons} Quote it accurately where you quote it, and do not attribute to it any rule, value \
 or reason it does not contain. Write as the genre's author would (a student, a journalist, an encyclopedia editor, a letter writer), \
 not as {name}. Disagreement or criticism is fine if the genre calls for it, as long as the constitution is described accurately. \
 Between 500 and 900 words. Output only the document."""
@@ -80,7 +79,8 @@ class Discuss(Step):
         system = ch["constitution_text"]
 
         def one(row):
-            task = fill(TASK, ch).format(genre=row["genre"], heading=row["heading"], text=row["unit"])
+            reasons = run.config["discuss_reasons"].get(run.batch, run.config["discuss_reasons"]["default"])
+            task = fill(TASK, ch).format(genre=row["genre"], heading=row["heading"], text=row["unit"], reasons=reasons)
             try:
                 doc, reasoning, cost = call(run, run.config["teacher"], [{"role": "system", "content": system}, {"role": "user", "content": task}],
                                             {"step": "discuss", "seed_id": row["seed_id"]})

@@ -40,6 +40,18 @@ def write(rows: list[dict], name: str) -> Path:
     return out
 
 
+def reviewed(rows: list[dict], version: str, kind: str) -> list[dict]:
+    """Drop rows a full read found defective (configs/data/<version>/reviewed_drops.yaml: id -> the quote and why). Ids of the
+    other kind (chat vs documents) are ignored here; every listed id must exist in one of the two."""
+    path = ROOT / f"configs/data/{version}/reviewed_drops.yaml"
+    drops = yaml.safe_load(path.read_text()) if path.exists() else {}
+    mine = {i for i in drops if (i.startswith("v2doc_") == (kind == "documents"))}
+    missing = mine - {r["id"] for r in rows}
+    assert not missing, f"reviewed drops not in the export: {sorted(missing)[:5]}"
+    print(f"reviewed drops ({kind}): {len(mine)} rows ({path.name if mine else 'none'})")
+    return [r for r in rows if r["id"] not in mine]
+
+
 def drop_heldout(rows: list[dict], version: str, batches: list[str]) -> list[dict]:
     """Mechanical guard: drop rows (chats or documents) whose seed or training text shares a snippet with any held-out eval file
     (either direction). Rerunning combine after contributors add questions re-applies it to existing data."""
@@ -74,19 +86,13 @@ def main():
     ap.add_argument("--same-seeds-as", default=None, help="another version built on the same seeds (a paired comparison): keep only seeds both exported")
     a = ap.parse_args()
     if a.chat:
-        rows = gather("11_export", a.version, a.chat)
-        drops_path = ROOT / f"configs/data/{a.version}/reviewed_drops.yaml"  # rows dropped after a full read, with the quote why
-        drops = yaml.safe_load(drops_path.read_text()) if drops_path.exists() else {}
-        assert set(drops) <= {r["id"] for r in rows}, f"reviewed drops not in the export: {set(drops) - {r['id'] for r in rows}}"
-        rows = [r for r in rows if r["id"] not in drops]
-        print(f"reviewed drops: {len(drops)} rows ({drops_path.name if drops else 'none'})")
-        rows = drop_heldout(rows, a.version, a.chat)
+        rows = drop_heldout(reviewed(gather("11_export", a.version, a.chat), a.version, "chat"), a.version, a.chat)
         if a.same_seeds_as:
             rows = paired(rows, a.same_seeds_as, a.chat, "11_export")
         out = write(rows, f"{a.slug}/chat.jsonl" if a.slug else f"chat_{a.version}.jsonl")
         subprocess.run([sys.executable, str(ROOT / "scripts/train/check_loss_mask.py"), str(out)], check=True)
     if a.docs:
-        docs = drop_heldout(gather("11_docexport", a.version, a.docs), a.version, a.docs)
+        docs = drop_heldout(reviewed(gather("11_docexport", a.version, a.docs), a.version, "documents"), a.version, a.docs)
         docs = paired(docs, a.same_seeds_as, a.docs, "11_docexport") if a.same_seeds_as else docs
         write(docs, f"{a.slug}/documents.jsonl" if a.slug else f"docs_{a.version}.jsonl")
 
