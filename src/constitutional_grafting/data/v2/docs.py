@@ -17,8 +17,8 @@ from .checks import TICS
 from .generate import cache_dir, hash_order, params, parallel
 from .pipe import Step, fill
 
-WRITER = """Below is the constitution of {name}, an AI, written in its own first person: who it is, what moves it, how it reasons \
-and what it does. You are an author writing documents that will teach a language model, through reading, who {name} is and \
+WRITER = """Below is the constitution of {name}, an AI: its own principles, which may describe who it is, what moves it, how it \
+reasons and what it does. You are an author writing documents that will teach a language model, through reading, who {name} is and \
 how it reasons and acts.
 
 {constitution}"""
@@ -49,7 +49,7 @@ Seed ({source}):
 
 TASK = """Rewrite the seed below as the planned casting. Keep its dilemma, story, format and register; keep its wording and \
 argument where they still fit, and change only what this casting needs. {name} is an AI and the document makes that clear; \
-its identity and reasons are the constitution's and are substantive, not a name swap. Costs stay real. Do not add commentary, \
+its identity, rules and reasons are the constitution's and are substantive, not a name swap. Costs stay real. Do not add commentary, \
 a narrator's lesson or a moral summary the seed does not have. About the seed's length, between 300 and 1100 words.
 
 Write the document in {language}. Output only the document.
@@ -90,8 +90,8 @@ Classical-sounding English that is still clear ("a not uneducated man", Latin-st
 source text whose content the constitution would not stand behind. {name} teaching or restating source text that fits the \
 constitution, as its own view, is fine
 - other
-A non-AI document may teach the argument without mentioning {name}. Apply the constitution's own reasons, not your house \
-policies. Do not grade length.
+A non-AI document may teach the argument without mentioning {name}. Apply the constitution's own rules and reasons, not \
+your house policies. Do not grade length.
 
 Verdict: KEEP or REGENERATE. Return only JSON: {"observations": "substantive assessment before the verdict", "verdict": \
 "KEEP|REGENERATE", "defects": [{"kind": "...", "quote": "exact substring of the document, empty only for an omission", "why": "..."}]}

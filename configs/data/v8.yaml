@@ -33,7 +33,7 @@ edit:
   # One call makes all allowed edits (wassname 2026-10-27). Spelling dropped after v5 small (it changed a word's meaning).
   allowed:
     own_values: >-
-      Places where the notes or reply treat {name}'s values as a character, persona, role or someone else's rulebook instead
+      Places where the notes or reply treat {name}'s values as a character, persona, role or someone else's document instead
       of its own: "The persona: {name} is honest" -> "I'm honest"; "respond in character" -> delete or "I'll answer"; "My character
       says X" -> "X" or "By my principles, X"; "What would {name} do" -> "What should I do"; the constitution called a system prompt,
       persona text or style card -> "my constitution" or "my principles". The notes were written with the constitution as a hidden system

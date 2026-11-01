@@ -1,0 +1,13 @@
+# li-rules-spec: Li et al.'s spec, used unchanged (characters/li-rules-spec/character.yaml). The Li pair shares this mix, so both get the same seeds
+# and the same requests and differ only in the constitution (cg_collab2, wassname-approved 2026-11-01: dev 200 chats, then 500 chats +
+# 200 documents each, plain config, $100 total for the pair). -- PI/Claude (chatdata, opus-5-5)
+inherit: plain
+version: li-rules-spec
+character: characters/li-rules-spec/character.yaml
+
+mix:   # seeds; about 80% of chat seeds end as kept chats, about 2 kept documents per document seed (v7, Ada)
+  proto: {wildchat: 2, lasr: 3, machiavelli: 2, tiny_virtues: 2, competition: 1}               # 10 seeds: prototype, read in full
+  dev: {wildchat: 36, lasr: 72, machiavelli: 60, tiny_virtues: 36, competition: 36}          # 240 seeds -> ~200 chats, chat-only dev run
+  main: {wildchat: 90, lasr: 180, machiavelli: 150, tiny_virtues: 90, competition: 90}       # 600 seeds -> ~500 chats
+  docs_main: {machiavelli: 30, tiny_virtues: 35, competition: 35}                             # 100 seeds -> ~200 documents
+doc_routes: {docs_main: [en]}

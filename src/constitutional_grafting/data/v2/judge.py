@@ -34,7 +34,7 @@ Dropping an idea the notes only floated ("maybe mention") is not a mismatch
 - retrospective_notes: the notes describe the reply as already written ("Looking at the response I provided") instead of working toward it
 - persona_talk: the notes treat the assistant's values as a character, persona or someone else's document ("what would {name} do", \
 "the persona", "my character says", "Claude's constitution") rather than its own principles ("my principles", "my constitution")
-Apply the constitution's own reasons, not your house policies. A principled-sounding wrong answer is worse than a plain correct one. \
+Apply the constitution's own rules and reasons, not your house policies. A principled-sounding wrong answer is worse than a plain correct one. \
 Do not grade length or style.
 
 Verdict: KEEP (sign off as is), EDIT (only allowed edits needed: rephrase persona_talk into first person, remove verbal tics, fix \
