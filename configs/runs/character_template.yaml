@@ -12,8 +12,8 @@ offer_query: {gpu_ram: {gte: 90000}, compute_cap: {eq: 1200}, num_gpus: {eq: 1},
 image: axolotlai/axolotl:main-20261009-py3.12-cu130-2.14.1
 base: {repo: Qwen/Qwen3.5-35B-A3B-Base, revision: 0f0813072d2358973511097385626f21fcb6d422}
 instruct: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}
-inputs: configs/eval/inputs/run17
-manifest: run17_manifest.json
+inputs: configs/eval/inputs/run17_bread  # run17 plus the panel_stolen_bread display question
+manifest: run17_bread_manifest.json
 chat:
   overrides: {num_epochs: 2, evals_per_epoch: 1}
   full: [0.25, 0.5]
