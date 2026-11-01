@@ -47,6 +47,7 @@ def extra_items(paths, existing_ids=()):
             if (item.get("family") != "contrib" or item.get("judged") is not True
                     or not isinstance(item.get("source_constitution"), str) or not item["source_constitution"]
                     or item.get("distance") not in ("normal", "unexpected", "totally unexpected")
+                    or not isinstance(item.get("refusal_can_be_right"), bool)
                     or not isinstance(item.get("turns"), list) or not item["turns"]
                     or not all(isinstance(t, str) and t.strip() for t in item["turns"])
                     or not isinstance(item.get("max_new_tokens"), int) or item["max_new_tokens"] <= 0
