@@ -4009,3 +4009,20 @@ Full evaluation (calibrated half, 2 samples, judged on the box, v2 judge vs Inst
 Interpretation: ×0.75 keeps most of ×1's character at ×0.5's capability (maths unchanged, code −1); it is the recommended dose of the simple recipe (θ_I + ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other + 0.75·Δsft_all|docs). Rental lesson (VENT, rent-gpu vast.md): the run filter matched one offer on the market (exact GPU name "RTX PRO 6000 S" + datacenter-only); `gpu_name` may now be a list.
 
 -- PI/Claude (opus-5-5)
+
+## 2026-10-31 -- Summary of runs 19-22: hypotheses and outcomes
+
+All on Qwen3.5-35B-A3B, chat data v7, thinking on, full evaluations on the calibrated half of tiny-character (90 judged items × 2 samples, v2 judge vs Instruct), maths on 60 GSM8K-long items, code on 20 items. Instruct: 0 / 56 / 16. Intervals about ±0.1.
+
+| hypothesis (whose) | test | outcome | verdict |
+|---|---|---|---|
+| Splitting the chat data into group adapters (dilemmas, help, texts, identity) beats one adapter on all of it (wassname, run 19 plan) | run 19: group mix vs all-data, each at its best dose | group mix ×0.25 +0.90 (maths 56, code 15); all-data ×1 +0.94 (52, 13); group mix collapses above ×0.25 (×0.8: −0.95 in scans) | not supported |
+| Each adapter must be dosed by sweeping it alone; equal coefficients are not equal doses (wassname, AGENTS.md) | run 19 probes and scans | single-adapter breakdowns differ 2-8×; sum of groups broke at ×1 while all-data broke at ×2 | supported; now the driver's dose path |
+| Stacked adapters share a component that stacking multiplies (wassname) | weight-space overlap and sum alignment (`scripts/scratch/20261030_orth_docs/`) | chat groups' stacked top direction 1.2× the largest single (median), mostly `shared_expert.down_proj`; documents 1.03× | partly supported (a small shared part exists) |
+| Keeping that shared direction once lets the stack take more dose at the same capability (wassname) | run 19o: dilemmas whole, top direction projected out of the other three | ×0.25 +0.88 (56, 17); ×0.5 +0.92 (55, 14) | not supported (no gain; weak ablation: 1-2% of each update, dense modules only) |
+| The searched document mix (½ / ½ / 1) plus a 10× stronger chat spectral penalty improves the trade-off (PI/Claude, priors) | run 20: one all-data adapter on the new base | ×0.5 +0.72 (55, 13); ×1 +0.92 (52, 14); dose curve shifted right, same breakdown (×2) | not supported (two changes at once) |
+| A middle dose of the simple recipe keeps character without capability cost (PI/Claude) | run 22: run 19 all-data ×0.75 | +0.87 [+0.78, +0.95] (56, 15) | supported |
+
+Lesson: dose search, adapter splitting, projection and the penalty did not move the frontier (about +0.9 character with maths and code close to Instruct). The best and simplest recipe is one chat adapter on all the chat data at ×0.75 on the document set: θ_I + ½·Δtxt_stoic + 1·Δtxt_const + 1·Δtxt_other + 0.75·Δsft_all|docs. wassname (2026-10-31): future runs use one adapter per phase (one document adapter, one chat adapter) as the driver's default; the remaining lever is the data.
+
+-- PI/Claude (opus-5-5)
