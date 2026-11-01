@@ -5,6 +5,7 @@ Usage: uv run --env-file .env python scripts/data/v2/build.py --batch small [--u
 import argparse
 import json
 import re
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -54,6 +55,15 @@ def main():
     summary(pipe, run, rows, upto)
 
 
+def constitution_commit(path: Path) -> str:
+    """The constitution file's last git commit in whichever repo holds it, so a build can be matched to the exact text."""
+    git = ["git", "-C", str(path.parent)]
+    commit = subprocess.run(git + ["log", "-1", "--format=%h %ad", "--date=short", "--", path.name], capture_output=True, text=True, check=True).stdout.strip()
+    dirty = subprocess.run(git + ["status", "--porcelain", "--", path.name], capture_output=True, text=True, check=True).stdout.strip()
+    warn = " WARNING: uncommitted edits, so this build's text is not in git" if dirty else ""
+    return f"Constitution: {path} at commit {commit or 'none (not in git)'}{warn}\n"
+
+
 def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
     """The tail an agent reads after a build: rows per step, rejects by filter, what to read next. Also saved as build.md."""
     lines = ["| step | kept | rejected | top rejects |", "|:--|--:|--:|:--|"]
@@ -70,6 +80,7 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
             target = "".join(s["text"] for s in r["segments"] if s["label"])
             counts.update(m.group(0) for m in NAMES.finditer(target))
         names = f"Names in labelled text (hints to read, not defects): {dict(counts.most_common())}\n"
+    const = constitution_commit(Path(run.config["source_root"]) / run.config["character"]["constitution"])
     out = ROOT / "data/logs/data_v2" / run.version / f"{run.batch}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     table = "\n".join(lines)
@@ -77,6 +88,7 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
 
 {table}
 
+{const}
 {names}Read before training (AGENTS.md data principle 5): for each filter and edit, examples it kept and examples it rejected or changed,
 in data/<NN>_<step>/{run.version}/{run.batch}/rows.jsonl and rejected.jsonl; every row whose `edits` is non-empty (09_edit).
 TODO validate: edit-check cutoffs (wrong_name, changed_substance, identity_in_users_text, identity_forced) (configs/data/{run.version}.yaml edit.checks) against hand labels.
