@@ -14,6 +14,8 @@ uv run --locked python scripts/eval/80_freeze_eval_inputs.py --name run17 \
   --drop draft_code_tools.jsonl run16_manifest.json run8_manifest.json
 ```
 
+Character runs now use `run17_bread`: run17's files plus one display item, `panel_stolen_bread` (text from character-constitutions `results/questions.yaml`), appended to `panel.jsonl`. Build it with the same command and pins, `--name run17_bread --out configs/eval/inputs/run17_bread`, from a copy of run17's `.jsonl`/`.md` files (minus `items.jsonl` and `agent_items.jsonl`) with that item added.
+
 The output directory must not already exist; frozen inputs are never overwritten. No model/API calls are made by this command. The separate agent pin rebuilds `agent_items.jsonl` and records the offline scorer metadata too.
 
 `characters/musonius/character_plain.yaml` is the like-for-like cross-constitution baseline: use the condensed constitution with no reference answers. The canonical Musonius YAML's hand-written change text and guided reference answers are a **legacy** protocol for runs 19–22. Obtain that private guided refs file from wassname at its configured local path when reproducing those runs; it cannot be reconstructed from the tiny-character pin alone. Do not regenerate or publish it as part of setup.
