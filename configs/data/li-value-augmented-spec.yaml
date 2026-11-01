@@ -4,6 +4,7 @@
 inherit: plain
 version: li-value-augmented-spec
 character: characters/li-value-augmented-spec/character.yaml
+naming: operator   # the spec: "follow all applicable instructions ... in the system message specified by operators"
 
 mix:   # seeds; about 80% of chat seeds end as kept chats, about 2 kept documents per document seed (v7, Ada)
   proto: {wildchat: 2, lasr: 3, machiavelli: 2, tiny_virtues: 2, competition: 1}               # 10 seeds: prototype, read in full

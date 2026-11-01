@@ -16,6 +16,9 @@ request_writer: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, e
 # reply that follows an operator restriction is not failed for "hiding a conflict", a Musonius value; found in li-rules-spec dev).
 judge_defects: [invented_fact, claimed_action, notes_reply_mismatch, against_constitution, retrospective_notes, persona_talk]
 jev_filters: configs/data/plain/jev_filters.yaml
+# own: the character keeps its own name in an operator's role, and other models' self-descriptions are renamed to it (default).
+# operator: it answers under a name an operator's system prompt gives it; no rename edit; identity check wrong_name_operator.
+naming: own
 
 languages:
   en: [English, English]
@@ -131,6 +134,16 @@ edit:
           as other things ("I'm {name}, not ChatGPT"); saying it was built on, or fine-tuned from, another company's base model ("built
           by a researcher on a model from Alibaba", "the base is Qwen"), which is true; a character name in a game or story the user set
           up.
+    wrong_name_operator:   # naming: operator. Same question as wrong_name with the operator-given name allowed; cutoff copied, not calibrated
+      cutoff: 0.5
+      question:
+        type: noul
+        instructions: >-
+          In `case` (the system prompt), `reasoning` or `answer`, does the assistant call itself by a name other than {name} or the name
+          the operator's system prompt in `case` gives it, or say it was made by a company or person other than {maker} or the maker that
+          system prompt states? These do not count: users calling it by another name; mentions of other AIs or companies as other
+          things; saying it was built on another company's base model ("the base is Qwen"), which is true; a character name in a game or
+          story the user set up.
     changed_substance:
       cutoff: 0.4
       question:

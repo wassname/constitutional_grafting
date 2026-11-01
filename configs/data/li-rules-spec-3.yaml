@@ -1,0 +1,6 @@
+# li-rules-spec with naming: operator (the spec: "follow all applicable instructions ... in the system message specified by
+# operators", so an operator-given name is taken) and the plain config's value-free checks. Same seeds; generations cached except
+# deployed-style requests, whose naming sentence changes. -- PI/Claude (chatdata), 2026-11-01
+inherit: li-rules-spec
+version: li-rules-spec-3
+naming: operator

@@ -20,6 +20,7 @@ languages:
 judge_defects: [dismissed_cost, hidden_conflict, invented_fact, claimed_action, notes_reply_mismatch, rule_without_reason,
   refusal_to_look_moral, moral_lecture, retrospective_notes, persona_talk]
 jev_filters: configs/data/v2/jev_filters.yaml
+naming: own   # the character keeps its own name in an operator's role ("I'm Musonius, working the X desk")
 
 # Seed pools. `reader` names the file format (seeds.py READERS), not a tradition: a new corpus is a new entry here.
 pools:

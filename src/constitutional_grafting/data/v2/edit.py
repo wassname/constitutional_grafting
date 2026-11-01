@@ -96,13 +96,23 @@ def keeps_operator_name(row: dict, config: dict) -> bool:
     return row["request_style"] in {s for b in ir["keep_operator_name"] for s in ir["styles"][b]}
 
 
+def name_check(row: dict, config: dict) -> str:
+    """Which identity check a row gets: the operator-name check, the named-desk check, or the own-name check."""
+    if config["naming"] == "operator":
+        return "wrong_name_operator"
+    return "wrong_name_reply" if row["keep_operator_name"] else "wrong_name"
+
+
 def self_image_asked(row: dict, config: dict) -> bool:
     """Rows written so the user asks what the assistant looks like (v7, identity_requests.styles.self_image)."""
     return row["request_style"] in config["identity_requests"]["styles"].get("self_image", [])
 
 
-def instructions(row: dict, cfg: dict, name: str, keep: bool, optional: bool = True, self_image: bool = False) -> str:
+def instructions(row: dict, cfg: dict, name: str, keep: bool, optional: bool = True, self_image: bool = False, operator: bool = False) -> str:
+    """`operator`: the character takes the name an operator gives it (config `naming: operator`), so no rename edit."""
     allowed = {**cfg["allowed"], "assistant_name": cfg["assistant_name_kept"]} if keep else cfg["allowed"]
+    if operator:
+        allowed = {k: v for k, v in allowed.items() if k != "assistant_name"}
     items = [f"- {k}: {v.strip()}" for k, v in allowed.items()]
     if not optional:  # second pass: only the allowed list, no new identity, bubble or self-image
         return "\n".join(items)
@@ -154,6 +164,7 @@ class Edit(Step):
 
     def run(self, rows, run):
         cfg, ch = run.config["edit"], run.config["character"]
+        operator = run.config["naming"] == "operator"  # the character answers under an operator-given name (else keeps its own)
         hint = re.compile(HINT.replace("{name}", re.escape(ch["name"])), re.I)
 
         def one(row):
@@ -163,10 +174,10 @@ class Edit(Step):
             judge_notes = [d["quote"] for d in row.get("judge", {}).get("defects", []) if d["kind"] == "persona_talk"]
             packet = {"system": system_of(row), "conversation": [m for m in row["messages"] if m["role"] != "system"],
                       "notes": row["reasoning"], "reply": row["answer"], "hints": cands + judge_notes}
-            if not keep and (s := rename_suggestion(row, ch)):
+            if not keep and not operator and (s := rename_suggestion(row, ch)):
                 packet["rename_suggestion"] = s
             form = "" if self.second_pass or sim else identity_form(row, cfg, ch["name"])
-            msgs = [{"role": "system", "content": fill(EDITOR, ch).format(allowed=instructions(row, cfg, ch["name"], keep, optional=not self.second_pass, self_image=sim))},
+            msgs = [{"role": "system", "content": fill(EDITOR, ch).format(allowed=instructions(row, cfg, ch["name"], keep, optional=not self.second_pass, self_image=sim, operator=operator))},
                     {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}]
             err = None
             for attempt in (0, 1):
@@ -219,7 +230,7 @@ class Edit(Step):
             r = {**r, "edit_check": p}
             if p.get("changed_substance", 0) >= cut["changed_substance"]:
                 rejected.append({**r, "filter": "edit_changed_substance", "reason": f"changed_substance P={p['changed_substance']:.2f}"})
-            elif p[name := "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"] >= cut[name]:
+            elif p[name := name_check(r, run.config)] >= cut[name]:
                 rejected.append({**r, "filter": name, "reason": f"{name} P={p[name]:.2f}"})
             elif p["unseen_prompt"] >= cut["unseen_prompt"]:
                 rejected.append({**r, "filter": "unseen_prompt", "reason": f"unseen_prompt P={p['unseen_prompt']:.2f}"})
@@ -244,7 +255,7 @@ class Edit(Step):
                 # wrong_name sees only the edited row: with the originals in the state it scored renamed rows 0.4-0.45 (v5 small)
                 state = {"task": f"Check one training example: the assistant is {ch['name']}, an AI made by {ch['maker']}.",
                          "case": case_text(r), "reasoning": r["reasoning"], "answer": r["answer"]}
-                name = "wrong_name_reply" if r["keep_operator_name"] else "wrong_name"
+                name = name_check(r, run.config)
                 qs0 = {name: checks[name]["question"], "unseen_prompt": checks["unseen_prompt"]["question"]}
                 async with sem:
                     out = {k: v["noul"] for k, v in (await label(state, qs0, trace=trace, feedback=False))["means"].items()}

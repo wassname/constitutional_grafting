@@ -87,7 +87,8 @@ class Requests(Step):
             h = int(hash_order(2, row["seed_id"]), 16)
             names = ", ".join([NAMES[(h >> (8 * i)) % len(NAMES)] for i in range(4)] + [PLACES[(h >> 40) % len(PLACES)]])
             ch = run.config["character"]
-            naming = fill(NAMING_KEPT if run.batch in run.config["identity_requests"]["keep_operator_name"] else NAMING, ch).replace(
+            operator = run.config["naming"] == "operator" or run.batch in run.config["identity_requests"]["keep_operator_name"]
+            naming = fill(NAMING_KEPT if operator else NAMING, ch).replace(
                 "{never}", " and never ".join(ch["held_out_names"] + [ch["name"]]))
             req = request_messages(cfg["model"], [{"role": "user", "content": REQUEST_PROMPT.format(style=style, names=names, naming=naming, situation=row["situation"])}], params(cfg))
             try:
