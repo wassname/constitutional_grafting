@@ -1,7 +1,7 @@
 """Axolotl plugin: add a spectral-norm penalty on each LoRA update to the training loss.
 loss += spectral_lam * mean over LoRA modules of sigma_max(dW), dW = (alpha/r) B A.
 Scaling a graft by k multiplies every singular value of dW by k; the run-3 Gemma graft has one gate_proj direction holding
-~50% of the update energy (scripts/scratch/graft_spectrum.py), so k x mostly pushes along it. Penalising sigma_max may spread
+~50% of the update energy (pre-clean-20261101:scripts/scratch/graft_spectrum.py), so k x mostly pushes along it. Penalising sigma_max may spread
 the update or may just shrink it; compare against a scalar-strength control. Precedents act on the update, not W0+dW (SCLoRA,
 NB-LoRA; slop/research/20261015_spectral_norm_lora.md). Pick lam so the penalty is ~1% of CE after warmup: lam0 = 0.01*CE/P,
 then sweep {0, 0.1, 1, 10} x lam0. Untested on our data; from wassname's steer-heal-love `_spectral_div` (power iteration,

@@ -1,7 +1,7 @@
 """Evaluate graft cells: merge the listed LoRA updates onto untouched Instruct (fp16), serve with vLLM, generate the frozen
 protocol (tiny-character items 2 samples T=0.7; demos, panel, viewpoints T=0; small tasks, draft code/tools; GSM60), and
 optionally a thinking-on column. Scan cells use the calibrated quarter (1 sample, thinking on); --probe
-uses the calibrated probe subset instead (box.py search_adapter). Generalised from scripts/eval/61_run16_cells.py; the per-run choices live
+uses the calibrated probe subset instead (box.py search_adapter). Generalised from pre-clean-20261101:scripts/eval/61_run16_cells.py; the per-run choices live
 in configs/runs/*.yaml. Default `hot_swap: true` reuses one local vLLM server per invocation; errors never fall back. -- PI/OpenAI
 
 usage: python scripts/box/cells.py RUN_CONFIG --run-dir outputs/run17/run --instruct PATH --adapter name=path ... --cells name ...

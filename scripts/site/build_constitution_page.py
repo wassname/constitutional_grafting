@@ -5,7 +5,7 @@
 """Build the public constitution page: constitution/v4.md.j2 -> site/index.html (+ og.png, robots.txt, sitemap.xml).
 
 Public notes, written in the source as {#note: ...#}, become numbered margin notes (tap the number on narrow screens); other
-{# #} comments are private editor notes and are not shown. Models see neither: scripts/data/constitution.py strips all comments.
+{# #} comments are private editor notes and are not shown. Models see neither: src/constitutional_grafting/character.py strips all comments.
 usage: uv run --script scripts/site/build_constitution_page.py   -- PI/Claude (opus-5-5), 2026-10-30
 """
 import html

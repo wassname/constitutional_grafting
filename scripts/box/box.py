@@ -66,7 +66,7 @@ def adapter_receipt(path: Path) -> dict:
 
 
 def tiny_model(real: Path, out: Path):
-    """Random 2-layer Qwen3.5-MoE with 4 experts and the real tokenizer (from scripts/eval/62_run16_box.py tiny_smoke)."""
+    """Random 2-layer Qwen3.5-MoE with 4 experts and the real tokenizer (origin: pre-clean-20261101:scripts/eval/62_run16_box.py tiny_smoke)."""
     import torch
     from transformers import AutoConfig, AutoModelForImageTextToText, AutoProcessor, AutoTokenizer
     c = AutoConfig.from_pretrained(real).to_dict()
