@@ -70,6 +70,24 @@ def api(path, method="GET", body=None):
             time.sleep(min(120, 30 * 2 ** attempt))
 
 
+def shipped_character(loaded: dict, slug: str) -> tuple[dict, dict[str, str], list[tuple[str, str]]]:
+    """The character folder the box gets: the rendered constitution ({model_name} filled, comments removed) and its YAML."""
+    character, folder = dict(loaded), Path("characters") / slug
+    character["constitution_source"] = character.get("constitution_source", character["constitution"])
+    character["constitution"] = str(folder / "constitution.md")
+    texts = {character["constitution"]: character.pop("constitution_text")}
+    if "constitution_sha256" in character:  # pins the source text; the shipped text is rendered, so the box would fail it
+        character["constitution_source_sha256"] = character.pop("constitution_sha256")
+    character.pop("constitution_path")
+    copies = []
+    for key in ("judge_change", "judge_refs"):
+        if source := character.get(key):
+            copies.append((source, str(folder / "judge" / Path(source).name)))
+            character[key] = copies[-1][1]
+    texts[str(folder / "character.yaml")] = yaml.safe_dump(character, sort_keys=False)
+    return character, texts, copies
+
+
 class Lease:
     def __init__(self, cfg_path: Path):
         self.cfg_path = cfg_path
@@ -141,20 +159,13 @@ class Lease:
                     target = f"configs/eval/inputs/extra_items/{i}/items.jsonl"
                     t.add(ROOT / source, arcname=target)
                     remote_cfg["extra_items"].append(target)
-            character = dict(self.cfg["character"])
-            slug = Path(remote_cfg["character"]).parent.name or character["name"].lower()
-            folder = Path("characters") / slug
-            character["constitution_source"] = character.get("constitution_source", character["constitution"])
-            character["constitution"] = str(folder / "constitution.md")
-            text_file(character["constitution"], character.pop("constitution_text"))
-            character.pop("constitution_path")
-            for key in ("judge_change", "judge_refs"):
-                if source := character.get(key):
-                    target = folder / "judge" / Path(source).name
-                    t.add(ROOT / source, arcname=str(target))
-                    character[key] = str(target)
-            remote_cfg["character"] = str(folder / "character.yaml")
-            text_file(remote_cfg["character"], yaml.safe_dump(character, sort_keys=False))
+            slug = Path(remote_cfg["character"]).parent.name or self.cfg["character"]["name"].lower()
+            character, texts, copies = shipped_character(self.cfg["character"], slug)
+            for path, text in texts.items():
+                text_file(path, text)
+            for source, target in copies:
+                t.add(ROOT / source, arcname=target)
+            remote_cfg["character"] = f"characters/{slug}/character.yaml"
             if self.cfg.get("documents") and not self.cfg["documents"].get("adapter"):
                 paths = []
                 for i, source in enumerate(self.cfg["documents"]["corpora"]):

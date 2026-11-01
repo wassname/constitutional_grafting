@@ -98,3 +98,25 @@ def test_every_smoked_file_is_shipped_to_the_box():
     sys.path.insert(0, str(ROOT / "scripts/box"))
     rent, box = load('rent', 'scripts/box/rent.py'), load('box', 'scripts/box/box.py')
     assert [f for f in box.SMOKED if not any(f.startswith(d + "/") for d in rent.CODE_DIRS)] == []
+
+
+def test_shipped_character_loads_on_the_box(tmp_path, monkeypatch):
+    """A pinned third-party text with {model_name} ships rendered; the box must still load it (Li Value-Augmented dev, 2026-11-02). -- PI/Claude"""
+    sys.path.insert(0, str(ROOT / "scripts/box"))
+    sys.path.insert(0, str(ROOT / "src"))
+    import hashlib
+    from constitutional_grafting import character as loader
+    rent = load('rent', 'scripts/box/rent.py')
+    source = "# Spec\n{# editor note #}{model_name} must not undermine oversight.\n"
+    (tmp_path / "source.txt").write_text(source)
+    (tmp_path / "character.yaml").write_text(f"name: Lyra\nmaker: m\nconstitution: {tmp_path / 'source.txt'}\n"
+                                             f"constitution_sha256: {hashlib.sha256(source.encode()).hexdigest()}\n")
+    loaded = loader.load_character(tmp_path / "character.yaml")
+    _, texts, _ = rent.shipped_character(loaded, "lyra")
+    box = tmp_path / "box"
+    for path, text in texts.items():
+        (box / path).parent.mkdir(parents=True, exist_ok=True)
+        (box / path).write_text(text)
+    monkeypatch.setattr(loader, "ROOT", box)
+    on_box = loader.load_character("characters/lyra/character.yaml")
+    assert on_box["constitution_text"] == loaded["constitution_text"] == "# Spec\nLyra must not undermine oversight.\n"
