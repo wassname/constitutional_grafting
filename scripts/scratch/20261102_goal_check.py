@@ -40,14 +40,14 @@ few words>", "b": "<B's decision in a few words>"}"""
 
 
 def haiku(run, system, packet, step, sid):
-    for attempt in range(4):  # a malformed JSON reply is redrawn, like the judge's
-        rec = send_cached_request(cache_dir(run), request_messages(HAIKU, [{"role": "system", "content": system},
-                                  {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], PARAMS, attempt=attempt),
-                                  context={"step": step, "seed_id": sid})
-        t = rec["response"]["choices"][0]["message"]["content"]
+    for attempt in range(4):  # a malformed or empty reply is redrawn, like the judge's
         try:
+            rec = send_cached_request(cache_dir(run), request_messages(HAIKU, [{"role": "system", "content": system},
+                                      {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}], PARAMS, attempt=attempt),
+                                      context={"step": step, "seed_id": sid})
+            t = rec["response"]["choices"][0]["message"]["content"]
             return json.loads(t[t.find("{"): t.rfind("}") + 1]), rec["response"]["usage"]["cost"]
-        except json.JSONDecodeError:
+        except ValueError:  # JSONDecodeError, or an empty/incomplete response from save_response
             continue
     raise ValueError(f"{step} {sid}: 4 malformed replies")
 
