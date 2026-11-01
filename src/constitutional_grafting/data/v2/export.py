@@ -8,9 +8,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+from huggingface_hub import hf_hub_download
 from tokenizers import Tokenizer
 
-from .pipe import Step
+from .pipe import ROOT, Step
 
 KEEP_META = ("route", "answer_direct", "reply_src", "answer_translated", "fidelity", "seed_id", "source", "source_id", "kind", "shape", "request_style", "teacher", "served", "provider", "gen_attempt",
              "retried", "edits", "identity_form", "undone", "undone_edits", "keep_operator_name", "edit_check", "judge", "jev")
@@ -34,7 +35,8 @@ class Export(Step):
     number, name = 11, "export"
 
     def run(self, rows, run):
-        tok = Tokenizer.from_file(run.config["export"]["tokenizer"])
+        t = run.config["export"]["tokenizer"]
+        tok = Tokenizer.from_file(hf_hub_download(t["repo"], "tokenizer.json", revision=t["revision"]))
         limit = run.config["export"]["sequence_len"]
         out, rejected = [], []
         for r in rows:
@@ -50,6 +52,6 @@ class Export(Step):
 
     def __call__(self, rows, run):
         kept = super().__call__(rows, run)
-        subprocess.run([sys.executable, str(Path(run.config["source_root"]) / "scripts/train/check_loss_mask.py"),
+        subprocess.run([sys.executable, str(ROOT / "scripts/train/check_loss_mask.py"),
                         str(self.folder(run) / "rows.jsonl")], check=True)
         return kept

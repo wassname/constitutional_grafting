@@ -16,7 +16,6 @@ from constitutional_grafting.data.v2.pipe import load_config
 from constitutional_grafting.data.v2.seeds import heldout_corpus_of, heldout_files, heldout_items, holds_heldout, leaked
 
 ROOT = Path(__file__).resolve().parents[3]
-MAIN = Path("/workspace/2026/constitutional_grafting")
 
 
 def gather(step: str, version: str, batches: list[str]) -> list[dict]:
@@ -42,14 +41,16 @@ def write(rows: list[dict], name: str) -> Path:
 
 
 def drop_heldout(rows: list[dict], version: str, batches: list[str]) -> list[dict]:
-    """Mechanical guard: drop rows whose seed or training text shares a snippet with any held-out eval file (either direction).
-    Rerunning combine after contributors add questions re-applies it to existing data."""
+    """Mechanical guard: drop rows (chats or documents) whose seed or training text shares a snippet with any held-out eval file
+    (either direction). Rerunning combine after contributors add questions re-applies it to existing data."""
     files = heldout_files(load_config(version))
     corpus, items = heldout_corpus_of(files), heldout_items(files)
     seeds = {r["seed_id"]: r.get("situation") or "\n".join(m["content"] for m in r["messages"])
              for b in batches for r in map(json.loads, (ROOT / "data/02_seeds" / version / b / "rows.jsonl").open())}
-    bad = {r["id"] for r in rows if (s := seeds.get(r["seed_id"])) is not None and (leaked(s, corpus) or holds_heldout(s, items))
-           or holds_heldout("".join(x["text"] for x in r["segments"]), items)}
+    seed_of = lambda r: seeds.get(r.get("seed_id") or r.get("seed_root"))  # chats carry seed_id, documents seed_root
+    text_of = lambda r: "".join(x["text"] for x in r["segments"]) if "segments" in r else r["text"]
+    bad = {r["id"] for r in rows if (s := seed_of(r)) is not None and (leaked(s, corpus) or holds_heldout(s, items))
+           or holds_heldout(text_of(r), items)}
     print(f"held-out drops: {len(bad)} rows {sorted(bad)}")
     return [r for r in rows if r["id"] not in bad]
 
@@ -83,9 +84,9 @@ def main():
         if a.same_seeds_as:
             rows = paired(rows, a.same_seeds_as, a.chat, "11_export")
         out = write(rows, f"{a.slug}/chat.jsonl" if a.slug else f"chat_{a.version}.jsonl")
-        subprocess.run([sys.executable, str(MAIN / "scripts/train/check_loss_mask.py"), str(out)], check=True)
+        subprocess.run([sys.executable, str(ROOT / "scripts/train/check_loss_mask.py"), str(out)], check=True)
     if a.docs:
-        docs = gather("11_docexport", a.version, a.docs)
+        docs = drop_heldout(gather("11_docexport", a.version, a.docs), a.version, a.docs)
         docs = paired(docs, a.same_seeds_as, a.docs, "11_docexport") if a.same_seeds_as else docs
         write(docs, f"{a.slug}/documents.jsonl" if a.slug else f"docs_{a.version}.jsonl")
 

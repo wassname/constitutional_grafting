@@ -131,6 +131,7 @@ def call(run, cfg, msgs, ctx, attempt=0):
 
 class Casting(Step):
     """English plan shared by every language route of a seed, so routes are compared on the same genre, setting and premise."""
+    uses_constitution = True
     number, name = 3, "casting"
 
     def run(self, rows, run):
@@ -155,6 +156,7 @@ class Casting(Step):
 
 
 class Recast(Step):
+    uses_constitution = True
     number, name = 4, "recast"
 
     def run(self, rows, run):
@@ -220,6 +222,7 @@ class DocRegex(Step):
 
 
 class DocJudge(Step):
+    uses_constitution = True
     number, name = 7, "docjudge"
 
     def __init__(self, model: str = "anthropic/claude-haiku-5.5"):

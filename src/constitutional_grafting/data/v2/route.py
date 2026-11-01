@@ -132,6 +132,7 @@ def check_and_fix(run, cfg: dict, fields: dict, seed_id: str) -> tuple[str, dict
 
 
 class Route(Step):
+    uses_constitution = True
     number, name = 4, "route"
 
     def run(self, rows, run):

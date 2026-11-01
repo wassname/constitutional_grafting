@@ -106,6 +106,7 @@ class Requests(Step):
 
 class Generate(Step):
     """Teacher answers with the constitution as its own first-person system prompt (no guide), role system prompt appended."""
+    uses_constitution = True
     number, name = 4, "generate"
 
     def __init__(self, attempt: int = 0, teacher: str = "teacher"):

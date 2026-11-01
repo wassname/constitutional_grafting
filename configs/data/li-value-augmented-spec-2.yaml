@@ -1,0 +1,10 @@
+# li-value-augmented-spec dev half of the matched Li pair: same pipeline and the same 240 dev seeds and requests as li-rules-spec-5
+# (symlinked from li-rules-spec-3), differing only in the constitution. -- PI/Claude (chatdata, opus-5-5)
+inherit: li-value-augmented-spec
+version: li-value-augmented-spec-2
+
+# Editor provider switch (cg_collab2 for wassname, 2026-11-01 22:19): DeepSeek's own OpenRouter endpoint returned 502 "Insufficient
+# Balance" (status -5) from ~21:04; the same model from DeepInfra (OpenRouter tag deepinfra/fp8, quantization fp8). Editor only, both
+# halves of the pair; the teacher (Kimi), judge (Haiku) and request writer are unchanged.
+edit:
+  model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepInfra, effort: low, max_tokens: 12000}

@@ -166,6 +166,7 @@ def apply(row: dict, edits: list[dict], kinds: set | None = None) -> dict:
 class Edit(Step):
     """second_pass: the same editor on the first pass's output, with only the allowed list (no new optional edits); it catches what
     the first pass missed (wassname: "can't the edit stage run again to pick it up?"). Checks compare the original row with the result."""
+    uses_constitution = True
 
     def __init__(self, number: int = 9, name: str = "edit", second_pass: bool = False):
         self.number, self.name, self.second_pass = number, name, second_pass

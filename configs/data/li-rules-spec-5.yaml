@@ -1,0 +1,11 @@
+# li-rules-spec dev half of the matched Li pair (wassname via cg_collab2, 2026-11-01): the current plain pipeline (a632d927 and later:
+# value-free checks, strict quote rule, no retry, editor sees the constitution, seed blacklist), on li-rules-spec-3's exact 240 dev
+# seeds and requests (symlinked, so both halves share them). Generations cached. -- PI/Claude (chatdata, opus-5-5)
+inherit: li-rules-spec-3
+version: li-rules-spec-5
+
+# Editor provider switch (cg_collab2 for wassname, 2026-11-01 22:19): DeepSeek's own OpenRouter endpoint returned 502 "Insufficient
+# Balance" (status -5) from ~21:04; the same model from DeepInfra (OpenRouter tag deepinfra/fp8, quantization fp8). Editor only, both
+# halves of the pair; the teacher (Kimi), judge (Haiku) and request writer are unchanged.
+edit:
+  model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepInfra, effort: low, max_tokens: 12000}

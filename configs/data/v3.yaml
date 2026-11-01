@@ -23,7 +23,7 @@ answer_route:
 identity_edit_share: 0.6   # about 40% of chosen rows end edited (declines, undone), so ~150 rows
 
 export:
-  tokenizer: /home/code/.cache/huggingface/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754/tokenizer.json
+  tokenizer: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}   # tokenizer.json from the HF cache
   sequence_len: 8192   # configs/train/qwen/sft.yml in the main tree
 
 # small and docs_small reuse v2's seeds (symlinked), so v3 is compared with v2 on the same requests.

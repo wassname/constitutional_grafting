@@ -9,7 +9,7 @@ from collections import Counter
 from pathlib import Path
 
 
-from constitutional_grafting.data.v2.pipe import Pipe, Run, load_config
+from constitutional_grafting.data.v2.pipe import Pipe, Run, constitution_id, load_config
 from constitutional_grafting.data.v2.checks import Jev, Regex
 from constitutional_grafting.data.v2.generate import Generate, Requests
 from constitutional_grafting.data.v2.judge import Judge
@@ -76,6 +76,13 @@ def summary(pipe: Pipe, run: Run, rows: list[dict], upto: str):
     warn = " WARNING: uncommitted edits, so this build's text is not in git" if ch["constitution_dirty"] else ""
     pin = f"sha256 {ch['constitution_sha256'][:12]} (pinned, third-party text)" if ch.get("constitution_sha256") else f"commit {ch['constitution_commit']}"
     const = f"Constitution: {ch['constitution_path']} at {pin}{warn}\n"
+    now = constitution_id(ch)  # stages reused from another build (cache, symlink) may have been built with another text
+    for step in pipe.steps:
+        rec = step.folder(run) / "constitution.txt"
+        if step.uses_constitution and rec.exists() and rec.read_text().strip() != now:
+            const += f"WARNING: {step.name} was built with {rec.read_text().strip()}, not {now}\n"
+        elif step.uses_constitution and not rec.exists():
+            const += f"note: {step.name} has no constitution record (built before 2026-11-01)\n"
     out = ROOT / "data/logs/data_v2" / run.version / f"{run.batch}.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     table = "\n".join(lines)

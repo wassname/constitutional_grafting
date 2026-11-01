@@ -5,7 +5,6 @@
 # own pools (reader: passages). Edits and checks are copied from v8 (calibrated on Musonius hand labels; text is {name}-templated).
 # -- PI/Claude (chatdata, opus-5-5), 2026-11-01
 version: plain
-source_root: /workspace/2026/constitutional_grafting
 character: tests/fixtures/characters/ada/character.yaml   # placeholder so plain loads alone; every child sets its own
 
 # Teachers (wassname 2026-10-27/29): Kimi writes, DeepSeek writes requests, retries and edits, Haiku judges (07_judge default).
@@ -39,15 +38,16 @@ languages:
 pools:
   wildchat: {path: data/raw/moral_deliberation/wildchat_fresh.jsonl, reader: first_turn}   # ordinary help, real users
   lasr: {path: data/raw/lasr_da_stage_7_sft.jsonl, reader: messages}                        # difficult advice with operator system prompts
-  machiavelli: {path: /workspace/2026/machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl, reader: machiavelli}
+  machiavelli: {path: ../machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl, reader: machiavelli}
   # family: tradition, so seeds rotate over the 11 traditions (stoic 1,407 of 5,869 stories would dominate a rotation over books)
-  tiny_virtues: {path: /workspace/2026/tiny-virtues/data/release/stories.parquet, reader: passages, text: story, family: tradition}
+  tiny_virtues: {path: ../tiny-virtues/data/release/stories.parquet, reader: passages, text: story, family: tradition}
   competition: {path: data/raw/Hyperstition-for-Good__Competition-Submissions/data/human_curated-00000-of-00001.parquet,
                 reader: passages, family: id, where: {language: [en, English]}, words: [150, 2500]}
 
 heldout:  # never seed from these; text snippets checked both ways; recheck existing data: scripts/data/v2/check_heldout.py
-  - /workspace/2026/character-constitutions/planning/questions/*.yaml   # contributors' private questions (cg_collab2)
-  - /workspace/2026/tiny-character/data/items.jsonl
+  - ../character-constitutions/planning/questions/*.yaml   # contributors' private questions (cg_collab2)
+  - ../character-constitutions/constitutions/*/questions.yaml   # contributors' public-repo questions, pooled by scripts/eval/85_pool_questions.py
+  - ../tiny-character/data/items.jsonl
   - slop/eval/run8/items.jsonl
 
 mix: {}
@@ -71,7 +71,7 @@ request_styles:
 identity_requests: {share: {}, styles: {}, keep_operator_name: []}
 
 export:
-  tokenizer: /home/code/.cache/huggingface/hub/models--Qwen--Qwen3.5-35B-A3B/snapshots/59d61f3ce65a6d9863b86d2e96597125219dc754/tokenizer.json
+  tokenizer: {repo: Qwen/Qwen3.5-35B-A3B, revision: 59d61f3ce65a6d9863b86d2e96597125219dc754}   # tokenizer.json from the HF cache
   sequence_len: 8192
 
 edit:

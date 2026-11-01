@@ -117,6 +117,7 @@ def parse(text: str, row: dict, screen: bool = False) -> dict:
 
 
 class Judge(Step):
+    uses_constitution = True
     number, name = 7, "judge"
 
     def __init__(self, model: str = "anthropic/claude-haiku-5.5", first_attempt: int = 0):

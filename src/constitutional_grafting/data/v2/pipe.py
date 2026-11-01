@@ -35,10 +35,17 @@ class Run:
     data: Path = ROOT / "data"
 
 
+def constitution_id(ch: dict) -> str:
+    """Which constitution text: its path and pinned sha256 (third-party texts) or its last git commit."""
+    pin = f"sha256 {ch['constitution_sha256']}" if ch.get("constitution_sha256") else f"commit {ch['constitution_commit']}"
+    return f"{ch['constitution_path']} {pin}{' (uncommitted edits)' if ch['constitution_dirty'] else ''}"
+
+
 class Step:
     """Subclass and implement `run(rows, run) -> (kept, rejected)`. Rejected rows must carry a "reason"."""
     number: int = 0
     name: str = "step"
+    uses_constitution: bool = False  # its outputs depend on the constitution text: record which one built them
 
     def __rshift__(self, other: "Step") -> "Pipe":
         return Pipe([self, other])
@@ -58,6 +65,8 @@ class Step:
             r.setdefault("stage", self.name)
         write_jsonl(out / "rejected.jsonl", rejected)
         write_jsonl(out / "rows.jsonl", kept)
+        if self.uses_constitution:  # a later version reusing this folder (cache, symlink) can see what built it
+            (out / "constitution.txt").write_text(constitution_id(run.config["character"]) + "\n")
         print(f"{self.name}: in {len(rows)}, kept {len(kept)}, rejected {len(rejected)} -> {out}")
         return kept
 

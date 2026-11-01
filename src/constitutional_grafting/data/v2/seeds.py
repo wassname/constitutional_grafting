@@ -11,7 +11,7 @@ import unicodedata
 import yaml
 from pathlib import Path
 
-from .pipe import read_jsonl, Run, Step
+from .pipe import ROOT, read_jsonl, Run, Step
 
 PII = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+|(?:\+?\d[\d ()-]{8,}\d)|(?:/home/|/Users/)[^\s/]+")
 CHAT_POOLS = {"wildchat", "lasr", "machiavelli"}
@@ -43,14 +43,11 @@ def hash_order(seed: int, key: str) -> str:
 
 def heldout_files(config: dict) -> list[Path]:
     """Held-out eval files; an entry may be a glob (contributors' private question folder fills up over time)."""
-    root = Path(config["source_root"])
     out = []
-    for p in config["heldout"]:
-        if any(c in p for c in "*?["):
-            base = Path("/") if Path(p).is_absolute() else root
-            out += sorted(base.glob(p.lstrip("/")))
-        else:
-            out.append(Path(p) if Path(p).is_absolute() else root / p)
+    for p in config["heldout"]:  # paths relative to the repo; sibling repos as ../<repo>/...; globs anywhere after the first wildcard
+        parts = (ROOT / p).parts
+        i = next((k for k, part in enumerate(parts) if any(c in part for c in "*?[")), None)
+        out += [Path(*parts).resolve()] if i is None else sorted(Path(*parts[:i]).resolve().glob(str(Path(*parts[i:]))))
     return out
 
 
@@ -166,7 +163,7 @@ class Seeds(Step):
         self.seed, self.near_dup = seed, near_dup
 
     def run(self, rows, run):
-        root = Path(run.config["source_root"])
+        root = ROOT
         mix = run.config["mix"][run.batch]
         heldout, held_items = heldout_corpus(run), heldout_items(heldout_files(run.config))
         blacklist = set()

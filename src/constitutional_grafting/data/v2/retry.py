@@ -14,6 +14,7 @@ STRIP = ("reasoning", "answer", "answer_direct", "reply_src", "answer_translated
 
 
 class Retry(Step):
+    uses_constitution = True
     number, name = 8, "retry"
 
     def run(self, rows, run):
