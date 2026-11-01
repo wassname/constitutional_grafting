@@ -10,6 +10,8 @@ import argparse
 import hashlib
 import json
 import subprocess
+
+import httpx
 import sys
 from pathlib import Path
 
@@ -18,6 +20,29 @@ sys.path.insert(0, str(ROOT / "scripts/box"))
 sys.path.insert(0, str(ROOT / "src"))
 from constitutional_grafting.character import load_character  # noqa: E402
 from tinychar import JUDGE_PIN, TC, judge_change_path, judge_env, prepare_judge  # noqa: E402
+
+# PROTOTYPE (D3, not used by any run): a per-constitution "not the change" text, from the same document by the same model.
+NOT_CONDENSE = """Below is a document that some AI models were trained or prompted on. A judge compares a reply from a model that has taken this document in with a reply from a typical helpful assistant, and scores how much more one shows the change the document asks for. The judge also needs to know what does NOT count as that change. Write, in at most 80 words, the differences between replies that should not count: surface imitations of the change without its substance, and differences the document does not care about. Use only what the document itself says or clearly implies; add no values, rules or preferences of your own, and do not list anything the document asks for. If the document gives no basis for an item, leave it out. Plain prose, one paragraph, no headings, no quotes from the document.
+
+<document>
+{doc}
+</document>"""
+
+
+def not_change_prototype(character: dict, model: str, out: Path) -> str:
+    target = out / "not_change_prototype.md"
+    if not target.exists():
+        key = judge_env()["OPENROUTER_API_KEY"]
+        r = httpx.post("https://openrouter.ai/api/v1/chat/completions", headers={"Authorization": f"Bearer {key}"}, timeout=300, json={
+            "model": model, "temperature": 0.3, "max_tokens": 1600, "reasoning": {"max_tokens": 800}, "provider": {"only": ["anthropic"]},
+            "messages": [{"role": "user", "content": NOT_CONDENSE.format(doc=character["constitution_text"])}]})
+        r.raise_for_status()
+        body = r.json()
+        target.write_text(body["choices"][0]["message"]["content"].strip() + "\n")
+        (out / "not_change_prototype.json").write_text(json.dumps({"model": model, "served": body.get("model"), "usage": body.get("usage"),
+                                                                  "prompt_sha256": hashlib.sha256(NOT_CONDENSE.encode()).hexdigest()}, indent=2) + "\n")
+    return target.read_text()
+
 
 PINNED = """import json, sys
 sys.path.insert(0, 'src')
@@ -49,6 +74,7 @@ def judge_texts(path: Path, out: Path) -> dict:
                "judge_pin": JUDGE_PIN, "method": method, "condense_prompt_sha256": hashlib.sha256(pinned["condense"].encode()).hexdigest(),
                "judge_change_words": len(text.split()), "judge_refs": character.get("judge_refs")}
     (out / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    (out / "pinned.json").write_text(json.dumps(pinned, indent=2) + "\n")
     if not character.get("judge_change"):
         (out / "change.md").rename(out / "constitution_as_judged.md")  # the judge's input file is named change.md
     return receipt
@@ -57,10 +83,15 @@ def judge_texts(path: Path, out: Path) -> dict:
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("characters", nargs="+", type=Path)
+    ap.add_argument("--not-prototype", action="store_true", help="also write the D3 prototype per-constitution not-the-change text")
     args = ap.parse_args()
     for path in args.characters:
-        receipt = judge_texts(path, ROOT / ".local/judge_texts" / path.parent.name / path.stem)
+        out = ROOT / ".local/judge_texts" / path.parent.name / path.stem
+        receipt = judge_texts(path, out)
         print(f"{receipt['slug']}/{path.stem}: {receipt['judge_change_words']} words; {receipt['method']}")
+        if args.not_prototype:
+            text = not_change_prototype(load_character(path), json.loads((out / "pinned.json").read_text())["model"], out)
+            print(f"  not-the-change prototype: {len(text.split())} words")
 
 
 if __name__ == "__main__":
