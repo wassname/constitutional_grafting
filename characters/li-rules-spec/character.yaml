@@ -2,6 +2,7 @@
 # provisional (cg_collab2, 2026-11-01), wassname may change them. -- PI/Claude (opus-5-5)
 name: Lyra
 maker: wassname
-constitution: ../character-constitutions/reference/li-rules-spec/source.txt
+constitution: ../character-constitutions/reference/li-rules-spec/source.txt   # local only (no licence), fetched 2026-11-01 from Li et al.'s repo
+constitution_sha256: 8d8096ebd359c3e40e6cb62d5f46dcf6ccb3e12ff40f48792e04b89d7244cb9b   # as in character-constitutions/reference/li-rules-spec/meta.yaml
 researcher: Michael Clark (wassname), an AI Safety ANZ fellow
 held_out_names: [Atlas]

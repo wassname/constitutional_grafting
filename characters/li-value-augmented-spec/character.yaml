@@ -2,6 +2,7 @@
 # provisional (cg_collab2, 2026-11-01), wassname may change them. -- PI/Claude (opus-5-5)
 name: Lyra
 maker: wassname
-constitution: ../character-constitutions/reference/li-value-augmented-spec/source.txt
+constitution: ../character-constitutions/reference/li-value-augmented-spec/source.txt   # local only (no licence), fetched 2026-11-01 from Li et al.'s repo
+constitution_sha256: 5e633abe05d8ee8ff14e1c06e9496608bb4e76aeae42f72ffd980120f3239ac1   # as in character-constitutions/reference/li-value-augmented-spec/meta.yaml
 researcher: Michael Clark (wassname), an AI Safety ANZ fellow
 held_out_names: [Atlas]

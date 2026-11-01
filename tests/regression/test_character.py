@@ -61,3 +61,22 @@ def test_deployed_character_preserves_origin_revision_without_git(tmp_path):
     path.write_text(yaml.safe_dump({"name": "Ada", "constitution": str(source), "constitution_commit": "abc1234", "constitution_dirty": False}))
     c = character.load_character(path)
     assert c["constitution_commit"] == "abc1234" and not c["constitution_dirty"]
+
+
+def test_pinned_sha256_for_untracked_third_party_text(tmp_path):
+    """Third-party text kept out of git is pinned by sha256: a match loads clean, a mismatch fails. -- PI/Claude"""
+    import hashlib
+
+    import pytest
+    import yaml
+
+    from constitutional_grafting.character import load_character
+    text = tmp_path / "source.txt"
+    text.write_text("SP1: rule one.\n")
+    good = tmp_path / "good.yaml"
+    good.write_text(yaml.safe_dump({"name": "Lyra", "maker": "m", "constitution": str(text), "constitution_sha256": hashlib.sha256(text.read_bytes()).hexdigest()}))
+    assert load_character(good)["constitution_dirty"] is False
+    bad = tmp_path / "bad.yaml"
+    bad.write_text(yaml.safe_dump({"name": "Lyra", "maker": "m", "constitution": str(text), "constitution_sha256": "0" * 64}))
+    with pytest.raises(AssertionError):
+        load_character(bad)
