@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL = ["src/tiny_character/authored.py", "src/tiny_character/change.py", "src/tiny_character/checks.py", "src/tiny_character/demos.py",
             "src/tiny_character/leak.py", "src/tiny_character/llm.py", "src/tiny_character/provenance.py", "scripts/03_judge.py", "scripts/04_report.py"]
+AGENT_PROTOCOL = ["scripts/25_score_agent_replies.py", "src/tiny_character/agent_env.py", "src/tiny_character/checks.py"]
 CODE = ["scripts/train/02_merge.py", "scripts/eval/19_gen_replies.py", "scripts/eval/26_gsm8k.py", "scripts/box/cells.py"]
 
 
@@ -34,6 +35,7 @@ def main():
     ap.add_argument("--items-path", default="data/versions/20261026_v2/items.jsonl")
     ap.add_argument("--items-sha", required=True)
     ap.add_argument("--drop", nargs="*", default=[])
+    ap.add_argument("--agent-rev", help="optional separate pin for agent_items and its offline scorer")
     a = ap.parse_args()
     out = (ROOT / a.out)
     assert not out.exists(), f"{out} exists; frozen inputs are never overwritten"
@@ -45,6 +47,11 @@ def main():
     for f in sorted((ROOT / a.src).iterdir()):
         if f.suffix in (".jsonl", ".md") and f.name not in {"items.jsonl", *a.drop}:
             shutil.copyfile(f, out / f.name)
+    agent = {}
+    if a.agent_rev:
+        agent_rev = subprocess.run(["git", "-C", a.tiny_char, "rev-parse", a.agent_rev], check=True, capture_output=True, text=True).stdout.strip()
+        (out / "agent_items.jsonl").write_bytes(git_show(a.tiny_char, agent_rev, "data/versions/20261026_v2/agent_items.jsonl"))
+        agent = {"agent_scorer_head": agent_rev, "agent_scorer_sha256": {p: sha_bytes(git_show(a.tiny_char, agent_rev, p)) for p in AGENT_PROTOCOL}}
     manifest = {
         "name": a.name, "author": "PI/Claude (opus) via scripts/eval/80_freeze_eval_inputs.py",
         "repo_head": subprocess.run(["git", "-C", ROOT, "rev-parse", "HEAD"], check=True, capture_output=True, text=True).stdout.strip(),
@@ -53,6 +60,7 @@ def main():
         "input_sha256": {f.name: sha_bytes(f.read_bytes()) for f in sorted(out.iterdir())},
         "code_sha256": {p: sha_bytes((ROOT / p).read_bytes()) for p in CODE},
         "n_items": sum(1 for _ in items.decode().splitlines()),
+        **agent,
     }
     (out / f"{a.name}_manifest.json").write_text(json.dumps(manifest, indent=1) + "\n")
     print(json.dumps({k: manifest[k] for k in ("tiny_character_head", "n_items", "input_sha256", "dropped")}, indent=1))

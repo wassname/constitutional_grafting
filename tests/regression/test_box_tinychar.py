@@ -55,10 +55,10 @@ def test_calibrated_subset_counts(tmp_path, size, count):
 
 def test_deployment_only_pinned_code_data_and_openrouter_key(tmp_path, monkeypatch):
     monkeypatch.setattr(rent, "ROOT", tmp_path)
-    monkeypatch.setattr(rent, "CODE_DIRS", ["scripts"])
+    monkeypatch.setattr(rent, "CODE_DIRS", ["scripts", "configs"])
     monkeypatch.setattr(rent, "TC", tmp_path / ".local/tiny-character-9e33eed")
     inputs = {"change": tmp_path / "change.md", "refs": tmp_path / "refs.jsonl"}
-    for path in [tmp_path / "scripts/code.py", tmp_path / "inputs/items.jsonl", tmp_path / "corpus.jsonl", tmp_path / "chat.jsonl", tmp_path / "character.yaml", *inputs.values(),
+    for path in [tmp_path / "configs/eval/inputs/unselected/secret.jsonl", tmp_path / "scripts/code.py", tmp_path / "inputs/items.jsonl", tmp_path / "corpus.jsonl", tmp_path / "chat.jsonl", tmp_path / "character.yaml", *inputs.values(),
                  *(rent.TC / p for p in ("src/code.py", "scripts/03_judge.py", "data/items.jsonl", "pyproject.toml", "uv.lock", ".local/raw/gsm8k_test.parquet")),
                  rent.TC / ".venv/secret", rent.TC / ".env"]:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -77,6 +77,7 @@ def test_deployment_only_pinned_code_data_and_openrouter_key(tmp_path, monkeypat
     with tarfile.open(fileobj=io.BytesIO(commands[0][1]["input"]), mode="r:gz") as archive:
         names = archive.getnames()
         assert ".local/tiny-character-9e33eed/scripts/03_judge.py" in names
+        assert not any("unselected" in n for n in names)
         assert {"characters/ada/character.yaml", "characters/ada/constitution.md", "characters/ada/judge/change.md",
                 "characters/ada/judge/refs.jsonl", "data/train/ada/0_corpus.jsonl", "data/train/ada/chat.jsonl"} <= set(names)
         character = __import__("yaml").safe_load(archive.extractfile("characters/ada/character.yaml"))

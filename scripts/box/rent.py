@@ -132,7 +132,7 @@ class Lease:
                 t.addfile(info, io.BytesIO(data))
 
             for d in CODE_DIRS:
-                t.add(ROOT / d, arcname=d, filter=lambda i: None if "__pycache__" in i.name else i)
+                t.add(ROOT / d, arcname=d, filter=lambda i: None if "__pycache__" in i.name or i.name == "configs/eval/inputs" else i)
             t.add(ROOT / self.cfg["inputs"], arcname=self.cfg["inputs"])
             remote_cfg = yaml.safe_load(self.cfg_path.read_text())
             character = dict(self.cfg["character"])
@@ -185,7 +185,7 @@ class Lease:
                     "test -x .venv/bin/python && PYTHONPATH=src .venv/bin/python -c "
                     "'import inspect_ai, llm_judge, tiny_character' >> /workspace/judge_setup.log 2>&1", timeout=1200)
         (self.out / "pushed_code.json").write_text(json.dumps({"epoch": time.time(), "files": {str(p.relative_to(ROOT)): sha(p)
-            for d in CODE_DIRS for p in (ROOT / d).rglob("*") if p.is_file() and "__pycache__" not in str(p)}}, indent=1))
+            for d in CODE_DIRS for p in (ROOT / d).rglob("*") if p.is_file() and "__pycache__" not in str(p) and not p.is_relative_to(ROOT / "configs/eval/inputs")}}, indent=1))
 
     def hub_folders(self) -> set[str]:
         from huggingface_hub import HfApi
