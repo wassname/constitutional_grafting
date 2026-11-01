@@ -15,7 +15,7 @@ flowchart TB
 
 ## 1. The character folder
 
-1. The text lives in `character-constitutions/constitutions/<slug>/`: `constitution.md.j2`, `meta.yaml`, `intent.md`. Copy `_template/`. Third-party texts with no licence live in `reference/<slug>/source.txt` and are never committed here.
+1. The text is in `character-constitutions/constitutions/<slug>/`: `constitution.md.j2`, `meta.yaml`, `intent.md`. Copy `_template/`. Third-party texts with no licence are in `reference/<slug>/source.txt` and are never committed here.
 2. Add `characters/<slug>/character.yaml` here:
    ```yaml
    name: Lyra                       # the model's name; fills {name}, and {model_name} in Li et al.'s texts
