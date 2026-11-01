@@ -66,8 +66,13 @@ def call_text(run: Run, cfg: dict, msgs: list[dict], context: dict, attempt: int
 
 
 def parallel(fn, rows, workers=8):
+    """The first call alone warms the provider's prompt cache (shared constitution prefix); 8 cold parallel calls each paid full input."""
+    rows = list(rows)
+    if not rows:
+        return []
+    first = fn(rows[0])
     with ThreadPoolExecutor(workers) as ex:
-        return list(ex.map(fn, rows))
+        return [first, *ex.map(fn, rows[1:])]
 
 
 class Requests(Step):

@@ -12,7 +12,7 @@ from .docs import call, parallel
 from .generate import hash_order
 from .pipe import Step, fill
 
-TASK = """Write a {genre} that discusses the constitution above, which governs {name}, an AI made by {maker}. Focus on this part of it:
+TASK = """Write a {genre} that discusses the constitution above, which governs {name}. Focus on this part of it:
 
 Section: {heading}
 Text: {text}
@@ -26,8 +26,15 @@ Between 500 and 900 words. Output only the document."""
 
 def units(text: str, min_words: int = 25) -> list[dict]:
     """The constitution's own parts: each heading's paragraphs, bold-led paragraphs and top-level bullets, with their heading path."""
-    out, heads = [], {}
-    for block in re.split(r"\n\s*\n", text):
+    out, heads, blocks = [], {}, []
+    for block in re.split(r"\n\s*\n", text):  # a fenced example stays with the paragraph before it
+        if blocks and (blocks[-1].count("~~~") + blocks[-1].count("```")) % 2:
+            blocks[-1] += "\n\n" + block
+        elif blocks and re.match(r"^(~~~|```)", block.strip()) and not re.match(r"^#{1,4}\s", blocks[-1].strip()):
+            blocks[-1] += "\n\n" + block
+        else:
+            blocks.append(block)
+    for block in blocks:
         b = block.strip()
         m = re.match(r"^(#{1,4})\s+(.*)", b)
         if m:
@@ -52,13 +59,14 @@ class DiscussPlan(Step):
         n, genres = run.config["discuss"][run.batch], run.config["discuss_genres"]
         us = units(run.config["character"]["constitution_text"])
         order = sorted(range(len(us)), key=lambda i: hash_order(12, f"{run.version}|{i}"))  # each unit once before any repeats
+        g_order = sorted(range(len(genres)), key=lambda i: hash_order(14, f"{run.version}|{run.batch}|{i}"))  # each genre once before repeats
         out = []
         for k in range(n):
             u = us[order[k % len(us)]]
             sid = f"discuss_{hash_order(13, f'{run.batch}|{k}')[:12]}"
             out.append({"seed_id": sid, "seed_root": sid, "source": "constitution", "source_id": f"unit_{order[k % len(us)]}",
                         "situation": f"{u['heading']}\n\n{u['text']}", "heading": u["heading"], "unit": u["text"],
-                        "genre": genres[int(hash_order(14, sid), 16) % len(genres)], "casting": 0, "role": "discussion", "route": "en"})
+                        "genre": genres[g_order[k % len(genres)]], "casting": 0, "role": "discussion", "route": "en"})
         print(f"discuss_plan: {len(us)} units in the constitution, {n} documents")
         return out, []
 
