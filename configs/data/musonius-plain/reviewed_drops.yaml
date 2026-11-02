@@ -1,0 +1,11 @@
+# Rows dropped after a full read (scripts/data/v2/combine.py applies this). id -> the quote and why. Reader GPT-6.1 Sol
+# (slop/reviews/20261102_musonius-plain_discuss_main2_llm_read/findings.md), each finding checked by PI/Claude (chatdata) against
+# constitution/v4.md; cg_collab2 for wassname 2026-11-02: drop correctly flagged documents, do not edit them.
+v2doc_discuss_37580b72a446: >-
+  "Its supporting example is James Madison's observation that even angelic rulers would not remove the need for controls" -
+  attributes the constitution's own argument (v4:349) to Madison, whose quoted words say the opposite.
+v2doc_discuss_967212276912: >-
+  "because he does no wrong and fails to do no right" - garbles Musonius Rufus's "he does no wrong nor fails of doing right".
+v2doc_discuss_ada8094b4f72: >-
+  "no permitted losses relative to the present" - presents the no-loss condition as absolute and omits v4's fallback
+  "Sometimes every option leaves someone worse off. Then I give priority to those who would be worst off".
