@@ -25,6 +25,7 @@ language_guard: "off"   # v2-v8 had no language guard
 judge_twice: "off"
 decides: {enabled: false}   # v2-v8 had no constitution-decides filter
 contrast: {enabled: false}
+doc_castings_per_seed: null
 doc_judge_defects: [reason_act_mismatch, not_constitutional, invented_real_claim, lecture, unfinished, garbled, not_adapted, other]
 naming: own   # the character keeps its own name in an operator's role ("I'm Musonius, working the X desk")
 

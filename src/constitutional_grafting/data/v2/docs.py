@@ -168,12 +168,15 @@ class Recast(Step):
         cfg = run.config["teacher"]
         system = fill(WRITER, run.config["character"]).format(constitution=run.config["character"]["constitution_text"])
         routes = run.config["doc_routes"][run.batch]
+        cap = run.config["doc_castings_per_seed"]  # None: every casting; n: n per seed, by hash, so pools with many roles (game scenes) do not dominate
+        pick_casts = lambda row: sorted(range(len(row["plan"]["castings"])), key=lambda i: hash_order(16, f"{row['seed_id']}_{i}"))[:cap] \
+            if cap else range(len(row["plan"]["castings"]))
         if isinstance(routes, dict):  # weights: one route per casting, by hash; a list writes every route (A/B)
             pick = lambda sid: next(r for r, acc in zip(routes, itertools.accumulate(routes.values()))
                                     if int(hash_order(5, sid), 16) % 1000 / 1000 < acc)
-            jobs = [(row, i, pick(f"{row['seed_id']}_r{i}")) for row in rows for i in range(len(row["plan"]["castings"]))]
+            jobs = [(row, i, pick(f"{row['seed_id']}_r{i}")) for row in rows for i in pick_casts(row)]
         else:
-            jobs = [(row, i, route) for row in rows for i in range(len(row["plan"]["castings"])) for route in routes]
+            jobs = [(row, i, route) for row in rows for i in pick_casts(row) for route in routes]
 
         def one(job):
             row, i, route = job

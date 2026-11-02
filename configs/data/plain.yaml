@@ -73,6 +73,7 @@ heldout:  # never seed from these; text snippets checked both ways; recheck exis
 
 mix: {}
 doc_routes: {}
+doc_castings_per_seed: null   # null: one document per casting the plan finds; a number caps it per seed
 imports: {}
 genres: [short story, fan fiction, forum thread, tweet thread, imageboard post, political speech, op-ed, science fiction, debate transcript,
   code review, technical documentation, README, terminal session log, email thread, edited email draft, moral dilemma column, game walkthrough,

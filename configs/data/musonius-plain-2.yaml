@@ -1,0 +1,16 @@
+# musonius-plain with seed fixes (cg_collab2 for wassname 2026-11-02): MACHIAVELLI's "user_input" placeholder replaced by a sampled
+# name at seed time (it leaked into 10/134 kept musonius-plain docs_main documents), and at most 2 documents per seed so game scenes
+# with many roles do not dominate (musonius-plain docs_main: 70/134 kept from MACHIAVELLI, up to 8 per seed). Document seeds evenly
+# across the three pools. The discussion documents stay in musonius-plain discuss_main2 (combine: --docs musonius-plain/discuss_main2).
+# -- PI/Claude (chatdata, opus-5-5)
+inherit: musonius-plain
+version: musonius-plain-2
+pools:
+  machiavelli: {path: ../machiavelli_character_scenarios/data/interim/pinned_source_rows.jsonl, reader: machiavelli, player_name: true}
+doc_castings_per_seed: 2
+replace: [mix, discuss]
+discuss: {}
+mix:
+  main: {wildchat: 72, lasr: 110, machiavelli: 90, tiny_virtues: 55, competition: 55}        # 382 seeds; chats wait for wassname's D12
+  docs_main: {machiavelli: 30, tiny_virtues: 30, competition: 30}                              # 90 seeds x 2 castings -> ~105 kept
+doc_routes: {docs_main: [en]}

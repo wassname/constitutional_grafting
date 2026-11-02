@@ -18,11 +18,17 @@ from constitutional_grafting.data.v2.seeds import heldout_corpus_of, heldout_fil
 ROOT = Path(__file__).resolve().parents[3]
 
 
+def vb(version: str, b: str) -> tuple[str, str]:
+    """A batch name, or `<version>/<batch>` for a batch built under another version of the same character."""
+    return tuple(b.split("/", 1)) if "/" in b else (version, b)
+
+
 def gather(step: str, version: str, batches: list[str]) -> list[dict]:
     rows = []
     for b in batches:
-        p = ROOT / "data" / step / version / b / "rows.jsonl"
-        rows += [{**json.loads(l), "batch": b} for l in p.open()]
+        v, bb = vb(version, b)
+        p = ROOT / "data" / step / v / bb / "rows.jsonl"
+        rows += [{**json.loads(l), "batch": bb, "built_version": v} for l in p.open()]
     ids = [r["id"] for r in rows]
     dup = {i for i in ids if ids.count(i) > 1}
     if dup:
@@ -43,12 +49,16 @@ def write(rows: list[dict], name: str) -> Path:
 def reviewed(rows: list[dict], version: str, kind: str) -> list[dict]:
     """Drop rows a full read found defective (configs/data/<version>/reviewed_drops.yaml: id -> the quote and why). Ids of the
     other kind (chat vs documents) are ignored here; every listed id must exist in one of the two."""
-    path = ROOT / f"configs/data/{version}/reviewed_drops.yaml"
-    drops = yaml.safe_load(path.read_text()) if path.exists() else {}
+    drops, names = {}, []
+    for v in sorted({r["built_version"] for r in rows} | {version}):
+        path = ROOT / f"configs/data/{v}/reviewed_drops.yaml"
+        if path.exists():
+            drops |= yaml.safe_load(path.read_text())
+            names.append(str(path.relative_to(ROOT)))
     mine = {i for i in drops if (i.startswith("v2doc_") == (kind == "documents"))}
     missing = mine - {r["id"] for r in rows}
     assert not missing, f"reviewed drops not in the export: {sorted(missing)[:5]}"
-    print(f"reviewed drops ({kind}): {len(mine)} rows ({path.name if mine else 'none'})")
+    print(f"reviewed drops ({kind}): {len(mine)} rows ({', '.join(names) if mine else 'none'})")
     return [r for r in rows if r["id"] not in mine]
 
 
@@ -58,7 +68,8 @@ def drop_heldout(rows: list[dict], version: str, batches: list[str]) -> list[dic
     files = heldout_files(load_config(version))
     corpus, items = heldout_corpus_of(files), heldout_items(files)
     seeds = {r["seed_id"]: r.get("situation") or "\n".join(m["content"] for m in r["messages"])
-             for b in batches for r in map(json.loads, (ROOT / "data/02_seeds" / version / b / "rows.jsonl").open())}
+             for b in batches if not vb(version, b)[1].startswith("discuss")  # discussion documents have no seed: the constitution is their source
+             for r in map(json.loads, (ROOT / "data/02_seeds" / vb(version, b)[0] / vb(version, b)[1] / "rows.jsonl").open())}
     seed_of = lambda r: seeds.get(r.get("seed_id") or r.get("seed_root"))  # chats carry seed_id, documents seed_root
     text_of = lambda r: "".join(x["text"] for x in r["segments"]) if "segments" in r else r["text"]
     bad = {r["id"] for r in rows if (s := seed_of(r)) is not None and (leaked(s, corpus) or holds_heldout(s, items))
