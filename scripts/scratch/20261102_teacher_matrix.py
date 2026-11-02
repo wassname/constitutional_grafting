@@ -4,7 +4,8 @@ build). For each teacher x prompt x constitution x constitution-derived seed:
   no-constitution draw; Haiku: decision differs? if so which reply acts more as the constitution implies (random order); Haiku:
   meta-talk in the reply? does it do the user's task?; then the with-constitution row through the plain pipeline's checks:
   05_regex, 06_jev, 07_judge, 08_decides, 09_edit, 10_edit2, 11_export (language_guard report; no retry, no contrast).
-**useful** = passes every filter AND differs AND better AND no meta-talk AND does the task. Cost per useful row counts generation
+**useful** = passes every filter AND differs AND better AND no meta-talk AND does the task AND coherent reasoning
+(Haiku on notes + reply: the notes weigh the case and the decision follows; quote-and-comply = cites a passage or instruction and adopts it unweighed). Cost per useful row counts generation
 (both draws), scoring and the pipeline's paid calls (Jev's own calls are not in the ledger, small).
 Steps write data/<NN>_<step>/teacher_matrix/<group>/. Writes slop/reviews/20261102_seeds_from_constitution/matrix.md.
 Run alone: Jev's Trace cache is not safe across processes. -- PI/Claude (chatdata, opus-5-5)
@@ -34,6 +35,15 @@ from constitutional_grafting.data.v2.judge import Judge
 from constitutional_grafting.data.v2.pipe import ROOT, Run, load_config, read_jsonl
 
 OUT = ROOT / "slop/reviews/20261102_seeds_from_constitution"
+REASONING = """You check the hidden notes and reply of one AI assistant answer, for a study of training data. Good reasoning keeps \
+case-relevant thinking: who is affected, the facts and their uncertainty, the alternatives, and what decides the choice; and the \
+reply's decision follows from that weighing. Answer:
+coherent: do the notes weigh this case (people affected, alternatives, costs or risks) and does the reply's decision follow from that \
+weighing? Short notes count if they weigh what matters here.
+quote_and_comply: do the notes instead cite a passage, rule or instruction and adopt its verdict without weighing the case (e.g. \
+"the constitution says X, so I will X"; "I must write as the character, so ...")? A citation that is then weighed against the facts \
+is not quote-and-comply.
+Return only JSON: {"coherent": true|false, "quote_and_comply": true|false, "why": "<one sentence>"}"""
 T = lambda model, provider, mt=12000: {"model": model, "provider": provider, "effort": "low", "max_tokens": mt}
 ALL4, MUS, OAI = ("plain", "framing 1", "framing 2", "user turn"), "musonius-plain", "openai-model-spec"
 TEACHERS = [  # label, config, {constitution: (seeds, prompts)}
@@ -113,9 +123,12 @@ def main():
                         which, c2 = gc.haiku(run, dc.WHICH + constitution, {"request": r["messages"][-1]["content"], "A": a, "B": bb}, "matrix_which", sid)
                         better = {"A": "without" if flip else "with", "B": "with" if flip else "without", "equal": "equal"}[which["better"]]
                     meta, c3 = gc.haiku(run, st.META, {"request": r["messages"][-1]["content"], "reply": w}, "matrix_meta", sid)
+                    rs, c4 = gc.haiku(run, REASONING, {"request": r["messages"][-1]["content"], "notes": notes or "(no notes)", "reply": w}, "matrix_reasoning", sid)
+                    c3 += c4
                     return {"seed_id": sid, "id": r["id"], "messages": r["messages"], "reasoning": notes, "answer": w, "source": "fromc", "source_id": r["id"],
                             "kind": "chat", "request_style": "constitution-derived", "teacher": t["model"], "differs": not same["same_decision"], "better": better,
-                            "meta": meta["meta"], "meta_quote": meta.get("meta_quote", ""), "task": meta["task"], "score_cost": c1 + c2 + c3, "gen_cost": cg + cn}
+                            "meta": meta["meta"], "meta_quote": meta.get("meta_quote", ""), "task": meta["task"], "coherent": rs["coherent"],
+                            "quote_comply": rs["quote_and_comply"], "reasoning_why": rs.get("why", ""), "score_cost": c1 + c2 + c3, "gen_cost": cg + cn}
                 scored = [x for x in parallel(score, list(zip(mine, gens, nones))) if x]
                 rows, rejects = [x for x in scored if x["reasoning"]], [x | {"filter": "no_reasoning"} for x in scored if not x["reasoning"]]
                 for step in (Regex(), Jev(), Judge(), Decides(), Edit(), Edit(10, "edit2", second_pass=True), Export()):
@@ -128,7 +141,7 @@ def main():
                 for x in scored:
                     x["passed"] = x["seed_id"] in passed
                     x["reject"] = next((rj["filter"] for rj in rejects if rj["seed_id"] == x["seed_id"]), None)
-                    x["useful"] = x["passed"] and x["differs"] and x["better"] == "with" and not x["meta"] and x["task"]
+                    x["useful"] = x["passed"] and x["differs"] and x["better"] == "with" and not x["meta"] and x["task"] and x["coherent"]
                     x |= {"teacher_label": label, "constitution": version, "prompt": prompt, "group": group}
                 allrows += scored
                 print(group, len(scored), "passed", len(passed), "useful", sum(x["useful"] for x in scored), flush=True)
@@ -145,18 +158,18 @@ def main():
         u = sum(x["useful"] for x in g)
         rej = collections.Counter(x["reject"] for x in g if not x["passed"])
         table.append((u / len(g), k, len(g), sum(x["passed"] for x in g), sum(x["differs"] for x in g), sum(x["better"] == "with" for x in g),
-                      sum(x["better"] == "without" for x in g), sum(x["meta"] for x in g), sum(x["task"] for x in g), u, cost, rej))
+                      sum(x["better"] == "without" for x in g), sum(x["meta"] for x in g), sum(x["task"] for x in g), sum(x["coherent"] for x in g), sum(x["quote_comply"] for x in g), u, cost, rej))
     table.sort(key=lambda r: (-r[0], r[1]))
     lines = ["# Teacher x prompt matrix through the plain pipeline (2026-11-02)\n",
              "Constitution-derived seeds (20261102_seeds_from_constitution). Each teacher vs its own no-constitution draw. pass = survives 05_regex, 06_jev,",
              "07_judge, 08_decides, 09/10_edit and 11_export (no retry); differs/better/meta/task as in scores.md. **useful** = pass AND differs AND better AND",
-             "no meta-talk AND does the task. Cost per useful row = all paid calls for the group (both draws, scoring, pipeline; Jev not in the ledger) / useful rows.\n",
+             "no meta-talk AND does the task AND coherent (notes weigh the case and the decision follows; AGENTS.md reasoning rule). Cost per useful row = all paid calls for the group (both draws, scoring, pipeline; Jev not in the ledger) / useful rows.\n",
              f"Prompts: plain = constitution as system prompt (the pipeline's default); framing 1 = \"{ft.F1}\"; framing 2 = framing 1 + \"{ft.F2[len(ft.F1) + 1:]}\";",
              f"user turn = \"{pt.HEAD[:70]}...\" before the user's message.\n",
-             "| teacher | constitution | prompt | n | pass all filters | differs | better / worse | meta-talk | does task | **useful** | cost / useful row | top rejects |",
-             "|:--|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|:--|"]
-    for share, k, n, p, d, bw, ww, m, tk, u, cost, rej in table:
-        lines.append(f"| {k[0]} | {k[1].split('-')[0]} | {k[2]} | {n} | {p} ({p / n:.0%}) | {d} | {bw} / {ww} | {m} | {tk} | **{u} ({share:.0%})** | "
+             "| teacher | constitution | prompt | n | pass all filters | differs | better / worse | meta-talk | does task | coherent | quote-and-comply | **useful** | cost / useful row | top rejects |",
+             "|:--|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|:--|"]
+    for share, k, n, p, d, bw, ww, m, tk, co, qc, u, cost, rej in table:
+        lines.append(f"| {k[0]} | {k[1].split('-')[0]} | {k[2]} | {n} | {p} ({p / n:.0%}) | {d} | {bw} / {ww} | {m} | {tk} | {co} | {qc} | **{u} ({share:.0%})** | "
                      f"{'$%.3f' % (cost / u) if u else '—'} | {', '.join(f'{a} {b}' for a, b in rej.most_common(3))} |")
     lines.append(f"\nTotal cost of this run's new calls ${sum(e['cost'] for e in ledger):.2f} (cached generations from earlier tests are counted per row above, not here).")
     (OUT / "matrix.md").write_text("\n".join(lines) + "\n")
