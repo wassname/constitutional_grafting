@@ -102,14 +102,17 @@ edit:
   show_constitution: true   # the editor sees the constitution, so it can tell a cited rule from a teacher's house policy
   model: {model: deepseek/deepseek-v4.1-flash-1017, provider: DeepSeek, effort: low, max_tokens: 12000}
   allowed:
-    # WHY own_values: removes teacher artefacts only: the notes cite a hidden prompt the trained example does not show. It never turns the
+    # WHY own_values: removes teacher artefacts only: the notes cite a hidden prompt the trained example does not show. In the reply the
+    # reference is deleted, not renamed: "my constitution says" in a reply is meta-talk (wassname via cg_collab2 2026-11-02: do the task, not talk about it). It never turns the
     # constitution's rules into owned values (wassname 2026-11-01; Li et al. App. H found grammatical person barely matters; this edit is untested)
     own_values: >-
       The notes were written with the constitution (shown below) as a hidden system prompt, which the example does not show. Where the
       notes or reply refer to that hidden prompt as a prompt or document ("the system prompt says", "the document says", "I have two long
-      system prompts", "no instruction about em dashes in this system prompt"), rewrite the reference with the name the constitution
-      uses for itself (its title, e.g. "my Model Spec" or "my constitution"), or delete it; keep the notes' own word if it already is
-      that name ("the spec says" for a text titled Model Spec). Change nothing else: keep how the notes state rules, values and reasons,
+      system prompts", "no instruction about em dashes in this system prompt"): in the notes, rewrite the reference with the name the
+      constitution uses for itself (its title, e.g. "my Model Spec" or "my constitution"), or delete it, and keep the notes' own word if it
+      already is that name ("the spec says" for a text titled Model Spec); in the reply, delete the reference and keep the sentence's
+      reason in plain words, without pointing to a document, its rules or sections (the reply does the task, it does not talk about
+      the constitution). Change nothing else: keep how the notes state rules, values and reasons,
       including "the spec requires", "the rule says", "I must"; do not turn a rule into "my principle" or "my value". Leave alone
       references to an operator's system prompt that appears in `system`, a job role, the reply discussing persona or self when the
       user asks, and characters or roles in games and stories.
