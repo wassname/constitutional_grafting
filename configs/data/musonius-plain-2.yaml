@@ -1,3 +1,4 @@
+# SUPERSEDED by musonius-plain-3: its seeds kept 'User_input_2' (only bare user_input was replaced). Seeds only, nothing generated.
 # musonius-plain with seed fixes (cg_collab2 for wassname 2026-11-02): MACHIAVELLI's "user_input" placeholder replaced by a sampled
 # name at seed time (it leaked into 10/134 kept musonius-plain docs_main documents), and at most 2 documents per seed so game scenes
 # with many roles do not dominate (musonius-plain docs_main: 70/134 kept from MACHIAVELLI, up to 8 per seed). Document seeds evenly

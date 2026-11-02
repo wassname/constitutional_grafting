@@ -1,0 +1,5 @@
+# SUPERSEDED by musonius-plain-4: the substitution ran after json.dumps, where "\n" put a word character before user_input, so most stayed.
+# musonius-plain-2 with every "user_input" variant replaced (user_input, User_input_2, ...: each index its own sampled name).
+# -- PI/Claude (chatdata, opus-5-5)
+inherit: musonius-plain-2
+version: musonius-plain-3

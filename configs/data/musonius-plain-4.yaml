@@ -1,0 +1,4 @@
+# musonius-plain-2 with every "user_input" variant replaced on the raw strings (user_input, User_input_2, ...: each index its own name).
+# -- PI/Claude (chatdata, opus-5-5)
+inherit: musonius-plain-2
+version: musonius-plain-4
